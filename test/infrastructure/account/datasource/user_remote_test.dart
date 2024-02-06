@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
@@ -89,7 +90,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation.getUserQuery(),
-            'variables': {'id': userId,'ignoreCustomerCode': true},
+            'variables': {'id': userId, 'ignoreCustomerCode': true},
           }),
         );
         await remoteDataSource
@@ -116,7 +117,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation.getUserQuery(),
-            'variables': {'id': userId,'ignoreCustomerCode': true},
+            'variables': {'id': userId, 'ignoreCustomerCode': true},
           }),
         );
         await remoteDataSource
@@ -246,6 +247,96 @@ void main() {
         final resTest =
             UserDto.fromJson(res['data']['updateUser']['user']).toDomain();
         expect(result.fullName, resTest.fullName);
+      },
+    );
+  });
+
+  group('Update User MarketPlace TnC -', () {
+    const value = 10;
+
+    test(
+      'success',
+      () async {
+        final response = json.decode(
+          await rootBundle.loadString('assets/json/tncdateUpdateResponse.json'),
+        );
+
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(
+            200,
+            response,
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.userQueryMutation
+                .updateMarketPlaceTnCAcceptance(),
+            'variables': {'isAcceptMPTC': value},
+          }),
+        );
+        final result = await remoteDataSource.updateUserMarketPlaceTC(value);
+        final resTest = SettingTcDto.fromJson(response['data']).toDomain();
+        expect(result, resTest);
+      },
+    );
+
+    test(
+      'server exception',
+      () async {
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(
+            200,
+            {
+              'data': null,
+              'errors': [
+                {'message': 'fake-error'}
+              ],
+            },
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.userQueryMutation
+                .updateMarketPlaceTnCAcceptance(),
+            'variables': {'isAcceptMPTC': value},
+          }),
+        );
+        await remoteDataSource
+            .updateUserMarketPlaceTC(value)
+            .onError((error, _) async {
+          expect(error, isA<ServerException>());
+          return Future.value(SettingTc.empty());
+        });
+      },
+    );
+
+    test(
+      'Status code != 200',
+      () async {
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(
+            201,
+            {
+              'data': null,
+            },
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.userQueryMutation
+                .updateMarketPlaceTnCAcceptance(),
+            'variables': {'isAcceptMPTC': value},
+          }),
+        );
+        await remoteDataSource
+            .updateUserMarketPlaceTC(value)
+            .onError((error, _) async {
+          expect(error, isA<ServerException>());
+          return Future.value(SettingTc.empty());
+        });
       },
     );
   });

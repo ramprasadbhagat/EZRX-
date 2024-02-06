@@ -82,6 +82,11 @@ class UserDto with _$UserDto {
         required List<String> supportedLanguages,
     @JsonKey(name: 'MobileNumber', defaultValue: '')
         required String mobileNumber,
+    @JsonKey(
+      name: 'acceptMPTC',
+      readValue: handleMarketPlaceTnCAcceptance,
+    )
+        required String acceptMPTC,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -116,6 +121,7 @@ class UserDto with _$UserDto {
       preferredLanguage: user.preferredLanguage.languageCode,
       mobileNumber: user.mobileNumber.getOrDefaultValue(''),
       supportedLanguages: <String>[],
+      acceptMPTC: user.acceptMPTC.getOrDefaultValue(''),
     );
   }
   static const emptyUserDto = UserDto(
@@ -142,7 +148,9 @@ class UserDto with _$UserDto {
     mobileNumber: '',
     supportedLanguages: <String>[],
     salesOrganisations: <String>[],
+    acceptMPTC: '',
   );
+
   User toDomain() {
     return User(
       id: id,
@@ -181,6 +189,7 @@ class UserDto with _$UserDto {
       preferredLanguage: Language(preferredLanguage),
       mobileNumber: MobileNumber(mobileNumber),
       supportedLanguages: supportedLanguages.map((e) => Language(e)).toList(),
+      acceptMPTC: MarketPlaceTnCAcceptance(acceptMPTC),
     );
   }
 
@@ -248,6 +257,13 @@ List<SalesOrganisationDto> _splitSalesOrg(
   }
 
   return saleOrgs;
+}
+
+String handleMarketPlaceTnCAcceptance(Map json, String key) {
+  final value = json[key];
+  if (value == null) return '';
+
+  return value.toString();
 }
 
 String handleEmptyLanguagePreference(Map json, String key) {

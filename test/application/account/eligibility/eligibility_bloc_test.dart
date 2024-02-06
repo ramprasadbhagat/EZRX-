@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/repository/mixpanel_repository.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
@@ -932,19 +933,143 @@ void main() {
     );
   });
 
-  group('showMarketPlaceProduct getter', () {
-    test('return false when sales org disable marketplace', () {
+  group('isMarketPlaceEnabled getter', () {
+    test('return false when sales org disables marketplace', () {
       final state = EligibilityState.initial()
           .copyWith(salesOrgConfigs: fakeSGSalesOrgConfigs);
+
+      expect(state.isMarketPlaceEnabled, false);
+    });
+
+    test('return false when region disables marketplace', () {
+      final state = EligibilityState.initial().copyWith(
+        shipToInfo: fakeShipToInfo,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+      );
+
+      expect(state.isMarketPlaceEnabled, false);
+    });
+
+    test('return false when role can not access marketplace', () {
+      final state = EligibilityState.initial().copyWith(
+        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+        user: fakeInternalSalesRepUser,
+      );
+
+      expect(state.isMarketPlaceEnabled, false);
+    });
+
+    test('return true when role can access marketplace', () {
+      final state = EligibilityState.initial().copyWith(
+        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+        user: fakeClientUser,
+      );
+
+      expect(state.isMarketPlaceEnabled, true);
+    });
+  });
+
+  group('showMarketPlaceProduct getter', () {
+    test('return false when marketplace disabled', () {
+      final state = EligibilityState.initial().copyWith(
+        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+        user: fakeInternalSalesRepUser,
+      );
 
       expect(state.showMarketPlaceProduct, false);
     });
 
-    test('return true when sales org enable marketplace', () {
-      final state = EligibilityState.initial()
-          .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs);
+    test('return false when marketplace is enable + user not accept TnC', () {
+      final state = EligibilityState.initial().copyWith(
+        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+        user: fakeClientUser,
+      );
+
+      expect(state.showMarketPlaceProduct, false);
+    });
+
+    test('return true when marketplace is enable + user accept TnC', () {
+      final state = EligibilityState.initial().copyWith(
+        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+        user: fakeClientUserAccessMarketPlace,
+      );
 
       expect(state.showMarketPlaceProduct, true);
+    });
+  });
+
+  group('showMarketPlaceTnc getter', () {
+    test('return false when user have not accepted normal TnC', () {
+      final state = EligibilityState.initial().copyWith(
+        user: fakeClientUser,
+      );
+
+      expect(state.showMarketPlaceTnc, false);
+    });
+
+    test('return false when accepted normal TnC and marketplace disable', () {
+      final state = EligibilityState.initial().copyWith(
+        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+        user: fakeExternalSalesRepUser.copyWith(acceptPrivacyPolicy: true),
+      );
+
+      expect(state.showMarketPlaceTnc, false);
+    });
+
+    test(
+        'return false when accepted normal TnC + marketplace enable + acceptance status is accepted/rejected',
+        () {
+      final state = EligibilityState.initial().copyWith(
+        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+        user:
+            fakeClientUserAccessMarketPlace.copyWith(acceptPrivacyPolicy: true),
+      );
+
+      expect(
+        state.copyWith
+            .user(acceptMPTC: MarketPlaceTnCAcceptance.accept())
+            .showMarketPlaceTnc,
+        false,
+      );
+
+      expect(
+        state.copyWith
+            .user(acceptMPTC: MarketPlaceTnCAcceptance.reject())
+            .showMarketPlaceTnc,
+        false,
+      );
+
+      expect(
+        state.copyWith
+            .user(acceptMPTC: MarketPlaceTnCAcceptance(''))
+            .showMarketPlaceTnc,
+        false,
+      );
+    });
+
+    test(
+        'return false when accepted normal TnC + marketplace enable + acceptance status is unknown',
+        () {
+      final state = EligibilityState.initial().copyWith(
+        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+        user:
+            fakeClientUserAccessMarketPlace.copyWith(acceptPrivacyPolicy: true),
+      );
+
+      expect(
+        state.copyWith
+            .user(acceptMPTC: MarketPlaceTnCAcceptance.unknown())
+            .showMarketPlaceTnc,
+        true,
+      );
     });
   });
 }

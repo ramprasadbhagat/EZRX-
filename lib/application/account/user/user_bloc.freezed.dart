@@ -21,6 +21,8 @@ mixin _$UserEvent {
     required TResult Function() initialized,
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(
             Language languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -35,6 +37,8 @@ mixin _$UserEvent {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
@@ -48,6 +52,8 @@ mixin _$UserEvent {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -62,6 +68,8 @@ mixin _$UserEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(_UpdateNotificationSettings value)
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
@@ -75,6 +83,8 @@ mixin _$UserEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
@@ -88,6 +98,8 @@ mixin _$UserEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
@@ -157,6 +169,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(
             Language languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -174,6 +188,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
@@ -190,6 +206,8 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -210,6 +228,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(_UpdateNotificationSettings value)
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
@@ -226,6 +246,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
@@ -242,6 +264,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
@@ -328,6 +352,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(
             Language languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -345,6 +371,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
@@ -361,6 +389,8 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -381,6 +411,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(_UpdateNotificationSettings value)
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
@@ -397,6 +429,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
@@ -413,6 +447,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
@@ -478,6 +514,8 @@ class _$_AcceptTnc implements _AcceptTnc {
     required TResult Function() initialized,
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(
             Language languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -495,6 +533,8 @@ class _$_AcceptTnc implements _AcceptTnc {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
@@ -511,6 +551,8 @@ class _$_AcceptTnc implements _AcceptTnc {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -531,6 +573,8 @@ class _$_AcceptTnc implements _AcceptTnc {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(_UpdateNotificationSettings value)
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
@@ -547,6 +591,8 @@ class _$_AcceptTnc implements _AcceptTnc {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
@@ -563,6 +609,8 @@ class _$_AcceptTnc implements _AcceptTnc {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
@@ -580,6 +628,198 @@ class _$_AcceptTnc implements _AcceptTnc {
 
 abstract class _AcceptTnc implements UserEvent {
   const factory _AcceptTnc() = _$_AcceptTnc;
+}
+
+/// @nodoc
+abstract class _$$_SetMarketPlaceTncAcceptanceCopyWith<$Res> {
+  factory _$$_SetMarketPlaceTncAcceptanceCopyWith(
+          _$_SetMarketPlaceTncAcceptance value,
+          $Res Function(_$_SetMarketPlaceTncAcceptance) then) =
+      __$$_SetMarketPlaceTncAcceptanceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MarketPlaceTnCAcceptance value});
+}
+
+/// @nodoc
+class __$$_SetMarketPlaceTncAcceptanceCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$_SetMarketPlaceTncAcceptance>
+    implements _$$_SetMarketPlaceTncAcceptanceCopyWith<$Res> {
+  __$$_SetMarketPlaceTncAcceptanceCopyWithImpl(
+      _$_SetMarketPlaceTncAcceptance _value,
+      $Res Function(_$_SetMarketPlaceTncAcceptance) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$_SetMarketPlaceTncAcceptance(
+      null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as MarketPlaceTnCAcceptance,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetMarketPlaceTncAcceptance implements _SetMarketPlaceTncAcceptance {
+  const _$_SetMarketPlaceTncAcceptance(this.value);
+
+  @override
+  final MarketPlaceTnCAcceptance value;
+
+  @override
+  String toString() {
+    return 'UserEvent.setMarketPlaceTncAcceptance(value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetMarketPlaceTncAcceptance &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetMarketPlaceTncAcceptanceCopyWith<_$_SetMarketPlaceTncAcceptance>
+      get copyWith => __$$_SetMarketPlaceTncAcceptanceCopyWithImpl<
+          _$_SetMarketPlaceTncAcceptance>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(bool isLoginOnBehalf) fetch,
+    required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
+    required TResult Function(
+            Language languagePreference, bool emailNotifications)
+        updateNotificationSettings,
+    required TResult Function(PaymentNotification paymentNotification)
+        updatePaymentNotificationSettings,
+    required TResult Function(Language language) updateLanguage,
+    required TResult Function(Language language) selectLanguage,
+  }) {
+    return setMarketPlaceTncAcceptance(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(bool isLoginOnBehalf)? fetch,
+    TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult? Function(Language languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
+    TResult? Function(PaymentNotification paymentNotification)?
+        updatePaymentNotificationSettings,
+    TResult? Function(Language language)? updateLanguage,
+    TResult? Function(Language language)? selectLanguage,
+  }) {
+    return setMarketPlaceTncAcceptance?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(bool isLoginOnBehalf)? fetch,
+    TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult Function(Language languagePreference, bool emailNotifications)?
+        updateNotificationSettings,
+    TResult Function(PaymentNotification paymentNotification)?
+        updatePaymentNotificationSettings,
+    TResult Function(Language language)? updateLanguage,
+    TResult Function(Language language)? selectLanguage,
+    required TResult orElse(),
+  }) {
+    if (setMarketPlaceTncAcceptance != null) {
+      return setMarketPlaceTncAcceptance(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
+    required TResult Function(_UpdateNotificationSettings value)
+        updateNotificationSettings,
+    required TResult Function(_UpdatePaymentNotificationSettings value)
+        updatePaymentNotificationSettings,
+    required TResult Function(_UpdateLanguage value) updateLanguage,
+    required TResult Function(_SelectLanguage value) selectLanguage,
+  }) {
+    return setMarketPlaceTncAcceptance(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult? Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
+    TResult? Function(_UpdatePaymentNotificationSettings value)?
+        updatePaymentNotificationSettings,
+    TResult? Function(_UpdateLanguage value)? updateLanguage,
+    TResult? Function(_SelectLanguage value)? selectLanguage,
+  }) {
+    return setMarketPlaceTncAcceptance?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
+    TResult Function(_UpdateNotificationSettings value)?
+        updateNotificationSettings,
+    TResult Function(_UpdatePaymentNotificationSettings value)?
+        updatePaymentNotificationSettings,
+    TResult Function(_UpdateLanguage value)? updateLanguage,
+    TResult Function(_SelectLanguage value)? selectLanguage,
+    required TResult orElse(),
+  }) {
+    if (setMarketPlaceTncAcceptance != null) {
+      return setMarketPlaceTncAcceptance(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetMarketPlaceTncAcceptance implements UserEvent {
+  const factory _SetMarketPlaceTncAcceptance(
+      final MarketPlaceTnCAcceptance value) = _$_SetMarketPlaceTncAcceptance;
+
+  MarketPlaceTnCAcceptance get value;
+  @JsonKey(ignore: true)
+  _$$_SetMarketPlaceTncAcceptanceCopyWith<_$_SetMarketPlaceTncAcceptance>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -664,6 +904,8 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     required TResult Function() initialized,
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(
             Language languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -681,6 +923,8 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
@@ -698,6 +942,8 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -718,6 +964,8 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(_UpdateNotificationSettings value)
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
@@ -734,6 +982,8 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
@@ -750,6 +1000,8 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
@@ -862,6 +1114,8 @@ class _$_UpdatePaymentNotificationSettings
     required TResult Function() initialized,
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(
             Language languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -879,6 +1133,8 @@ class _$_UpdatePaymentNotificationSettings
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
@@ -895,6 +1151,8 @@ class _$_UpdatePaymentNotificationSettings
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -915,6 +1173,8 @@ class _$_UpdatePaymentNotificationSettings
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(_UpdateNotificationSettings value)
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
@@ -931,6 +1191,8 @@ class _$_UpdatePaymentNotificationSettings
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
@@ -947,6 +1209,8 @@ class _$_UpdatePaymentNotificationSettings
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
@@ -1042,6 +1306,8 @@ class _$_UpdateLanguage implements _UpdateLanguage {
     required TResult Function() initialized,
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(
             Language languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -1059,6 +1325,8 @@ class _$_UpdateLanguage implements _UpdateLanguage {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
@@ -1075,6 +1343,8 @@ class _$_UpdateLanguage implements _UpdateLanguage {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -1095,6 +1365,8 @@ class _$_UpdateLanguage implements _UpdateLanguage {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(_UpdateNotificationSettings value)
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
@@ -1111,6 +1383,8 @@ class _$_UpdateLanguage implements _UpdateLanguage {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
@@ -1127,6 +1401,8 @@ class _$_UpdateLanguage implements _UpdateLanguage {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?
@@ -1219,6 +1495,8 @@ class _$_SelectLanguage implements _SelectLanguage {
     required TResult Function() initialized,
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
+    required TResult Function(MarketPlaceTnCAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(
             Language languagePreference, bool emailNotifications)
         updateNotificationSettings,
@@ -1236,6 +1514,8 @@ class _$_SelectLanguage implements _SelectLanguage {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
+    TResult? Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
@@ -1252,6 +1532,8 @@ class _$_SelectLanguage implements _SelectLanguage {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
+    TResult Function(MarketPlaceTnCAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(Language languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
@@ -1272,6 +1554,8 @@ class _$_SelectLanguage implements _SelectLanguage {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_AcceptTnc value) acceptTnc,
+    required TResult Function(_SetMarketPlaceTncAcceptance value)
+        setMarketPlaceTncAcceptance,
     required TResult Function(_UpdateNotificationSettings value)
         updateNotificationSettings,
     required TResult Function(_UpdatePaymentNotificationSettings value)
@@ -1288,6 +1572,8 @@ class _$_SelectLanguage implements _SelectLanguage {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_AcceptTnc value)? acceptTnc,
+    TResult? Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult? Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult? Function(_UpdatePaymentNotificationSettings value)?
@@ -1304,6 +1590,8 @@ class _$_SelectLanguage implements _SelectLanguage {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_AcceptTnc value)? acceptTnc,
+    TResult Function(_SetMarketPlaceTncAcceptance value)?
+        setMarketPlaceTncAcceptance,
     TResult Function(_UpdateNotificationSettings value)?
         updateNotificationSettings,
     TResult Function(_UpdatePaymentNotificationSettings value)?

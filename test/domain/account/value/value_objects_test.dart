@@ -306,6 +306,21 @@ void main() {
         expect(result, 'MRXC');
       },
     );
+
+    test('canAccessMarketPlace getter', () {
+      final validRole = [
+        'root_admin',
+        'zp_admin',
+        'client_admin',
+        'client_user'
+      ];
+
+      for (final role in validRole) {
+        expect(RoleType(role).canAccessMarketPlace, true);
+      }
+
+      expect(RoleType('internal_sales_rep').canAccessMarketPlace, false);
+    });
   });
 
   group('Currency value object', () {
@@ -1557,5 +1572,68 @@ void main() {
         expect(result, input);
       },
     );
+  });
+
+  group('Customer Code Region value object', () {
+    test('enableMarketPlace should return true when region code is valid', () {
+      final validRegion = [
+        'JOH',
+        'KED',
+        'KEL',
+        'KUL',
+        'MEL',
+        'PAH',
+        'PEL',
+        'PER',
+        'PIN',
+        'PSK',
+        'SEL',
+        'SER',
+        'TRE'
+      ];
+
+      for (final region in validRegion) {
+        expect(CustomerCodeRegion(region).enableMarketPlace, true);
+      }
+    });
+
+    test('enableMarketPlace should return false when region code is invalid',
+        () {
+      final invalidRegion = ['', 'TEST'];
+
+      for (final region in invalidRegion) {
+        expect(CustomerCodeRegion(region).enableMarketPlace, false);
+      }
+    });
+  });
+
+  group('MarketPlaceTCAcceptance value object', () {
+    test('isUnknown getter', () {
+      expect(MarketPlaceTnCAcceptance('0').isUnknown, true);
+      expect(MarketPlaceTnCAcceptance('1').isUnknown, false);
+    });
+
+    test('isAccept getter', () {
+      expect(MarketPlaceTnCAcceptance('0').isAccept, false);
+      expect(MarketPlaceTnCAcceptance('1').isAccept, true);
+    });
+
+    test('isReject getter', () {
+      expect(MarketPlaceTnCAcceptance('0').isReject, false);
+      expect(MarketPlaceTnCAcceptance('2').isReject, true);
+    });
+
+    test('apiValue getter', () {
+      final apiValueMap = {
+        '0': 0, //Unknown
+        '1': 1, //Accept
+        '2': 2, //Reject
+        '': 0, //Null
+      };
+
+      for (final entry in apiValueMap.entries) {
+        expect(MarketPlaceTnCAcceptance(entry.key).apiValue, entry.value);
+      }
+    });
   });
 }

@@ -1460,4 +1460,15 @@ class WidgetKeys {
   static Key editPaymentAdviceFileUploadButton =
       const Key('editPaymentAdviceFileUploadButton');
   static Key paymentAdviceFooter(int key) => Key('paymentAdviceFooter$key');
+
+  //============================================================
+  // Term and Condition dialog
+  //============================================================
+  static const Key tncDialogAppBar = Key('auptcappBar');
+  static const Key tncContentBox = Key('tncConsentBox');
+  static const Key privacyContentBox = Key('privacyConsentBox');
+  static const Key tncCheckBox = Key('tncCheckBox');
+  static const Key privacyCheckBox = Key('privacyCheckBox');
+  static const Key tncDialogAcceptButton = Key('auptcAcceptButton');
+  static const Key tncDialogCancelButton = Key('tncDialogCancelButton');
 }

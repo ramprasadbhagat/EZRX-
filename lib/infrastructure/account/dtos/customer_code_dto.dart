@@ -90,7 +90,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
       billToInfos: billToInfos.map((e) => e.toDomain()).toList(),
       customerAttr7: CustomerAttr7(customerAttr7),
       customerGrp4: CustomerGrp4(customerGrp4),
-      region: region,
+      region: CustomerCodeRegion(region),
       emailAddresses: emailAddresses.map((e) => EmailAddress(e)).toList(),
       comboEligible: comboEligible,
       salesDeals: salesDeals.map((e) => SalesDealNumber(e)).toList(),

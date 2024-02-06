@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -398,5 +399,48 @@ void main() {
         ),
       ],
     );
+
+    group('Set marketPlace TnC acceptance -', () {
+      final fakeAcceptanceStatus = MarketPlaceTnCAcceptance.reject();
+      const fakeError = ApiFailure.other('fake-error');
+      blocTest<UserBloc, UserState>(
+        'failure',
+        build: () => UserBloc(
+          userRepository: userRepoMock,
+        ),
+        setUp: () {
+          when(() => userRepoMock.updateUserMarketPlaceTc(fakeAcceptanceStatus))
+              .thenAnswer((_) async => const Left(fakeError));
+        },
+        act: (UserBloc bloc) => bloc
+            .add(UserEvent.setMarketPlaceTncAcceptance(fakeAcceptanceStatus)),
+        expect: () => [
+          userState.copyWith(
+            userFailureOrSuccessOption: optionOf(const Left(fakeError)),
+          ),
+        ],
+      );
+
+      blocTest<UserBloc, UserState>(
+        'success',
+        build: () => UserBloc(
+          userRepository: userRepoMock,
+        ),
+        setUp: () {
+          when(() => userRepoMock.updateUserMarketPlaceTc(fakeAcceptanceStatus))
+              .thenAnswer((_) async => const Right(unit));
+        },
+        act: (UserBloc bloc) => bloc
+            .add(UserEvent.setMarketPlaceTncAcceptance(fakeAcceptanceStatus)),
+        seed: () => userState.copyWith(user: fakeClientUser),
+        expect: () => [
+          userState.copyWith(
+            user: fakeClientUser.copyWith(
+              acceptMPTC: fakeAcceptanceStatus,
+            ),
+          )
+        ],
+      );
+    });
   });
 }

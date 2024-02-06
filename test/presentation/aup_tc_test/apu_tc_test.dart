@@ -1,699 +1,344 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
-import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
-import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
-import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
-import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
-import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
-import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
+import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+
+import '../../common_mock_data/mock_bloc.dart';
+import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AccountSummaryBlocMock
-    extends MockBloc<AccountSummaryEvent, AccountSummaryState>
-    implements AccountSummaryBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class MockAupTcBloc extends MockBloc<AupTcEvent, AupTcState>
-    implements AupTcBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {
-  @override
-  String currentPath = '';
-}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class PaymentCustomerInfoMockBloc extends MockBloc<
-        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
-    implements PaymentCustomerInformationBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ResetPasswordMockBloc
-    extends MockBloc<ResetPasswordEvent, ResetPasswordState>
-    implements ResetPasswordBloc {}
-
-class ScanMaterialInfoBlocMock
-    extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
-    implements ScanMaterialInfoBloc {}
-
-class OrderDocumentTypeMockBloc
-    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
-    implements OrderDocumentTypeBloc {}
-
-class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
-    implements SettingBloc {}
-
-class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
-    implements DeepLinkingBloc {}
-
-class MaterialListMockBloc
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class MaterialPriceMockBloc
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class ViewByItemsMockBloc extends MockBloc<ViewByItemsEvent, ViewByItemsState>
-    implements ViewByItemsBloc {}
-
-class ReturnListByItemMockBloc
-    extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
-    implements ReturnListByItemBloc {}
-
-class ViewByItemDetailsMockBloc
-    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
-    implements ViewByItemDetailsBloc {}
-
-class ViewByOrderDetailsMockBloc
-    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
-    implements ViewByOrderDetailsBloc {}
-
-class ProductDetailMockBloc
-    extends MockBloc<ProductDetailEvent, ProductDetailState>
-    implements ProductDetailBloc {}
-
-class CreditAndInvoiceDetailsMockBloc
-    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
-    implements CreditAndInvoiceDetailsBloc {}
-
-class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
-    implements ChatBotBloc {}
-
 void main() {
-  late GetIt locator;
-  late SalesOrgBloc mockSalesOrgBloc;
-  late AuthBloc authBlocMock;
-  late AccountSummaryBloc accountSummaryMock;
-  late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
-  late MockAupTcBloc mockAupTcBloc;
-  late UserBloc userBlocMock;
-  late CartBloc cartBlocMock;
-  late SettingBloc settingBlocMock;
-  late ScanMaterialInfoBloc scanMaterialInfoBlocMock;
-  late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
-  late EligibilityBloc eligibilityBlocMock;
-  late ResetPasswordBloc resetPasswordBlocMock;
-  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
-  late DeepLinkingBloc deepLinkingBlocMock;
-  late CustomerCodeBloc customerCodeBloc;
-  late MaterialListBloc materialListBloc;
-  late MaterialPriceBloc materialPriceBloc;
-  late ViewByItemsBloc viewByItemsBloc;
-  late ReturnListByItemBloc returnListByItemBloc;
-  late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
-  late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
-  late ProductDetailBloc productDetailBloc;
-  late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
-  late ChatBotBloc chatBotBloc;
-  late User fakeUser;
+  late AupTcBloc mockAupTcBloc;
+  late AuthBloc mockAuthBloc;
+  late AnnouncementBloc mockAnnouncementBloc;
+  late UserBloc mockUserBloc;
+  late SalesOrgBloc mockSalesOrgBloc;
 
   setUpAll(() async {
-    setupLocator();
     WidgetsFlutterBinding.ensureInitialized();
     TestWidgetsFlutterBinding.ensureInitialized();
-    mockSalesOrgBloc = SalesOrgBlocMock();
-    authBlocMock = AuthBlocMock();
-    settingBlocMock = SettingMockBloc();
-    accountSummaryMock = AccountSummaryBlocMock();
-    announcementBlocMock = AnnouncementBlocMock();
-    mockAupTcBloc = MockAupTcBloc();
-    scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
-    eligibilityBlocMock = EligibilityBlocMock();
-    materialListBloc = MaterialListMockBloc();
-    materialPriceBloc = MaterialPriceMockBloc();
-    viewByItemsBloc = ViewByItemsMockBloc();
-    returnListByItemBloc = ReturnListByItemMockBloc();
-    productDetailBloc = ProductDetailMockBloc();
-    chatBotBloc = ChatBotMockBloc();
-    locator = GetIt.instance;
+
+    locator.registerSingleton(Config());
+    locator.registerSingleton(AppRouter());
+    locator.registerSingleton<AupTcBloc>(AupTcMockBloc());
     locator<Config>().appFlavor = Flavor.mock;
-    locator<Config>().appName;
-    locator<Config>().oktaConfig;
-    locator<Config>().packageName;
     autoRouterMock = locator<AppRouter>();
-    fakeUser = User.empty().copyWith(
-      username: Username('fake-user'),
-    );
-    PackageInfo.setMockInitialValues(
-      appName: '',
-      packageName: '"packageName"',
-      version: '',
-      buildNumber: '',
-      buildSignature: '',
-      installerStore: '',
-    );
+    mockAupTcBloc = locator<AupTcBloc>();
   });
 
   setUp(() {
-    userBlocMock = UserBlocMock();
-    cartBlocMock = CartBlocMock();
-    paymentCustomerInformationBlocMock = PaymentCustomerInfoMockBloc();
-    eligibilityBlocMock = EligibilityBlocMock();
-    resetPasswordBlocMock = ResetPasswordMockBloc();
-    orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
-    announcementBlocMock = AnnouncementBlocMock();
-    deepLinkingBlocMock = DeepLinkingMockBloc();
-    customerCodeBloc = CustomerCodeBlocMock();
-    viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
-    viewByOrderDetailsBlocMock = ViewByOrderDetailsMockBloc();
-    creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
-    when(() => customerCodeBloc.state).thenReturn(CustomerCodeState.initial());
-    when(() => userBlocMock.state).thenReturn(UserState.initial());
-
-    when(() => cartBlocMock.state).thenReturn(CartState.initial());
-    when(() => accountSummaryMock.state)
-        .thenReturn(AccountSummaryState.initial());
-    when(() => settingBlocMock.state).thenReturn(SettingState.initial());
-    when(() => paymentCustomerInformationBlocMock.state)
-        .thenReturn(PaymentCustomerInformationState.initial());
-    when(() => eligibilityBlocMock.state)
-        .thenReturn(EligibilityState.initial());
-    when(() => scanMaterialInfoBlocMock.state)
-        .thenReturn(ScanMaterialInfoState.initial());
-    when(() => resetPasswordBlocMock.state)
-        .thenReturn(ResetPasswordState.initial());
-    when(() => orderDocumentTypeBlocMock.state)
-        .thenReturn(OrderDocumentTypeState.initial());
-    when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
-    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-    when(() => announcementBlocMock.state)
+    mockUserBloc = UserBlocMock();
+    mockAuthBloc = AuthBlocMock();
+    mockAnnouncementBloc = AnnouncementBlocMock();
+    mockSalesOrgBloc = SalesOrgBlocMock();
+    when(() => mockAupTcBloc.state).thenReturn(AupTcState.initial());
+    when(() => mockUserBloc.state).thenReturn(UserState.initial());
+    when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
+    when(() => mockAnnouncementBloc.state)
         .thenReturn(AnnouncementState.initial());
-    when(() => deepLinkingBlocMock.state)
-        .thenReturn(const DeepLinkingState.initial());
-    when(() => materialListBloc.state).thenReturn(MaterialListState.initial());
-    when(() => materialPriceBloc.state)
-        .thenReturn(MaterialPriceState.initial());
-    when(() => viewByItemsBloc.state).thenReturn(ViewByItemsState.initial());
-    when(() => returnListByItemBloc.state)
-        .thenReturn(ReturnListByItemState.initial());
-    when(() => viewByItemDetailsBlocMock.state)
-        .thenReturn(ViewByItemDetailsState.initial());
-    when(() => viewByOrderDetailsBlocMock.state)
-        .thenReturn(ViewByOrderDetailsState.initial());
-    when(() => productDetailBloc.state)
-        .thenReturn(ProductDetailState.initial());
-    when(() => creditAndInvoiceDetailsBloc.state)
-        .thenReturn(CreditAndInvoiceDetailsState.initial());
-    when(() => chatBotBloc.state).thenReturn(ChatBotState.initial());
+    when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+    resetMocktailState();
   });
 
-  group('AupTc Widget Show hide base on state.showTermsAndCondition true', () {
-    // TODO: V3 break
-    testWidgets(
-        'Test - AupTc Widget Show AupTcBloc state.showTermsAndCondition=true',
-        (tester) async {
-      when(() => mockAupTcBloc.state).thenReturn(
-        AupTcState.initial().copyWith(
-          privacyConsent: true,
-          tncConsent: true,
-        ),
-      );
-      when(() => userBlocMock.state).thenReturn(
-        UserState.initial().copyWith(
-          user: fakeUser,
-        ),
-      );
-      await tester.pumpWidget(
-        WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          usingLocalization: true,
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<UserBloc>(create: (context) => userBlocMock),
-              BlocProvider<AupTcBloc>(
-                create: (context) => mockAupTcBloc,
-              ),
-              BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-              BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock,
-              ),
-              BlocProvider<MaterialListBloc>(
-                create: (context) => materialListBloc,
-              ),
-              BlocProvider<MaterialPriceBloc>(
-                create: (context) => materialPriceBloc,
-              ),
-              BlocProvider<ViewByItemsBloc>(
-                create: (context) => viewByItemsBloc,
-              ),
-              BlocProvider<ReturnListByItemBloc>(
-                create: (context) => returnListByItemBloc,
-              ),
-              BlocProvider<ScanMaterialInfoBloc>(
-                create: (context) => scanMaterialInfoBlocMock,
-              ),
-              BlocProvider<ViewByItemDetailsBloc>(
-                create: (context) => viewByItemDetailsBlocMock,
-              ),
-              BlocProvider<ViewByOrderDetailsBloc>(
-                create: (context) => viewByOrderDetailsBlocMock,
-              ),
-              BlocProvider<ProductDetailBloc>(
-                create: (context) => productDetailBloc,
-              ),
-              BlocProvider<CreditAndInvoiceDetailsBloc>(
-                create: (context) => creditAndInvoiceDetailsBloc,
-              ),
-              BlocProvider<ChatBotBloc>(
-                create: (context) => chatBotBloc,
-              ),
-            ],
-            child: const HomeNavigationTabbar(),
-          ),
-        ),
-      );
-      await tester.pump();
-      final aupTcWebView = find.byKey(WidgetKeys.aupTcWebView);
-      expect(aupTcWebView, findsNWidgets(2));
-      final staticHtmlViewerElement1 =
-          tester.state(aupTcWebView.first) as StaticHtmlViewerState;
-      staticHtmlViewerElement1.isLoading = false;
-      // ignore: invalid_use_of_protected_member
-      staticHtmlViewerElement1.setState(() {});
-
-      final staticHtmlViewerElement2 =
-          tester.state(aupTcWebView.last) as StaticHtmlViewerState;
-      staticHtmlViewerElement2.isLoading = false;
-      // ignore: invalid_use_of_protected_member
-      staticHtmlViewerElement2.setState(() {});
-
-      await tester.pump();
-      final aupTcScreen = find.byKey(WidgetKeys.aupTcScreen);
-      final homeTabBar = find.byKey(const Key('homeTabBar'));
-      final aupTcaAppBar = find.byKey(const Key('auptcappBar'));
-      final aupTcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-
-      expect(aupTcScreen, findsOneWidget);
-      expect(aupTcaAppBar, findsOneWidget);
-      expect(homeTabBar, findsNothing);
-      expect(aupTcAcceptButton, findsOneWidget);
-
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-      await tester.tap(aupTcAcceptButton);
-      await tester.pump();
-      var willPopCalled = false;
-      final dynamic widgetsAppState = tester.state(find.byType(WidgetsApp));
-      willPopCalled = await widgetsAppState.didPopRoute();
-      await tester.pump();
-      expect(willPopCalled, false);
-    });
-
-    testWidgets(
-        'Test - AupTc Widget Show AupTcBloc state.showTermsAndCondition=false',
-        (tester) async {
-      await tester.pumpWidget(
-        WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBloc,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => mockSalesOrgBloc,
-            ),
-            BlocProvider<AuthBloc>(
-              create: (context) => authBlocMock,
-            ),
-            BlocProvider<AupTcBloc>(
-              create: (context) => mockAupTcBloc,
-            ),
-            BlocProvider<UserBloc>(
-              create: (context) => userBlocMock,
-            ),
-            BlocProvider<CartBloc>(
-              create: (context) => cartBlocMock,
-            ),
-            BlocProvider<PaymentCustomerInformationBloc>(
-              create: (context) => paymentCustomerInformationBlocMock,
-            ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-            BlocProvider<ResetPasswordBloc>(
-              create: (context) => resetPasswordBlocMock,
-            ),
-            BlocProvider<ScanMaterialInfoBloc>(
-              create: (context) => scanMaterialInfoBlocMock,
-            ),
-            BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeBlocMock,
-            ),
-            BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock,
-            ),
-            BlocProvider<DeepLinkingBloc>(
-              create: (context) => deepLinkingBlocMock,
-            ),
-            BlocProvider<AccountSummaryBloc>(
-              create: (context) => accountSummaryMock,
-            ),
-            BlocProvider<MaterialListBloc>(
-              create: (context) => materialListBloc,
-            ),
-            BlocProvider<MaterialPriceBloc>(
-              create: (context) => materialPriceBloc,
-            ),
-            BlocProvider<ViewByItemsBloc>(create: (context) => viewByItemsBloc),
-            BlocProvider<ReturnListByItemBloc>(
-              create: (context) => returnListByItemBloc,
-            ),
-            BlocProvider<ViewByItemDetailsBloc>(
-              create: (context) => viewByItemDetailsBlocMock,
-            ),
-            BlocProvider<ViewByOrderDetailsBloc>(
-              create: (context) => viewByOrderDetailsBlocMock,
-            ),
-            BlocProvider<ProductDetailBloc>(
-              create: (context) => productDetailBloc,
-            ),
-            BlocProvider<CreditAndInvoiceDetailsBloc>(
-              create: (context) => creditAndInvoiceDetailsBloc,
-            ),
-            BlocProvider<ChatBotBloc>(
-              create: (context) => chatBotBloc,
-            ),
-          ],
-          child: const SplashPage(),
-        ),
-      );
-      await tester.pumpAndSettle();
-      final aupTcScreen = find.byKey(WidgetKeys.aupTcScreen);
-      expect(aupTcScreen, findsNothing);
-    });
-  });
-
-  testWidgets('Test - AupTc Widget localization test', (tester) async {
-    when(() => mockAupTcBloc.state).thenReturn(
-      AupTcState.initial().copyWith(
-        privacyConsent: false,
-        tncConsent: false,
-      ),
-    );
-    when(() => userBlocMock.state).thenReturn(
-      UserState.initial().copyWith(
-        user: fakeUser,
-      ),
-    );
-    await tester.pumpWidget(
+  Widget aupTcWidget(User user, bool isMarketPlace) =>
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-            BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock,
+        providers: [
+          BlocProvider<UserBloc>(create: (_) => mockUserBloc),
+          BlocProvider<AuthBloc>(create: (_) => mockAuthBloc),
+          BlocProvider<AnnouncementBloc>(create: (_) => mockAnnouncementBloc),
+          BlocProvider<SalesOrgBloc>(create: (_) => mockSalesOrgBloc),
+        ],
+        child: AupTCDialog(user: user, isMarketPlace: isMarketPlace),
+      );
+  group('Term and Condition dialog -', () {
+    final appBar = find.byKey(WidgetKeys.tncDialogAppBar);
+    final tncContent = find.byKey(WidgetKeys.tncContentBox);
+    final privacyContent = find.byKey(WidgetKeys.privacyContentBox);
+    final tncCheckBox = find.byKey(WidgetKeys.tncCheckBox);
+    final privacyCheckBox = find.byKey(WidgetKeys.privacyCheckBox);
+    final acceptButton = find.byKey(WidgetKeys.tncDialogAcceptButton);
+    final cancelButton = find.byKey(WidgetKeys.tncDialogCancelButton);
+    final webView = find.byKey(WidgetKeys.aupTcWebView);
+
+    group('Normal TnC -', () {
+      testWidgets('Show with default component', (tester) async {
+        await tester.pumpWidget(aupTcWidget(fakeClientUser, false));
+        await tester.pump();
+
+        verify(() => mockAupTcBloc.add(AupTcEvent.show(fakeClientUser)))
+            .called(1);
+        expect(appBar, findsOneWidget);
+        expect(find.text('Welcome to eZRx+'.tr()), findsOneWidget);
+        expect(
+          find.text(
+            'As a new user of eZRx+, we will require you to acknowledge the Terms of Use and Regional Privacy Policy before proceeding.'
+                .tr(),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(of: tncContent, matching: webView),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(of: privacyContent, matching: webView),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: privacyCheckBox,
+            matching: find.text(
+              'I have read and hereby consent to Zuellig Pharma and its affiliates processing my personal data in accordance with the Regional Privacy Policy.'
+                  .tr(),
             ),
-            BlocProvider<AupTcBloc>(
-              create: (context) => mockAupTcBloc,
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tncCheckBox,
+            matching: find.text(
+              'I have read and hereby agree to the Terms of Use'.tr(),
             ),
-            BlocProvider<UserBloc>(
-              create: (context) => userBlocMock,
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: acceptButton,
+            matching: find.text('Accept and continue'.tr()),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: cancelButton,
+            matching: find.text('Cancel'.tr()),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('Tap on cancel button', (tester) async {
+        await tester.pumpWidget(aupTcWidget(fakeClient, false));
+        await tester.pump();
+
+        await tester.tap(cancelButton);
+
+        verify(() => mockAuthBloc.add(const AuthEvent.logout())).called(1);
+      });
+
+      testWidgets('Tap on accept button when have consent', (tester) async {
+        when(() => mockAupTcBloc.state).thenReturn(
+          AupTcState.initial().copyWith(
+            tncConsent: true,
+            privacyConsent: true,
+          ),
+        );
+
+        await tester.pumpWidget(aupTcWidget(fakeClient, false));
+        await tester.pump();
+
+        await tester.tap(acceptButton);
+
+        verify(() => mockUserBloc.add(const UserEvent.acceptTnc())).called(1);
+      });
+    });
+
+    group('Marketplace TnC -', () {
+      testWidgets('Show with default component', (tester) async {
+        await tester.pumpWidget(aupTcWidget(fakeClientUser, true));
+        await tester.pump();
+
+        verify(() => mockAupTcBloc.add(AupTcEvent.show(fakeClientUser)))
+            .called(1);
+        expect(appBar, findsOneWidget);
+        expect(
+          find.textContaining(
+            'Welcome to Marketplace'.tr(),
+            findRichText: true,
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.text(
+            'New Marketplace is launched and now you can purchases products from that sold by sellers as well. Before proceed kindly read and agree to the terms of use, acceptable usage policy & regional privacy policy before processing.'
+                .tr(),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(of: tncContent, matching: webView),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(of: privacyContent, matching: webView),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: privacyCheckBox,
+            matching: find.text(
+              'I have read and hereby consent to Zuellig Pharma and its affiliates processing my personal data in accordance with the Regional Privacy Policy.'
+                  .tr(),
             ),
-          ],
-          child: const HomeNavigationTabbar(),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tncCheckBox,
+            matching: find.text(
+              'I have read and hereby agree to the Terms of Use'.tr(),
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: acceptButton,
+            matching: find.text('Accept and continue'.tr()),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: cancelButton,
+            matching: find.text('Skip & only see ZP products'.tr()),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('Tap on cancel button', (tester) async {
+        await tester.pumpWidget(aupTcWidget(fakeClient, true));
+        await tester.pump();
+
+        await tester.tap(cancelButton);
+
+        verify(
+          () => mockUserBloc.add(
+            UserEvent.setMarketPlaceTncAcceptance(
+              MarketPlaceTnCAcceptance.reject(),
+            ),
+          ),
+        ).called(1);
+      });
+
+      testWidgets('Tap on accept button', (tester) async {
+        when(() => mockAupTcBloc.state).thenReturn(
+          AupTcState.initial().copyWith(
+            tncConsent: true,
+            privacyConsent: true,
+          ),
+        );
+
+        await tester.pumpWidget(aupTcWidget(fakeClient, true));
+        await tester.pump();
+
+        await tester.tap(acceptButton);
+
+        verify(
+          () => mockUserBloc.add(
+            UserEvent.setMarketPlaceTncAcceptance(
+              MarketPlaceTnCAcceptance.accept(),
+            ),
+          ),
+        ).called(1);
+      });
+    });
+
+    testWidgets('Tap on privacy checkbox', (tester) async {
+      const checkBoxInitialValue = true;
+      when(() => mockAupTcBloc.state).thenReturn(
+        AupTcState.initial().copyWith(
+          privacyConsent: checkBoxInitialValue,
         ),
-      ),
-    );
-    await tester.pump();
-    //This is for setting the isLoading false
-    final aupTcWebView = find.byKey(WidgetKeys.aupTcWebView);
-    expect(aupTcWebView, findsNWidgets(2));
-    final staticHtmlViewerElement1 =
-        tester.state(aupTcWebView.first) as StaticHtmlViewerState;
-    staticHtmlViewerElement1.isLoading = false;
-    // ignore: invalid_use_of_protected_member
-    staticHtmlViewerElement1.setState(() {});
+      );
+      await tester.pumpWidget(aupTcWidget(fakeClient, false));
+      await tester.pump();
+      expect(
+        tester.widget<CheckboxListTile>(privacyCheckBox).value,
+        checkBoxInitialValue,
+      );
+      await tester.tap(privacyCheckBox);
+      await tester.pump();
 
-    final staticHtmlViewerElement2 =
-        tester.state(aupTcWebView.last) as StaticHtmlViewerState;
-    staticHtmlViewerElement2.isLoading = false;
-    // ignore: invalid_use_of_protected_member
-    staticHtmlViewerElement2.setState(() {});
+      verify(
+        () => mockAupTcBloc.add(
+          const AupTcEvent.privacyPolicyConsent(
+            newValue: !checkBoxInitialValue,
+          ),
+        ),
+      ).called(1);
+    });
 
-    await tester.pump();
-    await tester.pump(const Duration(seconds: 5));
-    final acceptButtonTextFinder = find.text('Accept and continue');
-    expect(acceptButtonTextFinder, findsOneWidget);
-    final aupTcAcceptButton = find.byKey(const Key('auptcAcceptButton'));
-    await tester.tap(aupTcAcceptButton);
-    await tester.pumpAndSettle();
-    final snackBarMsgFinder = find.text(
-      'You need to read and accept full Terms of use and Privacy Policy before continue.'
-          .tr(),
-    );
-    expect(snackBarMsgFinder, findsOneWidget);
+    testWidgets('Tap on term and condition checkbox', (tester) async {
+      const checkBoxInitialValue = false;
+      when(() => mockAupTcBloc.state).thenReturn(
+        AupTcState.initial().copyWith(
+          tncConsent: checkBoxInitialValue,
+        ),
+      );
+      await tester.pumpWidget(aupTcWidget(fakeClient, false));
+      await tester.pump();
+      expect(
+        tester.widget<CheckboxListTile>(tncCheckBox).value,
+        checkBoxInitialValue,
+      );
+      await tester.tap(tncCheckBox);
+      await tester.pump();
+
+      verify(
+        () => mockAupTcBloc.add(
+          const AupTcEvent.termsOfUseConsent(
+            newValue: !checkBoxInitialValue,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(
+        'Tap on accept button when do not have both tnc and privacy consent',
+        (tester) async {
+      when(() => mockAupTcBloc.state).thenReturn(
+        AupTcState.initial().copyWith(
+          tncConsent: true,
+        ),
+      );
+
+      await tester.pumpWidget(aupTcWidget(fakeClient, false));
+      await tester.pump();
+
+      await tester.tap(acceptButton);
+      await tester.pump();
+
+      expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+      expect(
+        find.text(
+          'You need to read and accept full Terms of use and Privacy Policy before continue.'
+              .tr(),
+        ),
+        findsOneWidget,
+      );
+
+      verifyNoMoreInteractions(mockUserBloc);
+    });
   });
-
-  // TODO: V3 break
-  // testWidgets('Setting screen toc and notification and language tile',
-  //     (tester) async {
-  //   await TesterUtils.setUpLocalizationWrapper(
-  //       tester: tester,
-  //       home: const SettingsPage(),
-  //       locale: const Locale('en'),
-  //       isAutoRouteEnabled: true,
-  //       autoRouterMock: autoRouterMock,
-  //       providers: [
-  //         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-  //         BlocProvider<AnnouncementBloc>(
-  //             create: (context) => announcementBlocMock),
-  //         BlocProvider<AupTcBloc>(
-  //           create: (context) => mockAupTcBloc,
-  //         ),
-  //         BlocProvider<AnnouncementBloc>(
-  //           create: (context) => announcementBlocMock,
-  //         ),
-  //         BlocProvider<SalesOrgBloc>(
-  //           create: (context) => mockSalesOrgBloc,
-  //         ),
-  //         BlocProvider<SettingBloc>(
-  //           create: (context) => settingBlocMock,
-  //         ),
-  //       ]);
-  //   await tester.pump();
-  //   final tosTile = find.byKey(const Key('tostile'));
-  //   expect(tosTile, findsOneWidget);
-  //   await tester.tap(tosTile);
-  //   await tester.pump();
-  //   expect(autoRouterMock.current.name, AupTCDialogRoute.name);
-  //   final notificationTile = find.byKey(const Key('notificationTile'));
-  //   expect(notificationTile, findsOneWidget);
-  //   await tester.tap(notificationTile);
-  //   await tester.pump(const Duration(seconds: 2));
-  //   final languageTile = find.byKey(const Key('languageTile'));
-  //   expect(languageTile, findsOneWidget);
-  //   await tester.pump(const Duration(seconds: 2));
-  //   await tester.tap(languageTile);
-  //   await tester.pump(const Duration(seconds: 2));
-  //   await tester.pumpAndSettle(const Duration(
-  //     seconds: 3,
-  //   ));
-  //   final languagePicker =
-  //       find.byWidgetPredicate((w) => w is PlatformDialogAction);
-  //   await tester.pump(const Duration(seconds: 2));
-  //   expect(languagePicker, findsNWidgets(6));
-  //   final salesOrg = find.byType(PlatformDialogAction).first;
-  //   await tester.tap(salesOrg, warnIfMissed: false);
-  //   await tester.pumpAndSettle(const Duration(seconds: 3));
-  // });
-
-  // testWidgets('Setting screen contactUsTile', (tester) async {
-  //   await TesterUtils.setUpLocalizationWrapper(
-  //       tester: tester,
-  //       home: const SettingsPage(),
-  //       locale: const Locale('en'),
-  //       isAutoRouteEnabled: true,
-  //       autoRouterMock: autoRouterMock,
-  //       providers: [
-  //         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-  //         BlocProvider<AnnouncementBloc>(
-  //             create: (context) => announcementBlocMock),
-  //         BlocProvider<AupTcBloc>(
-  //           create: (context) => mockAupTcBloc,
-  //         ),
-  //         BlocProvider<SettingBloc>(
-  //           create: (context) => settingBlocMock,
-  //         ),
-  //       ]);
-  //   await tester.pump();
-  //   final contactUsTile = find.byKey(const Key('contactUsTile'));
-  //   expect(contactUsTile, findsOneWidget);
-  //   await tester.tap(contactUsTile);
-  //   await tester.pump();
-  //   expect(autoRouterMock.current.name, ContactUsPageRoute.name);
-  // });
-  // testWidgets('Setting screen changePasswordTile', (tester) async {
-  //   await TesterUtils.setUpLocalizationWrapper(
-  //       tester: tester,
-  //       home: const SettingsPage(),
-  //       locale: const Locale('en'),
-  //       isAutoRouteEnabled: true,
-  //       autoRouterMock: autoRouterMock,
-  //       providers: [
-  //         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-  //         BlocProvider<AnnouncementBloc>(
-  //             create: (context) => announcementBlocMock),
-  //         BlocProvider<AupTcBloc>(
-  //           create: (context) => mockAupTcBloc,
-  //         ),
-  //         BlocProvider<ResetPasswordBloc>(
-  //           create: (context) => resetPasswordBlocMock,
-  //         ),
-  //         BlocProvider<SettingBloc>(
-  //           create: (context) => settingBlocMock,
-  //         ),
-  //       ]);
-  //   await tester.pump();
-  //   final changePasswordTile = find.byKey(const Key('changePasswordTile'));
-  //   expect(changePasswordTile, findsOneWidget);
-  //   await tester.tap(changePasswordTile);
-  //   await tester.pump();
-  //   expect(autoRouterMock.current.name, ChangePasswordPageRoute.name);
-  // });
-  // testWidgets('Setting screen Privacy Policy', (tester) async {
-  //   await TesterUtils.setUpLocalizationWrapper(
-  //       tester: tester,
-  //       home: const SettingsPage(),
-  //       locale: const Locale('en'),
-  //       isAutoRouteEnabled: true,
-  //       autoRouterMock: autoRouterMock,
-  //       providers: [
-  //         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-  //         BlocProvider<AnnouncementBloc>(
-  //             create: (context) => announcementBlocMock),
-  //         BlocProvider<AupTcBloc>(
-  //           create: (context) => mockAupTcBloc,
-  //         ),
-  //         BlocProvider<SettingBloc>(
-  //           create: (context) => settingBlocMock,
-  //         ),
-  //       ]);
-  //   await tester.pump();
-  //   final privacyPolicy = find.byKey(const Key('Privacy_Policy'));
-  //   expect(privacyPolicy, findsOneWidget);
-  //   await tester.tap(privacyPolicy);
-  //   await tester.pump();
-  //   expect(autoRouterMock.current.name, WebViewPageRoute.name);
-  // });
-  // testWidgets('Setting screen logoutTile', (tester) async {
-  //   await TesterUtils.setUpLocalizationWrapper(
-  //       tester: tester,
-  //       home: const SettingsPage(),
-  //       locale: const Locale('en'),
-  //       isAutoRouteEnabled: true,
-  //       autoRouterMock: autoRouterMock,
-  //       providers: [
-  //         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-  //         BlocProvider<AnnouncementBloc>(
-  //             create: (context) => announcementBlocMock),
-  //         BlocProvider<AupTcBloc>(
-  //           create: (context) => mockAupTcBloc,
-  //         ),
-  //         BlocProvider<SettingBloc>(
-  //           create: (context) => settingBlocMock,
-  //         ),
-  //       ]);
-  //   await tester.pump();
-  //   final logoutTile = find.byKey(const Key('logoutTile'));
-  //   expect(logoutTile, findsOneWidget);
-  //   await tester.tap(logoutTile);
-  //   // await tester.pump();
-  //   // expect();
-  // });
-
-  // testWidgets('Setting screen Biometric Login with State change',
-  //     (tester) async {
-  //   final expectedStates = [
-  //     SettingState.initial().copyWith(
-  //       isBiometricEnable: true,
-  //       isBiometricPossible: true,
-  //       failureOrSuccessOption: none(),
-  //     ),
-  //     SettingState.initial().copyWith(
-  //       isBiometricEnable: false,
-  //       isBiometricPossible: true,
-  //       failureOrSuccessOption: none(),
-  //     ),
-  //   ];
-  //   whenListen(settingBlocMock, Stream.fromIterable(expectedStates));
-  //   await TesterUtils.setUpLocalizationWrapper(
-  //       tester: tester,
-  //       home: const SettingsPage(),
-  //       locale: const Locale('en'),
-  //       isAutoRouteEnabled: true,
-  //       autoRouterMock: autoRouterMock,
-  //       providers: [
-  //         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-  //         BlocProvider<AnnouncementBloc>(
-  //             create: (context) => announcementBlocMock),
-  //         BlocProvider<AupTcBloc>(
-  //           create: (context) => mockAupTcBloc,
-  //         ),
-  //         BlocProvider<SettingBloc>(
-  //           create: (context) => settingBlocMock,
-  //         ),
-  //       ]);
-  //   await tester.pump();
-  //   final biometricLoginToggle = find.byKey(const Key('biometricLoginToggle'));
-  //   expect(biometricLoginToggle, findsOneWidget);
-  //   await tester.tap(biometricLoginToggle);
-  //   await tester.pump();
-  //   verify(
-  //     () => settingBlocMock.add(const SettingEvent.toggleBiometric(
-  //       isBiometricEnabled: true,
-  //     )),
-  //   ).called(1);
-  // });
 }

@@ -302,6 +302,9 @@ class RoleType extends ValueObject<String> {
     return isSalesRepRole ? 'salesrep' : 'customer';
   }
 
+  bool get canAccessMarketPlace =>
+      isRootAdmin || isZPAdmin || isClientUser || isClientAdmin;
+
   const RoleType._(this.value);
 }
 
@@ -551,4 +554,41 @@ class CustomerBlock extends ValueObject<String> {
   double get appBarHeight => getCombinedAppBarHeight(isCustomerBlocked, false);
 
   const CustomerBlock._(this.value);
+}
+
+class CustomerCodeRegion extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CustomerCodeRegion(String input) =>
+      CustomerCodeRegion._(validateStringNotEmpty(input));
+
+  bool get enableMarketPlace =>
+      isRegionEnableMarketPlace(value.getOrElse(() => ''));
+
+  const CustomerCodeRegion._(this.value);
+}
+
+class MarketPlaceTnCAcceptance extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MarketPlaceTnCAcceptance(String input) =>
+      MarketPlaceTnCAcceptance._(Right(input));
+
+  factory MarketPlaceTnCAcceptance.unknown() => MarketPlaceTnCAcceptance('0');
+
+  factory MarketPlaceTnCAcceptance.accept() => MarketPlaceTnCAcceptance('1');
+
+  factory MarketPlaceTnCAcceptance.reject() => MarketPlaceTnCAcceptance('2');
+
+  bool get isUnknown => this == MarketPlaceTnCAcceptance.unknown();
+
+  bool get isAccept => this == MarketPlaceTnCAcceptance.accept();
+
+  bool get isReject => this == MarketPlaceTnCAcceptance.reject();
+
+  int get apiValue => int.tryParse(getOrDefaultValue('')) ?? 0;
+
+  const MarketPlaceTnCAcceptance._(this.value);
 }

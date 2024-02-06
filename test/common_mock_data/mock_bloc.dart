@@ -1,5 +1,5 @@
-
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -48,6 +48,9 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
+
+class AupTcMockBloc extends MockBloc<AupTcEvent, AupTcState>
+    implements AupTcBloc {}
 
 class DownloadPaymentAttachmentsBlocMock extends MockBloc<
         DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
@@ -112,7 +115,6 @@ class AvailableCreditFilterBlocMock
 
 class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
     implements NewPaymentBloc {}
-
 
 class PaymentInProgressBlocMock
     extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>

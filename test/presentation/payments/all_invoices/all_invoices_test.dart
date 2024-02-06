@@ -16,8 +16,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -30,6 +28,7 @@ import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.d
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -263,50 +262,12 @@ void main() {
           .thenReturn(AllInvoicesState.initial());
       when(() => customerCodeBlocMock.state).thenReturn(
         CustomerCodeState.initial().copyWith(
-          shipToInfo: ShipToInfo(
-            defaultShipToAddress: true,
-            shipToCustomerCode: '',
-            shipToName: ShipToName.empty(),
-            shipToAddress: ShipToAddress.empty(),
-            status: Status(''),
-            building: '',
-            city1: '',
-            city2: '',
-            postalCode: '',
-            houseNumber1: '',
-            telephoneNumber: '',
-            region: '',
-            floor: '',
-            plant: '',
-            licenses: [],
-            country: '',
-            targetCustomerType: '',
-            customerBlock: CustomerBlock(''),
-          ),
+          shipToInfo: fakeShipToInfo,
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          shipToInfo: ShipToInfo(
-            defaultShipToAddress: true,
-            shipToCustomerCode: '',
-            shipToName: ShipToName.empty(),
-            shipToAddress: ShipToAddress.empty(),
-            status: Status(''),
-            building: '',
-            city1: '',
-            city2: '',
-            postalCode: '',
-            houseNumber1: '',
-            telephoneNumber: '',
-            region: '',
-            floor: '',
-            plant: '',
-            licenses: [],
-            country: '',
-            targetCustomerType: '',
-            customerBlock: CustomerBlock(''),
-          ),
+          shipToInfo: fakeShipToInfo,
         ),
       );
 
@@ -402,26 +363,7 @@ void main() {
       );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          shipToInfo: ShipToInfo(
-            defaultShipToAddress: true,
-            shipToCustomerCode: '',
-            shipToName: ShipToName.empty(),
-            shipToAddress: ShipToAddress.empty(),
-            status: Status(''),
-            building: '',
-            city1: '',
-            city2: '',
-            postalCode: '',
-            houseNumber1: '',
-            telephoneNumber: '',
-            region: '',
-            floor: '',
-            plant: '',
-            licenses: [],
-            country: '',
-            targetCustomerType: '',
-            customerBlock: CustomerBlock(''),
-          ),
+          shipToInfo: fakeShipToInfo,
         ),
       );
       await tester.pumpWidget(getWidget());

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,6 +59,24 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               user: state.user.copyWith(
                 acceptPrivacyPolicy: settingTc.acceptTC,
               ),
+              userFailureOrSuccessOption: none(),
+            ),
+          ),
+        );
+      },
+      setMarketPlaceTncAcceptance: (e) async {
+        final failureOrSuccess =
+            await userRepository.updateUserMarketPlaceTc(e.value);
+
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              userFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (_) => emit(
+            state.copyWith(
+              user: state.user.copyWith(acceptMPTC: e.value),
               userFailureOrSuccessOption: none(),
             ),
           ),

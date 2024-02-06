@@ -285,9 +285,26 @@ class EligibilityState with _$EligibilityState {
             ? salesOrgConfigs.addOosMaterials.oosMaterialTag
             : salesOrgConfigs.addOosMaterials.oosTag,
       );
+
   bool get showMarketPlaceProduct {
+    if (!isMarketPlaceEnabled) return false;
+    if (!user.acceptMPTC.isAccept) return false;
+
+    return true;
+  }
+
+  bool get showMarketPlaceTnc {
+    if (!user.acceptPrivacyPolicy) return false;
+    if (!isMarketPlaceEnabled) return false;
+    if (!user.acceptMPTC.isUnknown) return false;
+
+    return true;
+  }
+
+  bool get isMarketPlaceEnabled {
     if (!salesOrgConfigs.enableMarketPlace) return false;
-    //TODO: Add more conditions related to user + customerCode in upcoming ticket
+    if (!shipToInfo.region.enableMarketPlace) return false;
+    if (!user.role.type.canAccessMarketPlace) return false;
 
     return true;
   }

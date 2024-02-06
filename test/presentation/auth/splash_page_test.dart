@@ -1231,9 +1231,6 @@ void main() {
       whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
 
       await getWidget(tester);
-      verify(
-        () => aupTcBlocMock.add(AupTcEvent.show(fakeUser)),
-      ).called(1);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       expect(
         EasyLocalization.of(tester.element(find.byType(Scaffold)))?.locale,

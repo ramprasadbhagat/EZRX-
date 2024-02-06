@@ -1,7 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
@@ -462,5 +465,80 @@ void main() {
         expect(result.isLeft(), true);
       },
     );
+
+    group('update user marketplace tc -', () {
+      const fakeStatusCode = 0;
+      final fakeStatus = MarketPlaceTnCAcceptance(fakeStatusCode.toString());
+      test(
+        'from local datasource successfully',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+
+          when(() => localDataSourceMock.updateUserTC())
+              .thenAnswer((_) async => const SettingTc(acceptTC: true));
+
+          final result = await repository.updateUserMarketPlaceTc(fakeStatus);
+          expect(result.isRight(), true);
+        },
+      );
+
+      test(
+        'from local datasource throws error',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+
+          when(() => localDataSourceMock.updateUserTC())
+              .thenThrow(mockException);
+
+          final result = await repository.updateUserMarketPlaceTc(fakeStatus);
+          expect(result, Left(ApiFailure.other(mockException.message)));
+        },
+      );
+
+      test(
+        'from remote datasource successfully',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+
+          when(
+            () => remoteDataSourceMock.updateUserMarketPlaceTC(fakeStatusCode),
+          ).thenAnswer((_) async => const SettingTc(acceptTC: true));
+
+          final result = await repository.updateUserMarketPlaceTc(fakeStatus);
+          expect(result.isRight(), true);
+        },
+      );
+
+      test(
+        'from remote datasource throws error',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+
+          when(
+            () => remoteDataSourceMock.updateUserMarketPlaceTC(fakeStatusCode),
+          ).thenThrow(mockException);
+
+          final result = await repository.updateUserMarketPlaceTc(fakeStatus);
+          expect(result, Left(ApiFailure.other(mockException.message)));
+        },
+      );
+
+      test(
+        'from remote datasource returning false value',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+
+          when(
+            () => remoteDataSourceMock.updateUserMarketPlaceTC(fakeStatusCode),
+          ).thenAnswer((_) async => const SettingTc(acceptTC: false));
+
+          final result = await repository.updateUserMarketPlaceTc(fakeStatus);
+          expect(
+            result,
+            const Left(ApiFailure.marketplaceTnCAcceptanceError()),
+          );
+        },
+      );
+    });
   });
 }

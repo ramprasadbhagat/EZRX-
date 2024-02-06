@@ -7,6 +7,9 @@ class UserEvent with _$UserEvent {
     @Default(false) bool isLoginOnBehalf,
   }) = _Fetch;
   const factory UserEvent.acceptTnc() = _AcceptTnc;
+  const factory UserEvent.setMarketPlaceTncAcceptance(
+    MarketPlaceTnCAcceptance value,
+  ) = _SetMarketPlaceTncAcceptance;
   const factory UserEvent.updateNotificationSettings({
     required Language languagePreference,
     required bool emailNotifications,

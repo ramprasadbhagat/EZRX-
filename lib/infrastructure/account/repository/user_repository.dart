@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
@@ -172,6 +173,34 @@ class UserRepository implements IUserRepository {
       }
 
       return const Left(ApiFailure.languageChangeFail());
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> updateUserMarketPlaceTc(
+    MarketPlaceTnCAcceptance value,
+  ) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        await localDataSource.updateUserTC();
+
+        return const Right(unit);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final result = await remoteDataSource.updateUserMarketPlaceTC(
+        value.apiValue,
+      );
+
+      if (!result.acceptTC) {
+        return const Left(ApiFailure.marketplaceTnCAcceptanceError());
+      }
+
+      return const Right(unit);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

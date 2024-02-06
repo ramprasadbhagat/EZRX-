@@ -28,4 +28,5 @@ abstract class SvgImage {
   static const String xlsIcon = '${_basePath}xls_icon.svg';
   static String paymentMethodOptionLogo(String optionID) =>
       '${_basePath}payment_option_$optionID.svg';
+  static const String marketplaceIcon = '${_basePath}marketplace_icon.svg';
 }

@@ -38,6 +38,7 @@ query customerInformationSearch(
       floor
       houseNumber1
       postalCode
+      region
       city1
       city2
       status
@@ -56,6 +57,7 @@ query customerInformationSearch(
         floor
         houseNumber1
         postalCode
+        region
         city1
         city2
         status

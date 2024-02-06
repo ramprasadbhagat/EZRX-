@@ -67,7 +67,7 @@ class ShipToDto with _$ShipToDto {
       telephoneNumber: shipToInfo.telephoneNumber,
       houseNumber1: shipToInfo.houseNumber1,
       building: shipToInfo.building,
-      region: shipToInfo.region,
+      region: shipToInfo.region.getOrDefaultValue(''),
       floor: shipToInfo.floor,
       plant: shipToInfo.plant,
       licenseDtoList:
@@ -104,7 +104,7 @@ class ShipToDto with _$ShipToDto {
       telephoneNumber: telephoneNumber,
       houseNumber1: houseNumber1,
       building: building,
-      region: region,
+      region: CustomerCodeRegion(region),
       floor: floor,
       plant: plant,
       licenses: licenseDtoList.isNotEmpty

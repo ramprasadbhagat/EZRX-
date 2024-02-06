@@ -77,6 +77,11 @@ mixin _$UserDto {
   List<String> get supportedLanguages => throw _privateConstructorUsedError;
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   String get mobileNumber => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'acceptMPTC',
+      defaultValue: '',
+      readValue: handleMarketPlaceTnCAcceptance)
+  String get acceptMPTC => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -134,7 +139,12 @@ abstract class $UserDtoCopyWith<$Res> {
           readValue: handleSupportedLanguages,
           defaultValue: <String>[])
       List<String> supportedLanguages,
-      @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber});
+      @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber,
+      @JsonKey(
+          name: 'acceptMPTC',
+          defaultValue: '',
+          readValue: handleMarketPlaceTnCAcceptance)
+      String acceptMPTC});
 
   $RoleDtoCopyWith<$Res> get role;
   $AccessRightDtoCopyWith<$Res> get accessRight;
@@ -178,6 +188,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? preferredLanguage = null,
     Object? supportedLanguages = null,
     Object? mobileNumber = null,
+    Object? acceptMPTC = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -280,6 +291,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      acceptMPTC: null == acceptMPTC
+          ? _value.acceptMPTC
+          : acceptMPTC // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -353,7 +368,12 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           readValue: handleSupportedLanguages,
           defaultValue: <String>[])
       List<String> supportedLanguages,
-      @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber});
+      @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber,
+      @JsonKey(
+          name: 'acceptMPTC',
+          defaultValue: '',
+          readValue: handleMarketPlaceTnCAcceptance)
+      String acceptMPTC});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -396,6 +416,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? preferredLanguage = null,
     Object? supportedLanguages = null,
     Object? mobileNumber = null,
+    Object? acceptMPTC = null,
   }) {
     return _then(_$_UserDto(
       id: null == id
@@ -498,6 +519,10 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      acceptMPTC: null == acceptMPTC
+          ? _value.acceptMPTC
+          : acceptMPTC // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -557,7 +582,12 @@ class _$_UserDto extends _UserDto {
           defaultValue: <String>[])
       required final List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '')
-      required this.mobileNumber})
+      required this.mobileNumber,
+      @JsonKey(
+          name: 'acceptMPTC',
+          defaultValue: '',
+          readValue: handleMarketPlaceTnCAcceptance)
+      required this.acceptMPTC})
       : _userSalesOrganisations = userSalesOrganisations,
         _salesOrganisations = salesOrganisations,
         _paymentNotification = paymentNotification,
@@ -675,10 +705,16 @@ class _$_UserDto extends _UserDto {
   @override
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   final String mobileNumber;
+  @override
+  @JsonKey(
+      name: 'acceptMPTC',
+      defaultValue: '',
+      readValue: handleMarketPlaceTnCAcceptance)
+  final String acceptMPTC;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC)';
   }
 
   @override
@@ -734,7 +770,9 @@ class _$_UserDto extends _UserDto {
             const DeepCollectionEquality()
                 .equals(other._supportedLanguages, _supportedLanguages) &&
             (identical(other.mobileNumber, mobileNumber) ||
-                other.mobileNumber == mobileNumber));
+                other.mobileNumber == mobileNumber) &&
+            (identical(other.acceptMPTC, acceptMPTC) ||
+                other.acceptMPTC == acceptMPTC));
   }
 
   @JsonKey(ignore: true)
@@ -765,7 +803,8 @@ class _$_UserDto extends _UserDto {
         const DeepCollectionEquality().hash(_paymentNotification),
         preferredLanguage,
         const DeepCollectionEquality().hash(_supportedLanguages),
-        mobileNumber
+        mobileNumber,
+        acceptMPTC
       ]);
 
   @JsonKey(ignore: true)
@@ -837,7 +876,12 @@ abstract class _UserDto extends UserDto {
           defaultValue: <String>[])
       required final List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '')
-      required final String mobileNumber}) = _$_UserDto;
+      required final String mobileNumber,
+      @JsonKey(
+          name: 'acceptMPTC',
+          defaultValue: '',
+          readValue: handleMarketPlaceTnCAcceptance)
+      required final String acceptMPTC}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
@@ -922,6 +966,12 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   String get mobileNumber;
+  @override
+  @JsonKey(
+      name: 'acceptMPTC',
+      defaultValue: '',
+      readValue: handleMarketPlaceTnCAcceptance)
+  String get acceptMPTC;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

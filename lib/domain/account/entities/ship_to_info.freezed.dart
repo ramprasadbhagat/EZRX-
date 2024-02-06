@@ -27,7 +27,7 @@ mixin _$ShipToInfo {
   String get postalCode => throw _privateConstructorUsedError;
   String get houseNumber1 => throw _privateConstructorUsedError;
   String get telephoneNumber => throw _privateConstructorUsedError;
-  String get region => throw _privateConstructorUsedError;
+  CustomerCodeRegion get region => throw _privateConstructorUsedError;
   String get floor => throw _privateConstructorUsedError;
   String get plant => throw _privateConstructorUsedError;
   String get targetCustomerType => throw _privateConstructorUsedError;
@@ -58,7 +58,7 @@ abstract class $ShipToInfoCopyWith<$Res> {
       String postalCode,
       String houseNumber1,
       String telephoneNumber,
-      String region,
+      CustomerCodeRegion region,
       String floor,
       String plant,
       String targetCustomerType,
@@ -150,7 +150,7 @@ class _$ShipToInfoCopyWithImpl<$Res, $Val extends ShipToInfo>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as String,
+              as CustomerCodeRegion,
       floor: null == floor
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
@@ -215,7 +215,7 @@ abstract class _$$_ShipToInfoCopyWith<$Res>
       String postalCode,
       String houseNumber1,
       String telephoneNumber,
-      String region,
+      CustomerCodeRegion region,
       String floor,
       String plant,
       String targetCustomerType,
@@ -307,7 +307,7 @@ class __$$_ShipToInfoCopyWithImpl<$Res>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as String,
+              as CustomerCodeRegion,
       floor: null == floor
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
@@ -384,7 +384,7 @@ class _$_ShipToInfo extends _ShipToInfo {
   @override
   final String telephoneNumber;
   @override
-  final String region;
+  final CustomerCodeRegion region;
   @override
   final String floor;
   @override
@@ -486,7 +486,7 @@ abstract class _ShipToInfo extends ShipToInfo {
       required final String postalCode,
       required final String houseNumber1,
       required final String telephoneNumber,
-      required final String region,
+      required final CustomerCodeRegion region,
       required final String floor,
       required final String plant,
       required final String targetCustomerType,
@@ -518,7 +518,7 @@ abstract class _ShipToInfo extends ShipToInfo {
   @override
   String get telephoneNumber;
   @override
-  String get region;
+  CustomerCodeRegion get region;
   @override
   String get floor;
   @override

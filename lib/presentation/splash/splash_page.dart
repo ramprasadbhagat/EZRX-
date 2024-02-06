@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/announcement_info/announcement_filter/ann
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
-import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
@@ -249,9 +248,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             }
             if (state.isNotEmpty) {
               context.setLocale(state.user.preferredLanguage.locale);
-            }
-            if (state.showTermsAndConditionDialog) {
-              context.read<AupTcBloc>().add(AupTcEvent.show(state.user));
             }
 
             _initializePaymentConfiguration(state);

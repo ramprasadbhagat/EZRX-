@@ -27,26 +27,44 @@ class HomeNavigationTabbar extends StatelessWidget {
           current.showTermsAndConditionDialog,
       builder: (context, state) {
         return state.showTermsAndConditionDialog
-            ? const AupTCDialog(
+            ? AupTCDialog(
                 key: WidgetKeys.aupTcScreen,
+                user: state.user,
+                isMarketPlace: false,
               )
-            : BlocBuilder<IntroBloc, IntroState>(
+            : BlocBuilder<EligibilityBloc, EligibilityState>(
                 buildWhen: (previous, current) =>
-                    previous.isAppFirstLaunch != current.isAppFirstLaunch,
+                    previous.showMarketPlaceTnc != current.showMarketPlaceTnc,
                 builder: (context, state) {
-                  return state.isAppFirstLaunch
-                      ? const IntroPage()
-                      : WillPopScope(
-                          onWillPop: () async => false,
-                          child: BlocBuilder<EligibilityBloc, EligibilityState>(
-                            buildWhen: (previous, current) =>
-                                previous.user != current.user,
-                            builder: (context, state) {
-                              return _CustomTabBar(
-                                routes: _getTabs(state),
-                              );
-                            },
-                          ),
+                  final isLoginOnBehalf =
+                      context.read<UserBloc>().state.isLoginOnBehalf;
+
+                  return state.showMarketPlaceTnc && !isLoginOnBehalf
+                      ? AupTCDialog(
+                          user: state.user,
+                          isMarketPlace: true,
+                        )
+                      : BlocBuilder<IntroBloc, IntroState>(
+                          buildWhen: (previous, current) =>
+                              previous.isAppFirstLaunch !=
+                              current.isAppFirstLaunch,
+                          builder: (context, state) {
+                            return state.isAppFirstLaunch
+                                ? const IntroPage()
+                                : WillPopScope(
+                                    onWillPop: () async => false,
+                                    child: BlocBuilder<EligibilityBloc,
+                                        EligibilityState>(
+                                      buildWhen: (previous, current) =>
+                                          previous.user != current.user,
+                                      builder: (context, state) {
+                                        return _CustomTabBar(
+                                          routes: _getTabs(state),
+                                        );
+                                      },
+                                    ),
+                                  );
+                          },
                         );
                 },
               );

@@ -41,6 +41,10 @@ final fakeClientUser = User.empty().copyWith(
   ),
 );
 
+final fakeClientUserAccessMarketPlace = fakeClientUser.copyWith(
+  acceptMPTC: MarketPlaceTnCAcceptance.accept(),
+);
+
 final fakeClient = User.empty().copyWith(
   username: Username(_fakeUserName),
   id: _fakeId,

@@ -36,6 +36,7 @@ class User with _$User {
     required Language preferredLanguage,
     required List<Language> supportedLanguages,
     required MobileNumber mobileNumber,
+    required MarketPlaceTnCAcceptance acceptMPTC,
   }) = _User;
 
   factory User.empty() => User(
@@ -64,6 +65,7 @@ class User with _$User {
         preferredLanguage: Language.english(),
         supportedLanguages: <Language>[],
         mobileNumber: MobileNumber(''),
+        acceptMPTC: MarketPlaceTnCAcceptance(''),
       );
 
   bool get userCanCreateOrder {

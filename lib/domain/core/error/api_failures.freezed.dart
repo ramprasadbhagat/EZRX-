@@ -23,6 +23,7 @@ mixin _$ApiFailure {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -67,6 +68,7 @@ mixin _$ApiFailure {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -111,6 +113,7 @@ mixin _$ApiFailure {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -156,6 +159,8 @@ mixin _$ApiFailure {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -220,6 +225,8 @@ mixin _$ApiFailure {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -272,6 +279,8 @@ mixin _$ApiFailure {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -405,6 +414,7 @@ class _$_Other implements _Other {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -452,6 +462,7 @@ class _$_Other implements _Other {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -499,6 +510,7 @@ class _$_Other implements _Other {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -550,6 +562,8 @@ class _$_Other implements _Other {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -617,6 +631,8 @@ class _$_Other implements _Other {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -672,6 +688,8 @@ class _$_Other implements _Other {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -802,6 +820,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -849,6 +868,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -896,6 +916,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -947,6 +968,8 @@ class _$_ServerError implements _ServerError {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -1014,6 +1037,8 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -1069,6 +1094,8 @@ class _$_ServerError implements _ServerError {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -1173,6 +1200,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -1220,6 +1248,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -1267,6 +1296,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -1318,6 +1348,8 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -1385,6 +1417,8 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -1440,6 +1474,8 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -1539,6 +1575,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -1586,6 +1623,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -1633,6 +1671,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -1684,6 +1723,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -1751,6 +1792,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -1806,6 +1849,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -1905,6 +1950,7 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -1952,6 +1998,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -1999,6 +2046,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -2050,6 +2098,8 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -2117,6 +2167,8 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -2172,6 +2224,8 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -2229,6 +2283,386 @@ abstract class _UserNotFound implements ApiFailure {
 }
 
 /// @nodoc
+abstract class _$$_MarketPlaceTnCAcceptanceErrorCopyWith<$Res> {
+  factory _$$_MarketPlaceTnCAcceptanceErrorCopyWith(
+          _$_MarketPlaceTnCAcceptanceError value,
+          $Res Function(_$_MarketPlaceTnCAcceptanceError) then) =
+      __$$_MarketPlaceTnCAcceptanceErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_MarketPlaceTnCAcceptanceErrorCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_MarketPlaceTnCAcceptanceError>
+    implements _$$_MarketPlaceTnCAcceptanceErrorCopyWith<$Res> {
+  __$$_MarketPlaceTnCAcceptanceErrorCopyWithImpl(
+      _$_MarketPlaceTnCAcceptanceError _value,
+      $Res Function(_$_MarketPlaceTnCAcceptanceError) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_MarketPlaceTnCAcceptanceError
+    implements _MarketPlaceTnCAcceptanceError {
+  const _$_MarketPlaceTnCAcceptanceError();
+
+  @override
+  String toString() {
+    return 'ApiFailure.marketplaceTnCAcceptanceError()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MarketPlaceTnCAcceptanceError);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() passwordResetFail,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() productDetailRoute,
+    required TResult Function() orderDetailRoute,
+    required TResult Function() returnDetailRoute,
+    required TResult Function() paymentDetailRoute,
+    required TResult Function() invoiceDetailRoute,
+    required TResult Function() languageChangeFail,
+    required TResult Function(String productNumber) scannedProductNotFound,
+    required TResult Function() cameraPermissionFailed,
+    required TResult Function() userNameNotFound,
+    required TResult Function() uploadedFileSizeExceed,
+    required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
+    required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
+    required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
+    required TResult Function() attachmentDownloadError,
+  }) {
+    return marketplaceTnCAcceptanceError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? productDetailRoute,
+    TResult? Function()? orderDetailRoute,
+    TResult? Function()? returnDetailRoute,
+    TResult? Function()? paymentDetailRoute,
+    TResult? Function()? invoiceDetailRoute,
+    TResult? Function()? languageChangeFail,
+    TResult? Function(String productNumber)? scannedProductNotFound,
+    TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? userNameNotFound,
+    TResult? Function()? uploadedFileSizeExceed,
+    TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
+    TResult? Function()? attachmentDownloadError,
+  }) {
+    return marketplaceTnCAcceptanceError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? passwordResetFail,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? productDetailRoute,
+    TResult Function()? orderDetailRoute,
+    TResult Function()? returnDetailRoute,
+    TResult Function()? paymentDetailRoute,
+    TResult Function()? invoiceDetailRoute,
+    TResult Function()? languageChangeFail,
+    TResult Function(String productNumber)? scannedProductNotFound,
+    TResult Function()? cameraPermissionFailed,
+    TResult Function()? userNameNotFound,
+    TResult Function()? uploadedFileSizeExceed,
+    TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
+    TResult Function()? attachmentDownloadError,
+    required TResult orElse(),
+  }) {
+    if (marketplaceTnCAcceptanceError != null) {
+      return marketplaceTnCAcceptanceError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_ProductDetailRoute value) productDetailRoute,
+    required TResult Function(_OrderDetailRoute value) orderDetailRoute,
+    required TResult Function(_ReturnDetailRoute value) returnDetailRoute,
+    required TResult Function(_PaymentDetailRoute value) paymentDetailRoute,
+    required TResult Function(_InvoiceDetailRoute value) invoiceDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+    required TResult Function(_ScannedProductNotFound value)
+        scannedProductNotFound,
+    required TResult Function(_CameraPermissionFailed value)
+        cameraPermissionFailed,
+    required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_UploadedFileSizeExceed value)
+        uploadedFileSizeExceed,
+    required TResult Function(_PaymentAdviceDeleteFailed value)
+        paymentAdviceDeleteFailed,
+    required TResult Function(_AllReorderItemInvalid value)
+        allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
+    required TResult Function(_CartHasDifferentAddress value)
+        cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
+    required TResult Function(_AttachmentDownloadError value)
+        attachmentDownloadError,
+  }) {
+    return marketplaceTnCAcceptanceError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult? Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult? Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult? Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult? Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult? Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
+  }) {
+    return marketplaceTnCAcceptanceError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    required TResult orElse(),
+  }) {
+    if (marketplaceTnCAcceptanceError != null) {
+      return marketplaceTnCAcceptanceError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MarketPlaceTnCAcceptanceError implements ApiFailure {
+  const factory _MarketPlaceTnCAcceptanceError() =
+      _$_MarketPlaceTnCAcceptanceError;
+}
+
+/// @nodoc
 abstract class _$$_InvalidEmailAndPasswordCombinationCopyWith<$Res> {
   factory _$$_InvalidEmailAndPasswordCombinationCopyWith(
           _$_InvalidEmailAndPasswordCombination value,
@@ -2276,6 +2710,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -2323,6 +2758,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -2370,6 +2806,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -2421,6 +2858,8 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -2488,6 +2927,8 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -2543,6 +2984,8 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -2643,6 +3086,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -2690,6 +3134,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -2737,6 +3182,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -2788,6 +3234,8 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -2855,6 +3303,8 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -2910,6 +3360,8 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -3009,6 +3461,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -3056,6 +3509,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -3103,6 +3557,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -3154,6 +3609,8 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -3221,6 +3678,8 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -3276,6 +3735,8 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -3375,6 +3836,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -3422,6 +3884,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -3469,6 +3932,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -3520,6 +3984,8 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -3587,6 +4053,8 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -3642,6 +4110,8 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -3741,6 +4211,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -3788,6 +4259,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -3835,6 +4307,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -3886,6 +4359,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -3953,6 +4428,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -4008,6 +4485,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -4111,6 +4590,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -4158,6 +4638,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -4205,6 +4686,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -4256,6 +4738,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -4323,6 +4807,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -4378,6 +4864,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -4482,6 +4970,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -4529,6 +5018,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -4576,6 +5066,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -4627,6 +5118,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -4694,6 +5187,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -4749,6 +5244,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -4852,6 +5349,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -4899,6 +5397,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -4946,6 +5445,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -4997,6 +5497,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -5064,6 +5566,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -5119,6 +5623,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -5219,6 +5725,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -5266,6 +5773,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -5313,6 +5821,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -5364,6 +5873,8 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -5431,6 +5942,8 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -5486,6 +5999,8 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -5588,6 +6103,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -5635,6 +6151,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -5682,6 +6199,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -5733,6 +6251,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -5800,6 +6320,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -5855,6 +6377,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -5954,6 +6478,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -6001,6 +6526,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -6048,6 +6574,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -6099,6 +6626,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -6166,6 +6695,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -6221,6 +6752,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -6320,6 +6853,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -6367,6 +6901,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -6414,6 +6949,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -6465,6 +7001,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -6532,6 +7070,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -6587,6 +7127,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -6686,6 +7228,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -6733,6 +7276,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -6780,6 +7324,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -6831,6 +7376,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -6898,6 +7445,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -6953,6 +7502,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -7052,6 +7603,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -7099,6 +7651,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -7146,6 +7699,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -7197,6 +7751,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -7264,6 +7820,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -7319,6 +7877,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -7418,6 +7978,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -7465,6 +8026,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -7512,6 +8074,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -7563,6 +8126,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -7630,6 +8195,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -7685,6 +8252,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -7784,6 +8353,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -7831,6 +8401,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -7878,6 +8449,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -7929,6 +8501,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -7996,6 +8570,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -8051,6 +8627,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -8151,6 +8729,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -8198,6 +8777,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -8245,6 +8825,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -8296,6 +8877,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -8363,6 +8946,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -8418,6 +9003,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -8517,6 +9104,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -8564,6 +9152,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -8611,6 +9200,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -8662,6 +9252,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -8729,6 +9321,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -8784,6 +9378,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -8884,6 +9480,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -8931,6 +9528,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -8978,6 +9576,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -9029,6 +9628,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -9096,6 +9697,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -9151,6 +9754,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -9250,6 +9855,7 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -9297,6 +9903,7 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -9344,6 +9951,7 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -9395,6 +10003,8 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -9462,6 +10072,8 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -9517,6 +10129,8 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -9616,6 +10230,7 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -9663,6 +10278,7 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -9710,6 +10326,7 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -9761,6 +10378,8 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -9828,6 +10447,8 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -9883,6 +10504,8 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -9982,6 +10605,7 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -10029,6 +10653,7 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -10076,6 +10701,7 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -10127,6 +10753,8 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -10194,6 +10822,8 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -10249,6 +10879,8 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -10348,6 +10980,7 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -10395,6 +11028,7 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -10442,6 +11076,7 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -10493,6 +11128,8 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -10560,6 +11197,8 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -10615,6 +11254,8 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -10714,6 +11355,7 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -10761,6 +11403,7 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -10808,6 +11451,7 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -10859,6 +11503,8 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -10926,6 +11572,8 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -10981,6 +11629,8 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -11080,6 +11730,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -11127,6 +11778,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -11174,6 +11826,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -11225,6 +11878,8 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -11292,6 +11947,8 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -11347,6 +12004,8 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -11474,6 +12133,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -11521,6 +12181,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -11568,6 +12229,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -11619,6 +12281,8 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -11686,6 +12350,8 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -11741,6 +12407,8 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -11847,6 +12515,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -11894,6 +12563,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -11941,6 +12611,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -11992,6 +12663,8 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -12059,6 +12732,8 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -12114,6 +12789,8 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -12213,6 +12890,7 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -12260,6 +12938,7 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -12307,6 +12986,7 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -12358,6 +13038,8 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -12425,6 +13107,8 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -12480,6 +13164,8 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -12580,6 +13266,7 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -12627,6 +13314,7 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -12674,6 +13362,7 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -12725,6 +13414,8 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -12792,6 +13483,8 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -12847,6 +13540,8 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -12976,6 +13671,7 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -13023,6 +13719,7 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -13070,6 +13767,7 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -13121,6 +13819,8 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -13188,6 +13888,8 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -13243,6 +13945,8 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -13348,6 +14052,7 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -13395,6 +14100,7 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -13442,6 +14148,7 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -13493,6 +14200,8 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -13560,6 +14269,8 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -13615,6 +14326,8 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -13744,6 +14457,7 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -13791,6 +14505,7 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -13838,6 +14553,7 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -13889,6 +14605,8 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -13956,6 +14674,8 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -14011,6 +14731,8 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -14117,6 +14839,7 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -14164,6 +14887,7 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -14211,6 +14935,7 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -14262,6 +14987,8 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -14329,6 +15056,8 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -14384,6 +15113,8 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -14488,6 +15219,7 @@ class _$_ArticleannuncementTagFetchingError
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -14535,6 +15267,7 @@ class _$_ArticleannuncementTagFetchingError
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -14582,6 +15315,7 @@ class _$_ArticleannuncementTagFetchingError
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -14633,6 +15367,8 @@ class _$_ArticleannuncementTagFetchingError
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -14700,6 +15436,8 @@ class _$_ArticleannuncementTagFetchingError
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -14755,6 +15493,8 @@ class _$_ArticleannuncementTagFetchingError
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
@@ -14856,6 +15596,7 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     required TResult Function() poorConnection,
     required TResult Function() serverTimeout,
     required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
@@ -14903,6 +15644,7 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     TResult? Function()? poorConnection,
     TResult? Function()? serverTimeout,
     TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
@@ -14950,6 +15692,7 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     TResult Function()? poorConnection,
     TResult Function()? serverTimeout,
     TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
@@ -15001,6 +15744,8 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     required TResult Function(_PoorConnection value) poorConnection,
     required TResult Function(_ServerTimeout value) serverTimeout,
     required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
@@ -15068,6 +15813,8 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     TResult? Function(_PoorConnection value)? poorConnection,
     TResult? Function(_ServerTimeout value)? serverTimeout,
     TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
@@ -15123,6 +15870,8 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     TResult Function(_PoorConnection value)? poorConnection,
     TResult Function(_ServerTimeout value)? serverTimeout,
     TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,

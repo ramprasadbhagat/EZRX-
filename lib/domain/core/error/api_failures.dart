@@ -11,6 +11,8 @@ class ApiFailure with _$ApiFailure {
 
   //User failure
   const factory ApiFailure.userNotFound() = _UserNotFound;
+  const factory ApiFailure.marketplaceTnCAcceptanceError() =
+      _MarketPlaceTnCAcceptanceError;
 
   //Auth failure
   const factory ApiFailure.invalidEmailAndPasswordCombination() =
@@ -131,5 +133,7 @@ extension ApiFailureExt on ApiFailure {
         articleannuncementTagFetchingError: (_) =>
             'Error while fetching announcement article tag list!',
         attachmentDownloadError: (_) => 'File download failed',
+        marketplaceTnCAcceptanceError: (_) =>
+            'Unable to update acceptance status',
       );
 }

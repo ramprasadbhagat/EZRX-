@@ -1262,7 +1262,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => AupTcBloc(
       aupTcRepository: locator<AupTcRepository>(),
       config: locator<Config>(),

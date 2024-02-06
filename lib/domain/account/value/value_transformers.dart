@@ -386,9 +386,7 @@ String subTotalTextString(String country) {
 }
 
 String returnSubTotalTextString(String country) {
-  return country == 'SG' 
-      ? 'Subtotal (excl.tax)'
-      : 'Subtotal with tax';
+  return country == 'SG' ? 'Subtotal (excl.tax)' : 'Subtotal with tax';
 }
 
 bool countrySupportOrderType(country) {
@@ -614,3 +612,22 @@ double getCombinedAppBarHeight(bool value, bool isFromHomePage) {
 }
 
 bool salesOrgIsPhMdi(String salesOrg) => salesOrg == '2501';
+
+List<String> _peninsulaMalaysiaRegion = [
+  'JOH',
+  'KED',
+  'KEL',
+  'KUL',
+  'MEL',
+  'PAH',
+  'PEL',
+  'PER',
+  'PIN',
+  'PSK',
+  'SEL',
+  'SER',
+  'TRE',
+];
+
+bool isRegionEnableMarketPlace(String region) =>
+    [..._peninsulaMalaysiaRegion].contains(region);

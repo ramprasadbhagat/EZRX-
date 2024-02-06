@@ -96,7 +96,8 @@
             "enableBrowserCookies": true,
             "automatedPersonalisation": true,
             "directMarketing": true
-         }
+         },
+         "acceptMPTC": 0
       }
    }
 }

@@ -33,7 +33,7 @@ mixin _$CustomerCodeInfo {
   List<EmailAddress> get emailAddresses => throw _privateConstructorUsedError;
   CustomerAttr7 get customerAttr7 => throw _privateConstructorUsedError;
   CustomerGrp4 get customerGrp4 => throw _privateConstructorUsedError;
-  String get region => throw _privateConstructorUsedError;
+  CustomerCodeRegion get region => throw _privateConstructorUsedError;
   bool get comboEligible => throw _privateConstructorUsedError;
   List<SalesDealNumber> get salesDeals => throw _privateConstructorUsedError;
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
@@ -68,7 +68,7 @@ abstract class $CustomerCodeInfoCopyWith<$Res> {
       List<EmailAddress> emailAddresses,
       CustomerAttr7 customerAttr7,
       CustomerGrp4 customerGrp4,
-      String region,
+      CustomerCodeRegion region,
       bool comboEligible,
       List<SalesDealNumber> salesDeals,
       PhoneNumber telephoneNumber,
@@ -180,7 +180,7 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as String,
+              as CustomerCodeRegion,
       comboEligible: null == comboEligible
           ? _value.comboEligible
           : comboEligible // ignore: cast_nullable_to_non_nullable
@@ -249,7 +249,7 @@ abstract class _$$_CustomerCodeInfoCopyWith<$Res>
       List<EmailAddress> emailAddresses,
       CustomerAttr7 customerAttr7,
       CustomerGrp4 customerGrp4,
-      String region,
+      CustomerCodeRegion region,
       bool comboEligible,
       List<SalesDealNumber> salesDeals,
       PhoneNumber telephoneNumber,
@@ -361,7 +361,7 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as String,
+              as CustomerCodeRegion,
       comboEligible: null == comboEligible
           ? _value.comboEligible
           : comboEligible // ignore: cast_nullable_to_non_nullable
@@ -471,7 +471,7 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
   @override
   final CustomerGrp4 customerGrp4;
   @override
-  final String region;
+  final CustomerCodeRegion region;
   @override
   final bool comboEligible;
   final List<SalesDealNumber> _salesDeals;
@@ -594,7 +594,7 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
       required final List<EmailAddress> emailAddresses,
       required final CustomerAttr7 customerAttr7,
       required final CustomerGrp4 customerGrp4,
-      required final String region,
+      required final CustomerCodeRegion region,
       required final bool comboEligible,
       required final List<SalesDealNumber> salesDeals,
       required final PhoneNumber telephoneNumber,
@@ -634,7 +634,7 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
   @override
   CustomerGrp4 get customerGrp4;
   @override
-  String get region;
+  CustomerCodeRegion get region;
   @override
   bool get comboEligible;
   @override

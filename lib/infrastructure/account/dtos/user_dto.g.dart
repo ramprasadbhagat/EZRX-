@@ -56,6 +56,8 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
               .toList() ??
           [],
       mobileNumber: json['MobileNumber'] as String? ?? '',
+      acceptMPTC:
+          handleMarketPlaceTnCAcceptance(json, 'acceptMPTC') as String? ?? '',
     );
 
 Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
@@ -87,4 +89,5 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'preferredLanguage': instance.preferredLanguage,
       'supportedLanguages': instance.supportedLanguages,
       'MobileNumber': instance.mobileNumber,
+      'acceptMPTC': instance.acceptMPTC,
     };

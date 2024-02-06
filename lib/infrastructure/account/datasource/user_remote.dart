@@ -74,6 +74,23 @@ class UserRemoteDataSource {
     });
   }
 
+  Future<SettingTc> updateUserMarketPlaceTC(int value) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode({
+          'query': userQueryMutation.updateMarketPlaceTnCAcceptance(),
+          'variables': {'isAcceptMPTC': value},
+        }),
+        apiEndpoint: 'updateAcceptanceStatus',
+      );
+      _userExceptionChecker(res: res);
+
+      return SettingTcDto.fromJson(res.data['data']).toDomain();
+    });
+  }
+
   Future<User> updateUserNotificationAndLanguagePreference({
     required String languagePreference,
     required bool emailNotification,

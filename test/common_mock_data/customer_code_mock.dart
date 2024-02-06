@@ -14,6 +14,10 @@ final fakeShipToInfo = ShipToInfo.empty().copyWith(
   shipToCustomerCode: _shipToCustomerCode,
   shipToName: _fakeShipToName,
 );
+
+final fakeShipToInfoPeninsulaRegion =
+    fakeShipToInfo.copyWith(region: CustomerCodeRegion('SEL'));
+
 final _fakeBillToInfo =
     BillToInfo.empty().copyWith(billToCustomerCode: _fakeBillToCustomerCode);
 

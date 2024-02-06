@@ -85,7 +85,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
-import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
@@ -272,9 +271,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ForgotPasswordBloc>(
           create: (context) => locator<ForgotPasswordBloc>(),
-        ),
-        BlocProvider<AupTcBloc>(
-          create: (context) => locator<AupTcBloc>(),
         ),
         BlocProvider<MaterialPriceBloc>(
           create: (context) => locator<MaterialPriceBloc>(),

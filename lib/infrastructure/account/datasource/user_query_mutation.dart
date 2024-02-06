@@ -98,6 +98,7 @@ class UserQueryMutation {
               automatedPersonalisation
              directMarketing
             }
+            acceptMPTC
           }
         }
     ''';
@@ -146,6 +147,16 @@ class UserQueryMutation {
       mutation updateAcceptanceStatus(\$isAcceptTC: Boolean!) {
 
         updateAcceptanceStatus(isAcceptTC: \$isAcceptTC)
+
+    }
+    ''';
+  }
+
+  String updateMarketPlaceTnCAcceptance() {
+    return '''
+      mutation updateAcceptanceStatus(\$isAcceptMPTC: Int!) {
+
+        updateAcceptanceStatus(isAcceptMPTC: \$isAcceptMPTC)
 
     }
     ''';
