@@ -6,6 +6,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -38,121 +39,133 @@ class MaterialGridItem extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         key: WidgetKeys.materialListMaterialCard,
         margin: const EdgeInsets.all(8),
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              flex: 3,
-              child: ColoredBox(
-                color: ZPColors.white,
-                child: Stack(
-                  children: [
-                    Center(
-                      child: ProductImage(
-                        materialNumber: materialInfo.materialNumber,
-                        fit: BoxFit.fill,
-                        width: double.infinity,
-                        height: double.infinity,
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            Column(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: ColoredBox(
+                    color: ZPColors.white,
+                    child: Stack(
                       children: [
-                        OfferLabel(
-                          materialInfo: materialInfo,
+                        Center(
+                          child: ProductImage(
+                            materialNumber: materialInfo.materialNumber,
+                            fit: BoxFit.fill,
+                            width: double.infinity,
+                            height: double.infinity,
+                          ),
                         ),
-                        StockLabel(
-                          materialInfo: materialInfo,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            OfferLabel(
+                              materialInfo: materialInfo,
+                            ),
+                            StockLabel(
+                              materialInfo: materialInfo,
+                            ),
+                            ComboOfferLabel(
+                              materialInfo: materialInfo,
+                            ),
+                          ],
                         ),
-                        ComboOfferLabel(
-                          materialInfo: materialInfo,
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: CovidLabel(
+                            materialInfo: materialInfo,
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: FavouriteIcon(
+                            isFavourite: materialInfo.isFavourite,
+                            onTap: () {
+                              if (!materialInfo.isFavourite) {
+                                trackMixpanelEvent(
+                                  MixpanelEvents.addProductToFavorite,
+                                  props: {
+                                    MixpanelProps.productName:
+                                        materialInfo.displayDescription,
+                                    MixpanelProps.productCode: materialInfo
+                                        .materialNumber.displayMatNo,
+                                    MixpanelProps.productManufacturer:
+                                        materialInfo.getManufactured,
+                                    MixpanelProps.clickAt:
+                                        RouterUtils.buildRouteTrackingName(
+                                      context.router.currentPath,
+                                    ),
+                                  },
+                                );
+                              }
+
+                              onFavouriteTap.call();
+                            },
+                          ),
                         ),
                       ],
                     ),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: CovidLabel(
-                        materialInfo: materialInfo,
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: FavouriteIcon(
-                        isFavourite: materialInfo.isFavourite,
-                        onTap: () {
-                          if (!materialInfo.isFavourite) {
-                            trackMixpanelEvent(
-                              MixpanelEvents.addProductToFavorite,
-                              props: {
-                                MixpanelProps.productName:
-                                    materialInfo.displayDescription,
-                                MixpanelProps.productCode:
-                                    materialInfo.materialNumber.displayMatNo,
-                                MixpanelProps.productManufacturer:
-                                    materialInfo.getManufactured,
-                                MixpanelProps.clickAt:
-                                    RouterUtils.buildRouteTrackingName(
-                                  context.router.currentPath,
-                                ),
-                              },
-                            );
-                          }
-
-                          onFavouriteTap.call();
-                        },
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      materialInfo.combinationCode(
-                        showGMCPart: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .salesOrgConfigs
-                            .enableGMC,
-                      ),
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: ZPColors.darkGray,
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          materialInfo.combinationCode(
+                            showGMCPart: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .salesOrgConfigs
+                                .enableGMC,
                           ),
-                      key: WidgetKeys.materialNumberText,
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          materialInfo.displayDescription,
-                          key: WidgetKeys.nameCart,
-                          style: Theme.of(context).textTheme.labelSmall,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: ZPColors.darkGray,
+                                  ),
+                          key: WidgetKeys.materialNumberText,
                         ),
-                      ),
-                    ),
-                    Text(
-                      materialInfo.getManufactured,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: ZPColors.darkGray,
-                            fontSize: 10,
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              materialInfo.displayDescription,
+                              key: WidgetKeys.nameCart,
+                              style: Theme.of(context).textTheme.labelSmall,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      key: WidgetKeys.manufacturerMaterials,
+                        ),
+                        Text(
+                          materialInfo.getManufactured,
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: ZPColors.darkGray,
+                                    fontSize: 10,
+                                  ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          key: WidgetKeys.manufacturerMaterials,
+                        ),
+                        const SizedBox(height: 5),
+                        ProductPriceLabel(materialInfo: materialInfo),
+                      ],
                     ),
-                    const SizedBox(height: 5),
-                    ProductPriceLabel(materialInfo: materialInfo),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
+            if (materialInfo.isMarketPlace)
+              const Positioned(
+                top: 10,
+                right: 10,
+                child: MarketPlaceLogo(),
+              ),
           ],
         ),
       ),

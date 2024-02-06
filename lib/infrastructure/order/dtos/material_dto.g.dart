@@ -52,6 +52,7 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       isSuspended: json['suspensionStatus'] as bool? ?? false,
+      isMarketPlace: json['isMarketPlace'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
@@ -91,6 +92,7 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'data': instance.data.map((e) => e.toJson()).toList(),
       'bundles': instance.bundles.map((e) => e.toJson()).toList(),
       'suspensionStatus': instance.isSuspended,
+      'isMarketPlace': instance.isMarketPlace,
     };
 
 _$_MaterialDataDto _$$_MaterialDataDtoFromJson(Map<String, dynamic> json) =>

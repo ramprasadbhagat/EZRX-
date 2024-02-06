@@ -47,7 +47,7 @@ class MaterialInfo with _$MaterialInfo {
     required String promoType,
     required bool isSuspended,
     required bool isPrincipalSuspended,
-
+    required bool isMarketPlace,
     //TODO: remove field from v2
     required String itemBrand,
     required MaterialGroup materialGroup2,
@@ -109,6 +109,7 @@ class MaterialInfo with _$MaterialInfo {
         sampleBonusItemId: '',
         isSuspended: false,
         isPrincipalSuspended: false,
+        isMarketPlace: false,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(

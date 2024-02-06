@@ -27,7 +27,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
-                    "IsGimmick": false
+                    "IsGimmick": false,
+                    "isMarketPlace":true
                 },
                 {
                     "Code": "0047278981",

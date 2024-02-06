@@ -51,6 +51,8 @@ class ProductDetailDto with _$ProductDetailDto {
         required bool promoStatus,
     @JsonKey(name: 'suspensionStatus', defaultValue: false)
         required bool isSuspended,
+    @JsonKey(name: 'isMarketPlace', defaultValue: false)
+        required bool isMarketPlace,
   }) = _ProductDetailDto;
 
   MaterialInfo toDomain() => MaterialInfo(
@@ -102,6 +104,7 @@ class ProductDetailDto with _$ProductDetailDto {
         sampleBonusItemId: '',
         isSuspended: isSuspended,
         isPrincipalSuspended: false,
+        isMarketPlace: isMarketPlace,
       );
 
   factory ProductDetailDto.fromJson(Map<String, dynamic> json) =>

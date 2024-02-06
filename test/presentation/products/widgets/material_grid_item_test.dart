@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.d
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -49,11 +50,13 @@ void main() {
   late CartBlocMock cartBlocMock;
   late AppRouter autoRouterMock;
   late MaterialInfo materialInfoMock;
+  late List<MaterialInfo> listMaterialInfo;
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
-    materialInfoMock =
-        (await MaterialListLocalDataSource().getProductList()).products.first;
+    listMaterialInfo =
+        (await MaterialListLocalDataSource().getProductList()).products;
+    materialInfoMock = listMaterialInfo.first;
   });
 
   group('Test "Material Grid Item"', () {
@@ -73,7 +76,7 @@ void main() {
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
     });
 
-    Widget getScopedWidget() {
+    Widget getScopedWidget({MaterialInfo? materialInfo}) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
@@ -93,7 +96,7 @@ void main() {
         ],
         child: Material(
           child: MaterialGridItem(
-            materialInfo: materialInfoMock,
+            materialInfo: materialInfo ?? materialInfoMock,
             onFavouriteTap: () {},
             onTap: () {},
           ),
@@ -260,5 +263,30 @@ void main() {
         });
       },
     );
+    group('MarketPlace Logo appearance', () {
+      testWidgets('should display MarketPlaceLogo when isMarketPlace is true',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(
+          getScopedWidget(
+            materialInfo:
+                listMaterialInfo.firstWhere((element) => element.isMarketPlace),
+          ),
+        );
+        await tester.pump();
+        expect(find.byType(MarketPlaceLogo), findsOneWidget);
+      });
+      testWidgets(
+          'should not display MarketPlaceLogo when isMarketPlace is false',
+          (WidgetTester tester) async {
+        await tester.pumpWidget(
+          getScopedWidget(
+            materialInfo: listMaterialInfo
+                .firstWhere((element) => !element.isMarketPlace),
+          ),
+        );
+        await tester.pump();
+        expect(find.byType(MarketPlaceLogo), findsNothing);
+      });
+    });
   });
 }

@@ -57,8 +57,7 @@ mixin _$ComboMaterialItemDto {
   @JsonKey(name: 'isComboEligible', defaultValue: false)
   bool get isComboEligible => throw _privateConstructorUsedError;
   @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
-  double get finalIndividualPrice =>
-      throw _privateConstructorUsedError; // @JsonKey(name: 'language', defaultValue: '') required String language,
+  double get finalIndividualPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialNumber', defaultValue: 'EN')
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxM1', defaultValue: '')
@@ -549,7 +548,6 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
   @override
   @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
   final double finalIndividualPrice;
-// @JsonKey(name: 'language', defaultValue: '') required String language,
   @override
   @JsonKey(name: 'materialNumber', defaultValue: 'EN')
   final String materialNumber;
@@ -776,7 +774,7 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
   @override
   @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
   double get finalIndividualPrice;
-  @override // @JsonKey(name: 'language', defaultValue: '') required String language,
+  @override
   @JsonKey(name: 'materialNumber', defaultValue: 'EN')
   String get materialNumber;
   @override

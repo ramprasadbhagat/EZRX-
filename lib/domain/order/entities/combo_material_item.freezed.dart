@@ -32,8 +32,7 @@ mixin _$ComboMaterialItem {
   String get comboDealType => throw _privateConstructorUsedError;
   bool get isComboEligible => throw _privateConstructorUsedError;
   PriceComboDeal get comboDeals => throw _privateConstructorUsedError;
-  double get finalIndividualPrice =>
-      throw _privateConstructorUsedError; //required String language,
+  double get finalIndividualPrice => throw _privateConstructorUsedError;
   SalesOrganisationConfigs get salesOrgConfig =>
       throw _privateConstructorUsedError;
   MaterialInfo get materialInfo => throw _privateConstructorUsedError;
@@ -433,7 +432,6 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
   final PriceComboDeal comboDeals;
   @override
   final double finalIndividualPrice;
-//required String language,
   @override
   final SalesOrganisationConfigs salesOrgConfig;
   @override
@@ -573,7 +571,7 @@ abstract class _ComboMaterialItem extends ComboMaterialItem {
   PriceComboDeal get comboDeals;
   @override
   double get finalIndividualPrice;
-  @override //required String language,
+  @override
   SalesOrganisationConfigs get salesOrgConfig;
   @override
   MaterialInfo get materialInfo;

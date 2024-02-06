@@ -46,7 +46,8 @@ mixin _$MaterialInfo {
   bool get promoStatus => throw _privateConstructorUsedError;
   String get promoType => throw _privateConstructorUsedError;
   bool get isSuspended => throw _privateConstructorUsedError;
-  bool get isPrincipalSuspended =>
+  bool get isPrincipalSuspended => throw _privateConstructorUsedError;
+  bool get isMarketPlace =>
       throw _privateConstructorUsedError; //TODO: remove field from v2
   String get itemBrand => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
@@ -104,6 +105,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       String promoType,
       bool isSuspended,
       bool isPrincipalSuspended,
+      bool isMarketPlace,
       String itemBrand,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
@@ -167,6 +169,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? promoType = null,
     Object? isSuspended = null,
     Object? isPrincipalSuspended = null,
+    Object? isMarketPlace = null,
     Object? itemBrand = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
@@ -301,6 +304,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.isPrincipalSuspended
           : isPrincipalSuspended // ignore: cast_nullable_to_non_nullable
               as bool,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
       itemBrand: null == itemBrand
           ? _value.itemBrand
           : itemBrand // ignore: cast_nullable_to_non_nullable
@@ -433,6 +440,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       String promoType,
       bool isSuspended,
       bool isPrincipalSuspended,
+      bool isMarketPlace,
       String itemBrand,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
@@ -499,6 +507,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? promoType = null,
     Object? isSuspended = null,
     Object? isPrincipalSuspended = null,
+    Object? isMarketPlace = null,
     Object? itemBrand = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
@@ -633,6 +642,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.isPrincipalSuspended
           : isPrincipalSuspended // ignore: cast_nullable_to_non_nullable
               as bool,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
       itemBrand: null == itemBrand
           ? _value.itemBrand
           : itemBrand // ignore: cast_nullable_to_non_nullable
@@ -719,6 +732,7 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.promoType,
       required this.isSuspended,
       required this.isPrincipalSuspended,
+      required this.isMarketPlace,
       required this.itemBrand,
       required this.materialGroup2,
       required this.materialGroup4,
@@ -808,6 +822,8 @@ class _$_MaterialInfo extends _MaterialInfo {
   final bool isSuspended;
   @override
   final bool isPrincipalSuspended;
+  @override
+  final bool isMarketPlace;
 //TODO: remove field from v2
   @override
   final String itemBrand;
@@ -842,7 +858,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, promoStatus: $promoStatus, promoType: $promoType, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, tax: $tax, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails, sampleBonusItemId: $sampleBonusItemId)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, promoStatus: $promoStatus, promoType: $promoType, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, isMarketPlace: $isMarketPlace, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, tax: $tax, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails, sampleBonusItemId: $sampleBonusItemId)';
   }
 
   @override
@@ -906,6 +922,8 @@ class _$_MaterialInfo extends _MaterialInfo {
                 other.isSuspended == isSuspended) &&
             (identical(other.isPrincipalSuspended, isPrincipalSuspended) ||
                 other.isPrincipalSuspended == isPrincipalSuspended) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace) &&
             (identical(other.itemBrand, itemBrand) ||
                 other.itemBrand == itemBrand) &&
             (identical(other.materialGroup2, materialGroup2) ||
@@ -963,6 +981,7 @@ class _$_MaterialInfo extends _MaterialInfo {
         promoType,
         isSuspended,
         isPrincipalSuspended,
+        isMarketPlace,
         itemBrand,
         materialGroup2,
         materialGroup4,
@@ -1016,6 +1035,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final String promoType,
       required final bool isSuspended,
       required final bool isPrincipalSuspended,
+      required final bool isMarketPlace,
       required final String itemBrand,
       required final MaterialGroup materialGroup2,
       required final MaterialGroup materialGroup4,
@@ -1090,6 +1110,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   bool get isSuspended;
   @override
   bool get isPrincipalSuspended;
+  @override
+  bool get isMarketPlace;
   @override //TODO: remove field from v2
   String get itemBrand;
   @override

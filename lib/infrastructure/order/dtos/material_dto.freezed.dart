@@ -74,7 +74,10 @@ mixin _$MaterialDto {
   @JsonKey(name: 'manufactured', defaultValue: '')
   String get manufactured => throw _privateConstructorUsedError;
   @JsonKey(name: 'isFavourite', defaultValue: false)
-  bool get isFavourite => throw _privateConstructorUsedError;
+  bool get isFavourite =>
+      throw _privateConstructorUsedError; // TODO: The default on type is assigned temporarily as material
+// will update this once issue is resolved from BE side
+// https://zuelligpharma.atlassian.net/browse/EZRX-16463
   @JsonKey(name: 'type', defaultValue: 'material')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'hidePrice', defaultValue: false)
@@ -91,6 +94,8 @@ mixin _$MaterialDto {
   List<BundleDto> get bundles => throw _privateConstructorUsedError;
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   bool get isSuspended => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -154,8 +159,8 @@ abstract class $MaterialDtoCopyWith<$Res> {
       List<MaterialDataDto> data,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       List<BundleDto> bundles,
-      @JsonKey(name: 'suspensionStatus', defaultValue: false)
-      bool isSuspended});
+      @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
+      @JsonKey(name: 'isMarketPlace', defaultValue: false) bool isMarketPlace});
 
   $BundleDtoCopyWith<$Res> get bundle;
 }
@@ -208,6 +213,7 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
     Object? data = null,
     Object? bundles = null,
     Object? isSuspended = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       governmentMaterialCode: null == governmentMaterialCode
@@ -350,6 +356,10 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
           ? _value.isSuspended
           : isSuspended // ignore: cast_nullable_to_non_nullable
               as bool,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -420,8 +430,8 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
       List<MaterialDataDto> data,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       List<BundleDto> bundles,
-      @JsonKey(name: 'suspensionStatus', defaultValue: false)
-      bool isSuspended});
+      @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
+      @JsonKey(name: 'isMarketPlace', defaultValue: false) bool isMarketPlace});
 
   @override
   $BundleDtoCopyWith<$Res> get bundle;
@@ -473,6 +483,7 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
     Object? data = null,
     Object? bundles = null,
     Object? isSuspended = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_$_MaterialDto(
       governmentMaterialCode: null == governmentMaterialCode
@@ -615,6 +626,10 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
           ? _value.isSuspended
           : isSuspended // ignore: cast_nullable_to_non_nullable
               as bool,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -683,7 +698,9 @@ class _$_MaterialDto extends _MaterialDto {
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       required final List<BundleDto> bundles,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
-      required this.isSuspended})
+      required this.isSuspended,
+      @JsonKey(name: 'isMarketPlace', defaultValue: false)
+      required this.isMarketPlace})
       : _data = data,
         _bundles = bundles,
         super._();
@@ -773,6 +790,9 @@ class _$_MaterialDto extends _MaterialDto {
   @override
   @JsonKey(name: 'isFavourite', defaultValue: false)
   final bool isFavourite;
+// TODO: The default on type is assigned temporarily as material
+// will update this once issue is resolved from BE side
+// https://zuelligpharma.atlassian.net/browse/EZRX-16463
   @override
   @JsonKey(name: 'type', defaultValue: 'material')
   final String type;
@@ -809,10 +829,13 @@ class _$_MaterialDto extends _MaterialDto {
   @override
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   final bool isSuspended;
+  @override
+  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'MaterialDto(governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, defaultMaterialDescription: $defaultMaterialDescription, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean, bundle: $bundle, code: $code, name: $name, principalCode: $principalCode, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, data: $data, bundles: $bundles, isSuspended: $isSuspended)';
+    return 'MaterialDto(governmentMaterialCode: $governmentMaterialCode, therapeuticClass: $therapeuticClass, itemBrand: $itemBrand, principalName: $principalName, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, unitOfMeasurement: $unitOfMeasurement, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, defaultMaterialDescription: $defaultMaterialDescription, isFOCMaterial: $isFOCMaterial, quantity: $quantity, remarks: $remarks, genericMaterialName: $genericMaterialName, ean: $ean, bundle: $bundle, code: $code, name: $name, principalCode: $principalCode, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, data: $data, bundles: $bundles, isSuspended: $isSuspended, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -884,7 +907,9 @@ class _$_MaterialDto extends _MaterialDto {
             const DeepCollectionEquality().equals(other._data, _data) &&
             const DeepCollectionEquality().equals(other._bundles, _bundles) &&
             (identical(other.isSuspended, isSuspended) ||
-                other.isSuspended == isSuspended));
+                other.isSuspended == isSuspended) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @JsonKey(ignore: true)
@@ -925,7 +950,8 @@ class _$_MaterialDto extends _MaterialDto {
         isGimmick,
         const DeepCollectionEquality().hash(_data),
         const DeepCollectionEquality().hash(_bundles),
-        isSuspended
+        isSuspended,
+        isMarketPlace
       ]);
 
   @JsonKey(ignore: true)
@@ -1008,7 +1034,9 @@ abstract class _MaterialDto extends MaterialDto {
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       required final List<BundleDto> bundles,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
-      required final bool isSuspended}) = _$_MaterialDto;
+      required final bool isSuspended,
+      @JsonKey(name: 'isMarketPlace', defaultValue: false)
+      required final bool isMarketPlace}) = _$_MaterialDto;
   const _MaterialDto._() : super._();
 
   factory _MaterialDto.fromJson(Map<String, dynamic> json) =
@@ -1095,7 +1123,9 @@ abstract class _MaterialDto extends MaterialDto {
   @override
   @JsonKey(name: 'isFavourite', defaultValue: false)
   bool get isFavourite;
-  @override
+  @override // TODO: The default on type is assigned temporarily as material
+// will update this once issue is resolved from BE side
+// https://zuelligpharma.atlassian.net/browse/EZRX-16463
   @JsonKey(name: 'type', defaultValue: 'material')
   String get type;
   @override
@@ -1119,6 +1149,9 @@ abstract class _MaterialDto extends MaterialDto {
   @override
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   bool get isSuspended;
+  @override
+  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialDtoCopyWith<_$_MaterialDto> get copyWith =>
