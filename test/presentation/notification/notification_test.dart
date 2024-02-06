@@ -451,8 +451,8 @@ void main() {
             ),
           ),
         );
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             customerCodeInfo: customerInformationMock.soldToInformation.first,
           ),
         );

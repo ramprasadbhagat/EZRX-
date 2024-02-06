@@ -129,13 +129,6 @@ void main() {
             ),
           ),
         );
-        when(() => customerCodeBloc.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              customerCodeSoldTo: '1234',
-            ),
-          ),
-        );
         when(() => userBloc.state).thenReturn(
           UserState.initial()
               .copyWith(user: User.empty().copyWith(hasBonusOverride: false)),

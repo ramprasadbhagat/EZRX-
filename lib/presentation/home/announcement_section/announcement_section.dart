@@ -20,7 +20,9 @@ class AnnouncementSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AnnouncementInfoBloc, AnnouncementInfoState>(
-      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+      buildWhen: (previous, current) =>
+          previous.isLoading != current.isLoading ||
+          previous.announcementInfo != current.announcementInfo,
       builder: (context, state) {
         if (state.isLoading) {
           return const _AnnouncementSectionLoadingShimmer();
@@ -52,6 +54,7 @@ class AnnouncementSection extends StatelessWidget {
 
 class _AnnouncementSectionItem extends StatelessWidget {
   final AnnouncementArticleItem announcementItem;
+
   const _AnnouncementSectionItem({Key? key, required this.announcementItem})
       : super(key: key);
 
@@ -84,6 +87,7 @@ class _ItemDescription extends StatelessWidget {
   final String title;
   final String description;
   final DateTimeStringValue publishedDate;
+
   const _ItemDescription({
     Key? key,
     required this.title,

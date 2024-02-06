@@ -1,30 +1,38 @@
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 
 class CustomerCodeSelector extends StatelessWidget {
   const CustomerCodeSelector({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
-      buildWhen: (previous, current) => previous != current,
-      builder: (context, state) {
+    return BlocBuilder<EligibilityBloc, EligibilityState>(
+      buildWhen: (previous, current) =>
+          previous.displayShipToCustomerCode !=
+              current.displayShipToCustomerCode ||
+          previous.displayShipTo != current.displayShipTo ||
+          previous.isLoadingCustomerCode != current.isLoadingCustomerCode,
+      builder: (context, eligibilityState) {
         return ListTile(
           contentPadding: const EdgeInsets.symmetric(horizontal: 8),
           minLeadingWidth: 40,
           horizontalTitleGap: 0,
           dense: true,
           key: WidgetKeys.customerCodeSelect,
-          onTap: state.isFetching
+          onTap: eligibilityState.isLoadingCustomerCode
               ? null
-              : () => context.router.pushNamed('customer_search'),
+              : () {
+                  context.read<CustomerCodeBloc>().add(
+                        const CustomerCodeEvent.deletedSearch(),
+                      );
+                  context.router.pushNamed('customer_search');
+                },
           leading: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -34,32 +42,26 @@ class CustomerCodeSelector extends StatelessWidget {
               ),
             ],
           ),
-          title: state.isFetching
+          title: eligibilityState.isLoadingCustomerCode
               ? LoadingShimmer.tile()
               : Text(
-                  state.shipToInfo == ShipToInfo.empty()
-                      ? context.tr('NA')
-                      : state.shipToInfo.shipToCustomerCode,
+                  eligibilityState.displayShipToCustomerCode,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: ZPColors.white,
                       ),
                 ),
-          subtitle: state.isFetching
+          subtitle: eligibilityState.isLoadingCustomerCode
               ? LoadingShimmer.tile()
               : Row(
                   children: [
                     Expanded(
                       child: Text(
-                        state.displayShipTo,
+                        eligibilityState.displayShipTo,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               color: ZPColors.white,
                             ),
                         overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: ZPColors.white,
                     ),
                   ],
                 ),

@@ -884,8 +884,8 @@ void main() {
     testWidgets(
       '=> test Checkout Body Product Scroll List for material type',
       (tester) async {
-        when(() => customerCodeBloc.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
           ),
@@ -947,8 +947,8 @@ void main() {
     testWidgets(
       '=> test Checkout Body Product Scroll List for bundle type',
       (tester) async {
-        when(() => customerCodeBloc.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+         when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
           ),
@@ -1027,8 +1027,8 @@ void main() {
     testWidgets(
       '=> test Checkout Body Product Scroll List',
       (tester) async {
-        when(() => customerCodeBloc.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+          when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
           ),
@@ -1093,8 +1093,8 @@ void main() {
     testWidgets(
       '=> test Checkout Body Product Scroll List for combo type',
       (tester) async {
-        when(() => customerCodeBloc.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+         when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
           ),

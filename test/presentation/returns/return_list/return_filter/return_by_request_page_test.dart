@@ -130,8 +130,8 @@ void main() {
     }
 
     testWidgets('Return By Request Page Body Test - loading', (tester) async {
-      when(() => mockCustomerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerCodeSoldTo: 'mock-customerCodeSoldTo',
           ),
@@ -163,8 +163,8 @@ void main() {
     });
 
     testWidgets('Return By Request Page Body Test - Success', (tester) async {
-      when(() => mockCustomerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerCodeSoldTo: 'mock-customerCodeSoldTo',
           ),

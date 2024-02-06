@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -36,6 +37,9 @@ class MockAppRouter extends Mock implements AppRouter {}
 
 class MockMixpanelService extends Mock implements MixpanelService {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -60,6 +64,8 @@ void main() {
   late CartBloc cartBlocMock;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
+
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
@@ -74,6 +80,8 @@ void main() {
       cartBlocMock = CartBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
+
       autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -83,6 +91,9 @@ void main() {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial(),
+      );
     });
     tearDownAll(() {
       locator.unregister<AppRouter>();
@@ -102,6 +113,9 @@ void main() {
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
             create: (context) => announcementBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
         ],
         child: SalesOrgSearch(

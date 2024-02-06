@@ -13,13 +13,6 @@ void main() {
 
   group('Intro Bloc', () {
     blocTest(
-      'Initialize',
-      build: () => IntroBloc(deviceRepository: deviceRepositoryMock),
-      act: (IntroBloc bloc) => bloc.add(const IntroEvent.initialIndex()),
-      expect: () => [IntroState.initial()],
-    );
-
-    blocTest(
       'Index Change',
       build: () => IntroBloc(deviceRepository: deviceRepositoryMock),
       act: (IntroBloc bloc) => bloc.add(const IntroEvent.setIndex(index: 2)),

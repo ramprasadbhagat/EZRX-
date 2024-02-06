@@ -243,7 +243,7 @@ void main() {
               user: fakeClientUser,
             ),
           ),
-        ).called(1);
+        ).called(2);
       },
     );
 

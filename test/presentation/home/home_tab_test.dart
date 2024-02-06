@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -113,6 +114,9 @@ class ProductSearchBlocMock
     extends MockBloc<ProductSearchEvent, ProductSearchState>
     implements ProductSearchBloc {}
 
+class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
+    implements DeepLinkingBloc {}
+
 class MockHTTPService extends Mock implements HttpService {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
@@ -148,6 +152,7 @@ void main() {
   late AnnouncementInfoBlocMock announcementInfoBlocMock;
   late ProductImageBlocMock productImageBlocMock;
   late Notifications notifications;
+  late DeepLinkingBloc deepLinkingBlocMock;
 
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -158,35 +163,6 @@ void main() {
     enableOrderType: true,
   );
 
-  //final fakeMaterialNumber = MaterialNumber('000000000023168451');
-  // final fakematerialInfo1 = MaterialInfo.empty().copyWith(
-  //   quantity: 0,
-  //   materialNumber: fakeMaterialNumber,
-  //   ean: '2234567890',
-  //   materialDescription: "Reag Cup 15ml 1'S",
-  //   governmentMaterialCode: '',
-  //   therapeuticClass: 'All other non-therapeutic products',
-  //   itemBrand: 'Item not listed in I',
-  //   principalData: PrincipalData(
-  //     principalName: PrincipalName('台灣羅氏醫療診斷設備(股)公司'),
-  //     principalCode: PrincipalCode('0000102004'),
-  //   ),
-  //   taxClassification: MaterialTaxClassification('Product : Full Tax'),
-  //   itemRegistrationNumber: 'NA',
-  //   unitOfMeasurement: StringValue('EA'),
-  //   materialGroup2: MaterialGroup.two(''),
-  //   materialGroup4: MaterialGroup.four('OTH'),
-  //   isSampleMaterial: false,
-  //   hidePrice: false,
-  //   hasValidTenderContract: false,
-  //   hasMandatoryTenderContract: false,
-  //   taxes: ['5'],
-  //   bundles: [],
-  //   defaultMaterialDescription: '',
-  //   isFOCMaterial: false,
-  //   remarks: '',
-  //   genericMaterialName: '',
-  // );
   final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
     customerCodeSoldTo: 'fake-1234',
   );
@@ -218,6 +194,7 @@ void main() {
     setUp(() {
       mockCustomerCodeBloc = CustomerCodeBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
+      deepLinkingBlocMock = DeepLinkingMockBloc();
       materialListBlocMock = MaterialListBlocMock();
       viewByItemsBlocMock = ViewByItemsBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
@@ -253,12 +230,8 @@ void main() {
         SalesOrgState.initial()
             .copyWith(salesOrganisation: fakeSalesOrganisation),
       );
-
-      when(() => mockCustomerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial()
-            .copyWith(customerCodeInfo: fakeCustomerCodeInfo),
-      );
-
+      when(() => deepLinkingBlocMock.state)
+          .thenReturn(const DeepLinkingState.initial());
       when(() => materialListBlocMock.state).thenReturn(
         MaterialListState.initial(),
       );
@@ -269,17 +242,14 @@ void main() {
           .thenReturn(MaterialPriceState.initial());
       when(() => viewByItemsBlocMock.state)
           .thenReturn(ViewByItemsState.initial());
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          customerCodeInfo:
-              CustomerCodeInfo.empty().copyWith(status: Status('EDI')),
-        ),
+      when(() => mockCustomerCodeBloc.state).thenReturn(
+        CustomerCodeState.initial(),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo:
-              CustomerCodeInfo.empty().copyWith(status: Status('EDI')),
+              fakeCustomerCodeInfo.copyWith(status: Status('EDI')),
           user: fakeUser,
         ),
       );
@@ -326,6 +296,9 @@ void main() {
             ),
             BlocProvider<NotificationBloc>(
               create: (context) => notificationBlocMock,
+            ),
+            BlocProvider<DeepLinkingBloc>(
+              create: (context) => deepLinkingBlocMock,
             ),
             BlocProvider<CustomerCodeBloc>(
               create: (context) => mockCustomerCodeBloc,
@@ -375,6 +348,7 @@ void main() {
                 type: RoleType('client_user'),
               ),
             ),
+            shipToInfo: fakeShipToInfo,
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -388,6 +362,7 @@ void main() {
         expect(find.byType(BrowseProduct), findsOneWidget);
       },
     );
+
     testWidgets(
       ' -> HomeScreen on refresh',
       (WidgetTester tester) async {
@@ -402,6 +377,8 @@ void main() {
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001'))
               ],
             ),
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -515,6 +492,7 @@ void main() {
               ),
             ),
             salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
           ),
         );
 
@@ -705,6 +683,7 @@ void main() {
         ).thenReturn(
           EligibilityState.initial().copyWith(
             user: fakeUser,
+            shipToInfo: fakeShipToInfo,
           ),
         );
         whenListen(
@@ -741,6 +720,7 @@ void main() {
             user: fakeClientUser,
           ),
         );
+
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
@@ -795,6 +775,7 @@ void main() {
         ).thenReturn(
           EligibilityState.initial().copyWith(
             user: fakeUser,
+            shipToInfo: fakeShipToInfo,
           ),
         );
       });
@@ -962,39 +943,64 @@ void main() {
       });
     });
 
-    group('Explore marketplace banner -', () {
-      testWidgets('Visible when can access marketplace', (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            user: fakeClientUserAccessMarketPlace,
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
-            shipToInfo: fakeShipToInfoPeninsulaRegion,
-          ),
-        );
+    group(
+      'Explore marketplace banner -',
+      () {
+        testWidgets('Visible when can access marketplace', (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              user: fakeClientUserAccessMarketPlace,
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: fakeShipToInfoPeninsulaRegion,
+            ),
+          );
 
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
 
-        expect(find.byType(ExploreMarketPlaceBanner), findsOneWidget);
-      });
+          expect(find.byType(ExploreMarketPlaceBanner), findsOneWidget);
+        });
 
-      testWidgets('Not visible when can not access marketplace',
-          (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            user: fakeClientUser,
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
-            shipToInfo: fakeShipToInfoPeninsulaRegion,
-          ),
-        );
+        testWidgets('Not visible when can not access marketplace',
+            (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              user: fakeClientUser,
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: fakeShipToInfoPeninsulaRegion,
+            ),
+          );
 
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
 
-        expect(find.byType(ExploreMarketPlaceBanner), findsNothing);
-      });
-    });
+          expect(find.byType(ExploreMarketPlaceBanner), findsNothing);
+        });
+        testWidgets('DeepLinkingBloc & salesOrgBloc initializes correctly',
+            (WidgetTester tester) async {
+          whenListen(
+            eligibilityBlocMock,
+            Stream.fromIterable([
+              EligibilityState.initial().copyWith(
+                isLoadingCustomerCode: true,
+              ),
+              EligibilityState.initial().copyWith(
+                isLoadingCustomerCode: false,
+              ),
+            ]),
+          );
 
+          await tester.pumpWidget(
+            getWidget(widget: const HomeNavigationTabbar()),
+          );
+          await tester.pump();
+
+          verify(
+            () => deepLinkingBlocMock.add(const DeepLinkingEvent.initialize()),
+          ).called(1);
+        });
+      },
+    );
     // testWidgets(
     //   'Hide paymentsExpansionTile when enablePayments is false',
     //   (WidgetTester tester) async {

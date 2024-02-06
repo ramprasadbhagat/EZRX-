@@ -261,7 +261,7 @@ void main() {
               user: fakeClientUser,
             ),
           ),
-        ).called(1);
+        ).called(2);
         verify(() => autoRouterMock.navigate(const ProductsTabRoute()))
             .called(1);
       },

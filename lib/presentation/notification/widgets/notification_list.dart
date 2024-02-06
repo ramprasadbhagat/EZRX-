@@ -136,8 +136,9 @@ class _CustomerDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
-      buildWhen: (previous, current) => previous != current,
+    return BlocBuilder<EligibilityBloc, EligibilityState>(
+      buildWhen: (previous, current) =>
+          previous.customerCodeInfo != current.customerCodeInfo,
       builder: (context, state) {
         final customerCodeInfo = state.customerCodeInfo;
         if (customerCodeInfo == CustomerCodeInfo.empty()) {

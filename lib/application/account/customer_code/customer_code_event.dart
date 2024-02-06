@@ -7,10 +7,6 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
     required User userInfo,
     required SalesOrganisation selectedSalesOrg,
   }) = _Initialized;
-  const factory CustomerCodeEvent.selected({
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-  }) = _Selected;
 
   const factory CustomerCodeEvent.fetch({
     @Default('') String searchText,
@@ -21,9 +17,6 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
   }) = _Search;
 
   const factory CustomerCodeEvent.loadMore() = _LoadMore;
-
-  const factory CustomerCodeEvent.loadStoredCustomerCode() =
-      _LoadStoredCustomerCode;
 
   const factory CustomerCodeEvent.deletedSearch({
     @Default('') String searchText,

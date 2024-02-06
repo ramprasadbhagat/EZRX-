@@ -53,7 +53,7 @@ class _DeliveryAddressSearchSection extends StatelessWidget {
                     const CustomerCodeEvent.deletedSearch(),
                   );
             },
-            initialValue: state.searchKey.searchValueOrEmpty,
+            initialValue: state.searchKey.getOrDefaultValue(''),
           );
         },
       ),

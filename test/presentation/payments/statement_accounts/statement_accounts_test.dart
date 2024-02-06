@@ -288,15 +288,15 @@ void main() {
         ),
       );
       final expectedStates = [
-        CustomerCodeState.initial()
+        EligibilityState.initial()
             .copyWith(customerCodeInfo: CustomerCodeInfo.empty()),
-        CustomerCodeState.initial().copyWith(
+        EligibilityState.initial().copyWith(
           customerCodeInfo: CustomerCodeInfo.empty()
               .copyWith(customerCodeSoldTo: '0030082707'),
         ),
       ];
       whenListen(
-        mockCustomerCodeBloc,
+        eligibilityBlocMock,
         Stream.fromIterable(expectedStates),
       );
 
@@ -426,14 +426,6 @@ void main() {
       ).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-            customerCodeSoldTo: 'mock-customerCodeSoldTo',
-          ),
-        ),
-      );
-
-      when(() => mockCustomerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerCodeSoldTo: 'mock-customerCodeSoldTo',
           ),

@@ -28,8 +28,19 @@ class RecentOrdersSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return BlocProvider<ViewByItemsBloc>(
-      create: (context) => locator<ViewByItemsBloc>(),
+      create: (context) => locator<ViewByItemsBloc>()
+        ..add(
+          ViewByItemsEvent.initialized(
+            salesOrgConfigs: eligibilityState.salesOrgConfigs,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+            user: eligibilityState.user,
+            salesOrganisation: eligibilityState.salesOrganisation,
+          ),
+        ),
       child: BlocListener<EligibilityBloc, EligibilityState>(
         listenWhen: (previous, current) =>
             previous.isLoading != current.isLoading && !current.isLoading,
@@ -98,6 +109,7 @@ class _BodyContent extends StatelessWidget {
 
 class _ProductTile extends StatelessWidget {
   final OrderHistoryItem product;
+
   const _ProductTile({Key? key, required this.product}) : super(key: key);
 
   @override

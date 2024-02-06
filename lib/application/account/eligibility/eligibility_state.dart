@@ -13,6 +13,8 @@ class EligibilityState with _$EligibilityState {
     required OrderDocumentType selectedOrderType,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
+    required bool isLoadingCustomerCode,
+    required bool preSelectShipTo,
   }) = _EligibilityState;
 
   factory EligibilityState.initial() => EligibilityState(
@@ -24,6 +26,8 @@ class EligibilityState with _$EligibilityState {
         selectedOrderType: OrderDocumentType.empty(),
         failureOrSuccessOption: none(),
         isLoading: false,
+        preSelectShipTo: false,
+        isLoadingCustomerCode: false,
       );
 
   bool get isReturnsEnable {
@@ -279,6 +283,22 @@ class EligibilityState with _$EligibilityState {
 
   bool get showMaterialDescInMandarin =>
       salesOrg.isTW && user.preferredLanguage.isMandarin;
+
+  bool get haveCustomerCodeInfo =>
+      customerCodeInfo != CustomerCodeInfo.empty() &&
+      customerCodeInfo.customerCodeSoldTo.isNotEmpty;
+
+  String get displayShipToCustomerCode =>
+      haveShipTo ? shipToInfo.shipToCustomerCode : 'NA';
+
+  String get displayShipTo =>
+      haveCustomerCodeInfo ? shipToInfo.fullDeliveryAddress : 'NA';
+
+  bool get haveCustomerCodeInfos =>
+      haveCustomerCodeInfo && customerCodeInfo.customerCodeSoldTo.isNotEmpty;
+
+  bool get haveShipToInfos =>
+      haveCustomerCodeInfo && customerCodeInfo.shipToInfos.isNotEmpty;
 
   StatusType get outOfStockProductStatus => StatusType(
         validateOutOfStockValue

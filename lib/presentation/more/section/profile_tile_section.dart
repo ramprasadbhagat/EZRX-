@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -52,8 +52,9 @@ class ProfileTile extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelMedium,
                 )
               : LoadingShimmer.tile(line: 3),
-          subtitle: BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
-            buildWhen: (previous, current) => previous != current,
+          subtitle: BlocBuilder<EligibilityBloc, EligibilityState>(
+            buildWhen: (previous, current) =>
+                previous.customerCodeInfo != current.customerCodeInfo,
             builder: (context, state) {
               final customerCodeInfo = state.customerCodeInfo;
               if (customerCodeInfo == CustomerCodeInfo.empty()) {

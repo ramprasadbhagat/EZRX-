@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -26,6 +27,9 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 final locator = GetIt.instance;
@@ -36,6 +40,7 @@ void main() {
   late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
   late CustomerCodeBloc customerCodeBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
 
   setUpAll(() {
     locator.registerLazySingleton(() => AppRouter());
@@ -45,9 +50,12 @@ void main() {
       userBlocMock = UserBlocMock();
       autoRouterMock = locator<AppRouter>();
       customerCodeBlocMock = CustomerCodeBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
     Widget getScopedWidget() {
       return EasyLocalization(
@@ -66,6 +74,9 @@ void main() {
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock,
+            ),
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock,
             ),
           ],
           child: const Material(child: ProfileTile()),
@@ -127,8 +138,8 @@ void main() {
     testWidgets(
       'Test Profile Name subtitle section',
       (tester) async {
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
         );

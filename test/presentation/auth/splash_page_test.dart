@@ -4,6 +4,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -65,16 +70,17 @@ import 'package:ezrxmobile/application/returns/return_request_type_code/return_r
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -103,6 +109,9 @@ import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
+import '../account/payment_configuration/bank_beneficiary/add_beneficiary_page_test.dart';
+import '../account/payment_configuration/deduction_code/add_deduction_code_page_test.dart';
+import '../account/payment_configuration/payment_method/add_payment_method_page_test.dart';
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
@@ -171,6 +180,10 @@ class ReturnRequestTypeCodeBlocMock
 class PolicyConfigurationListBlocMock
     extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
     implements PolicyConfigurationBloc {}
+
+class ManagePaymentAdviceFooterBlocMock extends MockBloc<
+    ManagePaymentAdviceFooterEvent,
+    ManagePaymentAdviceFooterState> implements ManagePaymentAdviceFooterBloc {}
 
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
@@ -351,6 +364,11 @@ void main() {
   late UsageCodeBloc usageCodeBlocMock;
   late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
+  late PaymentMethodsBloc paymentMethodsBlocMock;
+  late ManageBankBeneficiaryBloc manageBankBeneficiaryBlocMock;
+  late SalesDistrictBloc salesDistrictBlocMock;
+  late ManageDeductionCodeBloc manageDeductionCodeBlocMock;
+  late ManagePaymentAdviceFooterBloc managePaymentAdviceFooterBlocMock;
   late MaterialListBloc materialListBlocMock;
   late ScanMaterialInfoBloc scanMaterialInfoMockBloc;
   late SettingBloc settingBlocMock;
@@ -471,6 +489,11 @@ void main() {
       usageCodeBlocMock = UsageCodeBlocMock();
       returnRequestTypeCodeBlocMock = ReturnRequestTypeCodeBlocMock();
       policyConfigurationListBlocMock = PolicyConfigurationListBlocMock();
+      paymentMethodsBlocMock = PaymentMethodBlocMock();
+      manageBankBeneficiaryBlocMock = ManageBankBeneficiaryBlocMock();
+      salesDistrictBlocMock = SalesDistrictBlocMock();
+      manageDeductionCodeBlocMock = ManageDeductionCodeBlocMock();
+      managePaymentAdviceFooterBlocMock = ManagePaymentAdviceFooterBlocMock();
       materialListBlocMock = MaterialListBlocMock();
       materialFilterBlocMock = MaterialFilterBlocMock();
       returnApproverBlocMock = ReturnApproverBlocMock();
@@ -523,6 +546,21 @@ void main() {
         ),
       );
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => paymentMethodsBlocMock.state).thenReturn(
+        PaymentMethodsState.initial(),
+      );
+      when(() => manageBankBeneficiaryBlocMock.state).thenReturn(
+        ManageBankBeneficiaryState.initial(),
+      );
+      when(() => salesDistrictBlocMock.state).thenReturn(
+        SalesDistrictState.initial(),
+      );
+      when(() => manageDeductionCodeBlocMock.state).thenReturn(
+        ManageDeductionCodeState.initial(),
+      );
+      when(() => managePaymentAdviceFooterBlocMock.state).thenReturn(
+        ManagePaymentAdviceFooterState.initial(),
+      );
       when(() => accountSummaryMock.state)
           .thenReturn(AccountSummaryState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -646,6 +684,21 @@ void main() {
             providers: [
               BlocProvider<CustomerCodeBloc>(
                 create: (context) => customerCodeBlocMock,
+              ),
+              BlocProvider<ManageBankBeneficiaryBloc>(
+                create: (context) => manageBankBeneficiaryBlocMock,
+              ),
+              BlocProvider<SalesDistrictBloc>(
+                create: (context) => salesDistrictBlocMock,
+              ),
+              BlocProvider<ManageDeductionCodeBloc>(
+                create: (context) => manageDeductionCodeBlocMock,
+              ),
+              BlocProvider<ManagePaymentAdviceFooterBloc>(
+                create: (context) => managePaymentAdviceFooterBlocMock,
+              ),
+              BlocProvider<PaymentMethodsBloc>(
+                create: (context) => paymentMethodsBlocMock,
               ),
               BlocProvider<AuthBloc>(create: (context) => authBlocMock),
               BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
@@ -857,7 +910,9 @@ void main() {
     //   expect(autoRouterMock.current.name, LoginPageRoute.name);
     // });
 
-    testWidgets('When Auth State is authenticated', (tester) async {
+    testWidgets(
+        'When Auth State is authenticated and user having multiple customerCodes',
+        (tester) async {
       final expectedAuthListStates = [
         const AuthState.authenticated(),
       ];
@@ -865,7 +920,36 @@ void main() {
       await getWidget(tester);
       await tester.pump();
       verify(() => userBlocMock.add(const UserEvent.fetch())).called(1);
-      expect(autoRouterMock.current.name, HomeNavigationTabbarRoute.name);
+    });
+
+    testWidgets('When Intro Bloc is listener and isAppFirstLaunch == true',
+        (tester) async {
+      final expectedStates = [
+        IntroState.initial().copyWith(isAppFirstLaunch: true),
+      ];
+      whenListen(introBlocMock, Stream.fromIterable(expectedStates));
+      await getWidget(tester);
+      await tester.pump();
+      expect(autoRouterMock.current.name, IntroPageRoute.name);
+    });
+
+    testWidgets('When Intro Bloc is listener and showTermsAndCondition == true',
+        (tester) async {
+      final expectedStates = [
+        IntroState.initial().copyWith(isAppFirstLaunch: false),
+      ];
+      whenListen(introBlocMock, Stream.fromIterable(expectedStates));
+      when(() => userBlocMock.state).thenAnswer(
+        (invocation) => UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            acceptPrivacyPolicy: true,
+          ),
+          isLoginOnBehalf: false,
+        ),
+      );
+      await getWidget(tester);
+      await tester.pump();
+      expect(autoRouterMock.current.name, IntroPageRoute.name);
     });
 
     testWidgets('When PaymentCustomerInformation bloc is listening',
@@ -876,32 +960,39 @@ void main() {
           paymentCustomerInformation: const PaymentCustomerInformation(
             paymentTerm: 'paymentTerm',
             shipToInfoList: <ShipToInfo>[],
-            billToInfo: <BillToInfo>[],
+            billToInfo: [],
           ),
         )
       ];
 
-      await getWidget(tester);
-      await tester.pump();
+      when(() => salesOrgBlocMock.state).thenAnswer(
+        (invocation) => SalesOrgState.initial().copyWith(
+          salesOrganisation: fakeTWSalesOrganisation,
+          configs: fakeSalesOrganisationConfigs,
+        ),
+      );
 
       whenListen(
         paymentCustomerInformationBlocMock,
         Stream.fromIterable(expectedPaymentStates),
       );
 
+      await getWidget(tester);
+      await tester.pump();
+
       verify(
         () => paymentTermBlocMock.add(
           PaymentTermEvent.fetch(
-            customeCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-            salesOrganisationConfigs: salesOrgBlocMock.state.configs,
+            customeCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: fakeTWSalesOrganisation,
+            salesOrganisationConfigs: fakeSalesOrganisationConfigs,
             salesRepresentativeInfo: salesRepBlocMock.state.salesRepInfo,
             paymentCustomerInformation:
                 PaymentCustomerInformation.empty().copyWith(
               paymentTerm: 'paymentTerm',
               shipToInfoList: <ShipToInfo>[],
             ),
-            user: fakeClientUser,
+            user: fakeUser,
           ),
         ),
       ).called(1);
@@ -913,12 +1004,11 @@ void main() {
       final expectedStates = [
         EligibilityState.initial(),
         EligibilityState.initial().copyWith(
-          salesOrganisation: fakeTWSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
-        )
+          salesOrganisation: fakeTWSalesOrganisation,
+        ),
       ];
-
       whenListen(
         eligibilityBlocMock,
         Stream.fromIterable(expectedStates),
@@ -961,107 +1051,171 @@ void main() {
       expect(find.text('Fake-Error'), findsOneWidget);
     });
 
-    // testWidgets('When user dont have state organization', (tester) async {
-    //   final expectedEligibilityStates = [
-    //     EligibilityState.initial().copyWith(
-    //         salesOrganisation: SalesOrganisation.empty(),
-    //         customerCodeInfo: CustomerCodeInfo.empty(),
-    //         salesOrgConfigs: SalesOrganisationConfigs.empty(),
-    //         user: fakeUser),
-    //     EligibilityState.initial().copyWith(
-    //       salesOrganisation:
-    //           SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-    //       customerCodeInfo: CustomerCodeInfo.empty()
-    //           .copyWith(customerGrp4: CustomerGrp4('VR')),
-    //       salesOrgConfigs: SalesOrganisationConfigs.empty()
-    //           .copyWith(disableBundles: false, salesOrg: SalesOrg('2601')),
-    //       user: fakeUser.copyWith(
-    //         role: Role.empty().copyWith(
-    //           type: RoleType('internal_sales_rep'),
-    //         ),
-    //       ),
-    //     ),
-    //   ];
+    testWidgets('When user dont have state organization', (tester) async {
+      final expectedEligibilityStates = [
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrgConfigs: SalesOrganisationConfigs.empty(),
+          user: fakeUser,
+        ),
+        EligibilityState.initial().copyWith(
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeTWSalesOrganisation,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('internal_sales_rep'),
+            ),
+          ),
+        ),
+      ];
 
-    //   whenListen(
-    //       eligibilityBlocMock, Stream.fromIterable(expectedEligibilityStates));
-    //   final expectedStates = [
-    //     CartState.initial().copyWith(apiFailureOrSuccessOption: none()),
-    //     CartState.initial().copyWith(
-    //       apiFailureOrSuccessOption: optionOf(
-    //         Right([PriceAggregate.empty()]),
-    //       ),
-    //       isFetching: true,
-    //     ),
-    //   ];
-    //   whenListen(cartBlocMock, Stream.fromIterable(expectedStates));
-    //   final expectedUserListStates = [
-    //     UserState.initial(),
-    //     UserState.initial().copyWith(
-    //       user: fakeUser.copyWith(userSalesOrganisations: []),
-    //     ),
-    //   ];
-    //   whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
+      when(() => salesOrgBlocMock.state).thenAnswer(
+        (invocation) => SalesOrgState.initial().copyWith(
+          configs: fakeSalesOrganisationConfigs,
+          salesOrganisation: fakeTWSalesOrganisation,
+        ),
+      );
 
-    //   await getWidget(tester);
-    //   await tester.pump();
+      whenListen(
+        eligibilityBlocMock,
+        Stream.fromIterable(expectedEligibilityStates),
+      );
+      final expectedStates = [
+        CartState.initial().copyWith(apiFailureOrSuccessOption: none()),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: optionOf(
+            Right([PriceAggregate.empty()]),
+          ),
+          isFetching: true,
+        ),
+      ];
+      whenListen(cartBlocMock, Stream.fromIterable(expectedStates));
+      final expectedUserListStates = [
+        UserState.initial(),
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            userSalesOrganisations: [],
+            role: Role.empty().copyWith(
+              type: RoleType('internal_sales_rep'),
+            ),
+          ),
+        ),
+      ];
+      whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
 
-    //   verify(() => aupTcBlocMock
-    //           .add(AupTcEvent.show(fakeUser, salesOrgBlocMock.state.salesOrg)))
-    //       .called(2);
+      await getWidget(tester);
+      await tester.pump(const Duration(milliseconds: 500));
 
-    //   verify(() => cartBlocMock.add(const CartEvent.initialized())).called(1);
-    //   // expect(find.byType(UpgradeAlert), findsOneWidget);
-    // });
+      verify(() => introBlocMock.add(const IntroEvent.checkAppFirstLaunch()))
+          .called(1);
 
-    // testWidgets('When user role has return admin access ', (tester) async {
-    //   final expectedEligibilityStates = [
-    //     EligibilityState.initial().copyWith(
-    //         salesOrganisation: SalesOrganisation.empty(),
-    //         customerCodeInfo: CustomerCodeInfo.empty(),
-    //         salesOrgConfigs: SalesOrganisationConfigs.empty(),
-    //         user: fakeUser),
-    //     EligibilityState.initial().copyWith(
-    //       salesOrganisation:
-    //           SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-    //       customerCodeInfo: CustomerCodeInfo.empty()
-    //           .copyWith(customerGrp4: CustomerGrp4('VR')),
-    //       salesOrgConfigs: SalesOrganisationConfigs.empty()
-    //           .copyWith(disableBundles: false, salesOrg: SalesOrg('2601')),
-    //       user: fakeUser.copyWith(
-    //         role: Role.empty().copyWith(
-    //           type: RoleType('root_admin'),
-    //         ),
-    //       ),
-    //     ),
-    //   ];
+      verify(
+        () => cartBlocMock.add(
+          CartEvent.initialized(
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeTWSalesOrganisation,
+            salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeUser.copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('internal_sales_rep'),
+              ),
+            ),
+          ),
+        ),
+      ).called(1);
+      expect(find.byType(Scaffold), findsOneWidget);
+    });
 
-    //   whenListen(
-    //       eligibilityBlocMock, Stream.fromIterable(expectedEligibilityStates));
+    testWidgets('When user role has return admin access ', (tester) async {
+      final expectedEligibilityStates = [
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrgConfigs: SalesOrganisationConfigs.empty(),
+          user: fakeUser,
+        ),
+        EligibilityState.initial().copyWith(
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeTWSalesOrganisation,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('root_admin'),
+            ),
+          ),
+        ),
+      ];
 
-    //   final expectedUserListStates = [
-    //     UserState.initial(),
-    //     UserState.initial().copyWith(
-    //       user: fakeUser.copyWith(disableReturns: false),
-    //     ),
-    //   ];
-    //   whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
+      whenListen(
+        eligibilityBlocMock,
+        Stream.fromIterable(expectedEligibilityStates),
+      );
 
-    //   await getWidget(tester);
-    //   await tester.pump();
-    //   final salesOrganisation = eligibilityBlocMock.state.salesOrganisation;
-    //   verify(
-    //       () => userRestrictionListBlocMock.add(UserRestrictionListEvent.fetch(
-    //             salesOrg: salesOrganisation.salesOrg,
-    //           ))).called(1);
+      final expectedUserListStates = [
+        UserState.initial(),
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            disableReturns: false,
+            role: Role.empty().copyWith(
+              type: RoleType('root_admin'),
+            ),
+          ),
+        ),
+      ];
+      whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
 
-    //   verify(() =>
-    //       policyConfigurationListBlocMock.add(PolicyConfigurationEvent.fetch(
-    //         salesOrganisation: salesOrganisation,
-    //         searchKey: '',
-    //       ))).called(1);
-    //   // expect(find.byType(UpgradeAlert), findsOneWidget);
-    // });
+      when(() => salesOrgBlocMock.state).thenAnswer(
+        (invocation) => SalesOrgState.initial().copyWith(
+          configs: fakeSalesOrganisationConfigs,
+          salesOrganisation: fakeTWSalesOrganisation,
+        ),
+      );
+
+      await getWidget(tester);
+      await tester.pump(const Duration(milliseconds: 500));
+      verify(
+        () => userRestrictionListBlocMock.add(
+          UserRestrictionListEvent.fetch(
+            salesOrg: fakeTWSalesOrganisation.salesOrg,
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => paymentMethodsBlocMock.add(
+          const PaymentMethodsEvent.fetch(),
+        ),
+      ).called(1);
+
+      verify(
+        () => manageBankBeneficiaryBlocMock.add(
+          const ManageBankBeneficiaryEvent.fetch(),
+        ),
+      ).called(1);
+
+      verify(
+        () => salesDistrictBlocMock.add(
+          const SalesDistrictEvent.fetch(),
+        ),
+      ).called(1);
+      verify(
+        () => manageDeductionCodeBlocMock.add(
+          const ManageDeductionCodeEvent.fetch(),
+        ),
+      ).called(1);
+      verify(
+        () => managePaymentAdviceFooterBlocMock.add(
+          const ManagePaymentAdviceFooterEvent.fetch(),
+        ),
+      ).called(1);
+
+      expect(find.byType(Scaffold), findsOneWidget);
+    });
 
     test('testing UpgraderLocalizationMessage valid', () async {
       expect(UpgraderLocalizationMessage(), isNotNull);
@@ -1124,7 +1278,7 @@ void main() {
           MaterialListEvent.fetch(
             salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
             configs: salesOrgBlocMock.state.configs,
-            customerCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
+            customerCodeInfo: eligibilityBlocMock.state.customerCodeInfo,
             shipToInfo: eligibilityBlocMock.state.shipToInfo,
             selectedMaterialFilter: materialFilterBlocMock.state.materialFilter,
             user: fakeClientUser,
@@ -1163,25 +1317,6 @@ void main() {
 
       await getWidget(tester);
       await tester.pump();
-    });
-
-    testWidgets('DeepLinkingBloc initializes correctly',
-        (WidgetTester tester) async {
-      whenListen(
-        customerCodeBlocMock,
-        Stream.fromIterable([
-          CustomerCodeState.initial(),
-          CustomerCodeState.initial().copyWith(
-            shipToInfo:
-                ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-code'),
-          ),
-        ]),
-      );
-      await getWidget(tester);
-      await tester.pump();
-
-      verify(() => deepLinkingBlocMock.add(const DeepLinkingEvent.initialize()))
-          .called(1);
     });
 
     testWidgets('When Redirecting History page - success', (tester) async {
@@ -1328,7 +1463,7 @@ void main() {
       await getWidget(tester);
     });
 
-    testWidgets('fetch bundle details image', (tester) async {
+    testWidgets('fetch bundle details image ', (tester) async {
       final materials = [
         MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material-1'),

@@ -170,8 +170,8 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
         ),
       );
-      when(() => customerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
       );

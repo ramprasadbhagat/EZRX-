@@ -564,10 +564,6 @@ void main() {
             email: EmailAddress('abcd@fake.com'),
           ),
           salesOrganisation: fakeSGSalesOrganisation,
-        ),
-      );
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
           shipToInfo: fakeShipToInfo,
         ),
       );
@@ -633,11 +629,6 @@ void main() {
           shipToInfo: fakeShipToInfo,
         ),
       );
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          shipToInfo: fakeShipToInfo,
-        ),
-      );
       when(
         () => autoRouterMock.popAndPush(const PaymentSummaryPageRoute()),
       ).thenAnswer((invocation) => Future(() => null));
@@ -698,11 +689,6 @@ void main() {
             email: EmailAddress('abcd@fake.com'),
           ),
           salesOrganisation: fakeSGSalesOrganisation,
-          shipToInfo: fakeShipToInfo,
-        ),
-      );
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
           shipToInfo: fakeShipToInfo,
         ),
       );

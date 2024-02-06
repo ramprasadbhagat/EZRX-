@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -38,7 +37,7 @@ class ApproverActions extends StatelessWidget {
           preferredSize: const Size.fromHeight(30.0),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-            child: BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
+            child: BlocBuilder<EligibilityBloc, EligibilityState>(
               buildWhen: (previous, current) =>
                   previous.haveShipTo != current.haveShipTo,
               builder: (context, state) {
@@ -122,22 +121,12 @@ class ApproverActions extends StatelessWidget {
                 !scaffoldKey.currentState!.isEndDrawerOpen) ||
             current.activeSort != previous.activeSort,
         listener: (context, state) {
-          final hasCustomerCodeInfo = context
-              .read<CustomerCodeBloc>()
-              .state
-              .customerCodeInfo
-              .customerCodeSoldTo
-              .isNotEmpty;
-          final hasShipToInfo = context
-              .read<CustomerCodeBloc>()
-              .state
-              .shipToInfo
-              .shipToCustomerCode
-              .isNotEmpty;
-          if (hasCustomerCodeInfo && hasShipToInfo) {
+          final eligibilityState = context.read<EligibilityBloc>().state;
+          if (eligibilityState.haveCustomerCodeInfos &&
+              eligibilityState.haveShipToInfos) {
             context.read<ReturnApproverBloc>().add(
                   ReturnApproverEvent.fetch(
-                    user: context.read<EligibilityBloc>().state.user,
+                    user: eligibilityState.user,
                     approverReturnFilter: context
                         .read<ReturnApproverFilterBloc>()
                         .state

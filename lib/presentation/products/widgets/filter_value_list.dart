@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -52,6 +51,8 @@ class _FilterValueListState extends State<FilterValueList> {
                 onSelected: widget.isFetching
                     ? null
                     : (value) {
+                        final eligibilityState =
+                            context.read<EligibilityBloc>().state;
                         trackMixpanelEvent(
                           MixpanelEvents.productFilterClicked,
                           props: {MixpanelProps.filterClicked: 'Favourites'},
@@ -68,18 +69,10 @@ class _FilterValueListState extends State<FilterValueList> {
                                     .read<SalesOrgBloc>()
                                     .state
                                     .salesOrganisation,
-                                configs: context
-                                    .read<EligibilityBloc>()
-                                    .state
-                                    .salesOrgConfigs,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                shipToInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .shipToInfo,
+                                configs: eligibilityState.salesOrgConfigs,
+                                customerCodeInfo:
+                                    eligibilityState.customerCodeInfo,
+                                shipToInfo: eligibilityState.shipToInfo,
                                 selectedMaterialFilter:
                                     state.selectedMaterialFilter.copyWith(
                                   isFavourite:
@@ -116,6 +109,8 @@ class _FilterValueListState extends State<FilterValueList> {
                       onSelected: widget.isFetching
                           ? null
                           : (value) {
+                              final eligibilityState =
+                                  context.read<EligibilityBloc>().state;
                               trackMixpanelEvent(
                                 MixpanelEvents.productFilterClicked,
                                 props: {
@@ -140,14 +135,9 @@ class _FilterValueListState extends State<FilterValueList> {
                                           .read<SalesOrgBloc>()
                                           .state
                                           .configs,
-                                      customerCodeInfo: context
-                                          .read<CustomerCodeBloc>()
-                                          .state
-                                          .customerCodeInfo,
-                                      shipToInfo: context
-                                          .read<CustomerCodeBloc>()
-                                          .state
-                                          .shipToInfo,
+                                      customerCodeInfo:
+                                          eligibilityState.customerCodeInfo,
+                                      shipToInfo: eligibilityState.shipToInfo,
                                       selectedMaterialFilter:
                                           state.selectedMaterialFilter.copyWith(
                                         hasAccessToCovidMaterial: context

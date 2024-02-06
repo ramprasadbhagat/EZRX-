@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -18,11 +19,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
-class AupTCDialog extends StatelessWidget {
+class AupTCPage extends StatelessWidget {
   final User user;
   final bool isMarketPlace;
 
-  const AupTCDialog({
+  const AupTCPage({
     Key? key,
     required this.user,
     required this.isMarketPlace,
@@ -266,79 +267,104 @@ class AcceptButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AupTcBloc, AupTcState>(
-      buildWhen: (previous, current) =>
-          current.privacyConsent && current.tncConsent ||
-          !current.privacyConsent ||
-          !current.tncConsent,
-      builder: (context, state) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ElevatedButton(
-                  key: WidgetKeys.tncDialogAcceptButton,
-                  onPressed: () {
-                    if (!state.tncConsent || !state.privacyConsent) {
-                      CustomSnackBar(
-                        messageText:
-                            'You need to read and accept full Terms of use and Privacy Policy before continue.'
-                                .tr(),
-                      ).show(context);
-                    } else if (isMarketPlace) {
-                      context.read<UserBloc>().add(
-                            UserEvent.setMarketPlaceTncAcceptance(
-                              MarketPlaceTnCAcceptance.accept(),
-                            ),
-                          );
-                    } else {
-                      context.read<UserBloc>().add(
-                            const UserEvent.acceptTnc(),
-                          );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(350, 40),
-                    backgroundColor: state.tncConsent && state.privacyConsent
-                        ? ZPColors.primary
-                        : ZPColors.unselectedLabelColor,
-                  ),
-                  child: Text(
-                    context.tr('Accept and continue'),
-                  ),
-                ),
-                TextButton(
-                  key: WidgetKeys.tncDialogCancelButton,
-                  onPressed: () {
-                    if (isMarketPlace) {
-                      context.read<UserBloc>().add(
-                            UserEvent.setMarketPlaceTncAcceptance(
-                              MarketPlaceTnCAcceptance.reject(),
-                            ),
-                          );
-                    } else {
-                      context.read<AuthBloc>().add(
-                            const AuthEvent.logout(),
-                          );
-                    }
-                  },
-                  child: Text(
-                    isMarketPlace
-                        ? context.tr('Skip & only see ZP products')
-                        : context.tr('Cancel'),
-                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                          color: ZPColors.orange,
-                        ),
-                  ),
-                ),
-              ],
-            ),
+    return MultiBlocListener(
+      listeners: [
+        if (!isMarketPlace)
+          BlocListener<UserBloc, UserState>(
+            listenWhen: (pre, cur) =>
+                pre.showTermsAndConditionDialog !=
+                        cur.showTermsAndConditionDialog &&
+                    !cur.showTermsAndConditionDialog ||
+                cur.isLoginOnBehalf,
+            listener: (context, _) {
+              context.navigateBack();
+            },
           ),
-        );
-      },
+
+        if (isMarketPlace)
+          BlocListener<EligibilityBloc, EligibilityState>(
+            listenWhen: (pre, cur) =>
+                pre.showMarketPlaceTnc != cur.showMarketPlaceTnc &&
+                !cur.showMarketPlaceTnc,
+            listener: (context, _) {
+              context.navigateBack();
+            },
+          ),
+      ],
+      child: BlocBuilder<AupTcBloc, AupTcState>(
+        buildWhen: (previous, current) =>
+            current.privacyConsent && current.tncConsent ||
+            !current.privacyConsent ||
+            !current.tncConsent,
+        builder: (context, state) {
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ElevatedButton(
+                    key: WidgetKeys.tncDialogAcceptButton,
+                    onPressed: () {
+                      if (!state.tncConsent || !state.privacyConsent) {
+                        CustomSnackBar(
+                          messageText:
+                              'You need to read and accept full Terms of use and Privacy Policy before continue.'
+                                  .tr(),
+                        ).show(context);
+                      } else if (isMarketPlace) {
+                        context.read<UserBloc>().add(
+                              UserEvent.setMarketPlaceTncAcceptance(
+                                MarketPlaceTnCAcceptance.accept(),
+                              ),
+                            );
+                      } else {
+                        context.read<UserBloc>().add(
+                              const UserEvent.acceptTnc(),
+                            );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(350, 40),
+                      backgroundColor: state.tncConsent && state.privacyConsent
+                          ? ZPColors.primary
+                          : ZPColors.unselectedLabelColor,
+                    ),
+                    child: Text(
+                      context.tr('Accept and continue'),
+                    ),
+                  ),
+                  TextButton(
+                    key: WidgetKeys.tncDialogCancelButton,
+                    onPressed: () {
+                      if (isMarketPlace) {
+                        context.read<UserBloc>().add(
+                              UserEvent.setMarketPlaceTncAcceptance(
+                                MarketPlaceTnCAcceptance.reject(),
+                              ),
+                            );
+                      } else {
+                        context.read<AuthBloc>().add(
+                              const AuthEvent.logout(),
+                            );
+                      }
+                    },
+                    child: Text(
+                      isMarketPlace
+                          ? context.tr('Skip & only see ZP products')
+                          : context.tr('Cancel'),
+                      style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                            color: ZPColors.orange,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

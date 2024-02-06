@@ -107,3 +107,15 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     return displayWords.isEmpty ? 'NA' : displayWords.join(' - ');
   }
 }
+
+extension CustomerCodeList on List<CustomerCodeInfo> {
+  bool get canPreSelectShipToCode =>
+      length == 1 && first.shipToInfos.length == 1;
+
+  CustomerCodeInfo get preSelectedCustomerCodeInfo =>
+      canPreSelectShipToCode ? first : CustomerCodeInfo.empty();
+
+  ShipToInfo get preSelectedShipToInfo => canPreSelectShipToCode
+      ? preSelectedCustomerCodeInfo.shipToInfos.first
+      : ShipToInfo.empty();
+}

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -19,6 +20,7 @@ import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -51,6 +53,29 @@ class CustomerSearchPage extends StatelessWidget {
           style: Theme.of(context).textTheme.labelLarge,
         ),
         centerTitle: false,
+        leading: BlocBuilder<EligibilityBloc, EligibilityState>(
+          buildWhen: (previous, current) =>
+              previous.haveCustomerCodeInfo != current.haveCustomerCodeInfo,
+          builder: (context, state) {
+            return WillPopScope(
+              child: state.haveCustomerCodeInfo
+                  ? IconButton(
+                      key: WidgetKeys.backButton,
+                      icon: const Icon(Icons.arrow_back_ios_sharp),
+                      onPressed: () => context.popRoute(),
+                    )
+                  : const SizedBox.shrink(),
+              onWillPop: () async {
+                if (state.haveCustomerCodeInfo) return true;
+
+                await SystemChannels.platform
+                    .invokeMethod('SystemNavigator.pop');
+
+                return false;
+              },
+            );
+          },
+        ),
         actions: [
           BlocBuilder<SalesOrgBloc, SalesOrgState>(
             buildWhen: (previous, current) {
@@ -115,7 +140,21 @@ class CustomerSearchPage extends StatelessWidget {
             currentPath: context.router.currentPath,
           ),
           const _DeliveryAddressSearchSection(),
-          BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
+          BlocConsumer<CustomerCodeBloc, CustomerCodeState>(
+            listenWhen: (previous, current) =>
+                previous.apiFailureOrSuccessOption !=
+                current.apiFailureOrSuccessOption,
+            listener: (context, state) {
+              state.apiFailureOrSuccessOption.fold(
+                () {},
+                (either) => either.fold(
+                  (failure) {
+                    ErrorUtils.handleApiFailure(context, failure);
+                  },
+                  (_) {},
+                ),
+              );
+            },
             buildWhen: (previous, current) =>
                 previous.isFetching != current.isFetching,
             builder: (context, state) {

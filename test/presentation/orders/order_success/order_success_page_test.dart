@@ -1899,7 +1899,7 @@ void main() {
         expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
       });
     });
-    
+
     testWidgets('Bonus Stock tag', (tester) async {
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(

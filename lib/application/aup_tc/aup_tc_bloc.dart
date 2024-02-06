@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'aup_tc_bloc.freezed.dart';
+
 part 'aup_tc_event.dart';
+
 part 'aup_tc_state.dart';
 
 class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {

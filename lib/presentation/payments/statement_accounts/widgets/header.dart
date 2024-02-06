@@ -5,7 +5,7 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
+    return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
           previous.customerCodeInfo != current.customerCodeInfo,
       builder: (context, state) {

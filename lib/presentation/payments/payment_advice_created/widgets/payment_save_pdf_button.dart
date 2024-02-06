@@ -46,6 +46,8 @@ class PaymentSavePdfButton extends StatelessWidget {
           onPressed: state.isSavingInvoicePdf
               ? null
               : () async {
+                  final eligibilityState =
+                      context.read<EligibilityBloc>().state;
                   context.read<NewPaymentBloc>().add(
                         NewPaymentEvent.saveInvoicePdf(
                           dataInvoicePdf:
@@ -54,14 +56,9 @@ class PaymentSavePdfButton extends StatelessWidget {
                             createdDate: state.customerPaymentInfo.createdDate,
                             adviceExpiry:
                                 state.customerPaymentInfo.adviceExpiry,
-                            shipToInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .shipToInfo,
-                            salesOrganisation: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .salesOrganisation,
+                            shipToInfo: eligibilityState.shipToInfo,
+                            salesOrganisation:
+                                eligibilityState.salesOrganisation,
                           ),
                         ),
                       );

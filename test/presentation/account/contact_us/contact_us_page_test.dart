@@ -14,11 +14,8 @@ import 'package:ezrxmobile/domain/contact_us/entities/contact_us_details.dart';
 import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_local.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/domain/account/entities/contact_us.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -92,9 +89,6 @@ void main() {
       type: RoleType('fake-type'),
     ),
     preferredLanguage: Language.english(),
-  );
-  final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(
-    customerCodeSoldTo: '0030082707',
   );
   final salesOrg =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001'));
@@ -684,10 +678,6 @@ void main() {
       when(() => mockCustomerCodeBloc.state).thenReturn(
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-          customerCodeInfo: fakeCustomerCode,
-          shipToInfo: ShipToInfo.empty().copyWith(
-            shipToName: ShipToName.empty().copyWith(name1: 'fake_name'),
-          ),
         ),
       );
       final expectedState = [
@@ -727,10 +717,6 @@ void main() {
       when(() => mockCustomerCodeBloc.state).thenReturn(
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-          customerCodeInfo: fakeCustomerCode,
-          shipToInfo: ShipToInfo.empty().copyWith(
-            shipToName: ShipToName.empty().copyWith(name1: 'fake_name'),
-          ),
         ),
       );
       final expectedState = [
@@ -761,7 +747,22 @@ void main() {
           user: user,
         ),
       );
-
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+        ),
+      );
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          isLoading: false,
+          salesOrganisation: fakeMYSalesOrganisation,
+        ),
+      );
+      when(() => mockCustomerCodeBloc.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+        ),
+      );
       final expectedState = [
         ContactUsState.initial().copyWith(
           isSubmitting: true,
@@ -810,10 +811,6 @@ void main() {
       when(() => mockCustomerCodeBloc.state).thenReturn(
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-          customerCodeInfo: fakeCustomerCode,
-          shipToInfo: ShipToInfo.empty().copyWith(
-            shipToName: ShipToName.empty().copyWith(name1: 'fake_name'),
-          ),
         ),
       );
       final expectedState = [

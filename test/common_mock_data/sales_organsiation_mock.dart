@@ -1,4 +1,5 @@
 //Sales org
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -28,6 +29,10 @@ final fakeMMSalesOrg = SalesOrg(_fakeMMSalesOrgId);
 final fakePhMDISalesOrg = SalesOrg(_fakePhMDISalesOrgId);
 
 final fakeEmptySalesOrganisation = SalesOrganisation.empty();
+
+final fakeSalesOrganisationConfigs =
+    SalesOrganisationConfigs.empty().copyWith(salesOrg: fakeSalesOrg);
+
 final fakeSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg);
 

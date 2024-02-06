@@ -114,11 +114,11 @@ void main() {
     testWidgets('Banner test - when customer code changed - Success',
         (tester) async {
       final expectedCustomerCodeInfo = [
-        CustomerCodeState.initial()
+        EligibilityState.initial()
             .copyWith(customerCodeInfo: fakeCustomerCodeInfo)
       ];
       whenListen(
-        mockCustomerCodeBloc,
+        mockEligibilityBloc,
         Stream.fromIterable(expectedCustomerCodeInfo),
       );
 

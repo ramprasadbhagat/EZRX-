@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$IntroEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialIndex,
     required TResult Function(int index) setIndex,
     required TResult Function() checkAppFirstLaunch,
     required TResult Function() setAppFirstLaunch,
@@ -26,7 +25,6 @@ mixin _$IntroEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialIndex,
     TResult? Function(int index)? setIndex,
     TResult? Function()? checkAppFirstLaunch,
     TResult? Function()? setAppFirstLaunch,
@@ -34,7 +32,6 @@ mixin _$IntroEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialIndex,
     TResult Function(int index)? setIndex,
     TResult Function()? checkAppFirstLaunch,
     TResult Function()? setAppFirstLaunch,
@@ -43,7 +40,6 @@ mixin _$IntroEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitialIndex value) initialIndex,
     required TResult Function(_SetIndex value) setIndex,
     required TResult Function(_CheckAppFirstLaunch value) checkAppFirstLaunch,
     required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
@@ -51,7 +47,6 @@ mixin _$IntroEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialIndex value)? initialIndex,
     TResult? Function(_SetIndex value)? setIndex,
     TResult? Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
     TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
@@ -59,7 +54,6 @@ mixin _$IntroEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialIndex value)? initialIndex,
     TResult Function(_SetIndex value)? setIndex,
     TResult Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
     TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
@@ -84,120 +78,6 @@ class _$IntroEventCopyWithImpl<$Res, $Val extends IntroEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$_InitialIndexCopyWith<$Res> {
-  factory _$$_InitialIndexCopyWith(
-          _$_InitialIndex value, $Res Function(_$_InitialIndex) then) =
-      __$$_InitialIndexCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_InitialIndexCopyWithImpl<$Res>
-    extends _$IntroEventCopyWithImpl<$Res, _$_InitialIndex>
-    implements _$$_InitialIndexCopyWith<$Res> {
-  __$$_InitialIndexCopyWithImpl(
-      _$_InitialIndex _value, $Res Function(_$_InitialIndex) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_InitialIndex implements _InitialIndex {
-  const _$_InitialIndex();
-
-  @override
-  String toString() {
-    return 'IntroEvent.initialIndex()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_InitialIndex);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialIndex,
-    required TResult Function(int index) setIndex,
-    required TResult Function() checkAppFirstLaunch,
-    required TResult Function() setAppFirstLaunch,
-  }) {
-    return initialIndex();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialIndex,
-    TResult? Function(int index)? setIndex,
-    TResult? Function()? checkAppFirstLaunch,
-    TResult? Function()? setAppFirstLaunch,
-  }) {
-    return initialIndex?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialIndex,
-    TResult Function(int index)? setIndex,
-    TResult Function()? checkAppFirstLaunch,
-    TResult Function()? setAppFirstLaunch,
-    required TResult orElse(),
-  }) {
-    if (initialIndex != null) {
-      return initialIndex();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_InitialIndex value) initialIndex,
-    required TResult Function(_SetIndex value) setIndex,
-    required TResult Function(_CheckAppFirstLaunch value) checkAppFirstLaunch,
-    required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
-  }) {
-    return initialIndex(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialIndex value)? initialIndex,
-    TResult? Function(_SetIndex value)? setIndex,
-    TResult? Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
-    TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
-  }) {
-    return initialIndex?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialIndex value)? initialIndex,
-    TResult Function(_SetIndex value)? setIndex,
-    TResult Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
-    TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
-    required TResult orElse(),
-  }) {
-    if (initialIndex != null) {
-      return initialIndex(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _InitialIndex implements IntroEvent {
-  const factory _InitialIndex() = _$_InitialIndex;
 }
 
 /// @nodoc
@@ -264,7 +144,6 @@ class _$_SetIndex implements _SetIndex {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialIndex,
     required TResult Function(int index) setIndex,
     required TResult Function() checkAppFirstLaunch,
     required TResult Function() setAppFirstLaunch,
@@ -275,7 +154,6 @@ class _$_SetIndex implements _SetIndex {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialIndex,
     TResult? Function(int index)? setIndex,
     TResult? Function()? checkAppFirstLaunch,
     TResult? Function()? setAppFirstLaunch,
@@ -286,7 +164,6 @@ class _$_SetIndex implements _SetIndex {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialIndex,
     TResult Function(int index)? setIndex,
     TResult Function()? checkAppFirstLaunch,
     TResult Function()? setAppFirstLaunch,
@@ -301,7 +178,6 @@ class _$_SetIndex implements _SetIndex {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitialIndex value) initialIndex,
     required TResult Function(_SetIndex value) setIndex,
     required TResult Function(_CheckAppFirstLaunch value) checkAppFirstLaunch,
     required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
@@ -312,7 +188,6 @@ class _$_SetIndex implements _SetIndex {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialIndex value)? initialIndex,
     TResult? Function(_SetIndex value)? setIndex,
     TResult? Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
     TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
@@ -323,7 +198,6 @@ class _$_SetIndex implements _SetIndex {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialIndex value)? initialIndex,
     TResult Function(_SetIndex value)? setIndex,
     TResult Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
     TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
@@ -383,7 +257,6 @@ class _$_CheckAppFirstLaunch implements _CheckAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialIndex,
     required TResult Function(int index) setIndex,
     required TResult Function() checkAppFirstLaunch,
     required TResult Function() setAppFirstLaunch,
@@ -394,7 +267,6 @@ class _$_CheckAppFirstLaunch implements _CheckAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialIndex,
     TResult? Function(int index)? setIndex,
     TResult? Function()? checkAppFirstLaunch,
     TResult? Function()? setAppFirstLaunch,
@@ -405,7 +277,6 @@ class _$_CheckAppFirstLaunch implements _CheckAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialIndex,
     TResult Function(int index)? setIndex,
     TResult Function()? checkAppFirstLaunch,
     TResult Function()? setAppFirstLaunch,
@@ -420,7 +291,6 @@ class _$_CheckAppFirstLaunch implements _CheckAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitialIndex value) initialIndex,
     required TResult Function(_SetIndex value) setIndex,
     required TResult Function(_CheckAppFirstLaunch value) checkAppFirstLaunch,
     required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
@@ -431,7 +301,6 @@ class _$_CheckAppFirstLaunch implements _CheckAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialIndex value)? initialIndex,
     TResult? Function(_SetIndex value)? setIndex,
     TResult? Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
     TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
@@ -442,7 +311,6 @@ class _$_CheckAppFirstLaunch implements _CheckAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialIndex value)? initialIndex,
     TResult Function(_SetIndex value)? setIndex,
     TResult Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
     TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
@@ -497,7 +365,6 @@ class _$_SetAppFirstLaunch implements _SetAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialIndex,
     required TResult Function(int index) setIndex,
     required TResult Function() checkAppFirstLaunch,
     required TResult Function() setAppFirstLaunch,
@@ -508,7 +375,6 @@ class _$_SetAppFirstLaunch implements _SetAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialIndex,
     TResult? Function(int index)? setIndex,
     TResult? Function()? checkAppFirstLaunch,
     TResult? Function()? setAppFirstLaunch,
@@ -519,7 +385,6 @@ class _$_SetAppFirstLaunch implements _SetAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialIndex,
     TResult Function(int index)? setIndex,
     TResult Function()? checkAppFirstLaunch,
     TResult Function()? setAppFirstLaunch,
@@ -534,7 +399,6 @@ class _$_SetAppFirstLaunch implements _SetAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitialIndex value) initialIndex,
     required TResult Function(_SetIndex value) setIndex,
     required TResult Function(_CheckAppFirstLaunch value) checkAppFirstLaunch,
     required TResult Function(_SetAppFirstLaunch value) setAppFirstLaunch,
@@ -545,7 +409,6 @@ class _$_SetAppFirstLaunch implements _SetAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialIndex value)? initialIndex,
     TResult? Function(_SetIndex value)? setIndex,
     TResult? Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
     TResult? Function(_SetAppFirstLaunch value)? setAppFirstLaunch,
@@ -556,7 +419,6 @@ class _$_SetAppFirstLaunch implements _SetAppFirstLaunch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialIndex value)? initialIndex,
     TResult Function(_SetIndex value)? setIndex,
     TResult Function(_CheckAppFirstLaunch value)? checkAppFirstLaunch,
     TResult Function(_SetAppFirstLaunch value)? setAppFirstLaunch,

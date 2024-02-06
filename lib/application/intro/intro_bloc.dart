@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'intro_bloc.freezed.dart';
+
 part 'intro_event.dart';
+
 part 'intro_state.dart';
 
 class IntroBloc extends Bloc<IntroEvent, IntroState> {
@@ -14,12 +16,12 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
   }) : super(IntroState.initial()) {
     on<IntroEvent>(_onEvent);
   }
+
   Future<void> _onEvent(
     IntroEvent event,
     Emitter<IntroState> emit,
   ) async {
     await event.map(
-      initialIndex: (_) async => emit(IntroState.initial()),
       setIndex: (e) {
         emit(state.copyWith(index: e.index));
       },
@@ -36,12 +38,13 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
         );
       },
       setAppFirstLaunch: (e) async {
+        const isAppFirstLaunch = false;
         await deviceRepository.setDeviceData(
-          isAppFirstLaunch: false,
+          isAppFirstLaunch: isAppFirstLaunch,
         );
         emit(
           state.copyWith(
-            isAppFirstLaunch: false,
+            isAppFirstLaunch: isAppFirstLaunch,
           ),
         );
       },

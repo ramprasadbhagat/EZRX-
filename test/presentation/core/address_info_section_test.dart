@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -19,6 +20,9 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -27,6 +31,7 @@ void main() {
   late AppRouter autoRouterMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late CustomerInformation customerInformationMock;
+  late EligibilityBloc eligibilityBlocMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -41,6 +46,7 @@ void main() {
   group('Address Info Section Test', () {
     setUp(() {
       customerCodeBlocMock = CustomerCodeBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
       autoRouterMock = locator<AppRouter>();
     });
 
@@ -52,6 +58,9 @@ void main() {
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,
           ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
         ],
         child: Center(
           child: AddressInfoSection.noAction(),
@@ -60,11 +69,10 @@ void main() {
     }
 
     testWidgets('Test customer code address in proper format', (tester) async {
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          customerCodeInfo: customerInformationMock.soldToInformation.last,
-          shipToInfo:
-              customerInformationMock.soldToInformation.last.shipToInfos.first,
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo:  customerInformationMock.soldToInformation.last,
+          shipToInfo:  customerInformationMock.soldToInformation.last.shipToInfos.first,
         ),
       );
       await tester.pumpWidget(getWidget());
@@ -80,11 +88,11 @@ void main() {
     });
 
     testWidgets('Test ship to code address in proper format', (tester) async {
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           customerCodeInfo: customerInformationMock.soldToInformation.last,
           shipToInfo:
-              customerInformationMock.soldToInformation.last.shipToInfos.first,
+          customerInformationMock.soldToInformation.last.shipToInfos.first,
         ),
       );
       await tester.pumpWidget(getWidget());

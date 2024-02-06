@@ -24,8 +24,20 @@ class BrowseProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return BlocProvider<MaterialListBloc>(
-      create: (context) => locator<MaterialListBloc>(),
+      create: (context) => locator<MaterialListBloc>()
+        ..add(
+          MaterialListEvent.fetch(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            configs: eligibilityState.salesOrgConfigs,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+            selectedMaterialFilter: MaterialFilter.empty(),
+            user: context.read<UserBloc>().state.user,
+          ),
+        ),
       child: MultiBlocListener(
         listeners: [
           BlocListener<EligibilityBloc, EligibilityState>(
@@ -34,18 +46,10 @@ class BrowseProduct extends StatelessWidget {
             listener: (context, state) {
               context.read<MaterialListBloc>().add(
                     MaterialListEvent.fetch(
-                      salesOrganisation: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrganisation,
-                      configs:
-                          context.read<EligibilityBloc>().state.salesOrgConfigs,
-                      customerCodeInfo: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<EligibilityBloc>().state.shipToInfo,
+                      salesOrganisation: state.salesOrganisation,
+                      configs: state.salesOrgConfigs,
+                      customerCodeInfo: state.customerCodeInfo,
+                      shipToInfo: state.shipToInfo,
                       selectedMaterialFilter: MaterialFilter.empty(),
                       user: context.read<UserBloc>().state.user,
                     ),
@@ -131,6 +135,7 @@ class BrowseProduct extends StatelessWidget {
 
 class _BrowseProductCard extends StatelessWidget {
   final MaterialInfo product;
+
   const _BrowseProductCard({
     Key? key,
     required this.product,

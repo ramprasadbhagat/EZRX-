@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -8,7 +9,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
+import 'package:ezrxmobile/presentation/aup_tc/aup_tc_page.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ void main() {
   late AuthBloc mockAuthBloc;
   late AnnouncementBloc mockAnnouncementBloc;
   late UserBloc mockUserBloc;
+  late EligibilityBloc mockEligibilityBloc;
   late SalesOrgBloc mockSalesOrgBloc;
 
   setUpAll(() async {
@@ -41,10 +43,14 @@ void main() {
   });
 
   setUp(() {
+    mockEligibilityBloc = EligibilityBlocMock();
     mockUserBloc = UserBlocMock();
     mockAuthBloc = AuthBlocMock();
     mockAnnouncementBloc = AnnouncementBlocMock();
     mockSalesOrgBloc = SalesOrgBlocMock();
+    when(() => mockEligibilityBloc.state).thenReturn(
+      EligibilityState.initial(),
+    );
     when(() => mockAupTcBloc.state).thenReturn(AupTcState.initial());
     when(() => mockUserBloc.state).thenReturn(UserState.initial());
     when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
@@ -59,12 +65,13 @@ void main() {
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
         providers: [
+          BlocProvider<EligibilityBloc>(create: (_) => mockEligibilityBloc),
           BlocProvider<UserBloc>(create: (_) => mockUserBloc),
           BlocProvider<AuthBloc>(create: (_) => mockAuthBloc),
           BlocProvider<AnnouncementBloc>(create: (_) => mockAnnouncementBloc),
           BlocProvider<SalesOrgBloc>(create: (_) => mockSalesOrgBloc),
         ],
-        child: AupTCDialog(user: user, isMarketPlace: isMarketPlace),
+        child: AupTCPage(user: user, isMarketPlace: isMarketPlace),
       );
   group('Term and Condition dialog -', () {
     final appBar = find.byKey(WidgetKeys.tncDialogAppBar);
@@ -337,8 +344,6 @@ void main() {
         ),
         findsOneWidget,
       );
-
-      verifyNoMoreInteractions(mockUserBloc);
     });
   });
 }

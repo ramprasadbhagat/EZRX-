@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
@@ -23,10 +24,14 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   late CustomerCodeBlocMock mockCustomerCodeBloc;
+  late EligibilityBloc eligibilityBlocMock;
 
   setUpAll(() async {
     locator.registerLazySingleton(
@@ -79,10 +84,15 @@ void main() {
   group('Customer Code Selector Test ', () {
     setUp(() {
       mockCustomerCodeBloc = CustomerCodeBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
 
       when(() => mockCustomerCodeBloc.state).thenReturn(
         CustomerCodeState.initial()
             .copyWith(customerCodeList: [fakeCustomerInfo]),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial(),
       );
     });
 
@@ -94,6 +104,9 @@ void main() {
             providers: [
               BlocProvider<CustomerCodeBloc>(
                 create: (context) => mockCustomerCodeBloc,
+              ),
+              BlocProvider<EligibilityBloc>(
+                create: (context) => eligibilityBlocMock,
               ),
             ],
             child: const Material(
@@ -122,10 +135,17 @@ void main() {
       when(() => mockCustomerCodeBloc.state).thenReturn(
         CustomerCodeState.initial().copyWith(
           isFetching: false,
+          customerCodeList: [fakeCustomerInfo],
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeCustomerInfo.shipToInfos.first,
         ),
       );
+
       await tester.pumpWidget(getWidget());
       final selectedCustomerCodeText =
           find.text(fakeCustomerInfo.shipToInfos.first.shipToCustomerCode);
@@ -133,8 +153,11 @@ void main() {
     });
 
     testWidgets('When customerCodeInfo is getting fetched', (tester) async {
-      when(() => mockCustomerCodeBloc.state)
-          .thenReturn(CustomerCodeState.initial());
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          isLoadingCustomerCode: true,
+        ),
+      );
       await tester.pumpWidget(getWidget());
       final shimmer = find.byType(Shimmer);
       expect(shimmer, findsNWidgets(2));
@@ -145,8 +168,6 @@ void main() {
         CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-          customerCodeInfo: fakeCustomerInfo,
-          shipToInfo: fakeCustomerInfo.shipToInfos.first,
           customerCodeList: [
             CustomerCodeInfo.empty(),
           ],
@@ -172,17 +193,22 @@ void main() {
         CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-          customerCodeInfo: fakeCustomerInfo2,
           customerCodeList: [
             fakeCustomerInfo2,
           ],
-          shipToInfo: fakeCustomerInfo2.shipToInfos.first,
           apiFailureOrSuccessOption: optionOf(const Right(null)),
         ),
       ];
       whenListen(
         mockCustomerCodeBloc,
         Stream.fromIterable(expectedCustomerCodeListStates),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerInfo2,
+          shipToInfo: fakeCustomerInfo2.shipToInfos.first,
+        ),
       );
 
       await tester.pumpWidget(getWidget());
@@ -205,17 +231,21 @@ void main() {
         ),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-          customerCodeInfo: fakeCustomerInfo2,
           customerCodeList: [
             CustomerCodeInfo.empty(),
           ],
-          shipToInfo: fakeCustomerInfo2.shipToInfos.first,
           apiFailureOrSuccessOption: none(),
         ),
       ];
       whenListen(
         mockCustomerCodeBloc,
         Stream.fromIterable(expectedCustomerCodeListStates),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          shipToInfo: fakeCustomerInfo2.shipToInfos.first,
+        ),
       );
 
       await tester.pumpWidget(getWidget());
@@ -241,7 +271,19 @@ void main() {
       when(() => mockCustomerCodeBloc.state).thenReturn(
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-          customerCodeInfo: fakeCustomerInfo3,
+          customerCodeList: [
+            fakeCustomerInfo3.copyWith(
+              customerCodeSoldTo: 'fake-sold-to',
+            ),
+          ],
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerInfo3.copyWith(
+            customerCodeSoldTo: 'fake-sold-to',
+          ),
+          shipToInfo: fakeCustomerInfo3.shipToInfos.first,
         ),
       );
 

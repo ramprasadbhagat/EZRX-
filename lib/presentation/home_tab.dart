@@ -1,15 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/foundation.dart';
@@ -21,53 +18,20 @@ class HomeNavigationTabbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
-      buildWhen: (previous, current) =>
-          previous.showTermsAndConditionDialog !=
-          current.showTermsAndConditionDialog,
+    return BlocConsumer<EligibilityBloc, EligibilityState>(
+      listenWhen: (previous, current) =>
+          previous.isLoadingCustomerCode != current.isLoadingCustomerCode &&
+          !current.isLoadingCustomerCode,
+      listener: (context, state) {
+        context.read<DeepLinkingBloc>().add(
+              const DeepLinkingEvent.initialize(),
+            );
+      },
+      buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
-        return state.showTermsAndConditionDialog
-            ? AupTCDialog(
-                key: WidgetKeys.aupTcScreen,
-                user: state.user,
-                isMarketPlace: false,
-              )
-            : BlocBuilder<EligibilityBloc, EligibilityState>(
-                buildWhen: (previous, current) =>
-                    previous.showMarketPlaceTnc != current.showMarketPlaceTnc,
-                builder: (context, state) {
-                  final isLoginOnBehalf =
-                      context.read<UserBloc>().state.isLoginOnBehalf;
-
-                  return state.showMarketPlaceTnc && !isLoginOnBehalf
-                      ? AupTCDialog(
-                          user: state.user,
-                          isMarketPlace: true,
-                        )
-                      : BlocBuilder<IntroBloc, IntroState>(
-                          buildWhen: (previous, current) =>
-                              previous.isAppFirstLaunch !=
-                              current.isAppFirstLaunch,
-                          builder: (context, state) {
-                            return state.isAppFirstLaunch
-                                ? const IntroPage()
-                                : WillPopScope(
-                                    onWillPop: () async => false,
-                                    child: BlocBuilder<EligibilityBloc,
-                                        EligibilityState>(
-                                      buildWhen: (previous, current) =>
-                                          previous.user != current.user,
-                                      builder: (context, state) {
-                                        return _CustomTabBar(
-                                          routes: _getTabs(state),
-                                        );
-                                      },
-                                    ),
-                                  );
-                          },
-                        );
-                },
-              );
+        return _CustomTabBar(
+          routes: _getTabs(state),
+        );
       },
     );
   }

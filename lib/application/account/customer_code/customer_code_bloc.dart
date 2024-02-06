@@ -1,10 +1,8 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_customer_code_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -35,18 +33,6 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         ),
       ),
     );
-    on<_Selected>((e, emit) async {
-      await customerCodeRepository.storeCustomerInfo(
-        customerCode: e.customerCodeInfo.customerCodeSoldTo,
-        shippingAddress: e.shipToInfo.shipToCustomerCode,
-      );
-      emit(
-        state.copyWith(
-          customerCodeInfo: e.customerCodeInfo,
-          shipToInfo: e.shipToInfo,
-        ),
-      );
-    });
     on<_Search>(
       (e, emit) async {
         if (e.searchValue == state.searchKey) return;
@@ -105,88 +91,6 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       },
       transformer: restartable(),
     );
-    on<_LoadStoredCustomerCode>((e, emit) async {
-      emit(
-        state.copyWith(
-          isFetching: true,
-        ),
-      );
-
-      final customerStorageSuccessOrFailure =
-          await customerCodeRepository.getCustomerCodeStorage();
-
-      final lastSavedCustomerInfo = customerStorageSuccessOrFailure.fold(
-        (_) => AccountSelector.empty(),
-        (accountSelector) => accountSelector,
-      );
-
-      if (lastSavedCustomerInfo.customerCode.isEmpty) {
-        add(
-          const CustomerCodeEvent.fetch(),
-        );
-
-        return;
-      }
-
-      // Using the last saved shippingAddress to fetch current customerInformation
-      // as we do not receive all the shipToCodes associated with a customerCode
-      // at once. Necessary because when using the last saved customerCode,
-      // If the required shipToCode is on a paginated page beyond the first,
-      // the default behavior sets the first shipToCode as the shippingAddress.
-
-      final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-        salesOrganisation: state.selectedSalesOrg,
-        customerCodes: [lastSavedCustomerInfo.shippingAddress],
-        hideCustomer: state.hideCustomer,
-        user: state.userInfo,
-        pageSize: config.pageSize,
-        offset: 0,
-      );
-
-      final customerCodeInfoList =
-          failureOrSuccess.fold<List<CustomerCodeInfo>>(
-        (_) => <CustomerCodeInfo>[],
-        (customerInformation) => customerInformation.soldToInformation,
-      );
-
-      if (customerCodeInfoList.isEmpty) {
-        add(
-          const CustomerCodeEvent.fetch(),
-        );
-
-        return;
-      }
-
-      var shipToInfo = ShipToInfo.empty();
-      if (lastSavedCustomerInfo.shippingAddress.isNotEmpty) {
-        shipToInfo = customerCodeInfoList.first.shipToInfos.firstWhere(
-          (shipToInfo) =>
-              shipToInfo.shipToCustomerCode ==
-              lastSavedCustomerInfo.shippingAddress,
-          orElse: () => ShipToInfo.empty(),
-        );
-      }
-
-      final customerCodeInfo = customerCodeInfoList.firstWhere(
-        (element) =>
-            element.customerCodeSoldTo == lastSavedCustomerInfo.customerCode,
-        orElse: () => customerCodeInfoList.first,
-      );
-
-      emit(
-        state.copyWith(
-          customerCodeList: customerCodeInfoList,
-          isFetching: false,
-          isSearchActive: true,
-          canLoadMore: customerCodeInfoList.length >= config.pageSize,
-          searchKey: SearchKey.search(lastSavedCustomerInfo.shippingAddress),
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo == ShipToInfo.empty()
-              ? customerCodeInfoList.first.shipToInfos.first
-              : shipToInfo,
-        ),
-      );
-    });
     on<_Fetch>(
       (e, emit) async {
         // We have very bad API design so right now we using ugly implementation
@@ -244,19 +148,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                   customerCodeList: finalCustomerCodeInfoList,
                   apiFailureOrSuccessOption: none(),
                   isFetching: false,
-                  canLoadMore:
-                      customerInformation.shipToCount >= config.pageSize,
-                  customerCodeInfo:
-                      state.customerCodeInfo != CustomerCodeInfo.empty()
-                          ? state.customerCodeInfo
-                          : finalCustomerCodeInfoList.isNotEmpty
-                              ? finalCustomerCodeInfoList.first
-                              : CustomerCodeInfo.empty(),
-                  shipToInfo: state.shipToInfo != ShipToInfo.empty()
-                      ? state.shipToInfo
-                      : finalCustomerCodeInfoList.isNotEmpty
-                          ? finalCustomerCodeInfoList.first.shipToInfos.first
-                          : ShipToInfo.empty(),
+                  canLoadMore: customerInformation.shipToCount >= config.pageSize,
                 ),
               );
             }

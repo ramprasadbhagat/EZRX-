@@ -156,12 +156,14 @@ void main() {
         (tester) async {
       VisibilityDetectorController.instance.updateInterval = Duration.zero;
       final expectedCustomerCodeInfo = [
-        CustomerCodeState.initial()
-            .copyWith(customerCodeInfo: fakeCustomerCodeInfo, isFetching: true),
-        CustomerCodeState.initial().copyWith(isFetching: false),
+        EligibilityState.initial().copyWith(isLoadingCustomerCode: true),
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isLoadingCustomerCode: false,
+        ),
       ];
       whenListen(
-        mockCustomerCodeBloc,
+        mockEligibilityBloc,
         Stream.fromIterable(expectedCustomerCodeInfo),
       );
 

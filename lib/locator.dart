@@ -111,7 +111,6 @@ import 'package:ezrxmobile/application/returns/user_restriction_details/user_res
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_local.dart';
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_remote.dart';
@@ -238,6 +237,7 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/auth_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/datadog_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/performance_interceptor.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
@@ -847,6 +847,8 @@ void setupLocator() {
     () => EligibilityBloc(
       chatBotRepository: locator<ChatBotRepository>(),
       mixpanelRepository: locator<MixpanelRepository>(),
+      customerCodeRepository: locator<CustomerCodeRepository>(),
+      config: locator<Config>(),
     ),
   );
 

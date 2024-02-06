@@ -191,7 +191,7 @@ void main() {
             user: fakeClientUser,
           ),
         ),
-      ).called(1);
+      ).called(2);
     });
     testWidgets('ProductsOnOffer test - when Salesorg  changed - Success',
         (tester) async {
@@ -298,8 +298,6 @@ void main() {
         );
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
         );
         final expectedState = [

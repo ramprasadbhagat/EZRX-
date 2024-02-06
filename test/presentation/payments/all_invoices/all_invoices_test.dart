@@ -223,15 +223,11 @@ void main() {
     });
 
     testWidgets('=> Body Test when loading', (tester) async {
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerCodeSoldTo: 'mock-customerCodeSoldTo',
           ),
-        ),
-      );
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
           shipToInfo: ShipToInfo.empty().copyWith(
             shipToCustomerCode: 'mock-shipToCustomerCode',
           ),
@@ -260,11 +256,6 @@ void main() {
     testWidgets('=> Body Test onRefresh', (tester) async {
       when(() => allInvoicesBlocMock.state)
           .thenReturn(AllInvoicesState.initial());
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          shipToInfo: fakeShipToInfo,
-        ),
-      );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           shipToInfo: fakeShipToInfo,

@@ -27,6 +27,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 
 part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/product_offer_body_content.dart';
+
 part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/product_title.dart';
 
 class ProductsOnOffer extends StatelessWidget {
@@ -34,15 +35,27 @@ class ProductsOnOffer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => locator<MaterialListBloc>(),
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
+    return BlocProvider<MaterialListBloc>(
+      create: (context) => locator<MaterialListBloc>()
+        ..add(
+          MaterialListEvent.fetch(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            configs: eligibilityState.salesOrgConfigs,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+            selectedMaterialFilter: MaterialFilter.empty().copyWith(
+              isProductOffer: true,
+            ),
+            user: eligibilityState.user,
+          ),
+        ),
       child: MultiBlocListener(
         listeners: [
           BlocListener<EligibilityBloc, EligibilityState>(
             listenWhen: (previous, current) =>
-                previous.isLoading != current.isLoading &&
-                !current.isLoading &&
-                current.haveShipTo,
+                previous.isLoading != current.isLoading && !current.isLoading,
             listener: (context, state) {
               context.read<MaterialListBloc>().add(
                     MaterialListEvent.fetch(

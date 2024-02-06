@@ -6,10 +6,12 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
+import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -83,6 +85,9 @@ class OrderDocumentTypeMockBloc
 class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
     implements DeepLinkingBloc {}
 
+class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
+    implements IntroBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {
   @override
   String currentPath = '';
@@ -126,8 +131,12 @@ class CreditAndInvoiceDetailsMockBloc
 class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
     implements ChatBotBloc {}
 
+class AupTcBlocMock extends MockBloc<AupTcEvent, AupTcState>
+    implements AupTcBloc {}
+
 void main() {
   late GetIt locator;
+  late IntroBloc introBlocMock;
   late LoginFormBloc loginBlocMock;
   late AuthBloc authBlocMock;
   late ScanMaterialInfoBloc scanMaterialInfoBlocMock;
@@ -152,6 +161,7 @@ void main() {
   late ProductDetailBloc productDetailBloc;
   late ChatBotBloc chatBotBloc;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
+  late AupTcBloc aupTcBloc;
   final appMarketVariant = ValueVariant<AppMarket>(
     {
       // AppMarket('hk'),
@@ -193,6 +203,7 @@ void main() {
     setUp(() {
       WidgetsFlutterBinding.ensureInitialized();
       loginBlocMock = LoginFormBlocMock();
+      introBlocMock = IntroBlocMock();
       autoRouterMock = locator<AppRouter>();
       authBlocMock = AuthBlocMock();
       scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
@@ -209,6 +220,7 @@ void main() {
       productDetailBloc = ProductDetailMockBloc();
       creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
       chatBotBloc = ChatBotMockBloc();
+      aupTcBloc = AupTcBlocMock();
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -228,6 +240,7 @@ void main() {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => scanMaterialInfoBlocMock.state)
           .thenReturn(ScanMaterialInfoState.initial());
+      when(() => introBlocMock.state).thenReturn(IntroState.initial());
       when(() => deepLinkingBlocMock.state)
           .thenReturn(const DeepLinkingState.initial());
       when(() => materialListBloc.state)
@@ -246,6 +259,9 @@ void main() {
       when(() => creditAndInvoiceDetailsBloc.state)
           .thenReturn(CreditAndInvoiceDetailsState.initial());
       when(() => chatBotBloc.state).thenReturn(ChatBotState.initial());
+      when(() => aupTcBloc.state).thenReturn(
+        AupTcState.initial(),
+      );
     });
 
     Widget loginTestPage({bool? useMediaQuery}) => WidgetUtils.getScopedWidget(
@@ -256,6 +272,9 @@ void main() {
             providers: [
               BlocProvider<LoginFormBloc>(
                 create: (context) => loginBlocMock,
+              ),
+              BlocProvider<IntroBloc>(
+                create: (context) => introBlocMock,
               ),
               BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock,
@@ -307,6 +326,9 @@ void main() {
               ),
               BlocProvider<ChatBotBloc>(
                 create: (context) => chatBotBloc,
+              ),
+              BlocProvider<AupTcBloc>(
+                create: (context) => aupTcBloc,
               ),
             ],
             child: const LoginPage(),
@@ -389,6 +411,9 @@ void main() {
               BlocProvider(
                 create: (context) => authBlocMock,
               ),
+              BlocProvider<IntroBloc>(
+                create: (context) => introBlocMock,
+              ),
               BlocProvider<UserBloc>(
                 create: (context) => userBlocMock,
               ),
@@ -445,6 +470,9 @@ void main() {
               ),
               BlocProvider<ChatBotBloc>(
                 create: (context) => chatBotBloc,
+              ),
+              BlocProvider<AupTcBloc>(
+                create: (context) => aupTcBloc,
               ),
             ],
             child: const SplashPage(),
@@ -853,7 +881,7 @@ void main() {
         await tester.pump();
         expect(ezrxAplLogo, findsNothing);
       },
-      variant: mediaQueryVariant, 
+      variant: mediaQueryVariant,
     );
 
     testWidgets(

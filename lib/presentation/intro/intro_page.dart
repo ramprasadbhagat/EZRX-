@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:ezrxmobile/presentation/intro/intro_step.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,7 +74,6 @@ class _IntroPageState extends State<IntroPage> {
 
   void _getStarted(BuildContext context) {
     context.read<IntroBloc>().add(const IntroEvent.setAppFirstLaunch());
-    context.read<IntroBloc>().add(const IntroEvent.initialIndex());
     context.read<SalesOrgBloc>().add(
           SalesOrgEvent.loadSavedOrganisation(
             salesOrganisations: context
@@ -81,6 +82,9 @@ class _IntroPageState extends State<IntroPage> {
                 .user
                 .userSalesOrganisations,
           ),
+        );
+    context.read<EligibilityBloc>().add(
+          const EligibilityEvent.loadStoredCustomerCode(),
         );
   }
 
@@ -94,59 +98,67 @@ class _IntroPageState extends State<IntroPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => Future.value(false),
-      child: BlocBuilder<EligibilityBloc, EligibilityState>(
-        buildWhen: (pre, cur) => pre.isLoading != cur.isLoading,
+      child: BlocConsumer<IntroBloc, IntroState>(
+        buildWhen: (previous, current) => previous.index != current.index,
+        listenWhen: (previous, current) =>
+            previous.isAppFirstLaunch != current.isAppFirstLaunch &&
+            !current.isAppFirstLaunch,
+        listener: (context, state) {
+          if (!state.isAppFirstLaunch) {
+            context.router
+                .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
+          }
+        },
         builder: (context, state) {
-          final list = getOnBoardingObject(state);
+          return BlocBuilder<EligibilityBloc, EligibilityState>(
+            buildWhen: (pre, cur) => pre != cur,
+            builder: (context, eligibilityState) {
+              final list = getOnBoardingObject(eligibilityState);
 
-          return PageView.builder(
-            allowImplicitScrolling: true,
-            onPageChanged: (index) => context
-                .read<IntroBloc>()
-                .add(IntroEvent.setIndex(index: index)),
-            scrollDirection: Axis.horizontal,
-            controller: _pageController,
-            itemCount: list.length,
-            itemBuilder: (context, i) {
-              return Scaffold(
-                body: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/intro_background.png',
+              return PageView.builder(
+                allowImplicitScrolling: true,
+                onPageChanged: (index) => context
+                    .read<IntroBloc>()
+                    .add(IntroEvent.setIndex(index: index)),
+                scrollDirection: Axis.horizontal,
+                controller: _pageController,
+                itemCount: list.length,
+                itemBuilder: (context, i) {
+                  return Scaffold(
+                    body: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            'assets/images/intro_background.png',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: BlocBuilder<IntroBloc, IntroState>(
-                          buildWhen: (previous, current) =>
-                              previous.index != current.index,
-                          builder: (context, state) {
-                            return _CustomIndicator(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: _CustomIndicator(
                               index: state.index,
                               lastIndex: list.length - 1,
                               length: list.length,
-                            );
-                          },
-                        ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 9,
+                            child: IntroStep(
+                              introObject: list[i],
+                              isLastPage: i == (list.length - 1),
+                              getStarted: () => _getStarted(context),
+                              nextPage: _nextPage,
+                            ),
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        flex: 9,
-                        child: IntroStep(
-                          introObject: list[i],
-                          isLastPage: i == (list.length - 1),
-                          getStarted: () => _getStarted(context),
-                          nextPage: _nextPage,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               );
             },
           );

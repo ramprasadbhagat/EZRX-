@@ -55,6 +55,7 @@ import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:universal_io/io.dart';
@@ -161,14 +162,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               authenticated: (authState) {
                 context.read<UserBloc>().add(const UserEvent.fetch());
 
-                context.read<IntroBloc>().add(
-                      const IntroEvent.checkAppFirstLaunch(),
-                    );
-
                 context.router.replaceAll(
-                  [
-                    const SplashPageRoute(),
-                    const HomeNavigationTabbarRoute(),
+                  const [
+                    SplashPageRoute(),
+                    HomeNavigationTabbarRoute(),
                   ],
                 );
               },
@@ -250,7 +247,54 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               context.setLocale(state.user.preferredLanguage.locale);
             }
 
+            context.read<IntroBloc>().add(
+                  const IntroEvent.checkAppFirstLaunch(),
+                );
+
             _initializePaymentConfiguration(state);
+          },
+        ),
+        BlocListener<EligibilityBloc, EligibilityState>(
+          listenWhen: (previous, current) =>
+              previous.showMarketPlaceTnc != current.showMarketPlaceTnc,
+          listener: (context, state) {
+            final isLoginOnBehalf =
+                context.read<UserBloc>().state.isLoginOnBehalf;
+            if (state.showMarketPlaceTnc && !isLoginOnBehalf) {
+              context.router.push(
+                AupTCPageRoute(
+                  user: state.user,
+                  isMarketPlace: true,
+                ),
+              );
+            }
+          },
+        ),
+        BlocListener<UserBloc, UserState>(
+          listenWhen: (previous, current) =>
+              previous.showTermsAndConditionDialog !=
+                  current.showTermsAndConditionDialog &&
+              current.showTermsAndConditionDialog,
+          listener: (context, state) {
+            context.router.push(
+              AupTCPageRoute(
+                key: WidgetKeys.aupTcScreen,
+                user: state.user,
+                isMarketPlace: false,
+              ),
+            );
+          },
+        ),
+        BlocListener<IntroBloc, IntroState>(
+          listenWhen: (previous, current) =>
+              previous.isAppFirstLaunch != current.isAppFirstLaunch &&
+              current.isAppFirstLaunch,
+          listener: (context, state) {
+            final showTermsAndCondition =
+                context.read<UserBloc>().state.showTermsAndConditionDialog;
+            if (showTermsAndCondition) return;
+
+            context.router.push(const IntroPageRoute());
           },
         ),
         BlocListener<CartBloc, CartState>(
@@ -293,7 +337,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               context.read<PaymentTermBloc>().add(
                     PaymentTermEvent.fetch(
                       customeCodeInfo: context
-                          .read<CustomerCodeBloc>()
+                          .read<EligibilityBloc>()
                           .state
                           .customerCodeInfo,
                       paymentCustomerInformation:
@@ -475,14 +519,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
               current != EligibilityState.initial() &&
-              (previous.salesOrgConfigs != current.salesOrgConfigs ||
-                  previous.customerCodeInfo != current.customerCodeInfo ||
+              (previous.customerCodeInfo != current.customerCodeInfo ||
                   previous.shipToInfo != current.shipToInfo),
           listener: (context, state) {
             final orderDocumentTypeState =
                 context.read<OrderDocumentTypeBloc>().state;
             if (state.haveShipTo) {
-              _initializeProduct(state);
+              _initializeHomeTabDependencies(context);
+              _initializeProduct();
               _initializeCart(state);
               _initializeAccountSummary(state);
 
@@ -685,10 +729,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     OutstandingInvoicesEvent.initialized(
                       salesOrganisation:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
+                      customerCodeInfo: state.customerCodeInfo,
                     ),
                   );
 
@@ -725,10 +766,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
                 context.read<ViewByOrderDetailsBloc>().add(
                       ViewByOrderDetailsEvent.initialized(
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
+                        customerCodeInfo: state.customerCodeInfo,
                         user: context.read<UserBloc>().state.user,
                         salesOrganisation: context
                             .read<SalesOrgBloc>()
@@ -1019,10 +1057,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<SalesOrgBloc, SalesOrgState>(
           listenWhen: (previous, current) =>
-              previous.salesOrganisation != current.salesOrganisation ||
-              previous.configs != current.configs ||
-              previous.salesOrgFailureOrSuccessOption !=
-                  current.salesOrgFailureOrSuccessOption ||
               previous.isLoading != current.isLoading,
           listener: (context, state) {
             state.salesOrgFailureOrSuccessOption.fold(
@@ -1041,42 +1075,53 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               }
               if (state.haveSelectedSalesOrganisation &&
                   state.configs != SalesOrganisationConfigs.empty()) {
-                context.read<CustomerCodeBloc>().add(
-                      CustomerCodeEvent.initialized(
-                        userInfo: context.read<UserBloc>().state.user,
-                        selectedSalesOrg: state.salesOrganisation,
-                        hideCustomer: state.configs.hideCustomer,
-                      ),
-                    );
+                final eligibilityState = context.read<EligibilityBloc>().state;
+                context.read<EligibilityBloc>()
+                  ..add(
+                    EligibilityEvent.update(
+                      salesOrganisation: state.salesOrganisation,
+                      salesOrgConfigs: state.configs,
+                      user: context.read<UserBloc>().state.user,
+                      selectedOrderType: eligibilityState.selectedOrderType,
+                    ),
+                  )
+                  ..add(
+                    const EligibilityEvent.loadStoredCustomerCode(),
+                  );
+                context.read<CustomerCodeBloc>()
+                  ..add(
+                    CustomerCodeEvent.initialized(
+                      userInfo: context.read<UserBloc>().state.user,
+                      selectedSalesOrg: state.salesOrganisation,
+                      hideCustomer: state.configs.hideCustomer,
+                    ),
+                  )
+                  ..add(
+                    const CustomerCodeEvent.fetch(),
+                  );
 
-                context.read<CustomerCodeBloc>().add(
-                      const CustomerCodeEvent.loadStoredCustomerCode(),
+                context.read<AnnouncementInfoBloc>().add(
+                      const AnnouncementInfoEvent.fetch(),
                     );
                 // context.read<HomePageBloc>().add(const HomePageEvent.refresh());
               }
             }
           },
         ),
-        BlocListener<CustomerCodeBloc, CustomerCodeState>(
+        BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
-              previous.apiFailureOrSuccessOption !=
-                  current.apiFailureOrSuccessOption ||
-              previous.shipToInfo != current.shipToInfo ||
-              (previous.isFetching != current.isFetching &&
-                  !current.isFetching &&
-                  previous.customerCodeInfo.customerCodeSoldTo !=
-                      current.customerCodeInfo.customerCodeSoldTo),
+              previous.isLoadingCustomerCode != current.isLoadingCustomerCode &&
+              !current.isLoadingCustomerCode,
           listener: (context, state) {
-            state.apiFailureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {},
-              ),
-            );
-            _addDependentEvents(context, state);
+            final appFirstLaunch =
+                context.read<IntroBloc>().state.isAppFirstLaunch ||
+                    context.read<UserBloc>().state.showTermsAndConditionDialog;
+
+            final mandatoryShipTo = !state.preSelectShipTo && !appFirstLaunch;
+
+            if (mandatoryShipTo) {
+              context.router.push(const CustomerSearchPageRoute());
+            }
           },
         ),
         BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
@@ -1088,43 +1133,34 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               context.read<SalesOrgBloc>().state.salesOrganisation !=
                   SalesOrganisation.empty(),
           listener: (context, state) {
+            final eligibilityBloc = context.read<EligibilityBloc>();
             context.read<MaterialFilterBloc>().add(
                   MaterialFilterEvent.fetch(
                     user: context.read<UserBloc>().state.user,
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<EligibilityBloc>().state.shipToInfo,
-                    hasAccessToCovidMaterial: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .canOrderCovidMaterial,
+                    customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
+                    shipToInfo: eligibilityBloc.state.shipToInfo,
+                    hasAccessToCovidMaterial:
+                        eligibilityBloc.state.canOrderCovidMaterial,
                   ),
                 );
-            context.read<EligibilityBloc>().add(
-                  EligibilityEvent.update(
-                    user: context.read<UserBloc>().state.user,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<EligibilityBloc>().state.shipToInfo,
-                    selectedOrderType: state.selectedOrderType,
-                  ),
-                );
+            eligibilityBloc.add(
+              EligibilityEvent.update(
+                user: context.read<UserBloc>().state.user,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                selectedOrderType: state.selectedOrderType,
+              ),
+            );
             context.read<MaterialListBloc>().add(
                   MaterialListEvent.fetch(
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
                     configs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<EligibilityBloc>().state.shipToInfo,
+                    customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
+                    shipToInfo: eligibilityBloc.state.shipToInfo,
                     selectedMaterialFilter:
                         context.read<MaterialFilterBloc>().state.materialFilter,
                     user: context.read<UserBloc>().state.user,
@@ -1196,56 +1232,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         context,
         state.materialList,
       );
-    }
-  }
-
-  void _addDependentEvents(BuildContext context, CustomerCodeState state) {
-    final salesOrgState = context.read<SalesOrgBloc>().state;
-    final orderDocumentTypeState = context.read<OrderDocumentTypeBloc>().state;
-    final user = context.read<UserBloc>().state.user;
-
-    context.read<MaterialFilterBloc>().add(
-          const MaterialFilterEvent.resetFilter(),
-        );
-
-    context.read<MaterialListBloc>().add(
-          const MaterialListEvent.updateSearchKey(
-            searchKey: '',
-          ),
-        );
-
-    context
-        .read<ViewByItemFilterBloc>()
-        .add(const ViewByItemFilterEvent.initialize());
-
-    context.read<AccountSummaryBloc>().add(
-          const AccountSummaryEvent.initialize(),
-        );
-
-    context.read<DeepLinkingBloc>().add(
-          const DeepLinkingEvent.initialize(),
-        );
-
-    context.read<NotificationBloc>().add(
-          const NotificationEvent.fetch(),
-        );
-
-    /**
-      Need to initialize the eligibility bloc
-      so that when EligibilityBloc update event is call bloc listener will
-      execute all initialize bloc events respective modules
-     */
-    if (state.haveShipTo) {
-      context.read<EligibilityBloc>().add(
-            EligibilityEvent.update(
-              customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: state.shipToInfo,
-              salesOrganisation: salesOrgState.salesOrganisation,
-              salesOrgConfigs: salesOrgState.configs,
-              user: user,
-              selectedOrderType: orderDocumentTypeState.selectedOrderType,
-            ),
-          );
     }
   }
 
@@ -1361,11 +1347,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     }
   }
 
-  /// Use for all product related initialized bloc event here
-  void _initializeProduct(EligibilityState eligibilityState) {
+  void _initializeProduct() {
+    final eligibilityState = context.read<EligibilityBloc>().state;
     context.read<MaterialFilterBloc>().add(
           MaterialFilterEvent.fetch(
-            user: eligibilityState.user,
+            user: context.read<UserBloc>().state.user,
             salesOrganisation: eligibilityState.salesOrganisation,
             customerCodeInfo: eligibilityState.customerCodeInfo,
             shipToInfo: eligibilityState.shipToInfo,
@@ -1448,6 +1434,30 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 context.read<SalesOrgBloc>().state.salesOrganisation,
             hideCustomer: context.read<SalesOrgBloc>().state.hideCustomer,
           ),
+        );
+  }
+
+  void _initializeHomeTabDependencies(BuildContext context) {
+    context.read<MaterialFilterBloc>().add(
+          const MaterialFilterEvent.resetFilter(),
+        );
+
+    context.read<MaterialListBloc>().add(
+          const MaterialListEvent.updateSearchKey(
+            searchKey: '',
+          ),
+        );
+
+    context
+        .read<ViewByItemFilterBloc>()
+        .add(const ViewByItemFilterEvent.initialize());
+
+    context.read<AccountSummaryBloc>().add(
+          const AccountSummaryEvent.initialize(),
+        );
+
+    context.read<NotificationBloc>().add(
+          const NotificationEvent.fetch(),
         );
   }
 }

@@ -7,8 +7,15 @@ class EligibilityEvent with _$EligibilityEvent {
     required User user,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrgConfigs,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
     required OrderDocumentType selectedOrderType,
   }) = _Update;
+
+   const factory EligibilityEvent.selectedCustomerCode({
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+  }) = _SelectedCustomerCode;
+
+   const factory EligibilityEvent.loadStoredCustomerCode() = _LoadStoredCustomerCode;
+
+   const factory EligibilityEvent.fetchAndPreSelectCustomerCode() = _FetchAndPreSelectCustomerCode;
 }

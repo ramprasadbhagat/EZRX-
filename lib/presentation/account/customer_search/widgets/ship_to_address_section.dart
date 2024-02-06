@@ -40,8 +40,8 @@ class _ShipToAddressSection extends StatelessWidget {
 
   void _onShipToCodeChange(BuildContext context) {
     final cartBloc = context.read<CartBloc>();
-    final customerBloc = context.read<CustomerCodeBloc>();
-    if (shipToInfo != customerBloc.state.shipToInfo &&
+    final eligibilityBloc = context.read<EligibilityBloc>();
+    if (shipToInfo != eligibilityBloc.state.shipToInfo &&
         cartBloc.state.cartProducts.isNotEmpty) {
       showModalBottomSheet(
         isScrollControlled: true,
@@ -61,8 +61,8 @@ class _ShipToAddressSection extends StatelessWidget {
       );
     } else {
       context.router.popUntilRouteWithName(HomeNavigationTabbarRoute.name);
-      customerBloc.add(
-        CustomerCodeEvent.selected(
+      eligibilityBloc.add(
+        EligibilityEvent.selectedCustomerCode(
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
         ),

@@ -96,10 +96,10 @@ class _ConfirmChangeDeliveryAddressSection extends StatelessWidget {
                     MixpanelProps.shipToAddress: shipToInfo.shipToCustomerCode,
                   },
                 );
-                context.read<CustomerCodeBloc>().add(
-                      CustomerCodeEvent.selected(
-                        shipToInfo: shipToInfo,
+                context.read<EligibilityBloc>().add(
+                      EligibilityEvent.selectedCustomerCode(
                         customerCodeInfo: customerCodeInfo,
+                        shipToInfo: shipToInfo,
                       ),
                     );
                 context.read<CartBloc>().add(

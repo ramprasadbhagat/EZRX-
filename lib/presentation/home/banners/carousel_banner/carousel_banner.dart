@@ -33,7 +33,10 @@ class _CarouselBannerState extends State<CarouselBanner> {
       create: (context) => locator<BannerBloc>(),
       child: BlocListener<EligibilityBloc, EligibilityState>(
         listenWhen: (previous, current) =>
-            previous.isLoading != current.isLoading,
+            previous.shipToInfo != current.shipToInfo && current.haveShipTo ||
+            (previous.isLoadingCustomerCode != current.isLoadingCustomerCode &&
+                    !current.isLoadingCustomerCode) &&
+                current.salesOrganisation.salesOrg.isValid(),
         listener: (context, state) {
           // ID uses targeted banner carousels for users so we need to include targetCustomerType and branchCode in the eZReach banner call.
           // This feature is not applicable for other markets.
@@ -228,6 +231,7 @@ class _CarouselBannerState extends State<CarouselBanner> {
 class _CircleButton extends StatelessWidget {
   final VoidCallback onTap;
   final IconData iconData;
+
   const _CircleButton({
     Key? key,
     required this.onTap,

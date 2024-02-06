@@ -162,18 +162,18 @@ void main() {
       'Action Approver Empty Page',
       (tester) async {
         final expectedStates = [
-          CustomerCodeState.initial().copyWith(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: false,
             ),
           ),
-          CustomerCodeState.initial().copyWith(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
           ),
         ];
-        whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
+        whenListen(eligibilityBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
         expect(find.byKey(const Key('actionApproverAppBar')), findsOneWidget);
@@ -196,8 +196,8 @@ void main() {
     testWidgets(
       'Test Action Approver Page first fetch',
       (tester) async {
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
@@ -228,14 +228,15 @@ void main() {
               .copyWith(approverReturnRequestList: approverReturnRequestList)
         ];
         whenListen(returnApproverBlocMock, Stream.fromIterable(expectedStates));
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             customerCodeInfo: CustomerCodeInfo.empty()
                 .copyWith(customerCodeSoldTo: 'fake-sold-to-code'),
             shipToInfo: ShipToInfo.empty()
                 .copyWith(shipToCustomerCode: 'fake-sold-to-code'),
           ),
         );
+
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
         expect(find.byKey(const Key('actionApproverAppBar')), findsOneWidget);
@@ -279,27 +280,27 @@ void main() {
     testWidgets(
       'Test Action Approver Filter Drawer',
       (tester) async {
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
           ),
         );
         final expectedShipToCodeState = [
-          CustomerCodeState.initial().copyWith(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: false,
             ),
           ),
-          CustomerCodeState.initial().copyWith(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
           ),
         ];
         whenListen(
-          customerCodeBlocMock,
+          eligibilityBlocMock,
           Stream.fromIterable(expectedShipToCodeState),
         );
         final expectedStates = [
@@ -330,20 +331,20 @@ void main() {
     testWidgets(
       'Test Action Approver apply filter',
       (tester) async {
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
           ),
         );
         final expectedShipToCodeState = [
-          CustomerCodeState.initial().copyWith(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: false,
             ),
           ),
-          CustomerCodeState.initial().copyWith(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
@@ -351,7 +352,7 @@ void main() {
         ];
 
         whenListen(
-          customerCodeBlocMock,
+          eligibilityBlocMock,
           Stream.fromIterable(expectedShipToCodeState),
         );
         await tester.pumpWidget(getWidget());
@@ -377,13 +378,22 @@ void main() {
     testWidgets(
       'Test Action Approver Page refresh on filter change',
       (tester) async {
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'fake-sold-to-code',
+              shipToInfos: [
+                ShipToInfo.empty().copyWith(
+                  shipToCustomerCode: 'fake-sold-to-code',
+                ),
+              ],
+            ),
             shipToInfo: ShipToInfo.empty().copyWith(
-              shipToCustomerCode: 'Fake-shipTo-customer-code',
+              shipToCustomerCode: 'fake-sold-to-code',
             ),
           ),
         );
+
         final expectedreturnApproverFilterState = [
           ReturnApproverFilterState.initial().copyWith(
             approverReturnFilter: returnApproverFilter.copyWith(
@@ -400,15 +410,7 @@ void main() {
           ReturnApproverState.initial()
               .copyWith(approverReturnRequestList: approverReturnRequestList),
         );
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-            customerCodeInfo: CustomerCodeInfo.empty()
-                .copyWith(customerCodeSoldTo: 'fake-sold-to-code'),
-            shipToInfo: ShipToInfo.empty().copyWith(
-              shipToCustomerCode: 'fake-sold-to-code',
-            ),
-          ),
-        );
+
         await tester.pumpWidget(getWidget());
         await tester.pump();
         expect(find.byKey(const Key('actionApproverAppBar')), findsOneWidget);
@@ -431,8 +433,8 @@ void main() {
     testWidgets(
       'Test Action Approver Page sort by bottom sheet close',
       (tester) async {
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),
@@ -508,13 +510,6 @@ void main() {
     testWidgets(
       'Test Action Approver Page refresh',
       (tester) async {
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-            shipToInfo: ShipToInfo.empty().copyWith(
-              defaultShipToAddress: true,
-            ),
-          ),
-        );
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
@@ -554,8 +549,8 @@ void main() {
     testWidgets(
       'Test Action Approver Page loadMore',
       (tester) async {
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
               defaultShipToAddress: true,
             ),

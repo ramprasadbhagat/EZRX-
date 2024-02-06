@@ -96,14 +96,14 @@ class HomeTab extends StatelessWidget {
                       return const SizedBox.shrink();
                     },
                   ),
-                  if (state.user.userCanAccessProducts) ...[
+                  if (state.haveShipTo && state.user.userCanAccessProducts) ...[
                     const ProductsOnOffer(),
                     if (!state.salesOrgConfigs.disableBundles)
                       const BundleSection(),
                   ],
-                  if (state.user.userCanAccessOrderHistory)
+                  if (state.haveShipTo && state.user.userCanAccessOrderHistory)
                     const RecentOrdersSection(),
-                  if (state.user.userCanAccessProducts) const BrowseProduct(),
+                  if (state.haveShipTo && state.user.userCanAccessProducts) const BrowseProduct(),
                   const TopAdvertBoxBanner(),
                   const AnnouncementSection(),
                 ],

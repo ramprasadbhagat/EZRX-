@@ -693,6 +693,7 @@ void main() {
             salesOrgConfigs: fakePHSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfoForCovid,
             user: fakeClientAdmin,
+            shipToInfo: fakeShipToInfo,
           ),
         );
         when(() => salesOrgBlocMock.state).thenReturn(
@@ -701,12 +702,7 @@ void main() {
             configs: fakePHSalesOrgConfigs,
           ),
         );
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-            customerCodeInfo: fakeCustomerCodeInfoForCovid,
-            shipToInfo: fakeShipToInfo,
-          ),
-        );
+
         when(() => userBlocMock.state).thenReturn(
           UserState.initial().copyWith(
             user: fakeClientAdmin,

@@ -173,9 +173,8 @@ void main() {
       expect(find.byType(ViewByItemsPage), findsOneWidget);
     });
     testWidgets('customer Code Selector', (tester) async {
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          isFetching: false,
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
         ),
@@ -194,10 +193,9 @@ void main() {
       );
     });
     testWidgets('customer Code Selector loading', (tester) async {
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          shipToInfo: fakeShipToInfo,
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          isLoadingCustomerCode: true,
         ),
       );
       await tester.pumpWidget(testWidget(const OrdersTab()));
@@ -233,9 +231,9 @@ void main() {
     testWidgets('displayed when tap filter icon', (tester) async {
       final fakeFilter = ViewByOrdersFilter.empty()
           .copyWith(orderStatusList: [StatusType('test')]);
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
-          isFetching: false,
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
         ),
       );

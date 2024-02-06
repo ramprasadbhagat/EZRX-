@@ -23,10 +23,13 @@ mixin _$EligibilityEvent {
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
             OrderDocumentType selectedOrderType)
         update,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selectedCustomerCode,
+    required TResult Function() loadStoredCustomerCode,
+    required TResult Function() fetchAndPreSelectCustomerCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,10 +39,12 @@ mixin _$EligibilityEvent {
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult? Function()? loadStoredCustomerCode,
+    TResult? Function()? fetchAndPreSelectCustomerCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,10 +54,12 @@ mixin _$EligibilityEvent {
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult Function()? loadStoredCustomerCode,
+    TResult Function()? fetchAndPreSelectCustomerCode,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,18 +67,31 @@ mixin _$EligibilityEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
+    required TResult Function(_FetchAndPreSelectCustomerCode value)
+        fetchAndPreSelectCustomerCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult? Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,10 +158,13 @@ class _$_Initialized implements _Initialized {
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
             OrderDocumentType selectedOrderType)
         update,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selectedCustomerCode,
+    required TResult Function() loadStoredCustomerCode,
+    required TResult Function() fetchAndPreSelectCustomerCode,
   }) {
     return initialized();
   }
@@ -154,10 +177,12 @@ class _$_Initialized implements _Initialized {
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult? Function()? loadStoredCustomerCode,
+    TResult? Function()? fetchAndPreSelectCustomerCode,
   }) {
     return initialized?.call();
   }
@@ -170,10 +195,12 @@ class _$_Initialized implements _Initialized {
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult Function()? loadStoredCustomerCode,
+    TResult Function()? fetchAndPreSelectCustomerCode,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -187,6 +214,11 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
+    required TResult Function(_FetchAndPreSelectCustomerCode value)
+        fetchAndPreSelectCustomerCode,
   }) {
     return initialized(this);
   }
@@ -196,6 +228,10 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult? Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
   }) {
     return initialized?.call(this);
   }
@@ -205,6 +241,10 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -227,15 +267,11 @@ abstract class _$$_UpdateCopyWith<$Res> {
       {User user,
       SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs salesOrgConfigs,
-      CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
       OrderDocumentType selectedOrderType});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
   $OrderDocumentTypeCopyWith<$Res> get selectedOrderType;
 }
 
@@ -252,8 +288,6 @@ class __$$_UpdateCopyWithImpl<$Res>
     Object? user = null,
     Object? salesOrganisation = null,
     Object? salesOrgConfigs = null,
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
     Object? selectedOrderType = null,
   }) {
     return _then(_$_Update(
@@ -269,14 +303,6 @@ class __$$_UpdateCopyWithImpl<$Res>
           ? _value.salesOrgConfigs
           : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
       selectedOrderType: null == selectedOrderType
           ? _value.selectedOrderType
           : selectedOrderType // ignore: cast_nullable_to_non_nullable
@@ -311,22 +337,6 @@ class __$$_UpdateCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $OrderDocumentTypeCopyWith<$Res> get selectedOrderType {
     return $OrderDocumentTypeCopyWith<$Res>(_value.selectedOrderType, (value) {
       return _then(_value.copyWith(selectedOrderType: value));
@@ -341,8 +351,6 @@ class _$_Update implements _Update {
       {required this.user,
       required this.salesOrganisation,
       required this.salesOrgConfigs,
-      required this.customerCodeInfo,
-      required this.shipToInfo,
       required this.selectedOrderType});
 
   @override
@@ -352,15 +360,11 @@ class _$_Update implements _Update {
   @override
   final SalesOrganisationConfigs salesOrgConfigs;
   @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
   final OrderDocumentType selectedOrderType;
 
   @override
   String toString() {
-    return 'EligibilityEvent.update(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedOrderType: $selectedOrderType)';
+    return 'EligibilityEvent.update(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, selectedOrderType: $selectedOrderType)';
   }
 
   @override
@@ -373,17 +377,13 @@ class _$_Update implements _Update {
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.salesOrgConfigs, salesOrgConfigs) ||
                 other.salesOrgConfigs == salesOrgConfigs) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
             (identical(other.selectedOrderType, selectedOrderType) ||
                 other.selectedOrderType == selectedOrderType));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, salesOrganisation,
-      salesOrgConfigs, customerCodeInfo, shipToInfo, selectedOrderType);
+  int get hashCode => Object.hash(
+      runtimeType, user, salesOrganisation, salesOrgConfigs, selectedOrderType);
 
   @JsonKey(ignore: true)
   @override
@@ -399,13 +399,15 @@ class _$_Update implements _Update {
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
             OrderDocumentType selectedOrderType)
         update,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selectedCustomerCode,
+    required TResult Function() loadStoredCustomerCode,
+    required TResult Function() fetchAndPreSelectCustomerCode,
   }) {
-    return update(user, salesOrganisation, salesOrgConfigs, customerCodeInfo,
-        shipToInfo, selectedOrderType);
+    return update(user, salesOrganisation, salesOrgConfigs, selectedOrderType);
   }
 
   @override
@@ -416,13 +418,15 @@ class _$_Update implements _Update {
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult? Function()? loadStoredCustomerCode,
+    TResult? Function()? fetchAndPreSelectCustomerCode,
   }) {
-    return update?.call(user, salesOrganisation, salesOrgConfigs,
-        customerCodeInfo, shipToInfo, selectedOrderType);
+    return update?.call(
+        user, salesOrganisation, salesOrgConfigs, selectedOrderType);
   }
 
   @override
@@ -433,15 +437,17 @@ class _$_Update implements _Update {
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult Function()? loadStoredCustomerCode,
+    TResult Function()? fetchAndPreSelectCustomerCode,
     required TResult orElse(),
   }) {
     if (update != null) {
-      return update(user, salesOrganisation, salesOrgConfigs, customerCodeInfo,
-          shipToInfo, selectedOrderType);
+      return update(
+          user, salesOrganisation, salesOrgConfigs, selectedOrderType);
     }
     return orElse();
   }
@@ -451,6 +457,11 @@ class _$_Update implements _Update {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
+    required TResult Function(_FetchAndPreSelectCustomerCode value)
+        fetchAndPreSelectCustomerCode,
   }) {
     return update(this);
   }
@@ -460,6 +471,10 @@ class _$_Update implements _Update {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult? Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
   }) {
     return update?.call(this);
   }
@@ -469,6 +484,10 @@ class _$_Update implements _Update {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -483,19 +502,516 @@ abstract class _Update implements EligibilityEvent {
       {required final User user,
       required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs salesOrgConfigs,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
       required final OrderDocumentType selectedOrderType}) = _$_Update;
 
   User get user;
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get salesOrgConfigs;
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
   OrderDocumentType get selectedOrderType;
   @JsonKey(ignore: true)
   _$$_UpdateCopyWith<_$_Update> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SelectedCustomerCodeCopyWith<$Res> {
+  factory _$$_SelectedCustomerCodeCopyWith(_$_SelectedCustomerCode value,
+          $Res Function(_$_SelectedCustomerCode) then) =
+      __$$_SelectedCustomerCodeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+}
+
+/// @nodoc
+class __$$_SelectedCustomerCodeCopyWithImpl<$Res>
+    extends _$EligibilityEventCopyWithImpl<$Res, _$_SelectedCustomerCode>
+    implements _$$_SelectedCustomerCodeCopyWith<$Res> {
+  __$$_SelectedCustomerCodeCopyWithImpl(_$_SelectedCustomerCode _value,
+      $Res Function(_$_SelectedCustomerCode) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+  }) {
+    return _then(_$_SelectedCustomerCode(
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_SelectedCustomerCode implements _SelectedCustomerCode {
+  const _$_SelectedCustomerCode(
+      {required this.customerCodeInfo, required this.shipToInfo});
+
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+
+  @override
+  String toString() {
+    return 'EligibilityEvent.selectedCustomerCode(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SelectedCustomerCode &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, customerCodeInfo, shipToInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SelectedCustomerCodeCopyWith<_$_SelectedCustomerCode> get copyWith =>
+      __$$_SelectedCustomerCodeCopyWithImpl<_$_SelectedCustomerCode>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)
+        update,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selectedCustomerCode,
+    required TResult Function() loadStoredCustomerCode,
+    required TResult Function() fetchAndPreSelectCustomerCode,
+  }) {
+    return selectedCustomerCode(customerCodeInfo, shipToInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult? Function()? loadStoredCustomerCode,
+    TResult? Function()? fetchAndPreSelectCustomerCode,
+  }) {
+    return selectedCustomerCode?.call(customerCodeInfo, shipToInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult Function()? loadStoredCustomerCode,
+    TResult Function()? fetchAndPreSelectCustomerCode,
+    required TResult orElse(),
+  }) {
+    if (selectedCustomerCode != null) {
+      return selectedCustomerCode(customerCodeInfo, shipToInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Update value) update,
+    required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
+    required TResult Function(_FetchAndPreSelectCustomerCode value)
+        fetchAndPreSelectCustomerCode,
+  }) {
+    return selectedCustomerCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult? Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+  }) {
+    return selectedCustomerCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
+    TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+    required TResult orElse(),
+  }) {
+    if (selectedCustomerCode != null) {
+      return selectedCustomerCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SelectedCustomerCode implements EligibilityEvent {
+  const factory _SelectedCustomerCode(
+      {required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo}) = _$_SelectedCustomerCode;
+
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  @JsonKey(ignore: true)
+  _$$_SelectedCustomerCodeCopyWith<_$_SelectedCustomerCode> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LoadStoredCustomerCodeCopyWith<$Res> {
+  factory _$$_LoadStoredCustomerCodeCopyWith(_$_LoadStoredCustomerCode value,
+          $Res Function(_$_LoadStoredCustomerCode) then) =
+      __$$_LoadStoredCustomerCodeCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LoadStoredCustomerCodeCopyWithImpl<$Res>
+    extends _$EligibilityEventCopyWithImpl<$Res, _$_LoadStoredCustomerCode>
+    implements _$$_LoadStoredCustomerCodeCopyWith<$Res> {
+  __$$_LoadStoredCustomerCodeCopyWithImpl(_$_LoadStoredCustomerCode _value,
+      $Res Function(_$_LoadStoredCustomerCode) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
+  const _$_LoadStoredCustomerCode();
+
+  @override
+  String toString() {
+    return 'EligibilityEvent.loadStoredCustomerCode()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadStoredCustomerCode);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)
+        update,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selectedCustomerCode,
+    required TResult Function() loadStoredCustomerCode,
+    required TResult Function() fetchAndPreSelectCustomerCode,
+  }) {
+    return loadStoredCustomerCode();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult? Function()? loadStoredCustomerCode,
+    TResult? Function()? fetchAndPreSelectCustomerCode,
+  }) {
+    return loadStoredCustomerCode?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult Function()? loadStoredCustomerCode,
+    TResult Function()? fetchAndPreSelectCustomerCode,
+    required TResult orElse(),
+  }) {
+    if (loadStoredCustomerCode != null) {
+      return loadStoredCustomerCode();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Update value) update,
+    required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
+    required TResult Function(_FetchAndPreSelectCustomerCode value)
+        fetchAndPreSelectCustomerCode,
+  }) {
+    return loadStoredCustomerCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult? Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+  }) {
+    return loadStoredCustomerCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
+    TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+    required TResult orElse(),
+  }) {
+    if (loadStoredCustomerCode != null) {
+      return loadStoredCustomerCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadStoredCustomerCode implements EligibilityEvent {
+  const factory _LoadStoredCustomerCode() = _$_LoadStoredCustomerCode;
+}
+
+/// @nodoc
+abstract class _$$_FetchAndPreSelectCustomerCodeCopyWith<$Res> {
+  factory _$$_FetchAndPreSelectCustomerCodeCopyWith(
+          _$_FetchAndPreSelectCustomerCode value,
+          $Res Function(_$_FetchAndPreSelectCustomerCode) then) =
+      __$$_FetchAndPreSelectCustomerCodeCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchAndPreSelectCustomerCodeCopyWithImpl<$Res>
+    extends _$EligibilityEventCopyWithImpl<$Res,
+        _$_FetchAndPreSelectCustomerCode>
+    implements _$$_FetchAndPreSelectCustomerCodeCopyWith<$Res> {
+  __$$_FetchAndPreSelectCustomerCodeCopyWithImpl(
+      _$_FetchAndPreSelectCustomerCode _value,
+      $Res Function(_$_FetchAndPreSelectCustomerCode) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchAndPreSelectCustomerCode
+    implements _FetchAndPreSelectCustomerCode {
+  const _$_FetchAndPreSelectCustomerCode();
+
+  @override
+  String toString() {
+    return 'EligibilityEvent.fetchAndPreSelectCustomerCode()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchAndPreSelectCustomerCode);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)
+        update,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selectedCustomerCode,
+    required TResult Function() loadStoredCustomerCode,
+    required TResult Function() fetchAndPreSelectCustomerCode,
+  }) {
+    return fetchAndPreSelectCustomerCode();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult? Function()? loadStoredCustomerCode,
+    TResult? Function()? fetchAndPreSelectCustomerCode,
+  }) {
+    return fetchAndPreSelectCustomerCode?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult Function()? loadStoredCustomerCode,
+    TResult Function()? fetchAndPreSelectCustomerCode,
+    required TResult orElse(),
+  }) {
+    if (fetchAndPreSelectCustomerCode != null) {
+      return fetchAndPreSelectCustomerCode();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Update value) update,
+    required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
+    required TResult Function(_FetchAndPreSelectCustomerCode value)
+        fetchAndPreSelectCustomerCode,
+  }) {
+    return fetchAndPreSelectCustomerCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult? Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+  }) {
+    return fetchAndPreSelectCustomerCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
+    TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+    required TResult orElse(),
+  }) {
+    if (fetchAndPreSelectCustomerCode != null) {
+      return fetchAndPreSelectCustomerCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchAndPreSelectCustomerCode implements EligibilityEvent {
+  const factory _FetchAndPreSelectCustomerCode() =
+      _$_FetchAndPreSelectCustomerCode;
 }
 
 /// @nodoc
@@ -510,6 +1026,8 @@ mixin _$EligibilityState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isLoadingCustomerCode => throw _privateConstructorUsedError;
+  bool get preSelectShipTo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EligibilityStateCopyWith<EligibilityState> get copyWith =>
@@ -530,7 +1048,9 @@ abstract class $EligibilityStateCopyWith<$Res> {
       ShipToInfo shipToInfo,
       OrderDocumentType selectedOrderType,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      bool isLoading});
+      bool isLoading,
+      bool isLoadingCustomerCode,
+      bool preSelectShipTo});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -561,6 +1081,8 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
     Object? selectedOrderType = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
+    Object? isLoadingCustomerCode = null,
+    Object? preSelectShipTo = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -594,6 +1116,14 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingCustomerCode: null == isLoadingCustomerCode
+          ? _value.isLoadingCustomerCode
+          : isLoadingCustomerCode // ignore: cast_nullable_to_non_nullable
+              as bool,
+      preSelectShipTo: null == preSelectShipTo
+          ? _value.preSelectShipTo
+          : preSelectShipTo // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -664,7 +1194,9 @@ abstract class _$$_EligibilityStateCopyWith<$Res>
       ShipToInfo shipToInfo,
       OrderDocumentType selectedOrderType,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      bool isLoading});
+      bool isLoading,
+      bool isLoadingCustomerCode,
+      bool preSelectShipTo});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -699,6 +1231,8 @@ class __$$_EligibilityStateCopyWithImpl<$Res>
     Object? selectedOrderType = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
+    Object? isLoadingCustomerCode = null,
+    Object? preSelectShipTo = null,
   }) {
     return _then(_$_EligibilityState(
       user: null == user
@@ -733,6 +1267,14 @@ class __$$_EligibilityStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingCustomerCode: null == isLoadingCustomerCode
+          ? _value.isLoadingCustomerCode
+          : isLoadingCustomerCode // ignore: cast_nullable_to_non_nullable
+              as bool,
+      preSelectShipTo: null == preSelectShipTo
+          ? _value.preSelectShipTo
+          : preSelectShipTo // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -748,7 +1290,9 @@ class _$_EligibilityState extends _EligibilityState {
       required this.shipToInfo,
       required this.selectedOrderType,
       required this.failureOrSuccessOption,
-      required this.isLoading})
+      required this.isLoading,
+      required this.isLoadingCustomerCode,
+      required this.preSelectShipTo})
       : super._();
 
   @override
@@ -767,10 +1311,14 @@ class _$_EligibilityState extends _EligibilityState {
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
   final bool isLoading;
+  @override
+  final bool isLoadingCustomerCode;
+  @override
+  final bool preSelectShipTo;
 
   @override
   String toString() {
-    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedOrderType: $selectedOrderType, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading)';
+    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedOrderType: $selectedOrderType, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, isLoadingCustomerCode: $isLoadingCustomerCode, preSelectShipTo: $preSelectShipTo)';
   }
 
   @override
@@ -792,7 +1340,11 @@ class _$_EligibilityState extends _EligibilityState {
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.isLoadingCustomerCode, isLoadingCustomerCode) ||
+                other.isLoadingCustomerCode == isLoadingCustomerCode) &&
+            (identical(other.preSelectShipTo, preSelectShipTo) ||
+                other.preSelectShipTo == preSelectShipTo));
   }
 
   @override
@@ -805,7 +1357,9 @@ class _$_EligibilityState extends _EligibilityState {
       shipToInfo,
       selectedOrderType,
       failureOrSuccessOption,
-      isLoading);
+      isLoading,
+      isLoadingCustomerCode,
+      preSelectShipTo);
 
   @JsonKey(ignore: true)
   @override
@@ -823,7 +1377,9 @@ abstract class _EligibilityState extends EligibilityState {
       required final ShipToInfo shipToInfo,
       required final OrderDocumentType selectedOrderType,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final bool isLoading}) = _$_EligibilityState;
+      required final bool isLoading,
+      required final bool isLoadingCustomerCode,
+      required final bool preSelectShipTo}) = _$_EligibilityState;
   const _EligibilityState._() : super._();
 
   @override
@@ -842,6 +1398,10 @@ abstract class _EligibilityState extends EligibilityState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   bool get isLoading;
+  @override
+  bool get isLoadingCustomerCode;
+  @override
+  bool get preSelectShipTo;
   @override
   @JsonKey(ignore: true)
   _$$_EligibilityStateCopyWith<_$_EligibilityState> get copyWith =>

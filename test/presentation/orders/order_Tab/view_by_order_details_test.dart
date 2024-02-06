@@ -1117,11 +1117,11 @@ void main() {
     });
 
     testWidgets('Test display full customer address', (tester) async {
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           customerCodeInfo: customerCodeInfoList.soldToInformation.last,
           shipToInfo:
-              customerCodeInfoList.soldToInformation.last.shipToInfos.first,
+          customerCodeInfoList.soldToInformation.last.shipToInfos.first,
         ),
       );
 
@@ -1136,14 +1136,13 @@ void main() {
     });
 
     testWidgets('Test display full ship-to address', (tester) async {
-      when(() => customerCodeBlocMock.state).thenReturn(
-        CustomerCodeState.initial().copyWith(
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           customerCodeInfo: customerCodeInfoList.soldToInformation.last,
           shipToInfo:
-              customerCodeInfoList.soldToInformation.last.shipToInfos.first,
+          customerCodeInfoList.soldToInformation.last.shipToInfos.first,
         ),
       );
-
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       const fullShipToAddress =
@@ -2198,7 +2197,7 @@ void main() {
                   .getPaymentCustomerInformation(),
         ),
       );
-      
+
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       expect(find.byKey(WidgetKeys.payerInformation), findsOneWidget);
