@@ -4,7 +4,7 @@
 
 class SalesOrgQueryMutation {
   // For fetching Sales Organiazation Configs by salesOrg ID
-  String getSalesOrgConfigsQuery() {
+  String getSalesOrgConfigsQuery(bool enableMarketPlace) {
     return '''
       query salesOrgConfigs(\$request: SalesOrgConfigRequest) {
   salesOrgConfigs(request: \$request) {
@@ -101,7 +101,7 @@ class SalesOrgQueryMutation {
     displaySubtotalTaxBreakdown
     enableComboDeals
     comboDealsUserRole
-    enableMarketPlace
+    ${enableMarketPlace ? 'enableMarketPlace' : ''}
   }
 }
 

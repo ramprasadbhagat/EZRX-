@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/dtos/setting_tc_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
 class UserRemoteDataSource {
@@ -17,12 +18,14 @@ class UserRemoteDataSource {
   UserQueryMutation userQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
+  RemoteConfigService remoteConfigService;
 
   UserRemoteDataSource({
     required this.httpService,
     required this.userQueryMutation,
     required this.dataSourceExceptionHandler,
     required this.config,
+    required this.remoteConfigService,
   });
 
   Future<User> getUser({required String userId}) async {
@@ -31,7 +34,8 @@ class UserRemoteDataSource {
         method: 'POST',
         url: '${config.urlConstants}license',
         data: jsonEncode({
-          'query': userQueryMutation.getUserQuery(),
+          'query': userQueryMutation
+              .getUserQuery(remoteConfigService.marketPlaceConfig),
           'variables': {'id': userId, 'ignoreCustomerCode': true},
         }),
         apiEndpoint: 'userQuery',

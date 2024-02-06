@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/dtos/setting_tc_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,8 @@ import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 
 class UserMock extends Mock implements User {}
+
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 void main() {
   late UserRemoteDataSource remoteDataSource;
@@ -32,15 +35,20 @@ void main() {
   );
   final dioAdapter = DioAdapter(dio: dio);
   final service = HttpService.mockDio(dio);
+  final remoteConfigService = RemoteConfigServiceMock();
+  const fakeConfigValue = true;
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
+      when(() => remoteConfigService.marketPlaceConfig)
+          .thenReturn(fakeConfigValue);
       remoteDataSource = UserRemoteDataSource(
         httpService: service,
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
         userQueryMutation: UserQueryMutation(),
         config: locator.get<Config>(),
+        remoteConfigService: remoteConfigService,
       );
       userId = '3860';
     },
@@ -63,7 +71,8 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.userQueryMutation.getUserQuery(),
+            'query': remoteDataSource.userQueryMutation
+                .getUserQuery(fakeConfigValue),
             'variables': {'id': userId, 'ignoreCustomerCode': true},
           }),
         );
@@ -89,7 +98,8 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.userQueryMutation.getUserQuery(),
+            'query': remoteDataSource.userQueryMutation
+                .getUserQuery(fakeConfigValue),
             'variables': {'id': userId, 'ignoreCustomerCode': true},
           }),
         );
@@ -116,7 +126,8 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.userQueryMutation.getUserQuery(),
+            'query': remoteDataSource.userQueryMutation
+                .getUserQuery(fakeConfigValue),
             'variables': {'id': userId, 'ignoreCustomerCode': true},
           }),
         );

@@ -6,16 +6,20 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
 class SalesOrgRemoteDataSource {
   HttpService httpService;
   SalesOrgQueryMutation salesOrgQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
+  RemoteConfigService remoteConfigService;
+
   SalesOrgRemoteDataSource({
     required this.httpService,
     required this.salesOrgQueryMutation,
     required this.dataSourceExceptionHandler,
+    required this.remoteConfigService,
   });
 
   Future<SalesOrganisationConfigs> getConfig({required String salesOrg}) async {
@@ -24,7 +28,8 @@ class SalesOrgRemoteDataSource {
         method: 'POST',
         url: '/api/license',
         data: jsonEncode({
-          'query': salesOrgQueryMutation.getSalesOrgConfigsQuery(),
+          'query': salesOrgQueryMutation
+              .getSalesOrgConfigsQuery(remoteConfigService.marketPlaceConfig),
           'variables': {
             'request': {
               'salesOrg': salesOrg,

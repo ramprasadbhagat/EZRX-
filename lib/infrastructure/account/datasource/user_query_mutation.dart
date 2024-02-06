@@ -4,7 +4,7 @@
 
 class UserQueryMutation {
   // For fetching userdata by user ID
-  String getUserQuery() {
+  String getUserQuery(bool enableMarketPlace) {
     return '''
       query userQuery(\$id: Int!, \$ignoreCustomerCode: Boolean) {
         user(id: \$id, ignoreCustomerCode: \$ignoreCustomerCode) {
@@ -98,7 +98,7 @@ class UserQueryMutation {
               automatedPersonalisation
              directMarketing
             }
-            acceptMPTC
+            ${enableMarketPlace ? 'acceptMPTC' : ''}
           }
         }
     ''';

@@ -249,7 +249,8 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue),
           'variables': variables
         }),
       );
@@ -302,7 +303,8 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery.getProductQuery(),
+          'query': remoteDataSource.materialListQuery
+              .getProductQuery(fakeConfigValue),
           'variables': variables
         }),
       );

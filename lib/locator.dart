@@ -670,6 +670,7 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       userQueryMutation: locator<UserQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -785,6 +786,7 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       salesOrgQueryMutation: locator<SalesOrgQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 

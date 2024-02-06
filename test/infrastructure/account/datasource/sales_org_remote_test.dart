@@ -8,12 +8,16 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:mocktail/mocktail.dart';
+
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 void main() {
   late SalesOrgRemoteDataSource remoteDataSource;
@@ -27,14 +31,19 @@ void main() {
   );
   final dioAdapter = DioAdapter(dio: dio);
   final service = HttpService.mockDio(dio);
+  final remoteConfigService = RemoteConfigServiceMock();
+  const fakeConfigValue = true;
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
+      when(() => remoteConfigService.marketPlaceConfig)
+          .thenReturn(fakeConfigValue);
       remoteDataSource = SalesOrgRemoteDataSource(
         httpService: service,
         salesOrgQueryMutation: SalesOrgQueryMutation(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
+        remoteConfigService: remoteConfigService,
       );
       saleOrgName = '2601';
     },
@@ -59,7 +68,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.salesOrgQueryMutation
-                .getSalesOrgConfigsQuery(),
+                .getSalesOrgConfigsQuery(fakeConfigValue),
             'variables': {
               'request': {'salesOrg': saleOrgName},
             },
@@ -89,7 +98,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.salesOrgQueryMutation
-                .getSalesOrgConfigsQuery(),
+                .getSalesOrgConfigsQuery(fakeConfigValue),
             'variables': {
               'request': {'salesOrg': saleOrgName},
             },
@@ -121,7 +130,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.salesOrgQueryMutation
-                .getSalesOrgConfigsQuery(),
+                .getSalesOrgConfigsQuery(fakeConfigValue),
             'variables': {
               'request': {'salesOrg': saleOrgName},
             },
@@ -153,7 +162,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.salesOrgQueryMutation
-                .getSalesOrgConfigsQuery(),
+                .getSalesOrgConfigsQuery(fakeConfigValue),
             'variables': {
               'request': {'salesOrg': saleOrgName},
             },
