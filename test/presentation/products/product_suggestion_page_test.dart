@@ -13,7 +13,9 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_suggestion/product_suggestion_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -62,6 +64,7 @@ void main() {
   late MaterialFilterBloc materialFilterBlocMock;
   final locator = GetIt.instance;
   const fakeSearchText = 'fake-search-text';
+  late List<MaterialInfo> materialSearchResults;
 
   /////////////////////////key///////////////////////////////////
   final productSearchSuggestionSection =
@@ -75,6 +78,9 @@ void main() {
     locator.registerLazySingleton<MixpanelService>(() => MockMixPanelService());
     locator.registerLazySingleton(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
+    materialSearchResults =
+        (await ProductSearchLocalDataSource().getSearchedProductList())
+            .products;
   });
 
   setUp(() async {
@@ -166,6 +172,59 @@ void main() {
         find.text('No search history available'.tr()),
         findsOneWidget,
       );
+    });
+
+    group('Marketplace logo -', () {
+      testWidgets('Visible when material is from marketplace', (tester) async {
+        final marketPlaceMaterial =
+            materialSearchResults.firstWhere((e) => e.isMarketPlace);
+        when(() => productSearchBlocMock.state).thenReturn(
+          ProductSearchState.initial().copyWith(
+            suggestedProductList: [marketPlaceMaterial],
+            searchKey: SearchKey(fakeSearchText),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(
+              WidgetKeys.searchedProduct(
+                marketPlaceMaterial.materialNumber.displayMatNo,
+              ),
+            ),
+            matching: find.byType(MarketPlaceLogo),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('Not visible when material is not from marketplace',
+          (tester) async {
+        final nonMarketPlaceMaterial =
+            materialSearchResults.firstWhere((e) => !e.isMarketPlace);
+        when(() => productSearchBlocMock.state).thenReturn(
+          ProductSearchState.initial().copyWith(
+            suggestedProductList: [nonMarketPlaceMaterial],
+            searchKey: SearchKey(fakeSearchText),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(
+              WidgetKeys.searchedProduct(
+                nonMarketPlaceMaterial.materialNumber.displayMatNo,
+              ),
+            ),
+            matching: find.byType(MarketPlaceLogo),
+          ),
+          findsNothing,
+        );
+      });
     });
   });
 

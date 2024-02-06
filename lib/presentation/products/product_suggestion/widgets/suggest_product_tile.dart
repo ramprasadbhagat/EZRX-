@@ -26,6 +26,7 @@ class _SuggestedProductTile extends StatelessWidget {
             style: Theme.of(context).textTheme.titleSmall,
             key: WidgetKeys.suggestedProductsTile,
           ),
+          trailing: product.isMarketPlace ? const MarketPlaceLogo() : null,
         ),
         const Divider(
           indent: 15,

@@ -119,7 +119,7 @@ class MaterialListRemoteDataSource {
     required List<String> principalCodeList,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = materialListQuery.getComboDealPrincipalMaterialsQuery();
+      final queryData = materialListQuery.getProductQuery();
 
       final variables = {
         'request': {

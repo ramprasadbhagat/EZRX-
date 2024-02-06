@@ -249,8 +249,7 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery
-              .getComboDealPrincipalMaterialsQuery(),
+          'query': remoteDataSource.materialListQuery.getProductQuery(),
           'variables': variables
         }),
       );
@@ -303,8 +302,7 @@ void main() {
         ),
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
-          'query': remoteDataSource.materialListQuery
-              .getComboDealPrincipalMaterialsQuery(),
+          'query': remoteDataSource.materialListQuery.getProductQuery(),
           'variables': variables
         }),
       );
