@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_query.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
@@ -17,12 +18,14 @@ class ProductDetailRemoteDataSource {
   ProductDetailQuery productDetailQuery;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
+  RemoteConfigService remoteConfigService;
 
   ProductDetailRemoteDataSource({
     required this.httpService,
     required this.productDetailQuery,
     required this.dataSourceExceptionHandler,
     required this.config,
+    required this.remoteConfigService,
   });
   Future<MaterialInfo> getProductDetails({
     required String materialNumber,
@@ -32,7 +35,8 @@ class ProductDetailRemoteDataSource {
     required String shipToCode,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = productDetailQuery.getMaterialDetails();
+      final queryData = productDetailQuery
+          .getMaterialDetails(remoteConfigService.marketPlaceConfig);
 
       final variables = {
         'materialNumber': materialNumber,
@@ -65,7 +69,8 @@ class ProductDetailRemoteDataSource {
     required String salesOrg,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = productDetailQuery.getSimilarProductQuery();
+      final queryData = productDetailQuery
+          .getSimilarProductQuery(remoteConfigService.marketPlaceConfig);
 
       final variables = {
         'after': 0,

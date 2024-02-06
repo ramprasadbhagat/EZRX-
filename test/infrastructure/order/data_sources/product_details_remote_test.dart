@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_remote.dart';
@@ -12,6 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:mocktail/mocktail.dart';
+
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 void main() {
   late ProductDetailRemoteDataSource remoteDataSource;
@@ -24,15 +28,20 @@ void main() {
   );
   final dioAdapter = DioAdapter(dio: dio);
   final service = HttpService.mockDio(dio);
+  final remoteConfigService = RemoteConfigServiceMock();
+  const fakeConfigValue = true;
 
   setUpAll(
     () {
+      when(() => remoteConfigService.marketPlaceConfig)
+          .thenReturn(fakeConfigValue);
       WidgetsFlutterBinding.ensureInitialized();
       remoteDataSource = ProductDetailRemoteDataSource(
         httpService: service,
         config: Config(),
         productDetailQuery: ProductDetailQuery(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
+        remoteConfigService: remoteConfigService,
       );
     },
   );
@@ -67,8 +76,8 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query':
-                remoteDataSource.productDetailQuery.getSimilarProductQuery(),
+            'query': remoteDataSource.productDetailQuery
+                .getSimilarProductQuery(fakeConfigValue),
             'variables': variables
           }),
         );

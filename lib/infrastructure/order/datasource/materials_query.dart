@@ -1,5 +1,5 @@
 class MaterialsWithMetaQuery {
-  String getProductQuery() {
+  String getProductQuery(bool enableMarketplace) {
     return '''
       query (\$request: GetAllProductsRequest!) {
         GetAllProducts(request: \$request) {
@@ -13,6 +13,7 @@ class MaterialsWithMetaQuery {
             Manufactured
             IsFavourite
             isFOCMaterial
+            ${enableMarketplace ? 'IsMarketplace' : ''}
             materialGroup4
             Type
             HidePrice
@@ -47,7 +48,7 @@ class MaterialsWithMetaQuery {
     ''';
   }
 
-  String getProductDetailsQuery() {
+  String getProductDetailsQuery(bool enableMarketplace) {
     return '''
     query GetProductDetails(\$request: GetProductDetailsRequest!) {
       GetProductDetails(request: \$request) {
@@ -56,6 +57,7 @@ class MaterialsWithMetaQuery {
         Manufactured
         Type
         IsFavourite
+        ${enableMarketplace ? 'IsMarketplace' : ''}
         BundleInformation {
           BundleName
           BundleCode

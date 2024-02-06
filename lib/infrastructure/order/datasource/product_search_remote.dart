@@ -4,25 +4,26 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
-import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-
-import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
-
-import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
-
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
+import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 
 class ProductSearchRemoteDataSource {
   HttpService httpService;
   MaterialsWithMetaQuery materialListQuery;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
+  RemoteConfigService remoteConfigService;
+
   ProductSearchRemoteDataSource({
     required this.httpService,
     required this.materialListQuery,
     required this.dataSourceExceptionHandler,
     required this.config,
+    required this.remoteConfigService,
   });
 
   Future<MaterialResponse> getSearchedMaterialList({
@@ -38,7 +39,8 @@ class ProductSearchRemoteDataSource {
     required bool? isCovidSelected,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = materialListQuery.getProductQuery();
+      final queryData = materialListQuery
+          .getProductQuery(remoteConfigService.marketPlaceConfig);
 
       final variables = {
         'request': {

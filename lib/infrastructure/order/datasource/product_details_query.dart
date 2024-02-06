@@ -1,5 +1,5 @@
 class ProductDetailQuery {
-  String getMaterialDetails() {
+  String getMaterialDetails(bool enableMarketplace) {
     return '''
      query materialDetails(
         \$materialNumber: String!,
@@ -28,6 +28,7 @@ class ProductDetailQuery {
         materialBrand
         isFavourite
         isFOCMaterial
+        ${enableMarketplace ? 'isMarketPlace' : ''}
         defaultMaterialDescription
         country
         countryName
@@ -40,7 +41,7 @@ class ProductDetailQuery {
      ''';
   }
 
-  String getSimilarProductQuery() {
+  String getSimilarProductQuery(bool enableMarketplace) {
     return '''
      query similarSearches(
       \$principalCode: String, 
@@ -71,6 +72,7 @@ class ProductDetailQuery {
           defaultMaterialDescription
           itemBrand
           isFavourite
+          ${enableMarketplace ? 'isMarketPlace' : ''}
           hidePrice
           governmentMaterialCode
         }

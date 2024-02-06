@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
@@ -14,9 +15,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:mocktail/mocktail.dart';
+
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 void main() {
   late MaterialListRemoteDataSource remoteDataSource;
+  final remoteConfigService = RemoteConfigServiceMock();
+  const fakeConfigValue = true;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(
@@ -30,11 +36,14 @@ void main() {
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
+      when(() => remoteConfigService.marketPlaceConfig)
+          .thenReturn(fakeConfigValue);
       remoteDataSource = MaterialListRemoteDataSource(
         httpService: service,
         config: Config(),
         materialListQuery: MaterialsWithMetaQuery(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
+        remoteConfigService: remoteConfigService,
       );
     },
   );
@@ -67,7 +76,8 @@ void main() {
       ),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       data: jsonEncode({
-        'query': remoteDataSource.materialListQuery.getProductQuery(),
+        'query':
+            remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue),
         'variables': variables
       }),
     );
@@ -130,7 +140,8 @@ void main() {
       ),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       data: jsonEncode({
-        'query': remoteDataSource.materialListQuery.getProductQuery(),
+        'query':
+            remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue),
         'variables': variables
       }),
     );
@@ -189,7 +200,8 @@ void main() {
       ),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       data: jsonEncode({
-        'query': remoteDataSource.materialListQuery.getProductDetailsQuery(),
+        'query': remoteDataSource.materialListQuery
+            .getProductDetailsQuery(fakeConfigValue),
         'variables': variables
       }),
     );

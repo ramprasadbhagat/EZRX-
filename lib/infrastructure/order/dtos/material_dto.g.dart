@@ -52,7 +52,8 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       isSuspended: json['suspensionStatus'] as bool? ?? false,
-      isMarketPlace: json['isMarketPlace'] as bool? ?? false,
+      isMarketPlace:
+          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>

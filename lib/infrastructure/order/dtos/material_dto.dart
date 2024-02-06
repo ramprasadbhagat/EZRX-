@@ -102,7 +102,7 @@ class MaterialDto with _$MaterialDto {
         required List<BundleDto> bundles,
     @JsonKey(name: 'suspensionStatus', defaultValue: false)
         required bool isSuspended,
-    @JsonKey(name: 'isMarketPlace', defaultValue: false)
+    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
         required bool isMarketPlace,
   }) = _MaterialDto;
 

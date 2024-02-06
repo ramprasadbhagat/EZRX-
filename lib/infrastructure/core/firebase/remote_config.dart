@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config_constants.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 
@@ -29,17 +30,15 @@ class RemoteConfigService {
     }
   }
 
-  // keep this as example
-  // bool getScanToOrderConfig() {
-  //   return _remoteConfig.getBool(RemoteConfigConstants.enableScanToOrder);
-  // }
+  bool get marketPlaceConfig =>
+      _remoteConfig.getBool(RemoteConfigConstants.enableMarketPlace);
 
   /// Setting in-app default parameter values to make app behave as intended
   /// before it connects or if no values are set in the Remote Config backend
   Future<void> _setInAppDefaultValues() async {
     await _remoteConfig.setDefaults(
       const {
-        //RemoteConfigConstants.enableScanToOrder: false,
+        RemoteConfigConstants.enableMarketPlace: false,
       },
     );
   }

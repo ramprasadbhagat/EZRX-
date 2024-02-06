@@ -29,6 +29,13 @@ double handleTax(Map json, String key) {
   return double.tryParse(taxList.first) ?? 0.0;
 }
 
+bool mappingIsMarketPlace(Map json, String _) {
+  if (json['isMarketPlace'] != null) return json['isMarketPlace'];
+  if (json['isMarketplace'] != null) return json['isMarketplace'];
+
+  return false;
+}
+
 class StringToDoubleConverter extends JsonConverter<double, String> {
   const StringToDoubleConverter();
 

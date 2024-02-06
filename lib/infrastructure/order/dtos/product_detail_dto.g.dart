@@ -29,7 +29,8 @@ _$_ProductDetailDto _$$_ProductDetailDtoFromJson(Map<String, dynamic> json) =>
       promoType: json['promoType'] as String? ?? '',
       promoStatus: json['promoStatus'] as bool? ?? false,
       isSuspended: json['suspensionStatus'] as bool? ?? false,
-      isMarketPlace: json['isMarketPlace'] as bool? ?? false,
+      isMarketPlace:
+          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_ProductDetailDtoToJson(_$_ProductDetailDto instance) =>

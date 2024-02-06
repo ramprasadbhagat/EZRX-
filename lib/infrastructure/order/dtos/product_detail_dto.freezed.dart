@@ -60,7 +60,7 @@ mixin _$ProductDetailDto {
   bool get promoStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   bool get isSuspended => throw _privateConstructorUsedError;
-  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -103,7 +103,8 @@ abstract class $ProductDetailDtoCopyWith<$Res> {
       @JsonKey(name: 'promoType', defaultValue: '') String promoType,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false) bool isMarketPlace});
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -266,7 +267,8 @@ abstract class _$$_ProductDetailDtoCopyWith<$Res>
       @JsonKey(name: 'promoType', defaultValue: '') String promoType,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false) bool isMarketPlace});
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -430,7 +432,7 @@ class _$_ProductDetailDto extends _ProductDetailDto {
       required this.promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required this.isSuspended,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false)
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       required this.isMarketPlace})
       : super._();
 
@@ -498,7 +500,7 @@ class _$_ProductDetailDto extends _ProductDetailDto {
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   final bool isSuspended;
   @override
-  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -638,7 +640,7 @@ abstract class _ProductDetailDto extends ProductDetailDto {
       required final bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required final bool isSuspended,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false)
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$_ProductDetailDto;
   _ProductDetailDto._() : super._();
 
@@ -706,7 +708,7 @@ abstract class _ProductDetailDto extends ProductDetailDto {
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   bool get isSuspended;
   @override
-  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)

@@ -973,6 +973,7 @@ void setupLocator() {
       materialListQuery: locator<MaterialsWithMetaQuery>(),
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -1032,6 +1033,7 @@ void setupLocator() {
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
       productDetailQuery: locator<ProductDetailQuery>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -2561,6 +2563,7 @@ void setupLocator() {
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
       materialListQuery: locator<MaterialsWithMetaQuery>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 

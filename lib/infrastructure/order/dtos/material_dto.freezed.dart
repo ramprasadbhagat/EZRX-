@@ -94,7 +94,7 @@ mixin _$MaterialDto {
   List<BundleDto> get bundles => throw _privateConstructorUsedError;
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   bool get isSuspended => throw _privateConstructorUsedError;
-  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -160,7 +160,8 @@ abstract class $MaterialDtoCopyWith<$Res> {
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       List<BundleDto> bundles,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false) bool isMarketPlace});
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 
   $BundleDtoCopyWith<$Res> get bundle;
 }
@@ -431,7 +432,8 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       List<BundleDto> bundles,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false) bool isMarketPlace});
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 
   @override
   $BundleDtoCopyWith<$Res> get bundle;
@@ -699,7 +701,7 @@ class _$_MaterialDto extends _MaterialDto {
       required final List<BundleDto> bundles,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required this.isSuspended,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false)
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       required this.isMarketPlace})
       : _data = data,
         _bundles = bundles,
@@ -830,7 +832,7 @@ class _$_MaterialDto extends _MaterialDto {
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   final bool isSuspended;
   @override
-  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -1035,7 +1037,7 @@ abstract class _MaterialDto extends MaterialDto {
       required final List<BundleDto> bundles,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required final bool isSuspended,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false)
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$_MaterialDto;
   const _MaterialDto._() : super._();
 
@@ -1150,7 +1152,7 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   bool get isSuspended;
   @override
-  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
