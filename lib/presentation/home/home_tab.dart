@@ -10,6 +10,7 @@ import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
+import 'package:ezrxmobile/presentation/home/widgets/explore_marketplace_banner.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/account_suspended_warning.dart';
@@ -76,6 +77,14 @@ class HomeTab extends StatelessWidget {
                   const AccountSuspendedBanner(),
                   const QuickAccessMenuPanel(),
                   const CarouselBanner(),
+                  BlocBuilder<EligibilityBloc, EligibilityState>(
+                    buildWhen: (previous, current) =>
+                        previous.showMarketPlaceProduct !=
+                        current.showMarketPlaceProduct,
+                    builder: (context, state) => state.showMarketPlaceProduct
+                        ? const ExploreMarketPlaceBanner()
+                        : const SizedBox(),
+                  ),
                   BlocBuilder<EligibilityBloc, EligibilityState>(
                     buildWhen: (previous, current) =>
                         previous.comboDealEligible != current.comboDealEligible,

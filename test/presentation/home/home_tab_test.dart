@@ -41,6 +41,7 @@ import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart'
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
 import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
+import 'package:ezrxmobile/presentation/home/widgets/explore_marketplace_banner.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
@@ -52,7 +53,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
@@ -956,6 +959,39 @@ void main() {
             find.byKey(WidgetKeys.notificationBadge);
 
         expect(notificationWithBadgeIcon, findsNothing);
+      });
+    });
+
+    group('Explore marketplace banner -', () {
+      testWidgets('Visible when can access marketplace', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeClientUserAccessMarketPlace,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            shipToInfo: fakeShipToInfoPeninsulaRegion,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        expect(find.byType(ExploreMarketPlaceBanner), findsOneWidget);
+      });
+
+      testWidgets('Not visible when can not access marketplace',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeClientUser,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            shipToInfo: fakeShipToInfoPeninsulaRegion,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        expect(find.byType(ExploreMarketPlaceBanner), findsNothing);
       });
     });
 
