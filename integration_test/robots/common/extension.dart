@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 final _priceFormatter = StringUtils.priceFormatter;
+final _priceFormatterForID = StringUtils.priceFormatterWithDecimal;
 
 extension DateTimeExt on DateTime {
   bool isDateBetween(DateTime from, DateTime to) =>
@@ -16,8 +17,10 @@ extension DateTimeExt on DateTime {
 
 extension NumExt on num {
   String get priceFormatted => _priceFormatter.format(this);
+  String get priceFormattedForID => _priceFormatterForID.format(this);
 
   String priceDisplay(String currency) => '$currency $priceFormatted';
+  String priceDisplayForID(String currency) => '$currency $priceFormattedForID';
 }
 
 extension StringExt on String {

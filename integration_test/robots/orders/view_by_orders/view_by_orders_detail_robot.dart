@@ -115,6 +115,32 @@ class ViewByOrdersDetailRobot extends CommonRobot {
     );
   }
 
+  void verifyOrderSummaryComponentVisibleForID(String value) {
+    final subTotalWidget = find.byKey(WidgetKeys.viewByOrderIdSubtotalKey);
+    final viewByOrderIdTaxKey = find.byKey(WidgetKeys.viewByOrderIdTaxKey);
+    final viewByOrderIdSmallOrderFeeKey =
+        find.byKey(WidgetKeys.viewByOrderIdSmallOrderFeeKey);
+    final viewByOrderIdManualFeeKey =
+        find.byKey(WidgetKeys.viewByOrderIdManualFeeKey);
+    final viewByOrderIdGrandTotalKey =
+        find.byKey(WidgetKeys.viewByOrderIdGrandTotalKey);
+    final viewByOrderIdTotalSavingsKey =
+        find.byKey(WidgetKeys.viewByOrderIdTotalSavingsKey);
+    expect(subTotalWidget, findsOneWidget);
+    expect(
+      find.descendant(
+        of: subTotalWidget,
+        matching: find.text(value, findRichText: true),
+      ),
+      findsOneWidget,
+    );
+    expect(viewByOrderIdTaxKey, findsOneWidget);
+    expect(viewByOrderIdSmallOrderFeeKey, findsOneWidget);
+    expect(viewByOrderIdManualFeeKey, findsOneWidget);
+    expect(viewByOrderIdGrandTotalKey, findsOneWidget);
+    expect(viewByOrderIdTotalSavingsKey, findsOneWidget);
+  }
+
   Future<void> dragToVerifyItemsSection() => scrollEnsureFinderVisible(
         find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
       );

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class ViewByOrdersFilterRobot {
@@ -63,5 +64,17 @@ class ViewByOrdersFilterRobot {
   Future<void> tapResetButton() async {
     await tester.tap(resetButton);
     await tester.pumpAndSettle();
+  }
+
+  Future<void> tapStatusCheckbox(String name) async {
+    await tester.tap(find.widgetWithText(CheckboxListTile, name));
+    await tester.pump();
+  }
+
+  void verifyStatusFilterValue(String name, bool value) {
+    expect(
+      find.byKey(WidgetKeys.statusFilter(name, value)),
+      findsOneWidget,
+    );
   }
 }

@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../common/common_robot.dart';
 
 class FilterSortProductRobot extends CommonRobot {
-  final manufacturerLabel = find.text('Manufacturer'.tr());
+  final manufacturerLabel = find.byKey(WidgetKeys.filterManufacturerButton);
   final countryLabel = find.text('Country of origin'.tr());
   final suggestedCountry = find.byKey(WidgetKeys.suggestedCountryText);
 
@@ -53,6 +53,10 @@ class FilterSortProductRobot extends CommonRobot {
 
   void verifyFilterCountryOfOriginVisible() {
     expect(countryLabel, findsOneWidget);
+  }
+
+  void verifyFilterCountryOfOriginInvisibleForIdMarket() {
+    expect(countryLabel, findsNothing);
   }
 
   void verifyCountryListSelectedVisible(int countSelected) {
@@ -149,5 +153,14 @@ class FilterSortProductRobot extends CommonRobot {
     verifyRadioSort('Z-A', false);
     verifyFilterManufacturerVisible();
     verifyFilterCountryOfOriginVisible();
+  }
+
+  void verifyDefaultFilterProductForIdMarket() {
+    verifyCheckboxCheckedShowProduct('Favourites', false);
+    verifyRadioSort('A-Z', true);
+    verifyRadioSort('Z-A', false);
+    verifyRadioSort('Price: Low to high', false);
+    verifyRadioSort('Price: High to low', false);
+    verifyFilterManufacturerVisible();
   }
 }

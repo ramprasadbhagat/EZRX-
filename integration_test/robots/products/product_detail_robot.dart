@@ -286,9 +286,32 @@ class ProductDetailRobot extends CommonRobot {
     );
   }
 
+  void verifyQuantityProductDisplayedForID() {
+    expect(
+      find.descendant(
+        of: find.byType(ShowOfferDialogWidget),
+        matching: find.byKey(WidgetKeys.lblQuantityProductTireOffers),
+      ),
+      findsWidgets,
+    );
+  }
+
+  void verifyButtonCloseDisplayed() {
+    expect(find.byKey(WidgetKeys.closeButton), findsOneWidget);
+  }
+
   Future<void> verifyRelateProductDisplayed() async {
     await scrollEnsureFinderVisible(find.byType(SimilarProduct));
     expect(relatedMaterialCard, findsWidgets);
+  }
+
+  Future<void> dragMaterialDetailsInfoTileDisplayed() async {
+    await tester.dragUntilVisible(
+      find.byType(SimilarProduct),
+      materialDetailsInfoTile,
+      const Offset(0, -100),
+    );
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapFirstRelateProduct() async {

@@ -42,6 +42,7 @@ class _ManufacturerSection extends StatelessWidget {
           previous.materialFilter.manufactureListSelected !=
           current.materialFilter.manufactureListSelected,
       builder: (context, state) => InkWell(
+        key: WidgetKeys.filterManufacturerButton,
         onTap: () => _showFilterByPage(
           context: context,
           materialFilterType: MaterialFilterType.manufactured,

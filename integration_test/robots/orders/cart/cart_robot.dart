@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -121,6 +122,20 @@ class CartRobot {
     );
   }
 
+  void verifySmallOrderFee({
+    required bool isMinOrderValue,
+  }) {
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.checkoutSummarySmallOrderFeePrice &&
+            widget is PriceComponent &&
+            (widget.price).contains(isMinOrderValue ? '12500' : '0'),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyCartQty(int qty) {
     expect(
       find.byWidgetPredicate(
@@ -143,6 +158,15 @@ class CartRobot {
       ),
       findsOneWidget,
     );
+  }
+
+  Future<void> tapToSeePriceBreakDown() async {
+    expect(
+      find.byKey(WidgetKeys.priceSummaryListTile),
+      findsOneWidget,
+    );
+    await tester.tap(find.byKey(WidgetKeys.priceSummaryListTile));
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapShowShipToAddressDetail() async {
@@ -312,6 +336,16 @@ class CartRobot {
   }
 
   void verifyMaterialOfferTag(String materialNumber) {
+    expect(
+      find.descendant(
+        of: _materialItem(materialNumber),
+        matching: find.byKey(WidgetKeys.offerTag),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyMaterialBonusTag(String materialNumber) {
     expect(
       find.descendant(
         of: _materialItem(materialNumber),
@@ -695,6 +729,19 @@ class CartRobot {
         matching: find.byType(BonusTag),
       ),
       findsOneWidget,
+    );
+  }
+
+  void verifyBonusMaterialTagNotVisibleForID(
+    String materialNumber,
+    String bonusMaterialNumber,
+  ) {
+    expect(
+      find.descendant(
+        of: _bonusItem(materialNumber, bonusMaterialNumber),
+        matching: find.byType(BonusTag),
+      ),
+      findsNothing,
     );
   }
 

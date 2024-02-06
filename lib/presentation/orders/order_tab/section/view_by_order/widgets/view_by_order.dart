@@ -59,6 +59,7 @@ class _ViewByOrder extends StatelessWidget {
                   const QueueNumberInfoIcon(),
                 if (eligibilityState.salesOrg.isID)
                   StatusLabel(
+                    key: WidgetKeys.viewByOrderStatusKey,
                     status: StatusType(
                       context.tr(
                         viewByOrderHistoryItem.processingStatus

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,12 +15,19 @@ class ViewByOrdersRobot {
   final orderGroups = find.byKey(WidgetKeys.viewByOrdersGroupKey);
   final orderItems = find.byKey(WidgetKeys.viewByOrdersItemKey);
   final buyAgainButton = find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+  final status = find.byKey(WidgetKeys.viewByOrderStatusKey);
   final orderCodeLabel = find.byKey(WidgetKeys.viewByOrdersCodeLabelKey);
   final orderQtyLabel = find.byKey(WidgetKeys.viewByOrdersQtyLabelKey);
+  final searchBar = find.byType(CustomSearchBar);
 
   void verifyOrders() {
     verifyOrderGroups();
     verifyOrderItems();
+  }
+
+  void verifyOrdersForID() {
+    verifyOrderGroups();
+    verifyOrderItemsForID();
   }
 
   void verifyOrderGroups() {
@@ -47,6 +55,31 @@ class ViewByOrdersRobot {
     );
     expect(
       find.descendant(of: orderItems, matching: buyAgainButton),
+      findsNWidgets(itemCount),
+    );
+    expect(
+      find.descendant(of: orderItems, matching: buyAgainButton),
+      findsNWidgets(itemCount),
+    );
+  }
+
+  void verifyOrderItemsForID() {
+    expect(orderItems, findsAtLeastNWidgets(1));
+    final itemCount = orderItems.evaluate().length;
+    expect(
+      find.descendant(of: orderItems, matching: orderCodeLabel),
+      findsNWidgets(itemCount),
+    );
+    expect(
+      find.descendant(of: orderItems, matching: orderQtyLabel),
+      findsNWidgets(itemCount),
+    );
+    expect(
+      find.descendant(of: orderItems, matching: buyAgainButton),
+      findsNWidgets(itemCount),
+    );
+    expect(
+      find.descendant(of: orderItems, matching: status),
       findsNWidgets(itemCount),
     );
   }

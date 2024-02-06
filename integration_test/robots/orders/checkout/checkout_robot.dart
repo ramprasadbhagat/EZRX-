@@ -180,6 +180,10 @@ class CheckoutRobot {
         find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
         price,
       );
+  Future<void> verifyTaxLabel(String price) => _verifyOrderSummaryComponent(
+        find.byKey(WidgetKeys.checkoutSummaryTax),
+        price,
+      );
 
   Future<void> verifyTotalSavingLabel(String price) =>
       _verifyOrderSummaryComponent(

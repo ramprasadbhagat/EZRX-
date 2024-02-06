@@ -229,6 +229,7 @@ class WidgetKeys {
 
   static const Key materialFilterSearchField = Key('materialFilterSearchField');
   static const Key filterProductIcon = Key('filterProductIcon');
+  static const Key filterManufacturerButton = Key('filterManufacturerButton');
   static Key showProductCheckbox(String type) => Key('checkbox$type');
   static Key sortByRadio(String type) => Key('radioSort$type');
   static const Key clearSearchFilter = Key('clearSearchFilter');
@@ -256,6 +257,8 @@ class WidgetKeys {
   static const Key lblNameProductOffers = Key('lblNameProductOffers');
   static const Key lblCodeProductOffers = Key('lblCodeProductOffers');
   static const Key lblQuantityProductOffers = Key('lblQuantityProductOffers');
+  static const Key lblQuantityProductTireOffers =
+      Key('lblQuantityProductTireOffers');
   static const Key availableOffersTile = Key('availableOffersTile');
   static const Key materialDeliveryInstructions =
       Key('materialDeliveryInstructions');
@@ -613,6 +616,7 @@ class WidgetKeys {
   static const Key cartPageInvalidItemsBannerButton =
       Key('cartPageInvalidItemsBannerButton');
   static const Key summaryInfoButton = Key('summaryInfoButton');
+  static const Key showOrderSumaryListTile = Key('showOrderSumaryListTile');
 
   //============================================================
   //  Checkout Page Keys
@@ -1315,6 +1319,7 @@ class WidgetKeys {
   static Key viewByOrderIdManualFeeKey = const Key('viewByOrderIdManualFeeKey');
   static Key viewByOrderIdSmallOrderFeeKey =
       const Key('viewByOrderIdSmallOrderFeeKey');
+  static Key viewByOrderStatusKey = const Key('viewByOrderStatusKey');
   //============================================================
   // View By Orders filter bottom sheet
   //============================================================

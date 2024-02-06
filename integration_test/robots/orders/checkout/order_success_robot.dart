@@ -106,6 +106,30 @@ class OrderSuccessRobot extends CommonRobot {
           matching: find.text(price, findRichText: true),
         ),
       );
+  Future<void> verifyTax(String price) => scrollEnsureFinderVisible(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSummaryTax),
+          matching: find.text(price, findRichText: true),
+        ),
+      );
+  Future<void> verifySmallOrderFee(String price) => scrollEnsureFinderVisible(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSummarySmallFee),
+          matching: find.text(price, findRichText: true),
+        ),
+      );
+  Future<void> verifyManualFee(String price) => scrollEnsureFinderVisible(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSummaryManualFee),
+          matching: find.text(price, findRichText: true),
+        ),
+      );
+  Future<void> verifyTotalSaving(String price) => scrollEnsureFinderVisible(
+        find.descendant(
+          of: find.byKey(WidgetKeys.orderSummaryTotalSaving),
+          matching: find.text(price, findRichText: true),
+        ),
+      );
 
   Future<void> verifyOrderItemTotalQty(int qty) async {
     final label = find.byKey(WidgetKeys.orderSuccessItemTotalQty);

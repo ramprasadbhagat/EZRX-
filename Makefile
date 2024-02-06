@@ -60,6 +60,8 @@ reset_mm_salesorg_config:
 	./integration_test/mm/${SALESORGCONFIG}
 reset_kh_salesorg_config:
 	./integration_test/kh/${SALESORGCONFIG}
+reset_id_salesorg_config:
+	.integration_test/id/${SALESORGCONFIG}
 run_sg_client_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/sg/${CLIENTUSER}
 run_sg_external_test:
@@ -102,4 +104,6 @@ run_th_external_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${EXTERNALSALESREP}
 run_id_prod_user_cart_test:
 	./integration_test/id/prod_user_cart_runner.sh
+run_id_client_order_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENTUSERORDER} 
 	
