@@ -519,6 +519,8 @@ void main() {
         final invoiceDetailGrandTotalFinder =
             find.byKey(WidgetKeys.invoiceDetailGrandTotal);
         final invoiceDetailTax = find.byKey(WidgetKeys.invoiceDetailTax);
+        final invoiceDetailTotalSaving =
+            find.byKey(WidgetKeys.invoiceDetailTotalSaving);
         expect(
           find.descendant(
             of: invoiceDetailSubTotalFinder,
@@ -578,7 +580,7 @@ void main() {
           expect(
             find.descendant(
               of: invoiceDetailSmallOrderFeeFinder,
-              matching: find.textContaining(
+              matching: find.text(
                 'Small order fee'.tr(),
               ),
             ),
@@ -610,7 +612,7 @@ void main() {
             find.descendant(
               of: invoiceDetailManualFeeFinder,
               matching: find.text(
-                '${'Manual fee'.tr()}:',
+                'Manual fee'.tr(),
               ),
             ),
             findsOneWidget,
@@ -654,6 +656,31 @@ void main() {
           ),
           findsOneWidget,
         );
+        if (currentSalesOrganisation.salesOrg.isID) {
+          expect(
+            find.descendant(
+              of: invoiceDetailTotalSaving,
+              matching: find.text(
+                'Total savings'.tr(),
+              ),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: invoiceDetailTotalSaving,
+              matching: find.text(
+                StringUtils.priceComponentDisplayPrice(
+                  currentSalesOrgConfigs,
+                  fakeInvoice.discount,
+                  false,
+                ),
+                findRichText: true,
+              ),
+            ),
+            findsOneWidget,
+          );
+        }
       },
       variant: eligibilityStateVariant,
     );

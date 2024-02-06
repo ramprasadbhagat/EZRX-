@@ -84,7 +84,7 @@ class InvoiceSummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${context.tr('Small order fee')}:',
+                    context.tr('Small order fee'),
                   ),
                   PriceComponent(
                     type: PriceStyle.summaryPrice,
@@ -111,7 +111,7 @@ class InvoiceSummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${context.tr('Manual fee')}:',
+                    context.tr('Manual fee'),
                   ),
                   PriceComponent(
                     type: PriceStyle.summaryPrice,
@@ -143,6 +143,25 @@ class InvoiceSummary extends StatelessWidget {
               ),
             ],
           ),
+          if (eligibilityState.salesOrg.showTotalSaving)
+            Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Row(
+                key: WidgetKeys.invoiceDetailTotalSaving,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    context.tr('Total savings'),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  PriceComponent(
+                    type: PriceStyle.summaryPrice,
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
+                    price: invoiceItem.discount.toString(),
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
     );
