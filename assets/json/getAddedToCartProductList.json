@@ -601,22 +601,9 @@
       ],
       "MarketplaceItems": [],
       "CustomerCode": "0030082707",
-      "ShipTo": {
-        "ID": "0070149863",
-        "AddressName": null,
-        "CompanyName": null,
-        "FirstName": null,
-        "LastName": null,
-        "Street1": "",
-        "Street2": null,
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": "",
-        "Phone": null
-      },
-      "CreatedAt": "2023-06-22T09:22:25.917454Z",
-      "UpdatedAt": "2023-06-22T09:23:16.822431Z",
+      "ShipToCustomerCode": "0070149863",
+      "CreatedAt": "2024-02-02T05:50:24.52728Z",
+      "UpdatedAt": "2024-02-02T05:50:47.926256Z",
       "OrderID": "",
       "WorkSheet": null
     }

@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/apl_get_total_price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/apl_simulator_order_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/cart_dto.dart';
 import 'package:flutter/services.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
@@ -12,15 +14,15 @@ import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 class CartLocalDataSource {
   CartLocalDataSource();
 
-  Future<List<PriceAggregate>> getAddedToCartProductList() async {
+  Future<Cart> getAddedToCartProductList() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/getAddedToCartProductList.json'),
     );
-    final finalData = data['data']['cart']['EzRxItems'];
 
-    return List.from(
-      makeResponseCamelCase(jsonEncode(finalData)),
-    ).map((e) => CartProductDto.fromJson(e).toDomain).toList();
+    final finalData = data['data']['cart'];
+
+    return CartDto.fromJson(makeResponseCamelCase(jsonEncode(finalData)))
+        .toDomain();
   }
 
   Future<List<PriceAggregate>> upsertCart() async {

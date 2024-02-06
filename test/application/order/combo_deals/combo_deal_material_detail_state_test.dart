@@ -23,6 +23,7 @@ void main() {
   setUpAll(() async {
     comboDeal = (await ComboDealLocalDataSource().getComboDealList()).first;
     productList = (await CartLocalDataSource().getAddedToCartProductList())
+        .cartProducts
         .where((e) => e.materialInfo.type.typeMaterial)
         .toList();
 

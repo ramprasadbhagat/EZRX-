@@ -6,10 +6,12 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
+import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/apl_simulator_order_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/cart_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/apl_get_total_price_dto.dart';
 
@@ -26,7 +28,7 @@ class CartRemoteDataSource {
     required this.dataSourceExceptionHandler,
   });
 
-  Future<List<PriceAggregate>> getAddedToCartProductList() async {
+  Future<Cart> getAddedToCartProductList() async {
     return await dataSourceExceptionHandler.handle(() async {
       final query = cartQueryMutation.cart();
       final variables = {};
@@ -44,13 +46,10 @@ class CartRemoteDataSource {
 
       _exceptionChecker(res: res);
 
-      final productList = res.data['data']['cart']?['EzRxItems'] ?? [];
+      final cart = res.data['data']['cart'] ?? {};
 
-      return List.from(
-        makeResponseCamelCase(
-          jsonEncode(productList),
-        ),
-      ).map((e) => CartProductDto.fromJson(e).toDomain).toList();
+      return CartDto.fromJson(makeResponseCamelCase(jsonEncode(cart)))
+          .toDomain();
     });
   }
 

@@ -90,8 +90,9 @@ void main() {
     when(() => productImageBloc.state).thenReturn(
       productImageState,
     );
-    priceAggregate =
-        (await CartLocalDataSource().getAddedToCartProductList()).first;
+    priceAggregate = (await CartLocalDataSource().getAddedToCartProductList())
+        .cartProducts
+        .first;
     bonusItemsList =
         await MaterialBundleListLocalDatasource().getMaterialBundleList();
   });

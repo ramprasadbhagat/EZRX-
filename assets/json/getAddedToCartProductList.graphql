@@ -64,20 +64,7 @@ query Cart($language: String) {
       UpdatedAt
     }
     CustomerCode
-    ShipTo {
-      ID
-      AddressName
-      CompanyName
-      FirstName
-      LastName
-      Street1
-      Street2
-      City
-      State
-      Zip
-      Country
-      Phone
-    }
+    ShipToCustomerCode,
     CreatedAt
     UpdatedAt
     OrderID

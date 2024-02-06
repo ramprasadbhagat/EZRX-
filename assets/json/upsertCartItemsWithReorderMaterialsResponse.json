@@ -526,20 +526,7 @@
                 }
             ],
             "CustomerCode": "0030082707",
-            "ShipTo": {
-                "ID": "0070149863",
-                "AddressName": null,
-                "CompanyName": null,
-                "FirstName": null,
-                "LastName": null,
-                "Street1": "",
-                "Street2": null,
-                "City": "",
-                "State": "",
-                "Zip": "",
-                "Country": "",
-                "Phone": null
-            },
+            "ShipToCustomerCode": "0070149863",
             "CreatedAt": "2023-12-06T12:30:50.630456Z",
             "UpdatedAt": "2023-12-06T12:30:50.833352Z",
             "OrderID": "",

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/cart_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +25,13 @@ void main() async {
             await rootBundle
                 .loadString('assets/json/getAddedToCartProductList.json'),
           );
-          final finalData = data['data']['cart']['EzRxItems'];
+          final finalData = data['data']['cart'];
           final result = await localDataSource.getAddedToCartProductList();
           expect(
             result,
-            List.from(makeResponseCamelCase(jsonEncode(finalData)))
-                .map((e) => CartProductDto.fromJson(e).toDomain)
-                .toList(),
+            CartDto.fromJson(
+              makeResponseCamelCase(jsonEncode(finalData)),
+            ).toDomain(),
           );
         },
       );

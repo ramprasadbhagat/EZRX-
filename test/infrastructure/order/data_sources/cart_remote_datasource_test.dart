@@ -5,10 +5,12 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/cart_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +52,7 @@ void main() async {
       test(
         'Cart Remote data source Success',
         () async {
-          final finalData =
-              getAddedToCartProductListJson['data']['cart']['EzRxItems'];
+          final finalData = getAddedToCartProductListJson['data']['cart'];
           dioAdapter.onPost(
             '/api/cart',
             (server) => server.reply(
@@ -70,9 +71,8 @@ void main() async {
 
           expect(
             result,
-            List.from(makeResponseCamelCase(jsonEncode(finalData)))
-                .map((e) => CartProductDto.fromJson(e).toDomain)
-                .toList(),
+            CartDto.fromJson(makeResponseCamelCase(jsonEncode(finalData)))
+                .toDomain(),
           );
         },
       );
@@ -106,7 +106,7 @@ void main() async {
               error,
               isA<ServerException>(),
             );
-            return Future.value(<PriceAggregate>[]);
+            return Future.value(Cart.empty());
           });
         },
       );
@@ -138,7 +138,7 @@ void main() async {
 
           expect(
             result,
-            <PriceAggregate>[],
+            Cart.empty(),
           );
         },
       );
@@ -164,7 +164,7 @@ void main() async {
               .getAddedToCartProductList()
               .onError((error, _) {
             expect(error, isA<ServerException>());
-            return Future.value(<PriceAggregate>[]);
+            return Future.value(Cart.empty());
           });
         },
       );
@@ -280,7 +280,7 @@ void main() async {
 
           expect(
             result,
-            <PriceAggregate>[],
+            Cart.empty(),
           );
         },
       );

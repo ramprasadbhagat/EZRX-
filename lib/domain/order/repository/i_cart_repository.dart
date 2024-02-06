@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
+import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -78,7 +79,7 @@ abstract class ICartRepository {
     required Language language,
   });
 
-  Future<Either<ApiFailure, List<PriceAggregate>>> getAddedToCartProductList();
+  Future<Either<ApiFailure, Cart>> getAddedToCartProductList();
 
   Future<Either<ApiFailure, List<PriceAggregate>>> removeSelectedProducts({
     required SalesOrganisation salesOrganisation,

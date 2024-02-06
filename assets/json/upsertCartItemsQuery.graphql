@@ -203,9 +203,7 @@ mutation UpsertCartItems($itemInput: [ItemInput!]) {
       ...ezrxItemsFields
     }
     CustomerCode
-    ShipTo {
-      ...shipToFields
-    }
+    ShipToCustomerCode
     CreatedAt
     UpdatedAt
     OrderID

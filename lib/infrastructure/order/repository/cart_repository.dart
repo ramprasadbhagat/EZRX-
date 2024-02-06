@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
@@ -327,8 +328,7 @@ class CartRepository implements ICartRepository {
   // }
 
   @override
-  Future<Either<ApiFailure, List<PriceAggregate>>>
-      getAddedToCartProductList() async {
+  Future<Either<ApiFailure, Cart>> getAddedToCartProductList() async {
     try {
       if (config.appFlavor == Flavor.mock) {
         try {

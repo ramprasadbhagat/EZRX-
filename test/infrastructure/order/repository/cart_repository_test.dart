@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:collection/collection.dart';
@@ -1560,7 +1561,9 @@ void main() {
       when(
         () => cartRemoteDataSource.getAddedToCartProductList(),
       ).thenAnswer(
-        (invocation) async => fakeCartProducts,
+        (invocation) async => Cart.empty().copyWith(
+          cartProducts: fakeCartProducts,
+        ),
       );
 
       final result = await cartRepository.getAddedToCartProductList();
@@ -1584,7 +1587,9 @@ void main() {
       when(
         () => cartLocalDataSourceMock.getAddedToCartProductList(),
       ).thenAnswer(
-        (invocation) async => fakeCartProducts,
+        (invocation) async => Cart.empty().copyWith(
+          cartProducts: fakeCartProducts,
+        ),
       );
 
       final result = await cartRepository.getAddedToCartProductList();

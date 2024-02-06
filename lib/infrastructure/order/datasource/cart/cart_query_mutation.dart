@@ -201,21 +201,8 @@ class CartQueryMutation {
       CreatedAt
       UpdatedAt
     }
-    CustomerCode
-    ShipTo {
-      ID
-      AddressName
-      CompanyName
-      FirstName
-      LastName
-      Street1
-      Street2
-      City
-      State
-      Zip
-      Country
-      Phone
-    }
+    CustomerCode,
+    ShipToCustomerCode,
     CreatedAt
     UpdatedAt
     OrderID
@@ -761,20 +748,7 @@ class CartQueryMutation {
           Comment
         }
         CustomerCode
-        ShipTo {
-          ID
-          AddressName
-          CompanyName
-          FirstName
-          LastName
-          Street1
-          Street2
-          City
-          State
-          Zip
-          Country
-          Phone
-        }
+        ShipToCustomerCode
         CreatedAt
         UpdatedAt
         OrderID
@@ -1199,21 +1173,6 @@ fragment ezrxItemsFields on Item {
       }
 }
 
-fragment shipToFields on ShipTo {
-  ID
-  AddressName
-  CompanyName
-  FirstName
-  LastName
-  Street1
-  Street2
-  City
-  State
-  Zip
-  Country
-  Phone
-}
-
 fragment userAddressFields on CartShippingAddress {
   name
   street
@@ -1373,9 +1332,7 @@ mutation UpsertCartItems(\$itemInput: [ItemInput!]) {
       ...ezrxItemsFields
     }
     CustomerCode
-    ShipTo {
-      ...shipToFields
-    }
+    ShipToCustomerCode,
     CreatedAt
     UpdatedAt
     OrderID

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/entities/price_rule.dart';
 
+import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -63,7 +64,7 @@ void main() {
   late ProductDetailRepository productDetailRepository;
   late RequestCounterOfferDetails fakeCounterOfferDetails;
   late AplSimulatorOrder aplSimulatorOrder;
-  late final List<PriceAggregate> cartProducts;
+  late final Cart cartProducts;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -72,7 +73,7 @@ void main() {
     final materialListResponse =
         await MaterialListLocalDataSource().getProductList();
     aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
-    
+
     priceTiers = [
       PriceTier.empty().copyWith(
         tier: 'C',
@@ -139,8 +140,6 @@ void main() {
       (element) => element.materialInfo.type.typeBundle,
       orElse: () => PriceAggregate.empty(),
     );
-
-    
 
     bundleItem = bundleFromPriceAggregateList.copyWith(
       bundle: bundleFromPriceAggregateList.bundle.copyWith(
@@ -257,11 +256,20 @@ void main() {
           when(
             () => cartRepositoryMock.getAddedToCartProductList(),
           ).thenAnswer(
-            (invocation) async => const Right(
-              <PriceAggregate>[],
+            (invocation) async => Right(
+              Cart.empty().copyWith(
+                cartCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+                cartShipToCustomerCode: shipToInfo.shipToCustomerCode,
+              ),
             ),
           );
         },
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
         act: (bloc) => bloc.add(
           CartEvent.initialized(
             salesOrganisation: fakeMYSalesOrganisation,
@@ -408,10 +416,20 @@ void main() {
             () => cartRepositoryMock.getAddedToCartProductList(),
           ).thenAnswer(
             (invocation) async => Right(
-              priceAggregates,
+              Cart.empty().copyWith(
+                cartProducts: priceAggregates,
+                cartCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+                cartShipToCustomerCode: shipToInfo.shipToCustomerCode,
+              ),
             ),
           );
         },
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
         tearDown: () {
           expectedCartState = [];
         },
@@ -552,10 +570,20 @@ void main() {
             () => cartRepositoryMock.getAddedToCartProductList(),
           ).thenAnswer(
             (invocation) async => Right(
-              priceAggregates,
+              Cart.empty().copyWith(
+                cartProducts: priceAggregates,
+                cartCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+                cartShipToCustomerCode: shipToInfo.shipToCustomerCode,
+              ),
             ),
           );
         },
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
         tearDown: () {
           expectedCartState = [];
         },
@@ -723,10 +751,113 @@ void main() {
             () => cartRepositoryMock.getAddedToCartProductList(),
           ).thenAnswer(
             (invocation) async => Right(
-              priceAggregates,
+              Cart.empty().copyWith(
+                cartProducts: priceAggregates,
+                cartCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+                cartShipToCustomerCode: shipToInfo.shipToCustomerCode,
+              ),
             ),
           );
         },
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        tearDown: () {
+          expectedCartState = [];
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.initialized(
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+            user: fakeClientUser,
+          ),
+        ),
+        expect: () => expectedCartState,
+      );
+
+      blocTest<CartBloc, CartState>(
+        'Cart initialized fetchProductsAddedToCart-emit => getDetailsProductsAddedToCart-emit => ClearCart-emit',
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        setUp: () {
+          final updatedPriceAggregates = priceAggregates
+              .map(
+                (e) => e.materialInfo.type.typeBundle
+                    ? PriceAggregate.empty().copyWith(
+                        materialInfo: e.materialInfo,
+                        bundle: e.bundle,
+                        salesOrgConfig: e.salesOrgConfig,
+                      )
+                    : PriceAggregate.empty().copyWith(
+                        materialInfo: e.materialInfo,
+                        quantity: e.materialInfo.quantity.intValue,
+                        salesOrgConfig: e.salesOrgConfig,
+                        bonusSampleItems: e.bonusSampleItems,
+                      ),
+              )
+              .toList();
+          expectedCartState = [
+            CartState.initial().copyWith(
+              salesOrganisation: fakeMYSalesOrganisation,
+              config: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
+            ),
+            CartState.initial().copyWith(
+              isFetching: true,
+              salesOrganisation: fakeMYSalesOrganisation,
+              config: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
+            ),
+            CartState.initial().copyWith(
+              isClearing: true,
+              isFetching: true,
+              salesOrganisation: fakeMYSalesOrganisation,
+              config: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
+            ),
+            CartState.initial().copyWith(
+              salesOrganisation: fakeMYSalesOrganisation,
+              config: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ];
+
+          when(
+            () => cartRepositoryMock.getAddedToCartProductList(),
+          ).thenAnswer(
+            (invocation) async => Right(
+              Cart.empty().copyWith(
+                cartShipToCustomerCode: 'Fake-Ship-To',
+                cartCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+                cartProducts: updatedPriceAggregates,
+              ),
+            ),
+          );
+          when(
+            () => cartRepositoryMock.clearCart(),
+          ).thenAnswer(
+            (invocation) async => const Right(
+              unit,
+            ),
+          );
+        },
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
         tearDown: () {
           expectedCartState = [];
         },
@@ -4373,8 +4504,8 @@ void main() {
 
       group('deleteSuccessMessage -', () {
         test('when cart is empty', () {
-          final previousState =
-              CartState.initial().copyWith(cartProducts: cartProducts);
+          final previousState = CartState.initial()
+              .copyWith(cartProducts: cartProducts.cartProducts);
           final currentState = previousState.copyWith(cartProducts: []);
 
           expect(
@@ -4384,10 +4515,10 @@ void main() {
         });
 
         test('when remove material', () {
-          final materialIndex =
-              cartProducts.indexWhere((e) => e.materialInfo.type.typeMaterial);
+          final materialIndex = cartProducts.cartProducts
+              .indexWhere((e) => e.materialInfo.type.typeMaterial);
           final previousState = CartState.initial().copyWith(
-            cartProducts: cartProducts,
+            cartProducts: cartProducts.cartProducts,
           );
           final currentState = previousState.copyWith(
             cartProducts: [...priceAggregates]..removeAt(materialIndex),
@@ -4400,7 +4531,7 @@ void main() {
         });
 
         test('when remove bonus from material', () {
-          final materialWithBonus = cartProducts.firstWhere(
+          final materialWithBonus = cartProducts.cartProducts.firstWhere(
             (e) =>
                 e.materialInfo.type.typeMaterial &&
                 e.bonusSampleItems.isNotEmpty,
@@ -4419,13 +4550,13 @@ void main() {
         });
 
         test('when remove bundle', () {
-          final bundleIndex =
-              cartProducts.indexWhere((e) => e.materialInfo.type.typeBundle);
+          final bundleIndex = cartProducts.cartProducts
+              .indexWhere((e) => e.materialInfo.type.typeBundle);
           final previousState = CartState.initial().copyWith(
-            cartProducts: cartProducts,
+            cartProducts: cartProducts.cartProducts,
           );
           final currentState = previousState.copyWith(
-            cartProducts: [...cartProducts]..removeAt(bundleIndex),
+            cartProducts: [...cartProducts.cartProducts]..removeAt(bundleIndex),
           );
 
           expect(
@@ -4435,7 +4566,7 @@ void main() {
         });
 
         test('when remove item from bundle', () {
-          final bundle = cartProducts.firstWhere(
+          final bundle = cartProducts.cartProducts.firstWhere(
             (e) =>
                 e.materialInfo.type.typeBundle && e.bundle.materials.isNotEmpty,
           );
@@ -4455,14 +4586,14 @@ void main() {
         });
 
         test('when remove combo', () {
-          final comboIndex = cartProducts.indexWhere(
+          final comboIndex = cartProducts.cartProducts.indexWhere(
             (e) => e.materialInfo.type.typeCombo,
           );
           final previousState = CartState.initial().copyWith(
-            cartProducts: cartProducts,
+            cartProducts: cartProducts.cartProducts,
           );
           final currentState = previousState.copyWith(
-            cartProducts: [...cartProducts]..removeAt(comboIndex),
+            cartProducts: [...cartProducts.cartProducts]..removeAt(comboIndex),
           );
 
           expect(

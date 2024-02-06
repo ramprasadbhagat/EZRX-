@@ -203,7 +203,8 @@ void main() {
 
     autoRouterMock = locator<AutoRouteMock>();
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
-    mockCartItems = await CartLocalDataSource().getAddedToCartProductList();
+    mockCartItems =
+        (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
     priceList = await MaterialPriceLocalDataSource().getPriceList();
     aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
   });

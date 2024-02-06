@@ -54,6 +54,7 @@ void main() {
     materialListRepository = MaterialListRepositoryMock();
     config = ConfigMock();
     productList = (await CartLocalDataSource().getAddedToCartProductList())
+        .cartProducts
         .where((e) => e.materialInfo.type.typeMaterial)
         .toList();
     initialEvent = ComboDealMaterialDetailEvent.initialize(
@@ -72,6 +73,7 @@ void main() {
     materialInfos = await MaterialListLocalDataSource().getMaterialList();
     materialStockInfos =
         await StockInfoLocalDataSource().getMaterialStockInfoList();
+
     for (var i = 0; i < 2; i++) {
       productList[i] = productList[i].copyWith(
         materialInfo: productList[i]

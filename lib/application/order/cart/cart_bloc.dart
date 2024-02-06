@@ -320,8 +320,19 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (productAddedToCartList) {
-            final priceAggregateAddedToCartList = productAddedToCartList
+          (cart) {
+            final isShipToCodeDifferent = cart.cartShipToCustomerCode !=
+                state.shipToInfo.shipToCustomerCode;
+            final isCustomerCodeDifferent = cart.cartCustomerCode !=
+                state.customerCodeInfo.customerCodeSoldTo;
+
+            if (isCustomerCodeDifferent || isShipToCodeDifferent) {
+              add(const _ClearCart());
+
+              return;
+            }
+
+            final priceAggregateAddedToCartList = cart.cartProducts
                 .map(
                   (element) => element.toCartProduct,
                 )
@@ -405,7 +416,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
             if (newCartProductList.isNotEmpty) {
               add(const CartEvent.updateProductStock());
-              
+
               add(const CartEvent.fetchGrandTotalPriceForIdMarket());
             }
           },
