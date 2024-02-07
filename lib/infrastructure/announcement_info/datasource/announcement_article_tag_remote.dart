@@ -47,7 +47,9 @@ class AnnouncementArticlTagRemoteDataSource {
       );
       final finalData = res.data['data']['search']['results'];
 
-      return List.from(finalData).map((e) => e['name'].toString()).toList();
+      return List.from(finalData)
+          .map((e) => e['displayName'].toString())
+          .toList();
     });
   }
 

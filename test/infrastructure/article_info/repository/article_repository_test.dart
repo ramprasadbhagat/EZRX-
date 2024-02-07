@@ -2,7 +2,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/article_info/repository/article_info_repository.dart';
@@ -98,6 +97,8 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.articleVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
+      when(() => mockSalesOrg.languageCodeForHelpAndSupport)
+          .thenReturn(('zh-TW'));
       when(() => mockSalesOrg.isID).thenReturn((false));
 
       when(
@@ -107,7 +108,7 @@ void main() {
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
           pageSize: 24,
           after: '',
-          lang: Language.english().locale.languageCode,
+          lang: 'zh-TW',
         ),
       ).thenAnswer((invocation) async => AnnouncementArticleInfo.empty());
       final result = await repository.getArticles(

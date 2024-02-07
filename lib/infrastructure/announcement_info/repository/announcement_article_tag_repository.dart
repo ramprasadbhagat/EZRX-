@@ -39,7 +39,7 @@ class AnnouncementArticleTagRepository
         announcementArticleUrlPath: config.announcementApiUrlPath,
         template: config.announcementArticleTagTemplate,
         variablePath: variablePath,
-        lang: salesOrg.languageCode,
+        lang: salesOrg.languageCodeForHelpAndSupport,
       );
 
       return Right(announcementInfo);

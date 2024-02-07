@@ -615,8 +615,6 @@ Color getOosMaterialTagLabelColor(bool value) {
   return value ? ZPColors.darkerGrey : ZPColors.black;
 }
 
-String getOptionalText(bool value) => value ? '' : '(Optional)';
-
 String getOosTag() => 'Out of stock';
 
 Color getOosTagLabelColor() => ZPColors.black;

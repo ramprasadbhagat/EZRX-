@@ -43,7 +43,7 @@ class AnnouncementInfoRepository extends IAnnouncementInfoRepository {
         vnTemplate: config.announcementVnTemplate,
         pageSize: pageSize,
         variablePath: salesOrg.announcementVariablePath,
-        lang: user.preferredLanguage.locale.languageCode,
+        lang: salesOrg.languageCodeForHelpAndSupport,
         after: after,
       );
 

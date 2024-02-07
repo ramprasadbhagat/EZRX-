@@ -127,8 +127,8 @@ class User with _$User {
         'VN',
         'MM',
         'TH',
+        'TW',
         //TODO: Cover in another ticket
-        // 'TW',
         // 'KR',
       ];
 

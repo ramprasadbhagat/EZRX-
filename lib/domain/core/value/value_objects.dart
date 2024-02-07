@@ -352,8 +352,6 @@ class PoNumberRequired extends ValueObject<bool> {
 
   factory PoNumberRequired(bool input) => PoNumberRequired._(Right(input));
 
-  String get optionalText => getOptionalText(value.getOrElse(() => false));
-
   const PoNumberRequired._(this.value);
 }
 

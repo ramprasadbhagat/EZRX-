@@ -59,7 +59,6 @@ class _CategorySelector extends StatelessWidget {
             final value = state.filterCategoryKeyList.contains(category);
 
             return CheckboxListTile(
-              key: WidgetKeys.articleStatusFilter(category, value),
               contentPadding: EdgeInsets.zero,
               title: Text(
                 category,

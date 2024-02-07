@@ -58,7 +58,7 @@ class ArticleInfoRepository extends IArticleInfoRepository {
               template: config.articleTemplate,
               pageSize: pageSize,
               variablePath: salesOrg.articleVariablePath,
-              lang: user.preferredLanguage.locale.languageCode,
+              lang: salesOrg.languageCodeForHelpAndSupport,
               after: after,
             );
 

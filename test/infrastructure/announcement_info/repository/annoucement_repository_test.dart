@@ -100,6 +100,8 @@ void main() {
           .thenReturn('/api/announcement');
       when(() => mockSalesOrg.announcementVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
+      when(() => mockSalesOrg.languageCodeForHelpAndSupport)
+          .thenReturn(('zh-TW'));
       when(() => mockConfig.announcementVnTemplate)
           .thenReturn('fake-vn-template');
 
@@ -111,7 +113,7 @@ void main() {
           vnTemplate: 'fake-vn-template',
           pageSize: 24,
           after: '',
-          lang: fakeUser.preferredLanguage.locale.languageCode,
+          lang: 'zh-TW',
         ),
       ).thenAnswer((invocation) async => AnnouncementArticleInfo.empty());
       final result = await repository.getAnnouncement(
@@ -136,7 +138,7 @@ void main() {
           vnTemplate: 'fake-vn-template',
           pageSize: 24,
           after: '',
-          lang: fakeUser.preferredLanguage.locale.languageCode,
+          lang: 'zh-TW',
         ),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
