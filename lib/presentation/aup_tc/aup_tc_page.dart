@@ -272,15 +272,15 @@ class AcceptButton extends StatelessWidget {
         if (!isMarketPlace)
           BlocListener<UserBloc, UserState>(
             listenWhen: (pre, cur) =>
-                pre.showTermsAndConditionDialog !=
-                        cur.showTermsAndConditionDialog &&
-                    !cur.showTermsAndConditionDialog ||
-                cur.isLoginOnBehalf,
+                (pre.showTermsAndConditionDialog !=
+                            cur.showTermsAndConditionDialog &&
+                        !cur.showTermsAndConditionDialog ||
+                    cur.isLoginOnBehalf) &&
+                cur.user != User.empty(),
             listener: (context, _) {
               context.navigateBack();
             },
           ),
-
         if (isMarketPlace)
           BlocListener<EligibilityBloc, EligibilityState>(
             listenWhen: (pre, cur) =>
