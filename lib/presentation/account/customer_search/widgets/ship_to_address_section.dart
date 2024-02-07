@@ -3,6 +3,7 @@ part of 'package:ezrxmobile/presentation/account/customer_search/customer_search
 class _ShipToAddressSection extends StatelessWidget {
   final ShipToInfo shipToInfo;
   final CustomerCodeInfo customerCodeInfo;
+
   const _ShipToAddressSection({
     Key? key,
     required this.shipToInfo,
@@ -41,7 +42,8 @@ class _ShipToAddressSection extends StatelessWidget {
   void _onShipToCodeChange(BuildContext context) {
     final cartBloc = context.read<CartBloc>();
     final eligibilityBloc = context.read<EligibilityBloc>();
-    if (shipToInfo != eligibilityBloc.state.shipToInfo &&
+    if (eligibilityBloc.state.shipToInfo != ShipToInfo.empty() &&
+        shipToInfo != eligibilityBloc.state.shipToInfo &&
         cartBloc.state.cartProducts.isNotEmpty) {
       showModalBottomSheet(
         isScrollControlled: true,
