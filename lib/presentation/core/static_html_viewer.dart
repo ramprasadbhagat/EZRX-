@@ -14,6 +14,7 @@ class StaticHtmlViewer extends StatefulWidget {
   final String title;
   final String htmlPath;
   final String styleCss;
+
   const StaticHtmlViewer({
     Key? key,
     this.title = '',
@@ -53,37 +54,38 @@ class StaticHtmlViewerState extends State<StaticHtmlViewer> {
         currentPath: context.router.currentPath,
         child: Stack(
           children: [
-            InAppWebView(
-              key: WidgetKeys.staticHtmlViewer,
-              initialFile: widget.htmlPath,
-              initialOptions: InAppWebViewGroupOptions(
-                android: AndroidInAppWebViewOptions(
-                  useHybridComposition: true,
-                  useWideViewPort: false,
+            if (widget.htmlPath.isNotEmpty)
+              InAppWebView(
+                key: WidgetKeys.staticHtmlViewer,
+                initialFile: widget.htmlPath,
+                initialOptions: InAppWebViewGroupOptions(
+                  android: AndroidInAppWebViewOptions(
+                    useHybridComposition: true,
+                    useWideViewPort: false,
+                  ),
+                  ios: IOSInAppWebViewOptions(
+                    enableViewportScale: true,
+                  ),
+                  crossPlatform: InAppWebViewOptions(
+                    preferredContentMode: UserPreferredContentMode.RECOMMENDED,
+                    minimumFontSize: 14,
+                    allowUniversalAccessFromFileURLs: true,
+                  ),
                 ),
-                ios: IOSInAppWebViewOptions(
-                  enableViewportScale: true,
-                ),
-                crossPlatform: InAppWebViewOptions(
-                  preferredContentMode: UserPreferredContentMode.RECOMMENDED,
-                  minimumFontSize: 14,
-                  allowUniversalAccessFromFileURLs: true,
-                ),
+                onLoadStop: (controller, url) async {
+                  _controller = controller;
+                  if (widget.styleCss.isNotEmpty) {
+                    await _controller?.evaluateJavascript(
+                      source: widget.styleCss,
+                    );
+                  }
+                  if (mounted) {
+                    setState(() {
+                      isLoading = false;
+                    });
+                  }
+                },
               ),
-              onLoadStop: (controller, url) async {
-                _controller = controller;
-                if (widget.styleCss.isNotEmpty) {
-                  await _controller?.evaluateJavascript(
-                    source: widget.styleCss,
-                  );
-                }
-                if (mounted) {
-                  setState(() {
-                    isLoading = false;
-                  });
-                }
-              },
-            ),
             isLoading
                 ? Align(
                     alignment: Alignment.center,
