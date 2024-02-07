@@ -91,7 +91,8 @@ Either<ValueFailure<String>, String> validateStringIsBiggerThanZero(
       : left(ValueFailure.numberMustBiggerThanZero(failedValue: input));
 }
 
-Either<ValueFailure<String>, String> validateInputIsBiggerThanMaxValue(
+// Check if input does not exceed maxValue
+Either<ValueFailure<String>, String> validateInputNotExceedMaxValue(
   String input,
   int maxValue,
 ) {
@@ -104,7 +105,8 @@ Either<ValueFailure<String>, String> validateInputIsBiggerThanMaxValue(
         );
 }
 
-Either<ValueFailure<String>, String> validateStringInputIsBiggerThanMaxValue(
+// Check if input is less than maxValue
+Either<ValueFailure<String>, String> validateInputIsLessThanMaxValue(
   String input,
   double maxValue,
 ) {

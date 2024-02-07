@@ -33,7 +33,7 @@ class MonthsAfterExpiry extends ValueObject<String> {
   factory MonthsAfterExpiry.change(String searchText) {
     return MonthsAfterExpiry._(
       validateStringNotEmpty(searchText)
-          .flatMap((input) => validateInputIsBiggerThanMaxValue(input, 12)),
+          .flatMap((input) => validateInputNotExceedMaxValue(input, 12)),
     );
   }
   String get displayMonthsAfterExpiry {
@@ -50,7 +50,7 @@ class MonthsBeforeExpiry extends ValueObject<String> {
   factory MonthsBeforeExpiry.change(String searchText) {
     return MonthsBeforeExpiry._(
       validateStringNotEmpty(searchText)
-          .flatMap((input) => validateInputIsBiggerThanMaxValue(input, 36)),
+          .flatMap((input) => validateInputNotExceedMaxValue(input, 36)),
     );
   }
   String get displayMonthsBeforeExpiry {
@@ -103,7 +103,7 @@ class ReturnQuantity extends ValueObject<String> {
   ) {
     return ReturnQuantity._(
       validateStringNotEmpty(inputValue).flatMap(
-        (input) => validateInputIsBiggerThanMaxValue(
+        (input) => validateInputNotExceedMaxValue(
           inputValue,
           balanceQuantity,
         ),

@@ -237,7 +237,7 @@ class OrderRepository implements IOrderRepository {
     return SubmitOrder.empty().copyWith(
       userName: data.contactPerson.getValue().isNotEmpty
           ? data.contactPerson.getValue()
-          : user.fullName.toString(),
+          : user.username.getOrDefaultValue(''),
       poReference: data.poReference.getValue(),
       referenceNotes: data.referenceNote.getOrDefaultValue(''),
       specialInstructions: data.deliveryInstruction.getOrDefaultValue(''),

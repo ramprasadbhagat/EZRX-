@@ -611,7 +611,9 @@ class ContactPerson extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory ContactPerson(String input) {
-    return ContactPerson._(validateStringNotEmpty(input));
+    return ContactPerson._(
+      validateStringNotEmpty(input),
+    );
   }
 
   const ContactPerson._(this.value);
@@ -690,7 +692,7 @@ class CounterOfferDiscountValue extends ValueObject<String> {
       validateStringNotEmpty(input)
           .flatMap(validateStringIsBiggerThanZero)
           .flatMap(
-            (input) => validateStringInputIsBiggerThanMaxValue(input, 100),
+            (input) => validateInputIsLessThanMaxValue(input, 100),
           ),
     );
   }

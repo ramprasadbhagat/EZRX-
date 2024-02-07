@@ -113,6 +113,7 @@ class _DeliveryInfoState extends State<_DeliveryInfo> {
                                   labelText: 'Contact person',
                                   keyText: 'contactPersonKey',
                                   hintText: 'Enter contact person name',
+                                  maxLength: 35,
                                   label: DeliveryInfoLabel.contactPerson,
                                   deliveryInfoData: state.deliveryInfoData,
                                   focusNode: widget.focusNodes[
@@ -162,6 +163,7 @@ class _TextFormField extends StatefulWidget {
   final TextInputType keyboardType;
   final DeliveryInfoData deliveryInfoData;
   final FocusNode focusNode;
+  final int? maxLength;
 
   const _TextFormField({
     required this.labelText,
@@ -171,6 +173,7 @@ class _TextFormField extends StatefulWidget {
     required this.deliveryInfoData,
     this.hintText = '',
     required this.focusNode,
+    this.maxLength,
     Key? key,
   }) : super(key: key);
 
@@ -246,6 +249,7 @@ class _TextFormFieldState extends State<_TextFormField> {
             ),
             maxLines: widget.keyboardType == TextInputType.multiline ? 3 : 1,
             keyboardType: widget.keyboardType,
+            maxLength: widget.maxLength,
             onChanged: (value) {
               context.read<AdditionalDetailsBloc>().add(
                     AdditionalDetailsEvent.onTextChange(
