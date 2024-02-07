@@ -322,7 +322,7 @@ class _MaterialDetails extends StatelessWidget {
               textPadding: const EdgeInsets.symmetric(vertical: 2),
               valueText: cartItem.isMaxQtyExceedsForId
                   ? '${context.tr('Maximum order qty')}: ${cartItem.maximumQty}'
-                  : '${context.tr('Stock available')}: ${cartItem.stockQuantity}',
+                  : '${context.tr('Remaining stock')}: ${cartItem.stockQuantity}',
             ),
         ],
       ),

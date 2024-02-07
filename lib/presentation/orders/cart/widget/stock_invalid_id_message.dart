@@ -19,7 +19,7 @@ class _StockInvalidIDMarketMessage extends StatelessWidget {
                       ),
                       mainColor: ZPColors.lightRedStatusColor,
                       textValue:
-                          'Please ensure that the order quantity of each item is within order limit'
+                          'You have exceed the available qty for this item'
                               .tr(),
                     )
                   : const SizedBox.shrink();

@@ -651,7 +651,7 @@ void main() {
         final materialKey =
             find.byKey(WidgetKeys.cartItemProductMaterialNumber);
         expect(materialKey, findsOneWidget);
-        final stockAvailableKey = find.textContaining('Stock available'.tr());
+        final stockAvailableKey = find.textContaining('Remaining stock'.tr());
         expect(stockAvailableKey, findsOneWidget);
       });
 
