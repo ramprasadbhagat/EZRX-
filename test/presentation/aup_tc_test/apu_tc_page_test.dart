@@ -111,7 +111,7 @@ void main() {
           find.descendant(
             of: privacyCheckBox,
             matching: find.text(
-              'I have read and hereby consent to Zuellig Pharma and its affiliates processing my personal data in accordance with the Regional Privacy Policy.'
+              'I have read and hereby consent to my personal data being processed in accordance with the Regional Privacy Policy.'
                   .tr(),
             ),
           ),
@@ -202,7 +202,7 @@ void main() {
           find.descendant(
             of: privacyCheckBox,
             matching: find.text(
-              'I have read and hereby consent to Zuellig Pharma and its affiliates processing my personal data in accordance with the Regional Privacy Policy.'
+              'I have read and hereby consent to my personal data being processed in accordance with the Regional Privacy Policy.'
                   .tr(),
             ),
           ),

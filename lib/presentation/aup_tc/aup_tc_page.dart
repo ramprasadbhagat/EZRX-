@@ -198,7 +198,7 @@ class _PrivacyPolicyConsentCheckBox extends StatelessWidget {
           value: state.privacyConsent,
           title: Text(
             context.tr(
-              'I have read and hereby consent to Zuellig Pharma and its affiliates processing my personal data in accordance with the Regional Privacy Policy.',
+              'I have read and hereby consent to my personal data being processed in accordance with the Regional Privacy Policy.',
             ),
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: ZPColors.darkerGrey,
