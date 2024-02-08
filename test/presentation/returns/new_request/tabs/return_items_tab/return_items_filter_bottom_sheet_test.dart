@@ -113,7 +113,7 @@ void main() {
       verify(
         () => returnItemsBlocMock.add(
           ReturnItemsEvent.fetch(
-            appliedFilter: ReturnItemsFilter.empty(),
+            appliedFilter: ReturnItemsFilter.resetInvoiceDateFilter(),
             searchKey: SearchKey.search(''),
           ),
         ),

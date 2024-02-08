@@ -248,6 +248,39 @@ void main() {
       expect(find.byType(ReturnItemsFilterBottomSheet), findsOneWidget);
     });
 
+    testWidgets('Test Default Document Date when filter is reset',
+        (tester) async {
+      when(() => returnItemsFilterBlocMock.state).thenAnswer(
+        (invocation) => ReturnItemsFilterState.initial().copyWith(
+          filter: ReturnItemsFilter.empty().copyWith(
+            invoiceDateFrom: DateTimeStringValue('2023-12-24'),
+            invoiceDateTo: DateTimeStringValue('2023-12-25'),
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final filterButton = find.byKey(WidgetKeys.newRequestFilterIcon);
+      expect(filterButton, findsOneWidget);
+      await tester.tap(filterButton);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(ReturnItemsFilterBottomSheet), findsOneWidget);
+
+      final resetButton = find.byKey(WidgetKeys.filterResetButton);
+      expect(resetButton, findsOneWidget);
+      await tester.tap(resetButton);
+
+      verify(
+        () => returnItemsBlocMock.add(
+          ReturnItemsEvent.fetch(
+            appliedFilter: ReturnItemsFilter.resetInvoiceDateFilter(),
+            searchKey: SearchKey.search(''),
+          ),
+        ),
+      ).called(1);
+    });
+
     testWidgets('=> Show snackbar when api error', (tester) async {
       final expectStates = [
         ReturnItemsState.initial(),
