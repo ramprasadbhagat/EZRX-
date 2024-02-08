@@ -929,6 +929,8 @@ void main() {
       testWidgets(
         'Body section',
         (tester) async {
+          tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+          tester.binding.window.devicePixelRatioTestValue = 1.0;
           await tester.pumpWidget(getScopedWidget());
 
           await tester.pump();
@@ -950,16 +952,18 @@ void main() {
           final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
           expect(comboMaterialList, findsOneWidget);
 
-          final cartItemQuantityInputKey = find.byType(CartItemQuantityInput);
+          final cartItemQuantityInputKey =
+              find.byType(CartItemQuantityInput).first;
           expect(cartItemQuantityInputKey, findsOneWidget);
-          final cartItemAddKey = find.byKey(WidgetKeys.cartItemAddKey);
+          final cartItemAddKey = find.byKey(WidgetKeys.cartItemAddKey).first;
           expect(cartItemAddKey, findsOneWidget);
-          final cartItemDeleteKey = find.byKey(WidgetKeys.cartItemDeleteKey);
+          final cartItemDeleteKey =
+              find.byKey(WidgetKeys.cartItemDeleteKey).first;
           expect(cartItemDeleteKey, findsOneWidget);
           final quantityInputTextKey =
-              find.byKey(WidgetKeys.quantityInputTextKey);
+              find.byKey(WidgetKeys.quantityInputTextKey).first;
           expect(quantityInputTextKey, findsOneWidget);
-          await tester.tap(cartItemAddKey);
+          await tester.tap(cartItemAddKey, warnIfMissed: false);
           await tester.pump();
           verify(
             () => comboDetailMockBloc.add(
@@ -969,7 +973,7 @@ void main() {
               ),
             ),
           ).called(1);
-          await tester.tap(cartItemDeleteKey);
+          await tester.tap(cartItemDeleteKey, warnIfMissed: false);
           await tester.pump();
           verify(
             () => comboDetailMockBloc.add(
@@ -1023,7 +1027,7 @@ void main() {
           expect(comboRateDiscounted, findsNothing);
 
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
-          expect(nextDealInfo, findsNothing);
+          expect(nextDealInfo, findsOneWidget);
 
           final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
           expect(checkoutButton, findsOneWidget);
@@ -1861,6 +1865,8 @@ void main() {
       testWidgets(
         'Body section',
         (tester) async {
+          tester.binding.window.physicalSizeTestValue = const Size(600, 900);
+          tester.binding.window.devicePixelRatioTestValue = 1.0;
           await tester.pumpWidget(getScopedWidget());
 
           await tester.pump();

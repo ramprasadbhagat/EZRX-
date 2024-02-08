@@ -44,7 +44,7 @@ final fakeKHSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   disableBundles: false,
   disableProcessingStatus: false,
   disableOrderType: false,
-  displayItemTaxBreakdown: true,
+  displayItemTaxBreakdown: false,
   displaySubtotalTaxBreakdown: true,
   enableCollectiveNumber: false,
   enableGimmickMaterial: false,

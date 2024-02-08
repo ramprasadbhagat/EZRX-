@@ -483,7 +483,7 @@ void main() {
         );
         expect(cartItemProductTotalPrice, findsWidgets);
       });
-      testWidgets('cart Combo Item delete buttont test', (tester) async {
+      testWidgets('cart Combo Item delete button test', (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [cartItem],
@@ -506,6 +506,89 @@ void main() {
         final deleteButton = find.text('Delete');
         await tester.tap(deleteButton);
         await tester.pump();
+      });
+
+      testWidgets(
+          'Cart Combo Item should display one total amount if tax is not applicable',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartItem.copyWith(
+                comboMaterials: cartItem.comboMaterials
+                    .map(
+                      (e) => e.copyWith(
+                        salesOrgConfig: fakeKHSalesOrgConfigs,
+                        comboDealType: 'K1',
+                        comboDeals: PriceComboDeal.empty().copyWith(
+                          flexibleGroup: FlexibleGroup('123456'),
+                          salesDeal: SalesDealNumber('654321'),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              )
+            ],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo
+                .copyWith(salesDeals: [SalesDealNumber('654321')]),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final comboItem = find.byType(
+          CartProductCombo,
+        );
+        expect(comboItem, findsOneWidget);
+        final totalPriceWithTaxAmountFinder =
+            find.byKey(WidgetKeys.cartItemProductTotalPriceWithTaxAmount);
+        expect(totalPriceWithTaxAmountFinder, findsNothing);
+      });
+
+      testWidgets('Display best deal message for cart combo product K1',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartItem.copyWith(
+                comboMaterials: cartItem.comboMaterials
+                    .map(
+                      (e) => e.copyWith(
+                        salesOrgConfig: fakeKHSalesOrgConfigs,
+                        comboDealType: 'K1',
+                        comboDeals: PriceComboDeal.empty().copyWith(
+                          flexibleGroup: FlexibleGroup('123456'),
+                          salesDeal: SalesDealNumber('654321'),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              )
+            ],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo
+                .copyWith(salesDeals: [SalesDealNumber('654321')]),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final comboItem = find.byType(
+          CartProductCombo,
+        );
+        expect(comboItem, findsOneWidget);
+        final bestDealMessageFinder =
+            find.text('Yay! You’ve got the best deal.');
+        expect(bestDealMessageFinder, findsOneWidget);
       });
     },
   );

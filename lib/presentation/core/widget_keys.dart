@@ -580,6 +580,8 @@ class WidgetKeys {
   static const Key cartItemProductUnitPrice = Key('cartItemProductUnitPrice');
   static const Key cartItemCutOffListPrice = Key('cartItemCutOffListPrice');
   static const Key cartItemProductTotalPrice = Key('cartItemProductTotalPrice');
+  static const Key cartItemProductTotalPriceWithTaxAmount =
+      Key('cartItemProductTotalPriceWithTaxAmount');
   static const Key cartItemProductCounterOfferLabel =
       Key('cartItemProductCounterOfferLabel');
   static Key cartItemBundleTile(String bundleNumber) =>

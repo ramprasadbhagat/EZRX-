@@ -99,7 +99,7 @@ void main() {
       expect(comboDeal.minPurchaseQty, 0);
       expect(comboDeal.scheme.comboDealTitleAppbar, 'Combo K1');
       expect(comboDeal.scheme.comboDealType, 'K1');
-      expect(comboDeal.isNextComboDealVisible, false);
+      expect(comboDeal.isNextComboDealVisible, true);
       expect(comboDeal.schemeMinimumQtyRequirement, '');
       expect(comboDeal.scheme.comboDealCanLoadmore, false);
       expect(comboDeal.scheme.haveFixedMaterials, false);

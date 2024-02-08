@@ -73,6 +73,7 @@ import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -1051,7 +1052,7 @@ void main() {
       );
 
       testWidgets(
-        'Show tax details on material level when displayItemTaxBreakdown is enabled for KH with material level tax',
+        'Show tax details on material level when displayItemTaxBreakdown is enabled for TH with material level tax',
         (tester) async {
           final cartState = CartState.initial().copyWith(
             cartProducts: <PriceAggregate>[
@@ -1067,14 +1068,14 @@ void main() {
                 price: Price.empty().copyWith(
                   finalPrice: MaterialPrice(234.50),
                 ),
-                salesOrgConfig: fakeKHSalesOrgConfigs,
+                salesOrgConfig: fakeTHSalesOrgConfigs,
               ),
             ],
           );
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeKHSalesOrgConfigs,
-              salesOrganisation: fakeKHSalesOrganisation,
+              salesOrgConfigs: fakeTHSalesOrgConfigs,
+              salesOrganisation: fakeTHSalesOrganisation,
             ),
           );
           when(() => cartBloc.state).thenReturn(
@@ -1090,14 +1091,14 @@ void main() {
           final taxPercentageFinder = find.text('(5% tax)');
           expect(taxPercentageFinder, findsNothing);
           final vatPercentageFinder =
-              find.text('(${fakeKHSalesOrgConfigs.vatValue}% tax)');
+              find.text('(${fakeTHSalesOrgConfigs.vatValue}% tax)');
           expect(vatPercentageFinder, findsOneWidget);
           final listPriceWithTax = cartState
               .cartProducts.first.finalPriceTotalWithTax
               .toStringAsFixed(2);
           expect(
             find.text(
-              '${fakeKHSalesOrgConfigs.currency.code} $listPriceWithTax',
+              '${fakeTHSalesOrgConfigs.currency.code} $listPriceWithTax',
               findRichText: true,
             ),
             findsOneWidget,
@@ -2222,7 +2223,7 @@ void main() {
         );
       });
       //TODO: Re-check unit test
-      
+
       // testWidgets(
       //     'Should re-initialize AdditionalDetailsBloc when update cart or clear cart',
       //     (tester) async {
@@ -3165,7 +3166,7 @@ void main() {
               ),
             ],
           );
-          
+
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeVNSalesOrgConfigs,
@@ -3287,8 +3288,6 @@ void main() {
       });
 
       testWidgets('BillToInfo test when enablebillto is false', (tester) async {
-       
-
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[
             PriceAggregate.empty().copyWith(

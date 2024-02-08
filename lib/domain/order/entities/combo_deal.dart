@@ -433,10 +433,10 @@ class ComboDeal with _$ComboDeal {
 
   bool get isNextComboDealVisible {
     switch (scheme) {
-      case ComboDealScheme.k1:
       case ComboDealScheme.k21:
       case ComboDealScheme.kWithSuffix:
         return false;
+      case ComboDealScheme.k1:
       case ComboDealScheme.k22:
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:

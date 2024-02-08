@@ -30,9 +30,9 @@ import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 
@@ -177,17 +177,17 @@ void main() {
           taxClassification: MaterialTaxClassification('Product : Full Tax'),
           tax: 10,
         ),
-        salesOrgConfig: fakeKHSalesOrgConfigs,
+        salesOrgConfig: fakeTHSalesOrgConfigs,
       );
       final submitMaterialInfo = customPriceAggregate.toSubmitMaterialInfo();
 
       expect(
         submitMaterialInfo.mrp,
-        finalPrice + (finalPrice * fakeKHSalesOrgConfigs.vatValue) / 100,
+        finalPrice + (finalPrice * fakeTHSalesOrgConfigs.vatValue) / 100,
       );
       expect(
         submitMaterialInfo.tax,
-        (finalPrice * fakeKHSalesOrgConfigs.vatValue) / 100,
+        (finalPrice * fakeTHSalesOrgConfigs.vatValue) / 100,
       );
     });
 
@@ -1741,11 +1741,11 @@ void main() {
             tax: 5.0,
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
           ),
-          salesOrgConfig: fakeKHSalesOrgConfigs,
+          salesOrgConfig: fakeTHSalesOrgConfigs,
         );
         expect(
           customPriceAggregate.itemTaxPercent,
-          10.0,
+          7.0,
         );
       },
     );
