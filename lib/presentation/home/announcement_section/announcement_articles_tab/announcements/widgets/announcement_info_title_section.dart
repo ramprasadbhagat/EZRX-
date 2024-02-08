@@ -76,7 +76,7 @@ class _AnnouncementInfoTitleSection extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            if (details.publishedDate.aWeekDifference)
+            if (details.releaseDate.aWeekDifference)
               const NewAnnouncementIcon(),
           ],
         ),

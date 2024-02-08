@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcement_info_details_page.dart';
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +47,7 @@ void main() {
       summary: 'Summary',
       thumbnail: 'https://picsum.photos/200/300',
       publishedDate: DateTimeStringValue(''),
-      releaseDate: DateTimeStringValue(''),
+      releaseDate: DateTimeStringValue('20240101'),
       manufacturer: Manufacturer('Manufacturer'),
       source: Source(''),
       tag: '',
@@ -321,6 +322,27 @@ void main() {
           expect(announcementInfoDetailsPage, findsOneWidget);
           final errorSnackBar = find.byKey(WidgetKeys.customSnackBar);
           expect(errorSnackBar, findsOneWidget);
+        });
+      },
+    );
+
+    testWidgets(
+      'Test New AnnounceMent Icon not visible for announcements that has been released before 7 days from now',
+      (tester) async {
+        await tester.runAsync(() async {
+          when(() => announcementInfoDetailsBlocMock.state).thenReturn(
+            mockAnnouncementInfoDetailsState,
+          );
+
+          await tester.pumpFrames(
+            getAnnouncementInfoDetailsPage(),
+            const Duration(seconds: 5),
+          );
+          final announcementInfoDetailsPage =
+              find.byKey(WidgetKeys.announcementDetailsPageKey);
+          expect(announcementInfoDetailsPage, findsOneWidget);
+          final newIcon = find.byType(NewAnnouncementIcon);
+          expect(newIcon, findsNothing);
         });
       },
     );
