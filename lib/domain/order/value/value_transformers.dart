@@ -111,7 +111,7 @@ String getOrderStatus(String status) {
     case 'Pending release - seller approval required':
       return 'Pending release';
     case 'Order Creating':
-      return 'In queue';
+      return 'Order Created';
     case '':
       return '-';
     default:
@@ -119,7 +119,7 @@ String getOrderStatus(String status) {
   }
 }
 
-bool checkIfInQueue(String value) => value.toLowerCase() == 'order creating';
+bool checkIfInQueue(String value) => value.toLowerCase() == 'in queue';
 
 String queueStateToOrderConfirmationIcon(bool isInQueue) =>
     isInQueue ? SvgImage.orderInQueue : SvgImage.orderCreated;
@@ -245,7 +245,7 @@ List<OrderHistoryStep> getOrderHistorySteps({
 String getOrderSAPStatus(String status) {
   switch (status) {
     case 'Order Creating':
-      return 'In queue';
+      return 'Order Created';
     case '':
       return '-';
     default:

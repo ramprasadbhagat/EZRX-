@@ -1035,7 +1035,7 @@ void main() {
       );
 
       await tester.pumpAndSettle();
-      final orderCreatedText = find.text('In queue');
+      final orderCreatedText = find.text('Order Created');
       expect(orderCreatedText, findsOneWidget);
     });
 
@@ -1121,7 +1121,7 @@ void main() {
         EligibilityState.initial().copyWith(
           customerCodeInfo: customerCodeInfoList.soldToInformation.last,
           shipToInfo:
-          customerCodeInfoList.soldToInformation.last.shipToInfos.first,
+              customerCodeInfoList.soldToInformation.last.shipToInfos.first,
         ),
       );
 
@@ -1140,7 +1140,7 @@ void main() {
         EligibilityState.initial().copyWith(
           customerCodeInfo: customerCodeInfoList.soldToInformation.last,
           shipToInfo:
-          customerCodeInfoList.soldToInformation.last.shipToInfos.first,
+              customerCodeInfoList.soldToInformation.last.shipToInfos.first,
         ),
       );
       await tester.pumpWidget(getScopedWidget());
