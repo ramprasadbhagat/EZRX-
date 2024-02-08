@@ -93,7 +93,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                             .toString(),
                                                         showPreviousPrice:
                                                             e.isCounterOffer,
-                                                        hasDescription: true,
+                                                        hidePrice: e.hidePrice,
                                                       ),
                                                 statusWidget: StatusLabel(
                                                   key: WidgetKeys

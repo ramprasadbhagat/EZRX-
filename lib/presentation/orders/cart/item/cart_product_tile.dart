@@ -477,9 +477,6 @@ class _BonusPriceCounterSection extends StatelessWidget {
         (cartItem.isBonusEligibleForNonMYPnGSalesRep ||
             isMYPnGSalesRepEligible);
 
-    final isCounterOfferEnable = eligibilityState.isCounterOfferVisible &&
-        !cartItem.materialInfo.hidePrice;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
@@ -520,7 +517,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
                 ),
               ),
             ),
-          if (isCounterOfferEnable)
+          if (eligibilityState.isCounterOfferVisible)
             Flexible(
               child: FittedBox(
                 child: TextButton.icon(

@@ -29,6 +29,7 @@ _$_SubmitMaterialInfoDto _$$_SubmitMaterialInfoDtoFromJson(
       principalCode: json['PrincipalCode'] as String? ?? '',
       principalName: json['PrincipalName'] as String? ?? '',
       batch: json['batch'] as String? ?? '',
+      isCounterOffer: json['isCounterOffer'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SubmitMaterialInfoDtoToJson(
@@ -57,5 +58,6 @@ Map<String, dynamic> _$$_SubmitMaterialInfoDtoToJson(
   val['PrincipalCode'] = instance.principalCode;
   val['PrincipalName'] = instance.principalName;
   writeNotNull('batch', overrideBatchJson(instance.batch));
+  val['isCounterOffer'] = instance.isCounterOffer;
   return val;
 }

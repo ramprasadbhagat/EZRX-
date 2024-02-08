@@ -63,6 +63,8 @@ mixin _$SubmitMaterialInfoDto {
       toJson: overrideBatchJson,
       includeIfNull: false)
   String get batch => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isCounterOffer', defaultValue: false)
+  bool get isCounterOffer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -102,7 +104,9 @@ abstract class $SubmitMaterialInfoDtoCopyWith<$Res> {
           defaultValue: '',
           toJson: overrideBatchJson,
           includeIfNull: false)
-      String batch});
+      String batch,
+      @JsonKey(name: 'isCounterOffer', defaultValue: false)
+      bool isCounterOffer});
 
   $MaterialItemOverrideDtoCopyWith<$Res> get materialItemOverride;
 }
@@ -136,6 +140,7 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
     Object? principalCode = null,
     Object? principalName = null,
     Object? batch = null,
+    Object? isCounterOffer = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -198,6 +203,10 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
+      isCounterOffer: null == isCounterOffer
+          ? _value.isCounterOffer
+          : isCounterOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -245,7 +254,9 @@ abstract class _$$_SubmitMaterialInfoDtoCopyWith<$Res>
           defaultValue: '',
           toJson: overrideBatchJson,
           includeIfNull: false)
-      String batch});
+      String batch,
+      @JsonKey(name: 'isCounterOffer', defaultValue: false)
+      bool isCounterOffer});
 
   @override
   $MaterialItemOverrideDtoCopyWith<$Res> get materialItemOverride;
@@ -277,6 +288,7 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
     Object? principalCode = null,
     Object? principalName = null,
     Object? batch = null,
+    Object? isCounterOffer = null,
   }) {
     return _then(_$_SubmitMaterialInfoDto(
       materialNumber: null == materialNumber
@@ -339,6 +351,10 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
+      isCounterOffer: null == isCounterOffer
+          ? _value.isCounterOffer
+          : isCounterOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -376,7 +392,9 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
           defaultValue: '',
           toJson: overrideBatchJson,
           includeIfNull: false)
-      required this.batch})
+      required this.batch,
+      @JsonKey(name: 'isCounterOffer', defaultValue: false)
+      required this.isCounterOffer})
       : _bonuses = bonuses,
         super._();
 
@@ -444,10 +462,13 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
       toJson: overrideBatchJson,
       includeIfNull: false)
   final String batch;
+  @override
+  @JsonKey(name: 'isCounterOffer', defaultValue: false)
+  final bool isCounterOffer;
 
   @override
   String toString() {
-    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, parentId: $parentId, materialItemOverride: $materialItemOverride, productType: $productType, price: $price, tax: $tax, mrp: $mrp, promoStatus: $promoStatus, promoType: $promoType, principalCode: $principalCode, principalName: $principalName, batch: $batch)';
+    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, parentId: $parentId, materialItemOverride: $materialItemOverride, productType: $productType, price: $price, tax: $tax, mrp: $mrp, promoStatus: $promoStatus, promoType: $promoType, principalCode: $principalCode, principalName: $principalName, batch: $batch, isCounterOffer: $isCounterOffer)';
   }
 
   @override
@@ -477,7 +498,9 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
                 other.principalCode == principalCode) &&
             (identical(other.principalName, principalName) ||
                 other.principalName == principalName) &&
-            (identical(other.batch, batch) || other.batch == batch));
+            (identical(other.batch, batch) || other.batch == batch) &&
+            (identical(other.isCounterOffer, isCounterOffer) ||
+                other.isCounterOffer == isCounterOffer));
   }
 
   @JsonKey(ignore: true)
@@ -498,7 +521,8 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
       promoType,
       principalCode,
       principalName,
-      batch);
+      batch,
+      isCounterOffer);
 
   @JsonKey(ignore: true)
   @override
@@ -549,7 +573,9 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
           defaultValue: '',
           toJson: overrideBatchJson,
           includeIfNull: false)
-      required final String batch}) = _$_SubmitMaterialInfoDto;
+      required final String batch,
+      @JsonKey(name: 'isCounterOffer', defaultValue: false)
+      required final bool isCounterOffer}) = _$_SubmitMaterialInfoDto;
   const _SubmitMaterialInfoDto._() : super._();
 
   factory _SubmitMaterialInfoDto.fromJson(Map<String, dynamic> json) =
@@ -610,6 +636,9 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
       toJson: overrideBatchJson,
       includeIfNull: false)
   String get batch;
+  @override
+  @JsonKey(name: 'isCounterOffer', defaultValue: false)
+  bool get isCounterOffer;
   @override
   @JsonKey(ignore: true)
   _$$_SubmitMaterialInfoDtoCopyWith<_$_SubmitMaterialInfoDto> get copyWith =>

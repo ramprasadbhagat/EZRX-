@@ -145,6 +145,7 @@ class PriceAggregate with _$PriceAggregate {
       promoStatus: promoStatus,
       promoType: materialInfo.promoType,
       principalData: materialInfo.principalData,
+      isCounterOffer: materialInfo.counterOfferDetails.hasCounterOffer,
     );
   }
 

@@ -148,6 +148,7 @@ class ComboMaterialItem with _$ComboMaterialItem {
       promoStatus: false,
       promoType: materialInfo.promoType,
       principalData: materialInfo.principalData,
+      isCounterOffer: false,
     );
   }
 }

@@ -172,7 +172,7 @@ class OrderSuccessRobot extends CommonRobot {
   void verifyMaterialUnitPrice(String price, {bool isFree = false}) {
     final label = find.descendant(
       of: _verifyingItem,
-      matching: find.byKey(WidgetKeys.orderSuccessItemUnitPrice),
+      matching: find.byKey(WidgetKeys.orderItemUnitPrice),
     );
     expect(
       find.descendant(

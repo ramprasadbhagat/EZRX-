@@ -39,6 +39,8 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
     ///Todo: consider to delete it
     @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
         required String batch,
+    @JsonKey(name: 'isCounterOffer', defaultValue: false)
+        required bool isCounterOffer,
   }) = _SubmitMaterialInfoDto;
 
   SubmitMaterialInfo toDomain() {
@@ -60,6 +62,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
         principalName: PrincipalName(principalName),
         principalCode: PrincipalCode(principalCode),
       ),
+      isCounterOffer: isCounterOffer,
     );
   }
 
@@ -90,6 +93,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
           submitMaterialInfo.principalData.principalCode.getOrDefaultValue(''),
       principalName:
           submitMaterialInfo.principalData.principalName.getOrDefaultValue(''),
+      isCounterOffer: submitMaterialInfo.isCounterOffer,
     );
   }
 

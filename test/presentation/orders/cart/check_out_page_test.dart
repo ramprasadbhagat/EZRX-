@@ -34,6 +34,7 @@ import 'package:ezrxmobile/domain/order/entities/payment_customer_information.da
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -222,7 +223,7 @@ void main() {
 
   //////////////////////////////////////////////////////////////////////////
   group('Checkout Page Test', () {
-    setUp(()async{
+    setUp(() async {
       locator = GetIt.instance;
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
@@ -286,8 +287,7 @@ void main() {
               await PaymentCustomerInformationLocalDataSource()
                   .getPaymentCustomerInformation(),
         ),
-      ); 
-
+      );
     });
     Widget getScopedWidget() {
       return EasyLocalization(
@@ -947,7 +947,7 @@ void main() {
     testWidgets(
       '=> test Checkout Body Product Scroll List for bundle type',
       (tester) async {
-         when(() => eligibilityBloc.state).thenReturn(
+        when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
@@ -1027,7 +1027,7 @@ void main() {
     testWidgets(
       '=> test Checkout Body Product Scroll List',
       (tester) async {
-          when(() => eligibilityBloc.state).thenReturn(
+        when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
@@ -1093,7 +1093,7 @@ void main() {
     testWidgets(
       '=> test Checkout Body Product Scroll List for combo type',
       (tester) async {
-         when(() => eligibilityBloc.state).thenReturn(
+        when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
@@ -2430,8 +2430,7 @@ void main() {
 
       final subTotalTextFinder = find.descendant(
         of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
-        matching:
-            find.textContaining(
+        matching: find.textContaining(
           'Subtotal (${fakeKHSalesOrgConfigs.displayPrefixTax}.tax)',
         ),
       );
@@ -2674,8 +2673,6 @@ void main() {
     );
 
     testWidgets('BillToInfo test when enablebillto is true', (tester) async {
-      
-
       final cartState = CartState.initial().copyWith(
         cartProducts: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
@@ -2709,8 +2706,6 @@ void main() {
     testWidgets(
         'BillToInfo test when enablebillto is true and billToInfo empty',
         (tester) async {
-      
-
       final cartState = CartState.initial().copyWith(
         cartProducts: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
@@ -2748,8 +2743,6 @@ void main() {
     });
 
     testWidgets('BillToInfo test when enablebillto is false', (tester) async {
-    
-
       final cartState = CartState.initial().copyWith(
         cartProducts: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
@@ -2778,6 +2771,45 @@ void main() {
 
       final payerInformation = find.byKey(WidgetKeys.payerInformation);
       expect(payerInformation, findsNothing);
+    });
+
+    testWidgets('Counter offer Requested for png material', (tester) async {
+      final pnGCartItem = PriceAggregate.empty().copyWith(
+        quantity: 2,
+        price: Price.empty().copyWith(
+          isPriceOverride: true,
+          finalPrice: MaterialPrice(364.80),
+          lastPrice: MaterialPrice(364.80),
+        ),
+        materialInfo: MaterialInfo.empty().copyWith(
+          type: MaterialInfoType('material'),
+          hidePrice: true,
+          counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
+            counterOfferPrice: CounterOfferValue('500'),
+          ),
+        ),
+      );
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          cartProducts: [pnGCartItem],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final materialKey = find.byKey(WidgetKeys.cartItemProductMaterialNumber);
+      expect(materialKey, findsOneWidget);
+
+      final priceNotAvailableFinder = find.descendant(
+        of: find.byKey(WidgetKeys.cartItemProductUnitPrice),
+        matching: find.text('Price Not Available', findRichText: true),
+      );
+      expect(priceNotAvailableFinder, findsOneWidget);
+
+      final requestedCounterOfferKey =
+          find.text('Requested counter offer'.tr());
+      expect(requestedCounterOfferKey, findsOneWidget);
     });
   });
 }

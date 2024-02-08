@@ -961,6 +961,8 @@ void main() {
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: [
               fakeMaterialItem.copyWith(
+                originPrice: listPrice.getValue(),
+                unitPrice: finalPrice.getValue(),
                 material: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material-1'),
                 ),
@@ -975,6 +977,12 @@ void main() {
               ),
             ],
           ),
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
+          salesOrganisation: fakeVNSalesOrganisation,
         ),
       );
       await tester.pumpWidget(getWidget());
@@ -1826,23 +1834,23 @@ void main() {
       expect(tax, findsOneWidget);
       expect(taxAmount, findsOneWidget);
       expect(totalPriceWithTax, findsOneWidget);
-
     });
-      testWidgets('BillToInfo when enable bill to true', (tester) async {
-        when(() => eligibilityBlocMock.state).thenAnswer(
-          (invocation) => EligibilityState.initial().copyWith(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfigs: fakeKHSalesOrgConfigs,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) =>
-              OrderSummaryState.initial().copyWith.orderHistoryDetails(
-                    referenceNotes: 'fake-reference-notes',
-                  ),
-        );
 
-        when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+    testWidgets('BillToInfo when enable bill to true', (tester) async {
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+        ),
+      );
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) =>
+            OrderSummaryState.initial().copyWith.orderHistoryDetails(
+                  referenceNotes: 'fake-reference-notes',
+                ),
+      );
+
+      when(() => paymentCustomerInformationBlocMock.state).thenReturn(
         PaymentCustomerInformationState.initial().copyWith(
           paymentCustomerInformation:
               await PaymentCustomerInformationLocalDataSource()
@@ -1850,96 +1858,133 @@ void main() {
         ),
       );
 
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        expect(find.byKey(WidgetKeys.payerInformation), findsOneWidget);
-      });
-
-      testWidgets('BillToInfo when enable bill to true and billToInfo is empty',
-          (tester) async {
-        when(() => paymentCustomerInformationBlocMock.state).thenAnswer(
-          (invocation) => PaymentCustomerInformationState.initial().copyWith(
-            paymentCustomerInformation: PaymentCustomerInformation.empty(),
-          ),
-        );
-
-        when(() => eligibilityBlocMock.state).thenAnswer(
-          (invocation) => EligibilityState.initial().copyWith(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfigs: fakeKHSalesOrgConfigs,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) =>
-              OrderSummaryState.initial().copyWith.orderHistoryDetails(
-                    referenceNotes: 'fake-reference-notes',
-                  ),
-        );
-
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
-      });
-
-      testWidgets('BillToInfo when enable bill to false', (tester) async {
-        when(() => eligibilityBlocMock.state).thenAnswer(
-          (invocation) => EligibilityState.initial().copyWith(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfigs: fakeTWSalesOrgConfigs,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) =>
-              OrderSummaryState.initial().copyWith.orderHistoryDetails(
-                    referenceNotes: 'fake-reference-notes',
-                  ),
-        );
-
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
-      });
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.payerInformation), findsOneWidget);
     });
 
-    testWidgets('Bonus Stock tag', (tester) async {
-      when(() => orderSummaryBlocMock.state).thenAnswer(
-        (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: fakeOrderHistoryDetails,
+    testWidgets('BillToInfo when enable bill to true and billToInfo is empty',
+        (tester) async {
+      when(() => paymentCustomerInformationBlocMock.state).thenAnswer(
+        (invocation) => PaymentCustomerInformationState.initial().copyWith(
+          paymentCustomerInformation: PaymentCustomerInformation.empty(),
         ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+        ),
+      );
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) =>
+            OrderSummaryState.initial().copyWith.orderHistoryDetails(
+                  referenceNotes: 'fake-reference-notes',
+                ),
       );
 
       await tester.pumpWidget(getWidget());
       await tester.pump();
-      expect(
-        find.byKey(WidgetKeys.orderSuccessItemsSection),
-        findsOneWidget,
-      );
-      await tester.fling(
-        find.byKey(WidgetKeys.scrollList),
-        const Offset(0, -10000),
-        100,
-      );
-      await tester.pumpAndSettle();
-
-      expect(
-        find.byKey(WidgetKeys.orderSuccessMaterialItem(0)),
-        findsWidgets,
-      );
-      expect(
-        find.descendant(
-          of: find.byKey(WidgetKeys.orderSuccessMaterialItem(0)).first,
-          matching: find.widgetWithText(StatusLabel, 'Bonus'),
-        ),
-        findsOneWidget,
-      );
-      expect(
-        find.descendant(
-          of: find.byKey(WidgetKeys.orderSuccessMaterialItem(0)).first,
-          matching: find.widgetWithText(StatusLabel, 'Out of stock'),
-        ),
-        findsOneWidget,
-      );
+      expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
     });
+
+    testWidgets('BillToInfo when enable bill to false', (tester) async {
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+        ),
+      );
+      when(() => orderSummaryBlocMock.state).thenAnswer(
+        (invocation) =>
+            OrderSummaryState.initial().copyWith.orderHistoryDetails(
+                  referenceNotes: 'fake-reference-notes',
+                ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
+    });
+  });
+
+  testWidgets('Bonus Stock tag', (tester) async {
+    when(() => orderSummaryBlocMock.state).thenAnswer(
+      (invocation) => OrderSummaryState.initial().copyWith(
+        orderHistoryDetails: fakeOrderHistoryDetails,
+      ),
+    );
+
+    await tester.pumpWidget(getWidget());
+    await tester.pump();
+    expect(
+      find.byKey(WidgetKeys.orderSuccessItemsSection),
+      findsOneWidget,
+    );
+    await tester.fling(
+      find.byKey(WidgetKeys.scrollList),
+      const Offset(0, -10000),
+      100,
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(WidgetKeys.orderSuccessMaterialItem(0)),
+      findsWidgets,
+    );
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.orderSuccessMaterialItem(0)).first,
+        matching: find.widgetWithText(StatusLabel, 'Bonus'),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.orderSuccessMaterialItem(0)).first,
+        matching: find.widgetWithText(StatusLabel, 'Out of stock'),
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets(
+      'Display counter offer requested for PnG materials with price not available',
+      (tester) async {
+    when(() => orderSummaryBlocMock.state).thenAnswer(
+      (invocation) => OrderSummaryState.initial().copyWith(
+        orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+          orderValue: 516.0,
+          orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+            OrderHistoryDetailsOrderItem.empty().copyWith(
+              principalData: PrincipalData.empty().copyWith(
+                principalCode: PrincipalCode('0000101308'),
+                principalName: PrincipalName('PROCTER AND GAMBLE'),
+              ),
+              materialNumber: MaterialNumber(''),
+              originPrice: 15.0,
+              unitPrice: 17.2,
+              totalPrice: 516,
+              type: OrderItemType('Comm'),
+              productType: MaterialInfoType('material'),
+              hidePrice: true,
+              isCounterOffer: true,
+            ),
+          ],
+        ),
+      ),
+    );
+    await tester.pumpWidget(getWidget());
+    await tester.pumpAndSettle();
+
+    final priceNotAvailableFinder =
+        find.text('Price Not Available', findRichText: true);
+    expect(priceNotAvailableFinder, findsNWidgets(2));
+
+    final requestedCounterOfferKey = find.text('Requested counter offer'.tr());
+    expect(requestedCounterOfferKey, findsOneWidget);
+  });
 }
 
 bool findTextAndTap(InlineSpan visitor, String text) {

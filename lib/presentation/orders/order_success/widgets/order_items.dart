@@ -71,16 +71,18 @@ class _MaterialItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              ListPriceStrikeThroughComponent(
-                priceAggregate: orderItem.priceAggregate,
-              ),
-              PriceComponent(
-                key: WidgetKeys.orderSuccessItemUnitPrice,
-                price: orderItem.itemUnitPrice(
+              if (eligibilityState.salesOrgConfigs.enableListPrice &&
+                  orderItem.showMaterialListPrice)
+                ListPriceStrikeThroughComponent(
+                  priceAggregate: orderItem.priceAggregate,
+                ),
+              OrderItemPrice(
+                unitPrice: orderItem.itemUnitPrice(
                   isIDMarket,
                 ),
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                originPrice: orderItem.originPrice.toString(),
+                showPreviousPrice: orderItem.isCounterOffer,
+                hidePrice: orderItem.hidePrice,
               ),
             ],
           ),

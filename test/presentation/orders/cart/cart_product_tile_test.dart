@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dart';
@@ -447,7 +448,7 @@ void main() {
       });
 
       testWidgets(
-          'Counter offer button not visible for MY External sales rep having PnG material(Hide Price ----> true)',
+          'Counter offer button visible for MY External sales rep having PnG material(Hide Price ----> true)',
           (tester) async {
         final pnGCartItem = cartItem.copyWith(
           quantity: 2,
@@ -488,7 +489,7 @@ void main() {
 
         final counterOfferButton =
             find.byKey(WidgetKeys.counterOfferPriceButtonKey);
-        expect(counterOfferButton, findsNothing);
+        expect(counterOfferButton, findsOneWidget);
       });
 
       testWidgets(
@@ -870,6 +871,46 @@ void main() {
         final bonusSampleItemButton =
             find.byKey(WidgetKeys.bonusSampleItemButtonKey);
         expect(bonusSampleItemButton, findsOneWidget);
+      });
+
+      testWidgets('Counter offer Requested for png material', (tester) async {
+        final pnGCartItem = cartItem.copyWith(
+          quantity: 2,
+          price: Price.empty().copyWith(
+            isPriceOverride: true,
+            finalPrice: MaterialPrice(364.80),
+            lastPrice: MaterialPrice(364.80),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
+            hidePrice: true,
+            counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
+              counterOfferPrice: CounterOfferValue('500'),
+            ),
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [pnGCartItem],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final materialKey =
+            find.byKey(WidgetKeys.cartItemProductMaterialNumber);
+        expect(materialKey, findsOneWidget);
+
+        final priceNotAvailableFinder = find.descendant(
+          of: find.byKey(WidgetKeys.cartItemProductUnitPrice),
+          matching: find.text('Price Not Available', findRichText: true),
+        );
+        expect(priceNotAvailableFinder, findsOneWidget);
+
+        final requestedCounterOfferKey =
+            find.text('Requested counter offer'.tr());
+        expect(requestedCounterOfferKey, findsOneWidget);
       });
     },
   );

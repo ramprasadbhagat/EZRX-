@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,12 +10,12 @@ class OrderItemPrice extends StatelessWidget {
   final bool showPreviousPrice;
   final String originPrice;
   final String unitPrice;
-  final bool hasDescription;
+  final bool hidePrice;
   const OrderItemPrice({
     Key? key,
     required this.showPreviousPrice,
     required this.unitPrice,
-    required this.hasDescription,
+    required this.hidePrice,
     this.originPrice = '',
   }) : super(key: key);
 
@@ -27,7 +28,7 @@ class OrderItemPrice extends StatelessWidget {
       children: [
         Row(
           children: [
-            if (showPreviousPrice)
+            if (showPreviousPrice && !hidePrice)
               Padding(
                 padding: const EdgeInsets.only(right: 4.0),
                 child: PriceComponent(
@@ -37,15 +38,16 @@ class OrderItemPrice extends StatelessWidget {
                 ),
               ),
             PriceComponent(
+              key: WidgetKeys.orderItemUnitPrice,
               salesOrgConfig: configs,
               price: unitPrice,
               type: PriceStyle.summaryPrice,
             ),
           ],
         ),
-        if (showPreviousPrice && hasDescription)
+        if (showPreviousPrice)
           Text(
-            context.tr('Offer applied'),
+            context.tr('Requested counter offer'),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.darkGray,
                   fontSize: 10,

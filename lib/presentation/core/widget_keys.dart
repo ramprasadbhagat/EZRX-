@@ -52,6 +52,7 @@ class WidgetKeys {
   static const Key expandableSection = Key('expandableSection');
   static Key favIcon(String label) => Key('favIcon$label');
   static const Key payerInformation = Key('payerInformation');
+  static const Key orderItemUnitPrice = Key('orderItemUnitPrice');
   //============================================================
   //  PRE-ORDER-MODAL
   //============================================================

@@ -23,6 +23,7 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
     required String promoType,
     required bool promoStatus,
     required PrincipalData principalData,
+    required bool isCounterOffer,
 
     ///Todo: consider to delete it
     required BatchNumber batch,
@@ -43,5 +44,6 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
         promoStatus: false,
         promoType: '',
         principalData: PrincipalData.empty(),
+        isCounterOffer: false,
       );
 }

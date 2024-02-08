@@ -31,6 +31,7 @@ mixin _$SubmitMaterialInfo {
   String get promoType => throw _privateConstructorUsedError;
   bool get promoStatus => throw _privateConstructorUsedError;
   PrincipalData get principalData => throw _privateConstructorUsedError;
+  bool get isCounterOffer => throw _privateConstructorUsedError;
 
   ///Todo: consider to delete it
   BatchNumber get batch => throw _privateConstructorUsedError;
@@ -60,6 +61,7 @@ abstract class $SubmitMaterialInfoCopyWith<$Res> {
       String promoType,
       bool promoStatus,
       PrincipalData principalData,
+      bool isCounterOffer,
       BatchNumber batch});
 
   $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
@@ -92,6 +94,7 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
     Object? promoType = null,
     Object? promoStatus = null,
     Object? principalData = null,
+    Object? isCounterOffer = null,
     Object? batch = null,
   }) {
     return _then(_value.copyWith(
@@ -147,6 +150,10 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
           ? _value.principalData
           : principalData // ignore: cast_nullable_to_non_nullable
               as PrincipalData,
+      isCounterOffer: null == isCounterOffer
+          ? _value.isCounterOffer
+          : isCounterOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -194,6 +201,7 @@ abstract class _$$_SubmitMaterialInfoCopyWith<$Res>
       String promoType,
       bool promoStatus,
       PrincipalData principalData,
+      bool isCounterOffer,
       BatchNumber batch});
 
   @override
@@ -226,6 +234,7 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
     Object? promoType = null,
     Object? promoStatus = null,
     Object? principalData = null,
+    Object? isCounterOffer = null,
     Object? batch = null,
   }) {
     return _then(_$_SubmitMaterialInfo(
@@ -281,6 +290,10 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
           ? _value.principalData
           : principalData // ignore: cast_nullable_to_non_nullable
               as PrincipalData,
+      isCounterOffer: null == isCounterOffer
+          ? _value.isCounterOffer
+          : isCounterOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -306,6 +319,7 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
       required this.promoType,
       required this.promoStatus,
       required this.principalData,
+      required this.isCounterOffer,
       required this.batch})
       : _bonuses = bonuses,
         super._();
@@ -342,6 +356,8 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   final bool promoStatus;
   @override
   final PrincipalData principalData;
+  @override
+  final bool isCounterOffer;
 
   ///Todo: consider to delete it
   @override
@@ -349,7 +365,7 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
 
   @override
   String toString() {
-    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, productType: $productType, parentID: $parentID, comment: $comment, materialItemOverride: $materialItemOverride, price: $price, tax: $tax, mrp: $mrp, promoType: $promoType, promoStatus: $promoStatus, principalData: $principalData, batch: $batch)';
+    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, productType: $productType, parentID: $parentID, comment: $comment, materialItemOverride: $materialItemOverride, price: $price, tax: $tax, mrp: $mrp, promoType: $promoType, promoStatus: $promoStatus, principalData: $principalData, isCounterOffer: $isCounterOffer, batch: $batch)';
   }
 
   @override
@@ -378,6 +394,8 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
                 other.promoStatus == promoStatus) &&
             (identical(other.principalData, principalData) ||
                 other.principalData == principalData) &&
+            (identical(other.isCounterOffer, isCounterOffer) ||
+                other.isCounterOffer == isCounterOffer) &&
             (identical(other.batch, batch) || other.batch == batch));
   }
 
@@ -397,6 +415,7 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
       promoType,
       promoStatus,
       principalData,
+      isCounterOffer,
       batch);
 
   @JsonKey(ignore: true)
@@ -422,6 +441,7 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
       required final String promoType,
       required final bool promoStatus,
       required final PrincipalData principalData,
+      required final bool isCounterOffer,
       required final BatchNumber batch}) = _$_SubmitMaterialInfo;
   const _SubmitMaterialInfo._() : super._();
 
@@ -451,6 +471,8 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   bool get promoStatus;
   @override
   PrincipalData get principalData;
+  @override
+  bool get isCounterOffer;
   @override
 
   ///Todo: consider to delete it

@@ -1605,8 +1605,8 @@ void main() {
       );
       final orderItemPrice = find.byType(OrderItemPrice);
       expect(orderItemPrice, findsOneWidget);
-      final offerAppliedTxt = find.text('Offer applied'.tr());
-      expect(offerAppliedTxt, findsOneWidget);
+      final requestCounterOfferTxt = find.text('Requested counter offer'.tr());
+      expect(requestCounterOfferTxt, findsOneWidget);
     });
 
     testWidgets(
@@ -2244,6 +2244,52 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
+    });
+
+    testWidgets(
+        'Display counter offer requested for PnG materials with price not available',
+        (tester) async {
+      final materialNumber = MaterialNumber('000000000021247719');
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderValue: 516.0,
+            orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+              OrderHistoryDetailsOrderItem.empty().copyWith(
+                principalData: PrincipalData.empty().copyWith(
+                  principalCode: PrincipalCode('0000101308'),
+                  principalName: PrincipalName('PROCTER AND GAMBLE'),
+                ),
+                materialNumber: materialNumber,
+                unitPrice: 17.2,
+                originPrice: 15.0,
+                totalPrice: 516,
+                type: OrderItemType('Comm'),
+                productType: MaterialInfoType('material'),
+                hidePrice: true,
+                isCounterOffer: true,
+              )
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
+      await tester.pumpAndSettle();
+      final viewByOrderDetailsItemFinder = find.byKey(
+        WidgetKeys.viewByOrderDetailItem(materialNumber.displayMatNo, false),
+      );
+      expect(viewByOrderDetailsItemFinder, findsOneWidget);
+      final priceNotAvailableFinder =
+          find.text('Price Not Available', findRichText: true);
+      expect(priceNotAvailableFinder, findsNWidgets(2));
+
+      final requestedCounterOfferKey =
+          find.text('Requested counter offer'.tr());
+      expect(requestedCounterOfferKey, findsOneWidget);
     });
   });
 }

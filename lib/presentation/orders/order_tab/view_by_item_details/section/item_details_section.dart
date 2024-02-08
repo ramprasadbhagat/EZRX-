@@ -63,7 +63,7 @@ class ItemDetailsSection extends StatelessWidget {
                         ),
                         originPrice: orderHistoryItem.originPrice.toString(),
                         showPreviousPrice: orderHistoryItem.isCounterOffer,
-                        hasDescription: true,
+                        hidePrice: orderHistoryItem.hidePrice,
                       ),
                     ],
                   ),

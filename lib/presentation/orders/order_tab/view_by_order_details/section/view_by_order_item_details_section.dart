@@ -128,7 +128,7 @@ class _OrderItemTile extends StatelessWidget {
                   ),
                   originPrice: orderItem.originPrice.toString(),
                   showPreviousPrice: orderItem.isCounterOffer,
-                  hasDescription: true,
+                  hidePrice: orderItem.hidePrice,
                 ),
               ],
             ),
