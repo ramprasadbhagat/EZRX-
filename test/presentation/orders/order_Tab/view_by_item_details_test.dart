@@ -1159,6 +1159,7 @@ void main() {
             searchKey: SearchKey.searchFilter(
               fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
             ),
+            isDetailsPage: true,
           ),
         ),
       ).called(1);

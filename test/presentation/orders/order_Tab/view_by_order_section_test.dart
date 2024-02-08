@@ -557,6 +557,7 @@ void main() {
             ViewByOrderEvent.fetch(
               filter: ViewByOrdersFilter.empty(),
               searchKey: SearchKey.searchFilter(''),
+              isDetailsPage: false,
             ),
           ),
         ).called(1);
@@ -647,8 +648,8 @@ void main() {
         await tester.pumpAndSettle();
         verify(
           () => mockViewByOrderDetailsBloc.add(
-            ViewByOrderDetailsEvent.setOrderDetails(
-              orderHistoryDetails: viewByOrder.orderHeaders.first,
+            ViewByOrderDetailsEvent.fetch(
+              orderNumber: viewByOrder.orderHeaders.first.orderNumber,
             ),
           ),
         ).called(1);

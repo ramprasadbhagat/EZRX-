@@ -799,6 +799,7 @@ void main() {
           ViewByOrderEvent.fetch(
             filter: ViewByOrdersFilter.empty(),
             searchKey: SearchKey.searchFilter(''),
+            isDetailsPage: false,
           ),
         ),
       ).called(1);

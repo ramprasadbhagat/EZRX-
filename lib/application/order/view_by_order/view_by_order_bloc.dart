@@ -41,6 +41,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
         _Fetch(
           filter: state.appliedFilter,
           searchKey: state.searchKey,
+          isDetailsPage: false,
         ),
       );
     });
@@ -72,6 +73,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           searchKey: e.searchKey,
           viewByOrder: state.viewByOrderList,
           shipToInfo: state.shipToInfo,
+          isDetailsPage: e.isDetailsPage,
         );
 
         failureOrSuccess.fold(
@@ -112,6 +114,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           viewByOrder: state.viewByOrderList,
           salesOrganisation: state.salesOrganisation,
           shipToInfo: state.shipToInfo,
+          isDetailsPage: false,
         );
 
         failureOrSuccess.fold(

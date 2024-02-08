@@ -24,5 +24,6 @@ abstract class IViewByOrderRepository {
     required ViewByOrder viewByOrder,
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
+    required bool isDetailsPage,
   });
 }

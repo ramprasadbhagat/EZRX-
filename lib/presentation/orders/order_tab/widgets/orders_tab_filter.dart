@@ -161,6 +161,7 @@ class _FilterElement extends StatelessWidget {
           ViewByOrderEvent.fetch(
             filter: filter,
             searchKey: context.read<ViewByOrderBloc>().state.searchKey,
+            isDetailsPage: false,
           ),
         );
   }

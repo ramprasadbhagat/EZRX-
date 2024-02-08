@@ -94,6 +94,7 @@ class _SummarySearchBar extends StatelessWidget {
                 searchKey: onClear
                     ? SearchKey.searchFilter(searchKey)
                     : SearchKey.search(searchKey),
+                    isDetailsPage: false,
               ),
             )
         : context.read<ViewByItemsBloc>().add(

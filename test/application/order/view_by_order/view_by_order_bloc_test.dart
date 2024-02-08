@@ -62,6 +62,7 @@ void main() {
               searchKey: searchKey,
               viewByOrder: ViewByOrder.empty(),
               shipToInfo: fakeShipToInfo,
+              isDetailsPage: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -147,6 +148,7 @@ void main() {
               viewByOrdersFilter: viewByOrdersFilter,
               salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeShipToInfo,
+              isDetailsPage: false,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -158,6 +160,7 @@ void main() {
           ViewByOrderEvent.fetch(
             filter: viewByOrdersFilter,
             searchKey: searchKey,
+            isDetailsPage: false,
           ),
         ),
         expect: () => [
@@ -223,6 +226,7 @@ void main() {
               viewByOrder: viewByOrderMockData,
               salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeShipToInfo,
+              isDetailsPage: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -297,6 +301,7 @@ void main() {
               viewByOrder: viewByOrderMockData,
               salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: fakeShipToInfo,
+              isDetailsPage: false,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -348,6 +353,7 @@ void main() {
             ViewByOrderEvent.fetch(
               filter: viewByOrdersFilter,
               searchKey: SearchKey.searchFilter('1'),
+              isDetailsPage: false,
             ),
           ),
           expect: () => [],

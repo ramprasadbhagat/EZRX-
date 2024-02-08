@@ -38,6 +38,7 @@ class ViewByOrderDetailsRemoteDataSource {
         'soldTo': soldTo,
         'salesOrg': [salesOrg],
         'shipTo': [shipTo],
+        'isDetailsPage': true,
       };
 
       final res = await httpService.request(

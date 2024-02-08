@@ -44,6 +44,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
     required ViewByOrder viewByOrder,
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
+    required bool isDetailsPage,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -78,6 +79,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
         ).toJson(),
         sort: sort,
         shipTo: shipToInfo.shipToCustomerCode,
+        isDetailsPage: isDetailsPage,
       );
 
       final newViewByOrderList = List<OrderHistoryDetails>.from(

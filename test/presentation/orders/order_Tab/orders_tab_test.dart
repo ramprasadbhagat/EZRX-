@@ -386,6 +386,7 @@ void main() {
           ViewByOrderEvent.fetch(
             filter: ViewByOrdersFilter.empty(),
             searchKey: fakeSearchKey,
+            isDetailsPage: false,
           ),
         ),
       );
@@ -458,6 +459,7 @@ void main() {
           ViewByOrderEvent.fetch(
             filter: fakeFilter,
             searchKey: SearchKey(''),
+            isDetailsPage: false,
           ),
         ),
       );
@@ -741,6 +743,7 @@ void main() {
           ViewByOrderEvent.fetch(
             filter: ViewByOrdersFilter.empty(),
             searchKey: SearchKey('dummy'),
+            isDetailsPage: false,
           ),
         ),
       );

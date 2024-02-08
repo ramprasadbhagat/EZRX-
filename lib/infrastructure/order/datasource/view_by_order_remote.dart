@@ -34,6 +34,7 @@ class ViewByOrderRemoteDataSource {
     required String shipTo,
     required String searchKey,
     required Map<String, dynamic> filterQuery,
+    required isDetailsPage,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = viewByOrderQuery.getOrderHistoryDetails();
@@ -48,6 +49,7 @@ class ViewByOrderRemoteDataSource {
         'salesOrg': [salesOrg],
         'shipTo': [shipTo],
         'searchKey': searchKey,
+        'isDetailsPage': isDetailsPage,
         ...filterQuery,
       };
 

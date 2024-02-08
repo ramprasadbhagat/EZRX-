@@ -14,6 +14,7 @@ class ViewByOrderDetailsQueryMutation {
   \$searchKey: String,   
   \$salesOrg: [String],
   \$status: [String],
+  \$isDetailsPage: Boolean,
  ) {
   orderHistoryV3(
    request: {
@@ -29,6 +30,7 @@ class ViewByOrderDetailsQueryMutation {
       searchKey: \$searchKey,  
       salesOrg: \$salesOrg,
       status: \$status,
+      isDetailsPage: \$isDetailsPage,
      }
   ) {
     orderCount

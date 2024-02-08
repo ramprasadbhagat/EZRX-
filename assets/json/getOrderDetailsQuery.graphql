@@ -1,6 +1,6 @@
-query orderHistoryQuery($soldTo: String!, $language: String, $searchKey: String, $salesOrg: [String]) {
+query orderHistoryQuery($soldTo: String!, $language: String, $searchKey: String, $salesOrg: [String], $isDetailsPage: Boolean) {
   orderHistoryV3(
-    request: {soldTo: $soldTo, language: $language, searchKey: $searchKey, salesOrg: $salesOrg}
+    request: {soldTo: $soldTo, language: $language, searchKey: $searchKey, salesOrg: $salesOrg, isDetailsPage: $isDetailsPage}
   ) {
     orderCount
     creatingOrderIds

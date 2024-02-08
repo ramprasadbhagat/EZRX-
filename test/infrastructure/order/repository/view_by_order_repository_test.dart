@@ -71,6 +71,7 @@ void main() {
         searchKey: fakeSearchKey,
         viewByOrder: fakeViewByOrder,
         shipToInfo: fakeShipToInfo,
+        isDetailsPage: false,
       );
       expect(
         result.isLeft(),
@@ -97,6 +98,7 @@ void main() {
         searchKey: fakeSearchKey,
         viewByOrder: fakeViewByOrder,
         shipToInfo: fakeShipToInfo,
+        isDetailsPage: false,
       );
       expect(
         result.isRight(),
@@ -118,6 +120,7 @@ void main() {
           filterQuery: ViewByOrdersFilterDto.fromDomain(fakeFilter).toJson(),
           sort: fakeSort,
           shipTo: fakeShipToInfo.shipToCustomerCode,
+          isDetailsPage: false,
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -134,6 +137,7 @@ void main() {
         searchKey: fakeSearchKey,
         viewByOrder: fakeViewByOrder,
         shipToInfo: fakeShipToInfo,
+        isDetailsPage: false,
       );
       expect(
         result.isLeft(),
@@ -155,6 +159,7 @@ void main() {
           filterQuery: ViewByOrdersFilterDto.fromDomain(fakeFilter).toJson(),
           sort: fakeSort,
           shipTo: fakeShipToInfo.shipToCustomerCode,
+          isDetailsPage: false,
         ),
       ).thenAnswer(
         (invocation) async => fakeViewByOrder,
@@ -173,6 +178,7 @@ void main() {
         searchKey: fakeSearchKey,
         viewByOrder: fakeViewByOrder,
         shipToInfo: fakeShipToInfo,
+        isDetailsPage: false,
       );
       expect(
         result.isRight(),

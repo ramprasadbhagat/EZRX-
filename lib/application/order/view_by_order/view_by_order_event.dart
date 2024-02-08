@@ -13,6 +13,7 @@ class ViewByOrderEvent with _$ViewByOrderEvent {
   const factory ViewByOrderEvent.fetch({
     required ViewByOrdersFilter filter,
     required SearchKey searchKey,
+    required bool isDetailsPage,
   }) = _Fetch;
   const factory ViewByOrderEvent.loadMore() = _LoadMore;
 }

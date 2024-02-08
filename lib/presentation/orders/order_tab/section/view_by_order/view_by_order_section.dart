@@ -75,6 +75,7 @@ class ViewByOrdersPage extends StatelessWidget {
                 ViewByOrderEvent.fetch(
                   filter: ViewByOrdersFilter.empty(),
                   searchKey: SearchKey.searchFilter(''),
+                  isDetailsPage: false,
                 ),
               ),
           isLoading: state.isFetching,

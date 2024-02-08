@@ -52,6 +52,7 @@ void main() {
           'soldTo': 'fake-soldTo',
           'salesOrg': ['fake-salesOrg'],
           'shipTo': ['fake-shipTo'],
+          'isDetailsPage': true,
         };
         final res = json.decode(
           await rootBundle
@@ -96,6 +97,7 @@ void main() {
           'soldTo': 'fake-soldTo',
           'salesOrg': ['fake-salesOrg'],
           'shipTo': ['fake-shipTo'],
+          'isDetailsPage': true,
         };
 
         dioAdapter.onPost(
@@ -134,6 +136,7 @@ void main() {
           'soldTo': 'fake-soldTo',
           'salesOrg': ['fake-salesOrg'],
           'shipTo': ['fake-shipTo'],
+          'isDetailsPage': true,
         };
 
         dioAdapter.onPost(

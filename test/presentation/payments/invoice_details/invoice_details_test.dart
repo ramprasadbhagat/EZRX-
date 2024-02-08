@@ -399,6 +399,7 @@ void main() {
             searchKey: SearchKey.searchFilter(
               'fake-id',
             ),
+            isDetailsPage: true,
           ),
         ),
       ).called(1);
@@ -504,6 +505,18 @@ void main() {
 
         await getWidget(tester);
         await tester.pump();
+        verify(
+          () => viewByOrderBlocMock.add(
+            ViewByOrderEvent.initialized(
+              salesOrganisation: currentSalesOrganisation,
+              customerCodeInfo: currentEligibilityState.customerCodeInfo,
+              salesOrgConfigs: currentSalesOrgConfigs,
+              user: currentEligibilityState.user,
+              sortDirection: 'desc',
+              shipToInfo: currentEligibilityState.shipToInfo,
+            ),
+          ),
+        ).called(1);
         expect(
           find.byKey(WidgetKeys.invoiceDetailsPageListView),
           findsOneWidget,

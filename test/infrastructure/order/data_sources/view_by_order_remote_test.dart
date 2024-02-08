@@ -51,6 +51,7 @@ void main() {
           'salesOrg': ['fake-salesOrg'],
           'shipTo': ['fake-shipTo'],
           'searchKey': 'fake-searchKey',
+          'isDetailsPage': false,
         };
         final res = json.decode(
           await rootBundle
@@ -82,6 +83,7 @@ void main() {
           pageSize: 24,
           orderBy: 'datetime',
           sort: 'desc',
+          isDetailsPage: false,
         );
 
         expect(

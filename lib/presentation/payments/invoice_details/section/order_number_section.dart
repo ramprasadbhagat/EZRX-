@@ -124,6 +124,7 @@ class OrderNumberSection extends StatelessWidget {
                                           searchKey: SearchKey.searchFilter(
                                             orderNumber,
                                           ),
+                                          isDetailsPage: true,
                                         ),
                                       ),
                                   icon: const Icon(

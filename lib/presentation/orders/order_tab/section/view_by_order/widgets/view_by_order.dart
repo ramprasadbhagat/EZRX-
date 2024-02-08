@@ -26,8 +26,8 @@ class _ViewByOrder extends StatelessWidget {
               },
             );
             context.read<ViewByOrderDetailsBloc>().add(
-                  ViewByOrderDetailsEvent.setOrderDetails(
-                    orderHistoryDetails: viewByOrderHistoryItem,
+                  ViewByOrderDetailsEvent.fetch(
+                    orderNumber: viewByOrderHistoryItem.orderNumber,
                   ),
                 );
             context.read<ViewByItemDetailsBloc>().add(

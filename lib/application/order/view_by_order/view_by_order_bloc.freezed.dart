@@ -26,7 +26,8 @@ mixin _$ViewByOrderEvent {
             String sortDirection,
             ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)
+    required TResult Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)
         fetch,
     required TResult Function() loadMore,
   }) =>
@@ -41,7 +42,9 @@ mixin _$ViewByOrderEvent {
             String sortDirection,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
+    TResult? Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)?
+        fetch,
     TResult? Function()? loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,7 +58,9 @@ mixin _$ViewByOrderEvent {
             String sortDirection,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
+    TResult Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)?
+        fetch,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) =>
@@ -279,7 +284,8 @@ class _$_Initialized implements _Initialized {
             String sortDirection,
             ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)
+    required TResult Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)
         fetch,
     required TResult Function() loadMore,
   }) {
@@ -298,7 +304,9 @@ class _$_Initialized implements _Initialized {
             String sortDirection,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
+    TResult? Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)?
+        fetch,
     TResult? Function()? loadMore,
   }) {
     return initialized?.call(salesOrganisation, salesOrgConfigs,
@@ -316,7 +324,9 @@ class _$_Initialized implements _Initialized {
             String sortDirection,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
+    TResult Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)?
+        fetch,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) {
@@ -387,7 +397,8 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call({ViewByOrdersFilter filter, SearchKey searchKey});
+  $Res call(
+      {ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage});
 
   $ViewByOrdersFilterCopyWith<$Res> get filter;
 }
@@ -404,6 +415,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? filter = null,
     Object? searchKey = null,
+    Object? isDetailsPage = null,
   }) {
     return _then(_$_Fetch(
       filter: null == filter
@@ -414,6 +426,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      isDetailsPage: null == isDetailsPage
+          ? _value.isDetailsPage
+          : isDetailsPage // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -429,16 +445,21 @@ class __$$_FetchCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.filter, required this.searchKey});
+  const _$_Fetch(
+      {required this.filter,
+      required this.searchKey,
+      required this.isDetailsPage});
 
   @override
   final ViewByOrdersFilter filter;
   @override
   final SearchKey searchKey;
+  @override
+  final bool isDetailsPage;
 
   @override
   String toString() {
-    return 'ViewByOrderEvent.fetch(filter: $filter, searchKey: $searchKey)';
+    return 'ViewByOrderEvent.fetch(filter: $filter, searchKey: $searchKey, isDetailsPage: $isDetailsPage)';
   }
 
   @override
@@ -448,11 +469,14 @@ class _$_Fetch implements _Fetch {
             other is _$_Fetch &&
             (identical(other.filter, filter) || other.filter == filter) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.isDetailsPage, isDetailsPage) ||
+                other.isDetailsPage == isDetailsPage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filter, searchKey);
+  int get hashCode =>
+      Object.hash(runtimeType, filter, searchKey, isDetailsPage);
 
   @JsonKey(ignore: true)
   @override
@@ -471,11 +495,12 @@ class _$_Fetch implements _Fetch {
             String sortDirection,
             ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)
+    required TResult Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)
         fetch,
     required TResult Function() loadMore,
   }) {
-    return fetch(filter, searchKey);
+    return fetch(filter, searchKey, isDetailsPage);
   }
 
   @override
@@ -489,10 +514,12 @@ class _$_Fetch implements _Fetch {
             String sortDirection,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
+    TResult? Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)?
+        fetch,
     TResult? Function()? loadMore,
   }) {
-    return fetch?.call(filter, searchKey);
+    return fetch?.call(filter, searchKey, isDetailsPage);
   }
 
   @override
@@ -506,12 +533,14 @@ class _$_Fetch implements _Fetch {
             String sortDirection,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
+    TResult Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)?
+        fetch,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(filter, searchKey);
+      return fetch(filter, searchKey, isDetailsPage);
     }
     return orElse();
   }
@@ -554,10 +583,12 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements ViewByOrderEvent {
   const factory _Fetch(
       {required final ViewByOrdersFilter filter,
-      required final SearchKey searchKey}) = _$_Fetch;
+      required final SearchKey searchKey,
+      required final bool isDetailsPage}) = _$_Fetch;
 
   ViewByOrdersFilter get filter;
   SearchKey get searchKey;
+  bool get isDetailsPage;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -609,7 +640,8 @@ class _$_LoadMore implements _LoadMore {
             String sortDirection,
             ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)
+    required TResult Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)
         fetch,
     required TResult Function() loadMore,
   }) {
@@ -627,7 +659,9 @@ class _$_LoadMore implements _LoadMore {
             String sortDirection,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
+    TResult? Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)?
+        fetch,
     TResult? Function()? loadMore,
   }) {
     return loadMore?.call();
@@ -644,7 +678,9 @@ class _$_LoadMore implements _LoadMore {
             String sortDirection,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
+    TResult Function(
+            ViewByOrdersFilter filter, SearchKey searchKey, bool isDetailsPage)?
+        fetch,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) {

@@ -110,6 +110,7 @@ class OrderNumberSection extends StatelessWidget {
                                 orderHistoryItem.orderNumber
                                     .getOrDefaultValue(''),
                               ),
+                              isDetailsPage: true,
                             ),
                           ),
                       icon: const Icon(

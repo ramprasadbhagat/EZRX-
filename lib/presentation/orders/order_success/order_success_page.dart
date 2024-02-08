@@ -79,6 +79,7 @@ class OrderSuccessPage extends StatelessWidget {
                     ViewByOrderEvent.fetch(
                       filter: ViewByOrdersFilter.empty(),
                       searchKey: SearchKey.searchFilter(''),
+                      isDetailsPage: false,
                     ),
                   );
               context.read<ViewByItemsBloc>().add(
