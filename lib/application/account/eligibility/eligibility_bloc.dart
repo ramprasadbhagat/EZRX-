@@ -44,49 +44,14 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
   ) async {
     await event.map(
       initialized: (_) async => emit(EligibilityState.initial()),
-      update: (e) async {
+      update: (e) {
         emit(
           state.copyWith(
             user: e.user,
             salesOrganisation: e.salesOrganisation,
             salesOrgConfigs: e.salesOrgConfigs,
             selectedOrderType: e.selectedOrderType,
-            isLoading: true,
           ),
-        );
-        mixpanelRepository.registerSuperProps(
-          user: e.user,
-          salesOrg: e.salesOrganisation.salesOrg,
-          salesOrgConfigs: e.salesOrgConfigs,
-          customerCodeInfo: state.customerCodeInfo,
-          shipToInfo: state.shipToInfo,
-        );
-
-        final failureOrSuccess = await chatBotRepository.passPayloadToChatbot(
-          salesOrganisation: state.salesOrganisation,
-          user: state.user,
-          salesOrganisationConfigs: state.salesOrgConfigs,
-          customerCodeInfo: state.customerCodeInfo,
-          shipToInfo: state.shipToInfo,
-          locale: state.user.preferredLanguage.locale,
-        );
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-                isLoading: false,
-              ),
-            );
-          },
-          (value) {
-            emit(
-              state.copyWith(
-                failureOrSuccessOption: none(),
-                isLoading: false,
-              ),
-            );
-          },
         );
       },
       selectedCustomerCode: (e) async {
@@ -94,8 +59,9 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           customerCode: e.customerCodeInfo.customerCodeSoldTo,
           shippingAddress: e.shipToInfo.shipToCustomerCode,
         );
-        emit(
-          state.copyWith(
+
+        add(
+          EligibilityEvent.registerChatBot(
             customerCodeInfo: e.customerCodeInfo,
             shipToInfo: e.shipToInfo,
           ),
@@ -154,13 +120,13 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           return;
         }
 
-        var shipToInfo = ShipToInfo.empty();
+        var shipToInfo = customerCodeInfoList.first.shipToInfos.first;
         if (lastSavedCustomerInfo.shippingAddress.isNotEmpty) {
           shipToInfo = customerCodeInfoList.first.shipToInfos.firstWhere(
             (shipToInfo) =>
                 shipToInfo.shipToCustomerCode ==
                 lastSavedCustomerInfo.shippingAddress,
-            orElse: () => ShipToInfo.empty(),
+            orElse: () => customerCodeInfoList.first.shipToInfos.first,
           );
         }
 
@@ -170,12 +136,19 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           orElse: () => customerCodeInfoList.first,
         );
 
+        if (customerCodeInfoList.canPreSelectShipToCode) {
+          add(
+            EligibilityEvent.registerChatBot(
+              customerCodeInfo: customerCodeInfo,
+              shipToInfo: shipToInfo,
+            ),
+          );
+        }
+
         emit(
           state.copyWith(
             customerCodeInfo: customerCodeInfo,
-            shipToInfo: shipToInfo == ShipToInfo.empty()
-                ? customerCodeInfoList.first.shipToInfos.first
-                : shipToInfo,
+            shipToInfo: shipToInfo,
             isLoadingCustomerCode: false,
             preSelectShipTo: true,
           ),
@@ -204,6 +177,16 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           (customerInformation) => customerInformation.soldToInformation,
         );
 
+        if (customerCodeInfoList.canPreSelectShipToCode) {
+          add(
+            EligibilityEvent.registerChatBot(
+              customerCodeInfo:
+                  customerCodeInfoList.preSelectedCustomerCodeInfo,
+              shipToInfo: customerCodeInfoList.preSelectedShipToInfo,
+            ),
+          );
+        }
+
         emit(
           state.copyWith(
             customerCodeInfo: customerCodeInfoList.preSelectedCustomerCodeInfo,
@@ -211,6 +194,52 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
             isLoadingCustomerCode: false,
             preSelectShipTo: customerCodeInfoList.canPreSelectShipToCode,
           ),
+        );
+      },
+      registerChatBot: (e) async {
+        emit(
+          state.copyWith(
+            isLoading: true,
+          ),
+        );
+
+        mixpanelRepository.registerSuperProps(
+          user: state.user,
+          salesOrg: state.salesOrg,
+          salesOrgConfigs: state.salesOrgConfigs,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+        );
+
+        final failureOrSuccess = await chatBotRepository.passPayloadToChatbot(
+          salesOrganisation: state.salesOrganisation,
+          user: state.user,
+          salesOrganisationConfigs: state.salesOrgConfigs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                customerCodeInfo: e.customerCodeInfo,
+                shipToInfo: e.shipToInfo,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isLoading: false,
+              ),
+            );
+          },
+          (value) {
+            emit(
+              state.copyWith(
+                customerCodeInfo: e.customerCodeInfo,
+                shipToInfo: e.shipToInfo,
+                failureOrSuccessOption: none(),
+                isLoading: false,
+              ),
+            );
+          },
         );
       },
     );

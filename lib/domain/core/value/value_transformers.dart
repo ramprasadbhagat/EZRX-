@@ -735,6 +735,23 @@ String getLanguageString(String apiLanguageCode) {
   return languageString[apiLanguageCode] ?? 'English';
 }
 
+String languageCodeToLanguageCumCountryCode(String languageCode) {
+  final languageCodesMap = {
+    'en': 'en-US',
+    'th': 'th-TH',
+    'vi': 'vi-VN',
+    'my': 'my-MM',
+    'km': 'km-KH',
+    'ko': 'ko-KR',
+    'zh': 'zh-TW',
+    'id': 'id-ID',
+    'ms': 'ms-BN',
+  };
+
+  return languageCodesMap[languageCode.toLowerCase()] ??
+      languageCode.toLowerCase();
+}
+
 bool checkIfMandarin(String languageCode) => languageCode == 'ZH';
 
 String toSupportedLanguage(String value) {

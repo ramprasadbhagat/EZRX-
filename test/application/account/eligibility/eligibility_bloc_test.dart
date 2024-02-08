@@ -160,63 +160,6 @@ void main() {
     );
 
     blocTest(
-      'Eligibility Update fail',
-      build: () => EligibilityBloc(
-        chatBotRepository: chatBotRepositoryMock,
-        mixpanelRepository: mixpanelRepositoryMock,
-        customerCodeRepository: customerCodeRepositoryMock,
-        config: config,
-      ),
-      setUp: () {
-        when(
-          () => chatBotRepositoryMock.passPayloadToChatbot(
-            customerCodeInfo: fakeCustomerInfo,
-            salesOrganisation: fakeSaleOrg,
-            salesOrganisationConfigs: fakeSaleOrgConfig,
-            shipToInfo: fakeShipToInfo,
-            user: fakeUser,
-            locale: fakeUser.preferredLanguage.locale,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(true),
-        );
-      },
-      seed: () => EligibilityState.initial().copyWith(
-        customerCodeInfo: fakeCustomerInfo,
-        shipToInfo: fakeShipToInfo,
-      ),
-      act: (EligibilityBloc bloc) {
-        bloc.add(
-          EligibilityEvent.update(
-            user: fakeUser,
-            salesOrganisation: fakeSaleOrg,
-            salesOrgConfigs: fakeSaleOrgConfig,
-            selectedOrderType: OrderDocumentType.empty(),
-          ),
-        );
-      },
-      expect: () => [
-        EligibilityState.initial().copyWith(
-          user: fakeUser,
-          salesOrganisation: fakeSaleOrg,
-          salesOrgConfigs: fakeSaleOrgConfig,
-          customerCodeInfo: fakeCustomerInfo,
-          shipToInfo: fakeShipToInfo,
-          failureOrSuccessOption: const None(),
-          isLoading: true,
-        ),
-        EligibilityState.initial().copyWith(
-          user: fakeUser,
-          salesOrganisation: fakeSaleOrg,
-          salesOrgConfigs: fakeSaleOrgConfig,
-          customerCodeInfo: fakeCustomerInfo,
-          shipToInfo: fakeShipToInfo,
-          failureOrSuccessOption: const None(),
-        ),
-      ],
-    );
-
-    blocTest(
       'Eligibility Update',
       build: () => EligibilityBloc(
         chatBotRepository: chatBotRepositoryMock,
@@ -232,7 +175,6 @@ void main() {
             salesOrganisationConfigs: fakeSaleOrgConfig,
             shipToInfo: fakeShipToInfo,
             user: fakeUser,
-            locale: fakeUser.preferredLanguage.locale,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -261,20 +203,6 @@ void main() {
           salesOrgConfigs: fakeSaleOrgConfig,
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeShipToInfo,
-          failureOrSuccessOption: const None(),
-          isLoading: true,
-        ),
-        EligibilityState.initial().copyWith(
-          user: fakeUser,
-          salesOrganisation: fakeSaleOrg,
-          salesOrgConfigs: fakeSaleOrgConfig,
-          customerCodeInfo: fakeCustomerInfo,
-          shipToInfo: fakeShipToInfo,
-          failureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('Fake Error'),
-            ),
-          ),
         ),
       ],
     );
@@ -287,6 +215,13 @@ void main() {
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
       ),
+      seed: () => EligibilityState.initial().copyWith(
+        customerCodeInfo: fakeCustomerInfo,
+        salesOrganisation: fakeSaleOrg,
+        salesOrgConfigs: fakeSaleOrgConfig,
+        shipToInfo: fakeShipToInfo,
+        user: fakeUser,
+      ),
       setUp: () {
         when(
           () => customerCodeRepositoryMock.storeCustomerInfo(
@@ -295,6 +230,18 @@ void main() {
                 fakeCustomerInfo.shipToInfos.first.shipToCustomerCode,
           ),
         ).thenAnswer((invocation) async => const Right(unit));
+
+        when(
+          () => chatBotRepositoryMock.passPayloadToChatbot(
+            customerCodeInfo: fakeCustomerInfo,
+            salesOrganisation: fakeSaleOrg,
+            salesOrganisationConfigs: fakeSaleOrgConfig,
+            shipToInfo: fakeShipToInfo,
+            user: fakeUser,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(true),
+        );
       },
       act: (EligibilityBloc bloc) {
         bloc.add(
@@ -306,8 +253,20 @@ void main() {
       },
       expect: () => [
         EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSaleOrg,
+          salesOrgConfigs: fakeSaleOrgConfig,
+          user: fakeUser,
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeCustomerInfo.shipToInfos.first,
+          isLoading: true,
+        ),
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSaleOrg,
+          salesOrgConfigs: fakeSaleOrgConfig,
+          user: fakeUser,
+          customerCodeInfo: fakeCustomerInfo,
+          shipToInfo: fakeCustomerInfo.shipToInfos.first,
+          isLoading: false,
         )
       ],
     );

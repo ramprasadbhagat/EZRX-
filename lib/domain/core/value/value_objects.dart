@@ -468,6 +468,9 @@ class Language extends ValueObject<String> {
 
   String get languageCode => toSupportedLanguage(value.getOrElse(() => 'EN'));
 
+  String get languageCumCountryCode =>
+      languageCodeToLanguageCumCountryCode(value.getOrElse(() => ''));
+
   bool get isMandarin => checkIfMandarin(value.getOrElse(() => ''));
 
   Locale get locale => toLocale(languageCode);

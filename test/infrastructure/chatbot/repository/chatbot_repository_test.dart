@@ -5,7 +5,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
@@ -111,7 +110,7 @@ void main() {
         'market': fakeMYSalesOrganisation.salesOrg.country,
         'userRole': fakeClientUser.role.name,
         'salesorg': fakeMYSalesOrganisation.salesOrg.getOrCrash(),
-        'locale': fakeClientUser.preferredLanguage.locale.toLanguageTag(),
+        'locale': fakeClientUser.preferredLanguage.languageCumCountryCode,
         'fromDate': fromDateStringValue,
         'toDate': toDateStringValue,
         'currency': fakeMYSalesOrgConfigs.currency.code,
@@ -140,7 +139,6 @@ void main() {
         user: fakeClientUser.copyWith(
           email: fakeEmail,
         ),
-        locale: Language.english().locale,
       );
 
       expect(result, equals(const Right(true)));
@@ -162,7 +160,7 @@ void main() {
         'market': fakeMYSalesOrganisation.salesOrg.country,
         'userRole': fakeClientUser.role.name,
         'salesorg': fakeMYSalesOrganisation.salesOrg.getOrCrash(),
-        'locale': fakeClientUser.preferredLanguage.locale.toLanguageTag(),
+        'locale': fakeClientUser.preferredLanguage.languageCumCountryCode,
         'fromDate': fromDateStringValue,
         'toDate': toDateStringValue,
         'currency': fakeMYSalesOrgConfigs.currency.code,
@@ -191,7 +189,6 @@ void main() {
         user: fakeClientUser.copyWith(
           email: fakeEmail,
         ),
-        locale: Language.english().locale,
       );
 
       expect(result, Left(ApiFailure.other(errorMock.toString())));

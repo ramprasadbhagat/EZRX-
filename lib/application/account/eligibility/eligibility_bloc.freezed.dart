@@ -27,6 +27,9 @@ mixin _$EligibilityEvent {
         update,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        registerChatBot,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
     required TResult Function() loadStoredCustomerCode,
     required TResult Function() fetchAndPreSelectCustomerCode,
@@ -41,6 +44,8 @@ mixin _$EligibilityEvent {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -57,6 +62,8 @@ mixin _$EligibilityEvent {
             OrderDocumentType selectedOrderType)?
         update,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
     TResult Function()? fetchAndPreSelectCustomerCode,
@@ -67,6 +74,7 @@ mixin _$EligibilityEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_RegisterChatBot value) registerChatBot,
     required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
     required TResult Function(_LoadStoredCustomerCode value)
         loadStoredCustomerCode,
@@ -78,6 +86,7 @@ mixin _$EligibilityEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_RegisterChatBot value)? registerChatBot,
     TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_FetchAndPreSelectCustomerCode value)?
@@ -88,6 +97,7 @@ mixin _$EligibilityEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_RegisterChatBot value)? registerChatBot,
     TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_FetchAndPreSelectCustomerCode value)?
@@ -162,6 +172,9 @@ class _$_Initialized implements _Initialized {
         update,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        registerChatBot,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
     required TResult Function() loadStoredCustomerCode,
     required TResult Function() fetchAndPreSelectCustomerCode,
@@ -179,6 +192,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -198,6 +213,8 @@ class _$_Initialized implements _Initialized {
             OrderDocumentType selectedOrderType)?
         update,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
     TResult Function()? fetchAndPreSelectCustomerCode,
@@ -214,6 +231,7 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_RegisterChatBot value) registerChatBot,
     required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
     required TResult Function(_LoadStoredCustomerCode value)
         loadStoredCustomerCode,
@@ -228,6 +246,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_RegisterChatBot value)? registerChatBot,
     TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_FetchAndPreSelectCustomerCode value)?
@@ -241,6 +260,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_RegisterChatBot value)? registerChatBot,
     TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_FetchAndPreSelectCustomerCode value)?
@@ -403,6 +423,9 @@ class _$_Update implements _Update {
         update,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        registerChatBot,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
     required TResult Function() loadStoredCustomerCode,
     required TResult Function() fetchAndPreSelectCustomerCode,
@@ -420,6 +443,8 @@ class _$_Update implements _Update {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -440,6 +465,8 @@ class _$_Update implements _Update {
             OrderDocumentType selectedOrderType)?
         update,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
     TResult Function()? fetchAndPreSelectCustomerCode,
@@ -457,6 +484,7 @@ class _$_Update implements _Update {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_RegisterChatBot value) registerChatBot,
     required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
     required TResult Function(_LoadStoredCustomerCode value)
         loadStoredCustomerCode,
@@ -471,6 +499,7 @@ class _$_Update implements _Update {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_RegisterChatBot value)? registerChatBot,
     TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_FetchAndPreSelectCustomerCode value)?
@@ -484,6 +513,7 @@ class _$_Update implements _Update {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_RegisterChatBot value)? registerChatBot,
     TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_FetchAndPreSelectCustomerCode value)?
@@ -510,6 +540,223 @@ abstract class _Update implements EligibilityEvent {
   OrderDocumentType get selectedOrderType;
   @JsonKey(ignore: true)
   _$$_UpdateCopyWith<_$_Update> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RegisterChatBotCopyWith<$Res> {
+  factory _$$_RegisterChatBotCopyWith(
+          _$_RegisterChatBot value, $Res Function(_$_RegisterChatBot) then) =
+      __$$_RegisterChatBotCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+}
+
+/// @nodoc
+class __$$_RegisterChatBotCopyWithImpl<$Res>
+    extends _$EligibilityEventCopyWithImpl<$Res, _$_RegisterChatBot>
+    implements _$$_RegisterChatBotCopyWith<$Res> {
+  __$$_RegisterChatBotCopyWithImpl(
+      _$_RegisterChatBot _value, $Res Function(_$_RegisterChatBot) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+  }) {
+    return _then(_$_RegisterChatBot(
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_RegisterChatBot implements _RegisterChatBot {
+  const _$_RegisterChatBot(
+      {required this.customerCodeInfo, required this.shipToInfo});
+
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+
+  @override
+  String toString() {
+    return 'EligibilityEvent.registerChatBot(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RegisterChatBot &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, customerCodeInfo, shipToInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RegisterChatBotCopyWith<_$_RegisterChatBot> get copyWith =>
+      __$$_RegisterChatBotCopyWithImpl<_$_RegisterChatBot>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)
+        update,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        registerChatBot,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selectedCustomerCode,
+    required TResult Function() loadStoredCustomerCode,
+    required TResult Function() fetchAndPreSelectCustomerCode,
+  }) {
+    return registerChatBot(customerCodeInfo, shipToInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult? Function()? loadStoredCustomerCode,
+    TResult? Function()? fetchAndPreSelectCustomerCode,
+  }) {
+    return registerChatBot?.call(customerCodeInfo, shipToInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult Function()? loadStoredCustomerCode,
+    TResult Function()? fetchAndPreSelectCustomerCode,
+    required TResult orElse(),
+  }) {
+    if (registerChatBot != null) {
+      return registerChatBot(customerCodeInfo, shipToInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Update value) update,
+    required TResult Function(_RegisterChatBot value) registerChatBot,
+    required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
+    required TResult Function(_FetchAndPreSelectCustomerCode value)
+        fetchAndPreSelectCustomerCode,
+  }) {
+    return registerChatBot(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_RegisterChatBot value)? registerChatBot,
+    TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult? Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+  }) {
+    return registerChatBot?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
+    TResult Function(_RegisterChatBot value)? registerChatBot,
+    TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+    required TResult orElse(),
+  }) {
+    if (registerChatBot != null) {
+      return registerChatBot(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RegisterChatBot implements EligibilityEvent {
+  const factory _RegisterChatBot(
+      {required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo}) = _$_RegisterChatBot;
+
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  @JsonKey(ignore: true)
+  _$$_RegisterChatBotCopyWith<_$_RegisterChatBot> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -617,6 +864,9 @@ class _$_SelectedCustomerCode implements _SelectedCustomerCode {
         update,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        registerChatBot,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
     required TResult Function() loadStoredCustomerCode,
     required TResult Function() fetchAndPreSelectCustomerCode,
@@ -634,6 +884,8 @@ class _$_SelectedCustomerCode implements _SelectedCustomerCode {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -653,6 +905,8 @@ class _$_SelectedCustomerCode implements _SelectedCustomerCode {
             OrderDocumentType selectedOrderType)?
         update,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
     TResult Function()? fetchAndPreSelectCustomerCode,
@@ -669,6 +923,7 @@ class _$_SelectedCustomerCode implements _SelectedCustomerCode {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_RegisterChatBot value) registerChatBot,
     required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
     required TResult Function(_LoadStoredCustomerCode value)
         loadStoredCustomerCode,
@@ -683,6 +938,7 @@ class _$_SelectedCustomerCode implements _SelectedCustomerCode {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_RegisterChatBot value)? registerChatBot,
     TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_FetchAndPreSelectCustomerCode value)?
@@ -696,6 +952,7 @@ class _$_SelectedCustomerCode implements _SelectedCustomerCode {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_RegisterChatBot value)? registerChatBot,
     TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_FetchAndPreSelectCustomerCode value)?
@@ -769,6 +1026,9 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
         update,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        registerChatBot,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
     required TResult Function() loadStoredCustomerCode,
     required TResult Function() fetchAndPreSelectCustomerCode,
@@ -786,6 +1046,8 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -805,6 +1067,8 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             OrderDocumentType selectedOrderType)?
         update,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
     TResult Function()? fetchAndPreSelectCustomerCode,
@@ -821,6 +1085,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_RegisterChatBot value) registerChatBot,
     required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
     required TResult Function(_LoadStoredCustomerCode value)
         loadStoredCustomerCode,
@@ -835,6 +1100,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_RegisterChatBot value)? registerChatBot,
     TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_FetchAndPreSelectCustomerCode value)?
@@ -848,6 +1114,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_RegisterChatBot value)? registerChatBot,
     TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_FetchAndPreSelectCustomerCode value)?
@@ -917,6 +1184,9 @@ class _$_FetchAndPreSelectCustomerCode
         update,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        registerChatBot,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
     required TResult Function() loadStoredCustomerCode,
     required TResult Function() fetchAndPreSelectCustomerCode,
@@ -934,6 +1204,8 @@ class _$_FetchAndPreSelectCustomerCode
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -953,6 +1225,8 @@ class _$_FetchAndPreSelectCustomerCode
             OrderDocumentType selectedOrderType)?
         update,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        registerChatBot,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
     TResult Function()? fetchAndPreSelectCustomerCode,
@@ -969,6 +1243,7 @@ class _$_FetchAndPreSelectCustomerCode
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_RegisterChatBot value) registerChatBot,
     required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
     required TResult Function(_LoadStoredCustomerCode value)
         loadStoredCustomerCode,
@@ -983,6 +1258,7 @@ class _$_FetchAndPreSelectCustomerCode
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_RegisterChatBot value)? registerChatBot,
     TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult? Function(_FetchAndPreSelectCustomerCode value)?
@@ -996,6 +1272,7 @@ class _$_FetchAndPreSelectCustomerCode
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_RegisterChatBot value)? registerChatBot,
     TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
     TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
     TResult Function(_FetchAndPreSelectCustomerCode value)?
