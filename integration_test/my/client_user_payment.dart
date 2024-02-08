@@ -8,6 +8,7 @@ import '../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../robots/common/common_robot.dart';
 import '../robots/common/extension.dart';
+import '../robots/home/customer_search_robot.dart';
 import '../robots/home/home_robot.dart';
 import '../robots/login_robot.dart';
 import '../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
@@ -36,6 +37,7 @@ void main() {
   late CommonRobot commonRobot;
   late LoginRobot loginRobot;
   late HomeRobot homeRobot;
+  late CustomerSearchRobot customerSearchRobot;
   late PaymentHomeRobot paymentHomeRobot;
   late PaymentSummaryRobot paymentSummaryRobot;
   late PaymentSummaryDetailRobot paymentSummaryDetailRobot;
@@ -61,6 +63,7 @@ void main() {
     commonRobot = CommonRobot(tester);
     loginRobot = LoginRobot(tester);
     homeRobot = HomeRobot(tester);
+    customerSearchRobot = CustomerSearchRobot(tester);
     paymentHomeRobot = PaymentHomeRobot(tester);
     paymentSummaryRobot = PaymentSummaryRobot(tester);
     statementAccountRobot = StatementOfAccountRobot(tester);
@@ -95,15 +98,23 @@ void main() {
 
   var loginRequired = true;
 
-  Future<void> pumpAppWithHomeScreen(WidgetTester tester) async {
+  Future<void> pumpAppWithHomeScreen(
+    WidgetTester tester, {
+    String shipToCode = shipToCode,
+  }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
+      await commonRobot.dismissSnackbar(dismissAll: true);
+    } else {
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.changeDeliveryAddress(
+        shipToCode,
+      );
     }
-    await commonRobot.dismissSnackbar(dismissAll: true);
-    await commonRobot.changeDeliveryAddress(shipToCode);
   }
 
   group('Payment Home Page - ', () {

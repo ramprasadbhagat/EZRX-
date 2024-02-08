@@ -16,6 +16,13 @@ class CustomerSearchRobot {
     expect(customerSearchPage, findsOneWidget);
   }
 
+  Future<void> selectCustomerSearch(String shipToCode) async {
+    findCustomerCodeSearchField();
+    await search(shipToCode);
+    findCustomerCode(shipToCode);
+    await tapOnCustomerCode(shipToCode);
+  }
+
   void findCustomerCodeSearchField() {
     expect(customerCodeSearchField, findsOneWidget);
   }

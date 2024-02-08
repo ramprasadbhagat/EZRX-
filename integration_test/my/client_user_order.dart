@@ -192,15 +192,23 @@ void main() {
 
   var loginRequired = true;
 
-  Future<void> pumpAppWithHomeScreen(WidgetTester tester) async {
+  Future<void> pumpAppWithHomeScreen(
+    WidgetTester tester, {
+    String shipToCode = shipToCode,
+  }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
+      await commonRobot.dismissSnackbar(dismissAll: true);
+    } else {
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.changeDeliveryAddress(
+        shipToCode,
+      );
     }
-    await commonRobot.dismissSnackbar(dismissAll: true);
-    await commonRobot.changeDeliveryAddress(shipToCode);
   }
 
   Future<void> browseProductFromEmptyCart() async {
@@ -247,6 +255,9 @@ void main() {
     const usernameInCorrect = 'myclientuser001';
     const passwordInCorrect = 'St@ysafe001';
 
+    const usernameSingleShipTo = 'sgclientuser';
+    const passwordSingleShipTo = 'St@ysafe01';
+
     Future<void> pumpAppInitialState(WidgetTester tester) async {
       initializeRobot(tester);
       await runAppForTesting(tester);
@@ -255,8 +266,13 @@ void main() {
     testWidgets('EZRX-T6 | Verify GUI of Login screen', (tester) async {
       await pumpAppInitialState(tester);
 
-      //verify
+      //select market
       loginRobot.findMarketSelector();
+      await loginRobot.tapToMarketSelector();
+      await loginRobot.selectMarket(marketMalaysia);
+      loginRobot.verifySelectedMarket(marketMalaysia);
+
+      //verify
       loginRobot.findUsernameField();
       loginRobot.findPasswordField();
       loginRobot.findPasswordField();
@@ -271,7 +287,6 @@ void main() {
       await pumpAppInitialState(tester);
 
       //default value
-      loginRobot.verifyDefaultValueSelector(marketMalaysia);
       loginRobot.verifyRememberMeCheckboxUnchecked();
       loginRobot.verifyDefaultUsernameField();
       loginRobot.verifyDefaultPasswordField();
@@ -415,6 +430,53 @@ void main() {
       loginRobot.findSkipIntroButton();
       await loginRobot.tapSkipIntroButton();
 
+      //customer search
+      customerSearchRobot.verifyPage();
+
+      // verify customer search show successfully
+      customerSearchRobot.findCustomerCodeSearchField();
+      await customerSearchRobot.search(shipToCode);
+      customerSearchRobot.findCustomerCode(shipToCode);
+    });
+
+    testWidgets(
+        'EZRX-T12 | Verify login successfully with customer page still saved',
+        (tester) async {
+      await pumpAppInitialState(tester);
+
+      //customer search
+      customerSearchRobot.verifyPage();
+
+      // change address
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
+
+      //home page
+      homeRobot.verify();
+
+      //logout
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.findLogout();
+      await moreRobot.tapLogout();
+    });
+
+    testWidgets(
+        'EZRX-T12 | Verify login successfully with account single ship to',
+        (tester) async {
+      await pumpAppInitialState(tester);
+
+      //select market
+      loginRobot.findMarketSelector();
+      await loginRobot.tapToMarketSelector();
+      await loginRobot.selectMarket(marketMalaysia);
+      loginRobot.verifySelectedMarket(marketMalaysia);
+
+      // check remember me
+      loginRobot.findRememberMeCheckbox();
+      await loginRobot.tapToRememberMe();
+
+      //login with
+      await loginRobot.login(usernameSingleShipTo, passwordSingleShipTo);
+
       //home page
       homeRobot.verify();
 
@@ -442,6 +504,12 @@ void main() {
 
       //login with
       await loginRobot.login(username, password);
+
+      //customer search
+      customerSearchRobot.verifyPage();
+
+      // change address
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
 
       //home page
       homeRobot.verify();

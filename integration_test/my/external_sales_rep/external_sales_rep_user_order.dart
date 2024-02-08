@@ -185,6 +185,7 @@ void main() {
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
     }
     await commonRobot.dismissSnackbar(dismissAll: true);
@@ -198,6 +199,7 @@ void main() {
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
     }
     await commonRobot.dismissSnackbar(dismissAll: true);
@@ -208,6 +210,7 @@ void main() {
       await loginOnBehalfRobot.enterUserNameField(behalfName);
       await loginOnBehalfRobot.tapLoginButton();
       await Future.delayed(const Duration(seconds: 5));
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
       await commonRobot.dismissSnackbar(dismissAll: true);
       moreRobot.verifyProfileName(behalfName, behalfName);
       await commonRobot.navigateToScreen(NavigationTab.home);

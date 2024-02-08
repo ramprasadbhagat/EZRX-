@@ -7,6 +7,7 @@ import '../../../core/infrastructure/infra_core/zephyr_service/zephyr_service.da
 import '../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../../robots/common/common_robot.dart';
 import '../../../robots/common/enum.dart';
+import '../../../robots/home/customer_search_robot.dart';
 import '../../../robots/login_robot.dart';
 import '../../../robots/more/more_robot.dart';
 import '../../../robots/payments/payment_home_robot.dart';
@@ -15,6 +16,7 @@ import '../../../robots/payments/payment_summary/payment_summary_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
+  late CustomerSearchRobot customerSearchRobot;
   late CommonRobot commonRobot;
   late MoreRobot moreRobot;
   late PaymentSummaryRobot paymentSummaryRobot;
@@ -32,6 +34,7 @@ void main() {
 
   void initializeRobot(WidgetTester tester) {
     loginRobot = LoginRobot(tester);
+    customerSearchRobot = CustomerSearchRobot(tester);
     commonRobot = CommonRobot(tester);
     moreRobot = MoreRobot(tester);
     paymentHomeRobot = PaymentHomeRobot(tester);
@@ -51,6 +54,7 @@ void main() {
 
     if (loginNeeded) {
       await loginRobot.loginToHomeScreen(username, password, marketPhilippines);
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
       //Switch delivery address
       await commonRobot.changeDeliveryAddress(shipToCode);
     }

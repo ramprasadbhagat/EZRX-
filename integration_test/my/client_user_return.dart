@@ -9,6 +9,7 @@ import '../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../robots/common/common_robot.dart';
 import '../robots/common/enum.dart';
 import '../robots/common/extension.dart';
+import '../robots/home/customer_search_robot.dart';
 import '../robots/home/home_robot.dart';
 import '../robots/login_robot.dart';
 import '../robots/more/more_robot.dart';
@@ -25,6 +26,7 @@ import '../robots/returns/returns_root_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
+  late CustomerSearchRobot customerSearchRobot;
   late CommonRobot commonRobot;
   late MoreRobot moreRobot;
   late ReturnsRootRobot returnsRootRobot;
@@ -103,6 +105,7 @@ void main() {
 
   void initializeRobot(WidgetTester tester) {
     loginRobot = LoginRobot(tester);
+    customerSearchRobot = CustomerSearchRobot(tester);
     commonRobot = CommonRobot(tester);
     moreRobot = MoreRobot(tester);
     homeRobot = HomeRobot(tester);
@@ -173,6 +176,7 @@ void main() {
       //init app
       await runAppForTesting(tester);
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
       await homeRobot.tapReturnsQuickAccess();
 
       //verify
