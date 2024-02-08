@@ -335,13 +335,10 @@ class ComboDeal with _$ComboDeal {
     return comboRate.toString();
   }
 
-  String displayCombosMaximumDiscount({
-    required MaterialNumber materialNumber,
-  }) {
-    final materialSingleDeal = singleDeal(materialNumber: materialNumber);
+  String get displayCombosMaximumDiscount {
     switch (scheme) {
       case ComboDealScheme.k1:
-        return materialSingleDeal.discountInfo.rateDisplay;
+        return k1MaximumDiscount;
       case ComboDealScheme.k21:
         return groupDeal.discountInfo.rateDisplay;
       case ComboDealScheme.k22:
@@ -357,6 +354,16 @@ class ComboDeal with _$ComboDeal {
         return groupDeal.discountInfo.rateDisplay;
     }
   }
+
+  String get k1MaximumDiscount => allMaterials
+      .fold<double>(
+        0,
+        (previousValue, element) =>
+            element.discountInfo.rateToAbs > previousValue
+                ? element.discountInfo.rateToAbs
+                : previousValue,
+      )
+      .toString();
 
   String get k3MaximumDiscount => flexiSKUTier
       .fold<double>(

@@ -32,6 +32,7 @@ import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
@@ -111,6 +112,7 @@ void main() {
   final materialNumber = MaterialNumber('00000111111');
   late ProductImages productImage;
   late List<MaterialInfo> similarProducts;
+  late ComboDeal mockComboDeal;
   final price = Price.empty().copyWith(
     comboDeal: PriceComboDeal.empty().copyWith(
       isEligible: true,
@@ -187,6 +189,7 @@ void main() {
         (await ProductDetailLocalDataSource().getItemProductMetaData())
             .productImages
             .first;
+    mockComboDeal = (await ComboDealLocalDataSource().getComboDealList()).first;
     registerFallbackValue(const ComboDetailPageRoute());
   });
 
@@ -2025,6 +2028,63 @@ void main() {
         ).called(1);
 
         await tester.pumpAndSettle();
+      });
+      testWidgets('ComboOffersProduct should display highest discount value ',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                materialNumber: MaterialNumber('000000000021222875'),
+                isSuspended: false,
+                isFOCMaterial: true,
+                productImages: productImage,
+              ),
+              stockInfo: emptyStockInfo,
+              productItem: productItemWithProductItemXp,
+            ),
+            isDetailFetching: false,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
+            customerCodeInfo: CustomerCodeInfo.empty()
+                .copyWith(salesDeals: [SalesDealNumber('0000000000')]),
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            isFetching: false,
+            materialPrice: {MaterialNumber('000000000021222875'): price},
+          ),
+        );
+        when(() => comboDealListMockBloc.state).thenReturn(
+          ComboDealListState.initial().copyWith(
+            isFetching: false,
+            comboDeals: {
+              '${price.comboDeal.flexibleGroup.getValue()}-': [mockComboDeal],
+            },
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        await tester.tap(
+          find.byKey(WidgetKeys.getComboDealButton),
+        );
+        await tester.pump();
+        expect(
+          find.text(
+            'Discount up to ${mockComboDeal.k1MaximumDiscount}% on selected materials'
+                .tr(),
+          ),
+          findsOneWidget,
+        );
       });
     },
   );

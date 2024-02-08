@@ -108,9 +108,7 @@ class ComboOffersProduct extends StatelessWidget {
                       context.tr(
                         'Discount up to {percent}% on selected materials',
                         namedArgs: {
-                          'percent': comboDeal.displayCombosMaximumDiscount(
-                            materialNumber: materialNumber,
-                          ),
+                          'percent': comboDeal.displayCombosMaximumDiscount,
                         },
                       ),
                       style: Theme.of(context).textTheme.bodySmall,

@@ -113,10 +113,8 @@ void main() {
         DiscountInfo.empty(),
       );
       expect(
-        comboDeal.displayCombosMaximumDiscount(
-          materialNumber: MaterialNumber('fake-material'),
-        ),
-        '10',
+        comboDeal.displayCombosMaximumDiscount,
+        '10.0',
       );
       expect(
         comboDeal.isBestDealAvailableOnCombo(
@@ -214,9 +212,7 @@ void main() {
         DiscountInfo.empty(),
       );
       expect(
-        comboDeal.displayCombosMaximumDiscount(
-          materialNumber: MaterialNumber('fake-material'),
-        ),
+        comboDeal.displayCombosMaximumDiscount,
         '15',
       );
       expect(
@@ -325,9 +321,7 @@ void main() {
         DiscountInfo.empty(),
       );
       expect(
-        comboDeal.displayCombosMaximumDiscount(
-          materialNumber: MaterialNumber('fake-optional-material'),
-        ),
+        comboDeal.displayCombosMaximumDiscount,
         '12',
       );
       expect(
@@ -478,9 +472,7 @@ void main() {
         DiscountInfo.empty(),
       );
       expect(
-        comboDeal.displayCombosMaximumDiscount(
-          materialNumber: MaterialNumber('fake-optional-material'),
-        ),
+        comboDeal.displayCombosMaximumDiscount,
         '20.0',
       );
       expect(
@@ -624,9 +616,7 @@ void main() {
         DiscountInfo.empty(),
       );
       expect(
-        comboDeal.displayCombosMaximumDiscount(
-          materialNumber: MaterialNumber('fake-optional-material'),
-        ),
+        comboDeal.displayCombosMaximumDiscount,
         '20.0',
       );
       expect(
@@ -761,9 +751,7 @@ void main() {
         DiscountInfo.empty(),
       );
       expect(
-        comboDeal.displayCombosMaximumDiscount(
-          materialNumber: MaterialNumber('fake-optional-material'),
-        ),
+        comboDeal.displayCombosMaximumDiscount,
         '20',
       );
       expect(
