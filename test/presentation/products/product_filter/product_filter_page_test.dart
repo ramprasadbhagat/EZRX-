@@ -17,6 +17,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -148,6 +149,26 @@ void main() {
               ),
             ),
           ).called(1);
+        },
+      );
+
+      testWidgets(
+        'Test hide Bundle offer filter if disableBundle flag is enabled',
+        (tester) async {
+          when(() => mockEligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final bundleOffersTileFinder =
+              find.byKey(WidgetKeys.showProductCheckbox('Bundle offers'));
+          expect(
+            bundleOffersTileFinder,
+            findsNothing,
+          );
         },
       );
 
@@ -385,6 +406,7 @@ void main() {
         when(() => mockEligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
           ),
         );
         await tester.pumpWidget(getScopedWidget());

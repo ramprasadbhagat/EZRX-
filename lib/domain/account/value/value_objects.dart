@@ -178,6 +178,8 @@ class SalesOrg extends ValueObject<String> {
 
   bool get isProductDeterminationApplicable => isID;
 
+  bool get showOfferFilter => !isID;
+
   const SalesOrg._(this.value);
 }
 

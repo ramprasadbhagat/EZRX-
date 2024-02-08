@@ -9,6 +9,8 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.materialFilter != current.materialFilter,
       builder: (context, state) {
+        final eligibilityState = context.read<EligibilityBloc>().state;
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,7 +31,7 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                   ),
               title: 'Favourites',
             ),
-            if (!context.read<EligibilityBloc>().state.salesOrg.isID) ...[
+            if (eligibilityState.salesOrg.showOfferFilter)
               _ListTileThemeWidget(
                 value: state.materialFilter.isProductOffer,
                 onChanged: (value) => context.read<MaterialFilterBloc>().add(
@@ -40,6 +42,7 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                     ),
                 title: 'Items with offers',
               ),
+            if (!eligibilityState.salesOrgConfigs.disableBundles)
               _ListTileThemeWidget(
                 value: state.materialFilter.bundleOffers,
                 onChanged: (value) => context.read<MaterialFilterBloc>().add(
@@ -50,33 +53,32 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                     ),
                 title: 'Bundle offers',
               ),
-              if (context.read<EligibilityBloc>().state.comboDealEligible)
-                _ListTileThemeWidget(
-                  value: state.materialFilter.comboOffers,
-                  onChanged: (value) {
-                    context.read<MaterialFilterBloc>().add(
-                          MaterialFilterEvent.updateSelectedMaterialFilter(
-                            MaterialFilterType.comboOffers,
-                            !state.materialFilter.comboOffers,
-                          ),
-                        );
-                  },
-                  title: 'Combo offers',
-                ),
-              if (context.read<EligibilityBloc>().state.canOrderCovidMaterial)
-                _ListTileThemeWidget(
-                  value: state.materialFilter.isCovidSelected,
-                  onChanged: (value) {
-                    context.read<MaterialFilterBloc>().add(
-                          MaterialFilterEvent.updateSelectedMaterialFilter(
-                            MaterialFilterType.isCovidSelected,
-                            !state.materialFilter.isCovidSelected,
-                          ),
-                        );
-                  },
-                  title: 'Covid-19',
-                ),
-            ],
+            if (eligibilityState.salesOrgConfigs.enableComboDeals)
+              _ListTileThemeWidget(
+                value: state.materialFilter.comboOffers,
+                onChanged: (value) {
+                  context.read<MaterialFilterBloc>().add(
+                        MaterialFilterEvent.updateSelectedMaterialFilter(
+                          MaterialFilterType.comboOffers,
+                          !state.materialFilter.comboOffers,
+                        ),
+                      );
+                },
+                title: 'Combo offers',
+              ),
+            if (eligibilityState.canOrderCovidMaterial)
+              _ListTileThemeWidget(
+                value: state.materialFilter.isCovidSelected,
+                onChanged: (value) {
+                  context.read<MaterialFilterBloc>().add(
+                        MaterialFilterEvent.updateSelectedMaterialFilter(
+                          MaterialFilterType.isCovidSelected,
+                          !state.materialFilter.isCovidSelected,
+                        ),
+                      );
+                },
+                title: 'Covid-19',
+              ),
           ],
         );
       },
