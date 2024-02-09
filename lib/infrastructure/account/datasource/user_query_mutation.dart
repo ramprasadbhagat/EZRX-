@@ -41,14 +41,9 @@ class UserQueryMutation {
             shipToAddrTwo
             disable2fa
             lastLogin
-            acceptMobileTC
-            acceptTCTimestamp
             mobileNumber
             countryCode
             acceptTC
-            acceptAUP
-            acceptAUPTC
-            acceptLocalTC
             optIn
             optInTimestamp
             hasPriceOverride
