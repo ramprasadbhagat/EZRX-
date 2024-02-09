@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/banner/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/value/value_object.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -21,6 +22,7 @@ class NotificationData with _$NotificationData {
     required OrderNumber orderNumber,
     required StringValue paymentNumber,
     required StringValue paymentBatchAdditionalInfo,
+    required EZReachBannerLink hyperLink,
   }) = _NotificationData;
 
   factory NotificationData.empty() => NotificationData(
@@ -34,6 +36,7 @@ class NotificationData with _$NotificationData {
         orderNumber: OrderNumber(''),
         paymentNumber: StringValue(''),
         paymentBatchAdditionalInfo: StringValue(''),
+        hyperLink: EZReachBannerLink(''),
       );
 
   bool get isReturnEligible =>

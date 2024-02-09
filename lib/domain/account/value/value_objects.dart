@@ -115,6 +115,10 @@ class SalesOrg extends ValueObject<String> {
     return country == 'KH';
   }
 
+  bool get isKR {
+    return country == 'KR';
+  }
+
   bool get isPhMdi => salesOrgIsPhMdi(value.getOrElse(() => ''));
 
   bool get needUpdatePaymentGateway => isMY || isVN;
@@ -135,7 +139,9 @@ class SalesOrg extends ValueObject<String> {
       Locale(languageCodeForHelpAndSupport, country);
 
   String get announcementVariablePath => countryAnnouncementPath(country);
+
   String get articleTagVariablePath => countryArticleTagPath(country);
+
   String get announcementTagVariablePath => countryAnnouncementTagPath(country);
 
   String get articleVariablePath => countryArticlePath(country);
@@ -143,6 +149,7 @@ class SalesOrg extends ValueObject<String> {
   String get aboutUsVariablePath => countryAboutUsPath(country);
 
   String get countryFlag => getCountryFlag(country);
+
   String get faqVariablePath => countryFaqPath(country);
 
   String get customerPaymentResponsePath =>
@@ -179,6 +186,33 @@ class SalesOrg extends ValueObject<String> {
   bool get isProductDeterminationApplicable => isID;
 
   bool get showOfferFilter => !isID;
+
+  bool get isMaintenanceBannersDisabled => isID;
+
+  String get maintenanceBannerPathId =>
+      countryToMaintenanceBannerPathId(country);
+
+  String get maintenancePathId {
+    if (isPH) return 'C6B6D79B-3D53-4AF8-812C-AC83472F1';
+
+    if (isSg) return '1FFEC4CB-D518-42B9-AE58-952CC0984DF0';
+
+    if (isID) return '25256DFD-D111-43F1-B29A-2FABB6B45E42';
+
+    if (isKH) return 'B4444BCE-4508-4F34-B150-5DD4C5D1A74F';
+
+    if (isKR) return 'E64D62D9-69A2-4610-AA8C-37B1C1C77DEA';
+
+    if (isMM) return '4A238A3A-1840-414F-882B-A64F21842384';
+
+    if (isTH) return 'F3A68975-2A83-4859-90E7-7226DD9DA614';
+
+    if (isTW) return 'CA38B790-5B32-4895-9656-D3ECEAC274C9';
+
+    if (isVN) return 'B895ED50-F741-4266-869C-E5D21911639B';
+
+    return '294DBC60-6394-4284-9D2B-B3270D0459EF';
+  }
 
   const SalesOrg._(this.value);
 }

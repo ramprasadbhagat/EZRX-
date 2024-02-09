@@ -49,6 +49,7 @@ class QuickAccessMenuPanel extends StatelessWidget {
 
 class _QuickAccessMenu extends StatelessWidget {
   final _QuickAccessMenuData quickAccessMenuData;
+
   const _QuickAccessMenu({
     Key? key,
     required this.quickAccessMenuData,
@@ -111,6 +112,7 @@ class _QuickAccessMenuData {
   final String icon;
   final String label;
   final VoidCallback onTap;
+
   const _QuickAccessMenuData({
     required this.key,
     required this.icon,
@@ -138,7 +140,9 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     key: WidgetKeys.homeQuickAccessPaymentsMenu,
     icon: 'payments_menu.svg',
     label: 'Payments',
-    onTap: () => context.navigateTo(const PaymentPageRoute()),
+    onTap: () {
+      context.navigateTo(const PaymentPageRoute());
+    },
   );
 
   final homeQuickAccessEZPointMenu = _QuickAccessMenuData(

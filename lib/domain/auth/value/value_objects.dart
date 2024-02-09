@@ -71,6 +71,8 @@ class AppMarket extends ValueObject<String> {
   String get locale => getLocale(value.getOrElse(() => ''));
 
   bool get isRegistrationRestricted => isVN || isID;
+
+  SalesOrg get salesOrg => marketToSalesOrg(value.getOrElse(() => ''));
 }
 
 class Username extends ValueObject<String> {

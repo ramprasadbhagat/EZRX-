@@ -433,6 +433,23 @@ String countryAnnouncementPath(String country) {
   return salesOrgCountryMap[country] ?? '';
 }
 
+String countryToMaintenanceBannerPathId(String market) {
+  final marketCountryMap = {
+    'MY': '294DBC60-6394-4284-9D2B-B3270D0459EF',
+    'PH': '54E151C1-17CB-4A37-BD75-CE4631B9F173',
+    'SG': '1FFEC4CB-D518-42B9-AE58-952CC0984DF0',
+    'ID': '25256DFD-D111-43F1-B29A-2FABB6B45E42',
+    'KH': 'B4444BCE-4508-4F34-B150-5DD4C5D1A74F',
+    'KR': 'E64D62D9-69A2-4610-AA8C-37B1C1C77DEA',
+    'MM': '4A238A3A-1840-414F-882B-A64F21842384',
+    'TH': 'F3A68975-2A83-4859-90E7-7226DD9DA614',
+    'TW': 'CA38B790-5B32-4895-9656-D3ECEAC274C9',
+    'VN': 'B895ED50-F741-4266-869C-E5D21911639B',
+  };
+
+  return marketCountryMap[market] ?? marketCountryMap['KH']!;
+}
+
 String countryArticlePath(String country) {
   final salesOrgCountryMap = {
     'MY': '188B233B-B81D-4679-A70B-036F07B2F649',

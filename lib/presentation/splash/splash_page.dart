@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_adv
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
@@ -181,6 +182,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 context
                     .read<EligibilityBloc>()
                     .add(const EligibilityEvent.initialized());
+                context
+                    .read<AnnouncementBloc>()
+                    .add(const AnnouncementEvent.clearClosedTime());
 
                 final appMarket = AppMarket(
                   context.deviceLocale.countryCode?.toLowerCase() ??
@@ -201,6 +205,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     context.fallbackLocale ?? const Locale('en'),
                   );
                 }
+
+                context.read<AnnouncementBloc>().add(
+                      const AnnouncementEvent.clearBannerId(),
+                    );
 
                 context.router.replaceAll(
                   [
@@ -230,6 +238,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               await Future.delayed(const Duration(milliseconds: 500));
               _welcomeUserMessage(state);
             });
+          },
+        ),
+        BlocListener<LoginFormBloc, LoginFormState>(
+          listenWhen: (pre, cur) => pre != cur,
+          listener: (context, state) {
+            context.read<AnnouncementBloc>().add(
+                  AnnouncementEvent.getMaintenanceBanners(
+                    salesOrg: state.currentMarket.salesOrg,
+                  ),
+                );
           },
         ),
         BlocListener<UserBloc, UserState>(
@@ -525,7 +543,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             final orderDocumentTypeState =
                 context.read<OrderDocumentTypeBloc>().state;
             if (state.haveShipTo) {
-              _initializeHomeTabDependencies(context);
+              _initializeHomeTabDependencies(context, state);
               _initializeProduct();
               _initializeCart(state);
               _initializeAccountSummary(state);
@@ -1049,6 +1067,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               redirectContactUs: (market) {
                 context.router.push(ContactUsPageRoute(appMarket: market));
               },
+              redirectAboutUs: () {
+                context.router.push(const AboutUsPageRoute());
+              },
               error: (error) {
                 ErrorUtils.handleApiFailure(context, error);
               },
@@ -1437,7 +1458,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         );
   }
 
-  void _initializeHomeTabDependencies(BuildContext context) {
+  void _initializeHomeTabDependencies(
+    BuildContext context,
+    EligibilityState eligibilityState,
+  ) {
     context.read<MaterialFilterBloc>().add(
           const MaterialFilterEvent.resetFilter(),
         );
@@ -1458,6 +1482,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
     context.read<NotificationBloc>().add(
           const NotificationEvent.fetch(),
+        );
+
+    context.read<AnnouncementBloc>().add(
+          AnnouncementEvent.getMaintenanceBanners(
+            salesOrg: eligibilityState.salesOrg,
+          ),
         );
   }
 }

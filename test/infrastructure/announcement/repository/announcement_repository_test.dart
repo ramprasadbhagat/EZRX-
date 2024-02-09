@@ -6,6 +6,7 @@ import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_l
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_remote.dart';
 import 'package:ezrxmobile/infrastructure/announcement/dtos/announcement_dto.dart';
 import 'package:ezrxmobile/infrastructure/announcement/repository/announcement_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/banner_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,9 +20,12 @@ class AnnouncementLocalDataSourceMock extends Mock
 
 class ConfigMock extends Mock implements Config {}
 
+class MockDateTimeStorageStorage extends Mock implements BannerStorage {}
+
 void main() {
   late AnnouncementRepository repository;
   late AnnouncementRemoteDataSource remoteDataSourceMock;
+  late MockDateTimeStorageStorage dateTimeStorage;
   late Config configMock;
   late AnnouncementLocalDataSource localDataSourceMock;
   late Announcement announcementMock;
@@ -31,6 +35,7 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       configMock = Config()..appFlavor = Flavor.uat;
       localDataSourceMock = AnnouncementLocalDataSourceMock();
+      dateTimeStorage = MockDateTimeStorageStorage();
       when(() => localDataSourceMock.getAnnouncements())
           .thenAnswer((invocation) async {
         final res = json.decode(
@@ -48,6 +53,7 @@ void main() {
         remoteDataSource: remoteDataSourceMock,
         config: configMock,
         localDataSource: localDataSourceMock,
+        dateTimeStorage: dateTimeStorage,
       );
     },
   );
@@ -83,6 +89,7 @@ void main() {
         remoteDataSource: remoteDataSourceMock,
         config: configMock..appFlavor = Flavor.mock,
         localDataSource: localDataSourceMock,
+        dateTimeStorage: dateTimeStorage,
       );
 
       final result = await repository.getAnnouncements();
@@ -94,6 +101,7 @@ void main() {
         remoteDataSource: remoteDataSourceMock,
         config: configMock..appFlavor = Flavor.mock,
         localDataSource: localDataSourceMock,
+        dateTimeStorage: dateTimeStorage,
       );
       when(() => localDataSourceMock.getAnnouncements())
           .thenThrow(() => Exception('fake-error'));

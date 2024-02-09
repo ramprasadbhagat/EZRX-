@@ -1,15 +1,19 @@
+import 'package:ezrxmobile/domain/banner/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification_data.dart';
 import 'package:ezrxmobile/domain/notification/value/value_object.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'notification_data_dto.freezed.dart';
+
 part 'notification_data_dto.g.dart';
 
 @freezed
 class NotificationDataDto with _$NotificationDataDto {
   const NotificationDataDto._();
+
   const factory NotificationDataDto({
     @JsonKey(name: 'id', defaultValue: 0)
         required int id,
@@ -47,6 +51,7 @@ class NotificationDataDto with _$NotificationDataDto {
       orderNumber: OrderNumber(orderNumber),
       paymentNumber: StringValue(paymentNumber),
       paymentBatchAdditionalInfo: StringValue(paymentBatchAdditionalInfo),
+      hyperLink: EZReachBannerLink(''),
     );
   }
 

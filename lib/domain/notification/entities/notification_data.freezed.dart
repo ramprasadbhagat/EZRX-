@@ -27,6 +27,7 @@ mixin _$NotificationData {
   StringValue get paymentNumber => throw _privateConstructorUsedError;
   StringValue get paymentBatchAdditionalInfo =>
       throw _privateConstructorUsedError;
+  EZReachBannerLink get hyperLink => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NotificationDataCopyWith<NotificationData> get copyWith =>
@@ -49,7 +50,8 @@ abstract class $NotificationDataCopyWith<$Res> {
       ReturnRequestsId returnRequestId,
       OrderNumber orderNumber,
       StringValue paymentNumber,
-      StringValue paymentBatchAdditionalInfo});
+      StringValue paymentBatchAdditionalInfo,
+      EZReachBannerLink hyperLink});
 
   $ReturnRequestsIdCopyWith<$Res> get returnRequestId;
 }
@@ -77,6 +79,7 @@ class _$NotificationDataCopyWithImpl<$Res, $Val extends NotificationData>
     Object? orderNumber = null,
     Object? paymentNumber = null,
     Object? paymentBatchAdditionalInfo = null,
+    Object? hyperLink = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -119,6 +122,10 @@ class _$NotificationDataCopyWithImpl<$Res, $Val extends NotificationData>
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      hyperLink: null == hyperLink
+          ? _value.hyperLink
+          : hyperLink // ignore: cast_nullable_to_non_nullable
+              as EZReachBannerLink,
     ) as $Val);
   }
 
@@ -149,7 +156,8 @@ abstract class _$$_NotificationDataCopyWith<$Res>
       ReturnRequestsId returnRequestId,
       OrderNumber orderNumber,
       StringValue paymentNumber,
-      StringValue paymentBatchAdditionalInfo});
+      StringValue paymentBatchAdditionalInfo,
+      EZReachBannerLink hyperLink});
 
   @override
   $ReturnRequestsIdCopyWith<$Res> get returnRequestId;
@@ -176,6 +184,7 @@ class __$$_NotificationDataCopyWithImpl<$Res>
     Object? orderNumber = null,
     Object? paymentNumber = null,
     Object? paymentBatchAdditionalInfo = null,
+    Object? hyperLink = null,
   }) {
     return _then(_$_NotificationData(
       id: null == id
@@ -218,6 +227,10 @@ class __$$_NotificationDataCopyWithImpl<$Res>
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      hyperLink: null == hyperLink
+          ? _value.hyperLink
+          : hyperLink // ignore: cast_nullable_to_non_nullable
+              as EZReachBannerLink,
     ));
   }
 }
@@ -235,7 +248,8 @@ class _$_NotificationData extends _NotificationData {
       required this.returnRequestId,
       required this.orderNumber,
       required this.paymentNumber,
-      required this.paymentBatchAdditionalInfo})
+      required this.paymentBatchAdditionalInfo,
+      required this.hyperLink})
       : super._();
 
   @override
@@ -258,10 +272,12 @@ class _$_NotificationData extends _NotificationData {
   final StringValue paymentNumber;
   @override
   final StringValue paymentBatchAdditionalInfo;
+  @override
+  final EZReachBannerLink hyperLink;
 
   @override
   String toString() {
-    return 'NotificationData(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, paymentNumber: $paymentNumber, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo)';
+    return 'NotificationData(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, paymentNumber: $paymentNumber, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, hyperLink: $hyperLink)';
   }
 
   @override
@@ -286,7 +302,9 @@ class _$_NotificationData extends _NotificationData {
             (identical(other.paymentBatchAdditionalInfo,
                     paymentBatchAdditionalInfo) ||
                 other.paymentBatchAdditionalInfo ==
-                    paymentBatchAdditionalInfo));
+                    paymentBatchAdditionalInfo) &&
+            (identical(other.hyperLink, hyperLink) ||
+                other.hyperLink == hyperLink));
   }
 
   @override
@@ -301,7 +319,8 @@ class _$_NotificationData extends _NotificationData {
       returnRequestId,
       orderNumber,
       paymentNumber,
-      paymentBatchAdditionalInfo);
+      paymentBatchAdditionalInfo,
+      hyperLink);
 
   @JsonKey(ignore: true)
   @override
@@ -312,17 +331,17 @@ class _$_NotificationData extends _NotificationData {
 
 abstract class _NotificationData extends NotificationData {
   factory _NotificationData(
-          {required final int id,
-          required final NotificationType type,
-          required final NotificationTitle title,
-          required final String description,
-          required final DateTimeStringValue createdAt,
-          required final bool isRead,
-          required final ReturnRequestsId returnRequestId,
-          required final OrderNumber orderNumber,
-          required final StringValue paymentNumber,
-          required final StringValue paymentBatchAdditionalInfo}) =
-      _$_NotificationData;
+      {required final int id,
+      required final NotificationType type,
+      required final NotificationTitle title,
+      required final String description,
+      required final DateTimeStringValue createdAt,
+      required final bool isRead,
+      required final ReturnRequestsId returnRequestId,
+      required final OrderNumber orderNumber,
+      required final StringValue paymentNumber,
+      required final StringValue paymentBatchAdditionalInfo,
+      required final EZReachBannerLink hyperLink}) = _$_NotificationData;
   _NotificationData._() : super._();
 
   @override
@@ -345,6 +364,8 @@ abstract class _NotificationData extends NotificationData {
   StringValue get paymentNumber;
   @override
   StringValue get paymentBatchAdditionalInfo;
+  @override
+  EZReachBannerLink get hyperLink;
   @override
   @JsonKey(ignore: true)
   _$$_NotificationDataCopyWith<_$_NotificationData> get copyWith =>

@@ -544,6 +544,7 @@ mixin _$DeepLinkingState {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) =>
@@ -562,6 +563,7 @@ mixin _$DeepLinkingState {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) =>
@@ -580,6 +582,7 @@ mixin _$DeepLinkingState {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -602,6 +605,7 @@ mixin _$DeepLinkingState {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) =>
@@ -620,6 +624,7 @@ mixin _$DeepLinkingState {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) =>
@@ -638,6 +643,7 @@ mixin _$DeepLinkingState {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -714,6 +720,7 @@ class _$_Initial implements _Initial {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -735,6 +742,7 @@ class _$_Initial implements _Initial {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -756,6 +764,7 @@ class _$_Initial implements _Initial {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -784,6 +793,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -805,6 +815,7 @@ class _$_Initial implements _Initial {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -826,6 +837,7 @@ class _$_Initial implements _Initial {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -919,6 +931,7 @@ class _$_LinkPending implements _LinkPending {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -940,6 +953,7 @@ class _$_LinkPending implements _LinkPending {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -961,6 +975,7 @@ class _$_LinkPending implements _LinkPending {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -989,6 +1004,7 @@ class _$_LinkPending implements _LinkPending {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -1010,6 +1026,7 @@ class _$_LinkPending implements _LinkPending {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -1031,6 +1048,7 @@ class _$_LinkPending implements _LinkPending {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -1131,6 +1149,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -1152,6 +1171,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -1173,6 +1193,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -1201,6 +1222,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -1222,6 +1244,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -1243,6 +1266,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -1344,6 +1368,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -1365,6 +1390,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -1386,6 +1412,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -1414,6 +1441,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -1435,6 +1463,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -1456,6 +1485,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -1559,6 +1589,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -1580,6 +1611,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -1601,6 +1633,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -1629,6 +1662,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -1650,6 +1684,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -1671,6 +1706,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -1772,6 +1808,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -1793,6 +1830,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -1814,6 +1852,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -1842,6 +1881,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -1863,6 +1903,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -1884,6 +1925,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -1995,6 +2037,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -2016,6 +2059,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -2037,6 +2081,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -2065,6 +2110,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -2086,6 +2132,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -2107,6 +2154,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -2219,6 +2267,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -2240,6 +2289,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -2261,6 +2311,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -2289,6 +2340,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -2310,6 +2362,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -2331,6 +2384,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -2405,6 +2459,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -2426,6 +2481,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -2447,6 +2503,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -2475,6 +2532,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -2496,6 +2554,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -2517,6 +2576,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -2612,6 +2672,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -2633,6 +2694,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -2654,6 +2716,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -2682,6 +2745,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -2703,6 +2767,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -2724,6 +2789,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -2797,6 +2863,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -2818,6 +2885,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -2839,6 +2907,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -2867,6 +2936,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -2888,6 +2958,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -2909,6 +2980,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -2922,6 +2994,191 @@ class _$_RedirectFAQ implements _RedirectFAQ {
 
 abstract class _RedirectFAQ implements DeepLinkingState {
   const factory _RedirectFAQ() = _$_RedirectFAQ;
+}
+
+/// @nodoc
+abstract class _$$_RedirectAboutUsCopyWith<$Res> {
+  factory _$$_RedirectAboutUsCopyWith(
+          _$_RedirectAboutUs value, $Res Function(_$_RedirectAboutUs) then) =
+      __$$_RedirectAboutUsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RedirectAboutUsCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectAboutUs>
+    implements _$$_RedirectAboutUsCopyWith<$Res> {
+  __$$_RedirectAboutUsCopyWithImpl(
+      _$_RedirectAboutUs _value, $Res Function(_$_RedirectAboutUs) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_RedirectAboutUs implements _RedirectAboutUs {
+  const _$_RedirectAboutUs();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectAboutUs()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RedirectAboutUs);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(Uri link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+        redirectPaymentDetail,
+    required TResult Function() redirectPaymentHome,
+    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function(ApiFailure failure) error,
+  }) {
+    return redirectAboutUs();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(Uri link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+        redirectPaymentDetail,
+    TResult? Function()? redirectPaymentHome,
+    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function(ApiFailure failure)? error,
+  }) {
+    return redirectAboutUs?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Uri link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+        redirectPaymentDetail,
+    TResult Function()? redirectPaymentHome,
+    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function(ApiFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectAboutUs != null) {
+      return redirectAboutUs();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_Error value) error,
+  }) {
+    return redirectAboutUs(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_Error value)? error,
+  }) {
+    return redirectAboutUs?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectAboutUs != null) {
+      return redirectAboutUs(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectAboutUs implements DeepLinkingState {
+  const factory _RedirectAboutUs() = _$_RedirectAboutUs;
 }
 
 /// @nodoc
@@ -3003,6 +3260,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -3024,6 +3282,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -3045,6 +3304,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -3073,6 +3333,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -3094,6 +3355,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -3115,6 +3377,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -3222,6 +3485,7 @@ class _$_Error implements _Error {
     required TResult Function() redirectPaymentHome,
     required TResult Function(String invoiceNumber) redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
   }) {
@@ -3243,6 +3507,7 @@ class _$_Error implements _Error {
     TResult? Function()? redirectPaymentHome,
     TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
   }) {
@@ -3264,6 +3529,7 @@ class _$_Error implements _Error {
     TResult Function()? redirectPaymentHome,
     TResult Function(String invoiceNumber)? redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
     required TResult orElse(),
@@ -3292,6 +3558,7 @@ class _$_Error implements _Error {
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
   }) {
@@ -3313,6 +3580,7 @@ class _$_Error implements _Error {
     TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
   }) {
@@ -3334,6 +3602,7 @@ class _$_Error implements _Error {
     TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
     required TResult orElse(),

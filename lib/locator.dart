@@ -239,6 +239,7 @@ import 'package:ezrxmobile/infrastructure/core/http/interceptor/datadog_intercep
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/performance_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
@@ -487,6 +488,7 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(() => DeviceStorage());
+  locator.registerLazySingleton(() => BannerStorage());
   locator.registerLazySingleton(
     () => DeviceRepository(
       deviceStorage: locator<DeviceStorage>(),
@@ -872,6 +874,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AnnouncementRepository(
       config: locator<Config>(),
+      dateTimeStorage: locator<BannerStorage>(),
       remoteDataSource: locator<AnnouncementRemoteDataSource>(),
       localDataSource: locator<AnnouncementLocalDataSource>(),
     ),
@@ -880,7 +883,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AnnouncementBloc(
       announcementRepository: locator<AnnouncementRepository>(),
-    ),
+    )..add(const AnnouncementEvent.getClosedTime()),
   );
 
   //============================================================

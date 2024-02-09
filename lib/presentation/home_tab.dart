@@ -1,14 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/widgets/announcement_bottomsheet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,21 +21,47 @@ class HomeNavigationTabbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<EligibilityBloc, EligibilityState>(
-      listenWhen: (previous, current) =>
-          previous.isLoadingCustomerCode != current.isLoadingCustomerCode &&
-          !current.isLoadingCustomerCode,
+    return BlocListener<AnnouncementBloc, AnnouncementState>(
+      listenWhen: (pre, cur) =>
+          pre.isLoading != cur.isLoading && !cur.isLoading,
       listener: (context, state) {
-        context.read<DeepLinkingBloc>().add(
-              const DeepLinkingEvent.initialize(),
-            );
+        final eliState = context.read<EligibilityBloc>().state;
+        if (eliState.haveShipTo &&
+            state.canShowSheetHome &&
+            context.topRoute.name == HomeTabRoute.name) {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            enableDrag: false,
+            isDismissible: false,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(16),
+              ),
+            ),
+            builder: (_) => AnnouncementBottomSheet(
+              maintenanceItem: state.maintenanceItem,
+              storageType: StorageType.order,
+            ),
+          );
+        }
       },
-      buildWhen: (previous, current) => previous.user != current.user,
-      builder: (context, state) {
-        return _CustomTabBar(
-          routes: _getTabs(state),
-        );
-      },
+      child: BlocConsumer<EligibilityBloc, EligibilityState>(
+        listenWhen: (previous, current) =>
+            previous.isLoadingCustomerCode != current.isLoadingCustomerCode &&
+            !current.isLoadingCustomerCode,
+        listener: (context, state) {
+          context.read<DeepLinkingBloc>().add(
+                const DeepLinkingEvent.initialize(),
+              );
+        },
+        buildWhen: (previous, current) => previous.user != current.user,
+        builder: (context, state) {
+          return _CustomTabBar(
+            routes: _getTabs(state),
+          );
+        },
+      ),
     );
   }
 }

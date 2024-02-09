@@ -12,6 +12,7 @@ IconData notificationIcon(
     'Return request reviewed': Icons.electric_rickshaw,
     'Payment Advice created': Icons.account_balance_wallet_outlined,
     'Reminder: Payment advice expiring': Icons.error,
+    'Alert': Icons.push_pin_outlined,
   };
 
   return iconMap[title] ?? Icons.receipt_long_outlined;
@@ -24,6 +25,7 @@ Color getIconBGColor(
     'Order Created': ZPColors.accentColor,
     'Return request created': ZPColors.accentColor,
     'Payment Advice created': ZPColors.accentColor,
+    'Alert': ZPColors.accentColor,
   };
   final lightRed = {
     'Return request failed': ZPColors.lightRed,
@@ -47,6 +49,7 @@ Color getIconColor(
     'Order Created': ZPColors.primary,
     'Return request created': ZPColors.primary,
     'Payment advice created': ZPColors.primary,
+    'Alert': ZPColors.primary,
   };
   final red = {
     'Return request failed': ZPColors.red,
@@ -71,3 +74,5 @@ bool checkReturn(String val) =>
 bool checkOrder(String val) => val == 'OrderCreated';
 
 bool checkPayment(String val) => val == 'PaymentAdviceCreated';
+
+bool checkAnnouncement(String val) => val == 'AnnouncementBanner';

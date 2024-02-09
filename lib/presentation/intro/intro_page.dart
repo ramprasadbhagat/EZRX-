@@ -73,14 +73,11 @@ class _IntroPageState extends State<IntroPage> {
   }
 
   void _getStarted(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
     context.read<IntroBloc>().add(const IntroEvent.setAppFirstLaunch());
     context.read<SalesOrgBloc>().add(
           SalesOrgEvent.loadSavedOrganisation(
-            salesOrganisations: context
-                .read<EligibilityBloc>()
-                .state
-                .user
-                .userSalesOrganisations,
+            salesOrganisations: eligibilityState.user.userSalesOrganisations,
           ),
         );
     context.read<EligibilityBloc>().add(

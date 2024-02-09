@@ -10,4 +10,5 @@ class DateTimeFormatString {
       'EEEE, d MMM yyyy, HH:mm';
   static const String displayNotificationDateTimeFormat = 'dd MMM yyyy; HH:mm';
   static const String defaultDateTimeFormat = 'yyyy-MM-ddTHH:mm:ss';
+  static const String announcementDateFormat = 'MM/dd/yyyy HH:mm';
 }

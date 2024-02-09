@@ -117,12 +117,13 @@ class _MarketSelectorState extends State<MarketSelector> {
                 );
               }).toList(),
               value: state.currentMarket,
-              onChanged: (selectedMarket) => {
+              onChanged: (selectedMarket) {
+                final appMarket = selectedMarket ?? AppMarket.defaultMarket();
                 context.read<LoginFormBloc>().add(
                       LoginFormEvent.setCurrentMarket(
-                        selectedMarket ?? AppMarket.defaultMarket(),
+                        appMarket,
                       ),
-                    ),
+                    );
               },
             );
           },

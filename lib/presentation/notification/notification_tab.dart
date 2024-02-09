@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
@@ -22,9 +24,12 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 part 'package:ezrxmobile/presentation/notification/widgets/notification_list.dart';
 part 'package:ezrxmobile/presentation/notification/widgets/delete_notifications_button.dart';
+
+part 'package:ezrxmobile/presentation/notification/widgets/announcement_list.dart';
 
 class NotificationTab extends StatelessWidget {
   const NotificationTab({Key? key}) : super(key: key);
@@ -42,53 +47,76 @@ class NotificationTab extends StatelessWidget {
         customerBlocked:
             context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
       ),
-      body: BlocConsumer<NotificationBloc, NotificationState>(
-        listenWhen: (previous, current) =>
-            previous.isFetching != current.isFetching,
-        listener: (context, state) {
-          state.notificationFailureOrSuccessOption.fold(
-            () {
-              if (state.isDeletedAllSuccess) {
-                CustomSnackBar(
-                  messageText: context.tr('Notification has been deleted'),
-                ).show(context);
-              }
+      body: BlocBuilder<AnnouncementBloc, AnnouncementState>(
+        buildWhen: (pre, cur) => pre.maintenanceItem != cur.maintenanceItem,
+        builder: (context, announcementState) {
+          return BlocConsumer<NotificationBloc, NotificationState>(
+            listenWhen: (previous, current) =>
+                previous.isFetching != current.isFetching,
+            listener: (context, state) {
+              state.notificationFailureOrSuccessOption.fold(
+                () {
+                  if (state.isDeletedAllSuccess) {
+                    CustomSnackBar(
+                      messageText: context.tr('Notification has been deleted'),
+                    ).show(context);
+                  }
+                },
+                (either) => {},
+              );
             },
-            (either) => {},
-          );
-        },
-        buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching ||
-            previous.isDeletedAllSuccess != current.isDeletedAllSuccess ||
-            previous.isReadNotification != current.isReadNotification,
-        builder: (context, state) {
-          if (state.isFetching &&
-              state.notificationList.notificationData.isEmpty) {
-            return LoadingShimmer.logo(
-              key: WidgetKeys.loaderImage,
-            );
-          }
+            buildWhen: (previous, current) =>
+                previous.isFetching != current.isFetching ||
+                previous.isDeletedAllSuccess != current.isDeletedAllSuccess ||
+                previous.isReadNotification != current.isReadNotification,
+            builder: (context, state) {
+              if (state.isFetching &&
+                  state.notificationList.notificationData.isEmpty &&
+                  announcementState
+                      .maintenanceItem.listNotificationData.isEmpty) {
+                return LoadingShimmer.logo(
+                  key: WidgetKeys.loaderImage,
+                );
+              }
 
-          return ScrollList<NotificationData>(
-            controller: ScrollController(),
-            isLoading: state.isFetching,
-            noRecordFoundWidget: const NoRecordFound(
-              key: WidgetKeys.notificationNotFoundRecordKey,
-              title: 'No notifications to show',
-              subTitle: "We'll notify you when there is something",
-              svgImage: SvgImage.notification,
-            ),
-            itemBuilder: (context, index, item) => _NotificationList(
-              key: WidgetKeys.genericKey(key: item.description),
-              notificationData: item,
-            ),
-            items: state.notificationList.notificationData,
-            onRefresh: () => context
-                .read<NotificationBloc>()
-                .add(const NotificationEvent.fetch()),
-            onLoadingMore: () => context
-                .read<NotificationBloc>()
-                .add(const NotificationEvent.loadMore()),
+              return ScrollList<NotificationData>(
+                controller: ScrollController(),
+                isLoading: state.isFetching,
+                noRecordFoundWidget: const NoRecordFound(
+                  key: WidgetKeys.notificationNotFoundRecordKey,
+                  title: 'No notifications to show',
+                  subTitle: "We'll notify you when there is something",
+                  svgImage: SvgImage.notification,
+                ),
+                itemBuilder: (context, index, item) => item.type.isAnnouncement
+                    ? _AnnouncementList(
+                        key: WidgetKeys.genericKey(key: item.description),
+                        notificationData: item,
+                      )
+                    : _NotificationList(
+                        key: WidgetKeys.genericKey(key: item.description),
+                        notificationData: item,
+                      ),
+                items: [
+                  ...announcementState.maintenanceItem.listNotificationData,
+                  ...state.notificationList.notificationData,
+                ],
+                onRefresh: () {
+                  context.read<AnnouncementBloc>().add(
+                        AnnouncementEvent.getMaintenanceBanners(
+                          salesOrg:
+                              context.read<EligibilityBloc>().state.salesOrg,
+                        ),
+                      );
+                  context
+                      .read<NotificationBloc>()
+                      .add(const NotificationEvent.fetch());
+                },
+                onLoadingMore: () => context
+                    .read<NotificationBloc>()
+                    .add(const NotificationEvent.loadMore()),
+              );
+            },
           );
         },
       ),

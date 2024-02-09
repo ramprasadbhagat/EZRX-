@@ -29,6 +29,7 @@ void main() {
   final fakeCustomerCode = fakeCustomerCodeInfo;
   final fakeShipToCode = fakeShipToInfo;
   const fakeError = ApiFailure.other('fake-error');
+  const fakeLinkInvalid = ApiFailure.other('Link is not valid');
   final materialNumber = MaterialNumber('000000000011002079');
   const orderDetailLink = '/my-account/orders/order-detail';
   const contactUsLink = '/contact-us';
@@ -121,7 +122,9 @@ void main() {
         selectedShipTo: fakeShipToCode,
       ),
     ),
-    expect: () => [],
+    expect: () => [
+      const DeepLinkingState.error(fakeLinkInvalid)
+    ],
   );
 
   blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -207,6 +210,7 @@ void main() {
       ),
       expect: () => [
         DeepLinkingState.redirectContactUs(AppMarket.defaultMarket()),
+        const DeepLinkingState.error(fakeLinkInvalid),
       ],
     );
     blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -232,6 +236,7 @@ void main() {
       ),
       expect: () => [
         const DeepLinkingState.error(fakeError),
+        const DeepLinkingState.error(fakeLinkInvalid),
       ],
     );
   });

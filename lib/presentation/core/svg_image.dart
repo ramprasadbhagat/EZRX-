@@ -19,6 +19,7 @@ abstract class SvgImage {
   static const String faqSearch = '${_basePath}faq_search_icon.svg';
   static const String downloadIcon = '${_basePath}cloud_download.svg';
   static const String alert = '${_basePath}alert.svg';
+  static const String iconAlert = '${_basePath}icon_alert.svg';
   static const String coronavirus = '${_basePath}coronavirus.svg';
   static const String bonusOffer = '${_basePath}bonus_offer_tag.svg';
   static const String emptyFavourite = '${_basePath}empty_favourite.svg';

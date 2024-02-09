@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
@@ -65,11 +66,16 @@ class MockNotificationBloc
     extends MockBloc<NotificationEvent, NotificationState>
     implements NotificationBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
+  late AnnouncementBloc announcementBlocMock;
   late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
   late CustomerCodeBloc customerCodeBlocMock;
@@ -90,6 +96,7 @@ void main() {
   });
   group('Notification Screen', () {
     setUp(() async {
+      announcementBlocMock = AnnouncementBlocMock();
       userBlocMock = UserBlocMock();
       autoRouterMock = locator<AppRouter>();
       customerCodeBlocMock = CustomerCodeBlocMock();
@@ -100,6 +107,8 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       viewByItemDetailsBlocMock = ViewByItemDetailBlocMock();
       viewByOrderDetailsBlocMock = ViewByOrderDetailBlocMock();
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
       when(() => paymentSummaryDetailsBlockMock.state)
@@ -119,6 +128,9 @@ void main() {
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
         providers: [
+          BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock,
+          ),
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,

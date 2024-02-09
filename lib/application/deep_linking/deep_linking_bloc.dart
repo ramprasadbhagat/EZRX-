@@ -15,7 +15,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'deep_linking_event.dart';
+
 part 'deep_linking_state.dart';
+
 part 'deep_linking_bloc.freezed.dart';
 
 class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
@@ -66,7 +68,15 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
               );
             }
 
-            if (event.selectedShipTo == ShipToInfo.empty()) return;
+            if (event.selectedShipTo == ShipToInfo.empty()) {
+              emit(
+                const DeepLinkingState.error(
+                  ApiFailure.other('Please login to proceed'),
+                ),
+              );
+
+              return;
+            }
 
             if (link.path.startsWith('/product-details')) {
               final failureOrSuccess = repository.extractMaterialNumber(
@@ -169,6 +179,14 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
               emit(const DeepLinkingState.redirectPaymentHome());
             } else if (link.path == '/faq') {
               emit(const DeepLinkingState.redirectFAQ());
+            } else if (link.path == '/about-us') {
+              emit(const DeepLinkingState.redirectAboutUs());
+            } else {
+              emit(
+                const DeepLinkingState.error(
+                  ApiFailure.other('Link is not valid'),
+                ),
+              );
             }
           },
         );

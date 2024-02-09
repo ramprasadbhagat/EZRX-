@@ -61,8 +61,8 @@ class MoreDetailsTile {
   factory MoreDetailsTile.userGuide(BuildContext context) => MoreDetailsTile(
         key: WidgetKeys.userGuideTile,
         icon: const Icon(
-          Icons
-              .menu_book_outlined, //TODO : will update it after Design Them update the Figma
+          Icons.menu_book_outlined,
+          //TODO : will update it after Design Them update the Figma
           color: ZPColors.greenIconColor,
         ),
         label: 'User guide',
@@ -115,6 +115,7 @@ class MoreDetailsTile {
           ),
         ),
       );
+
   factory MoreDetailsTile.contactUs(BuildContext context) => MoreDetailsTile(
         key: WidgetKeys.contactUsTile,
         icon: const Icon(
@@ -164,7 +165,9 @@ class MoreDetailsTile {
           color: ZPColors.greenIconColor,
         ),
         label: 'Payments',
-        onTap: () => context.navigateTo(const PaymentPageRoute()),
+        onTap: () {
+          context.navigateTo(const PaymentPageRoute());
+        },
       );
 
   factory MoreDetailsTile.eZPointTab(BuildContext context) => MoreDetailsTile(

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -24,13 +26,20 @@ import 'package:ezrxmobile/presentation/returns/return_list/return_filter/return
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
+import 'package:ezrxmobile/presentation/widgets/announcement_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 part 'widgets/filter_return_by_request.dart';
+
 part 'widgets/filter_return_by_item.dart';
+
 part 'widgets/list_by_item_search_bar.dart';
+
 part 'widgets/list_by_request_search_bar.dart';
+
 part 'widgets/export_return_by_item.dart';
+
 part 'widgets/export_return_by_request.dart';
 
 class ReturnRoot extends StatefulWidget {
@@ -64,6 +73,29 @@ class _ReturnRootState extends State<ReturnRoot> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // This code will run after the build is finished
+      // You can perform any tasks here that require the build to be complete
+      if (context.read<AnnouncementBloc>().state.canShowSheetReturn) {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          enableDrag: false,
+          isDismissible: false,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(16),
+            ),
+          ),
+          builder: (_) => AnnouncementBottomSheet(
+            maintenanceItem:
+                context.read<AnnouncementBloc>().state.maintenanceItem,
+            storageType: StorageType.returns,
+          ),
+        );
+      }
+    });
+
     return Scaffold(
       key: WidgetKeys.returnRootPage,
       appBar: CustomAppBar.commonAppBar(

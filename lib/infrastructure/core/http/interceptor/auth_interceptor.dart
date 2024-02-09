@@ -34,6 +34,7 @@ class AuthInterceptor extends Interceptor {
     required this.authQueryMutation,
     required this.pushNotificationService,
   });
+
   @override
   Future<void> onRequest(
     RequestOptions options,
@@ -51,11 +52,13 @@ class AuthInterceptor extends Interceptor {
         }
         if (options.uri.path == config.getEZReachUrlConstant) {
           options.headers['Authorization'] = config.eZReachToken;
-        } else if (options.path == config.announcementApiUrlPath) {
-          options.headers['X-GQL-Token'] = config.getAnnouncementApiKey;
-        } else {
+        } else if (options.uri.path != config.announcementApiUrlPath) {
           options.headers['Authorization'] = 'Bearer V2 ${token.access}';
         }
+      }
+
+      if (options.uri.path == config.announcementApiUrlPath) {
+        options.headers['X-GQL-Token'] = config.getAnnouncementApiKey;
       }
       options.headers['package'] = await packageInfoService.getPackageName();
       options.headers['version'] = await packageInfoService.getVersion();

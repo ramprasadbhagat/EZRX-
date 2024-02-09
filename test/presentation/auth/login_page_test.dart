@@ -67,7 +67,7 @@ class CustomerCodeBlocMock
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
-class AnnnouncementBlocMock
+class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
 
@@ -208,7 +208,7 @@ void main() {
       authBlocMock = AuthBlocMock();
       scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
       accountSummaryMock = AccountSummaryBlocMock();
-      announcementBlocMock = AnnnouncementBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
       deepLinkingBlocMock = DeepLinkingMockBloc();
       materialListBloc = MaterialListMockBloc();
@@ -408,6 +408,9 @@ void main() {
         MaterialFrameWrapper(
           child: MultiBlocProvider(
             providers: [
+              BlocProvider(
+                create: (context) => loginBlocMock,
+              ),
               BlocProvider(
                 create: (context) => authBlocMock,
               ),

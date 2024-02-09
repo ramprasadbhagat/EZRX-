@@ -69,6 +69,7 @@ import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -165,6 +166,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<SettingStorage>().init();
   await locator<OrderStorage>().init();
   await locator<DeviceStorage>().init();
+  await locator<BannerStorage>().init();
   await locator<ProductSuggestionHistoryStorage>().init();
   await locator<MixpanelService>().init();
   await locator<DatadogService>().init();

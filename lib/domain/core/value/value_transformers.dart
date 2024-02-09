@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
@@ -151,6 +152,13 @@ DateTime? tryParseDateTime(String input) {
       //Case Date and Time(YYYY-MM-DD HH:mm:ss)example: '2023-11-20 07:36:33'
       if (RegExp(r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$').hasMatch(input)) {
         return DateFormat('yyyy-MM-dd HH:mm:ss').parse(input, true).toLocal();
+      }
+
+      //Case Date and Time(MM/dd/yyyy HH:mm)example: '01/30/2024 04:32'
+      if (RegExp(r'^\d{2}/\d{2}/\d{4} \d{2}:\d{2}$').hasMatch(input)) {
+        return DateFormat(DateTimeFormatString.announcementDateFormat)
+            .parse(input, false)
+            .toLocal();
       }
 
       //input with format yyyyddmmhh
@@ -600,6 +608,23 @@ String getLocale(String country) {
   };
 
   return marketLocaleMap[country] ?? 'en-US';
+}
+
+SalesOrg marketToSalesOrg(String market) {
+  final marketSalesOrgMap = {
+    'my': '2001',
+    'mm': '2200',
+    'ph': '2500',
+    'sg': '2601',
+    'tw': '2800',
+    'th': '2900',
+    'vn': '3000',
+    'kr': '3101',
+    'kh': '1500',
+    'id': '1900',
+  };
+
+  return SalesOrg(marketSalesOrgMap[market] ?? 'Unknown');
 }
 
 String getCountryFlag(String country) {

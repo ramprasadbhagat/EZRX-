@@ -38,14 +38,14 @@ class AboutUsRemoteDataSource {
       }),
     );
     _aboutUsExceptionChecker(res: res);
-    final finalData = (res.data['data']?['item']?['components'] ?? {})
-        as Map<String, dynamic>;
-    final templateList = (finalData['value'] ?? []) as List;
+    final finalData =
+        res.data['data']?['item']?['components'] as Map<String, dynamic>?;
+    final templateList = (finalData?['value'] ?? []) as List;
     if (templateList.isEmpty) {
       throw ServerException(message: 'Unable to load About us');
     }
 
-    return AboutUsDto.fromJson(finalData).toDomain();
+    return AboutUsDto.fromJson(finalData ?? {}).toDomain();
   }
 
   void _aboutUsExceptionChecker({required Response<dynamic> res}) {

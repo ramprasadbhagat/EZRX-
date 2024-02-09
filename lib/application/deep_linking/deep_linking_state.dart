@@ -27,6 +27,7 @@ class DeepLinkingState with _$DeepLinkingState {
     String invoiceNumber,
   ) = _RedirectInvoiceDetail;
   const factory DeepLinkingState.redirectFAQ() = _RedirectFAQ;
+  const factory DeepLinkingState.redirectAboutUs() = _RedirectAboutUs;
   const factory DeepLinkingState.redirectContactUs(
     AppMarket market,
   ) = _RedirectContactUs;

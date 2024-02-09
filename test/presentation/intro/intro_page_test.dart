@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -31,6 +32,10 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -41,6 +46,7 @@ void main() {
   late AupTcBloc aupTcBlocMock;
   final introSkipButton = find.byKey(WidgetKeys.introSkipButton);
   final introGetStartedButton = find.byKey(WidgetKeys.introGetStartedButton);
+  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -62,6 +68,9 @@ void main() {
     );
     when(() => aupTcBlocMock.state).thenReturn(AupTcState.initial());
     when(() => introBlocMock.state).thenReturn(IntroState.initial());
+    announcementBlocMock = AnnouncementBlocMock();
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   });
 
   Widget getIntroPage() {
@@ -80,6 +89,9 @@ void main() {
         ),
         BlocProvider<AupTcBloc>(
           create: ((context) => aupTcBlocMock),
+        ),
+        BlocProvider<AnnouncementBloc>(
+          create: (context) => announcementBlocMock,
         ),
       ],
       child: const IntroPage(),

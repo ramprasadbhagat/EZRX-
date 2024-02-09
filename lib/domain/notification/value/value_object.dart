@@ -34,5 +34,7 @@ class NotificationType extends ValueObject<String> {
 
   bool get isPayment => checkPayment(value.getOrElse(() => ''));
 
+  bool get isAnnouncement => checkAnnouncement(value.getOrElse(() => ''));
+
   const NotificationType._(this.value);
 }

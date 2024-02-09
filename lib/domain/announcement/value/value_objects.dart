@@ -24,11 +24,22 @@ class AnnouncementDislayTime extends ValueObject<String> {
 
   const AnnouncementDislayTime._(this.value);
 
-  bool get isPreLogin => value.getOrElse(() => '') == 'Pre';
+  bool get isPre => value.getOrElse(() => '') == 'Pre';
 
-  bool get isPostLogin => value.getOrElse(() => '') == 'Post';
+  bool get isPost => value.getOrElse(() => '') == 'Post';
 
   bool get isPreAndPost => value.getOrElse(() => '') == 'Pre and Post';
+
+  bool get isPreLogin => value.getOrElse(() => '') == 'Pre Login';
+
+  bool get isPostLogin => value.getOrElse(() => '') == 'Post Login';
+
+  bool get isPreAndPostLogin =>
+      value.getOrElse(() => '') == 'Pre and Post Login';
+
+  bool get isLogged => isPostLogin || isPreAndPostLogin;
+
+  bool get isPreLog => isPreLogin || isPreAndPostLogin;
 }
 
 class AnnouncementDislayModule extends ValueObject<String> {

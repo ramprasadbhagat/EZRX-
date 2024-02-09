@@ -46,11 +46,11 @@ class AnnouncementWidget extends StatelessWidget {
             final displayTime = state.announcement.loginType;
             final isValidTime = authState.map<bool>(
               authenticated: (value) =>
-                  displayTime.isPostLogin || displayTime.isPreAndPost,
+                  displayTime.isPost || displayTime.isPreAndPost,
               initial: (value) => false,
               loading: (value) => false,
               unauthenticated: (value) =>
-                  displayTime.isPreLogin || displayTime.isPreAndPost,
+                  displayTime.isPre || displayTime.isPreAndPost,
               biometricDenied: (value) => false,
               visitedAppSettings: (value) => false,
             );
