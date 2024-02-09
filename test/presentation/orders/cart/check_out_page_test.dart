@@ -55,6 +55,7 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
+import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bundle_item/checkout_bundle_item.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -154,6 +155,7 @@ void main() {
   late OrderEligibilityBloc orderEligibilityBlocMock;
   late List<PriceAggregate> mockCartItems;
   late List<PriceAggregate> mockCartBundleItems;
+  late Bundle fakeBundleList;
   late List<Price> priceList;
   late AplSimulatorOrder aplSimulatorOrder;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
@@ -208,6 +210,24 @@ void main() {
         (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
     priceList = await MaterialPriceLocalDataSource().getPriceList();
     aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
+    fakeBundleList = Bundle.empty().copyWith(
+      materials: [
+        MaterialInfo.empty().copyWith(
+          type: MaterialInfoType('bundle'),
+          materialNumber: MaterialNumber('fake-mat1'),
+          stockInfos: [
+            StockInfo.empty().copyWith(inStock: MaterialInStock('Yes'))
+          ],
+        ),
+        MaterialInfo.empty().copyWith(
+          type: MaterialInfoType('bundle'),
+          materialNumber: MaterialNumber('fake-mat2'),
+          stockInfos: [
+            StockInfo.empty().copyWith(inStock: MaterialInStock('No'))
+          ],
+        ),
+      ],
+    );
   });
 
   ///////////////////////////Finder//////////////////////////////////////////
@@ -2810,6 +2830,43 @@ void main() {
       final requestedCounterOfferKey =
           find.text('Requested counter offer'.tr());
       expect(requestedCounterOfferKey, findsOneWidget);
+    });
+
+    testWidgets('Find pre-order tag for bundle items in checkout page',
+        (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          config: fakeMYSalesOrgConfigs,
+          salesOrganisation: fakeKHSalesOrganisation,
+          cartProducts: [
+            mockCartBundleItems.first.copyWith(
+              bundle: fakeBundleList,
+            )
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+      expect(scrollListFinder, findsOneWidget);
+
+      await tester.dragUntilVisible(
+        find.byType(CheckoutBundleItem),
+        scrollListFinder,
+        const Offset(0.0, -500.0),
+      );
+      await tester.pumpAndSettle();
+
+      final preOrderText = find.text('OOS-Preorder');
+
+      expect(preOrderText, findsOneWidget);
     });
   });
 }

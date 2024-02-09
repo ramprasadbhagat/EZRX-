@@ -89,19 +89,29 @@ class _MaterialDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            cartItem.combinationCode(
-              showGMCPart: context
-                  .read<EligibilityBloc>()
-                  .state
-                  .salesOrgConfigs
-                  .enableGMC,
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: ZPColors.neutralsBlack,
+          Row(
+            children: [
+              Flexible(
+                child: Text(
+                  cartItem.combinationCode(
+                    showGMCPart: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .salesOrgConfigs
+                        .enableGMC,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
                 ),
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              PreOrderLabel(inStock: cartItem.inStock),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),

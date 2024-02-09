@@ -1635,18 +1635,12 @@ void main() {
           cartState,
         );
 
-        final expectedStates = [
-          OrderEligibilityState.initial(),
+        when(() => orderEligibilityBlocMock.state).thenReturn(
           OrderEligibilityState.initial().copyWith(
+            configs: fakeKHSalesOrgConfigs.copyWith(hideStockDisplay: true),
             cartItems: <PriceAggregate>[oosMaterial],
           ),
-        ];
-
-        whenListen(
-          orderEligibilityBlocMock,
-          Stream.fromIterable(expectedStates),
         );
-
         await tester.pumpWidget(getWidget());
 
         await tester.pumpAndSettle();

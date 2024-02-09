@@ -7,7 +7,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/pre_order_label.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -174,28 +174,8 @@ class _MaterialDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              if (eligibilityState.salesOrg.showBonus)
-                const BonusTag(),
-              BlocBuilder<CartBloc, CartState>(
-                buildWhen: (previous, current) =>
-                    previous.isUpdatingStock != current.isUpdatingStock &&
-                    !current.isUpdatingStock,
-                builder: (context, state) {
-                  return bonusItem.inStock.isMaterialInStock ||
-                          state.isUpdatingStock
-                      ? const SizedBox.shrink()
-                      : Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: StatusLabel(
-                            status:
-                                eligibilityState.outOfStockProductStatus,
-                            valueColor: eligibilityState
-                                .outOfStockProductStatus
-                                .displayStatusTextColor,
-                          ),
-                        );
-                },
-              ),
+              if (eligibilityState.salesOrg.showBonus) const BonusTag(),
+              PreOrderLabel(inStock: bonusItem.inStock.isMaterialInStock),
             ],
           ),
           Padding(

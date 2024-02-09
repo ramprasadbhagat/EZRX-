@@ -263,5 +263,5 @@ class OrderEligibilityState with _$OrderEligibilityState {
       [...invalidMaterialCartItems, ...invalidBundleCartItems];
 
   bool get displayInvalidOOSOnCartItem =>
-      !isOOSOrderAllowedToSubmit && !configs.hideStockDisplay;
+      !isOOSOrderAllowedToSubmit && configs.hideStockDisplay;
 }

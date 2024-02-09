@@ -11,7 +11,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/order_tag.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -137,7 +137,7 @@ class _ProductDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              OrderTag(cartItem: cartItem),
+              PreOrderLabel(inStock: cartItem.inStock),
             ],
           ),
           Padding(

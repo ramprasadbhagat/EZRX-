@@ -126,9 +126,8 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     return StatusType('');
   }
 
-  bool get inStock =>
-      materialStockInfo.stockInfos
-          .any((element) => element.inStock.isMaterialInStock);
+  bool get inStock => materialStockInfo.stockInfos
+      .any((element) => element.inStock.isMaterialInStock);
 
   /*For ViewByOrderDetails only bonus tag is displayed align with web */
   StatusType get orderDetailBonusTag => StatusType(isBonus ? 'Bonus' : '');
@@ -190,6 +189,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         materialNumber: materialNumber,
         parentID: productType.typeBundle ? parentId : '',
         quantity: MaterialQty(qty),
+        stockInfos: materialStockInfo.stockInfos,
       );
 
   bool get showMaterialListPrice => !hidePrice && getListPrice > unitPrice;

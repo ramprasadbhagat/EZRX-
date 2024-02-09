@@ -141,7 +141,6 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableMarketPlace: false,
       );
 
-
   bool get shouldDisplayVATInPercentage =>
       enableVat && !currency.isVN || enableTaxAtTotalLevelOnly;
 

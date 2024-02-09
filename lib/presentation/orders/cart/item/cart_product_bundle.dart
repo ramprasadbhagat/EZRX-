@@ -2,8 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -12,9 +12,9 @@ import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -263,7 +263,7 @@ class _MaterialDetails extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
+              Flexible(
                 child: Text(
                   cartItem.combinationCode(
                     showGMCPart: context
@@ -283,7 +283,7 @@ class _MaterialDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              _OrderTag(cartItem: cartItem),
+              PreOrderLabel(inStock: cartItem.inStock),
             ],
           ),
           Padding(
@@ -311,49 +311,6 @@ class _MaterialDetails extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _OrderTag extends StatelessWidget {
-  const _OrderTag({
-    Key? key,
-    required this.cartItem,
-  }) : super(key: key);
-  final MaterialInfo cartItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
-      buildWhen: (previous, current) =>
-          previous.isUpdatingStock != current.isUpdatingStock &&
-          !current.isUpdatingStock,
-      builder: (context, state) {
-        final configs = context.read<EligibilityBloc>().state.salesOrgConfigs;
-        final materialInfoList = state.cartProducts
-            .where((element) => element.materialInfo.type.typeBundle)
-            .map((e) => e.bundle.materials)
-            .expand((element) => element)
-            .toList();
-        final materialInfo = materialInfoList.firstWhere(
-          (element) => element.materialNumber == cartItem.materialNumber,
-          orElse: () => MaterialInfo.empty(),
-        );
-        if (materialInfo.stockInfos.isEmpty || materialInfo.inStock) {
-          return const SizedBox.shrink();
-        }
-
-        final validateOutOfStockValue =
-            context.read<EligibilityBloc>().state.validateOutOfStockValue;
-
-        return state.isFetching || state.isFetchingCartProductDetail
-            ? const SizedBox.shrink()
-            : StatusLabel(
-                status: StatusType(
-                  configs.addOosMaterials.productTag(validateOutOfStockValue),
-                ),
-              );
-      },
     );
   }
 }
@@ -414,33 +371,47 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
 
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            child: CartItemQuantityInput(
-              isEnabled: true,
-              quantityAddKey: WidgetKeys.cartItemAddKey,
-              quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
-              quantityTextKey: WidgetKeys.quantityInputTextKey,
-              controller: _controller,
-              onFieldChange: (value) {},
-              minusPressed: (k) => _callCartUpsertItemsEvent(quantity: k),
-              addPressed: (k) => _callCartUpsertItemsEvent(quantity: k),
-              onSubmit: (value) => _callCartUpsertItemsEvent(quantity: value),
-              isLoading: context.read<CartBloc>().state.isUpserting &&
-                  _qty != _controller.text,
-              minimumQty: totalQuantityOfProductBundle >
-                      (widget.bundle.bundleInformation.firstOrNull?.quantity ??
-                          1)
-                  ? 1
-                  : totalQuantityOfProductBundle,
+          Row(
+            children: [
+              Expanded(
+                child: CartItemQuantityInput(
+                  isEnabled: true,
+                  quantityAddKey: WidgetKeys.cartItemAddKey,
+                  quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
+                  quantityTextKey: WidgetKeys.quantityInputTextKey,
+                  controller: _controller,
+                  onFieldChange: (value) {},
+                  minusPressed: (k) => _callCartUpsertItemsEvent(quantity: k),
+                  addPressed: (k) => _callCartUpsertItemsEvent(quantity: k),
+                  onSubmit: (value) =>
+                      _callCartUpsertItemsEvent(quantity: value),
+                  isLoading: context.read<CartBloc>().state.isUpserting &&
+                      _qty != _controller.text,
+                  minimumQty: totalQuantityOfProductBundle >
+                          (widget.bundle.bundleInformation.firstOrNull
+                                  ?.quantity ??
+                              1)
+                      ? 1
+                      : totalQuantityOfProductBundle,
+                ),
+              ),
+              IconButton(
+                key: WidgetKeys.cartItemProductDeleteButton,
+                onPressed: () => _showConfirmRemove(context),
+                icon: const Icon(Icons.delete_outlined),
+              ),
+            ],
+          ),
+          if (!widget.cartItem.inStock &&
+              context
+                  .read<OrderEligibilityBloc>()
+                  .state
+                  .displayInvalidOOSOnCartItem)
+            ErrorTextWithIcon(
+              valueText: context.tr('Material out of stock'),
             ),
-          ),
-          IconButton(
-            key: WidgetKeys.cartItemProductDeleteButton,
-            onPressed: () => _showConfirmRemove(context),
-            icon: const Icon(Icons.delete_outlined),
-          ),
         ],
       ),
     );

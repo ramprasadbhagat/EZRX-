@@ -30,6 +30,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_t
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -1984,6 +1985,65 @@ void main() {
 
     final requestedCounterOfferKey = find.text('Requested counter offer'.tr());
     expect(requestedCounterOfferKey, findsOneWidget);
+  });
+
+  testWidgets('Find pre-order tag for bundle items in order success page',
+      (tester) async {
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+      ),
+    );
+    final bundleList = [
+      fakeMaterialItem.copyWith(
+        parentId: 'fake-parent-id',
+        productType: MaterialInfoType.bundle(),
+        material: MaterialInfo.empty().copyWith(
+          bundle: Bundle.empty().copyWith(
+            materials: [
+              MaterialInfo.empty().copyWith(
+                type: MaterialInfoType('bundle'),
+                materialNumber: MaterialNumber('fake-mat1'),
+                stockInfos: [
+                  StockInfo.empty().copyWith(inStock: MaterialInStock('Yes'))
+                ],
+              ),
+              MaterialInfo.empty().copyWith(
+                type: MaterialInfoType('bundle'),
+                materialNumber: MaterialNumber('fake-mat2'),
+                stockInfos: [
+                  StockInfo.empty().copyWith(inStock: MaterialInStock('No'))
+                ],
+              ),
+            ],
+          ),
+        ),
+      )
+    ];
+    when(() => orderSummaryBlocMock.state).thenReturn(
+      OrderSummaryState.initial().copyWith(
+        orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+          orderHistoryDetailsOrderItem: bundleList,
+        ),
+      ),
+    );
+    await tester.pumpWidget(getWidget());
+    await tester.pumpAndSettle();
+
+    final bundleItem =
+        find.byKey(WidgetKeys.cartItemBundleTile('fake-parent-id'));
+    final orderItemsScrollList = find.byKey(WidgetKeys.scrollList);
+
+    await tester.dragUntilVisible(
+      bundleItem,
+      orderItemsScrollList,
+      const Offset(0.0, -500.0),
+    );
+    await tester.pumpAndSettle();
+
+    final preOrderText = find.text('OOS-Preorder');
+
+    expect(preOrderText, findsOneWidget);
   });
 }
 

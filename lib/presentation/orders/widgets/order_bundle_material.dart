@@ -5,6 +5,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
@@ -91,11 +92,21 @@ class BundleItemMaterial extends StatelessWidget {
                       orderItem.sAPStatus.displayOrderStatus,
                     ),
                   ),
-                  Text(
-                    orderItem.combinationCode(
-                      showGMCPart: configs.enableGMC,
-                    ),
-                    style: Theme.of(context).textTheme.bodySmall,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          orderItem.combinationCode(
+                            showGMCPart: configs.enableGMC,
+                          ),
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ),
+                      PreOrderLabel(
+                        inStock: orderItem.reOrderMaterialInfo.inStock,
+                      ),
+                    ],
                   ),
                   Text(
                     orderItem.materialDescription,
