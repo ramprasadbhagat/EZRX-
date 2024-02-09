@@ -317,4 +317,24 @@ void main() {
 
     expect(offerTagProduct, findsOneWidget);
   });
+
+  testWidgets('Ezrx Number should not be displayed along with material number',
+      (tester) async {
+    when(
+      () => viewByItemsBlocMock.state,
+    ).thenAnswer(
+      (invocation) => ViewByItemsState.initial().copyWith(
+        orderHistory: OrderHistory.empty().copyWith(
+          orderHistoryItems: [
+            fakeOrderHistory.orderHistoryItems.first,
+          ],
+        ),
+      ),
+    );
+
+    await tester.pumpWidget(getScopedWidget());
+    await tester.pump();
+    final recentOrderProductLabelFinder = find.text('23008138 | EZRX-1720e3e');
+    expect(recentOrderProductLabelFinder, findsNothing);
+  });
 }
