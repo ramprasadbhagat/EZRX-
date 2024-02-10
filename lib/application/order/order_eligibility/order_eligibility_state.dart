@@ -101,7 +101,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
   }
 
   bool get isTotalGreaterThanMinOrderAmount {
-    if (salesOrg.salesOrg.isTH) {
+    if (salesOrg.salesOrg.checkMOVonSubTotal) {
       return subTotal >= double.parse(configs.minOrderAmount);
     }
 

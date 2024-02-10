@@ -185,6 +185,8 @@ class SalesOrg extends ValueObject<String> {
 
   bool get isProductDeterminationApplicable => isID;
 
+  bool get checkMOVonSubTotal => isTH || isSg;
+
   bool get showOfferFilter => !isID;
 
   bool get isMaintenanceBannersDisabled => isID;

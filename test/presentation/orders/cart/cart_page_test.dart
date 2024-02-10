@@ -3281,6 +3281,40 @@ void main() {
         expect(payerInformation, findsNothing);
       });
 
+      testWidgets(
+          'Find MOV check message if subtotal is less than minOrderAmount for SG market',
+          (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: mockCartItems,
+            salesOrg: fakeSGSalesOrganisation,
+            configs: fakeSGSalesOrgConfigs,
+            subTotal: 90,
+            grandTotal: 110,
+            showErrorMessage: true,
+          ),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: mockCartItems,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final movWarning = find.text(
+          'Please ensure that the order value satisfies the minimum order value of SGD 100.00',
+        );
+
+        expect(movWarning, findsOneWidget);
+      });
+
       testWidgets('BillToInfo test when enablebillto is false', (tester) async {
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[
