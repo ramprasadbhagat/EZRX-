@@ -2261,5 +2261,23 @@ void main() {
           .isNotEmpty,
       true,
     );
+
+  });
+  test('=> toSubmitMaterialInfo for Other market', () {
+    final finalPrice = MaterialPrice(80.0);
+    final customPriceAggregate = emptyPriceAggregate.copyWith(
+      price: bonusPrice.copyWith(
+        finalPrice: finalPrice,
+        isPriceOverride: true,
+        tiers: priceTiers,
+      ),
+      quantity: 5,
+      salesOrgConfig: fakeMYSalesOrgConfigs,
+    );
+
+    expect(
+      customPriceAggregate.finalPrice,
+      finalPrice.getValue(),
+    );
   });
 }

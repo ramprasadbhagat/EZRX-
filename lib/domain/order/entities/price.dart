@@ -75,7 +75,10 @@ class Price with _$Price {
 
   bool get isTireDiscountEligible => tiers.isNotEmpty;
 
-  bool get isDiscountEligible => isTireDiscountEligible || zmgDiscount;
+  bool get isDiscountEligible =>
+      (isTireDiscountEligible || zmgDiscount) &&
+      !isPriceOverride &&
+      !isDiscountOverride;
 
   bool get isBonusDealEligible => availableBonus.isNotEmpty;
 

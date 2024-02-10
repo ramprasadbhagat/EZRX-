@@ -195,16 +195,19 @@ class PriceAggregate with _$PriceAggregate {
   bool get isSpecialMaterial =>
       !materialInfo.isFOCMaterial || !materialInfo.isSampleMaterial;
 
+
   double get finalPrice {
     var finalPrice = 0.0;
 
-    finalPrice = tenderContract.tenderPrice.tenderPrice != 0
-        ? tenderContract.tenderPriceByPricingUnit
-        : isSpecialOrderTypeNotTH
-            ? 0.0
-            : (price.isDiscountEligible && !isSpecialOrderType)
-                ? discountedListPrice
-                : price.finalPrice.getOrDefaultValue(0);
+    if (tenderContract.tenderPrice.tenderPrice != 0) {
+      finalPrice = tenderContract.tenderPriceByPricingUnit;
+    } else if (isSpecialOrderTypeNotTH) {
+      finalPrice = 0.0;
+    } else if (price.isDiscountEligible && !isSpecialOrderType) {
+      finalPrice = discountedListPrice;
+    } else {
+      finalPrice = price.finalPrice.getOrDefaultValue(0);
+    }
 
     return NumUtils.roundToPlaces(finalPrice);
   }
