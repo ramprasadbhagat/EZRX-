@@ -27,7 +27,7 @@ class _MaterialDetails extends StatelessWidget {
                 ),
               ),
               if (eligibilityState.salesOrg.showBonus &&
-                  cartItem.materialInfo.type.typeBonus)
+                  cartItem.materialInfo.type.typeDealOrOverrideBonus)
                 const BonusTag(margin: EdgeInsets.only(left: 5)),
               const SizedBox(
                 width: 4,
@@ -60,7 +60,7 @@ class _MaterialDetails extends StatelessWidget {
               price: cartItem.display(PriceType.listPrice),
             ),
           ],
-          if (cartItem.materialInfo.type.typeBonus)
+          if (cartItem.materialInfo.type.typeDealOrOverrideBonus)
             eligibilityState.isIDMarket
                 ? PriceComponent(
                     salesOrgConfig: eligibilityState.salesOrgConfigs,

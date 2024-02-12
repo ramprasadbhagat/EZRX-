@@ -39,7 +39,7 @@ class _PreOrderProductTile extends StatelessWidget {
               ),
               if (cartProduct.materialInfo.type.typeMaterial)
                 _PriceSection(cartProduct: cartProduct),
-              if (cartProduct.materialInfo.type.typeBonus)
+              if (cartProduct.materialInfo.type.typeDealOrOverrideBonus)
                 Align(
                   alignment: Alignment.centerRight,
                   child: context.read<EligibilityBloc>().state.isIDMarket

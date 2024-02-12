@@ -884,6 +884,7 @@ class PriceAggregate with _$PriceAggregate {
           ),
           salesOrgConfig: salesOrgConfig,
           stockInfoList: [StockInfo.empty().copyWith(inStock: e.inStock)],
+          quantity: e.qty.intValue,
         ),
       )
       .toList();

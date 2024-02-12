@@ -793,3 +793,5 @@ String fileNameFromPath(String source) => path.basename(source);
 String fileTypeFromPath(String source) {
   return path.extension(source);
 }
+
+bool isDealOrOverrideBonus(String type) => type == 'Deals' || type == 'Bonus';

@@ -24,6 +24,7 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
@@ -128,10 +129,19 @@ void main() {
         BonusSampleItem.empty().copyWith(
           materialNumber: MaterialNumber('fake-bonus-1'),
           inStock: MaterialInStock('Yes'),
+          qty: MaterialQty(5),
         ),
         BonusSampleItem.empty().copyWith(
           materialNumber: MaterialNumber('fake-bonus-2'),
           inStock: MaterialInStock('No'),
+          type: MaterialInfoType('Bonus'),
+          qty: MaterialQty(10),
+        ),
+        BonusSampleItem.empty().copyWith(
+          materialNumber: MaterialNumber('fake-bonus-3'),
+          type: MaterialInfoType('Deals'),
+          inStock: MaterialInStock('No'),
+          qty: MaterialQty(15),
         )
       ],
     ),
@@ -610,6 +620,39 @@ void main() {
         await tester.pump();
         final offerTag = find.byType(OfferLabel);
         expect(offerTag, findsWidgets);
+      },
+    );
+    testWidgets(
+      'Find Bonus Tag for deal bonus',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final dealBonusItem = find.text('fake-bonus-3');
+        expect(dealBonusItem, findsOneWidget);
+        final bonusTag = find.byType(BonusTag);
+        expect(bonusTag, findsNWidgets(2));
+      },
+    );
+
+    testWidgets(
+      'Find Correct Quantity for added bonus item in pre-order model',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final dealBonusItem = find.text('fake-bonus-3');
+        expect(dealBonusItem, findsOneWidget);
+        final bonusQuantity = find.text('Qty: 15');
+        expect(bonusQuantity, findsOneWidget);
       },
     );
   });

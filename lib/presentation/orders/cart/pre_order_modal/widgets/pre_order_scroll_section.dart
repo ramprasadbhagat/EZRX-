@@ -26,7 +26,10 @@ class _PreOrderScrollSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                !preOrderItems[index].materialInfo.type.typeBonus &&
+                !preOrderItems[index]
+                            .materialInfo
+                            .type
+                            .typeDealOrOverrideBonus &&
                         (index == 0 ||
                             preOrderItems[index]
                                     .materialInfo
