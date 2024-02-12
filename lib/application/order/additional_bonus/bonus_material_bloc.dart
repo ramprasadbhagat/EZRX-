@@ -34,8 +34,12 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
   }) : super(BonusMaterialState.initial()) {
     on<_Fetch>(
       (e, emit) async {
-        if ((e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) ||
-            !e.searchKey.isValid()) return;
+        if (e.searchKey.isValueEmpty) {
+          emit(BonusMaterialState.initial());
+
+          return;
+        }
+        if ((e.searchKey == state.searchKey) || !e.searchKey.isValid()) return;
 
         emit(
           BonusMaterialState.initial().copyWith(

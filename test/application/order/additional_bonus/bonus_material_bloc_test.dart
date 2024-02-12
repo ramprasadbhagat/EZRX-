@@ -68,7 +68,7 @@ void main() {
             principalData: fakePrincipalData,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey('fake-searchKey'),
           ),
         ).thenAnswer(
           (_) async => Right(fakeMaterialListData),
@@ -83,16 +83,18 @@ void main() {
           salesOrganisation: fakeMYSalesOrganisation,
           shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           user: fakeRootAdminUser,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey('fake-searchKey'),
         ),
       ),
       expect: () => [
         BonusMaterialState.initial().copyWith(
           isFetching: true,
+          searchKey: SearchKey('fake-searchKey'),
         ),
         BonusMaterialState.initial().copyWith(
           bonusItemList: fakeMaterialListData.products,
           failureOrSuccessOption: optionOf(Right(fakeMaterialListData)),
+          searchKey: SearchKey('fake-searchKey'),
         ),
       ],
     );
@@ -115,7 +117,7 @@ void main() {
             principalData: fakePrincipalData,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey('fake-searchKey'),
           ),
         ).thenAnswer(
           (_) async => const Left(fakeError),
@@ -130,16 +132,17 @@ void main() {
           salesOrganisation: fakeMYSalesOrganisation,
           shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           user: fakeRootAdminUser,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey('fake-searchKey'),
         ),
       ),
       expect: () => [
         BonusMaterialState.initial().copyWith(
           isFetching: true,
+          searchKey: SearchKey('fake-searchKey'),
         ),
         BonusMaterialState.initial().copyWith(
-          failureOrSuccessOption:
-              optionOf(const Left(fakeError)),
+          searchKey: SearchKey('fake-searchKey'),
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
         ),
       ],
     );
@@ -247,8 +250,7 @@ void main() {
         ),
         BonusMaterialState.initial().copyWith(
           bonusItemList: fakeMaterialListData.products,
-          failureOrSuccessOption:
-              optionOf(const Left(fakeError)),
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
         ),
       ],
     );
@@ -337,4 +339,29 @@ void main() {
       ],
     );
   });
+
+  blocTest(
+    'Reset BonusMaterialBloc if searchKey is Empty',
+    build: () => BonusMaterialBloc(
+      materialListRepository: repository,
+      config: config,
+    ),
+    seed: () => BonusMaterialState.initial().copyWith(
+      bonusItemList: fakeMaterialListData.products,
+      searchKey: SearchKey('fake-search-key'),
+    ),
+    act: (BonusMaterialBloc bloc) => bloc.add(
+      BonusMaterialEvent.fetch(
+        configs: fakeMYSalesOrgConfigs,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        isGimmickMaterialEnabled: false,
+        principalData: fakePrincipalData,
+        salesOrganisation: fakeMYSalesOrganisation,
+        shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+        user: fakeRootAdminUser,
+        searchKey: SearchKey.searchFilter(''),
+      ),
+    ),
+    expect: () => [BonusMaterialState.initial()],
+  );
 }
