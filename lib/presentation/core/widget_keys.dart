@@ -730,6 +730,7 @@ class WidgetKeys {
       Key('bundleMaterialItemDescription$materialDescription');
   static const Key bundleMaterialDescriptionBottomSheet =
       Key('bundleMaterialDescriptionBottomSheet');
+  static const Key bundleMaterialExpiryDate = Key('bundleMaterialExpiryDate');
 
   //============================================================
   //  Orders

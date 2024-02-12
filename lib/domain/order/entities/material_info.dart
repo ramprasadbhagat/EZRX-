@@ -181,6 +181,14 @@ class MaterialInfo with _$MaterialInfo {
       ].join(' | ');
 
   bool get isPriceVisibleForNonFOC => !hidePrice && !isFOCMaterial;
+
+  String get bundleMaterialExpiryDate => stockInfos
+      .firstWhere(
+        (element) => element.expiryDate.isValid(),
+        orElse: () => StockInfo.empty(),
+      )
+      .expiryDate
+      .dateOrNaString;
 }
 
 @freezed

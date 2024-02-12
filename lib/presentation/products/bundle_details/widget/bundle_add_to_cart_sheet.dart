@@ -157,6 +157,13 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
                 widget.materialInfo.displayDescription,
                 style: Theme.of(context).textTheme.labelSmall,
               ),
+              if (eligibilityState.salesOrgConfigs.expiryDateDisplay) ...[
+                const SizedBox(height: 5),
+                Text(
+                  "${context.tr('EXP:')} ${widget.materialInfo.bundleMaterialExpiryDate}",
+                  key: WidgetKeys.bundleMaterialExpiryDate,
+                ),
+              ],
               const SizedBox(height: 8),
               CartItemQuantityInput(
                 key: WidgetKeys.genericKey(
