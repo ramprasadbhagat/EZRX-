@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
@@ -9,7 +8,6 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification_data.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';

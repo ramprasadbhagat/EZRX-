@@ -33,6 +33,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
+import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -470,13 +471,7 @@ void main() {
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final customerDetails = find.text(
-          '${customerInformationMock.soldToInformation.first.customerName}(${customerInformationMock.soldToInformation.first.customerCodeSoldTo})',
-        );
-        expect(
-          customerDetails,
-          findsNWidgets(notifications.notificationData.length),
-        );
+
         final itemKey = find.byKey(
           WidgetKeys.genericKey(
             key: notifications.notificationData.first.description,
@@ -492,6 +487,31 @@ void main() {
             ),
           ),
         ).called(1);
+      },
+    );
+
+    testWidgets(
+      'Test User selected customerCodeInfo not visible in notificationList',
+      (tester) async {
+        when(() => notificationBlocMock.state).thenReturn(
+          NotificationState.initial().copyWith(notificationList: notifications),
+        );
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeExternalSalesRepUser,
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: customerInformationMock.soldToInformation.first,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final customerDetails = find.text(
+          '${customerInformationMock.soldToInformation.first.customerName}(${customerInformationMock.soldToInformation.first.customerCodeSoldTo})',
+        );
+        expect(customerDetails, findsNothing);
       },
     );
 

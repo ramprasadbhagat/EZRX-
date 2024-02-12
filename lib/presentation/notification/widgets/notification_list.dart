@@ -53,9 +53,6 @@ class _NotificationList extends StatelessWidget {
             key: WidgetKeys.notificationItemDescription,
             style: Theme.of(context).textTheme.titleSmall,
           ),
-          context.read<UserBloc>().state.isSalesRep
-              ? const _CustomerDetails()
-              : const SizedBox.shrink(),
 
           ///TODO: will revisit later
           Text(
@@ -128,28 +125,5 @@ class _NotificationList extends StatelessWidget {
         messageText: context.tr("You don't have access"),
       ).show(context);
     }
-  }
-}
-
-class _CustomerDetails extends StatelessWidget {
-  const _CustomerDetails({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<EligibilityBloc, EligibilityState>(
-      buildWhen: (previous, current) =>
-          previous.customerCodeInfo != current.customerCodeInfo,
-      builder: (context, state) {
-        final customerCodeInfo = state.customerCodeInfo;
-        if (customerCodeInfo == CustomerCodeInfo.empty()) {
-          return const SizedBox.shrink();
-        }
-
-        return Text(
-          '${customerCodeInfo.customerName}(${customerCodeInfo.customerCodeSoldTo})',
-          style: Theme.of(context).textTheme.titleSmall,
-        );
-      },
-    );
   }
 }
