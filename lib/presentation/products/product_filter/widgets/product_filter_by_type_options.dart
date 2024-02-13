@@ -31,17 +31,16 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                   ),
               title: 'Favourites',
             ),
-            if (eligibilityState.salesOrg.showOfferFilter)
-              _ListTileThemeWidget(
-                value: state.materialFilter.isProductOffer,
-                onChanged: (value) => context.read<MaterialFilterBloc>().add(
-                      MaterialFilterEvent.updateSelectedMaterialFilter(
-                        MaterialFilterType.productOffers,
-                        !state.materialFilter.isProductOffer,
-                      ),
+            _ListTileThemeWidget(
+              value: state.materialFilter.isProductOffer,
+              onChanged: (value) => context.read<MaterialFilterBloc>().add(
+                    MaterialFilterEvent.updateSelectedMaterialFilter(
+                      MaterialFilterType.productOffers,
+                      !state.materialFilter.isProductOffer,
                     ),
-                title: 'Items with offers',
-              ),
+                  ),
+              title: 'Items with offers',
+            ),
             if (!eligibilityState.salesOrgConfigs.disableBundles)
               _ListTileThemeWidget(
                 value: state.materialFilter.bundleOffers,

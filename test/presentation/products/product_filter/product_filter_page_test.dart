@@ -418,7 +418,7 @@ void main() {
         );
         expect(
           find.byKey(WidgetKeys.showProductCheckbox('Items with offers')),
-          findsNothing,
+          findsOneWidget,
         );
         expect(
           find.byKey(WidgetKeys.showProductCheckbox('Bundle offers')),
