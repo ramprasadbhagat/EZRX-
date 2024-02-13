@@ -165,12 +165,8 @@ class OrderHistoryItem with _$OrderHistoryItem {
           governmentMaterialCode,
       ].join(' | ');
 
-  double get taxPercentage => unitPrice == 0
-      ? 0
-      : double.tryParse(
-            (tax / (unitPrice * qty) * 100).toStringAsExponential(2),
-          ) ??
-          0;
+  double get taxPercentage =>
+      unitPrice == 0 ? 0 : (tax * 100 / unitPrice).roundToDouble();
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {

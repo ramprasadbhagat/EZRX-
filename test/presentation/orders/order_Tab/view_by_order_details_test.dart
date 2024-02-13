@@ -1134,6 +1134,57 @@ void main() {
 
       expect(customerAddressFinder, findsOneWidget);
     });
+    testWidgets('Find item level tax percentage', (tester) async {
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first
+                  .copyWith(
+                unitPrice: 892.86,
+                qty: 8231,
+                tax: 109.28,
+              ),
+            ],
+          ),
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final viewByOrderDetailItemsSection =
+          find.byKey(WidgetKeys.viewByOrderDetailItemsSection);
+
+      await tester.dragUntilVisible(
+        viewByOrderDetailItemsSection,
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -500),
+      );
+
+      await tester.pumpAndSettle();
+
+      expect(viewByOrderDetailItemsSection, findsOneWidget);
+      final totalPriceWithTax = find.textContaining(
+        '8,231,026.34',
+        findRichText: true,
+      );
+      final tax = find.textContaining(
+        '(12.0% tax)',
+        findRichText: true,
+      );
+      final taxAmount = find.textContaining(
+        '881,895.68',
+        findRichText: true,
+      );
+      expect(tax, findsOneWidget);
+      expect(taxAmount, findsOneWidget);
+      expect(totalPriceWithTax, findsOneWidget);
+    });
 
     testWidgets('Test display full ship-to address', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(

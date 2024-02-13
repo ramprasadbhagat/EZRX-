@@ -1424,12 +1424,12 @@ void main() {
       );
       expect(expectedNetPrice, findsOneWidget);
       final taxPercentage = find.text(
-        '(7.0% ${'tax'.tr()})',
+        '(210.0% ${'tax'.tr()})',
       );
       expect(taxPercentage, findsOneWidget);
 
       final expectedPrice = find.text(
-        'THB 1,926.00',
+        'THB 5,580.00',
         findRichText: true,
       );
       expect(expectedPrice, findsOneWidget);
@@ -1462,7 +1462,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final expectedTax = find.text(
-        '(10.0% tax)',
+        '(50.0% tax)',
       );
       expect(expectedTax, findsOneWidget);
     });
@@ -1543,7 +1543,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final expectedPrice = find.text(
-        'MYR 1,926.00',
+        'MYR 5,580.00',
         findRichText: true,
       );
       expect(expectedPrice, findsOneWidget);
