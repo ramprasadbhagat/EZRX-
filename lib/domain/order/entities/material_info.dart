@@ -197,7 +197,7 @@ class MaterialData with _$MaterialData {
   factory MaterialData({
     required MaterialNumber materialNumber,
     required String manufactured,
-    required String materialDescription,
+    required StringValue materialDescription,
     required String defaultMaterialDescription,
     required String genericMaterialName,
     required StringValue governmentMaterialCode,
@@ -206,19 +206,19 @@ class MaterialData with _$MaterialData {
   factory MaterialData.empty() => MaterialData(
         materialNumber: MaterialNumber(''),
         manufactured: '',
-        materialDescription: '',
+        materialDescription: StringValue(''),
         defaultMaterialDescription: '',
         genericMaterialName: '',
         governmentMaterialCode: StringValue(''),
       );
 
-  String get displayDescription => materialDescription.isNotEmpty
-      ? materialDescription
+  String get displayDescription => materialDescription.isTrimmedValueNotEmpty
+      ? materialDescription.getOrDefaultValue('')
       : defaultMaterialDescription;
 
   MaterialInfo get toMaterialInfo => MaterialInfo.empty().copyWith(
         materialNumber: materialNumber,
-        materialDescription: materialDescription,
+        materialDescription: materialDescription.getOrDefaultValue(''),
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
         productImages: ProductImages.empty(),

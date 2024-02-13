@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -816,6 +817,33 @@ void main() {
             find.text(materialResponseMock.products[12].bundle.bundleCode),
             findsOneWidget,
           );
+        },
+      );
+
+      testWidgets(
+        'Find default material description if material description has whitespace characters',
+        (tester) async {
+          when(() => materialListBlocMock.state).thenReturn(
+            MaterialListState.initial().copyWith(
+              materialList: [
+                materialResponseMock.products.first.copyWith(
+                  materialDescription: '',
+                  data: [
+                    MaterialData.empty().copyWith(
+                      defaultMaterialDescription: 'fake-default-description',
+                      materialDescription: StringValue('        '),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pumpAndSettle();
+          final defaultDescription = find.text('fake-default-description');
+          expect(defaultDescription, findsOneWidget);
         },
       );
     },

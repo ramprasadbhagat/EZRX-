@@ -247,7 +247,7 @@ class MaterialDataDto with _$MaterialDataDto {
   MaterialData toDomain() => MaterialData(
         materialNumber: MaterialNumber(code),
         manufactured: manufactured,
-        materialDescription: materialDescription,
+        materialDescription: StringValue(materialDescription),
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
         governmentMaterialCode: StringValue(governmentMaterialCode),
@@ -257,7 +257,8 @@ class MaterialDataDto with _$MaterialDataDto {
       MaterialDataDto(
         code: materialData.materialNumber.getOrCrash(),
         manufactured: materialData.manufactured,
-        materialDescription: materialData.materialDescription,
+        materialDescription:
+            materialData.materialDescription.getOrDefaultValue(''),
         defaultMaterialDescription: materialData.defaultMaterialDescription,
         genericMaterialName: materialData.genericMaterialName,
         governmentMaterialCode:

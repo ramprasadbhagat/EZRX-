@@ -60,6 +60,8 @@ String zerosIfEmpty(String text) {
   return text.isEmpty ? '00000000' : text;
 }
 
+bool checkIfTrimmedValueNotEmpty(String text) => text.trim().isNotEmpty;
+
 bool getInStock(String text) {
   return text == 'Yes';
 }

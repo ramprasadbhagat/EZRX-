@@ -75,7 +75,7 @@ void main() {
   final fakeMaterialData = MaterialData(
     materialNumber: MaterialNumber('1234'),
     manufactured: 'manufactured',
-    materialDescription: 'materialDescription',
+    materialDescription: StringValue('materialDescription'),
     defaultMaterialDescription: 'defaultMaterialDescription',
     genericMaterialName: '1234567',
     governmentMaterialCode: StringValue('1234567'),

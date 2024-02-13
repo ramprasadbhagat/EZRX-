@@ -1146,7 +1146,7 @@ abstract class _MaterialInfo extends MaterialInfo {
 mixin _$MaterialData {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get manufactured => throw _privateConstructorUsedError;
-  String get materialDescription => throw _privateConstructorUsedError;
+  StringValue get materialDescription => throw _privateConstructorUsedError;
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
   StringValue get governmentMaterialCode => throw _privateConstructorUsedError;
@@ -1165,7 +1165,7 @@ abstract class $MaterialDataCopyWith<$Res> {
   $Res call(
       {MaterialNumber materialNumber,
       String manufactured,
-      String materialDescription,
+      StringValue materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
       StringValue governmentMaterialCode});
@@ -1203,7 +1203,7 @@ class _$MaterialDataCopyWithImpl<$Res, $Val extends MaterialData>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -1231,7 +1231,7 @@ abstract class _$$_MaterialDataCopyWith<$Res>
   $Res call(
       {MaterialNumber materialNumber,
       String manufactured,
-      String materialDescription,
+      StringValue materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
       StringValue governmentMaterialCode});
@@ -1267,7 +1267,7 @@ class __$$_MaterialDataCopyWithImpl<$Res>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -1301,7 +1301,7 @@ class _$_MaterialData extends _MaterialData {
   @override
   final String manufactured;
   @override
-  final String materialDescription;
+  final StringValue materialDescription;
   @override
   final String defaultMaterialDescription;
   @override
@@ -1356,7 +1356,7 @@ abstract class _MaterialData extends MaterialData {
   factory _MaterialData(
       {required final MaterialNumber materialNumber,
       required final String manufactured,
-      required final String materialDescription,
+      required final StringValue materialDescription,
       required final String defaultMaterialDescription,
       required final String genericMaterialName,
       required final StringValue governmentMaterialCode}) = _$_MaterialData;
@@ -1367,7 +1367,7 @@ abstract class _MaterialData extends MaterialData {
   @override
   String get manufactured;
   @override
-  String get materialDescription;
+  StringValue get materialDescription;
   @override
   String get defaultMaterialDescription;
   @override

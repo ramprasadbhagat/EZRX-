@@ -210,6 +210,9 @@ class StringValue extends ValueObject<String> {
 
   bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
 
+  bool get isTrimmedValueNotEmpty =>
+      checkIfTrimmedValueNotEmpty(value.getOrElse(() => ''));
+
   const StringValue._(this.value);
 }
 
