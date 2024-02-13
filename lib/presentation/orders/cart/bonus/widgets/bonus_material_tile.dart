@@ -1,9 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -238,19 +236,6 @@ class _CartIcon extends StatelessWidget {
   }) : super(key: key);
 
   void _addBonusMaterial(BuildContext context) {
-    if (bonusItem.quantity.isBonusMaxQuantityExceed) {
-      CustomSnackBar(
-        icon: const Icon(
-          Icons.info,
-          color: ZPColors.error,
-        ),
-        backgroundColor: ZPColors.errorSnackBarColor,
-        messageText:
-            context.tr('In cart quantity should not be greater than 999'),
-      ).show(context);
-
-      return;
-    }
 
     final bonusItemId = context
         .read<BonusMaterialBloc>()

@@ -239,8 +239,6 @@ class MaterialQty extends ValueObject<int> {
 
   int get intValue => value.getOrElse(() => 0);
 
-  bool get isBonusMaxQuantityExceed =>
-      isBonusMaterialMaxQuantityExceed(value.getOrElse(() => 0));
 
   bool get isQtyGreaterThanZero => intValue > 0;
 }

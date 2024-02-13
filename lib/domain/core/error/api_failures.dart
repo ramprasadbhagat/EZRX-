@@ -126,8 +126,8 @@ extension ApiFailureExt on ApiFailure {
         paymentAdviceDeleteFailed: (paymentAdvice) =>
             'PA #${paymentAdvice.adviceNumber} delete failed',
         allReorderItemInvalid: (_) => 'All reorder materials are invalid',
-        maximumCartQuantityExceed: (maximumExeption) =>
-            'In cart quantity should not be more than ${maximumExeption.maximumNumber}.',
+        maximumCartQuantityExceed: (maximumException) =>
+            'In cart quantity should not be more than ${maximumException.maximumNumber}.',
         cartHasDifferentAddress: (_) =>
             'shipToAddress changed from existing cart. Delete the cart and then add new item',
         articleannuncementTagFetchingError: (_) =>

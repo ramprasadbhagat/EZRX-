@@ -32,7 +32,6 @@ BonusMaterialCalculationEnum getBonusCalculationEnum(String calculation) {
   }
 }
 
-bool isBonusMaterialMaxQuantityExceed(int qty) => qty > 999;
 
 String materialGroup4Type(bool isFoc) {
   return isFoc ? 'ZPFC' : 'ZPOR';

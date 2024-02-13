@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_local.dart';
@@ -706,6 +707,80 @@ void main() {
               BonusMaterialEvent.updateBonusItemQuantity(
                 updatedBonusItem: bonusItemsList.first.copyWith(
                   quantity: MaterialQty(10),
+                ),
+              ),
+            ),
+          ).callCount >
+          0;
+    });
+
+    testWidgets('max input limit 99999', (tester) async {
+      const bonusMaxQuantity = 99999;
+      when(() => cartBloc.state).thenReturn(
+        cartState.copyWith(
+          cartProducts: [priceAggregate],
+        ),
+      );
+
+      final bonusMaterialBlocState = bonusMaterialState.copyWith(
+        bonusItemList: bonusItemsList
+            .map((e) => e.copyWith(quantity: MaterialQty(bonusMaxQuantity)))
+            .toList(),
+      );
+      when(() => bonusMaterialBloc.state).thenReturn(
+        bonusMaterialBlocState,
+      );
+      await tester.pumpWidget(getWidgetToTest(priceAggregate));
+      await tester.pump();
+      await tester.tap(find.byKey(WidgetKeys.cartButton).first);
+      await tester.pumpAndSettle();
+      verify(
+        () => cartBloc.add(
+          CartEvent.addBonusToCartItem(
+            bonusMaterial: bonusItemsList.first.copyWith(
+              parentID: priceAggregate.materialInfo.materialNumber
+                  .getOrDefaultValue(''),
+              quantity: priceAggregate.totalCartProductBonusQty(
+                StringValue(''),
+                MaterialQty(99999),
+              ),
+              type: MaterialInfoType('Bonus'),
+            ),
+            counterOfferDetails: RequestCounterOfferDetails.empty(),
+            bonusItemId: StringValue(''),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('max input 5 digit', (tester) async {
+      when(() => bonusMaterialBloc.state).thenReturn(
+        bonusMaterialState.copyWith(
+          bonusItemList: bonusItemsList,
+        ),
+      );
+      await tester.pumpWidget(getWidgetToTest(priceAggregate));
+      await tester.pump();
+      await tester.enterText(
+        find.byKey(WidgetKeys.quantityInputTextKey).first,
+        '9999999',
+      );
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      verifyNever(
+        () => bonusMaterialBloc.add(
+          BonusMaterialEvent.updateBonusItemQuantity(
+            updatedBonusItem: bonusItemsList.first.copyWith(
+              quantity: MaterialQty(9999999),
+            ),
+          ),
+        ),
+      );
+      verify(
+            () => bonusMaterialBloc.add(
+              BonusMaterialEvent.updateBonusItemQuantity(
+                updatedBonusItem: bonusItemsList.first.copyWith(
+                  quantity: MaterialQty(99999),
                 ),
               ),
             ),
