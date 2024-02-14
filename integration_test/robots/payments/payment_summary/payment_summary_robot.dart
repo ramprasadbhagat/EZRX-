@@ -124,6 +124,11 @@ class PaymentSummaryRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> tapFirstItem() async {
+    await tester.tap(item.first);
+    await tester.pumpAndSettle();
+  }
+
   void verifyPaymentSummaryGroupListVisible() {
     final noItemFound = find.byType(NoRecordFound).evaluate().isNotEmpty;
     if (noItemFound) {
@@ -152,6 +157,40 @@ class PaymentSummaryRobot {
         find.descendant(
           of: item,
           matching: find.byKey(WidgetKeys.paymentSummaryDateOrExpiry),
+        ),
+        findsNWidgets(itemCount),
+      );
+      expect(
+        find.descendant(
+          of: item,
+          matching: find.byKey(WidgetKeys.paymentSummaryAmountAndCurrency),
+        ),
+        findsNWidgets(itemCount),
+      );
+    }
+  }
+
+  void verifyPaymentSummaryGroupListVisibleForID() {
+    final noItemFound = find.byType(NoRecordFound).evaluate().isNotEmpty;
+    if (noItemFound) {
+      verifyNoRecordFoundVisible();
+    } else {
+      expect(itemGroupDate, findsAtLeastNWidgets(1));
+      expect(item, findsAtLeastNWidgets(1));
+      final itemCount = item.evaluate().length;
+
+      // Verify tile information
+      expect(
+        find.descendant(
+          of: item,
+          matching: find.byKey(WidgetKeys.commonTileItemLabel),
+        ),
+        findsNWidgets(itemCount),
+      );
+      expect(
+        find.descendant(
+          of: item,
+          matching: find.byKey(WidgetKeys.paymentSummaryTileStatus),
         ),
         findsNWidgets(itemCount),
       );

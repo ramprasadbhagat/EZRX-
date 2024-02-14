@@ -11,8 +11,16 @@ class PaymentSummaryDetailRobot {
   final WidgetTester _tester;
   final Finder _downloadAdviceButtonKey =
       find.byKey(WidgetKeys.downloadAdviceButtonKey);
+  final Finder _accountSummaryBankAccountSection =
+      find.byKey(WidgetKeys.accountSummaryBankAccountSection);
   final Finder _paymentSummaryDetailsPage =
       find.byKey(WidgetKeys.paymentSummaryDetailsPage);
+  final Finder _cancelAdviceButtonKey =
+      find.byKey(WidgetKeys.cancelAdviceButtonKey);
+  final Finder _deleteCancelAdviceBottomSheetButton =
+      find.byKey(WidgetKeys.deleteCancelAdviceBottomSheetButton);
+  final Finder _paymentSummaryDetailsBackButton =
+      find.byKey(WidgetKeys.paymentSummaryDetailsBackButton);
 
   PaymentSummaryDetailRobot(this._tester);
 
@@ -110,6 +118,26 @@ class PaymentSummaryDetailRobot {
     );
   }
 
+  void verifyPaymentSummaryDetailForID(
+    String title,
+    double invoicePrice,
+    String currency,
+  ) {
+    expect(
+      find.descendant(
+        of: find.byKey(
+          WidgetKeys.paymentSummaryTitle(
+            title,
+          ),
+        ),
+        matching: _getPriceFinder(
+          invoicePrice.priceDisplayForID(currency),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
   Future<void> verifyPaymentItems(
     String title,
     String id,
@@ -134,8 +162,67 @@ class PaymentSummaryDetailRobot {
     );
   }
 
+  Future<void> verifyPaymentItemsForID(
+    String title,
+    String id,
+    double price,
+    String currency,
+  ) async {
+    final paymentItem = find.byKey(WidgetKeys.paymentItems(title, id));
+    await _tester.dragUntilVisible(
+      paymentItem,
+      _paymentSummaryDetailsPage,
+      const Offset(0.0, -200),
+    );
+    await _tester.pump();
+    expect(
+      find.descendant(
+        of: paymentItem,
+        matching: _getPriceFinder(
+          price.priceDisplayForID(currency),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyDownloadAdviceButton() {
     expect(_downloadAdviceButtonKey, findsOneWidget);
+  }
+
+  void verifyBankAccountStatementSection() {
+    expect(_accountSummaryBankAccountSection, findsOneWidget);
+  }
+
+  void verifyDownloadAdviceButtonForSuccessfulStatus() {
+    expect(_downloadAdviceButtonKey, findsNothing);
+  }
+
+  void verifyDeleteCancelAdviceBottomSheetButton() {
+    expect(_deleteCancelAdviceBottomSheetButton, findsOneWidget);
+  }
+
+  Future<void> tapDeleteCancelAdviceBottomSheetButton() async {
+    await _tester.tap(_deleteCancelAdviceBottomSheetButton);
+    await _tester.pumpAndSettle();
+  }
+
+  void verifyPaymentSummaryDetailsBackButton() {
+    expect(_paymentSummaryDetailsBackButton, findsOneWidget);
+  }
+
+  Future<void> tapPaymentSummaryDetailsBackButton() async {
+    await _tester.tap(_paymentSummaryDetailsBackButton);
+    await _tester.pumpAndSettle();
+  }
+
+  void verifyCancelAdviceButtonKey() {
+    expect(_cancelAdviceButtonKey, findsOneWidget);
+  }
+
+  Future<void> tapCancelAdviceButtonKey() async {
+    await _tester.tap(_cancelAdviceButtonKey);
+    await _tester.pumpAndSettle();
   }
 
   Future<void> tapDownloadAdviceButton() async {

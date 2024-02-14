@@ -36,6 +36,16 @@ class AccountCreditsFilterRobot {
     _verifyApplyButton();
   }
 
+  void verifyDefaultFilterAppliedForID() {
+    verifyDateRangeFilterApplied(
+      fromDate: '',
+      toDate: '',
+    );
+    verifyAmountRangeFilterApplied(fromAmount: '', toAmount: '');
+    _verifyResetButton();
+    _verifyApplyButton();
+  }
+
   void verifyDateRangeFilterApplied({
     required String fromDate,
     required String toDate,

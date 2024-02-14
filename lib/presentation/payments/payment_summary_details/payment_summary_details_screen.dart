@@ -67,6 +67,7 @@ class PaymentSummaryDetailsPage extends StatelessWidget {
           customerBlocked:
               context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
           leadingWidget: IconButton(
+            key: WidgetKeys.paymentSummaryDetailsBackButton,
             icon: const Icon(Icons.arrow_back_ios_sharp),
             onPressed: () => context.router.pop(),
           ),

@@ -83,6 +83,11 @@ class AccountCreditsRobot {
     _verifyCreditItemPrice(price);
   }
 
+  void verifyCreditItemForID(String searchKey, String price) {
+    _verifyCreditItemId(searchKey);
+    _verifyCreditItemPrice(price);
+  }
+
   void _verifyCreditItemId(String searchKey) {
     _verifyOneCreditItem();
     expect(
@@ -131,6 +136,24 @@ class AccountCreditsRobot {
         matching: find.byType(StatusLabel),
       ),
       findsAtLeastNWidgets(1),
+    );
+    expect(
+      find.descendant(
+        of: _itemTile,
+        matching: find.byType(PriceComponent),
+      ),
+      findsAtLeastNWidgets(1),
+    );
+  }
+
+  void verifyCreditItemsListForID() {
+    expect(_itemTile, findsAtLeastNWidgets(1));
+    expect(
+      find.descendant(
+        of: _itemTile,
+        matching: find.byType(StatusLabel),
+      ),
+      findsNothing,
     );
     expect(
       find.descendant(

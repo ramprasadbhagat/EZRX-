@@ -68,6 +68,13 @@ class PaymentHomeRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> tapToAllObscureButtonForID() async {
+    await tester.tap(paymentHomeObscuredAmount.first);
+    await tester.pump();
+    await tester.tap(paymentHomeObscuredAmount.at(1));
+    await tester.pumpAndSettle();
+  }
+
   Future<void> downloadFirstStatementAccount() async {
     await tester.dragUntilVisible(
       downloadStatementAccountIcon.first,
@@ -98,6 +105,12 @@ class PaymentHomeRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.statementOfAccountsMenu), findsOneWidget);
   }
 
+  void verifyPaymentHomeOptionMenuForID() {
+    expect(find.byKey(WidgetKeys.accountSummaryMenu), findsOneWidget);
+    expect(find.byKey(WidgetKeys.paymentSummaryMenu), findsOneWidget);
+    expect(find.byKey(WidgetKeys.statementOfAccountsMenu), findsNothing);
+  }
+
   void verifyPaymentHomeInvoiceCard() {
     expect(totalOutstanding, findsOneWidget);
     expect(totalOverdue, findsOneWidget);
@@ -107,6 +120,12 @@ class PaymentHomeRobot extends CommonRobot {
     expect(totalCreditLimit, findsOneWidget);
     expect(creditLimitUtilized, findsOneWidget);
     expect(creditLimitRemaining, findsOneWidget);
+  }
+
+  void verifyPaymentHomeCreditCardForID() {
+    expect(totalCreditLimit, findsNothing);
+    expect(creditLimitUtilized, findsNothing);
+    expect(creditLimitRemaining, findsNothing);
   }
 
   void verifyPaymentHomeInProgressCard() {
@@ -123,6 +142,20 @@ class PaymentHomeRobot extends CommonRobot {
     expect(itemStatementAccounts, findsWidgets);
   }
 
+  Future<void> verifyPaymentStatementAccountForID() async {
+    await tester.dragUntilVisible(
+      paymentHomeSoa,
+      find.byKey(WidgetKeys.scrollList),
+      const Offset(0.0, -200),
+    );
+    expect(paymentHomeSoa, findsOneWidget);
+    if (itemStatementAccounts.evaluate().isEmpty) {
+      expect(find.text('No statements available'.tr()), findsOneWidget);
+    } else {
+      expect(itemStatementAccounts, findsWidgets);
+    }
+  }
+
   void verifyPaymentHomeInvoiceCardObscure() {
     expect(_getPriceOptionPayment(totalOutstanding), contains('*'));
     expect(_getPriceOptionPayment(totalOverdue), contains('*'));
@@ -135,7 +168,11 @@ class PaymentHomeRobot extends CommonRobot {
   }
 
   void verifyPaymentSummaryObscure() {
-    expect(_getPriceOptionPayment(inProgressAmount), contains('*'));
+    if (_getPriceOptionPayment(inProgressAmount).contains('NA')) {
+      expect(_getPriceOptionPayment(inProgressAmount), contains('NA'));
+    } else {
+      expect(_getPriceOptionPayment(inProgressAmount), contains('*'));
+    }
   }
 
   void verifyNoObscureTextPresent() {

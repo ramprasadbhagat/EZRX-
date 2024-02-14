@@ -3,10 +3,10 @@ VERSION := $$( echo $(STR) | cut -d '+' -f 1 )
 BUILD := $$( echo $(STR) | cut -d '+' -f 2 )
 CLIENTUSER := 'client_user.dart'
 CLIENTUSERRETURN := 'client_user_return.dart'
-CLIENTUSERPAYMENT := 'client_user_payment.dart'
+CLIENTUSERPAYMENT := 'client_user/client_user_payment.dart'
 EXTERNALSALESREPORDER := 'external_sales_rep/external_sales_rep_user_order.dart'
 EXTERNALSALESREPRETURN := 'external_sales_rep/external_sales_rep_user_return.dart'
-CLIENTUSERORDER := 'client_user_order.dart'
+CLIENTUSERORDER := 'client_user/client_user_order.dart'
 SALESORGCONFIG := 'reset_sales_org_config.sh'
 
 clean_ios:
@@ -106,4 +106,6 @@ run_id_prod_user_cart_test:
 	./integration_test/id/prod_user_cart_runner.sh
 run_id_client_order_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENTUSERORDER} 
+run_id_client_payment_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENTUSERPAYMENT} 
 	

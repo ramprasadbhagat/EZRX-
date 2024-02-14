@@ -1031,6 +1031,8 @@ class WidgetKeys {
   static const Key paymentSummaryDetailsPage = Key('paymentSummaryDetailsPage');
   static const Key paymentSummaryFilter = Key('paymentSummaryFilter');
   static const Key downloadAdviceButton = Key('downloadAdviceButton');
+  static const Key paymentSummaryDetailsBackButton =
+      Key('paymentSummaryDetailsBackButton');
 
   static const Key deleteAdviceButtonKey = Key('deleteAdviceButton');
   static const Key cancelAdviceButtonKey = Key('cancelAdviceButtonKey');
@@ -1137,6 +1139,7 @@ class WidgetKeys {
   static const Key invoiceCreditItemAmount = Key('invoiceCreditItemAmount');
   static const Key bankInInstructionNote = Key('bankInInstructionNote');
   static const Key bankInfoTile = Key('bankInInfoTile');
+  static const Key paymentMethodListView = Key('paymentMethodListView');
 
   //===========================================================
   //  Account summary

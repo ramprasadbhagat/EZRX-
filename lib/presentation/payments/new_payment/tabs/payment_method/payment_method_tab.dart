@@ -36,6 +36,7 @@ class PaymentMethodTab extends StatelessWidget {
     final saleOrg = context.read<EligibilityBloc>().state.salesOrg;
 
     return ListView(
+      key: WidgetKeys.paymentMethodListView,
       children: [
         if (!saleOrg.isID) const _NoteAnnouncement(),
         DetailsInfoSection(

@@ -2,29 +2,30 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import '../core/common.dart';
-import '../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../core/infrastructure/zephyr/repository/zephyr_repository.dart';
-import '../robots/common/common_robot.dart';
-import '../robots/common/enum.dart';
-import '../robots/common/extension.dart';
-import '../robots/home/home_robot.dart';
-import '../robots/login_robot.dart';
-import '../robots/orders/cart/cart_delivery_address_robot.dart';
-import '../robots/orders/cart/cart_robot.dart';
-import '../robots/orders/cart/oos_pre_order_robot.dart';
-import '../robots/orders/checkout/checkout_robot.dart';
-import '../robots/orders/checkout/order_price_summary_robot.dart';
-import '../robots/orders/checkout/order_success_robot.dart';
-import '../robots/orders/orders_root_robot.dart';
-import '../robots/orders/view_by_items/view_by_items_filter_robot.dart';
-import '../robots/orders/view_by_items/view_by_items_robot.dart';
-import '../robots/orders/view_by_orders/view_by_orders_filter_robot.dart';
-import '../robots/orders/view_by_orders/view_by_orders_robot.dart';
-import '../robots/products/filter_sort_product_robot.dart';
-import '../robots/products/product_detail_robot.dart';
-import '../robots/products/product_robot.dart';
-import '../robots/products/product_suggestion_robot.dart';
+import '../../core/common.dart';
+import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+import '../../robots/common/common_robot.dart';
+import '../../robots/common/enum.dart';
+import '../../robots/common/extension.dart';
+import '../../robots/home/customer_search_robot.dart';
+import '../../robots/home/home_robot.dart';
+import '../../robots/login_robot.dart';
+import '../../robots/orders/cart/cart_delivery_address_robot.dart';
+import '../../robots/orders/cart/cart_robot.dart';
+import '../../robots/orders/cart/oos_pre_order_robot.dart';
+import '../../robots/orders/checkout/checkout_robot.dart';
+import '../../robots/orders/checkout/order_price_summary_robot.dart';
+import '../../robots/orders/checkout/order_success_robot.dart';
+import '../../robots/orders/orders_root_robot.dart';
+import '../../robots/orders/view_by_items/view_by_items_filter_robot.dart';
+import '../../robots/orders/view_by_items/view_by_items_robot.dart';
+import '../../robots/orders/view_by_orders/view_by_orders_filter_robot.dart';
+import '../../robots/orders/view_by_orders/view_by_orders_robot.dart';
+import '../../robots/products/filter_sort_product_robot.dart';
+import '../../robots/products/product_detail_robot.dart';
+import '../../robots/products/product_robot.dart';
+import '../../robots/products/product_suggestion_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +49,7 @@ void main() {
   late ViewByItemsFilterRobot viewByItemsFilterRobot;
   late ViewByOrdersRobot viewByOrdersRobot;
   late ViewByOrdersFilterRobot viewByOrdersFilterRobot;
+  late CustomerSearchRobot customerSearchRobot;
 
   void initializeRobot(WidgetTester tester) {
     commonRobot = CommonRobot(tester);
@@ -63,6 +65,7 @@ void main() {
     orderPriceSummaryRobot = OrderPriceSummaryRobot(tester);
     checkoutRobot = CheckoutRobot(tester);
     orderSuccessRobot = OrderSuccessRobot(tester);
+    customerSearchRobot = CustomerSearchRobot(tester);
 
     ordersRootRobot = OrdersRootRobot(tester);
     viewByItemsRobot = ViewByItemsRobot(tester);
@@ -103,10 +106,16 @@ void main() {
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
+      await commonRobot.dismissSnackbar(dismissAll: true);
+    } else {
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.changeDeliveryAddress(
+        shipToCode,
+      );
     }
-    await commonRobot.dismissSnackbar(dismissAll: true);
-    await commonRobot.changeDeliveryAddress(shipToCode);
   }
 
   Future<void> browseProductFromEmptyCart() async {

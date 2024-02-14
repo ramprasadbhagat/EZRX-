@@ -139,11 +139,17 @@ class AccountInvoiceDetailRobot {
     expect(tester.widget<Text>(label).data, equals(materialNumber));
   }
 
-  void verifyMaterialQty(int qty) {
+  Future<void> verifyMaterialQty(int qty) async {
     final label = find.descendant(
       of: _verifyingMaterial,
-      matching: find.byKey(WidgetKeys.invoiceDetailMaterialQty),
+      matching: find.byKey(WidgetKeys.cartItemProductQty),
     );
+    await tester.dragUntilVisible(
+      label,
+      find.byKey(WidgetKeys.invoiceDetailsPageListView),
+      const Offset(0, -200),
+    );
+    await tester.pumpAndSettle();
     expect(tester.widget<Text>(label).data, contains(qty.toString()));
   }
 
@@ -164,7 +170,7 @@ class AccountInvoiceDetailRobot {
   void verifyMaterialTotalPrice(String price) {
     final label = find.descendant(
       of: _verifyingMaterial,
-      matching: find.byKey(WidgetKeys.invoiceDetailMaterialTotalPrice),
+      matching: find.byKey(WidgetKeys.cartItemProductTotalPrice),
     );
     expect(
       find.descendant(

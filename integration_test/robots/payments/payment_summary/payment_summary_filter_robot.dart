@@ -21,6 +21,12 @@ class PaymentSummaryFilterRobot {
     'Processed',
     'Successful',
   ];
+  final statusFilterOptionsForID = [
+    'In progress',
+    'Expired',
+    'Successful',
+    'Cancelled',
+  ];
 
   void verifyDefaultFilterApplied() {
     verifyRadioListTileFilter();
@@ -34,8 +40,29 @@ class PaymentSummaryFilterRobot {
     );
   }
 
+  void verifyDefaultFilterAppliedForID() {
+    verifyRadioListTileFilterForID();
+    verifyDateRangeFilterApplied(
+      fromDate: '',
+      toDate: '',
+    );
+    verifyAmountRangeFilterApplied(
+      fromAmount: '',
+      toAmount: '',
+    );
+  }
+
   void verifyRadioListTileFilter() {
     for (final option in statusFilterOptions) {
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus(option)),
+        findsOneWidget,
+      );
+    }
+  }
+
+  void verifyRadioListTileFilterForID() {
+    for (final option in statusFilterOptionsForID) {
       expect(
         find.byKey(WidgetKeys.paymentSummaryFilterStatus(option)),
         findsOneWidget,

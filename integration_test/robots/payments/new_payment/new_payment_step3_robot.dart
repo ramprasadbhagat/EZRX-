@@ -38,8 +38,60 @@ class NewPaymentStep3Robot {
     );
   }
 
-  void verifyWarningMessage() {
-    expect(createPaymentAdviseNote, findsOneWidget);
+  void verifyStep3InitialFieldForID() {
+    final defaultPaymentMethod = 'Virtual Account Payment'.tr();
+    expect(
+      find.textContaining(defaultPaymentMethod),
+      findsAtLeastNWidgets(1),
+    );
+    verifyWarningMessage(isVisible: false);
+    expect(radioPaymentGateway, findsAtLeastNWidgets(1));
+    expect(
+      tester.widget<Radio>(radioPaymentGateway).value,
+      equals(PaymentMethodValue(defaultPaymentMethod)),
+    );
+  }
+
+  void verifyStep3BankAccount() {
+    final defaultPaymentMethod = 'Virtual Account Payment'.tr();
+    expect(
+      find.textContaining(defaultPaymentMethod),
+      findsAtLeastNWidgets(1),
+    );
+    expect(radioPaymentGateway, findsAtLeastNWidgets(1));
+    expect(
+      tester.widget<Radio>(radioPaymentGateway).value,
+      equals(PaymentMethodValue(defaultPaymentMethod)),
+    );
+
+    expect(
+      find.byKey(WidgetKeys.paymentMethodCheckbox),
+      findsAtLeastNWidgets(1),
+    );
+  }
+
+  Future<void> verifyStep3SelectBankAccount() async {
+    final defaultPaymentMethod = 'Virtual Account Payment'.tr();
+    expect(
+      find.textContaining(defaultPaymentMethod),
+      findsAtLeastNWidgets(1),
+    );
+    expect(radioPaymentGateway, findsAtLeastNWidgets(1));
+    expect(
+      tester.widget<Radio>(radioPaymentGateway).value,
+      equals(PaymentMethodValue(defaultPaymentMethod)),
+    );
+
+    expect(
+      find.byKey(WidgetKeys.paymentMethodCheckbox),
+      findsAtLeastNWidgets(1),
+    );
+    await tester.tap(find.byKey(WidgetKeys.paymentMethodCheckbox).first);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyWarningMessage({bool isVisible = true}) {
+    expect(createPaymentAdviseNote, isVisible ? findsOneWidget : findsNothing);
   }
 
   void verifyOrderAddressVisible(String address) {
@@ -67,6 +119,51 @@ class NewPaymentStep3Robot {
   }
 
   void verifyShipToCode(String shipToCode) {
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.addressInfoSectionDeliveryToLabel &&
+            widget is Text &&
+            (widget.data ?? '').contains(shipToCode),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  Future<void> verifyOrderAddressVisibleForID(
+    String address,
+    String customerCode,
+    String shipToCode,
+  ) async {
+    await tester.dragUntilVisible(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.addressInfoSectionActionLabel &&
+            widget is Text &&
+            (widget.data ?? '').contains(address),
+      ),
+      find.byKey(WidgetKeys.paymentMethodListView),
+      const Offset(0, -200),
+    );
+    await tester.pumpAndSettle();
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.addressInfoSectionActionLabel &&
+            widget is Text &&
+            (widget.data ?? '').contains(address),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.addressInfoSectionCustomerCodeLabel &&
+            widget is Text &&
+            (widget.data ?? '').contains(customerCode),
+      ),
+      findsOneWidget,
+    );
     expect(
       find.byWidgetPredicate(
         (widget) =>
@@ -107,5 +204,14 @@ class NewPaymentStep3Robot {
           .price,
     );
     expect(totalAmount, invoicePrice - creditPrice);
+  }
+
+  void verifyTotalAmountToPayForID(double invoicePrice) {
+    final totalAmount = double.parse(
+      tester
+          .widget<PriceComponent>(find.byKey(WidgetKeys.totalAmountToPay))
+          .price,
+    );
+    expect(totalAmount.priceFormattedForID, invoicePrice.priceFormattedForID);
   }
 }
