@@ -88,7 +88,7 @@ android {
             resValue "string", "clevertap_account_id", "TEST-464-R68-876Z"
             resValue "string", "clevertap_token", "TEST-b62-464"
             resValue "string", "app_name", "eZRx+ Mock"
-            manifestPlaceholders += [appAuthRedirectScheme: "com.oktapreview.zuellig"]
+            manifestPlaceholders += [appAuthRedirectScheme: "com.okta.zuellig-ciam"]
         }
 
         dev {
@@ -98,7 +98,7 @@ android {
             resValue "string", "clevertap_account_id", "TEST-464-R68-876Z"
             resValue "string", "clevertap_token", "TEST-b62-464"
             resValue "string", "app_name", "eZRx+ Dev"
-            manifestPlaceholders += [appAuthRedirectScheme: "com.oktapreview.zuellig"]
+            manifestPlaceholders += [appAuthRedirectScheme: "com.okta.zuellig-ciam"]
         }
 
         uat {
@@ -108,7 +108,7 @@ android {
             resValue "string", "clevertap_account_id", "TEST-798-WW8-476Z"
             resValue "string", "clevertap_token", "TEST-b00-bca"
             resValue "string", "app_name", "eZRx+ Uat"
-            manifestPlaceholders += [appAuthRedirectScheme: "com.oktapreview.zuellig"]
+            manifestPlaceholders += [appAuthRedirectScheme: "com.okta.zuellig-ciam"]
         }
 
         prod {
@@ -116,7 +116,7 @@ android {
             resValue "string", "clevertap_account_id", "698-WW8-476Z"
             resValue "string", "clevertap_token", "b00-bc6"
             resValue "string", "app_name", "eZRx+"
-            manifestPlaceholders += [appAuthRedirectScheme: "com.zuelligpharma.ezlogin"]
+            manifestPlaceholders += [appAuthRedirectScheme: "com.okta.zuellig-ciam"]
         }
 
     }

@@ -56,13 +56,18 @@ class LoginMobile extends StatelessWidget {
                     const SizedBox(height: 15),
                     const LoginButton(),
                     const SizedBox(height: 25),
-                    if (state.currentMarket.isID) const EzrxAplLogo(),
-                    if (!state.currentMarket.isRegistrationRestricted) ...[
+                    if (!state.currentMarket.isSSOLoginRestricted) ...[
                       const OrDivider(),
                       const SizedBox(height: 25),
                       const _SSOLoginButton(),
+                    ],
+                    if (!state.currentMarket.isRegistrationRestricted) ...[
                       const SizedBox(height: 15),
                       const _CreateAccount(),
+                    ],
+                    if (state.currentMarket.isID) ...[
+                      const SizedBox(height: 15),
+                      const EzrxAplLogo(),
                     ],
                   ],
                 ),

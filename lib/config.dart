@@ -130,19 +130,19 @@ class Config {
       case Flavor.dev:
       case Flavor.uat:
         return {
-          'client_id': '0oa402ex52DFKp74y1d7',
-          'redirect_uri': 'com.oktapreview.zuellig:/callback',
-          'end_session_redirect_uri': 'com.oktapreview.zuellig:/',
-          'discovery_uri': 'https://zuellig.oktapreview.com/',
+          'client_id': '0oabg64fqts2fjher697',
+          'redirect_uri': 'com.okta.zuellig-ciam:/callback',
+          'end_session_redirect_uri': 'com.okta.zuellig-ciam:/',
+          'discovery_uri': 'https://zuellig-ciam.okta.com/',
           'scopes': ['openid', 'profile', 'offline_access'],
         };
       case Flavor.prod:
       default:
         return {
-          'client_id': '0oa5urfw6s1OLENaX5d7',
-          'redirect_uri': 'com.zuelligpharma.ezlogin:/callback',
-          'end_session_redirect_uri': 'com.zuelligpharma.ezlogin:/',
-          'discovery_uri': 'https://ezlogin.zuelligpharma.com/',
+          'client_id': '0oabg4njjrTWhg1jD697',
+          'redirect_uri': 'com.okta.zuellig-ciam:/callback',
+          'end_session_redirect_uri': 'com.okta.zuellig-ciam:/',
+          'discovery_uri': 'https://zuellig-ciam.okta.com/',
           'scopes': ['openid', 'profile', 'offline_access'],
         };
     }

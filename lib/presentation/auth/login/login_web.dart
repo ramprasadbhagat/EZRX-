@@ -204,15 +204,16 @@ class _LoginFormWeb extends StatelessWidget {
               const SizedBox(height: 15),
               const LoginButton(),
               const SizedBox(height: 25),
-              if (state.currentMarket.isID) const EzrxAplLogo(),
               if (!state.currentMarket.isRegistrationRestricted) ...[
                 const _TermsOfUse(),
                 const SizedBox(height: 6),
                 const _CreateAccount(),
+              ],
+              if (!state.currentMarket.isSSOLoginRestricted)
                 const _SSOLogin(
                   key: WidgetKeys.ssoLoginButton,
                 ),
-              ],
+              if (state.currentMarket.isID) const EzrxAplLogo(),
             ],
           ),
         ),

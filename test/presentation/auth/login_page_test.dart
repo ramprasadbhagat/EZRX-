@@ -515,10 +515,15 @@ void main() {
       (tester) async {
         await tester.pumpWidget(loginTestPage());
         await tester.pump();
-        // final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
-        // expect(ssoLoginButton, findsOneWidget);
-        // await tester.tap(ssoLoginButton);
+        final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
+        expect(ssoLoginButton, findsOneWidget);
+        await tester.tap(ssoLoginButton);
         await tester.pump();
+        verify(
+          () => loginBlocMock.add(
+            const LoginFormEvent.loginWithOktaButtonPressed(),
+          ),
+        ).called(1);
       },
     );
 
@@ -943,7 +948,7 @@ void main() {
         );
         expect(
           ssoLoginButton,
-          currentAppMarketVariant.isRegistrationRestricted
+          currentAppMarketVariant.isSSOLoginRestricted
               ? findsNothing
               : findsOneWidget,
         );
@@ -955,7 +960,7 @@ void main() {
         );
         expect(
           find.byType(OrDivider),
-          currentAppMarketVariant.isRegistrationRestricted
+          currentAppMarketVariant.isSSOLoginRestricted
               ? findsNothing
               : findsOneWidget,
         );

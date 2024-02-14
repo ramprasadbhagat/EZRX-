@@ -72,6 +72,8 @@ class AppMarket extends ValueObject<String> {
 
   bool get isRegistrationRestricted => isVN || isID;
 
+  bool get isSSOLoginRestricted => isVN || isID;
+
   SalesOrg get salesOrg => marketToSalesOrg(value.getOrElse(() => ''));
 }
 
