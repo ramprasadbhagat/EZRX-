@@ -14,6 +14,7 @@ class RequestInformationQuery {
       createdTime
       createdBy
       bapiStatus
+      totalItemCount
     }
     requestInformationV2 {
       invoiceNo

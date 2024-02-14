@@ -41,6 +41,8 @@ mixin _$RequestInformationHeaderDto {
   String get createdBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'bapiStatus', defaultValue: '')
   String get bapiStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'totalItemCount', defaultValue: '')
+  String get totalItemCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,7 +70,9 @@ abstract class $RequestInformationHeaderDtoCopyWith<$Res> {
       @JsonKey(name: 'soldTo', defaultValue: '') String soldTo,
       @JsonKey(name: 'requestID', defaultValue: '') String requestID,
       @JsonKey(name: 'createdBy', defaultValue: '') String createdBy,
-      @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus});
+      @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus,
+      @JsonKey(name: 'totalItemCount', defaultValue: '')
+      String totalItemCount});
 }
 
 /// @nodoc
@@ -95,6 +99,7 @@ class _$RequestInformationHeaderDtoCopyWithImpl<$Res,
     Object? requestID = null,
     Object? createdBy = null,
     Object? bapiStatus = null,
+    Object? totalItemCount = null,
   }) {
     return _then(_value.copyWith(
       returnReference: null == returnReference
@@ -137,6 +142,10 @@ class _$RequestInformationHeaderDtoCopyWithImpl<$Res,
           ? _value.bapiStatus
           : bapiStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      totalItemCount: null == totalItemCount
+          ? _value.totalItemCount
+          : totalItemCount // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -162,7 +171,9 @@ abstract class _$$_RequestInformationHeaderDtoCopyWith<$Res>
       @JsonKey(name: 'soldTo', defaultValue: '') String soldTo,
       @JsonKey(name: 'requestID', defaultValue: '') String requestID,
       @JsonKey(name: 'createdBy', defaultValue: '') String createdBy,
-      @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus});
+      @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus,
+      @JsonKey(name: 'totalItemCount', defaultValue: '')
+      String totalItemCount});
 }
 
 /// @nodoc
@@ -188,6 +199,7 @@ class __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>
     Object? requestID = null,
     Object? createdBy = null,
     Object? bapiStatus = null,
+    Object? totalItemCount = null,
   }) {
     return _then(_$_RequestInformationHeaderDto(
       returnReference: null == returnReference
@@ -230,6 +242,10 @@ class __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>
           ? _value.bapiStatus
           : bapiStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      totalItemCount: null == totalItemCount
+          ? _value.totalItemCount
+          : totalItemCount // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -249,7 +265,9 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
       @JsonKey(name: 'soldTo', defaultValue: '') required this.soldTo,
       @JsonKey(name: 'requestID', defaultValue: '') required this.requestID,
       @JsonKey(name: 'createdBy', defaultValue: '') required this.createdBy,
-      @JsonKey(name: 'bapiStatus', defaultValue: '') required this.bapiStatus})
+      @JsonKey(name: 'bapiStatus', defaultValue: '') required this.bapiStatus,
+      @JsonKey(name: 'totalItemCount', defaultValue: '')
+      required this.totalItemCount})
       : super._();
 
   factory _$_RequestInformationHeaderDto.fromJson(Map<String, dynamic> json) =>
@@ -285,10 +303,13 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
   @override
   @JsonKey(name: 'bapiStatus', defaultValue: '')
   final String bapiStatus;
+  @override
+  @JsonKey(name: 'totalItemCount', defaultValue: '')
+  final String totalItemCount;
 
   @override
   String toString() {
-    return 'RequestInformationHeaderDto(returnReference: $returnReference, specialInstructions: $specialInstructions, createdDate: $createdDate, createdTime: $createdTime, cName1: $cName1, refundTotal: $refundTotal, soldTo: $soldTo, requestID: $requestID, createdBy: $createdBy, bapiStatus: $bapiStatus)';
+    return 'RequestInformationHeaderDto(returnReference: $returnReference, specialInstructions: $specialInstructions, createdDate: $createdDate, createdTime: $createdTime, cName1: $cName1, refundTotal: $refundTotal, soldTo: $soldTo, requestID: $requestID, createdBy: $createdBy, bapiStatus: $bapiStatus, totalItemCount: $totalItemCount)';
   }
 
   @override
@@ -313,7 +334,9 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
             (identical(other.bapiStatus, bapiStatus) ||
-                other.bapiStatus == bapiStatus));
+                other.bapiStatus == bapiStatus) &&
+            (identical(other.totalItemCount, totalItemCount) ||
+                other.totalItemCount == totalItemCount));
   }
 
   @JsonKey(ignore: true)
@@ -329,7 +352,8 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
       soldTo,
       requestID,
       createdBy,
-      bapiStatus);
+      bapiStatus,
+      totalItemCount);
 
   @JsonKey(ignore: true)
   @override
@@ -366,7 +390,9 @@ abstract class _RequestInformationHeaderDto
       @JsonKey(name: 'createdBy', defaultValue: '')
       required final String createdBy,
       @JsonKey(name: 'bapiStatus', defaultValue: '')
-      required final String bapiStatus}) = _$_RequestInformationHeaderDto;
+      required final String bapiStatus,
+      @JsonKey(name: 'totalItemCount', defaultValue: '')
+      required final String totalItemCount}) = _$_RequestInformationHeaderDto;
   _RequestInformationHeaderDto._() : super._();
 
   factory _RequestInformationHeaderDto.fromJson(Map<String, dynamic> json) =
@@ -402,6 +428,9 @@ abstract class _RequestInformationHeaderDto
   @override
   @JsonKey(name: 'bapiStatus', defaultValue: '')
   String get bapiStatus;
+  @override
+  @JsonKey(name: 'totalItemCount', defaultValue: '')
+  String get totalItemCount;
   @override
   @JsonKey(ignore: true)
   _$$_RequestInformationHeaderDtoCopyWith<_$_RequestInformationHeaderDto>

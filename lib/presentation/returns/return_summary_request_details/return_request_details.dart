@@ -68,7 +68,7 @@ class ReturnRequestDetails extends StatelessWidget {
                         color: ZPColors.lightGray2,
                       ),
                       RequestItemSection(
-                        returnRequestinformationList: state.requestInformation,
+                        returnDetailsByRequestState: state,
                       ),
                     ],
                   ),

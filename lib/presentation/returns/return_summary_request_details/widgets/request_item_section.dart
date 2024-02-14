@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -26,9 +27,9 @@ part 'package:ezrxmobile/presentation/returns/return_summary_request_details/wid
 class RequestItemSection extends StatelessWidget {
   const RequestItemSection({
     Key? key,
-    required this.returnRequestinformationList,
+    required this.returnDetailsByRequestState,
   }) : super(key: key);
-  final List<ReturnRequestInformation> returnRequestinformationList;
+  final ReturnDetailsByRequestState returnDetailsByRequestState;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +43,11 @@ class RequestItemSection extends StatelessWidget {
               bottom: 16,
             ),
             child: Text(
-              '${context.tr('Return items')} (${returnRequestinformationList.length})',
+              '${context.tr('Return items')} (${returnDetailsByRequestState.requestInformationHeader.totalItemCount})',
               style: Theme.of(context).textTheme.labelMedium,
             ),
           ),
-          ...returnRequestinformationList.mapIndexed(
+          ...returnDetailsByRequestState.requestInformation.mapIndexed(
             (index, item) => _ReturnItemSection(
               key: WidgetKeys.returnRequestDetailMaterial(index),
               returnRequestinformation: item,

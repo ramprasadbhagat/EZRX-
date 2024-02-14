@@ -16,8 +16,10 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -690,6 +692,37 @@ void main() {
       expect(returnSummaryInfoBottomSheetFinder, findsOneWidget);
       expect(itemQuantityInfoIconContentFinder, findsOneWidget);
       expect(itemQuantityInfoIconSubContentFinder, findsOneWidget);
+    });
+
+    testWidgets('return summary details test display return items count',
+        (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformationHeader:
+              ReturnRequestInformationHeader.empty().copyWith(
+            totalItemCount: '2',
+          ),
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+      when(() => mockReturnListByRequestBloc.state).thenReturn(
+        ReturnListByRequestState.initial().copyWith(
+          returnItemList: [
+            ReturnItem.empty().copyWith(itemQty: ReturnQuantity('2'))
+          ],
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+
+      final returnItemCountFinder = find.text('Return items (2)');
+      expect(returnItemCountFinder, findsOneWidget);
     });
   });
 }

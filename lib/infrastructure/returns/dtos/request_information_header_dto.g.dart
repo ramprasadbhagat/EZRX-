@@ -19,6 +19,7 @@ _$_RequestInformationHeaderDto _$$_RequestInformationHeaderDtoFromJson(
       requestID: json['requestID'] as String? ?? '',
       createdBy: json['createdBy'] as String? ?? '',
       bapiStatus: json['bapiStatus'] as String? ?? '',
+      totalItemCount: json['totalItemCount'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_RequestInformationHeaderDtoToJson(
@@ -34,4 +35,5 @@ Map<String, dynamic> _$$_RequestInformationHeaderDtoToJson(
       'requestID': instance.requestID,
       'createdBy': instance.createdBy,
       'bapiStatus': instance.bapiStatus,
+      'totalItemCount': instance.totalItemCount,
     };

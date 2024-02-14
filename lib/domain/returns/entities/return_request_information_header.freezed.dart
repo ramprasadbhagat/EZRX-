@@ -26,6 +26,7 @@ mixin _$ReturnRequestInformationHeader {
   RefundTotal get refundTotal => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDateTime => throw _privateConstructorUsedError;
   StatusType get bapiStatus => throw _privateConstructorUsedError;
+  String get totalItemCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnRequestInformationHeaderCopyWith<ReturnRequestInformationHeader>
@@ -49,7 +50,8 @@ abstract class $ReturnRequestInformationHeaderCopyWith<$Res> {
       String createdBy,
       RefundTotal refundTotal,
       DateTimeStringValue createdDateTime,
-      StatusType bapiStatus});
+      StatusType bapiStatus,
+      String totalItemCount});
 }
 
 /// @nodoc
@@ -75,6 +77,7 @@ class _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
     Object? refundTotal = null,
     Object? createdDateTime = null,
     Object? bapiStatus = null,
+    Object? totalItemCount = null,
   }) {
     return _then(_value.copyWith(
       returnReference: null == returnReference
@@ -113,6 +116,10 @@ class _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
           ? _value.bapiStatus
           : bapiStatus // ignore: cast_nullable_to_non_nullable
               as StatusType,
+      totalItemCount: null == totalItemCount
+          ? _value.totalItemCount
+          : totalItemCount // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -135,7 +142,8 @@ abstract class _$$_ReturnRequestInformationHeaderCopyWith<$Res>
       String createdBy,
       RefundTotal refundTotal,
       DateTimeStringValue createdDateTime,
-      StatusType bapiStatus});
+      StatusType bapiStatus,
+      String totalItemCount});
 }
 
 /// @nodoc
@@ -160,6 +168,7 @@ class __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>
     Object? refundTotal = null,
     Object? createdDateTime = null,
     Object? bapiStatus = null,
+    Object? totalItemCount = null,
   }) {
     return _then(_$_ReturnRequestInformationHeader(
       returnReference: null == returnReference
@@ -198,6 +207,10 @@ class __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>
           ? _value.bapiStatus
           : bapiStatus // ignore: cast_nullable_to_non_nullable
               as StatusType,
+      totalItemCount: null == totalItemCount
+          ? _value.totalItemCount
+          : totalItemCount // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -215,7 +228,8 @@ class _$_ReturnRequestInformationHeader
       required this.createdBy,
       required this.refundTotal,
       required this.createdDateTime,
-      required this.bapiStatus});
+      required this.bapiStatus,
+      required this.totalItemCount});
 
   @override
   final StringValue returnReference;
@@ -235,10 +249,12 @@ class _$_ReturnRequestInformationHeader
   final DateTimeStringValue createdDateTime;
   @override
   final StatusType bapiStatus;
+  @override
+  final String totalItemCount;
 
   @override
   String toString() {
-    return 'ReturnRequestInformationHeader(returnReference: $returnReference, specialInstructions: $specialInstructions, requestID: $requestID, cName1: $cName1, soldTo: $soldTo, createdBy: $createdBy, refundTotal: $refundTotal, createdDateTime: $createdDateTime, bapiStatus: $bapiStatus)';
+    return 'ReturnRequestInformationHeader(returnReference: $returnReference, specialInstructions: $specialInstructions, requestID: $requestID, cName1: $cName1, soldTo: $soldTo, createdBy: $createdBy, refundTotal: $refundTotal, createdDateTime: $createdDateTime, bapiStatus: $bapiStatus, totalItemCount: $totalItemCount)';
   }
 
   @override
@@ -261,7 +277,9 @@ class _$_ReturnRequestInformationHeader
             (identical(other.createdDateTime, createdDateTime) ||
                 other.createdDateTime == createdDateTime) &&
             (identical(other.bapiStatus, bapiStatus) ||
-                other.bapiStatus == bapiStatus));
+                other.bapiStatus == bapiStatus) &&
+            (identical(other.totalItemCount, totalItemCount) ||
+                other.totalItemCount == totalItemCount));
   }
 
   @override
@@ -275,7 +293,8 @@ class _$_ReturnRequestInformationHeader
       createdBy,
       refundTotal,
       createdDateTime,
-      bapiStatus);
+      bapiStatus,
+      totalItemCount);
 
   @JsonKey(ignore: true)
   @override
@@ -296,7 +315,8 @@ abstract class _ReturnRequestInformationHeader
           required final String createdBy,
           required final RefundTotal refundTotal,
           required final DateTimeStringValue createdDateTime,
-          required final StatusType bapiStatus}) =
+          required final StatusType bapiStatus,
+          required final String totalItemCount}) =
       _$_ReturnRequestInformationHeader;
 
   @override
@@ -317,6 +337,8 @@ abstract class _ReturnRequestInformationHeader
   DateTimeStringValue get createdDateTime;
   @override
   StatusType get bapiStatus;
+  @override
+  String get totalItemCount;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnRequestInformationHeaderCopyWith<_$_ReturnRequestInformationHeader>

@@ -12,6 +12,7 @@ query requestInformationV2($request: requestInformationRequest!) {
         createdTime
         createdBy
         bapiStatus
+        totalItemCount
       }
       requestInformationV2 {
         invoiceNo
