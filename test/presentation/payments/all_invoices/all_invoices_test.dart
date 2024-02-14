@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -459,6 +461,31 @@ void main() {
 
       final documentReferenceID = find.text('Gov. no 0810055826');
       expect(documentReferenceID, findsOneWidget);
+    });
+
+    testWidgets(
+        '=> Invoice details should display no found invoice screen in failure state',
+        (tester) async {
+      when(() => allInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      final loaderImage = find.byKey(WidgetKeys.loaderImage);
+      expect(loaderImage, findsNothing);
+      final noRecordFoundWidgetFinder = find.byType(NoRecordFound);
+      expect(noRecordFoundWidgetFinder, findsOneWidget);
+
+      final noRecordTextFinder = find.text('No invoice found');
+
+      expect(noRecordTextFinder, findsOneWidget);
     });
   });
 }
