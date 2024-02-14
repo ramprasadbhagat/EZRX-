@@ -124,18 +124,6 @@ class _ProductDetails extends StatelessWidget {
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-          eligibilityState.isIDMarket
-              ? PriceComponent(
-                  salesOrgConfig: eligibilityState.salesOrgConfigs,
-                  price: '0',
-                )
-              : Text(
-                  'FREE'.tr(),
-                  key: WidgetKeys.cartItemBonusFreeLabel,
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: ZPColors.textButtonColor,
-                      ),
-                ),
         ],
       ),
     );

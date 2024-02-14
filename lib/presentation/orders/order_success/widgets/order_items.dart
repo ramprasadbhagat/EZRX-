@@ -76,14 +76,15 @@ class _MaterialItem extends StatelessWidget {
                 ListPriceStrikeThroughComponent(
                   priceAggregate: orderItem.priceAggregate,
                 ),
-              OrderItemPrice(
-                unitPrice: orderItem.itemUnitPrice(
-                  isIDMarket,
+              if (!orderItem.isBonus)
+                OrderItemPrice(
+                  unitPrice: orderItem.itemUnitPrice(
+                    isIDMarket,
+                  ),
+                  originPrice: orderItem.originPrice.toString(),
+                  showPreviousPrice: orderItem.isCounterOffer,
+                  hidePrice: orderItem.hidePrice,
                 ),
-                originPrice: orderItem.originPrice.toString(),
-                showPreviousPrice: orderItem.isCounterOffer,
-                hidePrice: orderItem.hidePrice,
-              ),
             ],
           ),
           GovtListPriceComponent(

@@ -142,6 +142,10 @@ void main() {
           type: MaterialInfoType('Deals'),
           inStock: MaterialInStock('No'),
           qty: MaterialQty(15),
+        ),
+        BonusSampleItem.empty().copyWith(
+          materialNumber: MaterialNumber('123456789'),
+          type: MaterialInfoType('Deals'),
         )
       ],
     ),
@@ -653,6 +657,44 @@ void main() {
         expect(dealBonusItem, findsOneWidget);
         final bonusQuantity = find.text('Qty: 15');
         expect(bonusQuantity, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Test Offer Tag Not visible for bonus items',
+      (tester) async {
+        when(() => materialPriceBlocMock.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {
+              MaterialNumber('123456789'): Price.empty().copyWith(
+                tiers: [
+                  PriceTier.empty().copyWith(
+                    tier: 'C',
+                    items: [
+                      PriceTierItem.empty().copyWith(
+                        rate: 41,
+                        quantity: 5,
+                      ),
+                      PriceTierItem.empty().copyWith(
+                        rate: 20,
+                        quantity: 10,
+                      )
+                    ],
+                  )
+                ],
+              ),
+            },
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final offerTag = find.byType(OfferLabel);
+        expect(offerTag, findsOneWidget);
       },
     );
   });

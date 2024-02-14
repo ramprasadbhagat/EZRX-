@@ -17,13 +17,14 @@ class _ImageSection extends StatelessWidget {
             fit: BoxFit.fitHeight,
           ),
         ),
-        Positioned(
-          top: MediaQuery.of(context).size.height * 0.011,
-          child: OfferLabel(
-            materialInfo: cartProduct.materialInfo,
-            iconOnly: true,
+        if (!cartProduct.materialInfo.type.typeDealOrOverrideBonus)
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.011,
+            child: OfferLabel(
+              materialInfo: cartProduct.materialInfo,
+              iconOnly: true,
+            ),
           ),
-        ),
         if (cartProduct.materialInfo.isFOCMaterial)
           Positioned(
             top: MediaQuery.of(context).size.height * 0.05,

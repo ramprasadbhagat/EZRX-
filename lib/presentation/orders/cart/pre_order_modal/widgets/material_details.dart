@@ -60,18 +60,6 @@ class _MaterialDetails extends StatelessWidget {
               price: cartItem.display(PriceType.listPrice),
             ),
           ],
-          if (cartItem.materialInfo.type.typeDealOrOverrideBonus)
-            eligibilityState.isIDMarket
-                ? PriceComponent(
-                    salesOrgConfig: eligibilityState.salesOrgConfigs,
-                    price: '0',
-                  )
-                : Text(
-                    context.tr('FREE'),
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: ZPColors.textButtonColor,
-                        ),
-                  ),
         ],
       ),
     );
