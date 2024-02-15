@@ -74,6 +74,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool hideCredit,
     required bool allowReturnsOutsidePolicy,
     required bool enableMarketPlace,
+    required double mpMinOrderAmount,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -139,6 +140,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         hideCredit: false,
         allowReturnsOutsidePolicy: false,
         enableMarketPlace: false,
+        mpMinOrderAmount: 0.0,
       );
 
   bool get shouldDisplayVATInPercentage =>

@@ -82,6 +82,10 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       allowReturnsOutsidePolicy:
           json['allowReturnsOutsidePolicy'] as bool? ?? false,
       enableMarketPlace: json['enableMarketPlace'] as bool? ?? false,
+      mpMinOrderAmount: json['mpMinOrderAmount'] == null
+          ? 0.0
+          : const StringToDoubleConverter()
+              .fromJson(json['mpMinOrderAmount'] as String),
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -150,4 +154,6 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'hideCredit': instance.hideCredit,
       'allowReturnsOutsidePolicy': instance.allowReturnsOutsidePolicy,
       'enableMarketPlace': instance.enableMarketPlace,
+      'mpMinOrderAmount':
+          const StringToDoubleConverter().toJson(instance.mpMinOrderAmount),
     };

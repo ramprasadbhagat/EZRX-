@@ -98,7 +98,8 @@ updateSalesorgconfigMutationReq=$(curl --location 'https://uat-my.ezrx.com/api/l
         "enableComboDeals": false,
         "enableGreenDelivery": false,
         "comboDealsUserRole": null,
-        "enableMarketPlace": true
+        "enableMarketPlace": true,
+        "mpMinOrderAmount": "0.0",
       }
     }
   }

@@ -102,6 +102,7 @@ class SalesOrgQueryMutation {
     enableComboDeals
     comboDealsUserRole
     ${enableMarketPlace ? 'enableMarketPlace' : ''}
+    mpMinOrderAmount
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_principal_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'sales_organisation_configs_dto.freezed.dart';
 part 'sales_organisation_configs_dto.g.dart';
@@ -126,6 +127,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
         required bool allowReturnsOutsidePolicy,
     @JsonKey(name: 'enableMarketPlace', defaultValue: false)
         required bool enableMarketPlace,
+    @StringToDoubleConverter()
+    @JsonKey(name: 'mpMinOrderAmount', defaultValue: 0.0)
+        required double mpMinOrderAmount,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -196,6 +200,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       hideCredit: configs.hideCredit,
       allowReturnsOutsidePolicy: configs.allowReturnsOutsidePolicy,
       enableMarketPlace: configs.enableMarketPlace,
+      mpMinOrderAmount: configs.mpMinOrderAmount,
     );
   }
 
@@ -263,6 +268,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       hideCredit: hideCredit,
       allowReturnsOutsidePolicy: allowReturnsOutsidePolicy,
       enableMarketPlace: enableMarketPlace,
+      mpMinOrderAmount: mpMinOrderAmount,
     );
   }
 

@@ -94,6 +94,7 @@ query salesOrgConfigs($request: SalesOrgConfigRequest) {
     enableComboDeals
     comboDealsUserRole
     enableMarketPlace
+    mpMinOrderAmount
     }
 }
 

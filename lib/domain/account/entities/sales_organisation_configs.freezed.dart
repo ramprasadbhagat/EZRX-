@@ -81,6 +81,7 @@ mixin _$SalesOrganisationConfigs {
   bool get hideCredit => throw _privateConstructorUsedError;
   bool get allowReturnsOutsidePolicy => throw _privateConstructorUsedError;
   bool get enableMarketPlace => throw _privateConstructorUsedError;
+  double get mpMinOrderAmount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -155,7 +156,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool disableOverrideFieldSR,
       bool hideCredit,
       bool allowReturnsOutsidePolicy,
-      bool enableMarketPlace});
+      bool enableMarketPlace,
+      double mpMinOrderAmount});
 }
 
 /// @nodoc
@@ -234,6 +236,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? hideCredit = null,
     Object? allowReturnsOutsidePolicy = null,
     Object? enableMarketPlace = null,
+    Object? mpMinOrderAmount = null,
   }) {
     return _then(_value.copyWith(
       enableIRN: null == enableIRN
@@ -484,6 +487,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.enableMarketPlace
           : enableMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      mpMinOrderAmount: null == mpMinOrderAmount
+          ? _value.mpMinOrderAmount
+          : mpMinOrderAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -559,7 +566,8 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool disableOverrideFieldSR,
       bool hideCredit,
       bool allowReturnsOutsidePolicy,
-      bool enableMarketPlace});
+      bool enableMarketPlace,
+      double mpMinOrderAmount});
 }
 
 /// @nodoc
@@ -636,6 +644,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? hideCredit = null,
     Object? allowReturnsOutsidePolicy = null,
     Object? enableMarketPlace = null,
+    Object? mpMinOrderAmount = null,
   }) {
     return _then(_$_SalesOrganisationConfigs(
       enableIRN: null == enableIRN
@@ -886,6 +895,10 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.enableMarketPlace
           : enableMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      mpMinOrderAmount: null == mpMinOrderAmount
+          ? _value.mpMinOrderAmount
+          : mpMinOrderAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -955,7 +968,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.disableOverrideFieldSR,
       required this.hideCredit,
       required this.allowReturnsOutsidePolicy,
-      required this.enableMarketPlace})
+      required this.enableMarketPlace,
+      required this.mpMinOrderAmount})
       : _principalList = principalList,
         super._();
 
@@ -1089,10 +1103,12 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final bool allowReturnsOutsidePolicy;
   @override
   final bool enableMarketPlace;
+  @override
+  final double mpMinOrderAmount;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace)';
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount)';
   }
 
   @override
@@ -1189,7 +1205,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             (identical(other.disableOverrideFieldSR, disableOverrideFieldSR) || other.disableOverrideFieldSR == disableOverrideFieldSR) &&
             (identical(other.hideCredit, hideCredit) || other.hideCredit == hideCredit) &&
             (identical(other.allowReturnsOutsidePolicy, allowReturnsOutsidePolicy) || other.allowReturnsOutsidePolicy == allowReturnsOutsidePolicy) &&
-            (identical(other.enableMarketPlace, enableMarketPlace) || other.enableMarketPlace == enableMarketPlace));
+            (identical(other.enableMarketPlace, enableMarketPlace) || other.enableMarketPlace == enableMarketPlace) &&
+            (identical(other.mpMinOrderAmount, mpMinOrderAmount) || other.mpMinOrderAmount == mpMinOrderAmount));
   }
 
   @override
@@ -1256,7 +1273,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         disableOverrideFieldSR,
         hideCredit,
         allowReturnsOutsidePolicy,
-        enableMarketPlace
+        enableMarketPlace,
+        mpMinOrderAmount
       ]);
 
   @JsonKey(ignore: true)
@@ -1330,7 +1348,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool disableOverrideFieldSR,
       required final bool hideCredit,
       required final bool allowReturnsOutsidePolicy,
-      required final bool enableMarketPlace}) = _$_SalesOrganisationConfigs;
+      required final bool enableMarketPlace,
+      required final double mpMinOrderAmount}) = _$_SalesOrganisationConfigs;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -1457,6 +1476,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   bool get allowReturnsOutsidePolicy;
   @override
   bool get enableMarketPlace;
+  @override
+  double get mpMinOrderAmount;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>

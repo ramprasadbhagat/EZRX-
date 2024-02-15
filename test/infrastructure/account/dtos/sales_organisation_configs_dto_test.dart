@@ -22,6 +22,7 @@ void main() {
       ).toDomain();
       expect(configs.currency, Currency('myr'));
       expect(configs.enableMarketPlace, true);
+      expect(configs.mpMinOrderAmount, 0.0);
     });
 
     test('Test fromDomain', () {
@@ -32,6 +33,7 @@ void main() {
       );
       expect(configsDto.currency, 'myr');
       expect(configsDto.enableMarketPlace, true);
+      expect(configsDto.mpMinOrderAmount, 0.0);
     });
 
     test('Test toJson', () {
@@ -42,6 +44,7 @@ void main() {
       ).toJson();
       expect(configsDtoMap['currency'], 'myr');
       expect(configsDtoMap['enableMarketPlace'], true);
+      expect(configsDtoMap['mpMinOrderAmount'], '0.0');
     });
 
     test('Test fromJson with default value', () {
@@ -52,6 +55,13 @@ void main() {
           {...json}..remove('enableMarketPlace'),
         ).enableMarketPlace,
         false,
+      );
+
+      expect(
+        SalesOrganisationConfigsDto.fromJson(
+          {...json}..remove('mpMinOrderAmount'),
+        ).mpMinOrderAmount,
+        0.0,
       );
     });
   });

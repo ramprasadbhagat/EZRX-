@@ -79,7 +79,8 @@
             "disableOverrideFieldCustomer": false,
             "disableOverrideFieldSR": false,
             "enablePOAttachmentRequired": false,
-            "enableMarketPlace": true
+            "enableMarketPlace": true,
+            "mpMinOrderAmount": "0.0"
          }
       ]
    }
