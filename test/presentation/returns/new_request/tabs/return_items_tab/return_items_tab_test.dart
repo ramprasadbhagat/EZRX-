@@ -334,7 +334,7 @@ void main() {
       expect(scrollListFinder, findsOneWidget);
       await tester.drag(
         scrollListFinder,
-        const Offset(0.0, -2000.0),
+        const Offset(0.0, -3000.0),
       );
       await tester.pumpAndSettle();
       verify(

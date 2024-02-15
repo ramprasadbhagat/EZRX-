@@ -57,10 +57,10 @@ class _ReturnMaterialInfo extends StatelessWidget {
               MaterialDetailsSection(
                 data: data,
               ),
-              _BonusItemSection(
-                items: data.bonusItems,
-              ),
             ],
+          ),
+          _BonusItemSection(
+            items: data.bonusItems,
           ),
         ],
       ),
