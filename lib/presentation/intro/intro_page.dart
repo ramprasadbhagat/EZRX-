@@ -80,9 +80,6 @@ class _IntroPageState extends State<IntroPage> {
             salesOrganisations: eligibilityState.user.userSalesOrganisations,
           ),
         );
-    context.read<EligibilityBloc>().add(
-          const EligibilityEvent.loadStoredCustomerCode(),
-        );
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -279,6 +280,9 @@ class AcceptButton extends StatelessWidget {
                 cur.user != User.empty(),
             listener: (context, _) {
               context.navigateBack();
+              context.read<IntroBloc>().add(
+                    const IntroEvent.checkAppFirstLaunch(),
+                  );
             },
           ),
         if (isMarketPlace)

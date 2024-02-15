@@ -301,12 +301,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<IntroBloc, IntroState>(
           listenWhen: (previous, current) =>
-              previous.isAppFirstLaunch != current.isAppFirstLaunch &&
-              current.isAppFirstLaunch,
+              previous.isLoading != current.isLoading && !current.isLoading,
           listener: (context, state) {
             final showTermsAndCondition =
                 context.read<UserBloc>().state.showTermsAndConditionDialog;
-            if (showTermsAndCondition) return;
+            if (showTermsAndCondition || !state.isAppFirstLaunch) return;
 
             context.router.push(const IntroPageRoute());
           },

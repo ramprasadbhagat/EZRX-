@@ -35,6 +35,11 @@ void main() {
       expect: () => [
         IntroState.initial().copyWith(
           isAppFirstLaunch: false,
+          isLoading: true,
+        ),
+        IntroState.initial().copyWith(
+          isAppFirstLaunch: false,
+          isLoading: false,
         ),
       ],
     );
@@ -50,7 +55,12 @@ void main() {
       },
       expect: () => [
         IntroState.initial().copyWith(
+          isAppFirstLaunch: false,
+          isLoading: true,
+        ),
+        IntroState.initial().copyWith(
           isAppFirstLaunch: true,
+          isLoading: false,
         ),
       ],
     );

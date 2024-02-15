@@ -925,7 +925,8 @@ void main() {
     testWidgets('When Intro Bloc is listener and isAppFirstLaunch == true',
         (tester) async {
       final expectedStates = [
-        IntroState.initial().copyWith(isAppFirstLaunch: true),
+        IntroState.initial().copyWith(isLoading: true),
+        IntroState.initial().copyWith(isAppFirstLaunch: true, isLoading: false),
       ];
       whenListen(introBlocMock, Stream.fromIterable(expectedStates));
       await getWidget(tester);
@@ -936,7 +937,9 @@ void main() {
     testWidgets('When Intro Bloc is listener and showTermsAndCondition == true',
         (tester) async {
       final expectedStates = [
-        IntroState.initial().copyWith(isAppFirstLaunch: false),
+        IntroState.initial().copyWith(isLoading: true),
+        IntroState.initial()
+            .copyWith(isAppFirstLaunch: false, isLoading: false),
       ];
       whenListen(introBlocMock, Stream.fromIterable(expectedStates));
       when(() => userBlocMock.state).thenAnswer(

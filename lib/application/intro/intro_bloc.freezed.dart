@@ -439,6 +439,7 @@ abstract class _SetAppFirstLaunch implements IntroEvent {
 mixin _$IntroState {
   int get index => throw _privateConstructorUsedError;
   bool get isAppFirstLaunch => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $IntroStateCopyWith<IntroState> get copyWith =>
@@ -451,7 +452,7 @@ abstract class $IntroStateCopyWith<$Res> {
           IntroState value, $Res Function(IntroState) then) =
       _$IntroStateCopyWithImpl<$Res, IntroState>;
   @useResult
-  $Res call({int index, bool isAppFirstLaunch});
+  $Res call({int index, bool isAppFirstLaunch, bool isLoading});
 }
 
 /// @nodoc
@@ -469,6 +470,7 @@ class _$IntroStateCopyWithImpl<$Res, $Val extends IntroState>
   $Res call({
     Object? index = null,
     Object? isAppFirstLaunch = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       index: null == index
@@ -478,6 +480,10 @@ class _$IntroStateCopyWithImpl<$Res, $Val extends IntroState>
       isAppFirstLaunch: null == isAppFirstLaunch
           ? _value.isAppFirstLaunch
           : isAppFirstLaunch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -491,7 +497,7 @@ abstract class _$$_IntroStateCopyWith<$Res>
       __$$_IntroStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int index, bool isAppFirstLaunch});
+  $Res call({int index, bool isAppFirstLaunch, bool isLoading});
 }
 
 /// @nodoc
@@ -507,6 +513,7 @@ class __$$_IntroStateCopyWithImpl<$Res>
   $Res call({
     Object? index = null,
     Object? isAppFirstLaunch = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_IntroState(
       index: null == index
@@ -517,6 +524,10 @@ class __$$_IntroStateCopyWithImpl<$Res>
           ? _value.isAppFirstLaunch
           : isAppFirstLaunch // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -524,17 +535,22 @@ class __$$_IntroStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_IntroState extends _IntroState {
-  const _$_IntroState({required this.index, required this.isAppFirstLaunch})
+  const _$_IntroState(
+      {required this.index,
+      required this.isAppFirstLaunch,
+      required this.isLoading})
       : super._();
 
   @override
   final int index;
   @override
   final bool isAppFirstLaunch;
+  @override
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'IntroState(index: $index, isAppFirstLaunch: $isAppFirstLaunch)';
+    return 'IntroState(index: $index, isAppFirstLaunch: $isAppFirstLaunch, isLoading: $isLoading)';
   }
 
   @override
@@ -544,11 +560,14 @@ class _$_IntroState extends _IntroState {
             other is _$_IntroState &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.isAppFirstLaunch, isAppFirstLaunch) ||
-                other.isAppFirstLaunch == isAppFirstLaunch));
+                other.isAppFirstLaunch == isAppFirstLaunch) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, index, isAppFirstLaunch);
+  int get hashCode =>
+      Object.hash(runtimeType, index, isAppFirstLaunch, isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -560,13 +579,16 @@ class _$_IntroState extends _IntroState {
 abstract class _IntroState extends IntroState {
   const factory _IntroState(
       {required final int index,
-      required final bool isAppFirstLaunch}) = _$_IntroState;
+      required final bool isAppFirstLaunch,
+      required final bool isLoading}) = _$_IntroState;
   const _IntroState._() : super._();
 
   @override
   int get index;
   @override
   bool get isAppFirstLaunch;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_IntroStateCopyWith<_$_IntroState> get copyWith =>
