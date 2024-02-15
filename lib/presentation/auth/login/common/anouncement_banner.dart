@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/domain/announcement/entities/maintenance_item.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -14,28 +15,38 @@ class AnnouncementBannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AnnouncementBloc, AnnouncementState>(
-      buildWhen: (previous, current) =>
-          previous.maintenanceItem.preLoginList !=
-              current.maintenanceItem.preLoginList ||
-          previous.listBannersIdClosed != current.listBannersIdClosed,
-      builder: (context, state) {
-        final list = state.maintenanceItem.preLoginList.where(
-          (element) => !state.listBannersIdClosed.contains(element.id),
-        );
-
-        if (list.isEmpty) {
-          return const SizedBox();
-        }
-
-        return Column(
-          children: list
-              .map(
-                (e) => _ItemAnnouncement(banner: e),
-              )
-              .toList(),
-        );
+    return BlocListener<LoginFormBloc, LoginFormState>(
+      listenWhen: (pre, cur) => pre.currentMarket != cur.currentMarket,
+      listener: (context, state) {
+        context.read<AnnouncementBloc>().add(
+              AnnouncementEvent.getMaintenanceBanners(
+                salesOrg: state.currentMarket.salesOrg,
+              ),
+            );
       },
+      child: BlocBuilder<AnnouncementBloc, AnnouncementState>(
+        buildWhen: (previous, current) =>
+            previous.maintenanceItem.preLoginList !=
+                current.maintenanceItem.preLoginList ||
+            previous.listBannersIdClosed != current.listBannersIdClosed,
+        builder: (context, state) {
+          final list = state.maintenanceItem.preLoginList.where(
+            (element) => !state.listBannersIdClosed.contains(element.id),
+          );
+
+          if (list.isEmpty) {
+            return const SizedBox();
+          }
+
+          return Column(
+            children: list
+                .map(
+                  (e) => _ItemAnnouncement(banner: e),
+                )
+                .toList(),
+          );
+        },
+      ),
     );
   }
 }

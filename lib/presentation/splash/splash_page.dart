@@ -206,9 +206,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   );
                 }
 
-                context.read<AnnouncementBloc>().add(
-                      const AnnouncementEvent.clearBannerId(),
-                    );
+                context.read<AnnouncementBloc>()
+                  ..add(
+                    const AnnouncementEvent.clearBannerId(),
+                  )
+                  ..add(
+                    AnnouncementEvent.getMaintenanceBanners(
+                      salesOrg: appMarket.salesOrg,
+                    ),
+                  );
 
                 context.router.replaceAll(
                   [
@@ -238,16 +244,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               await Future.delayed(const Duration(milliseconds: 500));
               _welcomeUserMessage(state);
             });
-          },
-        ),
-        BlocListener<LoginFormBloc, LoginFormState>(
-          listenWhen: (pre, cur) => pre != cur,
-          listener: (context, state) {
-            context.read<AnnouncementBloc>().add(
-                  AnnouncementEvent.getMaintenanceBanners(
-                    salesOrg: state.currentMarket.salesOrg,
-                  ),
-                );
           },
         ),
         BlocListener<UserBloc, UserState>(
