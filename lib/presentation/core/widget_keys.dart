@@ -1299,6 +1299,8 @@ class WidgetKeys {
       const Key('viewByItemDetailExpandButton');
   static const Key materialListPriceStrikeThrough =
       Key('materialListPriceStrikeThrough');
+  static const Key viewByItemsOrderDetailsReferenceNote =
+      Key('viewByItemsOrderDetailsReferenceNote');
 
   //============================================================
   // View By Orders

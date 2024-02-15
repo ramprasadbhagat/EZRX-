@@ -50,6 +50,7 @@ mixin _$OrderHistoryItem {
   PrincipalData get principalData => throw _privateConstructorUsedError;
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   bool get hidePrice => throw _privateConstructorUsedError;
+  StringValue get referenceNotes => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryItemCopyWith<OrderHistoryItem> get copyWith =>
@@ -93,7 +94,8 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       LineNumber lineNumber,
       PrincipalData principalData,
       String governmentMaterialCode,
-      bool hidePrice});
+      bool hidePrice,
+      StringValue referenceNotes});
 
   $InvoiceDataCopyWith<$Res> get invoiceData;
   $ProductImagesCopyWith<$Res> get productImages;
@@ -144,6 +146,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
     Object? principalData = null,
     Object? governmentMaterialCode = null,
     Object? hidePrice = null,
+    Object? referenceNotes = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -270,6 +273,10 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
+      referenceNotes: null == referenceNotes
+          ? _value.referenceNotes
+          : referenceNotes // ignore: cast_nullable_to_non_nullable
+              as StringValue,
     ) as $Val);
   }
 
@@ -337,7 +344,8 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       LineNumber lineNumber,
       PrincipalData principalData,
       String governmentMaterialCode,
-      bool hidePrice});
+      bool hidePrice,
+      StringValue referenceNotes});
 
   @override
   $InvoiceDataCopyWith<$Res> get invoiceData;
@@ -389,6 +397,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
     Object? principalData = null,
     Object? governmentMaterialCode = null,
     Object? hidePrice = null,
+    Object? referenceNotes = null,
   }) {
     return _then(_$_OrderHistoryItem(
       materialNumber: null == materialNumber
@@ -515,6 +524,10 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
+      referenceNotes: null == referenceNotes
+          ? _value.referenceNotes
+          : referenceNotes // ignore: cast_nullable_to_non_nullable
+              as StringValue,
     ));
   }
 }
@@ -553,7 +566,8 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
       required this.lineNumber,
       required this.principalData,
       required this.governmentMaterialCode,
-      required this.hidePrice})
+      required this.hidePrice,
+      required this.referenceNotes})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
 
@@ -626,10 +640,12 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   final String governmentMaterialCode;
   @override
   final bool hidePrice;
+  @override
+  final StringValue referenceNotes;
 
   @override
   String toString() {
-    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, lineNumber: $lineNumber, principalData: $principalData, governmentMaterialCode: $governmentMaterialCode, hidePrice: $hidePrice)';
+    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, lineNumber: $lineNumber, principalData: $principalData, governmentMaterialCode: $governmentMaterialCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes)';
   }
 
   @override
@@ -694,7 +710,9 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode) &&
             (identical(other.hidePrice, hidePrice) ||
-                other.hidePrice == hidePrice));
+                other.hidePrice == hidePrice) &&
+            (identical(other.referenceNotes, referenceNotes) ||
+                other.referenceNotes == referenceNotes));
   }
 
   @override
@@ -730,7 +748,8 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
         lineNumber,
         principalData,
         governmentMaterialCode,
-        hidePrice
+        hidePrice,
+        referenceNotes
       ]);
 
   @JsonKey(ignore: true)
@@ -772,7 +791,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final LineNumber lineNumber,
       required final PrincipalData principalData,
       required final String governmentMaterialCode,
-      required final bool hidePrice}) = _$_OrderHistoryItem;
+      required final bool hidePrice,
+      required final StringValue referenceNotes}) = _$_OrderHistoryItem;
   _OrderHistoryItem._() : super._();
 
   @override
@@ -837,6 +857,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   String get governmentMaterialCode;
   @override
   bool get hidePrice;
+  @override
+  StringValue get referenceNotes;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryItemCopyWith<_$_OrderHistoryItem> get copyWith =>

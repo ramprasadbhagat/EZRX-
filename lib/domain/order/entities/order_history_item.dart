@@ -49,6 +49,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required PrincipalData principalData,
     required String governmentMaterialCode,
     required bool hidePrice,
+    required StringValue referenceNotes,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -83,6 +84,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         hidePrice: false,
         lineNumber: LineNumber(''),
         principalData: PrincipalData.empty(),
+        referenceNotes: StringValue(''),
       );
 
   bool get isOfferItem => !isBundle && !isBonusMaterial && promoStatus;

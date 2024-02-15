@@ -61,7 +61,8 @@
               "PrincipalCode": "0000100775",
               "mrp": 0,
               "promotype": "",
-              "promoStatus": false
+              "promoStatus": false,
+              "referenceNotes": "Test Delivery Info"
             },
             {
               "poAttachment": null,
@@ -110,7 +111,8 @@
               "PrincipalCode": "0000100775",
               "mrp": 0,
               "promotype": "",
-              "promoStatus": false
+              "promoStatus": false,
+              "referenceNotes": "Test Delivery Info"
             },
             {
               "poAttachment": null,
@@ -159,7 +161,8 @@
               "PrincipalCode": "0000100763",
               "mrp": 70.5,
               "promotype": "",
-              "promoStatus": true
+              "promoStatus": true,
+              "referenceNotes": ""
             },
             {
               "poAttachment": null,
@@ -208,7 +211,8 @@
               "PrincipalCode": "0000100763",
               "mrp": 70.5,
               "promotype": "",
-              "promoStatus": true
+              "promoStatus": true,
+              "referenceNotes": ""
             },
             {
               "poAttachment": null,
@@ -257,7 +261,8 @@
               "PrincipalCode": "0000101308",
               "mrp": 86.67,
               "promotype": "",
-              "promoStatus": false
+              "promoStatus": false,
+              "referenceNotes": "Test Delivery Info"
            }
           ]
         }

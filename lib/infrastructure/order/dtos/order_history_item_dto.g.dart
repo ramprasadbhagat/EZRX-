@@ -43,6 +43,7 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
       lineNumber: json['LineNumber'] as String? ?? '',
       principalCode: json['PrincipalCode'] as String? ?? '',
       hidePrice: json['HidePrice'] as bool? ?? false,
+      referenceNotes: json['referenceNotes'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
@@ -81,4 +82,5 @@ Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
       'LineNumber': instance.lineNumber,
       'PrincipalCode': instance.principalCode,
       'HidePrice': instance.hidePrice,
+      'referenceNotes': instance.referenceNotes,
     };

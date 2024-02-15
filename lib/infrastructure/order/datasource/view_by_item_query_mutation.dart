@@ -84,6 +84,7 @@ class ViewByItemQueryMutation {
         mrp
         promotype
         promoStatus
+        referenceNotes
       }
      
     }

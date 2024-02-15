@@ -86,11 +86,19 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                           ),
                 )
               : const SizedBox.shrink(),
-          //TODO:will add value after getting data  from orderHistoryv2 api for these fields
-          //       BalanceTextRow(
-          //   keyText: 'Reference Note',
-          //   valueText: orderHistoryItem.,
-          // ),
+          if (config.enableReferenceNote)
+            BalanceTextRow(
+              key: WidgetKeys.viewByItemsOrderDetailsReferenceNote,
+              valueFlex: 1,
+              keyText: 'Reference Note',
+              valueText: orderHistoryItem.referenceNotes.displayDashIfEmpty,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+            ),
           if (!config.disablePaymentTermsDisplay)
             LoadingShimmer.withChild(
               enabled:
