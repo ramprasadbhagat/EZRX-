@@ -3338,6 +3338,85 @@ void main() {
             cartProducts: mockCartItems,
           ),
         );
+      });
+
+      testWidgets(
+          'Skip MOV check if cart contains any product with principal code 100822 for SG market',
+          (tester) async {
+        when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+            .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
+        final mockMinistryOfHealthCartItem = mockCartItems.first.copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            principalData: PrincipalData.empty().copyWith(
+              principalCode: PrincipalCode('100822'),
+            ),
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [mockMinistryOfHealthCartItem, mockCartItems.first],
+            salesOrg: fakeSGSalesOrganisation,
+            configs: fakeSGSalesOrgConfigs,
+            subTotal: 10,
+            grandTotal: 20,
+            showErrorMessage: true,
+          ),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [mockMinistryOfHealthCartItem, mockCartItems.first],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final movWarning = find.text(
+          'Please ensure that the order value satisfies the minimum order value of SGD 100.00',
+        );
+
+        expect(movWarning, findsNothing);
+
+        final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+        expect(checkoutButton, findsOneWidget);
+        await tester.tap(checkoutButton);
+        await tester.pumpAndSettle();
+        verify(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+            .called(1);
+      });
+
+      testWidgets(
+          'MOV check if cart does not contains any product with principal code 100822 for SG market',
+          (tester) async {
+        when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+            .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [mockCartItems.first],
+            salesOrg: fakeSGSalesOrganisation,
+            configs: fakeSGSalesOrgConfigs,
+            subTotal: 10,
+            grandTotal: 20,
+            showErrorMessage: true,
+          ),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [mockCartItems.first],
+          ),
+        );
 
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
@@ -3346,6 +3425,12 @@ void main() {
         );
 
         expect(movWarning, findsOneWidget);
+
+        final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+        expect(checkoutButton, findsOneWidget);
+        await tester.tap(checkoutButton);
+        await tester.pumpAndSettle();
+        verifyNever(() => autoRouterMock.pushNamed('orders/cart/checkout'));
       });
 
       testWidgets('BillToInfo test when enablebillto is false', (tester) async {

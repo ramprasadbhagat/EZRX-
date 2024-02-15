@@ -195,7 +195,6 @@ class PriceAggregate with _$PriceAggregate {
   bool get isSpecialMaterial =>
       !materialInfo.isFOCMaterial || !materialInfo.isSampleMaterial;
 
-
   double get finalPrice {
     var finalPrice = 0.0;
 
@@ -630,9 +629,6 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get hasSalesRepPrincipal =>
       materialInfo.principalData.principalCode.salesRepSubmitAllowed;
-
-  bool get hasClientPrincipal =>
-      materialInfo.principalData.principalCode.clientSubmitAllowed;
 
   bool get displayGenericMaterialName =>
       salesOrgConfig.enableGMN && materialInfo.genericMaterialName.isNotEmpty;

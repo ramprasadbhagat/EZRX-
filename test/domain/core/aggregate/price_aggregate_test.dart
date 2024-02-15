@@ -1157,7 +1157,7 @@ void main() {
     );
 
     test(
-      'hasClientPrincipal from PriceAggregate',
+      'hasMinistryOfHealthPrincipalCode from PriceAggregate',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           materialInfo: emptyMaterialInfo.copyWith(
@@ -1167,7 +1167,8 @@ void main() {
           ),
         );
         expect(
-          customPriceAggregate.hasClientPrincipal,
+          customPriceAggregate
+              .materialInfo.principalData.principalCode.isMinistryOfHealth,
           true,
         );
       },
@@ -2261,7 +2262,6 @@ void main() {
           .isNotEmpty,
       true,
     );
-
   });
   test('=> toSubmitMaterialInfo for Other market', () {
     final finalPrice = MaterialPrice(80.0);

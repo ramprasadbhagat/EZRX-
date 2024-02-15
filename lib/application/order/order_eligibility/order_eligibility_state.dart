@@ -30,11 +30,19 @@ class OrderEligibilityState with _$OrderEligibilityState {
         showErrorMessage: false,
       );
 
+  bool get hasMinistryOfHealthProduct => cartItems.any(
+        (element) =>
+            element.materialInfo.principalData.principalCode.isMinistryOfHealth,
+      );
+
   bool get isMinOrderValuePassed {
     if (hasPrincipal) {
       return true;
     }
     if (eligibleOrderType) {
+      return true;
+    }
+    if (hasMinistryOfHealthProduct) {
       return true;
     }
     if (isCartItemsContainsFOCMaterial) {

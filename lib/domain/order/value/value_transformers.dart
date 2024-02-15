@@ -64,7 +64,7 @@ bool materialTaxClassificationIsNoTax(String taxClassification) {
 bool havingPrincipalCodeForAllMaterial(String principalCode) =>
     principalCode == '0000000000';
 
-bool havingSubmitPrincipalForClient(String principalCode) =>
+bool havingMinistryOfHealthPrincipalCode(String principalCode) =>
     principalCode == '100822';
 
 bool havingSubmitPrincipalForSalesRep(String principalCode) =>

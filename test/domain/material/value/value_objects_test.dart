@@ -84,7 +84,7 @@ void main() {
         () async {
       const input = '0000000000100822';
       final principalCode = PrincipalCode(input);
-      final result = principalCode.clientSubmitAllowed;
+      final result = principalCode.isMinistryOfHealth;
       expect(result, true);
     });
 
@@ -93,7 +93,7 @@ void main() {
         () async {
       const input = '0000000000150822';
       final principalCode = PrincipalCode(input);
-      final result = principalCode.clientSubmitAllowed;
+      final result = principalCode.isMinistryOfHealth;
       expect(result, false);
     });
 

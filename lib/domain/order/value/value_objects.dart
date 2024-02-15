@@ -97,8 +97,6 @@ class PrincipalCode extends ValueObject<String> {
 
   String get _shortValue => removeLeadingZero(_valueOrEmpty);
 
-  bool get clientSubmitAllowed => havingSubmitPrincipalForClient(_shortValue);
-
   bool get salesRepSubmitAllowed =>
       havingSubmitPrincipalForSalesRep(_shortValue);
 
@@ -107,6 +105,9 @@ class PrincipalCode extends ValueObject<String> {
   bool get isPnG => havingPnGPrincipalCode(_shortValue);
 
   bool get isAbbot => havingAbbotPrincipalCode(_shortValue);
+
+  bool get isMinistryOfHealth =>
+      havingMinistryOfHealthPrincipalCode(_shortValue);
 }
 
 class MaterialNumber extends ValueObject<String> {
@@ -238,7 +239,6 @@ class MaterialQty extends ValueObject<int> {
   const MaterialQty._(this.value);
 
   int get intValue => value.getOrElse(() => 0);
-
 
   bool get isQtyGreaterThanZero => intValue > 0;
 }
