@@ -1,11 +1,8 @@
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/products/product_search_entry.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
+part of 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 
-class HomeProductSearchBar extends StatelessWidget {
+class _HomeProductSearchBar extends StatelessWidget {
   final bool isCustomerBlocked;
-  const HomeProductSearchBar({Key? key, required this.isCustomerBlocked})
+  const _HomeProductSearchBar({Key? key, required this.isCustomerBlocked})
       : super(key: key);
 
   @override
@@ -30,7 +27,7 @@ class HomeProductSearchBar extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: isCustomerBlocked
-                            ? ZPColors.priceWarning
+                            ? ZPColors.customerBlockedBannerColor
                             : ZPColors.white,
                         offset: const Offset(0, 1),
                       ),

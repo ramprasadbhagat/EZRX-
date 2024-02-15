@@ -38,7 +38,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/orders/widgets/account_suspended_warning.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -327,18 +326,16 @@ class _CartPageState extends State<CartPage> {
                               ),
                       ]
                     : [],
-                customerBlocked: context
+                customerBlockedOrSuspended: context
                     .read<EligibilityBloc>()
                     .state
-                    .shipToInfo
-                    .customerBlock,
+                    .customerBlockOrSuspended,
               ),
               body: Column(
                 children: [
                   AnnouncementWidget(
                     currentPath: context.router.currentPath,
                   ),
-                  const AccountSuspendedBanner(),
                   if (!state.priceUnderLoadingShimmer)
                     const _CartPageInvalidItemsBanner(),
                   const _CartPageCartScrollList(),

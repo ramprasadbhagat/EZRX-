@@ -64,7 +64,6 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
-import 'package:ezrxmobile/presentation/orders/widgets/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
@@ -892,12 +891,29 @@ void main() {
         await tester.pumpWidget(getWidget());
 
         await tester.pump();
-        final accountSuspendedBanner = find.byType(AccountSuspendedBanner);
-        expect(accountSuspendedBanner, findsOneWidget);
-        final accountSuspendedBannerTest = find.textContaining(
-          'Customer is suspended, please contact ZP Admin for support',
+        final accountSuspendedBanner = find.byKey(
+          WidgetKeys.customerBlockedBanner,
         );
-        expect(accountSuspendedBannerTest, findsOneWidget);
+        expect(accountSuspendedBanner, findsOneWidget);
+        expect(
+          find.descendant(
+            of: accountSuspendedBanner,
+            matching: find.text(
+              'Your account is blocked.',
+            ),
+          ),
+          findsOneWidget,
+        );
+
+        expect(
+          find.descendant(
+            of: accountSuspendedBanner,
+            matching: find.text(
+              'To continue using eZRx+, please contact your system administrator.',
+            ),
+          ),
+          findsOneWidget,
+        );
       });
 
       testWidgets('cart page Ships To Code AccountSuspendedBanner ',
@@ -912,12 +928,29 @@ void main() {
         await tester.pumpWidget(getWidget());
 
         await tester.pump();
-        final accountSuspendedBanner = find.byType(AccountSuspendedBanner);
-        expect(accountSuspendedBanner, findsOneWidget);
-        final accountSuspendedBannerTest = find.textContaining(
-          'Customer is suspended, please contact ZP Admin for support',
+        final accountSuspendedBanner = find.byKey(
+          WidgetKeys.customerBlockedBanner,
         );
-        expect(accountSuspendedBannerTest, findsOneWidget);
+        expect(accountSuspendedBanner, findsOneWidget);
+        expect(
+          find.descendant(
+            of: accountSuspendedBanner,
+            matching: find.text(
+              'Your account is blocked.',
+            ),
+          ),
+          findsOneWidget,
+        );
+
+        expect(
+          find.descendant(
+            of: accountSuspendedBanner,
+            matching: find.text(
+              'To continue using eZRx+, please contact your system administrator.',
+            ),
+          ),
+          findsOneWidget,
+        );
       });
 
       testWidgets(

@@ -163,8 +163,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               ),
             ),
           ],
-          customerBlocked:
-              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+          customerBlockedOrSuspended:
+              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
         ),
         floatingActionButton: !_isScrollAtInitialPosition
             ? FloatingActionButton(

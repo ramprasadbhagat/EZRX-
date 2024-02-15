@@ -13,7 +13,6 @@ import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dar
 import 'package:ezrxmobile/presentation/home/widgets/explore_marketplace_banner.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
-import 'package:ezrxmobile/presentation/orders/widgets/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +48,7 @@ class HomeTab extends StatelessWidget {
                 child: CartButton(),
               ),
             ],
-            customerBlocked: state.shipToInfo.customerBlock,
+            customerBlockedOrSuspended: state.customerBlockOrSuspended,
             isSearchBarVisible: state.user.userCanAccessProducts,
           ),
           //SingleChildScrollView and Column is needed
@@ -74,7 +73,6 @@ class HomeTab extends StatelessWidget {
                     key: WidgetKeys.homeTabAnnouncementWidget,
                   ),
                   const EdiUserBanner(),
-                  const AccountSuspendedBanner(),
                   const QuickAccessMenuPanel(),
                   const CarouselBanner(),
                   BlocBuilder<EligibilityBloc, EligibilityState>(

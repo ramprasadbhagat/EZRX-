@@ -43,11 +43,10 @@ class StaticHtmlViewerState extends State<StaticHtmlViewer> {
           ? CustomAppBar.commonAppBar(
               title: Text(context.tr(widget.title)),
               centreTitle: widget.title.isEmpty,
-              customerBlocked: context
+              customerBlockedOrSuspended: context
                   .read<EligibilityBloc>()
                   .state
-                  .shipToInfo
-                  .customerBlock,
+                  .customerBlockOrSuspended,
             )
           : null,
       body: AnnouncementBanner(

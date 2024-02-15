@@ -36,8 +36,8 @@ class InvoiceDetailsPage extends StatelessWidget {
             title: Text(
               context.tr('Invoice details'),
             ),
-            customerBlocked:
-                context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+            customerBlockedOrSuspended:
+                context.read<EligibilityBloc>().state.customerBlockOrSuspended,
           ),
           bottomNavigationBar: context
                       .read<EligibilityBloc>()

@@ -30,8 +30,8 @@ class ReturnRequestSummaryByItemDetails extends StatelessWidget {
         title: Text(
           context.tr('Return item details'),
         ),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: BlocConsumer<ReturnSummaryDetailsBloc, ReturnSummaryDetailsState>(
         listenWhen: (previous, current) =>

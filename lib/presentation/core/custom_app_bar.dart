@@ -1,13 +1,17 @@
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
-import 'package:ezrxmobile/presentation/home/widgets/customer_blocked_banner.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/color_container.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/products/product_search_entry.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+
+part 'package:ezrxmobile/presentation/core/customer_blocked_banner.dart';
+part 'package:ezrxmobile/presentation/core/home_product_search_bar.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final bool automaticallyImplyLeading;
   final bool isSearchBarVisible;
-  final CustomerBlock customerBlocked;
+  final bool customerBlockedOrSuspended;
   final Color backGroundColor;
   final Widget? leadingWidget;
   final double? leadingWidth;
@@ -26,7 +30,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     required this.backGroundColor,
     required this.centreTitle,
     required this.title,
-    required this.customerBlocked,
+    required this.customerBlockedOrSuspended,
     required this.appBarHeight,
     required this.titleSpacing,
     this.leadingWidget,
@@ -36,27 +40,25 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   factory CustomAppBar.homeTabAppBar({
     required Widget title,
-    required CustomerBlock customerBlocked,
+    required bool customerBlockedOrSuspended,
     required bool isSearchBarVisible,
     required List<Widget> actionWidget,
   }) =>
       CustomAppBar._(
         title: title,
         automaticallyImplyLeading: false,
-        customerBlocked: customerBlocked,
+        customerBlockedOrSuspended: customerBlockedOrSuspended,
         isSearchBarVisible: isSearchBarVisible,
         actionWidget: actionWidget,
         backGroundColor: ZPColors.primary,
         centreTitle: false,
         titleSpacing: 0,
-        appBarHeight: isSearchBarVisible
-            ? customerBlocked.homeAppBarHeight
-            : customerBlocked.appBarHeight,
+        appBarHeight: customerBlockedOrSuspended ? 195.0 : 121.0,
       );
 
   factory CustomAppBar.commonAppBar({
     Widget? title,
-    required CustomerBlock customerBlocked,
+    required bool customerBlockedOrSuspended,
     bool automaticallyImplyLeading = true,
     bool centreTitle = false,
     List<Widget> actionWidget = const [],
@@ -69,33 +71,33 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       CustomAppBar._(
         title: title,
         automaticallyImplyLeading: automaticallyImplyLeading,
-        customerBlocked: customerBlocked,
+        customerBlockedOrSuspended: customerBlockedOrSuspended,
         isSearchBarVisible: false,
         actionWidget: actionWidget,
         backGroundColor: backGroundColor,
         centreTitle: centreTitle,
         leadingWidget: leadingWidget,
         leadingWidth: leadingWidth,
-        appBarHeight: customerBlocked.appBarHeight,
+        appBarHeight: customerBlockedOrSuspended ? 140.0 : 56.0,
         key: key,
         titleSpacing: titleSpacing,
       );
 
   factory CustomAppBar.ordersTabAppBar({
     required Widget title,
-    required CustomerBlock customerBlocked,
+    required bool customerBlockedOrSuspended,
     Key? key,
   }) =>
       CustomAppBar._(
         title: title,
         automaticallyImplyLeading: false,
-        customerBlocked: customerBlocked,
+        customerBlockedOrSuspended: customerBlockedOrSuspended,
         isSearchBarVisible: false,
         actionWidget: const [],
         backGroundColor: ZPColors.primary,
         centreTitle: false,
-        appBarHeight: customerBlocked.appBarHeight + 50.0,
-        toolBarHeight: customerBlocked.appBarHeight + 50.0,
+        appBarHeight: (customerBlockedOrSuspended ? 140.0 : 56.0) + 50.0,
+        toolBarHeight: (customerBlockedOrSuspended ? 140.0 : 56.0) + 50.0,
         key: key,
         titleSpacing: 0,
       );
@@ -117,10 +119,12 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         child: Column(
           children: [
             if (isSearchBarVisible)
-              HomeProductSearchBar(
-                isCustomerBlocked: customerBlocked.isCustomerBlocked,
+              _HomeProductSearchBar(
+                isCustomerBlocked: customerBlockedOrSuspended,
               ),
-            const CustomerBlockedBanner(),
+            _CustomerBlockedBanner(
+              isCustomerBlocked: customerBlockedOrSuspended,
+            ),
           ],
         ),
       ),

@@ -41,8 +41,8 @@ class ViewByOrderDetailsPage extends StatelessWidget {
         return Scaffold(
           appBar: CustomAppBar.commonAppBar(
             title: Text(context.tr('Order Details')),
-            customerBlocked:
-                context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+            customerBlockedOrSuspended:
+                context.read<EligibilityBloc>().state.customerBlockOrSuspended,
           ),
           body: AnnouncementBanner(
             currentPath: context.router.currentPath,

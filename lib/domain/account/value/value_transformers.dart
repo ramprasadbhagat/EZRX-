@@ -621,12 +621,6 @@ num countryOrderTaxValue(String country) {
 
 bool checkIfCustomerIsBlocked(String value) => value == 'blocked';
 
-double getCombinedAppBarHeight(bool value, bool isFromHomePage) {
-  final baseHeight = isFromHomePage ? 195.0 : 140.0;
-  final alternativeHeight = isFromHomePage ? 121.0 : 56.0;
-
-  return value ? baseHeight : alternativeHeight;
-}
 
 bool salesOrgIsPhMdi(String salesOrg) => salesOrg == '2501';
 

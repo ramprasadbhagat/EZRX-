@@ -31,8 +31,8 @@ class UserRestrictionListPage extends StatelessWidget {
       key: WidgetKeys.userRestrictionListPage,
       appBar: CustomAppBar.commonAppBar(
         title: const UserRestrictionListSearch(),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

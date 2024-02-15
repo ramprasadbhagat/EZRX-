@@ -57,8 +57,8 @@ class _StatementAccountsPageState extends State<StatementAccountsPage> {
         title: Text(
           context.tr('Statement of accounts'),
         ),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       floatingActionButton: NewPaymentButton.scale(
         controller: _scrollController,

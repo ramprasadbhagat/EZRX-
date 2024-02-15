@@ -41,7 +41,6 @@ import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dar
 import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
-import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
 import 'package:ezrxmobile/presentation/home/widgets/explore_marketplace_banner.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
@@ -623,7 +622,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
-        final productSearchBar = find.byType(HomeProductSearchBar);
+        final productSearchBar = find.byKey(WidgetKeys.homeProductSearchBar);
         expect(productSearchBar, findsNothing);
       });
 
@@ -699,7 +698,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
-        final productSearchBar = find.byType(HomeProductSearchBar);
+        final productSearchBar = find.byKey(WidgetKeys.homeProductSearchBar);
         expect(productSearchBar, findsOneWidget);
       });
 
@@ -786,7 +785,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
-        final productSearchBar = find.byType(HomeProductSearchBar);
+        final productSearchBar = find.byKey(WidgetKeys.homeProductSearchBar);
         expect(productSearchBar, findsOneWidget);
       });
 
@@ -856,7 +855,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
-        final productSearchBar = find.byType(HomeProductSearchBar);
+        final productSearchBar = find.byKey(WidgetKeys.homeProductSearchBar);
         expect(productSearchBar, findsNothing);
       });
 
@@ -1001,6 +1000,43 @@ void main() {
         });
       },
     );
+
+    testWidgets('Home page Ships To Code AccountSuspendedBanner ',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            status: Status('01'),
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+
+      await tester.pump();
+      final accountSuspendedBanner = find.byKey(WidgetKeys.customerBlockedBanner);
+      expect(accountSuspendedBanner, findsOneWidget);
+
+      expect(
+        find.descendant(
+          of: accountSuspendedBanner,
+          matching: find.text(
+            'Your account is blocked.',
+          ),
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.descendant(
+          of: accountSuspendedBanner,
+          matching: find.text(
+            'To continue using eZRx+, please contact your system administrator.',
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+
     // testWidgets(
     //   'Hide paymentsExpansionTile when enablePayments is false',
     //   (WidgetTester tester) async {

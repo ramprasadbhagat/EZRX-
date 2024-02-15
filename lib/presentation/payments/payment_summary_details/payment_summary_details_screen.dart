@@ -64,8 +64,8 @@ class PaymentSummaryDetailsPage extends StatelessWidget {
             context.tr('Payment details'),
             style: Theme.of(context).textTheme.labelLarge,
           ),
-          customerBlocked:
-              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+          customerBlockedOrSuspended:
+              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
           leadingWidget: IconButton(
             key: WidgetKeys.paymentSummaryDetailsBackButton,
             icon: const Icon(Icons.arrow_back_ios_sharp),

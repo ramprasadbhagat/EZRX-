@@ -846,6 +846,42 @@ void main() {
           expect(defaultDescription, findsOneWidget);
         },
       );
+      testWidgets('Ships To Code AccountSuspendedBanner ', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              status: Status('01'),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+
+        await tester.pump();
+        final accountSuspendedBanner = find.byKey(
+          WidgetKeys.customerBlockedBanner,
+        );
+        expect(accountSuspendedBanner, findsOneWidget);
+
+        expect(
+          find.descendant(
+            of: accountSuspendedBanner,
+            matching: find.text(
+              'Your account is blocked.',
+            ),
+          ),
+          findsOneWidget,
+        );
+
+        expect(
+          find.descendant(
+            of: accountSuspendedBanner,
+            matching: find.text(
+              'To continue using eZRx+, please contact your system administrator.',
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
     },
   );
 }

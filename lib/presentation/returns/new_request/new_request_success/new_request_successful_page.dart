@@ -48,8 +48,8 @@ class NewRequestSuccessfulPage extends StatelessWidget {
         title: Text(
           context.tr('Return request submitted'),
         ),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
         leadingWidget: IconButton(
           onPressed: () => context.router.pop(),
           icon: const Icon(Icons.close),

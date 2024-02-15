@@ -1,21 +1,14 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/presentation/core/color_container.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 
-class CustomerBlockedBanner extends StatelessWidget {
-  const CustomerBlockedBanner({Key? key}) : super(key: key);
+class _CustomerBlockedBanner extends StatelessWidget {
+
+  final bool isCustomerBlocked;
+  const _CustomerBlockedBanner({Key? key, required this.isCustomerBlocked})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<EligibilityBloc, EligibilityState>(
-      buildWhen: (previous, current) =>
-          previous.shipToInfo.customerBlock != current.shipToInfo.customerBlock,
-      builder: (context, state) {
-        return state.shipToInfo.customerBlock.isCustomerBlocked
+    return isCustomerBlocked
             ? ColorContainer(
                 key: WidgetKeys.customerBlockedBanner,
                 color: ZPColors.customerBlockedBannerColor,
@@ -39,8 +32,6 @@ class CustomerBlockedBanner extends StatelessWidget {
                   ),
                 ],
               )
-            : const SizedBox.shrink();
-      },
-    );
+        : const SizedBox.shrink();
   }
 }

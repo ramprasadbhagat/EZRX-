@@ -29,8 +29,8 @@ class PolicyConfigurationPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar.commonAppBar(
         title: const _PolicyConfigurationSearch(),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

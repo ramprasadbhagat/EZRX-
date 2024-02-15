@@ -33,7 +33,7 @@ class OrdersTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
-          previous.shipToInfo.customerBlock != current.shipToInfo.customerBlock,
+          previous.customerBlockOrSuspended != current.customerBlockOrSuspended,
       builder: (context, state) {
         return Scaffold(
           appBar: CustomAppBar.ordersTabAppBar(
@@ -56,7 +56,7 @@ class OrdersTab extends StatelessWidget {
                 ),
               ],
             ),
-            customerBlocked: state.shipToInfo.customerBlock,
+            customerBlockedOrSuspended: state.customerBlockOrSuspended,
           ),
           body: Column(
             children: [

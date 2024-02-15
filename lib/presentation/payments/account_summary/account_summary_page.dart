@@ -41,8 +41,8 @@ class AccountSummary extends StatelessWidget {
           context.tr('Account Summary'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: Column(
         children: [

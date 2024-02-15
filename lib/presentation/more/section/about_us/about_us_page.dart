@@ -76,8 +76,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
           title: Text(
             context.tr('About Us'),
           ),
-          customerBlocked:
-              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+          customerBlockedOrSuspended:
+              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
         ),
         body: BlocConsumer<AboutUsBloc, AboutUsState>(
           listenWhen: (previous, current) =>

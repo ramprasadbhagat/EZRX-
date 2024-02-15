@@ -93,8 +93,8 @@ class NotificationSettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar.commonAppBar(
         title: Text(context.tr('Notifications')),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: BlocConsumer<NotificationSettingsBloc, NotificationSettingsState>(
         listenWhen: (previous, current) =>

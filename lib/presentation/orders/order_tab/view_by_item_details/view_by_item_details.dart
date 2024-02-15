@@ -55,8 +55,8 @@ class ViewByItemDetailsPage extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar.commonAppBar(
           title: Text(context.tr('Item Details')),
-          customerBlocked:
-              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+          customerBlockedOrSuspended:
+              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
         ),
         bottomNavigationBar:
             context.read<EligibilityBloc>().state.user.role.type.isSalesRepRole

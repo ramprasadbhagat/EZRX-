@@ -87,8 +87,8 @@ class NewPaymentPage extends StatelessWidget {
             title: Text(
               context.tr('New payment'),
             ),
-            customerBlocked:
-                context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+            customerBlockedOrSuspended:
+                context.read<EligibilityBloc>().state.customerBlockOrSuspended,
             leadingWidget: _PreviousButton(
               tabController: tabController,
               step: step,

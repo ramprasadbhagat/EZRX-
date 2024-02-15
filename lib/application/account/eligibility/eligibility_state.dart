@@ -328,4 +328,8 @@ class EligibilityState with _$EligibilityState {
 
     return true;
   }
+
+  bool get customerBlockOrSuspended =>
+      isAccountSuspended || shipToInfo.customerBlock.isCustomerBlocked;
+
 }

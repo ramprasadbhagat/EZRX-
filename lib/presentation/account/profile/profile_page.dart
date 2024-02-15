@@ -34,8 +34,8 @@ class ProfilePage extends StatelessWidget {
       key: WidgetKeys.profilePage,
       appBar: CustomAppBar.commonAppBar(
         title: Text(context.tr('Profile')),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 12, right: 12, top: 12),

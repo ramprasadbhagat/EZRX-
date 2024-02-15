@@ -35,8 +35,8 @@ class AnnouncementsPage extends StatelessWidget {
         title: Text(
           context.tr('Announcements & articles'),
         ),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: Column(
         mainAxisSize: MainAxisSize.min,

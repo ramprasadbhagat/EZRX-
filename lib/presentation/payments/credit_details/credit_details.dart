@@ -21,8 +21,8 @@ class CreditDetailsPage extends StatelessWidget {
         title: Text(
           context.tr('Credit Details'),
         ),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: BlocBuilder<CreditAndInvoiceDetailsBloc,
           CreditAndInvoiceDetailsState>(

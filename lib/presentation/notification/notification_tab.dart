@@ -42,8 +42,8 @@ class NotificationTab extends StatelessWidget {
         actionWidget: const [
           _DeleteNotificationButton(),
         ],
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: BlocBuilder<AnnouncementBloc, AnnouncementState>(
         buildWhen: (pre, cur) => pre.maintenanceItem != cur.maintenanceItem,

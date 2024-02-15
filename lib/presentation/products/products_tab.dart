@@ -36,7 +36,7 @@ class ProductsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
-          previous.shipToInfo.customerBlock != current.shipToInfo.customerBlock,
+          previous.customerBlockOrSuspended != current.customerBlockOrSuspended,
       builder: (context, state) {
         return Scaffold(
           key: WidgetKeys.materialListPage,
@@ -53,7 +53,7 @@ class ProductsTab extends StatelessWidget {
                 child: CartButton(),
               ),
             ],
-            customerBlocked: state.shipToInfo.customerBlock,
+            customerBlockedOrSuspended: state.customerBlockOrSuspended,
           ),
           body: BlocBuilder<MaterialListBloc, MaterialListState>(
             buildWhen: (previous, current) =>

@@ -100,8 +100,8 @@ class _ReturnRootState extends State<ReturnRoot> {
       key: WidgetKeys.returnRootPage,
       appBar: CustomAppBar.commonAppBar(
         title: Text(context.tr('Returns')),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: Column(
         mainAxisSize: MainAxisSize.min,

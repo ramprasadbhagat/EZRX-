@@ -41,8 +41,8 @@ class FAQPage extends StatelessWidget {
               size: 30,
             ),
           ),
-          customerBlocked:
-              context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+          customerBlockedOrSuspended:
+              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
         ),
         body: BlocBuilder<FaqBloc, FaqState>(
           buildWhen: (previous, current) =>

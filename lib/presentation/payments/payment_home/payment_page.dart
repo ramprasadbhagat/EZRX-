@@ -97,8 +97,8 @@ class PaymentPage extends StatelessWidget {
       appBar: CustomAppBar.commonAppBar(
         key: WidgetKeys.paymentHomeAppBar,
         title: Text(context.tr('Payments')),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       bottomNavigationBar: BlocListener<NewPaymentBloc, NewPaymentState>(
         listenWhen: (previous, current) =>

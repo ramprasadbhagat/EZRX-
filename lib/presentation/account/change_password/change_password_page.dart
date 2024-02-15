@@ -37,8 +37,8 @@ class ChangePasswordPage extends StatelessWidget {
             context.router.pop();
           },
         ),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

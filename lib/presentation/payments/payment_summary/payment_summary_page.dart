@@ -76,8 +76,8 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
           context.tr('Payment Summary'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
-        customerBlocked:
-            context.read<EligibilityBloc>().state.shipToInfo.customerBlock,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
         actionWidget: const [_PaymentSummaryDownloadButton()],
       ),
       floatingActionButton: NewPaymentButton.scale(

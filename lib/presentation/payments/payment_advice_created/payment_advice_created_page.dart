@@ -180,11 +180,10 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
                       ),
                     )
                   : const SizedBox.shrink(),
-              customerBlocked: context
+              customerBlockedOrSuspended: context
                   .read<EligibilityBloc>()
                   .state
-                  .shipToInfo
-                  .customerBlock,
+                  .customerBlockOrSuspended,
             ),
             body:
                 state.isFetchingInvoiceInfoPdf || state.isCreatingVirtualAccount
