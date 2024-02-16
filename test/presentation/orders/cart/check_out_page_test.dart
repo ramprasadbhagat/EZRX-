@@ -670,6 +670,93 @@ void main() {
         }
       },
     );
+
+    testWidgets(
+      '=> test Max character length of po reference input field',
+      (tester) async {
+        const textOfLength35 = 'fake-text-fake-text-fake-----------';
+        const textOfLengthGreaterThan35 =
+            'fake-text-fake-text-fake------------------';
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final pOReferenceKeyFinder =
+            find.byKey(WidgetKeys.genericKey(key: 'pOReferenceKey'));
+        expect(pOReferenceKeyFinder, findsOneWidget);
+
+        await tester.enterText(
+          pOReferenceKeyFinder,
+          textOfLength35,
+        );
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+        expect(
+          find.text(textOfLength35),
+          findsOneWidget,
+        );
+        await tester.enterText(
+          pOReferenceKeyFinder,
+          textOfLengthGreaterThan35,
+        );
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+        expect(
+          find.text(textOfLengthGreaterThan35),
+          findsNothing,
+        );
+      },
+    );
+
+    testWidgets(
+      '=> test Max character length of Delivery instructions input field',
+      (tester) async {
+        const textOfLength132 =
+            'fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-ake----';
+        const textOfLengthGreaterThan132 =
+            'fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-text-fake-ake---------';
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final deliveryInstructionField =
+            find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey'));
+        expect(deliveryInstructionField, findsOneWidget);
+
+        await tester.enterText(
+          deliveryInstructionField,
+          textOfLength132,
+        );
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+        expect(
+          find.text(textOfLength132),
+          findsOneWidget,
+        );
+        await tester.enterText(
+          deliveryInstructionField,
+          textOfLengthGreaterThan132,
+        );
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+        expect(
+          find.text(textOfLengthGreaterThan132),
+          findsNothing,
+        );
+      },
+    );
     testWidgets(
       '=> test Delivery Date ',
       (tester) async {

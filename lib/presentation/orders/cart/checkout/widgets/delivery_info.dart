@@ -87,6 +87,7 @@ class _DeliveryInfoState extends State<_DeliveryInfo> {
                                 focusNode: widget.focusNodes[
                                         DeliveryInfoLabel.poReference] ??
                                     FocusNode(),
+                                maxLength: 35,
                               ),
                               if (config.enableFutureDeliveryDay)
                                 const _RequestDeliveryDate(),
@@ -138,6 +139,7 @@ class _DeliveryInfoState extends State<_DeliveryInfo> {
                                   focusNode: widget.focusNodes[DeliveryInfoLabel
                                           .deliveryInstruction] ??
                                       FocusNode(),
+                                  maxLength: 132,
                                 ),
                               if (config.showPOAttachment)
                                 const PoAttachmentUpload(),
@@ -259,6 +261,8 @@ class _TextFormFieldState extends State<_TextFormField> {
                   );
             },
             decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.only(left: 10, top: 12, bottom: 12),
               hintText: context.tr(widget.hintText),
               suffixIcon: state.isLoading
                   ? const Padding(
