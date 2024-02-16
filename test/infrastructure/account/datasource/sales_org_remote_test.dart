@@ -32,13 +32,15 @@ void main() {
   final dioAdapter = DioAdapter(dio: dio);
   final service = HttpService.mockDio(dio);
   final remoteConfigService = RemoteConfigServiceMock();
-  const fakeConfigValue = true;
+  const fakeMarket = 'fake-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      when(() => remoteConfigService.marketPlaceConfig)
-          .thenReturn(fakeConfigValue);
+      when(() => remoteConfigService.enableMarketPlaceMarkets)
+          .thenReturn(fakeEnableMarketPlaceMarkets);
       remoteDataSource = SalesOrgRemoteDataSource(
         httpService: service,
         salesOrgQueryMutation: SalesOrgQueryMutation(),
@@ -74,7 +76,10 @@ void main() {
             },
           }),
         );
-        final result = await remoteDataSource.getConfig(salesOrg: saleOrgName);
+        final result = await remoteDataSource.getConfig(
+          salesOrg: saleOrgName,
+          market: fakeMarket,
+        );
         final resTest = SalesOrganisationConfigsDto.fromJson(
           res['data']['salesOrgConfigs'][0],
         ).toDomain();
@@ -104,7 +109,10 @@ void main() {
             },
           }),
         );
-        final result = await remoteDataSource.getConfig(salesOrg: saleOrgName);
+        final result = await remoteDataSource.getConfig(
+          salesOrg: saleOrgName,
+          market: fakeMarket,
+        );
 
         expect(result, SalesOrganisationConfigs.empty());
       },
@@ -137,7 +145,10 @@ void main() {
           }),
         );
         await remoteDataSource
-            .getConfig(salesOrg: saleOrgName)
+            .getConfig(
+          salesOrg: saleOrgName,
+          market: fakeMarket,
+        )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(SalesOrganisationConfigs.empty());
@@ -169,7 +180,10 @@ void main() {
           }),
         );
         await remoteDataSource
-            .getConfig(salesOrg: saleOrgName)
+            .getConfig(
+          salesOrg: saleOrgName,
+          market: fakeMarket,
+        )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(SalesOrganisationConfigs.empty());

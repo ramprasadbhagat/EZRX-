@@ -624,6 +624,8 @@ SalesOrg marketToSalesOrg(String market) {
     'kr': '3101',
     'kh': '1500',
     'id': '1900',
+    //TODO: Revisit to update the value when HK has its own sales org
+    'hk': '2001',
   };
 
   return SalesOrg(marketSalesOrgMap[market] ?? 'Unknown');

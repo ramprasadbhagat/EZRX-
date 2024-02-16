@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_remote.dart';
@@ -16,6 +17,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
@@ -38,6 +40,7 @@ void main() async {
   late ProductSuggestionHistoryStorage storage;
   late ProductSearchLocalDataSource localDataSource;
   late ProductSearchRemoteDataSource remoteDataSource;
+  late DeviceStorage deviceStorage;
 
   const fakeException = 'fake-exception';
   final fakeSearchKey = SearchKey('fake');
@@ -45,19 +48,20 @@ void main() async {
   const fakeOffset = 10;
   final fakeMaterialResponse =
       await ProductSearchLocalDataSource().getSearchedProductList();
-
-  setUpAll(() async {});
+  const fakeMarket = 'fake-market';
 
   setUp(() async {
     mockConfig = MockConfig();
     localDataSource = ProductSearchLocalDataSourceMock();
     remoteDataSource = ProductSearchRemoteDataSourceMock();
     storage = ProductSuggestionHistoryStorageMock();
+    deviceStorage = DeviceStorageMock();
     repository = ProductSearchRepository(
       config: mockConfig,
       productSuggestionHistoryStorage: storage,
       localDataSource: localDataSource,
       remoteDataSource: remoteDataSource,
+      deviceStorage: deviceStorage,
     );
   });
 
@@ -145,6 +149,7 @@ void main() async {
 
       test('Failure in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -157,6 +162,7 @@ void main() async {
             searchKey: '',
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             isCovidSelected: false,
+            market: fakeMarket,
           ),
         ).thenThrow(fakeException);
 
@@ -175,6 +181,7 @@ void main() async {
 
       test('Failure when response is empty in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -187,6 +194,7 @@ void main() async {
             searchKey: '',
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             isCovidSelected: false,
+            market: fakeMarket,
           ),
         ).thenAnswer((_) async => fakeMaterialResponse.copyWith(products: []));
 
@@ -208,6 +216,7 @@ void main() async {
 
       test('Success when response is not empty in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -220,6 +229,7 @@ void main() async {
             searchKey: '',
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             isCovidSelected: false,
+            market: fakeMarket,
           ),
         ).thenAnswer((_) async => fakeMaterialResponse);
 
@@ -280,6 +290,7 @@ void main() async {
       test('Failure in remote when get and put keyword failure', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(() => storage.getAllSearchKey()).thenThrow(fakeException);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => storage.putSearchKey(
             searchKeyList: ProductSuggestionHistoryDto.fromDomain(
@@ -299,6 +310,7 @@ void main() async {
             searchKey: fakeSearchKey.getOrDefaultValue(''),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             isCovidSelected: false,
+            market: fakeMarket,
           ),
         ).thenThrow(fakeException);
 
@@ -334,6 +346,7 @@ void main() async {
             ),
           ),
         ).thenAnswer((_) => Future.value());
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -346,6 +359,7 @@ void main() async {
             searchKey: fakeSearchKey.getOrDefaultValue(''),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             isCovidSelected: false,
+            market: fakeMarket,
           ),
         ).thenThrow(fakeException);
 
@@ -381,6 +395,7 @@ void main() async {
             ),
           ),
         ).thenAnswer((_) => Future.value());
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => remoteDataSource.getSearchedMaterialList(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -393,6 +408,7 @@ void main() async {
             searchKey: fakeSearchKey.getOrDefaultValue(''),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             isCovidSelected: false,
+            market: fakeMarket,
           ),
         ).thenAnswer((_) async => fakeMaterialResponse);
 

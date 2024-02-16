@@ -36,13 +36,16 @@ void main() {
   final dioAdapter = DioAdapter(dio: dio);
   final service = HttpService.mockDio(dio);
   final remoteConfigService = RemoteConfigServiceMock();
-  const fakeConfigValue = true;
+
+  const fakeMarket = 'fake-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      when(() => remoteConfigService.marketPlaceConfig)
-          .thenReturn(fakeConfigValue);
+      when(() => remoteConfigService.enableMarketPlaceMarkets)
+          .thenReturn(fakeEnableMarketPlaceMarkets);
       remoteDataSource = UserRemoteDataSource(
         httpService: service,
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
@@ -76,7 +79,10 @@ void main() {
             'variables': {'id': userId, 'ignoreCustomerCode': true},
           }),
         );
-        final result = await remoteDataSource.getUser(userId: userId);
+        final result = await remoteDataSource.getUser(
+          userId: userId,
+          market: fakeMarket,
+        );
         final resTest = UserDto.fromJson(res['data']['user']).toDomain();
         expect(result.fullName, resTest.fullName);
       },
@@ -104,7 +110,10 @@ void main() {
           }),
         );
         await remoteDataSource
-            .getUser(userId: userId)
+            .getUser(
+          userId: userId,
+          market: fakeMarket,
+        )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(User.empty());
@@ -132,7 +141,10 @@ void main() {
           }),
         );
         await remoteDataSource
-            .getUser(userId: userId)
+            .getUser(
+          userId: userId,
+          market: fakeMarket,
+        )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(User.empty());

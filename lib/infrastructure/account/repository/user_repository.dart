@@ -19,6 +19,7 @@ import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart'
 import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:flutter/foundation.dart';
@@ -35,6 +36,7 @@ class UserRepository implements IUserRepository {
   final DatadogService datadogService;
   final LanguageLocalDataSource languageLocalDataSource;
   final LanguageRemoteDataSource languageRemoteDataSource;
+  final DeviceStorage deviceStorage;
 
   UserRepository({
     required this.config,
@@ -48,6 +50,7 @@ class UserRepository implements IUserRepository {
     required this.datadogService,
     required this.languageLocalDataSource,
     required this.languageRemoteDataSource,
+    required this.deviceStorage,
   });
 
   @override
@@ -63,8 +66,10 @@ class UserRepository implements IUserRepository {
     }
     try {
       final token = await tokenStorage.get();
-      final user =
-          await remoteDataSource.getUser(userId: token.toDomain().userId);
+      final user = await remoteDataSource.getUser(
+        userId: token.toDomain().userId,
+        market: deviceStorage.currentMarket(),
+      );
       await firebaseAnalyticsService.analytics.setUserId(id: user.id);
       // await firebaseAnalyticsService.analytics.setUserProperty(
       //   name: user.username.getOrCrash(),

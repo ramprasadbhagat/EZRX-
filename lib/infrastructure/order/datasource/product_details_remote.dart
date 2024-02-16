@@ -33,10 +33,12 @@ class ProductDetailRemoteDataSource {
     required String salesOrg,
     required String customerCode,
     required String shipToCode,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = productDetailQuery
-          .getMaterialDetails(remoteConfigService.marketPlaceConfig);
+      final queryData = productDetailQuery.getMaterialDetails(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
 
       final variables = {
         'materialNumber': materialNumber,
@@ -67,10 +69,12 @@ class ProductDetailRemoteDataSource {
     required String shipToCode,
     required String principalCode,
     required String salesOrg,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = productDetailQuery
-          .getSimilarProductQuery(remoteConfigService.marketPlaceConfig);
+      final queryData = productDetailQuery.getSimilarProductQuery(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
 
       final variables = {
         'after': 0,

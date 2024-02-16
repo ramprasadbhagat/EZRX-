@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
@@ -26,6 +27,7 @@ class MaterialListRepository implements IMaterialListRepository {
   final MaterialListRemoteDataSource materialListRemoteDataSource;
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
+  final DeviceStorage deviceStorage;
 
   MaterialListRepository({
     required this.config,
@@ -33,6 +35,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required this.materialListRemoteDataSource,
     required this.stockInfoLocalDataSource,
     required this.stockInfoRemoteDataSource,
+    required this.deviceStorage,
   });
 
   @override
@@ -85,6 +88,7 @@ class MaterialListRepository implements IMaterialListRepository {
             .toList(),
         isComboOffers: selectedMaterialFilter.comboOffers,
         showSampleItem: false,
+        market: deviceStorage.currentMarket(),
       );
 
       final stockInfoList = await getStockInfoList(
@@ -180,6 +184,7 @@ class MaterialListRepository implements IMaterialListRepository {
         offset: offset,
         principalCodeList: principles,
         language: user.preferredLanguage.languageCode,
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(materialListData);
@@ -207,10 +212,10 @@ class MaterialListRepository implements IMaterialListRepository {
       try {
         final stockInfoList =
             await stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers:
-              materials
+          materialNumbers: materials
               .where((element) => element.type.typeMaterial)
-              .map((e) => e.materialNumber.getOrCrash()).toList(),
+              .map((e) => e.materialNumber.getOrCrash())
+              .toList(),
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
         );
@@ -283,6 +288,7 @@ class MaterialListRepository implements IMaterialListRepository {
           shipToCode: shipToInfo.shipToCustomerCode,
           type: type,
           language: language.languageCode,
+          market: deviceStorage.currentMarket(),
         );
 
         return Right(materialData);
@@ -339,6 +345,7 @@ class MaterialListRepository implements IMaterialListRepository {
         salesDeal: [],
         isComboOffers: false,
         showSampleItem: true,
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(materialListData);

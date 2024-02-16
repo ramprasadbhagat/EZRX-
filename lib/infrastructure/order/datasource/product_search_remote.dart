@@ -37,10 +37,12 @@ class ProductSearchRemoteDataSource {
     required String searchKey,
     required String eanNumber,
     required bool? isCovidSelected,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = materialListQuery
-          .getProductQuery(remoteConfigService.marketPlaceConfig);
+      final queryData = materialListQuery.getProductQuery(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
 
       final variables = {
         'request': {

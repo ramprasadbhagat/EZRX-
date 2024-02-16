@@ -17,6 +17,7 @@ import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart'
 import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -24,6 +25,8 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/mock_other.dart';
 
 class ConfigMock extends Mock implements Config {}
 
@@ -73,9 +76,11 @@ void main() {
   late LanguageLocalDataSource languageLocalDataSource;
   late LanguageRemoteDataSource languageRemoteDataSource;
   late UpdateLanguageResponse updateLanguageResponseMock;
+  late DeviceStorage deviceStorageMock;
   final error = Error();
   final mockException = MockException(message: 'exception');
   final locale = Language.vietnamese();
+  const mockMarket = 'mock-market';
   setUpAll(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
@@ -99,6 +104,7 @@ void main() {
       datadogServiceMock = DatadogServiceMock();
       languageLocalDataSource = LanguageLocalDataSourceMock();
       languageRemoteDataSource = LanguageRemoteDataSourceMock();
+      deviceStorageMock = DeviceStorageMock();
       repository = UserRepository(
         clevertapService: mockClevertapService,
         firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
@@ -111,6 +117,7 @@ void main() {
         datadogService: datadogServiceMock,
         languageLocalDataSource: languageLocalDataSource,
         languageRemoteDataSource: languageRemoteDataSource,
+        deviceStorage: deviceStorageMock,
       );
       updateLanguageResponseMock =
           await LanguageLocalDataSource().getCustomerLicense();
@@ -363,8 +370,13 @@ void main() {
         when(() => tokenStorageMock.get()).thenAnswer(
           (_) async => JWTDto(access: rootAdminToken, refresh: refreshToken),
         );
-        when(() => remoteDataSourceMock.getUser(userId: '11461'))
-            .thenAnswer((_) async => User.empty());
+        when(() => deviceStorageMock.currentMarket()).thenReturn(mockMarket);
+        when(
+          () => remoteDataSourceMock.getUser(
+            userId: '11461',
+            market: mockMarket,
+          ),
+        ).thenAnswer((_) async => User.empty());
 
         when(
           () => firebaseAnalyticsServiceMock.analytics
@@ -396,8 +408,13 @@ void main() {
         when(() => tokenStorageMock.get())
             .thenAnswer((_) async => JWTDto(access: '', refresh: ''));
         when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
-
-        when(() => remoteDataSourceMock.getUser(userId: '')).thenThrow(error);
+        when(() => deviceStorageMock.currentMarket()).thenReturn(mockMarket);
+        when(
+          () => remoteDataSourceMock.getUser(
+            userId: '',
+            market: mockMarket,
+          ),
+        ).thenThrow(error);
 
         final result = await repository.getUser();
         expect(result.isLeft(), true);

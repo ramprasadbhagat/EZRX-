@@ -22,14 +22,18 @@ class SalesOrgRemoteDataSource {
     required this.remoteConfigService,
   });
 
-  Future<SalesOrganisationConfigs> getConfig({required String salesOrg}) async {
+  Future<SalesOrganisationConfigs> getConfig({
+    required String salesOrg,
+    required String market,
+  }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
         url: '/api/license',
         data: jsonEncode({
-          'query': salesOrgQueryMutation
-              .getSalesOrgConfigsQuery(remoteConfigService.marketPlaceConfig),
+          'query': salesOrgQueryMutation.getSalesOrgConfigsQuery(
+            remoteConfigService.enableMarketPlaceMarkets.contains(market),
+          ),
           'variables': {
             'request': {
               'salesOrg': salesOrg,

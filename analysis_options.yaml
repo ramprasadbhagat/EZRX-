@@ -93,7 +93,10 @@ dart_code_metrics:
           - "**/splash_page.dart"
           # Ignore this file because SalesOrganisationConfigs class has many fields make the constructor marked as a long constructor 
           - "lib/infrastructure/account/dtos/sales_organisation_configs_dto.dart"
-    - long-parameter-list
+    - long-parameter-list:
+        exclude:
+          # Ignore this file because getProductList method has > 21 required parameters
+          - "lib/infrastructure/order/datasource/material_list_remote.dart"
   metrics:
     cyclomatic-complexity: 30
     maximum-nesting-level: 6

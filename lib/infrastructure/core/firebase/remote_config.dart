@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/entities/mp_remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/mp_remote_config_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config_constants.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
@@ -30,15 +34,25 @@ class RemoteConfigService {
     }
   }
 
-  bool get marketPlaceConfig =>
-      _remoteConfig.getBool(RemoteConfigConstants.enableMarketPlace);
+  List<String> get enableMarketPlaceMarkets {
+    final configAsJson = jsonDecode(
+      _remoteConfig
+          .getValue(RemoteConfigConstants.enableMarketPlace)
+          .asString(),
+    );
+
+    //JSON sample: {"marketplaceConfig":{"whitelist":["HK"]}}
+    return MPRemoteConfigDto.fromJson(configAsJson).toDomain.whiteList;
+  }
 
   /// Setting in-app default parameter values to make app behave as intended
   /// before it connects or if no values are set in the Remote Config backend
   Future<void> _setInAppDefaultValues() async {
     await _remoteConfig.setDefaults(
-      const {
-        RemoteConfigConstants.enableMarketPlace: false,
+      {
+        RemoteConfigConstants.enableMarketPlace: jsonEncode(
+          MPRemoteConfigDto.fromDomain(MPRemoteConfig.empty()).toJson(),
+        ),
       },
     );
   }

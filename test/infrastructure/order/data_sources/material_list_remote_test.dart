@@ -22,7 +22,9 @@ class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 void main() {
   late MaterialListRemoteDataSource remoteDataSource;
   final remoteConfigService = RemoteConfigServiceMock();
-  const fakeConfigValue = true;
+  const fakeMarket = 'fake-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(
@@ -36,8 +38,8 @@ void main() {
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      when(() => remoteConfigService.marketPlaceConfig)
-          .thenReturn(fakeConfigValue);
+      when(() => remoteConfigService.enableMarketPlaceMarkets)
+          .thenReturn(fakeEnableMarketPlaceMarkets);
       remoteDataSource = MaterialListRemoteDataSource(
         httpService: service,
         config: Config(),
@@ -103,6 +105,7 @@ void main() {
       salesDeal: [],
       isComboOffers: false,
       showSampleItem: true,
+      market: fakeMarket,
     );
 
     final finalData =
@@ -167,6 +170,7 @@ void main() {
       salesDeal: [],
       isComboOffers: false,
       showSampleItem: false,
+      market: fakeMarket,
     );
 
     final finalData =
@@ -213,6 +217,7 @@ void main() {
       type: 'bundle',
       code: 'fake_code',
       language: 'en',
+      market: fakeMarket,
     );
 
     final finalData =
@@ -263,6 +268,7 @@ void main() {
         salesOrgCode: 'fake-sales-org',
         shipToCode: 'fake-shipto-code',
         language: 'fake-language',
+        market: fakeMarket,
       );
       final finalData =
           makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
@@ -321,6 +327,7 @@ void main() {
         salesOrgCode: 'fake-sales-org',
         shipToCode: 'fake-shipto-code',
         language: 'fake-language',
+        market: fakeMarket,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());

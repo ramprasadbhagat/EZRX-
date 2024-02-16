@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
@@ -17,6 +18,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class MockConfig extends Mock implements Config {}
@@ -53,12 +55,14 @@ void main() {
   late ProductMetaData fakeProductMetaData;
   late StockInfo fakeStockInfo;
   late List<MaterialStockInfo> fakeStockInfoList;
+  late DeviceStorage deviceStorage;
 
   final mockMaterialNumber = MaterialNumber('12345');
   final mockLanguage = Language.english();
   final mockPrincipalCode = PrincipalCode('fake_principalCode');
   final mockMaterialInfoTypeBundle = MaterialInfoType.bundle();
   final mockMaterialInfoTypeMaterial = MaterialInfoType.material();
+  const mockMarket = 'fake-market';
 
   setUpAll(() async {
     mockConfig = MockConfig();
@@ -68,6 +72,7 @@ void main() {
     materialListRemoteDataSource = MaterialListRemoteDataSourceMock();
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
+    deviceStorage = DeviceStorageMock();
     fakeMaterialInfo = await ProductDetailLocalDataSource().getProductDetails();
     fakeProductMetaData =
         await ProductDetailLocalDataSource().getItemProductMetaData();
@@ -83,6 +88,7 @@ void main() {
       productDetailRemoteDataSource: productDetailRemoteDataSource,
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
+      deviceStorage: deviceStorage,
     );
   });
 
@@ -111,7 +117,7 @@ void main() {
 
       test('successfully - remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => productDetailRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -119,6 +125,7 @@ void main() {
             materialNumber: mockMaterialNumber.getOrCrash(),
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
+            market: mockMarket,
           ),
         ).thenAnswer((invocation) async => fakeMaterialInfo);
 
@@ -158,7 +165,7 @@ void main() {
 
       test('failure - remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => productDetailRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -166,6 +173,7 @@ void main() {
             materialNumber: mockMaterialNumber.getOrCrash(),
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
+            market: mockMarket,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -207,7 +215,7 @@ void main() {
 
       test('successfully - remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -216,6 +224,7 @@ void main() {
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: mockMaterialInfoTypeBundle.getValue(),
+            market: mockMarket,
           ),
         ).thenAnswer((invocation) async => fakeMaterialInfo);
 
@@ -255,7 +264,7 @@ void main() {
 
       test('failure - remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -264,6 +273,7 @@ void main() {
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: mockMaterialInfoTypeBundle.getValue(),
+            market: mockMarket,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -306,7 +316,7 @@ void main() {
 
       test('successfully - remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -315,6 +325,7 @@ void main() {
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: mockMaterialInfoTypeMaterial.getValue(),
+            market: mockMarket,
           ),
         ).thenAnswer((invocation) async => fakeMaterialInfo);
 
@@ -354,7 +365,7 @@ void main() {
 
       test('failure - remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -363,6 +374,7 @@ void main() {
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: mockMaterialInfoTypeMaterial.getValue(),
+            market: mockMarket,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -408,7 +420,7 @@ void main() {
 
       test('successfully - remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -417,6 +429,7 @@ void main() {
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: mockMaterialInfoTypeBundle.getValue(),
+            market: mockMarket,
           ),
         ).thenAnswer((invocation) async => fakeMaterialInfo);
 
@@ -454,7 +467,7 @@ void main() {
 
       test('failure - remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => materialListRemoteDataSource.getProductDetails(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -463,6 +476,7 @@ void main() {
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: mockMaterialInfoTypeBundle.getValue(),
+            market: mockMarket,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -666,7 +680,7 @@ void main() {
       test('successfully - remote (when material numbet dose not match)',
           () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => productDetailRemoteDataSource.getSimilarProduct(
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
@@ -675,6 +689,7 @@ void main() {
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             language: mockLanguage.languageCode,
             principalCode: mockPrincipalCode.getOrCrash(),
+            market: mockMarket,
           ),
         ).thenAnswer((invocation) async => [fakeMaterialInfo]);
         when(
@@ -700,7 +715,7 @@ void main() {
       });
       test('successfully - remote (when material numbet match)', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => productDetailRemoteDataSource.getSimilarProduct(
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
@@ -709,6 +724,7 @@ void main() {
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             language: mockLanguage.languageCode,
             principalCode: mockPrincipalCode.getOrCrash(),
+            market: mockMarket,
           ),
         ).thenAnswer(
           (invocation) async => [
@@ -764,7 +780,7 @@ void main() {
 
       test('failure - remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
         when(
           () => productDetailRemoteDataSource.getSimilarProduct(
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
@@ -773,6 +789,7 @@ void main() {
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             language: mockLanguage.languageCode,
             principalCode: mockPrincipalCode.getOrCrash(),
+            market: mockMarket,
           ),
         ).thenThrow((invocation) async => MockException());
         when(

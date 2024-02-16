@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,7 +11,7 @@ import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repositor
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
 
-
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 
@@ -33,6 +34,8 @@ void main() {
   late AccountSelectorStorage accountSelectorStorageMock;
   late SalesOrgLocalDataSource salesOrgLocalDataSourceMock;
   late SalesOrgRemoteDataSource salesOrgRemoteDataSourceMock;
+  late DeviceStorage deviceStorageMock;
+  const mockMarket = 'mockMarket';
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +44,7 @@ void main() {
     accountSelectorStorageMock = AccountSelectorStorageMock();
     salesOrgLocalDataSourceMock = SalesOrgLocalDataSourceMock();
     salesOrgRemoteDataSourceMock = SalesOrgRemoteDataSourceMock();
+    deviceStorageMock = DeviceStorageMock();
 
     mockSalesOrgName = 'mockSalesOrg';
 
@@ -53,6 +57,7 @@ void main() {
       localDataSource: salesOrgLocalDataSourceMock,
       remoteDataSource: salesOrgRemoteDataSourceMock,
       accountSelectorStorage: accountSelectorStorageMock,
+      deviceStorage: deviceStorageMock,
     );
 
     registerFallbackValue(AccountSelectorStorageDto.empty());
@@ -68,8 +73,7 @@ void main() {
         () => salesOrgLocalDataSourceMock.getConfig(),
       ).thenAnswer((invocation) async => fakeSGSalesOrgConfigs);
 
-      final result =
-          await salesOrgRepository
+      final result = await salesOrgRepository
           .getSalesOrganisationConfigs(fakeSalesOrganisation);
 
       expect(result.isRight(), true);
@@ -93,15 +97,16 @@ void main() {
         'Get Sales Organisation Config from remote data source successfully test',
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+      when(() => deviceStorageMock.currentMarket()).thenReturn(mockMarket);
 
       when(
         () => salesOrgRemoteDataSourceMock.getConfig(
           salesOrg: fakeSGSalesOrgConfigs.salesOrg.getOrCrash(),
+          market: mockMarket,
         ),
       ).thenAnswer((invocation) async => fakeSGSalesOrgConfigs);
 
-      final result =
-          await salesOrgRepository
+      final result = await salesOrgRepository
           .getSalesOrganisationConfigs(fakeSGSalesOrganisation);
 
       expect(result.isRight(), true);
@@ -110,10 +115,11 @@ void main() {
     test('Get Sales Organisation Config from remote data source failed test',
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-
+      when(() => deviceStorageMock.currentMarket()).thenReturn(mockMarket);
       when(
         () => salesOrgRemoteDataSourceMock.getConfig(
           salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+          market: mockMarket,
         ),
       ).thenThrow((invocation) async => Exception());
 

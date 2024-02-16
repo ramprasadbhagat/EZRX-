@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
@@ -26,6 +27,7 @@ class ProductDetailRepository implements IProductDetailRepository {
   final MaterialListRemoteDataSource materialListRemoteDataSource;
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
+  final DeviceStorage deviceStorage;
 
   ProductDetailRepository({
     required this.config,
@@ -35,6 +37,7 @@ class ProductDetailRepository implements IProductDetailRepository {
     required this.materialListRemoteDataSource,
     required this.stockInfoLocalDataSource,
     required this.stockInfoRemoteDataSource,
+    required this.deviceStorage,
   });
 
   @override
@@ -154,6 +157,7 @@ class ProductDetailRepository implements IProductDetailRepository {
         language: language.languageCode.toUpperCase(),
         materialNumber: materialNumber.getOrCrash(),
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(productDetail.copyWith(type: type));
@@ -190,6 +194,7 @@ class ProductDetailRepository implements IProductDetailRepository {
           shipToCode: shipToInfo.shipToCustomerCode,
           type: type.getValue(),
           language: language.languageCode,
+          market: deviceStorage.currentMarket(),
         );
 
         return Right(
@@ -261,6 +266,7 @@ class ProductDetailRepository implements IProductDetailRepository {
         materialNumber: materialNumber.getOrCrash(),
         principalCode: principalCode.getOrCrash(),
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        market: deviceStorage.currentMarket(),
       );
       final stockInfoData = await getStockInfoList(
         customerCodeInfo: customerCodeInfo,

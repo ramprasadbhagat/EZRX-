@@ -5,43 +5,35 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-
-import 'package:ezrxmobile/domain/order/repository/i_product_search_repository.dart';
-
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_remote.dart';
-
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
-
-import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
-
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
-
-import 'package:ezrxmobile/infrastructure/order/dtos/product_suggestion_history_dto.dart';
-
+import 'package:ezrxmobile/domain/order/repository/i_product_search_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-
-import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/product_search_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/product_suggestion_history_dto.dart';
 
 class ProductSearchRepository implements IProductSearchRepository {
   final Config config;
   final ProductSearchLocalDataSource localDataSource;
   final ProductSearchRemoteDataSource remoteDataSource;
   final ProductSuggestionHistoryStorage productSuggestionHistoryStorage;
+  final DeviceStorage deviceStorage;
 
   ProductSearchRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
     required this.productSuggestionHistoryStorage,
+    required this.deviceStorage,
   });
 
   @override
@@ -90,6 +82,7 @@ class ProductSearchRepository implements IProductSearchRepository {
         pageSize: pageSize,
         eanNumber: '',
         isCovidSelected: materialFilter.isCovidSelectedFilterValue,
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(materialList);
@@ -171,6 +164,7 @@ class ProductSearchRepository implements IProductSearchRepository {
         pageSize: 24,
         eanNumber: eanNumber.getOrCrash(),
         isCovidSelected: materialFilter.isCovidSelectedFilterValue,
+        market: deviceStorage.currentMarket(),
       );
 
       if (materialList.products.isEmpty) {

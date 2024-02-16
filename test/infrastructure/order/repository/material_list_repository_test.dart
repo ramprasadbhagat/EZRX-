@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:mocktail/mocktail.dart';
@@ -19,6 +20,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -48,6 +50,7 @@ void main() {
   late MaterialListRemoteDataSource materialListRemoteDataSource;
   late StockInfoLocalDataSource stockInfoLocalDataSource;
   late StockInfoRemoteDataSource stockInfoRemoteDataSource;
+  late DeviceStorage deviceStorage;
   final fakeMaterialFilter = MaterialFilter.empty().copyWith(
     countryListSelected: [
       MaterialFilterCountry.empty().copyWith(name: 'Hong Kong', code: 'HK'),
@@ -80,6 +83,7 @@ void main() {
     type: MaterialInfoType('bundle'),
     dataTotalHidden: DataTotalHidden(1),
   );
+  const fakeMarket = 'fake-market';
   late MaterialResponse fakeMaterialResponse;
   late MaterialResponse fakeComboDealMaterialResponse;
 
@@ -89,12 +93,14 @@ void main() {
     materialListRemoteDataSource = MaterialListRemoteDataSourceMock();
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
+    deviceStorage = DeviceStorageMock();
     materialListRepository = MaterialListRepository(
       config: mockConfig,
       materialListLocalDataSource: materialListLocalDataSource,
       materialListRemoteDataSource: materialListRemoteDataSource,
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
+      deviceStorage: deviceStorage,
     );
     fakeMaterialResponse = await MaterialListLocalDataSource().getProductList();
     fakeComboDealMaterialResponse = await MaterialListLocalDataSource()
@@ -173,6 +179,7 @@ void main() {
 
       test('=> get remotely fail', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => materialListRemoteDataSource.getProductList(
             salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
@@ -201,6 +208,7 @@ void main() {
             salesDeal: [],
             isComboOffers: fakeMaterialFilter.comboOffers,
             showSampleItem: false,
+            market: fakeMarket,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -222,6 +230,7 @@ void main() {
 
       test('=> get remotely success', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => materialListRemoteDataSource.getProductList(
             salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
@@ -252,6 +261,7 @@ void main() {
             salesDeal: [],
             isComboOffers: fakeMaterialFilterWithComboOffers.comboOffers,
             showSampleItem: false,
+            market: fakeMarket,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,
@@ -372,6 +382,7 @@ void main() {
 
       test('=> get remotely for principal code fail', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => materialListRemoteDataSource.getComboDealMaterialsPrincipalCode(
             salesOrgCode: fakeTWSalesOrganisation.salesOrg.getOrCrash(),
@@ -383,6 +394,7 @@ void main() {
             principalCodeList: [
               fakePrincipleData.principalCode.getOrDefaultValue(''),
             ],
+            market: fakeMarket,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -404,6 +416,7 @@ void main() {
 
       test('=> get remotely for principal code success', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => materialListRemoteDataSource.getComboDealMaterialsPrincipalCode(
             salesOrgCode: fakeTWSalesOrganisation.salesOrg.getOrCrash(),
@@ -415,6 +428,7 @@ void main() {
               fakePrincipleData.principalCode.getOrDefaultValue(''),
             ],
             language: fakeClientUser.preferredLanguage.languageCode,
+            market: fakeMarket,
           ),
         ).thenAnswer((invocation) async => fakeComboDealMaterialResponse);
 
@@ -498,8 +512,9 @@ void main() {
         when(
           () => stockInfoRemoteDataSource.getMaterialStockInfoList(
             materialNumbers: fakeMaterialResponse.products
-              .where((element) => element.type.typeMaterial)
-              .map((e) => e.materialNumber.getOrCrash()).toList(),
+                .where((element) => element.type.typeMaterial)
+                .map((e) => e.materialNumber.getOrCrash())
+                .toList(),
             salesOrg: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
             selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
           ),
@@ -561,6 +576,7 @@ void main() {
 
       test('=> get remotely fail', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => materialListRemoteDataSource.getProductDetails(
             code: fakeMatchMaterialInfo.materialNumber.getOrCrash(),
@@ -569,6 +585,7 @@ void main() {
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: '',
             language: fakeClientUser.preferredLanguage.languageCode,
+            market: fakeMarket,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -588,6 +605,7 @@ void main() {
 
       test('=> get remotely success', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => materialListRemoteDataSource.getProductDetails(
             code: fakeMatchMaterialInfo.materialNumber.getOrCrash(),
@@ -596,6 +614,7 @@ void main() {
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             type: '',
             language: fakeClientUser.preferredLanguage.languageCode,
+            market: fakeMarket,
           ),
         ).thenAnswer(
           (invocation) async => fakeMatchMaterialInfo,
@@ -666,6 +685,7 @@ void main() {
 
       test('=> get remotely fail', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => materialListRemoteDataSource.getProductList(
             salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
@@ -689,6 +709,7 @@ void main() {
             pageSize: 10,
             isComboOffers: fakeMaterialFilter.comboOffers,
             showSampleItem: true,
+            market: fakeMarket,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -712,6 +733,7 @@ void main() {
 
       test('=> get remotely success', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
         when(
           () => materialListRemoteDataSource.getProductList(
             salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
@@ -735,6 +757,7 @@ void main() {
             pageSize: 10,
             isComboOffers: fakeMaterialFilter.comboOffers,
             showSampleItem: true,
+            market: fakeMarket,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,

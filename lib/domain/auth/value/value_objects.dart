@@ -23,6 +23,7 @@ class AppMarket extends ValueObject<String> {
     AppMarket('tw'),
     AppMarket('th'),
     AppMarket('vn'),
+    AppMarket('hk'),
   ];
 
   factory AppMarket(String input) {

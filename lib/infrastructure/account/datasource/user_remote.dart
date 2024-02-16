@@ -28,14 +28,18 @@ class UserRemoteDataSource {
     required this.remoteConfigService,
   });
 
-  Future<User> getUser({required String userId}) async {
+  Future<User> getUser({
+    required String userId,
+    required String market,
+  }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}license',
         data: jsonEncode({
-          'query': userQueryMutation
-              .getUserQuery(remoteConfigService.marketPlaceConfig),
+          'query': userQueryMutation.getUserQuery(
+            remoteConfigService.enableMarketPlaceMarkets.contains(market),
+          ),
           'variables': {'id': userId, 'ignoreCustomerCode': true},
         }),
         apiEndpoint: 'userQuery',

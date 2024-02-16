@@ -12,23 +12,28 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dar
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 
 class SalesOrgRepository implements ISalesOrgRepository {
   final Config config;
   final SalesOrgRemoteDataSource remoteDataSource;
   final SalesOrgLocalDataSource localDataSource;
   final AccountSelectorStorage accountSelectorStorage;
+  final DeviceStorage deviceStorage;
 
   SalesOrgRepository({
     required this.config,
     required this.remoteDataSource,
     required this.localDataSource,
     required this.accountSelectorStorage,
+    required this.deviceStorage,
   });
 
   @override
   Future<Either<ApiFailure, SalesOrganisationConfigs>>
-      getSalesOrganisationConfigs(SalesOrganisation salesOrganisation) async {
+      getSalesOrganisationConfigs(
+    SalesOrganisation salesOrganisation,
+  ) async {
     final salesOrg = salesOrganisation.salesOrg.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -42,6 +47,7 @@ class SalesOrgRepository implements ISalesOrgRepository {
     try {
       final salesOrgConfigs = await remoteDataSource.getConfig(
         salesOrg: salesOrg,
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(salesOrgConfigs);

@@ -689,6 +689,7 @@ void setupLocator() {
       datadogService: locator<DatadogService>(),
       languageLocalDataSource: locator<LanguageLocalDataSource>(),
       languageRemoteDataSource: locator<LanguageRemoteDataSource>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
@@ -798,6 +799,7 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<SalesOrgLocalDataSource>(),
       remoteDataSource: locator<SalesOrgRemoteDataSource>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
@@ -991,6 +993,7 @@ void setupLocator() {
       materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
@@ -1053,6 +1056,7 @@ void setupLocator() {
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
       materialListLocalDataSource: locator<MaterialListLocalDataSource>(),
       materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
@@ -2581,6 +2585,7 @@ void setupLocator() {
       remoteDataSource: locator<ProductSearchRemoteDataSource>(),
       productSuggestionHistoryStorage:
           locator<ProductSuggestionHistoryStorage>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
   locator.registerLazySingleton(

@@ -29,12 +29,14 @@ void main() {
   final dioAdapter = DioAdapter(dio: dio);
   final service = HttpService.mockDio(dio);
   final remoteConfigService = RemoteConfigServiceMock();
-  const fakeConfigValue = true;
+  const fakeMarket = 'fake-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
 
   setUpAll(
     () {
-      when(() => remoteConfigService.marketPlaceConfig)
-          .thenReturn(fakeConfigValue);
+      when(() => remoteConfigService.enableMarketPlaceMarkets)
+          .thenReturn(fakeEnableMarketPlaceMarkets);
       WidgetsFlutterBinding.ensureInitialized();
       remoteDataSource = ProductDetailRemoteDataSource(
         httpService: service,
@@ -89,6 +91,7 @@ void main() {
           principalCode: '0000102403',
           shipToCode: 'fake-shipTo',
           salesOrg: 'fake-salesOrg',
+          market: fakeMarket,
         );
         final finalData = res['data']['similarSearches']['materials'];
 

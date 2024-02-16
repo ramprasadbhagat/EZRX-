@@ -47,10 +47,12 @@ class MaterialListRemoteDataSource {
     required List<String> salesDeal,
     required bool isComboOffers,
     required bool showSampleItem,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = materialListQuery
-          .getProductQuery(remoteConfigService.marketPlaceConfig);
+      final queryData = materialListQuery.getProductQuery(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
 
       final variables = {
         'request': {
@@ -117,10 +119,12 @@ class MaterialListRemoteDataSource {
     required int offset,
     required String language,
     required List<String> principalCodeList,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = materialListQuery
-          .getProductQuery(remoteConfigService.marketPlaceConfig);
+      final queryData = materialListQuery.getProductQuery(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
 
       final variables = {
         'request': {
@@ -158,10 +162,12 @@ class MaterialListRemoteDataSource {
     required String shipToCode,
     required String type,
     required String language,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = materialListQuery
-          .getProductDetailsQuery(remoteConfigService.marketPlaceConfig);
+      final queryData = materialListQuery.getProductDetailsQuery(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
 
       final variables = {
         'request': {

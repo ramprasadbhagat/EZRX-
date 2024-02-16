@@ -101,8 +101,7 @@ class SalesOrgQueryMutation {
     displaySubtotalTaxBreakdown
     enableComboDeals
     comboDealsUserRole
-    ${enableMarketPlace ? 'enableMarketPlace' : ''}
-    mpMinOrderAmount
+    ${enableMarketPlace ? 'enableMarketPlace \n mpMinOrderAmount' : ''}
   }
 }
 
