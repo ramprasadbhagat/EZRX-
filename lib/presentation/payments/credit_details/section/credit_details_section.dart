@@ -172,9 +172,7 @@ class CreditDetailsSection extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          eligibilityState.salesOrg.isVN
-                              ? context.tr('Tax')
-                              : '${context.tr('Tax at')} ${creditItems.taxPercent}%',
+                          context.tr('Tax'),
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         PriceComponent(

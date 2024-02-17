@@ -287,9 +287,7 @@ void main() {
           find.descendant(
             of: creditDetailTax,
             matching: find.text(
-              currentSalesOrganisation.salesOrg.isVN
-                  ? 'Tax'.tr()
-                  : '${'Tax at'.tr()} ${fakeItemList.taxPercent}%',
+              'Tax'.tr(),
             ),
           ),
           findsOneWidget,

@@ -564,11 +564,7 @@ void main() {
           expect(
             find.descendant(
               of: invoiceDetailTax,
-              matching: find.text(
-                currentSalesOrganisation.salesOrg.isVN
-                    ? 'Tax'.tr()
-                    : '${'Tax at'.tr()} ${fakeInvoiceDetail.taxPercent}%',
-              ),
+              matching: find.text('Tax'),
             ),
             findsOneWidget,
           );
