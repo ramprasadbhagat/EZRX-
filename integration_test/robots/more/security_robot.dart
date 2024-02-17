@@ -55,7 +55,7 @@ class SecurityRobot extends CommonRobot {
   void verifyRequireErrorMsgNewPassword(bool status) {
     final statusFinder = status ? findsOneWidget : findsNothing;
     expect(
-      _errorMessageField(newPasswordTextField, 'New Password Cannot be Empty.'),
+      _errorMessageField(newPasswordTextField, 'New password cannot be empty.'),
       statusFinder,
     );
   }
@@ -76,7 +76,7 @@ class SecurityRobot extends CommonRobot {
     expect(
       _errorMessageField(
         confirmPasswordField,
-        'Confirm Password Cannot be Empty.',
+        'Confirm password cannot be empty.',
       ),
       statusFinder,
     );

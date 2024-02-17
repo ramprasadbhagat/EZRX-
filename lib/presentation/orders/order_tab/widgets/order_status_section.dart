@@ -29,7 +29,7 @@ class OrderStatusSection extends StatelessWidget {
             ListTile(
               contentPadding: const EdgeInsets.fromLTRB(16.0, 16.0, 0, 0),
               title: Text(
-                context.tr('Order Status'),
+                context.tr('Order status'),
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge

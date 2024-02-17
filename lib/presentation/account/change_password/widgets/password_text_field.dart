@@ -53,7 +53,7 @@ class _PasswordTextField extends StatelessWidget {
       case PasswordFieldType.newPassword:
         return context.read<ResetPasswordBloc>().state.newPassword.value.fold(
               (f) => f.mapOrNull(
-                empty: (_) => context.tr('New Password Cannot be Empty.'),
+                empty: (_) => context.tr('New password cannot be empty.'),
                 mustNotMatchOldPassword: (_) =>
                     context.tr('New password cannot be same as old password'),
               ),
@@ -67,7 +67,7 @@ class _PasswordTextField extends StatelessWidget {
             .value
             .fold(
               (f) => f.mapOrNull(
-                empty: (_) => context.tr('Confirm Password Cannot be Empty.'),
+                empty: (_) => context.tr('Confirm password cannot be empty.'),
                 mustMatchNewPassword: (_) => context.tr('Password mismatch'),
               ),
               (_) => null,

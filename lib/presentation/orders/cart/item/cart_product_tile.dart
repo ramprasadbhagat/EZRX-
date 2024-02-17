@@ -201,7 +201,7 @@ class _ItemSubTotalSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'Total with tax:'.tr(),
+                  context.tr('Total with tax:'),
                   style: txtStyle,
                 ),
                 _LoadingShimmerWithChild(
