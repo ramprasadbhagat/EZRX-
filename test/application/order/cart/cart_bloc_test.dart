@@ -3367,6 +3367,128 @@ void main() {
         ),
       ],
     );
+
+    blocTest<CartBloc, CartState>(
+      'updatePriceForIdMarket for Id market aplSimulateOrder failure',
+      build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+      setUp: () {
+        when(
+          () => cartRepositoryMock.aplSimulateOrder(
+            salesOrganisation: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            product: priceAggregatesForID.materialInfos,
+          ),
+        ).thenAnswer(
+          (invocation) async => Left(fakeError),
+        );
+      },
+      seed: () => CartState.initial().copyWith(
+        cartProducts: priceAggregatesForID,
+        salesOrganisation: fakeIDSalesOrganisation,
+        config: fakeIDSalesOrgConfigs,
+        shipToInfo: shipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+      ),
+      act: (bloc) => bloc.add(
+        const CartEvent.updatePriceForIdMarket(),
+      ),
+      expect: () => [
+        CartState.initial().copyWith(
+          cartProducts: priceAggregatesForID,
+          salesOrganisation: fakeIDSalesOrganisation,
+          config: fakeIDSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isAplProductLoading: true,
+        ),
+        CartState.initial().copyWith(
+          cartProducts: priceAggregatesForID,
+          salesOrganisation: fakeIDSalesOrganisation,
+          config: fakeIDSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          apiFailureOrSuccessOption: optionOf(Left(fakeError)),
+        ),
+      ],
+    );
+
+    blocTest<CartBloc, CartState>(
+      'updatePriceForIdMarket for Id market aplSimulateOrder success',
+      build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+      setUp: () {
+        final aplProductList =
+            aplSimulatorOrder.productDeterminationList(priceAggregatesForID);
+        when(
+          () => productDetailRepository.getProductListDetail(
+            materialNumber:
+                aplProductList.map((e) => e.materialNumber).toList(),
+            salesOrganisation: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: shipToInfo,
+            language: fakeClientUser.preferredLanguage,
+            types:
+                aplProductList.map((e) => MaterialInfoType.material()).toList(),
+          ),
+        ).thenAnswer(
+          (invocation) async => Left(fakeError),
+        );
+        when(
+          () => cartRepositoryMock.aplSimulateOrder(
+            salesOrganisation: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            product: priceAggregatesForID.materialInfos,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(aplSimulatorOrder),
+        );
+      },
+      seed: () => CartState.initial().copyWith(
+        cartProducts: priceAggregatesForID,
+        salesOrganisation: fakeIDSalesOrganisation,
+        config: fakeIDSalesOrgConfigs,
+        shipToInfo: shipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+      ),
+      act: (bloc) => bloc.add(
+        const CartEvent.updatePriceForIdMarket(),
+      ),
+      expect: () => [
+        CartState.initial().copyWith(
+          cartProducts: priceAggregatesForID,
+          salesOrganisation: fakeIDSalesOrganisation,
+          config: fakeIDSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isAplProductLoading: true,
+        ),
+        CartState.initial().copyWith(
+          cartProducts: priceAggregatesForID,
+          salesOrganisation: fakeIDSalesOrganisation,
+          config: fakeIDSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          aplSimulatorOrder: aplSimulatorOrder,
+        ),
+        CartState.initial().copyWith(
+          cartProducts: priceAggregatesForID,
+          salesOrganisation: fakeIDSalesOrganisation,
+          config: fakeIDSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          aplSimulatorOrder: aplSimulatorOrder,
+          isUpdateProductDetermination: true,
+        ),
+        CartState.initial().copyWith(
+          cartProducts: priceAggregatesForID,
+          salesOrganisation: fakeIDSalesOrganisation,
+          config: fakeIDSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          aplSimulatorOrder: aplSimulatorOrder,
+          updateFailureOrSuccessOption: optionOf(Left(fakeError)),
+        ),
+      ],
+    );
   });
 
   group(

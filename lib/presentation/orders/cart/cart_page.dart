@@ -137,9 +137,13 @@ class _CartPageState extends State<CartPage> {
         BlocListener<CartBloc, CartState>(
           listenWhen: (previous, current) =>
               previous.isUpdateProductDetermination !=
-                  current.isUpdateProductDetermination &&
-              !current.isUpdateProductDetermination,
+                      current.isUpdateProductDetermination &&
+                  !current.isUpdateProductDetermination ||
+              //updated stock info is needed to determine isProductDeterminationFailed
+              previous.isUpdatingStock != current.isUpdatingStock &&
+                  !current.isUpdatingStock,
           listener: (context, state) {
+            //this will handle the api failure for product determination
             state.updateFailureOrSuccessOption.fold(() {}, (either) {
               either.fold(
                 (failure) {
@@ -149,6 +153,11 @@ class _CartPageState extends State<CartPage> {
                 (_) {},
               );
             });
+            //updated stock is needed for determining isProductDeterminationFailed
+            //if product determination is failed user will be poped from checkout page to cart page
+            if (state.isProductDeterminationFailed) {
+              context.router.navigateBack();
+            }
           },
         ),
         BlocListener<CartBloc, CartState>(

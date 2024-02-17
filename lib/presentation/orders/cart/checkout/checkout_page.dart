@@ -91,19 +91,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
 
-    return BlocConsumer<CartBloc, CartState>(
-      listenWhen: (previous, current) =>
-          previous.isFetchingBonus != current.isFetchingBonus &&
-          !current.isFetchingBonus,
-      listener: (context, state) {
-        if (state.isProductDeterminationFailed) {
-          context.router.navigateBack();
-        } else {
-          context.read<CartBloc>().add(
-                const CartEvent.updatePriceForIdMarket(),
-              );
-        }
-      },
+    return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) =>
           previous.isCartDetailsFetching != current.isCartDetailsFetching,
       builder: (context, cartState) {
