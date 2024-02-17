@@ -25,7 +25,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               contentPadding: const EdgeInsets.symmetric(horizontal: 12),
               title: Text(
-                '${"Order for".tr()} ${context.read<EligibilityBloc>().state.customerCodeInfo.customerName}',
+                '${context.tr("Order for")} ${context.read<EligibilityBloc>().state.customerCodeInfo.customerName}',
                 key: WidgetKeys.cartShipToAddress,
                 style: Theme.of(context).textTheme.labelSmall,
               ),
@@ -34,11 +34,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
                 size: 20,
               ),
             ),
-            if (!state.isCartDetailsFetching) ...[
-              const _MovCheckMessage(),
-              const _StockInvalidIDMarketMessage(),
-              const _CartPageInvalidItemsMessage(),
-            ],
+            if (!state.isCartDetailsFetching) const _CartPageInfoLabel(),
             PriceSummaryTile(cartState: state),
             if (!state.isCartDetailsFetching)
               const _CartPagePriceNotAvailableMessage(),
@@ -120,11 +116,11 @@ class _CartPageCheckoutButton extends StatelessWidget {
                         key: WidgetKeys.checkoutButton,
                         onPressed: state.isCartDetailsFetching ||
                                 materialPriceState.isFetching ||
-                                state.isNotAvailableToCheckoutForID ||
+                                orderState.isNotAvailableToCheckoutForID ||
                                 orderState.isCheckoutNotAllowed
                             ? null
                             : () => _onCheckOutPressed(context),
-                        child: const Text('Check out').tr(),
+                        child: Text(context.tr('Check out')),
                       );
                     },
                   ),

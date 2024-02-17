@@ -272,4 +272,16 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   bool get displayInvalidOOSOnCartItem =>
       !isOOSOrderAllowedToSubmit && configs.hideStockDisplay;
+
+  bool get isNotAvailableToCheckoutForID => cartItems.any(
+        (element) => element.showErrorMessageForID,
+      );
+
+  List<bool> get activeErrorsList => [
+        displayMovWarning,
+        displayInvalidItemsWarning,
+        isNotAvailableToCheckoutForID,
+      ].where((condition) => condition).toList();
+
+  bool get hasMultipleErrors => activeErrorsList.length > 1;
 }

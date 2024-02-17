@@ -317,7 +317,7 @@ class _MaterialDetails extends StatelessWidget {
             cartItem: cartItem,
             isInvalidCartItem: isInvalidCartItem,
           ),
-          if (cartItem.showErrorMessage)
+          if (cartItem.showErrorMessageForID)
             ErrorTextWithIcon(
               textPadding: const EdgeInsets.symmetric(vertical: 2),
               valueText: cartItem.isMaxQtyExceedsForId

@@ -498,10 +498,6 @@ class CartState with _$CartState {
         .getNewlyAddedItems(product.bonusSampleItems);
   }
 
-  bool get isNotAvailableToCheckoutForID => cartProducts.any(
-        (element) => element.showErrorMessage,
-      );
-
   List<PriceAggregate> get cartProductsComboSorted => List.from(cartProducts)
     ..sort(
       (a, b) => b.materialInfo.type.typeCombo ? 1 : -1,

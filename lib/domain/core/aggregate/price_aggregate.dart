@@ -102,7 +102,7 @@ class PriceAggregate with _$PriceAggregate {
   bool get isMaxQtyExceedsForId =>
       maximumQty != 0 && maximumQty < quantity && stockQuantity >= quantity;
 
-  bool get showErrorMessage =>
+  bool get showErrorMessageForID =>
       salesOrgConfig.salesOrg.isID &&
       (_isStockQtyExceedsForId || isMaxQtyExceedsForId);
 
