@@ -26,7 +26,7 @@ class NewPaymentButton extends StatelessWidget {
 
   const NewPaymentButton._(this.scrollController, {Key? key}) : super(key: key);
 
-  static const title = 'New Payment';
+  static const title = 'New payment';
 
   static const paymentFailureMessage =
       'You have a pending payment which has not been completed. Please create a new payment only after the existing one has been cleared.';

@@ -365,7 +365,7 @@ class _StatusesSelector extends StatelessWidget {
               key: WidgetKeys.returnStatusFilter(name, value),
               contentPadding: EdgeInsets.zero,
               title: Text(
-                name,
+                context.tr(name),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               controlAffinity: ListTileControlAffinity.leading,

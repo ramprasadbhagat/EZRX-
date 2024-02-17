@@ -165,7 +165,7 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
   final homeQuickAccessChatSupportMenu = _QuickAccessMenuData(
     key: WidgetKeys.homeQuickAccessChatSupportMenu,
     icon: 'chat_support_menu.svg',
-    label: 'Chat Support',
+    label: 'Chat support',
     onTap: () =>
         context.read<ChatBotBloc>().add(const ChatBotEvent.startChatbot()),
   );
