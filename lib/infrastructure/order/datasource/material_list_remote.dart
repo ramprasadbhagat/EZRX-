@@ -48,6 +48,7 @@ class MaterialListRemoteDataSource {
     required bool isComboOffers,
     required bool showSampleItem,
     required String market,
+    required bool isMarketPlace,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery(
@@ -65,6 +66,7 @@ class MaterialListRemoteDataSource {
           'isGimmick': gimmickMaterial,
           'SearchKey': searchKey,
           'isFOCMaterial': isCovidSelected,
+          if (isMarketPlace) 'IsMarketplace': isMarketPlace,
           if (showSampleItem) 'fromAddBonus': showSampleItem,
         },
       };

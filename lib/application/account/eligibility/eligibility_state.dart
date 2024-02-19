@@ -306,7 +306,7 @@ class EligibilityState with _$EligibilityState {
             : salesOrgConfigs.addOosMaterials.oosTag,
       );
 
-  bool get showMarketPlaceProduct {
+  bool get marketPlaceEligible {
     if (!isMarketPlaceEnabled) return false;
     if (!user.acceptMPTC.isAccept) return false;
 
@@ -331,5 +331,4 @@ class EligibilityState with _$EligibilityState {
 
   bool get customerBlockOrSuspended =>
       isAccountSuspended || shipToInfo.customerBlock.isCustomerBlocked;
-
 }

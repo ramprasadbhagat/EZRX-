@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MaterialFilter {
   bool get isFavourite => throw _privateConstructorUsedError;
+  bool get isMarketPlace => throw _privateConstructorUsedError;
   bool get isCovidSelected => throw _privateConstructorUsedError;
   bool get bundleOffers => throw _privateConstructorUsedError;
   bool get comboOffers => throw _privateConstructorUsedError;
@@ -46,6 +47,7 @@ abstract class $MaterialFilterCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isFavourite,
+      bool isMarketPlace,
       bool isCovidSelected,
       bool bundleOffers,
       bool comboOffers,
@@ -73,6 +75,7 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
   @override
   $Res call({
     Object? isFavourite = null,
+    Object? isMarketPlace = null,
     Object? isCovidSelected = null,
     Object? bundleOffers = null,
     Object? comboOffers = null,
@@ -89,6 +92,10 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
       isFavourite: null == isFavourite
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
       isCovidSelected: null == isCovidSelected
           ? _value.isCovidSelected
@@ -148,6 +155,7 @@ abstract class _$$_MaterialFilterCopyWith<$Res>
   @useResult
   $Res call(
       {bool isFavourite,
+      bool isMarketPlace,
       bool isCovidSelected,
       bool bundleOffers,
       bool comboOffers,
@@ -173,6 +181,7 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isFavourite = null,
+    Object? isMarketPlace = null,
     Object? isCovidSelected = null,
     Object? bundleOffers = null,
     Object? comboOffers = null,
@@ -189,6 +198,10 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
       isFavourite: null == isFavourite
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
       isCovidSelected: null == isCovidSelected
           ? _value.isCovidSelected
@@ -243,6 +256,7 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
 class _$_MaterialFilter extends _MaterialFilter {
   const _$_MaterialFilter(
       {this.isFavourite = false,
+      this.isMarketPlace = false,
       this.isCovidSelected = false,
       this.bundleOffers = false,
       this.comboOffers = false,
@@ -265,6 +279,9 @@ class _$_MaterialFilter extends _MaterialFilter {
   @override
   @JsonKey()
   final bool isFavourite;
+  @override
+  @JsonKey()
+  final bool isMarketPlace;
   @override
   @JsonKey()
   final bool isCovidSelected;
@@ -331,7 +348,7 @@ class _$_MaterialFilter extends _MaterialFilter {
 
   @override
   String toString() {
-    return 'MaterialFilter(isFavourite: $isFavourite, isCovidSelected: $isCovidSelected, bundleOffers: $bundleOffers, comboOffers: $comboOffers, isProductOffer: $isProductOffer, sortBy: $sortBy, hasAccessToCovidMaterial: $hasAccessToCovidMaterial, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
+    return 'MaterialFilter(isFavourite: $isFavourite, isMarketPlace: $isMarketPlace, isCovidSelected: $isCovidSelected, bundleOffers: $bundleOffers, comboOffers: $comboOffers, isProductOffer: $isProductOffer, sortBy: $sortBy, hasAccessToCovidMaterial: $hasAccessToCovidMaterial, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
   }
 
   @override
@@ -341,6 +358,8 @@ class _$_MaterialFilter extends _MaterialFilter {
             other is _$_MaterialFilter &&
             (identical(other.isFavourite, isFavourite) ||
                 other.isFavourite == isFavourite) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace) &&
             (identical(other.isCovidSelected, isCovidSelected) ||
                 other.isCovidSelected == isCovidSelected) &&
             (identical(other.bundleOffers, bundleOffers) ||
@@ -369,6 +388,7 @@ class _$_MaterialFilter extends _MaterialFilter {
   int get hashCode => Object.hash(
       runtimeType,
       isFavourite,
+      isMarketPlace,
       isCovidSelected,
       bundleOffers,
       comboOffers,
@@ -391,6 +411,7 @@ class _$_MaterialFilter extends _MaterialFilter {
 abstract class _MaterialFilter extends MaterialFilter {
   const factory _MaterialFilter(
           {final bool isFavourite,
+          final bool isMarketPlace,
           final bool isCovidSelected,
           final bool bundleOffers,
           final bool comboOffers,
@@ -407,6 +428,8 @@ abstract class _MaterialFilter extends MaterialFilter {
 
   @override
   bool get isFavourite;
+  @override
+  bool get isMarketPlace;
   @override
   bool get isCovidSelected;
   @override

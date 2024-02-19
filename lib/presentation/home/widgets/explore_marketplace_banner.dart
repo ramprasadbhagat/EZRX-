@@ -1,7 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ExploreMarketPlaceBanner extends StatelessWidget {
@@ -42,7 +48,20 @@ class ExploreMarketPlaceBanner extends StatelessWidget {
           const SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
-              //TODO: Will cover in EZRX-17284
+              final eligibilityState = context.read<EligibilityBloc>().state;
+              context.read<MaterialListBloc>().add(
+                    MaterialListEvent.fetch(
+                      salesOrganisation: eligibilityState.salesOrganisation,
+                      configs: eligibilityState.salesOrgConfigs,
+                      customerCodeInfo: eligibilityState.customerCodeInfo,
+                      shipToInfo: eligibilityState.shipToInfo,
+                      user: eligibilityState.user,
+                      selectedMaterialFilter: MaterialFilter.empty().copyWith(
+                        isMarketPlace: true,
+                      ),
+                    ),
+                  );
+              context.navigateTo(const ProductsTabRoute());
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),

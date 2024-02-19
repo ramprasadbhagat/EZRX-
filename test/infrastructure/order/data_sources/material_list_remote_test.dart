@@ -63,6 +63,7 @@ void main() {
         'isGimmick': false,
         'SearchKey': '',
         'fromAddBonus': true,
+        'IsMarketplace': true,
       },
     };
     final res = json.decode(
@@ -106,6 +107,7 @@ void main() {
       isComboOffers: false,
       showSampleItem: true,
       market: fakeMarket,
+      isMarketPlace: true,
     );
 
     final finalData =
@@ -116,7 +118,9 @@ void main() {
     );
   });
 
-  test('Get Product List exclude frommAddBonus when it is false', () async {
+  test(
+      'Get Product List exclude frommAddBonus and IsMarketPlace when they are false',
+      () async {
     final variables = {
       'request': {
         'After': 0,
@@ -171,6 +175,7 @@ void main() {
       isComboOffers: false,
       showSampleItem: false,
       market: fakeMarket,
+      isMarketPlace: false,
     );
 
     final finalData =

@@ -31,6 +31,17 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                   ),
               title: 'Favourites',
             ),
+            if (eligibilityState.marketPlaceEligible)
+              _ListTileThemeWidget(
+                value: state.materialFilter.isMarketPlace,
+                onChanged: (value) => context.read<MaterialFilterBloc>().add(
+                      MaterialFilterEvent.updateSelectedMaterialFilter(
+                        MaterialFilterType.isMarketPlace,
+                        !state.materialFilter.isMarketPlace,
+                      ),
+                    ),
+                title: 'Marketplace items',
+              ),
             _ListTileThemeWidget(
               value: state.materialFilter.isProductOffer,
               onChanged: (value) => context.read<MaterialFilterBloc>().add(

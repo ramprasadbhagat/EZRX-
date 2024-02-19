@@ -1421,7 +1421,7 @@ void main() {
         user: fakeInternalSalesRepUser,
       );
 
-      expect(state.showMarketPlaceProduct, false);
+      expect(state.marketPlaceEligible, false);
     });
 
     test('return false when marketplace is enable + user not accept TnC', () {
@@ -1431,7 +1431,7 @@ void main() {
         user: fakeClientUser,
       );
 
-      expect(state.showMarketPlaceProduct, false);
+      expect(state.marketPlaceEligible, false);
     });
 
     test('return true when marketplace is enable + user accept TnC', () {
@@ -1441,7 +1441,7 @@ void main() {
         user: fakeClientUserAccessMarketPlace,
       );
 
-      expect(state.showMarketPlaceProduct, true);
+      expect(state.marketPlaceEligible, true);
     });
   });
 

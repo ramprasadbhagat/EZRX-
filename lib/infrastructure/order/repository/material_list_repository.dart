@@ -89,6 +89,7 @@ class MaterialListRepository implements IMaterialListRepository {
         isComboOffers: selectedMaterialFilter.comboOffers,
         showSampleItem: false,
         market: deviceStorage.currentMarket(),
+        isMarketPlace: selectedMaterialFilter.isMarketPlace,
       );
 
       final stockInfoList = await getStockInfoList(
@@ -346,6 +347,7 @@ class MaterialListRepository implements IMaterialListRepository {
         isComboOffers: false,
         showSampleItem: true,
         market: deviceStorage.currentMarket(),
+        isMarketPlace: false,
       );
 
       return Right(materialListData);

@@ -10,6 +10,7 @@ class MaterialFilter with _$MaterialFilter {
 
   const factory MaterialFilter({
     @Default(false) bool isFavourite,
+    @Default(false) bool isMarketPlace,
     @Default(false) bool isCovidSelected,
     @Default(false) bool bundleOffers,
     @Default(false) bool comboOffers,
@@ -59,6 +60,7 @@ class MaterialFilter with _$MaterialFilter {
     if (isFavourite) showProductFilter.add('Favourites');
     if (isProductOffer) showProductFilter.add('Items with offers');
     if (bundleOffers) showProductFilter.add('Bundle offers');
+    if (isMarketPlace) showProductFilter.add('Marketplace items');
 
     return {
       if (showProductFilter.isNotEmpty)

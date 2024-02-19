@@ -160,6 +160,14 @@ class MaterialFilterBloc
               ),
             );
             break;
+          case MaterialFilterType.isMarketPlace:
+            emit(
+              state.copyWith(
+                materialFilter:
+                    state.materialFilter.copyWith(isMarketPlace: e.key as bool),
+              ),
+            );
+            break;
           default:
             break;
         }
@@ -200,6 +208,7 @@ class MaterialFilterBloc
                   e.selectedMaterialFilter.manufactureListSelected,
               countryListSelected: e.selectedMaterialFilter.countryListSelected,
               comboOffers: e.selectedMaterialFilter.comboOffers,
+              isMarketPlace: e.selectedMaterialFilter.isMarketPlace,
             ),
             searchKey: SearchKey.searchFilter(''),
           ),

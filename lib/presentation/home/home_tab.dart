@@ -77,9 +77,9 @@ class HomeTab extends StatelessWidget {
                   const CarouselBanner(),
                   BlocBuilder<EligibilityBloc, EligibilityState>(
                     buildWhen: (previous, current) =>
-                        previous.showMarketPlaceProduct !=
-                        current.showMarketPlaceProduct,
-                    builder: (context, state) => state.showMarketPlaceProduct
+                        previous.marketPlaceEligible !=
+                        current.marketPlaceEligible,
+                    builder: (context, state) => state.marketPlaceEligible
                         ? const ExploreMarketPlaceBanner()
                         : const SizedBox(),
                   ),
@@ -101,7 +101,8 @@ class HomeTab extends StatelessWidget {
                   ],
                   if (state.haveShipTo && state.user.userCanAccessOrderHistory)
                     const RecentOrdersSection(),
-                  if (state.haveShipTo && state.user.userCanAccessProducts) const BrowseProduct(),
+                  if (state.haveShipTo && state.user.userCanAccessProducts)
+                    const BrowseProduct(),
                   const TopAdvertBoxBanner(),
                   const AnnouncementSection(),
                 ],

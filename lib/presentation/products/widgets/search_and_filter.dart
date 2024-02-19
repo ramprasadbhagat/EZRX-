@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
@@ -76,17 +75,16 @@ class SearchAndFilter extends StatelessWidget {
     ).then((value) {
       if (value is MaterialFilter) {
         if (_haveDifferenceFilter(context, value)) {
+          final eligibilityState = context.read<EligibilityBloc>().state;
+
           context.read<MaterialListBloc>().add(
                 MaterialListEvent.fetch(
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  configs:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
-                  shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
+                  salesOrganisation: eligibilityState.salesOrganisation,
+                  configs: eligibilityState.salesOrgConfigs,
+                  customerCodeInfo: eligibilityState.customerCodeInfo,
+                  shipToInfo: eligibilityState.shipToInfo,
                   selectedMaterialFilter: value,
-                  user: context.read<UserBloc>().state.user,
+                  user: eligibilityState.user,
                 ),
               );
         }
@@ -94,50 +92,24 @@ class SearchAndFilter extends StatelessWidget {
     });
   }
 
-  bool _haveDifferenceFilter(BuildContext context, MaterialFilter value) {
-    return context
-                .read<MaterialListBloc>()
-                .state
-                .selectedMaterialFilter
-                .isFavourite !=
-            value.isFavourite ||
-        context
-                .read<MaterialListBloc>()
-                .state
-                .selectedMaterialFilter
-                .bundleOffers !=
-            value.bundleOffers ||
-        context
-                .read<MaterialListBloc>()
-                .state
-                .selectedMaterialFilter
-                .manufactureListSelected !=
-            value.manufactureListSelected ||
-        context
-                .read<MaterialListBloc>()
-                .state
-                .selectedMaterialFilter
-                .countryListSelected !=
-            value.countryListSelected ||
-        context
-                .read<MaterialListBloc>()
-                .state
-                .selectedMaterialFilter
-                .isProductOffer !=
-            value.isProductOffer ||
-        context.read<MaterialListBloc>().state.selectedMaterialFilter.sortBy !=
-            value.sortBy ||
-        context
-                .read<MaterialListBloc>()
-                .state
-                .selectedMaterialFilter
-                .comboOffers !=
-            value.comboOffers ||
-        context
-                .read<MaterialListBloc>()
-                .state
-                .selectedMaterialFilter
-                .isCovidSelected !=
-            value.isCovidSelected;
+  bool _haveDifferenceFilter(BuildContext context, MaterialFilter newFilter) {
+    final currentFilter =
+        context.read<MaterialListBloc>().state.selectedMaterialFilter;
+
+    // Can not use currentFilter != newFilter here because:
+    // 1. newFilter coming from MaterialFilterBloc has data in manufactureMapOptions, countryMapOptions and brandList fields
+    // 2. currentFilter coming from MaterialListBloc doesn't has data in those above fields
+    // ==> Using currentFilter != newFilter will always return true here
+
+    return currentFilter.isFavourite != newFilter.isFavourite ||
+        currentFilter.bundleOffers != newFilter.bundleOffers ||
+        currentFilter.manufactureListSelected !=
+            newFilter.manufactureListSelected ||
+        currentFilter.countryListSelected != newFilter.countryListSelected ||
+        currentFilter.isProductOffer != newFilter.isProductOffer ||
+        currentFilter.sortBy != newFilter.sortBy ||
+        currentFilter.comboOffers != newFilter.comboOffers ||
+        currentFilter.isCovidSelected != newFilter.isCovidSelected ||
+        currentFilter.isMarketPlace != newFilter.isMarketPlace;
   }
 }

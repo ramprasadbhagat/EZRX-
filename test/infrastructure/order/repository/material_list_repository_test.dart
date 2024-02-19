@@ -209,6 +209,7 @@ void main() {
             isComboOffers: fakeMaterialFilter.comboOffers,
             showSampleItem: false,
             market: fakeMarket,
+            isMarketPlace: fakeMaterialFilter.isMarketPlace,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -262,6 +263,7 @@ void main() {
             isComboOffers: fakeMaterialFilterWithComboOffers.comboOffers,
             showSampleItem: false,
             market: fakeMarket,
+            isMarketPlace: fakeMaterialFilterWithComboOffers.isMarketPlace,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,
@@ -710,6 +712,7 @@ void main() {
             isComboOffers: fakeMaterialFilter.comboOffers,
             showSampleItem: true,
             market: fakeMarket,
+            isMarketPlace: false,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -758,6 +761,7 @@ void main() {
             isComboOffers: fakeMaterialFilter.comboOffers,
             showSampleItem: true,
             market: fakeMarket,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,

@@ -24,6 +24,7 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
 
 enum MaterialFilterType {
   isFavourite,
+  isMarketPlace,
   isCovidSelected,
   productOffers,
   bundleOffers,
