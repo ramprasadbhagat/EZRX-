@@ -414,7 +414,28 @@ class _BundleSheetFooter extends StatelessWidget {
       enableDrag: false,
       isDismissible: false,
       builder: (_) {
-        return const AddToCartErrorSection();
+        final bundleAddToCartState = context.read<BundleAddToCartBloc>().state;
+        final materialInCart =
+            context.read<CartBloc>().state.cartProducts.firstWhere(
+                  (element) =>
+                      element.bundle.bundleCode ==
+                      bundleAddToCartState.bundle.materialNumber.getValue(),
+                  orElse: () => PriceAggregate.empty(),
+                );
+
+        return AddToCartErrorSection(
+          priceAggregate: PriceAggregate.empty().copyWith(
+            bundle: Bundle.empty().copyWith(
+              materials: bundleAddToCartState.selectedMaterialInfo(
+                materialInCart,
+              ),
+              bundleCode: bundleAddToCartState.bundle.materialNumber.getValue(),
+              bundleName: BundleName(
+                bundleAddToCartState.bundle.materialDescription,
+              ),
+            ),
+          ),
+        );
       },
     );
   }

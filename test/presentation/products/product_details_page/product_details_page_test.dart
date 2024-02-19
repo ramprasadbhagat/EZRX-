@@ -367,6 +367,210 @@ void main() {
         expect(addToCartErrorSection, findsOneWidget);
       });
 
+      testWidgets(
+          'Find Add To Cart Error Section When Add To Cart Button Pressed and tap to proceed button',
+          (tester) async {
+        when(
+          () => autoRouterMock
+              .push(ProductDetailsPageRoute(materialInfo: materialInfo)),
+        ).thenAnswer((invocation) => Future(() => null));
+        when(
+          () => autoRouterMock.pop(),
+        ).thenAnswer((invocation) => Future(() => true));
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: true,
+              ),
+            ),
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {materialInfo.materialNumber: materialPrice},
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+              addOosMaterials: OosMaterial(true),
+              oosValue: OosValue(1),
+            ),
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: true,
+              ),
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('true'),
+              ),
+            ),
+          ),
+        );
+        when(() => cartMockBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isUpserting: false,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(isFOCMaterial: false),
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cartButtonFinder =
+            find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+        final addToCartButton = find.byType(ElevatedButton);
+        final addToCartErrorSection =
+            find.byKey(WidgetKeys.addToCartErrorSection);
+        final addToCartErrorSectionProceed =
+            find.byKey(WidgetKeys.addToCartErrorSectionProceed);
+        expect(cartButtonFinder, findsOneWidget);
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        await tester.pumpAndSettle();
+        expect(addToCartErrorSection, findsOneWidget);
+        expect(addToCartErrorSectionProceed, findsOneWidget);
+
+        await tester.tap(addToCartErrorSectionProceed);
+
+        whenListen(
+          cartMockBloc,
+          Stream.fromIterable([
+            CartState.initial().copyWith(
+              isClearing: true,
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: materialInfo.copyWith(isFOCMaterial: false),
+                )
+              ],
+            ),
+            CartState.initial(),
+          ]),
+        );
+        await tester.pump(const Duration(seconds: 5));
+        await tester.pumpAndSettle();
+        verify(
+          () => cartMockBloc.add(
+            const CartEvent.clearCart(),
+          ),
+        ).called(1);
+      });
+      testWidgets(
+          'Find Add To Cart Error Section When Add To Cart Button Pressed upsertCart call',
+          (tester) async {
+        when(
+          () => autoRouterMock
+              .push(ProductDetailsPageRoute(materialInfo: materialInfo)),
+        ).thenAnswer((invocation) => Future(() => null));
+        when(
+          () => autoRouterMock.pop(),
+        ).thenAnswer((invocation) => Future(() => true));
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: true,
+              ),
+            ),
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {materialInfo.materialNumber: materialPrice},
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+              addOosMaterials: OosMaterial(true),
+              oosValue: OosValue(1),
+            ),
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: true,
+                type: MaterialInfoType.material(),
+              ),
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('true'),
+              ),
+            ),
+          ),
+        );
+        when(() => cartMockBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isUpserting: false,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(isFOCMaterial: false),
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cartButtonFinder =
+            find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+        final addToCartButton = find.byType(ElevatedButton);
+        expect(cartButtonFinder, findsOneWidget);
+        expect(addToCartButton, findsOneWidget);
+        whenListen(
+          cartMockBloc,
+          Stream.fromIterable([
+            CartState.initial().copyWith(
+              isClearing: true,
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: materialInfo.copyWith(isFOCMaterial: false),
+                )
+              ],
+            ),
+            CartState.initial(),
+          ]),
+        );
+        await tester.tap(addToCartButton);
+        await tester.pumpAndSettle();
+
+        await tester.pump(const Duration(seconds: 5));
+        await tester.pumpAndSettle();
+
+        verify(
+          () => cartMockBloc.add(
+            CartEvent.upsertCart(
+              priceAggregate: PriceAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  quantity: MaterialQty(2),
+                  isFOCMaterial: true,
+                  type: MaterialInfoType.material(),
+                ),
+                price: materialPrice,
+                quantity: 2,
+                salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+                  materialWithoutPrice: true,
+                  addOosMaterials: OosMaterial(true),
+                  oosValue: OosValue(1),
+                ),
+              ),
+            ),
+          ),
+        ).called(1);
+      });
+
       testWidgets('Should scroll to top when press FAB', (tester) async {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(

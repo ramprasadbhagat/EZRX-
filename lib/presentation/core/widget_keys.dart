@@ -32,6 +32,8 @@ class WidgetKeys {
   static const Key confirmBottomSheetConfirmButton =
       Key('confirmBottomSheetConfirmButton');
   static const Key addToCartErrorSection = Key('addToCartErrorSection');
+  static const Key addToCartErrorSectionProceed =
+      Key('addToCartErrorSectionProceed');
   static const Key moreTapListContent = Key('moreTapListContent');
   static const Key settingTile = Key('settingTile');
   static const Key versionDisplay = Key('versionDisplay');

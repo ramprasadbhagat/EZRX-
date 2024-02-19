@@ -915,7 +915,34 @@ void _showDetailsPagePage({
     isDismissible: false,
     clipBehavior: Clip.antiAliasWithSaveLayer,
     builder: (_) {
-      return const AddToCartErrorSection();
+      final productDetailsState = context.read<ProductDetailBloc>().state;
+      final cartState = context.read<CartBloc>().state;
+      final materialNumber = productDetailsState
+          .productDetailAggregate.materialInfo.materialNumber;
+      final price = context
+              .read<MaterialPriceBloc>()
+              .state
+              .materialPrice[materialNumber] ??
+          Price.empty();
+
+      return AddToCartErrorSection(
+        priceAggregate: PriceAggregate.empty().copyWith(
+          materialInfo:
+              productDetailsState.productDetailAggregate.materialInfo.copyWith(
+            counterOfferDetails:
+                cartState.productCounterOfferDetails(materialNumber),
+          ),
+          price: price,
+          salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
+          quantity: cartState.getQuantityOfProduct(
+                productNumber: materialNumber,
+              ) +
+              productDetailsState.inputQty,
+          bonusSampleItems: cartState.productBonusList(
+            materialNumber,
+          ),
+        ),
+      );
     },
   );
 }

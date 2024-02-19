@@ -619,6 +619,163 @@ void main() {
         expect(bundleMaterialExpiryDateFinder, findsAtLeastNWidgets(2));
         expect(expiryDateTextFinder, findsAtLeastNWidgets(2));
       });
+
+      testWidgets(
+          'Test CovidWarningMessageBottomSheet processed button tap appeared when cart contains FOC materials',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+          ),
+        );
+        when(() => bundleAddToCartBloc.state).thenReturn(
+          BundleAddToCartState.initial().copyWith(
+            bundle: MaterialInfo.empty().copyWith(
+              bundle: Bundle.empty().copyWith(
+                bundleInformation: <BundleInfo>[
+                  BundleInfo.empty()
+                      .copyWith(quantity: 10, sequence: 1, rate: 20),
+                ],
+              ),
+            ),
+            bundleMaterials: <MaterialInfo>[
+              MaterialInfo.empty().copyWith(
+                quantity: MaterialQty(15),
+                materialNumber: MaterialNumber('fake-material-1'),
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+              ),
+            ],
+          ),
+        );
+
+        when(() => cartMockBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo:
+                    MaterialInfo.empty().copyWith(isFOCMaterial: true),
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final textField = find.descendant(
+          of: find.byKey(WidgetKeys.bundleMaterialItem('fake-material-1')),
+          matching: find.byKey(WidgetKeys.bundleQuantityTextKey),
+        );
+        await tester.tap(textField);
+        await tester.enterText(textField, '15');
+        expect(textField, findsWidgets);
+        final sheetAddToCartButton =
+            find.byKey(WidgetKeys.bundleAddToCartSheetSubmitButton);
+        final addToCartErrorSectionProceed =
+            find.byKey(WidgetKeys.addToCartErrorSectionProceed);
+        await tester.tap(sheetAddToCartButton);
+        await tester.pumpAndSettle();
+        final addToCartErrorSection =
+            find.byKey(WidgetKeys.addToCartErrorSection);
+        expect(addToCartErrorSection, findsOneWidget);
+        expect(addToCartErrorSectionProceed, findsOneWidget);
+        await tester.tap(addToCartErrorSectionProceed);
+        await tester.pumpAndSettle();
+        verify(
+          () => cartMockBloc.add(
+            const CartEvent.clearCart(),
+          ),
+        ).called(1);
+      });
+      testWidgets(
+          'Test CovidWarningMessageBottomSheet upsert cart call after processed button tap appeared when cart contains FOC materials',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+          ),
+        );
+        when(() => bundleAddToCartBloc.state).thenReturn(
+          BundleAddToCartState.initial().copyWith(
+            bundle: MaterialInfo.empty().copyWith(
+              bundle: Bundle.empty().copyWith(
+                bundleInformation: <BundleInfo>[
+                  BundleInfo.empty()
+                      .copyWith(quantity: 10, sequence: 1, rate: 20),
+                ],
+              ),
+            ),
+            bundleMaterials: <MaterialInfo>[
+              MaterialInfo.empty().copyWith(
+                quantity: MaterialQty(15),
+                materialNumber: MaterialNumber('fake-material-1'),
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+              ),
+            ],
+          ),
+        );
+
+        when(() => cartMockBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo:
+                    MaterialInfo.empty().copyWith(isFOCMaterial: true),
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final textField = find.descendant(
+          of: find.byKey(WidgetKeys.bundleMaterialItem('fake-material-1')),
+          matching: find.byKey(WidgetKeys.bundleQuantityTextKey),
+        );
+        await tester.tap(textField);
+        await tester.enterText(textField, '15');
+        expect(textField, findsWidgets);
+        final sheetAddToCartButton =
+            find.byKey(WidgetKeys.bundleAddToCartSheetSubmitButton);
+        whenListen(
+          cartMockBloc,
+          Stream.fromIterable([
+            CartState.initial().copyWith(
+              isClearing: true,
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo:
+                      MaterialInfo.empty().copyWith(isFOCMaterial: true),
+                )
+              ],
+            ),
+            CartState.initial(),
+          ]),
+        );
+        await tester.tap(sheetAddToCartButton);
+        await tester.pumpAndSettle();
+        verify(
+          () => cartMockBloc.add(
+            CartEvent.upsertCartItems(
+              priceAggregate: PriceAggregate.empty().copyWith(
+                bundle: Bundle.empty().copyWith(
+                  materials: [
+                    MaterialInfo.empty().copyWith(
+                      quantity: MaterialQty(15),
+                      materialNumber: MaterialNumber('fake-material-1'),
+                    ),
+                  ],
+                  bundleCode: '',
+                  bundleName: BundleName(''),
+                ),
+              ),
+            ),
+          ),
+        ).called(1);
+      });
     },
   );
 }
