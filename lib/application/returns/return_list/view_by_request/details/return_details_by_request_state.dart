@@ -7,6 +7,9 @@ class ReturnDetailsByRequestState with _$ReturnDetailsByRequestState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required List<ReturnRequestInformation> requestInformation,
     required ReturnRequestInformationHeader requestInformationHeader,
+    required List<ReturnRequestAttachment> downloadingAttachments,
+    required ReturnRequestAttachment downloadedAttachment,
+    required Option<Either<ApiFailure, dynamic>> downloadFailureOrSuccessOption,
   }) = _ReturnSummaryDetailsState;
 
   factory ReturnDetailsByRequestState.initial() => ReturnDetailsByRequestState(
@@ -14,5 +17,8 @@ class ReturnDetailsByRequestState with _$ReturnDetailsByRequestState {
         isLoading: false,
         requestInformation: <ReturnRequestInformation>[],
         requestInformationHeader: ReturnRequestInformationHeader.empty(),
+        downloadingAttachments: <ReturnRequestAttachment>[],
+        downloadedAttachment: ReturnRequestAttachment.empty(),
+        downloadFailureOrSuccessOption: none(),
       );
 }

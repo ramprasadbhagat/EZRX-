@@ -30,7 +30,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required String bapiSalesDocNumber,
     required StatusType bapiStatus,
     required StatusType status,
-    required String statusReason,
+    required StatusReason statusReason,
     required bool outsidePolicy,
     required DateTimeStringValue invoiceDate,
     required Prsfd prsfd,
@@ -64,7 +64,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         rejectReason: '',
         returnQuantity: '',
         status: StatusType(''),
-        statusReason: '',
+        statusReason: StatusReason(''),
         totalPrice: 0.0,
         unitPrice: 0.0,
         prsfd: Prsfd(''),
@@ -114,6 +114,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
 
   bool get isApprovedCounterOffer =>
       status.isApprovedStatus && isCounterOfferRequested;
+  bool get isEmpty => this == ReturnRequestInformation.empty();
 }
 
 @freezed

@@ -30,7 +30,7 @@ class ReturnSummaryDetailsSection extends StatelessWidget {
           createDateTime: requestInformationHeader.createdDateTime,
           onTap: () {},
           status: requestInformation.status.displayStatus,
-          title: 'Return request status'.tr(),
+          title: context.tr('Return request status'),
         ),
         const Divider(
           indent: 0,
@@ -74,7 +74,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
             children: [
               Expanded(
                 child: Text(
-                  '${'Return'.tr()} #${widget.requestInformationHeader.requestID}',
+                  '${context.tr('Return')} #${widget.requestInformationHeader.requestID}',
                   key: WidgetKeys.returnItemDetailReturnId,
                   style: Theme.of(context)
                       .textTheme
@@ -97,7 +97,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
                   }
                 },
                 child: Text(
-                  isCopied ? 'Copied'.tr() : 'Copy'.tr(),
+                  isCopied ? context.tr('Copied') : context.tr('Copy'),
                   key: WidgetKeys.returnItemDetailCopyButton,
                   textAlign: TextAlign.start,
                   style: Theme.of(context)
@@ -112,7 +112,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
             children: [
               BalanceTextRow(
                 key: WidgetKeys.returnItemDetailRequestDate,
-                keyText: 'Request date'.tr(),
+                keyText: context.tr('Request date'),
                 keyFlex: 2,
                 valueText: widget.requestInformation.createdDate.dateString,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -123,7 +123,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
                     ),
               ),
               BalanceTextRow(
-                keyText: 'Return reference'.tr(),
+                keyText: context.tr('Return reference'),
                 keyFlex: 2,
                 valueText: widget
                     .requestInformationHeader.returnReference.displayNAIfEmpty,
@@ -135,7 +135,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
                     ),
               ),
               BalanceTextRow(
-                keyText: 'Special instructions'.tr(),
+                keyText: context.tr('Special instructions'),
                 keyFlex: 2,
                 valueText: widget.requestInformationHeader.specialInstructions
                     .displaySpecialInstructions,

@@ -11,7 +11,6 @@ import 'package:ezrxmobile/presentation/returns/return_summary_request_details/w
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
 class ReturnRequestDetails extends StatelessWidget {
@@ -31,6 +30,8 @@ class ReturnRequestDetails extends StatelessWidget {
       ),
       body:
           BlocConsumer<ReturnDetailsByRequestBloc, ReturnDetailsByRequestState>(
+        listenWhen: (previous, current) =>
+            previous.isLoading != current.isLoading,
         listener: (context, state) {
           state.failureOrSuccessOption.fold(
             () {},
@@ -43,7 +44,8 @@ class ReturnRequestDetails extends StatelessWidget {
           );
         },
         buildWhen: (previous, current) =>
-            previous.isLoading != current.isLoading,
+            previous.isLoading != current.isLoading ||
+            previous.downloadingAttachments != current.downloadingAttachments,
         builder: (context, state) {
           return AnnouncementBanner(
             currentPath: context.router.currentPath,

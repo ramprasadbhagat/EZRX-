@@ -38,7 +38,7 @@ mixin _$ReturnRequestInformation {
   String get bapiSalesDocNumber => throw _privateConstructorUsedError;
   StatusType get bapiStatus => throw _privateConstructorUsedError;
   StatusType get status => throw _privateConstructorUsedError;
-  String get statusReason => throw _privateConstructorUsedError;
+  StatusReason get statusReason => throw _privateConstructorUsedError;
   bool get outsidePolicy => throw _privateConstructorUsedError;
   DateTimeStringValue get invoiceDate => throw _privateConstructorUsedError;
   Prsfd get prsfd => throw _privateConstructorUsedError;
@@ -83,7 +83,7 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       String bapiSalesDocNumber,
       StatusType bapiStatus,
       StatusType status,
-      String statusReason,
+      StatusReason statusReason,
       bool outsidePolicy,
       DateTimeStringValue invoiceDate,
       Prsfd prsfd,
@@ -227,7 +227,7 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
       statusReason: null == statusReason
           ? _value.statusReason
           : statusReason // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusReason,
       outsidePolicy: null == outsidePolicy
           ? _value.outsidePolicy
           : outsidePolicy // ignore: cast_nullable_to_non_nullable
@@ -295,7 +295,7 @@ abstract class _$$_ReturnRequestInformationCopyWith<$Res>
       String bapiSalesDocNumber,
       StatusType bapiStatus,
       StatusType status,
-      String statusReason,
+      StatusReason statusReason,
       bool outsidePolicy,
       DateTimeStringValue invoiceDate,
       Prsfd prsfd,
@@ -437,7 +437,7 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
       statusReason: null == statusReason
           ? _value.statusReason
           : statusReason // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusReason,
       outsidePolicy: null == outsidePolicy
           ? _value.outsidePolicy
           : outsidePolicy // ignore: cast_nullable_to_non_nullable
@@ -576,7 +576,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
   @override
   final StatusType status;
   @override
-  final String statusReason;
+  final StatusReason statusReason;
   @override
   final bool outsidePolicy;
   @override
@@ -739,7 +739,7 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
           required final String bapiSalesDocNumber,
           required final StatusType bapiStatus,
           required final StatusType status,
-          required final String statusReason,
+          required final StatusReason statusReason,
           required final bool outsidePolicy,
           required final DateTimeStringValue invoiceDate,
           required final Prsfd prsfd,
@@ -794,7 +794,7 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   @override
   StatusType get status;
   @override
-  String get statusReason;
+  StatusReason get statusReason;
   @override
   bool get outsidePolicy;
   @override

@@ -471,6 +471,8 @@ class WidgetKeys {
   static Key returnSummaryInfoIcon(String header) => Key(header);
   static const Key returnSummaryInfoBottomSheet =
       Key('returnSummaryInfoBottomSheet');
+  static const Key returnBonusItemCard = Key('returnBonusItemCard');
+
   //============================================================
   //============================================================
   //  Reset Password

@@ -1,18 +1,23 @@
-part of 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/request_item_section.dart';
+part of 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 
-class _ReturnMaterialItemSection extends StatelessWidget {
-  const _ReturnMaterialItemSection({
+class _ReturnItemExpandSection extends StatelessWidget {
+  const _ReturnItemExpandSection({
     Key? key,
-    required this.returnRequestinformation,
+    required this.returnRequestInformation,
+    required this.downloadingAttachments,
+    required this.downloadAttachment,
   }) : super(key: key);
-  final ReturnRequestInformation returnRequestinformation;
+  final ReturnRequestInformation returnRequestInformation;
+  final List<ReturnRequestAttachment> downloadingAttachments;
+  final Function(ReturnRequestAttachment) downloadAttachment;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.returnDetailSummary,
       children: [
         _MaterialDetailsSection(
-          requestInformation: returnRequestinformation,
+          requestInformation: returnRequestInformation,
         ),
         const Divider(
           indent: 0,
@@ -21,22 +26,28 @@ class _ReturnMaterialItemSection extends StatelessWidget {
           color: ZPColors.lightGray2,
         ),
         _ApprovalDetailsSection(
-          requestInformation: returnRequestinformation,
+          requestInformation: returnRequestInformation,
+          downloadingAttachments: downloadingAttachments,
+          downloadAttachment: downloadAttachment,
         ),
         _ReturnDetailsSection(
-          requestInformation: returnRequestinformation,
+          requestInformation: returnRequestInformation,
+          downloadingAttachments: downloadingAttachments,
+          downloadAttachment: downloadAttachment,
         ),
-        if (returnRequestinformation.bonusInformation.isNotEmpty) ...[
+        if (returnRequestInformation.bonusInformation.isNotEmpty) ...[
           const Divider(
             indent: 0,
             height: 20,
             endIndent: 0,
             color: ZPColors.lightGray2,
           ),
-          ...returnRequestinformation.bonusInformation.map(
+          ...returnRequestInformation.bonusInformation.map(
             (item) => _ReturnBonusItemSection(
               isExpandable: false,
               bonusItem: item,
+              downloadingAttachments: downloadingAttachments,
+              downloadAttachment: downloadAttachment,
             ),
           ),
         ],
@@ -86,6 +97,7 @@ class _MaterialDetailsSection extends StatelessWidget {
           valueText: requestInformation.invoiceNo,
         ),
         BalanceTextRow(
+          key: WidgetKeys.returnItemDetailMaterialInvoiceDate,
           keyText: context.tr('Invoice date'),
           keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                 color: ZPColors.neutralsBlack,
@@ -101,9 +113,13 @@ class _ReturnDetailsSection extends StatelessWidget {
   const _ReturnDetailsSection({
     Key? key,
     required this.requestInformation,
+    required this.downloadingAttachments,
+    required this.downloadAttachment,
     this.isBonusDetails = false,
   }) : super(key: key);
   final ReturnRequestInformation requestInformation;
+  final List<ReturnRequestAttachment> downloadingAttachments;
+  final Function(ReturnRequestAttachment) downloadAttachment;
   final bool isBonusDetails;
   @override
   Widget build(BuildContext context) {
@@ -117,7 +133,7 @@ class _ReturnDetailsSection extends StatelessWidget {
           ),
           child: Text(
             isBonusDetails
-                ? context.tr('Bonus Return details')
+                ? context.tr('Bonus return details')
                 : context.tr('Return details'),
             style: Theme.of(context).textTheme.labelMedium,
           ),
@@ -136,9 +152,10 @@ class _ReturnDetailsSection extends StatelessWidget {
               ),
           valueText: requestInformation.remarks.displayText,
         ),
-        _CustomListTile(
-          imageUrlList: requestInformation.imageUrl,
-          title: 'Attachments',
+        _ReturnAttachmentSection(
+          attachments: requestInformation.attachmentUrl,
+          downloadingAttachments: downloadingAttachments,
+          downloadAttachment: downloadAttachment,
         ),
       ],
     );
@@ -149,14 +166,18 @@ class _ApprovalDetailsSection extends StatelessWidget {
   const _ApprovalDetailsSection({
     Key? key,
     required this.requestInformation,
+    required this.downloadingAttachments,
+    required this.downloadAttachment,
     this.isBonusDetails = false,
   }) : super(key: key);
   final ReturnRequestInformation requestInformation;
+  final List<ReturnRequestAttachment> downloadingAttachments;
+  final Function(ReturnRequestAttachment) downloadAttachment;
   final bool isBonusDetails;
 
   @override
   Widget build(BuildContext context) {
-    return requestInformation.status.isApprovedStatus
+    return requestInformation.status.showApprovalDetails
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -167,22 +188,29 @@ class _ApprovalDetailsSection extends StatelessWidget {
                 ),
                 child: Text(
                   isBonusDetails
-                      ? context.tr('Bonus Approval details')
+                      ? context.tr('Bonus approval details')
                       : context.tr('Approval details'),
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
               BalanceTextRow(
                 keyText: context.tr('Reason'),
-                valueText: requestInformation.returnOrderDesc,
+                valueText: requestInformation.statusReason.getOrDefault,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
               ),
               BalanceTextRow(
                 keyText: context.tr('Approval number'),
                 valueText: requestInformation.displayBapiStatus,
+                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
               ),
-              _CustomListTile(
-                imageUrlList: requestInformation.imageUrl,
-                title: 'Attachments',
+              _ReturnAttachmentSection(
+                downloadingAttachments: downloadingAttachments,
+                downloadAttachment: downloadAttachment,
+                attachments: const <ReturnRequestAttachment>[],
               ),
               const Divider(
                 indent: 0,
@@ -196,70 +224,52 @@ class _ApprovalDetailsSection extends StatelessWidget {
   }
 }
 
-class _CustomListTile extends StatelessWidget {
-  const _CustomListTile({
+class _ReturnAttachmentSection extends StatelessWidget {
+  const _ReturnAttachmentSection({
     Key? key,
-    required this.title,
-    required this.imageUrlList,
+    required this.attachments,
+    required this.downloadingAttachments,
+    required this.downloadAttachment,
   }) : super(key: key);
-  final String title;
-  final List<String> imageUrlList;
+  final List<ReturnRequestAttachment> attachments;
+  final List<ReturnRequestAttachment> downloadingAttachments;
+  final Function(ReturnRequestAttachment) downloadAttachment;
 
   @override
   Widget build(BuildContext context) {
-    return imageUrlList.isEmpty
+    return attachments.isEmpty
         ? BalanceTextRow(
-            keyText: context.tr(title),
+            keyText: context.tr('Attachments'),
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),
             valueText: '-',
           )
         : ListTile(
+            key: WidgetKeys.returnAttachmentSection,
             contentPadding: EdgeInsets.zero,
             title: Text(
-              '${context.tr(title)}:',
+              '${context.tr('Attachments')}:',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
             ),
-            subtitle: ListView.builder(
-              itemCount: imageUrlList.length,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                final file = File(imageUrlList[index]);
-                final fileName = path.basename(file.path).split('?').first;
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(
+                attachments.length,
+                (index) {
+                  final attachment = attachments.elementAt(index);
+                  final isDownloading =
+                      downloadingAttachments.contains(attachment);
 
-                return Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 5,
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: ZPColors.accentColor,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        fileName,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.cloud_download_outlined,
-                          color: ZPColors.primary,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+                  return ReturnDetailAttachmentTile(
+                    attachment: attachment,
+                    isDownloading: isDownloading,
+                    tapDownload: () => downloadAttachment(attachment),
+                  );
+                },
+              ),
             ),
           );
   }

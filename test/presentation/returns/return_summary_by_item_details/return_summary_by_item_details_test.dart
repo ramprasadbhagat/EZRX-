@@ -23,9 +23,8 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/return_summary_by_item_details.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_request_summary_item_section.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_bonus_item_section.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_details_section.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/widgets/return_summary_details_section.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_summary_item_price.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -151,6 +150,12 @@ void main() {
       testWidgets(
         '=> Test page app bar and body',
         (tester) async {
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock,
+              requestInformationHeader: returnRequestInformationHeader,
+            ),
+          );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           expect(find.text('Return item details'.tr()), findsOneWidget);
@@ -221,8 +226,7 @@ void main() {
           );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
-          expect(find.byType(ReturnSummaryItemSection), findsOneWidget);
-          expect(find.byType(ReturnItemSection), findsOneWidget);
+          expect(find.byType(ReturnItemCard), findsOneWidget);
           expect(find.byType(CommonTileItem), findsOneWidget);
           final showDetailButtonFinder =
               find.byKey(WidgetKeys.returnDetailShowDetailButton);
@@ -266,7 +270,7 @@ void main() {
           );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
-          expect(find.text('Bonus Details'), findsOneWidget);
+          expect(find.text('Bonus details'.tr()), findsOneWidget);
           expect(
             find.descendant(
               of: find.byType(StatusLabel),
@@ -280,7 +284,7 @@ void main() {
           );
           expect(
             find.descendant(
-              of: find.byType(ReturnSummaryBonusItemSection),
+              of: find.byKey(WidgetKeys.returnBonusItemCard),
               matching: find.text('Bonus'),
             ),
             findsOneWidget,
@@ -288,7 +292,7 @@ void main() {
 
           expect(
             find.descendant(
-              of: find.byType(ReturnSummaryBonusItemSection),
+              of: find.byKey(WidgetKeys.returnBonusItemCard),
               matching: find.text(
                 'Batch ${requestInformationMock.batch} (Expires ${requestInformationMock.expiryDate.dateString})',
               ),
@@ -299,7 +303,7 @@ void main() {
 
           expect(
             find.descendant(
-              of: find.byType(ReturnSummaryBonusItemSection),
+              of: find.byKey(WidgetKeys.returnBonusItemCard),
               matching: find.text(
                 'Qty: ${requestInformationMock.returnQuantity} ',
               ),
@@ -309,7 +313,7 @@ void main() {
 
           expect(
             find.descendant(
-              of: find.byType(ReturnSummaryBonusItemSection),
+              of: find.byKey(WidgetKeys.returnBonusItemCard),
               matching: find.text(
                 'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).'
                     .tr(),
@@ -338,7 +342,7 @@ void main() {
           );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
-          expect(find.text('Bonus Details'), findsOneWidget);
+          expect(find.text('Bonus details'.tr()), findsOneWidget);
           expect(
             find.descendant(
               of: find.byType(StatusLabel),
@@ -352,10 +356,10 @@ void main() {
           );
           expect(
             find.descendant(
-              of: find.byType(ReturnSummaryBonusItemSection),
+              of: find.byKey(WidgetKeys.returnBonusItemCard),
               matching: find.text('Bonus'),
             ),
-            findsNothing,
+            findsOneWidget,
           );
         },
       );
@@ -373,7 +377,7 @@ void main() {
           );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
-          expect(find.text('Bonus Details'), findsOneWidget);
+          expect(find.text('Bonus details'.tr()), findsOneWidget);
           expect(
             find.descendant(
               of: find.byType(StatusLabel),
@@ -387,7 +391,7 @@ void main() {
           );
           expect(
             find.descendant(
-              of: find.byType(ReturnSummaryBonusItemSection),
+              of: find.byKey(WidgetKeys.returnBonusItemCard),
               matching: find.text('Bonus'),
             ),
             findsOneWidget,
@@ -400,7 +404,7 @@ void main() {
           await tester.pumpAndSettle();
           expect(
             find.descendant(
-              of: find.byType(ReturnSummaryBonusItemSection),
+              of: find.byKey(WidgetKeys.returnBonusItemCard),
               matching: find.text('Bonus return details'),
             ),
             findsNothing,
@@ -410,7 +414,7 @@ void main() {
           await tester.pumpAndSettle();
           expect(
             find.descendant(
-              of: find.byType(ReturnSummaryBonusItemSection),
+              of: find.byKey(WidgetKeys.returnBonusItemCard),
               matching: find.text('Bonus return details'),
             ),
             findsOneWidget,
@@ -425,7 +429,7 @@ void main() {
           final comment = find.byKey(
             WidgetKeys.balanceTextRow(
               'Comments',
-              requestInformationMock.comment.getOrDefaultValue(''),
+              requestInformationMock.remarks.displayText,
             ),
           );
           expect(comment, findsWidgets);
@@ -495,7 +499,7 @@ void main() {
             findsOneWidget,
           );
           expect(find.byType(ReturnSummaryDetailsSection), findsOneWidget);
-          expect(find.byType(ReturnSummaryItemSection), findsOneWidget);
+          expect(find.byType(ReturnItemCard), findsOneWidget);
 
           final copyIdButtonFinder =
               find.byKey(WidgetKeys.returnItemDetailCopyButton);
@@ -952,7 +956,7 @@ void main() {
               .data;
           expect(
             snackBarMessage,
-            equals('Attachments downloaded successfully.'.tr()),
+            equals('The attachments downloaded successfully'),
           );
         });
 

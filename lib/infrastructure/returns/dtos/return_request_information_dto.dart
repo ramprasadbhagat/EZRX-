@@ -103,7 +103,7 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       bapiSalesDocNumber: bapiSalesDocNumber,
       bapiStatus: StatusType(bapiStatus),
       status: StatusType(status),
-      statusReason: statusReason,
+      statusReason: StatusReason(statusReason),
       outsidePolicy: outsidePolicy,
       invoiceDate: DateTimeStringValue(invoiceDate),
       prsfd: Prsfd(prsfd),

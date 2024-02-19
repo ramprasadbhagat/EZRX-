@@ -1,33 +1,50 @@
-part of 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/request_item_section.dart';
+part of 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 
 class _ReturnBonusItemSection extends StatelessWidget {
   const _ReturnBonusItemSection({
     Key? key,
     required this.bonusItem,
     required this.isExpandable,
+    required this.downloadingAttachments,
+    required this.downloadAttachment,
   }) : super(key: key);
   final ReturnRequestInformation bonusItem;
+  final List<ReturnRequestAttachment> downloadingAttachments;
+  final Function(ReturnRequestAttachment) downloadAttachment;
   final bool isExpandable;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.returnBonusItemCard,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Row(
+          child: Column(
             children: [
-              Expanded(
-                child: Text(
-                  context.tr('Bonus details'),
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-              ),
-              StatusLabel(
-                status: StatusType(
-                  bonusItem.status.displayStatus,
-                ),
+              if (bonusItem.displayOutSidePolicy(
+                context
+                    .read<EligibilityBloc>()
+                    .state
+                    .salesOrgConfigs
+                    .allowReturnsOutsidePolicy,
+              ))
+                const OutsideReturnPolicyTag(),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      context.tr('Bonus details'),
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                  ),
+                  StatusLabel(
+                    status: StatusType(
+                      bonusItem.status.displayStatus,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -92,8 +109,10 @@ class _ReturnBonusItemSection extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ReturnSummaryItemPrice(
-                            requestInformation: bonusItem,
+                          Expanded(
+                            child: ReturnSummaryItemPrice(
+                              requestInformation: bonusItem,
+                            ),
                           ),
                           Text(
                             '${context.tr('Qty')}: ${bonusItem.returnQuantity} ',
@@ -116,8 +135,11 @@ class _ReturnBonusItemSection extends StatelessWidget {
         ),
         _ExpandableDetailSection(
           isExpandable: isExpandable,
-          expandWidget: _BonusDetailsSection(
+          isExpanded: true,
+          expandWidget: _ReturnBonusExpandSection(
             requestInformation: bonusItem,
+            downloadingAttachments: downloadingAttachments,
+            downloadAttachment: downloadAttachment,
           ),
         ),
       ],
@@ -125,12 +147,16 @@ class _ReturnBonusItemSection extends StatelessWidget {
   }
 }
 
-class _BonusDetailsSection extends StatelessWidget {
-  const _BonusDetailsSection({
+class _ReturnBonusExpandSection extends StatelessWidget {
+  const _ReturnBonusExpandSection({
     Key? key,
     required this.requestInformation,
+    required this.downloadingAttachments,
+    required this.downloadAttachment,
   }) : super(key: key);
   final ReturnRequestInformation requestInformation;
+  final List<ReturnRequestAttachment> downloadingAttachments;
+  final Function(ReturnRequestAttachment) downloadAttachment;
 
   @override
   Widget build(BuildContext context) {
@@ -139,11 +165,15 @@ class _BonusDetailsSection extends StatelessWidget {
         _ApprovalDetailsSection(
           key: WidgetKeys.returnBonusApprovalDetail,
           requestInformation: requestInformation,
+          downloadingAttachments: downloadingAttachments,
+          downloadAttachment: downloadAttachment,
           isBonusDetails: true,
         ),
         _ReturnDetailsSection(
           key: WidgetKeys.returnBonusReturnDetail,
           requestInformation: requestInformation,
+          downloadingAttachments: downloadingAttachments,
+          downloadAttachment: downloadAttachment,
           isBonusDetails: true,
         ),
       ],

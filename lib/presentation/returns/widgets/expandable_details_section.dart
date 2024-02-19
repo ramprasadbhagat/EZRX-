@@ -1,12 +1,14 @@
-part of 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/request_item_section.dart';
+part of 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 
 class _ExpandableDetailSection extends StatefulWidget {
   const _ExpandableDetailSection({
     Key? key,
     required this.isExpandable,
+    required this.isExpanded,
     required this.expandWidget,
   }) : super(key: key);
   final bool isExpandable;
+  final bool isExpanded;
   final Widget expandWidget;
 
   @override
@@ -15,7 +17,13 @@ class _ExpandableDetailSection extends StatefulWidget {
 }
 
 class __ExpandableDetailSectionState extends State<_ExpandableDetailSection> {
-  bool isExpanded = false;
+  late bool isExpanded;
+  @override
+  void initState() {
+    isExpanded = widget.isExpanded;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(

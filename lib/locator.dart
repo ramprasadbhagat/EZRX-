@@ -2146,6 +2146,8 @@ void setupLocator() {
     () => ReturnDetailsByRequestBloc(
       returnDetailsByRequestRepository:
           locator<ReturnDetailsByRequestRepository>(),
+      returnRequestRepository: locator<ReturnRequestRepository>(),
+
     ),
   );
 

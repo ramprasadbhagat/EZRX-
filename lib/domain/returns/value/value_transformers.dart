@@ -44,3 +44,6 @@ bool isUserOverride(String value) {
 bool isApproverOverride(String value) {
   return value == 'Approver';
 }
+
+String statusReason(String reason) =>
+    reason.isNotEmpty ? reason : 'Updated at EZA';

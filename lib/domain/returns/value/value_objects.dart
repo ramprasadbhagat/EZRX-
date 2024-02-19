@@ -149,3 +149,16 @@ class OverrideRole extends ValueObject<String> {
 
   const OverrideRole._(this.value);
 }
+
+class StatusReason extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory StatusReason(String input) {
+    return StatusReason._(validateStringNotEmpty(input));
+  }
+
+  String get getOrDefault => statusReason(value.getOrElse(() => ''));
+
+  const StatusReason._(this.value);
+}

@@ -403,19 +403,19 @@ void main() {
         const Offset(0.0, -1000.0),
         1000.0,
       );
-      expect(find.text('Bonus Approval details'), findsOneWidget);
+      expect(find.text('Bonus approval details'), findsOneWidget);
       WidgetKeys.balanceTextRow(
         'Approval number',
         approvalNumber,
       );
-      expect(find.text('Bonus Return details'), findsOneWidget);
+      expect(find.text('Bonus return details'), findsOneWidget);
       final bonusReturnReason = find.byKey(
         WidgetKeys.balanceTextRow(
           'Reason',
           bonusRejectReason,
         ),
       );
-      expect(bonusReturnReason, findsNWidgets(2));
+      expect(bonusReturnReason, findsOneWidget);
       final bonusComment = find.byKey(
         WidgetKeys.balanceTextRow(
           'Comments',
@@ -510,8 +510,6 @@ void main() {
           find.byKey(WidgetKeys.returnRequestDetailScrollList),
           const Offset(0, -200),
         );
-        await tester.pumpAndSettle();
-        await tester.tap(showHideButton);
         await tester.pumpAndSettle();
         expect(
           find.descendant(

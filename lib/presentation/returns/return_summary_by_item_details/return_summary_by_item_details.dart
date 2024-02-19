@@ -7,9 +7,8 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_request_summary_item_section.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_bonus_item_section.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_summary_details_section.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/widgets/return_summary_details_section.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,13 +54,14 @@ class ReturnRequestSummaryByItemDetails extends StatelessWidget {
             (either) => either.fold(
               (failure) => ErrorUtils.handleApiFailure(context, failure),
               (_) => CustomSnackBar(
-                messageText: 'Attachments downloaded successfully.',
+                messageText: 'The attachments downloaded successfully',
               ).show(context),
             ),
           );
         },
         buildWhen: (previous, current) =>
-            previous.isLoading != current.isLoading,
+            previous.isLoading != current.isLoading ||
+            previous.downloadingAttachments != current.downloadingAttachments,
         builder: (context, state) {
           return AnnouncementBanner(
             currentPath: context.router.currentPath,
@@ -86,15 +86,19 @@ class ReturnRequestSummaryByItemDetails extends StatelessWidget {
                         endIndent: 0,
                         color: ZPColors.lightGray2,
                       ),
-                      state.requestInformation.prsfd.isBonus
-                          ? ReturnSummaryBonusItemSection(
-                              key: WidgetKeys.returnItemDetailBonusItem,
-                              returnRequestInformation:
-                                  state.requestInformation,
-                            )
-                          : ReturnSummaryItemSection(
-                              requestInformation: state.requestInformation,
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: ReturnItemCard(
+                          returnRequestInformation: state.requestInformation,
+                          downloadingAttachments: state.downloadingAttachments,
+                          downloadAttachment: (attachment) =>
+                              context.read<ReturnSummaryDetailsBloc>().add(
+                                    ReturnSummaryDetailsEvent.downloadFile(
+                                      file: attachment,
+                                    ),
+                                  ),
+                        ),
+                      ),
                     ],
                   ),
           );

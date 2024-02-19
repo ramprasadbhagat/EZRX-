@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_request_information.da
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_details_by_request_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/return_request_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -14,14 +15,20 @@ import 'package:mocktail/mocktail.dart';
 class ReturnDetailsByRequestRepositoryMock extends Mock
     implements ReturnDetailsByRequestRepository {}
 
+
+class MockReturnRequestRepository extends Mock
+    implements ReturnRequestRepository {}
+
 void main() {
   late ReturnDetailsByRequestRepository returnDetailsByRequestRepository;
+  late ReturnRequestRepository mockReturnRequestRepository;
   late ReturnRequestsId fakeReturnRequestsId;
   late RequestInformation fakeRequestInformation;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     returnDetailsByRequestRepository = ReturnDetailsByRequestRepositoryMock();
+    mockReturnRequestRepository = MockReturnRequestRepository();
   });
   setUp(() {
     fakeReturnRequestsId = ReturnRequestsId(requestId: '12345');
@@ -38,6 +45,7 @@ void main() {
         'Initialize',
         build: () => ReturnDetailsByRequestBloc(
           returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+          returnRequestRepository: mockReturnRequestRepository,
         ),
         act: (ReturnDetailsByRequestBloc bloc) =>
             bloc.add(const ReturnDetailsByRequestEvent.initialized()),
@@ -51,6 +59,7 @@ void main() {
       'fetch -> Return Details By Request Bloc fail',
       build: () => ReturnDetailsByRequestBloc(
         returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+        returnRequestRepository: mockReturnRequestRepository,
       ),
       setUp: () {
         when(
@@ -86,6 +95,7 @@ void main() {
       'fetch -> Return Details By Request Bloc Success',
       build: () => ReturnDetailsByRequestBloc(
         returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+        returnRequestRepository: mockReturnRequestRepository,
       ),
       setUp: () {
         when(

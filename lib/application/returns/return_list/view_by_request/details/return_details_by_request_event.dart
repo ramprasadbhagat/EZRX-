@@ -6,4 +6,7 @@ class ReturnDetailsByRequestEvent with _$ReturnDetailsByRequestEvent {
   const factory ReturnDetailsByRequestEvent.fetch({
     required String returnId,
   }) = _Fetch;
+  const factory ReturnDetailsByRequestEvent.downloadFile({
+    required ReturnRequestAttachment file,
+  }) = _DownloadFile;
 }

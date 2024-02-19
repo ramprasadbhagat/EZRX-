@@ -293,6 +293,10 @@ class StatusType extends ValueObject<String> {
 
   bool get isApprovedStatus => isApproved(value.getOrElse(() => ''));
 
+  bool get isRejectedStatus => isRejected(value.getOrElse(() => ''));
+
+  bool get showApprovalDetails => isApprovedStatus || isRejectedStatus;
+
   bool get getIsBapiStatusFailed =>
       isBapiStatusFailed(value.getOrElse(() => ''));
 

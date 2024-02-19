@@ -454,6 +454,8 @@ bool isApproved(String status) {
   return status == 'APPROVED';
 }
 
+bool isRejected(String status) => status == 'REJECTED';
+
 String bapiStatusType(String bapiStatus) {
   switch (bapiStatus) {
     case 'FAILED':
