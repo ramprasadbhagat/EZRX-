@@ -207,14 +207,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 }
 
                 context.read<AnnouncementBloc>()
-                  ..add(
+                  .add(
                     const AnnouncementEvent.clearBannerId(),
                   )
-                  ..add(
-                    AnnouncementEvent.getMaintenanceBanners(
-                      salesOrg: appMarket.salesOrg,
-                    ),
-                  );
+                 ;
 
                 context.router.replaceAll(
                   [

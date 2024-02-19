@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -20,6 +21,17 @@ class MarketSelector extends StatefulWidget {
 
 class _MarketSelectorState extends State<MarketSelector> {
   final markets = AppMarket.supportMarkets;
+
+  @override
+  void initState() {
+    context.read<AnnouncementBloc>().add(
+          AnnouncementEvent.getMaintenanceBanners(
+            salesOrg:
+                context.read<LoginFormBloc>().state.currentMarket.salesOrg,
+          ),
+        );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +57,16 @@ class _MarketSelectorState extends State<MarketSelector> {
         BlocConsumer<LoginFormBloc, LoginFormState>(
           listenWhen: (previous, current) =>
               previous.currentMarket != current.currentMarket,
-          listener: (context, state) => context.read<ChatBotBloc>().add(
-                const ChatBotEvent.resetChatbot(),
-              ),
+          listener: (context, state) {
+            context.read<ChatBotBloc>().add(
+                  const ChatBotEvent.resetChatbot(),
+                );
+            context.read<AnnouncementBloc>().add(
+                  AnnouncementEvent.getMaintenanceBanners(
+                    salesOrg: state.currentMarket.salesOrg,
+                  ),
+                );
+          },
           builder: (context, state) {
             return DropdownButtonFormField2<AppMarket>(
               key: WidgetKeys.appMarketSelector,
