@@ -115,6 +115,14 @@ void main() {
   final returnDetailSummary = find.byKey(WidgetKeys.returnDetailSummary);
   ///////////////////////////////////////////////////////////////////
 
+  final statusVariants = ValueVariant<StatusType>(
+    {
+      StatusType('PENDING'),
+      StatusType('APPROVED'),
+      StatusType('REJECTED'),
+    },
+  );
+
   Widget getScopedWidget() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
@@ -213,14 +221,54 @@ void main() {
         },
       );
 
+      testWidgets('=> show `-` when attachment is empty', (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+          ReturnSummaryDetailsState.initial().copyWith(
+            requestInformation: requestInformationMock.copyWith(
+              status: StatusType('APPROVED'),
+              bonusInformation: <ReturnRequestInformation>[],
+            ),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final showDetailButtonFinder =
+            find.byKey(WidgetKeys.returnDetailShowDetailButton);
+        expect(showDetailButtonFinder, findsOneWidget);
+        await tester.tap(showDetailButtonFinder);
+        await tester.pumpAndSettle();
+        await tester.fling(
+          find.byKey(WidgetKeys.returnItemDetailScrollList),
+          const Offset(0.0, -1000.0),
+          1000.0,
+        );
+        final attachmentSection = find.byKey(
+          WidgetKeys.returnAttachmentSection,
+        );
+        expect(attachmentSection, findsOneWidget);
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Attachments'.tr(),
+              '-',
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+
       testWidgets(
-        '=> return items approver details test',
+        '=> return items details test approval section',
         (tester) async {
+          final currentStatusVariant =
+              statusVariants.currentValue ?? StatusType('');
           await tester.binding.setSurfaceSize(const Size(480, 900));
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(
             ReturnSummaryDetailsState.initial().copyWith(
               requestInformation: requestInformationMock.copyWith(
-                status: StatusType('APPROVED'),
+                status: currentStatusVariant,
+                bonusInformation: <ReturnRequestInformation>[],
               ),
             ),
           );
@@ -238,23 +286,89 @@ void main() {
             const Offset(0.0, -1000.0),
             1000.0,
           );
-          expect(returnDetailSummary, findsOneWidget);
-          expect(find.text('Approval details'), findsOneWidget);
-          final reason = find.byKey(
-            WidgetKeys.balanceTextRow(
-              'Reason',
-              requestInformationMock.returnOrderDesc,
-            ),
-          );
-          expect(reason, findsWidgets);
-          final approvalNumber = find.byKey(
-            WidgetKeys.balanceTextRow(
-              'Approval number',
-              requestInformationMock.displayBapiStatus,
-            ),
-          );
-          expect(approvalNumber, findsWidgets);
+          if (currentStatusVariant == StatusType('PENDING')) {
+            expect(find.byKey(WidgetKeys.returnApprovalDetail), findsNothing);
+          } else {
+            expect(find.byKey(WidgetKeys.returnApprovalDetail), findsOneWidget);
+            expect(returnDetailSummary, findsOneWidget);
+            expect(find.text('Approval details'.tr()), findsOneWidget);
+            final reason = find.byKey(
+              WidgetKeys.balanceTextRow(
+                'Reason'.tr(),
+                requestInformationMock.statusReason.getOrDefault,
+              ),
+            );
+            expect(reason, findsOneWidget);
+            final approvalNumber = find.byKey(
+              WidgetKeys.balanceTextRow(
+                'Approval number'.tr(),
+                requestInformationMock.displayBapiStatus,
+              ),
+            );
+            expect(approvalNumber, findsOneWidget);
+            final attachmentSection = find.byKey(
+              WidgetKeys.returnAttachmentSection,
+            );
+            expect(attachmentSection, findsOneWidget);
+          }
         },
+        variant: statusVariants,
+      );
+
+      testWidgets(
+        '=> return bonus item details test approval section',
+        (tester) async {
+          final currentStatusVariant =
+              statusVariants.currentValue ?? StatusType('');
+          await tester.binding.setSurfaceSize(const Size(480, 900));
+          when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+            ReturnSummaryDetailsState.initial().copyWith(
+              requestInformation: requestInformationMock.copyWith(
+                prsfd: Prsfd('B'),
+                status: currentStatusVariant,
+              ),
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          await tester.fling(
+            find.byKey(WidgetKeys.returnItemDetailScrollList),
+            const Offset(0.0, -1000.0),
+            1000.0,
+          );
+          await tester.pumpAndSettle();
+          if (currentStatusVariant == StatusType('PENDING')) {
+            expect(
+              find.byKey(WidgetKeys.returnApprovalDetail),
+              findsNothing,
+            );
+          } else {
+            expect(
+              find.byKey(WidgetKeys.returnApprovalDetail),
+              findsOneWidget,
+            );
+            expect(find.text('Bonus approval details'.tr()), findsOneWidget);
+            final reason = find.byKey(
+              WidgetKeys.balanceTextRow(
+                'Reason'.tr(),
+                requestInformationMock.statusReason.getOrDefault,
+              ),
+            );
+            expect(reason, findsOneWidget);
+            final approvalNumber = find.byKey(
+              WidgetKeys.balanceTextRow(
+                'Approval number'.tr(),
+                requestInformationMock.displayBapiStatus,
+              ),
+            );
+            expect(approvalNumber, findsOneWidget);
+            final attachmentSection = find.byKey(
+              WidgetKeys.returnAttachmentSection,
+            );
+            expect(attachmentSection, findsOneWidget);
+          }
+        },
+        variant: statusVariants,
       );
 
       testWidgets(

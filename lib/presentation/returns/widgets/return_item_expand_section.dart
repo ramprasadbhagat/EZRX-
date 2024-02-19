@@ -153,6 +153,7 @@ class _ReturnDetailsSection extends StatelessWidget {
           valueText: requestInformation.remarks.displayText,
         ),
         _ReturnAttachmentSection(
+          key: WidgetKeys.returnAttachmentSection,
           attachments: requestInformation.attachmentUrl,
           downloadingAttachments: downloadingAttachments,
           downloadAttachment: downloadAttachment,
@@ -179,6 +180,7 @@ class _ApprovalDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return requestInformation.status.showApprovalDetails
         ? Column(
+            key: WidgetKeys.returnApprovalDetail,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -246,7 +248,6 @@ class _ReturnAttachmentSection extends StatelessWidget {
             valueText: '-',
           )
         : ListTile(
-            key: WidgetKeys.returnAttachmentSection,
             contentPadding: EdgeInsets.zero,
             title: Text(
               '${context.tr('Attachments')}:',

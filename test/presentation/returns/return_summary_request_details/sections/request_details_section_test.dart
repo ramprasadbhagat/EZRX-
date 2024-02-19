@@ -21,11 +21,13 @@ import 'package:ezrxmobile/domain/returns/entities/return_request_information.da
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
+import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/return_request_details.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_summary_item_price.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +91,14 @@ void main() {
   late AuthBloc mockAuthBloc;
   late EligibilityBloc eligibilityBlocMock;
   late RequestInformation requestInformation;
+
+  final statusVariants = ValueVariant<StatusType>(
+    {
+      StatusType('PENDING'),
+      StatusType('APPROVED'),
+      StatusType('REJECTED'),
+    },
+  );
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -722,5 +732,164 @@ void main() {
       final returnItemCountFinder = find.text('Return items (2)');
       expect(returnItemCountFinder, findsOneWidget);
     });
+
+    testWidgets('=> show `-` when attachment is empty', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformation: [
+            requestInformation.returnRequestInformationList.first.copyWith(
+              status: StatusType('APPROVED'),
+              bonusInformation: <ReturnRequestInformation>[],
+            )
+          ],
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      final showDetailButtonFinder =
+          find.byKey(WidgetKeys.returnDetailShowDetailButton);
+      expect(showDetailButtonFinder, findsOneWidget);
+      await tester.tap(showDetailButtonFinder);
+      await tester.pumpAndSettle();
+      await tester.fling(
+        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      final attachmentSection = find.byKey(
+        WidgetKeys.returnAttachmentSection,
+      );
+      expect(attachmentSection, findsOneWidget);
+      expect(
+        find.byKey(
+          WidgetKeys.balanceTextRow(
+            'Attachments'.tr(),
+            '-',
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+      '=> return items details test approval section',
+      (tester) async {
+        final currentStatusVariant =
+            statusVariants.currentValue ?? StatusType('');
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+          ReturnDetailsByRequestState.initial().copyWith(
+            requestInformation: [
+              requestInformation.returnRequestInformationList.first.copyWith(
+                status: currentStatusVariant,
+                bonusInformation: <ReturnRequestInformation>[],
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        expect(find.byType(ReturnItemCard), findsOneWidget);
+        expect(find.byType(CommonTileItem), findsOneWidget);
+        final showDetailButtonFinder =
+            find.byKey(WidgetKeys.returnDetailShowDetailButton);
+        expect(showDetailButtonFinder, findsOneWidget);
+        await tester.tap(showDetailButtonFinder);
+        await tester.pumpAndSettle();
+        await tester.fling(
+          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          const Offset(0.0, -1000.0),
+          1000.0,
+        );
+        if (currentStatusVariant == StatusType('PENDING')) {
+          expect(find.byKey(WidgetKeys.returnApprovalDetail), findsNothing);
+        } else {
+          expect(find.byKey(WidgetKeys.returnApprovalDetail), findsOneWidget);
+          expect(find.text('Approval details'.tr()), findsOneWidget);
+          final reason = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Reason'.tr(),
+              requestInformation
+                  .returnRequestInformationList.first.statusReason.getOrDefault,
+            ),
+          );
+          expect(reason, findsOneWidget);
+          final approvalNumber = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Approval number'.tr(),
+              requestInformation
+                  .returnRequestInformationList.first.displayBapiStatus,
+            ),
+          );
+          expect(approvalNumber, findsOneWidget);
+          final attachmentSection = find.byKey(
+            WidgetKeys.returnAttachmentSection,
+          );
+          expect(attachmentSection, findsOneWidget);
+        }
+      },
+      variant: statusVariants,
+    );
+
+    testWidgets(
+      '=> return bonus item details test approval section',
+      (tester) async {
+        final currentStatusVariant =
+            statusVariants.currentValue ?? StatusType('');
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+          ReturnDetailsByRequestState.initial().copyWith(
+            requestInformation: [
+              requestInformation.returnRequestInformationList.first.copyWith(
+                prsfd: Prsfd('B'),
+                status: currentStatusVariant,
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        await tester.fling(
+          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          const Offset(0.0, -1000.0),
+          1000.0,
+        );
+        await tester.pumpAndSettle();
+        if (currentStatusVariant == StatusType('PENDING')) {
+          expect(
+            find.byKey(WidgetKeys.returnApprovalDetail),
+            findsNothing,
+          );
+        } else {
+          expect(
+            find.byKey(WidgetKeys.returnApprovalDetail),
+            findsOneWidget,
+          );
+          expect(find.text('Bonus approval details'.tr()), findsOneWidget);
+          final reason = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Reason'.tr(),
+              requestInformation
+                  .returnRequestInformationList.first.statusReason.getOrDefault,
+            ),
+          );
+          expect(reason, findsOneWidget);
+          final approvalNumber = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Approval number'.tr(),
+              requestInformation
+                  .returnRequestInformationList.first.displayBapiStatus,
+            ),
+          );
+          expect(approvalNumber, findsOneWidget);
+          final attachmentSection = find.byKey(
+            WidgetKeys.returnAttachmentSection,
+          );
+          expect(attachmentSection, findsOneWidget);
+        }
+      },
+      variant: statusVariants,
+    );
   });
 }

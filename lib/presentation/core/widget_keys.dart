@@ -438,6 +438,7 @@ class WidgetKeys {
 
   static const Key returnBonusApprovalDetail = Key('returnBonusApprovalDetail');
   static const Key returnBonusReturnDetail = Key('returnBonusReturnDetail');
+  static const Key returnApprovalDetail = Key('returnApprovalDetail');
 
   //============================================================
   //  Returns by request

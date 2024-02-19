@@ -149,5 +149,15 @@ void main() {
         expect(result, false);
       },
     );
+
+    test(
+      'should return `Updated at EZA` when StatusReason empty',
+      () async {
+        const input = '';
+        final statusReason = StatusReason(input);
+        final result = statusReason.getOrDefault;
+        expect(result, 'Updated at EZA');
+      },
+    );
   });
 }
