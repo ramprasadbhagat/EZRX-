@@ -23,7 +23,6 @@ class AllCreditsAndInvoicesQueryMutation {
           amountInTransactionCurrency
           invoiceReference
           invoiceProcessingStatus
-          orderId
           accountingDocumentType
           accountingDocument
           postingKeyName

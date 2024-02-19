@@ -39,7 +39,6 @@ mixin _$CreditAndInvoiceItem {
   DebitCreditCode get debitCreditCode => throw _privateConstructorUsedError;
   ReferenceId get referenceId => throw _privateConstructorUsedError;
   StringValue get documentReferenceID => throw _privateConstructorUsedError;
-  dynamic get isLoadingOrder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreditAndInvoiceItemCopyWith<CreditAndInvoiceItem> get copyWith =>
@@ -75,8 +74,7 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
       StringValue orderId,
       DebitCreditCode debitCreditCode,
       ReferenceId referenceId,
-      StringValue documentReferenceID,
-      dynamic isLoadingOrder});
+      StringValue documentReferenceID});
 }
 
 /// @nodoc
@@ -116,7 +114,6 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
     Object? debitCreditCode = null,
     Object? referenceId = null,
     Object? documentReferenceID = null,
-    Object? isLoadingOrder = freezed,
   }) {
     return _then(_value.copyWith(
       bpCustomerNumber: null == bpCustomerNumber
@@ -211,10 +208,6 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as StringValue,
-      isLoadingOrder: freezed == isLoadingOrder
-          ? _value.isLoadingOrder
-          : isLoadingOrder // ignore: cast_nullable_to_non_nullable
-              as dynamic,
     ) as $Val);
   }
 }
@@ -250,8 +243,7 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
       StringValue orderId,
       DebitCreditCode debitCreditCode,
       ReferenceId referenceId,
-      StringValue documentReferenceID,
-      dynamic isLoadingOrder});
+      StringValue documentReferenceID});
 }
 
 /// @nodoc
@@ -288,7 +280,6 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
     Object? debitCreditCode = null,
     Object? referenceId = null,
     Object? documentReferenceID = null,
-    Object? isLoadingOrder = freezed,
   }) {
     return _then(_$_CreditAndInvoiceItem(
       bpCustomerNumber: null == bpCustomerNumber
@@ -383,8 +374,6 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as StringValue,
-      isLoadingOrder:
-          freezed == isLoadingOrder ? _value.isLoadingOrder! : isLoadingOrder,
     ));
   }
 }
@@ -415,8 +404,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
       required this.orderId,
       required this.debitCreditCode,
       required this.referenceId,
-      required this.documentReferenceID,
-      this.isLoadingOrder = true})
+      required this.documentReferenceID})
       : super._();
 
   @override
@@ -465,13 +453,10 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   final ReferenceId referenceId;
   @override
   final StringValue documentReferenceID;
-  @override
-  @JsonKey()
-  final dynamic isLoadingOrder;
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, grossAmount: $grossAmount, netAmount: $netAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, documentReferenceID: $documentReferenceID, isLoadingOrder: $isLoadingOrder)';
+    return 'CreditAndInvoiceItem(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, grossAmount: $grossAmount, netAmount: $netAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, documentReferenceID: $documentReferenceID)';
   }
 
   @override
@@ -527,9 +512,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
             (identical(other.referenceId, referenceId) ||
                 other.referenceId == referenceId) &&
             (identical(other.documentReferenceID, documentReferenceID) ||
-                other.documentReferenceID == documentReferenceID) &&
-            const DeepCollectionEquality()
-                .equals(other.isLoadingOrder, isLoadingOrder));
+                other.documentReferenceID == documentReferenceID));
   }
 
   @override
@@ -557,8 +540,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
         orderId,
         debitCreditCode,
         referenceId,
-        documentReferenceID,
-        const DeepCollectionEquality().hash(isLoadingOrder)
+        documentReferenceID
       ]);
 
   @JsonKey(ignore: true)
@@ -571,30 +553,30 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
 
 abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   factory _CreditAndInvoiceItem(
-      {required final String bpCustomerNumber,
-      required final String fiscalYear,
-      required final StringValue searchKey,
-      required final String accountingDocumentItem,
-      required final String accountingDocumentType,
-      required final String postingKeyName,
-      required final DateTimeStringValue netDueDate,
-      required final DateTimeStringValue postingDate,
-      required final StringValue referenceDocumentNumber,
-      required final DateTimeStringValue documentDate,
-      required final double amountInTransactionCurrency,
-      required final double deliveryFee,
-      required final double discount,
-      required final double manualFee,
-      required final double taxAmount,
-      required final double grossAmount,
-      required final double netAmount,
-      required final StringValue invoiceReference,
-      required final StatusType invoiceProcessingStatus,
-      required final StringValue orderId,
-      required final DebitCreditCode debitCreditCode,
-      required final ReferenceId referenceId,
-      required final StringValue documentReferenceID,
-      final dynamic isLoadingOrder}) = _$_CreditAndInvoiceItem;
+          {required final String bpCustomerNumber,
+          required final String fiscalYear,
+          required final StringValue searchKey,
+          required final String accountingDocumentItem,
+          required final String accountingDocumentType,
+          required final String postingKeyName,
+          required final DateTimeStringValue netDueDate,
+          required final DateTimeStringValue postingDate,
+          required final StringValue referenceDocumentNumber,
+          required final DateTimeStringValue documentDate,
+          required final double amountInTransactionCurrency,
+          required final double deliveryFee,
+          required final double discount,
+          required final double manualFee,
+          required final double taxAmount,
+          required final double grossAmount,
+          required final double netAmount,
+          required final StringValue invoiceReference,
+          required final StatusType invoiceProcessingStatus,
+          required final StringValue orderId,
+          required final DebitCreditCode debitCreditCode,
+          required final ReferenceId referenceId,
+          required final StringValue documentReferenceID}) =
+      _$_CreditAndInvoiceItem;
   _CreditAndInvoiceItem._() : super._();
 
   @override
@@ -643,8 +625,6 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   ReferenceId get referenceId;
   @override
   StringValue get documentReferenceID;
-  @override
-  dynamic get isLoadingOrder;
   @override
   @JsonKey(ignore: true)
   _$$_CreditAndInvoiceItemCopyWith<_$_CreditAndInvoiceItem> get copyWith =>

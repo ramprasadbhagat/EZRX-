@@ -111,7 +111,7 @@ void main() {
       );
       expect(haveDescriptionTextFinder, findsOneWidget);
       final introGetStatedButtonFinder =
-      find.byKey(WidgetKeys.introGetStartedButton);
+          find.byKey(WidgetKeys.introGetStartedButton);
       expect(introGetStatedButtonFinder, findsOneWidget);
       final haveButtonTextFinder = find.text(
         'Next',
@@ -119,182 +119,191 @@ void main() {
       expect(haveButtonTextFinder, findsOneWidget);
     });
 
-
     testWidgets('Get Started Button On Tap', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeClientUser.copyWith(
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+
       await tester.pumpWidget(getIntroPage());
       await tester.pump();
 
       await tester.tap(introSkipButton);
       verify(
-            () => introBlocMock.add(
+        () => introBlocMock.add(
           const IntroEvent.setAppFirstLaunch(),
         ),
       ).called(1);
       verify(
-            () => eligibilityBlocMock.add(
-          const EligibilityEvent.loadStoredCustomerCode(),
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: [fakeSalesOrganisation],
+          ),
         ),
       ).called(1);
     });
 
     testWidgets('User disable Payment & Return - Get started button only',
-            (tester) async {
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeTWSalesOrgConfigs,
-              user: fakeClientUser.copyWith(
-                disablePaymentAccess: true,
-                disableReturns: true,
-                userSalesOrganisations: [fakeSalesOrganisation],
-              ),
-            ),
-          );
-          await tester.pumpWidget(getIntroPage());
-          await tester.pumpAndSettle();
-          expect(introGetStartedButton, findsOneWidget);
-          expect(introSkipButton, findsNothing);
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+          user: fakeClientUser.copyWith(
+            disablePaymentAccess: true,
+            disableReturns: true,
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getIntroPage());
+      await tester.pumpAndSettle();
+      expect(introGetStartedButton, findsOneWidget);
+      expect(introSkipButton, findsNothing);
 
-          await tester.tap(introGetStartedButton);
-          await tester.pumpAndSettle();
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
 
-          verify(
-                () => introBlocMock.add(
-              const IntroEvent.setAppFirstLaunch(),
-            ),
-          ).called(1);
-          verify(
-                () => salesOrgBlocMock.add(
-              SalesOrgEvent.loadSavedOrganisation(
-                salesOrganisations: [fakeSalesOrganisation],
-              ),
-            ),
-          ).called(1);
-        });
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.setAppFirstLaunch(),
+        ),
+      ).called(1);
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      ).called(1);
+    });
 
     testWidgets('SaleOrg disable Payment & Return - Get started button only',
-            (tester) async {
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              //Due to this ticket https://zuelligpharma.atlassian.net/browse/EZRX-16961?focusedCommentId=118024
-              //we need to create TWSalesOrgConfigs disable return and payment of client_user, but the fakeTWSalesOrgConfigs wont' match
-              //so it will need copyWith in here
-              salesOrgConfigs: fakeTWSalesOrgConfigs.copyWith(
-                disableReturnsAccess: true,
-                disablePayment: true,
-              ),
-              user: fakeClientUser.copyWith(
-                disablePaymentAccess: false,
-                disableReturns: false,
-                userSalesOrganisations: [fakeSalesOrganisation],
-              ),
-            ),
-          );
-          await tester.pumpWidget(getIntroPage());
-          await tester.pumpAndSettle();
-          expect(introGetStartedButton, findsOneWidget);
-          expect(introSkipButton, findsNothing);
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          //Due to this ticket https://zuelligpharma.atlassian.net/browse/EZRX-16961?focusedCommentId=118024
+          //we need to create TWSalesOrgConfigs disable return and payment of client_user, but the fakeTWSalesOrgConfigs wont' match
+          //so it will need copyWith in here
+          salesOrgConfigs: fakeTWSalesOrgConfigs.copyWith(
+            disableReturnsAccess: true,
+            disablePayment: true,
+          ),
+          user: fakeClientUser.copyWith(
+            disablePaymentAccess: false,
+            disableReturns: false,
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getIntroPage());
+      await tester.pumpAndSettle();
+      expect(introGetStartedButton, findsOneWidget);
+      expect(introSkipButton, findsNothing);
 
-          await tester.tap(introGetStartedButton);
-          await tester.pumpAndSettle();
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
 
-          verify(
-                () => introBlocMock.add(
-              const IntroEvent.setAppFirstLaunch(),
-            ),
-          ).called(1);
-          verify(
-                () => salesOrgBlocMock.add(
-              SalesOrgEvent.loadSavedOrganisation(
-                salesOrganisations: [fakeSalesOrganisation],
-              ),
-            ),
-          ).called(1);
-        });
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.setAppFirstLaunch(),
+        ),
+      ).called(1);
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      ).called(1);
+    });
 
     testWidgets('Root admin - SaleOrg return disable & payment enable',
-            (tester) async {
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeKHSalesOrgConfigs,
-              user: fakeRootAdminUser.copyWith(
-                userSalesOrganisations: [fakeSalesOrganisation],
-              ),
-            ),
-          );
-          await tester.pumpWidget(getIntroPage());
-          await tester.pumpAndSettle();
-          expect(introGetStartedButton, findsOneWidget);
-          expect(introSkipButton, findsOneWidget);
-          expect(find.text('Order and track easily'), findsOneWidget);
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeKHSalesOrgConfigs,
+          user: fakeRootAdminUser.copyWith(
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getIntroPage());
+      await tester.pumpAndSettle();
+      expect(introGetStartedButton, findsOneWidget);
+      expect(introSkipButton, findsOneWidget);
+      expect(find.text('Order and track easily'), findsOneWidget);
 
-          await tester.tap(introGetStartedButton);
-          await tester.pumpAndSettle();
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
 
-          expect(find.text('Payments on the go'), findsOneWidget);
-          expect(introSkipButton, findsOneWidget);
+      expect(find.text('Payments on the go'), findsOneWidget);
+      expect(introSkipButton, findsOneWidget);
 
-          await tester.tap(introSkipButton);
-          await tester.pumpAndSettle();
+      await tester.tap(introSkipButton);
+      await tester.pumpAndSettle();
 
-          verify(
-                () => introBlocMock.add(
-              const IntroEvent.setAppFirstLaunch(),
-            ),
-          ).called(1);
-          // await tester.pumpAndSettle();
-          verify(
-                () => salesOrgBlocMock.add(
-              SalesOrgEvent.loadSavedOrganisation(
-                salesOrganisations: [fakeSalesOrganisation],
-              ),
-            ),
-          ).called(1);
-        });
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.setAppFirstLaunch(),
+        ),
+      ).called(1);
+      // await tester.pumpAndSettle();
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      ).called(1);
+    });
 
     testWidgets('Client user - MY SaleOrg & Return & Payment enable',
-            (tester) async {
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeMYSalesOrgConfigs,
-              user: fakeClientUser.copyWith(
-                userSalesOrganisations: [fakeSalesOrganisation],
-              ),
-            ),
-          );
-          await tester.pumpWidget(getIntroPage());
-          await tester.pumpAndSettle();
-          expect(introGetStartedButton, findsOneWidget);
-          expect(introSkipButton, findsOneWidget);
-          expect(find.text('Order and track easily'), findsOneWidget);
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          user: fakeClientUser.copyWith(
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getIntroPage());
+      await tester.pumpAndSettle();
+      expect(introGetStartedButton, findsOneWidget);
+      expect(introSkipButton, findsOneWidget);
+      expect(find.text('Order and track easily'), findsOneWidget);
 
-          await tester.tap(introGetStartedButton);
-          await tester.pumpAndSettle();
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
 
-          expect(find.text('Payments on the go'), findsOneWidget);
-          expect(introSkipButton, findsOneWidget);
+      expect(find.text('Payments on the go'), findsOneWidget);
+      expect(introSkipButton, findsOneWidget);
 
-          await tester.tap(introGetStartedButton);
-          await tester.pumpAndSettle();
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
 
-          expect(find.text('Hassle-free returns'), findsOneWidget);
-          expect(introSkipButton, findsNothing);
+      expect(find.text('Hassle-free returns'), findsOneWidget);
+      expect(introSkipButton, findsNothing);
 
-          await tester.tap(introGetStartedButton);
-          await tester.pumpAndSettle();
+      await tester.tap(introGetStartedButton);
+      await tester.pumpAndSettle();
 
-          verify(
-                () => introBlocMock.add(
-              const IntroEvent.setAppFirstLaunch(),
-            ),
-          ).called(1);
-          // await tester.pumpAndSettle();
-          verify(
-                () => salesOrgBlocMock.add(
-              SalesOrgEvent.loadSavedOrganisation(
-                salesOrganisations: [fakeSalesOrganisation],
-              ),
-            ),
-          ).called(1);
-        });
+      verify(
+        () => introBlocMock.add(
+          const IntroEvent.setAppFirstLaunch(),
+        ),
+      ).called(1);
+      // await tester.pumpAndSettle();
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.loadSavedOrganisation(
+            salesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      ).called(1);
+    });
   });
 }

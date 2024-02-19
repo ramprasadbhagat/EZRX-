@@ -262,18 +262,24 @@ class _OrderNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (invoiceItem.isLoadingOrder) {
-      return SizedBox(
-        key: WidgetKeys.invoiceItemOrderIdLoadingShimmer,
-        width: 40,
-        child: LoadingShimmer.tile(),
-      );
-    }
+    return BlocBuilder<AllInvoicesBloc, AllInvoicesState>(
+      buildWhen: (previous, current) =>
+          previous.isFetchingOrder != current.isFetchingOrder,
+      builder: (context, state) {
+        if (state.isFetchingOrder) {
+          return SizedBox(
+            key: WidgetKeys.invoiceItemOrderIdLoadingShimmer,
+            width: 40,
+            child: LoadingShimmer.tile(),
+          );
+        }
 
-    return Text(
-      '${context.tr('Order')} #${invoiceItem.orderId.displayNAIfEmpty}',
-      key: WidgetKeys.invoiceItemOrderId,
-      style: Theme.of(context).textTheme.titleSmall,
+        return Text(
+          '${context.tr('Order')} #${invoiceItem.orderId.displayNAIfEmpty}',
+          key: WidgetKeys.invoiceItemOrderId,
+          style: Theme.of(context).textTheme.titleSmall,
+        );
+      },
     );
   }
 }

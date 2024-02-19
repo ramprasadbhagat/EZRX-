@@ -398,7 +398,6 @@ void main() {
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
               orderId: StringValue('123456789'),
-              isLoadingOrder: false,
             ),
           ],
         ),
@@ -424,6 +423,7 @@ void main() {
 
       when(() => allInvoicesBlocMock.state).thenReturn(
         AllInvoicesState.initial().copyWith(
+          isFetchingOrder: true,
           items: <CreditAndInvoiceItem>[
             CreditAndInvoiceItem.empty().copyWith(
               searchKey: StringValue('123456780'),

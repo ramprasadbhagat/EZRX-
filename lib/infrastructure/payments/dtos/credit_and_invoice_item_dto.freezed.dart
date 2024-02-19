@@ -55,8 +55,6 @@ mixin _$CreditAndInvoiceItemDto {
   String get invoiceReference => throw _privateConstructorUsedError;
   @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
   String get invoiceProcessingStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'orderId', defaultValue: '')
-  String get orderId => throw _privateConstructorUsedError;
   @JsonKey(name: 'debitCreditCode', defaultValue: '')
   String get debitCreditCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceId', defaultValue: '')
@@ -106,7 +104,6 @@ abstract class $CreditAndInvoiceItemDtoCopyWith<$Res> {
       String invoiceReference,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
       String invoiceProcessingStatus,
-      @JsonKey(name: 'orderId', defaultValue: '') String orderId,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
       String debitCreditCode,
       @JsonKey(name: 'referenceId', defaultValue: '') String referenceId,
@@ -147,7 +144,6 @@ class _$CreditAndInvoiceItemDtoCopyWithImpl<$Res,
     Object? taxAmount = null,
     Object? invoiceReference = null,
     Object? invoiceProcessingStatus = null,
-    Object? orderId = null,
     Object? debitCreditCode = null,
     Object? referenceId = null,
     Object? documentReferenceID = null,
@@ -223,10 +219,6 @@ class _$CreditAndInvoiceItemDtoCopyWithImpl<$Res,
           ? _value.invoiceProcessingStatus
           : invoiceProcessingStatus // ignore: cast_nullable_to_non_nullable
               as String,
-      orderId: null == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
       debitCreditCode: null == debitCreditCode
           ? _value.debitCreditCode
           : debitCreditCode // ignore: cast_nullable_to_non_nullable
@@ -285,7 +277,6 @@ abstract class _$$_CreditAndInvoiceItemDtoCopyWith<$Res>
       String invoiceReference,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
       String invoiceProcessingStatus,
-      @JsonKey(name: 'orderId', defaultValue: '') String orderId,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
       String debitCreditCode,
       @JsonKey(name: 'referenceId', defaultValue: '') String referenceId,
@@ -324,7 +315,6 @@ class __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>
     Object? taxAmount = null,
     Object? invoiceReference = null,
     Object? invoiceProcessingStatus = null,
-    Object? orderId = null,
     Object? debitCreditCode = null,
     Object? referenceId = null,
     Object? documentReferenceID = null,
@@ -400,10 +390,6 @@ class __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>
           ? _value.invoiceProcessingStatus
           : invoiceProcessingStatus // ignore: cast_nullable_to_non_nullable
               as String,
-      orderId: null == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
       debitCreditCode: null == debitCreditCode
           ? _value.debitCreditCode
           : debitCreditCode // ignore: cast_nullable_to_non_nullable
@@ -460,7 +446,6 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
       required this.invoiceReference,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
       required this.invoiceProcessingStatus,
-      @JsonKey(name: 'orderId', defaultValue: '') required this.orderId,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
       required this.debitCreditCode,
       @JsonKey(name: 'referenceId', defaultValue: '') required this.referenceId,
@@ -526,9 +511,6 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
   @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
   final String invoiceProcessingStatus;
   @override
-  @JsonKey(name: 'orderId', defaultValue: '')
-  final String orderId;
-  @override
   @JsonKey(name: 'debitCreditCode', defaultValue: '')
   final String debitCreditCode;
   @override
@@ -546,7 +528,7 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
 
   @override
   String toString() {
-    return 'CreditAndInvoiceItemDto(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, orderId: $orderId, debitCreditCode: $debitCreditCode, referenceId: $referenceId, documentReferenceID: $documentReferenceID, grossAmount: $grossAmount, netAmount: $netAmount)';
+    return 'CreditAndInvoiceItemDto(bpCustomerNumber: $bpCustomerNumber, fiscalYear: $fiscalYear, accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, accountingDocumentType: $accountingDocumentType, postingKeyName: $postingKeyName, netDueDate: $netDueDate, postingDate: $postingDate, referenceDocumentNumber: $referenceDocumentNumber, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, deliveryFee: $deliveryFee, discount: $discount, manualFee: $manualFee, taxAmount: $taxAmount, invoiceReference: $invoiceReference, invoiceProcessingStatus: $invoiceProcessingStatus, debitCreditCode: $debitCreditCode, referenceId: $referenceId, documentReferenceID: $documentReferenceID, grossAmount: $grossAmount, netAmount: $netAmount)';
   }
 
   @override
@@ -592,7 +574,6 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
             (identical(
                     other.invoiceProcessingStatus, invoiceProcessingStatus) ||
                 other.invoiceProcessingStatus == invoiceProcessingStatus) &&
-            (identical(other.orderId, orderId) || other.orderId == orderId) &&
             (identical(other.debitCreditCode, debitCreditCode) ||
                 other.debitCreditCode == debitCreditCode) &&
             (identical(other.referenceId, referenceId) ||
@@ -626,7 +607,6 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
         taxAmount,
         invoiceReference,
         invoiceProcessingStatus,
-        orderId,
         debitCreditCode,
         referenceId,
         documentReferenceID,
@@ -686,7 +666,6 @@ abstract class _CreditAndInvoiceItemDto extends CreditAndInvoiceItemDto {
       required final String invoiceReference,
       @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
       required final String invoiceProcessingStatus,
-      @JsonKey(name: 'orderId', defaultValue: '') required final String orderId,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
       required final String debitCreditCode,
       @JsonKey(name: 'referenceId', defaultValue: '')
@@ -753,9 +732,6 @@ abstract class _CreditAndInvoiceItemDto extends CreditAndInvoiceItemDto {
   @override
   @JsonKey(name: 'invoiceProcessingStatus', defaultValue: '')
   String get invoiceProcessingStatus;
-  @override
-  @JsonKey(name: 'orderId', defaultValue: '')
-  String get orderId;
   @override
   @JsonKey(name: 'debitCreditCode', defaultValue: '')
   String get debitCreditCode;

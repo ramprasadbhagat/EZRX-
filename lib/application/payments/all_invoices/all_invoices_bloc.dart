@@ -125,15 +125,18 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
       (e, emit) async {
         if (e.invoices.isEmpty) return;
 
-        emit(
-          state.copyWith(
-            failureOrSuccessOption: none(),
-          ),
-        );
         final invoiceIds = e.invoices
             .where((e) => e.searchKey.isValid())
             .map((e) => e.searchKey.getValue())
             .toList();
+
+        emit(
+          state.copyWith(
+            isFetchingOrder: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+
         final failureOrSuccess =
             await allCreditsAndInvoicesRepository.fetchOrder(
           invoiceIds: invoiceIds,
@@ -143,31 +146,27 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
           (failure) {
             emit(
               state.copyWith(
+                isFetchingOrder: false,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
-                items: state.items
-                    .map(
-                      (e) => e.copyWith(
-                        isLoadingOrder: false,
-                      ),
-                    )
-                    .toList(),
+                items: state.items,
               ),
             );
           },
           (responseData) {
+            final updatedItems = state.items.map((e) {
+              final orderId =
+                  responseData[e.searchKey.getValue()] ?? StringValue('');
+
+              if (!e.orderId.isValid()) {
+                return e.copyWith(orderId: orderId);
+              }
+
+              return e;
+            }).toList();
             emit(
               state.copyWith(
-                items: state.items
-                    .map(
-                      (e) => e.isLoadingOrder
-                          ? e.copyWith(
-                              isLoadingOrder: false,
-                              orderId: responseData[e.searchKey.getValue()] ??
-                                  StringValue(''),
-                            )
-                          : e,
-                    )
-                    .toList(),
+                isFetchingOrder: false,
+                items: updatedItems,
                 failureOrSuccessOption: none(),
               ),
             );

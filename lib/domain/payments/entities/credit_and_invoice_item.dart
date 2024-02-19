@@ -33,7 +33,6 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
     required DebitCreditCode debitCreditCode,
     required ReferenceId referenceId,
     required StringValue documentReferenceID,
-    @Default(true) isLoadingOrder,
   }) = _CreditAndInvoiceItem;
 
   factory CreditAndInvoiceItem.empty() => CreditAndInvoiceItem(

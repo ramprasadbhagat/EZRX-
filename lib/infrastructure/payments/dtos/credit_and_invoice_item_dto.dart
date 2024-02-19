@@ -96,11 +96,6 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
     )
         required String invoiceProcessingStatus,
     @JsonKey(
-      name: 'orderId',
-      defaultValue: '',
-    )
-        required String orderId,
-    @JsonKey(
       name: 'debitCreditCode',
       defaultValue: '',
     )
@@ -145,7 +140,7 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       netAmount: netAmount,
       invoiceReference: StringValue(invoiceReference),
       invoiceProcessingStatus: StatusType(invoiceProcessingStatus),
-      orderId: StringValue(orderId),
+      orderId: StringValue(''),
       debitCreditCode: DebitCreditCode(debitCreditCode),
       referenceId: ReferenceId(referenceId),
       documentReferenceID: StringValue(documentReferenceID),

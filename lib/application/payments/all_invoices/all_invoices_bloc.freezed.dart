@@ -727,6 +727,7 @@ mixin _$AllInvoicesState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isFetchingOrder => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -747,6 +748,7 @@ abstract class $AllInvoicesStateCopyWith<$Res> {
       List<CreditAndInvoiceItem> items,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
+      bool isFetchingOrder,
       bool canLoadMore});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -773,6 +775,7 @@ class _$AllInvoicesStateCopyWithImpl<$Res, $Val extends AllInvoicesState>
     Object? items = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
+    Object? isFetchingOrder = null,
     Object? canLoadMore = null,
   }) {
     return _then(_value.copyWith(
@@ -799,6 +802,10 @@ class _$AllInvoicesStateCopyWithImpl<$Res, $Val extends AllInvoicesState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFetchingOrder: null == isFetchingOrder
+          ? _value.isFetchingOrder
+          : isFetchingOrder // ignore: cast_nullable_to_non_nullable
               as bool,
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
@@ -847,6 +854,7 @@ abstract class _$$_AllInvoicesStateCopyWith<$Res>
       List<CreditAndInvoiceItem> items,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
+      bool isFetchingOrder,
       bool canLoadMore});
 
   @override
@@ -874,6 +882,7 @@ class __$$_AllInvoicesStateCopyWithImpl<$Res>
     Object? items = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
+    Object? isFetchingOrder = null,
     Object? canLoadMore = null,
   }) {
     return _then(_$_AllInvoicesState(
@@ -901,6 +910,10 @@ class __$$_AllInvoicesStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFetchingOrder: null == isFetchingOrder
+          ? _value.isFetchingOrder
+          : isFetchingOrder // ignore: cast_nullable_to_non_nullable
+              as bool,
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
@@ -919,6 +932,7 @@ class _$_AllInvoicesState extends _AllInvoicesState {
       required final List<CreditAndInvoiceItem> items,
       required this.failureOrSuccessOption,
       required this.isLoading,
+      required this.isFetchingOrder,
       required this.canLoadMore})
       : _items = items,
         super._();
@@ -942,11 +956,13 @@ class _$_AllInvoicesState extends _AllInvoicesState {
   @override
   final bool isLoading;
   @override
+  final bool isFetchingOrder;
+  @override
   final bool canLoadMore;
 
   @override
   String toString() {
-    return 'AllInvoicesState(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, appliedFilter: $appliedFilter, items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore)';
+    return 'AllInvoicesState(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, appliedFilter: $appliedFilter, items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, isFetchingOrder: $isFetchingOrder, canLoadMore: $canLoadMore)';
   }
 
   @override
@@ -965,6 +981,8 @@ class _$_AllInvoicesState extends _AllInvoicesState {
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isFetchingOrder, isFetchingOrder) ||
+                other.isFetchingOrder == isFetchingOrder) &&
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore));
   }
@@ -978,6 +996,7 @@ class _$_AllInvoicesState extends _AllInvoicesState {
       const DeepCollectionEquality().hash(_items),
       failureOrSuccessOption,
       isLoading,
+      isFetchingOrder,
       canLoadMore);
 
   @JsonKey(ignore: true)
@@ -995,6 +1014,7 @@ abstract class _AllInvoicesState extends AllInvoicesState {
       required final List<CreditAndInvoiceItem> items,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
+      required final bool isFetchingOrder,
       required final bool canLoadMore}) = _$_AllInvoicesState;
   const _AllInvoicesState._() : super._();
 
@@ -1010,6 +1030,8 @@ abstract class _AllInvoicesState extends AllInvoicesState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   bool get isLoading;
+  @override
+  bool get isFetchingOrder;
   @override
   bool get canLoadMore;
   @override

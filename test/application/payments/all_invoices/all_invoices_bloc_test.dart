@@ -153,13 +153,13 @@ void main() {
             canLoadMore: false,
           ),
           AllInvoicesState.initial().copyWith(
+            isFetchingOrder: true,
             items: creditAndInvoiceItemList,
             canLoadMore: false,
           ),
           AllInvoicesState.initial().copyWith(
-            items: creditAndInvoiceItemList
-                .map((e) => e.copyWith(isLoadingOrder: false))
-                .toList(),
+            isFetchingOrder: false,
+            items: creditAndInvoiceItemList,
             failureOrSuccessOption: optionOf(
               Left(exception),
             ),
@@ -214,14 +214,15 @@ void main() {
             canLoadMore: false,
           ),
           AllInvoicesState.initial().copyWith(
+            isFetchingOrder: true,
             items: creditAndInvoiceItemList,
             canLoadMore: false,
           ),
           AllInvoicesState.initial().copyWith(
+            isFetchingOrder: false,
             items: creditAndInvoiceItemList
                 .map(
                   (e) => e.copyWith(
-                    isLoadingOrder: false,
                     orderId: invoiceOrderItems
                         .firstWhere(
                           (element) => element.invoiceId == e.searchKey,
@@ -249,7 +250,7 @@ void main() {
         isLoading: false,
         items: List.filled(
           config.pageSize,
-          fakeResult.first.copyWith(isLoadingOrder: false),
+          fakeResult.first,
         ),
       ),
       setUp: () {
@@ -272,7 +273,7 @@ void main() {
         AllInvoicesState.initial().copyWith(
           items: List.filled(
             config.pageSize,
-            CreditAndInvoiceItem.empty().copyWith(isLoadingOrder: false),
+            CreditAndInvoiceItem.empty(),
           ),
           isLoading: true,
         ),
@@ -280,7 +281,7 @@ void main() {
           items: List.filled(
             config.pageSize,
             CreditAndInvoiceItem.empty(),
-          ).map((e) => e.copyWith(isLoadingOrder: false)).toList(),
+          ),
           failureOrSuccessOption: optionOf(Left(exception)),
         ),
       ],
@@ -338,15 +339,16 @@ void main() {
             canLoadMore: false,
           ),
           AllInvoicesState.initial().copyWith(
+            isFetchingOrder: true,
             appliedFilter: allInvoicesFilter,
             canLoadMore: false,
-            items: newList
-                .map(
-                  (e) => e.copyWith(
-                    isLoadingOrder: false,
-                  ),
-                )
-                .toList(),
+            items: newList,
+          ),
+          AllInvoicesState.initial().copyWith(
+            isFetchingOrder: false,
+            appliedFilter: allInvoicesFilter,
+            canLoadMore: false,
+            items: newList,
           ),
         ];
       },

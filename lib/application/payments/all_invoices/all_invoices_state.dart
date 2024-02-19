@@ -10,6 +10,7 @@ class AllInvoicesState with _$AllInvoicesState {
     required List<CreditAndInvoiceItem> items,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
+    required bool isFetchingOrder,
     required bool canLoadMore,
   }) = _AllInvoicesState;
 
@@ -18,6 +19,7 @@ class AllInvoicesState with _$AllInvoicesState {
         salesOrganisation: SalesOrganisation.empty(),
         failureOrSuccessOption: none(),
         isLoading: false,
+        isFetchingOrder: false,
         canLoadMore: true,
         appliedFilter: AllInvoicesFilter.empty(),
         items: <CreditAndInvoiceItem>[],
