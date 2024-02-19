@@ -715,6 +715,35 @@ void main() {
     );
 
     testWidgets(
+      '=> Optional text not visible if po reference is a required field',
+      (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final pOReferenceKeyFinder =
+            find.byKey(WidgetKeys.genericKey(key: 'pOReferenceKey'));
+
+        expect(pOReferenceKeyFinder, findsOneWidget);
+
+        expect(
+          find.text('Enter your PO reference (Optional)'),
+          findsNothing,
+        );
+        expect(
+          find.text('Enter your PO reference'),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
       '=> test Max character length of Delivery instructions input field',
       (tester) async {
         const textOfLength132 =

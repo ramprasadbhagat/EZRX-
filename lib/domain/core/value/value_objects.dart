@@ -360,6 +360,9 @@ class PoNumberRequired extends ValueObject<bool> {
   factory PoNumberRequired(bool input) => PoNumberRequired._(Right(input));
 
   const PoNumberRequired._(this.value);
+
+  String get poReferenceHintText =>
+      getPoReferenceHintText(value.getOrElse(() => false));
 }
 
 class MobileNumber extends ValueObject<String> {

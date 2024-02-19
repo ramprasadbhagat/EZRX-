@@ -801,3 +801,6 @@ String fileTypeFromPath(String source) {
 }
 
 bool isDealOrOverrideBonus(String type) => type == 'Deals' || type == 'Bonus';
+
+String getPoReferenceHintText(bool value) =>
+    value ? 'Enter your PO reference' : 'Enter your PO reference (Optional)';
