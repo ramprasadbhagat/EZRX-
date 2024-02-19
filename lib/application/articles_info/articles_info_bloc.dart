@@ -56,7 +56,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
         final failureOrSuccessOption = await articleInfoRepository.getArticles(
           user: state.user,
           salesOrg: state.salesOrg,
-          pageSize: config.pageSize,
+          pageSize: config.articlePageSize,
           after: state.articleInfo.endCursor,
         );
 
@@ -65,6 +65,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
             state.copyWith(
               isFetching: false,
               apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
+              canLoadMore: false,
             ),
           ),
           (articles) {
@@ -76,6 +77,8 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
                             _getFilteredArticleInfo(articles.announcementList),
                       )
                     : articles,
+                canLoadMore:
+                    articles.announcementList.length >= config.articlePageSize,
                 isFetching: false,
                 apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
               ),
@@ -95,7 +98,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
         final failureOrSuccessOption = await articleInfoRepository.getArticles(
           user: state.user,
           salesOrg: state.salesOrg,
-          pageSize: config.pageSize,
+          pageSize: config.articlePageSize,
           after: state.articleInfo.endCursor,
         );
 
@@ -119,7 +122,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
                       : newArticlesList,
                 ),
                 canLoadMore:
-                    articles.announcementList.length >= config.pageSize,
+                    articles.announcementList.length >= config.articlePageSize,
                 isFetching: false,
                 apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
               ),

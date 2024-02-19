@@ -150,7 +150,7 @@ class _ArticlesTile extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          article.publishedDate.dateTimeOrDashString,
+                          article.releaseDate.dateTimeOrDashString,
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall

@@ -38,7 +38,6 @@ void main() {
   });
 
   group('Announcement Info Bloc', () {
-
     blocTest(
       'Get announcement info Initialize',
       build: () => AnnouncementInfoBloc(
@@ -50,7 +49,7 @@ void main() {
           () => repository.getAnnouncement(
             user: user,
             salesOrg: salesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -70,6 +69,7 @@ void main() {
           salesOrg: salesOrg,
         ),
         announcementInfoState.copyWith(
+          canLoadMore: false,
           announcementInfo: announcementInfoMock,
           user: user,
           salesOrg: salesOrg,
@@ -87,7 +87,7 @@ void main() {
           () => repository.getAnnouncement(
             user: user,
             salesOrg: salesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -103,6 +103,7 @@ void main() {
       expect: () => [
         announcementInfoState.copyWith(isLoading: true),
         announcementInfoState.copyWith(
+          canLoadMore: false,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
         ),
@@ -120,7 +121,7 @@ void main() {
           () => repository.getAnnouncement(
             user: user,
             salesOrg: salesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -136,6 +137,7 @@ void main() {
       expect: () => [
         announcementInfoState.copyWith(isLoading: true),
         announcementInfoState.copyWith(
+          canLoadMore: false,
           announcementInfo: announcementInfoMock,
         ),
       ],
@@ -155,7 +157,7 @@ void main() {
           () => repository.getAnnouncement(
             user: user,
             salesOrg: salesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: announcementInfoMock.endCursor,
           ),
         ).thenAnswer(
@@ -175,6 +177,7 @@ void main() {
           canLoadMore: true,
         ),
         announcementInfoState.copyWith(
+          canLoadMore: false,
           announcementInfo: announcementInfoMock.copyWith(
             announcementList: [
               ...announcementInfoMock.announcementList,
@@ -199,7 +202,7 @@ void main() {
           () => repository.getAnnouncement(
             user: user,
             salesOrg: salesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: announcementInfoMock.endCursor,
           ),
         ).thenAnswer(

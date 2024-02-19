@@ -29,6 +29,9 @@ class ArticleInfoQueryMutation {
           publishedDate: field(name: "Published Date") {
             ...dateFields
           }
+          releaseDate: field(name: "Release Date") {
+            ...dateFields
+          }
           documents: field(name: "Documents") {
             ...multilistFields
           }
@@ -65,6 +68,9 @@ class ArticleInfoQueryMutation {
               ...imageFields
             }
             publishedDate: field(name: "Published Date") {
+              ...dateFields
+            }
+            releaseDate: field(name: "Release Date") {
               ...dateFields
             }
             documents: field(name: "Documents") {
@@ -131,7 +137,7 @@ class ArticleInfoQueryMutation {
         where: {AND: [{OR: [{name: "_templates", value: \$template1, operator: CONTAINS}, {name: "_templates", value: \$template2, operator: CONTAINS}]}, {name: "_path", value: \$path, operator: CONTAINS}, {name: "_language", value: \$lang, operator: CONTAINS}]}
         first: \$pageSize
         after: \$after
-        orderBy: {name: "Published Date", direction: DESC}
+        orderBy: {name: "Release Date", direction: DESC}
       ) {
         pageInfo {
           endCursor
@@ -161,6 +167,9 @@ class ArticleInfoQueryMutation {
           ...imageFields
         }
         publishedDate: field(name: "Published Date") {
+          ...dateFields
+        }
+        releaseDate: field(name: "Release Date") {
           ...dateFields
         }
         documents: field(name: "Documents") {
@@ -209,6 +218,9 @@ class ArticleInfoQueryMutation {
           ...imageFields
         }
         publishedDate: field(name: "Published Date") {
+          ...dateFields
+        }
+        releaseDate: field(name: "Release Date") {
           ...dateFields
         }
         documents: field(name: "Documents") {

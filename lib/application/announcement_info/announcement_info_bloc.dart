@@ -53,7 +53,7 @@ class AnnouncementInfoBloc
             await announcementInfoRepository.getAnnouncement(
           user: state.user,
           salesOrg: state.salesOrg,
-          pageSize: config.pageSize,
+          pageSize: config.articlePageSize,
           after: '',
         );
         failureOrSuccess.fold(
@@ -61,6 +61,7 @@ class AnnouncementInfoBloc
             emit(
               state.copyWith(
                 isLoading: false,
+                canLoadMore: false,
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
@@ -70,7 +71,7 @@ class AnnouncementInfoBloc
               state.copyWith(
                 isLoading: false,
                 announcementInfo: announcementInfo,
-                canLoadMore: announcementInfo.total > config.pageSize,
+                canLoadMore: announcementInfo.total > config.articlePageSize,
               ),
             );
           },
@@ -92,7 +93,7 @@ class AnnouncementInfoBloc
             await announcementInfoRepository.getAnnouncement(
           user: state.user,
           salesOrg: state.salesOrg,
-          pageSize: config.pageSize,
+          pageSize: config.articlePageSize,
           after: state.announcementInfo.endCursor,
         );
 
@@ -117,8 +118,8 @@ class AnnouncementInfoBloc
                 ),
                 apiFailureOrSuccessOption: none(),
                 isLoading: false,
-                canLoadMore:
-                    announcement.announcementList.length >= config.pageSize,
+                canLoadMore: announcement.announcementList.length >=
+                    config.articlePageSize,
               ),
             );
           },

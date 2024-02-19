@@ -11,6 +11,13 @@ class Config {
   int httpReceiveTimeout = 150000;
   Duration dateRangePickerDuration = const Duration(days: 1095);
   int pageSize = 24;
+
+  // For article and announcement lists, due to technical bottlenecks on the Sitecore side, the backend is unable to provide search and filter support.
+  // Therefore, we need to address this issue locally, we handle filter data from our side
+  // There are some cases where we get the filtered items too small and cannot trigger the load more function in the listView
+  // So we increased the page to 1000 to ensure there are enough items after filtering on 1 page to trigger load more function
+
+  int articlePageSize = 1000;
   int autoSearchTimeout = 1500;
   int maximumCartQuantity = 99999;
   String customScheme = 'ezrx://';

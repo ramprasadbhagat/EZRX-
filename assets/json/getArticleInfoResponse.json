@@ -22,6 +22,10 @@
                         "isoValue": "20230713T095802",
                         "formattedDateValue": "07/13/2023 09:58"
                     },
+                    "releaseDate": {
+                        "isoValue": "20230713T095802",
+                        "formattedDateValue": "07/13/2023 09:58"
+                    },
                     "documents": {
                         "value": []
                     },
@@ -54,6 +58,10 @@
                     },
                     "publishedDate": {
                         "isoValue": "20230713T095800",
+                        "formattedDateValue": "07/13/2023 09:58"
+                    },
+                    "releaseDate": {
+                        "isoValue": "20230713T095802",
                         "formattedDateValue": "07/13/2023 09:58"
                     },
                     "documents": {
@@ -90,6 +98,10 @@
                     },
                     "publishedDate": {
                         "isoValue": "20230713T095800",
+                        "formattedDateValue": "07/13/2023 09:58"
+                    },
+                    "releaseDate": {
+                        "isoValue": "20230713T095802",
                         "formattedDateValue": "07/13/2023 09:58"
                     },
                     "documents": {

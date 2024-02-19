@@ -26,6 +26,9 @@ query (\$pageSize: Int!, \$template: String!, \$path: String!, \$lang: String!, 
           publishedDate: field(name: "Published Date") {
             ...dateFields
           }
+          releaseDate: field(name: "Release Date") {
+            ...dateFields
+          }
           documents: field(name: "Documents") {
             ...multilistFields
           }
@@ -62,6 +65,9 @@ query (\$pageSize: Int!, \$template: String!, \$path: String!, \$lang: String!, 
               ...imageFields
             }
             publishedDate: field(name: "Published Date") {
+              ...dateFields
+            }
+            releaseDate: field(name: "Release Date") {
               ...dateFields
             }
             documents: field(name: "Documents") {

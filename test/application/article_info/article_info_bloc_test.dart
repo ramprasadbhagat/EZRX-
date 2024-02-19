@@ -42,7 +42,6 @@ void main() {
   });
 
   group('Articles Info Bloc', () {
-
     blocTest(
       'Get Articles info Initialize',
       build: () => ArticlesInfoBloc(
@@ -54,7 +53,7 @@ void main() {
           () => repository.getArticles(
             user: user,
             salesOrg: fakeMYSalesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -63,14 +62,13 @@ void main() {
           ),
         );
       },
-      act: (ArticlesInfoBloc bloc) => bloc
-        .add(
-          ArticlesInfoEvent.initialize(
-            salesOrg: fakeMYSalesOrg,
-            shipToInfo: shipToInfo,
-            user: user,
-          ),
+      act: (ArticlesInfoBloc bloc) => bloc.add(
+        ArticlesInfoEvent.initialize(
+          salesOrg: fakeMYSalesOrg,
+          shipToInfo: shipToInfo,
+          user: user,
         ),
+      ),
       expect: () => [
         articlesInfoState.copyWith(
           salesOrg: fakeMYSalesOrg,
@@ -87,6 +85,7 @@ void main() {
           salesOrg: fakeMYSalesOrg,
           shipToInfo: shipToInfo,
           user: user,
+          canLoadMore: false,
           articleInfo: articleInfoMock,
           apiFailureOrSuccessOption: optionOf(Right(articleInfoMock)),
         ),
@@ -103,7 +102,7 @@ void main() {
           () => repository.getArticles(
             user: user,
             salesOrg: salesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -112,13 +111,13 @@ void main() {
           ),
         );
       },
-      act: (ArticlesInfoBloc bloc) => bloc
-        .add(
-          const ArticlesInfoEvent.getArticles(),
-        ),
+      act: (ArticlesInfoBloc bloc) => bloc.add(
+        const ArticlesInfoEvent.getArticles(),
+      ),
       expect: () => [
         articlesInfoState.copyWith(isFetching: true),
         articlesInfoState.copyWith(
+          canLoadMore: false,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
         ),
@@ -139,7 +138,7 @@ void main() {
           () => repository.getArticles(
             user: user,
             salesOrg: salesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -148,16 +147,16 @@ void main() {
           ),
         );
       },
-      act: (ArticlesInfoBloc bloc) => bloc
-        .add(
-          const ArticlesInfoEvent.getArticles(),
-        ),
+      act: (ArticlesInfoBloc bloc) => bloc.add(
+        const ArticlesInfoEvent.getArticles(),
+      ),
       expect: () => [
         articlesInfoState.copyWith(
           isFetching: true,
           shipToInfo: shipToInfo,
         ),
         articlesInfoState.copyWith(
+          canLoadMore: false,
           shipToInfo: shipToInfo,
           articleInfo: articleInfoMock,
           apiFailureOrSuccessOption: optionOf(Right(articleInfoMock)),
@@ -180,7 +179,7 @@ void main() {
           () => repository.getArticles(
             user: user,
             salesOrg: fakeIDSalesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -206,10 +205,9 @@ void main() {
           ),
         );
       },
-      act: (ArticlesInfoBloc bloc) => bloc
-        .add(
-          const ArticlesInfoEvent.getArticles(),
-        ),
+      act: (ArticlesInfoBloc bloc) => bloc.add(
+        const ArticlesInfoEvent.getArticles(),
+      ),
       expect: () {
         final mockArticleInfo = articleInfoMock.copyWith(
           announcementList: articleInfoMock.announcementList
@@ -239,6 +237,7 @@ void main() {
             shipToInfo: shipToInfo,
             salesOrg: fakeIDSalesOrg,
             articleInfo: mockArticleInfo,
+            canLoadMore: false,
             apiFailureOrSuccessOption: optionOf(
               Right(
                 articleInfoMock.copyWith(
@@ -282,7 +281,7 @@ void main() {
           () => repository.getArticles(
             user: user,
             salesOrg: salesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: articleInfoMock.endCursor,
           ),
         ).thenAnswer(
@@ -291,10 +290,9 @@ void main() {
           ),
         );
       },
-      act: (ArticlesInfoBloc bloc) => bloc
-        .add(
-          const ArticlesInfoEvent.loadMoreArticles(),
-        ),
+      act: (ArticlesInfoBloc bloc) => bloc.add(
+        const ArticlesInfoEvent.loadMoreArticles(),
+      ),
       expect: () => [
         articlesInfoState.copyWith(
           isFetching: true,
@@ -332,7 +330,7 @@ void main() {
           () => repository.getArticles(
             user: user,
             salesOrg: fakeIDSalesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: articleInfoMock.endCursor,
           ),
         ).thenAnswer(
@@ -358,10 +356,9 @@ void main() {
           ),
         );
       },
-      act: (ArticlesInfoBloc bloc) => bloc
-        .add(
-          const ArticlesInfoEvent.loadMoreArticles(),
-        ),
+      act: (ArticlesInfoBloc bloc) => bloc.add(
+        const ArticlesInfoEvent.loadMoreArticles(),
+      ),
       expect: () {
         final loadedMockArticlesInfoState = articleInfoMock.copyWith(
           announcementList: articleInfoMock.announcementList
@@ -416,7 +413,7 @@ void main() {
           () => repository.getArticles(
             user: user,
             salesOrg: salesOrg,
-            pageSize: config.pageSize,
+            pageSize: config.articlePageSize,
             after: articleInfoMock.endCursor,
           ),
         ).thenAnswer(
@@ -425,10 +422,9 @@ void main() {
           ),
         );
       },
-      act: (ArticlesInfoBloc bloc) => bloc
-        .add(
-          const ArticlesInfoEvent.loadMoreArticles(),
-        ),
+      act: (ArticlesInfoBloc bloc) => bloc.add(
+        const ArticlesInfoEvent.loadMoreArticles(),
+      ),
       expect: () => [
         articlesInfoState.copyWith(
           isFetching: true,
@@ -451,12 +447,11 @@ void main() {
         articleInfoRepository: repository,
         config: config,
       ),
-      act: (ArticlesInfoBloc bloc) => bloc
-        .add(
-          const ArticlesInfoEvent.setSearchKey(
-            searchKey: 'fake_searchKey',
-          ),
+      act: (ArticlesInfoBloc bloc) => bloc.add(
+        const ArticlesInfoEvent.setSearchKey(
+          searchKey: 'fake_searchKey',
         ),
+      ),
       expect: () => [
         articlesInfoState.copyWith(
           searchKey: SearchKey.searchFilter('fake_searchKey'),
