@@ -66,7 +66,7 @@ class MaterialListRemoteDataSource {
           'isGimmick': gimmickMaterial,
           'SearchKey': searchKey,
           'isFOCMaterial': isCovidSelected,
-          if (isMarketPlace) 'IsMarketplace': isMarketPlace,
+          if (isMarketPlace) 'isMarketPlace': isMarketPlace,
           if (showSampleItem) 'fromAddBonus': showSampleItem,
         },
       };

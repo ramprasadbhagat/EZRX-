@@ -13,7 +13,7 @@ class MaterialsWithMetaQuery {
             Manufactured
             IsFavourite
             isFOCMaterial
-            ${enableMarketplace ? 'IsMarketplace' : ''}
+            ${enableMarketplace ? 'isMarketPlace' : ''}
             materialGroup4
             Type
             HidePrice
@@ -57,7 +57,7 @@ class MaterialsWithMetaQuery {
         Manufactured
         Type
         IsFavourite
-        ${enableMarketplace ? 'IsMarketplace' : ''}
+        ${enableMarketplace ? 'isMarketPlace' : ''}
         BundleInformation {
           BundleName
           BundleCode

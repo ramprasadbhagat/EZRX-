@@ -63,7 +63,7 @@ void main() {
         'isGimmick': false,
         'SearchKey': '',
         'fromAddBonus': true,
-        'IsMarketplace': true,
+        'isMarketPlace': true,
       },
     };
     final res = json.decode(
