@@ -4724,6 +4724,78 @@ void main() {
           );
         });
       });
+
+      test(
+        'Testing CartBloc isPriceOverrideDisabled for sales rep -->true',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            config: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+            user: fakeExternalSalesRepUser,
+          );
+          expect(cartBlocState.isPriceOverrideDisabled, true);
+        },
+      );
+
+      test(
+        'Testing CartBloc isPriceOverrideDisabled for sales rep -->false',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            config: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+            user: fakeExternalSalesRepUser.copyWith(
+              hasPriceOverride: true,
+            ),
+          );
+          expect(cartBlocState.isPriceOverrideDisabled, false);
+        },
+      );
+
+      test(
+        'Testing CartBloc isCounterOfferProductResetRequired -->true',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  counterOfferDetails:
+                      RequestCounterOfferDetails.empty().copyWith(
+                    counterOfferPrice: CounterOfferValue('100'),
+                  ),
+                ),
+              )
+            ],
+            config: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+            user: fakeExternalSalesRepUser,
+          );
+          expect(cartBlocState.isCounterOfferProductResetRequired, true);
+        },
+      );
+
+      test(
+        'Testing CartBloc isCounterOfferProductResetRequired -->false',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  counterOfferDetails:
+                      RequestCounterOfferDetails.empty().copyWith(
+                    counterOfferPrice: CounterOfferValue('100'),
+                  ),
+                ),
+              ),
+            ],
+            config: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+            user: fakeExternalSalesRepUser.copyWith(
+              hasPriceOverride: true,
+            ),
+          );
+          expect(cartBlocState.isCounterOfferProductResetRequired, false);
+        },
+      );
     },
   );
 }

@@ -473,8 +473,9 @@ class CartState with _$CartState {
       )
       .toList();
 
-  bool get isPriceOverrideDisabled =>
-      !user.role.type.isSalesRepRole && !config.priceOverride;
+  bool get isPriceOverrideDisabled => user.role.type.isSalesRepRole
+      ? !user.hasPriceOverride
+      : !config.priceOverride;
 
   bool get isCounterOfferProductResetRequired =>
       productsWithCounterOfferPrice.isNotEmpty ||
