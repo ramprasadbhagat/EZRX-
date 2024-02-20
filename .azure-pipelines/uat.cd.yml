@@ -10,7 +10,7 @@ resources:
 - repo: self
 
 pool:
-  vmImage: 'macos-12'
+  vmImage: 'macos-13'
 
 variables:
   - group: "eZRx plus CICD"
