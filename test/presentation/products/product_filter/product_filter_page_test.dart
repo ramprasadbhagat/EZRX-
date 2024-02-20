@@ -17,8 +17,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockMaterialFilterBloc
@@ -149,6 +152,51 @@ void main() {
               ),
             ),
           ).called(1);
+        },
+      );
+
+      testWidgets(
+        'Test Product Filter By Type Options Marketplace Item',
+        (tester) async {
+          when(() => mockEligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: fakeShipToInfoPeninsulaRegion,
+              user: fakeClientUserAccessMarketPlace,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final marketplaceItemsTitleFinder =
+              find.byKey(WidgetKeys.showProductCheckbox('Marketplace items'));
+          expect(
+            marketplaceItemsTitleFinder,
+            findsOneWidget,
+          );
+          await tester.tap(marketplaceItemsTitleFinder);
+          verify(
+            () => mockMaterialFilterBloc.add(
+              const MaterialFilterEvent.updateSelectedMaterialFilter(
+                MaterialFilterType.isMarketPlace,
+                true,
+              ),
+            ),
+          ).called(1);
+        },
+      );
+      testWidgets(
+        'Test Product Filter By Type Options doesn\'t show Marketplace Item',
+        (tester) async {
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final marketplaceItemsTileFinder =
+              find.byKey(WidgetKeys.showProductCheckbox('Marketplace items'));
+          expect(
+            marketplaceItemsTileFinder,
+            findsNothing,
+          );
         },
       );
 

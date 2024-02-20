@@ -167,6 +167,7 @@ void main() {
         when(() => userBlocMock.state).thenReturn(
           UserState.initial(),
         );
+        resetMocktailState();
       });
 
       Widget getScopedWidget() {
@@ -882,6 +883,49 @@ void main() {
           findsOneWidget,
         );
       });
+      testWidgets(
+        '=> Test SearchAndFilter',
+        (tester) async {
+          when(() => materialFilterBlocMock.state).thenReturn(
+            MaterialFilterState.initial().copyWith.materialFilter(
+                  bundleOffers: true,
+                ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakePHSalesOrganisation,
+              salesOrgConfigs: fakePHSalesOrgConfigs,
+              customerCodeInfo: fakeCustomerCodeInfoForCovid,
+              user: fakeClientAdmin,
+              shipToInfo: fakeShipToInfo,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(find.byType(SearchAndFilter), findsOneWidget);
+          final filterProductBtn = find.byKey(WidgetKeys.filterProductIcon);
+          await tester.tap(filterProductBtn);
+          await tester.pumpAndSettle();
+          final applyBtn = find.byKey(WidgetKeys.filterApplyButton);
+          expect(applyBtn, findsOneWidget);
+          await tester.tap(applyBtn);
+          await tester.pumpAndSettle();
+          verify(
+            () => materialListBlocMock.add(
+              MaterialListEvent.fetch(
+                salesOrganisation: fakePHSalesOrganisation,
+                configs: fakePHSalesOrgConfigs,
+                customerCodeInfo: fakeCustomerCodeInfoForCovid,
+                user: fakeClientAdmin,
+                selectedMaterialFilter: MaterialFilter.empty().copyWith(
+                  bundleOffers: true,
+                ),
+                shipToInfo: fakeShipToInfo,
+              ),
+            ),
+          ).called(1);
+        },
+      );
     },
   );
 }

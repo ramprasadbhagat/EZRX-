@@ -39,6 +39,7 @@ void main() {
   const fakeBundleOffersFilterKey = true;
   const fakeProductOffersFilterKey = true;
   const fakeSortByFilterKey = Sort.za;
+  const fakeMarketPlaceFilterKey = true;
 
   group('Material Filter Bloc', () {
     setUp(() async {
@@ -316,6 +317,26 @@ void main() {
     );
 
     blocTest(
+      'Selected Material Filter Is Market Place',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      seed: () => filterState,
+      act: (MaterialFilterBloc bloc) => bloc.add(
+        const MaterialFilterEvent.updateSelectedMaterialFilter(
+          MaterialFilterType.isMarketPlace,
+          fakeMarketPlaceFilterKey,
+        ),
+      ),
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          materialFilter: filterState.materialFilter
+              .copyWith(isMarketPlace: fakeMarketPlaceFilterKey),
+        ),
+      ],
+    );
+
+    blocTest(
       'Selected Material Filter Sort',
       build: () => MaterialFilterBloc(
         materialFilterRepository: materialFilterRepositoryMock,
@@ -404,6 +425,7 @@ void main() {
               sortBy: materialActiveFilterMockData.sortBy,
               bundleOffers: materialActiveFilterMockData.bundleOffers,
               isProductOffer: materialActiveFilterMockData.isProductOffer,
+              isMarketPlace: materialActiveFilterMockData.isMarketPlace,
               manufactureMapOptions: manufactureMap,
               countryMapOptions: countryMap,
               manufactureListSelected:

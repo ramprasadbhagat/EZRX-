@@ -122,6 +122,7 @@ void main() {
               brandList: mockSelectedMaterialFilter.brandList,
               manufactureListSelected:
                   mockSelectedMaterialFilter.manufactureListSelected,
+              isMarketPlace: mockSelectedMaterialFilter.isMarketPlace,
             ),
           ),
           materialState.copyWith(
@@ -187,6 +188,7 @@ void main() {
             brandList: mockSelectedMaterialFilter.brandList,
             manufactureListSelected:
                 mockSelectedMaterialFilter.manufactureListSelected,
+            isMarketPlace: mockSelectedMaterialFilter.isMarketPlace,
           ),
         ),
         materialState.copyWith(
