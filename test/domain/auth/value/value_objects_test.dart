@@ -832,4 +832,116 @@ void main() {
       },
     );
   });
+
+  group('App Market value object', () {
+     test(
+      'SaleOrg for MY market',
+      () {
+        const input = '2001';
+        final salesOrg = SalesOrg(input);
+        final result = AppMarket('my');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+
+    test(
+      'SaleOrg for MM market',
+      () {
+        const input = '2200';
+        final salesOrg = SalesOrg(input);
+        final result = AppMarket('mm');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+
+    test(
+      'SaleOrg for PH market',
+      () {
+        const input = '2500';
+        final salesOrg = SalesOrg(input);
+        final result = AppMarket('ph');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+
+    test(
+      'SaleOrg for SG market',
+      () {
+        const input = '2601';
+         final salesOrg = SalesOrg(input);
+        final result = AppMarket('sg');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+
+    test(
+      'SaleOrg for TW market',
+      () {
+        const input = '2800';
+        final salesOrg = SalesOrg(input);
+        final result = AppMarket('tw');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+
+    test(
+      'SaleOrg for TH market',
+      () {
+        const input = '2900';
+       final salesOrg = SalesOrg(input);
+        final result = AppMarket('th');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+
+    test(
+      'SaleOrg for VN market',
+      () {
+        const input = '3000';
+         final salesOrg = SalesOrg(input);
+        final result = AppMarket('vn');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+
+    test(
+      'SaleOrg for KR market',
+      () {
+        const input = '3101';
+         final salesOrg = SalesOrg(input);
+        final result = AppMarket('kr');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+
+    test(
+      'SaleOrg for KH market',
+      () {
+        const input = '1500';
+        final salesOrg = SalesOrg(input);
+        final result = AppMarket('kh');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+
+    test(
+      'SaleOrg for ID market',
+      () {
+        const input = '1900';
+         final salesOrg = SalesOrg(input);
+        final result = AppMarket('id');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+
+     test(
+      'SaleOrg for HK market',
+      () {
+        const input = '2001';
+        final salesOrg = SalesOrg(input);
+        final result = AppMarket('hk');
+        expect(result.salesOrg, salesOrg);
+      },
+    );
+  });
 }

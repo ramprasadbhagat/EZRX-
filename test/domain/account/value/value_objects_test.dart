@@ -154,6 +154,106 @@ void main() {
         expect(result, 17);
       },
     );
+
+    test(
+      'Maintenance banner pathID for MY',
+      () {
+        const input = '2001';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.maintenanceBannerPathId;
+        expect(result, '294DBC60-6394-4284-9D2B-B3270D0459EF');
+      },
+    );
+
+    test(
+      'Maintenance banner pathID for MM',
+      () {
+        const input = '2200';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.maintenanceBannerPathId;
+        expect(result, '4A238A3A-1840-414F-882B-A64F21842384');
+      },
+    );
+
+    test(
+      'Maintenance banner pathID for PH',
+      () {
+        const input = '2500';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.maintenanceBannerPathId;
+        expect(result, 'C6B6D79B-3D53-4AF8-812C-AC83472F1B4D');
+      },
+    );
+
+    test(
+      'Maintenance banner pathID for SG',
+      () {
+        const input = '2601';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.maintenanceBannerPathId;
+        expect(result, '1FFEC4CB-D518-42B9-AE58-952CC0984DF0');
+      },
+    );
+
+    test(
+      'Maintenance banner pathID for TW',
+      () {
+        const input = '2800';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.maintenanceBannerPathId;
+        expect(result, 'CA38B790-5B32-4895-9656-D3ECEAC274C9');
+      },
+    );
+
+    test(
+      'Maintenance banner pathID for TH',
+      () {
+        const input = '2900';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.maintenanceBannerPathId;
+        expect(result, 'F3A68975-2A83-4859-90E7-7226DD9DA614');
+      },
+    );
+
+    test(
+      'Maintenance banner pathID for VN',
+      () {
+        const input = '3000';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.maintenanceBannerPathId;
+        expect(result, 'B895ED50-F741-4266-869C-E5D21911639B');
+      },
+    );
+
+    test(
+      'Maintenance banner pathID for KR',
+      () {
+        const input = '3101';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.maintenanceBannerPathId;
+        expect(result, 'E64D62D9-69A2-4610-AA8C-37B1C1C77DEA');
+      },
+    );
+
+    test(
+      'Maintenance banner pathID for KH',
+      () {
+        const input = '1500';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.maintenanceBannerPathId;
+        expect(result, 'B4444BCE-4508-4F34-B150-5DD4C5D1A74F');
+      },
+    );
+
+    test(
+      'Maintenance banner pathID for ID',
+      () {
+        const input = '1900';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.maintenanceBannerPathId;
+        expect(result, '25256DFD-D111-43F1-B29A-2FABB6B45E42');
+      },
+    );
   });
 
   group('RoleType value object', () {

@@ -436,7 +436,7 @@ String countryAnnouncementPath(String country) {
 String countryToMaintenanceBannerPathId(String market) {
   final marketCountryMap = {
     'MY': '294DBC60-6394-4284-9D2B-B3270D0459EF',
-    'PH': '54E151C1-17CB-4A37-BD75-CE4631B9F173',
+    'PH': 'C6B6D79B-3D53-4AF8-812C-AC83472F1B4D',
     'SG': '1FFEC4CB-D518-42B9-AE58-952CC0984DF0',
     'ID': '25256DFD-D111-43F1-B29A-2FABB6B45E42',
     'KH': 'B4444BCE-4508-4F34-B150-5DD4C5D1A74F',
