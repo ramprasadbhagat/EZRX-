@@ -11,10 +11,7 @@ class EligibilityEvent with _$EligibilityEvent {
     required OrderDocumentType selectedOrderType,
   }) = _Update;
 
-  const factory EligibilityEvent.registerChatBot({
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-  }) = _RegisterChatBot;
+  const factory EligibilityEvent.registerChatBot() = _RegisterChatBot;
 
   const factory EligibilityEvent.selectedCustomerCode({
     required CustomerCodeInfo customerCodeInfo,

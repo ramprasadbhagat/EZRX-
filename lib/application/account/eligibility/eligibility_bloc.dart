@@ -55,15 +55,23 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
         );
       },
       selectedCustomerCode: (e) async {
-        await customerCodeRepository.storeCustomerInfo(
+        final failureOrSuccess = await customerCodeRepository.storeCustomerInfo(
           customerCode: e.customerCodeInfo.customerCodeSoldTo,
           shippingAddress: e.shipToInfo.shipToCustomerCode,
         );
 
-        add(
-          EligibilityEvent.registerChatBot(
-            customerCodeInfo: e.customerCodeInfo,
-            shipToInfo: e.shipToInfo,
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (success) => emit(
+            state.copyWith(
+              customerCodeInfo: e.customerCodeInfo,
+              shipToInfo: e.shipToInfo,
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
           ),
         );
       },
@@ -136,15 +144,6 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           orElse: () => customerCodeInfoList.first,
         );
 
-        if (customerCodeInfoList.canPreSelectShipToCode) {
-          add(
-            EligibilityEvent.registerChatBot(
-              customerCodeInfo: customerCodeInfo,
-              shipToInfo: shipToInfo,
-            ),
-          );
-        }
-
         emit(
           state.copyWith(
             customerCodeInfo: customerCodeInfo,
@@ -177,16 +176,6 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           (customerInformation) => customerInformation.soldToInformation,
         );
 
-        if (customerCodeInfoList.canPreSelectShipToCode) {
-          add(
-            EligibilityEvent.registerChatBot(
-              customerCodeInfo:
-                  customerCodeInfoList.preSelectedCustomerCodeInfo,
-              shipToInfo: customerCodeInfoList.preSelectedShipToInfo,
-            ),
-          );
-        }
-
         emit(
           state.copyWith(
             customerCodeInfo: customerCodeInfoList.preSelectedCustomerCodeInfo,
@@ -215,16 +204,14 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           salesOrganisation: state.salesOrganisation,
           user: state.user,
           salesOrganisationConfigs: state.salesOrgConfigs,
-          customerCodeInfo: e.customerCodeInfo,
-          shipToInfo: e.shipToInfo,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
         );
 
         failureOrSuccess.fold(
           (failure) {
             emit(
               state.copyWith(
-                customerCodeInfo: e.customerCodeInfo,
-                shipToInfo: e.shipToInfo,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isLoading: false,
               ),
@@ -233,8 +220,6 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           (value) {
             emit(
               state.copyWith(
-                customerCodeInfo: e.customerCodeInfo,
-                shipToInfo: e.shipToInfo,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),

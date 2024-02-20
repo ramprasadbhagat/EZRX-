@@ -25,9 +25,7 @@ mixin _$EligibilityEvent {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)
         update,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
-        registerChatBot,
+    required TResult Function() registerChatBot,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
@@ -44,8 +42,7 @@ mixin _$EligibilityEvent {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -61,8 +58,7 @@ mixin _$EligibilityEvent {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
@@ -170,9 +166,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)
         update,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
-        registerChatBot,
+    required TResult Function() registerChatBot,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
@@ -192,8 +186,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -212,8 +205,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
@@ -421,9 +413,7 @@ class _$_Update implements _Update {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)
         update,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
-        registerChatBot,
+    required TResult Function() registerChatBot,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
@@ -443,8 +433,7 @@ class _$_Update implements _Update {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -464,8 +453,7 @@ class _$_Update implements _Update {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
@@ -548,11 +536,6 @@ abstract class _$$_RegisterChatBotCopyWith<$Res> {
   factory _$$_RegisterChatBotCopyWith(
           _$_RegisterChatBot value, $Res Function(_$_RegisterChatBot) then) =
       __$$_RegisterChatBotCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo});
-
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -562,77 +545,26 @@ class __$$_RegisterChatBotCopyWithImpl<$Res>
   __$$_RegisterChatBotCopyWithImpl(
       _$_RegisterChatBot _value, $Res Function(_$_RegisterChatBot) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
-  }) {
-    return _then(_$_RegisterChatBot(
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_RegisterChatBot implements _RegisterChatBot {
-  const _$_RegisterChatBot(
-      {required this.customerCodeInfo, required this.shipToInfo});
-
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
+  const _$_RegisterChatBot();
 
   @override
   String toString() {
-    return 'EligibilityEvent.registerChatBot(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'EligibilityEvent.registerChatBot()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_RegisterChatBot &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+        (other.runtimeType == runtimeType && other is _$_RegisterChatBot);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, customerCodeInfo, shipToInfo);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_RegisterChatBotCopyWith<_$_RegisterChatBot> get copyWith =>
-      __$$_RegisterChatBotCopyWithImpl<_$_RegisterChatBot>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -644,16 +576,14 @@ class _$_RegisterChatBot implements _RegisterChatBot {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)
         update,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
-        registerChatBot,
+    required TResult Function() registerChatBot,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
     required TResult Function() loadStoredCustomerCode,
     required TResult Function() fetchAndPreSelectCustomerCode,
   }) {
-    return registerChatBot(customerCodeInfo, shipToInfo);
+    return registerChatBot();
   }
 
   @override
@@ -666,14 +596,13 @@ class _$_RegisterChatBot implements _RegisterChatBot {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
     TResult? Function()? fetchAndPreSelectCustomerCode,
   }) {
-    return registerChatBot?.call(customerCodeInfo, shipToInfo);
+    return registerChatBot?.call();
   }
 
   @override
@@ -686,8 +615,7 @@ class _$_RegisterChatBot implements _RegisterChatBot {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
@@ -695,7 +623,7 @@ class _$_RegisterChatBot implements _RegisterChatBot {
     required TResult orElse(),
   }) {
     if (registerChatBot != null) {
-      return registerChatBot(customerCodeInfo, shipToInfo);
+      return registerChatBot();
     }
     return orElse();
   }
@@ -749,15 +677,7 @@ class _$_RegisterChatBot implements _RegisterChatBot {
 }
 
 abstract class _RegisterChatBot implements EligibilityEvent {
-  const factory _RegisterChatBot(
-      {required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_RegisterChatBot;
-
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
-  @JsonKey(ignore: true)
-  _$$_RegisterChatBotCopyWith<_$_RegisterChatBot> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _RegisterChatBot() = _$_RegisterChatBot;
 }
 
 /// @nodoc
@@ -862,9 +782,7 @@ class _$_SelectedCustomerCode implements _SelectedCustomerCode {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)
         update,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
-        registerChatBot,
+    required TResult Function() registerChatBot,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
@@ -884,8 +802,7 @@ class _$_SelectedCustomerCode implements _SelectedCustomerCode {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -904,8 +821,7 @@ class _$_SelectedCustomerCode implements _SelectedCustomerCode {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
@@ -1024,9 +940,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)
         update,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
-        registerChatBot,
+    required TResult Function() registerChatBot,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
@@ -1046,8 +960,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -1066,8 +979,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,
@@ -1182,9 +1094,7 @@ class _$_FetchAndPreSelectCustomerCode
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)
         update,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
-        registerChatBot,
+    required TResult Function() registerChatBot,
     required TResult Function(
             CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
         selectedCustomerCode,
@@ -1204,8 +1114,7 @@ class _$_FetchAndPreSelectCustomerCode
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult? Function()? registerChatBot,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult? Function()? loadStoredCustomerCode,
@@ -1224,8 +1133,7 @@ class _$_FetchAndPreSelectCustomerCode
             SalesOrganisationConfigs salesOrgConfigs,
             OrderDocumentType selectedOrderType)?
         update,
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
-        registerChatBot,
+    TResult Function()? registerChatBot,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
         selectedCustomerCode,
     TResult Function()? loadStoredCustomerCode,

@@ -216,10 +216,8 @@ void main() {
         config: config,
       ),
       seed: () => EligibilityState.initial().copyWith(
-        customerCodeInfo: fakeCustomerInfo,
         salesOrganisation: fakeSaleOrg,
         salesOrgConfigs: fakeSaleOrgConfig,
-        shipToInfo: fakeShipToInfo,
         user: fakeUser,
       ),
       setUp: () {
@@ -230,18 +228,6 @@ void main() {
                 fakeCustomerInfo.shipToInfos.first.shipToCustomerCode,
           ),
         ).thenAnswer((invocation) async => const Right(unit));
-
-        when(
-          () => chatBotRepositoryMock.passPayloadToChatbot(
-            customerCodeInfo: fakeCustomerInfo,
-            salesOrganisation: fakeSaleOrg,
-            salesOrganisationConfigs: fakeSaleOrgConfig,
-            shipToInfo: fakeShipToInfo,
-            user: fakeUser,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(true),
-        );
       },
       act: (EligibilityBloc bloc) {
         bloc.add(
@@ -258,16 +244,8 @@ void main() {
           user: fakeUser,
           customerCodeInfo: fakeCustomerInfo,
           shipToInfo: fakeCustomerInfo.shipToInfos.first,
-          isLoading: true,
+          failureOrSuccessOption: optionOf(const Right(unit)),
         ),
-        EligibilityState.initial().copyWith(
-          salesOrganisation: fakeSaleOrg,
-          salesOrgConfigs: fakeSaleOrgConfig,
-          user: fakeUser,
-          customerCodeInfo: fakeCustomerInfo,
-          shipToInfo: fakeCustomerInfo.shipToInfos.first,
-          isLoading: false,
-        )
       ],
     );
 
@@ -1513,5 +1491,70 @@ void main() {
         true,
       );
     });
+
+    blocTest(
+      'Test RegisterChatBot mixpanel registerSuperProps',
+      build: () => EligibilityBloc(
+        chatBotRepository: chatBotRepositoryMock,
+        mixpanelRepository: mixpanelRepositoryMock,
+        customerCodeRepository: customerCodeRepositoryMock,
+        config: config,
+      ),
+      setUp: () {
+        when(
+          () => chatBotRepositoryMock.passPayloadToChatbot(
+            customerCodeInfo: fakeCustomerInfo,
+            salesOrganisation: fakeSaleOrg,
+            shipToInfo: fakeShipToInfo,
+            user: fakeUser,
+            salesOrganisationConfigs: fakeSaleOrgConfig,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(true),
+        );
+
+        when(
+          () => mixpanelRepositoryMock.registerSuperProps(
+            customerCodeInfo: fakeCustomerInfo,
+            salesOrg: fakeSaleOrg.salesOrg,
+            salesOrgConfigs: fakeSaleOrgConfig,
+            shipToInfo: fakeShipToInfo,
+            user: fakeUser,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(true),
+        );
+      },
+      seed: () => EligibilityState.initial().copyWith(
+        user: fakeUser,
+        salesOrganisation: fakeSaleOrg,
+        salesOrgConfigs: fakeSaleOrgConfig,
+        customerCodeInfo: fakeCustomerInfo,
+        shipToInfo: fakeShipToInfo,
+      ),
+      act: (EligibilityBloc bloc) {
+        bloc.add(
+          const EligibilityEvent.registerChatBot(),
+        );
+      },
+      expect: () => [
+        EligibilityState.initial().copyWith(
+          user: fakeUser,
+          salesOrganisation: fakeSaleOrg,
+          isLoading: true,
+          customerCodeInfo: fakeCustomerInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrgConfigs: fakeSaleOrgConfig,
+        ),
+        EligibilityState.initial().copyWith(
+          user: fakeUser,
+          salesOrganisation: fakeSaleOrg,
+          isLoading: false,
+          customerCodeInfo: fakeCustomerInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrgConfigs: fakeSaleOrgConfig,
+        ),
+      ],
+    );
   });
 }

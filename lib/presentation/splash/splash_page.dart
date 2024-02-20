@@ -539,6 +539,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               _initializeCart(state);
               _initializeAccountSummary(state);
 
+              context.read<EligibilityBloc>().add(
+                    const EligibilityEvent.registerChatBot(),
+                  );
+
               context.read<MaterialPriceBloc>().add(
                     MaterialPriceEvent.initialized(
                       salesOrganisation: state.salesOrganisation,
