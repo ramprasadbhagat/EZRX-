@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
@@ -36,6 +37,8 @@ class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
 
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -47,8 +50,9 @@ void main() {
   final introSkipButton = find.byKey(WidgetKeys.introSkipButton);
   final introGetStartedButton = find.byKey(WidgetKeys.introGetStartedButton);
   late AnnouncementBloc announcementBlocMock;
+  late UserBloc userBlocMock;
 
-  setUpAll(() async {
+  setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -57,6 +61,7 @@ void main() {
     eligibilityBlocMock = EligibilityBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     aupTcBlocMock = AupTcBlocMock();
+    userBlocMock = UserBlocMock();
 
     when(() => eligibilityBlocMock.state).thenReturn(
       EligibilityState.initial(),
@@ -71,6 +76,7 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
+    when(() => userBlocMock.state).thenReturn(UserState.initial());
   });
 
   Widget getIntroPage() {
@@ -92,6 +98,9 @@ void main() {
         ),
         BlocProvider<AnnouncementBloc>(
           create: (context) => announcementBlocMock,
+        ),
+        BlocProvider<UserBloc>(
+          create: (context) => userBlocMock,
         ),
       ],
       child: const IntroPage(),
@@ -128,6 +137,14 @@ void main() {
         ),
       );
 
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeClientUser.copyWith(
+            userSalesOrganisations: [fakeSalesOrganisation],
+          ),
+        ),
+      );
+
       await tester.pumpWidget(getIntroPage());
       await tester.pump();
 
@@ -154,10 +171,18 @@ void main() {
           user: fakeClientUser.copyWith(
             disablePaymentAccess: true,
             disableReturns: true,
+          ),
+        ),
+      );
+
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeClientUser.copyWith(
             userSalesOrganisations: [fakeSalesOrganisation],
           ),
         ),
       );
+
       await tester.pumpWidget(getIntroPage());
       await tester.pumpAndSettle();
       expect(introGetStartedButton, findsOneWidget);
@@ -194,10 +219,20 @@ void main() {
           user: fakeClientUser.copyWith(
             disablePaymentAccess: false,
             disableReturns: false,
+          ),
+        ),
+      );
+
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeClientUser.copyWith(
+            disablePaymentAccess: false,
+            disableReturns: false,
             userSalesOrganisations: [fakeSalesOrganisation],
           ),
         ),
       );
+
       await tester.pumpWidget(getIntroPage());
       await tester.pumpAndSettle();
       expect(introGetStartedButton, findsOneWidget);
@@ -225,11 +260,18 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeKHSalesOrgConfigs,
+          user: fakeRootAdminUser,
+        ),
+      );
+
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
           user: fakeRootAdminUser.copyWith(
             userSalesOrganisations: [fakeSalesOrganisation],
           ),
         ),
       );
+
       await tester.pumpWidget(getIntroPage());
       await tester.pumpAndSettle();
       expect(introGetStartedButton, findsOneWidget);
@@ -265,7 +307,13 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeMYSalesOrgConfigs,
-          user: fakeClientUser.copyWith(
+          user: fakeClientUser,
+        ),
+      );
+
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeRootAdminUser.copyWith(
             userSalesOrganisations: [fakeSalesOrganisation],
           ),
         ),

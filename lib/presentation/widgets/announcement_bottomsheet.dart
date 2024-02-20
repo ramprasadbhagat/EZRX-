@@ -161,6 +161,7 @@ class _ButtonClose extends StatelessWidget {
       children: [
         Expanded(
           child: ElevatedButton(
+            key: WidgetKeys.closeAlertDialog,
             onPressed: () {
               context.read<AnnouncementBloc>().add(
                     AnnouncementEvent.setClosedTime(

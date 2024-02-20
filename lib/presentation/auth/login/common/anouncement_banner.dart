@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/domain/announcement/entities/maintenance_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,7 @@ class _ItemAnnouncement extends StatelessWidget {
       child: LoadingShimmer.withChild(
         enabled: isLoading,
         child: ListTile(
+          key: WidgetKeys.announcementBanner,
           tileColor: ZPColors.errorSnackBarColor,
           dense: true,
           contentPadding: const EdgeInsets.all(8),
@@ -89,6 +91,7 @@ class _ItemAnnouncement extends StatelessWidget {
           ),
           trailing: banner.enableCrossButton
               ? InkWell(
+                  key: WidgetKeys.closeAnnouncementBanner,
                   onTap: () {
                     context
                         .read<AnnouncementBloc>()

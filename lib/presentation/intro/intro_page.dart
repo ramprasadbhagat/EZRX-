@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:ezrxmobile/presentation/intro/intro_step.dart';
@@ -73,13 +74,18 @@ class _IntroPageState extends State<IntroPage> {
   }
 
   void _getStarted(BuildContext context) {
-    final eligibilityState = context.read<EligibilityBloc>().state;
     context.read<IntroBloc>().add(const IntroEvent.setAppFirstLaunch());
-    context.read<SalesOrgBloc>().add(
-          SalesOrgEvent.loadSavedOrganisation(
-            salesOrganisations: eligibilityState.user.userSalesOrganisations,
-          ),
-        );
+    //Here we are using userBloc instead of eligibilityBloc,
+    //as our integration test is too fast that sometimes
+    //it taps on getStarted button, before we update eligibility bloc.
+    final userState = context.read<UserBloc>().state;
+    if (userState.haveSalesOrganisation) {
+      context.read<SalesOrgBloc>().add(
+            SalesOrgEvent.loadSavedOrganisation(
+              salesOrganisations: userState.user.userSalesOrganisations,
+            ),
+          );
+    }
   }
 
   @override

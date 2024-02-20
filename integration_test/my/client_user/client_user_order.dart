@@ -3,49 +3,49 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import '../core/common.dart';
-import '../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../core/infrastructure/zephyr/repository/zephyr_repository.dart';
-import '../robots/announcement_article/announcement_article_root_robot.dart';
-import '../robots/announcement_article/articles/articles_details_robot.dart';
-import '../robots/announcement_article/articles/articles_robot.dart';
-import '../robots/auth/forgot_password_robot.dart';
-import '../robots/common/common_robot.dart';
-import '../robots/common/enum.dart';
-import '../robots/common/extension.dart';
-import '../robots/home/customer_search_robot.dart';
-import '../robots/home/home_robot.dart';
-import '../robots/login_robot.dart';
-import '../robots/more/contact_us_robot.dart';
-import '../robots/more/more_robot.dart';
-import '../robots/more/profile_robot.dart';
-import '../robots/more/security_robot.dart';
-import '../robots/notification/notification_robot.dart';
-import '../robots/orders/cart/bonus_sample_robot.dart';
-import '../robots/orders/cart/cart_delivery_address_robot.dart';
-import '../robots/orders/cart/cart_robot.dart';
-import '../robots/orders/cart/oos_pre_order_robot.dart';
-import '../robots/orders/cart/request_counter_offer_robot.dart';
-import '../robots/orders/checkout/checkout_robot.dart';
-import '../robots/orders/checkout/order_price_summary_robot.dart';
-import '../robots/orders/checkout/order_success_robot.dart';
-import '../robots/orders/orders_root_robot.dart';
-import '../robots/orders/view_by_items/view_by_items_detail_robot.dart';
-import '../robots/orders/view_by_items/view_by_items_filter_robot.dart';
-import '../robots/orders/view_by_items/view_by_items_robot.dart';
-import '../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
-import '../robots/payments/account_summary/account_invoice/account_invoice_detail_robot.dart';
-import '../robots/payments/payment_summary/payment_detail_robot.dart';
-import '../robots/orders/view_by_orders/view_by_orders_filter_robot.dart';
-import '../robots/orders/view_by_orders/view_by_orders_robot.dart';
-import '../robots/payments/payment_home_robot.dart';
-import '../robots/products/bundle_detail_robot.dart';
-import '../robots/products/filter_sort_product_robot.dart';
-import '../robots/products/product_detail_robot.dart';
-import '../robots/products/product_robot.dart';
-import '../robots/products/product_suggestion_robot.dart';
-import '../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
-import '../robots/returns/returns_root_robot.dart';
+import '../../core/common.dart';
+import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+import '../../robots/announcement_article/announcement_article_root_robot.dart';
+import '../../robots/announcement_article/articles/articles_details_robot.dart';
+import '../../robots/announcement_article/articles/articles_robot.dart';
+import '../../robots/auth/forgot_password_robot.dart';
+import '../../robots/common/common_robot.dart';
+import '../../robots/common/enum.dart';
+import '../../robots/common/extension.dart';
+import '../../robots/home/customer_search_robot.dart';
+import '../../robots/home/home_robot.dart';
+import '../../robots/login_robot.dart';
+import '../../robots/more/contact_us_robot.dart';
+import '../../robots/more/more_robot.dart';
+import '../../robots/more/profile_robot.dart';
+import '../../robots/more/security_robot.dart';
+import '../../robots/notification/notification_robot.dart';
+import '../../robots/orders/cart/bonus_sample_robot.dart';
+import '../../robots/orders/cart/cart_delivery_address_robot.dart';
+import '../../robots/orders/cart/cart_robot.dart';
+import '../../robots/orders/cart/oos_pre_order_robot.dart';
+import '../../robots/orders/cart/request_counter_offer_robot.dart';
+import '../../robots/orders/checkout/checkout_robot.dart';
+import '../../robots/orders/checkout/order_price_summary_robot.dart';
+import '../../robots/orders/checkout/order_success_robot.dart';
+import '../../robots/orders/orders_root_robot.dart';
+import '../../robots/orders/view_by_items/view_by_items_detail_robot.dart';
+import '../../robots/orders/view_by_items/view_by_items_filter_robot.dart';
+import '../../robots/orders/view_by_items/view_by_items_robot.dart';
+import '../../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
+import '../../robots/payments/account_summary/account_invoice/account_invoice_detail_robot.dart';
+import '../../robots/payments/payment_summary/payment_detail_robot.dart';
+import '../../robots/orders/view_by_orders/view_by_orders_filter_robot.dart';
+import '../../robots/orders/view_by_orders/view_by_orders_robot.dart';
+import '../../robots/payments/payment_home_robot.dart';
+import '../../robots/products/bundle_detail_robot.dart';
+import '../../robots/products/filter_sort_product_robot.dart';
+import '../../robots/products/product_detail_robot.dart';
+import '../../robots/products/product_robot.dart';
+import '../../robots/products/product_suggestion_robot.dart';
+import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
+import '../../robots/returns/returns_root_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -203,6 +203,7 @@ void main() {
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.closeAnnouncementAlertDialog();
     } else {
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.changeDeliveryAddress(
@@ -261,23 +262,27 @@ void main() {
     Future<void> pumpAppInitialState(WidgetTester tester) async {
       initializeRobot(tester);
       await runAppForTesting(tester);
+      await loginRobot.tapToCloseAnnouncementBanner();
+      //TODO: remove this line, once snackbar issue resolved
+      await commonRobot.dismissSnackbar(dismissAll: true);
     }
 
     testWidgets('EZRX-T6 | Verify GUI of Login screen', (tester) async {
       await pumpAppInitialState(tester);
 
       //select market
-      loginRobot.findMarketSelector();
+      await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
       await loginRobot.selectMarket(marketMalaysia);
-      loginRobot.verifySelectedMarket(marketMalaysia);
+      await loginRobot.tapToCloseAnnouncementBanner();
 
       //verify
-      loginRobot.findUsernameField();
-      loginRobot.findPasswordField();
-      loginRobot.findPasswordField();
-      loginRobot.findRememberMeCheckbox();
-      loginRobot.findForgotPasswordLink();
+      await loginRobot.findUsernameField();
+      await loginRobot.findPasswordField();
+      await loginRobot.findPasswordField();
+      await loginRobot.findRememberMeCheckbox();
+      await loginRobot.findForgotPasswordLink();
+      loginRobot.verifySelectedMarket(marketMalaysia);
       loginRobot.findSignUpLink();
       loginRobot.findLoginWithSSOButton();
     });
@@ -287,9 +292,9 @@ void main() {
       await pumpAppInitialState(tester);
 
       //default value
-      loginRobot.verifyRememberMeCheckboxUnchecked();
-      loginRobot.verifyDefaultUsernameField();
-      loginRobot.verifyDefaultPasswordField();
+      await loginRobot.verifyRememberMeCheckboxUnchecked();
+      await loginRobot.verifyDefaultUsernameField();
+      await loginRobot.verifyDefaultPasswordField();
     });
 
     testWidgets('EZRX-T8 | Verify mandatory fields', (tester) async {
@@ -298,13 +303,13 @@ void main() {
       await pumpAppInitialState(tester);
 
       //select market
-      loginRobot.findMarketSelector();
+      await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
       await loginRobot.selectMarket(marketMalaysia);
-      loginRobot.verifySelectedMarket(marketMalaysia);
 
       //login without username and password
       await loginRobot.login(emptyString, emptyString);
+
       loginRobot.verifyErrorMessageWithoutUsername();
       loginRobot.verifyErrorMessageWithoutPassword();
 
@@ -323,10 +328,9 @@ void main() {
       await pumpAppInitialState(tester);
 
       //select market
-      loginRobot.findMarketSelector();
+      await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
       await loginRobot.selectMarket(marketMalaysia);
-      loginRobot.verifySelectedMarket(marketMalaysia);
 
       //login with incorrect username
       await loginRobot.login(usernameInCorrect, password);
@@ -340,10 +344,9 @@ void main() {
       await pumpAppInitialState(tester);
 
       //select market
-      loginRobot.findMarketSelector();
+      await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
       await loginRobot.selectMarket(marketMalaysia);
-      loginRobot.verifySelectedMarket(marketMalaysia);
 
       //login with incorrect password
       await loginRobot.login(username, passwordInCorrect);
@@ -357,10 +360,9 @@ void main() {
       await pumpAppInitialState(tester);
 
       //select market
-      loginRobot.findMarketSelector();
+      await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
       await loginRobot.selectMarket(marketMalaysia);
-      loginRobot.verifySelectedMarket(marketMalaysia);
 
       //login with incorrect username
       await loginRobot.login(usernameInCorrect, passwordInCorrect);
@@ -372,7 +374,7 @@ void main() {
       await pumpAppInitialState(tester);
 
       //forgot password
-      loginRobot.findForgotPasswordLink();
+      await loginRobot.findForgotPasswordLink();
       await loginRobot.tapToForgotPassword();
 
       //back to login
@@ -399,7 +401,7 @@ void main() {
       await pumpAppInitialState(tester);
 
       //forgot password
-      loginRobot.findForgotPasswordLink();
+      await loginRobot.findForgotPasswordLink();
       await loginRobot.tapToForgotPassword();
 
       //verify send email
@@ -414,13 +416,12 @@ void main() {
       await pumpAppInitialState(tester);
 
       //select market
-      loginRobot.findMarketSelector();
+      await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
       await loginRobot.selectMarket(marketMalaysia);
-      loginRobot.verifySelectedMarket(marketMalaysia);
 
       // check remember me
-      loginRobot.findRememberMeCheckbox();
+      await loginRobot.findRememberMeCheckbox();
       await loginRobot.tapToRememberMe();
 
       //login with
@@ -429,6 +430,7 @@ void main() {
       //intro page
       loginRobot.findSkipIntroButton();
       await loginRobot.tapSkipIntroButton();
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
       //customer search
       customerSearchRobot.verifyPage();
@@ -449,6 +451,10 @@ void main() {
 
       // change address
       await customerSearchRobot.selectCustomerSearch(shipToCode);
+      //TODO: remove this line, once snackbar issue resolved
+      await commonRobot.dismissSnackbar(dismissAll: true);
+
+      await commonRobot.closeAnnouncementAlertDialog();
 
       //home page
       homeRobot.verify();
@@ -465,17 +471,21 @@ void main() {
       await pumpAppInitialState(tester);
 
       //select market
-      loginRobot.findMarketSelector();
+      await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
       await loginRobot.selectMarket(marketMalaysia);
       loginRobot.verifySelectedMarket(marketMalaysia);
 
       // check remember me
-      loginRobot.findRememberMeCheckbox();
+      await loginRobot.findRememberMeCheckbox();
       await loginRobot.tapToRememberMe();
 
       //login with
       await loginRobot.login(usernameSingleShipTo, passwordSingleShipTo);
+      //TODO: remove this line, once snackbar issue resolved
+      await commonRobot.dismissSnackbar(dismissAll: true);
+
+      await commonRobot.closeAnnouncementAlertDialog();
 
       //home page
       homeRobot.verify();
@@ -493,15 +503,15 @@ void main() {
       await pumpAppInitialState(tester);
 
       //select market
-      loginRobot.findMarketSelector();
+      await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
       await loginRobot.selectMarket(marketMalaysia);
-      loginRobot.verifySelectedMarket(marketMalaysia);
 
       // check remember me
-      loginRobot.findRememberMeCheckbox();
+      await loginRobot.findRememberMeCheckbox();
       await loginRobot.tapToRememberMe();
 
+      loginRobot.verifySelectedMarket(marketMalaysia);
       //login with
       await loginRobot.login(username, password);
 

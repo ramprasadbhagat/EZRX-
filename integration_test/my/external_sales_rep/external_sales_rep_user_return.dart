@@ -135,20 +135,32 @@ void main() {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.closeAnnouncementAlertDialog();
     }
     await commonRobot.dismissSnackbar(dismissAll: true);
     if (proxyLoginRequired) {
+      await tester.pumpAndSettle(const Duration(seconds: 1));
       await commonRobot.navigateToScreen(NavigationTab.more);
       await moreRobot.verifyLoginOnBehalfTile();
       await moreRobot.tapLoginOnBehalfTile();
       await loginOnBehalfRobot.enterUserNameField(behalfName);
       await loginOnBehalfRobot.tapLoginButton();
-      await Future.delayed(const Duration(seconds: 5));
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+      await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       await commonRobot.dismissSnackbar(dismissAll: true);
       moreRobot.verifyProfileName(behalfName, behalfName);
-      proxyLoginRequired = false;
       await commonRobot.navigateToScreen(NavigationTab.home);
+      proxyLoginRequired = false;
+    } else {
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await commonRobot.changeDeliveryAddress(
+        shipToCode,
+      );
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await tester.pumpAndSettle();
+      await commonRobot.closeAnnouncementAlertDialog();
     }
   }
 

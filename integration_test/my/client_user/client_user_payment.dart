@@ -3,33 +3,33 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import '../core/common.dart';
-import '../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../core/infrastructure/zephyr/repository/zephyr_repository.dart';
-import '../robots/common/common_robot.dart';
-import '../robots/common/extension.dart';
-import '../robots/home/customer_search_robot.dart';
-import '../robots/home/home_robot.dart';
-import '../robots/login_robot.dart';
-import '../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
-import '../robots/payments/account_summary/account_credits/account_credits_detail_robot.dart';
-import '../robots/payments/account_summary/account_credits/account_credits_filter_robot.dart';
-import '../robots/payments/account_summary/account_credits/account_credits_robot.dart';
-import '../robots/payments/account_summary/account_invoice/account_invoice_detail_robot.dart';
-import '../robots/payments/account_summary/account_invoice/account_invoice_filter_robot.dart';
-import '../robots/payments/account_summary/account_invoice/account_invoice_robot.dart';
-import '../robots/payments/account_summary/account_summary_root_robot.dart';
-import '../robots/payments/account_summary/account_summary_tab/account_summary_tab_filter_robot.dart';
-import '../robots/payments/account_summary/account_summary_tab/account_summary_tab_robot.dart';
-import '../robots/payments/new_payment/new_payment_robot.dart';
-import '../robots/payments/new_payment/new_payment_step1_robot.dart';
-import '../robots/payments/new_payment/new_payment_step2_robot.dart';
-import '../robots/payments/new_payment/new_payment_step3_robot.dart';
-import '../robots/payments/payment_home_robot.dart';
-import '../robots/payments/payment_summary/payment_detail_robot.dart';
-import '../robots/payments/payment_summary/payment_summary_filter_robot.dart';
-import '../robots/payments/payment_summary/payment_summary_robot.dart';
-import '../robots/payments/soa/statement_of_account_robot.dart';
+import '../../core/common.dart';
+import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+import '../../robots/common/common_robot.dart';
+import '../../robots/common/extension.dart';
+import '../../robots/home/customer_search_robot.dart';
+import '../../robots/home/home_robot.dart';
+import '../../robots/login_robot.dart';
+import '../../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
+import '../../robots/payments/account_summary/account_credits/account_credits_detail_robot.dart';
+import '../../robots/payments/account_summary/account_credits/account_credits_filter_robot.dart';
+import '../../robots/payments/account_summary/account_credits/account_credits_robot.dart';
+import '../../robots/payments/account_summary/account_invoice/account_invoice_detail_robot.dart';
+import '../../robots/payments/account_summary/account_invoice/account_invoice_filter_robot.dart';
+import '../../robots/payments/account_summary/account_invoice/account_invoice_robot.dart';
+import '../../robots/payments/account_summary/account_summary_root_robot.dart';
+import '../../robots/payments/account_summary/account_summary_tab/account_summary_tab_filter_robot.dart';
+import '../../robots/payments/account_summary/account_summary_tab/account_summary_tab_robot.dart';
+import '../../robots/payments/new_payment/new_payment_robot.dart';
+import '../../robots/payments/new_payment/new_payment_step1_robot.dart';
+import '../../robots/payments/new_payment/new_payment_step2_robot.dart';
+import '../../robots/payments/new_payment/new_payment_step3_robot.dart';
+import '../../robots/payments/payment_home_robot.dart';
+import '../../robots/payments/payment_summary/payment_detail_robot.dart';
+import '../../robots/payments/payment_summary/payment_summary_filter_robot.dart';
+import '../../robots/payments/payment_summary/payment_summary_robot.dart';
+import '../../robots/payments/soa/statement_of_account_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -109,6 +109,7 @@ void main() {
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.closeAnnouncementAlertDialog();
     } else {
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.changeDeliveryAddress(

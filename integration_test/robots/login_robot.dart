@@ -3,10 +3,10 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class LoginRobot {
-  final WidgetTester tester;
+import 'common/common_robot.dart';
 
-  LoginRobot(this.tester);
+class LoginRobot extends CommonRobot {
+  LoginRobot(WidgetTester tester) : super(tester);
 
   final rememberMeCheckbox =
       find.byKey(WidgetKeys.loginRememberPasswordCheckbox);
@@ -18,17 +18,19 @@ class LoginRobot {
   final skipIntroButton = find.byKey(WidgetKeys.introSkipButton);
   final signUp = find.byKey(WidgetKeys.createAccountButton);
   final loginWithSSO = find.byKey(WidgetKeys.ssoLoginButton);
+  final closeAnnouncementBanner =
+      find.byKey(WidgetKeys.closeAnnouncementBanner);
 
   Future<void> loginToHomeScreen(
     String username,
     String password,
     String market,
   ) async {
+    await tapToCloseAnnouncementBanner();
     //select market
-    findMarketSelector();
+    await findMarketSelector();
     await tapToMarketSelector();
     await selectMarket(market);
-    verifySelectedMarket(market);
 
     //login
     await login(username, password);
@@ -36,54 +38,63 @@ class LoginRobot {
   }
 
   Future<void> login(String username, String password) async {
-    expect(loginUsernameField, findsOneWidget);
-    expect(loginPasswordField, findsOneWidget);
-    expect(loginSubmitButton, findsOneWidget);
-
+    await tapToCloseAnnouncementBanner();
+    await findUsernameField();
     await tester.enterText(loginUsernameField, username);
+    await findPasswordField();
     await tester.enterText(loginPasswordField, password);
+    await findSubmitButton();
 
     expect(loginSubmitButton, findsOneWidget);
     await tester.tap(loginSubmitButton);
     await tester.pumpAndSettle();
   }
 
-  void findUsernameField() {
+  Future<void> findUsernameField() async {
+    await scrollEnsureFinderVisible(loginUsernameField);
     expect(loginUsernameField, findsOneWidget);
   }
 
-  void findPasswordField() {
+  Future<void> findPasswordField() async {
+    await scrollEnsureFinderVisible(loginPasswordField);
     expect(loginPasswordField, findsOneWidget);
   }
 
-  void findSubmitButton() {
+  Future<void> findSubmitButton() async {
+    await scrollEnsureFinderVisible(loginSubmitButton);
     expect(loginSubmitButton, findsOneWidget);
   }
 
-  void findRememberMeCheckbox() {
+  Future<void> findRememberMeCheckbox() async {
+    await scrollEnsureFinderVisible(rememberMeCheckbox);
     expect(rememberMeCheckbox, findsOneWidget);
   }
 
-  void verifyRememberMeCheckboxUnchecked() {
+  Future<void> verifyRememberMeCheckboxUnchecked() async {
+    await scrollEnsureFinderVisible(rememberMeCheckbox);
     final checkbox = tester.firstWidget<Checkbox>(rememberMeCheckbox);
     expect(checkbox.value, false);
   }
 
   Future<void> tapToRememberMe() async {
+    await scrollEnsureFinderVisible(rememberMeCheckbox);
     await tester.tap(rememberMeCheckbox);
     await tester.pumpAndSettle();
   }
 
-  void findForgotPasswordLink() {
+  Future<void> findForgotPasswordLink() async {
+    await scrollEnsureFinderVisible(forgotPasswordLink);
     expect(forgotPasswordLink, findsOneWidget);
   }
 
   Future<void> tapToForgotPassword() async {
+    await scrollEnsureFinderVisible(forgotPasswordLink);
     await tester.tap(forgotPasswordLink);
     await tester.pumpAndSettle();
   }
 
-  void findMarketSelector() {
+  Future<void> findMarketSelector() async {
+    await scrollEnsureFinderVisible(marketSelector);
     expect(marketSelector, findsOneWidget);
   }
 
@@ -101,23 +112,27 @@ class LoginRobot {
     expect(dropdownItemValue, findsOneWidget);
   }
 
-  void verifyDefaultUsernameField() {
+  Future<void> verifyDefaultUsernameField() async {
+    await scrollEnsureFinderVisible(loginUsernameField);
     final inputUsername = tester.widget<TextFormField>(loginUsernameField);
     expect(inputUsername.initialValue, isEmpty);
   }
 
-  void verifyDefaultPasswordField() {
+  Future<void> verifyDefaultPasswordField() async {
+    await scrollEnsureFinderVisible(loginPasswordField);
     final inputPassword = tester.widget<TextFormField>(loginPasswordField);
     expect(inputPassword.initialValue, isEmpty);
   }
 
   Future<void> tapToMarketSelector() async {
+    await scrollEnsureFinderVisible(marketSelector);
     await tester.tap(marketSelector);
     await tester.pumpAndSettle();
   }
 
   Future<void> selectMarket(String market) async {
     final dropdownItemToSelect = find.text(market).last;
+    await scrollEnsureFinderVisible(dropdownItemToSelect);
     await tester.tap(dropdownItemToSelect);
     await tester.pumpAndSettle();
   }
@@ -147,5 +162,22 @@ class LoginRobot {
 
   void findLoginWithSSOButton() {
     expect(loginWithSSO, findsOneWidget);
+  }
+
+  Future<void> tapToCloseAnnouncementBanner() async {
+    var closeButtonFinder = find.byKey(WidgetKeys.closeAnnouncementBanner);
+
+    await tester.pump(const Duration(seconds: 1));
+    while (closeButtonFinder.evaluate().isNotEmpty) {
+      await tester.ensureVisible(closeButtonFinder.first);
+      await tester.tap(closeButtonFinder.first);
+      await tester.pump();
+      closeButtonFinder = find.byKey(WidgetKeys.closeAnnouncementBanner);
+    }
+    final announcementBanner = find.byKey(WidgetKeys.announcementBanner);
+    if (announcementBanner.evaluate().isNotEmpty &&
+        find.byKey(WidgetKeys.closeAnnouncementBanner).evaluate().isEmpty) {
+      await scrollEnsureFinderVisible(announcementBanner.last);
+    }
   }
 }

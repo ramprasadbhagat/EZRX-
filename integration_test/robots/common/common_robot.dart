@@ -277,4 +277,17 @@ class CommonRobot {
     );
     await tester.pump();
   }
+
+  //============================================================
+  //  Announcement/Alert Banner/dialog
+  //============================================================
+
+  Future<void> closeAnnouncementAlertDialog() async {
+    //close dialog if present
+    final closeAlertDialog = find.byKey(WidgetKeys.closeAlertDialog);
+    if (closeAlertDialog.evaluate().isNotEmpty) {
+      await tester.tap(closeAlertDialog);
+      await tester.pumpAndSettle();
+    }
+  }
 }

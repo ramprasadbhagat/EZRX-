@@ -179,16 +179,24 @@ void main() {
   var proxyLoginRequired = true;
 
   Future<void> pumpAppWithLogin(
-    WidgetTester tester,
-  ) async {
+    WidgetTester tester, {
+    String shipToCode = shipToCode,
+  }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.closeAnnouncementAlertDialog();
+    } else {
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.changeDeliveryAddress(
+        shipToCode,
+      );
+      await commonRobot.closeAnnouncementAlertDialog();
     }
-    await commonRobot.dismissSnackbar(dismissAll: true);
   }
 
   Future<void> pumpAppWithLoginOnBehalf(
@@ -201,20 +209,32 @@ void main() {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.closeAnnouncementAlertDialog();
     }
     await commonRobot.dismissSnackbar(dismissAll: true);
     if (proxyLoginRequired) {
+      await tester.pumpAndSettle(const Duration(seconds: 1));
       await commonRobot.navigateToScreen(NavigationTab.more);
       await moreRobot.verifyLoginOnBehalfTile();
       await moreRobot.tapLoginOnBehalfTile();
       await loginOnBehalfRobot.enterUserNameField(behalfName);
       await loginOnBehalfRobot.tapLoginButton();
-      await Future.delayed(const Duration(seconds: 5));
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+      await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       await commonRobot.dismissSnackbar(dismissAll: true);
       moreRobot.verifyProfileName(behalfName, behalfName);
       await commonRobot.navigateToScreen(NavigationTab.home);
       proxyLoginRequired = false;
+    } else {
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await commonRobot.changeDeliveryAddress(
+        shipToCode,
+      );
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await tester.pumpAndSettle();
+      await commonRobot.closeAnnouncementAlertDialog();
     }
   }
 

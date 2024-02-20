@@ -2,11 +2,11 @@ STR := $$(perl -MYAML -le 'print YAML::LoadFile(shift)->{version}' ./pubspec.yam
 VERSION := $$( echo $(STR) | cut -d '+' -f 1 )
 BUILD := $$( echo $(STR) | cut -d '+' -f 2 )
 CLIENTUSER := 'client_user.dart'
-CLIENTUSERRETURN := 'client_user_return.dart'
+CLIENTUSERORDER := 'client_user/client_user_order.dart'
 CLIENTUSERPAYMENT := 'client_user/client_user_payment.dart'
+CLIENTUSERRETURN := 'client_user/client_user_return.dart'
 EXTERNALSALESREPORDER := 'external_sales_rep/external_sales_rep_user_order.dart'
 EXTERNALSALESREPRETURN := 'external_sales_rep/external_sales_rep_user_return.dart'
-CLIENTUSERORDER := 'client_user/client_user_order.dart'
 SALESORGCONFIG := 'reset_sales_org_config.sh'
 
 clean_ios:

@@ -83,7 +83,10 @@ void main() {
 
   var loginRequired = true;
 
-  Future<void> pumpAppWithHomeScreen(WidgetTester tester) async {
+  Future<void> pumpAppWithHomeScreen(
+    WidgetTester tester, {
+    String shipToCode = shipToCode,
+  }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRequired) {
@@ -91,8 +94,8 @@ void main() {
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.closeAnnouncementAlertDialog();
     } else {
-      await tester.pumpAndSettle(const Duration(seconds: 2));
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.changeDeliveryAddress(
         shipToCode,
@@ -541,7 +544,7 @@ void main() {
         invoiceOrderNumber,
       );
       accountInvoiceDetailRobot.verifyHyperLinkToOrderDetails();
-      //Need to cover the tap to go orde details
+      //Need to cover the tap to go order details
       accountInvoiceDetailRobot.verifyCustomerCode(customerCode);
       accountInvoiceDetailRobot.verifyDeliveryTo(shipToCode);
       accountInvoiceDetailRobot.verifyOrderAddress(shipToAddress);

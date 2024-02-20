@@ -18,6 +18,7 @@ Future<void> runAppForTesting(
   await runAppWithCrashlyticsAndLocalization();
   test.setUpTestLocator();
   await tester.pump();
+  await tester.pumpAndSettle(const Duration(seconds: 1));
   await tester.pumpAndSettle();
 }
 

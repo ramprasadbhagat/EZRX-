@@ -44,6 +44,7 @@ class LoginMobile extends StatelessWidget {
               ),
               Expanded(
                 child: ListView(
+                  key: WidgetKeys.scrollList,
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   children: [
                     const AnnouncementBannerWidget(),

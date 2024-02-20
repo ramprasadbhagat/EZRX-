@@ -35,6 +35,8 @@ class WidgetKeys {
   static const Key addToCartErrorSectionProceed =
       Key('addToCartErrorSectionProceed');
   static const Key moreTapListContent = Key('moreTapListContent');
+  static const closeAnnouncementBanner = Key('closeAnnouncementBanner');
+  static const announcementBanner = Key('announcementBanner');
   static const Key settingTile = Key('settingTile');
   static const Key versionDisplay = Key('versionDisplay');
   static const Key customBadge = Key('customBadge');
@@ -99,6 +101,7 @@ class WidgetKeys {
   static const Key aupTcScreen = Key('aupTcScreen');
   static const Key customerCodeSelector = Key('customerCodeSelector');
   static const Key homeTabAnnouncementWidget = Key('homeTabAnnouncementWidget');
+  static const Key closeAlertDialog = Key('closeAlertDialog');
   static const Key homeScreen = Key('homeScreen');
   static const Key homeProductSearchBar = Key('homeProductSearchBar');
   static const Key productSearchSuggestion = Key('productSearchSuggestion');

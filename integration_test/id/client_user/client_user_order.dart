@@ -101,7 +101,10 @@ void main() {
 
   var loginRequired = true;
 
-  Future<void> pumpAppWithHomeScreen(WidgetTester tester) async {
+  Future<void> pumpAppWithHomeScreen(
+    WidgetTester tester, {
+    String shipToCode = shipToCode,
+  }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRequired) {
@@ -109,8 +112,8 @@ void main() {
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.closeAnnouncementAlertDialog();
     } else {
-      await tester.pumpAndSettle(const Duration(seconds: 2));
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.changeDeliveryAddress(
         shipToCode,

@@ -6,18 +6,16 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class HomeRobot {
-  final WidgetTester tester;
-  HomeRobot(this.tester);
+import '../common/common_robot.dart';
 
-  final moreTab = find.byKey(WidgetKeys.moreTab);
-  final searchBar = find.byKey(WidgetKeys.homeProductSearchBar);
+class HomeRobot extends CommonRobot {
+  HomeRobot(WidgetTester tester) : super(tester);
+
   final miniCart = find.byType(CartButton);
   final quickAccessMenu = find.byType(QuickAccessMenuPanel);
   final banner = find.byType(CarouselBanner);
   final browseProductIcon = find.byKey(WidgetKeys.browseProductIcon);
   final announcementIcon = find.byKey(WidgetKeys.announcementIcon);
-  final productsTab = find.byKey(WidgetKeys.productsTab);
   final buttonNextBanner = find.byKey(WidgetKeys.nextBannerIcon);
   final buttonPreviousBanner = find.byKey(WidgetKeys.previousBannerIcon);
   final recentlyOrder = find.byKey(WidgetKeys.recentlyOrder);
@@ -193,11 +191,13 @@ class HomeRobot {
   Future<void> tapReturnsQuickAccess() async {
     await tester.tap(homeQuickAccessReturns);
     await tester.pumpAndSettle();
+    await closeAnnouncementAlertDialog();
   }
 
   Future<void> tapPaymentQuickAccess() async {
     await tester.tap(homeQuickAccessPayments);
     await tester.pumpAndSettle();
+    await closeAnnouncementAlertDialog();
   }
 
   Future<void> slideToNextProductsOnOffer() async {
