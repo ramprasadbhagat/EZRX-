@@ -91,7 +91,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       requestedDeliveryDate:
           orderHistoryDetails.requestedDeliveryDate.dateString,
       expectedDeliveryDate: orderHistoryDetails.expectedDeliveryDate.dateString,
-      type: orderHistoryDetails.type,
+      type: orderHistoryDetails.type.documentTypeCode,
       telephoneNumber:
           orderHistoryDetails.telephoneNumber.displayTelephoneNumber,
       orderValue: orderHistoryDetails.orderValue,
@@ -136,7 +136,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       processingStatus: OrderStepValue(processingStatus),
       requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),
       expectedDeliveryDate: DateTimeStringValue(expectedDeliveryDate),
-      type: type,
+      type: DocumentType(type),
       telephoneNumber: PhoneNumber(telephoneNumber),
       orderValue: orderValue,
       createdDate: DateTimeStringValue(createdDate),

@@ -84,7 +84,10 @@ class ItemDetailsSection extends StatelessWidget {
                     orderHistoryItem.batchNumHasData
                 ? '${'Batch'.tr()}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderHistoryItem.expiryDate.dateOrDashString})'
                 : '',
-            isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
+            isCovidItem: (eligibilityState.salesOrg.isPH &&
+                    orderHistoryItem.orderType.isCovidOrderTypeForPH) ||
+                (eligibilityState.salesOrg.isSg &&
+                    orderHistoryItem.orderType.isCovidOrderTypeForSG),
             showOfferTag: orderHistoryItem.isOfferItem,
             showBundleTag: orderHistoryItem.isBundle,
             footerWidget: QuantityAndPriceWithTax(

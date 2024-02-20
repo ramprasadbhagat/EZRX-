@@ -113,10 +113,8 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                     ],
                   ),
           ),
-          bottomNavigationBar: eligibilityState.user.disableCreateOrder ||
-                  state.isLoading
-              ? null
-              : BlocProvider(
+          bottomNavigationBar: state.displayBuyAgainButton && !state.isLoading
+              ? BlocProvider(
                   create: (context) => locator<ReOrderPermissionBloc>()
                     ..add(
                       ReOrderPermissionEvent.initialized(
@@ -134,7 +132,8 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                       key: WidgetKeys.viewByOrderBuyAgainButtonKey,
                     ),
                   ),
-                ),
+                )
+              : null,
         );
       },
     );

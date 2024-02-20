@@ -18,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_details_header_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/item_details_section.dart';
@@ -55,14 +56,17 @@ class ViewByItemDetailsPage extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar.commonAppBar(
           title: Text(context.tr('Item Details')),
-          customerBlockedOrSuspended:
-              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
+          customerBlockedOrSuspended: eligibilityState.customerBlockOrSuspended,
         ),
         bottomNavigationBar:
-            context.read<EligibilityBloc>().state.user.role.type.isSalesRepRole
-                ? null
-                : const _BuyAgainButton(),
+            context.read<ViewByItemDetailsBloc>().state.displayBuyAgainButton
+                ? const _BuyAgainButton()
+                : null,
         body: BlocConsumer<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+          listenWhen: (previous, current) =>
+              previous.failureOrSuccessOption !=
+                  current.failureOrSuccessOption ||
+              previous.isDetailsLoading != current.isDetailsLoading,
           listener: (context, state) {
             state.failureOrSuccessOption.fold(
               () {},
@@ -70,7 +74,14 @@ class ViewByItemDetailsPage extends StatelessWidget {
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
                 },
-                (success) {},
+                (success) {
+                  if (state.isCovidForNonCustomer) {
+                    CustomSnackBar(
+                      key: WidgetKeys.canNotReOrderThisOrderToast,
+                      messageText: 'You can’t re-order this order',
+                    ).show(context);
+                  }
+                },
               ),
             );
           },

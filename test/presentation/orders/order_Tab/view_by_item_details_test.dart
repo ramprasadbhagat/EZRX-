@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -721,6 +722,15 @@ void main() {
       });
 
       testWidgets('is visible when user role is not sales rep', (tester) async {
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem: fakeOrderHistoryItem,
+            orderHistory: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
+            user: fakeRootAdminUser,
+          ),
+        );
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final button = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
@@ -747,8 +757,12 @@ void main() {
       });
 
       testWidgets('is not visible when user role is sales rep', (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem: fakeOrderHistoryItem,
+            orderHistory: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
             user: fakeInternalSalesRepUser,
           ),
         );
@@ -757,6 +771,84 @@ void main() {
         expect(
           find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton),
           findsNothing,
+        );
+      });
+      testWidgets(
+          'is not visible when user role is not customer for covid order',
+          (tester) async {
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem:
+                fakeOrderHistoryItem.copyWith(orderType: DocumentType('ZPVF')),
+            orderHistory: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
+            user: fakeRootAdminUser,
+            salesOrgConfig: SalesOrganisationConfigs.empty()
+                .copyWith(salesOrg: SalesOrg('2500')),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton),
+          findsNothing,
+        );
+      });
+      testWidgets('is visible when user role is customer for covid order',
+          (tester) async {
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem:
+                fakeOrderHistoryItem.copyWith(orderType: DocumentType('ZPVF')),
+            orderHistory: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
+            user: fakeClientUser,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'is snackbar visible when user role is not customer for covid order',
+          (tester) async {
+        final expectedState = [
+          ViewByItemDetailsState.initial().copyWith(
+            isLoading: true,
+          ),
+          ViewByItemDetailsState.initial().copyWith(
+            failureOrSuccessOption: optionOf(
+              Right(
+                OrderHistory.empty().copyWith(
+                  orderHistoryItems: [fakeOrderHistoryItem],
+                ),
+              ),
+            ),
+            orderHistoryItem:
+                fakeOrderHistoryItem.copyWith(orderType: DocumentType('ZPVF')),
+            orderHistory: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
+            user: fakeRootAdminUser,
+            salesOrgConfig: SalesOrganisationConfigs.empty()
+                .copyWith(salesOrg: SalesOrg('2500')),
+          ),
+        ];
+        whenListen(
+          viewByItemDetailsBlocMock,
+          Stream.fromIterable(expectedState),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.text('You can’t re-order this order'),
+          findsOneWidget,
         );
       });
 

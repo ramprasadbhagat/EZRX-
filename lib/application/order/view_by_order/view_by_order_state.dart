@@ -33,4 +33,21 @@ class ViewByOrderState with _$ViewByOrderState {
         appliedFilter: ViewByOrdersFilter.empty(),
         shipToInfo: ShipToInfo.empty(),
       );
+
+  bool displayBuyAgainButton(DocumentType type) {
+    if (user.disableCreateOrder) {
+      return false;
+    }
+    final isCovidOrderType =
+        (salesOrgConfigs.salesOrg.isPH && type.isCovidOrderTypeForPH) ||
+            (salesOrgConfigs.salesOrg.isSg && type.isCovidOrderTypeForSG);
+
+    final isCustomer = user.role.type.isCustomer;
+
+    if (isCovidOrderType && !isCustomer) {
+      return false;
+    }
+
+    return true;
+  }
 }

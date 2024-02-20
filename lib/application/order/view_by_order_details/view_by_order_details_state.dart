@@ -47,6 +47,24 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
           .map((e) => e.parentId)
           .toList();
 
+  bool get displayBuyAgainButton {
+    if (user.disableCreateOrder) {
+      return false;
+    }
+    final isCovidOrderType = (configs.salesOrg.isPH &&
+            orderHistoryDetails.type.isCovidOrderTypeForPH) ||
+        (configs.salesOrg.isSg &&
+            orderHistoryDetails.type.isCovidOrderTypeForSG);
+
+    final isCustomer = user.role.type.isCustomer;
+
+    if (isCovidOrderType && !isCustomer) {
+      return false;
+    }
+
+    return true;
+  }
+
   //TODO:Need To Revisit when tender contract is implemented for V3
   // bool get loadingTenderContractSuccess => isLoadingTenderContract.values.every(
   //       (isLoading) => !isLoading,

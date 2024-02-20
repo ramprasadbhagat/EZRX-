@@ -27,7 +27,7 @@ mixin _$OrderHistoryDetails {
       throw _privateConstructorUsedError;
   DateTimeStringValue get expectedDeliveryDate =>
       throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
+  DocumentType get type => throw _privateConstructorUsedError;
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get eZRXNumber => throw _privateConstructorUsedError;
@@ -74,7 +74,7 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       OrderStepValue processingStatus,
       DateTimeStringValue requestedDeliveryDate,
       DateTimeStringValue expectedDeliveryDate,
-      String type,
+      DocumentType type,
       PhoneNumber telephoneNumber,
       DateTimeStringValue createdDate,
       String eZRXNumber,
@@ -182,7 +182,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DocumentType,
       telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
@@ -293,7 +293,7 @@ abstract class _$$_OrderHistoryDetailsCopyWith<$Res>
       OrderStepValue processingStatus,
       DateTimeStringValue requestedDeliveryDate,
       DateTimeStringValue expectedDeliveryDate,
-      String type,
+      DocumentType type,
       PhoneNumber telephoneNumber,
       DateTimeStringValue createdDate,
       String eZRXNumber,
@@ -400,7 +400,7 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DocumentType,
       telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
@@ -539,7 +539,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   @override
   final DateTimeStringValue expectedDeliveryDate;
   @override
-  final String type;
+  final DocumentType type;
   @override
   final PhoneNumber telephoneNumber;
   @override
@@ -718,7 +718,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
       required final OrderStepValue processingStatus,
       required final DateTimeStringValue requestedDeliveryDate,
       required final DateTimeStringValue expectedDeliveryDate,
-      required final String type,
+      required final DocumentType type,
       required final PhoneNumber telephoneNumber,
       required final DateTimeStringValue createdDate,
       required final String eZRXNumber,
@@ -762,7 +762,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   @override
   DateTimeStringValue get expectedDeliveryDate;
   @override
-  String get type;
+  DocumentType get type;
   @override
   PhoneNumber get telephoneNumber;
   @override

@@ -1303,6 +1303,8 @@ class WidgetKeys {
       const Key('viewByItemsOrderDetailsShowMoreAttachments');
   static Key viewByItemDetailBuyAgainButton =
       const Key('viewByItemDetailBuyAgainButton');
+  static Key canNotReOrderThisOrderToast =
+      const Key('canNotReOrderThisOrderToast');
   static Key viewByItemDetailExpandButton =
       const Key('viewByItemDetailExpandButton');
   static const Key materialListPriceStrikeThrough =

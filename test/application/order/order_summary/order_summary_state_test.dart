@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -15,8 +16,8 @@ void main() {
 
       // Modify the state to have non-empty orderHistoryDetails
       final modifiedState = state.copyWith(
-        orderHistoryDetails:
-            OrderHistoryDetails.empty().copyWith(type: 'fake-type'),
+        orderHistoryDetails: OrderHistoryDetails.empty()
+            .copyWith(type: DocumentType('fake-type')),
       );
       expect(modifiedState.isOrderHistoryDetailsEmpty, false);
     });

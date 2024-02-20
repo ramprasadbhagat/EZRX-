@@ -958,11 +958,6 @@ void main() {
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           isLoading: false,
-        ),
-      );
-
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
           user: User.empty().copyWith(
             disableCreateOrder: true,
           ),

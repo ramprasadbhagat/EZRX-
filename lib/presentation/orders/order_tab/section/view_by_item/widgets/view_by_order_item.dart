@@ -44,7 +44,10 @@ class _ViewByOrderItem extends StatelessWidget {
         title: orderHistoryItem.materialDescription,
         subtitle:
             orderHistoryItem.principalData.principalName.getOrDefaultValue(''),
-        isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
+        isCovidItem: (salesOrgConfigs.salesOrg.isPH &&
+                orderHistoryItem.orderType.isCovidOrderTypeForPH) ||
+            (salesOrgConfigs.salesOrg.isSg &&
+                orderHistoryItem.orderType.isCovidOrderTypeForSG),
         headerText:
             '${context.tr(orderHistoryItem.status.prefix)} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
         headerTextInfoIcon: orderHistoryItem.status.isInQueue

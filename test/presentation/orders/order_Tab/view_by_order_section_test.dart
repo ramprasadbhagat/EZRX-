@@ -268,11 +268,6 @@ void main() {
           viewByOrderList: viewByOrder.copyWith(
             orderHeaders: [OrderHistoryDetails.empty().copyWith(itemCount: 2)],
           ),
-        ),
-      );
-
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
           user: User.empty().copyWith(
             disableCreateOrder: true,
           ),
@@ -625,6 +620,9 @@ void main() {
         when(() => mockViewByOrderBloc.state).thenReturn(
           ViewByOrderState.initial().copyWith(
             viewByOrderList: viewByOrder,
+            user: User.empty().copyWith(
+              disableCreateOrder: true,
+            ),
           ),
         );
 

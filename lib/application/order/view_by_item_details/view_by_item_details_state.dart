@@ -44,4 +44,25 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
   List<OrderHistoryItem> get otherItems => orderHistory.orderHistoryItems
       .where((e) => e.lineNumber != orderHistoryItem.lineNumber)
       .toList();
+
+  bool get isCovidOrderType =>
+      (salesOrgConfig.salesOrg.isPH &&
+          orderHistoryItem.orderType.isCovidOrderTypeForPH) ||
+      (salesOrgConfig.salesOrg.isSg &&
+          orderHistoryItem.orderType.isCovidOrderTypeForSG);
+
+  bool get isCovidForNonCustomer =>
+      isCovidOrderType && !user.role.type.isCustomer;
+
+  bool get displayBuyAgainButton {
+    if (user.role.type.isSalesRepRole) {
+      return false;
+    }
+
+    if (isCovidForNonCustomer) {
+      return false;
+    }
+
+    return true;
+  }
 }
