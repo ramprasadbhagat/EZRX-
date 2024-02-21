@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:ezrxmobile/domain/account/error/price_override_exception.dart';
@@ -25,6 +26,11 @@ class FailureHandler {
     } else if (error is PriceException) {
       return error.map(
         priceNotFound: (_) => const ApiFailure.priceOverrideNotFound(),
+      );
+    } else if (error is CartException) {
+      return error.map(
+        cartHasDifferentAddress: (_) =>
+            const ApiFailure.cartHasDifferentAddress(),
       );
     } else {
       switch (error.runtimeType) {

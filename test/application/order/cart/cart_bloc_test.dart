@@ -49,6 +49,7 @@ class ProductDetailRepositoryMock extends Mock
 void main() {
   late List<Price> prices;
   late ApiFailure fakeError;
+  late ApiFailure fakeErrorWithDifferentDeliveryAddress;
   late ShipToInfo shipToInfo;
   late PriceAggregate bundleItem;
   late List<PriceTier> priceTiers;
@@ -69,6 +70,8 @@ void main() {
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     fakeError = const ApiFailure.other('fake-error');
+    fakeErrorWithDifferentDeliveryAddress =
+        const ApiFailure.cartHasDifferentAddress();
     shipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
     final materialListResponse =
         await MaterialListLocalDataSource().getProductList();
@@ -4725,6 +4728,61 @@ void main() {
           );
         });
       });
+
+      blocTest<CartBloc, CartState>(
+        'Cart upsertCart new Item if delivery address for the user is changed',
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        setUp: () {
+          when(
+            () => cartRepositoryMock.upsertCartWithBonus(
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              counterOfferDetails: fakeCounterOfferDetails,
+              language: fakeClientUser.preferredLanguage,
+              product: priceAggregates.first.copyWith(
+                quantity: 2,
+              ),
+            ),
+          ).thenAnswer(
+            (invocation) async => Left(fakeErrorWithDifferentDeliveryAddress),
+          );
+
+          when(
+            () => cartRepositoryMock.clearCart(),
+          ).thenAnswer((invocation) async => Left(fakeError));
+        },
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        act: (bloc) => bloc.add(
+          CartEvent.upsertCart(
+            priceAggregate: priceAggregates.first.copyWith(
+              quantity: 2,
+            ),
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isUpserting: true,
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: optionOf(Left(fakeError)),
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ],
+      );
 
       test(
         'Testing CartBloc isPriceOverrideDisabled for sales rep -->true',

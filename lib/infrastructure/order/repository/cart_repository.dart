@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -458,7 +459,12 @@ class CartRepository implements ICartRepository {
         );
 
         productList = cartProducts.fold(
-          (left) => throw left.failureMessage,
+          (left) {
+            if (left == const ApiFailure.cartHasDifferentAddress()) {
+              throw const CartException.cartHasDifferentAddress();
+            }
+            throw left.failureMessage;
+          },
           (right) => right,
         );
       }

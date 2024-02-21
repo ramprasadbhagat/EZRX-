@@ -392,8 +392,23 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        failureOrSuccess.fold(
-          (failure) {
+        await failureOrSuccess.fold(
+          (failure) async {
+            if (failure == const ApiFailure.cartHasDifferentAddress()) {
+              final failureOrSuccess = await repository.clearCart();
+              failureOrSuccess.fold(
+                (failure) => emit(
+                  state.copyWith(
+                    apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                    isUpserting: false,
+                  ),
+                ),
+                (_) =>
+                    add(CartEvent.upsertCart(priceAggregate: e.priceAggregate)),
+              );
+
+              return;
+            }
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
@@ -511,8 +526,26 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           language: state.user.preferredLanguage,
         );
 
-        failureOrSuccess.fold(
-          (failure) {
+        await failureOrSuccess.fold(
+          (failure) async {
+            if (failure == const ApiFailure.cartHasDifferentAddress()) {
+              final failureOrSuccess = await repository.clearCart();
+              failureOrSuccess.fold(
+                (failure) => emit(
+                  state.copyWith(
+                    apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                    isUpserting: false,
+                  ),
+                ),
+                (_) => add(
+                  CartEvent.upsertCartItems(
+                    priceAggregate: e.priceAggregate,
+                  ),
+                ),
+              );
+
+              return;
+            }
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),

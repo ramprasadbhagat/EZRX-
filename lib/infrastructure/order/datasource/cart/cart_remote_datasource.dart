@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
@@ -205,6 +206,11 @@ class CartRemoteDataSource {
   //we do not show any error message to the user.
   void _exceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null &&
+        res.data['errors'].isNotEmpty &&
+        res.data['errors'][0]['message'] ==
+            'shipToAddress changed from existing cart. Delete the cart and then add new item') {
+      throw const CartException.cartHasDifferentAddress();
+    } else if (res.data['errors'] != null &&
         res.data['errors'].isNotEmpty &&
         res.data['errors'][0]['message'] != 'no cart found') {
       throw ServerException(message: res.data['errors'][0]['message']);
