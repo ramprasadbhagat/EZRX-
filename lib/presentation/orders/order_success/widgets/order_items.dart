@@ -119,6 +119,7 @@ class _MaterialItem extends StatelessWidget {
                 ),
           ),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               PriceComponent(
                 key: WidgetKeys.orderSuccessItemTotalPrice,
@@ -128,8 +129,11 @@ class _MaterialItem extends StatelessWidget {
                 ),
               ),
               if (orderItem.showItemTax)
-                ItemTax(
-                  cartItem: orderItem.priceAggregate,
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: ItemTax(
+                    cartItem: orderItem.priceAggregate,
+                  ),
                 ),
             ],
           ),
