@@ -9,10 +9,8 @@ class OutstandingInvoicesState with _$OutstandingInvoicesState {
     required List<CustomerOpenItem> items,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
-    required bool isOrderFetching,
     required bool canLoadMore,
     required OutstandingInvoiceFilter appliedFilter,
-    required List<String> orderFetchingInvoiceIdList,
     required SearchKey searchKey,
   }) = _OutstandingInvoicesState;
 
@@ -22,11 +20,9 @@ class OutstandingInvoicesState with _$OutstandingInvoicesState {
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
-        isOrderFetching: false,
         items: <CustomerOpenItem>[],
         appliedFilter: OutstandingInvoiceFilter.empty(),
         searchKey: SearchKey.searchFilter(''),
-        orderFetchingInvoiceIdList: <String>[],
       );
 
   bool get isSearchAndFilterEmpty =>

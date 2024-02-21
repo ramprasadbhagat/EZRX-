@@ -85,7 +85,6 @@ class OutstandingInvoicesBloc
                 isLoading: false,
               ),
             );
-            add(OutstandingInvoicesEvent.fetchOrderForInvoices(invoices: data));
           },
         );
       },
@@ -132,61 +131,9 @@ class OutstandingInvoicesBloc
                 isLoading: false,
               ),
             );
-            add(OutstandingInvoicesEvent.fetchOrderForInvoices(invoices: data));
           },
         );
       }),
-    );
-
-    on<_FetchOrderForInvoices>(
-      (e, emit) async {
-        if (e.invoices.isEmpty) return;
-
-        final invoiceIds = e.invoices.map((e) => e.billingDocument).toList();
-        emit(
-          state.copyWith(
-            isOrderFetching: true,
-            failureOrSuccessOption: none(),
-            orderFetchingInvoiceIdList: invoiceIds,
-          ),
-        );
-        final failureOrSuccess =
-            await allCreditsAndInvoicesRepository.fetchOrder(
-          invoiceIds: invoiceIds,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                isOrderFetching: false,
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-                orderFetchingInvoiceIdList: <String>[],
-              ),
-            );
-          },
-          (responseData) {
-            final items = state.items
-                .map(
-                  (e) => e.orderId.isValid()
-                      ? e
-                      : e.copyWith(
-                          orderId: responseData[e.accountingDocument] ??
-                              StringValue(''),
-                        ),
-                )
-                .toList();
-            emit(
-              state.copyWith(
-                isOrderFetching: false,
-                items: items,
-                orderFetchingInvoiceIdList: <String>[],
-                failureOrSuccessOption: none(),
-              ),
-            );
-          },
-        );
-      },
     );
   }
 }

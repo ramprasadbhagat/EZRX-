@@ -28,6 +28,7 @@ query customerOpenItems($request: customerOpenItemsRequest!) {
             companyCode
             openAmountInTransCrcy
             billingDocument
+            orderId
         }
     }
 }

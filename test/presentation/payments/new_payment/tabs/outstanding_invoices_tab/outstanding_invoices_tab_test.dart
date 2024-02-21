@@ -599,5 +599,25 @@ void main() {
       final documentReferenceID = find.text('Gov. no 0800072883');
       expect(documentReferenceID, findsOneWidget);
     });
+
+    testWidgets('Find order id in outstanding invoices', (tester) async {
+      when(() => outstandingInvoicesBlocMock.state).thenReturn(
+        OutstandingInvoicesState.initial().copyWith(
+          items: [fakeInvoices.first],
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeVNSalesOrganisation,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final invoiceOrderIdFinder = find.text('Order #0239453435');
+      expect(invoiceOrderIdFinder, findsOneWidget);
+    });
   });
 }

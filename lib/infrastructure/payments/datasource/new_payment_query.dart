@@ -31,6 +31,7 @@ class NewPaymentQuery {
           companyCode
           openAmountInTransCrcy
           billingDocument
+          orderId
         }
       }
     }

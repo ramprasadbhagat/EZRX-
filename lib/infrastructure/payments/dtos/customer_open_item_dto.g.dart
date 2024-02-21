@@ -44,6 +44,7 @@ _$_CustomerOpenItemDto _$$_CustomerOpenItemDtoFromJson(
       billingDocument: json['billingDocument'] as String? ?? '',
       openAmountInTransCrcy:
           (json['openAmountInTransCrcy'] as num?)?.toDouble() ?? 0,
+      orderId: json['orderId'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CustomerOpenItemDtoToJson(
@@ -75,4 +76,5 @@ Map<String, dynamic> _$$_CustomerOpenItemDtoToJson(
       'companyCode': instance.companyCode,
       'billingDocument': instance.billingDocument,
       'openAmountInTransCrcy': instance.openAmountInTransCrcy,
+      'orderId': instance.orderId,
     };

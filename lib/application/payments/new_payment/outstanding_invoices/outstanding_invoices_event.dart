@@ -12,7 +12,4 @@ class OutstandingInvoicesEvent with _$OutstandingInvoicesEvent {
     required SearchKey searchKey,
   }) = _Fetch;
   const factory OutstandingInvoicesEvent.loadMore() = _LoadMore;
-  const factory OutstandingInvoicesEvent.fetchOrderForInvoices({
-    required List<CustomerOpenItem> invoices,
-  }) = _FetchOrderForInvoices;
 }

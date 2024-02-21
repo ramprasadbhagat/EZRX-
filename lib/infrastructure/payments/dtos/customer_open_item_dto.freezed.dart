@@ -73,6 +73,8 @@ mixin _$CustomerOpenItemDto {
   String get billingDocument => throw _privateConstructorUsedError;
   @JsonKey(name: 'openAmountInTransCrcy', defaultValue: 0)
   double get openAmountInTransCrcy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'orderId', defaultValue: '')
+  String get orderId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -130,7 +132,8 @@ abstract class $CustomerOpenItemDtoCopyWith<$Res> {
       @JsonKey(name: 'billingDocument', defaultValue: '')
       String billingDocument,
       @JsonKey(name: 'openAmountInTransCrcy', defaultValue: 0)
-      double openAmountInTransCrcy});
+      double openAmountInTransCrcy,
+      @JsonKey(name: 'orderId', defaultValue: '') String orderId});
 }
 
 /// @nodoc
@@ -172,6 +175,7 @@ class _$CustomerOpenItemDtoCopyWithImpl<$Res, $Val extends CustomerOpenItemDto>
     Object? companyCode = null,
     Object? billingDocument = null,
     Object? openAmountInTransCrcy = null,
+    Object? orderId = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -278,6 +282,10 @@ class _$CustomerOpenItemDtoCopyWithImpl<$Res, $Val extends CustomerOpenItemDto>
           ? _value.openAmountInTransCrcy
           : openAmountInTransCrcy // ignore: cast_nullable_to_non_nullable
               as double,
+      orderId: null == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -334,7 +342,8 @@ abstract class _$$_CustomerOpenItemDtoCopyWith<$Res>
       @JsonKey(name: 'billingDocument', defaultValue: '')
       String billingDocument,
       @JsonKey(name: 'openAmountInTransCrcy', defaultValue: 0)
-      double openAmountInTransCrcy});
+      double openAmountInTransCrcy,
+      @JsonKey(name: 'orderId', defaultValue: '') String orderId});
 }
 
 /// @nodoc
@@ -374,6 +383,7 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
     Object? companyCode = null,
     Object? billingDocument = null,
     Object? openAmountInTransCrcy = null,
+    Object? orderId = null,
   }) {
     return _then(_$_CustomerOpenItemDto(
       status: null == status
@@ -480,6 +490,10 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
           ? _value.openAmountInTransCrcy
           : openAmountInTransCrcy // ignore: cast_nullable_to_non_nullable
               as double,
+      orderId: null == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -533,7 +547,8 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
       @JsonKey(name: 'billingDocument', defaultValue: '')
       required this.billingDocument,
       @JsonKey(name: 'openAmountInTransCrcy', defaultValue: 0)
-      required this.openAmountInTransCrcy})
+      required this.openAmountInTransCrcy,
+      @JsonKey(name: 'orderId', defaultValue: '') required this.orderId})
       : super._();
 
   factory _$_CustomerOpenItemDto.fromJson(Map<String, dynamic> json) =>
@@ -617,10 +632,13 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
   @override
   @JsonKey(name: 'openAmountInTransCrcy', defaultValue: 0)
   final double openAmountInTransCrcy;
+  @override
+  @JsonKey(name: 'orderId', defaultValue: '')
+  final String orderId;
 
   @override
   String toString() {
-    return 'CustomerOpenItemDto(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentDate: $documentDate, postingDate: $postingDate, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, amountInTransactionCurrency: $amountInTransactionCurrency, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, companyCode: $companyCode, billingDocument: $billingDocument, openAmountInTransCrcy: $openAmountInTransCrcy)';
+    return 'CustomerOpenItemDto(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentDate: $documentDate, postingDate: $postingDate, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, amountInTransactionCurrency: $amountInTransactionCurrency, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, companyCode: $companyCode, billingDocument: $billingDocument, openAmountInTransCrcy: $openAmountInTransCrcy, orderId: $orderId)';
   }
 
   @override
@@ -682,7 +700,8 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
             (identical(other.billingDocument, billingDocument) ||
                 other.billingDocument == billingDocument) &&
             (identical(other.openAmountInTransCrcy, openAmountInTransCrcy) ||
-                other.openAmountInTransCrcy == openAmountInTransCrcy));
+                other.openAmountInTransCrcy == openAmountInTransCrcy) &&
+            (identical(other.orderId, orderId) || other.orderId == orderId));
   }
 
   @JsonKey(ignore: true)
@@ -714,7 +733,8 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
         paymentAmountInDisplayCrcy,
         companyCode,
         billingDocument,
-        openAmountInTransCrcy
+        openAmountInTransCrcy,
+        orderId
       ]);
 
   @JsonKey(ignore: true)
@@ -784,7 +804,9 @@ abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
       @JsonKey(name: 'billingDocument', defaultValue: '')
       required final String billingDocument,
       @JsonKey(name: 'openAmountInTransCrcy', defaultValue: 0)
-      required final double openAmountInTransCrcy}) = _$_CustomerOpenItemDto;
+      required final double openAmountInTransCrcy,
+      @JsonKey(name: 'orderId', defaultValue: '')
+      required final String orderId}) = _$_CustomerOpenItemDto;
   _CustomerOpenItemDto._() : super._();
 
   factory _CustomerOpenItemDto.fromJson(Map<String, dynamic> json) =
@@ -868,6 +890,9 @@ abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
   @override
   @JsonKey(name: 'openAmountInTransCrcy', defaultValue: 0)
   double get openAmountInTransCrcy;
+  @override
+  @JsonKey(name: 'orderId', defaultValue: '')
+  String get orderId;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerOpenItemDtoCopyWith<_$_CustomerOpenItemDto> get copyWith =>
