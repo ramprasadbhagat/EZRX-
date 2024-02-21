@@ -196,7 +196,7 @@ class _BundleSectionItem extends StatelessWidget {
                     top: 5,
                   ),
                   child: Text(
-                    '\u2022  ${e.materialDescription}',
+                    '\u2022  ${e.materialDescription.getOrDefaultValue('')}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

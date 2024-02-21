@@ -31,10 +31,12 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
@@ -152,6 +154,7 @@ void main() {
   late ProductImageBlocMock productImageBlocMock;
   late Notifications notifications;
   late DeepLinkingBloc deepLinkingBlocMock;
+  late List<MaterialInfo> bundles;
 
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -187,6 +190,7 @@ void main() {
     locator.registerFactory(() => viewByItemsBlocMock);
     locator.registerFactory(() => notificationBlocMock);
     notifications = await NotificationLocalDataSource().getNotificationList();
+    bundles = (await MaterialListLocalDataSource().getProductList()).products;
   });
 
   group('Home Tab Screen', () {
@@ -455,6 +459,35 @@ void main() {
 
         final bundlesFinder = find.byType(BundleSection);
         expect(bundlesFinder, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Find material description in Bundle Section',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            user: fakeRootAdminUser,
+            shipToInfo: fakeShipToInfo,
+          ),
+        );
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(
+            materialList: bundles,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final homeScreen = find.byKey(
+          WidgetKeys.homeScreen,
+        );
+        final description =
+            find.text('\u2022  Entresto FCT 100mg 56s (4X14) SG');
+        expect(homeScreen, findsOneWidget);
+
+        expect(find.byType(BundleSection), findsOneWidget);
+        expect(description, findsOneWidget);
       },
     );
 
@@ -1013,7 +1046,8 @@ void main() {
       await tester.pumpWidget(getWidget());
 
       await tester.pump();
-      final accountSuspendedBanner = find.byKey(WidgetKeys.customerBlockedBanner);
+      final accountSuspendedBanner =
+          find.byKey(WidgetKeys.customerBlockedBanner);
       expect(accountSuspendedBanner, findsOneWidget);
 
       expect(
