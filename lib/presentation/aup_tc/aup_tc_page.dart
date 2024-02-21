@@ -359,7 +359,7 @@ class AcceptButton extends StatelessWidget {
                           ? context.tr('Skip & only see ZP products')
                           : context.tr('Cancel'),
                       style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                            color: ZPColors.orange,
+                            color: ZPColors.extraDarkGreen,
                           ),
                     ),
                   ),
