@@ -49,7 +49,7 @@ class RememberPassword extends StatelessWidget {
             TextButton(
               key: WidgetKeys.forgotPasswordButton,
               child: Text(
-                context.tr('Forgot password?'),
+                '${context.tr('Forgot password')}?',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: ZPColors.extraDarkGreen,
                     ),
