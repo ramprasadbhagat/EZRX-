@@ -158,6 +158,8 @@ class MaterialInfo with _$MaterialInfo {
       ? manufactured
       : principalData.principalName.getOrDefaultValue('');
 
+  String get manufacturerPrefix => isMarketPlace ? 'Sold by: ' : '';
+
   List<String> get images => type.typeBundle
       ? bundle.materials.map((e) => e.productImages.thumbNail).toList()
       : productImages.image;

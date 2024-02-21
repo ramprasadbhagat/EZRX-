@@ -9,11 +9,7 @@ class _Header extends StatelessWidget {
     return ListTile(
       contentPadding: const EdgeInsets.only(top: 10.0, right: 10.0),
       title: Text(
-        materialFilterType == MaterialFilterType.countryList
-            ? context.tr('Country of origin')
-            : materialFilterType == MaterialFilterType.manufactured
-                ? 'Manufacturer'.tr()
-                : '',
+        _title(context),
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
               color: ZPColors.primary,
               fontSize: 20.0,
@@ -44,5 +40,18 @@ class _Header extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _title(BuildContext context) {
+    if (materialFilterType == MaterialFilterType.countryList) {
+      return context.tr('Country of origin');
+    }
+    if (materialFilterType == MaterialFilterType.manufactured) {
+      return context.tr(
+        context.read<EligibilityBloc>().state.productManufacturerFilterTitle,
+      );
+    }
+
+    return '';
   }
 }

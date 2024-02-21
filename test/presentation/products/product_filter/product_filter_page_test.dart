@@ -360,6 +360,63 @@ void main() {
       );
 
       testWidgets(
+        'Filter by manufacturers & sellers option is visible when eligible for marketplace',
+        (tester) async {
+          final manufactureList = ['BAXTER HEALTHCARE -M', 'AMO IRELAND'];
+          when(() => mockEligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: fakeShipToInfoPeninsulaRegion,
+              user: fakeClientUserAccessMarketPlace,
+            ),
+          );
+          when(() => mockMaterialFilterBloc.state).thenReturn(
+            MaterialFilterState.initial().copyWith.materialFilter(
+              manufactureMapOptions: {for (var e in manufactureList) e: false},
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(find.text('Filter by'.tr()), findsOneWidget);
+          final button = find.byKey(WidgetKeys.filterManufacturerButton);
+
+          expect(
+            find.descendant(
+              of: button,
+              matching: find.text('Manufacturers & Sellers'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: button,
+              matching: find.text('Manufacturer'),
+            ),
+            findsNothing,
+          );
+          await tester.tap(button);
+          await tester.pumpAndSettle();
+          final page = find.byType(FilterByPage);
+          expect(page, findsOneWidget);
+          expect(
+            find.descendant(
+              of: page,
+              matching: find.text('Manufacturers & Sellers'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: page,
+              matching: find.text('Manufacturer'),
+            ),
+            findsNothing,
+          );
+        },
+      );
+
+      testWidgets(
         'Manufacturer filter is selected',
         (tester) async {
           const fakeManufacturer = 'fake-manufacturer';

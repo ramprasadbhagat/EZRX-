@@ -331,4 +331,7 @@ class EligibilityState with _$EligibilityState {
 
   bool get customerBlockOrSuspended =>
       isAccountSuspended || shipToInfo.customerBlock.isCustomerBlocked;
+
+  String get productManufacturerFilterTitle =>
+      marketPlaceEligible ? 'Manufacturers & Sellers' : 'Manufacturer';
 }

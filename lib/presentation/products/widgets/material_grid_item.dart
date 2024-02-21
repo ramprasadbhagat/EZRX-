@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -142,7 +143,7 @@ class MaterialGridItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          materialInfo.getManufactured,
+                          '${context.tr(materialInfo.manufacturerPrefix)}${materialInfo.getManufactured}',
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.darkGray,

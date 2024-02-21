@@ -50,7 +50,12 @@ class _ManufacturerSection extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              'Manufacturer'.tr(),
+              context.tr(
+                context
+                    .read<EligibilityBloc>()
+                    .state
+                    .productManufacturerFilterTitle,
+              ),
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
@@ -82,7 +87,7 @@ class _ManufacturerSection extends StatelessWidget {
             const SizedBox(width: 4.0),
             const Icon(
               Icons.arrow_forward_ios_outlined,
-              color: ZPColors.orange,
+              color: ZPColors.extraDarkGreen,
               size: 12,
             ),
           ],
@@ -141,7 +146,7 @@ class _CountryOfOriginSection extends StatelessWidget {
             const SizedBox(width: 4.0),
             const Icon(
               Icons.arrow_forward_ios_outlined,
-              color: ZPColors.orange,
+              color: ZPColors.extraDarkGreen,
               size: 12,
             ),
           ],

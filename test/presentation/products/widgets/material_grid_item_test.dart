@@ -49,14 +49,14 @@ void main() {
   late EligibilityBlocMock eligibilityBlocMock;
   late CartBlocMock cartBlocMock;
   late AppRouter autoRouterMock;
-  late MaterialInfo materialInfoMock;
+  late MaterialInfo zpMaterialInfoMock;
   late List<MaterialInfo> listMaterialInfo;
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
     listMaterialInfo =
         (await MaterialListLocalDataSource().getProductList()).products;
-    materialInfoMock = listMaterialInfo.first;
+    zpMaterialInfoMock = listMaterialInfo.firstWhere((e) => !e.isMarketPlace);
   });
 
   group('Test "Material Grid Item"', () {
@@ -96,7 +96,7 @@ void main() {
         ],
         child: Material(
           child: MaterialGridItem(
-            materialInfo: materialInfo ?? materialInfoMock,
+            materialInfo: materialInfo ?? zpMaterialInfoMock,
             onFavouriteTap: () {},
             onTap: () {},
           ),
@@ -116,14 +116,14 @@ void main() {
           expect(find.byType(CovidLabel), findsOneWidget);
           expect(find.byType(FavouriteIcon), findsOneWidget);
           expect(
-            find.text(materialInfoMock.materialNumber.displayMatNo),
+            find.text(zpMaterialInfoMock.materialNumber.displayMatNo),
             findsOneWidget,
           );
           expect(
-            find.text(materialInfoMock.displayDescription),
+            find.text(zpMaterialInfoMock.displayDescription),
             findsOneWidget,
           );
-          expect(find.text(materialInfoMock.getManufactured), findsOneWidget);
+          expect(find.text(zpMaterialInfoMock.getManufactured), findsOneWidget);
           expect(find.byType(ProductPriceLabel), findsOneWidget);
         });
       },
@@ -143,10 +143,10 @@ void main() {
           when(() => materialPriceBlocMock.state).thenReturn(
             MaterialPriceState.initial().copyWith(
               materialPrice: {
-                materialInfoMock.materialNumber: Price.empty().copyWith(
+                zpMaterialInfoMock.materialNumber: Price.empty().copyWith(
                   lastPrice: listPrice,
                   finalPrice: finalPrice,
-                  materialNumber: materialInfoMock.materialNumber,
+                  materialNumber: zpMaterialInfoMock.materialNumber,
                 ),
               },
             ),
@@ -188,10 +188,10 @@ void main() {
           when(() => materialPriceBlocMock.state).thenReturn(
             MaterialPriceState.initial().copyWith(
               materialPrice: {
-                materialInfoMock.materialNumber: Price.empty().copyWith(
+                zpMaterialInfoMock.materialNumber: Price.empty().copyWith(
                   lastPrice: listPrice,
                   finalPrice: finalPrice,
-                  materialNumber: materialInfoMock.materialNumber,
+                  materialNumber: zpMaterialInfoMock.materialNumber,
                 ),
               },
             ),
@@ -233,10 +233,10 @@ void main() {
           when(() => materialPriceBlocMock.state).thenReturn(
             MaterialPriceState.initial().copyWith(
               materialPrice: {
-                materialInfoMock.materialNumber: Price.empty().copyWith(
+                zpMaterialInfoMock.materialNumber: Price.empty().copyWith(
                   lastPrice: listPrice,
                   finalPrice: finalPrice,
-                  materialNumber: materialInfoMock.materialNumber,
+                  materialNumber: zpMaterialInfoMock.materialNumber,
                 ),
               },
             ),
@@ -263,8 +263,9 @@ void main() {
         });
       },
     );
-    group('MarketPlace Logo appearance', () {
-      testWidgets('should display MarketPlaceLogo when isMarketPlace is true',
+    group('MarketPlace', () {
+      testWidgets(
+          'should display MarketPlaceLogo + sold to as prefix to manufacturer when isMarketPlace is true',
           (WidgetTester tester) async {
         await tester.pumpWidget(
           getScopedWidget(
@@ -274,9 +275,15 @@ void main() {
         );
         await tester.pump();
         expect(find.byType(MarketPlaceLogo), findsOneWidget);
+        final manufacturerText = tester
+                .widget<Text>(find.byKey(WidgetKeys.manufacturerMaterials))
+                .data ??
+            '';
+
+        expect(manufacturerText.startsWith('Sold by: '), true);
       });
       testWidgets(
-          'should not display MarketPlaceLogo when isMarketPlace is false',
+          'should not display MarketPlaceLogo + sold to as prefix to manufacturer when isMarketPlace is false',
           (WidgetTester tester) async {
         await tester.pumpWidget(
           getScopedWidget(
@@ -286,6 +293,12 @@ void main() {
         );
         await tester.pump();
         expect(find.byType(MarketPlaceLogo), findsNothing);
+        final manufacturerText = tester
+                .widget<Text>(find.byKey(WidgetKeys.manufacturerMaterials))
+                .data ??
+            '';
+
+        expect(manufacturerText.startsWith('Sold by: '), false);
       });
     });
   });
