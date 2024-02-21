@@ -153,9 +153,9 @@ class _InvoiceSummarySection extends StatelessWidget {
           ),
           _PriceWidget(
             key: WidgetKeys.returnRequestDetailSubTotal,
-            title:
-                '${context.tr(context.read<EligibilityBloc>().state.salesOrg.returnSubTotalText)}:',
+            title: '${context.tr('Subtotal (excl.tax)')} :',
             price: requestInformationHeader.refundTotal.refundTotal.toString(),
+            priceType: PriceStyle.summaryPrice,
           ),
           const Divider(
             indent: 0,
@@ -165,12 +165,9 @@ class _InvoiceSummarySection extends StatelessWidget {
           ),
           _PriceWidget(
             key: WidgetKeys.returnRequestDetailGrandTotal,
-            title: 'Grand total:',
+            title: '${context.tr('Grand total')}:',
             price: requestInformationHeader.refundTotal.refundTotal.toString(),
-            priceStyle: Theme.of(context)
-                .textTheme
-                .labelMedium
-                ?.copyWith(fontWeight: FontWeight.w700),
+            priceType: PriceStyle.grandTotalPrice,
           ),
         ],
       ),
@@ -183,23 +180,27 @@ class _PriceWidget extends StatelessWidget {
     Key? key,
     required this.title,
     required this.price,
-    this.priceStyle,
+    required this.priceType,
   }) : super(key: key);
   final String title;
   final String price;
-  final TextStyle? priceStyle;
+  final PriceStyle priceType;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          title.tr(),
-          style: Theme.of(context).textTheme.titleSmall,
+          title,
+          style: Theme.of(context)
+              .textTheme
+              .titleSmall!
+              .copyWith(color: ZPColors.neutralsBlack),
         ),
         PriceComponent(
           salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
           price: price,
+          type: priceType,
         ),
       ],
     );

@@ -385,10 +385,6 @@ String subTotalTextString(String country) {
   return country == 'ID' ? 'Subtotal (excl.tax)' : 'Subtotal with tax';
 }
 
-String returnSubTotalTextString(String country) {
-  return country == 'SG' ? 'Subtotal (excl.tax)' : 'Subtotal with tax';
-}
-
 bool countrySupportOrderType(country) {
   switch (country) {
     case 'TH':
@@ -620,7 +616,6 @@ num countryOrderTaxValue(String country) {
 }
 
 bool checkIfCustomerIsBlocked(String value) => value == 'blocked';
-
 
 bool salesOrgIsPhMdi(String salesOrg) => salesOrg == '2501';
 

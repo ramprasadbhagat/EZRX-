@@ -531,7 +531,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         expect(
-          find.text('${currentSalesOrgVariant.returnSubTotalText}:'),
+          find.text('Subtotal (excl.tax) :'),
           findsOneWidget,
         );
       },

@@ -149,6 +149,32 @@ class NewRequestPage extends StatelessWidget {
                                   Icons.chevron_right,
                                 ),
                               ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                     '${context.tr('Subtotal (excl.tax)')} :',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall!
+                                          .copyWith(
+                                            color: ZPColors.neutralsBlack,
+                                          ),
+                                    ),
+                                    PriceComponent(
+                                      salesOrgConfig: context
+                                          .read<SalesOrgBloc>()
+                                          .state
+                                          .configs,
+                                      type: PriceStyle.summaryPrice,
+                                      price: state.returnTotal.toString(),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               _AttentionWidget(
                                 key: WidgetKeys.cannotMoveToNextStep,
                                 message:
@@ -179,21 +205,25 @@ class NewRequestPage extends StatelessWidget {
                               ),
                               Row(
                                 children: [
-                                  Text(
-                                    'Return Total: '.tr(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleSmall!
-                                        .copyWith(
-                                          color: ZPColors.darkGray,
-                                        ),
-                                  ),
-                                  PriceComponent(
-                                    salesOrgConfig: context
-                                        .read<SalesOrgBloc>()
-                                        .state
-                                        .configs,
-                                    price: state.returnTotal.toString(),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        context.tr('Return Total: '),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(
+                                              color: ZPColors.darkGray,
+                                            ),
+                                      ),
+                                      PriceComponent(
+                                        salesOrgConfig: context
+                                            .read<SalesOrgBloc>()
+                                            .state
+                                            .configs,
+                                        price: state.returnTotal.toString(),
+                                      ),
+                                    ],
                                   ),
                                   const Spacer(),
                                   if (step == 1)

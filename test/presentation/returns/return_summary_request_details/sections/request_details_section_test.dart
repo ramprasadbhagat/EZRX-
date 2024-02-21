@@ -467,7 +467,7 @@ void main() {
           findsOneWidget,
         );
         expect(
-          find.text('${currentSalesOrgVariant.returnSubTotalText}:'),
+          find.text('Subtotal (excl.tax) :'),
           findsOneWidget,
         );
       },

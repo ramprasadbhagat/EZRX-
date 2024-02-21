@@ -29,7 +29,7 @@ class _ReturnSummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${context.tr(eligibilityState.salesOrg.returnSubTotalText)}:',
+                    '${context.tr('Subtotal (excl.tax)')} :',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: ZPColors.neutralsBlack,
                         ),
