@@ -60,7 +60,7 @@ void main() {
     productDetailMockRepository = ProductDetailRepositoryMock();
     favouriteMockRepository = FavouriteRepositoryMock();
     mockMaterialInfo = await ProductDetailLocalDataSource().getProductDetails();
-    mockStockInfo = await StockInfoLocalDataSource().getStockInfo();
+    mockStockInfo = (await StockInfoLocalDataSource().getStockInfoList()).first;
     fakeMaterialInfoList =
         await ProductSearchLocalDataSource().getSearchedProductList();
     fakeMaterialInfo = fakeMaterialInfoList.products

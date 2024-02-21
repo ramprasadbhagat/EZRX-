@@ -7,15 +7,6 @@ import 'package:flutter/services.dart';
 class StockInfoLocalDataSource {
   StockInfoLocalDataSource();
 
-  Future<StockInfo> getStockInfo() async {
-    await Future.delayed(const Duration(seconds: 1));
-    final data = json.decode(
-      await rootBundle.loadString('assets/json/stockInformationResponse.json'),
-    );
-
-    return StockInfoDto.fromJson(data['data']['stockInformation']).toDomain();
-  }
-
   Future<List<StockInfo>> getStockInfoList() async {
     await Future.delayed(const Duration(seconds: 1));
     final data = json.decode(

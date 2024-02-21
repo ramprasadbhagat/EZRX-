@@ -27,15 +27,12 @@ void main() {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/stockInformationResponse.json'),
+                .loadString('assets/json/getStockInformationList.json'),
           );
 
-          final result = await localDataSource.getStockInfo();
-
-          expect(
-            result,
-            StockInfoDto.fromJson(res['data']['stockInformation']).toDomain(),
-          );
+          return List.from(res['data']['getStockInformationLists'])
+              .map((e) => MaterialStockInfoDto.fromJson(e).toDomain())
+              .toList();
         },
       );
 

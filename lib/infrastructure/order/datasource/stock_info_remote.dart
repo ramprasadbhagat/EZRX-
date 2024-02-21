@@ -22,35 +22,6 @@ class StockInfoRemoteDataSource {
     required this.config,
   });
 
-  Future<StockInfo> getStockInfo({
-    required String materialNumber,
-    required String salesOrg,
-    required String selectedCustomerCode,
-  }) async {
-    return await dataSourceExceptionHandler.handle(() async {
-      final res = await httpService.request(
-        method: 'POST',
-        url: '${config.urlConstants}/order',
-        data: jsonEncode(
-          {
-            'query': stockInfoQueryMutation.getStockInfo(),
-            'variables': {
-              'materialNumber': materialNumber,
-              'customerCode': selectedCustomerCode,
-              'salesOrganisation': salesOrg,
-            },
-          },
-        ),
-        apiEndpoint: 'stockInformation',
-      );
-
-      _exceptionChecker(res: res);
-
-      return StockInfoDto.fromJson(res.data['data']['stockInformation'])
-          .toDomain();
-    });
-  }
-
   Future<List<MaterialStockInfo>> getMaterialStockInfoList({
     required List<String> materialNumbers,
     required String salesOrg,

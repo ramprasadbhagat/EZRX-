@@ -16,7 +16,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 
-class StockInfoMock extends Mock implements StockInfo {}
+class StockInfoMock extends Mock implements MaterialStockInfo {}
 
 void main() {
   late StockInfoRemoteDataSource remoteDataSource;
@@ -45,42 +45,6 @@ void main() {
   group(
     'Stock Information',
     () {
-      test('Get StockInfo', () async {
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/stockInformationResponse.json'),
-        );
-
-        dioAdapter.onPost(
-          '/api//order',
-          (server) => server.reply(
-            200,
-            res,
-            delay: const Duration(seconds: 1),
-          ),
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
-          data: jsonEncode({
-            'query': remoteDataSource.stockInfoQueryMutation.getStockInfo(),
-            'variables': {
-              'materialNumber': 'fake-material',
-              'customerCode': 'fake-customercode',
-              'salesOrganisation': 'fake-salesorg',
-            },
-          }),
-        );
-
-        final result = await remoteDataSource.getStockInfo(
-          materialNumber: 'fake-material',
-          salesOrg: 'fake-salesorg',
-          selectedCustomerCode: 'fake-customercode',
-        );
-
-        expect(
-          result,
-          StockInfoDto.fromJson(res['data']['stockInformation']).toDomain(),
-        );
-      });
-
       test('Get StockInfoList', () async {
         final res = json.decode(
           await rootBundle
@@ -131,24 +95,23 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.stockInfoQueryMutation.getStockInfo(),
+            'query': remoteDataSource.stockInfoQueryMutation
+                .getMaterialStockInfoListQuery(),
             'variables': {
-              'materialNumber': 'fake-material',
+              'materialNumbers': ['fake-material'],
               'customerCode': 'fake-customercode',
               'salesOrganisation': 'fake-salesorg',
             },
           }),
         );
 
-        await remoteDataSource
-            .getStockInfo(
-          materialNumber: 'fake-material',
+        await remoteDataSource.getMaterialStockInfoList(
+          materialNumbers: ['fake-material'],
           salesOrg: 'fake-salesorg',
           selectedCustomerCode: 'fake-customercode',
-        )
-            .onError((error, _) async {
+        ).onError((error, _) async {
           expect(error, isA<ServerException>());
-          return Future.value(StockInfoMock());
+          return Future.value([StockInfoMock()]);
         });
       });
 
@@ -167,24 +130,23 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.stockInfoQueryMutation.getStockInfo(),
+            'query': remoteDataSource.stockInfoQueryMutation
+                .getMaterialStockInfoListQuery(),
             'variables': {
-              'materialNumber': 'fake-material',
+              'materialNumbers': ['fake-material'],
               'customerCode': 'fake-customercode',
               'salesOrganisation': 'fake-salesorg',
             },
           }),
         );
 
-        await remoteDataSource
-            .getStockInfo(
-          materialNumber: 'fake-material',
+        await remoteDataSource.getMaterialStockInfoList(
+          materialNumbers: ['fake-material'],
           salesOrg: 'fake-salesorg',
           selectedCustomerCode: 'fake-customercode',
-        )
-            .onError((error, _) async {
+        ).onError((error, _) async {
           expect(error, isA<ServerException>());
-          return Future.value(StockInfoMock());
+          return Future.value([StockInfoMock()]);
         });
       });
     },

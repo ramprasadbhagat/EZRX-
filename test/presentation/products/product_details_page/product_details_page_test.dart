@@ -179,9 +179,13 @@ void main() {
         (await MaterialPriceLocalDataSource().getPriceList()).firstWhere(
       (element) => element.materialNumber == materialInfo.materialNumber,
     );
-    stockInfo = (await StockInfoLocalDataSource().getStockInfo()).copyWith(
-      inStock: MaterialInStock('Yes'),
-    );
+    stockInfo = (await StockInfoLocalDataSource().getMaterialStockInfoList())
+        .first
+        .stockInfos
+        .first
+        .copyWith(
+          inStock: MaterialInStock('Yes'),
+        );
     emptyStockInfo = StockInfo.empty().copyWith(
       inStock: MaterialInStock('Yes'),
     );

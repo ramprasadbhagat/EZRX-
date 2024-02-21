@@ -40,7 +40,6 @@ import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import 'order_repository_test.dart';
 
-
 class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
 
@@ -83,6 +82,16 @@ void main() {
       ),
     ),
   ];
+  final materialStockInfo = <MaterialStockInfo>[
+    MaterialStockInfo.empty().copyWith(
+      stockInfos: [
+        StockInfo.empty().copyWith(
+          materialNumber: MaterialNumber('12345'),
+          inStock: MaterialInStock('Yes'),
+        )
+      ],
+    )
+  ];
   final fakeCartProductsWithCombo = <PriceAggregate>[];
   final fakeException = Exception('fake_error');
 
@@ -113,9 +122,9 @@ void main() {
     aplSimulatorGetTotalPrice = await CartLocalDataSource().aplGetTotalPrice();
 
     when(
-      () => stockInfoLocalDataSource.getStockInfo(),
+      () => stockInfoLocalDataSource.getMaterialStockInfoList(),
     ).thenAnswer(
-      (invocation) async => StockInfo.empty(),
+      (invocation) async => materialStockInfo,
     );
 
     when(
@@ -185,8 +194,8 @@ void main() {
   test('Test getStockInfoList remote - success', () async {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
     when(
-      () => stockInfoRemoteDataSource.getStockInfo(
-        materialNumber: '12345',
+      () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+        materialNumbers: ['12345'],
         salesOrg: '2001',
         selectedCustomerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
       ),
@@ -207,12 +216,9 @@ void main() {
 
   test('Test Update Material Deal Bonus - Success', () async {
     when(
-      () => stockInfoLocalDataSource.getStockInfo(),
+      () => stockInfoLocalDataSource.getMaterialStockInfoList(),
     ).thenAnswer(
-      (invocation) async => StockInfo.empty().copyWith(
-        materialNumber: MaterialNumber('1234'),
-        inStock: MaterialInStock('Yes'),
-      ),
+      (invocation) async => materialStockInfo,
     );
 
     final materials = [...fakeCartProducts];
@@ -269,12 +275,9 @@ void main() {
       'Test Update Material Deal Bonus for different material number - Success',
       () async {
     when(
-      () => stockInfoLocalDataSource.getStockInfo(),
+      () => stockInfoLocalDataSource.getMaterialStockInfoList(),
     ).thenAnswer(
-      (invocation) async => StockInfo.empty().copyWith(
-        materialNumber: MaterialNumber('12345'),
-        inStock: MaterialInStock('Yes'),
-      ),
+      (invocation) async => materialStockInfo,
     );
 
     final materials = [...fakeCartProducts];
@@ -332,12 +335,9 @@ void main() {
       () async {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
     when(
-      () => stockInfoLocalDataSource.getStockInfo(),
+      () => stockInfoLocalDataSource.getMaterialStockInfoList(),
     ).thenAnswer(
-      (invocation) async => StockInfo.empty().copyWith(
-        materialNumber: MaterialNumber('12345'),
-        inStock: MaterialInStock('Yes'),
-      ),
+      (invocation) async => [MaterialStockInfo.empty()],
     );
 
     final materials = [...fakeCartProducts];
@@ -391,12 +391,9 @@ void main() {
 
   test('Test Update Material Deal Bonus - Failure', () async {
     when(
-      () => stockInfoLocalDataSource.getStockInfo(),
+      () => stockInfoLocalDataSource.getMaterialStockInfoList(),
     ).thenAnswer(
-      (invocation) async => StockInfo.empty().copyWith(
-        materialNumber: MaterialNumber(''),
-        inStock: MaterialInStock('Yes'),
-      ),
+      (invocation) async => materialStockInfo,
     );
 
     final result = await cartRepository.updateMaterialDealBonus(
@@ -826,8 +823,7 @@ void main() {
           .map(
             (productUpsertRequest) => ComboProductRequestDto.fromDomain(
               comboProductRequest: productUpsertRequest,
-              salesOrg:
-                  fakeSGSalesOrganisation.salesOrg.getOrDefaultValue(''),
+              salesOrg: fakeSGSalesOrganisation.salesOrg.getOrDefaultValue(''),
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               shipToId: fakeShipToInfo.shipToCustomerCode,
             ).toMap(),
@@ -1277,13 +1273,15 @@ void main() {
     test('removeSelectedProducts remote test success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
-        () => stockInfoRemoteDataSource.getStockInfo(
-          materialNumber: fakeCartProducts.materialNumbers.first.getOrCrash(),
+        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+          materialNumbers: [
+            fakeCartProducts.materialNumbers.first.getOrCrash()
+          ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         ),
       ).thenAnswer(
-        (invocation) async => StockInfo.empty(),
+        (invocation) async => materialStockInfo,
       );
       final upsertCartRequest = CartProductRequest.toMaterialRequest(
         salesOrg: fakeSalesOrganisation.salesOrg,
@@ -1339,13 +1337,15 @@ void main() {
         () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
-        () => stockInfoRemoteDataSource.getStockInfo(
-          materialNumber: fakeCartProducts.materialNumbers.first.getOrCrash(),
+        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+          materialNumbers: [
+            fakeCartProducts.materialNumbers.first.getOrCrash()
+          ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         ),
       ).thenAnswer(
-        (invocation) async => StockInfo.empty(),
+        (invocation) async => materialStockInfo,
       );
       final upsertCartRequest = CartProductRequest.toMaterialRequest(
         salesOrg: fakeSalesOrganisation.salesOrg,
@@ -1695,9 +1695,10 @@ void main() {
       );
 
       when(
-        () => stockInfoRemoteDataSource.getStockInfo(
-          materialNumber:
-              fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
+        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+          materialNumbers: [
+            fakeCartProducts.first.getMaterialNumber.getOrDefaultValue('')
+          ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         ),
@@ -1744,14 +1745,15 @@ void main() {
         (invocation) async => fakeCartProducts,
       );
       when(
-        () => stockInfoRemoteDataSource.getStockInfo(
-          materialNumber:
-              fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
+        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+          materialNumbers: [
+            fakeCartProducts.first.getMaterialNumber.getOrDefaultValue('')
+          ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         ),
       ).thenAnswer(
-        (invocation) async => StockInfo.empty(),
+        (invocation) async => materialStockInfo,
       );
 
       when(

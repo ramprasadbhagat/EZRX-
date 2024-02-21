@@ -3,7 +3,17 @@
         "getStockInformationLists": [
             {
                 "MaterialNumber": "000000000021038305",
-                "StockInformation": []
+                "StockInformation": [
+                    {
+                        "MaterialNumber": "000000000021038305",
+                        "Batch": "12S017",
+                        "ExpiryDate": "20251130",
+                        "InStock": "Yes",
+                        "ShelfLife": 180,
+                        "SalesDistrict": null,
+                        "StockQuantity": 156
+                    }
+                ]
             },
             {
                 "MaterialNumber": "000000000021038302",

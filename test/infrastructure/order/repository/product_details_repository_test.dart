@@ -53,7 +53,6 @@ void main() {
   late StockInfoRemoteDataSource stockInfoRemoteDataSource;
   late MaterialInfo fakeMaterialInfo;
   late ProductMetaData fakeProductMetaData;
-  late StockInfo fakeStockInfo;
   late List<MaterialStockInfo> fakeStockInfoList;
   late DeviceStorage deviceStorage;
 
@@ -76,7 +75,7 @@ void main() {
     fakeMaterialInfo = await ProductDetailLocalDataSource().getProductDetails();
     fakeProductMetaData =
         await ProductDetailLocalDataSource().getItemProductMetaData();
-    fakeStockInfo = await StockInfoLocalDataSource().getStockInfo();
+
     fakeStockInfoList =
         await StockInfoLocalDataSource().getMaterialStockInfoList();
 
@@ -498,8 +497,8 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
         when(
-          () => stockInfoLocalDataSource.getStockInfo(),
-        ).thenAnswer((invocation) async => fakeStockInfo);
+          () => stockInfoLocalDataSource.getMaterialStockInfoList(),
+        ).thenAnswer((invocation) async => fakeStockInfoList);
 
         final result = await productDetailRepository.getStockInfo(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -516,12 +515,12 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
         when(
-          () => stockInfoRemoteDataSource.getStockInfo(
+          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumber: mockMaterialNumber.getOrCrash(),
+            materialNumbers: [mockMaterialNumber.getOrCrash()],
             selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
           ),
-        ).thenAnswer((invocation) async => fakeStockInfo);
+        ).thenAnswer((invocation) async => fakeStockInfoList);
 
         final result = await productDetailRepository.getStockInfo(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -537,7 +536,7 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
         when(
-          () => stockInfoLocalDataSource.getStockInfo(),
+          () => stockInfoLocalDataSource.getMaterialStockInfoList(),
         ).thenThrow((invocation) async => MockException());
 
         final result = await productDetailRepository.getStockInfo(
@@ -555,9 +554,9 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
         when(
-          () => stockInfoRemoteDataSource.getStockInfo(
+          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumber: mockMaterialNumber.getOrCrash(),
+            materialNumbers: [mockMaterialNumber.getOrCrash()],
             selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
           ),
         ).thenThrow((invocation) async => MockException());

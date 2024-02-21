@@ -219,21 +219,33 @@ class ProductDetailRepository implements IProductDetailRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final stockInfoList = await stockInfoLocalDataSource.getStockInfo();
+        final stockInfoList =
+            await stockInfoLocalDataSource.getMaterialStockInfoList();
 
-        return Right(stockInfoList);
+        return Right(stockInfoList.first.stockInfos.first);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
     } else {
       try {
-        final stockInfoList = await stockInfoRemoteDataSource.getStockInfo(
-          materialNumber: materialNumber.getOrCrash(),
+        final stockInfoList =
+            await stockInfoRemoteDataSource.getMaterialStockInfoList(
+          materialNumbers: [materialNumber.getOrCrash()],
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
         );
+        final stockInfo = stockInfoList
+            .firstWhere(
+              (element) => element.materialNumber == materialNumber,
+              orElse: () => MaterialStockInfo.empty(),
+            )
+            .stockInfos
+            .firstWhere(
+              (element) => element.materialNumber == materialNumber,
+              orElse: () => StockInfo.empty(),
+            );
 
-        return Right(stockInfoList);
+        return Right(stockInfo);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
