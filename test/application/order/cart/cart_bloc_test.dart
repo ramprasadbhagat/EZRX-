@@ -830,6 +830,7 @@ void main() {
               config: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
           ];
 

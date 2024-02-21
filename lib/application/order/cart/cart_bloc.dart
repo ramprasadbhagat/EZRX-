@@ -258,6 +258,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               shipToInfo: state.shipToInfo,
               salesOrganisation: state.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
+              user: state.user,
             ),
           ),
         );

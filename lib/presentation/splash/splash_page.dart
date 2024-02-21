@@ -206,11 +206,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   );
                 }
 
-                context.read<AnnouncementBloc>()
-                  .add(
-                    const AnnouncementEvent.clearBannerId(),
-                  )
-                 ;
+                context.read<AnnouncementBloc>().add(
+                      const AnnouncementEvent.clearBannerId(),
+                    );
 
                 context.router.replaceAll(
                   [
@@ -528,7 +526,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
               current != EligibilityState.initial() &&
-              (previous.customerCodeInfo != current.customerCodeInfo ||
+              (previous.user.preferredLanguage !=
+                      current.user.preferredLanguage ||
+                  previous.customerCodeInfo != current.customerCodeInfo ||
                   previous.shipToInfo != current.shipToInfo),
           listener: (context, state) {
             final orderDocumentTypeState =

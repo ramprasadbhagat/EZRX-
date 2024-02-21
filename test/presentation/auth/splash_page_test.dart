@@ -106,6 +106,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:upgrader/upgrader.dart';
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
@@ -1501,6 +1502,49 @@ void main() {
       );
 
       await getWidget(tester);
+    });
+
+    testWidgets(
+        'When user preferred language gets updated cart initial event called',
+        (tester) async {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeRootAdminUser.copyWith(
+          preferredLanguage: Language('EN'),
+        ),
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeTWSalesOrganisation,
+        salesOrgConfigs: fakeTWSalesOrgConfigs,
+        shipToInfo: fakeShipToInfo,
+      );
+
+      final expectedListStates = [
+        eligibilityState.copyWith(
+          user: fakeRootAdminUser.copyWith(
+            preferredLanguage: Language('ZH'),
+          ),
+        ),
+      ];
+      whenListen(
+        eligibilityBlocMock,
+        Stream.fromIterable(expectedListStates),
+        initialState: eligibilityState,
+      );
+
+      await getWidget(tester);
+      await tester.pump(const Duration(milliseconds: 500));
+      verify(
+        () => cartBlocMock.add(
+          CartEvent.initialized(
+            user: fakeRootAdminUser.copyWith(
+              preferredLanguage: Language('ZH'),
+            ),
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeTWSalesOrganisation,
+            salesOrganisationConfigs: fakeTWSalesOrgConfigs,
+            shipToInfo: fakeShipToInfo,
+          ),
+        ),
+      ).called(1);
     });
   });
 }
