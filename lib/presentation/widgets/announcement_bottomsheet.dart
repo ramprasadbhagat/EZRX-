@@ -105,7 +105,9 @@ class _ItemBanner extends StatelessWidget {
       onTap: () {
         if (banner.hyperlink.isInternalLink) {
           context.read<DeepLinkingBloc>().add(
-                DeepLinkingEvent.addPendingLink(banner.hyperlink.uri),
+                DeepLinkingEvent.addPendingLink(
+                  EzrxLink(banner.hyperlink.getOrDefaultValue('')),
+                ),
               );
         } else if (banner.hyperlink.isExternalLink) {
           context.router.push(

@@ -8,29 +8,30 @@ import 'package:ezrxmobile/domain/auth/repository/i_change_password_repository.d
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_remote.dart';
 
 class ChangePasswordRepository implements IChangePasswordRepository {
   final Config config;
   final ChangePasswordLocalDataSource localDataSource;
-  final ChangePasswordRemoteDataSource changePasswordRemoteDataSource;
+  final ChangePasswordRemoteDataSource remoteDataSource;
 
   ChangePasswordRepository({
     required this.config,
     required this.localDataSource,
-    required this.changePasswordRemoteDataSource,
+    required this.remoteDataSource,
   });
 
   @override
-  Future<Either<ApiFailure, ResetPassword>> setPassword({
+  Future<Either<ApiFailure, ResetPassword>> changePassword({
     required Password newPassword,
     required Password oldPassword,
     required User user,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final resetPasswordEntities = await localDataSource.setUserPassword();
+        final resetPasswordEntities = await localDataSource.changePassword();
 
         return Right(resetPasswordEntities);
       } catch (e) {
@@ -39,10 +40,38 @@ class ChangePasswordRepository implements IChangePasswordRepository {
     }
     try {
       final resetPasswordEntities =
-          await changePasswordRemoteDataSource.setUserPassword(
+          await remoteDataSource.changePassword(
         user.username.getOrCrash(),
         oldPassword.getOrCrash(),
         newPassword.getOrCrash(),
+      );
+
+      return Right(resetPasswordEntities);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, ResetPassword>> resetPassword({
+    required StringValue token,
+    required Password newPassword,
+    required Username username,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final resetPasswordEntities = await localDataSource.resetPassword();
+
+        return Right(resetPasswordEntities);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final resetPasswordEntities = await remoteDataSource.resetPassword(
+        username: username.getOrCrash(),
+        resetPasswordToken: token.getOrCrash(),
+        newPassword: newPassword.getOrCrash(),
       );
 
       return Right(resetPasswordEntities);

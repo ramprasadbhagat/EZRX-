@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,6 +18,7 @@ import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../chatbot/repository/chatbot_repository_test.dart';
 
+class DeepLinkServiceMock extends Mock implements DeepLinkingService {}
 
 void main() {
   late Config mockConfig;
@@ -31,9 +33,9 @@ void main() {
     repository = DeepLinkingRepository(
       config: mockConfig,
       deviceStorage: deviceStorage,
+      service: DeepLinkServiceMock(),
     );
   });
-
 
   group('Extract Material Number', () {
     final materialNumber = MaterialNumber('fake-material-number');
@@ -83,7 +85,7 @@ void main() {
     });
   });
 
-group('Extract Product SearchKey', () {
+  group('Extract Product SearchKey', () {
     final materialNumber = MaterialNumber('fake-material-number');
     final materialListLink = Uri.parse(
       '$domain/product-listing?q=${materialNumber.getValue()}',
@@ -172,7 +174,6 @@ group('Extract Product SearchKey', () {
     });
 
     test('=> fail', () async {
-
       when(
         () => deviceStorage.currentMarket(),
       ).thenThrow(fakeError);
@@ -201,7 +202,6 @@ group('Extract Product SearchKey', () {
       '$domain/my-account/return-summary-details?requestID=${returnId.requestId}&soldTo=${fakeCustomerCodeInfo.customerCodeSoldTo}&shipTo=${fakeShipToInfo.shipToCustomerCode}',
     );
     test('=> success', () async {
-
       when(
         () => deviceStorage.currentMarket(),
       ).thenAnswer((_) => fakeMYSalesOrg.country.toLowerCase());
@@ -246,7 +246,6 @@ group('Extract Product SearchKey', () {
         const Left(ApiFailure.returnDetailRoute()),
       );
     });
-
   });
 
   group('Extract Payment Identifier Info', () {
@@ -286,7 +285,6 @@ group('Extract Product SearchKey', () {
     });
 
     test('=> fail', () async {
-
       when(
         () => deviceStorage.currentMarket(),
       ).thenThrow(fakeError);

@@ -1,7 +1,13 @@
-part of 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class _ResetPasswordValidation extends StatelessWidget {
-  const _ResetPasswordValidation({Key? key}) : super(key: key);
+class PasswordValidation extends StatelessWidget {
+  final User user;
+  const PasswordValidation({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +52,7 @@ class _ResetPasswordValidation extends StatelessWidget {
             _ConditionText(
               enableGreenTick: state
                   .newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName(
-                user: context.read<EligibilityBloc>().state.user,
+                user: user,
               ),
               msgText:
                   'New password cannot contain more than 2 consecutive characters from username and/or name of the user',

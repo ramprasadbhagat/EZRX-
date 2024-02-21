@@ -13,11 +13,18 @@ class ResetPasswordEvent with _$ResetPasswordEvent {
     User user,
   ) = _PasswordTextOnChange;
 
-  const factory ResetPasswordEvent.resetPasswordPressed({
+  const factory ResetPasswordEvent.changePassword({
     required User user,
-  }) = _ResetPasswordPressed;
+  }) = _ChangePassword;
 
-  const factory ResetPasswordEvent.clear() = _Clear;
+const factory ResetPasswordEvent.clear() = _Clear;
+
+const factory ResetPasswordEvent.addResetPasswordCred({
+    required ResetPasswordCred resetPasswordCred,
+}) = _AddResetPasswordCred;
+
+const factory ResetPasswordEvent.resetPassword() = _ResetPasswords;
+
 }
 
 enum PasswordFieldType {

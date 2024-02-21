@@ -22,7 +22,7 @@ class ChangePasswordRemoteDataSource {
     required this.config,
   });
 
-  Future<ResetPassword> setUserPassword(
+  Future<ResetPassword> changePassword(
     String username,
     String oldPassword,
     String newPassword,
@@ -49,6 +49,37 @@ class ChangePasswordRemoteDataSource {
       );
 
       return ResetPasswordDto.fromJson(res.data['data']['changePassword'])
+          .toDomain();
+    });
+  }
+
+  Future<ResetPassword> resetPassword({
+    required String username,
+    required String newPassword,
+    required String resetPasswordToken,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode(
+          {
+            'query': authQueryMutation.resetPassword(),
+            'variables': {
+              'username': username,
+              'newPassword': newPassword,
+              'resetPasswordToken': resetPasswordToken,
+            },
+          },
+        ),
+        apiEndpoint: 'resetPasswordV3',
+      );
+
+      _exceptionChecker(
+        res: res,
+      );
+
+      return ResetPasswordDto.fromJson(res.data['data']['resetPasswordV3'])
           .toDomain();
     });
   }

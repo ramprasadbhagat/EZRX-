@@ -184,7 +184,7 @@ void main() {
       ),
       seed: () => invalidResetPasswordState,
       act: (ResetPasswordBloc bloc) => bloc.add(
-        ResetPasswordEvent.resetPasswordPressed(
+        ResetPasswordEvent.changePassword(
           user: user,
         ),
       ),
@@ -207,7 +207,7 @@ void main() {
       seed: () => validResetPasswordState,
       setUp: () {
         when(
-          () => mockRepository.setPassword(
+          () => mockRepository.changePassword(
             user: user,
             oldPassword: validResetPasswordState.oldPassword,
             newPassword: validResetPasswordState.newPassword,
@@ -219,7 +219,7 @@ void main() {
         );
       },
       act: (ResetPasswordBloc bloc) => bloc.add(
-        ResetPasswordEvent.resetPasswordPressed(
+        ResetPasswordEvent.changePassword(
           user: user,
         ),
       ),
@@ -240,7 +240,7 @@ void main() {
       seed: () => validResetPasswordState,
       setUp: () {
         when(
-          () => mockRepository.setPassword(
+          () => mockRepository.changePassword(
             user: user,
             oldPassword: validResetPasswordState.oldPassword,
             newPassword: validResetPasswordState.newPassword,
@@ -252,7 +252,7 @@ void main() {
         );
       },
       act: (ResetPasswordBloc bloc) => bloc.add(
-        ResetPasswordEvent.resetPasswordPressed(
+        ResetPasswordEvent.changePassword(
           user: user,
         ),
       ),

@@ -1095,7 +1095,7 @@ void setupLocator() {
     () => ChangePasswordRepository(
       config: locator<Config>(),
       localDataSource: locator<ChangePasswordLocalDataSource>(),
-      changePasswordRemoteDataSource: locator<ChangePasswordRemoteDataSource>(),
+      remoteDataSource: locator<ChangePasswordRemoteDataSource>(),
     ),
   );
 
@@ -2184,13 +2184,13 @@ void setupLocator() {
     () => DeepLinkingRepository(
       config: locator<Config>(),
       deviceStorage: locator<DeviceStorage>(),
+      service: locator<DeepLinkingService>(),
     ),
   );
 
   locator.registerLazySingleton(
     () => DeepLinkingBloc(
       repository: locator<DeepLinkingRepository>(),
-      service: locator<DeepLinkingService>(),
       chatBotService: locator<ChatBotService>(),
     ),
   );

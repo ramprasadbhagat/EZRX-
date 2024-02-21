@@ -21,6 +21,7 @@ import 'package:ezrxmobile/application/articles_info/articles_info_filter/articl
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
@@ -233,6 +234,10 @@ class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
 class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
     implements IntroBloc {}
 
+class ResetPasswordBlocMock
+    extends MockBloc<ResetPasswordEvent, ResetPasswordState>
+    implements ResetPasswordBloc {}
+
 class MaterialPriceMockBloc
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
@@ -390,6 +395,7 @@ void main() {
   late ViewByItemsBloc mockViewByItemsBloc;
   late NotificationBloc mockNotificationBloc;
   late PriceOverrideBloc mockPriceOverrideBloc;
+  late ResetPasswordBloc resetPasswordBlocMock;
   final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockViewByOrderBloc = ViewByOrderMockBloc();
@@ -536,6 +542,7 @@ void main() {
       productImageBloc = ProductImageBlocMock();
       articlesInfoFilterBlocMock = ArticlesInfoFilterBlocMock();
       announcementFilterBlocMock = AnnouncementFilterBlocMock();
+      resetPasswordBlocMock = ResetPasswordBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => fullSummaryBlocMock.state)
           .thenReturn(FullSummaryState.initial());
@@ -662,6 +669,8 @@ void main() {
           .thenReturn(ArticlesInfoState.initial());
       when(() => productImageBloc.state)
           .thenReturn(ProductImageState.initial());
+      when(() => resetPasswordBlocMock.state)
+          .thenReturn(ResetPasswordState.initial());
       when(() => articlesInfoFilterBlocMock.state)
           .thenReturn(ArticlesInfoFilterState.initial());
       when(() => announcementFilterBlocMock.state)
@@ -861,6 +870,9 @@ void main() {
               ),
               BlocProvider<ProductImageBloc>(
                 create: (context) => productImageBloc,
+              ),
+              BlocProvider<ResetPasswordBloc>(
+                create: (context) => resetPasswordBlocMock,
               ),
               BlocProvider<ArticlesInfoFilterBloc>(
                 create: (context) => articlesInfoFilterBlocMock,
@@ -1327,7 +1339,7 @@ void main() {
       final expectedDeeplinkStates = [
         const DeepLinkingState.initial(),
         DeepLinkingState.linkPending(
-          Uri(path: '/history_details'),
+          EzrxLink(Uri(path: '/history_details').toString()),
         ),
         DeepLinkingState.redirectOrderDetail(OrderNumber('fake-order-history')),
       ];

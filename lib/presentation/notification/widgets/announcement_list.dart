@@ -15,7 +15,7 @@ class _AnnouncementList extends StatelessWidget {
         if (notificationData.hyperLink.isInternalLink) {
           context.read<DeepLinkingBloc>().add(
                 DeepLinkingEvent.addPendingLink(
-                  notificationData.hyperLink.uri,
+                  EzrxLink(notificationData.hyperLink.getOrDefaultValue('')),
                 ),
               );
         } else if (notificationData.hyperLink.isExternalLink) {

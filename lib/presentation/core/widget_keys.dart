@@ -84,6 +84,11 @@ class WidgetKeys {
   static const Key ezrxAplLogo = Key('ezrxAplLogo');
 
   //============================================================
+  //  Reset Password
+  //============================================================
+  static const Key resetPasswordButton = Key('resetPasswordButton');
+
+  //============================================================
   //  AupTCDialog
   //============================================================
   static const Key aupTcWebView = Key('aupTcWebView');

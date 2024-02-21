@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:app_links/app_links.dart';
-import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
-import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 
 class DeepLinkingService {
   final _appLinks = AppLinks();
   bool _initialLinkHandled = false;
+  final _deepLinkStreamController = StreamController<EzrxLink>.broadcast();
 
   DeepLinkingService();
 
@@ -23,12 +23,12 @@ class DeepLinkingService {
     return _appLinks.uriLinkStream.listen(handleDeepLink);
   }
 
+  Stream<EzrxLink> get getStream => _deepLinkStreamController.stream;
+
   void handleDeepLink(Uri? deepLink) {
     if (deepLink != null) {
       debugPrint('_handleDeepLink | deeplink: $deepLink');
-      locator<DeepLinkingBloc>().add(
-        DeepLinkingEvent.addPendingLink(deepLink),
-      );
+      _deepLinkStreamController.add(EzrxLink(deepLink.toString()));
     }
   }
 }

@@ -800,7 +800,42 @@ String fileTypeFromPath(String source) {
   return path.extension(source);
 }
 
+/// Filters and extracts the 'u' query parameter from the provided [uri].
+/// This is necessary when the redirecting URI is passed as a query parameter
+/// to the original URI.
+/// Example url -> EZRX://clicktime.symantec.com/15tStdWWRBCjGxB6bujRD?h=zRUjvnB-oJ7CeZWGKRQJobPyV8b1EJMcAlvzEMzuV0Y=&amp;u=https://uat-my.ezrx.com/login/set-password?username%3D****%26token%3D******
+Uri getFilteredResetPasswordUri(Uri uri) =>
+    Uri.parse(uri.queryParameters['u'] ?? '');
+
+bool isResetPasswordLink(String path) => path == '/login/set-password';
+
 bool isDealOrOverrideBonus(String type) => type == 'Deals' || type == 'Bonus';
 
 String getPoReferenceHintText(bool value) =>
     value ? 'Enter your PO reference' : 'Enter your PO reference (Optional)';
+
+bool isProductDetailLink(String path) => path.startsWith('/product-details');
+
+bool isProductListLink(String path) => path == '/product-listing';
+
+bool isBundleDetailLink(String path) => path.startsWith('/bundle-details');
+
+bool isOrderDetailLink(String path) =>
+    path == '/my-account/orders/order-detail';
+
+bool isReturnSummaryDetailLink(String path) =>
+    path == '/my-account/return-summary-details';
+
+bool isPaymentSummaryInvoiceDetailLink(String path) =>
+    path == '/payments/payment-summary/invoice-details';
+
+bool isAccountSummaryInvoiceDetailLink(String path) =>
+    path == '/payments/account-summary/invoice-details';
+
+bool isMyAccountPaymentLink(String path) => path == '/my-account/payments';
+
+bool isContactUsLink(String path) => path == '/contact-us';
+
+bool isFaqLink(String path) => path == '/faq';
+
+bool isAboutUsLink(String path) => path == '/about-us';

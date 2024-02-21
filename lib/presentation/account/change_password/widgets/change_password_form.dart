@@ -43,7 +43,7 @@ class _ChangePasswordForm extends StatelessWidget {
                     previous.isOldPasswordObscure !=
                     current.isOldPasswordObscure,
                 builder: (context, state) {
-                  return _PasswordTextField(
+                  return PasswordTextField(
                     key: WidgetKeys.currentPasswordField,
                     isPasswordVisible: state.isOldPasswordObscure,
                     labelText: 'Current Password',
@@ -58,7 +58,7 @@ class _ChangePasswordForm extends StatelessWidget {
                     previous.isNewPasswordObscure !=
                     current.isNewPasswordObscure,
                 builder: (context, state) {
-                  return _PasswordTextField(
+                  return PasswordTextField(
                     key: WidgetKeys.newPasswordTextField,
                     isPasswordVisible: state.isNewPasswordObscure,
                     labelText: 'New Password',
@@ -73,7 +73,7 @@ class _ChangePasswordForm extends StatelessWidget {
                     previous.isConfirmPasswordObscure !=
                     current.isConfirmPasswordObscure,
                 builder: (context, state) {
-                  return _PasswordTextField(
+                  return PasswordTextField(
                     key: WidgetKeys.confirmPasswordField,
                     isPasswordVisible: state.isConfirmPasswordObscure,
                     labelText: 'Enter new password again',

@@ -11,7 +11,6 @@ import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
-import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 
 import '../../common_mock_data/mock_other.dart';
@@ -22,10 +21,10 @@ class DeepLinkingRepositoryMock extends Mock
 
 void main() {
   late IDeepLinkingRepository repository;
-  late DeepLinkingService service;
+
   late ChatBotService chatBotService;
-  const fakeStream = Stream.empty();
-  final fakeSubscription = fakeStream.listen((_) {});
+  const fakeStream = Stream<EzrxLink>.empty();
+
   final fakeCustomerCode = fakeCustomerCodeInfo;
   final fakeShipToCode = fakeShipToInfo;
   const fakeError = ApiFailure.other('fake-error');
@@ -46,30 +45,32 @@ void main() {
 
   setUpAll(() {
     repository = DeepLinkingRepositoryMock();
-    service = UniversalLinkServiceMock();
+
     chatBotService = ChatBotServiceMock();
   });
 
   blocTest<DeepLinkingBloc, DeepLinkingState>(
     'Initialize',
     build: () => DeepLinkingBloc(
-      service: service,
       repository: repository,
       chatBotService: chatBotService,
     ),
     act: (bloc) => bloc.add(const DeepLinkingEvent.initialize()),
     setUp: () {
-      when(() => service.init()).thenAnswer((_) async => fakeSubscription);
+      when(() => repository.initializeDeepLink())
+          .thenAnswer((_) async => const Left(fakeError));
+      when(() => repository.watchDeepLinkValue()).thenAnswer(
+        (_) => fakeStream,
+      );
     },
-    verify: (_) {
-      verify(() => service.init()).called(1);
-    },
+    expect: () => [
+      const DeepLinkingState.error(fakeError),
+    ],
   );
 
   blocTest<DeepLinkingBloc, DeepLinkingState>(
     'Add pending link',
     build: () => DeepLinkingBloc(
-      service: service,
       repository: repository,
       chatBotService: chatBotService,
     ),
@@ -79,12 +80,12 @@ void main() {
     },
     act: (bloc) => bloc.add(
       DeepLinkingEvent.addPendingLink(
-        Uri(scheme: 'fakeScheme', host: 'fakeHost'),
+        EzrxLink(Uri(scheme: 'fakeScheme', host: 'fakeHost').toString()),
       ),
     ),
     expect: () => [
       DeepLinkingState.linkPending(
-        Uri(scheme: 'fakeScheme', host: 'fakeHost'),
+        EzrxLink(Uri(scheme: 'fakeScheme', host: 'fakeHost').toString()),
       )
     ],
   );
@@ -92,15 +93,14 @@ void main() {
   blocTest<DeepLinkingBloc, DeepLinkingState>(
     'Consume pending link when state is not DeepLinkingState.linkPending',
     build: () => DeepLinkingBloc(
-      service: service,
       repository: repository,
       chatBotService: chatBotService,
     ),
     seed: () => const DeepLinkingState.error(ApiFailure.orderDetailRoute()),
     act: (bloc) => bloc.add(
       DeepLinkingEvent.consumePendingLink(
-        selectedCustomerCode: fakeCustomerCode,
-        selectedShipTo: fakeShipToCode,
+        selectedCustomerCode: fakeCustomerCodeInfo,
+        selectedShipTo: fakeShipToInfo,
       ),
     ),
     expect: () => [],
@@ -109,45 +109,43 @@ void main() {
   blocTest<DeepLinkingBloc, DeepLinkingState>(
     'Consume an unsupported pending link',
     build: () => DeepLinkingBloc(
-      service: service,
       repository: repository,
       chatBotService: chatBotService,
     ),
     seed: () => DeepLinkingState.linkPending(
-      Uri(scheme: 'fakeScheme', host: 'fakeHost'),
+      EzrxLink(Uri(scheme: 'fakeScheme', host: 'fakeHost').toString()),
     ),
     act: (bloc) => bloc.add(
       DeepLinkingEvent.consumePendingLink(
-        selectedCustomerCode: fakeCustomerCode,
-        selectedShipTo: fakeShipToCode,
+        selectedCustomerCode: fakeCustomerCodeInfo,
+        selectedShipTo: fakeShipToInfo,
       ),
     ),
-    expect: () => [
-      const DeepLinkingState.error(fakeLinkInvalid)
-    ],
+    expect: () => [const DeepLinkingState.error(fakeLinkInvalid)],
   );
 
   blocTest<DeepLinkingBloc, DeepLinkingState>(
     'Consume redirect order history detail pending link success',
     build: () => DeepLinkingBloc(
-      service: service,
       repository: repository,
       chatBotService: chatBotService,
     ),
     setUp: () {
       when(
         () => repository.extractOrderNumber(
-          selectedCustomerCode: fakeCustomerCode,
-          selectedShipTo: fakeShipToCode,
+          selectedCustomerCode: fakeCustomerCodeInfo,
+          selectedShipTo: fakeShipToInfo,
           link: Uri(path: orderDetailLink),
         ),
       ).thenReturn(Right(OrderNumber('fake-order-history')));
     },
-    seed: () => DeepLinkingState.linkPending(Uri(path: orderDetailLink)),
+    seed: () => DeepLinkingState.linkPending(
+      EzrxLink(Uri(path: orderDetailLink).toString()),
+    ),
     act: (bloc) => bloc.add(
       DeepLinkingEvent.consumePendingLink(
-        selectedCustomerCode: fakeCustomerCode,
-        selectedShipTo: fakeShipToCode,
+        selectedCustomerCode: fakeCustomerCodeInfo,
+        selectedShipTo: fakeShipToInfo,
       ),
     ),
     expect: () => [
@@ -157,15 +155,14 @@ void main() {
   blocTest<DeepLinkingBloc, DeepLinkingState>(
     'Consume redirect order history detail pending link failure',
     build: () => DeepLinkingBloc(
-      service: service,
       repository: repository,
       chatBotService: chatBotService,
     ),
     setUp: () {
       when(
         () => repository.extractOrderNumber(
-          selectedCustomerCode: fakeCustomerCode,
-          selectedShipTo: fakeShipToCode,
+          selectedCustomerCode: fakeCustomerCodeInfo,
+          selectedShipTo: fakeShipToInfo,
           link: Uri(path: orderDetailLink),
         ),
       ).thenReturn(
@@ -173,12 +170,12 @@ void main() {
       );
     },
     seed: () => DeepLinkingState.linkPending(
-      Uri(path: orderDetailLink),
+      EzrxLink(Uri(path: orderDetailLink).toString()),
     ),
     act: (bloc) => bloc.add(
       DeepLinkingEvent.consumePendingLink(
-        selectedCustomerCode: fakeCustomerCode,
-        selectedShipTo: fakeShipToCode,
+        selectedCustomerCode: fakeCustomerCodeInfo,
+        selectedShipTo: fakeShipToInfo,
       ),
     ),
     expect: () => [
@@ -190,7 +187,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect contact-us success',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -200,7 +196,7 @@ void main() {
         ).thenReturn(Right(AppMarket.defaultMarket()));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: contactUsLink),
+        EzrxLink(contactUsLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -216,7 +212,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect contact-us failure',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -226,7 +221,7 @@ void main() {
         ).thenReturn(const Left(fakeError));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: contactUsLink),
+        EzrxLink(contactUsLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -245,7 +240,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect product details success',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -257,7 +251,7 @@ void main() {
         ).thenReturn(Right(materialNumber));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: productDetailsLink),
+        EzrxLink(productDetailsLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -272,7 +266,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect product details failure',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -284,7 +277,7 @@ void main() {
         ).thenReturn(const Left(fakeError));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: productDetailsLink),
+        EzrxLink(productDetailsLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -299,7 +292,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect bundle details success',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -311,7 +303,7 @@ void main() {
         ).thenReturn(Right(materialNumber));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: bundleDetailsLink),
+        EzrxLink(bundleDetailsLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -327,7 +319,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect bundle details failure',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -339,7 +330,7 @@ void main() {
         ).thenReturn(const Left(fakeError));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: bundleDetailsLink),
+        EzrxLink(bundleDetailsLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -355,7 +346,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect product listing success',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -367,7 +357,7 @@ void main() {
         ).thenReturn(Right(SearchKey(materialNumber.getValue())));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: productListingLink),
+        EzrxLink(productListingLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -385,7 +375,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect product listing failure',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -397,7 +386,7 @@ void main() {
         ).thenReturn(const Left(fakeError));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: productListingLink),
+        EzrxLink(productListingLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -415,7 +404,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect Return Summary success',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -429,7 +417,7 @@ void main() {
         ).thenReturn(Right(ReturnRequestsId(requestId: 'fake-request-id')));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: returnSummaryLink),
+        EzrxLink(returnSummaryLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -446,7 +434,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect Return Summary failure',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -460,7 +447,7 @@ void main() {
         ).thenReturn(const Left(fakeError));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: returnSummaryLink),
+        EzrxLink(returnSummaryLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -478,12 +465,11 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect Payment home success',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: paymentLink),
+        EzrxLink(paymentLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -498,7 +484,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect Payment Summary invoice Details success',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -516,7 +501,7 @@ void main() {
         );
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: paymentSummaryInvoiceDetailsLink),
+        EzrxLink(paymentSummaryInvoiceDetailsLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -535,7 +520,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect Payment Summary invoice Details failure',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -547,7 +531,7 @@ void main() {
         ).thenReturn(const Left(fakeError));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: paymentSummaryInvoiceDetailsLink),
+        EzrxLink(paymentSummaryInvoiceDetailsLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -563,7 +547,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect Account Summary invoice Details success',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -575,7 +558,7 @@ void main() {
         ).thenReturn(const Right('fake-invoice-number'));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: accountSummaryInvoiceDetailsLink),
+        EzrxLink(accountSummaryInvoiceDetailsLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -591,7 +574,6 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect Account Summary invoice Details failure',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
@@ -603,7 +585,7 @@ void main() {
         ).thenReturn(const Left(fakeError));
       },
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: accountSummaryInvoiceDetailsLink),
+        EzrxLink(accountSummaryInvoiceDetailsLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -620,12 +602,11 @@ void main() {
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect FAQ success',
       build: () => DeepLinkingBloc(
-        service: service,
         repository: repository,
         chatBotService: chatBotService,
       ),
       seed: () => DeepLinkingState.linkPending(
-        Uri(path: faqLink),
+        EzrxLink(faqLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(

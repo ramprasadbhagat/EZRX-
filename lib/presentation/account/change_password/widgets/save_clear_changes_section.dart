@@ -52,7 +52,7 @@ class _SaveClearChangesSection extends StatelessWidget {
                         onPressed: () {
                           FocusScope.of(context).unfocus();
                           context.read<ResetPasswordBloc>().add(
-                                ResetPasswordEvent.resetPasswordPressed(
+                                ResetPasswordEvent.changePassword(
                                   user: context
                                       .read<EligibilityBloc>()
                                       .state

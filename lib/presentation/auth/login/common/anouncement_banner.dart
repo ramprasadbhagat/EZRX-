@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/domain/announcement/entities/maintenance_item.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -78,7 +79,9 @@ class _ItemAnnouncement extends StatelessWidget {
             onLinkTap: (url, _, attributes, element) {
               if (banner.hyperlink.isInternalLink) {
                 context.read<DeepLinkingBloc>().add(
-                      DeepLinkingEvent.addPendingLink(banner.hyperlink.uri),
+                      DeepLinkingEvent.addPendingLink(
+                        EzrxLink(banner.hyperlink.getOrDefaultValue('')),
+                      ),
                     );
               } else if (banner.hyperlink.isExternalLink) {
                 context.router.push(

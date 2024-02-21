@@ -3,7 +3,7 @@ part of 'deep_linking_bloc.dart';
 @freezed
 class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.initial() = _Initial;
-  const factory DeepLinkingState.linkPending(Uri link) = _LinkPending;
+  const factory DeepLinkingState.linkPending(EzrxLink link) = _LinkPending;
   const factory DeepLinkingState.redirectBundleDetail(
     MaterialNumber materialNumber,
   ) = _RedirectBundleDetail;
@@ -32,4 +32,7 @@ class DeepLinkingState with _$DeepLinkingState {
     AppMarket market,
   ) = _RedirectContactUs;
   const factory DeepLinkingState.error(ApiFailure failure) = _Error;
+  const factory DeepLinkingState.redirectResetPassword(
+    ResetPasswordCred resetPasswordCred,
+  ) = _RedirectResetPassword;
 }

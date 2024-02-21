@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_change_password_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -87,7 +88,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
             break;
         }
       },
-      resetPasswordPressed: (e) async {
+      changePassword: (e) async {
         final isFormValidated = state.oldPassword.isValid() &&
             state.isNewPasswordValid(e.user) &&
             state.confirmPassword.isValid();
@@ -101,7 +102,8 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
             ),
           );
 
-          final failureOrSuccess = await changePasswordRepository.setPassword(
+          final failureOrSuccess =
+              await changePasswordRepository.changePassword(
             newPassword: state.newPassword,
             oldPassword: state.oldPassword,
             user: e.user,
@@ -136,6 +138,43 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       },
       clear: (e) async => emit(
         ResetPasswordState.initial(),
+      ),
+      resetPassword: (e) async {
+        final isFormValidated = state.isNewPasswordValid(
+              state.resetPasswordCred.toUser,
+            ) &&
+            state.confirmPassword.isValid();
+
+        if (!isFormValidated) {
+          emit(
+            state.copyWith(showErrorMessages: true),
+          );
+
+          return;
+        }
+        emit(
+          state.copyWith(
+            isSubmitting: true,
+            passwordResetFailureOrSuccessOption: none(),
+            showErrorMessages: false,
+          ),
+        );
+
+        final failureOrSuccess = await changePasswordRepository.resetPassword(
+          newPassword: state.newPassword,
+          token: state.resetPasswordCred.token,
+          username: state.resetPasswordCred.username,
+        );
+        emit(
+          state.copyWith(
+            passwordResetFailureOrSuccessOption: optionOf(failureOrSuccess),
+            isSubmitting: false,
+          ),
+        );
+        add(const ResetPasswordEvent.clear());
+      },
+      addResetPasswordCred: (_AddResetPasswordCred e) async => emit(
+        state.copyWith(resetPasswordCred: e.resetPasswordCred),
       ),
     );
   }

@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
@@ -46,6 +47,7 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/retur
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -171,49 +173,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 );
               },
               unauthenticated: (unauthState) {
-                locator<MixpanelService>().onLogout();
-                context
-                    .read<DeepLinkingBloc>()
-                    .add(const DeepLinkingEvent.initialize());
-                context.read<UserBloc>().add(const UserEvent.initialized());
-                context
-                    .read<ChatBotBloc>()
-                    .add(const ChatBotEvent.resetChatbot());
-                context
-                    .read<EligibilityBloc>()
-                    .add(const EligibilityEvent.initialized());
-                context
-                    .read<AnnouncementBloc>()
-                    .add(const AnnouncementEvent.clearClosedTime());
-
-                final appMarket = AppMarket(
-                  context.deviceLocale.countryCode?.toLowerCase() ??
-                      AppMarket.defaultMarket().getOrDefaultValue('kh'),
-                ).defaultMarket;
-
-                context.read<LoginFormBloc>().add(
-                      LoginFormEvent.loadLastSavedCred(appMarket),
-                    );
-
-                // Check if the device's language code is supported
-                if (context.supportedLocales
-                    .map((locale) => locale.languageCode)
-                    .contains(context.deviceLocale.languageCode)) {
-                  context.resetLocale();
-                } else {
-                  context.setLocale(
-                    context.fallbackLocale ?? const Locale('en'),
-                  );
-                }
-
-                context.read<AnnouncementBloc>().add(
-                      const AnnouncementEvent.clearBannerId(),
-                    );
+                _logout(context);
 
                 context.router.replaceAll(
                   [
                     const SplashPageRoute(),
                     const LoginPageRoute(),
+                    if (context
+                        .read<ResetPasswordBloc>()
+                        .state
+                        .resetPasswordCred
+                        .isNotEmpty)
+                      const ResetPasswordPageRoute(),
                   ],
                 );
               },
@@ -1068,6 +1039,21 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               error: (error) {
                 ErrorUtils.handleApiFailure(context, error);
               },
+              redirectResetPassword: (ResetPasswordCred resetPasswordCred) {
+                context.read<ResetPasswordBloc>().add(
+                      ResetPasswordEvent.addResetPasswordCred(
+                        resetPasswordCred: resetPasswordCred,
+                      ),
+                    );
+                if (context
+                    .read<SalesOrgBloc>()
+                    .state
+                    .haveSelectedSalesOrganisation) {
+                  context.read<AuthBloc>().add(const AuthEvent.logout());
+                } else {
+                  context.router.push(const ResetPasswordPageRoute());
+                }
+              },
             );
           },
         ),
@@ -1483,6 +1469,43 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           AnnouncementEvent.getMaintenanceBanners(
             salesOrg: eligibilityState.salesOrg,
           ),
+        );
+
+    context.read<ResetPasswordBloc>().add(const ResetPasswordEvent.clear());
+  }
+
+  void _logout(BuildContext context) {
+    locator<MixpanelService>().onLogout();
+    context.read<DeepLinkingBloc>().add(const DeepLinkingEvent.initialize());
+    context.read<UserBloc>().add(const UserEvent.initialized());
+    context.read<ChatBotBloc>().add(const ChatBotEvent.resetChatbot());
+    context.read<EligibilityBloc>().add(const EligibilityEvent.initialized());
+    context
+        .read<AnnouncementBloc>()
+        .add(const AnnouncementEvent.clearClosedTime());
+
+    final appMarket = AppMarket(
+      context.deviceLocale.countryCode?.toLowerCase() ??
+          AppMarket.defaultMarket().getOrDefaultValue('kh'),
+    ).defaultMarket;
+
+    context.read<LoginFormBloc>().add(
+          LoginFormEvent.loadLastSavedCred(appMarket),
+        );
+
+    // Check if the device's language code is supported
+    if (context.supportedLocales
+        .map((locale) => locale.languageCode)
+        .contains(context.deviceLocale.languageCode)) {
+      context.resetLocale();
+    } else {
+      context.setLocale(
+        context.fallbackLocale ?? const Locale('en'),
+      );
+    }
+
+    context.read<AnnouncementBloc>().add(
+          const AnnouncementEvent.clearBannerId(),
         );
   }
 }

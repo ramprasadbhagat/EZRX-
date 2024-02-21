@@ -16,6 +16,8 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/payment_ad
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_configuration_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
+import 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page.dart';
+import 'package:ezrxmobile/presentation/auth/reset_password_success/reset_password_success_page.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
 import 'package:ezrxmobile/presentation/faq/faq.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcement_info_details_page.dart';
@@ -100,6 +102,14 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(
       path: 'forgot_password_confirmation',
       page: ForgetPasswordConfirmationPage,
+    ),
+    AutoRoute(
+      path: 'reset_password',
+      page: ResetPasswordPage,
+    ),
+    AutoRoute(
+      path: 'reset_password_success',
+      page: ResetPasswordSuccess,
     ),
     AutoRoute(path: 'payment_configuration', page: PaymentConfigurationPage),
     AutoRoute(path: 'payment_methods', page: PaymentMethodsPage),

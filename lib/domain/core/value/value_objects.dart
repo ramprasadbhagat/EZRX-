@@ -487,3 +487,45 @@ class Language extends ValueObject<String> {
 
   const Language._(this.value);
 }
+
+class EzrxLink extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory EzrxLink(String input) {
+    return EzrxLink._(validateStringNotEmpty(input));
+  }
+
+  Uri get uri => Uri.parse(value.getOrElse(() => ''));
+
+  Uri get resetPasswordFilteredUri => getFilteredResetPasswordUri(uri);
+
+  bool get isResetPassword =>
+      isResetPasswordLink(resetPasswordFilteredUri.path);
+
+  bool get isProductDetail => isProductDetailLink(uri.path);
+
+  bool get isProductListing => isProductListLink(uri.path);
+
+  bool get isBundleDetail => isBundleDetailLink(uri.path);
+
+  bool get isOrderDetail => isOrderDetailLink(uri.path);
+
+  bool get isReturnSummaryDetail => isReturnSummaryDetailLink(uri.path);
+
+  bool get isPaymentSummaryInvoiceDetail =>
+      isPaymentSummaryInvoiceDetailLink(uri.path);
+
+  bool get isAccountSummaryInvoiceDetail =>
+      isAccountSummaryInvoiceDetailLink(uri.path);
+
+  bool get isMyAccountPayment => isMyAccountPaymentLink(uri.path);
+
+  bool get isContactUs => isContactUsLink(uri.path);
+
+  bool get isFaq => isFaqLink(uri.path);
+
+  bool get isAboutUs => isAboutUsLink(uri.path);
+
+  const EzrxLink._(this.value);
+}

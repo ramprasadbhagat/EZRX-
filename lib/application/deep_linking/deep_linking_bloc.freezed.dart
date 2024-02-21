@@ -19,7 +19,7 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(Uri link) addPendingLink,
+    required TResult Function(EzrxLink link) addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
@@ -28,7 +28,7 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(Uri link)? addPendingLink,
+    TResult? Function(EzrxLink link)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -37,7 +37,7 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(Uri link)? addPendingLink,
+    TResult Function(EzrxLink link)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -125,7 +125,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(Uri link) addPendingLink,
+    required TResult Function(EzrxLink link) addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
@@ -137,7 +137,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(Uri link)? addPendingLink,
+    TResult? Function(EzrxLink link)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -149,7 +149,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(Uri link)? addPendingLink,
+    TResult Function(EzrxLink link)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -206,7 +206,7 @@ abstract class _$$_AddPendingLinkCopyWith<$Res> {
           _$_AddPendingLink value, $Res Function(_$_AddPendingLink) then) =
       __$$_AddPendingLinkCopyWithImpl<$Res>;
   @useResult
-  $Res call({Uri link});
+  $Res call({EzrxLink link});
 }
 
 /// @nodoc
@@ -226,7 +226,7 @@ class __$$_AddPendingLinkCopyWithImpl<$Res>
       null == link
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
-              as Uri,
+              as EzrxLink,
     ));
   }
 }
@@ -237,7 +237,7 @@ class _$_AddPendingLink implements _AddPendingLink {
   const _$_AddPendingLink(this.link);
 
   @override
-  final Uri link;
+  final EzrxLink link;
 
   @override
   String toString() {
@@ -265,7 +265,7 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(Uri link) addPendingLink,
+    required TResult Function(EzrxLink link) addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
@@ -277,7 +277,7 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(Uri link)? addPendingLink,
+    TResult? Function(EzrxLink link)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -289,7 +289,7 @@ class _$_AddPendingLink implements _AddPendingLink {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(Uri link)? addPendingLink,
+    TResult Function(EzrxLink link)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -337,9 +337,9 @@ class _$_AddPendingLink implements _AddPendingLink {
 }
 
 abstract class _AddPendingLink implements DeepLinkingEvent {
-  const factory _AddPendingLink(final Uri link) = _$_AddPendingLink;
+  const factory _AddPendingLink(final EzrxLink link) = _$_AddPendingLink;
 
-  Uri get link;
+  EzrxLink get link;
   @JsonKey(ignore: true)
   _$$_AddPendingLinkCopyWith<_$_AddPendingLink> get copyWith =>
       throw _privateConstructorUsedError;
@@ -443,7 +443,7 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(Uri link) addPendingLink,
+    required TResult Function(EzrxLink link) addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
@@ -455,7 +455,7 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(Uri link)? addPendingLink,
+    TResult? Function(EzrxLink link)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -467,7 +467,7 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(Uri link)? addPendingLink,
+    TResult Function(EzrxLink link)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -531,7 +531,7 @@ mixin _$DeepLinkingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -547,12 +547,14 @@ mixin _$DeepLinkingState {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -566,12 +568,14 @@ mixin _$DeepLinkingState {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -585,6 +589,8 @@ mixin _$DeepLinkingState {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -608,6 +614,8 @@ mixin _$DeepLinkingState {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -627,6 +635,7 @@ mixin _$DeepLinkingState {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -646,6 +655,7 @@ mixin _$DeepLinkingState {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -707,7 +717,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -723,6 +733,8 @@ class _$_Initial implements _Initial {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return initial();
   }
@@ -731,7 +743,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -745,6 +757,8 @@ class _$_Initial implements _Initial {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return initial?.call();
   }
@@ -753,7 +767,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -767,6 +781,8 @@ class _$_Initial implements _Initial {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -796,6 +812,8 @@ class _$_Initial implements _Initial {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return initial(this);
   }
@@ -818,6 +836,7 @@ class _$_Initial implements _Initial {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return initial?.call(this);
   }
@@ -840,6 +859,7 @@ class _$_Initial implements _Initial {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -859,7 +879,7 @@ abstract class _$$_LinkPendingCopyWith<$Res> {
           _$_LinkPending value, $Res Function(_$_LinkPending) then) =
       __$$_LinkPendingCopyWithImpl<$Res>;
   @useResult
-  $Res call({Uri link});
+  $Res call({EzrxLink link});
 }
 
 /// @nodoc
@@ -879,7 +899,7 @@ class __$$_LinkPendingCopyWithImpl<$Res>
       null == link
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
-              as Uri,
+              as EzrxLink,
     ));
   }
 }
@@ -890,7 +910,7 @@ class _$_LinkPending implements _LinkPending {
   const _$_LinkPending(this.link);
 
   @override
-  final Uri link;
+  final EzrxLink link;
 
   @override
   String toString() {
@@ -918,7 +938,7 @@ class _$_LinkPending implements _LinkPending {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -934,6 +954,8 @@ class _$_LinkPending implements _LinkPending {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return linkPending(link);
   }
@@ -942,7 +964,7 @@ class _$_LinkPending implements _LinkPending {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -956,6 +978,8 @@ class _$_LinkPending implements _LinkPending {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return linkPending?.call(link);
   }
@@ -964,7 +988,7 @@ class _$_LinkPending implements _LinkPending {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -978,6 +1002,8 @@ class _$_LinkPending implements _LinkPending {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (linkPending != null) {
@@ -1007,6 +1033,8 @@ class _$_LinkPending implements _LinkPending {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return linkPending(this);
   }
@@ -1029,6 +1057,7 @@ class _$_LinkPending implements _LinkPending {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return linkPending?.call(this);
   }
@@ -1051,6 +1080,7 @@ class _$_LinkPending implements _LinkPending {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (linkPending != null) {
@@ -1061,9 +1091,9 @@ class _$_LinkPending implements _LinkPending {
 }
 
 abstract class _LinkPending implements DeepLinkingState {
-  const factory _LinkPending(final Uri link) = _$_LinkPending;
+  const factory _LinkPending(final EzrxLink link) = _$_LinkPending;
 
-  Uri get link;
+  EzrxLink get link;
   @JsonKey(ignore: true)
   _$$_LinkPendingCopyWith<_$_LinkPending> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1136,7 +1166,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -1152,6 +1182,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectBundleDetail(materialNumber);
   }
@@ -1160,7 +1192,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -1174,6 +1206,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectBundleDetail?.call(materialNumber);
   }
@@ -1182,7 +1216,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -1196,6 +1230,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectBundleDetail != null) {
@@ -1225,6 +1261,8 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectBundleDetail(this);
   }
@@ -1247,6 +1285,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectBundleDetail?.call(this);
   }
@@ -1269,6 +1308,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectBundleDetail != null) {
@@ -1355,7 +1395,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -1371,6 +1411,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectProductDetail(materialNumber);
   }
@@ -1379,7 +1421,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -1393,6 +1435,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectProductDetail?.call(materialNumber);
   }
@@ -1401,7 +1445,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -1415,6 +1459,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectProductDetail != null) {
@@ -1444,6 +1490,8 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectProductDetail(this);
   }
@@ -1466,6 +1514,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectProductDetail?.call(this);
   }
@@ -1488,6 +1537,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectProductDetail != null) {
@@ -1576,7 +1626,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -1592,6 +1642,8 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectProductSuggestion(searchKey);
   }
@@ -1600,7 +1652,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -1614,6 +1666,8 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectProductSuggestion?.call(searchKey);
   }
@@ -1622,7 +1676,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -1636,6 +1690,8 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectProductSuggestion != null) {
@@ -1665,6 +1721,8 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectProductSuggestion(this);
   }
@@ -1687,6 +1745,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectProductSuggestion?.call(this);
   }
@@ -1709,6 +1768,7 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectProductSuggestion != null) {
@@ -1795,7 +1855,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -1811,6 +1871,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectOrderDetail(orderNumber);
   }
@@ -1819,7 +1881,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -1833,6 +1895,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectOrderDetail?.call(orderNumber);
   }
@@ -1841,7 +1905,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -1855,6 +1919,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectOrderDetail != null) {
@@ -1884,6 +1950,8 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectOrderDetail(this);
   }
@@ -1906,6 +1974,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectOrderDetail?.call(this);
   }
@@ -1928,6 +1997,7 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectOrderDetail != null) {
@@ -2024,7 +2094,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -2040,6 +2110,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectReturnDetail(returnId);
   }
@@ -2048,7 +2120,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -2062,6 +2134,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectReturnDetail?.call(returnId);
   }
@@ -2070,7 +2144,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -2084,6 +2158,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectReturnDetail != null) {
@@ -2113,6 +2189,8 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectReturnDetail(this);
   }
@@ -2135,6 +2213,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectReturnDetail?.call(this);
   }
@@ -2157,6 +2236,7 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectReturnDetail != null) {
@@ -2254,7 +2334,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -2270,6 +2350,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectPaymentDetail(paymentIdentifierInfo);
   }
@@ -2278,7 +2360,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -2292,6 +2374,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectPaymentDetail?.call(paymentIdentifierInfo);
   }
@@ -2300,7 +2384,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -2314,6 +2398,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectPaymentDetail != null) {
@@ -2343,6 +2429,8 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectPaymentDetail(this);
   }
@@ -2365,6 +2453,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectPaymentDetail?.call(this);
   }
@@ -2387,6 +2476,7 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectPaymentDetail != null) {
@@ -2446,7 +2536,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -2462,6 +2552,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectPaymentHome();
   }
@@ -2470,7 +2562,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -2484,6 +2576,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectPaymentHome?.call();
   }
@@ -2492,7 +2586,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -2506,6 +2600,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectPaymentHome != null) {
@@ -2535,6 +2631,8 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectPaymentHome(this);
   }
@@ -2557,6 +2655,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectPaymentHome?.call(this);
   }
@@ -2579,6 +2678,7 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectPaymentHome != null) {
@@ -2659,7 +2759,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -2675,6 +2775,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectInvoiceDetail(invoiceNumber);
   }
@@ -2683,7 +2785,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -2697,6 +2799,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectInvoiceDetail?.call(invoiceNumber);
   }
@@ -2705,7 +2809,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -2719,6 +2823,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectInvoiceDetail != null) {
@@ -2748,6 +2854,8 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectInvoiceDetail(this);
   }
@@ -2770,6 +2878,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectInvoiceDetail?.call(this);
   }
@@ -2792,6 +2901,7 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectInvoiceDetail != null) {
@@ -2850,7 +2960,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -2866,6 +2976,8 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectFAQ();
   }
@@ -2874,7 +2986,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -2888,6 +3000,8 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectFAQ?.call();
   }
@@ -2896,7 +3010,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -2910,6 +3024,8 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectFAQ != null) {
@@ -2939,6 +3055,8 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectFAQ(this);
   }
@@ -2961,6 +3079,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectFAQ?.call(this);
   }
@@ -2983,6 +3102,7 @@ class _$_RedirectFAQ implements _RedirectFAQ {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectFAQ != null) {
@@ -3035,7 +3155,7 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -3051,6 +3171,8 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectAboutUs();
   }
@@ -3059,7 +3181,7 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -3073,6 +3195,8 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectAboutUs?.call();
   }
@@ -3081,7 +3205,7 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -3095,6 +3219,8 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectAboutUs != null) {
@@ -3124,6 +3250,8 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectAboutUs(this);
   }
@@ -3146,6 +3274,7 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectAboutUs?.call(this);
   }
@@ -3168,6 +3297,7 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectAboutUs != null) {
@@ -3247,7 +3377,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -3263,6 +3393,8 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return redirectContactUs(market);
   }
@@ -3271,7 +3403,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -3285,6 +3417,8 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return redirectContactUs?.call(market);
   }
@@ -3293,7 +3427,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -3307,6 +3441,8 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectContactUs != null) {
@@ -3336,6 +3472,8 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return redirectContactUs(this);
   }
@@ -3358,6 +3496,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return redirectContactUs?.call(this);
   }
@@ -3380,6 +3519,7 @@ class _$_RedirectContactUs implements _RedirectContactUs {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (redirectContactUs != null) {
@@ -3472,7 +3612,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Uri link) linkPending,
+    required TResult Function(EzrxLink link) linkPending,
     required TResult Function(MaterialNumber materialNumber)
         redirectBundleDetail,
     required TResult Function(MaterialNumber materialNumber)
@@ -3488,6 +3628,8 @@ class _$_Error implements _Error {
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
     required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
   }) {
     return error(failure);
   }
@@ -3496,7 +3638,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Uri link)? linkPending,
+    TResult? Function(EzrxLink link)? linkPending,
     TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -3510,6 +3652,8 @@ class _$_Error implements _Error {
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
     TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
   }) {
     return error?.call(failure);
   }
@@ -3518,7 +3662,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Uri link)? linkPending,
+    TResult Function(EzrxLink link)? linkPending,
     TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
     TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
@@ -3532,6 +3676,8 @@ class _$_Error implements _Error {
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
     TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -3561,6 +3707,8 @@ class _$_Error implements _Error {
     required TResult Function(_RedirectAboutUs value) redirectAboutUs,
     required TResult Function(_RedirectContactUs value) redirectContactUs,
     required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
   }) {
     return error(this);
   }
@@ -3583,6 +3731,7 @@ class _$_Error implements _Error {
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult? Function(_RedirectContactUs value)? redirectContactUs,
     TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
     return error?.call(this);
   }
@@ -3605,6 +3754,7 @@ class _$_Error implements _Error {
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
     TResult Function(_RedirectContactUs value)? redirectContactUs,
     TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -3620,5 +3770,244 @@ abstract class _Error implements DeepLinkingState {
   ApiFailure get failure;
   @JsonKey(ignore: true)
   _$$_ErrorCopyWith<_$_Error> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RedirectResetPasswordCopyWith<$Res> {
+  factory _$$_RedirectResetPasswordCopyWith(_$_RedirectResetPassword value,
+          $Res Function(_$_RedirectResetPassword) then) =
+      __$$_RedirectResetPasswordCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ResetPasswordCred resetPasswordCred});
+
+  $ResetPasswordCredCopyWith<$Res> get resetPasswordCred;
+}
+
+/// @nodoc
+class __$$_RedirectResetPasswordCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectResetPassword>
+    implements _$$_RedirectResetPasswordCopyWith<$Res> {
+  __$$_RedirectResetPasswordCopyWithImpl(_$_RedirectResetPassword _value,
+      $Res Function(_$_RedirectResetPassword) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? resetPasswordCred = null,
+  }) {
+    return _then(_$_RedirectResetPassword(
+      null == resetPasswordCred
+          ? _value.resetPasswordCred
+          : resetPasswordCred // ignore: cast_nullable_to_non_nullable
+              as ResetPasswordCred,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ResetPasswordCredCopyWith<$Res> get resetPasswordCred {
+    return $ResetPasswordCredCopyWith<$Res>(_value.resetPasswordCred, (value) {
+      return _then(_value.copyWith(resetPasswordCred: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_RedirectResetPassword implements _RedirectResetPassword {
+  const _$_RedirectResetPassword(this.resetPasswordCred);
+
+  @override
+  final ResetPasswordCred resetPasswordCred;
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectResetPassword(resetPasswordCred: $resetPasswordCred)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RedirectResetPassword &&
+            (identical(other.resetPasswordCred, resetPasswordCred) ||
+                other.resetPasswordCred == resetPasswordCred));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, resetPasswordCred);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RedirectResetPasswordCopyWith<_$_RedirectResetPassword> get copyWith =>
+      __$$_RedirectResetPasswordCopyWithImpl<_$_RedirectResetPassword>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link) linkPending,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectBundleDetail,
+    required TResult Function(MaterialNumber materialNumber)
+        redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+        redirectPaymentDetail,
+    required TResult Function() redirectPaymentHome,
+    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+  }) {
+    return redirectResetPassword(resetPasswordCred);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link)? linkPending,
+    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+        redirectPaymentDetail,
+    TResult? Function()? redirectPaymentHome,
+    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+  }) {
+    return redirectResetPassword?.call(resetPasswordCred);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link)? linkPending,
+    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+        redirectPaymentDetail,
+    TResult Function()? redirectPaymentHome,
+    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    required TResult orElse(),
+  }) {
+    if (redirectResetPassword != null) {
+      return redirectResetPassword(resetPasswordCred);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+  }) {
+    return redirectResetPassword(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+  }) {
+    return redirectResetPassword?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    required TResult orElse(),
+  }) {
+    if (redirectResetPassword != null) {
+      return redirectResetPassword(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectResetPassword implements DeepLinkingState {
+  const factory _RedirectResetPassword(
+      final ResetPasswordCred resetPasswordCred) = _$_RedirectResetPassword;
+
+  ResetPasswordCred get resetPasswordCred;
+  @JsonKey(ignore: true)
+  _$$_RedirectResetPasswordCopyWith<_$_RedirectResetPassword> get copyWith =>
       throw _privateConstructorUsedError;
 }

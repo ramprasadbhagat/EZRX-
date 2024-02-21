@@ -35,4 +35,6 @@ abstract class SvgImage {
   static const String marketplaceIcon = '${_basePath}marketplace_icon.svg';
   static const String marketplaceOutlinedButton =
       '${_basePath}marketplace_outlined_button.svg';
+  static const String resetPasswordSuccessLogo =
+      '${_basePath}reset_password_success_logo.svg';
 }

@@ -178,7 +178,7 @@ void main() {
           await tester.tap(submitButtonFinder);
           verify(() {
             mockResetPasswordBloc.add(
-              ResetPasswordEvent.resetPasswordPressed(
+              ResetPasswordEvent.changePassword(
                 user: mockEligibilityBloc.state.user,
               ),
             );

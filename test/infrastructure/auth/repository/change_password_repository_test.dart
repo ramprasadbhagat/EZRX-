@@ -53,7 +53,7 @@ void main() {
       remoteDataSourceMock = ChangePasswordRemoteDataSourceMock();
 
       repository = ChangePasswordRepository(
-        changePasswordRemoteDataSource: remoteDataSourceMock,
+        remoteDataSource: remoteDataSourceMock,
         config: configMock,
         localDataSource: localDataSourceMock,
       );
@@ -66,12 +66,12 @@ void main() {
         when(() => configMock.appFlavor)
             .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock.setUserPassword())
+        when(() => localDataSourceMock.changePassword())
             .thenAnswer((invocation) async => ResetPassword.empty());
         final oldPassword = Password.login('old');
 
         final newPassword = Password.login('new');
-        final result = await repository.setPassword(
+        final result = await repository.changePassword(
           oldPassword: oldPassword,
           newPassword: newPassword,
           user: User.empty(),
@@ -86,12 +86,12 @@ void main() {
         when(() => configMock.appFlavor)
             .thenAnswer((invocation) => Flavor.mock);
 
-        when(() => localDataSourceMock.setUserPassword())
+        when(() => localDataSourceMock.changePassword())
             .thenThrow((invocation) async => Exception('fake-error'));
         final oldPassword = Password.login('old');
 
         final newPassword = Password.login('old');
-        final result = await repository.setPassword(
+        final result = await repository.changePassword(
           oldPassword: oldPassword,
           newPassword: newPassword,
           user: User.empty(),
@@ -106,7 +106,7 @@ void main() {
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
         when(
-          () => remoteDataSourceMock.setUserPassword(
+          () => remoteDataSourceMock.changePassword(
             'test',
             'old',
             'new',
@@ -115,7 +115,7 @@ void main() {
         final oldPassword = Password.login('old');
 
         final newPassword = Password.login('old');
-        final result = await repository.setPassword(
+        final result = await repository.changePassword(
           oldPassword: oldPassword,
           newPassword: newPassword,
           user: User.empty(),
@@ -130,7 +130,7 @@ void main() {
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
         when(
-          () => remoteDataSourceMock.setUserPassword(
+          () => remoteDataSourceMock.changePassword(
             'test',
             'old',
             'new',
@@ -139,7 +139,7 @@ void main() {
         final oldPassword = Password.login('old');
 
         final newPassword = Password.login('new');
-        final result = await repository.setPassword(
+        final result = await repository.changePassword(
           oldPassword: oldPassword,
           newPassword: newPassword,
           user: User.empty().copyWith(username: Username('test')),

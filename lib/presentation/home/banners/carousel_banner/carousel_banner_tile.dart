@@ -47,7 +47,9 @@ class CarouselBannerTile extends StatelessWidget {
         );
         if (banner.navigationalURL.isInternalLink) {
           context.read<DeepLinkingBloc>().add(
-                DeepLinkingEvent.addPendingLink(banner.navigationalURL.uri),
+                DeepLinkingEvent.addPendingLink(
+                  EzrxLink(banner.navigationalURL.getOrDefaultValue('')),
+                ),
               );
         } else if (banner.navigationalURL.isExternalLink) {
           await context.router.push(

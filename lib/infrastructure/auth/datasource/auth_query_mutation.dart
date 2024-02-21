@@ -175,4 +175,19 @@ class AuthQueryMutation {
         }
     ''';
   }
+
+  String resetPassword() {
+    return '''
+        mutation resetPasswordV3(\$username: String!, \$newPassword: String!, \$resetPasswordToken: String!) {
+          resetPasswordV3(
+            username: \$username
+            newPassword: \$newPassword
+            resetPasswordToken: \$resetPasswordToken
+          ){
+            success
+            status
+          }
+        }
+    ''';
+  }
 }

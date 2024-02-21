@@ -1,16 +1,25 @@
-part of 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class _PasswordTextField extends StatelessWidget {
+class PasswordTextField extends StatelessWidget {
   final PasswordFieldType passwordFieldType;
   final String labelText;
   final String hintText;
   final bool isPasswordVisible;
-  const _PasswordTextField({
+  final String? emptyErrorText;
+  const PasswordTextField({
     Key? key,
     required this.passwordFieldType,
     required this.isPasswordVisible,
     required this.labelText,
     required this.hintText,
+    this.emptyErrorText,
   }) : super(key: key);
 
   String _getInitialValue(BuildContext context) {

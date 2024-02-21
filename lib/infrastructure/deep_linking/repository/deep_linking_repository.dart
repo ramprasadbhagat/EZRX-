@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
@@ -5,6 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -13,15 +15,19 @@ import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_reposit
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:flutter/material.dart';
 
 class DeepLinkingRepository implements IDeepLinkingRepository {
   final Config config;
   final DeviceStorage deviceStorage;
+  final DeepLinkingService service;
 
   DeepLinkingRepository({
     required this.config,
     required this.deviceStorage,
+    required this.service,
   });
 
   @override
@@ -135,6 +141,50 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
+
+  @override
+  Either<ApiFailure, ResetPasswordCred> extractResetPasswordCred({
+    required Uri link,
+  }) {
+    try {
+      final decodedLink = Uri.decodeFull(link.toString());
+      final queryParameters = Uri.splitQueryString(
+        decodedLink.characters
+            .getRange(decodedLink.indexOf('?') + 1)
+            .toString(),
+      );
+
+      if (!queryParameters.containsKey('username') ||
+          !queryParameters.containsKey('token')) {
+        return const Left(ApiFailure.passwordResetFail());
+      }
+
+      final setPassword = ResetPasswordCred(
+        username: Username(queryParameters['username'] ?? ''),
+        token: StringValue(queryParameters['token'] ?? ''),
+      );
+
+      return setPassword.isValid
+          ? Right(setPassword)
+          : const Left(ApiFailure.passwordResetFail());
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> initializeDeepLink() async {
+    try {
+      await service.init();
+
+      return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Stream<EzrxLink> watchDeepLinkValue() => service.getStream;
 
   bool _validDomain(Uri link) {
     final domain = link.host;

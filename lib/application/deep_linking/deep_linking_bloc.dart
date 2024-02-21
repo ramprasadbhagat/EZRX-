@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -10,7 +11,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
-import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,13 +21,11 @@ part 'deep_linking_state.dart';
 part 'deep_linking_bloc.freezed.dart';
 
 class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
-  final DeepLinkingService service;
   final ChatBotService chatBotService;
   final IDeepLinkingRepository repository;
-  StreamSubscription? dynamicLinkStream;
+  StreamSubscription<EzrxLink>? _deepLinkStreamSubscription;
 
   DeepLinkingBloc({
-    required this.service,
     required this.repository,
     required this.chatBotService,
   }) : super(const DeepLinkingState.initial()) {
@@ -40,7 +38,21 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
   ) async {
     await event.map(
       initialize: (_) async {
-        dynamicLinkStream ??= await service.init();
+        await _deepLinkStreamSubscription?.cancel();
+
+        _deepLinkStreamSubscription = repository.watchDeepLinkValue().listen(
+              (event) => add(
+                DeepLinkingEvent.addPendingLink(event),
+              ),
+            );
+        final failureOrSuccess = await repository.initializeDeepLink();
+
+        failureOrSuccess.fold(
+          (failure) => emit(
+            DeepLinkingState.error(failure),
+          ),
+          (success) {},
+        );
       },
       addPendingLink: (event) async {
         emit(
@@ -55,7 +67,7 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
       consumePendingLink: (event) {
         state.whenOrNull(
           linkPending: (link) {
-            if (link.path == '/contact-us') {
+            if (link.isContactUs) {
               final failureOrSuccess = repository.getCurrentMarket();
 
               failureOrSuccess.fold(
@@ -68,7 +80,8 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
               );
             }
 
-            if (event.selectedShipTo == ShipToInfo.empty()) {
+            if (event.selectedShipTo == ShipToInfo.empty() &&
+                !link.isResetPassword) {
               emit(
                 const DeepLinkingState.error(
                   ApiFailure.other('Please login to proceed'),
@@ -77,10 +90,24 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
 
               return;
             }
+            if (link.isResetPassword) {
+              final failureOrSuccess = repository.extractResetPasswordCred(
+                link: link.resetPasswordFilteredUri,
+              );
 
-            if (link.path.startsWith('/product-details')) {
+              failureOrSuccess.fold(
+                (error) => emit(
+                  DeepLinkingState.error(error),
+                ),
+                (resetPassword) => emit(
+                  DeepLinkingState.redirectResetPassword(resetPassword),
+                ),
+              );
+            }
+
+            if (link.isProductDetail) {
               final failureOrSuccess = repository.extractMaterialNumber(
-                link: link,
+                link: link.uri,
               );
 
               failureOrSuccess.fold(
@@ -91,9 +118,9 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.redirectProductDetail(materialNumber),
                 ),
               );
-            } else if (link.path.startsWith('/bundle-details')) {
+            } else if (link.isBundleDetail) {
               final failureOrSuccess = repository.extractMaterialNumber(
-                link: link,
+                link: link.uri,
               );
 
               failureOrSuccess.fold(
@@ -104,9 +131,9 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.redirectBundleDetail(materialNumber),
                 ),
               );
-            } else if (link.path == '/product-listing') {
+            } else if (link.isProductListing) {
               final failureOrSuccess = repository.extractProductSearchKey(
-                link: link,
+                link: link.uri,
               );
 
               failureOrSuccess.fold(
@@ -117,11 +144,11 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.redirectProductSuggestion(searchKey),
                 ),
               );
-            } else if (link.path == '/my-account/orders/order-detail') {
+            } else if (link.isOrderDetail) {
               final failureOrSuccess = repository.extractOrderNumber(
                 selectedCustomerCode: event.selectedCustomerCode,
                 selectedShipTo: event.selectedShipTo,
-                link: link,
+                link: link.uri,
               );
 
               failureOrSuccess.fold(
@@ -132,11 +159,11 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.redirectOrderDetail(orderNumber),
                 ),
               );
-            } else if (link.path == '/my-account/return-summary-details') {
+            } else if (link.isReturnSummaryDetail) {
               final failureOrSuccess = repository.extractReturnId(
                 selectedCustomerCode: event.selectedCustomerCode,
                 selectedShipTo: event.selectedShipTo,
-                link: link,
+                link: link.uri,
               );
 
               failureOrSuccess.fold(
@@ -147,10 +174,9 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.redirectReturnDetail(returnId),
                 ),
               );
-            } else if (link.path ==
-                '/payments/payment-summary/invoice-details') {
+            } else if (link.isPaymentSummaryInvoiceDetail) {
               final failureOrSuccess =
-                  repository.extractPaymentIdentifierInfo(link: link);
+                  repository.extractPaymentIdentifierInfo(link: link.uri);
 
               failureOrSuccess.fold(
                 (error) => emit(
@@ -162,10 +188,9 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   ),
                 ),
               );
-            } else if (link.path ==
-                '/payments/account-summary/invoice-details') {
+            } else if (link.isAccountSummaryInvoiceDetail) {
               final failureOrSuccess =
-                  repository.extractInvoiceNumber(link: link);
+                  repository.extractInvoiceNumber(link: link.uri);
 
               failureOrSuccess.fold(
                 (error) => emit(
@@ -175,11 +200,11 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.redirectInvoiceDetail(invoiceNumber),
                 ),
               );
-            } else if (link.path == '/my-account/payments') {
+            } else if (link.isMyAccountPayment) {
               emit(const DeepLinkingState.redirectPaymentHome());
-            } else if (link.path == '/faq') {
+            } else if (link.isFaq) {
               emit(const DeepLinkingState.redirectFAQ());
-            } else if (link.path == '/about-us') {
+            } else if (link.isAboutUs) {
               emit(const DeepLinkingState.redirectAboutUs());
             } else {
               emit(
@@ -196,7 +221,7 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
 
   @override
   Future<void> close() {
-    dynamicLinkStream?.cancel();
+    _deepLinkStreamSubscription?.cancel();
 
     return super.close();
   }

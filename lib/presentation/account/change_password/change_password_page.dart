@@ -1,23 +1,20 @@
-import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/password_validation.dart';
+import 'package:ezrxmobile/presentation/core/password_text_field.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 part 'package:ezrxmobile/presentation/account/change_password/widgets/change_password_form.dart';
-part 'package:ezrxmobile/presentation/account/change_password//widgets/password_text_field.dart';
 part 'package:ezrxmobile/presentation/account/change_password//widgets/save_clear_changes_section.dart';
-part 'package:ezrxmobile/presentation/account/change_password//widgets/change_password_validation.dart';
 
 class ChangePasswordPage extends StatelessWidget {
   const ChangePasswordPage({Key? key}) : super(key: key);
@@ -61,7 +58,9 @@ class ChangePasswordPage extends StatelessWidget {
               ),
             ),
             const _ChangePasswordForm(),
-            const _ResetPasswordValidation(),
+            PasswordValidation(
+              user: context.read<EligibilityBloc>().state.user,
+            ),
           ],
         ),
       ),

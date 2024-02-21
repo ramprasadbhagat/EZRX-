@@ -165,9 +165,9 @@ class _$_ForgotPasswordDto extends _ForgotPasswordDto {
 abstract class _ForgotPasswordDto extends ForgotPasswordDto {
   factory _ForgotPasswordDto(
       {@JsonKey(name: 'success', defaultValue: false)
-          required final bool success,
+      required final bool success,
       @JsonKey(name: 'email', defaultValue: '')
-          required final String email}) = _$_ForgotPasswordDto;
+      required final String email}) = _$_ForgotPasswordDto;
   _ForgotPasswordDto._() : super._();
 
   factory _ForgotPasswordDto.fromJson(Map<String, dynamic> json) =
