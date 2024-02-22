@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../common/common_robot.dart';
+import '../common/extension.dart';
 
 class HomeRobot extends CommonRobot {
   HomeRobot(WidgetTester tester) : super(tester);
@@ -54,6 +55,20 @@ class HomeRobot extends CommonRobot {
   void verify() {
     final home = find.byKey(WidgetKeys.homeScreen);
     expect(home, findsOneWidget);
+  }
+
+  void verifyEdiCustomer() {
+    final ediUserBannerFinder = find.byKey(WidgetKeys.ediUserBanner);
+    expect(
+      find.descendant(
+        of: ediUserBannerFinder,
+        matching: find.text(
+          'Orders for EDI Customers are disabled. Please place orders through EDI'
+              .tr(),
+        ),
+      ),
+      findsOneWidget,
+    );
   }
 
   void findQuickAccessMenu() {
@@ -133,7 +148,8 @@ class HomeRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  void findBundles() {
+  Future<void> findBundles() async {
+    await tester.pumpUntilVisible(bundles);
     expect(bundles, findsOneWidget);
   }
 
@@ -175,8 +191,8 @@ class HomeRobot extends CommonRobot {
     expect(homeQuickAccessReturns, findsOneWidget);
   }
 
-  void findQuickAccessPayments() {
-    expect(homeQuickAccessPayments, findsOneWidget);
+  void findQuickAccessPayments({bool isVisible = true}) {
+    expect(homeQuickAccessPayments, isVisible ? findsOneWidget : findsNothing);
   }
 
   void findQuickAccessChatSupport() {
@@ -248,7 +264,7 @@ class HomeRobot extends CommonRobot {
   }
 
   Future<void> slideBundle({bool reversed = true}) async {
-    await tester.drag(bundlesItem.first, Offset(reversed ? 500 : -500, 150));
+    await tester.drag(bundlesItem.first, Offset(reversed ? 150 : -150, 150));
     await tester.pump();
   }
 

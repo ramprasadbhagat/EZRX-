@@ -45,6 +45,11 @@ class OrderPriceSummaryRobot {
         price,
       );
 
+  void verifyTaxLabel(String price, int tax) {
+    _verifyPriceLabel(find.byKey(WidgetKeys.checkoutSummaryTaxPrice), price);
+    _verifyPriceLabel(find.byKey(WidgetKeys.checkoutSummaryTax), '$tax%');
+  }
+
   void _verifyPriceLabel(Finder finder, String price) {
     expect(
       find.descendant(

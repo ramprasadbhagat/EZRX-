@@ -5,10 +5,10 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
-class PaymentSummaryDetailRobot {
-  final WidgetTester _tester;
+class PaymentSummaryDetailRobot extends CommonRobot {
   final Finder _downloadAdviceButtonKey =
       find.byKey(WidgetKeys.downloadAdviceButtonKey);
   final Finder _accountSummaryBankAccountSection =
@@ -22,7 +22,7 @@ class PaymentSummaryDetailRobot {
   final Finder _paymentSummaryDetailsBackButton =
       find.byKey(WidgetKeys.paymentSummaryDetailsBackButton);
 
-  PaymentSummaryDetailRobot(this._tester);
+  PaymentSummaryDetailRobot(WidgetTester tester) : super(tester);
 
   void verifyPage() {
     expect(_paymentSummaryDetailsPage, findsOneWidget);
@@ -98,24 +98,17 @@ class PaymentSummaryDetailRobot {
     );
   }
 
-  void verifyPaymentSummaryDetail(
+  Future<void> verifyPaymentSummaryDetail(
     String title,
     double invoicePrice,
     String currency,
-  ) {
-    expect(
-      find.descendant(
-        of: find.byKey(
-          WidgetKeys.paymentSummaryTitle(
-            title,
-          ),
-        ),
-        matching: _getPriceFinder(
-          invoicePrice.priceDisplay(currency),
-        ),
-      ),
-      findsOneWidget,
+  ) async {
+    final widget = find.descendant(
+      of: find.byKey(WidgetKeys.paymentSummaryTitle(title)),
+      matching: _getPriceFinder(invoicePrice.priceDisplay(currency)),
     );
+    await scrollEnsureFinderVisible(widget);
+    expect(widget, findsOneWidget);
   }
 
   void verifyPaymentSummaryDetailForID(
@@ -145,18 +138,11 @@ class PaymentSummaryDetailRobot {
     String currency,
   ) async {
     final paymentItem = find.byKey(WidgetKeys.paymentItems(title, id));
-    await _tester.dragUntilVisible(
-      paymentItem,
-      _paymentSummaryDetailsPage,
-      const Offset(0.0, -200),
-    );
-    await _tester.pump();
+    await scrollEnsureFinderVisible(paymentItem);
     expect(
       find.descendant(
         of: paymentItem,
-        matching: _getPriceFinder(
-          price.priceDisplay(currency),
-        ),
+        matching: _getPriceFinder(price.priceDisplay(currency)),
       ),
       findsOneWidget,
     );
@@ -169,12 +155,12 @@ class PaymentSummaryDetailRobot {
     String currency,
   ) async {
     final paymentItem = find.byKey(WidgetKeys.paymentItems(title, id));
-    await _tester.dragUntilVisible(
+    await tester.dragUntilVisible(
       paymentItem,
       _paymentSummaryDetailsPage,
       const Offset(0.0, -200),
     );
-    await _tester.pump();
+    await tester.pump();
     expect(
       find.descendant(
         of: paymentItem,
@@ -203,8 +189,8 @@ class PaymentSummaryDetailRobot {
   }
 
   Future<void> tapDeleteCancelAdviceBottomSheetButton() async {
-    await _tester.tap(_deleteCancelAdviceBottomSheetButton);
-    await _tester.pumpAndSettle();
+    await tester.tap(_deleteCancelAdviceBottomSheetButton);
+    await tester.pumpAndSettle();
   }
 
   void verifyPaymentSummaryDetailsBackButton() {
@@ -212,8 +198,8 @@ class PaymentSummaryDetailRobot {
   }
 
   Future<void> tapPaymentSummaryDetailsBackButton() async {
-    await _tester.tap(_paymentSummaryDetailsBackButton);
-    await _tester.pumpAndSettle();
+    await tester.tap(_paymentSummaryDetailsBackButton);
+    await tester.pumpAndSettle();
   }
 
   void verifyCancelAdviceButtonKey() {
@@ -221,13 +207,13 @@ class PaymentSummaryDetailRobot {
   }
 
   Future<void> tapCancelAdviceButtonKey() async {
-    await _tester.tap(_cancelAdviceButtonKey);
-    await _tester.pumpAndSettle();
+    await tester.tap(_cancelAdviceButtonKey);
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapDownloadAdviceButton() async {
-    await _tester.tap(_downloadAdviceButtonKey);
-    await _tester.pumpAndSettle();
+    await tester.tap(_downloadAdviceButtonKey);
+    await tester.pumpAndSettle();
   }
 
   Finder _getPriceFinder(String price) => find.byWidgetPredicate(

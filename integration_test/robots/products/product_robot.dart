@@ -12,7 +12,9 @@ class ProductRobot extends CommonRobot {
   final bundleCard = find.byKey(WidgetKeys.materialListBundleCard);
   final nameCart = find.byKey(WidgetKeys.nameCart);
   final priceComponent = find.byKey(WidgetKeys.priceComponent);
-  final labelFilterFavorites = find.byKey(WidgetKeys.favoritesChoiceChip);
+  final favoritesChoiceChip = find.byKey(WidgetKeys.favoritesChoiceChip);
+  final covidChoiceChip = find.byKey(WidgetKeys.covidChoiceChip);
+
   final searchProductField = find.byKey(WidgetKeys.searchProductField);
 
   void verifyPageVisible() {
@@ -22,6 +24,8 @@ class ProductRobot extends CommonRobot {
   void verifyMaterial() => expect(materialCard, findsAtLeastNWidgets(1));
 
   void verifyBundle() => expect(bundleCard, findsAtLeastNWidgets(1));
+
+  void verifyCovid() => expect(materialCard, findsAtLeastNWidgets(1));
 
   void verifyOnOfferLabel() {
     final cardCount = materialCard.evaluate().length;
@@ -38,8 +42,12 @@ class ProductRobot extends CommonRobot {
     expect(cartButton, findsOneWidget);
   }
 
-  void verifyLabelFilterFavoritesVisible() {
-    expect(labelFilterFavorites, findsOneWidget);
+  void verifyFilterFavoritesChip() {
+    expect(favoritesChoiceChip, findsOneWidget);
+  }
+
+  void verifyFilterCovidChip() {
+    expect(covidChoiceChip, findsOneWidget);
   }
 
   Future<void> openFilterProductScreen() async {
@@ -119,9 +127,30 @@ class ProductRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> filterFavoritesInProductsScreen() async {
-    await tester.tap(labelFilterFavorites);
+  Future<void> tapFirstCovid() async {
+    await tester.tap(materialCard.first);
     await tester.pumpAndSettle();
+  }
+
+  Future<void> filterFavoritesInProductsScreen() async {
+    await tester.tap(favoritesChoiceChip);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapCovidChipInProductsScreen() async {
+    await tester.tap(covidChoiceChip);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyOnCovidChip() {
+    final cardCount = materialCard.evaluate().length;
+    expect(
+      find.descendant(
+        of: materialCard,
+        matching: find.byKey(WidgetKeys.covidLabel),
+      ),
+      findsNWidgets(cardCount),
+    );
   }
 
   Future<void> setProductFavoriteStatus(int index, bool isFavorite) async {

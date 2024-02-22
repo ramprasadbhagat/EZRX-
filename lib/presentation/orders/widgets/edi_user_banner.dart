@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +15,7 @@ class EdiUserBanner extends StatelessWidget {
       builder: (context, state) {
         return state.customerCodeInfo.status.isEDI
             ? Container(
-                key: const Key('ediUserBanner'),
+                key: WidgetKeys.ediUserBanner,
                 height: 40,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(

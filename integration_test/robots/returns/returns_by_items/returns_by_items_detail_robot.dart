@@ -5,12 +5,11 @@ import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class ReturnsByItemsDetailRobot {
-  final WidgetTester tester;
+import '../../common/common_robot.dart';
 
-  ReturnsByItemsDetailRobot(this.tester);
+class ReturnsByItemsDetailRobot extends CommonRobot {
+  ReturnsByItemsDetailRobot(WidgetTester tester) : super(tester);
 
-  final scrollView = find.byKey(WidgetKeys.returnItemDetailScrollList);
   final copyButton = find.byKey(WidgetKeys.returnItemDetailCopyButton);
   final showDetailButton = find.byKey(WidgetKeys.returnDetailShowDetailButton);
   final showDetailButtonFoBonus =
@@ -97,18 +96,14 @@ class ReturnsByItemsDetailRobot {
   }
 
   Future<void> dragToVerifyItemSectionVisible() async {
-    await tester.dragUntilVisible(
+    await scrollEnsureFinderVisible(
       find.byType(ReturnItemCard),
-      scrollView,
-      const Offset(0.0, -200),
     );
   }
 
   Future<void> dragToVerifyBonusSectionVisible() async {
-    await tester.dragUntilVisible(
+    await scrollEnsureFinderVisible(
       find.byKey(WidgetKeys.returnBonusItemCard),
-      scrollView,
-      const Offset(0.0, -200),
     );
   }
 
@@ -171,13 +166,15 @@ class ReturnsByItemsDetailRobot {
   }
 
   Future<void> tapShowDetailButton() async {
+    await scrollEnsureFinderVisible(showDetailButton);
     await tester.tap(showDetailButton);
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapShowDetailButtonForBonus() async {
+    await scrollEnsureFinderVisible(showDetailButtonFoBonus);
     await tester.tap(showDetailButtonFoBonus);
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   void verifyMaterialPrincipalCode(String code) {

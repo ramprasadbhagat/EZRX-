@@ -73,7 +73,7 @@ class ReturnRequestSummaryByItemDetails extends StatelessWidget {
                     ),
                   )
                 : ListView(
-                    key: WidgetKeys.returnItemDetailScrollList,
+                    key: WidgetKeys.scrollList,
                     children: [
                       ReturnSummaryDetailsSection(
                         requestInformation: state.requestInformation,

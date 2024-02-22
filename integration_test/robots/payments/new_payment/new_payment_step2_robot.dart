@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,8 @@ class NewPaymentStep2Robot {
   void verifyNoItemFound() {
     expect(creditPaymentItem, findsNothing);
   }
+
+  bool get noRecordFound => find.byType(NoRecordFound).evaluate().isNotEmpty;
 
   void verifyAtLeastOneItemFound() {
     expect(creditPaymentItem, findsAtLeastNWidgets(1));

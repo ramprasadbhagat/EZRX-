@@ -76,6 +76,7 @@ class PaymentSummaryDetailsPage extends StatelessWidget {
         body: AnnouncementBanner(
           currentPath: context.router.currentPath,
           child: ListView(
+            key: WidgetKeys.scrollList,
             children: const [
               _PaymentDetailsSection(),
               _PaymentSummarySection(),

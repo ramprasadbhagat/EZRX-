@@ -93,7 +93,13 @@ void main() {
 
     //change status
     await paymentSummaryRobot.tapFilterButton();
-    paymentSummaryFilterRobot.verifyDefaultFilterApplied();
+    paymentSummaryFilterRobot.verifyDefaultFilterApplied([
+      'In Progress',
+      'Failed',
+      'Processed',
+      'Successful',
+      'Pending',
+    ]);
     await paymentSummaryFilterRobot.tapStatusCheckbox(statusFilter);
     paymentSummaryFilterRobot.verifyStatusFilterValue(statusFilter);
     await paymentSummaryFilterRobot.tapApplyButton();

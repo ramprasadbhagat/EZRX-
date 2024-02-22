@@ -24,6 +24,7 @@ class CreditItemsSection extends StatelessWidget {
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return ListView.builder(
+      key: WidgetKeys.scrollList,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: creditItems.length,

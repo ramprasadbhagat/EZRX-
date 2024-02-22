@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'enum.dart';
+import 'extension.dart';
 
 class CommonRobot {
   final WidgetTester tester;
@@ -43,7 +44,7 @@ class CommonRobot {
     final isInputMode = dateRangeFields.evaluate().length == 2;
     if (!isInputMode) {
       await tester.tap(editWidget);
-      await tester.pump();
+      await tester.pumpAndSettle();
     }
 
     await tester.enterText(dateRangeFields.first, fromDateString);
@@ -54,7 +55,7 @@ class CommonRobot {
       matching: find.byType(TextButton),
     );
     await tester.tap(buttons.last);
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   Future<void> cancelDateRangePicker() async {
@@ -99,6 +100,10 @@ class CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  //============================================================
+  //  Snackbar
+  //============================================================
+
   Future<void> dismissSnackbar({bool dismissAll = false}) async {
     final dismissButton = find.byKey(WidgetKeys.snackBarDismissButton);
     if (dismissAll) {
@@ -113,6 +118,22 @@ class CommonRobot {
       }
     }
   }
+
+  Future<void> verifySnackbarVisible() async {
+    expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> verifyCustomSnackBar({required String message}) =>
+      tester.pumpUntilVisible(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget.key == WidgetKeys.customSnackBarMessage &&
+              widget is Text &&
+              widget.data == message,
+        ),
+        maxIteration: 60,
+      );
 
   //============================================================
   //  Customer code selector
@@ -133,6 +154,7 @@ class CommonRobot {
                 .title as Text)
             .data ==
         shipToCode) {
+      await closeAnnouncementAlertDialog();
       return;
     } else {
       await tester.tap(customerCodeSelector);
@@ -149,6 +171,7 @@ class CommonRobot {
         await tester.tap(changeAddressButton);
         await tester.pumpAndSettle();
       }
+      await closeAnnouncementAlertDialog();
     }
   }
 
@@ -210,11 +233,6 @@ class CommonRobot {
     expect(homeTabBar, findsOneWidget);
   }
 
-  Future<void> verifySnackbarVisible() async {
-    expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
-    await tester.pumpAndSettle();
-  }
-
   Future<void> tapToBackIcon() async {
     final backButton = find.byKey(WidgetKeys.backButton).last;
     await tester.tap(backButton);
@@ -235,33 +253,6 @@ class CommonRobot {
       find.descendant(of: cartButton, matching: find.text(qty.toString())),
       findsOneWidget,
     );
-  }
-
-  Future<void> verifyCustomSnackBar({
-    required String message,
-  }) async {
-    // Maximum number of attempts (60 seconds with 1-second intervals)
-    const maxAttempts = 60;
-
-    for (var count = 0; count < maxAttempts; count++) {
-      // Find the custom SnackBar
-      final customSnackBarFinder = find.byKey(WidgetKeys.customSnackBarMessage);
-      // Check if the SnackBar is present
-      if (customSnackBarFinder.evaluate().isNotEmpty) {
-        expect(
-          find.byWidgetPredicate(
-            (widget) =>
-                widget.key == WidgetKeys.customSnackBarMessage &&
-                widget is Text &&
-                widget.data == message,
-          ),
-          findsWidgets,
-        );
-        return;
-      }
-      await tester.pump(const Duration(seconds: 1));
-    }
-    fail('Custom SnackBar not found after $maxAttempts attempts.');
   }
 
   Future<void> tapToBackScreen() async {

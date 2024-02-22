@@ -1,9 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../common/extension.dart';
 
 class NewPaymentStep1Robot {
   final WidgetTester tester;
@@ -163,21 +164,18 @@ class NewPaymentStep1Robot {
   }
 
   void verifyDefaultFilter() {
+    final currentTime = DateTime.now();
     expect(
-      find.text(
-        DateTimeStringValue(DateTime.now().toIso8601String()).dateString,
-      ),
+      find.text(currentTime.displayDate),
       findsOneWidget,
     );
     expect(
       find.text(
-        DateTimeStringValue(
-          DateTime(
-            DateTime.now().year,
-            DateTime.now().month,
-            DateTime.now().day - 29,
-          ).toIso8601String(),
-        ).dateString,
+        DateTime(
+          currentTime.year,
+          currentTime.month,
+          currentTime.day - 29,
+        ).displayDate,
       ),
       findsOneWidget,
     );

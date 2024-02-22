@@ -352,6 +352,7 @@ void main() {
       returnsRootRobot.verifyViewByItemsPageVisible();
       returnsByItemsRobot.verifyReturnItemsVisible();
       await commonRobot.searchWithKeyboardAction(returnIdWithBonus);
+      returnsByItemsRobot.verifyReturnsWithIdVisible(returnIdWithBonus);
       returnsByItemsRobot.verifyReturnItemWithBonusVisible();
       await returnsByItemsRobot.tapFirstReturn();
       returnsByItemsDetailRobot.verifyDeliveryToVisible(shipToCode);
@@ -475,8 +476,8 @@ void main() {
         toAmount: toAmount,
       );
       returnsByItemsFilterRobot.verifyDateRangeFilterApplied(
-        fromDate: fromDate,
-        toDate: toDate,
+        fromDate: fromDate.displayDate,
+        toDate: toDate.displayDate,
       );
       returnsByItemsFilterRobot.verifyStatusFilterValue(returnStatus, true);
       await returnsByItemsFilterRobot.tapCloseIcon();
@@ -708,8 +709,8 @@ void main() {
       );
       await returnsByRequestRobot.tapFilterButton();
       returnsByRequestFilterRobot.verifyDateRangeFilterApplied(
-        fromDate: fromDate,
-        toDate: toDate,
+        fromDate: fromDate.displayDate,
+        toDate: toDate.displayDate,
       );
     });
 
@@ -803,8 +804,8 @@ void main() {
       returnsByRequestRobot.verifyFilterApplied(3);
       await returnsByRequestRobot.tapFilterButton();
       returnsByRequestFilterRobot.verifyDateRangeFilterApplied(
-        fromDate: fromDate,
-        toDate: toDate,
+        fromDate: fromDate.displayDate,
+        toDate: toDate.displayDate,
       );
       returnsByRequestFilterRobot.verifyAmountRangeFilterApplied(
         fromAmount: fromAmount,

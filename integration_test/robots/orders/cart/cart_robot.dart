@@ -200,6 +200,11 @@ class CartRobot {
     expect(material, findsOneWidget);
   }
 
+  Future<void> verifyCovidMaterial(String materialNumber) async {
+    await verifyMaterial(materialNumber);
+    expect(find.byKey(WidgetKeys.covidLabel), findsOneWidget);
+  }
+
   void verifyMaterialQty(String materialNumber, int qty) {
     expect(
       find.descendant(

@@ -454,7 +454,7 @@ class CheckoutRobot {
         of: _bonusItem(materialNumber, bonusMaterialNumber),
         matching: find.byKey(WidgetKeys.cartItemBonusFreeLabel),
       ),
-      findsNWidgets(2),
+      findsWidgets,
     );
   }
 

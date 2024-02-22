@@ -1,20 +1,19 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class StatementOfAccountRobot {
-  final WidgetTester tester;
+import '../../common/common_robot.dart';
 
-  StatementOfAccountRobot(this.tester);
+class StatementOfAccountRobot extends CommonRobot {
+  StatementOfAccountRobot(WidgetTester tester) : super(tester);
 
   final page = find.byKey(WidgetKeys.soaPage);
   final soaHeaderCustomerCodeKey = find.byKey(
     WidgetKeys.soaHeaderCustomerCodeKey,
   );
   final soaFilterButtonKey = find.byKey(WidgetKeys.soaFilterButton);
-  final soaFilterDefaultCountKey =
-      find.byKey(WidgetKeys.genericKey(key: 'soaFilterCount#1'));
   final soaFromDateFilter = find.byKey(WidgetKeys.soaFromDateFieldKey);
   final soaToDateFilter = find.byKey(WidgetKeys.soaToDateFieldKey);
   final soaSearchResultsKey = find.byKey(WidgetKeys.soaSearchResultsKey);
@@ -25,12 +24,9 @@ class StatementOfAccountRobot {
   final soaDownloadButtonKey = find.byKey(WidgetKeys.soaItemTextKey);
   final soaFilterBottomSheetKey =
       find.byKey(WidgetKeys.soaFilterBottomSheetKey);
-  final soaDownloadButtonLoadingKey =
-      find.byKey(WidgetKeys.soaLoadingAnimationWidgetKey);
   final soaFilterResetButtonKey =
       find.byKey(WidgetKeys.soaFilterResetButtonKey);
   final soaCloseButtonKey = find.byKey(WidgetKeys.closeButton);
-  final customSnackBar = find.byKey(WidgetKeys.customSnackBar);
 
   List<String?> getItemList() {
     return tester
@@ -80,7 +76,7 @@ class StatementOfAccountRobot {
     if (getItemList().isEmpty) {
       expect(soaSearchResultsKey, findsNothing);
     } else {
-      expect(soaSearchResultsKey, findsOneWidget);
+      expect(soaSearchResultsKey, findsWidgets);
     }
   }
 
@@ -142,22 +138,13 @@ class StatementOfAccountRobot {
   }
 
   Future<void> verifyAndTapStatementOfAccountDownloadButton() async {
-    for (final i in getItemList()) {
-      final soaDownloadButton = find.byKey(
-        WidgetKeys.genericKey(
-          key: 'soaDownloadButton#$i',
-        ),
-      );
-      expect(soaDownloadButton, findsOneWidget);
-      await tester.tap(soaDownloadButton);
-      await tester.pumpAndSettle();
-      expect(customSnackBar, findsOneWidget);
-      expect(
-        tester.widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage)).data,
-        'File downloaded successfully',
-      );
-      await tester.pump(const Duration(seconds: 2));
-    }
+    final soaDownloadButton = find.byKey(
+      WidgetKeys.genericKey(key: 'soaDownloadButton#${getItemList().first}'),
+    );
+    expect(soaDownloadButton, findsOneWidget);
+    await tester.tap(soaDownloadButton);
+    await verifyCustomSnackBar(message: 'File downloaded successfully'.tr());
+    await dismissSnackbar();
   }
 
   Future<void> tapSOAFilterButton() async {

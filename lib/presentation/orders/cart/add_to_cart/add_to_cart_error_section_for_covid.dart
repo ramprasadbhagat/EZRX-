@@ -86,6 +86,7 @@ class AddToCartErrorSection extends StatelessWidget {
                 children: [
                   Expanded(
                     child: OutlinedButton(
+                      key: WidgetKeys.cancelCovidMaterialAddToCart,
                       child: Text(
                         context.tr('Cancel'),
                         style: Theme.of(context)

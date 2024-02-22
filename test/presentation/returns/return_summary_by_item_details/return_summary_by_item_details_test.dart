@@ -238,8 +238,9 @@ void main() {
         expect(showDetailButtonFinder, findsOneWidget);
         await tester.tap(showDetailButtonFinder);
         await tester.pumpAndSettle();
+
         await tester.fling(
-          find.byKey(WidgetKeys.returnItemDetailScrollList),
+          find.byType(ReturnItemCard),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -282,7 +283,7 @@ void main() {
           await tester.tap(showDetailButtonFinder);
           await tester.pumpAndSettle();
           await tester.fling(
-            find.byKey(WidgetKeys.returnItemDetailScrollList),
+            find.byKey(WidgetKeys.scrollList),
             const Offset(0.0, -1000.0),
             1000.0,
           );
@@ -332,7 +333,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           await tester.fling(
-            find.byKey(WidgetKeys.returnItemDetailScrollList),
+            find.byType(ReturnItemCard),
             const Offset(0.0, -1000.0),
             1000.0,
           );
@@ -606,8 +607,7 @@ void main() {
 
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
-          final scrollListFinder =
-              find.byKey(WidgetKeys.returnItemDetailScrollList);
+          final scrollListFinder = find.byKey(WidgetKeys.scrollList);
           expect(
             scrollListFinder,
             findsOneWidget,
@@ -710,7 +710,7 @@ void main() {
               find.byKey(WidgetKeys.returnDetailShowDetailButton);
           await tester.dragUntilVisible(
             showButtonFinder,
-            find.byKey(WidgetKeys.returnItemDetailScrollList),
+            find.byKey(WidgetKeys.scrollList),
             const Offset(0, 1000),
           );
           await tester.pumpAndSettle();
@@ -758,8 +758,7 @@ void main() {
           );
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
-          final scrollListFinder =
-              find.byKey(WidgetKeys.returnItemDetailScrollList);
+          final scrollListFinder = find.byKey(WidgetKeys.scrollList);
           expect(
             scrollListFinder,
             findsOneWidget,
@@ -932,7 +931,7 @@ void main() {
       });
 
       group('=> Attachment section', () {
-        final scrollList = find.byKey(WidgetKeys.returnItemDetailScrollList);
+        final scrollList = find.byKey(WidgetKeys.scrollList);
         const scrollOffset = Offset(0, -300);
         const attachmentTestIndex = 0;
 

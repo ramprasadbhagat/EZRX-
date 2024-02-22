@@ -28,8 +28,8 @@ class PaymentSummaryFilterRobot {
     'Cancelled',
   ];
 
-  void verifyDefaultFilterApplied() {
-    verifyRadioListTileFilter();
+  void verifyDefaultFilterApplied(List<String> statuses) {
+    verifyRadioListTileFilter(statuses);
     verifyDateRangeFilterApplied(
       fromDate: '',
       toDate: '',
@@ -52,8 +52,8 @@ class PaymentSummaryFilterRobot {
     );
   }
 
-  void verifyRadioListTileFilter() {
-    for (final option in statusFilterOptions) {
+  void verifyRadioListTileFilter(List<String> statuses) {
+    for (final option in statuses) {
       expect(
         find.byKey(WidgetKeys.paymentSummaryFilterStatus(option)),
         findsOneWidget,
@@ -87,20 +87,16 @@ class PaymentSummaryFilterRobot {
     required String toAmount,
   }) {
     expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is TextFormField &&
-            widget.key == WidgetKeys.amountValueFrom &&
-            widget.initialValue == fromAmount,
+      find.descendant(
+        of: find.byKey(WidgetKeys.amountValueFrom),
+        matching: find.text(fromAmount),
       ),
       findsOneWidget,
     );
     expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is TextFormField &&
-            widget.key == WidgetKeys.amountValueTo &&
-            widget.initialValue == toAmount,
+      find.descendant(
+        of: find.byKey(WidgetKeys.amountValueTo),
+        matching: find.text(fromAmount),
       ),
       findsOneWidget,
     );

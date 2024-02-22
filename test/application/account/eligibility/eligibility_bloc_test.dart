@@ -868,19 +868,6 @@ void main() {
   );
 
   test(
-    'isOrderSummaryPPEDisclaimerEnable',
-    () {
-      final eligibilityState = EligibilityState.initial().copyWith(
-        salesOrganisation: SalesOrganisation.empty().copyWith(
-          salesOrg: SalesOrg('2601'),
-        ),
-      );
-
-      expect(eligibilityState.isOrderSummaryPPEDisclaimerEnable, true);
-    },
-  );
-
-  test(
     'isCovidMaterialEnable for sg market',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(

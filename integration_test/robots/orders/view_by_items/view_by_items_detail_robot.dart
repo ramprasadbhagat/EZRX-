@@ -198,4 +198,8 @@ class ViewByItemsDetailRobot extends CommonRobot {
         find.descendant(of: _verifyingItem, matching: freePrice),
         findsOneWidget,
       );
+
+  void verifyCovidMaterialLabel() {
+    expect(find.byKey(WidgetKeys.covidLabel), findsWidgets);
+  }
 }

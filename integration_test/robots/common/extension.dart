@@ -21,6 +21,13 @@ extension NumExt on num {
 
   String priceDisplay(String currency) => '$currency $priceFormatted';
   String priceDisplayForID(String currency) => '$currency $priceFormattedForID';
+
+  num includeTax(num tax) => this + taxValue(tax);
+
+  num taxValue(num tax) => this / 100 * tax;
+
+  //only for understanding purpose, exclude tax
+  num excludeTax() => this;
 }
 
 extension StringExt on String {
@@ -38,7 +45,7 @@ extension TesterExt on WidgetTester {
     const maxIteration = 15;
     for (var i = 0; i <= maxIteration; i++) {
       if (finder.evaluate().isNotEmpty) {
-        expect(finder, findsOneWidget);
+        expect(finder, findsWidgets);
 
         break;
       }

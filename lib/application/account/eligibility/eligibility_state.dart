@@ -149,10 +149,6 @@ class EligibilityState with _$EligibilityState {
       user.role.type.isSalesRepRole &&
       user.hasBonusOverride;
 
-  bool get isOrderSummaryPPEDisclaimerEnable {
-    return salesOrganisation.salesOrg.isSg && !user.role.type.isSalesRepRole;
-  }
-
   bool get isBillToInfo =>
       customerCodeInfo.hasBillToInfo && salesOrgConfigs.enableBillTo;
 

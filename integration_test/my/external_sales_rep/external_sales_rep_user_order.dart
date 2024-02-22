@@ -630,7 +630,7 @@ void main() {
       await pumpAppWithLoginOnBehalf(tester);
 
       //tap on bundle
-      homeRobot.findBundles();
+      await homeRobot.findBundles();
       await homeRobot.tapBundlesIcon();
 
       //navigate to material page
@@ -714,7 +714,7 @@ void main() {
       await pumpAppWithLoginOnBehalf(tester);
 
       // Move to bundle
-      homeRobot.findBundles();
+      await homeRobot.findBundles();
 
       //verify bundles details
       homeRobot.verifyDisplayBundlesTag();
@@ -735,7 +735,7 @@ void main() {
       await pumpAppWithLoginOnBehalf(tester);
 
       //move to products on offer
-      homeRobot.findBundles();
+      await homeRobot.findBundles();
 
       //tap on first product
       await homeRobot.tapOnFirstBundle();
@@ -819,7 +819,7 @@ void main() {
       productRobot.verifyPageVisible();
       productRobot.verifyMaterial();
       productRobot.verifyCartButtonVisible();
-      productRobot.verifyLabelFilterFavoritesVisible();
+      productRobot.verifyFilterFavoritesChip();
       productRobot.verifyCustomerCodeSelector();
       productRobot.verifyAppTabBarVisible();
       productRobot.verifySearchBarVisible();

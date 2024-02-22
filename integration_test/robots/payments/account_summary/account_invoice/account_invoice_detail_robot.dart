@@ -110,6 +110,16 @@ class AccountInvoiceDetailRobot {
     );
   }
 
+  void verifyTaxValue(String price) {
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.invoiceDetailTax),
+        matching: find.text(price, findRichText: true),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyGrandTotal(String price) {
     expect(
       find.descendant(
@@ -153,11 +163,15 @@ class AccountInvoiceDetailRobot {
     expect(tester.widget<Text>(label).data, contains(qty.toString()));
   }
 
-  void verifyMaterialUnitPrice(String price) {
+  void verifyMaterialUnitPrice(String price, {bool isFree = false}) {
     final label = find.descendant(
       of: _verifyingMaterial,
       matching: find.byKey(WidgetKeys.invoiceDetailMaterialUnitPrice),
     );
+    if (isFree) {
+      expect(label, findsNothing);
+      return;
+    }
     expect(
       find.descendant(
         of: label,
@@ -167,7 +181,7 @@ class AccountInvoiceDetailRobot {
     );
   }
 
-  void verifyMaterialTotalPrice(String price) {
+  void verifyMaterialTotalPrice(String price, {bool isFree = false}) {
     final label = find.descendant(
       of: _verifyingMaterial,
       matching: find.byKey(WidgetKeys.cartItemProductTotalPrice),
@@ -175,7 +189,7 @@ class AccountInvoiceDetailRobot {
     expect(
       find.descendant(
         of: label,
-        matching: find.text(price, findRichText: true),
+        matching: find.text(isFree ? 'FREE'.tr() : price, findRichText: true),
       ),
       findsOneWidget,
     );

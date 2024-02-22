@@ -259,6 +259,7 @@ class _BundleSheetFooter extends StatelessWidget {
                 children: [
                   Expanded(
                     child: OutlinedButton(
+                      key: WidgetKeys.cancelBundleMaterialAddToCart,
                       onPressed: () {
                         context.router.pop();
                       },

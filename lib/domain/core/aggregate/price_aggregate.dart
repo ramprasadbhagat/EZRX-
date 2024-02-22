@@ -316,7 +316,7 @@ class PriceAggregate with _$PriceAggregate {
 
   String get finalPriceTotalForAllMaterial {
     return materialInfo.isFOCMaterial
-        ? 'Price not available'
+        ? 'Price Not Available'
         : display(PriceType.finalPriceTotal);
   }
 

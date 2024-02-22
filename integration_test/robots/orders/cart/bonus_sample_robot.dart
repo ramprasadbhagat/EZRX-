@@ -52,7 +52,7 @@ class BonusSampleRobot extends CommonRobot {
       find.descendant(
         of: find.byKey(WidgetKeys.customSnackBar),
         matching:
-            find.text('In cart quantity should not be greater than 999'.tr()),
+            find.text('In cart quantity should not be more than 99999.'.tr()),
       ),
       findsOneWidget,
     );

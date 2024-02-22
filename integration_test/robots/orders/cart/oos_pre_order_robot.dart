@@ -12,6 +12,8 @@ class OOSPreOrderRobot {
   final continueButton = find.byKey(WidgetKeys.preOrderModalContinueButton);
   final bottomSheet = find.byKey(WidgetKeys.preOrderModel);
 
+  bool get isSheetVisible => bottomSheet.evaluate().isNotEmpty;
+
   void verifySheet({required bool isVisible}) {
     expect(bottomSheet, isVisible ? findsOneWidget : findsNothing);
   }

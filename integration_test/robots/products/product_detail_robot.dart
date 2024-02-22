@@ -173,6 +173,41 @@ class ProductDetailRobot extends CommonRobot {
     );
   }
 
+  void verifyBatchDisplayed({String value = '', bool isVisible = true}) {
+    if (!isVisible) {
+      expect(find.text('Batch'.tr()), findsNothing);
+      return;
+    }
+    expect(
+      find.byKey(
+        WidgetKeys.balanceTextRow('Batch'.tr(), value),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyExpiryDateLabelDisplayed({
+    String value = '',
+    bool isVisible = true,
+  }) {
+    if (!isVisible) {
+      expect(find.text('Expiry'.tr()), findsNothing);
+      return;
+    }
+    expect(
+      find.byKey(
+        WidgetKeys.balanceTextRow('Expiry'.tr(), value),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.text(
+        'Expiry date displayed is for reference, actual product may vary'.tr(),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyCountryOfOriginLabelDisplayed(String value) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('Country of origin'.tr(), value)),
@@ -208,26 +243,18 @@ class ProductDetailRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> verifyMultipleImages() async {
-    await tester.pumpUntilVisible(
-      find.byKey(WidgetKeys.genericKey(key: 'selected1false')),
-    );
-    expect(
-      find.byKey(WidgetKeys.materialDetailsCarouselImage),
-      findsAtLeastNWidgets(2),
-    );
+  Future<bool> verifyMultipleImages() async {
+    await tester.pumpUntilVisible(_productImage(0, false));
+    final image = find.byKey(WidgetKeys.materialDetailsCarouselImage);
+
+    return image.evaluate().length >= 2;
   }
 
-  void verifyImageMaterialSelected(int index, bool selected) {
-    expect(
-      find.byKey(WidgetKeys.genericKey(key: 'selected$index$selected')),
-      findsOneWidget,
-    );
-  }
+  void verifyImageMaterialSelected(int index, bool selected) =>
+      _productImage(index, selected);
 
   Future<void> tapToImageMaterial(int index, bool selected) async {
-    await tester
-        .tap(find.byKey(WidgetKeys.genericKey(key: 'selected$index$selected')));
+    await tester.tap(_productImage(index, selected));
     await tester.pumpAndSettle();
   }
 
@@ -321,4 +348,7 @@ class ProductDetailRobot extends CommonRobot {
 
   void verifySuspendedBanner() =>
       expect(find.byKey(WidgetKeys.productDetailSuspended), findsOneWidget);
+
+  Finder _productImage(int index, bool isSelected) =>
+      find.byKey(WidgetKeys.genericKey(key: 'selected$index$isSelected'));
 }

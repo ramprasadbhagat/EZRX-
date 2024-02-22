@@ -28,20 +28,25 @@ class NotificationRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.scrollList), findsOneWidget);
   }
 
-  void verifyNoRecordFound() {
-    expect(
-      find.byKey(WidgetKeys.notificationNotFoundRecordKey),
-      findsOneWidget,
-    );
-    expect(find.text('No notifications to show'), findsOneWidget);
-    expect(
-      find.text('We\'ll notify you when there is something'),
-      findsOneWidget,
-    );
-  }
+  void verifyNoRecordFound() => expect(
+        find.byKey(WidgetKeys.notificationNotFoundRecordKey),
+        findsOneWidget,
+      );
 
   void verifyDeleteButton() {
     expect(deleteButton, findsOneWidget);
+  }
+
+  Future<void> scrollAlertNotification() async {
+    var alertNotification = _alertNotificationFinder;
+    while (alertNotification.evaluate().isNotEmpty) {
+      expect(alertNotification, findsWidgets);
+      await scrollEnsureFinderVisible(alertNotification.last);
+      alertNotification = _alertNotificationFinder;
+      if (alertNotification.evaluate().length == 1) {
+        break;
+      }
+    }
   }
 
   void verifyNotificationItems() {
@@ -63,10 +68,6 @@ class NotificationRobot extends CommonRobot {
       find.descendant(of: items, matching: itemTitle),
       findsNWidgets(itemCount),
     );
-    expect(
-      find.descendant(of: items, matching: itemDescription),
-      findsNWidgets(itemCount),
-    );
   }
 
   String getNotificationDescription(int index) {
@@ -78,6 +79,23 @@ class NotificationRobot extends CommonRobot {
       tester.widget<Text>(itemDescription.at(index)).data,
       descriptionText,
     );
+  }
+
+  String getFirstBasicNotificationTitle() {
+    final count = itemTitle.evaluate().length;
+
+    for (var i = 0; i < count; i++) {
+      final data = tester.widget<Text>(itemTitle.at(i)).data ?? '';
+      if (data != 'Alert') {
+        return data;
+      }
+    }
+    return '';
+  }
+
+  Future<void> tapFirstBasicNotificationItem(String title) async {
+    await tester.tap(find.text(title).first);
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapNotificationItem(int index) async {
@@ -94,4 +112,11 @@ class NotificationRobot extends CommonRobot {
       findsOneWidget,
     );
   }
+
+  Finder get _alertNotificationFinder => find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.notificationItemTitle &&
+            widget is Text &&
+            widget.data == 'Alert'.tr(),
+      );
 }

@@ -79,6 +79,7 @@ class _FilterValueListState extends State<FilterValueList> {
             builder: (context, state) {
               return context.read<EligibilityBloc>().state.canOrderCovidMaterial
                   ? ChoiceChip(
+                      key: WidgetKeys.covidChoiceChip,
                       label: Text(
                         'Covid-19'.tr(),
                       ),

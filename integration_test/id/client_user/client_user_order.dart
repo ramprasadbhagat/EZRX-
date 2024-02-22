@@ -162,7 +162,7 @@ void main() {
       productRobot.verifyPageVisible();
       productRobot.verifyCartButtonVisible();
       productRobot.verifyCartButtonVisible();
-      productRobot.verifyLabelFilterFavoritesVisible();
+      productRobot.verifyFilterFavoritesChip();
       productRobot.verifyAppTabBarVisible();
       productRobot.verifySearchBarVisible();
       await productRobot.openFilterProductScreen();

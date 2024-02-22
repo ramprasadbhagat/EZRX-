@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,11 +17,10 @@ abstract class ReturnsFilterRobot {
   final applyButton = find.byKey(WidgetKeys.filterApplyButton);
 
   void verifyDefaultFilterApplied() {
-    final currentTime = DateTime.now();
     verifyNoStatusFilterApplied();
     verifyDateRangeFilterApplied(
-      fromDate: currentTime.subtract(const Duration(days: 29)),
-      toDate: currentTime,
+      fromDate: '',
+      toDate: '',
     );
     verifyAmountRangeFilterApplied(
       fromAmount: '',
@@ -81,25 +79,15 @@ abstract class ReturnsFilterRobot {
   }
 
   void verifyDateRangeFilterApplied({
-    required DateTime fromDate,
-    required DateTime toDate,
+    required String fromDate,
+    required String toDate,
   }) {
     expect(
-      find.descendant(
-        of: fromDateFilter,
-        matching: find.text(
-          DateTimeStringValue(fromDate.toIso8601String()).dateString,
-        ),
-      ),
+      find.descendant(of: fromDateFilter, matching: find.text(fromDate)),
       findsOneWidget,
     );
     expect(
-      find.descendant(
-        of: toDateFilter,
-        matching: find.text(
-          DateTimeStringValue(toDate.toIso8601String()).dateString,
-        ),
-      ),
+      find.descendant(of: toDateFilter, matching: find.text(toDate)),
       findsOneWidget,
     );
   }

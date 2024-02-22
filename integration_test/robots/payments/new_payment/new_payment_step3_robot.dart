@@ -19,9 +19,7 @@ class NewPaymentStep3Robot {
   final createPaymentAdviseNote =
       find.byKey(WidgetKeys.createPaymentAdviseNote);
 
-  void verifyStep3InitialField() {
-    final defaultPaymentMethod = 'Payment Gateway'.tr();
-
+  void verifyStep3InitialField(String defaultPaymentMethod) {
     verifyWarningMessage();
     expect(
       find.textContaining('Select payment method'.tr()),

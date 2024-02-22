@@ -274,4 +274,14 @@ class ViewByOrdersDetailRobot extends CommonRobot {
     await tester.tap(buyAgainButton);
     await tester.pumpUntilVisible(find.byKey(WidgetKeys.cartPage));
   }
+
+  void verifyCovidMaterialLabel() {
+    expect(
+      find.descendant(
+        of: _verifyingItem,
+        matching: find.byKey(WidgetKeys.covidLabel),
+      ),
+      findsOneWidget,
+    );
+  }
 }

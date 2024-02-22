@@ -20,6 +20,11 @@ class BundleDetailRobot extends CommonRobot {
     expect(bundlesDetail, findsOneWidget);
   }
 
+  Future<void> tapCancelBundleMaterialAddToCartButton() async {
+    await tester.tap(find.byKey(WidgetKeys.cancelBundleMaterialAddToCart));
+    await tester.pumpAndSettle();
+  }
+
   Future<void> tapAddToCartButton() async {
     await tester.tap(addToCartButton);
     await tester.pumpAndSettle();

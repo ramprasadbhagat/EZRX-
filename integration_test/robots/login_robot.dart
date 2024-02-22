@@ -35,6 +35,7 @@ class LoginRobot extends CommonRobot {
     //login
     await login(username, password);
     if (skipIntroButton.evaluate().isNotEmpty) await tapSkipIntroButton();
+    await tester.pumpAndSettle(const Duration(seconds: 2));
   }
 
   Future<void> login(String username, String password) async {
@@ -134,6 +135,8 @@ class LoginRobot extends CommonRobot {
     final dropdownItemToSelect = find.text(market).last;
     await scrollEnsureFinderVisible(dropdownItemToSelect);
     await tester.tap(dropdownItemToSelect);
+    await tester.pump(const Duration(seconds: 2));
+    await tester.pump();
     await tester.pumpAndSettle();
   }
 

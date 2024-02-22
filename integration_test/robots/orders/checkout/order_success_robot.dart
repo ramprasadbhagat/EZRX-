@@ -207,6 +207,16 @@ class OrderSuccessRobot extends CommonRobot {
     );
   }
 
+  void verifyCovidMaterialLabel() {
+    expect(
+      find.descendant(
+        of: _verifyingItem,
+        matching: find.byKey(WidgetKeys.covidLabel),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyMaterialBonusTag() {
     expect(
       find.descendant(
