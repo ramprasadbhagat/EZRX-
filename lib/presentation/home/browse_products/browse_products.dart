@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
@@ -29,13 +28,13 @@ class BrowseProduct extends StatelessWidget {
     return BlocProvider<MaterialListBloc>(
       create: (context) => locator<MaterialListBloc>()
         ..add(
-          MaterialListEvent.fetch(
+          MaterialListEvent.initialized(
             salesOrganisation: eligibilityState.salesOrganisation,
             configs: eligibilityState.salesOrgConfigs,
             customerCodeInfo: eligibilityState.customerCodeInfo,
             shipToInfo: eligibilityState.shipToInfo,
             selectedMaterialFilter: MaterialFilter.empty(),
-            user: context.read<UserBloc>().state.user,
+            user: eligibilityState.user,
           ),
         ),
       child: MultiBlocListener(
@@ -45,13 +44,13 @@ class BrowseProduct extends StatelessWidget {
                 previous.isLoading != current.isLoading && !current.isLoading,
             listener: (context, state) {
               context.read<MaterialListBloc>().add(
-                    MaterialListEvent.fetch(
+                    MaterialListEvent.initialized(
                       salesOrganisation: state.salesOrganisation,
                       configs: state.salesOrgConfigs,
                       customerCodeInfo: state.customerCodeInfo,
                       shipToInfo: state.shipToInfo,
                       selectedMaterialFilter: MaterialFilter.empty(),
-                      user: context.read<UserBloc>().state.user,
+                      user: state.user,
                     ),
                   );
             },
@@ -118,14 +117,7 @@ class BrowseProduct extends StatelessWidget {
     if (context.read<MaterialListBloc>().state.isFilterSelected) {
       context.read<MaterialListBloc>().add(
             MaterialListEvent.fetch(
-              salesOrganisation:
-                  context.read<EligibilityBloc>().state.salesOrganisation,
-              configs: context.read<EligibilityBloc>().state.salesOrgConfigs,
-              customerCodeInfo:
-                  context.read<EligibilityBloc>().state.customerCodeInfo,
-              shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
               selectedMaterialFilter: MaterialFilter.empty(),
-              user: context.read<UserBloc>().state.user,
             ),
           );
     }

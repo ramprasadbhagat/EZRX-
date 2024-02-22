@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -89,8 +88,19 @@ class ProductsTab extends StatelessWidget {
                               header: const _TotalMaterialCount(),
                               isLoading: state.isFetching,
                               items: state.materialList,
-                              onRefresh: () => _onRefresh(context),
-                              onLoadingMore: () => _onLoadingMore(context),
+                              onRefresh: () =>
+                                  context.read<MaterialListBloc>().add(
+                                        MaterialListEvent.fetch(
+                                          selectedMaterialFilter: context
+                                              .read<MaterialFilterBloc>()
+                                              .state
+                                              .materialFilter,
+                                        ),
+                                      ),
+                              onLoadingMore: () =>
+                                  context.read<MaterialListBloc>().add(
+                                        const MaterialListEvent.loadMore(),
+                                      ),
                               mainAxisSpacing: 0,
                               crossAxisSpacing: 0,
                               itemBuilder: (
@@ -106,9 +116,7 @@ class ProductsTab extends StatelessWidget {
                                           onFavouriteTap: () =>
                                               onFavouriteTap(context, item),
                                         )
-                                      : _BundleGridItem(
-                                          materialInfo: item,
-                                        ),
+                                      : _BundleGridItem(materialInfo: item),
                             ),
                           ),
                   ),
@@ -119,36 +127,6 @@ class ProductsTab extends StatelessWidget {
         );
       },
     );
-  }
-
-  void _onRefresh(BuildContext context) {
-    final eligibilityBloc = context.read<EligibilityBloc>();
-    context.read<MaterialListBloc>().add(
-          MaterialListEvent.fetch(
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            configs: eligibilityBloc.state.salesOrgConfigs,
-            customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
-            shipToInfo: eligibilityBloc.state.shipToInfo,
-            selectedMaterialFilter:
-                context.read<MaterialFilterBloc>().state.materialFilter,
-            user: context.read<UserBloc>().state.user,
-          ),
-        );
-  }
-
-  void _onLoadingMore(BuildContext context) {
-    final eligibilityBloc = context.read<EligibilityBloc>();
-    context.read<MaterialListBloc>().add(
-          MaterialListEvent.loadMore(
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            configs: eligibilityBloc.state.salesOrgConfigs,
-            customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
-            shipToInfo: eligibilityBloc.state.shipToInfo,
-            user: context.read<UserBloc>().state.user,
-          ),
-        );
   }
 
   void _productOnTap(BuildContext context, MaterialInfo materialInfo) {

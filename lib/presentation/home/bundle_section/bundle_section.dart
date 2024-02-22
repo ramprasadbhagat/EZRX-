@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -33,7 +32,7 @@ class BundleSection extends StatelessWidget {
     return BlocProvider<MaterialListBloc>(
       create: (context) => locator<MaterialListBloc>()
         ..add(
-          MaterialListEvent.fetch(
+          MaterialListEvent.initialized(
             salesOrganisation: eligibilityState.salesOrganisation,
             configs: eligibilityState.salesOrgConfigs,
             customerCodeInfo: eligibilityState.customerCodeInfo,
@@ -41,7 +40,7 @@ class BundleSection extends StatelessWidget {
             selectedMaterialFilter: MaterialFilter.empty().copyWith(
               bundleOffers: true,
             ),
-            user: context.read<UserBloc>().state.user,
+            user: eligibilityState.user,
           ),
         ),
       child: BlocListener<EligibilityBloc, EligibilityState>(
@@ -49,7 +48,7 @@ class BundleSection extends StatelessWidget {
             previous.isLoading != current.isLoading && !current.isLoading,
         listener: (context, state) {
           context.read<MaterialListBloc>().add(
-                MaterialListEvent.fetch(
+                MaterialListEvent.initialized(
                   salesOrganisation: state.salesOrganisation,
                   configs: state.salesOrgConfigs,
                   customerCodeInfo: state.customerCodeInfo,
@@ -57,7 +56,7 @@ class BundleSection extends StatelessWidget {
                   selectedMaterialFilter: MaterialFilter.empty().copyWith(
                     bundleOffers: true,
                   ),
-                  user: context.read<UserBloc>().state.user,
+                  user: state.user,
                 ),
               );
         },
@@ -110,16 +109,9 @@ class BundleSection extends StatelessWidget {
   void _navigateForMoreBundle(BuildContext context) {
     context.read<MaterialListBloc>().add(
           MaterialListEvent.fetch(
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            configs: context.read<EligibilityBloc>().state.salesOrgConfigs,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
-            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
             selectedMaterialFilter: MaterialFilter.empty().copyWith(
               bundleOffers: true,
             ),
-            user: context.read<UserBloc>().state.user,
           ),
         );
     context.navigateTo(const ProductsTabRoute());

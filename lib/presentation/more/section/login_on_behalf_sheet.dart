@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
-import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -45,9 +44,6 @@ class LoginOnBehalfSheet extends StatelessWidget {
             context
                 .read<EligibilityBloc>()
                 .add(const EligibilityEvent.initialized());
-            context
-                .read<MaterialListBloc>()
-                .add(const MaterialListEvent.initialized());
             context.read<UserBloc>().add(
                   const UserEvent.fetch(
                     isLoginOnBehalf: true,

@@ -141,9 +141,6 @@ void main() {
       verify(
         () => eligibilityBlocMock.add(const EligibilityEvent.initialized()),
       ).called(1);
-      verify(
-        () => materialListBlocMock.add(const MaterialListEvent.initialized()),
-      ).called(1);
     });
     testWidgets('Failure section', (tester) async {
       final expectedState = [
@@ -161,9 +158,6 @@ void main() {
       );
       verifyNever(
         () => eligibilityBlocMock.add(const EligibilityEvent.initialized()),
-      );
-      verifyNever(
-        () => materialListBlocMock.add(const MaterialListEvent.initialized()),
       );
     });
   });

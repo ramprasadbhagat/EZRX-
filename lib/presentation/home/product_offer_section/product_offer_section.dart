@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -40,7 +39,7 @@ class ProductsOnOffer extends StatelessWidget {
     return BlocProvider<MaterialListBloc>(
       create: (context) => locator<MaterialListBloc>()
         ..add(
-          MaterialListEvent.fetch(
+          MaterialListEvent.initialized(
             salesOrganisation: eligibilityState.salesOrganisation,
             configs: eligibilityState.salesOrgConfigs,
             customerCodeInfo: eligibilityState.customerCodeInfo,
@@ -58,7 +57,7 @@ class ProductsOnOffer extends StatelessWidget {
                 previous.isLoading != current.isLoading && !current.isLoading,
             listener: (context, state) {
               context.read<MaterialListBloc>().add(
-                    MaterialListEvent.fetch(
+                    MaterialListEvent.initialized(
                       salesOrganisation: state.salesOrganisation,
                       configs: state.salesOrgConfigs,
                       customerCodeInfo: state.customerCodeInfo,

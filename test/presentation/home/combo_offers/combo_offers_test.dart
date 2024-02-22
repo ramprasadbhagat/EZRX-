@@ -22,10 +22,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 
-import '../../../common_mock_data/customer_code_mock.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockAppRouter extends Mock implements AppRouter {}
@@ -188,14 +185,7 @@ void main() {
       (WidgetTester tester) async {
         when(() => autoRouterMock.navigate(any()))
             .thenAnswer((_) async => true);
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
-          ),
-        );
+
         when(() => materialListBlocMock.state).thenReturn(
           MaterialListState.initial().copyWith(
             materialList: materialList,
@@ -208,9 +198,6 @@ void main() {
             materialFilter: MaterialFilter.empty().copyWith(isFavourite: true),
           ),
         );
-        when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
-          user: fakeClientUser,
-        ),);
 
         await getWidget(tester);
         await tester.pump();
@@ -223,15 +210,10 @@ void main() {
         verify(
           () => materialListBlocMock.add(
             MaterialListEvent.fetch(
-              configs: fakeMYSalesOrgConfigs,
-              customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
                 isFavourite: true,
                 comboOffers: true,
               ),
-              shipToInfo: fakeShipToInfo,
-              user: fakeClientUser,
             ),
           ),
         ).called(1);

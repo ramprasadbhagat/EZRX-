@@ -26,9 +26,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
-import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -221,14 +219,7 @@ void main() {
       (WidgetTester tester) async {
         when(() => autoRouterMock.navigate(any()))
             .thenAnswer((_) async => true);
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrganisation,
-          ),
-        );
+
         when(() => materialListBlocMock.state).thenReturn(
           MaterialListState.initial().copyWith(
             materialList: materialList,
@@ -251,17 +242,12 @@ void main() {
         verify(
           () => materialListBlocMock.add(
             MaterialListEvent.fetch(
-              configs: fakeMYSalesOrgConfigs,
-              customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrganisation: fakeSalesOrganisation,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
                 bundleOffers: true,
               ),
-              shipToInfo: fakeShipToInfo,
-              user: fakeClientUser,
             ),
           ),
-        ).called(2);
+        ).called(1);
         verify(() => autoRouterMock.navigate(const ProductsTabRoute()))
             .called(1);
       },

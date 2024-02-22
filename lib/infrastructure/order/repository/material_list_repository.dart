@@ -92,11 +92,6 @@ class MaterialListRepository implements IMaterialListRepository {
         isMarketPlace: selectedMaterialFilter.isMarketPlace,
       );
 
-      final stockInfoList = await getStockInfoList(
-        materials: materialListData.products,
-        customerCodeInfo: customerCodeInfo,
-        salesOrganisation: salesOrganisation,
-      );
       final bundleData = await getBundleData(
         customerCodeInfo: customerCodeInfo,
         materials: materialListData.products,
@@ -107,50 +102,19 @@ class MaterialListRepository implements IMaterialListRepository {
 
       return Right(
         materialListData.copyWith(
-          products: _mapMaterialListDataWithStock(
-            materialListData,
-            stockInfoList,
-            bundleData,
-          ),
+          products: materialListData.products
+              .map(
+                (e) => bundleData.getOrElse(() => {}).putIfAbsent(
+                      e.materialNumber,
+                      () => e,
+                    ),
+              )
+              .toList(),
         ),
       );
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
-  }
-
-  List<MaterialInfo> _mapMaterialListDataWithStock(
-    MaterialResponse materialListData,
-    Either<ApiFailure, List<MaterialStockInfo>> stockInfoList,
-    Either<ApiFailure, Map<MaterialNumber, MaterialInfo>> bundleData,
-  ) {
-    return materialListData.products.map(
-      (MaterialInfo materialInfo) {
-        final materialStockInfo = getMaterialStockInfo(
-          stockInfoList: stockInfoList,
-          materialInfo: materialInfo,
-        );
-        final upDatedMaterialInfo = bundleData.getOrElse(() => {}).putIfAbsent(
-              materialInfo.materialNumber,
-              () => materialInfo,
-            );
-
-        return upDatedMaterialInfo.copyWithStock(
-          stockInfos: materialStockInfo.stockInfos,
-        );
-      },
-    ).toList();
-  }
-
-  MaterialStockInfo getMaterialStockInfo({
-    required Either<ApiFailure, List<MaterialStockInfo>> stockInfoList,
-    required MaterialInfo materialInfo,
-  }) {
-    return stockInfoList.getOrElse(() => []).firstWhere(
-          (MaterialStockInfo materialStockInfo) =>
-              materialStockInfo.materialNumber == materialInfo.materialNumber,
-          orElse: () => MaterialStockInfo.empty(),
-        );
   }
 
   @override

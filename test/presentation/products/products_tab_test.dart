@@ -12,7 +12,6 @@ import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -270,11 +269,7 @@ void main() {
               materialList: materialResponseMock.products,
             ),
           );
-          when(() => userBlocMock.state).thenReturn(
-            UserState.initial().copyWith(
-              user: fakeClientUser,
-            ),
-          );
+
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           await tester.fling(
@@ -291,12 +286,7 @@ void main() {
           verify(
             () => materialListBlocMock.add(
               MaterialListEvent.fetch(
-                salesOrganisation: SalesOrganisation.empty(),
-                configs: fakeMYSalesOrgConfigs,
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                shipToInfo: ShipToInfo.empty(),
                 selectedMaterialFilter: MaterialFilter.empty(),
-                user: fakeClientUser,
               ),
             ),
           ).called(1);
@@ -312,11 +302,7 @@ void main() {
               canLoadMore: true,
             ),
           );
-          when(() => userBlocMock.state).thenReturn(
-            UserState.initial().copyWith(
-              user: fakeClientUser,
-            ),
-          );
+
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           await tester.fling(
@@ -326,13 +312,7 @@ void main() {
           );
           verify(
             () => materialListBlocMock.add(
-              MaterialListEvent.loadMore(
-                salesOrganisation: SalesOrganisation.empty(),
-                configs: fakeMYSalesOrgConfigs,
-                customerCodeInfo: CustomerCodeInfo.empty(),
-                shipToInfo: ShipToInfo.empty(),
-                user: fakeClientUser,
-              ),
+              const MaterialListEvent.loadMore(),
             ),
           ).called(1);
         },
@@ -722,15 +702,10 @@ void main() {
         verify(
           () => materialListBlocMock.add(
             MaterialListEvent.fetch(
-              salesOrganisation: fakePHSalesOrganisation,
-              configs: fakePHSalesOrgConfigs,
-              customerCodeInfo: fakeCustomerCodeInfoForCovid,
-              shipToInfo: fakeShipToInfo,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
                 hasAccessToCovidMaterial: true,
                 isCovidSelected: true,
               ),
-              user: fakeClientAdmin,
             ),
           ),
         ).called(1);
@@ -891,15 +866,7 @@ void main() {
                   bundleOffers: true,
                 ),
           );
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              salesOrganisation: fakePHSalesOrganisation,
-              salesOrgConfigs: fakePHSalesOrgConfigs,
-              customerCodeInfo: fakeCustomerCodeInfoForCovid,
-              user: fakeClientAdmin,
-              shipToInfo: fakeShipToInfo,
-            ),
-          );
+
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           expect(find.byType(SearchAndFilter), findsOneWidget);
@@ -913,14 +880,9 @@ void main() {
           verify(
             () => materialListBlocMock.add(
               MaterialListEvent.fetch(
-                salesOrganisation: fakePHSalesOrganisation,
-                configs: fakePHSalesOrgConfigs,
-                customerCodeInfo: fakeCustomerCodeInfoForCovid,
-                user: fakeClientAdmin,
                 selectedMaterialFilter: MaterialFilter.empty().copyWith(
                   bundleOffers: true,
                 ),
-                shipToInfo: fakeShipToInfo,
               ),
             ),
           ).called(1);

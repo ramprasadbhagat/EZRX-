@@ -1291,7 +1291,7 @@ void main() {
 
       verify(
         () => materialListBlocMock.add(
-          MaterialListEvent.fetch(
+          MaterialListEvent.initialized(
             salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
             configs: salesOrgBlocMock.state.configs,
             customerCodeInfo: eligibilityBlocMock.state.customerCodeInfo,

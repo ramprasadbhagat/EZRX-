@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -62,8 +60,6 @@ class ComboOffersSection extends StatelessWidget {
                 ),
                 onPressed: () {
                   final materialFilterBloc = context.read<MaterialFilterBloc>();
-                  final eligibilityState =
-                      context.read<EligibilityBloc>().state;
 
                   final selectedMaterialFilter = materialFilterBloc
                       .state.materialFilter
@@ -77,12 +73,7 @@ class ComboOffersSection extends StatelessWidget {
 
                   context.read<MaterialListBloc>().add(
                         MaterialListEvent.fetch(
-                          salesOrganisation: eligibilityState.salesOrganisation,
-                          configs: eligibilityState.salesOrgConfigs,
-                          customerCodeInfo: eligibilityState.customerCodeInfo,
-                          shipToInfo: eligibilityState.shipToInfo,
                           selectedMaterialFilter: selectedMaterialFilter,
-                          user: context.read<UserBloc>().state.user,
                         ),
                       );
 

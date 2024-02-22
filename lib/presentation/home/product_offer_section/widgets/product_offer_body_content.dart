@@ -48,16 +48,9 @@ class _ProductOfferBodyContent extends StatelessWidget {
   void _navigateForMoreProductWithOffers(BuildContext context) {
     context.read<MaterialListBloc>().add(
           MaterialListEvent.fetch(
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            configs: context.read<EligibilityBloc>().state.salesOrgConfigs,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
-            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
             selectedMaterialFilter: MaterialFilter.empty().copyWith(
               isProductOffer: true,
             ),
-            user: context.read<UserBloc>().state.user,
           ),
         );
     context.navigateTo(const ProductsTabRoute());

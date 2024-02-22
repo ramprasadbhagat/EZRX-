@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -34,13 +36,33 @@ void main() {
   late final MaterialResponse materialResponseMock;
   late final AddFavourite addToFavouritesResponseMock;
   late final RemoveFavourite removeFavouritesResponseMock;
+  late List<MaterialStockInfo> stockInfoList;
   late List addToFavouritesList;
   late List removeFavouritesList;
-  final materialState = MaterialListState.initial();
+  final materialState = MaterialListState.initial().copyWith(
+    salesOrganisation: fakeSGSalesOrganisation,
+    configs: fakeSGSalesOrgConfigs,
+    customerCodeInfo: fakeCustomerCodeInfo,
+    shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+    user: fakeClientUser,
+  );
+  final updatedSelectedMaterialFilter =
+      materialState.selectedMaterialFilter.copyWith(
+    isFavourite: mockSelectedMaterialFilter.isFavourite,
+    isCovidSelected: mockSelectedMaterialFilter.isCovidSelected,
+    bundleOffers: mockSelectedMaterialFilter.bundleOffers,
+    isProductOffer: mockSelectedMaterialFilter.isProductOffer,
+    sortBy: mockSelectedMaterialFilter.sortBy,
+    countryListSelected: mockSelectedMaterialFilter.countryListSelected,
+    brandList: mockSelectedMaterialFilter.brandList,
+    manufactureListSelected: mockSelectedMaterialFilter.manufactureListSelected,
+    isMarketPlace: mockSelectedMaterialFilter.isMarketPlace,
+  );
   setUpAll(() async {
     materialListMockRepository = MockMaterialListRepository();
     favouriteMockRepository = MockFavouriteRepository();
     config = Config()..appFlavor = Flavor.mock;
+    stockInfoList = await StockInfoLocalDataSource().getMaterialStockInfoList();
     materialResponseMock = await MaterialListLocalDataSource().getProductList();
     addToFavouritesResponseMock =
         await FavouriteLocalDataSource().addFavouriteMaterial();
@@ -56,89 +78,6 @@ void main() {
   group('Material List Bloc', () {
     blocTest<MaterialListBloc, MaterialListState>(
       'Material List Initialize',
-      build: () => MaterialListBloc(
-        materialListRepository: materialListMockRepository,
-        favouriteRepository: favouriteMockRepository,
-        config: config,
-      ),
-      act: (MaterialListBloc bloc) =>
-          bloc.add(const MaterialListEvent.initialized()),
-      expect: () => [
-        MaterialListState.initial(),
-      ],
-    );
-
-    blocTest(
-      'Fetch material list success',
-      build: () => MaterialListBloc(
-        materialListRepository: materialListMockRepository,
-        favouriteRepository: favouriteMockRepository,
-        config: config,
-      ),
-      setUp: () {
-        when(
-          () => materialListMockRepository.getMaterialList(
-            salesOrganisation: fakeSGSalesOrganisation,
-            salesOrgConfig: fakeSGSalesOrgConfigs,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            pageSize: config.pageSize,
-            offset: 0,
-            selectedMaterialFilter: mockSelectedMaterialFilter,
-            language: Language.english(),
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(materialResponseMock),
-        );
-      },
-      act: (MaterialListBloc bloc) {
-        bloc.add(
-          MaterialListEvent.fetch(
-            salesOrganisation: fakeSGSalesOrganisation,
-            configs: fakeSGSalesOrgConfigs,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            selectedMaterialFilter: mockSelectedMaterialFilter,
-            user: fakeClientUser,
-          ),
-        );
-      },
-      expect: () {
-        return [
-          materialState.copyWith(
-            isFetching: true,
-            materialList: <MaterialInfo>[],
-            nextPageIndex: 0,
-            apiFailureOrSuccessOption: none(),
-            selectedMaterialFilter:
-                materialState.selectedMaterialFilter.copyWith(
-              isFavourite: mockSelectedMaterialFilter.isFavourite,
-              isCovidSelected: mockSelectedMaterialFilter.isCovidSelected,
-              bundleOffers: mockSelectedMaterialFilter.bundleOffers,
-              isProductOffer: mockSelectedMaterialFilter.isProductOffer,
-              sortBy: mockSelectedMaterialFilter.sortBy,
-              countryListSelected:
-                  mockSelectedMaterialFilter.countryListSelected,
-              brandList: mockSelectedMaterialFilter.brandList,
-              manufactureListSelected:
-                  mockSelectedMaterialFilter.manufactureListSelected,
-              isMarketPlace: mockSelectedMaterialFilter.isMarketPlace,
-            ),
-          ),
-          materialState.copyWith(
-            materialCount: materialResponseMock.count,
-            materialList: materialResponseMock.products,
-            apiFailureOrSuccessOption: optionOf(Right(materialResponseMock)),
-            canLoadMore:
-                materialResponseMock.products.length >= config.pageSize,
-            nextPageIndex: 1,
-          ),
-        ];
-      },
-    );
-
-    blocTest(
-      'Fetch material list fail',
       build: () => MaterialListBloc(
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
@@ -162,19 +101,152 @@ void main() {
           ),
         );
       },
+      act: (MaterialListBloc bloc) => bloc.add(
+        MaterialListEvent.initialized(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          configs: fakeSGSalesOrgConfigs,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClientUser,
+          selectedMaterialFilter: mockSelectedMaterialFilter,
+        ),
+      ),
+      expect: () => [
+        materialState,
+        materialState.copyWith(
+          isFetching: true,
+          selectedMaterialFilter: materialState.selectedMaterialFilter.copyWith(
+            isFavourite: mockSelectedMaterialFilter.isFavourite,
+            isCovidSelected: mockSelectedMaterialFilter.isCovidSelected,
+            bundleOffers: mockSelectedMaterialFilter.bundleOffers,
+            isProductOffer: mockSelectedMaterialFilter.isProductOffer,
+            sortBy: mockSelectedMaterialFilter.sortBy,
+            countryListSelected: mockSelectedMaterialFilter.countryListSelected,
+            brandList: mockSelectedMaterialFilter.brandList,
+            manufactureListSelected:
+                mockSelectedMaterialFilter.manufactureListSelected,
+            isMarketPlace: mockSelectedMaterialFilter.isMarketPlace,
+          ),
+        ),
+        materialState.copyWith(
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Fetch material list success',
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteMockRepository,
+        config: config,
+      ),
+      seed: () => materialState,
+      setUp: () {
+        when(
+          () => materialListMockRepository.getMaterialList(
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfig: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            language: fakeClientUser.preferredLanguage,
+            pageSize: config.pageSize,
+            offset: 0,
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(materialResponseMock),
+        );
+        when(
+          () => materialListMockRepository.getStockInfoList(
+            materials: materialResponseMock.products,
+            salesOrganisation: fakeSGSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ).thenAnswer((_) async => const Left(ApiFailure.other('fake-error')));
+      },
       act: (MaterialListBloc bloc) {
         bloc.add(
           MaterialListEvent.fetch(
-            salesOrganisation: fakeSGSalesOrganisation,
-            configs: fakeSGSalesOrgConfigs,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            user: fakeClientUser,
           ),
         );
       },
+      expect: () {
+        return [
+          materialState.copyWith(
+            isFetching: true,
+            materialList: <MaterialInfo>[],
+            nextPageIndex: 0,
+            apiFailureOrSuccessOption: none(),
+            selectedMaterialFilter: updatedSelectedMaterialFilter,
+          ),
+          materialState.copyWith(
+            materialCount: materialResponseMock.count,
+            materialList: materialResponseMock.products,
+            apiFailureOrSuccessOption: optionOf(Right(materialResponseMock)),
+            canLoadMore:
+                materialResponseMock.products.length >= config.pageSize,
+            nextPageIndex: 1,
+            selectedMaterialFilter: updatedSelectedMaterialFilter,
+          ),
+          materialState.copyWith(
+            materialCount: materialResponseMock.count,
+            materialList: materialResponseMock.products,
+            apiFailureOrSuccessOption: none(),
+            canLoadMore:
+                materialResponseMock.products.length >= config.pageSize,
+            nextPageIndex: 1,
+            selectedMaterialFilter: updatedSelectedMaterialFilter,
+          ),
+          materialState.copyWith(
+            materialCount: materialResponseMock.count,
+            materialList: materialResponseMock.products,
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake-error'))),
+            canLoadMore:
+                materialResponseMock.products.length >= config.pageSize,
+            nextPageIndex: 1,
+            selectedMaterialFilter: updatedSelectedMaterialFilter,
+          ),
+        ];
+      },
+    );
+
+    blocTest(
+      'Fetch material list fail',
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteMockRepository,
+        config: config,
+      ),
       seed: () => materialState,
+      setUp: () {
+        when(
+          () => materialListMockRepository.getMaterialList(
+            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrgConfig: fakeSGSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            pageSize: config.pageSize,
+            offset: 0,
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+            language: Language.english(),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (MaterialListBloc bloc) {
+        bloc.add(
+          MaterialListEvent.fetch(
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+          ),
+        );
+      },
       expect: () => [
         materialState.copyWith(
           isFetching: true,
@@ -242,17 +314,18 @@ void main() {
         ).thenAnswer(
           (invocation) async => Right(materialResponseMock),
         );
+        when(
+          () => materialListMockRepository.getStockInfoList(
+            materials: materialResponseMock.products,
+            salesOrganisation: fakeSGSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ).thenAnswer((_) async => const Left(ApiFailure.other('fake-error')));
       },
       seed: () => materialState,
       act: (MaterialListBloc bloc) {
         bloc.add(
-          MaterialListEvent.loadMore(
-            salesOrganisation: fakeSGSalesOrganisation,
-            configs: fakeSGSalesOrgConfigs,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            user: fakeClientUser,
-          ),
+          const MaterialListEvent.loadMore(),
         );
       },
       expect: () {
@@ -267,6 +340,14 @@ void main() {
             materialList: productList,
             canLoadMore: productList.length >= config.pageSize,
             nextPageIndex: materialState.nextPageIndex + 1,
+          ),
+          materialState.copyWith(
+            materialCount: materialResponseMock.count,
+            materialList: productList,
+            canLoadMore: productList.length >= config.pageSize,
+            nextPageIndex: materialState.nextPageIndex + 1,
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake-error'))),
           ),
         ];
       },
@@ -298,13 +379,7 @@ void main() {
       seed: () => materialState,
       act: (MaterialListBloc bloc) {
         bloc.add(
-          MaterialListEvent.loadMore(
-            salesOrganisation: fakeSGSalesOrganisation,
-            configs: fakeSGSalesOrgConfigs,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            user: fakeClientUser,
-          ),
+          const MaterialListEvent.loadMore(),
         );
       },
       expect: () => [
@@ -353,17 +428,17 @@ void main() {
             ),
           ),
         );
+
+        when(
+          () => materialListMockRepository.getStockInfoList(
+            materials: materialResponseMock.products.skip(20).toList(),
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+          ),
+        ).thenAnswer((_) async => const Left(ApiFailure.poorConnection()));
       },
       act: (MaterialListBloc bloc) {
-        bloc.add(
-          MaterialListEvent.loadMore(
-            salesOrganisation: fakeSGSalesOrganisation,
-            configs: fakeSGSalesOrgConfigs,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            user: fakeClientUser,
-          ),
-        );
+        bloc.add(const MaterialListEvent.loadMore());
       },
       expect: () {
         return [
@@ -383,10 +458,24 @@ void main() {
                 24,
                 (index) => materialResponseMock.products.first,
               ),
-              ...materialResponseMock.products.skip(20)
+              ...materialResponseMock.products.skip(20).toList()
             ],
             canLoadMore: false,
             nextPageIndex: 2,
+          ),
+          materialState.copyWith(
+            materialCount: 44,
+            materialList: [
+              ...List.generate(
+                24,
+                (index) => materialResponseMock.products.first,
+              ),
+              ...materialResponseMock.products.skip(20).toList()
+            ],
+            canLoadMore: false,
+            nextPageIndex: 2,
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.poorConnection())),
           ),
         ];
       },
@@ -651,5 +740,52 @@ void main() {
       );
       expect(materialBloc.state.isFilterSelected, true);
     });
+
+    blocTest(
+      'Get stock success',
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteMockRepository,
+        config: config,
+      ),
+      seed: () => materialState.copyWith(
+        materialList: materialResponseMock.products,
+        apiFailureOrSuccessOption:
+            optionOf(const Left(ApiFailure.poorConnection())),
+      ),
+      setUp: () {
+        when(
+          () => materialListMockRepository.getStockInfoList(
+            materials: materialResponseMock.products,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+          ),
+        ).thenAnswer((_) async => Right(stockInfoList));
+      },
+      act: (MaterialListBloc bloc) => bloc.add(
+        MaterialListEvent.fetchStock(
+          materials: materialResponseMock.products,
+        ),
+      ),
+      expect: () => [
+        materialState.copyWith(
+          materialList: materialResponseMock.products,
+          apiFailureOrSuccessOption: none(),
+        ),
+        materialState.copyWith(
+          materialList: materialResponseMock.products.map((material) {
+            final stockInfo = stockInfoList.firstWhere(
+              (e) => e.materialNumber == material.materialNumber,
+              orElse: () => MaterialStockInfo.empty(),
+            );
+
+            return material.stockInfos.isEmpty
+                ? material.copyWithStock(stockInfos: stockInfo.stockInfos)
+                : material;
+          }).toList(),
+          apiFailureOrSuccessOption: optionOf(Right(stockInfoList)),
+        ),
+      ],
+    );
   });
 }

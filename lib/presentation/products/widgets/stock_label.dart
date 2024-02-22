@@ -21,7 +21,9 @@ class StockLabel extends StatelessWidget {
     final salesOrgConfig =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
-    return salesOrgConfig.hideStockDisplay || materialInfo.inStock
+    return salesOrgConfig.hideStockDisplay ||
+            materialInfo.inStock ||
+            materialInfo.stockInfos.isEmpty
         ? const SizedBox.shrink()
         : Container(
             key: WidgetKeys.materialListStockLabel,

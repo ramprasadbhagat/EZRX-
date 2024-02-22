@@ -1,11 +1,9 @@
-import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -68,12 +66,6 @@ void main() {
   );
   final fakeStockInfo1 = MaterialStockInfo.empty().copyWith(
     materialNumber: MaterialNumber('123'),
-  );
-  final fakeStockInfo2 = MaterialStockInfo.empty().copyWith(
-    materialNumber: MaterialNumber('456'),
-  );
-  final fakeStockInfo3 = MaterialStockInfo.empty().copyWith(
-    materialNumber: MaterialNumber('789'),
   );
   final fakeMatchMaterialInfo = MaterialInfo.empty().copyWith(
     materialNumber: MaterialNumber('123'),
@@ -283,55 +275,6 @@ void main() {
           result.isRight(),
           true,
         );
-      });
-    });
-
-    group('=> get Material Stock Info', () {
-      test(
-          '=> returns MaterialStockInfo when stockInfoList has matching materialNumber',
-          () {
-        final result = materialListRepository.getMaterialStockInfo(
-          stockInfoList: Right([
-            fakeStockInfo1,
-            fakeStockInfo2,
-          ]),
-          materialInfo: fakeMatchMaterialInfo,
-        );
-
-        expect(result, fakeStockInfo1);
-      });
-
-      test('=> returns empty MaterialStockInfo when stockInfoList is Left', () {
-        final result = materialListRepository.getMaterialStockInfo(
-          stockInfoList: const Left(ApiFailure.other('fake-fail')),
-          materialInfo: fakeMatchMaterialInfo,
-        );
-
-        expect(result, MaterialStockInfo.empty());
-      });
-
-      test('=> returns empty MaterialStockInfo when stockInfoList is empty',
-          () {
-        // Act
-        final result = materialListRepository.getMaterialStockInfo(
-          stockInfoList: const Right([]),
-          materialInfo: fakeMatchMaterialInfo,
-        );
-
-        expect(result, MaterialStockInfo.empty());
-      });
-
-      test(
-          '=> returns empty MaterialStockInfo when no matching materialNumber is found',
-          () {
-        final result = materialListRepository.getMaterialStockInfo(
-          stockInfoList: Right([
-            fakeStockInfo2,
-            fakeStockInfo3,
-          ]),
-          materialInfo: fakeMatchMaterialInfo,
-        );
-        expect(result, MaterialStockInfo.empty());
       });
     });
 

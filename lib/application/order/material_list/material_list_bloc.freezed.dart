@@ -18,76 +18,61 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MaterialListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)
+        initialized,
     required TResult Function() watchFavoriteStatus,
     required TResult Function(MaterialInfo updatedMaterial)
         updateFavoriteStatus,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)
-        fetch,
+    required TResult Function(MaterialFilter selectedMaterialFilter) fetch,
+    required TResult Function(List<MaterialInfo> materials) fetchStock,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult? Function()? watchFavoriteStatus,
     TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult? Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult? Function(List<MaterialInfo> materials)? fetchStock,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult Function()? watchFavoriteStatus,
     TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult Function(List<MaterialInfo> materials)? fetchStock,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
@@ -99,6 +84,7 @@ mixin _$MaterialListEvent {
     required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
     required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -111,6 +97,7 @@ mixin _$MaterialListEvent {
     TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -123,6 +110,7 @@ mixin _$MaterialListEvent {
     TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -155,6 +143,21 @@ abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs configs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      MaterialFilter selectedMaterialFilter});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
+  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
 }
 
 /// @nodoc
@@ -164,112 +167,224 @@ class __$$_InitializedCopyWithImpl<$Res>
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrganisation = null,
+    Object? configs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? user = null,
+    Object? selectedMaterialFilter = null,
+  }) {
+    return _then(_$_Initialized(
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      selectedMaterialFilter: null == selectedMaterialFilter
+          ? _value.selectedMaterialFilter
+          : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialFilter,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get configs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
+      return _then(_value.copyWith(configs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialFilterCopyWith<$Res> get selectedMaterialFilter {
+    return $MaterialFilterCopyWith<$Res>(_value.selectedMaterialFilter,
+        (value) {
+      return _then(_value.copyWith(selectedMaterialFilter: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+  const _$_Initialized(
+      {required this.salesOrganisation,
+      required this.configs,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.user,
+      required this.selectedMaterialFilter});
+
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs configs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final User user;
+  @override
+  final MaterialFilter selectedMaterialFilter;
 
   @override
   String toString() {
-    return 'MaterialListEvent.initialized()';
+    return 'MaterialListEvent.initialized(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, selectedMaterialFilter: $selectedMaterialFilter)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.configs, configs) || other.configs == configs) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
+                other.selectedMaterialFilter == selectedMaterialFilter));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, salesOrganisation, configs,
+      customerCodeInfo, shipToInfo, user, selectedMaterialFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)
+        initialized,
     required TResult Function() watchFavoriteStatus,
     required TResult Function(MaterialInfo updatedMaterial)
         updateFavoriteStatus,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)
-        fetch,
+    required TResult Function(MaterialFilter selectedMaterialFilter) fetch,
+    required TResult Function(List<MaterialInfo> materials) fetchStock,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
-    return initialized();
+    return initialized(salesOrganisation, configs, customerCodeInfo, shipToInfo,
+        user, selectedMaterialFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult? Function()? watchFavoriteStatus,
     TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult? Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult? Function(List<MaterialInfo> materials)? fetchStock,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
-    return initialized?.call();
+    return initialized?.call(salesOrganisation, configs, customerCodeInfo,
+        shipToInfo, user, selectedMaterialFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult Function()? watchFavoriteStatus,
     TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult Function(List<MaterialInfo> materials)? fetchStock,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized();
+      return initialized(salesOrganisation, configs, customerCodeInfo,
+          shipToInfo, user, selectedMaterialFilter);
     }
     return orElse();
   }
@@ -281,6 +396,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
     required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -296,6 +412,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -311,6 +428,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -325,7 +443,23 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements MaterialListEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized(
+      {required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs configs,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final User user,
+      required final MaterialFilter selectedMaterialFilter}) = _$_Initialized;
+
+  SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get configs;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  User get user;
+  MaterialFilter get selectedMaterialFilter;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -366,26 +500,21 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)
+        initialized,
     required TResult Function() watchFavoriteStatus,
     required TResult Function(MaterialInfo updatedMaterial)
         updateFavoriteStatus,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)
-        fetch,
+    required TResult Function(MaterialFilter selectedMaterialFilter) fetch,
+    required TResult Function(List<MaterialInfo> materials) fetchStock,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
@@ -395,25 +524,20 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult? Function()? watchFavoriteStatus,
     TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult? Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult? Function(List<MaterialInfo> materials)? fetchStock,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
@@ -423,25 +547,20 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult Function()? watchFavoriteStatus,
     TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult Function(List<MaterialInfo> materials)? fetchStock,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
@@ -459,6 +578,7 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
     required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
     required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -474,6 +594,7 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
     TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -489,6 +610,7 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
     TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -582,26 +704,21 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)
+        initialized,
     required TResult Function() watchFavoriteStatus,
     required TResult Function(MaterialInfo updatedMaterial)
         updateFavoriteStatus,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)
-        fetch,
+    required TResult Function(MaterialFilter selectedMaterialFilter) fetch,
+    required TResult Function(List<MaterialInfo> materials) fetchStock,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
@@ -611,25 +728,20 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult? Function()? watchFavoriteStatus,
     TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult? Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult? Function(List<MaterialInfo> materials)? fetchStock,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
@@ -639,25 +751,20 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult Function()? watchFavoriteStatus,
     TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult Function(List<MaterialInfo> materials)? fetchStock,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
@@ -675,6 +782,7 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
     required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
     required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -690,6 +798,7 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
     TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -705,6 +814,7 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
     TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -733,20 +843,9 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {SalesOrganisation salesOrganisation,
-      SalesOrganisationConfigs configs,
-      CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      MaterialFilter selectedMaterialFilter,
-      User user});
+  $Res call({MaterialFilter selectedMaterialFilter});
 
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $SalesOrganisationConfigsCopyWith<$Res> get configs;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
   $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -759,71 +858,14 @@ class __$$_FetchCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrganisation = null,
-    Object? configs = null,
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
     Object? selectedMaterialFilter = null,
-    Object? user = null,
   }) {
     return _then(_$_Fetch(
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      configs: null == configs
-          ? _value.configs
-          : configs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
       selectedMaterialFilter: null == selectedMaterialFilter
           ? _value.selectedMaterialFilter
           : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
               as MaterialFilter,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get configs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
-      return _then(_value.copyWith(configs: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
   }
 
   @override
@@ -834,43 +876,19 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(selectedMaterialFilter: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  _$_Fetch(
-      {required this.salesOrganisation,
-      required this.configs,
-      required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.selectedMaterialFilter,
-      required this.user});
+  _$_Fetch({required this.selectedMaterialFilter});
 
   @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final SalesOrganisationConfigs configs;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
   final MaterialFilter selectedMaterialFilter;
-  @override
-  final User user;
 
   @override
   String toString() {
-    return 'MaterialListEvent.fetch(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter, user: $user)';
+    return 'MaterialListEvent.fetch(selectedMaterialFilter: $selectedMaterialFilter)';
   }
 
   @override
@@ -878,21 +896,12 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.configs, configs) || other.configs == configs) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
             (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
-                other.selectedMaterialFilter == selectedMaterialFilter) &&
-            (identical(other.user, user) || other.user == user));
+                other.selectedMaterialFilter == selectedMaterialFilter));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrganisation, configs,
-      customerCodeInfo, shipToInfo, selectedMaterialFilter, user);
+  int get hashCode => Object.hash(runtimeType, selectedMaterialFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -903,91 +912,73 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)
+        initialized,
     required TResult Function() watchFavoriteStatus,
     required TResult Function(MaterialInfo updatedMaterial)
         updateFavoriteStatus,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)
-        fetch,
+    required TResult Function(MaterialFilter selectedMaterialFilter) fetch,
+    required TResult Function(List<MaterialInfo> materials) fetchStock,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
-    return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo,
-        selectedMaterialFilter, user);
+    return fetch(selectedMaterialFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult? Function()? watchFavoriteStatus,
     TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult? Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult? Function(List<MaterialInfo> materials)? fetchStock,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
-    return fetch?.call(salesOrganisation, configs, customerCodeInfo, shipToInfo,
-        selectedMaterialFilter, user);
+    return fetch?.call(selectedMaterialFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult Function()? watchFavoriteStatus,
     TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult Function(List<MaterialInfo> materials)? fetchStock,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo,
-          selectedMaterialFilter, user);
+      return fetch(selectedMaterialFilter);
     }
     return orElse();
   }
@@ -999,6 +990,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
     required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -1014,6 +1006,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -1029,6 +1022,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -1043,22 +1037,218 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements MaterialListEvent {
-  factory _Fetch(
-      {required final SalesOrganisation salesOrganisation,
-      required final SalesOrganisationConfigs configs,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final MaterialFilter selectedMaterialFilter,
-      required final User user}) = _$_Fetch;
+  factory _Fetch({required final MaterialFilter selectedMaterialFilter}) =
+      _$_Fetch;
 
-  SalesOrganisation get salesOrganisation;
-  SalesOrganisationConfigs get configs;
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
   MaterialFilter get selectedMaterialFilter;
-  User get user;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchStockCopyWith<$Res> {
+  factory _$$_FetchStockCopyWith(
+          _$_FetchStock value, $Res Function(_$_FetchStock) then) =
+      __$$_FetchStockCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<MaterialInfo> materials});
+}
+
+/// @nodoc
+class __$$_FetchStockCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$_FetchStock>
+    implements _$$_FetchStockCopyWith<$Res> {
+  __$$_FetchStockCopyWithImpl(
+      _$_FetchStock _value, $Res Function(_$_FetchStock) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? materials = null,
+  }) {
+    return _then(_$_FetchStock(
+      materials: null == materials
+          ? _value._materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_FetchStock implements _FetchStock {
+  _$_FetchStock({required final List<MaterialInfo> materials})
+      : _materials = materials;
+
+  final List<MaterialInfo> _materials;
+  @override
+  List<MaterialInfo> get materials {
+    if (_materials is EqualUnmodifiableListView) return _materials;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_materials);
+  }
+
+  @override
+  String toString() {
+    return 'MaterialListEvent.fetchStock(materials: $materials)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchStock &&
+            const DeepCollectionEquality()
+                .equals(other._materials, _materials));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_materials));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchStockCopyWith<_$_FetchStock> get copyWith =>
+      __$$_FetchStockCopyWithImpl<_$_FetchStock>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)
+        initialized,
+    required TResult Function() watchFavoriteStatus,
+    required TResult Function(MaterialInfo updatedMaterial)
+        updateFavoriteStatus,
+    required TResult Function(MaterialFilter selectedMaterialFilter) fetch,
+    required TResult Function(List<MaterialInfo> materials) fetchStock,
+    required TResult Function(String searchKey) updateSearchKey,
+    required TResult Function() loadMore,
+    required TResult Function(MaterialInfo item) addFavourite,
+    required TResult Function(MaterialInfo item) deleteFavourite,
+  }) {
+    return fetchStock(materials);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
+    TResult? Function()? watchFavoriteStatus,
+    TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
+    TResult? Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult? Function(List<MaterialInfo> materials)? fetchStock,
+    TResult? Function(String searchKey)? updateSearchKey,
+    TResult? Function()? loadMore,
+    TResult? Function(MaterialInfo item)? addFavourite,
+    TResult? Function(MaterialInfo item)? deleteFavourite,
+  }) {
+    return fetchStock?.call(materials);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
+    TResult Function()? watchFavoriteStatus,
+    TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
+    TResult Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult Function(List<MaterialInfo> materials)? fetchStock,
+    TResult Function(String searchKey)? updateSearchKey,
+    TResult Function()? loadMore,
+    TResult Function(MaterialInfo item)? addFavourite,
+    TResult Function(MaterialInfo item)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (fetchStock != null) {
+      return fetchStock(materials);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
+    required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+  }) {
+    return fetchStock(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+  }) {
+    return fetchStock?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
+    TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (fetchStock != null) {
+      return fetchStock(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchStock implements MaterialListEvent {
+  factory _FetchStock({required final List<MaterialInfo> materials}) =
+      _$_FetchStock;
+
+  List<MaterialInfo> get materials;
+  @JsonKey(ignore: true)
+  _$$_FetchStockCopyWith<_$_FetchStock> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1127,26 +1317,21 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)
+        initialized,
     required TResult Function() watchFavoriteStatus,
     required TResult Function(MaterialInfo updatedMaterial)
         updateFavoriteStatus,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)
-        fetch,
+    required TResult Function(MaterialFilter selectedMaterialFilter) fetch,
+    required TResult Function(List<MaterialInfo> materials) fetchStock,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
@@ -1156,25 +1341,20 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult? Function()? watchFavoriteStatus,
     TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult? Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult? Function(List<MaterialInfo> materials)? fetchStock,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
@@ -1184,25 +1364,20 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult Function()? watchFavoriteStatus,
     TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult Function(List<MaterialInfo> materials)? fetchStock,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
@@ -1220,6 +1395,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
     required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -1235,6 +1411,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -1250,6 +1427,7 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
     TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -1278,19 +1456,6 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   factory _$$_LoadMoreCopyWith(
           _$_LoadMore value, $Res Function(_$_LoadMore) then) =
       __$$_LoadMoreCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisation salesOrganisation,
-      SalesOrganisationConfigs configs,
-      CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      User user});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $SalesOrganisationConfigsCopyWith<$Res> get configs;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -1300,220 +1465,97 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrganisation = null,
-    Object? configs = null,
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
-    Object? user = null,
-  }) {
-    return _then(_$_LoadMore(
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      configs: null == configs
-          ? _value.configs
-          : configs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get configs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
-      return _then(_value.copyWith(configs: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore(
-      {required this.salesOrganisation,
-      required this.configs,
-      required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.user});
-
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final SalesOrganisationConfigs configs;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
-  final User user;
+  const _$_LoadMore();
 
   @override
   String toString() {
-    return 'MaterialListEvent.loadMore(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user)';
+    return 'MaterialListEvent.loadMore()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_LoadMore &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.configs, configs) || other.configs == configs) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_LoadMore);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrganisation, configs,
-      customerCodeInfo, shipToInfo, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)
+        initialized,
     required TResult Function() watchFavoriteStatus,
     required TResult Function(MaterialInfo updatedMaterial)
         updateFavoriteStatus,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)
-        fetch,
+    required TResult Function(MaterialFilter selectedMaterialFilter) fetch,
+    required TResult Function(List<MaterialInfo> materials) fetchStock,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
-    return loadMore(
-        salesOrganisation, configs, customerCodeInfo, shipToInfo, user);
+    return loadMore();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult? Function()? watchFavoriteStatus,
     TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult? Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult? Function(List<MaterialInfo> materials)? fetchStock,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
-    return loadMore?.call(
-        salesOrganisation, configs, customerCodeInfo, shipToInfo, user);
+    return loadMore?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult Function()? watchFavoriteStatus,
     TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult Function(List<MaterialInfo> materials)? fetchStock,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(
-          salesOrganisation, configs, customerCodeInfo, shipToInfo, user);
+      return loadMore();
     }
     return orElse();
   }
@@ -1525,6 +1567,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
     required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -1540,6 +1583,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -1555,6 +1599,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -1569,21 +1614,7 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements MaterialListEvent {
-  const factory _LoadMore(
-      {required final SalesOrganisation salesOrganisation,
-      required final SalesOrganisationConfigs configs,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final User user}) = _$_LoadMore;
-
-  SalesOrganisation get salesOrganisation;
-  SalesOrganisationConfigs get configs;
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
-  User get user;
-  @JsonKey(ignore: true)
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _LoadMore() = _$_LoadMore;
 }
 
 /// @nodoc
@@ -1660,26 +1691,21 @@ class _$_AddFavourite implements _AddFavourite {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)
+        initialized,
     required TResult Function() watchFavoriteStatus,
     required TResult Function(MaterialInfo updatedMaterial)
         updateFavoriteStatus,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)
-        fetch,
+    required TResult Function(MaterialFilter selectedMaterialFilter) fetch,
+    required TResult Function(List<MaterialInfo> materials) fetchStock,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
@@ -1689,25 +1715,20 @@ class _$_AddFavourite implements _AddFavourite {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult? Function()? watchFavoriteStatus,
     TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult? Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult? Function(List<MaterialInfo> materials)? fetchStock,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
@@ -1717,25 +1738,20 @@ class _$_AddFavourite implements _AddFavourite {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult Function()? watchFavoriteStatus,
     TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult Function(List<MaterialInfo> materials)? fetchStock,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
@@ -1753,6 +1769,7 @@ class _$_AddFavourite implements _AddFavourite {
     required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
     required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -1768,6 +1785,7 @@ class _$_AddFavourite implements _AddFavourite {
     TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -1783,6 +1801,7 @@ class _$_AddFavourite implements _AddFavourite {
     TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -1879,26 +1898,21 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)
+        initialized,
     required TResult Function() watchFavoriteStatus,
     required TResult Function(MaterialInfo updatedMaterial)
         updateFavoriteStatus,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)
-        fetch,
+    required TResult Function(MaterialFilter selectedMaterialFilter) fetch,
+    required TResult Function(List<MaterialInfo> materials) fetchStock,
     required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function(MaterialInfo item) addFavourite,
     required TResult Function(MaterialInfo item) deleteFavourite,
   }) {
@@ -1908,25 +1922,20 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult? Function()? watchFavoriteStatus,
     TResult? Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult? Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult? Function(List<MaterialInfo> materials)? fetchStock,
     TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function(MaterialInfo item)? addFavourite,
     TResult? Function(MaterialInfo item)? deleteFavourite,
   }) {
@@ -1936,25 +1945,20 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            MaterialFilter selectedMaterialFilter)?
+        initialized,
     TResult Function()? watchFavoriteStatus,
     TResult Function(MaterialInfo updatedMaterial)? updateFavoriteStatus,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            MaterialFilter selectedMaterialFilter,
-            User user)?
-        fetch,
+    TResult Function(MaterialFilter selectedMaterialFilter)? fetch,
+    TResult Function(List<MaterialInfo> materials)? fetchStock,
     TResult Function(String searchKey)? updateSearchKey,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function(MaterialInfo item)? addFavourite,
     TResult Function(MaterialInfo item)? deleteFavourite,
     required TResult orElse(),
@@ -1972,6 +1976,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     required TResult Function(_WatchFavoriteStatus value) watchFavoriteStatus,
     required TResult Function(_UpdateFavoriteStatus value) updateFavoriteStatus,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchStock value) fetchStock,
     required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_AddFavourite value) addFavourite,
@@ -1987,6 +1992,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult? Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult? Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchStock value)? fetchStock,
     TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_AddFavourite value)? addFavourite,
@@ -2002,6 +2008,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult Function(_WatchFavoriteStatus value)? watchFavoriteStatus,
     TResult Function(_UpdateFavoriteStatus value)? updateFavoriteStatus,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchStock value)? fetchStock,
     TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_AddFavourite value)? addFavourite,
@@ -2027,6 +2034,11 @@ abstract class _DeleteFavourite implements MaterialListEvent {
 
 /// @nodoc
 mixin _$MaterialListState {
+  SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get configs => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
+  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
   int get materialCount => throw _privateConstructorUsedError;
   List<MaterialInfo> get materialList => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
@@ -2051,7 +2063,12 @@ abstract class $MaterialListStateCopyWith<$Res> {
       _$MaterialListStateCopyWithImpl<$Res, MaterialListState>;
   @useResult
   $Res call(
-      {int materialCount,
+      {SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs configs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      int materialCount,
       List<MaterialInfo> materialList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool canLoadMore,
@@ -2061,6 +2078,11 @@ abstract class $MaterialListStateCopyWith<$Res> {
       SearchKey searchKey,
       MaterialFilter selectedMaterialFilter});
 
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
   $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
 }
 
@@ -2077,6 +2099,11 @@ class _$MaterialListStateCopyWithImpl<$Res, $Val extends MaterialListState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrganisation = null,
+    Object? configs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? user = null,
     Object? materialCount = null,
     Object? materialList = null,
     Object? apiFailureOrSuccessOption = null,
@@ -2088,6 +2115,26 @@ class _$MaterialListStateCopyWithImpl<$Res, $Val extends MaterialListState>
     Object? selectedMaterialFilter = null,
   }) {
     return _then(_value.copyWith(
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       materialCount: null == materialCount
           ? _value.materialCount
           : materialCount // ignore: cast_nullable_to_non_nullable
@@ -2129,6 +2176,46 @@ class _$MaterialListStateCopyWithImpl<$Res, $Val extends MaterialListState>
 
   @override
   @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get configs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
+      return _then(_value.copyWith(configs: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $MaterialFilterCopyWith<$Res> get selectedMaterialFilter {
     return $MaterialFilterCopyWith<$Res>(_value.selectedMaterialFilter,
         (value) {
@@ -2146,7 +2233,12 @@ abstract class _$$_MaterialListStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int materialCount,
+      {SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs configs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      int materialCount,
       List<MaterialInfo> materialList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool canLoadMore,
@@ -2156,6 +2248,16 @@ abstract class _$$_MaterialListStateCopyWith<$Res>
       SearchKey searchKey,
       MaterialFilter selectedMaterialFilter});
 
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
+  $UserCopyWith<$Res> get user;
   @override
   $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
 }
@@ -2171,6 +2273,11 @@ class __$$_MaterialListStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrganisation = null,
+    Object? configs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? user = null,
     Object? materialCount = null,
     Object? materialList = null,
     Object? apiFailureOrSuccessOption = null,
@@ -2182,6 +2289,26 @@ class __$$_MaterialListStateCopyWithImpl<$Res>
     Object? selectedMaterialFilter = null,
   }) {
     return _then(_$_MaterialListState(
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       materialCount: null == materialCount
           ? _value.materialCount
           : materialCount // ignore: cast_nullable_to_non_nullable
@@ -2226,7 +2353,12 @@ class __$$_MaterialListStateCopyWithImpl<$Res>
 
 class _$_MaterialListState extends _MaterialListState {
   const _$_MaterialListState(
-      {required this.materialCount,
+      {required this.salesOrganisation,
+      required this.configs,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.user,
+      required this.materialCount,
       required final List<MaterialInfo> materialList,
       required this.apiFailureOrSuccessOption,
       required this.canLoadMore,
@@ -2238,6 +2370,16 @@ class _$_MaterialListState extends _MaterialListState {
       : _materialList = materialList,
         super._();
 
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs configs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final User user;
   @override
   final int materialCount;
   final List<MaterialInfo> _materialList;
@@ -2265,7 +2407,7 @@ class _$_MaterialListState extends _MaterialListState {
 
   @override
   String toString() {
-    return 'MaterialListState(materialCount: $materialCount, materialList: $materialList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, isScanFromBarcode: $isScanFromBarcode, nextPageIndex: $nextPageIndex, searchKey: $searchKey, selectedMaterialFilter: $selectedMaterialFilter)';
+    return 'MaterialListState(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, materialCount: $materialCount, materialList: $materialList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, isScanFromBarcode: $isScanFromBarcode, nextPageIndex: $nextPageIndex, searchKey: $searchKey, selectedMaterialFilter: $selectedMaterialFilter)';
   }
 
   @override
@@ -2273,6 +2415,14 @@ class _$_MaterialListState extends _MaterialListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialListState &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.configs, configs) || other.configs == configs) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.materialCount, materialCount) ||
                 other.materialCount == materialCount) &&
             const DeepCollectionEquality()
@@ -2297,6 +2447,11 @@ class _$_MaterialListState extends _MaterialListState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      salesOrganisation,
+      configs,
+      customerCodeInfo,
+      shipToInfo,
+      user,
       materialCount,
       const DeepCollectionEquality().hash(_materialList),
       apiFailureOrSuccessOption,
@@ -2317,7 +2472,12 @@ class _$_MaterialListState extends _MaterialListState {
 
 abstract class _MaterialListState extends MaterialListState {
   const factory _MaterialListState(
-          {required final int materialCount,
+          {required final SalesOrganisation salesOrganisation,
+          required final SalesOrganisationConfigs configs,
+          required final CustomerCodeInfo customerCodeInfo,
+          required final ShipToInfo shipToInfo,
+          required final User user,
+          required final int materialCount,
           required final List<MaterialInfo> materialList,
           required final Option<Either<ApiFailure, dynamic>>
               apiFailureOrSuccessOption,
@@ -2330,6 +2490,16 @@ abstract class _MaterialListState extends MaterialListState {
       _$_MaterialListState;
   const _MaterialListState._() : super._();
 
+  @override
+  SalesOrganisation get salesOrganisation;
+  @override
+  SalesOrganisationConfigs get configs;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
+  @override
+  ShipToInfo get shipToInfo;
+  @override
+  User get user;
   @override
   int get materialCount;
   @override

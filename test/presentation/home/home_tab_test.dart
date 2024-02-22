@@ -747,9 +747,13 @@ void main() {
       testWidgets('BundleSection Visible when product accessright is true',
           (tester) async {
         final materialListBloc = locator<MaterialListBloc>();
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeClientUser,
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeRootAdminUser,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
           ),
         );
 
@@ -760,15 +764,15 @@ void main() {
         expect(bundleSection, findsOneWidget);
         verify(
           () => materialListBloc.add(
-            MaterialListEvent.fetch(
-              salesOrganisation: SalesOrganisation.empty(),
-              configs: SalesOrganisationConfigs.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              shipToInfo: ShipToInfo.empty(),
+            MaterialListEvent.initialized(
+              user: fakeRootAdminUser,
+              configs: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeMYSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              shipToInfo: fakeShipToInfo,
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
                 bundleOffers: true,
               ),
-              user: fakeClientUser,
             ),
           ),
         ).called(1);

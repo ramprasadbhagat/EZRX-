@@ -4,9 +4,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/presentation/home/widgets/explore_marketplace_banner.dart';
@@ -17,7 +14,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
@@ -116,14 +112,9 @@ void main() {
       verify(
         () => materialListBlocMock.add(
           MaterialListEvent.fetch(
-            salesOrganisation: SalesOrganisation.empty(),
-            configs: eligibilityBlocMock.state.salesOrgConfigs,
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            shipToInfo: ShipToInfo.empty(),
             selectedMaterialFilter: MaterialFilter.empty().copyWith(
               isMarketPlace: true,
             ),
-            user: fakeClientUser,
           ),
         ),
       ).called(1);

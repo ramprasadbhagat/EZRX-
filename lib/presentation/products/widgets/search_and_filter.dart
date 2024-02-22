@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
@@ -75,16 +74,9 @@ class SearchAndFilter extends StatelessWidget {
     ).then((value) {
       if (value is MaterialFilter) {
         if (_haveDifferenceFilter(context, value)) {
-          final eligibilityState = context.read<EligibilityBloc>().state;
-
           context.read<MaterialListBloc>().add(
                 MaterialListEvent.fetch(
-                  salesOrganisation: eligibilityState.salesOrganisation,
-                  configs: eligibilityState.salesOrgConfigs,
-                  customerCodeInfo: eligibilityState.customerCodeInfo,
-                  shipToInfo: eligibilityState.shipToInfo,
                   selectedMaterialFilter: value,
-                  user: eligibilityState.user,
                 ),
               );
         }

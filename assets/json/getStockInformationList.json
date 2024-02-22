@@ -30,6 +30,20 @@
                 ]
             },
             {
+                "MaterialNumber": "000000000021041772",
+                "StockInformation": [
+                    {
+                        "MaterialNumber": "000000000021041772",
+                        "Batch": "123DJ1",
+                        "ExpiryDate": "20240530",
+                        "InStock": "Yes",
+                        "ShelfLife": 123,
+                        "SalesDistrict": null,
+                        "StockQuantity": 32
+                    }
+                ]
+            },
+            {
                 "MaterialNumber": "000000000021041773",
                 "StockInformation": []
             },

@@ -1157,7 +1157,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               ),
             );
             context.read<MaterialListBloc>().add(
-                  MaterialListEvent.fetch(
+                  MaterialListEvent.initialized(
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
                     configs: context.read<SalesOrgBloc>().state.configs,
@@ -1361,7 +1361,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
     context.read<MaterialListBloc>().add(
-          MaterialListEvent.fetch(
+          MaterialListEvent.initialized(
             salesOrganisation: eligibilityState.salesOrganisation,
             configs: eligibilityState.salesOrgConfigs,
             customerCodeInfo: eligibilityState.customerCodeInfo,
