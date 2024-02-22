@@ -62,7 +62,7 @@ class PushNotificationService {
     );
   }
 
-  Future<void> _showLocalNotification(
+  static Future<void> showLocalNotification(
     int notificationId,
     String? notificationTitle,
     String? notificationContent,
@@ -137,17 +137,7 @@ class PushNotificationService {
   }
 
   Future _setupRemoteMessageListener() async {
-    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-      debugPrint(
-        'AppPushs onBackgroundMessage : ${message.notification?.title} ${message.notification?.body} ${message.data}',
-      );
-      await _showLocalNotification(
-        message.notification.hashCode,
-        message.notification?.title,
-        message.notification?.body,
-        jsonEncode({'data': message.data}),
-      );
-    });
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     // from foreground usually won't have the push notification banner display
     // we need to use the local notification plugin to display
     FirebaseMessaging.onMessage.listen((RemoteMessage? message) async {
@@ -158,7 +148,7 @@ class PushNotificationService {
       final cleverTapId = message.data['wzrk_acct_id'] ?? '';
       _callNotificationApi(message);
       if (cleverTapId.isEmpty) {
-        await _showLocalNotification(
+        await showLocalNotification(
           message.notification.hashCode,
           message.notification?.title,
           message.notification?.body,
@@ -203,4 +193,16 @@ class PushNotificationService {
       locator<NotificationBloc>().add(const NotificationEvent.fetch());
     }
   }
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  debugPrint(
+    'AppPushs onBackgroundMessage : ${message.notification?.title} ${message.notification?.body} ${message.data}',
+  );
+  await PushNotificationService.showLocalNotification(
+    message.notification.hashCode,
+    message.notification?.title,
+    message.notification?.body,
+    jsonEncode({'data': message.data}),
+  );
 }
