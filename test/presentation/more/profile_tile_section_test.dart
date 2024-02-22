@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -41,6 +40,7 @@ void main() {
   late AppRouter autoRouterMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late EligibilityBloc eligibilityBlocMock;
+  const fakeFullname = FullName(firstName: 'test', lastName: 'test');
 
   setUpAll(() {
     locator.registerLazySingleton(() => AppRouter());
@@ -58,29 +58,19 @@ void main() {
           .thenReturn(EligibilityState.initial());
     });
     Widget getScopedWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
         ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-          ],
-          child: const Material(child: ProfileTile()),
-        ),
+        child: const Material(child: ProfileTile()),
       );
     }
 
@@ -91,7 +81,7 @@ void main() {
           UserState.initial().copyWith(
             user: User.empty().copyWith(
               id: 'testId',
-              fullName: const FullName(firstName: 'test', lastName: 'test'),
+              fullName: fakeFullname,
             ),
           ),
         ];
@@ -109,11 +99,13 @@ void main() {
           UserState.initial().copyWith(
             user: User.empty().copyWith(
               id: 'testId',
+              fullName: fakeFullname,
             ),
           ),
         ];
         whenListen(userBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
         final findProfileTileKey = find.byKey(WidgetKeys.profileTileSection);
         expect(findProfileTileKey, findsOneWidget);
       },
@@ -128,9 +120,9 @@ void main() {
         ];
         whenListen(userBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
         final findProfileName = find.text(
-          '${'Hello'.tr()}, ${const FullName(firstName: 'test', lastName: 'test').toTitleCase}',
+          '${'Hello'.tr()}, ${fakeFullname.toTitleCase}',
         );
         expect(findProfileName, findsOneWidget);
       },
@@ -150,9 +142,9 @@ void main() {
         ];
         whenListen(userBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
         final findProfileName = find.text(
-          '${'Hello'.tr()}, ${const FullName(firstName: 'test', lastName: 'test').toTitleCase}',
+          '${'Hello'.tr()}, ${fakeFullname.toTitleCase}',
         );
         expect(findProfileName, findsOneWidget);
         final profileTileSectionCustomerInformation =
@@ -172,9 +164,9 @@ void main() {
         ];
         whenListen(userBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
         final findProfileName = find.text(
-          '${'Hello'.tr()}, ${const FullName(firstName: 'test', lastName: 'test').toTitleCase}',
+          '${'Hello'.tr()}, ${fakeFullname.toTitleCase}',
         );
         expect(findProfileName, findsOneWidget);
       },

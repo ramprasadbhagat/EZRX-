@@ -85,7 +85,6 @@ import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upgrader/upgrader.dart';
@@ -159,9 +158,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<AuthBloc, AuthState>(
           listenWhen: (previous, current) => previous != current,
           listener: (context, state) {
-            state.map(
-              initial: (_) => _showLoadingDialog(context),
-              loading: (_) => _showLoadingDialog(context),
+            state.mapOrNull(
               authenticated: (authState) {
                 context.read<UserBloc>().add(const UserEvent.fetch());
 
@@ -1235,29 +1232,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         state.materialList,
       );
     }
-  }
-
-  void _showLoadingDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return CupertinoAlertDialog(
-          content: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: const <Widget>[
-              SizedBox(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(
-                  key: Key('splashLoadingIndicator'),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
   }
 
   // void _getAdminPoAttachment(EligibilityState eligibilityState) {

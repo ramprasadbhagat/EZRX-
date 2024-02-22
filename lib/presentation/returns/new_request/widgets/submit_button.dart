@@ -27,7 +27,10 @@ class _SubmitButton extends StatelessWidget {
               trackMixpanelEvent(
                 MixpanelEvents.returnRequestFailure,
                 props: {
-                  MixpanelProps.errorMessage: failure.failureMessage,
+                  MixpanelProps.errorMessage: context.tr(
+                    failure.failureMessage.message,
+                    namedArgs: failure.failureMessage.arguments,
+                  ),
                 },
               );
               ErrorUtils.handleApiFailure(context, failure);

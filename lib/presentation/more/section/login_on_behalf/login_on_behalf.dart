@@ -13,15 +13,8 @@ class LoginOnBehalf extends StatelessWidget {
         state.userFailureOrSuccessOption.fold(
           () {},
           (either) => either.fold(
-            (failure) async {
-              await CustomSnackBar(
-                icon: const Icon(
-                  Icons.info,
-                  color: ZPColors.error,
-                ),
-                backgroundColor: ZPColors.errorSnackBarColor,
-                messageText: failure.failureMessage,
-              ).show(context);
+            (failure) {
+              ErrorUtils.handleApiFailure(context, failure);
               if (context.mounted) {
                 context.read<AuthBloc>().add(
                       const AuthEvent.logout(),

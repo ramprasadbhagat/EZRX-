@@ -766,7 +766,10 @@ void _trackAddToCartFailure(BuildContext context, ApiFailure failure) =>
     trackMixpanelEvent(
       MixpanelEvents.addToCartFailed,
       props: {
-        MixpanelProps.errorMessage: failure.failureMessage,
+        MixpanelProps.errorMessage: context.tr(
+          failure.failureMessage.message,
+          namedArgs: failure.failureMessage.arguments,
+        ),
         MixpanelProps.viewFrom:
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
       },

@@ -5,8 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -29,16 +28,7 @@ class LoginOnBehalfSheet extends StatelessWidget {
       listener: (context, state) => state.authFailureOrSuccessOption.fold(
         () {},
         (either) => either.fold(
-          (failure) {
-            CustomSnackBar(
-              icon: const Icon(
-                Icons.info,
-                color: ZPColors.error,
-              ),
-              backgroundColor: ZPColors.errorSnackBarColor,
-              messageText: failure.failureMessage,
-            ).show(context);
-          },
+          (failure) => ErrorUtils.handleApiFailure(context, failure),
           (_) {
             context.read<SalesOrgBloc>().add(const SalesOrgEvent.initialized());
             context

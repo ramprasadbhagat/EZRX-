@@ -3,8 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -25,14 +25,7 @@ class PoAttachmentUpload extends StatelessWidget {
         state.failureOrSuccessOption.fold(
           () => {},
           (either) => either.fold(
-            (failure) => CustomSnackBar(
-              icon: const Icon(
-                Icons.info,
-                color: ZPColors.error,
-              ),
-              backgroundColor: ZPColors.errorSnackBarColor,
-              messageText: failure.failureMessage,
-            ).show(context),
+            (failure) => ErrorUtils.handleApiFailure(context, failure),
             (_) {
               context.read<AdditionalDetailsBloc>().add(
                     AdditionalDetailsEvent.addPoDocument(

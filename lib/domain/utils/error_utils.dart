@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -13,14 +14,17 @@ class ErrorUtils {
   static void handleApiFailure(BuildContext context, ApiFailure failure) {
     final isTokenExpiredFailure =
         failure == const ApiFailure.authenticationFailed();
-    final failureMessage = failure.failureMessage;
+    final message = context.tr(
+      failure.failureMessage.message,
+      namedArgs: failure.failureMessage.arguments,
+    );
     CustomSnackBar(
       icon: const Icon(
         Icons.info,
         color: ZPColors.error,
       ),
       backgroundColor: ZPColors.errorSnackBarColor,
-      messageText: failureMessage,
+      messageText: message,
     ).show(context);
     if (isTokenExpiredFailure) {
       context.read<AuthBloc>().add(const AuthEvent.logout());

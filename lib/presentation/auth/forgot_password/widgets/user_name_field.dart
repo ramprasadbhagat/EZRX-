@@ -19,14 +19,7 @@ class _UsernameField extends StatelessWidget {
         state.resetPasswordFailureOrSuccessOption.fold(
           () {},
           (either) => either.fold(
-            (failure) => CustomSnackBar(
-              icon: const Icon(
-                Icons.cancel,
-                color: ZPColors.error,
-              ),
-              backgroundColor: ZPColors.errorSnackBarColor,
-              messageText: failure.failureMessage,
-            ).show(context),
+            (failure) => ErrorUtils.handleApiFailure(context, failure),
             (success) =>
                 context.router.pushNamed('forgot_password_confirmation'),
           ),

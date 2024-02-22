@@ -104,6 +104,7 @@ void main() {
   Widget getEditDeductionCodePage() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<SalesDistrictBloc>(
           create: (context) => salesDistrictBlocMock,
@@ -361,7 +362,7 @@ void main() {
           );
           whenListen(deductionCodeMock, expectedState);
           await tester.pumpWidget(getEditDeductionCodePage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           verifyAppBarTitleAndScaffoldKey();
           final editDeductionCodeButton = find.byKey(
             const Key('editDeductionCodeButton'),
@@ -408,7 +409,7 @@ void main() {
           );
           whenListen(deductionCodeMock, expectedState);
           await tester.pumpWidget(getEditDeductionCodePage());
-          await tester.pump();
+          await tester.pumpAndSettle();
           verifyAppBarTitleAndScaffoldKey();
           final editDeductionCodeButton = find.byKey(
             const Key('editDeductionCodeButton'),

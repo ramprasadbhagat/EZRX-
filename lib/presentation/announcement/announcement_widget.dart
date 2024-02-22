@@ -48,7 +48,6 @@ class AnnouncementWidget extends StatelessWidget {
               authenticated: (value) =>
                   displayTime.isPost || displayTime.isPreAndPost,
               initial: (value) => false,
-              loading: (value) => false,
               unauthenticated: (value) =>
                   displayTime.isPre || displayTime.isPreAndPost,
               biometricDenied: (value) => false,

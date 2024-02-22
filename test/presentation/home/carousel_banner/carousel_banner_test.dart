@@ -137,6 +137,7 @@ void main() {
     RouteDataScope getWUT() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
           BlocProvider<CustomerCodeBloc>(
@@ -267,7 +268,7 @@ void main() {
       });
 
       await tester.pumpWidget(getWUT());
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(
         find.byKey(WidgetKeys.customSnackBar),
@@ -292,7 +293,7 @@ void main() {
       when(() => bannerBloc.state).thenReturn(mockState);
 
       await tester.pumpWidget(getWUT());
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(
         find.byKey(WidgetKeys.customSnackBar),

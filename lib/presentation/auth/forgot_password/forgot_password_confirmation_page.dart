@@ -1,7 +1,6 @@
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -36,14 +35,7 @@ class ForgetPasswordConfirmationPage extends StatelessWidget {
           state.resetPasswordFailureOrSuccessOption.fold(
             () {},
             (either) => either.fold(
-              (failure) => CustomSnackBar(
-                icon: const Icon(
-                  Icons.cancel,
-                  color: ZPColors.error,
-                ),
-                backgroundColor: ZPColors.errorSnackBarColor,
-                messageText: failure.failureMessage,
-              ).show(context),
+              (failure) => ErrorUtils.handleApiFailure(context, failure),
               (_) {},
             ),
           );

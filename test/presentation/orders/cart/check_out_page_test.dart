@@ -601,8 +601,7 @@ void main() {
           () => trackMixpanelEvent(
             MixpanelEvents.placeOrderFailure,
             props: {
-              MixpanelProps.errorMessage:
-                  const ApiFailure.other('Fake-error').failureMessage,
+              MixpanelProps.errorMessage: 'Fake-error'.tr(),
             },
           ),
         ).called(1);

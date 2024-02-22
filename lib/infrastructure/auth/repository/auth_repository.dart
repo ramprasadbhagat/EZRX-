@@ -100,7 +100,7 @@ class AuthRepository implements IAuthRepository {
         properties: {
           MixpanelProps.username: usernameStr,
           MixpanelProps.errorMessage:
-              FailureHandler.handleFailure(e).failureMessage,
+              FailureHandler.handleFailure(e).nonTranslatedFailureMessage,
           MixpanelProps.loginMethod: 'by_username',
         },
       );
@@ -515,7 +515,7 @@ class AuthRepository implements IAuthRepository {
     mixpanelService.trackEvent(
       eventName: MixpanelEvents.loginFailure,
       properties: {
-        MixpanelProps.errorMessage: failure.failureMessage,
+        MixpanelProps.errorMessage: failure.nonTranslatedFailureMessage,
         MixpanelProps.loginMethod: 'sso',
       },
     );

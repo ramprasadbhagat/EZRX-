@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -475,7 +476,7 @@ void main() {
     expect(
       find.descendant(
         of: find.byType(CustomSnackBar),
-        matching: find.text(fakeError.failureMessage),
+        matching: find.text(fakeError.failureMessage.message),
       ),
       findsOneWidget,
     );
@@ -712,7 +713,7 @@ void main() {
       expect(
         find.descendant(
           of: find.byType(CustomSnackBar),
-          matching: find.text(fakeError.failureMessage),
+          matching: find.text(fakeError.failureMessage.message),
         ),
         findsOneWidget,
       );
@@ -758,7 +759,7 @@ void main() {
       expect(
         find.descendant(
           of: find.byType(CustomSnackBar),
-          matching: find.text(fakeError.failureMessage),
+          matching: find.text(fakeError.failureMessage.message.tr()),
         ),
         findsOneWidget,
       );

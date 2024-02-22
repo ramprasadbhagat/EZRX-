@@ -71,7 +71,7 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
         properties: {
           MixpanelProps.scanMethod: 'camera',
           MixpanelProps.errorMessage:
-              FailureHandler.handleFailure(e).failureMessage,
+              FailureHandler.handleFailure(e).nonTranslatedFailureMessage,
         },
       );
 
@@ -106,7 +106,7 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
         properties: {
           MixpanelProps.scanMethod: 'gallery',
           MixpanelProps.errorMessage:
-              FailureHandler.handleFailure(e).failureMessage,
+              FailureHandler.handleFailure(e).nonTranslatedFailureMessage,
         },
       );
 

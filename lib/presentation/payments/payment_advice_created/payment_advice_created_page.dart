@@ -105,7 +105,10 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
                   MixpanelEvents.paymentFailure,
                   props: {
                     MixpanelProps.errorMessage:
-                        'Creating Virtual Account for payment advise failure with error message: ${failure.failureMessage}',
+                        'Creating Virtual Account for payment advise failure with error message: ${context.tr(
+                      failure.failureMessage.message,
+                      namedArgs: failure.failureMessage.arguments,
+                    )}',
                     MixpanelProps.paymentMethod: state
                         .selectedPaymentMethod.paymentMethod
                         .getOrDefaultValue(''),
@@ -128,7 +131,10 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
                   MixpanelEvents.paymentFailure,
                   props: {
                     MixpanelProps.errorMessage:
-                        'Generating payment advise failure with error message: ${failure.failureMessage}',
+                        'Generating payment advise failure with error message: ${context.tr(
+                      failure.failureMessage.message,
+                      namedArgs: failure.failureMessage.arguments,
+                    )}',
                     MixpanelProps.paymentMethod: state
                         .selectedPaymentMethod.paymentMethod
                         .getOrDefaultValue(''),

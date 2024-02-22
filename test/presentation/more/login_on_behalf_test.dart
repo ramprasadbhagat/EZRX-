@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -21,6 +22,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
@@ -44,6 +46,8 @@ void main() {
   late SalesOrgBlocMock salesOrgBlocMock;
   late AppRouter autoRouterMock;
   late EligibilityBloc eligibilityBlocMock;
+  late AuthBloc authBlocMock;
+
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
@@ -53,12 +57,14 @@ void main() {
     eligibilityBlocMock = EligibilityBlockMock();
     proxyLoginFormBlocMock = ProxyLoginFormBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
+    authBlocMock = AuthBlocMock();
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => proxyLoginFormBlocMock.state)
         .thenReturn(ProxyLoginFormState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
   });
 
   Widget getScopedWidget() {
@@ -77,6 +83,9 @@ void main() {
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
+        ),
+        BlocProvider<AuthBloc>(
+          create: (context) => authBlocMock,
         ),
       ],
       child: const LoginOnBehalf(),

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/error/failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'api_failures.freezed.dart';
@@ -75,65 +76,106 @@ class ApiFailure with _$ApiFailure {
 }
 
 extension ApiFailureExt on ApiFailure {
-  String get failureMessage => map(
-        other: (other) => other.message,
-        serverError: (serverError) => serverError.message,
-        poorConnection: (_) => 'Poor Internet connection',
-        serverTimeout: (_) => 'Server time out',
-        userNotFound: (_) => 'User not found.',
-        invalidEmailAndPasswordCombination: (_) =>
-            'Incorrect username and/or password.',
-        accountLocked: (_) => 'Account is Locked',
-        accountExpired: (_) => 'Account is Expired',
-        tokenExpired: (_) => 'Session token is Expired',
-        authenticationFailed: (_) => 'Your session has expired',
-        deviceNotSupportBiometric: (_) => 'Device not support biometric',
-        cannotCheckBiometrics: (_) => 'Unable to check your biometric',
-        noSupportedBiometrics: (_) => 'No supported biometric',
-        invalidBiometric: (_) => 'Incorrect biometric',
-        priceOverrideNotFound: (_) => 'Price override not found!',
-        proxyLoginRolePermissionNotMatch: (_) =>
-            'Only Root Admin and ZP Admin can login on behalf',
-        proxyLoginZPSalesOrgNotMatch: (_) =>
-            'ZP Admin can only login on behalf of users from the same Sales Org',
-        proxyLoginZPTargetRoleNotMatch: (_) =>
-            'ZP Admin can only login on behalf of Sales Rep and Customer users',
-        productOutOfStock: (_) => 'Product Not Available',
-        photoPermissionFailed: (_) =>
-            'Please enable Photos permission from the app settings',
-        storagePermissionFailed: (_) =>
-            'Please enable Storage permission from the app settings',
-        invalidFileFormat: (_) =>
-            'Unable to upload file as either file format not supported or something wrong with the file',
-        uploadCountExcideLimit: (_) => 'Number of files exceeds the criteria',
-        productDetailRoute: (_) =>
-            'This product is not available on your account',
-        orderDetailRoute: (_) => 'This order is not available on your account',
-        returnDetailRoute: (_) =>
-            'This return request is not available on your account',
-        paymentDetailRoute: (_) =>
-            'This payment advice is not available on your account',
-        invoiceDetailRoute: (_) =>
-            'This invoice is not available on your account',
-        passwordResetFail: (_) => 'Unable to reset password',
-        languageChangeFail: (_) => 'Unable to change language',
-        scannedProductNotFound: (scannedProduct) =>
-            'Unable to fetch Material ${scannedProduct.productNumber}',
-        cameraPermissionFailed: (_) => 'Camera Permission Denied',
-        userNameNotFound: (_) => 'Incorrect username',
-        uploadedFileSizeExceed: (_) =>
-            'Can’t upload.This file is larger than 20 MB',
-        paymentAdviceDeleteFailed: (paymentAdvice) =>
-            'PA #${paymentAdvice.adviceNumber} delete failed',
-        allReorderItemInvalid: (_) => 'All reorder materials are invalid',
-        maximumCartQuantityExceed: (maximumException) =>
-            'In cart quantity should not be more than ${maximumException.maximumNumber}.',
-        cartHasDifferentAddress: (_) =>
-            'shipToAddress changed from existing cart. Delete the cart and then add new item',
-        articleannuncementTagFetchingError: (_) =>
-            'Error while fetching announcement article tag list!',
-        attachmentDownloadError: (_) => 'File download failed',
-        marketplaceTnCAcceptanceError: (_) =>
-            'Unable to update acceptance status',
+  //ignore:long-method
+  Failure get failureMessage => map(
+        other: (other) => Failure(other.message),
+        serverError: (serverError) => Failure(serverError.message),
+        poorConnection: (_) => const Failure('Poor Internet connection'),
+        serverTimeout: (_) => const Failure('Server time out'),
+        userNotFound: (_) => const Failure('User not found.'),
+        invalidEmailAndPasswordCombination: (_) => const Failure(
+          'Incorrect username and/or password.',
+        ),
+        accountLocked: (_) => const Failure('Account is Locked'),
+        accountExpired: (_) => const Failure('Account is Expired'),
+        tokenExpired: (_) => const Failure('Session token is Expired'),
+        authenticationFailed: (_) => const Failure('Your session has expired'),
+        deviceNotSupportBiometric: (_) =>
+            const Failure('Device not support biometric'),
+        cannotCheckBiometrics: (_) =>
+            const Failure('Unable to check your biometric'),
+        noSupportedBiometrics: (_) => const Failure('No supported biometric'),
+        invalidBiometric: (_) => const Failure('Incorrect biometric'),
+        priceOverrideNotFound: (_) =>
+            const Failure('Price override not found!'),
+        proxyLoginRolePermissionNotMatch: (_) => const Failure(
+          'Only Root Admin and ZP Admin can login on behalf',
+        ),
+        proxyLoginZPSalesOrgNotMatch: (_) => const Failure(
+          'ZP Admin can only login on behalf of users from the same Sales Org',
+        ),
+        proxyLoginZPTargetRoleNotMatch: (_) => const Failure(
+          'ZP Admin can only login on behalf of Sales Rep and Customer users',
+        ),
+        productOutOfStock: (_) => const Failure('Product Not Available'),
+        photoPermissionFailed: (_) => const Failure(
+          'Please enable Photos permission from the app settings',
+        ),
+        storagePermissionFailed: (_) => const Failure(
+          'Please enable Storage permission from the app settings',
+        ),
+        invalidFileFormat: (_) => const Failure(
+          'Unable to upload file as either file format not supported or something wrong with the file',
+        ),
+        uploadCountExcideLimit: (_) =>
+            const Failure('Number of files exceeds the criteria'),
+        productDetailRoute: (_) => const Failure(
+          'This product is not available on your account',
+        ),
+        orderDetailRoute: (_) =>
+            const Failure('This order is not available on your account'),
+        returnDetailRoute: (_) => const Failure(
+          'This return request is not available on your account',
+        ),
+        paymentDetailRoute: (_) => const Failure(
+          'This payment advice is not available on your account',
+        ),
+        invoiceDetailRoute: (_) => const Failure(
+          'This invoice is not available on your account',
+        ),
+        passwordResetFail: (_) => const Failure('Unable to reset password'),
+        languageChangeFail: (_) => const Failure('Unable to change language'),
+        scannedProductNotFound: (scannedProduct) => Failure(
+          'Unable to fetch Material {productNumber}',
+          arguments: {'productNumber': scannedProduct.productNumber},
+        ),
+        cameraPermissionFailed: (_) =>
+            const Failure('Camera Permission Denied'),
+        userNameNotFound: (_) => const Failure('Incorrect username'),
+        uploadedFileSizeExceed: (_) => const Failure(
+          'Can’t upload.This file is larger than 20 MB',
+        ),
+        paymentAdviceDeleteFailed: (paymentAdvice) => Failure(
+          'PA #{adviceNumber} delete failed',
+          arguments: {'adviceNumber': paymentAdvice.adviceNumber},
+        ),
+        allReorderItemInvalid: (_) =>
+            const Failure('All reorder materials are invalid'),
+        maximumCartQuantityExceed: (maximumException) => Failure(
+          'In cart quantity should not be more than {maximumNumber}.',
+          arguments: {'maximumNumber': maximumException.maximumNumber},
+        ),
+        cartHasDifferentAddress: (_) => const Failure(
+          'shipToAddress changed from existing cart. Delete the cart and then add new item',
+        ),
+        articleannuncementTagFetchingError: (_) => const Failure(
+          'Error while fetching announcement article tag list!',
+        ),
+        attachmentDownloadError: (_) => const Failure('File download failed'),
+        marketplaceTnCAcceptanceError: (_) => const Failure(
+          'Unable to update acceptance status',
+        ),
       );
+  String get nonTranslatedFailureMessage {
+    var fullMessage = failureMessage.message;
+    if (failureMessage.arguments.isEmpty) {
+      return fullMessage;
+    }
+    failureMessage.arguments.forEach(
+      (String key, String value) =>
+          fullMessage = fullMessage.replaceAll(RegExp('{$key}'), value),
+    );
+
+    return fullMessage;
+  }
 }
