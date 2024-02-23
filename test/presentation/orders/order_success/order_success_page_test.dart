@@ -2045,6 +2045,51 @@ void main() {
 
     expect(preOrderText, findsOneWidget);
   });
+
+  testWidgets('Find Material total value', (tester) async {
+    const unitPrice = 17.2;
+    const quantity = 5; 
+    const totalMaterialPrice = unitPrice * quantity;
+
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeVNSalesOrgConfigs,
+        salesOrganisation: fakeVNSalesOrganisation,
+      ),
+    );
+    when(() => orderSummaryBlocMock.state).thenAnswer(
+      (invocation) => OrderSummaryState.initial().copyWith(
+        salesOrgConfig: fakeVNSalesOrgConfigs,
+        salesOrganisation: fakeVNSalesOrganisation,
+        orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+          orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+            OrderHistoryDetailsOrderItem.empty().copyWith(
+              principalData: PrincipalData.empty().copyWith(
+                principalCode: PrincipalCode('0000101308'),
+                principalName: PrincipalName('PROCTER AND GAMBLE'),
+              ),
+              materialNumber: MaterialNumber(''),
+              qty: quantity,
+              unitPrice: unitPrice,
+              type: OrderItemType('Comm'),
+              productType: MaterialInfoType('material'),
+            ),
+          ],
+        ),
+      ),
+    );
+    await tester.pumpWidget(getWidget());
+    await tester.pumpAndSettle();
+    final orderItemsSection = find.byKey(WidgetKeys.orderSuccessItemsSection);
+    await tester.scrollUntilVisible(orderItemsSection, -500);
+    await tester.pump(const Duration(seconds: 1));
+    expect(orderItemsSection, findsOneWidget);
+    final totalMaterialPriceText = find.textContaining(
+      totalMaterialPrice.toString(),
+      findRichText: true,
+    );
+    expect(totalMaterialPriceText, findsOneWidget);
+  });
 }
 
 bool findTextAndTap(InlineSpan visitor, String text) {

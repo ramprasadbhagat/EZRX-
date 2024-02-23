@@ -124,7 +124,7 @@ class _MaterialItem extends StatelessWidget {
               PriceComponent(
                 key: WidgetKeys.orderSuccessItemTotalPrice,
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price: orderItem.itemTotalPrice(
+                price: orderItem.itemNetPrice(
                   isIDMarket,
                 ),
               ),
