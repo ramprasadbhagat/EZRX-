@@ -3014,6 +3014,51 @@ void main() {
         expect(find.byKey(WidgetKeys.priceSummarySheet), findsOneWidget);
       });
 
+      testWidgets('Test Strike through price not visible for bundles',
+          (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            config: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+            cartProducts: [
+              mockCartBundleItems.first.copyWith(
+                bundle: Bundle.empty().copyWith(
+                  bundleCode: 'fake-bundle',
+                  bundleInformation: [
+                    BundleInfo.empty().copyWith(
+                      quantity: 10,
+                      rate: 90,
+                      sequence: 3,
+                    )
+                  ],
+                  materials: [
+                    MaterialInfo.empty().copyWith(quantity: MaterialQty(9))
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final bundleProduct = find.byKey(
+          WidgetKeys.cartItemBundleTile('fake-bundle'),
+        );
+
+        final strikeThroughPrice =
+            find.textContaining('MYR 90.0 per item', findRichText: true);
+        expect(bundleProduct, findsOneWidget);
+        expect(strikeThroughPrice, findsNothing);
+      });
+
       testWidgets(
           'Test Grand Total value for bundles with displaySubtotalTaxBreakdown enabled',
           (tester) async {

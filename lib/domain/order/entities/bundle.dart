@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -56,5 +57,11 @@ class Bundle with _$Bundle {
       (bundleInfo) => totalMaterial >= bundleInfo.quantity,
       orElse: () => BundleInfo.empty(),
     );
+  }
+
+  bool get showStrikeThroughPrice {
+    final originalRate = sortedBundleInformation.firstOrNull?.rate ?? 0;
+
+    return originalRate > currentBundleInfo.rate;
   }
 }

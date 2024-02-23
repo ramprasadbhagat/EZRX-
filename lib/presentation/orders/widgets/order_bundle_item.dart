@@ -153,14 +153,15 @@ class _BundleInformation extends StatelessWidget {
               type: PriceStyle.bundleActiveOfferPrice,
               trailingText: context.tr('per item '),
             ),
-            PriceComponent(
-              salesOrgConfig: salesOrgConfigs,
-              price: viewByOrdersGroup
-                  .bundleMaterial.bundle.minimumQuantityBundleMaterial.rate
-                  .toString(),
-              type: PriceStyle.bundleListPriceStrikeThrough,
-              trailingText: context.tr('per item'),
-            ),
+            if (viewByOrdersGroup.bundleMaterial.bundle.showStrikeThroughPrice)
+              PriceComponent(
+                salesOrgConfig: salesOrgConfigs,
+                price: viewByOrdersGroup
+                    .bundleMaterial.bundle.minimumQuantityBundleMaterial.rate
+                    .toString(),
+                type: PriceStyle.bundleListPriceStrikeThrough,
+                trailingText: context.tr('per item'),
+              ),
           ],
         ),
         Row(

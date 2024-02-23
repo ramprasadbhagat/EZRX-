@@ -37,20 +37,21 @@ class _BundleDetailsSection extends StatelessWidget {
           RichText(
             text: TextSpan(
               text:
-                  '${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate}  ${context.tr('per item')}',
+                  '${currentBundleOffer.type.getOrDefaultValue('')} ${currentBundleOffer.rate}  ${context.tr('per item')} ',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.neutralsBlack,
                     decoration: TextDecoration.none,
                   ),
               children: <TextSpan>[
-                TextSpan(
-                  text:
-                      '${currentBundleOffer.type.getOrDefaultValue('')} ${cartItem.bundle.bundleInformation.firstOrNull?.rate} ${context.tr('per item')}',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.darkGray,
-                        decoration: TextDecoration.lineThrough,
-                      ),
-                ),
+                if (cartItem.bundle.showStrikeThroughPrice)
+                  TextSpan(
+                    text:
+                        '${currentBundleOffer.type.getOrDefaultValue('')} ${cartItem.bundle.bundleInformation.firstOrNull?.rate} ${context.tr('per item')}',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: ZPColors.darkGray,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                  ),
               ],
             ),
           ),
