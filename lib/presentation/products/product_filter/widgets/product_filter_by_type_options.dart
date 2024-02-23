@@ -74,7 +74,7 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                         ),
                       );
                 },
-                title: 'Combo offers',
+                title: context.tr('Combo offers'),
               ),
             if (eligibilityState.canOrderCovidMaterial)
               _ListTileThemeWidget(

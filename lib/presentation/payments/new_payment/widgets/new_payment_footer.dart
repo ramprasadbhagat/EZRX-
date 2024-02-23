@@ -48,7 +48,7 @@ class _NewPaymentFooter extends StatelessWidget {
                         data: StringUtils.displayNumber(
                           state.selectedInvoices.amountTotal,
                         ),
-                        title: 'Amount payable',
+                        title: context.tr('Amount payable'),
                         salesOrgConfig: configs,
                       ),
                       Padding(
@@ -64,7 +64,7 @@ class _NewPaymentFooter extends StatelessWidget {
                         data: '(${StringUtils.displayNumber(
                           state.selectedCredits.amountTotal.abs(),
                         )})',
-                        title: 'Credit applied',
+                        title: context.tr('Credit applied'),
                         salesOrgConfig: configs,
                         isNegativeColorDisplay: state.negativeAmount,
                       ),

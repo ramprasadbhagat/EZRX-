@@ -33,8 +33,8 @@ class ForgetPasswordPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Logo(
-            title: 'Forgot password',
+          Logo(
+            title: context.tr('Forgot password'),
           ),
           Expanded(
             child: ListView(

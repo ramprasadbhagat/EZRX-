@@ -49,8 +49,8 @@ class NewPaymentPage extends StatelessWidget {
       enableDrag: false,
       builder: (_) => ConfirmBottomSheet(
         key: WidgetKeys.confirmBottomSheet,
-        title: 'Invoice/credit already in use',
-        content: paymentErrorMessage,
+        title: context.tr('Invoice/credit already in use'),
+        content: context.tr(paymentErrorMessage),
         confirmButtonText: 'Payment summary',
         iconWidget: SvgPicture.asset(
           SvgImage.alert,

@@ -94,9 +94,9 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
                     ),
                     child: ScrollList<AnnouncementArticleItem>(
                       key: WidgetKeys.announcementListKey,
-                      noRecordFoundWidget: const NoRecordFound(
+                      noRecordFoundWidget: NoRecordFound(
                         key: WidgetKeys.announcementNotFoundRecordKey,
-                        title: 'No Announcement found',
+                        title: context.tr('No Announcement found'),
                       ),
                       controller: _scrollController,
                       onRefresh: () => context.read<AnnouncementInfoBloc>().add(

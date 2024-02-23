@@ -23,7 +23,7 @@ class UsernameField extends StatelessWidget {
         return TextFieldWithLabel(
           fieldKey: WidgetKeys.loginUsernameField,
           initValue: state.username.getOrDefaultValue(''),
-          labelText: 'Username'.tr(),
+          labelText: context.tr('Username'),
           mandatory: true,
           decoration: InputDecoration(
             hintText: context.tr('Enter username'),

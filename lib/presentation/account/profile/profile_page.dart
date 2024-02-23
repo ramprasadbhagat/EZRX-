@@ -58,8 +58,8 @@ class ProfilePage extends StatelessWidget {
           builder: (context, state) {
             return ScrollList<CustomerLicense>(
               header: const _Header(),
-              noRecordFoundWidget: const NoRecordFound(
-                title: 'Looks like you don`t have any license here',
+              noRecordFoundWidget: NoRecordFound(
+                title: context.tr('Looks like you don`t have any license here'),
                 subTitle: '',
                 svgImage: SvgImage.emptyBox,
               ),

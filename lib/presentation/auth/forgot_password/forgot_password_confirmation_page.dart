@@ -49,8 +49,8 @@ class ForgetPasswordConfirmationPage extends StatelessWidget {
                 )
               : Column(
                   children: <Widget>[
-                    const Logo(
-                      title: 'Forgot password',
+                     Logo(
+                      title: context.tr('Forgot password'),
                     ),
                     Expanded(
                       child: ListView(

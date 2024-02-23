@@ -52,7 +52,7 @@ class NoRecordFound extends StatelessWidget {
       isFavourite
           ? NoRecordFound(
               svgImage: SvgImage.emptyFavourite,
-              title: 'No favourites yet',
+              title: context.tr('No favourites yet'),
               subTitleWidget: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(

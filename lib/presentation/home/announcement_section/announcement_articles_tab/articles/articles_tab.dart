@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,9 +72,9 @@ class _ArticlesTabState extends State<ArticlesTab> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: ScrollList<AnnouncementArticleItem>(
                     controller: _scrollController,
-                    noRecordFoundWidget: const NoRecordFound(
+                    noRecordFoundWidget: NoRecordFound(
                       key: WidgetKeys.noArticleToShowKey,
-                      title: 'No articles to show',
+                      title: context.tr('No articles to show'),
                     ),
                     onRefresh: () {
                       context.read<ArticlesInfoBloc>().add(

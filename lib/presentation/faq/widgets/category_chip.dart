@@ -24,7 +24,7 @@ class _CategoryChip extends StatelessWidget {
                   right: 8.0,
                 ),
                 child: _CustomChip(
-                  title: 'All'.tr(),
+                  title: context.tr('All'),
                   isSelected: state.selectedCategory.isAll,
                   onChanged: (value) {
                     context.read<FaqBloc>().add(
