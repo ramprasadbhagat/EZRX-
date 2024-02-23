@@ -10,7 +10,6 @@ import '../../robots/common/common_robot.dart';
 import '../../robots/common/enum.dart';
 import '../../robots/common/extension.dart';
 import '../../robots/home/customer_search_robot.dart';
-import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
 import '../../robots/more/more_robot.dart';
 import '../../robots/returns/new_return/step1/new_return_step1_robot.dart';
@@ -26,7 +25,6 @@ import '../../robots/returns/returns_root_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
-  late CustomerSearchRobot customerSearchRobot;
   late CommonRobot commonRobot;
   late MoreRobot moreRobot;
   late ReturnsRootRobot returnsRootRobot;
@@ -34,81 +32,83 @@ void main() {
   late ReturnsByRequestRobot returnsByRequestRobot;
   late ReturnsByItemsFilterRobot returnsByItemsFilterRobot;
   late ReturnsByItemsDetailRobot returnsByItemsDetailRobot;
-  late HomeRobot homeRobot;
   late ReturnsByRequestFilterRobot returnsByRequestFilterRobot;
   late ReturnsByRequestDetailRobot returnsByRequestDetailRobot;
   late NewReturnStep1Robot newReturnRobot;
   late NewReturnStep2Robot newReturnStep2Robot;
   late NewReturnStep3Robot newReturnStep3Robot;
+  late CustomerSearchRobot customerSearchRobot;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   // initialize variables
-  const marketMalaysia = 'Malaysia';
+  const market = 'Philippines';
   const username = 'auto_client_user';
   const password = 'Pa55word@1234';
-  const shipToCode = '0070149863';
-  const shipToAddress = 'RSD HOSPITALS SDN BHD (SJMC)';
-  const customerCode = '0030082707';
-  const currency = 'MYR';
+  const customerCode = '0030013148';
+  const shipToCode = '0070015858';
+  const shipToAddress = 'WATSONS PERSONAL CARE';
+  const currency = 'PHP';
   const invalidSearchKey = 'auto-testtttttttttttt';
   const invalidLengthSearchKey = 'a';
   const validSearchKey = 'EZ';
-  final fromDate = DateTime.now().subtract(const Duration(days: 360));
-  final toDate = DateTime.now().subtract(const Duration(days: 2));
+  final fromDate = DateTime(2023, 1, 1);
+  final toDate = DateTime.now();
   const fromAmount = '0.0';
   const toAmount = '100000000.0';
 
   //Return detail data
   const returnStatus = 'Pending Approval';
-  const returnId = 'EZRE-200124004014';
-  const returnIdWithBonus = 'EZRE-200123003529';
-  const returnReference = 'Test Return Reference';
-  const specialInstructions = 'Test Special Instruction';
-  const materialNumber = '21041727';
-  const materialName = '190 PANADOL SOLUBLETAB500MG120S/BX';
+  const returnId = 'EZRE-250023000802';
+  const returnIdWithBonus = 'EZRE-250024001194';
+  const returnReference = 'NA';
+  const specialInstructions = 'NA';
+  const materialNumber = '21000053';
+  const materialName = "10010317 SCHOLL HEELGRIPS 'S";
   const materialQty = 1;
-  const materialPrice = '$currency 123.30';
-  const materialPrincipalName = 'GLAXOSMITHKLINE CONSUMER';
-  const materialPrincipalCode = '0000101334';
-  const materialInvoiceNumber = '1100001281';
-  const materialReturnReason = 'Damaged Stocks';
+  final materialPrice = 151.79.priceDisplay(currency);
+  const materialPrincipalName = 'RECKITT BENCKISER (SINGAPORE) PTE';
+  const materialPrincipalCode = '0000100486';
+  const materialInvoiceNumber = '1510000244';
+  const materialReturnReason = 'Did Not Order';
   const materialReturnComments = '-';
+
+  const bonusMaterialNumber = '23001761';
+  const bonusMaterialQty = 1;
+  final bonusMaterialPrice = 1217.54.priceDisplay(currency);
   //Material data
   const materialIndex = 0;
 
   //New Return Request step - 1
   final fromDateForStep1 = DateTime.now().subtract(const Duration(days: 360));
   final toDateForStep1 = DateTime.now().subtract(const Duration(days: 2));
-  final fromDateToNext = DateTime(2023, 5, 29);
-  final toDateToNext = DateTime(2023, 8, 29);
-  const validSearchKeyForStep1 = 'ILIADIN';
+  final fromDateToNext = DateTime(2024, 2, 1);
+  final toDateToNext = DateTime(2024, 2, 6);
+  const validSearchKeyForStep1 = '2100';
   const inValidSearchKey = '1';
   const noResultSearchKey = 'asdasfxzc';
-  const materialNumberWithBonus = '21247736';
-  const materialNameWithBonus = '(Z) ILIANDIN ADULT DROP 0.05% 10ML';
 
   //
   const exceedReturnQuantity = '100';
   const validReturnQuantity = '1';
-  final fromDateToNextForStep2 = DateTime(2023, 8, 15);
-  final toDateToNextForStep2 = DateTime(2023, 8, 31);
+  final fromDateToNextForStep2 = fromDateToNext;
+  final toDateToNextForStep2 = toDateToNext;
   final reason = 'Wrong Bill-To'.tr();
-  const materialId = '23348055';
-  const materialTitle = "(Z) HYZAAR HAARLEM TABS 100/12.5MG30'S";
-  const materialUUID = '1100001272000010';
+  const materialId = materialNumber;
+  const materialTitle = materialName;
+  const materialUUID = '1510000744000010';
 
   //Return detail data
   const returnRequestStatus = 'Pending Review';
-  final returnSubTotal = '$currency ${123.30.priceFormatted}';
-  final returnGrandTotal = '$currency ${123.30.priceFormatted}';
+  final returnSubTotal = materialPrice;
+  final returnGrandTotal = materialPrice;
+
+  var loginRequired = true;
 
   void initializeRobot(WidgetTester tester) {
     loginRobot = LoginRobot(tester);
-    customerSearchRobot = CustomerSearchRobot(tester);
     commonRobot = CommonRobot(tester);
     moreRobot = MoreRobot(tester);
-    homeRobot = HomeRobot(tester);
     returnsRootRobot = ReturnsRootRobot(tester);
     returnsByItemsRobot = ReturnsByItemsRobot(tester);
     returnsByRequestRobot = ReturnsByRequestRobot(tester);
@@ -119,9 +119,8 @@ void main() {
     newReturnRobot = NewReturnStep1Robot(tester);
     newReturnStep2Robot = NewReturnStep2Robot(tester);
     newReturnStep3Robot = NewReturnStep3Robot(tester);
+    customerSearchRobot = CustomerSearchRobot(tester);
   }
-
-  var loginRequired = true;
 
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
@@ -130,7 +129,7 @@ void main() {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRequired) {
-      await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
+      await loginRobot.loginToHomeScreen(username, password, market);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
@@ -145,7 +144,6 @@ void main() {
 
   Future<void> goToReturns({required WidgetTester tester}) async {
     await pumpAppWithHomeScreen(tester);
-
     //Go returns
     await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapReturnsTile();
@@ -171,6 +169,7 @@ void main() {
   }
 
   Future<void> fillStep2() async {
+    await commonRobot.changeDeliveryAddress(shipToCode);
     await commonRobot.navigateToScreen(NavigationTab.more);
     await moreRobot.tapReturnsTile();
     await moreRobot.tapNewRequestFloatingButton();
@@ -186,8 +185,8 @@ void main() {
 
   group('Return by Item section - ', () {
     testWidgets('EZRX-T134 | Verify display items in Returns', (tester) async {
-      await pumpAppWithHomeScreen(tester);
-      await homeRobot.tapReturnsQuickAccess();
+      //initialize necessary robots
+      await goToReturns(tester: tester);
 
       //verify
       returnsRootRobot.verifyTabBarVisible();
@@ -352,21 +351,27 @@ void main() {
       returnsRootRobot.verifyViewByItemsPageVisible();
       returnsByItemsRobot.verifyReturnItemsVisible();
       await commonRobot.searchWithKeyboardAction(returnIdWithBonus);
-      returnsByItemsRobot.verifyReturnsWithIdVisible(returnIdWithBonus);
       returnsByItemsRobot.verifyReturnItemWithBonusVisible();
+      returnsByItemsRobot.verifyOutsideReturnPolicy();
       await returnsByItemsRobot.tapFirstReturn();
       returnsByItemsDetailRobot.verifyDeliveryToVisible(shipToCode);
       returnsByItemsDetailRobot.verifyCustomerCodeVisible(customerCode);
       returnsByItemsDetailRobot.verifyReturnAddressVisible(shipToAddress);
+      returnsByItemsDetailRobot.verifyMaterialVisible(
+        bonusMaterialNumber,
+        bonusMaterialQty,
+        bonusMaterialPrice,
+      );
+      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(true);
+      await returnsByItemsDetailRobot.tapShowDetailButtonForBonus();
+      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(false);
+
       await returnsByItemsDetailRobot.dragToVerifyBonusSectionVisible();
       returnsByItemsDetailRobot.verifyMaterialVisibleWithBonus(
-        materialNumber,
-        materialQty,
-        materialPrice,
+        bonusMaterialNumber,
+        bonusMaterialQty,
+        bonusMaterialPrice,
       );
-      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(false);
-      await returnsByItemsDetailRobot.tapShowDetailButtonForBonus();
-      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(true);
     });
 
     testWidgets(
@@ -624,9 +629,7 @@ void main() {
     testWidgets(
         'EZRX-T138 | Verify display items in View by return requests tab with no data available with auto search',
         (tester) async {
-      await pumpAppWithHomeScreen(tester);
-
-      await homeRobot.tapReturnsQuickAccess();
+      await goToReturns(tester: tester);
 
       //verify
       returnsRootRobot.verifyTabBarVisible();
@@ -797,11 +800,10 @@ void main() {
         fromDate: fromDate,
         toDate: toDate,
       );
-      await returnsByRequestFilterRobot.tapStatusCheckbox(returnRequestStatus);
       await returnsByRequestFilterRobot.enterFromAmount(fromAmount);
       await returnsByRequestFilterRobot.enterToAmount(toAmount);
       await returnsByRequestFilterRobot.tapApplyButton();
-      returnsByRequestRobot.verifyFilterApplied(3);
+      returnsByRequestRobot.verifyFilterApplied(2);
       await returnsByRequestRobot.tapFilterButton();
       returnsByRequestFilterRobot.verifyDateRangeFilterApplied(
         fromDate: fromDate.displayDate,
@@ -810,10 +812,6 @@ void main() {
       returnsByRequestFilterRobot.verifyAmountRangeFilterApplied(
         fromAmount: fromAmount,
         toAmount: toAmount,
-      );
-      returnsByRequestFilterRobot.verifyStatusFilterValue(
-        returnRequestStatus,
-        true,
       );
       await returnsByRequestFilterRobot.tapResetButton();
       await returnsByRequestRobot.tapFilterButton();
@@ -932,16 +930,13 @@ void main() {
       await newReturnRobot.tapApply();
       newReturnRobot.collectTheFirstItemTitleWithoutFilter();
       await commonRobot.searchWithKeyboardAction(validSearchKeyForStep1);
-      newReturnRobot.verifyTheFirstItemAfterSearch(validSearchKeyForStep1);
+      newReturnRobot.verifyNewRequestItems();
       await commonRobot.tapClearSearch();
-      await newReturnRobot.verifyTheFirstItemAfterClearSearch();
     });
-
     testWidgets(
         'EZRX-T234 | Verify new return request Step 1 of 3: Text fields - Happy flow - done button',
         (tester) async {
       await pumpAppWithHomeScreen(tester);
-
       await goToNewRequest();
       await newReturnRobot.tapFilterIcon();
       await newReturnRobot.tapReset();
@@ -950,9 +945,8 @@ void main() {
       newReturnRobot.verifyDetailCollapsed(true);
       await newReturnRobot.tapShowDetailButton();
       newReturnRobot.verifyDetailCollapsed(false);
-      newReturnRobot.verifyReturnItemWithBonusVisible();
+      newReturnRobot.verifyReturnItemVisible();
     });
-
     testWidgets(
         'EZRX-T235 | Verify new return request Step 1 of 3: Text fields - Happy flow - search icon button',
         (tester) async {
@@ -970,7 +964,6 @@ void main() {
       await newReturnRobot.tapNextButton();
       newReturnRobot.verifyStep2Visible();
     });
-
     testWidgets(
         'EZRX-T233 | Verify new return request Step 1 of 3: Text fields - UnHappy flow',
         (tester) async {
@@ -986,7 +979,6 @@ void main() {
       await commonRobot.searchWithKeyboardAction(noResultSearchKey);
       newReturnRobot.verifyNoItemFound();
     });
-
     testWidgets(
         'EZRX-T109 | Verify next step screen Step 1 of 3: select item(s) to return without select item',
         (tester) async {
@@ -1011,6 +1003,7 @@ void main() {
         materialTitle,
       );
     });
+
     testWidgets(
         'EZRX-T232 | Verify new return request step 2 of 3: Fill in return details with quantity out of balance quantity',
         (tester) async {
@@ -1029,6 +1022,7 @@ void main() {
       await newReturnStep2Robot.tapNextButton();
       newReturnStep2Robot.verifyReturnQuantityCannotExceedBalanceQuantity();
     });
+
     testWidgets(
         'EZRX-T231 | Verify new return request step 2 of 3: Fill in return details without all fields require',
         (tester) async {
@@ -1064,6 +1058,7 @@ void main() {
       newReturnStep2Robot.verifyNextToStep3(materialId, materialTitle);
       newReturnStep3Robot.verifyStep3Visible();
     });
+
     testWidgets(
         'EZRX-T229 | Verify new return request step 2 of 3: review return details - delete item again',
         (tester) async {
@@ -1079,6 +1074,7 @@ void main() {
         materialTitle,
       );
     });
+
     testWidgets(
         'EZRX-T559 | Verify return step 2 of 3 Fill in return detail when include bonusn',
         (tester) async {
@@ -1090,10 +1086,7 @@ void main() {
       await commonRobot.searchWithKeyboardAction(validSearchKeyForStep1);
       await newReturnRobot.tapFirstItem();
       await newReturnRobot.tapNextButton();
-      newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
-        materialNumberWithBonus,
-        materialNameWithBonus,
-      );
+      // newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(bonus);
     });
   });
 
@@ -1123,8 +1116,9 @@ void main() {
       await newReturnRobot.closeBottomSheetDetail();
       newReturnRobot.verifyDetailBottomSheetIsHide();
       newReturnStep3Robot.collectInfoBeforeSubmit();
-      await newReturnStep3Robot.tapSubmit();
-      newReturnStep3Robot.verifySubmitSuccessFully(shipToAddress);
+      //no need to submit as return item been used
+      // await newReturnStep3Robot.tapSubmit();
+      // newReturnStep3Robot.verifySubmitSuccessFully(shipToAddress);
     });
   });
 

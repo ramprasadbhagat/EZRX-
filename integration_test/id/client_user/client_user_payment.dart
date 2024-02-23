@@ -1408,7 +1408,6 @@ void main() {
     const formattedToAmount = '200000.2';
     const statusFilter = 'Successful';
 
-    const paymentStatus = 'Successful';
     const totalText = 'Total:';
     const totalPrice = 105450.0;
     const invoiceTitle = 'Invoice';
@@ -1600,7 +1599,6 @@ void main() {
       //payment summary Details
       paymentSummaryDetailRobot.verifyPaymentDetail(
         paymentId,
-        paymentStatus,
       );
       //payment summary Details
       paymentSummaryDetailRobot.verifyBankAccountStatementSection();

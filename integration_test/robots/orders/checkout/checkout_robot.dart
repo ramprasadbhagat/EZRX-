@@ -22,6 +22,8 @@ class CheckoutRobot {
   final paymentTermField = find.byKey(WidgetKeys.paymentTermDropdownKey);
   final contactPersonField =
       find.byKey(WidgetKeys.genericKey(key: 'contactPersonKey'));
+  final contactNumberField =
+      find.byKey(WidgetKeys.internationalPhoneNumberInput);
   final mobileNumberField = find.byKey(WidgetKeys.mobileNumber);
   final deliveryInstructionField =
       find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey'));
@@ -82,6 +84,57 @@ class CheckoutRobot {
       find.descendant(
         of: poReferenceField,
         matching: find.text('PO reference is a required field.'.tr()),
+      ),
+      isVisible ? findsOneWidget : findsNothing,
+    );
+  }
+
+  Future<void> enterPoReferenceNote(String text) async {
+    await tester.tap(referenceNoteField);
+    await tester.enterText(referenceNoteField, text);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyEmptyPoReferenceNoteErrorMessage({required bool isVisible}) {
+    expect(
+      find.descendant(
+        of: referenceNoteField,
+        matching: find.text('Reference note is a required field'.tr()),
+      ),
+      isVisible ? findsOneWidget : findsNothing,
+    );
+  }
+
+  Future<void> enterContactPerson(String text) async {
+    await tester.tap(contactPersonField);
+    await tester.enterText(contactPersonField, text);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyEmptyContactPersonErrorMessage({required bool isVisible}) {
+    expect(
+      find.descendant(
+        of: contactPersonField,
+        matching: find.text('Contact person is a required field'.tr()),
+      ),
+      isVisible ? findsOneWidget : findsNothing,
+    );
+  }
+
+  Future<void> enterContactNumber(String text) async {
+    await tester.tap(contactNumberField);
+    await tester.enterText(contactNumberField, text);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyEmptyContactNumberErrorMessage({required bool isVisible}) {
+    expect(
+      find.descendant(
+        of: contactNumberField,
+        matching: find.text('Mobile number is a required field'.tr()),
       ),
       isVisible ? findsOneWidget : findsNothing,
     );

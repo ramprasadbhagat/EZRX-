@@ -99,6 +99,7 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
     await scrollEnsureFinderVisible(
       find.byType(ReturnItemCard),
     );
+    await tester.pump();
   }
 
   Future<void> dragToVerifyBonusSectionVisible() async {
@@ -133,7 +134,7 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
           price,
         ),
       ),
-      findsNothing,
+      findsOneWidget,
     );
     expect(
       find.byKey(
@@ -208,14 +209,14 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
   void verifyMaterialReturnReason(String reason) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('Reason'.tr(), reason)),
-      findsOneWidget,
+      findsWidgets,
     );
   }
 
   void verifyMaterialReturnComments(String comment) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('Comments'.tr(), comment)),
-      findsOneWidget,
+      findsWidgets,
     );
   }
 

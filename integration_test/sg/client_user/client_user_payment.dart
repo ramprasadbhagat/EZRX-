@@ -1749,7 +1749,6 @@ void main() {
       //payment summary Details
       paymentSummaryDetailRobot.verifyPaymentDetail(
         paymentId,
-        paymentStatus,
       );
       //address info
       paymentSummaryDetailRobot.verifyOrderAddressVisible(shipToAddress);

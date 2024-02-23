@@ -41,9 +41,9 @@ class WidgetKeys {
       Key('cancelCovidMaterialAddToCart');
   static const Key proceedCovidMaterialAddToCart =
       Key('proceedCovidMaterialAddToCart');
+  static const Key moreTapListContent = Key('moreTapListContent');
   static const closeAnnouncementBanner = Key('closeAnnouncementBanner');
   static const announcementBanner = Key('announcementBanner');
-  static const Key moreTapListContent = Key('moreTapListContent');
   static const Key settingTile = Key('settingTile');
   static const Key versionDisplay = Key('versionDisplay');
   static const Key customBadge = Key('customBadge');
@@ -725,7 +725,6 @@ class WidgetKeys {
   static const Key scanFromCamera = Key('scanFromCamera');
   static const Key favoritesChoiceChip = Key('favoritesChoiceChip');
   static const Key covidChoiceChip = Key('covidChoiceChip');
-
   static Key statusFavoriteIcon(bool isFavorite) =>
       Key('isFavorite$isFavorite');
   static const Key materialCard = Key('MaterialCard');
@@ -849,6 +848,8 @@ class WidgetKeys {
       Key('productDetailQuantityTextKey');
   static const Key availableOfferColumnKey = Key('availableOfferColumn');
   static const Key materialInfoDialog = Key('materialInfoDialog');
+  static const Key closeMaterialInformationDialog =
+      Key('closeMaterialInformationDialog');
   static const Key bodyContentProductDetail = Key('bodyContentProductDetail');
   static const Key productDetailSuspended = Key('productDetailSuspended');
 
@@ -1101,7 +1102,6 @@ class WidgetKeys {
   //===========================================================
   //  Payment Home
   //============================================================
-  static const Key paymentHome = Key('paymentHome');
   static const Key paymentHomeAppBar = Key('paymentHomeAppBar');
   static const Key paymentHomeOptionMenu = Key('paymentHomeOptionMenu');
   static const Key accountSummaryMenu = Key('accountSummary');

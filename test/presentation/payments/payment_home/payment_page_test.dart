@@ -131,7 +131,7 @@ void main() {
   final paymentHomeObscuredAmount =
       find.byKey(WidgetKeys.paymentHomeObscuredAmount);
   final claimsMenu = find.byKey(WidgetKeys.claimsMenu);
-  final paymentHome = find.byKey(WidgetKeys.paymentHome);
+  final paymentHome = find.byKey(WidgetKeys.scrollList);
   final appBar = find.byKey(WidgetKeys.paymentHomeAppBar);
   final totalOverdue = find.byKey(WidgetKeys.totalOverdue);
   final paymentHomeSoa = find.byKey(WidgetKeys.paymentHomeSoa);

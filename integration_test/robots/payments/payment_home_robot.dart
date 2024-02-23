@@ -53,8 +53,11 @@ class PaymentHomeRobot extends CommonRobot {
   }
 
   Future<void> navigateToStatementOfAccountScreen() async {
+    final soaSectionFinder =
+        find.byKey(WidgetKeys.sectionTileIcon('Statement of accounts'.tr()));
+    await scrollEnsureFinderVisible(soaSectionFinder);
     await tester.tap(
-      find.byKey(WidgetKeys.sectionTileIcon('Statement of accounts'.tr())),
+      soaSectionFinder,
     );
     await tester.pumpAndSettle();
   }
@@ -99,10 +102,16 @@ class PaymentHomeRobot extends CommonRobot {
     expect(newPaymentButton, findsOneWidget);
   }
 
-  void verifyPaymentHomeOptionMenu() {
+  void verifyPaymentHomeOptionMenu({
+    bool isPH = false,
+  }) {
     expect(find.byKey(WidgetKeys.accountSummaryMenu), findsOneWidget);
     expect(find.byKey(WidgetKeys.paymentSummaryMenu), findsOneWidget);
     expect(find.byKey(WidgetKeys.statementOfAccountsMenu), findsOneWidget);
+    expect(
+      find.byKey(WidgetKeys.claimsMenu),
+      isPH ? findsOneWidget : findsNothing,
+    );
   }
 
   void verifyPaymentHomeOptionMenuForID() {

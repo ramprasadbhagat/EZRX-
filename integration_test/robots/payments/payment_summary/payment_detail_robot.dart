@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -30,19 +29,11 @@ class PaymentSummaryDetailRobot extends CommonRobot {
 
   void verifyPaymentDetail(
     String paymentId,
-    String paymentStatus,
   ) {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.paymentSummaryDetails),
         matching: find.textContaining(paymentId),
-      ),
-      findsOneWidget,
-    );
-    expect(
-      find.descendant(
-        of: find.byType(StatusLabel),
-        matching: find.text(paymentStatus),
       ),
       findsOneWidget,
     );

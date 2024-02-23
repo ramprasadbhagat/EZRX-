@@ -174,6 +174,7 @@ class _MaterialInfoDialog extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton(
+                  key: WidgetKeys.closeMaterialInformationDialog,
                   onPressed: () => context.router.pop(),
                   child: Text(context.tr('Close')),
                 ),

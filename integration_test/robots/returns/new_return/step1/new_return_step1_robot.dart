@@ -60,6 +60,10 @@ class NewReturnStep1Robot {
     );
   }
 
+  void verifyNewRequestItems() {
+    expect(item, findsWidgets);
+  }
+
   void verifyListAbleToReturnVisible() {
     expect(
       listAbleToReturn,
@@ -127,7 +131,7 @@ class NewReturnStep1Robot {
   Future<void> tapApply() async {
     expect(applyButton, findsOneWidget);
     await tester.tap(applyButton);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(seconds: 1));
   }
 
   Future<void> tapReset() async {

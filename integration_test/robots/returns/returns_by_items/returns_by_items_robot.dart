@@ -184,6 +184,16 @@ class ReturnsByItemsRobot {
     );
   }
 
+  void verifyOutsideReturnPolicy() {
+    expect(
+      find.descendant(
+        of: item,
+        matching: find.byKey(WidgetKeys.outsideReturnPolicyTag),
+      ),
+      findsAtLeastNWidgets(1),
+    );
+  }
+
   void verifyReturnGroupInDateRangeVisible({
     required DateTime fromDate,
     required DateTime toDate,

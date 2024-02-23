@@ -143,7 +143,7 @@ class PaymentPage extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () async => _refreshPayment(context),
         child: ListView(
-          key: WidgetKeys.paymentHome,
+          key: WidgetKeys.scrollList,
           padding: const EdgeInsets.all(16.0),
           children: [
             AnnouncementWidget(currentPath: context.router.currentPath),

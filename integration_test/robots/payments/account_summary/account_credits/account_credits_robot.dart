@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -78,6 +77,9 @@ class AccountCreditsRobot {
     );
   }
 
+  bool get noCreditFound =>
+      find.text('No credit found'.tr()).evaluate().isNotEmpty;
+
   void verifyCreditItem(String searchKey, String status, String price) {
     _verifyCreditItemId(searchKey);
     _verifyCreditItemStatus(status);
@@ -128,8 +130,6 @@ class AccountCreditsRobot {
       findsOneWidget,
     );
   }
-
-  bool get noCreditFound => find.byType(NoRecordFound).evaluate().isNotEmpty;
 
   void verifyCreditItemsList() {
     expect(_itemTile, findsAtLeastNWidgets(1));

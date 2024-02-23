@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,10 +12,15 @@ class ReturnsByRequestDetailRobot {
   final scrollView = find.byKey(WidgetKeys.returnRequestDetailScrollList);
   final showDetailButton = find.byKey(WidgetKeys.returnDetailShowDetailButton);
 
-  void verifyReturnIdVisible(String returnId, String status) {
+  void verifyReturnIdVisible(
+    String returnId,
+  ) {
     expect(
-      find.byKey(
-        WidgetKeys.balanceTextRow('${'Return'.tr()} #$returnId', status),
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.returnItemDetailReturnId &&
+            widget is BalanceTextRow &&
+            widget.keyText.contains(returnId),
       ),
       findsOneWidget,
     );

@@ -68,6 +68,10 @@ class NotificationRobot extends CommonRobot {
       find.descendant(of: items, matching: itemTitle),
       findsNWidgets(itemCount),
     );
+    expect(
+      find.descendant(of: items, matching: itemDescription),
+      findsWidgets, //we may have alert
+    );
   }
 
   String getNotificationDescription(int index) {

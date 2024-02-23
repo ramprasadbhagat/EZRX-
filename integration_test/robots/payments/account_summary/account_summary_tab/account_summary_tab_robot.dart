@@ -136,15 +136,15 @@ class AccountSummaryTabRobot {
     expect(_summaryExpandableSection, findsWidgets);
   }
 
-  Future<void> tapExpandableDetailsButton() async {
-    await _tester.tap(_summaryExpandableSection.first);
+  Future<void> tapExpandableDetailsButton({int index = 0}) async {
+    await _tester.tap(_summaryExpandableSection.at(index));
     await _tester.pumpAndSettle();
   }
 
-  void displayDetails({bool isHidden = false}) {
+  void displayDetails({bool isHidden = false, int index = 0}) {
     expect(
       find.descendant(
-        of: _summaryExpandableSection.first,
+        of: _summaryExpandableSection.at(index),
         matching: find.text(
           isHidden
               ? 'Show reference details'.tr()

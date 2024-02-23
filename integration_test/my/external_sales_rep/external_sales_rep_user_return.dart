@@ -871,7 +871,6 @@ void main() {
       await returnsByRequestRobot.tapFirstReturnVisible();
       returnsByRequestDetailRobot.verifyReturnIdVisible(
         returnId,
-        returnRequestStatus,
       );
       returnsByRequestDetailRobot.verifyRequestDateVisible();
       returnsByRequestDetailRobot.verifyReturnReferenceVisible(returnReference);

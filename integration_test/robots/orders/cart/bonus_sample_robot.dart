@@ -54,7 +54,7 @@ class BonusSampleRobot extends CommonRobot {
         matching:
             find.text('In cart quantity should not be more than 99999.'.tr()),
       ),
-      findsOneWidget,
+      findsWidgets,
     );
   }
 

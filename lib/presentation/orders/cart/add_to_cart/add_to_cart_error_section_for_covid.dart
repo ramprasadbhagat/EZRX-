@@ -89,6 +89,7 @@ class AddToCartErrorSection extends StatelessWidget {
                       key: WidgetKeys.cancelCovidMaterialAddToCart,
                       child: Text(
                         context.tr('Cancel'),
+                        key: WidgetKeys.cancelCovidMaterialAddToCart,
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium

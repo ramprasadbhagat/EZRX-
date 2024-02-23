@@ -46,7 +46,7 @@ class ReturnsByRequestRobot {
 
   Future<void> tapFilterButton() async {
     await tester.tap(filterButton);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(seconds: 1));
   }
 
   void verifyFilterApplied(int count) {

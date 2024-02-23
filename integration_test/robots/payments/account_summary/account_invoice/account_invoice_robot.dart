@@ -82,6 +82,8 @@ class AccountInvoiceRobot extends CommonRobot {
     );
   }
 
+  bool get noRecordFound => find.byType(NoRecordFound).evaluate().isNotEmpty;
+
   void verifyItems() {
     expect(invoiceItem, findsAtLeastNWidgets(1));
     expect(createdDateLabel, findsAtLeastNWidgets(1));

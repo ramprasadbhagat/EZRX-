@@ -29,6 +29,11 @@ class CartRobot {
     expect(cartPage, findsOneWidget);
   }
 
+  Future<void> verifyCovidMaterial(String materialNumber) async {
+    await verifyMaterial(materialNumber);
+    expect(find.byKey(WidgetKeys.covidLabel), findsOneWidget);
+  }
+
   Future<void> tapCloseButton() async {
     await tester.tap(find.byKey(WidgetKeys.closeButton));
     await tester.pumpAndSettle();
@@ -198,11 +203,6 @@ class CartRobot {
     await tester.dragUntilVisible(material, scrollList, defaultScrollOffset);
     await tester.pump();
     expect(material, findsOneWidget);
-  }
-
-  Future<void> verifyCovidMaterial(String materialNumber) async {
-    await verifyMaterial(materialNumber);
-    expect(find.byKey(WidgetKeys.covidLabel), findsOneWidget);
   }
 
   void verifyMaterialQty(String materialNumber, int qty) {

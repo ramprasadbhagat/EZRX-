@@ -32,6 +32,7 @@ class ProfileRobot {
     required String username,
     required String mobilePhone,
     required String language,
+    String paymentTerms = '',
   }) {
     _verifyTextVisible('Account & business details:');
     final userDetails = find.byKey(WidgetKeys.profileUserDetails);
@@ -41,6 +42,12 @@ class ProfileRobot {
     _verifyInfoRowVisible('Email', email);
     _verifyInfoRowVisible('Username', username);
     _verifyInfoRowVisible('Contact number', mobilePhone);
+    if (paymentTerms.isNotEmpty) {
+      _verifyInfoRowVisible(
+        'Payment terms',
+        paymentTerms,
+      );
+    }
     _verifyTextVisible('Language');
     _verifyTextVisible(language);
   }

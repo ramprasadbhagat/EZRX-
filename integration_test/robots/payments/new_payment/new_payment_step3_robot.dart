@@ -18,6 +18,8 @@ class NewPaymentStep3Robot {
   final paymentWebviewPage = find.byKey(WidgetKeys.paymentWebviewPage);
   final createPaymentAdviseNote =
       find.byKey(WidgetKeys.createPaymentAdviseNote);
+  final createPaymentAdviseWarning =
+      find.byKey(WidgetKeys.createPaymentAdviseWarning);
 
   void verifyStep3InitialField(String defaultPaymentMethod) {
     verifyWarningMessage();
@@ -31,7 +33,13 @@ class NewPaymentStep3Robot {
     );
     expect(radioPaymentGateway, findsAtLeastNWidgets(1));
     expect(
-      tester.widget<Radio>(radioPaymentGateway).value,
+      tester
+          .widget<Radio>(
+            radioPaymentGateway.evaluate().length > 1
+                ? radioPaymentGateway.at(0)
+                : radioPaymentGateway,
+          )
+          .value,
       equals(PaymentMethodValue(defaultPaymentMethod)),
     );
   }
@@ -90,6 +98,10 @@ class NewPaymentStep3Robot {
 
   void verifyWarningMessage({bool isVisible = true}) {
     expect(createPaymentAdviseNote, isVisible ? findsOneWidget : findsNothing);
+  }
+
+  void verifyPaymentAdviceWarning() {
+    expect(createPaymentAdviseWarning, findsOneWidget);
   }
 
   void verifyOrderAddressVisible(String address) {

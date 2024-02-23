@@ -25,6 +25,7 @@ class MoreRobot extends CommonRobot {
   Future<void> tapReturnsTile() async {
     await tester.tap(returnsTile);
     await tester.pumpAndSettle();
+    await closeAnnouncementAlertDialog();
   }
 
   void verifyProfileName(String firstName, String lastName) {

@@ -23,6 +23,8 @@ class ProductDetailRobot extends CommonRobot {
       find.byKey(WidgetKeys.materialDetailsAddToCartSnackBar);
   final body = find.byKey(WidgetKeys.bodyContentProductDetail);
   final offerBottomSheetCloseButton = find.byKey(WidgetKeys.closeButton);
+  final closeMaterialInformationDialog =
+      find.byKey(WidgetKeys.closeMaterialInformationDialog);
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
@@ -303,6 +305,15 @@ class ProductDetailRobot extends CommonRobot {
 
   Future<void> tapOfferBottomSheetCloseButton() async {
     await tester.tap(offerBottomSheetCloseButton);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyCloseButtonMaterialInformationDialog() {
+    expect(closeMaterialInformationDialog, findsOneWidget);
+  }
+
+  Future<void> tapCloseButtonMaterialInformationDialog() async {
+    await tester.tap(closeMaterialInformationDialog);
     await tester.pumpAndSettle();
   }
 

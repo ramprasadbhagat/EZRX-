@@ -58,43 +58,42 @@ class _ReturnByItemPageState extends State<ReturnByItemPage> {
               previous.isFetching != current.isFetching,
           builder: (context, state) {
             return ScrollList<ReturnItem>(
-                    noRecordFoundWidget: NoRecordFound.returnItems(
-                      isSearchKeyEmpty: state.searchKey.isValueEmpty,
+              noRecordFoundWidget: NoRecordFound.returnItems(
+                isSearchKeyEmpty: state.searchKey.isValueEmpty,
+              ),
+              controller: _controller,
+              onRefresh: () => context.read<ReturnListByItemBloc>().add(
+                    ReturnListByItemEvent.fetch(
+                      appliedFilter: ReturnFilter.empty(),
+                      searchKey: SearchKey(''),
                     ),
-                    controller: _controller,
-                    onRefresh: () => context.read<ReturnListByItemBloc>().add(
-                          ReturnListByItemEvent.fetch(
-                            appliedFilter: ReturnFilter.empty(),
-                            searchKey: SearchKey(''),
-                          ),
-                        ),
-                    onLoadingMore: () =>
-                        context.read<ReturnListByItemBloc>().add(
-                              const ReturnListByItemEvent.loadMore(),
-                            ),
-                    isLoading: state.isFetching,
-                    itemBuilder: (context, index, item) {
-                      final currentGroup = item.requestDate;
-                      final previousGroup = index != 0
-                          ? state.returnItemList[index - 1].requestDate
-                          : null;
+                  ),
+              onLoadingMore: () => context.read<ReturnListByItemBloc>().add(
+                    const ReturnListByItemEvent.loadMore(),
+                  ),
+              isLoading: state.isFetching,
+              itemBuilder: (context, index, item) {
+                final currentGroup = item.requestDate;
+                final previousGroup = index != 0
+                    ? state.returnItemList[index - 1].requestDate
+                    : null;
 
-                      return currentGroup != previousGroup
-                          ? _ReturnItem(
-                              key: WidgetKeys.returnItem(index.toString()),
-                              data: item,
-                              showDivider: index != 0,
-                              showHeader: true,
-                            )
-                          : _ReturnItem(
-                              key: WidgetKeys.returnItem(index.toString()),
-                              data: item,
-                              showDivider: false,
-                              showHeader: false,
-                            );
-                    },
-                    items: state.returnItemList,
-                  );
+                return currentGroup != previousGroup
+                    ? _ReturnItem(
+                        key: WidgetKeys.returnItem(index.toString()),
+                        data: item,
+                        showDivider: index != 0,
+                        showHeader: true,
+                      )
+                    : _ReturnItem(
+                        key: WidgetKeys.returnItem(index.toString()),
+                        data: item,
+                        showDivider: false,
+                        showHeader: false,
+                      );
+              },
+              items: state.returnItemList,
+            );
           },
         ),
       ),

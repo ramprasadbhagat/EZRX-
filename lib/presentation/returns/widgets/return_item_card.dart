@@ -118,6 +118,7 @@ class ReturnItemCard extends StatelessWidget {
             isExpanded: false,
             isExpandable: true,
             expandWidget: _ReturnItemExpandSection(
+              key: WidgetKeys.returnItemDetailBonusItem,
               returnRequestInformation: returnRequestInformation,
               downloadingAttachments: downloadingAttachments,
               downloadAttachment: downloadAttachment,

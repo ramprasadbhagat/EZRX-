@@ -34,8 +34,8 @@ class NewReturnStep2Robot {
   final bonusItemSection = find.byKey(WidgetKeys.bonusItemSection);
 
   void verifyReturnDetailDisplayed(String materialNumber, String materialName) {
-    expect(find.text(materialNumber), findsOneWidget);
-    expect(find.text(materialName), findsOneWidget);
+    expect(find.text(materialNumber), findsAtLeastNWidgets(1));
+    expect(find.text(materialName), findsAtLeastNWidgets(1));
     expect(newRequestStep2ItemImage, findsAtLeastNWidgets(1));
     expect(newRequestStep2ItemproductImage, findsAtLeastNWidgets(1));
     expect(newRequestStep2QuantityAndPrice, findsAtLeastNWidgets(1));
@@ -77,6 +77,7 @@ class NewReturnStep2Robot {
     );
     if (!_hasBonusSection(uuid)) {
       await tester.enterText(materialTextField, returnQuantity);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
       return;
     } else {

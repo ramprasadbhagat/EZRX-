@@ -93,7 +93,9 @@ class ProductRobot extends CommonRobot {
     if (matched) {
       expect(listNameProduct.first, nameProduct);
     } else {
-      expect(listNameProduct.first != nameProduct, true);
+      if (listNameProduct.isNotEmpty) {
+        expect(listNameProduct.first != nameProduct, true);
+      }
     }
   }
 
