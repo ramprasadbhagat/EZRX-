@@ -33,7 +33,7 @@ abstract class SvgImage {
   static String paymentMethodOptionLogo(String optionID) =>
       '${_basePath}payment_option_$optionID.svg';
   static const String marketplaceIcon = '${_basePath}marketplace_icon.svg';
-  static const String marketplaceOutlinedButton =
+  static const String marketplaceRectangleLogo =
       '${_basePath}marketplace_outlined_button.svg';
   static const String resetPasswordSuccessLogo =
       '${_basePath}reset_password_success_logo.svg';

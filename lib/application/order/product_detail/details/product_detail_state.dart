@@ -72,18 +72,29 @@ class ProductDetailState with _$ProductDetailState {
       (_isPnGPrinciple(isMYExternalSalesRepUser: isMYExternalSalesRepUser) &&
           bonusMaterialList.isNotEmpty);
 
-  DateTimeStringValue get expiryDate {
+  String get displayExpiryDate {
+    // If product is marketplace, expiry date always be NA
+    if (productDetailAggregate.materialInfo.isMarketPlace) {
+      return DateTimeStringValue('').dateOrNaString;
+    }
+
     /// If the sales organization is  PH MDI (2501) and
     /// the product is not an Abbot material, the expiry date is not available,
     /// and an empty DateTimeStringValue is returned.
     /// Otherwise, the expiry date from the product's stock information is returned.
-
     if (salesOrganisation.salesOrg.isPhMdi &&
         !productDetailAggregate
             .materialInfo.principalData.principalCode.isAbbot) {
-      return DateTimeStringValue('');
+      return DateTimeStringValue('').dateOrNaString;
     }
 
-    return productDetailAggregate.stockInfo.expiryDate;
+    return productDetailAggregate.stockInfo.expiryDate.dateOrNaString;
   }
+
+  // If product is marketplace, batch number always be NA
+  String get displayBatchNumber =>
+      (productDetailAggregate.materialInfo.isMarketPlace
+              ? BatchNumber('')
+              : productDetailAggregate.stockInfo.batch)
+          .displayLabel;
 }

@@ -15,7 +15,8 @@
                     "governmentMaterialCode": "KC00582214",
                     "promoType": "",
                     "promoStatus": false,
-                    "hidePrice": true
+                    "hidePrice": true,
+                    "isMarketPlace": true
                 },
                 {
                     "principalName": "GLAXOSMITHKLINE CONSUMER",
@@ -30,7 +31,8 @@
                     "governmentMaterialCode": "KC00582215",
                     "promoType": "",
                     "promoStatus": false,
-                    "hidePrice": false
+                    "hidePrice": false,
+                    "isMarketPlace": false
                 },
                 {
                     "principalName": "GLAXOSMITHKLINE CONSUMER",

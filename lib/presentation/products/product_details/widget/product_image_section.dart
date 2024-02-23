@@ -35,17 +35,29 @@ class _ProductImageSection extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.30,
                       width: double.infinity,
                     ),
-                    productImage.image.isNotEmpty
-                        ? Positioned(
-                            bottom: 10,
-                            right: 10,
-                            child: ImageCounter(
-                              total: productImage.image.length,
-                              selected:
-                                  productDetailState.selectedImageIndex + 1,
+                    Positioned(
+                      bottom: 0,
+                      right: 10,
+                      left: 10,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (productDetailState.productDetailAggregate
+                              .materialInfo.isMarketPlace)
+                            const MarketPlaceRectangleLogo(),
+                          const Spacer(),
+                          if (productImage.image.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: ImageCounter(
+                                total: productImage.image.length,
+                                selected:
+                                    productDetailState.selectedImageIndex + 1,
+                              ),
                             ),
-                          )
-                        : const SizedBox.shrink(),
+                        ],
+                      ),
+                    ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: CovidLabel(
@@ -94,7 +106,7 @@ class _ProductImages extends StatelessWidget {
         ? const SizedBox.shrink()
         : Container(
             key: WidgetKeys.materialDetailsCarousel,
-            margin: const EdgeInsets.all(16),
+            margin: const EdgeInsets.all(10),
             height: MediaQuery.of(context).size.height * 0.05,
             child: productImage.image.isNotEmpty
                 ? ListView.builder(

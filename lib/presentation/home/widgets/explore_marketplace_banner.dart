@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-import 'package:ezrxmobile/presentation/core/svg_image.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 class ExploreMarketPlaceBanner extends StatelessWidget {
   const ExploreMarketPlaceBanner({Key? key}) : super(key: key);
@@ -32,11 +31,7 @@ class ExploreMarketPlaceBanner extends StatelessWidget {
                 .copyWith(color: ZPColors.primary),
           ),
           const SizedBox(height: 8),
-          SvgPicture.asset(
-            SvgImage.marketplaceOutlinedButton,
-            height: 28,
-            width: 64,
-          ),
+          const MarketPlaceRectangleLogo(),
           const SizedBox(height: 8),
           Text(
             context.tr('Check out the new eZRx+ Marketplace!'),

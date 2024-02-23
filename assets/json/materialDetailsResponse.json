@@ -21,7 +21,8 @@
             "itemRegistrationNumber": "NOT110104420K",
             "suspensionStatus": false,
             "promoStatus": false,
-            "promoType": ""
+            "promoType": "",
+            "isMarketPlace": true
         }
     }
 }

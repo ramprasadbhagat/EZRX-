@@ -27,7 +27,6 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
-import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -114,6 +113,7 @@ void main() {
   late ProductImages productImage;
   late List<MaterialInfo> similarProducts;
   late ComboDeal mockComboDeal;
+  late ProductDetailAggregate zpMaterialDetail;
   final price = Price.empty().copyWith(
     comboDeal: PriceComboDeal.empty().copyWith(
       isEligible: true,
@@ -201,6 +201,10 @@ void main() {
             .first;
     mockComboDeal = (await ComboDealLocalDataSource().getComboDealList()).first;
     registerFallbackValue(const ComboDetailPageRoute());
+    zpMaterialDetail = ProductDetailAggregate.empty().copyWith(
+      materialInfo: materialInfo.copyWith(isMarketPlace: false),
+      stockInfo: stockInfo,
+    );
   });
 
   group(
@@ -316,16 +320,6 @@ void main() {
       testWidgets(
           'Find Add To Cart Error Section When Add To Cart Button Pressed',
           (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo.copyWith(
-                quantity: MaterialQty(2),
-                isFOCMaterial: true,
-              ),
-            ),
-          ),
-        );
         when(() => materialPriceMockBloc.state).thenReturn(
           MaterialPriceState.initial().copyWith(
             materialPrice: {materialInfo.materialNumber: materialPrice},
@@ -351,6 +345,7 @@ void main() {
                 inStock: MaterialInStock('true'),
               ),
             ),
+            inputQty: 2,
           ),
         );
         when(() => cartMockBloc.state).thenReturn(
@@ -387,29 +382,15 @@ void main() {
         when(
           () => autoRouterMock.pop(),
         ).thenAnswer((invocation) => Future(() => true));
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo.copyWith(
-                quantity: MaterialQty(2),
-                isFOCMaterial: true,
-              ),
-            ),
-          ),
-        );
+
         when(() => materialPriceMockBloc.state).thenReturn(
           MaterialPriceState.initial().copyWith(
             materialPrice: {materialInfo.materialNumber: materialPrice},
           ),
         );
         when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              materialWithoutPrice: true,
-              addOosMaterials: OosMaterial(true),
-              oosValue: OosValue(1),
-            ),
-          ),
+          EligibilityState.initial()
+              .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
         );
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
@@ -466,7 +447,6 @@ void main() {
             CartState.initial(),
           ]),
         );
-        await tester.pump(const Duration(seconds: 5));
         await tester.pumpAndSettle();
         verify(
           () => cartMockBloc.add(
@@ -477,6 +457,8 @@ void main() {
       testWidgets(
           'Find Add To Cart Error Section When Add To Cart Button Pressed upsertCart call',
           (tester) async {
+        const cartQty = 2;
+        const inputQty = 3;
         when(
           () => autoRouterMock
               .push(ProductDetailsPageRoute(materialInfo: materialInfo)),
@@ -484,29 +466,15 @@ void main() {
         when(
           () => autoRouterMock.pop(),
         ).thenAnswer((invocation) => Future(() => true));
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo.copyWith(
-                quantity: MaterialQty(2),
-                isFOCMaterial: true,
-              ),
-            ),
-          ),
-        );
+
         when(() => materialPriceMockBloc.state).thenReturn(
           MaterialPriceState.initial().copyWith(
             materialPrice: {materialInfo.materialNumber: materialPrice},
           ),
         );
         when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              materialWithoutPrice: true,
-              addOosMaterials: OosMaterial(true),
-              oosValue: OosValue(1),
-            ),
-          ),
+          EligibilityState.initial()
+              .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
         );
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
@@ -520,6 +488,7 @@ void main() {
                 inStock: MaterialInStock('true'),
               ),
             ),
+            inputQty: 3,
           ),
         );
         when(() => cartMockBloc.state).thenReturn(
@@ -528,6 +497,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 materialInfo: materialInfo.copyWith(isFOCMaterial: false),
+                quantity: cartQty,
               )
             ],
           ),
@@ -556,9 +526,6 @@ void main() {
         await tester.tap(addToCartButton);
         await tester.pumpAndSettle();
 
-        await tester.pump(const Duration(seconds: 5));
-        await tester.pumpAndSettle();
-
         verify(
           () => cartMockBloc.add(
             CartEvent.upsertCart(
@@ -569,12 +536,8 @@ void main() {
                   type: MaterialInfoType.material(),
                 ),
                 price: materialPrice,
-                quantity: 2,
-                salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-                  materialWithoutPrice: true,
-                  addOosMaterials: OosMaterial(true),
-                  oosValue: OosValue(1),
-                ),
+                quantity: cartQty + inputQty,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
               ),
             ),
           ),
@@ -650,16 +613,6 @@ void main() {
       testWidgets(
           'Find Add To Cart Error Section When Add To Cart Button Pressed case 2',
           (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo.copyWith(
-                quantity: MaterialQty(2),
-                isFOCMaterial: false,
-              ),
-            ),
-          ),
-        );
         when(() => materialPriceMockBloc.state).thenReturn(
           MaterialPriceState.initial().copyWith(
             materialPrice: {materialInfo.materialNumber: materialPrice},
@@ -685,6 +638,7 @@ void main() {
                 inStock: MaterialInStock('true'),
               ),
             ),
+            inputQty: 2,
           ),
         );
         when(() => cartMockBloc.state).thenReturn(
@@ -804,15 +758,6 @@ void main() {
 
       testWidgets('Add to Cart is enabled when materialWithoutPrice is true',
           (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo.copyWith(
-                quantity: MaterialQty(2),
-              ),
-            ),
-          ),
-        );
         when(() => materialPriceMockBloc.state).thenReturn(
           MaterialPriceState.initial().copyWith(
             materialPrice: {materialInfo.materialNumber: materialPrice},
@@ -837,6 +782,7 @@ void main() {
                 inStock: MaterialInStock('true'),
               ),
             ),
+            inputQty: 2,
           ),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -1274,94 +1220,214 @@ void main() {
         );
       });
 
-      testWidgets(
-          '_MaterialInfoDialog should be shown when tap icon - display expiry date',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo,
-              stockInfo: stockInfo,
-              productItem: productItemWithProductItemXp,
+      group('Material info dialog -', () {
+        testWidgets(
+            'Display expiry date when market allows & product is not from marketplace',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
             ),
-          ),
-        );
+          );
 
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            user: user,
-            salesOrganisation: fakeMYSalesOrganisation,
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
-          ),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        await tester.dragUntilVisible(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-          find.byKey(WidgetKeys.scrollList),
-          const Offset(0, -200),
-        );
-        await tester.pumpAndSettle();
-        expect(find.byKey(WidgetKeys.materialDetailsInfoTile), findsOneWidget);
-        await tester.tap(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-        );
-        await tester.pumpAndSettle();
-        expect(
-          find.byKey(WidgetKeys.materialInfoDialog),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(
-            WidgetKeys.balanceTextRow('Expiry'.tr(), '30 Nov 2025'),
-          ),
-          findsOneWidget,
-        );
-      });
-
-      testWidgets(
-          '_MaterialInfoDialog should be shown when tap icon - hide expiry date',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo,
-              stockInfo: stockInfo,
-              productItem: productItemWithProductItemXp,
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              user: user,
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
             ),
-          ),
-        );
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -200),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            findsOneWidget,
+          );
+          await tester.tap(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialInfoDialog),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow('Expiry'.tr(), '30 Nov 2025'),
+            ),
+            findsOneWidget,
+          );
+        });
 
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            user: user,
-            salesOrganisation: fakeSalesOrganisation,
-            salesOrgConfigs: fakePHSalesOrgConfigs,
-          ),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        await tester.dragUntilVisible(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-          find.byKey(WidgetKeys.scrollList),
-          const Offset(0, -200),
-        );
-        await tester.pumpAndSettle();
-        expect(find.byKey(WidgetKeys.materialDetailsInfoTile), findsOneWidget);
-        await tester.tap(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-        );
-        await tester.pumpAndSettle();
-        expect(
-          find.byKey(WidgetKeys.materialInfoDialog),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(
-            WidgetKeys.balanceTextRow('Expiry'.tr(), '30 Nov 2025'),
-          ),
-          findsNothing,
-        );
+        testWidgets('Hide expiry date when market is not allow',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              user: user,
+              salesOrganisation: fakeSalesOrganisation,
+              salesOrgConfigs: fakePHSalesOrgConfigs,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -200),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            findsOneWidget,
+          );
+          await tester.tap(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialInfoDialog),
+            findsOneWidget,
+          );
+
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow('Expiry'.tr(), 'NA'),
+            ),
+            findsNothing,
+          );
+        });
+
+        testWidgets('Display batch for Other Market', (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeMYSalesOrganisation,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -200),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            findsOneWidget,
+          );
+          await tester.tap(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialInfoDialog),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
+            ),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets('Not display batch for SG Market', (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeSGSalesOrganisation,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -200),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            findsOneWidget,
+          );
+          await tester.tap(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialInfoDialog),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
+            ),
+            findsNothing,
+          );
+        });
+
+        testWidgets('Not display batch for TW Market', (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeTWSalesOrganisation,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -200),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            findsOneWidget,
+          );
+          await tester.tap(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialInfoDialog),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
+            ),
+            findsNothing,
+          );
+        });
       });
 
       testWidgets('Similar product should be display', (tester) async {
@@ -1818,384 +1884,236 @@ void main() {
         );
       });
 
-      testWidgets(
-          'Product details Page should not display batch number for TW Market',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: stockInfo,
+      group('Batch -', () {
+        testWidgets('Should not display batch number for TW Market',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
             ),
-          ),
-        );
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeTWSalesOrganisation,
-          ),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        expect(
-          find.textContaining(
-            'Batch 12S017',
-            findRichText: true,
-          ),
-          findsNothing,
-        );
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeTWSalesOrganisation,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.textContaining(
+              'Batch: 12S017',
+              findRichText: true,
+            ),
+            findsNothing,
+          );
+        });
+
+        testWidgets('Should display batch number for Other Market',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeMYSalesOrganisation,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.textContaining(
+              'Batch: 12S017',
+              findRichText: true,
+            ),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets('Should not display batch number for SG Market',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeSGSalesOrganisation,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.textContaining(
+              'Batch: 12S017',
+              findRichText: true,
+            ),
+            findsNothing,
+          );
+        });
       });
 
-      testWidgets(
-          '_MaterialInfoDialog should be shown when tap icon - not display batch for TW Market',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo,
-              stockInfo: stockInfo,
-            ),
-          ),
-        );
-
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeTWSalesOrganisation,
-          ),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        await tester.dragUntilVisible(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-          find.byKey(WidgetKeys.scrollList),
-          const Offset(0, -200),
-        );
-        await tester.pumpAndSettle();
-        expect(find.byKey(WidgetKeys.materialDetailsInfoTile), findsOneWidget);
-        await tester.tap(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-        );
-        await tester.pumpAndSettle();
-        expect(
-          find.byKey(WidgetKeys.materialInfoDialog),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(
-            WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
-          ),
-          findsNothing,
-        );
-      });
-
-      testWidgets(
-          'Product details Page should display batch number for Other Market',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: stockInfo,
-            ),
-          ),
-        );
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeMYSalesOrganisation,
-          ),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        expect(
-          find.textContaining(
-            'Batch 12S017',
-            findRichText: true,
-          ),
-          findsOneWidget,
-        );
-      });
-
-      testWidgets(
-          '_MaterialInfoDialog should be shown when tap icon - display batch for Other Market',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo,
-              stockInfo: stockInfo,
-            ),
-          ),
-        );
-
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeMYSalesOrganisation,
-          ),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        await tester.dragUntilVisible(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-          find.byKey(WidgetKeys.scrollList),
-          const Offset(0, -200),
-        );
-        await tester.pumpAndSettle();
-        expect(find.byKey(WidgetKeys.materialDetailsInfoTile), findsOneWidget);
-        await tester.tap(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-        );
-        await tester.pumpAndSettle();
-        expect(
-          find.byKey(WidgetKeys.materialInfoDialog),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(
-            WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
-          ),
-          findsOneWidget,
-        );
-      });
-
-      testWidgets(
-          'Product details Page should not display batch number for SG Market',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: stockInfo,
-            ),
-          ),
-        );
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeSGSalesOrganisation,
-          ),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        expect(
-          find.textContaining(
-            'Batch 12S017',
-            findRichText: true,
-          ),
-          findsNothing,
-        );
-      });
-
-      testWidgets(
-          '_MaterialInfoDialog should be shown when tap icon - not display batch for SG Market',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo,
-              stockInfo: stockInfo,
-            ),
-          ),
-        );
-
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeSGSalesOrganisation,
-          ),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        await tester.dragUntilVisible(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-          find.byKey(WidgetKeys.scrollList),
-          const Offset(0, -200),
-        );
-        await tester.pumpAndSettle();
-        expect(find.byKey(WidgetKeys.materialDetailsInfoTile), findsOneWidget);
-        await tester.tap(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-        );
-        await tester.pumpAndSettle();
-        expect(
-          find.byKey(WidgetKeys.materialInfoDialog),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(
-            WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
-          ),
-          findsNothing,
-        );
-      });
-
-      testWidgets(
-          'Expiry Date visible for PH Mdi for materials with principal code 107381',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo.copyWith(
-                principalData: PrincipalData.empty().copyWith(
-                  principalCode: PrincipalCode('107381'),
-                ),
+      group('Expiry date -', () {
+        testWidgets(
+            'Visible for PH Mdi for materials with principal code 107381',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate:
+                  zpMaterialDetail.copyWith.materialInfo.principalData(
+                principalCode: PrincipalCode('107381'),
               ),
-              stockInfo: stockInfo,
+              salesOrganisation: fakePhMDISalesOrganisation,
             ),
-            salesOrganisation: fakePhMDISalesOrganisation,
-          ),
-        );
+          );
 
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
-          ),
-        );
-
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        expect(
-          find.textContaining('EXP: 30 Nov 2025', findRichText: true),
-          findsOneWidget,
-        );
-
-        await tester.tap(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-        );
-        await tester.pumpAndSettle();
-        expect(
-          find.byKey(WidgetKeys.materialInfoDialog),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(
-            WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
-          ),
-          findsOneWidget,
-        );
-      });
-
-      testWidgets(
-          'Expiry Date not visible for PH Mdi for materials with any principal code other than 107381',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo.copyWith(
-                principalData: PrincipalData.empty().copyWith(
-                  principalCode: PrincipalCode('fake-code'),
-                ),
-              ),
-              stockInfo: stockInfo,
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
             ),
-            salesOrganisation: fakePhMDISalesOrganisation,
-          ),
-        );
+          );
 
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
-          ),
-        );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.textContaining('EXP: 30 Nov 2025', findRichText: true),
+            findsOneWidget,
+          );
 
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        expect(
-          find.textContaining('EXP: NA', findRichText: true),
-          findsOneWidget,
-        );
-
-        await tester.tap(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-        );
-        await tester.pumpAndSettle();
-        expect(
-          find.byKey(WidgetKeys.materialInfoDialog),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(
-            WidgetKeys.balanceTextRow('Expiry', 'NA'),
-          ),
-          findsOneWidget,
-        );
-      });
-
-      testWidgets(
-          'Expiry Date visible for all markets and all materials except PH Mdi for materials without principal code 107381',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo,
-              stockInfo: stockInfo,
+          await tester.tap(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialInfoDialog),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
             ),
-            salesOrganisation: fakeMYSalesOrganisation,
-          ),
-        );
+            findsOneWidget,
+          );
+        });
 
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
-          ),
-        );
-
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        expect(
-          find.textContaining('EXP: 30 Nov 2025', findRichText: true),
-          findsOneWidget,
-        );
-
-        await tester.tap(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-        );
-        await tester.pumpAndSettle();
-        expect(
-          find.byKey(WidgetKeys.materialInfoDialog),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(
-            WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
-          ),
-          findsOneWidget,
-        );
-      });
-
-      testWidgets(
-          'Expiry Date not visible for all markets if expiry date toggle is off from salesOrgConfig',
-          (tester) async {
-        when(() => productDetailMockBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialInfo,
-              stockInfo: stockInfo,
+        testWidgets(
+            'Not visible for PH Mdi for materials with any principal code other than 107381',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
+              salesOrganisation: fakePhMDISalesOrganisation,
             ),
-            salesOrganisation: fakeMYSalesOrganisation,
-          ),
-        );
+          );
 
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakePHSalesOrgConfigs,
-          ),
-        );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+            ),
+          );
 
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pumpAndSettle();
-        expect(
-          find.textContaining('EXP: 30 Nov 2025', findRichText: true),
-          findsNothing,
-        );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.textContaining('EXP: NA', findRichText: true),
+            findsOneWidget,
+          );
 
-        await tester.tap(
-          find.byKey(WidgetKeys.materialDetailsInfoTile),
-        );
-        await tester.pumpAndSettle();
-        expect(
-          find.byKey(WidgetKeys.materialInfoDialog),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(
-            WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
-          ),
-          findsNothing,
-        );
+          await tester.tap(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialInfoDialog),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow('Expiry', 'NA'),
+            ),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets(
+            'Visible for all markets and all materials except PH Mdi for materials without principal code 107381',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
+              salesOrganisation: fakeMYSalesOrganisation,
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.textContaining('EXP: 30 Nov 2025', findRichText: true),
+            findsOneWidget,
+          );
+
+          await tester.tap(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialInfoDialog),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
+            ),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets(
+            'Not visible for all markets if expiry date toggle is off from salesOrgConfig',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
+              salesOrganisation: fakeMYSalesOrganisation,
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakePHSalesOrgConfigs,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.textContaining('EXP: 30 Nov 2025', findRichText: true),
+            findsNothing,
+          );
+
+          await tester.tap(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialInfoDialog),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
+            ),
+            findsNothing,
+          );
+        });
       });
 
       testWidgets(

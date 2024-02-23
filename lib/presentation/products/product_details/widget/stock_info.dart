@@ -44,16 +44,15 @@ class ProductStockInfo extends StatelessWidget {
                         .bodySmall
                         ?.copyWith(color: ZPColors.darkGray),
                     children: [
-                      if (eligibilityState.salesOrg.showBatchNumber &&
-                          stockInfo.batch.isValid())
+                      if (eligibilityState.salesOrg.showBatchNumber)
                         TextSpan(
                           text:
-                              '${context.tr('Batch')} ${stockInfo.batch.getOrDefaultValue('')} ',
+                              '${context.tr('Batch')}: ${state.displayBatchNumber} ',
                         ),
                       if (eligibilityState.salesOrgConfigs.expiryDateDisplay)
                         TextSpan(
                           text:
-                              '(${context.tr('EXP')}: ${state.expiryDate.dateOrNaString})',
+                              '(${context.tr('EXP')}: ${state.displayExpiryDate})',
                         ),
                     ],
                   ),

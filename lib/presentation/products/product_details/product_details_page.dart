@@ -25,6 +25,7 @@ import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -324,7 +325,7 @@ class _BodyContent extends StatelessWidget {
             ),
             ComboOffersProduct(materialNumber: materialInfo.materialNumber),
             AvailableOffer(materialNumber: materialInfo.materialNumber),
-            const MaterialInformation(),
+            MaterialInformation(materialInfo: materialInfo),
             const MaterialDetailsToggle(),
             const SizedBox(height: 20),
             const Divider(
