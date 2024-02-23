@@ -704,6 +704,9 @@ class WidgetKeys {
       Key('bundleMaterialCard$materialNumber');
   static const Key materialNumberText = Key('materialNumberText');
   static const Key covidLabel = Key('covidLabel');
+  static const Key zdpDiscountListPrice = Key('zDPDiscountListPrice');
+  static const Key listPriceStrikeThroughComponent =
+      Key('listPriceStrikeThroughComponent');
   //============================================================
   //  ProductSearch Keys
   //============================================================

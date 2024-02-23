@@ -2155,7 +2155,10 @@ void main() {
           (tester) async {
         final cartItem = mockCartItems.last.copyWith(
           materialInfo: mockCartItems.last.materialInfo,
-          price: Price.empty().copyWith(zdp5RemainingQuota: ZDP5Info('1')),
+          price: Price.empty().copyWith(
+            zdp5MaxQuota: ZDP5Info('1'),
+            zdp5RemainingQuota: ZDP5Info('1'),
+          ),
           quantity: 2,
           salesOrgConfig: fakeVNSalesOrgConfigs,
         );

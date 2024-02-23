@@ -66,22 +66,21 @@ class ProductPriceLabel extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              priceAggregate.zdp5PriceDisplay
-                  ? Padding(
-                      padding: const EdgeInsets.only(right: 5),
-                      child: PriceComponent(
-                        price: priceAggregate.displayZdp5Price,
-                        salesOrgConfig: salesOrgConfig,
-                      ),
-                    )
-                  : ListPriceStrikeThroughComponent(
-                      priceAggregate: priceAggregate,
-                    ),
+              ListPriceStrikeThroughComponent(
+                priceAggregate: priceAggregate,
+              ),
+              if (priceAggregate.showDiscountListPrice)
+                PriceComponent(
+                  key: WidgetKeys.zdpDiscountListPrice,
+                  type: PriceStyle.counterOfferPrice,
+                  price: priceAggregate.display(PriceType.listPrice),
+                  salesOrgConfig: salesOrgConfig,
+                ),
               PriceComponent(
-                type: priceAggregate.zdp5PriceDisplay
-                    ? PriceStyle.counterOfferPrice
-                    : PriceStyle.commonPrice,
-                price: priceAggregate.display(PriceType.unitPrice),
+                type: PriceStyle.commonPrice,
+                price: priceAggregate.tireItemPriceDisplay
+                    ? priceAggregate.displayZdp5Price
+                    : priceAggregate.display(PriceType.unitPrice),
                 salesOrgConfig: salesOrgConfig,
               ),
               GovtListPriceComponent(

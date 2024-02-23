@@ -687,7 +687,14 @@ class PriceAggregate with _$PriceAggregate {
           .itemId;
 
   bool get isZdp5DiscountEligible =>
-      salesOrgConfig.salesOrg.isVN && salesOrgConfig.enableZDP5;
+      salesOrgConfig.salesOrg.isVN &&
+      salesOrgConfig.enableZDP5 &&
+      price.zdp5RemainingQuota.isValidValue &&
+      price.zdp5MaxQuota.isValidValue;
+
+  bool get showDiscountListPrice =>
+      (salesOrgConfig.enableListPrice && !checkListPrice) &&
+      tireItemPriceDisplay;
 
   bool get hasZdp5Validation =>
       isZdp5DiscountEligible && quantity > price.zdp5RemainingQuota.intValue;
@@ -820,10 +827,8 @@ class PriceAggregate with _$PriceAggregate {
       )
       .stockQuantity;
 
-  bool get zdp5PriceDisplay =>
-      price.priceTireItem.isNotEmpty &&
-      price.zdp5MaxQuota.isValidValue &&
-      materialInfo.quantity.intValue >= 2;
+  bool get tireItemPriceDisplay =>
+      (price.priceTireItem.isNotEmpty && materialInfo.quantity.intValue >= 1);
 
   int get getTotalQuantityOfBundleProduct => bundle.materials.fold(
         0,
@@ -834,15 +839,17 @@ class PriceAggregate with _$PriceAggregate {
       getTotalQuantityOfBundleProduct >=
       bundle.minimumQuantityBundleMaterial.quantity;
 
-  bool get showMaterialListPrice {
+  bool get checkListPrice {
     final regex = RegExp(r'[a-zA-Z]');
     final listPrice = display(PriceType.listPrice);
     final finalPrice = display(PriceType.finalPrice);
 
-    return salesOrgConfig.enableListPrice &&
-        !(regex.hasMatch(listPrice) || regex.hasMatch(finalPrice)) &&
+    return !(regex.hasMatch(listPrice) || regex.hasMatch(finalPrice)) &&
         double.parse(listPrice) > double.parse(finalPrice);
   }
+
+  bool get showMaterialListPrice =>
+      salesOrgConfig.enableListPrice && checkListPrice;
 
   List<MaterialInfo> get bonusListToMaterialInfo => bonusSampleItems
       .map(

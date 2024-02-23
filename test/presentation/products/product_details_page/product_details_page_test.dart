@@ -108,6 +108,7 @@ void main() {
   late StockInfo stockInfo;
   late StockInfo emptyStockInfo;
   late Price materialPrice;
+  late Price materialPriceForTireSection;
   final user = fakeClientUser;
   final materialNumber = MaterialNumber('00000111111');
   late ProductImages productImage;
@@ -178,6 +179,11 @@ void main() {
     materialPrice =
         (await MaterialPriceLocalDataSource().getPriceList()).firstWhere(
       (element) => element.materialNumber == materialInfo.materialNumber,
+    );
+    materialPriceForTireSection =
+        (await MaterialPriceLocalDataSource().getPriceList()).firstWhere(
+      (element) =>
+          element.materialNumber == MaterialNumber('000000000021038302'),
     );
     stockInfo = (await StockInfoLocalDataSource().getMaterialStockInfoList())
         .first
@@ -2292,6 +2298,279 @@ void main() {
                 .tr(),
           ),
           findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'show strick through price for zdp5 (if list price > final price)',
+          (tester) async {
+        final materialNumber = MaterialNumber('000000000021038302');
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+          ),
+        );
+
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            isFetching: false,
+            materialPrice: {materialNumber: materialPriceForTireSection},
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                materialNumber: materialNumber,
+                quantity: MaterialQty(4),
+              ),
+            ),
+            inputQty: 3,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(WidgetKeys.materialDetailsQuantityInput),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.listPriceStrikeThroughComponent,
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.zdpDiscountListPrice,
+          ),
+          findsNothing,
+        );
+      });
+      testWidgets(
+          'show strick through price for zdp5 (if list price == final price)',
+          (tester) async {
+        final materialNumber = MaterialNumber('000000000021038302');
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+          ),
+        );
+
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            isFetching: false,
+            materialPrice: {
+              materialNumber: materialPriceForTireSection.copyWith(
+                lastPrice: MaterialPrice(100),
+                finalPrice: MaterialPrice(100),
+              )
+            },
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                materialNumber: materialNumber,
+                quantity: MaterialQty(4),
+              ),
+            ),
+            inputQty: 3,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(WidgetKeys.materialDetailsQuantityInput),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.listPriceStrikeThroughComponent,
+          ),
+          findsNothing,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.zdpDiscountListPrice,
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'show strick through price for tier price offers(Without zdp5) ',
+          (tester) async {
+        final materialNumber = MaterialNumber('000000000021038302');
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+          ),
+        );
+
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            isFetching: false,
+            materialPrice: {
+              materialNumber: materialPriceForTireSection.copyWith(
+                zdp5MaxQuota: ZDP5Info(''),
+                zdp5RemainingQuota: ZDP5Info(''),
+              )
+            },
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                materialNumber: materialNumber,
+                quantity: MaterialQty(4),
+              ),
+            ),
+            inputQty: 3,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(WidgetKeys.materialDetailsQuantityInput),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.listPriceStrikeThroughComponent,
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.zdpDiscountListPrice,
+          ),
+          findsNothing,
+        );
+      });
+
+      testWidgets(
+          'show strick through price for tier price offers(Without zdp5 and the list price is equal to final price) ',
+          (tester) async {
+        final materialNumber = MaterialNumber('000000000021038302');
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+          ),
+        );
+
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            isFetching: false,
+            materialPrice: {
+              materialNumber: materialPriceForTireSection.copyWith(
+                zdp5MaxQuota: ZDP5Info(''),
+                zdp5RemainingQuota: ZDP5Info(''),
+                lastPrice: MaterialPrice(100),
+                finalPrice: MaterialPrice(100),
+              )
+            },
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                materialNumber: materialNumber,
+                quantity: MaterialQty(4),
+              ),
+            ),
+            inputQty: 3,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(WidgetKeys.materialDetailsQuantityInput),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.listPriceStrikeThroughComponent,
+          ),
+          findsNothing,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.zdpDiscountListPrice,
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'show strick through price for tier price offers(When enableListPrice is false in config) ',
+          (tester) async {
+        final materialNumber = MaterialNumber('000000000021038302');
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakePHSalesOrgConfigs,
+          ),
+        );
+
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            isFetching: false,
+            materialPrice: {
+              materialNumber: materialPriceForTireSection.copyWith()
+            },
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                materialNumber: materialNumber,
+                quantity: MaterialQty(4),
+              ),
+            ),
+            inputQty: 3,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(WidgetKeys.materialDetailsQuantityInput),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.listPriceStrikeThroughComponent,
+          ),
+          findsNothing,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.zdpDiscountListPrice,
+          ),
+          findsNothing,
         );
       });
     },

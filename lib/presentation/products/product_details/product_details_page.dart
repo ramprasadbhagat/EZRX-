@@ -456,6 +456,11 @@ class _FooterState extends State<_Footer> {
     context
         .read<ProductDetailBloc>()
         .add(ProductDetailEvent.updateQty(qty: defaultQty));
+    context.read<ProductDetailBloc>().add(
+          const ProductDetailEvent.fetchItemQuantityForZdp5Discount(
+            quantity: defaultQty,
+          ),
+        );
     _quantityEditingController.addListener(() {
       context
           .read<ProductDetailBloc>()
@@ -544,8 +549,6 @@ class _FooterState extends State<_Footer> {
               previous.inputQty != current.inputQty,
           builder: (context, state) {
             final materialInfo = state.productDetailAggregate.materialInfo;
-            final isZdp5enable = eligibilityState.salesOrgConfigs.enableZDP5 &&
-                eligibilityState.salesOrganisation.salesOrg.isVN;
 
             return Column(
               mainAxisSize: MainAxisSize.min,
@@ -570,31 +573,27 @@ class _FooterState extends State<_Footer> {
                       child: CartItemQuantityInput(
                         key: WidgetKeys.materialDetailsQuantityInput,
                         addPressed: (value) {
-                          if (isZdp5enable) {
-                            context.read<ProductDetailBloc>().add(
-                                  ProductDetailEvent
-                                      .fetchItemQuantityForZdp5Discount(
-                                    quantity: int.parse(
-                                      _quantityEditingController.text,
-                                    ),
+                          context.read<ProductDetailBloc>().add(
+                                ProductDetailEvent
+                                    .fetchItemQuantityForZdp5Discount(
+                                  quantity: int.parse(
+                                    _quantityEditingController.text,
                                   ),
-                                );
-                          }
+                                ),
+                              );
                         },
                         controller: _quantityEditingController,
                         isEnabled: !materialInfo.isSuspended,
                         onFieldChange: (value) {},
                         onSubmit: (value) {
-                          if (isZdp5enable) {
-                            context.read<ProductDetailBloc>().add(
-                                  ProductDetailEvent
-                                      .fetchItemQuantityForZdp5Discount(
-                                    quantity: int.parse(
-                                      _quantityEditingController.text,
-                                    ),
+                          context.read<ProductDetailBloc>().add(
+                                ProductDetailEvent
+                                    .fetchItemQuantityForZdp5Discount(
+                                  quantity: int.parse(
+                                    _quantityEditingController.text,
                                   ),
-                                );
-                          }
+                                ),
+                              );
                         },
                         quantityAddKey: WidgetKeys.productDetailQuantityAddKey,
                         quantityDeleteKey:
@@ -602,16 +601,14 @@ class _FooterState extends State<_Footer> {
                         quantityTextKey:
                             WidgetKeys.productDetailQuantityTextKey,
                         minusPressed: (value) {
-                          if (isZdp5enable) {
-                            context.read<ProductDetailBloc>().add(
-                                  ProductDetailEvent
-                                      .fetchItemQuantityForZdp5Discount(
-                                    quantity: int.parse(
-                                      _quantityEditingController.text,
-                                    ),
+                          context.read<ProductDetailBloc>().add(
+                                ProductDetailEvent
+                                    .fetchItemQuantityForZdp5Discount(
+                                  quantity: int.parse(
+                                    _quantityEditingController.text,
                                   ),
-                                );
-                          }
+                                ),
+                              );
                         },
                         height: MediaQuery.of(context).size.height * 0.056,
                       ),
