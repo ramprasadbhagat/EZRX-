@@ -2,6 +2,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
@@ -145,6 +146,50 @@ void main() {
           user: User.empty().copyWith(username: Username('test')),
         );
         expect(result.isRight(), true);
+      },
+    );
+
+    test(
+      'Allow user to change password with uat',
+      () async {
+        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+
+        when(
+          () => remoteDataSourceMock.resetPassword(
+            newPassword: 'Pa55word@fake',
+            resetPasswordToken: 'fake-token',
+            username: 'fake-username',
+          ),
+        ).thenAnswer((invocation) async => ResetPassword.empty());
+
+        final result = await repository.resetPassword(
+          token: StringValue('fake-token'),
+          newPassword: Password.confirm('Pa55word@fake', 'Pa55word@fake'),
+          username: Username('fake-username'),
+        );
+        expect(result.isRight(), true);
+      },
+    );
+
+    test(
+      'Failure user to change password with uat',
+      () async {
+        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+
+        when(
+          () => remoteDataSourceMock.resetPassword(
+            newPassword: 'Pa55word@fake',
+            resetPasswordToken: 'fake-token',
+            username: 'fake-username',
+          ),
+        ).thenThrow((invocation) => Exception('fake-error'));
+
+        final result = await repository.resetPassword(
+          token: StringValue('fake-token'),
+          newPassword: Password.confirm('Pa55word@fake', 'Pa55word@fake'),
+          username: Username('fake-username'),
+        );
+        expect(result.isLeft(), true);
       },
     );
   });

@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -257,6 +259,7 @@ void main() {
     final returnDetailLink = Uri.parse(
       '$domain/payments/payment-summary/invoice-details?paymentID.c=${utf8.encode(paymentId.paymentID.getValue())}&paymentBatchAdditionalInfo=${paymentId.paymentBatchAdditionalInfo.getValue()}',
     );
+
     test('=> success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
@@ -302,6 +305,45 @@ void main() {
       expect(
         result,
         const Left(ApiFailure.paymentDetailRoute()),
+      );
+    });
+  });
+
+  group('Extract reset password credentials', () {
+    final resetPasswordValidUri = Uri.parse(
+      '$domain/login/set-password?username%3DFakeUser%26token%3DFakeToken',
+    );
+    final resetPasswordInvalidUri = Uri.parse(
+      '$domain/login/set-password?username%3D%26token%3D',
+    );
+    test('=> success', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+      final result = repository.extractResetPasswordCred(
+        link: resetPasswordValidUri,
+      );
+
+      expect(
+        result,
+        Right<ApiFailure, ResetPasswordCred>(
+          ResetPasswordCred.empty().copyWith(
+            username: Username('FakeUser'),
+            token: StringValue('FakeToken'),
+          ),
+        ),
+      );
+    });
+
+    test('=> fail', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+      final result = repository.extractResetPasswordCred(
+        link: resetPasswordInvalidUri,
+      );
+
+      expect(
+        result,
+        const Left(ApiFailure.passwordResetFail()),
       );
     });
   });

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -42,6 +43,8 @@ void main() {
       '/payments/account-summary/invoice-details';
   const paymentLink = '/my-account/payments';
   const faqLink = '/faq';
+  const resetPasswordLink =
+      'https://clicktime.symantec.com/15tStdYPVXVZm3CGiHwjj?h=AajXDPaRNcBc9HqeqM_8ZyhyH7ej6-GwTxaPE9fxEqU=&u=https://uat-sg.ezrx.com/login/set-password?username%3DFakeUser%26token%3DFakeToken';
 
   setUpAll(() {
     repository = DeepLinkingRepositoryMock();
@@ -616,6 +619,79 @@ void main() {
       ),
       expect: () => [
         const DeepLinkingState.redirectFAQ(),
+      ],
+    );
+  });
+
+  group('Redirect To Reset Password', () {
+    blocTest<DeepLinkingBloc, DeepLinkingState>(
+      'Consume reset password link success',
+      build: () => DeepLinkingBloc(
+        repository: repository,
+        chatBotService: chatBotService,
+      ),
+      setUp: () {
+        when(
+          () => repository.extractResetPasswordCred(
+            link: Uri(
+              path: '/login/set-password',
+              host: 'uat-sg.ezrx.com',
+              port: 443,
+              queryParameters: {'username': 'FakeUser', 'token': 'FakeToken'},
+              scheme: 'https',
+            ),
+          ),
+        ).thenReturn(Right(ResetPasswordCred.empty()));
+      },
+      seed: () => DeepLinkingState.linkPending(
+        EzrxLink(resetPasswordLink),
+      ),
+      act: (bloc) => bloc.add(
+        DeepLinkingEvent.consumePendingLink(
+          selectedCustomerCode: fakeCustomerCode,
+          selectedShipTo: fakeShipToCode,
+        ),
+      ),
+      expect: () => [
+        DeepLinkingState.redirectResetPassword(ResetPasswordCred.empty()),
+        const DeepLinkingState.error(
+          ApiFailure.other('Link is not valid'),
+        )
+      ],
+    );
+    blocTest<DeepLinkingBloc, DeepLinkingState>(
+      'Consume reset password link fail',
+      build: () => DeepLinkingBloc(
+        repository: repository,
+        chatBotService: chatBotService,
+      ),
+      setUp: () {
+        when(
+          () => repository.extractResetPasswordCred(
+            link: Uri(
+              path: '/login/set-password',
+              host: 'uat-sg.ezrx.com',
+              port: 443,
+              queryParameters: {'username': 'FakeUser', 'token': 'FakeToken'},
+              scheme: 'https',
+            ),
+          ),
+        ).thenReturn(const Left(fakeError));
+      },
+      seed: () => DeepLinkingState.linkPending(
+        EzrxLink(resetPasswordLink),
+      ),
+      act: (bloc) => bloc.add(
+        DeepLinkingEvent.consumePendingLink(
+          selectedCustomerCode: fakeCustomerCode,
+          selectedShipTo: fakeShipToCode,
+        ),
+      ),
+      expect: () => [
+        const DeepLinkingState.error(fakeError),
+        const DeepLinkingState.error(
+          ApiFailure.other('Link is not valid'),
+        )
       ],
     );
   });
