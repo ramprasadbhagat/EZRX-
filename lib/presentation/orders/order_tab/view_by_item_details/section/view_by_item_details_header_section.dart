@@ -104,6 +104,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
               enabled:
                   context.read<ViewByItemDetailsBloc>().state.isDetailsLoading,
               child: BalanceTextRow(
+                key: WidgetKeys.paymentTerm,
                 keyText: context.tr('Payment Term'),
                 valueFlex: 1,
                 valueText: orderHistoryBasicInfo.paymentTerm.displayValue,

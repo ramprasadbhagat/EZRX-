@@ -802,6 +802,7 @@ class WidgetKeys {
       Key('orderHistoryBundleInformation');
   static Key orderHistoryBundleItemMaterial(String materialNumber) =>
       Key('orderHistoryBundleItemMaterial$materialNumber');
+  static const Key paymentTerm = Key('paymentTerm');
 
   //============================================================
   //  Material Details

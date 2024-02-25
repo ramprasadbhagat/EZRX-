@@ -113,7 +113,8 @@ class ViewByItemRepository implements IViewByItemRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCodeSoldTo: soldTo.customerCodeSoldTo,
         language: user.preferredLanguage.languageCode,
-        searchKey: searchKey.getOrCrash(),
+        orderNumber: searchKey.getOrCrash(),
+        pageSize: 1,
       );
 
       final orderHistoryItemList =

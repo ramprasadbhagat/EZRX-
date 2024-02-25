@@ -30,7 +30,9 @@ class ViewByItemRequestDto with _$ViewByItemRequestDto {
     return ViewByItemRequestDto(
       salesOrg: [viewByItemRequest.salesOrg],
       soldTo: viewByItemRequest.customerCodeSoldTo,
-      shipTo: [viewByItemRequest.shipToCustomerCode],
+      shipTo: viewByItemRequest.shipToCustomerCode.isEmpty
+          ? []
+          : [viewByItemRequest.shipToCustomerCode],
       pageSize: viewByItemRequest.pageSize,
       offset: viewByItemRequest.offSet,
       language: viewByItemRequest.language,

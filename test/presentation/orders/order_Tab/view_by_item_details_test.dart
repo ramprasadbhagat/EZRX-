@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
@@ -59,6 +60,8 @@ import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/vi
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_number_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/invoice_number_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_attachment_section.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_term.dart'
+    as payment_term;
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
@@ -1951,6 +1954,69 @@ void main() {
       final requestedCounterOfferKey =
           find.text('Requested counter offer'.tr());
       expect(requestedCounterOfferKey, findsOneWidget);
+    });
+
+    testWidgets(
+        'Test Payment Term when disable payment term display is false',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
+            orderBasicInformation: OrderHistoryBasicInfo.empty().copyWith(
+              paymentTerm: payment_term.PaymentTerm.empty().copyWith(
+                paymentTermCode: 'K001',
+                paymentTermDescription: '30 Days from EOM, due EOM',
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.paymentTerm), findsOneWidget);
+
+      expect(find.text('K001-30 Days from EOM, due EOM'), findsOneWidget);
+    });
+
+    testWidgets(
+        'Test Payment Term when disable payment term display is enable',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeMYSalesOrgConfigs.copyWith(
+            disablePaymentTermsDisplay:
+                true, //need this value to test this scenario
+          ),
+        ),
+      );
+
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
+            orderBasicInformation: OrderHistoryBasicInfo.empty().copyWith(
+              paymentTerm: payment_term.PaymentTerm.empty().copyWith(
+                paymentTermCode: 'K001',
+                paymentTermDescription: '30 Days from EOM, due EOM',
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.paymentTerm), findsNothing);
+
+      expect(find.text('K001-30 Days from EOM, due EOM'), findsNothing);
     });
   });
 }
