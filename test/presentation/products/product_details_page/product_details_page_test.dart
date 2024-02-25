@@ -37,8 +37,10 @@ import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
+import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
+import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -2490,6 +2492,96 @@ void main() {
           ),
           findsNothing,
         );
+      });
+
+      group('Marketplace icon -', () {
+        testWidgets('Visible when material is from MP', (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith.productDetailAggregate(
+                  materialInfo:
+                      similarProducts.firstWhere((e) => e.isMarketPlace),
+                ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          expect(find.byType(MarketPlaceRectangleLogo), findsOneWidget);
+        });
+        testWidgets('Not visible when material is from ZP', (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith.productDetailAggregate(
+                  materialInfo:
+                      similarProducts.firstWhere((e) => !e.isMarketPlace),
+                ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          expect(find.byType(MarketPlaceRectangleLogo), findsNothing);
+        });
+      });
+
+      group('Marketplace seller -', () {
+        testWidgets('Visible instead of manufacturer when material is from MP',
+            (tester) async {
+          final material = similarProducts.firstWhere((e) => e.isMarketPlace);
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith.productDetailAggregate(
+                  materialInfo: material,
+                ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          expect(
+            find.descendant(
+              of: find.byType(MaterialInformation),
+              matching: find.textContaining('Sold by,'),
+            ),
+            findsOneWidget,
+          );
+          await tester.tap(find.byType(MaterialInformation));
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow(
+                'Sold by seller',
+                material.getManufactured,
+              ),
+            ),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets('Not visible when material is from ZP', (tester) async {
+          final material = similarProducts.firstWhere((e) => !e.isMarketPlace);
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith.productDetailAggregate(
+                  materialInfo: material,
+                ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          expect(
+            find.descendant(
+              of: find.byType(MaterialInformation),
+              matching: find.textContaining('Sold by,'),
+            ),
+            findsNothing,
+          );
+          await tester.tap(find.byType(MaterialInformation));
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow(
+                'Sold by seller',
+                material.getManufactured,
+              ),
+            ),
+            findsNothing,
+          );
+        });
       });
     },
   );

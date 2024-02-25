@@ -1175,6 +1175,88 @@ void main() {
           ),
         ],
       );
+
+      test('displayBatchNumber getter', () {
+        // Display NA when is MP material
+        expect(
+          ProductDetailState.initial()
+              .copyWith
+              .productDetailAggregate(
+                materialInfo: mockMaterialInfo,
+                stockInfo: mockStockInfo,
+              )
+              .displayBatchNumber,
+          'NA',
+        );
+
+        //Display number when is ZP material
+        expect(
+          ProductDetailState.initial()
+              .copyWith
+              .productDetailAggregate(
+                materialInfo: mockMaterialInfo.copyWith(isMarketPlace: false),
+                stockInfo: mockStockInfo,
+              )
+              .displayBatchNumber,
+          '199019',
+        );
+      });
+
+      test('displayExpiryDate getter', () {
+        final zpMaterialInfo = mockMaterialInfo.copyWith(isMarketPlace: false);
+        // Display NA when is MP material
+        expect(
+          ProductDetailState.initial()
+              .copyWith
+              .productDetailAggregate(
+                materialInfo: mockMaterialInfo,
+                stockInfo: mockStockInfo,
+              )
+              .displayExpiryDate,
+          'NA',
+        );
+
+        //Display NA when market is PH MDI (2501) and the product is not an Abbot material
+        expect(
+          ProductDetailState.initial()
+              .copyWith(
+                salesOrganisation: fakePhMDISalesOrganisation,
+                productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                  materialInfo: mockMaterialInfo,
+                  stockInfo: mockStockInfo,
+                ),
+              )
+              .displayExpiryDate,
+          'NA',
+        );
+
+        //Display date NA when market is PH MDI (2501) and the product is an Abbot material
+        expect(
+          ProductDetailState.initial()
+              .copyWith(
+                salesOrganisation: fakePhMDISalesOrganisation,
+                productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                  materialInfo: zpMaterialInfo.copyWith
+                      .principalData(principalCode: PrincipalCode('107381')),
+                  stockInfo: mockStockInfo,
+                ),
+              )
+              .displayExpiryDate,
+          '31 Jul 2023',
+        );
+
+        //Display date when is normal ZP material
+        expect(
+          ProductDetailState.initial()
+              .copyWith
+              .productDetailAggregate(
+                materialInfo: zpMaterialInfo,
+                stockInfo: mockStockInfo,
+              )
+              .displayExpiryDate,
+          '31 Jul 2023',
+        );
+      });
     },
   );
 }
