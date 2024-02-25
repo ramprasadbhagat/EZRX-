@@ -703,46 +703,6 @@ void main() {
         await tester.pumpAndSettle();
         expect(autoRouterMock.currentPath, 'payments/payment_advice_created');
       });
-      testWidgets('=> Test Invoice/credit already in use dialog',
-          (WidgetTester tester) async {
-        await tester.binding.setSurfaceSize(const Size(480, 900));
-        whenListen(
-          newPaymentBlocMock,
-          Stream.fromIterable([
-            NewPaymentState.initial().copyWith(
-              isLoading: true,
-            ),
-            NewPaymentState.initial().copyWith(
-              failureOrSuccessOption: optionOf(error),
-            ),
-          ]),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-        expect(
-          find.descendant(
-            of: find.byType(ConfirmBottomSheet),
-            matching: find.text('Invoice/credit already in use'),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: find.byType(ConfirmBottomSheet),
-            matching: confirmBottomSheetConfirmButton,
-          ),
-          findsOneWidget,
-        );
-        await tester.tap(confirmBottomSheetConfirmButton);
-        await tester.pumpAndSettle();
-        expect(
-          find.descendant(
-            of: find.byType(ConfirmBottomSheet),
-            matching: confirmBottomSheetConfirmButton,
-          ),
-          findsNothing,
-        );
-      });
 
       testWidgets('=> Test Previous button', (WidgetTester tester) async {
         await tester.binding.setSurfaceSize(const Size(480, 900));

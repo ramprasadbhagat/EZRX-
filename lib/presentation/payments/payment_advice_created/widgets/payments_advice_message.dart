@@ -25,7 +25,7 @@ class _PaymentBankInAdviceMessage extends StatelessWidget {
             height: 8.0,
           ),
           Text(
-            '${context.tr('Your payment advice')} #${state.paymentInvoiceInfoPdf.zzAdvice} ${context.tr('has been generated')}.',
+            '${context.tr('Your payment advice')} #${state.customerPaymentInfo.zzAdvice} ${context.tr('has been generated')}.',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),
@@ -68,10 +68,9 @@ class _PaymentGatewayAdviceMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.read<NewPaymentBloc>().state;
-    final firstMessage = state
-            .salesOrganisation.salesOrg.isPaymentNeedOpenWebView
-        ? 'has been generated. Please proceed to complete payment via your selected payment method “Payment Gateway” by clicking on the “Pay now” button below.'
-        : 'has been generated. Scan the QR code and complete payment.';
+    final scanQRText = state.salesOrganisation.salesOrg.isPaymentNeedOpenWebView
+        ? ''
+        : '${context.tr('Scan the QR code and complete payment')}.';
 
     return Padding(
       key: WidgetKeys.paymentGatewayAdviceMessage,
@@ -88,7 +87,7 @@ class _PaymentGatewayAdviceMessage extends StatelessWidget {
               ),
             ),
           Text(
-            '${context.tr('Your payment advice')} #${state.paymentInvoiceInfoPdf.zzAdvice} ${context.tr(firstMessage)}',
+            '${context.tr('Your payment advice')} #${state.customerPaymentInfo.zzAdvice} ${context.tr('has been generated')}. ${scanQRText.isNotEmpty ? scanQRText : ''}',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),
@@ -96,12 +95,13 @@ class _PaymentGatewayAdviceMessage extends StatelessWidget {
           const SizedBox(
             height: 8.0,
           ),
-          Text(
-            '${context.tr('We’ll send a payment advice copy to')} ${context.read<EligibilityBloc>().state.user.email.maskedValue} ${context.tr('shortly')}.',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: ZPColors.darkerGrey,
-                ),
-          ),
+          if (!state.salesOrganisation.salesOrg.isPaymentNeedOpenWebView)
+            Text(
+              '${context.tr('We’ll send a payment advice copy to')} ${context.read<EligibilityBloc>().state.user.email.maskedValue} ${context.tr('shortly')}.',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.darkerGrey,
+                  ),
+            ),
           const SizedBox(height: 24.0),
           const Divider(
             indent: 0,

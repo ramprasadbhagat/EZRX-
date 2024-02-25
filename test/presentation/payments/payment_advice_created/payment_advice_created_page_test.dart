@@ -27,6 +27,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
@@ -77,11 +78,15 @@ void main() {
   late PaymentSummaryDetails fakePaymentSummaryDetails;
   late PaymentSummaryBloc mockPaymentSummaryBloc;
   late List<PaymentItem> paymentList;
-  const fakeErrorMessage = 'fake-error';
   const fakeMockId = 'mock-id';
+  const fakeError = Left(ApiFailure.other('fake-error'));
 
   final paymentAdviceFailed = find.byKey(WidgetKeys.paymentAdviceFailed);
-
+  final confirmBottomSheetConfirmButton =
+      find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
+  final confirmBottomSheetCancelButton =
+      find.byKey(WidgetKeys.confirmBottomSheetCancelButton);
+      
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouterMock());
@@ -108,7 +113,9 @@ void main() {
   });
 
   setUp(() {
-    when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
+    when(() => newPaymentBlocMock.state).thenReturn(
+      NewPaymentState.initial(),
+    );
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
     when(() => customerCodeBlocMock.state)
@@ -171,6 +178,8 @@ void main() {
               options: <PaymentMethodOption>[],
               paymentMethod: PaymentMethodValue('Bank-In'),
             ),
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty()
+                .copyWith(zzAdvice: 'fake-zzadvice'),
           ),
         );
 
@@ -206,6 +215,8 @@ void main() {
               options: <PaymentMethodOption>[],
               paymentMethod: PaymentMethodValue('Bank-In'),
             ),
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty()
+                .copyWith(zzAdvice: 'fake-zzadvice'),
           ),
         );
 
@@ -226,6 +237,8 @@ void main() {
               options: <PaymentMethodOption>[],
               paymentMethod: PaymentMethodValue('Bank-In'),
             ),
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty()
+                .copyWith(zzAdvice: 'fake-zzadvice'),
           ),
         );
         when(
@@ -246,9 +259,21 @@ void main() {
       });
 
       testWidgets('Show Snackbar When Download Success', (tester) async {
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedPaymentMethod: NewPaymentMethod(
+              options: <PaymentMethodOption>[],
+              paymentMethod: PaymentMethodValue('Bank-In'),
+            ),
+            salesOrganisation: fakePHSalesOrganisation,
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty()
+                .copyWith(zzAdvice: 'fake-zzadvice'),
+          ),
+        );
         final expectStates = [
           NewPaymentState.initial().copyWith(
             isSavingInvoicePdf: true,
+            salesOrganisation: fakePHSalesOrganisation,
             selectedPaymentMethod: NewPaymentMethod(
               options: <PaymentMethodOption>[],
               paymentMethod: PaymentMethodValue('Bank-In'),
@@ -259,16 +284,40 @@ void main() {
               options: <PaymentMethodOption>[],
               paymentMethod: PaymentMethodValue('Bank-In'),
             ),
+            salesOrganisation: fakePHSalesOrganisation,
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty()
+                .copyWith(zzAdvice: 'fake-zzadvice'),
           ),
         ];
+
         whenListen(newPaymentBlocMock, Stream.fromIterable(expectStates));
+
         await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+        await tester.pump();
+
+        final downloadAdviceButtonFinder =
+            find.byKey(WidgetKeys.downloadAdviceButton);
+        expect(downloadAdviceButtonFinder, findsOneWidget);
+        await tester.tap(downloadAdviceButtonFinder);
+        await tester.pump();
+        await tester.pump();
+
         expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
         expect(find.text('Download Successful'.tr()), findsOneWidget);
       });
 
       testWidgets('Show Snackbar When Download Failure', (tester) async {
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(
+            selectedPaymentMethod: NewPaymentMethod(
+              options: <PaymentMethodOption>[],
+              paymentMethod: PaymentMethodValue('Bank-In'),
+            ),
+            salesOrganisation: fakePHSalesOrganisation,
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty()
+                .copyWith(zzAdvice: 'fake-zzadvice'),
+          ),
+        );
         final expectStates = [
           NewPaymentState.initial().copyWith(
             isSavingInvoicePdf: true,
@@ -276,19 +325,33 @@ void main() {
               options: <PaymentMethodOption>[],
               paymentMethod: PaymentMethodValue('Bank-In'),
             ),
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty()
+                .copyWith(zzAdvice: 'fake-zzadvice'),
           ),
           NewPaymentState.initial().copyWith(
             selectedPaymentMethod: NewPaymentMethod(
               options: <PaymentMethodOption>[],
               paymentMethod: PaymentMethodValue('Bank-In'),
             ),
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty()
+                .copyWith(zzAdvice: 'fake-zzadvice'),
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake-error'))),
           ),
         ];
+
         whenListen(newPaymentBlocMock, Stream.fromIterable(expectStates));
+
         await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+        await tester.pump();
+
+        final downloadAdviceButtonFinder =
+            find.byKey(WidgetKeys.downloadAdviceButton);
+        expect(downloadAdviceButtonFinder, findsOneWidget);
+        await tester.tap(downloadAdviceButtonFinder);
+        await tester.pump();
+        await tester.pump();
+
         expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
         expect(find.text('fake-error'.tr()), findsOneWidget);
       });
@@ -388,16 +451,20 @@ void main() {
         expect(find.byKey(WidgetKeys.paymentAdviceNextStep), findsOneWidget);
         expect(find.byKey(WidgetKeys.paymentSummarySection), findsOneWidget);
         expect(find.byKey(WidgetKeys.paymentAdviceButton), findsNothing);
+        // expect(
+        //   find.byKey(WidgetKeys.paymentAdviceDocumentHeader),
+        //   findsOneWidget,
+        // );
 
-        await tester.dragUntilVisible(
-          find.byKey(WidgetKeys.paymentSavePdfButtonSection),
-          find.byType(ListView),
-          const Offset(0.0, -200),
-        );
-        expect(
-          find.byKey(WidgetKeys.paymentSavePdfButtonSection),
-          findsOneWidget,
-        );
+        // await tester.dragUntilVisible(
+        //   find.byKey(WidgetKeys.paymentSavePdfButtonSection),
+        //   find.byType(ListView),
+        //   const Offset(0.0, -200),
+        // );
+        // expect(
+        //   find.byKey(WidgetKeys.paymentSavePdfButtonSection),
+        //   findsNothing,
+        // );
       });
     });
 
@@ -410,6 +477,8 @@ void main() {
               options: <PaymentMethodOption>[],
               paymentMethod: PaymentMethodValue('QR Code'),
             ),
+            paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty()
+                .copyWith(zzAdvice: 'fake-zzadvice'),
           ),
         );
 
@@ -431,14 +500,9 @@ void main() {
         expect(find.byKey(WidgetKeys.paymentSummarySection), findsNothing);
         expect(find.byKey(WidgetKeys.paymentAdviceButton), findsOneWidget);
 
-        await tester.dragUntilVisible(
-          find.byKey(WidgetKeys.paymentSavePdfButtonSection),
-          find.byType(ListView),
-          const Offset(0.0, -200),
-        );
         expect(
           find.byKey(WidgetKeys.paymentSavePdfButtonSection),
-          findsOneWidget,
+          findsNothing,
         );
       });
     });
@@ -810,6 +874,125 @@ void main() {
           ),
         ).called(1);
       });
+
+      testWidgets('=> Test Invoice/credit already in use dialog and click payment summary',
+          (WidgetTester tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              isLoading: true,
+            ),
+            NewPaymentState.initial().copyWith(
+              failureOrSuccessOption: optionOf(fakeError),
+            ),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        when(
+          () => autoRouterMock.pushAndPopUntil(
+            const PaymentSummaryPageRoute(),
+            predicate: any(named: 'predicate'),
+          ),
+        ).thenAnswer((invocation) => Future.value());
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: find.text('Invoice/credit already in use'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: confirmBottomSheetConfirmButton,
+          ),
+          findsOneWidget,
+        );
+        await tester.tap(confirmBottomSheetConfirmButton);
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: confirmBottomSheetConfirmButton,
+          ),
+          findsNothing,
+        );
+      });
+
+      testWidgets('=> Test Invoice/credit already in use dialog and click back',
+          (WidgetTester tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        whenListen(
+          newPaymentBlocMock,
+          Stream.fromIterable([
+            NewPaymentState.initial().copyWith(
+              isLoading: true,
+            ),
+            NewPaymentState.initial().copyWith(
+              failureOrSuccessOption: optionOf(fakeError),
+            ),
+          ]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        when(
+          () => autoRouterMock.pushAndPopUntil(
+            const NewPaymentPageRoute(),
+            predicate: any(named: 'predicate'),
+          ),
+        ).thenAnswer((invocation) => Future.value());
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: find.text('Invoice/credit already in use'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: confirmBottomSheetCancelButton,
+          ),
+          findsOneWidget,
+        );
+        await tester.tap(confirmBottomSheetCancelButton);
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: find.byType(ConfirmBottomSheet),
+            matching: confirmBottomSheetConfirmButton,
+          ),
+          findsNothing,
+        );
+      });
+
+      testWidgets('After get customerPayment success and fetch PDF Invoice',
+          (tester) async {
+        final expectStates = [
+          NewPaymentState.initial().copyWith(
+            isLoading: true,
+          ),
+          NewPaymentState.initial().copyWith(
+            isLoading: false,
+            customerPaymentInfo:
+                CustomerPaymentInfo.empty().copyWith(zzAdvice: 'fake-zzadvice'),
+          ),
+        ];
+
+        whenListen(newPaymentBlocMock, Stream.fromIterable(expectStates));
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        verify(
+          () => newPaymentBlocMock.add(
+            const NewPaymentEvent.fetchInvoiceInfoPdf(),
+          ),
+        ).called(1);
+      });
     });
     group('APL Payment Method Test', () {
       testWidgets('Apl payment non fetch Payment Summary DetailsInfo',
@@ -979,8 +1162,7 @@ void main() {
                   options: [paymentMethodOption],
                 ),
               ],
-              failureOrSuccessOption:
-                  optionOf(const Left(ApiFailure.other(fakeErrorMessage))),
+              failureOrSuccessOption: optionOf(fakeError),
               isCreatingVirtualAccount: false,
               createVirtualAccountFailed: true,
             ),

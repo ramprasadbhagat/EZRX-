@@ -40,25 +40,6 @@ part 'package:ezrxmobile/presentation/payments/new_payment/widgets/select_all_se
 class NewPaymentPage extends StatelessWidget {
   const NewPaymentPage({Key? key}) : super(key: key);
 
-  static const paymentErrorMessage =
-      'Unable to generate payment advice as at least one of the selected invoices/credit notes have already been selected for another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.';
-
-  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
-    return showModalBottomSheet<bool>(
-      context: context,
-      enableDrag: false,
-      builder: (_) => ConfirmBottomSheet(
-        key: WidgetKeys.confirmBottomSheet,
-        title: context.tr('Invoice/credit already in use'),
-        content: context.tr(paymentErrorMessage),
-        confirmButtonText: 'Payment summary',
-        iconWidget: SvgPicture.asset(
-          SvgImage.alert,
-        ),
-      ),
-    );
-  }
-
   List<PageRouteInfo<void>> _getTabs({
     bool isID = false,
   }) {
@@ -96,65 +77,18 @@ class NewPaymentPage extends StatelessWidget {
           ),
           body: AnnouncementBanner(
             currentPath: context.router.currentPath,
-            child: BlocListener<NewPaymentBloc, NewPaymentState>(
-              listenWhen: (previous, current) =>
-                  previous.isLoading != current.isLoading,
-              listener: (context, state) {
-                if (!state.isLoading) {
-                  state.failureOrSuccessOption.fold(
-                    () {
-                      context.read<NewPaymentBloc>().add(
-                            const NewPaymentEvent.fetchInvoiceInfoPdf(),
-                          );
-                      context.router.pushAndPopUntil(
-                        const PaymentAdviceCreatedPageRoute(),
-                        predicate: (Route route) =>
-                            route.settings.name == PaymentPageRoute.name,
-                      );
-                    },
-                    (either) => either.fold(
-                      (failure) async {
-                        trackMixpanelEvent(
-                          MixpanelEvents.paymentFailure,
-                          props: {
-                            MixpanelProps.errorMessage: paymentErrorMessage,
-                            MixpanelProps.paymentMethod: state
-                                .selectedPaymentMethod.paymentMethod
-                                .getOrDefaultValue(''),
-                            MixpanelProps.paymentDocumentCount:
-                                state.allSelectedItems.length,
-                          },
-                        );
-                        final confirmed =
-                            await _showConfirmBottomSheet(context);
-                        if ((confirmed ?? false) && context.mounted) {
-                          unawaited(
-                            context.router.pushAndPopUntil(
-                              const PaymentSummaryPageRoute(),
-                              predicate: (Route route) =>
-                                  route.settings.name == PaymentPageRoute.name,
-                            ),
-                          );
-                        }
-                      },
-                      (_) {},
-                    ),
-                  );
-                }
-              },
-              child: Column(
-                children: [
-                  _NewPaymentBody(
-                    currentStep: step,
-                    totalTabs: tabs.length,
-                    child: child,
-                  ),
-                  _NewPaymentFooter(
-                    currentStep: step,
-                    tabController: tabController,
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                _NewPaymentBody(
+                  currentStep: step,
+                  totalTabs: tabs.length,
+                  child: child,
+                ),
+                _NewPaymentFooter(
+                  currentStep: step,
+                  tabController: tabController,
+                ),
+              ],
             ),
           ),
         );

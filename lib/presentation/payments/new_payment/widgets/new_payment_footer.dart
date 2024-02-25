@@ -101,6 +101,11 @@ class _NewPaymentFooter extends StatelessWidget {
                                   context.read<NewPaymentBloc>().add(
                                         const NewPaymentEvent.pay(),
                                       );
+                                      context.router.pushAndPopUntil(
+                    const PaymentAdviceCreatedPageRoute(),
+                    predicate: (Route route) =>
+                        route.settings.name == PaymentPageRoute.name,
+                  );
                                 },
                           child: LoadingShimmer.withChild(
                             enabled: state.isLoading,

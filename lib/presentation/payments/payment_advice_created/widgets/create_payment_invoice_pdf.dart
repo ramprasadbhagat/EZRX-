@@ -883,7 +883,7 @@ class CreatePaymentInvoicePdf {
     pdf.addPage(
       pw.Page(
         pageFormat: PdfPageFormat.a4.copyWith(height: double.infinity),
-        margin: const pw.EdgeInsets.all(16.0),
+        margin: const pw.EdgeInsets.all(0),
         theme: _getThemeData(font),
         build: (context) {
           return pw.Column(

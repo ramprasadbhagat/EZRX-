@@ -67,7 +67,7 @@ class _PaymentSummarySection extends StatelessWidget {
                     const Spacer(),
                     ElevatedButton(
                       key: WidgetKeys.payButton,
-                      onPressed: state.isLoading ||
+                      onPressed: state.isFetching ||
                               (!state.salesOrganisation.salesOrg
                                   .isPaymentNeedOpenWebView)
                           ? null

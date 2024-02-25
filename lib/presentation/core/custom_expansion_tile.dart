@@ -40,6 +40,7 @@ class ExpansionTile extends StatefulWidget {
     this.initiallyExpanded = false,
     this.keepHeaderBorder = false,
     this.threeLineTitle = false,
+    this.radius,
   }) : super(key: key);
 
   /// A widget to display before the title.
@@ -86,6 +87,8 @@ class ExpansionTile extends StatefulWidget {
   final bool keepHeaderBorder;
 
   final bool threeLineTitle;
+
+  final double? radius;
 
   @override
   ExpansionTileState createState() => ExpansionTileState();
@@ -175,17 +178,19 @@ class ExpansionTileState extends State<ExpansionTile>
           IconTheme.merge(
             data: IconThemeData(color: _iconColor.value),
             child: Container(
-              color: widget.headerBackgroundColor,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(widget.radius ?? 0),
+                color: widget.headerBackgroundColor,
+              ),
               child: Container(
                 height: widget.threeLineTitle ? null : 40,
-                margin: const EdgeInsets.all(0),
-                decoration: BoxDecoration(
-                  border: widget.keepHeaderBorder
-                      ? const Border(
+                decoration: widget.keepHeaderBorder
+                    ? const BoxDecoration(
+                        border: Border(
                           bottom: BorderSide(width: 1, color: ZPColors.black),
-                        )
-                      : null,
-                ),
+                        ),
+                      )
+                    : null,
                 child: ListTile(
                   contentPadding: const EdgeInsets.all(0),
                   onTap: _handleTap,

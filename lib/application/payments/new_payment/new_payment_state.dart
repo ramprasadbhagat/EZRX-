@@ -85,4 +85,14 @@ class NewPaymentState with _$NewPaymentState {
   bool get canFetchPaymentDetails =>
       !isCreatingVirtualAccount &&
       createVirtualAccount != CreateVirtualAccount.empty();
+
+  bool get isFetching => isLoading || isCreatingVirtualAccount;
+
+  String get paymentAdviceGenerateTitle {
+    return isFetching
+        ? selectedPaymentMethod.paymentMethod.isPaymentGateway
+            ? 'Please be patient ...'
+            : 'Generating payment advice...'
+        : 'Payment advice generated';
+  }
 }

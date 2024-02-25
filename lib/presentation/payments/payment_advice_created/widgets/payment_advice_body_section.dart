@@ -20,14 +20,7 @@ class _PaymentAdviceBodySection extends StatelessWidget {
         newPaymentState.needOpenWebViewAndNotBankIn
             ? const _PaymentAdviceNextStep()
             : const _PaymentAdvicePleaseNote(),
-        const _PaymentInvoicePdf(),
-        if (!newPaymentState.selectedPaymentMethod.paymentMethod.isBankIn)
-          const Padding(
-            key: WidgetKeys.paymentSavePdfButtonSection,
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: PaymentSavePdfButton(),
-          ),
-        const SizedBox(height: 24),
+        const _PaymentAdviceDocument(),
       ],
     );
   }

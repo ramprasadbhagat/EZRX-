@@ -34,6 +34,18 @@ class _PaymentAdviceNextStep extends StatelessWidget {
           BulletWidget(
             content: RichText(
               text: TextSpan(
+                text: '${context.tr(
+                  'Click on the “Pay now” button on the bottom right to proceed with the payment via your selected payment method ‘Payment Gateway’',
+                )}.',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: ZPColors.extraLightGrey4,
+                    ),
+              ),
+            ),
+          ),
+          BulletWidget(
+            content: RichText(
+              text: TextSpan(
                 text: context.tr(
                   'It may take a few seconds for the payment gateway to open in a new browser tab.',
                 ),

@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -17,6 +18,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -36,10 +38,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
-
-part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_invoice_pdf.dart';
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+    as custom;
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_document.dart';
 
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_save_pdf_button.dart';
 
@@ -65,6 +67,26 @@ part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/pa
 
 class PaymentAdviceCreatedPage extends StatelessWidget {
   const PaymentAdviceCreatedPage({Key? key}) : super(key: key);
+
+  static const paymentErrorMessage =
+      'Unable to generate payment advice as at least one of the selected invoices/credit notes have already been selected for another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.';
+
+  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
+    return showModalBottomSheet<bool>(
+      context: context,
+      enableDrag: false,
+      builder: (_) => ConfirmBottomSheet(
+        key: WidgetKeys.confirmBottomSheet,
+        title: 'Invoice/credit already in use',
+        content: paymentErrorMessage,
+        cancelButtonText: 'Back',
+        confirmButtonText: 'Payment summary',
+        iconWidget: SvgPicture.asset(
+          SvgImage.alert,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,64 +172,111 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
         }
       },
       buildWhen: (previous, current) =>
-          previous.isFetchingInvoiceInfoPdf !=
-              current.isFetchingInvoiceInfoPdf ||
-          previous.isCreatingVirtualAccount !=
-              current.isCreatingVirtualAccount ||
+          previous.isFetching != current.isFetching ||
           previous.createVirtualAccountFailed !=
               current.createVirtualAccountFailed,
       builder: (context, state) {
-        return WillPopScope(
-          onWillPop: () async {
-            _onClosePressed(context);
-
-            return false;
+        return BlocListener<NewPaymentBloc, NewPaymentState>(
+          listenWhen: (previous, current) =>
+              previous.isLoading != current.isLoading,
+          listener: (context, state) {
+            if (!state.isLoading) {
+              state.failureOrSuccessOption.fold(
+                () {
+                  context.read<NewPaymentBloc>().add(
+                        const NewPaymentEvent.fetchInvoiceInfoPdf(),
+                      );
+                },
+                (either) => either.fold(
+                  (failure) async {
+                    trackMixpanelEvent(
+                      MixpanelEvents.paymentFailure,
+                      props: {
+                        MixpanelProps.errorMessage: paymentErrorMessage,
+                        MixpanelProps.paymentMethod: state
+                            .selectedPaymentMethod.paymentMethod
+                            .getOrDefaultValue(''),
+                        MixpanelProps.paymentDocumentCount:
+                            state.allSelectedItems.length,
+                      },
+                    );
+                    final confirmed = await _showConfirmBottomSheet(context);
+                    if (context.mounted) {
+                      if (confirmed ?? false) {
+                        unawaited(
+                          context.router.pushAndPopUntil(
+                            const PaymentSummaryPageRoute(),
+                            predicate: (Route route) =>
+                                route.settings.name == PaymentPageRoute.name,
+                          ),
+                        );
+                      } else {
+                        unawaited(
+                          context.router.pushAndPopUntil(
+                            const NewPaymentPageRoute(),
+                            predicate: (Route route) =>
+                                route.settings.name == PaymentPageRoute.name,
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  (_) {},
+                ),
+              );
+            }
           },
-          child: Scaffold(
-            appBar: CustomAppBar.commonAppBar(
-              automaticallyImplyLeading: false,
-              leadingWidth: state.canDisplayCrossButton ? null : 5,
-              title: Text(
-                state.isFetchingInvoiceInfoPdf || state.isCreatingVirtualAccount
-                    ? context.tr('Generating payment advice...')
-                    : context.tr('Payment advice generated'),
-              ),
-              leadingWidget: state.canDisplayCrossButton
-                  ? IconButton(
-                      key: WidgetKeys.closeButton,
-                      onPressed: () => _onClosePressed(context),
-                      icon: const CircleAvatar(
-                        maxRadius: 16,
-                        backgroundColor: ZPColors.transparent,
-                        child: Icon(
-                          Icons.close,
-                          color: ZPColors.neutralsBlack,
-                        ),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-              customerBlockedOrSuspended: context
-                  .read<EligibilityBloc>()
-                  .state
-                  .customerBlockOrSuspended,
-            ),
-            body:
-                state.isFetchingInvoiceInfoPdf || state.isCreatingVirtualAccount
-                    ? Center(
-                        child: LoadingShimmer.logo(
-                          key: WidgetKeys.paymentAdviceScreenLoader,
+          child: WillPopScope(
+            onWillPop: () async {
+              _onClosePressed(context);
+
+              return false;
+            },
+            child: Scaffold(
+              appBar: CustomAppBar.commonAppBar(
+                automaticallyImplyLeading: false,
+                leadingWidth: state.canDisplayCrossButton ? null : 5,
+                title: Text(
+                  context.tr(state.paymentAdviceGenerateTitle),
+                ),
+                leadingWidget: state.canDisplayCrossButton
+                    ? IconButton(
+                        key: WidgetKeys.closeButton,
+                        onPressed: () => _onClosePressed(context),
+                        icon: const CircleAvatar(
+                          maxRadius: 16,
+                          backgroundColor: ZPColors.transparent,
+                          child: Icon(
+                            Icons.close,
+                            color: ZPColors.neutralsBlack,
+                          ),
                         ),
                       )
-                    : state.createVirtualAccountFailed
-                        ? _PaymentVirtualAccountFailed()
-                        : Column(
-                            children: const [
-                              Expanded(
-                                child: _PaymentAdviceBodySection(),
-                              ),
-                              _PaymentAdviceFooterSection(),
-                            ],
-                          ),
+                    : const SizedBox.shrink(),
+                customerBlockedOrSuspended: context
+                    .read<EligibilityBloc>()
+                    .state
+                    .customerBlockOrSuspended,
+              ),
+              body: state.createVirtualAccountFailed
+                  ? _PaymentVirtualAccountFailed()
+                  : Column(
+                      children: [
+                        Expanded(
+                          child: state.isFetching
+                              ? _PaymentAdviceWaiting(
+                                  isPaymentGateway: state.selectedPaymentMethod
+                                      .paymentMethod.isPaymentGateway,
+                                )
+                              : const _PaymentAdviceBodySection(),
+                        ),
+                        if (state.selectedPaymentMethod.paymentMethod
+                                .isPaymentGateway ||
+                            !state.isFetching)
+                          const _PaymentAdviceFooterSection(),
+                      ],
+                    ),
+            ),
           ),
         );
       },
@@ -222,5 +291,47 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
           ),
         );
     Navigator.pop(context);
+  }
+}
+
+class _PaymentAdviceWaiting extends StatelessWidget {
+  final bool isPaymentGateway;
+  const _PaymentAdviceWaiting({required this.isPaymentGateway, Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      key: WidgetKeys.paymentAdviceScreenWaiting,
+      padding: const EdgeInsets.symmetric(
+        vertical: 16.0,
+        horizontal: 20.0,
+      ),
+      child: Column(
+        children: [
+          if (isPaymentGateway) ...[
+            Text(
+              '${context.tr('Please be patient while we connect to the bank gateway')}...',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.darkerGrey,
+                  ),
+            ),
+            const SizedBox(height: 24.0),
+            const Divider(
+              indent: 0,
+              thickness: 1,
+              endIndent: 0,
+              height: 1,
+              color: ZPColors.extraLightGrey3,
+            ),
+          ],
+          Expanded(
+            child: LoadingShimmer.logo(
+              key: WidgetKeys.paymentAdviceScreenLoader,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

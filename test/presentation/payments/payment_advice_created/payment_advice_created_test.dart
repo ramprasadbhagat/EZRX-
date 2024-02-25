@@ -128,6 +128,8 @@ void main() {
 
   final paymentAdviceScreenLoader =
       find.byKey(WidgetKeys.paymentAdviceScreenLoader);
+  final paymentAdviceScreenWaiting =
+      find.byKey(WidgetKeys.paymentAdviceScreenWaiting);
   final paymentGatewayAdviceMessage =
       find.byKey(WidgetKeys.paymentGatewayAdviceMessage);
   final paymentBankInAdviceMessage =
@@ -272,7 +274,7 @@ void main() {
       await tester.tap(closeButton);
       await tester.pumpAndSettle();
       verify(
-            () => mockPaymentSummaryBloc.add(
+        () => mockPaymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
             appliedFilter: PaymentSummaryFilter.empty(),
             searchKey: SearchKey.searchFilter(''),
@@ -281,15 +283,48 @@ void main() {
       ).called(1);
     });
 
-    testWidgets('Payment advice created page loading',
+    testWidgets('Payment advice created page waiting customer API called',
         (WidgetTester tester) async {
       when(() => newPaymentBlocMock.state).thenReturn(
         NewPaymentState.initial().copyWith(
-          isFetchingInvoiceInfoPdf: true,
+          isLoading: true,
         ),
       );
       await tester.pumpWidget(getWidget());
       await tester.pump();
+      expect(paymentAdviceScreenWaiting, findsOneWidget);
+      expect(paymentAdviceScreenLoader, findsOneWidget);
+    });
+
+    testWidgets(
+        'Payment advice created page waiting APL created advice API called',
+        (WidgetTester tester) async {
+      when(() => newPaymentBlocMock.state).thenReturn(
+        NewPaymentState.initial().copyWith(
+          isCreatingVirtualAccount: true,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(paymentAdviceScreenWaiting, findsOneWidget);
+      expect(paymentAdviceScreenLoader, findsOneWidget);
+    });
+
+    testWidgets(
+        'Payment advice created page waiting get payment invoice API called',
+        (WidgetTester tester) async {
+      when(() => newPaymentBlocMock.state).thenReturn(
+        NewPaymentState.initial().copyWith(
+          isFetchingInvoiceInfoPdf: true,
+          salesOrganisation: fakeSGSalesOrganisation,
+          selectedPaymentMethod: paymentMethodValueQr,
+          paymentInvoiceInfoPdf:
+              PaymentInvoiceInfoPdf.empty().copyWith(zzAdvice: 'fake-zzadvice'),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(paymentAdviceScreenWaiting, findsNothing);
       expect(paymentAdviceScreenLoader, findsOneWidget);
     });
 
@@ -299,7 +334,7 @@ void main() {
         NewPaymentState.initial().copyWith(
           selectedPaymentMethod: paymentMethodValueQr,
           salesOrganisation: fakeSGSalesOrganisation,
-          paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty().copyWith(
+          customerPaymentInfo: CustomerPaymentInfo.empty().copyWith(
             zzAdvice: 'fake-zzadvice',
           ),
         ),
@@ -491,9 +526,11 @@ void main() {
         NewPaymentState.initial().copyWith(
           selectedPaymentMethod: paymentMethodValueBank,
           salesOrganisation: fakeSGSalesOrganisation,
-          paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty().copyWith(
+          customerPaymentInfo: CustomerPaymentInfo.empty().copyWith(
             zzAdvice: 'fake-zzadvice',
           ),
+          paymentInvoiceInfoPdf:
+              PaymentInvoiceInfoPdf.empty().copyWith(zzAdvice: 'fake-zzadvice'),
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(

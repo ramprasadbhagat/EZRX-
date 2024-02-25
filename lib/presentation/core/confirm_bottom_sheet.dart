@@ -60,6 +60,7 @@ class ConfirmBottomSheet extends StatelessWidget {
                 if (displayCancelButton) ...[
                   Expanded(
                     child: ElevatedButton(
+                      key: WidgetKeys.confirmBottomSheetCancelButton,
                       onPressed: () {
                         Navigator.of(context).pop(false);
                       },
