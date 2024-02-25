@@ -14,7 +14,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_qu
 import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/bank_beneficiary_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/bank_beneficiary_response_dto.dart';
-import 'package:ezrxmobile/infrastructure/account/dtos/sales_district_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -158,40 +157,40 @@ void main() {
     );
   });
   group('Bank Beneficiary Remote for getSalesDistrict', () {
-    test(
-      '=> Success',
-      () async {
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getSalesDistrictResponse.json'),
-        );
+    // test(
+    //   '=> Success',
+    //   () async {
+    //     final res = json.decode(
+    //       await rootBundle
+    //           .loadString('assets/json/getSalesDistrictResponse.json'),
+    //     );
 
-        dioAdapter.onPost(
-          '/api/ezpay',
-          (server) => server.reply(
-            200,
-            res,
-            delay: const Duration(seconds: 1),
-          ),
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
-          data: jsonEncode({
-            'query': remoteDataSource.bankBeneficiaryQueryMutation
-                .getSalesDistrictQuery(),
-            'variables': getSalesDistricts,
-          }),
-        );
+    //     dioAdapter.onPost(
+    //       '/api/ezpay',
+    //       (server) => server.reply(
+    //         200,
+    //         res,
+    //         delay: const Duration(seconds: 1),
+    //       ),
+    //       headers: {'Content-Type': 'application/json; charset=utf-8'},
+    //       data: jsonEncode({
+    //         'query': remoteDataSource.bankBeneficiaryQueryMutation
+    //             .getSalesDistrictQuery(),
+    //         'variables': getSalesDistricts,
+    //       }),
+    //     );
 
-        final result =
-            await remoteDataSource.getSalesDistrict(salesOrg: salesOrg);
-        expect(
-          result.length,
-          List.from(res['data']['salesDistrict'])
-              .map((e) => SalesDistrictDto.fromJson(e).toDomain())
-              .toList()
-              .length,
-        );
-      },
-    );
+    //     final result =
+    //         await remoteDataSource.getSalesDistrict(salesOrg: salesOrg);
+    //     expect(
+    //       result.length,
+    //       List.from(res['data']['salesDistrict'])
+    //           .map((e) => SalesDistrictDto.fromJson(e).toDomain())
+    //           .toList()
+    //           .length,
+    //     );
+    //   },
+    // );
 
     test(
       '=> Failure',

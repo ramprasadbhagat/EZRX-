@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/account/payment_configuration/bank_benefi
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -371,7 +370,6 @@ void main() {
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late PaymentMethodsBloc paymentMethodsBlocMock;
   late ManageBankBeneficiaryBloc manageBankBeneficiaryBlocMock;
-  late SalesDistrictBloc salesDistrictBlocMock;
   late ManageDeductionCodeBloc manageDeductionCodeBlocMock;
   late ManagePaymentAdviceFooterBloc managePaymentAdviceFooterBlocMock;
   late MaterialListBloc materialListBlocMock;
@@ -497,7 +495,6 @@ void main() {
       policyConfigurationListBlocMock = PolicyConfigurationListBlocMock();
       paymentMethodsBlocMock = PaymentMethodBlocMock();
       manageBankBeneficiaryBlocMock = ManageBankBeneficiaryBlocMock();
-      salesDistrictBlocMock = SalesDistrictBlocMock();
       manageDeductionCodeBlocMock = ManageDeductionCodeBlocMock();
       managePaymentAdviceFooterBlocMock = ManagePaymentAdviceFooterBlocMock();
       materialListBlocMock = MaterialListBlocMock();
@@ -558,9 +555,6 @@ void main() {
       );
       when(() => manageBankBeneficiaryBlocMock.state).thenReturn(
         ManageBankBeneficiaryState.initial(),
-      );
-      when(() => salesDistrictBlocMock.state).thenReturn(
-        SalesDistrictState.initial(),
       );
       when(() => manageDeductionCodeBlocMock.state).thenReturn(
         ManageDeductionCodeState.initial(),
@@ -687,9 +681,6 @@ void main() {
             ),
             BlocProvider<ManageBankBeneficiaryBloc>(
               create: (context) => manageBankBeneficiaryBlocMock,
-            ),
-            BlocProvider<SalesDistrictBloc>(
-              create: (context) => salesDistrictBlocMock,
             ),
             BlocProvider<ManageDeductionCodeBloc>(
               create: (context) => manageDeductionCodeBlocMock,
@@ -1191,11 +1182,6 @@ void main() {
         ),
       ).called(1);
 
-      verify(
-        () => salesDistrictBlocMock.add(
-          const SalesDistrictEvent.fetch(),
-        ),
-      ).called(1);
       verify(
         () => manageDeductionCodeBlocMock.add(
           const ManageDeductionCodeEvent.fetch(),

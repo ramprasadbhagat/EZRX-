@@ -35,17 +35,17 @@ void main() {
       },
     );
 
-    test(
-      '=> fetchSalesDistrict',
-      () async {
-        final result = await localDataSource.getSalesDistrict();
+    // test(
+    //   '=> fetchSalesDistrict',
+    //   () async {
+    //     final result = await localDataSource.getSalesDistrict();
 
-        expect(
-          result.length,
-          1,
-        );
-      },
-    );
+    //     expect(
+    //       result.length,
+    //       1,
+    //     );
+    //   },
+    // );
 
     test(
       '=> DeleteBeneficiary',
@@ -59,7 +59,7 @@ void main() {
       },
     );
 
-     test(
+    test(
       '=> getBankBeneficiariesBySaleOrg',
       () async {
         final result = await localDataSource.getBankBeneficiariesBySaleOrg();

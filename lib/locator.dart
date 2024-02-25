@@ -11,7 +11,6 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_adv
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -148,9 +147,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_quer
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
@@ -173,7 +169,6 @@ import 'package:ezrxmobile/infrastructure/account/repository/ez_point_repository
 import 'package:ezrxmobile/infrastructure/account/repository/notification_settings_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_advice_footer_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_methods_repository.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/sales_district_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_rep_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/update_sales_org_repository.dart';
@@ -2147,7 +2142,6 @@ void setupLocator() {
       returnDetailsByRequestRepository:
           locator<ReturnDetailsByRequestRepository>(),
       returnRequestRepository: locator<ReturnRequestRepository>(),
-
     ),
   );
 
@@ -2313,38 +2307,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ManageBankBeneficiaryBloc(
       bankBeneficiaryRepository: locator<BankBeneficiaryRepository>(),
-    ),
-  );
-
-  //============================================================
-  //  Sales District (Payment Configuration)
-  //
-  //============================================================
-
-  locator.registerLazySingleton(() => SalesDistrictLocalDataSource());
-
-  locator.registerLazySingleton(() => SalesDistrictQueryMutation());
-
-  locator.registerLazySingleton(
-    () => SalesDistrictRemoteDataSource(
-      httpService: locator<HttpService>(),
-      salesDistrictQueryMutation: locator<SalesDistrictQueryMutation>(),
-      config: locator<Config>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => SalesDistrictRepository(
-      config: locator<Config>(),
-      localDataSource: locator<SalesDistrictLocalDataSource>(),
-      remoteDataSource: locator<SalesDistrictRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => SalesDistrictBloc(
-      salesDistrictRepository: locator<SalesDistrictRepository>(),
     ),
   );
 

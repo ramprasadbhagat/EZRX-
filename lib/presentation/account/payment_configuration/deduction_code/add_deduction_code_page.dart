@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/add_deduction_code.dart';
 import 'package:ezrxmobile/domain/account/entities/amount_type.dart';
@@ -35,15 +34,7 @@ class AddDeductionCodePage extends StatelessWidget {
               messageText: state.response.info.tr(),
             ).show(context);
           } else {
-            final salesDistrict = context
-                .read<SalesDistrictBloc>()
-                .state
-                .salesDistrictList
-                .firstWhere(
-                  (element) =>
-                      element.salesOrg == state.deductionCodeData.salesOrg,
-                  orElse: () => SalesDistrict.empty(),
-                );
+            final salesDistrict = SalesDistrict.empty();
             context.read<ManageDeductionCodeBloc>().add(
                   ManageDeductionCodeEvent.onValueChange(
                     label: DeductionCodeLabel.salesDistrict,
@@ -83,16 +74,7 @@ class AddDeductionCodePage extends StatelessWidget {
               previous.isSubmitting != current.isSubmitting,
           builder: (context, state) {
             final salesOrgList = context.read<UserBloc>().state.salesOrgValue;
-            final salesDistrictList = context
-                .read<SalesDistrictBloc>()
-                .state
-                .salesDistrictList
-                .firstWhere(
-                  (element) =>
-                      element.salesOrg == state.deductionCodeData.salesOrg,
-                  orElse: () => SalesDistrict.empty(),
-                )
-                .salesDistrictInfo;
+            final salesDistrictList = SalesDistrict.empty().salesDistrictInfo;
             final deductionCodeData =
                 context.read<ManageDeductionCodeBloc>().state.deductionCodeData;
 

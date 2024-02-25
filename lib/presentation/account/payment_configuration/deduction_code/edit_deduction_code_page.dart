@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/add_deduction_code.dart';
 import 'package:ezrxmobile/domain/account/entities/amount_type.dart';
@@ -59,15 +58,7 @@ class EditDeductionCodePage extends StatelessWidget {
             final deductionCodeData =
                 context.read<ManageDeductionCodeBloc>().state.deductionCodeData;
             final salesOrgList = context.read<UserBloc>().state.salesOrgValue;
-            final salesDistrictList = context
-                .read<SalesDistrictBloc>()
-                .state
-                .salesDistrictList
-                .firstWhere(
-                  (element) => element.salesOrg == deductionCodeData.salesOrg,
-                  orElse: () => SalesDistrict.empty(),
-                )
-                .salesDistrictInfo;
+            final salesDistrictList = SalesDistrict.empty().salesDistrictInfo;
 
             return SingleChildScrollView(
               padding: const EdgeInsets.all(25.0),

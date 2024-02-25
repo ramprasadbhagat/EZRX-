@@ -81,9 +81,6 @@ import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/sales_district_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/add_sales_district_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/edit_sales_district_page.dart';
 import 'package:ezrxmobile/presentation/products/products_tab.dart';
 import 'package:ezrxmobile/presentation/more/more_tab.dart';
 import 'package:ezrxmobile/presentation/products/product_suggestion/product_suggestion_page.dart';
@@ -337,15 +334,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(
       path: 'admin_po_attachment',
       page: AdminPoAttachmentPage,
-    ),
-    AutoRoute(path: 'payments/sales_district', page: SalesDistrictPage),
-    AutoRoute(
-      path: 'payments/sales_district/add_sales_district',
-      page: AddSalesDistrictPage,
-    ),
-    AutoRoute(
-      path: 'payments/sales_district/edit_sales_district',
-      page: EditSalesDistrictPage,
     ),
     AutoRoute(
       path: 'payments/advice_footer',
