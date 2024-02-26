@@ -20,9 +20,13 @@ class MaterialStockInfoDto with _$MaterialStockInfoDto {
   factory MaterialStockInfoDto.fromJson(Map<String, dynamic> json) =>
       _$MaterialStockInfoDtoFromJson(json);
 
+  /// If `stockInformation` is empty, we assign '[StockInfo.empty()]' to prevent
+  /// materials from being treated as 'inStock' in the presentation layer.
   MaterialStockInfo toDomain() => MaterialStockInfo(
         materialNumber: MaterialNumber(materialNumber),
-        stockInfos: stockInformation.map((e) => e.toDomain()).toList(),
+        stockInfos: stockInformation.isNotEmpty
+            ? stockInformation.map((e) => e.toDomain()).toList()
+            : [StockInfo.empty()],
       );
 }
 
