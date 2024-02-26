@@ -138,7 +138,7 @@ class _BrowseProductCard extends StatelessWidget {
     return SizedBox(
       width: Responsive.isLargerThan(context, Breakpoint.desktop)
           ? MediaQuery.of(context).size.width * 0.25
-          : MediaQuery.of(context).size.width * 0.5,
+          : MediaQuery.of(context).size.width * 0.45,
       child: MaterialGridItem(
         key: WidgetKeys.browseProductsList,
         materialInfo: product,
