@@ -3516,6 +3516,55 @@ void main() {
         final payerInformation = find.byKey(WidgetKeys.payerInformation);
         expect(payerInformation, findsNothing);
       });
+
+      testWidgets(
+          'Check if isProductDeterminationFailed is true then page is not redirecting from cart page to product details page',
+          (tester) async {
+        
+        final cartStates = [
+          CartState.initial().copyWith(
+            isUpdatingStock: true,
+          ),
+          CartState.initial().copyWith(
+            isUpdatingStock: false,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                maximumQty: 150,
+                quantity: 170,
+                stockInfoList: [
+                  StockInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                    stockQuantity: 100,
+                    inStock: MaterialInStock('No'),
+                  )
+                ],
+                materialInfo: MaterialInfo.empty().copyWith(
+                  type: MaterialInfoType('material'),
+                  materialNumber: MaterialNumber('123456789'),
+                  quantity: MaterialQty(170),
+                ),
+                salesOrgConfig: fakeIDSalesOrgConfigs,
+              ),
+            ],
+          )
+        ];
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+
+        whenListen(cartBloc, Stream.fromIterable(cartStates));
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        verifyNever(
+          () => autoRouterMock.navigateBack(),
+        );
+      });
     },
   );
 }

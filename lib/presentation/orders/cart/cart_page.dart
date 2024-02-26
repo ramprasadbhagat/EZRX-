@@ -153,7 +153,7 @@ class _CartPageState extends State<CartPage> {
             });
             //updated stock is needed for determining isProductDeterminationFailed
             //if product determination is failed user will be poped from checkout page to cart page
-            if (state.isProductDeterminationFailed) {
+            if (state.isProductDeterminationFailed && context.router.current.name == CheckoutPageRoute.name) {
               context.router.navigateBack();
             }
           },
