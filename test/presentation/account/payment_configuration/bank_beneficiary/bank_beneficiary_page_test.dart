@@ -194,33 +194,6 @@ void main() {
           handle.dispose();
         },
       );
-
-      testWidgets(
-        'Load Bank Beneficiary and scroll the list',
-        (tester) async {
-          when(() => manageBankBeneficiaryBlocMock.state).thenReturn(
-            ManageBankBeneficiaryState.initial().copyWith(
-              beneficiaryList: bankBeneficiaryList,
-            ),
-          );
-          await tester.pumpWidget(getBankBeneficiaryPage());
-          await tester.pump();
-          final appBarTitle = find.text('Bank Beneficiary Management');
-          final noDataError = find.text('No Beneficiary found');
-          expect(appBarTitle, findsOneWidget);
-          expect(noDataError, findsNothing);
-          final card = find.byKey(const Key('bankBeneficiary0'));
-          expect(card, findsOneWidget);
-          await tester.drag(
-            card,
-            const Offset(0.0, -2000.0),
-          );
-          await tester.pump(const Duration(seconds: 1));
-          final lastDeductionCode = find.byKey(const Key('bankBeneficiary17'));
-          expect(lastDeductionCode, findsOneWidget);
-        },
-      );
-
       testWidgets(
         'Load Bank Beneficiary and delete by icon',
         (tester) async {

@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -110,7 +109,6 @@ import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 import '../account/payment_configuration/bank_beneficiary/add_beneficiary_page_test.dart';
-import '../account/payment_configuration/deduction_code/add_deduction_code_page_test.dart';
 import '../account/payment_configuration/payment_method/add_payment_method_page_test.dart';
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
@@ -348,6 +346,7 @@ class ArticlesInfoFilterBlocMock
 class AnnouncementFilterBlocMock
     extends MockBloc<AnnouncementFilterEvent, AnnouncementFilterState>
     implements AnnouncementFilterBloc {}
+  
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -370,7 +369,6 @@ void main() {
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late PaymentMethodsBloc paymentMethodsBlocMock;
   late ManageBankBeneficiaryBloc manageBankBeneficiaryBlocMock;
-  late ManageDeductionCodeBloc manageDeductionCodeBlocMock;
   late ManagePaymentAdviceFooterBloc managePaymentAdviceFooterBlocMock;
   late MaterialListBloc materialListBlocMock;
   late ScanMaterialInfoBloc scanMaterialInfoMockBloc;
@@ -495,7 +493,6 @@ void main() {
       policyConfigurationListBlocMock = PolicyConfigurationListBlocMock();
       paymentMethodsBlocMock = PaymentMethodBlocMock();
       manageBankBeneficiaryBlocMock = ManageBankBeneficiaryBlocMock();
-      manageDeductionCodeBlocMock = ManageDeductionCodeBlocMock();
       managePaymentAdviceFooterBlocMock = ManagePaymentAdviceFooterBlocMock();
       materialListBlocMock = MaterialListBlocMock();
       materialFilterBlocMock = MaterialFilterBlocMock();
@@ -555,9 +552,6 @@ void main() {
       );
       when(() => manageBankBeneficiaryBlocMock.state).thenReturn(
         ManageBankBeneficiaryState.initial(),
-      );
-      when(() => manageDeductionCodeBlocMock.state).thenReturn(
-        ManageDeductionCodeState.initial(),
       );
       when(() => managePaymentAdviceFooterBlocMock.state).thenReturn(
         ManagePaymentAdviceFooterState.initial(),
@@ -681,9 +675,6 @@ void main() {
             ),
             BlocProvider<ManageBankBeneficiaryBloc>(
               create: (context) => manageBankBeneficiaryBlocMock,
-            ),
-            BlocProvider<ManageDeductionCodeBloc>(
-              create: (context) => manageDeductionCodeBlocMock,
             ),
             BlocProvider<ManagePaymentAdviceFooterBloc>(
               create: (context) => managePaymentAdviceFooterBlocMock,
@@ -1179,12 +1170,6 @@ void main() {
       verify(
         () => manageBankBeneficiaryBlocMock.add(
           const ManageBankBeneficiaryEvent.fetch(),
-        ),
-      ).called(1);
-
-      verify(
-        () => manageDeductionCodeBlocMock.add(
-          const ManageDeductionCodeEvent.fetch(),
         ),
       ).called(1);
       verify(

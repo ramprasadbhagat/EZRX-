@@ -6,7 +6,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
@@ -129,9 +128,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remot
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_query.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/ez_point_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/ez_point_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/ez_point_remote.dart';
@@ -164,7 +160,6 @@ import 'package:ezrxmobile/infrastructure/account/repository/bank_beneficiary_re
 import 'package:ezrxmobile/infrastructure/account/repository/contact_us_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_license_repository.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/deduction_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/ez_point_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/notification_settings_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_advice_footer_repository.dart';
@@ -2571,38 +2566,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => SettingBloc(
       authRepository: locator<AuthRepository>(),
-    ),
-  );
-
-  //============================================================
-  //  Deduction Code
-  //
-  //============================================================
-
-  locator.registerLazySingleton(() => DeductionCodeLocalDataSource());
-
-  locator.registerLazySingleton(() => DeductionCodeQueryMutation());
-
-  locator.registerLazySingleton(
-    () => DeductionCodeRemoteDataSource(
-      httpService: locator<HttpService>(),
-      deductionCodeQueryMutation: locator<DeductionCodeQueryMutation>(),
-      config: locator<Config>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => DeductionCodeRepository(
-      config: locator<Config>(),
-      localDataSource: locator<DeductionCodeLocalDataSource>(),
-      remoteDataSource: locator<DeductionCodeRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ManageDeductionCodeBloc(
-      deductionCodeRepository: locator<DeductionCodeRepository>(),
     ),
   );
 

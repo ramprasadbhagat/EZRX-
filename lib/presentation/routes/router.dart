@@ -7,11 +7,8 @@ import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_con
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/bank_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/add_beneficiary_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/add_deduction_code_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/deduction_code_list_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/edit_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/add_payment_advice_footer.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/edit_deduction_code_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/edit_payment_advice_footer.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_configuration_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
@@ -114,13 +111,7 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(path: 'add_payment_methods', page: AddPaymentMethodsPage),
     AutoRoute(path: 'payments/bank_beneficiary', page: BankBeneficiaryPage),
     AutoRoute(path: 'payments/add_beneficiary', page: AddBeneficiaryPage),
-    AutoRoute(path: 'payments/deduction_code', page: DeductionCodeListPage),
-    AutoRoute(path: 'payments/add_deduction_code', page: AddDeductionCodePage),
     AutoRoute(path: 'payments/edit_beneficiary', page: EditBeneficiaryPage),
-    AutoRoute(
-      path: 'payments/edit_deduction_code',
-      page: EditDeductionCodePage,
-    ),
     //AutoRoute(path: 'returns/request_return', page: RequestReturn),
     AutoRoute(path: 'returns/approver_actions', page: ApproverActions),
     AutoRoute(

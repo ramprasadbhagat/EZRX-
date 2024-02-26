@@ -3,7 +3,6 @@ import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
@@ -414,20 +413,11 @@ class App extends StatelessWidget {
         BlocProvider<ManageBankBeneficiaryBloc>(
           create: (context) => locator<ManageBankBeneficiaryBloc>(),
         ),
-        BlocProvider<ManageDeductionCodeBloc>(
-          create: (context) => locator<ManageDeductionCodeBloc>(),
-        ),
-        BlocProvider<ManageDeductionCodeBloc>(
-          create: (context) => locator<ManageDeductionCodeBloc>(),
-        ),
         BlocProvider<ManageBankBeneficiaryBloc>(
           create: (context) => locator<ManageBankBeneficiaryBloc>(),
         ),
         BlocProvider<AllCreditsFilterBloc>(
           create: (context) => locator<AllCreditsFilterBloc>(),
-        ),
-        BlocProvider<ManageDeductionCodeBloc>(
-          create: (context) => locator<ManageDeductionCodeBloc>(),
         ),
         BlocProvider<ManagePaymentAdviceFooterBloc>(
           create: (context) => locator<ManagePaymentAdviceFooterBloc>(),

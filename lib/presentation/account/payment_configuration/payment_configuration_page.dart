@@ -33,12 +33,6 @@ class PaymentConfigurationPage extends StatelessWidget {
                 onTap: () => context.router.pushNamed('payments/advice_footer'),
               ),
               ListTile(
-                key: const Key('deductionCodeTile'),
-                title: const Text('Configure Deduction Code').tr(),
-                onTap: () =>
-                    context.router.pushNamed('payments/deduction_code'),
-              ),
-              ListTile(
                 key: const Key('salesDistrictTile'),
                 title: const Text('Configure Sales District').tr(),
                 onTap: () =>
