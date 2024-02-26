@@ -18,7 +18,6 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -4168,32 +4167,6 @@ void main() {
         },
       );
 
-      test(
-        'Testing CartBloc state showDialog itemPrice ',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: [
-              priceAggregates.first.copyWith(price: prices.first),
-              priceAggregates.elementAt(1).copyWith(price: prices.elementAt(1)),
-            ],
-          );
-          expect(
-            cartBlocState.itemPrice(index: 0),
-            273.6,
-          );
-        },
-      );
-
-      test(
-        'Testing CartBloc state showDialog currentBundleOffer ',
-        () {
-          final cartBlocState = CartState.initial();
-          expect(
-            cartBlocState.currentBundleOffer(bundleCode: ''),
-            BundleInfo.empty(),
-          );
-        },
-      );
       test(
         'Testing CartBloc state showDialog updatedCartProduct ',
         () {

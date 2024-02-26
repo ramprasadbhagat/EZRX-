@@ -1672,6 +1672,7 @@ void setupLocator() {
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -1685,6 +1686,7 @@ void setupLocator() {
           locator<DiscountOverrideRemoteDataSource>(),
       cartLocalDataSource: locator<CartLocalDataSource>(),
       cartRemoteDataSource: locator<CartRemoteDataSource>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 

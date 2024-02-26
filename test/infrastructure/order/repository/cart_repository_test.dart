@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:collection/collection.dart';
@@ -34,11 +35,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
-import 'order_repository_test.dart';
 
 class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
@@ -65,6 +66,8 @@ void main() {
   late CartRemoteDataSource cartRemoteDataSource;
   late AplSimulatorOrder aplSimulatorOrder;
   late AplSimulatorOrder aplSimulatorGetTotalPrice;
+  late DeviceStorage deviceStorageMock;
+  const mockMarket = 'mockMarket';
 
   final fakeCartProducts = [
     PriceAggregate.empty().copyWith(
@@ -96,7 +99,7 @@ void main() {
   final fakeException = Exception('fake_error');
 
   setUpAll(() async {
-    mockConfig = MockConfig();
+    mockConfig = ConfigMock();
     when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
@@ -105,6 +108,7 @@ void main() {
         DiscountOverrideRemoteDataSourceMock();
     mixpanelService = MixpanelServiceMock();
     cartRemoteDataSource = CartRemoteDataSourceMock();
+    deviceStorageMock = DeviceStorageMock();
 
     cartRepository = CartRepository(
       mixpanelService: mixpanelService,
@@ -114,6 +118,7 @@ void main() {
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
       cartRemoteDataSource: cartRemoteDataSource,
+      deviceStorage: deviceStorageMock,
     );
 
     fakeCartProductsWithCombo
@@ -162,6 +167,7 @@ void main() {
       (invocation) async => [MaterialStockInfo.empty()],
     );
     when(() => mockConfig.maximumCartQuantity).thenReturn(99999);
+    when(() => deviceStorageMock.currentMarket()).thenReturn(mockMarket);
   });
 
   test('Test Clear Cart - Success', () async {
@@ -659,6 +665,7 @@ void main() {
       ];
       when(
         () => cartRemoteDataSource.upsertCartItems(
+          market: mockMarket,
           requestParams: productList.map((materialInfo) {
             final upsertCartRequest = CartProductRequest.toMaterialRequest(
               salesOrg: fakeSalesOrganisation.salesOrg,
@@ -708,6 +715,7 @@ void main() {
       ];
       when(
         () => cartRemoteDataSource.upsertCartItems(
+          market: mockMarket,
           requestParams: productList.map((materialInfo) {
             final upsertCartRequest = CartProductRequest.toMaterialRequest(
               salesOrg: fakeSalesOrganisation.salesOrg,
@@ -832,6 +840,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
         () => cartRemoteDataSource.upsertCartItems(
+          market: mockMarket,
           requestParams: requestParams,
         ),
       ).thenAnswer(
@@ -851,6 +860,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
         () => cartRemoteDataSource.upsertCartItems(
+          market: mockMarket,
           requestParams: [],
         ),
       ).thenThrow(
@@ -1164,6 +1174,7 @@ void main() {
       ).thenAnswer((invocation) async => unit);
       when(
         () => cartRemoteDataSource.upsertCartItems(
+          market: mockMarket,
           requestParams: materialInfo.map((materialInfo) {
             final upsertCartRequest = CartProductRequest.toMaterialRequest(
               salesOrg: fakeSalesOrganisation.salesOrg,
@@ -1214,6 +1225,7 @@ void main() {
       ).thenAnswer((invocation) async => unit);
       when(
         () => cartRemoteDataSource.upsertCartItems(
+          market: mockMarket,
           requestParams: materialInfo.map((materialInfo) {
             final upsertCartRequest = CartProductRequest.toMaterialRequest(
               salesOrg: fakeSalesOrganisation.salesOrg,
@@ -1315,6 +1327,7 @@ void main() {
         () => cartRemoteDataSource.upsertCart(
           requestParams:
               CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+          market: mockMarket,
         ),
       ).thenAnswer(
         (invocation) async => fakeCartProducts,
@@ -1362,6 +1375,7 @@ void main() {
         () => cartRemoteDataSource.upsertCart(
           requestParams:
               CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+          market: mockMarket,
         ),
       ).thenThrow(
         fakeException,
@@ -1420,6 +1434,7 @@ void main() {
 
       when(
         () => cartRemoteDataSource.upsertCartItems(
+          market: mockMarket,
           requestParams:
               fakeCartProducts.first.bundle.materials.map((materialInfo) {
             final upsertCartRequest = CartProductRequest.toBundlesRequest(
@@ -1453,6 +1468,7 @@ void main() {
 
       when(
         () => cartRemoteDataSource.upsertCartItems(
+          market: mockMarket,
           requestParams:
               fakeCartProducts.first.bundle.materials.map((materialInfo) {
             final upsertCartRequest = CartProductRequest.toBundlesRequest(
@@ -1559,7 +1575,9 @@ void main() {
     test('getAddedToCartProductList remote test success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
-        () => cartRemoteDataSource.getAddedToCartProductList(),
+        () => cartRemoteDataSource.getAddedToCartProductList(
+          market: mockMarket,
+        ),
       ).thenAnswer(
         (invocation) async => Cart.empty().copyWith(
           cartProducts: fakeCartProducts,
@@ -1573,7 +1591,9 @@ void main() {
     test('getAddedToCartProductList remote test failure', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
-        () => cartRemoteDataSource.getAddedToCartProductList(),
+        () => cartRemoteDataSource.getAddedToCartProductList(
+          market: mockMarket,
+        ),
       ).thenThrow(
         (invocation) async => MockException(),
       );
@@ -1677,6 +1697,7 @@ void main() {
         () => cartRemoteDataSource.upsertCart(
           requestParams:
               CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+          market: mockMarket,
         ),
       ).thenAnswer(
         (invocation) async => fakeCartProducts,
@@ -1740,6 +1761,7 @@ void main() {
         () => cartRemoteDataSource.upsertCart(
           requestParams:
               CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+          market: mockMarket,
         ),
       ).thenAnswer(
         (invocation) async => fakeCartProducts,
@@ -1843,6 +1865,7 @@ void main() {
         () => cartRemoteDataSource.upsertCart(
           requestParams:
               CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+          market: mockMarket,
         ),
       ).thenThrow(
         (invocation) async => MockException(),
@@ -1879,6 +1902,7 @@ void main() {
         () => cartRemoteDataSource.upsertCart(
           requestParams:
               CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+          market: mockMarket,
         ),
       ).thenAnswer(
         (invocation) async => fakeCartProducts,
@@ -1916,6 +1940,7 @@ void main() {
         () => cartRemoteDataSource.upsertCart(
           requestParams:
               CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+          market: mockMarket,
         ),
       ).thenAnswer(
         (invocation) async => fakeCartProducts,

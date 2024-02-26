@@ -23,7 +23,7 @@ final fakeVNSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableZDP8Override: false,
   enableGMC: false,
   enableGMN: false,
-  minOrderAmount: '1000000',
+  minOrderAmount: 1000000,
   vatValue: 0,
   netPriceOverride: false,
   enableFutureDeliveryDay: false,

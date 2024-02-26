@@ -168,6 +168,8 @@ void main() {
             grandTotal: 200.0,
             orderType: '',
             subTotal: 180.0,
+            mpSubtotal: 222.2,
+            zpSubtotal: 333.3,
           ),
         ),
         expect: () => [
@@ -176,6 +178,8 @@ void main() {
             orderType: '',
             grandTotal: 200.0,
             subTotal: 180.0,
+            mpSubtotal: 222.2,
+            zpSubtotal: 333.3,
           ),
         ],
       );

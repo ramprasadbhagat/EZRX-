@@ -23,7 +23,7 @@ final fakeMYSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableZDP8Override: false,
   enableGMC: false,
   enableGMN: false,
-  minOrderAmount: '300',
+  minOrderAmount: 300,
   vatValue: 0,
   netPriceOverride: false,
   enableFutureDeliveryDay: false,

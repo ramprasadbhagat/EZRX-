@@ -65,7 +65,7 @@ mixin _$SalesOrganisationConfigs {
   bool get enableTaxDisplay => throw _privateConstructorUsedError;
   bool get netPriceOverride => throw _privateConstructorUsedError;
   bool get displayOrderDiscount => throw _privateConstructorUsedError;
-  String get minOrderAmount => throw _privateConstructorUsedError;
+  double get minOrderAmount => throw _privateConstructorUsedError;
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
   bool get enableZDP8Override => throw _privateConstructorUsedError;
   bool get disableReturnsAccessSR => throw _privateConstructorUsedError;
@@ -142,7 +142,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool enableTaxDisplay,
       bool netPriceOverride,
       bool displayOrderDiscount,
-      String minOrderAmount,
+      double minOrderAmount,
       SalesOrg salesOrg,
       bool enableZDP8Override,
       bool disableReturnsAccessSR,
@@ -430,7 +430,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
       minOrderAmount: null == minOrderAmount
           ? _value.minOrderAmount
           : minOrderAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -552,7 +552,7 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool enableTaxDisplay,
       bool netPriceOverride,
       bool displayOrderDiscount,
-      String minOrderAmount,
+      double minOrderAmount,
       SalesOrg salesOrg,
       bool enableZDP8Override,
       bool disableReturnsAccessSR,
@@ -838,7 +838,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
       minOrderAmount: null == minOrderAmount
           ? _value.minOrderAmount
           : minOrderAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -1074,7 +1074,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   final bool displayOrderDiscount;
   @override
-  final String minOrderAmount;
+  final double minOrderAmount;
   @override
   final SalesOrg salesOrg;
   @override
@@ -1334,7 +1334,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool enableTaxDisplay,
       required final bool netPriceOverride,
       required final bool displayOrderDiscount,
-      required final String minOrderAmount,
+      required final double minOrderAmount,
       required final SalesOrg salesOrg,
       required final bool enableZDP8Override,
       required final bool disableReturnsAccessSR,
@@ -1447,7 +1447,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   @override
   bool get displayOrderDiscount;
   @override
-  String get minOrderAmount;
+  double get minOrderAmount;
   @override
   SalesOrg get salesOrg;
   @override

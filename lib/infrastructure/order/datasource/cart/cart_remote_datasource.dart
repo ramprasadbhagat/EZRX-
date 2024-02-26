@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/apl_simulator_order_dto.dart';
@@ -17,21 +18,25 @@ import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/apl_get_total_price_dto.dart';
 
 class CartRemoteDataSource {
-  HttpService httpService;
-  CartQueryMutation cartQueryMutation;
-  DataSourceExceptionHandler dataSourceExceptionHandler;
-  Config config;
+  final HttpService httpService;
+  final CartQueryMutation cartQueryMutation;
+  final DataSourceExceptionHandler dataSourceExceptionHandler;
+  final Config config;
+  final RemoteConfigService remoteConfigService;
 
   CartRemoteDataSource({
     required this.httpService,
     required this.config,
     required this.cartQueryMutation,
     required this.dataSourceExceptionHandler,
+    required this.remoteConfigService,
   });
 
-  Future<Cart> getAddedToCartProductList() async {
+  Future<Cart> getAddedToCartProductList({required String market}) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final query = cartQueryMutation.cart();
+      final query = cartQueryMutation.cart(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
       final variables = {};
 
       final res = await httpService.request(
@@ -72,11 +77,15 @@ class CartRemoteDataSource {
 
   Future<List<PriceAggregate>> upsertCart({
     required Map<String, dynamic> requestParams,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
+      final enableMarketPlace =
+          remoteConfigService.enableMarketPlaceMarkets.contains(market);
       final query = requestParams['Type'] == 'bundle'
-          ? cartQueryMutation.upsertCartItems()
-          : cartQueryMutation.upsertCart();
+          ? cartQueryMutation.upsertCartItems(enableMarketPlace)
+          : cartQueryMutation.upsertCart(enableMarketPlace);
+
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}cart',
@@ -105,9 +114,12 @@ class CartRemoteDataSource {
 
   Future<List<PriceAggregate>> upsertCartItems({
     required List<Map<String, dynamic>> requestParams,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final query = cartQueryMutation.upsertCartItems();
+      final query = cartQueryMutation.upsertCartItems(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
       final variables = {
         'itemInput': requestParams,
       };

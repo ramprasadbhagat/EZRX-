@@ -109,8 +109,9 @@ mixin _$SalesOrganisationConfigsDto {
   bool get batchNumDisplay => throw _privateConstructorUsedError;
   @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
   bool get displayOrderDiscount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'minOrderAmount', defaultValue: '0')
-  String get minOrderAmount => throw _privateConstructorUsedError;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'minOrderAmount', defaultValue: 0.0)
+  double get minOrderAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'salesOrgCode', defaultValue: '0')
   String get salesOrg => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableZDP8Override', defaultValue: false)
@@ -238,7 +239,9 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       bool batchNumDisplay,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
       bool displayOrderDiscount,
-      @JsonKey(name: 'minOrderAmount', defaultValue: '0') String minOrderAmount,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'minOrderAmount', defaultValue: 0.0)
+      double minOrderAmount,
       @JsonKey(name: 'salesOrgCode', defaultValue: '0') String salesOrg,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
       bool enableZDP8Override,
@@ -530,7 +533,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
       minOrderAmount: null == minOrderAmount
           ? _value.minOrderAmount
           : minOrderAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -693,7 +696,9 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       bool batchNumDisplay,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
       bool displayOrderDiscount,
-      @JsonKey(name: 'minOrderAmount', defaultValue: '0') String minOrderAmount,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'minOrderAmount', defaultValue: 0.0)
+      double minOrderAmount,
       @JsonKey(name: 'salesOrgCode', defaultValue: '0') String salesOrg,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
       bool enableZDP8Override,
@@ -984,7 +989,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
       minOrderAmount: null == minOrderAmount
           ? _value.minOrderAmount
           : minOrderAmount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -1150,7 +1155,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       required this.batchNumDisplay,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
       required this.displayOrderDiscount,
-      @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+      @StringToDoubleConverter()
+      @JsonKey(name: 'minOrderAmount', defaultValue: 0.0)
       required this.minOrderAmount,
       @JsonKey(name: 'salesOrgCode', defaultValue: '0') required this.salesOrg,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
@@ -1332,8 +1338,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
   final bool displayOrderDiscount;
   @override
-  @JsonKey(name: 'minOrderAmount', defaultValue: '0')
-  final String minOrderAmount;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'minOrderAmount', defaultValue: 0.0)
+  final double minOrderAmount;
   @override
   @JsonKey(name: 'salesOrgCode', defaultValue: '0')
   final String salesOrg;
@@ -1667,8 +1674,9 @@ abstract class _SalesOrganisationConfigsDto
       required final bool batchNumDisplay,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
       required final bool displayOrderDiscount,
-      @JsonKey(name: 'minOrderAmount', defaultValue: '0')
-      required final String minOrderAmount,
+      @StringToDoubleConverter()
+      @JsonKey(name: 'minOrderAmount', defaultValue: 0.0)
+      required final double minOrderAmount,
       @JsonKey(name: 'salesOrgCode', defaultValue: '0')
       required final String salesOrg,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
@@ -1844,8 +1852,9 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
   bool get displayOrderDiscount;
   @override
-  @JsonKey(name: 'minOrderAmount', defaultValue: '0')
-  String get minOrderAmount;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'minOrderAmount', defaultValue: 0.0)
+  double get minOrderAmount;
   @override
   @JsonKey(name: 'salesOrgCode', defaultValue: '0')
   String get salesOrg;

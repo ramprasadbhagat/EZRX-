@@ -1,5 +1,5 @@
 class CartQueryMutation {
-  String cart() => '''
+  String cart(bool enableMarketplace) => '''
   fragment BundleMaterialsFields on Item {
     Type
     ProductID
@@ -39,6 +39,7 @@ class CartQueryMutation {
     orderedQty
     remainingQty
     mov
+    ${enableMarketplace ? 'isMarketPlace' : ''}
     materialType
     suspensionStatus
     principalCutoffStatus
@@ -84,6 +85,7 @@ class CartQueryMutation {
   orderedQty
   remainingQty
   mov
+  ${enableMarketplace ? 'isMarketPlace' : ''}
   materialType
   suspensionStatus
   principalCutoffStatus
@@ -179,6 +181,7 @@ class CartQueryMutation {
       orderedQty
       remainingQty
       mov
+      ${enableMarketplace ? 'isMarketPlace' : ''}
       materialType
       suspensionStatus
       principalCutoffStatus
@@ -554,7 +557,7 @@ class CartQueryMutation {
     }
 ''';
 
-  String upsertCart() => '''
+  String upsertCart(bool enableMarketplace) => '''
     mutation UpsertCart(\$itemInput: ItemInput!) {
       upsertCart(itemInput: \$itemInput) {
         ID
@@ -598,6 +601,7 @@ class CartQueryMutation {
           orderedQty
           remainingQty
           mov
+          ${enableMarketplace ? 'isMarketPlace' : ''}
           materialType
           suspensionStatus
           principalCutoffStatus
@@ -1091,7 +1095,7 @@ class CartQueryMutation {
     }
   ''';
 
-  String upsertCartItems() => '''
+  String upsertCartItems(bool enableMarketplace) => '''
 fragment ezrxItemsFields on Item {
   ProductID
   ItemSource
@@ -1130,6 +1134,7 @@ fragment ezrxItemsFields on Item {
   orderedQty
   remainingQty
   mov
+  ${enableMarketplace ? 'isMarketPlace' : ''}
   materialType
   suspensionStatus
   principalCutoffStatus
@@ -1259,6 +1264,7 @@ fragment BundleMaterialsFields on Item {
   orderedQty
   remainingQty
   mov
+  ${enableMarketplace ? 'isMarketPlace' : ''}
   materialType
   suspensionStatus
   principalCutoffStatus
@@ -1305,6 +1311,7 @@ fragment ComboMaterialsFields on Item {
   orderedQty
   remainingQty
   mov
+  ${enableMarketplace ? 'isMarketPlace' : ''}
   materialType
   suspensionStatus
   principalCutoffStatus

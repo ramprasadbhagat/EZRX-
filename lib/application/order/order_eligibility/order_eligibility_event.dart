@@ -14,6 +14,8 @@ class OrderEligibilityEvent with _$OrderEligibilityEvent {
     required List<PriceAggregate> cartItems,
     required String orderType,
     required double grandTotal,
+    required double zpSubtotal,
+    required double mpSubtotal,
     required double subTotal,
   }) = _Update;
 

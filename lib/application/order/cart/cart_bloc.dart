@@ -11,8 +11,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_product.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';

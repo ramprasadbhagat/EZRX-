@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.d
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
@@ -36,6 +37,7 @@ class CartRepository implements ICartRepository {
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
   final DiscountOverrideRemoteDataSource discountOverrideRemoteDataSource;
   final MixpanelService mixpanelService;
+  final DeviceStorage deviceStorage;
 
   CartRepository({
     required this.config,
@@ -45,6 +47,7 @@ class CartRepository implements ICartRepository {
     required this.mixpanelService,
     required this.cartLocalDataSource,
     required this.cartRemoteDataSource,
+    required this.deviceStorage,
   });
 
   @override
@@ -342,7 +345,9 @@ class CartRepository implements ICartRepository {
         }
       }
       final savedCartList =
-          await cartRemoteDataSource.getAddedToCartProductList();
+          await cartRemoteDataSource.getAddedToCartProductList(
+        market: deviceStorage.currentMarket(),
+      );
 
       return Right(savedCartList);
     } catch (e) {
@@ -394,6 +399,7 @@ class CartRepository implements ICartRepository {
       final productList = await cartRemoteDataSource.upsertCart(
         requestParams:
             CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+        market: deviceStorage.currentMarket(),
       );
 
       final response = await getStockInfo(
@@ -501,6 +507,7 @@ class CartRepository implements ICartRepository {
 
     try {
       final productList = await cartRemoteDataSource.upsertCartItems(
+        market: deviceStorage.currentMarket(),
         requestParams: materialInfo.map((materialInfo) {
           // For Reordering we are using [convertToMaterialRequest] it has all
           // the cases covered for materials, bundles, bonuses and combo's,
@@ -547,6 +554,7 @@ class CartRepository implements ICartRepository {
 
     try {
       final productList = await cartRemoteDataSource.upsertCartItems(
+        market: deviceStorage.currentMarket(),
         requestParams: product.bundle.materials.map((materialInfo) {
           final upsertCartRequest = CartProductRequest.toBundlesRequest(
             salesOrg: salesOrganisation.salesOrg,
@@ -628,6 +636,7 @@ class CartRepository implements ICartRepository {
     }
     try {
       final productList = await cartRemoteDataSource.upsertCartItems(
+        market: deviceStorage.currentMarket(),
         requestParams: products.comboMaterialItemList
             .map(
               (productUpsertRequest) => ComboProductRequestDto.fromDomain(
@@ -753,6 +762,7 @@ class CartRepository implements ICartRepository {
       ];
 
       final productList = await cartRemoteDataSource.upsertCartItems(
+        market: deviceStorage.currentMarket(),
         requestParams: materialInfo.map((materialInfo) {
           final upsertCartRequest = CartProductRequest.toMaterialRequest(
             salesOrg: salesOrganisation.salesOrg,

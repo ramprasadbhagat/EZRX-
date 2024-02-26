@@ -188,9 +188,7 @@ class CartState with _$CartState {
         0,
         (previousValue, element) =>
             previousValue +
-            (itemBundlePrice(bundleCode: element.bundle.bundleCode) *
-                element.salesOrgConfig.vatValue /
-                100),
+            (element.bundle.totalPrice * element.salesOrgConfig.vatValue / 100),
       );
 
   double get taxCombo => config.displaySubtotalTaxBreakdown
@@ -218,74 +216,20 @@ class CartState with _$CartState {
 
   bool get _isID => salesOrganisation.salesOrg.isID;
 
-  double itemPrice({required int index}) {
-    final cartProductsTemp = cartProducts.elementAt(index);
-
-    return cartProductsTemp.price.finalPrice.getValue() *
-        cartProductsTemp.quantity;
-  }
-
-  int getTotalQuantityOfProductBundle({required String bundleCode}) {
-    return cartProducts
-            .where((element) => element.bundle.bundleCode == bundleCode)
-            .elementAtOrNull(0)
-            ?.bundle
-            .materials
-            .fold(
-              0,
-              (previousValue, element) =>
-                  (previousValue ?? 0) + element.quantity.intValue,
-            ) ??
-        0;
-  }
-
-  BundleInfo currentBundleOffer({required String bundleCode}) {
-    final bundle = cartProducts
-            .where((element) => element.bundle.bundleCode == bundleCode)
-            .elementAtOrNull(0)
-            ?.bundle ??
-        Bundle.empty();
-
-    return bundle.sortedBundleInformation.reversed.firstWhere(
-      (element) =>
-          element.quantity <=
-          getTotalQuantityOfProductBundle(bundleCode: bundleCode),
-      orElse: () =>
-          bundle.sortedBundleInformation.firstOrNull ?? BundleInfo.empty(),
-    );
-  }
-
-  double itemBundlePrice({required String bundleCode}) =>
-      currentBundleOffer(bundleCode: bundleCode).rate *
-      getTotalQuantityOfProductBundle(bundleCode: bundleCode);
-
   //Total product price without tax
-  double get totalMaterialsPrice => cartProducts
-      .where(
-        (item) =>
-            !item.materialInfo.type.typeBundle &&
-            !item.materialInfo.type.typeCombo,
-      )
-      .fold<double>(
-        0,
-        (sum, item) => sum + item.finalPriceTotal,
-      );
+  double get totalZPMaterialsPrice =>
+      cartProducts.zpMaterialOnly.totalMaterialsPrice;
 
-  double get totalBundlesPrice => cartProducts
-      .where((element) => element.materialInfo.type.typeBundle)
-      .fold(
-        0,
-        (previousValue, element) =>
-            previousValue +
-            itemBundlePrice(bundleCode: element.bundle.bundleCode),
-      );
+  double get totalMaterialsPrice => cartProducts.totalMaterialsPrice;
 
-  double get totalComboPrice =>
-      cartProducts.where((element) => element.materialInfo.type.typeCombo).fold(
-            0,
-            (previousValue, element) =>
-                previousValue + element.comboSubTotalExclTax,
-          );
+  double get totalZPBundlesPrice =>
+      cartProducts.zpMaterialOnly.totalBundlesPrice;
+
+  double get totalBundlesPrice => cartProducts.totalBundlesPrice;
+
+  double get totalZPComboPrice => cartProducts.zpMaterialOnly.totalComboPrice;
+
+  double get totalComboPrice => cartProducts.totalComboPrice;
 
   double get totalMaterialsPriceHidePrice => cartProducts
       .where(
@@ -299,14 +243,13 @@ class CartState with _$CartState {
         (sum, item) => sum + item.finalPriceTotal,
       );
 // This getter is used for MOV check
+  double get zpSubtotal =>
+      totalZPMaterialsPrice + totalZPBundlesPrice + totalZPComboPrice;
+
+  double get mpSubtotal => subTotal - zpSubtotal;
+
   double get subTotal =>
       totalBundlesPrice + totalMaterialsPrice + totalComboPrice;
-
-  PriceAggregate findItemById(MaterialNumber matNumber) =>
-      cartProducts.firstWhere(
-        (element) => element.id == matNumber,
-        orElse: () => PriceAggregate.empty(),
-      );
 
   //Total product price with tax
   double get totalBundlePriceWithTax => totalBundlesPrice + taxBundle;
@@ -350,10 +293,7 @@ class CartState with _$CartState {
       .map((e) => e.bundle)
       .every(
         (element) =>
-            getTotalQuantityOfProductBundle(
-              bundleCode: element.bundleCode,
-            ) >=
-            element.minimumQuantityBundleMaterial.quantity,
+            element.totalQty >= element.minimumQuantityBundleMaterial.quantity,
       );
 
   bool showManufacturerName(int index) {
@@ -626,4 +566,10 @@ class CartState with _$CartState {
             ...item.comboMaterials.map((e) => e.materialInfo.materialNumber),
           ],
       };
+
+  PriceAggregate findItemById(MaterialNumber matNumber) =>
+      cartProducts.firstWhere(
+        (element) => element.id == matNumber,
+        orElse: () => PriceAggregate.empty(),
+      );
 }

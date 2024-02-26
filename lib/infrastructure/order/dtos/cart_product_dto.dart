@@ -74,6 +74,8 @@ class CartProductDto with _$CartProductDto {
         required List<ComboMaterialItemDto> comboMaterials,
     //maximumQty auto set to maximum limit if we get null from response
     @JsonKey(name: 'maximumQty', defaultValue: 99999) required int maximumQty,
+    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+        required bool isMarketPlace,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -125,6 +127,7 @@ class CartProductDto with _$CartProductDto {
       comboDeal: PriceComboDealDto.empty,
       maximumQty: cartItemDetails.maximumQty,
       governmentMaterialCode: cartItemDetails.materialInfo.getGMC.getValue(),
+      isMarketPlace: cartItemDetails.materialInfo.isMarketPlace,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -161,6 +164,7 @@ class CartProductDto with _$CartProductDto {
       remarks: remarks,
       isSuspended: isSuspended,
       isPrincipalSuspended: isPrincipalSuspended,
+      isMarketPlace: isMarketPlace,
     );
   }
 

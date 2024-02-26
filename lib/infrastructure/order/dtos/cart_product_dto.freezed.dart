@@ -78,6 +78,8 @@ mixin _$CartProductDto {
       throw _privateConstructorUsedError; //maximumQty auto set to maximum limit if we get null from response
   @JsonKey(name: 'maximumQty', defaultValue: 99999)
   int get maximumQty => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -132,7 +134,9 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
       List<ComboMaterialItemDto> comboMaterials,
-      @JsonKey(name: 'maximumQty', defaultValue: 99999) int maximumQty});
+      @JsonKey(name: 'maximumQty', defaultValue: 99999) int maximumQty,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
@@ -179,6 +183,7 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? comboDeal = null,
     Object? comboMaterials = null,
     Object? maximumQty = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       productID: null == productID
@@ -293,6 +298,10 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.maximumQty
           : maximumQty // ignore: cast_nullable_to_non_nullable
               as int,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -362,7 +371,9 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
       @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
       List<ComboMaterialItemDto> comboMaterials,
-      @JsonKey(name: 'maximumQty', defaultValue: 99999) int maximumQty});
+      @JsonKey(name: 'maximumQty', defaultValue: 99999) int maximumQty,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 
   @override
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
@@ -409,6 +420,7 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
     Object? comboDeal = null,
     Object? comboMaterials = null,
     Object? maximumQty = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_$_CartProductDto(
       productID: null == productID
@@ -523,6 +535,10 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value.maximumQty
           : maximumQty // ignore: cast_nullable_to_non_nullable
               as int,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -578,7 +594,9 @@ class _$_CartProductDto extends _CartProductDto {
       @JsonKey(name: 'comboMaterials', defaultValue: [])
       required final List<ComboMaterialItemDto> comboMaterials,
       @JsonKey(name: 'maximumQty', defaultValue: 99999)
-      required this.maximumQty})
+      required this.maximumQty,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required this.isMarketPlace})
       : _bundleMaterials = bundleMaterials,
         _bonusMaterials = bonusMaterials,
         _comboMaterials = comboMaterials,
@@ -690,10 +708,13 @@ class _$_CartProductDto extends _CartProductDto {
   @override
   @JsonKey(name: 'maximumQty', defaultValue: 99999)
   final int maximumQty;
+  @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -753,7 +774,9 @@ class _$_CartProductDto extends _CartProductDto {
             const DeepCollectionEquality()
                 .equals(other._comboMaterials, _comboMaterials) &&
             (identical(other.maximumQty, maximumQty) ||
-                other.maximumQty == maximumQty));
+                other.maximumQty == maximumQty) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @JsonKey(ignore: true)
@@ -787,7 +810,8 @@ class _$_CartProductDto extends _CartProductDto {
         isPrincipalSuspended,
         comboDeal,
         const DeepCollectionEquality().hash(_comboMaterials),
-        maximumQty
+        maximumQty,
+        isMarketPlace
       ]);
 
   @JsonKey(ignore: true)
@@ -855,7 +879,9 @@ abstract class _CartProductDto extends CartProductDto {
       @JsonKey(name: 'comboMaterials', defaultValue: [])
       required final List<ComboMaterialItemDto> comboMaterials,
       @JsonKey(name: 'maximumQty', defaultValue: 99999)
-      required final int maximumQty}) = _$_CartProductDto;
+      required final int maximumQty,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required final bool isMarketPlace}) = _$_CartProductDto;
   const _CartProductDto._() : super._();
 
   factory _CartProductDto.fromJson(Map<String, dynamic> json) =
@@ -945,6 +971,9 @@ abstract class _CartProductDto extends CartProductDto {
   @override //maximumQty auto set to maximum limit if we get null from response
   @JsonKey(name: 'maximumQty', defaultValue: 99999)
   int get maximumQty;
+  @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
   _$$_CartProductDtoCopyWith<_$_CartProductDto> get copyWith =>

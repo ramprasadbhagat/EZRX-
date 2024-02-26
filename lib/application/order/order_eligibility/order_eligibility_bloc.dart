@@ -39,6 +39,8 @@ class OrderEligibilityBloc
       ),
       update: (e) async => emit(
         state.copyWith(
+          mpSubtotal: e.mpSubtotal,
+          zpSubtotal: e.zpSubtotal,
           subTotal: e.subTotal,
           grandTotal: e.grandTotal,
           cartItems: e.cartItems,

@@ -224,6 +224,8 @@ class _CartPageState extends State<CartPage> {
                         .selectedOrderType
                         .documentType
                         .getOrDefaultValue(''),
+                    zpSubtotal: state.zpSubtotal,
+                    mpSubtotal: state.mpSubtotal,
                     subTotal: state.subTotal,
                   ),
                 );

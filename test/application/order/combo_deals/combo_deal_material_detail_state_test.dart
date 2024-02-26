@@ -24,7 +24,10 @@ void main() {
     comboDeal = (await ComboDealLocalDataSource().getComboDealList()).first;
     productList = (await CartLocalDataSource().getAddedToCartProductList())
         .cartProducts
-        .where((e) => e.materialInfo.type.typeMaterial)
+        .where(
+          (e) =>
+              e.materialInfo.type.typeMaterial && !e.materialInfo.isMarketPlace,
+        )
         .toList();
 
     for (var i = 0; i < productList.length; i++) {

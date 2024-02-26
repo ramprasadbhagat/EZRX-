@@ -59,7 +59,10 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       netPriceOverride: json['netPriceOverride'] as bool? ?? false,
       batchNumDisplay: json['batchNumDisplay'] as bool? ?? false,
       displayOrderDiscount: json['displayOrderDiscount'] as bool? ?? false,
-      minOrderAmount: json['minOrderAmount'] as String? ?? '0',
+      minOrderAmount: json['minOrderAmount'] == null
+          ? 0.0
+          : const StringToDoubleConverter()
+              .fromJson(json['minOrderAmount'] as String),
       salesOrg: json['salesOrgCode'] as String? ?? '0',
       enableZDP8Override: json['enableZDP8Override'] as bool? ?? false,
       disableReturnsAccessSR: json['disableReturnsAccessSR'] as bool? ?? false,
@@ -135,7 +138,8 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'netPriceOverride': instance.netPriceOverride,
       'batchNumDisplay': instance.batchNumDisplay,
       'displayOrderDiscount': instance.displayOrderDiscount,
-      'minOrderAmount': instance.minOrderAmount,
+      'minOrderAmount':
+          const StringToDoubleConverter().toJson(instance.minOrderAmount),
       'salesOrgCode': instance.salesOrg,
       'enableZDP8Override': instance.enableZDP8Override,
       'disableReturnsAccessSR': instance.disableReturnsAccessSR,

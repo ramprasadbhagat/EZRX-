@@ -26,8 +26,13 @@ mixin _$OrderEligibilityEvent {
             ShipToInfo shipInfo,
             String orderType)
         initialized,
-    required TResult Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)
+    required TResult Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)
         update,
     required TResult Function() validateOrderEligibility,
   }) =>
@@ -42,8 +47,13 @@ mixin _$OrderEligibilityEvent {
             ShipToInfo shipInfo,
             String orderType)?
         initialized,
-    TResult? Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)?
+    TResult? Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)?
         update,
     TResult? Function()? validateOrderEligibility,
   }) =>
@@ -58,8 +68,13 @@ mixin _$OrderEligibilityEvent {
             ShipToInfo shipInfo,
             String orderType)?
         initialized,
-    TResult Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)?
+    TResult Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)?
         update,
     TResult Function()? validateOrderEligibility,
     required TResult orElse(),
@@ -285,8 +300,13 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipInfo,
             String orderType)
         initialized,
-    required TResult Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)
+    required TResult Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)
         update,
     required TResult Function() validateOrderEligibility,
   }) {
@@ -305,8 +325,13 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipInfo,
             String orderType)?
         initialized,
-    TResult? Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)?
+    TResult? Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)?
         update,
     TResult? Function()? validateOrderEligibility,
   }) {
@@ -325,8 +350,13 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipInfo,
             String orderType)?
         initialized,
-    TResult Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)?
+    TResult Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)?
         update,
     TResult Function()? validateOrderEligibility,
     required TResult orElse(),
@@ -404,6 +434,8 @@ abstract class _$$_UpdateCopyWith<$Res> {
       {List<PriceAggregate> cartItems,
       String orderType,
       double grandTotal,
+      double zpSubtotal,
+      double mpSubtotal,
       double subTotal});
 }
 
@@ -420,6 +452,8 @@ class __$$_UpdateCopyWithImpl<$Res>
     Object? cartItems = null,
     Object? orderType = null,
     Object? grandTotal = null,
+    Object? zpSubtotal = null,
+    Object? mpSubtotal = null,
     Object? subTotal = null,
   }) {
     return _then(_$_Update(
@@ -434,6 +468,14 @@ class __$$_UpdateCopyWithImpl<$Res>
       grandTotal: null == grandTotal
           ? _value.grandTotal
           : grandTotal // ignore: cast_nullable_to_non_nullable
+              as double,
+      zpSubtotal: null == zpSubtotal
+          ? _value.zpSubtotal
+          : zpSubtotal // ignore: cast_nullable_to_non_nullable
+              as double,
+      mpSubtotal: null == mpSubtotal
+          ? _value.mpSubtotal
+          : mpSubtotal // ignore: cast_nullable_to_non_nullable
               as double,
       subTotal: null == subTotal
           ? _value.subTotal
@@ -450,6 +492,8 @@ class _$_Update implements _Update {
       {required final List<PriceAggregate> cartItems,
       required this.orderType,
       required this.grandTotal,
+      required this.zpSubtotal,
+      required this.mpSubtotal,
       required this.subTotal})
       : _cartItems = cartItems;
 
@@ -466,11 +510,15 @@ class _$_Update implements _Update {
   @override
   final double grandTotal;
   @override
+  final double zpSubtotal;
+  @override
+  final double mpSubtotal;
+  @override
   final double subTotal;
 
   @override
   String toString() {
-    return 'OrderEligibilityEvent.update(cartItems: $cartItems, orderType: $orderType, grandTotal: $grandTotal, subTotal: $subTotal)';
+    return 'OrderEligibilityEvent.update(cartItems: $cartItems, orderType: $orderType, grandTotal: $grandTotal, zpSubtotal: $zpSubtotal, mpSubtotal: $mpSubtotal, subTotal: $subTotal)';
   }
 
   @override
@@ -484,6 +532,10 @@ class _$_Update implements _Update {
                 other.orderType == orderType) &&
             (identical(other.grandTotal, grandTotal) ||
                 other.grandTotal == grandTotal) &&
+            (identical(other.zpSubtotal, zpSubtotal) ||
+                other.zpSubtotal == zpSubtotal) &&
+            (identical(other.mpSubtotal, mpSubtotal) ||
+                other.mpSubtotal == mpSubtotal) &&
             (identical(other.subTotal, subTotal) ||
                 other.subTotal == subTotal));
   }
@@ -494,6 +546,8 @@ class _$_Update implements _Update {
       const DeepCollectionEquality().hash(_cartItems),
       orderType,
       grandTotal,
+      zpSubtotal,
+      mpSubtotal,
       subTotal);
 
   @JsonKey(ignore: true)
@@ -513,12 +567,18 @@ class _$_Update implements _Update {
             ShipToInfo shipInfo,
             String orderType)
         initialized,
-    required TResult Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)
+    required TResult Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)
         update,
     required TResult Function() validateOrderEligibility,
   }) {
-    return update(cartItems, orderType, grandTotal, subTotal);
+    return update(
+        cartItems, orderType, grandTotal, zpSubtotal, mpSubtotal, subTotal);
   }
 
   @override
@@ -532,12 +592,18 @@ class _$_Update implements _Update {
             ShipToInfo shipInfo,
             String orderType)?
         initialized,
-    TResult? Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)?
+    TResult? Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)?
         update,
     TResult? Function()? validateOrderEligibility,
   }) {
-    return update?.call(cartItems, orderType, grandTotal, subTotal);
+    return update?.call(
+        cartItems, orderType, grandTotal, zpSubtotal, mpSubtotal, subTotal);
   }
 
   @override
@@ -551,14 +617,20 @@ class _$_Update implements _Update {
             ShipToInfo shipInfo,
             String orderType)?
         initialized,
-    TResult Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)?
+    TResult Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)?
         update,
     TResult Function()? validateOrderEligibility,
     required TResult orElse(),
   }) {
     if (update != null) {
-      return update(cartItems, orderType, grandTotal, subTotal);
+      return update(
+          cartItems, orderType, grandTotal, zpSubtotal, mpSubtotal, subTotal);
     }
     return orElse();
   }
@@ -605,11 +677,15 @@ abstract class _Update implements OrderEligibilityEvent {
       {required final List<PriceAggregate> cartItems,
       required final String orderType,
       required final double grandTotal,
+      required final double zpSubtotal,
+      required final double mpSubtotal,
       required final double subTotal}) = _$_Update;
 
   List<PriceAggregate> get cartItems;
   String get orderType;
   double get grandTotal;
+  double get zpSubtotal;
+  double get mpSubtotal;
   double get subTotal;
   @JsonKey(ignore: true)
   _$$_UpdateCopyWith<_$_Update> get copyWith =>
@@ -665,8 +741,13 @@ class _$_ValidateOrderEligibility implements _ValidateOrderEligibility {
             ShipToInfo shipInfo,
             String orderType)
         initialized,
-    required TResult Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)
+    required TResult Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)
         update,
     required TResult Function() validateOrderEligibility,
   }) {
@@ -684,8 +765,13 @@ class _$_ValidateOrderEligibility implements _ValidateOrderEligibility {
             ShipToInfo shipInfo,
             String orderType)?
         initialized,
-    TResult? Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)?
+    TResult? Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)?
         update,
     TResult? Function()? validateOrderEligibility,
   }) {
@@ -703,8 +789,13 @@ class _$_ValidateOrderEligibility implements _ValidateOrderEligibility {
             ShipToInfo shipInfo,
             String orderType)?
         initialized,
-    TResult Function(List<PriceAggregate> cartItems, String orderType,
-            double grandTotal, double subTotal)?
+    TResult Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)?
         update,
     TResult Function()? validateOrderEligibility,
     required TResult orElse(),
@@ -766,6 +857,8 @@ mixin _$OrderEligibilityState {
   ShipToInfo get shipInfo => throw _privateConstructorUsedError;
   String get orderType => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
+  double get zpSubtotal => throw _privateConstructorUsedError;
+  double get mpSubtotal => throw _privateConstructorUsedError;
   double get subTotal => throw _privateConstructorUsedError;
   bool get showErrorMessage => throw _privateConstructorUsedError;
 
@@ -789,6 +882,8 @@ abstract class $OrderEligibilityStateCopyWith<$Res> {
       ShipToInfo shipInfo,
       String orderType,
       User user,
+      double zpSubtotal,
+      double mpSubtotal,
       double subTotal,
       bool showErrorMessage});
 
@@ -821,6 +916,8 @@ class _$OrderEligibilityStateCopyWithImpl<$Res,
     Object? shipInfo = null,
     Object? orderType = null,
     Object? user = null,
+    Object? zpSubtotal = null,
+    Object? mpSubtotal = null,
     Object? subTotal = null,
     Object? showErrorMessage = null,
   }) {
@@ -857,6 +954,14 @@ class _$OrderEligibilityStateCopyWithImpl<$Res,
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      zpSubtotal: null == zpSubtotal
+          ? _value.zpSubtotal
+          : zpSubtotal // ignore: cast_nullable_to_non_nullable
+              as double,
+      mpSubtotal: null == mpSubtotal
+          ? _value.mpSubtotal
+          : mpSubtotal // ignore: cast_nullable_to_non_nullable
+              as double,
       subTotal: null == subTotal
           ? _value.subTotal
           : subTotal // ignore: cast_nullable_to_non_nullable
@@ -926,6 +1031,8 @@ abstract class _$$_OrderEligibilityStateCopyWith<$Res>
       ShipToInfo shipInfo,
       String orderType,
       User user,
+      double zpSubtotal,
+      double mpSubtotal,
       double subTotal,
       bool showErrorMessage});
 
@@ -960,6 +1067,8 @@ class __$$_OrderEligibilityStateCopyWithImpl<$Res>
     Object? shipInfo = null,
     Object? orderType = null,
     Object? user = null,
+    Object? zpSubtotal = null,
+    Object? mpSubtotal = null,
     Object? subTotal = null,
     Object? showErrorMessage = null,
   }) {
@@ -996,6 +1105,14 @@ class __$$_OrderEligibilityStateCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      zpSubtotal: null == zpSubtotal
+          ? _value.zpSubtotal
+          : zpSubtotal // ignore: cast_nullable_to_non_nullable
+              as double,
+      mpSubtotal: null == mpSubtotal
+          ? _value.mpSubtotal
+          : mpSubtotal // ignore: cast_nullable_to_non_nullable
+              as double,
       subTotal: null == subTotal
           ? _value.subTotal
           : subTotal // ignore: cast_nullable_to_non_nullable
@@ -1020,6 +1137,8 @@ class _$_OrderEligibilityState extends _OrderEligibilityState {
       required this.shipInfo,
       required this.orderType,
       required this.user,
+      required this.zpSubtotal,
+      required this.mpSubtotal,
       required this.subTotal,
       required this.showErrorMessage})
       : _cartItems = cartItems,
@@ -1048,13 +1167,17 @@ class _$_OrderEligibilityState extends _OrderEligibilityState {
   @override
   final User user;
   @override
+  final double zpSubtotal;
+  @override
+  final double mpSubtotal;
+  @override
   final double subTotal;
   @override
   final bool showErrorMessage;
 
   @override
   String toString() {
-    return 'OrderEligibilityState(cartItems: $cartItems, configs: $configs, salesOrg: $salesOrg, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, orderType: $orderType, user: $user, subTotal: $subTotal, showErrorMessage: $showErrorMessage)';
+    return 'OrderEligibilityState(cartItems: $cartItems, configs: $configs, salesOrg: $salesOrg, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, orderType: $orderType, user: $user, zpSubtotal: $zpSubtotal, mpSubtotal: $mpSubtotal, subTotal: $subTotal, showErrorMessage: $showErrorMessage)';
   }
 
   @override
@@ -1076,6 +1199,10 @@ class _$_OrderEligibilityState extends _OrderEligibilityState {
             (identical(other.orderType, orderType) ||
                 other.orderType == orderType) &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.zpSubtotal, zpSubtotal) ||
+                other.zpSubtotal == zpSubtotal) &&
+            (identical(other.mpSubtotal, mpSubtotal) ||
+                other.mpSubtotal == mpSubtotal) &&
             (identical(other.subTotal, subTotal) ||
                 other.subTotal == subTotal) &&
             (identical(other.showErrorMessage, showErrorMessage) ||
@@ -1093,6 +1220,8 @@ class _$_OrderEligibilityState extends _OrderEligibilityState {
       shipInfo,
       orderType,
       user,
+      zpSubtotal,
+      mpSubtotal,
       subTotal,
       showErrorMessage);
 
@@ -1114,6 +1243,8 @@ abstract class _OrderEligibilityState extends OrderEligibilityState {
       required final ShipToInfo shipInfo,
       required final String orderType,
       required final User user,
+      required final double zpSubtotal,
+      required final double mpSubtotal,
       required final double subTotal,
       required final bool showErrorMessage}) = _$_OrderEligibilityState;
   const _OrderEligibilityState._() : super._();
@@ -1134,6 +1265,10 @@ abstract class _OrderEligibilityState extends OrderEligibilityState {
   String get orderType;
   @override
   User get user;
+  @override
+  double get zpSubtotal;
+  @override
+  double get mpSubtotal;
   @override
   double get subTotal;
   @override

@@ -9,15 +9,19 @@ class _TotalQtySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentBundle = context
+        .read<CartBloc>()
+        .state
+        .findItemById(MaterialNumber(cartProduct.bundle.bundleCode))
+        .bundle;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '${context.tr('Total qty')}: ${context.read<CartBloc>().state.getTotalQuantityOfProductBundle(
-                  bundleCode: cartProduct.bundle.bundleCode,
-                ).toString()}',
+            '${context.tr('Total qty')}: ${currentBundle.totalQty.toString()}',
             key: WidgetKeys.cartItemBundleQty,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.neutralsBlack,
@@ -27,11 +31,7 @@ class _TotalQtySection extends StatelessWidget {
             key: WidgetKeys.cartItemBundleTotalPrice,
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,
-            price: context
-                .read<CartBloc>()
-                .state
-                .itemBundlePrice(bundleCode: cartProduct.bundle.bundleCode)
-                .toString(),
+            price: currentBundle.totalPrice.toString(),
           ),
         ],
       ),

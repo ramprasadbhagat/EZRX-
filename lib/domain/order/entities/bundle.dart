@@ -47,21 +47,22 @@ class Bundle with _$Bundle {
       )
       .toList();
 
-  BundleInfo get currentBundleInfo {
-    final totalMaterial = materials.fold(
-      0,
-      (int previousValue, element) => previousValue + element.quantity.intValue,
-    );
-
-    return sortedBundleInformation.lastWhere(
-      (bundleInfo) => totalMaterial >= bundleInfo.quantity,
-      orElse: () => BundleInfo.empty(),
-    );
-  }
+  double get totalPrice => totalQty * currentBundleInfo.rate;
 
   bool get showStrikeThroughPrice {
     final originalRate = sortedBundleInformation.firstOrNull?.rate ?? 0;
 
     return originalRate > currentBundleInfo.rate;
   }
+
+  BundleInfo get currentBundleInfo => sortedBundleInformation.lastWhere(
+        (bundleInfo) => totalQty >= bundleInfo.quantity,
+        orElse: () => BundleInfo.empty(),
+      );
+
+  int get totalQty => materials.fold(
+        0,
+        (int previousValue, element) =>
+            previousValue + element.quantity.intValue,
+      );
 }

@@ -13,6 +13,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
     required ShipToInfo shipInfo,
     required String orderType,
     required User user,
+    required double zpSubtotal,
+    required double mpSubtotal,
     required double subTotal,
     required bool showErrorMessage,
   }) = _OrderEligibilityState;
@@ -26,7 +28,9 @@ class OrderEligibilityState with _$OrderEligibilityState {
         configs: SalesOrganisationConfigs.empty(),
         salesOrg: SalesOrganisation.empty(),
         user: User.empty(),
-        subTotal: 0.0,
+        mpSubtotal: 0,
+        zpSubtotal: 0,
+        subTotal: 0,
         showErrorMessage: false,
       );
 
@@ -65,7 +69,22 @@ class OrderEligibilityState with _$OrderEligibilityState {
     const invalidItemErrorMessage =
         'The following items have been identified in your cart:';
     if (!isMinOrderValuePassed) {
-      return 'Please ensure that the order value satisfies the minimum order value of ${StringUtils.displayPrice(configs, double.tryParse(configs.minOrderAmount) ?? 0)}';
+      final displayMinOrderAmount =
+          StringUtils.displayPrice(configs, configs.minOrderAmount);
+      final displayMPMinOrderAmount =
+          StringUtils.displayPrice(configs, configs.mpMinOrderAmount);
+
+      if (!cartItems.containMPMaterial) {
+        return 'Please ensure that the order value satisfies the minimum order value of $displayMinOrderAmount}';
+      }
+
+      if (!mpSubtotalMOVEligible && !zpSubtotalMOVEligible) {
+        return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal & $displayMPMinOrderAmount for MP subtotal.';
+      } else if (!zpSubtotalMOVEligible) {
+        return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal.';
+      } else {
+        return 'Please ensure that minimum order value is at least $displayMPMinOrderAmount for MP subtotal.';
+      }
     }
     if (isMWPNotAllowedAndPresentInCart) {
       return '$invalidItemErrorMessage Material without price';
@@ -109,12 +128,23 @@ class OrderEligibilityState with _$OrderEligibilityState {
   }
 
   bool get isTotalGreaterThanMinOrderAmount {
-    if (salesOrg.salesOrg.checkMOVonSubTotal) {
-      return subTotal >= double.parse(configs.minOrderAmount);
+    if (cartItems.containMPMaterial) {
+      return zpSubtotalMOVEligible && mpSubtotalMOVEligible;
     }
 
-    return grandTotal >= double.parse(configs.minOrderAmount);
+    if (salesOrg.salesOrg.checkMOVonSubTotal) {
+      return subTotal >= configs.minOrderAmount;
+    }
+
+    return grandTotal >= configs.minOrderAmount;
   }
+
+  bool get zpSubtotalMOVEligible =>
+      cartItems.zpMaterialOnly.isEmpty || zpSubtotal >= configs.minOrderAmount;
+
+  bool get mpSubtotalMOVEligible =>
+      cartItems.mpMaterialOnly.isEmpty ||
+      mpSubtotal >= configs.mpMinOrderAmount;
 
   bool get isAccountSuspended {
     return customerCodeInfo.status.isSuspended || shipInfo.status.isSuspended;

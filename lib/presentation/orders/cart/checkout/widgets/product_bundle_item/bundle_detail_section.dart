@@ -10,7 +10,9 @@ class _BundleDetailsSection extends StatelessWidget {
     final currentBundleOffer = context
         .read<CartBloc>()
         .state
-        .currentBundleOffer(bundleCode: cartItem.bundle.bundleCode);
+        .findItemById(MaterialNumber(cartItem.bundle.bundleCode))
+        .bundle
+        .currentBundleInfo;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

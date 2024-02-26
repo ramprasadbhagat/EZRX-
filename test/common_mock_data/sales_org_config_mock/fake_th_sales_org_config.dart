@@ -23,7 +23,7 @@ final fakeTHSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableZDP8Override: true,
   enableGMC: false,
   enableGMN: false,
-  minOrderAmount: '100',
+  minOrderAmount: 100,
   vatValue: 7,
   netPriceOverride: false,
   enableFutureDeliveryDay: true,

@@ -92,8 +92,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
         required bool batchNumDisplay,
     @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
         required bool displayOrderDiscount,
-    @JsonKey(name: 'minOrderAmount', defaultValue: '0')
-        required String minOrderAmount,
+    @StringToDoubleConverter()
+    @JsonKey(name: 'minOrderAmount', defaultValue: 0.0)
+        required double minOrderAmount,
     @JsonKey(name: 'salesOrgCode', defaultValue: '0') required String salesOrg,
     @JsonKey(name: 'enableZDP8Override', defaultValue: false)
         required bool enableZDP8Override,

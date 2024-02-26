@@ -166,4 +166,34 @@ extension PriceAggregateExtension on List<PriceAggregate> {
           );
         },
       ).toList();
+
+  List<PriceAggregate> get zpMaterialOnly =>
+      where((e) => !e.materialInfo.isMarketPlace).toList();
+
+  List<PriceAggregate> get mpMaterialOnly =>
+      where((e) => e.materialInfo.isMarketPlace).toList();
+
+  bool get containMPMaterial => any((e) => e.materialInfo.isMarketPlace);
+
+  double get totalMaterialsPrice => where(
+        (item) =>
+            !item.materialInfo.type.typeBundle &&
+            !item.materialInfo.type.typeCombo,
+      ).fold<double>(
+        0,
+        (sum, item) => sum + item.finalPriceTotal,
+      );
+
+  double get totalBundlesPrice =>
+      where((element) => element.materialInfo.type.typeBundle).fold(
+        0,
+        (previousValue, element) => previousValue + element.bundle.totalPrice,
+      );
+
+  double get totalComboPrice =>
+      where((element) => element.materialInfo.type.typeCombo).fold(
+        0,
+        (previousValue, element) =>
+            previousValue + element.comboSubTotalExclTax,
+      );
 }

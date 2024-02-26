@@ -55,7 +55,10 @@ void main() {
     config = ConfigMock();
     productList = (await CartLocalDataSource().getAddedToCartProductList())
         .cartProducts
-        .where((e) => e.materialInfo.type.typeMaterial)
+        .where(
+          (e) =>
+              e.materialInfo.type.typeMaterial && !e.materialInfo.isMarketPlace,
+        )
         .toList();
     initialEvent = ComboDealMaterialDetailEvent.initialize(
       salesOrganisation: fakeKHSalesOrganisation,

@@ -23,7 +23,7 @@ final fakeKHSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableZDP8Override: false,
   enableGMC: false,
   enableGMN: false,
-  minOrderAmount: '20',
+  minOrderAmount: 20.0,
   vatValue: 10,
   netPriceOverride: false,
   enableFutureDeliveryDay: false,

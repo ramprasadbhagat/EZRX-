@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
@@ -17,6 +18,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:mocktail/mocktail.dart';
+
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,12 +32,19 @@ void main() async {
   );
   final dioAdapter = DioAdapter(dio: dio);
   final service = HttpService.mockDio(dio);
+  final remoteConfigService = RemoteConfigServiceMock();
+  const fakeMarket = 'fake-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
   final remoteDataSource = CartRemoteDataSource(
     httpService: service,
     config: Config(),
     dataSourceExceptionHandler: DataSourceExceptionHandler(),
     cartQueryMutation: CartQueryMutation(),
+    remoteConfigService: remoteConfigService,
   );
+  when(() => remoteConfigService.enableMarketPlaceMarkets)
+      .thenReturn(fakeEnableMarketPlaceMarkets);
 
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
@@ -62,12 +73,14 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.cart(),
+              'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
               'variables': {}
             }),
           );
 
-          final result = await remoteDataSource.getAddedToCartProductList();
+          final result = await remoteDataSource.getAddedToCartProductList(
+            market: fakeMarket,
+          );
 
           expect(
             result,
@@ -95,12 +108,12 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.cart(),
+              'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
               'variables': {}
             }),
           );
           await remoteDataSource
-              .getAddedToCartProductList()
+              .getAddedToCartProductList(market: fakeMarket)
               .onError((error, _) {
             expect(
               error,
@@ -130,11 +143,13 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.cart(),
+              'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
               'variables': {}
             }),
           );
-          final result = await remoteDataSource.getAddedToCartProductList();
+          final result = await remoteDataSource.getAddedToCartProductList(
+            market: fakeMarket,
+          );
 
           expect(
             result,
@@ -155,13 +170,13 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.cart(),
+              'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
               'variables': {}
             }),
           );
 
           await remoteDataSource
-              .getAddedToCartProductList()
+              .getAddedToCartProductList(market: fakeMarket)
               .onError((error, _) {
             expect(error, isA<ServerException>());
             return Future.value(Cart.empty());
@@ -198,15 +213,18 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.upsertCartItems(),
+              'query': remoteDataSource.cartQueryMutation
+                  .upsertCartItems(fakeConfigValue),
               'variables': {
                 'itemInput': [{}],
               },
             }),
           );
 
-          final result =
-              await remoteDataSource.upsertCartItems(requestParams: [{}]);
+          final result = await remoteDataSource.upsertCartItems(
+            requestParams: [{}],
+            market: fakeMarket,
+          );
 
           expect(
             result,
@@ -235,7 +253,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.upsertCartItems(),
+              'query': remoteDataSource.cartQueryMutation
+                  .upsertCartItems(fakeConfigValue),
               'variables': {
                 'itemInput': [{}],
               },
@@ -243,6 +262,7 @@ void main() async {
           );
           await remoteDataSource.upsertCartItems(
             requestParams: [{}],
+            market: fakeMarket,
           ).onError((error, _) {
             expect(
               error,
@@ -272,11 +292,13 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.cart(),
+              'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
               'variables': {}
             }),
           );
-          final result = await remoteDataSource.getAddedToCartProductList();
+          final result = await remoteDataSource.getAddedToCartProductList(
+            market: fakeMarket,
+          );
 
           expect(
             result,

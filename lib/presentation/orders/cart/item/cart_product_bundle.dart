@@ -77,10 +77,12 @@ class _BundleDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentBundleOffer = context
+    final currentBundle = context
         .read<CartBloc>()
         .state
-        .currentBundleOffer(bundleCode: cartItem.bundle.bundleCode);
+        .findItemById(MaterialNumber(cartItem.bundle.bundleCode))
+        .bundle;
+    final currentBundleOffer = currentBundle.currentBundleInfo;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -100,7 +102,7 @@ class _BundleDetailsSection extends StatelessWidget {
                     ),
               ),
               Text(
-                '${context.tr('Total quantity: ')}${context.read<CartBloc>().state.getTotalQuantityOfProductBundle(bundleCode: cartItem.bundle.bundleCode)}',
+                '${context.tr('Total quantity: ')}${currentBundle.totalQty}',
                 key: WidgetKeys.cartItemBundleQty,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -367,7 +369,9 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
     final totalQuantityOfProductBundle = context
         .read<CartBloc>()
         .state
-        .getTotalQuantityOfProductBundle(bundleCode: widget.bundle.bundleCode);
+        .findItemById(MaterialNumber(widget.bundle.bundleCode))
+        .bundle
+        .totalQty;
 
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
@@ -585,7 +589,9 @@ class _BundleSubTotalSection extends StatelessWidget {
             price: context
                 .read<CartBloc>()
                 .state
-                .itemBundlePrice(bundleCode: cartProduct.bundle.bundleCode)
+                .findItemById(MaterialNumber(cartProduct.bundle.bundleCode))
+                .bundle
+                .totalPrice
                 .toString(),
           ),
         ],
