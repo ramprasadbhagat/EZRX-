@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -336,5 +337,25 @@ void main() {
     await tester.pump();
     final recentOrderProductLabelFinder = find.text('23008138 | EZRX-1720e3e');
     expect(recentOrderProductLabelFinder, findsNothing);
+  });
+  testWidgets('Find MarketPlace tag for MarketPlace items', (tester) async {
+    when(
+      () => viewByItemsBlocMock.state,
+    ).thenAnswer(
+      (invocation) => ViewByItemsState.initial().copyWith(
+        orderHistory: fakeOrderHistory,
+      ),
+    );
+
+    final mpItemsCount = fakeOrderHistory.orderHistoryItems
+        .where((element) => element.isMarketPlace)
+        .length;
+    await tester.pumpWidget(getScopedWidget());
+    await tester.pumpAndSettle();
+    final marketPlaceLogo = find.byType(MarketPlaceLogo, skipOffstage: false);
+    expect(
+      marketPlaceLogo,
+      findsNWidgets(mpItemsCount),
+    );
   });
 }

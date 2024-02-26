@@ -5,6 +5,8 @@ import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_request.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_request_dto.dart';
@@ -28,16 +30,23 @@ class ViewByItemLocalDataSourceMock extends Mock
 class ViewByItemRemoteDataSourceMock extends Mock
     implements ViewByItemRemoteDataSource {}
 
+class DeviceStorageMock extends Mock implements DeviceStorage {}
+
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final mockConfig = MockConfig();
   final viewByItemLocalDataSource = ViewByItemLocalDataSourceMock();
   final orderHistoryRemoteDataSource = ViewByItemRemoteDataSourceMock();
+  final deviceStorage = DeviceStorageMock();
+  final remoteConfigService = RemoteConfigServiceMock();
 
   final repository = ViewByItemRepository(
     config: mockConfig,
     viewByItemLocalDataSource: viewByItemLocalDataSource,
     viewByItemRemoteDataSource: orderHistoryRemoteDataSource,
+    deviceStorage: deviceStorage,
   );
 
   const fakeException = 'fake-exception';
@@ -59,6 +68,14 @@ void main() async {
   final fakeInvoiceMap = {
     for (final invoice in fakeInvoice) invoice.hashId: invoice,
   };
+  const fakeMarket = 'fake-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarket];
+
+  setUpAll(() {
+    WidgetsFlutterBinding.ensureInitialized();
+    when(() => remoteConfigService.enableMarketPlaceMarkets)
+        .thenReturn(fakeEnableMarketPlaceMarkets);
+  });
 
   group('View by item repository test', () {
     group('=> Get view by item test', () {
@@ -104,6 +121,7 @@ void main() async {
 
       test('=> Failure in remote', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
 
         final viewByItemRequest = ViewByItemRequest.empty().copyWith(
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
@@ -119,6 +137,7 @@ void main() async {
           () => orderHistoryRemoteDataSource.getOrderHistory(
             variables:
                 ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson(),
+            market: fakeMarket,
           ),
         ).thenThrow(fakeException);
 
@@ -153,6 +172,7 @@ void main() async {
           () => orderHistoryRemoteDataSource.getOrderHistory(
             variables:
                 ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson(),
+            market: fakeMarket,
           ),
         ).thenAnswer((_) async => fakeOrderHistory);
 
@@ -194,6 +214,7 @@ void main() async {
           () => orderHistoryRemoteDataSource.getOrderHistory(
             variables:
                 ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson(),
+            market: fakeMarket,
           ),
         ).thenAnswer((_) async => fakeOrderHistory);
 
@@ -243,6 +264,7 @@ void main() async {
           () => orderHistoryRemoteDataSource.getOrderHistory(
             variables:
                 ViewByItemRequestDto.fromDomain(viewByItemRequest).toMapJson(),
+            market: fakeMarket,
           ),
         ).thenAnswer((_) async => fakeOrderHistory);
 
@@ -415,6 +437,7 @@ void main() async {
           () => orderHistoryRemoteDataSource.getOrderHistory(
             variables: ViewByItemRequestDto.fromDomain(viewByItemSearchRequest)
                 .toMapJson(),
+            market: fakeMarket,
           ),
         ).thenThrow(fakeException);
 
@@ -443,6 +466,7 @@ void main() async {
           () => orderHistoryRemoteDataSource.getOrderHistory(
             variables: ViewByItemRequestDto.fromDomain(viewByItemSearchRequest)
                 .toMapJson(),
+            market: fakeMarket,
           ),
         ).thenAnswer((_) async => fakeOrderHistory);
 

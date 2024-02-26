@@ -62,6 +62,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'HidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'referenceNotes', defaultValue: '')
         required String referenceNotes,
+    @JsonKey(name: 'isMarketPlace', defaultValue: false)
+        required bool isMarketPlace,
   }) = _OrderHistoryItemDto;
 
   factory OrderHistoryItemDto.fromDomain(OrderHistoryItem orderHistoryItem) {
@@ -105,6 +107,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       governmentMaterialCode: orderHistoryItem.governmentMaterialCode,
       hidePrice: orderHistoryItem.hidePrice,
       referenceNotes: orderHistoryItem.referenceNotes.getOrDefaultValue(''),
+      isMarketPlace: orderHistoryItem.isMarketPlace,
     );
   }
   OrderHistoryItem toDomain() {
@@ -146,6 +149,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       governmentMaterialCode: governmentMaterialCode,
       hidePrice: hidePrice,
       referenceNotes: StringValue(referenceNotes),
+      isMarketPlace: isMarketPlace,
     );
   }
 

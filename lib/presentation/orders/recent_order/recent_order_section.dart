@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
@@ -6,6 +7,8 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/icon_label.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -20,8 +23,6 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-
-import 'package:ezrxmobile/presentation/core/price_component.dart';
 
 class RecentOrdersSection extends StatelessWidget {
   const RecentOrdersSection({Key? key}) : super(key: key);
@@ -87,13 +88,14 @@ class _BodyContent extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 150,
+                    height: 140,
                     child: state.isFetching
                         ? LoadingShimmer.logo(
                             key: WidgetKeys.recentOrderSectionLoaderImage,
                           )
                         : ListView(
                             scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.zero,
                             children: state.orderHistory.orderHistoryItems
                                 .map((e) => _ProductTile(product: e))
                                 .toList(),
@@ -126,9 +128,10 @@ class _ProductTile extends StatelessWidget {
               margin: const EdgeInsets.all(8.0),
               child: ListTile(
                 key: WidgetKeys.listRecentlyOrdered,
-                contentPadding: const EdgeInsets.all(8),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomCard(
                       showBorder: true,
@@ -136,6 +139,8 @@ class _ProductTile extends StatelessWidget {
                       child: ProductImage(
                         materialNumber: product.materialNumber,
                         fit: BoxFit.fitHeight,
+                        width: 90,
+                        height: 90,
                       ),
                     ),
                     const SizedBox(
@@ -144,17 +149,28 @@ class _ProductTile extends StatelessWidget {
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            product.materialNumber.displayMatNo,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(color: ZPColors.extraLightGrey4),
+                          Row(
+                            children: [
+                              if (product.isMarketPlace)
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 5.0),
+                                  child: MarketPlaceLogo.small(),
+                                ),
+                              Text(
+                                product.materialNumber.displayMatNo,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color: ZPColors.extraLightGrey4,
+                                    ),
+                              ),
+                            ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.symmetric(vertical: 2.0),
                             child: Text(
                               product.materialDescription,
                               style: Theme.of(context).textTheme.labelSmall,
@@ -165,8 +181,7 @@ class _ProductTile extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            product.principalData.principalName
-                                .getOrDefaultValue(''),
+                            '${product.isMarketPlace ? context.tr('Sold by:') : ''} ${product.principalData.principalName.getOrDefaultValue('')}',
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: ZPColors.extraLightGrey4,
@@ -175,7 +190,7 @@ class _ProductTile extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 2,
                           ),
                           PriceComponent(
                             price: product.itemUnitPrice(

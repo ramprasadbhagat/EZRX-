@@ -51,6 +51,7 @@ mixin _$OrderHistoryItem {
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   bool get hidePrice => throw _privateConstructorUsedError;
   StringValue get referenceNotes => throw _privateConstructorUsedError;
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryItemCopyWith<OrderHistoryItem> get copyWith =>
@@ -95,7 +96,8 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       PrincipalData principalData,
       String governmentMaterialCode,
       bool hidePrice,
-      StringValue referenceNotes});
+      StringValue referenceNotes,
+      bool isMarketPlace});
 
   $InvoiceDataCopyWith<$Res> get invoiceData;
   $ProductImagesCopyWith<$Res> get productImages;
@@ -147,6 +149,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
     Object? governmentMaterialCode = null,
     Object? hidePrice = null,
     Object? referenceNotes = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -277,6 +280,10 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.referenceNotes
           : referenceNotes // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -345,7 +352,8 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       PrincipalData principalData,
       String governmentMaterialCode,
       bool hidePrice,
-      StringValue referenceNotes});
+      StringValue referenceNotes,
+      bool isMarketPlace});
 
   @override
   $InvoiceDataCopyWith<$Res> get invoiceData;
@@ -398,6 +406,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
     Object? governmentMaterialCode = null,
     Object? hidePrice = null,
     Object? referenceNotes = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_$_OrderHistoryItem(
       materialNumber: null == materialNumber
@@ -528,6 +537,10 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
           ? _value.referenceNotes
           : referenceNotes // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -567,7 +580,8 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
       required this.principalData,
       required this.governmentMaterialCode,
       required this.hidePrice,
-      required this.referenceNotes})
+      required this.referenceNotes,
+      required this.isMarketPlace})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
 
@@ -642,10 +656,12 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   final bool hidePrice;
   @override
   final StringValue referenceNotes;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, lineNumber: $lineNumber, principalData: $principalData, governmentMaterialCode: $governmentMaterialCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes)';
+    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, lineNumber: $lineNumber, principalData: $principalData, governmentMaterialCode: $governmentMaterialCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -712,7 +728,9 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
             (identical(other.hidePrice, hidePrice) ||
                 other.hidePrice == hidePrice) &&
             (identical(other.referenceNotes, referenceNotes) ||
-                other.referenceNotes == referenceNotes));
+                other.referenceNotes == referenceNotes) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
@@ -749,7 +767,8 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
         principalData,
         governmentMaterialCode,
         hidePrice,
-        referenceNotes
+        referenceNotes,
+        isMarketPlace
       ]);
 
   @JsonKey(ignore: true)
@@ -792,7 +811,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final PrincipalData principalData,
       required final String governmentMaterialCode,
       required final bool hidePrice,
-      required final StringValue referenceNotes}) = _$_OrderHistoryItem;
+      required final StringValue referenceNotes,
+      required final bool isMarketPlace}) = _$_OrderHistoryItem;
   _OrderHistoryItem._() : super._();
 
   @override
@@ -859,6 +879,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   bool get hidePrice;
   @override
   StringValue get referenceNotes;
+  @override
+  bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryItemCopyWith<_$_OrderHistoryItem> get copyWith =>

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/invoice_data_dto.dart';
@@ -17,19 +18,24 @@ class ViewByItemRemoteDataSource {
   ViewByItemQueryMutation viewByItemQueryMutation;
   Config config;
   DataSourceExceptionHandler dataSourceExceptionHandler;
+  RemoteConfigService remoteConfigService;
 
   ViewByItemRemoteDataSource({
     required this.httpService,
     required this.viewByItemQueryMutation,
     required this.config,
     required this.dataSourceExceptionHandler,
+    required this.remoteConfigService,
   });
 
   Future<OrderHistory> getOrderHistory({
     required Map<String, dynamic> variables,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = viewByItemQueryMutation.getViewByItem();
+      final queryData = viewByItemQueryMutation.getViewByItem(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}order',
@@ -39,7 +45,6 @@ class ViewByItemRemoteDataSource {
         }),
         apiEndpoint: 'orderHistoryFetchByItems',
       );
-
       _orderHistoryExceptionChecker(res: res);
 
       if (res

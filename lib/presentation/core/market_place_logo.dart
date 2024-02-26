@@ -3,17 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MarketPlaceLogo extends StatelessWidget {
-  const MarketPlaceLogo({Key? key}) : super(key: key);
+  final double? width;
+  final double? height;
+  const MarketPlaceLogo({Key? key, this.width, this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 24,
-      height: 24,
+      width: width ?? 24,
+      height: height ?? 24,
       child: SvgPicture.asset(
         SvgImage.marketPlaceLogo,
         fit: BoxFit.fill,
       ),
+    );
+  }
+
+  factory MarketPlaceLogo.small() {
+    return const MarketPlaceLogo(
+      width: 20,
+      height: 20,
     );
   }
 }

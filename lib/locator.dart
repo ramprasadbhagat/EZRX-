@@ -1140,6 +1140,7 @@ void setupLocator() {
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
       viewByItemQueryMutation: locator<ViewByItemQueryMutation>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -1148,6 +1149,7 @@ void setupLocator() {
       config: locator<Config>(),
       viewByItemLocalDataSource: locator<ViewByItemLocalDataSource>(),
       viewByItemRemoteDataSource: locator<ViewByItemRemoteDataSource>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
   locator.registerFactory(

@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_request.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 
@@ -24,11 +25,13 @@ class ViewByItemRepository implements IViewByItemRepository {
   final Config config;
   final ViewByItemLocalDataSource viewByItemLocalDataSource;
   final ViewByItemRemoteDataSource viewByItemRemoteDataSource;
+  final DeviceStorage deviceStorage;
 
   ViewByItemRepository({
     required this.config,
     required this.viewByItemLocalDataSource,
     required this.viewByItemRemoteDataSource,
+    required this.deviceStorage,
   });
 
   @override
@@ -81,6 +84,7 @@ class ViewByItemRepository implements IViewByItemRepository {
           await viewByItemRemoteDataSource.getOrderHistory(
         variables:
             ViewByItemRequestDto.fromDomain(viewByItemsRequest).toMapJson(),
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(orderHistoryItemList);
@@ -121,6 +125,7 @@ class ViewByItemRepository implements IViewByItemRepository {
           await viewByItemRemoteDataSource.getOrderHistory(
         variables: ViewByItemRequestDto.fromDomain(viewByItemDetailRequest)
             .toMapJson(),
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(orderHistoryItemList);
@@ -161,6 +166,7 @@ class ViewByItemRepository implements IViewByItemRepository {
           await viewByItemRemoteDataSource.getOrderHistory(
         variables: ViewByItemRequestDto.fromDomain(viewByItemSearchRequest)
             .toMapJson(),
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(orderHistoryItemList);
