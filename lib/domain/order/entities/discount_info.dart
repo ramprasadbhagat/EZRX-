@@ -26,10 +26,14 @@ class DiscountInfo with _$DiscountInfo {
   double get rateToAbs => rate.abs();
 
   String get rateDisplay {
+    if (rateToAbs == 0) {
+      return '';
+    }
+
     if (rateToAbs == rateToAbs.toInt()) {
       return rateToAbs.toInt().toString();
     }
-    
+
     return rateToAbs.toString();
   }
 }

@@ -11,9 +11,6 @@ class _MaterialDetails extends StatelessWidget {
     required this.onTapName,
   }) : super(key: key);
 
-  bool get _canDisplayDiscountTag =>
-      comboItem.comboDeal.scheme.displayDiscountedPrice;
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ComboDealMaterialDetailBloc,
@@ -28,35 +25,62 @@ class _MaterialDetails extends StatelessWidget {
           currentTotalAmount: state.originalPriceSelectedItems,
         );
 
+        final materialNextSuffixDiscountRate =
+            comboItem.comboDeal.materialNextSuffixDiscountRate(
+          materialNumber: comboItem.getMaterialNumber,
+          totalQty: state.totalQuantityUnit,
+        );
+
+        final canDisplayDiscountTag =
+            comboItem.comboDeal.scheme.displayDiscountedPrice &&
+                materialComboRateDisplay.isNotEmpty;
+
+        final canDisplayNextTierDiscount =
+            comboItem.comboDeal.scheme.displayNextTierDiscount &&
+                materialNextSuffixDiscountRate.isNotEmpty;
+
         return Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      comboItem.materialInfo.combinationCode(
-                        showGMCPart: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .salesOrgConfigs
-                            .enableGMC,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: ZPColors.darkGray,
-                          ),
+              Text(
+                comboItem.materialInfo.combinationCode(
+                  showGMCPart: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .salesOrgConfigs
+                      .enableGMC,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: ZPColors.darkGray,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  if (_canDisplayDiscountTag)
-                    DiscountTagWidget(rateDisplay: materialComboRateDisplay),
-                ],
               ),
+              if (canDisplayDiscountTag)
+                Row(
+                  children: [
+                    DiscountTagWidget(rateDisplay: materialComboRateDisplay),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    if (canDisplayNextTierDiscount)
+                      Expanded(
+                        child: Text(
+                          context.tr(
+                            'Next tier {discountRate}% discount',
+                            namedArgs: {
+                              'discountRate': materialNextSuffixDiscountRate,
+                            },
+                          ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: ZPColors.darkGray,
+                                  ),
+                        ),
+                      ),
+                  ],
+                ),
               const SizedBox(height: 4),
               InkWell(
                 onTap: onTapName,
@@ -72,18 +96,23 @@ class _MaterialDetails extends StatelessWidget {
                       color: ZPColors.neutralsGrey1,
                     ),
               ),
-              Text(
-                context.tr(
-                  'EXP: {date}',
-                  namedArgs: {
-                    'date': comboItem.stockInfo.expiryDate.dateOrNaString,
-                  },
+              if (context
+                  .read<EligibilityBloc>()
+                  .state
+                  .salesOrgConfigs
+                  .expiryDateDisplay)
+                Text(
+                  context.tr(
+                    'EXP: {date}',
+                    namedArgs: {
+                      'date': comboItem.stockInfo.expiryDate.dateOrNaString,
+                    },
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontSize: 10,
+                        color: ZPColors.neutralsGrey1,
+                      ),
                 ),
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontSize: 10,
-                      color: ZPColors.neutralsGrey1,
-                    ),
-              ),
               _MaterialPriceSection(
                 comboItem: comboItem,
                 totalQuantityUnit: state.totalQuantityUnit,

@@ -179,6 +179,7 @@ class ComboDealMaterialDetailBloc
           case ComboDealScheme.k22:
           case ComboDealScheme.k3:
           case ComboDealScheme.k4:
+          case ComboDealScheme.k42:
           case ComboDealScheme.k5:
           case ComboDealScheme.kWithSuffix:
             emit(

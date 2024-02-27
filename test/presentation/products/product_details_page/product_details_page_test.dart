@@ -2214,7 +2214,7 @@ void main() {
         await tester.pump();
         expect(
           find.text(
-            'Discount up to ${mockComboDeal.k1MaximumDiscount}% on selected materials'
+            'Discount up to ${mockComboDeal.materialsMaximumDiscount}% on selected materials'
                 .tr(),
           ),
           findsOneWidget,

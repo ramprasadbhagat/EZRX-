@@ -112,7 +112,7 @@ class ComboDeal with _$ComboDeal {
 
   ComboDealScheme get scheme {
     if (_allMaterialWithSuffix && _allFlexiQtyTierWithSuffix) {
-      return ComboDealScheme.kWithSuffix;
+      return ComboDealScheme.k42;
     }
     if (materialComboDeals.isNotEmpty &&
         allMaterials.every((item) => item.mandatory)) {
@@ -150,12 +150,12 @@ class ComboDeal with _$ComboDeal {
       materialComboDeals.isNotEmpty;
 
   ComboDealMaterial selectedSuffix({
-    required PriceAggregate material,
+    required MaterialNumber materialNumber,
     required ComboDealQtyTier eligibleComboDealQtyTier,
   }) =>
       allMaterials.firstWhere(
         (element) =>
-            element.materialNumber == material.getMaterialNumber &&
+            element.materialNumber == materialNumber &&
             eligibleComboDealQtyTier.suffix == element.suffix,
         orElse: () => ComboDealMaterial.empty(),
       );
@@ -190,6 +190,15 @@ class ComboDeal with _$ComboDeal {
             )
             .discountInfo
             .rateToAbs;
+      case ComboDealScheme.k42:
+        final eligibleComboDealQtyTier = descendingSortedQtyTiers.firstWhere(
+          (tier) => tier.minQty <= totalQuantityUnit,
+          orElse: () => ComboDealQtyTier.empty(),
+        );
+        return selectedSuffix(
+          materialNumber: materialNumber,
+          eligibleComboDealQtyTier: eligibleComboDealQtyTier,
+        ).discountInfo.rateToAbs;
       case ComboDealScheme.k5:
         if (currentTotalAmount == null) {
           return descendingSortedRateToAbsTiers
@@ -221,6 +230,7 @@ class ComboDeal with _$ComboDeal {
       case ComboDealScheme.k3:
         return descendingSortedSKUTier.last.minQty;
       case ComboDealScheme.k4:
+      case ComboDealScheme.k42:
         return descendingSortedQtyTiers.last.minQty;
       case ComboDealScheme.kWithSuffix:
         return groupDeal.minTotalQuantity;
@@ -235,6 +245,21 @@ class ComboDeal with _$ComboDeal {
         orElse: () => ComboDealTierRule.empty(),
       );
 
+  String materialNextSuffixDiscountRate({
+    required int totalQty,
+    required MaterialNumber materialNumber,
+  }) {
+    final nextDiscountTier = flexiQtyTier.firstWhere(
+      (tier) => totalQty < tier.minQty,
+      orElse: () => ComboDealQtyTier.empty(),
+    );
+
+    return selectedSuffix(
+      materialNumber: materialNumber,
+      eligibleComboDealQtyTier: nextDiscountTier,
+    ).discountInfo.rateDisplay;
+  }
+
   String get buyMoreInfoKey {
     switch (scheme) {
       case ComboDealScheme.k1:
@@ -246,6 +271,8 @@ class ComboDeal with _$ComboDeal {
         return 'Buy {unit} more items to get {discount}% discount';
       case ComboDealScheme.k4:
         return 'Buy {unit} more to get {discount}% discount';
+      case ComboDealScheme.k42:
+        return 'Buy {unit} more quantity to achieve next tier discount';
       case ComboDealScheme.k5:
         return 'Buy \${unit} more to get {discount}% discount';
     }
@@ -263,6 +290,7 @@ class ComboDeal with _$ComboDeal {
         return '';
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
+      case ComboDealScheme.k42:
         final discountInfo = getNextEligibleComboDiscount(
           totalQty: totalQty,
           totalAmount: totalAmount,
@@ -282,6 +310,7 @@ class ComboDeal with _$ComboDeal {
     switch (scheme) {
       case ComboDealScheme.k1:
       case ComboDealScheme.k22:
+      case ComboDealScheme.k42:
       case ComboDealScheme.k4:
         return context.tr(
           'You must select at least {unit} items.',
@@ -328,6 +357,10 @@ class ComboDeal with _$ComboDeal {
       totalQuantityUnit: totalQuantityUnit,
     );
 
+    if (comboRate == 0) {
+      return '';
+    }
+
     if (comboRate == comboRate.toInt()) {
       return comboRate.toInt().toString();
     }
@@ -338,7 +371,8 @@ class ComboDeal with _$ComboDeal {
   String get displayCombosMaximumDiscount {
     switch (scheme) {
       case ComboDealScheme.k1:
-        return k1MaximumDiscount;
+      case ComboDealScheme.k42:
+        return materialsMaximumDiscount;
       case ComboDealScheme.k21:
         return groupDeal.discountInfo.rateDisplay;
       case ComboDealScheme.k22:
@@ -355,7 +389,7 @@ class ComboDeal with _$ComboDeal {
     }
   }
 
-  String get k1MaximumDiscount => allMaterials
+  String get materialsMaximumDiscount => allMaterials
       .fold<double>(
         0,
         (previousValue, element) =>
@@ -413,6 +447,7 @@ class ComboDeal with _$ComboDeal {
             )
             .discountInfo;
       case ComboDealScheme.k4:
+      case ComboDealScheme.k42:
         return flexiQtyTier
             .firstWhere(
               (tier) => totalQty < tier.minQty,
@@ -447,6 +482,7 @@ class ComboDeal with _$ComboDeal {
       case ComboDealScheme.k22:
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
+      case ComboDealScheme.k42:
       case ComboDealScheme.k5:
         return true;
     }
@@ -456,7 +492,7 @@ class ComboDeal with _$ComboDeal {
     if (scheme == ComboDealScheme.k22) {
       return descendingSortedQtyTiers.firstOrNull?.minQty.toString() ?? '';
     }
-    if (scheme == ComboDealScheme.k4) {
+    if (scheme == ComboDealScheme.k4 || scheme == ComboDealScheme.k42) {
       return descendingSortedQtyTiers.last.minQty.toString();
     }
 
@@ -464,7 +500,7 @@ class ComboDeal with _$ComboDeal {
   }
 }
 
-enum ComboDealScheme { k1, k21, k22, k3, k4, k5, kWithSuffix }
+enum ComboDealScheme { k1, k21, k22, k3, k4, k42, k5, kWithSuffix }
 
 extension ComboDealSchemeExt on ComboDealScheme {
   bool get comboDealCanLoadmore => this == ComboDealScheme.k5;
@@ -483,6 +519,7 @@ extension ComboDealSchemeExt on ComboDealScheme {
         return '$totalUnit ${context.tr('items')}';
       case ComboDealScheme.k22:
       case ComboDealScheme.k4:
+      case ComboDealScheme.k42:
         return '${context.tr('Total qty')}: $totalUnit';
       case ComboDealScheme.kWithSuffix:
         return '';
@@ -496,6 +533,7 @@ extension ComboDealSchemeExt on ComboDealScheme {
         return context.tr('Per item');
       case ComboDealScheme.k22:
       case ComboDealScheme.k4:
+      case ComboDealScheme.k42:
         return context.tr('Total Quantity');
       case ComboDealScheme.k3:
         return context.tr('Total SKUs');
@@ -530,6 +568,7 @@ extension ComboDealSchemeExt on ComboDealScheme {
           'Purchase different products with min. of its quantity. Buy more save more.',
         );
       case ComboDealScheme.k4:
+      case ComboDealScheme.k42:
         return context.tr(
           'Purchase min. {minQty} items from any of these products. Buy more save more.',
           namedArgs: {
@@ -566,6 +605,9 @@ extension ComboDealSchemeExt on ComboDealScheme {
       case ComboDealScheme.k4:
         title = 'Combo K4';
         break;
+      case ComboDealScheme.k42:
+        title = 'Combo K4.2';
+        break;
       case ComboDealScheme.k5:
         title = 'Combo K5';
         break;
@@ -588,6 +630,7 @@ extension ComboDealSchemeExt on ComboDealScheme {
         return 'K3';
 
       case ComboDealScheme.k4:
+      case ComboDealScheme.k42:
         return 'K4';
 
       case ComboDealScheme.k5:
@@ -597,12 +640,17 @@ extension ComboDealSchemeExt on ComboDealScheme {
     }
   }
 
-  bool get displayDiscountedPrice => this == ComboDealScheme.k1;
+  bool get displayDiscountedPrice =>
+      this == ComboDealScheme.k1 || this == ComboDealScheme.k42;
+
+  bool get displayNextTierDiscount => this == ComboDealScheme.k42;
 
   bool get displayDiscountedSubTotal => this == ComboDealScheme.k21;
 
   bool get displayOriginalPrice =>
-      this != ComboDealScheme.k1 && this != ComboDealScheme.k21;
+      this != ComboDealScheme.k1 &&
+      this != ComboDealScheme.k21 &&
+      this != ComboDealScheme.k42;
 
   bool isComboDealEligible(List<PriceAggregate> materials) {
     final comboDeal = materials.firstComboDeal;
@@ -662,6 +710,7 @@ extension ComboDealSchemeExt on ComboDealScheme {
         return getEligibleComboDealSKUTier(materials) !=
             ComboDealSKUTier.empty();
       case ComboDealScheme.k4:
+      case ComboDealScheme.k42:
       case ComboDealScheme.kWithSuffix:
         return getEligibleComboDealQtyTier(materials) !=
             ComboDealQtyTier.empty();

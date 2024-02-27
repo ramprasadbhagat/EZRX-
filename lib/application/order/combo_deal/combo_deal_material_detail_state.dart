@@ -122,6 +122,7 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
         return allSelectedItems.length;
       case ComboDealScheme.k22:
       case ComboDealScheme.k4:
+      case ComboDealScheme.k42:
         return totalSelectedQuantity;
     }
   }
