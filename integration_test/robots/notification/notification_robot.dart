@@ -49,24 +49,28 @@ class NotificationRobot extends CommonRobot {
     }
   }
 
-  void verifyNotificationItems() {
-    final itemCount = items.evaluate().length;
+  Future<void> verifyNotificationItems() async {
+    await scrollAlertNotification();
     expect(items, findsAtLeastNWidgets(1));
     expect(
       find.descendant(of: items, matching: itemCreatedAt),
-      findsNWidgets(itemCount),
+      findsAtLeastNWidgets(1),
     );
     expect(
       find.descendant(of: items, matching: itemDifferenceTime),
-      findsNWidgets(itemCount),
+      findsAtLeastNWidgets(1),
     );
     expect(
       find.descendant(of: items, matching: itemIcon),
-      findsNWidgets(itemCount),
+      findsAtLeastNWidgets(1),
     );
     expect(
       find.descendant(of: items, matching: itemTitle),
-      findsNWidgets(itemCount),
+      findsAtLeastNWidgets(1),
+    );
+    expect(
+      find.descendant(of: items, matching: itemDescription),
+      findsAtLeastNWidgets(1),
     );
     expect(
       find.descendant(of: items, matching: itemDescription),

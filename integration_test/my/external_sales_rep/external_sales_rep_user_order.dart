@@ -355,7 +355,7 @@ void main() {
 
         return;
       }
-      notificationRobot.verifyNotificationItems();
+      await notificationRobot.verifyNotificationItems();
       final itemDescription =
           notificationRobot.getNotificationDescription(notificationIndex);
       await notificationRobot.tapNotificationItem(notificationIndex);
@@ -382,11 +382,11 @@ void main() {
 
         return;
       }
-      notificationRobot.verifyNotificationItems();
+      await notificationRobot.verifyNotificationItems();
       final itemDescription =
           notificationRobot.getNotificationDescription(notificationIndex);
       await notificationRobot.pullToRefresh();
-      notificationRobot.verifyNotificationItems();
+      await notificationRobot.verifyNotificationItems();
       notificationRobot.verifyNotificationWithDescription(
         notificationIndex,
         itemDescription,

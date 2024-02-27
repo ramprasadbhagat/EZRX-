@@ -118,6 +118,9 @@ class _SalesOrgItem extends StatelessWidget {
             color: ZPColors.lightGray2,
           ),
         ListTile(
+          key: WidgetKeys.salesOrgSearchOption(
+            salesOrganisation.salesOrg.getOrDefaultValue(''),
+          ),
           onTap: () {
             trackMixpanelEvent(
               MixpanelEvents.salesOrgSave,
@@ -131,7 +134,7 @@ class _SalesOrgItem extends StatelessWidget {
                     salesOrganisation: salesOrganisation,
                   ),
                 );
-                 context.read<EligibilityBloc>().add(
+            context.read<EligibilityBloc>().add(
                   EligibilityEvent.selectedCustomerCode(
                     customerCodeInfo: CustomerCodeInfo.empty(),
                     shipToInfo: ShipToInfo.empty(),

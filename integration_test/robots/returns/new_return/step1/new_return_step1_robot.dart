@@ -207,8 +207,8 @@ class NewReturnStep1Robot {
     expect(itemTitleAfterReset, contains(searchKey));
   }
 
-  Future<void> tapFirstItem() async {
-    await tester.tap(item.at(1));
+  Future<void> tapItemAt({required int index}) async {
+    await tester.tap(item.at(index));
     await tester.pumpAndSettle();
   }
 

@@ -17,12 +17,15 @@ parameters:
       - integration_test__my__client_user__client_user_payment__my
       - integration_test__my__external_sales_rep__external_sales_rep_user_order__my
       - integration_test__my__external_sales_rep__external_sales_rep_user_return__my
+      - integration_test__ph__external_sales_rep__external_sales_rep_user_order__ph
+      - integration_test__ph__external_sales_rep__external_sales_rep_user_return__ph
 
   - name: preset_config_files
     type: object 
     displayName: Preset Sales Org Configs File ( use "__" instead of "/", no need to define file extension(default is sh) )
     default:
       - integration_test__my__reset_sales_org_config
+      - integration_test__ph__reset_sales_org_config
 
   - name: build_mode 
     displayName: Build Mode

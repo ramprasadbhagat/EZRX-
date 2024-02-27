@@ -282,7 +282,7 @@ void main() {
       await loginRobot.findPasswordField();
       await loginRobot.findRememberMeCheckbox();
       await loginRobot.findForgotPasswordLink();
-      loginRobot.verifySelectedMarket(marketMalaysia);
+      await loginRobot.verifySelectedMarket(marketMalaysia);
       loginRobot.findSignUpLink();
       loginRobot.findLoginWithSSOButton();
     });
@@ -474,7 +474,7 @@ void main() {
       await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
       await loginRobot.selectMarket(marketMalaysia);
-      loginRobot.verifySelectedMarket(marketMalaysia);
+      await loginRobot.verifySelectedMarket(marketMalaysia);
 
       // check remember me
       await loginRobot.findRememberMeCheckbox();
@@ -511,7 +511,7 @@ void main() {
       await loginRobot.findRememberMeCheckbox();
       await loginRobot.tapToRememberMe();
 
-      loginRobot.verifySelectedMarket(marketMalaysia);
+      await loginRobot.verifySelectedMarket(marketMalaysia);
       //login with
       await loginRobot.login(username, password);
 
@@ -558,7 +558,7 @@ void main() {
 
         return;
       }
-      notificationRobot.verifyNotificationItems();
+      await notificationRobot.verifyNotificationItems();
       final itemDescription =
           notificationRobot.getNotificationDescription(notificationIndex);
       await notificationRobot.tapNotificationItem(notificationIndex);
@@ -585,11 +585,11 @@ void main() {
 
         return;
       }
-      notificationRobot.verifyNotificationItems();
+      await notificationRobot.verifyNotificationItems();
       final itemDescription =
           notificationRobot.getNotificationDescription(notificationIndex);
       await notificationRobot.pullToRefresh();
-      notificationRobot.verifyNotificationItems();
+      await notificationRobot.verifyNotificationItems();
       notificationRobot.verifyNotificationWithDescription(
         notificationIndex,
         itemDescription,

@@ -224,6 +224,12 @@ class WidgetKeys {
   static const Key shipToCodeSelect = Key('shipToCodeSelect');
   static Key shipToAddressOption(String shipToCustomerCode) =>
       Key('shipToOption$shipToCustomerCode');
+  //============================================================
+  //  SalesOrgSearch page Keys
+  //============================================================
+  static const Key changeSalesOrgButton = Key('changeSalesOrgButton');
+  static Key salesOrgSearchOption(String salesOrg) =>
+      Key('salesOrgOption$salesOrg');
 
   //============================================================
   //  CovidMaterialListSearch Page Keys

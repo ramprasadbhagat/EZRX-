@@ -79,6 +79,13 @@ class CheckoutRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> enterContactPerson(String text) async {
+    await tester.tap(contactPersonField);
+    await tester.enterText(contactPersonField, text);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+
   void verifyEmptyPoReferenceMessage({required bool isVisible}) {
     expect(
       find.descendant(
@@ -89,7 +96,7 @@ class CheckoutRobot {
     );
   }
 
-  Future<void> enterPoReferenceNote(String text) async {
+  Future<void> enterReferenceNote(String text) async {
     await tester.tap(referenceNoteField);
     await tester.enterText(referenceNoteField, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -104,13 +111,6 @@ class CheckoutRobot {
       ),
       isVisible ? findsOneWidget : findsNothing,
     );
-  }
-
-  Future<void> enterContactPerson(String text) async {
-    await tester.tap(contactPersonField);
-    await tester.enterText(contactPersonField, text);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
   }
 
   void verifyEmptyContactPersonErrorMessage({required bool isVisible}) {

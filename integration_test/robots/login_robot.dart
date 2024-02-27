@@ -140,7 +140,8 @@ class LoginRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifySelectedMarket(String market) {
+  Future<void> verifySelectedMarket(String market) async {
+    await scrollEnsureFinderVisible(marketSelector);
     expect(find.text(market).last, findsOneWidget);
   }
 

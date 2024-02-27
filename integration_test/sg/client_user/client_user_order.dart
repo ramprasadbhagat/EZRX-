@@ -279,7 +279,7 @@ void main() {
       await loginRobot.findPasswordField();
       await loginRobot.findRememberMeCheckbox();
       await loginRobot.findForgotPasswordLink();
-      loginRobot.verifySelectedMarket(market);
+      await loginRobot.verifySelectedMarket(market);
       loginRobot.findSignUpLink();
       loginRobot.findLoginWithSSOButton();
     });
@@ -474,7 +474,7 @@ void main() {
       await loginRobot.findRememberMeCheckbox();
       await loginRobot.tapToRememberMe();
 
-      loginRobot.verifySelectedMarket(market);
+      await loginRobot.verifySelectedMarket(market);
       //login with
       await loginRobot.login(username, password);
 
@@ -521,7 +521,7 @@ void main() {
         return;
       }
       await notificationRobot.scrollAlertNotification();
-      notificationRobot.verifyNotificationItems();
+      await notificationRobot.verifyNotificationItems();
       final itemTitle = notificationRobot.getFirstBasicNotificationTitle();
       await notificationRobot.tapFirstBasicNotificationItem(itemTitle);
       if (itemTitle.startsWith(orderNotificationKeyword.tr())) {
@@ -547,9 +547,9 @@ void main() {
 
         return;
       }
-      notificationRobot.verifyNotificationItems();
+      await notificationRobot.verifyNotificationItems();
       await notificationRobot.pullToRefresh();
-      notificationRobot.verifyNotificationItems();
+      await notificationRobot.verifyNotificationItems();
     });
   });
 

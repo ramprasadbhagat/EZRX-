@@ -10,6 +10,7 @@ class CustomerSearchRobot {
   final confirmChangeAddress = find.byKey(WidgetKeys.confirmButton);
   final cancelChangeAddress = find.byKey(WidgetKeys.cancelButton);
   final customerCodeSearchField = find.byKey(WidgetKeys.searchBar);
+  final changeSalesOrgButton = find.byKey(WidgetKeys.changeSalesOrgButton);
 
   void verifyPage() {
     final customerSearchPage = find.byKey(WidgetKeys.customerSearchPage);
@@ -17,6 +18,32 @@ class CustomerSearchRobot {
   }
 
   Future<void> selectCustomerSearch(String shipToCode) async {
+    findCustomerCodeSearchField();
+    await search(shipToCode);
+    findCustomerCode(shipToCode);
+    await tapOnCustomerCode(shipToCode);
+  }
+
+  void findChangeSalesOrgButton() {
+    expect(changeSalesOrgButton, findsOneWidget);
+  }
+
+  Future<void> tapChangeSalesOrgButton() async {
+    await tester.tap(changeSalesOrgButton);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> changeSalesOrgAndSelectCustomerSearch(
+    String shipToCode,
+    String salesOrg,
+  ) async {
+    findChangeSalesOrgButton();
+    await tapChangeSalesOrgButton();
+    findCustomerCodeSearchField();
+    await search(salesOrg);
+    findSalesOrgItem(salesOrg);
+    await tapOnSalesOrgItem(salesOrg);
+    await tester.pumpAndSettle(const Duration(seconds: 2));
     findCustomerCodeSearchField();
     await search(shipToCode);
     findCustomerCode(shipToCode);
@@ -41,9 +68,22 @@ class CustomerSearchRobot {
     );
   }
 
+  void findSalesOrgItem(String salesOrg) {
+    expect(
+      find.byKey(WidgetKeys.salesOrgSearchOption(salesOrg)).first,
+      findsOneWidget,
+    );
+  }
+
   Future<void> tapOnCustomerCode(String shipToCode) async {
     await tester
         .tap(find.byKey(WidgetKeys.shipToAddressOption(shipToCode)).first);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapOnSalesOrgItem(String salesOrg) async {
+    await tester
+        .tap(find.byKey(WidgetKeys.salesOrgSearchOption(salesOrg)).first);
     await tester.pumpAndSettle();
   }
 

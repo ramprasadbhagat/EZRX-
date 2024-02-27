@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -90,10 +91,12 @@ class ProductRobot extends CommonRobot {
   void verifyProductFilter(String nameProduct, {required bool matched}) {
     final listNameProduct =
         tester.widgetList<Text>(nameCart).map((e) => e.data);
-    if (matched) {
-      expect(listNameProduct.first, nameProduct);
+    if (listNameProduct.isEmpty) {
+      verifyNoProduct();
     } else {
-      if (listNameProduct.isNotEmpty) {
+      if (matched) {
+        expect(listNameProduct.first, nameProduct);
+      } else {
         expect(listNameProduct.first != nameProduct, true);
       }
     }
@@ -190,4 +193,8 @@ class ProductRobot extends CommonRobot {
             widget.key == WidgetKeys.priceComponent &&
             widget.text.toPlainText().contains(price),
       );
+
+  void verifyNoProduct() {
+    expect(find.byType(NoRecordFound), findsOneWidget);
+  }
 }

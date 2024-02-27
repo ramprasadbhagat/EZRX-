@@ -126,6 +126,7 @@ class CustomerSearchPage extends StatelessWidget {
                     Text(
                       '${state.salesOrg.buName} ${state.salesOrg.getOrDefaultValue('')}',
                       style: Theme.of(context).textTheme.bodySmall,
+                      key: WidgetKeys.changeSalesOrgButton,
                     ).tr(),
                   ],
                 ),
@@ -186,7 +187,7 @@ class _BodyContent extends StatelessWidget {
             )
           : ScrollList<CustomerCodeInfo>(
               controller: ScrollController(),
-              key: WidgetKeys.customerCodeSelect,
+              key: WidgetKeys.customerCodeList,
               onRefresh: () {
                 context.read<CustomerCodeBloc>().add(
                       const CustomerCodeEvent.fetch(),

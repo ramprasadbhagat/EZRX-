@@ -186,7 +186,7 @@ void main() {
       toDate: toDateToNextForStep2,
     );
     await newReturnRobot.tapApply();
-    await newReturnRobot.tapFirstItem();
+    await newReturnRobot.tapItemAt(index: 1);
     await newReturnRobot.tapNextButton();
   }
 
@@ -994,7 +994,7 @@ void main() {
         toDate: toDateToNext,
       );
       await newReturnRobot.tapApply();
-      await newReturnRobot.tapFirstItem();
+      await newReturnRobot.tapItemAt(index: 1);
       await newReturnRobot.tapNextButton();
       newReturnRobot.verifyStep2Visible();
     });
@@ -1111,7 +1111,7 @@ void main() {
       );
       await newReturnRobot.tapApply();
       await tester.pump(const Duration(seconds: 1));
-      await newReturnRobot.tapFirstItem();
+      await newReturnRobot.tapItemAt(index: 1);
       await newReturnRobot.tapNextButton();
       newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
         materialId,
@@ -1127,7 +1127,7 @@ void main() {
       await newReturnRobot.tapFilterIcon();
       await newReturnRobot.tapReset();
       await commonRobot.searchWithKeyboardAction(validSearchKeyForStep1);
-      await newReturnRobot.tapFirstItem();
+      await newReturnRobot.tapItemAt(index: 1);
       await newReturnRobot.tapNextButton();
       newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
         materialNumber,
