@@ -97,36 +97,36 @@ stages:
               ./$preset_file.sh
           displayName: Preset Sales Org Configs ${{ presetConfigFile }}
 
-        - task: DownloadSecureFile@1
-          name: localprop
-          displayName: Download local properties file
-          inputs:
-            secureFile: 'local.properties'
+      - task: DownloadSecureFile@1
+        name: localprop
+        displayName: Download local properties file
+        inputs:
+          secureFile: 'local.properties'
 
-        - task: DownloadSecureFile@1
-          name: keyprop
-          displayName: Download key properties file
-          inputs:
-            secureFile: 'key.properties'
+      - task: DownloadSecureFile@1
+        name: keyprop
+        displayName: Download key properties file
+        inputs:
+          secureFile: 'key.properties'
 
-        - task: DownloadSecureFile@1
-          name: key
-          displayName: Download signing key
-          inputs:
-            secureFile: 'ezrxplusuat.jks'
+      - task: DownloadSecureFile@1
+        name: key
+        displayName: Download signing key
+        inputs:
+          secureFile: 'ezrxplusuat.jks'
 
-        - task: Bash@3
-          displayName: Copy config files
-          inputs:
-            targetType: 'inline'
-            script: |
-              cp $(localprop.secureFilePath) $(Build.SourcesDirectory)/android/local.properties
-              cp $(keyprop.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
-              cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/ezrxkey.jks
+      - task: Bash@3
+        displayName: Copy config files
+        inputs:
+          targetType: 'inline'
+          script: |
+            cp $(localprop.secureFilePath) $(Build.SourcesDirectory)/android/local.properties
+            cp $(keyprop.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
+            cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/ezrxkey.jks
           
-              echo "local.properties copied to $(Build.SourcesDirectory)/android/local.properties"
-              echo "key.properties copied to $(Build.SourcesDirectory)/android/key.properties"
-              echo "key.jks copied to $(Build.SourcesDirectory)/android/app/ezrxkey.jks"
+            echo "local.properties copied to $(Build.SourcesDirectory)/android/local.properties"
+            echo "key.properties copied to $(Build.SourcesDirectory)/android/key.properties"
+            echo "key.jks copied to $(Build.SourcesDirectory)/android/app/ezrxkey.jks"  
 
       - task: Bash@3
         inputs: 
