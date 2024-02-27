@@ -2,58 +2,392 @@ trigger:
   tags:
     include:
     - test.uat.*
+  branches: 
+    include: 
+    - main
+    - v3
+
+parameters:
+  - name: testFiles
+    type: object 
+    displayName: Path File ( use "__" instead of "/", no need to define file extension(default is dart) and define the region at the end of file __[region] )
+    default:
+      - integration_test__my__client_user__client_user_return__my
+      - integration_test__my__client_user__client_user_order__my
+      - integration_test__my__client_user__client_user_payment__my
+      - integration_test__my__external_sales_rep__external_sales_rep_user_order__my
+      - integration_test__my__external_sales_rep__external_sales_rep_user_return__my
+
+  - name: preset_config_files
+    type: object 
+    displayName: Preset Sales Org Configs File ( use "__" instead of "/", no need to define file extension(default is sh) )
+    default:
+      - integration_test__my__reset_sales_org_config
+
+  - name: build_mode 
+    displayName: Build Mode
+    type: string
+    default: debug 
+    values: 
+      - debug
+       
+  - name: device_name 
+    type: string 
+    displayName: Test Device
+    default: 'Samsung Galaxy S21 Plus-11.0'
+    values:
+      - 'Google Pixel 6-12.0'
+      - 'Samsung Galaxy S23-13.0'
+      - 'OnePlus 9-11.0'
+      - 'Samsung Galaxy S21 Plus-11.0'
+
+  - name: build_pool 
+    displayName: Build Pool
+    type: string
+    default: devops-flutter33 
+    values: 
+      - devops-flutter33 
+      
+pool:   
+  name: devops-flutter33
 
 resources:
 - repo: self
 
-pool:
-  vmImage: 'macos-12'
-
 variables:
   - group: "eZRx Cred"
+  - group: "eZRx plus CICD"
 
 stages:
+- stage: PublishNotificationTemplate
+  displayName: Publish Notification Template
+  jobs: 
+  - job: 
+    displayName: Upload Push Notification Template
+    steps:
+    - task: AzureCLI@2
+      displayName: Update PushNotification Template
+      inputs:
+        azureSubscription: 'devops-dd-sc'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage blob upload --connection-string $AZURE_STORAGE_CONNECTION_STRING --container-name devops-operations --overwrite --file $(System.DefaultWorkingDirectory)/push_notification_to_teams.sh --name dndstsharednpd/ezrxplus/mobile
+      env: 
+        AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
+
+- stage: BuildApplication 
+  dependsOn: [PubLishNotificationTemplate]
+  displayName: Build Application 
+  jobs: 
+  - job: BuildApplication
+    displayName: Build Application 
+    steps:  
+      - ${{ each presetConfigFile in parameters.preset_config_files }}: 
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              preset_file_param=${{ presetConfigFile }}
+              preset_file=$(echo $preset_file_param | sed 's|__|/|g')
+              chmod 777 $preset_file.sh
+              ./$preset_file.sh
+          displayName: Preset Sales Org Configs ${{ presetConfigFile }}
+
+        - task: DownloadSecureFile@1
+          name: localprop
+          displayName: Download local properties file
+          inputs:
+            secureFile: 'local.properties'
+
+        - task: DownloadSecureFile@1
+          name: keyprop
+          displayName: Download key properties file
+          inputs:
+            secureFile: 'key.properties'
+
+        - task: DownloadSecureFile@1
+          name: key
+          displayName: Download signing key
+          inputs:
+            secureFile: 'ezrxplusuat.jks'
+
+        - task: Bash@3
+          displayName: Copy config files
+          inputs:
+            targetType: 'inline'
+            script: |
+              cp $(localprop.secureFilePath) $(Build.SourcesDirectory)/android/local.properties
+              cp $(keyprop.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
+              cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/ezrxkey.jks
+          
+              echo "local.properties copied to $(Build.SourcesDirectory)/android/local.properties"
+              echo "key.properties copied to $(Build.SourcesDirectory)/android/key.properties"
+              echo "key.jks copied to $(Build.SourcesDirectory)/android/app/ezrxkey.jks"
+
+      - task: Bash@3
+        inputs: 
+          targetType: 'inline' 
+          script: | 
+            pushd android	
+            source /etc/profile.d/gradle.sh 
+            flutter pub get 
+            gradle wrapper
+            ./gradlew app:assembleUatDebugAndroidTest
+            popd
+        displayName: Build Application      
+
+      - task: PublishBuildArtifacts@1
+        displayName: Publish build android test suits artifacts
+        inputs: 
+          pathToPublish: '$(System.DefaultWorkingDirectory)/build/app/outputs/apk/androidTest/uat/debug/app-uat-debug-androidTest.apk'
+          artifactName: androidTestFile
+
 - stage: AndroidUATRegressionJob
-  dependsOn: []
-  displayName: AndroidUATRegressionJob
+  dependsOn: [BuildApplication]
+  displayName: Android UAT Regression Job
   jobs:
+  - ${{ each testFile in parameters.testFiles }}: 
+      - job: RunIntegrationTest${{ testFile }}
+        displayName: ${{ testFile }}
+        pool:   
+          name: ${{ parameters.build_pool }}
+        steps:
 
-  - job: INTEGRATION_TESTs
-    pool: 
-      name: devops-flutter33
-    displayName: INTEGRATION_TESTs
-    steps: 
+        - task: DownloadBuildArtifacts@1
+          inputs:
+            buildType: 'current'
+            artifactName: androidTestFile
+            downloadPath: '$(System.ArtifactsDirectory)'     
 
-    - task: Bash@3
-      displayName: Preset Sales Org Configs
-      inputs:
-        targetType: 'inline'
-        script: |
-          chmod 777 ./integration_test/kh/reset_sales_org_config.sh
-          ./integration_test/kh/reset_sales_org_config.sh
-          chmod 777 ./integration_test/mm/reset_sales_org_config.sh
-          ./integration_test/mm/reset_sales_org_config.sh
-          chmod 777 ./integration_test/my/reset_sales_org_config.sh
-          ./integration_test/my/reset_sales_org_config.sh
-          chmod 777 ./integration_test/ph/reset_sales_org_config.sh
-          ./integration_test/ph/reset_sales_org_config.sh
-          chmod 777 ./integration_test/sg/reset_sales_org_config.sh
-          ./integration_test/sg/reset_sales_org_config.sh
-          chmod 777 ./integration_test/th/reset_sales_org_config.sh
-          ./integration_test/th/reset_sales_org_config.sh
-          chmod 777 ./integration_test/tw/reset_sales_org_config.sh
-          ./integration_test/tw/reset_sales_org_config.sh
-          chmod 777 ./integration_test/vn/reset_sales_org_config.sh
-          ./integration_test/vn/reset_sales_org_config.sh
+        - task: DownloadSecureFile@1
+          name: localprop
+          displayName: Download local properties file
+          inputs:
+            secureFile: 'local.properties'
 
-    - task: Bash@3
-      displayName: Run Integration tests
-      inputs:
-        targetType: 'inline'
-        script: |
-          export BROWSERSTACK_USERNAME='$(BROWSERSTACK_USERNAME)'
-          export BROWSERSTACK_ACCESSKEY='$(BROWSERSTACK_ACCESSKEY)'
-          export ENABLE_GEOLOCATION='$(ENABLE_GEOLOCATION)'
-          chmod 777 run_intg_android_browserstack.sh
-          testIT=("./integration_test/th/order/client_user.dart":"TH" "./integration_test/ph/order/client_user.dart":"PH" "./integration_test/mm/order/client_user.dart":"SG" "./integration_test/kh/order/client_user.dart":"KH" "./integration_test/vn/order/client_user.dart":"VN" "./integration_test/sg/order/client_user.dart":"SG" "./integration_test/my/order/client_user.dart":"MY" "./integration_test/tw/order/client_user.dart":"TW" "./integration_test/th/order/external_sales_rep.dart":"TH" "./integration_test/ph/order/external_sales_rep.dart":"PH" "./integration_test/mm/order/external_sales_rep.dart":"SG" "./integration_test/kh/order/external_sales_rep.dart":"KH" "./integration_test/vn/order/external_sales_rep.dart":"VN" "./integration_test/sg/order/external_sales_rep.dart":"SG" "./integration_test/my/order/external_sales_rep.dart":"MY" "./integration_test/tw/order/external_sales_rep.dart":"TW")
-          ./run_intg_android_browserstack.sh ${testIT[@]}
+        - task: DownloadSecureFile@1
+          name: keyprop
+          displayName: Download key properties file
+          inputs:
+            secureFile: 'key.properties'
+
+        - task: DownloadSecureFile@1
+          name: key
+          displayName: Download signing key
+          inputs:
+            secureFile: 'ezrxplusuat.jks'
+
+        - task: Bash@3
+          displayName: Copy config files
+          inputs:
+            targetType: 'inline'
+            script: |
+              cp $(localprop.secureFilePath) $(Build.SourcesDirectory)/android/local.properties
+              cp $(keyprop.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
+              cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/ezrxkey.jks
+          
+              echo "local.properties copied to $(Build.SourcesDirectory)/android/local.properties"
+              echo "key.properties copied to $(Build.SourcesDirectory)/android/key.properties"
+              echo "key.jks copied to $(Build.SourcesDirectory)/android/app/ezrxkey.jks"
+          
+        - task: Bash@3
+          continueOnError: true 
+          inputs:
+            targetType: 'inline'
+            script: |
+              test_file_param=${{ testFile }}
+              test_file=$(echo $test_file_param | rev | cut -d "_" -f 3- | rev | sed 's|__|/|g')
+              pushd android	 
+              source /etc/profile.d/gradle.sh
+              flutter pub get 
+              gradle wrapper
+              ./gradlew app:assembleUatDebug -Ptarget="$test_file.dart"
+              popd
+          displayName: Build Test Suite    
+
+        - task: Bash@3
+          continueOnError: true 
+          inputs:
+            targetType: 'inline'
+            script: |
+              BROWSERSTACK_CREDENTIALS=$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESSKEY
+
+              test_file_param=${{ testFile }}
+              country=$(echo $test_file_param | rev | cut -d "_" -f -1 | rev)
+              test_file=$(echo $test_file_param | rev | cut -d "_" -f 3- | rev | sed 's|__|/|g')
+              testSuite=("$test_file.dart" "${country^^}")
+              
+              echo "Testcase:" "${testSuite[0]}"
+              echo "GeoLocation:" "${testSuite[1]}"
+              echo "Using device:" "${{ parameters.device_name }}"
+            
+
+              echo -e "\n"
+              echo 'Uploading the App to Browserstack from $(System.DefaultWorkingDirectory)/build/app/outputs/apk/uat/debug/app-uat-debug.apk :'
+
+              cmd="curl -u $BROWSERSTACK_CREDENTIALS -X POST "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/app" -F "file=@$(System.DefaultWorkingDirectory)/build/app/outputs/apk/uat/debug/app-uat-debug.apk" -F "custom_id=${{ testFile }}""
+              app_url=`$cmd | sed -En 's/.*"app_url":"([^"]*).*/\1/p'`
+              echo -e "\n"
+              echo "app_url : " $app_url
+
+              echo -e "\n"
+              echo 'Uploading the test suite to Browserstack from $(System.ArtifactsDirectory)/androidTestFile/app-uat-debug-androidTest.apk :'
+
+              cmd="curl -u $BROWSERSTACK_CREDENTIALS -X POST "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/test-suite" -F "file=@$(System.ArtifactsDirectory)/androidTestFile/app-uat-debug-androidTest.apk" -F "custom_id=${{ testFile }}""
+              test_suite_url=`$cmd | sed -En 's/.*"test_suite_url":"([^"]*).*/\1/p'` 
+              echo -e "\n"
+              echo "test_suite_url : " $test_suite_url
+
+              echo -e "\n"
+              echo "Staring the Test execution on Browserstack :"
+
+              val=""
+              if [ $IS_GEOLOCATION_ENABLED == 'Yes' ]
+              then
+                val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
+                --header 'Content-Type: application/json' \
+                -u $BROWSERSTACK_CREDENTIALS \
+                -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "geoLocation":"'"${testSuite[1]}}"'" , "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "deviceLogs":"true", "networkLogs":"true", "devices": ["'"${{ parameters.device_name }}"'"]}' )
+              else
+                val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
+                --header 'Content-Type: application/json' \
+                -u $BROWSERSTACK_CREDENTIALS \
+                -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "deviceLogs":"true", "networkLogs":"true",  "devices": ["'"${{ parameters.device_name }}"'"]}' )
+              fi
+
+              result_build_id=$(echo $val | sed 's/{.*"build_id":"*\([0-9a-zA-Z]*\)"*,*.*}/\1/')
+              echo "Build_Id : " $result_build_id
+              
+              buildStatus="running"
+              buildMonitorStart=$SECONDS
+              maxTime=300 # Max test time should not be above 5 minutes. (Yet apply, if want to do this please use ENV Param instead)
+
+              while [ "$buildStatus" == "running" ];
+              do
+                cmd="curl -X GET "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/builds/${result_build_id}" -u $BROWSERSTACK_CREDENTIALS "
+                buildStatus=`$cmd | sed -En 's/.*"status":"([^"]*).*/\1/p'`
+                sessionId=`$cmd | sed -En 's/.*"id":"([^"]*).*/\1/p'`
+                echo "The Current status of the run is : " $buildStatus
+                echo "The Session Id of the run is : " $sessionId
+                monitorTime=$(( SECONDS - buildMonitorStart ))
+                echo "Monitor Time : " $monitorTime
+                echo "Max Time : " $maxTime
+                if [ $monitorTime -gt $maxTime  ]
+                then	
+                  buildStatus="error"
+                fi
+              done
+              buildDetails=https://app-automate.browserstack.com/dashboard/v2/builds/"${result_build_id}"
+
+              duration=$(( SECONDS - start ))
+
+              echo -e "\n"
+              echo "Summary of the Test Run is as follows: "
+
+              echo "Test case : " ${testFile}
+
+              echo "Build Status : " ${buildStatus}
+              build_status=${buildStatus}
+
+              echo "Build Details Link : " ${buildDetails}
+              build_detail_link=${buildDetails}
+
+              echo -e "\n"
+              echo "The total time taken for the test execution in seconds is :" $duration 
+
+              echo "##vso[task.setvariable variable=build_status]$build_status"
+              echo "##vso[task.setvariable variable=build_detail_link]$build_detail_link"
+              echo "##vso[task.setvariable variable=test_file]$test_file"
+
+          displayName: Upload App and Test to BrowserStack and wait for result
+          env: 
+            BROWSERSTACK_USERNAME: '$(BROWSERSTACK_USERNAME)'
+            BROWSERSTACK_ACCESSKEY: '$(BROWSERSTACK_ACCESSKEY)'
+            ENABLE_GEOLOCATION: '$(ENABLE_GEOLOCATION)'
+        
+        - task: AzureCLI@2
+          displayName: Download PushNotification Template
+          inputs:
+            azureSubscription: 'devops-dd-sc'
+            scriptType: 'bash'
+            scriptLocation: 'inlineScript'
+            inlineScript: |
+              sleep $(echo $(( (RANDOM % 7) * 5 )))
+              az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/push_notification_to_teams.sh --name dndstsharednpd/ezrxplus/mobile 
+          env: 
+            AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
+
+        - task: Bash@3
+          displayName: Replace Notification Content
+          inputs:
+            targetType: 'inline'
+            script: |
+              echo $(build_status)
+              echo $(build_detail_link)
+              echo $(build_video_link)
+              echo $(test_file)
+
+              cat <<-EOF >> push_notification_to_teams.sh 
+                {
+                  "@type": "OpenUri",
+                  "name": "Build Detail Link With Test Case $(test_file): $(build_status) ",
+                  "targets": [
+                    { "os": "default", "uri": "$(build_detail_link)" }
+                  ]
+                },              
+                {
+                  "@type": "OpenUri",
+                  "name": "Video Link For Test Case $(test_file)",
+                  "targets": [
+                    { "os": "default", "uri": "$(build_video_link)"}
+                  ]
+                },  
+              EOF     
+            workingDirectory: '$(System.DefaultWorkingDirectory)'
+            
+        - task: AzureCLI@2
+          displayName: Update PushNotification Template
+          inputs:
+            azureSubscription: 'devops-dd-sc'
+            scriptType: 'bash'
+            scriptLocation: 'inlineScript'
+            inlineScript: |                          
+              cat push_notification_to_teams.sh 
+              az storage blob upload --container-name devops-operations --overwrite --file $(System.DefaultWorkingDirectory)/push_notification_to_teams.sh --name dndstsharednpd/ezrxplus/mobile
+          env: 
+            AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
+
+- stage: MSTeamsNotificationStage
+  dependsOn: [AndroidUATRegressionJob]
+  displayName: MSTeams Notification Stage
+  jobs:
+  - job: MSTeamsNotificationUatJob
+    displayName: MSTeamsNotificationUatJob
+    steps:         
+      - task: AzureCLI@2
+        displayName: Download PushNotification Template
+        inputs:
+          azureSubscription: 'devops-dd-sc'
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/push_notification_to_teams.sh --name dndstsharednpd/ezrxplus/mobile 
+        env: 
+          AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
+
+      - task: Bash@3
+        displayName: Complete Push Notification File
+        inputs:
+          targetType: 'inline'
+          script: |
+            sed -i '$ d' push_notification_to_teams.sh
+            cat <<EOF >> push_notification_to_teams.sh        
+                }]
+              }]
+            }'
+            EOF
+      - task: Bash@3
+        displayName: Push Notification To Teams
+        inputs:
+          filePath: '$(System.DefaultWorkingDirectory)/push_notification_to_teams.sh'
