@@ -2048,7 +2048,7 @@ void main() {
 
   testWidgets('Find Material total value', (tester) async {
     const unitPrice = 17.2;
-    const quantity = 5; 
+    const quantity = 5;
     const totalMaterialPrice = unitPrice * quantity;
 
     when(() => eligibilityBlocMock.state).thenReturn(
@@ -2089,6 +2089,41 @@ void main() {
       findRichText: true,
     );
     expect(totalMaterialPriceText, findsOneWidget);
+  });
+
+  testWidgets('Test list price not visible for bonus items', (tester) async {
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeSGSalesOrgConfigs,
+      ),
+    );
+    final materialList = [
+      fakeMaterialItem,
+      fakeMaterialItem.copyWith(type: OrderItemType('Bonus'), unitPrice: 0)
+    ];
+    when(() => orderSummaryBlocMock.state).thenReturn(
+      OrderSummaryState.initial().copyWith(
+        orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+          orderHistoryDetailsOrderItem: materialList,
+        ),
+      ),
+    );
+    await tester.pumpWidget(getWidget());
+    await tester.pumpAndSettle();
+
+    final material = find.byKey(WidgetKeys.orderSuccessItemsSection);
+    final orderItemsScrollList = find.byKey(WidgetKeys.scrollList);
+
+    await tester.dragUntilVisible(
+      material,
+      orderItemsScrollList,
+      const Offset(0.0, -500.0),
+    );
+    await tester.pumpAndSettle();
+
+    final govtListPriceComponent = find.byType(GovtListPriceComponent);
+
+    expect(govtListPriceComponent, findsOneWidget);
   });
 }
 

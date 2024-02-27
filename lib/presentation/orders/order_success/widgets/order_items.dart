@@ -66,32 +66,33 @@ class _MaterialItem extends StatelessWidget {
         showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
       ),
       subtitle: '',
-      priceComponent: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              if (eligibilityState.salesOrgConfigs.enableListPrice &&
-                  orderItem.showMaterialListPrice)
-                ListPriceStrikeThroughComponent(
-                  priceAggregate: orderItem.priceAggregate,
+      priceComponent: !orderItem.isBonus
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    if (eligibilityState.salesOrgConfigs.enableListPrice &&
+                        orderItem.showMaterialListPrice)
+                      ListPriceStrikeThroughComponent(
+                        priceAggregate: orderItem.priceAggregate,
+                      ),
+                    OrderItemPrice(
+                      unitPrice: orderItem.itemUnitPrice(
+                        isIDMarket,
+                      ),
+                      originPrice: orderItem.originPrice.toString(),
+                      showPreviousPrice: orderItem.isCounterOffer,
+                      hidePrice: orderItem.hidePrice,
+                    ),
+                  ],
                 ),
-              if (!orderItem.isBonus)
-                OrderItemPrice(
-                  unitPrice: orderItem.itemUnitPrice(
-                    isIDMarket,
-                  ),
-                  originPrice: orderItem.originPrice.toString(),
-                  showPreviousPrice: orderItem.isCounterOffer,
-                  hidePrice: orderItem.hidePrice,
+                GovtListPriceComponent(
+                  price: orderItem.priceAggregate.display(PriceType.listPrice),
                 ),
-            ],
-          ),
-          GovtListPriceComponent(
-            price: orderItem.priceAggregate.display(PriceType.listPrice),
-          ),
-        ],
-      ),
+              ],
+            )
+          : null,
       title: orderItem.materialDescription,
       quantity: '${orderItem.qty}',
       isQuantityBelowImage: false,
