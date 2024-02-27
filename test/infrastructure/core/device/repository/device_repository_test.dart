@@ -4,6 +4,7 @@ import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -13,6 +14,8 @@ class MockDeviceStorage extends Mock implements DeviceStorage {}
 
 class MockPermissionService extends Mock implements PermissionService {}
 
+class MockMixPanelService extends Mock implements MixpanelService {}
+
 class MockDeviceInfo extends Mock implements DeviceInfo {}
 
 void main() {
@@ -20,6 +23,7 @@ void main() {
   late PermissionService mockPermissionService;
   late DeviceInfo mockDeviceInfo;
   late DeviceRepository repository;
+  late MixpanelService mockMixPanelService;
   final mockException = MockException(message: 'exception');
   late String mockMarket;
 
@@ -28,12 +32,14 @@ void main() {
       mockMarket = AppMarket.defaultMarket().value.getOrElse(() => '');
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
       mockDeviceStorage = MockDeviceStorage();
+      mockMixPanelService = MockMixPanelService();
       mockPermissionService = MockPermissionService();
       mockDeviceInfo = MockDeviceInfo();
       repository = DeviceRepository(
         deviceStorage: mockDeviceStorage,
         permissionService: mockPermissionService,
         deviceInfo: mockDeviceInfo,
+        mixpanelService: mockMixPanelService,
       );
     },
   );

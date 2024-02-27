@@ -484,6 +484,7 @@ void setupLocator() {
       deviceStorage: locator<DeviceStorage>(),
       deviceInfo: locator<DeviceInfo>(),
       permissionService: locator<PermissionService>(),
+      mixpanelService: locator<MixpanelService>(),
     ),
   );
   locator.registerLazySingleton(() => SecureStorage());

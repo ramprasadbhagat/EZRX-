@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -13,11 +14,13 @@ class DeviceRepository implements IDeviceRepository {
   final DeviceStorage deviceStorage;
   final PermissionService permissionService;
   final DeviceInfo deviceInfo;
+  final MixpanelService mixpanelService;
 
   DeviceRepository({
     required this.deviceStorage,
     required this.permissionService,
     required this.deviceInfo,
+    required this.mixpanelService,
   });
 
   @override
@@ -64,6 +67,15 @@ class DeviceRepository implements IDeviceRepository {
     try {
       await deviceStorage.putCurrentMarket(
         currentMarket: currentMarket.value.getOrElse(() => ''),
+      );
+      mixpanelService.registerSuperProps(
+        username: '',
+        salesOrg: '',
+        userRole: '',
+        market: currentMarket.getOrCrash(),
+        customerCode: '',
+        shipToAddress: '',
+        currency: '',
       );
 
       return const Right(unit);
