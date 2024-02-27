@@ -491,7 +491,7 @@ String countryContactUsItemId(String country) {
 
 String countryArticleTagPath(String country) {
   final salesOrgCountryMap = {
-    'MY': '188B233B-B81D-4679-A70B-036F07B2F649',
+    'MY': '390C267C-98A7-4485-9C50-E635987F7DE2',
     'PH': '89286340-245D-4854-A22C-EFE81D0C7E23',
     'SG': 'F3271446-85C2-4AD6-825C-171296C64239',
     'ID': '8D05F353-F579-4754-85F3-396BE1303D65',
@@ -508,7 +508,7 @@ String countryArticleTagPath(String country) {
 
 String countryAnnouncementTagPath(String country) {
   final salesOrgCountryMap = {
-    'MY': '188B233B-B81D-4679-A70B-036F07B2F649',
+    'MY': '75499105-496E-42E7-9BBF-897E7FF20F15',
     'PH': 'ED179A30-BF78-4264-BA4D-6F036D3299D7',
     'SG': 'B47137E7-2D89-4575-A27D-A02F2DA0B438',
     'ID': '9B16AD26-0BBD-415D-A42B-838DFC4CE71B',

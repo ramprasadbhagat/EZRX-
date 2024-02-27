@@ -116,7 +116,7 @@ void main() {
         when(
           () => repository.getAnnouncementArticleTag(
             salesOrg: fakeMYSalesOrg,
-            variablePath: fakeMYSalesOrg.articleTagVariablePath,
+            variablePath: fakeMYSalesOrg.announcementTagVariablePath,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -143,7 +143,7 @@ void main() {
         when(
           () => repository.getAnnouncementArticleTag(
             salesOrg: fakeMYSalesOrg,
-            variablePath: fakeMYSalesOrg.articleTagVariablePath,
+            variablePath: fakeMYSalesOrg.announcementTagVariablePath,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
