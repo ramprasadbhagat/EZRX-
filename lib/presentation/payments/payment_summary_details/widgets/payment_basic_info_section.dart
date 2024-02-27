@@ -15,7 +15,7 @@ class _PaymentBasicInfoSection extends StatelessWidget {
             ? DateFormat(
                 DateTimeFormatString.displayDateFormat,
                 context.locale.languageCode,
-              ).format(state.details.valueDate.dateTime)
+              ).format(state.details.paymentDate.dateTime)
             : 'NA';
         final paCreatedDate = state.details.createdDate.isValid()
             ? DateFormat(

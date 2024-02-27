@@ -725,7 +725,7 @@ void main() {
       when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
         PaymentSummaryDetailsState.initial().copyWith(
           details: mockPaymentDetails.copyWith(
-            valueDate: DateTimeStringValue(''),
+            paymentDate: DateTimeStringValue(''),
           ),
         ),
       );
@@ -745,5 +745,32 @@ void main() {
 
       expect(paCreatedDateFinder, findsOneWidget);
     });
+
+    testWidgets(
+      'Show date text from value date field for ID market on successful items',
+      (tester) async {
+        final paymentDate = DateTimeStringValue('2024-01-11');
+
+        when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+          PaymentSummaryDetailsState.initial().copyWith(
+            salesOrganization: fakeMYSalesOrganisation,
+            details: PaymentSummaryDetails.empty().copyWith(
+              paymentDate: paymentDate,
+              status: FilterStatus('Successful'),
+            ),
+          ),
+        );
+        await tester.pumpWidget(
+          getWUT(
+            child: const PaymentSummaryDetailsPage(),
+          ),
+        );
+        await tester.pumpAndSettle();
+        final paymentDateFinder = find.byKey(
+          WidgetKeys.balanceTextRow('Payment date', paymentDate.dateOrNaString),
+        );
+        expect(paymentDateFinder, findsOneWidget);
+      },
+    );
   });
 }

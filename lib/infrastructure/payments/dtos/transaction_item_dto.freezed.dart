@@ -30,6 +30,8 @@ mixin _$TransactionItemDto {
   double get amountDue => throw _privateConstructorUsedError;
   @JsonKey(name: 'createdOn', defaultValue: '')
   String get createdOn => throw _privateConstructorUsedError;
+  @JsonKey(name: 'paidOn', defaultValue: '')
+  String get paidOn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +50,8 @@ abstract class $TransactionItemDtoCopyWith<$Res> {
       @JsonKey(name: 'reference', defaultValue: '') String reference,
       @JsonKey(name: 'paymentStatus', defaultValue: '') String paymentStatus,
       @JsonKey(name: 'amountDue', defaultValue: 0) double amountDue,
-      @JsonKey(name: 'createdOn', defaultValue: '') String createdOn});
+      @JsonKey(name: 'createdOn', defaultValue: '') String createdOn,
+      @JsonKey(name: 'paidOn', defaultValue: '') String paidOn});
 }
 
 /// @nodoc
@@ -69,6 +72,7 @@ class _$TransactionItemDtoCopyWithImpl<$Res, $Val extends TransactionItemDto>
     Object? paymentStatus = null,
     Object? amountDue = null,
     Object? createdOn = null,
+    Object? paidOn = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -91,6 +95,10 @@ class _$TransactionItemDtoCopyWithImpl<$Res, $Val extends TransactionItemDto>
           ? _value.createdOn
           : createdOn // ignore: cast_nullable_to_non_nullable
               as String,
+      paidOn: null == paidOn
+          ? _value.paidOn
+          : paidOn // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -108,7 +116,8 @@ abstract class _$$_TransactionItemDtoCopyWith<$Res>
       @JsonKey(name: 'reference', defaultValue: '') String reference,
       @JsonKey(name: 'paymentStatus', defaultValue: '') String paymentStatus,
       @JsonKey(name: 'amountDue', defaultValue: 0) double amountDue,
-      @JsonKey(name: 'createdOn', defaultValue: '') String createdOn});
+      @JsonKey(name: 'createdOn', defaultValue: '') String createdOn,
+      @JsonKey(name: 'paidOn', defaultValue: '') String paidOn});
 }
 
 /// @nodoc
@@ -127,6 +136,7 @@ class __$$_TransactionItemDtoCopyWithImpl<$Res>
     Object? paymentStatus = null,
     Object? amountDue = null,
     Object? createdOn = null,
+    Object? paidOn = null,
   }) {
     return _then(_$_TransactionItemDto(
       id: null == id
@@ -149,6 +159,10 @@ class __$$_TransactionItemDtoCopyWithImpl<$Res>
           ? _value.createdOn
           : createdOn // ignore: cast_nullable_to_non_nullable
               as String,
+      paidOn: null == paidOn
+          ? _value.paidOn
+          : paidOn // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -162,7 +176,8 @@ class _$_TransactionItemDto extends _TransactionItemDto {
       @JsonKey(name: 'paymentStatus', defaultValue: '')
       required this.paymentStatus,
       @JsonKey(name: 'amountDue', defaultValue: 0) required this.amountDue,
-      @JsonKey(name: 'createdOn', defaultValue: '') required this.createdOn})
+      @JsonKey(name: 'createdOn', defaultValue: '') required this.createdOn,
+      @JsonKey(name: 'paidOn', defaultValue: '') required this.paidOn})
       : super._();
 
   factory _$_TransactionItemDto.fromJson(Map<String, dynamic> json) =>
@@ -183,10 +198,13 @@ class _$_TransactionItemDto extends _TransactionItemDto {
   @override
   @JsonKey(name: 'createdOn', defaultValue: '')
   final String createdOn;
+  @override
+  @JsonKey(name: 'paidOn', defaultValue: '')
+  final String paidOn;
 
   @override
   String toString() {
-    return 'TransactionItemDto(id: $id, reference: $reference, paymentStatus: $paymentStatus, amountDue: $amountDue, createdOn: $createdOn)';
+    return 'TransactionItemDto(id: $id, reference: $reference, paymentStatus: $paymentStatus, amountDue: $amountDue, createdOn: $createdOn, paidOn: $paidOn)';
   }
 
   @override
@@ -202,13 +220,14 @@ class _$_TransactionItemDto extends _TransactionItemDto {
             (identical(other.amountDue, amountDue) ||
                 other.amountDue == amountDue) &&
             (identical(other.createdOn, createdOn) ||
-                other.createdOn == createdOn));
+                other.createdOn == createdOn) &&
+            (identical(other.paidOn, paidOn) || other.paidOn == paidOn));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, reference, paymentStatus, amountDue, createdOn);
+      runtimeType, id, reference, paymentStatus, amountDue, createdOn, paidOn);
 
   @JsonKey(ignore: true)
   @override
@@ -235,7 +254,9 @@ abstract class _TransactionItemDto extends TransactionItemDto {
       @JsonKey(name: 'amountDue', defaultValue: 0)
       required final double amountDue,
       @JsonKey(name: 'createdOn', defaultValue: '')
-      required final String createdOn}) = _$_TransactionItemDto;
+      required final String createdOn,
+      @JsonKey(name: 'paidOn', defaultValue: '')
+      required final String paidOn}) = _$_TransactionItemDto;
   const _TransactionItemDto._() : super._();
 
   factory _TransactionItemDto.fromJson(Map<String, dynamic> json) =
@@ -256,6 +277,9 @@ abstract class _TransactionItemDto extends TransactionItemDto {
   @override
   @JsonKey(name: 'createdOn', defaultValue: '')
   String get createdOn;
+  @override
+  @JsonKey(name: 'paidOn', defaultValue: '')
+  String get paidOn;
   @override
   @JsonKey(ignore: true)
   _$$_TransactionItemDtoCopyWith<_$_TransactionItemDto> get copyWith =>

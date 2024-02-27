@@ -124,15 +124,16 @@ class _PaymentDateInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eligibilityState = context.read<EligibilityBloc>().state;
-    final paymentDate = details.valueDate.isValid()
+    final isIDMarket = context.read<EligibilityBloc>().state.salesOrg.isID;
+
+    final displayPaymentDate = details.paymentDate.isValid()
         ? DateFormat(
             DateTimeFormatString.displayDateFormat,
             context.locale.languageCode,
-          ).format(details.valueDate.dateTime)
+          ).format(details.paymentDate.dateTime)
         : 'NA';
 
-    if (eligibilityState.salesOrg.isID && details.status.isExpiredOrCanceled) {
+    if (isIDMarket && details.status.isExpiredOrCanceled) {
       return const SizedBox.shrink();
     }
 
@@ -140,8 +141,8 @@ class _PaymentDateInfo extends StatelessWidget {
       children: [
         Text(
           details.status.getIsSuccessfulOrProcessed
-              ? '${context.tr('Payment date')}: $paymentDate'
-              : '${context.tr('Expires')} ${eligibilityState.salesOrg.isID ? details.idAdviceExpiryText : details.adviceExpiryText}',
+              ? '${context.tr('Payment date')}: $displayPaymentDate'
+              : '${context.tr('Expires')} ${isIDMarket ? details.idAdviceExpiryText : details.adviceExpiryText}',
           key: WidgetKeys.paymentSummaryDateOrExpiry,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: details.status.getPaymentDisplayStatusTextColor,

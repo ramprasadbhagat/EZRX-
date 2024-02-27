@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PaymentSummaryDetails {
   StringValue get paymentID => throw _privateConstructorUsedError;
-  DateTimeStringValue get valueDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get paymentDate => throw _privateConstructorUsedError;
   double get paymentAmount => throw _privateConstructorUsedError;
   Currency get transactionCurrency => throw _privateConstructorUsedError;
   String get paymentDocument => throw _privateConstructorUsedError;
@@ -57,7 +57,7 @@ abstract class $PaymentSummaryDetailsCopyWith<$Res> {
   @useResult
   $Res call(
       {StringValue paymentID,
-      DateTimeStringValue valueDate,
+      DateTimeStringValue paymentDate,
       double paymentAmount,
       Currency transactionCurrency,
       String paymentDocument,
@@ -98,7 +98,7 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? paymentID = null,
-    Object? valueDate = null,
+    Object? paymentDate = null,
     Object? paymentAmount = null,
     Object? transactionCurrency = null,
     Object? paymentDocument = null,
@@ -128,9 +128,9 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
           ? _value.paymentID
           : paymentID // ignore: cast_nullable_to_non_nullable
               as StringValue,
-      valueDate: null == valueDate
-          ? _value.valueDate
-          : valueDate // ignore: cast_nullable_to_non_nullable
+      paymentDate: null == paymentDate
+          ? _value.paymentDate
+          : paymentDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
       paymentAmount: null == paymentAmount
           ? _value.paymentAmount
@@ -238,7 +238,7 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
   @useResult
   $Res call(
       {StringValue paymentID,
-      DateTimeStringValue valueDate,
+      DateTimeStringValue paymentDate,
       double paymentAmount,
       Currency transactionCurrency,
       String paymentDocument,
@@ -276,7 +276,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? paymentID = null,
-    Object? valueDate = null,
+    Object? paymentDate = null,
     Object? paymentAmount = null,
     Object? transactionCurrency = null,
     Object? paymentDocument = null,
@@ -306,9 +306,9 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
           ? _value.paymentID
           : paymentID // ignore: cast_nullable_to_non_nullable
               as StringValue,
-      valueDate: null == valueDate
-          ? _value.valueDate
-          : valueDate // ignore: cast_nullable_to_non_nullable
+      paymentDate: null == paymentDate
+          ? _value.paymentDate
+          : paymentDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
       paymentAmount: null == paymentAmount
           ? _value.paymentAmount
@@ -411,7 +411,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
 class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   const _$_PaymentSummaryDetails(
       {required this.paymentID,
-      required this.valueDate,
+      required this.paymentDate,
       required this.paymentAmount,
       required this.transactionCurrency,
       required this.paymentDocument,
@@ -441,7 +441,7 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   @override
   final StringValue paymentID;
   @override
-  final DateTimeStringValue valueDate;
+  final DateTimeStringValue paymentDate;
   @override
   final double paymentAmount;
   @override
@@ -496,7 +496,7 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
 
   @override
   String toString() {
-    return 'PaymentSummaryDetails(paymentID: $paymentID, valueDate: $valueDate, paymentAmount: $paymentAmount, transactionCurrency: $transactionCurrency, paymentDocument: $paymentDocument, status: $status, paymentMethod: $paymentMethod, iban: $iban, bankIdentification: $bankIdentification, bankCountryKey: $bankCountryKey, bankKey: $bankKey, bankAccountNumber: $bankAccountNumber, bankName: $bankName, paymentCardID: $paymentCardID, paymentCardNumber: $paymentCardNumber, paymentCardHolderName: $paymentCardHolderName, paymentCardMaskedNumber: $paymentCardMaskedNumber, paymentCardTypeName: $paymentCardTypeName, customId: $customId, createdDate: $createdDate, zzAdvice: $zzAdvice, adviceExpiry: $adviceExpiry, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, accountingDocExternalReference: $accountingDocExternalReference, paymentItems: $paymentItems)';
+    return 'PaymentSummaryDetails(paymentID: $paymentID, paymentDate: $paymentDate, paymentAmount: $paymentAmount, transactionCurrency: $transactionCurrency, paymentDocument: $paymentDocument, status: $status, paymentMethod: $paymentMethod, iban: $iban, bankIdentification: $bankIdentification, bankCountryKey: $bankCountryKey, bankKey: $bankKey, bankAccountNumber: $bankAccountNumber, bankName: $bankName, paymentCardID: $paymentCardID, paymentCardNumber: $paymentCardNumber, paymentCardHolderName: $paymentCardHolderName, paymentCardMaskedNumber: $paymentCardMaskedNumber, paymentCardTypeName: $paymentCardTypeName, customId: $customId, createdDate: $createdDate, zzAdvice: $zzAdvice, adviceExpiry: $adviceExpiry, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, accountingDocExternalReference: $accountingDocExternalReference, paymentItems: $paymentItems)';
   }
 
   @override
@@ -506,8 +506,8 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
             other is _$_PaymentSummaryDetails &&
             (identical(other.paymentID, paymentID) ||
                 other.paymentID == paymentID) &&
-            (identical(other.valueDate, valueDate) ||
-                other.valueDate == valueDate) &&
+            (identical(other.paymentDate, paymentDate) ||
+                other.paymentDate == paymentDate) &&
             (identical(other.paymentAmount, paymentAmount) ||
                 other.paymentAmount == paymentAmount) &&
             (identical(other.transactionCurrency, transactionCurrency) ||
@@ -562,7 +562,7 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   int get hashCode => Object.hashAll([
         runtimeType,
         paymentID,
-        valueDate,
+        paymentDate,
         paymentAmount,
         transactionCurrency,
         paymentDocument,
@@ -599,7 +599,7 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
 abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   const factory _PaymentSummaryDetails(
           {required final StringValue paymentID,
-          required final DateTimeStringValue valueDate,
+          required final DateTimeStringValue paymentDate,
           required final double paymentAmount,
           required final Currency transactionCurrency,
           required final String paymentDocument,
@@ -629,7 +629,7 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   @override
   StringValue get paymentID;
   @override
-  DateTimeStringValue get valueDate;
+  DateTimeStringValue get paymentDate;
   @override
   double get paymentAmount;
   @override

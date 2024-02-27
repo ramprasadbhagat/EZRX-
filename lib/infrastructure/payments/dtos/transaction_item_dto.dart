@@ -16,6 +16,7 @@ class TransactionItemDto with _$TransactionItemDto {
         required String paymentStatus,
     @JsonKey(name: 'amountDue', defaultValue: 0) required double amountDue,
     @JsonKey(name: 'createdOn', defaultValue: '') required String createdOn,
+    @JsonKey(name: 'paidOn', defaultValue: '') required String paidOn,
   }) = _TransactionItemDto;
 
   PaymentSummaryDetails toDomain() {
@@ -25,6 +26,7 @@ class TransactionItemDto with _$TransactionItemDto {
       status: FilterStatus(paymentStatus),
       createdDate: DateTimeStringValue(createdOn),
       paymentAmount: amountDue,
+      paymentDate: DateTimeStringValue(paidOn),
     );
   }
 

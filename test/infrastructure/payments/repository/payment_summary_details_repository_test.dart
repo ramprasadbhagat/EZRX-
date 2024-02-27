@@ -342,7 +342,8 @@ void main() {
               paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
               transactionCurrency: paymentSummaryDetails.transactionCurrency
                   .getOrDefaultValue(''),
-              valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
+              paymentDate:
+                  paymentSummaryDetails.paymentDate.apiDateWithDashString,
               zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
               shipToCode: ShipToInfo.empty().shipToCustomerCode,
             ),
@@ -373,7 +374,8 @@ void main() {
               paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
               transactionCurrency: paymentSummaryDetails.transactionCurrency
                   .getOrDefaultValue(''),
-              valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
+              paymentDate:
+                  paymentSummaryDetails.paymentDate.apiDateWithDashString,
               zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
               shipToCode: ShipToInfo.empty().shipToCustomerCode,
             ),
@@ -406,7 +408,8 @@ void main() {
               paymentId: paymentSummaryDetails.paymentID.getOrCrash(),
               transactionCurrency: paymentSummaryDetails.transactionCurrency
                   .getOrDefaultValue(''),
-              valueDate: paymentSummaryDetails.valueDate.apiDateWithDashString,
+              paymentDate:
+                  paymentSummaryDetails.paymentDate.apiDateWithDashString,
               zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
               shipToCode: ShipToInfo.empty().shipToCustomerCode,
             ),
@@ -521,9 +524,9 @@ void main() {
       );
       test(
         'Currency SG: Pending ',
-            () async {
-          final paymentSummaryDetails = await PaymentItemLocalDataSource()
-              .getPaymentSummaryDetailsSG();
+        () async {
+          final paymentSummaryDetails =
+              await PaymentItemLocalDataSource().getPaymentSummaryDetailsSG();
 
           expect(
             paymentSummaryDetails.status,
@@ -533,7 +536,7 @@ void main() {
       );
       test(
         'Currency Other Payment Gateway: In Progress ',
-            () async {
+        () async {
           final paymentSummaryDetails = await PaymentItemLocalDataSource()
               .getPaymentSummaryDetailsPHPayment();
 

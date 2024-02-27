@@ -57,6 +57,7 @@ class TransactionDetailDto with _$TransactionDetailDto {
       bankIdentification: bankId,
       bankAccountNumber: StringValue(vaNumber),
       bankName: StringValue(vaName),
+      paymentDate: DateTimeStringValue(paidOn),
     );
   }
 

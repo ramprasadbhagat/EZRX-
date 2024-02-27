@@ -89,7 +89,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       paymentID: StringValue(paymentID),
       paymentMethod: paymentMethodValue,
       transactionCurrency: currency,
-      valueDate: DateTimeStringValue(valueDate),
+      paymentDate: DateTimeStringValue(valueDate),
       createdDate: DateTimeStringValue(createdDate),
       adviceExpiry: AdviceExpiryValue(adviceExpiry),
       zzAdvice: StringValue(zzAdvice),
@@ -104,7 +104,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
   ) {
     return PaymentSummaryDetailsDto(
       paymentID: details.paymentID.getOrDefaultValue(''),
-      valueDate: details.valueDate.getOrDefaultValue(''),
+      valueDate: details.paymentDate.getOrDefaultValue(''),
       paymentAmount: details.paymentAmount,
       transactionCurrency: details.transactionCurrency.getOrDefaultValue(''),
       paymentDocument: details.paymentDocument,

@@ -100,7 +100,7 @@ class PaymentItemRemoteDataSource {
     required String paymentBatchAdditionalInfo,
     required String paymentId,
     required String transactionCurrency,
-    required String valueDate,
+    required String paymentDate,
     required String zzAdvice,
   }) async {
     final queryData = paymentItemQuery.deleteCustomerPaymentQuery();
@@ -112,7 +112,7 @@ class PaymentItemRemoteDataSource {
       'paymentBatchAdditionalInfo': paymentBatchAdditionalInfo,
       'paymentID': paymentId,
       'transactionCurrency': transactionCurrency,
-      'valueDate': valueDate,
+      'valueDate': paymentDate,
       'zzAdvice': zzAdvice,
     };
     final res = await httpService.request(

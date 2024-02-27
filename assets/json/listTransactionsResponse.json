@@ -13,7 +13,7 @@
                     "amountDue": 7952040,
                     "reference": null,
                     "createdOn": "2023-10-19T09:22:02",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310180717",
@@ -26,7 +26,7 @@
                     "amountDue": 7952040,
                     "reference": null,
                     "createdOn": "2023-10-18T10:03:18",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310180712",
@@ -39,7 +39,7 @@
                     "amountDue": 8432607,
                     "reference": null,
                     "createdOn": "2023-10-18T09:59:00",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310180705",
@@ -52,7 +52,7 @@
                     "amountDue": 7952040,
                     "reference": null,
                     "createdOn": "2023-10-18T09:52:35",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310170693",
@@ -65,7 +65,7 @@
                     "amountDue": 7952040,
                     "reference": null,
                     "createdOn": "2023-10-17T16:06:40",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310170691",
@@ -78,7 +78,7 @@
                     "amountDue": 7952040,
                     "reference": null,
                     "createdOn": "2023-10-17T14:10:11",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310170689",
@@ -91,7 +91,7 @@
                     "amountDue": 7952040,
                     "reference": null,
                     "createdOn": "2023-10-17T14:08:38",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310170687",
@@ -104,7 +104,7 @@
                     "amountDue": 480567,
                     "reference": null,
                     "createdOn": "2023-10-17T14:08:04",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310170685",
@@ -117,7 +117,7 @@
                     "amountDue": 7952040,
                     "reference": null,
                     "createdOn": "2023-10-17T14:05:09",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310170679",
@@ -130,7 +130,7 @@
                     "amountDue": 7952040,
                     "reference": null,
                     "createdOn": "2023-10-17T09:54:01",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310170675",
@@ -143,7 +143,7 @@
                     "amountDue": 7952040,
                     "reference": null,
                     "createdOn": "2023-10-17T09:47:58",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310170674",
@@ -156,7 +156,7 @@
                     "amountDue": 7952040,
                     "reference": null,
                     "createdOn": "2023-10-17T09:46:42",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310060645",
@@ -169,7 +169,7 @@
                     "amountDue": 335311,
                     "reference": null,
                     "createdOn": "2023-10-06T14:00:06",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202310060640",
@@ -182,7 +182,7 @@
                     "amountDue": 335311,
                     "reference": null,
                     "createdOn": "2023-10-06T11:44:55",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 },
                 {
                     "id": "TR202309190532",
@@ -195,7 +195,7 @@
                     "amountDue": 480567,
                     "reference": null,
                     "createdOn": "2023-09-19T19:25:32",
-                    "paidOn": null
+                    "paidOn": "2021-11-07T11:40:13"
                 }
             ],
             "totalCount": 16

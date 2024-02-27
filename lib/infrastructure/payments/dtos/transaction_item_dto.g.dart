@@ -14,6 +14,7 @@ _$_TransactionItemDto _$$_TransactionItemDtoFromJson(
       paymentStatus: json['paymentStatus'] as String? ?? '',
       amountDue: (json['amountDue'] as num?)?.toDouble() ?? 0,
       createdOn: json['createdOn'] as String? ?? '',
+      paidOn: json['paidOn'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_TransactionItemDtoToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$_TransactionItemDtoToJson(
       'paymentStatus': instance.paymentStatus,
       'amountDue': instance.amountDue,
       'createdOn': instance.createdOn,
+      'paidOn': instance.paidOn,
     };

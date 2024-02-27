@@ -860,7 +860,7 @@ void main() {
           PaymentSummaryState.initial().copyWith(
             details: [
               PaymentSummaryDetails.empty().copyWith(
-                valueDate: fakeDate,
+                paymentDate: fakeDate,
                 status: filterStatusVariant.currentValue ?? FilterStatus(''),
                 adviceExpiry: fakeAdviceExpiry,
               )
@@ -899,7 +899,7 @@ void main() {
           PaymentSummaryState.initial().copyWith(
             details: [
               PaymentSummaryDetails.empty().copyWith(
-                valueDate: fakeDate,
+                paymentDate: fakeDate,
                 status: filterStatusVariant.currentValue ?? FilterStatus(''),
                 adviceExpiry: fakeAdviceExpiry,
               )
@@ -1186,6 +1186,39 @@ void main() {
             ),
           ),
         ).called(1);
+      },
+    );
+
+    testWidgets(
+      'Show date text from value date field on successful items',
+      (tester) async {
+        final paymentDate = DateTimeStringValue('2024-01-11');
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        );
+        when(() => paymentSummaryBloc.state).thenReturn(
+          PaymentSummaryState.initial().copyWith(
+            details: [
+              PaymentSummaryDetails.empty().copyWith(
+                paymentDate: paymentDate,
+                status: FilterStatus('Successful'),
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        final dateTextFinder = find
+            .byKey(WidgetKeys.paymentSummaryDateOrExpiry)
+            .evaluate()
+            .single
+            .widget as Text;
+        expect(
+          dateTextFinder.data,
+          '${'Payment date'.tr()}: ${paymentDate.dateOrNaString}',
+        );
       },
     );
   });

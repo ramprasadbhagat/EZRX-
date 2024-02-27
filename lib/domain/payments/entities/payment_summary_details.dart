@@ -18,7 +18,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
 
   const factory PaymentSummaryDetails({
     required StringValue paymentID,
-    required DateTimeStringValue valueDate,
+    required DateTimeStringValue paymentDate,
     required double paymentAmount,
     required Currency transactionCurrency,
     required String paymentDocument,
@@ -62,7 +62,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         paymentID: StringValue(''),
         paymentMethod: PaymentMethodValue(''),
         transactionCurrency: Currency(''),
-        valueDate: DateTimeStringValue(''),
+        paymentDate: DateTimeStringValue(''),
         createdDate: DateTimeStringValue(''),
         adviceExpiry: AdviceExpiryValue(''),
         zzAdvice: StringValue(''),
@@ -95,7 +95,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         transactionCurrency: Currency(
           invoice.paymentItems.firstOrNull?.transactionCurrency ?? '',
         ),
-        valueDate: invoice.valueDate,
+        paymentDate: invoice.valueDate,
         createdDate: DateTimeStringValue(''),
         adviceExpiry: AdviceExpiryValue(''),
         zzAdvice: StringValue(invoice.zzAdvice),
@@ -127,7 +127,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         paymentID: StringValue(createVirtualAccount.id),
         paymentMethod: PaymentMethodValue(''),
         transactionCurrency: Currency(''),
-        valueDate: createVirtualAccount.createdOn,
+        paymentDate: createVirtualAccount.createdOn,
         createdDate: createVirtualAccount.createdOn,
         adviceExpiry: AdviceExpiryValue(''),
         zzAdvice: StringValue(createVirtualAccount.id),
@@ -163,7 +163,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
   bool get isEmpty => this == PaymentSummaryDetails.empty();
 
   bool get displayPaymentDate =>
-      valueDate.isValid() && status.getIsSuccessfulOrProcessed;
+      paymentDate.isValid() && status.getIsSuccessfulOrProcessed;
 }
 
 extension PaymentSummaryListExtension on List<PaymentSummaryDetails> {
