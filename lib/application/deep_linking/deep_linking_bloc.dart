@@ -103,6 +103,8 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.redirectResetPassword(resetPassword),
                 ),
               );
+
+              return;
             }
 
             if (link.isProductDetail) {

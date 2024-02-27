@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,6 +21,8 @@ import '../../common_mock_data/customer_code_mock.dart';
 
 class DeepLinkingRepositoryMock extends Mock
     implements IDeepLinkingRepository {}
+
+final locator = GetIt.instance;
 
 void main() {
   late IDeepLinkingRepository repository;
@@ -44,12 +48,13 @@ void main() {
   const paymentLink = '/my-account/payments';
   const faqLink = '/faq';
   const resetPasswordLink =
-      'https://clicktime.symantec.com/15tStdYPVXVZm3CGiHwjj?h=AajXDPaRNcBc9HqeqM_8ZyhyH7ej6-GwTxaPE9fxEqU=&u=https://uat-sg.ezrx.com/login/set-password?username%3DFakeUser%26token%3DFakeToken';
+      'https://clicktime.symantec.com/15tStdYPVXVZm3CGiHwjj?h=AajXDPaRNcBc9HqeqM_8ZyhyH7ej6-GwTxaPE9fxEqU=&amp;u=https://uat-sg.ezrx.com/login/set-password?username%3DFakeUser%26token%3DFakeToken';
 
   setUpAll(() {
     repository = DeepLinkingRepositoryMock();
 
     chatBotService = ChatBotServiceMock();
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
   });
 
   blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -654,9 +659,6 @@ void main() {
       ),
       expect: () => [
         DeepLinkingState.redirectResetPassword(ResetPasswordCred.empty()),
-        const DeepLinkingState.error(
-          ApiFailure.other('Link is not valid'),
-        )
       ],
     );
     blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -689,9 +691,6 @@ void main() {
       ),
       expect: () => [
         const DeepLinkingState.error(fakeError),
-        const DeepLinkingState.error(
-          ApiFailure.other('Link is not valid'),
-        )
       ],
     );
   });

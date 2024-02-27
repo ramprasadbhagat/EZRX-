@@ -1,7 +1,9 @@
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 // ignore: depend_on_referenced_packages
@@ -800,12 +802,18 @@ String fileTypeFromPath(String source) {
   return path.extension(source);
 }
 
-/// Filters and extracts the 'u' query parameter from the provided [uri].
+/// Filters and extracts the query parameter from the provided [uri] that contains ezrx domain.
 /// This is necessary when the redirecting URI is passed as a query parameter
 /// to the original URI.
 /// Example url -> EZRX://clicktime.symantec.com/15tStdWWRBCjGxB6bujRD?h=zRUjvnB-oJ7CeZWGKRQJobPyV8b1EJMcAlvzEMzuV0Y=&amp;u=https://uat-my.ezrx.com/login/set-password?username%3D****%26token%3D******
-Uri getFilteredResetPasswordUri(Uri uri) =>
-    Uri.parse(uri.queryParameters['u'] ?? '');
+Uri getFilteredResetPasswordUri(Uri uri) {
+  final link = uri.queryParameters.values.firstWhere(
+    (element) => element.contains(GetIt.instance<Config>().domain),
+    orElse: () => uri.toString(),
+  );
+
+  return Uri.parse(link);
+}
 
 bool isResetPasswordLink(String path) => path == '/login/set-password';
 
