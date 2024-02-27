@@ -2,10 +2,6 @@ trigger:
   tags:
     include:
     - test.uat.*
-  branches: 
-    include: 
-    - main
-    - v3
 
 parameters:
   - name: testFiles
