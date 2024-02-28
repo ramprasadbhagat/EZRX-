@@ -37,7 +37,6 @@ import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 
-
 import '../../../utils/widget_utils.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/mock_bloc.dart';
@@ -45,8 +44,6 @@ import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
-
-
 
 void main() {
   late CartBloc cartBloc;
@@ -72,7 +69,10 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerFactory(() => AppRouter());
     autoRouter = locator<AppRouter>();
-    cartItems = await CartLocalDataSource().upsertCart();
+    cartItems = (await CartLocalDataSource().upsertCart())
+        .where((e) => e.materialInfo.type.typeMaterial)
+        .take(1)
+        .toList();
   });
 
   group('Request Counter Offer Sheet Test', () {
@@ -136,7 +136,7 @@ void main() {
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeMYSalesOrganisation, 
+            salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: '1234',
             ),
@@ -188,33 +188,6 @@ void main() {
       );
     }
 
-    testWidgets('Initialize Cart Page', (tester) async {
-      when(() => cartBloc.state).thenReturn(
-        CartState.initial().copyWith(
-          cartProducts: cartItems,
-        ),
-      );
-      when(() => eligibilityBloc.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
-        ),
-      );
-      await tester.pumpWidget(
-        getWidget(
-          child: const CartPage(),
-        ),
-      );
-      await tester.pump();
-      final cartItemFinder = find.byKey(
-        WidgetKeys.cartItemProductTile(
-          cartItems.first.materialInfo.materialNumber.displayMatNo,
-        ),
-      );
-
-      expect(cartPageFinder, findsOneWidget);
-      expect(cartItemFinder, findsNWidgets(2));
-    });
-
     testWidgets('Open counter offer sheet from cart', (tester) async {
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(
@@ -245,7 +218,7 @@ void main() {
       final counterOfferBottomSheetFinder =
           find.byKey(WidgetKeys.counterOfferBottomSheet);
       expect(cartPageFinder, findsOneWidget);
-      expect(cartItemFinder, findsNWidgets(2));
+      expect(cartItemFinder, findsNWidgets(1));
       expect(counterOfferPriceButtonFinder.first, findsOneWidget);
 
       await tester.tap(counterOfferPriceButtonFinder.first);
@@ -288,7 +261,7 @@ void main() {
       final counterOfferBottomSheetFinder =
           find.byKey(WidgetKeys.counterOfferBottomSheet);
       expect(cartPageFinder, findsOneWidget);
-      expect(cartItemFinder, findsNWidgets(2));
+      expect(cartItemFinder, findsNWidgets(1));
       expect(counterOfferPriceButtonFinder.first, findsOneWidget);
 
       await tester.tap(counterOfferPriceButtonFinder.first);
@@ -362,7 +335,7 @@ void main() {
       final counterOfferBottomSheetFinder =
           find.byKey(WidgetKeys.counterOfferBottomSheet);
       expect(cartPageFinder, findsOneWidget);
-      expect(cartItemFinder, findsNWidgets(2));
+      expect(cartItemFinder, findsNWidgets(1));
       expect(counterOfferPriceButtonFinder.first, findsOneWidget);
 
       await tester.tap(counterOfferPriceButtonFinder.first);

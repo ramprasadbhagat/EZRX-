@@ -47,7 +47,7 @@ void main() async {
 
           expect(
             result,
-            List.from(finalData)
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
                 .map((e) => CartProductDto.fromJson(e).toDomain)
                 .toList(),
           );

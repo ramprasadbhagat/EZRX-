@@ -47,27 +47,28 @@ class CartProductCombo extends StatelessWidget {
   Widget build(BuildContext context) {
     final salesOrgConfig = context.read<EligibilityBloc>().state;
 
-    return CustomSlidable(
-      extentRatio: 0.24,
-      endActionPaneActions: canEditable
-          ? [
-              CustomSlidableAction(
-                key: WidgetKeys.cartItemSwipeDeleteButton,
-                label: '',
-                icon: Icons.delete_outline,
-                onPressed: (v) => _showDeleteComboBottomSheet(
-                  context,
-                  cartItem: cartItem,
+    return CustomCard(
+      margin: EdgeInsets.zero,
+      clipBehavior: Clip.hardEdge,
+      child: CustomSlidable(
+        extentRatio: 0.24,
+        endActionPaneActions: canEditable
+            ? [
+                CustomSlidableAction(
+                  key: WidgetKeys.cartItemSwipeDeleteButton,
+                  label: '',
+                  icon: Icons.delete_outline,
+                  onPressed: (v) => _showDeleteComboBottomSheet(
+                    context,
+                    cartItem: cartItem,
+                  ),
                 ),
-              ),
-            ]
-          : [],
-      child: CustomCard(
-        margin: EdgeInsets.zero,
-        padding: const EdgeInsets.symmetric(vertical: 16),
+              ]
+            : [],
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 16),
             Row(
               children: [
                 ProductTag.comboOffer(),
@@ -203,6 +204,7 @@ class CartProductCombo extends StatelessWidget {
               comboScheme: _comboScheme,
               priceComboDeal: _priceComboDeal,
             ),
+            const SizedBox(height: 16),
           ],
         ),
       ),

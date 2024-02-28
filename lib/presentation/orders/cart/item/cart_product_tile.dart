@@ -49,15 +49,16 @@ class CartProductTile extends StatelessWidget {
         !cartItem.inStock && !orderEligibilityState.isOOSAllowedIfPresentInCart;
     final isMWPNotAllowed = cartItem.price.finalPrice.isEmpty &&
         orderEligibilityState.isMWPNotAllowedAndPresentInCart;
-    final isSuspended = cartItem.materialInfo.isSuspended ||
+    final isSuspended = cartItem.isSuspendedMaterial ||
         cartItem.materialInfo.isPrincipalSuspended;
     final isInvalidCartItem = isSuspended || isOOSNotAllowed || isMWPNotAllowed;
 
-    return Padding(
+    return CustomCard(
       key: WidgetKeys.cartItemProductTile(
         cartItem.materialInfo.materialNumber.displayMatNo,
       ),
-      padding: const EdgeInsets.only(top: 25.0),
+      margin: const EdgeInsets.symmetric(vertical: 12),
+      clipBehavior: Clip.hardEdge,
       child: CustomSlidable(
         extentRatio: 0.24,
         endActionPaneActions: [
@@ -77,34 +78,31 @@ class CartProductTile extends StatelessWidget {
             },
           ),
         ],
-        borderRadius: 8,
-        child: CustomCard(
-          margin: EdgeInsets.zero,
-          child: Column(
-            children: [
-              _MaterialDetailsSection(
+        child: Column(
+          children: [
+            _MaterialDetailsSection(
+              cartItem: cartItem,
+              isInvalidCartItem: isInvalidCartItem,
+            ),
+            const Divider(
+              indent: 0,
+              endIndent: 0,
+              color: ZPColors.accentColor,
+            ),
+            _ItemSubTotalSection(
+              cartProduct: cartItem,
+            ),
+            if (!isInvalidCartItem && !cartItem.materialInfo.isMarketPlace) ...[
+              const Divider(
+                indent: 0,
+                endIndent: 0,
+                color: ZPColors.accentColor,
+              ),
+              _BonusPriceCounterSection(
                 cartItem: cartItem,
-                isInvalidCartItem: isInvalidCartItem,
               ),
-              const Divider(
-                indent: 0,
-                endIndent: 0,
-                color: ZPColors.accentColor,
-              ),
-              _ItemSubTotalSection(
-                cartProduct: cartItem,
-              ),
-              const Divider(
-                indent: 0,
-                endIndent: 0,
-                color: ZPColors.accentColor,
-              ),
-              if (!isInvalidCartItem)
-                _BonusPriceCounterSection(
-                  cartItem: cartItem,
-                ),
             ],
-          ),
+          ],
         ),
       ),
     );

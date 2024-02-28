@@ -233,7 +233,7 @@ void main() {
     mockCartItemWithAllType =
         (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
-    mockCartItems = await CartLocalDataSource().upsertCart();
+    mockCartItems = (await CartLocalDataSource().upsertCart());
     fakeComboMaterialItems =
         (await CartLocalDataSource().upsertCartItemsWithComboOffers())
             .comboMaterialItemList;
@@ -1549,33 +1549,23 @@ void main() {
 
       testWidgets('Test invalid banner when cart consist suspended material',
           (tester) async {
-        final suspendedMaterial = mockCartItems[1].copyWith(
-          materialInfo: mockCartItems[1].materialInfo.copyWith(
-                type: MaterialInfoType('material'),
-              ),
-        );
-        final cartState = CartState.initial().copyWith(
-          cartProducts: <PriceAggregate>[suspendedMaterial],
-          isClearing: false,
+        final suspendedMaterial = mockCartItems.firstWhere(
+          (e) => e.materialInfo.type.typeMaterial && e.materialInfo.isSuspended,
         );
 
         when(() => cartBloc.state).thenReturn(
-          cartState,
+          CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[suspendedMaterial],
+          ),
         );
-        final expectedStates = [
-          OrderEligibilityState.initial(),
+
+        when(() => orderEligibilityBlocMock.state).thenReturn(
           OrderEligibilityState.initial().copyWith(
             cartItems: <PriceAggregate>[suspendedMaterial],
           ),
-        ];
-
-        whenListen(
-          orderEligibilityBlocMock,
-          Stream.fromIterable(expectedStates),
         );
 
         await tester.pumpWidget(getWidget());
-
         await tester.pumpAndSettle();
 
         final invalidItemBannerFinder =
@@ -1588,12 +1578,14 @@ void main() {
         expect(invalidItemBannerFinder, findsOneWidget);
         expect(invalidMessageFinder, findsOneWidget);
         expect(invalidItemBannerButtonFinder, findsOneWidget);
-
         await tester.tap(invalidItemBannerButtonFinder);
         verify(
           () => cartBloc.add(
             CartEvent.removeInvalidProducts(
-              invalidCartItems: <MaterialInfo>[suspendedMaterial.materialInfo],
+              invalidCartItems: <MaterialInfo>[
+                suspendedMaterial.materialInfo
+                    .copyWith(quantity: MaterialQty(0))
+              ],
             ),
           ),
         ).called(1);
@@ -1602,39 +1594,28 @@ void main() {
       testWidgets(
           'Test invalid banner when cart consist material without price',
           (tester) async {
-        final materialWithoutPrice = mockCartItems.first.copyWith(
-          materialInfo: mockCartItems.first.materialInfo.copyWith(
-            type: MaterialInfoType('material'),
-          ),
-          price: mockCartItems.first.price.copyWith(
-            finalPrice: MaterialPrice(0),
-            lastPrice: MaterialPrice(0),
-          ),
-        );
-
-        final cartState = CartState.initial().copyWith(
-          cartProducts: <PriceAggregate>[materialWithoutPrice],
-          isClearing: false,
-        );
+        final materialWithoutPrice = mockCartItems
+            .firstWhere((e) => e.materialInfo.type.typeMaterial)
+            .copyWith(
+              price: mockCartItems.first.price.copyWith(
+                finalPrice: MaterialPrice(0),
+                lastPrice: MaterialPrice(0),
+              ),
+            );
 
         when(() => cartBloc.state).thenReturn(
-          cartState,
+          CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[materialWithoutPrice],
+          ),
         );
 
-        final expectedStates = [
-          OrderEligibilityState.initial(),
+        when(() => orderEligibilityBlocMock.state).thenReturn(
           OrderEligibilityState.initial().copyWith(
             cartItems: <PriceAggregate>[materialWithoutPrice],
           ),
-        ];
-
-        whenListen(
-          orderEligibilityBlocMock,
-          Stream.fromIterable(expectedStates),
         );
 
         await tester.pumpWidget(getWidget());
-
         await tester.pumpAndSettle();
 
         final invalidItemBannerFinder =
@@ -1649,6 +1630,7 @@ void main() {
             CartEvent.removeInvalidProducts(
               invalidCartItems: <MaterialInfo>[
                 materialWithoutPrice.materialInfo
+                    .copyWith(quantity: MaterialQty(0))
               ],
             ),
           ),
@@ -1657,19 +1639,13 @@ void main() {
 
       testWidgets('Test invalid banner when cart consist out of stock material',
           (tester) async {
-        final oosMaterial = mockCartItems.first.copyWith(
-          materialInfo: mockCartItems.first.materialInfo.copyWith(
-            type: MaterialInfoType('material'),
-          ),
-        );
-
-        final cartState = CartState.initial().copyWith(
-          cartProducts: <PriceAggregate>[oosMaterial],
-          isClearing: false,
-        );
+        final oosMaterial =
+            mockCartItems.firstWhere((e) => e.materialInfo.type.typeMaterial);
 
         when(() => cartBloc.state).thenReturn(
-          cartState,
+          CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[oosMaterial],
+          ),
         );
 
         when(() => orderEligibilityBlocMock.state).thenReturn(
@@ -1679,7 +1655,6 @@ void main() {
           ),
         );
         await tester.pumpWidget(getWidget());
-
         await tester.pumpAndSettle();
 
         final invalidItemBannerFinder =
@@ -1694,7 +1669,9 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.removeInvalidProducts(
-              invalidCartItems: <MaterialInfo>[oosMaterial.materialInfo],
+              invalidCartItems: <MaterialInfo>[
+                oosMaterial.materialInfo.copyWith(quantity: MaterialQty(0))
+              ],
             ),
           ),
         ).called(1);
@@ -1878,31 +1855,23 @@ void main() {
       testWidgets(
           'Test invalid banner when cart consist suspended principal material',
           (tester) async {
-        final suspendedPrincipalMaterial = mockCartItems.last.copyWith(
-          materialInfo: mockCartItems.last.materialInfo.copyWith(
-            type: MaterialInfoType('material'),
-          ),
-        );
-
-        final cartState = CartState.initial().copyWith(
-          cartProducts: <PriceAggregate>[suspendedPrincipalMaterial],
-          isClearing: false,
+        final suspendedPrincipalMaterial = mockCartItems.firstWhere(
+          (e) =>
+              e.materialInfo.type.typeMaterial &&
+              e.materialInfo.isPrincipalSuspended,
         );
 
         when(() => cartBloc.state).thenReturn(
-          cartState,
+          CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[suspendedPrincipalMaterial],
+            isClearing: false,
+          ),
         );
 
-        final expectedStates = [
-          OrderEligibilityState.initial(),
+        when(() => orderEligibilityBlocMock.state).thenReturn(
           OrderEligibilityState.initial().copyWith(
             cartItems: <PriceAggregate>[suspendedPrincipalMaterial],
           ),
-        ];
-
-        whenListen(
-          orderEligibilityBlocMock,
-          Stream.fromIterable(expectedStates),
         );
 
         await tester.pumpWidget(getWidget());
@@ -1927,6 +1896,7 @@ void main() {
             CartEvent.removeInvalidProducts(
               invalidCartItems: <MaterialInfo>[
                 suspendedPrincipalMaterial.materialInfo
+                    .copyWith(quantity: MaterialQty(0))
               ],
             ),
           ),
@@ -1934,10 +1904,10 @@ void main() {
       });
 
       testWidgets('Test invalid banner remove button', (tester) async {
-        final suspendedPrincipalMaterial = mockCartItems.last.copyWith(
-          materialInfo: mockCartItems.last.materialInfo.copyWith(
-            type: MaterialInfoType('material'),
-          ),
+        final suspendedPrincipalMaterial = mockCartItems.firstWhere(
+          (e) =>
+              e.materialInfo.type.typeMaterial &&
+              e.materialInfo.isPrincipalSuspended,
         );
 
         final cartState = CartState.initial().copyWith(
@@ -1976,6 +1946,7 @@ void main() {
             CartEvent.removeInvalidProducts(
               invalidCartItems: <MaterialInfo>[
                 suspendedPrincipalMaterial.materialInfo
+                    .copyWith(quantity: MaterialQty(0))
               ],
             ),
           ),
@@ -2637,11 +2608,8 @@ void main() {
       testWidgets(
           ' Test Material Out Stock not displayed on item when hideStockDisplay is enabled for invalid cart',
           (tester) async {
-        final oosMaterial = mockCartItems.first.copyWith(
-          materialInfo: mockCartItems.first.materialInfo.copyWith(
-            type: MaterialInfoType('material'),
-          ),
-        );
+        final oosMaterial =
+            mockCartItems.firstWhere((e) => e.materialInfo.type.typeMaterial);
 
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[oosMaterial],
@@ -2677,7 +2645,9 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.removeInvalidProducts(
-              invalidCartItems: <MaterialInfo>[oosMaterial.materialInfo],
+              invalidCartItems: <MaterialInfo>[
+                oosMaterial.materialInfo.copyWith(quantity: MaterialQty(0))
+              ],
             ),
           ),
         ).called(1);

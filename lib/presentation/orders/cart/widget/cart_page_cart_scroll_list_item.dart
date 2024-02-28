@@ -13,21 +13,30 @@ class _CartPageScrollListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (item.materialInfo.type.typeCombo) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 25),
+      return Container(
+        color: Colors.white,
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
         child: CartProductCombo(
           cartItem: item,
           canEditable: true,
         ),
       );
     } else if (item.materialInfo.type.typeBundle) {
-      return CartProductBundle(
-        cartItem: item,
+      return Container(
+        color: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: CartProductBundle(
+          cartItem: item,
+        ),
       );
     } else {
-      return _CartProductMaterial(
-        item: item,
-        showManufacturerName: showManufacturerName,
+      return Container(
+        color: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: _CartProductMaterial(
+          item: item,
+          showManufacturerName: showManufacturerName,
+        ),
       );
     }
   }
@@ -69,13 +78,8 @@ class _CartProductMaterial extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (showManufacturerName)
-            _CartPageManufacturerName(
-              key: WidgetKeys.cartPrincipalLabel,
-              cartProduct: item.materialInfo,
-            ),
-          CartProductTile(
-            cartItem: item,
-          ),
+            _CartPageManufacturerName(cartProduct: item.materialInfo),
+          CartProductTile(cartItem: item),
           if (item.sortedBonusList.isNotEmpty)
             ...item.sortedBonusList
                 .map(
@@ -93,6 +97,7 @@ class _CartProductMaterial extends StatelessWidget {
 
 class _CartPageManufacturerName extends StatelessWidget {
   final MaterialInfo cartProduct;
+
   const _CartPageManufacturerName({
     Key? key,
     required this.cartProduct,
@@ -100,14 +105,38 @@ class _CartPageManufacturerName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const textColor = ZPColors.neutralsBlack;
+    final manufacturer = cartProduct.getManufactured;
+
     return Padding(
-      padding: const EdgeInsets.only(top: 24.0),
-      child: Text(
-        cartProduct.principalData.principalName.getOrDefaultValue(''),
-        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: ZPColors.neutralsBlack,
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      key: WidgetKeys.cartPrincipalLabel,
+      child: cartProduct.isMarketPlace
+          ? Row(
+              children: [
+                SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: SvgPicture.asset(
+                    SvgImage.marketplaceSellerIcon,
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  manufacturer,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: textColor,
+                      ),
+                ),
+              ],
+            )
+          : Text(
+              manufacturer,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: textColor,
+                  ),
             ),
-      ),
     );
   }
 }

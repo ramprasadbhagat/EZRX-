@@ -14,51 +14,95 @@ class _CartPageCartScrollList extends StatelessWidget {
           previous.isUpserting != current.isUpserting ||
           previous.isBuyAgain != current.isBuyAgain,
       builder: (context, state) {
-        return Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: state.isFetching && state.cartProducts.isEmpty
-                ? LoadingShimmer.logo(
-                    key: WidgetKeys.loaderImage,
-                  )
-                : ScrollList<PriceAggregate>(
-                    noRecordFoundWidget: NoRecordFound(
-                      title: 'Your cart is empty',
-                      subTitle:
-                          'Looks like you haven’t added anything to your cart yet',
-                      actionButton: ElevatedButton(
-                        key: WidgetKeys.startBrowsingProducts,
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(
-                            double.maxFinite,
-                            50,
-                          ),
-                        ),
-                        onPressed: () {
-                          context.router.navigateNamed('main/products');
+        if (state.isFetching && state.cartProducts.isEmpty ||
+            state.isBuyAgain) {
+          return LoadingShimmer.logo();
+        }
+
+        final zpMaterials = state.cartProducts.zpMaterialOnly.sortToDisplay;
+        final mpMaterials = state.cartProducts.mpMaterialOnly.sortToDisplay;
+
+        return RefreshIndicator(
+          onRefresh: () async => context.read<CartBloc>().add(
+                const CartEvent.fetchProductsAddedToCart(),
+              ),
+          child: CustomScrollView(
+            key: WidgetKeys.scrollList,
+            physics: const AlwaysScrollableScrollPhysics(),
+            slivers: state.cartProducts.isEmpty
+                ? [SliverToBoxAdapter(child: NoRecordFound.cart(context))]
+                : [
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (_, index) {
+                          final item = zpMaterials[index];
+
+                          return _CartPageScrollListItem(
+                            item: item,
+                            showManufacturerName:
+                                zpMaterials.showManufacturerName(index),
+                          );
                         },
-                        child: const Text('Start browsing').tr(),
+                        childCount: zpMaterials.length,
                       ),
-                      svgImage: SvgImage.shoppingCart,
                     ),
-                    controller: ScrollController(),
-                    onRefresh: () => context.read<CartBloc>().add(
-                          const CartEvent.fetchProductsAddedToCart(),
+                    if ([...mpMaterials, ...zpMaterials].isNotEmpty)
+                      SliverToBoxAdapter(
+                        child: Container(
+                          height: 10,
+                          color: Theme.of(context).scaffoldBackgroundColor,
                         ),
-                    isLoading: state.isFetching && state.cartProducts.isEmpty ||
-                        state.isClearing ||
-                        state.isBuyAgain,
-                    itemBuilder: (context, index, item) {
-                      return _CartPageScrollListItem(
-                        item: item,
-                        showManufacturerName: state.showManufacturerName(index),
-                      );
-                    },
-                    items: state.cartProductsComboSorted,
-                  ),
+                      ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (_, index) {
+                          final item = mpMaterials[index];
+
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (index == 0) const _MarketPlaceLabel(),
+                              _CartPageScrollListItem(
+                                item: item,
+                                showManufacturerName:
+                                    mpMaterials.showManufacturerName(index),
+                              ),
+                            ],
+                          );
+                        },
+                        childCount: mpMaterials.length,
+                      ),
+                    ),
+                  ],
           ),
         );
       },
+    );
+  }
+}
+
+class _MarketPlaceLabel extends StatelessWidget {
+  const _MarketPlaceLabel({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+      color: Colors.white,
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            SvgImage.marketplaceIcon,
+            height: 24,
+            width: 24,
+          ),
+          const SizedBox(width: 2),
+          Text(
+            context.tr('Marketplace'),
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -225,7 +225,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       isMWPNotAllowedAndPresentInCart && showErrorMessage;
 
   bool get cartContainsSuspendedMaterials =>
-      cartItems.any((product) => product.materialInfo.isSuspended);
+      cartItems.any((product) => product.isSuspendedMaterial);
 
   bool get cartContainsSuspendedPrincipal =>
       cartItems.any((product) => product.materialInfo.isPrincipalSuspended);
@@ -249,7 +249,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       .where(
         (item) =>
             item.materialInfo.type.typeMaterial &&
-            (item.materialInfo.isSuspended ||
+            (item.isSuspendedMaterial ||
                 item.materialInfo.isPrincipalSuspended ||
                 (item.price.finalPrice.isEmpty &&
                     isMWPNotAllowedAndPresentInCart) ||

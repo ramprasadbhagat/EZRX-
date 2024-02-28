@@ -37,36 +37,37 @@ class CartProductTileBonus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomSlidable(
+    return CustomCard(
       key: WidgetKeys.cartItemBonus(
         cartProduct.materialInfo.materialNumber.displayMatNo,
         bonusItem.materialNumber.displayMatNo,
       ),
-      extentRatio: 0.24,
-      endActionPaneActions: [
-        if (context.read<EligibilityBloc>().state.isBonusSampleItemVisible)
-          CustomSlidableAction(
-            key: WidgetKeys.cartItemSwipeDeleteButtonForBonus,
-            label: '',
-            icon: Icons.delete_outline,
-            onPressed: (v) => context.read<CartBloc>().add(
-                  CartEvent.addBonusToCartItem(
-                    bonusMaterial: MaterialInfo.empty().copyWith(
-                      materialNumber: bonusItem.materialNumber,
-                      parentID: cartProduct.materialInfo.materialNumber
-                          .getOrDefaultValue(''),
-                      quantity: MaterialQty(0),
-                      type: bonusItem.type,
+      margin: const EdgeInsets.symmetric(vertical: 12),
+      clipBehavior: Clip.hardEdge,
+      child: CustomSlidable(
+        extentRatio: 0.24,
+        endActionPaneActions: [
+          if (context.read<EligibilityBloc>().state.isBonusSampleItemVisible)
+            CustomSlidableAction(
+              key: WidgetKeys.cartItemSwipeDeleteButtonForBonus,
+              label: '',
+              icon: Icons.delete_outline,
+              onPressed: (v) => context.read<CartBloc>().add(
+                    CartEvent.addBonusToCartItem(
+                      bonusMaterial: MaterialInfo.empty().copyWith(
+                        materialNumber: bonusItem.materialNumber,
+                        parentID: cartProduct.materialInfo.materialNumber
+                            .getOrDefaultValue(''),
+                        quantity: MaterialQty(0),
+                        type: bonusItem.type,
+                      ),
+                      counterOfferDetails: RequestCounterOfferDetails.empty(),
+                      bonusItemId: bonusItem.itemId,
                     ),
-                    counterOfferDetails: RequestCounterOfferDetails.empty(),
-                    bonusItemId: bonusItem.itemId,
                   ),
-                ),
-          ),
-      ],
-      borderRadius: 8,
-      child: CustomCard(
-        margin: const EdgeInsets.only(top: 25.0),
+            ),
+        ],
+        borderRadius: 8,
         child: Column(
           children: [
             _MaterialDetailsSection(
@@ -123,10 +124,7 @@ class _ItemSubTotalSection extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
 
     return Padding(
-      padding: const EdgeInsets.only(
-        right: 8,
-        bottom: 8,
-      ),
+      padding: const EdgeInsets.only(right: 8, bottom: 8),
       child: Align(
         alignment: Alignment.centerRight,
         child: eligibilityState.isIDMarket

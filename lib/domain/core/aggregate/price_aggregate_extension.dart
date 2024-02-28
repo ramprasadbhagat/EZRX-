@@ -184,6 +184,16 @@ extension PriceAggregateExtension on List<PriceAggregate> {
         (sum, item) => sum + item.finalPriceTotal,
       );
 
+  double get totalMaterialsPriceHidePrice => where(
+        (item) =>
+            !item.materialInfo.type.typeBundle &&
+            !item.materialInfo.type.typeCombo &&
+            !item.materialInfo.hidePrice,
+      ).fold<double>(
+        0,
+        (sum, item) => sum + item.finalPriceTotal,
+      );
+
   double get totalBundlesPrice =>
       where((element) => element.materialInfo.type.typeBundle).fold(
         0,
@@ -196,4 +206,24 @@ extension PriceAggregateExtension on List<PriceAggregate> {
         (previousValue, element) =>
             previousValue + element.comboSubTotalExclTax,
       );
+
+  List<PriceAggregate> get sortToDisplay => toList()
+    ..sort(
+      (a, b) => b.materialInfo.type.sortPriority
+          .compareTo(a.materialInfo.type.sortPriority),
+    )
+    ..sort((a, b) {
+      if (a.materialInfo.type.typeMaterial &&
+          b.materialInfo.type.typeMaterial) {
+        return a.materialInfo.getManufactured
+            .compareTo(b.materialInfo.getManufactured);
+      }
+
+      return 0;
+    });
+
+  bool showManufacturerName(int index) =>
+      index == 0 ||
+      this[index].materialInfo.getManufactured !=
+          this[index - 1].materialInfo.getManufactured;
 }

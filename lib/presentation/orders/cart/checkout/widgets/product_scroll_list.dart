@@ -9,19 +9,14 @@ class _ProductScrollList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          final item = cartState.cartProducts[index];
+        (_, int index) {
+          final list = cartState.cartProducts.sortToDisplay;
+          final item = list[index];
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              index == 0 ||
-                      cartState.cartProducts[index].materialInfo.principalData
-                              .principalName
-                              .getValue() !=
-                          cartState.cartProducts[index - 1].materialInfo
-                              .principalData.principalName
-                              .getValue()
+              list.showManufacturerName(index)
                   ? _TitleScrollList(
                       cartProduct: item.materialInfo,
                     )

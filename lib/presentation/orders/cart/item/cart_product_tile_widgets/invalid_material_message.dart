@@ -11,7 +11,7 @@ class _InvalidMaterialMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (cartItem.materialInfo.isSuspended)
+        if (cartItem.isSuspendedMaterial)
           ErrorTextWithIcon(
             valueText: context.tr('Material Suspended'),
           ),

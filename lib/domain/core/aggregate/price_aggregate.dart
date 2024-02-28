@@ -891,6 +891,15 @@ class PriceAggregate with _$PriceAggregate {
         ),
       )
       .toList();
+
+  // Used for suspended material validation in cart page
+  bool get isSuspendedMaterial {
+    if (materialInfo.isSuspended) return true;
+    // This case happens when we had MP materials in cart but salesOrg may disable marketplace
+    if (materialInfo.isMarketPlace) return !salesOrgConfig.enableMarketPlace;
+
+    return false;
+  }
 }
 
 enum PriceType {

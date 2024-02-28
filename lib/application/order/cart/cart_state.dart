@@ -231,17 +231,11 @@ class CartState with _$CartState {
 
   double get totalComboPrice => cartProducts.totalComboPrice;
 
-  double get totalMaterialsPriceHidePrice => cartProducts
-      .where(
-        (item) =>
-            !item.materialInfo.type.typeBundle &&
-            !item.materialInfo.type.typeCombo &&
-            !item.materialInfo.hidePrice,
-      )
-      .fold<double>(
-        0,
-        (sum, item) => sum + item.finalPriceTotal,
-      );
+  double get totalZPMaterialsPriceHidePrice =>
+      cartProducts.zpMaterialOnly.totalMaterialsPriceHidePrice;
+
+  double get totalMaterialsPriceHidePrice =>
+      cartProducts.totalMaterialsPriceHidePrice;
 // This getter is used for MOV check
   double get zpSubtotal =>
       totalZPMaterialsPrice + totalZPBundlesPrice + totalZPComboPrice;
@@ -277,6 +271,12 @@ class CartState with _$CartState {
 
   //This getter is used for displaying subtotal value in
   // cart and for Order Submission
+  double get mpSubTotalHidePriceMaterial =>
+      subTotalHidePriceMaterial - zpSubTotalHidePriceMaterial;
+
+  double get zpSubTotalHidePriceMaterial =>
+      totalZPBundlesPrice + totalZPComboPrice + totalZPMaterialsPriceHidePrice;
+
   double get subTotalHidePriceMaterial =>
       totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice;
 
@@ -295,20 +295,6 @@ class CartState with _$CartState {
         (element) =>
             element.totalQty >= element.minimumQuantityBundleMaterial.quantity,
       );
-
-  bool showManufacturerName(int index) {
-    return index == 0 ||
-        cartProducts[index]
-                .materialInfo
-                .principalData
-                .principalName
-                .getValue() !=
-            cartProducts[index - 1]
-                .materialInfo
-                .principalData
-                .principalName
-                .getValue();
-  }
 
   double get materialLevelFinalPriceWithTaxForFullTax => cartProducts
       .where(
@@ -438,11 +424,6 @@ class CartState with _$CartState {
         )
         .getNewlyAddedItems(product.bonusSampleItems);
   }
-
-  List<PriceAggregate> get cartProductsComboSorted => List.from(cartProducts)
-    ..sort(
-      (a, b) => b.materialInfo.type.typeCombo ? 1 : -1,
-    );
 
   String get taxTitlePercent =>
       config.salesOrg.isVN ? '' : ' $totalTaxPercent%';

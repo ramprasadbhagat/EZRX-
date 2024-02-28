@@ -31,7 +31,7 @@ class CartLocalDataSource {
     );
     final products = data['data']['upsertCart']['EzRxItems'];
 
-    return List.from(products)
+    return List.from(makeResponseCamelCase(jsonEncode(products)))
         .map((e) => CartProductDto.fromJson(e).toDomain)
         .toList();
   }

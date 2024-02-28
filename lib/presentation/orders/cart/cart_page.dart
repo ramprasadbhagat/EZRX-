@@ -1,8 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
@@ -14,13 +20,13 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
-import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -33,20 +39,13 @@ import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list_item.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_checkout_section.dart';
-part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items_banner.dart';
-
-part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_price_not_available_message.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_info_label.dart';
+part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items_banner.dart';
+part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_price_not_available_message.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -347,7 +346,7 @@ class _CartPageState extends State<CartPage> {
                   ),
                   if (!state.priceUnderLoadingShimmer)
                     const _CartPageInvalidItemsBanner(),
-                  const _CartPageCartScrollList(),
+                  const Expanded(child: _CartPageCartScrollList()),
                   if (state.cartProducts.isNotEmpty)
                     const _CartPageCheckoutSection(),
                 ],

@@ -21,6 +21,50 @@ class PriceSummarySection extends StatelessWidget {
               ),
         ),
         const SizedBox(height: 24.0),
+        if (cartState.cartProducts.containMPMaterial) ...[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'ZP ${context.tr(
+                  'Subtotal (${salesOrgConfig.displayPrefixTax}.tax)',
+                )}:',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
+              ),
+              _DisplayPrice(
+                priceComponent: PriceComponent(
+                  salesOrgConfig: salesOrgConfig,
+                  price: cartState.zpSubTotalHidePriceMaterial.toString(),
+                  type: PriceStyle.summaryPrice,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'MP ${context.tr(
+                  'Subtotal (${salesOrgConfig.displayPrefixTax}.tax)',
+                )}:',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
+              ),
+              _DisplayPrice(
+                priceComponent: PriceComponent(
+                  salesOrgConfig: salesOrgConfig,
+                  price: cartState.mpSubTotalHidePriceMaterial.toString(),
+                  type: PriceStyle.summaryPrice,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+        ],
         Row(
           key: WidgetKeys.checkoutSummarySubTotal,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

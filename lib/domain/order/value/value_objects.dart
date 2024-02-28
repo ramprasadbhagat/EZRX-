@@ -157,6 +157,13 @@ class MaterialInfoType extends ValueObject<String> {
   bool get typeDealOrOverrideBonus =>
       isDealOrOverrideBonus(value.getOrElse(() => ''));
 
+  int get sortPriority {
+    if (typeCombo) return 3;
+    if (typeBundle) return 2;
+    
+    return 1;
+  }
+
   const MaterialInfoType._(this.value);
 }
 

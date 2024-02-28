@@ -19,7 +19,6 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
@@ -4112,41 +4111,6 @@ void main() {
                 documentType: DocumentType('ZPOR'),
               ),
             ),
-            true,
-          );
-        },
-      );
-
-      test(
-        'Testing CartBloc state showDialog showManufacturerName at 0 index',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: priceAggregates,
-          );
-          expect(
-            cartBlocState.showManufacturerName(0),
-            true,
-          );
-        },
-      );
-
-      test(
-        'Testing CartBloc state showDialog showManufacturerName at 1 index',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: [
-              priceAggregates.first,
-              priceAggregates.elementAt(1).copyWith(
-                    materialInfo: MaterialInfo.empty().copyWith(
-                      principalData: PrincipalData.empty().copyWith(
-                        principalName: PrincipalName('fake-principal-name'),
-                      ),
-                    ),
-                  )
-            ],
-          );
-          expect(
-            cartBlocState.showManufacturerName(1),
             true,
           );
         },

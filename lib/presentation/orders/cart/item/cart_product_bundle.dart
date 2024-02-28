@@ -26,27 +26,29 @@ class CartProductBundle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomSlidable(
-      key: WidgetKeys.cartItemBundleTile(cartItem.bundle.bundleCode),
-      extentRatio: 0.24,
-      endActionPaneActions: [
-        CustomSlidableAction(
-          key: WidgetKeys.cartItemSwipeDeleteButton,
-          label: '',
-          icon: Icons.delete_outline,
-          onPressed: (v) {
-            context.read<CartBloc>().add(
-                  CartEvent.upsertCart(
-                    priceAggregate: cartItem.copyWith(
-                      quantity: 0,
+    return CustomCard(
+      margin: const EdgeInsets.symmetric(vertical: 12),
+      clipBehavior: Clip.hardEdge,
+      child: CustomSlidable(
+        key: WidgetKeys.cartItemBundleTile(cartItem.bundle.bundleCode),
+        extentRatio: 0.24,
+        endActionPaneActions: [
+          CustomSlidableAction(
+            key: WidgetKeys.cartItemSwipeDeleteButton,
+            label: '',
+            icon: Icons.delete_outline,
+            onPressed: (v) {
+              context.read<CartBloc>().add(
+                    CartEvent.upsertCart(
+                      priceAggregate: cartItem.copyWith(
+                        quantity: 0,
+                      ),
                     ),
-                  ),
-                );
-          },
-        ),
-      ],
-      borderRadius: 8,
-      child: CustomCard(
+                  );
+            },
+          ),
+        ],
+        borderRadius: 8,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

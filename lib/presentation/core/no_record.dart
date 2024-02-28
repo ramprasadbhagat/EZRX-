@@ -141,6 +141,22 @@ class NoRecordFound extends StatelessWidget {
             )
           : const NoRecordFound();
 
+  factory NoRecordFound.cart(BuildContext context) => NoRecordFound(
+        title: 'Your cart is empty',
+        subTitle: 'Looks like you haven’t added anything to your cart yet',
+        actionButton: ElevatedButton(
+          key: WidgetKeys.startBrowsingProducts,
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size(double.maxFinite, 50),
+          ),
+          onPressed: () {
+            context.router.navigateNamed('main/products');
+          },
+          child: Text(context.tr('Start browsing')),
+        ),
+        svgImage: SvgImage.shoppingCart,
+      );
+
   @override
   Widget build(BuildContext context) {
     return Padding(

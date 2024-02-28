@@ -103,8 +103,7 @@ class CartItemQuantityInput extends StatelessWidget {
                 onSubmit(int.parse(text));
               },
               decoration: InputDecoration(
-                fillColor:
-                    isEnabled ? ZPColors.white : ZPColors.extraLightGrey5,
+                fillColor: isEnabled ? ZPColors.white : ZPColors.lightSilver,
                 isDense: true,
                 prefixIcon: ValueListenableBuilder<TextEditingValue>(
                   valueListenable: controller,
