@@ -8,7 +8,7 @@ class CustomDialogs {
     required BuildContext context,
     required String title,
     required String message,
-    Future<void> Function()? onCancelPressed,
+    required Future<void> Function() onCancelPressed,
     required Future<void> Function() onAcceptPressed,
     String confirmText = 'OK',
     String cancelText = 'Cancel',
@@ -26,7 +26,7 @@ class CustomDialogs {
               key: Key(cancelText),
               child: Text(cancelText).tr(),
               onPressed: () async {
-                if (onCancelPressed != null) await onCancelPressed();
+                await onCancelPressed();
                 if (context.mounted) await context.router.pop();
               },
             ),

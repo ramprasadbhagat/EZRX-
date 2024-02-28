@@ -3,9 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -108,8 +105,6 @@ import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.da
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
-import '../account/payment_configuration/bank_beneficiary/add_beneficiary_page_test.dart';
-import '../account/payment_configuration/payment_method/add_payment_method_page_test.dart';
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
@@ -178,10 +173,6 @@ class ReturnRequestTypeCodeBlocMock
 class PolicyConfigurationListBlocMock
     extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
     implements PolicyConfigurationBloc {}
-
-class ManagePaymentAdviceFooterBlocMock extends MockBloc<
-    ManagePaymentAdviceFooterEvent,
-    ManagePaymentAdviceFooterState> implements ManagePaymentAdviceFooterBloc {}
 
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
@@ -346,7 +337,6 @@ class ArticlesInfoFilterBlocMock
 class AnnouncementFilterBlocMock
     extends MockBloc<AnnouncementFilterEvent, AnnouncementFilterState>
     implements AnnouncementFilterBloc {}
-  
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -367,9 +357,6 @@ void main() {
   late UsageCodeBloc usageCodeBlocMock;
   late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
-  late PaymentMethodsBloc paymentMethodsBlocMock;
-  late ManageBankBeneficiaryBloc manageBankBeneficiaryBlocMock;
-  late ManagePaymentAdviceFooterBloc managePaymentAdviceFooterBlocMock;
   late MaterialListBloc materialListBlocMock;
   late ScanMaterialInfoBloc scanMaterialInfoMockBloc;
   late SettingBloc settingBlocMock;
@@ -491,9 +478,6 @@ void main() {
       usageCodeBlocMock = UsageCodeBlocMock();
       returnRequestTypeCodeBlocMock = ReturnRequestTypeCodeBlocMock();
       policyConfigurationListBlocMock = PolicyConfigurationListBlocMock();
-      paymentMethodsBlocMock = PaymentMethodBlocMock();
-      manageBankBeneficiaryBlocMock = ManageBankBeneficiaryBlocMock();
-      managePaymentAdviceFooterBlocMock = ManagePaymentAdviceFooterBlocMock();
       materialListBlocMock = MaterialListBlocMock();
       materialFilterBlocMock = MaterialFilterBlocMock();
       returnApproverBlocMock = ReturnApproverBlocMock();
@@ -547,15 +531,7 @@ void main() {
         ),
       );
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-      when(() => paymentMethodsBlocMock.state).thenReturn(
-        PaymentMethodsState.initial(),
-      );
-      when(() => manageBankBeneficiaryBlocMock.state).thenReturn(
-        ManageBankBeneficiaryState.initial(),
-      );
-      when(() => managePaymentAdviceFooterBlocMock.state).thenReturn(
-        ManagePaymentAdviceFooterState.initial(),
-      );
+
       when(() => accountSummaryMock.state)
           .thenReturn(AccountSummaryState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -672,15 +648,6 @@ void main() {
           providers: [
             BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<ManageBankBeneficiaryBloc>(
-              create: (context) => manageBankBeneficiaryBlocMock,
-            ),
-            BlocProvider<ManagePaymentAdviceFooterBloc>(
-              create: (context) => managePaymentAdviceFooterBlocMock,
-            ),
-            BlocProvider<PaymentMethodsBloc>(
-              create: (context) => paymentMethodsBlocMock,
             ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
@@ -1158,23 +1125,6 @@ void main() {
           UserRestrictionListEvent.fetch(
             salesOrg: fakeTWSalesOrganisation.salesOrg,
           ),
-        ),
-      ).called(1);
-
-      verify(
-        () => paymentMethodsBlocMock.add(
-          const PaymentMethodsEvent.fetch(),
-        ),
-      ).called(1);
-
-      verify(
-        () => manageBankBeneficiaryBlocMock.add(
-          const ManageBankBeneficiaryEvent.fetch(),
-        ),
-      ).called(1);
-      verify(
-        () => managePaymentAdviceFooterBlocMock.add(
-          const ManagePaymentAdviceFooterEvent.fetch(),
         ),
       ).called(1);
 

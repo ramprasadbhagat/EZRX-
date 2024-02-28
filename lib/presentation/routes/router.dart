@@ -5,14 +5,6 @@ import 'package:ezrxmobile/presentation/account/sales_org_search.dart';
 import 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_confirmation_page.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/bank_beneficiary_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/add_beneficiary_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/edit_beneficiary_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/add_payment_advice_footer.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/edit_payment_advice_footer.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/payment_configuration_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page.dart';
 import 'package:ezrxmobile/presentation/auth/reset_password_success/reset_password_success_page.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
@@ -22,7 +14,6 @@ import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
 import 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/payment_methods_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
@@ -42,7 +33,6 @@ import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/vi
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
 import 'package:ezrxmobile/presentation/payments/account_summary/account_summary_page.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/payment_advice_footer_page.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
 import 'package:ezrxmobile/presentation/payments/full_summary/full_summary.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
@@ -105,13 +95,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       path: 'reset_password_success',
       page: ResetPasswordSuccess,
     ),
-    AutoRoute(path: 'payment_configuration', page: PaymentConfigurationPage),
-    AutoRoute(path: 'payment_methods', page: PaymentMethodsPage),
-    AutoRoute(path: 'edit_payment_methods', page: EditPaymentMethodsPage),
-    AutoRoute(path: 'add_payment_methods', page: AddPaymentMethodsPage),
-    AutoRoute(path: 'payments/bank_beneficiary', page: BankBeneficiaryPage),
-    AutoRoute(path: 'payments/add_beneficiary', page: AddBeneficiaryPage),
-    AutoRoute(path: 'payments/edit_beneficiary', page: EditBeneficiaryPage),
     //AutoRoute(path: 'returns/request_return', page: RequestReturn),
     AutoRoute(path: 'returns/approver_actions', page: ApproverActions),
     AutoRoute(
@@ -325,18 +308,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(
       path: 'admin_po_attachment',
       page: AdminPoAttachmentPage,
-    ),
-    AutoRoute(
-      path: 'payments/advice_footer',
-      page: PaymentAdviceFooterPage,
-    ),
-    AutoRoute(
-      path: 'payments/advice_footer/add_advice_footer',
-      page: AddPaymentAdviceFooterPage,
-    ),
-    AutoRoute(
-      path: 'payments/advice_footer/edit_advice_footer',
-      page: EditPaymentAdviceFooterPage,
     ),
     CustomRoute(
       path: 'intro_page',

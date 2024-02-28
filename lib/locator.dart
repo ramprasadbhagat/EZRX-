@@ -5,11 +5,6 @@ import 'package:ezrxmobile/application/account/customer_license_bloc/customer_li
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -137,12 +132,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dar
 import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_footer_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_footer_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
@@ -162,8 +151,6 @@ import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repos
 import 'package:ezrxmobile/infrastructure/account/repository/customer_license_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/ez_point_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/notification_settings_repository.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/payment_advice_footer_repository.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/payment_methods_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_rep_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/update_sales_org_repository.dart';
@@ -2234,50 +2221,6 @@ void setupLocator() {
   );
 
   //============================================================
-  //  Payment Configuration
-  //
-  //============================================================
-
-  locator.registerLazySingleton(() => PaymentMethodsLocalDataSource());
-
-  locator.registerLazySingleton(() => PaymentMethodsQueryMutation());
-
-  locator.registerLazySingleton(
-    () => PaymentMethodsRemoteDataSource(
-      httpService: locator<HttpService>(),
-      paymentMethodsQueryMutation: locator<PaymentMethodsQueryMutation>(),
-      config: locator<Config>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => PaymentMethodsRepository(
-      config: locator<Config>(),
-      localDataSource: locator<PaymentMethodsLocalDataSource>(),
-      remoteDataSource: locator<PaymentMethodsRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => PaymentMethodsBloc(
-      paymentMethodsRepository: locator<PaymentMethodsRepository>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ManagePaymentMethodsBloc(
-      paymentMethodsRepository: locator<PaymentMethodsRepository>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => AddPaymentMethodBloc(
-      paymentMethodsRepository: locator<PaymentMethodsRepository>(),
-    ),
-  );
-
-  //============================================================
 
   //  Manage Bank Beneficiary
   //
@@ -2301,12 +2244,6 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<BankBeneficiaryLocalDataSource>(),
       remoteDataSource: locator<BankBeneficiaryRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ManageBankBeneficiaryBloc(
-      bankBeneficiaryRepository: locator<BankBeneficiaryRepository>(),
     ),
   );
 
@@ -2460,44 +2397,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => BankInAccountsBloc(
       bankBeneficiaryRepository: locator<BankBeneficiaryRepository>(),
-    ),
-  );
-
-  //============================================================
-  //  Payment Advice footer
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => PaymentAdviceFooterLocalDataSource(),
-  );
-  locator.registerLazySingleton(
-    () => PaymentAdviceQueryMutation(),
-  );
-
-  locator.registerLazySingleton(
-    () => PaymentAdviceFooterRemoteDataSource(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      paymentAdviceQueryMutation: locator<PaymentAdviceQueryMutation>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => PaymentAdviceFooterRepository(
-      config: locator<Config>(),
-      localDataSource: locator<PaymentAdviceFooterLocalDataSource>(),
-      remoteDataSource: locator<PaymentAdviceFooterRemoteDataSource>(),
-      permissionService: locator<PermissionService>(),
-      deviceInfo: locator<DeviceInfo>(),
-      filePickerService: locator<FilePickerService>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ManagePaymentAdviceFooterBloc(
-      paymentAdviceFooterRepository: locator<PaymentAdviceFooterRepository>(),
     ),
   );
 

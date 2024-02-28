@@ -412,47 +412,5 @@ void main() {
     //   await tester.tap(supportTile);
     //   await tester.pump();
     // });
-
-    // testWidgets(
-    //     'Payment Configuration should be visible when user role is root_admin',
-    //     (tester) async {
-    //   final expectedUserStates = [
-    //     UserState.initial().copyWith(
-    //       user: User.empty().copyWith(
-    //         id: 'testId',
-    //         role: Role.empty().copyWith(type: RoleType('root_admin')),
-    //       ),
-    //     ),
-    //   ];
-
-    //   whenListen(userBlocMock, Stream.fromIterable(expectedUserStates));
-
-    //   await tester.pumpWidget(getScopedWidget());
-    //   await tester.pump();
-    //   final supportTile = find.byKey(const Key('paymentConfigurationTile'));
-
-    //   expect(supportTile, findsOneWidget);
-    // });
-
-    // testWidgets(
-    //     'Payment Configuration should not be visible when user role is other than root_admin',
-    //     (tester) async {
-    //   final expectedUserStates = [
-    //     UserState.initial().copyWith(
-    //       user: User.empty().copyWith(
-    //         id: 'testId',
-    //         role: Role.empty().copyWith(type: RoleType('fake_admin')),
-    //       ),
-    //     ),
-    //   ];
-
-    //   whenListen(userBlocMock, Stream.fromIterable(expectedUserStates));
-
-    //   await tester.pumpWidget(getScopedWidget());
-    //   await tester.pump();
-    //   final supportTile = find.byKey(const Key('paymentConfigurationTile'));
-
-    //   expect(supportTile, findsNothing);
-    // });
   });
 }

@@ -18,39 +18,4 @@ class BankBeneficiaryQueryMutation {
     }
     ''';
   }
-
-  String getSalesDistrictQuery() {
-    return '''
-      query salesDistrict(\$request: salesDistrictRequest!) {
-        salesDistrict(request: \$request) {
-          salesOrg
-          salesDistricts {
-            id
-            salesDistrict
-            salesDistrictLabel
-          }
-        }
-      }
-    ''';
-  }
-
-  String addOrUpdateBeneficiaryQuery() {
-    return '''
-      mutation addBankBeneficiary(\$input: addBankBeneficiaryInput!) {
-        addBankBeneficiary(input: \$input) {
-          info
-        }
-      }
-    ''';
-  }
-
-  String deleteBeneficiaryQuery() {
-    return '''
-      mutation deleteBankBeneficiary(\$input: deleteBankBeneficiaryInput!) {
-        deleteBankBeneficiary(input: \$input) {
-          info
-        }
-      }
-    ''';
-  }
 }

@@ -3,15 +3,11 @@ import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
@@ -23,6 +19,7 @@ import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
+import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
@@ -53,11 +50,11 @@ import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.d
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
-import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
@@ -127,10 +124,8 @@ import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
-import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
-import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
@@ -368,9 +363,6 @@ class App extends StatelessWidget {
         // BlocProvider<AdminPoAttachmentFilterBloc>(
         //   create: (context) => locator<AdminPoAttachmentFilterBloc>(),
         // ),
-        BlocProvider<PaymentMethodsBloc>(
-          create: (context) => locator<PaymentMethodsBloc>(),
-        ),
         BlocProvider<AllInvoicesFilterBloc>(
           create: (context) => locator<AllInvoicesFilterBloc>(),
         ),
@@ -398,29 +390,14 @@ class App extends StatelessWidget {
         BlocProvider<NewPaymentBloc>(
           create: (context) => locator<NewPaymentBloc>(),
         ),
-        BlocProvider<ManagePaymentMethodsBloc>(
-          create: (context) => locator<ManagePaymentMethodsBloc>(),
-        ),
         BlocProvider<DownloadPaymentAttachmentsBloc>(
           create: (context) => locator<DownloadPaymentAttachmentsBloc>(),
-        ),
-        BlocProvider<AddPaymentMethodBloc>(
-          create: (context) => locator<AddPaymentMethodBloc>(),
         ),
         BlocProvider<SettingBloc>(
           create: (context) => locator<SettingBloc>(),
         ),
-        BlocProvider<ManageBankBeneficiaryBloc>(
-          create: (context) => locator<ManageBankBeneficiaryBloc>(),
-        ),
-        BlocProvider<ManageBankBeneficiaryBloc>(
-          create: (context) => locator<ManageBankBeneficiaryBloc>(),
-        ),
         BlocProvider<AllCreditsFilterBloc>(
           create: (context) => locator<AllCreditsFilterBloc>(),
-        ),
-        BlocProvider<ManagePaymentAdviceFooterBloc>(
-          create: (context) => locator<ManagePaymentAdviceFooterBloc>(),
         ),
         BlocProvider<IntroBloc>(
           create: (context) => locator<IntroBloc>(),

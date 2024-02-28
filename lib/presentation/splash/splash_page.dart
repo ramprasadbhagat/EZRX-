@@ -1,6 +1,3 @@
-import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
@@ -57,7 +54,6 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:universal_io/io.dart';
 import 'package:auto_route/auto_route.dart';
@@ -100,6 +96,8 @@ import 'package:ezrxmobile/application/order/scan_material_info/scan_material_in
 import 'package:ezrxmobile/presentation/orders/create_order/camera_files_permission_bottomsheet.dart';
 
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -224,8 +222,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             context.read<IntroBloc>().add(
                   const IntroEvent.checkAppFirstLaunch(),
                 );
-
-            _initializePaymentConfiguration(state);
           },
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
@@ -1297,21 +1293,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       );
     } else {
       salesOrgBloc.add(const SalesOrgEvent.initialized());
-    }
-  }
-
-  /// Use for all payment configuration related initialized bloc event here
-  void _initializePaymentConfiguration(UserState userState) {
-    if (userState.user.role.type.isRootAdmin) {
-      context.read<PaymentMethodsBloc>().add(
-            const PaymentMethodsEvent.fetch(),
-          );
-      context.read<ManageBankBeneficiaryBloc>().add(
-            const ManageBankBeneficiaryEvent.fetch(),
-          );
-      context.read<ManagePaymentAdviceFooterBloc>().add(
-            const ManagePaymentAdviceFooterEvent.fetch(),
-          );
     }
   }
 

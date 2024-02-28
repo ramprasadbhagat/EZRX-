@@ -14,7 +14,7 @@ void main() {
       () async {
         data = json.decode(
           await rootBundle.loadString(
-            'assets/json/getManageBankBenificiary.json',
+            'assets/json/getPaymentBankInAccountsResponse.json',
           ),
         );
       },
@@ -23,19 +23,19 @@ void main() {
       final bankBeneficiaryList = List.from(data['data']['bankBeneficiary'])
           .map((e) => BankBeneficiaryDto.fromJson(e).toDomain())
           .toList();
-      expect(bankBeneficiaryList.length, 18);
-      expect(bankBeneficiaryList.first.salesOrg.getOrDefaultValue(''), '2803');
+      expect(bankBeneficiaryList.length, 2);
+      expect(bankBeneficiaryList.first.salesOrg.getOrDefaultValue(''), '2500');
 
       //--Todo---//
       final bankBeneficiaryDtoList =
           bankBeneficiaryList.map((e) => BankBeneficiaryDto.fromDomain(e));
-      expect(bankBeneficiaryDtoList.length, 18);
-      expect(bankBeneficiaryDtoList.first.salesOrg, '2803');
+      expect(bankBeneficiaryDtoList.length, 2);
+      expect(bankBeneficiaryDtoList.first.salesOrg, '2500');
 
       final bankBeneficiaryDtoListMap =
           bankBeneficiaryDtoList.map((e) => e.toJson());
-      expect(bankBeneficiaryDtoListMap.length, 18);
-      expect(bankBeneficiaryDtoListMap.first['salesOrg'], '2803');
+      expect(bankBeneficiaryDtoListMap.length, 2);
+      expect(bankBeneficiaryDtoListMap.first['salesOrg'], '2500');
     });
   });
 }
