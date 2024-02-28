@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -194,6 +195,7 @@ void main() {
   late List<ComboMaterialItem> fakeComboMaterialItems;
   late AplSimulatorOrder aplSimulatorOrder;
   late PaymentCustomerInformationMockBloc paymentCustomerInformationMock;
+  late List<PriceAggregate> mockCartItemWithAllType;
   final routeData = RouteData(
     route: const RouteMatch(
       name: 'CartsPageRoute',
@@ -228,6 +230,8 @@ void main() {
     locator.registerFactory(() => AppRouter());
     locator.registerFactory<TenderContractBloc>(() => tenderContractBlocMock);
     autoRouterMock = MockAppRouter();
+    mockCartItemWithAllType =
+        (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
     mockCartItems = await CartLocalDataSource().upsertCart();
     fakeComboMaterialItems =
@@ -3520,7 +3524,6 @@ void main() {
       testWidgets(
           'Check if isProductDeterminationFailed is true then page is not redirecting from cart page to product details page',
           (tester) async {
-        
         final cartStates = [
           CartState.initial().copyWith(
             isUpdatingStock: true,
@@ -3564,6 +3567,108 @@ void main() {
         verifyNever(
           () => autoRouterMock.navigateBack(),
         );
+      });
+
+      group('Marketplace MOV validation -', () {
+        testWidgets('When both zp MOV and mp MOV is not eligible',
+            (tester) async {
+          final salesOrgConfig = fakeMYSalesOrgConfigs;
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: mockCartItemWithAllType),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              cartItems: mockCartItemWithAllType,
+              configs: salesOrgConfig,
+              mpSubtotal: salesOrgConfig.mpMinOrderAmount - 1,
+              zpSubtotal: salesOrgConfig.minOrderAmount - 1,
+              showErrorMessage: true,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final classicMOVErrorMessage =
+              'Please ensure that the order value satisfies the minimum order value of ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.minOrderAmount)}';
+          final errorMessage =
+              'Please ensure that minimum order value is at least ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.minOrderAmount)} for ZP subtotal & ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.mpMinOrderAmount)} for MP subtotal.';
+          expect(find.text(errorMessage), findsOneWidget);
+          expect(find.text(classicMOVErrorMessage), findsNothing);
+        });
+
+        testWidgets('When zp MOV is eligible and mp MOV is not eligible',
+            (tester) async {
+          final salesOrgConfig = fakeMYSalesOrgConfigs;
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: mockCartItemWithAllType),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              cartItems: mockCartItemWithAllType,
+              configs: salesOrgConfig,
+              mpSubtotal: salesOrgConfig.mpMinOrderAmount - 1,
+              zpSubtotal: salesOrgConfig.minOrderAmount,
+              showErrorMessage: true,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final errorMessage =
+              'Please ensure that minimum order value is at least ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.mpMinOrderAmount)} for MP subtotal.';
+          expect(find.text(errorMessage), findsOneWidget);
+        });
+
+        testWidgets('When mp MOV is not eligible and no zp material in cart',
+            (tester) async {
+          final salesOrgConfig = fakeMYSalesOrgConfigs;
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial()
+                .copyWith(cartProducts: mockCartItemWithAllType.mpMaterialOnly),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              cartItems: mockCartItemWithAllType.mpMaterialOnly,
+              configs: salesOrgConfig,
+              mpSubtotal: salesOrgConfig.mpMinOrderAmount - 1,
+              zpSubtotal: salesOrgConfig.minOrderAmount - 1,
+              showErrorMessage: true,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final errorMessage =
+              'Please ensure that minimum order value is at least ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.mpMinOrderAmount)} for MP subtotal.';
+          expect(find.text(errorMessage), findsOneWidget);
+        });
+
+        testWidgets('When zp MOV is not eligible and mp MOV is eligible',
+            (tester) async {
+          final salesOrgConfig = fakeMYSalesOrgConfigs;
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: mockCartItemWithAllType),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              cartItems: mockCartItemWithAllType,
+              configs: salesOrgConfig,
+              mpSubtotal: salesOrgConfig.mpMinOrderAmount,
+              zpSubtotal: salesOrgConfig.minOrderAmount - 1,
+              showErrorMessage: true,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final errorMessage =
+              'Please ensure that minimum order value is at least ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.minOrderAmount)} for ZP subtotal.';
+          expect(find.text(errorMessage), findsOneWidget);
+        });
       });
     },
   );

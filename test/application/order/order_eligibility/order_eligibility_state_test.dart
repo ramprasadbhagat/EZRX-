@@ -17,16 +17,20 @@ import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late OrderEligibilityState initializedState;
   late PriceAggregate fakeCartItem;
+  late PriceAggregate fakeMarketPlaceCartItem;
   late List<PriceAggregate> mockMaterialsCartItems;
   group('Test OrderEligibilityState', () {
     setUp(
       () async {
         fakeCartItem = (await CartLocalDataSource().upsertCartItems())[0];
+        fakeMarketPlaceCartItem =
+            fakeCartItem.copyWith.materialInfo(isMarketPlace: true);
         initializedState = OrderEligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
           salesOrg: fakeMYSalesOrganisation,
@@ -434,6 +438,171 @@ void main() {
         cartItems: [mockMaterialsCartItems.last],
       );
       expect(modifiedState.cartContainsSuspendedPrincipal, true);
+    });
+
+    group('MOV validation -', () {
+      test('zpSubtotalMOVEligible getter', () {
+        //return true when there is no zp material
+        expect(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeMarketPlaceCartItem],
+          ).zpSubtotalMOVEligible,
+          true,
+        );
+
+        //return true when zp material subtotal >= mov value
+        expect(
+          OrderEligibilityState.initial()
+              .copyWith(
+                configs: fakeMYSalesOrgConfigs,
+                cartItems: [fakeCartItem],
+                zpSubtotal: fakeMYSalesOrgConfigs.minOrderAmount,
+              )
+              .zpSubtotalMOVEligible,
+          true,
+        );
+
+        //return false when zp material subtotal < mov value
+        expect(
+          OrderEligibilityState.initial()
+              .copyWith(
+                configs: fakeMYSalesOrgConfigs,
+                cartItems: [fakeCartItem],
+                zpSubtotal: fakeMYSalesOrgConfigs.minOrderAmount - 1,
+              )
+              .zpSubtotalMOVEligible,
+          false,
+        );
+      });
+
+      test('mpSubtotalMOVEligible getter', () {
+        //return true when there is no mp material
+        expect(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeCartItem],
+          ).mpSubtotalMOVEligible,
+          true,
+        );
+
+        //return true when mp material subtotal >= mov value
+        expect(
+          OrderEligibilityState.initial()
+              .copyWith(
+                configs: fakeMYSalesOrgConfigs,
+                cartItems: [fakeMarketPlaceCartItem],
+                mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount,
+              )
+              .mpSubtotalMOVEligible,
+          true,
+        );
+
+        //return false when mp material subtotal < mov value
+        expect(
+          OrderEligibilityState.initial()
+              .copyWith(
+                configs: fakeMYSalesOrgConfigs,
+                cartItems: [fakeMarketPlaceCartItem],
+                mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount - 1,
+              )
+              .mpSubtotalMOVEligible,
+          false,
+        );
+      });
+
+      group('isTotalGreaterThanMinOrderAmount getter -', () {
+        test('when contains marketplace material', () {
+          final stateWithMPMaterial = OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeMarketPlaceCartItem, fakeCartItem],
+            configs: fakeMYSalesOrgConfigs,
+          );
+          //return false when not satisfied zp MOV
+          expect(
+            stateWithMPMaterial
+                .copyWith(
+                  zpSubtotal: fakeMYSalesOrgConfigs.minOrderAmount - 1,
+                  mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount,
+                )
+                .isTotalGreaterThanMinOrderAmount,
+            false,
+          );
+
+          //return false when not satisfied mp MOV
+          expect(
+            stateWithMPMaterial
+                .copyWith(
+                  zpSubtotal: fakeMYSalesOrgConfigs.minOrderAmount,
+                  mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount - 1,
+                )
+                .isTotalGreaterThanMinOrderAmount,
+            false,
+          );
+
+          //return true when satisfied both mp MOV and zp MOV
+          expect(
+            stateWithMPMaterial
+                .copyWith(
+                  zpSubtotal: fakeMYSalesOrgConfigs.minOrderAmount,
+                  mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount,
+                )
+                .isTotalGreaterThanMinOrderAmount,
+            true,
+          );
+        });
+
+        test(
+            'when contains only zp material && market required check mov on subtotal',
+            () {
+          final state = OrderEligibilityState.initial().copyWith(
+            salesOrg: fakeSGSalesOrganisation,
+            configs: fakeSGSalesOrgConfigs,
+            cartItems: [fakeCartItem],
+          );
+
+          // return false when subtotal < mov
+          expect(
+            state
+                .copyWith(subTotal: fakeSGSalesOrgConfigs.minOrderAmount - 1)
+                .isTotalGreaterThanMinOrderAmount,
+            false,
+          );
+
+          // return true when subtotal >= mov
+          expect(
+            state
+                .copyWith(subTotal: fakeSGSalesOrgConfigs.minOrderAmount)
+                .isTotalGreaterThanMinOrderAmount,
+            true,
+          );
+        });
+
+        test(
+            'when contains only zp material && market not required check mov on subtotal',
+            () {
+          final state = OrderEligibilityState.initial().copyWith(
+            salesOrg: fakeMYSalesOrganisation,
+            configs: fakeMYSalesOrgConfigs,
+            cartItems: [fakeCartItem],
+          );
+
+          // return false when grandTotal < mov
+          expect(
+            state
+                .copyWith(
+                  grandTotal: fakeMYSalesOrgConfigs.minOrderAmount - 1,
+                )
+                .isTotalGreaterThanMinOrderAmount,
+            false,
+          );
+
+          // return true when grandTotal >= mov
+          expect(
+            state
+                .copyWith(grandTotal: fakeMYSalesOrgConfigs.minOrderAmount)
+                .isTotalGreaterThanMinOrderAmount,
+            true,
+          );
+        });
+      });
     });
   });
 }
