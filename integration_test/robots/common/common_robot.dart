@@ -143,6 +143,9 @@ class CommonRobot {
     expect(customerCodeSelector, findsOneWidget);
   }
 
+  bool get isCustomerCodeSelectorVisible =>
+      customerCodeSelector.evaluate().isNotEmpty;
+
   Future<void> tapCustomerCodeSelector() async {
     await tester.tap(customerCodeSelector);
     await tester.pumpAndSettle();

@@ -31,7 +31,7 @@ class WidgetKeys {
   static const Key commonTileItemSubTitle = Key('commonTileItemSubTitle');
   static const Key confirmBottomSheetConfirmButton =
       Key('confirmBottomSheetConfirmButton');
-        static const Key confirmBottomSheetCancelButton =
+  static const Key confirmBottomSheetCancelButton =
       Key('confirmBottomSheetCancelButton');
   static const Key cancelBundleMaterialAddToCart =
       Key('cancelBundleMaterialAddToCart');
@@ -927,7 +927,8 @@ class WidgetKeys {
   static const Key outstandingInvoiceFilterPage =
       Key('outstandingInvoiceFilterPage');
   static const Key generatePaymentAdvice = Key('generatePaymentAdvice');
-  static const Key paymentAdviceDocumentHeader = Key('paymentAdviceDocumentHeader');
+  static const Key paymentAdviceDocumentHeader =
+      Key('paymentAdviceDocumentHeader');
   static const Key paymentSavePdfButtonSection =
       Key('paymentSavePdfButtonSection');
   static const Key paymentCancelAdviceButton = Key('paymentCancelAdviceButton');
@@ -1473,7 +1474,8 @@ class WidgetKeys {
   // Payment advice Page
   //============================================================
   static Key paymentAdviceScreenLoader = const Key('paymentAdviceScreenLoader');
-    static Key paymentAdviceScreenWaiting = const Key('paymentAdviceScreenWaiting');
+  static Key paymentAdviceScreenWaiting =
+      const Key('paymentAdviceScreenWaiting');
 
   static Key paymentBankInAdviceMessage =
       const Key('paymentBankInAdviceMessage');

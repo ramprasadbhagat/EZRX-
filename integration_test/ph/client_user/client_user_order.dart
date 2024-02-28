@@ -145,10 +145,24 @@ void main() {
   const market = 'Philippines';
   const username = 'auto_client_user';
   const password = 'Pa55word@1234';
+  const salesOrg = '2500';
   const customerCode = '0030013148';
   const shipToCode = '0070015858';
   const shipToAddress = 'WATSONS PERSONAL CARE';
   const otherShipToCode = '0000002511';
+
+  const mdiSalesOrg = '2501';
+  const mdiShipTo = '0000107381';
+  //abbott principal we show expiry date
+  const abbottMaterialNumber = '21248591';
+  const abbottExpiryDate = '14 Dec 2050';
+  const abbottPrincipalName = 'ABBOTT LABORATORIES';
+
+  //non abbott principal (other principal) - we hide expiry date as NA
+  const nonAbbottMaterialNumber = '13008017';
+  const nonAbbottExpiryDate = 'NA';
+  const nonAbbottPrincipalName = 'BAUSCH AND LOMB PHILS., INC';
+
   const currency = 'PHP';
   const invalidLengthSearchKey = '1';
   const invalidSearchKey = 'auto-test-auto-test';
@@ -161,7 +175,7 @@ void main() {
   const materialPrincipalName = 'RECKITT BENCKISER (SINGAPORE) PTE';
   const materialCountryOfOrigin = 'Philippines';
   const materialUnitMeasurement = 'EA';
-  const materialBatch = 'ZPOWNEDS';
+  const materialBatch = 'ZPOWNED5';
   const materialUnitPrice = 175.00;
   const multiImageMaterialNumber = materialNumber;
   const otherInfoMaterialNumber = materialNumber;
@@ -206,20 +220,31 @@ void main() {
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
     String shipToCode = shipToCode,
+    String salesOrg = salesOrg,
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, market);
-      await customerSearchRobot.selectCustomerSearch(shipToCode);
+      await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
+        shipToCode,
+        salesOrg,
+      );
       loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
     } else {
       await commonRobot.dismissSnackbar(dismissAll: true);
-      await commonRobot.changeDeliveryAddress(
+      if (commonRobot.isCustomerCodeSelectorVisible) {
+        await commonRobot.tapCustomerCodeSelector();
+        await tester.pumpAndSettle();
+      }
+      await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
+        salesOrg,
       );
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.closeAnnouncementAlertDialog();
     }
   }
 
@@ -1298,6 +1323,70 @@ void main() {
       productDetailRobot.verifyBatchDisplayed(value: materialBatch);
     });
 
+    testWidgets(
+        'EZRX-T1059 | Verify abbott material detail show expiry date - mdi sales org',
+        (tester) async {
+      await pumpAppWithHomeScreen(
+        tester,
+        salesOrg: mdiSalesOrg,
+        shipToCode: mdiShipTo,
+      );
+
+      await commonRobot.navigateToScreen(NavigationTab.products);
+      await productRobot.openSearchProductScreen();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(abbottMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(abbottMaterialNumber);
+      productDetailRobot.verifyProductImageDisplayed();
+      productDetailRobot.verifyProductFavoriteIconDisplayed();
+      productDetailRobot.verifyProductNameDisplayed();
+      productDetailRobot.verifyExpiryDate(abbottExpiryDate);
+      productDetailRobot.verifyProductPriceDisplayed();
+      productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
+      productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
+      productDetailRobot.verifyCartButtonDisplayed();
+      productDetailRobot.verifyAddToCartCartButtonDisplayed();
+
+      await productDetailRobot.openMaterialInformation();
+      productDetailRobot.verifyMateriaNumberDisplayed(abbottMaterialNumber);
+      productDetailRobot.verifyManufacturerDisplayed(abbottPrincipalName);
+      productDetailRobot.verifyExpiryDateLabelDisplayed(
+        value: abbottExpiryDate,
+      );
+    });
+
+    testWidgets(
+        'EZRX-T1060 | Verify non abbott material detail hide expiry date - mdi sales org',
+        (tester) async {
+      await pumpAppWithHomeScreen(
+        tester,
+        salesOrg: mdiSalesOrg,
+        shipToCode: mdiShipTo,
+      );
+
+      await commonRobot.navigateToScreen(NavigationTab.products);
+      await productRobot.openSearchProductScreen();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(nonAbbottMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(nonAbbottMaterialNumber);
+      productDetailRobot.verifyProductImageDisplayed();
+      productDetailRobot.verifyProductFavoriteIconDisplayed();
+      productDetailRobot.verifyProductNameDisplayed();
+      productDetailRobot.verifyExpiryDate(nonAbbottExpiryDate);
+      productDetailRobot.verifyProductPriceDisplayed();
+      productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
+      productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
+      productDetailRobot.verifyCartButtonDisplayed();
+      productDetailRobot.verifyAddToCartCartButtonDisplayed();
+
+      await productDetailRobot.openMaterialInformation();
+      productDetailRobot.verifyMateriaNumberDisplayed(nonAbbottMaterialNumber);
+      productDetailRobot.verifyManufacturerDisplayed(nonAbbottPrincipalName);
+      productDetailRobot.verifyExpiryDateLabelDisplayed(
+        value: nonAbbottExpiryDate,
+      );
+    });
+
     testWidgets('EZRX-T64 | Verify display image when having multiple images',
         (tester) async {
       await pumpAppWithHomeScreen(tester);
@@ -1306,9 +1395,6 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productRobot.searchWithKeyboardAction(multiImageMaterialNumber);
       await productSuggestionRobot.tapSearchResult(multiImageMaterialNumber);
-      // final havingMultipleImage =
-      //     await productDetailRobot.verifyMultipleImages();
-      // if (havingMultipleImage) {
       productDetailRobot.verifyImageMaterialSelected(0, true);
       productDetailRobot.verifyImageMaterialSelected(1, false);
       await productDetailRobot.tapToImageMaterial(1, false);

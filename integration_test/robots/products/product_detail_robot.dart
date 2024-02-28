@@ -25,6 +25,7 @@ class ProductDetailRobot extends CommonRobot {
   final offerBottomSheetCloseButton = find.byKey(WidgetKeys.closeButton);
   final closeMaterialInformationDialog =
       find.byKey(WidgetKeys.closeMaterialInformationDialog);
+  final materialDetailsStock = find.byKey(WidgetKeys.materialDetailsStock);
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
@@ -108,6 +109,15 @@ class ProductDetailRobot extends CommonRobot {
       materialDetailsMaterialDescription.first,
       findsOneWidget,
     );
+  }
+
+  void verifyExpiryDate(String expiryDate) {
+    expect(materialDetailsStock, findsOneWidget);
+    final richTextChildren =
+        (tester.widget<RichText>(materialDetailsStock).text as TextSpan)
+            .children;
+    final expiryText = (richTextChildren!.last as TextSpan).text;
+    expect(expiryText, '(${'EXP'.tr()}: $expiryDate)');
   }
 
   void verifyProductPriceDisplayed() {
