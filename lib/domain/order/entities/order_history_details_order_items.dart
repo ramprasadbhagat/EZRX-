@@ -202,6 +202,9 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
   bool get showItemTax =>
       priceAggregate.showTaxBreakDown && !type.isMaterialTypeBonus;
+
+  bool get hasInValidPrice =>
+      !type.isMaterialTypeBonus && (hidePrice || unitPrice == 0);
 }
 
 extension ViewByOrderDetailsListExtension

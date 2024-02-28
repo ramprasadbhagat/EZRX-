@@ -228,8 +228,8 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         : '';
   }
 
-  bool get orderContainsHidePriceMaterial =>
-      orderHistoryDetailsOrderItem.any((element) => element.hidePrice);
+  bool get orderContainsMaterialsWithInvalidPrice =>
+      orderHistoryDetailsOrderItem.any((element) => element.hasInValidPrice);
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetails> {

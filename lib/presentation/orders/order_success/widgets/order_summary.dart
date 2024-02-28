@@ -151,7 +151,7 @@ class _OrderSummary extends StatelessWidget {
                 ],
               ),
             ),
-          if (orderHistoryDetails.orderContainsHidePriceMaterial)
+          if (orderHistoryDetails.orderContainsMaterialsWithInvalidPrice)
             const PriceNotAvailableMessage(
               margin: EdgeInsets.symmetric(vertical: 8),
             ),

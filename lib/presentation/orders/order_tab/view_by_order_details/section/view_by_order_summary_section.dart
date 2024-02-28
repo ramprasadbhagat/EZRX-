@@ -133,7 +133,7 @@ class OrderSummarySection extends StatelessWidget {
                   ? orderDetails.grandTotal(isMYExternalSalesRep)
                   : orderDetails.orderedItemsValue(isMYExternalSalesRep),
             ),
-            if (orderDetails.orderContainsHidePriceMaterial)
+            if (orderDetails.orderContainsMaterialsWithInvalidPrice)
               const PriceNotAvailableMessage(
                 margin: EdgeInsets.symmetric(vertical: 8),
               ),

@@ -1223,6 +1223,34 @@ void main() {
       );
     });
 
+    testWidgets(
+        'Find Price is not available warning if any item has invalid price',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+        ),
+      );
+      final materialList = [
+        fakeMaterialItem,
+        fakeMaterialItem.copyWith(hidePrice: false, unitPrice: 0),
+      ];
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: materialList,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+
+      final priceNotAvailableWarning =
+          find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
+
+      expect(priceNotAvailableWarning, findsOneWidget);
+    });
+
     testWidgets('Show Attachment Document Showing Less', (tester) async {
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) =>
