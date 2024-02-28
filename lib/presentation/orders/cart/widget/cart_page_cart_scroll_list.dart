@@ -33,11 +33,13 @@ class _CartPageCartScrollList extends StatelessWidget {
                 ? [SliverToBoxAdapter(child: NoRecordFound.cart(context))]
                 : [
                     SliverList(
+                      key: WidgetKeys.cartZPProductSection,
                       delegate: SliverChildBuilderDelegate(
                         (_, index) {
                           final item = zpMaterials[index];
 
                           return _CartPageScrollListItem(
+                            key: WidgetKeys.cartItemTile(index),
                             item: item,
                             showManufacturerName:
                                 zpMaterials.showManufacturerName(index),
@@ -54,6 +56,7 @@ class _CartPageCartScrollList extends StatelessWidget {
                         ),
                       ),
                     SliverList(
+                      key: WidgetKeys.cartMPProductSection,
                       delegate: SliverChildBuilderDelegate(
                         (_, index) {
                           final item = mpMaterials[index];
@@ -63,6 +66,7 @@ class _CartPageCartScrollList extends StatelessWidget {
                             children: [
                               if (index == 0) const _MarketPlaceLabel(),
                               _CartPageScrollListItem(
+                                key: WidgetKeys.cartItemTile(index),
                                 item: item,
                                 showManufacturerName:
                                     mpMaterials.showManufacturerName(index),
@@ -90,6 +94,7 @@ class _MarketPlaceLabel extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       color: Colors.white,
       child: Row(
+        key: WidgetKeys.cartMPProductSectionLabel,
         children: [
           SvgPicture.asset(
             SvgImage.marketplaceIcon,

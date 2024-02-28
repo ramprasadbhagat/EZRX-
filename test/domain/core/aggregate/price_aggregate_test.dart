@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -37,6 +38,7 @@ import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   final emptyPrice = Price.empty();
   final emptyMaterialInfo = MaterialInfo.empty();
   final emptyBundle = Bundle.empty();
@@ -1327,6 +1329,43 @@ void main() {
         );
       });
     });
+
+    test('isSuspendedMaterial getter', () {
+      // True when isSuspended is true
+      expect(
+        emptyPriceAggregate.copyWith
+            .materialInfo(isSuspended: true)
+            .isSuspendedMaterial,
+        true,
+      );
+
+      // False when isSuspended is false and is ZP material
+      expect(emptyPriceAggregate.isSuspendedMaterial, false);
+
+      // False when isSuspended is false, is MP material and SalesOrg enable marketplace
+      expect(
+        emptyPriceAggregate
+            .copyWith(
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              materialInfo: MaterialInfo.empty()
+                  .copyWith(isSuspended: false, isMarketPlace: true),
+            )
+            .isSuspendedMaterial,
+        false,
+      );
+
+      // True when isSuspended is false, is MP material and SalesOrg disable marketplace
+      expect(
+        emptyPriceAggregate
+            .copyWith(
+              salesOrgConfig: fakeSGSalesOrgConfigs,
+              materialInfo: MaterialInfo.empty()
+                  .copyWith(isSuspended: false, isMarketPlace: true),
+            )
+            .isSuspendedMaterial,
+        true,
+      );
+    });
   });
 
   group('Combo Deal K1', () {
@@ -2279,5 +2318,44 @@ void main() {
       customPriceAggregate.finalPrice,
       finalPrice.getValue(),
     );
+  });
+
+  group('Price Aggregate List Test -', () {
+    late final List<PriceAggregate> items;
+
+    setUpAll(() async {
+      items = (await CartLocalDataSource().getAddedToCartProductList())
+          .cartProducts;
+    });
+    test('Sort to display in cart page & checkout page', () {
+      final materials =
+          items.where((e) => e.materialInfo.type.typeMaterial).toList();
+      final bundles =
+          items.where((e) => e.materialInfo.type.typeBundle).toList();
+      final combos = items.where((e) => e.materialInfo.type.typeCombo).toList();
+
+      expect(
+        items.sortToDisplay,
+        <PriceAggregate>[...combos, ...bundles, ...materials],
+      );
+    });
+
+    test('showManufacturerName', () {
+      //Return true if is first index
+      expect(items.showManufacturerName(0), true);
+
+      //Return true if index manufacturer is different from previous index's
+      expect(
+        [
+          items.first,
+          items.first.copyWith.materialInfo
+              .principalData(principalName: PrincipalName('test'))
+        ].showManufacturerName(1),
+        true,
+      );
+
+      //Return false if index manufacturer is the same from previous index's
+      expect([items.first, items.first].showManufacturerName(1), false);
+    });
   });
 }

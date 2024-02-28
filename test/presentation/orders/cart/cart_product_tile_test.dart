@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
@@ -911,6 +912,75 @@ void main() {
         final requestedCounterOfferKey =
             find.text('Requested counter offer'.tr());
         expect(requestedCounterOfferKey, findsOneWidget);
+      });
+
+      testWidgets(
+          'Marketplace material display seller instead of manufacturer and hide bonus/price override section',
+          (tester) async {
+        final mpMaterial = cartItem.copyWith.materialInfo(isMarketPlace: true);
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(cartProducts: [mpMaterial]),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final mpSection = find.byKey(WidgetKeys.cartMPProductSection);
+        expect(mpSection, findsOneWidget);
+        expect(
+          find.descendant(
+            of: mpSection,
+            matching: find.byKey(WidgetKeys.marketplaceSellerIcon),
+          ),
+          findsOneWidget,
+        );
+        final material = find.descendant(
+          of: mpSection,
+          matching: find.byKey(
+            WidgetKeys.cartItemProductTile(
+              cartItem.getMaterialNumber.displayMatNo,
+            ),
+          ),
+        );
+        expect(material, findsOneWidget);
+        expect(
+          find.descendant(
+            of: material,
+            matching: find.byKey(WidgetKeys.bonusPriceOverrideSection),
+          ),
+          findsNothing,
+        );
+      });
+
+      testWidgets(
+          'Marketplace material show Material Suspended when salesOrg turn off marketplace',
+          (tester) async {
+        final mpMaterial = cartItem.copyWith.materialInfo(isMarketPlace: true);
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              mpMaterial.copyWith(salesOrgConfig: fakeSGSalesOrgConfigs)
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final material = find.byKey(
+          WidgetKeys.cartItemProductTile(
+            cartItem.getMaterialNumber.displayMatNo,
+          ),
+        );
+
+        expect(material, findsOneWidget);
+        expect(
+          find.descendant(
+            of: material,
+            matching: find.descendant(
+              of: find.byType(ErrorTextWithIcon),
+              matching: find.text('Material Suspended'),
+            ),
+          ),
+          findsOneWidget,
+        );
       });
     },
   );

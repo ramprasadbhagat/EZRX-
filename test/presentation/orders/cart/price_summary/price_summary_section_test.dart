@@ -34,6 +34,8 @@ class MockAppRouter extends Mock implements AppRouter {}
 
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
+class CartStateMock extends Mock implements CartState {}
+
 void main() {
   late EligibilityBloc eligibilityBloc;
   late CartBloc cartBloc;
@@ -53,6 +55,8 @@ void main() {
   );
 
   late List<PriceAggregate> mockCartBundleItems;
+  late List<PriceAggregate> cartItemMock;
+  late CartState cartStateMock;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +64,8 @@ void main() {
     locator.registerFactory<AppRouter>(() => MockAppRouter());
     autoRouter = locator<AppRouter>();
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
+    cartItemMock =
+        (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
   });
 
   RouteData fakeRouteData(String name) => RouteData(
@@ -78,9 +84,18 @@ void main() {
     () {
       cartBloc = CartBlocMock();
       eligibilityBloc = EligibilityBlocMock();
+      cartStateMock = CartStateMock();
       when(() => cartBloc.state).thenReturn(CartState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
       when(() => autoRouter.current).thenReturn(fakeRouteData(''));
+      when(() => cartStateMock.cartProducts).thenReturn([]);
+      when(() => cartStateMock.checkoutSubTotalHidePriceMaterial).thenReturn(0);
+      when(() => cartStateMock.subTotalHidePriceMaterial).thenReturn(0);
+      when(() => cartStateMock.grandTotalHidePriceMaterial).thenReturn(0);
+      when(() => cartStateMock.checkoutTotalSaving).thenReturn(0);
+      when(() => cartStateMock.cartTotalSaving).thenReturn(0);
+      when(() => cartStateMock.salesOrganisation)
+          .thenReturn(fakeMYSalesOrganisation);
     },
   );
 
@@ -232,6 +247,91 @@ void main() {
       });
     });
 
+    group('Subtotal for marketplace', () {
+      final zpSubTotalSection =
+          find.byKey(WidgetKeys.checkoutSummaryZPSubTotal);
+      final mpSubTotalSection =
+          find.byKey(WidgetKeys.checkoutSummaryMPSubTotal);
+
+      testWidgets('ZP & MP subtotal visible when cart has MP items',
+          (tester) async {
+        const mpSubTotal = 200.5;
+        const zpSubTotal = 100.2;
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial()
+              .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+        );
+        when(() => cartStateMock.cartProducts).thenReturn(cartItemMock);
+        when(() => cartStateMock.mpSubTotalHidePriceMaterial)
+            .thenReturn(mpSubTotal);
+        when(() => cartStateMock.zpSubTotalHidePriceMaterial)
+            .thenReturn(zpSubTotal);
+
+        await tester.pumpWidget(getWidget(cartStateMock));
+        await tester.pumpAndSettle();
+
+        expect(mpSubTotalSection, findsOneWidget);
+        expect(
+          find.descendant(
+            of: mpSubTotalSection,
+            matching: find.text('MP Subtotal (incl.tax):'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: mpSubTotalSection,
+            matching: find.text(
+              StringUtils.priceComponentDisplayPrice(
+                fakeMYSalesOrgConfigs,
+                mpSubTotal,
+                false,
+              ),
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(zpSubTotalSection, findsOneWidget);
+        expect(
+          find.descendant(
+            of: zpSubTotalSection,
+            matching: find.textContaining('ZP Subtotal (incl.tax):'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: zpSubTotalSection,
+            matching: find.textContaining(
+              StringUtils.priceComponentDisplayPrice(
+                fakeMYSalesOrgConfigs,
+                zpSubTotal,
+                false,
+              ),
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('ZP & MP subtotal not visible when cart has MP items',
+          (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial()
+              .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+        );
+        when(() => cartStateMock.cartProducts).thenReturn([]);
+
+        await tester.pumpWidget(getWidget(cartStateMock));
+        await tester.pumpAndSettle();
+
+        expect(mpSubTotalSection, findsNothing);
+        expect(zpSubTotalSection, findsNothing);
+      });
+    });
+
     group('Test SubTotal', () {
       testWidgets('Test Sub total Cart page for bundles ', (tester) async {
         final cartState = CartState.initial().copyWith(
@@ -255,8 +355,7 @@ void main() {
         expect(
           find.descendant(
             of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
-            matching: find
-                .textContaining(
+            matching: find.textContaining(
               'Subtotal (${fakeMYSalesOrgConfigs.displayPrefixTax}.tax)',
             ),
           ),
@@ -301,8 +400,7 @@ void main() {
         expect(
           find.descendant(
             of: find.byKey(WidgetKeys.checkoutSummarySubTotal),
-            matching: find
-                .textContaining(
+            matching: find.textContaining(
               'Subtotal (${fakeMYSalesOrgConfigs.displayPrefixTax}.tax)',
             ),
           ),

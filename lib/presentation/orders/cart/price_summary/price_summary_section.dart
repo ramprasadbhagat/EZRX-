@@ -23,6 +23,7 @@ class PriceSummarySection extends StatelessWidget {
         const SizedBox(height: 24.0),
         if (cartState.cartProducts.containMPMaterial) ...[
           Row(
+            key: WidgetKeys.checkoutSummaryZPSubTotal,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -44,6 +45,7 @@ class PriceSummarySection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Row(
+            key: WidgetKeys.checkoutSummaryMPSubTotal,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(

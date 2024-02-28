@@ -476,6 +476,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
             isMYPnGSalesRepEligible);
 
     return Padding(
+      key: WidgetKeys.bonusPriceOverrideSection,
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

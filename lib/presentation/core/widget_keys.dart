@@ -597,6 +597,7 @@ class WidgetKeys {
   static const Key cartShipToAddressSheet = Key('cartShipToAddressSheet');
   static const Key cartShipToAddressSheetCloseButton =
       Key('cartShipToAddressSheetCloseButton');
+  static Key cartItemTile(int index) => Key('cartItemTile$index');
   static Key cartItemProductTile(String materialNumber) =>
       Key('cartItemProductTile$materialNumber');
   static const Key cartItemProductMaterialNumber =
@@ -649,6 +650,11 @@ class WidgetKeys {
       Key('cartPageInvalidItemsBannerButton');
   static const Key summaryInfoButton = Key('summaryInfoButton');
   static const Key showOrderSumaryListTile = Key('showOrderSumaryListTile');
+  static const Key bonusPriceOverrideSection = Key('bonusPriceOverrideSection');
+  static const Key marketplaceSellerIcon = Key('marketplaceSellerIcon');
+  static const Key cartZPProductSection = Key('cartZPProductSection');
+  static const Key cartMPProductSection = Key('cartMPProductSection');
+  static const Key cartMPProductSectionLabel = Key('cartMPProductSectionLabel');
 
   //============================================================
   //  Checkout Page Keys
@@ -674,6 +680,8 @@ class WidgetKeys {
   static const Key checkoutScrollList = Key('checkoutScrollList');
   static const Key checkoutDeliveryArrowButton =
       Key('checkoutDeliveryArrowButton');
+  static const Key checkoutSummaryZPSubTotal = Key('checkoutSummaryZPSubTotal');
+  static const Key checkoutSummaryMPSubTotal = Key('checkoutSummaryMPSubTotal');
   static const Key checkoutSummarySubTotal = Key('checkoutSummarySubTotal');
   static const Key checkoutSummaryStampDuty = Key('checkoutSummaryStampDuty');
   static const Key checkoutSummarySmallOrderFee =

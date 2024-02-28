@@ -115,6 +115,7 @@ class _CartPageManufacturerName extends StatelessWidget {
           ? Row(
               children: [
                 SizedBox(
+                  key: WidgetKeys.marketplaceSellerIcon,
                   width: 20,
                   height: 20,
                   child: SvgPicture.asset(

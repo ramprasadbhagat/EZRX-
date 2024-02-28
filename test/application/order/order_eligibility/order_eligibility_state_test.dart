@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -17,7 +18,6 @@ import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -236,18 +236,35 @@ void main() {
       expect(initializedState.cartContainsSuspendedMaterials, false);
 
       // cartContainsSuspendedMaterials is true
-      final modifiedState = initializedState.copyWith(
+      final stateWithZPMaterial = initializedState.copyWith(
         showErrorMessage: true,
         cartItems: [
           fakeCartItem.copyWith(
+            salesOrgConfig: fakeMYSalesOrgConfigs,
             materialInfo: MaterialInfo.empty().copyWith(
-              type: MaterialInfoType('material'),
+              type: MaterialInfoType.material(),
               isSuspended: true,
             ),
           )
         ],
       );
-      expect(modifiedState.cartContainsSuspendedMaterials, true);
+      expect(stateWithZPMaterial.cartContainsSuspendedMaterials, true);
+
+      // cartContainsSuspendedMaterials is true
+      final stateWithMPMaterial = initializedState.copyWith(
+        showErrorMessage: true,
+        cartItems: [
+          fakeCartItem.copyWith(
+            salesOrgConfig: fakeSGSalesOrgConfigs,
+            materialInfo: MaterialInfo.empty().copyWith(
+              type: MaterialInfoType.material(),
+              isSuspended: false,
+              isMarketPlace: true,
+            ),
+          )
+        ],
+      );
+      expect(stateWithMPMaterial.cartContainsSuspendedMaterials, true);
     });
 
     test(' => invalidMaterialCartItems should return correct value', () {
@@ -365,34 +382,6 @@ void main() {
           isSuspended: true,
         )
       ]);
-    });
-
-    test(' => invalidCartItems should return correct value', () {
-      // invalidCartItems is empty
-      expect(initializedState.invalidCartItems, []);
-
-      // invalidCartItems is not empty
-      final cartProducts = mockMaterialsCartItems
-          .map(
-            (e) => e.copyWith(
-              materialInfo: e.materialInfo.copyWith(
-                type: MaterialInfoType('material'),
-              ),
-            ),
-          )
-          .toList();
-      final eligibilityState = OrderEligibilityState.initial().copyWith(
-        cartItems: cartProducts,
-      );
-      final invalidMaterials = cartProducts
-          .map(
-            (e) => e.materialInfo.copyWith(
-              quantity: MaterialQty(0),
-            ),
-          )
-          .toList();
-      final materials = eligibilityState.invalidMaterialCartItems;
-      expect(materials, invalidMaterials);
     });
 
     test(' => eligibleForOrderSubmit should return correct value', () {

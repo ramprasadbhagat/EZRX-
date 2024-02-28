@@ -2,7 +2,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:auto_route/auto_route.dart';
@@ -27,7 +29,6 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -158,8 +159,6 @@ class MaterialPageXMock extends Mock implements MaterialPageX {}
 class PaymentCustomerInformationMockBloc extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
-
-final locator = GetIt.instance;
 
 void main() {
   late CartBloc cartBloc;
@@ -3638,6 +3637,159 @@ void main() {
           final errorMessage =
               'Please ensure that minimum order value is at least ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.minOrderAmount)} for ZP subtotal.';
           expect(find.text(errorMessage), findsOneWidget);
+        });
+      });
+
+      group('Scroll list section -', () {
+        late List<PriceAggregate> cartItems;
+        late final zpItems = cartItems.zpMaterialOnly;
+        late final mpItems = cartItems.mpMaterialOnly;
+        final zpSection = find.byKey(WidgetKeys.cartZPProductSection);
+        final mpSection = find.byKey(WidgetKeys.cartMPProductSection);
+
+        setUpAll(() async {
+          cartItems = (await CartLocalDataSource().getAddedToCartProductList())
+              .cartProducts;
+        });
+
+        Future<void> scroll(WidgetTester tester, Finder finder) =>
+            tester.dragUntilVisible(
+              finder,
+              find.byKey(WidgetKeys.scrollList),
+              const Offset(0, -200),
+            );
+
+        testWidgets('MP and ZP section visible', (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: cartItems),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          expect(zpSection, findsOneWidget);
+          final lastZPItem = find.descendant(
+            of: zpSection,
+            matching: find.byKey(WidgetKeys.cartItemTile(zpItems.length - 1)),
+          );
+          await scroll(tester, lastZPItem);
+          expect(lastZPItem, findsOneWidget);
+          await scroll(tester, mpSection);
+          expect(mpSection, findsOneWidget);
+          expect(
+            find.descendant(
+              of: mpSection,
+              matching: find.byKey(WidgetKeys.cartMPProductSectionLabel),
+            ),
+            findsOneWidget,
+          );
+          final lastMPItem = find.descendant(
+            of: mpSection,
+            matching: find.byKey(WidgetKeys.cartItemTile(mpItems.length - 1)),
+          );
+          await scroll(tester, lastMPItem);
+          expect(lastMPItem, findsOneWidget);
+        });
+
+        testWidgets('MP section not visible when there is no MP items',
+            (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: zpItems),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          expect(zpSection, findsOneWidget);
+          final lastZPItem = find.descendant(
+            of: zpSection,
+            matching: find.byKey(WidgetKeys.cartItemTile(zpItems.length - 1)),
+          );
+          await scroll(tester, lastZPItem);
+          expect(lastZPItem, findsOneWidget);
+          await tester.drag(
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -1000),
+          );
+          expect(mpSection, findsNothing);
+          expect(
+            find.descendant(
+              of: mpSection,
+              matching: find.byKey(WidgetKeys.cartItemTile(0)),
+            ),
+            findsNothing,
+          );
+        });
+
+        testWidgets('ZP section not visible when there is no ZP items',
+            (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: mpItems),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          expect(zpSection, findsNothing);
+          expect(
+            find.descendant(
+              of: zpSection,
+              matching: find.byKey(WidgetKeys.cartItemTile(0)),
+            ),
+            findsNothing,
+          );
+          expect(mpSection, findsOneWidget);
+          expect(
+            find.descendant(
+              of: mpSection,
+              matching: find.byKey(WidgetKeys.cartMPProductSectionLabel),
+            ),
+            findsOneWidget,
+          );
+          final lastMPItem = find.descendant(
+            of: mpSection,
+            matching: find.byKey(WidgetKeys.cartItemTile(mpItems.length - 1)),
+          );
+          await scroll(tester, lastMPItem);
+          expect(lastMPItem, findsOneWidget);
+        });
+
+        testWidgets('Display no record when list is empty', (tester) async {
+          when(() => autoRouterMock.navigateNamed('main/products'))
+              .thenAnswer((async) => Future.value());
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: <PriceAggregate>[]),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          final noRecord = find.byType(NoRecordFound);
+          expect(noRecord, findsOneWidget);
+          expect(mpSection, findsNothing);
+          expect(zpSection, findsNothing);
+          expect(
+            find.descendant(
+              of: noRecord,
+              matching: find.text('Your cart is empty'),
+            ),
+            findsOneWidget,
+          );
+
+          expect(
+            find.descendant(
+              of: noRecord,
+              matching: find.text(
+                'Looks like you haven’t added anything to your cart yet.',
+              ),
+            ),
+            findsOneWidget,
+          );
+          final browseButton = find.byKey(WidgetKeys.startBrowsingProducts);
+          expect(browseButton, findsOneWidget);
+          await tester.tap(browseButton);
+          await tester.pumpAndSettle();
+
+          verify(() => autoRouterMock.navigateNamed('main/products')).called(1);
         });
       });
     },
