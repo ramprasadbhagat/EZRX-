@@ -22,40 +22,31 @@ class _PreOrderScrollSection extends StatelessWidget {
           onRefresh: null,
           isLoading: false,
           itemBuilder: (context, index, item) {
+            final isDifferentSeller =
+                preOrderItems.showOOSManufacturerName(index);
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                !preOrderItems[index]
-                            .materialInfo
-                            .type
-                            .typeDealOrOverrideBonus &&
-                        (index == 0 ||
-                            preOrderItems[index]
-                                    .materialInfo
-                                    .principalData
-                                    .principalName
-                                    .getValue() !=
-                                preOrderItems[index - 1]
-                                    .materialInfo
-                                    .principalData
-                                    .principalName
-                                    .getValue())
-                    ? _ManufacturerName(
-                        cartProduct: item.materialInfo,
-                      )
-                    : const SizedBox(),
+                if (index != 0 && isDifferentSeller)
+                  const Divider(
+                    color: ZPColors.lightGray2,
+                    indent: 0,
+                    endIndent: 0,
+                    height: 10,
+                    thickness: 1,
+                  ),
+                if (isDifferentSeller)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: _ManufacturerName(
+                      cartProduct: item.materialInfo,
+                    ),
+                  ),
                 _PreOrderProductTile(
                   cartProduct: item,
                 ),
-                index == state.cartProducts.length - 1
-                    ? const SizedBox.shrink()
-                    : const Divider(
-                        color: ZPColors.lightGray2,
-                        indent: 0,
-                        endIndent: 0,
-                        height: 30,
-                      ),
               ],
             );
           },

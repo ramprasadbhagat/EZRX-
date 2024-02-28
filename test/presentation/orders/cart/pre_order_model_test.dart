@@ -28,6 +28,7 @@ import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
@@ -695,6 +696,45 @@ void main() {
         await tester.pump();
         final offerTag = find.byType(OfferLabel);
         expect(offerTag, findsOneWidget);
+      },
+    );
+    testWidgets(
+      '=> Display MarketPlace Logo when item is MarketPlace',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct
+                .map(
+                  (e) => e.copyWith(
+                    materialInfo: e.materialInfo.copyWith(isMarketPlace: true),
+                  ),
+                )
+                .toList(),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(find.byType(MarketPlaceLogo), findsWidgets);
+      },
+    );
+
+    testWidgets(
+      '=> Should not display MarketPlace Logo when item is non-MarketPlace',
+      (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct
+                .map(
+                  (e) => e.copyWith(
+                    materialInfo: e.materialInfo.copyWith(isMarketPlace: false),
+                  ),
+                )
+                .toList(),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(find.byType(MarketPlaceLogo), findsNothing);
       },
     );
   });

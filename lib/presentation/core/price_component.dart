@@ -144,7 +144,8 @@ enum PriceStyle {
   returnBonusPrice,
   materialListPriceStrikeThrough,
   govtMaterialListPrice,
-  returnOriginPriceStrikeThrough
+  returnOriginPriceStrikeThrough,
+  oosPreOrderItemPrice
 }
 
 Color _priceTextColor(PriceStyle type) {
@@ -180,7 +181,8 @@ Color _priceTextColor(PriceStyle type) {
 
     case PriceStyle.negativePrice:
       return ZPColors.priceNegative;
-
+    case PriceStyle.oosPreOrderItemPrice:
+      return ZPColors.neutralsGrey1;
     default:
       return ZPColors.black;
   }
@@ -248,6 +250,9 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       break;
     case PriceStyle.returnOriginPriceStrikeThrough:
       priceTextStyle = Theme.of(context).textTheme.titleSmall!;
+      break;
+    case PriceStyle.oosPreOrderItemPrice:
+      priceTextStyle = Theme.of(context).textTheme.bodyLarge!;
       break;
     default:
       break;
@@ -332,6 +337,10 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             color: ZPColors.darkGray,
             decoration: TextDecoration.lineThrough,
+          );
+    case PriceStyle.oosPreOrderItemPrice:
+      return Theme.of(context).textTheme.bodyLarge!.copyWith(
+            color: ZPColors.neutralsGrey1,
           );
     case PriceStyle.returnBonusPrice:
     default:

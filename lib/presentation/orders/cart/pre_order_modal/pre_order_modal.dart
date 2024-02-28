@@ -9,7 +9,9 @@ import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -44,7 +46,7 @@ class PreOrderModal extends StatelessWidget {
       children: [
         AppBar(
           title: Text(
-            headerTitle.tr(),
+            context.tr(headerTitle),
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: ZPColors.primary,
                   fontWeight: FontWeight.w600,
@@ -55,15 +57,13 @@ class PreOrderModal extends StatelessWidget {
           elevation: 0,
         ),
         Padding(
-          padding: const EdgeInsets.all(10),
-          child: ListTile(
-            tileColor: ZPColors.lightBgYellow,
-            title: Text(
-              headerSubTitle.tr(),
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.w400,
-                  ),
-            ),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: InfoLabel(
+            textValue: context.tr(headerSubTitle),
+            margin: const EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            mainColor: ZPColors.lightBorderYellow,
+            textStyle: Theme.of(context).textTheme.bodySmall,
           ),
         ),
         BlocBuilder<CartBloc, CartState>(

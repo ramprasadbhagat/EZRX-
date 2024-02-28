@@ -38,7 +38,6 @@ class CartRemoteDataSource {
         remoteConfigService.enableMarketPlaceMarkets.contains(market),
       );
       final variables = {};
-
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}cart',
@@ -49,7 +48,6 @@ class CartRemoteDataSource {
           },
         ),
       );
-
       _exceptionChecker(res: res);
 
       final cart = res.data['data']['cart'] ?? {};

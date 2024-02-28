@@ -6,7 +6,9 @@ class InfoLabel extends StatelessWidget {
   final Color textColor;
   final double radius;
   final String textValue;
+  final TextStyle? textStyle;
   final EdgeInsets margin;
+  final EdgeInsets padding;
   final Widget icon;
   const InfoLabel({
     Key? key,
@@ -14,7 +16,9 @@ class InfoLabel extends StatelessWidget {
     this.mainColor = ZPColors.lightBlueColor,
     this.textColor = ZPColors.black,
     required this.textValue,
+    this.textStyle,
     this.margin = const EdgeInsets.symmetric(vertical: 16),
+    this.padding = const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
     this.icon = const SizedBox.shrink(),
   }) : super(key: key);
 
@@ -23,7 +27,7 @@ class InfoLabel extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: margin,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: padding,
       decoration: BoxDecoration(
         color: mainColor,
         borderRadius: BorderRadius.all(Radius.circular(radius)),
@@ -38,7 +42,7 @@ class InfoLabel extends StatelessWidget {
           Expanded(
             child: Text(
               textValue,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: textStyle ?? Theme.of(context).textTheme.bodyMedium,
             ),
           ),
         ],

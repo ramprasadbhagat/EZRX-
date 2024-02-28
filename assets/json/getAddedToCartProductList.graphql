@@ -42,6 +42,7 @@ query Cart($language: String) {
       orderedQty
       remainingQty
       mov
+      isMarketPlace
       materialType
       suspensionStatus
       principalCutoffStatus

@@ -30,7 +30,7 @@ class _MaterialDetails extends StatelessWidget {
                   cartItem.materialInfo.type.typeDealOrOverrideBonus)
                 const BonusTag(margin: EdgeInsets.only(left: 5)),
               const SizedBox(
-                width: 4,
+                width: 8,
               ),
               if (!eligibilityState.salesOrgConfigs.hideStockDisplay)
                 StatusLabel(
@@ -45,21 +45,34 @@ class _MaterialDetails extends StatelessWidget {
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-          if (cartItem.materialInfo.type.typeMaterial) ...[
-            Row(
-              children: [
-                ListPriceStrikeThroughComponent(priceAggregate: cartItem),
-                PriceComponent(
-                  key: WidgetKeys.preOrderModalItemFinalPrice,
-                  salesOrgConfig: eligibilityState.salesOrgConfigs,
-                  price: cartItem.display(PriceType.finalPrice),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (cartItem.materialInfo.type.typeMaterial) ...[
+                Row(
+                  children: [
+                    ListPriceStrikeThroughComponent(priceAggregate: cartItem),
+                    PriceComponent(
+                      key: WidgetKeys.preOrderModalItemFinalPrice,
+                      salesOrgConfig: eligibilityState.salesOrgConfigs,
+                      price: cartItem.display(PriceType.finalPrice),
+                      type: PriceStyle.oosPreOrderItemPrice,
+                    ),
+                  ],
+                ),
+                GovtListPriceComponent(
+                  price: cartItem.display(PriceType.listPrice),
                 ),
               ],
-            ),
-            GovtListPriceComponent(
-              price: cartItem.display(PriceType.listPrice),
-            ),
-          ],
+              Text(
+                '${"Qty: ".tr()}${cartItem.quantity.toString()}',
+                key: WidgetKeys.preOrderMaterialQty,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+              ),
+            ],
+          ),
         ],
       ),
     );

@@ -9,14 +9,23 @@ class _ManufacturerName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24.0),
-      child: Text(
-        cartProduct.principalData.principalName.getValue(),
-        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: ZPColors.neutralsBlack,
-            ),
-      ),
+    return Row(
+      children: [
+        if (cartProduct.isMarketPlace)
+          const Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: MarketPlaceLogo(),
+          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          child: Text(
+            cartProduct.principalData.principalName.getValue(),
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: ZPColors.neutralsBlack,
+                ),
+          ),
+        ),
+      ],
     );
   }
 }

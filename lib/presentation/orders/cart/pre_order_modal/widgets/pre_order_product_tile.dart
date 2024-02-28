@@ -10,8 +10,9 @@ class _PreOrderProductTile extends StatelessWidget {
       key: WidgetKeys.preOrderMaterial(
         cartProduct.getMaterialNumber.displayMatNo,
       ),
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,43 +24,24 @@ class _PreOrderProductTile extends StatelessWidget {
               _MaterialDetails(cartItem: cartProduct),
             ],
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '${"Qty: ".tr()}${cartProduct.quantity.toString()}',
-                key: WidgetKeys.preOrderMaterialQty,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w400,
+          if (cartProduct.materialInfo.type.typeMaterial)
+            _PriceSection(cartProduct: cartProduct),
+          if (cartProduct.materialInfo.type.typeDealOrOverrideBonus)
+            Align(
+              alignment: Alignment.centerRight,
+              child: context.read<EligibilityBloc>().state.isIDMarket
+                  ? PriceComponent(
+                      salesOrgConfig:
+                          context.read<EligibilityBloc>().state.salesOrgConfigs,
+                      price: '0',
+                    )
+                  : Text(
+                      context.tr('FREE'),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: ZPColors.textButtonColor,
+                          ),
                     ),
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              if (cartProduct.materialInfo.type.typeMaterial)
-                _PriceSection(cartProduct: cartProduct),
-              if (cartProduct.materialInfo.type.typeDealOrOverrideBonus)
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: context.read<EligibilityBloc>().state.isIDMarket
-                      ? PriceComponent(
-                          salesOrgConfig: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .salesOrgConfigs,
-                          price: '0',
-                        )
-                      : Text(
-                          context.tr('FREE'),
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: ZPColors.textButtonColor,
-                                  ),
-                        ),
-                ),
-            ],
-          ),
+            ),
         ],
       ),
     );

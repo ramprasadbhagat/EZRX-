@@ -226,4 +226,8 @@ extension PriceAggregateExtension on List<PriceAggregate> {
       index == 0 ||
       this[index].materialInfo.getManufactured !=
           this[index - 1].materialInfo.getManufactured;
+
+  bool showOOSManufacturerName(int index) =>
+      !this[index].materialInfo.type.typeDealOrOverrideBonus &&
+      showManufacturerName(index);
 }

@@ -11,10 +11,11 @@ class _ImageSection extends StatelessWidget {
           showBorder: true,
           showShadow: false,
           clipBehavior: Clip.antiAlias,
-          margin: const EdgeInsets.fromLTRB(0, 10, 8, 0),
+          margin: EdgeInsets.zero,
           child: ProductImage(
             materialNumber: cartProduct.getMaterialNumber,
-            fit: BoxFit.fitHeight,
+            height: 80,
+            width: 80,
           ),
         ),
         if (!cartProduct.materialInfo.type.typeDealOrOverrideBonus)
