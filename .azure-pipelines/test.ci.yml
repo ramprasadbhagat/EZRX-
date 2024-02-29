@@ -46,12 +46,13 @@ parameters:
   - name: build_pool 
     displayName: Build Pool
     type: string
-    default: devops-flutter33 
+    default: dnd-azdevops-flutter33  
     values: 
-      - devops-flutter33 
+      - devops-flutter33
+      - dnd-azdevops-flutter33       
       
 pool:   
-  name: devops-flutter33
+  name: dnd-azdevops-flutter33
 
 resources:
 - repo: self
