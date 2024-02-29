@@ -3,7 +3,7 @@ resources:
   - repo: self
 jobs:
   - job: SonarJob
-    pool: devops-flutter33
+    pool: dnd-azdevops-flutter
     steps:
       - task: SonarQubePrepare@5
         displayName: Setup sonarcube

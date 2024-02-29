@@ -23,7 +23,7 @@ stages:
 
   - job: IOSUatJob
     displayName: IOSUatJob
-    steps: 
+    steps:
 
     - task: InstallAppleCertificate@2
       displayName: Install Apple Certificate P12 file
@@ -31,7 +31,7 @@ stages:
         certSecureFile: 'Certificates.p12'
         certPwd: '$(P12_PASSWORD)'
         keychain: 'temp'
-        deleteCert: true  
+        deleteCert: true
 
     - task: InstallAppleProvisioningProfile@1
       displayName: Install Apple Provisioning Profile
@@ -86,7 +86,7 @@ stages:
 
   - job: AndroidUatJob
     displayName: AndroidUatJob
-    steps: 
+    steps:
 
     - task: DownloadSecureFile@1
       name: localprop
@@ -121,7 +121,7 @@ stages:
           cp $(keyprop.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
           cp $(key.secureFilePath) $(Build.SourcesDirectory)/android/app/ezrxkey.jks
           cp $(serviceAccountKey.secureFilePath) $(Build.SourcesDirectory)/android/serviceAccountKey.json
-          
+
           echo "local.properties copied to $(Build.SourcesDirectory)/android/local.properties"
           echo "key.properties copied to $(Build.SourcesDirectory)/android/key.properties"
           echo "key.jks copied to $(Build.SourcesDirectory)/android/app/ezrxkey.jks"
@@ -181,7 +181,7 @@ stages:
 
   - job: WebUatJob
     displayName: WebUatJob
-    steps: 
+    steps:
 
     - task: Bash@3
       displayName: flutter & firebase setup
@@ -255,7 +255,7 @@ stages:
               }]
             }]
           }'
-    
+
       env:
         APPCENTER_APP_URL_UAT_ANDROID: '$(APPCENTER_APP_URL_UAT_ANDROID)'
         TESTFLIGHT_APP_URL_UAT_IOS: '$(TESTFLIGHT_APP_URL_UAT_IOS)'
