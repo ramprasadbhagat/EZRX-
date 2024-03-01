@@ -2,6 +2,8 @@ part of 'aup_tc_bloc.dart';
 
 @freezed
 class AupTcState with _$AupTcState {
+  const AupTcState._();
+
   const factory AupTcState({
     required String tncFile,
     required String privacyFile,
@@ -15,4 +17,6 @@ class AupTcState with _$AupTcState {
         tncConsent: false,
         privacyConsent: false,
       );
+
+  bool get userConsentAll => tncConsent && privacyConsent;
 }

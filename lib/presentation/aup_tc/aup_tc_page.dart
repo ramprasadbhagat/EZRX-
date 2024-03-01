@@ -6,8 +6,10 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -295,77 +297,106 @@ class AcceptButton extends StatelessWidget {
             },
           ),
       ],
-      child: BlocBuilder<AupTcBloc, AupTcState>(
-        buildWhen: (previous, current) =>
-            current.privacyConsent && current.tncConsent ||
-            !current.privacyConsent ||
-            !current.tncConsent,
-        builder: (context, state) {
-          return SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  ElevatedButton(
-                    key: WidgetKeys.tncDialogAcceptButton,
-                    onPressed: () {
-                      if (!state.tncConsent || !state.privacyConsent) {
-                        CustomSnackBar(
-                          messageText:
-                              'You need to read and accept full Terms of use and Privacy Policy before continue.'
-                                  .tr(),
-                        ).show(context);
-                      } else if (isMarketPlace) {
-                        context.read<UserBloc>().add(
-                              UserEvent.setMarketPlaceTncAcceptance(
-                                MarketPlaceTnCAcceptance.accept(),
-                              ),
-                            );
-                      } else {
-                        context.read<UserBloc>().add(
-                              const UserEvent.acceptTnc(),
-                            );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(350, 40),
-                      backgroundColor: state.tncConsent && state.privacyConsent
-                          ? ZPColors.primary
-                          : ZPColors.unselectedLabelColor,
-                    ),
-                    child: Text(
-                      context.tr('Accept and continue'),
-                    ),
-                  ),
-                  TextButton(
-                    key: WidgetKeys.tncDialogCancelButton,
-                    onPressed: () {
-                      if (isMarketPlace) {
-                        context.read<UserBloc>().add(
-                              UserEvent.setMarketPlaceTncAcceptance(
-                                MarketPlaceTnCAcceptance.reject(),
-                              ),
-                            );
-                      } else {
-                        context.read<AuthBloc>().add(
-                              const AuthEvent.logout(),
-                            );
-                      }
-                    },
-                    child: Text(
-                      isMarketPlace
-                          ? context.tr('Skip & only see ZP products')
-                          : context.tr('Cancel'),
-                      style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                            color: ZPColors.extraDarkGreen,
-                          ),
-                    ),
-                  ),
-                ],
-              ),
+      child: BlocConsumer<UserBloc, UserState>(
+        listenWhen: (previous, current) =>
+            previous.isLoading != current.isLoading && !current.isLoading,
+        listener: (context, state) {
+          state.userFailureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) => ErrorUtils.handleApiFailure(context, failure),
+              (_) {},
             ),
+          );
+        },
+        buildWhen: (previous, current) =>
+            previous.isLoading != current.isLoading,
+        builder: (context, userState) {
+          return BlocBuilder<AupTcBloc, AupTcState>(
+            buildWhen: (previous, current) =>
+                previous.userConsentAll != current.userConsentAll,
+            builder: (context, state) {
+              return SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ElevatedButton(
+                        key: WidgetKeys.tncDialogAcceptButton,
+                        onPressed: () {
+                          if (userState.isLoading) return;
+                          if (!state.userConsentAll) {
+                            CustomSnackBar(
+                              messageText:
+                                  'You need to read and accept full Terms of use and Privacy Policy before continue.',
+                            ).show(context);
+
+                            return;
+                          }
+
+                          if (isMarketPlace) {
+                            context.read<UserBloc>().add(
+                                  UserEvent.setMarketPlaceTncAcceptance(
+                                    MarketPlaceTnCAcceptance.accept(),
+                                  ),
+                                );
+                          } else {
+                            context.read<UserBloc>().add(
+                                  const UserEvent.acceptTnc(),
+                                );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(350, 40),
+                          backgroundColor: state.userConsentAll
+                              ? ZPColors.primary
+                              : ZPColors.unselectedLabelColor,
+                        ),
+                        child: LoadingShimmer.withChild(
+                          enabled: userState.isLoading,
+                          child: Text(
+                            context.tr('Accept and continue'),
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        key: WidgetKeys.tncDialogCancelButton,
+                        onPressed: () {
+                          if (userState.isLoading) return;
+                          if (isMarketPlace) {
+                            context.read<UserBloc>().add(
+                                  UserEvent.setMarketPlaceTncAcceptance(
+                                    MarketPlaceTnCAcceptance.reject(),
+                                  ),
+                                );
+                          } else {
+                            context.read<AuthBloc>().add(
+                                  const AuthEvent.logout(),
+                                );
+                          }
+                        },
+                        child: LoadingShimmer.withChild(
+                          enabled: userState.isLoading,
+                          child: Text(
+                            isMarketPlace
+                                ? context.tr('Skip & only see ZP products')
+                                : context.tr('Cancel'),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall!
+                                .copyWith(
+                                  color: ZPColors.extraDarkGreen,
+                                ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           );
         },
       ),

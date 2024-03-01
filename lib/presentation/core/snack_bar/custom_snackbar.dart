@@ -126,7 +126,7 @@ class _ActualSnackbar extends StatelessWidget {
                         bottom: 10,
                       ),
                       child: Text(
-                        messageText.tr(),
+                        context.tr(messageText),
                         key: WidgetKeys.customSnackBarMessage,
                         style: textStyle ??
                             Theme.of(context).textTheme.titleMedium?.copyWith(

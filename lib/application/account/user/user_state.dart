@@ -9,6 +9,7 @@ class UserState with _$UserState {
     required bool isLoginOnBehalf,
     required Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption,
     required Language activeLanguage,
+    required bool isLoading,
   }) = _UserState;
 
   factory UserState.initial() => UserState(
@@ -16,20 +17,20 @@ class UserState with _$UserState {
         isLoginOnBehalf: false,
         userFailureOrSuccessOption: none(),
         activeLanguage: Language.english(),
+        isLoading: false,
       );
 
   bool get haveSalesOrganisation => user.userSalesOrganisations.isNotEmpty;
+
   bool get isSalesRep => user.role.type.isSalesRepRole;
+
   bool get isNotEmpty => user != User.empty();
-  String get userRoleName => user.role.name;
-  FullName get userFullName => user.fullName;
+
   bool get userCanLoginOnBehalf => user.role.type.canLoginOnBehalf;
-  bool get userHasReturnsAdminAccess => user.role.type.hasReturnsAdminAccess;
-  bool get emailNotifications => user.settings.emailNotifications;
+
   List<SalesOrganisation> get userSalesOrganisations =>
       user.userSalesOrganisations;
-  List<String> get salesOrgValue =>
-      userSalesOrganisations.map((e) => e.salesOrg.getValue()).toList();
+
   bool get showTermsAndConditionDialog =>
       isNotEmpty && !isLoginOnBehalf && !user.acceptPrivacyPolicy;
 }

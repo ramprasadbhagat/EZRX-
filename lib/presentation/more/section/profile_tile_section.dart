@@ -48,7 +48,7 @@ class ProfileTile extends StatelessWidget {
           ),
           title: state.isNotEmpty
               ? Text(
-                  '${'Hello'.tr()}, ${state.userFullName.toTitleCase}',
+                  '${context.tr('Hello')}, ${state.user.fullName.toTitleCase}',
                   style: Theme.of(context).textTheme.labelMedium,
                 )
               : LoadingShimmer.tile(line: 3),

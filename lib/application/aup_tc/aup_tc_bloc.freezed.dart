@@ -628,12 +628,13 @@ class __$$_AupTcStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AupTcState implements _AupTcState {
+class _$_AupTcState extends _AupTcState {
   const _$_AupTcState(
       {required this.tncFile,
       required this.privacyFile,
       required this.tncConsent,
-      required this.privacyConsent});
+      required this.privacyConsent})
+      : super._();
 
   @override
   final String tncFile;
@@ -674,12 +675,13 @@ class _$_AupTcState implements _AupTcState {
       __$$_AupTcStateCopyWithImpl<_$_AupTcState>(this, _$identity);
 }
 
-abstract class _AupTcState implements AupTcState {
+abstract class _AupTcState extends AupTcState {
   const factory _AupTcState(
       {required final String tncFile,
       required final String privacyFile,
       required final bool tncConsent,
       required final bool privacyConsent}) = _$_AupTcState;
+  const _AupTcState._() : super._();
 
   @override
   String get tncFile;

@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
@@ -79,44 +78,6 @@ void main() {
       ],
     );
 
-    blocTest<UserBloc, UserState>(
-      'T&c accept',
-      build: () => UserBloc(
-        userRepository: userRepoMock,
-      ),
-      setUp: () {
-        when(
-          () => userRepoMock.updateUserTc(),
-        ).thenAnswer(
-          (invocation) async => Right(SettingTc.empty()),
-        );
-      },
-      act: (UserBloc bloc) => bloc.add(
-        const UserEvent.acceptTnc(),
-      ),
-      expect: () => [
-        userState,
-      ],
-    );
-    blocTest<UserBloc, UserState>(
-      'T&c failed',
-      build: () => UserBloc(
-        userRepository: userRepoMock,
-      ),
-      setUp: () {
-        when(() => userRepoMock.updateUserTc()).thenAnswer(
-          (invocation) async => const Left(ApiFailure.other('tnc failed')),
-        );
-      },
-      act: (UserBloc bloc) => bloc.add(const UserEvent.acceptTnc()),
-      expect: () => [
-        userState.copyWith(
-          userFailureOrSuccessOption:
-              optionOf(const Left(ApiFailure.other('tnc failed'))),
-        )
-      ],
-    );
-
     test('Check if User have SalesOrganisation', () {
       expect(userState.haveSalesOrganisation, false);
     });
@@ -126,21 +87,11 @@ void main() {
     test('Check if User isNotEmpty', () {
       expect(userState.isNotEmpty, false);
     });
-    test('Check if User userRoleName', () {
-      expect(userState.userRoleName, '');
-    });
-    test('Check if User userFullName', () {
-      expect(userState.userFullName, FullName.empty());
-    });
+
     test('Check if User userCanLoginOnBehalf', () {
       expect(userState.userCanLoginOnBehalf, false);
     });
-    test('Check if User userHasReturnsAdminAccess', () {
-      expect(userState.userHasReturnsAdminAccess, false);
-    });
-    test('Check if User emailNotifications', () {
-      expect(userState.emailNotifications, false);
-    });
+
     // test('Check if User languagePreference', () {
     //   expect(
     //     userState.,
@@ -153,12 +104,7 @@ void main() {
         List<SalesOrganisation>.empty(),
       );
     });
-    test('Check if User salesOrgValue', () {
-      expect(
-        userState.salesOrgValue,
-        List<String>.empty(),
-      );
-    });
+
     blocTest<UserBloc, UserState>(
       'Create bloc and fetch',
       build: () => UserBloc(
@@ -400,6 +346,40 @@ void main() {
       ],
     );
 
+    group('Set classic TnC acceptance -', () {
+      const fakeError = ApiFailure.other('fake-error');
+      blocTest<UserBloc, UserState>(
+        'success',
+        build: () => UserBloc(userRepository: userRepoMock),
+        setUp: () {
+          when(
+            () => userRepoMock.updateUserTc(),
+          ).thenAnswer((_) async => const Right(SettingTc(acceptTC: true)));
+        },
+        act: (UserBloc bloc) => bloc.add(const UserEvent.acceptTnc()),
+        expect: () => [
+          userState.copyWith(isLoading: true),
+          userState.copyWith.user(acceptPrivacyPolicy: true)
+        ],
+      );
+      blocTest<UserBloc, UserState>(
+        'failure -',
+        build: () => UserBloc(userRepository: userRepoMock),
+        setUp: () {
+          when(() => userRepoMock.updateUserTc()).thenAnswer(
+            (_) async => const Left(fakeError),
+          );
+        },
+        act: (UserBloc bloc) => bloc.add(const UserEvent.acceptTnc()),
+        expect: () => [
+          userState.copyWith(isLoading: true),
+          userState.copyWith(
+            userFailureOrSuccessOption: optionOf(const Left(fakeError)),
+          )
+        ],
+      );
+    });
+
     group('Set marketPlace TnC acceptance -', () {
       final fakeAcceptanceStatus = MarketPlaceTnCAcceptance.reject();
       const fakeError = ApiFailure.other('fake-error');
@@ -415,6 +395,7 @@ void main() {
         act: (UserBloc bloc) => bloc
             .add(UserEvent.setMarketPlaceTncAcceptance(fakeAcceptanceStatus)),
         expect: () => [
+          userState.copyWith(isLoading: true),
           userState.copyWith(
             userFailureOrSuccessOption: optionOf(const Left(fakeError)),
           ),
@@ -434,6 +415,7 @@ void main() {
             .add(UserEvent.setMarketPlaceTncAcceptance(fakeAcceptanceStatus)),
         seed: () => userState.copyWith(user: fakeClientUser),
         expect: () => [
+          userState.copyWith(user: fakeClientUser, isLoading: true),
           userState.copyWith(
             user: fakeClientUser.copyWith(
               acceptMPTC: fakeAcceptanceStatus,

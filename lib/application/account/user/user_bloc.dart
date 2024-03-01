@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -46,11 +45,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         );
       },
       acceptTnc: (e) async {
+        emit(state.copyWith(isLoading: true));
+
         final failureOrSuccess = await userRepository.updateUserTc();
 
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
+              isLoading: false,
               userFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
@@ -59,23 +61,28 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               user: state.user.copyWith(
                 acceptPrivacyPolicy: settingTc.acceptTC,
               ),
+              isLoading: false,
               userFailureOrSuccessOption: none(),
             ),
           ),
         );
       },
       setMarketPlaceTncAcceptance: (e) async {
+        emit(state.copyWith(isLoading: true));
+
         final failureOrSuccess =
             await userRepository.updateUserMarketPlaceTc(e.value);
 
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
+              isLoading: false,
               userFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
           (_) => emit(
             state.copyWith(
+              isLoading: false,
               user: state.user.copyWith(acceptMPTC: e.value),
               userFailureOrSuccessOption: none(),
             ),

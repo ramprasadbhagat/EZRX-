@@ -1,6 +1,7 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
@@ -8,8 +9,10 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc_page.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +31,6 @@ void main() {
   late AnnouncementBloc mockAnnouncementBloc;
   late UserBloc mockUserBloc;
   late EligibilityBloc mockEligibilityBloc;
-  late SalesOrgBloc mockSalesOrgBloc;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +49,7 @@ void main() {
     mockUserBloc = UserBlocMock();
     mockAuthBloc = AuthBlocMock();
     mockAnnouncementBloc = AnnouncementBlocMock();
-    mockSalesOrgBloc = SalesOrgBlocMock();
+
     when(() => mockEligibilityBloc.state).thenReturn(
       EligibilityState.initial(),
     );
@@ -56,7 +58,7 @@ void main() {
     when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
     when(() => mockAnnouncementBloc.state)
         .thenReturn(AnnouncementState.initial());
-    when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+
     resetMocktailState();
   });
 
@@ -69,7 +71,6 @@ void main() {
           BlocProvider<UserBloc>(create: (_) => mockUserBloc),
           BlocProvider<AuthBloc>(create: (_) => mockAuthBloc),
           BlocProvider<AnnouncementBloc>(create: (_) => mockAnnouncementBloc),
-          BlocProvider<SalesOrgBloc>(create: (_) => mockSalesOrgBloc),
         ],
         child: AupTCPage(user: user, isMarketPlace: isMarketPlace),
       );
@@ -165,6 +166,43 @@ void main() {
         await tester.tap(acceptButton);
 
         verify(() => mockUserBloc.add(const UserEvent.acceptTnc())).called(1);
+      });
+
+      testWidgets('Can not tap on button when loading', (tester) async {
+        when(() => mockUserBloc.state)
+            .thenReturn(UserState.initial().copyWith(isLoading: true));
+        when(() => mockAupTcBloc.state).thenReturn(
+          AupTcState.initial().copyWith(
+            tncConsent: true,
+            privacyConsent: true,
+          ),
+        );
+
+        await tester.pumpWidget(aupTcWidget(fakeClient, false));
+        await tester.pump();
+
+        await tester.tap(acceptButton);
+        final acceptButtonShimmer = tester.widget<LoadingShimmer>(
+          find.descendant(
+            of: acceptButton,
+            matching: find.byType(LoadingShimmer),
+          ),
+        );
+        expect(acceptButtonShimmer.enabled, true);
+
+        verifyNever(() => mockUserBloc.add(const UserEvent.acceptTnc()));
+
+        await tester.tap(cancelButton);
+
+        final cancelButtonShimmer = tester.widget<LoadingShimmer>(
+          find.descendant(
+            of: cancelButton,
+            matching: find.byType(LoadingShimmer),
+          ),
+        );
+        expect(cancelButtonShimmer.enabled, true);
+
+        verifyNever(() => mockAuthBloc.add(const AuthEvent.logout()));
       });
     });
 
@@ -269,6 +307,55 @@ void main() {
           ),
         ).called(1);
       });
+
+      testWidgets('Can not tap on button when loading', (tester) async {
+        when(() => mockUserBloc.state)
+            .thenReturn(UserState.initial().copyWith(isLoading: true));
+        when(() => mockAupTcBloc.state).thenReturn(
+          AupTcState.initial().copyWith(
+            tncConsent: true,
+            privacyConsent: true,
+          ),
+        );
+
+        await tester.pumpWidget(aupTcWidget(fakeClient, true));
+        await tester.pump();
+
+        await tester.tap(acceptButton);
+        final acceptButtonShimmer = tester.widget<LoadingShimmer>(
+          find.descendant(
+            of: acceptButton,
+            matching: find.byType(LoadingShimmer),
+          ),
+        );
+        expect(acceptButtonShimmer.enabled, true);
+
+        verifyNever(
+          () => mockUserBloc.add(
+            UserEvent.setMarketPlaceTncAcceptance(
+              MarketPlaceTnCAcceptance.accept(),
+            ),
+          ),
+        );
+
+        await tester.tap(cancelButton);
+
+        final cancelButtonShimmer = tester.widget<LoadingShimmer>(
+          find.descendant(
+            of: cancelButton,
+            matching: find.byType(LoadingShimmer),
+          ),
+        );
+        expect(cancelButtonShimmer.enabled, true);
+
+        verifyNever(
+          () => mockUserBloc.add(
+            UserEvent.setMarketPlaceTncAcceptance(
+              MarketPlaceTnCAcceptance.reject(),
+            ),
+          ),
+        );
+      });
     });
 
     testWidgets('Tap on privacy checkbox', (tester) async {
@@ -343,6 +430,32 @@ void main() {
               .tr(),
         ),
         findsOneWidget,
+      );
+    });
+
+    testWidgets('Show snackbar when API is failure', (tester) async {
+      whenListen(
+        mockUserBloc,
+        Stream.fromIterable([
+          UserState.initial().copyWith(isLoading: true),
+          UserState.initial().copyWith(
+            isLoading: false,
+            userFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('fake-error'))),
+          ),
+        ]),
+      );
+
+      await tester.pumpWidget(aupTcWidget(fakeClient, false));
+      // Webview in the screen show loading.
+      // double pump() is required here because using pumpAndSettle causes timeout
+      await tester.pump();
+      await tester.pump();
+
+      expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+      expect(
+        tester.widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage)).data,
+        equals('fake-error'),
       );
     });
   });

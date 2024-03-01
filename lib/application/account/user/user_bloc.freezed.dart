@@ -1623,6 +1623,7 @@ mixin _$UserState {
   Option<Either<ApiFailure, dynamic>> get userFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   Language get activeLanguage => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserStateCopyWith<UserState> get copyWith =>
@@ -1638,7 +1639,8 @@ abstract class $UserStateCopyWith<$Res> {
       {User user,
       bool isLoginOnBehalf,
       Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption,
-      Language activeLanguage});
+      Language activeLanguage,
+      bool isLoading});
 
   $UserCopyWith<$Res> get user;
 }
@@ -1660,6 +1662,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
     Object? isLoginOnBehalf = null,
     Object? userFailureOrSuccessOption = null,
     Object? activeLanguage = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -1678,6 +1681,10 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
           ? _value.activeLanguage
           : activeLanguage // ignore: cast_nullable_to_non_nullable
               as Language,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -1701,7 +1708,8 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
       {User user,
       bool isLoginOnBehalf,
       Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption,
-      Language activeLanguage});
+      Language activeLanguage,
+      bool isLoading});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -1722,6 +1730,7 @@ class __$$_UserStateCopyWithImpl<$Res>
     Object? isLoginOnBehalf = null,
     Object? userFailureOrSuccessOption = null,
     Object? activeLanguage = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_UserState(
       user: null == user
@@ -1740,6 +1749,10 @@ class __$$_UserStateCopyWithImpl<$Res>
           ? _value.activeLanguage
           : activeLanguage // ignore: cast_nullable_to_non_nullable
               as Language,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1751,7 +1764,8 @@ class _$_UserState extends _UserState {
       {required this.user,
       required this.isLoginOnBehalf,
       required this.userFailureOrSuccessOption,
-      required this.activeLanguage})
+      required this.activeLanguage,
+      required this.isLoading})
       : super._();
 
   @override
@@ -1762,10 +1776,12 @@ class _$_UserState extends _UserState {
   final Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption;
   @override
   final Language activeLanguage;
+  @override
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'UserState(user: $user, isLoginOnBehalf: $isLoginOnBehalf, userFailureOrSuccessOption: $userFailureOrSuccessOption, activeLanguage: $activeLanguage)';
+    return 'UserState(user: $user, isLoginOnBehalf: $isLoginOnBehalf, userFailureOrSuccessOption: $userFailureOrSuccessOption, activeLanguage: $activeLanguage, isLoading: $isLoading)';
   }
 
   @override
@@ -1781,12 +1797,14 @@ class _$_UserState extends _UserState {
                 other.userFailureOrSuccessOption ==
                     userFailureOrSuccessOption) &&
             (identical(other.activeLanguage, activeLanguage) ||
-                other.activeLanguage == activeLanguage));
+                other.activeLanguage == activeLanguage) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, user, isLoginOnBehalf,
-      userFailureOrSuccessOption, activeLanguage);
+      userFailureOrSuccessOption, activeLanguage, isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -1801,7 +1819,8 @@ abstract class _UserState extends UserState {
       required final bool isLoginOnBehalf,
       required final Option<Either<ApiFailure, dynamic>>
           userFailureOrSuccessOption,
-      required final Language activeLanguage}) = _$_UserState;
+      required final Language activeLanguage,
+      required final bool isLoading}) = _$_UserState;
   const _UserState._() : super._();
 
   @override
@@ -1812,6 +1831,8 @@ abstract class _UserState extends UserState {
   Option<Either<ApiFailure, dynamic>> get userFailureOrSuccessOption;
   @override
   Language get activeLanguage;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_UserStateCopyWith<_$_UserState> get copyWith =>
