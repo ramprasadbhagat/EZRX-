@@ -112,7 +112,8 @@ String getDateValue(Map json, String key) =>
 
 String getEndCursorValue(Map json, String key) => json[key]?['endCursor'] ?? '';
 
-String readTag(Map json, String key) => json[key]?['value']?['name'] ?? '';
+String readTag(Map json, String key) =>
+    json[key]?['value']?['displayName'] ?? '';
 
 List<dynamic> getDocumentsList(Map json, String _) {
   final urlList = json['documents']?['jsonValue'] ?? [];
