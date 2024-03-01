@@ -51,6 +51,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
@@ -2982,6 +2983,40 @@ void main() {
       final preOrderText = find.text('OOS-Preorder');
 
       expect(preOrderText, findsOneWidget);
+    });
+    testWidgets('Find Marketplace Title and Marketplace Icon', (tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          config: fakeMYSalesOrgConfigs,
+          salesOrganisation: fakeKHSalesOrganisation,
+          cartProducts: mockCartItems,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+      expect(scrollListFinder, findsOneWidget);
+
+      await tester.dragUntilVisible(
+        find.text('Marketplace'),
+        scrollListFinder,
+        const Offset(0.0, -500.0),
+      );
+
+      await tester.dragUntilVisible(
+        find.byType(MarketPlaceSellerTitle),
+        scrollListFinder,
+        const Offset(0.0, -500.0),
+      );
+
+      await tester.pumpAndSettle();
     });
   });
 }

@@ -101,7 +101,7 @@ class _ProductDetails extends StatelessWidget {
                     ),
               ),
               const SizedBox(
-                width: 4,
+                width: 8,
               ),
               if (eligibilityState.salesOrg.showBonus) const BonusTag(),
               if (!bonusItem.inStock.isMaterialInStock)

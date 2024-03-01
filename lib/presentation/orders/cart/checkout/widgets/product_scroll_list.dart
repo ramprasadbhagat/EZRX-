@@ -1,26 +1,23 @@
 part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 
 class _ProductScrollList extends StatelessWidget {
-  final CartState cartState;
-  const _ProductScrollList({Key? key, required this.cartState})
+  final List<PriceAggregate> listItems;
+  const _ProductScrollList({Key? key, required this.listItems})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final listDisplayItem = listItems.sortToDisplay;
+
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (_, int index) {
-          final list = cartState.cartProducts.sortToDisplay;
-          final item = list[index];
+          final item = listDisplayItem[index];
+          final isDifferentSeller = listDisplayItem.showManufacturerName(index);
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              list.showManufacturerName(index)
-                  ? _TitleScrollList(
-                      cartProduct: item.materialInfo,
-                    )
-                  : const SizedBox.shrink(),
               if (item.materialInfo.type.typeBundle)
                 CheckoutBundleItem(
                   key: WidgetKeys.cartItemBundleTile(
@@ -31,6 +28,8 @@ class _ProductScrollList extends StatelessWidget {
               if (item.materialInfo.type.typeMaterial)
                 _CheckoutProductMaterialWithBonus(
                   cartItem: item,
+                  isDifferentSeller: isDifferentSeller,
+                  isFirst: index == 0,
                 ),
               if (item.materialInfo.type.typeCombo)
                 Padding(
@@ -41,7 +40,7 @@ class _ProductScrollList extends StatelessWidget {
             ],
           );
         },
-        childCount: cartState.cartProducts.length, // 1000 list items
+        childCount: listDisplayItem.length, // 1000 list items
       ),
     );
   }
@@ -49,14 +48,43 @@ class _ProductScrollList extends StatelessWidget {
 
 class _CheckoutProductMaterialWithBonus extends StatelessWidget {
   final PriceAggregate cartItem;
+  final bool isDifferentSeller;
+  final bool isFirst;
 
-  const _CheckoutProductMaterialWithBonus({required this.cartItem, Key? key})
-      : super(key: key);
+  const _CheckoutProductMaterialWithBonus({
+    Key? key,
+    required this.cartItem,
+    required this.isDifferentSeller,
+    required this.isFirst,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (isDifferentSeller)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (!isFirst && !cartItem.materialInfo.isMarketPlace)
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: _Divider(),
+                ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                child: cartItem.materialInfo.isMarketPlace
+                    ? MarketPlaceSellerTitle(
+                        sellerName: cartItem.materialInfo.getManufactured,
+                      )
+                    : _ZPTitleScrollList(
+                        cartProduct: cartItem.materialInfo,
+                      ),
+              ),
+            ],
+          ),
         CheckoutMaterialItem(
           cartItem: cartItem,
         ),
@@ -74,22 +102,54 @@ class _CheckoutProductMaterialWithBonus extends StatelessWidget {
   }
 }
 
-class _TitleScrollList extends StatelessWidget {
+class _ZPTitleScrollList extends StatelessWidget {
   final MaterialInfo cartProduct;
-  const _TitleScrollList({Key? key, required this.cartProduct})
+  const _ZPTitleScrollList({Key? key, required this.cartProduct})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Text(
-        cartProduct.principalData.principalName.getValue(),
-        key: WidgetKeys.cartPrincipalLabel,
-        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: ZPColors.neutralsBlack,
-            ),
-      ),
+    return Text(
+      cartProduct.getManufactured,
+      key: WidgetKeys.cartPrincipalLabel,
+      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+            color: ZPColors.neutralsBlack,
+          ),
+    );
+  }
+}
+
+class _DividerAndMarketPlaceTitle extends StatelessWidget {
+  const _DividerAndMarketPlaceTitle({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: _Divider(),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+          child: MarketPlaceTitleWithLogo(),
+        ),
+      ],
+    );
+  }
+}
+
+class _Divider extends StatelessWidget {
+  const _Divider({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Divider(
+      color: ZPColors.lightGray2,
+      indent: 15,
+      endIndent: 15,
+      height: 10,
+      thickness: 1,
     );
   }
 }

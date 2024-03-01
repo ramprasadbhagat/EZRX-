@@ -117,7 +117,7 @@ class _ProductDetails extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
+              Flexible(
                 child: Text(
                   cartItem.materialInfo.combinationCode(
                     showGMCPart: context
@@ -135,7 +135,7 @@ class _ProductDetails extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: 4,
+                width: 8,
               ),
               PreOrderLabel(inStock: cartItem.inStock),
             ],

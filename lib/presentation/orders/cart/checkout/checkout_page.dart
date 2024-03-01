@@ -25,6 +25,8 @@ import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -137,8 +139,17 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
                     const SliverToBoxAdapter(child: _TotalItems()),
-                    const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
-                    _ProductScrollList(cartState: cartState),
+                    const SliverToBoxAdapter(child: SizedBox(height: 12.0)),
+                    _ProductScrollList(
+                      listItems: cartState.cartProducts.zpMaterialOnly,
+                    ),
+                    if (cartState.cartProducts.mpMaterialOnly.isNotEmpty)
+                      const SliverToBoxAdapter(
+                        child: _DividerAndMarketPlaceTitle(),
+                      ),
+                    _ProductScrollList(
+                      listItems: cartState.cartProducts.mpMaterialOnly,
+                    ),
                     const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
                     const SliverToBoxAdapter(
                       child: Divider(

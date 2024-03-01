@@ -1,0 +1,33 @@
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+class MarketPlaceSellerTitle extends StatelessWidget {
+  final String sellerName;
+  const MarketPlaceSellerTitle({Key? key, required this.sellerName})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 18,
+          height: 18,
+          child: SvgPicture.asset(
+            SvgImage.marketplaceSellerIcon,
+            fit: BoxFit.fill,
+          ),
+        ),
+        const SizedBox(width: 4),
+        Text(
+          sellerName,
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+      ],
+    );
+  }
+}

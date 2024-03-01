@@ -6,7 +6,7 @@ class _TotalItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Text(
         '${context.tr('Your items')} (${context.read<CartBloc>().state.totalCartCount})',
         key: WidgetKeys.checkoutItemsTotalQty,
