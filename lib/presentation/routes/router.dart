@@ -7,6 +7,7 @@ import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_con
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_page.dart';
 import 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page.dart';
 import 'package:ezrxmobile/presentation/auth/reset_password_success/reset_password_success_page.dart';
+import 'package:ezrxmobile/presentation/core/pdfview_page.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
 import 'package:ezrxmobile/presentation/faq/faq.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcement_info_details_page.dart';
@@ -226,6 +227,10 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
           path: 'notification_tab',
         ),
       ],
+    ),
+    AutoRoute(
+      path: 'pdf_view',
+      page: PdfViewPage,
     ),
 
     // =========

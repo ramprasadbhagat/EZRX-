@@ -67,7 +67,7 @@ class MoreDetailsTile {
         ),
         label: 'User guide',
         onTap: () => context.navigateTo(
-          WebViewPageRoute(
+          PdfViewPageRoute(
             url: locator<Config>().getUserGuidePdfUrl(
               context
                   .read<EligibilityBloc>()

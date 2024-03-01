@@ -725,7 +725,7 @@ void main() {
         expect(userGuideTileFinder, findsOneWidget);
         await tester.tap(userGuideTileFinder);
         await tester.pump();
-        expect(autoRouterMock.current.name, 'WebViewPageRoute');
+        expect(autoRouterMock.current.name, 'PdfViewPageRoute');
       },
     );
   });

@@ -535,6 +535,7 @@ class WidgetKeys {
   static Key balanceTextRow(String keyText, String valueText) =>
       Key('$keyText$valueText');
   static const Key priceComponent = Key('priceComponent');
+  static const Key errorLoadingUrl = Key('errorLoadingUrl');
 
   //============================================================
   //  Quantity Input Widget Keys
