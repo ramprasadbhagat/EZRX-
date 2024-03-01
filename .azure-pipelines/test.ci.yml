@@ -8,11 +8,19 @@ parameters:
     type: object 
     displayName: Path File ( use "__" instead of "/", no need to define file extension(default is dart) and define the region at the end of file __[region] )
     default:
-      - integration_test__my__client_user__client_user_return__my
       - integration_test__my__client_user__client_user_order__my
       - integration_test__my__client_user__client_user_payment__my
+      - integration_test__my__client_user__client_user_return__my
       - integration_test__my__external_sales_rep__external_sales_rep_user_order__my
       - integration_test__my__external_sales_rep__external_sales_rep_user_return__my
+
+      - integration_test__id__client_user__client_user_order__id
+      - integration_test__id__client_user__client_user_payment__id
+
+      - integration_test__sg__client_user__client_user_order__sg
+      - integration_test__sg__client_user__client_user_payment__sg
+      - integration_test__sg__client_user__client_user_return__sg
+      
       - integration_test__ph__client_user__client_user_return__ph
       - integration_test__ph__client_user__client_user_order__ph
       - integration_test__ph__client_user__client_user_payment__ph
