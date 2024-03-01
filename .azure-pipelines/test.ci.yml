@@ -32,6 +32,8 @@ parameters:
     displayName: Preset Sales Org Configs File ( use "__" instead of "/", no need to define file extension(default is sh) )
     default:
       - integration_test__my__reset_sales_org_config
+      - integration_test__id__reset_sales_org_config
+      - integration_test__sg__reset_sales_org_config
       - integration_test__ph__reset_sales_org_config
 
   - name: build_mode 
