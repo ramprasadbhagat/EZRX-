@@ -61,10 +61,8 @@ class _ViewByOrder extends StatelessWidget {
                   StatusLabel(
                     key: WidgetKeys.viewByOrderStatusKey,
                     status: StatusType(
-                      context.tr(
-                        viewByOrderHistoryItem.processingStatus
-                            .getOrDefaultValue(''),
-                      ),
+                      viewByOrderHistoryItem.processingStatus
+                          .getOrDefaultValue(''),
                     ),
                   ),
               ],
