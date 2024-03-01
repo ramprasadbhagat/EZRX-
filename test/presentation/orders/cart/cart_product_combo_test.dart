@@ -2,6 +2,9 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -228,6 +231,59 @@ void main() {
   group(
     'Test Cart_Page',
     () {
+      final firstQtyTier = ComboDealQtyTier.empty().copyWith(
+        minQty: 3,
+        suffix: ComboSuffix('1'),
+      );
+      final secondQtyTier = ComboDealQtyTier.empty().copyWith(
+        minQty: 7,
+        suffix: ComboSuffix('2'),
+      );
+
+      final fakeSuffixMaterial1 = ComboDealMaterial.empty().copyWith(
+        minQty: 0,
+        materialNumber: MaterialNumber('fake-optional-material'),
+        rate: -4,
+        mandatory: false,
+        suffix: ComboSuffix('1'),
+      );
+
+      final fakeSuffixMaterial2 = ComboDealMaterial.empty().copyWith(
+        minQty: 0,
+        materialNumber: MaterialNumber('fake-optional-material'),
+        rate: -8,
+        mandatory: false,
+        suffix: ComboSuffix('2'),
+      );
+
+      final comboDeal = ComboDeal.empty().copyWith(
+        flexiQtyTier: [
+          firstQtyTier,
+          secondQtyTier,
+        ],
+        materialComboDeals: [
+          ComboDealMaterialSet(
+            materials: [fakeSuffixMaterial1, fakeSuffixMaterial2],
+            setNo: 'fake-set',
+          ),
+        ],
+      );
+
+      final comboMaterialsMock = {
+        MaterialNumber('fake-optional-material'):
+            PriceAggregate.empty().copyWith(
+          quantity: 4,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-optional-material'),
+          ),
+          comboDeal: comboDeal,
+        ),
+      };
+
+      final comboMaterialsSeletedMock = {
+        MaterialNumber('fake-optional-material'): false,
+      };
+
       Widget getWidget() {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouter,
@@ -589,6 +645,75 @@ void main() {
         final bestDealMessageFinder =
             find.text('Yay! You’ve got the best deal.');
         expect(bestDealMessageFinder, findsOneWidget);
+      });
+
+      testWidgets('Display combo K4.2 title and requirement message ',
+          (tester) async {
+        when(() => comboDealListBlocMock.state).thenReturn(
+          ComboDealListState.initial().copyWith(
+            comboDeals: {
+              '123456-654321': [comboDeal]
+            },
+            priceComboDeal: PriceComboDeal.empty().copyWith(
+              flexibleGroup: FlexibleGroup('123456'),
+              salesDeal: SalesDealNumber('654321'),
+            ),
+          ),
+        );
+        when(() => comboDealMaterialDetailBlocMock.state).thenReturn(
+          ComboDealMaterialDetailState.initial().copyWith(
+            items: comboMaterialsMock,
+            materialCount: comboMaterialsMock.length,
+            selectedItems: comboMaterialsSeletedMock,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartItem.copyWith(
+                quantity: 7,
+                comboMaterials: cartItem.comboMaterials
+                    .map(
+                      (e) => e.copyWith(
+                        materialInfo: e.materialInfo.copyWith(
+                          quantity: MaterialQty(7),
+                        ),
+                        salesOrgConfig: fakeKHSalesOrgConfigs,
+                        comboDealType: 'K4',
+                        comboDeals: PriceComboDeal.empty().copyWith(
+                          flexibleGroup: FlexibleGroup('123456'),
+                          salesDeal: SalesDealNumber('654321'),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              )
+            ],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo
+                .copyWith(salesDeals: [SalesDealNumber('654321')]),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final comboItem = find.byType(
+          CartProductCombo,
+        );
+        expect(comboItem, findsOneWidget);
+
+        final cartComboTitleFinder = find.text('Combo K4');
+        expect(cartComboTitleFinder, findsOneWidget);
+
+        final cartComboRequirementFinder = find.text(
+          'Purchase min. 3 items from any of these products. Buy more save more.',
+        );
+
+        expect(cartComboRequirementFinder, findsOneWidget);
       });
     },
   );

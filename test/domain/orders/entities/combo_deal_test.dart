@@ -647,6 +647,181 @@ void main() {
       );
     });
 
+    test('K4.2 case', () {
+      final firstQtyTier = ComboDealQtyTier.empty().copyWith(
+        minQty: 3,
+        suffix: ComboSuffix('1'),
+      );
+      final secondQtyTier = ComboDealQtyTier.empty().copyWith(
+        minQty: 7,
+        suffix: ComboSuffix('2'),
+      );
+      final fakeSuffixMaterial1 = ComboDealMaterial.empty().copyWith(
+        minQty: 0,
+        materialNumber: MaterialNumber('fake-optional-material'),
+        rate: -4,
+        mandatory: false,
+        suffix: ComboSuffix('1'),
+      );
+
+      final fakeSuffixMaterial2 = ComboDealMaterial.empty().copyWith(
+        minQty: 0,
+        materialNumber: MaterialNumber('fake-optional-material'),
+        rate: -8,
+        mandatory: false,
+        suffix: ComboSuffix('2'),
+      );
+
+      final comboDeal = ComboDeal.empty().copyWith(
+        flexiQtyTier: [
+          firstQtyTier,
+          secondQtyTier,
+        ],
+        materialComboDeals: [
+          ComboDealMaterialSet(
+            materials: [fakeSuffixMaterial1, fakeSuffixMaterial2],
+            setNo: 'fake-set',
+          ),
+        ],
+      );
+
+      eligibleMaterialsCombo = [
+        PriceAggregate.empty().copyWith(
+          quantity: 4,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-optional-material'),
+          ),
+          comboDeal: comboDeal,
+        ),
+      ];
+      notEligibleMaterialsCombo = [
+        PriceAggregate.empty().copyWith(
+          quantity: 2,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-optional-material'),
+          ),
+          comboDeal: comboDeal,
+        ),
+      ];
+
+      expect(comboDeal.scheme, ComboDealScheme.k42);
+      expect(
+        comboDeal.allMaterials,
+        [fakeSuffixMaterial1, fakeSuffixMaterial2],
+      );
+      expect(
+        comboDeal.descendingSortedQtyTiers,
+        [secondQtyTier, firstQtyTier],
+      );
+
+      expect(
+        comboDeal.singleDeal(
+          materialNumber: MaterialNumber('fake-optional-material'),
+        ),
+        fakeSuffixMaterial1,
+      );
+      expect(
+        comboDeal.getMaterialComboRate(
+          materialNumber: MaterialNumber('fake-optional-material'),
+          totalQuantityUnit: 1,
+        ),
+        0,
+      );
+      expect(
+        comboDeal.getMaterialComboRate(
+          materialNumber: MaterialNumber('fake-optional-material'),
+          totalQuantityUnit: 4,
+        ),
+        4,
+      );
+      expect(
+        comboDeal.getMaterialComboRate(
+          materialNumber: MaterialNumber('fake-optional-material'),
+          totalQuantityUnit: 10,
+        ),
+        8,
+      );
+
+      expect(
+        comboDeal.selectedSuffix(
+          materialNumber: MaterialNumber('fake-optional-material'),
+          eligibleComboDealQtyTier: firstQtyTier,
+        ),
+        fakeSuffixMaterial1,
+      );
+      expect(
+        comboDeal.selectedSuffix(
+          materialNumber: MaterialNumber('fake-optional-material'),
+          eligibleComboDealQtyTier: secondQtyTier,
+        ),
+        fakeSuffixMaterial2,
+      );
+      expect(comboDeal.minPurchaseQty, 3);
+      expect(comboDeal.scheme.comboDealTitleAppbar, 'Combo K4.2');
+      expect(comboDeal.scheme.comboDealType, 'K4');
+      expect(comboDeal.isNextComboDealVisible, true);
+      expect(comboDeal.schemeMinimumQtyRequirement, '3');
+      expect(comboDeal.scheme.comboDealCanLoadmore, false);
+      expect(comboDeal.scheme.haveFixedMaterials, false);
+      expect(
+        comboDeal.buyMoreInfoKey,
+        'Buy {unit} more quantity to achieve next tier discount',
+      );
+      expect(comboDeal.buyMoreInfoUnit(totalAmount: 40, totalQty: 1), '2');
+      expect(
+        comboDeal.getNextEligibleComboDiscount(
+          totalQty: 2,
+          totalAmount: 80,
+        ),
+        DiscountInfo.empty().copyWith(minQty: 3, rate: 0),
+      );
+      expect(comboDeal.buyMoreInfoUnit(totalAmount: 140, totalQty: 6), '1');
+      expect(
+        comboDeal.getNextEligibleComboDiscount(
+          totalQty: 5,
+          totalAmount: 120,
+        ),
+        DiscountInfo.empty().copyWith(minQty: 7, rate: 0),
+      );
+      expect(
+        comboDeal.getNextEligibleComboDiscount(
+          totalQty: 7,
+          totalAmount: 150,
+        ),
+        DiscountInfo.empty(),
+      );
+      expect(
+        comboDeal.displayCombosMaximumDiscount,
+        '8.0',
+      );
+      expect(
+        comboDeal.isBestDealAvailableOnCombo(
+          totalQty: 7,
+          totalAmount: 160,
+        ),
+        true,
+      );
+      expect(
+        comboDeal.isBestDealAvailableOnCombo(
+          totalQty: 3,
+          totalAmount: 60,
+        ),
+        false,
+      );
+      expect(
+        comboDeal.scheme.isComboDealEligible(
+          eligibleMaterialsCombo,
+        ),
+        true,
+      );
+      expect(
+        comboDeal.scheme.isComboDealEligible(
+          notEligibleMaterialsCombo,
+        ),
+        false,
+      );
+    });
+
     test('K5 case', () {
       final firstAmountTier =
           ComboDealTierRule.empty().copyWith(minTotalAmount: 50, rate: -12);

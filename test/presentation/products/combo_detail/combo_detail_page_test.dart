@@ -2026,4 +2026,247 @@ void main() {
       );
     },
   );
+
+  group(
+    'Combo Details K4.2',
+    () {
+      setUp(() {
+        final firstQtyTier = ComboDealQtyTier.empty().copyWith(
+          minQty: 3,
+          suffix: ComboSuffix('1'),
+        );
+        final secondQtyTier = ComboDealQtyTier.empty().copyWith(
+          minQty: 7,
+          suffix: ComboSuffix('2'),
+        );
+
+        final fakeSuffixMaterial1 = ComboDealMaterial.empty().copyWith(
+          minQty: 0,
+          materialNumber: MaterialNumber('fake-optional-material'),
+          rate: -4,
+          mandatory: false,
+          suffix: ComboSuffix('1'),
+        );
+
+        final fakeSuffixMaterial2 = ComboDealMaterial.empty().copyWith(
+          minQty: 0,
+          materialNumber: MaterialNumber('fake-optional-material'),
+          rate: -8,
+          mandatory: false,
+          suffix: ComboSuffix('2'),
+        );
+
+        final comboDeal = ComboDeal.empty().copyWith(
+          flexiQtyTier: [
+            firstQtyTier,
+            secondQtyTier,
+          ],
+          materialComboDeals: [
+            ComboDealMaterialSet(
+              materials: [fakeSuffixMaterial1, fakeSuffixMaterial2],
+              setNo: 'fake-set',
+            ),
+          ],
+        );
+
+        comboMaterialsMock = {
+          MaterialNumber('fake-optional-material'):
+              PriceAggregate.empty().copyWith(
+            quantity: 4,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('fake-optional-material'),
+            ),
+            comboDeal: comboDeal,
+          ),
+        };
+
+        comboMaterialsSeletedMock = {
+          MaterialNumber('fake-optional-material'): false,
+        };
+        when(() => comboDetailMockBloc.state).thenReturn(
+          ComboDealMaterialDetailState.initial().copyWith(
+            items: comboMaterialsMock,
+            materialCount: comboMaterialsMock.length,
+            selectedItems: comboMaterialsSeletedMock,
+          ),
+        );
+      });
+
+      testWidgets(
+        'Appbar title',
+        (tester) async {
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+          final appbarTitle = find.text('Combo K4.2');
+          expect(appbarTitle, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Requirement section',
+        (tester) async {
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final requirementMessage = find.text(
+            'Purchase min. ${comboMaterialsMock.values.first.comboDeal.minPurchaseQty} items from any of these products. Buy more save more.',
+          );
+          expect(requirementMessage, findsOneWidget);
+
+          final discountOnMessage = find.text('Total Quantity');
+          expect(discountOnMessage, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Body section',
+        (tester) async {
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final comboFixedList = find.byKey(WidgetKeys.comboFixedList);
+          expect(comboFixedList, findsNothing);
+
+          final selectAtLeastMessage = find.text(
+            'Select at least one product from the below section to receive offered price',
+          );
+          expect(selectAtLeastMessage, findsNothing);
+
+          final searchBar = find.byType(CustomSearchBar);
+          expect(searchBar, findsOneWidget);
+
+          final totalMaterials = find.byKey(WidgetKeys.totalMaterialItemCount);
+          expect(totalMaterials, findsOneWidget);
+
+          final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
+          expect(comboMaterialList, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Add to cart section',
+        (tester) async {
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final notEligibleMessage =
+              find.byKey(WidgetKeys.comboNotEligibleMessage);
+          expect(notEligibleMessage, findsOneWidget);
+
+          final materialsSelected = comboMaterialsSeletedMock.entries
+              .where((element) => element.value)
+              .toList();
+
+          final totalUnitMessage =
+              find.text('${'Total qty'.tr()}: ${materialsSelected.length}');
+          expect(totalUnitMessage, findsOneWidget);
+
+          final comboRateDiscounted =
+              find.byKey(WidgetKeys.comboRateDiscounted);
+          expect(comboRateDiscounted, findsNothing);
+
+          final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
+          expect(nextDealInfo, findsNothing);
+
+          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          expect(checkoutButton, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Next deal info - Next deal display',
+        (tester) async {
+          comboMaterialsSeletedMock = {
+            MaterialNumber('fake-optional-material'): true,
+          };
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: comboMaterialsMock,
+              materialCount: comboMaterialsMock.length,
+              selectedItems: comboMaterialsSeletedMock,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final notEligibleMessage =
+              find.byKey(WidgetKeys.comboNotEligibleMessage);
+          expect(notEligibleMessage, findsNothing);
+
+          final itemNextTierDealFinder = find.text('Next tier 8% discount');
+          expect(itemNextTierDealFinder, findsOneWidget);
+
+          final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
+          expect(nextDealInfo, findsOneWidget);
+
+          final nextDealIcon = find.byKey(WidgetKeys.comboNextDealIcon);
+          expect(nextDealIcon, findsOneWidget);
+
+          final bestDealIcon = find.byKey(WidgetKeys.comboBestDealIcon);
+          expect(bestDealIcon, findsNothing);
+
+          final nextDealText =
+              find.text('Buy 3 more quantity to achieve next tier discount');
+          expect(nextDealText, findsOneWidget);
+
+          final bestDealText = find.text('Yay! You’ve got the best deal.');
+          expect(bestDealText, findsNothing);
+        },
+      );
+
+      testWidgets(
+        'Next deal info - Best deal display',
+        (tester) async {
+          comboMaterialsSeletedMock = {
+            MaterialNumber('fake-optional-material'): true,
+          };
+          when(() => comboDetailMockBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: comboMaterialsMock.map(
+                (key, value) => MapEntry(
+                  key,
+                  value.copyWith(quantity: 7),
+                ),
+              ),
+              materialCount: comboMaterialsMock.length,
+              selectedItems: comboMaterialsSeletedMock,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+
+          await tester.pump();
+
+          final notEligibleMessage =
+              find.byKey(WidgetKeys.comboNotEligibleMessage);
+          expect(notEligibleMessage, findsNothing);
+
+          final itemNextTierDealFinder = find.text('Next tier 8% discount');
+          expect(itemNextTierDealFinder, findsNothing);
+
+          final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
+          expect(nextDealInfo, findsOneWidget);
+
+          final nextDealIcon = find.byKey(WidgetKeys.comboNextDealIcon);
+          expect(nextDealIcon, findsNothing);
+
+          final bestDealIcon = find.byKey(WidgetKeys.comboBestDealIcon);
+          expect(bestDealIcon, findsOneWidget);
+
+          final nextDealText =
+              find.text('Buy 3 more quantity to achieve next tier discount');
+          expect(nextDealText, findsNothing);
+
+          final bestDealText = find.text('Yay! You’ve got the best deal.');
+          expect(bestDealText, findsOneWidget);
+        },
+      );
+    },
+  );
 }
