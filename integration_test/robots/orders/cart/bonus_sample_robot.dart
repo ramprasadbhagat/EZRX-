@@ -51,8 +51,10 @@ class BonusSampleRobot extends CommonRobot {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.customSnackBar),
-        matching:
-            find.text('In cart quantity should not be more than 99999.'.tr()),
+        matching: find.text(
+          'In cart quantity should not be more than {maximumNumber}.'
+              .tr(namedArgs: {'maximumNumber': '99999'}),
+        ),
       ),
       findsWidgets,
     );

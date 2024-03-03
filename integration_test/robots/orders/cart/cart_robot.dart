@@ -24,6 +24,7 @@ class CartRobot {
   final swipeDeleteButton = find.byKey(WidgetKeys.cartItemSwipeDeleteButton);
   final counterOfferButton = find.byKey(WidgetKeys.counterOfferPriceButtonKey);
   final bonusSampleButton = find.byKey(WidgetKeys.bonusSampleItemButtonKey);
+  final govtMaterialListPrice = find.byKey(WidgetKeys.govtMaterialListPrice);
 
   void verifyPage() {
     expect(cartPage, findsOneWidget);
@@ -228,7 +229,14 @@ class CartRobot {
     );
   }
 
-  void verifyMaterialNumber(String materialNumber) {
+  void verifyMaterialNumber(
+    String materialNumber, {
+    String? govermentMaterialCode,
+  }) {
+    var materialCode = materialNumber;
+    if (govermentMaterialCode != null) {
+      materialCode = '$materialNumber | $govermentMaterialCode';
+    }
     expect(
       find.descendant(
         of: _materialItem(materialNumber),
@@ -236,7 +244,7 @@ class CartRobot {
           (widget) =>
               widget.key == WidgetKeys.cartItemProductMaterialNumber &&
               widget is Text &&
-              widget.data == materialNumber,
+              widget.data == materialCode,
         ),
       ),
       findsOneWidget,
@@ -265,6 +273,23 @@ class CartRobot {
         matching: find.descendant(
           of: find.byKey(WidgetKeys.cartItemProductUnitPrice),
           matching: find.text(price, findRichText: true),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyGovtMaterialListPrice(
+    String materialNumber,
+    String price,
+  ) {
+    expect(
+      find.descendant(
+        of: _materialItem(materialNumber),
+        matching: find.descendant(
+          of: find.byKey(WidgetKeys.govtMaterialListPrice),
+          matching:
+              find.text('${'List price'.tr()}: $price', findRichText: true),
         ),
       ),
       findsOneWidget,
@@ -383,13 +408,16 @@ class CartRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyMaterialBonusSampleButton(String materialNumber) {
+  void verifyMaterialBonusSampleButton(
+    String materialNumber, {
+    bool isVisible = true,
+  }) {
     expect(
       find.descendant(
         of: _materialItem(materialNumber),
         matching: bonusSampleButton,
       ),
-      findsOneWidget,
+      isVisible ? findsOneWidget : findsNothing,
     );
   }
 

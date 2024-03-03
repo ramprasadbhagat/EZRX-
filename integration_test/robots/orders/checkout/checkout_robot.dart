@@ -165,6 +165,14 @@ class CheckoutRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> enterPaymentTerm(String text) async {
+    await tester.tap(paymentTermField);
+    await tester.pumpAndSettle();
+    await tester
+        .tap(find.descendant(of: paymentTermField, matching: find.text(text)));
+    await tester.pumpAndSettle();
+  }
+
   Future<void> verifyPoAttachmentSection({required bool isVisible}) =>
       _verifyDeliveryInformationComponent(poAttachmentSection, isVisible);
 
@@ -296,6 +304,22 @@ class CheckoutRobot {
           matching: find.byKey(WidgetKeys.cartItemProductUnitPrice),
         ),
         matching: find.textContaining(price, findRichText: true),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyGovtMaterialListPrice(String materialNumber, String price) {
+    expect(
+      find.descendant(
+        of: find.descendant(
+          of: _material(materialNumber),
+          matching: find.byKey(WidgetKeys.govtMaterialListPrice),
+        ),
+        matching: find.text(
+          '${'List price'.tr()}: $price',
+          findRichText: true,
+        ),
       ),
       findsOneWidget,
     );

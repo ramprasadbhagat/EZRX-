@@ -357,7 +357,7 @@ class _Description extends StatelessWidget {
         if (context.read<EligibilityBloc>().state.showMaterialDescInMandarin)
           Text(
             materialInfo.materialDescription,
-            key: WidgetKeys.materialDetailsMaterialDescription,
+            key: WidgetKeys.materialDetailsMaterialDescriptionInMandarin,
             style: Theme.of(context).textTheme.labelSmall,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

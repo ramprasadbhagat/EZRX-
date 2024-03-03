@@ -26,7 +26,11 @@ class _ProductOfferBodyContent extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 150,
+                    height: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .salesOrgConfigs
+                        .homeOfferListHeight,
                     child: state.isFetching
                         ? LoadingShimmer.logo(
                             key: WidgetKeys.productOfferSectionLoaderImage,

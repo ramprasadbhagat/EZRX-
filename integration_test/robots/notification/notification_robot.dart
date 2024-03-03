@@ -89,12 +89,12 @@ class NotificationRobot extends CommonRobot {
     );
   }
 
-  String getFirstBasicNotificationTitle() {
+  String getFirstBasicNotificationTitle({String? alertTitle}) {
     final count = itemTitle.evaluate().length;
 
     for (var i = 0; i < count; i++) {
       final data = tester.widget<Text>(itemTitle.at(i)).data ?? '';
-      if (data != 'Alert') {
+      if (data != (alertTitle ?? 'Alert')) {
         return data;
       }
     }

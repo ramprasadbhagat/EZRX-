@@ -71,12 +71,7 @@ class BonusItemsSheet extends StatelessWidget {
                     );
               }
             },
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
+            (either) => {},
           );
         },
         buildWhen: (previous, current) =>

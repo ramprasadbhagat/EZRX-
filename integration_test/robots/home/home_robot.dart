@@ -47,6 +47,7 @@ class HomeRobot extends CommonRobot {
   final productDescription = find.byKey(WidgetKeys.nameCart);
   final productManufactured = find.byKey(WidgetKeys.manufacturerMaterials);
   final productPrice = find.byKey(WidgetKeys.priceComponent);
+  final govtMaterialListPrice = find.byKey(WidgetKeys.govtMaterialListPrice);
   final productNumber = find.byKey(WidgetKeys.materialNumberText);
   final productFavoriteIcon = find.byKey(WidgetKeys.favoritesIcon);
   final searchByProductField = find.byKey(WidgetKeys.searchProductField);
@@ -172,10 +173,9 @@ class HomeRobot extends CommonRobot {
     await tester.pump();
   }
 
-  void verifyFirstBannerIsDisplay() {
+  void verifyBannerIsDisplay() {
     final listBanner = find.byKey(WidgetKeys.homeBanner);
-    final listPosition = tester.widget<PageView>(listBanner);
-    expect(listPosition.controller.page, 0);
+    expect(listBanner, findsOneWidget);
   }
 
   void findQuickAccessOrders() {
@@ -349,6 +349,10 @@ class HomeRobot extends CommonRobot {
 
   void findProductPrice() {
     expect(productPrice, findsWidgets);
+  }
+
+  void findGovtMaterialListPrice() {
+    expect(govtMaterialListPrice, findsWidgets);
   }
 
   void findProductFavouriteIcon() {

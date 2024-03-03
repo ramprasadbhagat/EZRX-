@@ -16,6 +16,7 @@ class LoginRobot extends CommonRobot {
   final loginPasswordField = find.byKey(WidgetKeys.loginPasswordField);
   final loginSubmitButton = find.byKey(WidgetKeys.loginSubmitButton);
   final skipIntroButton = find.byKey(WidgetKeys.introSkipButton);
+  final introGetStartedButton = find.byKey(WidgetKeys.introGetStartedButton);
   final signUp = find.byKey(WidgetKeys.createAccountButton);
   final loginWithSSO = find.byKey(WidgetKeys.ssoLoginButton);
   final closeAnnouncementBanner =
@@ -34,8 +35,19 @@ class LoginRobot extends CommonRobot {
 
     //login
     await login(username, password);
-    if (skipIntroButton.evaluate().isNotEmpty) await tapSkipIntroButton();
-    await tester.pumpAndSettle(const Duration(seconds: 2));
+    await skipIntroIfHas();
+  }
+
+  Future<void> skipIntroIfHas() async {
+    if (skipIntroButton.evaluate().isNotEmpty) {
+      await tapSkipIntroButton();
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+      return;
+    }
+    if (introGetStartedButton.evaluate().isNotEmpty) {
+      await tapIntroGetStartedButton();
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+    }
   }
 
   Future<void> login(String username, String password) async {
@@ -105,6 +117,15 @@ class LoginRobot extends CommonRobot {
 
   Future<void> tapSkipIntroButton() async {
     await tester.tap(skipIntroButton);
+    await tester.pumpAndSettle();
+  }
+
+  void findIntroGetStartedButton() {
+    expect(introGetStartedButton, findsOneWidget);
+  }
+
+  Future<void> tapIntroGetStartedButton() async {
+    await tester.tap(introGetStartedButton);
     await tester.pumpAndSettle();
   }
 

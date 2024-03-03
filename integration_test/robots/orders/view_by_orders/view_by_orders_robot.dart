@@ -149,7 +149,7 @@ class ViewByOrdersRobot {
   }
 
   String getOrderIdText({required int index}) {
-    final suffixText = '${'Order'.tr()} #';
+    const suffixText = '#';
     final labelText =
         tester.widget<Text>(orderCodeLabel.at(index)).data ?? suffixText;
 

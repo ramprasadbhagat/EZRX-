@@ -145,12 +145,19 @@ class OrderSuccessRobot extends CommonRobot {
     _verifyingItem = _material(index);
   }
 
-  void verifyMaterialNumber(String materialNumber) {
+  void verifyMaterialNumber(
+    String materialNumber, {
+    String? govermentMaterialCode,
+  }) {
     final label = find.descendant(
       of: _verifyingItem,
       matching: find.byKey(WidgetKeys.commonTileItemLabel),
     );
-    expect(tester.widget<Text>(label).data, equals(materialNumber));
+    var materialCode = materialNumber;
+    if (govermentMaterialCode != null) {
+      materialCode = '$materialNumber | $govermentMaterialCode';
+    }
+    expect(tester.widget<Text>(label).data, equals(materialCode));
   }
 
   void verifyMateriaDescription(String text) {
@@ -185,6 +192,21 @@ class OrderSuccessRobot extends CommonRobot {
         findsOneWidget,
       );
     }
+  }
+
+  void verifyGovtMaterialListPrice(String price) {
+    final label = find.descendant(
+      of: _verifyingItem,
+      matching: find.byKey(WidgetKeys.govtMaterialListPrice),
+    );
+
+    expect(
+      find.descendant(
+        of: label,
+        matching: find.text('${'List price'.tr()}: $price', findRichText: true),
+      ),
+      findsOneWidget,
+    );
   }
 
   void verifyMaterialTotalPrice(String price, {bool isFree = false}) {

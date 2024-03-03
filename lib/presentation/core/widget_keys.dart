@@ -258,6 +258,7 @@ class WidgetKeys {
   static const Key materialFilterSearchField = Key('materialFilterSearchField');
   static const Key filterProductIcon = Key('filterProductIcon');
   static const Key filterManufacturerButton = Key('filterManufacturerButton');
+  static const Key filterCountryButton = Key('filterCountryButton');
   static Key showProductCheckbox(String type) => Key('checkbox$type');
   static Key sortByRadio(String type) => Key('radioSort$type');
   static const Key clearSearchFilter = Key('clearSearchFilter');
@@ -724,6 +725,8 @@ class WidgetKeys {
   static const Key zdpDiscountListPrice = Key('zDPDiscountListPrice');
   static const Key listPriceStrikeThroughComponent =
       Key('listPriceStrikeThroughComponent');
+  static const Key govtMaterialListPrice = Key('govtMaterialListPrice');
+  static const Key currentPrice = Key('currentPrice');
   //============================================================
   //  ProductSearch Keys
   //============================================================
@@ -837,6 +840,8 @@ class WidgetKeys {
       Key('materialDetailsMaterialNumber');
   static const Key materialDetailsMaterialDescription =
       Key('materialDetailsMaterialDescription');
+  static const Key materialDetailsMaterialDescriptionInMandarin =
+      Key('materialDetailsMaterialDescriptionInMandarin');
   static const Key materialDetailsFavoriteIcon =
       Key('materialDetailsMaterialFavoriteIcon');
   static const Key materialDetailsStock = Key('materialDetailsStock');

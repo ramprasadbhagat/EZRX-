@@ -78,6 +78,7 @@ class ProductPriceLabel extends StatelessWidget {
                 ),
               PriceComponent(
                 type: PriceStyle.commonPrice,
+                key: WidgetKeys.currentPrice,
                 price: priceAggregate.tireItemPriceDisplay
                     ? priceAggregate.displayZdp5Price
                     : priceAggregate.display(PriceType.unitPrice),

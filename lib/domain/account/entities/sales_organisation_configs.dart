@@ -251,4 +251,6 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   String get displayPrefixTax => showSubtotalTaxBreakdown ? 'excl' : 'incl';
 
   bool get showGovtListPrice => enableListPrice && salesOrg.isTW;
+
+  double get homeOfferListHeight => showGovtListPrice ? 170 : 150;
 }

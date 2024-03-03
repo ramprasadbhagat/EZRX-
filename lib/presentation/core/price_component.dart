@@ -30,7 +30,7 @@ class PriceComponent extends StatelessWidget {
   //ignore:long-method
   List<TextSpan> _getTextSpan(BuildContext context) {
     final textSpans = <TextSpan>[];
-    final notPrice = price.contains(RegExp(r'[A-Za-z]'));
+    final notPrice = !price.contains(RegExp(r'^-?\d+(\.\d+)?$'));
     final priceTextStyle = _priceStyle(context, type);
     final currencyCodeTextStyle = _currencyCodeTextStyle(context, type);
     final singleCommaTextStyle = _currencyCodeTextStyle(context, type).copyWith(

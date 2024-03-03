@@ -163,7 +163,7 @@ class ViewByOrdersDetailRobot extends CommonRobot {
             of: _verifyingItem,
             matching: find.byKey(WidgetKeys.cartItemProductTotalPrice),
           ),
-          matching: find.text(isFree ? 'FREE' : price, findRichText: true),
+          matching: find.text(isFree ? 'FREE'.tr() : price, findRichText: true),
         ),
         findsOneWidget,
       );

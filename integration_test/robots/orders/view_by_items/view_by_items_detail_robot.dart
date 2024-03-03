@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
@@ -26,10 +27,10 @@ class ViewByItemsDetailRobot extends CommonRobot {
   final offerTag = find.byKey(WidgetKeys.offerTag);
   final bundleTag = find.byKey(WidgetKeys.bundleTag);
   final bonusTag = find.byKey(WidgetKeys.commonTileItemStatusLabel);
-  final freePrice = find.descendant(
-    of: find.byKey(WidgetKeys.cartItemProductTotalPrice),
-    matching: find.text('FREE', findRichText: true),
-  );
+  Finder get freePrice => find.descendant(
+        of: find.byKey(WidgetKeys.cartItemProductTotalPrice),
+        matching: find.text('FREE'.tr(), findRichText: true),
+      );
   final buyAgainButton = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
   final expandButton = find.byKey(WidgetKeys.viewByItemDetailExpandButton);
   final qtyLabel = find.byKey(WidgetKeys.cartItemProductQty);

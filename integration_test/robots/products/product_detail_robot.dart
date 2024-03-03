@@ -26,6 +26,7 @@ class ProductDetailRobot extends CommonRobot {
   final closeMaterialInformationDialog =
       find.byKey(WidgetKeys.closeMaterialInformationDialog);
   final materialDetailsStock = find.byKey(WidgetKeys.materialDetailsStock);
+  final govtMaterialListPrice = find.byKey(WidgetKeys.govtMaterialListPrice);
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
@@ -122,6 +123,50 @@ class ProductDetailRobot extends CommonRobot {
 
   void verifyProductPriceDisplayed() {
     expect(find.byKey(WidgetKeys.priceComponent).first, findsOneWidget);
+  }
+
+  void verifyListPriceStrikeThroughComponent(String price) {
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.bodyContentProductDetail),
+        matching: find.descendant(
+          of: find.byKey(WidgetKeys.listPriceStrikeThroughComponent),
+          matching: find.textContaining(price, findRichText: true),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyCurrentProductPrice(String price) {
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.bodyContentProductDetail),
+        matching: find.descendant(
+          of: find.byKey(WidgetKeys.currentPrice),
+          matching: find.text(price, findRichText: true),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyGovtMaterialListPrice(String price) {
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.bodyContentProductDetail),
+        matching: find.descendant(
+          of: find.byKey(WidgetKeys.govtMaterialListPrice),
+          matching:
+              find.text('${'List price'.tr()}: $price', findRichText: true),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyGovtMaterialListPriceDisplayed() {
+    expect(govtMaterialListPrice.first, findsOneWidget);
   }
 
   void verifyMaterialDetailsInfoTileDisplayed() {
@@ -223,6 +268,13 @@ class ProductDetailRobot extends CommonRobot {
   void verifyCountryOfOriginLabelDisplayed(String value) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('Country of origin'.tr(), value)),
+      findsOneWidget,
+    );
+  }
+
+  void verifyGovermentMaterialCode(String value) {
+    expect(
+      find.byKey(WidgetKeys.balanceTextRow('Govt material number'.tr(), value)),
       findsOneWidget,
     );
   }

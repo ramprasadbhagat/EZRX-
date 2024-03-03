@@ -187,11 +187,18 @@ class ViewByItemsRobot {
       .widget<RichText>(orderId.first)
       .text
       .toPlainText()
-      .split('${'Order'.tr()} #')[1];
+      .split('${'Order'.tr()} #')[1]
+      .substring(0, 4);
 
   String getFirstProductName() => _getText(productName.first);
 
-  String getFirstProductId() => _getText(productId.first);
+  String getFirstProductId({bool enableGMC = false}) {
+    final code = _getText(productId.first);
+    if (enableGMC) {
+      return code.split(' | ').first;
+    }
+    return code;
+  }
 
   String _getText(Finder finder) => tester.widget<Text>(finder).data ?? '';
 

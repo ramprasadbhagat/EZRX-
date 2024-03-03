@@ -13,6 +13,7 @@ class ProductRobot extends CommonRobot {
   final bundleCard = find.byKey(WidgetKeys.materialListBundleCard);
   final nameCart = find.byKey(WidgetKeys.nameCart);
   final priceComponent = find.byKey(WidgetKeys.priceComponent);
+  final govtMaterialListPrice = find.byKey(WidgetKeys.govtMaterialListPrice);
   final favoritesChoiceChip = find.byKey(WidgetKeys.favoritesChoiceChip);
   final covidChoiceChip = find.byKey(WidgetKeys.covidChoiceChip);
 
@@ -93,12 +94,12 @@ class ProductRobot extends CommonRobot {
         tester.widgetList<Text>(nameCart).map((e) => e.data);
     if (listNameProduct.isEmpty) {
       verifyNoProduct();
+      return;
+    }
+    if (matched) {
+      expect(listNameProduct.contains(nameProduct), true);
     } else {
-      if (matched) {
-        expect(listNameProduct.first, nameProduct);
-      } else {
-        expect(listNameProduct.first != nameProduct, true);
-      }
+      expect(listNameProduct.first != nameProduct, true);
     }
   }
 
@@ -182,6 +183,16 @@ class ProductRobot extends CommonRobot {
       find.descendant(
         of: materialCard,
         matching: _getPriceFinder('Price Not Available'.tr()),
+      ),
+      findsWidgets,
+    );
+  }
+
+  void verifyGovtMaterialListPrice() {
+    expect(
+      find.descendant(
+        of: materialCard,
+        matching: govtMaterialListPrice,
       ),
       findsWidgets,
     );

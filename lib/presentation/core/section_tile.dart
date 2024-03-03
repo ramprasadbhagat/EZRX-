@@ -18,14 +18,14 @@ class SectionTitle extends StatelessWidget {
     return Row(
       children: [
         Text(
-          title.tr(),
+          context.tr(title),
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: ZPColors.neutralsBlack,
               ),
         ),
         IconButton(
           // key: WidgetKeys.iconArrow,
-          key: WidgetKeys.sectionTileIcon(title),
+          key: WidgetKeys.sectionTileIcon(context.tr(title)),
           onPressed: onTapIconButton,
           visualDensity: VisualDensity.compact,
           icon: const CircleAvatar(

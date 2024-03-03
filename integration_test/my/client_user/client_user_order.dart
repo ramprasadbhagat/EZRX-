@@ -745,7 +745,7 @@ void main() {
       //init app
       await pumpAppWithHomeScreen(tester);
 
-      homeRobot.verifyFirstBannerIsDisplay();
+      homeRobot.verifyBannerIsDisplay();
       //tap on next banner
       homeRobot.findNextBanner();
       await homeRobot.tapNextBanner();

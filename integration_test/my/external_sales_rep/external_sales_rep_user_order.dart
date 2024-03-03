@@ -542,7 +542,7 @@ void main() {
       //init app
       await pumpAppWithLoginOnBehalf(tester);
 
-      homeRobot.verifyFirstBannerIsDisplay();
+      homeRobot.verifyBannerIsDisplay();
       //tap on next banner
       homeRobot.findNextBanner();
       await homeRobot.tapNextBanner();

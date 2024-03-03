@@ -162,32 +162,7 @@ void main() {
         findsOneWidget,
       );
     });
-    testWidgets('Should show error snackbar after add bonus to cart',
-        (tester) async {
-      whenListen(
-        cartBloc,
-        Stream.fromIterable(
-          [
-            cartState.copyWith(
-              isUpserting: true,
-            ),
-            cartState.copyWith(
-              apiFailureOrSuccessOption:
-                  optionOf(const Left(ApiFailure.other('fail'))),
-            ),
-          ],
-        ),
-      );
-      await tester.pumpWidget(getWidgetToTest(priceAggregate));
-      await tester.pumpAndSettle();
 
-      expect(
-        find.byKey(
-          WidgetKeys.customSnackBar,
-        ),
-        findsOneWidget,
-      );
-    });
     testWidgets('Should show bonus item list when fetch data successfully',
         (tester) async {
       when(() => cartBloc.state).thenReturn(

@@ -21,8 +21,6 @@ class CommonRobot {
   final customerCodeSelector = find.byKey(WidgetKeys.customerCodeSelector);
   final customSnackBar = find.byKey(WidgetKeys.customSnackBar);
   final searchBar = find.byType(CustomSearchBar);
-  final invalidLengthSearchMessage =
-      find.text('Please enter at least 2 characters.'.tr());
   final homeTabBar = find.byKey(WidgetKeys.homeTabBar);
   final homeTab = find.byKey(WidgetKeys.homeTab);
   final productsTab = find.byKey(WidgetKeys.productsTab);
@@ -31,9 +29,12 @@ class CommonRobot {
   Future<void> setDateRangePickerValue({
     required DateTime fromDate,
     required DateTime toDate,
+    String? dateStringFormat = 'MM/dd/yyyy',
   }) async {
-    final fromDateString = '${fromDate.month}/${fromDate.day}/${fromDate.year}';
-    final toDateString = '${toDate.month}/${toDate.day}/${toDate.year}';
+    final dateFormat = DateFormat(dateStringFormat);
+    final fromDateString = dateFormat.format(fromDate);
+    final toDateString = dateFormat.format(toDate);
+
     final dialog = find.byType(DateRangePickerDialog);
     final editWidget = find.descendant(
       of: dialog,
@@ -196,7 +197,7 @@ class CommonRobot {
 
   void verifyInvalidLengthSearchMessage({bool isVisible = true}) {
     expect(
-      invalidLengthSearchMessage,
+      find.text('Please enter at least 2 characters.'.tr()),
       isVisible ? findsOneWidget : findsNothing,
     );
   }
