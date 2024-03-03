@@ -161,55 +161,9 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         .first;
   }
 
-  double grandTotal(
-    bool isMYExternalSalesRep, {
-    bool isIDMarket = false,
-  }) {
-    if (isIDMarket) return totalValue;
-
-    return orderHistoryDetailsOrderItem.fold(
-      grandTotalWithTax,
-      (previousValue, element) => isMYExternalSalesRep &&
-              element.type.isMaterialTypeComm &&
-              element.principalData.principalCode.isPnG &&
-              !invoiceNumber.isValid() &&
-              orderValue > 0
-          ? grandTotalWithTax - element.totalPrice
-          : previousValue,
-    );
-  }
-
-  double subTotalExcludeTax(bool isMYExternalSalesRep) =>
-      orderHistoryDetailsOrderItem.fold(
-        orderValue,
-        (previousValue, element) => isMYExternalSalesRep &&
-                element.type.isMaterialTypeComm &&
-                element.principalData.principalCode.isPnG &&
-                !invoiceNumber.isValid() &&
-                orderValue > 0
-            ? orderValue - (element.qty * element.unitPrice)
-            : previousValue,
-      );
-
-  double orderedItemsValue(
-    bool isMYExternalSalesRep, {
-    bool isIDMarket = false,
-  }) {
-    if (isIDMarket) {
-      return totalValue;
-    }
-
-    return orderHistoryDetailsOrderItem.fold(
-      orderValue,
-      (previousValue, element) => isMYExternalSalesRep &&
-              element.type.isMaterialTypeComm &&
-              element.principalData.principalCode.isPnG &&
-              !invoiceNumber.isValid() &&
-              orderValue > 0
-          ? orderValue - (element.qty * element.unitPrice)
-          : previousValue,
-    );
-  }
+  double subTotal(bool showSubTotalExcludingTax) => showSubTotalExcludingTax
+      ? orderValue //order value is excl tax
+      : totalValue; //total value is incl tax
 
   String get totalTaxPercentage {
     /// Retrieves the total tax percentage for the entire order by extracting it from the first order item

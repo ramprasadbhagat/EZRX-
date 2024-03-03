@@ -19,9 +19,6 @@ class OrderSummarySection extends StatelessWidget {
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final salesOrgConfigs = eligibilityState.salesOrgConfigs;
-    final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
-    final taxDisplayForOrderHistoryAndDetails =
-        salesOrgConfigs.displaySubtotalTaxBreakdown;
     final orderDetails =
         context.read<ViewByOrderDetailsBloc>().state.orderHistoryDetails;
 
@@ -40,13 +37,17 @@ class OrderSummarySection extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          if (eligibilityState.salesOrg.isID) ...[
-            _PriceTile(
-              key: WidgetKeys.viewByOrderIdSubtotalKey,
-              orderNumber: orderDetails.orderNumber,
-              title: context.tr('Subtotal (excl.tax)'),
-              value: orderDetails.orderValue,
+          _PriceTile(
+            key: WidgetKeys.viewByOrderSubtotalKey,
+            orderNumber: orderDetails.orderNumber,
+            title: context.tr(
+              'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
             ),
+            value: orderDetails.subTotal(
+              eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown,
+            ),
+          ),
+          if (eligibilityState.salesOrg.isID) ...[
             const SizedBox(height: 10),
             _PriceTile(
               key: WidgetKeys.viewByOrderIdTaxKey,
@@ -94,14 +95,6 @@ class OrderSummarySection extends StatelessWidget {
               value: orderDetails.totalDiscount,
             ),
           ] else ...[
-            _PriceTile(
-              key: WidgetKeys.viewByOrderSubtotalKey,
-              orderNumber: orderDetails.orderNumber,
-              title: context.tr(
-                'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
-              ),
-              value: orderDetails.subTotalExcludeTax(isMYExternalSalesRep),
-            ),
             const SizedBox(
               height: 5,
             ),
@@ -129,9 +122,7 @@ class OrderSummarySection extends StatelessWidget {
               orderNumber: orderDetails.orderNumber,
               title: context.tr('Grand total'),
               priceStyle: PriceStyle.grandTotalPrice,
-              value: taxDisplayForOrderHistoryAndDetails
-                  ? orderDetails.grandTotal(isMYExternalSalesRep)
-                  : orderDetails.orderedItemsValue(isMYExternalSalesRep),
+              value: orderDetails.totalValue,
             ),
             if (orderDetails.orderContainsMaterialsWithInvalidPrice)
               const PriceNotAvailableMessage(

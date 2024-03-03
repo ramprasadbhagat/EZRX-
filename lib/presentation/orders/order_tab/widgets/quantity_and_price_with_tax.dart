@@ -55,11 +55,7 @@ class QuantityAndPriceWithTax extends StatelessWidget {
             PriceComponent(
               key: WidgetKeys.cartItemProductTotalPrice,
               salesOrgConfig: eligibilityState.salesOrgConfigs,
-              price: (eligibilityState
-                          .salesOrgConfigs.displaySubtotalTaxBreakdown ||
-                      netPriceValue == 0)
-                  ? netPrice
-                  : (netPriceValue * (1 + taxPercentage / 100)).toString(),
+              price: netPrice,
             ),
             if (eligibilityState.salesOrgConfigs.displayItemTaxBreakdown &&
                 netPriceValue > 0)

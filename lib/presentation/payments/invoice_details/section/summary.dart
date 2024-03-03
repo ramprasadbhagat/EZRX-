@@ -48,13 +48,14 @@ class InvoiceSummary extends StatelessWidget {
               PriceComponent(
                 type: PriceStyle.summaryPrice,
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
-                price: eligibilityState.salesOrgConfigs.showSubtotalTaxBreakdown
-                    ? customerDocumentDetail.totalNetAmount.toString()
-                    : customerDocumentDetail.totalGrossAmount.toString(),
+                price:
+                    eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown
+                        ? customerDocumentDetail.totalNetAmount.toString()
+                        : customerDocumentDetail.totalGrossAmount.toString(),
               ),
             ],
           ),
-          if (eligibilityState.salesOrgConfigs.showSubtotalTaxBreakdown) ...[
+          if (eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown) ...[
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Row(

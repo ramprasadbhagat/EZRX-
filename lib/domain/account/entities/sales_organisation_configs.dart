@@ -245,10 +245,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         futureDeliveryDay.intValue - 1,
       );
 
-  bool get showSubtotalTaxBreakdown =>
-      displaySubtotalTaxBreakdown || salesOrg.isID;
 
-  String get displayPrefixTax => showSubtotalTaxBreakdown ? 'excl' : 'incl';
+  String get displayPrefixTax => displaySubtotalTaxBreakdown ? 'excl' : 'incl';
 
   bool get showGovtListPrice => enableListPrice && salesOrg.isTW;
 

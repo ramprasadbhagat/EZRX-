@@ -505,7 +505,11 @@ void main() {
         ViewByOrderState.initial().copyWith(
           viewByOrderList: viewByOrder.copyWith(
             orderHeaders: [
-              viewByOrder.orderHeaders.first.copyWith(totalTax: 20)
+              viewByOrder.orderHeaders.first.copyWith(
+                orderValue: 364.80,
+                totalTax: 20,
+                totalValue: 384.80,
+              )
             ],
           ),
         ),

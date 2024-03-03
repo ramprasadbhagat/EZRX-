@@ -37,11 +37,11 @@ class _OrderSummary extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
                 price:
-                    '${orderHistoryDetails.subTotalExcludeTax(eligibilityState.isMYExternalSalesRepUser)}',
+                    '${orderHistoryDetails.subTotal(eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)}',
               ),
             ],
           ),
-          if (eligibilityState.salesOrgConfigs.showSubtotalTaxBreakdown)
+          if (eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Row(
@@ -123,10 +123,7 @@ class _OrderSummary extends StatelessWidget {
               ),
               PriceComponent(
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
-                price: eligibilityState
-                        .salesOrgConfigs.displaySubtotalTaxBreakdown
-                    ? '${orderHistoryDetails.grandTotal(eligibilityState.isMYExternalSalesRepUser, isIDMarket: eligibilityState.isIDMarket)}'
-                    : '${orderHistoryDetails.orderedItemsValue(eligibilityState.isMYExternalSalesRepUser, isIDMarket: eligibilityState.isIDMarket)}',
+                price: orderHistoryDetails.totalValue.toStringAsFixed(2),
               ),
             ],
           ),

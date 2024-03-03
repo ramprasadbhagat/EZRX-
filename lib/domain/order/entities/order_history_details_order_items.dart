@@ -150,10 +150,13 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
       );
 
   String itemNetPrice(
+    bool showItemTotalExcludingTax,
     bool isIDMarket,
   ) =>
       _itemPrice(
-        unitPrice * qty,
+        showItemTotalExcludingTax
+            ? unitPrice * qty //item total price excl tax
+            : totalPrice, //item total price incl tax
         isIDMarket,
       );
 

@@ -2699,13 +2699,13 @@ void main() {
         expect(subTotalValueFinder, findsOneWidget);
         expect(
           checkoutSummaryTax,
-          currentSalesOrgConfigVariant.showSubtotalTaxBreakdown
+          currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown
               ? findsOneWidget
               : findsNothing,
         );
         expect(
           checkoutSummaryTaxPrice,
-          currentSalesOrgConfigVariant.showSubtotalTaxBreakdown
+          currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown
               ? findsOneWidget
               : findsNothing,
         );

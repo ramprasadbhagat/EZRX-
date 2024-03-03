@@ -1562,14 +1562,16 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
-            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            salesOrgConfigs: fakeIDSalesOrgConfigs.copyWith(
+              displaySubtotalTaxBreakdown: true,
+            ),
           ),
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.viewByOrderIdSubtotalKey),
+            of: find.byKey(WidgetKeys.viewByOrderSubtotalKey),
             matching: find.text('Subtotal (excl.tax):'),
           ),
           findsOneWidget,
@@ -2057,6 +2059,7 @@ void main() {
             orderNumber: OrderNumber('Fake-Order-Number'),
             orderValue: 990.0,
             totalTax: 99.0,
+            totalValue: 1089.00,
             orderHistoryDetailsOrderItem: bundleList,
           ),
         ),
@@ -2148,6 +2151,7 @@ void main() {
             orderNumber: OrderNumber('Fake-Order-Number'),
             orderValue: 990.0,
             totalTax: 99.0,
+            totalValue: 1089.00,
             orderHistoryDetailsOrderItem: bundleList,
           ),
         ),
@@ -2168,7 +2172,7 @@ void main() {
         find.descendant(
           of: find.byKey(WidgetKeys.viewByOrderSubtotalKey),
           matching: find.text(
-            'MYR 990.00',
+            'MYR 1,089.00',
             findRichText: true,
           ),
         ),
@@ -2202,7 +2206,7 @@ void main() {
         find.descendant(
           of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
           matching: find.text(
-            'MYR 990.00',
+            'MYR 1,089.00',
             findRichText: true,
           ),
         ),

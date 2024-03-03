@@ -1679,6 +1679,7 @@ void main() {
             unitPrice: 60,
             qty: 30,
             tax: 126,
+            totalPrice: 1926.00,
           ),
         ),
       ];
@@ -1689,7 +1690,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final expectedPrice = find.text(
-        'MYR 5,580.00',
+        'MYR 1,800.00',
         findRichText: true,
       );
       expect(expectedPrice, findsOneWidget);
@@ -1956,8 +1957,7 @@ void main() {
       expect(requestedCounterOfferKey, findsOneWidget);
     });
 
-    testWidgets(
-        'Test Payment Term when disable payment term display is false',
+    testWidgets('Test Payment Term when disable payment term display is false',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenAnswer(
         (invocation) => EligibilityState.initial().copyWith(
@@ -1986,8 +1986,7 @@ void main() {
       expect(find.text('K001-30 Days from EOM, due EOM'), findsOneWidget);
     });
 
-    testWidgets(
-        'Test Payment Term when disable payment term display is enable',
+    testWidgets('Test Payment Term when disable payment term display is enable',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenAnswer(
         (invocation) => EligibilityState.initial().copyWith(

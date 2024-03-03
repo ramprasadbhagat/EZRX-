@@ -272,7 +272,7 @@ void main() {
           matching: find.text(
             StringUtils.priceComponentDisplayPrice(
               currentSalesOrgConfigs,
-              currentSalesOrgConfigs.showSubtotalTaxBreakdown
+              currentSalesOrgConfigs.displaySubtotalTaxBreakdown
                   ? fakeItemList.totalNetAmount
                   : fakeItemList.totalGrossAmount,
               false,
@@ -282,7 +282,7 @@ void main() {
         ),
         findsOneWidget,
       );
-      if (currentSalesOrgConfigs.showSubtotalTaxBreakdown) {
+      if (currentSalesOrgConfigs.displaySubtotalTaxBreakdown) {
         expect(
           find.descendant(
             of: creditDetailTax,

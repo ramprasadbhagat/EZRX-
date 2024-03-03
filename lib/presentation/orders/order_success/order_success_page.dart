@@ -112,7 +112,6 @@ class OrderSuccessPage extends StatelessWidget {
   void _trackOrderSuccess(BuildContext context, OrderSummaryState state) {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final isIDMarket = eligibilityState.salesOrg.isID;
-    final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
     final orderDetail = state.orderHistoryDetails;
     final orderNumber = orderDetail.orderNumber.getOrDefaultValue('');
 
@@ -120,7 +119,7 @@ class OrderSuccessPage extends StatelessWidget {
       MixpanelEvents.placeOrderSuccess,
       props: {
         MixpanelProps.orderNumber: orderNumber,
-        MixpanelProps.grandTotal: orderDetail.grandTotal(isMYExternalSalesRep),
+        MixpanelProps.grandTotal: orderDetail.totalValue,
         MixpanelProps.totalQty: orderDetail.orderItemsCount,
         MixpanelProps.requestDeliveryDate:
             orderDetail.requestedDeliveryDate.dateOrNaString,

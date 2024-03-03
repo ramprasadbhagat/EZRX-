@@ -126,6 +126,7 @@ class _MaterialItem extends StatelessWidget {
                 key: WidgetKeys.orderSuccessItemTotalPrice,
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 price: orderItem.itemNetPrice(
+                  eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
                   isIDMarket,
                 ),
               ),

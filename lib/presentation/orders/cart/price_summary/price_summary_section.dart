@@ -90,7 +90,7 @@ class PriceSummarySection extends StatelessWidget {
             ),
           ],
         ),
-        if (salesOrgConfig.showSubtotalTaxBreakdown)
+        if (salesOrgConfig.displaySubtotalTaxBreakdown)
           _TaxWidget(cartState: cartState),
         if (cartState.salesOrganisation.salesOrg.showSmallOrderFee)
           _SmallOrderFee(cartState: cartState),

@@ -79,10 +79,7 @@ class _ViewByOrder extends StatelessWidget {
                   ),
                   PriceComponent(
                     salesOrgConfig: eligibilityState.salesOrgConfigs,
-                    price: eligibilityState
-                            .salesOrgConfigs.displaySubtotalTaxBreakdown
-                        ? '${viewByOrderHistoryItem.grandTotal(eligibilityState.isMYExternalSalesRepUser, isIDMarket: eligibilityState.isIDMarket)}'
-                        : '${viewByOrderHistoryItem.orderedItemsValue(eligibilityState.isMYExternalSalesRepUser, isIDMarket: eligibilityState.isIDMarket)}',
+                    price: viewByOrderHistoryItem.totalValue.toStringAsFixed(2),
                     title: context.tr('Order total : '),
                     priceLabelStyle:
                         Theme.of(context).textTheme.titleSmall?.copyWith(

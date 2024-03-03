@@ -157,14 +157,14 @@ class CreditDetailsSection extends StatelessWidget {
                       type: PriceStyle.summaryPrice,
                       salesOrgConfig: eligibilityState.salesOrgConfigs,
                       price: eligibilityState
-                              .salesOrgConfigs.showSubtotalTaxBreakdown
+                              .salesOrgConfigs.displaySubtotalTaxBreakdown
                           ? creditItems.totalNetAmount.toString()
                           : creditItems.totalGrossAmount.toString(),
                     ),
                   ],
                 ),
                 if (eligibilityState
-                    .salesOrgConfigs.showSubtotalTaxBreakdown) ...[
+                    .salesOrgConfigs.displaySubtotalTaxBreakdown) ...[
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Row(

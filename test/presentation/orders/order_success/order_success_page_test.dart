@@ -402,6 +402,7 @@ void main() {
                   qty: quantity,
                 )
               ],
+              totalValue: grandTotalValue,
               orderValue: subTotalValueWithoutTax,
               totalTax: totalTax,
             ),
@@ -641,6 +642,7 @@ void main() {
                   qty: quantity,
                 )
               ],
+              totalValue: grandTotalValue,
               orderValue: subTotalValueWithoutTax,
               totalTax: totalTax,
             ),
@@ -767,7 +769,7 @@ void main() {
           properties: {
             MixpanelProps.orderNumber:
                 fakeOrderDetail.orderNumber.getOrDefaultValue(''),
-            MixpanelProps.grandTotal: fakeOrderDetail.grandTotal(false),
+            MixpanelProps.grandTotal: fakeOrderDetail.totalValue,
             MixpanelProps.totalQty: fakeOrderDetail.orderItemsCount,
             MixpanelProps.requestDeliveryDate:
                 fakeOrderDetail.requestedDeliveryDate.dateOrNaString,
@@ -1580,6 +1582,7 @@ void main() {
             orderNumber: OrderNumber('Fake-Order-Number'),
             orderValue: 990.0,
             totalTax: 99.0,
+            totalValue: 1089.00,
             orderHistoryDetailsOrderItem: bundleList,
           ),
         ),
@@ -1661,6 +1664,7 @@ void main() {
             orderNumber: OrderNumber('Fake-Order-Number'),
             orderValue: 990.0,
             totalTax: 99.0,
+            totalValue: 1089.00,
             orderHistoryDetailsOrderItem: bundleList,
           ),
         ),
@@ -1681,7 +1685,7 @@ void main() {
         find.descendant(
           of: find.byKey(WidgetKeys.orderSuccessSubTotal),
           matching: find.text(
-            'MYR 990.00',
+            'MYR 1,089.00',
             findRichText: true,
           ),
         ),
@@ -1715,7 +1719,7 @@ void main() {
         find.descendant(
           of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
           matching: find.text(
-            'MYR 990.00',
+            'MYR 1,089.00',
             findRichText: true,
           ),
         ),
