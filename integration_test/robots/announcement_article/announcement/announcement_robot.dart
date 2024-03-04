@@ -51,10 +51,7 @@ class AnnouncementRobot extends CommonRobot {
       findsOneWidget,
     );
     expect(
-      find.text(
-        'Try adjusting your search or filter selection to find what you’re looking for.'
-            .tr(),
-      ),
+      find.text(noRecordFoundDefaultSubTitle),
       findsOneWidget,
     );
   }

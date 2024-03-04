@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_alt_name.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_name.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bill_to_info.freezed.dart';
@@ -17,7 +18,7 @@ class BillToInfo with _$BillToInfo {
     required BillToAddress billToAddress,
     required BillToAltName billToAltName,
     required List<EmailAddress> emailAddresses,
-    required String taxNumber,
+    required StringValue taxNumber,
     required String status,
     required String country,
     required String district,
@@ -41,16 +42,16 @@ class BillToInfo with _$BillToInfo {
     required String customerLocalGroup,
   }) = _BillToInfo;
 
-  factory BillToInfo.empty() => const BillToInfo(
+  factory BillToInfo.empty() => BillToInfo(
         defaulBillToAddress: false,
         billToCustomerCode: '',
-        billToName: BillToName(
+        billToName: const BillToName(
           name1: '',
           name2: '',
           name3: '',
           name4: '',
         ),
-        billToAddress: BillToAddress(
+        billToAddress: const BillToAddress(
           street: '',
           street2: '',
           street3: '',
@@ -59,14 +60,14 @@ class BillToInfo with _$BillToInfo {
           city1: '',
           city2: '',
         ),
-        billToAltName: BillToAltName(
+        billToAltName: const BillToAltName(
           altName1: '',
           altName2: '',
           altName3: '',
           altName4: '',
         ),
         emailAddresses: <EmailAddress>[],
-        taxNumber: '',
+        taxNumber: StringValue(''),
         status: '',
         country: '',
         region: '',

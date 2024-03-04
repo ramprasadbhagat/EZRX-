@@ -42,6 +42,7 @@ class InvoiceItemCard extends StatelessWidget {
             Text(
               '${context.tr('Gov. no')} ${customerOpenItem.documentReferenceID.displayDashIfEmpty}',
               style: Theme.of(context).textTheme.labelSmall,
+              key: WidgetKeys.governmentNumber,
             ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0, bottom: 10.0),

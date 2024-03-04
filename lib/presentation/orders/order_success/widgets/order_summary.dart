@@ -27,12 +27,15 @@ class _OrderSummary extends StatelessWidget {
           Row(
             key: WidgetKeys.orderSuccessSubTotal,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                '${context.tr(
-                  'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
-                )}:',
-                style: Theme.of(context).textTheme.titleSmall,
+              Flexible(
+                child: Text(
+                  '${context.tr(
+                    'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
+                  )}:',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
               ),
               PriceComponent(
                 salesOrgConfig: eligibilityState.salesOrgConfigs,

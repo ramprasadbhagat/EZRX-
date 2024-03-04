@@ -181,17 +181,13 @@ class OrderSuccessRobot extends CommonRobot {
       of: _verifyingItem,
       matching: find.byKey(WidgetKeys.orderItemUnitPrice),
     );
-    if (isFree) {
-      expect(label, findsNothing);
-    } else {
-      expect(
-        find.descendant(
-          of: label,
-          matching: find.text(price, findRichText: true),
-        ),
-        findsOneWidget,
-      );
-    }
+    expect(
+      find.descendant(
+        of: label,
+        matching: find.text(price, findRichText: true),
+      ),
+      isFree ? findsNothing : findsOneWidget,
+    );
   }
 
   void verifyGovtMaterialListPrice(String price) {

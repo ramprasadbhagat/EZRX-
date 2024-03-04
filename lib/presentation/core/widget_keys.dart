@@ -66,6 +66,10 @@ class WidgetKeys {
   static Key favIcon(String label) => Key('favIcon$label');
   static const Key payerInformation = Key('payerInformation');
   static const Key orderItemUnitPrice = Key('orderItemUnitPrice');
+  static const Key governmentNumber = Key('governmentNumber');
+  static const Key billToCustomerCode = Key('billToCustomerCode');
+  static const Key billToAddress = Key('billToAddress');
+
   //============================================================
   //  PRE-ORDER-MODAL
   //============================================================
@@ -258,7 +262,8 @@ class WidgetKeys {
   static const Key materialFilterSearchField = Key('materialFilterSearchField');
   static const Key filterProductIcon = Key('filterProductIcon');
   static const Key filterManufacturerButton = Key('filterManufacturerButton');
-  static const Key filterCountryButton = Key('filterCountryButton');
+  static const Key filterCountryOfOriginButton =
+      Key('filterCountryOfOriginButton');
   static Key showProductCheckbox(String type) => Key('checkbox$type');
   static Key sortByRadio(String type) => Key('radioSort$type');
   static const Key clearSearchFilter = Key('clearSearchFilter');
@@ -1163,7 +1168,6 @@ class WidgetKeys {
   static const Key itemCheckBadge = Key('itemCheckBadge');
   //step 2
   static const Key creditPaymentItem = Key('creditPaymentItem');
-  static const Key documentReferenceID = Key('documentReferenceID');
   static const Key accountingDocument = Key('accountingDocument');
   static const Key creditIdPrice = Key('creditIdPrice');
   static const Key itemStatementAccounts = Key('itemStatementAccounts');

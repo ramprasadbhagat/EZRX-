@@ -19,8 +19,10 @@ class AccountInvoiceDetailRobot {
   void verifyInvoiceDetails(
     String id,
     String status,
-    String orderNumber,
-  ) {
+    String orderNumber, {
+    bool isVn = false,
+    String govNo = '',
+  }) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('${'Invoice'.tr()} #$id', status)),
       findsOneWidget,
@@ -42,6 +44,10 @@ class AccountInvoiceDetailRobot {
     expect(
       find.byKey(WidgetKeys.invoiceOrderNumber(orderNumber)),
       findsOneWidget,
+    );
+    expect(
+      find.byKey(WidgetKeys.balanceTextRow('Gov. no'.tr(), govNo)),
+      isVn ? findsOneWidget : findsNothing,
     );
   }
 

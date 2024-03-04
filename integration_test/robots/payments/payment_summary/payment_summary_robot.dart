@@ -28,6 +28,8 @@ class PaymentSummaryRobot {
     expect(page, findsOneWidget);
   }
 
+  bool get moreThanFiveItem => item.evaluate().length > 5;
+
   void verifyDownloadButtonVisible() {
     expect(downloadButton, findsOneWidget);
   }

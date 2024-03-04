@@ -13,11 +13,14 @@ class ViewByOrdersDetailRobot extends CommonRobot {
   ViewByOrdersDetailRobot(WidgetTester tester) : super(tester);
 
   final buyAgainButton = find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+  final _page = find.byType(ViewByOrderDetailsPage);
   late Finder _verifyingItem;
 
   void verifyPage() {
-    expect(find.byType(ViewByOrderDetailsPage), findsOneWidget);
+    expect(_page, findsOneWidget);
   }
+
+  bool get isOrderDetailPage => _page.evaluate().isNotEmpty;
 
   void verifyOrderId(String orderId) {
     expect(
@@ -48,6 +51,13 @@ class ViewByOrdersDetailRobot extends CommonRobot {
   void verifyDeliveryInstructions(String text) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('Delivery instructions'.tr(), text)),
+      findsOneWidget,
+    );
+  }
+
+  void verifyPaymentTerm(String text) {
+    expect(
+      find.byKey(WidgetKeys.balanceTextRow('Payment Term'.tr(), text)),
       findsOneWidget,
     );
   }
@@ -97,6 +107,18 @@ class ViewByOrdersDetailRobot extends CommonRobot {
     expect(
       find.descendant(
         of: subTotalWidget,
+        matching: find.text(value, findRichText: true),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyTax(String value) {
+    final taxFinder = find.byKey(WidgetKeys.viewByOrderTaxKey);
+    expect(taxFinder, findsOneWidget);
+    expect(
+      find.descendant(
+        of: taxFinder,
         matching: find.text(value, findRichText: true),
       ),
       findsOneWidget,

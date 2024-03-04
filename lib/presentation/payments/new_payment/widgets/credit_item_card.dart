@@ -49,7 +49,7 @@ class CreditItemCard extends StatelessWidget {
                   Text(
                     '${context.tr('Gov. no')} ${customerOpenItem.documentReferenceID.displayDashIfEmpty}',
                     style: Theme.of(context).textTheme.labelSmall,
-                    key: WidgetKeys.documentReferenceID,
+                    key: WidgetKeys.governmentNumber,
                   ),
                 PriceComponent(
                   key: WidgetKeys.creditIdPrice,

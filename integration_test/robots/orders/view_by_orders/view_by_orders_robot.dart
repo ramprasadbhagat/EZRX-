@@ -1,16 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
-class ViewByOrdersRobot {
-  final WidgetTester tester;
-
-  ViewByOrdersRobot(this.tester);
+class ViewByOrdersRobot extends CommonRobot {
+  ViewByOrdersRobot(WidgetTester tester) : super(tester);
 
   final orderGroups = find.byKey(WidgetKeys.viewByOrdersGroupKey);
   final orderItems = find.byKey(WidgetKeys.viewByOrdersItemKey);
@@ -18,7 +16,6 @@ class ViewByOrdersRobot {
   final status = find.byKey(WidgetKeys.viewByOrderStatusKey);
   final orderCodeLabel = find.byKey(WidgetKeys.viewByOrdersCodeLabelKey);
   final orderQtyLabel = find.byKey(WidgetKeys.viewByOrdersQtyLabelKey);
-  final searchBar = find.byType(CustomSearchBar);
 
   void verifyOrders() {
     verifyOrderGroups();
@@ -90,10 +87,7 @@ class ViewByOrdersRobot {
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
     expect(find.text('No orders found'.tr()), findsOneWidget);
     expect(
-      find.textContaining(
-        'Try adjusting your search or filter selection to find what you’re looking for'
-            .tr(),
-      ),
+      find.text(noRecordFoundDefaultSubTitle),
       findsOneWidget,
     );
   }

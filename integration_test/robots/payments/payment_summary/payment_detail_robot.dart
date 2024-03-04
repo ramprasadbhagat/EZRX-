@@ -27,6 +27,9 @@ class PaymentSummaryDetailRobot extends CommonRobot {
     expect(_paymentSummaryDetailsPage, findsOneWidget);
   }
 
+  bool get isPaymentDetailPage =>
+      _paymentSummaryDetailsPage.evaluate().isNotEmpty;
+
   void verifyPaymentDetail(
     String paymentId,
   ) {

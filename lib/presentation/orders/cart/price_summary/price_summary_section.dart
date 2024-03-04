@@ -70,14 +70,17 @@ class PriceSummarySection extends StatelessWidget {
         Row(
           key: WidgetKeys.checkoutSummarySubTotal,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
-              '${context.tr(
-                'Subtotal (${salesOrgConfig.displayPrefixTax}.tax)',
-              )}:',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                  ),
+            Flexible(
+              child: Text(
+                '${context.tr(
+                  'Subtotal (${salesOrgConfig.displayPrefixTax}.tax)',
+                )}:',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
+              ),
             ),
             _DisplayPrice(
               priceComponent: PriceComponent(

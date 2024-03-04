@@ -156,7 +156,7 @@ class PaymentSummaryFilterRobot {
 
   Future<void> tapApplyButton() async {
     await tester.tap(applyButton);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(seconds: 1));
   }
 
   Future<void> tapResetButton() async {

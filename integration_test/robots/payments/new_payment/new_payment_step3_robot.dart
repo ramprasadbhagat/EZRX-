@@ -20,6 +20,7 @@ class NewPaymentStep3Robot {
       find.byKey(WidgetKeys.createPaymentAdviseNote);
   final createPaymentAdviseWarning =
       find.byKey(WidgetKeys.createPaymentAdviseWarning);
+  final invoiceCreditTile = find.byKey(WidgetKeys.invoiceCreditItemTile);
 
   void verifyStep3InitialField(String defaultPaymentMethod) {
     verifyWarningMessage();
@@ -185,6 +186,40 @@ class NewPaymentStep3Robot {
     );
   }
 
+  Future<void> verifyInvoiceCreditItem(
+    String id,
+    String governmentNumber,
+  ) async {
+    final firstItem = invoiceCreditTile.evaluate().length > 1
+        ? invoiceCreditTile.first
+        : invoiceCreditTile;
+    await _scrollUntilVisible(firstItem);
+    expect(
+      find.descendant(
+        of: firstItem,
+        matching: find.byWidgetPredicate(
+          (widget) =>
+              widget.key == WidgetKeys.invoiceCreditItemId &&
+              widget is Text &&
+              widget.data!.contains(id),
+        ),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: firstItem,
+        matching: find.byWidgetPredicate(
+          (widget) =>
+              widget.key == WidgetKeys.governmentNumber &&
+              widget is Text &&
+              widget.data!.contains(governmentNumber),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyGeneratePaymentAdviceButton() {
     expect(generatePaymentAdviceButton, findsOneWidget);
   }
@@ -223,5 +258,14 @@ class NewPaymentStep3Robot {
           .price,
     );
     expect(totalAmount.priceFormattedForID, invoicePrice.priceFormattedForID);
+  }
+
+  Future<void> _scrollUntilVisible(Finder finder) async {
+    await tester.dragUntilVisible(
+      finder,
+      find.byKey(WidgetKeys.paymentMethodListView),
+      const Offset(0.0, -200),
+    );
+    await tester.pump();
   }
 }

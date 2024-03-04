@@ -36,7 +36,7 @@ class AccountCreditDetailsRobot {
     expect(
       find.descendant(
         of: _itemDetailsTile,
-        matching: find.text(status),
+        matching: find.text(status.tr()),
       ),
       findsOneWidget,
     );

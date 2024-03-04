@@ -25,6 +25,7 @@ class CommonRobot {
   final homeTab = find.byKey(WidgetKeys.homeTab);
   final productsTab = find.byKey(WidgetKeys.productsTab);
   final cartButton = find.byType(CartButton);
+  final payerInformationVn = find.byKey(WidgetKeys.payerInformation);
 
   Future<void> setDateRangePickerValue({
     required DateTime fromDate,
@@ -285,4 +286,72 @@ class CommonRobot {
       await tester.pumpAndSettle();
     }
   }
+
+  //============================================================
+  //  Bill To information for VN
+  //============================================================
+  Future<void> verifyBillToInfoForVn({
+    required String customerCode,
+    required String shipToAddress,
+    required String name,
+    required String email,
+    required String taxNumber,
+    required String phoneNumber,
+  }) async {
+    final isExpanded =
+        tester.widget<ExpansionTile>(payerInformationVn).initiallyExpanded;
+    if (!isExpanded) {
+      await tester.tap(find.byKey(WidgetKeys.billToCustomerCode));
+      await tester.pump();
+    }
+    expect(
+      find.descendant(
+        of: payerInformationVn,
+        matching: find.byWidgetPredicate(
+          (widget) =>
+              widget.key == WidgetKeys.billToCustomerCode &&
+              widget is Text &&
+              widget.data == '${'Bill-to'.tr()}: $customerCode',
+        ),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: payerInformationVn,
+        matching: find.byWidgetPredicate(
+          (widget) =>
+              widget.key == WidgetKeys.billToAddress &&
+              widget is Text &&
+              widget.data == (shipToAddress),
+        ),
+      ),
+      findsOneWidget,
+    );
+    _verifyBillToInfoField('Name', name);
+    _verifyBillToInfoField('Email', email);
+    _verifyBillToInfoField('Tax number', taxNumber);
+    _verifyBillToInfoField('Phone', phoneNumber);
+    await tester.tap(find.byKey(WidgetKeys.billToCustomerCode));
+    await tester.pump();
+  }
+
+  void _verifyBillToInfoField(String keyText, String valueText) {
+    expect(
+      find.descendant(
+        of: payerInformationVn,
+        matching: find.byKey(
+          WidgetKeys.balanceTextRow(keyText.tr(), valueText),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  //============================================================
+  //  Language Translation stuff
+  //============================================================
+
+  String get noRecordFoundDefaultSubTitle =>
+      '${'Try adjusting your search or filter selection to find what you’re looking for'.tr()}.';
 }

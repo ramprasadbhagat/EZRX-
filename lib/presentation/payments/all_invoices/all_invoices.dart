@@ -202,6 +202,7 @@ class _InvoiceItem extends StatelessWidget {
             ),
             if (context.read<EligibilityBloc>().state.salesOrg.showGovNumber)
               Padding(
+                key: WidgetKeys.governmentNumber,
                 padding: const EdgeInsets.symmetric(vertical: 2.0),
                 child: Text(
                   '${context.tr('Gov. no')} ${invoiceItem.documentReferenceID.displayDashIfEmpty}',

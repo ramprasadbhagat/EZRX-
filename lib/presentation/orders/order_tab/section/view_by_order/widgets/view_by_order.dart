@@ -70,12 +70,15 @@ class _ViewByOrder extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    '${viewByOrderHistoryItem.itemCount} ${context.tr('items')}',
-                    key: WidgetKeys.viewByOrdersQtyLabelKey,
-                    style: Theme.of(context).textTheme.titleSmall,
+                  Flexible(
+                    child: Text(
+                      '${viewByOrderHistoryItem.itemCount} ${context.tr('items')}',
+                      key: WidgetKeys.viewByOrdersQtyLabelKey,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                   ),
                   PriceComponent(
                     salesOrgConfig: eligibilityState.salesOrgConfigs,

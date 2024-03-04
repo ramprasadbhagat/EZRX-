@@ -37,13 +37,16 @@ class InvoiceSummary extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             key: WidgetKeys.invoiceDetailSubTotal,
             children: [
-              Text(
-                context.tr(
-                  'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
+              Flexible(
+                child: Text(
+                  context.tr(
+                    'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
+                  ),
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
-                style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
                 type: PriceStyle.summaryPrice,

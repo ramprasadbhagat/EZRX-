@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -6,7 +5,6 @@ import 'package:integration_test/integration_test.dart';
 import '../../core/common.dart';
 import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
-import '../../robots/announcement_article/announcement/announcement_detail_robot.dart';
 import '../../robots/announcement_article/announcement_article_root_robot.dart';
 import '../../robots/auth/forgot_password_robot.dart';
 import '../../robots/common/common_robot.dart';
@@ -17,9 +15,11 @@ import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
 import '../../robots/more/more_robot.dart';
 import '../../robots/notification/notification_robot.dart';
+import '../../robots/orders/cart/bonus_sample_robot.dart';
 import '../../robots/orders/cart/cart_delivery_address_robot.dart';
 import '../../robots/orders/cart/cart_robot.dart';
 import '../../robots/orders/cart/oos_pre_order_robot.dart';
+import '../../robots/orders/cart/request_counter_offer_robot.dart';
 import '../../robots/orders/checkout/checkout_robot.dart';
 import '../../robots/orders/checkout/order_price_summary_robot.dart';
 import '../../robots/orders/checkout/order_success_robot.dart';
@@ -28,14 +28,17 @@ import '../../robots/orders/view_by_items/view_by_items_detail_robot.dart';
 import '../../robots/orders/view_by_items/view_by_items_filter_robot.dart';
 import '../../robots/orders/view_by_items/view_by_items_robot.dart';
 import '../../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
+import '../../robots/payments/account_summary/account_invoice/account_invoice_detail_robot.dart';
 import '../../robots/payments/payment_summary/payment_detail_robot.dart';
 import '../../robots/orders/view_by_orders/view_by_orders_filter_robot.dart';
 import '../../robots/orders/view_by_orders/view_by_orders_robot.dart';
+import '../../robots/payments/payment_home_robot.dart';
 import '../../robots/products/filter_sort_product_robot.dart';
 import '../../robots/products/product_detail_robot.dart';
 import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
+import '../../robots/returns/returns_root_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +50,7 @@ void main() {
   late CustomerSearchRobot customerSearchRobot;
   late NotificationRobot notificationRobot;
   late MoreRobot moreRobot;
+
   late ProductRobot productRobot;
   late ProductDetailRobot productDetailRobot;
   late FilterSortProductRobot filterSortProductRobot;
@@ -54,6 +58,8 @@ void main() {
   late CartRobot cartRobot;
   late OOSPreOrderRobot oosPreOrderRobot;
   late CartDeliveryAddressRobot cartDeliveryAddressDetailRobot;
+  late RequestCounterOfferRobot requestCounterOfferRobot;
+  late BonusSampleRobot bonusSampleRobot;
   late OrderPriceSummaryRobot orderPriceSummaryRobot;
   late CheckoutRobot checkoutRobot;
   late OrderSuccessRobot orderSuccessRobot;
@@ -65,10 +71,14 @@ void main() {
   late ViewByOrdersRobot viewByOrdersRobot;
   late ViewByOrdersFilterRobot viewByOrdersFilterRobot;
   late ViewByOrdersDetailRobot viewByOrdersDetailRobot;
+
+  late ReturnsRootRobot returnsRootRobot;
   late ReturnsByItemsDetailRobot returnsByItemsDetailRobot;
+
+  late PaymentHomeRobot paymentHomeRobot;
   late PaymentSummaryDetailRobot paymentDetailRobot;
+  late AccountInvoiceDetailRobot accountInvoiceDetailRobot;
   late AnnouncementArticleRootRobot announcementArticleRootRobot;
-  late AnnouncementDetailRobot announcementDetailRobot;
 
   void initializeRobot(WidgetTester tester) {
     commonRobot = CommonRobot(tester);
@@ -78,6 +88,7 @@ void main() {
     customerSearchRobot = CustomerSearchRobot(tester);
     moreRobot = MoreRobot(tester);
     notificationRobot = NotificationRobot(tester);
+
     productRobot = ProductRobot(tester);
     productDetailRobot = ProductDetailRobot(tester);
     filterSortProductRobot = FilterSortProductRobot(tester);
@@ -85,6 +96,8 @@ void main() {
     cartRobot = CartRobot(tester);
     oosPreOrderRobot = OOSPreOrderRobot(tester);
     cartDeliveryAddressDetailRobot = CartDeliveryAddressRobot(tester);
+    requestCounterOfferRobot = RequestCounterOfferRobot(tester);
+    bonusSampleRobot = BonusSampleRobot(tester);
     orderPriceSummaryRobot = OrderPriceSummaryRobot(tester);
     checkoutRobot = CheckoutRobot(tester);
     orderSuccessRobot = OrderSuccessRobot(tester);
@@ -96,52 +109,61 @@ void main() {
     viewByOrdersRobot = ViewByOrdersRobot(tester);
     viewByOrdersFilterRobot = ViewByOrdersFilterRobot(tester);
     viewByOrdersDetailRobot = ViewByOrdersDetailRobot(tester);
+
+    returnsRootRobot = ReturnsRootRobot(tester);
     returnsByItemsDetailRobot = ReturnsByItemsDetailRobot(tester);
+
+    paymentHomeRobot = PaymentHomeRobot(tester);
     paymentDetailRobot = PaymentSummaryDetailRobot(tester);
+    accountInvoiceDetailRobot = AccountInvoiceDetailRobot(tester);
+
     announcementArticleRootRobot = AnnouncementArticleRootRobot(tester);
-    announcementDetailRobot = AnnouncementDetailRobot(tester);
   }
 
-  const marketMalaysia = 'Taiwan';
-  const username = 'twclientuser';
-  const password = 'St@ysafe01';
-  const customerCode = '0000100891';
-  const shipToCode = '0070117663';
-  const shipToAddress = '台灣明尼蘇達礦業製造（股）公';
-  const otherCustomerCode = '0030038504';
-  const otherShipToCode = '0070100010';
-  const otherShipToAddress = '長庚紀念醫院林口分院';
-  const currency = 'TWD';
+  const market = 'Vietnam';
+  const username = 'auto_client_user';
+  const password = 'Pa55word@1234';
+  const customerCode = '0000102668';
+  const shipToAddress = 'LG VINA COSMETICS CO., LTD';
+  const shipToCode = '0071192102';
+  const otherShipToCode = '0000003070';
+
+  const billToCustomerCode = '0030277787';
+  const billToShipToCode = '0071205149';
+  const billToOrderAddress = 'Cong Ty TNHH Xuan Thuy';
+  const billToAddress = 'Bach Mai P. Cau Den';
+  const billToName = 'Cong Ty TNHH Xuan Thuy   ';
+  const billToEmail = 'NA';
+  const billToTaxNumber = 'NA';
+  const billToPhoneNumber = '01693200644';
+
+  const currency = 'VND';
   const invalidLengthSearchKey = '1';
   const invalidSearchKey = 'auto-test-auto-test';
   const invalidNumberSearchKey = '1231762381236123';
-  const materialNumber = '23156808';
-  const bonusMaterialNumber = '23156808';
-  const bonusGovermentMaterialCode = 'NCS030510NBD';
-  const govermentMaterialCode = 'NCS030510NBD';
-  const materialName = '０．３ｃｃ塑膠胰島素空針３１號針頭　　';
-  const materialEnglishName = '0.3cc 31G Syr. 10Bag  8mm 100/Bx';
-  const materialPrincipalName = '新加坡商必帝(股)公司台灣分公司';
-  const materialCountryOfOrigin = '美國';
-  const materialUnitMeasurement = 'EA';
-  const materialUnitPrice = 700;
-  const govtMaterialListPrice = 300;
+  const minOrderAmount = 1000000.0;
+  const tax = 5; // please note it is not vat value, it's material tax
 
-  const govermentMaterialCodePriceNA = 'NCS030510NBD';
-  const multiImageMaterialNumber = '23156808';
-  const otherInfoMaterialNumber = '23156808';
-  const materialNumberHavingPriceNA = '23156808';
-  const materialNameHavingPriceNA = '0.3cc 31G Syr. 10Bag  8mm 100/Bx';
-  const materialPrincipalNameHavingPriceNA = '新加坡商必帝(股)公司台灣分公司';
-  // const suspendedMaterialNumber = '21034245';
-  const paymentTerm = 'T019-發票日起15天內付款';
+  const materialNumber = '21248715';
+  const materialName = 'ALINITY I ANTI-HBC IGM CALIBRATORS';
+  const materialPrincipalName = 'Abbott GmbH Co. KG';
+  const materialCountryOfOrigin = 'United Kingdom';
+  const materialUnitMeasurement = 'EA';
+  const materialUnitPrice = 2253100.0;
+  const multiImageMaterialNumber = '21248715';
+  const otherInfoMaterialNumber = '21128190';
+  const suspendedMaterialNumber = '21253250';
+  const lowPriceMaterialNumber = '21230973';
+  const lowPriceMaterialUnitPrice = 460693.0;
+  const oosPreOrderMaterialNumber = '21128190';
+  const bonusMaterialNumber = '21230896';
   const bonusMaterialNumberTierQty = 10;
-  const bonusMaterialName = '０．３ｃｃ塑膠胰島素空針３１號針頭　　';
-  const bonusMaterialEnglishName = '0.3cc 31G Syr. 10Bag  8mm 100/Bx';
-  const bonusMaterialNumberUnitPrice = 700;
-  const contactPerson = 'contact-person';
-  const contactNumber = '1234567890';
-  const alertTitle = '警報';
+  const bonusMaterialNumberUnitPrice = 2156000;
+  const bonusMaterialName = 'ARCHITECT CA 19-9XR RGT 400TEST';
+
+  const poReference = 'Auto-test-po-reference';
+  const deliveryInstruction = 'Auto-test-delivery-instruction';
+  const dateFormat = 'dd/MM/yyyy';
 
   var loginRequired = true;
 
@@ -152,7 +174,7 @@ void main() {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRequired) {
-      await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
+      await loginRobot.loginToHomeScreen(username, password, market);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
@@ -162,6 +184,7 @@ void main() {
       await commonRobot.changeDeliveryAddress(
         shipToCode,
       );
+      await commonRobot.closeAnnouncementAlertDialog();
     }
   }
 
@@ -189,19 +212,15 @@ void main() {
     }
   }
 
-  Future<void> placeOrderWithMaterial(
-    String materialNumber,
-    int qty, {
-    bool isPreOrder = false,
-  }) async {
-    await checkoutWithMaterial(materialNumber, qty, isPreOrder: isPreOrder);
-    await checkoutRobot.verifyPaymentTermField(isVisible: true);
-    await checkoutRobot.enterPaymentTerm(paymentTerm);
-    await checkoutRobot.verifyContactPersonField(isVisible: true);
-    await checkoutRobot.enterContactPerson(contactPerson);
-    await checkoutRobot.verifyMobileNumberField(isVisible: true);
-    await checkoutRobot.enterContactNumber(contactNumber);
-    await checkoutRobot.tapPlaceOrderButton();
+  Future<void> verifyBillToInfo() async {
+    await commonRobot.verifyBillToInfoForVn(
+      customerCode: billToCustomerCode,
+      shipToAddress: billToAddress,
+      name: billToName,
+      email: billToEmail,
+      taxNumber: billToTaxNumber,
+      phoneNumber: billToPhoneNumber,
+    );
   }
 
   group('Authentication -', () {
@@ -212,8 +231,6 @@ void main() {
       initializeRobot(tester);
       await runAppForTesting(tester);
       await loginRobot.tapToCloseAnnouncementBanner();
-      //TODO: remove this line, once snackbar issue resolved
-      await commonRobot.dismissSnackbar(dismissAll: true);
     }
 
     testWidgets('EZRX-T6 | Verify GUI of Login screen', (tester) async {
@@ -222,7 +239,7 @@ void main() {
       //select market
       await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
-      await loginRobot.selectMarket(marketMalaysia);
+      await loginRobot.selectMarket(market);
       await loginRobot.tapToCloseAnnouncementBanner();
 
       //verify
@@ -231,9 +248,11 @@ void main() {
       await loginRobot.findPasswordField();
       await loginRobot.findRememberMeCheckbox();
       await loginRobot.findForgotPasswordLink();
-      await loginRobot.verifySelectedMarket(marketMalaysia);
-      await loginRobot.findSignUpLink();
-      await loginRobot.findLoginWithSSOButton();
+      await loginRobot.verifySelectedMarket(market);
+      await loginRobot.findSignUpLink(
+        isVisible: false,
+      );
+      await loginRobot.findLoginWithSSOButton(isVisible: false);
     });
 
     testWidgets('EZRX-T7 | Verify Default value fields', (tester) async {
@@ -254,7 +273,7 @@ void main() {
       //select market
       await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
-      await loginRobot.selectMarket(marketMalaysia);
+      await loginRobot.selectMarket(market);
 
       //login without username and password
       await loginRobot.login(emptyString, emptyString);
@@ -279,7 +298,7 @@ void main() {
       //select market
       await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
-      await loginRobot.selectMarket(marketMalaysia);
+      await loginRobot.selectMarket(market);
 
       //login with incorrect username
       await loginRobot.login(usernameInCorrect, password);
@@ -295,7 +314,7 @@ void main() {
       //select market
       await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
-      await loginRobot.selectMarket(marketMalaysia);
+      await loginRobot.selectMarket(market);
 
       //login with incorrect password
       await loginRobot.login(username, passwordInCorrect);
@@ -311,7 +330,7 @@ void main() {
       //select market
       await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
-      await loginRobot.selectMarket(marketMalaysia);
+      await loginRobot.selectMarket(market);
 
       //login with incorrect username
       await loginRobot.login(usernameInCorrect, passwordInCorrect);
@@ -367,7 +386,7 @@ void main() {
       //select market
       await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
-      await loginRobot.selectMarket(marketMalaysia);
+      await loginRobot.selectMarket(market);
 
       // check remember me
       await loginRobot.findRememberMeCheckbox();
@@ -377,8 +396,8 @@ void main() {
       await loginRobot.login(username, password);
 
       //intro page
-      loginRobot.findIntroGetStartedButton();
-      await loginRobot.skipIntroIfHas();
+      loginRobot.findSkipIntroButton();
+      await loginRobot.tapSkipIntroButton();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       //customer search
@@ -389,6 +408,7 @@ void main() {
       await customerSearchRobot.search(shipToCode);
       customerSearchRobot.findCustomerCode(shipToCode);
     });
+
     testWidgets(
         'EZRX-T12 | Verify login successfully with customer page still saved',
         (tester) async {
@@ -419,13 +439,13 @@ void main() {
       //select market
       await loginRobot.findMarketSelector();
       await loginRobot.tapToMarketSelector();
-      await loginRobot.selectMarket(marketMalaysia);
+      await loginRobot.selectMarket(market);
 
       // check remember me
       await loginRobot.findRememberMeCheckbox();
       await loginRobot.tapToRememberMe();
 
-      await loginRobot.verifySelectedMarket(marketMalaysia);
+      await loginRobot.verifySelectedMarket(market);
       //login with
       await loginRobot.login(username, password);
 
@@ -442,10 +462,6 @@ void main() {
   });
 
   group('Notification Tab -', () {
-    const orderNotificationKeyword = 'Order';
-    const returnNotificationKeyword = 'Return';
-    const paymentNotificationKeyword = 'Payment';
-
     testWidgets('EZRX-T95 | Verify Notification Tab with Default Values',
         (tester) async {
       //init app
@@ -455,10 +471,6 @@ void main() {
       //verify
       notificationRobot.verifyPage();
       notificationRobot.verifyScrollList();
-      if (notificationRobot.checkIfNotificationListEmpty()) {
-        notificationRobot.verifyNoRecordFound();
-        return;
-      }
       notificationRobot.verifyDeleteButton();
     });
 
@@ -466,7 +478,7 @@ void main() {
         'EZRX-T96 | Verify at least one notification item if list not empty',
         (tester) async {
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester);
       await commonRobot.navigateToScreen(NavigationTab.notifications);
 
       //verify
@@ -477,15 +489,13 @@ void main() {
       }
       await notificationRobot.scrollAlertNotification();
       await notificationRobot.verifyNotificationItems();
-      final itemTitle = notificationRobot.getFirstBasicNotificationTitle(
-        alertTitle: alertTitle,
-      );
+      final itemTitle = notificationRobot.getFirstBasicNotificationTitle();
       await notificationRobot.tapFirstBasicNotificationItem(itemTitle);
-      if (itemTitle.startsWith(orderNotificationKeyword.tr())) {
+      if (viewByOrdersDetailRobot.isOrderDetailPage) {
         viewByOrdersDetailRobot.verifyPage();
-      } else if (itemTitle.startsWith(returnNotificationKeyword.tr())) {
+      } else if (returnsByItemsDetailRobot.isReturnDetailPage) {
         returnsByItemsDetailRobot.verifyPage();
-      } else if (itemTitle.startsWith(paymentNotificationKeyword.tr())) {
+      } else if (paymentDetailRobot.isPaymentDetailPage) {
         paymentDetailRobot.verifyPage();
       } else {
         notificationRobot.verifyRedirectNotAvailableMessage();
@@ -511,8 +521,7 @@ void main() {
   });
 
   group('Home Tab -', () {
-    testWidgets(
-        'EZRX-T17 | Access Homepage after logging in and having existing ShipTo',
+    testWidgets('EZRX-T17 | Verify Homepage with default components',
         (tester) async {
       //init app
       await pumpAppWithHomeScreen(tester);
@@ -520,18 +529,16 @@ void main() {
       //verify homepage
       homeRobot.verify();
       commonRobot.verifyCustomerCodeSelector();
+      customerSearchRobot.verifyCustomerCodeIsSelected(shipToCode);
       homeRobot.findMiniCartIcon();
       homeRobot.findQuickAccessMenu();
-      homeRobot.findQuickAccessOrders();
-      homeRobot.findQuickAccessChatSupport();
       homeRobot.findBannerInHomeScreen();
       await homeRobot.findBrowseProductsIcon();
-      await homeRobot.findRecentlyOrderIcon();
-      await homeRobot.findAnnouncementsIcon();
+      // await homeRobot.findAnnouncementsIcon();
     });
 
     testWidgets(
-        'EZRX-T18 | Verify select ShipTo in Homepage incase existing items in cart',
+        'EZRX-T18 | Verify select other ShipTo in Homepage incase existing items in cart',
         (tester) async {
       //init app
       await pumpAppWithHomeScreen(tester);
@@ -580,12 +587,13 @@ void main() {
     });
 
     testWidgets(
-        'EZRX-T20 | Verify Search ShipTo with keyword contains Customer name/ShipTo name in Homepage',
+        'EZRX-T20 | Verify Search ShipTo with keyword contains valid/invalid Customer name/ShipTo',
         (tester) async {
       // initialize variables
       final subCustomerCode = customerCode.substring(0, 8);
+      final subCustomerName = shipToAddress.substring(0, 8);
       final subShipToCode = shipToCode.substring(0, 8);
-      final subShipToName = shipToAddress.substring(0, 10);
+      final subShipToName = shipToAddress.substring(0, 8);
 
       //init app
       await pumpAppWithHomeScreen(tester);
@@ -598,6 +606,10 @@ void main() {
       // contain customer code
       await customerSearchRobot.search(subCustomerCode);
       customerSearchRobot.verifySearchResults(subCustomerCode);
+
+      // contain customer name
+      await customerSearchRobot.search(subCustomerName);
+      customerSearchRobot.verifySearchResults(subCustomerName);
 
       // contain ship to code
       await customerSearchRobot.search(subShipToCode);
@@ -616,11 +628,10 @@ void main() {
       customerSearchRobot.verifySearchNotFound();
     });
 
-    testWidgets(
-        'EZRX-T28 | Verify Search by inputting valid keyword contains Product name',
+    testWidgets('EZRX-T28 | Verify navigate to search product in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester);
 
       // search for valid products
       homeRobot.findSearchProductField();
@@ -667,13 +678,12 @@ void main() {
       homeRobot.findProductDescription();
       homeRobot.findProductManufactured();
       homeRobot.findProductPrice();
-      homeRobot.findGovtMaterialListPrice();
       homeRobot.findProductFavouriteIcon();
       homeRobot.verifyProductNumber();
     });
 
     testWidgets(
-        'EZRX-T22 | Verify click on Orders action in Top navigation menu',
+        'EZRX-T22 | Verify navigate with top navigation menu in Homepage',
         (tester) async {
       //init app
       await pumpAppWithHomeScreen(tester);
@@ -682,21 +692,45 @@ void main() {
       homeRobot.findQuickAccessOrders();
       await homeRobot.tapOrdersQuickAccess();
       ordersRootRobot.verifyPage();
+      await commonRobot.navigateToScreen(NavigationTab.home);
+
+      //tap on home quick access return
+      homeRobot.findQuickAccessReturns();
+      await homeRobot.tapReturnsQuickAccess();
+      returnsRootRobot.verifyRootPageVisible();
+      await commonRobot.tapToBackScreen();
+
+      //tap on home quick access payments
+      homeRobot.findQuickAccessPayments();
+      await homeRobot.tapPaymentQuickAccess();
+      paymentHomeRobot.verifyPage();
     });
 
-    // // Reopen when the api filter product by offer fixed
-    // testWidgets('EZRX-T44 | Verify display Product on offer in Homepage',
-    //     (tester) async {
-    //   //init app
-    //   await pumpAppWithHomeScreen(tester);
+    testWidgets(
+        'EZRX-T44 | Verify display product on offer and navigate in Homepage',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
 
-    //   //tap on products on offer
-    //   homeRobot.findProductsOnOffer();
-    //   await homeRobot.tapProductsOnOfferIcon();
+      homeRobot.findProductsOnOffer();
+      homeRobot.verifyDisplayProductsWithOfferTag();
 
-    //   //navigate to material page
-    //   productRobot.verifyPageVisible();
-    // });
+      //Navigate to product detail page
+      await homeRobot.tapOnFirstProductOnOffer();
+      productDetailRobot.verifyPage();
+      productDetailRobot.verifyOnOfferLabel();
+      await productDetailRobot.tapBackButton();
+
+      //Navigate to product tab
+      homeRobot.findProductsOnOffer();
+      await homeRobot.tapProductsOnOfferIcon();
+      productRobot.verifyPageVisible();
+      await productRobot.openFilterProductScreen();
+      filterSortProductRobot.verifyCheckboxCheckedShowProduct(
+        'Items with offers',
+        true,
+      );
+    });
 
     testWidgets('EZRX-T46 | Verify display recently ordered and navigate',
         (tester) async {
@@ -755,21 +789,6 @@ void main() {
       //verify go to announcements page
       announcementArticleRootRobot.verifyAnnouncementPage();
     });
-
-    testWidgets('EZRX-T59 | Verify click on Announcement in Announcements',
-        (tester) async {
-      //init app
-      await pumpAppWithHomeScreen(tester);
-
-      //move to Announcements
-      await homeRobot.findAnnouncementsIcon();
-
-      //tap on first product
-      await homeRobot.tapOnFirstAnnouncement();
-
-      //verify announcement detail page
-      announcementDetailRobot.verifyPage();
-    });
   });
 
   group('Product Tab -', () {
@@ -788,7 +807,6 @@ void main() {
       productRobot.verifyCustomerCodeSelector();
       productRobot.verifyAppTabBarVisible();
       productRobot.verifySearchBarVisible();
-      productRobot.verifyGovtMaterialListPrice();
 
       await productRobot.openFilterProductScreen();
       filterSortProductRobot.verifySheet();
@@ -807,33 +825,33 @@ void main() {
       await productRobot.tapCustomerCodeSelector();
       customerSearchRobot.verifyPage();
     });
-    // // Reopen when the api filter product by offer fixed
-    // testWidgets('EZRX-38 | Verify Filter by product on offer', (tester) async {
-    //   const offerCheckbox = 'Items with offers';
 
-    //   await pumpAppWithHomeScreen(tester);
-    //   await productRobot.navigateToScreen(NavigationTab.products);
-    //   await productRobot.openFilterProductScreen();
+    testWidgets('EZRX-38 | Verify Filter by product on offer', (tester) async {
+      const offerCheckbox = 'Items with offers';
 
-    //   await filterSortProductRobot.tapProductTypeCheckbox(offerCheckbox);
-    //   await filterSortProductRobot.tapFilterApplyButton();
-    //   productRobot.verifyOnOfferLabel();
-    //   await productRobot.tapFirstMaterial();
-    //   productDetailRobot.verifyPage();
-    //   productDetailRobot.verifyOnOfferLabel();
-    //   await productDetailRobot.tapBackButton();
+      await pumpAppWithHomeScreen(tester);
+      await productRobot.navigateToScreen(NavigationTab.products);
+      await productRobot.openFilterProductScreen();
 
-    //   await productRobot.openFilterProductScreen();
-    //   filterSortProductRobot.verifyCheckboxCheckedShowProduct(
-    //     offerCheckbox,
-    //     true,
-    //   );
-    //   await filterSortProductRobot.tapProductTypeCheckbox(offerCheckbox);
-    //   filterSortProductRobot.verifyCheckboxCheckedShowProduct(
-    //     offerCheckbox,
-    //     false,
-    //   );
-    // });
+      await filterSortProductRobot.tapProductTypeCheckbox(offerCheckbox);
+      await filterSortProductRobot.tapFilterApplyButton();
+      productRobot.verifyOnOfferLabel();
+      await productRobot.tapFirstMaterial();
+      productDetailRobot.verifyPage();
+      productDetailRobot.verifyOnOfferLabel();
+      await productDetailRobot.tapBackButton();
+
+      await productRobot.openFilterProductScreen();
+      filterSortProductRobot.verifyCheckboxCheckedShowProduct(
+        offerCheckbox,
+        true,
+      );
+      await filterSortProductRobot.tapProductTypeCheckbox(offerCheckbox);
+      filterSortProductRobot.verifyCheckboxCheckedShowProduct(
+        offerCheckbox,
+        false,
+      );
+    });
 
     testWidgets('EZRX-T39 | Verify Filter by Country of origin',
         (tester) async {
@@ -999,13 +1017,9 @@ void main() {
       productRobot.verifySearchBarVisible();
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialName);
-      productSuggestionRobot.verifySuggestProductsSearch(
-        materialName,
-      );
+      productSuggestionRobot.verifySuggestProductsSearch(materialName);
       await productSuggestionRobot.autoSearch(materialName);
-      productSuggestionRobot.verifySuggestProductsSearch(
-        materialName,
-      );
+      productSuggestionRobot.verifySuggestProductsSearch(materialName);
 
       await productSuggestionRobot
           .searchWithKeyboardAction(invalidLengthSearchKey);
@@ -1014,14 +1028,10 @@ void main() {
       await productSuggestionRobot.searchWithKeyboardAction(invalidSearchKey);
       productSuggestionRobot.verifyNoSuggestedProduct();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      productSuggestionRobot.verifySuggestProductsSearch(
-        materialName,
-      );
+      productSuggestionRobot.verifySuggestProductsSearch(materialName);
 
       await productSuggestionRobot.autoSearch(materialName);
-      productSuggestionRobot.verifySuggestProductsSearch(
-        materialName,
-      );
+      productSuggestionRobot.verifySuggestProductsSearch(materialName);
       await productSuggestionRobot.autoSearch(invalidSearchKey);
       productSuggestionRobot.verifyNoSuggestedProduct();
       productSuggestionRobot.verifyNoRecordFound();
@@ -1058,8 +1068,6 @@ void main() {
       productSuggestionRobot.verifySearchBarText(materialNumber);
       productSuggestionRobot.verifySearchHistory(isVisible: false);
       await productSuggestionRobot.tapClearSearch();
-      productSuggestionRobot.verifySearchHistory();
-      productSuggestionRobot.verifySearchHistoryItem(materialNumber);
 
       await productSuggestionRobot.tapDeleteSearchHistory();
       productSuggestionRobot.verifyClearHistoryBottomSheet();
@@ -1073,10 +1081,7 @@ void main() {
   group('Material detail -', () {
     testWidgets('EZRX-T62 | Verify material detail with basic information',
         (tester) async {
-      await pumpAppWithHomeScreen(
-        tester,
-        shipToCode: otherShipToCode,
-      );
+      await pumpAppWithHomeScreen(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1086,14 +1091,6 @@ void main() {
       productDetailRobot.verifyProductFavoriteIconDisplayed();
       productDetailRobot.verifyProductNameDisplayed();
       productDetailRobot.verifyProductPriceDisplayed();
-      productDetailRobot.verifyGovtMaterialListPriceDisplayed();
-
-      productDetailRobot
-          .verifyCurrentProductPrice(materialUnitPrice.priceDisplay(currency));
-      productDetailRobot.verifyGovtMaterialListPrice(
-        govtMaterialListPrice.priceDisplay(currency),
-      );
-
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
       productDetailRobot.verifyCartButtonDisplayed();
@@ -1106,8 +1103,6 @@ void main() {
           .verifyUnitOfMeasurementLabelDisplayed(materialUnitMeasurement);
       productDetailRobot
           .verifyCountryOfOriginLabelDisplayed(materialCountryOfOrigin);
-      productDetailRobot.verifyGovermentMaterialCode(govermentMaterialCode);
-      productDetailRobot.verifyBatchDisplayed(isVisible: false);
     });
 
     testWidgets('EZRX-T64 | Verify display image when having multiple images',
@@ -1130,7 +1125,7 @@ void main() {
 
     testWidgets('EZRX-T65| Verify available offers in the material detail',
         (tester) async {
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1143,7 +1138,7 @@ void main() {
       productDetailRobot.verifyNameProductOffer(productName);
       productDetailRobot.verifyCodeProductOffer(bonusMaterialNumber);
       productDetailRobot.verifyQuantityProductDisplayed();
-      productDetailRobot.verifyOfferBottomSheetCloseButton();
+      productDetailRobot.verifyButtonCloseDisplayed();
     });
 
     testWidgets('EZRX-T66 | Verify Related products in the material detail',
@@ -1170,6 +1165,11 @@ void main() {
       await productSuggestionRobot
           .searchWithKeyboardAction(otherInfoMaterialNumber);
       await productSuggestionRobot.tapSearchResult(otherInfoMaterialNumber);
+      if (productDetailRobot.isSeeMoreOptionNotVisible) {
+        productDetailRobot.verifySeeMoreOption(isVisible: false);
+        return;
+      }
+      productDetailRobot.verifySeeMoreOption();
       await productDetailRobot.tapToSeeMore();
       productDetailRobot.verifyMaterialDosageDisplayed();
       productDetailRobot.verifyMaterialHowToUseDisplayed();
@@ -1197,22 +1197,21 @@ void main() {
       productDetailRobot.verifyAddToCartFailureMessage();
     });
 
-    // // Open it when the bug EZRX-18859 fixed
-    // testWidgets('EZRX-T68 | Verify suspended banner ', (tester) async {
-    //   await pumpAppWithHomeScreen(tester);
+    testWidgets('EZRX-T68 | Verify suspended banner ', (tester) async {
+      await pumpAppWithHomeScreen(tester);
 
-    //   await browseProductFromEmptyCart();
-    //   await productSuggestionRobot
-    //       .searchWithKeyboardAction(suspendedMaterialNumber);
-    //   await productSuggestionRobot.tapSearchResult(suspendedMaterialNumber);
-    //   productDetailRobot.verifySuspendedBanner();
-    //   await productDetailRobot.tapAddToCart();
-    //   productDetailRobot.verifyAddToCartSuccessMessage(isVisible: false);
-    //   productDetailRobot.verifyCartButtonQty(0);
-    //   await productDetailRobot.tapCartButton();
-    //   cartRobot.verifyPage();
-    //   cartRobot.verifyNoRecordFound();
-    // });
+      await browseProductFromEmptyCart();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(suspendedMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(suspendedMaterialNumber);
+      productDetailRobot.verifySuspendedBanner();
+      await productDetailRobot.tapAddToCart();
+      productDetailRobot.verifyAddToCartSuccessMessage(isVisible: false);
+      productDetailRobot.verifyCartButtonQty(0);
+      await productDetailRobot.tapCartButton();
+      cartRobot.verifyPage();
+      cartRobot.verifyNoRecordFound();
+    });
 
     testWidgets('EZRX-T215 | Verify favorite in material detail',
         (tester) async {
@@ -1239,61 +1238,10 @@ void main() {
   });
 
   group('Cart -', () {
-    testWidgets(
-        'EZRX-T1033 | Verify material with price not available can be able to add to cart',
-        (tester) async {
-      const qty = 1000;
-      const cartTotalPrice = 0.0;
-      //init app
-      await pumpAppWithHomeScreen(tester);
-      await browseProductFromEmptyCart();
-      await productSuggestionRobot
-          .searchWithKeyboardAction(materialNumberHavingPriceNA);
-      await productSuggestionRobot.tapSearchResult(materialNumberHavingPriceNA);
-      await productDetailRobot.tapAddToCart();
-      productDetailRobot.verifyCartButtonQty(1);
-      await productDetailRobot.tapCartButton();
-
-      //verify
-      cartRobot.verifyClearCartButton();
-      await cartRobot.verifyMaterial(materialNumberHavingPriceNA);
-      cartRobot.verifyManufacturerName(materialPrincipalNameHavingPriceNA);
-      cartRobot.verifyMaterialNumber(
-        materialNumberHavingPriceNA,
-        govermentMaterialCode: govermentMaterialCodePriceNA,
-      );
-      cartRobot.verifyMaterialImage(materialNumberHavingPriceNA);
-      await cartRobot.changeMaterialQty(materialNumberHavingPriceNA, qty);
-      cartRobot.verifyMaterialQty(materialNumberHavingPriceNA, qty);
-      cartRobot.verifyMaterialDescription(
-        materialNumberHavingPriceNA,
-        materialNameHavingPriceNA,
-      );
-      cartRobot.verifyMaterialUnitPrice(
-        materialNumberHavingPriceNA,
-        'Price Not Available'.tr(),
-      );
-      cartRobot.verifyGovtMaterialListPrice(
-        materialNumberHavingPriceNA,
-        'Price Not Available'.tr(),
-      );
-      cartRobot.verifyMaterialTotalPrice(
-        materialNumberHavingPriceNA,
-        'Price Not Available'.tr(),
-      );
-      cartRobot.verifyCartQty(1);
-      cartRobot.verifyQtyOnAppBar(1);
-      cartRobot.verifyCartShipToAddress(shipToAddress);
-      cartRobot.verifyCartTotalPrice(
-        cartTotalPrice.priceDisplay(currency),
-      );
-      cartRobot.verifyCheckoutButton();
-    });
-
     testWidgets('EZRX-T98 | Verify material in cart + change material qty',
         (tester) async {
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester);
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productSuggestionRobot.tapSearchResult(materialNumber);
@@ -1305,20 +1253,13 @@ void main() {
       cartRobot.verifyClearCartButton();
       await cartRobot.verifyMaterial(materialNumber);
       cartRobot.verifyManufacturerName(materialPrincipalName);
-      cartRobot.verifyMaterialNumber(
-        materialNumber,
-        govermentMaterialCode: govermentMaterialCode,
-      );
+      cartRobot.verifyMaterialNumber(materialNumber);
       cartRobot.verifyMaterialImage(materialNumber);
       cartRobot.verifyMaterialQty(materialNumber, 1);
-      cartRobot.verifyMaterialDescription(materialNumber, materialEnglishName);
+      cartRobot.verifyMaterialDescription(materialNumber, materialName);
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
         materialUnitPrice.priceDisplay(currency),
-      );
-      cartRobot.verifyGovtMaterialListPrice(
-        materialNumber,
-        govtMaterialListPrice.priceDisplay(currency),
       );
       cartRobot.verifyMaterialTotalPrice(
         materialNumber,
@@ -1326,9 +1267,10 @@ void main() {
       );
       cartRobot.verifyCartQty(1);
       cartRobot.verifyQtyOnAppBar(1);
-      cartRobot.verifyCartShipToAddress(otherShipToAddress);
-      cartRobot.verifyCartTotalPrice(materialUnitPrice.priceDisplay(currency));
-
+      cartRobot.verifyCartShipToAddress(shipToAddress);
+      cartRobot.verifyCartTotalPrice(
+        materialUnitPrice.includeTax(tax).priceDisplay(currency),
+      );
       cartRobot.verifyCheckoutButton();
 
       var totalPrice = materialUnitPrice;
@@ -1339,7 +1281,9 @@ void main() {
         materialNumber,
         totalPrice.priceDisplay(currency),
       );
-      cartRobot.verifyCartTotalPrice(totalPrice.priceDisplay(currency));
+      cartRobot.verifyCartTotalPrice(
+        totalPrice.includeTax(tax).priceDisplay(currency),
+      );
 
       await cartRobot.changeMaterialQty(materialNumber, 10);
       totalPrice = materialUnitPrice * 10;
@@ -1348,7 +1292,9 @@ void main() {
         materialNumber,
         totalPrice.priceDisplay(currency),
       );
-      cartRobot.verifyCartTotalPrice(totalPrice.priceDisplay(currency));
+      cartRobot.verifyCartTotalPrice(
+        totalPrice.includeTax(tax).priceDisplay(currency),
+      );
 
       await cartRobot.decreaseMaterialQty(materialNumber);
       totalPrice = materialUnitPrice * 9;
@@ -1357,87 +1303,11 @@ void main() {
         materialNumber,
         totalPrice.priceDisplay(currency),
       );
-      cartRobot.verifyCartTotalPrice(totalPrice.priceDisplay(currency));
-    });
-
-    testWidgets('EZRX-T101 | Verify material on offer with bonus in cart',
-        (tester) async {
-      const bonusMaterialNumberNextTierQty = 20;
-      const firstBonusQty = 1;
-      const nextBonusQty = 3;
-      //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
-      await browseProductFromEmptyCart();
-
-      //verify
-      await productSuggestionRobot
-          .searchWithKeyboardAction(bonusMaterialNumber);
-      await productSuggestionRobot.tapSearchResult(bonusMaterialNumber);
-      await productDetailRobot.tapAddToCart();
-      await productDetailRobot.dismissSnackbar();
-      await productDetailRobot.tapCartButton();
-      await cartRobot.verifyMaterial(bonusMaterialNumber);
-      cartRobot.verifyMaterialQty(bonusMaterialNumber, 1);
-      cartRobot.verifyMaterialOfferTag(bonusMaterialNumber);
-      await cartRobot.changeMaterialQty(
-        bonusMaterialNumber,
-        bonusMaterialNumberTierQty,
-      );
-      await cartRobot.verifyBonusMaterial(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      await cartRobot.verifyBonusMaterialQty(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-        firstBonusQty,
-      );
-      cartRobot.verifyBonusMaterialFreeLabel(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      cartRobot.verifyBonusMaterialTag(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      cartRobot.verifyBonusMaterialDescription(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-        bonusMaterialEnglishName,
-      );
-      cartRobot.verifyBonusMaterialImage(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-
-      await cartRobot.changeMaterialQty(
-        bonusMaterialNumber,
-        bonusMaterialNumberNextTierQty,
-      );
-      await cartRobot.verifyBonusMaterialQty(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-        nextBonusQty,
-      );
-      await cartRobot.decreaseBonusMaterialQty(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      await cartRobot.verifyBonusMaterialQty(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-        nextBonusQty,
-      );
-      await cartRobot.increaseBonusMaterialQty(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      await cartRobot.verifyBonusMaterialQty(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-        nextBonusQty,
+      cartRobot.verifyCartTotalPrice(
+        totalPrice.includeTax(tax).priceDisplay(currency),
       );
     });
+
     testWidgets('EZRX-T108 | Verify remove item in cart', (tester) async {
       //init app
       await pumpAppWithHomeScreen(tester);
@@ -1465,10 +1335,6 @@ void main() {
       await productSuggestionRobot.tapSearchResult(materialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
-      await productDetailRobot.tapBackButton();
-      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
-      await productDetailRobot.tapAddToCart();
       await productDetailRobot.tapCartButton();
       cartRobot.verifyCartQty(1);
       await cartRobot.tapClearCartButton();
@@ -1479,10 +1345,15 @@ void main() {
       productRobot.verifyPageVisible();
     });
 
+    //TODO : need to work in these test case for bonus decending order, Once BE issue resolved
     testWidgets('EZRX-T102 | Verify add bonus/sample item in cart',
         (tester) async {
+      const invalidQty = 1000;
+      const validQty = 10;
+      const materialIndex = 0;
+
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester);
       await browseProductFromEmptyCart();
 
       //verify display
@@ -1491,16 +1362,73 @@ void main() {
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.tapCartButton();
       await cartRobot.verifyMaterial(materialNumber);
-      cartRobot.verifyMaterialBonusSampleButton(
+      cartRobot.verifyMaterialBonusSampleButton(materialNumber);
+      await cartRobot.tapMaterialBonusSampleButton(materialNumber);
+      bonusSampleRobot.verifySheet(isVisible: true);
+      bonusSampleRobot.verifySearchBar();
+      await bonusSampleRobot.searchWithKeyboardAction(materialName);
+      bonusSampleRobot.verifyBonusSampleItems();
+      bonusSampleRobot.verifyCloseButton();
+      await bonusSampleRobot.tapCloseButton();
+      bonusSampleRobot.verifySheet(isVisible: false);
+
+      //Unhappy case when adding
+      await cartRobot.tapMaterialBonusSampleButton(materialNumber);
+      await bonusSampleRobot.searchWithKeyboardAction(materialName);
+      await bonusSampleRobot.tapSubmitButton(materialIndex);
+      bonusSampleRobot.verifyEmptyQtyMessage(isVisible: true);
+      await bonusSampleRobot.enterBonusSampleQty(materialIndex, invalidQty);
+      await bonusSampleRobot.tapSubmitButton(materialIndex);
+      bonusSampleRobot.verifyEmptyQtyMessage(isVisible: false);
+      bonusSampleRobot.verifyInvalidQtyMessage();
+      await bonusSampleRobot.dismissSnackbar();
+
+      //Happy case when adding
+      final bonusSampleMaterialNumber =
+          bonusSampleRobot.getBonusSampleMaterialNumber(materialIndex);
+      final bonusSampleMaterialDescription =
+          bonusSampleRobot.getBonusSampleMaterialDescription(materialIndex);
+      await bonusSampleRobot.enterBonusSampleQty(materialIndex, validQty);
+      await bonusSampleRobot.tapSubmitButton(materialIndex);
+      bonusSampleRobot.verifyAddToCartSuccessMessage();
+      await bonusSampleRobot.dismissSnackbar();
+      await bonusSampleRobot.tapCloseButton();
+      bonusSampleRobot.verifySheet(isVisible: false);
+      await cartRobot.verifyBonusMaterial(
         materialNumber,
-        isVisible: false,
+        bonusSampleMaterialNumber,
+      );
+      await cartRobot.verifyBonusMaterialQty(
+        materialNumber,
+        bonusSampleMaterialNumber,
+        validQty,
+      );
+      cartRobot.verifyBonusMaterialDescription(
+        materialNumber,
+        bonusSampleMaterialNumber,
+        bonusSampleMaterialDescription,
+      );
+      cartRobot.verifyBonusMaterialFreeLabel(
+        materialNumber,
+        bonusSampleMaterialNumber,
+      );
+      cartRobot.verifyBonusMaterialTag(
+        materialNumber,
+        bonusSampleMaterialNumber,
+      );
+      cartRobot.verifyBonusMaterialImage(
+        materialNumber,
+        bonusSampleMaterialNumber,
       );
     });
 
     testWidgets('EZRX-T105 | Verify counter offer price with remark',
         (tester) async {
+      const newUnitPrice = materialUnitPrice + 100;
+      const remark = 'AUTO-TEST';
+
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester);
       await browseProductFromEmptyCart();
 
       //verify
@@ -1513,16 +1441,55 @@ void main() {
         materialNumber,
         materialUnitPrice.priceDisplay(currency),
       );
-      cartRobot.verifyMaterialCounterOfferButton(
-        materialNumber,
+      cartRobot.verifyMaterialCounterOfferButton(materialNumber);
+      await cartRobot.tapMaterialCounterOfferButton(materialNumber);
+      requestCounterOfferRobot.verifySheet(isVisible: true);
+      requestCounterOfferRobot.verifyListPrice(
+        materialUnitPrice.priceDisplay(currency),
         isVisible: false,
       );
+      requestCounterOfferRobot.verifyOfferPrice(
+        materialUnitPrice.priceDisplay(currency),
+      );
+      requestCounterOfferRobot.verifyPriceTextField();
+      requestCounterOfferRobot.verifyPriceText('');
+      requestCounterOfferRobot.verifyRemarkTextField();
+      requestCounterOfferRobot.verifyRemarkText('');
+      requestCounterOfferRobot.verifyRemarkMaximumLengthMessage();
+      requestCounterOfferRobot.verifyConfirmButton();
+      requestCounterOfferRobot.verifyCancelButton();
+      await requestCounterOfferRobot.tapCancelButton();
+      requestCounterOfferRobot.verifySheet(isVisible: false);
+      cartRobot.verifyMaterialUnitPrice(
+        materialNumber,
+        materialUnitPrice.priceDisplay(currency),
+      );
+
+      await cartRobot.tapMaterialCounterOfferButton(materialNumber);
+      await requestCounterOfferRobot.tapConfirmButton();
+      requestCounterOfferRobot.verifyPriceTextEmptyMessage();
+      await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
+      await requestCounterOfferRobot.enterRemark(remark);
+      await requestCounterOfferRobot.tapConfirmButton();
+      requestCounterOfferRobot.verifySheet(isVisible: false);
+      cartRobot.verifyMaterialUnitPrice(
+        materialNumber,
+        newUnitPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyCartTotalPrice(
+        newUnitPrice.includeTax(tax).priceDisplay(currency),
+      );
+      await cartRobot.tapMaterialCounterOfferButton(materialNumber);
+      requestCounterOfferRobot
+          .verifyOfferPrice(newUnitPrice.priceDisplay(currency));
+      requestCounterOfferRobot.verifyPriceText(newUnitPrice.toString());
+      requestCounterOfferRobot.verifyRemarkText(remark);
     });
 
     testWidgets('EZRX-T114 | Verify address information in cart',
         (tester) async {
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester, shipToCode: billToShipToCode);
       await browseProductFromEmptyCart();
 
       //verify
@@ -1535,15 +1502,19 @@ void main() {
       cartRobot.verifyCartQty(1);
       await cartRobot.tapShowShipToAddressDetail();
       cartDeliveryAddressDetailRobot.verifySheet(isVisible: true);
-      cartDeliveryAddressDetailRobot.verifyCustomerCode(otherCustomerCode);
-      cartDeliveryAddressDetailRobot.verifyShipToCode(otherShipToCode);
+      cartDeliveryAddressDetailRobot.verifyCustomerCode(billToCustomerCode);
+      cartDeliveryAddressDetailRobot.verifyShipToCode(billToShipToCode);
+      //Bill to info
+      await verifyBillToInfo();
       await cartDeliveryAddressDetailRobot.tapCloseButton();
       cartDeliveryAddressDetailRobot.verifySheet(isVisible: false);
     });
 
     testWidgets('EZRX-T97 | Verify price summary in cart', (tester) async {
+      const qty = 1;
+      const totalPrice = materialUnitPrice * qty;
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester);
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productSuggestionRobot.tapSearchResult(materialNumber);
@@ -1552,52 +1523,157 @@ void main() {
       await productDetailRobot.tapCartButton();
 
       //verify
-      cartRobot.verifyCartTotalPrice(materialUnitPrice.priceDisplay(currency));
+      cartRobot.verifyCartTotalPrice(
+        totalPrice.includeTax(tax).priceDisplay(currency),
+      );
       await cartRobot.tapShowPriceSummary();
       orderPriceSummaryRobot.verifySheet(isVisible: true);
       orderPriceSummaryRobot
-          .verifySubTotalLabel(materialUnitPrice.priceDisplay(currency));
-      orderPriceSummaryRobot
-          .verifyGrandTotalLabel(materialUnitPrice.priceDisplay(currency));
+          .verifySubTotalLabel(totalPrice.priceDisplay(currency));
+      orderPriceSummaryRobot.verifyTaxLabel(
+        totalPrice.taxValue(tax).priceDisplay(currency),
+        tax,
+        isVn: true,
+      );
+      orderPriceSummaryRobot.verifyGrandTotalLabel(
+        totalPrice.includeTax(tax).priceDisplay(currency),
+      );
       await orderPriceSummaryRobot.tapCloseButton();
       orderPriceSummaryRobot.verifySheet(isVisible: false);
+    });
+
+    testWidgets('EZRX-T110 | Verify cart under minimum order value',
+        (tester) async {
+      final validQty = (minOrderAmount / lowPriceMaterialUnitPrice).ceil();
+      final validTotalPrice = lowPriceMaterialUnitPrice * validQty;
+      const lowPriceMaterialTax = 10;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot
+          .searchWithKeyboardAction(lowPriceMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(lowPriceMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(lowPriceMaterialNumber);
+      cartRobot.verifyMaterialQty(lowPriceMaterialNumber, 1);
+      cartRobot.verifyMaterialUnitPrice(
+        lowPriceMaterialNumber,
+        lowPriceMaterialUnitPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyMaterialTotalPrice(
+        lowPriceMaterialNumber,
+        lowPriceMaterialUnitPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyCartTotalPrice(
+        lowPriceMaterialUnitPrice
+            .includeTax(lowPriceMaterialTax)
+            .priceDisplay(currency),
+      );
+      await cartRobot.tapCheckoutButton();
+      cartRobot.verifyMOVWarningMessage(
+        minOrderAmount.priceDisplay(currency),
+        isVisible: true,
+      );
+      await cartRobot.changeMaterialQty(lowPriceMaterialNumber, validQty);
+      cartRobot.verifyMaterialQty(lowPriceMaterialNumber, validQty);
+      cartRobot.verifyMaterialTotalPrice(
+        lowPriceMaterialNumber,
+        validTotalPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyCartTotalPrice(
+        validTotalPrice.includeTax(lowPriceMaterialTax).priceDisplay(currency),
+      );
+      cartRobot.verifyMOVWarningMessage(
+        minOrderAmount.priceDisplay(currency),
+        isVisible: false,
+      );
+    });
+
+    testWidgets('EZRX-T115 | Verify checkout cart when having pre-order items',
+        (tester) async {
+      const qty = 100;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot
+          .searchWithKeyboardAction(oosPreOrderMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(oosPreOrderMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(oosPreOrderMaterialNumber);
+      cartRobot.verifyMaterialOOSPreOrderStatus(oosPreOrderMaterialNumber);
+      await cartRobot.changeMaterialQty(oosPreOrderMaterialNumber, qty);
+      await cartRobot.tapCheckoutButton();
+      oosPreOrderRobot.verifySheet(isVisible: true);
+      oosPreOrderRobot.verifyCancelButton();
+      oosPreOrderRobot.verifyContinueButton();
+      oosPreOrderRobot.verifyWarningMessage();
+      oosPreOrderRobot.verifyMaterial(oosPreOrderMaterialNumber, qty);
+      await oosPreOrderRobot.tapCancelButton();
+      cartRobot.verifyPage();
+      oosPreOrderRobot.verifySheet(isVisible: false);
+      await cartRobot.tapCheckoutButton();
+      oosPreOrderRobot.verifyMaterial(oosPreOrderMaterialNumber, qty);
+      await oosPreOrderRobot.tapContinueButton();
+      checkoutRobot.verifyPage();
     });
   });
 
   group('Checkout -', () {
     testWidgets('EZRX-T116 | Verify display checkout with default components',
         (tester) async {
-      const qty = 1;
+      const qty = 1000;
       const totalPrice = materialUnitPrice * qty;
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester, shipToCode: billToShipToCode);
       await checkoutWithMaterial(materialNumber, qty);
 
       //verify
       checkoutRobot.verifyPage();
       checkoutRobot.verifyAddressSection();
-      checkoutRobot.verifyCustomerCode(otherCustomerCode);
-      checkoutRobot.verifyDeliveryTo(otherShipToCode);
+      checkoutRobot.verifyCustomerCode(billToCustomerCode);
+      checkoutRobot.verifyDeliveryTo(billToShipToCode);
+      //Bill to info
+      await verifyBillToInfo();
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
       await checkoutRobot.verifyDeliveryDateField(isVisible: false);
       await checkoutRobot.verifyReferenceNoteField(isVisible: false);
-      await checkoutRobot.verifyPaymentTermField(isVisible: true);
-      await checkoutRobot.verifyContactPersonField(isVisible: true);
-      await checkoutRobot.verifyMobileNumberField(isVisible: true);
+      await checkoutRobot.verifyPaymentTermField(isVisible: false);
+      await checkoutRobot.verifyContactPersonField(isVisible: false);
+      await checkoutRobot.verifyMobileNumberField(isVisible: false);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
       await checkoutRobot.verifyYoursItemLabel(1);
       await checkoutRobot.verifyMaterial(materialNumber);
       await checkoutRobot
           .verifySubTotalLabel(totalPrice.priceDisplay(currency));
-      await checkoutRobot
-          .verifyGrandTotalLabel(totalPrice.priceDisplay(currency));
+      await checkoutRobot.verifyGrandTotalLabel(
+        totalPrice.includeTax(tax).priceDisplay(currency),
+      );
       checkoutRobot.verifyStickyTotalQty(1);
-      checkoutRobot.verifyStickyGrandTotal(totalPrice.priceDisplay(currency));
+      checkoutRobot.verifyStickyGrandTotal(
+        totalPrice.includeTax(tax).priceDisplay(currency),
+      );
       await checkoutRobot.tapStickyGrandTotal();
       orderPriceSummaryRobot.verifySheet(isVisible: true);
-      orderPriceSummaryRobot
-          .verifySubTotalLabel(totalPrice.priceDisplay(currency));
-      orderPriceSummaryRobot
-          .verifyGrandTotalLabel(totalPrice.priceDisplay(currency));
+      orderPriceSummaryRobot.verifyTaxLabel(
+        totalPrice.taxValue(tax).priceDisplay(currency),
+        tax,
+        isVn: true,
+      );
+      orderPriceSummaryRobot.verifySubTotalLabel(
+        totalPrice.priceDisplay(currency),
+      );
+      orderPriceSummaryRobot.verifyGrandTotalLabel(
+        totalPrice.includeTax(tax).priceDisplay(currency),
+      );
       await orderPriceSummaryRobot.tapCloseButton();
       orderPriceSummaryRobot.verifySheet(isVisible: false);
       checkoutRobot.verifyPlaceOrderButton();
@@ -1610,21 +1686,18 @@ void main() {
       const emptyDeliveryInstruction = 'NA';
 
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester);
       await checkoutWithMaterial(materialNumber, 1000);
 
       //verify
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
       await checkoutRobot.tapDeliveryInformationArrowButton();
       await checkoutRobot.verifyPoReferenceField(isVisible: false);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: false);
       await checkoutRobot.tapDeliveryInformationArrowButton();
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
-      await checkoutRobot.verifyPaymentTermField(isVisible: true);
-      await checkoutRobot.enterPaymentTerm(paymentTerm);
-      await checkoutRobot.verifyContactPersonField(isVisible: true);
-      await checkoutRobot.enterContactPerson(contactPerson);
-      await checkoutRobot.verifyMobileNumberField(isVisible: true);
-      await checkoutRobot.enterContactNumber(contactNumber);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
       await checkoutRobot.tapPlaceOrderButton();
       checkoutRobot.verifyEmptyPoReferenceMessage(isVisible: false);
       orderSuccessRobot.verifyPage();
@@ -1635,28 +1708,23 @@ void main() {
     testWidgets(
         'EZRX-T119 | Verify display material with/without counter offer applied in checkout',
         (tester) async {
-      const qty = 1;
+      const qty = 1000;
+      const newUnitPrice = materialUnitPrice + 100;
+      const newTotalPrice = (newUnitPrice * qty);
 
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await pumpAppWithHomeScreen(tester);
       await checkoutWithMaterial(materialNumber, qty);
 
       //verify
       await checkoutRobot.verifyMaterialPrincipal(materialPrincipalName);
       await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialQty(materialNumber, qty);
-      checkoutRobot.verifyMaterialDescription(
-        materialNumber,
-        materialEnglishName,
-      );
+      checkoutRobot.verifyMaterialDescription(materialNumber, materialName);
       checkoutRobot.verifyMaterialImage(materialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
         materialNumber,
         materialUnitPrice.priceDisplay(currency),
-      );
-      checkoutRobot.verifyGovtMaterialListPrice(
-        materialNumber,
-        govtMaterialListPrice.priceDisplay(currency),
       );
       checkoutRobot.verifyMaterialTotalPrice(
         materialNumber,
@@ -1666,63 +1734,33 @@ void main() {
         materialNumber,
         isVisible: false,
       );
-    });
-
-    testWidgets(
-        'EZRX-T119 | Verify display material on offer with bonus in checkout',
-        (tester) async {
-      const qty = 10;
-      const bonusQty = qty ~/ bonusMaterialNumberTierQty;
-      final totalPrice =
-          (bonusMaterialNumberUnitPrice * qty).priceDisplay(currency);
-
-      //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
-      await checkoutWithMaterial(bonusMaterialNumber, qty);
-
-      //verify
-      await checkoutRobot.verifyYoursItemLabel(2);
-      await checkoutRobot.verifyMaterial(bonusMaterialNumber);
+      await checkoutRobot.tapCloseButton();
+      await cartRobot.tapMaterialCounterOfferButton(materialNumber);
+      await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
+      await requestCounterOfferRobot.tapConfirmButton();
+      await cartRobot.tapCheckoutButton();
+      await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
-        bonusMaterialNumber,
-        bonusMaterialNumberUnitPrice.priceDisplay(currency),
-      );
-      checkoutRobot.verifyGovtMaterialListPrice(
         materialNumber,
-        govtMaterialListPrice.priceDisplay(currency),
+        newUnitPrice.priceDisplay(currency),
       );
-      checkoutRobot.verifyMaterialTotalPrice(bonusMaterialNumber, totalPrice);
-      checkoutRobot.verifyMaterialQty(bonusMaterialNumber, qty);
-      await checkoutRobot.verifyBonusMaterial(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
+      checkoutRobot.verifyMaterialTotalPrice(
+        materialNumber,
+        newTotalPrice.priceDisplay(currency),
       );
-      checkoutRobot.verifyBonusMaterialDescription(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-        bonusMaterialEnglishName,
+      checkoutRobot.verifyMaterialCounterOfferLabel(
+        materialNumber,
+        isVisible: true,
       );
-      checkoutRobot.verifyBonusMaterialImage(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
+      await checkoutRobot
+          .verifySubTotalLabel(newTotalPrice.priceDisplay(currency));
+      await checkoutRobot.verifyGrandTotalLabel(
+        newTotalPrice.includeTax(tax).priceDisplay(currency),
       );
-      checkoutRobot.verifyBonusMaterialQty(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-        bonusQty,
+      checkoutRobot.verifyStickyTotalQty(1);
+      checkoutRobot.verifyStickyGrandTotal(
+        newTotalPrice.includeTax(tax).priceDisplay(currency),
       );
-      checkoutRobot.verifyBonusMaterialTag(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      checkoutRobot.verifyBonusMaterialFreeLabel(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      await checkoutRobot.verifySubTotalLabel(totalPrice);
-      await checkoutRobot.verifyGrandTotalLabel(totalPrice);
-      checkoutRobot.verifyStickyGrandTotal(totalPrice);
-      checkoutRobot.verifyStickyTotalQty(2);
     });
   });
 
@@ -1731,13 +1769,16 @@ void main() {
         'EZRX-T123 | Verify display order submitted with default components + close page',
         (tester) async {
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
-      await placeOrderWithMaterial(materialNumber, 1000);
+      await pumpAppWithHomeScreen(tester, shipToCode: billToShipToCode);
+      await checkoutWithMaterial(materialNumber, 1000);
 
       //verify
+      await checkoutRobot.tapPlaceOrderButton();
       orderSuccessRobot.verifyPage();
       orderSuccessRobot.verifyOrderSubmittedMessage();
       await orderSuccessRobot.dismissSnackbar();
+      //Bill to info
+      await verifyBillToInfo();
       orderSuccessRobot.verifyOrderId();
       orderSuccessRobot.verifyOrderDate();
       await orderSuccessRobot.verifyOrderSummarySection();
@@ -1751,34 +1792,27 @@ void main() {
 
     testWidgets('EZRX-T125 | Verify display material in order submitted',
         (tester) async {
-      const qty = 1;
+      const qty = 1000;
       const totalPrice = materialUnitPrice * qty;
 
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
-      await placeOrderWithMaterial(materialNumber, qty);
+      await pumpAppWithHomeScreen(tester);
+      await checkoutWithMaterial(materialNumber, qty);
+      await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
 
       //verify
       await orderSuccessRobot.verifyOrderSummarySection();
       await orderSuccessRobot.verifySubTotal(totalPrice.priceDisplay(currency));
-      await orderSuccessRobot.verifyGrandTotal(
-        totalPrice.priceDisplay(currency),
-      );
-
+      await orderSuccessRobot
+          .verifyGrandTotal(totalPrice.includeTax(tax).priceDisplay(currency));
       await orderSuccessRobot.verifyOrderItemTotalQty(1);
       await orderSuccessRobot.startVerifyMaterial(index: 0);
-      orderSuccessRobot.verifyMaterialNumber(
-        materialNumber,
-        govermentMaterialCode: govermentMaterialCode,
-      );
+      orderSuccessRobot.verifyMaterialNumber(materialNumber);
       orderSuccessRobot.verifyMateriaDescription(materialName);
-      orderSuccessRobot.verifyItemQty(qty);
+      orderSuccessRobot.verifyItemQty(1);
       orderSuccessRobot
           .verifyMaterialUnitPrice(materialUnitPrice.priceDisplay(currency));
-      orderSuccessRobot.verifyGovtMaterialListPrice(
-        govtMaterialListPrice.priceDisplay(currency),
-      );
       orderSuccessRobot.verifyMaterialTotalPrice(
         totalPrice.priceDisplay(currency),
       );
@@ -1789,40 +1823,32 @@ void main() {
         (tester) async {
       const qty = 10;
       const bonusQty = qty ~/ bonusMaterialNumberTierQty;
-      final totalPrice =
-          (bonusMaterialNumberUnitPrice * qty).priceDisplay(currency);
+      const totalPrice = bonusMaterialNumberUnitPrice * qty;
 
       //init app
-      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
-      await placeOrderWithMaterial(bonusMaterialNumber, qty);
-
+      await pumpAppWithHomeScreen(tester);
+      await checkoutWithMaterial(bonusMaterialNumber, qty);
+      await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
 
       //verify
       await orderSuccessRobot.verifyOrderSummarySection();
-      await orderSuccessRobot.verifySubTotal(totalPrice);
-      await orderSuccessRobot.verifyGrandTotal(totalPrice);
+      await orderSuccessRobot.verifySubTotal(totalPrice.priceDisplay(currency));
+      await orderSuccessRobot
+          .verifyGrandTotal(totalPrice.includeTax(tax).priceDisplay(currency));
       await orderSuccessRobot.verifyOrderItemTotalQty(2);
       await orderSuccessRobot.startVerifyMaterial(index: 0);
-      orderSuccessRobot.verifyMaterialNumber(
-        bonusMaterialNumber,
-        govermentMaterialCode: bonusGovermentMaterialCode,
-      );
+      orderSuccessRobot.verifyMaterialNumber(bonusMaterialNumber);
       orderSuccessRobot.verifyMateriaDescription(bonusMaterialName);
       orderSuccessRobot.verifyItemQty(qty);
       orderSuccessRobot.verifyMaterialOnOfferTag();
       orderSuccessRobot.verifyMaterialUnitPrice(
         bonusMaterialNumberUnitPrice.priceDisplay(currency),
       );
-      orderSuccessRobot.verifyGovtMaterialListPrice(
-        govtMaterialListPrice.priceDisplay(currency),
-      );
-      orderSuccessRobot.verifyMaterialTotalPrice(totalPrice);
+      orderSuccessRobot
+          .verifyMaterialTotalPrice(totalPrice.priceDisplay(currency));
       await orderSuccessRobot.startVerifyMaterial(index: 1);
-      orderSuccessRobot.verifyMaterialNumber(
-        bonusMaterialNumber,
-        govermentMaterialCode: bonusGovermentMaterialCode,
-      );
+      orderSuccessRobot.verifyMaterialNumber(bonusMaterialNumber);
       orderSuccessRobot.verifyMateriaDescription(bonusMaterialName);
       orderSuccessRobot.verifyItemQty(bonusQty);
       orderSuccessRobot.verifyMaterialBonusTag();
@@ -1838,7 +1864,7 @@ void main() {
   });
 
   group('Order Tab -', () {
-    final fromDate = DateTime.now().subtract(const Duration(days: 150));
+    final fromDate = DateTime.now().subtract(const Duration(days: 100));
     final toDate = DateTime.now().subtract(const Duration(days: 2));
 
     group('View by items -', () {
@@ -1882,22 +1908,20 @@ void main() {
           'EZRX-T75 | Verify search by material number/material description/order number',
           (tester) async {
         //init app
-        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+        await pumpAppWithHomeScreen(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify
         ordersRootRobot.verifyViewByItemsPage();
         await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
         commonRobot.verifyInvalidLengthSearchMessage();
-        // Re open when list can search by product name
-        // final productName = viewByItemsRobot.getFirstProductName();
-        // await commonRobot.searchWithKeyboardAction(productName);
-        // viewByItemsRobot.verifyOrdersWithProductName(productName);
-        // await commonRobot.pullToRefresh();
-        // commonRobot.verifySearchBarText('');
+        final productName = viewByItemsRobot.getFirstProductName();
+        await commonRobot.searchWithKeyboardAction(productName);
+        viewByItemsRobot.verifyOrdersWithProductName(productName);
+        await commonRobot.pullToRefresh();
+        commonRobot.verifySearchBarText('');
 
-        final materialNumber =
-            viewByItemsRobot.getFirstProductId(enableGMC: true);
+        final materialNumber = viewByItemsRobot.getFirstProductId();
         await commonRobot.searchWithSearchIcon(materialNumber);
         viewByItemsRobot.verifyOrdersWithProductCode(materialNumber);
         await commonRobot.pullToRefresh();
@@ -1906,7 +1930,6 @@ void main() {
         await commonRobot.autoSearch(invalidLengthSearchKey);
         await commonRobot.waitAutoSearchDuration();
         commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
-        await commonRobot.autoSearch('');
         await commonRobot.autoSearch(orderCode);
         viewByItemsRobot.verifyOrdersWithOrderCode(orderCode);
         await commonRobot.pullToRefresh();
@@ -1932,7 +1955,7 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
-          dateStringFormat: 'yyyy/MM/dd',
+          dateStringFormat: dateFormat,
         );
         await viewByItemsFilterRobot.tapApplyButton();
         ordersRootRobot.verifyFilterApplied(1);
@@ -1957,7 +1980,7 @@ void main() {
       testWidgets(
           'EZRX-T85 | Verify Filter by status when selecting 1 checkbox and existing data available',
           (tester) async {
-        final statusFilter = 'Order Created'.tr();
+        const statusFilter = 'Order Created';
 
         //init app
         await pumpAppWithHomeScreen(tester);
@@ -1970,7 +1993,7 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
-          dateStringFormat: 'yyyy/MM/dd',
+          dateStringFormat: dateFormat,
         );
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
         viewByItemsFilterRobot.verifyStatusFilterValue(statusFilter, true);
@@ -1999,10 +2022,10 @@ void main() {
       testWidgets(
           'EZRX-T87 | Verify view by item detail with default components',
           (tester) async {
-        const orderId = '0200330666';
+        const orderId = '0200330876';
 
         //init app
-        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+        await pumpAppWithHomeScreen(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify
@@ -2016,6 +2039,12 @@ void main() {
         viewByOrdersDetailRobot.verifyOrderId(orderId);
         await commonRobot.tapToBackScreen();
 
+        final invoiceNumber = viewByItemsDetailRobot.getInvoiceNumber();
+        await viewByItemsDetailRobot.tapInvoiceNumber();
+        accountInvoiceDetailRobot.verifyPage();
+        accountInvoiceDetailRobot.verifyInvoiceId(invoiceNumber);
+        await commonRobot.tapToBackScreen();
+
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
         await viewByItemsDetailRobot.verifyItemComponent();
@@ -2023,22 +2052,24 @@ void main() {
 
       testWidgets('EZRX-T91 | Verify material in view by item detail',
           (tester) async {
-        const qty = 1;
+        const qty = 1000;
 
         //init app
-        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
-        await placeOrderWithMaterial(materialNumber, qty);
+        await pumpAppWithHomeScreen(tester, shipToCode: billToShipToCode);
+        await checkoutWithMaterial(materialNumber, qty);
+        await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify
         ordersRootRobot.verifyViewByItemsPage();
         await commonRobot.pullToRefresh();
-        //Need to tap offer tag because this is offer material
-        await viewByItemsRobot.tapFirstOfferTag();
+        await viewByItemsRobot.tapFirstOrder();
         viewByItemsDetailRobot.verifyHeader();
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
+        //Bill to info
+        await verifyBillToInfo();
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(materialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
@@ -2059,8 +2090,9 @@ void main() {
         const bonusQty = qty ~/ bonusMaterialNumberTierQty;
 
         //init app
-        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
-        await placeOrderWithMaterial(bonusMaterialNumber, qty);
+        await pumpAppWithHomeScreen(tester);
+        await checkoutWithMaterial(bonusMaterialNumber, qty);
+        await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
@@ -2179,7 +2211,7 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
-          dateStringFormat: 'yyyy/MM/dd',
+          dateStringFormat: dateFormat,
         );
         await viewByOrdersFilterRobot.tapApplyButton();
         ordersRootRobot.verifyFilterApplied(1);
@@ -2211,7 +2243,7 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
-          dateStringFormat: 'yyyy/MM/dd',
+          dateStringFormat: dateFormat,
         );
         await viewByOrdersFilterRobot.tapApplyButton();
         viewByOrdersRobot.verifyOrderIdText(
@@ -2234,8 +2266,9 @@ void main() {
       testWidgets('EZRX-T72 | Verify click on Buy again', (tester) async {
         const qty = 1000;
         //init app
-        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
-        await placeOrderWithMaterial(materialNumber, qty);
+        await pumpAppWithHomeScreen(tester);
+        await checkoutWithMaterial(materialNumber, qty);
+        await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
@@ -2253,31 +2286,45 @@ void main() {
       testWidgets(
           'EZRX-T88 | Verify view by order detail with default components',
           (tester) async {
-        const qty = 1;
-        final price = (materialUnitPrice * qty).priceDisplay(currency);
+        const qty = 1000;
+        const totalPrice = materialUnitPrice * qty;
 
         //init app
-        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
-        await placeOrderWithMaterial(materialNumber, qty);
-
+        await pumpAppWithHomeScreen(tester, shipToCode: billToShipToCode);
+        await checkoutWithMaterial(materialNumber, qty);
+        await checkoutRobot.verifyPoReferenceField(isVisible: true);
+        await checkoutRobot.enterPoReference(poReference);
+        await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+        await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+        await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
         await ordersRootRobot.switchToViewByOrders();
 
         //verify
         await commonRobot.pullToRefresh();
+        final orderId = viewByOrdersRobot.getOrderIdText(index: 0);
         await viewByOrdersRobot.tapFirstOrder();
+        viewByOrdersDetailRobot.verifyOrderId(orderId);
         viewByOrdersDetailRobot.verifyOrderDate();
-        viewByOrdersDetailRobot.verifyOrderAddress(otherShipToAddress);
-        viewByOrdersDetailRobot.verifyCustomerCode(otherCustomerCode);
-        viewByOrdersDetailRobot.verifyDeliveryTo(otherShipToCode);
+        viewByOrdersDetailRobot.verifyPoReference(poReference);
+        viewByOrdersDetailRobot.verifyDeliveryInstructions(deliveryInstruction);
+        viewByOrdersDetailRobot.verifyOrderAddress(billToOrderAddress);
+        viewByOrdersDetailRobot.verifyCustomerCode(billToCustomerCode);
+        viewByOrdersDetailRobot.verifyDeliveryTo(billToShipToCode);
+        //Bill to info
+        await verifyBillToInfo();
         await viewByOrdersDetailRobot.dragToVerifySummary();
-        viewByOrdersDetailRobot.verifySubTotal(price);
-        viewByOrdersDetailRobot.verifyGrandTotal(price);
+        viewByOrdersDetailRobot
+            .verifySubTotal(totalPrice.priceDisplay(currency));
+        viewByOrdersDetailRobot.verifyGrandTotal(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
         await viewByOrdersDetailRobot.dragToVerifyItemsSection();
         await viewByOrdersDetailRobot.startVerifyMaterial(materialNumber);
         viewByOrdersDetailRobot.verifyQty(qty);
-        viewByOrdersDetailRobot.verifyMaterialTotalPrice(price);
+        viewByOrdersDetailRobot
+            .verifyMaterialTotalPrice(totalPrice.priceDisplay(currency));
         viewByOrdersDetailRobot.verifyBuyAgainButton();
       });
 
@@ -2287,10 +2334,11 @@ void main() {
         const orderQty = 1000;
         const cartQty = 10;
         //init app
-        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+        await pumpAppWithHomeScreen(tester);
 
         //setup data
-        await placeOrderWithMaterial(materialNumber, orderQty);
+        await checkoutWithMaterial(materialNumber, orderQty);
+        await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.products);
         await productRobot.openSearchProductScreen();
@@ -2313,6 +2361,7 @@ void main() {
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, orderQty + cartQty);
+        // TODO: Revist when popup 'Reoder for this delivery address? is added to add new test step
       });
 
       testWidgets(
@@ -2321,10 +2370,11 @@ void main() {
         const qty = 10;
         const bonusQty = qty ~/ bonusMaterialNumberTierQty;
         //init app
-        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+        await pumpAppWithHomeScreen(tester);
 
         //setup data
-        await placeOrderWithMaterial(bonusMaterialNumber, qty);
+        await checkoutWithMaterial(bonusMaterialNumber, qty);
+        await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
@@ -2376,6 +2426,9 @@ void main() {
       });
     });
   });
+
+  //TODO : WE NEED TO COVER STRIKE THROUGH PRICE, RIGHT NOW WE DON'T HAVE DATA
+  //TODO : WE NEED TO COVER ZDP5 FEATURE LATER, ONCE THE TEST DATA GET READY
 
   tearDown(() async {
     locator<ZephyrService>().setNameAndStatus();

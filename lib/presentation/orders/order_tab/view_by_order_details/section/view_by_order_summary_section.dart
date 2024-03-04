@@ -157,8 +157,9 @@ class _PriceTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
-        Text('$title:'),
+        Flexible(child: Text('$title:')),
         PriceComponent(
           type: priceStyle,
           price: orderNumber.isValid() ? value.toString() : context.tr('NA'),

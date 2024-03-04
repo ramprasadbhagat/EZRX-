@@ -5,13 +5,10 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../../../common/common_robot.dart';
 import '../../../common/extension.dart';
 
-class AccountCreditsRobot {
-  final WidgetTester _tester;
-
-  AccountCreditsRobot(this._tester);
-
+class AccountCreditsRobot extends CommonRobot {
   //initialize Finder
   final Finder _fileDownloadButtonFinder =
       find.byKey(WidgetKeys.accountSummaryDownloadButton);
@@ -23,6 +20,8 @@ class AccountCreditsRobot {
   final Finder _itemTile = find.byKey(WidgetKeys.creditsItemTile);
   final Finder _itemGroupDate = find.byKey(WidgetKeys.creditCreatedOn);
 
+  AccountCreditsRobot(WidgetTester tester) : super(tester);
+
   //Robot Functions
   void verify() {
     expect(find.byKey(WidgetKeys.allCreditsPage), findsOneWidget);
@@ -33,9 +32,9 @@ class AccountCreditsRobot {
   }
 
   Future<void> searchCredits(String input) async {
-    await _tester.enterText(_searchBar, input);
-    await _tester.testTextInput.receiveAction(TextInputAction.done);
-    await _tester.pumpAndSettle();
+    await tester.enterText(_searchBar, input);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
   }
 
   void verifyFilterTuneIcon() {
@@ -51,8 +50,8 @@ class AccountCreditsRobot {
   }
 
   Future<void> tapDownloadButton() async {
-    await _tester.tap(_fileDownloadButtonFinder);
-    await _tester.pumpAndSettle();
+    await tester.tap(_fileDownloadButtonFinder);
+    await tester.pumpAndSettle();
   }
 
   void verifyNewPaymentButton() {
@@ -60,8 +59,8 @@ class AccountCreditsRobot {
   }
 
   Future<void> tapFilterTuneIcon() async {
-    await _tester.tap(_filterTuneIconFinder);
-    await _tester.pumpAndSettle();
+    await tester.tap(_filterTuneIconFinder);
+    await tester.pumpAndSettle();
   }
 
   void verifyNoCreditFound() {
@@ -69,10 +68,7 @@ class AccountCreditsRobot {
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
     expect(find.text('No credit found'.tr()), findsOneWidget);
     expect(
-      find.text(
-        'Try adjusting your search or filter selection to find what you’re looking for.'
-            .tr(),
-      ),
+      find.text(noRecordFoundDefaultSubTitle),
       findsOneWidget,
     );
   }
@@ -102,12 +98,28 @@ class AccountCreditsRobot {
     );
   }
 
+  void verifyCreditItemGovNumberForVN(String searchKey, String govNumber) {
+    _verifyCreditItemId(searchKey);
+    expect(
+      find.descendant(
+        of: _itemTile,
+        matching: find.byWidgetPredicate(
+          (widget) =>
+              widget.key == WidgetKeys.governmentNumber &&
+              widget is Text &&
+              widget.data!.contains(govNumber),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void _verifyCreditItemStatus(String status) {
     _verifyOneCreditItem();
     expect(
       find.descendant(
         of: _itemTile,
-        matching: find.text(status),
+        matching: find.text(status.tr()),
       ),
       findsOneWidget,
     );
@@ -168,13 +180,13 @@ class AccountCreditsRobot {
   }
 
   Future<void> tapPaymentButton() async {
-    await _tester.tap(_newPaymentButtonFinder);
-    await _tester.pumpAndSettle();
+    await tester.tap(_newPaymentButtonFinder);
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapFirstCreditItem() async {
-    await _tester.tap(_itemTile.first);
-    await _tester.pumpAndSettle();
+    await tester.tap(_itemTile.first);
+    await tester.pumpAndSettle();
   }
 
   void verifyCreditsCreatedGroupInDateRange({
@@ -182,7 +194,7 @@ class AccountCreditsRobot {
     required DateTime toDate,
   }) {
     expect(_itemGroupDate, findsAtLeastNWidgets(1));
-    final dateText = _tester
+    final dateText = tester
         .widgetList<Text>(
           find.descendant(
             of: _itemGroupDate,
@@ -199,17 +211,17 @@ class AccountCreditsRobot {
   }
 
   void verifyCreditsItemListWithStatus(String status, {bool isVisible = true}) {
-    final statusText = _tester
+    final statusText = tester
         .widgetList<Text>(
           find.descendant(
             of: _itemTile,
-            matching: find.text(status),
+            matching: find.text(status.tr()),
           ),
         )
         .map((e) => e.data!);
 
     for (final text in statusText) {
-      expect(text == status, isVisible);
+      expect(text == status.tr(), isVisible);
     }
     expect(_itemTile.evaluate().length, isVisible ? statusText.length : 0);
   }
@@ -220,7 +232,7 @@ class AccountCreditsRobot {
     required String currency,
   }) {
     expect(_itemGroupDate, findsAtLeastNWidgets(1));
-    final dateText = _tester
+    final dateText = tester
         .widgetList<RichText>(find.byKey(WidgetKeys.priceComponent))
         .map((e) => e.text.toPlainText());
     for (final text in dateText) {

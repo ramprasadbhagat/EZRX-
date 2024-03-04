@@ -8,7 +8,7 @@ import '../common/common_robot.dart';
 
 class FilterSortProductRobot extends CommonRobot {
   final manufacturerLabel = find.byKey(WidgetKeys.filterManufacturerButton);
-  final countryLabel = find.byKey(WidgetKeys.filterCountryButton);
+  final countryLabel = find.byKey(WidgetKeys.filterCountryOfOriginButton);
   final suggestedCountry = find.byKey(WidgetKeys.suggestedCountryText);
 
   FilterSortProductRobot(WidgetTester tester) : super(tester);

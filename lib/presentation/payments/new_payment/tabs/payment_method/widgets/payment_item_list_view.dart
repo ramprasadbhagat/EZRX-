@@ -51,6 +51,7 @@ class _InvoiceCreditItemTile extends StatelessWidget {
               padding: const EdgeInsets.only(top: 2),
               child: Text(
                 '${context.tr('Gov. no')} ${customerOpenItem.documentReferenceID.displayDashIfEmpty}',
+                key: WidgetKeys.governmentNumber,
                 style: Theme.of(context).textTheme.labelSmall,
               ),
             ),

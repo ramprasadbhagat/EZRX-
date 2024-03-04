@@ -40,7 +40,7 @@ class AccountInvoiceFilterRobot extends CommonRobot {
   }
 
   Future<void> tapStatusCheckbox(String name) async {
-    await tester.tap(find.widgetWithText(CheckboxListTile, name));
+    await tester.tap(find.widgetWithText(CheckboxListTile, name.tr()));
     await tester.pump();
   }
 
@@ -152,7 +152,7 @@ class AccountInvoiceFilterRobot extends CommonRobot {
 
   Future<void> tapApplyButton() async {
     await tester.tap(applyButton);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(seconds: 1));
   }
 
   Future<void> tapResetButton() async {

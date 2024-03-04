@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -41,7 +42,7 @@ class AccountSummaryTabFilterRobot {
   }
 
   Future<void> tapStatusCheckbox(String name) async {
-    await _tester.tap(find.widgetWithText(CheckboxListTile, name));
+    await _tester.tap(find.widgetWithText(CheckboxListTile, name.tr()));
     await _tester.pump();
   }
 

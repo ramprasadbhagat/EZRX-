@@ -167,14 +167,17 @@ class _ItemSubTotalSection extends StatelessWidget {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                context.tr('Item subtotal:'),
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: ZPColors.darkGray,
-                    ),
+              Flexible(
+                child: Text(
+                  context.tr('Item subtotal:'),
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: ZPColors.darkGray,
+                      ),
+                ),
               ),
               _LoadingShimmerWithChild(
                 child: PriceComponent(

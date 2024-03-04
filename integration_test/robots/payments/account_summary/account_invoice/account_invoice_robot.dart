@@ -22,6 +22,7 @@ class AccountInvoiceRobot extends CommonRobot {
   final statusLabel = find.byKey(WidgetKeys.invoiceItemStatus);
   final idLabel = find.byKey(WidgetKeys.invoiceItemId);
   final orderIdLabel = find.byKey(WidgetKeys.invoiceItemOrderId);
+  final govNumber = find.byKey(WidgetKeys.governmentNumber);
 
   void verifyFilterButton() {
     expect(filterButton, findsOneWidget);
@@ -73,10 +74,7 @@ class AccountInvoiceRobot extends CommonRobot {
     expect(
       find.descendant(
         of: widget,
-        matching: find.text(
-          'Try adjusting your search or filter selection to find what you’re looking for.'
-              .tr(),
-        ),
+        matching: find.text(noRecordFoundDefaultSubTitle),
       ),
       findsOneWidget,
     );
@@ -84,7 +82,7 @@ class AccountInvoiceRobot extends CommonRobot {
 
   bool get noRecordFound => find.byType(NoRecordFound).evaluate().isNotEmpty;
 
-  void verifyItems() {
+  void verifyItems({bool isVn = false}) {
     expect(invoiceItem, findsAtLeastNWidgets(1));
     expect(createdDateLabel, findsAtLeastNWidgets(1));
     final itemCount = invoiceItem.evaluate().length;
@@ -108,6 +106,12 @@ class AccountInvoiceRobot extends CommonRobot {
       find.descendant(of: invoiceItem, matching: statusLabel),
       findsAtLeastNWidgets(itemCount),
     );
+    if (isVn) {
+      expect(
+        find.descendant(of: invoiceItem, matching: govNumber),
+        findsAtLeastNWidgets(itemCount),
+      );
+    }
   }
 
   void verifyItemsWithSearchKey(String searchKey) {

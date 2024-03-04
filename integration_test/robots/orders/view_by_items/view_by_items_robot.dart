@@ -5,12 +5,11 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
-class ViewByItemsRobot {
-  final WidgetTester tester;
-
-  ViewByItemsRobot(this.tester);
+class ViewByItemsRobot extends CommonRobot {
+  ViewByItemsRobot(WidgetTester tester) : super(tester);
 
   final orderGroups = find.byKey(WidgetKeys.viewByItemsOrderGroupKey);
   final orderItems = find.byKey(WidgetKeys.viewByItemsOrderItemKey);
@@ -137,10 +136,7 @@ class ViewByItemsRobot {
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
     expect(find.text('No orders found'.tr()), findsOneWidget);
     expect(
-      find.textContaining(
-        'Try adjusting your search or filter selection to find what you’re looking for'
-            .tr(),
-      ),
+      find.text(noRecordFoundDefaultSubTitle),
       findsOneWidget,
     );
     expect(find.byKey(WidgetKeys.startBrowsingViewByItem), findsOneWidget);

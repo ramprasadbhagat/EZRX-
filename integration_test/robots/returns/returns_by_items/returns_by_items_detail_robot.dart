@@ -14,10 +14,13 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
   final showDetailButton = find.byKey(WidgetKeys.returnDetailShowDetailButton);
   final showDetailButtonFoBonus =
       find.byKey(WidgetKeys.returnDetailShowDetailButton);
+  final _page = find.byType(ReturnRequestSummaryByItemDetails);
 
   void verifyPage() {
-    expect(find.byType(ReturnRequestSummaryByItemDetails), findsOneWidget);
+    expect(_page, findsOneWidget);
   }
+
+  bool get isReturnDetailPage => _page.evaluate().isNotEmpty;
 
   void verifyReturnIdVisible(String returnId) {
     expect(

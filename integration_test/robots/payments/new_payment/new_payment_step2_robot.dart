@@ -23,6 +23,7 @@ class NewPaymentStep2Robot {
   final itemCheckBadge = find.byKey(WidgetKeys.itemCheckBadge);
   final accountingDocument = find.byKey(WidgetKeys.accountingDocument);
   final nextButton = find.byKey(WidgetKeys.nextButton);
+  final govNumber = find.byKey(WidgetKeys.governmentNumber);
 
   String firstAccountingDocument = '';
 
@@ -67,8 +68,9 @@ class NewPaymentStep2Robot {
 
   bool get noRecordFound => find.byType(NoRecordFound).evaluate().isNotEmpty;
 
-  void verifyAtLeastOneItemFound() {
+  void verifyAtLeastOneItemFound({bool isVn = false}) {
     expect(creditPaymentItem, findsAtLeastNWidgets(1));
+    expect(govNumber, isVn ? findsAtLeastNWidgets(1) : findsNothing);
   }
 
   void verifyDefaultFilter() {

@@ -181,12 +181,18 @@ class LoginRobot extends CommonRobot {
     expect(incorrectUsername, findsOneWidget);
   }
 
-  void findSignUpLink() {
-    expect(signUp, findsOneWidget);
+  Future<void> findSignUpLink({bool isVisible = true}) async {
+    if (isVisible) {
+      await scrollEnsureFinderVisible(loginWithSSO);
+    }
+    expect(signUp, isVisible ? findsOneWidget : findsNothing);
   }
 
-  void findLoginWithSSOButton() {
-    expect(loginWithSSO, findsOneWidget);
+  Future<void> findLoginWithSSOButton({bool isVisible = true}) async {
+    if (isVisible) {
+      await scrollEnsureFinderVisible(loginWithSSO);
+    }
+    expect(loginWithSSO, isVisible ? findsOneWidget : findsNothing);
   }
 
   Future<void> tapToCloseAnnouncementBanner() async {

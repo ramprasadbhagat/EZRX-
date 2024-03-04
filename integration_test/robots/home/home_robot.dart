@@ -52,6 +52,7 @@ class HomeRobot extends CommonRobot {
   final productFavoriteIcon = find.byKey(WidgetKeys.favoritesIcon);
   final searchByProductField = find.byKey(WidgetKeys.searchProductField);
   final listView = find.byType(SingleChildScrollView).last;
+  final homeBanner = find.byKey(WidgetKeys.homeBanner);
 
   void verify() {
     final home = find.byKey(WidgetKeys.homeScreen);
@@ -173,9 +174,15 @@ class HomeRobot extends CommonRobot {
     await tester.pump();
   }
 
-  void verifyBannerIsDisplay() {
-    final listBanner = find.byKey(WidgetKeys.homeBanner);
-    expect(listBanner, findsOneWidget);
+  bool get isBannerEmpty => homeBanner.evaluate().isEmpty;
+
+  void verifyHomeBanner({bool isVisible = true}) {
+    expect(homeBanner, isVisible ? findsOneWidget : findsNothing);
+  }
+
+  void verifyFirstBannerIsDisplay() {
+    final listPosition = tester.widget<PageView>(homeBanner);
+    expect(listPosition.controller.page, 0);
   }
 
   void findQuickAccessOrders() {

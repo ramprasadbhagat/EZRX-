@@ -15,16 +15,14 @@ class PayerInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final payerInfoState =
-        context.read<PaymentCustomerInformationBloc>().state;
-        
-    return payerInfoState
-                .billToInfoAvailable &&
+    final payerInfoState = context.read<PaymentCustomerInformationBloc>().state;
+
+    return payerInfoState.billToInfoAvailable &&
             context.read<EligibilityBloc>().state.salesOrgConfigs.enableBillTo
         ? Theme(
-            key: WidgetKeys.payerInformation,
             data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
             child: ExpansionTile(
+              key: WidgetKeys.payerInformation,
               initiallyExpanded: expanded,
               tilePadding: const EdgeInsets.only(
                 left: 0,
@@ -35,10 +33,12 @@ class PayerInformation extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
+                key: WidgetKeys.billToCustomerCode,
               ),
               subtitle: Text(
                 '${payerInfoState.getBillToInfo.billToAddress}',
                 style: Theme.of(context).textTheme.bodyMedium,
+                key: WidgetKeys.billToAddress,
               ),
               children: [
                 BalanceTextRow(
@@ -56,7 +56,8 @@ class PayerInformation extends StatelessWidget {
                 BalanceTextRow(
                   keyText: context.tr('Tax number'),
                   keyTextStyle: Theme.of(context).textTheme.bodyMedium,
-                  valueText: payerInfoState.getBillToInfo.taxNumber,
+                  valueText:
+                      payerInfoState.getBillToInfo.taxNumber.displayNAIfEmpty,
                   valueTextStyle: Theme.of(context).textTheme.bodyMedium,
                 ),
                 BalanceTextRow(

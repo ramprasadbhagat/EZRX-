@@ -6,12 +6,10 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../common/common_robot.dart';
 import '../../../common/extension.dart';
 
-class AccountSummaryTabRobot {
-  final WidgetTester _tester;
-  AccountSummaryTabRobot(this._tester);
-
+class AccountSummaryTabRobot extends CommonRobot {
   final _allSummaryPage = find.byKey(WidgetKeys.allSummaryPage);
   final _filterButton = find.byKey(WidgetKeys.accountSummaryFilterButton);
   final _downloadButton = find.byKey(WidgetKeys.accountSummaryDownloadButton);
@@ -28,6 +26,9 @@ class AccountSummaryTabRobot {
   final _summaryExpandableSection =
       find.byKey(WidgetKeys.summaryExpandableSection);
   final _newPaymentButtonFinder = find.byKey(WidgetKeys.newPaymentButton);
+  final _govNumber = find.byKey(WidgetKeys.governmentNumber);
+
+  AccountSummaryTabRobot(WidgetTester tester) : super(tester);
 
   void verifyPage() {
     expect(_allSummaryPage, findsOneWidget);
@@ -38,8 +39,8 @@ class AccountSummaryTabRobot {
   }
 
   Future<void> tapFilterButton() async {
-    await _tester.tap(_filterButton);
-    await _tester.pumpAndSettle();
+    await tester.tap(_filterButton);
+    await tester.pumpAndSettle();
   }
 
   void verifyFilterApplied(int count) {
@@ -57,8 +58,8 @@ class AccountSummaryTabRobot {
   }
 
   Future<void> tapDownloadButton() async {
-    await _tester.tap(_downloadButton);
-    await _tester.pumpAndSettle();
+    await tester.tap(_downloadButton);
+    await tester.pumpAndSettle();
   }
 
   void verifyNewPaymentButton() {
@@ -66,8 +67,8 @@ class AccountSummaryTabRobot {
   }
 
   Future<void> tapNewPaymentButton() async {
-    await _tester.tap(_newPaymentButton);
-    await _tester.pumpAndSettle();
+    await tester.tap(_newPaymentButton);
+    await tester.pumpAndSettle();
   }
 
   void verifyNoRecordFound() {
@@ -83,16 +84,13 @@ class AccountSummaryTabRobot {
     expect(
       find.descendant(
         of: widget,
-        matching: find.text(
-          'Try adjusting your search or filter selection to find what you’re looking for.'
-              .tr(),
-        ),
+        matching: find.text(noRecordFoundDefaultSubTitle),
       ),
       findsOneWidget,
     );
   }
 
-  void verifyItems() {
+  void verifyItems({bool isVn = false}) {
     expect(_summaryItem, findsAtLeastNWidgets(1));
     final itemCount = _summaryItem.evaluate().length;
     expect(
@@ -115,6 +113,12 @@ class AccountSummaryTabRobot {
       find.descendant(of: _summaryItem, matching: _statusLabel),
       findsAtLeastNWidgets(itemCount),
     );
+    if (isVn) {
+      expect(
+        find.descendant(of: _summaryItem, matching: _govNumber),
+        findsAtLeastNWidgets(itemCount),
+      );
+    }
   }
 
   void verifyItemWithId(String id, bool isCredit) {
@@ -127,9 +131,9 @@ class AccountSummaryTabRobot {
 
   Future<void> tapItemWithId(String id, bool isCredit) async {
     final itemId = '${isCredit ? 'Credit' : 'Debit'} #$id';
-    await _tester
+    await tester
         .tap(find.descendant(of: _summaryItem, matching: find.text(itemId)));
-    await _tester.pumpAndSettle();
+    await tester.pumpAndSettle();
   }
 
   void verifyExpandableDetailsButton() {
@@ -137,8 +141,8 @@ class AccountSummaryTabRobot {
   }
 
   Future<void> tapExpandableDetailsButton({int index = 0}) async {
-    await _tester.tap(_summaryExpandableSection.at(index));
-    await _tester.pumpAndSettle();
+    await tester.tap(_summaryExpandableSection.at(index));
+    await tester.pumpAndSettle();
   }
 
   void displayDetails({bool isHidden = false, int index = 0}) {
@@ -156,13 +160,13 @@ class AccountSummaryTabRobot {
   }
 
   Future<void> tapPaymentButton() async {
-    await _tester.tap(_newPaymentButtonFinder);
-    await _tester.pumpAndSettle();
+    await tester.tap(_newPaymentButtonFinder);
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapFirstSummaryItem() async {
-    await _tester.tap(_summaryItem.first);
-    await _tester.pumpAndSettle();
+    await tester.tap(_summaryItem.first);
+    await tester.pumpAndSettle();
   }
 
   void verifySummaryItemsDate({
@@ -170,7 +174,7 @@ class AccountSummaryTabRobot {
     required DateTime toDate,
   }) {
     expect(_summaryDocumentDateLabel, findsAtLeastNWidgets(1));
-    final dateText = _tester
+    final dateText = tester
         .widgetList<Text>(
           _summaryDocumentDateLabel,
         )
@@ -183,17 +187,17 @@ class AccountSummaryTabRobot {
   }
 
   void verifyCreditsItemListWithStatus(String status, {bool isVisible = true}) {
-    final statusText = _tester
+    final statusText = tester
         .widgetList<Text>(
           find.descendant(
             of: _statusLabel,
-            matching: find.text(status),
+            matching: find.text(status.tr()),
           ),
         )
         .map((e) => e.data!);
 
     for (final text in statusText) {
-      expect(text == status, isVisible);
+      expect(text == status.tr(), isVisible);
     }
     expect(_summaryItem.evaluate().length, isVisible ? statusText.length : 0);
   }

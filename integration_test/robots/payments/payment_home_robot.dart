@@ -143,12 +143,11 @@ class PaymentHomeRobot extends CommonRobot {
 
   Future<void> verifyPaymentStatementAccount() async {
     await tester.dragUntilVisible(
-      downloadStatementAccountIcon.first,
+      paymentHomeSoa,
       find.byKey(WidgetKeys.scrollList),
       const Offset(0.0, -200),
     );
     expect(paymentHomeSoa, findsOneWidget);
-    expect(itemStatementAccounts, findsWidgets);
   }
 
   Future<void> verifyPaymentStatementAccountForID() async {

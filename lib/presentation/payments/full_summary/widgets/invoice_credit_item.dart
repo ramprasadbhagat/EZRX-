@@ -61,6 +61,7 @@ class _InvoiceCreditItem extends StatelessWidget {
                       .showGovNumber)
                     Text(
                       '${context.tr('Gov. no')} ${data.documentReferenceID.displayDashIfEmpty}',
+                      key: WidgetKeys.governmentNumber,
                       style: Theme.of(context).textTheme.labelSmall,
                     ),
                   Padding(

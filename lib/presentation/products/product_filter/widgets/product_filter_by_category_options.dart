@@ -107,7 +107,7 @@ class _CountryOfOriginSection extends StatelessWidget {
           previous.materialFilter.countryListSelected !=
           current.materialFilter.countryListSelected,
       builder: (context, state) => InkWell(
-        key: WidgetKeys.filterCountryButton,
+        key: WidgetKeys.filterCountryOfOriginButton,
         onTap: () => _showFilterByPage(
           context: context,
           materialFilterType: MaterialFilterType.countryList,

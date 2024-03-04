@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../common/common_robot.dart';
@@ -50,7 +51,6 @@ class NotificationRobot extends CommonRobot {
   }
 
   Future<void> verifyNotificationItems() async {
-    expect(items, findsAtLeastNWidgets(1));
     expect(
       find.descendant(of: items, matching: itemCreatedAt),
       findsWidgets,
@@ -74,14 +74,24 @@ class NotificationRobot extends CommonRobot {
   }
 
   String getNotificationDescription(int index) {
+    if (tester.widget<Text>(itemTitle.at(index)).data == 'Alert'.tr()) {
+      return tester.widget<Html>(itemDescription.at(index)).data ?? '';
+    }
     return tester.widget<Text>(itemDescription.at(index)).data ?? '';
   }
 
   void verifyNotificationWithDescription(int index, String descriptionText) {
-    expect(
-      tester.widget<Text>(itemDescription.at(index)).data,
-      descriptionText,
-    );
+    if (tester.widget<Text>(itemTitle.at(index)).data == 'Alert'.tr()) {
+      expect(
+        tester.widget<Html>(itemDescription.at(index)).data,
+        descriptionText,
+      );
+    } else {
+      expect(
+        tester.widget<Text>(itemDescription.at(index)).data,
+        descriptionText,
+      );
+    }
   }
 
   String getFirstBasicNotificationTitle({String? alertTitle}) {

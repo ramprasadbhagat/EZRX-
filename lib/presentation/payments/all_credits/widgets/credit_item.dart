@@ -24,13 +24,16 @@ class _CreditsItem extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '${context.tr('Account credit')} #${creditItem.searchKey.getOrDefaultValue('')}',
-                  key: WidgetKeys.creditItemId(
-                    creditItem.searchKey.getOrDefaultValue(''),
+                Flexible(
+                  child: Text(
+                    '${context.tr('Account credit')} #${creditItem.searchKey.getOrDefaultValue('')}',
+                    key: WidgetKeys.creditItemId(
+                      creditItem.searchKey.getOrDefaultValue(''),
+                    ),
+                    style: Theme.of(context).textTheme.labelSmall,
                   ),
-                  style: Theme.of(context).textTheme.labelSmall,
                 ),
                 if (!isIDMarket)
                   StatusLabel(
@@ -46,6 +49,7 @@ class _CreditsItem extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 2.0),
                 child: Text(
                   '${context.tr('Gov. no')} ${creditItem.documentReferenceID.displayDashIfEmpty}',
+                  key: WidgetKeys.governmentNumber,
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
               ),

@@ -27,6 +27,7 @@ class ProductDetailRobot extends CommonRobot {
       find.byKey(WidgetKeys.closeMaterialInformationDialog);
   final materialDetailsStock = find.byKey(WidgetKeys.materialDetailsStock);
   final govtMaterialListPrice = find.byKey(WidgetKeys.govtMaterialListPrice);
+  final expandIcon = find.byKey(WidgetKeys.expandIcon);
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
@@ -83,8 +84,13 @@ class ProductDetailRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  bool get isSeeMoreOptionNotVisible => expandIcon.evaluate().isEmpty;
+
+  void verifySeeMoreOption({bool isVisible = true}) {
+    expect(expandIcon, isVisible ? findsOneWidget : findsNothing);
+  }
+
   Future<void> tapToSeeMore() async {
-    final expandIcon = find.byKey(WidgetKeys.expandIcon);
     await tester.pumpUntilVisible(expandIcon);
     await tester.tap(expandIcon);
   }

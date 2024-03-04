@@ -45,9 +45,15 @@ class OrderPriceSummaryRobot {
         price,
       );
 
-  void verifyTaxLabel(String price, int tax) {
+  void verifyTaxLabel(
+    String price,
+    int tax, {
+    bool isVn = false,
+  }) {
     _verifyPriceLabel(find.byKey(WidgetKeys.checkoutSummaryTaxPrice), price);
-    _verifyPriceLabel(find.byKey(WidgetKeys.checkoutSummaryTax), '$tax%');
+    if (!isVn) {
+      _verifyPriceLabel(find.byKey(WidgetKeys.checkoutSummaryTax), '$tax%');
+    }
   }
 
   void _verifyPriceLabel(Finder finder, String price) {

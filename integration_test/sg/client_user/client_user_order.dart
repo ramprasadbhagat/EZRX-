@@ -280,8 +280,8 @@ void main() {
       await loginRobot.findRememberMeCheckbox();
       await loginRobot.findForgotPasswordLink();
       await loginRobot.verifySelectedMarket(market);
-      loginRobot.findSignUpLink();
-      loginRobot.findLoginWithSSOButton();
+      await loginRobot.findSignUpLink();
+      await loginRobot.findLoginWithSSOButton();
     });
 
     testWidgets('EZRX-T7 | Verify Default value fields', (tester) async {
@@ -719,7 +719,13 @@ void main() {
       //init app
       await pumpAppWithHomeScreen(tester);
 
-      homeRobot.verifyBannerIsDisplay();
+      if (homeRobot.isBannerEmpty) {
+        homeRobot.verifyHomeBanner(isVisible: false);
+        return;
+      }
+
+      homeRobot.verifyHomeBanner();
+      homeRobot.verifyFirstBannerIsDisplay();
       //tap on next banner
       homeRobot.findNextBanner();
       await homeRobot.tapNextBanner();

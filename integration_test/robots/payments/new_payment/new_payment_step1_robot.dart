@@ -26,10 +26,12 @@ class NewPaymentStep1Robot {
   final openSelector = find.byKey(WidgetKeys.genericKey(key: 'Open'.tr()));
   final overDueSelector =
       find.byKey(WidgetKeys.genericKey(key: 'Overdue'.tr()));
+  final govNumber = find.byKey(WidgetKeys.governmentNumber);
 
   String invoiceId = '';
   String orderId = '';
   String invoiceIdPrice = '';
+  String govIdForVn = '';
 
   void verifyPage() {
     expect(outstandingInvoicesPage, findsOneWidget);
@@ -55,11 +57,14 @@ class NewPaymentStep1Robot {
     expect(paymentItem, findsNothing);
   }
 
-  void verifyAtLeast1ItemFound() {
+  void verifyAtLeast1ItemFound({
+    isVn = false,
+  }) {
     expect(paymentItem, findsAtLeastNWidgets(1));
+    expect(govNumber, isVn ? findsAtLeastNWidgets(1) : findsNothing);
   }
 
-  void collectTheFirstItem() {
+  void collectTheFirstItem({isVn = false}) {
     invoiceId =
         tester.widget<Text>(find.byKey(WidgetKeys.invoiceId).first).data!;
     invoiceIdPrice = tester
@@ -68,6 +73,11 @@ class NewPaymentStep1Robot {
     orderId = tester
         .widget<Text>(find.byKey(WidgetKeys.invoiceItemOrderId).first)
         .data!;
+    if (isVn) {
+      govIdForVn = tester
+          .widget<Text>(find.byKey(WidgetKeys.governmentNumber).first)
+          .data!;
+    }
   }
 
   String get getFirstInvoiceId {
@@ -78,6 +88,11 @@ class NewPaymentStep1Robot {
   double get getFirstInvoiceIdPrice {
     collectTheFirstItem();
     return double.parse(invoiceIdPrice);
+  }
+
+  String get getFirstGovIdForVn {
+    collectTheFirstItem();
+    return govIdForVn;
   }
 
   Future<void> pullToRefresh() async {

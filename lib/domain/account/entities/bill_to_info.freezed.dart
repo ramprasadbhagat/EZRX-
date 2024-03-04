@@ -22,7 +22,7 @@ mixin _$BillToInfo {
   BillToAddress get billToAddress => throw _privateConstructorUsedError;
   BillToAltName get billToAltName => throw _privateConstructorUsedError;
   List<EmailAddress> get emailAddresses => throw _privateConstructorUsedError;
-  String get taxNumber => throw _privateConstructorUsedError;
+  StringValue get taxNumber => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
   String get district => throw _privateConstructorUsedError;
@@ -63,7 +63,7 @@ abstract class $BillToInfoCopyWith<$Res> {
       BillToAddress billToAddress,
       BillToAltName billToAltName,
       List<EmailAddress> emailAddresses,
-      String taxNumber,
+      StringValue taxNumber,
       String status,
       String country,
       String district,
@@ -161,7 +161,7 @@ class _$BillToInfoCopyWithImpl<$Res, $Val extends BillToInfo>
       taxNumber: null == taxNumber
           ? _value.taxNumber
           : taxNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -289,7 +289,7 @@ abstract class _$$_BillToInfoCopyWith<$Res>
       BillToAddress billToAddress,
       BillToAltName billToAltName,
       List<EmailAddress> emailAddresses,
-      String taxNumber,
+      StringValue taxNumber,
       String status,
       String country,
       String district,
@@ -388,7 +388,7 @@ class __$$_BillToInfoCopyWithImpl<$Res>
       taxNumber: null == taxNumber
           ? _value.taxNumber
           : taxNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -531,7 +531,7 @@ class _$_BillToInfo extends _BillToInfo {
   }
 
   @override
-  final String taxNumber;
+  final StringValue taxNumber;
   @override
   final String status;
   @override
@@ -686,7 +686,7 @@ abstract class _BillToInfo extends BillToInfo {
       required final BillToAddress billToAddress,
       required final BillToAltName billToAltName,
       required final List<EmailAddress> emailAddresses,
-      required final String taxNumber,
+      required final StringValue taxNumber,
       required final String status,
       required final String country,
       required final String district,
@@ -723,7 +723,7 @@ abstract class _BillToInfo extends BillToInfo {
   @override
   List<EmailAddress> get emailAddresses;
   @override
-  String get taxNumber;
+  StringValue get taxNumber;
   @override
   String get status;
   @override

@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/bill_to_alt_name.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_name.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bill_to_dto.freezed.dart';
@@ -100,7 +101,7 @@ class BillToDto with _$BillToDto {
       telephoneExtension: telephoneExtension,
       faxNumber: faxNumber,
       faxExtension: faxExtension,
-      taxNumber: taxNumber,
+      taxNumber: StringValue(taxNumber),
       houseNumber1: houseNumber1,
       houseNumber2: houseNumber2,
       building: building,
@@ -129,7 +130,8 @@ class BillToDto with _$BillToDto {
       customerLocalGroup: billToInfo.customerLocalGroup,
       defaulBillToAddress: billToInfo.defaulBillToAddress,
       district: billToInfo.district,
-      emailAddresses: billToInfo.emailAddresses.map((e) => e.getValue()).toList(),
+      emailAddresses:
+          billToInfo.emailAddresses.map((e) => e.getValue()).toList(),
       faxExtension: billToInfo.faxExtension,
       houseNumber2: billToInfo.houseNumber2,
       name1: billToInfo.billToName.name1,
@@ -148,7 +150,7 @@ class BillToDto with _$BillToDto {
       street5: billToInfo.billToAddress.street5,
       street: billToInfo.billToAddress.street,
       taxIncludedBySalesOrganization: billToInfo.taxIncludedBySalesOrganization,
-      taxNumber: billToInfo.taxNumber,
+      taxNumber: billToInfo.taxNumber.getOrDefaultValue(''),
       telephoneExtension: billToInfo.telephoneExtension,
       telephoneNumber: billToInfo.telephoneNumber,
       faxNumber: billToInfo.faxNumber,

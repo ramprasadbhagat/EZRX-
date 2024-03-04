@@ -726,7 +726,7 @@ void main() {
         findsWidgets,
       );
       await tester.tap(
-        find.byKey(WidgetKeys.sectionTileIcon('Payment summary')),
+        find.byKey(WidgetKeys.sectionTileIcon('Payment summary'.tr())),
       );
       await tester.pumpAndSettle();
       verify(
@@ -856,7 +856,7 @@ void main() {
         findsOneWidget,
       );
       await tester.tap(
-        find.byKey(WidgetKeys.sectionTileIcon('Statement of accounts')),
+        find.byKey(WidgetKeys.sectionTileIcon('Statement of accounts'.tr())),
       );
       await tester.pumpAndSettle();
       verify(

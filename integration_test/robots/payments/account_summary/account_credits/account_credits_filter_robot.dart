@@ -147,6 +147,9 @@ class AccountCreditsFilterRobot {
   }
 
   void verifyInvalidAmountError() {
-    expect(find.text('Invalid Amount range!'.tr()), findsOneWidget);
+    expect(
+      find.text('${'Invalid'.tr()} ${'Amount'.tr()} ${'range'.tr()}!'),
+      findsOneWidget,
+    );
   }
 }

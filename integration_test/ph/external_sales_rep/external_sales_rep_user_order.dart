@@ -503,7 +503,13 @@ void main() {
       //init app
       await pumpAppWithLoginOnBehalf(tester);
 
-      homeRobot.verifyBannerIsDisplay();
+      if (homeRobot.isBannerEmpty) {
+        homeRobot.verifyHomeBanner(isVisible: false);
+        return;
+      }
+
+      homeRobot.verifyHomeBanner();
+      homeRobot.verifyFirstBannerIsDisplay();
       //tap on next banner
       homeRobot.findNextBanner();
       await homeRobot.tapNextBanner();

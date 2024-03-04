@@ -39,7 +39,7 @@ class ProductSuggestionRobot extends CommonRobot {
     );
     expect(
       find.text(
-        '${'Try adjusting your search or filter selection to find what you’re looking for'.tr()}.',
+        noRecordFoundDefaultSubTitle,
       ),
       isVisible ? findsOneWidget : findsNothing,
     );
