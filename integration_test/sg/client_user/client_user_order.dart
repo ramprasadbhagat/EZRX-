@@ -177,6 +177,14 @@ void main() {
   const deliveryInstruction = 'Auto-test-delivery-instruction';
   const orderId = '0200331221';
 
+  final bundleMaterialNumberExpiryDatePair = {
+    '23007415': 'NA',
+    '23007425': '01 Mar 2025',
+    '23007440': '01 Feb 2025',
+    '23007448': 'NA',
+    '23340349': 'NA',
+  };
+
   const covidMaterialNumber = '23348698';
   const covidMaterialName = "?Alcohol swabs box of 200's";
   const covidMaterialPrincipalName = 'MINISTRY OF HEALTH (HQ)/AG';
@@ -1460,6 +1468,11 @@ void main() {
       await productSuggestionRobot.searchWithKeyboardAction(bundleShortNumber);
       await productSuggestionRobot.tapSearchResult(bundleShortNumber);
       bundleDetailRobot.verifyAllInformationBundleOfferDisplayed();
+      await bundleDetailRobot.tapAddToCartButton();
+      bundleDetailRobot.verifyAddBundleBottomSheet();
+      await bundleDetailRobot.verifyBundleMaterialExpiryDate(
+        bundleMaterialNumberExpiryDatePair,
+      );
     });
 
     testWidgets('EZRX-T212 | Verify add and navigate to cart in bundle detail',

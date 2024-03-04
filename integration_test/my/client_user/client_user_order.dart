@@ -190,6 +190,16 @@ void main() {
   const poReference = 'Auto-test-po-reference';
   const deliveryInstruction = 'Auto-test-delivery-instruction';
 
+  final bundleMaterialNumberExpiryDatePair = {
+    '23046003': 'NA',
+    '23046018': '03 Feb 2025',
+    '23046031': 'NA',
+    '23046042': 'NA',
+    '23046118': 'NA',
+    '23046313': 'NA',
+    '23046682': 'NA',
+  };
+
   var loginRequired = true;
 
   Future<void> pumpAppWithHomeScreen(
@@ -1536,6 +1546,11 @@ void main() {
       await productSuggestionRobot.searchWithKeyboardAction(bundleShortNumber);
       await productSuggestionRobot.tapSearchResult(bundleShortNumber);
       bundleDetailRobot.verifyAllInformationBundleOfferDisplayed();
+      await bundleDetailRobot.tapAddToCartButton();
+      bundleDetailRobot.verifyAddBundleBottomSheet();
+      await bundleDetailRobot.verifyBundleMaterialExpiryDate(
+        bundleMaterialNumberExpiryDatePair,
+      );
     });
 
     testWidgets('EZRX-T212 | Verify add and navigate to cart in bundle detail',

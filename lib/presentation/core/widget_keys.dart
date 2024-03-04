@@ -766,6 +766,8 @@ class WidgetKeys {
       Key('bundleAddToCartSheetSubmitButton');
   static Key bundleMaterialItem(String materialNumber) =>
       Key('bundleMaterialItem$materialNumber');
+  static Key bundleMaterialDetails(String materialNumber) =>
+      Key('bundleMaterialDetails$materialNumber');
   static const Key bundleAddToCart = Key('bundleAddToCart');
   static const Key bundleMaterialListItem = Key('bundleMaterialListItem');
   static const Key bundleOfferCode = Key('bundleOfferCode');

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../common/common_robot.dart';
@@ -93,6 +94,32 @@ class BundleDetailRobot extends CommonRobot {
 
   void verifyAddBundleBottomSheet({bool isVisible = true}) =>
       expect(sheetAddToCart, isVisible ? findsOneWidget : findsNothing);
+
+  Future<void> verifyBundleMaterialExpiryDate(
+    Map<String, String> materialNumberExpiryPair,
+  ) async {
+    for (final entry in materialNumberExpiryPair.entries) {
+      final materialNumber = entry.key;
+      final expiryDate = entry.value;
+      final itemTile = find.byKey(
+        WidgetKeys.bundleMaterialDetails(materialNumber),
+      );
+
+      await scrollEnsureFinderVisible(itemTile);
+      expect(
+        find.descendant(
+          of: itemTile,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.bundleMaterialExpiryDate &&
+                widget is Text &&
+                widget.data == '${'EXP:'.tr()} $expiryDate',
+          ),
+        ),
+        findsOneWidget,
+      );
+    }
+  }
 
   void verifyAddBundleMinimumQty(int value) => _findWidgetContainText(
         find.byKey(WidgetKeys.addBundleMinimumQty),

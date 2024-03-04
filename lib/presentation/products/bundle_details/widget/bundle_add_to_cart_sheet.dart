@@ -56,6 +56,7 @@ class BundlesAddToCartSheet extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
+              key: WidgetKeys.scrollList,
               itemCount: bundleAddToCartState.bundleMaterials.length,
               itemBuilder: (context, index) => _BundleMaterialListTile(
                 materialInfo:
@@ -128,6 +129,9 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
         const SizedBox(width: 10),
         Expanded(
           child: Column(
+            key: WidgetKeys.bundleMaterialDetails(
+              widget.materialInfo.materialNumber.displayMatNo,
+            ),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
