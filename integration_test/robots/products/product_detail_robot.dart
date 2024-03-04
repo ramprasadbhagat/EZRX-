@@ -101,6 +101,16 @@ class ProductDetailRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.productImage).first, findsOneWidget);
   }
 
+  void verifyProductExpiryDateDisplayed() {
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.materialDetailsStock),
+        matching: find.textContaining('EXP'.tr(), findRichText: true),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyProductFavoriteIconDisplayed() {
     expect(find.byKey(WidgetKeys.favoritesIcon).first, findsOneWidget);
   }

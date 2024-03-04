@@ -53,6 +53,7 @@ class _AnnouncementList extends StatelessWidget {
             style: Theme.of(context).textTheme.labelSmall,
           ),
           Html(
+            key: WidgetKeys.notificationItemDescription,
             data: notificationData.description,
             style: {
               'body': Style(

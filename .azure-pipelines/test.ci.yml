@@ -20,6 +20,8 @@ parameters:
       - integration_test__sg__client_user__client_user_order__sg
       - integration_test__sg__client_user__client_user_payment__sg
       - integration_test__sg__client_user__client_user_return__sg
+      - integration_test__sg__external_sales_rep__external_sales_rep_user_order__sg
+      - integration_test__sg__external_sales_rep__external_sales_rep_user_return__sg
       
       - integration_test__ph__client_user__client_user_return__ph
       - integration_test__ph__client_user__client_user_order__ph
@@ -27,6 +29,7 @@ parameters:
       - integration_test__ph__external_sales_rep__external_sales_rep_user_order__ph
       - integration_test__ph__external_sales_rep__external_sales_rep_user_return__ph
       - integration_test__tw__client_user__client_user_order__tw
+
   - name: preset_config_files
     type: object 
     displayName: Preset Sales Org Configs File ( use "__" instead of "/", no need to define file extension(default is sh) )
