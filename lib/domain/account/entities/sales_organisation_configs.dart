@@ -75,8 +75,10 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool allowReturnsOutsidePolicy,
     required bool enableMarketPlace,
     required double mpMinOrderAmount,
+    required bool statementOfAccountEnabled,
   }) = _SalesOrganisationConfigs;
 
+  //ignore:long-method
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
         salesOrg: SalesOrg(''),
         enableIRN: false,
@@ -141,6 +143,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         allowReturnsOutsidePolicy: false,
         enableMarketPlace: false,
         mpMinOrderAmount: 0.0,
+        statementOfAccountEnabled: false,
       );
 
   bool get shouldDisplayVATInPercentage =>

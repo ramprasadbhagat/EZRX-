@@ -92,6 +92,9 @@ class PaymentPage extends StatelessWidget {
       }
     });
 
+    final salesOrgConfig =
+        context.read<EligibilityBloc>().state.salesOrgConfigs;
+
     return Scaffold(
       key: WidgetKeys.paymentsTabPage,
       appBar: CustomAppBar.commonAppBar(
@@ -150,18 +153,16 @@ class PaymentPage extends StatelessWidget {
             const _PaymentOptionMenu(),
             const SizedBox(height: 20),
             const _Invoice(),
-            if (!context
-                .read<EligibilityBloc>()
-                .state
-                .salesOrgConfigs
-                .hideCredit) ...[
+            if (!salesOrgConfig.hideCredit) ...[
               const SizedBox(height: 20),
               const _Credit(),
             ],
             const SizedBox(height: 20),
             const _PaymentSummary(),
-            const SizedBox(height: 20),
-            const _AccountStatement(),
+            if (salesOrgConfig.statementOfAccountEnabled) ...[
+              const SizedBox(height: 20),
+              const _AccountStatement(),
+            ],
             const SizedBox(height: 20),
           ],
         ),

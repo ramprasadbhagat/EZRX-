@@ -65,4 +65,5 @@ final fakeSGSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enablePOAttachmentRequired: false,
   enableComboDeals: false,
   comboDealsUserRole: ComboDealUserRole(0),
+  statementOfAccountEnabled: true,
 );

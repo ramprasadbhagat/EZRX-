@@ -95,93 +95,12 @@ query salesOrgConfigs($request: SalesOrgConfigRequest) {
     comboDealsUserRole
     enableMarketPlace
     mpMinOrderAmount
+    statementOfAccountEnabled
     }
 }
 
 "variables": {
-    "input": {
-        "id": 5,
-        "data": {
-            "ponRequired": false,
-            "priceOverride": false,
-            "expiryDateDisplay": false,
-            "batchNumDisplay": false,
-            "currency": "vnd",
-            "enableUploadAd": false,
-            "topLeftAd": "",
-            "topRightAd": "",
-            "btmLeftAd": "",
-            "btmRightAd": "",
-            "supportURL": "",
-            "minOrderAmount": "100",
-            "vatValue": 5,
-            "enableFutureDeliveryDay": false,
-            "netPriceOverride": false,
-            "futureDeliveryDay": "10",
-            "plantNumber": "",
-            "materialWithoutPrice": false,
-            "enablePaymentTerms": false,
-            "enableAnalytics": false,
-            "enablePartialPayment": false,
-            "enableUnreferencedReturn": false,
-            "disableReturnsAccess": false,
-            "disablePayment": true,
-            "disableReturnsAccessSR": false,
-            "enableMobileNumber": false,
-            "enableRemarks": false,
-            "enableListPrice": false,
-            "enableTaxDisplay": false,
-            "addOosMaterials": true,
-            "oosValue": 1,
-            "enableDefaultMD": false,
-            "enableZDP5": false,
-            "enableZDP8Override": false,
-            "enableGMC": false,
-            "enableGMN": false,
-            "enableBatchNumber": false,
-            "enableOHPrice": true,
-            "enableSpecialInstructions": true,
-            "enableReferenceNote": false,
-            "displayOrderDiscount": false,
-            "enableIRN": false,
-            "enableTaxClassification": false,
-            "enableTaxAtTotalLevelOnly": false,
-            "displayItemTaxBreakdown": true,
-            "displaySubtotalTaxBreakdown": true,
-            "supportMail": "",
-            "disablePrincipals": false,
-            "principalList": {
-                "value": []
-            },
-            "disableDeals": false,
-            "principleDisabledDeals": {
-                "value": []
-            },
-            "enable2FA": false,
-            "disableBundles": false,
-            "disableProcessingStatus": false,
-            "disableOrderType": false,
-            "enableCollectiveNumber": false,
-            "enableGimmickMaterial": false,
-            "enableVat": false,
-            "hideCustomer": false,
-            "enableBillTo": true,
-            "disablePaymentTermsDisplay": false,
-            "hideStockDisplay": false,
-            "showPOAttachment": false,
-            "enablePOAttachmentRequired": false,
-            "enableLoyaltyScheme": false,
-            "disableOverrideFieldCustomer": false,
-            "disableOverrideFieldSR": true,
-            "disableOverrideApprovalCustomer": false,
-            "disableOverrideApprovalSR": false,
-            "disableDeliveryDate": true,
-            "allowReturnsOutsidePolicy": false,
-            "disableApproverActions": false,
-            "disableUserRestrictions": false,
-            "hideCredit": false,
-            "enableComboDeals": false,
-            "comboDealsUserRole": null
-        }
-    }
-}
+    "request": {
+        "salesOrg": "2001",
+    },
+},

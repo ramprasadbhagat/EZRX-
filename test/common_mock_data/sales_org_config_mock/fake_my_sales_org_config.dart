@@ -67,4 +67,5 @@ final fakeMYSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   comboDealsUserRole: ComboDealUserRole(0),
   enableMarketPlace: true,
   mpMinOrderAmount: 0.0,
+  statementOfAccountEnabled: true,
 );

@@ -131,6 +131,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @StringToDoubleConverter()
     @JsonKey(name: 'mpMinOrderAmount', defaultValue: 0.0)
         required double mpMinOrderAmount,
+    @JsonKey(name: 'statementOfAccountEnabled', defaultValue: false)
+        required bool statementOfAccountEnabled,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -202,6 +204,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       allowReturnsOutsidePolicy: configs.allowReturnsOutsidePolicy,
       enableMarketPlace: configs.enableMarketPlace,
       mpMinOrderAmount: configs.mpMinOrderAmount,
+      statementOfAccountEnabled: configs.statementOfAccountEnabled,
     );
   }
 
@@ -270,6 +273,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       allowReturnsOutsidePolicy: allowReturnsOutsidePolicy,
       enableMarketPlace: enableMarketPlace,
       mpMinOrderAmount: mpMinOrderAmount,
+      statementOfAccountEnabled: statementOfAccountEnabled,
     );
   }
 

@@ -80,7 +80,8 @@
             "disableOverrideFieldSR": false,
             "enablePOAttachmentRequired": false,
             "enableMarketPlace": true,
-            "mpMinOrderAmount": "0.0"
+            "mpMinOrderAmount": "0.0",
+            "statementOfAccountEnabled": false
          }
       ]
    }

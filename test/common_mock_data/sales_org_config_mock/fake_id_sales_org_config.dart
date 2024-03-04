@@ -65,4 +65,5 @@ final fakeIDSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enablePOAttachmentRequired: true,
   enableComboDeals: false,
   comboDealsUserRole: ComboDealUserRole(0),
+  statementOfAccountEnabled: false,
 );

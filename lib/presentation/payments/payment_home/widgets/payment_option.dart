@@ -37,7 +37,7 @@ class _PaymentOption extends StatelessWidget {
 
     return SizedBox(
       width: eligibilityState.salesOrg.isPaymentClaimEnabled ||
-              !eligibilityState.isSOAApplicable
+              !eligibilityState.salesOrgConfigs.statementOfAccountEnabled
           ? width * 0.45
           : width * 0.3,
       child: GestureDetector(
@@ -138,7 +138,8 @@ List<_PaymentOptionData> _getPaymentOptionItems(BuildContext context) {
   return [
     accountSummary,
     paymentSummary,
-    if (eligibilityState.isSOAApplicable) accountStateMent,
+    if (eligibilityState.salesOrgConfigs.statementOfAccountEnabled)
+      accountStateMent,
     if (eligibilityState.salesOrg.isPaymentClaimEnabled) claim,
   ];
 }

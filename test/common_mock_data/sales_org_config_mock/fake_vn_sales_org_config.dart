@@ -65,4 +65,5 @@ final fakeVNSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enablePOAttachmentRequired: false,
   enableComboDeals: true,
   comboDealsUserRole: ComboDealUserRole(1),
+  statementOfAccountEnabled: true,
 );

@@ -43,6 +43,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -280,6 +282,12 @@ void main() {
   group('Payment Home Option menu check', () {
     testWidgets('Check payment option menu noClaim',
         (WidgetTester tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
       when(() => autoRouterMock.pushNamed('payments/invoice_credit'))
           .thenAnswer(
         (_) => Future.value(),
@@ -322,16 +330,10 @@ void main() {
 
     testWidgets('Check payment option menu With Claim',
         (WidgetTester tester) async {
-      when(() => salesOrgBlocMock.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
-        ),
-      );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
+          salesOrganisation: fakePHSalesOrganisation,
+          salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
       await tester.pumpWidget(getWidget());
@@ -736,6 +738,12 @@ void main() {
   });
   group('Payment Home Statement of account', () {
     testWidgets('Check statement of account', (WidgetTester tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakePHSalesOrganisation,
+          salesOrgConfigs: fakePHSalesOrgConfigs,
+        ),
+      );
       whenListen(
         downloadPaymentAttachmentsBloc,
         Stream.fromIterable([
@@ -767,6 +775,12 @@ void main() {
 
     testWidgets('Check statement of account downloaded fuke',
         (WidgetTester tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakePHSalesOrganisation,
+          salesOrgConfigs: fakePHSalesOrgConfigs,
+        ),
+      );
       whenListen(
         downloadPaymentAttachmentsBloc,
         Stream.fromIterable([
@@ -839,6 +853,12 @@ void main() {
     });
     testWidgets('account summary navigation', (WidgetTester tester) async {
       await tester.binding.setSurfaceSize(const Size(480, 900));
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakePHSalesOrganisation,
+          salesOrgConfigs: fakePHSalesOrgConfigs,
+        ),
+      );
       when(() => autoRouterMock.pushNamed('payments/statement_accounts'))
           .thenAnswer(
         (_) => Future.value(),
@@ -865,6 +885,12 @@ void main() {
     });
 
     testWidgets('account summary soa List', (WidgetTester tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakePHSalesOrganisation,
+          salesOrgConfigs: fakePHSalesOrgConfigs,
+        ),
+      );
       whenListen(
         soaBloc,
         Stream.fromIterable([

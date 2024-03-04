@@ -272,8 +272,6 @@ class EligibilityState with _$EligibilityState {
   bool get isNotificationSettingsEnable =>
       user.userCanAccessOrderHistory || isPaymentEnabled || isReturnsEnable;
 
-  bool get isSOAApplicable => !isIDMarket;
-
   bool get disableCreateOrder =>
       !user.userCanCreateOrder || shipToInfo.customerBlock.isCustomerBlocked;
 

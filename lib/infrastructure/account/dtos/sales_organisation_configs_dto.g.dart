@@ -89,6 +89,8 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
           ? 0.0
           : const StringToDoubleConverter()
               .fromJson(json['mpMinOrderAmount'] as String),
+      statementOfAccountEnabled:
+          json['statementOfAccountEnabled'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -160,4 +162,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableMarketPlace': instance.enableMarketPlace,
       'mpMinOrderAmount':
           const StringToDoubleConverter().toJson(instance.mpMinOrderAmount),
+      'statementOfAccountEnabled': instance.statementOfAccountEnabled,
     };
