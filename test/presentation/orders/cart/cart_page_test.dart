@@ -1809,7 +1809,7 @@ void main() {
           ),
         );
 
-        final expectedStates = [
+        when(() => orderEligibilityBlocMock.state).thenReturn(
           OrderEligibilityState.initial().copyWith(
             cartItems: [
               PriceAggregate.empty().copyWith(
@@ -1823,26 +1823,12 @@ void main() {
             ),
             showErrorMessage: true,
           ),
-        ];
-
-        whenListen(
-          orderEligibilityBlocMock,
-          Stream.fromIterable(expectedStates),
         );
         await tester.pumpAndSettle();
 
         await tester.pumpWidget(getWidget());
 
         await tester.pump();
-
-        final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
-        expect(checkoutButton, findsOneWidget);
-        await tester.tap(checkoutButton);
-        await tester.pump();
-        verify(
-          () => orderEligibilityBlocMock
-              .add(const OrderEligibilityEvent.validateOrderEligibility()),
-        ).called(1);
 
         final movWarning = find.text(
           'Please ensure that the order value satisfies the minimum order value of MYR 100.00',

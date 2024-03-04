@@ -307,6 +307,12 @@ class OrderEligibilityState with _$OrderEligibilityState {
         (element) => element.showErrorMessageForID,
       );
 
+  bool get isCheckoutDisabled =>
+      isNotAvailableToCheckoutForID ||
+      isCheckoutNotAllowed ||
+      !isMinOrderValuePassed ||
+      !isOOSAllowedIfPresentInCart;
+
   List<bool> get activeErrorsList => [
         displayMovWarning,
         displayInvalidItemsWarning,

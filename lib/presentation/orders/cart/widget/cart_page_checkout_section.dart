@@ -116,8 +116,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
                         key: WidgetKeys.checkoutButton,
                         onPressed: state.isCartDetailsFetching ||
                                 materialPriceState.isFetching ||
-                                orderState.isNotAvailableToCheckoutForID ||
-                                orderState.isCheckoutNotAllowed
+                                orderState.isCheckoutDisabled
                             ? null
                             : () => _onCheckOutPressed(context),
                         child: Text(context.tr('Check out')),

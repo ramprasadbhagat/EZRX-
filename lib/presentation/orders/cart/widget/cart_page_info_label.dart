@@ -23,7 +23,9 @@ class _CartPageInfoLabel extends StatelessWidget {
                     if (state.displayMovWarning) _MOVText(state: state),
                     if (state.displayInvalidItemsWarning)
                       _ErrorText(
-                        text: context.tr('Please remove invalid items.'),
+                        text: context.tr(
+                          'Please remove invalid items.',
+                        ),
                         showLeadingIcon: state.hasMultipleErrors,
                       ),
                     if (state.isNotAvailableToCheckoutForID)

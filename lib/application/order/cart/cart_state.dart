@@ -366,6 +366,7 @@ class CartState with _$CartState {
       isFetchingBonus ||
       isAplProductLoading ||
       isUpdateProductDetermination ||
+      isClearing ||
       isMappingPrice;
 
   List<MaterialInfo> get productsWithCounterOfferPrice => cartProducts
