@@ -179,6 +179,7 @@ void main() {
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late DiscountOverrideBloc discountOverrideBlocMock;
   late List<PriceAggregate> mockCartItemWithDataListOverride;
+  late List<PriceAggregate> mockCartItemOOS;
   late Map<MaterialNumber, Price> mockPriceList;
   late OrderEligibilityBloc orderEligibilityBlocMock;
   late AuthBloc authBlocMock;
@@ -468,6 +469,27 @@ void main() {
           stockInfo: StockInfo.empty().copyWith(
             inStock: MaterialInStock('Yes'),
           ),
+        ),
+      ];
+
+      mockCartItemOOS = [
+        PriceAggregate.empty().copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
+            materialNumber: MaterialNumber('123456789'),
+            stockInfos: <StockInfo>[],
+            quantity: MaterialQty(1),
+            taxClassification: MaterialTaxClassification('Product : Full Tax'),
+          ),
+          stockInfoList: <StockInfo>[
+            StockInfo.empty().copyWith(
+              inStock: MaterialInStock('No'),
+            )
+          ],
+          price: Price.empty().copyWith(
+            finalPrice: MaterialPrice(234.50),
+          ),
+          salesOrgConfig: fakeKHSalesOrgConfigs,
         ),
       ];
       // mockCartItemWithOutBatch = CartItem(
@@ -1260,6 +1282,42 @@ void main() {
           expect(
             (tester.widget(checkoutButton) as ElevatedButton).enabled,
             true,
+          );
+        },
+      );
+
+      testWidgets(
+        'Check out button is disable when allow Materials Out of Stock is OFF and there are OOS items in cart',
+        (tester) async {
+          final cartState = CartState.initial().copyWith(
+            cartProducts: mockCartItemOOS,
+          );
+
+          when(() => cartBloc.state).thenReturn(
+            cartState,
+          );
+
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              configs: SalesOrganisationConfigs.empty().copyWith(
+                addOosMaterials: OosMaterial(false),
+              ),
+              cartItems: cartState.cartProducts,
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final checkoutButton =
+              find.widgetWithText(ElevatedButton, 'Check out');
+          expect(
+            checkoutButton,
+            findsOneWidget,
+          );
+          await tester.pump();
+          expect(
+            (tester.widget(checkoutButton) as ElevatedButton).enabled,
+            false,
           );
         },
       );
