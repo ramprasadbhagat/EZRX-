@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -29,7 +31,10 @@ class PdfViewPage extends StatelessWidget {
               ),
       ),
       body: SafeArea(
-        child: const PDF().fromUrl(
+        child: PDF(
+          pageFling: false,
+          autoSpacing: !Platform.isAndroid,
+        ).fromUrl(
           url,
           placeholder: (double progress) => Align(
             alignment: Alignment.center,
