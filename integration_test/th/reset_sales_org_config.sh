@@ -3,7 +3,7 @@ echo -e "\n"
 echo "Presetting sales org config for TH."
 loginApiResponse=$(curl -s --location 'https://uat-th.ezrx.com/api/license' \
 --header 'Content-Type: application/json' \
---data '{"variables": { "input": { "username": "rootadmin", "password": "Pa55word@1234" } }, "query": "query LoginV4($input: loginV4Input!) { loginV4(input: $input) { eZRxJWT } }"}')
+--data '{"variables": { "input": { "username": "throotadmin", "password": "St@ysafe01" } }, "query": "query LoginV4($input: loginV4Input!) { loginV4(input: $input) { eZRxJWT } }"}')
 response=$(echo $loginApiResponse | sed -e 's/^.*"eZRxJWT":"\([^"]*\)".*$/\1/')
 updateSalesorgconfigMutationReq=$(curl --location 'https://uat-th.ezrx.com/api/license' \
 --header 'Content-Type: application/json' \

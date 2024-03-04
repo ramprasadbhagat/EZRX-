@@ -122,10 +122,10 @@ void main() {
     paymentDetailRobot = PaymentSummaryDetailRobot(tester);
   }
 
-  const username = 'rootadmin';
-  const password = 'Pa55word@1234';
+  const username = 'myrootadmin';
+  const password = 'St@ysafe01';
   const shipToCode = '0070149863';
-  const proxyUserName = 'testextsalesrep';
+  const proxyUserName = 'myexternalsalesrep';
   const marketMalaysia = 'Malaysia';
   const customerCode = '0030082707';
   const shipToAddress = 'RSD HOSPITALS SDN BHD (SJMC)';

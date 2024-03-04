@@ -143,8 +143,8 @@ void main() {
   }
 
   const market = 'Philippines';
-  const username = 'auto_client_user';
-  const password = 'Pa55word@1234';
+  const username = 'phclientuser';
+  const password = 'St@ysafe01';
   const salesOrg = '2500';
   const customerCode = '0030013148';
   const shipToCode = '0070015858';

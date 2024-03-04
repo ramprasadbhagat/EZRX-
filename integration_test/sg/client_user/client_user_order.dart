@@ -124,8 +124,8 @@ void main() {
   }
 
   const market = 'Singapore';
-  const username = 'auto_client_user';
-  const password = 'Pa55word@1234';
+  const username = 'sgclientuser';
+  const password = 'St@ysafe01';
   const customerCode = '0030031507';
   const shipToCode = '0070042061';
   const shipToAddress = 'Order for Mon and Mon Plastic Surgery';

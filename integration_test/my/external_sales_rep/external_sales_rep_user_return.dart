@@ -47,9 +47,9 @@ void main() {
 
   // initialize variables
   const marketMalaysia = 'Malaysia';
-  const username = 'rootadmin';
-  const password = 'Pa55word@1234';
-  const proxyUserName = 'testextsalesrep';
+  const username = 'myrootadmin';
+  const password = 'St@ysafe01';
+  const proxyUserName = 'myexternalsalesrep';
   const shipToCode = '0070149863';
   const shipToAddress = 'RSD HOSPITALS SDN BHD (SJMC)';
   const customerCode = '0030082707';

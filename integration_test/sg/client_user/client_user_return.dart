@@ -44,8 +44,8 @@ void main() {
 
   // initialize variables
   const market = 'Singapore';
-  const username = 'auto_client_user';
-  const password = 'Pa55word@1234';
+  const username = 'sgclientuser';
+  const password = 'St@ysafe01';
   const customerCode = '0030032324';
   const shipToCode = '0070042789';
   const shipToAddress = 'Cambridge Clinic - Dr Ng Khin Seng';

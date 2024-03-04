@@ -47,9 +47,9 @@ void main() {
 
   // initialize variables
   const marketSingapore = 'Philippines';
-  const username = 'rootadmin';
-  const password = 'Pa55word@1234';
-  const proxyUserName = 'testextsalesrep';
+  const username = 'phrootadmin';
+  const password = 'St@ysafe01';
+  const proxyUserName = 'phexternalsalesrep';
   const customerCode = '0000100296';
   const shipToCode = '0070023239';
   const shipToAddress = 'PASCUAL ANALGESIC';
