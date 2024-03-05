@@ -67,7 +67,7 @@ class _AttachmentsWithIcon extends StatelessWidget {
               ErrorUtils.handleApiFailure(context, failure);
             },
             (_) => CustomSnackBar(
-              messageText: 'Attachments downloaded successfully.',
+              messageText: context.tr('Attachments downloaded successfully.'),
             ).show(context),
           ),
         );

@@ -17,12 +17,12 @@ class _PaymentAdviceButton extends StatelessWidget {
             final eligibilityState = context.read<EligibilityBloc>().state;
             if (!state.isSavingAdvice && !eligibilityState.salesOrg.isID) {
               CustomSnackBar(
-                messageText: 'Download Successful',
+                messageText: context.tr('Download Successful'),
               ).show(context);
             }
             if (!state.isCancelingAdvice && eligibilityState.salesOrg.isID) {
               CustomSnackBar(
-                messageText: 'Payment cancel successfully',
+                messageText: context.tr('Payment cancel successfully'),
               ).show(context);
               context.read<PaymentSummaryDetailsBloc>().add(
                     PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(

@@ -884,7 +884,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             final noAccessSnackbar = CustomSnackBar(
               icon: const Icon(Icons.info, color: ZPColors.error),
               backgroundColor: ZPColors.errorSnackBarColor,
-              messageText: "You don't have access",
+              messageText: context.tr("You don't have access"),
             );
 
             state.when(
@@ -1269,9 +1269,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   void _welcomeUserMessage(UserState userState) {
     if (userState.user.username.isValid()) {
       final welcomeMessage =
-          '${'Welcome back'.tr()}, ${userState.user.username.getOrCrash()}';
+          '${context.tr('Welcome back')}, ${userState.user.username.getOrCrash()}';
       final loginOnBehalfMessage =
-          '${'Logged in on behalf of'.tr()} ${userState.user.username.getOrCrash()}.';
+          '${context.tr('Logged in on behalf of')} ${userState.user.username.getOrCrash()}.';
       final message =
           userState.isLoginOnBehalf ? loginOnBehalfMessage : welcomeMessage;
       context

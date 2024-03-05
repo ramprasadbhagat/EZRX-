@@ -98,7 +98,7 @@ class OrderSuccessPage extends StatelessWidget {
                   );
               _trackOrderSuccess(context, state);
               CustomSnackBar(
-                messageText: 'Order submitted'.tr(),
+                messageText: context.tr('Order submitted'),
               ).show(context);
               context.read<CartBloc>().add(const CartEvent.clearCart());
             }

@@ -51,7 +51,7 @@ class _Export extends StatelessWidget {
               ErrorUtils.handleApiFailure(context, failure);
             },
             (_) => CustomSnackBar(
-              messageText: 'File downloaded successfully',
+              messageText: context.tr('File downloaded successfully'),
             ).show(context),
           ),
         );

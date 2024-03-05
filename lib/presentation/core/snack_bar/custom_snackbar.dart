@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/overlay_router.dart' as route;
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -126,7 +125,7 @@ class _ActualSnackbar extends StatelessWidget {
                         bottom: 10,
                       ),
                       child: Text(
-                        context.tr(messageText),
+                        messageText,
                         key: WidgetKeys.customSnackBarMessage,
                         style: textStyle ??
                             Theme.of(context).textTheme.titleMedium?.copyWith(

@@ -21,7 +21,7 @@ class PaymentSavePdfButton extends StatelessWidget {
         if (!state.isSavingInvoicePdf) {
           state.failureOrSuccessOption.fold(
             () => CustomSnackBar(
-              messageText: 'Download Successful',
+              messageText: context.tr('Download Successful'),
             ).show(context),
             (option) => option.fold(
               (failure) => ErrorUtils.handleApiFailure(context, failure),

@@ -61,7 +61,7 @@ class BonusItemsSheet extends StatelessWidget {
                     );
 
                 CustomSnackBar(
-                  messageText: 'Bonus/sample added to cart'.tr(),
+                  messageText: context.tr('Bonus/sample added to cart'),
                 ).show(context);
                 context.read<CartBloc>().add(
                       CartEvent.getDetailsProductsAddedToCart(

@@ -78,7 +78,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
                   if (state.isCovidForNonCustomer) {
                     CustomSnackBar(
                       key: WidgetKeys.canNotReOrderThisOrderToast,
-                      messageText: 'You can’t re-order this order',
+                      messageText: context.tr('You can’t re-order this order'),
                     ).show(context);
                   }
                 },

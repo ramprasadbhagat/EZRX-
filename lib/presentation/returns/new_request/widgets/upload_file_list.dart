@@ -49,7 +49,7 @@ class UploadedFileList extends StatelessWidget {
                             ErrorUtils.handleApiFailure(context, failure),
                         (success) => CustomSnackBar(
                           messageText:
-                              'Attachments downloaded successfully.'.tr(),
+                              context.tr('Attachments downloaded successfully.'),
                         ).show(context),
                       ),
                     ),

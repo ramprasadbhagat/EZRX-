@@ -23,7 +23,7 @@ class _Footer extends StatelessWidget {
           listenWhen: (previous, current) =>
               previous.user.preferredLanguage != current.user.preferredLanguage,
           listener: (context, state) => CustomSnackBar(
-            messageText: 'Language changed successfully',
+            messageText: context.tr('Language changed successfully'),
           ).show(context),
           buildWhen: (previous, current) =>
               previous.user.preferredLanguage !=

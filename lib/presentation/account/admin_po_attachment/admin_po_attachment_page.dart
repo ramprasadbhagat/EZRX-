@@ -94,7 +94,7 @@ class AdminPoAttachmentPage extends StatelessWidget {
                     if (state.isDownloadOperation) {
                       CustomSnackBar(
                         messageText:
-                            'Attachments downloaded successfully.'.tr(),
+                            context.tr('Attachments downloaded successfully.'),
                       ).show(context);
                     }
                   },

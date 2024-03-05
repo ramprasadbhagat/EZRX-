@@ -30,7 +30,7 @@ class _UploadAttachmentSection extends StatelessWidget {
                     ),
                   );
               CustomSnackBar(
-                messageText: 'File uploaded successfully'.tr(),
+                messageText: context.tr('File uploaded successfully'),
               ).show(context);
             },
           ),

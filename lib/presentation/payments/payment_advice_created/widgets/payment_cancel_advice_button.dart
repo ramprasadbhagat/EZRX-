@@ -26,7 +26,7 @@ class _PaymentCancelAdviceButton extends StatelessWidget {
           () {
             Navigator.pop(context);
             CustomSnackBar(
-              messageText: 'Payment cancel successfully',
+              messageText: context.tr('Payment cancel successfully'),
             ).show(context);
           },
           (option) => option.fold(

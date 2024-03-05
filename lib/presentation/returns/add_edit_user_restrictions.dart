@@ -52,7 +52,7 @@ class AddEditUserRestrictionPage extends StatelessWidget {
                         color: ZPColors.error,
                       ),
                       backgroundColor: ZPColors.errorSnackBarColor,
-                      messageText: 'No New Records Added'.tr(),
+                      messageText: context.tr('No New Records Added'),
                     ).show(context);
 
                     return;
@@ -262,7 +262,7 @@ class _AddDeleteButton extends StatelessWidget {
           color: ZPColors.error,
         ),
         backgroundColor: ZPColors.errorSnackBarColor,
-        messageText: 'User Restriction Not Added'.tr(),
+        messageText: context.tr('User Restriction Not Added'),
       ).show(context);
 
       return;

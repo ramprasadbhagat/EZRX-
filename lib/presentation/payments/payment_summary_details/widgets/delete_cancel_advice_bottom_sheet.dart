@@ -148,7 +148,7 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
               }
 
               CustomSnackBar(
-                messageText: state.adviceDeletedMessage,
+                messageText: context.tr(state.adviceDeletedMessage),
               ).show(context);
             }
           },

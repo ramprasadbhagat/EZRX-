@@ -19,7 +19,7 @@ class _AccountStatement extends StatelessWidget {
             },
             (_) {
               CustomSnackBar(
-                messageText: 'File downloaded successfully',
+                messageText: context.tr('File downloaded successfully'),
               ).show(context);
             },
           ),

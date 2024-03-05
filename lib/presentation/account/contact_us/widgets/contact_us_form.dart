@@ -16,13 +16,13 @@ class _ContactUsForm extends StatelessWidget {
               await context.router.pop().then(
                     (value) => CustomSnackBar(
                       key: WidgetKeys.messageReceivedKey,
-                      messageText: 'Message has been received.',
+                      messageText: context.tr('Message has been received.'),
                     ).show(context),
                   );
             } else {
               await CustomSnackBar(
                 key: WidgetKeys.messageNotReceivedKey,
-                messageText: 'Message has not been received.',
+                messageText: context.tr('Message has not been received.'),
                 backgroundColor: ZPColors.error,
                 icon: const Icon(
                   Icons.error_outline,

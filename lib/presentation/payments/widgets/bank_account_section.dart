@@ -123,7 +123,7 @@ class _BankAccountInfoRow extends StatelessWidget {
                             Clipboard.setData(ClipboardData(text: text))
                                 .whenComplete(
                           () => CustomSnackBar(
-                            messageText: 'Copied',
+                            messageText: context.tr('Copied'),
                           ).show(context),
                         ),
                         child: const Padding(

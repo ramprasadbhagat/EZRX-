@@ -103,7 +103,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   }
 
   void _showSnackbar(BuildContext context) => CustomSnackBar(
-        messageText: 'Please enter at least 2 characters.'.tr(),
+        messageText: context.tr('Please enter at least 2 characters.'),
       ).show(context);
 
   void _onSearch(
