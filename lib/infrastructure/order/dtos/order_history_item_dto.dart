@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
@@ -62,7 +63,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'HidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'referenceNotes', defaultValue: '')
         required String referenceNotes,
-    @JsonKey(name: 'isMarketPlace', defaultValue: false)
+    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
         required bool isMarketPlace,
   }) = _OrderHistoryItemDto;
 

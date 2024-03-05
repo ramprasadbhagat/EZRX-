@@ -32,6 +32,7 @@ class CommonTileItem extends StatelessWidget {
     this.showBundleTag = false,
     this.topHeaderWidget,
     this.labelTrailing,
+    this.labelLeading,
   }) : super(key: key);
 
   final String label;
@@ -53,6 +54,7 @@ class CommonTileItem extends StatelessWidget {
   final VoidCallback? onTap;
   final Widget? topHeaderWidget;
   final Widget? labelTrailing;
+  final Widget? labelLeading;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +90,7 @@ class CommonTileItem extends StatelessWidget {
                       children: [
                         Row(
                           children: [
+                            if (labelLeading != null) labelLeading!,
                             Flexible(
                               child: Text(
                                 label,
@@ -99,9 +102,7 @@ class CommonTileItem extends StatelessWidget {
                                 statusTag!
                                     .getOrDefaultValue('')
                                     .isNotEmpty) ...[
-                              const SizedBox(
-                                width: 5,
-                              ),
+                              const SizedBox(width: 5),
                               StatusLabel(
                                 key: WidgetKeys.commonTileItemStatusLabel,
                                 status: statusTag!,

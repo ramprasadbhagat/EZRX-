@@ -171,6 +171,8 @@ class OrderHistoryItem with _$OrderHistoryItem {
 
   double get taxPercentage =>
       unitPrice == 0 ? 0 : (tax * 100 / unitPrice).roundToDouble();
+
+  String get manufacturerPrefix => isMarketPlace ? 'Sold by' : '';
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {

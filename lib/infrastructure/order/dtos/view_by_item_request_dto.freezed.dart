@@ -44,6 +44,8 @@ mixin _$ViewByItemRequestDto {
   String get dateFrom => throw _privateConstructorUsedError;
   @JsonKey(name: 'isOptimised', defaultValue: true)
   bool get isOptimised => throw _privateConstructorUsedError;
+  @JsonKey(name: 'orderType', includeIfNull: false)
+  int? get orderType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -71,7 +73,8 @@ abstract class $ViewByItemRequestDtoCopyWith<$Res> {
       List<String> orderStatus,
       @JsonKey(name: 'toDate', defaultValue: '') String dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '') String dateFrom,
-      @JsonKey(name: 'isOptimised', defaultValue: true) bool isOptimised});
+      @JsonKey(name: 'isOptimised', defaultValue: true) bool isOptimised,
+      @JsonKey(name: 'orderType', includeIfNull: false) int? orderType});
 }
 
 /// @nodoc
@@ -100,6 +103,7 @@ class _$ViewByItemRequestDtoCopyWithImpl<$Res,
     Object? dateTo = null,
     Object? dateFrom = null,
     Object? isOptimised = null,
+    Object? orderType = freezed,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -150,6 +154,10 @@ class _$ViewByItemRequestDtoCopyWithImpl<$Res,
           ? _value.isOptimised
           : isOptimised // ignore: cast_nullable_to_non_nullable
               as bool,
+      orderType: freezed == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -176,7 +184,8 @@ abstract class _$$_ViewByItemRequestDtoCopyWith<$Res>
       List<String> orderStatus,
       @JsonKey(name: 'toDate', defaultValue: '') String dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '') String dateFrom,
-      @JsonKey(name: 'isOptimised', defaultValue: true) bool isOptimised});
+      @JsonKey(name: 'isOptimised', defaultValue: true) bool isOptimised,
+      @JsonKey(name: 'orderType', includeIfNull: false) int? orderType});
 }
 
 /// @nodoc
@@ -202,6 +211,7 @@ class __$$_ViewByItemRequestDtoCopyWithImpl<$Res>
     Object? dateTo = null,
     Object? dateFrom = null,
     Object? isOptimised = null,
+    Object? orderType = freezed,
   }) {
     return _then(_$_ViewByItemRequestDto(
       salesOrg: null == salesOrg
@@ -252,6 +262,10 @@ class __$$_ViewByItemRequestDtoCopyWithImpl<$Res>
           ? _value.isOptimised
           : isOptimised // ignore: cast_nullable_to_non_nullable
               as bool,
+      orderType: freezed == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -275,7 +289,8 @@ class _$_ViewByItemRequestDto extends _ViewByItemRequestDto {
       @JsonKey(name: 'toDate', defaultValue: '') required this.dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '') required this.dateFrom,
       @JsonKey(name: 'isOptimised', defaultValue: true)
-      required this.isOptimised})
+      required this.isOptimised,
+      @JsonKey(name: 'orderType', includeIfNull: false) this.orderType})
       : _salesOrg = salesOrg,
         _shipTo = shipTo,
         _orderStatus = orderStatus,
@@ -338,10 +353,13 @@ class _$_ViewByItemRequestDto extends _ViewByItemRequestDto {
   @override
   @JsonKey(name: 'isOptimised', defaultValue: true)
   final bool isOptimised;
+  @override
+  @JsonKey(name: 'orderType', includeIfNull: false)
+  final int? orderType;
 
   @override
   String toString() {
-    return 'ViewByItemRequestDto(salesOrg: $salesOrg, soldTo: $soldTo, shipTo: $shipTo, pageSize: $pageSize, offset: $offset, language: $language, searchKey: $searchKey, orderNumber: $orderNumber, orderStatus: $orderStatus, dateTo: $dateTo, dateFrom: $dateFrom, isOptimised: $isOptimised)';
+    return 'ViewByItemRequestDto(salesOrg: $salesOrg, soldTo: $soldTo, shipTo: $shipTo, pageSize: $pageSize, offset: $offset, language: $language, searchKey: $searchKey, orderNumber: $orderNumber, orderStatus: $orderStatus, dateTo: $dateTo, dateFrom: $dateFrom, isOptimised: $isOptimised, orderType: $orderType)';
   }
 
   @override
@@ -367,7 +385,9 @@ class _$_ViewByItemRequestDto extends _ViewByItemRequestDto {
             (identical(other.dateFrom, dateFrom) ||
                 other.dateFrom == dateFrom) &&
             (identical(other.isOptimised, isOptimised) ||
-                other.isOptimised == isOptimised));
+                other.isOptimised == isOptimised) &&
+            (identical(other.orderType, orderType) ||
+                other.orderType == orderType));
   }
 
   @JsonKey(ignore: true)
@@ -385,7 +405,8 @@ class _$_ViewByItemRequestDto extends _ViewByItemRequestDto {
       const DeepCollectionEquality().hash(_orderStatus),
       dateTo,
       dateFrom,
-      isOptimised);
+      isOptimised,
+      orderType);
 
   @JsonKey(ignore: true)
   @override
@@ -423,7 +444,9 @@ abstract class _ViewByItemRequestDto extends ViewByItemRequestDto {
       @JsonKey(name: 'fromDate', defaultValue: '')
       required final String dateFrom,
       @JsonKey(name: 'isOptimised', defaultValue: true)
-      required final bool isOptimised}) = _$_ViewByItemRequestDto;
+      required final bool isOptimised,
+      @JsonKey(name: 'orderType', includeIfNull: false)
+      final int? orderType}) = _$_ViewByItemRequestDto;
   const _ViewByItemRequestDto._() : super._();
 
   factory _ViewByItemRequestDto.fromJson(Map<String, dynamic> json) =
@@ -465,6 +488,9 @@ abstract class _ViewByItemRequestDto extends ViewByItemRequestDto {
   @override
   @JsonKey(name: 'isOptimised', defaultValue: true)
   bool get isOptimised;
+  @override
+  @JsonKey(name: 'orderType', includeIfNull: false)
+  int? get orderType;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByItemRequestDtoCopyWith<_$_ViewByItemRequestDto> get copyWith =>

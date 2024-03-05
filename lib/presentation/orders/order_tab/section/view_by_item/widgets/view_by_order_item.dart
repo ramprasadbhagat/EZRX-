@@ -38,12 +38,20 @@ class _ViewByOrderItem extends StatelessWidget {
       },
       child: CommonTileItem(
         key: WidgetKeys.viewByItemsOrderItemKey,
+        labelLeading: orderHistoryItem.isMarketPlace
+            ? Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: MarketPlaceLogo.small(),
+              )
+            : null,
         label: orderHistoryItem.combinationCode(
           showGMCPart: salesOrgConfigs.enableGMC,
         ),
         title: orderHistoryItem.materialDescription,
-        subtitle:
-            orderHistoryItem.principalData.principalName.getOrDefaultValue(''),
+        subtitle: (orderHistoryItem.manufacturerPrefix.isNotEmpty
+                ? '${context.tr(orderHistoryItem.manufacturerPrefix)}: '
+                : '') +
+            orderHistoryItem.principalData.principalName.name,
         isCovidItem: (salesOrgConfigs.salesOrg.isPH &&
                 orderHistoryItem.orderType.isCovidOrderTypeForPH) ||
             (salesOrgConfigs.salesOrg.isSg &&

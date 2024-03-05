@@ -1,15 +1,14 @@
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-
-part 'view_by_item_filter_event.dart';
-
-part 'view_by_item_filter_state.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 part 'view_by_item_filter_bloc.freezed.dart';
+part 'view_by_item_filter_event.dart';
+part 'view_by_item_filter_state.dart';
 
 class ViewByItemFilterBloc
     extends Bloc<ViewByItemFilterEvent, ViewByItemFilterState> {
@@ -17,15 +16,15 @@ class ViewByItemFilterBloc
     on<ViewByItemFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     ViewByItemFilterEvent event,
     Emitter<ViewByItemFilterState> emit,
-  ) async {
-    await event.map(
-      initialize: (e) async => emit(
+  ) {
+    event.map(
+      initialize: (e) => emit(
         ViewByItemFilterState.initial(),
       ),
-      setOrderDate: (e) async => emit(
+      setOrderDate: (e) => emit(
         state.copyWith(
           filter: state.filter.copyWith(
             orderDateFrom: DateTimeStringValue(
@@ -50,12 +49,15 @@ class ViewByItemFilterBloc
           ),
         );
       },
-      resetFiltersToLastApplied: (e) async => emit(
+      setOrderHistoryType: (e) => emit(
+        state.copyWith.filter(orderHistoryType: e.type),
+      ),
+      resetFiltersToLastApplied: (e) => emit(
         state.copyWith(
           filter: e.lastAppliedFilter,
         ),
       ),
-      resetFilter: (e) async => emit(
+      resetFilter: (e) => emit(
         ViewByItemFilterState.initial().copyWith(
           filter: ViewByItemFilter.empty(),
         ),

@@ -23,6 +23,7 @@ mixin _$ViewByItemFilterEvent {
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
     required TResult Function() resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -33,6 +34,7 @@ mixin _$ViewByItemFilterEvent {
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
     TResult? Function()? resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +45,7 @@ mixin _$ViewByItemFilterEvent {
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) =>
@@ -54,6 +57,7 @@ mixin _$ViewByItemFilterEvent {
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
     required TResult Function(_ResetFilter value) resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +68,7 @@ mixin _$ViewByItemFilterEvent {
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult? Function(_ResetFilter value)? resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,6 +79,7 @@ mixin _$ViewByItemFilterEvent {
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) =>
@@ -142,6 +148,7 @@ class _$_Initialized implements _Initialized {
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
     required TResult Function() resetFilter,
   }) {
     return initialize();
@@ -155,6 +162,7 @@ class _$_Initialized implements _Initialized {
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
     TResult? Function()? resetFilter,
   }) {
     return initialize?.call();
@@ -168,6 +176,7 @@ class _$_Initialized implements _Initialized {
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -185,6 +194,7 @@ class _$_Initialized implements _Initialized {
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
     required TResult Function(_ResetFilter value) resetFilter,
   }) {
     return initialize(this);
@@ -198,6 +208,7 @@ class _$_Initialized implements _Initialized {
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult? Function(_ResetFilter value)? resetFilter,
   }) {
     return initialize?.call(this);
@@ -211,6 +222,7 @@ class _$_Initialized implements _Initialized {
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -309,6 +321,7 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
     required TResult Function() resetFilter,
   }) {
     return resetFiltersToLastApplied(lastAppliedFilter);
@@ -322,6 +335,7 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
     TResult? Function()? resetFilter,
   }) {
     return resetFiltersToLastApplied?.call(lastAppliedFilter);
@@ -335,6 +349,7 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -352,6 +367,7 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
     required TResult Function(_ResetFilter value) resetFilter,
   }) {
     return resetFiltersToLastApplied(this);
@@ -365,6 +381,7 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult? Function(_ResetFilter value)? resetFilter,
   }) {
     return resetFiltersToLastApplied?.call(this);
@@ -378,6 +395,7 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -469,6 +487,7 @@ class _$_SetOrderDate implements _SetOrderDate {
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
     required TResult Function() resetFilter,
   }) {
     return setOrderDate(dateRange);
@@ -482,6 +501,7 @@ class _$_SetOrderDate implements _SetOrderDate {
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
     TResult? Function()? resetFilter,
   }) {
     return setOrderDate?.call(dateRange);
@@ -495,6 +515,7 @@ class _$_SetOrderDate implements _SetOrderDate {
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -512,6 +533,7 @@ class _$_SetOrderDate implements _SetOrderDate {
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
     required TResult Function(_ResetFilter value) resetFilter,
   }) {
     return setOrderDate(this);
@@ -525,6 +547,7 @@ class _$_SetOrderDate implements _SetOrderDate {
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult? Function(_ResetFilter value)? resetFilter,
   }) {
     return setOrderDate?.call(this);
@@ -538,6 +561,7 @@ class _$_SetOrderDate implements _SetOrderDate {
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -635,6 +659,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
     required TResult Function() resetFilter,
   }) {
     return setOrderStatus(status, value);
@@ -648,6 +673,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
     TResult? Function()? resetFilter,
   }) {
     return setOrderStatus?.call(status, value);
@@ -661,6 +687,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -678,6 +705,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
     required TResult Function(_ResetFilter value) resetFilter,
   }) {
     return setOrderStatus(this);
@@ -691,6 +719,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult? Function(_ResetFilter value)? resetFilter,
   }) {
     return setOrderStatus?.call(this);
@@ -704,6 +733,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -723,6 +753,171 @@ abstract class _SetOrderStatus implements ViewByItemFilterEvent {
   bool get value;
   @JsonKey(ignore: true)
   _$$_SetOrderStatusCopyWith<_$_SetOrderStatus> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SetOrderHistoryTypeCopyWith<$Res> {
+  factory _$$_SetOrderHistoryTypeCopyWith(_$_SetOrderHistoryType value,
+          $Res Function(_$_SetOrderHistoryType) then) =
+      __$$_SetOrderHistoryTypeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({OrderHistoryType type});
+}
+
+/// @nodoc
+class __$$_SetOrderHistoryTypeCopyWithImpl<$Res>
+    extends _$ViewByItemFilterEventCopyWithImpl<$Res, _$_SetOrderHistoryType>
+    implements _$$_SetOrderHistoryTypeCopyWith<$Res> {
+  __$$_SetOrderHistoryTypeCopyWithImpl(_$_SetOrderHistoryType _value,
+      $Res Function(_$_SetOrderHistoryType) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+  }) {
+    return _then(_$_SetOrderHistoryType(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as OrderHistoryType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetOrderHistoryType implements _SetOrderHistoryType {
+  const _$_SetOrderHistoryType({required this.type});
+
+  @override
+  final OrderHistoryType type;
+
+  @override
+  String toString() {
+    return 'ViewByItemFilterEvent.setOrderHistoryType(type: $type)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetOrderHistoryType &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetOrderHistoryTypeCopyWith<_$_SetOrderHistoryType> get copyWith =>
+      __$$_SetOrderHistoryTypeCopyWithImpl<_$_SetOrderHistoryType>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(ViewByItemFilter lastAppliedFilter)
+        resetFiltersToLastApplied,
+    required TResult Function(DateTimeRange dateRange) setOrderDate,
+    required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
+    required TResult Function() resetFilter,
+  }) {
+    return setOrderHistoryType(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(ViewByItemFilter lastAppliedFilter)?
+        resetFiltersToLastApplied,
+    TResult? Function(DateTimeRange dateRange)? setOrderDate,
+    TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult? Function()? resetFilter,
+  }) {
+    return setOrderHistoryType?.call(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(ViewByItemFilter lastAppliedFilter)?
+        resetFiltersToLastApplied,
+    TResult Function(DateTimeRange dateRange)? setOrderDate,
+    TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult Function()? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (setOrderHistoryType != null) {
+      return setOrderHistoryType(type);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialize,
+    required TResult Function(_ResetFiltersToLastApplied value)
+        resetFiltersToLastApplied,
+    required TResult Function(_SetOrderDate value) setOrderDate,
+    required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
+    required TResult Function(_ResetFilter value) resetFilter,
+  }) {
+    return setOrderHistoryType(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialize,
+    TResult? Function(_ResetFiltersToLastApplied value)?
+        resetFiltersToLastApplied,
+    TResult? Function(_SetOrderDate value)? setOrderDate,
+    TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
+    TResult? Function(_ResetFilter value)? resetFilter,
+  }) {
+    return setOrderHistoryType?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialize,
+    TResult Function(_ResetFiltersToLastApplied value)?
+        resetFiltersToLastApplied,
+    TResult Function(_SetOrderDate value)? setOrderDate,
+    TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
+    TResult Function(_ResetFilter value)? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (setOrderHistoryType != null) {
+      return setOrderHistoryType(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetOrderHistoryType implements ViewByItemFilterEvent {
+  const factory _SetOrderHistoryType({required final OrderHistoryType type}) =
+      _$_SetOrderHistoryType;
+
+  OrderHistoryType get type;
+  @JsonKey(ignore: true)
+  _$$_SetOrderHistoryTypeCopyWith<_$_SetOrderHistoryType> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -769,6 +964,7 @@ class _$_ResetFilter implements _ResetFilter {
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
     required TResult Function() resetFilter,
   }) {
     return resetFilter();
@@ -782,6 +978,7 @@ class _$_ResetFilter implements _ResetFilter {
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
     TResult? Function()? resetFilter,
   }) {
     return resetFilter?.call();
@@ -795,6 +992,7 @@ class _$_ResetFilter implements _ResetFilter {
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -812,6 +1010,7 @@ class _$_ResetFilter implements _ResetFilter {
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
     required TResult Function(_ResetFilter value) resetFilter,
   }) {
     return resetFilter(this);
@@ -825,6 +1024,7 @@ class _$_ResetFilter implements _ResetFilter {
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult? Function(_ResetFilter value)? resetFilter,
   }) {
     return resetFilter?.call(this);
@@ -838,6 +1038,7 @@ class _$_ResetFilter implements _ResetFilter {
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) {

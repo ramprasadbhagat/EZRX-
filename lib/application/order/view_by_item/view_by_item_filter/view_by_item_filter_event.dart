@@ -13,5 +13,8 @@ class ViewByItemFilterEvent with _$ViewByItemFilterEvent {
     required StatusType status,
     required bool value,
   }) = _SetOrderStatus;
+  const factory ViewByItemFilterEvent.setOrderHistoryType({
+    required OrderHistoryType type,
+  }) = _SetOrderHistoryType;
   const factory ViewByItemFilterEvent.resetFilter() = _ResetFilter;
 }

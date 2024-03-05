@@ -21,8 +21,8 @@ class MarketPlaceLogo extends StatelessWidget {
 
   factory MarketPlaceLogo.small() {
     return const MarketPlaceLogo(
-      width: 20,
-      height: 20,
+      width: 18,
+      height: 18,
     );
   }
 }

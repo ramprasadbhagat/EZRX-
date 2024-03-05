@@ -125,9 +125,11 @@ DialogTheme _dialogTheme() {
 }
 
 BottomSheetThemeData _bottomSheetTheme() {
-  return BottomSheetThemeData(
+  return const BottomSheetThemeData(
     backgroundColor: ZPColors.white,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    ),
   );
 }
 

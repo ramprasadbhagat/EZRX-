@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +16,9 @@ part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filt
 part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/widgets/view_by_item_filter_date_range_picker.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/widgets/view_by_item_filter_reset_button.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/widgets/view_by_item_filter_status_picker.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/widgets/view_by_item_filter_type_picker.dart';
+
+const _defaultPadding = EdgeInsets.symmetric(horizontal: 15);
 
 class ViewByItemFilterSheet extends StatelessWidget {
   const ViewByItemFilterSheet({
@@ -24,44 +29,95 @@ class ViewByItemFilterSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           const _ViewByItemFilterAppBar(),
-          ListTile(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  context.tr('Order date'),
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
+          const Flexible(
+            child: _FilterList(),
+          ),
+          const Divider(
+            height: 32,
+            endIndent: 0,
+            indent: 0,
+            color: ZPColors.lightGrey,
+          ),
+          Padding(
+            padding: _defaultPadding,
+            child: Row(
+              children: const [
+                Expanded(
+                  child: _ViewByItemFilterResetButton(),
                 ),
-                const SizedBox(height: 12),
-                const _ViewByItemFilterDateRangePicker(),
-                const SizedBox(height: 20),
-                Text(
-                  context.tr('Status'),
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-                const SizedBox(height: 12),
-                const _ViewByItemFilterStatusPicker(),
-                const SizedBox(height: 20),
-                Row(
-                  children: const [
-                    Expanded(
-                      child: _ViewByItemFilterResetButton(),
-                    ),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: _ViewByItemFilterApplyButton(),
-                    ),
-                  ],
+                SizedBox(width: 12),
+                Expanded(
+                  child: _ViewByItemFilterApplyButton(),
                 ),
               ],
             ),
           ),
+          const SizedBox(height: 16),
         ],
+      ),
+    );
+  }
+}
+
+class _FilterList extends StatelessWidget {
+  const _FilterList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scrollbar(
+      thumbVisibility: true,
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          const SizedBox(height: 12),
+          if (context.read<EligibilityBloc>().state.marketPlaceEligible) ...[
+            const _FilterSectionLabel('Show history'),
+            const SizedBox(height: 12),
+            Padding(
+              padding: _defaultPadding
+                  .subtract(const EdgeInsets.symmetric(horizontal: 3)),
+              child: const _ViewByItemFilterHistoryTypePicker(),
+            ),
+            const SizedBox(height: 20),
+          ],
+          const _FilterSectionLabel('Order date'),
+          const SizedBox(height: 12),
+          const Padding(
+            padding: _defaultPadding,
+            child: _ViewByItemFilterDateRangePicker(),
+          ),
+          const SizedBox(height: 20),
+          const _FilterSectionLabel('Status'),
+          const SizedBox(height: 12),
+          const Padding(
+            padding: _defaultPadding,
+            child: _ViewByItemFilterStatusPicker(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FilterSectionLabel extends StatelessWidget {
+  final String text;
+  const _FilterSectionLabel(this.text, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: _defaultPadding,
+      child: Text(
+        context.tr(text),
+        style: Theme.of(context).textTheme.labelMedium?.copyWith(
+              color: ZPColors.neutralsBlack,
+            ),
       ),
     );
   }

@@ -85,7 +85,7 @@ mixin _$OrderHistoryItemDto {
   bool get hidePrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNotes', defaultValue: '')
   String get referenceNotes => throw _privateConstructorUsedError;
-  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -141,7 +141,8 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false) bool isMarketPlace});
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -377,7 +378,8 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
       @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false) bool isMarketPlace});
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -613,7 +615,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       @JsonKey(name: 'HidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
       required this.referenceNotes,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false)
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       required this.isMarketPlace})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
@@ -725,7 +727,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @JsonKey(name: 'referenceNotes', defaultValue: '')
   final String referenceNotes;
   @override
-  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -917,7 +919,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       required final bool hidePrice,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
       required final String referenceNotes,
-      @JsonKey(name: 'isMarketPlace', defaultValue: false)
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$_OrderHistoryItemDto;
   const _OrderHistoryItemDto._() : super._();
 
@@ -1021,7 +1023,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(name: 'referenceNotes', defaultValue: '')
   String get referenceNotes;
   @override
-  @JsonKey(name: 'isMarketPlace', defaultValue: false)
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)

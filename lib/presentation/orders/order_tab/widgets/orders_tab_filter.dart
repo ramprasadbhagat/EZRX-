@@ -91,12 +91,9 @@ class _FilterElement extends StatelessWidget {
       isScrollControlled: true,
       enableDrag: false,
       isDismissible: false,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(16),
-        ),
-      ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
+      constraints:
+          BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.88),
       builder: (_) {
         return viewByItem
             ? const ViewByItemFilterSheet()

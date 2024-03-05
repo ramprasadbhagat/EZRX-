@@ -1,7 +1,23 @@
 class ViewByItemQueryMutation {
   String getViewByItem(bool enableMarketplace) {
     return '''
-     query orderHistoryFetchByItems(\$soldTo: String!, \$fromDate: String, \$toDate: String, \$shipTo: [String], \$first: Int, \$after: Int, \$language: String, \$orderStatus: [String!], \$searchKey: String, \$salesOrg: [String], \$filterBlockCustomer: Boolean, \$materialSearch: String, \$orderNumber: String, \$isOptimised: Boolean,) {
+     query orderHistoryFetchByItems(
+        \$soldTo: String!,
+        \$fromDate: String,
+        \$toDate: String, 
+        \$shipTo: [String], 
+        \$first: Int, 
+        \$after: Int, 
+        \$language: String, 
+        \$orderStatus: [String!], 
+        \$searchKey: String, 
+        \$salesOrg: [String], 
+        \$filterBlockCustomer: Boolean, 
+        \$materialSearch: String, 
+        \$orderNumber: String, 
+        \$isOptimised: Boolean, 
+        ${enableMarketplace ? '\$orderType: Int,' : ''}
+      ) {
   orderHistoryFetchByItems(
     soldTo: \$soldTo
     fromDate: \$fromDate
@@ -17,6 +33,7 @@ class ViewByItemQueryMutation {
     filterBlockedCustomer: \$filterBlockCustomer
     orderNumber: \$orderNumber
     isOptimised: \$isOptimised
+    ${enableMarketplace ? 'orderType: \$orderType' : ''}
   ) {
     OrderCount
     OrderHistory {
@@ -60,7 +77,7 @@ class ViewByItemQueryMutation {
         Available
         Batch
         ExpiryDate
-        ${enableMarketplace ? 'isMarketPlace' : ''}
+        ${enableMarketplace ? 'IsMarketplace' : ''}
         Seller
         POReference
         ManufactureName

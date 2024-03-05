@@ -160,7 +160,7 @@ class MaterialInfoType extends ValueObject<String> {
   int get sortPriority {
     if (typeCombo) return 3;
     if (typeBundle) return 2;
-    
+
     return 1;
   }
 
@@ -935,4 +935,27 @@ class ScaleBasis extends ValueObject<String> {
   bool get isQuantityScale => value.getOrElse(() => '').toUpperCase() == 'C';
 
   const ScaleBasis._(this.value);
+}
+
+class OrderHistoryType extends ValueObject<int> {
+  static final supportedTypes = [
+    OrderHistoryType.all(),
+    OrderHistoryType.mp(),
+    OrderHistoryType.zp(),
+  ];
+
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory OrderHistoryType(int input) => OrderHistoryType._(Right(input));
+
+  factory OrderHistoryType.all() => OrderHistoryType(0);
+
+  factory OrderHistoryType.mp() => OrderHistoryType(1);
+
+  factory OrderHistoryType.zp() => OrderHistoryType(2);
+
+  const OrderHistoryType._(this.value);
+
+  String get title => getOrderHistoryTypeTitle(value.getOrElse(() => -1));
 }

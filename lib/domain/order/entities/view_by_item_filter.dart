@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,12 +14,14 @@ class ViewByItemFilter with _$ViewByItemFilter {
     required DateTimeStringValue orderDateFrom,
     required DateTimeStringValue orderDateTo,
     required List<StatusType> orderStatusList,
+    required OrderHistoryType orderHistoryType,
   }) = _ViewByItemFilter;
 
   factory ViewByItemFilter.empty() => ViewByItemFilter(
         orderDateFrom: DateTimeStringValue(''),
         orderDateTo: DateTimeStringValue(''),
         orderStatusList: <StatusType>[],
+        orderHistoryType: OrderHistoryType.all(),
       );
 
   DateTimeRange get getOrderDateFilterDateRange => DateTimeRange(
@@ -27,13 +30,6 @@ class ViewByItemFilter with _$ViewByItemFilter {
       );
 
   bool get dateRangeEmpty => orderDateFrom.isEmpty && orderDateTo.isEmpty;
-
-  bool isNotEqual({required ViewByItemFilter newFilter}) =>
-      orderStatusList.length != newFilter.orderStatusList.length ||
-      orderDateTo.apiDateTimeString !=
-          newFilter.orderDateTo.apiDateTimeString ||
-      orderDateFrom.apiDateTimeString !=
-          newFilter.orderDateFrom.apiDateTimeString;
 
   int get appliedFilterCount {
     var filterCount = 0;

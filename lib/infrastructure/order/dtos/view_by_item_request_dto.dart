@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/view_by_item_request.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'view_by_item_request_dto.freezed.dart';
@@ -24,9 +25,12 @@ class ViewByItemRequestDto with _$ViewByItemRequestDto {
     @JsonKey(name: 'toDate', defaultValue: '') required String dateTo,
     @JsonKey(name: 'fromDate', defaultValue: '') required String dateFrom,
     @JsonKey(name: 'isOptimised', defaultValue: true) required bool isOptimised,
+    @JsonKey(name: 'orderType', includeIfNull: false) int? orderType,
   }) = _ViewByItemRequestDto;
 
   factory ViewByItemRequestDto.fromDomain(ViewByItemRequest viewByItemRequest) {
+    final orderType = viewByItemRequest.viewByItemFilter.orderHistoryType;
+
     return ViewByItemRequestDto(
       salesOrg: [viewByItemRequest.salesOrg],
       soldTo: viewByItemRequest.customerCodeSoldTo,
@@ -45,6 +49,9 @@ class ViewByItemRequestDto with _$ViewByItemRequestDto {
       dateFrom:
           viewByItemRequest.viewByItemFilter.orderDateFrom.apiDateTimeString,
       isOptimised: true,
+      orderType: orderType == OrderHistoryType.all()
+          ? null
+          : orderType.getOrDefaultValue(0),
     );
   }
 

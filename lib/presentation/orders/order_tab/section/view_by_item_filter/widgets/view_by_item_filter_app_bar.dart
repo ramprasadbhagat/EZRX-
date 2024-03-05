@@ -8,7 +8,13 @@ class _ViewByItemFilterAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(context.tr('Filter')),
+      title: Text(
+        context.tr('Filter'),
+        style: Theme.of(context)
+            .textTheme
+            .labelLarge
+            ?.copyWith(color: ZPColors.primary, fontSize: 20),
+      ),
       automaticallyImplyLeading: false,
       centerTitle: false,
       elevation: 0,

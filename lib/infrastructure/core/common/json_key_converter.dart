@@ -30,8 +30,9 @@ double handleTax(Map json, String key) {
 }
 
 bool mappingIsMarketPlace(Map json, String _) {
-  if (json['isMarketPlace'] != null) return json['isMarketPlace'];
-  if (json['isMarketplace'] != null) return json['isMarketplace'];
+  final parsedJson = makeResponseCamelCase(jsonEncode(json));
+  if (parsedJson['isMarketPlace'] != null) return parsedJson['isMarketPlace'];
+  if (parsedJson['isMarketplace'] != null) return parsedJson['isMarketplace'];
 
   return false;
 }

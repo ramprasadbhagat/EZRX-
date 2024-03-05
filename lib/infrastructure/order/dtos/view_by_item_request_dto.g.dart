@@ -30,21 +30,32 @@ _$_ViewByItemRequestDto _$$_ViewByItemRequestDtoFromJson(
       dateTo: json['toDate'] as String? ?? '',
       dateFrom: json['fromDate'] as String? ?? '',
       isOptimised: json['isOptimised'] as bool? ?? true,
+      orderType: json['orderType'] as int?,
     );
 
 Map<String, dynamic> _$$_ViewByItemRequestDtoToJson(
-        _$_ViewByItemRequestDto instance) =>
-    <String, dynamic>{
-      'salesOrg': instance.salesOrg,
-      'soldTo': instance.soldTo,
-      'shipTo': instance.shipTo,
-      'first': instance.pageSize,
-      'after': instance.offset,
-      'language': instance.language,
-      'searchKey': instance.searchKey,
-      'orderNumber': instance.orderNumber,
-      'orderStatus': instance.orderStatus,
-      'toDate': instance.dateTo,
-      'fromDate': instance.dateFrom,
-      'isOptimised': instance.isOptimised,
-    };
+    _$_ViewByItemRequestDto instance) {
+  final val = <String, dynamic>{
+    'salesOrg': instance.salesOrg,
+    'soldTo': instance.soldTo,
+    'shipTo': instance.shipTo,
+    'first': instance.pageSize,
+    'after': instance.offset,
+    'language': instance.language,
+    'searchKey': instance.searchKey,
+    'orderNumber': instance.orderNumber,
+    'orderStatus': instance.orderStatus,
+    'toDate': instance.dateTo,
+    'fromDate': instance.dateFrom,
+    'isOptimised': instance.isOptimised,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('orderType', instance.orderType);
+  return val;
+}
