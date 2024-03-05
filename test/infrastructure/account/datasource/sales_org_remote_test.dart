@@ -35,12 +35,15 @@ void main() {
   const fakeMarket = 'fake-market';
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
+  const fakeAccountStatementConfigDisable = false;
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
       when(() => remoteConfigService.enableMarketPlaceMarkets)
           .thenReturn(fakeEnableMarketPlaceMarkets);
+      when(() => remoteConfigService.enableAccountStatementQuery)
+          .thenReturn(fakeAccountStatementConfigDisable);
       remoteDataSource = SalesOrgRemoteDataSource(
         httpService: service,
         salesOrgQueryMutation: SalesOrgQueryMutation(),
@@ -69,8 +72,11 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.salesOrgQueryMutation
-                .getSalesOrgConfigsQuery(fakeConfigValue),
+            'query':
+                remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
+              fakeConfigValue,
+              fakeAccountStatementConfigDisable,
+            ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
             },
@@ -102,8 +108,11 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.salesOrgQueryMutation
-                .getSalesOrgConfigsQuery(fakeConfigValue),
+            'query':
+                remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
+              fakeConfigValue,
+              fakeAccountStatementConfigDisable,
+            ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
             },
@@ -137,8 +146,11 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.salesOrgQueryMutation
-                .getSalesOrgConfigsQuery(fakeConfigValue),
+            'query':
+                remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
+              fakeConfigValue,
+              fakeAccountStatementConfigDisable,
+            ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
             },
@@ -172,8 +184,11 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query': remoteDataSource.salesOrgQueryMutation
-                .getSalesOrgConfigsQuery(fakeConfigValue),
+            'query':
+                remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
+              fakeConfigValue,
+              fakeAccountStatementConfigDisable,
+            ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
             },

@@ -4,7 +4,10 @@
 
 class SalesOrgQueryMutation {
   // For fetching Sales Organiazation Configs by salesOrg ID
-  String getSalesOrgConfigsQuery(bool enableMarketPlace) {
+  String getSalesOrgConfigsQuery(
+    bool enableMarketPlace,
+    bool enableAccountStatementQuery,
+  ) {
     return '''
       query salesOrgConfigs(\$request: SalesOrgConfigRequest) {
   salesOrgConfigs(request: \$request) {
@@ -102,7 +105,7 @@ class SalesOrgQueryMutation {
     enableComboDeals
     comboDealsUserRole
     ${enableMarketPlace ? 'enableMarketPlace \n mpMinOrderAmount' : ''}
-    statementOfAccountEnabled
+    ${enableAccountStatementQuery ? 'statementOfAccountEnabled' : ''}
   }
 }
 
