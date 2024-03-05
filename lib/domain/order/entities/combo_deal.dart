@@ -530,10 +530,10 @@ extension ComboDealSchemeExt on ComboDealScheme {
     switch (this) {
       case ComboDealScheme.k1:
       case ComboDealScheme.k21:
+      case ComboDealScheme.k42:
         return context.tr('Per item');
       case ComboDealScheme.k22:
       case ComboDealScheme.k4:
-      case ComboDealScheme.k42:
         return context.tr('Total Quantity');
       case ComboDealScheme.k3:
         return context.tr('Total SKUs');
@@ -648,9 +648,12 @@ extension ComboDealSchemeExt on ComboDealScheme {
   bool get displayDiscountedSubTotal => this == ComboDealScheme.k21;
 
   bool get displayOriginalPrice =>
-      this != ComboDealScheme.k1 &&
-      this != ComboDealScheme.k21 &&
-      this != ComboDealScheme.k42;
+      this != ComboDealScheme.k1 && this != ComboDealScheme.k21;
+
+  bool get displayDiscountedTotal =>
+      this == ComboDealScheme.k22 ||
+      this == ComboDealScheme.k3 ||
+      this == ComboDealScheme.k5;
 
   bool isComboDealEligible(List<PriceAggregate> materials) {
     final comboDeal = materials.firstComboDeal;

@@ -14,7 +14,7 @@ class _ProductImageSection extends StatelessWidget {
       builder: (context, productDetailState) {
         return BlocBuilder<ProductImageBloc, ProductImageState>(
           buildWhen: (previous, current) =>
-              previous != current || previous.isFetching != current.isFetching,
+              previous.productImageMap != current.productImageMap,
           builder: (context, productImageState) {
             final productImage = productImageState.getMaterialImage(
               productDetailState

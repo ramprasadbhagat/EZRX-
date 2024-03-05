@@ -140,25 +140,28 @@ class _MaterialPriceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final materialComboRate = comboItem.comboDeal.getMaterialComboRate(
+      materialNumber: comboItem.getMaterialNumber,
+      totalQuantityUnit: totalQuantityUnit,
+    );
+
     return comboItem.comboDeal.scheme.displayDiscountedPrice
         ? Row(
             children: [
-              PriceComponent(
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: comboItem.display(PriceType.listPrice),
-                type: PriceStyle.comboOfferPrice,
-              ),
+              if (materialComboRate > 0)
+                PriceComponent(
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: comboItem.display(PriceType.listPrice),
+                  type: PriceStyle.comboOfferPrice,
+                ),
               const SizedBox(width: 4),
               PriceComponent(
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: comboItem
                     .getComboOfferPriceWithDiscount(
-                      comboDealRate: comboItem.comboDeal.getMaterialComboRate(
-                        materialNumber: comboItem.getMaterialNumber,
-                        totalQuantityUnit: totalQuantityUnit,
-                      ),
+                      comboDealRate: materialComboRate,
                     )
                     .toString(),
                 type: PriceStyle.comboOfferPriceDiscounted,

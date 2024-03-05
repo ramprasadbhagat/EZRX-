@@ -21,6 +21,12 @@ class _ComboDetailBodyContent extends StatelessWidget {
                 products: state.allMaterialsInfo,
               ),
             );
+
+        context.read<ProductImageBloc>().add(
+              ProductImageEvent.fetch(
+                list: state.allMaterialsInfo,
+              ),
+            );
       },
       buildWhen: (previous, current) =>
           previous.isFetchingPrice != current.isFetchingPrice ||

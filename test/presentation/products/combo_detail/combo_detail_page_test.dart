@@ -18,6 +18,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
@@ -425,7 +426,19 @@ void main() {
               },
             ),
           );
-
+          when(() => mockProductImageBloc.state).thenReturn(
+            ProductImageState.initial().copyWith(
+              productImageMap: <MaterialNumber, ProductImages>{
+                requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                  materialNumber: requiredMaterial.materialNumber,
+                  image: [
+                    'fake-image-1',
+                    'fake-image-2',
+                  ],
+                ),
+              },
+            ),
+          );
           when(() => cartMockBloc.state).thenReturn(
             CartState.initial().copyWith(
               cartProducts: [fakeCartCombo],
@@ -479,7 +492,19 @@ void main() {
               searchKey: SearchKey.search('fake'),
             ),
           );
-
+          when(() => mockProductImageBloc.state).thenReturn(
+            ProductImageState.initial().copyWith(
+              productImageMap: <MaterialNumber, ProductImages>{
+                requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                  materialNumber: requiredMaterial.materialNumber,
+                  image: [
+                    'fake-image-1',
+                    'fake-image-2',
+                  ],
+                ),
+              },
+            ),
+          );
           when(() => cartMockBloc.state).thenReturn(
             CartState.initial().copyWith(
               cartProducts: [fakeCartCombo],
@@ -496,7 +521,7 @@ void main() {
           expect(searchBar, findsOneWidget);
 
           await tester.enterText(searchBar, 'fake-material');
-          await tester.pumpAndSettle(const Duration(microseconds: 200));
+          await tester.pump(const Duration(microseconds: 200));
           await tester.testTextInput.receiveAction(TextInputAction.done);
 
           verify(
@@ -548,7 +573,19 @@ void main() {
               },
             ),
           );
-
+          when(() => mockProductImageBloc.state).thenReturn(
+            ProductImageState.initial().copyWith(
+              productImageMap: <MaterialNumber, ProductImages>{
+                requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                  materialNumber: requiredMaterial.materialNumber,
+                  image: [
+                    'fake-image-1',
+                    'fake-image-2',
+                  ],
+                ),
+              },
+            ),
+          );
           when(
             () => autoRouterMock.push(
               ProductDetailsPageRoute(
@@ -608,7 +645,7 @@ void main() {
             ),
           ).called(1);
 
-          await tester.pumpAndSettle();
+          await tester.pump();
         },
       );
 
@@ -724,6 +761,19 @@ void main() {
               },
             ),
           );
+          when(() => mockProductImageBloc.state).thenReturn(
+            ProductImageState.initial().copyWith(
+              productImageMap: <MaterialNumber, ProductImages>{
+                requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                  materialNumber: requiredMaterial.materialNumber,
+                  image: [
+                    'fake-image-1',
+                    'fake-image-2',
+                  ],
+                ),
+              },
+            ),
+          );
 
           when(() => cartMockBloc.state).thenReturn(
             CartState.initial().copyWith(
@@ -795,6 +845,19 @@ void main() {
               items: {requiredMaterial.materialNumber: fakeCartCombo},
               selectedItems: {
                 requiredMaterial.materialNumber: true,
+              },
+            ),
+          );
+          when(() => mockProductImageBloc.state).thenReturn(
+            ProductImageState.initial().copyWith(
+              productImageMap: <MaterialNumber, ProductImages>{
+                requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                  materialNumber: requiredMaterial.materialNumber,
+                  image: [
+                    'fake-image-1',
+                    'fake-image-2',
+                  ],
+                ),
               },
             ),
           );
@@ -895,6 +958,19 @@ void main() {
             items: comboMaterialsMock,
             materialCount: comboMaterialsMock.length,
             selectedItems: comboMaterialsSeletedMock,
+          ),
+        );
+        when(() => mockProductImageBloc.state).thenReturn(
+          ProductImageState.initial().copyWith(
+            productImageMap: <MaterialNumber, ProductImages>{
+              requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                materialNumber: requiredMaterial.materialNumber,
+                image: [
+                  'fake-image-1',
+                  'fake-image-2',
+                ],
+              ),
+            },
           ),
         );
       });
@@ -1097,6 +1173,19 @@ void main() {
             selectedItems: comboMaterialsSeletedMock,
           ),
         );
+        when(() => mockProductImageBloc.state).thenReturn(
+          ProductImageState.initial().copyWith(
+            productImageMap: <MaterialNumber, ProductImages>{
+              requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                materialNumber: requiredMaterial.materialNumber,
+                image: [
+                  'fake-image-1',
+                  'fake-image-2',
+                ],
+              ),
+            },
+          ),
+        );
       });
 
       testWidgets(
@@ -1247,6 +1336,19 @@ void main() {
             selectedItems: comboMaterialsSeletedMock,
           ),
         );
+        when(() => mockProductImageBloc.state).thenReturn(
+          ProductImageState.initial().copyWith(
+            productImageMap: <MaterialNumber, ProductImages>{
+              requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                materialNumber: requiredMaterial.materialNumber,
+                image: [
+                  'fake-image-1',
+                  'fake-image-2',
+                ],
+              ),
+            },
+          ),
+        );
       });
 
       testWidgets(
@@ -1393,6 +1495,19 @@ void main() {
             items: comboMaterialsMock,
             materialCount: comboMaterialsMock.length,
             selectedItems: comboMaterialsSeletedMock,
+          ),
+        );
+        when(() => mockProductImageBloc.state).thenReturn(
+          ProductImageState.initial().copyWith(
+            productImageMap: <MaterialNumber, ProductImages>{
+              requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                materialNumber: requiredMaterial.materialNumber,
+                image: [
+                  'fake-image-1',
+                  'fake-image-2',
+                ],
+              ),
+            },
           ),
         );
       });
@@ -1616,6 +1731,19 @@ void main() {
             selectedItems: comboMaterialsSeletedMock,
           ),
         );
+        when(() => mockProductImageBloc.state).thenReturn(
+          ProductImageState.initial().copyWith(
+            productImageMap: <MaterialNumber, ProductImages>{
+              requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                materialNumber: requiredMaterial.materialNumber,
+                image: [
+                  'fake-image-1',
+                  'fake-image-2',
+                ],
+              ),
+            },
+          ),
+        );
       });
 
       testWidgets(
@@ -1832,6 +1960,19 @@ void main() {
             selectedItems: comboMaterialsSeletedMock,
           ),
         );
+        when(() => mockProductImageBloc.state).thenReturn(
+          ProductImageState.initial().copyWith(
+            productImageMap: <MaterialNumber, ProductImages>{
+              requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                materialNumber: requiredMaterial.materialNumber,
+                image: [
+                  'fake-image-1',
+                  'fake-image-2',
+                ],
+              ),
+            },
+          ),
+        );
       });
 
       testWidgets(
@@ -1865,7 +2006,7 @@ void main() {
       testWidgets(
         'Body section',
         (tester) async {
-          tester.binding.window.physicalSizeTestValue = const Size(600, 900);
+          tester.binding.window.physicalSizeTestValue = const Size(600, 800);
           tester.binding.window.devicePixelRatioTestValue = 1.0;
           await tester.pumpWidget(getScopedWidget());
 
@@ -2090,6 +2231,19 @@ void main() {
             selectedItems: comboMaterialsSeletedMock,
           ),
         );
+        when(() => mockProductImageBloc.state).thenReturn(
+          ProductImageState.initial().copyWith(
+            productImageMap: <MaterialNumber, ProductImages>{
+              requiredMaterial.materialNumber: ProductImages.empty().copyWith(
+                materialNumber: requiredMaterial.materialNumber,
+                image: [
+                  'fake-image-1',
+                  'fake-image-2',
+                ],
+              ),
+            },
+          ),
+        );
       });
 
       testWidgets(
@@ -2115,7 +2269,7 @@ void main() {
           );
           expect(requirementMessage, findsOneWidget);
 
-          final discountOnMessage = find.text('Total Quantity');
+          final discountOnMessage = find.text('Per item');
           expect(discountOnMessage, findsOneWidget);
         },
       );

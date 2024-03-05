@@ -64,15 +64,25 @@ class _MaterialImageSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomCard(
-          showShadow: false,
-          showBorder: true,
-          child: CustomImage(
-            imageUrl: '',
-            fit: BoxFit.fitHeight,
-            height: MediaQuery.of(context).size.height * 0.08,
-            width: MediaQuery.of(context).size.height * 0.08,
-          ),
+        BlocBuilder<ProductImageBloc, ProductImageState>(
+          buildWhen: (previous, current) =>
+              previous.productImageMap != current.productImageMap,
+          builder: (context, productImageState) {
+            final productImage = productImageState.getMaterialImage(
+              comboItem.materialInfo.materialNumber,
+            );
+
+            return CustomCard(
+              showShadow: false,
+              showBorder: true,
+              child: CustomImage(
+                imageUrl: productImage.image.firstOrNull ?? '',
+                fit: BoxFit.fitHeight,
+                height: MediaQuery.of(context).size.height * 0.08,
+                width: MediaQuery.of(context).size.height * 0.08,
+              ),
+            );
+          },
         ),
         if (isFixed)
           Container(

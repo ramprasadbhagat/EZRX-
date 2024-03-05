@@ -60,55 +60,36 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
               dense: true,
               visualDensity: const VisualDensity(vertical: -4, horizontal: -2),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              title: Column(
                 children: [
-                  Text(
-                    state.currentDeal.scheme.getTotalUnitMessage(
-                      context,
-                      totalUnit: state.totalQuantityUnit,
-                    ),
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  PriceComponent(
-                    key: WidgetKeys.grandTotalKey,
-                    salesOrgConfig:
-                        context.read<EligibilityBloc>().state.salesOrgConfigs,
-                    price: state.totalPriceDisplay.toString(),
-                    title: '${context.tr('Total')}: ',
-                    priceLabelStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: ZPColors.extraLightGrey4,
-                            ),
-                  ),
-                ],
-              ),
-              subtitle: (state.currentDeal.scheme.displayOriginalPrice &&
+                  if (state.currentDeal.scheme.displayOriginalPrice &&
                       state.isEnableAddToCart)
-                  ? Row(
+                    Row(
                       key: WidgetKeys.comboRateDiscounted,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          context.tr(
-                            '{percent}% Discount',
-                            namedArgs: {
-                              'percent':
-                                  state.currentDeal.materialComboRateDisplay(
-                                materialNumber: state.allMaterialsNumber.first,
-                                totalQuantityUnit: state.totalQuantityUnit,
-                                currentTotalAmount:
-                                    state.originalPriceSelectedItems,
-                              ),
-                            },
+                        if (state.currentDeal.scheme.displayDiscountedTotal)
+                          Text(
+                            context.tr(
+                              '{percent}% Discount',
+                              namedArgs: {
+                                'percent':
+                                    state.currentDeal.materialComboRateDisplay(
+                                  materialNumber:
+                                      state.allMaterialsNumber.first,
+                                  totalQuantityUnit: state.totalQuantityUnit,
+                                  currentTotalAmount:
+                                      state.originalPriceSelectedItems,
+                                ),
+                              },
+                            ),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: ZPColors.discountedTotalTitle,
+                                      height: 1.5,
+                                    ),
                           ),
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: ZPColors.discountedTotalTitle,
-                                    height: 1.5,
-                                  ),
-                        ),
+                        const Spacer(),
                         PriceComponent(
                           key: WidgetKeys.grandTotalKey,
                           salesOrgConfig: context
@@ -123,8 +104,34 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                                   ),
                         ),
                       ],
-                    )
-                  : const SizedBox.shrink(),
+                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        state.currentDeal.scheme.getTotalUnitMessage(
+                          context,
+                          totalUnit: state.totalQuantityUnit,
+                        ),
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      PriceComponent(
+                        key: WidgetKeys.grandTotalKey,
+                        salesOrgConfig: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .salesOrgConfigs,
+                        price: state.totalPriceDisplay.toString(),
+                        title: '${context.tr('Total')}: ',
+                        priceLabelStyle:
+                            Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  color: ZPColors.extraLightGrey4,
+                                ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             if (state.displayNextComboDealMessage)
               ComboDetailNextDealInfo(
