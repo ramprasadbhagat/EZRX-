@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
@@ -13,6 +15,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
@@ -422,6 +425,29 @@ void main() {
         expect(bundleMaterialCount, findsOneWidget);
 
         expect(find.text('+ 6 materials'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      '-> Test error text visible when there is error from BE',
+      (WidgetTester tester) async {
+        whenListen(
+          materialListBlocMock,
+          Stream.fromIterable([
+            MaterialListState.initial().copyWith(isFetching: true),
+            MaterialListState.initial().copyWith(
+              apiFailureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other('fake-error'))),
+            ),
+          ]),
+        );
+
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+        final customSnackBar = find.byType(CustomSnackBar);
+        final errorText = find.text('fake-error');
+        expect(customSnackBar, findsOneWidget);
+        expect(errorText, findsOneWidget);
       },
     );
   });

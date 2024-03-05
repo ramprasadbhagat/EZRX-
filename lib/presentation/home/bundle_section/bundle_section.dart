@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -60,9 +61,19 @@ class BundleSection extends StatelessWidget {
                 ),
               );
         },
-        child: BlocBuilder<MaterialListBloc, MaterialListState>(
+        child: BlocConsumer<MaterialListBloc, MaterialListState>(
+          listenWhen: (previous, current) =>
+              previous.apiFailureOrSuccessOption !=
+              current.apiFailureOrSuccessOption,
+          listener: (context, state) => state.apiFailureOrSuccessOption.fold(
+            () => {},
+            (either) => either.fold(
+              (failure) => ErrorUtils.handleApiFailure(context, failure),
+              (_) => {},
+            ),
+          ),
           buildWhen: (previous, current) =>
-              previous.materialList != current.materialList,
+              previous.isFetching != current.isFetching,
           builder: (_, state) {
             return state.isFetching || state.materialList.isNotEmpty
                 ? Column(

@@ -1,14 +1,17 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
 import 'package:get_it/get_it.dart';
@@ -350,6 +353,29 @@ void main() {
             ),
           ),
         ).called(1);
+      },
+    );
+
+    testWidgets(
+      '-> Test error text visible when there is error from BE',
+      (WidgetTester tester) async {
+        whenListen(
+          materialListBlocMock,
+          Stream.fromIterable([
+            MaterialListState.initial().copyWith(isFetching: true),
+            MaterialListState.initial().copyWith(
+              apiFailureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other('fake-error'))),
+            ),
+          ]),
+        );
+
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+        final customSnackBar = find.byType(CustomSnackBar);
+        final errorText = find.text('fake-error');
+        expect(customSnackBar, findsOneWidget);
+        expect(errorText, findsOneWidget);
       },
     );
   });
