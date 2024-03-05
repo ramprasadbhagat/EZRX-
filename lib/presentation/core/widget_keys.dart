@@ -1324,6 +1324,8 @@ class WidgetKeys {
   static Key viewByItemsFilterToDateKey = const Key('viewByItemsFilterToDate');
   static Key viewByItemsFilterStatusKey(String name, bool value) =>
       Key('viewByItemsFilterStatus$name$value');
+  static Key filterRadioTile(String name, bool isSelected) =>
+      Key('filterRadioTile$name$isSelected');
   //============================================================
   // View By Item Detail
   //============================================================

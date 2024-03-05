@@ -557,18 +557,12 @@ void main() {
 
       expect(
         orderPacked.viewByOrderHistorySteps.map((e) => e.title).toList(),
-        [
-          'Order packed and ready for delivery',
-          ...viewByOrderFixedSteps
-        ],
+        ['Order packed and ready for delivery', ...viewByOrderFixedSteps],
       );
 
       expect(
         orderPacked.viewByItemHistorySteps.map((e) => e.title).toList(),
-        [
-          'Order packed and ready for delivery',
-          ...viewByItemFixedSteps
-        ],
+        ['Order packed and ready for delivery', ...viewByItemFixedSteps],
       );
     });
 
@@ -627,6 +621,25 @@ void main() {
         outForDelivery.viewByItemHistorySteps.map((e) => e.title).toList(),
         ['Delivered', ...viewByItemFixedSteps],
       );
+    });
+  });
+
+  group('Order History Type Value Object -', () {
+    test('supported types', () {
+      expect(OrderHistoryType.all(), OrderHistoryType(0));
+      expect(OrderHistoryType.zp(), OrderHistoryType(2));
+      expect(OrderHistoryType.mp(), OrderHistoryType(1));
+      expect(
+        OrderHistoryType.supportedTypes,
+        [OrderHistoryType.all(), OrderHistoryType.mp(), OrderHistoryType.zp()],
+      );
+    });
+
+    test('title getter', () {
+      expect(OrderHistoryType.all().title, 'All');
+      expect(OrderHistoryType.zp().title, 'ZP items');
+      expect(OrderHistoryType.mp().title, 'MP items');
+      expect(OrderHistoryType(-1).title, '');
     });
   });
 }

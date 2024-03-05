@@ -20,6 +20,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/view_by_item_section.dart';
@@ -448,6 +449,39 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       expect(find.text('Invoice #${fakeInvoice.getOrCrash()}'), findsOneWidget);
+    });
+
+    testWidgets('Display marketplace icon and seller when order is from MP',
+        (tester) async {
+      final orderHistoryList = orderHistory.copyWith(
+        orderHistoryItems: [
+          orderHistory.orderHistoryItems.firstWhere((e) => e.isMarketPlace)
+        ],
+      );
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(orderHistory: orderHistoryList),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final historyTile = find.byKey(WidgetKeys.viewByItemsOrderItemKey);
+      expect(historyTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsOneWidget,
+      );
+      final sellerText = tester
+          .widget<Text>(
+            find.descendant(
+              of: historyTile,
+              matching: find.byKey(WidgetKeys.commonTileItemSubTitle),
+            ),
+          )
+          .data;
+      expect(sellerText, startsWith('Sold by: '));
     });
   });
 }

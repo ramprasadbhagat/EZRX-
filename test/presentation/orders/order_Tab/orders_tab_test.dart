@@ -12,6 +12,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -29,7 +30,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
@@ -658,6 +661,61 @@ void main() {
         find.byKey(WidgetKeys.viewByItemsFilterToDateKey),
         findsOneWidget,
       );
+    });
+
+    testWidgets(
+        'Should hide order history type when user can not access marketplace view by item filter',
+        (tester) async {
+      await tester.pumpWidget(testWidget(const ViewByItemFilterSheet()));
+      await tester.pumpAndSettle();
+      expect(find.text('Show history'), findsNothing);
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('All', true)),
+        findsNothing,
+      );
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('ZP items', false)),
+        findsNothing,
+      );
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('MP items', false)),
+        findsNothing,
+      );
+    });
+
+    testWidgets('apply order history type view by item filter', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          shipToInfo: fakeShipToInfoPeninsulaRegion,
+          user: fakeClientUserAccessMarketPlace,
+        ),
+      );
+      await tester.pumpWidget(testWidget(const ViewByItemFilterSheet()));
+      await tester.pumpAndSettle();
+      expect(find.text('Show history'), findsOneWidget);
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('All', true)),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('ZP items', false)),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('MP items', false)),
+        findsOneWidget,
+      );
+
+      await tester
+          .tap(find.byKey(WidgetKeys.filterRadioTile('ZP items', false)));
+      verify(
+        () => viewByItemFilterBlocMock.add(
+          ViewByItemFilterEvent.setOrderHistoryType(
+            type: OrderHistoryType.zp(),
+          ),
+        ),
+      ).called(1);
     });
 
     testWidgets(

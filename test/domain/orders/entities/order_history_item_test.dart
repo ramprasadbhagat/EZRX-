@@ -107,5 +107,15 @@ void main() async {
         );
       });
     });
+
+    test('manufacturerPrefix', () {
+      expect(OrderHistoryItem.empty().manufacturerPrefix, '');
+      expect(
+        OrderHistoryItem.empty()
+            .copyWith(isMarketPlace: true)
+            .manufacturerPrefix,
+        'Sold by',
+      );
+    });
   });
 }
