@@ -569,6 +569,8 @@ void setupLocator() {
       localAuthentication: locator<LocalAuthentication>(),
       mixpanelService: locator<MixpanelService>(),
       clevertapService: locator<ClevertapService>(),
+      productSuggestionHistoryStorage:
+          locator<ProductSuggestionHistoryStorage>(),
     ),
   );
 

@@ -20,6 +20,7 @@ import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart'
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -46,6 +47,7 @@ class AuthRepository implements IAuthRepository {
   final PushNotificationService pushNotificationService;
   final LocalAuthentication localAuthentication;
   final ClevertapService clevertapService;
+  final ProductSuggestionHistoryStorage productSuggestionHistoryStorage;
 
   final MixpanelService mixpanelService;
 
@@ -62,6 +64,7 @@ class AuthRepository implements IAuthRepository {
     required this.accountSelectorStorage,
     required this.mixpanelService,
     required this.clevertapService,
+    required this.productSuggestionHistoryStorage,
   });
 
   @override
@@ -298,6 +301,7 @@ class AuthRepository implements IAuthRepository {
       await accountSelectorStorage.delete();
       await settingStorage.clear();
       await clevertapService.logout();
+      await productSuggestionHistoryStorage.clear();
 
       return const Right(unit);
     } catch (e) {

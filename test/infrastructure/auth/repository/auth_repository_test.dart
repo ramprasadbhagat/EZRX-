@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart'
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -58,6 +59,9 @@ class LocalAuthenticationMock extends Mock implements LocalAuthentication {}
 
 class ClevertapServiceMock extends Mock implements ClevertapService {}
 
+class ProductSuggestionHistoryStorageMock extends Mock
+    implements ProductSuggestionHistoryStorage {}
+
 class RoleNameMock extends Mock implements RoleName {}
 
 void main() {
@@ -72,7 +76,7 @@ void main() {
   late LocalAuthentication localAuthenticationMock;
   late MixpanelService mixpanelService;
   late ClevertapService clevertapServiceMock;
-
+  late ProductSuggestionHistoryStorage productSuggestionHistoryStorageMock;
   late AuthRepository repository;
   late Config configMock;
 
@@ -139,6 +143,8 @@ void main() {
       pushNotificationServiceMock = PushNotificationServiceMock();
       mixpanelService = MixpanelServiceMock();
       clevertapServiceMock = ClevertapServiceMock();
+      productSuggestionHistoryStorageMock =
+          ProductSuggestionHistoryStorageMock();
 
       repository = AuthRepository(
         mixpanelService: mixpanelService,
@@ -153,6 +159,7 @@ void main() {
         pushNotificationService: pushNotificationServiceMock,
         settingStorage: settingStorageMock,
         clevertapService: clevertapServiceMock,
+        productSuggestionHistoryStorage: productSuggestionHistoryStorageMock,
       );
     },
   );
@@ -678,6 +685,11 @@ void main() {
         );
         when(
           () => clevertapServiceMock.logout(),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+        when(
+          () => productSuggestionHistoryStorageMock.clear(),
         ).thenAnswer(
           (_) => Future.value(),
         );
