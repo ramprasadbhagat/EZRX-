@@ -143,6 +143,8 @@ void main() {
   const materialUnitPrice = 39.6;
   const pAndGMaterialPrincipalName = 'PROCTER AND GAMBLE';
   const pAndGMaterialNumber = '21247723';
+  // const merckMaterialNumber = '23072025';
+  // const merckMaterialUnitPrice = 62.00;
   const pAndGMaterialName = 'SANGOBION COMPLETE 100S';
   const pAndGBonusMaterialTierQty = 3;
   const pAndGMaterialNumberAsBonus = '21247738';
@@ -1725,6 +1727,80 @@ void main() {
           isVisible: false,
         );
       });
+      testWidgets(
+          'EZRX-T91 | Verify material with offer and collapse other item in view by items detail',
+          (tester) async {
+        const qty = 1000;
+        const bonusQty = 399;
+        final totalPrice = 'Price Not Available'.tr();
+
+        //init app
+        await pumpAppWithLoginOnBehalf(tester);
+        await checkoutWithMaterial(pAndGMaterialNumber, qty, isPreOrder: true);
+        await checkoutRobot.verifyPoReferenceField(isVisible: true);
+        await checkoutRobot.enterPoReference(poReference);
+        await checkoutRobot.tapPlaceOrderButton();
+        await orderSuccessRobot.dismissSnackbar();
+
+        //verify
+        await orderSuccessRobot.verifyOrderSummarySection();
+        await orderSuccessRobot.verifySubTotal(0.priceDisplay(currency));
+        await orderSuccessRobot.verifyGrandTotal(0.priceDisplay(currency));
+        await orderSuccessRobot.verifyOrderItemTotalQty(2);
+        await orderSuccessRobot.startVerifyMaterial(index: 0);
+        orderSuccessRobot.verifyMaterialNumber(pAndGMaterialNumber);
+        orderSuccessRobot.verifyMateriaDescription(pAndGMaterialName);
+        orderSuccessRobot.verifyItemQty(qty);
+        orderSuccessRobot.verifyMaterialOnOfferTag();
+        orderSuccessRobot.verifyMaterialUnitPrice(
+          totalPrice,
+        );
+        orderSuccessRobot.verifyMaterialTotalPrice(totalPrice);
+        await orderSuccessRobot.startVerifyMaterial(index: 1);
+        orderSuccessRobot.verifyMaterialNumber(pAndGMaterialNumber);
+        orderSuccessRobot.verifyMateriaDescription(pAndGMaterialName);
+        orderSuccessRobot.verifyItemQty(bonusQty);
+        orderSuccessRobot.verifyMaterialBonusTag();
+        await orderSuccessRobot.tapCloseButton();
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //verify
+        ordersRootRobot.verifyViewByItemsPage();
+        await commonRobot.pullToRefresh();
+        viewByItemsRobot.verifyOfferTag();
+        await viewByItemsRobot.tapFirstOfferTag();
+        await viewByItemsDetailRobot.verifyItemComponent();
+        viewByItemsDetailRobot.verifyOfferTag();
+        viewByItemsDetailRobot.verifyMaterialNumber(pAndGMaterialNumber);
+        viewByItemsDetailRobot.verifyQty(qty);
+        await viewByItemsDetailRobot.verifyOtherItemsComponent();
+        await viewByItemsDetailRobot.startVerifyOtherItem(0);
+        viewByItemsDetailRobot.verifyOtherItemBonusLabel();
+        viewByItemsDetailRobot.verifyOtherItemFreePrice();
+        viewByItemsDetailRobot.verifyOtherItemQty(bonusQty);
+        await viewByItemsDetailRobot.tapToBackScreen();
+
+        viewByItemsRobot.verifyBonusLabel();
+        await viewByItemsRobot.tapFirstBonusLabel();
+        await viewByItemsDetailRobot.verifyItemComponent();
+        viewByItemsDetailRobot.verifyBonusLabel();
+        viewByItemsDetailRobot.verifyFreePrice();
+        viewByItemsDetailRobot.verifyMaterialNumber(pAndGMaterialNumber);
+        viewByItemsDetailRobot.verifyQty(bonusQty);
+        await viewByItemsDetailRobot.verifyOtherItemsComponent();
+        await viewByItemsDetailRobot.startVerifyOtherItem(0);
+        viewByItemsDetailRobot.verifyOtherItemOfferTag();
+        viewByItemsDetailRobot.verifyOtherItemQty(qty);
+        viewByItemsDetailRobot.verifyExpandButton(isVisible: true);
+        await viewByItemsDetailRobot.tapExpandButton();
+        await viewByItemsDetailRobot.verifyOtherItemsComponent(
+          isVisible: false,
+        );
+
+        viewByItemsDetailRobot.verifyBuyAgainButton(
+          isVisible: false,
+        );
+      });
 
       testWidgets('EZRX-T91 | Verify bundle in view by items detail',
           (tester) async {
@@ -2859,10 +2935,10 @@ void main() {
         minOrderAmount.priceDisplay(currency),
         isVisible: false,
       );
-      cartRobot.verifyMaterialCounterOfferButton(
-        pAndGMaterialNumber,
-        isVisible: false,
-      );
+      // cartRobot.verifyMaterialCounterOfferButton(
+      //   pAndGMaterialNumber,
+      //   isVisible: false,
+      // );
 
       //bonus override
       const materialIndex = 0;
@@ -2885,6 +2961,74 @@ void main() {
         pAndGMaterialNumberAsBonus,
         validQty,
       );
+    });
+
+    testWidgets('EZRX-T689 | Verify P&G Material counter offer',
+        (tester) async {
+      const validQty = 100;
+      final validTotalPrice = 'Price Not Available'.tr();
+      const newUnitPrice = 100;
+      const remark = 'AUTO-test';
+
+      //init app
+      await pumpAppWithLoginOnBehalf(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot
+          .searchWithKeyboardAction(pAndGMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(pAndGMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(pAndGMaterialNumber);
+      cartRobot.verifyMaterialQty(pAndGMaterialNumber, 1);
+      cartRobot.verifyMaterialUnitPrice(
+        pAndGMaterialNumber,
+        validTotalPrice,
+      );
+      cartRobot.verifyMaterialTotalPrice(
+        pAndGMaterialNumber,
+        validTotalPrice,
+      );
+      cartRobot.verifyCartTotalPrice(
+        '0.0',
+      );
+      await cartRobot.tapCheckoutButton();
+      cartRobot.verifyMOVWarningMessage(
+        minOrderAmount.priceDisplay(currency),
+        isVisible: true,
+      );
+      await cartRobot.changeMaterialQty(pAndGMaterialNumber, validQty);
+      cartRobot.verifyMaterialQty(pAndGMaterialNumber, validQty);
+      cartRobot.verifyMaterialTotalPrice(
+        pAndGMaterialNumber,
+        validTotalPrice,
+      );
+      cartRobot.verifyCartTotalPrice('0.0');
+      cartRobot.verifyMOVWarningMessage(
+        minOrderAmount.priceDisplay(currency),
+        isVisible: false,
+      );
+      cartRobot.verifyMaterialCounterOfferButton(
+        pAndGMaterialNumber,
+        isVisible: true,
+      );
+      await cartRobot.tapMaterialCounterOfferButton(
+        pAndGMaterialNumber,
+      );
+      await requestCounterOfferRobot.tapConfirmButton();
+      await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
+      await requestCounterOfferRobot.enterRemark(remark);
+      await requestCounterOfferRobot.tapConfirmButton();
+      requestCounterOfferRobot.verifySheet(isVisible: false);
+      cartRobot.verifyMaterialUnitPrice(
+        pAndGMaterialNumber,
+        validTotalPrice,
+      );
+      await cartRobot.tapMaterialCounterOfferButton(pAndGMaterialNumber);
+      requestCounterOfferRobot.verifyOfferPrice(validTotalPrice);
+      requestCounterOfferRobot.verifyPriceText(newUnitPrice.toStringAsFixed(1));
+      requestCounterOfferRobot.verifyRemarkText(remark);
     });
 
     testWidgets('EZRX-274 | Verify discount override', (tester) async {
@@ -3001,6 +3145,129 @@ void main() {
       orderPriceSummaryRobot.verifySheet(isVisible: false);
       checkoutRobot.verifyPlaceOrderButton();
     });
+
+    testWidgets(
+        'EZRX-T116 | Verify display checkout with P&G material clubed with normal material',
+        (tester) async {
+      const qty = 1000;
+      const totalPrice = materialUnitPrice * qty;
+      //init app
+      await pumpAppWithLoginOnBehalf(tester);
+      await browseProductFromEmptyCart();
+      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.changeMaterialQty(materialNumber, qty);
+      await cartRobot.tapCloseButton();
+      await productDetailRobot.tapBackButton();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(pAndGMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(pAndGMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.changeMaterialQty(pAndGMaterialNumber, 1);
+      await cartRobot.tapCheckoutButton();
+      await oosPreOrderRobot.tapContinueButton();
+      //verify
+      checkoutRobot.verifyPage();
+      checkoutRobot.verifyAddressSection();
+      checkoutRobot.verifyCustomerCode(customerCode);
+      checkoutRobot.verifyDeliveryTo(shipToCode);
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryDateField(isVisible: false);
+      await checkoutRobot.verifyReferenceNoteField(isVisible: false);
+      await checkoutRobot.verifyPaymentTermField(isVisible: false);
+      await checkoutRobot.verifyContactPersonField(isVisible: false);
+      await checkoutRobot.verifyMobileNumberField(isVisible: false);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      // Should be 3 here because material has offer and also have a P&G material
+      await checkoutRobot.verifyYoursItemLabel(3);
+      await checkoutRobot.verifyMaterial(pAndGMaterialNumber);
+      await checkoutRobot
+          .verifySubTotalLabel(totalPrice.priceDisplay(currency));
+      await checkoutRobot
+          .verifyGrandTotalLabel(totalPrice.priceDisplay(currency));
+      checkoutRobot.verifyStickyTotalQty(3);
+      checkoutRobot.verifyStickyGrandTotal(totalPrice.priceDisplay(currency));
+      await checkoutRobot.tapStickyGrandTotal();
+      orderPriceSummaryRobot.verifySheet(isVisible: true);
+      orderPriceSummaryRobot
+          .verifySubTotalLabel(totalPrice.priceDisplay(currency));
+      orderPriceSummaryRobot
+          .verifyGrandTotalLabel(totalPrice.priceDisplay(currency));
+      await orderPriceSummaryRobot.tapCloseButton();
+      orderPriceSummaryRobot.verifySheet(isVisible: false);
+      checkoutRobot.verifyPlaceOrderButton();
+    });
+
+// TODO we do not have data for testextsalesrep user so commented that
+    // testWidgets('EZRX-T116 | Verify display checkout with default components',
+    //     (tester) async {
+    //   const qty = 1;
+    //   const totalPrice = merckMaterialUnitPrice * qty;
+    //   //init app
+    //   await pumpAppWithLoginOnBehalf(tester, behalfName: 'nadzhar');
+    //   await browseProductFromEmptyCart();
+
+    //   //verify
+    //   await productSuggestionRobot
+    //       .searchWithKeyboardAction(merckMaterialNumber);
+    //   await productSuggestionRobot.tapSearchResult(merckMaterialNumber);
+    //   await productDetailRobot.tapAddToCart();
+    //   await productDetailRobot.tapCartButton();
+    //   await cartRobot.verifyMaterial(merckMaterialNumber);
+    //   cartRobot.verifyMaterialQty(merckMaterialNumber, 1);
+    //   cartRobot.verifyMaterialUnitPrice(
+    //     merckMaterialNumber,
+    //     merckMaterialUnitPrice.priceDisplay(currency),
+    //   );
+    //   cartRobot.verifyMaterialTotalPrice(
+    //     merckMaterialNumber,
+    //     merckMaterialUnitPrice.priceDisplay(currency),
+    //   );
+    //   cartRobot.verifyCartTotalPrice(
+    //     merckMaterialUnitPrice.priceDisplay(currency),
+    //   );
+    //   await cartRobot.tapCheckoutButton();
+    //   cartRobot.verifyMOVWarningMessage(
+    //     minOrderAmount.priceDisplay(currency),
+    //     isVisible: false,
+    //   );
+    //   await cartRobot.tapCheckoutButton();
+    //   await oosPreOrderRobot.tapContinueButton();
+
+    //   //verify
+    //   checkoutRobot.verifyPage();
+    //   checkoutRobot.verifyAddressSection();
+    //   checkoutRobot.verifyCustomerCode(customerCode);
+    //   checkoutRobot.verifyDeliveryTo(shipToCode);
+    //   await checkoutRobot.verifyPoReferenceField(isVisible: true);
+    //   await checkoutRobot.verifyDeliveryDateField(isVisible: false);
+    //   await checkoutRobot.verifyReferenceNoteField(isVisible: false);
+    //   await checkoutRobot.verifyPaymentTermField(isVisible: false);
+    //   await checkoutRobot.verifyContactPersonField(isVisible: false);
+    //   await checkoutRobot.verifyMobileNumberField(isVisible: false);
+    //   await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+    //   // Should be 2 here because material has offer
+    //   await checkoutRobot.verifyYoursItemLabel(2);
+    //   await checkoutRobot.verifyMaterial(merckMaterialNumber);
+    //   await checkoutRobot
+    //       .verifySubTotalLabel(totalPrice.priceDisplay(currency));
+    //   await checkoutRobot
+    //       .verifyGrandTotalLabel(totalPrice.priceDisplay(currency));
+    //   checkoutRobot.verifyStickyTotalQty(1);
+    //   checkoutRobot.verifyStickyGrandTotal(totalPrice.priceDisplay(currency));
+    //   await checkoutRobot.tapStickyGrandTotal();
+    //   orderPriceSummaryRobot.verifySheet(isVisible: true);
+    //   orderPriceSummaryRobot
+    //       .verifySubTotalLabel(totalPrice.priceDisplay(currency));
+    //   orderPriceSummaryRobot
+    //       .verifyGrandTotalLabel(totalPrice.priceDisplay(currency));
+    //   await orderPriceSummaryRobot.tapCloseButton();
+    //   orderPriceSummaryRobot.verifySheet(isVisible: false);
+    //   checkoutRobot.verifyPlaceOrderButton();
+    // });
 
     testWidgets(
         'EZRX-T118 | Validate fields in checkout and go to order submitted',
@@ -3381,6 +3648,41 @@ void main() {
         0.priceDisplay(currency),
         isFree: true,
       );
+    });
+
+    testWidgets('EZRX-T125 | Verify display P&G material in order submitted',
+        (tester) async {
+      const qty = 1000;
+      const bonusQty = 399;
+      final totalPrice = 'Price Not Available'.tr();
+
+      //init app
+      await pumpAppWithLoginOnBehalf(tester);
+      await checkoutWithMaterial(pAndGMaterialNumber, qty, isPreOrder: true);
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.enterPoReference(poReference);
+      await checkoutRobot.tapPlaceOrderButton();
+      await orderSuccessRobot.dismissSnackbar();
+
+      //verify
+      await orderSuccessRobot.verifyOrderSummarySection();
+      await orderSuccessRobot.verifySubTotal(0.priceDisplay(currency));
+      await orderSuccessRobot.verifyGrandTotal(0.priceDisplay(currency));
+      await orderSuccessRobot.verifyOrderItemTotalQty(2);
+      await orderSuccessRobot.startVerifyMaterial(index: 0);
+      orderSuccessRobot.verifyMaterialNumber(pAndGMaterialNumber);
+      orderSuccessRobot.verifyMateriaDescription(pAndGMaterialName);
+      orderSuccessRobot.verifyItemQty(qty);
+      orderSuccessRobot.verifyMaterialOnOfferTag();
+      orderSuccessRobot.verifyMaterialUnitPrice(
+        totalPrice,
+      );
+      orderSuccessRobot.verifyMaterialTotalPrice(totalPrice);
+      await orderSuccessRobot.startVerifyMaterial(index: 1);
+      orderSuccessRobot.verifyMaterialNumber(pAndGMaterialNumber);
+      orderSuccessRobot.verifyMateriaDescription(pAndGMaterialName);
+      orderSuccessRobot.verifyItemQty(bonusQty);
+      orderSuccessRobot.verifyMaterialBonusTag();
     });
 
     testWidgets('EZRX-T125 | Verify display bundle in order submitted',
