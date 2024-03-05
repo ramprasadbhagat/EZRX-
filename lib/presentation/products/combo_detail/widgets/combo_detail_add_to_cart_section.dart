@@ -36,6 +36,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
             ),
             ListTile(
               dense: true,
+              onTap: () => _showSumaryInfo(context),
               visualDensity: const VisualDensity(vertical: -4, horizontal: -2),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               title: Text(
@@ -135,6 +136,47 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  void _showSumaryInfo(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      builder: (_) => SafeArea(
+        key: WidgetKeys.cartShipToAddressSheet,
+        child: Padding(
+          padding: const EdgeInsets.all(
+            20,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 16),
+              AddressInfoSection.order(),
+              const PayerInformation(expanded: true),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  key: WidgetKeys.cartShipToAddressSheetCloseButton,
+                  onPressed: () {
+                    context.router.pop();
+                  },
+                  child: Text(
+                    context.tr('Close'),
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: ZPColors.white,
+                        ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
