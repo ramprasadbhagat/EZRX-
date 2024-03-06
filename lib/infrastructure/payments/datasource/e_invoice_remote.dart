@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/e_invoice_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/e_credit_invoice_dto.dart';
 
 class EInvoiceRemoteDataSource {
   final HttpService httpService;
@@ -43,7 +43,7 @@ class EInvoiceRemoteDataSource {
       return DownloadPaymentAttachment.empty();
     }
 
-    return EInvoiceDto.fromJson(res.data['data'][0]).toDomain();
+    return ECreditInvoiceDto.fromJson(res.data['data'][0]).toDomain();
   }
 
   void _exceptionChecker({

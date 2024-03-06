@@ -1,14 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_details_section.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_items_section.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+part 'package:ezrxmobile/presentation/payments/credit_details/widgets/download_e_credit_button.dart';
 
 class CreditDetailsPage extends StatelessWidget {
   const CreditDetailsPage({Key? key}) : super(key: key);
@@ -46,6 +51,13 @@ class CreditDetailsPage extends StatelessWidget {
             ],
           );
         },
+      ),
+      bottomNavigationBar: _DownloadECreditButton(
+        searchKey: context
+            .read<CreditAndInvoiceDetailsBloc>()
+            .state
+            .basicInfo
+            .searchKey,
       ),
     );
   }

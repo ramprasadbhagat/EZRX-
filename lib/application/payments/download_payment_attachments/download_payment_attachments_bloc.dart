@@ -264,8 +264,8 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         ),
         (_) async {
           final failureOrSuccess =
-              await paymentAttachmentRepository.eInvoiceDownload(
-            eInvoice: event.eInvoice,
+              await paymentAttachmentRepository.eCreditInvoiceDownload(
+            eCreditInvoiceUrl: event.eInvoice,
           );
           failureOrSuccess.fold(
             (failure) => emit(
@@ -284,5 +284,66 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         },
       );
     });
+
+    on<_DownloadECredit>(
+      (event, emit) async {
+        emit(
+          state.copyWith(
+            isDownloadInProgress: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+
+        final failureOrSuccess =
+            await paymentAttachmentRepository.getECreditDownloadUrl(
+          eCreditNumber: event.eCredit,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) async => emit(
+            state.copyWith(
+              isDownloadInProgress: false,
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (eCreditUrl) async {
+            final failureOrSuccessPermission =
+                await paymentAttachmentRepository.downloadPermission();
+
+            await failureOrSuccessPermission.fold(
+              (failure) async => emit(
+                state.copyWith(
+                  isDownloadInProgress: false,
+                  failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+                ),
+              ),
+              (_) async {
+                final downloadFailureOrSuccess =
+                    await paymentAttachmentRepository.eCreditInvoiceDownload(
+                  eCreditInvoiceUrl: eCreditUrl,
+                );
+
+                downloadFailureOrSuccess.fold(
+                  (failure) => emit(
+                    state.copyWith(
+                      isDownloadInProgress: false,
+                      failureOrSuccessOption:
+                          optionOf(downloadFailureOrSuccess),
+                    ),
+                  ),
+                  (_) => emit(
+                    state.copyWith(
+                      isDownloadInProgress: false,
+                      failureOrSuccessOption:
+                          optionOf(downloadFailureOrSuccess),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
+    );
   }
 }

@@ -659,8 +659,8 @@ void main() {
         );
 
         final result =
-            await downloadPaymentAttachmentRepository.eInvoiceDownload(
-          eInvoice: DownloadPaymentAttachment.empty(),
+            await downloadPaymentAttachmentRepository.eCreditInvoiceDownload(
+          eCreditInvoiceUrl: DownloadPaymentAttachment.empty(),
         );
         expect(
           result,
@@ -679,8 +679,8 @@ void main() {
         );
 
         final result =
-            await downloadPaymentAttachmentRepository.eInvoiceDownload(
-          eInvoice: DownloadPaymentAttachment.empty(),
+            await downloadPaymentAttachmentRepository.eCreditInvoiceDownload(
+          eCreditInvoiceUrl: DownloadPaymentAttachment.empty(),
         );
         expect(
           result,
@@ -702,8 +702,8 @@ void main() {
         );
 
         final result =
-            await downloadPaymentAttachmentRepository.eInvoiceDownload(
-          eInvoice: const DownloadPaymentAttachment(url: 'fake-url'),
+            await downloadPaymentAttachmentRepository.eCreditInvoiceDownload(
+          eCreditInvoiceUrl: const DownloadPaymentAttachment(url: 'fake-url'),
         );
         expect(
           result,
@@ -721,8 +721,8 @@ void main() {
         ).thenThrow(fakeError);
 
         final result =
-            await downloadPaymentAttachmentRepository.eInvoiceDownload(
-          eInvoice: const DownloadPaymentAttachment(url: 'fake-url'),
+            await downloadPaymentAttachmentRepository.eCreditInvoiceDownload(
+          eCreditInvoiceUrl: const DownloadPaymentAttachment(url: 'fake-url'),
         );
         expect(
           result,

@@ -6,6 +6,8 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -37,6 +39,10 @@ class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class DownloadPaymentAttachmentsBlocMock extends MockBloc<
+        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
+    implements DownloadPaymentAttachmentsBloc {}
+
 void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
@@ -50,6 +56,7 @@ void main() {
   late EligibilityBlocMock eligibilityBlocMock;
   late ProductImageBloc productImageBlocMock;
   late List<CreditAndInvoiceItem> customerDocumentDetails;
+  late DownloadPaymentAttachmentsBloc downloadPaymentBlocMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -64,6 +71,7 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
+    downloadPaymentBlocMock = DownloadPaymentAttachmentsBlocMock();
 
     userBlocMock = UserBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
@@ -86,6 +94,8 @@ void main() {
         .thenReturn(AnnouncementState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    when(() => downloadPaymentBlocMock.state)
+        .thenReturn(DownloadPaymentAttachmentsState.initial());
   });
 
   Future getWidget(tester) async {
@@ -115,6 +125,9 @@ void main() {
           ),
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
+          ),
+          BlocProvider<DownloadPaymentAttachmentsBloc>(
+            create: (context) => downloadPaymentBlocMock,
           ),
         ],
         child: const CreditDetailsPage(),

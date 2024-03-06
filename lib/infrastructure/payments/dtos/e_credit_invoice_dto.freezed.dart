@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'e_invoice_dto.dart';
+part of 'e_credit_invoice_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-EInvoiceDto _$EInvoiceDtoFromJson(Map<String, dynamic> json) {
-  return _EInvoiceDto.fromJson(json);
+ECreditInvoiceDto _$ECreditInvoiceDtoFromJson(Map<String, dynamic> json) {
+  return _ECreditInvoiceDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$EInvoiceDto {
+mixin _$ECreditInvoiceDto {
   @JsonKey(name: 'name', defaultValue: '')
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $EInvoiceDtoCopyWith<EInvoiceDto> get copyWith =>
+  $ECreditInvoiceDtoCopyWith<ECreditInvoiceDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $EInvoiceDtoCopyWith<$Res> {
-  factory $EInvoiceDtoCopyWith(
-          EInvoiceDto value, $Res Function(EInvoiceDto) then) =
-      _$EInvoiceDtoCopyWithImpl<$Res, EInvoiceDto>;
+abstract class $ECreditInvoiceDtoCopyWith<$Res> {
+  factory $ECreditInvoiceDtoCopyWith(
+          ECreditInvoiceDto value, $Res Function(ECreditInvoiceDto) then) =
+      _$ECreditInvoiceDtoCopyWithImpl<$Res, ECreditInvoiceDto>;
   @useResult
   $Res call({@JsonKey(name: 'name', defaultValue: '') String name});
 }
 
 /// @nodoc
-class _$EInvoiceDtoCopyWithImpl<$Res, $Val extends EInvoiceDto>
-    implements $EInvoiceDtoCopyWith<$Res> {
-  _$EInvoiceDtoCopyWithImpl(this._value, this._then);
+class _$ECreditInvoiceDtoCopyWithImpl<$Res, $Val extends ECreditInvoiceDto>
+    implements $ECreditInvoiceDtoCopyWith<$Res> {
+  _$ECreditInvoiceDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -63,22 +63,22 @@ class _$EInvoiceDtoCopyWithImpl<$Res, $Val extends EInvoiceDto>
 }
 
 /// @nodoc
-abstract class _$$_EInvoiceDtoCopyWith<$Res>
-    implements $EInvoiceDtoCopyWith<$Res> {
-  factory _$$_EInvoiceDtoCopyWith(
-          _$_EInvoiceDto value, $Res Function(_$_EInvoiceDto) then) =
-      __$$_EInvoiceDtoCopyWithImpl<$Res>;
+abstract class _$$_ECreditInvoiceDtoCopyWith<$Res>
+    implements $ECreditInvoiceDtoCopyWith<$Res> {
+  factory _$$_ECreditInvoiceDtoCopyWith(_$_ECreditInvoiceDto value,
+          $Res Function(_$_ECreditInvoiceDto) then) =
+      __$$_ECreditInvoiceDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'name', defaultValue: '') String name});
 }
 
 /// @nodoc
-class __$$_EInvoiceDtoCopyWithImpl<$Res>
-    extends _$EInvoiceDtoCopyWithImpl<$Res, _$_EInvoiceDto>
-    implements _$$_EInvoiceDtoCopyWith<$Res> {
-  __$$_EInvoiceDtoCopyWithImpl(
-      _$_EInvoiceDto _value, $Res Function(_$_EInvoiceDto) _then)
+class __$$_ECreditInvoiceDtoCopyWithImpl<$Res>
+    extends _$ECreditInvoiceDtoCopyWithImpl<$Res, _$_ECreditInvoiceDto>
+    implements _$$_ECreditInvoiceDtoCopyWith<$Res> {
+  __$$_ECreditInvoiceDtoCopyWithImpl(
+      _$_ECreditInvoiceDto _value, $Res Function(_$_ECreditInvoiceDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -86,7 +86,7 @@ class __$$_EInvoiceDtoCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
   }) {
-    return _then(_$_EInvoiceDto(
+    return _then(_$_ECreditInvoiceDto(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -97,12 +97,13 @@ class __$$_EInvoiceDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_EInvoiceDto extends _EInvoiceDto {
-  _$_EInvoiceDto({@JsonKey(name: 'name', defaultValue: '') required this.name})
+class _$_ECreditInvoiceDto extends _ECreditInvoiceDto {
+  _$_ECreditInvoiceDto(
+      {@JsonKey(name: 'name', defaultValue: '') required this.name})
       : super._();
 
-  factory _$_EInvoiceDto.fromJson(Map<String, dynamic> json) =>
-      _$$_EInvoiceDtoFromJson(json);
+  factory _$_ECreditInvoiceDto.fromJson(Map<String, dynamic> json) =>
+      _$$_ECreditInvoiceDtoFromJson(json);
 
   @override
   @JsonKey(name: 'name', defaultValue: '')
@@ -110,14 +111,14 @@ class _$_EInvoiceDto extends _EInvoiceDto {
 
   @override
   String toString() {
-    return 'EInvoiceDto(name: $name)';
+    return 'ECreditInvoiceDto(name: $name)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EInvoiceDto &&
+            other is _$_ECreditInvoiceDto &&
             (identical(other.name, name) || other.name == name));
   }
 
@@ -128,31 +129,32 @@ class _$_EInvoiceDto extends _EInvoiceDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EInvoiceDtoCopyWith<_$_EInvoiceDto> get copyWith =>
-      __$$_EInvoiceDtoCopyWithImpl<_$_EInvoiceDto>(this, _$identity);
+  _$$_ECreditInvoiceDtoCopyWith<_$_ECreditInvoiceDto> get copyWith =>
+      __$$_ECreditInvoiceDtoCopyWithImpl<_$_ECreditInvoiceDto>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EInvoiceDtoToJson(
+    return _$$_ECreditInvoiceDtoToJson(
       this,
     );
   }
 }
 
-abstract class _EInvoiceDto extends EInvoiceDto {
-  factory _EInvoiceDto(
+abstract class _ECreditInvoiceDto extends ECreditInvoiceDto {
+  factory _ECreditInvoiceDto(
       {@JsonKey(name: 'name', defaultValue: '')
-      required final String name}) = _$_EInvoiceDto;
-  _EInvoiceDto._() : super._();
+      required final String name}) = _$_ECreditInvoiceDto;
+  _ECreditInvoiceDto._() : super._();
 
-  factory _EInvoiceDto.fromJson(Map<String, dynamic> json) =
-      _$_EInvoiceDto.fromJson;
+  factory _ECreditInvoiceDto.fromJson(Map<String, dynamic> json) =
+      _$_ECreditInvoiceDto.fromJson;
 
   @override
   @JsonKey(name: 'name', defaultValue: '')
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_EInvoiceDtoCopyWith<_$_EInvoiceDto> get copyWith =>
+  _$$_ECreditInvoiceDtoCopyWith<_$_ECreditInvoiceDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

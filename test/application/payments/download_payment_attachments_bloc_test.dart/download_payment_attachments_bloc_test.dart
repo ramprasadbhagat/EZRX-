@@ -703,8 +703,8 @@ void main() {
           (invocation) async => const Right(PermissionStatus.granted),
         );
         when(
-          () => downloadPaymentAttachmentRepository.eInvoiceDownload(
-            eInvoice: downloadPaymentAttachmentMockData,
+          () => downloadPaymentAttachmentRepository.eCreditInvoiceDownload(
+            eCreditInvoiceUrl: downloadPaymentAttachmentMockData,
           ),
         ).thenAnswer(
           (invocation) async => Right(file),
@@ -752,8 +752,8 @@ void main() {
           (invocation) async => const Right(PermissionStatus.granted),
         );
         when(
-          () => downloadPaymentAttachmentRepository.eInvoiceDownload(
-            eInvoice: downloadPaymentAttachmentMockData,
+          () => downloadPaymentAttachmentRepository.eCreditInvoiceDownload(
+            eCreditInvoiceUrl: downloadPaymentAttachmentMockData,
           ),
         ).thenAnswer(
           (invocation) async => const Left(fakeError),

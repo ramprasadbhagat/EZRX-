@@ -259,8 +259,8 @@ class DownloadPaymentAttachmentRepository
   }
 
   @override
-  Future<Either<ApiFailure, File>> eInvoiceDownload({
-    required DownloadPaymentAttachment eInvoice,
+  Future<Either<ApiFailure, File>> eCreditInvoiceDownload({
+    required DownloadPaymentAttachment eCreditInvoiceUrl,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -276,13 +276,41 @@ class DownloadPaymentAttachmentRepository
     }
     try {
       final localFile = await remoteDataSource.eInvoiceDownload(
-        eInvoice.url,
+        eCreditInvoiceUrl.url,
       );
       final downloadedFile = await fileSystemHelper.getDownloadedFile(
         localFile,
       );
 
       return Right(downloadedFile);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, DownloadPaymentAttachment>> getECreditDownloadUrl({
+    required String eCreditNumber,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.getECreditDownloadUrl();
+
+        return Right(response);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final response = await remoteDataSource.getECreditDownloadUrl(
+        eCreditNumber: eCreditNumber,
+      );
+
+      if (response.url.isEmpty) {
+        return const Left(ApiFailure.emptyCreditUrl());
+      }
+
+      return Right(response);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

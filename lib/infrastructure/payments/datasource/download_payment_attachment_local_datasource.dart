@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ezrxmobile/infrastructure/payments/dtos/e_credit_invoice_dto.dart';
 import 'package:flutter/services.dart';
 
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
@@ -60,5 +61,16 @@ class DownloadPaymentAttachmentLocalDataSource {
       name: 'paymentAttachments',
       buffer: data.buffer.asUint8List(),
     );
+  }
+
+  Future<DownloadPaymentAttachment> getECreditDownloadUrl() async {
+    final res = json.decode(
+      await rootBundle.loadString(
+        'assets/json/eCreditResponse.json',
+      ),
+    );
+    final data = res['data'].first;
+
+    return ECreditInvoiceDto.fromJson(data).toDomain();
   }
 }

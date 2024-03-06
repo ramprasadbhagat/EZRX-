@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_a
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/dtos/download_payment_attachment_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/e_credit_invoice_dto.dart';
 
 class DownloadPaymentAttachmentRemoteDataSource {
   HttpService httpService;
@@ -107,6 +108,25 @@ class DownloadPaymentAttachmentRemoteDataSource {
         buffer: res.data,
       );
     });
+  }
+
+  Future<DownloadPaymentAttachment> getECreditDownloadUrl({
+    required String eCreditNumber,
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}payment/listEcn',
+      data: jsonEncode(
+        {'ecn_number': eCreditNumber},
+      ),
+    );
+    _approverReturnRequestInformationExceptionChecker(res: res);
+
+    if (res.data['data'] == null || res.data['data'].isEmpty) {
+      return DownloadPaymentAttachment.empty();
+    }
+
+    return ECreditInvoiceDto.fromJson(res.data['data'][0]).toDomain();
   }
 
   Future<AttachmentFileBuffer> soaDownload(

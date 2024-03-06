@@ -31,4 +31,8 @@ class DownloadPaymentAttachmentEvent with _$DownloadPaymentAttachmentEvent {
   const factory DownloadPaymentAttachmentEvent.downloadEInvoice({
     required DownloadPaymentAttachment eInvoice,
   }) = _DownloadEInvoice;
+
+  const factory DownloadPaymentAttachmentEvent.downloadECredit({
+    required String eCredit,
+  }) = _DownloadECredit;
 }

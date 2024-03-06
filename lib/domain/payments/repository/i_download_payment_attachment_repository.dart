@@ -45,9 +45,13 @@ abstract class IDownloadPaymentAttachmentRepository {
   Future<Either<ApiFailure, File>> soaDownload({
     required SoaData soaData,
   });
-  Future<Either<ApiFailure, File>> eInvoiceDownload({
-    required DownloadPaymentAttachment eInvoice,
+  Future<Either<ApiFailure, File>> eCreditInvoiceDownload({
+    required DownloadPaymentAttachment eCreditInvoiceUrl,
   });
 
   Future<Either<ApiFailure, PermissionStatus>> downloadPermission();
+
+  Future<Either<ApiFailure, DownloadPaymentAttachment>> getECreditDownloadUrl({
+    required String eCreditNumber,
+  });
 }
