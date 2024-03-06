@@ -26,6 +26,8 @@ class ViewByItemRequestDto with _$ViewByItemRequestDto {
     @JsonKey(name: 'fromDate', defaultValue: '') required String dateFrom,
     @JsonKey(name: 'isOptimised', defaultValue: true) required bool isOptimised,
     @JsonKey(name: 'orderType', includeIfNull: false) int? orderType,
+    @JsonKey(name: 'isDetailsPage', defaultValue: false)
+        required bool isDetailsPage,
   }) = _ViewByItemRequestDto;
 
   factory ViewByItemRequestDto.fromDomain(ViewByItemRequest viewByItemRequest) {
@@ -52,6 +54,7 @@ class ViewByItemRequestDto with _$ViewByItemRequestDto {
       orderType: orderType == OrderHistoryType.all()
           ? null
           : orderType.getOrDefaultValue(0),
+      isDetailsPage: viewByItemRequest.isDetailsPage,
     );
   }
 

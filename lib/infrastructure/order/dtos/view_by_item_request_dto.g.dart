@@ -31,6 +31,7 @@ _$_ViewByItemRequestDto _$$_ViewByItemRequestDtoFromJson(
       dateFrom: json['fromDate'] as String? ?? '',
       isOptimised: json['isOptimised'] as bool? ?? true,
       orderType: json['orderType'] as int?,
+      isDetailsPage: json['isDetailsPage'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_ViewByItemRequestDtoToJson(
@@ -57,5 +58,6 @@ Map<String, dynamic> _$$_ViewByItemRequestDtoToJson(
   }
 
   writeNotNull('orderType', instance.orderType);
+  val['isDetailsPage'] = instance.isDetailsPage;
   return val;
 }

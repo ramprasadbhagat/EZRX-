@@ -25,6 +25,7 @@ mixin _$ViewByItemRequest {
   String get searchKey => throw _privateConstructorUsedError;
   String get orderNumber => throw _privateConstructorUsedError;
   ViewByItemFilter get viewByItemFilter => throw _privateConstructorUsedError;
+  bool get isDetailsPage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByItemRequestCopyWith<ViewByItemRequest> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $ViewByItemRequestCopyWith<$Res> {
       int offSet,
       String searchKey,
       String orderNumber,
-      ViewByItemFilter viewByItemFilter});
+      ViewByItemFilter viewByItemFilter,
+      bool isDetailsPage});
 
   $ViewByItemFilterCopyWith<$Res> get viewByItemFilter;
 }
@@ -73,6 +75,7 @@ class _$ViewByItemRequestCopyWithImpl<$Res, $Val extends ViewByItemRequest>
     Object? searchKey = null,
     Object? orderNumber = null,
     Object? viewByItemFilter = null,
+    Object? isDetailsPage = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -111,6 +114,10 @@ class _$ViewByItemRequestCopyWithImpl<$Res, $Val extends ViewByItemRequest>
           ? _value.viewByItemFilter
           : viewByItemFilter // ignore: cast_nullable_to_non_nullable
               as ViewByItemFilter,
+      isDetailsPage: null == isDetailsPage
+          ? _value.isDetailsPage
+          : isDetailsPage // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -140,7 +147,8 @@ abstract class _$$_ViewByItemRequestCopyWith<$Res>
       int offSet,
       String searchKey,
       String orderNumber,
-      ViewByItemFilter viewByItemFilter});
+      ViewByItemFilter viewByItemFilter,
+      bool isDetailsPage});
 
   @override
   $ViewByItemFilterCopyWith<$Res> get viewByItemFilter;
@@ -166,6 +174,7 @@ class __$$_ViewByItemRequestCopyWithImpl<$Res>
     Object? searchKey = null,
     Object? orderNumber = null,
     Object? viewByItemFilter = null,
+    Object? isDetailsPage = null,
   }) {
     return _then(_$_ViewByItemRequest(
       salesOrg: null == salesOrg
@@ -204,6 +213,10 @@ class __$$_ViewByItemRequestCopyWithImpl<$Res>
           ? _value.viewByItemFilter
           : viewByItemFilter // ignore: cast_nullable_to_non_nullable
               as ViewByItemFilter,
+      isDetailsPage: null == isDetailsPage
+          ? _value.isDetailsPage
+          : isDetailsPage // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -220,7 +233,8 @@ class _$_ViewByItemRequest extends _ViewByItemRequest {
       required this.offSet,
       required this.searchKey,
       required this.orderNumber,
-      required this.viewByItemFilter})
+      required this.viewByItemFilter,
+      required this.isDetailsPage})
       : super._();
 
   @override
@@ -241,10 +255,12 @@ class _$_ViewByItemRequest extends _ViewByItemRequest {
   final String orderNumber;
   @override
   final ViewByItemFilter viewByItemFilter;
+  @override
+  final bool isDetailsPage;
 
   @override
   String toString() {
-    return 'ViewByItemRequest(salesOrg: $salesOrg, customerCodeSoldTo: $customerCodeSoldTo, shipToCustomerCode: $shipToCustomerCode, language: $language, pageSize: $pageSize, offSet: $offSet, searchKey: $searchKey, orderNumber: $orderNumber, viewByItemFilter: $viewByItemFilter)';
+    return 'ViewByItemRequest(salesOrg: $salesOrg, customerCodeSoldTo: $customerCodeSoldTo, shipToCustomerCode: $shipToCustomerCode, language: $language, pageSize: $pageSize, offSet: $offSet, searchKey: $searchKey, orderNumber: $orderNumber, viewByItemFilter: $viewByItemFilter, isDetailsPage: $isDetailsPage)';
   }
 
   @override
@@ -268,7 +284,9 @@ class _$_ViewByItemRequest extends _ViewByItemRequest {
             (identical(other.orderNumber, orderNumber) ||
                 other.orderNumber == orderNumber) &&
             (identical(other.viewByItemFilter, viewByItemFilter) ||
-                other.viewByItemFilter == viewByItemFilter));
+                other.viewByItemFilter == viewByItemFilter) &&
+            (identical(other.isDetailsPage, isDetailsPage) ||
+                other.isDetailsPage == isDetailsPage));
   }
 
   @override
@@ -282,7 +300,8 @@ class _$_ViewByItemRequest extends _ViewByItemRequest {
       offSet,
       searchKey,
       orderNumber,
-      viewByItemFilter);
+      viewByItemFilter,
+      isDetailsPage);
 
   @JsonKey(ignore: true)
   @override
@@ -302,7 +321,8 @@ abstract class _ViewByItemRequest extends ViewByItemRequest {
       required final int offSet,
       required final String searchKey,
       required final String orderNumber,
-      required final ViewByItemFilter viewByItemFilter}) = _$_ViewByItemRequest;
+      required final ViewByItemFilter viewByItemFilter,
+      required final bool isDetailsPage}) = _$_ViewByItemRequest;
   _ViewByItemRequest._() : super._();
 
   @override
@@ -323,6 +343,8 @@ abstract class _ViewByItemRequest extends ViewByItemRequest {
   String get orderNumber;
   @override
   ViewByItemFilter get viewByItemFilter;
+  @override
+  bool get isDetailsPage;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByItemRequestCopyWith<_$_ViewByItemRequest> get copyWith =>

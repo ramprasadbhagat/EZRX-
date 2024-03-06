@@ -119,6 +119,7 @@ class ViewByItemRepository implements IViewByItemRepository {
         language: user.preferredLanguage.languageCode,
         orderNumber: searchKey.getOrCrash(),
         pageSize: 1,
+        isDetailsPage: true,
       );
 
       final orderHistoryItemList =

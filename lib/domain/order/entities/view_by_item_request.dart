@@ -17,6 +17,7 @@ class ViewByItemRequest with _$ViewByItemRequest {
     required String searchKey,
     required String orderNumber,
     required ViewByItemFilter viewByItemFilter,
+    required bool isDetailsPage,
   }) = _ViewByItemRequest;
 
   factory ViewByItemRequest.empty() => ViewByItemRequest(
@@ -29,5 +30,6 @@ class ViewByItemRequest with _$ViewByItemRequest {
         searchKey: '',
         orderNumber: '',
         viewByItemFilter: ViewByItemFilter.empty(),
+        isDetailsPage: false,
       );
 }
