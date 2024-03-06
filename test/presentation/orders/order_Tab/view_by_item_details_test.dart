@@ -1690,7 +1690,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final expectedPrice = find.text(
-        'MYR 1,800.00',
+        'MYR 1,926.00',
         findRichText: true,
       );
       expect(expectedPrice, findsOneWidget);

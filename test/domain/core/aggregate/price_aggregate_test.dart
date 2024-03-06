@@ -1764,7 +1764,7 @@ void main() {
             tax: 5.0,
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
           ),
-          salesOrgConfig: fakeIDSalesOrgConfigs,
+          salesOrgConfig: fakeIDSalesOrgConfigs.copyWith(vatValue: 11),
         );
         expect(
           customPriceAggregate.itemTaxPercent,

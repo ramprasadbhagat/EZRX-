@@ -94,6 +94,7 @@ class ItemDetailsSection extends StatelessWidget {
               quantity: orderHistoryItem.qty,
               taxPercentage: orderHistoryItem.taxPercentage,
               netPrice: orderHistoryItem.itemTotalNetPrice(
+                eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
                 eligibilityState.salesOrg.isID,
               ),
             ),

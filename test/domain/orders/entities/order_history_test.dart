@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -61,6 +62,7 @@ void main() async {
 
         expect(
           orderHistoryItem.itemTotalNetPrice(
+            fakeIDSalesOrgConfigs.displayItemTaxBreakdown,
             false,
           ),
           '100.0',

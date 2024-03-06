@@ -53,7 +53,7 @@ class OrderSummarySection extends StatelessWidget {
               key: WidgetKeys.viewByOrderIdTaxKey,
               orderNumber: orderDetails.orderNumber,
               title:
-                  '${context.tr('Tax at')} ${eligibilityState.salesOrg.orderTaxValue}%',
+                  '${context.tr('Tax at')} ${salesOrgConfigs.vatValue}%',
               value: orderDetails.totalTax,
             ),
             const SizedBox(height: 10),

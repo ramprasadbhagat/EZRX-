@@ -1558,12 +1558,13 @@ void main() {
         );
       });
 
-      testWidgets('Order summary section for ID', (tester) async {
+      testWidgets('Order summary section for ID', (tester) async {  
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
             salesOrgConfigs: fakeIDSalesOrgConfigs.copyWith(
               displaySubtotalTaxBreakdown: true,
+              vatValue: 11,
             ),
           ),
         );

@@ -607,14 +607,6 @@ double countrySmallOrderThreshold(String country) {
   return salesOrgCountryMap[country] ?? 0;
 }
 
-num countryOrderTaxValue(String country) {
-  final salesOrgCountryMap = {
-    'ID': 11,
-  };
-
-  return salesOrgCountryMap[country] ?? 0;
-}
-
 bool checkIfCustomerIsBlocked(String value) => value == 'blocked';
 
 bool salesOrgIsPhMdi(String salesOrg) => salesOrg == '2501';

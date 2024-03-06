@@ -320,9 +320,6 @@ class CartState with _$CartState {
       .replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '');
 
   double get _totalTaxPercentInDouble {
-    if (_isID) {
-      return salesOrganisation.salesOrg.orderTaxValue.toDouble();
-    }
     if (!config.salesOrg.isVN) {
       return config.vatValue.toDouble();
     }

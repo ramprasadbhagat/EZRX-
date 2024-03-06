@@ -333,9 +333,6 @@ class PriceAggregate with _$PriceAggregate {
     }
     final salesOrg = salesOrgConfig.salesOrg;
 
-    if (salesOrg.isID) {
-      return salesOrg.orderTaxValue.toDouble();
-    }
     if (salesOrg.isVN) {
       return materialInfo.tax;
     }

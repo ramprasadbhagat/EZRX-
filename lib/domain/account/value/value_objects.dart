@@ -157,8 +157,6 @@ class SalesOrg extends ValueObject<String> {
 
   int get cutOffTime => countryCutOffTime(country);
 
-  num get orderTaxValue => countryOrderTaxValue(country);
-
   double get smallOrderThreshold => countrySmallOrderThreshold(country);
 
   bool get showSmallOrderFee => isID;

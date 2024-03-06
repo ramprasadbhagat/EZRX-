@@ -123,6 +123,9 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                       e.taxPercentage,
                                                   netPrice: e.itemTotalNetPrice(
                                                     eligibilityState
+                                                        .salesOrgConfigs
+                                                        .displayItemTaxBreakdown,
+                                                    eligibilityState
                                                         .salesOrg.isID,
                                                   ),
                                                 ),
