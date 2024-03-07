@@ -882,6 +882,9 @@ class WidgetKeys {
       Key('closeMaterialInformationDialog');
   static const Key bodyContentProductDetail = Key('bodyContentProductDetail');
   static const Key productDetailSuspended = Key('productDetailSuspended');
+  static const Key expiryDateInfoIcon = Key('expiryDateInfoIcon');
+  static const Key expiryDateInstructionSheet =
+      Key('expiryDateInstructionSheet');
 
   //============================================================
   //  bundle Details

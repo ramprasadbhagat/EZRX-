@@ -40,6 +40,4 @@ class StockInfo with _$StockInfo {
         salesDistrict: '',
         stockQuantity: 0,
       );
-
-  bool get batchExpiryDateAvailable => batch.isValid() || expiryDate.isValid();
 }

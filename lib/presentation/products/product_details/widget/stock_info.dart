@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -23,7 +24,6 @@ class ProductStockInfo extends StatelessWidget {
               previous.productDetailAggregate.stockInfo ||
           current.isDetailAndStockFetching != previous.isDetailAndStockFetching,
       builder: (context, state) {
-        final stockInfo = state.productDetailAggregate.stockInfo;
         final eligibilityState = context.read<EligibilityBloc>().state;
 
         if (state.isDetailAndStockFetching) {
@@ -33,33 +33,90 @@ class ProductStockInfo extends StatelessWidget {
           );
         }
 
-        return stockInfo.batchExpiryDateAvailable
-            ? Padding(
-                key: WidgetKeys.materialDetailsStock,
-                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                child: RichText(
-                  text: TextSpan(
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(color: ZPColors.darkGray),
-                    children: [
-                      if (eligibilityState.salesOrg.showBatchNumber)
-                        TextSpan(
-                          text:
-                              '${context.tr('Batch')}: ${state.displayBatchNumber} ',
-                        ),
-                      if (eligibilityState.salesOrgConfigs.expiryDateDisplay)
-                        TextSpan(
-                          text:
-                              '(${context.tr('EXP')}: ${state.displayExpiryDate})',
-                        ),
-                    ],
+        return Padding(
+          key: WidgetKeys.materialDetailsStock,
+          padding: const EdgeInsets.symmetric(vertical: 5.0),
+          child: RichText(
+            text: TextSpan(
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: ZPColors.darkGray),
+              children: [
+                if (eligibilityState.salesOrg.showBatchNumber)
+                  TextSpan(
+                    text:
+                        '${context.tr('Batch')}: ${state.displayBatchNumber} ',
                   ),
-                ),
-              )
-            : const SizedBox.shrink();
+                if (eligibilityState.salesOrgConfigs.expiryDateDisplay) ...[
+                  TextSpan(
+                    text: '(${context.tr('EXP')}: ${state.displayExpiryDate})',
+                  ),
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.middle,
+                    child: IconButton(
+                      key: WidgetKeys.expiryDateInfoIcon,
+                      splashRadius: 15,
+                      constraints: const BoxConstraints(),
+                      padding: EdgeInsets.zero,
+                      onPressed: () => showModalBottomSheet(
+                        context: context,
+                        builder: (context) => const _ExpiryDateInstruction(),
+                      ),
+                      icon: const Icon(Icons.info, size: 18),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        );
       },
+    );
+  }
+}
+
+class _ExpiryDateInstruction extends StatelessWidget {
+  const _ExpiryDateInstruction({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+        child: Column(
+          key: WidgetKeys.expiryDateInstructionSheet,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              context.tr('Expiry date'),
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    color: ZPColors.primary,
+                    fontSize: 20,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              '${context.tr('Expiry date displayed is for reference, actual product may vary')}.',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: ZPColors.neutralsGrey1,
+                  ),
+            ),
+            const SizedBox(height: 35),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                key: WidgetKeys.closeButton,
+                onPressed: () => context.router.pop(),
+                child: Text(context.tr('Got it')),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -802,30 +802,25 @@ void main() {
       testWidgets('Product Details Related Products Visible', (tester) async {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
-            isRelatedProductsFetching: true,
-            productDetailAggregate: ProductDetailAggregate.empty(),
+            isRelatedProductsFetching: false,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              similarProduct: similarProducts,
+            ),
           ),
         );
-        final expectedStates = Stream.fromIterable(
-          [
-            ProductDetailState.initial().copyWith(
-              isRelatedProductsFetching: false,
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                materialInfo: materialInfo,
-                similarProduct: similarProducts,
-              ),
-            ),
-          ],
-        );
 
-        whenListen(productDetailMockBloc, expectedStates);
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
         final similarProductSectionFinder =
             find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
         final similarProductItemFinder =
             find.byKey(WidgetKeys.materialDetailsSimilarProductItem);
-
+        await tester.dragUntilVisible(
+          similarProductSectionFinder,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -300),
+        );
         expect(similarProductSectionFinder, findsOneWidget);
         expect(similarProductItemFinder, findsAtLeastNWidgets(1));
 
@@ -2116,6 +2111,70 @@ void main() {
             findsNothing,
           );
         });
+
+        testWidgets('Should display icon with tooltip along with expiry date',
+            (tester) async {
+          when(() => autoRouterMock.pop())
+              .thenAnswer((_) => Future.value(true));
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.textContaining('(EXP: NA)', findRichText: true),
+            findsOneWidget,
+          );
+          final infoIcon = find.byKey(WidgetKeys.expiryDateInfoIcon);
+          expect(infoIcon, findsOneWidget);
+          await tester.tap(infoIcon);
+          await tester.pumpAndSettle();
+          final bottomSheet = find.byKey(WidgetKeys.expiryDateInstructionSheet);
+          expect(bottomSheet, findsOneWidget);
+          expect(
+            find.text(
+              'Expiry date displayed is for reference, actual product may vary.',
+            ),
+            findsOneWidget,
+          );
+          final closeButton = find.descendant(
+            of: bottomSheet,
+            matching: find.byKey(WidgetKeys.closeButton),
+          );
+          expect(closeButton, findsOneWidget);
+          expect(
+            find.descendant(of: closeButton, matching: find.text('Got it')),
+            findsOneWidget,
+          );
+          await tester.tap(closeButton);
+
+          verify(() => autoRouterMock.pop()).called(1);
+        });
+      });
+
+      testWidgets(
+          'Should display batch and expiry date for Other Market when no data',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.materialDetailsStock), findsOneWidget);
+        expect(
+          find.textContaining('Batch: NA', findRichText: true),
+          findsOneWidget,
+        );
+        expect(
+          find.textContaining('(EXP: NA)', findRichText: true),
+          findsOneWidget,
+        );
       });
 
       testWidgets(
