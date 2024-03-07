@@ -1009,7 +1009,7 @@ void main() {
           of: listPriceStrikeThroughComponent,
           matching: listPriceFinder,
         ),
-        findsOneWidget,
+        findsNothing,
       );
     });
 
@@ -1746,7 +1746,7 @@ void main() {
 
         expect(
           find.byType(GovtListPriceComponent),
-          findsOneWidget,
+          findsNothing,
         );
       },
     );
@@ -2155,7 +2155,7 @@ void main() {
 
     final govtListPriceComponent = find.byType(GovtListPriceComponent);
 
-    expect(govtListPriceComponent, findsOneWidget);
+    expect(govtListPriceComponent, findsNothing);
   });
 }
 

@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/icon_label.dart';
 import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -197,13 +196,6 @@ class _ProductTile extends StatelessWidget {
                               eligibilityState.salesOrg.isID,
                             ),
                             salesOrgConfig: eligibilityState.salesOrgConfigs,
-                          ),
-                          Flexible(
-                            child: GovtListPriceComponent(
-                              price: product.itemUnitPrice(
-                                eligibilityState.salesOrg.isID,
-                              ),
-                            ),
                           ),
                         ],
                       ),

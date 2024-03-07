@@ -20,6 +20,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -286,7 +287,7 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      expect(find.byType(GovtListPriceComponent), findsOneWidget);
+      expect(find.byType(GovtListPriceComponent), findsNothing);
     });
   });
 
@@ -357,5 +358,34 @@ void main() {
       marketPlaceLogo,
       findsNWidgets(mpItemsCount),
     );
+  });
+
+  testWidgets('Hide List Price section for bonus materials', (tester) async {
+    when(
+      () => eligibilityBlocMock.state,
+    ).thenAnswer(
+      (invocation) => EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeTWSalesOrgConfigs,
+      ),
+    );
+    when(
+      () => viewByItemsBlocMock.state,
+    ).thenAnswer(
+      (invocation) => ViewByItemsState.initial().copyWith(
+        orderHistory: fakeOrderHistory.copyWith(
+          orderHistoryItems: [
+            fakeOrderHistory.orderHistoryItems.first,
+            fakeOrderHistory.orderHistoryItems.first
+                .copyWith(isBonusMaterial: true)
+          ],
+        ),
+      ),
+    );
+
+    await tester.pumpWidget(getScopedWidget());
+    await tester.pumpAndSettle();
+
+    final freeText = find.text('List price: FREE', findRichText: true);
+    expect(freeText, findsNothing);
   });
 }
