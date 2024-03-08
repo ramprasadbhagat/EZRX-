@@ -364,20 +364,21 @@ class AcceptButton extends StatelessWidget {
                       ),
                       TextButton(
                         key: WidgetKeys.tncDialogCancelButton,
-                        onPressed: () {
-                          if (userState.isLoading) return;
-                          if (isMarketPlace) {
-                            context.read<UserBloc>().add(
-                                  UserEvent.setMarketPlaceTncAcceptance(
-                                    MarketPlaceTnCAcceptance.reject(),
-                                  ),
-                                );
-                          } else {
-                            context.read<AuthBloc>().add(
-                                  const AuthEvent.logout(),
-                                );
-                          }
-                        },
+                        onPressed: (userState.isLoading || state.userConsentAll)
+                            ? null
+                            : () {
+                                if (isMarketPlace) {
+                                  context.read<UserBloc>().add(
+                                        UserEvent.setMarketPlaceTncAcceptance(
+                                          MarketPlaceTnCAcceptance.reject(),
+                                        ),
+                                      );
+                                } else {
+                                  context.read<AuthBloc>().add(
+                                        const AuthEvent.logout(),
+                                      );
+                                }
+                              },
                         child: LoadingShimmer.withChild(
                           enabled: userState.isLoading,
                           child: Text(
@@ -388,7 +389,9 @@ class AcceptButton extends StatelessWidget {
                                 .textTheme
                                 .labelSmall!
                                 .copyWith(
-                                  color: ZPColors.extraDarkGreen,
+                                  color: state.userConsentAll
+                                      ? ZPColors.lightGray
+                                      : ZPColors.extraDarkGreen,
                                 ),
                           ),
                         ),

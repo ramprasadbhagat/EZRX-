@@ -308,6 +308,48 @@ void main() {
         ).called(1);
       });
 
+      testWidgets(
+          'Disable Skip or Cancel button when user clicked both checkbox',
+          (tester) async {
+        when(() => mockAupTcBloc.state).thenReturn(
+          AupTcState.initial().copyWith(
+            tncConsent: true,
+            privacyConsent: true,
+          ),
+        );
+
+        await tester.pumpWidget(aupTcWidget(fakeClient, true));
+        await tester.pump();
+        final skipBtn = find.byKey(WidgetKeys.tncDialogCancelButton);
+        expect(
+          find.descendant(
+            of: skipBtn,
+            matching: find.text('Skip & only see ZP products'.tr()),
+          ),
+          findsOneWidget,
+        );
+        await tester.tap(skipBtn);
+        verifyNever(
+          () => mockUserBloc.add(
+            UserEvent.setMarketPlaceTncAcceptance(
+              MarketPlaceTnCAcceptance.reject(),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(aupTcWidget(fakeClient, false));
+        await tester.pump();
+        final cancelBtn = find.byKey(WidgetKeys.tncDialogCancelButton);
+        await tester.tap(cancelBtn);
+
+        verifyNever(
+          () => mockUserBloc.add(
+            UserEvent.setMarketPlaceTncAcceptance(
+              MarketPlaceTnCAcceptance.reject(),
+            ),
+          ),
+        );
+      });
       testWidgets('Can not tap on button when loading', (tester) async {
         when(() => mockUserBloc.state)
             .thenReturn(UserState.initial().copyWith(isLoading: true));
