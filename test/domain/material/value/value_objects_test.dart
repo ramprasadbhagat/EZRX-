@@ -19,66 +19,6 @@ void main() {
     });
   });
 
-  group('Material Group 4 value object', () {
-    test('should return true when material group is 6A1', () async {
-      const input = '6A1';
-      final materialGroup = MaterialGroup.four(input);
-      final result = materialGroup.isFOC;
-      expect(result, true);
-    });
-
-    test('should return false when material group is 6GS', () async {
-      const input = '6GS';
-      final materialGroup = MaterialGroup.four(input);
-      final result = materialGroup.isFOC;
-      expect(result, false);
-    });
-
-    test('should return ZPFC when material group type is ZPFC', () async {
-      const input = '6A1';
-      final materialGroup = MaterialGroup.four(input);
-      final result = materialGroup.getMaterialGroup4Type;
-      expect(result, 'ZPFC');
-    });
-
-    test('should return ZPOR when material group type is ZPOR', () async {
-      const input = '6GS';
-      final materialGroup = MaterialGroup.four(input);
-      final result = materialGroup.getMaterialGroup4Type;
-      expect(result, 'ZPOR');
-    });
-  });
-
-  group('Material Group 2 value object', () {
-    test('should return true when material group is 6A1', () async {
-      const input = '6A1';
-      final materialGroup = MaterialGroup.two(input);
-      final result = materialGroup.isFOC;
-      expect(result, true);
-    });
-
-    test('should return false when material group is 6GS', () async {
-      const input = '6GS';
-      final materialGroup = MaterialGroup.two(input);
-      final result = materialGroup.isFOC;
-      expect(result, false);
-    });
-
-    test('should return ZPFC when material group type is ZPFC', () async {
-      const input = '6A1';
-      final materialGroup = MaterialGroup.two(input);
-      final result = materialGroup.getMaterialGroup4Type;
-      expect(result, 'ZPFC');
-    });
-
-    test('should return ZPOR when material group type is ZPOR', () async {
-      const input = '6GS';
-      final materialGroup = MaterialGroup.two(input);
-      final result = materialGroup.getMaterialGroup4Type;
-      expect(result, 'ZPOR');
-    });
-  });
-
   group('Principal Code value object', () {
     test('should return true when principal code submit allowed for client',
         () async {

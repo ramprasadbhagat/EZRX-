@@ -3497,22 +3497,6 @@ void main() {
     'Testing CartBloc state test',
     () {
       test(
-        'Testing CartBloc state containCovidMaterial',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: priceAggregates
-                .map(
-                  (e) => e.copyWith(
-                    materialInfo: MaterialInfo.empty()
-                        .copyWith(materialGroup4: MaterialGroup.four('6A1')),
-                  ),
-                )
-                .toList(),
-          );
-          expect(cartBlocState.containCovidMaterial, true);
-        },
-      );
-      test(
         'Testing CartBloc state containFocMaterial',
         () {
           final cartBlocState = CartState.initial().copyWith(
@@ -3545,15 +3529,6 @@ void main() {
         },
       );
 
-      test(
-        'Testing CartBloc state containNonCovidMaterial',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: priceAggregates,
-          );
-          expect(cartBlocState.containNonCovidMaterial, true);
-        },
-      );
       test(
         'Testing CartBloc state containNonFocMaterial',
         () {

@@ -8,10 +8,6 @@ double totalPriceStringAsFixed(String value) {
   return double.parse(value);
 }
 
-bool materialIsFOC(String materialGroup) {
-  return materialGroup == '6A1';
-}
-
 BonusMaterialCalculationEnum getBonusCalculationEnum(String calculation) {
   switch (calculation) {
     case '001':
@@ -30,10 +26,6 @@ BonusMaterialCalculationEnum getBonusCalculationEnum(String calculation) {
     default:
       return BonusMaterialCalculationEnum.calculation912;
   }
-}
-
-String materialGroup4Type(bool isFoc) {
-  return isFoc ? 'ZPFC' : 'ZPOR';
 }
 
 bool checkMaterialType(String type) {

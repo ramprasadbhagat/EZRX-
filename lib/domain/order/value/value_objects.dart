@@ -209,14 +209,6 @@ class MaterialGroup extends ValueObject<String> {
     return MaterialGroup._(Right(input));
   }
 
-  bool get isFOC {
-    return materialIsFOC(value.getOrElse(() => ''));
-  }
-
-  String get getMaterialGroup4Type {
-    return materialGroup4Type(isFOC);
-  }
-
   const MaterialGroup._(this.value);
 }
 

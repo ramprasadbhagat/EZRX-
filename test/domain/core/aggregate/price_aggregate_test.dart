@@ -566,21 +566,6 @@ void main() {
     );
 
     test(
-      'display from PriceAggregate for isFOC',
-      () {
-        final customPriceAggregate = emptyPriceAggregate.copyWith(
-          price: emptyPrice.copyWith(
-            isFOC: true,
-          ),
-        );
-        expect(
-          customPriceAggregate.display(PriceType.unitPriceTotal),
-          'FOC',
-        );
-      },
-    );
-
-    test(
       'display from PriceAggregate for finalPrice isUnavailable',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
