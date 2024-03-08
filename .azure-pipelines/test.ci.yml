@@ -33,6 +33,8 @@ parameters:
 
       - integration_test__vn__client_user__client_user_order__vn
       - integration_test__vn__client_user__client_user_payment__vn
+      - integration_test__vn__external_sales_rep__external_sales_rep_user_order__vn
+      - integration_test__vn__external_sales_rep__external_sales_rep_user_return__vn
 
       - integration_test__mm__external_sales_rep__external_sales_rep_user_order__my
 

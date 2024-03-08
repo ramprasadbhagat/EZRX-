@@ -145,14 +145,24 @@ class FilterSortProductRobot extends CommonRobot {
     }
   }
 
-  void verifyDefaultFilterProduct() {
-    verifyCheckboxCheckedShowProduct('Favourites', false);
-    verifyCheckboxCheckedShowProduct('Items with offers', false);
-    verifyCheckboxCheckedShowProduct('Bundle offers', false);
+  void verifyDefaultFilterProduct({
+    bool verifyFavourite = true,
+    bool verifyItemWithOffer = true,
+    bool verifyBundleOffer = true,
+    bool verifyManufacturerVisible = true,
+    bool verifyCountryOfOriginVisible = true,
+  }) {
+    if (verifyFavourite) verifyCheckboxCheckedShowProduct('Favourites', false);
+    if (verifyItemWithOffer) {
+      verifyCheckboxCheckedShowProduct('Items with offers', false);
+    }
+    if (verifyBundleOffer) {
+      verifyCheckboxCheckedShowProduct('Bundle offers', false);
+    }
     verifyRadioSort('A-Z', true);
     verifyRadioSort('Z-A', false);
-    verifyFilterManufacturerVisible();
-    verifyFilterCountryOfOriginVisible();
+    if (verifyManufacturerVisible) verifyFilterManufacturerVisible();
+    if (verifyCountryOfOriginVisible) verifyFilterCountryOfOriginVisible();
   }
 
   void verifyDefaultFilterProductForIdMarket() {

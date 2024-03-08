@@ -9,6 +9,14 @@ class ProfileRobot {
   ProfileRobot(this.tester);
 
   final page = find.byKey(WidgetKeys.profilePage);
+  final profilePageLanguageDropdown =
+      find.byKey(WidgetKeys.profilePageLanguageDropdown);
+
+  Finder profilePageLanguageDropdownItem(String languageString) => find.byKey(
+        WidgetKeys.genericKey(
+          key: 'language_$languageString',
+        ),
+      );
 
   void verifyPageVisible() {
     expect(page, findsOneWidget);
@@ -53,7 +61,7 @@ class ProfileRobot {
   }
 
   void verifyLicenseListVisible() {
-    _verifyTextVisible('License information:');
+    _verifyTextVisible('License information:'.tr());
     final noItemFound =
         find.byKey(WidgetKeys.noRecordsFoundSearchIcon).evaluate().isNotEmpty;
     if (noItemFound) {
@@ -93,6 +101,20 @@ class ProfileRobot {
     }
   }
 
+  void verifyProfilePageLanguageDropdown(String languageString) {
+    expect(profilePageLanguageDropdown, findsOneWidget);
+    expect(profilePageLanguageDropdownItem(languageString), findsOneWidget);
+  }
+
+  Future<void> tapProfilePageLanguageDropdownAndChangeLanguage(
+    String languageString,
+  ) async {
+    await tester.tap(profilePageLanguageDropdown);
+    await tester.pumpAndSettle();
+    await tester.tap(profilePageLanguageDropdownItem(languageString).first);
+    await tester.pumpAndSettle();
+  }
+
   void _verifyButtonDisabled(Key key) {
     final button = find.byKey(key);
     expect(button, findsOneWidget);
@@ -103,5 +125,27 @@ class ProfileRobot {
   void verifyButtonsDisabled() {
     _verifyButtonDisabled(WidgetKeys.profileClearButton);
     _verifyButtonDisabled(WidgetKeys.profileSaveButton);
+  }
+
+  void _verifyButtonEnabled(Key key) {
+    final button = find.byKey(key);
+    expect(button, findsOneWidget);
+    final buttonWidget = tester.widget<ButtonStyleButton>(button);
+    expect(buttonWidget.enabled, true);
+  }
+
+  void verifyButtonsEnabled() {
+    _verifyButtonEnabled(WidgetKeys.profileClearButton);
+    _verifyButtonEnabled(WidgetKeys.profileSaveButton);
+  }
+
+  Future<void> tapSaveButton() async {
+    await tester.tap(find.byKey(WidgetKeys.profileSaveButton));
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapClearButton() async {
+    await tester.tap(find.byKey(WidgetKeys.profileClearButton));
+    await tester.pumpAndSettle();
   }
 }

@@ -75,6 +75,7 @@ class ProductDetailRobot extends CommonRobot {
     await tester.tap(favoritesIcon.first);
     await tester.pumpUntilVisible(customSnackBar);
     await dismissSnackbar();
+    await tester.pumpAndSettle();
   }
 
   Future<void> openMaterialInformation() async {

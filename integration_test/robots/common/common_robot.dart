@@ -153,7 +153,9 @@ class CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> changeDeliveryAddress(String shipToCode) async {
+  Future<void> changeDeliveryAddress(
+    String shipToCode,
+  ) async {
     if ((tester
                 .widget<ListTile>(find.byKey(WidgetKeys.customerCodeSelect))
                 .title as Text)
