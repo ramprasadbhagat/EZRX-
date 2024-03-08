@@ -87,7 +87,7 @@ class OrderHeaderSection extends StatelessWidget {
               ),
               if (eligibilityState.salesOrgConfigs.enableFutureDeliveryDay)
                 BalanceTextRow(
-                  keyText: context.tr('Requested Delivery Date'),
+                  keyText: context.tr('Request delivery date'),
                   valueText:
                       orderDetails.requestedDeliveryDate.dateTimeOrNaString,
                   keyTextStyle:
@@ -103,7 +103,7 @@ class OrderHeaderSection extends StatelessWidget {
                 ),
               if (eligibilityState.salesOrgConfigs.enableReferenceNote)
                 BalanceTextRow(
-                  keyText: context.tr('Reference Note'),
+                  keyText: context.tr('Reference note'),
                   valueText: orderDetails.referenceNotes,
                   keyTextStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -119,7 +119,7 @@ class OrderHeaderSection extends StatelessWidget {
               if (eligibilityState.displayPaymentTerm)
                 BalanceTextRow(
                   key: WidgetKeys.paymentTermKey,
-                  keyText: context.tr('Payment Term'),
+                  keyText: context.tr('Payment term'),
                   valueText: orderDetails
                       .orderHistoryDetailsPaymentTerm.displayPaymentTerm,
                   keyTextStyle:

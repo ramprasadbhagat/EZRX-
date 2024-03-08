@@ -1,15 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 
 class ItemDetailsSection extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
@@ -21,84 +10,23 @@ class ItemDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eligibilityState = context.read<EligibilityBloc>().state;
-
     return Padding(
       padding: const EdgeInsets.only(
         top: 12.0,
-        left: 12.0,
-        right: 12.0,
+        left: 20,
+        right: 20,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            orderHistoryItem.principalData.principalName.getOrDefaultValue(''),
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          CommonTileItem(
-            subtitle: '',
-            label: orderHistoryItem.combinationCode(
-              showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+          if (!orderHistoryItem.isMarketPlace) ...[
+            Text(
+              orderHistoryItem.principalData.principalName.name,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
-            title: orderHistoryItem.materialDescription,
-            priceComponent: orderHistoryItem.isBonusMaterial
-                ? null
-                : Row(
-                    children: [
-                      if (eligibilityState.salesOrgConfigs.enableListPrice &&
-                          orderHistoryItem.showMaterialListPrice)
-                        PriceComponent(
-                          key: WidgetKeys.materialListPriceStrikeThrough,
-                          salesOrgConfig: eligibilityState.salesOrgConfigs,
-                          price: orderHistoryItem.getListPrice.toString(),
-                          type: PriceStyle.materialListPriceStrikeThrough,
-                        ),
-                      OrderItemPrice(
-                        unitPrice: orderHistoryItem.itemUnitPrice(
-                          eligibilityState.salesOrg.isID,
-                        ),
-                        originPrice: orderHistoryItem.originPrice.toString(),
-                        showPreviousPrice: orderHistoryItem.isCounterOffer,
-                        hidePrice: orderHistoryItem.hidePrice,
-                      ),
-                    ],
-                  ),
-            statusWidget: StatusLabel(
-              key: WidgetKeys.orderItemStatusKey,
-              status: StatusType(
-                orderHistoryItem.status.displayOrderStatus,
-              ),
-            ),
-            quantity: '',
-            isQuantityBelowImage: true,
-            isQuantityRequired: false,
-            materialNumber: orderHistoryItem.materialNumber,
-            statusTag: eligibilityState.salesOrg.isID
-                ? null
-                : orderHistoryItem.productTag,
-            headerText: eligibilityState.salesOrgConfigs.batchNumDisplay &&
-                    orderHistoryItem.batchNumHasData
-                ? '${'Batch'.tr()}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderHistoryItem.expiryDate.dateOrDashString})'
-                : '',
-            isCovidItem: (eligibilityState.salesOrg.isPH &&
-                    orderHistoryItem.orderType.isCovidOrderTypeForPH) ||
-                (eligibilityState.salesOrg.isSg &&
-                    orderHistoryItem.orderType.isCovidOrderTypeForSG),
-            showOfferTag: orderHistoryItem.isOfferItem,
-            showBundleTag: orderHistoryItem.isBundle,
-            footerWidget: QuantityAndPriceWithTax(
-              quantity: orderHistoryItem.qty,
-              taxPercentage: orderHistoryItem.taxPercentage,
-              netPrice: orderHistoryItem.itemTotalNetPrice(
-                eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
-                eligibilityState.salesOrg.isID,
-              ),
-            ),
-          ),
+            const SizedBox(height: 10),
+          ],
+          ViewByItemOrderItemTile(orderHistoryItem: orderHistoryItem),
         ],
       ),
     );

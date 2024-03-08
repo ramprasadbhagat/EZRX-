@@ -57,7 +57,7 @@ class ViewByOrdersDetailRobot extends CommonRobot {
 
   void verifyPaymentTerm(String text) {
     expect(
-      find.byKey(WidgetKeys.balanceTextRow('Payment Term'.tr(), text)),
+      find.byKey(WidgetKeys.balanceTextRow('Payment term'.tr(), text)),
       findsOneWidget,
     );
   }

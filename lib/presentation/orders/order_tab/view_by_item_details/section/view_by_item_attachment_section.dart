@@ -1,17 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
-
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
-
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
-
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 
 class ViewByItemAttachmentSection extends StatelessWidget {
   const ViewByItemAttachmentSection({Key? key}) : super(key: key);

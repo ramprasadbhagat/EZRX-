@@ -21,6 +21,7 @@ class CommonTileItem extends StatelessWidget {
     required this.isQuantityBelowImage,
     required this.footerWidget,
     this.headerText,
+    this.headerTextStyle,
     this.headerTextInfoIcon,
     this.statusWidget,
     this.statusTag,
@@ -40,6 +41,7 @@ class CommonTileItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final String? headerText;
+  final TextStyle? headerTextStyle;
   final Widget? headerTextInfoIcon;
   final Widget? priceComponent;
   final Widget? statusWidget;
@@ -66,6 +68,7 @@ class CommonTileItem extends StatelessWidget {
           children: [
             _HeaderItem(
               header: headerText,
+              headerTextStyle: headerTextStyle,
               statusWidget: statusWidget,
               topHeaderWidget: topHeaderWidget,
               headerTextInfoIcon: headerTextInfoIcon,
@@ -217,12 +220,14 @@ class _HeaderItem extends StatelessWidget {
   const _HeaderItem({
     Key? key,
     this.header,
+    this.headerTextStyle,
     this.statusWidget,
     this.topHeaderWidget,
     this.headerTextInfoIcon,
   }) : super(key: key);
 
   final String? header;
+  final TextStyle? headerTextStyle;
   final Widget? headerTextInfoIcon;
   final Widget? statusWidget;
   final Widget? topHeaderWidget;
@@ -245,9 +250,10 @@ class _HeaderItem extends StatelessWidget {
                 key: WidgetKeys.commonTileItemHeader,
                 text: TextSpan(
                   text: headerText,
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: ZPColors.darkerGrey,
-                      ),
+                  style: headerTextStyle ??
+                      Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: ZPColors.darkerGrey,
+                          ),
                   children: [
                     WidgetSpan(
                       child: headerTextInfoIcon ?? const SizedBox.shrink(),

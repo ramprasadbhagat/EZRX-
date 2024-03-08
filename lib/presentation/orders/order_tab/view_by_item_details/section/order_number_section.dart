@@ -1,21 +1,4 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 
 class OrderNumberSection extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;

@@ -1,21 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_number_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_attachment_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/invoice_number_section.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 
 class ViewByItemDetailsHeaderSection extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
   final OrderHistoryBasicInfo orderHistoryBasicInfo;
+
   const ViewByItemDetailsHeaderSection({
     Key? key,
     required this.orderHistoryItem,
@@ -38,9 +26,31 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
           OrderNumberSection(
             orderHistoryItem: orderHistoryItem,
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          if (orderHistoryItem.isMarketPlace)
+            Padding(
+              padding: const EdgeInsets.only(top: 16, bottom: 6),
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const MarketPlaceRectangleLogo(),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: MarketPlaceSellerTitle(
+                      sellerName:
+                          orderHistoryItem.principalData.principalName.name,
+                      iconColor: Colors.white,
+                      textColor: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          const SizedBox(height: 10),
           BalanceTextRow(
             valueFlex: 1,
             key: WidgetKeys.viewByItemsOrderDetailOrderDate,
@@ -53,11 +63,13 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                   color: ZPColors.white,
                 ),
           ),
+          const SizedBox(height: 8),
           InvoiceNumberSection(
             key: WidgetKeys.viewByItemsOrderDetailInvoiceNumber,
             invoiceNumber: orderHistoryItem.invoiceData.invoiceNumber
                 .getOrDefaultValue(''),
           ),
+          const SizedBox(height: 8),
           BalanceTextRow(
             valueFlex: 1,
             key: WidgetKeys.viewByItemsOrderDetailPoReference,
@@ -70,27 +82,27 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                   color: ZPColors.white,
                 ),
           ),
-          config.enableFutureDeliveryDay
-              ? BalanceTextRow(
-                  valueFlex: 1,
-                  key: WidgetKeys.viewByItemsOrderDetailsRequestedDeliveryDate,
-                  keyText: context.tr('Requested Delivery Date'),
-                  valueText: orderHistoryItem.requestedDeliveryDate.dateString,
-                  keyTextStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.white,
-                          ),
-                  valueTextStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.white,
-                          ),
-                )
-              : const SizedBox.shrink(),
-          if (config.enableReferenceNote)
+          if (config.enableFutureDeliveryDay) ...[
+            const SizedBox(height: 8),
+            BalanceTextRow(
+              valueFlex: 1,
+              key: WidgetKeys.viewByItemsOrderDetailsRequestedDeliveryDate,
+              keyText: context.tr('Request delivery date'),
+              valueText: orderHistoryItem.requestedDeliveryDate.dateString,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+            ),
+          ],
+          if (config.enableReferenceNote) ...[
+            const SizedBox(height: 8),
             BalanceTextRow(
               key: WidgetKeys.viewByItemsOrderDetailsReferenceNote,
               valueFlex: 1,
-              keyText: 'Reference Note',
+              keyText: context.tr('Reference note'),
               valueText: orderHistoryItem.referenceNotes.displayDashIfEmpty,
               keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.white,
@@ -99,13 +111,15 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                     color: ZPColors.white,
                   ),
             ),
-          if (!config.disablePaymentTermsDisplay)
+          ],
+          if (!config.disablePaymentTermsDisplay) ...[
+            const SizedBox(height: 8),
             LoadingShimmer.withChild(
               enabled:
                   context.read<ViewByItemDetailsBloc>().state.isDetailsLoading,
               child: BalanceTextRow(
                 key: WidgetKeys.paymentTerm,
-                keyText: context.tr('Payment Term'),
+                keyText: context.tr('Payment term'),
                 valueFlex: 1,
                 valueText: orderHistoryBasicInfo.paymentTerm.displayValue,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -117,40 +131,38 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                         ),
               ),
             ),
-          config.enableMobileNumber
-              ? BalanceTextRow(
-                  valueFlex: 1,
-                  key: WidgetKeys.viewByItemsOrderDetailsContactPerson,
-                  keyText: context.tr('Contact person'),
-                  valueText: orderHistoryItem.orderBy.displayNAIfEmpty,
-                  keyTextStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.white,
-                          ),
-                  valueTextStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.white,
-                          ),
-                )
-              : const SizedBox.shrink(),
-          config.enableMobileNumber
-              ? BalanceTextRow(
-                  valueFlex: 1,
-                  key: WidgetKeys.viewByItemsOrderDetailsContactNumber,
-                  keyText: context.tr('Contact number'),
-                  valueText:
-                      orderHistoryItem.telephoneNumber.displayTelephoneNumber,
-                  keyTextStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.white,
-                          ),
-                  valueTextStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.white,
-                          ),
-                )
-              : const SizedBox.shrink(),
-          if (config.enableSpecialInstructions)
+          ],
+          if (config.enableMobileNumber) ...[
+            const SizedBox(height: 8),
+            BalanceTextRow(
+              valueFlex: 1,
+              key: WidgetKeys.viewByItemsOrderDetailsContactPerson,
+              keyText: context.tr('Contact person'),
+              valueText: orderHistoryItem.orderBy.displayNAIfEmpty,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            BalanceTextRow(
+              valueFlex: 1,
+              key: WidgetKeys.viewByItemsOrderDetailsContactNumber,
+              keyText: context.tr('Contact number'),
+              valueText:
+                  orderHistoryItem.telephoneNumber.displayTelephoneNumber,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.white,
+                  ),
+            ),
+          ],
+          if (config.enableSpecialInstructions) ...[
+            const SizedBox(height: 8),
             BalanceTextRow(
               valueFlex: 1,
               keyText: context.tr('Delivery instructions'),
@@ -163,7 +175,11 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                     color: ZPColors.white,
                   ),
             ),
-          if (config.showPOAttachment) const ViewByItemAttachmentSection(),
+          ],
+          if (config.showPOAttachment) ...[
+            const SizedBox(height: 8),
+            const ViewByItemAttachmentSection(),
+          ],
         ],
       ),
     );

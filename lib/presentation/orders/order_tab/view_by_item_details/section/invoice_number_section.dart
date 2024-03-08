@@ -1,21 +1,5 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
+part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
-
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class InvoiceNumberSection extends StatelessWidget {
   final String invoiceNumber;

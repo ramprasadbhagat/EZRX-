@@ -93,7 +93,7 @@ class _DeliveryInfoState extends State<_DeliveryInfo> {
                                 const _RequestDeliveryDate(),
                               if (config.enableReferenceNote)
                                 _TextFormField(
-                                  labelText: 'Reference Note',
+                                  labelText: 'Reference note',
                                   keyText: 'referenceNoteKey',
                                   hintText: 'Enter reference note',
                                   label: DeliveryInfoLabel.referenceNote,

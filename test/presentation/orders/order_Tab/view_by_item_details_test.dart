@@ -5,6 +5,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
+import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
@@ -57,9 +59,6 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_number_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/invoice_number_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_attachment_section.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart'
     as payment_term;
 
@@ -359,7 +358,11 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-
+      await tester.dragUntilVisible(
+        find.byType(ItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
       final combinationCode = find.text(
         '${fakeOrderHistoryItem.materialNumber.displayMatNo} | ${fakeOrderHistoryItem.governmentMaterialCode}',
       );
@@ -384,7 +387,11 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-
+      await tester.dragUntilVisible(
+        find.byType(ItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
       final materialNumber =
           find.text(fakeOrderHistoryItem.materialNumber.displayMatNo);
       expect(materialNumber, findsWidgets);
@@ -537,7 +544,7 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      final referenceNote = find.textContaining('Reference Note');
+      final referenceNote = find.textContaining('Reference note');
       expect(referenceNote, findsNothing);
     });
 
@@ -564,7 +571,7 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      final referenceNote = find.textContaining('Reference Note');
+      final referenceNote = find.textContaining('Reference note');
       expect(referenceNote, findsOneWidget);
     });
     testWidgets('Find Order Created Status', (tester) async {
@@ -640,25 +647,17 @@ void main() {
       );
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
-        ),
-      );
-      final expectedStates = [
-        ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [
-              fakeOrderHistoryItem,
-            ],
-          ),
         ),
-      ];
-      whenListen(
-        viewByItemDetailsBlocMock,
-        Stream.fromIterable(expectedStates),
       );
+
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(ItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
       final expectedDelivery = find.textContaining(
         '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
         findRichText: true,
@@ -1563,7 +1562,11 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-
+      await tester.dragUntilVisible(
+        find.byType(ItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
       final expectedNetPrice = find.text(
         'THB 1,800.00',
         findRichText: true,
@@ -1607,6 +1610,11 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(ItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
       final expectedTax = find.text(
         '(50.0% tax)',
       );
@@ -1689,6 +1697,11 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(ItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
       final expectedPrice = find.text(
         'MYR 1,926.00',
         findRichText: true,
@@ -1755,6 +1768,11 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
+      await tester.dragUntilVisible(
+        find.byType(ItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
       final materialListPriceStrikeThroughFinder =
           find.byKey(WidgetKeys.materialListPriceStrikeThrough);
       final listPriceFinder = find.byWidgetPredicate(
@@ -2016,6 +2034,59 @@ void main() {
       expect(find.byKey(WidgetKeys.paymentTerm), findsNothing);
 
       expect(find.text('K001-30 Days from EOM, due EOM'), findsNothing);
+    });
+
+    testWidgets(
+        'Show seller and MP logo at header + Display batch & expiry date as NA for MP order item',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial()
+            .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(isMarketPlace: true),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final header = find.byType(ViewByItemDetailsHeaderSection);
+      final detail = find.byType(ItemDetailsSection);
+      final sellerName = fakeOrderHistoryItem.principalData.principalName.name;
+      expect(
+        find.descendant(
+          of: header,
+          matching: find.byType(MarketPlaceRectangleLogo),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: header,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget is MarketPlaceSellerTitle &&
+                widget.sellerName == sellerName,
+          ),
+        ),
+        findsOneWidget,
+      );
+
+      await tester.dragUntilVisible(
+        detail,
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
+      expect(
+        find.descendant(of: detail, matching: find.text(sellerName)),
+        findsNothing,
+      );
+      final batchExpiryDate = tester
+          .widget<RichText>(find.byKey(WidgetKeys.commonTileItemHeader))
+          .text
+          .toPlainText();
+      expect(batchExpiryDate, contains('Batch NA (EXP: NA)'));
     });
   });
 }

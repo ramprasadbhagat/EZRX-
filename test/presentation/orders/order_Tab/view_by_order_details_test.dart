@@ -357,7 +357,7 @@ void main() {
       await tester.pump();
 
       final paymentTermWidget =
-          find.byKey(WidgetKeys.balanceTextRow('Payment Term', 'NA'));
+          find.byKey(WidgetKeys.balanceTextRow('Payment term', 'NA'));
       expect(paymentTermWidget, findsOneWidget);
     });
 
@@ -737,7 +737,7 @@ void main() {
       expect(
         find.descendant(
           of: find.byType(BalanceTextRow),
-          matching: find.textContaining('Requested Delivery Date'),
+          matching: find.textContaining('Request delivery date'),
         ),
         findsOneWidget,
       );
@@ -755,7 +755,7 @@ void main() {
       expect(
         find.descendant(
           of: find.byType(BalanceTextRow),
-          matching: find.textContaining('Reference Note'),
+          matching: find.textContaining('Reference note'),
         ),
         findsOneWidget,
       );

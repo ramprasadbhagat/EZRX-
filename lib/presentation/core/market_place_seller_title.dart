@@ -5,12 +5,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class MarketPlaceSellerTitle extends StatelessWidget {
   final String sellerName;
-  const MarketPlaceSellerTitle({Key? key, required this.sellerName})
-      : super(key: key);
+  final Color? iconColor;
+  final Color? textColor;
+
+  const MarketPlaceSellerTitle({
+    Key? key,
+    required this.sellerName,
+    this.iconColor,
+    this.textColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           width: 18,
@@ -18,14 +26,17 @@ class MarketPlaceSellerTitle extends StatelessWidget {
           child: SvgPicture.asset(
             SvgImage.marketplaceSellerIcon,
             fit: BoxFit.fill,
+            color: iconColor,
           ),
         ),
         const SizedBox(width: 4),
-        Text(
-          sellerName,
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
+        Flexible(
+          child: Text(
+            sellerName,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: textColor ?? ZPColors.neutralsBlack,
+                ),
+          ),
         ),
       ],
     );
