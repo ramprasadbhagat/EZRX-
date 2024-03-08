@@ -84,17 +84,19 @@ class IntroStep extends StatelessWidget {
                       ),
                     ),
                     if (!isLastPage)
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: TextButton(
-                          key: WidgetKeys.introSkipButton,
-                          onPressed: getStarted,
-                          child: Text(
-                            context.tr('Skip'),
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(color: ZPColors.paleLime),
+                      Expanded(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: TextButton(
+                            key: WidgetKeys.introSkipButton,
+                            onPressed: getStarted,
+                            child: Text(
+                              context.tr('Skip'),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(color: ZPColors.paleLime),
+                            ),
                           ),
                         ),
                       ),

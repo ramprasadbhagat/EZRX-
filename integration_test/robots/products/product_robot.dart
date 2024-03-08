@@ -148,6 +148,10 @@ class ProductRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  bool checkMaterialListNotEmpty() {
+    return materialCard.evaluate().isNotEmpty;
+  }
+
   void verifyOnCovidChip() {
     final cardCount = materialCard.evaluate().length;
     expect(

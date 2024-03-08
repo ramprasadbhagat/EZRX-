@@ -60,6 +60,13 @@ class CartRobot {
     await tester.pumpUntilVisible(clearCartSuccessMessage);
   }
 
+  void verifyTaxDescription() {
+    expect(
+      find.text('Applies to materials with full tax'.tr()),
+      findsOneWidget,
+    );
+  }
+
   void verifyClearCartButton() {
     expect(clearCartButton, findsOneWidget);
   }
@@ -307,6 +314,24 @@ class CartRobot {
       ),
       findsOneWidget,
     );
+  }
+
+  Future<void> swipeBonusMaterialToDelete(
+    String materialNumber,
+    String bonusMaterialNumber,
+  ) async {
+    await tester.drag(
+      _bonusItem(materialNumber, bonusMaterialNumber),
+      defaultSwipeOffset,
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.descendant(
+        of: _bonusItem(materialNumber, bonusMaterialNumber),
+        matching: find.byKey(WidgetKeys.cartItemSwipeDeleteButtonForBonus),
+      ),
+    );
+    await tester.pumpAndSettle();
   }
 
   Future<void> swipeMaterialToDelete(String materialNumber) async {

@@ -211,11 +211,11 @@ class _QuantityAndPrice extends StatelessWidget {
                 ),
               ),
               Column(
-                key: WidgetKeys.cartItemProductTotalPrice,
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   _DisplayMaterialDetails(
+                    key: WidgetKeys.cartItemProductTotalPrice,
                     child: PriceComponent(
                       salesOrgConfig:
                           context.read<EligibilityBloc>().state.salesOrgConfigs,

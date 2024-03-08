@@ -281,6 +281,10 @@ class HomeRobot extends CommonRobot {
     await tester.pump();
   }
 
+  bool checkBrowseProductsEnoughItemToScroll() {
+    return browseProductsList.evaluate().length > 3;
+  }
+
   Future<void> slideToNextBrowseProducts() async {
     final browse = browseProductsList.first;
     await tester.drag(browse, const Offset(-500, 150));

@@ -19,7 +19,7 @@ class ServiceTile extends StatelessWidget {
           return GridView.count(
             physics: const NeverScrollableScrollPhysics(),
             crossAxisCount: (MediaQuery.of(context).size.width / 80).round(),
-            childAspectRatio: 1,
+            childAspectRatio: 0.9,
             shrinkWrap: true,
             children: _getServiceTabs(context, state).map((item) {
               return InkWell(
@@ -54,8 +54,7 @@ class ServiceTile extends StatelessWidget {
       if (state.user.userCanAccessOrderHistory)
         MoreDetailsTile.orderTab(context),
       if (state.isReturnsEnable) MoreDetailsTile.returnsTab(context),
-      if (state.isPaymentEnabled)
-        MoreDetailsTile.paymentsTab(context),
+      if (state.isPaymentEnabled) MoreDetailsTile.paymentsTab(context),
       if (state.isIDMarket) MoreDetailsTile.eZPointTab(context),
     ];
   }
