@@ -901,6 +901,7 @@ void setupLocator() {
           locator<ViewByOrderDetailsRemoteDataSource>(),
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
@@ -1167,6 +1168,7 @@ void setupLocator() {
       localDataSource: locator<ViewByOrderDetailsLocalDataSource>(),
       orderHistoryDetailsRemoteDataSource:
           locator<ViewByOrderDetailsRemoteDataSource>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
@@ -1184,6 +1186,7 @@ void setupLocator() {
       viewByOrderDetailsQueryMutation:
           locator<ViewByOrderDetailsQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -2526,6 +2529,7 @@ void setupLocator() {
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
       viewByOrderQuery: locator<ViewByOrderDetailsQueryMutation>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -2534,6 +2538,7 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<ViewByOrderLocalDataSource>(),
       remoteDataSource: locator<ViewByOrderRemoteDataSource>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
   locator.registerFactory(

@@ -180,7 +180,7 @@ class _ProductTile extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '${product.isMarketPlace ? context.tr('Sold by:') : ''} ${product.principalData.principalName.getOrDefaultValue('')}',
+                            '${product.isMarketPlace ? '${context.tr('Sold by')}:' : ''} ${product.principalData.principalName.name})}',
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: ZPColors.extraLightGrey4,

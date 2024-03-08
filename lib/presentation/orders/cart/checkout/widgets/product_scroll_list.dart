@@ -120,17 +120,22 @@ class _ZPTitleScrollList extends StatelessWidget {
 }
 
 class _DividerAndMarketPlaceTitle extends StatelessWidget {
-  const _DividerAndMarketPlaceTitle({Key? key}) : super(key: key);
+  final bool showDivider;
+
+  const _DividerAndMarketPlaceTitle({Key? key, required this.showDivider})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 5),
-          child: _Divider(),
-        ),
-        Padding(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (showDivider)
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 5),
+            child: _Divider(),
+          ),
+        const Padding(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
           child: MarketPlaceTitleWithLogo(),
         ),

@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_payment_term_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
@@ -76,6 +77,8 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         required List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
     @JsonKey(name: 'ItmCount', defaultValue: 0)
         required int itemCount,
+    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+        required bool isMarketPlace,
   }) = _OrderHistoryDetailsDto;
   factory OrderHistoryDetailsDto.fromDomain(
     OrderHistoryDetails orderHistoryDetails,
@@ -123,6 +126,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
               .map((e) => PoDocumentsDto.fromDomain(e))
               .toList(),
       itemCount: orderHistoryDetails.orderItemsCount,
+      isMarketPlace: orderHistoryDetails.isMarketPlace,
     );
   }
 
@@ -160,6 +164,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       orderHistoryDetailsPoDocuments:
           orderHistoryDetailsPoDocuments.map((dto) => dto.toDomain()).toList(),
       itemCount: itemCount,
+      isMarketPlace: isMarketPlace,
     );
   }
 

@@ -49,10 +49,21 @@ class _ViewByOrder extends StatelessWidget {
             Row(
               children: [
                 Flexible(
-                  child: Text(
-                    '${context.tr(viewByOrderHistoryItem.processingStatus.prefix)} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
-                    key: WidgetKeys.viewByOrdersCodeLabelKey,
-                    style: Theme.of(context).textTheme.labelSmall,
+                  child: Row(
+                    children: [
+                      if (viewByOrderHistoryItem.isMarketPlace)
+                        const Padding(
+                          padding: EdgeInsets.only(right: 8),
+                          child: MarketPlaceLogo(),
+                        ),
+                      Expanded(
+                        child: Text(
+                          '${context.tr(viewByOrderHistoryItem.processingStatus.prefix)} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                          key: WidgetKeys.viewByOrdersCodeLabelKey,
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 if (viewByOrderHistoryItem.processingStatus.isInQueue)

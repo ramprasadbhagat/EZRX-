@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:mocktail/mocktail.dart';
@@ -44,6 +45,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
@@ -93,6 +95,8 @@ void main() {
   final mockShipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
   late ViewByOrderDetailsLocalDataSource viewByOrderDetailsLocalDataSource;
   late ViewByOrderDetailsRemoteDataSource viewByOrderDetailsRemoteDataSource;
+  late DeviceStorage deviceStorage;
+  const fakeMarket = 'fake-market';
   const fakeSecretKey = 'fake-key';
   final fakeError = MockException(message: 'fake-exception');
 
@@ -102,7 +106,7 @@ void main() {
     mockConfig = MockConfig();
     orderLocalDataSource = OrderLocalDataSourceMock();
     orderRemoteDataSource = OrderRemoteDataSourceMock();
-
+    deviceStorage = DeviceStorageMock();
     mixpanelService = MixpanelServiceMock();
     viewByOrderDetailsLocalDataSource = ViewByOrderDetailsLocalDataSourceMock();
     viewByOrderDetailsRemoteDataSource =
@@ -124,6 +128,7 @@ void main() {
       orderHistoryDetailsRemoteDataSource: viewByOrderDetailsRemoteDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
       stockInfoLocalDataSource: stockInfoLocalDataSource,
+      deviceStorage: deviceStorage,
     );
     final materialListResponse =
         await MaterialListLocalDataSource().getProductList();
@@ -1127,6 +1132,7 @@ void main() {
 
     test('get submit order getOrderHistoryDetails remote success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
 
       when(
         () => viewByOrderDetailsRemoteDataSource.getOrderHistoryDetails(
@@ -1135,6 +1141,7 @@ void main() {
           searchKey: submitOrderResponseMock.salesDocument,
           soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
           shipTo: fakeShipToInfo.shipToCustomerCode,
+          market: fakeMarket,
         ),
       ).thenAnswer(
         (invocation) async => orderHistoryDetailsMock,
@@ -1166,6 +1173,7 @@ void main() {
             searchKey: submitOrderResponseMock.salesDocument,
             soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipTo: fakeShipToInfo.shipToCustomerCode,
+            market: fakeMarket,
           ),
         ).thenThrow(fakeError);
 

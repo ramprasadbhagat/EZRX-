@@ -73,6 +73,7 @@ query orderHistoryQuery($soldTo: String!, $language: String, $searchKey: String,
         mrp
         promotype
         promoStatus
+        isMarketPlace
         Batches {
           BatchNumber
           ExpiryDate

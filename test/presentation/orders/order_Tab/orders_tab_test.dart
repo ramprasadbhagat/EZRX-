@@ -762,6 +762,62 @@ void main() {
 
       expect(find.byType(ViewByItemsPage), findsOneWidget);
     });
+    testWidgets(
+        'Should hide order history type when user can not access marketplace view by orders filter',
+        (tester) async {
+      await tester.pumpWidget(testWidget(const ViewByOrderFilterBottomSheet()));
+      await tester.pumpAndSettle();
+      expect(find.text('Show history'), findsNothing);
+      expect(
+        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('All', true)),
+        findsNothing,
+      );
+      expect(
+        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('ZP orders', false)),
+        findsNothing,
+      );
+      expect(
+        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('MP orders', false)),
+        findsNothing,
+      );
+    });
+
+    testWidgets('apply order history type view by orders filter',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          shipToInfo: fakeShipToInfoPeninsulaRegion,
+          user: fakeClientUserAccessMarketPlace,
+        ),
+      );
+      await tester.pumpWidget(testWidget(const ViewByOrderFilterBottomSheet()));
+      await tester.pumpAndSettle();
+      expect(find.text('Show history'), findsOneWidget);
+      expect(
+        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('All', true)),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('ZP orders', false)),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('MP orders', false)),
+        findsOneWidget,
+      );
+
+      await tester.tap(
+        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('MP orders', false)),
+      );
+      verify(
+        () => viewByOrderFilterBlocMock.add(
+          ViewByOrderFilterEvent.setOrderHistoryType(
+            type: OrderHistoryType.mp(),
+          ),
+        ),
+      ).called(1);
+    });
   });
 
   group('Orders tab search bar', () {

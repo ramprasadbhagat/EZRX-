@@ -15,12 +15,23 @@ _$_ViewByOrdersFilterDto _$$_ViewByOrdersFilterDtoFromJson(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      orderType: json['orderType'] as int?,
     );
 
 Map<String, dynamic> _$$_ViewByOrdersFilterDtoToJson(
-        _$_ViewByOrdersFilterDto instance) =>
-    <String, dynamic>{
-      'toDate': instance.dateTo,
-      'fromDate': instance.dateFrom,
-      'status': instance.orderStatus,
-    };
+    _$_ViewByOrdersFilterDto instance) {
+  final val = <String, dynamic>{
+    'toDate': instance.dateTo,
+    'fromDate': instance.dateFrom,
+    'status': instance.orderStatus,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('orderType', instance.orderType);
+  return val;
+}

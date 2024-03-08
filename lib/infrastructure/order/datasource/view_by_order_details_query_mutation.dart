@@ -1,5 +1,5 @@
 class ViewByOrderDetailsQueryMutation {
-  String getOrderHistoryDetails() {
+  String getOrderHistoryDetails(bool enableMarketPlace) {
     return '''
       query orderHistoryQuery(
   \$soldTo: String!, 
@@ -15,6 +15,7 @@ class ViewByOrderDetailsQueryMutation {
   \$salesOrg: [String],
   \$status: [String],
   \$isDetailsPage: Boolean,
+  ${enableMarketPlace ? '\$orderType: Int,' : ''}
  ) {
   orderHistoryV3(
    request: {
@@ -30,7 +31,8 @@ class ViewByOrderDetailsQueryMutation {
       searchKey: \$searchKey,  
       salesOrg: \$salesOrg,
       status: \$status,
-      isDetailsPage: \$isDetailsPage,
+      isDetailsPage: \$isDetailsPage, 
+      ${enableMarketPlace ? 'orderType: \$orderType' : ''}
      }
   ) {
     orderCount
@@ -61,10 +63,11 @@ class ViewByOrderDetailsQueryMutation {
       SpecialInstructions
       PaymentMethod
       InvoiceNumber
+      ${enableMarketPlace ? 'IsMarketPlace' : ''}
       PaymentTerm {
-          PaymentTermCode
-          PaymentTermDescription
-        }
+        PaymentTermCode
+        PaymentTermDescription
+      }
       TotalDiscount
       ItmCount
       HasPOAttachment
@@ -109,6 +112,7 @@ class ViewByOrderDetailsQueryMutation {
         mrp
         promotype
         promoStatus
+        ${enableMarketPlace ? 'IsMarketPlace' : ''}
         Batches {
           BatchNumber
           ExpiryDate

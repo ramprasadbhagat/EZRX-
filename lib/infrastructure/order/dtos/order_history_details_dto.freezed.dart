@@ -83,6 +83,8 @@ mixin _$OrderHistoryDetailsDto {
       throw _privateConstructorUsedError;
   @JsonKey(name: 'ItmCount', defaultValue: 0)
   int get itemCount => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -134,7 +136,9 @@ abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
       String orderHistoryDetailsSpecialInstructions,
       @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
       List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
-      @JsonKey(name: 'ItmCount', defaultValue: 0) int itemCount});
+      @JsonKey(name: 'ItmCount', defaultValue: 0) int itemCount,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 
   $OrderHistoryDetailsPaymentTermDtoCopyWith<$Res>
       get orderHistoryDetailsPaymentTerm;
@@ -183,6 +187,7 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
     Object? orderHistoryDetailsSpecialInstructions = null,
     Object? orderHistoryDetailsPoDocuments = null,
     Object? itemCount = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       orderValue: null == orderValue
@@ -302,6 +307,10 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
           ? _value.itemCount
           : itemCount // ignore: cast_nullable_to_non_nullable
               as int,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -363,7 +372,9 @@ abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
       String orderHistoryDetailsSpecialInstructions,
       @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
       List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
-      @JsonKey(name: 'ItmCount', defaultValue: 0) int itemCount});
+      @JsonKey(name: 'ItmCount', defaultValue: 0) int itemCount,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 
   @override
   $OrderHistoryDetailsPaymentTermDtoCopyWith<$Res>
@@ -411,6 +422,7 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
     Object? orderHistoryDetailsSpecialInstructions = null,
     Object? orderHistoryDetailsPoDocuments = null,
     Object? itemCount = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_$_OrderHistoryDetailsDto(
       orderValue: null == orderValue
@@ -530,6 +542,10 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
           ? _value.itemCount
           : itemCount // ignore: cast_nullable_to_non_nullable
               as int,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -581,7 +597,9 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
       required this.orderHistoryDetailsSpecialInstructions,
       @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
       required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
-      @JsonKey(name: 'ItmCount', defaultValue: 0) required this.itemCount})
+      @JsonKey(name: 'ItmCount', defaultValue: 0) required this.itemCount,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required this.isMarketPlace})
       : _orderHistoryDetailsOrderItem = orderHistoryDetailsOrderItem,
         _orderHistoryDetailsPoDocuments = orderHistoryDetailsPoDocuments,
         super._();
@@ -690,10 +708,13 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   @override
   @JsonKey(name: 'ItmCount', defaultValue: 0)
   final int itemCount;
+  @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsDto(orderValue: $orderValue, totalTax: $totalTax, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, expectedDeliveryDate: $expectedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, companyName: $companyName, orderNumber: $orderNumber, pOReference: $pOReference, shipTo: $shipTo, soldTo: $soldTo, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, itemCount: $itemCount)';
+    return 'OrderHistoryDetailsDto(orderValue: $orderValue, totalTax: $totalTax, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, expectedDeliveryDate: $expectedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, companyName: $companyName, orderNumber: $orderNumber, pOReference: $pOReference, shipTo: $shipTo, soldTo: $soldTo, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, itemCount: $itemCount, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -760,7 +781,9 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
                 other._orderHistoryDetailsPoDocuments,
                 _orderHistoryDetailsPoDocuments) &&
             (identical(other.itemCount, itemCount) ||
-                other.itemCount == itemCount));
+                other.itemCount == itemCount) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @JsonKey(ignore: true)
@@ -795,7 +818,8 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
         orderHistoryDetailsPaymentTerm,
         orderHistoryDetailsSpecialInstructions,
         const DeepCollectionEquality().hash(_orderHistoryDetailsPoDocuments),
-        itemCount
+        itemCount,
+        isMarketPlace
       ]);
 
   @JsonKey(ignore: true)
@@ -870,8 +894,9 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
       required final String orderHistoryDetailsSpecialInstructions,
       @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
       required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
-      @JsonKey(name: 'ItmCount', defaultValue: 0)
-      required final int itemCount}) = _$_OrderHistoryDetailsDto;
+      @JsonKey(name: 'ItmCount', defaultValue: 0) required final int itemCount,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required final bool isMarketPlace}) = _$_OrderHistoryDetailsDto;
   const _OrderHistoryDetailsDto._() : super._();
 
   factory _OrderHistoryDetailsDto.fromJson(Map<String, dynamic> json) =
@@ -964,6 +989,9 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   @override
   @JsonKey(name: 'ItmCount', defaultValue: 0)
   int get itemCount;
+  @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsDtoCopyWith<_$_OrderHistoryDetailsDto> get copyWith =>

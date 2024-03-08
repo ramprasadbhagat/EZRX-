@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_order_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_filter_dto.dart';
@@ -23,11 +24,13 @@ class ViewByOrderRepository implements IViewByOrderRepository {
   final Config config;
   final ViewByOrderLocalDataSource localDataSource;
   final ViewByOrderRemoteDataSource remoteDataSource;
+  final DeviceStorage deviceStorage;
 
   ViewByOrderRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
+    required this.deviceStorage,
   });
 
   @override
@@ -80,6 +83,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
         sort: sort,
         shipTo: shipToInfo.shipToCustomerCode,
         isDetailsPage: isDetailsPage,
+        market: deviceStorage.currentMarket(),
       );
 
       final newViewByOrderList = List<OrderHistoryDetails>.from(

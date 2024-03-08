@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
@@ -18,8 +19,11 @@ import 'package:mocktail/mocktail.dart';
 
 class OrderHistoryDetailsMock extends Mock implements OrderHistoryDetails {}
 
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
+
 void main() {
   late ViewByOrderDetailsRemoteDataSource remoteDataSource;
+  final remoteConfigService = RemoteConfigServiceMock();
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(
@@ -29,15 +33,21 @@ void main() {
   );
   final dioAdapter = DioAdapter(dio: dio);
   final service = HttpService.mockDio(dio);
+  const fakeMarket = 'fake-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
+      when(() => remoteConfigService.enableMarketPlaceMarkets)
+          .thenReturn(fakeEnableMarketPlaceMarkets);
       remoteDataSource = ViewByOrderDetailsRemoteDataSource(
         httpService: service,
         config: Config(),
         viewByOrderDetailsQueryMutation: ViewByOrderDetailsQueryMutation(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
+        remoteConfigService: remoteConfigService,
       );
     },
   );
@@ -69,7 +79,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderDetailsQueryMutation
-                .getOrderHistoryDetails(),
+                .getOrderHistoryDetails(fakeConfigValue),
             'variables': variables
           }),
         );
@@ -80,6 +90,7 @@ void main() {
           soldTo: 'fake-soldTo',
           language: 'fake-language',
           shipTo: 'fake-shipTo',
+          market: fakeMarket,
         );
 
         expect(
@@ -110,7 +121,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderDetailsQueryMutation
-                .getOrderHistoryDetails(),
+                .getOrderHistoryDetails(fakeConfigValue),
             'variables': variables
           }),
         );
@@ -122,6 +133,7 @@ void main() {
           soldTo: 'fake-soldTo',
           language: 'fake-language',
           shipTo: 'fake-shipTo',
+          market: fakeMarket,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -154,7 +166,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderDetailsQueryMutation
-                .getOrderHistoryDetails(),
+                .getOrderHistoryDetails(fakeConfigValue),
             'variables': variables
           }),
         );
@@ -166,6 +178,7 @@ void main() {
           soldTo: 'fake-soldTo',
           language: 'fake-language',
           shipTo: 'fake-shipTo',
+          market: fakeMarket,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());

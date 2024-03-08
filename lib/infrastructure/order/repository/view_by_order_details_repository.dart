@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_history_details_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 
@@ -16,10 +17,12 @@ class ViewByOrderDetailsRepository implements IViewByOrderDetailsRepository {
   final Config config;
   final ViewByOrderDetailsLocalDataSource localDataSource;
   final ViewByOrderDetailsRemoteDataSource orderHistoryDetailsRemoteDataSource;
+  final DeviceStorage deviceStorage;
   ViewByOrderDetailsRepository({
     required this.config,
     required this.localDataSource,
     required this.orderHistoryDetailsRemoteDataSource,
+    required this.deviceStorage,
   });
   @override
   Future<Either<ApiFailure, OrderHistoryDetails>> getViewByOrderDetails({
@@ -46,6 +49,7 @@ class ViewByOrderDetailsRepository implements IViewByOrderDetailsRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         soldTo: customerCodeInfo.customerCodeSoldTo,
         shipTo: shipToInfo.shipToCustomerCode,
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(orderHistoryDetailsList);

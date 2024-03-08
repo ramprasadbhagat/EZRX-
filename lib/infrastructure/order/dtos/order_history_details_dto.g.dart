@@ -48,6 +48,8 @@ _$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
               .map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
               .toList(),
       itemCount: json['ItmCount'] as int? ?? 0,
+      isMarketPlace:
+          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(
@@ -85,4 +87,5 @@ Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(
           .map((e) => e.toJson())
           .toList(),
       'ItmCount': instance.itemCount,
+      'isMarketPlace': instance.isMarketPlace,
     };

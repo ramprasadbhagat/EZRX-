@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_dto.dart';
@@ -14,11 +15,14 @@ class ViewByOrderDetailsRemoteDataSource {
   ViewByOrderDetailsQueryMutation viewByOrderDetailsQueryMutation;
   Config config;
   DataSourceExceptionHandler dataSourceExceptionHandler;
+  RemoteConfigService remoteConfigService;
+
   ViewByOrderDetailsRemoteDataSource({
     required this.httpService,
     required this.viewByOrderDetailsQueryMutation,
     required this.config,
     required this.dataSourceExceptionHandler,
+    required this.remoteConfigService,
   });
 
   Future<OrderHistoryDetails> getOrderHistoryDetails({
@@ -27,10 +31,12 @@ class ViewByOrderDetailsRemoteDataSource {
     required String searchKey,
     required String salesOrg,
     required String shipTo,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData =
-          viewByOrderDetailsQueryMutation.getOrderHistoryDetails();
+      final queryData = viewByOrderDetailsQueryMutation.getOrderHistoryDetails(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
 
       final variables = {
         'searchKey': searchKey,

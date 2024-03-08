@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -717,6 +718,22 @@ void main() {
         expect(
           find.descendant(of: orderItems, matching: find.byType(StatusLabel)),
           findsNWidgets(orderCount),
+        );
+      });
+      testWidgets('Display MarketPlace logo on MP order ', (tester) async {
+        when(() => mockViewByOrderBloc.state).thenReturn(
+          ViewByOrderState.initial().copyWith(
+            viewByOrderList: viewByOrder,
+          ),
+        );
+        final mpItemsCount = viewByOrder.orderHeaders
+            .where((order) => order.isMarketPlace)
+            .length;
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(
+          find.byType(MarketPlaceLogo),
+          findsNWidgets(mpItemsCount),
         );
       });
     });

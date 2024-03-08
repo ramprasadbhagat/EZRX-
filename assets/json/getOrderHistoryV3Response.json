@@ -23,6 +23,7 @@
           "ItmDescription": "0.9% SODIUM CHLORIDEBP 96X50ML",
           "PaymentMethod": "Bank Transfer",
           "IsGreen": false,
+          "IsMarketplace": true,
           "OrderItems": [
             {
               "MaterialCode": "000000000023063780",
@@ -51,6 +52,7 @@
           "ItmDescription": "AVODARTCAP0.5MG30'S",
           "PaymentMethod": "Bank Transfer",
           "IsGreen": false,
+          "IsMarketplace": false,
           "OrderItems": [
             {
               "MaterialCode": "000000000023046799",
@@ -78,6 +80,7 @@
           "ItmDescription": "(M) 10085 EMBRYOGLUE 10ML",
           "PaymentMethod": "Bank Transfer",
           "IsGreen": false,
+          "IsMarketplace": true,
           "OrderItems": [
             {
               "MaterialCode": "000000000023350931",
@@ -105,6 +108,7 @@
           "ItmDescription": "(Z) JANUMET XR 100/1000 TABS 28'S",
           "PaymentMethod": "Bank Transfer",
           "IsGreen": false,
+          "IsMarketplace": false,
           "OrderItems": [
             {
               "MaterialCode": "000000000023046516",
@@ -137,6 +141,7 @@
           "ItmDescription": "(Z) JANUMET XR 100/1000 TABS 28'S",
           "PaymentMethod": "Bank Transfer",
           "IsGreen": false,
+          "IsMarketplace": true,
           "OrderItems": [
             {
               "MaterialCode": "000000000023046516",
@@ -169,6 +174,7 @@
           "ItmDescription": "PROPECIA FP LPTABS1MG28'S",
           "PaymentMethod": "Bank Transfer",
           "IsGreen": false,
+          "IsMarketplace": false,
           "OrderItems": [
             {
               "MaterialCode": "000000000023046018",
@@ -201,6 +207,7 @@
           "ItmDescription": "PROPECIA FP LPTABS1MG28'S",
           "PaymentMethod": "Bank Transfer",
           "IsGreen": false,
+          "IsMarketplace": true,
           "OrderItems": [
             {
               "MaterialCode": "000000000023046018",
@@ -233,6 +240,7 @@
           "ItmDescription": "PROPECIA FP LPTABS1MG28'S",
           "PaymentMethod": "Bank Transfer",
           "IsGreen": false,
+          "IsMarketplace": false,
           "OrderItems": [
             {
               "MaterialCode": "000000000023046018",
@@ -265,6 +273,7 @@
           "ItmDescription": "ABBOTT CALCIUM MILKEY CHEW400MG30'S",
           "PaymentMethod": "Bank Transfer",
           "IsGreen": false,
+          "IsMarketplace": true,
           "OrderItems": [
             {
               "MaterialCode": "000000000021042567",
@@ -307,6 +316,7 @@
           "ItmDescription": "FOSAMAXTABS10MG30'S",
           "PaymentMethod": "Bank Transfer",
           "IsGreen": false,
+          "IsMarketplace": false,
           "OrderItems": [
             {
               "MaterialCode": "000000000023046018",

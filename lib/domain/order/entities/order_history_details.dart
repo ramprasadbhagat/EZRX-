@@ -48,6 +48,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     required OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
     required SpecialInstructions orderHistoryDetailsSpecialInstructions,
     required List<PoDocuments> orderHistoryDetailsPoDocuments,
+    required bool isMarketPlace,
   }) = _OrderHistoryDetails;
 
   factory OrderHistoryDetails.empty() => OrderHistoryDetails(
@@ -80,6 +81,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         orderHistoryDetailsSpecialInstructions: SpecialInstructions(''),
         orderHistoryDetailsPoDocuments: <PoDocuments>[],
         itemCount: 0,
+        isMarketPlace: false,
       );
 
   double get grandTotalWithTax => orderValue + totalTax;

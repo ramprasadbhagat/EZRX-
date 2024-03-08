@@ -23,6 +23,7 @@ import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
@@ -42,6 +43,7 @@ class OrderRepository implements IOrderRepository {
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final Encryption encryption;
+  final DeviceStorage deviceStorage;
 
   late MixpanelService mixpanelService;
 
@@ -55,6 +57,7 @@ class OrderRepository implements IOrderRepository {
     required this.orderHistoryDetailsRemoteDataSource,
     required this.stockInfoRemoteDataSource,
     required this.stockInfoLocalDataSource,
+    required this.deviceStorage,
   });
 
   @override
@@ -157,6 +160,7 @@ class OrderRepository implements IOrderRepository {
         soldTo: customerCodeInfo.customerCodeSoldTo,
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         shipTo: shipToInfo.shipToCustomerCode,
+        market: deviceStorage.currentMarket(),
       );
 
       final orderHistoryDetailsWithMaterialInfo = orderHistoryDetails.copyWith(

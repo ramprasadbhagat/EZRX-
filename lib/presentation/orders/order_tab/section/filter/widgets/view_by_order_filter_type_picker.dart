@@ -1,11 +1,11 @@
-part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
+part of 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
 
-class _ViewByItemFilterHistoryTypePicker extends StatelessWidget {
-  const _ViewByItemFilterHistoryTypePicker({Key? key}) : super(key: key);
+class _ViewByOrderFilterHistoryTypePicker extends StatelessWidget {
+  const _ViewByOrderFilterHistoryTypePicker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ViewByItemFilterBloc, ViewByItemFilterState>(
+    return BlocBuilder<ViewByOrderFilterBloc, ViewByOrderFilterState>(
       buildWhen: (previous, current) =>
           previous.filter.orderHistoryType != current.filter.orderHistoryType,
       builder: (context, state) => Column(
@@ -13,13 +13,13 @@ class _ViewByItemFilterHistoryTypePicker extends StatelessWidget {
           return ListTileTheme(
             horizontalTitleGap: 2,
             child: RadioListTile<OrderHistoryType>(
-              key: WidgetKeys.filterRadioTile(
-                type.titleViewByItem,
+              key: WidgetKeys.viewByOrderFilterRadioTitle(
+                type.titleViewByOrder,
                 state.filter.orderHistoryType == type,
               ),
               contentPadding: EdgeInsets.zero,
               title: Text(
-                context.tr(type.titleViewByItem),
+                type.titleViewByOrder,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               controlAffinity: ListTileControlAffinity.leading,
@@ -27,8 +27,8 @@ class _ViewByItemFilterHistoryTypePicker extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               onChanged: (value) {
                 if (value == null) return;
-                context.read<ViewByItemFilterBloc>().add(
-                      ViewByItemFilterEvent.setOrderHistoryType(type: value),
+                context.read<ViewByOrderFilterBloc>().add(
+                      ViewByOrderFilterEvent.setOrderHistoryType(type: value),
                     );
               },
               groupValue: state.filter.orderHistoryType,

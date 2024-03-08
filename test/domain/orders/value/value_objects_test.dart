@@ -636,10 +636,37 @@ void main() {
     });
 
     test('title getter', () {
-      expect(OrderHistoryType.all().title, 'All');
-      expect(OrderHistoryType.zp().title, 'ZP items');
-      expect(OrderHistoryType.mp().title, 'MP items');
-      expect(OrderHistoryType(-1).title, '');
+      expect(
+        OrderHistoryType.all().titleViewByItem,
+        'All',
+      );
+      expect(
+        OrderHistoryType.zp().titleViewByItem,
+        'ZP items',
+      );
+      expect(
+        OrderHistoryType.mp().titleViewByItem,
+        'MP items',
+      );
+      expect(
+        OrderHistoryType(-1).titleViewByItem,
+        '',
+      );
+    });
+    test('title getter view by order', () {
+      expect(
+        OrderHistoryType.all().titleViewByOrder,
+        'All',
+      );
+      expect(
+        OrderHistoryType.zp().titleViewByOrder,
+        'ZP orders',
+      );
+      expect(
+        OrderHistoryType.mp().titleViewByOrder,
+        'MP orders',
+      );
+      expect(OrderHistoryType(-1).titleViewByOrder, '');
     });
   });
 }

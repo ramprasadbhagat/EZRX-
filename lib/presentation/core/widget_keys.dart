@@ -1365,6 +1365,8 @@ class WidgetKeys {
       Key('materialListPriceStrikeThrough');
   static const Key viewByItemsOrderDetailsReferenceNote =
       Key('viewByItemsOrderDetailsReferenceNote');
+  static Key viewByOrderFilterRadioTitle(String name, bool isSelected) =>
+      Key('viewByOrderFilterRadioTitle$name$isSelected');
 
   //============================================================
   // View By Orders

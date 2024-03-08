@@ -23,6 +23,7 @@ mixin _$ViewByOrderFilterEvent {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,6 +32,7 @@ mixin _$ViewByOrderFilterEvent {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +41,7 @@ mixin _$ViewByOrderFilterEvent {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +51,7 @@ mixin _$ViewByOrderFilterEvent {
     required TResult Function(_UpdateCurrentFilter value) updateCurrentFilter,
     required TResult Function(_SetDateRange value) setDateRange,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +60,7 @@ mixin _$ViewByOrderFilterEvent {
     TResult? Function(_UpdateCurrentFilter value)? updateCurrentFilter,
     TResult? Function(_SetDateRange value)? setDateRange,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +69,7 @@ mixin _$ViewByOrderFilterEvent {
     TResult Function(_UpdateCurrentFilter value)? updateCurrentFilter,
     TResult Function(_SetDateRange value)? setDateRange,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -168,6 +174,7 @@ class _$_Initialized implements _Initialized {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
   }) {
     return initialized(salesOrganisation);
   }
@@ -179,6 +186,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
   }) {
     return initialized?.call(salesOrganisation);
   }
@@ -190,6 +198,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -205,6 +214,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_UpdateCurrentFilter value) updateCurrentFilter,
     required TResult Function(_SetDateRange value) setDateRange,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
   }) {
     return initialized(this);
   }
@@ -216,6 +226,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_UpdateCurrentFilter value)? updateCurrentFilter,
     TResult? Function(_SetDateRange value)? setDateRange,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
   }) {
     return initialized?.call(this);
   }
@@ -227,6 +238,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_UpdateCurrentFilter value)? updateCurrentFilter,
     TResult Function(_SetDateRange value)? setDateRange,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -327,6 +339,7 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
   }) {
     return updateCurrentFilter(currentFilter);
   }
@@ -338,6 +351,7 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
   }) {
     return updateCurrentFilter?.call(currentFilter);
   }
@@ -349,6 +363,7 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (updateCurrentFilter != null) {
@@ -364,6 +379,7 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
     required TResult Function(_UpdateCurrentFilter value) updateCurrentFilter,
     required TResult Function(_SetDateRange value) setDateRange,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
   }) {
     return updateCurrentFilter(this);
   }
@@ -375,6 +391,7 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
     TResult? Function(_UpdateCurrentFilter value)? updateCurrentFilter,
     TResult? Function(_SetDateRange value)? setDateRange,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
   }) {
     return updateCurrentFilter?.call(this);
   }
@@ -386,6 +403,7 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
     TResult Function(_UpdateCurrentFilter value)? updateCurrentFilter,
     TResult Function(_SetDateRange value)? setDateRange,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (updateCurrentFilter != null) {
@@ -476,6 +494,7 @@ class _$_SetDateRange implements _SetDateRange {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
   }) {
     return setDateRange(dateRange);
   }
@@ -487,6 +506,7 @@ class _$_SetDateRange implements _SetDateRange {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
   }) {
     return setDateRange?.call(dateRange);
   }
@@ -498,6 +518,7 @@ class _$_SetDateRange implements _SetDateRange {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (setDateRange != null) {
@@ -513,6 +534,7 @@ class _$_SetDateRange implements _SetDateRange {
     required TResult Function(_UpdateCurrentFilter value) updateCurrentFilter,
     required TResult Function(_SetDateRange value) setDateRange,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
   }) {
     return setDateRange(this);
   }
@@ -524,6 +546,7 @@ class _$_SetDateRange implements _SetDateRange {
     TResult? Function(_UpdateCurrentFilter value)? updateCurrentFilter,
     TResult? Function(_SetDateRange value)? setDateRange,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
   }) {
     return setDateRange?.call(this);
   }
@@ -535,6 +558,7 @@ class _$_SetDateRange implements _SetDateRange {
     TResult Function(_UpdateCurrentFilter value)? updateCurrentFilter,
     TResult Function(_SetDateRange value)? setDateRange,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (setDateRange != null) {
@@ -630,6 +654,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
   }) {
     return setOrderStatus(status, value);
   }
@@ -641,6 +666,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
   }) {
     return setOrderStatus?.call(status, value);
   }
@@ -652,6 +678,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (setOrderStatus != null) {
@@ -667,6 +694,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
     required TResult Function(_UpdateCurrentFilter value) updateCurrentFilter,
     required TResult Function(_SetDateRange value) setDateRange,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
   }) {
     return setOrderStatus(this);
   }
@@ -678,6 +706,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
     TResult? Function(_UpdateCurrentFilter value)? updateCurrentFilter,
     TResult? Function(_SetDateRange value)? setDateRange,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
   }) {
     return setOrderStatus?.call(this);
   }
@@ -689,6 +718,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
     TResult Function(_UpdateCurrentFilter value)? updateCurrentFilter,
     TResult Function(_SetDateRange value)? setDateRange,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (setOrderStatus != null) {
@@ -707,6 +737,160 @@ abstract class _SetOrderStatus implements ViewByOrderFilterEvent {
   bool get value;
   @JsonKey(ignore: true)
   _$$_SetOrderStatusCopyWith<_$_SetOrderStatus> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SetOrderHistoryTypeCopyWith<$Res> {
+  factory _$$_SetOrderHistoryTypeCopyWith(_$_SetOrderHistoryType value,
+          $Res Function(_$_SetOrderHistoryType) then) =
+      __$$_SetOrderHistoryTypeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({OrderHistoryType type});
+}
+
+/// @nodoc
+class __$$_SetOrderHistoryTypeCopyWithImpl<$Res>
+    extends _$ViewByOrderFilterEventCopyWithImpl<$Res, _$_SetOrderHistoryType>
+    implements _$$_SetOrderHistoryTypeCopyWith<$Res> {
+  __$$_SetOrderHistoryTypeCopyWithImpl(_$_SetOrderHistoryType _value,
+      $Res Function(_$_SetOrderHistoryType) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+  }) {
+    return _then(_$_SetOrderHistoryType(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as OrderHistoryType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetOrderHistoryType implements _SetOrderHistoryType {
+  const _$_SetOrderHistoryType({required this.type});
+
+  @override
+  final OrderHistoryType type;
+
+  @override
+  String toString() {
+    return 'ViewByOrderFilterEvent.setOrderHistoryType(type: $type)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetOrderHistoryType &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetOrderHistoryTypeCopyWith<_$_SetOrderHistoryType> get copyWith =>
+      __$$_SetOrderHistoryTypeCopyWithImpl<_$_SetOrderHistoryType>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation) initialized,
+    required TResult Function(ViewByOrdersFilter currentFilter)
+        updateCurrentFilter,
+    required TResult Function(DateTimeRange dateRange) setDateRange,
+    required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function(OrderHistoryType type) setOrderHistoryType,
+  }) {
+    return setOrderHistoryType(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation)? initialized,
+    TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
+    TResult? Function(DateTimeRange dateRange)? setDateRange,
+    TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
+  }) {
+    return setOrderHistoryType?.call(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation)? initialized,
+    TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
+    TResult Function(DateTimeRange dateRange)? setDateRange,
+    TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function(OrderHistoryType type)? setOrderHistoryType,
+    required TResult orElse(),
+  }) {
+    if (setOrderHistoryType != null) {
+      return setOrderHistoryType(type);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_UpdateCurrentFilter value) updateCurrentFilter,
+    required TResult Function(_SetDateRange value) setDateRange,
+    required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_SetOrderHistoryType value) setOrderHistoryType,
+  }) {
+    return setOrderHistoryType(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_UpdateCurrentFilter value)? updateCurrentFilter,
+    TResult? Function(_SetDateRange value)? setDateRange,
+    TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_SetOrderHistoryType value)? setOrderHistoryType,
+  }) {
+    return setOrderHistoryType?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_UpdateCurrentFilter value)? updateCurrentFilter,
+    TResult Function(_SetDateRange value)? setDateRange,
+    TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_SetOrderHistoryType value)? setOrderHistoryType,
+    required TResult orElse(),
+  }) {
+    if (setOrderHistoryType != null) {
+      return setOrderHistoryType(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetOrderHistoryType implements ViewByOrderFilterEvent {
+  const factory _SetOrderHistoryType({required final OrderHistoryType type}) =
+      _$_SetOrderHistoryType;
+
+  OrderHistoryType get type;
+  @JsonKey(ignore: true)
+  _$$_SetOrderHistoryTypeCopyWith<_$_SetOrderHistoryType> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

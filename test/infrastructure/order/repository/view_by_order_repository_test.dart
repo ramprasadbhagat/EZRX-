@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_filter_dto.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
@@ -30,6 +32,7 @@ void main() {
   late ViewByOrderLocalDataSource viewByOrderLocalDataSource;
   late ViewByOrder fakeViewByOrder;
   late ViewByOrderRemoteDataSource viewByOrderRemoteDataSource;
+  late DeviceStorage deviceStorage;
 
   const fakeSort = 'desc';
   const fakeOrderBy = 'datetime';
@@ -37,6 +40,7 @@ void main() {
   final fakeFilter = ViewByOrdersFilter.empty();
   const fakePageSize = 10;
   const fakeOffSet = 0;
+  const fakeMarket = 'fake-market';
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -44,10 +48,12 @@ void main() {
     mockConfig = MockConfig();
     viewByOrderLocalDataSource = ViewByOrderLocalDataSourceMock();
     viewByOrderRemoteDataSource = ViewByOrderRemoteDataSourceMock();
+    deviceStorage = DeviceStorageMock();
     viewByOrderRepository = ViewByOrderRepository(
       config: mockConfig,
       localDataSource: viewByOrderLocalDataSource,
       remoteDataSource: viewByOrderRemoteDataSource,
+      deviceStorage: deviceStorage,
     );
     fakeViewByOrder = await ViewByOrderLocalDataSource().getViewByOrders();
   });
@@ -108,6 +114,7 @@ void main() {
 
     test('=> get remotely fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
       when(
         () => viewByOrderRemoteDataSource.getViewByOrders(
           soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -121,6 +128,7 @@ void main() {
           sort: fakeSort,
           shipTo: fakeShipToInfo.shipToCustomerCode,
           isDetailsPage: false,
+          market: fakeMarket,
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -147,6 +155,7 @@ void main() {
 
     test('=> get remotely success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
       when(
         () => viewByOrderRemoteDataSource.getViewByOrders(
           soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -160,6 +169,7 @@ void main() {
           sort: fakeSort,
           shipTo: fakeShipToInfo.shipToCustomerCode,
           isDetailsPage: false,
+          market: fakeMarket,
         ),
       ).thenAnswer(
         (invocation) async => fakeViewByOrder,

@@ -27,6 +27,8 @@ mixin _$ViewByOrdersFilterDto {
   String get dateFrom => throw _privateConstructorUsedError;
   @JsonKey(name: 'status', defaultValue: <String>[])
   List<String> get orderStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'orderType', includeIfNull: false)
+  int? get orderType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +46,8 @@ abstract class $ViewByOrdersFilterDtoCopyWith<$Res> {
       {@JsonKey(name: 'toDate', defaultValue: '') String dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '') String dateFrom,
       @JsonKey(name: 'status', defaultValue: <String>[])
-      List<String> orderStatus});
+      List<String> orderStatus,
+      @JsonKey(name: 'orderType', includeIfNull: false) int? orderType});
 }
 
 /// @nodoc
@@ -64,6 +67,7 @@ class _$ViewByOrdersFilterDtoCopyWithImpl<$Res,
     Object? dateTo = null,
     Object? dateFrom = null,
     Object? orderStatus = null,
+    Object? orderType = freezed,
   }) {
     return _then(_value.copyWith(
       dateTo: null == dateTo
@@ -78,6 +82,10 @@ class _$ViewByOrdersFilterDtoCopyWithImpl<$Res,
           ? _value.orderStatus
           : orderStatus // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      orderType: freezed == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -94,7 +102,8 @@ abstract class _$$_ViewByOrdersFilterDtoCopyWith<$Res>
       {@JsonKey(name: 'toDate', defaultValue: '') String dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '') String dateFrom,
       @JsonKey(name: 'status', defaultValue: <String>[])
-      List<String> orderStatus});
+      List<String> orderStatus,
+      @JsonKey(name: 'orderType', includeIfNull: false) int? orderType});
 }
 
 /// @nodoc
@@ -111,6 +120,7 @@ class __$$_ViewByOrdersFilterDtoCopyWithImpl<$Res>
     Object? dateTo = null,
     Object? dateFrom = null,
     Object? orderStatus = null,
+    Object? orderType = freezed,
   }) {
     return _then(_$_ViewByOrdersFilterDto(
       dateTo: null == dateTo
@@ -125,6 +135,10 @@ class __$$_ViewByOrdersFilterDtoCopyWithImpl<$Res>
           ? _value._orderStatus
           : orderStatus // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      orderType: freezed == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -136,7 +150,8 @@ class _$_ViewByOrdersFilterDto extends _ViewByOrdersFilterDto {
       {@JsonKey(name: 'toDate', defaultValue: '') required this.dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '') required this.dateFrom,
       @JsonKey(name: 'status', defaultValue: <String>[])
-      required final List<String> orderStatus})
+      required final List<String> orderStatus,
+      @JsonKey(name: 'orderType', includeIfNull: false) this.orderType})
       : _orderStatus = orderStatus,
         super._();
 
@@ -159,8 +174,12 @@ class _$_ViewByOrdersFilterDto extends _ViewByOrdersFilterDto {
   }
 
   @override
+  @JsonKey(name: 'orderType', includeIfNull: false)
+  final int? orderType;
+
+  @override
   String toString() {
-    return 'ViewByOrdersFilterDto(dateTo: $dateTo, dateFrom: $dateFrom, orderStatus: $orderStatus)';
+    return 'ViewByOrdersFilterDto(dateTo: $dateTo, dateFrom: $dateFrom, orderStatus: $orderStatus, orderType: $orderType)';
   }
 
   @override
@@ -172,13 +191,15 @@ class _$_ViewByOrdersFilterDto extends _ViewByOrdersFilterDto {
             (identical(other.dateFrom, dateFrom) ||
                 other.dateFrom == dateFrom) &&
             const DeepCollectionEquality()
-                .equals(other._orderStatus, _orderStatus));
+                .equals(other._orderStatus, _orderStatus) &&
+            (identical(other.orderType, orderType) ||
+                other.orderType == orderType));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, dateTo, dateFrom,
-      const DeepCollectionEquality().hash(_orderStatus));
+      const DeepCollectionEquality().hash(_orderStatus), orderType);
 
   @JsonKey(ignore: true)
   @override
@@ -201,7 +222,9 @@ abstract class _ViewByOrdersFilterDto extends ViewByOrdersFilterDto {
       @JsonKey(name: 'fromDate', defaultValue: '')
       required final String dateFrom,
       @JsonKey(name: 'status', defaultValue: <String>[])
-      required final List<String> orderStatus}) = _$_ViewByOrdersFilterDto;
+      required final List<String> orderStatus,
+      @JsonKey(name: 'orderType', includeIfNull: false)
+      final int? orderType}) = _$_ViewByOrdersFilterDto;
   const _ViewByOrdersFilterDto._() : super._();
 
   factory _ViewByOrdersFilterDto.fromJson(Map<String, dynamic> json) =
@@ -216,6 +239,9 @@ abstract class _ViewByOrdersFilterDto extends ViewByOrdersFilterDto {
   @override
   @JsonKey(name: 'status', defaultValue: <String>[])
   List<String> get orderStatus;
+  @override
+  @JsonKey(name: 'orderType', includeIfNull: false)
+  int? get orderType;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByOrdersFilterDtoCopyWith<_$_ViewByOrdersFilterDto> get copyWith =>

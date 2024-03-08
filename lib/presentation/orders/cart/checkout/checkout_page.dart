@@ -144,8 +144,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       listItems: cartState.cartProducts.zpMaterialOnly,
                     ),
                     if (cartState.cartProducts.mpMaterialOnly.isNotEmpty)
-                      const SliverToBoxAdapter(
-                        child: _DividerAndMarketPlaceTitle(),
+                      SliverToBoxAdapter(
+                        child: _DividerAndMarketPlaceTitle(
+                          showDivider:
+                              cartState.cartProducts.zpMaterialOnly.isNotEmpty,
+                        ),
                       ),
                     _ProductScrollList(
                       listItems: cartState.cartProducts.mpMaterialOnly,

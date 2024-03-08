@@ -267,3 +267,16 @@ String getOrderHistoryTypeTitle(int value) {
       return '';
   }
 }
+
+String getViewByOrderHistoryTitle(int value) {
+  switch (value) {
+    case 0:
+      return 'All';
+    case 1:
+      return 'MP orders';
+    case 2:
+      return 'ZP orders';
+    default:
+      return '';
+  }
+}

@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -32,6 +34,8 @@ void main() {
   late ViewByOrderDetailsRemoteDataSource orderHistoryDetailsRemoteDataSource;
   late CustomerCodeInfo customerCodeInfo;
   late SalesOrganisation salesOrganisation;
+  late DeviceStorage deviceStorage;
+  const fakeMarket = 'fake-market';
 
   final orderHistoryDetailsMockList = OrderHistoryDetails.empty();
 
@@ -47,11 +51,13 @@ void main() {
         OrderHistoryDetailsLocalDataSourceMock();
     orderHistoryDetailsRemoteDataSource =
         OrderHistoryDetailsRemoteDataSourceMock();
+    deviceStorage = DeviceStorageMock();
 
     orderHistoryDetailsRepository = ViewByOrderDetailsRepository(
       config: mockConfig,
       localDataSource: orderHistoryDetailsLocalDataSource,
       orderHistoryDetailsRemoteDataSource: orderHistoryDetailsRemoteDataSource,
+      deviceStorage: deviceStorage,
     );
     customerCodeInfo =
         CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0030082707');
@@ -143,6 +149,7 @@ void main() {
     test('get OrderHistoryDetails successfully remotely for salesrep',
         () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
       when(
         () => orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
           searchKey: '0200268014',
@@ -150,6 +157,7 @@ void main() {
           salesOrg: '2001',
           soldTo: '0030082707',
           shipTo: fakeShipToInfo.shipToCustomerCode,
+          market: fakeMarket,
         ),
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
@@ -179,6 +187,7 @@ void main() {
           salesOrg: '',
           soldTo: '',
           shipTo: fakeShipToInfo.shipToCustomerCode,
+          market: fakeMarket,
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -206,6 +215,7 @@ void main() {
           salesOrg: '2001',
           soldTo: '0030082707',
           shipTo: fakeShipToInfo.shipToCustomerCode,
+          market: fakeMarket,
         ),
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
@@ -230,6 +240,7 @@ void main() {
           salesOrg: '',
           soldTo: '',
           shipTo: fakeShipToInfo.shipToCustomerCode,
+          market: fakeMarket,
         ),
       ).thenThrow((invocation) async => MockException());
 

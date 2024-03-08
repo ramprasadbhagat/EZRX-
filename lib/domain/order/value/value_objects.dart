@@ -949,5 +949,9 @@ class OrderHistoryType extends ValueObject<int> {
 
   const OrderHistoryType._(this.value);
 
-  String get title => getOrderHistoryTypeTitle(value.getOrElse(() => -1));
+  String get titleViewByItem =>
+      getOrderHistoryTypeTitle(value.getOrElse(() => -1));
+
+  String get titleViewByOrder =>
+      getViewByOrderHistoryTitle(value.getOrElse(() => -1));
 }
