@@ -488,7 +488,7 @@ void main() {
         return;
       }
       await notificationRobot.scrollAlertNotification();
-      await notificationRobot.verifyNotificationItems();
+      notificationRobot.verifyNotificationItems();
       final itemTitle = notificationRobot.getFirstBasicNotificationTitle();
       await notificationRobot.tapFirstBasicNotificationItem(itemTitle);
       if (viewByOrdersDetailRobot.isOrderDetailPage) {
@@ -514,9 +514,9 @@ void main() {
 
         return;
       }
-      await notificationRobot.verifyNotificationItems();
+      notificationRobot.verifyNotificationItems();
       await notificationRobot.pullToRefresh();
-      await notificationRobot.verifyNotificationItems();
+      notificationRobot.verifyNotificationItems();
     });
   });
 

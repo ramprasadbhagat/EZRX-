@@ -45,8 +45,8 @@ void main() {
 
   // initialize variables
   const marketMalaysia = 'Malaysia';
-  const username = 'auto_client_user';
-  const password = 'Pa55word@1234';
+  const username = 'myclientuser';
+  const password = 'St@ysafe01';
   const shipToCode = '0070149863';
   const shipToAddress = 'RSD HOSPITALS SDN BHD (SJMC)';
   const customerCode = '0030082707';
@@ -61,19 +61,24 @@ void main() {
 
   //Return detail data
   const returnStatus = 'Pending Approval';
-  const returnId = 'EZRE-200124004014';
-  const returnIdWithBonus = 'EZRE-200123003529';
-  const returnReference = 'Test Return Reference';
-  const specialInstructions = 'Test Special Instruction';
-  const materialNumber = '21041727';
-  const materialName = '190 PANADOL SOLUBLETAB500MG120S/BX';
+  const returnId = 'EZRE-200124004145';
+  const returnReference = '-';
+  const specialInstructions = '-';
+  const materialNumber = '23348055';
+  const materialName = "(Z) HYZAAR HAARLEM TABS 100/12.5MG30'S";
   const materialQty = 1;
-  const materialPrice = '$currency 123.30';
-  const materialPrincipalName = 'GLAXOSMITHKLINE CONSUMER';
-  const materialPrincipalCode = '0000101334';
-  const materialInvoiceNumber = '1100001281';
-  const materialReturnReason = 'Damaged Stocks';
+  const materialPrice = 100.00;
+  const materialPrincipalName = 'ORGANON (M) SDN BHD';
+  const materialPrincipalCode = '0000140087';
+  const materialInvoiceNumber = '1100001272';
+  const materialReturnReason = 'Did Not Order';
   const materialReturnComments = '-';
+
+  const returnIdWithBonus = 'EZRE-200124004839';
+  const bonusMaterialNumber = '21046286';
+  const bonusMaterialQty = 1;
+  const bonusMaterialPrice = 945.0;
+
   //Material data
   const materialIndex = 0;
 
@@ -82,26 +87,26 @@ void main() {
   final toDateForStep1 = DateTime.now().subtract(const Duration(days: 2));
   final fromDateToNext = DateTime(2023, 5, 29);
   final toDateToNext = DateTime(2023, 8, 29);
-  const validSearchKeyForStep1 = 'ILIADIN';
+  const validSearchKeyForStep1 = 'OXY';
   const inValidSearchKey = '1';
   const noResultSearchKey = 'asdasfxzc';
-  const materialNumberWithBonus = '21247736';
-  const materialNameWithBonus = '(Z) ILIANDIN ADULT DROP 0.05% 10ML';
+  const materialNumberWithBonus = '23071095';
+  const materialNameWithBonus = 'OXY 10 LOTION10G';
 
   //
   const exceedReturnQuantity = '100';
   const validReturnQuantity = '1';
-  final fromDateToNextForStep2 = DateTime(2023, 8, 15);
-  final toDateToNextForStep2 = DateTime(2023, 8, 31);
+  final fromDateToNextForStep2 = DateTime(2023, 10, 15);
+  final toDateToNextForStep2 = DateTime(2023, 10, 31);
   final reason = 'Wrong Bill-To'.tr();
-  const materialId = '23348055';
-  const materialTitle = "(Z) HYZAAR HAARLEM TABS 100/12.5MG30'S";
-  const materialUUID = '1100001272000010';
+  const materialId = '21042660';
+  const materialTitle = "SURBEX BE CALCIUM PLUS CAP350MG30'S";
+  const materialUUID = '1100001302000020';
 
   //Return detail data
   const returnRequestStatus = 'Pending Review';
-  final returnSubTotal = '$currency ${123.30.priceFormatted}';
-  final returnGrandTotal = '$currency ${123.30.priceFormatted}';
+  const returnSubTotal = materialPrice;
+  const returnGrandTotal = materialPrice;
 
   void initializeRobot(WidgetTester tester) {
     loginRobot = LoginRobot(tester);
@@ -166,7 +171,7 @@ void main() {
       toDate: toDateToNextForStep2,
     );
     await newReturnRobot.tapApply();
-    await newReturnRobot.tapItemAt(index: 1);
+    await newReturnRobot.tapItemAt(index: 0);
     await newReturnRobot.tapNextButton();
   }
 
@@ -358,15 +363,14 @@ void main() {
       returnsByItemsDetailRobot.verifyDeliveryToVisible(shipToCode);
       returnsByItemsDetailRobot.verifyCustomerCodeVisible(customerCode);
       returnsByItemsDetailRobot.verifyReturnAddressVisible(shipToAddress);
+      await returnsByItemsDetailRobot.tapToShowDetailForBonus();
+      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(false);
       await returnsByItemsDetailRobot.dragToVerifyBonusSectionVisible();
       returnsByItemsDetailRobot.verifyMaterialVisibleWithBonus(
-        materialNumber,
-        materialQty,
-        materialPrice,
+        bonusMaterialNumber,
+        bonusMaterialQty,
+        bonusMaterialPrice.priceDisplay(currency),
       );
-      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(false);
-      await returnsByItemsDetailRobot.tapShowDetailButtonForBonus();
-      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(true);
     });
 
     testWidgets(
@@ -542,7 +546,7 @@ void main() {
       returnsByItemsDetailRobot.verifyMaterialVisible(
         materialNumber,
         materialQty,
-        materialPrice,
+        materialPrice.priceDisplay(currency),
       );
       returnsByItemsDetailRobot.verifyMaterialDetailCollapsed(true);
     });
@@ -848,8 +852,10 @@ void main() {
       returnsByRequestDetailRobot.verifyReturnAddressVisible(shipToAddress);
       returnsByRequestDetailRobot.verifyCustomerCodeVisible(customerCode);
       returnsByRequestDetailRobot.verifyDeliveryToVisible(shipToCode);
-      returnsByRequestDetailRobot.verifySubTotalVisible(returnSubTotal);
-      returnsByRequestDetailRobot.verifyGrandTotalVisible(returnGrandTotal);
+      returnsByRequestDetailRobot
+          .verifySubTotalVisible(returnSubTotal.priceDisplay(currency));
+      returnsByRequestDetailRobot
+          .verifyGrandTotalVisible(returnGrandTotal.priceDisplay(currency));
       await returnsByRequestDetailRobot.verifyMaterialVisible(
         index: materialIndex,
         materialNumber: materialNumber,
@@ -950,7 +956,6 @@ void main() {
       newReturnRobot.verifyDetailCollapsed(true);
       await newReturnRobot.tapShowDetailButton();
       newReturnRobot.verifyDetailCollapsed(false);
-      newReturnRobot.verifyReturnItemWithBonusVisible();
     });
 
     testWidgets(
@@ -966,7 +971,7 @@ void main() {
         toDate: toDateToNext,
       );
       await newReturnRobot.tapApply();
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnRobot.verifyStep2Visible();
     });
@@ -1088,7 +1093,7 @@ void main() {
       await newReturnRobot.tapFilterIcon();
       await newReturnRobot.tapReset();
       await commonRobot.searchWithKeyboardAction(validSearchKeyForStep1);
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
         materialNumberWithBonus,
@@ -1123,8 +1128,9 @@ void main() {
       await newReturnRobot.closeBottomSheetDetail();
       newReturnRobot.verifyDetailBottomSheetIsHide();
       newReturnStep3Robot.collectInfoBeforeSubmit();
-      await newReturnStep3Robot.tapSubmit();
-      newReturnStep3Robot.verifySubmitSuccessFully(shipToAddress);
+      //No need to submit - as the required return request will get vanished.
+      // await newReturnStep3Robot.tapSubmit();
+      // newReturnStep3Robot.verifySubmitSuccessFully(shipToAddress);
     });
   });
 

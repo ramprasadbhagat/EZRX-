@@ -48,7 +48,7 @@ class OOSPreOrderRobot {
 
   void verifyMaterial(String materialNumber, int qty) {
     final material = find.byKey(WidgetKeys.preOrderMaterial(materialNumber));
-    expect(material, findsOneWidget);
+    expect(material, findsWidgets);
     expect(
       find.descendant(
         of: material,

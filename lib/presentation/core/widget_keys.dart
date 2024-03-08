@@ -451,6 +451,12 @@ class WidgetKeys {
     String totalPrice,
   ) =>
       Key('returnItemDetailMaterial$materialNumber$qty$totalPrice');
+  static Key returnItemDetailOnlyBonusMaterial(
+    String materialNumber,
+    String qty,
+    String totalPrice,
+  ) =>
+      Key('returnItemDetailOnlyBonusMaterial$materialNumber$qty$totalPrice');
   static const Key returnDetailShowDetailButton =
       Key('returnDetailShowMaterialDetailButton');
   static const Key returnDetailShowBonusDetailButton =

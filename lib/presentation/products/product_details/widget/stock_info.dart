@@ -34,9 +34,9 @@ class ProductStockInfo extends StatelessWidget {
         }
 
         return Padding(
-          key: WidgetKeys.materialDetailsStock,
           padding: const EdgeInsets.symmetric(vertical: 5.0),
           child: RichText(
+            key: WidgetKeys.materialDetailsStock,
             text: TextSpan(
               style: Theme.of(context)
                   .textTheme

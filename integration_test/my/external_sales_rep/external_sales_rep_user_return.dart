@@ -49,7 +49,7 @@ void main() {
   const marketMalaysia = 'Malaysia';
   const username = 'myrootadmin';
   const password = 'St@ysafe01';
-  const proxyUserName = 'myexternalsalesrep';
+  const proxyUserName = 'testextsalesrep';
   const shipToCode = '0070149863';
   const shipToAddress = 'RSD HOSPITALS SDN BHD (SJMC)';
   const customerCode = '0030082707';
@@ -65,7 +65,6 @@ void main() {
   //Return detail data
   const returnStatus = 'Pending Approval';
   const returnId = 'EZRE-200123002930';
-  const returnIdWithBonus = 'EZRE-200123002962';
   const returnReference = 'return ref';
   const specialInstructions = 'spcl instruct';
   const materialNumber = '21247736';
@@ -77,6 +76,11 @@ void main() {
   const materialInvoiceNumber = '1100001124';
   const materialReturnReason = 'Duplicate Order - Customer';
   const materialReturnComments = 'comment';
+
+  const returnIdWithBonus = 'EZRE-200123002962';
+  const bonusMaterialNumber = '21247736';
+  const bonusMaterialQty = 2;
+  const bonusMaterialPrice = 17.54;
   //Material data
   const materialIndex = 0;
 
@@ -96,7 +100,7 @@ void main() {
   final reason = 'Wrong Bill-To'.tr();
   const materialId = materialNumber;
   const materialTitle = materialName;
-  const materialUUID = '1100001120000011';
+  const materialUUID = '1100001119000011';
 
   //Return detail data
   const returnRequestStatus = 'Pending Review';
@@ -186,7 +190,7 @@ void main() {
       toDate: toDateToNextForStep2,
     );
     await newReturnRobot.tapApply();
-    await newReturnRobot.tapItemAt(index: 1);
+    await newReturnRobot.tapItemAt(index: 0);
     await newReturnRobot.tapNextButton();
   }
 
@@ -387,15 +391,15 @@ void main() {
       returnsByItemsDetailRobot.verifyDeliveryToVisible(shipToCode);
       returnsByItemsDetailRobot.verifyCustomerCodeVisible(customerCode);
       returnsByItemsDetailRobot.verifyReturnAddressVisible(shipToAddress);
-      await returnsByItemsDetailRobot.dragToVerifyBonusSectionVisible();
-      returnsByItemsDetailRobot.verifyMaterialVisibleWithBonus(
-        materialNumber,
-        materialQty,
-        materialPrice,
-      );
+      // returnsByItemsDetailRobot.verifyBonusDetailCollapsed(true);
+      await returnsByItemsDetailRobot.tapToShowDetailForBonus();
       returnsByItemsDetailRobot.verifyBonusDetailCollapsed(false);
-      await returnsByItemsDetailRobot.tapShowDetailButtonForBonus();
-      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(true);
+      await returnsByItemsDetailRobot.dragToVerifyBonusSectionVisible();
+      returnsByItemsDetailRobot.verifyOnlyBonusMaterial(
+        bonusMaterialNumber,
+        bonusMaterialQty,
+        bonusMaterialPrice.priceDisplay(currency),
+      );
     });
 
     testWidgets(
@@ -994,7 +998,7 @@ void main() {
         toDate: toDateToNext,
       );
       await newReturnRobot.tapApply();
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnRobot.verifyStep2Visible();
     });
@@ -1111,7 +1115,7 @@ void main() {
       );
       await newReturnRobot.tapApply();
       await tester.pump(const Duration(seconds: 1));
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
         materialId,
@@ -1161,8 +1165,9 @@ void main() {
       await newReturnRobot.closeBottomSheetDetail();
       newReturnRobot.verifyDetailBottomSheetIsHide();
       newReturnStep3Robot.collectInfoBeforeSubmit();
-      await newReturnStep3Robot.tapSubmit();
-      newReturnStep3Robot.verifySubmitSuccessFully(shipToAddress);
+      //No need to submit - as the required return request will get vanished.
+      // await newReturnStep3Robot.tapSubmit();
+      // newReturnStep3Robot.verifySubmitSuccessFully(shipToAddress);
     });
   });
 

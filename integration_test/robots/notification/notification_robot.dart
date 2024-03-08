@@ -50,7 +50,7 @@ class NotificationRobot extends CommonRobot {
     }
   }
 
-  Future<void> verifyNotificationItems() async {
+  void verifyNotificationItems() {
     expect(
       find.descendant(of: items, matching: itemCreatedAt),
       findsWidgets,
@@ -65,6 +65,10 @@ class NotificationRobot extends CommonRobot {
     );
     expect(
       find.descendant(of: items, matching: itemTitle),
+      findsWidgets,
+    );
+    expect(
+      find.descendant(of: items, matching: itemDescription),
       findsWidgets,
     );
     expect(

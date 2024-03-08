@@ -1513,25 +1513,25 @@ void main() {
     const invalidSearchKey = 'invalid keyword';
     const invalidLengthSearchKey = 'a';
     const validLengthSearchKey = 'ab';
-    const paymentId = '09EZ240001852801';
+    const paymentId = '09EZ240001979301';
     final fromDate = DateTime.now().subtract(const Duration(days: 3600));
     final toDate = DateTime.now().subtract(const Duration(days: 2));
-    const fromAmount = '800.123400';
-    const toAmount = '1000.20';
+    const fromAmount = '100.123400';
+    const toAmount = '200.20';
     const invalidToAmount = '1';
-    const formattedFromAmount = '800.1234';
-    const formattedToAmount = '1000.2';
+    const formattedFromAmount = '100.1234';
+    const formattedToAmount = '200.2';
     const statusFilter = 'In Progress';
 
     // const paymentStatus = 'Pending';
     const invoiceText = 'Invoice total:';
-    const invoicePrice = 872.0;
+    const invoicePrice = 179.80;
     const creditText = 'Credits applied:';
     const creditPrice = 0.00;
     const totalText = 'Total:';
     const totalPrice = invoicePrice;
     const invoiceTitle = 'Invoice';
-    const invoiceId = '1030096950';
+    const invoiceId = '1030096943';
 
     const filterStatusOption = [
       'Pending',

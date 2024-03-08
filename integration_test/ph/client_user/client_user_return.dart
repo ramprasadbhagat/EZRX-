@@ -43,6 +43,7 @@ void main() {
 
   // initialize variables
   const market = 'Philippines';
+  const salesOrg = '2500';
   const username = 'phclientuser';
   const password = 'St@ysafe01';
   const customerCode = '0030013148';
@@ -60,7 +61,7 @@ void main() {
   //Return detail data
   const returnStatus = 'Pending Approval';
   const returnId = 'EZRE-250023000802';
-  const returnIdWithBonus = 'EZRE-250024001194';
+  const returnIdWithBonus = 'EZRE-250024001345';
   const returnReference = 'NA';
   const specialInstructions = 'NA';
   const materialNumber = '21000053';
@@ -84,7 +85,7 @@ void main() {
   final toDateForStep1 = DateTime.now().subtract(const Duration(days: 2));
   final fromDateToNext = DateTime(2024, 2, 1);
   final toDateToNext = DateTime(2024, 2, 6);
-  const validSearchKeyForStep1 = '2100';
+  const validSearchKeyForStep1 = '2300';
   const inValidSearchKey = '1';
   const noResultSearchKey = 'asdasfxzc';
 
@@ -125,20 +126,31 @@ void main() {
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
     String shipToCode = shipToCode,
+    String salesOrg = salesOrg,
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, market);
-      await customerSearchRobot.selectCustomerSearch(shipToCode);
+      await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
+        shipToCode,
+        salesOrg,
+      );
       loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
     } else {
       await commonRobot.dismissSnackbar(dismissAll: true);
-      await commonRobot.changeDeliveryAddress(
+      if (commonRobot.isCustomerCodeSelectorVisible) {
+        await commonRobot.tapCustomerCodeSelector();
+        await tester.pumpAndSettle();
+      }
+      await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
+        salesOrg,
       );
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.closeAnnouncementAlertDialog();
     }
   }
 
@@ -164,7 +176,7 @@ void main() {
       toDate: toDateToNextForStep2,
     );
     await newReturnRobot.tapApply();
-    await newReturnRobot.tapItemAt(index: 1);
+    await newReturnRobot.tapItemAt(index: 0);
     await newReturnRobot.tapNextButton();
   }
 
@@ -363,7 +375,7 @@ void main() {
         bonusMaterialPrice,
       );
       returnsByItemsDetailRobot.verifyBonusDetailCollapsed(true);
-      await returnsByItemsDetailRobot.tapShowDetailButtonForBonus();
+      await returnsByItemsDetailRobot.tapToShowDetailForBonus();
       returnsByItemsDetailRobot.verifyBonusDetailCollapsed(false);
 
       await returnsByItemsDetailRobot.dragToVerifyBonusSectionVisible();
@@ -960,7 +972,7 @@ void main() {
         toDate: toDateToNext,
       );
       await newReturnRobot.tapApply();
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnRobot.verifyStep2Visible();
     });
@@ -1084,7 +1096,7 @@ void main() {
       await newReturnRobot.tapFilterIcon();
       await newReturnRobot.tapReset();
       await commonRobot.searchWithKeyboardAction(validSearchKeyForStep1);
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       // newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(bonus);
     });

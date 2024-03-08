@@ -41,7 +41,14 @@ class ReturnItemCard extends StatelessWidget {
     if (returnRequestInformation.isEmpty) return const SizedBox.shrink();
     if (returnRequestInformation.prsfd.isBonus) {
       return CustomCard(
-        key: WidgetKeys.returnItemDetailBonusItem,
+        key: WidgetKeys.returnItemDetailOnlyBonusMaterial(
+          returnRequestInformation.materialNumber.displayMatNo,
+          returnRequestInformation.returnQuantity,
+          StringUtils.displayPrice(
+            salesOrgConfigs,
+            returnRequestInformation.totalPrice,
+          ),
+        ),
         child: ListTile(
           title: _ReturnBonusItemSection(
             isExpandable: true,

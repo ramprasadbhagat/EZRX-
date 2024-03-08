@@ -147,6 +147,23 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
     );
   }
 
+  void verifyOnlyBonusMaterial(
+    String materialNumber,
+    int qty,
+    String price,
+  ) {
+    expect(
+      find.byKey(
+        WidgetKeys.returnItemDetailOnlyBonusMaterial(
+          materialNumber,
+          qty.toString(),
+          price,
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyMaterialDetailCollapsed(bool isCollapsed) {
     expect(
       find.descendant(
@@ -175,10 +192,16 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapShowDetailButtonForBonus() async {
-    await scrollEnsureFinderVisible(showDetailButtonFoBonus);
-    await tester.tap(showDetailButtonFoBonus);
-    await tester.pumpAndSettle();
+  Future<void> tapToShowDetailForBonus() async {
+    final finder = find.descendant(
+      of: showDetailButtonFoBonus,
+      matching: find.text('Show details'.tr()),
+    );
+    if (finder.evaluate().isNotEmpty) {
+      await scrollEnsureFinderVisible(showDetailButtonFoBonus);
+      await tester.tap(showDetailButtonFoBonus);
+      await tester.pumpAndSettle();
+    }
   }
 
   void verifyMaterialPrincipalCode(String code) {

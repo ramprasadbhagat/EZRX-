@@ -115,7 +115,7 @@ class NewPaymentStep1Robot {
 
   Future<void> clickFilter() async {
     await tester.tap(filterBadge);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(seconds: 1));
   }
 
   Future<void> clickDocumentDateField() async {

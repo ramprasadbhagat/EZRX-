@@ -141,6 +141,7 @@ void main() {
   const materialCountryOfOrigin = 'USA';
   const materialUnitMeasurement = 'EA';
   const materialUnitPrice = 14.21;
+  const materialExpiryDate = '31 Dec 2025';
 
   // const multiImageMaterialNumber = '21041786';
   const otherInfoMaterialNumber = '23012375';
@@ -344,7 +345,7 @@ void main() {
         return;
       }
       await notificationRobot.scrollAlertNotification();
-      await notificationRobot.verifyNotificationItems();
+      notificationRobot.verifyNotificationItems();
       final itemDescription =
           notificationRobot.getNotificationDescription(notificationIndex);
       await notificationRobot.tapNotificationItem(notificationIndex);
@@ -371,11 +372,11 @@ void main() {
 
         return;
       }
-      await notificationRobot.verifyNotificationItems();
+      notificationRobot.verifyNotificationItems();
       final itemDescription =
           notificationRobot.getNotificationDescription(notificationIndex);
       await notificationRobot.pullToRefresh();
-      await notificationRobot.verifyNotificationItems();
+      notificationRobot.verifyNotificationItems();
       notificationRobot.verifyNotificationWithDescription(
         notificationIndex,
         itemDescription,
@@ -1168,7 +1169,7 @@ void main() {
       productDetailRobot.verifyProductImageDisplayed();
       productDetailRobot.verifyProductFavoriteIconDisplayed();
       productDetailRobot.verifyProductNameDisplayed();
-      productDetailRobot.verifyProductExpiryDateDisplayed();
+      productDetailRobot.verifyExpiryDate(materialExpiryDate);
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();

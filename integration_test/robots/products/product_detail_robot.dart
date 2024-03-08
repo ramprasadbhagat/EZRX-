@@ -108,16 +108,6 @@ class ProductDetailRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.productImage).first, findsOneWidget);
   }
 
-  void verifyProductExpiryDateDisplayed() {
-    expect(
-      find.descendant(
-        of: find.byKey(WidgetKeys.materialDetailsStock),
-        matching: find.textContaining('EXP'.tr(), findRichText: true),
-      ),
-      findsOneWidget,
-    );
-  }
-
   void verifyProductFavoriteIconDisplayed() {
     expect(find.byKey(WidgetKeys.favoritesIcon).first, findsOneWidget);
   }
@@ -134,8 +124,17 @@ class ProductDetailRobot extends CommonRobot {
     final richTextChildren =
         (tester.widget<RichText>(materialDetailsStock).text as TextSpan)
             .children;
-    final expiryText = (richTextChildren!.last as TextSpan).text;
+    final expiryText = (richTextChildren![1] as TextSpan).text;
     expect(expiryText, '(${'EXP'.tr()}: $expiryDate)');
+  }
+
+  void verifyBatch(String batch) {
+    expect(materialDetailsStock, findsOneWidget);
+    final richTextChildren =
+        (tester.widget<RichText>(materialDetailsStock).text as TextSpan)
+            .children;
+    final expiryText = (richTextChildren!.first as TextSpan).text;
+    expect(expiryText, '${'Batch'.tr()}: $batch ');
   }
 
   void verifyProductPriceDisplayed() {
