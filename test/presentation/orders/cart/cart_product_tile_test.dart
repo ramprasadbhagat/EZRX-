@@ -982,6 +982,40 @@ void main() {
           findsOneWidget,
         );
       });
+
+      testWidgets(
+        'Do not Show tax details on material level when price is zero and displayItemTaxBreakdown is enable',
+        (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                cartItem.copyWith(
+                  salesOrgConfig: fakeIDSalesOrgConfigs,
+                ),
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                    quantity: MaterialQty(1),
+                    taxClassification:
+                        MaterialTaxClassification('Product : Full Tax'),
+                    tax: 10,
+                  ),
+                  price: Price.empty().copyWith(
+                    lastPrice: MaterialPrice(0.00),
+                  ),
+                ),
+              ],
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+
+          await tester.pump();
+
+          final taxLevelFinder = find.text('Total with tax:');
+          expect(taxLevelFinder, findsNothing);
+        },
+      );
     },
   );
 }

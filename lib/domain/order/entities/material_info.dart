@@ -182,8 +182,6 @@ class MaterialInfo with _$MaterialInfo {
         if (showGMCPart && getGMC.isNotEmpty) getGMC.getValue(),
       ].join(' | ');
 
-  bool get isPriceVisibleForNonFOC => !hidePrice && !isFOCMaterial;
-
   String get bundleMaterialExpiryDate => stockInfos
       .firstWhere(
         (element) => element.expiryDate.isValid(),
