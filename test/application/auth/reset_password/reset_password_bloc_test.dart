@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
@@ -23,17 +22,18 @@ void main() {
   late MockResetPassword mockRepository;
   final resetPasswordState = ResetPasswordState.initial();
   late TokenStorage tokenStorage;
-  late User user;
 
   const invalidPassword = 'rootadmin1234@';
   const validPassword = 'New12345678@';
   const oldPassword = 'old';
+  const fakeUserName = 'fake-user';
 
   final invalidResetPasswordState = resetPasswordState.copyWith(
     oldPassword: Password.login('old'),
     newPassword: Password.resetV2(
       invalidPassword,
       'old',
+      'fake-user',
     ),
     confirmPassword: Password.confirm(
       invalidPassword,
@@ -41,10 +41,12 @@ void main() {
     ),
   );
   final validResetPasswordState = resetPasswordState.copyWith(
+    user: User.empty().copyWith(username: Username(fakeUserName)),
     oldPassword: Password.login('old'),
     newPassword: Password.resetV2(
       validPassword,
       oldPassword,
+      fakeUserName,
     ),
     confirmPassword: Password.confirm(
       validPassword,
@@ -65,7 +67,6 @@ void main() {
     tokenStorage = MockTokenStorage();
     when(() => tokenStorage.get())
         .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));
-    user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
   });
 
   group('Reset Password Form Bloc', () {
@@ -129,10 +130,9 @@ void main() {
         changePasswordRepository: mockRepository,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
-        ResetPasswordEvent.onTextChange(
+        const ResetPasswordEvent.onTextChange(
           PasswordFieldType.oldPassword,
           oldPassword,
-          user,
         ),
       ),
       expect: () => [
@@ -148,10 +148,9 @@ void main() {
         changePasswordRepository: mockRepository,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
-        ResetPasswordEvent.onTextChange(
+        const ResetPasswordEvent.onTextChange(
           PasswordFieldType.newPassword,
           validPassword,
-          user,
         ),
       ),
       expect: () => [
@@ -159,6 +158,7 @@ void main() {
           newPassword: Password.resetV2(
             validPassword,
             resetPasswordState.confirmPassword.getValue(),
+            resetPasswordState.user.username.getValue(),
           ),
         )
       ],
@@ -170,10 +170,9 @@ void main() {
         changePasswordRepository: mockRepository,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
-        ResetPasswordEvent.onTextChange(
+        const ResetPasswordEvent.onTextChange(
           PasswordFieldType.confirmPassword,
           validPassword,
-          user,
         ),
       ),
       expect: () => [
@@ -193,16 +192,14 @@ void main() {
       ),
       seed: () => invalidResetPasswordState,
       act: (ResetPasswordBloc bloc) => bloc.add(
-        ResetPasswordEvent.changePassword(
-          user: user,
-        ),
+        const ResetPasswordEvent.changePassword(),
       ),
       expect: () => [
         invalidResetPasswordState.copyWith(showErrorMessages: true),
       ],
       verify: (ResetPasswordBloc bloc) {
         expect(
-          bloc.state.showNewPasswordPatternMismatchError(user),
+          bloc.state.showNewPasswordPatternMismatchError,
           true,
         );
       },
@@ -217,7 +214,7 @@ void main() {
       setUp: () {
         when(
           () => mockRepository.changePassword(
-            user: user,
+            user: validResetPasswordState.user,
             oldPassword: validResetPasswordState.oldPassword,
             newPassword: validResetPasswordState.newPassword,
           ),
@@ -228,9 +225,7 @@ void main() {
         );
       },
       act: (ResetPasswordBloc bloc) => bloc.add(
-        ResetPasswordEvent.changePassword(
-          user: user,
-        ),
+        const ResetPasswordEvent.changePassword(),
       ),
       expect: () => [
         validResetPasswordState.copyWith(isSubmitting: true),
@@ -250,7 +245,7 @@ void main() {
       setUp: () {
         when(
           () => mockRepository.changePassword(
-            user: user,
+            user: validResetPasswordState.user,
             oldPassword: validResetPasswordState.oldPassword,
             newPassword: validResetPasswordState.newPassword,
           ),
@@ -261,9 +256,7 @@ void main() {
         );
       },
       act: (ResetPasswordBloc bloc) => bloc.add(
-        ResetPasswordEvent.changePassword(
-          user: user,
-        ),
+        const ResetPasswordEvent.changePassword(),
       ),
       expect: () => [
         validResetPasswordState.copyWith(isSubmitting: true),
@@ -281,8 +274,9 @@ void main() {
         changePasswordRepository: mockRepository,
       ),
       act: (ResetPasswordBloc bloc) => bloc.add(
-        ResetPasswordEvent.addResetPasswordCred(
+        ResetPasswordEvent.initialize(
           resetPasswordCred: resetPasswordCred,
+          user: User.empty(),
         ),
       ),
       expect: () => [

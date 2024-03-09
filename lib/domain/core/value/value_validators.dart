@@ -69,6 +69,20 @@ Either<ValueFailure<String>, String> atLeastOneSpecialCharacter(String input) {
       : left(ValueFailure.mustOneSpecialCharacter(failedValue: input));
 }
 
+Either<ValueFailure<String>, String> validateAbsenceOfSourceSubstrings(
+  String textToValidate,
+  String sourceText,
+) {
+  return containsSubstringFromSourceOfSizeThree(
+    textToValidate: textToValidate,
+    sourceString: sourceText,
+  )
+      ? left(
+          ValueFailure.containsForbiddenSubstring(failedValue: textToValidate),
+        )
+      : right(textToValidate);
+}
+
 Either<ValueFailure<String>, String> validateStringIsEmpty(String input) {
   return input.isEmpty
       ? right(input)

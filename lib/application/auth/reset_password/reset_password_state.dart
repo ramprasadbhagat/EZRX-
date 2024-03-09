@@ -4,6 +4,7 @@ part of 'reset_password_bloc.dart';
 class ResetPasswordState with _$ResetPasswordState {
   const ResetPasswordState._();
   const factory ResetPasswordState({
+    required User user,
     required bool isOldPasswordObscure,
     required bool isNewPasswordObscure,
     required bool isConfirmPasswordObscure,
@@ -18,8 +19,10 @@ class ResetPasswordState with _$ResetPasswordState {
   }) = _ResetPassword;
 
   factory ResetPasswordState.initial() => ResetPasswordState(
+        user: User.empty(),
         oldPassword: Password.login(''),
         newPassword: Password.resetV2(
+          '',
           '',
           '',
         ),
@@ -33,10 +36,6 @@ class ResetPasswordState with _$ResetPasswordState {
         resetPasswordCred: ResetPasswordCred.empty(),
       );
 
-  bool isNewPasswordValid(User user) =>
-      newPassword.isValid() &&
-      newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName(user: user);
-
   bool newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName({
     required User user,
   }) {
@@ -48,8 +47,8 @@ class ResetPasswordState with _$ResetPasswordState {
         !_checkInLowerCase(input, user.fullName.lastName);
   }
 
-  bool showNewPasswordPatternMismatchError(User user) =>
-      !isNewPasswordValid(user) && showErrorMessages;
+  bool get showNewPasswordPatternMismatchError =>
+      !newPassword.isValid() && showErrorMessages;
 
   bool _checkInLowerCase(String input, String value) {
     final lowerCaseInput = input.toLowerCase();

@@ -413,6 +413,7 @@ void main() {
       () async {
         const newPassword = 'Auron@2022!';
         const oldPassword = 'Auron@2022';
+        const fakeUserName = 'fake-user';
         // final user = User(
         //   id: '1',
         //   username: Username('choo'),
@@ -437,7 +438,11 @@ void main() {
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
-        final password = Password.resetV2(newPassword, oldPassword);
+        final password = Password.resetV2(
+          newPassword,
+          oldPassword,
+          fakeUserName,
+        );
         final result = password.isValid();
         expect(result, true);
       },
@@ -492,6 +497,7 @@ void main() {
         const errorMessage = 'Minimum length of 10 characters';
         const newPassword = 'Auron@222';
         const oldPassword = 'Auron@2022';
+        const fakeUserName = 'fake-user';
         // final user = User(
         //   id: '1',
         //   username: Username('choo'),
@@ -516,7 +522,11 @@ void main() {
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
-        final password = Password.resetV2(newPassword, oldPassword);
+        final password = Password.resetV2(
+          newPassword,
+          oldPassword,
+          fakeUserName,
+        );
         final result = password.value.fold(
           (f) => f.maybeMap(
             subceedLength: (_) => errorMessage,
@@ -534,6 +544,7 @@ void main() {
         const errorMessage = 'Contain at least 1 Upper case character (A to Z)';
         const newPassword = 'auron@2022!';
         const oldPassword = 'Auron@2022';
+        const fakeUserName = 'Auron@2022';
         // final user = User(
         //   id: '1',
         //   username: Username('choo'),
@@ -558,7 +569,8 @@ void main() {
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
-        final password = Password.resetV2(newPassword, oldPassword);
+        final password =
+            Password.resetV2(newPassword, oldPassword, fakeUserName);
         final result = password.value.fold(
           (f) => f.maybeMap(
             mustOneUpperCaseCharacter: (_) => errorMessage,
@@ -576,6 +588,7 @@ void main() {
         const errorMessage = 'Contain at least 1 Lower case character (a to z)';
         const newPassword = 'AURON@2022!';
         const oldPassword = 'Auron@2022';
+        const fakeUserName = 'Auron@2022';
         // final user = User(
         //   id: '1',
         //   username: Username('choo'),
@@ -600,7 +613,8 @@ void main() {
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
-        final password = Password.resetV2(newPassword, oldPassword);
+        final password =
+            Password.resetV2(newPassword, oldPassword, fakeUserName);
         final result = password.value.fold(
           (f) => f.maybeMap(
             mustOneLowerCaseCharacter: (_) => errorMessage,
@@ -618,6 +632,7 @@ void main() {
         const errorMessage = 'Contain at least a numeric character (0 to 9)';
         const newPassword = 'Auron@developer';
         const oldPassword = 'Auron@2022';
+        const fakeUserName = 'Auron@2022';
         // final user = User(
         //   id: '1',
         //   username: Username('choo'),
@@ -642,7 +657,8 @@ void main() {
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
-        final password = Password.resetV2(newPassword, oldPassword);
+        final password =
+            Password.resetV2(newPassword, oldPassword, fakeUserName);
         final result = password.value.fold(
           (f) => f.maybeMap(
             mustOneNumericCharacter: (_) => errorMessage,
@@ -661,6 +677,7 @@ void main() {
             'Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )';
         const newPassword = 'Auron20222';
         const oldPassword = 'Auron@2022';
+        const fakeUserName = 'Auron@2022';
         // final user = User(
         //   id: '1',
         //   username: Username('choo'),
@@ -685,7 +702,8 @@ void main() {
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
-        final password = Password.resetV2(newPassword, oldPassword);
+        final password =
+            Password.resetV2(newPassword, oldPassword, fakeUserName);
         final result = password.value.fold(
           (f) => f.maybeMap(
             mustOneSpecialCharacter: (_) => errorMessage,
@@ -747,6 +765,7 @@ void main() {
         const errorMessage = 'New password cannot be same as old one';
         const newPassword = 'Auron@2022';
         const oldPassword = 'Auron@2022';
+        const fakeUserName = 'fake-user';
         // final user = User(
         //   id: '1',
         //   username: Username('choo'),
@@ -771,7 +790,8 @@ void main() {
         //   mobileNumber: MobileNumber(''),
         //   supportedLanguages: <Language>[],
         // );
-        final password = Password.resetV2(newPassword, oldPassword);
+        final password =
+            Password.resetV2(newPassword, oldPassword, fakeUserName);
         final result = password.value.fold(
           (f) => f.maybeMap(
             mustNotMatchOldPassword: (_) => errorMessage,
@@ -834,7 +854,7 @@ void main() {
   });
 
   group('App Market value object', () {
-     test(
+    test(
       'SaleOrg for MY market',
       () {
         const input = '2001';
@@ -868,7 +888,7 @@ void main() {
       'SaleOrg for SG market',
       () {
         const input = '2601';
-         final salesOrg = SalesOrg(input);
+        final salesOrg = SalesOrg(input);
         final result = AppMarket('sg');
         expect(result.salesOrg, salesOrg);
       },
@@ -888,7 +908,7 @@ void main() {
       'SaleOrg for TH market',
       () {
         const input = '2900';
-       final salesOrg = SalesOrg(input);
+        final salesOrg = SalesOrg(input);
         final result = AppMarket('th');
         expect(result.salesOrg, salesOrg);
       },
@@ -898,7 +918,7 @@ void main() {
       'SaleOrg for VN market',
       () {
         const input = '3000';
-         final salesOrg = SalesOrg(input);
+        final salesOrg = SalesOrg(input);
         final result = AppMarket('vn');
         expect(result.salesOrg, salesOrg);
       },
@@ -908,7 +928,7 @@ void main() {
       'SaleOrg for KR market',
       () {
         const input = '3101';
-         final salesOrg = SalesOrg(input);
+        final salesOrg = SalesOrg(input);
         final result = AppMarket('kr');
         expect(result.salesOrg, salesOrg);
       },
@@ -928,13 +948,13 @@ void main() {
       'SaleOrg for ID market',
       () {
         const input = '1900';
-         final salesOrg = SalesOrg(input);
+        final salesOrg = SalesOrg(input);
         final result = AppMarket('id');
         expect(result.salesOrg, salesOrg);
       },
     );
 
-     test(
+    test(
       'SaleOrg for HK market',
       () {
         const input = '2001';

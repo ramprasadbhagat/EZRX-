@@ -32,16 +32,16 @@ class PasswordValidation extends StatelessWidget {
             ),
             _ConditionText(
               enableGreenTick: state.newPassword.matchAtLeastOneUpperCharacter,
-              msgText: 'Contain at least 1 Upper case character (A to Z)',
+              msgText: 'At least 1 Upper case character (A to Z)',
             ),
             _ConditionText(
               enableGreenTick: state.newPassword.matchAtLeastOneLowerCharacter,
-              msgText: 'Contain at least 1 Lower case character (a to z)',
+              msgText: 'At least 1 Lower case character (a to z)',
             ),
             _ConditionText(
               enableGreenTick:
                   state.newPassword.matchAtLeastOneNumericCharacter,
-              msgText: 'Contain at least a numeric character (0 to 9)',
+              msgText: 'At least a numeric character (0 to 9)',
             ),
             _ConditionText(
               enableGreenTick:
@@ -77,27 +77,30 @@ class _ConditionText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 5, bottom: 5, left: 8, right: 2),
+      padding: const EdgeInsets.only(top: 5, bottom: 4, left: 8, right: 2),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          enableGreenTick
-              ? const Icon(
-                  Icons.check,
-                  color: ZPColors.green,
-                  size: 15,
-                )
-              : Icon(
-                  Icons.circle,
-                  color: context
-                              .read<ResetPasswordBloc>()
-                              .state
-                              .showErrorMessages &&
-                          !enableGreenTick
-                      ? ZPColors.red
-                      : ZPColors.passwordValidationsColor,
-                  size: 5,
-                ),
-          const SizedBox(width: 8),
+          Padding(
+            padding: const EdgeInsets.only(top: 7, right: 8),
+            child: enableGreenTick
+                ? const Icon(
+                    Icons.check,
+                    color: ZPColors.green,
+                    size: 15,
+                  )
+                : Icon(
+                    Icons.circle,
+                    color: context
+                                .read<ResetPasswordBloc>()
+                                .state
+                                .showErrorMessages &&
+                            !enableGreenTick
+                        ? ZPColors.red
+                        : ZPColors.passwordValidationsColor,
+                    size: 5,
+                  ),
+          ),
           Expanded(
             child: Text(
               context.tr(msgText),

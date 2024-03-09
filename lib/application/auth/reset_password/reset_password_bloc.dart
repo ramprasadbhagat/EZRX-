@@ -68,6 +68,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
                 newPassword: Password.resetV2(
                   e.newValue,
                   state.oldPassword.getValue(),
+                  state.user.username.getValue(),
                 ),
                 confirmPassword: Password.confirm(
                   state.confirmPassword.getValue(),
@@ -90,7 +91,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       },
       changePassword: (e) async {
         final isFormValidated = state.oldPassword.isValid() &&
-            state.isNewPasswordValid(e.user) &&
+            state.newPassword.isValid() &&
             state.confirmPassword.isValid();
 
         if (isFormValidated) {
@@ -106,7 +107,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
               await changePasswordRepository.changePassword(
             newPassword: state.newPassword,
             oldPassword: state.oldPassword,
-            user: e.user,
+            user: state.user,
           );
 
           failureOrSuccess.fold(
@@ -140,10 +141,8 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
         ResetPasswordState.initial(),
       ),
       resetPassword: (e) async {
-        final isFormValidated = state.isNewPasswordValid(
-              state.resetPasswordCred.toUser,
-            ) &&
-            state.confirmPassword.isValid();
+        final isFormValidated =
+            state.newPassword.isValid() && state.confirmPassword.isValid();
 
         if (!isFormValidated) {
           emit(
@@ -173,8 +172,8 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
         );
         add(const ResetPasswordEvent.clear());
       },
-      addResetPasswordCred: (_AddResetPasswordCred e) async => emit(
-        state.copyWith(resetPasswordCred: e.resetPasswordCred),
+      initialize: (_Initialize e) async => emit(
+        state.copyWith(resetPasswordCred: e.resetPasswordCred, user: e.user),
       ),
     );
   }

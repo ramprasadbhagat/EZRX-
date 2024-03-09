@@ -120,6 +120,19 @@ String displayDateTimeString(
       .replaceFirst(' 00:00:00', '');
 }
 
+bool containsSubstringFromSourceOfSizeThree({
+  required String textToValidate,
+  required String sourceString,
+}) {
+  for (var i = 0; i <= sourceString.length - 3; i++) {
+    final substring =
+        sourceString.characters.getRange(i, i + 3).string.toLowerCase();
+    if (textToValidate.toLowerCase().contains(substring)) return true;
+  }
+
+  return false;
+}
+
 bool isNumericOnly(String text) => RegExp(r'^\d+$').hasMatch(text);
 
 DateTime? tryParseDateTime(String input) {

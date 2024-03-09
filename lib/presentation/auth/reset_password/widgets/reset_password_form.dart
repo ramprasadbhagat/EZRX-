@@ -42,9 +42,8 @@ class _ResetPasswordForm extends StatelessWidget {
                       key: WidgetKeys.newPasswordTextField,
                       isPasswordVisible: state.isNewPasswordObscure,
                       labelText: 'New Password',
-                      hintText: 'Follow instruction below',
+                      hintText: 'Enter your new password',
                       passwordFieldType: PasswordFieldType.newPassword,
-                      emptyErrorText: 'New password is a required field',
                     );
                   },
                 ),
@@ -57,11 +56,9 @@ class _ResetPasswordForm extends StatelessWidget {
                     return PasswordTextField(
                       key: WidgetKeys.confirmPasswordField,
                       isPasswordVisible: state.isConfirmPasswordObscure,
-                      labelText: 'Enter new password again',
-                      hintText: 'Enter new password again',
+                      labelText: 'Confirm new password',
+                      hintText: 'Enter your new password again',
                       passwordFieldType: PasswordFieldType.confirmPassword,
-                      emptyErrorText:
-                          'Confirm new password is a required field',
                     );
                   },
                 ),

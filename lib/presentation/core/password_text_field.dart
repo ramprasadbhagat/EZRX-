@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -12,14 +11,12 @@ class PasswordTextField extends StatelessWidget {
   final String labelText;
   final String hintText;
   final bool isPasswordVisible;
-  final String? emptyErrorText;
   const PasswordTextField({
     Key? key,
     required this.passwordFieldType,
     required this.isPasswordVisible,
     required this.labelText,
     required this.hintText,
-    this.emptyErrorText,
   }) : super(key: key);
 
   String _getInitialValue(BuildContext context) {
@@ -55,16 +52,34 @@ class PasswordTextField extends StatelessWidget {
       case PasswordFieldType.oldPassword:
         return context.read<ResetPasswordBloc>().state.oldPassword.value.fold(
               (f) => f.mapOrNull(
-                empty: (_) => context.tr('Current password cannot be empty'),
+                empty: (_) => context.tr('Please enter a valid password'),
               ),
               (_) => null,
             );
       case PasswordFieldType.newPassword:
         return context.read<ResetPasswordBloc>().state.newPassword.value.fold(
               (f) => f.mapOrNull(
-                empty: (_) => context.tr('New password cannot be empty.'),
+                empty: (_) => context.tr('Please enter a valid password'),
                 mustNotMatchOldPassword: (_) =>
                     context.tr('New password cannot be same as old password'),
+                mustOneLowerCaseCharacter: (_) => context.tr(
+                  'New password should have at least one Lower case character (a to z)',
+                ),
+                mustOneUpperCaseCharacter: (_) => context.tr(
+                  'New password should have at least one Upper case character (A to Z)',
+                ),
+                mustOneNumericCharacter: (_) => context.tr(
+                  'New password should have at least a numeric character (0 to 9)',
+                ),
+                mustOneSpecialCharacter: (_) => context.tr(
+                  'New password should have at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )',
+                ),
+                containsForbiddenSubstring: (_) => context.tr(
+                  'New password cannot contain more than 2 consecutive characters from username and/or name of the user',
+                ),
+                subceedLength: (_) => context.tr(
+                  'New password should have minimum length of 10 characters',
+                ),
               ),
               (_) => null,
             );
@@ -76,7 +91,7 @@ class PasswordTextField extends StatelessWidget {
             .value
             .fold(
               (f) => f.mapOrNull(
-                empty: (_) => context.tr('Confirm password cannot be empty.'),
+                empty: (_) => context.tr('Please enter a valid password'),
                 mustMatchNewPassword: (_) => context.tr('Password mismatch'),
               ),
               (_) => null,
@@ -98,12 +113,12 @@ class PasswordTextField extends StatelessWidget {
             ResetPasswordEvent.onTextChange(
               passwordFieldType,
               text,
-              context.read<EligibilityBloc>().state.user,
             ),
           ),
       obscureText: isPasswordVisible,
       validator: (_) => _validateForm(context),
       decoration: InputDecoration(
+        errorMaxLines: 2,
         hintText: tr(hintText),
         suffixIcon: IconButton(
           icon: Icon(

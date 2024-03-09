@@ -13,9 +13,7 @@ class _ResetPasswordButton extends StatelessWidget {
       builder: ((context, state) {
         return Column(
           children: [
-            if (state.showNewPasswordPatternMismatchError(
-              context.read<EligibilityBloc>().state.user,
-            ))
+            if (state.showNewPasswordPatternMismatchError)
               const _ValidationsFailedWarning(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),

@@ -21,9 +21,7 @@ class _SaveClearChangesSection extends StatelessWidget {
                 endIndent: 0,
                 height: 40,
               ),
-              if (state.showNewPasswordPatternMismatchError(
-                context.read<EligibilityBloc>().state.user,
-              ))
+              if (state.showNewPasswordPatternMismatchError)
                 const _ValidationsFailedWarning(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -52,12 +50,7 @@ class _SaveClearChangesSection extends StatelessWidget {
                         onPressed: () {
                           FocusScope.of(context).unfocus();
                           context.read<ResetPasswordBloc>().add(
-                                ResetPasswordEvent.changePassword(
-                                  user: context
-                                      .read<EligibilityBloc>()
-                                      .state
-                                      .user,
-                                ),
+                                const ResetPasswordEvent.changePassword(),
                               );
                         },
                         child: LoadingShimmer.withChild(

@@ -1032,8 +1032,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               redirectResetPassword: (ResetPasswordCred resetPasswordCred) {
                 context.read<ResetPasswordBloc>().add(
-                      ResetPasswordEvent.addResetPasswordCred(
+                      ResetPasswordEvent.initialize(
                         resetPasswordCred: resetPasswordCred,
+                        user: resetPasswordCred.toUser,
                       ),
                     );
                 if (context
@@ -1418,7 +1419,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
 
-    context.read<ResetPasswordBloc>().add(const ResetPasswordEvent.clear());
+    context.read<ResetPasswordBloc>().add(
+          ResetPasswordEvent.initialize(
+            resetPasswordCred: ResetPasswordCred.empty(),
+            user: eligibilityState.user,
+          ),
+        );
   }
 
   void _logout(BuildContext context) {

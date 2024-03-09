@@ -98,18 +98,17 @@ void main() {
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
       final newPasswordField = find.byKey(WidgetKeys.newPasswordTextField);
-      final newPasswordHintText = find.text('Follow instruction below');
+      final newPasswordHintText = find.text('Enter your new password');
       final confirmPasswordField = find.byKey(WidgetKeys.confirmPasswordField);
-      final confirmPasswordHintText = find.text('Enter new password again');
+      final confirmPasswordHintText =
+          find.text('Enter your new password again');
       final passwordValidationTitle =
           find.text('Your new password should have :');
       final minTenChars = find.text('Minimum length of 10 characters');
       final oneUpperCase =
-          find.text('Contain at least 1 Upper case character (A to Z)');
-      final oneLoweCase =
-          find.text('Contain at least 1 Lower case character (a to z)');
-      final numericChar =
-          find.text('Contain at least a numeric character (0 to 9)');
+          find.text('At least 1 Upper case character (A to Z)');
+      final oneLoweCase = find.text('At least 1 Lower case character (a to z)');
+      final numericChar = find.text('At least a numeric character (0 to 9)');
       final specialChar = find.text(
         'At least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )',
       );
@@ -141,7 +140,7 @@ void main() {
         ResetPasswordState.initial(),
         ResetPasswordState.initial().copyWith(
           showErrorMessages: true,
-          newPassword: Password.resetV2('new-password', ''),
+          newPassword: Password.resetV2('', '', 'fake-user'),
         ),
       ];
       whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
@@ -149,11 +148,10 @@ void main() {
       await tester.pumpAndSettle();
       final warning = find.byKey(WidgetKeys.errorRequirementsFillAllField);
       final confirmPasswordEmptyWarning =
-          find.text('Confirm password cannot be empty.');
-      final checkIcon = find.byIcon(Icons.check);
+          find.text('Please enter a valid password');
+
       expect(warning, findsOneWidget);
-      expect(confirmPasswordEmptyWarning, findsOneWidget);
-      expect(checkIcon, findsNWidgets(3));
+      expect(confirmPasswordEmptyWarning, findsNWidgets(2));
 
       final resetPasswordButton = find.byKey(WidgetKeys.resetPasswordButton);
 

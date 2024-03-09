@@ -42,7 +42,7 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.mustOneSpecialCharacter({
     required T failedValue,
   }) = OneSpecial<T>;
-  const factory ValueFailure.mustNotContainUserName({
+  const factory ValueFailure.containsForbiddenSubstring({
     required T failedValue,
   }) = NotContainUserName<T>;
   const factory ValueFailure.mustNotMatchOldPassword({

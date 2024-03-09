@@ -178,9 +178,7 @@ void main() {
           await tester.tap(submitButtonFinder);
           verify(() {
             mockResetPasswordBloc.add(
-              ResetPasswordEvent.changePassword(
-                user: mockEligibilityBloc.state.user,
-              ),
+              const ResetPasswordEvent.changePassword(),
             );
           });
         },
@@ -281,18 +279,18 @@ void main() {
           );
           expect(
             find.text(
-              'Contain at least 1 Upper case character (A to Z)'.tr(),
+              'At least 1 Upper case character (A to Z)'.tr(),
             ),
             findsOneWidget,
           );
           expect(
             find.text(
-              'Contain at least 1 Lower case character (a to z)'.tr(),
+              'At least 1 Lower case character (a to z)'.tr(),
             ),
             findsOneWidget,
           );
           expect(
-            find.text('Contain at least a numeric character (0 to 9)'.tr()),
+            find.text('At least a numeric character (0 to 9)'.tr()),
             findsOneWidget,
           );
           expect(
@@ -325,10 +323,9 @@ void main() {
           await tester.enterText(textFieldOldPasswordFinder, fakePassword);
           verify(
             () => mockResetPasswordBloc.add(
-              ResetPasswordEvent.onTextChange(
+              const ResetPasswordEvent.onTextChange(
                 PasswordFieldType.oldPassword,
                 fakePassword,
-                mockEligibilityBloc.state.user,
               ),
             ),
           );

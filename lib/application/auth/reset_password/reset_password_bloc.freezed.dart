@@ -20,13 +20,12 @@ mixin _$ResetPasswordEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(
-            PasswordFieldType fieldType, String newValue, User user)
+    required TResult Function(PasswordFieldType fieldType, String newValue)
         onTextChange,
-    required TResult Function(User user) changePassword,
+    required TResult Function() changePassword,
     required TResult Function() clear,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        addResetPasswordCred,
+    required TResult Function(User user, ResetPasswordCred resetPasswordCred)
+        initialize,
     required TResult Function() resetPassword,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,12 +33,12 @@ mixin _$ResetPasswordEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult? Function(User user)? changePassword,
+    TResult? Function()? changePassword,
     TResult? Function()? clear,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        addResetPasswordCred,
+    TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult? Function()? resetPassword,
   }) =>
       throw _privateConstructorUsedError;
@@ -47,11 +46,12 @@ mixin _$ResetPasswordEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult Function(User user)? changePassword,
+    TResult Function()? changePassword,
     TResult Function()? clear,
-    TResult Function(ResetPasswordCred resetPasswordCred)? addResetPasswordCred,
+    TResult Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult Function()? resetPassword,
     required TResult orElse(),
   }) =>
@@ -63,7 +63,7 @@ mixin _$ResetPasswordEvent {
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ChangePassword value) changePassword,
     required TResult Function(_Clear value) clear,
-    required TResult Function(_AddResetPasswordCred value) addResetPasswordCred,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
   }) =>
       throw _privateConstructorUsedError;
@@ -73,7 +73,7 @@ mixin _$ResetPasswordEvent {
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ChangePassword value)? changePassword,
     TResult? Function(_Clear value)? clear,
-    TResult? Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
   }) =>
       throw _privateConstructorUsedError;
@@ -83,7 +83,7 @@ mixin _$ResetPasswordEvent {
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ChangePassword value)? changePassword,
     TResult Function(_Clear value)? clear,
-    TResult Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
     required TResult orElse(),
   }) =>
@@ -185,13 +185,12 @@ class _$_PasswordVisibility implements _PasswordVisibility {
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(
-            PasswordFieldType fieldType, String newValue, User user)
+    required TResult Function(PasswordFieldType fieldType, String newValue)
         onTextChange,
-    required TResult Function(User user) changePassword,
+    required TResult Function() changePassword,
     required TResult Function() clear,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        addResetPasswordCred,
+    required TResult Function(User user, ResetPasswordCred resetPasswordCred)
+        initialize,
     required TResult Function() resetPassword,
   }) {
     return togglePasswordVisibility(fieldType, toggleValue);
@@ -202,12 +201,12 @@ class _$_PasswordVisibility implements _PasswordVisibility {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult? Function(User user)? changePassword,
+    TResult? Function()? changePassword,
     TResult? Function()? clear,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        addResetPasswordCred,
+    TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult? Function()? resetPassword,
   }) {
     return togglePasswordVisibility?.call(fieldType, toggleValue);
@@ -218,11 +217,12 @@ class _$_PasswordVisibility implements _PasswordVisibility {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult Function(User user)? changePassword,
+    TResult Function()? changePassword,
     TResult Function()? clear,
-    TResult Function(ResetPasswordCred resetPasswordCred)? addResetPasswordCred,
+    TResult Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult Function()? resetPassword,
     required TResult orElse(),
   }) {
@@ -240,7 +240,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ChangePassword value) changePassword,
     required TResult Function(_Clear value) clear,
-    required TResult Function(_AddResetPasswordCred value) addResetPasswordCred,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
   }) {
     return togglePasswordVisibility(this);
@@ -253,7 +253,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ChangePassword value)? changePassword,
     TResult? Function(_Clear value)? clear,
-    TResult? Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
   }) {
     return togglePasswordVisibility?.call(this);
@@ -266,7 +266,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ChangePassword value)? changePassword,
     TResult Function(_Clear value)? clear,
-    TResult Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
     required TResult orElse(),
   }) {
@@ -295,9 +295,7 @@ abstract class _$$_PasswordTextOnChangeCopyWith<$Res> {
           $Res Function(_$_PasswordTextOnChange) then) =
       __$$_PasswordTextOnChangeCopyWithImpl<$Res>;
   @useResult
-  $Res call({PasswordFieldType fieldType, String newValue, User user});
-
-  $UserCopyWith<$Res> get user;
+  $Res call({PasswordFieldType fieldType, String newValue});
 }
 
 /// @nodoc
@@ -313,7 +311,6 @@ class __$$_PasswordTextOnChangeCopyWithImpl<$Res>
   $Res call({
     Object? fieldType = null,
     Object? newValue = null,
-    Object? user = null,
   }) {
     return _then(_$_PasswordTextOnChange(
       null == fieldType
@@ -324,37 +321,23 @@ class __$$_PasswordTextOnChangeCopyWithImpl<$Res>
           ? _value.newValue
           : newValue // ignore: cast_nullable_to_non_nullable
               as String,
-      null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_PasswordTextOnChange implements _PasswordTextOnChange {
-  const _$_PasswordTextOnChange(this.fieldType, this.newValue, this.user);
+  const _$_PasswordTextOnChange(this.fieldType, this.newValue);
 
   @override
   final PasswordFieldType fieldType;
   @override
   final String newValue;
-  @override
-  final User user;
 
   @override
   String toString() {
-    return 'ResetPasswordEvent.onTextChange(fieldType: $fieldType, newValue: $newValue, user: $user)';
+    return 'ResetPasswordEvent.onTextChange(fieldType: $fieldType, newValue: $newValue)';
   }
 
   @override
@@ -365,12 +348,11 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
             (identical(other.fieldType, fieldType) ||
                 other.fieldType == fieldType) &&
             (identical(other.newValue, newValue) ||
-                other.newValue == newValue) &&
-            (identical(other.user, user) || other.user == user));
+                other.newValue == newValue));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, fieldType, newValue, user);
+  int get hashCode => Object.hash(runtimeType, fieldType, newValue);
 
   @JsonKey(ignore: true)
   @override
@@ -384,16 +366,15 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(
-            PasswordFieldType fieldType, String newValue, User user)
+    required TResult Function(PasswordFieldType fieldType, String newValue)
         onTextChange,
-    required TResult Function(User user) changePassword,
+    required TResult Function() changePassword,
     required TResult Function() clear,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        addResetPasswordCred,
+    required TResult Function(User user, ResetPasswordCred resetPasswordCred)
+        initialize,
     required TResult Function() resetPassword,
   }) {
-    return onTextChange(fieldType, newValue, user);
+    return onTextChange(fieldType, newValue);
   }
 
   @override
@@ -401,15 +382,15 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult? Function(User user)? changePassword,
+    TResult? Function()? changePassword,
     TResult? Function()? clear,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        addResetPasswordCred,
+    TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult? Function()? resetPassword,
   }) {
-    return onTextChange?.call(fieldType, newValue, user);
+    return onTextChange?.call(fieldType, newValue);
   }
 
   @override
@@ -417,16 +398,17 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult Function(User user)? changePassword,
+    TResult Function()? changePassword,
     TResult Function()? clear,
-    TResult Function(ResetPasswordCred resetPasswordCred)? addResetPasswordCred,
+    TResult Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult Function()? resetPassword,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
-      return onTextChange(fieldType, newValue, user);
+      return onTextChange(fieldType, newValue);
     }
     return orElse();
   }
@@ -439,7 +421,7 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ChangePassword value) changePassword,
     required TResult Function(_Clear value) clear,
-    required TResult Function(_AddResetPasswordCred value) addResetPasswordCred,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
   }) {
     return onTextChange(this);
@@ -452,7 +434,7 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ChangePassword value)? changePassword,
     TResult? Function(_Clear value)? clear,
-    TResult? Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
   }) {
     return onTextChange?.call(this);
@@ -465,7 +447,7 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ChangePassword value)? changePassword,
     TResult Function(_Clear value)? clear,
-    TResult Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
     required TResult orElse(),
   }) {
@@ -477,12 +459,12 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
 }
 
 abstract class _PasswordTextOnChange implements ResetPasswordEvent {
-  const factory _PasswordTextOnChange(final PasswordFieldType fieldType,
-      final String newValue, final User user) = _$_PasswordTextOnChange;
+  const factory _PasswordTextOnChange(
+          final PasswordFieldType fieldType, final String newValue) =
+      _$_PasswordTextOnChange;
 
   PasswordFieldType get fieldType;
   String get newValue;
-  User get user;
   @JsonKey(ignore: true)
   _$$_PasswordTextOnChangeCopyWith<_$_PasswordTextOnChange> get copyWith =>
       throw _privateConstructorUsedError;
@@ -493,10 +475,6 @@ abstract class _$$_ChangePasswordCopyWith<$Res> {
   factory _$$_ChangePasswordCopyWith(
           _$_ChangePassword value, $Res Function(_$_ChangePassword) then) =
       __$$_ChangePasswordCopyWithImpl<$Res>;
-  @useResult
-  $Res call({User user});
-
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -506,74 +484,41 @@ class __$$_ChangePasswordCopyWithImpl<$Res>
   __$$_ChangePasswordCopyWithImpl(
       _$_ChangePassword _value, $Res Function(_$_ChangePassword) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_$_ChangePassword(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_ChangePassword implements _ChangePassword {
-  const _$_ChangePassword({required this.user});
-
-  @override
-  final User user;
+  const _$_ChangePassword();
 
   @override
   String toString() {
-    return 'ResetPasswordEvent.changePassword(user: $user)';
+    return 'ResetPasswordEvent.changePassword()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ChangePassword &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_ChangePassword);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ChangePasswordCopyWith<_$_ChangePassword> get copyWith =>
-      __$$_ChangePasswordCopyWithImpl<_$_ChangePassword>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(
-            PasswordFieldType fieldType, String newValue, User user)
+    required TResult Function(PasswordFieldType fieldType, String newValue)
         onTextChange,
-    required TResult Function(User user) changePassword,
+    required TResult Function() changePassword,
     required TResult Function() clear,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        addResetPasswordCred,
+    required TResult Function(User user, ResetPasswordCred resetPasswordCred)
+        initialize,
     required TResult Function() resetPassword,
   }) {
-    return changePassword(user);
+    return changePassword();
   }
 
   @override
@@ -581,15 +526,15 @@ class _$_ChangePassword implements _ChangePassword {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult? Function(User user)? changePassword,
+    TResult? Function()? changePassword,
     TResult? Function()? clear,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        addResetPasswordCred,
+    TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult? Function()? resetPassword,
   }) {
-    return changePassword?.call(user);
+    return changePassword?.call();
   }
 
   @override
@@ -597,16 +542,17 @@ class _$_ChangePassword implements _ChangePassword {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult Function(User user)? changePassword,
+    TResult Function()? changePassword,
     TResult Function()? clear,
-    TResult Function(ResetPasswordCred resetPasswordCred)? addResetPasswordCred,
+    TResult Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult Function()? resetPassword,
     required TResult orElse(),
   }) {
     if (changePassword != null) {
-      return changePassword(user);
+      return changePassword();
     }
     return orElse();
   }
@@ -619,7 +565,7 @@ class _$_ChangePassword implements _ChangePassword {
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ChangePassword value) changePassword,
     required TResult Function(_Clear value) clear,
-    required TResult Function(_AddResetPasswordCred value) addResetPasswordCred,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
   }) {
     return changePassword(this);
@@ -632,7 +578,7 @@ class _$_ChangePassword implements _ChangePassword {
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ChangePassword value)? changePassword,
     TResult? Function(_Clear value)? clear,
-    TResult? Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
   }) {
     return changePassword?.call(this);
@@ -645,7 +591,7 @@ class _$_ChangePassword implements _ChangePassword {
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ChangePassword value)? changePassword,
     TResult Function(_Clear value)? clear,
-    TResult Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
     required TResult orElse(),
   }) {
@@ -657,12 +603,7 @@ class _$_ChangePassword implements _ChangePassword {
 }
 
 abstract class _ChangePassword implements ResetPasswordEvent {
-  const factory _ChangePassword({required final User user}) = _$_ChangePassword;
-
-  User get user;
-  @JsonKey(ignore: true)
-  _$$_ChangePasswordCopyWith<_$_ChangePassword> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _ChangePassword() = _$_ChangePassword;
 }
 
 /// @nodoc
@@ -703,13 +644,12 @@ class _$_Clear implements _Clear {
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(
-            PasswordFieldType fieldType, String newValue, User user)
+    required TResult Function(PasswordFieldType fieldType, String newValue)
         onTextChange,
-    required TResult Function(User user) changePassword,
+    required TResult Function() changePassword,
     required TResult Function() clear,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        addResetPasswordCred,
+    required TResult Function(User user, ResetPasswordCred resetPasswordCred)
+        initialize,
     required TResult Function() resetPassword,
   }) {
     return clear();
@@ -720,12 +660,12 @@ class _$_Clear implements _Clear {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult? Function(User user)? changePassword,
+    TResult? Function()? changePassword,
     TResult? Function()? clear,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        addResetPasswordCred,
+    TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult? Function()? resetPassword,
   }) {
     return clear?.call();
@@ -736,11 +676,12 @@ class _$_Clear implements _Clear {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult Function(User user)? changePassword,
+    TResult Function()? changePassword,
     TResult Function()? clear,
-    TResult Function(ResetPasswordCred resetPasswordCred)? addResetPasswordCred,
+    TResult Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult Function()? resetPassword,
     required TResult orElse(),
   }) {
@@ -758,7 +699,7 @@ class _$_Clear implements _Clear {
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ChangePassword value) changePassword,
     required TResult Function(_Clear value) clear,
-    required TResult Function(_AddResetPasswordCred value) addResetPasswordCred,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
   }) {
     return clear(this);
@@ -771,7 +712,7 @@ class _$_Clear implements _Clear {
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ChangePassword value)? changePassword,
     TResult? Function(_Clear value)? clear,
-    TResult? Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
   }) {
     return clear?.call(this);
@@ -784,7 +725,7 @@ class _$_Clear implements _Clear {
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ChangePassword value)? changePassword,
     TResult Function(_Clear value)? clear,
-    TResult Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
     required TResult orElse(),
   }) {
@@ -800,35 +741,49 @@ abstract class _Clear implements ResetPasswordEvent {
 }
 
 /// @nodoc
-abstract class _$$_AddResetPasswordCredCopyWith<$Res> {
-  factory _$$_AddResetPasswordCredCopyWith(_$_AddResetPasswordCred value,
-          $Res Function(_$_AddResetPasswordCred) then) =
-      __$$_AddResetPasswordCredCopyWithImpl<$Res>;
+abstract class _$$_InitializeCopyWith<$Res> {
+  factory _$$_InitializeCopyWith(
+          _$_Initialize value, $Res Function(_$_Initialize) then) =
+      __$$_InitializeCopyWithImpl<$Res>;
   @useResult
-  $Res call({ResetPasswordCred resetPasswordCred});
+  $Res call({User user, ResetPasswordCred resetPasswordCred});
 
+  $UserCopyWith<$Res> get user;
   $ResetPasswordCredCopyWith<$Res> get resetPasswordCred;
 }
 
 /// @nodoc
-class __$$_AddResetPasswordCredCopyWithImpl<$Res>
-    extends _$ResetPasswordEventCopyWithImpl<$Res, _$_AddResetPasswordCred>
-    implements _$$_AddResetPasswordCredCopyWith<$Res> {
-  __$$_AddResetPasswordCredCopyWithImpl(_$_AddResetPasswordCred _value,
-      $Res Function(_$_AddResetPasswordCred) _then)
+class __$$_InitializeCopyWithImpl<$Res>
+    extends _$ResetPasswordEventCopyWithImpl<$Res, _$_Initialize>
+    implements _$$_InitializeCopyWith<$Res> {
+  __$$_InitializeCopyWithImpl(
+      _$_Initialize _value, $Res Function(_$_Initialize) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? resetPasswordCred = null,
   }) {
-    return _then(_$_AddResetPasswordCred(
+    return _then(_$_Initialize(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       resetPasswordCred: null == resetPasswordCred
           ? _value.resetPasswordCred
           : resetPasswordCred // ignore: cast_nullable_to_non_nullable
               as ResetPasswordCred,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
   }
 
   @override
@@ -842,51 +797,52 @@ class __$$_AddResetPasswordCredCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddResetPasswordCred implements _AddResetPasswordCred {
-  const _$_AddResetPasswordCred({required this.resetPasswordCred});
+class _$_Initialize implements _Initialize {
+  const _$_Initialize({required this.user, required this.resetPasswordCred});
 
+  @override
+  final User user;
   @override
   final ResetPasswordCred resetPasswordCred;
 
   @override
   String toString() {
-    return 'ResetPasswordEvent.addResetPasswordCred(resetPasswordCred: $resetPasswordCred)';
+    return 'ResetPasswordEvent.initialize(user: $user, resetPasswordCred: $resetPasswordCred)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddResetPasswordCred &&
+            other is _$_Initialize &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.resetPasswordCred, resetPasswordCred) ||
                 other.resetPasswordCred == resetPasswordCred));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, resetPasswordCred);
+  int get hashCode => Object.hash(runtimeType, user, resetPasswordCred);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddResetPasswordCredCopyWith<_$_AddResetPasswordCred> get copyWith =>
-      __$$_AddResetPasswordCredCopyWithImpl<_$_AddResetPasswordCred>(
-          this, _$identity);
+  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
+      __$$_InitializeCopyWithImpl<_$_Initialize>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(
-            PasswordFieldType fieldType, String newValue, User user)
+    required TResult Function(PasswordFieldType fieldType, String newValue)
         onTextChange,
-    required TResult Function(User user) changePassword,
+    required TResult Function() changePassword,
     required TResult Function() clear,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        addResetPasswordCred,
+    required TResult Function(User user, ResetPasswordCred resetPasswordCred)
+        initialize,
     required TResult Function() resetPassword,
   }) {
-    return addResetPasswordCred(resetPasswordCred);
+    return initialize(user, resetPasswordCred);
   }
 
   @override
@@ -894,15 +850,15 @@ class _$_AddResetPasswordCred implements _AddResetPasswordCred {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult? Function(User user)? changePassword,
+    TResult? Function()? changePassword,
     TResult? Function()? clear,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        addResetPasswordCred,
+    TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult? Function()? resetPassword,
   }) {
-    return addResetPasswordCred?.call(resetPasswordCred);
+    return initialize?.call(user, resetPasswordCred);
   }
 
   @override
@@ -910,16 +866,17 @@ class _$_AddResetPasswordCred implements _AddResetPasswordCred {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult Function(User user)? changePassword,
+    TResult Function()? changePassword,
     TResult Function()? clear,
-    TResult Function(ResetPasswordCred resetPasswordCred)? addResetPasswordCred,
+    TResult Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult Function()? resetPassword,
     required TResult orElse(),
   }) {
-    if (addResetPasswordCred != null) {
-      return addResetPasswordCred(resetPasswordCred);
+    if (initialize != null) {
+      return initialize(user, resetPasswordCred);
     }
     return orElse();
   }
@@ -932,10 +889,10 @@ class _$_AddResetPasswordCred implements _AddResetPasswordCred {
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ChangePassword value) changePassword,
     required TResult Function(_Clear value) clear,
-    required TResult Function(_AddResetPasswordCred value) addResetPasswordCred,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
   }) {
-    return addResetPasswordCred(this);
+    return initialize(this);
   }
 
   @override
@@ -945,10 +902,10 @@ class _$_AddResetPasswordCred implements _AddResetPasswordCred {
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ChangePassword value)? changePassword,
     TResult? Function(_Clear value)? clear,
-    TResult? Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
   }) {
-    return addResetPasswordCred?.call(this);
+    return initialize?.call(this);
   }
 
   @override
@@ -958,25 +915,26 @@ class _$_AddResetPasswordCred implements _AddResetPasswordCred {
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ChangePassword value)? changePassword,
     TResult Function(_Clear value)? clear,
-    TResult Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
     required TResult orElse(),
   }) {
-    if (addResetPasswordCred != null) {
-      return addResetPasswordCred(this);
+    if (initialize != null) {
+      return initialize(this);
     }
     return orElse();
   }
 }
 
-abstract class _AddResetPasswordCred implements ResetPasswordEvent {
-  const factory _AddResetPasswordCred(
-          {required final ResetPasswordCred resetPasswordCred}) =
-      _$_AddResetPasswordCred;
+abstract class _Initialize implements ResetPasswordEvent {
+  const factory _Initialize(
+      {required final User user,
+      required final ResetPasswordCred resetPasswordCred}) = _$_Initialize;
 
+  User get user;
   ResetPasswordCred get resetPasswordCred;
   @JsonKey(ignore: true)
-  _$$_AddResetPasswordCredCopyWith<_$_AddResetPasswordCred> get copyWith =>
+  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1020,13 +978,12 @@ class _$_ResetPasswords implements _ResetPasswords {
   TResult when<TResult extends Object?>({
     required TResult Function(PasswordFieldType fieldType, bool toggleValue)
         togglePasswordVisibility,
-    required TResult Function(
-            PasswordFieldType fieldType, String newValue, User user)
+    required TResult Function(PasswordFieldType fieldType, String newValue)
         onTextChange,
-    required TResult Function(User user) changePassword,
+    required TResult Function() changePassword,
     required TResult Function() clear,
-    required TResult Function(ResetPasswordCred resetPasswordCred)
-        addResetPasswordCred,
+    required TResult Function(User user, ResetPasswordCred resetPasswordCred)
+        initialize,
     required TResult Function() resetPassword,
   }) {
     return resetPassword();
@@ -1037,12 +994,12 @@ class _$_ResetPasswords implements _ResetPasswords {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult? Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult? Function(User user)? changePassword,
+    TResult? Function()? changePassword,
     TResult? Function()? clear,
-    TResult? Function(ResetPasswordCred resetPasswordCred)?
-        addResetPasswordCred,
+    TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult? Function()? resetPassword,
   }) {
     return resetPassword?.call();
@@ -1053,11 +1010,12 @@ class _$_ResetPasswords implements _ResetPasswords {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(PasswordFieldType fieldType, bool toggleValue)?
         togglePasswordVisibility,
-    TResult Function(PasswordFieldType fieldType, String newValue, User user)?
+    TResult Function(PasswordFieldType fieldType, String newValue)?
         onTextChange,
-    TResult Function(User user)? changePassword,
+    TResult Function()? changePassword,
     TResult Function()? clear,
-    TResult Function(ResetPasswordCred resetPasswordCred)? addResetPasswordCred,
+    TResult Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
     TResult Function()? resetPassword,
     required TResult orElse(),
   }) {
@@ -1075,7 +1033,7 @@ class _$_ResetPasswords implements _ResetPasswords {
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ChangePassword value) changePassword,
     required TResult Function(_Clear value) clear,
-    required TResult Function(_AddResetPasswordCred value) addResetPasswordCred,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
   }) {
     return resetPassword(this);
@@ -1088,7 +1046,7 @@ class _$_ResetPasswords implements _ResetPasswords {
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ChangePassword value)? changePassword,
     TResult? Function(_Clear value)? clear,
-    TResult? Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
   }) {
     return resetPassword?.call(this);
@@ -1101,7 +1059,7 @@ class _$_ResetPasswords implements _ResetPasswords {
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ChangePassword value)? changePassword,
     TResult Function(_Clear value)? clear,
-    TResult Function(_AddResetPasswordCred value)? addResetPasswordCred,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
     required TResult orElse(),
   }) {
@@ -1118,6 +1076,7 @@ abstract class _ResetPasswords implements ResetPasswordEvent {
 
 /// @nodoc
 mixin _$ResetPasswordState {
+  User get user => throw _privateConstructorUsedError;
   bool get isOldPasswordObscure => throw _privateConstructorUsedError;
   bool get isNewPasswordObscure => throw _privateConstructorUsedError;
   bool get isConfirmPasswordObscure => throw _privateConstructorUsedError;
@@ -1143,7 +1102,8 @@ abstract class $ResetPasswordStateCopyWith<$Res> {
       _$ResetPasswordStateCopyWithImpl<$Res, ResetPasswordState>;
   @useResult
   $Res call(
-      {bool isOldPasswordObscure,
+      {User user,
+      bool isOldPasswordObscure,
       bool isNewPasswordObscure,
       bool isConfirmPasswordObscure,
       Password oldPassword,
@@ -1155,6 +1115,7 @@ abstract class $ResetPasswordStateCopyWith<$Res> {
       ResetPasswordCred resetPasswordCred,
       bool showErrorMessages});
 
+  $UserCopyWith<$Res> get user;
   $ResetPasswordCredCopyWith<$Res> get resetPasswordCred;
 }
 
@@ -1171,6 +1132,7 @@ class _$ResetPasswordStateCopyWithImpl<$Res, $Val extends ResetPasswordState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? isOldPasswordObscure = null,
     Object? isNewPasswordObscure = null,
     Object? isConfirmPasswordObscure = null,
@@ -1183,6 +1145,10 @@ class _$ResetPasswordStateCopyWithImpl<$Res, $Val extends ResetPasswordState>
     Object? showErrorMessages = null,
   }) {
     return _then(_value.copyWith(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       isOldPasswordObscure: null == isOldPasswordObscure
           ? _value.isOldPasswordObscure
           : isOldPasswordObscure // ignore: cast_nullable_to_non_nullable
@@ -1229,6 +1195,14 @@ class _$ResetPasswordStateCopyWithImpl<$Res, $Val extends ResetPasswordState>
 
   @override
   @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $ResetPasswordCredCopyWith<$Res> get resetPasswordCred {
     return $ResetPasswordCredCopyWith<$Res>(_value.resetPasswordCred, (value) {
       return _then(_value.copyWith(resetPasswordCred: value) as $Val);
@@ -1245,7 +1219,8 @@ abstract class _$$_ResetPasswordCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isOldPasswordObscure,
+      {User user,
+      bool isOldPasswordObscure,
       bool isNewPasswordObscure,
       bool isConfirmPasswordObscure,
       Password oldPassword,
@@ -1257,6 +1232,8 @@ abstract class _$$_ResetPasswordCopyWith<$Res>
       ResetPasswordCred resetPasswordCred,
       bool showErrorMessages});
 
+  @override
+  $UserCopyWith<$Res> get user;
   @override
   $ResetPasswordCredCopyWith<$Res> get resetPasswordCred;
 }
@@ -1272,6 +1249,7 @@ class __$$_ResetPasswordCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
     Object? isOldPasswordObscure = null,
     Object? isNewPasswordObscure = null,
     Object? isConfirmPasswordObscure = null,
@@ -1284,6 +1262,10 @@ class __$$_ResetPasswordCopyWithImpl<$Res>
     Object? showErrorMessages = null,
   }) {
     return _then(_$_ResetPassword(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       isOldPasswordObscure: null == isOldPasswordObscure
           ? _value.isOldPasswordObscure
           : isOldPasswordObscure // ignore: cast_nullable_to_non_nullable
@@ -1333,7 +1315,8 @@ class __$$_ResetPasswordCopyWithImpl<$Res>
 
 class _$_ResetPassword extends _ResetPassword {
   const _$_ResetPassword(
-      {required this.isOldPasswordObscure,
+      {required this.user,
+      required this.isOldPasswordObscure,
       required this.isNewPasswordObscure,
       required this.isConfirmPasswordObscure,
       required this.oldPassword,
@@ -1345,6 +1328,8 @@ class _$_ResetPassword extends _ResetPassword {
       required this.showErrorMessages})
       : super._();
 
+  @override
+  final User user;
   @override
   final bool isOldPasswordObscure;
   @override
@@ -1369,7 +1354,7 @@ class _$_ResetPassword extends _ResetPassword {
 
   @override
   String toString() {
-    return 'ResetPasswordState(isOldPasswordObscure: $isOldPasswordObscure, isNewPasswordObscure: $isNewPasswordObscure, isConfirmPasswordObscure: $isConfirmPasswordObscure, oldPassword: $oldPassword, newPassword: $newPassword, confirmPassword: $confirmPassword, isSubmitting: $isSubmitting, passwordResetFailureOrSuccessOption: $passwordResetFailureOrSuccessOption, resetPasswordCred: $resetPasswordCred, showErrorMessages: $showErrorMessages)';
+    return 'ResetPasswordState(user: $user, isOldPasswordObscure: $isOldPasswordObscure, isNewPasswordObscure: $isNewPasswordObscure, isConfirmPasswordObscure: $isConfirmPasswordObscure, oldPassword: $oldPassword, newPassword: $newPassword, confirmPassword: $confirmPassword, isSubmitting: $isSubmitting, passwordResetFailureOrSuccessOption: $passwordResetFailureOrSuccessOption, resetPasswordCred: $resetPasswordCred, showErrorMessages: $showErrorMessages)';
   }
 
   @override
@@ -1377,6 +1362,7 @@ class _$_ResetPassword extends _ResetPassword {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ResetPassword &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.isOldPasswordObscure, isOldPasswordObscure) ||
                 other.isOldPasswordObscure == isOldPasswordObscure) &&
             (identical(other.isNewPasswordObscure, isNewPasswordObscure) ||
@@ -1405,6 +1391,7 @@ class _$_ResetPassword extends _ResetPassword {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      user,
       isOldPasswordObscure,
       isNewPasswordObscure,
       isConfirmPasswordObscure,
@@ -1425,7 +1412,8 @@ class _$_ResetPassword extends _ResetPassword {
 
 abstract class _ResetPassword extends ResetPasswordState {
   const factory _ResetPassword(
-      {required final bool isOldPasswordObscure,
+      {required final User user,
+      required final bool isOldPasswordObscure,
       required final bool isNewPasswordObscure,
       required final bool isConfirmPasswordObscure,
       required final Password oldPassword,
@@ -1438,6 +1426,8 @@ abstract class _ResetPassword extends ResetPasswordState {
       required final bool showErrorMessages}) = _$_ResetPassword;
   const _ResetPassword._() : super._();
 
+  @override
+  User get user;
   @override
   bool get isOldPasswordObscure;
   @override

@@ -125,13 +125,20 @@ class Password extends ValueObject<String> {
     return Password._(validateStringNotEmpty(input).flatMap(validatePassword));
   }
 
-  factory Password.resetV2(String newPassword, String oldPassword) {
+  factory Password.resetV2(
+    String newPassword,
+    String oldPassword,
+    String userName,
+  ) {
     return Password._(
       validateStringNotEmpty(newPassword)
           .flatMap(atLeastOneLowerCharacter)
           .flatMap(atLeastOneUpperCharacter)
           .flatMap(atLeastOneNumericCharacter)
           .flatMap(atLeastOneSpecialCharacter)
+          .flatMap(
+            (input) => validateAbsenceOfSourceSubstrings(input, userName),
+          )
           .flatMap((input) => validateMinStringLength(input, 10))
           .flatMap((input) => validateOldAndNewPassword(input, oldPassword)),
     );
