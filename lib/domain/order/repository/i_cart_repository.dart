@@ -79,7 +79,9 @@ abstract class ICartRepository {
     required Language language,
   });
 
-  Future<Either<ApiFailure, Cart>> getAddedToCartProductList();
+  Future<Either<ApiFailure, Cart>> getAddedToCartProductList({
+    required Language language,
+  });
 
   Future<Either<ApiFailure, List<PriceAggregate>>> removeSelectedProducts({
     required SalesOrganisation salesOrganisation,

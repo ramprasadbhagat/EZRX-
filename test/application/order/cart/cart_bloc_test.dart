@@ -208,7 +208,9 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           when(
-            () => cartRepositoryMock.getAddedToCartProductList(),
+            () => cartRepositoryMock.getAddedToCartProductList(
+              language: fakeClientUser.preferredLanguage,
+            ),
           ).thenAnswer(
             (invocation) async => Left(
               fakeError,
@@ -255,7 +257,9 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           when(
-            () => cartRepositoryMock.getAddedToCartProductList(),
+            () => cartRepositoryMock.getAddedToCartProductList(
+              language: fakeClientUser.preferredLanguage,
+            ),
           ).thenAnswer(
             (invocation) async => Right(
               Cart.empty().copyWith(
@@ -414,7 +418,9 @@ void main() {
             ),
           );
           when(
-            () => cartRepositoryMock.getAddedToCartProductList(),
+            () => cartRepositoryMock.getAddedToCartProductList(
+              language: fakeClientUser.preferredLanguage,
+            ),
           ).thenAnswer(
             (invocation) async => Right(
               Cart.empty().copyWith(
@@ -568,7 +574,9 @@ void main() {
             (invocation) async => Right(metaDataResponse),
           );
           when(
-            () => cartRepositoryMock.getAddedToCartProductList(),
+            () => cartRepositoryMock.getAddedToCartProductList(
+              language: fakeClientUser.preferredLanguage,
+            ),
           ).thenAnswer(
             (invocation) async => Right(
               Cart.empty().copyWith(
@@ -749,7 +757,9 @@ void main() {
             (invocation) async => Right(metaDataResponse),
           );
           when(
-            () => cartRepositoryMock.getAddedToCartProductList(),
+            () => cartRepositoryMock.getAddedToCartProductList(
+              language: fakeClientUser.preferredLanguage,
+            ),
           ).thenAnswer(
             (invocation) async => Right(
               Cart.empty().copyWith(
@@ -836,7 +846,9 @@ void main() {
           ];
 
           when(
-            () => cartRepositoryMock.getAddedToCartProductList(),
+            () => cartRepositoryMock.getAddedToCartProductList(
+              language: fakeClientUser.preferredLanguage,
+            ),
           ).thenAnswer(
             (invocation) async => Right(
               Cart.empty().copyWith(

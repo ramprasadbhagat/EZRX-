@@ -32,12 +32,15 @@ class CartRemoteDataSource {
     required this.remoteConfigService,
   });
 
-  Future<Cart> getAddedToCartProductList({required String market}) async {
+  Future<Cart> getAddedToCartProductList({
+    required String market,
+    required String language,
+  }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final query = cartQueryMutation.cart(
         remoteConfigService.enableMarketPlaceMarkets.contains(market),
       );
-      final variables = {};
+      final variables = {'language': language};
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}cart',

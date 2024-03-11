@@ -308,7 +308,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final failureOrSuccess = await repository.getAddedToCartProductList();
+        final failureOrSuccess = await repository.getAddedToCartProductList(
+          language: state.user.preferredLanguage,
+        );
 
         failureOrSuccess.fold(
           (failure) {

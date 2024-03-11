@@ -332,7 +332,9 @@ class CartRepository implements ICartRepository {
   // }
 
   @override
-  Future<Either<ApiFailure, Cart>> getAddedToCartProductList() async {
+  Future<Either<ApiFailure, Cart>> getAddedToCartProductList({
+    required Language language,
+  }) async {
     try {
       if (config.appFlavor == Flavor.mock) {
         try {
@@ -347,6 +349,7 @@ class CartRepository implements ICartRepository {
       final savedCartList =
           await cartRemoteDataSource.getAddedToCartProductList(
         market: deviceStorage.currentMarket(),
+        language: language.languageCode,
       );
 
       return Right(savedCartList);

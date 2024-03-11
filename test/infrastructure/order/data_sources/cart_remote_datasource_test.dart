@@ -34,6 +34,7 @@ void main() async {
   final service = HttpService.mockDio(dio);
   final remoteConfigService = RemoteConfigServiceMock();
   const fakeMarket = 'fake-market';
+  const fakeLanguage = 'fake-language';
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
   final remoteDataSource = CartRemoteDataSource(
@@ -74,12 +75,13 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {}
+              'variables': {'language': fakeLanguage}
             }),
           );
 
           final result = await remoteDataSource.getAddedToCartProductList(
             market: fakeMarket,
+            language: fakeLanguage,
           );
 
           expect(
@@ -109,11 +111,14 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {}
+              'variables': {'language': fakeLanguage}
             }),
           );
           await remoteDataSource
-              .getAddedToCartProductList(market: fakeMarket)
+              .getAddedToCartProductList(
+            market: fakeMarket,
+            language: fakeLanguage,
+          )
               .onError((error, _) {
             expect(
               error,
@@ -144,11 +149,12 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {}
+              'variables': {'language': fakeLanguage}
             }),
           );
           final result = await remoteDataSource.getAddedToCartProductList(
             market: fakeMarket,
+            language: fakeLanguage,
           );
 
           expect(
@@ -171,12 +177,15 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {}
+              'variables': {'language': fakeLanguage}
             }),
           );
 
           await remoteDataSource
-              .getAddedToCartProductList(market: fakeMarket)
+              .getAddedToCartProductList(
+            market: fakeMarket,
+            language: fakeLanguage,
+          )
               .onError((error, _) {
             expect(error, isA<ServerException>());
             return Future.value(Cart.empty());
@@ -293,11 +302,12 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {}
+              'variables': {'language': fakeLanguage}
             }),
           );
           final result = await remoteDataSource.getAddedToCartProductList(
             market: fakeMarket,
+            language: fakeLanguage,
           );
 
           expect(

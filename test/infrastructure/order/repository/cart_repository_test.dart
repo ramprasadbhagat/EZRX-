@@ -1577,6 +1577,7 @@ void main() {
       when(
         () => cartRemoteDataSource.getAddedToCartProductList(
           market: mockMarket,
+          language: Language.english().languageCode,
         ),
       ).thenAnswer(
         (invocation) async => Cart.empty().copyWith(
@@ -1584,7 +1585,9 @@ void main() {
         ),
       );
 
-      final result = await cartRepository.getAddedToCartProductList();
+      final result = await cartRepository.getAddedToCartProductList(
+        language: Language.english(),
+      );
       expect(result.isRight(), true);
     });
 
@@ -1593,12 +1596,15 @@ void main() {
       when(
         () => cartRemoteDataSource.getAddedToCartProductList(
           market: mockMarket,
+          language: Language.english().languageCode,
         ),
       ).thenThrow(
         (invocation) async => MockException(),
       );
 
-      final result = await cartRepository.getAddedToCartProductList();
+      final result = await cartRepository.getAddedToCartProductList(
+        language: Language.english(),
+      );
       expect(result.isLeft(), true);
     });
 
@@ -1612,7 +1618,9 @@ void main() {
         ),
       );
 
-      final result = await cartRepository.getAddedToCartProductList();
+      final result = await cartRepository.getAddedToCartProductList(
+        language: Language.english(),
+      );
       expect(result.isRight(), true);
     });
 
@@ -1624,7 +1632,9 @@ void main() {
         (invocation) async => MockException(),
       );
 
-      final result = await cartRepository.getAddedToCartProductList();
+      final result = await cartRepository.getAddedToCartProductList(
+        language: Language.english(),
+      );
       expect(result.isLeft(), true);
     });
 
