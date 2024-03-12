@@ -574,13 +574,13 @@ void main() {
       final referenceNote = find.textContaining('Reference note');
       expect(referenceNote, findsOneWidget);
     });
-    testWidgets('Find Order Created Status', (tester) async {
+    testWidgets('Find Order created Status', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           isLoading: false,
           orderHistoryStatuses: [],
           orderHistoryItem: fakeOrderHistoryItem.copyWith(
-            status: OrderStepValue('Order Created'),
+            status: OrderStepValue('Order created'),
           ),
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [fakeOrderHistoryItem],
@@ -598,7 +598,7 @@ void main() {
       expect(statusTrackerSection, findsOneWidget);
       await tester.tap(statusTrackerSection);
       await tester.pump();
-      final expectedDelivery = find.textContaining('Order Created');
+      final expectedDelivery = find.textContaining('Order created');
       expect(expectedDelivery, findsWidgets);
     });
 

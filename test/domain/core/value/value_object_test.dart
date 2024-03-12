@@ -316,9 +316,9 @@ void main() {
 
   group('StatusType displayStatusLabelColor for order', () {
     test(
-      'Status Order Created',
+      'Status Order created',
       () {
-        final statusType = FilterStatus('Order Created');
+        final statusType = FilterStatus('Order created');
         expect(statusType.displayStatusLabelColor, ZPColors.invoiceStatusBlue);
       },
     );

@@ -101,7 +101,7 @@ String getOrderStatus(String status) {
     case 'Pending release - seller approval required':
       return 'Pending release';
     case 'Order Creating':
-      return 'Order Created';
+      return 'Order created';
     case '':
       return '-';
     default:
@@ -142,7 +142,7 @@ List<OrderHistoryStep> getOrderHistorySteps({
         icon: Icons.pending_actions,
       ),
     OrderHistoryStep.empty().copyWith(
-      title: 'Order Created',
+      title: 'Order created',
       icon: Icons.inventory_outlined,
     ),
   ];
@@ -235,7 +235,7 @@ List<OrderHistoryStep> getOrderHistorySteps({
 String getOrderSAPStatus(String status) {
   switch (status) {
     case 'Order Creating':
-      return 'Order Created';
+      return 'Order created';
     case '':
       return '-';
     default:

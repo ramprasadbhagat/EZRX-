@@ -1002,7 +1002,7 @@ void main() {
       expect(buyAgainButton, findsOneWidget);
     });
 
-    testWidgets('Find Order Created Status Label', (tester) async {
+    testWidgets('Find Order created Status Label', (tester) async {
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -1030,7 +1030,7 @@ void main() {
       );
 
       await tester.pumpAndSettle();
-      final orderCreatedText = find.text('Order Created');
+      final orderCreatedText = find.text('Order created');
       expect(orderCreatedText, findsOneWidget);
     });
 
@@ -1558,7 +1558,7 @@ void main() {
         );
       });
 
-      testWidgets('Order summary section for ID', (tester) async {  
+      testWidgets('Order summary section for ID', (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,

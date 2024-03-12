@@ -17,7 +17,7 @@ class ViewByOrderFilterState with _$ViewByOrderFilterState {
   List<StatusType> get statusList => salesOrganisation.salesOrg.isID
       ? [
           StatusType('Order received'),
-          StatusType('Order Created'),
+          StatusType('Order created'),
           StatusType('Picking in progress'),
           StatusType('Out for delivery'),
           StatusType('Delivered'),

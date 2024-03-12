@@ -3224,7 +3224,7 @@ void main() {
       testWidgets(
           'EZRX-T85 | Verify Filter by status when selecting 1 checkbox and existing data available',
           (tester) async {
-        const statusFilter = 'Order Created';
+        const statusFilter = 'Order created';
 
         //init app
         await pumpAppWithHomeScreen(tester);

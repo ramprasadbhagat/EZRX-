@@ -132,7 +132,7 @@ void main() {
       );
       final idMarketStatusList = [
         StatusType('Order received'),
-        StatusType('Order Created'),
+        StatusType('Order created'),
         StatusType('Picking in progress'),
         StatusType('Out for delivery'),
         StatusType('Delivered'),

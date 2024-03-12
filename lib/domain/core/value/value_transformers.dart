@@ -352,7 +352,6 @@ Color getStatusLabelColor(String statusType) {
     ...lightRedStatusColor,
     ...lightYellow,
     ...secondary,
-    'Order Created': ZPColors.invoiceStatusBlue,
     'Order created': ZPColors.invoiceStatusBlue,
     'Order received': ZPColors.invoiceStatusBlue,
     'Order Creating': ZPColors.invoiceStatusBlue,

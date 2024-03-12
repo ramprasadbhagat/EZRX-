@@ -14,7 +14,7 @@
           "OrderValue": 1565,
           "DeliveryFee": 0,
           "ManualFee": 0,
-          "ProcessingStatus": "Order Created",
+          "ProcessingStatus": "Order created",
           "CreatedDate": "20240108",
           "CreatedTime": "122100",
           "RequestedDeliveryDate": "2024-01-08",

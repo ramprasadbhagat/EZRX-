@@ -433,20 +433,20 @@ void main() {
 
       expect(
         orderCancelled.viewByOrderHistorySteps.map((e) => e.title).toList(),
-        ['Order Cancelled', 'Order Created', 'Order received'],
+        ['Order Cancelled', 'Order created', 'Order received'],
       );
       expect(
         cancelled.viewByOrderHistorySteps.map((e) => e.title).toList(),
-        ['Cancelled', 'Order Created', 'Order received'],
+        ['Cancelled', 'Order created', 'Order received'],
       );
 
       expect(
         orderCancelled.viewByItemHistorySteps.map((e) => e.title).toList(),
-        ['Order Cancelled', 'Order Created'],
+        ['Order Cancelled', 'Order created'],
       );
       expect(
         cancelled.viewByItemHistorySteps.map((e) => e.title).toList(),
-        ['Cancelled', 'Order Created'],
+        ['Cancelled', 'Order created'],
       );
     });
 
@@ -462,7 +462,7 @@ void main() {
         'Order packed and ready for delivery',
         'Picking in progress',
         'Pending release',
-        'Order Created',
+        'Order created',
         'Order received',
       ];
 
@@ -492,7 +492,7 @@ void main() {
       final pendingRelease = OrderStepValue('Pending release');
 
       final fixedStep = [
-        'Order Created',
+        'Order created',
         'Order received',
       ];
 
@@ -502,7 +502,7 @@ void main() {
       );
 
       final viewByItemFixedStep = [
-        'Order Created',
+        'Order created',
       ];
 
       expect(
@@ -516,7 +516,7 @@ void main() {
 
       final fixedStep = [
         'Pending release',
-        'Order Created',
+        'Order created',
         'Order received',
       ];
 
@@ -545,7 +545,7 @@ void main() {
       final fixedStep = [
         'Picking in progress',
         'Pending release',
-        'Order Created',
+        'Order created',
         'Order received',
       ];
 
@@ -573,7 +573,7 @@ void main() {
         'Order packed and ready for delivery',
         'Picking in progress',
         'Pending release',
-        'Order Created',
+        'Order created',
         'Order received',
       ];
 
@@ -602,7 +602,7 @@ void main() {
         'Order packed and ready for delivery',
         'Picking in progress',
         'Pending release',
-        'Order Created',
+        'Order created',
         'Order received',
       ];
 
