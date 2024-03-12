@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -729,6 +730,98 @@ void main() {
           Left(FailureHandler.handleFailure(fakeError)),
         );
       });
+    });
+  });
+
+  group('Test Download e-credit', () {
+    test('fetch credit Url successfully local', () async {
+      mockConfig.appFlavor = Flavor.mock;
+      when(() => localDataSource.getECreditDownloadUrl()).thenAnswer(
+        (invocation) async => downloadPaymentAttachment,
+      );
+
+      final result =
+          await downloadPaymentAttachmentRepository.getECreditDownloadUrl(
+        eCreditNumber: 'fake-eCredit',
+      );
+      expect(
+        result,
+        Right(downloadPaymentAttachment),
+      );
+    });
+    test('fetch credit Url fail local', () async {
+      mockConfig.appFlavor = Flavor.mock;
+      when(() => localDataSource.getECreditDownloadUrl()).thenThrow(
+        (invocation) async => fakeError,
+      );
+
+      final result =
+          await downloadPaymentAttachmentRepository.getECreditDownloadUrl(
+        eCreditNumber: 'fake-eCredit',
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+    });
+
+    test('fetch credit Url successfully remote', () async {
+      mockConfig.appFlavor = Flavor.uat;
+      when(
+        () => remoteDataSource.getECreditDownloadUrl(
+          eCreditNumber: 'fake-eCredit',
+        ),
+      ).thenAnswer(
+        (invocation) async => downloadPaymentAttachment,
+      );
+
+      final result =
+          await downloadPaymentAttachmentRepository.getECreditDownloadUrl(
+        eCreditNumber: 'fake-eCredit',
+      );
+      expect(
+        result,
+        Right(downloadPaymentAttachment),
+      );
+    });
+    test('fetch credit Url fail remote', () async {
+      mockConfig.appFlavor = Flavor.uat;
+      when(
+        () => remoteDataSource.getECreditDownloadUrl(
+          eCreditNumber: 'fake-eCredit',
+        ),
+      ).thenThrow(
+        (invocation) async => fakeError,
+      );
+
+      final result =
+          await downloadPaymentAttachmentRepository.getECreditDownloadUrl(
+        eCreditNumber: 'fake-eCredit',
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+    });
+    test('fetch credit Url successfully remote and response is empty',
+        () async {
+      mockConfig.appFlavor = Flavor.uat;
+      when(
+        () => remoteDataSource.getECreditDownloadUrl(
+          eCreditNumber: 'fake-eCredit',
+        ),
+      ).thenAnswer(
+        (invocation) async => DownloadPaymentAttachment.empty(),
+      );
+
+      final result =
+          await downloadPaymentAttachmentRepository.getECreditDownloadUrl(
+        eCreditNumber: 'fake-eCredit',
+      );
+      expect(
+        result,
+        const Left(ApiFailure.emptyCreditUrl()),
+      );
     });
   });
 }

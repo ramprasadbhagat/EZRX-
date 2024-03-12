@@ -827,5 +827,149 @@ void main() {
         ),
       ],
     );
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download e-credit success',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      setUp: () {
+        when(() => downloadPaymentAttachmentRepository.downloadPermission())
+            .thenAnswer(
+          (invocation) async => const Right(PermissionStatus.granted),
+        );
+        when(
+          () => downloadPaymentAttachmentRepository.getECreditDownloadUrl(
+            eCreditNumber: 'fake-url',
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(downloadPaymentAttachmentMockData),
+        );
+        when(
+          () => downloadPaymentAttachmentRepository.eCreditInvoiceDownload(
+            eCreditInvoiceUrl: downloadPaymentAttachmentMockData,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(file),
+        );
+      },
+      act: (bloc) => bloc.add(
+        const DownloadPaymentAttachmentEvent.downloadECredit(
+          eCredit: 'fake-url',
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: true,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: false,
+          failureOrSuccessOption: optionOf(Right(file)),
+        ),
+      ],
+    );
+
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download e-credit failure',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      setUp: () {
+        when(() => downloadPaymentAttachmentRepository.downloadPermission())
+            .thenAnswer(
+          (invocation) async => const Right(PermissionStatus.granted),
+        );
+        when(
+          () => downloadPaymentAttachmentRepository.getECreditDownloadUrl(
+            eCreditNumber: 'fake-url',
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(downloadPaymentAttachmentMockData),
+        );
+        when(
+          () => downloadPaymentAttachmentRepository.eCreditInvoiceDownload(
+            eCreditInvoiceUrl: downloadPaymentAttachmentMockData,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(fakeError),
+        );
+      },
+      act: (bloc) => bloc.add(
+        const DownloadPaymentAttachmentEvent.downloadECredit(
+          eCredit: 'fake-url',
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: true,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: false,
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
+        ),
+      ],
+    );
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Fetch e-credit url failure',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      setUp: () {
+        when(
+          () => downloadPaymentAttachmentRepository.getECreditDownloadUrl(
+            eCreditNumber: 'fake-url',
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(fakeError),
+        );
+      },
+      act: (bloc) => bloc.add(
+        const DownloadPaymentAttachmentEvent.downloadECredit(
+          eCredit: 'fake-url',
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: true,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: false,
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
+        ),
+      ],
+    );
+
+    blocTest<DownloadPaymentAttachmentsBloc, DownloadPaymentAttachmentsState>(
+      'Download permission for e credit download  failure',
+      build: () => DownloadPaymentAttachmentsBloc(
+        paymentAttachmentRepository: downloadPaymentAttachmentRepository,
+      ),
+      setUp: () {
+        when(() => downloadPaymentAttachmentRepository.downloadPermission())
+            .thenAnswer(
+          (invocation) async => const Left(fakeError),
+        );
+        when(
+          () => downloadPaymentAttachmentRepository.getECreditDownloadUrl(
+            eCreditNumber: 'fake-url',
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(downloadPaymentAttachmentMockData),
+        );
+      },
+      act: (bloc) => bloc.add(
+        const DownloadPaymentAttachmentEvent.downloadECredit(
+          eCredit: 'fake-url',
+        ),
+      ),
+      expect: () => [
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: true,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: false,
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
+        ),
+      ],
+    );
   });
 }

@@ -26,6 +26,7 @@ class _DownloadECreditButton extends StatelessWidget {
                       ),
               child: state.isDownloadInProgress
                   ? LoadingAnimationWidget.discreteCircle(
+                      key: WidgetKeys.downloadECreditLoadingAnimationWidget,
                       color: ZPColors.primary,
                       secondRingColor: ZPColors.secondary,
                       thirdRingColor: ZPColors.orange,

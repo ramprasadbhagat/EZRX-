@@ -220,5 +220,60 @@ void main() {
       expect(tax, findsOneWidget);
       expect(totalTaxAmount, findsOneWidget);
     });
+
+    testWidgets('Find download e credit button', (tester) async {
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          basicInfo: customerDocumentDetails.first,
+        ),
+      );
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      final downloadECreditButton =
+          find.byKey(WidgetKeys.downloadECreditButton);
+      expect(downloadECreditButton, findsOneWidget);
+      await tester.tap(downloadECreditButton);
+      verify(
+        () => downloadPaymentBlocMock.add(
+          DownloadPaymentAttachmentEvent.downloadECredit(
+            eCredit:
+                customerDocumentDetails.first.searchKey.getOrDefaultValue(''),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(
+        'test download e credit button not clickable when download is in progress ',
+        (tester) async {
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          basicInfo: customerDocumentDetails.first,
+        ),
+      );
+
+      when(() => downloadPaymentBlocMock.state).thenReturn(
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          isDownloadInProgress: true,
+        ),
+      );
+
+      await getWidget(tester);
+      await tester.pump();
+      final downloadECreditLoadingAnimationWidget =
+          find.byKey(WidgetKeys.downloadECreditLoadingAnimationWidget);
+
+      expect(downloadECreditLoadingAnimationWidget, findsOneWidget);
+      await tester.tap(downloadECreditLoadingAnimationWidget);
+      verifyNever(
+        () => downloadPaymentBlocMock.add(
+          DownloadPaymentAttachmentEvent.downloadECredit(
+            eCredit:
+                customerDocumentDetails.first.searchKey.getOrDefaultValue(''),
+          ),
+        ),
+      );
+      await tester.pump();
+    });
   });
 }
