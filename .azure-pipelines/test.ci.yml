@@ -60,7 +60,7 @@ parameters:
   - name: device_name 
     type: string 
     displayName: Test Device
-    default: 'Samsung Galaxy S21 Plus-11.0'
+    default: 'Samsung Galaxy S23-13.0'
     values:
       - 'Google Pixel 6-12.0'
       - 'Samsung Galaxy S23-13.0'
