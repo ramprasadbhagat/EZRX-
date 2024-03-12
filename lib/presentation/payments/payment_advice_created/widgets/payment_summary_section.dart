@@ -71,89 +71,18 @@ class _PaymentSummarySection extends StatelessWidget {
                               (!state.salesOrganisation.salesOrg
                                   .isPaymentNeedOpenWebView)
                           ? null
-                          : () async {
-                              state.salesOrganisation.salesOrg
-                                      .isPaymentNeedOpenWebView
-                                  ? await context.router
-                                      .pushNamed('payments/payments_webview')
-                                      .then((uri) {
-                                      /// * Document: https://zuelligpharma.atlassian.net/wiki/spaces/EZRX/pages/293306636/MB+-+UPDATE+PAYMENT+GATEWAY+LOGIC
-                                      /// If payment is successful (Received redirect url with
-                                      /// path payment/thank-you): Update payment gateway,
-                                      /// back to the payment overview page and navigate to
-                                      /// the payment advice created page
-                                      if (uri != null) {
-                                        trackMixpanelEvent(
-                                          MixpanelEvents.paymentSuccess,
-                                          props: {
-                                            MixpanelProps.paymentAmount:
-                                                state.amountTotal,
-                                            MixpanelProps.paymentMethod: state
-                                                .selectedPaymentMethod
-                                                .paymentMethod
-                                                .getOrDefaultValue(''),
-                                            MixpanelProps.paymentDocumentCount:
-                                                state.allSelectedItems.length,
-                                            MixpanelProps.paymentAdviseId: state
-                                                .paymentInvoiceInfoPdf.zzAdvice,
-                                          },
-                                        );
-                                        context.read<NewPaymentBloc>().add(
-                                              NewPaymentEvent
-                                                  .updatePaymentGateway(
-                                                paymentUrl: uri as Uri,
-                                              ),
-                                            );
-                                        context.router.pushAndPopUntil(
-                                          const PaymentCompletedPageRoute(),
-                                          predicate: (Route route) =>
-                                              route.settings.name ==
-                                              PaymentPageRoute.name,
-                                        );
-                                      } else {
-                                        /// If payment is fails (No received redirect url with
-                                        /// path payment/thank-you):
-                                        /// * If on TH market: Back to the payment overview
-                                        /// page and navigate to the payment advice created page
-                                        /// * If on other market: Back to the payment overview page
-                                        trackMixpanelEvent(
-                                          MixpanelEvents.paymentFailure,
-                                          props: {
-                                            MixpanelProps.errorMessage:
-                                                'Payment failed in webview',
-                                            MixpanelProps.paymentMethod: state
-                                                .selectedPaymentMethod
-                                                .paymentMethod
-                                                .getOrDefaultValue(''),
-                                            MixpanelProps.paymentDocumentCount:
-                                                state.allSelectedItems.length,
-                                            MixpanelProps.paymentAdviseId: state
-                                                .paymentInvoiceInfoPdf.zzAdvice,
-                                          },
-                                        );
-                                        context
-                                                .read<EligibilityBloc>()
-                                                .state
-                                                .salesOrg
-                                                .isTH
-                                            ? context.router.pushAndPopUntil(
-                                                const PaymentCompletedPageRoute(),
-                                                predicate: (Route route) =>
-                                                    route.settings.name ==
-                                                    PaymentPageRoute.name,
-                                              )
-                                            : context.router
-                                                .popUntilRouteWithPath(
-                                                'payments',
-                                              );
-                                      }
-                                    })
-                                  : await context.router.pushAndPopUntil(
-                                      const PaymentCompletedPageRoute(),
-                                      predicate: (Route route) =>
-                                          route.settings.name ==
-                                          PaymentPageRoute.name,
-                                    );
+                          : () {
+                              if (state.salesOrganisation.salesOrg
+                                  .isPaymentNeedOpenWebView) {
+                                _handleOpenWebview(state, context);
+                              } else {
+                                context.router.pushAndPopUntil(
+                                  const PaymentCompletedPageRoute(),
+                                  predicate: (Route route) =>
+                                      route.settings.name ==
+                                      PaymentPageRoute.name,
+                                );
+                              }
                             },
                       child: LoadingShimmer.withChild(
                         enabled: state.isLoading,
@@ -176,5 +105,78 @@ class _PaymentSummarySection extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> _handleOpenWebview(
+    NewPaymentState state,
+    BuildContext context,
+  ) async {
+    final uri = state.salesOrganisation.salesOrg.isTH
+        ? await showDialog(
+            context: context,
+            useSafeArea: false,
+            barrierDismissible: false,
+            builder: (dialogContext) => Dialog(
+              insetPadding: EdgeInsets.only(
+                top: MediaQuery.of(dialogContext).viewPadding.top,
+              ),
+              clipBehavior: Clip.hardEdge,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(
+                    24,
+                  ),
+                ),
+              ),
+              child: const PaymentWebviewPage(),
+            ),
+          )
+        : await context.router.pushNamed('payments/payments_webview');
+
+    /// * Document: https://zuelligpharma.atlassian.net/wiki/spaces/EZRX/pages/293306636/MB+-+UPDATE+PAYMENT+GATEWAY+LOGIC
+    /// If payment is successful (Received redirect url with
+    /// path payment/thank-you): Update payment gateway,
+    /// back to the payment overview page and navigate to
+    /// the payment advice created page
+    if (uri != null && context.mounted) {
+      if (uri.toString().isNotEmpty) {
+        trackMixpanelEvent(
+          MixpanelEvents.paymentSuccess,
+          props: {
+            MixpanelProps.paymentAmount: state.amountTotal,
+            MixpanelProps.paymentMethod:
+                state.selectedPaymentMethod.paymentMethod.getOrDefaultValue(''),
+            MixpanelProps.paymentDocumentCount: state.allSelectedItems.length,
+            MixpanelProps.paymentAdviseId: state.paymentInvoiceInfoPdf.zzAdvice,
+          },
+        );
+        context.read<NewPaymentBloc>().add(
+              NewPaymentEvent.updatePaymentGateway(
+                paymentUrl: uri as Uri,
+              ),
+            );
+        unawaited(
+          context.router.pushAndPopUntil(
+            const PaymentCompletedPageRoute(),
+            predicate: (Route route) =>
+                route.settings.name == PaymentPageRoute.name,
+          ),
+        );
+      }
+    } else {
+      /// If payment is fails (No received redirect url with
+      /// path payment/thank-you): Back to the payment overview page
+      trackMixpanelEvent(
+        MixpanelEvents.paymentFailure,
+        props: {
+          MixpanelProps.errorMessage: 'Payment failed in webview',
+          MixpanelProps.paymentMethod:
+              state.selectedPaymentMethod.paymentMethod.getOrDefaultValue(''),
+          MixpanelProps.paymentDocumentCount: state.allSelectedItems.length,
+          MixpanelProps.paymentAdviseId: state.paymentInvoiceInfoPdf.zzAdvice,
+        },
+      );
+      context.router.popUntilRouteWithPath('payments');
+    }
   }
 }

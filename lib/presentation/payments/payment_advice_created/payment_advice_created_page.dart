@@ -5,13 +5,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -27,6 +24,7 @@ import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/create_payment_invoice_pdf.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
+import 'package:ezrxmobile/presentation/payments/payment_webview/payment_webview_page.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/attention_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/bank_account_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/price_text.dart';
@@ -226,71 +224,54 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
               );
             }
           },
-          child: WillPopScope(
-            onWillPop: () async {
-              _onClosePressed(context);
-
-              return false;
-            },
-            child: Scaffold(
-              appBar: CustomAppBar.commonAppBar(
-                automaticallyImplyLeading: false,
-                leadingWidth: state.canDisplayCrossButton ? null : 5,
-                title: Text(
-                  context.tr(state.paymentAdviceGenerateTitle),
-                ),
-                leadingWidget: state.canDisplayCrossButton
-                    ? IconButton(
-                        key: WidgetKeys.closeButton,
-                        onPressed: () => _onClosePressed(context),
-                        icon: const CircleAvatar(
-                          maxRadius: 16,
-                          backgroundColor: ZPColors.transparent,
-                          child: Icon(
-                            Icons.close,
-                            color: ZPColors.neutralsBlack,
-                          ),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-                customerBlockedOrSuspended: context
-                    .read<EligibilityBloc>()
-                    .state
-                    .customerBlockOrSuspended,
+          child: Scaffold(
+            appBar: CustomAppBar.commonAppBar(
+              automaticallyImplyLeading: false,
+              leadingWidth: state.canDisplayCrossButton ? null : 5,
+              title: Text(
+                context.tr(state.paymentAdviceGenerateTitle),
               ),
-              body: state.createVirtualAccountFailed
-                  ? _PaymentVirtualAccountFailed()
-                  : Column(
-                      children: [
-                        Expanded(
-                          child: state.isFetching
-                              ? _PaymentAdviceWaiting(
-                                  isPaymentGateway: state.selectedPaymentMethod
-                                      .paymentMethod.isPaymentGateway,
-                                )
-                              : const _PaymentAdviceBodySection(),
+              leadingWidget: state.canDisplayCrossButton
+                  ? IconButton(
+                      key: WidgetKeys.closeButton,
+                      onPressed: () => context.popRoute(),
+                      icon: const CircleAvatar(
+                        maxRadius: 16,
+                        backgroundColor: ZPColors.transparent,
+                        child: Icon(
+                          Icons.close,
+                          color: ZPColors.neutralsBlack,
                         ),
-                        if (state.selectedPaymentMethod.paymentMethod
-                                .isPaymentGateway ||
-                            !state.isFetching)
-                          const _PaymentAdviceFooterSection(),
-                      ],
-                    ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              customerBlockedOrSuspended: context
+                  .read<EligibilityBloc>()
+                  .state
+                  .customerBlockOrSuspended,
             ),
+            body: state.createVirtualAccountFailed
+                ? _PaymentVirtualAccountFailed()
+                : Column(
+                    children: [
+                      Expanded(
+                        child: state.isFetching
+                            ? _PaymentAdviceWaiting(
+                                isPaymentGateway: state.selectedPaymentMethod
+                                    .paymentMethod.isPaymentGateway,
+                              )
+                            : const _PaymentAdviceBodySection(),
+                      ),
+                      if (state.selectedPaymentMethod.paymentMethod
+                              .isPaymentGateway ||
+                          !state.isFetching)
+                        const _PaymentAdviceFooterSection(),
+                    ],
+                  ),
           ),
         );
       },
     );
-  }
-
-  void _onClosePressed(BuildContext context) {
-    context.read<PaymentSummaryBloc>().add(
-          PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.empty(),
-            searchKey: SearchKey.searchFilter(''),
-          ),
-        );
-    Navigator.pop(context);
   }
 }
 

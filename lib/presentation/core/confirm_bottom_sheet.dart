@@ -37,7 +37,7 @@ class ConfirmBottomSheet extends StatelessWidget {
                 child: Center(child: iconWidget!),
               ),
             Text(
-              title.tr(),
+              context.tr(title),
               style: Theme.of(context)
                   .textTheme
                   .labelMedium
@@ -47,7 +47,7 @@ class ConfirmBottomSheet extends StatelessWidget {
               height: 8,
             ),
             Text(
-              content.tr(),
+              context.tr(content),
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.extraLightGrey4,
                   ),
@@ -79,7 +79,7 @@ class ConfirmBottomSheet extends StatelessWidget {
                                 ),
                               ),
                       child: Text(
-                        cancelButtonText.tr(),
+                        context.tr(cancelButtonText),
                         style:
                             Theme.of(context).textTheme.labelMedium?.copyWith(
                                   color: ZPColors.primary,
@@ -115,7 +115,8 @@ class ConfirmBottomSheet extends StatelessWidget {
                               ),
                             ),
                     child: Text(
-                      confirmButtonText.tr(),
+                      context.tr(confirmButtonText),
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
                             color: ZPColors.white,
                           ),

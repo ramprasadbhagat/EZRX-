@@ -116,6 +116,7 @@ class NewPaymentRemoteDataSource {
     required String customerCode,
     required String salesOrg,
     required CustomerPaymentFilterDto filter,
+    required String baseUrl,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -140,7 +141,8 @@ class NewPaymentRemoteDataSource {
         CustomerPaymentDto.fromJson(res.data['data']['customerPayment']);
 
     return customerPaymentDto.customerPaymentResponse.isNotEmpty
-        ? customerPaymentDto.customerPaymentResponse.first.toDomain()
+        ? customerPaymentDto.customerPaymentResponse.first
+            .toDomain(baseUrl: baseUrl)
         : CustomerPaymentInfo.empty();
   }
 

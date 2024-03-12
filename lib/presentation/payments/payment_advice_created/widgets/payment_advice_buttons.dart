@@ -13,8 +13,7 @@ class _PaymentAdviceButtons extends StatelessWidget {
               current.isFetchingInvoiceInfoPdf &&
           !current.isFetchingInvoiceInfoPdf,
       builder: (context, state) {
-        final isQRPayment =
-            state.selectedPaymentMethod.paymentMethod.isQrCode;
+        final isQRPayment = state.selectedPaymentMethod.paymentMethod.isQrCode;
         if (state.paymentInvoiceInfoPdf == PaymentInvoiceInfoPdf.empty()) {
           return const SizedBox.shrink();
         }
@@ -55,12 +54,6 @@ class _PaymentAdviceButtons extends StatelessWidget {
                           ),
                     ),
                     onPressed: () {
-                      context.read<PaymentSummaryBloc>().add(
-                            PaymentSummaryEvent.fetch(
-                              appliedFilter: PaymentSummaryFilter.empty(),
-                              searchKey: SearchKey.searchFilter(''),
-                            ),
-                          );
                       context.router
                           .popAndPush(const PaymentSummaryPageRoute());
                     },

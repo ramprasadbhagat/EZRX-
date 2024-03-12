@@ -33,58 +33,51 @@ class CustomerPaymentItemDto with _$CustomerPaymentItemDto {
     @JsonKey(name: 'adviceExpiry', defaultValue: '')
         required String adviceExpiry,
     @JsonKey(name: 'createdDate', defaultValue: '') required String createdDate,
-    @JsonKey(name: 'status', defaultValue: '') required String status,
   }) = _CustomerPaymentItemDto;
 
-  CustomerPaymentInfo toDomain() {
-    if (zzHtmcs.isEmpty) {
-      return CustomerPaymentInfo(
-        zzHtmcs: zzHtmcs,
-        paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
-        paymentID: paymentID,
-        accountingDocExternalReference: accountingDocExternalReference,
-        zzAdvice: zzAdvice,
-        createdDate: DateTimeStringValue(createdDate),
-        adviceExpiry: AdviceExpiryValue(adviceExpiry),
-      );
+  CustomerPaymentInfo toDomain({required String baseUrl}) {
+    var zzHtmcsConverted = '';
+    if (zzHtmcs.isNotEmpty) {
+      var htmlFormat = zzHtmcs
+          .replaceAll(RegExp(r'html:\s*'), '')
+          .replaceAll(RegExp(r'_blank\s*'), '_self');
+      final buttonHtml = htmlFormat.characters
+          .getRange(
+            htmlFormat.indexOf('<button'),
+            htmlFormat.indexOf('</button>') + '</button>'.length,
+          )
+          .string;
+      htmlFormat = htmlFormat.replaceAll(buttonHtml, '');
+      const jsLib =
+          '''<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>''';
+      const autoClick =
+          '''<script type="text/javascript">\$(document).ready(function(){\$("#btn_submit").click();});</script>''';
+
+      zzHtmcsConverted ='$jsLib$buttonHtml$htmlFormat$autoClick';
     }
 
     if (Currency(transactionCurrency).isTH) {
-      final htmlFormat = zzHtmcs.characters
+      // We need to replace form action from post /api/thankyou-page to "https://uat-th.ezrx.com/api/thankyou-page"
+      // by using baseURL call API to load the success page when form success and redirect to
+      // https://uat-th.ezrx.com/my-account/thankyou?TxnStatus=53616c7465645f5f9e6445a22f88ac275415afdf861f1a360b3c9d40e1d1afa2&paymentId=53616c7465645f5fa366a6a3b8e9bc690c839d598e55995f7d98a6198d77462e&transactionReference=53616c7465645f5fbd8415d149a249d8fb7ac3b4443f650f7ae710c09892b2cc&isCancelled=false
+
+      final regexSplitAction = RegExp(r'(action=")([^"]+)(")');
+
+      zzHtmcsConverted = zzHtmcs.characters
           .getRange(
             zzHtmcs.indexOf('<html>'),
             zzHtmcs.indexOf('</html>') + '</html>'.length,
           )
-          .string;
-
-      return CustomerPaymentInfo(
-        zzHtmcs: htmlFormat,
-        paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
-        paymentID: paymentID,
-        accountingDocExternalReference: accountingDocExternalReference,
-        zzAdvice: zzAdvice,
-        createdDate: DateTimeStringValue(createdDate),
-        adviceExpiry: AdviceExpiryValue(adviceExpiry),
-      );
+          .string
+          .replaceAllMapped(
+            regexSplitAction,
+            (match) =>
+                '${match.group(1)}$baseUrl${match.group(2)}${match.group(3)}',
+          );
     }
 
-    var htmlFormat = zzHtmcs
-        .replaceAll(RegExp(r'html:\s*'), '')
-        .replaceAll(RegExp(r'_blank\s*'), '_self');
-    final buttonHtml = htmlFormat.characters
-        .getRange(
-          htmlFormat.indexOf('<button'),
-          htmlFormat.indexOf('</button>') + '</button>'.length,
-        )
-        .string;
-    htmlFormat = htmlFormat.replaceAll(buttonHtml, '');
-    const jsLib =
-        '''<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>''';
-    const autoClick =
-        '''<script type="text/javascript">\$(document).ready(function(){\$("#btn_submit").click();});</script>''';
-
     return CustomerPaymentInfo(
-      zzHtmcs: '$jsLib$buttonHtml$htmlFormat$autoClick',
+      zzHtmcs: zzHtmcsConverted,
       paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
       paymentID: paymentID,
       accountingDocExternalReference: accountingDocExternalReference,

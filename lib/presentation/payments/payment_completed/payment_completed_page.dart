@@ -2,9 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -113,12 +110,6 @@ class _BodyContent extends StatelessWidget {
                   child: ElevatedButton(
                     key: WidgetKeys.paymentSummaryRouteButton,
                     onPressed: () {
-                      context.read<PaymentSummaryBloc>().add(
-                            PaymentSummaryEvent.fetch(
-                              appliedFilter: PaymentSummaryFilter.empty(),
-                              searchKey: SearchKey.searchFilter(''),
-                            ),
-                          );
                       context.router.pushNamed('payments/payment_summary');
                     },
                     style:

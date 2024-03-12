@@ -10,6 +10,7 @@ void main() {
   late String htmlUrlPH;
   late String htmlUrlVN;
   late String htmlUrlTH;
+  const fakeTHBaseUrl = 'https://uat-th.ezrx.com';
 
   setUpAll(
     () {
@@ -25,7 +26,7 @@ void main() {
     htmlUrlVN =
         '''<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script><button type="button" onlick="butonClick" id="btn_submit">Open Payment Gateway</button><script language="javascript">\$(document).ready(function(){\$("#btn_submit").click(function (){var win=window.open("https://newsandbox.payoo.com.vn/v2/paynow/prepare?_token=1hgRF9i75CC" ,"_self" );})})</script><script type="text/javascript">\$(document).ready(function(){\$("#btn_submit").click();});</script>''';
     htmlUrlTH =
-        '''<html><head></head><body><script type="text/javascript" src="https://dev-kpaymentgateway.kasikornbank.com/ui/v2/kpayment.min.js" data-apikey="pkey_test_21102hvZyafqGFFzN0G3NjphkJZ2NPFbRBMRq" data-amount="1605.00" data-currency="THB" data-payment-methods="qr" data-order-id="order_test_21102e9e04f465f8d4975a4f64d7de25b8c1b"></script></body></html>''';
+        '''<html><head></head><body><form method="POST" action="$fakeTHBaseUrl/api/thankyou-payment"><script type="text/javascript" src="https://dev-kpaymentgateway.kasikornbank.com/ui/v2/kpayment.min.js" data-apikey="pkey_test_21102hvZyafqGFFzN0G3NjphkJZ2NPFbRBMRq" data-amount="32199.51" data-currency="THB" data-payment-methods="qr" data-order-id="order_test_211025257366f3c084154b2941ae1fa149c53"></script></form></body></html>''';
   });
 
   group(
@@ -47,6 +48,7 @@ void main() {
         () async {
           final result = await localDataSource.getCustomerPayment(
             salesOrg: fakeMMSalesOrg,
+            baseUrl: fakeTHBaseUrl,
           );
           expect(
             result.zzHtmcs,
@@ -60,6 +62,7 @@ void main() {
         () async {
           final result = await localDataSource.getCustomerPayment(
             salesOrg: fakePHSalesOrg,
+            baseUrl: fakeTHBaseUrl,
           );
           expect(
             result.zzHtmcs,
@@ -73,6 +76,7 @@ void main() {
         () async {
           final result = await localDataSource.getCustomerPayment(
             salesOrg: fakeVNSalesOrg,
+            baseUrl: fakeTHBaseUrl,
           );
           expect(
             result.zzHtmcs,
@@ -86,6 +90,7 @@ void main() {
         () async {
           final result = await localDataSource.getCustomerPayment(
             salesOrg: fakeTHSalesOrg,
+            baseUrl: fakeTHBaseUrl,
           );
           expect(
             result.zzHtmcs,
@@ -99,6 +104,7 @@ void main() {
         () async {
           final result = await localDataSource.getCustomerPayment(
             salesOrg: fakeSGSalesOrg,
+            baseUrl: fakeTHBaseUrl,
           );
           expect(
             result.zzHtmcs,

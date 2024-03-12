@@ -3,6 +3,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
@@ -23,6 +24,7 @@ import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
@@ -38,6 +40,7 @@ class NewPaymentRepository extends INewPaymentRepository {
   final NewPaymentRemoteDataSource remoteDataSource;
   final FileSystemHelper fileSystemHelper;
   final DeviceInfo deviceInfo;
+  final DeviceStorage deviceStorage;
 
   NewPaymentRepository({
     required this.config,
@@ -45,6 +48,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required this.remoteDataSource,
     required this.fileSystemHelper,
     required this.deviceInfo,
+    required this.deviceStorage,
   });
 
   @override
@@ -323,10 +327,14 @@ class NewPaymentRepository extends INewPaymentRepository {
     required CustomerCodeInfo customerCodeInfo,
     required CustomerPaymentFilter filter,
   }) async {
+    final baseUrl = config.baseUrl(
+      marketDomain: AppMarket(deviceStorage.currentMarket()).marketDomain,
+    );
     if (config.appFlavor == Flavor.mock) {
       try {
         final response = await localDataSource.getCustomerPayment(
           salesOrg: salesOrganisation.salesOrg,
+          baseUrl: baseUrl,
         );
 
         return Right(response);
@@ -341,6 +349,7 @@ class NewPaymentRepository extends INewPaymentRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
         filter: CustomerPaymentFilterDto.fromDomain(filter),
+        baseUrl: baseUrl,
       );
 
       return Right(response);

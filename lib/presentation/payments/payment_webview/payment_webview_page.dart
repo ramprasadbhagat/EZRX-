@@ -1,69 +1,176 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-class PaymentWebviewPage extends StatefulWidget {
+class PaymentWebviewPage extends StatelessWidget {
   const PaymentWebviewPage({Key? key}) : super(key: key);
 
   @override
-  State<PaymentWebviewPage> createState() => _PaymentWebviewPageState();
+  Widget build(BuildContext context) {
+    final isTH =
+        context.read<NewPaymentBloc>().state.salesOrganisation.salesOrg.isTH;
+
+    return Scaffold(
+      body: isTH
+          ? Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  ListTile(
+                    tileColor: ZPColors.blueAccent,
+                    dense: true,
+                    contentPadding: const EdgeInsets.all(8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    title: Text(
+                      context.tr(
+                        'Take a screen shot and scan the QR code for payment using the KBank mobile app',
+                      ),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Expanded(
+                    child: _WebviewBody(isTH: isTH),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(top: 12),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.router.pop(Uri.parse(''));
+                      },
+                      child: Text(
+                        context.tr('Close'),
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium!
+                            .copyWith(color: ZPColors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : SafeArea(
+              child: _WebviewBody(isTH: isTH),
+            ),
+    );
+  }
 }
 
-class _PaymentWebviewPageState extends State<PaymentWebviewPage> {
+class _WebviewBody extends StatefulWidget {
+  final bool isTH;
+  const _WebviewBody({required this.isTH, Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: InAppWebView(
-          key: WidgetKeys.paymentWebviewPage,
-          initialOptions: InAppWebViewGroupOptions(
-            crossPlatform: InAppWebViewOptions(
-              useShouldOverrideUrlLoading: true,
-              javaScriptCanOpenWindowsAutomatically: true,
-            ),
-          ),
-          initialUrlRequest: URLRequest(
-            url: Uri.dataFromString(
-              context.read<NewPaymentBloc>().state.customerPaymentInfo.zzHtmcs,
-              mimeType: 'text/html',
-            ),
-          ),
-          onLoadStart: (controller, url) async {
-            final uri = await controller.getUrl();
-            if (uri != null && (uri.path).contains('my-account/thankyou')) {
-              if (mounted) {
-                await context.router.pop(
-                  uri,
-                );
+  State<_WebviewBody> createState() => _WebviewBodyState();
+}
+
+class _WebviewBodyState extends State<_WebviewBody> {
+  NewPaymentState get _newPaymentState => context.read<NewPaymentBloc>().state;
+
+  Future<void> _initMobileViewport(InAppWebViewController controller) async {
+    await controller.evaluateJavascript(
+      source: """
+            (function() {
+              var meta = document.querySelector('meta[name="viewport"]');
+              if (meta) {
+                meta.content = 'width=device-width, initial-scale=1';
+              } else {
+                meta = document.createElement('meta');
+                meta.name = 'viewport';
+                meta.content = 'width=device-width, initial-scale=1';
+                document.getElementsByTagName('head')[0].appendChild(meta);
               }
-            }
-          },
-          onLoadStop: (controller, url) async {
-            await controller.evaluateJavascript(
-              source: ''' 
-                const payNowButton = document.querySelector('button[_kpayment].pay-button');
+            })();
+          """,
+    );
+  }
+
+  Future<void> _updateTHWebviewComponentStyles(
+    InAppWebViewController controller,
+  ) async {
+    await controller.evaluateJavascript(
+      source: """
+            const payNowButton = document.querySelector('button[_kpayment].pay-button');
                 if (payNowButton) {
-                  payNowButton.style.padding ='30px 30px';
-                  payNowButton.style.fontSize='35px';
                   payNowButton.style.fontWeight = 'bold';
                   payNowButton.style.position = 'absolute';
                   payNowButton.style.display = 'flex';
                   payNowButton.style.top = '50%';
                   payNowButton.style.left = '50%';
                   payNowButton.style.transform = 'translate(-50%, -50%)';
-                  payNowButton.style.width = 210
                 }
-              ''',
-            );
-          },
-          shouldOverrideUrlLoading: (controller, navigationAction) async {
-            return NavigationActionPolicy.ALLOW;
-          },
+
+            const paymentContainer = document.querySelector('.payment-container[_kpayment]');
+                if(paymentContainer){
+                  paymentContainer.style.backgroundColor = 'white'; 
+                }
+
+             // Step 1: Select the style tag
+            var styleTag = document.querySelector('style');
+
+            if(styleTag){
+              var styleContent = styleTag.innerHTML;
+              styleContent = styleContent.replace(/overflow-y:hidden/g, 'overflow-y:scroll');
+              styleTag.innerHTML = styleContent;
+            }
+
+            const timer = setInterval(() => {
+                const findButtonElement = document.getElementsByClassName('pay-button')?.[0];
+                if (findButtonElement) clearInterval(timer);
+                else return;
+                findButtonElement.click();
+            }, 50);
+          """,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InAppWebView(
+      key: WidgetKeys.paymentWebviewPage,
+      initialOptions: InAppWebViewGroupOptions(
+        crossPlatform: InAppWebViewOptions(
+          useShouldOverrideUrlLoading: true,
+          javaScriptCanOpenWindowsAutomatically: true,
+          supportZoom: false,
         ),
       ),
+      initialUrlRequest: URLRequest(
+        url: Uri.dataFromString(
+          _newPaymentState.customerPaymentInfo.zzHtmcs,
+          mimeType: 'text/html',
+        ),
+      ),
+      onLoadStart: (controller, url) async {
+        final uri = await controller.getUrl();
+        if (uri != null && uri.path.contains('my-account/thankyou')) {
+          if (mounted) {
+            await context.router.pop(
+              uri,
+            );
+          }
+        }
+      },
+      onLoadStop: (controller, url) async {
+        await _initMobileViewport(controller);
+        if (widget.isTH) {
+          await _updateTHWebviewComponentStyles(controller);
+        }
+      },
+      shouldOverrideUrlLoading: (controller, navigationAction) async {
+        return NavigationActionPolicy.ALLOW;
+      },
     );
   }
 }

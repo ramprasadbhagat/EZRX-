@@ -600,7 +600,7 @@ void main() {
             searchKey: SearchKey.searchFilter(''),
           ),
         ),
-      ).called(1);
+      ).called(2);
     });
 
     testWidgets('Payment Summary filter bottom sheet Test', (tester) async {
@@ -815,7 +815,7 @@ void main() {
             appliedFilter: PaymentSummaryFilter.empty(),
           ),
         ),
-      ).called(1);
+      ).called(2);
     });
     testWidgets(
         '=> AmountValueError Test when amountValueTo greater than amountValueFrom',
@@ -1174,7 +1174,7 @@ void main() {
           findsOneWidget,
         );
         await tester.tap(paymentSummaryFilterIcon);
-        await tester.pumpAndSettle();
+        await tester.pump();
         expect(paymentSummaryFilter, findsOneWidget);
         expect(filterResetButton, findsOneWidget);
         await tester.tap(filterResetButton);

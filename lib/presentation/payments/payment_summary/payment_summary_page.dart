@@ -61,6 +61,17 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
   final _scrollController = ScrollController();
 
   @override
+  void initState() {
+    context.read<PaymentSummaryBloc>().add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: PaymentSummaryFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        );
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();

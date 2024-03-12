@@ -834,47 +834,6 @@ void main() {
         ).called(1);
       });
 
-      testWidgets('On Tap Pay Now Button But Cannot Get Url With TH Market',
-          (tester) async {
-        when(() => autoRouterMock.pushNamed('payments/payments_webview'))
-            .thenAnswer((invocation) => Future.value());
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial()
-              .copyWith
-              .salesOrganisation(salesOrg: fakeTHSalesOrg),
-        );
-        when(
-          () => autoRouterMock.pushAndPopUntil(
-            const PaymentCompletedPageRoute(),
-            predicate: any(named: 'predicate'),
-          ),
-        ).thenAnswer((invocation) => Future.value());
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final buttonFinder = find.byKey(WidgetKeys.payButton);
-        await tester.tap(buttonFinder);
-        await tester.pumpAndSettle();
-        verify(() => autoRouterMock.pushNamed('payments/payments_webview'))
-            .called(1);
-        verify(
-          () => trackMixpanelEvent(
-            MixpanelEvents.paymentFailure,
-            props: {
-              MixpanelProps.errorMessage: 'Payment failed in webview',
-              MixpanelProps.paymentMethod: '',
-              MixpanelProps.paymentDocumentCount: 0,
-              MixpanelProps.paymentAdviseId: '',
-            },
-          ),
-        ).called(1);
-        verify(
-          () => autoRouterMock.pushAndPopUntil(
-            const PaymentCompletedPageRoute(),
-            predicate: any(named: 'predicate'),
-          ),
-        ).called(1);
-      });
-
       testWidgets('=> Test Invoice/credit already in use dialog and click payment summary',
           (WidgetTester tester) async {
         await tester.binding.setSurfaceSize(const Size(480, 900));

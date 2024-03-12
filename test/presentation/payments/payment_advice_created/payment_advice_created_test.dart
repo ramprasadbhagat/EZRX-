@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:flutter/gestures.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
@@ -267,20 +266,13 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
         ),
       );
+      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
       await tester.pumpWidget(getWidget());
       await tester.pump();
       final closeButton = find.byKey(WidgetKeys.closeButton);
       expect(closeButton, findsOneWidget);
       await tester.tap(closeButton);
       await tester.pumpAndSettle();
-      verify(
-        () => mockPaymentSummaryBloc.add(
-          PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.empty(),
-            searchKey: SearchKey.searchFilter(''),
-          ),
-        ),
-      ).called(1);
     });
 
     testWidgets('Payment advice created page waiting customer API called',

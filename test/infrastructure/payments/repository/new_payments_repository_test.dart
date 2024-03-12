@@ -21,6 +21,7 @@ import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
@@ -46,6 +47,8 @@ class FileSystemHelperMock extends Mock implements FileSystemHelper {}
 
 class DeviceInfoMock extends Mock implements DeviceInfo {}
 
+class DeviceStorageMock extends Mock implements DeviceStorage {}
+
 void main() {
   late NewPaymentRepository nawPaymentsRepository;
   late Config mockConfig;
@@ -56,6 +59,7 @@ void main() {
   late CustomerPaymentInfo customerPaymentInfo;
   late CreateVirtualAccount createVirtualAccount;
   late PrincipalCutoffs principalCutoffs;
+  late DeviceStorage deviceStorage;
 
   final customerOpenItemsList = [
     CustomerOpenItem.empty().copyWith(
@@ -83,6 +87,8 @@ void main() {
 
   final fakeUser = User.empty().copyWith(username: Username(fakeUserName));
 
+  const domain = 'https://uat-my.ezrx.com';
+
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     mockConfig = MockConfig();
@@ -90,6 +96,7 @@ void main() {
     newPaymentRemoteDataSource = NewPaymentRemoteDataSourceMock();
     fileSystemHelper = FileSystemHelperMock();
     deviceInfo = DeviceInfoMock();
+    deviceStorage = DeviceStorageMock();
 
     nawPaymentsRepository = NewPaymentRepository(
       config: mockConfig,
@@ -97,12 +104,24 @@ void main() {
       remoteDataSource: newPaymentRemoteDataSource,
       fileSystemHelper: fileSystemHelper,
       deviceInfo: deviceInfo,
+      deviceStorage: deviceStorage,
     );
-    customerPaymentInfo = await NewPaymentLocalDataSource()
-        .getCustomerPayment(salesOrg: fakeSalesOrg);
+    customerPaymentInfo = await NewPaymentLocalDataSource().getCustomerPayment(
+      salesOrg: fakeSalesOrg,
+      baseUrl: domain,
+    );
     createVirtualAccount =
         await NewPaymentLocalDataSource().createVirtualAccount();
     principalCutoffs = await NewPaymentLocalDataSource().getPrincipalCutoffs();
+    when(
+      () => deviceStorage.currentMarket(),
+    ).thenAnswer((_) => fakeMYSalesOrg.country.toLowerCase());
+
+    when(
+      () => mockConfig.baseUrl(
+        marketDomain: fakeMYSalesOrg.country.toLowerCase(),
+      ),
+    ).thenAnswer((_) => domain);
   });
 
   group(
@@ -865,6 +884,7 @@ void main() {
         when(
           () => newPaymentLocalDataSource.getCustomerPayment(
             salesOrg: fakeSalesOrg,
+            baseUrl: domain,
           ),
         ).thenAnswer((invocation) async => customerPaymentInfo);
 
@@ -883,6 +903,7 @@ void main() {
         when(
           () => newPaymentLocalDataSource.getCustomerPayment(
             salesOrg: fakeSalesOrg,
+            baseUrl: domain,
           ),
         ).thenThrow((invocation) => MockException());
 
@@ -906,6 +927,7 @@ void main() {
             filter: CustomerPaymentFilterDto.fromDomain(
               CustomerPaymentFilter.empty(),
             ),
+            baseUrl: domain,
           ),
         ).thenAnswer((invocation) async => customerPaymentInfo);
 
@@ -929,6 +951,7 @@ void main() {
             filter: CustomerPaymentFilterDto.fromDomain(
               CustomerPaymentFilter.empty(),
             ),
+            baseUrl: domain,
           ),
         ).thenThrow((invocation) => MockException());
 

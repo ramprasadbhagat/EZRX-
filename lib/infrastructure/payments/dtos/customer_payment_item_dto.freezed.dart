@@ -48,8 +48,6 @@ mixin _$CustomerPaymentItemDto {
   String get adviceExpiry => throw _privateConstructorUsedError;
   @JsonKey(name: 'createdDate', defaultValue: '')
   String get createdDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'status', defaultValue: '')
-  String get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -81,8 +79,7 @@ abstract class $CustomerPaymentItemDtoCopyWith<$Res> {
       @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
       @JsonKey(name: 'zzHtmcs', defaultValue: '') String zzHtmcs,
       @JsonKey(name: 'adviceExpiry', defaultValue: '') String adviceExpiry,
-      @JsonKey(name: 'createdDate', defaultValue: '') String createdDate,
-      @JsonKey(name: 'status', defaultValue: '') String status});
+      @JsonKey(name: 'createdDate', defaultValue: '') String createdDate});
 }
 
 /// @nodoc
@@ -112,7 +109,6 @@ class _$CustomerPaymentItemDtoCopyWithImpl<$Res,
     Object? zzHtmcs = null,
     Object? adviceExpiry = null,
     Object? createdDate = null,
-    Object? status = null,
   }) {
     return _then(_value.copyWith(
       paymentID: null == paymentID
@@ -167,10 +163,6 @@ class _$CustomerPaymentItemDtoCopyWithImpl<$Res,
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -201,8 +193,7 @@ abstract class _$$_CustomerPaymentItemDtoCopyWith<$Res>
       @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
       @JsonKey(name: 'zzHtmcs', defaultValue: '') String zzHtmcs,
       @JsonKey(name: 'adviceExpiry', defaultValue: '') String adviceExpiry,
-      @JsonKey(name: 'createdDate', defaultValue: '') String createdDate,
-      @JsonKey(name: 'status', defaultValue: '') String status});
+      @JsonKey(name: 'createdDate', defaultValue: '') String createdDate});
 }
 
 /// @nodoc
@@ -230,7 +221,6 @@ class __$$_CustomerPaymentItemDtoCopyWithImpl<$Res>
     Object? zzHtmcs = null,
     Object? adviceExpiry = null,
     Object? createdDate = null,
-    Object? status = null,
   }) {
     return _then(_$_CustomerPaymentItemDto(
       paymentID: null == paymentID
@@ -285,10 +275,6 @@ class __$$_CustomerPaymentItemDtoCopyWithImpl<$Res>
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -317,8 +303,8 @@ class _$_CustomerPaymentItemDto extends _CustomerPaymentItemDto {
       @JsonKey(name: 'zzHtmcs', defaultValue: '') required this.zzHtmcs,
       @JsonKey(name: 'adviceExpiry', defaultValue: '')
       required this.adviceExpiry,
-      @JsonKey(name: 'createdDate', defaultValue: '') required this.createdDate,
-      @JsonKey(name: 'status', defaultValue: '') required this.status})
+      @JsonKey(name: 'createdDate', defaultValue: '')
+      required this.createdDate})
       : super._();
 
   factory _$_CustomerPaymentItemDto.fromJson(Map<String, dynamic> json) =>
@@ -363,13 +349,10 @@ class _$_CustomerPaymentItemDto extends _CustomerPaymentItemDto {
   @override
   @JsonKey(name: 'createdDate', defaultValue: '')
   final String createdDate;
-  @override
-  @JsonKey(name: 'status', defaultValue: '')
-  final String status;
 
   @override
   String toString() {
-    return 'CustomerPaymentItemDto(paymentID: $paymentID, valueDate: $valueDate, paymentAmount: $paymentAmount, transactionCurrency: $transactionCurrency, invoiceProcessingStatus: $invoiceProcessingStatus, accountingDocExternalReference: $accountingDocExternalReference, paymentMethod: $paymentMethod, zCcpPaymentQrCode: $zCcpPaymentQrCode, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, zzAdvice: $zzAdvice, zzHtmcs: $zzHtmcs, adviceExpiry: $adviceExpiry, createdDate: $createdDate, status: $status)';
+    return 'CustomerPaymentItemDto(paymentID: $paymentID, valueDate: $valueDate, paymentAmount: $paymentAmount, transactionCurrency: $transactionCurrency, invoiceProcessingStatus: $invoiceProcessingStatus, accountingDocExternalReference: $accountingDocExternalReference, paymentMethod: $paymentMethod, zCcpPaymentQrCode: $zCcpPaymentQrCode, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, zzAdvice: $zzAdvice, zzHtmcs: $zzHtmcs, adviceExpiry: $adviceExpiry, createdDate: $createdDate)';
   }
 
   @override
@@ -406,8 +389,7 @@ class _$_CustomerPaymentItemDto extends _CustomerPaymentItemDto {
             (identical(other.adviceExpiry, adviceExpiry) ||
                 other.adviceExpiry == adviceExpiry) &&
             (identical(other.createdDate, createdDate) ||
-                other.createdDate == createdDate) &&
-            (identical(other.status, status) || other.status == status));
+                other.createdDate == createdDate));
   }
 
   @JsonKey(ignore: true)
@@ -426,8 +408,7 @@ class _$_CustomerPaymentItemDto extends _CustomerPaymentItemDto {
       zzAdvice,
       zzHtmcs,
       adviceExpiry,
-      createdDate,
-      status);
+      createdDate);
 
   @JsonKey(ignore: true)
   @override
@@ -470,9 +451,7 @@ abstract class _CustomerPaymentItemDto extends CustomerPaymentItemDto {
       @JsonKey(name: 'adviceExpiry', defaultValue: '')
       required final String adviceExpiry,
       @JsonKey(name: 'createdDate', defaultValue: '')
-      required final String createdDate,
-      @JsonKey(name: 'status', defaultValue: '')
-      required final String status}) = _$_CustomerPaymentItemDto;
+      required final String createdDate}) = _$_CustomerPaymentItemDto;
   const _CustomerPaymentItemDto._() : super._();
 
   factory _CustomerPaymentItemDto.fromJson(Map<String, dynamic> json) =
@@ -517,9 +496,6 @@ abstract class _CustomerPaymentItemDto extends CustomerPaymentItemDto {
   @override
   @JsonKey(name: 'createdDate', defaultValue: '')
   String get createdDate;
-  @override
-  @JsonKey(name: 'status', defaultValue: '')
-  String get status;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerPaymentItemDtoCopyWith<_$_CustomerPaymentItemDto> get copyWith =>

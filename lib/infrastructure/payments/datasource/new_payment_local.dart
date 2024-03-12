@@ -82,6 +82,7 @@ class NewPaymentLocalDataSource {
 
   Future<CustomerPaymentInfo> getCustomerPayment({
     required SalesOrg salesOrg,
+    required String baseUrl,
   }) async {
     final data = json.decode(
       await rootBundle.loadString(
@@ -92,7 +93,7 @@ class NewPaymentLocalDataSource {
     return CustomerPaymentDto.fromJson(data['data']['customerPayment'])
         .customerPaymentResponse
         .first
-        .toDomain();
+        .toDomain(baseUrl: baseUrl);
   }
 
   Future<CreateVirtualAccount> createVirtualAccount() async {

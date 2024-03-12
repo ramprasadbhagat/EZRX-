@@ -2371,6 +2371,7 @@ void setupLocator() {
       remoteDataSource: locator<NewPaymentRemoteDataSource>(),
       fileSystemHelper: locator<FileSystemHelper>(),
       deviceInfo: locator<DeviceInfo>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
   locator.registerLazySingleton(

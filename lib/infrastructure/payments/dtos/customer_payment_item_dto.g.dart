@@ -24,7 +24,6 @@ _$_CustomerPaymentItemDto _$$_CustomerPaymentItemDtoFromJson(
       zzHtmcs: json['zzHtmcs'] as String? ?? '',
       adviceExpiry: json['adviceExpiry'] as String? ?? '',
       createdDate: json['createdDate'] as String? ?? '',
-      status: json['status'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CustomerPaymentItemDtoToJson(
@@ -43,5 +42,4 @@ Map<String, dynamic> _$$_CustomerPaymentItemDtoToJson(
       'zzHtmcs': instance.zzHtmcs,
       'adviceExpiry': instance.adviceExpiry,
       'createdDate': instance.createdDate,
-      'status': instance.status,
     };
