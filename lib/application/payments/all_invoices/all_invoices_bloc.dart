@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -70,7 +69,6 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
                 isLoading: false,
               ),
             );
-            add(AllInvoicesEvent.fetchOrder(invoices: responseData));
           },
         );
       },
@@ -114,60 +112,6 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
                 canLoadMore: responseData.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
-              ),
-            );
-            add(AllInvoicesEvent.fetchOrder(invoices: responseData));
-          },
-        );
-      },
-    );
-    on<_FetchOrder>(
-      (e, emit) async {
-        if (e.invoices.isEmpty) return;
-
-        final invoiceIds = e.invoices
-            .where((e) => e.searchKey.isValid())
-            .map((e) => e.searchKey.getValue())
-            .toList();
-
-        emit(
-          state.copyWith(
-            isFetchingOrder: true,
-            failureOrSuccessOption: none(),
-          ),
-        );
-
-        final failureOrSuccess =
-            await allCreditsAndInvoicesRepository.fetchOrder(
-          invoiceIds: invoiceIds,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                isFetchingOrder: false,
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-                items: state.items,
-              ),
-            );
-          },
-          (responseData) {
-            final updatedItems = state.items.map((e) {
-              final orderId =
-                  responseData[e.searchKey.getValue()] ?? StringValue('');
-
-              if (!e.orderId.isValid()) {
-                return e.copyWith(orderId: orderId);
-              }
-
-              return e;
-            }).toList();
-            emit(
-              state.copyWith(
-                isFetchingOrder: false,
-                items: updatedItems,
-                failureOrSuccessOption: none(),
               ),
             );
           },

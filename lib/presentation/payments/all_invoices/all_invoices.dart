@@ -216,8 +216,10 @@ class _InvoiceItem extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: 3,
-                    child: _OrderNumber(
-                      invoiceItem: invoiceItem,
+                    child: Text(
+                      '${context.tr('Order')} #${invoiceItem.orderId.displayNAIfEmpty}',
+                      key: WidgetKeys.invoiceItemOrderId,
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -249,38 +251,6 @@ class _InvoiceItem extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _OrderNumber extends StatelessWidget {
-  final CreditAndInvoiceItem invoiceItem;
-
-  const _OrderNumber({
-    Key? key,
-    required this.invoiceItem,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AllInvoicesBloc, AllInvoicesState>(
-      buildWhen: (previous, current) =>
-          previous.isFetchingOrder != current.isFetchingOrder,
-      builder: (context, state) {
-        if (state.isFetchingOrder) {
-          return SizedBox(
-            key: WidgetKeys.invoiceItemOrderIdLoadingShimmer,
-            width: 40,
-            child: LoadingShimmer.tile(),
-          );
-        }
-
-        return Text(
-          '${context.tr('Order')} #${invoiceItem.orderId.displayNAIfEmpty}',
-          key: WidgetKeys.invoiceItemOrderId,
-          style: Theme.of(context).textTheme.titleSmall,
-        );
-      },
     );
   }
 }

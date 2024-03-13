@@ -396,7 +396,7 @@ void main() {
       await tester.pumpWidget(getWidget());
       await tester.pump();
 
-      final documentReferenceID = find.text('Gov. no 0810055826');
+      final documentReferenceID = find.text('Gov. no 0810234244');
       expect(documentReferenceID, findsOneWidget);
     });
   });

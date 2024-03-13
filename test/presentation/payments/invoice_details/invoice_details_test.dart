@@ -825,7 +825,7 @@ void main() {
       await tester.pump();
 
       final documentReferenceID =
-          find.byKey(WidgetKeys.balanceTextRow('Gov. no', '0810055826'));
+          find.byKey(WidgetKeys.balanceTextRow('Gov. no', '0810234244'));
       expect(documentReferenceID, findsOneWidget);
     });
   });

@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
@@ -35,7 +34,6 @@ void main() {
   late AllCreditsAndInvoicesRemoteDataSource
       allCreditsAndInvoicesRemoteDataSourceMock;
   late AllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
-  late List<InvoiceOrderItem> invoiceOrderItems;
   final fakeToDate = DateTime.now();
   final fakeFromDate = DateTime.now().subtract(
     const Duration(days: 29),
@@ -48,8 +46,6 @@ void main() {
         AllCreditsAndInvoicesLocalDataSourceMock();
     allCreditsAndInvoicesRemoteDataSourceMock =
         AllCreditsAndInvoicesRemoteDataSourceMock();
-    invoiceOrderItems =
-        await AllCreditsAndInvoicesLocalDataSource().getOrderForInvoice();
     allCreditsAndInvoicesRepository = AllCreditsAndInvoicesRepository(
       config: configMock,
       localDataSource: allCreditsAndInvoicesLocalDataSourceMock,
@@ -199,82 +195,6 @@ void main() {
         pageSize: 1,
         offset: 0,
         filter: allCreditsFilter,
-      );
-      expect(result.isLeft(), true);
-    });
-  });
-  group('get orders for invoice Test', () {
-    test('=> locally success', () async {
-      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-      when(() => allCreditsAndInvoicesLocalDataSourceMock.getOrderForInvoice())
-          .thenAnswer(
-        (invocation) async => invoiceOrderItems,
-      );
-      final result = await allCreditsAndInvoicesRepository.fetchOrder(
-        invoiceIds: invoiceOrderItems
-            .map(
-              (e) => e.invoiceId.getValue(),
-            )
-            .toList(),
-      );
-      expect(
-        result.getOrElse(() => <String, StringValue>{}),
-        invoiceOrderItems.toMap,
-      );
-    });
-
-    test('=> locally fail', () async {
-      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-      when(() => allCreditsAndInvoicesLocalDataSourceMock.getOrderForInvoice())
-          .thenThrow(
-        (invocation) async => MockException(),
-      );
-      final result = await allCreditsAndInvoicesRepository.fetchOrder(
-        invoiceIds: invoiceOrderItems
-            .map(
-              (e) => e.invoiceId.getValue(),
-            )
-            .toList(),
-      );
-      expect(result.isLeft(), true);
-    });
-
-    test('=> remote success', () async {
-      when(() => configMock.appFlavor).thenReturn(Flavor.dev);
-      when(
-        () => allCreditsAndInvoicesRemoteDataSourceMock.getOrderForInvoice(
-          invoiceOrderItems.map((e) => e.invoiceId.getValue()).toList(),
-        ),
-      ).thenAnswer(
-        (invocation) async => invoiceOrderItems,
-      );
-      final result = await allCreditsAndInvoicesRepository.fetchOrder(
-        invoiceIds: invoiceOrderItems
-            .map(
-              (e) => e.invoiceId.getValue(),
-            )
-            .toList(),
-      );
-      expect(
-        result.getOrElse(() => <String, StringValue>{}),
-        invoiceOrderItems.toMap,
-      );
-    });
-    test('=> remote fail', () async {
-      when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-      when(
-        () => allCreditsAndInvoicesRemoteDataSourceMock.getOrderForInvoice(
-          invoiceOrderItems.map((e) => e.invoiceId.getValue()).toList(),
-        ),
-      ).thenThrow(
-        (invocation) async => MockException(),
-      );
-      final result = await allCreditsAndInvoicesRepository.fetchOrder(
-        invoiceIds: invoiceOrderItems
-            .map(
-              (e) => e.invoiceId.getValue(),
-            )
-            .toList(),
       );
       expect(result.isLeft(), true);
     });

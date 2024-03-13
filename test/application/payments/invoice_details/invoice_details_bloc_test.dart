@@ -49,12 +49,13 @@ void main() {
         .getCreditAndInvoiceDetails();
   });
 
-  setUp(() {
+  setUp(() async {
     fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
       bpCustomerNumber: '0030032223',
       fiscalYear: '2023',
-      searchKey: StringValue('1080005528'),
+      searchKey: StringValue('1100001301'),
       accountingDocumentItem: '001',
+      postingKeyName: 'Invoice',
     );
   });
 
@@ -116,41 +117,6 @@ void main() {
         ),
       ],
     );
-    blocTest(
-      'fetch -> Invoice Details fetch success',
-      build: () => CreditAndInvoiceDetailsBloc(
-        creditAndInvoiceDetailsRepository: creditAndInvoiceDetailsRepository,
-        allCreditsAndInvoicesRepository: allCreditsAndInvoicesRepository,
-      ),
-      seed: () => fakeInitialState,
-      setUp: () {
-        when(
-          () => creditAndInvoiceDetailsRepository.getCreditAndInvoiceDetails(
-            salesOrganisation: fakeMYSalesOrganisation,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            creditAndInvoiceItem: fakeInvoice,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(<CustomerDocumentDetail>[]),
-        );
-      },
-      act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
-        CreditAndInvoiceDetailsEvent.fetch(
-          creditAndInvoiceItem: fakeInvoice,
-        ),
-      ),
-      expect: () => [
-        fakeInitialState.copyWith(isLoading: true, basicInfo: fakeInvoice),
-        fakeInitialState.copyWith(
-          isLoading: false,
-          basicInfo: fakeInvoice,
-          itemsInfo: <CustomerDocumentDetail>[],
-          failureOrSuccessOption:
-              optionOf(const Right(<CustomerDocumentDetail>[])),
-        ),
-      ],
-    );
-
     blocTest(
       'fetch -> Invoice Details fetch By Id success',
       build: () => CreditAndInvoiceDetailsBloc(

@@ -25,7 +25,7 @@ void main() {
 
       expect(
         creditAndInvoiceItemDto.searchKey,
-        StringValue('1100001228'),
+        StringValue('1100001442'),
       );
       expect(
         creditAndInvoiceItemDto.debitCreditCode,

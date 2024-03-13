@@ -409,42 +409,6 @@ void main() {
       expect(find.byKey(WidgetKeys.invoiceItemOrderId), findsWidgets);
     });
 
-    testWidgets('=> Invoice order Id Loading', (tester) async {
-      when(() => salesOrgBlocMock.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          salesOrganisation: thSalesOrganisation,
-        ),
-      );
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: thSalesOrganisation,
-        ),
-      );
-
-      when(() => allInvoicesBlocMock.state).thenReturn(
-        AllInvoicesState.initial().copyWith(
-          isFetchingOrder: true,
-          items: <CreditAndInvoiceItem>[
-            CreditAndInvoiceItem.empty().copyWith(
-              searchKey: StringValue('123456780'),
-              netDueDate: DateTimeStringValue('20230919'),
-              postingDate: DateTimeStringValue('20230917'),
-              amountInTransactionCurrency: 15.72,
-              invoiceProcessingStatus: StatusType('Cleared'),
-            ),
-          ],
-        ),
-      );
-
-      await tester.pumpWidget(getWidget());
-
-      await tester.pump();
-      expect(
-        find.byKey(WidgetKeys.invoiceItemOrderIdLoadingShimmer),
-        findsWidgets,
-      );
-    });
-
     testWidgets('Find Gov.No for all invoices', (tester) async {
       when(() => allInvoicesBlocMock.state).thenReturn(
         AllInvoicesState.initial().copyWith(items: allInvoicesData),
@@ -459,7 +423,7 @@ void main() {
       await tester.pumpWidget(getWidget());
       await tester.pump();
 
-      final documentReferenceID = find.text('Gov. no 0810055826');
+      final documentReferenceID = find.text('Gov. no 0810234244');
       expect(documentReferenceID, findsOneWidget);
     });
 

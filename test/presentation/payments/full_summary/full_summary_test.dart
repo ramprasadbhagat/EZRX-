@@ -293,7 +293,7 @@ void main() {
       expect(
         find.descendant(
           of: itemCard,
-          matching: find.textContaining('900.00', findRichText: true),
+          matching: find.textContaining('9,540.00', findRichText: true),
         ),
         findsOneWidget,
       );
@@ -417,7 +417,7 @@ void main() {
       expect(
         find.descendant(
           of: itemCard,
-          matching: find.textContaining('(900.00)', findRichText: true),
+          matching: find.textContaining('(9,540.00)', findRichText: true),
         ),
         findsOneWidget,
       );
@@ -502,7 +502,7 @@ void main() {
       await tester.pumpWidget(getWidget());
       await tester.pump();
 
-      final documentReferenceID = find.text('Gov. no 0810055826');
+      final documentReferenceID = find.text('Gov. no 0810234244');
       expect(documentReferenceID, findsOneWidget);
     });
 

@@ -32,6 +32,7 @@ _$_CreditAndInvoiceItemDto _$$_CreditAndInvoiceItemDtoFromJson(
       documentReferenceID: json['documentReferenceID'] as String? ?? '',
       grossAmount: (json['grossAmount'] as num?)?.toDouble() ?? 0.0,
       netAmount: (json['netAmount'] as num?)?.toDouble() ?? 0.0,
+      orderId: json['orderId'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CreditAndInvoiceItemDtoToJson(
@@ -59,4 +60,5 @@ Map<String, dynamic> _$$_CreditAndInvoiceItemDtoToJson(
       'documentReferenceID': instance.documentReferenceID,
       'grossAmount': instance.grossAmount,
       'netAmount': instance.netAmount,
+      'orderId': instance.orderId,
     };

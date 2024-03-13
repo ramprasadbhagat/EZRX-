@@ -166,16 +166,6 @@ void main() {
             fakeCustomerOpenItem,
           ),
         );
-        when(
-          () => allCreditsAndInvoicesRepository.fetchOrder(
-            invoiceIds:
-                fakeCustomerOpenItem.map((e) => e.billingDocument).toList(),
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(
-            <String, StringValue>{},
-          ),
-        );
       },
       act: (OutstandingInvoicesBloc bloc) => bloc.add(
         OutstandingInvoicesEvent.fetch(
@@ -281,16 +271,6 @@ void main() {
         ).thenAnswer(
           (invocation) async => Right(
             fakeCustomerOpenItem,
-          ),
-        );
-        when(
-          () => allCreditsAndInvoicesRepository.fetchOrder(
-            invoiceIds:
-                fakeCustomerOpenItem.map((e) => e.billingDocument).toList(),
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(
-            <String, StringValue>{},
           ),
         );
       },

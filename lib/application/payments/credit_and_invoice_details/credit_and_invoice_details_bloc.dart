@@ -67,6 +67,7 @@ class CreditAndInvoiceDetailsBloc
             emit(
               state.copyWith(
                 itemsInfo: data,
+                basicInfo: event.creditAndInvoiceItem,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isLoading: false,
               ),

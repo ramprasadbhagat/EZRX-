@@ -4,12 +4,10 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/all_invoices_filter_dto.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
@@ -132,32 +130,6 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
       );
 
       return Right(response);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, Map<String, StringValue>>> fetchOrder({
-    required List<String> invoiceIds,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final response = await localDataSource.getOrderForInvoice();
-
-        return Right(response.toMap);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final response = await remoteDataSource.getOrderForInvoice(invoiceIds);
-
-      return Right(response.toMap);
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),

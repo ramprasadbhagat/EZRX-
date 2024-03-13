@@ -5,11 +5,10 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/credit_and_invoice_item_dto.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/invoice_order_item_dto.dart';
+
 
 class AllCreditsAndInvoicesRemoteDataSource {
   HttpService httpService;
@@ -161,28 +160,6 @@ class AllCreditsAndInvoicesRemoteDataSource {
     }
 
     return result;
-  }
-
-  Future<List<InvoiceOrderItem>> getOrderForInvoice(
-    List<String> invoiceId,
-  ) async {
-    final res = await httpService.request(
-      method: 'POST',
-      url: '${config.urlConstants}ezpay',
-      data: jsonEncode(
-        {
-          'query': allCreditsAndInvoicesQueryMutation.getOrderForInvoice(),
-          'variables': {
-            'invoiceId': invoiceId,
-          },
-        },
-      ),
-    );
-    _exceptionChecker(property: 'getOrdersForInvoiceId', res: res);
-
-    return List.from(res.data['data']['getOrdersForInvoiceId'])
-        .map((e) => InvoiceOrderItemDto.fromJson(e).toDomain)
-        .toList();
   }
 
   void _exceptionChecker({

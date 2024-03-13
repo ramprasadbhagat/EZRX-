@@ -117,6 +117,11 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       defaultValue: 0.0,
     )
         required double netAmount,
+    @JsonKey(
+      name: 'orderId',
+      defaultValue:'',
+    )
+        required String orderId,    
   }) = _CreditAndInvoiceItemDto;
 
   CreditAndInvoiceItem toDomain() {
@@ -140,7 +145,7 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       netAmount: netAmount,
       invoiceReference: StringValue(invoiceReference),
       invoiceProcessingStatus: StatusType(invoiceProcessingStatus),
-      orderId: StringValue(''),
+      orderId: StringValue(orderId),
       debitCreditCode: DebitCreditCode(debitCreditCode),
       referenceId: ReferenceId(referenceId),
       documentReferenceID: StringValue(documentReferenceID),

@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/invoice_order_item.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ void main() {
   late List<CreditAndInvoiceItem> fakeResult;
   late AllCreditsAndInvoicesRepository repository;
   late List<CreditAndInvoiceItem> creditAndInvoiceItemList;
-  late List<InvoiceOrderItem> invoiceOrderItems;
+
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -40,8 +39,6 @@ void main() {
     exception = const ApiFailure.other('fake-error');
     creditAndInvoiceItemList =
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
-    invoiceOrderItems =
-        await AllCreditsAndInvoicesLocalDataSource().getOrderForInvoice();
   });
 
   group(
@@ -107,7 +104,7 @@ void main() {
       );
 
       blocTest(
-        'fetch -> invoices fetch success fetch order fail',
+        'fetch -> invoices fetch success',
         build: () => AllInvoicesBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
@@ -123,15 +120,6 @@ void main() {
             ),
           ).thenAnswer(
             (invocation) async => Right(creditAndInvoiceItemList),
-          );
-          when(
-            () => repository.fetchOrder(
-              invoiceIds: creditAndInvoiceItemList
-                  .map((e) => e.searchKey.getValue())
-                  .toList(),
-            ),
-          ).thenAnswer(
-            (invocation) async => Left(exception),
           );
         },
         act: (AllInvoicesBloc bloc) => bloc.add(
@@ -150,88 +138,6 @@ void main() {
                 creditAndInvoiceItemList,
               ),
             ),
-            canLoadMore: false,
-          ),
-          AllInvoicesState.initial().copyWith(
-            isFetchingOrder: true,
-            items: creditAndInvoiceItemList,
-            canLoadMore: false,
-          ),
-          AllInvoicesState.initial().copyWith(
-            isFetchingOrder: false,
-            items: creditAndInvoiceItemList,
-            failureOrSuccessOption: optionOf(
-              Left(exception),
-            ),
-            canLoadMore: false,
-          ),
-        ],
-      );
-      blocTest(
-        'fetch -> invoices fetch success fetch order success',
-        build: () => AllInvoicesBloc(
-          allCreditsAndInvoicesRepository: repository,
-          config: config,
-        ),
-        setUp: () {
-          when(
-            () => repository.filterInvoices(
-              salesOrganisation: SalesOrganisation.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              filter: allInvoicesFilter,
-              offset: 0,
-              pageSize: config.pageSize,
-            ),
-          ).thenAnswer(
-            (invocation) async => Right(creditAndInvoiceItemList),
-          );
-          when(
-            () => repository.fetchOrder(
-              invoiceIds: creditAndInvoiceItemList
-                  .map((e) => e.searchKey.getValue())
-                  .toList(),
-            ),
-          ).thenAnswer(
-            (invocation) async => Right(invoiceOrderItems.toMap),
-          );
-        },
-        act: (AllInvoicesBloc bloc) => bloc.add(
-          AllInvoicesEvent.fetch(
-            appliedFilter: AllInvoicesFilter.empty(),
-          ),
-        ),
-        expect: () => [
-          AllInvoicesState.initial().copyWith(
-            isLoading: true,
-          ),
-          AllInvoicesState.initial().copyWith(
-            items: creditAndInvoiceItemList,
-            failureOrSuccessOption: optionOf(
-              Right(
-                creditAndInvoiceItemList,
-              ),
-            ),
-            canLoadMore: false,
-          ),
-          AllInvoicesState.initial().copyWith(
-            isFetchingOrder: true,
-            items: creditAndInvoiceItemList,
-            canLoadMore: false,
-          ),
-          AllInvoicesState.initial().copyWith(
-            isFetchingOrder: false,
-            items: creditAndInvoiceItemList
-                .map(
-                  (e) => e.copyWith(
-                    orderId: invoiceOrderItems
-                        .firstWhere(
-                          (element) => element.invoiceId == e.searchKey,
-                          orElse: () => InvoiceOrderItem.empty(),
-                        )
-                        .orderId,
-                  ),
-                )
-                .toList(),
             canLoadMore: false,
           ),
         ],
@@ -309,15 +215,6 @@ void main() {
         ).thenAnswer(
           (invocation) async => Right(creditAndInvoiceItemList),
         );
-        when(
-          () => repository.fetchOrder(
-            invoiceIds: creditAndInvoiceItemList
-                .map((e) => e.searchKey.getValue())
-                .toList(),
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(invoiceOrderItems.toMap),
-        );
       },
       act: (AllInvoicesBloc bloc) => bloc.add(
         const AllInvoicesEvent.loadMore(),
@@ -337,18 +234,6 @@ void main() {
             appliedFilter: allInvoicesFilter,
             items: newList,
             canLoadMore: false,
-          ),
-          AllInvoicesState.initial().copyWith(
-            isFetchingOrder: true,
-            appliedFilter: allInvoicesFilter,
-            canLoadMore: false,
-            items: newList,
-          ),
-          AllInvoicesState.initial().copyWith(
-            isFetchingOrder: false,
-            appliedFilter: allInvoicesFilter,
-            canLoadMore: false,
-            items: newList,
           ),
         ];
       },
