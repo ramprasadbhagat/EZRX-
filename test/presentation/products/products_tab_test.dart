@@ -842,7 +842,7 @@ void main() {
           find.descendant(
             of: accountSuspendedBanner,
             matching: find.text(
-              'Your account is blocked.',
+              'Your account is blocked.'.tr(),
             ),
           ),
           findsOneWidget,
@@ -852,7 +852,8 @@ void main() {
           find.descendant(
             of: accountSuspendedBanner,
             matching: find.text(
-              'To continue using eZRx+, please contact your system administrator.',
+              'To continue using eZRx+, please contact your system administrator.'
+                  .tr(),
             ),
           ),
           findsOneWidget,
