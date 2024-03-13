@@ -2,32 +2,46 @@ part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page
 
 class _MaterialItemSection extends StatelessWidget {
   final List<ViewByOrdersGroup> orderItems;
+  final bool isMarketPlace;
 
   const _MaterialItemSection({
     Key? key,
     required this.orderItems,
+    this.isMarketPlace = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (orderItems.isEmpty) return const SizedBox();
+
     return Column(
-      key: WidgetKeys.orderSuccessItemsSection,
+      key: isMarketPlace
+          ? WidgetKeys.orderSuccessMPItemsSection
+          : WidgetKeys.orderSuccessZPItemsSection,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: orderItems
           .map(
             (item) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    child: Text(
-                      item.principalName.name,
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: ZPColors.black,
+                    child: isMarketPlace
+                        ? MarketPlaceSellerTitle(
+                            sellerName: item.principalName.name,
+                            textColor: ZPColors.black,
+                          )
+                        : Text(
+                            item.principalName.name,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(
+                                  color: ZPColors.black,
+                                ),
                           ),
-                    ),
                   ),
                   ...item.viewByOrderItem
                       .mapIndexed(

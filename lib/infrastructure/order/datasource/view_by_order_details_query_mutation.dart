@@ -11,7 +11,8 @@ class ViewByOrderDetailsQueryMutation {
   \$orderBy: String, 
   \$sort: String, 
   \$language: String, 
-  \$searchKey: String,   
+  \$searchKey: String,
+  ${enableMarketPlace ? '\$orderNumbers: [String],' : ''}   
   \$salesOrg: [String],
   \$status: [String],
   \$isDetailsPage: Boolean,
@@ -28,7 +29,8 @@ class ViewByOrderDetailsQueryMutation {
       orderBy: \$orderBy, 
       sort: \$sort, 
       language: \$language, 
-      searchKey: \$searchKey,  
+      searchKey: \$searchKey,
+      ${enableMarketPlace ? 'orderNumbers: \$orderNumbers,' : ''}  
       salesOrg: \$salesOrg,
       status: \$status,
       isDetailsPage: \$isDetailsPage, 

@@ -65,7 +65,6 @@ void main() {
           OrderSummaryEvent.initialized(
             user: seedState.user,
             shipToInfo: seedState.shipToInfo,
-            salesOrg: seedState.salesOrg,
             customerCodeInfo: seedState.customerCodeInfo,
             salesOrgConfig: seedState.salesOrgConfig,
             salesOrganisation: seedState.salesOrganisation,
@@ -300,13 +299,13 @@ void main() {
             shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer(
-          (value) async => Right(orderHistoryDetails),
+          (value) async => Right([orderHistoryDetails]),
         );
         when(
           () => orderRepositoryMock.getConfirmedOrderStockInfo(
-            salesOrg: seedState.salesOrg,
+            salesOrg: seedState.salesOrganisation.salesOrg,
             customerCodeInfo: seedState.customerCodeInfo,
-            orderHistoryDetails: orderHistoryDetails,
+            orderHistoryDetailList: [orderHistoryDetails],
           ),
         ).thenAnswer(
           (value) async => Right(stockInfoList),
@@ -335,11 +334,11 @@ void main() {
         seedState.copyWith(
           submitOrderResponse: submitOrderResponse,
           isConfirming: true,
-          orderHistoryDetails: orderHistoryDetails,
+          orderHistoryDetailsList: [orderHistoryDetails],
         ),
         seedState.copyWith(
           submitOrderResponse: submitOrderResponse,
-          orderHistoryDetails: orderHistoryDetails,
+          orderHistoryDetailsList: [orderHistoryDetails],
         ),
       ],
     );
@@ -397,9 +396,9 @@ void main() {
       setUp: () {
         when(
           () => orderRepositoryMock.getConfirmedOrderStockInfo(
-            salesOrg: seedState.salesOrg,
+            salesOrg: seedState.salesOrganisation.salesOrg,
             customerCodeInfo: seedState.customerCodeInfo,
-            orderHistoryDetails: orderHistoryDetails,
+            orderHistoryDetailList: [orderHistoryDetails],
           ),
         ).thenAnswer(
           (value) async => Right(stockInfoList),
@@ -417,14 +416,14 @@ void main() {
                 quantity: 2,
               )
             ],
-            orderHistoryDetails: orderHistoryDetails,
+            orderHistoryDetailList: [orderHistoryDetails],
           ),
         );
       },
       expect: () => [
         seedState.copyWith(
           submitOrderResponse: submitOrderResponse,
-          orderHistoryDetails: orderHistoryDetails,
+          orderHistoryDetailsList: [orderHistoryDetails],
         ),
       ],
     );
@@ -435,8 +434,8 @@ void main() {
         when(
           () => orderRepositoryMock.getConfirmedOrderStockInfo(
             customerCodeInfo: seedState.customerCodeInfo,
-            orderHistoryDetails: orderHistoryDetails,
-            salesOrg: seedState.salesOrg,
+            orderHistoryDetailList: [orderHistoryDetails],
+            salesOrg: seedState.salesOrganisation.salesOrg,
           ),
         ).thenAnswer(
           (value) async => const Left(ApiFailure.other('Some Error')),
@@ -454,7 +453,7 @@ void main() {
                 quantity: 2,
               )
             ],
-            orderHistoryDetails: orderHistoryDetails,
+            orderHistoryDetailList: [orderHistoryDetails],
           ),
         );
       },

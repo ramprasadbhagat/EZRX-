@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -124,7 +125,8 @@ class OrderSummarySection extends StatelessWidget {
               priceStyle: PriceStyle.grandTotalPrice,
               value: orderDetails.totalValue,
             ),
-            if (orderDetails.orderContainsMaterialsWithInvalidPrice)
+            if (orderDetails
+                .orderHistoryDetailsOrderItem.containsMaterialsWithInvalidPrice)
               const PriceNotAvailableMessage(
                 margin: EdgeInsets.symmetric(vertical: 8),
               ),

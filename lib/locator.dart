@@ -894,7 +894,6 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<OrderLocalDataSource>(),
       remoteDataSource: locator<OrderRemoteDataSource>(),
-      mixpanelService: locator<MixpanelService>(),
       encryption: locator<Encryption>(),
       orderDetailLocalDataSource: locator<ViewByOrderDetailsLocalDataSource>(),
       orderHistoryDetailsRemoteDataSource:
@@ -902,6 +901,7 @@ void setupLocator() {
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
       deviceStorage: locator<DeviceStorage>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 

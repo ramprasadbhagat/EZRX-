@@ -105,37 +105,17 @@ class _CartPageManufacturerName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const textColor = ZPColors.neutralsBlack;
     final manufacturer = cartProduct.getManufactured;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       key: WidgetKeys.cartPrincipalLabel,
       child: cartProduct.isMarketPlace
-          ? Row(
-              children: [
-                SizedBox(
-                  key: WidgetKeys.marketplaceSellerIcon,
-                  width: 20,
-                  height: 20,
-                  child: SvgPicture.asset(
-                    SvgImage.marketplaceSellerIcon,
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  manufacturer,
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: textColor,
-                      ),
-                ),
-              ],
-            )
+          ? MarketPlaceSellerTitle(sellerName: manufacturer)
           : Text(
               manufacturer,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: textColor,
+                    color: ZPColors.neutralsBlack,
                   ),
             ),
     );

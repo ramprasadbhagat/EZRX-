@@ -69,6 +69,53 @@ class ViewByOrderDetailsRemoteDataSource {
     });
   }
 
+  Future<List<OrderHistoryDetails>> getOrderHistoryDetailsList({
+    required String language,
+    required String soldTo,
+    required List<String> orderNumber,
+    required String salesOrg,
+    required String shipTo,
+    required String market,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = viewByOrderDetailsQueryMutation.getOrderHistoryDetails(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
+
+      final variables = {
+        'orderNumbers': orderNumber,
+        'language': language,
+        'soldTo': soldTo,
+        'salesOrg': [salesOrg],
+        'shipTo': [shipTo],
+        'isDetailsPage': true,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}order',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'orderDetails',
+      );
+
+      _orderHistoryDetailsExceptionChecker(res: res);
+
+      final rawOrderHistories =
+          res.data['data']['orderHistoryV3']['orderHeaders'];
+
+      if (rawOrderHistories is List<dynamic>) {
+        return rawOrderHistories
+            .map((e) => OrderHistoryDetailsDto.fromJson(e).toDomain())
+            .toList();
+      }
+
+      return <OrderHistoryDetails>[];
+    });
+  }
+
   void _orderHistoryDetailsExceptionChecker({required Response<dynamic> res}) {
     if (res.statusCode != 200) {
       throw ServerException(

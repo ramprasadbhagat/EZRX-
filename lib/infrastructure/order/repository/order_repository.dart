@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -23,9 +22,9 @@ import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
@@ -44,12 +43,10 @@ class OrderRepository implements IOrderRepository {
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final Encryption encryption;
   final DeviceStorage deviceStorage;
-
-  late MixpanelService mixpanelService;
+  final RemoteConfigService remoteConfigService;
 
   OrderRepository({
     required this.config,
-    required this.mixpanelService,
     required this.localDataSource,
     required this.remoteDataSource,
     required this.encryption,
@@ -58,6 +55,7 @@ class OrderRepository implements IOrderRepository {
     required this.stockInfoRemoteDataSource,
     required this.stockInfoLocalDataSource,
     required this.deviceStorage,
+    required this.remoteConfigService,
   });
 
   @override
@@ -120,9 +118,13 @@ class OrderRepository implements IOrderRepository {
         data: submitOrderData,
         secretKey: config.orderEncryptionSecret,
       );
+      final enableMarketPlace = remoteConfigService.enableMarketPlaceMarkets
+          .contains(deviceStorage.currentMarket());
 
-      final submitOrderResponse =
-          await remoteDataSource.submitOrder(orderEncryption: encryptedData);
+      final submitOrderResponse = await remoteDataSource.submitOrder(
+        orderEncryption: encryptedData,
+        enableMarketPlace: enableMarketPlace,
+      );
 
       return Right(submitOrderResponse);
     } catch (e) {
@@ -133,7 +135,8 @@ class OrderRepository implements IOrderRepository {
   }
 
   @override
-  Future<Either<ApiFailure, OrderHistoryDetails>> getOrderConfirmationDetail({
+  Future<Either<ApiFailure, List<OrderHistoryDetails>>>
+      getOrderConfirmationDetail({
     required SubmitOrderResponse orderResponse,
     required User user,
     required CustomerCodeInfo customerCodeInfo,
@@ -144,7 +147,7 @@ class OrderRepository implements IOrderRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final result =
-            await orderDetailLocalDataSource.getOrderHistoryDetails();
+            await orderDetailLocalDataSource.getOrderHistoryDetailsList();
 
         return Right(result);
       } catch (e) {
@@ -153,6 +156,28 @@ class OrderRepository implements IOrderRepository {
     }
 
     try {
+      final enableMarketPlace = remoteConfigService.enableMarketPlaceMarkets
+          .contains(deviceStorage.currentMarket());
+
+      if (enableMarketPlace) {
+        final orderHistoryDetailsList =
+            await orderHistoryDetailsRemoteDataSource
+                .getOrderHistoryDetailsList(
+          orderNumber: orderResponse.salesDocuments,
+          language: user.preferredLanguage.languageCode,
+          soldTo: customerCodeInfo.customerCodeSoldTo,
+          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+          shipTo: shipToInfo.shipToCustomerCode,
+          market: deviceStorage.currentMarket(),
+        );
+
+        return Right(
+          orderHistoryDetailsList
+              .map((e) => e.copyWithMaterialInfo(priceAggregates: cartProducts))
+              .toList(),
+        );
+      }
+
       final orderHistoryDetails =
           await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
         searchKey: orderResponse.salesDocument,
@@ -163,28 +188,13 @@ class OrderRepository implements IOrderRepository {
         market: deviceStorage.currentMarket(),
       );
 
-      final orderHistoryDetailsWithMaterialInfo = orderHistoryDetails.copyWith(
-        orderHistoryDetailsOrderItem:
-            orderHistoryDetails.orderHistoryDetailsOrderItem.map(
-          (e) {
-            final priceAggregate = cartProducts.firstWhere(
-              (element) {
-                return element.getMaterialNumber == MaterialNumber(e.parentId);
-              },
-              orElse: () => PriceAggregate.empty(),
-            );
-
-            return e.copyWith(
-              material: MaterialInfo.empty().copyWith(
-                materialNumber: priceAggregate.getMaterialNumber,
-                bundle: priceAggregate.bundle,
-              ),
-            );
-          },
-        ).toList(),
+      return Right(
+        [
+          orderHistoryDetails.copyWithMaterialInfo(
+            priceAggregates: cartProducts,
+          ),
+        ],
       );
-
-      return Right(orderHistoryDetailsWithMaterialInfo);
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),
@@ -195,7 +205,7 @@ class OrderRepository implements IOrderRepository {
   @override
   Future<Either<ApiFailure, List<MaterialStockInfo>>>
       getConfirmedOrderStockInfo({
-    required OrderHistoryDetails orderHistoryDetails,
+    required List<OrderHistoryDetails> orderHistoryDetailList,
     required SalesOrg salesOrg,
     required CustomerCodeInfo customerCodeInfo,
   }) async {
@@ -212,7 +222,7 @@ class OrderRepository implements IOrderRepository {
     try {
       final stockInfoList =
           await stockInfoRemoteDataSource.getMaterialStockInfoList(
-        materialNumbers: orderHistoryDetails.orderHistoryDetailsOrderItem
+        materialNumbers: orderHistoryDetailList.allItems
             .map((e) => e.materialNumber.getOrDefaultValue(''))
             .toList(),
         salesOrg: salesOrg.getOrCrash(),

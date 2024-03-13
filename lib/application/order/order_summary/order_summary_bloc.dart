@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
@@ -41,7 +41,6 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           OrderSummaryState.initial().copyWith(
             user: value.user,
             shipToInfo: value.shipToInfo,
-            salesOrg: value.salesOrg,
             customerCodeInfo: value.customerCodeInfo,
             salesOrgConfig: value.salesOrgConfig,
             orderDocumentType: value.orderDocumentType,
@@ -87,7 +86,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
                 isSubmitting: false,
                 isConfirming: true,
                 submitOrderResponse: submitOrderResponse,
-                orderHistoryDetails: OrderHistoryDetails.empty(),
+                orderHistoryDetailsList: <OrderHistoryDetails>[],
               ),
             );
           },
@@ -123,12 +122,12 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
                 isConfirming: true,
-                orderHistoryDetails: orderConfirmationDetail,
+                orderHistoryDetailsList: orderConfirmationDetail,
               ),
             );
             add(
               OrderSummaryEvent.confirmedOrderStockInfo(
-                orderHistoryDetails: orderConfirmationDetail,
+                orderHistoryDetailList: orderConfirmationDetail,
                 priceAggregate: e.priceAggregate,
               ),
             );
@@ -138,8 +137,8 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
       confirmedOrderStockInfo: (e) async {
         final failureOrSuccess = await repository.getConfirmedOrderStockInfo(
           customerCodeInfo: state.customerCodeInfo,
-          orderHistoryDetails: e.orderHistoryDetails,
-          salesOrg: state.salesOrg,
+          orderHistoryDetailList: e.orderHistoryDetailList,
+          salesOrg: state.salesOrganisation.salesOrg,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -155,13 +154,15 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
                 isConfirming: false,
-                orderHistoryDetails: e.orderHistoryDetails.copyWithStock(
-                  stockInfoList: stockInfoList,
-                  orderHistoryDetailsOrderItem:
-                      e.orderHistoryDetails.orderHistoryDetailsOrderItem,
-                  priceAggregate: e.priceAggregate,
-                  salesOrganisationConfigs: state.salesOrgConfig,
-                ),
+                orderHistoryDetailsList: e.orderHistoryDetailList
+                    .map(
+                      (item) => item.copyWithStock(
+                        stockInfoList: stockInfoList,
+                        priceAggregate: e.priceAggregate,
+                        salesOrganisationConfigs: state.salesOrgConfig,
+                      ),
+                    )
+                    .toList(),
               ),
             );
           },

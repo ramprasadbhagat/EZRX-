@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SubmitOrderResponse {
   String get salesDocument => throw _privateConstructorUsedError;
+  List<String> get salesDocuments => throw _privateConstructorUsedError;
   List<SubmitOrderResponseMessage> get messages =>
       throw _privateConstructorUsedError;
 
@@ -31,7 +32,10 @@ abstract class $SubmitOrderResponseCopyWith<$Res> {
           SubmitOrderResponse value, $Res Function(SubmitOrderResponse) then) =
       _$SubmitOrderResponseCopyWithImpl<$Res, SubmitOrderResponse>;
   @useResult
-  $Res call({String salesDocument, List<SubmitOrderResponseMessage> messages});
+  $Res call(
+      {String salesDocument,
+      List<String> salesDocuments,
+      List<SubmitOrderResponseMessage> messages});
 }
 
 /// @nodoc
@@ -48,6 +52,7 @@ class _$SubmitOrderResponseCopyWithImpl<$Res, $Val extends SubmitOrderResponse>
   @override
   $Res call({
     Object? salesDocument = null,
+    Object? salesDocuments = null,
     Object? messages = null,
   }) {
     return _then(_value.copyWith(
@@ -55,6 +60,10 @@ class _$SubmitOrderResponseCopyWithImpl<$Res, $Val extends SubmitOrderResponse>
           ? _value.salesDocument
           : salesDocument // ignore: cast_nullable_to_non_nullable
               as String,
+      salesDocuments: null == salesDocuments
+          ? _value.salesDocuments
+          : salesDocuments // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       messages: null == messages
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
@@ -71,7 +80,10 @@ abstract class _$$_SubmitOrderResponseCopyWith<$Res>
       __$$_SubmitOrderResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String salesDocument, List<SubmitOrderResponseMessage> messages});
+  $Res call(
+      {String salesDocument,
+      List<String> salesDocuments,
+      List<SubmitOrderResponseMessage> messages});
 }
 
 /// @nodoc
@@ -86,6 +98,7 @@ class __$$_SubmitOrderResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesDocument = null,
+    Object? salesDocuments = null,
     Object? messages = null,
   }) {
     return _then(_$_SubmitOrderResponse(
@@ -93,6 +106,10 @@ class __$$_SubmitOrderResponseCopyWithImpl<$Res>
           ? _value.salesDocument
           : salesDocument // ignore: cast_nullable_to_non_nullable
               as String,
+      salesDocuments: null == salesDocuments
+          ? _value._salesDocuments
+          : salesDocuments // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       messages: null == messages
           ? _value._messages
           : messages // ignore: cast_nullable_to_non_nullable
@@ -106,12 +123,22 @@ class __$$_SubmitOrderResponseCopyWithImpl<$Res>
 class _$_SubmitOrderResponse extends _SubmitOrderResponse {
   const _$_SubmitOrderResponse(
       {required this.salesDocument,
+      required final List<String> salesDocuments,
       required final List<SubmitOrderResponseMessage> messages})
-      : _messages = messages,
+      : _salesDocuments = salesDocuments,
+        _messages = messages,
         super._();
 
   @override
   final String salesDocument;
+  final List<String> _salesDocuments;
+  @override
+  List<String> get salesDocuments {
+    if (_salesDocuments is EqualUnmodifiableListView) return _salesDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_salesDocuments);
+  }
+
   final List<SubmitOrderResponseMessage> _messages;
   @override
   List<SubmitOrderResponseMessage> get messages {
@@ -122,7 +149,7 @@ class _$_SubmitOrderResponse extends _SubmitOrderResponse {
 
   @override
   String toString() {
-    return 'SubmitOrderResponse(salesDocument: $salesDocument, messages: $messages)';
+    return 'SubmitOrderResponse(salesDocument: $salesDocument, salesDocuments: $salesDocuments, messages: $messages)';
   }
 
   @override
@@ -132,11 +159,16 @@ class _$_SubmitOrderResponse extends _SubmitOrderResponse {
             other is _$_SubmitOrderResponse &&
             (identical(other.salesDocument, salesDocument) ||
                 other.salesDocument == salesDocument) &&
+            const DeepCollectionEquality()
+                .equals(other._salesDocuments, _salesDocuments) &&
             const DeepCollectionEquality().equals(other._messages, _messages));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesDocument,
+  int get hashCode => Object.hash(
+      runtimeType,
+      salesDocument,
+      const DeepCollectionEquality().hash(_salesDocuments),
       const DeepCollectionEquality().hash(_messages));
 
   @JsonKey(ignore: true)
@@ -150,12 +182,15 @@ class _$_SubmitOrderResponse extends _SubmitOrderResponse {
 abstract class _SubmitOrderResponse extends SubmitOrderResponse {
   const factory _SubmitOrderResponse(
           {required final String salesDocument,
+          required final List<String> salesDocuments,
           required final List<SubmitOrderResponseMessage> messages}) =
       _$_SubmitOrderResponse;
   const _SubmitOrderResponse._() : super._();
 
   @override
   String get salesDocument;
+  @override
+  List<String> get salesDocuments;
   @override
   List<SubmitOrderResponseMessage> get messages;
   @override

@@ -808,7 +808,10 @@ class WidgetKeys {
   static const Key orderSuccessOrderSummarySection =
       Key('orderSuccessOrderSummarySection');
   static const Key orderSuccessItemTotalQty = Key('orderSuccessItemTotalQty');
-  static const Key orderSuccessItemsSection = Key('orderSuccessItemsSection');
+  static const Key orderSuccessZPItemsSection =
+      Key('orderSuccessZPItemsSection');
+  static const Key orderSuccessMPItemsSection =
+      Key('orderSuccessMPItemsSection');
   static const Key orderSuccessSubTotal = Key('orderSuccessSubTotal');
   static const Key orderSummaryTax = Key('orderSummaryTax');
   static const Key orderSummarySmallFee = Key('orderSummarySmallFee');

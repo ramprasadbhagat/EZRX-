@@ -1,9 +1,12 @@
 part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 
 class _OrderSuccessMessage extends StatelessWidget {
-  final OrderHistoryDetails orderHistoryDetails;
-  const _OrderSuccessMessage({Key? key, required this.orderHistoryDetails})
-      : super(key: key);
+  final OrderStepValue orderStatus;
+
+  const _OrderSuccessMessage({
+    Key? key,
+    required this.orderStatus,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +14,13 @@ class _OrderSuccessMessage extends StatelessWidget {
       key: WidgetKeys.orderSuccessMessage,
       children: [
         SvgPicture.asset(
-          orderHistoryDetails.processingStatus.orderConfirmationIcon,
+          orderStatus.orderConfirmationIcon,
           fit: BoxFit.fitHeight,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Text(
-            '${context.tr(orderHistoryDetails.processingStatus.orderConfirmationPrefixMessage)} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${context.tr(orderHistoryDetails.processingStatus.orderConfirmationSuffixMessage)}',
+            '${context.tr(orderStatus.orderConfirmationPrefixMessage)} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${context.tr(orderStatus.orderConfirmationSuffixMessage)}',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),

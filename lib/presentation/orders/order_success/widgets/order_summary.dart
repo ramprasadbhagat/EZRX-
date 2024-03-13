@@ -1,9 +1,12 @@
 part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 
 class _OrderSummary extends StatelessWidget {
-  final OrderHistoryDetails orderHistoryDetails;
-  const _OrderSummary({Key? key, required this.orderHistoryDetails})
-      : super(key: key);
+  final List<OrderHistoryDetails> orderHistoryDetailList;
+
+  const _OrderSummary({
+    Key? key,
+    required this.orderHistoryDetailList,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,48 @@ class _OrderSummary extends StatelessWidget {
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (orderHistoryDetailList.mpOrderOnly.isNotEmpty) ...[
+            Row(
+              key: WidgetKeys.checkoutSummaryZPSubTotal,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'ZP ${context.tr(
+                    'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
+                  )}:',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
+                ),
+                PriceComponent(
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
+                  price:
+                      '${orderHistoryDetailList.zpOrderOnly.subtotal(eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)}',
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              key: WidgetKeys.checkoutSummaryMPSubTotal,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'MP ${context.tr(
+                    'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
+                  )}:',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
+                ),
+                PriceComponent(
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
+                  price:
+                      '${orderHistoryDetailList.mpOrderOnly.subtotal(eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)}',
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+          ],
           Row(
             key: WidgetKeys.orderSuccessSubTotal,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,7 +85,7 @@ class _OrderSummary extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
                 price:
-                    '${orderHistoryDetails.subTotal(eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)}',
+                    '${orderHistoryDetailList.subtotal(eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)}',
               ),
             ],
           ),
@@ -59,7 +104,7 @@ class _OrderSummary extends StatelessWidget {
                   ),
                   PriceComponent(
                     salesOrgConfig: eligibilityState.salesOrgConfigs,
-                    price: orderHistoryDetails.totalTax.toString(),
+                    price: orderHistoryDetailList.totalTax.toString(),
                   ),
                 ],
               ),
@@ -77,7 +122,7 @@ class _OrderSummary extends StatelessWidget {
                   ),
                   PriceComponent(
                     salesOrgConfig: eligibilityState.salesOrgConfigs,
-                    price: orderHistoryDetails.deliveryFee.toString(),
+                    price: orderHistoryDetailList.smallOrderFee.toString(),
                   ),
                 ],
               ),
@@ -105,7 +150,7 @@ class _OrderSummary extends StatelessWidget {
                   ),
                   PriceComponent(
                     salesOrgConfig: eligibilityState.salesOrgConfigs,
-                    price: orderHistoryDetails.manualFee.toString(),
+                    price: orderHistoryDetailList.manualFee.toString(),
                   ),
                 ],
               ),
@@ -126,7 +171,7 @@ class _OrderSummary extends StatelessWidget {
               ),
               PriceComponent(
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
-                price: orderHistoryDetails.totalValue.toStringAsFixed(2),
+                price: orderHistoryDetailList.grandTotal.toStringAsFixed(2),
               ),
             ],
           ),
@@ -145,13 +190,13 @@ class _OrderSummary extends StatelessWidget {
                   ),
                   PriceComponent(
                     salesOrgConfig: eligibilityState.salesOrgConfigs,
-                    price: orderHistoryDetails.totalDiscount.toString(),
+                    price: orderHistoryDetailList.totalSaving.toString(),
                     type: PriceStyle.summaryPrice,
                   ),
                 ],
               ),
             ),
-          if (orderHistoryDetails.orderContainsMaterialsWithInvalidPrice)
+          if (orderHistoryDetailList.allItems.containsMaterialsWithInvalidPrice)
             const PriceNotAvailableMessage(
               margin: EdgeInsets.symmetric(vertical: 8),
             ),

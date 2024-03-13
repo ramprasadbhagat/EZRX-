@@ -12,6 +12,8 @@ class SubmitOrderResponseDto with _$SubmitOrderResponseDto {
   const factory SubmitOrderResponseDto({
     @JsonKey(name: 'SalesDocument', defaultValue: '')
         required String salesDocument,
+    @JsonKey(name: 'SalesDocuments', defaultValue: <String>[])
+        required List<String> salesDocuments,
     @JsonKey(name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
         required List<SubmitOrderResponseMessageDto> messages,
   }) = _SubmitOrderResponseDto;
@@ -20,6 +22,7 @@ class SubmitOrderResponseDto with _$SubmitOrderResponseDto {
     return SubmitOrderResponse(
       salesDocument: salesDocument,
       messages: messages.map((e) => e.toDomain()).toList(),
+      salesDocuments: salesDocuments,
     );
   }
 
@@ -28,6 +31,7 @@ class SubmitOrderResponseDto with _$SubmitOrderResponseDto {
   ) {
     return SubmitOrderResponseDto(
       salesDocument: submitOrderResponse.salesDocument,
+      salesDocuments: submitOrderResponse.salesDocuments,
       messages: submitOrderResponse.messages
           .map((e) => SubmitOrderResponseMessageDto.fromDomain(e))
           .toList(),

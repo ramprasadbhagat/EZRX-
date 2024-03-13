@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,8 +22,9 @@ class MarketPlaceSellerTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          width: 18,
-          height: 18,
+          key: WidgetKeys.marketplaceSellerIcon,
+          width: 20,
+          height: 20,
           child: SvgPicture.asset(
             SvgImage.marketplaceSellerIcon,
             fit: BoxFit.fill,

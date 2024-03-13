@@ -9,7 +9,6 @@ class CustomerCodeLocalDataSource {
   CustomerCodeLocalDataSource();
 
   Future<CustomerInformation> getCustomerCodeList() async {
-    await Future.delayed(const Duration(seconds: 3));
     final data = json.decode(
       await rootBundle.loadString(
         'assets/json/getCustomerInformationResponse.json',
@@ -23,7 +22,6 @@ class CustomerCodeLocalDataSource {
   }
 
   Future<CustomerInformation> getSalesRepCustomerCodeList() async {
-    await Future.delayed(const Duration(seconds: 3));
     final data = json.decode(
       await rootBundle.loadString(
         'assets/json/getCustomerInformationResponseForSalesRep.json',

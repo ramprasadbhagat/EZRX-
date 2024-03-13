@@ -9,7 +9,6 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
     required OrderDocumentType orderDocumentType,
     required SalesOrganisationConfigs salesOrgConfig,
     required SalesOrganisation salesOrganisation,
-    required SalesOrg salesOrg,
   }) = _Initialized;
 
   const factory OrderSummaryEvent.submitOrder({
@@ -26,7 +25,7 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
   }) = _OrderConfirmationDetail;
 
   const factory OrderSummaryEvent.confirmedOrderStockInfo({
-    required OrderHistoryDetails orderHistoryDetails,
+    required List<OrderHistoryDetails> orderHistoryDetailList,
     required List<PriceAggregate> priceAggregate,
   }) = _ConfirmedOrderStockInfo;
 

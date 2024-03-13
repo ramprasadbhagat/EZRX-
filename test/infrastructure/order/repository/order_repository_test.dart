@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
@@ -35,7 +36,6 @@ import 'package:ezrxmobile/domain/order/entities/submit_order_customer.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
@@ -70,18 +70,19 @@ class EncryptionMock extends Mock implements Encryption {}
 class ViewByOrderDetailsLocalDataSourceMock extends Mock
     implements ViewByOrderDetailsLocalDataSource {}
 
-class MixpanelServiceMock extends Mock implements MixpanelService {}
-
 class OrderLocalDataSourceMock extends Mock implements OrderLocalDataSource {}
 
 class OrderRemoteDataSourceMock extends Mock implements OrderRemoteDataSource {}
+
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 void main() {
   late Config mockConfig;
   late Encryption encryption;
   late SubmitOrder submitOrderMock;
   late OrderRepository orderRepository;
-  late MixpanelService mixpanelService;
+  late DeviceStorage deviceStorage;
+  late RemoteConfigService remoteConfigService;
   late DeliveryInfoData deliveryInfoData;
   late List<PriceAggregate> cartMaterials;
   late OrderEncryption orderEncryptionMock;
@@ -95,8 +96,11 @@ void main() {
   final mockShipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
   late ViewByOrderDetailsLocalDataSource viewByOrderDetailsLocalDataSource;
   late ViewByOrderDetailsRemoteDataSource viewByOrderDetailsRemoteDataSource;
-  late DeviceStorage deviceStorage;
-  const fakeMarket = 'fake-market';
+  const fakeMarketPlaceMarket = 'fake-marketplace-market';
+  const fakeNormalMarket = 'fake-normal-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarketPlaceMarket];
+  final fakeConfigValue =
+      fakeEnableMarketPlaceMarkets.contains(fakeMarketPlaceMarket);
   const fakeSecretKey = 'fake-key';
   final fakeError = MockException(message: 'fake-exception');
 
@@ -107,7 +111,7 @@ void main() {
     orderLocalDataSource = OrderLocalDataSourceMock();
     orderRemoteDataSource = OrderRemoteDataSourceMock();
     deviceStorage = DeviceStorageMock();
-    mixpanelService = MixpanelServiceMock();
+    remoteConfigService = RemoteConfigServiceMock();
     viewByOrderDetailsLocalDataSource = ViewByOrderDetailsLocalDataSourceMock();
     viewByOrderDetailsRemoteDataSource =
         ViewByOrderDetailsRemoteDataSourceMock();
@@ -122,13 +126,13 @@ void main() {
       config: mockConfig,
       localDataSource: orderLocalDataSource,
       remoteDataSource: orderRemoteDataSource,
-      mixpanelService: mixpanelService,
       encryption: encryption,
       orderDetailLocalDataSource: viewByOrderDetailsLocalDataSource,
       orderHistoryDetailsRemoteDataSource: viewByOrderDetailsRemoteDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       deviceStorage: deviceStorage,
+      remoteConfigService: remoteConfigService,
     );
     final materialListResponse =
         await MaterialListLocalDataSource().getProductList();
@@ -203,6 +207,9 @@ void main() {
         await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
     stockInfoListMock =
         await StockInfoLocalDataSource().getMaterialStockInfoList();
+    when(() => deviceStorage.currentMarket()).thenReturn(fakeMarketPlaceMarket);
+    when(() => remoteConfigService.enableMarketPlaceMarkets)
+        .thenReturn(fakeEnableMarketPlaceMarkets);
   });
 
   test('get submit order successfully locally ', () async {
@@ -563,6 +570,7 @@ void main() {
       when(
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
+          enableMarketPlace: fakeConfigValue,
         ),
       ).thenAnswer(
         (invocation) async => submitOrderResponseMock,
@@ -617,6 +625,7 @@ void main() {
       when(
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
+          enableMarketPlace: fakeConfigValue,
         ),
       ).thenThrow(fakeError);
 
@@ -673,6 +682,7 @@ void main() {
       when(
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
+          enableMarketPlace: fakeConfigValue,
         ),
       ).thenThrow(fakeError);
 
@@ -732,6 +742,7 @@ void main() {
       when(
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
+          enableMarketPlace: fakeConfigValue,
         ),
       ).thenThrow(fakeError);
 
@@ -805,6 +816,7 @@ void main() {
       when(
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
+          enableMarketPlace: fakeConfigValue,
         ),
       ).thenAnswer(
         (invocation) async => submitOrderResponseMock,
@@ -846,6 +858,7 @@ void main() {
       when(
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
+          enableMarketPlace: fakeConfigValue,
         ),
       ).thenThrow(fakeError);
 
@@ -961,6 +974,7 @@ void main() {
       when(
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
+          enableMarketPlace: fakeConfigValue,
         ),
       ).thenAnswer(
         (invocation) async => submitOrderResponseMock,
@@ -1014,6 +1028,7 @@ void main() {
       when(
         () => orderRemoteDataSource.submitOrder(
           orderEncryption: orderEncryptionMock,
+          enableMarketPlace: fakeConfigValue,
         ),
       ).thenAnswer(
         (invocation) async => submitOrderResponseMock,
@@ -1063,6 +1078,7 @@ void main() {
     when(
       () => orderRemoteDataSource.submitOrder(
         orderEncryption: orderEncryptionMock,
+        enableMarketPlace: fakeConfigValue,
       ),
     ).thenAnswer(
       (invocation) async => submitOrderResponseMock,
@@ -1089,12 +1105,10 @@ void main() {
 
   group('OrderRepository => getOrderHistoryDetails', () {
     test('get submit order getOrderHistoryDetails locally success', () async {
+      final orderList = [orderHistoryDetailsMock];
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-
-      when(() => viewByOrderDetailsLocalDataSource.getOrderHistoryDetails())
-          .thenAnswer(
-        (invocation) async => orderHistoryDetailsMock,
-      );
+      when(() => viewByOrderDetailsLocalDataSource.getOrderHistoryDetailsList())
+          .thenAnswer((_) async => orderList);
 
       final result = await orderRepository.getOrderConfirmationDetail(
         user: fakeClientUser,
@@ -1106,14 +1120,14 @@ void main() {
       );
       expect(
         result,
-        Right(orderHistoryDetailsMock),
+        Right(orderList),
       );
     });
 
     test('get submit order getOrderHistoryDetails locally fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => viewByOrderDetailsLocalDataSource.getOrderHistoryDetails())
+      when(() => viewByOrderDetailsLocalDataSource.getOrderHistoryDetailsList())
           .thenThrow(fakeError);
 
       final result = await orderRepository.getOrderConfirmationDetail(
@@ -1132,7 +1146,8 @@ void main() {
 
     test('get submit order getOrderHistoryDetails remote success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
+      when(() => deviceStorage.currentMarket())
+          .thenReturn(fakeNormalMarket);
 
       when(
         () => viewByOrderDetailsRemoteDataSource.getOrderHistoryDetails(
@@ -1141,7 +1156,7 @@ void main() {
           searchKey: submitOrderResponseMock.salesDocument,
           soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
           shipTo: fakeShipToInfo.shipToCustomerCode,
-          market: fakeMarket,
+          market: fakeNormalMarket,
         ),
       ).thenAnswer(
         (invocation) async => orderHistoryDetailsMock,
@@ -1149,15 +1164,16 @@ void main() {
 
       final result = await orderRepository.getOrderConfirmationDetail(
         user: fakeClientUser,
-        cartProducts: cartMaterials,
+        cartProducts:
+            cartMaterials.where((e) => !e.materialInfo.isMarketPlace).toList(),
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
         shipToInfo: fakeShipToInfo,
       );
       expect(
-        result,
-        Right(orderHistoryDetailsMock),
+        result.getOrElse(() => <OrderHistoryDetails>[]),
+        equals([orderHistoryDetailsMock]),
       );
     });
 
@@ -1173,13 +1189,15 @@ void main() {
             searchKey: submitOrderResponseMock.salesDocument,
             soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
             shipTo: fakeShipToInfo.shipToCustomerCode,
-            market: fakeMarket,
+            market: fakeNormalMarket,
           ),
         ).thenThrow(fakeError);
 
         final result = await orderRepository.getOrderConfirmationDetail(
           user: fakeClientUser,
-          cartProducts: cartMaterials,
+          cartProducts: cartMaterials
+              .where((e) => !e.materialInfo.isMarketPlace)
+              .toList(),
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
           orderResponse: submitOrderResponseMock,
@@ -1190,9 +1208,6 @@ void main() {
           Left(FailureHandler.handleFailure(fakeError)),
         );
       },
-      timeout: const Timeout(
-        Duration(seconds: 100),
-      ),
     );
   });
 
@@ -1209,7 +1224,7 @@ void main() {
       final result = await orderRepository.getConfirmedOrderStockInfo(
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrg: fakeSalesOrganisation.salesOrg,
-        orderHistoryDetails: orderHistoryDetailsMock,
+        orderHistoryDetailList: [orderHistoryDetailsMock],
       );
       expect(
         result,
@@ -1226,7 +1241,7 @@ void main() {
       final result = await orderRepository.getConfirmedOrderStockInfo(
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrg: fakeSalesOrganisation.salesOrg,
-        orderHistoryDetails: orderHistoryDetailsMock,
+        orderHistoryDetailList: [orderHistoryDetailsMock],
       );
       expect(
         result,
@@ -1253,7 +1268,7 @@ void main() {
       final result = await orderRepository.getConfirmedOrderStockInfo(
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrg: fakeSalesOrganisation.salesOrg,
-        orderHistoryDetails: orderHistoryDetailsMock,
+        orderHistoryDetailList: [orderHistoryDetailsMock],
       );
       expect(
         result,
@@ -1277,7 +1292,7 @@ void main() {
       final result = await orderRepository.getConfirmedOrderStockInfo(
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrg: fakeSalesOrganisation.salesOrg,
-        orderHistoryDetails: orderHistoryDetailsMock,
+        orderHistoryDetailList: [orderHistoryDetailsMock],
       );
       expect(
         result,

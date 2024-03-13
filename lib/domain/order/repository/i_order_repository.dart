@@ -29,7 +29,8 @@ abstract class IOrderRepository {
     required SalesOrganisationConfigs configs,
   });
 
-  Future<Either<ApiFailure, OrderHistoryDetails>> getOrderConfirmationDetail({
+  Future<Either<ApiFailure, List<OrderHistoryDetails>>>
+      getOrderConfirmationDetail({
     required SubmitOrderResponse orderResponse,
     required User user,
     required CustomerCodeInfo customerCodeInfo,
@@ -40,7 +41,7 @@ abstract class IOrderRepository {
 
   Future<Either<ApiFailure, List<MaterialStockInfo>>>
       getConfirmedOrderStockInfo({
-    required OrderHistoryDetails orderHistoryDetails,
+    required List<OrderHistoryDetails> orderHistoryDetailList,
     required SalesOrg salesOrg,
     required CustomerCodeInfo customerCodeInfo,
   });

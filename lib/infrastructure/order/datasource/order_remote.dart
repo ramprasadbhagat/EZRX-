@@ -23,6 +23,7 @@ class OrderRemoteDataSource {
 
   Future<SubmitOrderResponse> submitOrder({
     required OrderEncryption orderEncryption,
+    required bool enableMarketPlace,
   }) async {
     return await exceptionHandler.handle(() async {
       final variables = {
@@ -35,7 +36,7 @@ class OrderRemoteDataSource {
         method: 'POST',
         url: '/api/order',
         data: jsonEncode({
-          'query': queryMutation.submitOrder(),
+          'query': queryMutation.submitOrder(enableMarketPlace),
           'variables': variables,
         }),
         apiEndpoint: 'submitOrderMutation',
@@ -66,7 +67,8 @@ class OrderRemoteDataSource {
   void _submitOrderExceptionChecker({
     required SubmitOrderResponseDto submitOrderResponse,
   }) {
-    if (submitOrderResponse.salesDocument.isEmpty) {
+    if (submitOrderResponse.salesDocument.isEmpty &&
+        submitOrderResponse.salesDocuments.isEmpty) {
       final msg = submitOrderResponse.messages
           .map((e) => e.message)
           .toList()

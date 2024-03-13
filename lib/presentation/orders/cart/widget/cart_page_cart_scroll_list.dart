@@ -64,7 +64,15 @@ class _CartPageCartScrollList extends StatelessWidget {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              if (index == 0) const _MarketPlaceLabel(),
+                              if (index == 0)
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                    horizontal: 8,
+                                  ),
+                                  color: Colors.white,
+                                  child: const MarketPlaceTitleWithLogo(),
+                                ),
                               _CartPageScrollListItem(
                                 key: WidgetKeys.cartItemTile(index),
                                 item: item,
@@ -81,33 +89,6 @@ class _CartPageCartScrollList extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _MarketPlaceLabel extends StatelessWidget {
-  const _MarketPlaceLabel({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-      color: Colors.white,
-      child: Row(
-        key: WidgetKeys.cartMPProductSectionLabel,
-        children: [
-          SvgPicture.asset(
-            SvgImage.marketplaceIcon,
-            height: 24,
-            width: 24,
-          ),
-          const SizedBox(width: 2),
-          Text(
-            context.tr('Marketplace'),
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-        ],
-      ),
     );
   }
 }

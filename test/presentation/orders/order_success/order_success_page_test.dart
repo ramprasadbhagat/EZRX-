@@ -161,7 +161,21 @@ void main() {
       locator.registerLazySingleton(() => AutoRouterMock());
       locator
           .registerLazySingleton<MixpanelService>(() => MockMixpanelService());
+      mixpanelServiceMock = locator<MixpanelService>();
 
+      fakeOrderHistoryDetails =
+          await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
+      fakeOrderHistory = await ViewByItemLocalDataSource().getViewByItems();
+      fakeBundleItem = fakeOrderHistoryDetails.orderHistoryDetailsOrderItem
+          .firstWhere((e) => e.productType.typeBundle);
+      fakeMaterialItem =
+          fakeOrderHistoryDetails.orderHistoryDetailsOrderItem.firstWhere(
+        (e) => e.productType.typeMaterial && e.type.isMaterialTypeComm,
+      );
+    },
+  );
+  setUp(
+    () async {
       autoRouterMock = locator<AutoRouterMock>();
       customerCodeBlocMock = CustomerCodeBlocMock();
       authBlocMock = AuthBlocMock();
@@ -177,22 +191,8 @@ void main() {
       viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
       productImageBlocMock = ProductImageBlocMock();
       poAttachmentBlocMock = PoAttachmentBlocMock();
-      mixpanelServiceMock = locator<MixpanelService>();
-      paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
-      fakeOrderHistoryDetails =
-          await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
-      fakeOrderHistory = await ViewByItemLocalDataSource().getViewByItems();
-      fakeBundleItem = fakeOrderHistoryDetails.orderHistoryDetailsOrderItem
-          .firstWhere((e) => e.productType.typeBundle);
-      fakeMaterialItem =
-          fakeOrderHistoryDetails.orderHistoryDetailsOrderItem.firstWhere(
-        (e) => e.productType.typeMaterial && e.type.isMaterialTypeComm,
-      );
-    },
-  );
-  setUp(
-    () async {
       mockSalesOrgBloc = MockSalesOrgBloc();
+      paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
@@ -308,15 +308,12 @@ void main() {
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
-            isConfirming: false,
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              invoiceNumber: StringValue('fake-number'),
-              orderHistoryDetailsPaymentTerm:
-                  OrderHistoryDetailsPaymentTerm.empty().copyWith(
-                paymentTermCode: PaymentTermCode(''),
-                paymentTermDescription: PaymentTermDescription(''),
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsPaymentTerm:
+                    OrderHistoryDetailsPaymentTerm.empty(),
               ),
-            ),
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -334,10 +331,11 @@ void main() {
       (tester) async {
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              invoiceNumber: StringValue('fake-number'),
-              pOReference: POReference(''),
-            ),
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                pOReference: POReference(''),
+              )
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -356,15 +354,7 @@ void main() {
             .thenAnswer((invocation) => Future(() => null));
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
-            isConfirming: false,
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              invoiceNumber: StringValue('fake-number'),
-              orderHistoryDetailsPaymentTerm:
-                  OrderHistoryDetailsPaymentTerm.empty().copyWith(
-                paymentTermCode: PaymentTermCode(''),
-                paymentTermDescription: PaymentTermDescription(''),
-              ),
-            ),
+            orderHistoryDetailsList: [OrderHistoryDetails.empty()],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -395,17 +385,18 @@ void main() {
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
-            isConfirming: false,
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsOrderItem: [
-                OrderHistoryDetailsOrderItem.empty().copyWith(
-                  qty: quantity,
-                )
-              ],
-              totalValue: grandTotalValue,
-              orderValue: subTotalValueWithoutTax,
-              totalTax: totalTax,
-            ),
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [
+                  OrderHistoryDetailsOrderItem.empty().copyWith(
+                    qty: quantity,
+                  )
+                ],
+                totalValue: grandTotalValue,
+                orderValue: subTotalValueWithoutTax,
+                totalTax: totalTax,
+              )
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -476,17 +467,19 @@ void main() {
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsOrderItem: [
-                OrderHistoryDetailsOrderItem.empty().copyWith(
-                  qty: quantity,
-                  tax: vatValue,
-                  unitPrice: finalPrice,
-                )
-              ],
-              orderValue: subTotalValueWithoutTax,
-              totalTax: totalTax,
-            ),
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [
+                  OrderHistoryDetailsOrderItem.empty().copyWith(
+                    qty: quantity,
+                    tax: vatValue,
+                    unitPrice: finalPrice,
+                  )
+                ],
+                orderValue: subTotalValueWithoutTax,
+                totalTax: totalTax,
+              )
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -530,15 +523,17 @@ void main() {
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsOrderItem: [
-                OrderHistoryDetailsOrderItem.empty().copyWith(
-                  qty: quantity,
-                  unitPrice: finalPrice,
-                )
-              ],
-              orderValue: subTotalValueWithoutTax,
-            ),
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [
+                  OrderHistoryDetailsOrderItem.empty().copyWith(
+                    qty: quantity,
+                    unitPrice: finalPrice,
+                  )
+                ],
+                orderValue: subTotalValueWithoutTax,
+              )
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -584,15 +579,17 @@ void main() {
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsOrderItem: [
-                OrderHistoryDetailsOrderItem.empty().copyWith(
-                  qty: quantity,
-                )
-              ],
-              orderValue: subTotalValueWithoutTax,
-              totalTax: totalTax,
-            ),
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [
+                  OrderHistoryDetailsOrderItem.empty().copyWith(
+                    qty: quantity,
+                  )
+                ],
+                orderValue: subTotalValueWithoutTax,
+                totalTax: totalTax,
+              )
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -636,16 +633,18 @@ void main() {
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
             isConfirming: false,
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsOrderItem: [
-                OrderHistoryDetailsOrderItem.empty().copyWith(
-                  qty: quantity,
-                )
-              ],
-              totalValue: grandTotalValue,
-              orderValue: subTotalValueWithoutTax,
-              totalTax: totalTax,
-            ),
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [
+                  OrderHistoryDetailsOrderItem.empty().copyWith(
+                    qty: quantity,
+                  )
+                ],
+                totalValue: grandTotalValue,
+                orderValue: subTotalValueWithoutTax,
+                totalTax: totalTax,
+              )
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -705,9 +704,11 @@ void main() {
         ).thenAnswer((invocation) => Future(() => null));
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderNumber: fakeOrderNumber,
-            ),
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderNumber: fakeOrderNumber,
+              )
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -756,7 +757,7 @@ void main() {
               isConfirming: true,
             ),
             OrderSummaryState.initial().copyWith(
-              orderHistoryDetails: fakeOrderDetail,
+              orderHistoryDetailsList: [fakeOrderDetail],
             ),
           ],
         ),
@@ -856,8 +857,12 @@ void main() {
     group('Bundle -', () {
       setUp(() {
         when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith.orderHistoryDetails(
-            orderHistoryDetailsOrderItem: [fakeBundleItem],
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [fakeBundleItem],
+              )
+            ],
           ),
         );
       });
@@ -938,8 +943,12 @@ void main() {
     group('Material -', () {
       setUp(() {
         when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith.orderHistoryDetails(
-            orderHistoryDetailsOrderItem: [fakeMaterialItem],
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [fakeMaterialItem],
+              )
+            ],
           ),
         );
       });
@@ -948,7 +957,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
         expect(
-          find.byKey(WidgetKeys.orderSuccessItemsSection),
+          find.byKey(WidgetKeys.orderSuccessZPItemsSection),
           findsOneWidget,
         );
       });
@@ -961,25 +970,27 @@ void main() {
       final listPrice = MaterialPrice(100);
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsOrderItem: [
-              fakeMaterialItem.copyWith(
-                originPrice: listPrice.getValue(),
-                unitPrice: finalPrice.getValue(),
-                material: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('fake-material-1'),
-                ),
-                priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeIDSalesOrgConfigs,
-                  price: Price.empty().copyWith(
-                    lastPrice: listPrice,
-                    finalPrice: finalPrice,
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [
+                fakeMaterialItem.copyWith(
+                  originPrice: listPrice.getValue(),
+                  unitPrice: finalPrice.getValue(),
+                  material: MaterialInfo.empty().copyWith(
                     materialNumber: MaterialNumber('fake-material-1'),
                   ),
+                  priceAggregate: PriceAggregate.empty().copyWith(
+                    salesOrgConfig: fakeIDSalesOrgConfigs,
+                    price: Price.empty().copyWith(
+                      lastPrice: listPrice,
+                      finalPrice: finalPrice,
+                      materialNumber: MaterialNumber('fake-material-1'),
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            )
+          ],
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -991,7 +1002,7 @@ void main() {
       await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(
-        find.byKey(WidgetKeys.orderSuccessItemsSection),
+        find.byKey(WidgetKeys.orderSuccessZPItemsSection),
         findsOneWidget,
       );
       final listPriceStrikeThroughComponent =
@@ -1020,29 +1031,31 @@ void main() {
       final listPrice = MaterialPrice(100);
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsOrderItem: [
-              fakeMaterialItem.copyWith(
-                material: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('fake-material-1'),
-                ),
-                priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeMYSalesOrgConfigs,
-                  price: Price.empty().copyWith(
-                    lastPrice: listPrice,
-                    finalPrice: finalPrice,
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [
+                fakeMaterialItem.copyWith(
+                  material: MaterialInfo.empty().copyWith(
                     materialNumber: MaterialNumber('fake-material-1'),
                   ),
+                  priceAggregate: PriceAggregate.empty().copyWith(
+                    salesOrgConfig: fakeMYSalesOrgConfigs,
+                    price: Price.empty().copyWith(
+                      lastPrice: listPrice,
+                      finalPrice: finalPrice,
+                      materialNumber: MaterialNumber('fake-material-1'),
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            )
+          ],
         ),
       );
       await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(
-        find.byKey(WidgetKeys.orderSuccessItemsSection),
+        find.byKey(WidgetKeys.orderSuccessZPItemsSection),
         findsOneWidget,
       );
       final listPriceStrikeThroughComponent =
@@ -1071,29 +1084,31 @@ void main() {
       final listPrice = MaterialPrice(100);
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsOrderItem: [
-              fakeMaterialItem.copyWith(
-                material: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('fake-material-1'),
-                ),
-                priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeIDSalesOrgConfigs,
-                  price: Price.empty().copyWith(
-                    lastPrice: listPrice,
-                    finalPrice: finalPrice,
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [
+                fakeMaterialItem.copyWith(
+                  material: MaterialInfo.empty().copyWith(
                     materialNumber: MaterialNumber('fake-material-1'),
                   ),
+                  priceAggregate: PriceAggregate.empty().copyWith(
+                    salesOrgConfig: fakeIDSalesOrgConfigs,
+                    price: Price.empty().copyWith(
+                      lastPrice: listPrice,
+                      finalPrice: finalPrice,
+                      materialNumber: MaterialNumber('fake-material-1'),
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            )
+          ],
         ),
       );
       await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(
-        find.byKey(WidgetKeys.orderSuccessItemsSection),
+        find.byKey(WidgetKeys.orderSuccessZPItemsSection),
         findsOneWidget,
       );
       final listPriceStrikeThroughComponent =
@@ -1127,14 +1142,17 @@ void main() {
         ),
       );
       when(() => orderSummaryBlocMock.state).thenAnswer(
-        (invocation) =>
-            OrderSummaryState.initial().copyWith.orderHistoryDetails(
-                  requestedDeliveryDate: fakeRequestedDeliveryDate,
-                  referenceNotes: fakeReferenceNotes,
-                  orderHistoryDetailsPaymentTerm:
-                      fakeOrderHistoryDetailsPaymentTerm,
-                  orderHistoryDetailsSpecialInstructions: fakeInstruction,
-                ),
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              requestedDeliveryDate: fakeRequestedDeliveryDate,
+              referenceNotes: fakeReferenceNotes,
+              orderHistoryDetailsPaymentTerm:
+                  fakeOrderHistoryDetailsPaymentTerm,
+              orderHistoryDetailsSpecialInstructions: fakeInstruction,
+            )
+          ],
+        ),
       );
 
       await tester.pumpWidget(getWidget());
@@ -1191,10 +1209,13 @@ void main() {
         ),
       );
       when(() => orderSummaryBlocMock.state).thenAnswer(
-        (invocation) =>
-            OrderSummaryState.initial().copyWith.orderHistoryDetails(
-                  telephoneNumber: fakePhoneNumber,
-                ),
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              telephoneNumber: fakePhoneNumber,
+            )
+          ],
+        ),
       );
       when(() => additionalDetailsBlocMock.state).thenAnswer(
         (invocation) =>
@@ -1239,9 +1260,11 @@ void main() {
       ];
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsOrderItem: materialList,
-          ),
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: materialList,
+            )
+          ],
         ),
       );
       await tester.pumpWidget(getWidget());
@@ -1255,11 +1278,14 @@ void main() {
 
     testWidgets('Show Attachment Document Showing Less', (tester) async {
       when(() => orderSummaryBlocMock.state).thenAnswer(
-        (invocation) =>
-            OrderSummaryState.initial().copyWith.orderHistoryDetails(
-          orderHistoryDetailsPoDocuments: [
-            PoDocuments.empty(),
-            PoDocuments.empty(),
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsPoDocuments: [
+                PoDocuments.empty(),
+                PoDocuments.empty(),
+              ],
+            )
           ],
         ),
       );
@@ -1302,9 +1328,11 @@ void main() {
         () => orderSummaryBlocMock.state,
       ).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsPoDocuments: fakeFiles,
-          ),
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsPoDocuments: fakeFiles,
+            )
+          ],
           isExpanded: true,
         ),
       );
@@ -1350,9 +1378,11 @@ void main() {
         () => orderSummaryBlocMock.state,
       ).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsPoDocuments: fakeFiles,
-          ),
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsPoDocuments: fakeFiles,
+            )
+          ],
         ),
       );
 
@@ -1398,9 +1428,11 @@ void main() {
         () => orderSummaryBlocMock.state,
       ).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsPoDocuments: fakeFiles,
-          ),
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsPoDocuments: fakeFiles,
+            )
+          ],
         ),
       );
 
@@ -1440,11 +1472,13 @@ void main() {
     testWidgets('Show offer tag when material have offer', (tester) async {
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsOrderItem: [
-              fakeMaterialItem.copyWith(promoStatus: true),
-            ],
-          ),
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderItem: [
+                fakeMaterialItem.copyWith(promoStatus: true),
+              ],
+            )
+          ],
         ),
       );
       await tester.pumpWidget(getWidget());
@@ -1466,14 +1500,16 @@ void main() {
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsOrderItem: [
-                OrderHistoryDetailsOrderItem.empty().copyWith(
-                  qty: 2,
-                )
-              ],
-              totalDiscount: 21.39,
-            ),
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [
+                  OrderHistoryDetailsOrderItem.empty().copyWith(
+                    qty: 2,
+                  )
+                ],
+                totalDiscount: 21.39,
+              )
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -1503,7 +1539,7 @@ void main() {
     //     );
     //     when(() => orderSummaryBlocMock.state).thenReturn(
     //       OrderSummaryState.initial().copyWith(
-    //         orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+    //         orderHistoryDetailsList: OrderHistoryDetails.empty().copyWith(
     //           orderHistoryDetailsOrderItem: [
     //             OrderHistoryDetailsOrderItem.empty()
     //           ],
@@ -1529,23 +1565,25 @@ void main() {
         (tester) async {
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderValue: 516.0,
-            orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
-              OrderHistoryDetailsOrderItem.empty().copyWith(
-                principalData: PrincipalData.empty().copyWith(
-                  principalCode: PrincipalCode('0000101308'),
-                  principalName: PrincipalName('PROCTER AND GAMBLE'),
-                ),
-                materialNumber: MaterialNumber(''),
-                unitPrice: 17.2,
-                totalPrice: 516,
-                type: OrderItemType('Comm'),
-                productType: MaterialInfoType('material'),
-                hidePrice: true,
-              )
-            ],
-          ),
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderValue: 516.0,
+              orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+                OrderHistoryDetailsOrderItem.empty().copyWith(
+                  principalData: PrincipalData.empty().copyWith(
+                    principalCode: PrincipalCode('0000101308'),
+                    principalName: PrincipalName('PROCTER AND GAMBLE'),
+                  ),
+                  materialNumber: MaterialNumber(''),
+                  unitPrice: 17.2,
+                  totalPrice: 516,
+                  type: OrderItemType('Comm'),
+                  productType: MaterialInfoType('material'),
+                  hidePrice: true,
+                )
+              ],
+            )
+          ],
         ),
       );
       await tester.pumpWidget(getWidget());
@@ -1578,13 +1616,15 @@ void main() {
       ];
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderNumber: OrderNumber('Fake-Order-Number'),
-            orderValue: 990.0,
-            totalTax: 99.0,
-            totalValue: 1089.00,
-            orderHistoryDetailsOrderItem: bundleList,
-          ),
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderNumber: OrderNumber('Fake-Order-Number'),
+              orderValue: 990.0,
+              totalTax: 99.0,
+              totalValue: 1089.00,
+              orderHistoryDetailsOrderItem: bundleList,
+            )
+          ],
         ),
       );
 
@@ -1660,13 +1700,15 @@ void main() {
       ];
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderNumber: OrderNumber('Fake-Order-Number'),
-            orderValue: 990.0,
-            totalTax: 99.0,
-            totalValue: 1089.00,
-            orderHistoryDetailsOrderItem: bundleList,
-          ),
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              orderNumber: OrderNumber('Fake-Order-Number'),
+              orderValue: 990.0,
+              totalTax: 99.0,
+              totalValue: 1089.00,
+              orderHistoryDetailsOrderItem: bundleList,
+            )
+          ],
         ),
       );
 
@@ -1736,9 +1778,11 @@ void main() {
       (tester) async {
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
-            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsOrderItem: [fakeMaterialItem],
-            ),
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [fakeMaterialItem],
+              )
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -1760,7 +1804,7 @@ void main() {
       );
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: fakeOrderHistoryDetails,
+          orderHistoryDetailsList: [fakeOrderHistoryDetails],
         ),
       );
       await tester.pumpWidget(getWidget());
@@ -1830,24 +1874,27 @@ void main() {
       );
       when(() => orderSummaryBlocMock.state).thenAnswer(
         (invocation) => OrderSummaryState.initial().copyWith(
-          orderHistoryDetails: fakeOrderHistoryDetails.copyWith(
-            orderHistoryDetailsOrderItem: [
-              fakeMaterialItem.copyWith(
-                priceAggregate: PriceAggregate.empty().copyWith(
-                  salesOrgConfig: fakeVNSalesOrgConfigs,
-                  materialInfo: MaterialInfo.empty().copyWith(tax: 5),
-                  price: Price.empty().copyWith(
-                    finalPrice: MaterialPrice(100),
+          orderHistoryDetailsList: [
+            fakeOrderHistoryDetails.copyWith(
+              orderHistoryDetailsOrderItem: [
+                fakeMaterialItem.copyWith(
+                  priceAggregate: PriceAggregate.empty().copyWith(
+                    salesOrgConfig: fakeVNSalesOrgConfigs,
+                    materialInfo: MaterialInfo.empty().copyWith(tax: 5),
+                    price: Price.empty().copyWith(
+                      finalPrice: MaterialPrice(100),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            )
+          ],
         ),
       );
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
-      final orderItemsSection = find.byKey(WidgetKeys.orderSuccessItemsSection);
+      final orderItemsSection =
+          find.byKey(WidgetKeys.orderSuccessZPItemsSection);
       await tester.scrollUntilVisible(orderItemsSection, -500);
       expect(orderItemsSection, findsOneWidget);
       final itemTax = find.byType(ItemTax);
@@ -1877,10 +1924,13 @@ void main() {
         ),
       );
       when(() => orderSummaryBlocMock.state).thenAnswer(
-        (invocation) =>
-            OrderSummaryState.initial().copyWith.orderHistoryDetails(
-                  referenceNotes: 'fake-reference-notes',
-                ),
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              referenceNotes: 'fake-reference-notes',
+            )
+          ],
+        ),
       );
 
       when(() => paymentCustomerInformationBlocMock.state).thenReturn(
@@ -1911,10 +1961,13 @@ void main() {
         ),
       );
       when(() => orderSummaryBlocMock.state).thenAnswer(
-        (invocation) =>
-            OrderSummaryState.initial().copyWith.orderHistoryDetails(
-                  referenceNotes: 'fake-reference-notes',
-                ),
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              referenceNotes: 'fake-reference-notes',
+            )
+          ],
+        ),
       );
 
       await tester.pumpWidget(getWidget());
@@ -1930,10 +1983,13 @@ void main() {
         ),
       );
       when(() => orderSummaryBlocMock.state).thenAnswer(
-        (invocation) =>
-            OrderSummaryState.initial().copyWith.orderHistoryDetails(
-                  referenceNotes: 'fake-reference-notes',
-                ),
+        (invocation) => OrderSummaryState.initial().copyWith(
+          orderHistoryDetailsList: [
+            OrderHistoryDetails.empty().copyWith(
+              referenceNotes: 'fake-reference-notes',
+            )
+          ],
+        ),
       );
 
       await tester.pumpWidget(getWidget());
@@ -1945,14 +2001,14 @@ void main() {
   testWidgets('Bonus Stock tag', (tester) async {
     when(() => orderSummaryBlocMock.state).thenAnswer(
       (invocation) => OrderSummaryState.initial().copyWith(
-        orderHistoryDetails: fakeOrderHistoryDetails,
+        orderHistoryDetailsList: [fakeOrderHistoryDetails],
       ),
     );
 
     await tester.pumpWidget(getWidget());
     await tester.pump();
     expect(
-      find.byKey(WidgetKeys.orderSuccessItemsSection),
+      find.byKey(WidgetKeys.orderSuccessZPItemsSection),
       findsOneWidget,
     );
     await tester.fling(
@@ -1987,25 +2043,27 @@ void main() {
       (tester) async {
     when(() => orderSummaryBlocMock.state).thenAnswer(
       (invocation) => OrderSummaryState.initial().copyWith(
-        orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-          orderValue: 516.0,
-          orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
-            OrderHistoryDetailsOrderItem.empty().copyWith(
-              principalData: PrincipalData.empty().copyWith(
-                principalCode: PrincipalCode('0000101308'),
-                principalName: PrincipalName('PROCTER AND GAMBLE'),
+        orderHistoryDetailsList: [
+          OrderHistoryDetails.empty().copyWith(
+            orderValue: 516.0,
+            orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+              OrderHistoryDetailsOrderItem.empty().copyWith(
+                principalData: PrincipalData.empty().copyWith(
+                  principalCode: PrincipalCode('0000101308'),
+                  principalName: PrincipalName('PROCTER AND GAMBLE'),
+                ),
+                materialNumber: MaterialNumber(''),
+                originPrice: 15.0,
+                unitPrice: 17.2,
+                totalPrice: 516,
+                type: OrderItemType('Comm'),
+                productType: MaterialInfoType('material'),
+                hidePrice: true,
+                isCounterOffer: true,
               ),
-              materialNumber: MaterialNumber(''),
-              originPrice: 15.0,
-              unitPrice: 17.2,
-              totalPrice: 516,
-              type: OrderItemType('Comm'),
-              productType: MaterialInfoType('material'),
-              hidePrice: true,
-              isCounterOffer: true,
-            ),
-          ],
-        ),
+            ],
+          )
+        ],
       ),
     );
     await tester.pumpWidget(getWidget());
@@ -2054,9 +2112,11 @@ void main() {
     ];
     when(() => orderSummaryBlocMock.state).thenReturn(
       OrderSummaryState.initial().copyWith(
-        orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-          orderHistoryDetailsOrderItem: bundleList,
-        ),
+        orderHistoryDetailsList: [
+          OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: bundleList,
+          )
+        ],
       ),
     );
     await tester.pumpWidget(getWidget());
@@ -2093,26 +2153,28 @@ void main() {
       (invocation) => OrderSummaryState.initial().copyWith(
         salesOrgConfig: fakeVNSalesOrgConfigs,
         salesOrganisation: fakeVNSalesOrganisation,
-        orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-          orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
-            OrderHistoryDetailsOrderItem.empty().copyWith(
-              principalData: PrincipalData.empty().copyWith(
-                principalCode: PrincipalCode('0000101308'),
-                principalName: PrincipalName('PROCTER AND GAMBLE'),
+        orderHistoryDetailsList: [
+          OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+              OrderHistoryDetailsOrderItem.empty().copyWith(
+                principalData: PrincipalData.empty().copyWith(
+                  principalCode: PrincipalCode('0000101308'),
+                  principalName: PrincipalName('PROCTER AND GAMBLE'),
+                ),
+                materialNumber: MaterialNumber(''),
+                qty: quantity,
+                unitPrice: unitPrice,
+                type: OrderItemType('Comm'),
+                productType: MaterialInfoType('material'),
               ),
-              materialNumber: MaterialNumber(''),
-              qty: quantity,
-              unitPrice: unitPrice,
-              type: OrderItemType('Comm'),
-              productType: MaterialInfoType('material'),
-            ),
-          ],
-        ),
+            ],
+          )
+        ],
       ),
     );
     await tester.pumpWidget(getWidget());
     await tester.pumpAndSettle();
-    final orderItemsSection = find.byKey(WidgetKeys.orderSuccessItemsSection);
+    final orderItemsSection = find.byKey(WidgetKeys.orderSuccessZPItemsSection);
     await tester.scrollUntilVisible(orderItemsSection, -500);
     await tester.pump(const Duration(seconds: 1));
     expect(orderItemsSection, findsOneWidget);
@@ -2135,15 +2197,17 @@ void main() {
     ];
     when(() => orderSummaryBlocMock.state).thenReturn(
       OrderSummaryState.initial().copyWith(
-        orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-          orderHistoryDetailsOrderItem: materialList,
-        ),
+        orderHistoryDetailsList: [
+          OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: materialList,
+          )
+        ],
       ),
     );
     await tester.pumpWidget(getWidget());
     await tester.pumpAndSettle();
 
-    final material = find.byKey(WidgetKeys.orderSuccessItemsSection);
+    final material = find.byKey(WidgetKeys.orderSuccessZPItemsSection);
     final orderItemsScrollList = find.byKey(WidgetKeys.scrollList);
 
     await tester.dragUntilVisible(

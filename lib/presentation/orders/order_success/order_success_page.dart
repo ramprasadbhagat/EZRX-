@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -25,6 +26,8 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
@@ -154,6 +157,10 @@ class _BodyContent extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isConfirming != current.isConfirming,
       builder: (context, state) {
+        final allItems = state.orderHistoryDetailsList.allItems;
+        final zpItems = allItems.zpItemOnly;
+        final mpItems = allItems.mpItemOnly;
+
         return state.isConfirming
             ? LoadingShimmer.logo(
                 key: WidgetKeys.loaderImage,
@@ -164,16 +171,19 @@ class _BodyContent extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 children: [
                   _OrderSuccessMessage(
-                    orderHistoryDetails: state.orderHistoryDetails,
+                    orderStatus: state.orderHistoryDetails.processingStatus,
                   ),
-                  if (!state.isOrderHistoryDetailsEmpty)
+                  if (state.orderHistoryDetailsList.isNotEmpty)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
                           height: 20.0,
                         ),
-                        _OrderDetailHeader(),
+                        _OrderDetailHeader(
+                          orderHeader: state.orderHistoryDetails,
+                          orderHistoryList: state.orderHistoryDetailsList,
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 16.0,
@@ -196,7 +206,7 @@ class _BodyContent extends StatelessWidget {
                           thickness: 0.2,
                         ),
                         _OrderSummary(
-                          orderHistoryDetails: state.orderHistoryDetails,
+                          orderHistoryDetailList: state.orderHistoryDetailsList,
                         ),
                         const Divider(
                           indent: 0,
@@ -210,7 +220,7 @@ class _BodyContent extends StatelessWidget {
                             horizontal: 20.0,
                           ),
                           child: Text(
-                            '${context.tr('Your items')}(${context.read<OrderSummaryBloc>().state.orderHistoryDetails.orderHistoryDetailsOrderItem.length})',
+                            '${context.tr('Your items')}(${allItems.length})',
                             key: WidgetKeys.orderSuccessItemTotalQty,
                             style: Theme.of(context)
                                 .textTheme
@@ -221,17 +231,32 @@ class _BodyContent extends StatelessWidget {
                           ),
                         ),
                         _BundleItemSection(
-                          bundleItems: state
-                              .orderHistoryDetails
-                              .orderHistoryDetailsOrderItem
-                              .bundleItemDetailsList,
+                          bundleItems: zpItems.bundleItemDetailsList,
                         ),
                         _MaterialItemSection(
-                          orderItems: state
-                              .orderHistoryDetails
-                              .orderHistoryDetailsOrderItem
-                              .materialItemDetailsList,
+                          orderItems: zpItems.materialItemDetailsList,
                         ),
+                        if (zpItems.isNotEmpty && mpItems.isNotEmpty) ...[
+                          const SizedBox(height: 12),
+                          const Divider(
+                            height: 24,
+                            thickness: 0.4,
+                          ),
+                        ],
+                        if (mpItems.isNotEmpty) ...[
+                          const SizedBox(height: 12),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: MarketPlaceTitleWithLogo(),
+                          ),
+                          _BundleItemSection(
+                            bundleItems: mpItems.bundleItemDetailsList,
+                          ),
+                          _MaterialItemSection(
+                            orderItems: mpItems.materialItemDetailsList,
+                            isMarketPlace: true,
+                          ),
+                        ],
                       ],
                     ),
                 ],

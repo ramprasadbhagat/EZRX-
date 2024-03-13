@@ -23,6 +23,8 @@ SubmitOrderResponseDto _$SubmitOrderResponseDtoFromJson(
 mixin _$SubmitOrderResponseDto {
   @JsonKey(name: 'SalesDocument', defaultValue: '')
   String get salesDocument => throw _privateConstructorUsedError;
+  @JsonKey(name: 'SalesDocuments', defaultValue: <String>[])
+  List<String> get salesDocuments => throw _privateConstructorUsedError;
   @JsonKey(name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
   List<SubmitOrderResponseMessageDto> get messages =>
       throw _privateConstructorUsedError;
@@ -40,10 +42,12 @@ abstract class $SubmitOrderResponseDtoCopyWith<$Res> {
       _$SubmitOrderResponseDtoCopyWithImpl<$Res, SubmitOrderResponseDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'SalesDocument', defaultValue: '')
-          String salesDocument,
-      @JsonKey(name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
-          List<SubmitOrderResponseMessageDto> messages});
+      {@JsonKey(name: 'SalesDocument', defaultValue: '') String salesDocument,
+      @JsonKey(name: 'SalesDocuments', defaultValue: <String>[])
+      List<String> salesDocuments,
+      @JsonKey(
+          name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
+      List<SubmitOrderResponseMessageDto> messages});
 }
 
 /// @nodoc
@@ -61,6 +65,7 @@ class _$SubmitOrderResponseDtoCopyWithImpl<$Res,
   @override
   $Res call({
     Object? salesDocument = null,
+    Object? salesDocuments = null,
     Object? messages = null,
   }) {
     return _then(_value.copyWith(
@@ -68,6 +73,10 @@ class _$SubmitOrderResponseDtoCopyWithImpl<$Res,
           ? _value.salesDocument
           : salesDocument // ignore: cast_nullable_to_non_nullable
               as String,
+      salesDocuments: null == salesDocuments
+          ? _value.salesDocuments
+          : salesDocuments // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       messages: null == messages
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
@@ -85,10 +94,12 @@ abstract class _$$_SubmitOrderResponseDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'SalesDocument', defaultValue: '')
-          String salesDocument,
-      @JsonKey(name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
-          List<SubmitOrderResponseMessageDto> messages});
+      {@JsonKey(name: 'SalesDocument', defaultValue: '') String salesDocument,
+      @JsonKey(name: 'SalesDocuments', defaultValue: <String>[])
+      List<String> salesDocuments,
+      @JsonKey(
+          name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
+      List<SubmitOrderResponseMessageDto> messages});
 }
 
 /// @nodoc
@@ -104,6 +115,7 @@ class __$$_SubmitOrderResponseDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesDocument = null,
+    Object? salesDocuments = null,
     Object? messages = null,
   }) {
     return _then(_$_SubmitOrderResponseDto(
@@ -111,6 +123,10 @@ class __$$_SubmitOrderResponseDtoCopyWithImpl<$Res>
           ? _value.salesDocument
           : salesDocument // ignore: cast_nullable_to_non_nullable
               as String,
+      salesDocuments: null == salesDocuments
+          ? _value._salesDocuments
+          : salesDocuments // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       messages: null == messages
           ? _value._messages
           : messages // ignore: cast_nullable_to_non_nullable
@@ -124,10 +140,14 @@ class __$$_SubmitOrderResponseDtoCopyWithImpl<$Res>
 class _$_SubmitOrderResponseDto extends _SubmitOrderResponseDto {
   const _$_SubmitOrderResponseDto(
       {@JsonKey(name: 'SalesDocument', defaultValue: '')
-          required this.salesDocument,
-      @JsonKey(name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
-          required final List<SubmitOrderResponseMessageDto> messages})
-      : _messages = messages,
+      required this.salesDocument,
+      @JsonKey(name: 'SalesDocuments', defaultValue: <String>[])
+      required final List<String> salesDocuments,
+      @JsonKey(
+          name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
+      required final List<SubmitOrderResponseMessageDto> messages})
+      : _salesDocuments = salesDocuments,
+        _messages = messages,
         super._();
 
   factory _$_SubmitOrderResponseDto.fromJson(Map<String, dynamic> json) =>
@@ -136,6 +156,15 @@ class _$_SubmitOrderResponseDto extends _SubmitOrderResponseDto {
   @override
   @JsonKey(name: 'SalesDocument', defaultValue: '')
   final String salesDocument;
+  final List<String> _salesDocuments;
+  @override
+  @JsonKey(name: 'SalesDocuments', defaultValue: <String>[])
+  List<String> get salesDocuments {
+    if (_salesDocuments is EqualUnmodifiableListView) return _salesDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_salesDocuments);
+  }
+
   final List<SubmitOrderResponseMessageDto> _messages;
   @override
   @JsonKey(name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
@@ -147,7 +176,7 @@ class _$_SubmitOrderResponseDto extends _SubmitOrderResponseDto {
 
   @override
   String toString() {
-    return 'SubmitOrderResponseDto(salesDocument: $salesDocument, messages: $messages)';
+    return 'SubmitOrderResponseDto(salesDocument: $salesDocument, salesDocuments: $salesDocuments, messages: $messages)';
   }
 
   @override
@@ -157,12 +186,17 @@ class _$_SubmitOrderResponseDto extends _SubmitOrderResponseDto {
             other is _$_SubmitOrderResponseDto &&
             (identical(other.salesDocument, salesDocument) ||
                 other.salesDocument == salesDocument) &&
+            const DeepCollectionEquality()
+                .equals(other._salesDocuments, _salesDocuments) &&
             const DeepCollectionEquality().equals(other._messages, _messages));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, salesDocument,
+  int get hashCode => Object.hash(
+      runtimeType,
+      salesDocument,
+      const DeepCollectionEquality().hash(_salesDocuments),
       const DeepCollectionEquality().hash(_messages));
 
   @JsonKey(ignore: true)
@@ -182,10 +216,14 @@ class _$_SubmitOrderResponseDto extends _SubmitOrderResponseDto {
 
 abstract class _SubmitOrderResponseDto extends SubmitOrderResponseDto {
   const factory _SubmitOrderResponseDto(
-      {@JsonKey(name: 'SalesDocument', defaultValue: '')
+          {@JsonKey(name: 'SalesDocument', defaultValue: '')
           required final String salesDocument,
-      @JsonKey(name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
-          required final List<SubmitOrderResponseMessageDto> messages}) = _$_SubmitOrderResponseDto;
+          @JsonKey(name: 'SalesDocuments', defaultValue: <String>[])
+          required final List<String> salesDocuments,
+          @JsonKey(
+              name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
+          required final List<SubmitOrderResponseMessageDto> messages}) =
+      _$_SubmitOrderResponseDto;
   const _SubmitOrderResponseDto._() : super._();
 
   factory _SubmitOrderResponseDto.fromJson(Map<String, dynamic> json) =
@@ -194,6 +232,9 @@ abstract class _SubmitOrderResponseDto extends SubmitOrderResponseDto {
   @override
   @JsonKey(name: 'SalesDocument', defaultValue: '')
   String get salesDocument;
+  @override
+  @JsonKey(name: 'SalesDocuments', defaultValue: <String>[])
+  List<String> get salesDocuments;
   @override
   @JsonKey(name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
   List<SubmitOrderResponseMessageDto> get messages;

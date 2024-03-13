@@ -3,7 +3,6 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -28,8 +27,9 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
@@ -152,7 +152,8 @@ class _CartPageState extends State<CartPage> {
             });
             //updated stock is needed for determining isProductDeterminationFailed
             //if product determination is failed user will be poped from checkout page to cart page
-            if (state.isProductDeterminationFailed && context.router.current.name == CheckoutPageRoute.name) {
+            if (state.isProductDeterminationFailed &&
+                context.router.current.name == CheckoutPageRoute.name) {
               context.router.navigateBack();
             }
           },

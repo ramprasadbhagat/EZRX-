@@ -101,12 +101,13 @@ void main() {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.queryMutation.submitOrder(),
+              'query': remoteDataSource.queryMutation.submitOrder(true),
               'variables': variables,
             }),
           );
           final result = await remoteDataSource.submitOrder(
             orderEncryption: encryptedData,
+            enableMarketPlace: true,
           );
 
           expect(

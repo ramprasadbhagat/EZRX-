@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
@@ -10,7 +11,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details.freezed.dart';
 
@@ -84,8 +84,6 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         isMarketPlace: false,
       );
 
-  double get grandTotalWithTax => orderValue + totalTax;
-
   bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
 
   List<MaterialQueryInfo> get allItemQueryInfo => items
@@ -128,9 +126,29 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         (previous, current) => previous + current.qty,
       );
 
+  // Mapping bundle data in order success page
+  OrderHistoryDetails copyWithMaterialInfo({
+    required List<PriceAggregate> priceAggregates,
+  }) =>
+      copyWith(
+        orderHistoryDetailsOrderItem: orderHistoryDetailsOrderItem.map((e) {
+          final priceAggregate = priceAggregates.firstWhere(
+            (element) =>
+                element.getMaterialNumber == MaterialNumber(e.parentId),
+            orElse: () => PriceAggregate.empty(),
+          );
+
+          return e.copyWith(
+            material: MaterialInfo.empty().copyWith(
+              materialNumber: priceAggregate.getMaterialNumber,
+              bundle: priceAggregate.bundle,
+            ),
+          );
+        }).toList(),
+      );
+
   OrderHistoryDetails copyWithStock({
     required List<MaterialStockInfo> stockInfoList,
-    required List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
     required List<PriceAggregate> priceAggregate,
     required SalesOrganisationConfigs salesOrganisationConfigs,
   }) =>
@@ -140,6 +158,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
               (e) => e.copyWith(
                 materialStockInfo: stockInfoList.firstWhere(
                   (element) => element.materialNumber == e.materialNumber,
+                  orElse: () => MaterialStockInfo.empty(),
                 ),
                 priceAggregate: priceAggregate
                     .firstWhere(
@@ -147,48 +166,40 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
                           element.getMaterialNumber == e.materialNumber,
                       orElse: () => PriceAggregate.empty(),
                     )
-                    .copyWith(
-                      salesOrgConfig: salesOrganisationConfigs,
-                    ),
+                    .copyWith(salesOrgConfig: salesOrganisationConfigs),
               ),
             )
             .toList(),
       );
 
-  OrderHistoryDetailsOrderItem getOrderHistoryDetailsOrderItem({
-    required MaterialNumber materialNumber,
-  }) {
-    return orderHistoryDetailsOrderItem
-        .where((element) => element.materialNumber == materialNumber)
-        .first;
-  }
-
   double subTotal(bool showSubTotalExcludingTax) => showSubTotalExcludingTax
       ? orderValue //order value is excl tax
       : totalValue; //total value is incl tax
-
-  String get totalTaxPercentage {
-    /// Retrieves the total tax percentage for the entire order by extracting it from the first order item
-    /// that includes tax. This approach uses the first order item with a positive tax percentage,
-    /// assuming that all items with tax share the same tax rate during order creation.
-    /// The [orElse] parameter ensures a fallback to an empty order item if no taxable item is found.
-    final firstOrderItemWithTax = orderHistoryDetailsOrderItem.firstWhere(
-      (element) => element.taxPercentage > 0,
-      orElse: () => OrderHistoryDetailsOrderItem.empty(),
-    );
-
-    return firstOrderItemWithTax.isNotEmpty
-        ? StringUtils.displayNumberWithDecimal(
-            firstOrderItemWithTax.taxPercentage,
-          )
-        : '';
-  }
-
-  bool get orderContainsMaterialsWithInvalidPrice =>
-      orderHistoryDetailsOrderItem.any((element) => element.hasInValidPrice);
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetails> {
+  double get grandTotal => fold<double>(0, (sum, e) => sum + e.totalValue);
+
+  double get totalSaving => fold<double>(0, (sum, e) => sum + e.totalDiscount);
+
+  double get manualFee => fold<double>(0, (sum, e) => sum + e.manualFee);
+
+  double get smallOrderFee => fold<double>(0, (sum, e) => sum + e.deliveryFee);
+
+  double get totalTax => fold<double>(0, (sum, e) => sum + e.totalTax);
+
+  double subtotal(bool showSubTotalExcludingTax) =>
+      fold<double>(0, (sum, e) => sum + e.subTotal(showSubTotalExcludingTax));
+
+  List<OrderHistoryDetailsOrderItem> get allItems =>
+      map((e) => e.orderHistoryDetailsOrderItem).flattened.toList();
+
+  List<OrderHistoryDetails> get zpOrderOnly =>
+      where((e) => !e.isMarketPlace).toList();
+
+  List<OrderHistoryDetails> get mpOrderOnly =>
+      where((e) => e.isMarketPlace).toList();
+
   List<ViewByOrdersGroup> get getViewByOrderGroupList {
     return List<OrderHistoryDetails>.from(this)
         .groupListsBy((item) => item.createdDate)

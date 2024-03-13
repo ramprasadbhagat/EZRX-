@@ -50,6 +50,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required bool promoStatus,
     required bool isCounterOffer,
     required bool hidePrice,
+    required bool isMarketPlace,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -83,15 +84,13 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         promoStatus: false,
         isCounterOffer: false,
         hidePrice: false,
+        isMarketPlace: false,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(
         orderHistoryDetailsOrderItem: this,
       );
 
-  String get batchAndExpiryDate => '$batch:${expiryDate.dateString}';
-  String get deliveryDate =>
-      plannedDeliveryDate.isNotEmpty ? plannedDeliveryDate.dateString : '-';
   OrderHistoryDetailsOrderItem copyWithTaxCal({
     required SalesOrganisationConfigs salesOrganisationConfigs,
   }) =>
@@ -135,9 +134,6 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   bool get showOfferTag => !isBonus && promoStatus;
 
   bool get isBonus => type.isMaterialTypeBonus && unitPrice == 0;
-
-  bool get isPnGMaterial =>
-      type.isMaterialTypeComm && principalData.principalCode.isPnG;
 
   bool get batchNumHasData => batch.isValid() || expiryDate.isNotEmpty;
 
@@ -201,8 +197,6 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
           governmentMaterialCode,
       ].join(' | ');
 
-  bool get isNotEmpty => this != OrderHistoryDetailsOrderItem.empty();
-
   bool get showItemTax =>
       priceAggregate.showTaxBreakDown && !type.isMaterialTypeBonus;
 
@@ -212,6 +206,15 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
 extension ViewByOrderDetailsListExtension
     on List<OrderHistoryDetailsOrderItem> {
+  List<OrderHistoryDetailsOrderItem> get zpItemOnly =>
+      where((e) => !e.isMarketPlace).toList();
+
+  List<OrderHistoryDetailsOrderItem> get mpItemOnly =>
+      where((e) => e.isMarketPlace).toList();
+
+  bool get containsMaterialsWithInvalidPrice =>
+      any((element) => element.hasInValidPrice);
+
   List<ViewByOrdersGroup> get materialItemDetailsList {
     return List<OrderHistoryDetailsOrderItem>.from(this)
         .where((element) => element.productType.typeMaterial)

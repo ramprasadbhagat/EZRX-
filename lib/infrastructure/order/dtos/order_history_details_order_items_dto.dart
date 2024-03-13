@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_details_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_tender_contract_details_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -74,6 +75,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required bool isCounterOffer,
     @JsonKey(name: 'HidePrice', defaultValue: false)
         required bool hidePrice,
+    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required bool isMarketPlace,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
     OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
@@ -118,6 +121,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       promosStatus: orderHistoryDetailsOrderItem.promoStatus,
       isCounterOffer: orderHistoryDetailsOrderItem.isCounterOffer,
       hidePrice: orderHistoryDetailsOrderItem.hidePrice,
+      isMarketPlace: orderHistoryDetailsOrderItem.isMarketPlace,
     );
   }
 
@@ -158,6 +162,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       promoStatus: promosStatus,
       isCounterOffer: isCounterOffer,
       hidePrice: hidePrice,
+      isMarketPlace: isMarketPlace,
     );
   }
 

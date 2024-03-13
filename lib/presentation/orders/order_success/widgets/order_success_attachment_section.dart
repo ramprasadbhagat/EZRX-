@@ -22,7 +22,7 @@ class OrderSuccessAttachmentSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          flex: 2,
+          flex: 3,
           child: Text(
             '${context.tr('Attachments')}:',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -31,7 +31,7 @@ class OrderSuccessAttachmentSection extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 3,
+          flex: 4,
           child: context
                   .read<OrderSummaryBloc>()
                   .state

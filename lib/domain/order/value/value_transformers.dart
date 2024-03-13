@@ -115,11 +115,11 @@ String queueStateToOrderConfirmationIcon(bool isInQueue) =>
     isInQueue ? SvgImage.orderInQueue : SvgImage.orderCreated;
 
 String queueStateToOrderConfirmationPrefixMessage(bool isInQueue) => isInQueue
-    ? 'Your order is being created,please do not place a duplicate order while this order is being processed. We will send a confirmation email to'
+    ? 'Currently SAP system is under maintenance. Your order has been placed on eZRx+ but has not yet been made on SAP, and it will be queued in the SAP system to be created. We’ll send a confirmation to'
     : 'We’ll send a confirmation to';
 
 String queueStateToOrderConfirmationSuffixMessage(bool isInQueue) => isInQueue
-    ? 'once your order is successfully created.'
+    ? 'once your order is created in SAP.'
     : 'once your order has been confirmed';
 
 String getOrderNumberPrefix(bool value) => value ? 'Queue' : 'Order';

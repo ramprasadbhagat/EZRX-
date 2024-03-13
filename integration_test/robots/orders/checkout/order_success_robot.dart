@@ -138,7 +138,7 @@ class OrderSuccessRobot extends CommonRobot {
   }
 
   Future<void> startVerifyMaterial({required int index}) async {
-    final materialSection = find.byKey(WidgetKeys.orderSuccessItemsSection);
+    final materialSection = find.byKey(WidgetKeys.orderSuccessZPItemsSection);
     await scrollEnsureFinderVisible(materialSection);
     await tester.pumpUntilVisible(_material(index));
     await scrollEnsureFinderVisible(_material(index));

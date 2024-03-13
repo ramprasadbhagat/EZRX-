@@ -48,6 +48,7 @@ mixin _$OrderHistoryDetailsOrderItem {
   bool get promoStatus => throw _privateConstructorUsedError;
   bool get isCounterOffer => throw _privateConstructorUsedError;
   bool get hidePrice => throw _privateConstructorUsedError;
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsOrderItemCopyWith<OrderHistoryDetailsOrderItem>
@@ -91,7 +92,8 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       MaterialInfo material,
       bool promoStatus,
       bool isCounterOffer,
-      bool hidePrice});
+      bool hidePrice,
+      bool isMarketPlace});
 
   $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
       get tenderContractDetails;
@@ -145,6 +147,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? promoStatus = null,
     Object? isCounterOffer = null,
     Object? hidePrice = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -263,6 +266,10 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -355,7 +362,8 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
       MaterialInfo material,
       bool promoStatus,
       bool isCounterOffer,
-      bool hidePrice});
+      bool hidePrice,
+      bool isMarketPlace});
 
   @override
   $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
@@ -414,6 +422,7 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
     Object? promoStatus = null,
     Object? isCounterOffer = null,
     Object? hidePrice = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItem(
       type: null == type
@@ -532,6 +541,10 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
               as bool,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -568,7 +581,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
       required this.material,
       required this.promoStatus,
       required this.isCounterOffer,
-      required this.hidePrice})
+      required this.hidePrice,
+      required this.isMarketPlace})
       : _details = details,
         super._();
 
@@ -636,10 +650,12 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   final bool isCounterOffer;
   @override
   final bool hidePrice;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice)';
+    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -700,7 +716,9 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
             (identical(other.isCounterOffer, isCounterOffer) ||
                 other.isCounterOffer == isCounterOffer) &&
             (identical(other.hidePrice, hidePrice) ||
-                other.hidePrice == hidePrice));
+                other.hidePrice == hidePrice) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
@@ -734,7 +752,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
         material,
         promoStatus,
         isCounterOffer,
-        hidePrice
+        hidePrice,
+        isMarketPlace
       ]);
 
   @JsonKey(ignore: true)
@@ -777,7 +796,8 @@ abstract class _OrderHistoryDetailsOrderItem
       required final MaterialInfo material,
       required final bool promoStatus,
       required final bool isCounterOffer,
-      required final bool hidePrice}) = _$_OrderHistoryDetailsOrderItem;
+      required final bool hidePrice,
+      required final bool isMarketPlace}) = _$_OrderHistoryDetailsOrderItem;
   _OrderHistoryDetailsOrderItem._() : super._();
 
   @override
@@ -838,6 +858,8 @@ abstract class _OrderHistoryDetailsOrderItem
   bool get isCounterOffer;
   @override
   bool get hidePrice;
+  @override
+  bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderItemCopyWith<_$_OrderHistoryDetailsOrderItem>
