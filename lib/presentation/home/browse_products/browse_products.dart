@@ -3,19 +3,13 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/material_loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
+import 'package:ezrxmobile/presentation/home/widgets/product_card.dart';
+import 'package:ezrxmobile/presentation/home/widgets/product_loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -103,19 +97,39 @@ class BrowseProduct extends StatelessWidget {
                               : _navigateForMoreProducts(context),
                         ),
                       ),
-                      state.isFetching
-                          ? const _BrowseProductLoadingShimmer(
-                              key: WidgetKeys.browseProductLoadingShimmer,
-                            )
-                          : SizedBox(
-                              height: 300,
-                              child: ListView(
+                      SizedBox(
+                        height: 300,
+                        child: state.isFetching
+                            ? const ProductLoadingShimmer(
+                                key: WidgetKeys.browseProductLoadingShimmer,
+                              )
+                            : ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: state.materialList
-                                    .map((e) => _BrowseProductCard(product: e))
+                                    .map(
+                                      (e) => ProductCard(
+                                        material: e,
+                                        widgetKey:
+                                            WidgetKeys.browseProductsList,
+                                        section: 'Browse products',
+                                        onFavouriteTap: () {
+                                          context.read<MaterialListBloc>().add(
+                                                e.isFavourite
+                                                    ? MaterialListEvent
+                                                        .deleteFavourite(
+                                                        item: e,
+                                                      )
+                                                    : MaterialListEvent
+                                                        .addFavourite(
+                                                        item: e,
+                                                      ),
+                                              );
+                                        },
+                                      ),
+                                    )
                                     .toList(),
                               ),
-                            ),
+                      ),
                     ],
                   )
                 : const SizedBox.shrink();
@@ -134,74 +148,5 @@ class BrowseProduct extends StatelessWidget {
           );
     }
     context.navigateTo(const ProductsTabRoute());
-  }
-}
-
-class _BrowseProductCard extends StatelessWidget {
-  final MaterialInfo product;
-
-  const _BrowseProductCard({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: Responsive.isLargerThan(context, Breakpoint.desktop)
-          ? MediaQuery.of(context).size.width * 0.25
-          : MediaQuery.of(context).size.width * 0.45,
-      child: MaterialGridItem(
-        key: WidgetKeys.browseProductsList,
-        materialInfo: product,
-        onTap: () => _productOnTap(context, product),
-        onFavouriteTap: () {
-          context.read<MaterialListBloc>().add(
-                product.isFavourite
-                    ? MaterialListEvent.deleteFavourite(
-                        item: product,
-                      )
-                    : MaterialListEvent.addFavourite(
-                        item: product,
-                      ),
-              );
-        },
-      ),
-    );
-  }
-
-  void _productOnTap(BuildContext context, MaterialInfo materialInfo) {
-    trackMixpanelEvent(
-      MixpanelEvents.productItemClicked,
-      props: {
-        MixpanelProps.clickAt:
-            RouterUtils.buildRouteTrackingName(context.router.currentPath),
-        MixpanelProps.isBundle: false,
-        MixpanelProps.productName: materialInfo.displayDescription,
-        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
-        MixpanelProps.productManufacturer: materialInfo.getManufactured,
-        MixpanelProps.section: 'Browse products',
-      },
-    );
-
-    context.router.push(ProductDetailsPageRoute(materialInfo: materialInfo));
-  }
-}
-
-class _BrowseProductLoadingShimmer extends StatelessWidget {
-  const _BrowseProductLoadingShimmer({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 300,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: List.generate(
-          4,
-          (index) => const MaterialLoading(),
-        ),
-      ),
-    );
   }
 }

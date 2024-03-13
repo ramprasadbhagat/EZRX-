@@ -79,7 +79,9 @@ class _MaterialInfoDialog extends StatelessWidget {
         children: [
           Text(
             context.tr('Material Information'),
-            style: Theme.of(context).textTheme.labelLarge,
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: ZPColors.primary,
+                ),
           ),
           const SizedBox(
             height: 20,
