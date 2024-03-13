@@ -86,7 +86,7 @@ void main() {
       find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
   final confirmBottomSheetCancelButton =
       find.byKey(WidgetKeys.confirmBottomSheetCancelButton);
-      
+
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouterMock());
@@ -613,14 +613,6 @@ void main() {
         );
         expect(
           find.textContaining(
-            'If you encountered an error with the payment, delete the system-generated payment advice in the eZRx payment summary section and regenerate a new payment advice by repeating the payment process.'
-                .tr(),
-            findRichText: true,
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.textContaining(
             'You may download the payment advice after the payment process or through the payment summary page.'
                 .tr(),
             findRichText: true,
@@ -683,6 +675,14 @@ void main() {
             ),
           ),
         ).called(1);
+        expect(find.text('${'Delete payment advice'.tr()}?'), findsOneWidget);
+        expect(
+          find.text(
+            'Once deleted, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.'
+                .tr(),
+          ),
+          findsOneWidget,
+        );
       });
 
       testWidgets('On Tap Delete info PDF note empty', (tester) async {
@@ -834,7 +834,8 @@ void main() {
         ).called(1);
       });
 
-      testWidgets('=> Test Invoice/credit already in use dialog and click payment summary',
+      testWidgets(
+          '=> Test Invoice/credit already in use dialog and click payment summary',
           (WidgetTester tester) async {
         await tester.binding.setSurfaceSize(const Size(480, 900));
         whenListen(

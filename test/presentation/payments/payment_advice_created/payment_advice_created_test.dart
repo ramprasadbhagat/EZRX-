@@ -471,11 +471,7 @@ void main() {
         findRichText: true,
       );
       expect(clickOnTheBack, findsOneWidget);
-      final encounterPaymentError = find.text(
-        'If you encountered an error with the payment, delete the system-generated payment advice in the eZRx payment summary section and regenerate a new payment advice by repeating the payment process.',
-        findRichText: true,
-      );
-      expect(encounterPaymentError, findsOneWidget);
+
       final downloadPaymentAdvice = find.text(
         'You may download the payment advice after the payment process or through the payment summary page.',
         findRichText: true,

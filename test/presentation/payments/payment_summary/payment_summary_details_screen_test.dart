@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -772,5 +773,81 @@ void main() {
         expect(paymentDateFinder, findsOneWidget);
       },
     );
+
+    testWidgets(
+        'Check delete payment advice content when status is in progress',
+        (tester) async {
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        PaymentSummaryDetailsState.initial().copyWith(
+          details: PaymentSummaryDetails.empty().copyWith(
+            status: FilterStatus('processing'),
+            zzAdvice: StringValue('fake_id'),
+          ),
+        ),
+      );
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pump();
+      final deleteButton = find.byKey(WidgetKeys.deleteAdviceButtonKey);
+      expect(deleteButton, findsOneWidget);
+      await tester.tap(deleteButton);
+      await tester.pumpAndSettle();
+      expect(find.text('${'Delete payment advice'.tr()}?'), findsOneWidget);
+      expect(
+        find.text(
+          'Payment advice #{adviceNumber} is still in progress.'.tr(
+            namedArgs: {
+              'adviceNumber': 'fake_id',
+            },
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.text(
+          'Deletion is not recommended as it may result in duplicate payments for the same invoices.',
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.text(
+          '${'You may proceed if you are certain that your payment has not been processed.'.tr()} ${'Once deleted, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.'.tr()}',
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Check delete payment advice content when status is failed',
+        (tester) async {
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        PaymentSummaryDetailsState.initial().copyWith(
+          details: PaymentSummaryDetails.empty().copyWith(
+            status: FilterStatus('Failed'),
+            zzAdvice: StringValue('fake_id'),
+          ),
+        ),
+      );
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(),
+        ),
+      );
+      await tester.pump();
+      final deleteButton = find.byKey(WidgetKeys.deleteAdviceButtonKey);
+      expect(deleteButton, findsOneWidget);
+      await tester.tap(deleteButton);
+      await tester.pumpAndSettle();
+      expect(find.text('${'Delete payment advice'.tr()}?'), findsOneWidget);
+
+      expect(
+        find.text(
+          'Once deleted, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.',
+        ),
+        findsOneWidget,
+      );
+    });
   });
 }

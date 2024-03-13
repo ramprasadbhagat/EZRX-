@@ -3,19 +3,23 @@ part of 'package:ezrxmobile/presentation/payments/payment_summary_details/paymen
 class DeleteCancelAdviceBottomSheet extends StatelessWidget {
   final String paymentAdviceNumber;
   final bool isDelete;
+  final bool isInProgress;
   const DeleteCancelAdviceBottomSheet({
     Key? key,
     required this.paymentAdviceNumber,
     required this.isDelete,
+    this.isInProgress = false,
   }) : super(key: key);
 
   factory DeleteCancelAdviceBottomSheet.delete({
     required String paymentAdviceNumber,
+    bool isInProgress = false,
     Key? key,
   }) =>
       DeleteCancelAdviceBottomSheet(
         isDelete: true,
         paymentAdviceNumber: paymentAdviceNumber,
+        isInProgress: isInProgress,
         key: key,
       );
 
@@ -42,9 +46,9 @@ class DeleteCancelAdviceBottomSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.tr(
+            '${context.tr(
               isDelete ? 'Delete payment advice' : 'Cancel payment advice',
-            ),
+            )}?',
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: ZPColors.primary,
                 ),
@@ -52,41 +56,12 @@ class DeleteCancelAdviceBottomSheet extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          if (isDelete) ...[
-            Text(
-              context.tr(
-                'Payment advice #{adviceNumber} is still in progress.',
-                namedArgs: {
-                  'adviceNumber': paymentAdviceNumber,
-                },
-              ),
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.extraLightGrey4,
-                  ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Text(
-              context.tr(
-                'Deletion is not recommended as it may result in duplicate payments for the same invoices.',
-              ),
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.extraLightGrey4,
-                  ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Text(
-              context.tr(
-                'You may proceed if you are certain that your payment has not been processed. Once deleted, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.',
-              ),
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.extraLightGrey4,
-                  ),
-            ),
-          ] else
+          if (isDelete)
+            _DeletePaymentAdviceContent(
+              paymentAdviceNumber: paymentAdviceNumber,
+              isInProgress: isInProgress,
+            )
+          else
             Text(
               context.tr(
                 'Once cancelled, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.',
@@ -103,6 +78,71 @@ class DeleteCancelAdviceBottomSheet extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _DeletePaymentAdviceContent extends StatelessWidget {
+  final bool isInProgress;
+  final String paymentAdviceNumber;
+  const _DeletePaymentAdviceContent({
+    Key? key,
+    required this.paymentAdviceNumber,
+    this.isInProgress = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (isInProgress) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            context.tr(
+              'Payment advice #{adviceNumber} is still in progress.',
+              namedArgs: {
+                'adviceNumber': paymentAdviceNumber,
+              },
+            ),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ZPColors.extraLightGrey4,
+                ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Text(
+            context.tr(
+              'Deletion is not recommended as it may result in duplicate payments for the same invoices.',
+            ),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ZPColors.extraLightGrey4,
+                ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Text(
+            '${context.tr(
+              'You may proceed if you are certain that your payment has not been processed.',
+            )} ${context.tr(
+              'Once deleted, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.',
+            )}',
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ZPColors.extraLightGrey4,
+                ),
+          ),
+        ],
+      );
+    }
+
+    return Text(
+      context.tr(
+        'Once deleted, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.',
+      ),
+      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            color: ZPColors.extraLightGrey4,
+          ),
     );
   }
 }

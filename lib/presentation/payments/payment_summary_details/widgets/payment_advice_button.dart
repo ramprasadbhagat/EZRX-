@@ -125,6 +125,7 @@ class _DeleteAdviceButton extends StatelessWidget {
       isScrollControlled: true,
       builder: (_) => DeleteCancelAdviceBottomSheet.delete(
         paymentAdviceNumber: paymentAdviceNumber,
+        isInProgress: state.details.status.getIsInProgress,
       ),
     );
   }
