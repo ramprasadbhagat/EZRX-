@@ -60,9 +60,6 @@ class _MaterialDetails extends StatelessWidget {
                     ),
                   ],
                 ),
-                GovtListPriceComponent(
-                  price: cartItem.display(PriceType.listPrice),
-                ),
               ],
               Text(
                 '${"Qty: ".tr()}${cartItem.quantity.toString()}',
@@ -73,6 +70,10 @@ class _MaterialDetails extends StatelessWidget {
               ),
             ],
           ),
+          if (cartItem.materialInfo.type.typeMaterial)
+            GovtListPriceComponent(
+              price: cartItem.display(PriceType.listPrice),
+            ),
         ],
       ),
     );

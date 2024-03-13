@@ -31,7 +31,6 @@ import 'package:ezrxmobile/presentation/core/list_price_strike_through_component
 import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -308,19 +307,11 @@ void main() {
             fakeCartProduct.first.getMaterialNumber.displayMatNo,
           ),
         );
-        expect(preOrderMaterialFinder, findsOneWidget);
+        expect(preOrderMaterialFinder, findsNWidgets(2));
         final preOrderModalItemFinalPrice = find.byKey(
           WidgetKeys.preOrderModalItemFinalPrice,
         );
         expect(preOrderModalItemFinalPrice, findsOneWidget);
-        final preOrderModalItemTotalPrice = find.byKey(
-          WidgetKeys.preOrderModalItemTotalPrice,
-        );
-        expect(preOrderModalItemTotalPrice, findsOneWidget);
-        final preOrderModalItemTax = find.byType(
-          ItemTax,
-        );
-        expect(preOrderModalItemTax, findsOneWidget);
       },
     );
     testWidgets(
@@ -350,7 +341,7 @@ void main() {
             fakeCartProduct.first.getMaterialNumber.displayMatNo,
           ),
         );
-        expect(preOrderMaterialFinder, findsOneWidget);
+        expect(preOrderMaterialFinder, findsNWidgets(2));
         expect(find.byType(CovidTag), findsOneWidget);
         expect(
           find.byType(GovtListPriceComponent),
@@ -401,19 +392,11 @@ void main() {
             fakeCartProduct.first.getMaterialNumber.displayMatNo,
           ),
         );
-        expect(preOrderMaterialFinder, findsOneWidget);
+        expect(preOrderMaterialFinder, findsNWidgets(2));
         final preOrderModalItemFinalPrice = find.byKey(
           WidgetKeys.preOrderModalItemFinalPrice,
         );
         expect(preOrderModalItemFinalPrice, findsWidgets);
-        final preOrderModalItemTotalPrice = find.byKey(
-          WidgetKeys.preOrderModalItemTotalPrice,
-        );
-        expect(preOrderModalItemTotalPrice, findsWidgets);
-        final preOrderModalItemTax = find.byType(
-          ItemTax,
-        );
-        expect(preOrderModalItemTax, findsWidgets);
       },
     );
 
@@ -640,7 +623,7 @@ void main() {
         final dealBonusItem = find.text('fake-bonus-3');
         expect(dealBonusItem, findsOneWidget);
         final bonusTag = find.byType(BonusTag);
-        expect(bonusTag, findsNWidgets(2));
+        expect(bonusTag, findsNWidgets(3));
       },
     );
 

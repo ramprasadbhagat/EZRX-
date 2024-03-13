@@ -24,8 +24,6 @@ class _PreOrderProductTile extends StatelessWidget {
               _MaterialDetails(cartItem: cartProduct),
             ],
           ),
-          if (cartProduct.materialInfo.type.typeMaterial)
-            _PriceSection(cartProduct: cartProduct),
           if (cartProduct.materialInfo.type.typeDealOrOverrideBonus)
             Align(
               alignment: Alignment.centerRight,
