@@ -3836,6 +3836,39 @@ void main() {
 
           verify(() => autoRouterMock.navigateNamed('main/products')).called(1);
         });
+
+        testWidgets('Display exceed quantity message on ID market',
+            (tester) async {
+          final mockItem = mockCartItems.first.copyWith(
+            quantity: 11,
+            stockInfoList: [
+              StockInfo.empty().copyWith(
+                materialNumber: mockCartItems.first.getMaterialNumber,
+                stockQuantity: 10,
+              )
+            ],
+            salesOrgConfig: fakeIDSalesOrgConfigs,
+          );
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [mockItem],
+            ),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              cartItems: [mockItem],
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.text(
+              'You have exceeded the available quantity for this item.'.tr(),
+            ),
+            findsOneWidget,
+          );
+        });
       });
     },
   );

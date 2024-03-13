@@ -31,7 +31,7 @@ class _CartPageInfoLabel extends StatelessWidget {
                     if (state.isNotAvailableToCheckoutForID)
                       _ErrorText(
                         text: context.tr(
-                          'You have exceeded the available quantity for this item',
+                          'You have exceeded the available quantity for this item.',
                         ),
                         showLeadingIcon: state.hasMultipleErrors,
                       ),
