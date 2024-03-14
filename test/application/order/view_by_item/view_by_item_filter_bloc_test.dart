@@ -22,17 +22,6 @@ void main() {
     DateFormat(DateTimeFormatString.apiDateFormat).format(DateTime.now()),
   );
 
-  final statusList = <StatusType>[
-    StatusType('Order created'),
-    StatusType('Pending'),
-    StatusType('Order packed and ready for delivery'),
-    StatusType('Picking in progress'),
-    StatusType('Out for delivery'),
-    StatusType('Delivered'),
-    StatusType('Cancelled'),
-    StatusType('Failed'),
-    StatusType('In Queue'),
-  ];
   group(
     'Order View By Item Filter Bloc',
     () {
@@ -96,7 +85,6 @@ void main() {
                 StatusType('Order created'),
               ],
             ),
-            statusList: statusList,
           ),
           ViewByItemFilterState.initial().copyWith(
             filter: ViewByItemFilter.empty().copyWith(
@@ -105,7 +93,6 @@ void main() {
                 StatusType('Picking in progress'),
               ],
             ),
-            statusList: statusList,
           ),
         ],
       );
@@ -146,7 +133,6 @@ void main() {
               StatusType('Picking in progress'),
             ],
           ),
-          statusList: statusList,
         ),
         expect: () => [
           ViewByItemFilterState.initial().copyWith(
@@ -155,7 +141,6 @@ void main() {
                 StatusType('Order created'),
               ],
             ),
-            statusList: statusList,
           ),
         ],
       );

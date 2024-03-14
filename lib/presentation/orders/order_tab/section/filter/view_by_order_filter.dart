@@ -79,6 +79,8 @@ class _FilterList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return Scrollbar(
       thumbVisibility: true,
       child: ListView(
@@ -126,10 +128,10 @@ class _FilterList extends StatelessWidget {
                   ),
                   BlocBuilder<ViewByOrderFilterBloc, ViewByOrderFilterState>(
                     buildWhen: (previous, current) =>
-                        previous.statusList != current.statusList ||
                         previous.filter.orderStatusList !=
-                            current.filter.orderStatusList,
-                    builder: (context, state) => state.statusList.isNotEmpty
+                        current.filter.orderStatusList,
+                    builder: (context, state) => eligibilityState
+                            .salesOrg.displayViewByOrderFilterByStatus
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -141,7 +143,8 @@ class _FilterList extends StatelessWidget {
                               const SizedBox(height: 12),
                               _OrderStatusPicker(
                                 selectedStatus: state.filter.orderStatusList,
-                                statusList: state.statusList,
+                                statusList: eligibilityState
+                                    .salesOrg.orderHistoryFilterStatusList,
                               ),
                             ],
                           )

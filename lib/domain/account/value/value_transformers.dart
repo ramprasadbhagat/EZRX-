@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:ezrxmobile/domain/account/entities/bu_contact.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 BuContact salesOrgContact(String salesOrg) {
@@ -445,6 +446,19 @@ String countryToMaintenanceBannerPathId(String market) {
 
   return marketCountryMap[market] ?? marketCountryMap['KH']!;
 }
+
+List<StatusType> getOrderHistoryFilterStatusList(bool isID) => <StatusType>[
+      if (isID) StatusType('Order received'),
+      StatusType('Order created'),
+      StatusType('Picking in progress'),
+      StatusType('Out for delivery'),
+      StatusType('Delivered'),
+      StatusType('Cancelled'),
+      if (!isID) StatusType('Pending'),
+      if (!isID) StatusType('Order packed and ready for delivery'),
+      if (!isID) StatusType('Failed'),
+      if (!isID) StatusType('In Queue'),
+    ];
 
 String countryArticlePath(String country) {
   final salesOrgCountryMap = {

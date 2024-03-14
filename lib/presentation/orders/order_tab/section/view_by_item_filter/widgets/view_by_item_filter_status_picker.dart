@@ -9,7 +9,12 @@ class _ViewByItemFilterStatusPicker extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.filter.orderStatusList != current.filter.orderStatusList,
       builder: (context, state) => Column(
-        children: state.statusList.map(
+        children: context
+            .read<EligibilityBloc>()
+            .state
+            .salesOrg
+            .orderHistoryFilterStatusList
+            .map(
           (StatusType status) {
             final name = context.tr(status.statusLabel);
             final value = state.filter.orderStatusList.contains(status);

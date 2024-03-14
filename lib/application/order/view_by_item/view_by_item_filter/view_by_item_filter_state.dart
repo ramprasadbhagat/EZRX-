@@ -6,22 +6,10 @@ class ViewByItemFilterState with _$ViewByItemFilterState {
 
   const factory ViewByItemFilterState({
     required ViewByItemFilter filter,
-    required List<StatusType> statusList,
   }) = _ViewByItemFilterState;
 
   factory ViewByItemFilterState.initial() => ViewByItemFilterState(
         filter: ViewByItemFilter.empty(),
-        statusList: <StatusType>[
-          StatusType('Order created'),
-          StatusType('Pending'),
-          StatusType('Order packed and ready for delivery'),
-          StatusType('Picking in progress'),
-          StatusType('Out for delivery'),
-          StatusType('Delivered'),
-          StatusType('Cancelled'),
-          StatusType('Failed'),
-          StatusType('In Queue'),
-        ],
       );
 
   ViewByItemFilter get emptyViewByItemFilter => ViewByItemFilter.empty();

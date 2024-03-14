@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
@@ -127,7 +128,7 @@ void main() {
     );
 
     test('Get order status list in ID market', () {
-      final viewByOrderFilterState = ViewByOrderFilterState.initial().copyWith(
+      final eligibilityState = EligibilityState.initial().copyWith(
         salesOrganisation: fakeIDSalesOrganisation,
       );
       final idMarketStatusList = [
@@ -139,15 +140,32 @@ void main() {
         StatusType('Cancelled'),
       ];
 
-      expect(viewByOrderFilterState.statusList, idMarketStatusList);
+      expect(
+        eligibilityState.salesOrg.orderHistoryFilterStatusList,
+        idMarketStatusList,
+      );
     });
 
     test('Get order status list in other market', () {
-      final viewByOrderFilterState = ViewByOrderFilterState.initial().copyWith(
+      final eligibilityState = EligibilityState.initial().copyWith(
         salesOrganisation: fakeMYSalesOrganisation,
       );
+      final myMarketStatusList = <StatusType>[
+        StatusType('Order created'),
+        StatusType('Picking in progress'),
+        StatusType('Out for delivery'),
+        StatusType('Delivered'),
+        StatusType('Cancelled'),
+        StatusType('Pending'),
+        StatusType('Order packed and ready for delivery'),
+        StatusType('Failed'),
+        StatusType('In Queue'),
+      ];
 
-      expect(viewByOrderFilterState.statusList, <StatusType>[]);
+      expect(
+        eligibilityState.salesOrg.orderHistoryFilterStatusList,
+        myMarketStatusList,
+      );
     });
   });
 }

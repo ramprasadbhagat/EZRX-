@@ -208,6 +208,11 @@ class SalesOrg extends ValueObject<String> {
     return '294DBC60-6394-4284-9D2B-B3270D0459EF';
   }
 
+  List<StatusType> get orderHistoryFilterStatusList =>
+      getOrderHistoryFilterStatusList(isID);
+
+  bool get displayViewByOrderFilterByStatus => isID;
+
   const SalesOrg._(this.value);
 }
 
@@ -617,5 +622,3 @@ class MarketPlaceTnCAcceptance extends ValueObject<String> {
 
   const MarketPlaceTnCAcceptance._(this.value);
 }
-
-

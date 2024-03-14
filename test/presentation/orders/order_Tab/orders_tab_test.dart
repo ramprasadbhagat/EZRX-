@@ -300,6 +300,11 @@ void main() {
           salesOrganisation: fakeIDSalesOrganisation,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeIDSalesOrganisation,
+        ),
+      );
       await tester.pumpWidget(testWidget(const ViewByOrderFilterBottomSheet()));
       await tester.pump();
       expect(find.byType(ViewByOrderFilterBottomSheet), findsOneWidget);

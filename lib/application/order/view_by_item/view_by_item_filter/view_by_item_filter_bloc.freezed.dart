@@ -1056,7 +1056,6 @@ abstract class _ResetFilter implements ViewByItemFilterEvent {
 /// @nodoc
 mixin _$ViewByItemFilterState {
   ViewByItemFilter get filter => throw _privateConstructorUsedError;
-  List<StatusType> get statusList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByItemFilterStateCopyWith<ViewByItemFilterState> get copyWith =>
@@ -1069,7 +1068,7 @@ abstract class $ViewByItemFilterStateCopyWith<$Res> {
           $Res Function(ViewByItemFilterState) then) =
       _$ViewByItemFilterStateCopyWithImpl<$Res, ViewByItemFilterState>;
   @useResult
-  $Res call({ViewByItemFilter filter, List<StatusType> statusList});
+  $Res call({ViewByItemFilter filter});
 
   $ViewByItemFilterCopyWith<$Res> get filter;
 }
@@ -1089,17 +1088,12 @@ class _$ViewByItemFilterStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? filter = null,
-    Object? statusList = null,
   }) {
     return _then(_value.copyWith(
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
               as ViewByItemFilter,
-      statusList: null == statusList
-          ? _value.statusList
-          : statusList // ignore: cast_nullable_to_non_nullable
-              as List<StatusType>,
     ) as $Val);
   }
 
@@ -1120,7 +1114,7 @@ abstract class _$$_ViewByItemFilterStateCopyWith<$Res>
       __$$_ViewByItemFilterStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ViewByItemFilter filter, List<StatusType> statusList});
+  $Res call({ViewByItemFilter filter});
 
   @override
   $ViewByItemFilterCopyWith<$Res> get filter;
@@ -1138,17 +1132,12 @@ class __$$_ViewByItemFilterStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? filter = null,
-    Object? statusList = null,
   }) {
     return _then(_$_ViewByItemFilterState(
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
               as ViewByItemFilter,
-      statusList: null == statusList
-          ? _value._statusList
-          : statusList // ignore: cast_nullable_to_non_nullable
-              as List<StatusType>,
     ));
   }
 }
@@ -1156,24 +1145,14 @@ class __$$_ViewByItemFilterStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ViewByItemFilterState extends _ViewByItemFilterState {
-  const _$_ViewByItemFilterState(
-      {required this.filter, required final List<StatusType> statusList})
-      : _statusList = statusList,
-        super._();
+  const _$_ViewByItemFilterState({required this.filter}) : super._();
 
   @override
   final ViewByItemFilter filter;
-  final List<StatusType> _statusList;
-  @override
-  List<StatusType> get statusList {
-    if (_statusList is EqualUnmodifiableListView) return _statusList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_statusList);
-  }
 
   @override
   String toString() {
-    return 'ViewByItemFilterState(filter: $filter, statusList: $statusList)';
+    return 'ViewByItemFilterState(filter: $filter)';
   }
 
   @override
@@ -1181,14 +1160,11 @@ class _$_ViewByItemFilterState extends _ViewByItemFilterState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ViewByItemFilterState &&
-            (identical(other.filter, filter) || other.filter == filter) &&
-            const DeepCollectionEquality()
-                .equals(other._statusList, _statusList));
+            (identical(other.filter, filter) || other.filter == filter));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, filter, const DeepCollectionEquality().hash(_statusList));
+  int get hashCode => Object.hash(runtimeType, filter);
 
   @JsonKey(ignore: true)
   @override
@@ -1200,14 +1176,11 @@ class _$_ViewByItemFilterState extends _ViewByItemFilterState {
 
 abstract class _ViewByItemFilterState extends ViewByItemFilterState {
   const factory _ViewByItemFilterState(
-      {required final ViewByItemFilter filter,
-      required final List<StatusType> statusList}) = _$_ViewByItemFilterState;
+      {required final ViewByItemFilter filter}) = _$_ViewByItemFilterState;
   const _ViewByItemFilterState._() : super._();
 
   @override
   ViewByItemFilter get filter;
-  @override
-  List<StatusType> get statusList;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByItemFilterStateCopyWith<_$_ViewByItemFilterState> get copyWith =>
