@@ -163,7 +163,7 @@ class OrderRepository implements IOrderRepository {
         final orderHistoryDetailsList =
             await orderHistoryDetailsRemoteDataSource
                 .getOrderHistoryDetailsList(
-          orderNumber: orderResponse.salesDocuments,
+          orderNumbers: orderResponse.salesDocuments,
           language: user.preferredLanguage.languageCode,
           soldTo: customerCodeInfo.customerCodeSoldTo,
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),

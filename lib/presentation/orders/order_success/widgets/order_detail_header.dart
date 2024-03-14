@@ -31,6 +31,7 @@ class _OrderDetailHeader extends StatelessWidget {
             ? [
                 if (zpOrders.isNotEmpty)
                   _OrderNumberList(
+                    key: WidgetKeys.orderSuccessZPOrderNumbers,
                     prefix: 'ZP',
                     orderStatus: orderHeader.processingStatus,
                     orderNumber: zpOrders.map((e) => e.orderNumber).toList(),
@@ -39,6 +40,7 @@ class _OrderDetailHeader extends StatelessWidget {
                   const SizedBox(height: 16),
                 if (mpOrders.isNotEmpty)
                   _OrderNumberList(
+                    key: WidgetKeys.orderSuccessMPOrderNumbers,
                     prefix: 'MP',
                     orderStatus: orderHeader.processingStatus,
                     orderNumber: mpOrders.map((e) => e.orderNumber).toList(),

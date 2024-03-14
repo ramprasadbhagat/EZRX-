@@ -805,6 +805,10 @@ class WidgetKeys {
   static const Key filterOrderIcon = Key('filterOrderIcon');
   static const Key orderSuccessMessage = Key('orderSuccessMessage');
   static const Key orderSuccessOrderId = Key('orderSuccessOrderId');
+  static const Key orderSuccessZPOrderNumbers =
+      Key('orderSuccessZPOrderNumbers');
+  static const Key orderSuccessMPOrderNumbers =
+      Key('orderSuccessMPOrderNumbers');
   static const Key orderSuccessOrderSummarySection =
       Key('orderSuccessOrderSummarySection');
   static const Key orderSuccessItemTotalQty = Key('orderSuccessItemTotalQty');

@@ -72,7 +72,7 @@ class ViewByOrderDetailsRemoteDataSource {
   Future<List<OrderHistoryDetails>> getOrderHistoryDetailsList({
     required String language,
     required String soldTo,
-    required List<String> orderNumber,
+    required List<String> orderNumbers,
     required String salesOrg,
     required String shipTo,
     required String market,
@@ -83,7 +83,7 @@ class ViewByOrderDetailsRemoteDataSource {
       );
 
       final variables = {
-        'orderNumbers': orderNumber,
+        'orderNumbers': orderNumbers,
         'language': language,
         'soldTo': soldTo,
         'salesOrg': [salesOrg],

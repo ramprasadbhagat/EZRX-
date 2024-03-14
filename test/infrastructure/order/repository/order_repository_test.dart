@@ -1104,7 +1104,7 @@ void main() {
   });
 
   group('OrderRepository => getOrderHistoryDetails', () {
-    test('get submit order getOrderHistoryDetails locally success', () async {
+    test('Locally success', () async {
       final orderList = [orderHistoryDetailsMock];
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(() => viewByOrderDetailsLocalDataSource.getOrderHistoryDetailsList())
@@ -1124,7 +1124,7 @@ void main() {
       );
     });
 
-    test('get submit order getOrderHistoryDetails locally fail', () async {
+    test('Locally fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
       when(() => viewByOrderDetailsLocalDataSource.getOrderHistoryDetailsList())
@@ -1144,10 +1144,9 @@ void main() {
       );
     });
 
-    test('get submit order getOrderHistoryDetails remote success', () async {
+    test('Remote success in non-marketplace market', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(() => deviceStorage.currentMarket())
-          .thenReturn(fakeNormalMarket);
+      when(() => deviceStorage.currentMarket()).thenReturn(fakeNormalMarket);
 
       when(
         () => viewByOrderDetailsRemoteDataSource.getOrderHistoryDetails(
@@ -1177,38 +1176,97 @@ void main() {
       );
     });
 
-    test(
-      'get submit order getOrderHistoryDetails remote fail',
-      () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    test('Remote fail in non-marketplace market', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => deviceStorage.currentMarket()).thenReturn(fakeNormalMarket);
 
-        when(
-          () => viewByOrderDetailsRemoteDataSource.getOrderHistoryDetails(
-            language: fakeClientUser.preferredLanguage.languageCode,
-            salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
-            searchKey: submitOrderResponseMock.salesDocument,
-            soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
-            shipTo: fakeShipToInfo.shipToCustomerCode,
-            market: fakeNormalMarket,
-          ),
-        ).thenThrow(fakeError);
+      when(
+        () => viewByOrderDetailsRemoteDataSource.getOrderHistoryDetails(
+          language: fakeClientUser.preferredLanguage.languageCode,
+          salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
+          searchKey: submitOrderResponseMock.salesDocument,
+          soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
+          market: fakeNormalMarket,
+        ),
+      ).thenThrow(fakeError);
 
-        final result = await orderRepository.getOrderConfirmationDetail(
-          user: fakeClientUser,
-          cartProducts: cartMaterials
-              .where((e) => !e.materialInfo.isMarketPlace)
-              .toList(),
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          orderResponse: submitOrderResponseMock,
-          shipToInfo: fakeShipToInfo,
-        );
-        expect(
-          result,
-          Left(FailureHandler.handleFailure(fakeError)),
-        );
-      },
-    );
+      final result = await orderRepository.getOrderConfirmationDetail(
+        user: fakeClientUser,
+        cartProducts:
+            cartMaterials.where((e) => !e.materialInfo.isMarketPlace).toList(),
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        orderResponse: submitOrderResponseMock,
+        shipToInfo: fakeShipToInfo,
+      );
+      expect(
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
+      );
+    });
+
+    test('Remote success in marketplace enabled market', () async {
+      final orderHistoryList = await ViewByOrderDetailsLocalDataSource()
+          .getOrderHistoryDetailsList();
+      when(() => deviceStorage.currentMarket())
+          .thenReturn(fakeMarketPlaceMarket);
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+      when(
+        () => viewByOrderDetailsRemoteDataSource.getOrderHistoryDetailsList(
+          language: fakeClientUser.preferredLanguage.languageCode,
+          salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
+          orderNumbers: submitOrderResponseMock.salesDocuments,
+          soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
+          market: fakeMarketPlaceMarket,
+        ),
+      ).thenAnswer((_) async => orderHistoryList);
+
+      final result = await orderRepository.getOrderConfirmationDetail(
+        user: fakeClientUser,
+        cartProducts: cartMaterials,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        orderResponse: submitOrderResponseMock,
+        shipToInfo: fakeShipToInfo,
+      );
+      expect(
+        result.getOrElse(() => <OrderHistoryDetails>[]),
+        equals(orderHistoryList),
+      );
+    });
+
+    test('Remote fail in marketplace enabled market', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => deviceStorage.currentMarket())
+          .thenReturn(fakeMarketPlaceMarket);
+
+      when(
+        () => viewByOrderDetailsRemoteDataSource.getOrderHistoryDetailsList(
+          language: fakeClientUser.preferredLanguage.languageCode,
+          salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
+          orderNumbers: submitOrderResponseMock.salesDocuments,
+          soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipTo: fakeShipToInfo.shipToCustomerCode,
+          market: fakeMarketPlaceMarket,
+        ),
+      ).thenThrow(fakeError);
+
+      final result = await orderRepository.getOrderConfirmationDetail(
+        user: fakeClientUser,
+        cartProducts: cartMaterials,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        orderResponse: submitOrderResponseMock,
+        shipToInfo: fakeShipToInfo,
+      );
+      expect(
+        result,
+        Left(FailureHandler.handleFailure(fakeError)),
+      );
+    });
   });
 
   group('OrderRepository => getConfirmedOrderStockInfo', () {

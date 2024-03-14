@@ -1,9 +1,16 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
@@ -56,6 +63,10 @@ class DownloadPaymentAttachmentsBlocMock extends MockBloc<
         DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
     implements DownloadPaymentAttachmentsBloc {}
 
+class PaymentCustomerInformationBlocMock extends MockBloc<
+        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}
+
 //////////////////////Product//////////////////////////////////////////////
 class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
@@ -82,6 +93,29 @@ class OrderEligibilityBlocMock
 class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
     implements OrderSummaryBloc {}
+
+class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
+    implements ViewByOrderBloc {}
+
+class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
+    implements ViewByItemsBloc {}
+
+class ViewByOrderDetailsBlocMock
+    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
+    implements ViewByOrderDetailsBloc {}
+
+class ViewByItemDetailsBlocMock
+    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
+    implements ViewByItemDetailsBloc {}
+
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
+
+class PoAttachmentBlocMock
+    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
+    implements PoAttachmentBloc {}
+
 //////////////////////////////////////////////////////////////////////////
 
 ///////////////////////Payment///////////////////////////////////////////////

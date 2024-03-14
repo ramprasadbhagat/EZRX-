@@ -622,6 +622,41 @@ void main() {
         ['Delivered', ...viewByItemFixedSteps],
       );
     });
+
+    test('Check is in queue', () {
+      // Return true if raw data return "in queue" text
+      expect(OrderStepValue('in queue').isInQueue, true);
+      expect(OrderStepValue('In Queue').isInQueue, true);
+      expect(OrderStepValue('In queue').isInQueue, true);
+      expect(OrderStepValue('in Queue').isInQueue, true);
+
+      //Return false if raw data return text not equals to "in queue"
+      expect(OrderStepValue('test').isInQueue, false);
+    });
+
+    test('Order confirmation message prefix', () {
+      expect(
+        OrderStepValue('in queue').orderConfirmationPrefixMessage,
+        'Currently SAP system is under maintenance. Your order has been placed on eZRx+ but has not yet been made on SAP, and it will be queued in the SAP system to be created. We’ll send a confirmation to',
+      );
+
+      expect(
+        OrderStepValue('test').orderConfirmationPrefixMessage,
+        'We’ll send a confirmation to',
+      );
+    });
+
+    test('Order confirmation message suffix', () {
+      expect(
+        OrderStepValue('in queue').orderConfirmationSuffixMessage,
+        'once your order is created in SAP.',
+      );
+
+      expect(
+        OrderStepValue('test').orderConfirmationSuffixMessage,
+        'once your order has been confirmed',
+      );
+    });
   });
 
   group('Order History Type Value Object -', () {

@@ -187,4 +187,125 @@ void main() {
       });
     },
   );
+
+  group(
+    'Order History Details List',
+    () {
+      test('Get OrderHistory Details', () async {
+        final variables = {
+          'orderNumbers': ['test', 'test2'],
+          'language': 'fake-language',
+          'soldTo': 'fake-soldTo',
+          'salesOrg': ['fake-salesOrg'],
+          'shipTo': ['fake-shipTo'],
+          'isDetailsPage': true,
+        };
+        final jsonResult = json.decode(
+          await rootBundle.loadString(
+            'assets/json/getOrderDetailsMarketPlaceResponse.json',
+          ),
+        );
+        final expectedResult = (jsonResult['data']['orderHistoryV3']
+                ['orderHeaders'] as List<dynamic>)
+            .map((e) => OrderHistoryDetailsDto.fromJson(e).toDomain())
+            .toList();
+
+        dioAdapter.onPost(
+          '/api/order',
+          (server) => server.reply(200, jsonResult),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.viewByOrderDetailsQueryMutation
+                .getOrderHistoryDetails(fakeConfigValue),
+            'variables': variables
+          }),
+        );
+
+        final result = await remoteDataSource.getOrderHistoryDetailsList(
+          salesOrg: 'fake-salesOrg',
+          orderNumbers: ['test', 'test2'],
+          soldTo: 'fake-soldTo',
+          language: 'fake-language',
+          shipTo: 'fake-shipTo',
+          market: fakeMarket,
+        );
+
+        expect(result, expectedResult);
+      });
+
+      test('status code not equal to 200', () async {
+        final variables = {
+          'orderNumbers': ['test', 'test2'],
+          'language': 'fake-language',
+          'soldTo': 'fake-soldTo',
+          'salesOrg': ['fake-salesOrg'],
+          'shipTo': ['fake-shipTo'],
+          'isDetailsPage': true,
+        };
+
+        dioAdapter.onPost(
+          '/api/order',
+          (server) => server.reply(205, {'data': []}),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.viewByOrderDetailsQueryMutation
+                .getOrderHistoryDetails(fakeConfigValue),
+            'variables': variables,
+          }),
+        );
+
+        await remoteDataSource
+            .getOrderHistoryDetailsList(
+          salesOrg: 'fake-salesOrg',
+          orderNumbers: ['test', 'test2'],
+          soldTo: 'fake-soldTo',
+          language: 'fake-language',
+          shipTo: 'fake-shipTo',
+          market: fakeMarket,
+        )
+            .onError((error, _) async {
+          expect(error, isA<ServerException>());
+
+          return Future.value([]);
+        });
+      });
+
+      test('response not return correct json', () async {
+        final variables = {
+          'orderNumbers': ['test', 'test2'],
+          'language': 'fake-language',
+          'soldTo': 'fake-soldTo',
+          'salesOrg': ['fake-salesOrg'],
+          'shipTo': ['fake-shipTo'],
+          'isDetailsPage': true,
+        };
+
+        dioAdapter.onPost(
+          '/api/order',
+          (server) => server.reply(200, {
+            'data': {
+              'orderHistoryV3': {'orderHeaders': 'test'}
+            }
+          }),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.viewByOrderDetailsQueryMutation
+                .getOrderHistoryDetails(fakeConfigValue),
+            'variables': variables
+          }),
+        );
+
+        final result = await remoteDataSource.getOrderHistoryDetailsList(
+          salesOrg: 'fake-salesOrg',
+          orderNumbers: ['test', 'test2'],
+          soldTo: 'fake-soldTo',
+          language: 'fake-language',
+          shipTo: 'fake-shipTo',
+          market: fakeMarket,
+        );
+
+        expect(result, <OrderHistoryDetails>[]);
+      });
+    },
+  );
 }

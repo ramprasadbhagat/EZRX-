@@ -130,4 +130,52 @@ void main() async {
       });
     });
   });
+
+  group('OrderHistoryDetailOrderItem list', () {
+    final zpOrderItem = OrderHistoryDetailsOrderItem.empty().copyWith(
+      isMarketPlace: false,
+      type: OrderItemType('Comm'),
+      unitPrice: 20,
+    );
+    final mpOrderItem = OrderHistoryDetailsOrderItem.empty().copyWith(
+      isMarketPlace: true,
+      type: OrderItemType('Comm'),
+      unitPrice: 30,
+    );
+
+    test(
+      'Get only zp items',
+      () => expect([zpOrderItem, mpOrderItem].zpItemOnly, [zpOrderItem]),
+    );
+
+    test(
+      'Get only mp items',
+      () => expect([zpOrderItem, mpOrderItem].mpItemOnly, [mpOrderItem]),
+    );
+
+    test('Check if contain item has invalid price', () {
+      final hidePriceItem = zpOrderItem.copyWith(hidePrice: true);
+      final zeroPriceItem = mpOrderItem.copyWith(unitPrice: 0);
+      final bonusItem = zpOrderItem.copyWith(
+        type: OrderItemType('Bonus'),
+        hidePrice: true,
+        unitPrice: 0,
+      );
+
+      expect(
+        [zpOrderItem, mpOrderItem, hidePriceItem]
+            .containsMaterialsWithInvalidPrice,
+        true,
+      );
+      expect(
+        [zpOrderItem, mpOrderItem, zeroPriceItem]
+            .containsMaterialsWithInvalidPrice,
+        true,
+      );
+      expect(
+        [zpOrderItem, mpOrderItem, bonusItem].containsMaterialsWithInvalidPrice,
+        false,
+      );
+    });
+  });
 }
