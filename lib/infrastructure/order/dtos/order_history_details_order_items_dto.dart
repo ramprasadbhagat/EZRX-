@@ -76,7 +76,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
     @JsonKey(name: 'HidePrice', defaultValue: false)
         required bool hidePrice,
     @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required bool isMarketPlace,
+        required bool isMarketPlace,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
     OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,

@@ -109,6 +109,8 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                               .orderHistoryDetails
                               .orderHistoryDetailsOrderItem
                               .materialItemDetailsList,
+                          isMarketPlace:
+                              state.orderHistoryDetails.isMarketPlace,
                         ),
                     ],
                   ),

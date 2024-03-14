@@ -20,6 +20,7 @@ class CommonTileItem extends StatelessWidget {
     required this.quantity,
     required this.isQuantityBelowImage,
     required this.footerWidget,
+    this.padding,
     this.headerText,
     this.headerTextStyle,
     this.headerTextInfoIcon,
@@ -40,6 +41,7 @@ class CommonTileItem extends StatelessWidget {
   final MaterialNumber materialNumber;
   final String title;
   final String subtitle;
+  final EdgeInsets? padding;
   final String? headerText;
   final TextStyle? headerTextStyle;
   final Widget? headerTextInfoIcon;
@@ -61,6 +63,7 @@ class CommonTileItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      padding: padding ?? const EdgeInsets.only(bottom: 0),
       child: ListTile(
         onTap: onTap,
         title: Column(
@@ -87,7 +90,7 @@ class CommonTileItem extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
+                    padding: const EdgeInsets.fromLTRB(5, 8, 10, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -303,6 +306,8 @@ class _ImageBox extends StatelessWidget {
                       key: WidgetKeys.commonTileItemImage,
                       fit: BoxFit.fitHeight,
                       materialNumber: materialNumber,
+                      width: 80,
+                      height: 80,
                     ),
                     if (showOfferTag) ProductTag.onOfferIcon(),
                     if (isCovidItem)
@@ -335,6 +340,8 @@ class _ImageBox extends StatelessWidget {
                 ProductImage(
                   materialNumber: materialNumber,
                   fit: BoxFit.fitHeight,
+                  width: 80,
+                  height: 80,
                 ),
                 if (showOfferTag) ProductTag.onOfferIcon(),
                 if (showBundleTag) ProductTag.bundleOfferIcon(),

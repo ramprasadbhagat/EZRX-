@@ -44,7 +44,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                       sellerName:
                           orderHistoryItem.principalData.principalName.name,
                       iconColor: Colors.white,
-                      textColor: Colors.white,
+                      textColor: ZPColors.white,
                     ),
                   ),
                 ],

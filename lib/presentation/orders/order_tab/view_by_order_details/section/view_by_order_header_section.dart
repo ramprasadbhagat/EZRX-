@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/attachment_section.dart';
@@ -22,6 +24,7 @@ class OrderHeaderSection extends StatelessWidget {
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         final orderDetails = state.orderHistoryDetails;
+        final isMarketPlace = state.orderHistoryDetails.isMarketPlace;
 
         return Container(
           color: ZPColors.primary,
@@ -58,6 +61,32 @@ class OrderHeaderSection extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
+              if (isMarketPlace &&
+                  orderDetails.orderHistoryDetailsOrderItem.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: const MarketPlaceRectangleLogo(),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: MarketPlaceSellerTitle(
+                          sellerName: orderDetails.orderHistoryDetailsOrderItem
+                              .first.principalData.principalName.name,
+                          iconColor: Colors.white,
+                          iconSize: 20,
+                          textColor: ZPColors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               BalanceTextRow(
                 key: WidgetKeys.viewByOrderDetailOrderDate,
                 keyText: context.tr('Order date'),
@@ -72,6 +101,7 @@ class OrderHeaderSection extends StatelessWidget {
                 keyFlex: 8,
                 valueFlex: 7,
               ),
+              const SizedBox(height: 5),
               BalanceTextRow(
                 keyText: context.tr('PO reference'),
                 valueText: orderDetails.pOReference.displayPOReference,
@@ -85,7 +115,8 @@ class OrderHeaderSection extends StatelessWidget {
                 keyFlex: 8,
                 valueFlex: 7,
               ),
-              if (eligibilityState.salesOrgConfigs.enableFutureDeliveryDay)
+              if (eligibilityState.salesOrgConfigs.enableFutureDeliveryDay) ...[
+                const SizedBox(height: 5),
                 BalanceTextRow(
                   keyText: context.tr('Request delivery date'),
                   valueText:
@@ -101,7 +132,9 @@ class OrderHeaderSection extends StatelessWidget {
                   keyFlex: 8,
                   valueFlex: 7,
                 ),
-              if (eligibilityState.salesOrgConfigs.enableReferenceNote)
+              ],
+              if (eligibilityState.salesOrgConfigs.enableReferenceNote) ...[
+                const SizedBox(height: 5),
                 BalanceTextRow(
                   keyText: context.tr('Reference note'),
                   valueText: orderDetails.referenceNotes,
@@ -116,7 +149,9 @@ class OrderHeaderSection extends StatelessWidget {
                   keyFlex: 8,
                   valueFlex: 7,
                 ),
-              if (eligibilityState.displayPaymentTerm)
+              ],
+              if (eligibilityState.displayPaymentTerm) ...[
+                const SizedBox(height: 5),
                 BalanceTextRow(
                   key: WidgetKeys.paymentTermKey,
                   keyText: context.tr('Payment term'),
@@ -133,7 +168,9 @@ class OrderHeaderSection extends StatelessWidget {
                   keyFlex: 8,
                   valueFlex: 7,
                 ),
+              ],
               if (eligibilityState.salesOrgConfigs.enableMobileNumber) ...[
+                const SizedBox(height: 5),
                 BalanceTextRow(
                   keyText: context.tr('Contact person'),
                   valueText: orderDetails.orderBy.displayNAIfEmpty,
@@ -148,6 +185,7 @@ class OrderHeaderSection extends StatelessWidget {
                   keyFlex: 8,
                   valueFlex: 7,
                 ),
+                const SizedBox(height: 5),
                 BalanceTextRow(
                   keyText: context.tr('Contact number'),
                   valueText:
@@ -164,7 +202,9 @@ class OrderHeaderSection extends StatelessWidget {
                   valueFlex: 7,
                 ),
               ],
-              if (eligibilityState.salesOrgConfigs.enableSpecialInstructions)
+              if (eligibilityState
+                  .salesOrgConfigs.enableSpecialInstructions) ...[
+                const SizedBox(height: 8),
                 BalanceTextRow(
                   keyText: context.tr('Delivery instructions'),
                   valueText: orderDetails.orderHistoryDetailsSpecialInstructions
@@ -180,8 +220,11 @@ class OrderHeaderSection extends StatelessWidget {
                   keyFlex: 8,
                   valueFlex: 7,
                 ),
-              if (eligibilityState.salesOrgConfigs.showPOAttachment)
+              ],
+              if (eligibilityState.salesOrgConfigs.showPOAttachment) ...[
+                const SizedBox(height: 5),
                 const AttachmentSection(),
+              ],
             ],
           ),
         );

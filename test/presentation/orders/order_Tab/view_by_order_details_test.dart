@@ -47,9 +47,12 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.d
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_header_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_item_details_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
 import 'package:ezrxmobile/presentation/core/material_tax.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
@@ -2341,6 +2344,72 @@ void main() {
       final requestedCounterOfferKey =
           find.text('Requested counter offer'.tr());
       expect(requestedCounterOfferKey, findsOneWidget);
+    });
+    testWidgets(
+        'Show seller and MP logo at header + Display batch & expiry date NA with MP orders',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs.copyWith(
+            batchNumDisplay: true,
+          ),
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryItem.copyWith(
+                expiryDate: DateTimeStringValue(
+                  DateTime.now().toIso8601String(),
+                ),
+                isMarketPlace: true,
+              ),
+            ],
+            isMarketPlace: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final header = find.byType(OrderHeaderSection);
+      final detail = find.byType(OrderItemDetailsSection);
+      final sellerName = fakeOrderHistoryItem.principalData.principalName.name;
+      expect(
+        find.descendant(
+          of: header,
+          matching: find.byType(MarketPlaceRectangleLogo),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: header,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget is MarketPlaceSellerTitle &&
+                widget.sellerName == sellerName,
+          ),
+        ),
+        findsOneWidget,
+      );
+
+      await tester.dragUntilVisible(
+        detail,
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
+      expect(
+        find.descendant(of: detail, matching: find.text(sellerName)),
+        findsNothing,
+      );
+      await tester.pumpAndSettle();
+      final batchExpiryDate = tester
+          .widget<RichText>(find.byKey(WidgetKeys.commonTileItemHeader))
+          .text
+          .toPlainText();
+      expect(batchExpiryDate, contains('Batch NA (EXP: NA)'));
     });
   });
 }

@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
@@ -25,8 +26,10 @@ class OrderItemDetailsSection extends StatelessWidget {
   const OrderItemDetailsSection({
     Key? key,
     required this.viewByOrderHistoryGroupList,
+    this.isMarketPlace = false,
   }) : super(key: key);
   final List<ViewByOrdersGroup> viewByOrderHistoryGroupList;
+  final bool isMarketPlace;
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +49,15 @@ class OrderItemDetailsSection extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  Text(
-                    e.principalName.name,
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  if (!isMarketPlace) ...[
+                    Text(
+                      e.principalName.name,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                  ],
                   BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
                     buildWhen: (previous, current) =>
                         previous.orderHistory.orderHistoryItems !=
@@ -95,8 +100,11 @@ class _OrderItemTile extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final salesOrgConfig = eligibilityState.salesOrgConfigs;
     final isIDMarket = eligibilityState.salesOrganisation.salesOrg.isID;
+    final isMarketPlace = orderItem.isMarketPlace;
+    final headerText = _batchExpiryDateText(context, isMarketPlace);
 
     return CommonTileItem(
+      padding: const EdgeInsets.symmetric(vertical: 10),
       onTap: () => _goToViewByItemDetail(
         context,
         orderHistory,
@@ -146,9 +154,12 @@ class _OrderItemTile extends StatelessWidget {
       showOfferTag: orderItem.showOfferTag,
       statusTag:
           salesOrgConfig.salesOrg.isID ? null : orderItem.orderDetailBonusTag,
-      headerText: salesOrgConfig.batchNumDisplay && orderItem.batchNumHasData
-          ? '${'Batch'.tr()}: ${orderItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderItem.expiryDate.dateOrDashString})'
+      headerText: salesOrgConfig.batchNumDisplay && headerText.isNotEmpty
+          ? headerText
           : '',
+      headerTextStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: ZPColors.darkGray,
+          ),
       subtitle: '',
       footerWidget: QuantityAndPriceWithTax.order(
         quantity: orderItem.qty,
@@ -162,6 +173,18 @@ class _OrderItemTile extends StatelessWidget {
         taxPercentage: orderItem.taxPercentage,
       ),
     );
+  }
+
+  String _batchExpiryDateText(BuildContext context, bool isMarketPlace) {
+    if (isMarketPlace) {
+      return '${context.tr('Batch')} NA (${context.tr('EXP')}: NA)';
+    }
+
+    if (orderItem.batchNumHasData) {
+      return '${context.tr('Batch')}: ${orderItem.batch.displayDashIfEmpty}\n(${context.tr('EXP')}: ${orderItem.expiryDate.dateOrDashString})';
+    }
+
+    return '';
   }
 
   Future _goToViewByItemDetail(
