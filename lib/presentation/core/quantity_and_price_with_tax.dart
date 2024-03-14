@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/material_tax.dart';
+import 'package:ezrxmobile/presentation/core/material_tax.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,14 +12,42 @@ class QuantityAndPriceWithTax extends StatelessWidget {
   final String quantityDescription;
   final String netPrice;
   final double taxPercentage;
+  final double? taxValue;
 
-  const QuantityAndPriceWithTax({
+  const QuantityAndPriceWithTax._({
     Key? key,
     required this.quantity,
     this.quantityDescription = '',
     required this.taxPercentage,
     required this.netPrice,
+    this.taxValue,
   }) : super(key: key);
+
+  factory QuantityAndPriceWithTax.order({
+  required int quantity,
+  String quantityDescription = '',
+  required String netPrice,
+  required double taxPercentage,
+  }) => QuantityAndPriceWithTax._(
+    quantity: quantity,
+    quantityDescription: quantityDescription,
+    netPrice: netPrice,
+    taxPercentage: taxPercentage,
+  );
+
+  factory QuantityAndPriceWithTax.invoice({
+    required int quantity,
+    required String netPrice,
+    required double taxValue,
+    required double taxPercentage,
+  }) =>
+      QuantityAndPriceWithTax._(
+        quantity: quantity,
+        netPrice: netPrice,
+        taxValue: taxValue,
+        taxPercentage: taxPercentage,
+
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +90,8 @@ class QuantityAndPriceWithTax extends StatelessWidget {
               MaterialTax(
                 totalPrice: netPriceValue,
                 percentage: taxPercentage,
+                //TODO : This is a temporary solution once C4P fix the calculated total, we will remove this
+                taxValue: taxValue??(netPriceValue * taxPercentage / 100),
               ),
           ],
         ),

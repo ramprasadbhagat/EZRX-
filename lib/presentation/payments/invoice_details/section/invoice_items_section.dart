@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
+import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -99,7 +99,8 @@ class _InvoiceItemDetail extends StatelessWidget {
       isQuantityBelowImage: true,
       isQuantityRequired: false,
       statusWidget: const SizedBox.shrink(),
-      footerWidget: QuantityAndPriceWithTax(
+      footerWidget: QuantityAndPriceWithTax.invoice(
+        taxValue: customerDocumentDetail.taxAmount,
         quantity: customerDocumentDetail.billingQuantity.getOrDefaultValue(0),
         taxPercentage: customerDocumentDetail.taxPercent,
         netPrice: customerDocumentDetail.netPriceText,

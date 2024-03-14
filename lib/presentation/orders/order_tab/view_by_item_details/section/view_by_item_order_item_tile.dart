@@ -62,7 +62,7 @@ class ViewByItemOrderItemTile extends StatelessWidget {
               orderHistoryItem.orderType.isCovidOrderTypeForSG),
       showOfferTag: orderHistoryItem.isOfferItem,
       showBundleTag: orderHistoryItem.isBundle,
-      footerWidget: QuantityAndPriceWithTax(
+      footerWidget: QuantityAndPriceWithTax.order(
         quantity: orderHistoryItem.qty,
         taxPercentage: orderHistoryItem.taxPercentage,
         netPrice: orderHistoryItem.itemTotalNetPrice(

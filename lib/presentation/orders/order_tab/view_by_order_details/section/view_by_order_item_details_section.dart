@@ -7,7 +7,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
+import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
@@ -150,7 +150,7 @@ class _OrderItemTile extends StatelessWidget {
           ? '${'Batch'.tr()}: ${orderItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderItem.expiryDate.dateOrDashString})'
           : '',
       subtitle: '',
-      footerWidget: QuantityAndPriceWithTax(
+      footerWidget: QuantityAndPriceWithTax.order(
         quantity: orderItem.qty,
         quantityDescription: isIDMarket
             ? '${orderItem.pickedQuantity} ${context.tr('of')} ${orderItem.qty} ${context.tr('stocks fulfilled')}'

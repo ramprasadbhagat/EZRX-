@@ -40,6 +40,27 @@
         "expiryDate": "20250306",
         "principalName": "ORGANON (M) SDN BHD",
         "principalCode": "0000140087"
+      },
+      {
+        "billingDocumentItem": "000010",
+        "salesDocumentItemType": "",
+        "material": "000000000021253383",
+        "billingDocumentItemText": "AVELOX INJ 400MG/ 250ML 1'S",
+        "billingQuantity": "2.000",
+        "billingQuantityUnit": "BOX",
+        "salesMeasureISOUnit": "",
+        "referenceSDDocument": "",
+        "referenceSDDocumentItem": "",
+        "referenceSDDocumentCategory": "",
+        "grossAmount": 714347,
+        "netAmount": 680330,
+        "taxAmount": 34017,
+        "transactionCurrency": "",
+        "batchNumber": null,
+        "expiryDate": null,
+        "principalName": "Bayer (South East Asia) Pte. Ltd",
+        "principalCode": "0000102670",
+        "__typename": "customerDocumentDetailsResponse"
       }
     ]
   }

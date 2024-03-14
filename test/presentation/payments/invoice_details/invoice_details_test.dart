@@ -29,7 +29,7 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/material_tax.dart';
+import 'package:ezrxmobile/presentation/core/material_tax.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_details_section.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/order_number_section.dart';
@@ -828,5 +828,53 @@ void main() {
           find.byKey(WidgetKeys.balanceTextRow('Gov. no', '0810234244'));
       expect(documentReferenceID, findsOneWidget);
     });
+
+    testWidgets(
+      ' => Test tax value for invoice item section for VN market',
+      (tester) async {
+        final invoiceDetail = fakeInvoiceDetail[2];
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
+
+        when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+          CreditAndInvoiceDetailsState.initial().copyWith(
+            itemsInfo: [invoiceDetail],
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+
+        await tester.dragUntilVisible(
+          find.byKey(
+            Key(invoiceDetail.batchNumber.getOrDefaultValue('')),
+          ),
+          find.byKey(
+            WidgetKeys.invoiceDetailsPageListView,
+          ),
+          const Offset(0.0, -1000),
+        );
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byType(MaterialTax),
+            matching: find.text(
+              'VND 34,017.00',
+              findRichText: true,
+            ),
+          ),
+          (fakeVNSalesOrgConfigs.displayItemTaxBreakdown &&
+                  invoiceDetail.netAmount > 0 &&
+                  invoiceDetail.taxPercent > 0)
+              ? findsOneWidget
+              : findsNothing,
+        );
+      },
+    );
   });
 }

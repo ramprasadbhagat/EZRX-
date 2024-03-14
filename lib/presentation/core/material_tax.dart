@@ -8,10 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MaterialTax extends StatelessWidget {
   final double totalPrice;
   final double percentage;
+  final double taxValue;
   const MaterialTax({
     Key? key,
     required this.totalPrice,
     required this.percentage,
+    required this.taxValue,
   }) : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class MaterialTax extends StatelessWidget {
             PriceComponent(
               salesOrgConfig:
                   context.read<EligibilityBloc>().state.salesOrgConfigs,
-              price: (totalPrice * percentage / 100).toString(),
+              price: taxValue.toString(),
               type: PriceStyle.taxPrice,
             ),
             Text(
@@ -53,7 +55,8 @@ class MaterialTax extends StatelessWidget {
             PriceComponent(
               salesOrgConfig:
                   context.read<EligibilityBloc>().state.salesOrgConfigs,
-              price: (totalPrice * (1 + percentage / 100)).toString(),
+              //TODO : This is a temporary solution once C4P fix the calculated total, we will remove this
+              price: (totalPrice + taxValue).toString(),
               type: PriceStyle.taxPrice,
             ),
           ],

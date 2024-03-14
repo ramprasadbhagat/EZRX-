@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/payments/entities/customer_document_details_gr
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/quantity_and_price_with_tax.dart';
+import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,7 +80,7 @@ class CreditItemsSection extends StatelessWidget {
                                 : creditItem.unitGrossPrice.toString(),
                           )
                         : null,
-                    footerWidget: QuantityAndPriceWithTax(
+                    footerWidget: QuantityAndPriceWithTax.order(
                       quantity: creditItem.billingQuantity.getOrDefaultValue(0),
                       taxPercentage: creditItem.taxPercent,
                       netPrice: creditItem.netPriceText,
