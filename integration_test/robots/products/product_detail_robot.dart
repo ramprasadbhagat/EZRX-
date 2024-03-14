@@ -225,7 +225,7 @@ class ProductDetailRobot extends CommonRobot {
 
   void verifyMateriaNumberDisplayed(String value) {
     expect(
-      find.byKey(WidgetKeys.balanceTextRow('Material Number'.tr(), value)),
+      find.byKey(WidgetKeys.balanceTextRow('Material number'.tr(), value)),
       findsOneWidget,
     );
   }
@@ -264,12 +264,12 @@ class ProductDetailRobot extends CommonRobot {
     bool isVisible = true,
   }) {
     if (!isVisible) {
-      expect(find.text('Expiry'.tr()), findsNothing);
+      expect(find.text('Expiry date'.tr()), findsNothing);
       return;
     }
     expect(
       find.byKey(
-        WidgetKeys.balanceTextRow('Expiry'.tr(), value),
+        WidgetKeys.balanceTextRow('Expiry date'.tr(), value),
       ),
       findsOneWidget,
     );

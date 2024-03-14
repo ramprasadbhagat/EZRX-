@@ -1256,7 +1256,7 @@ void main() {
           );
           expect(
             find.byKey(
-              WidgetKeys.balanceTextRow('Expiry'.tr(), '30 Nov 2025'),
+              WidgetKeys.balanceTextRow('Expiry date'.tr(), '30 Nov 2025'),
             ),
             findsOneWidget,
           );
@@ -1300,7 +1300,7 @@ void main() {
 
           expect(
             find.byKey(
-              WidgetKeys.balanceTextRow('Expiry'.tr(), 'NA'),
+              WidgetKeys.balanceTextRow('Expiry date'.tr(), 'NA'),
             ),
             findsNothing,
           );
@@ -1423,6 +1423,47 @@ void main() {
               WidgetKeys.balanceTextRow('Batch'.tr(), '12S017'),
             ),
             findsNothing,
+          );
+        });
+
+        testWidgets('Display material name', (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: zpMaterialDetail,
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              user: user,
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -200),
+          );
+          await tester.pumpAndSettle();
+          await tester.tap(
+            find.byKey(WidgetKeys.materialDetailsInfoTile),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.byKey(WidgetKeys.materialInfoDialog),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(
+              WidgetKeys.balanceTextRow(
+                'Material name'.tr(),
+                zpMaterialDetail.materialInfo.defaultMaterialDescription,
+              ),
+            ),
+            findsOneWidget,
           );
         });
       });
@@ -1989,7 +2030,7 @@ void main() {
           );
           expect(
             find.byKey(
-              WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
+              WidgetKeys.balanceTextRow('Expiry date', '30 Nov 2025'),
             ),
             findsOneWidget,
           );
@@ -2028,7 +2069,7 @@ void main() {
           );
           expect(
             find.byKey(
-              WidgetKeys.balanceTextRow('Expiry', 'NA'),
+              WidgetKeys.balanceTextRow('Expiry date', 'NA'),
             ),
             findsOneWidget,
           );
@@ -2067,7 +2108,7 @@ void main() {
           );
           expect(
             find.byKey(
-              WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
+              WidgetKeys.balanceTextRow('Expiry date', '30 Nov 2025'),
             ),
             findsOneWidget,
           );
@@ -2106,7 +2147,7 @@ void main() {
           );
           expect(
             find.byKey(
-              WidgetKeys.balanceTextRow('Expiry', '30 Nov 2025'),
+              WidgetKeys.balanceTextRow('Expiry date', '30 Nov 2025'),
             ),
             findsNothing,
           );

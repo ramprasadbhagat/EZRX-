@@ -78,7 +78,7 @@ class _MaterialInfoDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.tr('Material Information'),
+            context.tr('Material information'),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: ZPColors.primary,
                 ),
@@ -87,7 +87,7 @@ class _MaterialInfoDialog extends StatelessWidget {
             height: 20,
           ),
           BalanceTextRow(
-            keyText: context.tr('Material Number'),
+            keyText: context.tr('Material number'),
             valueText: materialInfo.materialNumber.displayMatNo,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -112,6 +112,18 @@ class _MaterialInfoDialog extends StatelessWidget {
             ),
             const SizedBox(height: 7),
           ],
+          BalanceTextRow(
+            keyText: context.tr('Material name'),
+            valueText: materialInfo.defaultMaterialDescription,
+            valueFlex: 1,
+            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.black,
+                ),
+            valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                ),
+          ),
+          const SizedBox(height: 7),
           BalanceTextRow(
             keyText: context.tr(
               materialInfo.isMarketPlace ? 'Sold by seller' : 'Manufacturer',
@@ -199,7 +211,7 @@ class _ExpiryDateWidget extends StatelessWidget {
       children: [
         const SizedBox(height: 7),
         BalanceTextRow(
-          keyText: context.tr('Expiry'),
+          keyText: context.tr('Expiry date'),
           valueText: expiryDateText,
           valueFlex: 1,
           keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
