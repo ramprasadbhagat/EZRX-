@@ -712,7 +712,7 @@ void main() {
       await productDetailRobot.openAvailableOffers();
       productDetailRobot.verifyNameProductOffer(productName);
       productDetailRobot.verifyCodeProductOffer(materialNumber);
-      productDetailRobot.verifyQuantityProductDisplayedForID();
+      productDetailRobot.verifyQuantityProductDisplayedForTirePriceOffer();
       productDetailRobot.verifyButtonCloseDisplayed();
     });
     testWidgets('EZRX-T115 | Verify checkout cart when having pre-order items',

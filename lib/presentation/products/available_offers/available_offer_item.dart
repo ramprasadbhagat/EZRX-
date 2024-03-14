@@ -195,6 +195,7 @@ class _TierItem extends StatelessWidget {
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: ZPColors.black,
               ),
+          key: WidgetKeys.lblQuantityProductTireOffers,
         ),
       ],
     );

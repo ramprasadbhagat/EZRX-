@@ -13,6 +13,7 @@ class _LanguageDropDown extends StatelessWidget {
           flex: 4,
           child: Text(
             'Language'.tr(),
+            key: WidgetKeys.profilePageLanguageDropdownLabel,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),

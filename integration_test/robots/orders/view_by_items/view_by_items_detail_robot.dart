@@ -111,7 +111,7 @@ class ViewByItemsDetailRobot extends CommonRobot {
   }
 
   Future<void> verifyItemComponent() async {
-    await scrollEnsureFinderVisible(qtyLabel.first);
+    await scrollEnsureFinderVisible(orderItem);
     _verifyItemComponent(orderItem);
     _verifyItemComponent(find.byKey(WidgetKeys.commonTileItemTitle));
     _verifyItemComponent(find.byKey(WidgetKeys.commonTileItemLabel));

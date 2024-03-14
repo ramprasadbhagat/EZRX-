@@ -1433,6 +1433,8 @@ class WidgetKeys {
   //============================================================
   static const Key profilePageLanguageDropdown =
       Key('profilePageLanguageDropdown');
+  static const Key profilePageLanguageDropdownLabel =
+      Key('profilePageLanguageDropdownLabel');
   // SOA page
   //============================================================
   static const Key soaNotFoundRecordKey = Key('soaNotFoundRecordKey');

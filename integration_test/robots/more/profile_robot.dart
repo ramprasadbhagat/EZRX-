@@ -33,6 +33,31 @@ class ProfileRobot {
     expect(infoRow, findsOneWidget);
   }
 
+  void _verifyLanguageDropdownLabelVisible() {
+    expect(
+      find.byKey(WidgetKeys.profilePageLanguageDropdownLabel),
+      findsOneWidget,
+    );
+    expect(
+      (tester.widget(find.byKey(WidgetKeys.profilePageLanguageDropdownLabel))
+              as Text)
+          .data,
+      'Language'.tr(),
+    );
+  }
+
+  void _verifyLanguageDropdownVisible(String text) {
+    expect(
+      find.byKey(WidgetKeys.profilePageLanguageDropdown),
+      findsOneWidget,
+    );
+    // expect(
+    //   (tester.widget(find.byKey(WidgetKeys.profilePageLanguageDropdown))as DropdownButtonFormField2<Language>)
+    //       .initialValue,
+    //   text,
+    // );
+  }
+
   void verifyAccountAndBusinessDetailsVisible({
     required String firstName,
     required String lastName,
@@ -56,8 +81,8 @@ class ProfileRobot {
         paymentTerms,
       );
     }
-    _verifyTextVisible('Language');
-    _verifyTextVisible(language);
+    _verifyLanguageDropdownLabelVisible();
+    _verifyLanguageDropdownVisible(language);
   }
 
   void verifyLicenseListVisible() {

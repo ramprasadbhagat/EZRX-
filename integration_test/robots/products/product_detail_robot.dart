@@ -303,6 +303,26 @@ class ProductDetailRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> increaseMaterialQty() async {
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(WidgetKeys.materialDetailsQuantityInput),
+        matching: find.byKey(WidgetKeys.productDetailQuantityAddKey),
+      ),
+    );
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> decreaseMaterialQty() async {
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(WidgetKeys.materialDetailsQuantityInput),
+        matching: find.byKey(WidgetKeys.productDetailQuantityDeleteKey),
+      ),
+    );
+    await tester.pumpAndSettle();
+  }
+
   Future<void> tapAddToCart() async {
     await tester.tap(addToCartButton);
     await tester.pumpUntilVisible(find.byKey(WidgetKeys.customSnackBar));
@@ -402,7 +422,7 @@ class ProductDetailRobot extends CommonRobot {
     );
   }
 
-  void verifyQuantityProductDisplayedForID() {
+  void verifyQuantityProductDisplayedForTirePriceOffer() {
     expect(
       find.descendant(
         of: find.byType(ShowOfferDialogWidget),

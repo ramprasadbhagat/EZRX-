@@ -58,6 +58,8 @@ reset_ph_salesorg_config:
 	./integration_test/ph/${SALESORGCONFIG}
 reset_mm_salesorg_config:
 	./integration_test/mm/${SALESORGCONFIG}
+run_mm_client_order_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/mm/${CLIENTUSERORDER} 
 reset_kh_salesorg_config:
 	./integration_test/kh/${SALESORGCONFIG}
 reset_id_salesorg_config:
