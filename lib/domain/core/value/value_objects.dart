@@ -387,7 +387,7 @@ class Remarks extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory Remarks(String input) {
-    return Remarks._(validateStringNotEmpty(input));
+    return Remarks._(validateStringNotEmpty(input.trim()));
   }
 
   String get displayText => value.getOrElse(() => '-');

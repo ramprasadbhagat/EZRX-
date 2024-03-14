@@ -296,6 +296,42 @@ void main() {
       );
     });
 
+    testWidgets(
+        ' =>  Body Test - Return remarks empty space trimmed from both leading and trailing',
+        (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial.copyWith(bonusItems: [])],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails.copyWith(
+                  returnReason: fakeUsageList.first.usageCode,
+                  remarks: Remarks('   test-remarks  '),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Comments',
+              'test-remarks',
+            ),
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+
     testWidgets(' =>  Body Test - Uploaded File List section', (tester) async {
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
