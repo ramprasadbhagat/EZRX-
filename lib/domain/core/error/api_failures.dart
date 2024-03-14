@@ -144,7 +144,7 @@ extension ApiFailureExt on ApiFailure {
             const Failure('Camera Permission Denied'),
         userNameNotFound: (_) => const Failure('Incorrect username'),
         uploadedFileSizeExceed: (_) => const Failure(
-          'Can’t upload.This file is larger than 20 MB',
+          'Maximum file size should be 20MB',
         ),
         paymentAdviceDeleteFailed: (paymentAdvice) => Failure(
           'PA #{adviceNumber} delete failed',

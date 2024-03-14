@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
@@ -422,6 +424,29 @@ void main() {
         },
       );
 
+      test('uploadFiles remote try upload bigger file', () async {
+        when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+        final result = await repository.uploadFiles(
+          files: [
+            PlatformFile(
+              name: 'fake-name',
+              size: (20 * pow(1024, 2) + 1).toInt(),
+            ),
+          ],
+          user: fakeClientUser,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+        expect(
+          result,
+          const Left(
+            ApiFailure.uploadedFileSizeExceed(),
+          ),
+        );
+      });
+
       test(
         'Upload Files Too Big Error',
         () async {
@@ -439,7 +464,7 @@ void main() {
         () async {
           when(() => configMock.appFlavor).thenReturn(Flavor.uat);
           final file = MultipartFile.fromBytes([1, 2, 3]);
-           when(
+          when(
             () => fileSystemHelperMock.toMultipartFile(
               name: any(named: 'name'),
               path: any(named: 'path'),
