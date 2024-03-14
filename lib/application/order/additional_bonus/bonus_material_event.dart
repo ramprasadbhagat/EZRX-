@@ -30,4 +30,11 @@ class BonusMaterialEvent with _$BonusMaterialEvent {
   factory BonusMaterialEvent.updateAddedBonusItems({
     required List<BonusSampleItem> addedBonusItemList,
   }) = _UpdateAddedBonusItems;
+  const factory BonusMaterialEvent.updateProductStock({
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs configs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required List<MaterialInfo> items,
+  }) = _UpdateProductStock;
 }

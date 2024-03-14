@@ -325,7 +325,7 @@ void main() {
       await tester.pump();
       await tester.drag(
         find.byKey(WidgetKeys.scrollList),
-        const Offset(0.0, -2000.0),
+        const Offset(0.0, -2500.0),
       );
       await tester.pumpAndSettle();
 

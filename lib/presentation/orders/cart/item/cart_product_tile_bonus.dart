@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/pre_order_label.dart';
+import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -173,7 +174,9 @@ class _MaterialDetails extends StatelessWidget {
                 width: 4,
               ),
               if (eligibilityState.salesOrg.showBonus) const BonusTag(),
-              PreOrderLabel(inStock: bonusItem.inStock.isMaterialInStock),
+              PreOrderLabel(
+                inStock: bonusItem.stockInfo.inStock.isMaterialInStock,
+              ),
             ],
           ),
           Padding(
@@ -184,6 +187,10 @@ class _MaterialDetails extends StatelessWidget {
               maxLines: 2,
               style: Theme.of(context).textTheme.labelSmall,
             ),
+          ),
+          StockInfoWidget(
+            materialInfo: cartProduct.materialInfo,
+            stockInfo: bonusItem.stockInfo,
           ),
           _MaterialQuantitySection(
             bonusItem: bonusItem,

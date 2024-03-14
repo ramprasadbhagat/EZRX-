@@ -42,6 +42,13 @@ mixin _$BonusMaterialEvent {
         updateBonusItemQuantity,
     required TResult Function(List<BonusSampleItem> addedBonusItemList)
         updateAddedBonusItems,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)
+        updateProductStock,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +76,13 @@ mixin _$BonusMaterialEvent {
     TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult? Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,6 +110,13 @@ mixin _$BonusMaterialEvent {
     TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -109,6 +130,7 @@ mixin _$BonusMaterialEvent {
         updateBonusItemQuantity,
     required TResult Function(_UpdateAddedBonusItems value)
         updateAddedBonusItems,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -118,6 +140,7 @@ mixin _$BonusMaterialEvent {
     TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult? Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -127,6 +150,7 @@ mixin _$BonusMaterialEvent {
     TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -379,6 +403,13 @@ class _$_Fetch implements _Fetch {
         updateBonusItemQuantity,
     required TResult Function(List<BonusSampleItem> addedBonusItemList)
         updateAddedBonusItems,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)
+        updateProductStock,
   }) {
     return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo, user,
         searchKey, isGimmickMaterialEnabled, principalData);
@@ -410,6 +441,13 @@ class _$_Fetch implements _Fetch {
     TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult? Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
   }) {
     return fetch?.call(salesOrganisation, configs, customerCodeInfo, shipToInfo,
         user, searchKey, isGimmickMaterialEnabled, principalData);
@@ -441,6 +479,13 @@ class _$_Fetch implements _Fetch {
     TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -461,6 +506,7 @@ class _$_Fetch implements _Fetch {
         updateBonusItemQuantity,
     required TResult Function(_UpdateAddedBonusItems value)
         updateAddedBonusItems,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
   }) {
     return fetch(this);
   }
@@ -473,6 +519,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult? Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
   }) {
     return fetch?.call(this);
   }
@@ -485,6 +532,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -738,6 +786,13 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
         updateBonusItemQuantity,
     required TResult Function(List<BonusSampleItem> addedBonusItemList)
         updateAddedBonusItems,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)
+        updateProductStock,
   }) {
     return loadMoreBonusItem(salesOrganisation, configs, customerCodeInfo,
         shipToInfo, user, principalData, isGimmickMaterialEnabled);
@@ -769,6 +824,13 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
     TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult? Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
   }) {
     return loadMoreBonusItem?.call(salesOrganisation, configs, customerCodeInfo,
         shipToInfo, user, principalData, isGimmickMaterialEnabled);
@@ -800,6 +862,13 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
     TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
     required TResult orElse(),
   }) {
     if (loadMoreBonusItem != null) {
@@ -820,6 +889,7 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
         updateBonusItemQuantity,
     required TResult Function(_UpdateAddedBonusItems value)
         updateAddedBonusItems,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
   }) {
     return loadMoreBonusItem(this);
   }
@@ -832,6 +902,7 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
     TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult? Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
   }) {
     return loadMoreBonusItem?.call(this);
   }
@@ -844,6 +915,7 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
     TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
     required TResult orElse(),
   }) {
     if (loadMoreBonusItem != null) {
@@ -975,6 +1047,13 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
         updateBonusItemQuantity,
     required TResult Function(List<BonusSampleItem> addedBonusItemList)
         updateAddedBonusItems,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)
+        updateProductStock,
   }) {
     return validateBonusQuantity(bonusMaterial);
   }
@@ -1005,6 +1084,13 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
     TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult? Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
   }) {
     return validateBonusQuantity?.call(bonusMaterial);
   }
@@ -1035,6 +1121,13 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
     TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
     required TResult orElse(),
   }) {
     if (validateBonusQuantity != null) {
@@ -1054,6 +1147,7 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
         updateBonusItemQuantity,
     required TResult Function(_UpdateAddedBonusItems value)
         updateAddedBonusItems,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
   }) {
     return validateBonusQuantity(this);
   }
@@ -1066,6 +1160,7 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
     TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult? Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
   }) {
     return validateBonusQuantity?.call(this);
   }
@@ -1078,6 +1173,7 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
     TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
     required TResult orElse(),
   }) {
     if (validateBonusQuantity != null) {
@@ -1198,6 +1294,13 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
         updateBonusItemQuantity,
     required TResult Function(List<BonusSampleItem> addedBonusItemList)
         updateAddedBonusItems,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)
+        updateProductStock,
   }) {
     return updateBonusItemQuantity(updatedBonusItem);
   }
@@ -1228,6 +1331,13 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
     TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult? Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
   }) {
     return updateBonusItemQuantity?.call(updatedBonusItem);
   }
@@ -1258,6 +1368,13 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
     TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
     required TResult orElse(),
   }) {
     if (updateBonusItemQuantity != null) {
@@ -1277,6 +1394,7 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
         updateBonusItemQuantity,
     required TResult Function(_UpdateAddedBonusItems value)
         updateAddedBonusItems,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
   }) {
     return updateBonusItemQuantity(this);
   }
@@ -1289,6 +1407,7 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
     TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult? Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
   }) {
     return updateBonusItemQuantity?.call(this);
   }
@@ -1301,6 +1420,7 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
     TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
     required TResult orElse(),
   }) {
     if (updateBonusItemQuantity != null) {
@@ -1420,6 +1540,13 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
         updateBonusItemQuantity,
     required TResult Function(List<BonusSampleItem> addedBonusItemList)
         updateAddedBonusItems,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)
+        updateProductStock,
   }) {
     return updateAddedBonusItems(addedBonusItemList);
   }
@@ -1450,6 +1577,13 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
     TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult? Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
   }) {
     return updateAddedBonusItems?.call(addedBonusItemList);
   }
@@ -1480,6 +1614,13 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
     TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     TResult Function(List<BonusSampleItem> addedBonusItemList)?
         updateAddedBonusItems,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
     required TResult orElse(),
   }) {
     if (updateAddedBonusItems != null) {
@@ -1499,6 +1640,7 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
         updateBonusItemQuantity,
     required TResult Function(_UpdateAddedBonusItems value)
         updateAddedBonusItems,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
   }) {
     return updateAddedBonusItems(this);
   }
@@ -1511,6 +1653,7 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
     TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult? Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
   }) {
     return updateAddedBonusItems?.call(this);
   }
@@ -1523,6 +1666,7 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
     TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
     TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     TResult Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
     required TResult orElse(),
   }) {
     if (updateAddedBonusItems != null) {
@@ -1544,8 +1688,349 @@ abstract class _UpdateAddedBonusItems implements BonusMaterialEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdateProductStockCopyWith<$Res> {
+  factory _$$_UpdateProductStockCopyWith(_$_UpdateProductStock value,
+          $Res Function(_$_UpdateProductStock) then) =
+      __$$_UpdateProductStockCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs configs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      List<MaterialInfo> items});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+}
+
+/// @nodoc
+class __$$_UpdateProductStockCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_UpdateProductStock>
+    implements _$$_UpdateProductStockCopyWith<$Res> {
+  __$$_UpdateProductStockCopyWithImpl(
+      _$_UpdateProductStock _value, $Res Function(_$_UpdateProductStock) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrganisation = null,
+    Object? configs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? items = null,
+  }) {
+    return _then(_$_UpdateProductStock(
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      items: null == items
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get configs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
+      return _then(_value.copyWith(configs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateProductStock implements _UpdateProductStock {
+  const _$_UpdateProductStock(
+      {required this.salesOrganisation,
+      required this.configs,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required final List<MaterialInfo> items})
+      : _items = items;
+
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs configs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  final List<MaterialInfo> _items;
+  @override
+  List<MaterialInfo> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
+
+  @override
+  String toString() {
+    return 'BonusMaterialEvent.updateProductStock(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, items: $items)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateProductStock &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.configs, configs) || other.configs == configs) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            const DeepCollectionEquality().equals(other._items, _items));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      salesOrganisation,
+      configs,
+      customerCodeInfo,
+      shipToInfo,
+      const DeepCollectionEquality().hash(_items));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateProductStockCopyWith<_$_UpdateProductStock> get copyWith =>
+      __$$_UpdateProductStockCopyWithImpl<_$_UpdateProductStock>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SearchKey searchKey,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)
+        loadMoreBonusItem,
+    required TResult Function(MaterialInfo bonusMaterial) validateBonusQuantity,
+    required TResult Function(MaterialInfo updatedBonusItem)
+        updateBonusItemQuantity,
+    required TResult Function(List<BonusSampleItem> addedBonusItemList)
+        updateAddedBonusItems,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)
+        updateProductStock,
+  }) {
+    return updateProductStock(
+        salesOrganisation, configs, customerCodeInfo, shipToInfo, items);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SearchKey searchKey,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult? Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
+    TResult? Function(List<BonusSampleItem> addedBonusItemList)?
+        updateAddedBonusItems,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
+  }) {
+    return updateProductStock?.call(
+        salesOrganisation, configs, customerCodeInfo, shipToInfo, items);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SearchKey searchKey,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
+    TResult Function(List<BonusSampleItem> addedBonusItemList)?
+        updateAddedBonusItems,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> items)?
+        updateProductStock,
+    required TResult orElse(),
+  }) {
+    if (updateProductStock != null) {
+      return updateProductStock(
+          salesOrganisation, configs, customerCodeInfo, shipToInfo, items);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMoreBonusItem value) loadMoreBonusItem,
+    required TResult Function(_ValidateBonusQuantity value)
+        validateBonusQuantity,
+    required TResult Function(_UpdateBonusItemQuantity value)
+        updateBonusItemQuantity,
+    required TResult Function(_UpdateAddedBonusItems value)
+        updateAddedBonusItems,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
+  }) {
+    return updateProductStock(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
+    TResult? Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
+  }) {
+    return updateProductStock?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
+    TResult Function(_UpdateAddedBonusItems value)? updateAddedBonusItems,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
+    required TResult orElse(),
+  }) {
+    if (updateProductStock != null) {
+      return updateProductStock(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateProductStock implements BonusMaterialEvent {
+  const factory _UpdateProductStock(
+      {required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs configs,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final List<MaterialInfo> items}) = _$_UpdateProductStock;
+
+  SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get configs;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  List<MaterialInfo> get items;
+  @JsonKey(ignore: true)
+  _$$_UpdateProductStockCopyWith<_$_UpdateProductStock> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$BonusMaterialState {
   bool get isFetching => throw _privateConstructorUsedError;
+  bool get isUpdatingStock => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   List<MaterialInfo> get bonusItemList => throw _privateConstructorUsedError;
@@ -1568,6 +2053,7 @@ abstract class $BonusMaterialStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isFetching,
+      bool isUpdatingStock,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       List<MaterialInfo> bonusItemList,
       bool canLoadMore,
@@ -1590,6 +2076,7 @@ class _$BonusMaterialStateCopyWithImpl<$Res, $Val extends BonusMaterialState>
   @override
   $Res call({
     Object? isFetching = null,
+    Object? isUpdatingStock = null,
     Object? failureOrSuccessOption = null,
     Object? bonusItemList = null,
     Object? canLoadMore = null,
@@ -1601,6 +2088,10 @@ class _$BonusMaterialStateCopyWithImpl<$Res, $Val extends BonusMaterialState>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isUpdatingStock: null == isUpdatingStock
+          ? _value.isUpdatingStock
+          : isUpdatingStock // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
@@ -1640,6 +2131,7 @@ abstract class _$$_BonusMaterialStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isFetching,
+      bool isUpdatingStock,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       List<MaterialInfo> bonusItemList,
       bool canLoadMore,
@@ -1660,6 +2152,7 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isFetching = null,
+    Object? isUpdatingStock = null,
     Object? failureOrSuccessOption = null,
     Object? bonusItemList = null,
     Object? canLoadMore = null,
@@ -1671,6 +2164,10 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isUpdatingStock: null == isUpdatingStock
+          ? _value.isUpdatingStock
+          : isUpdatingStock // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
@@ -1705,6 +2202,7 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
 class _$_BonusMaterialState extends _BonusMaterialState {
   const _$_BonusMaterialState(
       {required this.isFetching,
+      required this.isUpdatingStock,
       required this.failureOrSuccessOption,
       required final List<MaterialInfo> bonusItemList,
       required this.canLoadMore,
@@ -1717,6 +2215,8 @@ class _$_BonusMaterialState extends _BonusMaterialState {
 
   @override
   final bool isFetching;
+  @override
+  final bool isUpdatingStock;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   final List<MaterialInfo> _bonusItemList;
@@ -1744,7 +2244,7 @@ class _$_BonusMaterialState extends _BonusMaterialState {
 
   @override
   String toString() {
-    return 'BonusMaterialState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, bonusItemList: $bonusItemList, canLoadMore: $canLoadMore, isBonusQtyValidated: $isBonusQtyValidated, searchKey: $searchKey, addedBonusItemsList: $addedBonusItemsList)';
+    return 'BonusMaterialState(isFetching: $isFetching, isUpdatingStock: $isUpdatingStock, failureOrSuccessOption: $failureOrSuccessOption, bonusItemList: $bonusItemList, canLoadMore: $canLoadMore, isBonusQtyValidated: $isBonusQtyValidated, searchKey: $searchKey, addedBonusItemsList: $addedBonusItemsList)';
   }
 
   @override
@@ -1754,6 +2254,8 @@ class _$_BonusMaterialState extends _BonusMaterialState {
             other is _$_BonusMaterialState &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
+            (identical(other.isUpdatingStock, isUpdatingStock) ||
+                other.isUpdatingStock == isUpdatingStock) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             const DeepCollectionEquality()
@@ -1772,6 +2274,7 @@ class _$_BonusMaterialState extends _BonusMaterialState {
   int get hashCode => Object.hash(
       runtimeType,
       isFetching,
+      isUpdatingStock,
       failureOrSuccessOption,
       const DeepCollectionEquality().hash(_bonusItemList),
       canLoadMore,
@@ -1790,6 +2293,7 @@ class _$_BonusMaterialState extends _BonusMaterialState {
 abstract class _BonusMaterialState extends BonusMaterialState {
   const factory _BonusMaterialState(
       {required final bool isFetching,
+      required final bool isUpdatingStock,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final List<MaterialInfo> bonusItemList,
       required final bool canLoadMore,
@@ -1801,6 +2305,8 @@ abstract class _BonusMaterialState extends BonusMaterialState {
 
   @override
   bool get isFetching;
+  @override
+  bool get isUpdatingStock;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override

@@ -8,6 +8,8 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -27,9 +29,11 @@ part 'bonus_material_state.dart';
 
 class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
   final IMaterialListRepository materialListRepository;
+  final ICartRepository cartRepository;
   final Config config;
   BonusMaterialBloc({
     required this.materialListRepository,
+    required this.cartRepository,
     required this.config,
   }) : super(BonusMaterialState.initial()) {
     on<_Fetch>(
@@ -78,6 +82,15 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
                 isFetching: false,
               ),
             );
+            add(
+              _UpdateProductStock(
+                items: bonus.products,
+                salesOrganisation: e.salesOrganisation,
+                configs: e.configs,
+                shipToInfo: e.shipToInfo,
+                customerCodeInfo: e.customerCodeInfo,
+              ),
+            );
           },
         );
       },
@@ -122,6 +135,15 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
                 canLoadMore: bonusItems.products.length >= config.pageSize,
               ),
             );
+            add(
+              _UpdateProductStock(
+                items: bonusItems.products,
+                salesOrganisation: e.salesOrganisation,
+                configs: e.configs,
+                shipToInfo: e.shipToInfo,
+                customerCodeInfo: e.customerCodeInfo,
+              ),
+            );
           },
         );
       },
@@ -164,6 +186,52 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
               ...e.addedBonusItemList,
             ],
           ),
+        );
+      },
+    );
+
+    on<_UpdateProductStock>(
+      (e, emit) async {
+        emit(
+          state.copyWith(
+            isUpdatingStock: true,
+          ),
+        );
+
+        final failureOrSuccess = await cartRepository.getStockInfoList(
+          items: e.items,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisationConfigs: e.configs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isUpdatingStock: false,
+              ),
+            );
+          },
+          (newStockFetched) {
+            final updatedItemList = state.bonusItemList.map((product) {
+              return product.copyWith(
+                stockInfos: product.stockInfos.isNotEmpty
+                    ? product.stockInfos
+                    : (newStockFetched[product.materialNumber] ??
+                        <StockInfo>[]),
+              );
+            }).toList();
+            emit(
+              state.copyWith(
+                bonusItemList: updatedItemList,
+                failureOrSuccessOption: none(),
+                isUpdatingStock: false,
+              ),
+            );
+          },
         );
       },
     );

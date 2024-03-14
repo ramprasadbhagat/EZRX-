@@ -37,7 +37,7 @@ import 'package:ezrxmobile/presentation/products/available_offers/available_offe
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_details.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/similar_product.dart';
-import 'package:ezrxmobile/presentation/products/product_details/widget/stock_info.dart';
+import 'package:ezrxmobile/presentation/products/product_details/widget/product_stock_info.dart';
 import 'package:ezrxmobile/presentation/products/widgets/combo_offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';

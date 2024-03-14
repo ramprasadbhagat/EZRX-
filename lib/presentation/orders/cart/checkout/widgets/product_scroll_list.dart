@@ -93,7 +93,7 @@ class _CheckoutProductMaterialWithBonus extends StatelessWidget {
               .map(
                 (e) => _CheckoutProductBonusItem(
                   bonusItem: e,
-                  parentMaterialNumber: cartItem.getMaterialNumber,
+                  cartProduct: cartItem,
                 ),
               )
               .toList(),

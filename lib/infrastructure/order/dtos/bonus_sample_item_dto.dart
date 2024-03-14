@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -38,7 +39,7 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
       ),
       itemId: StringValue(itemId),
       type: MaterialInfoType(type),
-      inStock: MaterialInStock(''),
+      stockInfo: StockInfo.empty(),
     );
   }
 

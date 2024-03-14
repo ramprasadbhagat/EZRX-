@@ -604,6 +604,11 @@ class PriceAggregate with _$PriceAggregate {
       )
       .toList();
 
+  StockInfo get stockInfoValid => stockInfoList.firstWhere(
+        (element) => element.expiryDate.isValid() || element.batch.isValid(),
+        orElse: () => StockInfo.empty(),
+      );
+
   PriceAggregate copyWithPrice({
     required Price newPrice,
     required bool exceedQty,
@@ -878,7 +883,7 @@ class PriceAggregate with _$PriceAggregate {
             materialDescription: e.materialDescription,
           ),
           salesOrgConfig: salesOrgConfig,
-          stockInfoList: [StockInfo.empty().copyWith(inStock: e.inStock)],
+          stockInfoList: [e.stockInfo],
           quantity: e.qty.intValue,
         ),
       )

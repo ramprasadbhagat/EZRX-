@@ -812,6 +812,15 @@ void main() {
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
+        final materialDetailsMaterialDescription = find.byKey(
+          WidgetKeys.materialDetailsMaterialDescription,
+        );
+        expect(materialDetailsMaterialDescription, findsOneWidget);
+        await tester.drag(
+          materialDetailsMaterialDescription,
+          const Offset(0.0, -1000),
+        );
+        await tester.pumpAndSettle();
         final similarProductSectionFinder =
             find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
         final similarProductItemFinder =
@@ -1316,6 +1325,8 @@ void main() {
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrganisation: fakeMYSalesOrganisation,
+              salesOrgConfigs:
+                  fakeMYSalesOrgConfigs.copyWith(enableBatchNumber: true),
             ),
           );
           await tester.pumpWidget(getScopedWidget());
@@ -1956,6 +1967,8 @@ void main() {
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrganisation: fakeMYSalesOrganisation,
+              salesOrgConfigs:
+                  fakeMYSalesOrgConfigs.copyWith(enableBatchNumber: true),
             ),
           );
           await tester.pumpWidget(getScopedWidget());
@@ -2049,6 +2062,7 @@ void main() {
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakePhMDISalesOrganisation,
             ),
           );
 
@@ -2166,7 +2180,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
           expect(
-            find.textContaining('(EXP: NA)', findRichText: true),
+            find.textContaining('EXP: NA', findRichText: true),
             findsOneWidget,
           );
           final infoIcon = find.byKey(WidgetKeys.expiryDateInfoIcon);
@@ -2202,7 +2216,8 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeMYSalesOrganisation,
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            salesOrgConfigs:
+                fakeMYSalesOrgConfigs.copyWith(enableBatchNumber: true),
           ),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -2213,7 +2228,7 @@ void main() {
           findsOneWidget,
         );
         expect(
-          find.textContaining('(EXP: NA)', findRichText: true),
+          find.textContaining('EXP: NA', findRichText: true),
           findsOneWidget,
         );
       });

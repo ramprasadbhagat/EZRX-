@@ -2,19 +2,19 @@ part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart
 
 class _CheckoutProductBonusItem extends StatelessWidget {
   final BonusSampleItem bonusItem;
-  final MaterialNumber parentMaterialNumber;
+  final PriceAggregate cartProduct;
 
   const _CheckoutProductBonusItem({
     Key? key,
     required this.bonusItem,
-    required this.parentMaterialNumber,
+    required this.cartProduct,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
       key: WidgetKeys.cartItemBonus(
-        parentMaterialNumber.displayMatNo,
+        cartProduct.getMaterialNumber.displayMatNo,
         bonusItem.materialNumber.displayMatNo,
       ),
       showBorder: true,
@@ -23,6 +23,7 @@ class _CheckoutProductBonusItem extends StatelessWidget {
         children: [
           _ProductDetailsSection(
             bonusItem: bonusItem,
+            cartProduct: cartProduct,
           ),
           _QuantityAndPrice(bonusItem: bonusItem),
         ],
@@ -33,8 +34,13 @@ class _CheckoutProductBonusItem extends StatelessWidget {
 
 class _ProductDetailsSection extends StatelessWidget {
   final BonusSampleItem bonusItem;
-  const _ProductDetailsSection({Key? key, required this.bonusItem})
-      : super(key: key);
+  final PriceAggregate cartProduct;
+
+  const _ProductDetailsSection({
+    Key? key,
+    required this.bonusItem,
+    required this.cartProduct,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +55,10 @@ class _ProductDetailsSection extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-          _ProductDetails(bonusItem: bonusItem),
+          _ProductDetails(
+            bonusItem: bonusItem,
+            cartProduct: cartProduct,
+          ),
         ],
       ),
     );
@@ -82,7 +91,13 @@ class _ProductImageSection extends StatelessWidget {
 
 class _ProductDetails extends StatelessWidget {
   final BonusSampleItem bonusItem;
-  const _ProductDetails({required this.bonusItem, Key? key}) : super(key: key);
+  final PriceAggregate cartProduct;
+
+  const _ProductDetails({
+    required this.bonusItem,
+    required this.cartProduct,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +119,7 @@ class _ProductDetails extends StatelessWidget {
                 width: 8,
               ),
               if (eligibilityState.salesOrg.showBonus) const BonusTag(),
-              if (!bonusItem.inStock.isMaterialInStock)
+              if (!bonusItem.stockInfo.inStock.isMaterialInStock)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: StatusLabel(
@@ -123,6 +138,10 @@ class _ProductDetails extends StatelessWidget {
               maxLines: 2,
               style: Theme.of(context).textTheme.labelSmall,
             ),
+          ),
+          StockInfoWidget(
+            materialInfo: cartProduct.materialInfo,
+            stockInfo: bonusItem.stockInfo,
           ),
         ],
       ),

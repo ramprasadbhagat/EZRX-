@@ -173,10 +173,6 @@ class SalesOrg extends ValueObject<String> {
 
   bool get showBonus => !isID;
 
-  //This is a temporary fix for hiding batch display for TW and SG Market
-  // later can be introduce as remote config
-  bool get showBatchNumber => !isTW && !isSg;
-
   bool get isProductDeterminationApplicable => isID;
 
   bool get checkMOVonSubTotal => isTH || isSg;

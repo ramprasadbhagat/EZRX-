@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -17,7 +18,7 @@ class BonusSampleItem with _$BonusSampleItem {
     required String materialDescription,
     required PrincipalData principalData,
     required MaterialInfoType type,
-    required MaterialInStock inStock,
+    required StockInfo stockInfo,
   }) = _BonusSampleItem;
 
   factory BonusSampleItem.empty() => BonusSampleItem(
@@ -27,7 +28,6 @@ class BonusSampleItem with _$BonusSampleItem {
         itemId: StringValue(''),
         principalData: PrincipalData.empty(),
         type: MaterialInfoType(''),
-        inStock: MaterialInStock(''),
+        stockInfo: StockInfo.empty(),
       );
-
 }

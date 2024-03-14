@@ -24,6 +24,7 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section_for_covid.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
+import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
@@ -161,13 +162,10 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
                 widget.materialInfo.displayDescription,
                 style: Theme.of(context).textTheme.labelSmall,
               ),
-              if (eligibilityState.salesOrgConfigs.expiryDateDisplay) ...[
-                const SizedBox(height: 5),
-                Text(
-                  "${context.tr('EXP:')} ${widget.materialInfo.bundleMaterialExpiryDate}",
-                  key: WidgetKeys.bundleMaterialExpiryDate,
-                ),
-              ],
+              StockInfoWidget(
+                materialInfo: widget.materialInfo,
+                stockInfo: widget.materialInfo.bundleStockInfoValid,
+              ),
               const SizedBox(height: 8),
               CartItemQuantityInput(
                 key: WidgetKeys.genericKey(

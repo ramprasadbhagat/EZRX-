@@ -127,7 +127,7 @@ class CartRepository implements ICartRepository {
             );
 
             return bonus.copyWith(
-              inStock: stockInfo.inStock,
+              stockInfo: stockInfo,
             );
           }
 

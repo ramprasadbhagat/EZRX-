@@ -21,6 +21,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -128,19 +129,25 @@ void main() {
       bonusSampleItems: [
         BonusSampleItem.empty().copyWith(
           materialNumber: MaterialNumber('fake-bonus-1'),
-          inStock: MaterialInStock('Yes'),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('Yes'),
+          ),
           qty: MaterialQty(5),
         ),
         BonusSampleItem.empty().copyWith(
           materialNumber: MaterialNumber('fake-bonus-2'),
-          inStock: MaterialInStock('No'),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('No'),
+          ),
           type: MaterialInfoType('Bonus'),
           qty: MaterialQty(10),
         ),
         BonusSampleItem.empty().copyWith(
           materialNumber: MaterialNumber('fake-bonus-3'),
           type: MaterialInfoType('Deals'),
-          inStock: MaterialInStock('No'),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('No'),
+          ),
           qty: MaterialQty(15),
         ),
         BonusSampleItem.empty().copyWith(

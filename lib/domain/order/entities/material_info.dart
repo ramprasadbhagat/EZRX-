@@ -182,13 +182,10 @@ class MaterialInfo with _$MaterialInfo {
         if (showGMCPart && getGMC.isNotEmpty) getGMC.getValue(),
       ].join(' | ');
 
-  String get bundleMaterialExpiryDate => stockInfos
-      .firstWhere(
-        (element) => element.expiryDate.isValid(),
+  StockInfo get bundleStockInfoValid => stockInfos.firstWhere(
+        (element) => element.expiryDate.isValid() || element.batch.isValid(),
         orElse: () => StockInfo.empty(),
-      )
-      .expiryDate
-      .dateOrNaString;
+      );
 }
 
 @freezed

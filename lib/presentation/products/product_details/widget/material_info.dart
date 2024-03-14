@@ -162,7 +162,7 @@ class _MaterialInfoDialog extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 7),
-          if (eligibilityState.salesOrg.showBatchNumber)
+          if (eligibilityState.salesOrgConfigs.enableBatchNumber)
             BalanceTextRow(
               keyText: context.tr('Batch'),
               valueText: productDetailState.displayBatchNumber,

@@ -388,7 +388,8 @@ void main() {
     if (result.isRight()) {
       result.fold((l) => {}, (r) {
         expect(
-          r.first.bonusSampleItems.first.inStock == MaterialInStock(''),
+          r.first.bonusSampleItems.first.stockInfo.inStock ==
+              MaterialInStock(''),
           true,
         );
       });

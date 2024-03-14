@@ -5,6 +5,7 @@ class BonusMaterialState with _$BonusMaterialState {
   const BonusMaterialState._();
   const factory BonusMaterialState({
     required bool isFetching,
+    required bool isUpdatingStock,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required List<MaterialInfo> bonusItemList,
     required bool canLoadMore,
@@ -18,6 +19,7 @@ class BonusMaterialState with _$BonusMaterialState {
         bonusItemList: <MaterialInfo>[],
         canLoadMore: true,
         isFetching: false,
+        isUpdatingStock: false,
         isBonusQtyValidated: true,
         searchKey: SearchKey.searchFilter(''),
         addedBonusItemsList: <BonusSampleItem>[],

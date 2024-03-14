@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -70,6 +71,10 @@ class BonusMaterialTile extends StatelessWidget {
                     key: WidgetKeys.bonusSampleSheetItemMaterialDescription,
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
+                ),
+                StockInfoWidget(
+                  materialInfo: cartProduct.materialInfo,
+                  stockInfo: bonusMaterial.bundleStockInfoValid,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -236,7 +241,6 @@ class _CartIcon extends StatelessWidget {
   }) : super(key: key);
 
   void _addBonusMaterial(BuildContext context) {
-
     final bonusItemId = context
         .read<BonusMaterialBloc>()
         .state

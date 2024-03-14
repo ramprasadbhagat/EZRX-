@@ -132,6 +132,10 @@ class _MaterialDetails extends StatelessWidget {
                   color: ZPColors.extraLightGrey4,
                 ),
           ),
+          StockInfoWidget(
+            stockInfo: cartItem.bundleStockInfoValid,
+            materialInfo: cartItem,
+          ),
           Align(
             alignment: Alignment.centerRight,
             child: Text(

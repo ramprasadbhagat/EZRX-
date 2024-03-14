@@ -22,7 +22,7 @@ mixin _$BonusSampleItem {
   String get materialDescription => throw _privateConstructorUsedError;
   PrincipalData get principalData => throw _privateConstructorUsedError;
   MaterialInfoType get type => throw _privateConstructorUsedError;
-  MaterialInStock get inStock => throw _privateConstructorUsedError;
+  StockInfo get stockInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BonusSampleItemCopyWith<BonusSampleItem> get copyWith =>
@@ -42,9 +42,10 @@ abstract class $BonusSampleItemCopyWith<$Res> {
       String materialDescription,
       PrincipalData principalData,
       MaterialInfoType type,
-      MaterialInStock inStock});
+      StockInfo stockInfo});
 
   $PrincipalDataCopyWith<$Res> get principalData;
+  $StockInfoCopyWith<$Res> get stockInfo;
 }
 
 /// @nodoc
@@ -66,7 +67,7 @@ class _$BonusSampleItemCopyWithImpl<$Res, $Val extends BonusSampleItem>
     Object? materialDescription = null,
     Object? principalData = null,
     Object? type = null,
-    Object? inStock = null,
+    Object? stockInfo = null,
   }) {
     return _then(_value.copyWith(
       qty: null == qty
@@ -93,10 +94,10 @@ class _$BonusSampleItemCopyWithImpl<$Res, $Val extends BonusSampleItem>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MaterialInfoType,
-      inStock: null == inStock
-          ? _value.inStock
-          : inStock // ignore: cast_nullable_to_non_nullable
-              as MaterialInStock,
+      stockInfo: null == stockInfo
+          ? _value.stockInfo
+          : stockInfo // ignore: cast_nullable_to_non_nullable
+              as StockInfo,
     ) as $Val);
   }
 
@@ -105,6 +106,14 @@ class _$BonusSampleItemCopyWithImpl<$Res, $Val extends BonusSampleItem>
   $PrincipalDataCopyWith<$Res> get principalData {
     return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
       return _then(_value.copyWith(principalData: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StockInfoCopyWith<$Res> get stockInfo {
+    return $StockInfoCopyWith<$Res>(_value.stockInfo, (value) {
+      return _then(_value.copyWith(stockInfo: value) as $Val);
     });
   }
 }
@@ -124,10 +133,12 @@ abstract class _$$_BonusSampleItemCopyWith<$Res>
       String materialDescription,
       PrincipalData principalData,
       MaterialInfoType type,
-      MaterialInStock inStock});
+      StockInfo stockInfo});
 
   @override
   $PrincipalDataCopyWith<$Res> get principalData;
+  @override
+  $StockInfoCopyWith<$Res> get stockInfo;
 }
 
 /// @nodoc
@@ -147,7 +158,7 @@ class __$$_BonusSampleItemCopyWithImpl<$Res>
     Object? materialDescription = null,
     Object? principalData = null,
     Object? type = null,
-    Object? inStock = null,
+    Object? stockInfo = null,
   }) {
     return _then(_$_BonusSampleItem(
       qty: null == qty
@@ -174,10 +185,10 @@ class __$$_BonusSampleItemCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MaterialInfoType,
-      inStock: null == inStock
-          ? _value.inStock
-          : inStock // ignore: cast_nullable_to_non_nullable
-              as MaterialInStock,
+      stockInfo: null == stockInfo
+          ? _value.stockInfo
+          : stockInfo // ignore: cast_nullable_to_non_nullable
+              as StockInfo,
     ));
   }
 }
@@ -192,7 +203,7 @@ class _$_BonusSampleItem extends _BonusSampleItem {
       required this.materialDescription,
       required this.principalData,
       required this.type,
-      required this.inStock})
+      required this.stockInfo})
       : super._();
 
   @override
@@ -208,11 +219,11 @@ class _$_BonusSampleItem extends _BonusSampleItem {
   @override
   final MaterialInfoType type;
   @override
-  final MaterialInStock inStock;
+  final StockInfo stockInfo;
 
   @override
   String toString() {
-    return 'BonusSampleItem(qty: $qty, materialNumber: $materialNumber, itemId: $itemId, materialDescription: $materialDescription, principalData: $principalData, type: $type, inStock: $inStock)';
+    return 'BonusSampleItem(qty: $qty, materialNumber: $materialNumber, itemId: $itemId, materialDescription: $materialDescription, principalData: $principalData, type: $type, stockInfo: $stockInfo)';
   }
 
   @override
@@ -229,12 +240,13 @@ class _$_BonusSampleItem extends _BonusSampleItem {
             (identical(other.principalData, principalData) ||
                 other.principalData == principalData) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.inStock, inStock) || other.inStock == inStock));
+            (identical(other.stockInfo, stockInfo) ||
+                other.stockInfo == stockInfo));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, qty, materialNumber, itemId,
-      materialDescription, principalData, type, inStock);
+      materialDescription, principalData, type, stockInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -251,7 +263,7 @@ abstract class _BonusSampleItem extends BonusSampleItem {
       required final String materialDescription,
       required final PrincipalData principalData,
       required final MaterialInfoType type,
-      required final MaterialInStock inStock}) = _$_BonusSampleItem;
+      required final StockInfo stockInfo}) = _$_BonusSampleItem;
   const _BonusSampleItem._() : super._();
 
   @override
@@ -267,7 +279,7 @@ abstract class _BonusSampleItem extends BonusSampleItem {
   @override
   MaterialInfoType get type;
   @override
-  MaterialInStock get inStock;
+  StockInfo get stockInfo;
   @override
   @JsonKey(ignore: true)
   _$$_BonusSampleItemCopyWith<_$_BonusSampleItem> get copyWith =>

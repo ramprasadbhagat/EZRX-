@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -332,7 +333,9 @@ void main() {
                 bonusSampleItems: cartItem.bonusSampleItems
                     .map(
                       (e) => e.copyWith(
-                        inStock: MaterialInStock('Yes'),
+                        stockInfo: StockInfo.empty().copyWith(
+                          inStock: MaterialInStock('Yes'),
+                        ),
                       ),
                     )
                     .toList(),

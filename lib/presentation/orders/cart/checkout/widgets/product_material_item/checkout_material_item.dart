@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
+import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -147,6 +148,10 @@ class _ProductDetails extends StatelessWidget {
               key: WidgetKeys.cartItemProductMaterialDescription,
               style: Theme.of(context).textTheme.labelSmall,
             ),
+          ),
+          StockInfoWidget(
+            stockInfo: cartItem.stockInfoValid,
+            materialInfo: cartItem.materialInfo,
           ),
           Row(
             key: WidgetKeys.cartItemProductUnitPrice,

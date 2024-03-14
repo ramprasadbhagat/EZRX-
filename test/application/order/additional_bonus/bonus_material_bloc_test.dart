@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -22,11 +24,15 @@ import '../../../common_mock_data/sales_organsiation_mock.dart';
 class MaterialListRepositoryMock extends Mock
     implements MaterialListRepository {}
 
+class CartRepositoryMock extends Mock implements CartRepository {}
+
 void main() {
-  late final MaterialListRepository repository;
+  late final MaterialListRepository materialListRepository;
+  late final CartRepository cartRepository;
   late Config config;
   late MaterialResponse fakeMaterialListData;
   late List<BonusSampleItem> fakeSampleBonusItem;
+  late Map<MaterialNumber, List<StockInfo>> fakeStockInfoList;
   final fakePrincipalData = PrincipalData.empty().copyWith(
     principalName: PrincipalName('fake-principal-name'),
     principalCode: PrincipalCode('0000101246'),
@@ -35,8 +41,10 @@ void main() {
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     config = Config()..appFlavor = Flavor.mock;
-    repository = MaterialListRepositoryMock();
+    materialListRepository = MaterialListRepositoryMock();
+    cartRepository = CartRepositoryMock();
     fakeMaterialListData = await MaterialListLocalDataSource().getProductList();
+    fakeStockInfoList = <MaterialNumber, List<StockInfo>>{};
     fakeSampleBonusItem = [
       BonusSampleItem.empty().copyWith(
         qty: fakeMaterialListData.products.first.quantity,
@@ -53,12 +61,13 @@ void main() {
     blocTest(
       'Fetch Bonus material success',
       build: () => BonusMaterialBloc(
-        materialListRepository: repository,
+        materialListRepository: materialListRepository,
+        cartRepository: cartRepository,
         config: config,
       ),
       setUp: () {
         when(
-          () => repository.getMaterialBonusList(
+          () => materialListRepository.getMaterialBonusList(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -72,6 +81,19 @@ void main() {
           ),
         ).thenAnswer(
           (_) async => Right(fakeMaterialListData),
+        );
+        when(
+          () => cartRepository.getStockInfoList(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+            items: fakeMaterialListData.products,
+          ),
+        ).thenAnswer(
+          (_) async => Right(
+            fakeStockInfoList,
+          ),
         );
       },
       act: (BonusMaterialBloc bloc) => bloc.add(
@@ -96,18 +118,30 @@ void main() {
           failureOrSuccessOption: optionOf(Right(fakeMaterialListData)),
           searchKey: SearchKey('fake-searchKey'),
         ),
+        BonusMaterialState.initial().copyWith(
+          isUpdatingStock: true,
+          bonusItemList: fakeMaterialListData.products,
+          failureOrSuccessOption: optionOf(Right(fakeMaterialListData)),
+          searchKey: SearchKey('fake-searchKey'),
+        ),
+        BonusMaterialState.initial().copyWith(
+          bonusItemList: fakeMaterialListData.products,
+          failureOrSuccessOption: none(),
+          searchKey: SearchKey('fake-searchKey'),
+        ),
       ],
     );
 
     blocTest(
       'Fetch Bonus material failure',
       build: () => BonusMaterialBloc(
-        materialListRepository: repository,
+        materialListRepository: materialListRepository,
+        cartRepository: cartRepository,
         config: config,
       ),
       setUp: () {
         when(
-          () => repository.getMaterialBonusList(
+          () => materialListRepository.getMaterialBonusList(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -150,7 +184,8 @@ void main() {
     blocTest(
       'LoadMore Bonus material Success',
       build: () => BonusMaterialBloc(
-        materialListRepository: repository,
+        materialListRepository: materialListRepository,
+        cartRepository: cartRepository,
         config: config,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
@@ -159,7 +194,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => repository.getMaterialBonusList(
+          () => materialListRepository.getMaterialBonusList(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -173,6 +208,19 @@ void main() {
           ),
         ).thenAnswer(
           (_) async => Right(fakeMaterialListData),
+        );
+        when(
+          () => cartRepository.getStockInfoList(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+            items: fakeMaterialListData.products,
+          ),
+        ).thenAnswer(
+          (_) async => Right(
+            fakeStockInfoList,
+          ),
         );
       },
       act: (BonusMaterialBloc bloc) => bloc.add(
@@ -200,13 +248,31 @@ void main() {
           ],
           failureOrSuccessOption: optionOf(Right(fakeMaterialListData)),
         ),
+        BonusMaterialState.initial().copyWith(
+          isUpdatingStock: true,
+          canLoadMore: false,
+          bonusItemList: [
+            ...fakeMaterialListData.products,
+            ...fakeMaterialListData.products,
+          ],
+          failureOrSuccessOption: optionOf(Right(fakeMaterialListData)),
+        ),
+        BonusMaterialState.initial().copyWith(
+          canLoadMore: false,
+          bonusItemList: [
+            ...fakeMaterialListData.products,
+            ...fakeMaterialListData.products,
+          ],
+          failureOrSuccessOption: none(),
+        ),
       ],
     );
 
     blocTest(
       'LoadMore Bonus material failure',
       build: () => BonusMaterialBloc(
-        materialListRepository: repository,
+        materialListRepository: materialListRepository,
+        cartRepository: cartRepository,
         config: config,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
@@ -215,7 +281,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => repository.getMaterialBonusList(
+          () => materialListRepository.getMaterialBonusList(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -258,7 +324,8 @@ void main() {
     blocTest(
       'Validate Bonus Quantity',
       build: () => BonusMaterialBloc(
-        materialListRepository: repository,
+        materialListRepository: materialListRepository,
+        cartRepository: cartRepository,
         config: config,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
@@ -283,7 +350,8 @@ void main() {
     blocTest(
       'Update Added Bonus Items',
       build: () => BonusMaterialBloc(
-        materialListRepository: repository,
+        materialListRepository: materialListRepository,
+        cartRepository: cartRepository,
         config: config,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
@@ -311,7 +379,8 @@ void main() {
     blocTest(
       'Update Bonus Item Quantity',
       build: () => BonusMaterialBloc(
-        materialListRepository: repository,
+        materialListRepository: materialListRepository,
+        cartRepository: cartRepository,
         config: config,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
@@ -343,7 +412,8 @@ void main() {
   blocTest(
     'Reset BonusMaterialBloc if searchKey is Empty',
     build: () => BonusMaterialBloc(
-      materialListRepository: repository,
+      materialListRepository: materialListRepository,
+      cartRepository: cartRepository,
       config: config,
     ),
     seed: () => BonusMaterialState.initial().copyWith(

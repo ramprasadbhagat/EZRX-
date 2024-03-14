@@ -717,6 +717,7 @@ void setupLocator() {
   locator.registerFactory(
     () => BonusMaterialBloc(
       materialListRepository: locator<MaterialListRepository>(),
+      cartRepository: locator<CartRepository>(),
       config: locator<Config>(),
     ),
   );

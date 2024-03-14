@@ -45,6 +45,10 @@ class _MaterialDetails extends StatelessWidget {
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
+          StockInfoWidget(
+            materialInfo: cartItem.materialInfo,
+            stockInfo: cartItem.stockInfo,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

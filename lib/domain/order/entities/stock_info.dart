@@ -40,4 +40,26 @@ class StockInfo with _$StockInfo {
         salesDistrict: '',
         stockQuantity: 0,
       );
+
+  // If product is marketplace, batch number always be NA
+  String displayBatchNumber({required bool isMarketPlace}) =>
+      (isMarketPlace ? BatchNumber('') : batch).displayLabel;
+
+  String displayExpiryDate({
+    required bool isMarketPlace,
+    required bool isPhMdi,
+    required bool isAbbotPrincipalCode,
+  }) {
+    /// If the sales organization is  PH MDI (2501) and
+    /// the product is not an Abbot material, the expiry date is not available,
+    /// and an empty DateTimeStringValue is returned.
+    /// Otherwise, the expiry date from the product's stock information is returned.
+    if (isPhMdi && !isAbbotPrincipalCode) {
+      return DateTimeStringValue('').dateOrNaString;
+    }
+
+  // If product is marketplace, expiry date always be NA
+    return (isMarketPlace ? DateTimeStringValue('') : expiryDate)
+        .dateOrNaString;
+  }
 }
