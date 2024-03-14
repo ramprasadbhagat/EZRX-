@@ -35,6 +35,7 @@ import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.d
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/bank_in_accounts/bank_in_accounts_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_e_credit/download_e_credit_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/filter/full_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
@@ -498,6 +499,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<BankInAccountsBloc>(
           create: (context) => locator<BankInAccountsBloc>(),
+        ),
+        BlocProvider<DownloadECreditBloc>(
+          create: (context) => locator<DownloadECreditBloc>(),
         ),
       ],
       child: MaterialApp.router(

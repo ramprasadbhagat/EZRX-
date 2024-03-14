@@ -73,7 +73,6 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.articleannuncementTagFetchingError() =
       _ArticleannuncementTagFetchingError;
   const factory ApiFailure.attachmentDownloadError() = _AttachmentDownloadError;
-  const factory ApiFailure.emptyCreditUrl() = _EmptyCreditUrl;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -165,9 +164,6 @@ extension ApiFailureExt on ApiFailure {
         attachmentDownloadError: (_) => const Failure('File download failed'),
         marketplaceTnCAcceptanceError: (_) => const Failure(
           'Unable to update acceptance status',
-        ),
-        emptyCreditUrl: (_) => const Failure(
-          'eCredit url is empty',
         ),
       );
   String get nonTranslatedFailureMessage {

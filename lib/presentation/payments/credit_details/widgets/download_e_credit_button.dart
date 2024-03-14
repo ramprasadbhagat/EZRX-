@@ -1,44 +1,54 @@
 part of 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
 
 class _DownloadECreditButton extends StatelessWidget {
-  final StringValue searchKey;
-  const _DownloadECreditButton({required this.searchKey, Key? key})
-      : super(key: key);
+  const _DownloadECreditButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: BlocBuilder<DownloadPaymentAttachmentsBloc,
-            DownloadPaymentAttachmentsState>(
-          buildWhen: (previous, current) =>
-              previous.isDownloadInProgress != current.isDownloadInProgress,
-          builder: (context, state) {
-            return OutlinedButton(
-              key: WidgetKeys.downloadECreditButton,
-              onPressed: state.isDownloadInProgress
-                  ? null
-                  : () => context.read<DownloadPaymentAttachmentsBloc>().add(
-                        DownloadPaymentAttachmentEvent.downloadECredit(
-                          eCredit: searchKey.getOrDefaultValue(''),
-                        ),
-                      ),
-              child: state.isDownloadInProgress
-                  ? LoadingAnimationWidget.discreteCircle(
-                      key: WidgetKeys.downloadECreditLoadingAnimationWidget,
-                      color: ZPColors.primary,
-                      secondRingColor: ZPColors.secondary,
-                      thirdRingColor: ZPColors.orange,
-                      size: 18,
-                    )
-                  : Text(
-                      context.tr('Download e-credit'),
-                    ),
-            );
-          },
+    return BlocConsumer<DownloadECreditBloc, DownloadECreditState>(
+      listenWhen: (previous, current) =>
+          previous.failureOrSuccessOption != current.failureOrSuccessOption,
+      listener: (context, state) => state.failureOrSuccessOption.fold(
+        () => {},
+        (either) => either.fold(
+          (failure) => ErrorUtils.handleApiFailure(context, failure),
+          (_) => CustomSnackBar(
+            messageText: context.tr('File downloaded successfully'),
+          ).show(context),
         ),
       ),
+      buildWhen: (previous, current) =>
+          previous.fileUrl != current.fileUrl ||
+          previous.isDownloading != current.isDownloading,
+      builder: (context, state) {
+        return state.fileUrl.url.isNotEmpty
+            ? SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: OutlinedButton(
+                    key: WidgetKeys.downloadECreditButton,
+                    onPressed: state.isDownloading
+                        ? null
+                        : () => context.read<DownloadECreditBloc>().add(
+                              const DownloadECreditEvent.downloadECredit(),
+                            ),
+                    child: state.isDownloading
+                        ? LoadingAnimationWidget.discreteCircle(
+                            key: WidgetKeys
+                                .downloadECreditLoadingAnimationWidget,
+                            color: ZPColors.primary,
+                            secondRingColor: ZPColors.secondary,
+                            thirdRingColor: ZPColors.orange,
+                            size: 18,
+                          )
+                        : Text(
+                            context.tr('Download e-credit'),
+                          ),
+                  ),
+                ),
+              )
+            : const SizedBox.shrink();
+      },
     );
   }
 }

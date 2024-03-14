@@ -6,12 +6,12 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-
-import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_e_credit/download_e_credit_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
+import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -39,9 +39,9 @@ class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
-class DownloadPaymentAttachmentsBlocMock extends MockBloc<
-        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
-    implements DownloadPaymentAttachmentsBloc {}
+class DownloadECreditBlocMock
+    extends MockBloc<DownloadECreditEvent, DownloadECreditState>
+    implements DownloadECreditBloc {}
 
 void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
@@ -56,7 +56,7 @@ void main() {
   late EligibilityBlocMock eligibilityBlocMock;
   late ProductImageBloc productImageBlocMock;
   late List<CreditAndInvoiceItem> customerDocumentDetails;
-  late DownloadPaymentAttachmentsBloc downloadPaymentBlocMock;
+  late DownloadECreditBloc downloadECreditBlocMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -71,7 +71,7 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
-    downloadPaymentBlocMock = DownloadPaymentAttachmentsBlocMock();
+    downloadECreditBlocMock = DownloadECreditBlocMock();
 
     userBlocMock = UserBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
@@ -94,8 +94,8 @@ void main() {
         .thenReturn(AnnouncementState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
-    when(() => downloadPaymentBlocMock.state)
-        .thenReturn(DownloadPaymentAttachmentsState.initial());
+    when(() => downloadECreditBlocMock.state)
+        .thenReturn(DownloadECreditState.initial());
   });
 
   Future getWidget(tester) async {
@@ -126,8 +126,8 @@ void main() {
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
           ),
-          BlocProvider<DownloadPaymentAttachmentsBloc>(
-            create: (context) => downloadPaymentBlocMock,
+          BlocProvider<DownloadECreditBloc>(
+            create: (context) => downloadECreditBlocMock,
           ),
         ],
         child: const CreditDetailsPage(),
@@ -227,6 +227,12 @@ void main() {
           basicInfo: customerDocumentDetails.first,
         ),
       );
+      when(() => downloadECreditBlocMock.state).thenReturn(
+        DownloadECreditState.initial().copyWith(
+          fileUrl: DownloadPaymentAttachment.empty()
+              .copyWith(url: 'fake-eCredit-url'),
+        ),
+      );
       await getWidget(tester);
       await tester.pumpAndSettle();
       final downloadECreditButton =
@@ -234,11 +240,8 @@ void main() {
       expect(downloadECreditButton, findsOneWidget);
       await tester.tap(downloadECreditButton);
       verify(
-        () => downloadPaymentBlocMock.add(
-          DownloadPaymentAttachmentEvent.downloadECredit(
-            eCredit:
-                customerDocumentDetails.first.searchKey.getOrDefaultValue(''),
-          ),
+        () => downloadECreditBlocMock.add(
+          const DownloadECreditEvent.downloadECredit(),
         ),
       ).called(1);
     });
@@ -252,9 +255,11 @@ void main() {
         ),
       );
 
-      when(() => downloadPaymentBlocMock.state).thenReturn(
-        DownloadPaymentAttachmentsState.initial().copyWith(
-          isDownloadInProgress: true,
+      when(() => downloadECreditBlocMock.state).thenReturn(
+        DownloadECreditState.initial().copyWith(
+          isDownloading: true,
+          fileUrl: DownloadPaymentAttachment.empty()
+              .copyWith(url: 'fake-eCredit-url'),
         ),
       );
 
@@ -266,11 +271,8 @@ void main() {
       expect(downloadECreditLoadingAnimationWidget, findsOneWidget);
       await tester.tap(downloadECreditLoadingAnimationWidget);
       verifyNever(
-        () => downloadPaymentBlocMock.add(
-          DownloadPaymentAttachmentEvent.downloadECredit(
-            eCredit:
-                customerDocumentDetails.first.searchKey.getOrDefaultValue(''),
-          ),
+        () => downloadECreditBlocMock.add(
+          const DownloadECreditEvent.downloadECredit(),
         ),
       );
       await tester.pump();

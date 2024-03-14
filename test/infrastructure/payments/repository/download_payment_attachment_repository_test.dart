@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -820,7 +819,7 @@ void main() {
       );
       expect(
         result,
-        const Left(ApiFailure.emptyCreditUrl()),
+        Right(DownloadPaymentAttachment.empty()),
       );
     });
   });

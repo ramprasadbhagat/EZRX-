@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/payments/download_e_credit/download_e_credit_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,10 @@ class CreditAndInvoiceDetailsBlocMock
 class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
     implements NewPaymentBloc {}
 
+class DownloadECreditBlocMock
+    extends MockBloc<DownloadECreditEvent, DownloadECreditState>
+    implements DownloadECreditBloc {}
+
 void main() {
   late AllCreditsBloc allCreditsBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
@@ -75,6 +80,7 @@ void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
   late List<CreditAndInvoiceItem> creditItemList;
   late NewPaymentBlocMock newPaymentBlocMock;
+  late DownloadECreditBloc downloadECreditBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -98,6 +104,7 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
+    downloadECreditBlocMock = DownloadECreditBlocMock();
 
     when(() => allCreditsBlocMock.state).thenReturn(AllCreditsState.initial());
     when(() => allCreditsFilterBlocMock.state)
@@ -114,6 +121,8 @@ void main() {
     when(() => creditAndInvoiceDetailsBlocMock.state)
         .thenReturn(CreditAndInvoiceDetailsState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
+    when(() => downloadECreditBlocMock.state)
+        .thenReturn(DownloadECreditState.initial());
   });
 
   Widget getWidget() {
@@ -148,6 +157,9 @@ void main() {
         ),
         BlocProvider<NewPaymentBloc>(
           create: (context) => newPaymentBlocMock,
+        ),
+        BlocProvider<DownloadECreditBloc>(
+          create: (context) => downloadECreditBlocMock,
         ),
       ],
       child: const AllCreditsPage(),

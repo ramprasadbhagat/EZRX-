@@ -306,10 +306,6 @@ class DownloadPaymentAttachmentRepository
         eCreditNumber: eCreditNumber,
       );
 
-      if (response.url.isEmpty) {
-        return const Left(ApiFailure.emptyCreditUrl());
-      }
-
       return Right(response);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));

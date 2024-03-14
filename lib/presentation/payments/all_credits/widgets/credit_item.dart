@@ -94,6 +94,11 @@ class _CreditsItem extends StatelessWidget {
             creditAndInvoiceItem: creditItem,
           ),
         );
+    context.read<DownloadECreditBloc>().add(
+          DownloadECreditEvent.fetchECreditDownloadUrl(
+            eCredit: creditItem.searchKey.getOrDefaultValue(''),
+          ),
+        );
     context.router.push(const CreditDetailsPageRoute());
   }
 }

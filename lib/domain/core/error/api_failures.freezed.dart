@@ -59,7 +59,6 @@ mixin _$ApiFailure {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -105,7 +104,6 @@ mixin _$ApiFailure {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -151,7 +149,6 @@ mixin _$ApiFailure {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -219,7 +216,6 @@ mixin _$ApiFailure {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -274,7 +270,6 @@ mixin _$ApiFailure {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -329,7 +324,6 @@ mixin _$ApiFailure {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -456,7 +450,6 @@ class _$_Other implements _Other {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return other(message);
   }
@@ -505,7 +498,6 @@ class _$_Other implements _Other {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return other?.call(message);
   }
@@ -554,7 +546,6 @@ class _$_Other implements _Other {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -628,7 +619,6 @@ class _$_Other implements _Other {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return other(this);
   }
@@ -686,7 +676,6 @@ class _$_Other implements _Other {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return other?.call(this);
   }
@@ -744,7 +733,6 @@ class _$_Other implements _Other {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -868,7 +856,6 @@ class _$_ServerError implements _ServerError {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return serverError(message);
   }
@@ -917,7 +904,6 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return serverError?.call(message);
   }
@@ -966,7 +952,6 @@ class _$_ServerError implements _ServerError {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -1040,7 +1025,6 @@ class _$_ServerError implements _ServerError {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return serverError(this);
   }
@@ -1098,7 +1082,6 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return serverError?.call(this);
   }
@@ -1156,7 +1139,6 @@ class _$_ServerError implements _ServerError {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -1254,7 +1236,6 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return poorConnection();
   }
@@ -1303,7 +1284,6 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return poorConnection?.call();
   }
@@ -1352,7 +1332,6 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1426,7 +1405,6 @@ class _$_PoorConnection implements _PoorConnection {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return poorConnection(this);
   }
@@ -1484,7 +1462,6 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return poorConnection?.call(this);
   }
@@ -1542,7 +1519,6 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1635,7 +1611,6 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return serverTimeout();
   }
@@ -1684,7 +1659,6 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return serverTimeout?.call();
   }
@@ -1733,7 +1707,6 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1807,7 +1780,6 @@ class _$_ServerTimeout implements _ServerTimeout {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return serverTimeout(this);
   }
@@ -1865,7 +1837,6 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return serverTimeout?.call(this);
   }
@@ -1923,7 +1894,6 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -2016,7 +1986,6 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return userNotFound();
   }
@@ -2065,7 +2034,6 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return userNotFound?.call();
   }
@@ -2114,7 +2082,6 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -2188,7 +2155,6 @@ class _$_UserNotFound implements _UserNotFound {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return userNotFound(this);
   }
@@ -2246,7 +2212,6 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return userNotFound?.call(this);
   }
@@ -2304,7 +2269,6 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -2401,7 +2365,6 @@ class _$_MarketPlaceTnCAcceptanceError
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return marketplaceTnCAcceptanceError();
   }
@@ -2450,7 +2413,6 @@ class _$_MarketPlaceTnCAcceptanceError
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return marketplaceTnCAcceptanceError?.call();
   }
@@ -2499,7 +2461,6 @@ class _$_MarketPlaceTnCAcceptanceError
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (marketplaceTnCAcceptanceError != null) {
@@ -2573,7 +2534,6 @@ class _$_MarketPlaceTnCAcceptanceError
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return marketplaceTnCAcceptanceError(this);
   }
@@ -2631,7 +2591,6 @@ class _$_MarketPlaceTnCAcceptanceError
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return marketplaceTnCAcceptanceError?.call(this);
   }
@@ -2689,7 +2648,6 @@ class _$_MarketPlaceTnCAcceptanceError
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (marketplaceTnCAcceptanceError != null) {
@@ -2788,7 +2746,6 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -2837,7 +2794,6 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -2886,7 +2842,6 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -2960,7 +2915,6 @@ class _$_InvalidEmailAndPasswordCombination
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -3018,7 +2972,6 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -3076,7 +3029,6 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -3170,7 +3122,6 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return accountLocked();
   }
@@ -3219,7 +3170,6 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return accountLocked?.call();
   }
@@ -3268,7 +3218,6 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -3342,7 +3291,6 @@ class _$_AccountLocked implements _AccountLocked {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return accountLocked(this);
   }
@@ -3400,7 +3348,6 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return accountLocked?.call(this);
   }
@@ -3458,7 +3405,6 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -3551,7 +3497,6 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return accountExpired();
   }
@@ -3600,7 +3545,6 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return accountExpired?.call();
   }
@@ -3649,7 +3593,6 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -3723,7 +3666,6 @@ class _$_AccountExpired implements _AccountExpired {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return accountExpired(this);
   }
@@ -3781,7 +3723,6 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return accountExpired?.call(this);
   }
@@ -3839,7 +3780,6 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -3932,7 +3872,6 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return tokenExpired();
   }
@@ -3981,7 +3920,6 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return tokenExpired?.call();
   }
@@ -4030,7 +3968,6 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -4104,7 +4041,6 @@ class _$_TokenExpired implements _TokenExpired {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return tokenExpired(this);
   }
@@ -4162,7 +4098,6 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return tokenExpired?.call(this);
   }
@@ -4220,7 +4155,6 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -4313,7 +4247,6 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return authenticationFailed();
   }
@@ -4362,7 +4295,6 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return authenticationFailed?.call();
   }
@@ -4411,7 +4343,6 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -4485,7 +4416,6 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return authenticationFailed(this);
   }
@@ -4543,7 +4473,6 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return authenticationFailed?.call(this);
   }
@@ -4601,7 +4530,6 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -4698,7 +4626,6 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return proxyLoginRolePermissionNotMatch();
   }
@@ -4747,7 +4674,6 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return proxyLoginRolePermissionNotMatch?.call();
   }
@@ -4796,7 +4722,6 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -4870,7 +4795,6 @@ class _$_ProxyLoginRolePermissionNotMatch
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return proxyLoginRolePermissionNotMatch(this);
   }
@@ -4928,7 +4852,6 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return proxyLoginRolePermissionNotMatch?.call(this);
   }
@@ -4986,7 +4909,6 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -5084,7 +5006,6 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return proxyLoginZPTargetRoleNotMatch();
   }
@@ -5133,7 +5054,6 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call();
   }
@@ -5182,7 +5102,6 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -5256,7 +5175,6 @@ class _$_ProxyLoginZPTargetRoleNotMatch
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return proxyLoginZPTargetRoleNotMatch(this);
   }
@@ -5314,7 +5232,6 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call(this);
   }
@@ -5372,7 +5289,6 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -5469,7 +5385,6 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return proxyLoginZPSalesOrgNotMatch();
   }
@@ -5518,7 +5433,6 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call();
   }
@@ -5567,7 +5481,6 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -5641,7 +5554,6 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return proxyLoginZPSalesOrgNotMatch(this);
   }
@@ -5699,7 +5611,6 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call(this);
   }
@@ -5757,7 +5668,6 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -5851,7 +5761,6 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return passwordResetFail();
   }
@@ -5900,7 +5809,6 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return passwordResetFail?.call();
   }
@@ -5949,7 +5857,6 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -6023,7 +5930,6 @@ class _$_PasswordResetFail implements _PasswordResetFail {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return passwordResetFail(this);
   }
@@ -6081,7 +5987,6 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return passwordResetFail?.call(this);
   }
@@ -6139,7 +6044,6 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -6235,7 +6139,6 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return deviceNotSupportBiometric();
   }
@@ -6284,7 +6187,6 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return deviceNotSupportBiometric?.call();
   }
@@ -6333,7 +6235,6 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -6407,7 +6308,6 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return deviceNotSupportBiometric(this);
   }
@@ -6465,7 +6365,6 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return deviceNotSupportBiometric?.call(this);
   }
@@ -6523,7 +6422,6 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -6616,7 +6514,6 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return cannotCheckBiometrics();
   }
@@ -6665,7 +6562,6 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -6714,7 +6610,6 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -6788,7 +6683,6 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return cannotCheckBiometrics(this);
   }
@@ -6846,7 +6740,6 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -6904,7 +6797,6 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -6997,7 +6889,6 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return noSupportedBiometrics();
   }
@@ -7046,7 +6937,6 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -7095,7 +6985,6 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -7169,7 +7058,6 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return noSupportedBiometrics(this);
   }
@@ -7227,7 +7115,6 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -7285,7 +7172,6 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -7378,7 +7264,6 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return invalidBiometric();
   }
@@ -7427,7 +7312,6 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return invalidBiometric?.call();
   }
@@ -7476,7 +7360,6 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -7550,7 +7433,6 @@ class _$_InvalidBiometric implements _InvalidBiometric {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return invalidBiometric(this);
   }
@@ -7608,7 +7490,6 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return invalidBiometric?.call(this);
   }
@@ -7666,7 +7547,6 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -7759,7 +7639,6 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return priceOverrideNotFound();
   }
@@ -7808,7 +7687,6 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return priceOverrideNotFound?.call();
   }
@@ -7857,7 +7735,6 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -7931,7 +7808,6 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return priceOverrideNotFound(this);
   }
@@ -7989,7 +7865,6 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return priceOverrideNotFound?.call(this);
   }
@@ -8047,7 +7922,6 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -8140,7 +8014,6 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return productOutOfStock();
   }
@@ -8189,7 +8062,6 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return productOutOfStock?.call();
   }
@@ -8238,7 +8110,6 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -8312,7 +8183,6 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return productOutOfStock(this);
   }
@@ -8370,7 +8240,6 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return productOutOfStock?.call(this);
   }
@@ -8428,7 +8297,6 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -8521,7 +8389,6 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return photoPermissionFailed();
   }
@@ -8570,7 +8437,6 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return photoPermissionFailed?.call();
   }
@@ -8619,7 +8485,6 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -8693,7 +8558,6 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return photoPermissionFailed(this);
   }
@@ -8751,7 +8615,6 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return photoPermissionFailed?.call(this);
   }
@@ -8809,7 +8672,6 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -8903,7 +8765,6 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return storagePermissionFailed();
   }
@@ -8952,7 +8813,6 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return storagePermissionFailed?.call();
   }
@@ -9001,7 +8861,6 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -9075,7 +8934,6 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return storagePermissionFailed(this);
   }
@@ -9133,7 +8991,6 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return storagePermissionFailed?.call(this);
   }
@@ -9191,7 +9048,6 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -9284,7 +9140,6 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return invalidFileFormat();
   }
@@ -9333,7 +9188,6 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return invalidFileFormat?.call();
   }
@@ -9382,7 +9236,6 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -9456,7 +9309,6 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return invalidFileFormat(this);
   }
@@ -9514,7 +9366,6 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return invalidFileFormat?.call(this);
   }
@@ -9572,7 +9423,6 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -9666,7 +9516,6 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return uploadCountExcideLimit();
   }
@@ -9715,7 +9564,6 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return uploadCountExcideLimit?.call();
   }
@@ -9764,7 +9612,6 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -9838,7 +9685,6 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return uploadCountExcideLimit(this);
   }
@@ -9896,7 +9742,6 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return uploadCountExcideLimit?.call(this);
   }
@@ -9954,7 +9799,6 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -10047,7 +9891,6 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return productDetailRoute();
   }
@@ -10096,7 +9939,6 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return productDetailRoute?.call();
   }
@@ -10145,7 +9987,6 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (productDetailRoute != null) {
@@ -10219,7 +10060,6 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return productDetailRoute(this);
   }
@@ -10277,7 +10117,6 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return productDetailRoute?.call(this);
   }
@@ -10335,7 +10174,6 @@ class _$_ProductDetailRoute implements _ProductDetailRoute {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (productDetailRoute != null) {
@@ -10428,7 +10266,6 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return orderDetailRoute();
   }
@@ -10477,7 +10314,6 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return orderDetailRoute?.call();
   }
@@ -10526,7 +10362,6 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (orderDetailRoute != null) {
@@ -10600,7 +10435,6 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return orderDetailRoute(this);
   }
@@ -10658,7 +10492,6 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return orderDetailRoute?.call(this);
   }
@@ -10716,7 +10549,6 @@ class _$_OrderDetailRoute implements _OrderDetailRoute {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (orderDetailRoute != null) {
@@ -10809,7 +10641,6 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return returnDetailRoute();
   }
@@ -10858,7 +10689,6 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return returnDetailRoute?.call();
   }
@@ -10907,7 +10737,6 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (returnDetailRoute != null) {
@@ -10981,7 +10810,6 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return returnDetailRoute(this);
   }
@@ -11039,7 +10867,6 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return returnDetailRoute?.call(this);
   }
@@ -11097,7 +10924,6 @@ class _$_ReturnDetailRoute implements _ReturnDetailRoute {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (returnDetailRoute != null) {
@@ -11190,7 +11016,6 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return paymentDetailRoute();
   }
@@ -11239,7 +11064,6 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return paymentDetailRoute?.call();
   }
@@ -11288,7 +11112,6 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (paymentDetailRoute != null) {
@@ -11362,7 +11185,6 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return paymentDetailRoute(this);
   }
@@ -11420,7 +11242,6 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return paymentDetailRoute?.call(this);
   }
@@ -11478,7 +11299,6 @@ class _$_PaymentDetailRoute implements _PaymentDetailRoute {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (paymentDetailRoute != null) {
@@ -11571,7 +11391,6 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return invoiceDetailRoute();
   }
@@ -11620,7 +11439,6 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return invoiceDetailRoute?.call();
   }
@@ -11669,7 +11487,6 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (invoiceDetailRoute != null) {
@@ -11743,7 +11560,6 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return invoiceDetailRoute(this);
   }
@@ -11801,7 +11617,6 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return invoiceDetailRoute?.call(this);
   }
@@ -11859,7 +11674,6 @@ class _$_InvoiceDetailRoute implements _InvoiceDetailRoute {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (invoiceDetailRoute != null) {
@@ -11952,7 +11766,6 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return languageChangeFail();
   }
@@ -12001,7 +11814,6 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return languageChangeFail?.call();
   }
@@ -12050,7 +11862,6 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (languageChangeFail != null) {
@@ -12124,7 +11935,6 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return languageChangeFail(this);
   }
@@ -12182,7 +11992,6 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return languageChangeFail?.call(this);
   }
@@ -12240,7 +12049,6 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (languageChangeFail != null) {
@@ -12361,7 +12169,6 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return scannedProductNotFound(productNumber);
   }
@@ -12410,7 +12217,6 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return scannedProductNotFound?.call(productNumber);
   }
@@ -12459,7 +12265,6 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (scannedProductNotFound != null) {
@@ -12533,7 +12338,6 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return scannedProductNotFound(this);
   }
@@ -12591,7 +12395,6 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return scannedProductNotFound?.call(this);
   }
@@ -12649,7 +12452,6 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (scannedProductNotFound != null) {
@@ -12749,7 +12551,6 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return cameraPermissionFailed();
   }
@@ -12798,7 +12599,6 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return cameraPermissionFailed?.call();
   }
@@ -12847,7 +12647,6 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (cameraPermissionFailed != null) {
@@ -12921,7 +12720,6 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return cameraPermissionFailed(this);
   }
@@ -12979,7 +12777,6 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return cameraPermissionFailed?.call(this);
   }
@@ -13037,7 +12834,6 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (cameraPermissionFailed != null) {
@@ -13130,7 +12926,6 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return userNameNotFound();
   }
@@ -13179,7 +12974,6 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return userNameNotFound?.call();
   }
@@ -13228,7 +13022,6 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (userNameNotFound != null) {
@@ -13302,7 +13095,6 @@ class _$_UserNameNotFound implements _UserNameNotFound {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return userNameNotFound(this);
   }
@@ -13360,7 +13152,6 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return userNameNotFound?.call(this);
   }
@@ -13418,7 +13209,6 @@ class _$_UserNameNotFound implements _UserNameNotFound {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (userNameNotFound != null) {
@@ -13512,7 +13302,6 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return uploadedFileSizeExceed();
   }
@@ -13561,7 +13350,6 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return uploadedFileSizeExceed?.call();
   }
@@ -13610,7 +13398,6 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (uploadedFileSizeExceed != null) {
@@ -13684,7 +13471,6 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return uploadedFileSizeExceed(this);
   }
@@ -13742,7 +13528,6 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return uploadedFileSizeExceed?.call(this);
   }
@@ -13800,7 +13585,6 @@ class _$_UploadedFileSizeExceed implements _UploadedFileSizeExceed {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (uploadedFileSizeExceed != null) {
@@ -13923,7 +13707,6 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return paymentAdviceDeleteFailed(adviceNumber);
   }
@@ -13972,7 +13755,6 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return paymentAdviceDeleteFailed?.call(adviceNumber);
   }
@@ -14021,7 +13803,6 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (paymentAdviceDeleteFailed != null) {
@@ -14095,7 +13876,6 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return paymentAdviceDeleteFailed(this);
   }
@@ -14153,7 +13933,6 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return paymentAdviceDeleteFailed?.call(this);
   }
@@ -14211,7 +13990,6 @@ class _$_PaymentAdviceDeleteFailed implements _PaymentAdviceDeleteFailed {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (paymentAdviceDeleteFailed != null) {
@@ -14310,7 +14088,6 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return allReorderItemInvalid();
   }
@@ -14359,7 +14136,6 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return allReorderItemInvalid?.call();
   }
@@ -14408,7 +14184,6 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (allReorderItemInvalid != null) {
@@ -14482,7 +14257,6 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return allReorderItemInvalid(this);
   }
@@ -14540,7 +14314,6 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return allReorderItemInvalid?.call(this);
   }
@@ -14598,7 +14371,6 @@ class _$_AllReorderItemInvalid implements _AllReorderItemInvalid {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (allReorderItemInvalid != null) {
@@ -14721,7 +14493,6 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return maximumCartQuantityExceed(maximumNumber);
   }
@@ -14770,7 +14541,6 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return maximumCartQuantityExceed?.call(maximumNumber);
   }
@@ -14819,7 +14589,6 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (maximumCartQuantityExceed != null) {
@@ -14893,7 +14662,6 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return maximumCartQuantityExceed(this);
   }
@@ -14951,7 +14719,6 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return maximumCartQuantityExceed?.call(this);
   }
@@ -15009,7 +14776,6 @@ class _$_MaximumCartQuantityExceed implements _MaximumCartQuantityExceed {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (maximumCartQuantityExceed != null) {
@@ -15109,7 +14875,6 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return cartHasDifferentAddress();
   }
@@ -15158,7 +14923,6 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return cartHasDifferentAddress?.call();
   }
@@ -15207,7 +14971,6 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (cartHasDifferentAddress != null) {
@@ -15281,7 +15044,6 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return cartHasDifferentAddress(this);
   }
@@ -15339,7 +15101,6 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return cartHasDifferentAddress?.call(this);
   }
@@ -15397,7 +15158,6 @@ class _$_CartHasDifferentAddress implements _CartHasDifferentAddress {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (cartHasDifferentAddress != null) {
@@ -15495,7 +15255,6 @@ class _$_ArticleannuncementTagFetchingError
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return articleannuncementTagFetchingError();
   }
@@ -15544,7 +15303,6 @@ class _$_ArticleannuncementTagFetchingError
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return articleannuncementTagFetchingError?.call();
   }
@@ -15593,7 +15351,6 @@ class _$_ArticleannuncementTagFetchingError
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (articleannuncementTagFetchingError != null) {
@@ -15667,7 +15424,6 @@ class _$_ArticleannuncementTagFetchingError
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return articleannuncementTagFetchingError(this);
   }
@@ -15725,7 +15481,6 @@ class _$_ArticleannuncementTagFetchingError
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return articleannuncementTagFetchingError?.call(this);
   }
@@ -15783,7 +15538,6 @@ class _$_ArticleannuncementTagFetchingError
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (articleannuncementTagFetchingError != null) {
@@ -15878,7 +15632,6 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
     required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
   }) {
     return attachmentDownloadError();
   }
@@ -15927,7 +15680,6 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
     TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
   }) {
     return attachmentDownloadError?.call();
   }
@@ -15976,7 +15728,6 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
     TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (attachmentDownloadError != null) {
@@ -16050,7 +15801,6 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
         articleannuncementTagFetchingError,
     required TResult Function(_AttachmentDownloadError value)
         attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
   }) {
     return attachmentDownloadError(this);
   }
@@ -16108,7 +15858,6 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     TResult? Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
   }) {
     return attachmentDownloadError?.call(this);
   }
@@ -16166,7 +15915,6 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
     TResult Function(_ArticleannuncementTagFetchingError value)?
         articleannuncementTagFetchingError,
     TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
     required TResult orElse(),
   }) {
     if (attachmentDownloadError != null) {
@@ -16178,385 +15926,4 @@ class _$_AttachmentDownloadError implements _AttachmentDownloadError {
 
 abstract class _AttachmentDownloadError implements ApiFailure {
   const factory _AttachmentDownloadError() = _$_AttachmentDownloadError;
-}
-
-/// @nodoc
-abstract class _$$_EmptyCreditUrlCopyWith<$Res> {
-  factory _$$_EmptyCreditUrlCopyWith(
-          _$_EmptyCreditUrl value, $Res Function(_$_EmptyCreditUrl) then) =
-      __$$_EmptyCreditUrlCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_EmptyCreditUrlCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_EmptyCreditUrl>
-    implements _$$_EmptyCreditUrlCopyWith<$Res> {
-  __$$_EmptyCreditUrlCopyWithImpl(
-      _$_EmptyCreditUrl _value, $Res Function(_$_EmptyCreditUrl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_EmptyCreditUrl implements _EmptyCreditUrl {
-  const _$_EmptyCreditUrl();
-
-  @override
-  String toString() {
-    return 'ApiFailure.emptyCreditUrl()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_EmptyCreditUrl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String message) other,
-    required TResult Function(String message) serverError,
-    required TResult Function() poorConnection,
-    required TResult Function() serverTimeout,
-    required TResult Function() userNotFound,
-    required TResult Function() marketplaceTnCAcceptanceError,
-    required TResult Function() invalidEmailAndPasswordCombination,
-    required TResult Function() accountLocked,
-    required TResult Function() accountExpired,
-    required TResult Function() tokenExpired,
-    required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() passwordResetFail,
-    required TResult Function() deviceNotSupportBiometric,
-    required TResult Function() cannotCheckBiometrics,
-    required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometric,
-    required TResult Function() priceOverrideNotFound,
-    required TResult Function() productOutOfStock,
-    required TResult Function() photoPermissionFailed,
-    required TResult Function() storagePermissionFailed,
-    required TResult Function() invalidFileFormat,
-    required TResult Function() uploadCountExcideLimit,
-    required TResult Function() productDetailRoute,
-    required TResult Function() orderDetailRoute,
-    required TResult Function() returnDetailRoute,
-    required TResult Function() paymentDetailRoute,
-    required TResult Function() invoiceDetailRoute,
-    required TResult Function() languageChangeFail,
-    required TResult Function(String productNumber) scannedProductNotFound,
-    required TResult Function() cameraPermissionFailed,
-    required TResult Function() userNameNotFound,
-    required TResult Function() uploadedFileSizeExceed,
-    required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
-    required TResult Function() allReorderItemInvalid,
-    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
-    required TResult Function() cartHasDifferentAddress,
-    required TResult Function() articleannuncementTagFetchingError,
-    required TResult Function() attachmentDownloadError,
-    required TResult Function() emptyCreditUrl,
-  }) {
-    return emptyCreditUrl();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? other,
-    TResult? Function(String message)? serverError,
-    TResult? Function()? poorConnection,
-    TResult? Function()? serverTimeout,
-    TResult? Function()? userNotFound,
-    TResult? Function()? marketplaceTnCAcceptanceError,
-    TResult? Function()? invalidEmailAndPasswordCombination,
-    TResult? Function()? accountLocked,
-    TResult? Function()? accountExpired,
-    TResult? Function()? tokenExpired,
-    TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? passwordResetFail,
-    TResult? Function()? deviceNotSupportBiometric,
-    TResult? Function()? cannotCheckBiometrics,
-    TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometric,
-    TResult? Function()? priceOverrideNotFound,
-    TResult? Function()? productOutOfStock,
-    TResult? Function()? photoPermissionFailed,
-    TResult? Function()? storagePermissionFailed,
-    TResult? Function()? invalidFileFormat,
-    TResult? Function()? uploadCountExcideLimit,
-    TResult? Function()? productDetailRoute,
-    TResult? Function()? orderDetailRoute,
-    TResult? Function()? returnDetailRoute,
-    TResult? Function()? paymentDetailRoute,
-    TResult? Function()? invoiceDetailRoute,
-    TResult? Function()? languageChangeFail,
-    TResult? Function(String productNumber)? scannedProductNotFound,
-    TResult? Function()? cameraPermissionFailed,
-    TResult? Function()? userNameNotFound,
-    TResult? Function()? uploadedFileSizeExceed,
-    TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
-    TResult? Function()? allReorderItemInvalid,
-    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
-    TResult? Function()? cartHasDifferentAddress,
-    TResult? Function()? articleannuncementTagFetchingError,
-    TResult? Function()? attachmentDownloadError,
-    TResult? Function()? emptyCreditUrl,
-  }) {
-    return emptyCreditUrl?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? other,
-    TResult Function(String message)? serverError,
-    TResult Function()? poorConnection,
-    TResult Function()? serverTimeout,
-    TResult Function()? userNotFound,
-    TResult Function()? marketplaceTnCAcceptanceError,
-    TResult Function()? invalidEmailAndPasswordCombination,
-    TResult Function()? accountLocked,
-    TResult Function()? accountExpired,
-    TResult Function()? tokenExpired,
-    TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? passwordResetFail,
-    TResult Function()? deviceNotSupportBiometric,
-    TResult Function()? cannotCheckBiometrics,
-    TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometric,
-    TResult Function()? priceOverrideNotFound,
-    TResult Function()? productOutOfStock,
-    TResult Function()? photoPermissionFailed,
-    TResult Function()? storagePermissionFailed,
-    TResult Function()? invalidFileFormat,
-    TResult Function()? uploadCountExcideLimit,
-    TResult Function()? productDetailRoute,
-    TResult Function()? orderDetailRoute,
-    TResult Function()? returnDetailRoute,
-    TResult Function()? paymentDetailRoute,
-    TResult Function()? invoiceDetailRoute,
-    TResult Function()? languageChangeFail,
-    TResult Function(String productNumber)? scannedProductNotFound,
-    TResult Function()? cameraPermissionFailed,
-    TResult Function()? userNameNotFound,
-    TResult Function()? uploadedFileSizeExceed,
-    TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
-    TResult Function()? allReorderItemInvalid,
-    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
-    TResult Function()? cartHasDifferentAddress,
-    TResult Function()? articleannuncementTagFetchingError,
-    TResult Function()? attachmentDownloadError,
-    TResult Function()? emptyCreditUrl,
-    required TResult orElse(),
-  }) {
-    if (emptyCreditUrl != null) {
-      return emptyCreditUrl();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Other value) other,
-    required TResult Function(_ServerError value) serverError,
-    required TResult Function(_PoorConnection value) poorConnection,
-    required TResult Function(_ServerTimeout value) serverTimeout,
-    required TResult Function(_UserNotFound value) userNotFound,
-    required TResult Function(_MarketPlaceTnCAcceptanceError value)
-        marketplaceTnCAcceptanceError,
-    required TResult Function(_InvalidEmailAndPasswordCombination value)
-        invalidEmailAndPasswordCombination,
-    required TResult Function(_AccountLocked value) accountLocked,
-    required TResult Function(_AccountExpired value) accountExpired,
-    required TResult Function(_TokenExpired value) tokenExpired,
-    required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_PasswordResetFail value) passwordResetFail,
-    required TResult Function(_DeviceNotSupportBiometric value)
-        deviceNotSupportBiometric,
-    required TResult Function(_CannotCheckBiometrics value)
-        cannotCheckBiometrics,
-    required TResult Function(_NoSupportedBiometrics value)
-        noSupportedBiometrics,
-    required TResult Function(_InvalidBiometric value) invalidBiometric,
-    required TResult Function(_PriceOverrideNotFound value)
-        priceOverrideNotFound,
-    required TResult Function(_ProductOutOfStock value) productOutOfStock,
-    required TResult Function(_PhotoPermissionFailed value)
-        photoPermissionFailed,
-    required TResult Function(_StoragePermissionFailed value)
-        storagePermissionFailed,
-    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
-    required TResult Function(_UploadCountExcideLimit value)
-        uploadCountExcideLimit,
-    required TResult Function(_ProductDetailRoute value) productDetailRoute,
-    required TResult Function(_OrderDetailRoute value) orderDetailRoute,
-    required TResult Function(_ReturnDetailRoute value) returnDetailRoute,
-    required TResult Function(_PaymentDetailRoute value) paymentDetailRoute,
-    required TResult Function(_InvoiceDetailRoute value) invoiceDetailRoute,
-    required TResult Function(_LanguageChangeFail value) languageChangeFail,
-    required TResult Function(_ScannedProductNotFound value)
-        scannedProductNotFound,
-    required TResult Function(_CameraPermissionFailed value)
-        cameraPermissionFailed,
-    required TResult Function(_UserNameNotFound value) userNameNotFound,
-    required TResult Function(_UploadedFileSizeExceed value)
-        uploadedFileSizeExceed,
-    required TResult Function(_PaymentAdviceDeleteFailed value)
-        paymentAdviceDeleteFailed,
-    required TResult Function(_AllReorderItemInvalid value)
-        allReorderItemInvalid,
-    required TResult Function(_MaximumCartQuantityExceed value)
-        maximumCartQuantityExceed,
-    required TResult Function(_CartHasDifferentAddress value)
-        cartHasDifferentAddress,
-    required TResult Function(_ArticleannuncementTagFetchingError value)
-        articleannuncementTagFetchingError,
-    required TResult Function(_AttachmentDownloadError value)
-        attachmentDownloadError,
-    required TResult Function(_EmptyCreditUrl value) emptyCreditUrl,
-  }) {
-    return emptyCreditUrl(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Other value)? other,
-    TResult? Function(_ServerError value)? serverError,
-    TResult? Function(_PoorConnection value)? poorConnection,
-    TResult? Function(_ServerTimeout value)? serverTimeout,
-    TResult? Function(_UserNotFound value)? userNotFound,
-    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
-        marketplaceTnCAcceptanceError,
-    TResult? Function(_InvalidEmailAndPasswordCombination value)?
-        invalidEmailAndPasswordCombination,
-    TResult? Function(_AccountLocked value)? accountLocked,
-    TResult? Function(_AccountExpired value)? accountExpired,
-    TResult? Function(_TokenExpired value)? tokenExpired,
-    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_PasswordResetFail value)? passwordResetFail,
-    TResult? Function(_DeviceNotSupportBiometric value)?
-        deviceNotSupportBiometric,
-    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometric value)? invalidBiometric,
-    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
-    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
-    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
-    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
-    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
-    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
-    TResult? Function(_ProductDetailRoute value)? productDetailRoute,
-    TResult? Function(_OrderDetailRoute value)? orderDetailRoute,
-    TResult? Function(_ReturnDetailRoute value)? returnDetailRoute,
-    TResult? Function(_PaymentDetailRoute value)? paymentDetailRoute,
-    TResult? Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
-    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
-    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
-    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
-    TResult? Function(_UserNameNotFound value)? userNameNotFound,
-    TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
-    TResult? Function(_PaymentAdviceDeleteFailed value)?
-        paymentAdviceDeleteFailed,
-    TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
-    TResult? Function(_MaximumCartQuantityExceed value)?
-        maximumCartQuantityExceed,
-    TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
-    TResult? Function(_ArticleannuncementTagFetchingError value)?
-        articleannuncementTagFetchingError,
-    TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult? Function(_EmptyCreditUrl value)? emptyCreditUrl,
-  }) {
-    return emptyCreditUrl?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Other value)? other,
-    TResult Function(_ServerError value)? serverError,
-    TResult Function(_PoorConnection value)? poorConnection,
-    TResult Function(_ServerTimeout value)? serverTimeout,
-    TResult Function(_UserNotFound value)? userNotFound,
-    TResult Function(_MarketPlaceTnCAcceptanceError value)?
-        marketplaceTnCAcceptanceError,
-    TResult Function(_InvalidEmailAndPasswordCombination value)?
-        invalidEmailAndPasswordCombination,
-    TResult Function(_AccountLocked value)? accountLocked,
-    TResult Function(_AccountExpired value)? accountExpired,
-    TResult Function(_TokenExpired value)? tokenExpired,
-    TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_PasswordResetFail value)? passwordResetFail,
-    TResult Function(_DeviceNotSupportBiometric value)?
-        deviceNotSupportBiometric,
-    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
-    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometric value)? invalidBiometric,
-    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
-    TResult Function(_ProductOutOfStock value)? productOutOfStock,
-    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
-    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
-    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
-    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
-    TResult Function(_ProductDetailRoute value)? productDetailRoute,
-    TResult Function(_OrderDetailRoute value)? orderDetailRoute,
-    TResult Function(_ReturnDetailRoute value)? returnDetailRoute,
-    TResult Function(_PaymentDetailRoute value)? paymentDetailRoute,
-    TResult Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
-    TResult Function(_LanguageChangeFail value)? languageChangeFail,
-    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
-    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
-    TResult Function(_UserNameNotFound value)? userNameNotFound,
-    TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
-    TResult Function(_PaymentAdviceDeleteFailed value)?
-        paymentAdviceDeleteFailed,
-    TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
-    TResult Function(_MaximumCartQuantityExceed value)?
-        maximumCartQuantityExceed,
-    TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
-    TResult Function(_ArticleannuncementTagFetchingError value)?
-        articleannuncementTagFetchingError,
-    TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
-    TResult Function(_EmptyCreditUrl value)? emptyCreditUrl,
-    required TResult orElse(),
-  }) {
-    if (emptyCreditUrl != null) {
-      return emptyCreditUrl(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _EmptyCreditUrl implements ApiFailure {
-  const factory _EmptyCreditUrl() = _$_EmptyCreditUrl;
 }
