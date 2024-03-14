@@ -98,7 +98,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
             leading: IconButton(
               key: WidgetKeys.closeButton,
               icon: const Icon(
-                Icons.close,
+                Icons.arrow_back_ios,
+                size: 16,
               ),
               onPressed: () {
                 context.router.navigateBack();
@@ -112,12 +113,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   key: WidgetKeys.checkoutScrollList,
                   slivers: [
                     SliverToBoxAdapter(
-                      child: Padding(
+                      child: AddressInfoSection.greenBackground(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0,
-                          vertical: 5.0,
+                          vertical: 16,
+                          horizontal: 12,
                         ),
-                        child: AddressInfoSection.noAction(),
                       ),
                     ),
                     const SliverPadding(
