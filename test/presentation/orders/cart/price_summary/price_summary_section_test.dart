@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
@@ -56,6 +57,7 @@ void main() {
 
   late List<PriceAggregate> mockCartBundleItems;
   late List<PriceAggregate> cartItemMock;
+  late List<ComboMaterialItem> fakeComboMaterialItems;
   late CartState cartStateMock;
 
   setUpAll(() async {
@@ -66,6 +68,9 @@ void main() {
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
     cartItemMock =
         (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
+    fakeComboMaterialItems =
+        (await CartLocalDataSource().upsertCartItemsWithComboOffers())
+            .comboMaterialItemList;
   });
 
   RouteData fakeRouteData(String name) => RouteData(
@@ -719,6 +724,56 @@ void main() {
             of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
             matching: find.text(
               '${fakeKHSalesOrgConfigs.currency.code} 1,089.00',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+      testWidgets(
+          'Test Total Tax when displayItemTaxBreakdown is disabled and displaySubtotalTaxBreakdown is enabled',
+          (tester) async {
+        final cartState = CartState.initial().copyWith(
+          cartProducts: [
+            cartItemMock.last.copyWith(
+              materialInfo: cartItemMock.last.materialInfo.copyWith(
+                type: MaterialInfoType('combo'),
+              ),
+              comboMaterials: [
+                fakeComboMaterialItems.first.copyWith(
+                  salesOrgConfig: fakeKHSalesOrgConfigs,
+                  finalIndividualPrice: 1930.86,
+                )
+              ],
+            )
+          ],
+          salesOrganisation: fakeKHSalesOrganisation,
+          config: fakeKHSalesOrgConfigs,
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeKHSalesOrganisation,
+            salesOrgConfigs: fakeKHSalesOrgConfigs,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(cartState);
+
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryTax),
+            matching: find.textContaining('Tax at 10%:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryTaxPrice),
+            matching: find.text(
+              '${fakeKHSalesOrgConfigs.currency.code} 193.09',
               findRichText: true,
             ),
           ),

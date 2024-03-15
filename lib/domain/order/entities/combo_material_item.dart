@@ -63,8 +63,7 @@ class ComboMaterialItem with _$ComboMaterialItem {
       salesOrgConfig.displayItemTaxBreakdown && !materialInfo.hidePrice;
 
   double get itemTaxPercent {
-    if (!salesOrgConfig.displayItemTaxBreakdown ||
-        materialInfo.taxClassification.isNoTax) {
+    if (materialInfo.taxClassification.isNoTax) {
       return 0.0;
     }
     final salesOrg = salesOrgConfig.salesOrg;
