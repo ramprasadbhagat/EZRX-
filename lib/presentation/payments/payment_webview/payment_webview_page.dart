@@ -43,6 +43,7 @@ class PaymentWebviewPage extends StatelessWidget {
                   ),
                   Container(
                     width: double.infinity,
+                    key: WidgetKeys.closeButton,
                     margin: const EdgeInsets.only(top: 12),
                     child: ElevatedButton(
                       onPressed: () {
