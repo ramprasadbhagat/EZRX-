@@ -103,14 +103,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
                 },
-                (success) {
-                  if (state.isCovidForNonCustomer) {
-                    CustomSnackBar(
-                      key: WidgetKeys.canNotReOrderThisOrderToast,
-                      messageText: context.tr('You can’t re-order this order'),
-                    ).show(context);
-                  }
-                },
+                (_) {},
               ),
             );
           },

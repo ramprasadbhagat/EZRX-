@@ -850,7 +850,7 @@ void main() {
         await tester.pumpAndSettle();
         expect(
           find.text('You can’t re-order this order'),
-          findsOneWidget,
+          findsNothing,
         );
       });
 
