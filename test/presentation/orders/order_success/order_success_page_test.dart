@@ -407,7 +407,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
         final finder = find.byWidgetPredicate(
-          (widget) => widget is RichText && tapTextSpan(widget, 'Orders'),
+          (widget) => widget is RichText && tapTextSpan(widget, 'Orders.'),
         );
         await tester.pumpAndSettle();
         expect(finder, findsOneWidget);

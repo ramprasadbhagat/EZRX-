@@ -60,7 +60,9 @@ class OrderSuccessPage extends StatelessWidget {
     return Scaffold(
       key: WidgetKeys.orderSuccess,
       appBar: AppBar(
+        leadingWidth: 40,
         leading: IconButton(
+          padding: const EdgeInsets.only(left: 18),
           key: WidgetKeys.closeButton,
           onPressed: () {
             context.router.popUntilRouteWithPath('main');
@@ -68,6 +70,7 @@ class OrderSuccessPage extends StatelessWidget {
           icon: const Icon(Icons.close),
         ),
         title: Text('${'Order submitted'.tr()}!'),
+        centerTitle: false,
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

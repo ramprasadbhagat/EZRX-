@@ -20,7 +20,7 @@ class _OrderSuccessMessage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Text(
-            '${context.tr(orderStatus.orderConfirmationPrefixMessage)} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${context.tr(orderStatus.orderConfirmationSuffixMessage)}',
+            '${context.tr(orderStatus.orderConfirmationPrefixMessage)} ${context.read<EligibilityBloc>().state.user.email.maskedValue} ${context.tr(orderStatus.orderConfirmationSuffixMessage)}',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),
@@ -52,16 +52,16 @@ class _OrderSuccessMessage extends StatelessWidget {
             ),
             subtitle: RichText(
               text: TextSpan(
-                text: 'Track your ordered items under'.tr(),
+                text: context.tr('Track your ordered items under'),
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: ZPColors.darkGray,
                     ),
                 children: <TextSpan>[
                   const TextSpan(text: ' '),
                   TextSpan(
-                    text: 'Orders'.tr(),
+                    text: '${context.tr('Orders')}.',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: ZPColors.black,
+                          color: ZPColors.extraDarkGreen,
                         ),
                     recognizer: TapGestureRecognizer()
                       ..onTap =
