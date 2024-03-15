@@ -456,11 +456,14 @@ class Status extends ValueObject<String> {
     return value.getOrElse(() => '').contains('Z1');
   }
 
+  bool get isCustomerBlocked =>
+      checkIfCustomerIsBlocked(value.getOrElse(() => ''));
+
   bool get isEDI {
     return value.getOrElse(() => '') == 'EDI';
   }
 
-  bool get isSuspended => isContain01 || isContainZ1;
+  bool get isSuspended => isContain01 || isContainZ1 || isCustomerBlocked;
 
   const Status._(this.value);
 }
