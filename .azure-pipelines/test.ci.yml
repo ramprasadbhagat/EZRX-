@@ -34,7 +34,6 @@ parameters:
       - integration_test__vn__client_user__client_user_order__vn
       - integration_test__vn__client_user__client_user_payment__vn
       - integration_test__vn__external_sales_rep__external_sales_rep_user_order__vn
-      - integration_test__vn__external_sales_rep__external_sales_rep_user_return__vn
 
       - integration_test__mm__client_user__client_user_order__my
       - integration_test__mm__external_sales_rep__external_sales_rep_user_order__my
@@ -57,6 +56,14 @@ parameters:
     default: debug 
     values: 
       - debug
+
+  - name: max_test_time 
+    displayName: Max Test Time
+    type: object
+    default: 300
+    values: 
+      - 500
+      - 300      
        
   - name: device_name 
     type: string 
@@ -100,12 +107,11 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          az storage blob upload --connection-string $AZURE_STORAGE_CONNECTION_STRING --container-name devops-operations --overwrite --file $(System.DefaultWorkingDirectory)/push_notification_to_teams.sh --name dndstsharednpd/ezrxplus/mobile
+          az storage blob upload --connection-string $AZURE_STORAGE_CONNECTION_STRING --container-name devops-operations --overwrite --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name dndstsharednpd/ezrxplus/template$(Build.BuildId)
       env: 
         AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
 
 - stage: BuildApplication 
-  dependsOn: [PubLishNotificationTemplate]
   displayName: Build Application 
   jobs: 
   - job: BuildApplication
@@ -162,7 +168,16 @@ stages:
             flutter pub get 
             gradle wrapper
             ./gradlew app:assembleUatDebugAndroidTest
+            build_status=$(echo $?)
+            if [ "$build_status" == 0 ]
+            then
+              echo "Build Done"
+            else
+              echo "Some Build Failed."
+              exit 1
+            fi            
             popd
+          
         displayName: Build Application      
 
       - task: PublishBuildArtifacts@1
@@ -177,6 +192,8 @@ stages:
   jobs:
   - ${{ each testFile in parameters.testFiles }}: 
       - job: RunIntegrationTest${{ testFile }}
+        timeoutInMinutes: 90 
+        cancelTimeoutInMinutes: 5
         displayName: ${{ testFile }}
         pool:   
           name: ${{ parameters.build_pool }}
@@ -220,7 +237,6 @@ stages:
               echo "key.jks copied to $(Build.SourcesDirectory)/android/app/ezrxkey.jks"
           
         - task: Bash@3
-          continueOnError: true 
           inputs:
             targetType: 'inline'
             script: |
@@ -231,20 +247,28 @@ stages:
               flutter pub get 
               gradle wrapper
               ./gradlew app:assembleUatDebug -Ptarget="$test_file.dart"
+
+              build_status=$(echo $?)
+              if [ "$build_status" == 0 ]
+              then
+                echo "Build Done"
+              else
+                echo "Some Build Failed."
+                exit 1
+              fi
               popd
           displayName: Build Test Suite    
 
         - task: Bash@3
-          continueOnError: true 
           inputs:
             targetType: 'inline'
             script: |
               BROWSERSTACK_CREDENTIALS=$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESSKEY
 
               test_file_param=${{ testFile }}
-              country=$(echo $test_file_param | rev | cut -d "_" -f -1 | rev)
+              region=$(echo $test_file_param | rev | cut -d "_" -f -1 | rev)
               test_file=$(echo $test_file_param | rev | cut -d "_" -f 3- | rev | sed 's|__|/|g')
-              testSuite=("$test_file.dart" "${country^^}")
+              testSuite=("$test_file.dart" "${region^^}")
               
               echo "Testcase:" "${testSuite[0]}"
               echo "GeoLocation:" "${testSuite[1]}"
@@ -289,7 +313,7 @@ stages:
               
               buildStatus="running"
               buildMonitorStart=$SECONDS
-              maxTime=300 # Max test time should not be above 5 minutes. (Yet apply, if want to do this please use ENV Param instead)
+              maxTime=${{ parameters.max_test_time }} # Max test time should not be above 5 minutes. (Yet apply, if want to do this please use ENV Param instead)
 
               while [ "$buildStatus" == "running" ];
               do
@@ -313,109 +337,172 @@ stages:
               echo -e "\n"
               echo "Summary of the Test Run is as follows: "
 
-              echo "Test case : " ${testFile}
+              echo "Test case : " ${test_file}
 
               echo "Build Status : " ${buildStatus}
-              build_status=${buildStatus}
 
               echo "Build Details Link : " ${buildDetails}
-              build_detail_link=${buildDetails}
 
               echo -e "\n"
-              echo "The total time taken for the test execution in seconds is :" $duration 
+              echo "The total time taken for the test execution in seconds is :" $duration                     
 
-              echo "##vso[task.setvariable variable=build_status]$build_status"
-              echo "##vso[task.setvariable variable=build_detail_link]$build_detail_link"
-              echo "##vso[task.setvariable variable=test_file]$test_file"
+              file_without_intergration=$(echo ${test_file} | cut -d '/' -f 2-)
+
+              echo "##vso[task.setvariable variable=region]$region"   
+              echo "##vso[task.setvariable variable=buildDetails]$buildDetails"   
+              echo "##vso[task.setvariable variable=result_build_id]$result_build_id" 
+              echo "##vso[task.setvariable variable=file_without_intergration]$file_without_intergration"   
 
           displayName: Upload App and Test to BrowserStack and wait for result
           env: 
             BROWSERSTACK_USERNAME: '$(BROWSERSTACK_USERNAME)'
             BROWSERSTACK_ACCESSKEY: '$(BROWSERSTACK_ACCESSKEY)'
             ENABLE_GEOLOCATION: '$(ENABLE_GEOLOCATION)'
-        
+
         - task: AzureCLI@2
-          displayName: Download PushNotification Template
+          displayName: Edit PushNotification Template
           inputs:
             azureSubscription: 'devops-dd-sc'
             scriptType: 'bash'
             scriptLocation: 'inlineScript'
             inlineScript: |
-              sleep $(echo $(( (RANDOM % 7) * 5 )))
-              az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/push_notification_to_teams.sh --name dndstsharednpd/ezrxplus/mobile 
+              BROWSERSTACK_CREDENTIALS=$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESSKEY
+              result_build_id=$(result_build_id)
+              test_file=$(file_without_intergration)
+              buildDetails=$(buildDetails)
+              echo $test_file
+              total_cases=$(curl -X GET "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/builds/${result_build_id}" -u $BROWSERSTACK_CREDENTIALS | jq '.devices[].sessions[].testcases.count')
+              echo "Total Cases: $total_cases"
+              passed_cases=$(curl -X GET "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/builds/${result_build_id}" -u $BROWSERSTACK_CREDENTIALS | jq '.devices[].sessions[].testcases.status.passed')
+              echo "Total Cases Passed: $passed_cases"
+
+              az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name dndstsharednpd/ezrxplus/template$(Build.BuildId) 
+
+              if [ -n "$total_cases" ] && [ -n "$passed_cases" ]; then
+                if [ "$total_cases" == "0"] && [ "$passed_cases" == "0"]; then 
+                  avg=0
+                  echo "set avg: $avg cause Devision Error"
+                  sed -i "s|${test_file}_per|${avg}%|g" .azure-pipelines/template.html 
+                else
+                  avg=$(python3 -c "print(int(( $passed_cases / $total_cases)*100))")
+                  sed -i "s|${test_file}_link|$buildDetails|g" .azure-pipelines/template.html 
+                  sed -i "s|${test_file}_per|${avg}%|g" .azure-pipelines/template.html 
+                  echo "current avg: $avg"
+                fi
+              else
+                avg=0
+                echo "Error! Will set avg = $avg"
+                sed -i "s|${test_file}_per|${avg}%|g" .azure-pipelines/template.html 
+              fi
+
+              az storage blob upload --connection-string $AZURE_STORAGE_CONNECTION_STRING --container-name devops-operations --overwrite --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name dndstsharednpd/ezrxplus/template$(Build.BuildId)
+              cat .azure-pipelines/template.html
           env: 
             AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
+            BROWSERSTACK_USERNAME: '$(BROWSERSTACK_USERNAME)'
+            BROWSERSTACK_ACCESSKEY: '$(BROWSERSTACK_ACCESSKEY)'
+            ENABLE_GEOLOCATION: '$(ENABLE_GEOLOCATION)'
 
         - task: Bash@3
-          displayName: Replace Notification Content
+          displayName: Read Integration Test Report
           inputs:
-            targetType: 'inline'
+            targetType: 'inline'       
             script: |
-              echo $(build_status)
-              echo $(build_detail_link)
-              echo $(build_video_link)
-              echo $(test_file)
-
-              cat <<-EOF >> push_notification_to_teams.sh 
-                {
-                  "@type": "OpenUri",
-                  "name": "Build Detail Link With Test Case $(test_file): $(build_status) ",
-                  "targets": [
-                    { "os": "default", "uri": "$(build_detail_link)" }
-                  ]
-                },              
-                {
-                  "@type": "OpenUri",
-                  "name": "Video Link For Test Case $(test_file)",
-                  "targets": [
-                    { "os": "default", "uri": "$(build_video_link)"}
-                  ]
-                },  
-              EOF     
-            workingDirectory: '$(System.DefaultWorkingDirectory)'
-            
-        - task: AzureCLI@2
-          displayName: Update PushNotification Template
-          inputs:
-            azureSubscription: 'devops-dd-sc'
-            scriptType: 'bash'
-            scriptLocation: 'inlineScript'
-            inlineScript: |                          
-              cat push_notification_to_teams.sh 
-              az storage blob upload --container-name devops-operations --overwrite --file $(System.DefaultWorkingDirectory)/push_notification_to_teams.sh --name dndstsharednpd/ezrxplus/mobile
-          env: 
-            AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
+              w3m -dump .azure-pipelines/template.html
 
 - stage: MSTeamsNotificationStage
   dependsOn: [AndroidUATRegressionJob]
   displayName: MSTeams Notification Stage
+  condition: succeeded()  
   jobs:
   - job: MSTeamsNotificationUatJob
     displayName: MSTeamsNotificationUatJob
-    steps:         
-      - task: AzureCLI@2
-        displayName: Download PushNotification Template
-        inputs:
-          azureSubscription: 'devops-dd-sc'
-          scriptType: 'bash'
-          scriptLocation: 'inlineScript'
-          inlineScript: |
-            az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/push_notification_to_teams.sh --name dndstsharednpd/ezrxplus/mobile 
-        env: 
-          AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
+    steps:  
+    - task: AzureCLI@2
+      displayName: Edit PushNotification Template
+      inputs:
+        azureSubscription: 'devops-dd-sc'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name dndstsharednpd/ezrxplus/template$(Build.BuildId) 
+          sed -E -i "s|<a.*_per|NA|g" ./.azure-pipelines/template.html
+          w3m -dump .azure-pipelines/template.html   
 
-      - task: Bash@3
-        displayName: Complete Push Notification File
-        inputs:
-          targetType: 'inline'
-          script: |
-            sed -i '$ d' push_notification_to_teams.sh
-            cat <<EOF >> push_notification_to_teams.sh        
-                }]
+    - task: Bash@3
+      displayName: Push Notification
+      inputs:
+        targetType: 'inline'
+        script: |
+          regions=( my sg th ph vn tw kh mm id)
+          for region in ${regions[@]}
+          do
+            avg=$(grep -Eo "${region}.*[0-9]+%" .azure-pipelines/template.html | grep -Eo '[0-9]+%' | grep -Eo '[0-9]+')
+            len=$(grep -Eco "${region}.*[0-9]+%" .azure-pipelines/template.html)
+            echo $(echo $region: ${avg[@]})
+            if [ "$len" == 0 ]; then 
+              echo "Ignore"
+            else
+              sum=0
+              for i in ${avg[@]}; do
+                sum=$((sum + i ))
+              done
+              average=$((sum / len))
+              echo "${region}_avg: $average"
+              sed -i "s|${region}_avg|${average}%|g" ./.azure-pipelines/template.html
+            fi
+          done
+          sed -E -i "s|>.*_avg|>NA|g" ./.azure-pipelines/template.html
+          buildUrl="$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"
+          sed -E -i "s|build_url_link|$buildUrl|g" ./.azure-pipelines/template.html
+
+    - task: Bash@3
+      displayName: Push Notification
+      inputs:
+        targetType: 'inline'
+        script: |
+          html=$(tr -d '\n' < ./.azure-pipelines/template.html)
+          curl -X POST -H "Content-Type: application/json" -d "{\"text\":\"$html\"}" $MICROSOFT_TEAMS_BUILD_CHANNEL
+      env:
+        MICROSOFT_TEAMS_BUILD_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_CHANNEL)'
+
+- stage: MSTeamsFailedNotificationStage
+  dependsOn: [AndroidUATRegressionJob]
+  displayName: MSTeams Failed Notification Stage
+  condition: failed()
+  jobs:
+  - job: MSTeamsFailedNotificationUatJob
+    displayName: MSTeams Failed Notification 
+    steps:  
+    - task: Bash@3
+      displayName: Push Notification When Failed
+      inputs:
+        targetType: 'inline'
+        script: |
+          buildUrl="$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"        
+          TITLE="Some Integration Test Case Fail"
+          curl --location --request POST '$(MICROSOFT_TEAMS_BUILD_CHANNEL)' \
+          --header 'Content-Type: text/plain' \
+          --data-raw '{
+            "@type": "MessageCard",
+            "@context": "http://schema.org/extensions",
+            "summary": "Some Integration Test Case Fail",
+            "sections": [{
+              "activityTitle": "'"$TITLE"'",
+                "markdown": true
+              }],
+            "potentialAction": [{
+              "@type": "ActionCard",
+              "name": "Build url",
+              "actions": [{
+                "@type": "OpenUri",
+                "name": "Pipeline Fail",
+                "targets": [
+                  { "os": "default", "uri": "'"$buildUrl"'" }
+                ]
               }]
-            }'
-            EOF
-      - task: Bash@3
-        displayName: Push Notification To Teams
-        inputs:
-          filePath: '$(System.DefaultWorkingDirectory)/push_notification_to_teams.sh'
+            }]
+          }'  
+      env:
+        MICROSOFT_TEAMS_BUILD_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_CHANNEL)'          
+
