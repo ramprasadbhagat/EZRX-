@@ -60,8 +60,11 @@ parameters:
   - name: max_test_time 
     displayName: Max Test Time
     type: object
-    default: 300
-    values: 
+    default: 3000
+    values:
+      - 3000
+      - 1500
+      - 1000 
       - 500
       - 300      
        
