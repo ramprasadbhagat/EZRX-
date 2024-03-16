@@ -303,12 +303,12 @@ stages:
                 val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
                 --header 'Content-Type: application/json' \
                 -u $BROWSERSTACK_CREDENTIALS \
-                -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "geoLocation":"'"${testSuite[1]}}"'" , "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "deviceLogs":"true", "networkLogs":"true", "devices": ["'"${{ parameters.device_name }}"'"]}' )
+                -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "geoLocation":"'"${testSuite[1]}}"'" , "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "autoGrantPermissions":"true", "deviceLogs":"true", "networkLogs":"true", "devices": ["'"${{ parameters.device_name }}"'"]}' )
               else
                 val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
                 --header 'Content-Type: application/json' \
                 -u $BROWSERSTACK_CREDENTIALS \
-                -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "deviceLogs":"true", "networkLogs":"true",  "devices": ["'"${{ parameters.device_name }}"'"]}' )
+                -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "autoGrantPermissions":"true", "deviceLogs":"true", "networkLogs":"true",  "devices": ["'"${{ parameters.device_name }}"'"]}' )
               fi
 
               result_build_id=$(echo $val | sed 's/{.*"build_id":"*\([0-9a-zA-Z]*\)"*,*.*}/\1/')
