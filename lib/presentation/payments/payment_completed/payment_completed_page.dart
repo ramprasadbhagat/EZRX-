@@ -22,7 +22,7 @@ class PaymentCompletedPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         centerTitle: false,
         backgroundColor: ZPColors.white,
-        title: Text(context.tr('Payment completed')),
+        title: Text(context.tr('Payment request submitted')),
         leading: IconButton(
           key: WidgetKeys.paymentAdviceCreatedPageBack,
           onPressed: () => Navigator.pop(context),

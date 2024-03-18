@@ -108,7 +108,7 @@ void main() {
       await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(
-        find.text('Payment completed'.tr()),
+        find.text('Payment request submitted'.tr()),
         findsOneWidget,
       );
       final paymentAdviceCreatedPageBack =
