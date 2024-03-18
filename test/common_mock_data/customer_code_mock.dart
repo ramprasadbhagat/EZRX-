@@ -45,3 +45,5 @@ final fakeCustomerCodeInfoWithCustomerGrp4 = CustomerCodeInfo.empty().copyWith(
   customerAttr7: CustomerAttr7('ZEV'),
   customerGrp4: CustomerGrp4('VR'),
 );
+final fakeBlockedCustomerCodeInfo = CustomerCodeInfo.empty()
+    .copyWith(status: Status('Z1 - Suspended Customer'));

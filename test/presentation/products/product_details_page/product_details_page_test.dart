@@ -1119,6 +1119,46 @@ void main() {
           ),
         );
       });
+
+      testWidgets(
+          'test add to cart button disabled when customerCode is blocked',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('Yes'),
+              ),
+            ),
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeBlockedCustomerCodeInfo,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final addToCartButton =
+            find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        verifyNever(
+          () => cartMockBloc.add(
+            CartEvent.upsertCart(
+              priceAggregate: PriceAggregate.empty().copyWith(
+                materialInfo: materialInfo,
+                salesOrgConfig: fakeVNSalesOrgConfigs,
+                quantity: 1,
+              ),
+            ),
+          ),
+        );
+      });
       testWidgets('MaterialDetailsToggle should be visible', (tester) async {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(

@@ -79,13 +79,18 @@ class BuyAgainButton extends StatelessWidget {
               previous.isFetching != current.isFetching ||
               previous.orderNumberWillUpsert != current.orderNumberWillUpsert,
           builder: (context, state) {
+            final isCustomerBlockedOrSuspended =
+                context.read<EligibilityBloc>().state.customerBlockOrSuspended;
+
             return OutlinedButton(
               style: OutlinedButton.styleFrom(
                 maximumSize: const Size(double.maxFinite, 45),
               ),
               onPressed: (state.orderNumberWillUpsert ==
                           viewByOrderHistoryItem.orderNumber ||
-                      stateCart.isBuyAgainNotAllowed)
+                      stateCart.isUpserting ||
+                      stateCart.isFetching ||
+                      isCustomerBlockedOrSuspended)
                   ? null
                   : () {
                       _trackBuyAgainEvent(

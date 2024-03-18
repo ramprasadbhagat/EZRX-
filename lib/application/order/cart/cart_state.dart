@@ -432,9 +432,6 @@ class CartState with _$CartState {
         )
       : 0;
 
-  bool get isBuyAgainNotAllowed =>
-      isUpserting || isFetching || shipToInfo.customerBlock.isCustomerBlocked;
-
   List<BonusSampleItem> productBonusList(MaterialNumber material) =>
       cartProducts
           .firstWhere(

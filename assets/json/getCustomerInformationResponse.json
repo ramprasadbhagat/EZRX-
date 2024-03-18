@@ -1245,6 +1245,53 @@
                     ]
                 },
                 {
+                    "customerCodeSoldTo": "0030264492",
+                    "name1": "Khoa Rang Ham Mat",
+                    "name2": "Truong Dai Hoc Y Duoc",
+                    "name3": "Thanh Pho Ho Chi Minh",
+                    "name4": "(CTM)",
+                    "street1": "Nguyen Trai",
+                    "street2": "",
+                    "street3": "",
+                    "street4": "",
+                    "street5": "",
+                    "building": "",
+                    "floor": "",
+                    "houseNumber1": "",
+                    "postalCode": "",
+                    "city1": "Tinh Ha Nam",
+                    "city2": "Thi Xa Duy Tien",
+                    "status": "Z1 - Suspended Customer",
+                    "customerGrp4": "V07",
+                    "shipTo": [
+                        {
+                            "defaultShipToAddress": true,
+                            "shipToCustomerCode": "0071192119",
+                            "customerBlock": "",
+                            "name1": "Khoa Rang Ham Mat Truong DH Y",
+                            "name2": " Duoc TP.HCM (CTM)",
+                            "name3": "",
+                            "name4": "",
+                            "street": "Nguyen Trai",
+                            "street2": "",
+                            "street3": "",
+                            "street4": "",
+                            "street5": "",
+                            "building": "",
+                            "region": "001",
+                            "floor": "",
+                            "houseNumber1": "",
+                            "postalCode": "",
+                            "city1": "Thành Phố Hồ Chí Minh",
+                            "city2": "Quận 5",
+                            "status": ""  
+                        }
+                    ],
+                    "comboEligible": false,
+                    "salesDeals": []
+                    
+                },
+                {
                     "customerCodeSoldTo": "0030082707",
                     "comboEligible": true,
                     "salesDeals": [

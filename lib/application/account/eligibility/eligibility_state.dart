@@ -273,7 +273,7 @@ class EligibilityState with _$EligibilityState {
       user.userCanAccessOrderHistory || isPaymentEnabled || isReturnsEnable;
 
   bool get disableCreateOrder =>
-      !user.userCanCreateOrder || shipToInfo.customerBlock.isCustomerBlocked;
+      !user.userCanCreateOrder || customerBlockOrSuspended;
 
   bool get showMaterialDescInMandarin =>
       salesOrg.isTW && user.preferredLanguage.isMandarin;
