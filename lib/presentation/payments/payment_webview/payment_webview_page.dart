@@ -142,7 +142,6 @@ class _WebviewBodyState extends State<_WebviewBody> {
       key: WidgetKeys.paymentWebviewPage,
       initialOptions: InAppWebViewGroupOptions(
         crossPlatform: InAppWebViewOptions(
-          useShouldOverrideUrlLoading: true,
           javaScriptCanOpenWindowsAutomatically: true,
           supportZoom: false,
         ),
@@ -153,25 +152,27 @@ class _WebviewBodyState extends State<_WebviewBody> {
           mimeType: 'text/html',
         ),
       ),
-      onLoadStart: (controller, url) async {
-        final uri = await controller.getUrl();
-        if (uri != null && uri.path.contains('my-account/thankyou')) {
-          if (mounted) {
-            await context.router.pop(
-              uri,
-            );
-          }
-        }
-      },
       onLoadStop: (controller, url) async {
-        await _initMobileViewport(controller);
+        await _onPaymentSuccessCallBack(controller);
+
         if (widget.isTH) {
+          await _initMobileViewport(controller);
           await _updateTHWebviewComponentStyles(controller);
         }
       },
-      shouldOverrideUrlLoading: (controller, navigationAction) async {
-        return NavigationActionPolicy.ALLOW;
-      },
     );
+  }
+
+  Future<void> _onPaymentSuccessCallBack(
+    InAppWebViewController controller,
+  ) async {
+    final uri = await controller.getUrl();
+    if (uri != null && uri.path.contains('my-account/thankyou')) {
+      if (mounted) {
+        await context.router.pop(
+          uri,
+        );
+      }
+    }
   }
 }
