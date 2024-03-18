@@ -407,6 +407,139 @@ void main() {
         ),
       ],
     );
+
+    blocTest(
+      'Update Product Stock Success',
+      build: () => BonusMaterialBloc(
+        materialListRepository: materialListRepository,
+        cartRepository: cartRepository,
+        config: config,
+      ),
+      seed: () => BonusMaterialState.initial().copyWith(
+        bonusItemList: [
+          fakeMaterialListData.products.first.copyWith(
+            stockInfos: [
+              StockInfo.empty().copyWith(
+                stockQuantity: 10,
+              )
+            ],
+          ),
+        ],
+      ),
+      setUp: () {
+        when(
+          () => cartRepository.getStockInfoList(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+            items: [
+              fakeMaterialListData.products.first,
+            ],
+          ),
+        ).thenAnswer(
+          (_) async => Right({
+            MaterialNumber('fake-material-name'): [
+              StockInfo.empty().copyWith(
+                stockQuantity: 10,
+              )
+            ]
+          }),
+        );
+      },
+      act: (BonusMaterialBloc bloc) => bloc.add(
+        BonusMaterialEvent.updateProductStock(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          salesOrganisation: fakeMYSalesOrganisation,
+          configs: fakeMYSalesOrgConfigs,
+          items: [
+            fakeMaterialListData.products.first,
+          ],
+        ),
+      ),
+      expect: () => [
+        BonusMaterialState.initial().copyWith(
+          isUpdatingStock: true,
+          bonusItemList: [
+            fakeMaterialListData.products.first.copyWith(
+              stockInfos: [
+                StockInfo.empty().copyWith(
+                  stockQuantity: 10,
+                )
+              ],
+            ),
+          ],
+        ),
+        BonusMaterialState.initial().copyWith(
+          bonusItemList: [
+            fakeMaterialListData.products.first.copyWith(
+              stockInfos: [
+                StockInfo.empty().copyWith(
+                  stockQuantity: 10,
+                )
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+
+    blocTest(
+      'Update Product Stock Failed',
+      build: () => BonusMaterialBloc(
+        materialListRepository: materialListRepository,
+        cartRepository: cartRepository,
+        config: config,
+      ),
+      seed: () => BonusMaterialState.initial().copyWith(
+        bonusItemList: [
+          fakeMaterialListData.products.first,
+        ],
+      ),
+      setUp: () {
+        when(
+          () => cartRepository.getStockInfoList(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+            items: [
+              fakeMaterialListData.products.first,
+            ],
+          ),
+        ).thenAnswer(
+          (_) async => const Left(fakeError),
+        );
+      },
+      act: (BonusMaterialBloc bloc) => bloc.add(
+        BonusMaterialEvent.updateProductStock(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          salesOrganisation: fakeMYSalesOrganisation,
+          configs: fakeMYSalesOrgConfigs,
+          items: [
+            fakeMaterialListData.products.first,
+          ],
+        ),
+      ),
+      expect: () => [
+        BonusMaterialState.initial().copyWith(
+          isUpdatingStock: true,
+          bonusItemList: [
+            fakeMaterialListData.products.first,
+          ],
+        ),
+        BonusMaterialState.initial().copyWith(
+          bonusItemList: [
+            fakeMaterialListData.products.first,
+          ],
+          failureOrSuccessOption: optionOf(
+            const Left(fakeError),
+          ),
+        ),
+      ],
+    );
   });
 
   blocTest(

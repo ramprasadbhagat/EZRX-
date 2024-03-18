@@ -222,5 +222,16 @@ void main() {
         findsNothing,
       );
     });
+
+    testWidgets('Show Stock Info When Config Enabled', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(fakeMaterial));
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.materialDetailsStock), findsOneWidget);
+    });
   });
 }

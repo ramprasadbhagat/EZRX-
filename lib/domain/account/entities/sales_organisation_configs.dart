@@ -248,10 +248,11 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         futureDeliveryDay.intValue - 1,
       );
 
-
   String get displayPrefixTax => displaySubtotalTaxBreakdown ? 'excl' : 'incl';
 
   bool get showGovtListPrice => enableListPrice && salesOrg.isTW;
 
   double get homeOfferListHeight => showGovtListPrice ? 170 : 150;
+
+  bool get displayStockInfo => enableBatchNumber || expiryDateDisplay;
 }

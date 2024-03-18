@@ -22,51 +22,54 @@ class StockInfoWidget extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final enableBatchNumber =
         eligibilityState.salesOrgConfigs.enableBatchNumber;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: RichText(
-        key: WidgetKeys.materialDetailsStock,
-        text: TextSpan(
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall
-              ?.copyWith(color: ZPColors.darkGray),
-          children: [
-            if (enableBatchNumber)
-              TextSpan(
-                text:
-                    '${context.tr('Batch')}: ${stockInfo.displayBatchNumber(isMarketPlace: materialInfo.isMarketPlace)}',
-              ),
-            if (eligibilityState.salesOrgConfigs.expiryDateDisplay) ...[
-              if (enableBatchNumber) const TextSpan(text: ' - '),
-              TextSpan(
-                text: '${context.tr('EXP')}: ${stockInfo.displayExpiryDate(
-                  isMarketPlace: materialInfo.isMarketPlace,
-                  isPhMdi: eligibilityState.salesOrg.isPhMdi,
-                  isAbbotPrincipalCode:
-                      materialInfo.principalData.principalCode.isAbbot,
-                )}',
-              ),
-              WidgetSpan(
-                alignment: PlaceholderAlignment.middle,
-                child: IconButton(
-                  key: WidgetKeys.expiryDateInfoIcon,
-                  splashRadius: 15,
-                  constraints: const BoxConstraints(),
-                  padding: EdgeInsets.zero,
-                  onPressed: () => showModalBottomSheet(
-                    context: context,
-                    builder: (context) => const _ExpiryDateInstruction(),
-                  ),
-                  icon: const Icon(Icons.info, size: 18),
+    if (eligibilityState.salesOrgConfigs.displayStockInfo) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5.0),
+        child: RichText(
+          key: WidgetKeys.materialDetailsStock,
+          text: TextSpan(
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(color: ZPColors.darkGray),
+            children: [
+              if (enableBatchNumber)
+                TextSpan(
+                  text:
+                      '${context.tr('Batch')}: ${stockInfo.displayBatchNumber(isMarketPlace: materialInfo.isMarketPlace)}',
                 ),
-              ),
+              if (eligibilityState.salesOrgConfigs.expiryDateDisplay) ...[
+                if (enableBatchNumber) const TextSpan(text: ' - '),
+                TextSpan(
+                  text: '${context.tr('EXP')}: ${stockInfo.displayExpiryDate(
+                    isMarketPlace: materialInfo.isMarketPlace,
+                    isPhMdi: eligibilityState.salesOrg.isPhMdi,
+                    isAbbotPrincipalCode:
+                        materialInfo.principalData.principalCode.isAbbot,
+                  )}',
+                ),
+                WidgetSpan(
+                  alignment: PlaceholderAlignment.middle,
+                  child: IconButton(
+                    key: WidgetKeys.expiryDateInfoIcon,
+                    splashRadius: 15,
+                    constraints: const BoxConstraints(),
+                    padding: EdgeInsets.zero,
+                    onPressed: () => showModalBottomSheet(
+                      context: context,
+                      builder: (context) => const _ExpiryDateInstruction(),
+                    ),
+                    icon: const Icon(Icons.info, size: 18),
+                  ),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
-      ),
-    );
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 }
 

@@ -4,12 +4,12 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,10 +74,14 @@ void main() {
         ),
       ],
       child: Material(
-        child: CartProductTile(
+        child: CartProductBundle(
           cartItem: PriceAggregate.empty().copyWith(
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('fake-material-number'),
+            bundle: Bundle.empty().copyWith(
+              materials: [
+                MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-number'),
+                ),
+              ],
             ),
           ),
         ),
@@ -85,32 +89,24 @@ void main() {
     );
   }
 
-  group('Cart Product Tile Test', () {
-    testWidgets('Dislay GovtListPriceComponent Test', (tester) async {
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pump();
-      expect(find.byType(GovtListPriceComponent), findsOneWidget);
-    });
-
-    testWidgets('Dislay Stock Info Test', (tester) async {
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
-        ),
-      );
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pump();
-      expect(
-        find.descendant(
-          of: find.byKey(
-            WidgetKeys.cartItemProductTile(
-              MaterialNumber('fake-material-number').displayMatNo,
-            ),
+  testWidgets('Check stock detail display', (tester) async {
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+      ),
+    );
+    await tester.pumpWidget(getScopedWidget());
+    await tester.pump();
+    expect(
+      find.descendant(
+        of: find.byKey(
+          WidgetKeys.cartItemProductTile(
+            MaterialNumber('fake-number').displayMatNo,
           ),
-          matching: find.byKey(WidgetKeys.materialDetailsStock),
         ),
-        findsOneWidget,
-      );
-    });
+        matching: find.byKey(WidgetKeys.materialDetailsStock),
+      ),
+      findsOneWidget,
+    );
   });
 }

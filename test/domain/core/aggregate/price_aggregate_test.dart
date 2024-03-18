@@ -2343,4 +2343,49 @@ void main() {
       expect([items.first, items.first].showManufacturerName(1), false);
     });
   });
+
+  group('Price Aggregate Get Stock Info Valid -', () {
+    late final PriceAggregate item;
+
+    setUpAll(() async {
+      item = (await CartLocalDataSource().getAddedToCartProductList())
+          .cartProducts
+          .first;
+    });
+    test('Stock Info Valid When Epiry Date Valid', () {
+      final stockInfo = StockInfo.empty()
+          .copyWith(expiryDate: DateTimeStringValue('20230917'));
+      final validStockItem = item.copyWith(
+        stockInfoList: [stockInfo],
+      );
+
+      expect(
+        validStockItem.stockInfoValid,
+        stockInfo,
+      );
+    });
+
+    test('Stock Info Valid When Batch Number Valid', () {
+      final stockInfo =
+          StockInfo.empty().copyWith(batch: BatchNumber('fake-batch-number'));
+      final validStockItem = item.copyWith(
+        stockInfoList: [stockInfo],
+      );
+
+      expect(
+        validStockItem.stockInfoValid,
+        stockInfo,
+      );
+    });
+    test('Stock Info Valid When both Batch Number And Expiry Date Invalid', () {
+      final validStockItem = item.copyWith(
+        stockInfoList: [],
+      );
+
+      expect(
+        validStockItem.stockInfoValid,
+        StockInfo.empty(),
+      );
+    });
+  });
 }

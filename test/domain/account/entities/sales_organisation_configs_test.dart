@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
@@ -74,6 +75,34 @@ void main() {
       configs = fakeSGSalesOrgConfigs;
       expect(
         configs.showGovtListPrice,
+        false,
+      );
+    });
+
+    test('Display Stock Info When expiryDateDisplay is True Test', () {
+      configs = fakeMYSalesOrgConfigs;
+      expect(
+        configs.displayStockInfo,
+        true,
+      );
+    });
+
+    test('Display Stock Info When enableBatchNumber is True Test', () {
+      configs = fakeMYSalesOrgConfigs.copyWith(
+        enableBatchNumber: true,
+      );
+      expect(
+        configs.displayStockInfo,
+        true,
+      );
+    });
+
+    test(
+        'Hide Stock Info When both expiryDateDisplay and enableBatchNumber is false Test',
+        () {
+      configs = fakeKHSalesOrgConfigs;
+      expect(
+        configs.displayStockInfo,
         false,
       );
     });

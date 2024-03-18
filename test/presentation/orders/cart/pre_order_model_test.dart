@@ -727,5 +727,29 @@ void main() {
         expect(find.byType(MarketPlaceLogo), findsNothing);
       },
     );
+
+    testWidgets(
+      'Find Stock Info if config enable',
+      (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: fakeCartProduct
+                .map((e) => e.copyWith(bonusSampleItems: []))
+                .toList(),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.materialDetailsStock),
+          findsOneWidget,
+        );
+      },
+    );
   });
 }
