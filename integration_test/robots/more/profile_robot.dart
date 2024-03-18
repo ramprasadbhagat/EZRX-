@@ -90,7 +90,7 @@ class ProfileRobot {
     final noItemFound =
         find.byKey(WidgetKeys.noRecordsFoundSearchIcon).evaluate().isNotEmpty;
     if (noItemFound) {
-      _verifyTextVisible('Looks like you don`t have any license here'.tr());
+      _verifyTextVisible("Looks like you don't have any license here".tr());
     } else {
       final licenseItems = find.byKey(WidgetKeys.profileLicenseTile);
       final itemCount = licenseItems.evaluate().length;
