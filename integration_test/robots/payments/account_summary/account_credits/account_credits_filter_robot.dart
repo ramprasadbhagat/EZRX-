@@ -138,12 +138,14 @@ class AccountCreditsFilterRobot {
     await _tester.tap(_fromAmountValue);
     await _tester.enterText(_fromAmountValue, text);
     await _tester.testTextInput.receiveAction(TextInputAction.done);
+    await _tester.pump();
   }
 
   Future<void> enterToAmount(String text) async {
     await _tester.tap(_toAmountValue);
     await _tester.enterText(_toAmountValue, text);
     await _tester.testTextInput.receiveAction(TextInputAction.done);
+    await _tester.pump();
   }
 
   void verifyInvalidAmountError() {

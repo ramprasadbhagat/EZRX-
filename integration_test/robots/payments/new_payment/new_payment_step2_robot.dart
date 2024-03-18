@@ -78,7 +78,7 @@ class NewPaymentStep2Robot {
       find.text(
         DateTime.now().displayDate,
       ),
-      findsOneWidget,
+      findsWidgets,
     );
     expect(
       find.text(
@@ -88,7 +88,7 @@ class NewPaymentStep2Robot {
           DateTime.now().day - 29,
         ).displayDate,
       ),
-      findsOneWidget,
+      findsWidgets,
     );
   }
 

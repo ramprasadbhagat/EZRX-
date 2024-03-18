@@ -111,13 +111,21 @@ class ViewByItemsDetailRobot extends CommonRobot {
   }
 
   Future<void> verifyItemComponent() async {
-    await scrollEnsureFinderVisible(orderItem);
+    await scrollEnsureFinderVisible(orderItem.first);
     _verifyItemComponent(orderItem);
     _verifyItemComponent(find.byKey(WidgetKeys.commonTileItemTitle));
     _verifyItemComponent(find.byKey(WidgetKeys.commonTileItemLabel));
     _verifyItemComponent(find.byType(ProductImage));
     _verifyItemComponent(find.byKey(WidgetKeys.orderItemStatusKey));
     _verifyItemComponent(qtyLabel);
+  }
+
+  Future<void> verifyManufacturerName(String manufacturerName) async {
+    await scrollEnsureFinderVisible(addressSection);
+    final manufacturerFinder =
+        find.byKey(WidgetKeys.manufacturerMaterials).first;
+    await scrollEnsureFinderVisible(manufacturerFinder);
+    expect(tester.widget<Text>(manufacturerFinder).data, manufacturerName);
   }
 
   void verifyMaterialNumber(String materialNumber) => _verifyItemComponent(

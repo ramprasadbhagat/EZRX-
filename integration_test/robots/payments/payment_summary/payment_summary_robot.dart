@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class PaymentSummaryRobot {
@@ -130,6 +132,20 @@ class PaymentSummaryRobot {
     await tester.tap(item.first);
     await tester.pumpAndSettle();
   }
+
+  String getPaymentId(int index) => tester
+      .widget<Text>(find.byKey(WidgetKeys.commonTileItemLabel).at(index))
+      .data!
+      .split('#')
+      .last;
+
+  double getPaymentIdPrice(int index) => double.parse(
+        tester
+            .widget<PriceComponent>(
+              find.byKey(WidgetKeys.paymentSummaryAmountAndCurrency).at(index),
+            )
+            .price,
+      );
 
   void verifyPaymentSummaryGroupListVisible() {
     final noItemFound = find.byType(NoRecordFound).evaluate().isNotEmpty;

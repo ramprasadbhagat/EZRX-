@@ -174,7 +174,7 @@ class ProductRobot extends CommonRobot {
       await tester.pumpAndSettle();
     } else {
       await tester.tap(favoriteIcon);
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
       await tester.tap(favoriteIcon);
       await tester.pumpAndSettle();
     }

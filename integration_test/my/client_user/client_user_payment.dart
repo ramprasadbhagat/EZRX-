@@ -323,14 +323,17 @@ void main() {
       //verify
       accountInvoiceRobot.verifyItems();
       await accountInvoiceRobot.searchWithSearchIcon(invalidLengthSearchKey);
-      accountInvoiceRobot.verifyInvalidLengthSearchMessage();
-      await accountInvoiceRobot.dismissSnackbar();
+      await accountInvoiceRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await accountInvoiceRobot
           .searchWithKeyboardAction(invalidLengthSearchKey);
-      accountInvoiceRobot.verifyInvalidLengthSearchMessage();
-      await accountInvoiceRobot.dismissSnackbar();
+      await accountInvoiceRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await accountInvoiceRobot.autoSearch(invalidLengthSearchKey);
-      accountInvoiceRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await accountInvoiceRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.tapDocumentDateField();
       await accountInvoiceFilterRobot.setDateRangePickerValue(
@@ -673,12 +676,15 @@ void main() {
       //search bar
       accountCreditsRobot.verifyCreditSearchBar();
       await commonRobot.autoSearch(inValidShortText);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       await commonRobot.searchWithKeyboardAction(inValidShortText);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
 
       //No credit found - keyboard done
       await commonRobot.searchWithKeyboardAction(inValidCreditId);
+      await commonRobot.dismissSnackbar(dismissAll: true);
       accountCreditsRobot.verifyNoCreditFound();
       await commonRobot.tapClearSearch();
 
@@ -1185,10 +1191,11 @@ void main() {
 
         commonRobot.verifySearchBar();
         await commonRobot.autoSearch(inValidShortText);
-        commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: false,
+        );
         await commonRobot.searchWithKeyboardAction(inValidShortText);
-        commonRobot.verifyInvalidLengthSearchMessage();
-        await commonRobot.dismissSnackbar(dismissAll: true);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
 
         // No payment summary found - keyboard done
         await commonRobot.searchWithKeyboardAction(invalidSearchKey);
@@ -1517,12 +1524,12 @@ void main() {
   });
 
   group('Payment summary menu - ', () {
-    const invalidSearchKey = 'invalid keyword';
+    const invalidSearchKey = 'invalid-keyword';
     const invalidLengthSearchKey = 'a';
-    const validLengthSearchKey = 'ab';
-    const paymentId = '09EZ240002018401';
-    final fromDate = DateTime.now().subtract(const Duration(days: 360));
-    final toDate = DateTime.now().subtract(const Duration(days: 2));
+    const validLengthSearchKey = 'qq';
+    var paymentId = '';
+    final fromDate = DateTime(2000, 1, 1);
+    final toDate = DateTime.now();
     const statusFilter = 'In Progress';
     final statusFilterOptions = [
       'In Progress',
@@ -1531,14 +1538,7 @@ void main() {
       'Successful',
     ];
 
-    const invoiceText = 'Invoice total:';
-    const invoicePrice = 2997.30;
-    const creditText = 'Credits applied:';
-    const creditPrice = 0.00;
-    const totalText = 'Total:';
-    const totalPrice = invoicePrice;
-    const invoiceTitle = 'Invoice';
-    const invoiceId = '0040176965';
+    double totalPrice;
 
     Future<void> goToPaymentSummaryPage(WidgetTester tester) async {
       //init app
@@ -1581,11 +1581,12 @@ void main() {
       paymentSummaryRobot.verifyPageVisible();
 
       await commonRobot.autoSearch(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
 
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: true);
-      await commonRobot.dismissSnackbar();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
 
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
       paymentSummaryRobot.verifyNoRecordFoundVisible();
@@ -1595,6 +1596,7 @@ void main() {
     testWidgets(
         'EZRX-T186 | Verify search payment advice by inputting valid keyword - happy Flow',
         (tester) async {
+      const index = 0;
       //navigate to page
       await goToPaymentSummaryPage(tester);
 
@@ -1611,6 +1613,8 @@ void main() {
       await commonRobot.searchWithSearchIcon(validLengthSearchKey);
       paymentSummaryRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
+
+      paymentId = paymentSummaryRobot.getPaymentId(index);
 
       await commonRobot.searchWithKeyboardAction(paymentId);
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
@@ -1689,9 +1693,8 @@ void main() {
     testWidgets('EZRX-563 | Verify Reset Feature', (tester) async {
       //navigate to page
       await goToPaymentSummaryPage(tester);
-
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
-      await commonRobot.searchWithKeyboardAction(invalidSearchKey);
+      await commonRobot.searchWithSearchIcon(invalidSearchKey);
       paymentSummaryRobot.verifyNoRecordFoundVisible();
       await paymentSummaryRobot.tapFilterButton();
       paymentSummaryRobot.verifyResetButton();
@@ -1707,15 +1710,19 @@ void main() {
         'EZRX-T565 | verify Payment Summary Details Page with download invoice',
         (tester) async {
       const downloadMessage = 'Download Successful';
+      const index = 0;
       //navigate to page
       await goToPaymentSummaryPage(tester);
 
       //verify
       paymentSummaryRobot.verifyPageVisible();
+      await commonRobot.pullToRefresh();
+      paymentId = paymentSummaryRobot.getPaymentId(index);
+      totalPrice = paymentSummaryRobot.getPaymentIdPrice(index);
 
-      await commonRobot.searchWithKeyboardAction(paymentId);
+      await commonRobot.searchWithSearchIcon(paymentId);
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
-      await paymentSummaryRobot.tapItem();
+      await paymentSummaryRobot.tapFirstItem();
 
       //payment summary Details
       paymentSummaryDetailRobot.verifyPaymentDetail(
@@ -1726,27 +1733,10 @@ void main() {
       paymentSummaryDetailRobot.verifyCustomerCode(customerCode);
       paymentSummaryDetailRobot.verifyShipToCode(shipToCode);
 
-      //verify price
-      await paymentSummaryDetailRobot.verifyPaymentSummaryDetail(
-        invoiceText,
-        invoicePrice,
-        currency,
-      );
-      await paymentSummaryDetailRobot.verifyPaymentSummaryDetail(
-        creditText,
-        creditPrice,
-        currency,
-      );
-      await paymentSummaryDetailRobot.verifyPaymentSummaryDetail(
-        totalText,
-        totalPrice,
-        currency,
-      );
-      await paymentSummaryDetailRobot.verifyPaymentItems(
-        invoiceTitle,
-        invoiceId,
-        invoicePrice,
-        currency,
+      //verify payment summary fields and verify total price
+      await paymentSummaryDetailRobot.verifyPaymentSummaryInvoiceCredit();
+      await paymentSummaryDetailRobot.verifyPaymentSummaryTotalPrice(
+        totalPrice.priceDisplay(currency),
       );
 
       //Download Advice
@@ -2080,7 +2070,7 @@ void main() {
 
         await filterTheDateToGetItem();
         await commonRobot.searchWithKeyboardAction('0');
-        commonRobot.verifyInvalidLengthSearchMessage(isVisible: true);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         await commonRobot.dismissSnackbar();
         await commonRobot.searchWithKeyboardAction(noResultCreditSearchKeyword);
         newPaymentStep2Robot.verifyNoItemFound();

@@ -55,12 +55,14 @@ class AccountInvoiceFilterRobot extends CommonRobot {
     await tester.tap(amountFrom);
     await tester.enterText(amountFrom, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
   }
 
   Future<void> enterToAmount(String text) async {
     await tester.tap(amountTo);
     await tester.enterText(amountTo, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
   }
 
   void verifyAmountRangeApplied(String fromAmount, String toAmount) {

@@ -23,6 +23,7 @@ class ItemDetailsSection extends StatelessWidget {
             Text(
               orderHistoryItem.principalData.principalName.name,
               style: Theme.of(context).textTheme.labelMedium,
+              key: WidgetKeys.manufacturerMaterials,
             ),
             const SizedBox(height: 10),
           ],

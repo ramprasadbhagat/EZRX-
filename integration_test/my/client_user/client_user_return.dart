@@ -101,7 +101,7 @@ void main() {
   final reason = 'Wrong Bill-To'.tr();
   const materialId = '21042660';
   const materialTitle = "SURBEX BE CALCIUM PLUS CAP350MG30'S";
-  const materialUUID = '1100001302000020';
+  const materialUUID = '1100001302000120';
 
   //Return detail data
   const returnRequestStatus = 'Pending Review';
@@ -256,10 +256,13 @@ void main() {
       returnsRootRobot.verifyViewByItemsPageVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByItemsRobot.verifyReturnItemsVisible();
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByItemsRobot.verifyReturnItemsVisible();
@@ -275,7 +278,7 @@ void main() {
       returnsRootRobot.verifyViewByItemsPageVisible();
       returnsByItemsRobot.verifyReturnItemsVisible();
       await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.searchWithSearchIcon(materialName);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
@@ -299,9 +302,10 @@ void main() {
       );
       await returnsByItemsFilterRobot.tapApplyButton();
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
+      await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.tapClearSearch();
       returnsByItemsRobot.verifyReturnItemsVisible();
       await commonRobot.searchWithKeyboardAction(materialNumber);
@@ -641,7 +645,9 @@ void main() {
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByRequestRobot.verifyReturnRequestVisible();
@@ -657,7 +663,7 @@ void main() {
       await returnsRootRobot.switchToViewByRequestPage();
       returnsRootRobot.verifyViewByRequestPageVisible();
       await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await returnsByRequestRobot.tapFilterButton();
       await returnsByRequestFilterRobot.tapFromDateField();
       await commonRobot.setDateRangePickerValue(
@@ -681,7 +687,7 @@ void main() {
       await returnsRootRobot.switchToViewByRequestPage();
       returnsRootRobot.verifyViewByRequestPageVisible();
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();

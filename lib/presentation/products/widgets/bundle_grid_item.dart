@@ -71,7 +71,7 @@ class _BundleGridItem extends StatelessWidget {
             ),
             materialInfo.isMaterialHiddenOnListing
                 ? Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 9),
                     child: Text(
                       '+ ${materialInfo.data.skip(materialInfo.listingVisibleMaterial.length).length} materials',
                       style: Theme.of(context).textTheme.bodySmall,

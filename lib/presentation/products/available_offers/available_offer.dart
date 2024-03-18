@@ -109,7 +109,7 @@ class _PriceTierItem extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.4,
         padding: const EdgeInsets.symmetric(
           horizontal: 10,
-          vertical: 14,
+          vertical: 8,
         ),
       ),
     );
@@ -141,7 +141,7 @@ class _BonusLevelItem extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.4,
         padding: const EdgeInsets.symmetric(
           horizontal: 10,
-          vertical: 14,
+          vertical: 8,
         ),
       ),
     );

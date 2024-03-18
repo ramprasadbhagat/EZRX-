@@ -124,8 +124,10 @@ class ProductDetailRobot extends CommonRobot {
     final richTextChildren =
         (tester.widget<RichText>(materialDetailsStock).text as TextSpan)
             .children;
-    final expiryText = (richTextChildren![1] as TextSpan).text;
-    expect(expiryText, '(${'EXP'.tr()}: $expiryDate)');
+    final result = richTextChildren!.any(
+      (element) => element.toPlainText().contains('${'EXP'.tr()}: $expiryDate'),
+    );
+    expect(result, true);
   }
 
   void verifyBatch(String batch) {
@@ -133,8 +135,10 @@ class ProductDetailRobot extends CommonRobot {
     final richTextChildren =
         (tester.widget<RichText>(materialDetailsStock).text as TextSpan)
             .children;
-    final expiryText = (richTextChildren!.first as TextSpan).text;
-    expect(expiryText, '${'Batch'.tr()}: $batch ');
+    final result = richTextChildren!.any(
+      (element) => element.toPlainText().contains('${'Batch'.tr()}: $batch '),
+    );
+    expect(result, true);
   }
 
   void verifyProductPriceDisplayed() {

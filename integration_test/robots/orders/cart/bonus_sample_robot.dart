@@ -44,6 +44,7 @@ class BonusSampleRobot extends CommonRobot {
     );
     await tester.tap(materialQtyInput);
     await tester.enterText(materialQtyInput, qty.toString());
+    await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
   }
 

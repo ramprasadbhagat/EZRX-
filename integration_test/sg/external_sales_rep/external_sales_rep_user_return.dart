@@ -278,7 +278,9 @@ void main() {
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByItemsRobot.verifyReturnItemsVisible();
@@ -294,7 +296,7 @@ void main() {
       returnsRootRobot.verifyViewByItemsPageVisible();
       returnsByItemsRobot.verifyReturnItemsVisible();
       await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.searchWithSearchIcon(materialName);
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
@@ -318,7 +320,7 @@ void main() {
       );
       await returnsByItemsFilterRobot.tapApplyButton();
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
@@ -668,7 +670,9 @@ void main() {
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByRequestRobot.verifyReturnRequestVisible();
@@ -684,7 +688,7 @@ void main() {
       await returnsRootRobot.switchToViewByRequestPage();
       returnsRootRobot.verifyViewByRequestPageVisible();
       await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await returnsByRequestRobot.tapFilterButton();
       await returnsByRequestFilterRobot.tapFromDateField();
       await commonRobot.setDateRangePickerValue(
@@ -708,7 +712,7 @@ void main() {
       await returnsRootRobot.switchToViewByRequestPage();
       returnsRootRobot.verifyViewByRequestPageVisible();
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();

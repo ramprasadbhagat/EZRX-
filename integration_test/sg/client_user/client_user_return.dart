@@ -228,7 +228,7 @@ void main() {
 
       //verify search with return id
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.dismissSnackbar();
       await commonRobot.searchWithSearchIcon(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
@@ -244,7 +244,7 @@ void main() {
 
       //verify search with material number
       await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.dismissSnackbar();
       await commonRobot.searchWithSearchIcon(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
@@ -257,7 +257,9 @@ void main() {
       //verify search with material name
       await commonRobot.autoSearch(invalidLengthSearchKey);
       await commonRobot.waitAutoSearchDuration();
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(materialName);
@@ -562,7 +564,7 @@ void main() {
 
       //verify search with keyboard
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.dismissSnackbar();
       await commonRobot.searchWithSearchIcon(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
@@ -578,7 +580,7 @@ void main() {
 
       //verify search with icon
       await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.dismissSnackbar();
       await commonRobot.searchWithSearchIcon(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
@@ -591,7 +593,9 @@ void main() {
       //verify auto search
       await commonRobot.autoSearch(invalidLengthSearchKey);
       await commonRobot.waitAutoSearchDuration();
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(returnId);

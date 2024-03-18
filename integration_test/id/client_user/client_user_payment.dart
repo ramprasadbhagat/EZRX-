@@ -337,14 +337,19 @@ void main() {
       //verify
       accountInvoiceRobot.verifyItems();
       await accountInvoiceRobot.searchWithSearchIcon(invalidLengthSearchKey);
-      accountInvoiceRobot.verifyInvalidLengthSearchMessage();
+      await accountInvoiceRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await accountInvoiceRobot.dismissSnackbar();
       await accountInvoiceRobot
           .searchWithKeyboardAction(invalidLengthSearchKey);
-      accountInvoiceRobot.verifyInvalidLengthSearchMessage();
+      await accountInvoiceRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await accountInvoiceRobot.dismissSnackbar();
       await accountInvoiceRobot.autoSearch(invalidLengthSearchKey);
-      accountInvoiceRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await accountInvoiceRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.tapDocumentDateField();
       await accountInvoiceFilterRobot.setDateRangePickerValue(
@@ -649,9 +654,11 @@ void main() {
       //search bar
       accountCreditsRobot.verifyCreditSearchBar();
       await commonRobot.autoSearch(inValidShortText);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       await commonRobot.searchWithKeyboardAction(inValidShortText);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
 
       //No credit found - keyboard done
       await commonRobot.searchWithKeyboardAction(inValidCreditId);
@@ -1444,10 +1451,12 @@ void main() {
       paymentSummaryRobot.verifyPageVisible();
 
       await commonRobot.autoSearch(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
 
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: true);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.dismissSnackbar();
 
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);

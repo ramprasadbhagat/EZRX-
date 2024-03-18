@@ -295,14 +295,19 @@ void main() {
       //verify
       accountInvoiceRobot.verifyItems(isVn: true);
       await accountInvoiceRobot.searchWithSearchIcon(invalidLengthSearchKey);
-      accountInvoiceRobot.verifyInvalidLengthSearchMessage();
+      await accountInvoiceRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await accountInvoiceRobot.dismissSnackbar();
       await accountInvoiceRobot
           .searchWithKeyboardAction(invalidLengthSearchKey);
-      accountInvoiceRobot.verifyInvalidLengthSearchMessage();
+      await accountInvoiceRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await accountInvoiceRobot.dismissSnackbar();
       await accountInvoiceRobot.autoSearch(invalidLengthSearchKey);
-      accountInvoiceRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await accountInvoiceRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.tapDocumentDateField();
       await accountInvoiceFilterRobot.setDateRangePickerValue(
@@ -663,9 +668,11 @@ void main() {
       //search bar
       accountCreditsRobot.verifyCreditSearchBar();
       await commonRobot.autoSearch(inValidShortText);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
       await commonRobot.searchWithKeyboardAction(inValidShortText);
-      commonRobot.verifyInvalidLengthSearchMessage();
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
 
       //No credit found - keyboard done
       await commonRobot.searchWithKeyboardAction(inValidCreditId);
@@ -1192,9 +1199,11 @@ void main() {
 
         commonRobot.verifySearchBar();
         await commonRobot.autoSearch(inValidShortText);
-        commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: false,
+        );
         await commonRobot.searchWithKeyboardAction(inValidShortText);
-        commonRobot.verifyInvalidLengthSearchMessage();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         await commonRobot.dismissSnackbar(dismissAll: true);
 
         // No payment summary found - keyboard done
@@ -1434,7 +1443,7 @@ void main() {
     const invalidSearchKey = 'invalid keyword';
     const invalidLengthSearchKey = 'a';
     const validLengthSearchKey = 'ab';
-    const paymentId = '09EZ240001897601';
+    String paymentId;
     final fromDate = DateTime.now().subtract(const Duration(days: 3600));
     final toDate = DateTime.now().subtract(const Duration(days: 2));
     const fromAmount = '500.123400';
@@ -1443,14 +1452,7 @@ void main() {
     const formattedFromAmount = '500.1234';
     const formattedToAmount = '1000.2';
 
-    const invoiceText = 'Invoice total:';
-    const invoicePrice = 600.0;
-    const creditText = 'Credits applied:';
-    const creditPrice = 0.00;
-    const totalText = 'Total:';
-    const totalPrice = invoicePrice;
-    const invoiceTitle = 'Invoice';
-    const invoiceId = '0180000003';
+    double totalPrice;
 
     const filterOption = ['In Progress', 'Failed', 'Processed', 'Successful'];
 
@@ -1497,10 +1499,12 @@ void main() {
       paymentSummaryRobot.verifyPageVisible();
 
       await commonRobot.autoSearch(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
 
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      commonRobot.verifyInvalidLengthSearchMessage(isVisible: true);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.dismissSnackbar();
 
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
@@ -1511,6 +1515,7 @@ void main() {
     testWidgets(
         'EZRX-T186 | Verify search payment advice by inputting valid keyword - happy Flow',
         (tester) async {
+      const index = 0;
       //navigate to page
       await goToPaymentSummaryPage(tester);
 
@@ -1523,6 +1528,8 @@ void main() {
       await commonRobot.autoSearch(validLengthSearchKey);
       paymentSummaryRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
+
+      paymentId = paymentSummaryRobot.getPaymentId(index);
 
       await commonRobot.searchWithSearchIcon(validLengthSearchKey);
       paymentSummaryRobot.verifyNoRecordFoundVisible();
@@ -1634,6 +1641,7 @@ void main() {
     testWidgets(
         'EZRX-T565 | verify Payment Summary Details Page with download invoice',
         (tester) async {
+      const index = 0;
       const downloadMessage = 'Download Successful';
       //navigate to page
       await goToPaymentSummaryPage(tester);
@@ -1641,7 +1649,11 @@ void main() {
       //verify
       paymentSummaryRobot.verifyPageVisible();
 
-      await commonRobot.searchWithKeyboardAction(paymentId);
+      await commonRobot.pullToRefresh();
+      paymentId = paymentSummaryRobot.getPaymentId(index);
+      totalPrice = paymentSummaryRobot.getPaymentIdPrice(index);
+
+      await commonRobot.searchWithSearchIcon(paymentId);
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
       await paymentSummaryRobot.tapItem();
 
@@ -1654,27 +1666,10 @@ void main() {
       paymentSummaryDetailRobot.verifyCustomerCode(customerCode);
       paymentSummaryDetailRobot.verifyShipToCode(shipToCode);
 
-      //verify price
-      await paymentSummaryDetailRobot.verifyPaymentSummaryDetail(
-        invoiceText,
-        invoicePrice,
-        currency,
-      );
-      await paymentSummaryDetailRobot.verifyPaymentSummaryDetail(
-        creditText,
-        creditPrice,
-        currency,
-      );
-      await paymentSummaryDetailRobot.verifyPaymentSummaryDetail(
-        totalText,
-        totalPrice,
-        currency,
-      );
-      await paymentSummaryDetailRobot.verifyPaymentItems(
-        invoiceTitle,
-        invoiceId,
-        invoicePrice,
-        currency,
+      //verify payment summary fields and verify total price
+      await paymentSummaryDetailRobot.verifyPaymentSummaryInvoiceCredit();
+      await paymentSummaryDetailRobot.verifyPaymentSummaryTotalPrice(
+        totalPrice.priceDisplay(currency),
       );
 
       //Download Advice
@@ -2025,7 +2020,7 @@ void main() {
 
         await filterTheDateToGetItem();
         await commonRobot.searchWithKeyboardAction('0');
-        commonRobot.verifyInvalidLengthSearchMessage(isVisible: true);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         await commonRobot.dismissSnackbar();
         await commonRobot.searchWithKeyboardAction(noResultCreditSearchKeyword);
         newPaymentStep2Robot.verifyNoItemFound();

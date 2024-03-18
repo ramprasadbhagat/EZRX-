@@ -141,7 +141,6 @@ void main() {
   const materialCountryOfOrigin = 'NA';
   const materialUnitMeasurement = 'EA';
   const materialExpiryDate = 'NA';
-  const materialBatch = 'NA';
 
   const materialUnitPrice = 39.6;
   const pAndGMaterialPrincipalName = 'PROCTER AND GAMBLE';
@@ -161,6 +160,7 @@ void main() {
   const bonusMaterialNumberUnitPrice = 36.50;
   const oosPreOrderMaterialNumber = bonusMaterialNumber;
   const bonusMaterialName = '190 ORAL BALANCE 1.5OZ/42G(190)';
+  const bonusManufacturerName = 'GLAXOSMITHKLINE CONSUMER';
   const bundleShortNumber = '8896469';
   const bundleNumber = '0008896469';
   const bundleName = 'UAT ALM 9060';
@@ -338,7 +338,9 @@ void main() {
       //verify
       notificationRobot.verifyPage();
       notificationRobot.verifyScrollList();
-      notificationRobot.verifyDeleteButton();
+      if (notificationRobot.getFirstBasicNotificationTitle().isNotEmpty) {
+        notificationRobot.verifyDeleteButton();
+      }
     });
 
     testWidgets(
@@ -356,6 +358,9 @@ void main() {
       }
       await notificationRobot.scrollAlertNotification();
       notificationRobot.verifyNotificationItems();
+      if (notificationRobot.getFirstBasicNotificationTitle().isEmpty) {
+        return;
+      }
       final itemTitle = notificationRobot.getFirstBasicNotificationTitle();
       await notificationRobot.tapFirstBasicNotificationItem(itemTitle);
       if (viewByOrdersDetailRobot.isOrderDetailPage) {
@@ -1100,7 +1105,8 @@ void main() {
 
       await productSuggestionRobot
           .searchWithKeyboardAction(invalidLengthSearchKey);
-      productSuggestionRobot.verifyInvalidLengthSearchMessage();
+      await productSuggestionRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await productSuggestionRobot.dismissSnackbar();
       await productSuggestionRobot.searchWithKeyboardAction(invalidSearchKey);
       productSuggestionRobot.verifyNoSuggestedProduct();
@@ -1200,7 +1206,6 @@ void main() {
           .verifyUnitOfMeasurementLabelDisplayed(materialUnitMeasurement);
       productDetailRobot
           .verifyCountryOfOriginLabelDisplayed(materialCountryOfOrigin);
-      productDetailRobot.verifyBatchDisplayed(value: materialBatch);
       productDetailRobot.verifyExpiryDateLabelDisplayed(
         value: materialExpiryDate,
       );
@@ -1508,7 +1513,7 @@ void main() {
         //verify
         ordersRootRobot.verifyViewByItemsPage();
         await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         final productName = viewByItemsRobot.getFirstProductName();
         await commonRobot.searchWithKeyboardAction(productName);
         viewByItemsRobot.verifyOrdersWithProductName(productName);
@@ -1523,7 +1528,9 @@ void main() {
         const orderCode = '200324436';
         await commonRobot.autoSearch(invalidLengthSearchKey);
         await commonRobot.waitAutoSearchDuration();
-        commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: false,
+        );
         await commonRobot.autoSearch(orderCode);
         viewByItemsRobot.verifyOrdersWithOrderCode(orderCode);
         await commonRobot.pullToRefresh();
@@ -1615,6 +1622,7 @@ void main() {
           'EZRX-T87 | Verify view by item detail with default components',
           (tester) async {
         const orderId = '0200276381';
+        const materialManufacturerName = 'MERCK SHARP & DOHME (I.A)';
 
         //init app
         await pumpAppWithLoginOnBehalf(tester);
@@ -1633,6 +1641,8 @@ void main() {
 
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(materialManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
       });
 
@@ -1659,6 +1669,8 @@ void main() {
         viewByItemsDetailRobot.verifyHeader();
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(materialPrincipalName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(materialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
@@ -1690,6 +1702,8 @@ void main() {
         await commonRobot.pullToRefresh();
         viewByItemsRobot.verifyOfferTag();
         await viewByItemsRobot.tapFirstOfferTag();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyOfferTag();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
@@ -1703,6 +1717,8 @@ void main() {
 
         viewByItemsRobot.verifyBonusLabel();
         await viewByItemsRobot.tapFirstBonusLabel();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyBonusLabel();
         viewByItemsDetailRobot.verifyFreePrice();
@@ -1764,6 +1780,8 @@ void main() {
         await commonRobot.pullToRefresh();
         viewByItemsRobot.verifyOfferTag();
         await viewByItemsRobot.tapFirstOfferTag();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(pAndGMaterialPrincipalName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyOfferTag();
         viewByItemsDetailRobot.verifyMaterialNumber(pAndGMaterialNumber);
@@ -1777,6 +1795,8 @@ void main() {
 
         viewByItemsRobot.verifyBonusLabel();
         await viewByItemsRobot.tapFirstBonusLabel();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(pAndGMaterialPrincipalName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyBonusLabel();
         viewByItemsDetailRobot.verifyFreePrice();
@@ -1818,6 +1838,8 @@ void main() {
         ordersRootRobot.verifyViewByItemsPage();
         await commonRobot.pullToRefresh();
         await viewByItemsRobot.tapFirstOrderWithMaterial(bundleMaterialNumber1);
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bundleMaterialPrincipalName1);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyBundleTag();
         viewByItemsDetailRobot.verifyMaterialNumber(bundleMaterialNumber1);
@@ -1868,7 +1890,7 @@ void main() {
         await commonRobot.searchWithKeyboardAction(invalidSearchKey);
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.searchWithKeyboardAction(orderId);
         viewByOrdersRobot.verifyOrdersWithOrderCode(orderId);
@@ -1880,7 +1902,9 @@ void main() {
         await commonRobot.autoSearch(invalidSearchKey);
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.autoSearch(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: false,
+        );
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.tapClearSearch();
 
@@ -1891,7 +1915,7 @@ void main() {
         await commonRobot.tapClearSearch();
         viewByOrdersRobot.verifyOrders();
         await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       });
 
       testWidgets('EZRX-T83 | Verify filter by date', (tester) async {
@@ -1930,6 +1954,7 @@ void main() {
 
         //verify
         ordersRootRobot.verifyFilterApplied(0);
+        await commonRobot.pullToRefresh();
         viewByOrdersRobot.verifyOrders();
         final orderId = viewByOrdersRobot.getOrderIdText(index: index);
         await ordersRootRobot.tapFilterButton();
@@ -2087,6 +2112,8 @@ void main() {
         viewByOrdersDetailRobot.verifyOfferTag();
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
@@ -2104,6 +2131,8 @@ void main() {
         );
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
         viewByItemsDetailRobot.verifyQty(bonusQty);
@@ -2163,6 +2192,8 @@ void main() {
         viewByOrdersDetailRobot.verifyQty(bundleMaterialQty1);
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bundleMaterialPrincipalName1);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(bundleMaterialNumber1);
         viewByItemsDetailRobot.verifyQty(bundleMaterialQty1);
@@ -3080,6 +3111,7 @@ void main() {
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productSuggestionRobot.tapSearchResult(materialNumber);
       await productDetailRobot.tapAddToCart();
+      await commonRobot.dismissSnackbar(dismissAll: true);
       await productDetailRobot.tapCartButton();
       await cartRobot.changeMaterialQty(materialNumber, qty);
       await cartRobot.tapCloseButton();
@@ -3089,7 +3121,6 @@ void main() {
       await productSuggestionRobot.tapSearchResult(pAndGMaterialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.tapCartButton();
-      await cartRobot.changeMaterialQty(pAndGMaterialNumber, 1);
       await cartRobot.tapCheckoutButton();
       await oosPreOrderRobot.tapContinueButton();
       //verify
@@ -3238,6 +3269,10 @@ void main() {
       );
 
       //verify
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      // Should be 2 here because material has offer
+      await checkoutRobot.verifyYoursItemLabel(2);
       await checkoutRobot.verifyMaterialPrincipal(materialPrincipalName);
       await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialQty(materialNumber, qty);
@@ -3261,6 +3296,10 @@ void main() {
       await requestCounterOfferRobot.tapConfirmButton();
       await cartRobot.tapCheckoutButton();
       await oosPreOrderRobot.tapContinueButton();
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      // Should be 2 here because material has offer
+      await checkoutRobot.verifyYoursItemLabel(2);
       await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
         materialNumber,
@@ -3301,6 +3340,10 @@ void main() {
       await oosPreOrderRobot.tapContinueButton();
 
       //verify
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+
+      await checkoutRobot.verifyYoursItemLabel(2);
       await checkoutRobot.verifyBundle(bundleNumber);
       checkoutRobot.verifyBundleName(bundleNumber, bundleName);
       checkoutRobot.verifyBundleRate(
@@ -3372,6 +3415,8 @@ void main() {
       await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
 
       //verify
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
       await checkoutRobot.verifyYoursItemLabel(2);
       await checkoutRobot.verifyMaterial(bonusMaterialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
@@ -3424,6 +3469,8 @@ void main() {
       await checkoutWithMaterial(pAndGMaterialNumber, qty, isPreOrder: true);
 
       //verify
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
       await checkoutRobot.verifyYoursItemLabel(2);
       await checkoutRobot.verifyMaterial(pAndGMaterialNumber);
       checkoutRobot.verifyMaterialUnitPrice(

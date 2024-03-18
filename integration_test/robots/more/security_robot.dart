@@ -115,21 +115,21 @@ class SecurityRobot extends CommonRobot {
 
   void verifyConditionValidationPasswordContainUppercase(bool status) {
     verifyConditionValidationPassword(
-      'Contain at least 1 Upper case character (A to Z)',
+      'At least 1 Upper case character (A to Z)',
       status,
     );
   }
 
   void verifyConditionValidationPasswordContainLowercase(bool status) {
     verifyConditionValidationPassword(
-      'Contain at least 1 Lower case character (a to z)',
+      'At least 1 Lower case character (a to z)',
       status,
     );
   }
 
   void verifyConditionValidationPasswordContainNumeric(bool status) {
     verifyConditionValidationPassword(
-      'Contain at least a numeric character (0 to 9)',
+      'At least a numeric character (0 to 9)',
       status,
     );
   }

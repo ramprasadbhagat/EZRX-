@@ -1221,7 +1221,8 @@ void main() {
 
       await productSuggestionRobot
           .searchWithKeyboardAction(invalidLengthSearchKey);
-      productSuggestionRobot.verifyInvalidLengthSearchMessage();
+      await productSuggestionRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await productSuggestionRobot.dismissSnackbar();
       await productSuggestionRobot.searchWithKeyboardAction(invalidSearchKey);
       productSuggestionRobot.verifyNoSuggestedProduct();
@@ -3160,7 +3161,7 @@ void main() {
         //verify
         ordersRootRobot.verifyViewByItemsPage();
         await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         final productName = viewByItemsRobot.getFirstProductName();
         await commonRobot.searchWithKeyboardAction(productName);
         viewByItemsRobot.verifyOrdersWithProductName(productName);
@@ -3174,7 +3175,9 @@ void main() {
 
         await commonRobot.autoSearch(invalidLengthSearchKey);
         await commonRobot.waitAutoSearchDuration();
-        commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: false,
+        );
         await commonRobot.autoSearch(orderId);
         viewByItemsRobot.verifyOrdersWithOrderCode(orderId);
         await commonRobot.pullToRefresh();
@@ -3481,7 +3484,7 @@ void main() {
         await commonRobot.searchWithKeyboardAction(invalidSearchKey);
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.searchWithKeyboardAction(orderId);
         viewByOrdersRobot.verifyOrdersWithOrderCode(orderId);
@@ -3493,7 +3496,9 @@ void main() {
         await commonRobot.autoSearch(invalidSearchKey);
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.autoSearch(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: false,
+        );
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.tapClearSearch();
 
@@ -3504,7 +3509,7 @@ void main() {
         await commonRobot.tapClearSearch();
         viewByOrdersRobot.verifyOrders();
         await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       });
 
       testWidgets('EZRX-T83 | Verify filter by date', (tester) async {

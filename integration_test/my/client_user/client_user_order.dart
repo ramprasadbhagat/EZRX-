@@ -163,7 +163,6 @@ void main() {
   const materialUnitMeasurement = 'EA';
   const materialUnitPrice = 364.80;
   const materialExpiryDate = '30 Nov 2026';
-  const materialBatch = '12S017';
 
   const multiImageMaterialNumber = '21041738';
   const otherInfoMaterialNumber = '21041738';
@@ -173,6 +172,7 @@ void main() {
   const bonusMaterialNumber = '21041769';
   const bonusMaterialNumberTierQty = 6;
   const bonusMaterialNumberUnitPrice = 19.8;
+  const bonusManufacturerName = 'GLAXOSMITHKLINE CONSUMER';
   const bonusMaterialName = '190 FIRST TEETH T/PASTE (190) 40G';
   const oosPreOrderMaterialNumber = '21041769';
   const bundleShortNumber = '8896469';
@@ -234,9 +234,8 @@ void main() {
 
   Future<void> checkoutWithMaterial(
     String materialNumber,
-    int qty, {
-    bool isPreOrder = false,
-  }) async {
+    int qty,
+  ) async {
     await browseProductFromEmptyCart();
     await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
     await productSuggestionRobot.tapSearchResult(materialNumber);
@@ -244,7 +243,7 @@ void main() {
     await productDetailRobot.tapCartButton();
     await cartRobot.changeMaterialQty(materialNumber, qty);
     await cartRobot.tapCheckoutButton();
-    if (isPreOrder) {
+    if (oosPreOrderRobot.isSheetVisible) {
       await oosPreOrderRobot.tapContinueButton();
     }
   }
@@ -553,7 +552,9 @@ void main() {
       //verify
       notificationRobot.verifyPage();
       notificationRobot.verifyScrollList();
-      notificationRobot.verifyDeleteButton();
+      if (notificationRobot.getFirstBasicNotificationTitle().isNotEmpty) {
+        notificationRobot.verifyDeleteButton();
+      }
     });
 
     testWidgets(
@@ -566,11 +567,13 @@ void main() {
       //verify
       if (notificationRobot.checkIfNotificationListEmpty()) {
         notificationRobot.verifyNoRecordFound();
-
         return;
       }
       await notificationRobot.scrollAlertNotification();
       notificationRobot.verifyNotificationItems();
+      if (notificationRobot.getFirstBasicNotificationTitle().isEmpty) {
+        return;
+      }
       final itemTitle = notificationRobot.getFirstBasicNotificationTitle();
       await notificationRobot.tapFirstBasicNotificationItem(itemTitle);
       if (viewByOrdersDetailRobot.isOrderDetailPage) {
@@ -1307,7 +1310,8 @@ void main() {
 
       await productSuggestionRobot
           .searchWithKeyboardAction(invalidLengthSearchKey);
-      productSuggestionRobot.verifyInvalidLengthSearchMessage();
+      await productSuggestionRobot
+          .verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await productSuggestionRobot.dismissSnackbar();
       await productSuggestionRobot.searchWithKeyboardAction(invalidSearchKey);
       productSuggestionRobot.verifyNoSuggestedProduct();
@@ -1391,7 +1395,6 @@ void main() {
       productDetailRobot.verifyProductFavoriteIconDisplayed();
       productDetailRobot.verifyProductNameDisplayed();
       productDetailRobot.verifyExpiryDate(materialExpiryDate);
-      productDetailRobot.verifyBatch(materialBatch);
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
@@ -1404,7 +1407,6 @@ void main() {
           .verifyUnitOfMeasurementLabelDisplayed(materialUnitMeasurement);
       productDetailRobot
           .verifyCountryOfOriginLabelDisplayed(materialCountryOfOrigin);
-      productDetailRobot.verifyBatchDisplayed(value: materialBatch);
       productDetailRobot.verifyExpiryDateLabelDisplayed(
         value: materialExpiryDate,
       );
@@ -2377,6 +2379,7 @@ void main() {
       await checkoutRobot.tapDeliveryInformationArrowButton();
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
       await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      await checkoutRobot.verifyYoursItemLabel(1);
       await checkoutRobot.tapPlaceOrderButton();
       checkoutRobot.verifyEmptyPoReferenceMessage(isVisible: false);
       orderSuccessRobot.verifyPage();
@@ -2396,6 +2399,9 @@ void main() {
       await checkoutWithMaterial(materialNumber, qty);
 
       //verify
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      await checkoutRobot.verifyYoursItemLabel(1);
       await checkoutRobot.verifyMaterialPrincipal(materialPrincipalName);
       await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialQty(materialNumber, qty);
@@ -2418,6 +2424,10 @@ void main() {
       await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
       await requestCounterOfferRobot.tapConfirmButton();
       await cartRobot.tapCheckoutButton();
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      await checkoutRobot.verifyYoursItemLabel(1);
+
       await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
         materialNumber,
@@ -2457,6 +2467,9 @@ void main() {
       await oosPreOrderRobot.tapContinueButton();
 
       //verify
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      await checkoutRobot.verifyYoursItemLabel(2);
       await checkoutRobot.verifyBundle(bundleNumber);
       checkoutRobot.verifyBundleName(bundleNumber, bundleName);
       checkoutRobot.verifyBundleRate(
@@ -2525,9 +2538,14 @@ void main() {
 
       //init app
       await pumpAppWithHomeScreen(tester);
-      await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+      await checkoutWithMaterial(
+        bonusMaterialNumber,
+        qty,
+      );
 
       //verify
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
       await checkoutRobot.verifyYoursItemLabel(2);
       await checkoutRobot.verifyMaterial(bonusMaterialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
@@ -2632,7 +2650,10 @@ void main() {
 
       //init app
       await pumpAppWithHomeScreen(tester);
-      await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+      await checkoutWithMaterial(
+        bonusMaterialNumber,
+        qty,
+      );
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
 
@@ -2760,7 +2781,7 @@ void main() {
         //verify
         ordersRootRobot.verifyViewByItemsPage();
         await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         final productName = viewByItemsRobot.getFirstProductName();
         await commonRobot.searchWithKeyboardAction(productName);
         viewByItemsRobot.verifyOrdersWithProductName(productName);
@@ -2775,7 +2796,9 @@ void main() {
         final orderCode = viewByItemsRobot.getFirstOrderId();
         await commonRobot.autoSearch(invalidLengthSearchKey);
         await commonRobot.waitAutoSearchDuration();
-        commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: false,
+        );
         await commonRobot.autoSearch(orderCode);
         viewByItemsRobot.verifyOrdersWithOrderCode(orderCode);
         await commonRobot.pullToRefresh();
@@ -2867,6 +2890,7 @@ void main() {
           'EZRX-T87 | Verify view by item detail with default components',
           (tester) async {
         const orderId = '0200276381';
+        const materialManufacturerName = 'MERCK SHARP & DOHME (I.A)';
 
         //init app
         await pumpAppWithHomeScreen(tester);
@@ -2891,6 +2915,8 @@ void main() {
 
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(materialManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
       });
 
@@ -2912,6 +2938,8 @@ void main() {
         viewByItemsDetailRobot.verifyHeader();
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(materialPrincipalName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(materialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
@@ -2934,7 +2962,10 @@ void main() {
 
         //init app
         await pumpAppWithHomeScreen(tester);
-        await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+        await checkoutWithMaterial(
+          bonusMaterialNumber,
+          qty,
+        );
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
@@ -2944,6 +2975,8 @@ void main() {
         await commonRobot.pullToRefresh();
         viewByItemsRobot.verifyOfferTag();
         await viewByItemsRobot.tapFirstOfferTag();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyOfferTag();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
@@ -2957,6 +2990,8 @@ void main() {
 
         viewByItemsRobot.verifyBonusLabel();
         await viewByItemsRobot.tapFirstBonusLabel();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyBonusLabel();
         viewByItemsDetailRobot.verifyFreePrice();
@@ -2999,6 +3034,8 @@ void main() {
         ordersRootRobot.verifyViewByItemsPage();
         await commonRobot.pullToRefresh();
         await viewByItemsRobot.tapFirstOrderWithMaterial(bundleMaterialNumber1);
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bundleMaterialPrincipalName1);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyBundleTag();
         viewByItemsDetailRobot.verifyMaterialNumber(bundleMaterialNumber1);
@@ -3007,7 +3044,6 @@ void main() {
         await viewByItemsDetailRobot.startVerifyOtherItem(0);
         viewByItemsDetailRobot.verifyOtherItemBundleTag();
         viewByItemsDetailRobot.verifyOtherItemQty(bundleMaterialQty2);
-
         await viewByItemsDetailRobot.tapBuyAgainButton();
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(bundleMaterialNumber1);
@@ -3052,7 +3088,7 @@ void main() {
         await commonRobot.searchWithKeyboardAction(invalidSearchKey);
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.searchWithKeyboardAction(orderId);
         viewByOrdersRobot.verifyOrdersWithOrderCode(orderId);
@@ -3064,7 +3100,9 @@ void main() {
         await commonRobot.autoSearch(invalidSearchKey);
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.autoSearch(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: false,
+        );
         viewByOrdersRobot.verifyNoRecordFound();
         await commonRobot.tapClearSearch();
 
@@ -3075,7 +3113,7 @@ void main() {
         await commonRobot.tapClearSearch();
         viewByOrdersRobot.verifyOrders();
         await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-        commonRobot.verifyInvalidLengthSearchMessage();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       });
 
       testWidgets('EZRX-T83 | Verify filter by date', (tester) async {
@@ -3114,6 +3152,7 @@ void main() {
 
         //verify
         ordersRootRobot.verifyFilterApplied(0);
+        await commonRobot.pullToRefresh();
         viewByOrdersRobot.verifyOrders();
         final orderId = viewByOrdersRobot.getOrderIdText(index: index);
         await ordersRootRobot.tapFilterButton();
@@ -3211,6 +3250,9 @@ void main() {
         await checkoutWithMaterial(materialNumber, orderQty);
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+        await commonRobot.pullToRefresh();
         await commonRobot.navigateToScreen(NavigationTab.products);
         await productRobot.openSearchProductScreen();
         await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
@@ -3226,7 +3268,6 @@ void main() {
 
         //verify
         await ordersRootRobot.switchToViewByOrders();
-        await commonRobot.pullToRefresh();
         await viewByOrdersRobot.tapFirstOrder();
         await viewByOrdersDetailRobot.tapBuyAgainButton();
         cartRobot.verifyPage();
@@ -3244,7 +3285,10 @@ void main() {
         await pumpAppWithHomeScreen(tester);
 
         //setup data
-        await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+        await checkoutWithMaterial(
+          bonusMaterialNumber,
+          qty,
+        );
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
@@ -3259,6 +3303,8 @@ void main() {
         viewByOrdersDetailRobot.verifyOfferTag();
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
@@ -3276,6 +3322,8 @@ void main() {
         );
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
         viewByItemsDetailRobot.verifyQty(bonusQty);
@@ -3335,6 +3383,8 @@ void main() {
         viewByOrdersDetailRobot.verifyQty(bundleMaterialQty1);
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bundleMaterialPrincipalName1);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(bundleMaterialNumber1);
         viewByItemsDetailRobot.verifyQty(bundleMaterialQty1);

@@ -148,10 +148,10 @@ void main() {
       await tester.pumpAndSettle();
       final warning = find.byKey(WidgetKeys.errorRequirementsFillAllField);
       final confirmPasswordEmptyWarning =
-          find.text('Please enter a valid password');
+          find.text('Confirm password cannot be empty.');
 
       expect(warning, findsOneWidget);
-      expect(confirmPasswordEmptyWarning, findsNWidgets(2));
+      expect(confirmPasswordEmptyWarning, findsOneWidget);
 
       final resetPasswordButton = find.byKey(WidgetKeys.resetPasswordButton);
 

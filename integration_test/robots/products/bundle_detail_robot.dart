@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -84,7 +85,7 @@ class BundleDetailRobot extends CommonRobot {
       await tester.pumpAndSettle();
     } else {
       await tester.tap(favoriteIcon);
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
       await tester.tap(favoriteIcon);
       await tester.pumpAndSettle();
     }
@@ -101,8 +102,11 @@ class BundleDetailRobot extends CommonRobot {
     for (final entry in materialNumberExpiryPair.entries) {
       final materialNumber = entry.key;
       final expiryDate = entry.value;
-      final itemTile = find.byKey(
-        WidgetKeys.bundleMaterialDetails(materialNumber),
+      final itemTile = find.descendant(
+        of: find.byKey(
+          WidgetKeys.bundleMaterialDetails(materialNumber),
+        ),
+        matching: find.byType(StockInfoWidget),
       );
 
       await scrollEnsureFinderVisible(itemTile);
@@ -111,9 +115,11 @@ class BundleDetailRobot extends CommonRobot {
           of: itemTile,
           matching: find.byWidgetPredicate(
             (widget) =>
-                widget.key == WidgetKeys.bundleMaterialExpiryDate &&
-                widget is Text &&
-                widget.data == '${'EXP:'.tr()} $expiryDate',
+                widget.key == WidgetKeys.materialDetailsStock &&
+                widget is RichText &&
+                widget.text
+                    .toPlainText()
+                    .contains('${'EXP'.tr()}: $expiryDate'),
           ),
         ),
         findsOneWidget,

@@ -198,11 +198,20 @@ class CommonRobot {
     expect(searchBar, findsOneWidget);
   }
 
-  void verifyInvalidLengthSearchMessage({bool isVisible = true}) {
+  Future<void> verifyAndDismissInvalidLengthSearchMessageSnackbar({
+    bool isVisible = true,
+  }) async {
     expect(
-      find.text('Please enter at least 2 characters.'.tr()),
+      find.descendant(
+        of: customSnackBar,
+        matching: find.text('Please enter at least 2 characters.'.tr()),
+      ),
       isVisible ? findsOneWidget : findsNothing,
     );
+    if (isVisible) {
+      expect(customSnackBar, findsWidgets);
+      await dismissSnackbar(dismissAll: true);
+    }
   }
 
   Future<void> searchWithKeyboardAction(String text) async {
