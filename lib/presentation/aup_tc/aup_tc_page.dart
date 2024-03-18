@@ -111,6 +111,7 @@ class AupTCPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               fontSize: 15,
                               fontWeight: FontWeight.w400,
+                              color: ZPColors.neutralsGrey1,
                             ),
                       ),
                       const SizedBox(
@@ -166,7 +167,9 @@ class _TermsOfUseConsentCheckBox extends StatelessWidget {
           contentPadding: const EdgeInsets.all(0),
           value: state.tncConsent,
           title: Text(
-            context.tr('I have read and hereby agree to the Terms of Use'),
+            context.tr(
+              'I have read and hereby agree to the Terms of Use and Acceptable Use Policy.',
+            ),
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: ZPColors.darkerGrey,
                 ),

@@ -122,7 +122,8 @@ void main() {
           find.descendant(
             of: tncCheckBox,
             matching: find.text(
-              'I have read and hereby agree to the Terms of Use'.tr(),
+              'I have read and hereby agree to the Terms of Use and Acceptable Use Policy.'
+                  .tr(),
             ),
           ),
           findsOneWidget,
@@ -250,7 +251,8 @@ void main() {
           find.descendant(
             of: tncCheckBox,
             matching: find.text(
-              'I have read and hereby agree to the Terms of Use'.tr(),
+              'I have read and hereby agree to the Terms of Use and Acceptable Use Policy.'
+                  .tr(),
             ),
           ),
           findsOneWidget,
