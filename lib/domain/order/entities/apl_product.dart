@@ -1,4 +1,6 @@
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/tr_object.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_promotions.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,6 +19,7 @@ class AplProduct with _$AplProduct {
     required MaterialPrice finalPrice,
     required MaterialQty productQty,
     required double tax,
+    required List<AplPromotions> aplPromotions,
   }) = _AplProduct;
 
   factory AplProduct.empty() => AplProduct(
@@ -28,6 +31,7 @@ class AplProduct with _$AplProduct {
         finalPriceTotal: MaterialPrice(0),
         productQty: MaterialQty(0),
         tax: 0,
+        aplPromotions: [],
       );
 
   PriceAggregate toPriceAggregate(
@@ -44,4 +48,20 @@ class AplProduct with _$AplProduct {
       cartItemBonus.copyWith(
         qty: productQty,
       );
+
+  List<TRObject> get promotionValue => aplPromotions
+          .where((element) => element.discountValue.abs() > 0)
+          .map((element) {
+        return element.discountTypeValue.isPercent
+            ? TRObject(
+                '{discountValue} discount',
+                arguments: {'discountValue': '${element.discountValue.abs()}%'},
+              )
+            : TRObject(
+                '${element.discountTypeValue.getValue()} ${element.discountValue.abs()}',
+              );
+      }).toList();
+
+  
 }
+  

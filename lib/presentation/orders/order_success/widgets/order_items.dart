@@ -74,6 +74,10 @@ class _MaterialItem extends StatelessWidget {
 
     final isIDMarket = eligibilityState.salesOrg.isID;
 
+    final aplPromotions = context.read<CartBloc>().state.aplPromotionLabel(
+          orderItem.priceAggregate.getMaterialNumber,
+        );
+
     return CommonTileItem(
       materialNumber: orderItem.materialNumber,
       label: orderItem.combinationCode(
@@ -92,6 +96,22 @@ class _MaterialItem extends StatelessWidget {
                   showPreviousPrice: orderItem.isCounterOffer,
                   hidePrice: orderItem.hidePrice,
                 ),
+                //Promotional Information for ID market from aplSimulatedOrder
+                if (aplPromotions.isNotEmpty)
+                  Text(
+                    '${aplPromotions.map(
+                          (e) => context.tr(
+                            e.message,
+                            namedArgs: e.arguments,
+                          ),
+                        ).join(',')} ${context.tr('offer applied')}',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: ZPColors.extraLightGrey4,
+                          fontStyle: FontStyle.italic,
+                        ),
+                  ),
               ],
             )
           : null,

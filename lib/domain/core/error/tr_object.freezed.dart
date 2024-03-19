@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'failure.dart';
+part of 'tr_object.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,26 +15,27 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$Failure {
+mixin _$TRObject {
   String get message => throw _privateConstructorUsedError;
   Map<String, String> get arguments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $FailureCopyWith<Failure> get copyWith => throw _privateConstructorUsedError;
+  $TRObjectCopyWith<TRObject> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FailureCopyWith<$Res> {
-  factory $FailureCopyWith(Failure value, $Res Function(Failure) then) =
-      _$FailureCopyWithImpl<$Res, Failure>;
+abstract class $TRObjectCopyWith<$Res> {
+  factory $TRObjectCopyWith(TRObject value, $Res Function(TRObject) then) =
+      _$TRObjectCopyWithImpl<$Res, TRObject>;
   @useResult
   $Res call({String message, Map<String, String> arguments});
 }
 
 /// @nodoc
-class _$FailureCopyWithImpl<$Res, $Val extends Failure>
-    implements $FailureCopyWith<$Res> {
-  _$FailureCopyWithImpl(this._value, this._then);
+class _$TRObjectCopyWithImpl<$Res, $Val extends TRObject>
+    implements $TRObjectCopyWith<$Res> {
+  _$TRObjectCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -61,20 +62,21 @@ class _$FailureCopyWithImpl<$Res, $Val extends Failure>
 }
 
 /// @nodoc
-abstract class _$$_FailureCopyWith<$Res> implements $FailureCopyWith<$Res> {
-  factory _$$_FailureCopyWith(
-          _$_Failure value, $Res Function(_$_Failure) then) =
-      __$$_FailureCopyWithImpl<$Res>;
+abstract class _$$_TRObjectCopyWith<$Res> implements $TRObjectCopyWith<$Res> {
+  factory _$$_TRObjectCopyWith(
+          _$_TRObject value, $Res Function(_$_TRObject) then) =
+      __$$_TRObjectCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, Map<String, String> arguments});
 }
 
 /// @nodoc
-class __$$_FailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$_Failure>
-    implements _$$_FailureCopyWith<$Res> {
-  __$$_FailureCopyWithImpl(_$_Failure _value, $Res Function(_$_Failure) _then)
+class __$$_TRObjectCopyWithImpl<$Res>
+    extends _$TRObjectCopyWithImpl<$Res, _$_TRObject>
+    implements _$$_TRObjectCopyWith<$Res> {
+  __$$_TRObjectCopyWithImpl(
+      _$_TRObject _value, $Res Function(_$_TRObject) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -83,7 +85,7 @@ class __$$_FailureCopyWithImpl<$Res>
     Object? message = null,
     Object? arguments = null,
   }) {
-    return _then(_$_Failure(
+    return _then(_$_TRObject(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -98,8 +100,8 @@ class __$$_FailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Failure extends _Failure {
-  const _$_Failure(this.message,
+class _$_TRObject extends _TRObject {
+  const _$_TRObject(this.message,
       {final Map<String, String> arguments = const <String, String>{}})
       : _arguments = arguments,
         super._();
@@ -117,14 +119,14 @@ class _$_Failure extends _Failure {
 
   @override
   String toString() {
-    return 'Failure(message: $message, arguments: $arguments)';
+    return 'TRObject(message: $message, arguments: $arguments)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Failure &&
+            other is _$_TRObject &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality()
                 .equals(other._arguments, _arguments));
@@ -137,14 +139,14 @@ class _$_Failure extends _Failure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FailureCopyWith<_$_Failure> get copyWith =>
-      __$$_FailureCopyWithImpl<_$_Failure>(this, _$identity);
+  _$$_TRObjectCopyWith<_$_TRObject> get copyWith =>
+      __$$_TRObjectCopyWithImpl<_$_TRObject>(this, _$identity);
 }
 
-abstract class _Failure extends Failure {
-  const factory _Failure(final String message,
-      {final Map<String, String> arguments}) = _$_Failure;
-  const _Failure._() : super._();
+abstract class _TRObject extends TRObject {
+  const factory _TRObject(final String message,
+      {final Map<String, String> arguments}) = _$_TRObject;
+  const _TRObject._() : super._();
 
   @override
   String get message;
@@ -152,6 +154,6 @@ abstract class _Failure extends Failure {
   Map<String, String> get arguments;
   @override
   @JsonKey(ignore: true)
-  _$$_FailureCopyWith<_$_Failure> get copyWith =>
+  _$$_TRObjectCopyWith<_$_TRObject> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1371,6 +1371,10 @@ mutation UpsertCartItems(\$itemInput: [ItemInput!]) {
           productPriceNetValue
           taxValue
           netValue
+          promotions {                  
+            discountValue              
+            discountTypeValue 
+            }
         }
       }
     }

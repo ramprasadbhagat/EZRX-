@@ -16,6 +16,10 @@ _$_AplProductDto _$$_AplProductDtoFromJson(Map<String, dynamic> json) =>
       finalPrice: (json['productPriceNetValue'] as num?)?.toDouble() ?? 0,
       productQty: json['productQty'] as int? ?? 0,
       taxValue: (json['taxValue'] as num?)?.toDouble() ?? 0,
+      aplPromotions: (json['promotions'] as List<dynamic>?)
+              ?.map((e) => AplPromotionsDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_AplProductDtoToJson(_$_AplProductDto instance) =>
@@ -28,4 +32,5 @@ Map<String, dynamic> _$$_AplProductDtoToJson(_$_AplProductDto instance) =>
       'productPriceNetValue': instance.finalPrice,
       'productQty': instance.productQty,
       'taxValue': instance.taxValue,
+      'promotions': instance.aplPromotions.map((e) => e.toJson()).toList(),
     };

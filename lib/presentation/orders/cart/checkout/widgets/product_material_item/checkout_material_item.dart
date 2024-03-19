@@ -112,6 +112,10 @@ class _ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final aplPromotions = context.read<CartBloc>().state.aplPromotionLabel(
+          cartItem.getMaterialNumber,
+        );
+
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,6 +177,23 @@ class _ProductDetails extends StatelessWidget {
               ),
             ],
           ),
+          //Promotional Information for ID market from aplSimulatedOrder
+          if (aplPromotions.isNotEmpty)
+            Text(
+              '${aplPromotions.map(
+                    (e) => context.tr(
+                      e.message,
+                      namedArgs: e.arguments,
+                    ),
+                  ).join(',')} ${context.tr('offer applied')}',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: ZPColors.extraLightGrey4,
+                    fontStyle: FontStyle.italic,
+                  ),
+            ),
+
           if (cartItem.price.isCounterOfferRequested)
             Text(
               context.tr('Requested counter offer'),

@@ -37,6 +37,9 @@ mixin _$AplProductDto {
   int get productQty => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxValue', defaultValue: 0)
   double get taxValue => throw _privateConstructorUsedError;
+  @JsonKey(name: 'promotions', defaultValue: <AplPromotionsDto>[])
+  List<AplPromotionsDto> get aplPromotions =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -59,7 +62,9 @@ abstract class $AplProductDtoCopyWith<$Res> {
       @JsonKey(name: 'netValue', defaultValue: 0) double finalPriceTotal,
       @JsonKey(name: 'productPriceNetValue', defaultValue: 0) double finalPrice,
       @JsonKey(name: 'productQty', defaultValue: 0) int productQty,
-      @JsonKey(name: 'taxValue', defaultValue: 0) double taxValue});
+      @JsonKey(name: 'taxValue', defaultValue: 0) double taxValue,
+      @JsonKey(name: 'promotions', defaultValue: <AplPromotionsDto>[])
+      List<AplPromotionsDto> aplPromotions});
 }
 
 /// @nodoc
@@ -83,6 +88,7 @@ class _$AplProductDtoCopyWithImpl<$Res, $Val extends AplProductDto>
     Object? finalPrice = null,
     Object? productQty = null,
     Object? taxValue = null,
+    Object? aplPromotions = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -117,6 +123,10 @@ class _$AplProductDtoCopyWithImpl<$Res, $Val extends AplProductDto>
           ? _value.taxValue
           : taxValue // ignore: cast_nullable_to_non_nullable
               as double,
+      aplPromotions: null == aplPromotions
+          ? _value.aplPromotions
+          : aplPromotions // ignore: cast_nullable_to_non_nullable
+              as List<AplPromotionsDto>,
     ) as $Val);
   }
 }
@@ -138,7 +148,9 @@ abstract class _$$_AplProductDtoCopyWith<$Res>
       @JsonKey(name: 'netValue', defaultValue: 0) double finalPriceTotal,
       @JsonKey(name: 'productPriceNetValue', defaultValue: 0) double finalPrice,
       @JsonKey(name: 'productQty', defaultValue: 0) int productQty,
-      @JsonKey(name: 'taxValue', defaultValue: 0) double taxValue});
+      @JsonKey(name: 'taxValue', defaultValue: 0) double taxValue,
+      @JsonKey(name: 'promotions', defaultValue: <AplPromotionsDto>[])
+      List<AplPromotionsDto> aplPromotions});
 }
 
 /// @nodoc
@@ -160,6 +172,7 @@ class __$$_AplProductDtoCopyWithImpl<$Res>
     Object? finalPrice = null,
     Object? productQty = null,
     Object? taxValue = null,
+    Object? aplPromotions = null,
   }) {
     return _then(_$_AplProductDto(
       type: null == type
@@ -194,6 +207,10 @@ class __$$_AplProductDtoCopyWithImpl<$Res>
           ? _value.taxValue
           : taxValue // ignore: cast_nullable_to_non_nullable
               as double,
+      aplPromotions: null == aplPromotions
+          ? _value._aplPromotions
+          : aplPromotions // ignore: cast_nullable_to_non_nullable
+              as List<AplPromotionsDto>,
     ));
   }
 }
@@ -211,8 +228,11 @@ class _$_AplProductDto extends _AplProductDto {
       @JsonKey(name: 'productPriceNetValue', defaultValue: 0)
       required this.finalPrice,
       @JsonKey(name: 'productQty', defaultValue: 0) required this.productQty,
-      @JsonKey(name: 'taxValue', defaultValue: 0) required this.taxValue})
-      : super._();
+      @JsonKey(name: 'taxValue', defaultValue: 0) required this.taxValue,
+      @JsonKey(name: 'promotions', defaultValue: <AplPromotionsDto>[])
+      required final List<AplPromotionsDto> aplPromotions})
+      : _aplPromotions = aplPromotions,
+        super._();
 
   factory _$_AplProductDto.fromJson(Map<String, dynamic> json) =>
       _$$_AplProductDtoFromJson(json);
@@ -243,10 +263,18 @@ class _$_AplProductDto extends _AplProductDto {
   @override
   @JsonKey(name: 'taxValue', defaultValue: 0)
   final double taxValue;
+  final List<AplPromotionsDto> _aplPromotions;
+  @override
+  @JsonKey(name: 'promotions', defaultValue: <AplPromotionsDto>[])
+  List<AplPromotionsDto> get aplPromotions {
+    if (_aplPromotions is EqualUnmodifiableListView) return _aplPromotions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_aplPromotions);
+  }
 
   @override
   String toString() {
-    return 'AplProductDto(type: $type, itemNumber: $itemNumber, parentItemNumber: $parentItemNumber, materialNumber: $materialNumber, finalPriceTotal: $finalPriceTotal, finalPrice: $finalPrice, productQty: $productQty, taxValue: $taxValue)';
+    return 'AplProductDto(type: $type, itemNumber: $itemNumber, parentItemNumber: $parentItemNumber, materialNumber: $materialNumber, finalPriceTotal: $finalPriceTotal, finalPrice: $finalPrice, productQty: $productQty, taxValue: $taxValue, aplPromotions: $aplPromotions)';
   }
 
   @override
@@ -268,7 +296,9 @@ class _$_AplProductDto extends _AplProductDto {
             (identical(other.productQty, productQty) ||
                 other.productQty == productQty) &&
             (identical(other.taxValue, taxValue) ||
-                other.taxValue == taxValue));
+                other.taxValue == taxValue) &&
+            const DeepCollectionEquality()
+                .equals(other._aplPromotions, _aplPromotions));
   }
 
   @JsonKey(ignore: true)
@@ -282,7 +312,8 @@ class _$_AplProductDto extends _AplProductDto {
       finalPriceTotal,
       finalPrice,
       productQty,
-      taxValue);
+      taxValue,
+      const DeepCollectionEquality().hash(_aplPromotions));
 
   @JsonKey(ignore: true)
   @override
@@ -314,7 +345,9 @@ abstract class _AplProductDto extends AplProductDto {
       @JsonKey(name: 'productQty', defaultValue: 0)
       required final int productQty,
       @JsonKey(name: 'taxValue', defaultValue: 0)
-      required final double taxValue}) = _$_AplProductDto;
+      required final double taxValue,
+      @JsonKey(name: 'promotions', defaultValue: <AplPromotionsDto>[])
+      required final List<AplPromotionsDto> aplPromotions}) = _$_AplProductDto;
   const _AplProductDto._() : super._();
 
   factory _AplProductDto.fromJson(Map<String, dynamic> json) =
@@ -344,6 +377,9 @@ abstract class _AplProductDto extends AplProductDto {
   @override
   @JsonKey(name: 'taxValue', defaultValue: 0)
   double get taxValue;
+  @override
+  @JsonKey(name: 'promotions', defaultValue: <AplPromotionsDto>[])
+  List<AplPromotionsDto> get aplPromotions;
   @override
   @JsonKey(ignore: true)
   _$$_AplProductDtoCopyWith<_$_AplProductDto> get copyWith =>

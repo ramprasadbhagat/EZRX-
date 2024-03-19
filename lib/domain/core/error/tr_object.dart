@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'failure.freezed.dart';
+part 'tr_object.freezed.dart';
 
 @freezed
-class Failure with _$Failure {
-  const Failure._();
-  const factory Failure(
+class TRObject with _$TRObject {
+  const TRObject._();
+  const factory TRObject(
     String message, {
     @Default(<String, String>{}) Map<String, String> arguments,
-  }) = _Failure;
+  }) = _TRObject;
 }

@@ -542,4 +542,13 @@ class CartState with _$CartState {
         (element) => element.id == matNumber,
         orElse: () => PriceAggregate.empty(),
       );
+
+  List<TRObject> aplPromotionLabel(MaterialNumber materialNumber) {
+    return aplSimulatorOrder.aplProducts
+        .firstWhere(
+          (element) => element.materialNumber == materialNumber,
+          orElse: () => AplProduct.empty(),
+        )
+        .promotionValue;
+  }
 }

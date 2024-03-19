@@ -16,6 +16,7 @@ class AplSimulatorOrder with _$AplSimulatorOrder {
     required double totalTax,
     required double totalDiscountValue,
     required List<AplProduct> aplProducts,
+    
   }) = _AplSimulatorOrder;
 
   factory AplSimulatorOrder.empty() => const AplSimulatorOrder(

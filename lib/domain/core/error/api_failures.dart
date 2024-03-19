@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/core/error/failure.dart';
+import 'package:ezrxmobile/domain/core/error/tr_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'api_failures.freezed.dart';
@@ -77,92 +77,92 @@ class ApiFailure with _$ApiFailure {
 
 extension ApiFailureExt on ApiFailure {
   //ignore:long-method
-  Failure get failureMessage => map(
-        other: (other) => Failure(other.message),
-        serverError: (serverError) => Failure(serverError.message),
-        poorConnection: (_) => const Failure('Poor Internet connection'),
-        serverTimeout: (_) => const Failure('Server time out'),
-        userNotFound: (_) => const Failure('User not found.'),
-        invalidEmailAndPasswordCombination: (_) => const Failure(
+  TRObject get failureMessage => map(
+        other: (other) => TRObject(other.message),
+        serverError: (serverError) => TRObject(serverError.message),
+        poorConnection: (_) => const TRObject('Poor Internet connection'),
+        serverTimeout: (_) => const TRObject('Server time out'),
+        userNotFound: (_) => const TRObject('User not found.'),
+        invalidEmailAndPasswordCombination: (_) => const TRObject(
           'Incorrect username and/or password.',
         ),
-        accountLocked: (_) => const Failure('Account is Locked'),
-        accountExpired: (_) => const Failure('Account is Expired'),
-        tokenExpired: (_) => const Failure('Session token is Expired'),
-        authenticationFailed: (_) => const Failure('Your session has expired'),
+        accountLocked: (_) => const TRObject('Account is Locked'),
+        accountExpired: (_) => const TRObject('Account is Expired'),
+        tokenExpired: (_) => const TRObject('Session token is Expired'),
+        authenticationFailed: (_) => const TRObject('Your session has expired'),
         deviceNotSupportBiometric: (_) =>
-            const Failure('Device not support biometric'),
+            const TRObject('Device not support biometric'),
         cannotCheckBiometrics: (_) =>
-            const Failure('Unable to check your biometric'),
-        noSupportedBiometrics: (_) => const Failure('No supported biometric'),
-        invalidBiometric: (_) => const Failure('Incorrect biometric'),
+            const TRObject('Unable to check your biometric'),
+        noSupportedBiometrics: (_) => const TRObject('No supported biometric'),
+        invalidBiometric: (_) => const TRObject('Incorrect biometric'),
         priceOverrideNotFound: (_) =>
-            const Failure('Price override not found!'),
-        proxyLoginRolePermissionNotMatch: (_) => const Failure(
+            const TRObject('Price override not found!'),
+        proxyLoginRolePermissionNotMatch: (_) => const TRObject(
           'Only Root Admin and ZP Admin can login on behalf',
         ),
-        proxyLoginZPSalesOrgNotMatch: (_) => const Failure(
+        proxyLoginZPSalesOrgNotMatch: (_) => const TRObject(
           'ZP Admin can only login on behalf of users from the same Sales Org',
         ),
-        proxyLoginZPTargetRoleNotMatch: (_) => const Failure(
+        proxyLoginZPTargetRoleNotMatch: (_) => const TRObject(
           'ZP Admin can only login on behalf of Sales Rep and Customer users',
         ),
-        productOutOfStock: (_) => const Failure('Product Not Available'),
-        photoPermissionFailed: (_) => const Failure(
+        productOutOfStock: (_) => const TRObject('Product Not Available'),
+        photoPermissionFailed: (_) => const TRObject(
           'Please enable Photos permission from the app settings',
         ),
-        storagePermissionFailed: (_) => const Failure(
+        storagePermissionFailed: (_) => const TRObject(
           'Please enable Storage permission from the app settings',
         ),
-        invalidFileFormat: (_) => const Failure(
+        invalidFileFormat: (_) => const TRObject(
           'Unable to upload file as either file format not supported or something wrong with the file',
         ),
         uploadCountExcideLimit: (_) =>
-            const Failure('Number of files exceeds the criteria'),
-        productDetailRoute: (_) => const Failure(
+            const TRObject('Number of files exceeds the criteria'),
+        productDetailRoute: (_) => const TRObject(
           'This product is not available on your account',
         ),
         orderDetailRoute: (_) =>
-            const Failure('This order is not available on your account'),
-        returnDetailRoute: (_) => const Failure(
+            const TRObject('This order is not available on your account'),
+        returnDetailRoute: (_) => const TRObject(
           'This return request is not available on your account',
         ),
-        paymentDetailRoute: (_) => const Failure(
+        paymentDetailRoute: (_) => const TRObject(
           'This payment advice is not available on your account',
         ),
-        invoiceDetailRoute: (_) => const Failure(
+        invoiceDetailRoute: (_) => const TRObject(
           'This invoice is not available on your account',
         ),
-        passwordResetFail: (_) => const Failure('Unable to reset password'),
-        languageChangeFail: (_) => const Failure('Unable to change language'),
-        scannedProductNotFound: (scannedProduct) => Failure(
+        passwordResetFail: (_) => const TRObject('Unable to reset password'),
+        languageChangeFail: (_) => const TRObject('Unable to change language'),
+        scannedProductNotFound: (scannedProduct) => TRObject(
           'Unable to fetch Material {productNumber}',
           arguments: {'productNumber': scannedProduct.productNumber},
         ),
         cameraPermissionFailed: (_) =>
-            const Failure('Camera Permission Denied'),
-        userNameNotFound: (_) => const Failure('Incorrect username'),
-        uploadedFileSizeExceed: (_) => const Failure(
+            const TRObject('Camera Permission Denied'),
+        userNameNotFound: (_) => const TRObject('Incorrect username'),
+        uploadedFileSizeExceed: (_) => const TRObject(
           'Maximum file size should be 20MB',
         ),
-        paymentAdviceDeleteFailed: (paymentAdvice) => Failure(
+        paymentAdviceDeleteFailed: (paymentAdvice) => TRObject(
           'PA #{adviceNumber} delete failed',
           arguments: {'adviceNumber': paymentAdvice.adviceNumber},
         ),
         allReorderItemInvalid: (_) =>
-            const Failure('All reorder materials are invalid'),
-        maximumCartQuantityExceed: (maximumException) => Failure(
+            const TRObject('All reorder materials are invalid'),
+        maximumCartQuantityExceed: (maximumException) => TRObject(
           'In cart quantity should not be more than {maximumNumber}.',
           arguments: {'maximumNumber': maximumException.maximumNumber},
         ),
-        cartHasDifferentAddress: (_) => const Failure(
+        cartHasDifferentAddress: (_) => const TRObject(
           'shipToAddress changed from existing cart. Delete the cart and then add new item',
         ),
-        articleannuncementTagFetchingError: (_) => const Failure(
+        articleannuncementTagFetchingError: (_) => const TRObject(
           'Error while fetching announcement article tag list!',
         ),
-        attachmentDownloadError: (_) => const Failure('File download failed'),
-        marketplaceTnCAcceptanceError: (_) => const Failure(
+        attachmentDownloadError: (_) => const TRObject('File download failed'),
+        marketplaceTnCAcceptanceError: (_) => const TRObject(
           'Unable to update acceptance status',
         ),
       );

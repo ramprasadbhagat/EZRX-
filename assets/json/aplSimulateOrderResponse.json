@@ -15,7 +15,11 @@
           "productQty": 1,
           "productPriceNetValue": 5734000,
           "taxValue": 630740,
-          "netValue": 5734000
+          "netValue": 5734000,
+          "promotions": [
+            { "discountValue": -5, "discountTypeValue": "%" },
+            { "discountValue": -10, "discountTypeValue": "%" }
+          ]
         },
         {
           "type": "Bonus",

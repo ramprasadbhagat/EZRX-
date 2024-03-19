@@ -24,6 +24,7 @@ mixin _$AplProduct {
   MaterialPrice get finalPrice => throw _privateConstructorUsedError;
   MaterialQty get productQty => throw _privateConstructorUsedError;
   double get tax => throw _privateConstructorUsedError;
+  List<AplPromotions> get aplPromotions => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AplProductCopyWith<AplProduct> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $AplProductCopyWith<$Res> {
       MaterialPrice finalPriceTotal,
       MaterialPrice finalPrice,
       MaterialQty productQty,
-      double tax});
+      double tax,
+      List<AplPromotions> aplPromotions});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$AplProductCopyWithImpl<$Res, $Val extends AplProduct>
     Object? finalPrice = null,
     Object? productQty = null,
     Object? tax = null,
+    Object? aplPromotions = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -102,6 +105,10 @@ class _$AplProductCopyWithImpl<$Res, $Val extends AplProduct>
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
               as double,
+      aplPromotions: null == aplPromotions
+          ? _value.aplPromotions
+          : aplPromotions // ignore: cast_nullable_to_non_nullable
+              as List<AplPromotions>,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$_AplProductCopyWith<$Res>
       MaterialPrice finalPriceTotal,
       MaterialPrice finalPrice,
       MaterialQty productQty,
-      double tax});
+      double tax,
+      List<AplPromotions> aplPromotions});
 }
 
 /// @nodoc
@@ -144,6 +152,7 @@ class __$$_AplProductCopyWithImpl<$Res>
     Object? finalPrice = null,
     Object? productQty = null,
     Object? tax = null,
+    Object? aplPromotions = null,
   }) {
     return _then(_$_AplProduct(
       type: null == type
@@ -178,6 +187,10 @@ class __$$_AplProductCopyWithImpl<$Res>
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
               as double,
+      aplPromotions: null == aplPromotions
+          ? _value._aplPromotions
+          : aplPromotions // ignore: cast_nullable_to_non_nullable
+              as List<AplPromotions>,
     ));
   }
 }
@@ -193,8 +206,10 @@ class _$_AplProduct extends _AplProduct {
       required this.finalPriceTotal,
       required this.finalPrice,
       required this.productQty,
-      required this.tax})
-      : super._();
+      required this.tax,
+      required final List<AplPromotions> aplPromotions})
+      : _aplPromotions = aplPromotions,
+        super._();
 
   @override
   final MaterialInfoType type;
@@ -212,10 +227,17 @@ class _$_AplProduct extends _AplProduct {
   final MaterialQty productQty;
   @override
   final double tax;
+  final List<AplPromotions> _aplPromotions;
+  @override
+  List<AplPromotions> get aplPromotions {
+    if (_aplPromotions is EqualUnmodifiableListView) return _aplPromotions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_aplPromotions);
+  }
 
   @override
   String toString() {
-    return 'AplProduct(type: $type, itemNumber: $itemNumber, parentItemNumber: $parentItemNumber, materialNumber: $materialNumber, finalPriceTotal: $finalPriceTotal, finalPrice: $finalPrice, productQty: $productQty, tax: $tax)';
+    return 'AplProduct(type: $type, itemNumber: $itemNumber, parentItemNumber: $parentItemNumber, materialNumber: $materialNumber, finalPriceTotal: $finalPriceTotal, finalPrice: $finalPrice, productQty: $productQty, tax: $tax, aplPromotions: $aplPromotions)';
   }
 
   @override
@@ -236,7 +258,9 @@ class _$_AplProduct extends _AplProduct {
                 other.finalPrice == finalPrice) &&
             (identical(other.productQty, productQty) ||
                 other.productQty == productQty) &&
-            (identical(other.tax, tax) || other.tax == tax));
+            (identical(other.tax, tax) || other.tax == tax) &&
+            const DeepCollectionEquality()
+                .equals(other._aplPromotions, _aplPromotions));
   }
 
   @override
@@ -249,7 +273,8 @@ class _$_AplProduct extends _AplProduct {
       finalPriceTotal,
       finalPrice,
       productQty,
-      tax);
+      tax,
+      const DeepCollectionEquality().hash(_aplPromotions));
 
   @JsonKey(ignore: true)
   @override
@@ -267,7 +292,8 @@ abstract class _AplProduct extends AplProduct {
       required final MaterialPrice finalPriceTotal,
       required final MaterialPrice finalPrice,
       required final MaterialQty productQty,
-      required final double tax}) = _$_AplProduct;
+      required final double tax,
+      required final List<AplPromotions> aplPromotions}) = _$_AplProduct;
   const _AplProduct._() : super._();
 
   @override
@@ -286,6 +312,8 @@ abstract class _AplProduct extends AplProduct {
   MaterialQty get productQty;
   @override
   double get tax;
+  @override
+  List<AplPromotions> get aplPromotions;
   @override
   @JsonKey(ignore: true)
   _$$_AplProductCopyWith<_$_AplProduct> get copyWith =>
