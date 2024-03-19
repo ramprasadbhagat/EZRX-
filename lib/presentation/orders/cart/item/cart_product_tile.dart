@@ -279,7 +279,7 @@ class _MaterialDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              cartItem.materialInfo.materialDescription,
+              cartItem.materialInfo.displayDescription,
               key: WidgetKeys.cartItemProductMaterialDescription,
               style: Theme.of(context).textTheme.labelSmall,
             ),

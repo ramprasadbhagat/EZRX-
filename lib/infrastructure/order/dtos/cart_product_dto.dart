@@ -76,6 +76,8 @@ class CartProductDto with _$CartProductDto {
     @JsonKey(name: 'maximumQty', defaultValue: 99999) required int maximumQty,
     @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
         required bool isMarketPlace,
+    @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+        required String defaultMaterialDescription,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -128,6 +130,8 @@ class CartProductDto with _$CartProductDto {
       maximumQty: cartItemDetails.maximumQty,
       governmentMaterialCode: cartItemDetails.materialInfo.getGMC.getValue(),
       isMarketPlace: cartItemDetails.materialInfo.isMarketPlace,
+      defaultMaterialDescription:
+          cartItemDetails.materialInfo.defaultMaterialDescription,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -151,6 +155,7 @@ class CartProductDto with _$CartProductDto {
         MaterialData.empty().copyWith(
           materialNumber: MaterialNumber(productID),
           governmentMaterialCode: StringValue(governmentMaterialCode),
+          defaultMaterialDescription: defaultMaterialDescription,
         ),
       ],
       counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(

@@ -3869,6 +3869,34 @@ void main() {
             findsOneWidget,
           );
         });
+
+        testWidgets(
+            'Display default material description when material description is empty',
+            (tester) async {
+          final mockItem = mockCartItems.first.copyWith(
+            salesOrgConfig: fakeIDSalesOrgConfigs,
+            materialInfo: mockCartItems.first.materialInfo.copyWith(
+              materialDescription: '',
+              data: [
+                MaterialData.empty().copyWith(
+                  defaultMaterialDescription: 'fake-material-description',
+                )
+              ],
+            ),
+          );
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [mockItem],
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.text('fake-material-description'),
+            findsOneWidget,
+          );
+        });
       });
     },
   );

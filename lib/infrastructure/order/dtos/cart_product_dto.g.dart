@@ -56,6 +56,8 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
       maximumQty: json['maximumQty'] as int? ?? 99999,
       isMarketPlace:
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+      defaultMaterialDescription:
+          json['defaultMaterialDescription'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
@@ -90,6 +92,7 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'comboMaterials': instance.comboMaterials.map((e) => e.toJson()).toList(),
       'maximumQty': instance.maximumQty,
       'isMarketPlace': instance.isMarketPlace,
+      'defaultMaterialDescription': instance.defaultMaterialDescription,
     };
 
 _$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>

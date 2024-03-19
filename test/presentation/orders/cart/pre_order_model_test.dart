@@ -751,5 +751,33 @@ void main() {
         );
       },
     );
+
+    testWidgets(
+        'Display default material description when material description is empty',
+        (tester) async {
+      final mockItem = fakeCartProduct.first.copyWith(
+        salesOrgConfig: fakeIDSalesOrgConfigs,
+        materialInfo: fakeCartProduct.first.materialInfo.copyWith(
+          materialDescription: '',
+          data: [
+            MaterialData.empty().copyWith(
+              defaultMaterialDescription: 'fake-material-description',
+            )
+          ],
+        ),
+      );
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          cartProducts: [mockItem],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.text('fake-material-description'),
+        findsOneWidget,
+      );
+    });
   });
 }
