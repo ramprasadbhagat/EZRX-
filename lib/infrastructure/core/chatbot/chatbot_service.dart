@@ -16,7 +16,7 @@ class ChatBotService {
     await YmChat.showCloseButton(true);
     await YmChat.setVersion(2);
     await YmChat.useLiteVersion(false);
-    final fcmToken = await pushNotificationService.getFCMToken();
+    final fcmToken = await pushNotificationService.getToken();
     await YmChat.setDeviceToken(fcmToken);
   }
 

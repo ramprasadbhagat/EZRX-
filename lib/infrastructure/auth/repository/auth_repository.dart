@@ -84,7 +84,7 @@ class AuthRepository implements IAuthRepository {
       }
     }
     try {
-      final fcmToken = await pushNotificationService.getFCMToken();
+      final fcmToken = await pushNotificationService.getToken();
       final login = await remoteDataSource.loginWithPassword(
         username: usernameStr,
         password: passwordStr,
@@ -182,7 +182,7 @@ class AuthRepository implements IAuthRepository {
       }
     }
     try {
-      final fcmToken = await pushNotificationService.getFCMToken();
+      final fcmToken = await pushNotificationService.getToken();
       final login = await remoteDataSource.loginWithOktaToken(
         oktaAccessToken: token,
         fcmToken: fcmToken,

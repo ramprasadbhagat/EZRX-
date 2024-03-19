@@ -204,7 +204,7 @@ void main() {
         () async {
           when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
 
-          when(() => pushNotificationServiceMock.getFCMToken())
+          when(() => pushNotificationServiceMock.getToken())
               .thenAnswer((_) async => fakeJWT.getValue());
 
           when(
@@ -236,7 +236,7 @@ void main() {
           final serverException = ServerException();
           when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
 
-          when(() => pushNotificationServiceMock.getFCMToken())
+          when(() => pushNotificationServiceMock.getToken())
               .thenAnswer((_) async => fakeJWT.getValue());
 
           when(
@@ -440,7 +440,7 @@ void main() {
         () async {
           when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
           when(
-            () => pushNotificationServiceMock.getFCMToken(),
+            () => pushNotificationServiceMock.getToken(),
           ).thenAnswer(
             (_) async => fakeJWT.getOrCrash(),
           );
@@ -465,7 +465,7 @@ void main() {
         () async {
           when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
           when(
-            () => pushNotificationServiceMock.getFCMToken(),
+            () => pushNotificationServiceMock.getToken(),
           ).thenThrow(
             (_) async => fakeError,
           );

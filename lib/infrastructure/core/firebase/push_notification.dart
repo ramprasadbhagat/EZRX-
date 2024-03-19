@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -29,6 +30,22 @@ class PushNotificationService {
   Future<String> getFCMToken() async {
     try {
       return await _fcm.getToken() ?? '';
+    } on FirebaseException {
+      return '';
+    }
+  }
+
+  Future<String> getAPNSToken() async {
+    try {
+      return await _fcm.getAPNSToken() ?? '';
+    } on FirebaseException {
+      return '';
+    }
+  }
+
+  Future<String> getToken() async {
+    try {
+      return Platform.isIOS ? getAPNSToken() : getFCMToken();
     } on FirebaseException {
       return '';
     }

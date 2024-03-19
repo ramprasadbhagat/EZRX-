@@ -34,7 +34,7 @@ class ClevertapService {
   }
 
   Future<void> setPushToken() async {
-    final token = await pushNotificationService.getFCMToken();
+    final token = await pushNotificationService.getToken();
     await CleverTapPlugin.setPushToken(token);
   }
 
