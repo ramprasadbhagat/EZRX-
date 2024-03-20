@@ -368,13 +368,6 @@ void main() {
     });
 
     testWidgets('Body Test - onRefresh', (tester) async {
-      when(() => mockEligibilityBloc.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          isLoading: false,
-          customerCodeInfo: CustomerCodeInfo.empty(),
-        ),
-      );
-
       when(() => mockSoaBloc.state).thenReturn(
         SoaState.initial().copyWith(
           soaList: <Soa>[],

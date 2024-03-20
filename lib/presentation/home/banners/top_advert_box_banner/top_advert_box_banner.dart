@@ -14,8 +14,12 @@ class TopAdvertBoxBanner extends StatelessWidget {
     return BlocProvider(
       create: (context) => locator<BannerBloc>(),
       child: BlocListener<EligibilityBloc, EligibilityState>(
+        //This check is required for refresh the data whenever sales org is refreshed
+        //Whenever sales org is refreshed, the customer code is also refreshed after that
+        //and isLoadingCustomerCode value will be changed
         listenWhen: (previous, current) =>
-            previous.isLoading != current.isLoading,
+            previous.isLoadingCustomerCode != current.isLoadingCustomerCode &&
+            !current.isLoadingCustomerCode,
         listener: (context, state) {
           context.read<BannerBloc>().add(
                 BannerEvent.fetch(
@@ -30,9 +34,7 @@ class TopAdvertBoxBanner extends StatelessWidget {
               );
         },
         child: BlocBuilder<BannerBloc, BannerState>(
-          buildWhen: (previous, current) {
-            return previous.banner != current.banner;
-          },
+          buildWhen: (previous, current) => previous.banner != current.banner,
           builder: (context, state) {
             return ListView.builder(
               padding: const EdgeInsets.symmetric(vertical: 25.0),

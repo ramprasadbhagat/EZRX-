@@ -186,12 +186,6 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
         );
       },
       registerChatBot: (e) async {
-        emit(
-          state.copyWith(
-            isLoading: true,
-          ),
-        );
-
         mixpanelRepository.registerSuperProps(
           user: state.user,
           salesOrg: state.salesOrg,
@@ -213,7 +207,6 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
-                isLoading: false,
               ),
             );
           },
@@ -221,7 +214,6 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
             emit(
               state.copyWith(
                 failureOrSuccessOption: none(),
-                isLoading: false,
               ),
             );
           },

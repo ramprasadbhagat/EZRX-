@@ -488,10 +488,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
               current != EligibilityState.initial() &&
-              (previous.user.preferredLanguage !=
-                      current.user.preferredLanguage ||
-                  previous.customerCodeInfo != current.customerCodeInfo ||
-                  previous.shipToInfo != current.shipToInfo),
+              current.isRefreshed(previous),
           listener: (context, state) {
             final orderDocumentTypeState =
                 context.read<OrderDocumentTypeBloc>().state;

@@ -3211,7 +3211,7 @@ void main() {
         whenListen(
           eligibilityBloc,
           Stream.fromIterable([
-            EligibilityState.initial().copyWith(isLoading: true),
+            EligibilityState.initial(),
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,

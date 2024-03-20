@@ -12,7 +12,6 @@ class EligibilityState with _$EligibilityState {
     required ShipToInfo shipToInfo,
     required OrderDocumentType selectedOrderType,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-    required bool isLoading,
     required bool isLoadingCustomerCode,
     required bool preSelectShipTo,
   }) = _EligibilityState;
@@ -25,7 +24,6 @@ class EligibilityState with _$EligibilityState {
         shipToInfo: ShipToInfo.empty(),
         selectedOrderType: OrderDocumentType.empty(),
         failureOrSuccessOption: none(),
-        isLoading: false,
         preSelectShipTo: false,
         isLoadingCustomerCode: false,
       );
@@ -328,4 +326,17 @@ class EligibilityState with _$EligibilityState {
 
   String get productManufacturerFilterTitle =>
       marketPlaceEligible ? 'Manufacturers & Sellers' : 'Manufacturer';
+
+  // Used in listenWhen for BlocListener for sections in home page to refresh the data
+  // when pulling to refresh or selecting a new shipTo
+  bool isRefreshed(EligibilityState previous) {
+    final isLoadShipToSuccess =
+        previous.isLoadingCustomerCode != isLoadingCustomerCode &&
+            !isLoadingCustomerCode;
+    final isSelectNewShipTo = previous.shipToInfo != shipToInfo && haveShipTo;
+    final isSelectNewLanguage =
+        previous.user.preferredLanguage != user.preferredLanguage;
+
+    return isLoadShipToSuccess || isSelectNewShipTo || isSelectNewLanguage;
+  }
 }

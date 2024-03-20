@@ -42,8 +42,7 @@ class RecentOrdersSection extends StatelessWidget {
           ),
         ),
       child: BlocListener<EligibilityBloc, EligibilityState>(
-        listenWhen: (previous, current) =>
-            previous.isLoading != current.isLoading && !current.isLoading,
+        listenWhen: (previous, current) => current.isRefreshed(previous),
         listener: (context, state) {
           context.read<ViewByItemsBloc>().add(
                 ViewByItemsEvent.initialized(
@@ -180,7 +179,7 @@ class _ProductTile extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '${product.isMarketPlace ? '${context.tr('Sold by')}:' : ''} ${product.principalData.principalName.name})}',
+                            '${product.isMarketPlace ? '${context.tr('Sold by')}: ' : ''}${product.principalData.principalName.name}',
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: ZPColors.extraLightGrey4,

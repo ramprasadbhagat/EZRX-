@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -17,6 +16,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
@@ -83,8 +84,6 @@ void main() {
       ),
     );
   });
-  final fakeCustomerCodeInfo =
-      CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '00001234');
 
   group('Carousel Banner', () {
     setUp(() {
@@ -114,8 +113,11 @@ void main() {
     testWidgets('Banner test - when customer code changed - Success',
         (tester) async {
       final expectedCustomerCodeInfo = [
-        EligibilityState.initial()
-            .copyWith(customerCodeInfo: fakeCustomerCodeInfo)
+        EligibilityState.initial().copyWith(isLoadingCustomerCode: true),
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          user: fakeClient,
+        )
       ];
       whenListen(
         mockEligibilityBloc,
@@ -127,11 +129,11 @@ void main() {
       verify(
         () => mockBannerBloc.add(
           BannerEvent.fetch(
-            salesOrganisation: mockEligibilityBloc.state.salesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             bannerType: 'top_advert_box',
-            country: mockEligibilityBloc.state.salesOrg.country,
+            country: fakeMYSalesOrganisation.salesOrg.country,
             isPreSalesOrg: false,
-            role: mockEligibilityBloc.state.user.role.type.getEZReachRoleType,
+            role: fakeClient.role.type.getEZReachRoleType,
             targetCustomerType: '',
             branchCode: '',
           ),

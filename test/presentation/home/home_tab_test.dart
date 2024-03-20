@@ -718,13 +718,6 @@ void main() {
             shipToInfo: fakeShipToInfo,
           ),
         );
-        whenListen(
-          eligibilityBlocMock,
-          Stream.fromIterable([
-            EligibilityState.initial().copyWith(isLoading: true),
-            EligibilityState.initial().copyWith(isLoading: false),
-          ]),
-        );
       });
       testWidgets('Product SearchBar Visible when product accessright is true',
           (tester) async {
@@ -755,6 +748,13 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
           ),
+        );
+        whenListen(
+          eligibilityBlocMock,
+          Stream.fromIterable([
+            EligibilityState.initial().copyWith(isLoadingCustomerCode: true),
+            EligibilityState.initial().copyWith(isLoadingCustomerCode: false),
+          ]),
         );
 
         await tester.pumpWidget(getWidget());

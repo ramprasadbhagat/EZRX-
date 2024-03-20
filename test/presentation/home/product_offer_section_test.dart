@@ -188,7 +188,7 @@ void main() {
     testWidgets('ProductsOnOffer test - when Salesorg  changed - Success',
         (tester) async {
       final expectedState = [
-        EligibilityState.initial().copyWith(isLoading: true),
+        EligibilityState.initial(),
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeMYSalesOrganisation,
@@ -224,7 +224,7 @@ void main() {
       (tester) async {
         final expectedState = [
           EligibilityState.initial().copyWith(
-            isLoading: true,
+            isLoadingCustomerCode: true,
           ),
           EligibilityState.initial().copyWith(
             user: fakeClientUser,

@@ -327,14 +327,12 @@ void main() {
         EligibilityState.initial().copyWith(
           user: fakeUser,
           salesOrganisation: fakeSaleOrg,
-          isLoading: false,
           isLoadingCustomerCode: true,
           preSelectShipTo: false,
         ),
         EligibilityState.initial().copyWith(
           user: fakeUser,
           salesOrganisation: fakeSaleOrg,
-          isLoading: false,
           isLoadingCustomerCode: false,
           customerCodeInfo: customerMockData.soldToInformation.first,
           preSelectShipTo: true,
@@ -392,14 +390,12 @@ void main() {
       EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        isLoading: false,
         isLoadingCustomerCode: true,
         preSelectShipTo: false,
       ),
       EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        isLoading: false,
         isLoadingCustomerCode: false,
         customerCodeInfo: customerMockData.soldToInformation.first,
         preSelectShipTo: true,
@@ -455,14 +451,12 @@ void main() {
       EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        isLoading: false,
         isLoadingCustomerCode: true,
         preSelectShipTo: false,
       ),
       EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        isLoading: false,
         isLoadingCustomerCode: false,
         customerCodeInfo: customerMockData.soldToInformation.firstWhere(
           (element) => element.customerCodeSoldTo == '0000002011',
@@ -520,14 +514,12 @@ void main() {
       EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        isLoading: false,
         isLoadingCustomerCode: true,
         preSelectShipTo: false,
       ),
       EligibilityState.initial().copyWith(
         user: fakeUser,
         salesOrganisation: fakeSaleOrg,
-        isLoading: false,
         isLoadingCustomerCode: false,
         customerCodeInfo: customerMockData.soldToInformation.firstWhere(
           (element) => element.customerCodeSoldTo == '0000002011',
@@ -1524,24 +1516,7 @@ void main() {
           const EligibilityEvent.registerChatBot(),
         );
       },
-      expect: () => [
-        EligibilityState.initial().copyWith(
-          user: fakeUser,
-          salesOrganisation: fakeSaleOrg,
-          isLoading: true,
-          customerCodeInfo: fakeCustomerInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrgConfigs: fakeSaleOrgConfig,
-        ),
-        EligibilityState.initial().copyWith(
-          user: fakeUser,
-          salesOrganisation: fakeSaleOrg,
-          isLoading: false,
-          customerCodeInfo: fakeCustomerInfo,
-          shipToInfo: fakeShipToInfo,
-          salesOrgConfigs: fakeSaleOrgConfig,
-        ),
-      ],
+      expect: () => [],
     );
   });
 }

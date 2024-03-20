@@ -103,9 +103,7 @@ void main() {
         eligibilityBlocMock,
         Stream.fromIterable(
           [
-            EligibilityState.initial().copyWith(
-              isLoading: true,
-            ),
+            EligibilityState.initial().copyWith(isLoadingCustomerCode: true),
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeMYSalesOrgConfigs,
               customerCodeInfo: fakeCustomerCodeInfo,

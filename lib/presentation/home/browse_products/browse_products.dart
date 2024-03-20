@@ -35,8 +35,7 @@ class BrowseProduct extends StatelessWidget {
       child: MultiBlocListener(
         listeners: [
           BlocListener<EligibilityBloc, EligibilityState>(
-            listenWhen: (previous, current) =>
-                previous.isLoading != current.isLoading && !current.isLoading,
+            listenWhen: (previous, current) => current.isRefreshed(previous),
             listener: (context, state) {
               context.read<MaterialListBloc>().add(
                     MaterialListEvent.initialized(

@@ -115,8 +115,7 @@ class _CartPageState extends State<CartPage> {
     return MultiBlocListener(
       listeners: [
         BlocListener<EligibilityBloc, EligibilityState>(
-          listenWhen: (previous, current) =>
-              previous.isLoading != current.isLoading,
+          listenWhen: (previous, current) => current.isRefreshed(previous),
           listener: (context, state) {
             context.read<OrderEligibilityBloc>().add(
                   OrderEligibilityEvent.initialized(
