@@ -38,7 +38,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
             PriceSummaryTile(cartState: state),
             if (!state.isCartDetailsFetching)
               const _CartPagePriceNotAvailableMessage(),
-            _CartPageCheckoutButton(),
+            const _CartPageCheckoutButton(),
           ],
         );
       },
@@ -88,47 +88,51 @@ class _CartPageCheckoutSection extends StatelessWidget {
 }
 
 class _CartPageCheckoutButton extends StatelessWidget {
+  const _CartPageCheckoutButton({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
-      buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
-      builder: (context, materialPriceState) {
-        return BlocBuilder<CartBloc, CartState>(
-          buildWhen: (previous, current) =>
-              previous.isCartDetailsFetching != current.isCartDetailsFetching,
-          builder: (context, state) {
-            return SafeArea(
-              child: LoadingShimmer.withChild(
-                enabled: state.isCartDetailsFetching ||
-                    materialPriceState.isFetching,
-                child: Container(
-                  width: double.infinity,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  child:
-                      BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
-                    buildWhen: (previous, current) =>
-                        previous.isComboNotAllowedIfPresentInCart !=
-                        current.isComboNotAllowedIfPresentInCart,
-                    builder: (context, orderState) {
-                      return ElevatedButton(
-                        key: WidgetKeys.checkoutButton,
-                        onPressed: state.isCartDetailsFetching ||
-                                materialPriceState.isFetching ||
-                                orderState.isCheckoutDisabled
-                            ? null
-                            : () => _onCheckOutPressed(context),
-                        child: Text(context.tr('Check out')),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            );
-          },
-        );
-      },
+    final isPriceFetching =
+        context.select((MaterialPriceBloc bloc) => bloc.state.isFetching);
+    final isCartFetching =
+        context.select((CartBloc bloc) => bloc.state.isCartDetailsFetching);
+    final isCheckoutDisabled = context
+        .select((OrderEligibilityBloc bloc) => bloc.state.isCheckoutDisabled);
+    final isFetching = isPriceFetching || isCartFetching;
+
+    return SafeArea(
+      child: LoadingShimmer.withChild(
+        enabled: isFetching,
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: ElevatedButton(
+            style: isCheckoutDisabled
+                ? ButtonStyle(
+                    elevation: MaterialStateProperty.resolveWith(
+                      (_) => 0,
+                    ),
+                    overlayColor: MaterialStateProperty.resolveWith(
+                      (_) => Colors.transparent,
+                    ),
+                    foregroundColor: MaterialStateProperty.resolveWith(
+                      (_) => ZPColors.white,
+                    ),
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                      (_) => ZPColors.elevatedDisableColor,
+                    ),
+                    splashFactory: NoSplash.splashFactory,
+                  )
+                : null,
+            key: WidgetKeys.checkoutButton,
+            onPressed: isFetching ||
+                    context.read<EligibilityBloc>().state.disableCreateOrder
+                ? null
+                : () => _onCheckOutPressed(context),
+            child: Text(context.tr('Check out')),
+          ),
+        ),
+      ),
     );
   }
 
@@ -162,7 +166,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
     final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
     final cartState = context.read<CartBloc>().state;
 
-    if (orderEligibilityState.eligibleForOrderSubmit) {
+    if (!orderEligibilityState.isCheckoutDisabled) {
       FocusScope.of(context).requestFocus(FocusNode());
       trackMixpanelEvent(
         MixpanelEvents.checkoutSuccess,

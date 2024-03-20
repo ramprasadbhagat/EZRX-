@@ -305,6 +305,8 @@ ElevatedButtonThemeData _elevatedButtonTheme() {
     style: ElevatedButton.styleFrom(
       backgroundColor: ZPColors.primary,
       foregroundColor: ZPColors.white,
+      disabledBackgroundColor: ZPColors.elevatedDisableColor,
+      disabledForegroundColor: ZPColors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       textStyle: GoogleFonts.notoSans(
         fontSize: 15,
@@ -312,7 +314,6 @@ ElevatedButtonThemeData _elevatedButtonTheme() {
         fontWeight: FontWeight.w600,
       ),
       elevation: 0,
-      disabledBackgroundColor: ZPColors.lightPrimary,
       minimumSize: const Size(120, 45),
     ),
   );

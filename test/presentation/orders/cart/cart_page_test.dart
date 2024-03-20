@@ -2,6 +2,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
@@ -207,6 +208,7 @@ void main() {
     router: MockAppRouter(),
     pendingChildren: [],
   );
+  late MixpanelService mixpanelService;
 
   final checkoutPageRouteData = RouteData(
     route: const RouteMatch(
@@ -221,8 +223,9 @@ void main() {
   );
 
   setUpAll(() async {
+    mixpanelService = MockMixpanelService();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
+    locator.registerLazySingleton<MixpanelService>(() => mixpanelService);
     locator.registerLazySingleton(() => DiscountOverrideRepositoryMock());
     locator.registerFactory(
       () => DiscountOverrideBloc(repository: DiscountOverrideRepositoryMock()),
@@ -242,6 +245,7 @@ void main() {
   setUp(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+      reset(mixpanelService);
       materialListBlocMock = MaterialListBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       comboDealListBlocMock = ComboDealListBlocMock();
@@ -1294,9 +1298,7 @@ void main() {
             cartProducts: mockCartItemOOS,
           );
 
-          when(() => cartBloc.state).thenReturn(
-            cartState,
-          );
+          when(() => cartBloc.state).thenReturn(cartState);
 
           when(() => orderEligibilityBlocMock.state).thenReturn(
             OrderEligibilityState.initial().copyWith(
@@ -1311,15 +1313,15 @@ void main() {
 
           final checkoutButton =
               find.widgetWithText(ElevatedButton, 'Check out');
-          expect(
-            checkoutButton,
-            findsOneWidget,
-          );
+          expect(checkoutButton, findsOneWidget);
+          await tester.tap(checkoutButton);
           await tester.pump();
-          expect(
-            (tester.widget(checkoutButton) as ElevatedButton).enabled,
-            false,
-          );
+          verify(
+            () => mixpanelService.trackEvent(
+              eventName: MixpanelEvents.checkoutFailure,
+              properties: any(named: 'properties'),
+            ),
+          ).called(1);
         },
       );
 
@@ -2492,10 +2494,12 @@ void main() {
         expect(checkoutButton, findsOneWidget);
         await tester.tap(checkoutButton);
         await tester.pump();
-        verifyNever(
-          () => orderEligibilityBlocMock
-              .add(const OrderEligibilityEvent.validateOrderEligibility()),
-        );
+        verify(
+          () => mixpanelService.trackEvent(
+            eventName: MixpanelEvents.checkoutFailure,
+            properties: any(named: 'properties'),
+          ),
+        ).called(1);
 
         await tester.tap(invalidItemBannerButtonFinder);
         verify(

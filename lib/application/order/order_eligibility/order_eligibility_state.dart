@@ -56,15 +56,6 @@ class OrderEligibilityState with _$OrderEligibilityState {
     return !isAccountSuspended ? isTotalGreaterThanMinOrderAmount : false;
   }
 
-  bool get eligibleForOrderSubmit =>
-      isMinOrderValuePassed &&
-      !isMWPNotAllowedAndPresentInCart &&
-      isOOSAllowedIfPresentInCart &&
-      isBundleQuantitySatisfies &&
-      !cartContainsSuspendedMaterials &&
-      !cartContainsSuspendedPrincipal &&
-      !isComboNotAllowedIfPresentInCart;
-
   String get orderEligibleTrackingErrorMessage {
     const invalidItemErrorMessage =
         'The following items have been identified in your cart:';
@@ -177,9 +168,6 @@ class OrderEligibilityState with _$OrderEligibilityState {
   bool get displayMovWarning =>
       !isMinOrderValuePassed && showErrorMessage && !isAccountSuspended;
 
-  bool get displayOOSWarning =>
-      !isOOSAllowedIfPresentInCart && showErrorMessage;
-
   bool get displayInvalidItemsWarning =>
       displayInvalidItemsBanner && showErrorMessage;
 
@@ -233,10 +221,6 @@ class OrderEligibilityState with _$OrderEligibilityState {
   bool get isComboNotAllowedIfPresentInCart =>
       !comboDealEligible &&
       cartItems.any((product) => product.materialInfo.type.typeCombo);
-
-  bool get isCheckoutNotAllowed =>
-      isComboNotAllowedIfPresentInCart ||
-      shipInfo.customerBlock.isCustomerBlocked;
 
   bool get displayInvalidItemsBanner =>
       cartContainsSuspendedMaterials ||
@@ -308,10 +292,10 @@ class OrderEligibilityState with _$OrderEligibilityState {
       );
 
   bool get isCheckoutDisabled =>
+      !isBundleQuantitySatisfies ||
+      displayInvalidItemsBanner ||
       isNotAvailableToCheckoutForID ||
-      isCheckoutNotAllowed ||
-      !isMinOrderValuePassed ||
-      !isOOSAllowedIfPresentInCart;
+      !isMinOrderValuePassed;
 
   List<bool> get activeErrorsList => [
         displayMovWarning,

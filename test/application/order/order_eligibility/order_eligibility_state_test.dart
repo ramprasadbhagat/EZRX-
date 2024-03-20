@@ -109,27 +109,6 @@ void main() {
       expect(modifiedState.isOOSAllowedIfPresentInCart, false);
     });
 
-    test(' => displayOOSWarning should return correct value', () {
-      // displayOOSWarning is false
-      expect(initializedState.displayOOSWarning, false);
-      // displayOOSWarning is true
-      final modifiedState = initializedState.copyWith(
-        configs: fakeKHSalesOrgConfigs.copyWith(
-          addOosMaterials: OosMaterial(false),
-        ),
-        cartItems: [
-          fakeCartItem.copyWith(
-            materialInfo: MaterialInfo.empty().copyWith(
-              type: MaterialInfoType('material'),
-            ),
-            stockInfoList: [StockInfo.empty()],
-          ),
-        ],
-        showErrorMessage: true,
-      );
-      expect(modifiedState.displayOOSWarning, true);
-    });
-
     test(' => isBundleQuantitySatisfies should return correct value', () {
       // isBundleQuantitySatisfies is true
       expect(initializedState.isBundleQuantitySatisfies, true);
@@ -384,10 +363,10 @@ void main() {
       ]);
     });
 
-    test(' => eligibleForOrderSubmit should return correct value', () {
-      // eligibleForOrderSubmit is false
-      expect(initializedState.eligibleForOrderSubmit, false);
-      // eligibleForOrderSubmit is true
+    test(' => isCheckoutDisabled should return correct value', () {
+      // isCheckoutDisabled is false
+      expect(initializedState.isCheckoutDisabled, true);
+      // isCheckoutDisabled is true
       final modifiedState = initializedState.copyWith(
         orderType: 'ZPFC',
         cartItems: [
@@ -403,7 +382,7 @@ void main() {
         ],
         grandTotal: 100,
       );
-      expect(modifiedState.eligibleForOrderSubmit, true);
+      expect(modifiedState.isCheckoutDisabled, false);
     });
 
     test(' => displayInvalidItemsBanner should return correct value', () {
