@@ -110,8 +110,8 @@ class NewPaymentStep3Robot {
       find.byWidgetPredicate(
         (widget) =>
             widget.key == WidgetKeys.addressInfoSectionActionLabel &&
-            widget is Text &&
-            (widget.data ?? '').contains(address),
+            widget is RichText &&
+            widget.text.toPlainText().contains(address),
       ),
       findsOneWidget,
     );
@@ -146,24 +146,20 @@ class NewPaymentStep3Robot {
     String customerCode,
     String shipToCode,
   ) async {
+    final addressWidget = find.byWidgetPredicate(
+      (widget) =>
+          widget.key == WidgetKeys.addressInfoSectionActionLabel &&
+          widget is RichText &&
+          widget.text.toPlainText().contains(address),
+    );
     await tester.dragUntilVisible(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget.key == WidgetKeys.addressInfoSectionActionLabel &&
-            widget is Text &&
-            (widget.data ?? '').contains(address),
-      ),
+      addressWidget,
       find.byKey(WidgetKeys.paymentMethodListView),
       const Offset(0, -200),
     );
     await tester.pumpAndSettle();
     expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget.key == WidgetKeys.addressInfoSectionActionLabel &&
-            widget is Text &&
-            (widget.data ?? '').contains(address),
-      ),
+      addressWidget,
       findsOneWidget,
     );
     expect(

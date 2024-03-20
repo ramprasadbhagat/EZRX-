@@ -9,6 +9,7 @@ class AddressInfoSection extends StatelessWidget {
   final String actionText;
   final Color? backgroundColor;
   final Color? infoTextColor;
+  final Color? customerNameTextColor;
   final EdgeInsets padding;
 
   const AddressInfoSection._({
@@ -16,11 +17,14 @@ class AddressInfoSection extends StatelessWidget {
     required this.actionText,
     this.backgroundColor,
     this.infoTextColor,
+    this.customerNameTextColor,
     this.padding = EdgeInsets.zero,
   }) : super(key: key);
 
-  factory AddressInfoSection.order() =>
-      const AddressInfoSection._(actionText: 'Order for');
+  factory AddressInfoSection.order() => const AddressInfoSection._(
+        actionText: 'Order for',
+        customerNameTextColor: ZPColors.primary,
+      );
 
   factory AddressInfoSection.returnRequest() =>
       const AddressInfoSection._(actionText: 'Return for');
@@ -49,34 +53,28 @@ class AddressInfoSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              actionText.isEmpty
-                  ? Text(
-                      state.customerCodeInfo.customerName.name1,
-                      key: WidgetKeys.addressInfoSectionActionLabel,
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: infoTextColor,
-                          ),
-                    )
-                  : RichText(
-                      key: WidgetKeys.addressInfoSectionActionLabel,
-                      text: TextSpan(
-                        text: '${actionText.tr()} ',
-                        style: Theme.of(context).textTheme.labelMedium,
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: state.customerCodeInfo.customerName.name1,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(color: infoTextColor),
-                          ),
-                        ],
+              RichText(
+                key: WidgetKeys.addressInfoSectionActionLabel,
+                text: TextSpan(
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: infoTextColor,
                       ),
+                  children: <TextSpan>[
+                    if (actionText.isNotEmpty)
+                      TextSpan(
+                        text: '${context.tr(actionText)} ',
+                      ),
+                    TextSpan(
+                      text: state.customerCodeInfo.customerName.name1,
+                      style: TextStyle(color: customerNameTextColor),
                     ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  '${'Customer code'.tr()}: ${state.customerCodeInfo.customerCodeSoldTo}',
+                  '${context.tr('Customer code')}: ${state.customerCodeInfo.customerCodeSoldTo}',
                   key: WidgetKeys.addressInfoSectionCustomerCodeLabel,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: infoTextColor,
@@ -93,7 +91,7 @@ class AddressInfoSection extends StatelessWidget {
                 height: 16,
               ),
               Text(
-                '${'Delivery to'.tr()}: ${state.shipToInfo.shipToCustomerCode}',
+                '${context.tr('Delivery to')}: ${state.shipToInfo.shipToCustomerCode}',
                 key: WidgetKeys.addressInfoSectionDeliveryToLabel,
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: infoTextColor,

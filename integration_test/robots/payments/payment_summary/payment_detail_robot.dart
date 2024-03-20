@@ -61,8 +61,8 @@ class PaymentSummaryDetailRobot extends CommonRobot {
       find.byWidgetPredicate(
         (widget) =>
             widget.key == WidgetKeys.addressInfoSectionActionLabel &&
-            widget is Text &&
-            (widget.data ?? '').contains(address),
+            widget is RichText &&
+            widget.text.toPlainText().contains(address),
       ),
       findsOneWidget,
     );
