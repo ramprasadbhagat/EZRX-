@@ -314,7 +314,15 @@ void main() {
             fakeCartProduct.first.getMaterialNumber.displayMatNo,
           ),
         );
-        expect(preOrderMaterialFinder, findsNWidgets(2));
+        expect(preOrderMaterialFinder, findsOneWidget);
+        expect(
+          find.byKey(
+            WidgetKeys.preOrderMaterial(
+              fakeCartProduct.first.getMaterialNumber.displayMatNo,
+            ),
+          ),
+          findsOneWidget,
+        );
         final preOrderModalItemFinalPrice = find.byKey(
           WidgetKeys.preOrderModalItemFinalPrice,
         );
@@ -348,7 +356,15 @@ void main() {
             fakeCartProduct.first.getMaterialNumber.displayMatNo,
           ),
         );
-        expect(preOrderMaterialFinder, findsNWidgets(2));
+        expect(preOrderMaterialFinder, findsOneWidget);
+        expect(
+          find.byKey(
+            WidgetKeys.preOrderMaterial(
+              fakeCartProduct.first.getMaterialNumber.displayMatNo,
+            ),
+          ),
+          findsOneWidget,
+        );
         expect(find.byType(CovidTag), findsOneWidget);
         expect(
           find.byType(GovtListPriceComponent),
@@ -399,7 +415,15 @@ void main() {
             fakeCartProduct.first.getMaterialNumber.displayMatNo,
           ),
         );
-        expect(preOrderMaterialFinder, findsNWidgets(2));
+        expect(preOrderMaterialFinder, findsOneWidget);
+        expect(
+          find.byKey(
+            WidgetKeys.preOrderMaterial(
+              fakeCartProduct.first.getMaterialNumber.displayMatNo,
+            ),
+          ),
+          findsOneWidget,
+        );
         final preOrderModalItemFinalPrice = find.byKey(
           WidgetKeys.preOrderModalItemFinalPrice,
         );

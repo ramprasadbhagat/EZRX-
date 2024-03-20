@@ -582,8 +582,11 @@ class WidgetKeys {
       Key('preOrderModalItemFinalPrice');
   static const Key preOrderModalItemTotalPrice =
       Key('preOrderModalItemTotalPrice');
-  static Key preOrderMaterial(String materialNumber) =>
-      Key('preOrderMaterial$materialNumber');
+  static Key preOrderMaterial(String materialNumber, {bool isBonus = false}) =>
+      isBonus
+          ? Key('preOrderBonusMaterial$materialNumber')
+          : Key('preOrderMaterial$materialNumber');
+
   static const Key preOrderMaterialQty = Key('preOrderMaterialQty');
   static const Key bonusOfferItemAddKey = Key('bonusOfferItemAddKey');
   static const Key bonusOfferItemDeleteKey = Key('bonusOfferItemDeleteKey');

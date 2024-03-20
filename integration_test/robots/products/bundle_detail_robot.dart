@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -16,6 +16,7 @@ class BundleDetailRobot extends CommonRobot {
       find.byKey(WidgetKeys.bundleAddToCartSheetSubmitButton);
   final sheetInvalidQtyWarning =
       find.byKey(WidgetKeys.addBundleInvalidQtyWarning);
+  final expiryDateIcon = find.byKey(WidgetKeys.expiryDateInfoIcon);
 
   void verifyPage() {
     final bundlesDetail = find.byKey(WidgetKeys.bundleDetailPage);
@@ -96,19 +97,26 @@ class BundleDetailRobot extends CommonRobot {
   void verifyAddBundleBottomSheet({bool isVisible = true}) =>
       expect(sheetAddToCart, isVisible ? findsOneWidget : findsNothing);
 
-  Future<void> verifyBundleMaterialExpiryDate(
-    Map<String, String> materialNumberExpiryPair,
-  ) async {
-    for (final entry in materialNumberExpiryPair.entries) {
-      final materialNumber = entry.key;
-      final expiryDate = entry.value;
-      final itemTile = find.descendant(
-        of: find.byKey(
-          WidgetKeys.bundleMaterialDetails(materialNumber),
-        ),
-        matching: find.byType(StockInfoWidget),
+  Future<void> verifyBundleMaterialExpiryDateAndBatchNo({
+    List<StockInfo> stockInfoList = const <StockInfo>[],
+    bool isExpiryDateVisible = true,
+    bool isBatchNumberVisible = true,
+  }) async {
+    if (!isExpiryDateVisible && !isBatchNumberVisible) {
+      expect(find.byKey(WidgetKeys.materialDetailsStock), findsNothing);
+      return;
+    }
+    for (final stockInfo in stockInfoList) {
+      final materialNumber = stockInfo.materialNumber.displayMatNo;
+      final expiryDate = stockInfo.expiryDate.dateOrNaString;
+      final batchNumber = stockInfo.batch.displayLabel;
+      final itemTile = find.byKey(
+        WidgetKeys.bundleMaterialDetails(materialNumber),
       );
-
+      final texts = <String>[];
+      if (isBatchNumberVisible) texts.add('${'Batch:'.tr()} $batchNumber');
+      if (isExpiryDateVisible) texts.add('${'EXP:'.tr()} $expiryDate');
+      final stockText = texts.join(' - ');
       await scrollEnsureFinderVisible(itemTile);
       expect(
         find.descendant(
@@ -117,14 +125,17 @@ class BundleDetailRobot extends CommonRobot {
             (widget) =>
                 widget.key == WidgetKeys.materialDetailsStock &&
                 widget is RichText &&
-                widget.text
-                    .toPlainText()
-                    .contains('${'EXP'.tr()}: $expiryDate'),
+                widget.text.toPlainText().contains(stockText),
           ),
         ),
         findsOneWidget,
       );
     }
+  }
+
+  Future<void> tapExpiryDateInfoIcon() async {
+    await tester.tap(expiryDateIcon.last);
+    await tester.pumpAndSettle();
   }
 
   void verifyAddBundleMinimumQty(int value) => _findWidgetContainText(

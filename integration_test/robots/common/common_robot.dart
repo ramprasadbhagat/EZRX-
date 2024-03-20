@@ -26,6 +26,9 @@ class CommonRobot {
   final productsTab = find.byKey(WidgetKeys.productsTab);
   final cartButton = find.byType(CartButton);
   final payerInformationVn = find.byKey(WidgetKeys.payerInformation);
+  final expiryDateBottomSheet =
+      find.byKey(WidgetKeys.expiryDateInstructionSheet);
+  final expiryDateBottomSheetCloseButton = find.byKey(WidgetKeys.closeButton);
 
   Future<void> setDateRangePickerValue({
     required DateTime fromDate,
@@ -365,4 +368,43 @@ class CommonRobot {
 
   String get noRecordFoundDefaultSubTitle =>
       '${'Try adjusting your search or filter selection to find what you’re looking for'.tr()}.';
+
+  //============================================================
+  //  Expiry date info bottomsheet
+  //============================================================
+
+  Future<void> verifyExpiryDateBottomSheetAndTapClose() async {
+    expect(expiryDateBottomSheet, findsOneWidget);
+    expect(
+      find.descendant(
+        of: expiryDateBottomSheet,
+        matching: find.text('Expiry date'.tr()),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: expiryDateBottomSheet,
+        matching: find.text(
+          '${'Expiry date displayed is for reference, actual product may vary'.tr()}.',
+        ),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: expiryDateBottomSheetCloseButton,
+        matching: find.text('Got it'.tr()),
+      ),
+      findsOneWidget,
+    );
+    await tester.tap(
+      find.descendant(
+        of: expiryDateBottomSheet,
+        matching: expiryDateBottomSheetCloseButton,
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(expiryDateBottomSheet, findsNothing);
+  }
 }

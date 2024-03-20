@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -100,6 +101,10 @@ void main() {
   const orderMaterialName = 'ABBOTIC GRANULES 30 ML';
 
   var loginRequired = true;
+  final materialStockInfo = StockInfo.empty();
+  final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
+  final materialBatch = materialStockInfo.batch.displayLabel;
+  final oosPreOrderMaterialStockInfo = StockInfo.empty();
 
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
@@ -352,15 +357,30 @@ void main() {
       await pumpAppWithHomeScreen(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
-      await productRobot.tapFirstMaterial();
+      await productRobot.openSearchProductScreen();
+      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+      await productSuggestionRobot.tapSearchResult(materialNumber);
       productDetailRobot.verifyProductImageDisplayed();
       productDetailRobot.verifyProductFavoriteIconDisplayed();
       productDetailRobot.verifyProductNameDisplayed();
+      productDetailRobot.verifyExpiryDate(
+        materialExpiryDate,
+      );
+      await productDetailRobot.tapExpiryDateInfoIcon();
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
       productDetailRobot.verifyCartButtonDisplayed();
       productDetailRobot.verifyAddToCartCartButtonDisplayed();
+      await productDetailRobot.openMaterialInformation();
+      productDetailRobot.verifyBatchDisplayed(
+        value: materialBatch,
+        isVisible: false,
+      );
+      productDetailRobot.verifyExpiryDateLabelDisplayed(
+        value: materialExpiryDate,
+      );
     });
 
     testWidgets('EZRX-T42 | Verify Product detail via Home screen',
@@ -514,6 +534,13 @@ void main() {
       cartRobot.verifyMaterialImage(materialNumber);
       cartRobot.verifyMaterialQty(materialNumber, 1);
       cartRobot.verifyMaterialDescription(materialNumber, materialName);
+      cartRobot.verifyMaterialExpiryDateAndBatch(
+        materialNumber,
+        materialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await cartRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
         materialUnitPrice.priceDisplayForID(currency),
@@ -740,6 +767,13 @@ void main() {
       oosPreOrderRobot.verifyContinueButton();
       oosPreOrderRobot.verifyWarningMessage();
       oosPreOrderRobot.verifyMaterial(oosPreOrderMaterialNumber, qty);
+      oosPreOrderRobot.verifyExpiryDateAndBatch(
+        oosPreOrderMaterialNumber,
+        oosPreOrderMaterialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await oosPreOrderRobot.tapExpiryDateInfoIcon(oosPreOrderMaterialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       await oosPreOrderRobot.tapCancelButton();
       cartRobot.verifyPage();
       oosPreOrderRobot.verifySheet(isVisible: false);
@@ -772,6 +806,13 @@ void main() {
       // Should be 2 here because material has offer
       await checkoutRobot.verifyYoursItemLabel(1);
       await checkoutRobot.verifyMaterial(materialNumber);
+      checkoutRobot.verifyMaterialExpiryDateAndBatch(
+        materialNumber,
+        materialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await checkoutRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       await checkoutRobot
           .verifySubTotalLabel(totalPrice.priceDisplayForID(currency));
       await checkoutRobot

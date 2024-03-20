@@ -9,6 +9,7 @@ class _PreOrderProductTile extends StatelessWidget {
     return CustomCard(
       key: WidgetKeys.preOrderMaterial(
         cartProduct.getMaterialNumber.displayMatNo,
+        isBonus: cartProduct.materialInfo.type.typeDealOrOverrideBonus,
       ),
       padding: const EdgeInsets.all(8),
       child: Column(

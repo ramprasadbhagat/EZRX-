@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
@@ -36,6 +37,8 @@ class CheckoutRobot {
   final materialPrincipalLabel =
       find.byKey(WidgetKeys.cartItemProductPrincipalName);
   final materialImage = find.byType(CustomImage);
+  final materialDetailsStock = find.byKey(WidgetKeys.materialDetailsStock);
+  final expiryDateIcon = find.byKey(WidgetKeys.expiryDateInfoIcon);
 
   void verifyPage() {
     expect(page, findsOneWidget);
@@ -575,5 +578,129 @@ class CheckoutRobot {
       ),
       findsOneWidget,
     );
+  }
+
+  void verifyMaterialExpiryDateAndBatch(
+    String materialNumber,
+    StockInfo stockInfo, {
+    bool isExpiryDateVisible = true,
+    bool isBatchNumberVisible = true,
+  }) {
+    final stockWidget = find.descendant(
+      of: _material(materialNumber),
+      matching: materialDetailsStock,
+    );
+    if (!isExpiryDateVisible && !isBatchNumberVisible) {
+      expect(stockWidget, findsNothing);
+      return;
+    }
+    expect(stockWidget, findsOneWidget);
+    final richText =
+        (tester.widget<RichText>(stockWidget).text as TextSpan).toPlainText();
+    final texts = <String>[];
+    if (isBatchNumberVisible) {
+      texts.add('${'Batch:'.tr()} ${stockInfo.batch.displayLabel}');
+    }
+    if (isExpiryDateVisible) {
+      texts.add('${'EXP:'.tr()} ${stockInfo.expiryDate.dateOrNaString}');
+    }
+    final stockText = texts.join(' - ');
+    expect(richText.contains(stockText), true);
+  }
+
+  Future<void> tapMaterialExpiryDateInfoIcon(
+    String materialNumber,
+  ) async {
+    final materialExpiryDateIcon = find.descendant(
+      of: _material(materialNumber),
+      matching: expiryDateIcon,
+    );
+    expect(materialExpiryDateIcon, findsOneWidget);
+    await tester.tap(materialExpiryDateIcon);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyBundleItemExpiryDateAndBatch(
+    String bundleNumber,
+    String materialNumber,
+    StockInfo stockInfo, {
+    bool isExpiryDateVisible = true,
+    bool isBatchNumberVisible = true,
+  }) {
+    final stockWidget = find.descendant(
+      of: _bundleItem(bundleNumber, materialNumber),
+      matching: materialDetailsStock,
+    );
+    if (!isExpiryDateVisible && !isBatchNumberVisible) {
+      expect(stockWidget, findsNothing);
+      return;
+    }
+    expect(stockWidget, findsOneWidget);
+    final richText =
+        (tester.widget<RichText>(stockWidget).text as TextSpan).toPlainText();
+    final texts = <String>[];
+    if (isBatchNumberVisible) {
+      texts.add('${'Batch:'.tr()} ${stockInfo.batch.displayLabel}');
+    }
+    if (isExpiryDateVisible) {
+      texts.add('${'EXP:'.tr()} ${stockInfo.expiryDate.dateOrNaString}');
+    }
+    final stockText = texts.join(' - ');
+    expect(richText.contains(stockText), true);
+  }
+
+  Future<void> tapBundleItemExpiryDateInfoIcon(
+    String bundleNumber,
+    String materialNumber,
+  ) async {
+    final materialExpiryDateIcon = find.descendant(
+      of: _bundleItem(bundleNumber, materialNumber),
+      matching: expiryDateIcon,
+    );
+    expect(materialExpiryDateIcon, findsOneWidget);
+    await tester.tap(materialExpiryDateIcon);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyBonusMaterialExpiryDateAndBatch(
+    String materialNumber,
+    String bonusMaterialNumber,
+    StockInfo stockInfo, {
+    bool isExpiryDateVisible = true,
+    bool isBatchNumberVisible = true,
+  }) {
+    final stockWidget = find.descendant(
+      of: _bonusItem(materialNumber, bonusMaterialNumber),
+      matching: materialDetailsStock,
+    );
+    if (!isExpiryDateVisible && !isBatchNumberVisible) {
+      expect(stockWidget, findsNothing);
+      return;
+    }
+    expect(stockWidget, findsOneWidget);
+    final richText =
+        (tester.widget<RichText>(stockWidget).text as TextSpan).toPlainText();
+    final texts = <String>[];
+    if (isBatchNumberVisible) {
+      texts.add('${'Batch:'.tr()} ${stockInfo.batch.displayLabel}');
+    }
+    if (isExpiryDateVisible) {
+      texts.add('${'EXP:'.tr()} ${stockInfo.expiryDate.dateOrNaString}');
+    }
+    final stockText = texts.join(' - ');
+    expect(richText.contains(stockText), true);
+  }
+
+  Future<void> tapBonusMaterialExpiryDateInfoIcon(
+    String materialNumber,
+    String bonusMaterialNumber,
+  ) async {
+    final materialExpiryDateIcon = find.descendant(
+      of: _bonusItem(materialNumber, bonusMaterialNumber),
+      matching: expiryDateIcon,
+    );
+    expect(materialExpiryDateIcon, findsOneWidget);
+    await tester.tap(materialExpiryDateIcon);
+    await tester.pumpAndSettle();
   }
 }

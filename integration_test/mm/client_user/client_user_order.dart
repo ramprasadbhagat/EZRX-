@@ -1,3 +1,6 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -150,6 +153,16 @@ void main() {
   const orderId = 'e159cac5-f640-4295-acfb-272a3d32a00b';
 
   var loginRequired = true;
+
+  final materialStockInfo = StockInfo.empty().copyWith(
+    expiryDate: DateTimeStringValue(
+      '2024-04-30',
+    ),
+    batch: BatchNumber('TEST'),
+  );
+  final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
+  final materialBatch = materialStockInfo.batch.displayLabel;
+  final oosPreOrderMaterialStockInfo = StockInfo.empty();
 
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
@@ -1180,6 +1193,14 @@ void main() {
       productDetailRobot.verifyProductImageDisplayed();
       productDetailRobot.verifyProductFavoriteIconDisplayed();
       productDetailRobot.verifyProductNameDisplayed();
+      productDetailRobot.verifyExpiryDate(
+        materialExpiryDate,
+      );
+      productDetailRobot.verifyExpiryDate(
+        materialBatch,
+      );
+      await productDetailRobot.tapExpiryDateInfoIcon();
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
@@ -1193,6 +1214,12 @@ void main() {
           .verifyUnitOfMeasurementLabelDisplayed(materialUnitMeasurement);
       productDetailRobot
           .verifyCountryOfOriginLabelDisplayed(materialCountryOfOrigin);
+      productDetailRobot.verifyBatchDisplayed(
+        value: materialBatch,
+      );
+      productDetailRobot.verifyExpiryDateLabelDisplayed(
+        value: materialExpiryDate,
+      );
     });
 
     testWidgets('EZRX-T64 | Verify display image when having multiple images',
@@ -1380,6 +1407,12 @@ void main() {
       cartRobot.verifyMaterialImage(materialNumber);
       cartRobot.verifyMaterialQty(materialNumber, 1);
       cartRobot.verifyMaterialDescription(materialNumber, materialName);
+      cartRobot.verifyMaterialExpiryDateAndBatch(
+        materialNumber,
+        materialStockInfo,
+      );
+      await cartRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
         materialUnitPrice.priceDisplay(currency),
@@ -1854,6 +1887,12 @@ void main() {
       oosPreOrderRobot.verifySheet(isVisible: false);
       await cartRobot.tapCheckoutButton();
       oosPreOrderRobot.verifyMaterial(oosPreOrderMaterialNumber, qty);
+      oosPreOrderRobot.verifyExpiryDateAndBatch(
+        oosPreOrderMaterialNumber,
+        oosPreOrderMaterialStockInfo,
+      );
+      await oosPreOrderRobot.tapExpiryDateInfoIcon(oosPreOrderMaterialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       await oosPreOrderRobot.tapContinueButton();
       checkoutRobot.verifyPage();
     });
@@ -2013,6 +2052,12 @@ void main() {
       await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
       await checkoutRobot.verifyYoursItemLabel(1);
       await checkoutRobot.verifyMaterial(materialNumber);
+      checkoutRobot.verifyMaterialExpiryDateAndBatch(
+        materialNumber,
+        materialStockInfo,
+      );
+      await checkoutRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       await checkoutRobot
           .verifySubTotalLabel(totalPrice.priceDisplay(currency));
       await checkoutRobot.verifyGrandTotalLabel(

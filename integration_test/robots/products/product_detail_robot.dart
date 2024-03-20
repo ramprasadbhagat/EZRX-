@@ -28,6 +28,7 @@ class ProductDetailRobot extends CommonRobot {
   final materialDetailsStock = find.byKey(WidgetKeys.materialDetailsStock);
   final govtMaterialListPrice = find.byKey(WidgetKeys.govtMaterialListPrice);
   final expandIcon = find.byKey(WidgetKeys.expandIcon);
+  final expiryDateIcon = find.byKey(WidgetKeys.expiryDateInfoIcon);
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
@@ -139,6 +140,12 @@ class ProductDetailRobot extends CommonRobot {
       (element) => element.toPlainText().contains('${'Batch'.tr()}: $batch '),
     );
     expect(result, true);
+  }
+
+  Future<void> tapExpiryDateInfoIcon() async {
+    expect(expiryDateIcon, findsOneWidget);
+    await tester.tap(expiryDateIcon);
+    await tester.pumpAndSettle();
   }
 
   void verifyProductPriceDisplayed() {

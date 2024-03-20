@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -155,12 +157,16 @@ void main() {
   const mdiShipTo = '0000107381';
   //abbott principal we show expiry date
   const abbottMaterialNumber = '21248591';
-  const abbottExpiryDate = '14 Dec 2050';
+  final abbottMaterialStockInfo =
+      StockInfo.empty().copyWith(expiryDate: DateTimeStringValue('2050-12-14'));
+  final abbottExpiryDate = abbottMaterialStockInfo.expiryDate.dateOrNaString;
   const abbottPrincipalName = 'ABBOTT LABORATORIES';
 
   //non abbott principal (other principal) - we hide expiry date as NA
   const nonAbbottMaterialNumber = '13008017';
-  const nonAbbottExpiryDate = 'NA';
+  final nonAbbottMaterialStockInfo = StockInfo.empty();
+  final nonAbbottExpiryDate =
+      nonAbbottMaterialStockInfo.expiryDate.dateOrNaString;
   const nonAbbottPrincipalName = 'BAUSCH AND LOMB PHILS., INC';
 
   const currency = 'PHP';
@@ -1347,7 +1353,6 @@ void main() {
       productDetailRobot.verifyProductImageDisplayed();
       productDetailRobot.verifyProductFavoriteIconDisplayed();
       productDetailRobot.verifyProductNameDisplayed();
-      productDetailRobot.verifyExpiryDate(abbottExpiryDate);
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
@@ -1357,8 +1362,13 @@ void main() {
       await productDetailRobot.openMaterialInformation();
       productDetailRobot.verifyMateriaNumberDisplayed(abbottMaterialNumber);
       productDetailRobot.verifyManufacturerDisplayed(abbottPrincipalName);
+      productDetailRobot.verifyBatchDisplayed(
+        value: materialBatch,
+        isVisible: false,
+      );
       productDetailRobot.verifyExpiryDateLabelDisplayed(
         value: abbottExpiryDate,
+        isVisible: false,
       );
     });
 
@@ -1379,7 +1389,6 @@ void main() {
       productDetailRobot.verifyProductImageDisplayed();
       productDetailRobot.verifyProductFavoriteIconDisplayed();
       productDetailRobot.verifyProductNameDisplayed();
-      productDetailRobot.verifyExpiryDate(nonAbbottExpiryDate);
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
@@ -1389,8 +1398,13 @@ void main() {
       await productDetailRobot.openMaterialInformation();
       productDetailRobot.verifyMateriaNumberDisplayed(nonAbbottMaterialNumber);
       productDetailRobot.verifyManufacturerDisplayed(nonAbbottPrincipalName);
+      productDetailRobot.verifyBatchDisplayed(
+        value: materialBatch,
+        isVisible: false,
+      );
       productDetailRobot.verifyExpiryDateLabelDisplayed(
         value: nonAbbottExpiryDate,
+        isVisible: false,
       );
     });
 

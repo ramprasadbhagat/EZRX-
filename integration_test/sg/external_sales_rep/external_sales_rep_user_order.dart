@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -141,8 +143,6 @@ void main() {
   const materialCountryOfOrigin = 'USA';
   const materialUnitMeasurement = 'EA';
   const materialUnitPrice = 14.21;
-  const materialExpiryDate = '31 Dec 2025';
-
   // const multiImageMaterialNumber = '21041786';
   const otherInfoMaterialNumber = '23012375';
   const relatedProductMaterialNumber = '23008054';
@@ -155,6 +155,14 @@ void main() {
   const bonusMaterialNumberTierQty = 6;
   const bonusMaterialNumberUnitPrice = 10.60;
   const anotherMaterialNumber = '23008054';
+
+  final materialStockInfo =
+      StockInfo.empty().copyWith(expiryDate: DateTimeStringValue('2025-12-31'));
+  final bonusMaterialStockInfo = StockInfo.empty();
+  final oosPreOrderMaterialStockInfo = StockInfo.empty();
+  final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
+  final materialBatchNumber = materialStockInfo.batch.displayLabel;
+
   // TODO we do not have bundle data for extsales rep so the test is done with rootadmin
   // const bundleShortNumber = '9880081';
   // const bundleNumber = '0009880081';
@@ -1170,7 +1178,11 @@ void main() {
       productDetailRobot.verifyProductImageDisplayed();
       productDetailRobot.verifyProductFavoriteIconDisplayed();
       productDetailRobot.verifyProductNameDisplayed();
-      productDetailRobot.verifyExpiryDate(materialExpiryDate);
+      productDetailRobot.verifyExpiryDate(
+        materialExpiryDate,
+      );
+      await productDetailRobot.tapExpiryDateInfoIcon();
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
@@ -1184,6 +1196,13 @@ void main() {
           .verifyUnitOfMeasurementLabelDisplayed(materialUnitMeasurement);
       productDetailRobot
           .verifyCountryOfOriginLabelDisplayed(materialCountryOfOrigin);
+      productDetailRobot.verifyBatchDisplayed(
+        value: materialBatchNumber,
+        isVisible: false,
+      );
+      productDetailRobot.verifyExpiryDateLabelDisplayed(
+        value: materialExpiryDate,
+      );
     });
 
 // TODO We do not have multiImage material for now
@@ -1325,6 +1344,13 @@ void main() {
       cartRobot.verifyMaterialImage(materialNumber);
       cartRobot.verifyMaterialQty(materialNumber, 1);
       cartRobot.verifyMaterialDescription(materialNumber, materialName);
+      cartRobot.verifyMaterialExpiryDateAndBatch(
+        materialNumber,
+        materialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await cartRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
         materialUnitPrice.priceDisplay(currency),
@@ -1646,6 +1672,17 @@ void main() {
         bonusMaterialNumber,
         bonusMaterialName,
       );
+      cartRobot.verifyBonusItemExpiryDateAndBatch(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+        bonusMaterialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await cartRobot.tapBonusItemExpiryDateInfoIcon(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+      );
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyBonusMaterialImage(
         bonusMaterialNumber,
         bonusMaterialNumber,
@@ -1801,6 +1838,17 @@ void main() {
         bonusSampleMaterialNumber,
         bonusSampleMaterialDescription,
       );
+      cartRobot.verifyBonusItemExpiryDateAndBatch(
+        materialNumber,
+        bonusSampleMaterialNumber,
+        materialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await cartRobot.tapBonusItemExpiryDateInfoIcon(
+        materialNumber,
+        bonusSampleMaterialNumber,
+      );
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyBonusMaterialFreeLabel(
         materialNumber,
         bonusSampleMaterialNumber,
@@ -2002,6 +2050,13 @@ void main() {
       oosPreOrderRobot.verifySheet(isVisible: false);
       await cartRobot.tapCheckoutButton();
       oosPreOrderRobot.verifyMaterial(oosPreOrderMaterialNumber, qty);
+      oosPreOrderRobot.verifyExpiryDateAndBatch(
+        oosPreOrderMaterialNumber,
+        oosPreOrderMaterialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await oosPreOrderRobot.tapExpiryDateInfoIcon(oosPreOrderMaterialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       await oosPreOrderRobot.tapContinueButton();
       checkoutRobot.verifyPage();
     });
@@ -2193,6 +2248,13 @@ void main() {
       await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialQty(materialNumber, qty);
       checkoutRobot.verifyMaterialDescription(materialNumber, materialName);
+      checkoutRobot.verifyMaterialExpiryDateAndBatch(
+        materialNumber,
+        materialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await checkoutRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       checkoutRobot.verifyMaterialImage(materialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
         materialNumber,
@@ -2335,6 +2397,17 @@ void main() {
         bonusMaterialNumber,
         bonusMaterialName,
       );
+      checkoutRobot.verifyBonusMaterialExpiryDateAndBatch(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+        bonusMaterialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await checkoutRobot.tapBonusMaterialExpiryDateInfoIcon(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+      );
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       checkoutRobot.verifyBonusMaterialImage(
         bonusMaterialNumber,
         bonusMaterialNumber,

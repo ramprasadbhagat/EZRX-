@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,6 +12,8 @@ class OOSPreOrderRobot {
   final cancelButton = find.byKey(WidgetKeys.preOrderModalCancelButton);
   final continueButton = find.byKey(WidgetKeys.preOrderModalContinueButton);
   final bottomSheet = find.byKey(WidgetKeys.preOrderModel);
+  final materialDetailsStock = find.byKey(WidgetKeys.materialDetailsStock);
+  final expiryDateIcon = find.byKey(WidgetKeys.expiryDateInfoIcon);
 
   bool get isSheetVisible => bottomSheet.evaluate().isNotEmpty;
 
@@ -61,5 +64,45 @@ class OOSPreOrderRobot {
       ),
       findsOneWidget,
     );
+  }
+
+  void verifyExpiryDateAndBatch(
+    String materialNumber,
+    StockInfo stockInfo, {
+    bool isExpiryDateVisible = true,
+    bool isBatchNumberVisible = true,
+  }) {
+    final stockWidget = find.descendant(
+      of: find.byKey(WidgetKeys.preOrderMaterial(materialNumber)),
+      matching: materialDetailsStock,
+    );
+    if (!isExpiryDateVisible && !isBatchNumberVisible) {
+      expect(stockWidget, findsNothing);
+      return;
+    }
+    expect(stockWidget, findsOneWidget);
+    final richText =
+        (tester.widget<RichText>(stockWidget).text as TextSpan).toPlainText();
+    final texts = <String>[];
+    if (isBatchNumberVisible) {
+      texts.add('${'Batch:'.tr()} ${stockInfo.batch.displayLabel}');
+    }
+    if (isExpiryDateVisible) {
+      texts.add('${'EXP:'.tr()} ${stockInfo.expiryDate.dateOrNaString}');
+    }
+    final stockText = texts.join(' - ');
+    expect(richText.contains(stockText), true);
+  }
+
+  Future<void> tapExpiryDateInfoIcon(
+    String materialNumber,
+  ) async {
+    final materialExpiryDateIcon = find.descendant(
+      of: find.byKey(WidgetKeys.preOrderMaterial(materialNumber)),
+      matching: expiryDateIcon,
+    );
+    expect(materialExpiryDateIcon, findsOneWidget);
+    await tester.tap(materialExpiryDateIcon);
+    await tester.pumpAndSettle();
   }
 }
