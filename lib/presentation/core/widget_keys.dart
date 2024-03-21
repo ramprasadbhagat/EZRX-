@@ -900,7 +900,7 @@ class WidgetKeys {
   static const Key expiryDateInfoIcon = Key('expiryDateInfoIcon');
   static const Key expiryDateInstructionSheet =
       Key('expiryDateInstructionSheet');
-
+  static const Key materialAddToCartButton = Key('materialAddToCartButton');
   //============================================================
   //  bundle Details
   //============================================================
@@ -911,6 +911,7 @@ class WidgetKeys {
   static const Key addBundleInvalidQtyWarning =
       Key('addBundleInvalidQtyWarning');
   static const Key addBundleRate = Key('addBundleRate');
+  static const Key bundleAddToCartButton = Key('bundleAddToCartButton');
 
   //============================================================
   //  Payment Summary
@@ -1579,7 +1580,8 @@ class WidgetKeys {
   //  EDI banner
   //============================================================
   static const Key ediUserBanner = Key('ediUserBanner');
-  static const Key ediCustomerOrderDisableTitle = Key('ediCustomerOrderDisableTitle');
-  static const Key ediCustomerOrderDisableContent = Key('ediCustomerOrderDisableContent');
-
+  static const Key ediCustomerOrderDisableTitle =
+      Key('ediCustomerOrderDisableTitle');
+  static const Key ediCustomerOrderDisableContent =
+      Key('ediCustomerOrderDisableContent');
 }

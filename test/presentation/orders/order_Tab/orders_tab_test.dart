@@ -867,5 +867,47 @@ void main() {
         ),
       );
     });
+
+      testWidgets(
+      ' -> Find edi if customer info status is edi',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeEDICustomerCodeInfo,
+          ),
+        );
+        await tester.pumpWidget(testWidget(const OrdersTab()));
+        await tester.pump();
+
+        final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
+        final ediBannerTitle = find.text('You are an EDI customer.');
+        final ediBannerSubTitle = find.text(
+            'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',);
+        expect(ediBanner, findsOneWidget);
+        expect(ediBannerTitle, findsOneWidget);
+        expect(ediBannerSubTitle, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Not Find edi if customer info status is not edi',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        );
+        await tester.pumpWidget(testWidget(const OrdersTab()));
+        await tester.pump();
+
+        final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
+        final ediBannerTitle = find.text('You are an EDI customer.');
+        final ediBannerSubTitle = find.text(
+            'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',);
+        expect(ediBanner, findsNothing);
+        expect(ediBannerTitle, findsNothing);
+        expect(ediBannerSubTitle, findsNothing);
+      },
+    );
   });
 }

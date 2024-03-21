@@ -1090,6 +1090,56 @@ void main() {
       );
     });
 
+    testWidgets(
+      ' -> Find edi if customer info status is edi',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeEDICustomerCodeInfo,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final homeScreen = find.byKey(
+          WidgetKeys.homeScreen,
+        );
+        final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
+        final ediBannerTitle = find.text('You are an EDI customer.');
+        final ediBannerSubTitle = find.text(
+            'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',);
+        expect(homeScreen, findsOneWidget);
+        expect(ediBanner, findsOneWidget);
+        expect(ediBannerTitle, findsOneWidget);
+        expect(ediBannerSubTitle, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Not Find edi if customer info status is not edi',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final homeScreen = find.byKey(
+          WidgetKeys.homeScreen,
+        );
+        final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
+        final ediBannerTitle = find.text('You are an EDI customer.');
+        final ediBannerSubTitle = find.text(
+            'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',);
+        expect(homeScreen, findsOneWidget);
+        expect(ediBanner, findsNothing);
+        expect(ediBannerTitle, findsNothing);
+        expect(ediBannerSubTitle, findsNothing);
+      },
+    );
+
     // testWidgets(
     //   'Hide paymentsExpansionTile when enablePayments is false',
     //   (WidgetTester tester) async {

@@ -38,6 +38,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/customer_code_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -820,6 +821,69 @@ void main() {
             find.text(materialResponseMock.products[12].bundle.bundleCode);
         expect(price, findsOneWidget);
       });
+
+      testWidgets(
+        ' -> Find edi if customer info status is edi',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              customerCodeInfo: fakeEDICustomerCodeInfo,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
+          final ediBannerTitle = find.text('You are an EDI customer.');
+          final ediBannerSubTitle = find.text(
+            'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+          );
+          expect(ediBanner, findsOneWidget);
+          expect(ediBannerTitle, findsOneWidget);
+          expect(ediBannerSubTitle, findsOneWidget);
+          expect(materialDetailsAddToCartButton, findsOneWidget);
+          await tester.tap(materialDetailsAddToCartButton);
+
+          expect(
+            tester
+                .widget<ElevatedButton>(materialDetailsAddToCartButton)
+                .enabled,
+            isFalse,
+          );
+        },
+      );
+
+      testWidgets(
+        ' -> Not Find edi if customer info status is not edi',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
+          final ediBannerTitle = find.text('You are an EDI customer.');
+          final ediBannerSubTitle = find.text(
+            'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+          );
+          expect(ediBanner, findsNothing);
+          expect(ediBannerTitle, findsNothing);
+          expect(ediBannerSubTitle, findsNothing);
+
+           expect(materialDetailsAddToCartButton, findsOneWidget);
+          await tester.tap(materialDetailsAddToCartButton);
+
+          expect(
+            tester
+                .widget<ElevatedButton>(materialDetailsAddToCartButton)
+                .enabled,
+            isTrue,
+          );
+        },
+      );
     },
   );
 }

@@ -2162,5 +2162,79 @@ void main() {
           .toPlainText();
       expect(batchExpiryDate, contains('Batch NA (EXP: NA)'));
     });
+
+    testWidgets(
+      ' -> Find edi if customer info status is edi',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeEDICustomerCodeInfo,
+          ),
+        );
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem:
+                fakeOrderHistoryItem.copyWith(orderType: DocumentType('ZPVF')),
+            orderHistory: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
+            user: fakeClientUser,
+            customerCodeInfo: fakeEDICustomerCodeInfo,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
+        final ediBannerTitle = find.text('You are an EDI customer.');
+        final ediBannerSubTitle = find.text(
+          'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+        );
+        expect(ediBanner, findsOneWidget);
+        expect(ediBannerTitle, findsOneWidget);
+        expect(ediBannerSubTitle, findsOneWidget);
+
+        final buyAgainButton =
+            find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+        expect(buyAgainButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Not Find edi if customer info status is not edi',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        );
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem:
+                fakeOrderHistoryItem.copyWith(orderType: DocumentType('ZPVF')),
+            orderHistory: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
+            user: fakeClientUser,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
+        final ediBannerTitle = find.text('You are an EDI customer.');
+        final ediBannerSubTitle = find.text(
+          'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+        );
+        expect(ediBanner, findsNothing);
+        expect(ediBannerTitle, findsNothing);
+        expect(ediBannerSubTitle, findsNothing);
+
+        final buyAgainButton =
+            find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+        expect(buyAgainButton, findsOneWidget);
+      },
+    );
   });
 }

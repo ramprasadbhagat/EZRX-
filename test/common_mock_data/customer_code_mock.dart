@@ -50,3 +50,6 @@ final fakeBlockedCustomerCodeInfo = CustomerCodeInfo.empty()
 
 final fakeBlockedShipToInfo =
     ShipToInfo.empty().copyWith(status: Status('Z1 - Suspended Customer'));
+    
+final fakeEDICustomerCodeInfo =
+    CustomerCodeInfo.empty().copyWith(status: Status('EDI'));

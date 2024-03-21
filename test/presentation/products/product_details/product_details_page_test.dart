@@ -2785,6 +2785,102 @@ void main() {
             findsNothing,
           );
         });
+
+        testWidgets(
+          ' -> Find edi if customer info status is edi',
+          (WidgetTester tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial().copyWith(
+                customerCodeInfo: fakeEDICustomerCodeInfo,
+              ),
+            );
+            when(() => productDetailMockBloc.state).thenReturn(
+              ProductDetailState.initial().copyWith(
+                productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                  materialInfo: materialInfo,
+                  stockInfo: StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('Yes'),
+                  ),
+                ),
+              ),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pump();
+
+            final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
+            final ediBannerTitle = find.text('You are an EDI customer.');
+            final ediBannerSubTitle = find.text(
+              'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+            );
+
+            expect(ediBanner, findsOneWidget);
+            expect(ediBannerTitle, findsOneWidget);
+            expect(ediBannerSubTitle, findsOneWidget);
+
+            final addToCartButton = find.byType(ElevatedButton);
+            expect(addToCartButton, findsOneWidget);
+            await tester.tap(addToCartButton);
+            expect(
+              tester.widget<ElevatedButton>(addToCartButton).enabled,
+              isFalse,
+            );
+          },
+        );
+
+        testWidgets(
+          ' -> Not Find edi if customer info status is not edi',
+          (WidgetTester tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial().copyWith(
+                customerCodeInfo: fakeCustomerCodeInfo,
+                salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                  materialWithoutPrice: true,
+                  addOosMaterials: OosMaterial(true),
+                  oosValue: OosValue(1),
+                ),
+              ),
+            );
+            when(() => materialPriceMockBloc.state).thenReturn(
+              MaterialPriceState.initial().copyWith(
+                materialPrice: {materialInfo.materialNumber: materialPrice},
+              ),
+            );
+            when(() => productDetailMockBloc.state).thenReturn(
+              ProductDetailState.initial().copyWith(
+                productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                  materialInfo: materialInfo.copyWith(
+                    quantity: MaterialQty(2),
+                  ),
+                  stockInfo: StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('true'),
+                  ),
+                ),
+                inputQty: 2,
+              ),
+            );
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pump();
+
+            final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
+            final ediBannerTitle = find.text('You are an EDI customer.');
+            final ediBannerSubTitle = find.text(
+              'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+            );
+
+            expect(ediBanner, findsNothing);
+            expect(ediBannerTitle, findsNothing);
+            expect(ediBannerSubTitle, findsNothing);
+
+            final addToCartButton = find.byType(ElevatedButton);
+            expect(addToCartButton, findsOneWidget);
+            await tester.tap(addToCartButton);
+            expect(
+              tester.widget<ElevatedButton>(addToCartButton).enabled,
+              isTrue,
+            );
+          },
+        );
       });
     },
   );
