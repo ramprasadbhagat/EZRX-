@@ -27,9 +27,7 @@ class BuyAgainButton extends StatelessWidget {
               );
 
           state.apiFailureOrSuccessOption.fold(
-            () {
-              context.router.pushNamed('orders/cart');
-            },
+            () {},
             (either) => either.fold(
               (failure) {
                 ErrorUtils.handleReorderFailure(context, failure);
@@ -61,6 +59,7 @@ class BuyAgainButton extends StatelessWidget {
                         counterOfferDetails: RequestCounterOfferDetails.empty(),
                       ),
                     );
+                context.router.push(const CartPageRoute());
               },
               (either) => either.fold(
                 (failure) {

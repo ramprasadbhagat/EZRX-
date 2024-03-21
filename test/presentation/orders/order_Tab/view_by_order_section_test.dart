@@ -383,7 +383,7 @@ void main() {
         () => autoRouterMock.currentPath,
       ).thenAnswer((invocation) => 'orders/view_by_order_details_page');
       when(
-        () => autoRouterMock.pushNamed('orders/cart'),
+        () => autoRouterMock.push(const CartPageRoute()),
       ).thenAnswer((invocation) => Future(() => null));
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
@@ -408,7 +408,7 @@ void main() {
         ),
       ).called(1);
       verify(
-        () => autoRouterMock.pushNamed('orders/cart'),
+        () => autoRouterMock.push(const CartPageRoute()),
       ).called(1);
     });
 
