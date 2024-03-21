@@ -38,6 +38,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
@@ -1219,6 +1220,42 @@ void main() {
           dateTextFinder.data,
           '${'Payment date'.tr()}: ${paymentDate.dateOrNaString}',
         );
+      },
+    );
+
+    testWidgets(
+      ' -> Find Account Suspended Banner when Customer Code is blocked',
+      (WidgetTester tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeBlockedCustomerCodeInfo,
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final customerBlockedBanner =
+            find.byKey(WidgetKeys.customerBlockedBanner);
+
+        expect(customerBlockedBanner, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Find Account Suspended Banner when ship to Code is blocked',
+      (WidgetTester tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            shipToInfo: fakeBlockedShipToInfo,
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final customerBlockedBanner =
+            find.byKey(WidgetKeys.customerBlockedBanner);
+
+        expect(customerBlockedBanner, findsOneWidget);
       },
     );
   });

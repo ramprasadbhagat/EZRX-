@@ -776,6 +776,42 @@ void main() {
       );
 
       testWidgets(
+        ' -> Find Account Suspended Banner when Customer Code is blocked',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              customerCodeInfo: fakeBlockedCustomerCodeInfo,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final customerBlockedBanner =
+              find.byKey(WidgetKeys.customerBlockedBanner);
+
+          expect(customerBlockedBanner, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        ' -> Find Account Suspended Banner when ship to Code is blocked',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              shipToInfo: fakeBlockedShipToInfo,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final customerBlockedBanner =
+              find.byKey(WidgetKeys.customerBlockedBanner);
+
+          expect(customerBlockedBanner, findsOneWidget);
+        },
+      );
+
+      testWidgets(
         '=> Test full bundle code displayed ',
         (tester) async {
           when(() => materialListBlocMock.state).thenReturn(

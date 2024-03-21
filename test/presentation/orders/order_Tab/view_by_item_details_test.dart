@@ -401,6 +401,80 @@ void main() {
       expect(combinationCode, findsNothing);
     });
 
+    testWidgets(
+        'test isAccountSuspended banner and buy again button is disabled when ship to code is blocked',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
+          shipToInfo: fakeBlockedShipToInfo,
+        ),
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final customerBlockedBanner =
+          find.byKey(WidgetKeys.customerBlockedBanner);
+
+      expect(customerBlockedBanner, findsOneWidget);
+      final button = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+      await tester.tap(button);
+      verifyNever(
+        () => reOrderPermissionBlocMock.add(
+          ReOrderPermissionEvent.fetchItem(
+            orderHistoryDetail: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
+            item: fakeOrderHistoryItem,
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'test isAccountSuspended banner and buy again button is disabled when customer code is blocked',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
+          customerCodeInfo: fakeBlockedCustomerCodeInfo,
+        ),
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final customerBlockedBanner =
+          find.byKey(WidgetKeys.customerBlockedBanner);
+
+      expect(customerBlockedBanner, findsOneWidget);
+      final button = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+      await tester.tap(button);
+      verifyNever(
+        () => reOrderPermissionBlocMock.add(
+          ReOrderPermissionEvent.fetchItem(
+            orderHistoryDetail: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
+            item: fakeOrderHistoryItem,
+          ),
+        ),
+      );
+    });
+
     testWidgets('When disableDeliveryDate is false', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(

@@ -1143,6 +1143,54 @@ void main() {
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
+        final customerBlockedBanner =
+            find.byKey(WidgetKeys.customerBlockedBanner);
+
+        expect(customerBlockedBanner, findsOneWidget);
+        final addToCartButton =
+            find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        verifyNever(
+          () => cartMockBloc.add(
+            CartEvent.upsertCart(
+              priceAggregate: PriceAggregate.empty().copyWith(
+                materialInfo: materialInfo,
+                salesOrgConfig: fakeVNSalesOrgConfigs,
+                quantity: 1,
+              ),
+            ),
+          ),
+        );
+      });
+
+      testWidgets(
+          'test add to cart button disabled when ship to code is blocked',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('Yes'),
+              ),
+            ),
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            shipToInfo: fakeBlockedShipToInfo,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final customerBlockedBanner =
+            find.byKey(WidgetKeys.customerBlockedBanner);
+
+        expect(customerBlockedBanner, findsOneWidget);
         final addToCartButton =
             find.byKey(WidgetKeys.materialDetailsAddToCartButton);
         expect(addToCartButton, findsOneWidget);

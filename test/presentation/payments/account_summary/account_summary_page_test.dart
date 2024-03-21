@@ -30,6 +30,7 @@ import 'package:ezrxmobile/presentation/payments/account_summary/account_summary
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class AnnouncementBlocMock
@@ -621,5 +622,41 @@ void main() {
       ).called(1);
       expect(find.byType(FullSummaryFilterBottomSheet), findsOneWidget);
     });
+
+    testWidgets(
+      ' -> Find Account Suspended Banner when Customer Code is blocked',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeBlockedCustomerCodeInfo,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final customerBlockedBanner =
+            find.byKey(WidgetKeys.customerBlockedBanner);
+
+        expect(customerBlockedBanner, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Find Account Suspended Banner when ship to Code is blocked',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            shipToInfo: fakeBlockedShipToInfo,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final customerBlockedBanner =
+            find.byKey(WidgetKeys.customerBlockedBanner);
+
+        expect(customerBlockedBanner, findsOneWidget);
+      },
+    );
   });
 }

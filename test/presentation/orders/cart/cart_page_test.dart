@@ -917,6 +917,17 @@ void main() {
             ),
           ),
         );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: mockCartItems,
+            customerCodeInfo: fakeBlockedCustomerCodeInfo,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: mockCartItems,
+          ),
+        );
         await tester.pumpWidget(getWidget());
 
         await tester.pump();
@@ -942,6 +953,14 @@ void main() {
             ),
           ),
           findsOneWidget,
+        );
+        final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+        expect(checkoutButton, findsOneWidget);
+        await tester.tap(checkoutButton);
+        verifyNever(
+          () => orderEligibilityBlocMock.add(
+            const OrderEligibilityEvent.validateOrderEligibility(),
+          ),
         );
       });
 

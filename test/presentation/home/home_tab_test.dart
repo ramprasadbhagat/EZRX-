@@ -997,6 +997,22 @@ void main() {
           expect(find.byType(ExploreMarketPlaceBanner), findsOneWidget);
         });
 
+        testWidgets(
+            'Find Account suspended banner when CustomerCodeInfo is blocked',
+            (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              customerCodeInfo: fakeBlockedCustomerCodeInfo,
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+
+          await tester.pump();
+          final accountSuspendedBanner =
+              find.byKey(WidgetKeys.customerBlockedBanner);
+          expect(accountSuspendedBanner, findsOneWidget);
+        });
+
         testWidgets('Not visible when can not access marketplace',
             (tester) async {
           when(() => eligibilityBlocMock.state).thenReturn(
@@ -1042,9 +1058,7 @@ void main() {
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-            status: Status('01'),
-          ),
+          shipToInfo: fakeBlockedShipToInfo,
         ),
       );
       await tester.pumpWidget(getWidget());
