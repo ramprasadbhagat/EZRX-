@@ -71,12 +71,14 @@ parameters:
   - name: device_name 
     type: string 
     displayName: Test Device
-    default: 'Samsung Galaxy S23-13.0'
+    default: 'Google Pixel 8 Pro-14.0'
     values:
+      - 'Google Pixel 8 Pro-14.0'
       - 'Google Pixel 6-12.0'
       - 'Samsung Galaxy S23-13.0'
-      - 'OnePlus 9-11.0'
       - 'Samsung Galaxy S21 Plus-11.0'
+      - 'OnePlus 9-11.0'
+      
 
   - name: build_pool 
     displayName: Build Pool
