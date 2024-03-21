@@ -17,6 +17,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
@@ -60,6 +61,7 @@ class OrdersTab extends StatelessWidget {
           ),
           body: Column(
             children: [
+              const EdiUserBanner(),
               AnnouncementWidget(
                 currentPath: context.router.currentPath,
               ),

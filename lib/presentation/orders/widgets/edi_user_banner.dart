@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,17 +17,31 @@ class EdiUserBanner extends StatelessWidget {
         return state.customerCodeInfo.status.isEDI
             ? Container(
                 key: WidgetKeys.ediUserBanner,
-                height: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.orange.withOpacity(0.8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                decoration: const BoxDecoration(
+                  color: ZPColors.customerBlockedBannerColor,
                 ),
-                child: Text(
-                  'Orders for EDI Customers are disabled. Please place orders through EDI'
-                      .tr(),
-                  textAlign: TextAlign.center,
-                  key: const Key('ediCustomerOrderDisable'),
-                  style: Theme.of(context).textTheme.titleSmall,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      context.tr('You are an EDI customer.'),
+                      key: WidgetKeys.ediCustomerOrderDisableTitle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      context.tr(
+                        'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+                      ),
+                      key: WidgetKeys.ediCustomerOrderDisableContent,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ],
                 ),
               )
             : const SizedBox.shrink();

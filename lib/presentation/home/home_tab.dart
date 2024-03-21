@@ -15,6 +15,7 @@ import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
 
@@ -50,6 +51,9 @@ class HomeTab extends StatelessWidget {
             ],
             customerBlockedOrSuspended: state.customerBlockOrSuspended,
             isSearchBarVisible: state.user.userCanAccessProducts,
+            boxShadowColor: state.disableCreateOrder
+                ? ZPColors.customerBlockedBannerColor
+                : ZPColors.white,
           ),
           //SingleChildScrollView and Column is needed
           //as the ListView is rebuilding the BrowseProduct & BundleSection

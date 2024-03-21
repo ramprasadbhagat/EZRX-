@@ -63,6 +63,10 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
       return false;
     }
 
+    if (customerCodeInfo.status.isEDI) {
+      return false;
+    }
+
     return true;
   }
 }

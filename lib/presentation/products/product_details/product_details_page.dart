@@ -33,6 +33,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section_for_covid.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/available_offer.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_details.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
@@ -183,6 +184,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           key: WidgetKeys.scrollList,
           controller: _scrollController,
           children: [
+            const EdiUserBanner(),
             const _ProductImageSection(),
             const _BodyContent(),
             _SimilarProducts(),

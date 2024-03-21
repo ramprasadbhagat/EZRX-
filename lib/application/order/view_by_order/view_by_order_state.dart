@@ -38,6 +38,9 @@ class ViewByOrderState with _$ViewByOrderState {
     if (user.disableCreateOrder) {
       return false;
     }
+    if (customerCodeInfo.status.isEDI) {
+      return false;
+    }
     final isCovidOrderType =
         (salesOrgConfigs.salesOrg.isPH && type.isCovidOrderTypeForPH) ||
             (salesOrgConfigs.salesOrg.isSg && type.isCovidOrderTypeForSG);

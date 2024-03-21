@@ -51,6 +51,9 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
     if (user.disableCreateOrder) {
       return false;
     }
+    if (customerCodeInfo.status.isEDI) {
+      return false;
+    }
     final isCovidOrderType = (configs.salesOrg.isPH &&
             orderHistoryDetails.type.isCovidOrderTypeForPH) ||
         (configs.salesOrg.isSg &&

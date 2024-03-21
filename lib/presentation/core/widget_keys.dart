@@ -111,7 +111,6 @@ class WidgetKeys {
 
   static const Key homeTabBar = Key('homeTabBar');
   static const Key homeTab = Key('homeTab');
-  static const Key ediUserBanner = Key('ediUserBanner');
   static const Key productsTab = Key('productsTab');
   static const Key ordersTab = Key('ordersTab');
   static const Key notificationTab = Key('notificationTab');
@@ -1575,4 +1574,12 @@ class WidgetKeys {
   static const Key privacyCheckBox = Key('privacyCheckBox');
   static const Key tncDialogAcceptButton = Key('auptcAcceptButton');
   static const Key tncDialogCancelButton = Key('tncDialogCancelButton');
+
+  //============================================================
+  //  EDI banner
+  //============================================================
+  static const Key ediUserBanner = Key('ediUserBanner');
+  static const Key ediCustomerOrderDisableTitle = Key('ediCustomerOrderDisableTitle');
+  static const Key ediCustomerOrderDisableContent = Key('ediCustomerOrderDisableContent');
+
 }

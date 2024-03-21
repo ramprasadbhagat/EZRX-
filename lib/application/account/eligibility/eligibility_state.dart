@@ -270,8 +270,7 @@ class EligibilityState with _$EligibilityState {
   bool get isNotificationSettingsEnable =>
       user.userCanAccessOrderHistory || isPaymentEnabled || isReturnsEnable;
 
-  bool get disableCreateOrder =>
-      !user.userCanCreateOrder || customerBlockOrSuspended;
+  bool get disableCreateOrder => !user.userCanCreateOrder || customerBlockOrSuspended || isEDI;
 
   bool get showMaterialDescInMandarin =>
       salesOrg.isTW && user.preferredLanguage.isMandarin;
@@ -323,6 +322,8 @@ class EligibilityState with _$EligibilityState {
 
   bool get customerBlockOrSuspended =>
       isAccountSuspended || shipToInfo.customerBlock.isCustomerBlocked;
+
+  bool get isEDI => customerCodeInfo.status.isEDI;
 
   String get productManufacturerFilterTitle =>
       marketPlaceEligible ? 'Manufacturers & Sellers' : 'Manufacturer';

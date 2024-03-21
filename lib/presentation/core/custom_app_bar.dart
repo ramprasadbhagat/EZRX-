@@ -19,6 +19,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final double appBarHeight;
   final double titleSpacing;
   final double? toolBarHeight;
+  final Color? boxShadowColor;
 
   final List<Widget> actionWidget;
   final Widget? title;
@@ -36,6 +37,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     this.leadingWidget,
     this.leadingWidth,
     this.toolBarHeight,
+    this.boxShadowColor,
   }) : super(key: key);
 
   factory CustomAppBar.homeTabAppBar({
@@ -43,6 +45,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     required bool customerBlockedOrSuspended,
     required bool isSearchBarVisible,
     required List<Widget> actionWidget,
+    required Color boxShadowColor,
   }) =>
       CustomAppBar._(
         title: title,
@@ -54,6 +57,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         centreTitle: false,
         titleSpacing: 0,
         appBarHeight: customerBlockedOrSuspended ? 195.0 : 121.0,
+        boxShadowColor: boxShadowColor,
       );
 
   factory CustomAppBar.commonAppBar({
@@ -121,6 +125,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             if (isSearchBarVisible)
               _HomeProductSearchBar(
                 isCustomerBlocked: customerBlockedOrSuspended,
+                boxShadowColor: boxShadowColor,
               ),
             _CustomerBlockedBanner(
               isCustomerBlocked: customerBlockedOrSuspended,

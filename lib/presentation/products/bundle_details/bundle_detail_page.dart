@@ -18,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_add_to_cart_sheet.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_material_descriptions_sheet.dart';
 import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
@@ -123,6 +124,7 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
         body: ListView(
           controller: _scrollController,
           children: [
+            const EdiUserBanner(),
             const _BundleImageSection(),
             Align(
               alignment: Alignment.topLeft,
@@ -407,7 +409,11 @@ class _AddToCartButton extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     key: WidgetKeys.materialDetailsAddToCartButton,
-                    onPressed: state.isDetailAndStockFetching
+                    onPressed: state.isDetailAndStockFetching ||
+                            context
+                                .read<EligibilityBloc>()
+                                .state
+                                .disableCreateOrder
                         ? null
                         : () {
                             final bundle = context
