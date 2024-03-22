@@ -86,7 +86,12 @@ class _ViewByOrder extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      '${viewByOrderHistoryItem.itemCount} ${context.tr('items')}',
+                      context.tr(
+                        '{qty} items',
+                        namedArgs: {
+                          'qty': viewByOrderHistoryItem.itemCount.toString(),
+                        },
+                      ),
                       key: WidgetKeys.viewByOrdersQtyLabelKey,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
@@ -104,9 +109,9 @@ class _ViewByOrder extends StatelessWidget {
               ),
             ),
             if (context
-                    .read<ViewByOrderBloc>()
-                    .state
-                    .displayBuyAgainButton(viewByOrderHistoryItem.type))
+                .read<ViewByOrderBloc>()
+                .state
+                .displayBuyAgainButton(viewByOrderHistoryItem.type))
               BuyAgainButton(
                 viewByOrderHistoryItem: viewByOrderHistoryItem,
                 key: WidgetKeys.viewByOrderBuyAgainButtonKey,

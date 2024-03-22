@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -225,7 +226,7 @@ void main() {
       await tester.pump();
 
       final materials = find.text(
-        '2 items',
+        '{qty} items'.tr(namedArgs: {'qty': '2'}),
       );
       expect(materials, findsOneWidget);
     });

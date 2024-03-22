@@ -516,7 +516,8 @@ extension ComboDealSchemeExt on ComboDealScheme {
       case ComboDealScheme.k21:
       case ComboDealScheme.k3:
       case ComboDealScheme.k5:
-        return '$totalUnit ${context.tr('items')}';
+        return context
+            .tr('{qty} items', namedArgs: {'qty': totalUnit.toString()});
       case ComboDealScheme.k22:
       case ComboDealScheme.k4:
       case ComboDealScheme.k42:
