@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -6,7 +7,6 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/presentation/core/regexes.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -150,6 +150,9 @@ class _WebviewBodyState extends State<_WebviewBody> {
         crossPlatform: InAppWebViewOptions(
           javaScriptCanOpenWindowsAutomatically: true,
           supportZoom: false,
+          useShouldOverrideUrlLoading: true,
+          cacheEnabled: false,
+          clearCache: true,
         ),
       ),
       initialUrlRequest: URLRequest(
@@ -158,8 +161,19 @@ class _WebviewBodyState extends State<_WebviewBody> {
           mimeType: 'text/html',
         ),
       ),
+      shouldOverrideUrlLoading: (controller, navigationAction) async {
+        //TODO: Will POC the issue on IOS first, can take a look to enhancement later after we find a 90% to reproduce issue
+
+        if (Platform.isIOS) {
+          await _onPaymentSuccessCallBack(controller);
+        }
+
+        return NavigationActionPolicy.ALLOW;
+      },
       onLoadStop: (controller, url) async {
-        await _onPaymentSuccessCallBack(controller);
+        if (Platform.isAndroid) {
+          await _onPaymentSuccessCallBack(controller);
+        }
 
         if (widget.isTH) {
           await _initMobileViewport(controller);
@@ -175,7 +189,7 @@ class _WebviewBodyState extends State<_WebviewBody> {
     final router = context.router;
     final uri = await controller.getUrl();
 
-    if (uri != null && ZPRegexes.hyperlinkRegExp.hasMatch(uri.toString())) {
+    if (uri != null) {
       final isPaymentSuccess = uri.path.contains('my-account/thankyou');
       trackMixpanelEvent(
         MixpanelEvents.paymentGatewayWebviewLoaded,
