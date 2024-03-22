@@ -1,6 +1,12 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/core/regexes.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -166,11 +172,31 @@ class _WebviewBodyState extends State<_WebviewBody> {
   Future<void> _onPaymentSuccessCallBack(
     InAppWebViewController controller,
   ) async {
+    final router = context.router;
     final uri = await controller.getUrl();
-    if (uri != null && uri.path.contains('my-account/thankyou')) {
-      if (mounted) {
-        await context.router.pop(
-          uri,
+
+    if (uri != null && ZPRegexes.hyperlinkRegExp.hasMatch(uri.toString())) {
+      final isPaymentSuccess = uri.path.contains('my-account/thankyou');
+      trackMixpanelEvent(
+        MixpanelEvents.paymentGatewayWebviewLoaded,
+        props: {
+          MixpanelProps.paymentGatewayRedirectUrl: uri.toString(),
+          MixpanelProps.market:
+              _newPaymentState.salesOrganisation.salesOrg.country,
+          MixpanelProps.paymentGatewayzzHtmcs:
+              _newPaymentState.customerPaymentInfo.zzHtmcs,
+          MixpanelProps.username:
+              _newPaymentState.user.fullName.displayFullName,
+          MixpanelProps.paymentAdviseId:
+              _newPaymentState.paymentInvoiceInfoPdf.zzAdvice,
+          MixpanelProps.paymentGatewaySuccess: isPaymentSuccess,
+        },
+      );
+      if (isPaymentSuccess) {
+        unawaited(
+          router.pop(
+            uri,
+          ),
         );
       }
     }

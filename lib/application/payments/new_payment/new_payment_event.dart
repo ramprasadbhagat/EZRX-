@@ -47,12 +47,11 @@ class NewPaymentEvent with _$NewPaymentEvent {
     required NewPaymentMethod paymentMethodSelected,
   }) = _UpdatePaymentMethodSelected;
 
-    const factory NewPaymentEvent.updatePaymentMethodOptionSelected({
+  const factory NewPaymentEvent.updatePaymentMethodOptionSelected({
     required PaymentMethodOption paymentMethodOptionSelected,
   }) = _UpdatePaymentMethodOptionSelected;
 
-    const factory NewPaymentEvent.createVirtualAccount() = _CreateVirtualAccount;
+  const factory NewPaymentEvent.createVirtualAccount() = _CreateVirtualAccount;
 
-    const factory NewPaymentEvent.getPrincipalCutoffs() = _GetPrincipalCutoffs;
-
+  const factory NewPaymentEvent.getPrincipalCutoffs() = _GetPrincipalCutoffs;
 }

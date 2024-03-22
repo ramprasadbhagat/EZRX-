@@ -59,4 +59,7 @@ class MixpanelProps {
   static String paymentMethod = 'payment_method';
   static String paymentAdviseId = 'payment_advice_id';
   static String paymentDocumentCount = 'document_count';
+  static String paymentGatewayRedirectUrl = 'payment_gateway_redirect_url';
+  static String paymentGatewayzzHtmcs = 'payment_gateway_zzhtmcs';
+  static String paymentGatewaySuccess = 'payment_gateway_success';
 }
