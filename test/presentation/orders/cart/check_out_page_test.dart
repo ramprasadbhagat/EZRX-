@@ -1475,45 +1475,85 @@ void main() {
       (tester) async {
         when(() => additionalDetailsBlocMock.state).thenReturn(
           AdditionalDetailsState.initial().copyWith(
-            isValidated: true,
+            showErrorMessages: true,
           ),
         );
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            isSubmitting: true,
-          ),
+        whenListen(
+          additionalDetailsBlocMock,
+          Stream.fromIterable([
+            AdditionalDetailsState.initial().copyWith(
+              showErrorMessages: false,
+            ),
+            AdditionalDetailsState.initial().copyWith(
+              showErrorMessages: true,
+            ),
+          ]),
         );
+
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
             configs: fakeVNSalesOrgConfigs,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrganisation: fakeVNSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeVNSalesOrgConfigs,
-            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final customerContactPersonKey =
+            find.byKey(const Key('contactPersonKey'));
+        final customerContactNumber =
+            find.byKey(WidgetKeys.internationalPhoneNumberInput);
+        expect(customerContactPersonKey, findsOneWidget);
+        expect(customerContactNumber, findsOneWidget);
+        expect(
+          find.descendant(
+            of: customerContactPersonKey,
+            matching: find.text('Contact person is a required field'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: customerContactNumber,
+            matching: find.text('Mobile number is a required field'),
+          ),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      '=> test Contact Person in place Order when EnableMobileNumber is false ',
+      (tester) async {
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeTWSalesOrgConfigs,
+            salesOrganisation: fakeTWSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
+            salesOrganisation: fakeTWSalesOrganisation,
           ),
         );
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
 
-        final placeOrder = find.text('Place order');
-        expect(placeOrder, findsOneWidget);
-        await tester.tap(placeOrder);
-        await tester.pump();
-
         final customerContactPersonKey =
             find.byKey(const Key('contactPersonKey'));
-        expect(customerContactPersonKey, findsOneWidget);
-
-        expect(
-          (tester.widget(customerContactPersonKey) as TextFormField)
-              .validator
-              ?.call('ContactPerson field'),
-          'Contact person is a required field',
-        );
+        final customerContactNumber =
+            find.byKey(WidgetKeys.internationalPhoneNumberInput);
+        expect(customerContactPersonKey, findsNothing);
+        expect(customerContactNumber, findsNothing);
       },
     );
     testWidgets(
