@@ -718,6 +718,7 @@ class WidgetKeys {
   static const Key quantityAndPrice = Key('quantityAndPrice');
   static const Key productImageSection = Key('productImageSection');
   static const Key bonusProductDetail = Key('bonusProductDetail');
+  static Key promotionLabel(String materialNumber) => Key('promotionLabel$materialNumber'); 
 
   //============================================================
   //  Material List

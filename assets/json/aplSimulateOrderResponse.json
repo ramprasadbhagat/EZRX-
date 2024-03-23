@@ -18,7 +18,7 @@
           "netValue": 5734000,
           "promotions": [
             { "discountValue": -5, "discountTypeValue": "%" },
-            { "discountValue": -10, "discountTypeValue": "%" }
+            { "discountValue": -10, "discountTypeValue": "IDR" }
           ]
         },
         {

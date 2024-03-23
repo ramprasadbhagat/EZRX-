@@ -19,6 +19,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
@@ -37,6 +38,7 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
@@ -94,6 +96,7 @@ void main() {
   late OrderHistory fakeOrderHistory;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late List<OrderHistoryDetails> fakeOrderHistoryList;
+  late AplSimulatorOrder aplSimulatorOrderMock;
 
   setUpAll(
     () async {
@@ -116,6 +119,7 @@ void main() {
       );
       fakeOrderHistoryList = await ViewByOrderDetailsLocalDataSource()
           .getOrderHistoryDetailsList();
+      aplSimulatorOrderMock = await CartLocalDataSource().aplSimulateOrder();
     },
   );
 
@@ -2248,6 +2252,122 @@ void main() {
           find.descendant(of: mpOrderNumbers, matching: orderId),
           findsNWidgets(zpOrderHistoryList.length),
         );
+      });
+
+      testWidgets(
+          'Show Promotional label for ID market if promotional data is notEmpty',
+          (tester) async {
+        final scrollList = find.byKey(WidgetKeys.scrollList);
+
+        final cartItem = PriceAggregate.empty().copyWith(
+          salesOrgConfig: fakeIDSalesOrgConfigs,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000003353621001'),
+            type: MaterialInfoType.material(),
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItem],
+            aplSimulatorOrder: aplSimulatorOrderMock,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderNumber: OrderNumber('Fake-Order-Number'),
+                orderHistoryDetailsOrderItem: [
+                  fakeMaterialItem.copyWith(
+                    material: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('000000003353621001'),
+                    ),
+                    priceAggregate: cartItem,
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final promotionTextFinder = find.byKey(
+          WidgetKeys.promotionLabel(cartItem.getMaterialNumber.getValue()),
+        );
+        await tester.dragUntilVisible(
+          promotionTextFinder,
+          scrollList,
+          const Offset(0, -300),
+        );
+
+        expect(promotionTextFinder, findsOneWidget);
+
+        expect(
+          find.text(
+            '5.0% discount,IDR 10.0 offer applied',
+            findRichText: true,
+          ),
+          findsOneWidget,
+        );
+      });
+      testWidgets(
+          'Hide Promotional label for ID market if promotional data is empty',
+          (tester) async {
+        final cartItem = PriceAggregate.empty().copyWith(
+          salesOrgConfig: fakeIDSalesOrgConfigs,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000003353621001'),
+            type: MaterialInfoType.material(),
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItem],
+            aplSimulatorOrder: AplSimulatorOrder.empty(),
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderNumber: OrderNumber('Fake-Order-Number'),
+                orderHistoryDetailsOrderItem: [
+                  fakeMaterialItem.copyWith(
+                    material: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('000000003353621001'),
+                    ),
+                    priceAggregate: cartItem,
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final promotionTextFinder = find.byKey(
+          WidgetKeys.promotionLabel(cartItem.getMaterialNumber.getValue()),
+        );
+
+        expect(promotionTextFinder, findsNothing);
       });
     });
   });

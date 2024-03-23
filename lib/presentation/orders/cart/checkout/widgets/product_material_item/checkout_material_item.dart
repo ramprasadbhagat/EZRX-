@@ -192,8 +192,10 @@ class _ProductDetails extends StatelessWidget {
                     color: ZPColors.extraLightGrey4,
                     fontStyle: FontStyle.italic,
                   ),
+              key: WidgetKeys.promotionLabel(
+                cartItem.getMaterialNumber.getValue(),
+              ),
             ),
-
           if (cartItem.price.isCounterOfferRequested)
             Text(
               context.tr('Requested counter offer'),

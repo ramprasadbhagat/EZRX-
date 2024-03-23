@@ -3,9 +3,11 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
@@ -44,6 +46,7 @@ void main() {
       materialDescription: 'fake-description',
     ),
   );
+  late AplSimulatorOrder aplSimulatorOrderMock;
 
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
@@ -56,6 +59,7 @@ void main() {
         .thenReturn(EligibilityState.initial());
     when(() => materialPriceBlocMock.state)
         .thenReturn(MaterialPriceState.initial());
+    aplSimulatorOrderMock = await CartLocalDataSource().aplSimulateOrder();
   });
 
   Widget getScopedWidget(PriceAggregate material) {
@@ -232,6 +236,60 @@ void main() {
       await tester.pumpWidget(getScopedWidget(fakeMaterial));
       await tester.pump();
       expect(find.byKey(WidgetKeys.materialDetailsStock), findsOneWidget);
+    });
+
+    testWidgets('=> Show promotion label when AplPromotion is notEmpty',
+        (tester) async {
+      final cartItem = PriceAggregate.empty().copyWith(
+        salesOrgConfig: fakeIDSalesOrgConfigs,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('000000003353621001'),
+          type: MaterialInfoType('material'),
+        ),
+      );
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(
+          aplSimulatorOrder: aplSimulatorOrderMock,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(cartItem));
+      await tester.pump();
+      final promotionTextFinder = find.byKey(
+        WidgetKeys.promotionLabel(cartItem.getMaterialNumber.getValue()),
+      );
+
+      expect(promotionTextFinder, findsOneWidget);
+
+      expect(
+        find.text(
+          '5.0% discount,IDR 10.0 offer applied',
+          findRichText: true,
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('=> Hide promotion label when AplPromotion is empty',
+        (tester) async {
+      final cartItem = PriceAggregate.empty().copyWith(
+        salesOrgConfig: fakeIDSalesOrgConfigs,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('000000003353621001'),
+          type: MaterialInfoType('material'),
+        ),
+      );
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(
+          aplSimulatorOrder: AplSimulatorOrder.empty(),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(cartItem));
+      await tester.pump();
+      final promotionTextFinder = find.byKey(
+        WidgetKeys.promotionLabel(cartItem.getMaterialNumber.getValue()),
+      );
+
+      expect(promotionTextFinder, findsNothing);
     });
   });
 }

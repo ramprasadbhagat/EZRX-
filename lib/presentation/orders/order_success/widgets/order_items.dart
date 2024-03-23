@@ -111,6 +111,8 @@ class _MaterialItem extends StatelessWidget {
                           color: ZPColors.extraLightGrey4,
                           fontStyle: FontStyle.italic,
                         ),
+                    key: WidgetKeys.promotionLabel(
+                        orderItem.priceAggregate.getMaterialNumber.getValue(),),
                   ),
               ],
             )
