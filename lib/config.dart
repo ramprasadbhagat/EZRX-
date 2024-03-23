@@ -187,7 +187,7 @@ class Config {
   String get staticStyleCss {
     return '''
       var style = document.createElement('style');
-      style.innerHTML = 'body { padding: 4rem !important; padding-top: 2rem !important; text-align: left !important; }';
+      style.innerHTML = 'body { padding: 1rem !important; padding-top: 2rem !important; text-align: left !important; }';
       document.head.appendChild(style);
     ''';
   }
