@@ -74,18 +74,18 @@ PODS:
   - Firebase/RemoteConfig (10.18.0):
     - Firebase/CoreOnly
     - FirebaseRemoteConfig (~> 10.18.0)
-  - firebase_analytics (10.8.0):
+  - firebase_analytics (10.7.4):
     - Firebase/Analytics (= 10.18.0)
     - firebase_core
     - Flutter
   - firebase_core (2.24.2):
     - Firebase/CoreOnly (= 10.18.0)
     - Flutter
-  - firebase_crashlytics (3.4.9):
+  - firebase_crashlytics (3.4.8):
     - Firebase/Crashlytics (= 10.18.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (14.7.10):
+  - firebase_messaging (14.7.9):
     - Firebase/Messaging (= 10.18.0)
     - firebase_core
     - Flutter
@@ -97,7 +97,7 @@ PODS:
     - Firebase/RemoteConfig (= 10.18.0)
     - firebase_core
     - Flutter
-  - FirebaseABTesting (10.22.0):
+  - FirebaseABTesting (10.23.0):
     - FirebaseCore (~> 10.0)
   - FirebaseAnalytics (10.18.0):
     - FirebaseAnalytics/AdIdSupport (= 10.18.0)
@@ -121,9 +121,9 @@ PODS:
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.12)
     - GoogleUtilities/Logger (~> 7.12)
-  - FirebaseCoreExtension (10.22.0):
+  - FirebaseCoreExtension (10.23.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseCoreInternal (10.22.0):
+  - FirebaseCoreInternal (10.23.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - FirebaseCrashlytics (10.18.0):
     - FirebaseCore (~> 10.5)
@@ -133,7 +133,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (~> 2.1)
-  - FirebaseInstallations (10.22.0):
+  - FirebaseInstallations (10.23.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
@@ -164,7 +164,7 @@ PODS:
     - FirebaseSharedSwift (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseSessions (10.22.0):
+  - FirebaseSessions (10.23.0):
     - FirebaseCore (~> 10.5)
     - FirebaseCoreExtension (~> 10.0)
     - FirebaseInstallations (~> 10.0)
@@ -172,7 +172,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.10)
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
-  - FirebaseSharedSwift (10.22.0)
+  - FirebaseSharedSwift (10.23.0)
   - Flutter (1.0.0)
   - flutter_inappwebview (0.0.1):
     - Flutter
@@ -267,11 +267,11 @@ PODS:
   - okta_oidc (0.0.1):
     - Flutter
     - OktaOidc
-  - OktaOidc (3.11.2):
-    - OktaOidc/AppAuth (= 3.11.2)
-    - OktaOidc/Okta (= 3.11.2)
-  - OktaOidc/AppAuth (3.11.2)
-  - OktaOidc/Okta (3.11.2):
+  - OktaOidc (3.11.4):
+    - OktaOidc/AppAuth (= 3.11.4)
+    - OktaOidc/Okta (= 3.11.4)
+  - OktaOidc/AppAuth (3.11.4)
+  - OktaOidc/Okta (3.11.4):
     - OktaOidc/AppAuth
   - open_file_safe (0.0.1):
     - Flutter
@@ -283,11 +283,11 @@ PODS:
     - FlutterMacOS
   - permission_handler_apple (9.1.1):
     - Flutter
-  - PhoneNumberKit (3.7.9):
-    - PhoneNumberKit/PhoneNumberKitCore (= 3.7.9)
-    - PhoneNumberKit/UIKit (= 3.7.9)
-  - PhoneNumberKit/PhoneNumberKitCore (3.7.9)
-  - PhoneNumberKit/UIKit (3.7.9):
+  - PhoneNumberKit (3.7.10):
+    - PhoneNumberKit/PhoneNumberKitCore (= 3.7.10)
+    - PhoneNumberKit/UIKit (= 3.7.10)
+  - PhoneNumberKit/PhoneNumberKitCore (3.7.10)
+  - PhoneNumberKit/UIKit (3.7.10):
     - PhoneNumberKit/PhoneNumberKitCore
   - PLCrashReporter (1.11.1)
   - printing (1.0.0):
@@ -295,22 +295,22 @@ PODS:
   - PromisesObjC (2.4.0)
   - PromisesSwift (2.4.0):
     - PromisesObjC (= 2.4.0)
-  - ReachabilitySwift (5.0.0)
-  - scandit-datacapture-frameworks-barcode (6.22.0):
-    - scandit-datacapture-frameworks-core (= 6.22.0)
-    - ScanditBarcodeCapture (= 6.22.0)
-  - scandit-datacapture-frameworks-core (6.22.0):
-    - ScanditCaptureCore (= 6.22.0)
-  - scandit_flutter_datacapture_barcode (6.22.0):
+  - ReachabilitySwift (5.2.1)
+  - scandit-datacapture-frameworks-barcode (6.23.0):
+    - scandit-datacapture-frameworks-core (= 6.23.0)
+    - ScanditBarcodeCapture (= 6.23.0)
+  - scandit-datacapture-frameworks-core (6.23.0):
+    - ScanditCaptureCore (= 6.23.0)
+  - scandit_flutter_datacapture_barcode (6.23.0):
     - Flutter
-    - scandit-datacapture-frameworks-barcode (= 6.22.0)
-    - scandit_flutter_datacapture_core (= 6.22.0)
-  - scandit_flutter_datacapture_core (6.22.0):
+    - scandit-datacapture-frameworks-barcode (= 6.23.0)
+    - scandit_flutter_datacapture_core (= 6.23.0)
+  - scandit_flutter_datacapture_core (6.23.0):
     - Flutter
-    - scandit-datacapture-frameworks-core (= 6.22.0)
-  - ScanditBarcodeCapture (6.22.0):
-    - ScanditCaptureCore (= 6.22.0)
-  - ScanditCaptureCore (6.22.0)
+    - scandit-datacapture-frameworks-core (= 6.23.0)
+  - ScanditBarcodeCapture (6.23.0):
+    - ScanditCaptureCore (= 6.23.0)
+  - ScanditCaptureCore (6.23.0)
   - SDWebImage (5.19.0):
     - SDWebImage/Core (= 5.19.0)
   - SDWebImage/Core (5.19.0)
@@ -505,24 +505,24 @@ SPEC CHECKSUMS:
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: ce3938a0df3cc1ef404671531facef740d03f920
   Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
-  firebase_analytics: b3d6dd14c61549a29abb10e9843446a4d8bb53eb
+  firebase_analytics: 88c111412070acc2b05c1734151f58824f3db657
   firebase_core: 0af4a2b24f62071f9bf283691c0ee41556dcb3f5
-  firebase_crashlytics: 4b91b8ad60ee7c168fe88979f84c9573a729de7a
-  firebase_messaging: 90e8a6db84b6e1e876cebce4f30f01dc495e7014
+  firebase_crashlytics: 55714f63ae0973c54b3a721c451ae5f815086c1f
+  firebase_messaging: 875385354f623750aa03204a028d640108bc3412
   firebase_performance: 2183122a3c7a650c80d8c164e9e28f13c4c62fc7
   firebase_remote_config: 14ad7a3c99810d373ba1ad4a754a8cf26c91d476
-  FirebaseABTesting: 66d2594b36d4ff6e7d3c8719802100990de05857
+  FirebaseABTesting: aec61ed9a34d85a95e2013a3fdf051426a2419df
   FirebaseAnalytics: 4d310b35c48eaa4a058ddc04bdca6bdb5dc0fe80
   FirebaseCore: 2322423314d92f946219c8791674d2f3345b598f
-  FirebaseCoreExtension: 6394c00b887d0bebadbc7049c464aa0cbddc5d41
-  FirebaseCoreInternal: bca337352024b18424a61e478460547d46c4c753
+  FirebaseCoreExtension: cb88851781a24e031d1b58e0bd01eb1f46b044b5
+  FirebaseCoreInternal: 6a292e6f0bece1243a737e81556e56e5e19282e3
   FirebaseCrashlytics: 86d5bce01f42fa1db265f87ff1d591f04db610ec
-  FirebaseInstallations: 763814908793c0da14c18b3dcffdec71e29ed55e
+  FirebaseInstallations: 42d6ead4605d6eafb3b6683674e80e18eb6f2c35
   FirebaseMessaging: 9bc34a98d2e0237e1b121915120d4d48ddcf301e
   FirebasePerformance: c406a9198d8aabfbac281b42855f5122fc1bcf69
   FirebaseRemoteConfig: bbd42790a4e84fde6aab7eae810b608e7b5c0bf6
-  FirebaseSessions: cd97fb07674f3906619c871eefbd260a1546c9d3
-  FirebaseSharedSwift: 48076404e6e52372290d15a07d2ed1d2f1754023
+  FirebaseSessions: f06853e30f99fe42aa511014d7ee6c8c319f08a3
+  FirebaseSharedSwift: c92645b392db3c41a83a0aa967de16f8bad25568
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_inappwebview: 3d32228f1304635e7c028b0d4252937730bbc6cf
   flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
@@ -540,24 +540,24 @@ SPEC CHECKSUMS:
   mixpanel_flutter: ed1e5eaea382cbbaf655d20e23478211727ee011
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
   okta_oidc: bc6da484c380ea7f036b55db794a49ea7ea8153f
-  OktaOidc: 15fb3d494103d4f07ba8a523b3347d02c4d30486
+  OktaOidc: 228d072054d326cfb358b76af3cce8ba760a1f7d
   open_file_safe: 84c01ac91378bd9166ab570d7f22f4fb3532141a
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
-  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
+  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
-  PhoneNumberKit: 9c8d546d65c3784721d575a29e712ae8b992fe79
+  PhoneNumberKit: 3d9a20cfe8ee68f35c2a3ae9474093133f72a8a1
   PLCrashReporter: 5d2d3967afe0efad61b3048d617e2199a5d1b787
   printing: 233e1b73bd1f4a05615548e9b5a324c98588640b
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
-  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  scandit-datacapture-frameworks-barcode: 75bbdeec8fa4654fe2047cef74bf7d7fdffbe5f6
-  scandit-datacapture-frameworks-core: 2574f741ebf4eb3a9edcc5590c63c1bf4b8bec37
-  scandit_flutter_datacapture_barcode: 2a199e9c7c85be792c1243dd0af9acc25056ae0a
-  scandit_flutter_datacapture_core: 91164384f771d2e9d8380b7fe606015ba3109002
-  ScanditBarcodeCapture: d1211bcb452db573cd6cd8df713ed36a8f86499a
-  ScanditCaptureCore: baecd3df7bc8accbd626eb03a2f272d67507fe05
+  ReachabilitySwift: 5ae15e16814b5f9ef568963fb2c87aeb49158c66
+  scandit-datacapture-frameworks-barcode: 762ca89631c6ebad39439f8951696f0d13629571
+  scandit-datacapture-frameworks-core: d119afdbda94c92c62a384da357f2beb4f1fe740
+  scandit_flutter_datacapture_barcode: aadfdf309fa2597970698ddec1d17af7ce97669e
+  scandit_flutter_datacapture_core: e33f040ec849d59614cdc74f32305264e83097d0
+  ScanditBarcodeCapture: a008ad5b2fcf6b119ee28bb023578bbdf04bec72
+  ScanditCaptureCore: 220aef28ae511600d0db7516991c5f489f50e5f9
   SDWebImage: 981fd7e860af070920f249fd092420006014c3eb
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
@@ -571,4 +571,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 180d60dd70b55c2916d8f6b9c8a5fc5866f7196c
 
-COCOAPODS: 1.15.0
+COCOAPODS: 1.15.2

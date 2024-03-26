@@ -47,6 +47,7 @@ final appThemeData = {
     dividerTheme: _dividerTheme(),
     chipTheme: _chipTheme(),
     listTileTheme: _listTileTheme(),
+    datePickerTheme: _datePickerTheme(),
   ),
   AppTheme.dark: ThemeData.dark().copyWith(),
 };
@@ -449,5 +450,13 @@ ListTileThemeData _listTileTheme() {
   return const ListTileThemeData(
     iconColor: ZPColors.primary,
     textColor: ZPColors.primary,
+  );
+}
+
+DatePickerThemeData _datePickerTheme() {
+  return const DatePickerThemeData(
+    dayForegroundColor: MaterialStatePropertyAll(ZPColors.white),
+    rangeSelectionBackgroundColor: ZPColors.extraLightGray,
+    surfaceTintColor: ZPColors.extraLightGray,
   );
 }

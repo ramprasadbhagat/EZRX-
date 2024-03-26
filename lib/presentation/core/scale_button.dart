@@ -51,7 +51,7 @@ class _ScaleButtonState extends State<ScaleButton> {
           heroTag: UniqueKey(),
           extendedPadding: const EdgeInsets.only(left: 12, right: 12),
           backgroundColor: ZPColors.orange,
-          shape: isExpanded ? null : const CircleBorder(),
+          shape: isExpanded ? const StadiumBorder() : const CircleBorder(),
           onPressed: widget.onPress,
           label: AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),

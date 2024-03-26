@@ -145,6 +145,7 @@ class _CustomTabBarState extends State<_CustomTabBar>
                   controller: tabController,
                   key: WidgetKeys.homeTabBar,
                   indicator: _TopIndicator(),
+                  dividerColor: Colors.transparent,
                   onTap: (index) {
                     _currentPage = widget.routes.routeList[index];
                     tabsRouter.setActiveIndex(index);
