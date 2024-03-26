@@ -25,4 +25,11 @@ class MarketPlaceLogo extends StatelessWidget {
       height: 18,
     );
   }
+
+  factory MarketPlaceLogo.medium() {
+    return const MarketPlaceLogo(
+      width: 20,
+      height: 20,
+    );
+  }
 }

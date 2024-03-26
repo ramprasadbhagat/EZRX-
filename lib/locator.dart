@@ -2807,6 +2807,7 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       query: locator<ReturnRequestQuery>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
   locator.registerLazySingleton(
@@ -2818,6 +2819,7 @@ void setupLocator() {
       deviceInfo: locator<DeviceInfo>(),
       filePickerService: locator<FilePickerService>(),
       fileSystemHelper: locator<FileSystemHelper>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
   locator.registerLazySingleton(

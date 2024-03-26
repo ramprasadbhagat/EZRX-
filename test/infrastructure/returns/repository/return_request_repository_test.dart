@@ -19,6 +19,7 @@ import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/add_request_params_dto.dart';
@@ -32,6 +33,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 
@@ -62,6 +64,8 @@ void main() {
   late PermissionService permissionServiceMock;
   late FilePickerService filePickerServiceMock;
   late FileSystemHelper fileSystemHelperMock;
+  late DeviceStorage deviceStorageMock;
+  const mockMarket = 'mockMarket';
   const pageSizeMock = 10;
   const offsetMock = 0;
   final requestParamsMock = ReturnMaterialsParams(
@@ -113,7 +117,9 @@ void main() {
       permissionServiceMock = PermissionServiceMock();
       filePickerServiceMock = FilePickerServiceMock();
       fileSystemHelperMock = FileSystemHelperMock();
+      deviceStorageMock = DeviceStorageMock();
       locator.registerLazySingleton(() => configMock);
+      when(() => deviceStorageMock.currentMarket()).thenReturn(mockMarket);
       repository = ReturnRequestRepository(
         config: configMock,
         localDataSource: localDataSourceMock,
@@ -122,6 +128,7 @@ void main() {
         permissionService: permissionServiceMock,
         filePickerService: filePickerServiceMock,
         fileSystemHelper: fileSystemHelperMock,
+        deviceStorage: deviceStorageMock,
       );
     },
   );
@@ -167,6 +174,7 @@ void main() {
                   ReturnMaterialsParamsDto.fromDomain(requestParamsMock)
                       .copyWith(username: '')
                       .toMap(),
+              market: mockMarket,
             ),
           ).thenAnswer(
             (_) async => ReturnMaterialList.empty(),
@@ -188,6 +196,7 @@ void main() {
                   ReturnMaterialsParamsDto.fromDomain(requestParamsMock)
                       .copyWith(username: '')
                       .toMap(),
+              market: mockMarket,
             ),
           ).thenThrow(errorMock);
           final result = await repository.searchReturnMaterials(

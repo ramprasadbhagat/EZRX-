@@ -732,7 +732,10 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           final cardFinder = find.byKey(WidgetKeys.returnReviewItemKey);
-          expect(cardFinder, findsNWidgets(2));
+          expect(
+            cardFinder,
+            findsNWidgets(fakeReturnMaterialList.items.length),
+          );
           expect(
             find.descendant(
               of: cardFinder.first,
@@ -760,7 +763,10 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           final cardFinder = find.byKey(WidgetKeys.returnReviewItemKey);
-          expect(cardFinder, findsNWidgets(2));
+          expect(
+            cardFinder,
+            findsNWidgets(fakeReturnMaterialList.items.length),
+          );
           expect(
             find.descendant(
               of: cardFinder.first,

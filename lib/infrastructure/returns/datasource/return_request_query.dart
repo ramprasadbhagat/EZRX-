@@ -1,5 +1,5 @@
 class ReturnRequestQuery {
-  String searchReturnMaterials() {
+  String searchReturnMaterials(bool enableMarketplace) {
     return '''
       fragment MaterialsFields on returnMaterialInformation {
         item {
@@ -18,6 +18,7 @@ class ReturnRequestQuery {
           expiryDate
           itemNumber
           outsidePolicy
+          ${enableMarketplace ? 'isMarketPlace' : ''}
           bonusItem {
             assignmentNumber
             material
@@ -33,6 +34,7 @@ class ReturnRequestQuery {
             expiryDate
             itemNumber
             outsidePolicy
+            ${enableMarketplace ? 'isMarketPlace' : ''}
           }
         }
       }
@@ -56,7 +58,7 @@ class ReturnRequestQuery {
     ''';
   }
 
-  String searchReturnMaterialsForSalesRep() {
+  String searchReturnMaterialsForSalesRep(bool enableMarketplace) {
     return '''
       fragment MaterialsFields on returnMaterialInformation {
         item {
@@ -83,6 +85,7 @@ class ReturnRequestQuery {
           principalName
           expiryDate
           eligibleForReturn
+          ${enableMarketplace ? 'isMarketPlace' : ''}
           schedules {
             scheduledLine
             requestDate
@@ -123,6 +126,7 @@ class ReturnRequestQuery {
             principalName
             expiryDate
             eligibleForReturn
+            ${enableMarketplace ? 'isMarketPlace' : ''}
             schedules {
               scheduledLine
               requestDate

@@ -1079,6 +1079,8 @@ class WidgetKeys {
   static const Key returnItemsFilter = Key('returnItemsFilter');
   static const Key invalidSelectedReturnItemError =
       Key('invalidSelectedReturnItemError');
+  static const Key invalidSelectedReturnItemErrorMsg =
+      Key('invalidSelectedReturnItemErrorMsg');
   static const Key toggleIncludeBonusButton = Key('toggleIncludeBonusButton');
   static const Key returnDetailsSectionKey = Key('returnDetailsSection');
   static const Key returnReviewTabBodyKey = Key('returnReviewTabBody');

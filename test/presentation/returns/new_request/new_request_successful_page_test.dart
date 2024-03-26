@@ -389,7 +389,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final cardFinder = find.byKey(WidgetKeys.returnSuccessfulItemKey);
-        expect(cardFinder, findsNWidgets(2));
+        expect(cardFinder, findsNWidgets(fakeListMaterial.items.length));
         expect(
           find.descendant(
             of: cardFinder.first,
@@ -417,7 +417,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final cardFinder = find.byKey(WidgetKeys.returnSuccessfulItemKey);
-        expect(cardFinder, findsNWidgets(2));
+        expect(cardFinder, findsNWidgets(fakeListMaterial.items.length));
         expect(
           find.descendant(
             of: cardFinder.first,

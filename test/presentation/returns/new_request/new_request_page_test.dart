@@ -222,9 +222,9 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-      final invalidSelectedReturnItemError =
-          find.byKey(WidgetKeys.invalidSelectedReturnItemError);
-      expect(invalidSelectedReturnItemError, findsNothing);
+      final invalidSelectedReturnItemErrorMsg =
+          find.byKey(WidgetKeys.invalidSelectedReturnItemErrorMsg);
+      expect(invalidSelectedReturnItemErrorMsg, findsNothing);
     });
     testWidgets(' => rebuild widget when selectedItems is different',
         (WidgetTester tester) async {
@@ -250,9 +250,9 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-      final invalidSelectedReturnItemError =
-          find.byKey(WidgetKeys.invalidSelectedReturnItemError);
-      expect(invalidSelectedReturnItemError, findsNothing);
+      final invalidSelectedReturnItemErrorMsg =
+          find.byKey(WidgetKeys.invalidSelectedReturnItemErrorMsg);
+      expect(invalidSelectedReturnItemErrorMsg, findsNothing);
     });
     testWidgets('=> show the SummaryInfo when press Return for',
         (tester) async {

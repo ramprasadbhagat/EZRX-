@@ -156,7 +156,7 @@ class NewRequestPage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                     '${context.tr('Subtotal (excl.tax)')} :',
+                                      '${context.tr('Subtotal (excl.tax)')} :',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall!
@@ -183,13 +183,17 @@ class NewRequestPage extends StatelessWidget {
                                 visible: step == 1 && state.showErrorMessages,
                               ),
                               _AttentionWidget(
-                                widgetKey:
-                                    WidgetKeys.invalidSelectedReturnItemError,
-                                message:
-                                    'Please ensure that the items selected for return are from the same Principal.'
-                                        .tr(),
-                                visible:
-                                    step == 1 && !state.isSelectedItemsValid,
+                                key: WidgetKeys.invalidSelectedReturnItemError,
+                                widgetKey: WidgetKeys
+                                    .invalidSelectedReturnItemErrorMsg,
+                                message: context.tr(
+                                  context
+                                      .read<EligibilityBloc>()
+                                      .state
+                                      .invalidSelectedReturnItemMsg,
+                                ),
+                                visible: step == 1 &&
+                                    state.areSelectedReturnItemsInvalid,
                               ),
                               if (step == 1)
                                 Text(
@@ -229,9 +233,9 @@ class NewRequestPage extends StatelessWidget {
                                   if (step == 1)
                                     _NextButton(
                                       tabController: tabController,
-                                      nextAllowed:
-                                          state.selectedItems.isNotEmpty &&
-                                              state.isSelectedItemsValid,
+                                      nextAllowed: state
+                                              .selectedItems.isNotEmpty &&
+                                          !state.areSelectedReturnItemsInvalid,
                                     ),
                                   if (step == 2)
                                     _NextButton(

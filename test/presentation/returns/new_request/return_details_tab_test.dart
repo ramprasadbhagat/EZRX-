@@ -984,7 +984,7 @@ void main() {
       expect(
         find.byKey(
           WidgetKeys.balanceTextRow(
-            'Principal code',
+            fakeReturnMaterial.isMarketPlace ? 'Seller code' : 'Principal code',
             fakeReturnMaterial.principalCode.getOrDefaultValue(''),
           ),
         ),
@@ -993,7 +993,7 @@ void main() {
       expect(
         find.byKey(
           WidgetKeys.balanceTextRow(
-            'Principal name',
+            fakeReturnMaterial.isMarketPlace ? 'Seller name' : 'Principal name',
             fakeReturnMaterial.principalName.name,
           ),
         ),

@@ -1,14 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_item_price.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class MaterialInfoWidget extends StatelessWidget {
+  final bool showMpLogo;
+
   const MaterialInfoWidget({
     Key? key,
     required this.data,
+    this.showMpLogo = false,
     this.showBatchExp = true,
   }) : super(key: key);
 
@@ -24,10 +28,20 @@ class MaterialInfoWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            data.materialNumber.displayMatNo,
-            style: Theme.of(context).textTheme.titleSmall,
-            key: WidgetKeys.itemMaterialNumberKey,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (data.isMarketPlace && showMpLogo)
+                Padding(
+                  padding: const EdgeInsets.only(right: 5.0),
+                  child: MarketPlaceLogo.medium(),
+                ),
+              Text(
+                data.materialNumber.displayMatNo,
+                style: Theme.of(context).textTheme.bodyMedium,
+                key: WidgetKeys.itemMaterialNumberKey,
+              ),
+            ],
           ),
           Text(
             data.materialDescription,

@@ -28,6 +28,8 @@ _$_ReturnMaterialDto _$$_ReturnMaterialDtoFromJson(Map<String, dynamic> json) =>
           [],
       outsidePolicy: json['outsidePolicy'] as bool? ?? false,
       targetQuantity: json['targetQuantity'] as String? ?? '',
+      isMarketPlace:
+          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_ReturnMaterialDtoToJson(
@@ -49,4 +51,5 @@ Map<String, dynamic> _$$_ReturnMaterialDtoToJson(
       'bonusItem': instance.bonusItems.map((e) => e.toJson()).toList(),
       'outsidePolicy': instance.outsidePolicy,
       'targetQuantity': instance.targetQuantity,
+      'isMarketPlace': instance.isMarketPlace,
     };

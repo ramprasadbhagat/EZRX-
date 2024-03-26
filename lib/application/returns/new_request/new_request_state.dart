@@ -27,10 +27,17 @@ class NewRequestState with _$NewRequestState {
         salesOrg: SalesOrg(''),
       );
 
-  bool get isSelectedItemsValid =>
+  bool get _areItemsFromSamePrincipal =>
       salesOrg.isSg ||
       selectedItems.every(
         (item) => selectedItems.first.principalCode == item.principalCode,
+      );
+
+  bool get areSelectedReturnItemsInvalid =>
+      _areItemsFromBothZPAndMP || !_areItemsFromSamePrincipal;
+
+  bool get _areItemsFromBothZPAndMP => !selectedItems.every(
+        (item) => selectedItems.first.isMarketPlace == item.isMarketPlace,
       );
 
   bool get isAdditionInfoValid =>

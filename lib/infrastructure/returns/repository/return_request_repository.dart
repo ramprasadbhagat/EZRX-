@@ -10,6 +10,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_materials_params.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_materials_params_dto.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_request_repository.dart';
@@ -36,6 +37,7 @@ class ReturnRequestRepository extends IReturnRequestRepository {
   final PermissionService permissionService;
   final FilePickerService filePickerService;
   final FileSystemHelper fileSystemHelper;
+  final DeviceStorage deviceStorage;
 
   ReturnRequestRepository({
     required this.config,
@@ -45,6 +47,7 @@ class ReturnRequestRepository extends IReturnRequestRepository {
     required this.permissionService,
     required this.filePickerService,
     required this.fileSystemHelper,
+    required this.deviceStorage,
   });
 
   @override
@@ -75,9 +78,11 @@ class ReturnRequestRepository extends IReturnRequestRepository {
       final returnRequest = requestParams.user.role.type.isSalesRepRole
           ? await remoteDataSource.searchReturnMaterialsForSalesRep(
               requestParams: returnParameters,
+              market: deviceStorage.currentMarket(),
             )
           : await remoteDataSource.searchReturnMaterials(
               requestParams: returnParameters,
+              market: deviceStorage.currentMarket(),
             );
 
       return Right(returnRequest);

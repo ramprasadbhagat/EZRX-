@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_material_list_dto.dart';
@@ -18,19 +19,24 @@ class ReturnRequestRemoteDataSource {
   ReturnRequestQuery query;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
+  final RemoteConfigService remoteConfigService;
 
   ReturnRequestRemoteDataSource({
     required this.httpService,
     required this.query,
     required this.dataSourceExceptionHandler,
     required this.config,
+    required this.remoteConfigService,
   });
 
   Future<ReturnMaterialList> searchReturnMaterials({
     required Map<String, dynamic> requestParams,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = query.searchReturnMaterials();
+      final queryData = query.searchReturnMaterials(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
       final variables = {
         'searchReturnMaterialsRequestV2': requestParams,
       };
@@ -55,9 +61,12 @@ class ReturnRequestRemoteDataSource {
 
   Future<ReturnMaterialList> searchReturnMaterialsForSalesRep({
     required Map<String, dynamic> requestParams,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = query.searchReturnMaterialsForSalesRep();
+      final queryData = query.searchReturnMaterialsForSalesRep(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
       final variables = {
         'searchReturnMaterialsForSalesRepRequest': requestParams,
       };

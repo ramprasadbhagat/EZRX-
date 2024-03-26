@@ -16,19 +16,19 @@ class MaterialDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpandableInfo(
-      labelText: 'Material details'.tr(),
+      labelText: context.tr('Material details'),
       expandable: expandable,
       child: Column(
         children: [
           BalanceTextRow(
-            keyText: 'Principal code'.tr(),
+            keyText: context.tr(data.displayPrincipalOrSellerCode),
             keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,
             valueFlex: 3,
             valueText: data.principalCode.getOrDefaultValue(''),
           ),
           BalanceTextRow(
-            keyText: 'Principal name'.tr(),
+            keyText: context.tr(data.displayPrincipalOrSellerName),
             keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,
             valueFlex: 3,
@@ -42,7 +42,7 @@ class MaterialDetailsSection extends StatelessWidget {
             valueText: data.assignmentNumber,
           ),
           BalanceTextRow(
-            keyText: 'Invoice date'.tr(),
+            keyText: context.tr('Invoice date'),
             keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,
             valueFlex: 3,

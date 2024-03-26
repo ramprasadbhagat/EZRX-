@@ -270,7 +270,8 @@ class EligibilityState with _$EligibilityState {
   bool get isNotificationSettingsEnable =>
       user.userCanAccessOrderHistory || isPaymentEnabled || isReturnsEnable;
 
-  bool get disableCreateOrder => !user.userCanCreateOrder || customerBlockOrSuspended || isEDI;
+  bool get disableCreateOrder =>
+      !user.userCanCreateOrder || customerBlockOrSuspended || isEDI;
 
   bool get showMaterialDescInMandarin =>
       salesOrg.isTW && user.preferredLanguage.isMandarin;
@@ -340,4 +341,8 @@ class EligibilityState with _$EligibilityState {
 
     return isLoadShipToSuccess || isSelectNewShipTo || isSelectNewLanguage;
   }
+
+  String get invalidSelectedReturnItemMsg => marketPlaceEligible
+      ? 'Please note that ZP and MP products cannot be returned together. Additionally, MP products must be from the same seller in each request.'
+      : 'Please ensure that the items selected for return are from the same Principal.';
 }

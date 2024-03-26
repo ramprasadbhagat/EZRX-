@@ -42,7 +42,10 @@ class _ReturnMaterialInfo extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: MaterialInfoWidget(data: data),
+                child: MaterialInfoWidget(
+                  data: data,
+                  showMpLogo: true,
+                ),
               ),
             ],
           ),

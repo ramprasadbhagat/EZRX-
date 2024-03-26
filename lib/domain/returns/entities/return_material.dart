@@ -29,6 +29,7 @@ class ReturnMaterial with _$ReturnMaterial {
     required DateTimeStringValue priceDate,
     required bool outsidePolicy,
     required List<ReturnMaterial> bonusItems,
+    required bool isMarketPlace,
   }) = _ReturnMaterial;
 
   factory ReturnMaterial.empty() => ReturnMaterial(
@@ -48,6 +49,7 @@ class ReturnMaterial with _$ReturnMaterial {
         priceDate: DateTimeStringValue(''),
         bonusItems: <ReturnMaterial>[],
         outsidePolicy: false,
+        isMarketPlace: false,
       );
 
   String get uuid => '$assignmentNumber$itemNumber';
@@ -60,6 +62,12 @@ class ReturnMaterial with _$ReturnMaterial {
 
   bool displayOutSidePolicy(bool allowReturnsOutsidePolicy) =>
       outsidePolicy && allowReturnsOutsidePolicy;
+
+  String get displayPrincipalOrSellerCode =>
+      isMarketPlace ? 'Seller code' : 'Principal code';
+
+  String get displayPrincipalOrSellerName =>
+      isMarketPlace ? 'Seller name' : 'Principal name';
 
   ReturnItemDetails get validatedItemDetails =>
       ReturnItemDetails.empty().copyWith(
