@@ -237,7 +237,7 @@ void main() {
         outstandingInvoicesBlocMock,
         Stream.fromIterable([
           OutstandingInvoicesState.initial().copyWith(isLoading: true),
-          OutstandingInvoicesState.initial()
+          OutstandingInvoicesState.initial(),
         ]),
       );
       await tester.pumpWidget(getWidget());

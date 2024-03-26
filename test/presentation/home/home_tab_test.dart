@@ -377,7 +377,7 @@ void main() {
                 type: RoleType('client_user'),
               ),
               userSalesOrganisations: [
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001'))
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001')),
               ],
             ),
             customerCodeInfo: fakeCustomerCodeInfo,
@@ -413,7 +413,7 @@ void main() {
           () => salesOrgBlocMock.add(
             SalesOrgEvent.loadSavedOrganisation(
               salesOrganisations: [
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001'))
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001')),
               ],
             ),
           ),
@@ -963,7 +963,7 @@ void main() {
               notificationData: [
                 notifications.notificationData.first.copyWith(
                   isRead: true,
-                )
+                ),
               ],
             ),
           ),

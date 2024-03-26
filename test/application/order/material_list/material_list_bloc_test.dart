@@ -458,7 +458,7 @@ void main() {
                 24,
                 (index) => materialResponseMock.products.first,
               ),
-              ...materialResponseMock.products.skip(20).toList()
+              ...materialResponseMock.products.skip(20).toList(),
             ],
             canLoadMore: false,
             nextPageIndex: 2,
@@ -470,7 +470,7 @@ void main() {
                 24,
                 (index) => materialResponseMock.products.first,
               ),
-              ...materialResponseMock.products.skip(20).toList()
+              ...materialResponseMock.products.skip(20).toList(),
             ],
             canLoadMore: false,
             nextPageIndex: 2,
@@ -654,7 +654,7 @@ void main() {
       ),
       seed: () => MaterialListState.initial().copyWith(
         materialList: [
-          materialResponseMock.products.first.copyWith(isFavourite: true)
+          materialResponseMock.products.first.copyWith(isFavourite: true),
         ],
       ),
       act: (MaterialListBloc bloc) =>
@@ -664,7 +664,7 @@ void main() {
           (_) => Stream.fromIterable(
             [
               materialResponseMock.products.first,
-              materialResponseMock.products.first.copyWith(isFavourite: true)
+              materialResponseMock.products.first.copyWith(isFavourite: true),
             ],
           ),
         );
@@ -675,9 +675,9 @@ void main() {
         ),
         MaterialListState.initial().copyWith(
           materialList: [
-            materialResponseMock.products.first.copyWith(isFavourite: true)
+            materialResponseMock.products.first.copyWith(isFavourite: true),
           ],
-        )
+        ),
       ],
     );
 
@@ -690,7 +690,7 @@ void main() {
       ),
       seed: () => MaterialListState.initial().copyWith(
         materialList: [
-          materialResponseMock.products.first.copyWith(isFavourite: true)
+          materialResponseMock.products.first.copyWith(isFavourite: true),
         ],
       ),
       act: (MaterialListBloc bloc) => bloc.add(
@@ -714,7 +714,7 @@ void main() {
       ),
       seed: () => MaterialListState.initial().copyWith(
         materialList: [
-          materialResponseMock.products.first.copyWith(isFavourite: true)
+          materialResponseMock.products.first.copyWith(isFavourite: true),
         ],
       ),
       act: (MaterialListBloc bloc) => bloc.add(

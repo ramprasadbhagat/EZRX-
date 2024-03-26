@@ -12,7 +12,7 @@ void main() {
         'username': 'test-name',
         'companyName': 'test-name',
         'PurchaseOrderType': fakePurchaseOrderType,
-        'customer': <String, dynamic>{}
+        'customer': <String, dynamic>{},
       };
     });
     test('Test toDomain', () {

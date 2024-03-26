@@ -171,6 +171,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
           },
           '\n',
         );
+        
         return message.toString();
       case 'TW':
         message.writeAll(
@@ -181,6 +182,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
           },
           '\n',
         );
+
         return message.toString();
       case 'PH':
         message.writeAll(
@@ -190,6 +192,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
           },
           '\n',
         );
+
         return message.toString();
       default:
         message.writeAll(
@@ -199,6 +202,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
           },
           '\n',
         );
+
         return message.toString();
     }
   }

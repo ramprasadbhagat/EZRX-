@@ -57,8 +57,8 @@ class HomeNavigationTabbar extends StatelessWidget {
         },
         buildWhen: (previous, current) => previous.user != current.user,
         builder: (context, state) {
-          return WillPopScope(
-            onWillPop: () async => false,
+          return PopScope(
+            canPop: false,
             child: _CustomTabBar(
               routes: _getTabs(state),
             ),

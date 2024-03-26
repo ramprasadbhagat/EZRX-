@@ -95,7 +95,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-        )
+        ),
       ],
     );
 
@@ -127,7 +127,7 @@ void main() {
         PaymentCustomerInformationState.initial().copyWith(
           paymentCustomerInformation: paymentCustomerInformationMockData,
           paymentCustomerInformationFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 

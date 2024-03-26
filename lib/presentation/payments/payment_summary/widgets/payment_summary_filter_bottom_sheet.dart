@@ -88,8 +88,8 @@ class _PaymentSummaryFilterBottomSheet extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                children: const [
+              const Row(
+                children: [
                   _PaymentSummaryResetButton(),
                   SizedBox(
                     width: 12,

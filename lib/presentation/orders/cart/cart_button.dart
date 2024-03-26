@@ -51,7 +51,7 @@ class CartButton extends StatelessWidget {
                 showBadge: state.cartProducts.isNotEmpty,
                 elevation: 0,
                 position:
-                    bd.BadgePosition.topEnd(top: positionTop ?? 0, end: 3),
+                    bd.BadgePosition.topEnd(top: positionTop ?? -5, end: 3),
                 animationType: bd.BadgeAnimationType.fade,
                 child: Container(
                   height: size,

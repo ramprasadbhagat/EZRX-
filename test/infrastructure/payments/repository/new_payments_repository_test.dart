@@ -64,13 +64,13 @@ void main() {
   final customerOpenItemsList = [
     CustomerOpenItem.empty().copyWith(
       documentReferenceID: StringValue('fake-id'),
-    )
+    ),
   ];
   final paymentInfo = PaymentInfo.empty();
   final customerOpenItems = [
     CustomerOpenItem.empty().copyWith(
       amountInTransactionCurrency: 5,
-    )
+    ),
   ];
   const fakeUserName = 'fakeUser';
   const fakeDebitCreditCode = 'S';
@@ -977,7 +977,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           invoices: [
             CustomerOpenItem.empty()
-                .copyWith(accountingDocument: 'fake_document')
+                .copyWith(accountingDocument: 'fake_document'),
           ],
           paymentMethodOption: PaymentMethodOption.empty().copyWith(
             bankOptionId: BankOptionId('fake_id'),
@@ -1000,7 +1000,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           invoices: [
             CustomerOpenItem.empty()
-                .copyWith(accountingDocument: 'fake_document')
+                .copyWith(accountingDocument: 'fake_document'),
           ],
           paymentMethodOption: PaymentMethodOption.empty().copyWith(
             bankOptionId: BankOptionId('fake_id'),
@@ -1029,7 +1029,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           invoices: [
             CustomerOpenItem.empty()
-                .copyWith(accountingDocument: 'fake_document')
+                .copyWith(accountingDocument: 'fake_document'),
           ],
           paymentMethodOption: PaymentMethodOption.empty().copyWith(
             bankOptionId: BankOptionId('fake_id'),
@@ -1059,7 +1059,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           invoices: [
             CustomerOpenItem.empty()
-                .copyWith(accountingDocument: 'fake_document')
+                .copyWith(accountingDocument: 'fake_document'),
           ],
           paymentMethodOption: PaymentMethodOption.empty().copyWith(
             bankOptionId: BankOptionId('fake_id'),

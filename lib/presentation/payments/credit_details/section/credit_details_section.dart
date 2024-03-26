@@ -31,7 +31,7 @@ class CreditDetailsSection extends StatelessWidget {
         ListTile(
           key: WidgetKeys.creditDetailsTile,
           tileColor: ZPColors.primary,
-          minVerticalPadding: 20.0,
+          minVerticalPadding: 15.0,
           title: Row(
             children: [
               Expanded(

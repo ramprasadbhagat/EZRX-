@@ -156,7 +156,7 @@ void main() {
           canLoadMore: false,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
-        )
+        ),
       ],
     );
 
@@ -208,7 +208,7 @@ void main() {
           canLoadMore: false,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
-        )
+        ),
       ],
     );
   });

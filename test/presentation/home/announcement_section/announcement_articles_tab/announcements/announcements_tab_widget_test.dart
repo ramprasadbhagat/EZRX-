@@ -95,6 +95,27 @@ void main() {
     expect(announcementNotFoundRecordKey, findsOneWidget);
   }
 
+  List<AnnouncementArticleItem> sortedAnnouncementsWithPinned(
+    List<AnnouncementArticleItem> announcements,
+  ) {
+    final pinnedAnnouncementArticleList =
+        announcements.where((element) => element.pinToTop).toList()
+          ..sort(
+            (a, b) => b.releaseDate.dateTime.compareTo(a.releaseDate.dateTime),
+          );
+
+    final unPinnedAnnouncementArticleList =
+        announcements.where((element) => !element.pinToTop).toList()
+          ..sort(
+            (a, b) => b.releaseDate.dateTime.compareTo(a.releaseDate.dateTime),
+          );
+
+    return [
+      ...pinnedAnnouncementArticleList,
+      ...unPinnedAnnouncementArticleList,
+    ];
+  }
+
   group(
     'Test "announcement_tab" widget test => ',
     () {
@@ -116,6 +137,11 @@ void main() {
             .thenReturn(AnnouncementInfoDetailsState.initial());
         announcementInfo =
             await AnnouncementInfoLocalDataSource().getAnnouncementInfo();
+        announcementInfo = announcementInfo.copyWith(
+          announcementList: sortedAnnouncementsWithPinned(
+            announcementInfo.announcementList,
+          ),
+        );
       });
 
       testWidgets(
@@ -357,13 +383,12 @@ void main() {
           final itemKey2 =
               find.byKey(Key(announcementInfo.announcementList[3].id));
           expect(itemKey2, findsOneWidget);
-          await tester.drag(
-            itemKey2,
-            const Offset(0, -2000),
+          await tester.fling(
+            find.byKey(WidgetKeys.announcementListKey),
+            const Offset(0, -1000),
+            1000,
           );
           await tester.pump();
-
-          expect(itemKey, findsOneWidget);
           expect(scrollToTopArrowIcon, findsOneWidget);
 
           verify(

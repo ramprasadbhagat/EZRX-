@@ -47,7 +47,9 @@ class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
                 ? null
                 : ([bool mounted = true]) async {
                     final dateTime = await pickDate(context);
-                    if (!mounted || dateTime == null) return;
+                    if (!mounted || dateTime == null || !context.mounted) {
+                      return;
+                    }
                     _deliveryDateText.text =
                         DateTimeUtils.getDeliveryDateString(dateTime);
                     context.read<AdditionalDetailsBloc>().add(

@@ -33,9 +33,9 @@ class CustomerCodeSelector extends StatelessWidget {
                       );
                   context.router.pushNamed('customer_search');
                 },
-          leading: Column(
+          leading: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Icon(
                 Icons.location_on_outlined,
                 color: ZPColors.orange,

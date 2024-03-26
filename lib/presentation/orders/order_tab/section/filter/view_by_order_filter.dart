@@ -54,12 +54,12 @@ class ViewByOrderFilterBottomSheet extends StatelessWidget {
             child: _FilterList(),
           ),
           const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(
+          const Padding(
+            padding: EdgeInsets.symmetric(
               horizontal: 12.0,
             ),
             child: Row(
-              children: const [
+              children: [
                 _ResetButton(),
                 SizedBox(width: 12),
                 _ApplyButton(),

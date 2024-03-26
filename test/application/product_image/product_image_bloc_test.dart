@@ -38,7 +38,7 @@ void main() {
     repository = ProductDetailRepositoryMock();
     productImage = ProductImages.empty().copyWith(thumbNail: 'image_url_1');
     fetchedMaterialImageMap = {
-      for (var materialInfo in fetchedMaterials)
+      for (final materialInfo in fetchedMaterials)
         materialInfo.materialNumber:
             productImage.copyWith(materialNumber: materialInfo.materialNumber),
     };
@@ -63,7 +63,7 @@ void main() {
         ProductImageState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeMYSalesOrganisation,
-        )
+        ),
       ],
     );
 

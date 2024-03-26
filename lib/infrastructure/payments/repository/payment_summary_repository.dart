@@ -40,7 +40,7 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
     required SearchKey searchKey,
     required int offset,
     required int pageSize,
-  }) async {
+  }) {
     final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
     final customerCode = customerCodeInfo.customerCodeSoldTo;
 

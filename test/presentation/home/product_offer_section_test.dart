@@ -549,7 +549,7 @@ void main() {
           MaterialInfo.empty().copyWith(
             isFavourite: false,
             materialNumber: MaterialNumber('1234'),
-          )
+          ),
         ];
 
         when(() => materialListBlocMock.state).thenReturn(

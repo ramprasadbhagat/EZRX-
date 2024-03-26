@@ -70,8 +70,8 @@ void main() {
           data: {
             'date': null,
             'errors': [
-              {'message': 'mockError'}
-            ]
+              {'message': 'mockError'},
+            ],
           },
           requestOptions: RequestOptions(
             path: '/api/tncdate',

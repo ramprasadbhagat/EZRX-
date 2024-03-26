@@ -49,7 +49,7 @@ void main() {
     ),
     SalesOrganisation.empty().copyWith(
       salesOrg: SalesOrg('2504'),
-    )
+    ),
   ];
   final salesOrgState = SalesOrgState.initial().copyWith(
     searchKey: SearchKey(''),

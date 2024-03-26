@@ -171,6 +171,8 @@ class WidgetKeys {
   static Key searchSectionTab(String title) => Key('searchSectionTab$title');
   static Key bundleMaterialCount(String title) =>
       Key('bundleMaterialCount$title');
+       static const Key availableOfferList =
+      Key('availableOfferList');
   //============================================================
   //  MORE TAB BAR
   //============================================================
@@ -403,7 +405,7 @@ class WidgetKeys {
   static const Key newRequestStep2RemoveIcon = Key('newRequestStep2RemoveIcon');
   static const Key newRequestStep2ReasonDropdown =
       Key('newRequestStep2ReasonDropdown');
-  static Key newRequestStepsDropdownItem(option) =>
+  static Key newRequestStepsDropdownItem(String option) =>
       Key('newRequestStep2ReasonDropdownItem_$option');
   static Key materialQuantityField(String uuid) =>
       Key('materialQuantityField_$uuid');
@@ -1005,6 +1007,7 @@ class WidgetKeys {
   static Key announcementStatusFilter(String name, bool value) =>
       Key('announcementStatusFilter$name$value');
   static const Key announcementFilterIcon = Key('announcementFilterIcon');
+  static const Key announcementInfoDetailList = Key('announcementInfoDetailList');
 
   //============================================================
   //  Article

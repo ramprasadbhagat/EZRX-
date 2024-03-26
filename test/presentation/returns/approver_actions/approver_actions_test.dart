@@ -225,7 +225,7 @@ void main() {
             ),
           ),
           ReturnApproverState.initial()
-              .copyWith(approverReturnRequestList: approverReturnRequestList)
+              .copyWith(approverReturnRequestList: approverReturnRequestList),
         ];
         whenListen(returnApproverBlocMock, Stream.fromIterable(expectedStates));
         when(() => eligibilityBlocMock.state).thenReturn(
@@ -313,7 +313,7 @@ void main() {
             ),
           ),
           ReturnApproverState.initial()
-              .copyWith(approverReturnRequestList: approverReturnRequestList)
+              .copyWith(approverReturnRequestList: approverReturnRequestList),
         ];
         whenListen(returnApproverBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());

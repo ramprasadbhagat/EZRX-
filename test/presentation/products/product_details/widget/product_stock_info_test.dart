@@ -96,7 +96,7 @@ void main() {
           ProductDetailState.initial().copyWith(
             isStockFetching: true,
           ),
-          ProductDetailState.initial()
+          ProductDetailState.initial(),
         ],
       );
       whenListen(productDetailMockBloc, expectedStates);

@@ -1,8 +1,14 @@
 # Test all the test cases when commit happend
 trigger: none
+
 resources:
-- repo: self
+  - repo: self
+
 pool: dnd-azdevops-flutter
+
+variables:
+  - group: "eZRx plus CICD"
+
 jobs:
 - job: FlutterAnalyze
   displayName: 'Analyze flutter'
@@ -12,23 +18,35 @@ jobs:
 - job: DCMAnalyse
   displayName: 'DCM Analyse'
   steps:
-  - bash: flutter pub get && flutter pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings --disable-sunset-warning
+  - bash: dcm analyze lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-style --fatal-performance --fatal-warnings
+    env:
+      DCM_CI_KEY: '$(DCM_CI_KEY)'
+      DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
 
 - job: DCMCheckUnnecessaryNullable
   displayName: 'DCM Check Unnecessary Nullable'
   steps:
-  - bash: flutter pub get && flutter pub run dart_code_metrics:metrics check-unnecessary-nullable lib --fatal-found --disable-sunset-warning
+  - bash: dcm check-unnecessary-nullable lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
+    env:
+      DCM_CI_KEY: '$(DCM_CI_KEY)'
+      DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
 
 - job: DCMCheckUnusedCode
   displayName: 'DCM Check Unused Code'
   steps:
-  - bash: flutter pub get && flutter pub run dart_code_metrics:metrics check-unused-code lib --fatal-unused --disable-sunset-warning
+  - bash: dcm check-unused-code lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-unused
+    env:
+      DCM_CI_KEY: '$(DCM_CI_KEY)'
+      DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
 
 - job: DCMCheckUnusedFiles
   displayName: 'DCM Check Unused Files'
   steps:
-  - bash: flutter pub get && flutter pub run dart_code_metrics:metrics check-unused-files lib --fatal-unused --disable-sunset-warning
-
+  - bash: dcm check-unused-files lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-unused
+    env:
+      DCM_CI_KEY: '$(DCM_CI_KEY)'
+      DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
+      
 - job: TestApplication
   displayName: Test application
   steps:

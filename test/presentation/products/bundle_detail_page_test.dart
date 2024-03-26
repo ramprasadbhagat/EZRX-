@@ -287,9 +287,9 @@ void main() {
         when(() => mockProductImageBloc.state).thenReturn(
           ProductImageState.initial().copyWith(
             productImageMap: <MaterialNumber, ProductImages>{
-              for (var material in bundle.bundle.materials)
+              for (final material in bundle.bundle.materials)
                 material.materialNumber: ProductImages.empty()
-                    .copyWith(materialNumber: material.materialNumber)
+                    .copyWith(materialNumber: material.materialNumber),
             },
           ),
         );
@@ -366,9 +366,9 @@ void main() {
         when(() => mockProductImageBloc.state).thenReturn(
           ProductImageState.initial().copyWith(
             productImageMap: <MaterialNumber, ProductImages>{
-              for (var material in bundle.bundle.materials)
+              for (final material in bundle.bundle.materials)
                 material.materialNumber: ProductImages.empty()
-                    .copyWith(materialNumber: material.materialNumber)
+                    .copyWith(materialNumber: material.materialNumber),
             },
           ),
         );
@@ -669,7 +669,7 @@ void main() {
         when(() => cartMockBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [
-              PriceAggregate.empty().copyWith(bundle: bundle.bundle)
+              PriceAggregate.empty().copyWith(bundle: bundle.bundle),
             ],
           ),
         );
@@ -743,12 +743,12 @@ void main() {
             CartState.initial().copyWith(
               isUpserting: true,
               cartProducts: [
-                PriceAggregate.empty().copyWith(bundle: bundle.bundle)
+                PriceAggregate.empty().copyWith(bundle: bundle.bundle),
               ],
             ),
             CartState.initial().copyWith(
               cartProducts: [
-                PriceAggregate.empty().copyWith(bundle: bundle.bundle)
+                PriceAggregate.empty().copyWith(bundle: bundle.bundle),
               ],
             ),
           ],
@@ -780,12 +780,12 @@ void main() {
             CartState.initial().copyWith(
               isUpserting: true,
               cartProducts: [
-                PriceAggregate.empty().copyWith(bundle: bundle.bundle)
+                PriceAggregate.empty().copyWith(bundle: bundle.bundle),
               ],
             ),
             CartState.initial().copyWith(
               cartProducts: [
-                PriceAggregate.empty().copyWith(bundle: bundle.bundle)
+                PriceAggregate.empty().copyWith(bundle: bundle.bundle),
               ],
               apiFailureOrSuccessOption: optionOf(
                 const Left(

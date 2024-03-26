@@ -111,7 +111,7 @@ void main() {
                 optionOf(const Left(ApiFailure.other('fake'))),
             material: MaterialInfo.empty(),
             materialFilter: fakeMaterialFilter,
-          )
+          ),
         ],
       );
 
@@ -141,7 +141,7 @@ void main() {
                 optionOf(const Left(ApiFailure.other('fake'))),
             material: MaterialInfo.empty(),
             materialFilter: fakeMaterialFilter,
-          )
+          ),
         ],
       );
 
@@ -192,7 +192,7 @@ void main() {
             apiFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake'))),
             material: MaterialInfo.empty(),
-          )
+          ),
         ],
       );
 
@@ -221,7 +221,7 @@ void main() {
             apiFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake'))),
             material: MaterialInfo.empty(),
-          )
+          ),
         ],
       );
 
@@ -264,7 +264,7 @@ void main() {
           initialState.copyWith(
             apiFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake'))),
-          )
+          ),
         ],
       );
       blocTest<ScanMaterialInfoBloc, ScanMaterialInfoState>(
@@ -376,7 +376,7 @@ void main() {
           initialState.copyWith(
             apiFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake'))),
-          )
+          ),
         ],
       );
       blocTest<ScanMaterialInfoBloc, ScanMaterialInfoState>(
@@ -395,7 +395,7 @@ void main() {
         expect: () => [
           initialState.copyWith(
             isTorchStateEnabled: false,
-          )
+          ),
         ],
       );
     });

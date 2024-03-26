@@ -80,7 +80,7 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.productDetailQuery
                 .getSimilarProductQuery(fakeConfigValue),
-            'variables': variables
+            'variables': variables,
           }),
         );
 

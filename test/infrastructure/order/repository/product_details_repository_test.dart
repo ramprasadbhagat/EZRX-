@@ -727,7 +727,7 @@ void main() {
           ),
         ).thenAnswer(
           (invocation) async => [
-            fakeMaterialInfo.copyWith(materialNumber: MaterialNumber('12345'))
+            fakeMaterialInfo.copyWith(materialNumber: MaterialNumber('12345')),
           ],
         );
         when(
@@ -739,7 +739,7 @@ void main() {
         ).thenAnswer(
           (invocation) async => [
             fakeStockInfoList.first
-                .copyWith(materialNumber: MaterialNumber('12345'))
+                .copyWith(materialNumber: MaterialNumber('12345')),
           ],
         );
 

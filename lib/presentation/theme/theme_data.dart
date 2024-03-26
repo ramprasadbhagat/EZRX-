@@ -52,7 +52,7 @@ final appThemeData = {
 };
 
 ColorScheme _colorScheme() {
-  return const ColorScheme.light().copyWith(
+  return ColorScheme.fromSeed(seedColor: ZPColors.primary).copyWith(
     primary: ZPColors.primary,
     background: ZPColors.white,
     secondary: ZPColors.secondary,
@@ -68,7 +68,8 @@ ColorScheme _colorScheme() {
 AppBarTheme _appBarTheme() {
   return AppBarTheme(
     centerTitle: true,
-    color: ZPColors.white,
+    backgroundColor: ZPColors.white,
+    surfaceTintColor: ZPColors.transparent,
     titleTextStyle: GoogleFonts.notoSans(
       fontSize: 18,
       color: ZPColors.black,
@@ -127,6 +128,7 @@ DialogTheme _dialogTheme() {
 BottomSheetThemeData _bottomSheetTheme() {
   return const BottomSheetThemeData(
     backgroundColor: ZPColors.white,
+    surfaceTintColor: ZPColors.white,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
@@ -295,7 +297,7 @@ InputDecorationTheme _inputDecorationTheme() {
 FloatingActionButtonThemeData _floatingActionButtonTheme() {
   return const FloatingActionButtonThemeData(
     elevation: 0,
-    backgroundColor: ZPColors.orange,
+    backgroundColor: ZPColors.transparent,
     foregroundColor: ZPColors.white,
   );
 }
@@ -363,7 +365,7 @@ CheckboxThemeData _checkboxTheme() {
     fillColor: MaterialStateColor.resolveWith(
       (states) => states.contains(MaterialState.selected)
           ? ZPColors.primary
-          : ZPColors.darkGray,
+          : ZPColors.white,
     ),
     visualDensity: VisualDensity.compact,
     shape: RoundedRectangleBorder(
@@ -430,12 +432,16 @@ DividerThemeData _dividerTheme() {
 }
 
 ChipThemeData _chipTheme() {
-  return const ChipThemeData(
+  return ChipThemeData(
     backgroundColor: ZPColors.secondaryEmerald10,
-    labelPadding: EdgeInsets.symmetric(horizontal: 10),
-    labelStyle: TextStyle(fontSize: 14, letterSpacing: 0.25, height: 1.1),
+    labelPadding: const EdgeInsets.symmetric(horizontal: 10),
+    labelStyle: const TextStyle(fontSize: 14, letterSpacing: 0.25, height: 1.1),
     selectedColor: ZPColors.primary,
     padding: EdgeInsets.zero,
+    side: BorderSide.none,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(24),
+    ),
   );
 }
 

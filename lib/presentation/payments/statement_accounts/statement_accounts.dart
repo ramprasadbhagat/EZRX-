@@ -86,8 +86,8 @@ class _StatementAccountsPageState extends State<StatementAccountsPage> {
           return AnnouncementBanner(
             currentPath: context.router.currentPath,
             child: ScrollList<Soa>(
-              header: Column(
-                children: const [
+              header: const Column(
+                children: [
                   _Header(),
                   _Filter(),
                 ],

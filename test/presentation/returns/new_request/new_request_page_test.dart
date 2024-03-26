@@ -368,9 +368,9 @@ void main() {
                   balanceQty: IntegerValue('1'),
                   returnReason: 'fake_reason',
                   returnQuantity: ReturnQuantity('1'),
-                )
+                ),
               ],
-            )
+            ),
           ],
           selectedItems: [
             fakeReturnMaterial.copyWith(
@@ -436,9 +436,9 @@ void main() {
                   balanceQty: IntegerValue('1'),
                   returnReason: 'fake_reason',
                   returnQuantity: ReturnQuantity('1'),
-                )
+                ),
               ],
-            )
+            ),
           ],
           selectedItems: [
             fakeReturnMaterial.copyWith(
@@ -508,9 +508,9 @@ void main() {
                   balanceQty: IntegerValue('1'),
                   returnReason: 'fake_reason',
                   returnQuantity: ReturnQuantity('1'),
-                )
+                ),
               ],
-            )
+            ),
           ],
           selectedItems: [
             fakeReturnMaterial.copyWith(
@@ -577,9 +577,9 @@ void main() {
                   balanceQty: IntegerValue('1'),
                   returnReason: 'fake_reason',
                   returnQuantity: ReturnQuantity('1'),
-                )
+                ),
               ],
-            )
+            ),
           ],
           selectedItems: [
             fakeReturnMaterial.copyWith(

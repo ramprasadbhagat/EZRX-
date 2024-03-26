@@ -84,8 +84,8 @@ void main() {
           final variables = {
             'NewOrderInput': {
               'data': encryptedData.data,
-              'hash': encryptedData.hash
-            }
+              'hash': encryptedData.hash,
+            },
           };
 
           final res = json.decode(

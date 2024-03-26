@@ -188,7 +188,7 @@ void main() {
         expect: () => [
           NewPaymentState.initial().copyWith(
             selectedInvoices: [CustomerOpenItem.empty()],
-          )
+          ),
         ],
       );
 
@@ -225,7 +225,7 @@ void main() {
         expect: () => [
           NewPaymentState.initial().copyWith(
             selectedInvoices: [CustomerOpenItem.empty()],
-          )
+          ),
         ],
       );
     },
@@ -250,7 +250,7 @@ void main() {
         expect: () => [
           NewPaymentState.initial().copyWith(
             selectedCredits: [CustomerOpenItem.empty()],
-          )
+          ),
         ],
       );
 
@@ -440,7 +440,7 @@ void main() {
               shipToInfo: ShipToInfo.empty(),
               customerOpenItems: [
                 ...fakeCustomerOpenItemSelected,
-                ...fakeCreditSelected
+                ...fakeCreditSelected,
               ],
             ),
           ).thenAnswer(

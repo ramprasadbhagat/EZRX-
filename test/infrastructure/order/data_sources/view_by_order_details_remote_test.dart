@@ -80,7 +80,7 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderDetailsQueryMutation
                 .getOrderHistoryDetails(fakeConfigValue),
-            'variables': variables
+            'variables': variables,
           }),
         );
 
@@ -122,7 +122,7 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderDetailsQueryMutation
                 .getOrderHistoryDetails(fakeConfigValue),
-            'variables': variables
+            'variables': variables,
           }),
         );
 
@@ -158,7 +158,7 @@ void main() {
             {
               'data': null,
               'errors': [
-                {'message': 'fake-error'}
+                {'message': 'fake-error'},
               ],
             },
             delay: const Duration(seconds: 1),
@@ -167,7 +167,7 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderDetailsQueryMutation
                 .getOrderHistoryDetails(fakeConfigValue),
-            'variables': variables
+            'variables': variables,
           }),
         );
 
@@ -217,7 +217,7 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderDetailsQueryMutation
                 .getOrderHistoryDetails(fakeConfigValue),
-            'variables': variables
+            'variables': variables,
           }),
         );
 
@@ -284,14 +284,14 @@ void main() {
           '/api/order',
           (server) => server.reply(200, {
             'data': {
-              'orderHistoryV3': {'orderHeaders': 'test'}
-            }
+              'orderHistoryV3': {'orderHeaders': 'test'},
+            },
           }),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderDetailsQueryMutation
                 .getOrderHistoryDetails(fakeConfigValue),
-            'variables': variables
+            'variables': variables,
           }),
         );
 

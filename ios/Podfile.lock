@@ -74,18 +74,18 @@ PODS:
   - Firebase/RemoteConfig (10.18.0):
     - Firebase/CoreOnly
     - FirebaseRemoteConfig (~> 10.18.0)
-  - firebase_analytics (10.7.4):
+  - firebase_analytics (10.8.0):
     - Firebase/Analytics (= 10.18.0)
     - firebase_core
     - Flutter
   - firebase_core (2.24.2):
     - Firebase/CoreOnly (= 10.18.0)
     - Flutter
-  - firebase_crashlytics (3.4.8):
+  - firebase_crashlytics (3.4.9):
     - Firebase/Crashlytics (= 10.18.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (14.7.9):
+  - firebase_messaging (14.7.10):
     - Firebase/Messaging (= 10.18.0)
     - firebase_core
     - Flutter
@@ -97,7 +97,7 @@ PODS:
     - Firebase/RemoteConfig (= 10.18.0)
     - firebase_core
     - Flutter
-  - FirebaseABTesting (10.19.0):
+  - FirebaseABTesting (10.22.0):
     - FirebaseCore (~> 10.0)
   - FirebaseAnalytics (10.18.0):
     - FirebaseAnalytics/AdIdSupport (= 10.18.0)
@@ -121,9 +121,9 @@ PODS:
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.12)
     - GoogleUtilities/Logger (~> 7.12)
-  - FirebaseCoreExtension (10.19.0):
+  - FirebaseCoreExtension (10.22.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseCoreInternal (10.19.0):
+  - FirebaseCoreInternal (10.22.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - FirebaseCrashlytics (10.18.0):
     - FirebaseCore (~> 10.5)
@@ -133,7 +133,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (~> 2.1)
-  - FirebaseInstallations (10.19.0):
+  - FirebaseInstallations (10.22.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
@@ -164,15 +164,15 @@ PODS:
     - FirebaseSharedSwift (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseSessions (10.19.0):
+  - FirebaseSessions (10.22.0):
     - FirebaseCore (~> 10.5)
     - FirebaseCoreExtension (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - GoogleDataTransport (~> 9.2)
     - GoogleUtilities/Environment (~> 7.10)
-    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
-  - FirebaseSharedSwift (10.19.0)
+  - FirebaseSharedSwift (10.22.0)
   - Flutter (1.0.0)
   - flutter_inappwebview (0.0.1):
     - Flutter
@@ -181,17 +181,17 @@ PODS:
   - flutter_inappwebview/Core (0.0.1):
     - Flutter
     - OrderedSet (~> 5.0)
-  - flutter_keyboard_visibility (0.0.1):
-    - Flutter
   - flutter_local_notifications (0.0.1):
     - Flutter
   - flutter_native_splash (0.0.1):
     - Flutter
+  - flutter_pdfview (1.0.2):
+    - Flutter
   - flutter_secure_storage (6.0.0):
     - Flutter
-  - FMDB (2.7.5):
-    - FMDB/standard (= 2.7.5)
-  - FMDB/standard (2.7.5)
+  - FMDB (2.7.9):
+    - FMDB/standard (= 2.7.9)
+  - FMDB/standard (2.7.9)
   - GoogleAppMeasurement (10.18.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.18.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -212,30 +212,40 @@ PODS:
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleDataTransport (9.3.0):
+  - GoogleDataTransport (9.4.1):
     - GoogleUtilities/Environment (~> 7.7)
-    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/AppDelegateSwizzler (7.12.0):
+  - GoogleUtilities/AppDelegateSwizzler (7.13.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.12.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (7.13.0):
+    - GoogleUtilities/Privacy
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/ISASwizzler (7.12.0)
-  - GoogleUtilities/Logger (7.12.0):
+  - GoogleUtilities/ISASwizzler (7.13.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Logger (7.13.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (7.12.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/MethodSwizzler (7.13.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (7.12.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (7.13.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.12.0)"
-  - GoogleUtilities/Reachability (7.12.0):
+  - "GoogleUtilities/NSData+zlib (7.13.0)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (7.13.0)
+  - GoogleUtilities/Reachability (7.13.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (7.12.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/UserDefaults (7.13.0):
     - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
   - integration_test (0.0.1):
     - Flutter
   - libphonenumber_plugin (0.0.1):
@@ -273,32 +283,37 @@ PODS:
     - FlutterMacOS
   - permission_handler_apple (9.1.1):
     - Flutter
-  - PhoneNumberKit (3.7.6):
-    - PhoneNumberKit/PhoneNumberKitCore (= 3.7.6)
-    - PhoneNumberKit/UIKit (= 3.7.6)
-  - PhoneNumberKit/PhoneNumberKitCore (3.7.6)
-  - PhoneNumberKit/UIKit (3.7.6):
+  - PhoneNumberKit (3.7.9):
+    - PhoneNumberKit/PhoneNumberKitCore (= 3.7.9)
+    - PhoneNumberKit/UIKit (= 3.7.9)
+  - PhoneNumberKit/PhoneNumberKitCore (3.7.9)
+  - PhoneNumberKit/UIKit (3.7.9):
     - PhoneNumberKit/PhoneNumberKitCore
   - PLCrashReporter (1.11.1)
   - printing (1.0.0):
     - Flutter
-  - PromisesObjC (2.3.1)
-  - PromisesSwift (2.3.1):
-    - PromisesObjC (= 2.3.1)
+  - PromisesObjC (2.4.0)
+  - PromisesSwift (2.4.0):
+    - PromisesObjC (= 2.4.0)
   - ReachabilitySwift (5.0.0)
-  - scandit_flutter_datacapture_barcode (6.17.3):
+  - scandit-datacapture-frameworks-barcode (6.22.0):
+    - scandit-datacapture-frameworks-core (= 6.22.0)
+    - ScanditBarcodeCapture (= 6.22.0)
+  - scandit-datacapture-frameworks-core (6.22.0):
+    - ScanditCaptureCore (= 6.22.0)
+  - scandit_flutter_datacapture_barcode (6.22.0):
     - Flutter
-    - scandit_flutter_datacapture_core
-    - ScanditBarcodeCapture (= 6.17.3)
-  - scandit_flutter_datacapture_core (6.17.3):
+    - scandit-datacapture-frameworks-barcode (= 6.22.0)
+    - scandit_flutter_datacapture_core (= 6.22.0)
+  - scandit_flutter_datacapture_core (6.22.0):
     - Flutter
-    - ScanditCaptureCore (= 6.17.3)
-  - ScanditBarcodeCapture (6.17.3):
-    - ScanditCaptureCore (= 6.17.3)
-  - ScanditCaptureCore (6.17.3)
-  - SDWebImage (5.18.10):
-    - SDWebImage/Core (= 5.18.10)
-  - SDWebImage/Core (5.18.10)
+    - scandit-datacapture-frameworks-core (= 6.22.0)
+  - ScanditBarcodeCapture (6.22.0):
+    - ScanditCaptureCore (= 6.22.0)
+  - ScanditCaptureCore (6.22.0)
+  - SDWebImage (5.19.0):
+    - SDWebImage/Core (= 5.19.0)
+  - SDWebImage/Core (5.19.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -334,9 +349,9 @@ DEPENDENCIES:
   - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
-  - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
+  - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - libphonenumber_plugin (from `.symlinks/plugins/libphonenumber_plugin/ios`)
@@ -345,12 +360,12 @@ DEPENDENCIES:
   - okta_oidc (from `.symlinks/plugins/okta_oidc/ios`)
   - open_file_safe (from `.symlinks/plugins/open_file_safe/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - printing (from `.symlinks/plugins/printing/ios`)
   - scandit_flutter_datacapture_barcode (from `.symlinks/plugins/scandit_flutter_datacapture_barcode/ios`)
   - scandit_flutter_datacapture_core (from `.symlinks/plugins/scandit_flutter_datacapture_core/ios`)
-  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
@@ -392,6 +407,8 @@ SPEC REPOS:
     - PromisesObjC
     - PromisesSwift
     - ReachabilitySwift
+    - scandit-datacapture-frameworks-barcode
+    - scandit-datacapture-frameworks-core
     - ScanditBarcodeCapture
     - ScanditCaptureCore
     - SDWebImage
@@ -427,12 +444,12 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_inappwebview:
     :path: ".symlinks/plugins/flutter_inappwebview/ios"
-  flutter_keyboard_visibility:
-    :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_local_notifications:
     :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
+  flutter_pdfview:
+    :path: ".symlinks/plugins/flutter_pdfview/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   integration_test:
@@ -450,7 +467,7 @@ EXTERNAL SOURCES:
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/ios"
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   printing:
@@ -460,7 +477,7 @@ EXTERNAL SOURCES:
   scandit_flutter_datacapture_core:
     :path: ".symlinks/plugins/scandit_flutter_datacapture_core/ios"
   shared_preferences_foundation:
-    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   url_launcher_ios:
@@ -482,41 +499,41 @@ SPEC CHECKSUMS:
   datadog_flutter_plugin: 8f47e24d1953bd48658d44bb557e173534f26ac2
   DatadogSDK: c2519eea53cc46c17d28a90b9784c3b265afdb52
   DatadogSDKCrashReporting: c3d443bad91788a9c4f781e079fa0a43564bedd7
-  device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
+  device_info_plus: c6fb39579d0f423935b0c9ce7ee2f44b71b9fce6
   DictionaryCoder: 5f84fff69f54cb806071538430bdafe04a89d658
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: ce3938a0df3cc1ef404671531facef740d03f920
   Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
-  firebase_analytics: 88c111412070acc2b05c1734151f58824f3db657
+  firebase_analytics: b3d6dd14c61549a29abb10e9843446a4d8bb53eb
   firebase_core: 0af4a2b24f62071f9bf283691c0ee41556dcb3f5
-  firebase_crashlytics: 55714f63ae0973c54b3a721c451ae5f815086c1f
-  firebase_messaging: 875385354f623750aa03204a028d640108bc3412
+  firebase_crashlytics: 4b91b8ad60ee7c168fe88979f84c9573a729de7a
+  firebase_messaging: 90e8a6db84b6e1e876cebce4f30f01dc495e7014
   firebase_performance: 2183122a3c7a650c80d8c164e9e28f13c4c62fc7
   firebase_remote_config: 14ad7a3c99810d373ba1ad4a754a8cf26c91d476
-  FirebaseABTesting: bfa3b384b68cee10a89183649c64cd7998a37a12
+  FirebaseABTesting: 66d2594b36d4ff6e7d3c8719802100990de05857
   FirebaseAnalytics: 4d310b35c48eaa4a058ddc04bdca6bdb5dc0fe80
   FirebaseCore: 2322423314d92f946219c8791674d2f3345b598f
-  FirebaseCoreExtension: c08d14c7b22e07994e876d837e6f58642f340087
-  FirebaseCoreInternal: b444828ea7cfd594fca83046b95db98a2be4f290
+  FirebaseCoreExtension: 6394c00b887d0bebadbc7049c464aa0cbddc5d41
+  FirebaseCoreInternal: bca337352024b18424a61e478460547d46c4c753
   FirebaseCrashlytics: 86d5bce01f42fa1db265f87ff1d591f04db610ec
-  FirebaseInstallations: 033d199474164db20c8350736842a94fe717b960
+  FirebaseInstallations: 763814908793c0da14c18b3dcffdec71e29ed55e
   FirebaseMessaging: 9bc34a98d2e0237e1b121915120d4d48ddcf301e
   FirebasePerformance: c406a9198d8aabfbac281b42855f5122fc1bcf69
   FirebaseRemoteConfig: bbd42790a4e84fde6aab7eae810b608e7b5c0bf6
-  FirebaseSessions: e5f4caa188dc8bc6142abc974355be75b042215e
-  FirebaseSharedSwift: f34eeb7d3ea87a34497629b6ca41657beadef76a
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  FirebaseSessions: cd97fb07674f3906619c871eefbd260a1546c9d3
+  FirebaseSharedSwift: 48076404e6e52372290d15a07d2ed1d2f1754023
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_inappwebview: 3d32228f1304635e7c028b0d4252937730bbc6cf
-  flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
-  flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
+  flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
+  flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
-  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  FMDB: aa44149f6fb634b1ac54f64f47064bb0d0c5a032
   GoogleAppMeasurement: 70ce9aa438cff1cfb31ea3e660bcc67734cb716e
-  GoogleDataTransport: 57c22343ab29bc686febbf7cbb13bad167c2d8fe
-  GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
-  integration_test: a1e7d09bd98eca2fc37aefd79d4f41ad37bdbbe5
+  GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
+  GoogleUtilities: d053d902a8edaa9904e1bd00c37535385b8ed152
+  integration_test: 13825b8a9334a850581300559b8839134b124670
   libphonenumber_plugin: e8a7d64a6624a7c25f2c4ab0b7ead2a8e341e35e
   local_auth_ios: c6cf091ded637a88f24f86a8875d8b0f526e2605
   Mixpanel-swift: e5dd85295923e6a875acf17ccbab8d2ecb10ea65
@@ -529,17 +546,19 @@ SPEC CHECKSUMS:
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
-  PhoneNumberKit: 3c68a822bad955ffcefc72a52df72b6596498555
+  PhoneNumberKit: 9c8d546d65c3784721d575a29e712ae8b992fe79
   PLCrashReporter: 5d2d3967afe0efad61b3048d617e2199a5d1b787
   printing: 233e1b73bd1f4a05615548e9b5a324c98588640b
-  PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  scandit_flutter_datacapture_barcode: 4e2ba5ad0a930f7dc6be8b66b3b7c445460ebf7c
-  scandit_flutter_datacapture_core: 1da5103d15d6453cc8bef8e770c6f8d5857e6823
-  ScanditBarcodeCapture: 292b43c71136d21e3adf1b61fc379a1014d54cfa
-  ScanditCaptureCore: 067a5b0c7a21d8ae5a50bc8003a7c58399cf0bf4
-  SDWebImage: fc8f2d48bbfd72ef39d70e981bd24a3f3be53fec
+  scandit-datacapture-frameworks-barcode: 75bbdeec8fa4654fe2047cef74bf7d7fdffbe5f6
+  scandit-datacapture-frameworks-core: 2574f741ebf4eb3a9edcc5590c63c1bf4b8bec37
+  scandit_flutter_datacapture_barcode: 2a199e9c7c85be792c1243dd0af9acc25056ae0a
+  scandit_flutter_datacapture_core: 91164384f771d2e9d8380b7fe606015ba3109002
+  ScanditBarcodeCapture: d1211bcb452db573cd6cd8df713ed36a8f86499a
+  ScanditCaptureCore: baecd3df7bc8accbd626eb03a2f272d67507fe05
+  SDWebImage: 981fd7e860af070920f249fd092420006014c3eb
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
@@ -550,6 +569,6 @@ SPEC CHECKSUMS:
   YMChat: c7325a2c25a2b576ecdcb2b942108fc80cb3b60f
   ymchat_flutter: ed1b0fec4da203e365674e8174a522283fa25313
 
-PODFILE CHECKSUM: 4353bd1cc64d3c99876794438d4480dcfaebed4e
+PODFILE CHECKSUM: 180d60dd70b55c2916d8f6b9c8a5fc5866f7196c
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.15.0

@@ -485,12 +485,13 @@ void main() {
     });
 
     testWidgets('New payment Button show failed bottom sheet', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       when(() => paymentSummaryBlocMock.state).thenReturn(
         PaymentSummaryState.initial().copyWith(
           details: [
             PaymentSummaryDetails.empty().copyWith(
               status: FilterStatus('In Progress'),
-            )
+            ),
           ],
         ),
       );
@@ -532,7 +533,7 @@ void main() {
           details: [
             PaymentSummaryDetails.empty().copyWith(
               status: FilterStatus('Pending'),
-            )
+            ),
           ],
         ),
       );
@@ -707,7 +708,6 @@ void main() {
           mockSoaBloc,
           Stream.fromIterable(expectedStates),
         );
-
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
 
@@ -758,6 +758,8 @@ void main() {
           Stream.fromIterable(expectedStates),
         );
 
+        tester.view.physicalSize = const Size(480, 800);
+        tester.view.devicePixelRatio = 1;
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
 
@@ -800,6 +802,8 @@ void main() {
           Stream.fromIterable(expectedStates),
         );
 
+         tester.view.physicalSize = const Size(480, 800);
+        tester.view.devicePixelRatio = 1;
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
         final filterIcon = find.byIcon(Icons.tune_outlined);
@@ -846,6 +850,8 @@ void main() {
           Stream.fromIterable(expectedStates),
         );
 
+         tester.view.physicalSize = const Size(480, 800);
+        tester.view.devicePixelRatio = 1;
         await tester.pumpWidget(getWUT());
         await tester.pump();
         final filterIcon = find.byIcon(Icons.tune_outlined);

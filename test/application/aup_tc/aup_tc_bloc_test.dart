@@ -80,7 +80,7 @@ void main() {
             tncFile: config.getTnCFile,
             tncConsent: false,
             privacyConsent: false,
-          )
+          ),
         ],
       );
       blocTest<AupTcBloc, AupTcState>(
@@ -103,7 +103,7 @@ void main() {
             tncFile: config.getTnCFile,
             tncConsent: false,
             privacyConsent: false,
-          )
+          ),
         ],
       );
 
@@ -127,7 +127,7 @@ void main() {
             tncFile: config.getTnCFile,
             tncConsent: false,
             privacyConsent: false,
-          )
+          ),
         ],
       );
 
@@ -151,7 +151,7 @@ void main() {
             tncFile: config.getTnCFile,
             tncConsent: false,
             privacyConsent: false,
-          )
+          ),
         ],
       );
 
@@ -175,7 +175,7 @@ void main() {
             tncFile: config.getTnCFile,
             tncConsent: false,
             privacyConsent: false,
-          )
+          ),
         ],
       );
 
@@ -199,7 +199,7 @@ void main() {
             tncFile: config.getTnCFile,
             tncConsent: false,
             privacyConsent: false,
-          )
+          ),
         ],
       );
 
@@ -223,7 +223,7 @@ void main() {
             tncFile: config.getTnCFile,
             tncConsent: false,
             privacyConsent: false,
-          )
+          ),
         ],
       );
 
@@ -251,7 +251,7 @@ void main() {
             tncFile: config.getTnCFile,
             tncConsent: true,
             privacyConsent: false,
-          )
+          ),
         ],
       );
 
@@ -279,7 +279,7 @@ void main() {
             tncFile: config.getTnCFile,
             tncConsent: false,
             privacyConsent: true,
-          )
+          ),
         ],
       );
     },

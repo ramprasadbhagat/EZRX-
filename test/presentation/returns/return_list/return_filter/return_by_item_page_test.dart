@@ -151,7 +151,7 @@ void main() {
             ),
             BlocProvider<ReturnSummaryDetailsBloc>(
               create: (context) => mockReturnSummaryDetailsBloc,
-            )
+            ),
           ],
           child: const Scaffold(body: ReturnByItemPage()),
         );
@@ -249,7 +249,7 @@ void main() {
             ReturnListByItemState.initial().copyWith(
               isFetching: false,
               returnItemList: [fakeReturnItemList.first],
-            )
+            ),
           ];
           whenListen(
             mockReturnListByItemBloc,

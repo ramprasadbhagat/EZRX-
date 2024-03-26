@@ -272,7 +272,7 @@ void main() {
           when(() => mockMaterialFilterBloc.state).thenReturn(
             MaterialFilterState.initial().copyWith.materialFilter(
               countryMapOptions: {
-                MaterialFilterCountry.empty().copyWith(name: 'fake-name'): true
+                MaterialFilterCountry.empty().copyWith(name: 'fake-name'): true,
               },
             ),
           );
@@ -313,12 +313,12 @@ void main() {
           final manufactureList = ['BAXTER HEALTHCARE -M', 'AMO IRELAND'];
           when(() => mockMaterialFilterBloc.state).thenReturn(
             MaterialFilterState.initial().copyWith.materialFilter(
-              manufactureMapOptions: {for (var e in manufactureList) e: false},
+              manufactureMapOptions: {for (final e in manufactureList) e: false},
             ),
           );
           final expectedState = [
             MaterialFilterState.initial().copyWith.materialFilter(
-              manufactureMapOptions: {for (var e in manufactureList) e: true},
+              manufactureMapOptions: {for (final e in manufactureList) e: true},
             ),
           ];
           whenListen(
@@ -362,6 +362,8 @@ void main() {
       testWidgets(
         'Filter by manufacturers & sellers option is visible when eligible for marketplace',
         (tester) async {
+              await tester.binding.setSurfaceSize(const Size(480, 900));
+        tester.view.devicePixelRatio = 1;
           final manufactureList = ['BAXTER HEALTHCARE -M', 'AMO IRELAND'];
           when(() => mockEligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
@@ -372,7 +374,7 @@ void main() {
           );
           when(() => mockMaterialFilterBloc.state).thenReturn(
             MaterialFilterState.initial().copyWith.materialFilter(
-              manufactureMapOptions: {for (var e in manufactureList) e: false},
+              manufactureMapOptions: {for (final e in manufactureList) e: false},
             ),
           );
 

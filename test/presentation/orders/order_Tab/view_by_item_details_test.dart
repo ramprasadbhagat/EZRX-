@@ -1445,7 +1445,7 @@ void main() {
           PoAttachmentEvent.downloadFile(
             files: [
               fakeOrderHistoryItemWithAttachments
-                  .orderHistoryItemPoAttachments.first
+                  .orderHistoryItemPoAttachments.first,
             ],
           ),
         ),
@@ -1786,13 +1786,15 @@ void main() {
     testWidgets(
         'test view by item details item has price not available for PnG',
         (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           isLoading: false,
           orderHistoryItem: mockViewByItemsOrderHistory.orderHistoryItems.last,
           orderHistory: OrderHistory.empty().copyWith(
             orderHistoryItems: [
-              mockViewByItemsOrderHistory.orderHistoryItems.last
+              mockViewByItemsOrderHistory.orderHistoryItems.last,
             ],
           ),
         ),
@@ -1821,6 +1823,8 @@ void main() {
     testWidgets(
         'List price strike through price visible, if final price is less than list price && enableListPrice = true',
         (tester) async {
+      await tester.binding.setSurfaceSize(const Size(600, 900));
+
       final fakeOrderHistoryItemWithCounterOffer =
           fakeOrderHistoryItem.copyWith(
         originPrice: 100.1,
@@ -1947,6 +1951,8 @@ void main() {
     });
 
     testWidgets('BillToInfo when enable bill to true', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(600, 900));
+
       when(() => eligibilityBlocMock.state).thenAnswer(
         (invocation) => EligibilityState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -2021,6 +2027,8 @@ void main() {
     testWidgets(
         'Display counter offer requested for PnG materials with price not available',
         (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
       final pnGMaterial =
           mockViewByItemsOrderHistory.orderHistoryItems.last.copyWith(
         originPrice: 80.00,

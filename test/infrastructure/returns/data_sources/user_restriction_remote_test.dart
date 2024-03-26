@@ -87,7 +87,7 @@ void main() {
     final res = {
       'data': null,
       'errors': [
-        {'message': 'fake-error'}
+        {'message': 'fake-error'},
       ],
     };
 
@@ -162,7 +162,7 @@ void main() {
       'approverRequest': {
         'salesOrg': salesOrg,
         'username': 'fake-username',
-      }
+      },
     };
 
     dioAdapter.onPost(
@@ -175,7 +175,7 @@ void main() {
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       data: jsonEncode({
         'query': remoteDataSource.userRestrictionMutation.getUserRestrictions(),
-        'variables': request
+        'variables': request,
       }),
     );
 
@@ -215,7 +215,7 @@ void main() {
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       data: jsonEncode({
         'query': remoteDataSource.userRestrictionMutation.addApprovalLimit(),
-        'variables': request
+        'variables': request,
       }),
     );
 
@@ -253,7 +253,7 @@ void main() {
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       data: jsonEncode({
         'query': remoteDataSource.userRestrictionMutation.addRestriction(),
-        'variables': {'input': request}
+        'variables': {'input': request},
       }),
     );
 
@@ -288,7 +288,7 @@ void main() {
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       data: jsonEncode({
         'query': remoteDataSource.userRestrictionMutation.deleteApprovalRight(),
-        'variables': {'input': request}
+        'variables': {'input': request},
       }),
     );
 
@@ -323,7 +323,7 @@ void main() {
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       data: jsonEncode({
         'query': remoteDataSource.userRestrictionMutation.deleteApprovalLimit(),
-        'variables': {'input': request}
+        'variables': {'input': request},
       }),
     );
 

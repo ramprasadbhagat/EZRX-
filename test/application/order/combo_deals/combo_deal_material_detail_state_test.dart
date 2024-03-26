@@ -88,7 +88,7 @@ void main() {
           ComboDealMaterialSet.empty().copyWith(
             materials: [
               ComboDealMaterial.empty(),
-              ComboDealMaterial.empty().copyWith(mandatory: true)
+              ComboDealMaterial.empty().copyWith(mandatory: true),
             ],
           ),
           ComboDealMaterialSet.empty().copyWith(
@@ -97,7 +97,7 @@ void main() {
               ComboDealMaterial.empty().copyWith(
                 mandatory: true,
                 materialNumber: productList.first.getMaterialNumber,
-              )
+              ),
             ],
           ),
         ],
@@ -155,7 +155,7 @@ void main() {
               finalPrice: MaterialPrice(100),
               finalTotalPrice: MaterialPrice(100),
             ),
-          )
+          ),
       };
       final selectedItems = {
         for (final item in productList) item.getMaterialNumber: true,
@@ -180,7 +180,7 @@ void main() {
               finalPrice: MaterialPrice(100),
               finalTotalPrice: MaterialPrice(100),
             ),
-          )
+          ),
       };
       final selectedItems = {
         for (final item in productList) item.getMaterialNumber: true,
@@ -228,7 +228,7 @@ void main() {
     test(' => totalSelectedQuantity should show the right result', () {
       items = {
         for (final item in productList)
-          item.getMaterialNumber: item.copyWith(quantity: 2)
+          item.getMaterialNumber: item.copyWith(quantity: 2),
       };
       final selectedItems = {
         for (final item in productList) item.getMaterialNumber: true,
@@ -254,7 +254,7 @@ void main() {
                 principalName: PrincipalName('dummy'),
               ),
             ),
-          )
+          ),
       };
       final selectedItems = {
         for (final item in productList) item.getMaterialNumber: true,

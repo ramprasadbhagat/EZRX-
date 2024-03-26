@@ -65,8 +65,8 @@ class _ProductFilterPageState extends State<ProductFilterPage> {
               top: BorderSide(color: ZPColors.extraLightGrey2),
             ),
           ),
-          child: Row(
-            children: const [
+          child: const Row(
+            children: [
               Expanded(
                 child: _ProductFilterResetButton(),
               ),

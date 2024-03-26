@@ -117,7 +117,7 @@ void main() {
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           user: fakeClient,
-        )
+        ),
       ];
       whenListen(
         mockEligibilityBloc,

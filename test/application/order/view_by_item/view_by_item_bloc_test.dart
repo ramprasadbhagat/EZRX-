@@ -237,7 +237,7 @@ void main() {
           salesOrganisation: fakeMYSalesOrganisation,
           searchKey: searchKey,
           appliedFilter: viewByItemFilter,
-        )
+        ),
       ],
     );
 
@@ -308,7 +308,7 @@ void main() {
           shipToInfo: fakeShipToInfo,
           user: fakeClient,
           salesOrganisation: fakeMYSalesOrganisation,
-        )
+        ),
       ],
     );
 

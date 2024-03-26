@@ -54,7 +54,7 @@ void main() {
                     'message': 'Invalid username or password',
                   }
                 ],
-                'data': null
+                'data': null,
               },
               delay: const Duration(seconds: 1),
             ),

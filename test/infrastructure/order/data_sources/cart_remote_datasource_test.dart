@@ -75,8 +75,8 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {'language': fakeLanguage}
-            }),
+              'variables': {'language': fakeLanguage},
+            },),
           );
 
           final result = await remoteDataSource.getAddedToCartProductList(
@@ -103,7 +103,7 @@ void main() async {
                 ..putIfAbsent(
                   'errors',
                   () => [
-                    {'message': 'fake-error'}
+                    {'message': 'fake-error'},
                   ],
                 ),
               delay: const Duration(seconds: 1),
@@ -111,7 +111,7 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {'language': fakeLanguage}
+              'variables': {'language': fakeLanguage},
             }),
           );
           await remoteDataSource
@@ -138,10 +138,10 @@ void main() async {
               200,
               {
                 'data': {
-                  'upsertCartItems': {'EzRxItems': []}
+                  'upsertCartItems': {'EzRxItems': []},
                 },
                 'errors': [
-                  {'message': 'no cart found'}
+                  {'message': 'no cart found'},
                 ],
               },
               delay: const Duration(seconds: 1),
@@ -149,7 +149,7 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {'language': fakeLanguage}
+              'variables': {'language': fakeLanguage},
             }),
           );
           final result = await remoteDataSource.getAddedToCartProductList(
@@ -177,7 +177,7 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {'language': fakeLanguage}
+              'variables': {'language': fakeLanguage},
             }),
           );
 
@@ -255,7 +255,7 @@ void main() async {
                 ..putIfAbsent(
                   'errors',
                   () => [
-                    {'message': 'fake-error'}
+                    {'message': 'fake-error'},
                   ],
                 ),
               delay: const Duration(seconds: 1),
@@ -291,10 +291,10 @@ void main() async {
               200,
               {
                 'data': {
-                  'upsertCartItems': {'EzRxItems': []}
+                  'upsertCartItems': {'EzRxItems': []},
                 },
                 'errors': [
-                  {'message': 'no cart found'}
+                  {'message': 'no cart found'},
                 ],
               },
               delay: const Duration(seconds: 1),
@@ -302,7 +302,7 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {'language': fakeLanguage}
+              'variables': {'language': fakeLanguage},
             }),
           );
           final result = await remoteDataSource.getAddedToCartProductList(

@@ -208,7 +208,7 @@ void main() {
       await tester.tap(filterAdminPoAttachmentDateFieldKey);
       await tester.pumpAndSettle(const Duration(seconds: 4));
 
-      final saveButton = find.text('SAVE');
+      final saveButton = find.text('Save');
       expect(saveButton, findsOneWidget);
       await tester.tap(saveButton);
       await tester.pumpAndSettle();

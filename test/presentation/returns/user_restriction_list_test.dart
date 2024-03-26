@@ -126,7 +126,7 @@ void main() {
         UserRestrictionListState.initial().copyWith(
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-error'))),
-        )
+        ),
       ];
       whenListen(
         userRestrictionListBlocMock,

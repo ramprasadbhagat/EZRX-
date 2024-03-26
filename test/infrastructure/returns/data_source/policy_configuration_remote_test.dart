@@ -175,7 +175,7 @@ void main() {
               {
                 'data': null,
                 'errors': [
-                  {'message': 'fake-error'}
+                  {'message': 'fake-error'},
                 ],
               },
               delay: const Duration(seconds: 1),
@@ -220,7 +220,7 @@ void main() {
                 'uuid': 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
                 'returnsAllowed': true,
                 'principalName': '',
-                'status': 'data deleted successfully'
+                'status': 'data deleted successfully',
               },
             },
           };
@@ -269,7 +269,7 @@ void main() {
                 'uuid': 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
                 'returnsAllowed': true,
                 'principalName': '',
-                'status': null
+                'status': null,
               },
             },
           };
@@ -312,7 +312,7 @@ void main() {
                 'uuid': 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
                 'returnsAllowed': true,
                 'principalName': '',
-                'status': 'fake-status'
+                'status': 'fake-status',
               },
             },
           };
@@ -361,7 +361,7 @@ void main() {
                 'uuid': 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
                 'returnsAllowed': true,
                 'principalName': '',
-                'status': 'Successfully added the Policy Configuration'
+                'status': 'Successfully added the Policy Configuration',
               },
             },
           };
@@ -410,7 +410,7 @@ void main() {
                 'uuid': 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
                 'returnsAllowed': true,
                 'principalName': '',
-                'status': null
+                'status': null,
               },
             },
           };
@@ -453,7 +453,7 @@ void main() {
                 'uuid': 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
                 'returnsAllowed': true,
                 'principalName': '',
-                'status': 'fake-status'
+                'status': 'fake-status',
               },
             },
           };

@@ -110,7 +110,7 @@ void main() {
             data: jsonEncode({
               'query': remoteDataSource.notificationSettingsMutation
                   .setNotificationSettings(),
-              'variables': variables
+              'variables': variables,
             }),
           );
 

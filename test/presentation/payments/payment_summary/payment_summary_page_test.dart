@@ -98,7 +98,7 @@ void main() {
       PaymentSummaryDetails.empty().copyWith(
         paymentAmount: 200,
         status: FilterStatus('In Progress'),
-      )
+      ),
     ];
   });
   setUp(() async {
@@ -399,7 +399,7 @@ void main() {
           details: [
             PaymentSummaryDetails.empty().copyWith(
               status: FilterStatus('In Progress'),
-            )
+            ),
           ],
         ),
       );
@@ -439,7 +439,7 @@ void main() {
             PaymentSummaryDetails.empty().copyWith(
               paymentAmount: 250,
               status: FilterStatus('In Progress'),
-            )
+            ),
           ],
         ),
       );
@@ -477,7 +477,7 @@ void main() {
             PaymentSummaryDetails.empty().copyWith(
               paymentAmount: 250,
               status: FilterStatus('In Progress'),
-            )
+            ),
           ],
         ),
       );
@@ -625,7 +625,7 @@ void main() {
         Stream.fromIterable([
           PaymentSummaryFilterState.initial().copyWith(
             filter: PaymentSummaryFilter.empty().copyWith(filterStatuses: []),
-          )
+          ),
         ]),
       );
       await tester.pumpWidget(getWUT());
@@ -681,7 +681,7 @@ void main() {
           PaymentSummaryFilterState.initial().copyWith(
             filter: PaymentSummaryFilter.empty()
                 .copyWith(filterStatuses: [FilterStatus('In Progress')]),
-          )
+          ),
         ]),
       );
       await tester.pumpWidget(getWUT());
@@ -724,7 +724,7 @@ void main() {
       await tester.tap(find.byKey(WidgetKeys.toDocumentDateField));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('SAVE'.tr()));
+      await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
 
       verify(
@@ -749,7 +749,7 @@ void main() {
       await tester.tap(fromDocumentDateField);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('SAVE'.tr()));
+      await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
 
       verify(
@@ -864,7 +864,7 @@ void main() {
                 paymentDate: fakeDate,
                 status: filterStatusVariant.currentValue ?? FilterStatus(''),
                 adviceExpiry: fakeAdviceExpiry,
-              )
+              ),
             ],
           ),
         );
@@ -903,7 +903,7 @@ void main() {
                 paymentDate: fakeDate,
                 status: filterStatusVariant.currentValue ?? FilterStatus(''),
                 adviceExpiry: fakeAdviceExpiry,
-              )
+              ),
             ],
           ),
         );
@@ -1205,7 +1205,7 @@ void main() {
               PaymentSummaryDetails.empty().copyWith(
                 paymentDate: paymentDate,
                 status: FilterStatus('Successful'),
-              )
+              ),
             ],
           ),
         );

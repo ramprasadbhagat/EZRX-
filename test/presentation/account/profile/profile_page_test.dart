@@ -91,7 +91,7 @@ void main() {
         validFrom: DateTimeStringValue('fake4'),
         validTo: DateTimeStringValue('fake4'),
         status: StatusType('fake5'),
-      )
+      ),
     ];
   });
   group('Test profile page', () {
@@ -147,7 +147,7 @@ void main() {
               ApiFailure.other('Fake Error'),
             ),
           ),
-        )
+        ),
       ];
 
       whenListen(
@@ -247,7 +247,7 @@ void main() {
           customerLicenses: [
             ...customerLicensesListMock,
             ...customerLicensesListMock,
-            ...customerLicensesListMock
+            ...customerLicensesListMock,
           ],
         ),
       );

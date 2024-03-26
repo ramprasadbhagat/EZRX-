@@ -87,8 +87,8 @@ class AddPolicyConfigurationState extends State<AddPolicyConfiguration> {
                   },
                   builder: (context, state) {
                     return state.returnsAllowed.getOrCrash()
-                        ? Column(
-                            children: const [
+                        ? const Column(
+                            children: [
                               _MonthsBeforeExpiryField(),
                               SizedBox(
                                 height: 16,

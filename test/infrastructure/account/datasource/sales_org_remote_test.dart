@@ -96,7 +96,7 @@ void main() {
       'Get sales config details is empty',
       () async {
         final res = {
-          'data': {'salesOrgConfigs': []}
+          'data': {'salesOrgConfigs': []},
         };
 
         dioAdapter.onPost(
@@ -139,7 +139,7 @@ void main() {
             {
               'data': null,
               'errors': [
-                {'message': 'fake-error'}
+                {'message': 'fake-error'},
               ],
             },
             delay: const Duration(seconds: 1),

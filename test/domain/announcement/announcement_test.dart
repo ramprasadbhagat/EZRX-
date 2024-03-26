@@ -24,7 +24,7 @@ void main() async {
           AnnouncementMessage.empty().copyWith(
             announcement:
                 'eZRx and \${functionLabel} will be unavailable from \${startTime} to \${endTime} on \${day}',
-          )
+          ),
         ],
       );
 

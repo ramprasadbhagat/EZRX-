@@ -598,7 +598,7 @@ void main() {
               materialList: [
                 materialResponseMock.products.first.copyWith(
                   type: MaterialInfoType('material'),
-                )
+                ),
               ],
             ),
           );
@@ -735,7 +735,7 @@ void main() {
               materialResponseMock.products.first.copyWith(
                 type: MaterialInfoType('material'),
                 isFOCMaterial: true,
-              )
+              ),
             ],
           ),
         );
@@ -846,7 +846,7 @@ void main() {
                       materialDescription: StringValue('        '),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           );

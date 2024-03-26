@@ -81,7 +81,7 @@ void main() {
             salesOrganisation: mockSalesOrganisation,
             customerCodeInfo: mockCustomerCodeInfo,
             appliedFilter: OutstandingInvoiceFilter.init(),
-          )
+          ),
         ],
       );
     },

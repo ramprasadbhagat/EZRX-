@@ -137,6 +137,8 @@ void main() {
 
   group('Payment method tab -', () {
     testWidgets('Initial state', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
       when(() => newPaymentBlocMock.state).thenReturn(
         NewPaymentState.initial().copyWith(
           selectedPaymentMethod: NewPaymentMethod.empty().copyWith(
@@ -351,7 +353,7 @@ void main() {
                   paymentMethod: PaymentMethodValue('fake'),
                   options: [],
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -549,6 +551,8 @@ void main() {
         );
       });
       testWidgets('Apl payment bank selection', (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+
         final paymentMethodOption = PaymentMethodOption.empty().copyWith(
           bankOptionId: BankOptionId('permata'),
         );
@@ -636,6 +640,8 @@ void main() {
         },
       );
       testWidgets('Display For ID market', (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        tester.view.devicePixelRatio = 1;
         await tester.pumpWidget(getWidget());
         await tester.pump();
         expect(find.byKey(WidgetKeys.aplPaymentSelector), findsOneWidget);
@@ -646,6 +652,7 @@ void main() {
       });
 
       testWidgets('On Payment Option Change', (tester) async {
+        await tester.binding.setSurfaceSize(const Size(600, 900));
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final checkBoxFinder =

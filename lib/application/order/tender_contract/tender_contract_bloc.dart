@@ -27,7 +27,7 @@ class TenderContractBloc
     on<TenderContractEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(event, emit) async {
+  Future<void> _onEvent(TenderContractEvent event,Emitter emit) async {
     await event.map(
       initialized: (_) async => emit(TenderContractState.initial()),
       fetch: (_Fetch e) async {

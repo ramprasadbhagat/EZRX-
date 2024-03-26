@@ -79,7 +79,7 @@ void main() {
         'errors': [
           {
             'message':
-                'status: 401, message: token has either expired or its not valid'
+                'status: 401, message: token has either expired or its not valid',
           },
         ],
       });

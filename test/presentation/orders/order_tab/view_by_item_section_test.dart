@@ -455,7 +455,7 @@ void main() {
         (tester) async {
       final orderHistoryList = orderHistory.copyWith(
         orderHistoryItems: [
-          orderHistory.orderHistoryItems.firstWhere((e) => e.isMarketPlace)
+          orderHistory.orderHistoryItems.firstWhere((e) => e.isMarketPlace),
         ],
       );
       when(() => mockViewByItemsBloc.state).thenReturn(

@@ -24,7 +24,7 @@ void main() {
           data['data']['customerInformation'],
         ).toDomain().copyWith(
           shipToInfoList: [
-            ShipToInfo.empty().copyWith(status: Status('fake-status'))
+            ShipToInfo.empty().copyWith(status: Status('fake-status')),
           ],
         ),
       );
@@ -37,7 +37,7 @@ void main() {
           data['data']['customerInformation'],
         ).toDomain().copyWith(
           shipToInfoList: [
-            ShipToInfo.empty().copyWith(status: Status('fake-status'))
+            ShipToInfo.empty().copyWith(status: Status('fake-status')),
           ],
         ),
       ).toJson();

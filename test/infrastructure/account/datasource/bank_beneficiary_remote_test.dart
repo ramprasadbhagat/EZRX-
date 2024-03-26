@@ -47,7 +47,7 @@ void main() {
       salesOrg = '3050';
 
       getBankBeneficiaryBySaleOrgVariables = {
-        'request': {'salesOrg': salesOrg}
+        'request': {'salesOrg': salesOrg},
       };
     },
   );

@@ -159,7 +159,7 @@ void main() {
         BonusSampleItem.empty().copyWith(
           qty: MaterialQty(1),
           materialNumber: MaterialNumber('12345'),
-        )
+        ),
       ],
     );
   });
@@ -259,6 +259,7 @@ void main() {
       }
 
       testWidgets('Bonus sample item test', (tester) async {
+        await tester.binding.setSurfaceSize(const Size(600, 900));
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [cartItem],
@@ -278,7 +279,7 @@ void main() {
           CartProductTile,
         );
         expect(accountSuspendedBanner, findsOneWidget);
-        await tester.drag(accountSuspendedBanner, const Offset(0, -100));
+        await tester.drag(accountSuspendedBanner, const Offset(0, -500));
         await tester.pump();
         final bonusSampleItemButton = find.byKey(
           WidgetKeys.cartItemBonus(
@@ -293,7 +294,7 @@ void main() {
         await tester.dragUntilVisible(
           customSlidableAction,
           bonusSampleItemButton,
-          const Offset(-500, 0),
+          const Offset(-1000, 0),
         );
         await tester.pump();
         expect(customSlidableAction, findsOneWidget);
@@ -339,7 +340,7 @@ void main() {
                       ),
                     )
                     .toList(),
-              )
+              ),
             ],
           ),
         );

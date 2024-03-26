@@ -20,7 +20,7 @@ void main() {
       () async {
         final input = <PriceBonusItem>[
           PriceBonusItem.empty().copyWith(qualifyingQuantity: 1),
-          PriceBonusItem.empty().copyWith(qualifyingQuantity: 2)
+          PriceBonusItem.empty().copyWith(qualifyingQuantity: 2),
         ];
         final bonus = PriceBonus(items: input);
         final result = bonus.items;
@@ -45,7 +45,7 @@ void main() {
               BonusMaterial.empty().copyWith(bonusQuantity: 2),
               BonusMaterial.empty().copyWith(bonusQuantity: 4),
             ],
-          )
+          ),
         ];
         final bonus = PriceBonus(items: input);
         final result = bonus.items;
@@ -75,7 +75,7 @@ void main() {
               BonusMaterial.empty().copyWith(bonusQuantity: 2),
               BonusMaterial.empty().copyWith(bonusQuantity: 4),
             ],
-          )
+          ),
         ];
 
         final bonuses = <PriceBonus>[
@@ -111,7 +111,7 @@ void main() {
               BonusMaterial.empty().copyWith(bonusQuantity: 2),
               BonusMaterial.empty().copyWith(bonusQuantity: 4),
             ],
-          )
+          ),
         ];
 
         final bonuses = <PriceBonus>[
@@ -158,7 +158,7 @@ void main() {
                 materialNumber: MaterialNumber('00000001234'),
               ),
             ],
-          )
+          ),
         ];
 
         final bonuses = <PriceBonus>[

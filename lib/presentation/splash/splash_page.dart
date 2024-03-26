@@ -131,12 +131,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           context.read<NotificationBloc>().add(const NotificationEvent.fetch());
         }
         break;
-      case AppLifecycleState.inactive:
-        break;
+
       case AppLifecycleState.paused:
         _initializeTimestamp();
         break;
+      case AppLifecycleState.inactive:
       case AppLifecycleState.detached:
+      case AppLifecycleState.hidden:
         break;
     }
   }
@@ -1177,11 +1178,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       child: locator<Config>().appFlavor == Flavor.mock
           ? const _Splash()
           : UpgradeAlert(
+              dialogStyle: Platform.isIOS
+                  ? UpgradeDialogStyle.cupertino
+                  : UpgradeDialogStyle.material,
               upgrader: Upgrader(
                 messages: UpgraderLocalizationMessage(),
-                dialogStyle: Platform.isIOS
-                    ? UpgradeDialogStyle.cupertino
-                    : UpgradeDialogStyle.material,
                 debugLogging: locator<Config>().appFlavor != Flavor.prod,
                 minAppVersion: '1.0.0',
               ),
@@ -1254,7 +1255,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       cancelText: 'Logout',
       onAcceptPressed: () async {
         final visited = await openAppSettings();
-        if (context.mounted && visited) {
+        if (mounted && visited) {
           context.read<AuthBloc>().add(const AuthEvent.visitedAppSettings());
         }
       },

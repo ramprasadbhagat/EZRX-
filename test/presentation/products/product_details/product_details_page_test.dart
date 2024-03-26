@@ -131,7 +131,7 @@ void main() {
         materials: [
           ComboDealMaterial.empty().copyWith(
             materialNumber: materialNumber,
-          )
+          ),
         ],
       ),
     ],
@@ -278,7 +278,7 @@ void main() {
             ),
             BlocProvider<ComboDealListBloc>(
               create: (context) => comboDealListMockBloc,
-            )
+            ),
           ],
           child: ProductDetailsPage(materialInfo: materialInfo),
         );
@@ -356,7 +356,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 materialInfo: materialInfo.copyWith(isFOCMaterial: false),
-              )
+              ),
             ],
           ),
         );
@@ -413,7 +413,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 materialInfo: materialInfo.copyWith(isFOCMaterial: false),
-              )
+              ),
             ],
           ),
         );
@@ -443,7 +443,7 @@ void main() {
               cartProducts: <PriceAggregate>[
                 PriceAggregate.empty().copyWith(
                   materialInfo: materialInfo.copyWith(isFOCMaterial: false),
-                )
+                ),
               ],
             ),
             CartState.initial(),
@@ -500,7 +500,7 @@ void main() {
               PriceAggregate.empty().copyWith(
                 materialInfo: materialInfo.copyWith(isFOCMaterial: false),
                 quantity: cartQty,
-              )
+              ),
             ],
           ),
         );
@@ -519,7 +519,7 @@ void main() {
               cartProducts: <PriceAggregate>[
                 PriceAggregate.empty().copyWith(
                   materialInfo: materialInfo.copyWith(isFOCMaterial: false),
-                )
+                ),
               ],
             ),
             CartState.initial(),
@@ -581,7 +581,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 materialInfo: materialInfo.copyWith(isFOCMaterial: false),
-              )
+              ),
             ],
           ),
         );
@@ -649,7 +649,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 materialInfo: materialInfo.copyWith(isFOCMaterial: true),
-              )
+              ),
             ],
           ),
         );
@@ -711,7 +711,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 materialInfo: materialInfo.copyWith(isFOCMaterial: true),
-              )
+              ),
             ],
           ),
         );
@@ -1284,7 +1284,7 @@ void main() {
             MaterialPriceState.initial().copyWith(
               isFetching: false,
               materialPrice: {materialNumber: price},
-            )
+            ),
           ]),
         );
         whenListen(
@@ -1298,7 +1298,7 @@ void main() {
               comboDeals: {
                 '${price.comboDeal.flexibleGroup.getValue()}-': [comboDeal],
               },
-            )
+            ),
           ]),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -1731,7 +1731,7 @@ void main() {
               materialNumber: price.copyWith(
                 zdp5MaxQuota: ZDP5Info('2'),
                 zdp5RemainingQuota: ZDP5Info('2'),
-              )
+              ),
             },
           ),
         );
@@ -2494,7 +2494,7 @@ void main() {
               materialNumber: materialPriceForTireSection.copyWith(
                 lastPrice: MaterialPrice(100),
                 finalPrice: MaterialPrice(100),
-              )
+              ),
             },
           ),
         );
@@ -2550,7 +2550,7 @@ void main() {
               materialNumber: materialPriceForTireSection.copyWith(
                 zdp5MaxQuota: ZDP5Info(''),
                 zdp5RemainingQuota: ZDP5Info(''),
-              )
+              ),
             },
           ),
         );
@@ -2608,7 +2608,7 @@ void main() {
                 zdp5RemainingQuota: ZDP5Info(''),
                 lastPrice: MaterialPrice(100),
                 finalPrice: MaterialPrice(100),
-              )
+              ),
             },
           ),
         );
@@ -2661,7 +2661,7 @@ void main() {
           MaterialPriceState.initial().copyWith(
             isFetching: false,
             materialPrice: {
-              materialNumber: materialPriceForTireSection.copyWith()
+              materialNumber: materialPriceForTireSection.copyWith(),
             },
           ),
         );

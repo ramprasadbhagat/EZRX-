@@ -134,7 +134,7 @@ void main() {
           isLoading: false,
           policyConfigurationList: policyConfigurationListMock,
           failureOrSuccessOption: optionOf(const Right('success')),
-        )
+        ),
       ];
       whenListen(
         policyConfigurationListBlocMock,

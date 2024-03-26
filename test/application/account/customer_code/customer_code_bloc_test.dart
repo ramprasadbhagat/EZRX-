@@ -29,7 +29,7 @@ void main() {
     SalesOrgCustomerInfo(
       customerCodeSoldTo: CustomerCode('fake-customer-code'),
       shipToInfos: [],
-    )
+    ),
   ];
 
   final fakeMultipleSalesOrgCustomerInfos = [
@@ -40,7 +40,7 @@ void main() {
     SalesOrgCustomerInfo(
       customerCodeSoldTo: CustomerCode('fake-customer-code-2'),
       shipToInfos: [],
-    )
+    ),
   ];
 
   final fakeUser = User.empty().copyWith(
@@ -88,7 +88,7 @@ void main() {
           hideCustomer: false,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
-        )
+        ),
       ],
     );
 
@@ -334,7 +334,7 @@ void main() {
               shipToCount: 1,
               soldToInformation: [
                 CustomerCodeInfo.empty()
-                    .copyWith(customerCodeSoldTo: 'fake-customer-code')
+                    .copyWith(customerCodeSoldTo: 'fake-customer-code'),
               ],
             ),
           ),
@@ -363,13 +363,13 @@ void main() {
           selectedSalesOrg: fakeSaleOrg,
           customerCodeList: [
             CustomerCodeInfo.empty()
-                .copyWith(customerCodeSoldTo: 'fake-customer-code')
+                .copyWith(customerCodeSoldTo: 'fake-customer-code'),
           ],
           searchKey: SearchKey('fake-customer-code'),
           canLoadMore: false,
           isSearchActive: true,
           isFetching: false,
-        )
+        ),
       ],
     );
 
@@ -427,7 +427,7 @@ void main() {
           canLoadMore: false,
           isSearchActive: true,
           isFetching: false,
-        )
+        ),
       ],
     );
 
@@ -524,7 +524,7 @@ void main() {
               shipToCount: 1,
               soldToInformation: [
                 CustomerCodeInfo.empty()
-                    .copyWith(customerCodeSoldTo: 'fake-customer-code')
+                    .copyWith(customerCodeSoldTo: 'fake-customer-code'),
               ],
             ),
           ),
@@ -554,13 +554,13 @@ void main() {
           selectedSalesOrg: fakeSaleOrg,
           customerCodeList: [
             CustomerCodeInfo.empty()
-                .copyWith(customerCodeSoldTo: 'fake-customer-code')
+                .copyWith(customerCodeSoldTo: 'fake-customer-code'),
           ],
           searchKey: SearchKey('fake-customer-code'),
           canLoadMore: false,
           isFetching: false,
           isSearchActive: true,
-        )
+        ),
       ],
     );
 
@@ -675,7 +675,7 @@ void main() {
               optionOf(const Left(ApiFailure.other('fake-error'))),
           canLoadMore: true,
           // customerCodeList: customerMockData,
-        )
+        ),
       ],
     );
 
@@ -754,7 +754,7 @@ void main() {
         bloc.state.customerCodeList,
         [
           customerMockData.soldToInformation.first,
-          customerMockData.soldToInformation.first
+          customerMockData.soldToInformation.first,
         ],
       ),
     );
@@ -777,7 +777,7 @@ void main() {
             customerCodes: [
               fakeSalesOrgCustomerInfos[0]
                   .customerCodeSoldTo
-                  .checkAllOrCustomerCode
+                  .checkAllOrCustomerCode,
             ],
             hideCustomer: false,
             offset: 0,

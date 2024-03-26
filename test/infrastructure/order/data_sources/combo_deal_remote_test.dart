@@ -75,7 +75,7 @@ void main() async {
             data: jsonEncode({
               'query':
                   remoteDataSource.queryMutation.getComboDealForMaterials(),
-              'variables': fakeQueryVariables
+              'variables': fakeQueryVariables,
             }),
           );
 
@@ -111,7 +111,7 @@ void main() async {
             data: jsonEncode({
               'query':
                   remoteDataSource.queryMutation.getComboDealForMaterials(),
-              'variables': fakeQueryVariables
+              'variables': fakeQueryVariables,
             }),
           );
 
@@ -166,7 +166,7 @@ void main() async {
           data: jsonEncode({
             'query':
                 remoteDataSource.queryMutation.getComboDealForPrincipleGroup(),
-            'variables': fakeQueryVariables
+            'variables': fakeQueryVariables,
           }),
         );
 
@@ -198,7 +198,7 @@ void main() async {
           data: jsonEncode({
             'query':
                 remoteDataSource.queryMutation.getComboDealForPrincipleGroup(),
-            'variables': fakeQueryVariables
+            'variables': fakeQueryVariables,
           }),
         );
 

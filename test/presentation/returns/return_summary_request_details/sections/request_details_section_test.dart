@@ -178,7 +178,7 @@ void main() {
           ),
           BlocProvider<PoAttachmentBloc>(
             create: (context) => mockPoAttachmentBloc,
-          )
+          ),
         ],
         child: const Scaffold(
           body: ReturnRequestDetails(),
@@ -228,7 +228,7 @@ void main() {
           isLoading: false,
           requestInformation: [
             ReturnRequestInformation.empty()
-                .copyWith(returnQuantity: '1', status: StatusType('PENDING'))
+                .copyWith(returnQuantity: '1', status: StatusType('PENDING')),
           ],
           requestInformationHeader:
               ReturnRequestInformationHeader.empty().copyWith(
@@ -281,6 +281,8 @@ void main() {
           ],
         ),
       );
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
       await tester.pumpWidget(getWUT());
       await tester.pump();
       final showButtonFinder =
@@ -324,6 +326,7 @@ void main() {
               .toList(),
         ),
       );
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       await tester.pumpWidget(getWUT());
       await tester.pump();
       final showButtonFinder =
@@ -353,6 +356,8 @@ void main() {
           requestInformation: requestInformation.returnRequestInformationList,
         ),
       );
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
       await tester.pumpWidget(getWUT());
       await tester.pump();
       final showButtonFinder =
@@ -386,7 +391,7 @@ void main() {
                   bapiSalesDocNumber: approvalNumber,
                 ),
               ],
-            )
+            ),
           ],
         ),
       );
@@ -442,7 +447,7 @@ void main() {
           ReturnDetailsByRequestState.initial().copyWith(
             isLoading: false,
             requestInformation: [
-              ReturnRequestInformation.empty().copyWith(returnQuantity: '1')
+              ReturnRequestInformation.empty().copyWith(returnQuantity: '1'),
             ],
             requestInformationHeader:
                 ReturnRequestInformationHeader.empty().copyWith(
@@ -487,6 +492,7 @@ void main() {
             ],
           ),
         );
+        await tester.binding.setSurfaceSize(const Size(480, 900));
 
         await tester.pumpWidget(getWUT());
         await tester.pump();
@@ -554,6 +560,7 @@ void main() {
           salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       await tester.pumpWidget(getWUT());
       await tester.pumpAndSettle();
       final itemSummaryPriceFinder = find.byType(ReturnSummaryItemPrice);
@@ -581,6 +588,8 @@ void main() {
           salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
       await tester.pumpWidget(getWUT());
       await tester.pumpAndSettle();
       final showButtonFinder =
@@ -612,15 +621,13 @@ void main() {
     testWidgets(
         'return summary details item test display return price info icon',
         (tester) async {
-      await tester.binding.setSurfaceSize(const Size(480, 900));
-
       when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
         ReturnDetailsByRequestState.initial().copyWith(
           requestInformation: requestInformation.returnRequestInformationList
               .map(
                 (e) => e.copyWith(
                   status: StatusType('APPROVED'),
-                  initialQuantity: 0,
+                  initialQuantity: 1,
                 ),
               )
               .toList(),
@@ -640,6 +647,12 @@ void main() {
           find.byKey(WidgetKeys.returnSummaryInfoIcon('Return value changed'));
       expect(itemPriceFinder, findsOneWidget);
       expect(itemPriceInfoIconFinder, findsOneWidget);
+      await tester.fling(
+        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      await tester.pump();
 
       await tester.tap(itemPriceInfoIconFinder);
       await tester.pump();
@@ -666,7 +679,7 @@ void main() {
               .map(
                 (e) => e.copyWith(
                   status: StatusType('APPROVED'),
-                  overrideValue: 0,
+                  overrideValue: 1,
                   priceOverrideTrail: <PriceOverrideTrail>[],
                 ),
               )
@@ -687,6 +700,12 @@ void main() {
           .byKey(WidgetKeys.returnSummaryInfoIcon('Return quantity changed'));
       expect(itemQuantityFinder, findsOneWidget);
       expect(itemQuantityInfoIconFinder, findsOneWidget);
+       await tester.fling(
+        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      await tester.pump();
 
       await tester.tap(itemQuantityInfoIconFinder);
       await tester.pump();
@@ -722,7 +741,7 @@ void main() {
       when(() => mockReturnListByRequestBloc.state).thenReturn(
         ReturnListByRequestState.initial().copyWith(
           returnItemList: [
-            ReturnItem.empty().copyWith(itemQty: ReturnQuantity('2'))
+            ReturnItem.empty().copyWith(itemQty: ReturnQuantity('2')),
           ],
         ),
       );
@@ -734,14 +753,14 @@ void main() {
     });
 
     testWidgets('=> show `-` when attachment is empty', (tester) async {
-      await tester.binding.setSurfaceSize(const Size(480, 900));
+      await tester.binding.setSurfaceSize(const Size(480, 1100));
       when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
         ReturnDetailsByRequestState.initial().copyWith(
           requestInformation: [
             requestInformation.returnRequestInformationList.first.copyWith(
               status: StatusType('APPROVED'),
               bonusInformation: <ReturnRequestInformation>[],
-            )
+            ),
           ],
         ),
       );
@@ -777,14 +796,14 @@ void main() {
       (tester) async {
         final currentStatusVariant =
             statusVariants.currentValue ?? StatusType('');
-        await tester.binding.setSurfaceSize(const Size(480, 900));
+        await tester.binding.setSurfaceSize(const Size(480, 1100));
         when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
           ReturnDetailsByRequestState.initial().copyWith(
             requestInformation: [
               requestInformation.returnRequestInformationList.first.copyWith(
                 status: currentStatusVariant,
                 bonusInformation: <ReturnRequestInformation>[],
-              )
+              ),
             ],
           ),
         );

@@ -176,7 +176,7 @@ void main() {
             category: PriceComboDealCategory.empty()
                 .copyWith(type: ComboDealCategoryType('MATNR')),
           ),
-        )
+        ),
       ],
     );
   });
@@ -416,9 +416,9 @@ void main() {
               cartItem.copyWith(
                 comboMaterials: [
                   cartItem.comboMaterials.first
-                      .copyWith(comboDeals: PriceComboDeal.empty())
+                      .copyWith(comboDeals: PriceComboDeal.empty()),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -470,9 +470,9 @@ void main() {
                     comboDealType: 'K2',
                     mandatory: true,
                     comboDeals: PriceComboDeal.empty(),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -510,9 +510,9 @@ void main() {
                     salesOrgConfig: fakeKHSalesOrgConfigs,
                     comboDealType: 'K2',
                     comboDeals: PriceComboDeal.empty(),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -583,7 +583,7 @@ void main() {
                       ),
                     )
                     .toList(),
-              )
+              ),
             ],
           ),
         );
@@ -624,7 +624,7 @@ void main() {
                       ),
                     )
                     .toList(),
-              )
+              ),
             ],
           ),
         );
@@ -652,7 +652,7 @@ void main() {
         when(() => comboDealListBlocMock.state).thenReturn(
           ComboDealListState.initial().copyWith(
             comboDeals: {
-              '123456-654321': [comboDeal]
+              '123456-654321': [comboDeal],
             },
             priceComboDeal: PriceComboDeal.empty().copyWith(
               flexibleGroup: FlexibleGroup('123456'),
@@ -687,7 +687,7 @@ void main() {
                       ),
                     )
                     .toList(),
-              )
+              ),
             ],
           ),
         );

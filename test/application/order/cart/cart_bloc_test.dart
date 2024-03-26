@@ -86,9 +86,9 @@ void main() {
           PriceTierItem.empty().copyWith(
             rate: 20,
             quantity: 10,
-          )
+          ),
         ],
-      )
+      ),
     ];
 
     priceRules = [
@@ -99,10 +99,10 @@ void main() {
             RuleTier.empty().copyWith(
               quantity: 20,
               rate: 200,
-            )
+            ),
           ],
         ),
-      )
+      ),
     ];
 
     priceAggregates = materialListResponse.products
@@ -162,7 +162,7 @@ void main() {
         materialNumber: priceAggregates.first.getMaterialNumber,
         bonusRatio: 1,
         bonusQuantity: 1,
-      )
+      ),
     ];
     priceBonus = <PriceBonusItem>[
       PriceBonusItem.empty().copyWith(
@@ -181,7 +181,7 @@ void main() {
           rules: priceRules,
         ),
         quantity: 20,
-      )
+      ),
     ];
     cartProducts = await CartLocalDataSource().getAddedToCartProductList();
   });
@@ -629,12 +629,12 @@ void main() {
           );
           final allAdditionInfo = metaDataResponse.metaDataMap;
           final stockInfo = {
-            for (MaterialInfo i in priceAggregateAllMaterial)
+            for (final MaterialInfo i in priceAggregateAllMaterial)
               i.materialNumber: [
                 StockInfo.empty().copyWith(
                   inStock: MaterialInStock('Yes'),
-                )
-              ]
+                ),
+              ],
           };
           final updatedPriceAggregates = priceAggregates
               .map(
@@ -892,7 +892,7 @@ void main() {
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         setUp: () {
           final priceAggregateAllMaterial = allMaterial([
-            priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem)
+            priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
           ]);
 
           expectedCartState = [
@@ -926,7 +926,7 @@ void main() {
               isUpdatingStock: true,
               cartProducts: [
                 priceAggregates.first
-                    .copyWith(bonusSampleItems: bonusSampleItem)
+                    .copyWith(bonusSampleItems: bonusSampleItem),
               ],
               additionInfo: ProductMetaData.empty().metaDataMap,
             ),
@@ -958,7 +958,7 @@ void main() {
             () => productDetailRepository.getProductsMetaData(
               materialNumbers: [
                 MaterialNumber('000000000021041772'),
-                MaterialNumber('fake-bonus-sample-item-1')
+                MaterialNumber('fake-bonus-sample-item-1'),
               ],
               salesOrganisation: fakeMYSalesOrganisation,
               customerCodeInfo: fakeCustomerCodeInfo,
@@ -973,13 +973,13 @@ void main() {
           shipToInfo: shipToInfo,
           customerCodeInfo: fakeCustomerCodeInfo,
           cartProducts: [
-            priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem)
+            priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
           ],
         ),
         act: (bloc) => bloc.add(
           CartEvent.getDetailsProductsAddedToCart(
             cartProducts: [
-              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem)
+              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
             ],
           ),
         ),
@@ -1155,7 +1155,7 @@ void main() {
                 finalPrice: MaterialPrice(35.0),
                 lastPrice: MaterialPrice(39.0),
               ),
-            )
+            ),
           ],
         ),
         setUp: () {
@@ -1172,7 +1172,7 @@ void main() {
                     finalPrice: MaterialPrice(39.0),
                     lastPrice: MaterialPrice(39.0),
                   ),
-                )
+                ),
               ],
             ),
           ).thenAnswer(
@@ -1184,7 +1184,7 @@ void main() {
                     finalPrice: MaterialPrice(39.0),
                     lastPrice: MaterialPrice(39.0),
                   ),
-                )
+                ),
               ],
             ),
           );
@@ -1199,7 +1199,7 @@ void main() {
                   finalPrice: MaterialPrice(39.0),
                   lastPrice: MaterialPrice(39.0),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -1213,7 +1213,7 @@ void main() {
                   finalPrice: MaterialPrice(35.0),
                   lastPrice: MaterialPrice(39.0),
                 ),
-              )
+              ),
             ],
             salesOrganisation: fakeSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -1228,7 +1228,7 @@ void main() {
                   finalPrice: MaterialPrice(35.0),
                   lastPrice: MaterialPrice(39.0),
                 ),
-              )
+              ),
             ],
             salesOrganisation: fakeSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -1282,7 +1282,7 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [
               priceAggregatesWithBothTierAndDealBonus.first
-                  .copyWith(discountedMaterialCount: 20)
+                  .copyWith(discountedMaterialCount: 20),
             ],
             salesOrganisation: fakeSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -1293,7 +1293,7 @@ void main() {
             isFetchingBonus: true,
             cartProducts: [
               priceAggregatesWithBothTierAndDealBonus.first
-                  .copyWith(discountedMaterialCount: 20)
+                  .copyWith(discountedMaterialCount: 20),
             ],
             salesOrganisation: fakeSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -1303,7 +1303,7 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [
               priceAggregatesWithBothTierAndDealBonus.first
-                  .copyWith(discountedMaterialCount: 20)
+                  .copyWith(discountedMaterialCount: 20),
             ],
             salesOrganisation: fakeSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -1359,7 +1359,7 @@ void main() {
             upsertBonusItemInProgressHashCode: [
               priceAggregates.first.materialInfo
                   .copyWith(quantity: MaterialQty(1))
-                  .hashCode
+                  .hashCode,
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -1407,7 +1407,7 @@ void main() {
               [
                 priceAggregates.first.copyWith(
                   bonusSampleItems: bonusSampleItem,
-                )
+                ),
               ],
             ),
           );
@@ -1420,7 +1420,7 @@ void main() {
               materials: [
                 priceAggregates.first.copyWith(
                   bonusSampleItems: bonusSampleItem,
-                )
+                ),
               ],
             ),
           ).thenAnswer(
@@ -1446,7 +1446,7 @@ void main() {
                   .copyWith(
                     quantity: MaterialQty(1),
                   )
-                  .hashCode
+                  .hashCode,
             ],
             cartProducts: [
               priceAggregates.first,
@@ -2348,7 +2348,7 @@ void main() {
               price: prices.first.copyWith(
                 materialNumber: priceAggregates.first.getMaterialNumber,
               ),
-            )
+            ),
           ],
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -2365,7 +2365,7 @@ void main() {
               materials: [
                 priceAggregates.first.copyWith(
                   price: prices.first,
-                )
+                ),
               ],
             ),
           ).thenAnswer(
@@ -2377,7 +2377,7 @@ void main() {
         act: (bloc) => bloc.add(
           CartEvent.updatePriceProduct(
             priceProducts: {
-              priceAggregates.first.getMaterialNumber: prices.first
+              priceAggregates.first.getMaterialNumber: prices.first,
             },
           ),
         ),
@@ -2389,7 +2389,7 @@ void main() {
                 price: prices.first.copyWith(
                   materialNumber: priceAggregates.first.getMaterialNumber,
                 ),
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2400,7 +2400,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2412,7 +2412,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2423,7 +2423,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2445,7 +2445,7 @@ void main() {
           cartProducts: [
             priceAggregates.first.copyWith(
               price: prices.first,
-            )
+            ),
           ],
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -2462,7 +2462,7 @@ void main() {
               materials: [
                 priceAggregates.first.copyWith(
                   price: prices.first,
-                )
+                ),
               ],
             ),
           ).thenAnswer(
@@ -2474,7 +2474,7 @@ void main() {
         act: (bloc) => bloc.add(
           CartEvent.updatePriceProduct(
             priceProducts: {
-              priceAggregates.first.getMaterialNumber: prices.first
+              priceAggregates.first.getMaterialNumber: prices.first,
             },
           ),
         ),
@@ -2484,7 +2484,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2495,7 +2495,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2507,7 +2507,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2518,7 +2518,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2539,7 +2539,7 @@ void main() {
           cartProducts: [
             priceAggregates.first.copyWith(
               price: prices.elementAt(1),
-            )
+            ),
           ],
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -2564,7 +2564,7 @@ void main() {
         act: (bloc) => bloc.add(
           CartEvent.updatePriceProduct(
             priceProducts: {
-              priceAggregates.first.getMaterialNumber: prices.first
+              priceAggregates.first.getMaterialNumber: prices.first,
             },
           ),
         ),
@@ -2572,7 +2572,7 @@ void main() {
           CartState.initial().copyWith(
             isMappingPrice: true,
             cartProducts: [
-              priceAggregates.first.copyWith(price: prices.elementAt(1))
+              priceAggregates.first.copyWith(price: prices.elementAt(1)),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2616,7 +2616,7 @@ void main() {
           cartProducts: [
             priceAggregates.first.copyWith(
               price: prices.first,
-            )
+            ),
           ],
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -2636,7 +2636,7 @@ void main() {
                   price: prices.first.copyWith(
                     tiers: priceTiers,
                   ),
-                )
+                ),
               ],
             ),
           ).thenAnswer(
@@ -2650,7 +2650,7 @@ void main() {
             priceProducts: {
               priceAggregates.first.getMaterialNumber: prices.first.copyWith(
                 tiers: priceTiers,
-              )
+              ),
             },
           ),
         ),
@@ -2660,7 +2660,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2674,7 +2674,7 @@ void main() {
                 price: prices.first.copyWith(
                   tiers: priceTiers,
                 ),
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2689,7 +2689,7 @@ void main() {
                 price: prices.first.copyWith(
                   tiers: priceTiers,
                 ),
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2703,7 +2703,7 @@ void main() {
                 price: prices.first.copyWith(
                   tiers: priceTiers,
                 ),
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2883,7 +2883,7 @@ void main() {
           cartProducts: [
             priceAggregates.first.copyWith(
               bonusSampleItems: bonusSampleItem,
-            )
+            ),
           ],
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -2903,7 +2903,7 @@ void main() {
                   parentID: priceAggregates.first.getMaterialNumber.getValue(),
                   quantity: MaterialQty(0),
                   sampleBonusItemId: 'fake-item-id',
-                )
+                ),
               ],
               language: fakeClientUser.preferredLanguage,
             ),
@@ -2922,7 +2922,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 bonusSampleItems: bonusSampleItem,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2945,7 +2945,7 @@ void main() {
           cartProducts: [
             priceAggregates.first.copyWith(
               bonusSampleItems: bonusSampleItem,
-            )
+            ),
           ],
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -2965,7 +2965,7 @@ void main() {
                   parentID: priceAggregates.first.getMaterialNumber.getValue(),
                   quantity: MaterialQty(0),
                   sampleBonusItemId: 'fake-item-id',
-                )
+                ),
               ],
               language: fakeClientUser.preferredLanguage,
             ),
@@ -2982,7 +2982,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 bonusSampleItems: bonusSampleItem,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -2994,7 +2994,7 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 bonusSampleItems: bonusSampleItem,
-              )
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
@@ -3906,7 +3906,7 @@ void main() {
                       .map((e) => e.copyWith(quantity: MaterialQty(10)))
                       .toList(),
                 ),
-              )
+              ),
             ],
           );
           expect(
@@ -3943,7 +3943,7 @@ void main() {
                       MaterialTaxClassification('Product : Full Tax'),
                   tax: 1,
                 ),
-              )
+              ),
             ],
           );
           expect(
@@ -4155,7 +4155,7 @@ void main() {
                       .map((e) => e.copyWith(quantity: MaterialQty(5)))
                       .toList(),
                 ),
-              )
+              ),
             ],
           );
           expect(
@@ -4179,13 +4179,13 @@ void main() {
                           stockInfos: [
                             StockInfo.empty().copyWith(
                               inStock: MaterialInStock('Yes'),
-                            )
+                            ),
                           ],
                         ),
                       )
                       .toList(),
                 ),
-              )
+              ),
             ],
           );
           expect(
@@ -4252,7 +4252,7 @@ void main() {
                       MaterialTaxClassification('Product : Full Tax'),
                   tax: 1,
                 ),
-              )
+              ),
             ],
             config: fakeIDSalesOrgConfigs,
           );
@@ -4275,7 +4275,7 @@ void main() {
                       MaterialTaxClassification('Product : Full Tax'),
                   tax: 1,
                 ),
-              )
+              ),
             ],
             config: fakeKHSalesOrgConfigs,
           );
@@ -4298,7 +4298,7 @@ void main() {
                       MaterialTaxClassification('Product : Full Tax'),
                   tax: 1,
                 ),
-              )
+              ),
             ],
             config: fakeVNSalesOrgConfigs.copyWith(
               displaySubtotalTaxBreakdown: true,
@@ -4378,7 +4378,7 @@ void main() {
                 ),
                 discountedMaterialCount: 50,
                 quantity: 50,
-              )
+              ),
             ],
             config: fakeKHSalesOrgConfigs,
           );
@@ -4396,7 +4396,7 @@ void main() {
             cartProducts: [
               bundleItem.copyWith(
                 salesOrgConfig: fakeKHSalesOrgConfigs,
-              )
+              ),
             ],
           );
           expect(
@@ -4626,7 +4626,7 @@ void main() {
           final currentState = previousState.copyWith(
             cartProducts: [
               bundle.copyWith
-                  .bundle(materials: [...bundle.bundle.materials]..removeLast())
+                  .bundle(materials: [...bundle.bundle.materials]..removeLast()),
             ],
           );
           expect(
@@ -4746,7 +4746,7 @@ void main() {
                     counterOfferPrice: CounterOfferValue('100'),
                   ),
                 ),
-              )
+              ),
             ],
             config: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,

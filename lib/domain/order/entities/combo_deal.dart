@@ -195,6 +195,7 @@ class ComboDeal with _$ComboDeal {
           (tier) => tier.minQty <= totalQuantityUnit,
           orElse: () => ComboDealQtyTier.empty(),
         );
+        
         return selectedSuffix(
           materialNumber: materialNumber,
           eligibleComboDealQtyTier: eligibleComboDealQtyTier,

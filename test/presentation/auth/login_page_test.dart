@@ -1,3 +1,7 @@
+//TODO: Remove ignore when login with web introduce
+
+// ignore_for_file: dead_code
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -513,9 +517,10 @@ void main() {
     testWidgets(
       'SSOLogin Login',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(600, 900));
+
         await tester.pumpWidget(loginTestPage());
         await tester.pump();
-        final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
         expect(ssoLoginButton, findsOneWidget);
         await tester.tap(ssoLoginButton);
         await tester.pump();
@@ -530,8 +535,8 @@ void main() {
     testWidgets(
       'Check only LoginMobile available',
       (tester) async {
-        tester.binding.window.physicalSizeTestValue = const Size(2732, 2048);
-        tester.binding.window.devicePixelRatioTestValue = 1;
+        tester.view.physicalSize = const Size(2732, 2048);
+        tester.view.devicePixelRatio = 1;
         await tester.pumpWidget(
           loginTestPage(
             useMediaQuery: false,
@@ -767,8 +772,8 @@ void main() {
 
     testWidgets(' Test After click on Create Account Button for Tablet',
         (tester) async {
-      tester.binding.window.physicalSizeTestValue = const Size(2732, 2048);
-      tester.binding.window.devicePixelRatioTestValue = 1;
+      tester.view.physicalSize = const Size(2732, 2048);
+      tester.view.devicePixelRatio = 1;
       await tester.pumpWidget(loginTestPage(useMediaQuery: false));
       await tester.pump();
 
@@ -1156,8 +1161,8 @@ void main() {
     testWidgets(
       'Exrx apl logo on market change from other to VN show register',
       (tester) async {
-        tester.binding.window.physicalSizeTestValue = const Size(2732, 2048);
-        tester.binding.window.devicePixelRatioTestValue = 1;
+        tester.view.physicalSize = const Size(2732, 2048);
+        tester.view.devicePixelRatio = 1;
         when(() => loginBlocMock.state).thenReturn(
           LoginFormState.initial().copyWith(
             currentMarket: AppMarket('sg'),

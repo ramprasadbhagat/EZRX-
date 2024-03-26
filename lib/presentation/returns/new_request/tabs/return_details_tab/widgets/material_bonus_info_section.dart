@@ -64,7 +64,6 @@ class _ToggleActiveButton extends StatelessWidget {
             ),
             Theme(
               data: Theme.of(context).copyWith(
-                useMaterial3: true,
                 colorScheme: const ColorScheme.light().copyWith(
                   outline: ZPColors.extraLightGrey3,
                 ),

@@ -425,7 +425,7 @@ void main() {
             failureOrSuccessOption: optionOf(const Right(unit)),
             viewByOrderList: fakeViewByOrder,
             searchKey: SearchKey('test'),
-          )
+          ),
         ]),
       );
 
@@ -466,7 +466,7 @@ void main() {
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other(failureMessage))),
             searchKey: SearchKey.searchFilter('fake_searchKey'),
-          )
+          ),
         ]),
       );
 

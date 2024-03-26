@@ -25,8 +25,8 @@ class _ArticleFilterBottomSheet extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Row(
-            children: const [
+          const Row(
+            children:  [
               _ArticleFilterResetButton(),
               SizedBox(
                 width: 12,

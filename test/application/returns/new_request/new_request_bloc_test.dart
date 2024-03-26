@@ -69,7 +69,7 @@ void main() {
         expect: () => [
           NewRequestState.initial().copyWith(
             salesOrg: fakeSalesOrg,
-          )
+          ),
         ],
       );
 
@@ -82,7 +82,7 @@ void main() {
             InvoiceDetails.empty().copyWith(
               invoiceNumber: fakeReturnItemDetail.assignmentNumber,
               returnItemDetailsList: [fakeReturnItemDetail],
-            )
+            ),
           ],
         ),
         verify: (NewRequestBloc bloc) {
@@ -125,7 +125,7 @@ void main() {
             InvoiceDetails.empty().copyWith(
               invoiceNumber: fakeReturnItemDetail.assignmentNumber,
               returnItemDetailsList: [fakeReturnItemDetail],
-            )
+            ),
           ],
         ),
         verify: (NewRequestBloc bloc) {
@@ -157,7 +157,7 @@ void main() {
           selectedItems: [
             fakeReturnMaterial.copyWith(
               itemNumber: '',
-            )
+            ),
           ],
         ),
         verify: (NewRequestBloc bloc) {
@@ -177,7 +177,7 @@ void main() {
           invoiceDetails: [
             InvoiceDetails.empty().copyWith(
               returnItemDetailsList: [fakeReturnItemDetail],
-            )
+            ),
           ],
         ),
         act: (NewRequestBloc bloc) => bloc.add(
@@ -192,9 +192,9 @@ void main() {
             invoiceDetails: [
               InvoiceDetails.empty().copyWith(
                 returnItemDetailsList: [fakeReturnItemDetail],
-              )
+              ),
             ],
-          )
+          ),
         ],
       );
 
@@ -221,9 +221,9 @@ void main() {
                 returnItemDetailsList: [
                   fakeReturnMaterial.validatedItemDetails,
                 ],
-              )
+              ),
             ],
-          )
+          ),
         ],
       );
 
@@ -260,9 +260,9 @@ void main() {
                     (bonusItem) => bonusItem.validatedItemDetails,
                   ),
                 ],
-              )
+              ),
             ],
-          )
+          ),
         ],
       );
 
@@ -276,9 +276,9 @@ void main() {
                 fakeReturnItemDetail.copyWith(
                   // change batch value to make sure item is different
                   batch: 'fake-batch',
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
         act: (NewRequestBloc bloc) => bloc.add(
@@ -291,9 +291,9 @@ void main() {
             invoiceDetails: [
               InvoiceDetails.empty().copyWith(
                 returnItemDetailsList: [fakeReturnItemDetail],
-              )
+              ),
             ],
-          )
+          ),
         ],
       );
 
@@ -304,7 +304,7 @@ void main() {
           invoiceDetails: [
             InvoiceDetails.empty().copyWith(
               returnItemDetailsList: [fakeReturnItemDetail],
-            )
+            ),
           ],
         ),
         act: (NewRequestBloc bloc) => bloc.add(
@@ -326,11 +326,11 @@ void main() {
                       ReturnRequestAttachment.empty()
                           .copyWith(name: fakeFileName),
                     ],
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
-          )
+          ),
         ],
       );
 
@@ -346,9 +346,9 @@ void main() {
                     ReturnRequestAttachment.empty()
                         .copyWith(name: fakeFileName),
                   ],
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
         act: (NewRequestBloc bloc) => bloc.add(
@@ -365,9 +365,9 @@ void main() {
             invoiceDetails: [
               InvoiceDetails.empty().copyWith(
                 returnItemDetailsList: [fakeReturnItemDetail],
-              )
+              ),
             ],
-          )
+          ),
         ],
       );
 
@@ -382,7 +382,7 @@ void main() {
         expect: () => [
           NewRequestState.initial().copyWith(
             showErrorMessages: true,
-          )
+          ),
         ],
       );
 
@@ -406,7 +406,7 @@ void main() {
               ReturnMaterial.empty(),
             ],
             showErrorMessages: false,
-          )
+          ),
         ],
       );
 
@@ -417,7 +417,7 @@ void main() {
           invoiceDetails: [
             InvoiceDetails.empty().copyWith(
               returnItemDetailsList: [fakeReturnItemDetail],
-            )
+            ),
           ],
         ),
         act: (NewRequestBloc bloc) => bloc.add(
@@ -430,10 +430,10 @@ void main() {
             invoiceDetails: [
               InvoiceDetails.empty().copyWith(
                 returnItemDetailsList: [fakeReturnItemDetail],
-              )
+              ),
             ],
             showErrorMessages: true,
-          )
+          ),
         ],
       );
 
@@ -448,7 +448,7 @@ void main() {
         expect: () => [
           NewRequestState.initial().copyWith(
             returnReference: 'fake-return-reference',
-          )
+          ),
         ],
       );
 
@@ -463,7 +463,7 @@ void main() {
         expect: () => [
           NewRequestState.initial().copyWith(
             specialInstructions: 'fake-instruction',
-          )
+          ),
         ],
       );
 
@@ -549,7 +549,7 @@ void main() {
               invoiceNumber: fakeReturnMaterial.assignmentNumber,
               salesOrg: fakeSalesOrg,
               returnItemDetailsList: [fakeReturnItemDetail],
-            )
+            ),
           ],
         ),
         act: (NewRequestBloc bloc) => [
@@ -586,7 +586,7 @@ void main() {
                 returnItemDetailsList: [
                   fakeReturnMaterial.validatedItemDetails,
                 ],
-              )
+              ),
             ],
           ),
         ],

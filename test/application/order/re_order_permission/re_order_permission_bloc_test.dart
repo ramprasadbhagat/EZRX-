@@ -188,7 +188,7 @@ void main() {
           () => repository.getReorderPermission(
             customerCodeInfo: fakeCustomerCodeInfo,
             materialNumbers: [
-              fakeViewByItemDetail.orderHistoryItems.first.materialNumber
+              fakeViewByItemDetail.orderHistoryItems.first.materialNumber,
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
@@ -237,7 +237,7 @@ void main() {
               validMaterials: [
                 ValidMaterial.empty().copyWith(
                   materialNumber: fakeOrderHistoryItem.materialNumber,
-                )
+                ),
               ],
             ),
           ),
@@ -279,7 +279,7 @@ void main() {
               validMaterials: [
                 ValidMaterial.empty().copyWith(
                   materialNumber: fakeOrderHistoryItem.materialNumber,
-                )
+                ),
               ],
             ),
           ),
@@ -317,7 +317,7 @@ void main() {
                   isBonusMaterial: true,
                   lineNumber: LineNumber('12'),
                 )
-                .reOrderMaterialInfo
+                .reOrderMaterialInfo,
           ],
         ),
       ],

@@ -72,7 +72,7 @@ void main() {
             materialInfoMock.materialNumber: Price.empty().copyWith(
               lastPrice: MaterialPrice(10.0),
               finalPrice: MaterialPrice(11.0),
-            )
+            ),
           },
         ),
       );

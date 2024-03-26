@@ -330,10 +330,10 @@ void main() {
                       .add(const Duration(days: 3))
                       .toString(),
                 ),
-              )
+              ),
             ],
           ),
-        )
+        ),
       ];
       whenListen(mockViewByOrderBloc, Stream.fromIterable(expectedStatue));
 
@@ -361,7 +361,7 @@ void main() {
             ),
             ReOrderPermissionState.initial().copyWith(
               orderNumberWillUpsert: viewByOrder.orderHeaders.first.orderNumber,
-            )
+            ),
           ],
         ),
       );
@@ -376,7 +376,7 @@ void main() {
             ),
             CartState.initial().copyWith(
               isBuyAgain: false,
-            )
+            ),
           ],
         ),
       );
@@ -435,7 +435,7 @@ void main() {
             CartState.initial().copyWith(
               apiFailureOrSuccessOption:
                   optionOf(const Left(ApiFailure.other('test'))),
-            )
+            ),
           ],
         ),
       );
@@ -484,7 +484,7 @@ void main() {
               orderNumberWillUpsert: viewByOrder.orderHeaders.first.orderNumber,
               failureOrSuccessOption:
                   optionOf(const Left(ApiFailure.other('test'))),
-            )
+            ),
           ],
         ),
       );
@@ -511,7 +511,7 @@ void main() {
                 orderValue: 364.80,
                 totalTax: 20,
                 totalValue: 384.80,
-              )
+              ),
             ],
           ),
         ),
@@ -545,7 +545,7 @@ void main() {
         await tester.pump();
         await tester.fling(
           find.byKey(WidgetKeys.viewByOrdersGroupList),
-          const Offset(0.0, 150.0),
+          const Offset(0.0, 200.0),
           800.0,
         );
         expect(
@@ -601,7 +601,7 @@ void main() {
                   ApiFailure.other('fake-exception'),
                 ),
               ),
-            )
+            ),
           ]),
         );
         await tester.pumpWidget(getScopedWidget());

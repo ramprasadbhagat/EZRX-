@@ -144,7 +144,7 @@ void main() {
       final res = {
         'data': {
           'clearAllClevertapNotifications': {'message': 'clear done'},
-        }
+        },
       };
 
       dioAdapter.onPost(
@@ -200,7 +200,7 @@ void main() {
           {
             'data': null,
             'errors': [
-              {'message': 'fake-error'}
+              {'message': 'fake-error'},
             ],
           },
           delay: const Duration(seconds: 1),

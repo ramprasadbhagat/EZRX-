@@ -197,7 +197,7 @@ void main() {
           itemsInfo: [
             CustomerDocumentDetail.empty().copyWith(
               taxAmount: 15,
-            )
+            ),
           ],
         ),
       );

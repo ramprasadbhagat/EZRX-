@@ -189,7 +189,7 @@ void main() {
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('No'),
-                    )
+                    ),
                   ],
                 ),
                 MaterialInfo.empty().copyWith(
@@ -198,7 +198,7 @@ void main() {
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('No'),
-                    )
+                    ),
                   ],
                 ),
               ],
@@ -271,7 +271,7 @@ void main() {
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('No'),
-                    )
+                    ),
                   ],
                 ),
                 MaterialInfo.empty().copyWith(
@@ -280,7 +280,7 @@ void main() {
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('No'),
-                    )
+                    ),
                   ],
                 ),
               ],
@@ -382,7 +382,7 @@ void main() {
           Stream.fromIterable([
             bundleAddToCartBloc.state.copyWith(
               showErrorMessage: true,
-            )
+            ),
           ]),
         );
 
@@ -441,7 +441,7 @@ void main() {
               PriceAggregate.empty().copyWith(
                 materialInfo:
                     MaterialInfo.empty().copyWith(isFOCMaterial: true),
-              )
+              ),
             ],
           ),
         );
@@ -536,7 +536,7 @@ void main() {
                   StockInfo.empty().copyWith(
                     inStock: MaterialInStock('Yes'),
                     expiryDate: DateTimeStringValue('20240604'),
-                  )
+                  ),
                 ],
               ),
             ],
@@ -631,7 +631,7 @@ void main() {
               PriceAggregate.empty().copyWith(
                 materialInfo:
                     MaterialInfo.empty().copyWith(isFOCMaterial: true),
-              )
+              ),
             ],
           ),
         );
@@ -699,7 +699,7 @@ void main() {
               PriceAggregate.empty().copyWith(
                 materialInfo:
                     MaterialInfo.empty().copyWith(isFOCMaterial: true),
-              )
+              ),
             ],
           ),
         );
@@ -724,7 +724,7 @@ void main() {
                 PriceAggregate.empty().copyWith(
                   materialInfo:
                       MaterialInfo.empty().copyWith(isFOCMaterial: true),
-                )
+                ),
               ],
             ),
             CartState.initial(),

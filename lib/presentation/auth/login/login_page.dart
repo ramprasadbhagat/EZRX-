@@ -19,8 +19,8 @@ class LoginPage extends StatelessWidget {
         backgroundColor: ZPColors.accentColor,
         toolbarHeight: 1,
       ),
-      body: WillPopScope(
-        onWillPop: () async => false,
+      body: PopScope(
+            canPop: false,
         child: BlocConsumer<LoginFormBloc, LoginFormState>(
           listenWhen: (previous, current) =>
               previous.authFailureOrSuccessOption !=

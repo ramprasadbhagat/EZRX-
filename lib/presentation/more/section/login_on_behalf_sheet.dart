@@ -102,9 +102,9 @@ class LoginOnBehalfSheet extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     _CancelButton(),
                     SizedBox(
                       width: 10,

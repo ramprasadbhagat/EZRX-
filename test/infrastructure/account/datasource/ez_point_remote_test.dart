@@ -51,7 +51,7 @@ void main() {
         final variables = {
           'request': {
             'customerCode': fakeCustomerCode,
-          }
+          },
         };
 
         dioAdapter.onPost(
@@ -64,7 +64,7 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.ezPointMutation.getTokenQuery(),
-            'variables': variables
+            'variables': variables,
           }),
         );
 

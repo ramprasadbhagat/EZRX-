@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -20,10 +18,10 @@ class AdminPoAttachmentFilterBloc
     on<AdminPoAttachmentFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     AdminPoAttachmentFilterEvent event,
     Emitter<AdminPoAttachmentFilterState> emit,
-  ) async {
+  ) {
     event.map(
       initialized: (_) => emit(
         AdminPoAttachmentFilterState.initial(),

@@ -106,7 +106,7 @@ void main() {
           appliedFilter: fakeReturnItemsFilter,
           searchKey: SearchKey(''),
           items: fakeReturnMaterialList.items,
-        )
+        ),
       ],
     );
 
@@ -153,7 +153,7 @@ void main() {
           searchKey: SearchKey(''),
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
-        )
+        ),
       ],
     );
 
@@ -205,7 +205,7 @@ void main() {
             ...fakeReturnMaterialList.items,
             ...fakeReturnMaterialList.items,
           ],
-        )
+        ),
       ],
     );
     blocTest<ReturnItemsBloc, ReturnItemsState>(
@@ -254,7 +254,7 @@ void main() {
           items: fakeReturnMaterialList.items,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
-        )
+        ),
       ],
     );
   });

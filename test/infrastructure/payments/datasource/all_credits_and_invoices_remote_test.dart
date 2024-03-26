@@ -44,10 +44,10 @@ void main() {
         'after': 0,
         'excelFor': 'Debit',
         'orderBy': [
-          {'order': 'desc', 'field': 'netDueDate'}
+          {'order': 'desc', 'field': 'netDueDate'},
         ],
-        'filterBy': filterMap
-      }
+        'filterBy': filterMap,
+      },
     },
   };
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
@@ -158,7 +158,7 @@ void main() {
                 {
                   'data': null,
                   'errors': [
-                    {'message': 'fake-error'}
+                    {'message': 'fake-error'},
                   ],
                 },
                 delay: const Duration(seconds: 1),
@@ -203,8 +203,8 @@ void main() {
                       'field': 'documentDate',
                     }
                   ],
-                  'filterBy': filterMap
-                }
+                  'filterBy': filterMap,
+                },
               },
             };
 

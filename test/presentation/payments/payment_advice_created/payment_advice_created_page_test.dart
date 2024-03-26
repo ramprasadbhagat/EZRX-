@@ -763,7 +763,7 @@ void main() {
 
       testWidgets('On Tap Pay Now Button And Get Url', (tester) async {
         final fakeUrl = Uri.parse('fake-url');
-        when(() => autoRouterMock.pushNamed('payments/payments_webview'))
+        when(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
             .thenAnswer((invocation) => Future.value(fakeUrl));
         when(
           () => autoRouterMock.pushAndPopUntil(
@@ -777,7 +777,7 @@ void main() {
         final buttonFinder = find.byKey(WidgetKeys.payButton);
         await tester.tap(buttonFinder);
         await tester.pumpAndSettle();
-        verify(() => autoRouterMock.pushNamed('payments/payments_webview'))
+        verify(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
             .called(1);
         verify(
           () => trackMixpanelEvent(
@@ -806,7 +806,7 @@ void main() {
       });
 
       testWidgets('On Tap Pay Now Button But Cannot Get Url', (tester) async {
-        when(() => autoRouterMock.pushNamed('payments/payments_webview'))
+        when(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
             .thenAnswer((invocation) => Future.value());
 
         await tester.pumpWidget(getWidget());
@@ -814,7 +814,7 @@ void main() {
         final buttonFinder = find.byKey(WidgetKeys.payButton);
         await tester.tap(buttonFinder);
         await tester.pumpAndSettle();
-        verify(() => autoRouterMock.pushNamed('payments/payments_webview'))
+        verify(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
             .called(1);
         verify(
           () => trackMixpanelEvent(

@@ -75,7 +75,7 @@ void main() {
         },
         data: jsonEncode({
           'query': remoteDataSource.queryMutation.getAnnouncementInfoQuery(),
-          'variables': variables
+          'variables': variables,
         }),
       );
 
@@ -105,7 +105,7 @@ void main() {
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: jsonEncode({
           'query': remoteDataSource.queryMutation.getAnnouncementInfoQuery(),
-          'variables': variables
+          'variables': variables,
         }),
       );
 
@@ -133,7 +133,7 @@ void main() {
           {
             'data': null,
             'errors': [
-              {'message': 'fake-error'}
+              {'message': 'fake-error'},
             ],
           },
           delay: const Duration(seconds: 1),
@@ -143,7 +143,7 @@ void main() {
         },
         data: jsonEncode({
           'query': remoteDataSource.queryMutation.getAnnouncementInfoQuery(),
-          'variables': variables
+          'variables': variables,
         }),
       );
 
@@ -177,7 +177,7 @@ void main() {
         },
         data: jsonEncode({
           'query': remoteDataSource.queryMutation.getAnnouncementInfoQuery(),
-          'variables': variables
+          'variables': variables,
         }),
       );
 
@@ -273,7 +273,7 @@ void main() {
           {
             'data': null,
             'errors': [
-              {'message': 'fake-error'}
+              {'message': 'fake-error'},
             ],
           },
           delay: const Duration(seconds: 1),

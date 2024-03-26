@@ -19,7 +19,7 @@ class OktaLoginServices {
     }).catchError((error) => throw error as PlatformException);
   }
 
-  Future<Map?> login() async {
+  Future<Map?> login() {
     return _oktaOidcPlugin.login().then((value) {
       return !value?['status']
           ? throw PlatformException(code: '0', message: value?['message'])
@@ -27,7 +27,7 @@ class OktaLoginServices {
     }).catchError((error) => throw error as PlatformException);
   }
 
-  Future<Map?> getAccessToken() async {
+  Future<Map?> getAccessToken() {
     return _oktaOidcPlugin.getAccessToken().then((value) {
       return !value?['status']
           ? throw PlatformException(code: '0', message: value?['message'])
@@ -35,13 +35,13 @@ class OktaLoginServices {
     }).catchError((error) => throw error as PlatformException);
   }
 
-  Future<bool?> logout() async {
+  Future<bool?> logout() {
     return _oktaOidcPlugin.logout().then((value) {
       return value ?? (throw PlatformException(code: '0'));
     }).catchError((error) => throw error as PlatformException);
   }
 
-  Future<dynamic> getUserProfile() async {
+  Future<dynamic> getUserProfile() {
     return _oktaOidcPlugin.getUserProfile().then((value) {
       return value;
     }).catchError((error) => throw error as PlatformException);

@@ -20,7 +20,6 @@ analyzer:
 linter:
   rules:
     - always_declare_return_types
-    - always_require_non_null_named_parameters
     - annotate_overrides
     - avoid_empty_else
     - avoid_init_to_null
@@ -83,8 +82,6 @@ linter:
     - non_constant_identifier_names
 
 dart_code_metrics:
-  # extends:
-  #   - package:dart_code_metrics_presets/all.yaml
   anti-patterns:
     - long-method:
         exclude:
@@ -146,4 +143,4 @@ dart_code_metrics:
     - use-setstate-synchronously
     - prefer-using-list-view:
         exclude:
-          - "lib/presentation/home/home_tab.dart"  
+          - "lib/presentation/home/home_tab.dart" 

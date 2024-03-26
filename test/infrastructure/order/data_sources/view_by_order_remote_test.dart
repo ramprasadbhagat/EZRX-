@@ -80,7 +80,7 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderQuery
                 .getOrderHistoryDetails(fakeConfigValue),
-            'variables': variables
+            'variables': variables,
           }),
         );
 

@@ -30,6 +30,7 @@ class SectionTitle extends StatelessWidget {
           visualDensity: VisualDensity.compact,
           icon: const CircleAvatar(
             backgroundColor: ZPColors.arrowButtonBackgroundColor,
+            radius: 12,
             child: Icon(
               Icons.arrow_forward,
               size: 16,

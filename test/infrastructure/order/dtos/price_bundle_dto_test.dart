@@ -14,7 +14,7 @@ void main() {
       data = {
         'BundleName': '',
         'BundleCode': 'fake-code',
-        'BundleInformation': []
+        'BundleInformation': [],
       };
     });
     test('Test fromDomain', () {

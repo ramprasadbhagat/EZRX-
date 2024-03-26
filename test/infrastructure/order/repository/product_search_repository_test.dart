@@ -335,7 +335,7 @@ void main() async {
           ProductSuggestionHistoryDto(
             searchKeyList: [
               fakeSearchKey.getOrDefaultValue(''),
-              fakeSearchKey.getOrDefaultValue('')
+              fakeSearchKey.getOrDefaultValue(''),
             ],
           ),
         );
@@ -384,7 +384,7 @@ void main() async {
           ProductSuggestionHistoryDto(
             searchKeyList: [
               fakeSearchKey.getOrDefaultValue(''),
-              fakeSearchKey.getOrDefaultValue('')
+              fakeSearchKey.getOrDefaultValue(''),
             ],
           ),
         );

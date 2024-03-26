@@ -228,7 +228,7 @@ void main() {
           tenderOrderReason: TenderContractReason('reas'),
         ),
         salesOrgConfig: fakePHSalesOrgConfigs,
-      )
+      ),
     ];
 
     final submitOrder = SubmitOrder.empty().copyWith(
@@ -253,7 +253,7 @@ void main() {
             contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
             tenderOrderReason: TenderContractReason('reas'),
           ),
-        )
+        ),
       ].first.tenderContract.contractPaymentTerm.getValue(),
       customer: SubmitOrderCustomer.empty().copyWith(
         customerNumber: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -273,7 +273,7 @@ void main() {
             contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
             tenderOrderReason: TenderContractReason('reas'),
           ),
-        )
+        ),
       ].map((e) => e.toSubmitMaterialInfo()).toList(),
     );
 
@@ -320,7 +320,7 @@ void main() {
           tenderOrderReason: TenderContractReason('reas'),
         ),
         salesOrgConfig: fakePHSalesOrgConfigs,
-      )
+      ),
     ];
 
     final submitOrder = SubmitOrder.empty().copyWith(
@@ -345,7 +345,7 @@ void main() {
             contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
             tenderOrderReason: TenderContractReason('reas'),
           ),
-        )
+        ),
       ].first.tenderContract.contractPaymentTerm.getValue(),
       customer: SubmitOrderCustomer.empty().copyWith(
         customerNumber: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -365,7 +365,7 @@ void main() {
             contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
             tenderOrderReason: TenderContractReason('reas'),
           ),
-        )
+        ),
       ].map((e) => e.toSubmitMaterialInfo()).toList(),
     );
 
@@ -405,7 +405,7 @@ void main() {
           principalData: PrincipalData.empty()
               .copyWith(principalCode: PrincipalCode('0000140332')),
         ),
-      )
+      ),
     ];
     final submitOrder = SubmitOrder.empty().copyWith(
       userName: '',
@@ -418,7 +418,7 @@ void main() {
         SubmitMaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('000000000023001758'),
           quantity: 2,
-        )
+        ),
       ],
       blockOrder: fakePHSalesOrgConfigs.enablePrincipalList &&
           cartMaterial.any((item) => item.checkSalesCutOff),
@@ -496,7 +496,7 @@ void main() {
                       principalName: PrincipalName('fake-principle-name'),
                       principalCode: PrincipalCode('fake-principle-code'),
                     ),
-                  )
+                  ),
                 ],
               ),
             )
@@ -781,7 +781,7 @@ void main() {
                     principalName: PrincipalName('fake-principle-name'),
                     principalCode: PrincipalCode('fake-principle-code'),
                   ),
-                )
+                ),
               ],
             ),
           )

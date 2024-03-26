@@ -1,6 +1,5 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 
-
 class InvoiceNumberSection extends StatelessWidget {
   final String invoiceNumber;
 
@@ -49,18 +48,17 @@ class InvoiceNumberSection extends StatelessWidget {
                       (option) => option.fold(
                         (failure) =>
                             ErrorUtils.handleApiFailure(context, failure),
-                        (_) => {
-                          if (state.items.isNotEmpty)
-                            {
-                              context.read<CreditAndInvoiceDetailsBloc>().add(
-                                    CreditAndInvoiceDetailsEvent.fetch(
-                                      creditAndInvoiceItem: state.items.first,
-                                    ),
+                        (_) {
+                          if (state.items.isNotEmpty) {
+                            context.read<CreditAndInvoiceDetailsBloc>().add(
+                                  CreditAndInvoiceDetailsEvent.fetch(
+                                    creditAndInvoiceItem: state.items.first,
                                   ),
-                              context.router.push(
-                                const InvoiceDetailsPageRoute(),
-                              ),
-                            },
+                                );
+                            context.router.push(
+                              const InvoiceDetailsPageRoute(),
+                            );
+                          }
                         },
                       ),
                     );

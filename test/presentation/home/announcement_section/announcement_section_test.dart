@@ -96,7 +96,7 @@ void main() async {
               announcementArticleInfo.announcementList.first.copyWith(
                 releaseDate:
                     DateTimeStringValue(DateTime.now().toIso8601String()),
-              )
+              ),
             ],
           ),
         ),

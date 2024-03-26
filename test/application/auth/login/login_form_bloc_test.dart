@@ -89,7 +89,7 @@ void main() {
           authFailureOrSuccessOption: optionOf(const Right(unit)),
           isSubmitting: false,
           currentMarket: AppMarket.vietnam(),
-        )
+        ),
       ],
     );
 
@@ -133,7 +133,7 @@ void main() {
           rememberPassword: true,
           authFailureOrSuccessOption: optionOf(const Right(unit)),
           currentMarket: AppMarket.vietnam(),
-        )
+        ),
       ],
     );
 
@@ -176,7 +176,7 @@ void main() {
           rememberPassword: true,
           authFailureOrSuccessOption: optionOf(const Right(unit)),
           currentMarket: AppMarket.defaultMarket(),
-        )
+        ),
       ],
     );
 
@@ -250,7 +250,7 @@ void main() {
         loginFormState.copyWith(
           username: Username('new-username-fake'),
           authFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 
@@ -273,7 +273,7 @@ void main() {
         loginFormState.copyWith(
           password: Password.login('new-password-fake'),
           authFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 
@@ -296,7 +296,7 @@ void main() {
         loginFormState.copyWith(
           passwordVisible: !loginFormState.passwordVisible,
           authFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 
@@ -319,7 +319,7 @@ void main() {
         loginFormState.copyWith(
           rememberPassword: !loginFormState.rememberPassword,
           authFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 

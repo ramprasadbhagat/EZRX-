@@ -57,9 +57,9 @@ class ApproverReturnFilterDrawer extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: const [
+                        children: [
                           _ClearButton(),
                           _ApplyButton(),
                         ],

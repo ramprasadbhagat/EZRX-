@@ -479,7 +479,7 @@ void main() {
             InvoiceDetails.empty().copyWith(
               returnItemDetailsList: [
                 fakeReturnItemDetails,
-                fakeReturnBonusItemDetails
+                fakeReturnBonusItemDetails,
               ],
             ),
           ],
@@ -521,7 +521,7 @@ void main() {
               InvoiceDetails.empty().copyWith(
                 returnItemDetailsList: [
                   fakeReturnItemDetails,
-                  fakeReturnBonusItemDetails
+                  fakeReturnBonusItemDetails,
                 ],
               ),
             ],

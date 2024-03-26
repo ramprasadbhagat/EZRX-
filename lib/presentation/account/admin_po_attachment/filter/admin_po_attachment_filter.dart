@@ -66,30 +66,30 @@ class AdminPoAttachmentFilterDrawer extends StatelessWidget {
                         horizontal: 15,
                         vertical: 30,
                       ),
-                      children: <Widget>[
-                        const _OrderNoByFilter(),
-                        const SizedBox(
+                      children: const <Widget>[
+                        _OrderNoByFilter(),
+                        SizedBox(
                           height: 20,
                         ),
-                        const _EzrxNumberFilter(),
-                        const SizedBox(
+                        _EzrxNumberFilter(),
+                        SizedBox(
                           height: 20,
                         ),
-                        const _SalesOrgByFilter(),
-                        const SizedBox(
+                        _SalesOrgByFilter(),
+                        SizedBox(
                           height: 20,
                         ),
-                        const _CustomerCodeByFilter(),
-                        const SizedBox(
+                        _CustomerCodeByFilter(),
+                        SizedBox(
                           height: 20,
                         ),
-                        const _AdminAttachmentDateFilter(),
-                        const SizedBox(
+                        _AdminAttachmentDateFilter(),
+                        SizedBox(
                           height: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: const [
+                          children: [
                             _ClearButton(),
                             _ApplyButton(),
                           ],

@@ -1540,7 +1540,7 @@ void main() {
       'In Progress',
       'Failed',
       'Processed',
-      'Successful'
+      'Successful',
     ];
 
     Future<void> goToPaymentSummaryPage(WidgetTester tester) async {

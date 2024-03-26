@@ -118,7 +118,7 @@ void main() {
           materialFilter: materialFilterMockData,
           apiFailureOrSuccessOption: none(),
           isFetching: false,
-        )
+        ),
       ],
     );
 
@@ -164,7 +164,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-        )
+        ),
       ],
     );
 
@@ -433,7 +433,7 @@ void main() {
               countryListSelected:
                   materialActiveFilterMockData.countryListSelected,
             ),
-          )
+          ),
         ];
       },
     );
@@ -473,7 +473,7 @@ void main() {
               manufactureMapOptions: manufactureMap,
               countryMapOptions: countryMap,
             ),
-          )
+          ),
         ];
       },
     );

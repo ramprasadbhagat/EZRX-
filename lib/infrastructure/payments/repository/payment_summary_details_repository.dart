@@ -31,7 +31,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required PaymentSummaryDetails details,
-  }) async {
+  }) {
     final salesOrg = salesOrganization.salesOrg;
     final customerCode = customerCodeInfo.customerCodeSoldTo;
 

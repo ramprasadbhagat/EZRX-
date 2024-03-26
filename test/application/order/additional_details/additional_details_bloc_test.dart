@@ -46,7 +46,7 @@ void main() {
               mobileNumber: MobileNumber(''),
             ),
             config: fakeIDSalesOrgConfigs,
-          )
+          ),
         ],
       );
 
@@ -70,7 +70,7 @@ void main() {
             config: fakeIDSalesOrgConfigs.copyWith(
               futureDeliveryDay: FutureDeliveryDay(''),
             ),
-          )
+          ),
         ],
       );
 
@@ -91,7 +91,7 @@ void main() {
               deliveryDate: DateTimeStringValue(''),
               mobileNumber: MobileNumber('1234567890'),
             ),
-          )
+          ),
         ],
       );
 
@@ -199,7 +199,7 @@ void main() {
               paymentTerm: PaymentTerm('0001-Test'),
               mobileNumber: MobileNumber('1234567890'),
             ),
-          )
+          ),
         ],
       );
 

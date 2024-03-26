@@ -10,7 +10,7 @@ void main() {
   final fakeDocumentDateTo = DateTimeStringValue('2023-12-18');
   const fakeFilterStatuses = [
     'fake-first-filter-status',
-    'fake--second-filter-status'
+    'fake--second-filter-status',
   ];
 
   const fakeSearchKey = 'fake-search-key';

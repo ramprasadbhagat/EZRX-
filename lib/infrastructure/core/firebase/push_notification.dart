@@ -59,7 +59,7 @@ class PushNotificationService {
   Future<void> _initLocalNotifications() async {
     const initializationSettings = InitializationSettings(
       android: AndroidInitializationSettings('@mipmap/ic_notification'),
-      iOS: IOSInitializationSettings(),
+      iOS: DarwinInitializationSettings(),
     );
 
     await _localNotificationsPlugin
@@ -75,7 +75,8 @@ class PushNotificationService {
 
     await _localNotificationsPlugin.initialize(
       initializationSettings,
-      onSelectNotification: _onSelectLocalNotification,
+      onDidReceiveNotificationResponse: (details) =>
+          _onSelectLocalNotification(details.payload),
     );
   }
 
@@ -96,7 +97,7 @@ class PushNotificationService {
       importance: notificationImportance,
       priority: notificationPriority,
     );
-    const iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    const iOSPlatformChannelSpecifics = DarwinNotificationDetails();
 
     const platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
@@ -153,7 +154,7 @@ class PushNotificationService {
     });
   }
 
-  Future _setupRemoteMessageListener() async {
+  Future<void>? _setupRemoteMessageListener() {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     // from foreground usually won't have the push notification banner display
     // we need to use the local notification plugin to display
@@ -184,6 +185,8 @@ class PushNotificationService {
       if (message == null) return;
       _redirectTothePage(message);
     });
+    
+    return null;
   }
 
   Future<dynamic> _onSelectLocalNotification(String? payload) async {

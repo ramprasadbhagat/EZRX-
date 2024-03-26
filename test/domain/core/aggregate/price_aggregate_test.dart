@@ -63,9 +63,9 @@ void main() {
             calculation: BonusMaterialCalculation('915'),
             bonusMaterials: [bonusMaterial],
             qualifyingQuantity: 2,
-          )
+          ),
         ],
-      )
+      ),
     ],
   );
 
@@ -80,9 +80,9 @@ void main() {
         PriceTierItem.empty().copyWith(
           rate: 20,
           quantity: 10,
-        )
+        ),
       ],
-    )
+    ),
   ];
   group('Price Aggregate Test', () {
     test('should return correct price aggregate object', () {
@@ -294,7 +294,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
             ],
           ),
         );
@@ -316,7 +316,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
             ],
           ),
         );
@@ -384,7 +384,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
             ],
           ),
           salesOrgConfig: fakeVNSalesOrgConfigs,
@@ -407,7 +407,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
             ],
           ),
           salesOrgConfig: fakeVNSalesOrgConfigs,
@@ -430,7 +430,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
             ],
           ),
           salesOrgConfig: fakeVNSalesOrgConfigs,
@@ -450,7 +450,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
             ],
           ),
           salesOrgConfig: fakeVNSalesOrgConfigs,
@@ -732,7 +732,7 @@ void main() {
           materialInfo:
               MaterialInfo.empty().copyWith(type: MaterialInfoType.combo()),
           comboMaterials: [
-            ComboMaterialItem.empty().copyWith(comboDeals: priceComboDeal)
+            ComboMaterialItem.empty().copyWith(comboDeals: priceComboDeal),
           ],
         );
 
@@ -1371,7 +1371,7 @@ void main() {
         ComboDealMaterialSet(
           materials: [fakePercentMaterialDeal],
           setNo: 'fake-set',
-        )
+        ),
       ],
     );
     final fakeAmountComboDealDetail = ComboDeal.empty().copyWith(
@@ -1379,7 +1379,7 @@ void main() {
         ComboDealMaterialSet(
           materials: [fakeAmountMaterialDeal],
           setNo: 'fake-set',
-        )
+        ),
       ],
     );
     final fakePriceAggregate = emptyPriceAggregate.copyWith(
@@ -1429,10 +1429,10 @@ void main() {
               materials: [
                 fakeAmountMaterialDeal.copyWith(
                   type: DiscountType(''),
-                )
+                ),
               ],
               setNo: 'fake-set',
-            )
+            ),
           ],
         );
         final priceAggregate2 = fakePriceAggregate.copyWith(
@@ -1639,7 +1639,7 @@ void main() {
                 quantity: 2,
                 type: DiscountType('%'),
                 rate: 20,
-              )
+              ),
             ],
           ),
         );
@@ -1668,7 +1668,7 @@ void main() {
                 quantity: 2,
                 type: DiscountType('%'),
                 rate: 20,
-              )
+              ),
             ],
           ),
         );
@@ -1840,7 +1840,7 @@ void main() {
         [
           price.priceBonusItem.first.bonusMaterials.first.copyWith(
             bonusQuantity: 1,
-          )
+          ),
         ],
       );
       expect(
@@ -1850,7 +1850,7 @@ void main() {
         [
           price.priceBonusItem.first.bonusMaterials.first.copyWith(
             bonusQuantity: 2,
-          )
+          ),
         ],
       );
     });
@@ -1877,7 +1877,7 @@ void main() {
         [
           price.priceBonusItem.last.bonusMaterials.first.copyWith(
             bonusQuantity: 2,
-          )
+          ),
         ],
       );
       expect(
@@ -1887,7 +1887,7 @@ void main() {
         [
           price.priceBonusItem.first.bonusMaterials.first.copyWith(
             bonusQuantity: 3,
-          )
+          ),
         ],
       );
       expect(
@@ -1897,7 +1897,7 @@ void main() {
         [
           price.priceBonusItem.first.bonusMaterials.first.copyWith(
             bonusQuantity: 4,
-          )
+          ),
         ],
       );
       expect(
@@ -1907,7 +1907,7 @@ void main() {
         [
           price.priceBonusItem.first.bonusMaterials.first.copyWith(
             bonusQuantity: 5,
-          )
+          ),
         ],
       );
       expect(
@@ -1917,7 +1917,7 @@ void main() {
         [
           price.priceBonusItem.first.bonusMaterials.first.copyWith(
             bonusQuantity: 6,
-          )
+          ),
         ],
       );
     });
@@ -2004,7 +2004,7 @@ void main() {
             BonusSampleItem.empty().copyWith(
               qty: MaterialQty(2),
               materialNumber: MaterialNumber('fake-number'),
-            )
+            ),
           ],
           salesOrgConfig: fakeMYSalesOrgConfigs,
         );
@@ -2039,7 +2039,7 @@ void main() {
             BonusSampleItem.empty().copyWith(
               qty: MaterialQty(2),
               materialNumber: MaterialNumber('fake-number'),
-            )
+            ),
           ],
           salesOrgConfig: fakeMYSalesOrgConfigs,
         );
@@ -2078,9 +2078,9 @@ void main() {
               PriceTierItem.empty().copyWith(
                 rate: 20,
                 quantity: 10,
-              )
+              ),
             ],
-          )
+          ),
         ];
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           quantity: 10,
@@ -2112,7 +2112,7 @@ void main() {
               materialNumber: MaterialNumber('fake-bonus1'),
               qty: MaterialQty(2),
               type: MaterialInfoType('Deals'),
-            )
+            ),
           ],
           price: Price.empty().copyWith(
             bonuses: [
@@ -2128,11 +2128,11 @@ void main() {
                         qualifyingQuantity: 7,
                         bonusQuantity: 1,
                         limitPerTransaction: 0,
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -2151,7 +2151,7 @@ void main() {
               type: MaterialInfoType('Deals'),
               sampleBonusItemId: '123',
               parentID: 'fake-product',
-            )
+            ),
           ],
         );
       },
@@ -2334,7 +2334,7 @@ void main() {
         [
           items.first,
           items.first.copyWith.materialInfo
-              .principalData(principalName: PrincipalName('test'))
+              .principalData(principalName: PrincipalName('test')),
         ].showManufacturerName(1),
         true,
       );

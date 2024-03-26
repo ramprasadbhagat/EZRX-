@@ -139,7 +139,7 @@ void main() {
               ApiFailure.other('Fake Error'),
             ),
           ),
-        )
+        ),
       ],
     );
 
@@ -186,7 +186,7 @@ void main() {
               emailNotifications: true,
             ),
           ),
-        )
+        ),
       ],
     );
 
@@ -230,7 +230,7 @@ void main() {
           user: fakeClientUser,
           userFailureOrSuccessOption:
               some(const Left(ApiFailure.other('Fake Error'))),
-        )
+        ),
       ],
     );
     blocTest<UserBloc, UserState>(
@@ -264,7 +264,7 @@ void main() {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
     blocTest<UserBloc, UserState>(
@@ -297,7 +297,7 @@ void main() {
           user: fakeClientUser.copyWith(
             preferredLanguage: Language.vietnamese(),
           ),
-        )
+        ),
       ],
     );
 
@@ -328,7 +328,7 @@ void main() {
         userState.copyWith(
           userFailureOrSuccessOption:
               some(const Left(ApiFailure.other('Fake Error'))),
-        )
+        ),
       ],
     );
     blocTest<UserBloc, UserState>(
@@ -359,7 +359,7 @@ void main() {
         act: (UserBloc bloc) => bloc.add(const UserEvent.acceptTnc()),
         expect: () => [
           userState.copyWith(isLoading: true),
-          userState.copyWith.user(acceptPrivacyPolicy: true)
+          userState.copyWith.user(acceptPrivacyPolicy: true),
         ],
       );
       blocTest<UserBloc, UserState>(
@@ -375,7 +375,7 @@ void main() {
           userState.copyWith(isLoading: true),
           userState.copyWith(
             userFailureOrSuccessOption: optionOf(const Left(fakeError)),
-          )
+          ),
         ],
       );
     });
@@ -420,7 +420,7 @@ void main() {
             user: fakeClientUser.copyWith(
               acceptMPTC: fakeAcceptanceStatus,
             ),
-          )
+          ),
         ],
       );
     });

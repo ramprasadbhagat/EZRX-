@@ -90,7 +90,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
-              )
+              ),
             ],
             grandTotal: 100.0,
             orderValue: 100.0,
@@ -107,7 +107,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
-              )
+              ),
             ],
             grandTotal: 100.0,
             data: DeliveryInfoData.empty(),
@@ -138,7 +138,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
-              )
+              ),
             ],
             grandTotal: 100.0,
             customerCodeInfo: seedState.customerCodeInfo,
@@ -162,7 +162,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
-              )
+              ),
             ],
             grandTotal: 100.0,
             data: DeliveryInfoData.empty(),
@@ -221,7 +221,7 @@ void main() {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
             grandTotal: 18.0,
             orderValue: 30.0,
@@ -261,7 +261,7 @@ void main() {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
             data: DeliveryInfoData.empty(),
             grandTotal: 18.0,
@@ -294,7 +294,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
-              )
+              ),
             ],
             shipToInfo: fakeShipToInfo,
           ),
@@ -321,7 +321,7 @@ void main() {
             priceAggregate: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
-              )
+              ),
             ],
           ),
         );
@@ -355,7 +355,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
-              )
+              ),
             ],
             shipToInfo: fakeShipToInfo,
           ),
@@ -373,7 +373,7 @@ void main() {
             priceAggregate: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
-              )
+              ),
             ],
           ),
         );
@@ -414,7 +414,7 @@ void main() {
             priceAggregate: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
-              )
+              ),
             ],
             orderHistoryDetailList: [orderHistoryDetails],
           ),
@@ -451,7 +451,7 @@ void main() {
             priceAggregate: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
-              )
+              ),
             ],
             orderHistoryDetailList: [orderHistoryDetails],
           ),

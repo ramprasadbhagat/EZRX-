@@ -16,7 +16,7 @@ void main() {
       data = {
         'percentageOverride': [],
         'reference': 'fake-ref',
-        'valueOverride': []
+        'valueOverride': [],
       };
     });
     test('Test toDomain', () {
@@ -88,10 +88,10 @@ void main() {
 
     test('Test valueOverrideTojson', () {
       final configs = valueOverrideTojson([
-        const ValueOverrideDto(code: '', price: 1, currency: 'fake-currency')
+        const ValueOverrideDto(code: '', price: 1, currency: 'fake-currency'),
       ]);
       expect(configs, [
-        {'code': '', 'price': 1, 'currency': 'fake-currency'}
+        {'code': '', 'price': 1, 'currency': 'fake-currency'},
       ]);
     });
 
@@ -100,7 +100,7 @@ void main() {
         [const PercentageOverrideDto(code: '', percentage: 10)],
       );
       expect(configs, [
-        {'code': '', 'percentage': 10}
+        {'code': '', 'percentage': 10},
       ]);
     });
   });

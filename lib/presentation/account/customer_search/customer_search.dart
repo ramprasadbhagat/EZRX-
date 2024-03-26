@@ -57,7 +57,8 @@ class CustomerSearchPage extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.haveCustomerCodeInfo != current.haveCustomerCodeInfo,
           builder: (context, state) {
-            return WillPopScope(
+            return PopScope(
+              canPop: state.haveCustomerCodeInfo,
               child: state.haveCustomerCodeInfo
                   ? IconButton(
                       key: WidgetKeys.backButton,
@@ -65,13 +66,11 @@ class CustomerSearchPage extends StatelessWidget {
                       onPressed: () => context.popRoute(),
                     )
                   : const SizedBox.shrink(),
-              onWillPop: () async {
-                if (state.haveCustomerCodeInfo) return true;
+              onPopInvoked: (bool didPop) async {
+                if (didPop) return;
 
                 await SystemChannels.platform
                     .invokeMethod('SystemNavigator.pop');
-
-                return false;
               },
             );
           },

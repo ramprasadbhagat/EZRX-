@@ -383,7 +383,7 @@ void main() {
         final cartState = CartState.initial().copyWith(
           cartProducts: [
             mockCartBundleItems.first
-                .copyWith(salesOrgConfig: fakeMYSalesOrgConfigs)
+                .copyWith(salesOrgConfig: fakeMYSalesOrgConfigs),
           ],
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -454,7 +454,7 @@ void main() {
           cartProducts: [
             mockCartBundleItems.first.copyWith(
               salesOrgConfig: fakeKHSalesOrgConfigs,
-            )
+            ),
           ],
           salesOrganisation: fakeKHSalesOrganisation,
           config: fakeKHSalesOrgConfigs,
@@ -522,7 +522,7 @@ void main() {
           cartProducts: [
             mockCartBundleItems.first.copyWith(
               salesOrgConfig: fakeKHSalesOrgConfigs,
-            )
+            ),
           ],
           salesOrganisation: fakeKHSalesOrganisation,
           config: fakeKHSalesOrgConfigs,
@@ -609,7 +609,7 @@ void main() {
           cartProducts: [
             mockCartBundleItems.first.copyWith(
               salesOrgConfig: fakeMYSalesOrgConfigs,
-            )
+            ),
           ],
           salesOrganisation: fakeKHSalesOrganisation,
           config: fakeKHSalesOrgConfigs,
@@ -693,7 +693,7 @@ void main() {
         final cartState = CartState.initial().copyWith(
           cartProducts: [
             mockCartBundleItems.first
-                .copyWith(salesOrgConfig: fakeKHSalesOrgConfigs)
+                .copyWith(salesOrgConfig: fakeKHSalesOrgConfigs),
           ],
           salesOrganisation: fakeKHSalesOrganisation,
           config: fakeKHSalesOrgConfigs,
@@ -743,9 +743,9 @@ void main() {
                 fakeComboMaterialItems.first.copyWith(
                   salesOrgConfig: fakeKHSalesOrgConfigs,
                   finalIndividualPrice: 1930.86,
-                )
+                ),
               ],
-            )
+            ),
           ],
           salesOrganisation: fakeKHSalesOrganisation,
           config: fakeKHSalesOrgConfigs,

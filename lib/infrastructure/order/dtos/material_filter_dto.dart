@@ -17,8 +17,8 @@ class MaterialFilterDto with _$MaterialFilterDto {
 
   MaterialFilter toDomain() {
     return MaterialFilter(
-      manufactureMapOptions: {for (var e in manufactureList) e: false},
-      countryMapOptions: {for (var e in countryList) e.toDomain(): false},
+      manufactureMapOptions: {for (final e in manufactureList) e: false},
+      countryMapOptions: {for (final e in countryList) e.toDomain(): false},
       brandList: brandList,
     );
   }

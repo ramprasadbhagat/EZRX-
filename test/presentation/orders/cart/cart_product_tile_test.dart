@@ -275,9 +275,9 @@ void main() {
                   BonusSampleItem.empty().copyWith(
                     materialNumber: MaterialNumber(materialNumber),
                     qty: MaterialQty(1),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -637,7 +637,7 @@ void main() {
             StockInfo.empty().copyWith(
               materialNumber: cartItem.materialInfo.materialNumber,
               stockQuantity: 1,
-            )
+            ),
           ],
         );
 
@@ -957,7 +957,7 @@ void main() {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [
-              mpMaterial.copyWith(salesOrgConfig: fakeSGSalesOrgConfigs)
+              mpMaterial.copyWith(salesOrgConfig: fakeSGSalesOrgConfigs),
             ],
           ),
         );

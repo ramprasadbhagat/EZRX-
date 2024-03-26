@@ -35,7 +35,7 @@ void main() {
   final eligibilityState = EligibilityState.initial().copyWith(
     salesOrganisation: fakeMYSalesOrganisation,
   );
-  const defaultScrollOffset = Offset(0, -200);
+  const defaultScrollOffset = Offset(0, -500);
   late AboutUs aboutUs;
   final aboutUsState = AboutUsState.initial();
 

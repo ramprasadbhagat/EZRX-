@@ -22,7 +22,7 @@ void main() {
           uploadedFiles: <ReturnRequestAttachment>[],
           returnQuantity: ReturnQuantity('1'),
           returnReason: 'fake-reason',
-        )
+        ),
       ],
       salesOrg: SalesOrg('fake-salesOrg'),
     ),
@@ -44,9 +44,9 @@ void main() {
             'returnType': '500',
             'remarks': '',
             'outsidePolicy': false,
-            'priceOverride': ''
+            'priceOverride': '',
           }
-        ]
+        ],
       };
     });
     test('=> Invoice Details  fromDomain', () {

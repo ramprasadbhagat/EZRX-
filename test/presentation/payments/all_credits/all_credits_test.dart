@@ -215,7 +215,7 @@ void main() {
           items: [
             creditItemList.first.copyWith(
               searchKey: StringValue('123456789'),
-            )
+            ),
           ],
         ),
       );

@@ -64,7 +64,7 @@ void main() {
                 counterOfferDetails: RequestCounterOfferDetails.empty(),
               ),
             ),
-          )
+          ),
         ],
       );
 
@@ -91,7 +91,7 @@ void main() {
                 ),
               ),
             ),
-          )
+          ),
         ],
       );
 
@@ -504,7 +504,7 @@ void main() {
                 ),
               ),
             ),
-          )
+          ),
         ],
       );
     },

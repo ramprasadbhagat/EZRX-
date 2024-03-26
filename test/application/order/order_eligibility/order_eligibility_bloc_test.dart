@@ -74,7 +74,7 @@ void main() {
         expect: () => [
           initializedState.copyWith(
             showErrorMessage: true,
-          )
+          ),
         ],
       );
 
@@ -91,7 +91,7 @@ void main() {
                 ),
                 type: MaterialInfoType('material'),
               ),
-            )
+            ),
           ],
         ),
         act: (OrderEligibilityBloc bloc) {
@@ -110,10 +110,10 @@ void main() {
                   ),
                   type: MaterialInfoType('material'),
                 ),
-              )
+              ),
             ],
             showErrorMessage: true,
-          )
+          ),
         ],
       );
 
@@ -131,7 +131,7 @@ void main() {
                   principalCode: PrincipalCode('100225'),
                 ),
               ),
-            )
+            ),
           ],
         ),
         act: (OrderEligibilityBloc bloc) {
@@ -151,7 +151,7 @@ void main() {
                     principalCode: PrincipalCode('100225'),
                   ),
                 ),
-              )
+              ),
             ],
             showErrorMessage: true,
           ),
@@ -293,7 +293,7 @@ void main() {
                     principalCode: PrincipalCode('101252'),
                   ),
                 ),
-              )
+              ),
             ],
             subTotal: 99,
           );
@@ -327,7 +327,7 @@ void main() {
                     principalCode: PrincipalCode('101252'),
                   ),
                 ),
-              )
+              ),
             ],
             grandTotal: 99,
             configs: fakeTHSalesOrgConfigs,

@@ -293,7 +293,7 @@ void main() {
         notificationState.copyWith(
           isFetching: true,
         ),
-        notificationState.copyWith(isDeletedAllSuccess: true)
+        notificationState.copyWith(isDeletedAllSuccess: true),
       ],
     );
     blocTest(
@@ -320,7 +320,7 @@ void main() {
         notificationState.copyWith(
           notificationFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
-        )
+        ),
       ],
     );
   });

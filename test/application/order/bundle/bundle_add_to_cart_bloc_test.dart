@@ -140,7 +140,7 @@ void main() {
               .where((element) => element.quantity.intValue > 0)
               .toList()
               .first
-              .copyWith(quantity: MaterialQty(10))
+              .copyWith(quantity: MaterialQty(10)),
         ],
       );
     });
@@ -152,7 +152,7 @@ void main() {
               .where((element) => element.quantity.intValue > 0)
               .toList()
               .first
-              .copyWith(quantity: MaterialQty(10))
+              .copyWith(quantity: MaterialQty(10)),
         ],
       );
     });

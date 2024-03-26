@@ -422,7 +422,7 @@ void main() {
         whenListen(
           newPaymentBlocMock,
           Stream.fromIterable([
-            NewPaymentState.initial().copyWith(selectedInvoices: fakeInvoices)
+            NewPaymentState.initial().copyWith(selectedInvoices: fakeInvoices),
           ]),
         );
         await tester.pumpWidget(getWidget());
@@ -469,7 +469,7 @@ void main() {
           Stream.fromIterable([
             NewPaymentState.initial().copyWith(
               selectedInvoices: [fakeInvoices.first],
-            )
+            ),
           ]),
         );
         await tester.pumpWidget(getWidget());
@@ -492,7 +492,7 @@ void main() {
             selectedInvoices: [
               fakeInvoices.first.copyWith(
                 displayCurrency: Currency('php'),
-              )
+              ),
             ],
           ),
         );
@@ -558,7 +558,7 @@ void main() {
             NewPaymentState.initial().copyWith(
               selectedInvoices: fakeInvoices,
               selectedCredits: fakeCredits,
-            )
+            ),
           ]),
         );
         await tester.pumpWidget(getWidget());
@@ -623,7 +623,7 @@ void main() {
             NewPaymentState.initial().copyWith(
               selectedInvoices: [fakeInvoices.first],
               selectedCredits: [fakeCredits.first],
-            )
+            ),
           ]),
         );
         await tester.pumpWidget(getWidget());
@@ -876,7 +876,7 @@ void main() {
                     bankOptionId: BankOptionId('permata'),
                   ),
                 ],
-              )
+              ),
             ],
             selectedPaymentMethod: NewPaymentMethod(
               paymentMethod: PaymentMethodValue('Bank-In'),
@@ -950,7 +950,7 @@ void main() {
                     bankOptionId: BankOptionId('permata'),
                   ),
                 ],
-              )
+              ),
             ],
             selectedPaymentMethod: NewPaymentMethod(
               paymentMethod: PaymentMethodValue('Bank-In'),
@@ -992,7 +992,7 @@ void main() {
                       bankOptionId: BankOptionId('permata'),
                     ),
                   ],
-                )
+                ),
               ],
               selectedPaymentMethod: NewPaymentMethod(
                 paymentMethod: PaymentMethodValue('Bank-In'),
@@ -1014,7 +1014,7 @@ void main() {
                       bankOptionId: BankOptionId('permata'),
                     ),
                   ],
-                )
+                ),
               ],
               selectedPaymentMethod: NewPaymentMethod(
                 paymentMethod: PaymentMethodValue('Bank-In'),
@@ -1067,7 +1067,7 @@ void main() {
                     bankOptionId: BankOptionId('permata'),
                   ),
                 ],
-              )
+              ),
             ],
             selectedPaymentMethod: NewPaymentMethod(
               paymentMethod: PaymentMethodValue('Bank-In'),
@@ -1109,7 +1109,7 @@ void main() {
                       bankOptionId: BankOptionId('permata'),
                     ),
                   ],
-                )
+                ),
               ],
               selectedPaymentMethod: NewPaymentMethod(
                 paymentMethod: PaymentMethodValue('Bank-In'),
@@ -1127,7 +1127,7 @@ void main() {
                       bankOptionId: BankOptionId('permata'),
                     ),
                   ],
-                )
+                ),
               ],
               selectedPaymentMethod: NewPaymentMethod(
                 paymentMethod: PaymentMethodValue('Bank-In'),

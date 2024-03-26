@@ -153,7 +153,7 @@ void main() {
         BonusSampleItem.empty().copyWith(
           materialNumber: MaterialNumber('123456789'),
           type: MaterialInfoType('Deals'),
-        )
+        ),
       ],
     ),
   ];
@@ -296,6 +296,7 @@ void main() {
     testWidgets(
       '=> test Pre Order Modal Body ',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(600, 900));
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: fakeCartProduct,
@@ -332,6 +333,7 @@ void main() {
     testWidgets(
       '=> test Pre Order Modal Body item image section for covid material',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(600, 900));
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [
@@ -375,6 +377,7 @@ void main() {
     testWidgets(
       '=> test Pre Order Modal Body Manufacturer Name',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(600, 900));
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [
@@ -434,6 +437,7 @@ void main() {
     testWidgets(
       '=> test Pre Order Modal Bottom section',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(600, 900));
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [
@@ -610,6 +614,7 @@ void main() {
     testWidgets(
       '=> Find Offer Tag',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(600, 900));
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [
@@ -626,9 +631,9 @@ void main() {
                         PriceTierItem.empty().copyWith(
                           rate: 20,
                           quantity: 10,
-                        )
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -644,6 +649,8 @@ void main() {
     testWidgets(
       'Find Bonus Tag for deal bonus',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: fakeCartProduct,
@@ -693,9 +700,9 @@ void main() {
                       PriceTierItem.empty().copyWith(
                         rate: 20,
                         quantity: 10,
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             },
@@ -786,7 +793,7 @@ void main() {
           data: [
             MaterialData.empty().copyWith(
               defaultMaterialDescription: 'fake-material-description',
-            )
+            ),
           ],
         ),
       );

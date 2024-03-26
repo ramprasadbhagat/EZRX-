@@ -191,12 +191,12 @@ void main() {
                       branchInfo: [
                         BranchAndIc4Info.empty().copyWith(
                           name: shipToInfo.plant,
-                        )
+                        ),
                       ],
                       iC4Info: [
                         BranchAndIc4Info.empty().copyWith(
                           name: shipToInfo.targetCustomerType,
-                        )
+                        ),
                       ],
                     ),
                   )
@@ -216,12 +216,12 @@ void main() {
                   branchInfo: [
                     BranchAndIc4Info.empty().copyWith(
                       name: shipToInfo.plant,
-                    )
+                    ),
                   ],
                   iC4Info: [
                     BranchAndIc4Info.empty().copyWith(
                       name: shipToInfo.targetCustomerType,
-                    )
+                    ),
                   ],
                 ),
               )
@@ -247,12 +247,12 @@ void main() {
                           branchInfo: [
                             BranchAndIc4Info.empty().copyWith(
                               name: shipToInfo.plant,
-                            )
+                            ),
                           ],
                           iC4Info: [
                             BranchAndIc4Info.empty().copyWith(
                               name: shipToInfo.targetCustomerType,
-                            )
+                            ),
                           ],
                         ),
                       )
@@ -304,7 +304,7 @@ void main() {
           articleInfo: articleInfoMock.copyWith(
             announcementList: [
               ...articleInfoMock.announcementList,
-              ...articleInfoMock.announcementList
+              ...articleInfoMock.announcementList,
             ],
           ),
           canLoadMore: false,
@@ -342,12 +342,12 @@ void main() {
                       branchInfo: [
                         BranchAndIc4Info.empty().copyWith(
                           name: shipToInfo.plant,
-                        )
+                        ),
                       ],
                       iC4Info: [
                         BranchAndIc4Info.empty().copyWith(
                           name: shipToInfo.targetCustomerType,
-                        )
+                        ),
                       ],
                     ),
                   )
@@ -367,12 +367,12 @@ void main() {
                   branchInfo: [
                     BranchAndIc4Info.empty().copyWith(
                       name: shipToInfo.plant,
-                    )
+                    ),
                   ],
                   iC4Info: [
                     BranchAndIc4Info.empty().copyWith(
                       name: shipToInfo.targetCustomerType,
-                    )
+                    ),
                   ],
                 ),
               )

@@ -27,16 +27,16 @@ class ViewByItemFilterSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const _ViewByItemFilterAppBar(),
-          const Flexible(
+          _ViewByItemFilterAppBar(),
+          Flexible(
             child: _FilterList(),
           ),
-          const Divider(
+          Divider(
             height: 32,
             endIndent: 0,
             indent: 0,
@@ -45,7 +45,7 @@ class ViewByItemFilterSheet extends StatelessWidget {
           Padding(
             padding: _defaultPadding,
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: _ViewByItemFilterResetButton(),
                 ),
@@ -56,7 +56,7 @@ class ViewByItemFilterSheet extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
         ],
       ),
     );

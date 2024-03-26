@@ -328,7 +328,7 @@ void main() async {
           result.fold((l) => {}, (r) => r),
           {
             hashIdFirst: fakeInvoice[fakeInvoice.length - 2],
-            hashIdLast: fakeInvoice.last
+            hashIdLast: fakeInvoice.last,
           },
         );
       });

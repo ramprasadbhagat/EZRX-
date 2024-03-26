@@ -46,7 +46,7 @@ void main() {
       material.materialNumber: Price.empty().copyWith(
         materialNumber: material.materialNumber,
         isValid: false,
-      )
+      ),
   };
 
   final fakeMaterialQuery = [
@@ -65,7 +65,7 @@ void main() {
     repository = MaterialPriceRepositoryMock();
     final priceData = await MaterialPriceLocalDataSource().getPriceList();
     mockPriceMap = {
-      for (var price in priceData)
+      for (final price in priceData)
         price.materialNumber: price.copyWith(
           zdp5MaxQuota: ZDP5Info('500'),
           zdp5RemainingQuota: ZDP5Info('50'),
@@ -91,7 +91,7 @@ void main() {
           shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeMYSalesOrganisation,
           salesConfigs: fakeMYSalesOrgConfigs,
-        )
+        ),
       ],
     );
 
@@ -104,7 +104,7 @@ void main() {
         salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
         materialPrice: {
-          for (var number in fakeMaterialQuery)
+          for (final number in fakeMaterialQuery)
             number.materialNumber: Price.empty().copyWith(
               rules: [PriceRule.empty()],
               tiers: [PriceTier.empty()],
@@ -127,7 +127,7 @@ void main() {
             salesConfigs: fakeMYSalesOrgConfigs,
             isFetching: true,
             materialPrice: {
-              for (var number in fakeMaterialQuery)
+              for (final number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
                   rules: [PriceRule.empty()],
                   tiers: [PriceTier.empty()],
@@ -141,14 +141,14 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialPrice: {
-              for (var number in fakeMaterialQuery)
+              for (final number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
                   rules: [PriceRule.empty()],
                   tiers: [PriceTier.empty()],
                   bonuses: [PriceBonus.empty()],
                 ),
             },
-          )
+          ),
         ];
       },
     );
@@ -298,7 +298,7 @@ void main() {
         salesOrganisation: fakeMYSalesOrganisation,
         salesConfigs: fakeMYSalesOrgConfigs,
         materialPrice: {
-          for (var number in fakeMaterialQuery)
+          for (final number in fakeMaterialQuery)
             number.materialNumber: Price.empty().copyWith(
               rules: [PriceRule.empty()],
               tiers: [PriceTier.empty()],
@@ -321,7 +321,7 @@ void main() {
             salesConfigs: fakeMYSalesOrgConfigs,
             isFetching: true,
             materialPrice: {
-              for (var number in fakeMaterialQuery)
+              for (final number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
                   rules: [PriceRule.empty()],
                   tiers: [PriceTier.empty()],
@@ -335,14 +335,14 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             salesConfigs: fakeMYSalesOrgConfigs,
             materialPrice: {
-              for (var number in fakeMaterialQuery)
+              for (final number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
                   rules: [PriceRule.empty()],
                   tiers: [PriceTier.empty()],
                   bonuses: [PriceBonus.empty()],
                 ),
             },
-          )
+          ),
         ];
       },
     );
@@ -637,7 +637,7 @@ void main() {
             fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
               materialNumber: fakeMaterialQuery.first.materialNumber,
               isValid: false,
-            )
+            ),
           },
         ),
         MaterialPriceState.initial().copyWith(
@@ -649,7 +649,7 @@ void main() {
             fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
               materialNumber: fakeMaterialQuery.first.materialNumber,
               isValid: false,
-            )
+            ),
           },
         ),
       ],
@@ -687,7 +687,7 @@ void main() {
             fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
               materialNumber: fakeMaterialQuery.first.materialNumber,
               isValid: false,
-            )
+            ),
           },
         ),
         MaterialPriceState.initial().copyWith(
@@ -699,7 +699,7 @@ void main() {
             fakeMaterialQuery.first.materialNumber: Price.empty().copyWith(
               materialNumber: fakeMaterialQuery.first.materialNumber,
               isValid: false,
-            )
+            ),
           },
         ),
       ],

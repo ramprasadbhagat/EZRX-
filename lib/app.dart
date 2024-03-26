@@ -176,7 +176,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
 
 Future<void> runAppWithCrashlyticsAndLocalization() async {
   final configuration = locator<DatadogService>().configuration;
-  await DatadogSdk.runApp(configuration, () async {
+  await DatadogSdk.runApp(configuration, () {
     runZonedGuarded(
       () => runApp(
         EasyLocalization(

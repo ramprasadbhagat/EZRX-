@@ -81,7 +81,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-        )
+        ),
       ],
     );
 
@@ -116,7 +116,7 @@ void main() {
               returnRequestTypeCodeDetailsMockData,
           isFetching: false,
           returnRequestTypeCodeDetailsFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
   });

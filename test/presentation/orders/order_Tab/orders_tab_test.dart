@@ -530,7 +530,7 @@ void main() {
       final dialog = find.byType(DateRangePickerDialog);
       final editIcon = find.descendant(
         of: dialog,
-        matching: find.widgetWithIcon(IconButton, Icons.edit),
+        matching: find.widgetWithIcon(IconButton, Icons.edit_outlined),
       );
 
       await tester.tap(editIcon);
@@ -582,7 +582,7 @@ void main() {
       final dialog = find.byType(DateRangePickerDialog);
       final editIcon = find.descendant(
         of: dialog,
-        matching: find.widgetWithIcon(IconButton, Icons.edit),
+        matching: find.widgetWithIcon(IconButton, Icons.edit_outlined),
       );
 
       await tester.tap(editIcon);
@@ -652,7 +652,7 @@ void main() {
                 fakeEndDate.toIso8601String(),
               ),
             ),
-          )
+          ),
         ]),
       );
       await tester.pumpWidget(testWidget(const ViewByItemFilterSheet()));

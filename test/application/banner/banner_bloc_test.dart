@@ -113,7 +113,7 @@ void main() {
         BannerState.initial().copyWith(
           bannerFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
-        )
+        ),
       ],
     );
 
@@ -159,7 +159,7 @@ void main() {
             EZReachBanner.empty(),
           ],
           bannerFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 
@@ -203,7 +203,7 @@ void main() {
           banner: [
             EZReachBanner.empty(),
           ],
-        )
+        ),
       ],
     );
   });

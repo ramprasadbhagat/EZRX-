@@ -59,9 +59,9 @@ void main() {
         bonusMaterials: [
           BonusMaterial.empty().copyWith(
             materialNumber: MaterialNumber('123456789'),
-          )
+          ),
         ],
-      )
+      ),
     ],
   );
 
@@ -76,7 +76,7 @@ void main() {
             bonusRatio: 1,
             bonusQuantity: 3,
             qualifyingQuantity: 20,
-          )
+          ),
         ],
       ),
       PriceBonusItem.empty().copyWith(
@@ -89,7 +89,7 @@ void main() {
             bonusRatio: 1,
             bonusQuantity: 1,
             qualifyingQuantity: 10,
-          )
+          ),
         ],
       ),
     ],
@@ -164,7 +164,7 @@ void main() {
               materialInfoMock.materialNumber: materialPrice.copyWith(
                 tiers: [],
                 bonuses: [],
-              )
+              ),
             },
           ),
         );
@@ -213,7 +213,7 @@ void main() {
               materialInfoMock.materialNumber: materialPrice.copyWith(
                 tiers: [PriceTier.empty().copyWith(tier: 'fake_tier')],
                 bonuses: [bonus],
-              )
+              ),
             },
           ),
         );
@@ -248,7 +248,7 @@ void main() {
             materialInfoMock.materialNumber: materialPrice.copyWith(
               tiers: [],
               bonuses: [],
-            )
+            ),
           },
         ),
       );
@@ -263,7 +263,7 @@ void main() {
           materialPrice: {
             materialInfoMock.materialNumber: materialPrice.copyWith(
               bonuses: [bonus],
-            )
+            ),
           },
         ),
       );
@@ -301,7 +301,7 @@ void main() {
           materialPrice: {
             materialInfoMock.materialNumber: materialPrice.copyWith(
               bonuses: [bonus],
-            )
+            ),
           },
         ),
       );
@@ -322,6 +322,8 @@ void main() {
       );
     });
     testWidgets('Available offers button test', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+      tester.view.devicePixelRatio = 1;
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
@@ -334,7 +336,7 @@ void main() {
           materialPrice: {
             materialInfoMock.materialNumber: materialPrice.copyWith(
               bonuses: [bonus],
-            )
+            ),
           },
         ),
       );
@@ -389,7 +391,7 @@ void main() {
           materialPrice: {
             materialInfoMock.materialNumber: materialPrice.copyWith(
               bonuses: [bonus],
-            )
+            ),
           },
         ),
       );
@@ -445,7 +447,8 @@ void main() {
       when(() => materialPriceBlocMock.state).thenReturn(
         MaterialPriceState.initial().copyWith(
           materialPrice: {
-            materialInfoMock.materialNumber: materialPrice.copyWith(bonuses: [])
+            materialInfoMock.materialNumber:
+                materialPrice.copyWith(bonuses: []),
           },
         ),
       );
@@ -486,7 +489,8 @@ void main() {
 
     testWidgets('Available Offer Item test sorted Bonus offer listing ',
         (tester) async {
-      await tester.binding.setSurfaceSize(const Size(480, 900));
+       await tester.binding.setSurfaceSize(const Size(480, 1200));
+      tester.view.devicePixelRatio = 1;
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeTWSalesOrganisation,
@@ -499,7 +503,7 @@ void main() {
             materialInfoMock.materialNumber: materialPrice.copyWith(
               bonuses: [unsortedBonus],
               tiers: <PriceTier>[],
-            )
+            ),
           },
         ),
       );

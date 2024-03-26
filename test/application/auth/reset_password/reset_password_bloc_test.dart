@@ -84,7 +84,7 @@ void main() {
       expect: () => [
         resetPasswordState.copyWith(
           isOldPasswordObscure: true,
-        )
+        ),
       ],
     );
 
@@ -102,7 +102,7 @@ void main() {
       expect: () => [
         resetPasswordState.copyWith(
           isNewPasswordObscure: true,
-        )
+        ),
       ],
     );
 
@@ -120,7 +120,7 @@ void main() {
       expect: () => [
         resetPasswordState.copyWith(
           isConfirmPasswordObscure: true,
-        )
+        ),
       ],
     );
 
@@ -138,7 +138,7 @@ void main() {
       expect: () => [
         resetPasswordState.copyWith(
           oldPassword: Password.login(oldPassword),
-        )
+        ),
       ],
     );
 
@@ -160,7 +160,7 @@ void main() {
             resetPasswordState.confirmPassword.getValue(),
             resetPasswordState.user.username.getValue(),
           ),
-        )
+        ),
       ],
     );
 
@@ -181,7 +181,7 @@ void main() {
             validPassword,
             resetPasswordState.newPassword.getValue(),
           ),
-        )
+        ),
       ],
     );
 
@@ -264,7 +264,7 @@ void main() {
           passwordResetFailureOrSuccessOption:
               optionOf(Right(ResetPassword.empty())),
         ),
-        ResetPasswordState.initial()
+        ResetPasswordState.initial(),
       ],
     );
 
@@ -282,7 +282,7 @@ void main() {
       expect: () => [
         ResetPasswordState.initial().copyWith(
           resetPasswordCred: resetPasswordCred,
-        )
+        ),
       ],
     );
 
@@ -301,7 +301,7 @@ void main() {
         ResetPasswordState.initial().copyWith(
           newPassword: Password.confirm('new-password@N9', 'new-password'),
           showErrorMessages: true,
-        )
+        ),
       ],
     );
 

@@ -159,7 +159,7 @@ void main() {
           items: items,
           selectedItems: selectedItems,
           isFetchingPrice: true,
-        )
+        ),
       ],
     );
 
@@ -197,7 +197,7 @@ void main() {
       expect: () => [
         initialState.copyWith(
           items: items,
-        )
+        ),
       ],
     );
     blocTest(
@@ -234,7 +234,7 @@ void main() {
       expect: () => [
         initialState.copyWith(
           items: items,
-        )
+        ),
       ],
     );
     blocTest(
@@ -247,7 +247,7 @@ void main() {
             ),
         };
         selectionStatus = {
-          for (final item in productList) item.getMaterialNumber: true
+          for (final item in productList) item.getMaterialNumber: true,
         };
       },
       build: () => ComboDealMaterialDetailBloc(
@@ -258,7 +258,7 @@ void main() {
       seed: () => initialState.copyWith(
         items: items,
         selectedItems: {
-          for (final item in productList) item.getMaterialNumber: true
+          for (final item in productList) item.getMaterialNumber: true,
         },
       ),
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
@@ -299,7 +299,7 @@ void main() {
         itemsAfterGetMaterials =
             Map<MaterialNumber, PriceAggregate>.from(items);
         selectionStatus = {
-          for (final item in productList) item.getMaterialNumber: true
+          for (final item in productList) item.getMaterialNumber: true,
         };
         qty = {
           for (final item in productList) item.materialInfo.materialNumber: 1,
@@ -385,7 +385,7 @@ void main() {
               item.getMaterialNumber:
                   currentQuantityMap.containsKey(item.getMaterialNumber)
                       ? true
-                      : item.selfComboDeal.mandatory
+                      : item.selfComboDeal.mandatory,
           },
         );
       },
@@ -397,7 +397,7 @@ void main() {
       seed: () => initialState.copyWith(
         items: items,
         selectedItems: {
-          for (final item in productList) item.getMaterialNumber: true
+          for (final item in productList) item.getMaterialNumber: true,
         },
         salesConfigs: fakeKHSalesOrgConfigs,
         salesOrganisation: fakeKHSalesOrganisation,
@@ -455,7 +455,7 @@ void main() {
             offset: 0,
             principles: [
               productList.first.materialInfo.principalData.principalCode
-                  .getOrDefaultValue('')
+                  .getOrDefaultValue(''),
             ],
             salesOrgConfig: fakeKHSalesOrgConfigs,
           ),
@@ -544,7 +544,7 @@ void main() {
             for (final item in itemsAfterGetMaterials.values)
               item.getMaterialNumber: qty.containsKey(item.getMaterialNumber)
                   ? true
-                  : item.selfComboDeal.mandatory
+                  : item.selfComboDeal.mandatory,
           },
         );
       },
@@ -559,7 +559,7 @@ void main() {
         salesConfigs: fakeKHSalesOrgConfigs,
         salesOrganisation: fakeKHSalesOrganisation,
         selectedItems: {
-          for (final item in productList) item.getMaterialNumber: true
+          for (final item in productList) item.getMaterialNumber: true,
         },
       ),
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
@@ -567,7 +567,7 @@ void main() {
           comboDeal: comboDeal,
           principles: [
             productList.first.materialInfo.principalData.principalCode
-                .getOrDefaultValue('')
+                .getOrDefaultValue(''),
           ],
           comboMaterialsCurrentQuantity: qty,
         ),
@@ -612,7 +612,7 @@ void main() {
             offset: 0,
             principles: [
               productList.first.materialInfo.principalData.principalCode
-                  .getOrDefaultValue('')
+                  .getOrDefaultValue(''),
             ],
             salesOrgConfig: fakeKHSalesOrgConfigs,
           ),
@@ -693,7 +693,7 @@ void main() {
           comboDeal: comboDeal,
           principles: [
             productList.first.materialInfo.principalData.principalCode
-                .getOrDefaultValue('')
+                .getOrDefaultValue(''),
           ],
         ),
       ),
@@ -792,7 +792,7 @@ void main() {
             offset: 0,
             principles: [
               productList.first.materialInfo.principalData.principalCode
-                  .getOrDefaultValue('')
+                  .getOrDefaultValue(''),
             ],
             salesOrgConfig: fakeKHSalesOrgConfigs,
           ),
@@ -818,7 +818,7 @@ void main() {
           comboDeal: comboDeal,
           principles: [
             productList.first.materialInfo.principalData.principalCode
-                .getOrDefaultValue('')
+                .getOrDefaultValue(''),
           ],
         ),
       ),

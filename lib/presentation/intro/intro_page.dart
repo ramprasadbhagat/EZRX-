@@ -96,8 +96,8 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future.value(false),
+    return PopScope(
+      canPop: false,
       child: BlocConsumer<IntroBloc, IntroState>(
         buildWhen: (previous, current) => previous.index != current.index,
         listenWhen: (previous, current) =>

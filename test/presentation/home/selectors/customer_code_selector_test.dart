@@ -45,7 +45,7 @@ void main() {
     shipToInfos: [
       ShipToInfo.empty().copyWith(
         shipToCustomerCode: '00001234',
-      )
+      ),
     ],
   );
 
@@ -54,7 +54,7 @@ void main() {
     shipToInfos: [
       ShipToInfo.empty().copyWith(
         shipToCustomerCode: '00001235',
-      )
+      ),
     ],
   );
 
@@ -77,7 +77,7 @@ void main() {
           street: 'test-street',
         ),
         postalCode: 'test-postal-code',
-      )
+      ),
     ],
   );
 

@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/password_validation.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -268,6 +269,12 @@ void main() {
           ];
           whenListen(mockResetPasswordBloc, Stream.fromIterable(expectedState));
           await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            find.byType(PasswordValidation),
+            find.byType(ListView),
+            const Offset(0.0, -500),
+          );
           await tester.pumpAndSettle();
           expect(
             find.text('Your new password should have :'.tr()),

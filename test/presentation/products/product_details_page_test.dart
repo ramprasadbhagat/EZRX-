@@ -149,7 +149,7 @@ void main() {
             ),
             BlocProvider<ComboDealListBloc>(
               create: (context) => comboDealListMockBloc,
-            )
+            ),
           ],
           child: Scaffold(
             body: ProductDetailsPage(materialInfo: MaterialInfo.empty()),
@@ -247,7 +247,7 @@ void main() {
             comboDeals: {
               'fake-combo-deal-id': [
                 ComboDeal.empty(),
-              ]
+              ],
             },
           ),
         );

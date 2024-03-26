@@ -327,7 +327,7 @@ void main() {
                   fakeMaterialData,
                   fakeMaterialData,
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -357,7 +357,7 @@ void main() {
                 bundle: Bundle.empty().copyWith(
                   bundleName: BundleName('fake-name'),
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -413,7 +413,7 @@ void main() {
                   fakeMaterialData,
                   fakeMaterialData,
                 ],
-              )
+              ),
             ],
           ),
         );

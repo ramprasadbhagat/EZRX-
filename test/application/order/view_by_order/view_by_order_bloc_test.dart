@@ -190,7 +190,7 @@ void main() {
             searchKey: searchKey,
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeShipToInfo,
-          )
+          ),
         ],
       );
 

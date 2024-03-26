@@ -694,6 +694,8 @@ void main() {
     });
 
     testWidgets('payment summary fetch failure', (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
       whenListen(
         paymentInProgressBloc,
         Stream.fromIterable([
@@ -910,6 +912,7 @@ void main() {
         ]),
       );
       await tester.binding.setSurfaceSize(const Size(480, 900));
+      tester.view.devicePixelRatio = 1;
       when(() => autoRouterMock.pushNamed('payments/statement_accounts'))
           .thenAnswer(
         (_) => Future.value(),
@@ -928,6 +931,12 @@ void main() {
       );
       expect(itemStatementAccounts, findsWidgets);
       expect(downloadStatementAccountIcon, findsWidgets);
+      await tester.fling(
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      await tester.pump();
       await tester.tap(downloadStatementAccountIcon.first);
       await tester.pumpAndSettle();
       verify(

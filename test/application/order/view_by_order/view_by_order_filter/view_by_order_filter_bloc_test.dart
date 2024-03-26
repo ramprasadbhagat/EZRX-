@@ -35,7 +35,7 @@ void main() {
       expect: () => [
         ViewByOrderFilterState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
-        )
+        ),
       ],
     );
     blocTest(
@@ -52,7 +52,7 @@ void main() {
         ViewByOrderFilterState.initial().copyWith.filter(
               orderDateFrom: parsedDateTime(fakeStartDate),
               orderDateTo: parsedDateTime(fakeEndDate),
-            )
+            ),
       ],
     );
 
@@ -70,7 +70,7 @@ void main() {
       expect: () => [
         ViewByOrderFilterState.initial().copyWith.filter(
               orderDateFrom: parsedDateTime(fakeStartDate),
-            )
+            ),
       ],
     );
 
@@ -106,7 +106,7 @@ void main() {
       expect: () => [
         ViewByOrderFilterState.initial().copyWith.filter(
           orderStatusList: [fakeStatus],
-        )
+        ),
       ],
     );
 

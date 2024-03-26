@@ -102,7 +102,7 @@ void main() {
           name: 'fake_name',
           path: 'fake_path',
           size: FileSize(1),
-        )
+        ),
       ],
     );
 
@@ -333,6 +333,8 @@ void main() {
     });
 
     testWidgets(' =>  Body Test - Uploaded File List section', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
           selectedItems: [fakeReturnMaterial],
@@ -369,6 +371,12 @@ void main() {
         find.byIcon(Icons.cloud_download_outlined),
         findsWidgets,
       );
+      await tester.fling(
+        find.byKey(WidgetKeys.returnReviewTabBodyKey),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      await tester.pump();
       await tester.tap(find.byIcon(Icons.cloud_download_outlined).first);
       await tester.pumpAndSettle();
       verify(
@@ -515,6 +523,7 @@ void main() {
 
     testWidgets(' => display Override Price for return material item',
         (WidgetTester tester) async {
+                await tester.binding.setSurfaceSize(const Size(600, 900));
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
           selectedItems: [fakeReturnMaterial],
@@ -572,6 +581,7 @@ void main() {
     testWidgets(
         ' => display Total Price for 1 return material item with override price',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(600, 900));
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
           selectedItems: [fakeReturnMaterial],
@@ -899,7 +909,7 @@ void main() {
               selectedItems: <ReturnMaterial>[
                 fakeReturnMaterial.copyWith(
                   balanceQuantity: IntegerValue('0'),
-                )
+                ),
               ],
               invoiceDetails: <InvoiceDetails>[
                 InvoiceDetails.empty().copyWith(
@@ -965,7 +975,7 @@ void main() {
               selectedItems: <ReturnMaterial>[
                 fakeReturnMaterial.copyWith(
                   balanceQuantity: IntegerValue('0'),
-                )
+                ),
               ],
               invoiceDetails: <InvoiceDetails>[
                 InvoiceDetails.empty().copyWith(

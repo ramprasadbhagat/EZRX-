@@ -94,7 +94,7 @@ void main() {
     expect: () => [
       DeepLinkingState.linkPending(
         EzrxLink(Uri(scheme: 'fakeScheme', host: 'fakeHost').toString()),
-      )
+      ),
     ],
   );
 

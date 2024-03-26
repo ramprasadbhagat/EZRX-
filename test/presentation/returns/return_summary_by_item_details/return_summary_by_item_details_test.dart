@@ -751,7 +751,7 @@ void main() {
                   ReturnRequestInformation.empty().copyWith(
                     totalPrice: 200,
                     returnQuantity: '1',
-                  )
+                  ),
                 ],
               ),
             ),
@@ -992,7 +992,7 @@ void main() {
           when(() => returnSummaryDetailsBlocMock.state).thenReturn(
             ReturnSummaryDetailsState.initial().copyWith(
               downloadingAttachments: [
-                requestInformationMock.attachmentUrl[attachmentTestIndex]
+                requestInformationMock.attachmentUrl[attachmentTestIndex],
               ],
               requestInformation: requestInformationMock.copyWith(
                 status: StatusType(''),

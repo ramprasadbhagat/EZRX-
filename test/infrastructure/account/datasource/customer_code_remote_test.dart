@@ -115,7 +115,7 @@ void main() {
               {
                 'data': data,
                 'errors': [
-                  {'message': 'fake-error'}
+                  {'message': 'fake-error'},
                 ],
               },
               delay: const Duration(seconds: 1),
@@ -194,7 +194,7 @@ void main() {
               'filterBlockCustomer': false,
               'first': 24,
               'after': 0,
-            }
+            },
           };
 
           dioAdapter.onPost(

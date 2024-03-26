@@ -109,7 +109,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-        )
+        ),
       ],
     );
 
@@ -148,7 +148,7 @@ void main() {
         PaymentTermState.initial().copyWith(
           paymentTerms: paymentTermMockData,
           paymentTermsFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 

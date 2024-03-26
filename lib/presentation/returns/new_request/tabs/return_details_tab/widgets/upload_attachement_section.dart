@@ -108,7 +108,7 @@ class _AttachmentUploadOptionPickerState
   @override
   Widget build(BuildContext context) {
     return PlatformAlertDialog(
-      key: WidgetKeys.returnAttachmentUploadDialog,
+      widgetKey: WidgetKeys.returnAttachmentUploadDialog,
       title: Text(
         'Upload Attachment'.tr(),
       ),
@@ -117,7 +117,7 @@ class _AttachmentUploadOptionPickerState
       ),
       actions: [
         PlatformDialogAction(
-          key: WidgetKeys.returnAttachmentPhotoUploadButton,
+          widgetKey: WidgetKeys.returnAttachmentPhotoUploadButton,
           child: Column(
             children: [
               const Icon(
@@ -139,7 +139,7 @@ class _AttachmentUploadOptionPickerState
           ),
         ),
         PlatformDialogAction(
-          key: WidgetKeys.returnAttachmentFileUploadButton,
+          widgetKey: WidgetKeys.returnAttachmentFileUploadButton,
           child: Column(
             children: [
               const Icon(

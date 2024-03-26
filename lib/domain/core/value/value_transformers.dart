@@ -172,7 +172,14 @@ DateTime? tryParseDateTime(String input) {
       }
 
       //Case Date and Time(MM/dd/yyyy HH:mm)example: '01/30/2024 04:32'
-      if (RegExp(r'^\d{2}/\d{2}/\d{4} \d{2}:\d{2}$').hasMatch(input)) {
+      if (RegExp(r'^\d{1,2}/\d{1,2}/\d{4} \d{1,2}:\d{1,2}$').hasMatch(input)) {
+        return DateFormat(DateTimeFormatString.announcementDateFormat)
+            .parse(input, false)
+            .toLocal();
+      }
+
+      //Case Date and Time and(MM/dd/yyyy HH:mm a)example: '01/30/2024 04:32 PM'
+      if (RegExp(r'^\d{1,2}/\d{1,2}/\d{4} \d{1,2}:\d{1,2} (AM|PM)$').hasMatch(input)) {
         return DateFormat(DateTimeFormatString.announcementDateFormat)
             .parse(input, false)
             .toLocal();
@@ -528,6 +535,7 @@ List<StatusType> getReturnStatusDetails(String status) {
 
     default:
       final normalizedStatus = bapiStatusType(status).toLowerCase();
+      
       return returnStatusList
           .skipWhile(
             (item) =>

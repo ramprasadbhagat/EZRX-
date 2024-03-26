@@ -16,7 +16,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:universal_io/io.dart';
@@ -176,10 +175,11 @@ void main() {
           await tester.pump();
           final scrollToTopArrowIcon =
               find.byKey(WidgetKeys.materialDetailsFloatingButton);
-          final htmlBodyFinder = find.byType(Html);
+          final customScrollView =
+              find.byKey(WidgetKeys.announcementInfoDetailList);
           await tester.drag(
-            htmlBodyFinder,
-            const Offset(0, -1000),
+            customScrollView,
+            const Offset(0, -200),
             warnIfMissed: false,
           );
           await tester.pump(const Duration(seconds: 1));

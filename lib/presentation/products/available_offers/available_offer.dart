@@ -103,7 +103,7 @@ class _PriceTierItem extends StatelessWidget {
         right: right,
       ),
       child: AvailableOfferItem(
-        height: MediaQuery.of(context).size.height * 0.12,
+        height: MediaQuery.of(context).size.height * 0.15,
         bonusMaterial: BonusMaterial.empty(),
         priceTier: priceTierItem,
         width: MediaQuery.of(context).size.width * 0.4,
@@ -135,7 +135,7 @@ class _BonusLevelItem extends StatelessWidget {
         right: right,
       ),
       child: AvailableOfferItem(
-        height: MediaQuery.of(context).size.height * 0.12,
+        height: MediaQuery.of(context).size.height * 0.15,
         bonusMaterial: bonusMaterial,
         priceTier: PriceTierItem.empty(),
         width: MediaQuery.of(context).size.width * 0.4,
@@ -164,9 +164,10 @@ class _AvailableOfferScrollList extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: size.height * 0.12,
+      height: size.height * 0.15,
       child: ListView(
         scrollDirection: Axis.horizontal,
+        key: WidgetKeys.availableOfferList,
         children: [
           if (showTierPrice)
             ...priceTiersList.asMap().entries.map((e) {

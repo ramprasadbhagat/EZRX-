@@ -52,7 +52,7 @@ void main() {
           UsageCodeState.initial().copyWith(
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('mock-error'))),
-          )
+          ),
         ],
       );
 

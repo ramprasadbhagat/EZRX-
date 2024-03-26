@@ -284,7 +284,7 @@ void main() {
               orderHistoryDetails: orderHistoryDetailsMock,
               materials: materialsWithUpdatedTenderContract,
               isLoadingTenderContract: loadingTenderContractStatus,
-            )
+            ),
           ];
         },
       );

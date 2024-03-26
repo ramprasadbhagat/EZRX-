@@ -298,7 +298,7 @@ void main() {
           ),
         );
         expect(itemKey, findsWidgets);
-        await tester.drag(itemKey.first, const Offset(0, -500));
+        await tester.drag(itemKey.first, const Offset(0, -1000));
         await tester.pump();
 
         verify(

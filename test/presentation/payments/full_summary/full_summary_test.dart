@@ -225,7 +225,7 @@ void main() {
 
       await tester.fling(
         scrollList,
-        const Offset(0.0, 150.0),
+        const Offset(0.0, 300.0),
         800.0,
       );
       await tester.pumpAndSettle();
@@ -364,7 +364,7 @@ void main() {
           items: [
             fullSummaryList.first.copyWith(
               debitCreditCode: DebitCreditCode('H'),
-            )
+            ),
           ],
         ),
       );
@@ -456,7 +456,7 @@ void main() {
           items: [
             fullSummaryList.first.copyWith(
               debitCreditCode: DebitCreditCode('H'),
-            )
+            ),
           ],
         ),
       );

@@ -148,7 +148,7 @@ void main() {
             cartState.copyWith(
               isUpserting: true,
             ),
-            cartState
+            cartState,
           ],
         ),
       );
@@ -312,6 +312,8 @@ void main() {
     testWidgets(
         'Should load more data again when scroll to the bot of the scroll list',
         (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
       when(() => cartBloc.state).thenReturn(
         cartState,
       );
@@ -323,9 +325,10 @@ void main() {
       );
       await tester.pumpWidget(getWidgetToTest(priceAggregate));
       await tester.pump();
-      await tester.drag(
+      await tester.fling(
         find.byKey(WidgetKeys.scrollList),
-        const Offset(0.0, -2500.0),
+        const Offset(0.0, -3000.0),
+        800.0,
       );
       await tester.pumpAndSettle();
 
@@ -462,7 +465,7 @@ void main() {
           productImageState.copyWith(
             productImageMap: {
               priceAggregate.getMaterialNumber:
-                  ProductImages.empty().copyWith(thumbNail: '')
+                  ProductImages.empty().copyWith(thumbNail: ''),
             },
           ),
         ]),
@@ -490,7 +493,7 @@ void main() {
           productImageState.copyWith(
             productImageMap: {
               priceAggregate.getMaterialNumber:
-                  ProductImages.empty().copyWith(thumbNail: '')
+                  ProductImages.empty().copyWith(thumbNail: ''),
             },
           ),
         ]),
@@ -527,7 +530,7 @@ void main() {
           productImageState.copyWith(
             productImageMap: {
               priceAggregate.getMaterialNumber:
-                  ProductImages.empty().copyWith(thumbNail: '')
+                  ProductImages.empty().copyWith(thumbNail: ''),
             },
           ),
         ]),
@@ -570,7 +573,7 @@ void main() {
           productImageState.copyWith(
             productImageMap: {
               priceAggregate.getMaterialNumber:
-                  ProductImages.empty().copyWith(thumbNail: '')
+                  ProductImages.empty().copyWith(thumbNail: ''),
             },
           ),
         ]),
@@ -610,7 +613,7 @@ void main() {
           productImageState.copyWith(
             productImageMap: {
               priceAggregate.getMaterialNumber:
-                  ProductImages.empty().copyWith(thumbNail: '')
+                  ProductImages.empty().copyWith(thumbNail: ''),
             },
           ),
         ]),
@@ -655,7 +658,7 @@ void main() {
           productImageState.copyWith(
             productImageMap: {
               priceAggregate.getMaterialNumber:
-                  ProductImages.empty().copyWith(thumbNail: '')
+                  ProductImages.empty().copyWith(thumbNail: ''),
             },
           ),
         ]),
@@ -771,7 +774,7 @@ void main() {
         bonusMaterialState.copyWith(
           isFetching: false,
           bonusItemList: [
-            bonusItemsList.first.copyWith(quantity: MaterialQty(1))
+            bonusItemsList.first.copyWith(quantity: MaterialQty(1)),
           ],
         ),
       );

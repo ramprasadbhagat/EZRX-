@@ -17,7 +17,7 @@ void main() {
             calculation: '',
             qualifyingQuantity: 10,
             bonusMaterials: [],
-          )
+          ),
         ],
       );
     });
@@ -37,7 +37,7 @@ void main() {
       final data = {
         'Calculation': 'fake-data',
         'QualifyingQuantity': 12,
-        'BonusMaterial': []
+        'BonusMaterial': [],
       };
       final configsDtoMap = PriceBonusItemDto.fromDomain(
         PriceBonusItemDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
@@ -53,7 +53,7 @@ void main() {
         'Calculation': '',
         'BonusRatio': 1,
         'QualifyingQuantity': 1,
-        'BonusQuantity': 1
+        'BonusQuantity': 1,
       };
       final configs = BonusMaterialDto.fromDomain(
         BonusMaterialDto.fromJson(makeResponseCamelCase(jsonEncode(data)))

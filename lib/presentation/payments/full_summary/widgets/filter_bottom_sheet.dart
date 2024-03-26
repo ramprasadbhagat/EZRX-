@@ -107,8 +107,8 @@ class FullSummaryFilterBottomSheet extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      children: const [
+                    const Row(
+                      children: [
                         _ResetButton(),
                         SizedBox(
                           width: 12,

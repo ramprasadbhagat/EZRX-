@@ -139,7 +139,7 @@ void main() {
           NotificationData.empty().copyWith(
             isRead: true,
             id: 13160,
-          )
+          ),
         ],
       );
       expect(
@@ -179,7 +179,7 @@ void main() {
         previousNotificationDataList: [
           NotificationData.empty().copyWith(
             id: 13245,
-          )
+          ),
         ],
       );
       expect(

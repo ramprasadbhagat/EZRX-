@@ -400,7 +400,7 @@ void main() {
 
       await tester.drag(
         adminPoAttachmentKey,
-        const Offset(0.0, -4000.0),
+        const Offset(0.0, -4500.0),
       );
       await tester.pump(const Duration(seconds: 2));
       await tester.pump(

@@ -182,7 +182,7 @@ void main() {
               isCounterOffer: true,
               originPrice: 100.1,
               unitPrice: 98,
-            )
+            ),
           ],
         ),
       ],
@@ -196,7 +196,7 @@ void main() {
               totalPrice: 336.6,
               unitPrice: 336.6,
               qty: 1,
-            )
+            ),
           ],
         ),
       ],
@@ -275,7 +275,7 @@ void main() {
                 materialNumber: MaterialNumber('000000000021247719'),
                 unitPrice: 17.2,
                 totalPrice: 516,
-              )
+              ),
             ],
           ),
         ),
@@ -636,7 +636,7 @@ void main() {
               failureOrSuccessOption: optionOf(const Right(unit)),
               fileOperationMode: FileOperationMode.download,
               isFetching: false,
-            )
+            ),
           ]),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -665,7 +665,7 @@ void main() {
                   optionOf(const Left(ApiFailure.other(fakeMessage))),
               fileOperationMode: FileOperationMode.download,
               isFetching: false,
-            )
+            ),
           ]),
         );
         await tester.pumpWidget(getScopedWidget());
@@ -799,7 +799,7 @@ void main() {
                 unitPrice: 17.2,
                 totalPrice: 516,
                 type: OrderItemType('Comm'),
-              )
+              ),
             ],
           ),
         ),
@@ -844,7 +844,7 @@ void main() {
                 type: OrderItemType('Comm'),
                 productType: MaterialInfoType('material'),
                 hidePrice: true,
-              )
+              ),
             ],
           ),
         ),
@@ -1013,7 +1013,7 @@ void main() {
               fakeOrderHistoryItem.copyWith(
                 sAPStatus: OrderStepValue('Order Creating'),
                 productType: MaterialInfoType('material'),
-              )
+              ),
             ],
           ),
         ),
@@ -1045,7 +1045,7 @@ void main() {
             orderHistoryDetailsOrderItem: [
               fakeOrderHistoryItem.copyWith(
                 productType: MaterialInfoType('material'),
-              )
+              ),
             ],
           ),
         ),
@@ -1073,7 +1073,7 @@ void main() {
               fakeOrderHistoryItem.copyWith(
                 productType: MaterialInfoType.material(),
                 promoStatus: true,
-              )
+              ),
             ],
           ),
         );
@@ -1097,7 +1097,7 @@ void main() {
                 productType: MaterialInfoType.material(),
                 type: OrderItemType('Bonus'),
                 promoStatus: true,
-              )
+              ),
             ],
           ),
         );
@@ -1225,7 +1225,7 @@ void main() {
         (tester) async {
       final bundleList = [
         OrderHistoryDetailsOrderItem.empty()
-            .copyWith(productType: MaterialInfoType.bundle())
+            .copyWith(productType: MaterialInfoType.bundle()),
       ];
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
@@ -1253,7 +1253,7 @@ void main() {
         (tester) async {
       final bundleList = [
         OrderHistoryDetailsOrderItem.empty()
-            .copyWith(productType: MaterialInfoType.bundle())
+            .copyWith(productType: MaterialInfoType.bundle()),
       ];
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
@@ -1291,7 +1291,7 @@ void main() {
           material: MaterialInfo.empty().copyWith(
             bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
           ),
-        )
+        ),
       ];
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
@@ -1446,14 +1446,14 @@ void main() {
             materialNumber: MaterialNumber('1234567890'),
             unitPrice: 17.2,
             totalPrice: 516,
-          )
+          ),
         ],
       );
       final bundleList = [
         OrderHistoryDetailsOrderItem.empty().copyWith(
           materialNumber: MaterialNumber('1234567890'),
           productType: MaterialInfoType.bundle(),
-        )
+        ),
       ];
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -1532,7 +1532,7 @@ void main() {
                 productType: MaterialInfoType.material(),
                 qty: fakeQty,
                 pickedQuantity: fakePickedQty,
-              )
+              ),
             ],
           ),
         );
@@ -1562,6 +1562,8 @@ void main() {
       });
 
       testWidgets('Order summary section for ID', (tester) async {
+        await tester.binding.setSurfaceSize(const Size(600, 900));
+
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
@@ -1940,7 +1942,7 @@ void main() {
                   .copyWith(
                 originPrice: originPrice,
                 unitPrice: unitPrice,
-              )
+              ),
             ],
           ),
         ),
@@ -1979,7 +1981,7 @@ void main() {
               fakeOrderHistoryItem.copyWith(
                 sAPStatus: OrderStepValue('Pending release - on backorder'),
                 productType: MaterialInfoType('material'),
-              )
+              ),
             ],
           ),
         ),
@@ -2023,7 +2025,7 @@ void main() {
                 type: OrderItemType('Comm'),
                 productType: MaterialInfoType('material'),
                 hidePrice: true,
-              )
+              ),
             ],
           ),
         ),
@@ -2055,7 +2057,7 @@ void main() {
           material: MaterialInfo.empty().copyWith(
             bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
           ),
-        )
+        ),
       ];
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
@@ -2147,7 +2149,7 @@ void main() {
           material: MaterialInfo.empty().copyWith(
             bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
           ),
-        )
+        ),
       ];
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
@@ -2323,7 +2325,7 @@ void main() {
                 productType: MaterialInfoType('material'),
                 hidePrice: true,
                 isCounterOffer: true,
-              )
+              ),
             ],
           ),
         ),
@@ -2411,7 +2413,7 @@ void main() {
           .toPlainText();
       expect(batchExpiryDate, contains('Batch NA (EXP: NA)'));
     });
-    
+
     testWidgets(
       ' -> Find edi if customer info status is edi',
       (WidgetTester tester) async {

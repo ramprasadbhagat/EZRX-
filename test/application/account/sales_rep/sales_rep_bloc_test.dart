@@ -47,7 +47,7 @@ void main() {
               ApiFailure.other('Fake Error'),
             ),
           ),
-        )
+        ),
       ],
     );
     blocTest<SalesRepBloc, SalesRepState>(
@@ -66,7 +66,7 @@ void main() {
         SalesRepState.initial().copyWith(
           salesRepInfo: SalesRepresentativeInfo.empty().copyWith(count: 2),
           salesRepFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
     blocTest<SalesRepBloc, SalesRepState>(
@@ -86,7 +86,7 @@ void main() {
         SalesRepState.initial().copyWith(
           salesRepInfo: SalesRepresentativeInfo.empty(),
           salesRepFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
   });

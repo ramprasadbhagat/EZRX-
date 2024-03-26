@@ -91,9 +91,9 @@ void main() {
         StockInfo.empty().copyWith(
           materialNumber: MaterialNumber('12345'),
           inStock: MaterialInStock('Yes'),
-        )
+        ),
       ],
-    )
+    ),
   ];
   final fakeCartProductsWithCombo = <PriceAggregate>[];
   final fakeException = Exception('fake_error');
@@ -146,7 +146,7 @@ void main() {
     when(
       () => stockInfoRemoteDataSource.getMaterialStockInfoList(
         materialNumbers: [
-          fakeCartProducts.first.getMaterialNumber.getOrDefaultValue('')
+          fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
         ],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -158,7 +158,7 @@ void main() {
     when(
       () => stockInfoRemoteDataSource.getMaterialStockInfoList(
         materialNumbers: [
-          fakeCartProducts.first.getMaterialNumber.getOrDefaultValue('')
+          fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
         ],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -209,7 +209,7 @@ void main() {
 
     final result = await cartRepository.getStockInfoList(
       items: [
-        MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('12345'))
+        MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('12345')),
       ],
       shipToInfo: ShipToInfo.empty(),
       salesOrganisation:
@@ -254,7 +254,7 @@ void main() {
       bonusSampleItems: [
         BonusSampleItem.empty().copyWith(
           materialNumber: MaterialNumber('fake-number'),
-        )
+        ),
       ],
     );
     materials.replaceRange(0, 1, [material]);
@@ -313,7 +313,7 @@ void main() {
       bonusSampleItems: [
         BonusSampleItem.empty().copyWith(
           materialNumber: MaterialNumber('fake-number'),
-        )
+        ),
       ],
     );
     materials.replaceRange(0, 1, [material]);
@@ -373,7 +373,7 @@ void main() {
       bonusSampleItems: [
         BonusSampleItem.empty().copyWith(
           materialNumber: MaterialNumber('fake-number'),
-        )
+        ),
       ],
     );
     materials.replaceRange(0, 1, [material]);
@@ -559,7 +559,7 @@ void main() {
     when(
       () => stockInfoRemoteDataSource.getMaterialStockInfoList(
         materialNumbers: [
-          fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+          fakeCartProducts.first.materialInfo.materialNumber.getOrCrash(),
         ],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -583,7 +583,7 @@ void main() {
     when(
       () => stockInfoRemoteDataSource.getMaterialStockInfoList(
         materialNumbers: [
-          fakeCartProducts.first.getMaterialNumber.getOrDefaultValue('')
+          fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
         ],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -635,7 +635,7 @@ void main() {
     when(
       () => stockInfoRemoteDataSource.getMaterialStockInfoList(
         materialNumbers: [
-          fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+          fakeCartProducts.first.materialInfo.materialNumber.getOrCrash(),
         ],
         salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
         selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -662,7 +662,7 @@ void main() {
           quantity: MaterialQty(1),
           type: MaterialInfoType('material'),
           parentID: 'fake-parent-Id',
-        )
+        ),
       ];
       when(
         () => cartRemoteDataSource.upsertCartItems(
@@ -686,7 +686,7 @@ void main() {
         (invocation) async => <PriceAggregate>[
           PriceAggregate.empty().copyWith(
             materialInfo: productList.first,
-          )
+          ),
         ],
       );
 
@@ -712,7 +712,7 @@ void main() {
           quantity: MaterialQty(1),
           type: MaterialInfoType('material'),
           parentID: 'fake-parent-Id',
-        )
+        ),
       ];
       when(
         () => cartRemoteDataSource.upsertCartItems(
@@ -1275,7 +1275,7 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         language: Language.english(),
         products: [
-          MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('12345'))
+          MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('12345')),
         ],
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
@@ -1288,7 +1288,7 @@ void main() {
       when(
         () => stockInfoRemoteDataSource.getMaterialStockInfoList(
           materialNumbers: [
-            fakeCartProducts.materialNumbers.first.getOrCrash()
+            fakeCartProducts.materialNumbers.first.getOrCrash(),
           ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -1310,7 +1310,7 @@ void main() {
       when(
         () => stockInfoRemoteDataSource.getMaterialStockInfoList(
           materialNumbers: [
-            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash(),
           ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -1320,7 +1320,7 @@ void main() {
           MaterialStockInfo.empty().copyWith(
             materialNumber: fakeCartProducts.first.materialInfo.materialNumber,
             stockInfos: [StockInfo.empty()],
-          )
+          ),
         ],
       );
 
@@ -1343,7 +1343,7 @@ void main() {
         shipToInfo: fakeShipToInfo,
       );
       expect(result.getOrElse(() => <PriceAggregate>[]), [
-        fakeCartProducts.first.copyWith(stockInfoList: [StockInfo.empty()])
+        fakeCartProducts.first.copyWith(stockInfoList: [StockInfo.empty()]),
       ]);
     });
 
@@ -1353,7 +1353,7 @@ void main() {
       when(
         () => stockInfoRemoteDataSource.getMaterialStockInfoList(
           materialNumbers: [
-            fakeCartProducts.materialNumbers.first.getOrCrash()
+            fakeCartProducts.materialNumbers.first.getOrCrash(),
           ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -1717,7 +1717,7 @@ void main() {
       when(
         () => stockInfoRemoteDataSource.getMaterialStockInfoList(
           materialNumbers: [
-            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash(),
           ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -1729,7 +1729,7 @@ void main() {
       when(
         () => stockInfoRemoteDataSource.getMaterialStockInfoList(
           materialNumbers: [
-            fakeCartProducts.first.getMaterialNumber.getOrDefaultValue('')
+            fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
           ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -1780,7 +1780,7 @@ void main() {
       when(
         () => stockInfoRemoteDataSource.getMaterialStockInfoList(
           materialNumbers: [
-            fakeCartProducts.first.getMaterialNumber.getOrDefaultValue('')
+            fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
           ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -1792,7 +1792,7 @@ void main() {
       when(
         () => stockInfoRemoteDataSource.getMaterialStockInfoList(
           materialNumbers: [
-            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash(),
           ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -1802,7 +1802,7 @@ void main() {
           MaterialStockInfo.empty().copyWith(
             materialNumber: fakeCartProducts.first.materialInfo.materialNumber,
             stockInfos: [StockInfo.empty()],
-          )
+          ),
         ],
       );
 
@@ -1822,7 +1822,7 @@ void main() {
       expect(result.getOrElse(() => []), [
         fakeCartProducts.first.copyWith(
           stockInfoList: [StockInfo.empty()],
-        )
+        ),
       ]);
     });
 
@@ -1930,7 +1930,7 @@ void main() {
             fakeCartProducts.first.materialInfo.counterOfferDetails,
       );
       expect(result.getOrElse(() => []), [
-        fakeCartProducts.first.copyWith(stockInfoList: [StockInfo.empty()])
+        fakeCartProducts.first.copyWith(stockInfoList: [StockInfo.empty()]),
       ]);
     });
 
@@ -1960,7 +1960,7 @@ void main() {
       when(
         () => stockInfoRemoteDataSource.getMaterialStockInfoList(
           materialNumbers: [
-            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash()
+            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash(),
           ],
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -1974,9 +1974,9 @@ void main() {
                 materialNumber:
                     fakeCartProducts.first.materialInfo.materialNumber,
                 inStock: MaterialInStock('Yes'),
-              )
+              ),
             ],
-          )
+          ),
         ],
       );
 
@@ -2000,9 +2000,9 @@ void main() {
               materialNumber:
                   fakeCartProducts.first.materialInfo.materialNumber,
               inStock: MaterialInStock('Yes'),
-            )
+            ),
           ],
-        )
+        ),
       ]);
     });
   });

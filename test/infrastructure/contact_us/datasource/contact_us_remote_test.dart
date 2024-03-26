@@ -120,7 +120,7 @@ void main() {
           {
             'data': null,
             'errors': [
-              {'message': 'fake-error'}
+              {'message': 'fake-error'},
             ],
           },
           delay: const Duration(seconds: 1),

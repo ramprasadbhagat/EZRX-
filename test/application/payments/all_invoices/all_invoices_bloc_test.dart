@@ -60,7 +60,7 @@ void main() {
           AllInvoicesState.initial().copyWith(
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
-          )
+          ),
         ],
       );
     },

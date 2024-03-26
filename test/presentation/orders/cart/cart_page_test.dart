@@ -285,7 +285,7 @@ void main() {
                 stockInfos: <StockInfo>[
                   StockInfo.empty().copyWith(
                     inStock: MaterialInStock('No'),
-                  )
+                  ),
                 ],
               ),
               MaterialInfo.empty().copyWith(
@@ -294,7 +294,7 @@ void main() {
                 stockInfos: <StockInfo>[
                   StockInfo.empty().copyWith(
                     inStock: MaterialInStock('Yes'),
-                  )
+                  ),
                 ],
               ),
             ],
@@ -320,7 +320,7 @@ void main() {
                 stockInfos: <StockInfo>[
                   StockInfo.empty().copyWith(
                     inStock: MaterialInStock('Yes'),
-                  )
+                  ),
                 ],
               ),
               MaterialInfo.empty().copyWith(
@@ -328,7 +328,7 @@ void main() {
                 stockInfos: <StockInfo>[
                   StockInfo.empty().copyWith(
                     inStock: MaterialInStock('Yes'),
-                  )
+                  ),
                 ],
               ),
             ],
@@ -386,7 +386,7 @@ void main() {
               principalData: PrincipalData.empty().copyWith(
                 principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
               ),
-            )
+            ),
           ],
           quantity: 1,
           bundle: Bundle.empty().copyWith(
@@ -432,7 +432,7 @@ void main() {
               MaterialData.empty().copyWith(
                 materialNumber: MaterialNumber('000000000023168451'),
                 governmentMaterialCode: StringValue('fake-code'),
-              )
+              ),
             ],
           ),
           stockInfo: StockInfo.empty().copyWith(
@@ -488,7 +488,7 @@ void main() {
           stockInfoList: <StockInfo>[
             StockInfo.empty().copyWith(
               inStock: MaterialInStock('No'),
-            )
+            ),
           ],
           price: Price.empty().copyWith(
             finalPrice: MaterialPrice(234.50),
@@ -663,7 +663,7 @@ void main() {
             ),
             BlocProvider<PaymentCustomerInformationBloc>(
               create: (context) => paymentCustomerInformationMock,
-            )
+            ),
           ],
           child: const CartPage(),
         );
@@ -769,18 +769,29 @@ void main() {
         await tester.pumpWidget(getWidget());
 
         await tester.pump();
-        final listWidget = find.byType(CartProductTile);
-        expect(listWidget, findsOneWidget);
-        await tester.drag(listWidget, const Offset(-500, 0));
-        await tester.pump();
-        final deleteIcon = find.byIcon(Icons.delete_outline);
-        expect(deleteIcon, findsOneWidget);
-
-        await tester.tap(
-          deleteIcon,
-          warnIfMissed: true,
+        final startOffset = tester.getCenter(find.byType(CartProductTile));
+        final gesture = await tester.startGesture(startOffset);
+        await gesture.moveBy(const Offset(-500, 0)); // Swipe to the left
+        await tester.pump(); // Rebuild the widget
+        final materialItem = find.byKey(
+          WidgetKeys.cartItemProductTile(
+            mockCartItemWithDataList2
+                .first.materialInfo.materialNumber.displayMatNo,
+          ),
         );
-        await tester.pump(const Duration(seconds: 1));
+        expect(materialItem, findsOneWidget);
+        final customSlidableAction = find.byKey(
+          WidgetKeys.cartItemSwipeDeleteButton,
+        );
+        await tester.dragUntilVisible(
+          customSlidableAction,
+          materialItem,
+          const Offset(-500, 0),
+        );
+        await tester.pump();
+        expect(customSlidableAction, findsOneWidget);
+        await tester.tap(customSlidableAction);
+        await tester.pump();
 
         verify(
           () => cartBloc.add(
@@ -1265,7 +1276,7 @@ void main() {
                 stockInfoList: <StockInfo>[
                   StockInfo.empty().copyWith(
                     inStock: MaterialInStock('No'),
-                  )
+                  ),
                 ],
                 price: Price.empty().copyWith(
                   finalPrice: MaterialPrice(234.50),
@@ -1371,7 +1382,7 @@ void main() {
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('yes'),
-                    )
+                    ),
                   ],
                 ),
                 MaterialInfo.empty().copyWith(
@@ -1380,7 +1391,7 @@ void main() {
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('Yes'),
-                    )
+                    ),
                   ],
                 ),
               ],
@@ -1592,7 +1603,7 @@ void main() {
                   materialNumber: MaterialNumber('1234'),
                   materialGroup4: MaterialGroup.four('6A1'),
                 ),
-              )
+              ),
             ],
             isUpserting: true,
             isUpdatingStock: true,
@@ -1608,7 +1619,7 @@ void main() {
                   materialNumber: MaterialNumber('1234'),
                   materialGroup4: MaterialGroup.four('6A1'),
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -1663,7 +1674,7 @@ void main() {
             CartEvent.removeInvalidProducts(
               invalidCartItems: <MaterialInfo>[
                 suspendedMaterial.materialInfo
-                    .copyWith(quantity: MaterialQty(0))
+                    .copyWith(quantity: MaterialQty(0)),
               ],
             ),
           ),
@@ -1709,7 +1720,7 @@ void main() {
             CartEvent.removeInvalidProducts(
               invalidCartItems: <MaterialInfo>[
                 materialWithoutPrice.materialInfo
-                    .copyWith(quantity: MaterialQty(0))
+                    .copyWith(quantity: MaterialQty(0)),
               ],
             ),
           ),
@@ -1749,7 +1760,7 @@ void main() {
           () => cartBloc.add(
             CartEvent.removeInvalidProducts(
               invalidCartItems: <MaterialInfo>[
-                oosMaterial.materialInfo.copyWith(quantity: MaterialQty(0))
+                oosMaterial.materialInfo.copyWith(quantity: MaterialQty(0)),
               ],
             ),
           ),
@@ -1864,7 +1875,7 @@ void main() {
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('1234'),
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -1875,7 +1886,7 @@ void main() {
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('1234'),
                 ),
-              )
+              ),
             ],
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               status: Status('01'),
@@ -1896,7 +1907,7 @@ void main() {
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('1234'),
                 ),
-              )
+              ),
             ],
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               status: Status('01'),
@@ -1961,7 +1972,7 @@ void main() {
             CartEvent.removeInvalidProducts(
               invalidCartItems: <MaterialInfo>[
                 suspendedPrincipalMaterial.materialInfo
-                    .copyWith(quantity: MaterialQty(0))
+                    .copyWith(quantity: MaterialQty(0)),
               ],
             ),
           ),
@@ -1984,7 +1995,7 @@ void main() {
           cartState,
           cartState.copyWith(
             isClearing: true,
-          )
+          ),
         ];
 
         whenListen(
@@ -2011,7 +2022,7 @@ void main() {
             CartEvent.removeInvalidProducts(
               invalidCartItems: <MaterialInfo>[
                 suspendedPrincipalMaterial.materialInfo
-                    .copyWith(quantity: MaterialQty(0))
+                    .copyWith(quantity: MaterialQty(0)),
               ],
             ),
           ),
@@ -2245,7 +2256,7 @@ void main() {
           materialPriceBloc,
           Stream.fromIterable([
             MaterialPriceState.initial().copyWith(isFetching: true),
-            MaterialPriceState.initial()
+            MaterialPriceState.initial(),
           ]),
         );
 
@@ -2274,7 +2285,7 @@ void main() {
           materialPriceBloc,
           Stream.fromIterable([
             MaterialPriceState.initial().copyWith(isFetching: true),
-            MaterialPriceState.initial()
+            MaterialPriceState.initial(),
           ]),
         );
         whenListen(
@@ -2367,7 +2378,7 @@ void main() {
               type: MaterialInfoType.material(),
             ),
             price: Price.empty(),
-          )
+          ),
         ];
         final orderEligibilityState = OrderEligibilityState.initial().copyWith(
           configs: fakeMYSalesOrgConfigs,
@@ -2713,7 +2724,7 @@ void main() {
           () => cartBloc.add(
             CartEvent.removeInvalidProducts(
               invalidCartItems: <MaterialInfo>[
-                oosMaterial.materialInfo.copyWith(quantity: MaterialQty(0))
+                oosMaterial.materialInfo.copyWith(quantity: MaterialQty(0)),
               ],
             ),
           ),
@@ -2756,7 +2767,7 @@ void main() {
                   materialNumber: MaterialNumber('fake-material'),
                   type: MaterialInfoType('material'),
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -2803,7 +2814,7 @@ void main() {
                   materialNumber: MaterialNumber('fake-material'),
                   type: MaterialInfoType('material'),
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -2850,7 +2861,7 @@ void main() {
                   materialNumber: MaterialNumber('fake-material'),
                   type: MaterialInfoType('material'),
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -3079,13 +3090,13 @@ void main() {
                       quantity: 10,
                       rate: 90,
                       sequence: 3,
-                    )
+                    ),
                   ],
                   materials: [
-                    MaterialInfo.empty().copyWith(quantity: MaterialQty(9))
+                    MaterialInfo.empty().copyWith(quantity: MaterialQty(9)),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -3118,7 +3129,7 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             cartProducts: [
               mockCartBundleItems.first
-                  .copyWith(salesOrgConfig: fakeMYSalesOrgConfigs)
+                  .copyWith(salesOrgConfig: fakeMYSalesOrgConfigs),
             ],
           ),
         );
@@ -3206,7 +3217,7 @@ void main() {
                 isUpdateProductDetermination: false,
                 updateFailureOrSuccessOption:
                     optionOf(const Left(ApiFailure.other('fake-error'))),
-              )
+              ),
             ]),
           );
 
@@ -3576,7 +3587,7 @@ void main() {
                     materialNumber: MaterialNumber('123456789'),
                     stockQuantity: 100,
                     inStock: MaterialInStock('No'),
-                  )
+                  ),
                 ],
                 materialInfo: MaterialInfo.empty().copyWith(
                   type: MaterialInfoType('material'),
@@ -3586,7 +3597,7 @@ void main() {
                 salesOrgConfig: fakeIDSalesOrgConfigs,
               ),
             ],
-          )
+          ),
         ];
 
         when(() => eligibilityBloc.state).thenReturn(
@@ -3622,7 +3633,7 @@ void main() {
               showErrorMessage: true,
             ),
           );
-
+          await tester.binding.setSurfaceSize(const Size(600, 900));
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
 
@@ -3650,6 +3661,7 @@ void main() {
             ),
           );
 
+          await tester.binding.setSurfaceSize(const Size(600, 900));
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
 
@@ -3699,6 +3711,7 @@ void main() {
             ),
           );
 
+          await tester.binding.setSurfaceSize(const Size(600, 900));
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
 
@@ -3868,7 +3881,7 @@ void main() {
               StockInfo.empty().copyWith(
                 materialNumber: mockCartItems.first.getMaterialNumber,
                 stockQuantity: 10,
-              )
+              ),
             ],
             salesOrgConfig: fakeIDSalesOrgConfigs,
           );
@@ -3903,7 +3916,7 @@ void main() {
               data: [
                 MaterialData.empty().copyWith(
                   defaultMaterialDescription: 'fake-material-description',
-                )
+                ),
               ],
             ),
           );

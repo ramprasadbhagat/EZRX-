@@ -20,7 +20,7 @@ class AccountSummaryTabFilterRobot {
     'In progress',
     'Overdue',
     'Cleared',
-    'Outstanding'
+    'Outstanding',
   ];
 
   void verifyCreditsFilter({bool isVisible = true}) {

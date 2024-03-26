@@ -16,7 +16,7 @@ void main() {
         'customerNumber': '0030082707',
         'customerNumberShipTo': '0070149863',
         'salesOrganisation': '2001',
-        'division': '00'
+        'division': '00',
       },
       'materials': [
         {
@@ -29,7 +29,7 @@ void main() {
               'materialNumber': '000000000021041773',
               'qty': 2,
               'PromoStatus': false,
-              'PromoType': ''
+              'PromoType': '',
             }
           ],
           'ProductType': 'MATERIAL',
@@ -41,7 +41,7 @@ void main() {
           'isCounterOffer': false,
           'principalCode': '0000101334',
           'principalName': 'GLAXOSMITHKLINE CONSUMER',
-          'Description': '190 BIOTENE D/MOUTHT/PASTE FM ORI 4.5OZ'
+          'Description': '190 BIOTENE D/MOUTHT/PASTE FM ORI 4.5OZ',
         }
       ],
       'blockOrder': false,
@@ -60,7 +60,7 @@ void main() {
       'poDocuments': [],
       'Telephone': '',
       'deliveryFee': 'undefined',
-      'PurchaseOrderType': 'DSS'
+      'PurchaseOrderType': 'DSS',
     },
   };
 

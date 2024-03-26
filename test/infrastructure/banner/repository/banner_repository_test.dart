@@ -32,7 +32,7 @@ void main() {
     salesOrg: salesOrg2601,
     customerInfos: <SalesOrgCustomerInfo>[
       SalesOrgCustomerInfo.empty()
-          .copyWith(shipToInfos: [SalesOrgShipToInfo.empty()])
+          .copyWith(shipToInfos: [SalesOrgShipToInfo.empty()]),
     ],
   );
   const fakeBranchCode = 'fake-branch-code';

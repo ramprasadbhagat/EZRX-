@@ -217,14 +217,14 @@ void main() {
           type: MaterialInfoType('bundle'),
           materialNumber: MaterialNumber('fake-mat1'),
           stockInfos: [
-            StockInfo.empty().copyWith(inStock: MaterialInStock('Yes'))
+            StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
           ],
         ),
         MaterialInfo.empty().copyWith(
           type: MaterialInfoType('bundle'),
           materialNumber: MaterialNumber('fake-mat2'),
           stockInfos: [
-            StockInfo.empty().copyWith(inStock: MaterialInStock('No'))
+            StockInfo.empty().copyWith(inStock: MaterialInStock('No')),
           ],
         ),
       ],
@@ -612,6 +612,8 @@ void main() {
     testWidgets(
       '=> test Checkout Body ',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(800, 1200));
+
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeTHSalesOrgConfigs,
@@ -661,7 +663,7 @@ void main() {
         await tester.dragUntilVisible(
           deliveryDateFinder,
           checkoutScrollListFinder,
-          const Offset(0, -100),
+          const Offset(0, -200),
         );
         if (DateTime.now().hour < fakeTHSalesOrgConfigs.salesOrg.cutOffTime) {
           await tester.tap(deliveryDateFinder);
@@ -789,6 +791,8 @@ void main() {
     testWidgets(
       '=> test Delivery Date ',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(800, 1200));
+
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeTHSalesOrgConfigs,
@@ -972,6 +976,8 @@ void main() {
     });
     testWidgets('=> test TextEditingValue on change for Payment Terms',
         (tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 1200));
+
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeTWSalesOrgConfigs,
@@ -981,7 +987,7 @@ void main() {
       when(() => additionalDetailsBlocMock.state).thenReturn(
         AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            paymentTerm: PaymentTerm('fake_input'),
+            paymentTerm: PaymentTerm('fake_payment_term-fake_payment_term_description'),
           ),
         ),
       );
@@ -994,7 +1000,7 @@ void main() {
             payment_term.PaymentTerm.empty().copyWith(
               paymentTermCode: 'fake_payment_term',
               paymentTermDescription: 'fake_payment_term_description',
-            )
+            ),
           ],
         ),
       ];
@@ -1042,7 +1048,7 @@ void main() {
                 ),
                 bonusSampleItems: [
                   BonusSampleItem.empty()
-                      .copyWith(materialNumber: MaterialNumber('12345'))
+                      .copyWith(materialNumber: MaterialNumber('12345')),
                 ],
               ),
             ],
@@ -1051,9 +1057,9 @@ void main() {
               MaterialNumber('12345'): ProductMetaData.empty().copyWith(
                 productImages: [
                   ProductImages.empty()
-                      .copyWith(thumbNail: 'fake_product_thumbNail')
+                      .copyWith(thumbNail: 'fake_product_thumbNail'),
                 ],
-              )
+              ),
             },
           ),
         );
@@ -1109,7 +1115,7 @@ void main() {
                 ),
                 bonusSampleItems: [
                   BonusSampleItem.empty()
-                      .copyWith(materialNumber: MaterialNumber('12345'))
+                      .copyWith(materialNumber: MaterialNumber('12345')),
                 ],
               ),
             ],
@@ -1118,9 +1124,9 @@ void main() {
               MaterialNumber('12345'): ProductMetaData.empty().copyWith(
                 productImages: [
                   ProductImages.empty()
-                      .copyWith(thumbNail: 'fake_product_thumbNail')
+                      .copyWith(thumbNail: 'fake_product_thumbNail'),
                 ],
-              )
+              ),
             },
           ),
         );
@@ -1198,9 +1204,9 @@ void main() {
               MaterialNumber('12345'): ProductMetaData.empty().copyWith(
                 productImages: [
                   ProductImages.empty()
-                      .copyWith(thumbNail: 'fake_product_thumbNail')
+                      .copyWith(thumbNail: 'fake_product_thumbNail'),
                 ],
-              )
+              ),
             },
           ),
         );
@@ -1253,7 +1259,7 @@ void main() {
                 comboMaterials: [
                   ComboMaterialItem.empty().copyWith(
                     materialInfo: fakeCartProduct.first.materialInfo,
-                  )
+                  ),
                 ],
               ),
             ],
@@ -1567,7 +1573,7 @@ void main() {
                 PoDocuments.empty().copyWith(
                   name: 'fake_file',
                   url: 'fake_url',
-                )
+                ),
               ],
             ),
           ),
@@ -1602,7 +1608,7 @@ void main() {
               PoDocuments.empty().copyWith(
                 name: 'fake_file',
                 url: 'fake_url',
-              )
+              ),
             ],
           ),
         ];
@@ -1628,7 +1634,7 @@ void main() {
                 PoDocuments.empty().copyWith(
                   name: 'fake_file',
                   url: 'fake_url',
-                )
+                ),
               ],
             ),
           ),
@@ -1653,7 +1659,7 @@ void main() {
                 PoDocuments.empty().copyWith(
                   name: 'fake_file',
                   url: 'fake_url',
-                )
+                ),
               ],
               uploadOptionType: UploadOptionType.gallery,
               user: fakeClientUser,
@@ -1672,7 +1678,7 @@ void main() {
                 PoDocuments.empty().copyWith(
                   name: 'fake_file',
                   url: 'fake_url',
-                )
+                ),
               ],
               uploadOptionType: UploadOptionType.file,
               user: fakeClientUser,
@@ -1684,6 +1690,8 @@ void main() {
     testWidgets(
       '=> test PoAttachment Upload in place Order check uploaded list',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(800, 1200));
+
         when(() => additionalDetailsBlocMock.state).thenReturn(
           AdditionalDetailsState.initial().copyWith(
             isValidated: true,
@@ -1692,7 +1700,7 @@ void main() {
                 PoDocuments.empty().copyWith(
                   name: 'fake_file',
                   url: 'fake_url',
-                )
+                ),
               ],
             ),
           ),
@@ -1722,7 +1730,7 @@ void main() {
               PoDocuments.empty().copyWith(
                 name: 'fake_file',
                 url: 'fake_url',
-              )
+              ),
             ],
           ),
         ];
@@ -1748,7 +1756,7 @@ void main() {
                 PoDocuments.empty().copyWith(
                   name: 'fake_file',
                   url: 'fake_url',
-                )
+                ),
               ],
             ),
           ),
@@ -1861,7 +1869,7 @@ void main() {
               PoDocuments.empty().copyWith(
                 name: 'fake_file',
                 url: 'fake_url',
-              )
+              ),
             ],
           ),
         ];
@@ -2419,6 +2427,8 @@ void main() {
 
     testWidgets('=> Selecting a date updates the delivery date text',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 1200));
+
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeTHSalesOrganisation,
@@ -2452,7 +2462,7 @@ void main() {
       // Verify that the date picker is displayed
       final okButton = find.text('OK');
       expect(okButton, findsOneWidget);
-      await tester.tap(find.widgetWithIcon(IconButton, Icons.edit));
+      await tester.tap(find.widgetWithIcon(IconButton, Icons.edit_outlined));
       await tester.pump();
       selectedDate = DateTimeUtils.addWorkingDay(
         fakeTHSalesOrgConfigs.deliveryStartDate,
@@ -2593,7 +2603,7 @@ void main() {
           cartProducts: [
             mockCartBundleItems.first.copyWith(
               salesOrgConfig: fakeKHSalesOrgConfigs,
-            )
+            ),
           ],
         ),
       );
@@ -2700,7 +2710,7 @@ void main() {
                 salesOrgConfig: currentSalesOrgConfigVariant,
                 price: priceList.first,
                 quantity: 1,
-              )
+              ),
             ],
             aplSimulatorOrder: aplSimulatorOrder,
           ),
@@ -2816,13 +2826,13 @@ void main() {
                 bonusSampleItems: [
                   BonusSampleItem.empty().copyWith(
                     materialNumber: mockCartItems.first.getMaterialNumber,
-                  )
+                  ),
                 ],
                 stockInfoList: [
                   StockInfo.empty().copyWith(
                     inStock: MaterialInStock('Yes'),
                     materialNumber: mockCartItems.first.getMaterialNumber,
-                  )
+                  ),
                 ],
               ),
             ],
@@ -2866,13 +2876,13 @@ void main() {
                 bonusSampleItems: [
                   BonusSampleItem.empty().copyWith(
                     materialNumber: mockCartItems.first.getMaterialNumber,
-                  )
+                  ),
                 ],
                 stockInfoList: [
                   StockInfo.empty().copyWith(
                     inStock: MaterialInStock('Yes'),
                     materialNumber: mockCartItems.first.getMaterialNumber,
-                  )
+                  ),
                 ],
               ),
             ],
@@ -3056,7 +3066,7 @@ void main() {
           cartProducts: [
             mockCartBundleItems.first.copyWith(
               bundle: fakeBundleList,
-            )
+            ),
           ],
         ),
       );

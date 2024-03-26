@@ -39,6 +39,7 @@ class _FilterValueListState extends State<FilterValueList> {
                   'Favourites'.tr(),
                 ),
                 selected: state.selectedMaterialFilter.isFavourite,
+                showCheckmark: false,
                 backgroundColor: ZPColors.secondaryEmerald10,
                 selectedColor: ZPColors.primary,
                 labelStyle: Theme.of(context).chipTheme.labelStyle?.copyWith(

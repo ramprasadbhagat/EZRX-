@@ -18,6 +18,7 @@ class _ItemBuilder extends StatelessWidget {
         final conditionOfLabel = index == 0 ||
             item.manufactureMapOptions.keys.elementAt(index)[0] !=
                 item.manufactureMapOptions.keys.elementAt(index - 1)[0];
+                
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -75,6 +76,7 @@ class _ItemBuilder extends StatelessWidget {
         final conditionOfLabel = index == 0 ||
             item.countryMapOptions.keys.elementAt(index).name[0] !=
                 item.countryMapOptions.keys.elementAt(index - 1).name[0];
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

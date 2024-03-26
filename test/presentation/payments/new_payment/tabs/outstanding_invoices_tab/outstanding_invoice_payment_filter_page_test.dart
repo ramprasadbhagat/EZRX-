@@ -252,7 +252,7 @@ void main() {
         expect(filterFromDateField, findsOneWidget);
         await tester.tap(filterFromDateField);
         await tester.pumpAndSettle();
-        final saveButton = find.text('SAVE');
+        final saveButton = find.text('Save');
         expect(saveButton, findsOneWidget);
         await tester.tap(saveButton);
         await tester.pumpAndSettle();
@@ -301,7 +301,7 @@ void main() {
         expect(dateField, findsOneWidget);
         await tester.tap(dateField);
         await tester.pumpAndSettle();
-        final saveButton = find.text('SAVE');
+        final saveButton = find.text('Save');
         expect(saveButton, findsOneWidget);
         await tester.tap(saveButton);
         await tester.pumpAndSettle();
@@ -350,7 +350,7 @@ void main() {
         expect(dateField, findsOneWidget);
         await tester.tap(dateField);
         await tester.pumpAndSettle();
-        final saveButton = find.text('SAVE');
+        final saveButton = find.text('Save');
         expect(saveButton, findsOneWidget);
         await tester.tap(saveButton);
         await tester.pumpAndSettle();
@@ -398,7 +398,7 @@ void main() {
         expect(dateField, findsOneWidget);
         await tester.tap(dateField);
         await tester.pumpAndSettle();
-        final saveButton = find.text('SAVE');
+        final saveButton = find.text('Save');
         expect(saveButton, findsOneWidget);
         await tester.tap(saveButton);
         await tester.pumpAndSettle();

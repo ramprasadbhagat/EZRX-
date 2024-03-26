@@ -274,7 +274,7 @@ void main() {
               netDueDate: DateTimeStringValue('2023-12-25'),
               amountInTransactionCurrency: 15.72,
               invoiceProcessingStatus: StatusType('Cleared'),
-            )
+            ),
           ],
         ),
       );

@@ -111,7 +111,8 @@ class _PaymentSummarySection extends StatelessWidget {
     NewPaymentState state,
     BuildContext context,
   ) async {
-    final uri = state.salesOrganisation.salesOrg.isTH
+    Uri? uri;
+    uri = state.salesOrganisation.salesOrg.isTH
         ? await showDialog(
             context: context,
             useSafeArea: false,
@@ -152,7 +153,7 @@ class _PaymentSummarySection extends StatelessWidget {
         );
         context.read<NewPaymentBloc>().add(
               NewPaymentEvent.updatePaymentGateway(
-                paymentUrl: uri as Uri,
+                paymentUrl: uri,
               ),
             );
         unawaited(
@@ -176,7 +177,9 @@ class _PaymentSummarySection extends StatelessWidget {
           MixpanelProps.paymentAdviseId: state.paymentInvoiceInfoPdf.zzAdvice,
         },
       );
-      context.router.popUntilRouteWithPath('payments');
+      if (context.mounted) {
+        context.router.popUntilRouteWithPath('payments');
+      }
     }
   }
 }

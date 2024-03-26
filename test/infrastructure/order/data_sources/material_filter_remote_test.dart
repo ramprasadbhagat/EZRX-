@@ -51,8 +51,8 @@ void main() {
             'SalesOrg': 'fake-sales-org',
             'ShipTo': 'fake-shiptocode',
             'Language': 'fake-language',
-            'SearchKey': ''
-          }
+            'SearchKey': '',
+          },
         };
         final res = json.decode(
           await rootBundle
@@ -70,7 +70,7 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.materialFilterQueryMutation
                 .getMaterialFilterCategoryList(),
-            'variables': variables
+            'variables': variables,
           }),
         );
 

@@ -37,9 +37,9 @@ void main() {
           create: (context) => chatBotBlocMock,
         ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         home: Stack(
-          children: const [
+          children: [
             ChatBotWidget(),
           ],
         ),

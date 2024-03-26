@@ -130,7 +130,7 @@ void main() {
               {
                 'data': null,
                 'errors': [
-                  {'message': 'mock-error'}
+                  {'message': 'mock-error'},
                 ],
               },
               delay: const Duration(seconds: 1),

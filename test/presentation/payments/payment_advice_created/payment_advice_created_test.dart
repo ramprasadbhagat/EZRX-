@@ -305,6 +305,8 @@ void main() {
     testWidgets(
         'Payment advice created page waiting get payment invoice API called',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
       when(() => newPaymentBlocMock.state).thenReturn(
         NewPaymentState.initial().copyWith(
           isFetchingInvoiceInfoPdf: true,
@@ -398,8 +400,8 @@ void main() {
         ),
       );
       when(
-        () => autoRouterMock.pushNamed('payments/payments_webview'),
-      ).thenAnswer((invocation) => Future(() => null));
+        () => autoRouterMock.pushNamed<Uri>('payments/payments_webview'),
+      ).thenAnswer((invocation) => Future(() => Uri()));
       await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(paymentGatewayAdviceMessage, findsOneWidget);
@@ -431,7 +433,7 @@ void main() {
       await tester.tap(payButton);
       await tester.pump(const Duration(seconds: 1));
       verify(
-        () => autoRouterMock.pushNamed('payments/payments_webview'),
+        () => autoRouterMock.pushNamed<Uri>('payments/payments_webview'),
       ).called(1);
       await tester.pump(const Duration(seconds: 1));
     });
@@ -580,7 +582,7 @@ void main() {
             paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty().copyWith(
               zzAdvice: 'fake-zzadvice',
             ),
-          )
+          ),
         ]),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -642,7 +644,7 @@ void main() {
               createdDate: DateTimeStringValue('02/02/2024'),
               adviceExpiry: AdviceExpiryValue('fake-advice-Expiry'),
             ),
-          )
+          ),
         ]),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -705,7 +707,7 @@ void main() {
               createdDate: DateTimeStringValue('02/02/2024'),
               adviceExpiry: AdviceExpiryValue('fake-advice-Expiry'),
             ),
-          )
+          ),
         ]),
       );
       when(() => eligibilityBlocMock.state).thenReturn(

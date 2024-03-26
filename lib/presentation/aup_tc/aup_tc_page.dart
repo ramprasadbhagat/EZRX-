@@ -34,8 +34,8 @@ class AupTCPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+            canPop: false,
       child: BlocProvider(
         create: (context) => locator<AupTcBloc>()..add(AupTcEvent.show(user)),
         child: BlocBuilder<AupTcBloc, AupTcState>(

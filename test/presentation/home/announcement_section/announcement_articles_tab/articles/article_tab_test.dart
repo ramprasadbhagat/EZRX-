@@ -101,7 +101,7 @@ void main() {
         thumbnail: '',
         content: HtmlContent(''),
         publishedDate: DateTimeStringValue(''),
-      )
+      ),
     ];
   });
   group('test article tab', () {

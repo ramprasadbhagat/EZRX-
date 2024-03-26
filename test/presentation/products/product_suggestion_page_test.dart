@@ -240,9 +240,9 @@ void main() {
               MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('fake-material-number'),
                 type: MaterialInfoType('material'),
-              )
+              ),
             ],
-          )
+          ),
         ];
         whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
         await tester.pumpWidget(getWidget());
@@ -274,9 +274,9 @@ void main() {
                 MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material-number'),
                   type: MaterialInfoType('bundle'),
-                )
+                ),
               ],
-            )
+            ),
           ];
           whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
           await tester.pumpWidget(getWidget());
@@ -343,7 +343,7 @@ void main() {
           await tester.pumpAndSettle();
           await tester.fling(
             find.byKey(WidgetKeys.productSearchSuggestion),
-            const Offset(0.0, 150.0),
+            const Offset(0.0, 500.0),
             800.0,
           );
           expect(

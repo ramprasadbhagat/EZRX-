@@ -81,7 +81,7 @@ void main() {
       data: jsonEncode({
         'query':
             remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue),
-        'variables': variables
+        'variables': variables,
       }),
     );
 
@@ -149,7 +149,7 @@ void main() {
       data: jsonEncode({
         'query':
             remoteDataSource.materialListQuery.getProductQuery(fakeConfigValue),
-        'variables': variables
+        'variables': variables,
       }),
     );
 
@@ -211,7 +211,7 @@ void main() {
       data: jsonEncode({
         'query': remoteDataSource.materialListQuery
             .getProductDetailsQuery(fakeConfigValue),
-        'variables': variables
+        'variables': variables,
       }),
     );
 
@@ -261,7 +261,7 @@ void main() {
         data: jsonEncode({
           'query': remoteDataSource.materialListQuery
               .getProductQuery(fakeConfigValue),
-          'variables': variables
+          'variables': variables,
         }),
       );
 
@@ -307,7 +307,7 @@ void main() {
           {
             'data': null,
             'errors': [
-              {'message': 'fake-error'}
+              {'message': 'fake-error'},
             ],
           },
           delay: const Duration(seconds: 1),
@@ -316,7 +316,7 @@ void main() {
         data: jsonEncode({
           'query': remoteDataSource.materialListQuery
               .getProductQuery(fakeConfigValue),
-          'variables': variables
+          'variables': variables,
         }),
       );
 

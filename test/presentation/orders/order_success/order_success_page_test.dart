@@ -268,7 +268,7 @@ void main() {
               orderHistoryDetailsList: [
                 OrderHistoryDetails.empty().copyWith(
                   pOReference: POReference(''),
-                )
+                ),
               ],
             ),
           );
@@ -301,7 +301,7 @@ void main() {
                 orderHistoryDetailsPaymentTerm:
                     fakeOrderHistoryDetailsPaymentTerm,
                 orderHistoryDetailsSpecialInstructions: fakeInstruction,
-              )
+              ),
             ],
           ),
         );
@@ -364,7 +364,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 telephoneNumber: fakePhoneNumber,
-              )
+              ),
             ],
           ),
         );
@@ -442,12 +442,12 @@ void main() {
                   orderHistoryDetailsOrderItem: [
                     OrderHistoryDetailsOrderItem.empty().copyWith(
                       qty: quantity,
-                    )
+                    ),
                   ],
                   totalValue: grandTotalValue,
                   orderValue: subTotalValueWithoutTax,
                   totalTax: totalTax,
-                )
+                ),
               ],
             ),
           );
@@ -526,11 +526,11 @@ void main() {
                       qty: quantity,
                       tax: vatValue,
                       unitPrice: finalPrice,
-                    )
+                    ),
                   ],
                   orderValue: subTotalValueWithoutTax,
                   totalTax: totalTax,
-                )
+                ),
               ],
             ),
           );
@@ -581,10 +581,10 @@ void main() {
                     OrderHistoryDetailsOrderItem.empty().copyWith(
                       qty: quantity,
                       unitPrice: finalPrice,
-                    )
+                    ),
                   ],
                   orderValue: subTotalValueWithoutTax,
-                )
+                ),
               ],
             ),
           );
@@ -636,11 +636,11 @@ void main() {
                   orderHistoryDetailsOrderItem: [
                     OrderHistoryDetailsOrderItem.empty().copyWith(
                       qty: quantity,
-                    )
+                    ),
                   ],
                   orderValue: subTotalValueWithoutTax,
                   totalTax: totalTax,
-                )
+                ),
               ],
             ),
           );
@@ -691,12 +691,12 @@ void main() {
                   orderHistoryDetailsOrderItem: [
                     OrderHistoryDetailsOrderItem.empty().copyWith(
                       qty: quantity,
-                    )
+                    ),
                   ],
                   totalValue: grandTotalValue,
                   orderValue: subTotalValueWithoutTax,
                   totalTax: totalTax,
-                )
+                ),
               ],
             ),
           );
@@ -768,10 +768,10 @@ void main() {
                   orderHistoryDetailsOrderItem: [
                     OrderHistoryDetailsOrderItem.empty().copyWith(
                       qty: 2,
-                    )
+                    ),
                   ],
                   totalDiscount: 21.39,
-                )
+                ),
               ],
             ),
           );
@@ -805,7 +805,7 @@ void main() {
             material: MaterialInfo.empty().copyWith(
               bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
             ),
-          )
+          ),
         ];
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
@@ -816,7 +816,7 @@ void main() {
                 totalTax: 99.0,
                 totalValue: 1089.00,
                 orderHistoryDetailsOrderItem: bundleList,
-              )
+              ),
             ],
           ),
         );
@@ -889,7 +889,7 @@ void main() {
             material: MaterialInfo.empty().copyWith(
               bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
             ),
-          )
+          ),
         ];
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
@@ -900,7 +900,7 @@ void main() {
                 totalTax: 99.0,
                 totalValue: 1089.00,
                 orderHistoryDetailsOrderItem: bundleList,
-              )
+              ),
             ],
           ),
         );
@@ -1173,7 +1173,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 orderHistoryDetailsOrderItem: [fakeBundleItem],
-              )
+              ),
             ],
           ),
         );
@@ -1270,27 +1270,28 @@ void main() {
                     materialNumber: MaterialNumber('fake-mat1'),
                     stockInfos: [
                       StockInfo.empty()
-                          .copyWith(inStock: MaterialInStock('Yes'))
+                          .copyWith(inStock: MaterialInStock('Yes')),
                     ],
                   ),
                   MaterialInfo.empty().copyWith(
                     type: MaterialInfoType('bundle'),
                     materialNumber: MaterialNumber('fake-mat2'),
                     stockInfos: [
-                      StockInfo.empty().copyWith(inStock: MaterialInStock('No'))
+                      StockInfo.empty()
+                          .copyWith(inStock: MaterialInStock('No')),
                     ],
                   ),
                 ],
               ),
             ),
-          )
+          ),
         ];
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 orderHistoryDetailsOrderItem: bundleList,
-              )
+              ),
             ],
           ),
         );
@@ -1321,7 +1322,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 orderHistoryDetailsOrderItem: [fakeMaterialItem],
-              )
+              ),
             ],
           ),
         );
@@ -1344,7 +1345,7 @@ void main() {
                 orderHistoryDetailsOrderItem: [
                   fakeMaterialItem.copyWith(promoStatus: true),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -1373,9 +1374,9 @@ void main() {
                     type: OrderItemType('Comm'),
                     productType: MaterialInfoType('material'),
                     hidePrice: true,
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -1399,7 +1400,7 @@ void main() {
               orderHistoryDetailsList: [
                 OrderHistoryDetails.empty().copyWith(
                   orderHistoryDetailsOrderItem: [fakeMaterialItem],
-                )
+                ),
               ],
             ),
           );
@@ -1434,7 +1435,7 @@ void main() {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -1480,7 +1481,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 orderHistoryDetailsOrderItem: materialList,
-              )
+              ),
             ],
           ),
         );
@@ -1557,7 +1558,7 @@ void main() {
                     isCounterOffer: true,
                   ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -1603,7 +1604,7 @@ void main() {
                     productType: MaterialInfoType('material'),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -1630,14 +1631,14 @@ void main() {
         );
         final materialList = [
           fakeMaterialItem,
-          fakeMaterialItem.copyWith(type: OrderItemType('Bonus'), unitPrice: 0)
+          fakeMaterialItem.copyWith(type: OrderItemType('Bonus'), unitPrice: 0),
         ];
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 orderHistoryDetailsOrderItem: materialList,
-              )
+              ),
             ],
           ),
         );
@@ -1733,7 +1734,7 @@ void main() {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -1792,7 +1793,7 @@ void main() {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -1845,7 +1846,7 @@ void main() {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -1885,7 +1886,7 @@ void main() {
                   PoDocuments.empty(),
                   PoDocuments.empty(),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -1931,7 +1932,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 orderHistoryDetailsPoDocuments: fakeFiles,
-              )
+              ),
             ],
             isExpanded: true,
           ),
@@ -1981,7 +1982,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 orderHistoryDetailsPoDocuments: fakeFiles,
-              )
+              ),
             ],
           ),
         );
@@ -2001,7 +2002,7 @@ void main() {
                 failureOrSuccessOption: optionOf(
                   const Right(''),
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -2031,7 +2032,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 orderHistoryDetailsPoDocuments: fakeFiles,
-              )
+              ),
             ],
           ),
         );
@@ -2051,7 +2052,7 @@ void main() {
                 failureOrSuccessOption: optionOf(
                   const Left(ApiFailure.other('fake-error')),
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -2083,7 +2084,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 referenceNotes: 'fake-reference-notes',
-              )
+              ),
             ],
           ),
         );
@@ -2120,7 +2121,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 referenceNotes: 'fake-reference-notes',
-              )
+              ),
             ],
           ),
         );
@@ -2142,7 +2143,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 referenceNotes: 'fake-reference-notes',
-              )
+              ),
             ],
           ),
         );
@@ -2169,7 +2170,7 @@ void main() {
               orderHistoryDetailsList: [
                 OrderHistoryDetails.empty().copyWith(
                   orderNumber: fakeOrderNumber,
-                )
+                ),
               ],
             ),
           );
@@ -2292,7 +2293,7 @@ void main() {
                     priceAggregate: cartItem,
                   ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -2355,7 +2356,7 @@ void main() {
                     priceAggregate: cartItem,
                   ),
                 ],
-              )
+              ),
             ],
           ),
         );

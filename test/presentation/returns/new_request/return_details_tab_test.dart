@@ -208,7 +208,7 @@ void main() {
             InvoiceDetails.empty().copyWith(
               salesOrg: fakeSalesOrg,
               returnItemDetailsList: [fakeReturnItemDetails],
-            )
+            ),
           ],
         ),
       );
@@ -244,9 +244,9 @@ void main() {
           selectedItems: [
             fakeReturnMaterial.copyWith(
               bonusItems: [
-                fakeReturnMaterial.copyWith(balanceQuantity: IntegerValue('0'))
+                fakeReturnMaterial.copyWith(balanceQuantity: IntegerValue('0')),
               ],
-            )
+            ),
           ],
           invoiceDetails: [
             InvoiceDetails.empty().copyWith(
@@ -254,9 +254,9 @@ void main() {
               returnItemDetailsList: [
                 fakeReturnItemDetails.copyWith(
                   balanceQty: IntegerValue('0'),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       );
@@ -277,9 +277,9 @@ void main() {
           selectedItems: [
             fakeReturnMaterial.copyWith(
               bonusItems: [
-                fakeReturnMaterial.copyWith(balanceQuantity: IntegerValue('0'))
+                fakeReturnMaterial.copyWith(balanceQuantity: IntegerValue('0')),
               ],
-            )
+            ),
           ],
           invoiceDetails: [
             InvoiceDetails.empty().copyWith(
@@ -287,9 +287,9 @@ void main() {
               returnItemDetailsList: [
                 fakeReturnItemDetails.copyWith(
                   balanceQty: IntegerValue('0'),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       );
@@ -384,7 +384,7 @@ void main() {
               //make return material detail is not allowed to edit
               fakeReturnMaterialList.items[1].copyWith(
                 balanceQuantity: IntegerValue('0'),
-              )
+              ),
             ],
             invoiceDetails: [
               InvoiceDetails.empty().copyWith(
@@ -423,7 +423,7 @@ void main() {
               //make return material detail is not allowed to edit
               fakeReturnMaterialList.items[1].copyWith(
                 balanceQuantity: IntegerValue('0'),
-              )
+              ),
             ],
             invoiceDetails: [
               InvoiceDetails.empty().copyWith(
@@ -455,7 +455,7 @@ void main() {
               itemNumber: '1',
               balanceQuantity: IntegerValue('0'),
               bonusItems: [
-                fakeReturnMaterialList.items.first.copyWith(itemNumber: '2')
+                fakeReturnMaterialList.items.first.copyWith(itemNumber: '2'),
               ],
             ),
           ],
@@ -1050,6 +1050,12 @@ void main() {
         returnUploadAttachmentButton,
         findsWidgets,
       );
+      await tester.fling(
+        find.byKey(WidgetKeys.returnDetailsListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      await tester.pump();
       await tester.tap(returnUploadAttachmentButton.first);
       await tester.pumpAndSettle();
       expect(
@@ -1138,6 +1144,12 @@ void main() {
         returnUploadAttachmentButton,
         findsWidgets,
       );
+       await tester.fling(
+        find.byKey(WidgetKeys.returnDetailsListView),
+        const Offset(0.0, -1000.0),
+        1000.0,
+      );
+      await tester.pump();
       await tester.tap(returnUploadAttachmentButton.first);
       await tester.pumpAndSettle();
       expect(
@@ -1325,7 +1337,7 @@ void main() {
       expect(fileDeleteIcon, findsWidgets);
       await tester.fling(
         find.byType(ListView),
-        const Offset(0.0, -1000.0),
+        const Offset(0.0, -1500.0),
         1000.0,
       );
       await tester.tap(fileDeleteIcon.last);

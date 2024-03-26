@@ -46,8 +46,8 @@ class _ContactUsForm extends StatelessWidget {
           autovalidateMode: state.showErrorMessage
               ? AutovalidateMode.always
               : AutovalidateMode.disabled,
-          child: Column(
-            children: const [
+          child: const Column(
+            children: [
               _UsernameTextField(),
               SizedBox(
                 height: 16,

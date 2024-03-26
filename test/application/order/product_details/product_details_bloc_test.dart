@@ -46,7 +46,7 @@ void main() {
   final bundleInfoType = MaterialInfoType('bundle');
   final productImage = ProductImages.empty().copyWith(
     image: [
-      'https://ezrxdev.blob.core.windows.net/assets/21041773/21041773.png'
+      'https://ezrxdev.blob.core.windows.net/assets/21041773/21041773.png',
     ],
   );
   final mockInitialState = ProductDetailState.initial().copyWith(
@@ -727,7 +727,7 @@ void main() {
               list: [
                 mockMaterialInfo.copyWith(
                   productImages: mockProductMetaData.productImages.first,
-                )
+                ),
               ],
             ),
           ).thenAnswer(
@@ -736,7 +736,7 @@ void main() {
                 mockMaterialInfo.copyWith(
                   isFavourite: true,
                   productImages: mockProductMetaData.productImages.first,
-                )
+                ),
               ],
             ),
           );
@@ -850,7 +850,7 @@ void main() {
               list: [
                 mockMaterialInfo.copyWith(
                   productImages: mockProductMetaData.productImages.first,
-                )
+                ),
               ],
             ),
           ).thenAnswer(
@@ -906,7 +906,7 @@ void main() {
                 mockMaterialInfo.copyWith(
                   isFavourite: true,
                   productImages: mockProductMetaData.productImages.first,
-                )
+                ),
               ],
             ),
           ).thenAnswer(
@@ -915,7 +915,7 @@ void main() {
                 mockMaterialInfo.copyWith(
                   isFavourite: false,
                   productImages: mockProductMetaData.productImages.first,
-                )
+                ),
               ],
             ),
           );
@@ -1043,7 +1043,7 @@ void main() {
                 mockMaterialInfo.copyWith(
                   isFavourite: true,
                   productImages: mockProductMetaData.productImages.first,
-                )
+                ),
               ],
             ),
           ).thenAnswer(

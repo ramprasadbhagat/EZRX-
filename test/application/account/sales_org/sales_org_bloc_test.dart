@@ -67,7 +67,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           salesOrgFailureOrSuccessOption:
               optionOf(const Left(fakeError)),
-        )
+        ),
       ],
     );
     blocTest<SalesOrgBloc, SalesOrgState>(
@@ -100,7 +100,7 @@ void main() {
         SalesOrgState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           configs: fakeMYSalesOrgConfigs,
-        )
+        ),
       ],
     );
 
@@ -293,7 +293,7 @@ void main() {
         SalesOrgState.initial().copyWith(
           salesOrganisation: fakePHSalesOrganisation,
           configs: fakePHSalesOrgConfigs,
-        )
+        ),
       ],
     );
     // blocTest<SalesOrgBloc, SalesOrgState>(

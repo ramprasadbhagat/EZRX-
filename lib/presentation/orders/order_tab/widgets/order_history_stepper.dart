@@ -205,10 +205,10 @@ class _SubStatusSection extends StatelessWidget {
                   flex: 3,
                   child: Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 22.0),
                         child: Column(
-                          children: const [
+                          children: [
                             VerticalLine(),
                             Icon(
                               Icons.circle,

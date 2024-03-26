@@ -71,7 +71,7 @@ void main() {
           approvalLimits: ApprovalLimits.empty().copyWith(
             salesOrg: fakeSaleOrganisation.salesOrg,
           ),
-        )
+        ),
       ],
     );
 
@@ -102,7 +102,7 @@ void main() {
           addedApproverRightsList:
               fetUserRestrictionDetails.approverRights.approverRightsList,
           approvalLimits: fetUserRestrictionDetails.approverLimitsDetails,
-        )
+        ),
       ],
     );
 
@@ -138,7 +138,7 @@ void main() {
         UserRestrictionDetailsState.initial().copyWith(
           userRestrictionStatus: userRestrictionStatusApproverRights,
           apiFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 
@@ -166,7 +166,7 @@ void main() {
         UserRestrictionDetailsState.initial().copyWith(
           userRestrictionStatus: userRestrictionStatusApproverRights,
           apiFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 
@@ -200,7 +200,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-        )
+        ),
       ],
     );
 
@@ -228,7 +228,7 @@ void main() {
             approvalLimitStatus: true,
           ),
           apiFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 
@@ -326,7 +326,7 @@ void main() {
             approvalLimitStatus: true,
           ),
           apiFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 
@@ -401,7 +401,7 @@ void main() {
       seed: () => UserRestrictionDetailsState.initial().copyWith(
         addedApproverRightsList: [
           ApproverRightsDetails.empty()
-              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg),
         ],
       ),
       act: (bloc) => bloc.add(
@@ -417,7 +417,7 @@ void main() {
             ApproverRightsDetails.empty().copyWith(
               principal: 'fake-principal',
               salesOrg: fakeSaleOrganisation.salesOrg,
-            )
+            ),
           ],
         ),
       ],
@@ -431,7 +431,7 @@ void main() {
       seed: () => UserRestrictionDetailsState.initial().copyWith(
         addedApproverRightsList: [
           ApproverRightsDetails.empty()
-              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg),
         ],
       ),
       act: (bloc) => bloc.add(
@@ -447,7 +447,7 @@ void main() {
             ApproverRightsDetails.empty().copyWith(
               industryCode1: 'fake-industrialcode1',
               salesOrg: fakeSaleOrganisation.salesOrg,
-            )
+            ),
           ],
         ),
       ],
@@ -461,7 +461,7 @@ void main() {
       seed: () => UserRestrictionDetailsState.initial().copyWith(
         addedApproverRightsList: [
           ApproverRightsDetails.empty()
-              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg),
         ],
       ),
       act: (bloc) => bloc.add(
@@ -477,7 +477,7 @@ void main() {
             ApproverRightsDetails.empty().copyWith(
               industryCode2: 'fake-industrialcode2',
               salesOrg: fakeSaleOrganisation.salesOrg,
-            )
+            ),
           ],
         ),
       ],
@@ -491,7 +491,7 @@ void main() {
       seed: () => UserRestrictionDetailsState.initial().copyWith(
         addedApproverRightsList: [
           ApproverRightsDetails.empty()
-              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg),
         ],
       ),
       act: (bloc) => bloc.add(
@@ -507,7 +507,7 @@ void main() {
             ApproverRightsDetails.empty().copyWith(
               industryCode3: 'fake-industrialcode3',
               salesOrg: fakeSaleOrganisation.salesOrg,
-            )
+            ),
           ],
         ),
       ],
@@ -521,7 +521,7 @@ void main() {
       seed: () => UserRestrictionDetailsState.initial().copyWith(
         addedApproverRightsList: [
           ApproverRightsDetails.empty()
-              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg),
         ],
       ),
       act: (bloc) => bloc.add(
@@ -537,7 +537,7 @@ void main() {
             ApproverRightsDetails.empty().copyWith(
               industryCode4: 'fake-industrialcode4',
               salesOrg: fakeSaleOrganisation.salesOrg,
-            )
+            ),
           ],
         ),
       ],
@@ -551,7 +551,7 @@ void main() {
       seed: () => UserRestrictionDetailsState.initial().copyWith(
         addedApproverRightsList: [
           ApproverRightsDetails.empty()
-              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg),
         ],
       ),
       act: (bloc) => bloc.add(
@@ -567,7 +567,7 @@ void main() {
             ApproverRightsDetails.empty().copyWith(
               industryCode5: 'fake-industrialcode5',
               salesOrg: fakeSaleOrganisation.salesOrg,
-            )
+            ),
           ],
         ),
       ],
@@ -581,7 +581,7 @@ void main() {
       seed: () => UserRestrictionDetailsState.initial().copyWith(
         addedApproverRightsList: [
           ApproverRightsDetails.empty()
-              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg),
         ],
       ),
       act: (bloc) => bloc.add(
@@ -597,7 +597,7 @@ void main() {
             ApproverRightsDetails.empty().copyWith(
               plant: 'fake-plant',
               salesOrg: fakeSaleOrganisation.salesOrg,
-            )
+            ),
           ],
         ),
       ],
@@ -611,7 +611,7 @@ void main() {
       seed: () => UserRestrictionDetailsState.initial().copyWith(
         addedApproverRightsList: [
           ApproverRightsDetails.empty()
-              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg)
+              .copyWith(salesOrg: fakeSaleOrganisation.salesOrg),
         ],
       ),
       act: (bloc) => bloc.add(
@@ -627,7 +627,7 @@ void main() {
             ApproverRightsDetails.empty().copyWith(
               materialNumber: MaterialNumber('1234'),
               salesOrg: fakeSaleOrganisation.salesOrg,
-            )
+            ),
           ],
         ),
       ],

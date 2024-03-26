@@ -435,10 +435,10 @@ void main() {
                       quantity: 2,
                       type: DiscountType('%'),
                       rate: 20,
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         );

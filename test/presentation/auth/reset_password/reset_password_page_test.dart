@@ -8,6 +8,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page.dart';
+import 'package:ezrxmobile/presentation/core/password_validation.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +98,12 @@ void main() {
     testWidgets('Test all widgets visibility', (WidgetTester tester) async {
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(PasswordValidation),
+        find.byType(ListView),
+        const Offset(0.0, -500),
+      );
+      await tester.pumpAndSettle();
       final newPasswordField = find.byKey(WidgetKeys.newPasswordTextField);
       final newPasswordHintText = find.text('Enter your new password');
       final confirmPasswordField = find.byKey(WidgetKeys.confirmPasswordField);
@@ -146,6 +153,13 @@ void main() {
       whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(PasswordValidation),
+        find.byType(ListView),
+        const Offset(0.0, -500),
+      );
+      await tester.pumpAndSettle();
+      await tester.pump();
       final warning = find.byKey(WidgetKeys.errorRequirementsFillAllField);
       final confirmPasswordEmptyWarning =
           find.text('Confirm password cannot be empty.');
@@ -157,11 +171,11 @@ void main() {
 
       await tester.tap(resetPasswordButton);
       await tester.pumpAndSettle();
-      verifyNever(
+      verify(
         () => resetPasswordBlocMock.add(
           const ResetPasswordEvent.resetPassword(),
         ),
-      );
+      ).called(1);
     });
 
     testWidgets('test confirm password does not match with new password',
@@ -177,7 +191,12 @@ void main() {
       whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
-
+      await tester.dragUntilVisible(
+        find.byType(PasswordValidation),
+        find.byType(ListView),
+        const Offset(0.0, -500),
+      );
+      await tester.pumpAndSettle();
       final passwordMismatchWarning = find.text('Password mismatch');
       final checkIcon = find.byIcon(Icons.check);
 
@@ -188,11 +207,11 @@ void main() {
       expect(resetPasswordButton, findsOneWidget);
       await tester.tap(resetPasswordButton);
       await tester.pumpAndSettle();
-      verifyNever(
+      verify(
         () => resetPasswordBlocMock.add(
           const ResetPasswordEvent.resetPassword(),
         ),
-      );
+      ).called(1);
     });
 
     testWidgets(
@@ -232,7 +251,12 @@ void main() {
       whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
-
+      await tester.dragUntilVisible(
+        find.byType(PasswordValidation),
+        find.byType(ListView),
+        const Offset(0.0, -500),
+      );
+      await tester.pumpAndSettle();
       final passwordMismatchWarning = find.text('Password mismatch');
       final checkIcon = find.byIcon(Icons.check);
       final warning = find.byKey(WidgetKeys.errorRequirementsFillAllField);

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 part 'package:ezrxmobile/presentation/core/customer_blocked_banner.dart';
 part 'package:ezrxmobile/presentation/core/home_product_search_bar.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool automaticallyImplyLeading;
   final bool isSearchBarVisible;
   final bool customerBlockedOrSuspended;

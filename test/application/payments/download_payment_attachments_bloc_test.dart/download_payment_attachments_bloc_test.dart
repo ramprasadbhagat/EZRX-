@@ -87,7 +87,7 @@ void main() {
             const Left(fakeError),
           ),
           isDownloadInProgress: false,
-        )
+        ),
       ],
     );
 
@@ -144,7 +144,7 @@ void main() {
           salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(Right(file)),
           isDownloadInProgress: false,
-        )
+        ),
       ],
     );
 
@@ -192,7 +192,7 @@ void main() {
             const Left(fakeError),
           ),
           isDownloadInProgress: false,
-        )
+        ),
       ],
     );
 
@@ -249,7 +249,7 @@ void main() {
           salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(Right(file)),
           isDownloadInProgress: false,
-        )
+        ),
       ],
     );
 
@@ -294,7 +294,7 @@ void main() {
             const Left(fakeError),
           ),
           isDownloadInProgress: false,
-        )
+        ),
       ],
     );
 
@@ -348,7 +348,7 @@ void main() {
           salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(Right(file)),
           isDownloadInProgress: false,
-        )
+        ),
       ],
     );
 
@@ -397,7 +397,7 @@ void main() {
             const Left(fakeError),
           ),
           isDownloadInProgress: false,
-        )
+        ),
       ],
     );
 
@@ -453,7 +453,7 @@ void main() {
             const Left(fakeError),
           ),
           isDownloadInProgress: false,
-        )
+        ),
       ],
     );
 
@@ -507,7 +507,7 @@ void main() {
           failureOrSuccessOption: optionOf(
             Right(file),
           ),
-        )
+        ),
       ],
     );
 
@@ -548,7 +548,7 @@ void main() {
           failureOrSuccessOption: optionOf(
             const Left(fakeError),
           ),
-        )
+        ),
       ],
     );
 

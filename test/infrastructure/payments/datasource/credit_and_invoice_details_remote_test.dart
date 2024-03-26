@@ -35,8 +35,8 @@ void main() {
       'accountingDocument': fakeAccountingDocument,
       'fiscalYear': fakeFiscalYear,
       'bpCustomerNumber': fakeBpCustomerNumber,
-      'accountingDocumentItem': fakeAccountingDocumentItem
-    }
+      'accountingDocumentItem': fakeAccountingDocumentItem,
+    },
   };
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
@@ -148,7 +148,7 @@ void main() {
                 {
                   'data': null,
                   'errors': [
-                    {'message': 'fake-error'}
+                    {'message': 'fake-error'},
                   ],
                 },
                 delay: const Duration(seconds: 1),

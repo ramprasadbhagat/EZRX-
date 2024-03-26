@@ -49,7 +49,7 @@ void main() {
         proxyloginFormState.copyWith(
           username: Username('new-username-fake'),
           authFailureOrSuccessOption: none(),
-        )
+        ),
       ],
     );
 

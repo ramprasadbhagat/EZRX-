@@ -1005,8 +1005,8 @@ void main() {
       testWidgets(
         'Body section',
         (tester) async {
-          tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
-          tester.binding.window.devicePixelRatioTestValue = 1.0;
+          tester.view.physicalSize = const Size(1080, 1920);
+          tester.view.devicePixelRatio = 1.0;
           await tester.pumpWidget(getScopedWidget());
 
           await tester.pump();
@@ -2006,8 +2006,8 @@ void main() {
       testWidgets(
         'Body section',
         (tester) async {
-          tester.binding.window.physicalSizeTestValue = const Size(600, 800);
-          tester.binding.window.devicePixelRatioTestValue = 1.0;
+          tester.view.physicalSize = const Size(600, 800);
+          tester.view.devicePixelRatio = 1.0;
           await tester.pumpWidget(getScopedWidget());
 
           await tester.pump();
@@ -2047,7 +2047,7 @@ void main() {
                           .principalData
                           .principalCode
                           .getOrDefaultValue('') ??
-                      ''
+                      '',
                 ],
               ),
             ),

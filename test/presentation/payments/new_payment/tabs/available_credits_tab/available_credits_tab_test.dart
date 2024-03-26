@@ -591,7 +591,7 @@ void main() {
       await tester.tap(fromDateField);
       await tester.pumpAndSettle();
       // Verify that the date picker is displayed
-      await tester.tap(find.widgetWithIcon(IconButton, Icons.edit));
+      await tester.tap(find.widgetWithIcon(IconButton, Icons.edit_outlined));
       await tester.pump();
       final okButton = find.text('OK');
       await tester.tap(okButton);
@@ -627,7 +627,7 @@ void main() {
       await tester.tap(toDateField);
       await tester.pumpAndSettle();
       // Verify that the date picker is displayed
-      await tester.tap(find.widgetWithIcon(IconButton, Icons.edit));
+      await tester.tap(find.widgetWithIcon(IconButton, Icons.edit_outlined));
       await tester.pump();
       final okButton = find.text('OK');
       await tester.tap(okButton);

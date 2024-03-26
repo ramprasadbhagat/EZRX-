@@ -241,7 +241,7 @@ void main() {
           OrderHistoryItem.empty().copyWith(
             isBonusMaterial: true,
             totalPrice: 20.0,
-          )
+          ),
         ],
       );
       when(
@@ -299,7 +299,7 @@ void main() {
         OrderHistoryItem.empty().copyWith(
           isBonusMaterial: true,
           promoStatus: false,
-        )
+        ),
       ],
     );
     when(
@@ -374,7 +374,7 @@ void main() {
           orderHistoryItems: [
             fakeOrderHistory.orderHistoryItems.first,
             fakeOrderHistory.orderHistoryItems.first
-                .copyWith(isBonusMaterial: true)
+                .copyWith(isBonusMaterial: true),
           ],
         ),
       ),

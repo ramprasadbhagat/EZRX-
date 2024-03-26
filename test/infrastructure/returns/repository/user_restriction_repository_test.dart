@@ -317,7 +317,7 @@ void main() {
             plant: 'plant',
             materialNumber: MaterialNumber('materialNumber'),
             uuid: 'uuid',
-          )
+          ),
         ],
       ),
     );
@@ -361,7 +361,7 @@ void main() {
             plant: 'plant',
             materialNumber: MaterialNumber('materialNumber'),
             uuid: 'uuid',
-          )
+          ),
         ],
       ),
     );
@@ -392,7 +392,7 @@ void main() {
             plant: 'plant',
             materialNumber: MaterialNumber('materialNumber'),
             uuid: 'uuid',
-          )
+          ),
         ],
       ),
     );
@@ -420,7 +420,7 @@ void main() {
             plant: 'plant',
             materialNumber: MaterialNumber('materialNumber'),
             uuid: 'uuid',
-          )
+          ),
         ],
       ),
     );
@@ -527,7 +527,7 @@ void main() {
           ApproverRightsDetails.empty().copyWith(
             salesOrg: salesOrg,
             uuid: 'uuid',
-          )
+          ),
         ],
       ),
     );
@@ -550,7 +550,7 @@ void main() {
           ApproverRightsDetails.empty().copyWith(
             salesOrg: salesOrg,
             uuid: 'uuid',
-          )
+          ),
         ],
       ),
     );
@@ -572,7 +572,7 @@ void main() {
           ApproverRightsDetails.empty().copyWith(
             salesOrg: salesOrg,
             uuid: 'uuid',
-          )
+          ),
         ],
       ),
     );
@@ -591,7 +591,7 @@ void main() {
           ApproverRightsDetails.empty().copyWith(
             salesOrg: salesOrg,
             uuid: 'uuid',
-          )
+          ),
         ],
       ),
     );

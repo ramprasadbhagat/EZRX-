@@ -902,7 +902,7 @@ void main() {
             shipToInfoList: <ShipToInfo>[],
             billToInfo: [],
           ),
-        )
+        ),
       ];
 
       when(() => salesOrgBlocMock.state).thenAnswer(
@@ -1388,7 +1388,7 @@ void main() {
         ),
         MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-material-2'),
-        )
+        ),
       ];
       final expectedUserListStates = [
         ProductDetailState.initial().copyWith(

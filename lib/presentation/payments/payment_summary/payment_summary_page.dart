@@ -98,10 +98,10 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
         currentPath: context.router.currentPath,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(12, 12, 12, 0),
               child: Row(
-                children: const [
+                children: [
                   Expanded(
                     child: _PaymentSummarySearchBar(
                       key: WidgetKeys.paymentSummarySearchBar,

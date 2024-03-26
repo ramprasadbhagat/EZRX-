@@ -91,7 +91,7 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
             shipToInfo: fakeShipToInfo,
-          )
+          ),
         ],
       );
 
@@ -251,7 +251,7 @@ void main() {
               orderHistoryItems: [
                 ...orderHistory.orderHistoryItems,
                 orderHistory.orderHistoryItems.first
-                    .copyWith(orderNumber: OrderNumber('fake'))
+                    .copyWith(orderNumber: OrderNumber('fake')),
               ],
             ),
             orderHistoryItem: fakeOrderHistoryItem,
@@ -546,7 +546,7 @@ void main() {
             orderHistoryBloc.state.poDocumentsList,
             [
               orderHistoryBloc
-                  .state.orderHistoryItem.orderHistoryItemPoAttachments.first
+                  .state.orderHistoryItem.orderHistoryItemPoAttachments.first,
             ],
           );
         },
@@ -623,7 +623,7 @@ void main() {
             failureOrSuccessOption: optionOf(const Left(fakeError)),
             orderHistory: OrderHistory.empty(),
             orderHistoryItem: OrderHistoryItem.empty(),
-          )
+          ),
         ],
       );
 
@@ -677,7 +677,7 @@ void main() {
           ),
           seedState.copyWith(
             failureOrSuccessOption: optionOf(const Left(fakeError)),
-          )
+          ),
         ],
       );
 
@@ -744,7 +744,7 @@ void main() {
                   )
                   .toList(),
             ),
-          )
+          ),
         ],
       );
       blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
@@ -854,7 +854,7 @@ void main() {
           seedState.copyWith(
             isLoading: true,
           ),
-          seedState
+          seedState,
         ],
       );
 

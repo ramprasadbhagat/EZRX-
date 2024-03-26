@@ -39,7 +39,9 @@ class CreatePaymentInvoicePdf {
   }) async {
     final imageData = await ScreenshotController().captureFromWidget(
       MediaQuery(
-        data: MediaQueryData.fromWindow(WidgetsBinding.instance.window),
+        data: MediaQueryData.fromView(
+          WidgetsBinding.instance.platformDispatcher.views.single,
+        ),
         child: Html(
           data: pleaseNote,
           style: {

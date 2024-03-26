@@ -108,6 +108,7 @@ class _AnnouncementInfoDetailsPageState
                   )
                 : CustomScrollView(
                     controller: _scrollController,
+                    key: WidgetKeys.announcementInfoDetailList,
                     slivers: [
                       SliverAppBar(
                         automaticallyImplyLeading: false,

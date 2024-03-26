@@ -523,7 +523,7 @@ void main() {
           isFetching: false,
           apiFailureOrSuccessOption: optionOf(Right(item)),
           item: item,
-        )
+        ),
       ]);
 
       final expectedCartState = Stream<CartState>.fromIterable([
@@ -661,7 +661,7 @@ void main() {
         confirmedPriceOverrideState.copyWith(
           apiFailureOrSuccessOption: optionOf(Right(item)),
           item: item,
-        )
+        ),
       ]);
 
       final expectedCartState = Stream<CartState>.fromIterable([
@@ -782,7 +782,7 @@ void main() {
         confirmedPriceOverrideState.copyWith(
           showErrorMessages: true,
           item: confirmedPriceOverrideState.item,
-        )
+        ),
       ]);
 
       whenListen(
@@ -865,7 +865,7 @@ void main() {
         confirmedPriceOverrideState.copyWith(
           apiFailureOrSuccessOption: optionOf(Right(item)),
           item: item,
-        )
+        ),
       ]);
 
       final expectedCartState = Stream<CartState>.fromIterable([
@@ -936,6 +936,8 @@ void main() {
     });
 
     testWidgets('Submit Counter Offer Error While Price Fail', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(600, 900));
+
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakePHSalesOrgConfigs,
@@ -986,7 +988,7 @@ void main() {
           showErrorMessages: true,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error Message'))),
-        )
+        ),
       ]);
       whenListen(
         cartBloc,
@@ -1215,6 +1217,8 @@ void main() {
     testWidgets(
         'Offer Price Price Displayed Price Not Available for PnG material ',
         (tester) async {
+      await tester.binding.setSurfaceSize(const Size(700, 1200));
+
       final cartItem = cartItems.first.copyWith(
         materialInfo: cartItems.first.materialInfo.copyWith(
           hidePrice: true,

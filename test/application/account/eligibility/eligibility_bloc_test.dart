@@ -46,7 +46,7 @@ void main() {
     SalesOrgCustomerInfo(
       customerCodeSoldTo: CustomerCode('fake-customer-code'),
       shipToInfos: [],
-    )
+    ),
   ];
 
   final fakeShipToInfo = ShipToInfo.empty()
@@ -305,7 +305,7 @@ void main() {
           () => customerCodeRepositoryMock.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
             customerCodes: [
-              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash()
+              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
             ],
             hideCustomer: false,
             offset: 0,

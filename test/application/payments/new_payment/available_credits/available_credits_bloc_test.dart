@@ -105,7 +105,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
-          )
+          ),
         ],
       );
 
@@ -166,7 +166,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
-          )
+          ),
         ],
       );
 
@@ -228,7 +228,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
-          )
+          ),
         ],
       );
 
@@ -287,7 +287,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
-          )
+          ),
         ],
       );
     },

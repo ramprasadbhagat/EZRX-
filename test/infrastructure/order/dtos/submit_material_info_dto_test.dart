@@ -26,7 +26,7 @@ void main() {
           }
         ],
         'override': <String, dynamic>{},
-        'contract': <String, dynamic>{}
+        'contract': <String, dynamic>{},
       };
     });
     test('Test fromDomain', () {
@@ -55,7 +55,7 @@ void main() {
       const configDto = MaterialItemOverrideDto(
         reference: '',
         valueOverride: [
-          ValueOverrideDto(code: '', price: 10, currency: 'fake-currency')
+          ValueOverrideDto(code: '', price: 10, currency: 'fake-currency'),
         ],
         percentageOverride: [],
       );
@@ -64,8 +64,8 @@ void main() {
       expect(config, {
         'reference': '',
         'valueOverride': [
-          {'code': '', 'price': 10, 'currency': 'fake-currency'}
-        ]
+          {'code': '', 'price': 10, 'currency': 'fake-currency'},
+        ],
       });
     });
   });

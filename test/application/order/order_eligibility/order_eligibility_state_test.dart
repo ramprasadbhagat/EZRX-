@@ -123,7 +123,7 @@ void main() {
             bundle: fakeCartItem.bundle.copyWith(
               materials: bundleMaterials,
             ),
-          )
+          ),
         ],
         showErrorMessage: true,
       );
@@ -204,7 +204,7 @@ void main() {
             materialInfo: MaterialInfo.empty().copyWith(
               type: MaterialInfoType('material'),
             ),
-          )
+          ),
         ],
       );
       expect(modifiedState.displayMWPNotAllowedWarning, true);
@@ -224,7 +224,7 @@ void main() {
               type: MaterialInfoType.material(),
               isSuspended: true,
             ),
-          )
+          ),
         ],
       );
       expect(stateWithZPMaterial.cartContainsSuspendedMaterials, true);
@@ -240,7 +240,7 @@ void main() {
               isSuspended: false,
               isMarketPlace: true,
             ),
-          )
+          ),
         ],
       );
       expect(stateWithMPMaterial.cartContainsSuspendedMaterials, true);
@@ -286,7 +286,7 @@ void main() {
               type: MaterialInfoType('material'),
               isSuspended: true,
             ),
-          )
+          ),
         ],
       );
       expect(modifiedState.displayPriceNotAvailableMessage, true);
@@ -322,7 +322,7 @@ void main() {
       expect(modifiedState.invalidBundleCartItems, [
         MaterialInfo.empty().copyWith(
           parentID: 'test-code',
-        )
+        ),
       ]);
 
       final changedState = initializedState.copyWith(
@@ -340,7 +340,7 @@ void main() {
                   stockInfos: [
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('Yes'),
-                    )
+                    ),
                   ],
                   isSuspended: true,
                 ),
@@ -356,10 +356,10 @@ void main() {
           stockInfos: [
             StockInfo.empty().copyWith(
               inStock: MaterialInStock('Yes'),
-            )
+            ),
           ],
           isSuspended: true,
-        )
+        ),
       ]);
     });
 

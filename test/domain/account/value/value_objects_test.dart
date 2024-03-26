@@ -412,7 +412,7 @@ void main() {
         'root_admin',
         'zp_admin',
         'client_admin',
-        'client_user'
+        'client_user',
       ];
 
       for (final role in validRole) {
@@ -1689,7 +1689,7 @@ void main() {
         'PSK',
         'SEL',
         'SER',
-        'TRE'
+        'TRE',
       ];
 
       for (final region in validRegion) {

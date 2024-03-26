@@ -165,7 +165,7 @@ void main() {
       await tester.tap(toDocumentDateField);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('SAVE'));
+      await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
 
       verify(
@@ -182,7 +182,7 @@ void main() {
       await tester.tap(fromDocumentDateField);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('SAVE'));
+      await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
 
       verify(
@@ -230,7 +230,7 @@ void main() {
       await tester.tap(toDueDateField);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('SAVE'));
+      await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
 
       verify(
@@ -246,7 +246,7 @@ void main() {
       await tester.tap(fromDueDateField);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('SAVE'));
+      await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
 
       verify(

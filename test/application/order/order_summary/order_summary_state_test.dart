@@ -18,7 +18,7 @@ void main() {
         orderHistoryDetailsList: [
           OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsPoDocuments: fakePoDocuments,
-          )
+          ),
         ],
       );
 
@@ -36,7 +36,7 @@ void main() {
         orderHistoryDetailsList: [
           OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsPoDocuments: fakePoDocuments,
-          )
+          ),
         ],
       );
 
@@ -52,7 +52,7 @@ void main() {
         orderHistoryDetailsList: [
           OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsPoDocuments: fakePoDocuments,
-          )
+          ),
         ],
       );
 

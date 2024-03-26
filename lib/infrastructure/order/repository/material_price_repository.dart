@@ -38,7 +38,7 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
 
         return Right(
           {
-            for (var price in priceData) price.materialNumber: price,
+            for (final price in priceData) price.materialNumber: price,
           },
         );
       } catch (e) {

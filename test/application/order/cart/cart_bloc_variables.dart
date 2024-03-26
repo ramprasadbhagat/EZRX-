@@ -52,7 +52,7 @@ final mockMaterialList = [
 
 final mockStockInfoMapEmpty = <MaterialNumber, StockInfo>{};
 final mockStockInfoMap = <MaterialNumber, StockInfo>{
-  MaterialNumber('8949542'): mockStockInfo
+  MaterialNumber('8949542'): mockStockInfo,
 };
 
 const remarkText = '1234';
@@ -234,7 +234,7 @@ final bonus913MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 1,
                 qualifyingQuantity: 3,
                 calculation: BonusMaterialCalculation('913'),
-              )
+              ),
             ],
           ),
           PriceBonusItem.empty().copyWith(
@@ -248,7 +248,7 @@ final bonus913MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 2,
                 qualifyingQuantity: 5,
                 calculation: BonusMaterialCalculation('913'),
-              )
+              ),
             ],
           ),
           PriceBonusItem.empty().copyWith(
@@ -262,7 +262,7 @@ final bonus913MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 3,
                 qualifyingQuantity: 10,
                 calculation: BonusMaterialCalculation('913'),
-              )
+              ),
             ],
           ),
         ],
@@ -311,7 +311,7 @@ final bonus911MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 1,
                 qualifyingQuantity: 3,
                 calculation: BonusMaterialCalculation('911'),
-              )
+              ),
             ],
           ),
           PriceBonusItem.empty().copyWith(
@@ -325,7 +325,7 @@ final bonus911MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 2,
                 qualifyingQuantity: 5,
                 calculation: BonusMaterialCalculation('911'),
-              )
+              ),
             ],
           ),
           PriceBonusItem.empty().copyWith(
@@ -339,7 +339,7 @@ final bonus911MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 3,
                 qualifyingQuantity: 10,
                 calculation: BonusMaterialCalculation('911'),
-              )
+              ),
             ],
           ),
         ],
@@ -388,7 +388,7 @@ final bonus914MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 1,
                 qualifyingQuantity: 3,
                 calculation: BonusMaterialCalculation('914'),
-              )
+              ),
             ],
           ),
           PriceBonusItem.empty().copyWith(
@@ -402,7 +402,7 @@ final bonus914MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 1,
                 qualifyingQuantity: 5,
                 calculation: BonusMaterialCalculation('914'),
-              )
+              ),
             ],
           ),
           PriceBonusItem.empty().copyWith(
@@ -416,7 +416,7 @@ final bonus914MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 1,
                 qualifyingQuantity: 10,
                 calculation: BonusMaterialCalculation('914'),
-              )
+              ),
             ],
           ),
         ],
@@ -465,7 +465,7 @@ final bonus915MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 1,
                 qualifyingQuantity: 3,
                 calculation: BonusMaterialCalculation('915'),
-              )
+              ),
             ],
           ),
           PriceBonusItem.empty().copyWith(
@@ -479,7 +479,7 @@ final bonus915MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 1,
                 qualifyingQuantity: 5,
                 calculation: BonusMaterialCalculation('915'),
-              )
+              ),
             ],
           ),
           PriceBonusItem.empty().copyWith(
@@ -493,7 +493,7 @@ final bonus915MockCartItem = PriceAggregate.empty().copyWith(
                 bonusRatio: 1,
                 qualifyingQuantity: 10,
                 calculation: BonusMaterialCalculation('915'),
-              )
+              ),
             ],
           ),
         ],

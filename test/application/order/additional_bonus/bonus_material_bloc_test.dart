@@ -53,7 +53,7 @@ void main() {
             fakeMaterialListData.products.first.materialDescription,
         itemId: StringValue(''),
         principalData: fakeMaterialListData.products.first.principalData,
-      )
+      ),
     ];
   });
 
@@ -421,7 +421,7 @@ void main() {
             stockInfos: [
               StockInfo.empty().copyWith(
                 stockQuantity: 10,
-              )
+              ),
             ],
           ),
         ],
@@ -442,8 +442,8 @@ void main() {
             MaterialNumber('fake-material-name'): [
               StockInfo.empty().copyWith(
                 stockQuantity: 10,
-              )
-            ]
+              ),
+            ],
           }),
         );
       },
@@ -466,7 +466,7 @@ void main() {
               stockInfos: [
                 StockInfo.empty().copyWith(
                   stockQuantity: 10,
-                )
+                ),
               ],
             ),
           ],
@@ -477,7 +477,7 @@ void main() {
               stockInfos: [
                 StockInfo.empty().copyWith(
                   stockQuantity: 10,
-                )
+                ),
               ],
             ),
           ],
