@@ -1023,7 +1023,7 @@ void main() {
         await tester.pump();
         final favouriteIcon =
             find.byKey(WidgetKeys.materialDetailsFavoriteIcon);
-        final favouriteMessage = find.text('Product added as favourite');
+        final favouriteMessage = find.text('Product added as favorite');
         expect(favouriteIcon, findsOneWidget);
         await tester.tap(favouriteIcon);
         await tester.pumpAndSettle();
@@ -1058,7 +1058,7 @@ void main() {
         await tester.pump();
         final favouriteIcon =
             find.byKey(WidgetKeys.materialDetailsFavoriteIcon);
-        final favouriteMessage = find.text('Product removed as favourite');
+        final favouriteMessage = find.text('Product removed as favorite');
         expect(favouriteIcon, findsOneWidget);
         await tester.tap(favouriteIcon);
         await tester.pumpAndSettle();

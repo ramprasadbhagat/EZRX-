@@ -388,8 +388,8 @@ class _Description extends StatelessWidget {
               listener: (context, state) {
                 final toastMessage =
                     state.productDetailAggregate.materialInfo.isFavourite
-                        ? 'Product added as favourite'
-                        : 'Product removed as favourite';
+                        ? 'Product added as favorite'
+                        : 'Product removed as favorite';
 
                 CustomSnackBar(
                   messageText: context.tr(toastMessage),
