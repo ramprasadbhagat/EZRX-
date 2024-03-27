@@ -298,6 +298,41 @@ class _ComboSubTotalSection extends StatelessWidget {
                 ),
               ],
             ),
+          if (comboScheme.displayNextTierDiscount)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  context.tr(
+                    'Total {qty} items',
+                    namedArgs: {
+                      'qty': cartProduct.comboMaterials
+                          .fold<int>(
+                            0,
+                            (previousValue, element) =>
+                                previousValue + element.quantity,
+                          )
+                          .toString(),
+                    },
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: ZPColors.changePasswordRecommendationColor,
+                      ),
+                ),
+                PriceComponent(
+                  key: WidgetKeys.grandTotalKey,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: cartProduct.comboOriginalSubTotal.toString(),
+                  type: PriceStyle.comboOfferPrice,
+                  priceLabelStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.darkerGrey,
+                          ),
+                ),
+              ],
+            ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

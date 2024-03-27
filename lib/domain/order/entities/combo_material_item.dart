@@ -112,6 +112,8 @@ class ComboMaterialItem with _$ComboMaterialItem {
         return ComboDealScheme.k3;
       case 'K4':
         return ComboDealScheme.k4;
+      case 'K4.2':
+        return ComboDealScheme.k42;
       case 'K5':
         return ComboDealScheme.k5;
       default:

@@ -139,7 +139,7 @@ class _ComboSubTotalSection extends StatelessWidget {
           ],
         ),
         if (comboMaterialItem.showTaxBreakDown &&
-            !comboMaterialItem.materialInfo.isFOCMaterial)
+            !comboMaterialItem.materialInfo.isFOCMaterial) ...[
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -160,19 +160,20 @@ class _ComboSubTotalSection extends StatelessWidget {
                       color: ZPColors.darkGray,
                     ),
               ),
-              PriceComponent(
-                key: WidgetKeys.cartItemProductTotalPriceWithTaxAmount,
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: (comboScheme.displayOriginalPrice
-                        ? comboMaterialItem.originalTotalWithTax
-                        : comboMaterialItem.discountedSubTotalWithTax)
-                    .toString(),
-                title: '= ',
-                type: PriceStyle.comboSubTotalItemWithTax,
-              ),
             ],
           ),
+          PriceComponent(
+            key: WidgetKeys.cartItemProductTotalPriceWithTaxAmount,
+            salesOrgConfig:
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
+            price: (comboScheme.displayOriginalPrice
+                    ? comboMaterialItem.originalTotalWithTax
+                    : comboMaterialItem.discountedSubTotalWithTax)
+                .toString(),
+            title: '= ',
+            type: PriceStyle.comboSubTotalItemWithTax,
+          ),
+        ],
       ],
     );
   }

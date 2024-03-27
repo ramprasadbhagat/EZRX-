@@ -43,7 +43,7 @@ class _ItemSubTotalSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   if (state.isMaterialSelected(comboItem.getMaterialNumber) &&
-                      state.currentDeal.scheme.displayDiscountedSubTotal)
+                      state.currentDeal.scheme == ComboDealScheme.k21)
                     Row(
                       children: [
                         DiscountTagWidget(

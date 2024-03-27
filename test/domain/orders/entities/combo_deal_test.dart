@@ -758,11 +758,15 @@ void main() {
       );
       expect(comboDeal.minPurchaseQty, 3);
       expect(comboDeal.scheme.comboDealTitleAppbar, 'Combo K4.2');
-      expect(comboDeal.scheme.comboDealType, 'K4');
+      expect(comboDeal.scheme.comboDealType, 'K4.2');
       expect(comboDeal.isNextComboDealVisible, true);
       expect(comboDeal.schemeMinimumQtyRequirement, '3');
       expect(comboDeal.scheme.comboDealCanLoadmore, false);
       expect(comboDeal.scheme.haveFixedMaterials, false);
+      expect(comboDeal.scheme.displayNextTierDiscount, true);
+      expect(comboDeal.scheme.displayDiscountedSubTotal, true);
+      expect(comboDeal.scheme.displayOriginalPrice, false);
+
       expect(
         comboDeal.buyMoreInfoKey,
         'Buy {unit} more quantity to achieve next tier discount',

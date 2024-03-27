@@ -679,7 +679,7 @@ void main() {
                           quantity: MaterialQty(7),
                         ),
                         salesOrgConfig: fakeKHSalesOrgConfigs,
-                        comboDealType: 'K4',
+                        comboDealType: 'K4.2',
                         comboDeals: PriceComboDeal.empty().copyWith(
                           flexibleGroup: FlexibleGroup('123456'),
                           salesDeal: SalesDealNumber('654321'),
@@ -706,11 +706,11 @@ void main() {
         );
         expect(comboItem, findsOneWidget);
 
-        final cartComboTitleFinder = find.text('Combo K4');
+        final cartComboTitleFinder = find.text('Combo K4.2');
         expect(cartComboTitleFinder, findsOneWidget);
 
         final cartComboRequirementFinder = find.text(
-          'Purchase min. 3 items from any of these products. Buy more save more.',
+          'Buy 3 more quantity to achieve next tier discount',
         );
 
         expect(cartComboRequirementFinder, findsOneWidget);

@@ -32,7 +32,8 @@ class _MaterialDetails extends StatelessWidget {
         );
 
         final canDisplayDiscountTag =
-            comboItem.comboDeal.scheme.displayDiscountedPrice &&
+            (comboItem.comboDeal.scheme.displayDiscountedPrice ||
+                    comboItem.comboDeal.scheme.displayNextTierDiscount) &&
                 materialComboRateDisplay.isNotEmpty;
 
         final canDisplayNextTierDiscount =
@@ -145,7 +146,8 @@ class _MaterialPriceSection extends StatelessWidget {
       totalQuantityUnit: totalQuantityUnit,
     );
 
-    return comboItem.comboDeal.scheme.displayDiscountedPrice
+    return (comboItem.comboDeal.scheme.displayDiscountedPrice ||
+            comboItem.comboDeal.scheme.displayNextTierDiscount)
         ? Row(
             children: [
               if (materialComboRate > 0)

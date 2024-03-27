@@ -195,7 +195,7 @@ class ComboDeal with _$ComboDeal {
           (tier) => tier.minQty <= totalQuantityUnit,
           orElse: () => ComboDealQtyTier.empty(),
         );
-        
+
         return selectedSuffix(
           materialNumber: materialNumber,
           eligibleComboDealQtyTier: eligibleComboDealQtyTier,
@@ -632,9 +632,9 @@ extension ComboDealSchemeExt on ComboDealScheme {
         return 'K3';
 
       case ComboDealScheme.k4:
-      case ComboDealScheme.k42:
         return 'K4';
-
+      case ComboDealScheme.k42:
+        return 'K4.2';
       case ComboDealScheme.k5:
         return 'K5';
       case ComboDealScheme.kWithSuffix:
@@ -642,15 +642,17 @@ extension ComboDealSchemeExt on ComboDealScheme {
     }
   }
 
-  bool get displayDiscountedPrice =>
-      this == ComboDealScheme.k1 || this == ComboDealScheme.k42;
+  bool get displayDiscountedPrice => this == ComboDealScheme.k1;
 
   bool get displayNextTierDiscount => this == ComboDealScheme.k42;
 
-  bool get displayDiscountedSubTotal => this == ComboDealScheme.k21;
+  bool get displayDiscountedSubTotal =>
+      this == ComboDealScheme.k21 || this == ComboDealScheme.k42;
 
   bool get displayOriginalPrice =>
-      this != ComboDealScheme.k1 && this != ComboDealScheme.k21;
+      this != ComboDealScheme.k1 &&
+      this != ComboDealScheme.k21 &&
+      this != ComboDealScheme.k42;
 
   bool get displayDiscountedTotal =>
       this == ComboDealScheme.k22 ||
