@@ -202,6 +202,66 @@ void main() {
     });
 
     testWidgets(
+        ' => showing invalidSelectedReturnItemError when return items are from both ZP and MP',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg,
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              isMarketPlace: true,
+            ),
+            fakeReturnMaterial.copyWith(
+              isMarketPlace: false,
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final invalidSelectedReturnItemError =
+          find.byKey(WidgetKeys.invalidSelectedReturnItemError);
+      expect(invalidSelectedReturnItemError, findsOneWidget);
+    });
+
+    testWidgets(
+        ' => Disable Next Button when the condition to pass step 1 is not meet',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg,
+          selectedItems: [],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final nextButtonFinder =
+          tester.widget(find.byKey(WidgetKeys.nextButton)) as ElevatedButton;
+      expect(nextButtonFinder.enabled, false);
+
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg,
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              isMarketPlace: true,
+            ),
+            fakeReturnMaterial.copyWith(
+              isMarketPlace: false,
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final nextButtonFinder2 =
+          tester.widget(find.byKey(WidgetKeys.nextButton)) as ElevatedButton;
+      expect(nextButtonFinder2.enabled, false);
+    });
+
+    testWidgets(
         ' => [SG market] NOT showing invalidSelectedReturnItemError when return items are from the different principals',
         (WidgetTester tester) async {
       when(() => newRequestBlocMock.state).thenReturn(

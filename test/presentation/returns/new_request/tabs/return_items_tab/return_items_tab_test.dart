@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_tab.dart';
@@ -155,6 +156,33 @@ void main() {
         );
       },
     );
+    testWidgets(
+      '=> display market place logo if item is from MP',
+      (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeTHSalesOrgConfigs,
+          ),
+        );
+        when(() => returnItemsBlocMock.state).thenReturn(
+          ReturnItemsState.initial().copyWith(
+            items: fakeReturnMaterialList.items,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final scrollList =
+            find.byKey(WidgetKeys.newRequestListItemAbleToReturn);
+        await tester.drag(
+          scrollList,
+          const Offset(0.0, -1000),
+        );
+        await tester.pump();
+        final mpLogo = find.byType(MarketPlaceLogo, skipOffstage: false);
+        expect(mpLogo, findsWidgets);
+      },
+    );
+
     testWidgets(
       '=> display outside return policy tag when toggle is off in the sales org config',
       (tester) async {
@@ -334,7 +362,7 @@ void main() {
       expect(scrollListFinder, findsOneWidget);
       await tester.drag(
         scrollListFinder,
-        const Offset(0.0, -3000.0),
+        const Offset(0.0, -1000.0),
       );
       await tester.pumpAndSettle();
       verify(
