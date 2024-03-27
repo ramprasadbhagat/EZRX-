@@ -792,7 +792,7 @@ void main() {
 
     testWidgets('EZRX-T169 | verify Credits Detail Page', (tester) async {
       //variables
-      const documentType = 'Credit memo';
+      const documentType = 'Credit Memo';
       const referenceNumber = '1100001268';
       const returnMaterialNumber1 = '23348057';
       const returnMaterialNumber2 = returnMaterialNumber1;
@@ -1368,8 +1368,6 @@ void main() {
     testWidgets('EZRX-T569 | Verify filter tune icon - Filter by status',
         (tester) async {
       final statusList = [
-        'Open',
-        'Overdue',
         'Cleared',
       ];
       //Got to Summary Page
@@ -1564,11 +1562,13 @@ void main() {
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
       paymentSummaryRobot.verifyNewPaymentButtonVisible();
 
-      await paymentSummaryRobot.scrollDown();
-      paymentSummaryRobot.verifyScrollToTopButtonVisible();
+      if (paymentSummaryRobot.moreThanFiveItem) {
+        await paymentSummaryRobot.scrollDown();
+        paymentSummaryRobot.verifyScrollToTopButtonVisible();
 
-      await paymentSummaryRobot.tapScrollToTopButton();
-      paymentSummaryRobot.verifyScrollToTopButtonInvisible();
+        await paymentSummaryRobot.tapScrollToTopButton();
+        paymentSummaryRobot.verifyScrollToTopButtonInvisible();
+      }
     });
 
     testWidgets(

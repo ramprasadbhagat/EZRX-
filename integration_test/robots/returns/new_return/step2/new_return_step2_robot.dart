@@ -75,6 +75,7 @@ class NewReturnStep2Robot {
       of: materialQuantityField(uuid),
       matching: newRequestStep2BalanceQuantityTextField(uuid),
     );
+    await _dragTo(materialTextField);
     if (!_hasBonusSection(uuid)) {
       await tester.enterText(materialTextField, returnQuantity);
       await tester.testTextInput.receiveAction(TextInputAction.done);

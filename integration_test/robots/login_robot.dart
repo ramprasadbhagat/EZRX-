@@ -202,7 +202,7 @@ class LoginRobot extends CommonRobot {
     while (closeButtonFinder.evaluate().isNotEmpty) {
       await tester.ensureVisible(closeButtonFinder.first);
       await tester.tap(closeButtonFinder.first);
-      await tester.pump();
+      await tester.pumpAndSettle(Durations.long3);
       closeButtonFinder = find.byKey(WidgetKeys.closeAnnouncementBanner);
     }
     final announcementBanner = find.byKey(WidgetKeys.announcementBanner);

@@ -283,6 +283,7 @@ void main() {
       returnsRootRobot.verifyViewByItemsPageVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByItemsRobot.verifyReturnItemsVisible();
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(invalidLengthSearchKey);
@@ -673,6 +674,7 @@ void main() {
       returnsRootRobot.verifyViewByRequestPageVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByRequestRobot.verifyReturnRequestVisible();
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(invalidLengthSearchKey);

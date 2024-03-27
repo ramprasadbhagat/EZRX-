@@ -196,7 +196,16 @@ class ViewByItemsRobot extends CommonRobot {
     return code;
   }
 
-  String _getText(Finder finder) => tester.widget<Text>(finder).data ?? '';
+  String _getText(Finder finder) {
+    final text = tester.widget<Text>(finder).data ?? '';
+    if (text.isEmpty) return text;
+    final specialCharRegex = RegExp(r'^[^a-zA-Z0-9\s]*');
+
+    //Remove special characters from the beginning of the input string
+    //some time we get the material name as ?Alcohol swabs box of 200's
+    //but if we search, we should remove the special character at beginning
+    return text.replaceFirst(specialCharRegex, '');
+  }
 
   Future<void> tapFirstOrder() async {
     await tester.tap(orderItems.first);

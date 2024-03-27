@@ -1776,7 +1776,7 @@ void main() {
       //verify
       await checkoutRobot.tapPlaceOrderButton();
       orderSuccessRobot.verifyPage();
-      orderSuccessRobot.verifyOrderSubmittedMessage();
+      await orderSuccessRobot.verifyOrderSubmittedMessage();
       await orderSuccessRobot.dismissSnackbar();
       //Bill to info
       await verifyBillToInfo();

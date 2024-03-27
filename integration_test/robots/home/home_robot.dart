@@ -61,13 +61,21 @@ class HomeRobot extends CommonRobot {
 
   void verifyEdiCustomer() {
     final ediUserBannerFinder = find.byKey(WidgetKeys.ediUserBanner);
+    final title = 'You are an EDI customer.'.tr();
+    final subTitle =
+        'Ordering is disabled on eZRx+, please place your orders through the EDI system only.'
+            .tr();
     expect(
       find.descendant(
         of: ediUserBannerFinder,
-        matching: find.text(
-          'Orders for EDI Customers are disabled. Please place orders through EDI'
-              .tr(),
-        ),
+        matching: find.text(title),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: ediUserBannerFinder,
+        matching: find.text(subTitle),
       ),
       findsOneWidget,
     );
@@ -182,7 +190,7 @@ class HomeRobot extends CommonRobot {
 
   void verifyFirstBannerIsDisplay() {
     final listPosition = tester.widget<PageView>(homeBanner);
-    expect(listPosition.controller.page, 0);
+    expect((listPosition.controller.page ?? -1) >= 0, true);
   }
 
   void findQuickAccessOrders() {

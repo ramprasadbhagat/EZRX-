@@ -60,7 +60,7 @@ class AccountInvoiceDetailRobot {
 
   Future<void> redirectToOrderDetails() async {
     await tester.tap(find.byKey(WidgetKeys.invoiceDetailsOrderNumberButton));
-    await tester.pump(const Duration(seconds: 2));
+    await tester.pump(const Duration(seconds: 4));
     await tester.pumpAndSettle();
   }
 

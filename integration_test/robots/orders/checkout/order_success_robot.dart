@@ -66,12 +66,8 @@ class OrderSuccessRobot extends CommonRobot {
     );
   }
 
-  void verifyOrderSubmittedMessage() {
-    expect(
-      tester.widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage)).data,
-      equals('Order submitted'.tr()),
-    );
-  }
+  Future<void> verifyOrderSubmittedMessage() async =>
+      await verifyCustomSnackBar(message: 'Order submitted'.tr());
 
   void verifyOrderDate() {
     expect(

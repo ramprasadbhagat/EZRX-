@@ -42,12 +42,11 @@ extension StringExt on String {
 
 extension TesterExt on WidgetTester {
   Future<void> pumpUntilVisible(Finder finder, {int maxIteration = 15}) async {
-    const maxIteration = 15;
-    for (var i = 0; i <= maxIteration; i++) {
+    for (var i = 0; i < maxIteration; i++) {
       if (finder.evaluate().isNotEmpty) {
         expect(finder, findsWidgets);
 
-        break;
+        return;
       }
       await pumpAndSettle(const Duration(seconds: 1));
     }

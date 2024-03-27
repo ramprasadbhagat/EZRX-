@@ -62,22 +62,22 @@ void main() {
   const materialNumber = '23350889';
   const materialName = 'Vocabria + Recambys Bundle';
   const materialQty = 1;
-  const materialPrice = 55.0;
+  const materialPrice = 1200.0;
   const materialPrincipalName = 'GlaxoSmithKline Pte Ltd';
   const materialPrincipalCode = '0000105086';
-  const materialInvoiceNumber = '1080010483';
+  const materialInvoiceNumber = '1080010476';
   const materialReturnReason = 'Product Recall';
   const materialReturnComments = '-';
 
   //Return by item, request data
   const returnItemStatus = 'Pending Approval';
-  const returnId = 'EZRE-260124000967';
+  const returnId = 'EZRE-260124001408';
   // const returnIdWithBonus = 'EZRE-200123003529';
-  const returnRequestStatus = 'Failed';
+  const returnRequestStatus = 'Pending Review';
   const returnSubTotal = materialPrice * materialQty;
   const returnGrandTotal = materialPrice * materialQty;
-  const returnReference = '-';
-  const specialInstructions = '-';
+  const returnReference = 'sg-return';
+  const specialInstructions = 'sg-instructions';
 
   //New Return Request
   final newReturnFromDate = DateTime(2023, 11, 5);
@@ -86,7 +86,7 @@ void main() {
   const validReturnQuantity = '1';
   const newReturnMaterialId = '23350889';
   const newReturnMaterialName = 'VOCABRIA + RECAMBYS BUNDLE';
-  const newReturnMaterialUUID = '1080010479000010';
+  const newReturnMaterialUUID = '1080010476000010';
 
   void initializeRobot(WidgetTester tester) {
     loginRobot = LoginRobot(tester);
@@ -142,7 +142,7 @@ void main() {
       toDate: newReturnToDate,
     );
     await newReturnRobot.tapApply();
-    await newReturnRobot.tapItemAt(index: 1);
+    await newReturnRobot.tapItemAt(index: 0);
     await newReturnRobot.tapNextButton();
   }
 
@@ -229,7 +229,8 @@ void main() {
       //verify search with return id
       await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
-      await commonRobot.dismissSnackbar();
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.tapClearSearch();
       await commonRobot.searchWithSearchIcon(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
@@ -245,7 +246,8 @@ void main() {
       //verify search with material number
       await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
-      await commonRobot.dismissSnackbar();
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.tapClearSearch();
       await commonRobot.searchWithSearchIcon(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
@@ -260,8 +262,10 @@ void main() {
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
         isVisible: false,
       );
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(materialName);
       returnsByItemsRobot.verifyReturnsWithProductNameVisible(materialName);
     });
@@ -581,7 +585,8 @@ void main() {
       //verify search with icon
       await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
-      await commonRobot.dismissSnackbar();
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.tapClearSearch();
       await commonRobot.searchWithSearchIcon(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
@@ -589,6 +594,7 @@ void main() {
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByRequestRobot.verifyReturnsWithIdVisible(returnId);
+      await commonRobot.tapClearSearch();
 
       //verify auto search
       await commonRobot.autoSearch(invalidLengthSearchKey);
@@ -596,8 +602,10 @@ void main() {
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
         isVisible: false,
       );
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(returnId);
       returnsByRequestRobot.verifyReturnsWithIdVisible(returnId);
     });
@@ -670,7 +678,7 @@ void main() {
         'EZRX-T150 | Verify Filter by Status when selecting 2 checkboxes in View by return requests tab',
         (tester) async {
       const filterStatus1 = 'Pending Review';
-      const filterStatus2 = returnRequestStatus;
+      const filterStatus2 = 'Reviewed';
       await goToReturns(tester);
 
       //verify
@@ -878,7 +886,7 @@ void main() {
         toDate: newReturnToDate,
       );
       await newReturnRobot.tapApply();
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnRobot.verifyStep2Visible();
     });
@@ -1007,7 +1015,7 @@ void main() {
       await newReturnRobot.tapFilterIcon();
       await newReturnRobot.tapReset();
       await commonRobot.searchWithKeyboardAction(newReturnMaterialId);
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       // newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus();
     });

@@ -118,6 +118,7 @@ class ContactUsRobot extends CommonRobot {
 
   Future<void> _enterText(Finder target, String text) async {
     await tester.tap(target);
+    await tester.pumpAndSettle();
     await tester.enterText(target, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();

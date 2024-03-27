@@ -156,7 +156,7 @@ void main() {
   const pAndGMaterialNumberAsBonus = '21247738';
 
   const multiImageMaterialNumber = '21041786';
-  const otherInfoMaterialNumber = multiImageMaterialNumber;
+  const otherInfoMaterialNumber = '21041777';
   const suspendedMaterialNumber = '23046003';
   const lowPriceMaterialNumber = materialNumber;
   const lowPriceMaterialUnitPrice = materialUnitPrice;
@@ -244,7 +244,7 @@ void main() {
       await moreRobot.tapLoginOnBehalfTile();
       await loginOnBehalfRobot.enterUserNameField(behalfName);
       await loginOnBehalfRobot.tapLoginButton();
-      await tester.pumpAndSettle(const Duration(seconds: 5));
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       await commonRobot.dismissSnackbar(dismissAll: true);
@@ -271,9 +271,8 @@ void main() {
 
   Future<void> checkoutWithMaterial(
     String materialNumber,
-    int qty, {
-    bool isPreOrder = false,
-  }) async {
+    int qty,
+  ) async {
     await browseProductFromEmptyCart();
     await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
     await productSuggestionRobot.tapSearchResult(materialNumber);
@@ -281,7 +280,7 @@ void main() {
     await productDetailRobot.tapCartButton();
     await cartRobot.changeMaterialQty(materialNumber, qty);
     await cartRobot.tapCheckoutButton();
-    if (isPreOrder) {
+    if (oosPreOrderRobot.isSheetVisible) {
       await oosPreOrderRobot.tapContinueButton();
     }
   }
@@ -1692,7 +1691,6 @@ void main() {
         await checkoutWithMaterial(
           materialNumber,
           qty,
-          isPreOrder: true,
         );
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
@@ -1729,7 +1727,10 @@ void main() {
 
         //init app
         await pumpAppWithLoginOnBehalf(tester);
-        await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+        await checkoutWithMaterial(
+          bonusMaterialNumber,
+          qty,
+        );
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
@@ -1784,7 +1785,10 @@ void main() {
 
         //init app
         await pumpAppWithLoginOnBehalf(tester);
-        await checkoutWithMaterial(pAndGMaterialNumber, qty, isPreOrder: true);
+        await checkoutWithMaterial(
+          pAndGMaterialNumber,
+          qty,
+        );
         await checkoutRobot.verifyPoReferenceField(isVisible: true);
         await checkoutRobot.enterPoReference(poReference);
         await checkoutRobot.tapPlaceOrderButton();
@@ -1866,7 +1870,9 @@ void main() {
           bundleMaterialNumber2: bundleMaterialQty2,
         });
         await cartRobot.tapCheckoutButton();
-        await oosPreOrderRobot.tapContinueButton();
+        if (oosPreOrderRobot.isSheetVisible) {
+          await oosPreOrderRobot.tapContinueButton();
+        }
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
@@ -1920,6 +1926,7 @@ void main() {
         await pumpAppWithLoginOnBehalf(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
         await ordersRootRobot.switchToViewByOrders();
+        await commonRobot.pullToRefresh();
 
         //verify
         viewByOrdersRobot.verifyOrders();
@@ -2025,7 +2032,6 @@ void main() {
         await checkoutWithMaterial(
           materialNumber,
           qty,
-          isPreOrder: true,
         );
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
@@ -2053,7 +2059,6 @@ void main() {
         await checkoutWithMaterial(
           materialNumber,
           qty,
-          isPreOrder: true,
         );
         await checkoutRobot.verifyPoReferenceField(isVisible: true);
         await checkoutRobot.enterPoReference(poReference);
@@ -2097,7 +2102,6 @@ void main() {
         await checkoutWithMaterial(
           materialNumber,
           orderQty,
-          isPreOrder: true,
         );
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
@@ -2134,7 +2138,10 @@ void main() {
         await pumpAppWithLoginOnBehalf(tester);
 
         //setup data
-        await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+        await checkoutWithMaterial(
+          bonusMaterialNumber,
+          qty,
+        );
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
@@ -2205,7 +2212,9 @@ void main() {
           bundleMaterialNumber2: bundleMaterialQty2,
         });
         await cartRobot.tapCheckoutButton();
-        await oosPreOrderRobot.tapContinueButton();
+        if (oosPreOrderRobot.isSheetVisible) {
+          await oosPreOrderRobot.tapContinueButton();
+        }
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
@@ -3005,7 +3014,9 @@ void main() {
       oosPreOrderRobot.verifySheet(isVisible: false);
       await cartRobot.tapCheckoutButton();
       oosPreOrderRobot.verifyMaterial(oosPreOrderMaterialNumber, qty);
-      await oosPreOrderRobot.tapContinueButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
       checkoutRobot.verifyPage();
     });
 
@@ -3161,7 +3172,6 @@ void main() {
       await checkoutWithMaterial(
         materialNumber,
         qty,
-        isPreOrder: true,
       );
 
       //verify
@@ -3218,7 +3228,9 @@ void main() {
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.tapCartButton();
       await cartRobot.tapCheckoutButton();
-      await oosPreOrderRobot.tapContinueButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
       //verify
       checkoutRobot.verifyPage();
       checkoutRobot.verifyAddressSection();
@@ -3330,7 +3342,6 @@ void main() {
       await checkoutWithMaterial(
         materialNumber,
         1000,
-        isPreOrder: true,
       );
 
       //verify
@@ -3361,7 +3372,6 @@ void main() {
       await checkoutWithMaterial(
         materialNumber,
         qty,
-        isPreOrder: true,
       );
 
       //verify
@@ -3391,7 +3401,9 @@ void main() {
       await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
       await requestCounterOfferRobot.tapConfirmButton();
       await cartRobot.tapCheckoutButton();
-      await oosPreOrderRobot.tapContinueButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
       await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
       // Should be 2 here because material has offer
@@ -3440,7 +3452,9 @@ void main() {
         bundleMaterialNumber2: bundleMaterialQty2,
       });
       await cartRobot.tapCheckoutButton();
-      await oosPreOrderRobot.tapContinueButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
 
       //verify
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
@@ -3537,7 +3551,10 @@ void main() {
 
       //init app
       await pumpAppWithLoginOnBehalf(tester);
-      await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+      await checkoutWithMaterial(
+        bonusMaterialNumber,
+        qty,
+      );
 
       //verify
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
@@ -3602,7 +3619,10 @@ void main() {
 
       //init app
       await pumpAppWithLoginOnBehalf(tester);
-      await checkoutWithMaterial(pAndGMaterialNumber, qty, isPreOrder: true);
+      await checkoutWithMaterial(
+        pAndGMaterialNumber,
+        qty,
+      );
 
       //verify
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
@@ -3661,13 +3681,12 @@ void main() {
       await checkoutWithMaterial(
         materialNumber,
         1000,
-        isPreOrder: true,
       );
 
       //verify
       await checkoutRobot.tapPlaceOrderButton();
       orderSuccessRobot.verifyPage();
-      orderSuccessRobot.verifyOrderSubmittedMessage();
+      await orderSuccessRobot.verifyOrderSubmittedMessage();
       await orderSuccessRobot.dismissSnackbar();
       orderSuccessRobot.verifyOrderId();
       orderSuccessRobot.verifyOrderDate();
@@ -3723,7 +3742,10 @@ void main() {
 
       //init app
       await pumpAppWithLoginOnBehalf(tester);
-      await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+      await checkoutWithMaterial(
+        bonusMaterialNumber,
+        qty,
+      );
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
 
@@ -3764,7 +3786,10 @@ void main() {
 
       //init app
       await pumpAppWithLoginOnBehalf(tester);
-      await checkoutWithMaterial(pAndGMaterialNumber, qty, isPreOrder: true);
+      await checkoutWithMaterial(
+        pAndGMaterialNumber,
+        qty,
+      );
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
       await checkoutRobot.enterPoReference(poReference);
       await checkoutRobot.tapPlaceOrderButton();
@@ -3806,7 +3831,9 @@ void main() {
         bundleMaterialNumber2: bundleMaterialQty2,
       });
       await cartRobot.tapCheckoutButton();
-      await oosPreOrderRobot.tapContinueButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
 

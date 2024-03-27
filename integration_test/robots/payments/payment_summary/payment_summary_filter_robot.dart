@@ -96,7 +96,7 @@ class PaymentSummaryFilterRobot {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.amountValueTo),
-        matching: find.text(fromAmount),
+        matching: find.text(toAmount),
       ),
       findsOneWidget,
     );

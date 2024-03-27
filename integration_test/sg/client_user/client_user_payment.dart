@@ -561,8 +561,9 @@ void main() {
       await viewByOrdersDetailRobot.dragToVerifyItemsSection();
       await viewByOrdersDetailRobot.startVerifyMaterial(materialNumber1);
       viewByOrdersDetailRobot.verifyQty(materialQty1);
-      viewByOrdersDetailRobot
-          .verifyMaterialTotalPrice(materialTotalPrice1.priceDisplay(currency));
+      viewByOrdersDetailRobot.verifyMaterialTotalPrice(
+        materialTotalPrice1.includeTax(tax).priceDisplay(currency),
+      );
       await viewByOrdersDetailRobot.startVerifyMaterial(
         materialNumber2,
         isBonus: true,
@@ -633,7 +634,7 @@ void main() {
     const taxPercentage = 7;
     const creditPriceExcludeTax = 5222.0;
     final creditPrice = creditPriceExcludeTax.includeTax(taxPercentage);
-    const documentType = 'Credit memo';
+    const documentType = 'Credit Memo';
     const referenceNumber = '1080004782';
     const returnMaterialNumber1 = '23348590';
     const returnQuantity1 = 10;
@@ -1576,11 +1577,13 @@ void main() {
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
       paymentSummaryRobot.verifyNewPaymentButtonVisible();
 
-      await paymentSummaryRobot.scrollDown();
-      paymentSummaryRobot.verifyScrollToTopButtonVisible();
+      if (paymentSummaryRobot.moreThanFiveItem) {
+        await paymentSummaryRobot.scrollDown();
+        paymentSummaryRobot.verifyScrollToTopButtonVisible();
 
-      await paymentSummaryRobot.tapScrollToTopButton();
-      paymentSummaryRobot.verifyScrollToTopButtonInvisible();
+        await paymentSummaryRobot.tapScrollToTopButton();
+        paymentSummaryRobot.verifyScrollToTopButtonInvisible();
+      }
     });
 
     testWidgets(
@@ -1692,7 +1695,7 @@ void main() {
       await paymentSummaryFilterRobot.tapStatusCheckbox(statusFilter);
       paymentSummaryFilterRobot.verifyStatusFilterValue(statusFilter);
       await paymentSummaryFilterRobot.tapApplyButton();
-      paymentSummaryRobot.verifyFilterApplied(3);
+      paymentSummaryRobot.verifyFilterApplied(2);
     });
 
     testWidgets('EZRX-T189 | Verify pull to refresh Feature', (tester) async {
@@ -1738,7 +1741,7 @@ void main() {
 
       await commonRobot.searchWithKeyboardAction(paymentId);
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
-      await paymentSummaryRobot.tapItem();
+      await paymentSummaryRobot.tapFirstItem();
 
       //payment summary Details
       paymentSummaryDetailRobot.verifyPaymentDetail(

@@ -42,7 +42,7 @@ class CommonRobot {
     final dialog = find.byType(DateRangePickerDialog);
     final editWidget = find.descendant(
       of: dialog,
-      matching: find.widgetWithIcon(IconButton, Icons.edit),
+      matching: find.widgetWithIcon(IconButton, Icons.edit_outlined),
     );
     final dateRangeFields =
         find.descendant(of: dialog, matching: find.byType(TextField));
@@ -209,22 +209,25 @@ class CommonRobot {
         of: customSnackBar,
         matching: find.text('Please enter at least 2 characters.'.tr()),
       ),
-      isVisible ? findsOneWidget : findsNothing,
+      isVisible ? findsWidgets : findsNothing,
     );
     if (isVisible) {
-      expect(customSnackBar, findsWidgets);
       await dismissSnackbar(dismissAll: true);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
     }
   }
 
   Future<void> searchWithKeyboardAction(String text) async {
     await tester.tap(searchBar);
+    await tester.pumpAndSettle();
     await tester.enterText(searchBar, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
   }
 
   Future<void> autoSearch(String text) async {
+    await tester.tap(searchBar);
+    await tester.pumpAndSettle();
     await tester.enterText(searchBar, text);
     await tester.pumpAndSettle(
       Duration(milliseconds: locator<Config>().autoSearchTimeout),
@@ -232,7 +235,9 @@ class CommonRobot {
   }
 
   Future<void> searchWithSearchIcon(String text) async {
+    await tester.pumpUntilVisible(searchBar);
     await tester.tap(searchBar);
+    await tester.pumpAndSettle();
     await tester.enterText(searchBar, text);
     await tester.tap(find.byKey(WidgetKeys.searchIconKey));
     await tester.pumpAndSettle();

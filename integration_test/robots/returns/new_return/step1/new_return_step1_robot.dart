@@ -119,7 +119,7 @@ class NewReturnStep1Robot {
   Future<void> tapFilterIcon() async {
     expect(filterIcon, findsOneWidget);
     await tester.tap(filterIcon);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(Durations.long4);
   }
 
   Future<void> tapTheDateField() async {

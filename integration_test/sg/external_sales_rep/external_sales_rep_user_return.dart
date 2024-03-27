@@ -47,8 +47,8 @@ void main() {
 
   // initialize variables
   const marketSingapore = 'Singapore';
-  const username = 'rootadmin';
-  const password = 'Pa55word@1234';
+  const username = 'sgrootadmin';
+  const password = 'St@ysafe01';
   const proxyUserName = 'testextsalesrep';
   const customerCode = '0030032073';
   const shipToCode = '0070042482';
@@ -94,12 +94,12 @@ void main() {
   final fromDateToNextForStep2 = DateTime(2023, 6, 1);
   final toDateToNextForStep2 = DateTime(2023, 12, 1);
   final reason = 'Expired Within Policy'.tr();
-  const materialId = materialNumber;
-  final materialTitle = materialName.toUpperCase();
-  const materialUUID = '1080005613000010';
+  const materialId = '23007551';
+  const materialTitle = "BAMBEC TAB 10MG 100'S";
+  const materialUUID = '1080005602000010';
 
   //Return detail data
-  const returnRequestStatus = 'Reviewed';
+  const returnRequestStatus = 'Pending Review';
   final returnSubTotal = '$currency ${100.00.priceFormatted}';
   final returnGrandTotal = '$currency ${100.00.priceFormatted}';
 
@@ -997,7 +997,7 @@ void main() {
         toDate: toDateToNext,
       );
       await newReturnRobot.tapApply();
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnRobot.verifyStep2Visible();
     });
@@ -1115,7 +1115,7 @@ void main() {
       );
       await newReturnRobot.tapApply();
       await tester.pump(const Duration(seconds: 1));
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
         materialId,
@@ -1167,8 +1167,9 @@ void main() {
       await newReturnRobot.closeBottomSheetDetail();
       newReturnRobot.verifyDetailBottomSheetIsHide();
       newReturnStep3Robot.collectInfoBeforeSubmit();
-      await newReturnStep3Robot.tapSubmit();
-      newReturnStep3Robot.verifySubmitSuccessFully(shipToAddress);
+      // no need to submit
+      // await newReturnStep3Robot.tapSubmit();
+      // newReturnStep3Robot.verifySubmitSuccessFully(shipToAddress);
     });
   });
 

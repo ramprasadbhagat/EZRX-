@@ -99,9 +99,9 @@ void main() {
   final fromDateToNextForStep2 = DateTime(2023, 10, 15);
   final toDateToNextForStep2 = DateTime(2023, 10, 31);
   final reason = 'Wrong Bill-To'.tr();
-  const materialId = '21042660';
-  const materialTitle = "SURBEX BE CALCIUM PLUS CAP350MG30'S";
-  const materialUUID = '1100001302000120';
+  const materialId = '21038305';
+  const materialTitle = "0.9% SODIUM CHLORIDEBP100ML1X72'S";
+  const materialUUID = '1100001315000010';
 
   //Return detail data
   const returnRequestStatus = 'Pending Review';
@@ -642,6 +642,7 @@ void main() {
       returnsRootRobot.verifyViewByRequestPageVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByRequestRobot.verifyReturnRequestVisible();
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(invalidLengthSearchKey);

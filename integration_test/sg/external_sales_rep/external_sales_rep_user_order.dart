@@ -124,8 +124,8 @@ void main() {
   }
 
   const marketSingapore = 'Singapore';
-  const username = 'rootadmin';
-  const password = 'Pa55word@1234';
+  const username = 'sgrootadmin';
+  const password = 'St@ysafe01';
   const proxyUserName = 'testextsalesrep';
   const customerCode = '0030032073';
   const shipToCode = '0070042482';
@@ -220,6 +220,7 @@ void main() {
       await moreRobot.tapLoginOnBehalfTile();
       await loginOnBehalfRobot.enterUserNameField(behalfName);
       await loginOnBehalfRobot.tapLoginButton();
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       moreRobot.verifyProfileName(behalfName, behalfName);
@@ -2244,6 +2245,9 @@ void main() {
       );
 
       //verify
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      await checkoutRobot.tapDeliveryInformationArrowButton();
       await checkoutRobot.verifyMaterialPrincipal(materialPrincipalName);
       await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialQty(materialNumber, qty);
@@ -2273,6 +2277,9 @@ void main() {
       await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
       await requestCounterOfferRobot.tapConfirmButton();
       await cartRobot.tapCheckoutButton();
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      await checkoutRobot.tapDeliveryInformationArrowButton();
       await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
         materialNumber,
@@ -2380,6 +2387,9 @@ void main() {
       await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
 
       //verify
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      await checkoutRobot.tapDeliveryInformationArrowButton();
       await checkoutRobot.verifyYoursItemLabel(2);
       await checkoutRobot.verifyMaterial(bonusMaterialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
@@ -2446,7 +2456,7 @@ void main() {
       //verify
       await checkoutRobot.tapPlaceOrderButton();
       orderSuccessRobot.verifyPage();
-      orderSuccessRobot.verifyOrderSubmittedMessage();
+      await orderSuccessRobot.verifyOrderSubmittedMessage();
       await orderSuccessRobot.dismissSnackbar();
       orderSuccessRobot.verifyOrderId();
       orderSuccessRobot.verifyOrderDate();

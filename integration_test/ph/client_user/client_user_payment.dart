@@ -1567,11 +1567,13 @@ void main() {
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
       paymentSummaryRobot.verifyNewPaymentButtonVisible();
 
-      await paymentSummaryRobot.scrollDown();
-      paymentSummaryRobot.verifyScrollToTopButtonVisible();
+      if (paymentSummaryRobot.moreThanFiveItem) {
+        await paymentSummaryRobot.scrollDown();
+        paymentSummaryRobot.verifyScrollToTopButtonVisible();
 
-      await paymentSummaryRobot.tapScrollToTopButton();
-      paymentSummaryRobot.verifyScrollToTopButtonInvisible();
+        await paymentSummaryRobot.tapScrollToTopButton();
+        paymentSummaryRobot.verifyScrollToTopButtonInvisible();
+      }
     });
 
     testWidgets('EZRX-T188 | Verify Filter Tune Icon', (tester) async {

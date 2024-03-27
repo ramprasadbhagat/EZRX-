@@ -917,7 +917,7 @@ void main() {
       //verify
       await checkoutRobot.tapPlaceOrderButton();
       orderSuccessRobot.verifyPage();
-      orderSuccessRobot.verifyOrderSubmittedMessage();
+      await orderSuccessRobot.verifyOrderSubmittedMessage();
       await orderSuccessRobot.dismissSnackbar();
       orderSuccessRobot.verifyOrderId();
       orderSuccessRobot.verifyOrderDate();

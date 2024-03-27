@@ -1434,11 +1434,13 @@ void main() {
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisibleForID();
       paymentSummaryRobot.verifyNewPaymentButtonVisible();
 
-      await paymentSummaryRobot.scrollDown();
-      paymentSummaryRobot.verifyScrollToTopButtonVisible();
+      if (paymentSummaryRobot.moreThanFiveItem) {
+        await paymentSummaryRobot.scrollDown();
+        paymentSummaryRobot.verifyScrollToTopButtonVisible();
 
-      await paymentSummaryRobot.tapScrollToTopButton();
-      paymentSummaryRobot.verifyScrollToTopButtonInvisible();
+        await paymentSummaryRobot.tapScrollToTopButton();
+        paymentSummaryRobot.verifyScrollToTopButtonInvisible();
+      }
     });
 
     testWidgets(

@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../common/extension.dart';
+
 class CustomerSearchRobot {
   final WidgetTester tester;
 
@@ -11,10 +13,14 @@ class CustomerSearchRobot {
   final cancelChangeAddress = find.byKey(WidgetKeys.cancelButton);
   final customerCodeSearchField = find.byKey(WidgetKeys.searchBar);
   final changeSalesOrgButton = find.byKey(WidgetKeys.changeSalesOrgButton);
+  final customerSearchPage = find.byKey(WidgetKeys.customerSearchPage);
 
   void verifyPage() {
-    final customerSearchPage = find.byKey(WidgetKeys.customerSearchPage);
     expect(customerSearchPage, findsOneWidget);
+  }
+
+  Future<void> waitForCustomerCodePageToLoad() async {
+    await tester.pumpUntilVisible(customerSearchPage, maxIteration: 30);
   }
 
   Future<void> selectCustomerSearch(String shipToCode) async {
@@ -55,6 +61,8 @@ class CustomerSearchRobot {
   }
 
   Future<void> search(String customerCode) async {
+    await tester.tap(customerCodeSearchField);
+    await tester.pump();
     await tester.enterText(customerCodeSearchField, customerCode);
     await tester.pump();
     await tester.testTextInput.receiveAction(TextInputAction.done);

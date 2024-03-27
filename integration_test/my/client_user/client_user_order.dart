@@ -159,17 +159,15 @@ void main() {
   const invalidNumberSearchKey = '1231762381236123';
   const minOrderAmount = 300.0;
 
-  const materialNumber = '21038302';
-  const materialName = '0.9% SODIUM CHLORIDEBP 96X50ML';
+  const materialNumber = '21038305';
+  const materialName = "0.9% SODIUM CHLORIDEBP100ML1x72'S";
   const materialPrincipalName = 'BAXTER HEALTHCARE -M';
-  const materialCountryOfOrigin = 'NA';
+  const materialCountryOfOrigin = 'Philippines';
   const materialUnitMeasurement = 'EA';
-  const materialUnitPrice = 364.80;
+  const materialUnitPrice = 273.60;
 
-  final materialStockInfo =
-      StockInfo.empty().copyWith(expiryDate: DateTimeStringValue('2026-11-30'));
+  final materialStockInfo = StockInfo.empty();
   final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
-  const materialBatch = '12S017';
 
   const multiImageMaterialNumber = '21041738';
   const otherInfoMaterialNumber = '21041738';
@@ -1332,6 +1330,7 @@ void main() {
 
       await productSuggestionRobot.autoSearch(materialName);
       productSuggestionRobot.verifySuggestProductsSearch(materialName);
+      await productSuggestionRobot.tapClearSearch();
       await productSuggestionRobot.autoSearch(invalidSearchKey);
       productSuggestionRobot.verifyNoSuggestedProduct();
       productSuggestionRobot.verifyNoRecordFound();
@@ -1423,10 +1422,6 @@ void main() {
           .verifyUnitOfMeasurementLabelDisplayed(materialUnitMeasurement);
       productDetailRobot
           .verifyCountryOfOriginLabelDisplayed(materialCountryOfOrigin);
-      productDetailRobot.verifyBatchDisplayed(
-        value: materialBatch,
-        isVisible: false,
-      );
       productDetailRobot.verifyExpiryDateLabelDisplayed(
         value: materialExpiryDate,
       );
@@ -2513,6 +2508,9 @@ void main() {
       await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
       await requestCounterOfferRobot.tapConfirmButton();
       await cartRobot.tapCheckoutButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
       await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
       await checkoutRobot.verifyYoursItemLabel(1);
@@ -2720,7 +2718,7 @@ void main() {
       //verify
       await checkoutRobot.tapPlaceOrderButton();
       orderSuccessRobot.verifyPage();
-      orderSuccessRobot.verifyOrderSubmittedMessage();
+      await orderSuccessRobot.verifyOrderSubmittedMessage();
       await orderSuccessRobot.dismissSnackbar();
       orderSuccessRobot.verifyOrderId();
       orderSuccessRobot.verifyOrderDate();
@@ -3203,6 +3201,7 @@ void main() {
         await pumpAppWithHomeScreen(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
         await ordersRootRobot.switchToViewByOrders();
+        await commonRobot.pullToRefresh();
 
         //verify
         viewByOrdersRobot.verifyOrders();

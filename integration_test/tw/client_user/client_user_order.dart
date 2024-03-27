@@ -1737,7 +1737,7 @@ void main() {
 
       //verify
       orderSuccessRobot.verifyPage();
-      orderSuccessRobot.verifyOrderSubmittedMessage();
+      await orderSuccessRobot.verifyOrderSubmittedMessage();
       await orderSuccessRobot.dismissSnackbar();
       orderSuccessRobot.verifyOrderId();
       orderSuccessRobot.verifyOrderDate();
