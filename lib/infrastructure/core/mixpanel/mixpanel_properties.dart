@@ -47,6 +47,7 @@ class MixpanelProps {
   static String subTabFrom = 'subtab_from';
   static String keyword = 'keyword';
   static String orderNumber = 'order_number';
+  static String queueNumber = 'queue_number';
   static String requestDeliveryDate = 'request_delivery_date';
   static String step = 'step';
   static String stepName = 'step_name';
@@ -57,9 +58,11 @@ class MixpanelProps {
   static String isBonusIncluded = 'is_bonus_included';
   static String paymentAmount = 'payment_amount';
   static String paymentMethod = 'payment_method';
-  static String paymentAdviseId = 'payment_advice_id';
+  static String paymentAdviceId = 'payment_advice_id';
   static String paymentDocumentCount = 'document_count';
   static String paymentGatewayRedirectUrl = 'payment_gateway_redirect_url';
   static String paymentGatewayzzHtmcs = 'payment_gateway_zzhtmcs';
   static String paymentGatewaySuccess = 'payment_gateway_success';
+  static String searchMethod = 'search_method';
+  static String searchResults = 'search_results';
 }

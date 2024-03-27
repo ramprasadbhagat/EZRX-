@@ -2,8 +2,12 @@ part of 'package:ezrxmobile/presentation/products/product_suggestion/product_sug
 
 class _SuggestedProductTile extends StatelessWidget {
   final MaterialInfo product;
-  const _SuggestedProductTile({Key? key, required this.product})
-      : super(key: key);
+  final String parentRoute;
+  const _SuggestedProductTile({
+    Key? key,
+    required this.product,
+    required this.parentRoute,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +15,26 @@ class _SuggestedProductTile extends StatelessWidget {
       children: [
         ListTile(
           key: WidgetKeys.searchedProduct(product.materialNumber.displayMatNo),
-          onTap: () => product.type.typeMaterial
-              ? context.router
-                  .push(ProductDetailsPageRoute(materialInfo: product))
-              : context.router
-                  .push(BundleDetailPageRoute(materialInfo: product)),
+          onTap: () {
+            trackMixpanelEvent(
+              MixpanelEvents.productSearch,
+              props: {
+                MixpanelProps.searchKeyword: context
+                    .read<ProductSearchBloc>()
+                    .state
+                    .searchKey
+                    .getOrDefaultValue(''),
+                MixpanelProps.searchFrom:
+                    RouterUtils.buildRouteTrackingName(parentRoute),
+                MixpanelProps.searchMethod: 'drop down list',
+              },
+            );
+            product.type.typeMaterial
+                ? context.router
+                    .push(ProductDetailsPageRoute(materialInfo: product))
+                : context.router
+                    .push(BundleDetailPageRoute(materialInfo: product));
+          },
           horizontalTitleGap: 0,
           leading: const Icon(
             Icons.search,

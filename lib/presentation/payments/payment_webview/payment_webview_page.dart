@@ -201,7 +201,7 @@ class _WebviewBodyState extends State<_WebviewBody> {
               _newPaymentState.customerPaymentInfo.zzHtmcs,
           MixpanelProps.username:
               _newPaymentState.user.fullName.displayFullName,
-          MixpanelProps.paymentAdviseId:
+          MixpanelProps.paymentAdviceId:
               _newPaymentState.paymentInvoiceInfoPdf.zzAdvice,
           MixpanelProps.paymentGatewaySuccess: isPaymentSuccess,
         },

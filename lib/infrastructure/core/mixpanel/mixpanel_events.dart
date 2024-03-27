@@ -59,4 +59,8 @@ class MixpanelEvents {
   static String paymentSuccess = 'Successful Payment';
   static String paymentFailure = 'Payment Failed';
   static String paymentGatewayWebviewLoaded = 'Payment Webview Loaded';
+  static String generatePaymentAdviceSuccess =
+      'Generate Payment Advice Success';
+  static String generatePaymentAdviceFailed = 'Generate Payment Advice Failed';
+  static String payNowClicked = 'Pay Now Clicked';
 }

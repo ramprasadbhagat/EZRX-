@@ -72,6 +72,13 @@ class _PaymentSummarySection extends StatelessWidget {
                                   .isPaymentNeedOpenWebView)
                           ? null
                           : () {
+                              trackMixpanelEvent(
+                                MixpanelEvents.payNowClicked,
+                                props: {
+                                  MixpanelProps.paymentAdviceId:
+                                      state.paymentInvoiceInfoPdf.zzAdvice,
+                                },
+                              );
                               if (state.salesOrganisation.salesOrg
                                   .isPaymentNeedOpenWebView) {
                                 _handleOpenWebview(state, context);
@@ -148,7 +155,7 @@ class _PaymentSummarySection extends StatelessWidget {
             MixpanelProps.paymentMethod:
                 state.selectedPaymentMethod.paymentMethod.getOrDefaultValue(''),
             MixpanelProps.paymentDocumentCount: state.allSelectedItems.length,
-            MixpanelProps.paymentAdviseId: state.paymentInvoiceInfoPdf.zzAdvice,
+            MixpanelProps.paymentAdviceId: state.paymentInvoiceInfoPdf.zzAdvice,
           },
         );
         context.read<NewPaymentBloc>().add(
@@ -174,7 +181,7 @@ class _PaymentSummarySection extends StatelessWidget {
           MixpanelProps.paymentMethod:
               state.selectedPaymentMethod.paymentMethod.getOrDefaultValue(''),
           MixpanelProps.paymentDocumentCount: state.allSelectedItems.length,
-          MixpanelProps.paymentAdviseId: state.paymentInvoiceInfoPdf.zzAdvice,
+          MixpanelProps.paymentAdviceId: state.paymentInvoiceInfoPdf.zzAdvice,
         },
       );
       if (context.mounted) {

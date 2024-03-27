@@ -85,7 +85,7 @@ class _PDFAdviceSection extends StatelessWidget {
                       .getOrDefaultValue(''),
                   MixpanelProps.paymentDocumentCount:
                       newPaymentState.allSelectedItems.length,
-                  MixpanelProps.paymentAdviseId:
+                  MixpanelProps.paymentAdviceId:
                       newPaymentState.paymentInvoiceInfoPdf.zzAdvice,
                 },
               );
@@ -112,7 +112,7 @@ class _PDFAdviceSection extends StatelessWidget {
                       .getOrDefaultValue(''),
                   MixpanelProps.paymentDocumentCount:
                       newPaymentState.allSelectedItems.length,
-                  MixpanelProps.paymentAdviseId:
+                  MixpanelProps.paymentAdviceId:
                       newPaymentState.paymentInvoiceInfoPdf.zzAdvice,
                 },
               );

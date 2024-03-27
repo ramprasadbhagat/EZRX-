@@ -116,12 +116,16 @@ class OrderSuccessPage extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final isIDMarket = eligibilityState.salesOrg.isID;
     final orderDetail = state.orderHistoryDetails;
-    final orderNumber = orderDetail.orderNumber.getOrDefaultValue('');
+    final orderQueueNumber = orderDetail.orderNumber.getOrDefaultValue('');
 
     trackMixpanelEvent(
       MixpanelEvents.placeOrderSuccess,
       props: {
-        MixpanelProps.orderNumber: orderNumber,
+        if (orderDetail.processingStatus.isInQueue)
+          MixpanelProps.queueNumber: orderQueueNumber,
+        MixpanelProps.orderNumber: orderDetail.processingStatus.isInQueue
+            ? 'no order number'
+            : orderQueueNumber,
         MixpanelProps.grandTotal: orderDetail.totalValue,
         MixpanelProps.totalQty: orderDetail.orderItemsCount,
         MixpanelProps.requestDeliveryDate:
@@ -133,7 +137,11 @@ class OrderSuccessPage extends StatelessWidget {
       trackMixpanelEvent(
         MixpanelEvents.successOrderItem,
         props: {
-          MixpanelProps.orderNumber: orderNumber,
+          if (orderDetail.processingStatus.isInQueue)
+            MixpanelProps.queueNumber: orderQueueNumber,
+          MixpanelProps.orderNumber: orderDetail.processingStatus.isInQueue
+              ? 'no order number'
+              : orderQueueNumber,
           MixpanelProps.productName: item.materialDescription,
           MixpanelProps.productCode: item.materialNumber.displayMatNo,
           MixpanelProps.productQty: item.qty,

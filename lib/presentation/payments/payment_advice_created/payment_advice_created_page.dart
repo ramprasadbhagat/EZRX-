@@ -115,7 +115,7 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
                       .getOrDefaultValue(''),
                   MixpanelProps.paymentDocumentCount:
                       state.allSelectedItems.length,
-                  MixpanelProps.paymentAdviseId: state.createVirtualAccount.id,
+                  MixpanelProps.paymentAdviceId: state.createVirtualAccount.id,
                 },
               );
             },
@@ -144,7 +144,16 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
 
         if (!state.isFetchingInvoiceInfoPdf) {
           state.failureOrSuccessOption.fold(
-            () {},
+            () {
+              trackMixpanelEvent(
+                MixpanelEvents.generatePaymentAdviceSuccess,
+                props: {
+                  MixpanelProps.paymentMethod: state
+                      .selectedPaymentMethod.paymentMethod
+                      .getOrDefaultValue(''),
+                },
+              );
+            },
             (option) => option.fold(
               (failure) {
                 trackMixpanelEvent(
@@ -162,6 +171,16 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
                         state.allSelectedItems.length,
                   },
                 );
+                trackMixpanelEvent(
+                  MixpanelEvents.generatePaymentAdviceFailed,
+                  props: {
+                    MixpanelProps.paymentMethod: state
+                        .selectedPaymentMethod.paymentMethod
+                        .getOrDefaultValue(''),
+                    MixpanelProps.errorMessage: failure.failureMessage.message,
+                  },
+                );
+
                 ErrorUtils.handleApiFailure(context, failure);
               },
               (r) {},

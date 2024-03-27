@@ -786,7 +786,7 @@ void main() {
               MixpanelProps.paymentAmount: 0,
               MixpanelProps.paymentMethod: '',
               MixpanelProps.paymentDocumentCount: 0,
-              MixpanelProps.paymentAdviseId: '',
+              MixpanelProps.paymentAdviceId: '',
             },
           ),
         ).called(1);
@@ -823,7 +823,7 @@ void main() {
               MixpanelProps.errorMessage: 'Payment failed in webview',
               MixpanelProps.paymentMethod: '',
               MixpanelProps.paymentDocumentCount: 0,
-              MixpanelProps.paymentAdviseId: '',
+              MixpanelProps.paymentAdviceId: '',
             },
           ),
         ).called(1);

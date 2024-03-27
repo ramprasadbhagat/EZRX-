@@ -43,13 +43,17 @@ class ProductSuggestionPage extends StatelessWidget {
         elevation: 0,
         titleSpacing: 0,
       ),
-      body: const _BodyContent(),
+      body: _BodyContent(parentRoute: parentRoute),
     );
   }
 }
 
 class _BodyContent extends StatelessWidget {
-  const _BodyContent({Key? key}) : super(key: key);
+  final String parentRoute;
+  const _BodyContent({
+    Key? key,
+    required this.parentRoute,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +62,7 @@ class _BodyContent extends StatelessWidget {
           previous.searchKey.validateNotEmpty !=
           current.searchKey.validateNotEmpty,
       builder: (context, state) => state.searchKey.validateNotEmpty
-          ? const _ProductSuggestionSection()
+          ? _ProductSuggestionSection(parentRoute: parentRoute)
           : const _ProductSearchHistorySuggestionSection(),
     );
   }
