@@ -1259,11 +1259,8 @@ void main() {
       expect(result, Left(FailureHandler.handleFailure(fakeException)));
     });
 
-    /////////////////////////////////-updateCartWithProductDetermination-////////////////////////
-
-    /////////////////////////////////-removeSelectedProducts-////////////////////////
-
     test('removeSelectedProducts local test success', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(
         () => cartLocalDataSourceMock.upsertCart(),
       ).thenAnswer(
@@ -1275,7 +1272,8 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         language: Language.english(),
         products: [
-          MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('12345')),
+          MaterialInfo.empty()
+              .copyWith(materialNumber: MaterialNumber('12345')),
         ],
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
@@ -1285,17 +1283,6 @@ void main() {
 
     test('removeSelectedProducts remote test success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(
-        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: [
-            fakeCartProducts.materialNumbers.first.getOrCrash(),
-          ],
-          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        ),
-      ).thenAnswer(
-        (invocation) async => materialStockInfo,
-      );
       final upsertCartRequest = CartProductRequest.toMaterialRequest(
         salesOrg: fakeSalesOrganisation.salesOrg,
         customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -1307,27 +1294,12 @@ void main() {
         counterOfferDetails:
             fakeCartProducts.first.materialInfo.counterOfferDetails,
       );
-      when(
-        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: [
-            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash(),
-          ],
-          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        ),
-      ).thenAnswer(
-        (invocation) async => [
-          MaterialStockInfo.empty().copyWith(
-            materialNumber: fakeCartProducts.first.materialInfo.materialNumber,
-            stockInfos: [StockInfo.empty()],
-          ),
-        ],
-      );
 
       when(
-        () => cartRemoteDataSource.upsertCart(
-          requestParams:
-              CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+        () => cartRemoteDataSource.upsertCartItems(
+          requestParams: [
+            CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+          ],
           market: mockMarket,
         ),
       ).thenAnswer(
@@ -1342,25 +1314,12 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
       );
-      expect(result.getOrElse(() => <PriceAggregate>[]), [
-        fakeCartProducts.first.copyWith(stockInfoList: [StockInfo.empty()]),
-      ]);
+      expect(result, Right(fakeCartProducts));
     });
 
     test('removeSelectedProducts remote test success - if upsert cart fails',
         () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(
-        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: [
-            fakeCartProducts.materialNumbers.first.getOrCrash(),
-          ],
-          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        ),
-      ).thenAnswer(
-        (invocation) async => materialStockInfo,
-      );
       final upsertCartRequest = CartProductRequest.toMaterialRequest(
         salesOrg: fakeSalesOrganisation.salesOrg,
         customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -1373,14 +1332,13 @@ void main() {
             fakeCartProducts.first.materialInfo.counterOfferDetails,
       );
       when(
-        () => cartRemoteDataSource.upsertCart(
-          requestParams:
-              CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+        () => cartRemoteDataSource.upsertCartItems(
+          requestParams: [
+            CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+          ],
           market: mockMarket,
         ),
-      ).thenThrow(
-        fakeException,
-      );
+      ).thenThrow(fakeException);
 
       final result = await cartRepository.removeSelectedProducts(
         salesOrganisationConfig: fakeSGSalesOrgConfigs,
@@ -1390,10 +1348,9 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         shipToInfo: fakeShipToInfo,
       );
-      expect(result.isRight(), true);
-      expect(result.getOrElse(() => <PriceAggregate>[]), <PriceAggregate>[]);
+
+      expect(result, Left(FailureHandler.handleFailure(fakeException)));
     });
-    /////////////////////////////////-removeSelectedProducts-////////////////////////
 
     test('upsertCartItems local test failure', () async {
       when(

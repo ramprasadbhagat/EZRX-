@@ -588,27 +588,28 @@ class CartRepository implements ICartRepository {
     required List<MaterialInfo> products,
   }) async {
     try {
-      final productList = <PriceAggregate>[];
+      if (config.appFlavor == Flavor.mock) {
+        final productList = await cartLocalDataSource.upsertCart();
 
-      await Future.wait(
-        products.map((product) async {
-          final cartProducts = await upsertCart(
-            materialInfo: product,
-            salesOrganisation: salesOrganisation,
-            salesOrganisationConfig: salesOrganisationConfig,
-            customerCodeInfo: customerCodeInfo,
-            shipToInfo: shipToInfo,
-            language: language,
-            itemId: product.sampleBonusItemId,
-            quantity: product.quantity.intValue,
-            counterOfferDetails: product.counterOfferDetails,
+        return Right(productList);
+      }
+
+      final productList = await cartRemoteDataSource.upsertCartItems(
+        market: deviceStorage.currentMarket(),
+        requestParams: products.map((materialInfo) {
+          final upsertCartRequest = CartProductRequest.toMaterialRequest(
+            salesOrg: salesOrganisation.salesOrg,
+            customerCode: customerCodeInfo.customerCodeSoldTo,
+            shipToCustomerCode: shipToInfo.shipToCustomerCode,
+            language: language.languageCode,
+            materialInfo: materialInfo,
+            itemId: materialInfo.sampleBonusItemId,
+            quantity: materialInfo.quantity.intValue,
+            counterOfferDetails: materialInfo.counterOfferDetails,
           );
 
-          cartProducts.fold((l) => {}, (r) {
-            productList.clear();
-            productList.addAll(r);
-          });
-        }),
+          return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
+        }).toList(),
       );
 
       return Right(productList);
