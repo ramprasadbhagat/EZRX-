@@ -979,6 +979,8 @@ void main() {
     testWidgets(
       'Payment Summary Filter Status',
       (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+
         final currentSalesOrgVariant =
             salesOrgVariant.currentValue ?? fakeSGSalesOrg;
         when(() => paymentSummaryFilterBloc.state).thenReturn(

@@ -22,7 +22,7 @@ class _PaymentSummaryFilterBottomSheet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
+                padding: const EdgeInsets.only(bottom: 16.0),
                 child: Text(
                   context.tr('Created date'),
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
@@ -45,7 +45,7 @@ class _PaymentSummaryFilterBottomSheet extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 24.0, bottom: 12.0),
+                padding: const EdgeInsets.only(top: 24.0, bottom: 16.0),
                 child: Text(
                   '${context.tr('Amount range')} (${salesOrgConfig.currency.code})',
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
@@ -75,7 +75,7 @@ class _PaymentSummaryFilterBottomSheet extends StatelessWidget {
                   isValid: state.filter.isAmountValueRangeValid,
                 ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 12.0, top: 20.0),
+                padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
                 child: Text(
                   context.tr('Status'),
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
@@ -86,13 +86,13 @@ class _PaymentSummaryFilterBottomSheet extends StatelessWidget {
               ),
               const _PaymentSummaryStatusesSelector(),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               const Row(
                 children: [
                   _PaymentSummaryResetButton(),
                   SizedBox(
-                    width: 12,
+                    width: 16,
                   ),
                   _PaymentSummaryApplyButton(),
                 ],

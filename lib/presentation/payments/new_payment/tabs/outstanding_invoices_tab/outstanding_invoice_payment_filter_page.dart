@@ -77,7 +77,7 @@ class _PaymentFilter extends StatelessWidget {
                     ),
               ),
               const SizedBox(
-                height: 12,
+                height: 16,
               ),
               Row(
                 children: [
@@ -97,7 +97,7 @@ class _PaymentFilter extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 24,
               ),
               Text(
                 context.tr('Due Date'),
@@ -106,7 +106,7 @@ class _PaymentFilter extends StatelessWidget {
                     ),
               ),
               const SizedBox(
-                height: 12,
+                height: 16,
               ),
               Row(
                 children: [
@@ -126,7 +126,7 @@ class _PaymentFilter extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 24,
               ),
               Text(
                 '${context.tr('Amount range')} (${salesOrgConfig.currency.code})',
@@ -135,7 +135,7 @@ class _PaymentFilter extends StatelessWidget {
                     ),
               ),
               const SizedBox(
-                height: 12,
+                height: 16,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,10 +159,10 @@ class _PaymentFilter extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               const SizedBox(
-                height: 20,
+                height: 24,
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
+                padding: const EdgeInsets.only(bottom: 16.0),
                 child: Text(
                   context.tr('Status'),
                   style: Theme.of(context).textTheme.labelSmall,
@@ -170,19 +170,19 @@ class _PaymentFilter extends StatelessWidget {
               ),
               const _StatusesSelector(),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               const Row(
                 children: [
                   _ResetButton(),
                   SizedBox(
-                    width: 12,
+                    width: 16,
                   ),
                   _ApplyButton(),
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 24,
               ),
             ],
           ),

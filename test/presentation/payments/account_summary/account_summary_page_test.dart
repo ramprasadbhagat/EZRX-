@@ -247,6 +247,7 @@ void main() {
     });
 
     testWidgets('=> Test filter Account summary invoice', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       when(() => allInvoicesBlocMock.state).thenReturn(
         AllInvoicesState.initial().copyWith(
           appliedFilter: allInvoicesFilter,

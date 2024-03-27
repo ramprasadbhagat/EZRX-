@@ -75,7 +75,7 @@ class _PaymentFilter extends StatelessWidget {
                     ),
               ),
               const SizedBox(
-                height: 12,
+                height: 16,
               ),
               Row(
                 children: [
@@ -91,7 +91,7 @@ class _PaymentFilter extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 24,
               ),
               Text(
                 '${context.tr('Amount range')} (${salesOrgConfig.currency.code})',
@@ -100,7 +100,7 @@ class _PaymentFilter extends StatelessWidget {
                     ),
               ),
               const SizedBox(
-                height: 12,
+                height: 16,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,19 +124,19 @@ class _PaymentFilter extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               const Row(
                 children: [
                   _ResetButton(),
                   SizedBox(
-                    width: 12,
+                    width: 16,
                   ),
                   _ApplyButton(),
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 24,
               ),
             ],
           ),

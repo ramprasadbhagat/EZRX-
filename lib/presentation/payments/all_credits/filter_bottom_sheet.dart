@@ -56,7 +56,7 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0),
+                      padding: const EdgeInsets.only(bottom: 16.0),
                       child: Text(
                         context.tr('Document date'),
                         style: Theme.of(context).textTheme.labelSmall,
@@ -76,7 +76,7 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0, top: 20.0),
+                      padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
                       child: Text(
                         context.tr('Amount range'),
                         style: Theme.of(context).textTheme.labelSmall,
@@ -109,7 +109,7 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
                         children: [
                           Padding(
                             padding:
-                                const EdgeInsets.only(bottom: 12.0, top: 20.0),
+                                const EdgeInsets.only(bottom: 16.0, top: 24.0),
                             child: Text(
                               context.tr('Status'),
                               style: Theme.of(context).textTheme.labelSmall,
@@ -119,13 +119,13 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
                         ],
                       ),
                     const SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
                     const Row(
                       children: [
                         _ResetButton(),
                         SizedBox(
-                          width: 12,
+                          width: 16,
                         ),
                         _ApplyButton(),
                       ],

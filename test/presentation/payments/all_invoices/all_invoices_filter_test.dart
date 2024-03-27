@@ -315,6 +315,7 @@ void main() {
     });
 
     testWidgets('=> _ApplyButton Button Click Test', (tester) async {
+            await tester.binding.setSurfaceSize(const Size(480, 900));
       await getWidget(tester);
       await tester.pumpAndSettle();
 
