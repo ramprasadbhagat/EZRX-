@@ -1262,27 +1262,27 @@ void main() {
           fakeMaterialItem.copyWith(
             parentId: 'fake-parent-id',
             productType: MaterialInfoType.bundle(),
-            material: MaterialInfo.empty().copyWith(
-              bundle: Bundle.empty().copyWith(
-                materials: [
-                  MaterialInfo.empty().copyWith(
-                    type: MaterialInfoType('bundle'),
-                    materialNumber: MaterialNumber('fake-mat1'),
-                    stockInfos: [
-                      StockInfo.empty()
-                          .copyWith(inStock: MaterialInStock('Yes')),
-                    ],
-                  ),
-                  MaterialInfo.empty().copyWith(
-                    type: MaterialInfoType('bundle'),
-                    materialNumber: MaterialNumber('fake-mat2'),
-                    stockInfos: [
-                      StockInfo.empty()
-                          .copyWith(inStock: MaterialInStock('No')),
-                    ],
-                  ),
-                ],
-              ),
+            materialNumber: MaterialNumber('fake-mat1'),
+            materialStockInfo: MaterialStockInfo.empty().copyWith(
+              stockInfos: [
+                StockInfo.empty().copyWith(
+                  inStock: MaterialInStock('Yes'),
+                  materialNumber: MaterialNumber('fake-mat1'),
+                ),
+              ],
+            ),
+          ),
+          fakeMaterialItem.copyWith(
+            parentId: 'fake-parent-id',
+            productType: MaterialInfoType.bundle(),
+            materialNumber: MaterialNumber('fake-mat2'),
+            materialStockInfo: MaterialStockInfo.empty().copyWith(
+              stockInfos: [
+                StockInfo.empty().copyWith(
+                  inStock: MaterialInStock('No'),
+                  materialNumber: MaterialNumber('fake-mat2'),
+                ),
+              ],
             ),
           ),
         ];

@@ -725,6 +725,11 @@ class PriceAggregate with _$PriceAggregate {
   bool get inStock =>
       stockInfoList.any((element) => element.inStock.isMaterialInStock);
 
+  StockInfo get productStockInfo => stockInfoList.firstWhere(
+        (element) => element.materialNumber.isValid(),
+        orElse: () => StockInfo.empty(),
+      );
+
   bool get isOOSProduct =>
       !inStock && !salesOrgConfig.addOosMaterials.getOrDefaultValue(true);
 
@@ -818,12 +823,7 @@ class PriceAggregate with _$PriceAggregate {
           materialInfo.quantity.intValue >= 2) ||
       showMaterialListPrice;
 
-  int get stockQuantity => stockInfoList
-      .firstWhere(
-        (element) => element.materialNumber == materialInfo.materialNumber,
-        orElse: () => StockInfo.empty(),
-      )
-      .stockQuantity;
+  int get stockQuantity => productStockInfo.stockQuantity;
 
   bool get tireItemPriceDisplay =>
       (price.priceTireItem.isNotEmpty && materialInfo.quantity.intValue >= 1);

@@ -175,7 +175,7 @@ class _MaterialDetails extends StatelessWidget {
               ),
               if (eligibilityState.salesOrg.showBonus) const BonusTag(),
               PreOrderLabel(
-                inStock: bonusItem.stockInfo.inStock.isMaterialInStock,
+                stockInfo: bonusItem.stockInfo,
               ),
             ],
           ),

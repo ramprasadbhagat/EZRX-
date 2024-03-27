@@ -140,6 +140,11 @@ class MaterialInfo with _$MaterialInfo {
   bool get inStock =>
       stockInfos.any((element) => element.inStock.isMaterialInStock);
 
+  StockInfo get productStockInfo => stockInfos.firstWhere(
+        (element) => element.materialNumber.isValid(),
+        orElse: () => StockInfo.empty(),
+      );
+
   MaterialInfo copyWithStock({
     required List<StockInfo> stockInfos,
   }) =>

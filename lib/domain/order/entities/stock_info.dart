@@ -58,8 +58,11 @@ class StockInfo with _$StockInfo {
       return DateTimeStringValue('').dateOrNaString;
     }
 
-  // If product is marketplace, expiry date always be NA
+    // If product is marketplace, expiry date always be NA
     return (isMarketPlace ? DateTimeStringValue('') : expiryDate)
         .dateOrNaString;
   }
+
+  bool get displayPreOrderLabel =>
+      this != StockInfo.empty() && !inStock.isMaterialInStock;
 }

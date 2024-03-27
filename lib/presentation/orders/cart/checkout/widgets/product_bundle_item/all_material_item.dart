@@ -110,7 +110,7 @@ class _MaterialDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              PreOrderLabel(inStock: cartItem.inStock),
+              PreOrderLabel(stockInfo: cartItem.productStockInfo),
             ],
           ),
           Padding(

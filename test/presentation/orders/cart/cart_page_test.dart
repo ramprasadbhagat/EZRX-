@@ -284,6 +284,7 @@ void main() {
                 quantity: MaterialQty(10),
                 stockInfos: <StockInfo>[
                   StockInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('fake-material-1'),
                     inStock: MaterialInStock('No'),
                   ),
                 ],
@@ -293,6 +294,7 @@ void main() {
                 quantity: MaterialQty(10),
                 stockInfos: <StockInfo>[
                   StockInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('fake-material-2'),
                     inStock: MaterialInStock('Yes'),
                   ),
                 ],
@@ -1275,6 +1277,7 @@ void main() {
                 ),
                 stockInfoList: <StockInfo>[
                   StockInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
                     inStock: MaterialInStock('No'),
                   ),
                 ],
@@ -2570,6 +2573,11 @@ void main() {
                     finalPrice: MaterialPrice(234.50),
                   ),
                   salesOrgConfig: fakeIDSalesOrgConfigs,
+                  stockInfoList: [
+                    StockInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('fake-material'),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -2616,6 +2624,11 @@ void main() {
                     finalPrice: MaterialPrice(234.50),
                   ),
                   salesOrgConfig: fakeIDSalesOrgConfigs,
+                  stockInfoList: [
+                    StockInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('fake-material'),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -3905,6 +3918,35 @@ void main() {
             findsOneWidget,
           );
         });
+
+        testWidgets(
+          'Test OOS-PreOrder tag not visible when stockInfoList is empty',
+          (tester) async {
+            final cartState = CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                mockCartItems.first.copyWith(stockInfoList: []),
+              ],
+            );
+
+            final eligibilityState = EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+            );
+
+            when(() => cartBloc.state).thenReturn(
+              cartState,
+            );
+
+            when(() => eligibilityBloc.state).thenReturn(
+              eligibilityState,
+            );
+
+            await tester.pumpWidget(getWidget());
+            await tester.pumpAndSettle();
+
+            final preOrderText = find.text('OOS-Preorder');
+            expect(preOrderText, findsNothing);
+          },
+        );
 
         testWidgets(
             'Display default material description when material description is empty',

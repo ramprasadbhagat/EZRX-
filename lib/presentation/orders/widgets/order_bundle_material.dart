@@ -104,7 +104,8 @@ class BundleItemMaterial extends StatelessWidget {
                         ),
                       ),
                       PreOrderLabel(
-                        inStock: orderItem.reOrderMaterialInfo.inStock,
+                        stockInfo:
+                            orderItem.reOrderMaterialInfo.productStockInfo,
                       ),
                     ],
                   ),

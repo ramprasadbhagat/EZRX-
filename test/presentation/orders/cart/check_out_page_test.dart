@@ -217,14 +217,20 @@ void main() {
           type: MaterialInfoType('bundle'),
           materialNumber: MaterialNumber('fake-mat1'),
           stockInfos: [
-            StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+            StockInfo.empty().copyWith(
+              inStock: MaterialInStock('Yes'),
+              materialNumber: MaterialNumber('fake-mat1'),
+            ),
           ],
         ),
         MaterialInfo.empty().copyWith(
           type: MaterialInfoType('bundle'),
           materialNumber: MaterialNumber('fake-mat2'),
           stockInfos: [
-            StockInfo.empty().copyWith(inStock: MaterialInStock('No')),
+            StockInfo.empty().copyWith(
+              inStock: MaterialInStock('No'),
+              materialNumber: MaterialNumber('fake-mat2'),
+            ),
           ],
         ),
       ],
@@ -987,7 +993,8 @@ void main() {
       when(() => additionalDetailsBlocMock.state).thenReturn(
         AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            paymentTerm: PaymentTerm('fake_payment_term-fake_payment_term_description'),
+            paymentTerm:
+                PaymentTerm('fake_payment_term-fake_payment_term_description'),
           ),
         ),
       );
