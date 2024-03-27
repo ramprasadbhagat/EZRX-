@@ -16,19 +16,19 @@ jobs:
           extraProperties: |
             sonar.sources=lib
             sonar.tests=test
-            sonar.exclusions=test/utils/**
-            sonar.cpd.exclusions=**.freezed.dart,**.g.dart
+            # sonar.exclusions=test/utils/**
+            # sonar.cpd.exclusions=**.freezed.dart,**.g.dart
             sonar.sourceEncoding=UTF-8
-            sonar.flutter.analyzer.mode=flutter
-            sonar.dart.analysis.useExistingOptions=true
-            sonar.verbose=true
+            # sonar.flutter.analyzer.mode=flutter
+            # sonar.dart.analysis.useExistingOptions=true
+            # sonar.verbose=true
       - task: CmdLine@2
         displayName: Generate test report
         inputs:
           script: flutter test --machine --coverage > tests.output
-      - task: SonarQubeAnalyze@4
+      - task: SonarQubeAnalyze@5
         displayName: Run SonarQube Analyze
-      - task: SonarQubePublish@4
+      - task: SonarQubePublish@5
         displayName: Run SonarQube Publish
         inputs:
           pollingTimeoutSec: '300'

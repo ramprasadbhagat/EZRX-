@@ -314,7 +314,28 @@ stages:
               fi
 
               result_build_id=$(echo $val | sed 's/{.*"build_id":"*\([0-9a-zA-Z]*\)"*,*.*}/\1/')
+              
               echo "Build_Id : " $result_build_id
+
+              while echo "$result_build_id" | grep -q "BROWSERSTACK_ALL_PARALLELS_IN_USE"; do
+                val=""
+                if [ $IS_GEOLOCATION_ENABLED == 'Yes' ]
+                then
+                  val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
+                  --header 'Content-Type: application/json' \
+                  -u $BROWSERSTACK_CREDENTIALS \
+                  -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "geoLocation":"'"${testSuite[1]}}"'" , "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "deviceLogs":"true", "networkLogs":"true", "devices": ["'"${{ parameters.device_name }}"'"]}' )
+                else
+                  val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
+                  --header 'Content-Type: application/json' \
+                  -u $BROWSERSTACK_CREDENTIALS \
+                  -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "deviceLogs":"true", "networkLogs":"true",  "devices": ["'"${{ parameters.device_name }}"'"]}' )
+                fi
+                result_build_id=$(echo $val | sed 's/{.*"build_id":"*\([0-9a-zA-Z]*\)"*,*.*}/\1/')
+                echo "Build_Id : " $result_build_id                  
+                sleep 30 
+              done
+
               
               buildStatus="running"
               buildMonitorStart=$SECONDS
@@ -384,7 +405,7 @@ stages:
               az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name dndstsharednpd/ezrxplus/template$(Build.BuildId) 
 
               if [ -n "$total_cases" ] && [ -n "$passed_cases" ]; then
-                if [ "$total_cases" == "0"] && [ "$passed_cases" == "0"]; then 
+                if [ "$total_cases" -eq "0"]; then 
                   avg=0
                   echo "set avg: $avg cause Devision Error"
                   sed -i "s|${test_file}_per|${avg}%|g" .azure-pipelines/template.html 
