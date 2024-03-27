@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification_data.dart';
 import 'package:ezrxmobile/domain/notification/repository/i_notification_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_remote.dart';
 
@@ -12,11 +13,13 @@ class NotificationRepository implements INotificationRepository {
   final Config config;
   final NotificationRemoteDataSource remoteDataSource;
   final NotificationLocalDataSource localDataSource;
+  final DeviceStorage deviceStorage;
 
   NotificationRepository({
     required this.config,
     required this.remoteDataSource,
     required this.localDataSource,
+    required this.deviceStorage,
   });
 
   @override
@@ -37,6 +40,7 @@ class NotificationRepository implements INotificationRepository {
       final notification = await remoteDataSource.getNotification(
         page: page,
         perPage: perPage,
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(notification);

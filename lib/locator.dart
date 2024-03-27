@@ -2912,6 +2912,7 @@ void setupLocator() {
       notificationQuery: locator<NotificationQuery>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       config: locator<Config>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -2920,6 +2921,7 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<NotificationLocalDataSource>(),
       remoteDataSource: locator<NotificationRemoteDataSource>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 

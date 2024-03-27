@@ -28,6 +28,7 @@ mixin _$NotificationData {
   StringValue get paymentBatchAdditionalInfo =>
       throw _privateConstructorUsedError;
   EZReachBannerLink get hyperLink => throw _privateConstructorUsedError;
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NotificationDataCopyWith<NotificationData> get copyWith =>
@@ -51,7 +52,8 @@ abstract class $NotificationDataCopyWith<$Res> {
       OrderNumber orderNumber,
       StringValue paymentNumber,
       StringValue paymentBatchAdditionalInfo,
-      EZReachBannerLink hyperLink});
+      EZReachBannerLink hyperLink,
+      bool isMarketPlace});
 
   $ReturnRequestsIdCopyWith<$Res> get returnRequestId;
 }
@@ -80,6 +82,7 @@ class _$NotificationDataCopyWithImpl<$Res, $Val extends NotificationData>
     Object? paymentNumber = null,
     Object? paymentBatchAdditionalInfo = null,
     Object? hyperLink = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -126,6 +129,10 @@ class _$NotificationDataCopyWithImpl<$Res, $Val extends NotificationData>
           ? _value.hyperLink
           : hyperLink // ignore: cast_nullable_to_non_nullable
               as EZReachBannerLink,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -157,7 +164,8 @@ abstract class _$$_NotificationDataCopyWith<$Res>
       OrderNumber orderNumber,
       StringValue paymentNumber,
       StringValue paymentBatchAdditionalInfo,
-      EZReachBannerLink hyperLink});
+      EZReachBannerLink hyperLink,
+      bool isMarketPlace});
 
   @override
   $ReturnRequestsIdCopyWith<$Res> get returnRequestId;
@@ -185,6 +193,7 @@ class __$$_NotificationDataCopyWithImpl<$Res>
     Object? paymentNumber = null,
     Object? paymentBatchAdditionalInfo = null,
     Object? hyperLink = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_$_NotificationData(
       id: null == id
@@ -231,6 +240,10 @@ class __$$_NotificationDataCopyWithImpl<$Res>
           ? _value.hyperLink
           : hyperLink // ignore: cast_nullable_to_non_nullable
               as EZReachBannerLink,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -249,7 +262,8 @@ class _$_NotificationData extends _NotificationData {
       required this.orderNumber,
       required this.paymentNumber,
       required this.paymentBatchAdditionalInfo,
-      required this.hyperLink})
+      required this.hyperLink,
+      required this.isMarketPlace})
       : super._();
 
   @override
@@ -274,10 +288,12 @@ class _$_NotificationData extends _NotificationData {
   final StringValue paymentBatchAdditionalInfo;
   @override
   final EZReachBannerLink hyperLink;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'NotificationData(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, paymentNumber: $paymentNumber, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, hyperLink: $hyperLink)';
+    return 'NotificationData(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, paymentNumber: $paymentNumber, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, hyperLink: $hyperLink, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -304,7 +320,9 @@ class _$_NotificationData extends _NotificationData {
                 other.paymentBatchAdditionalInfo ==
                     paymentBatchAdditionalInfo) &&
             (identical(other.hyperLink, hyperLink) ||
-                other.hyperLink == hyperLink));
+                other.hyperLink == hyperLink) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
@@ -320,7 +338,8 @@ class _$_NotificationData extends _NotificationData {
       orderNumber,
       paymentNumber,
       paymentBatchAdditionalInfo,
-      hyperLink);
+      hyperLink,
+      isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
@@ -341,7 +360,8 @@ abstract class _NotificationData extends NotificationData {
       required final OrderNumber orderNumber,
       required final StringValue paymentNumber,
       required final StringValue paymentBatchAdditionalInfo,
-      required final EZReachBannerLink hyperLink}) = _$_NotificationData;
+      required final EZReachBannerLink hyperLink,
+      required final bool isMarketPlace}) = _$_NotificationData;
   _NotificationData._() : super._();
 
   @override
@@ -366,6 +386,8 @@ abstract class _NotificationData extends NotificationData {
   StringValue get paymentBatchAdditionalInfo;
   @override
   EZReachBannerLink get hyperLink;
+  @override
+  bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
   _$$_NotificationDataCopyWith<_$_NotificationData> get copyWith =>

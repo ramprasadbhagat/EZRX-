@@ -20,6 +20,7 @@ _$_NotificationDataDto _$$_NotificationDataDtoFromJson(
       paymentNumber: json['paymentNumber'] as String? ?? '',
       paymentBatchAdditionalInfo:
           json['paymentBatchAdditionalInfo'] as String? ?? '',
+      isMarketPlace: json['isMarketPlace'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_NotificationDataDtoToJson(
@@ -35,4 +36,5 @@ Map<String, dynamic> _$$_NotificationDataDtoToJson(
       'orderNumber': instance.orderNumber,
       'paymentNumber': instance.paymentNumber,
       'paymentBatchAdditionalInfo': instance.paymentBatchAdditionalInfo,
+      'isMarketPlace': instance.isMarketPlace,
     };

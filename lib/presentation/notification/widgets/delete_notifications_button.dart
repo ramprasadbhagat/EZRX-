@@ -16,10 +16,13 @@ class _DeleteNotificationButton extends StatelessWidget {
 
         return IconButton(
           key: WidgetKeys.notificationDeleteButton,
-          onPressed: () {
-            context.read<NotificationBloc>().add(
-                  const NotificationEvent.deleteAllNotifications(),
-                );
+          onPressed: () async {
+            final confirmed = await _showConfirmBottomSheet(context);
+            if ((confirmed ?? false) && context.mounted) {
+              context.read<NotificationBloc>().add(
+                    const NotificationEvent.deleteAllNotifications(),
+                  );
+            }
           },
           icon: const Icon(
             Icons.delete_outline,
@@ -27,6 +30,20 @@ class _DeleteNotificationButton extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
+    return showModalBottomSheet<bool>(
+      context: context,
+      enableDrag: false,
+      builder: (_) => ConfirmBottomSheet(
+        key: WidgetKeys.confirmBottomSheet,
+        title: 'Clear all notifications?',
+        content: 'This action cannot be undone',
+        confirmButtonText: 'Clear All',
+        displayCancelButton: true,
+      ),
     );
   }
 }

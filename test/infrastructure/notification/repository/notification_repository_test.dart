@@ -1,11 +1,14 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification_data.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_remote.dart';
 import 'package:ezrxmobile/infrastructure/notification/repository/notification_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/mock_other.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -20,16 +23,20 @@ void main() {
   late NotificationRemoteDataSource remoteDataSource;
   late NotificationLocalDataSource localDataSource;
   late NotificationRepository repository;
+  late DeviceStorage deviceStorage;
   final notificationMockList = Notifications.empty();
+  const fakeMarket = 'fake-market';
   setUpAll(() {
     mockConfig = MockConfig();
     localDataSource = NotificationLocalDataSourceMock();
     remoteDataSource = NotificationRemoteDataSourceMock();
+    deviceStorage = DeviceStorageMock();
 
     repository = NotificationRepository(
       config: mockConfig,
       localDataSource: localDataSource,
       remoteDataSource: remoteDataSource,
+      deviceStorage: deviceStorage,
     );
   });
   group('NotificationRepository should - ', () {
@@ -69,11 +76,12 @@ void main() {
     });
     test(' get Notification successfully Remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+      when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
       when(
         () => remoteDataSource.getNotification(
           page: 1,
           perPage: 24,
+          market: fakeMarket,
         ),
       ).thenAnswer((invocation) async => notificationMockList);
 
@@ -93,6 +101,7 @@ void main() {
         () => remoteDataSource.getNotification(
           page: 1,
           perPage: 24,
+          market: fakeMarket,
         ),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),

@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
+import 'package:ezrxmobile/presentation/core/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -179,6 +180,10 @@ void main() {
 
       await tester.tap(deleteIcon);
       await tester.pumpAndSettle();
+
+      final confirmBtn = find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
+      await tester.tap(confirmBtn);
+
       verify(
         () => notificationBlocMock.add(
           const NotificationEvent.deleteAllNotifications(),
@@ -604,6 +609,41 @@ void main() {
 
       final deleteIconFinder = find.byKey(WidgetKeys.notificationDeleteButton);
       expect(deleteIconFinder, findsNothing);
+    });
+
+    testWidgets('Show MP logo if item is from market place ', (tester) async {
+      when(() => notificationBlocMock.state).thenReturn(
+        NotificationState.initial().copyWith(
+          notificationList: Notifications.empty().copyWith(
+            notificationData: [
+              notifications.notificationData
+                  .firstWhere((element) => element.isMarketPlace),
+            ],
+          ),
+          canLoadMore: false,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(find.byType(MarketPlaceIcon), findsOneWidget);
+    });
+
+    testWidgets('Do not show MP logo if no notification from MP',
+        (tester) async {
+      when(() => notificationBlocMock.state).thenReturn(
+        NotificationState.initial().copyWith(
+          notificationList: Notifications.empty().copyWith(
+            notificationData: [
+              notifications.notificationData
+                  .firstWhere((element) => !element.isMarketPlace),
+            ],
+          ),
+          canLoadMore: false,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(find.byType(MarketPlaceIcon), findsNothing);
     });
   });
 }

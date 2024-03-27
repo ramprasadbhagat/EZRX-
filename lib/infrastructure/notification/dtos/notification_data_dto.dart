@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/notification/entities/notification_data.dart';
 import 'package:ezrxmobile/domain/notification/value/value_object.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'notification_data_dto.freezed.dart';
@@ -37,6 +38,8 @@ class NotificationDataDto with _$NotificationDataDto {
         required String paymentNumber,
     @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
         required String paymentBatchAdditionalInfo,
+    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+        required bool isMarketPlace,
   }) = _NotificationDataDto;
 
   NotificationData toDomain() {
@@ -52,6 +55,7 @@ class NotificationDataDto with _$NotificationDataDto {
       paymentNumber: StringValue(paymentNumber),
       paymentBatchAdditionalInfo: StringValue(paymentBatchAdditionalInfo),
       hyperLink: EZReachBannerLink(''),
+      isMarketPlace: isMarketPlace,
     );
   }
 

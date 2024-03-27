@@ -1,5 +1,5 @@
 class NotificationQuery {
-  String getNotificationQuery() {
+  String getNotificationQuery(bool enableMarketplace) {
     return '''
      query getClevertapNotifications(\$page: Int!, \$perPage: Int!) {
   getClevertapNotifications(request: {perPage: \$perPage, page: \$page}) {
@@ -18,6 +18,7 @@ class NotificationQuery {
       returnRequestNumber
       paymentNumber
       paymentBatchAdditionalInfo
+      ${enableMarketplace ? 'isMarketPlace' : ''}
     }
     pagination {
       totalPage

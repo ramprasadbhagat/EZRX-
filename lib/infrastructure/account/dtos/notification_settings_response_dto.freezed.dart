@@ -44,11 +44,11 @@ abstract class $NotificationSettingsResponseDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'orderConfirmation', defaultValue: false)
-          bool orderConfirmation,
+      bool orderConfirmation,
       @JsonKey(name: 'paymentConfirmation', defaultValue: false)
-          bool paymentConfirmation,
+      bool paymentConfirmation,
       @JsonKey(name: 'ereturnConfirmation', defaultValue: false)
-          bool ereturnConfirmation});
+      bool ereturnConfirmation});
 }
 
 /// @nodoc
@@ -97,11 +97,11 @@ abstract class _$$_NotificationSettingsResponseDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'orderConfirmation', defaultValue: false)
-          bool orderConfirmation,
+      bool orderConfirmation,
       @JsonKey(name: 'paymentConfirmation', defaultValue: false)
-          bool paymentConfirmation,
+      bool paymentConfirmation,
       @JsonKey(name: 'ereturnConfirmation', defaultValue: false)
-          bool ereturnConfirmation});
+      bool ereturnConfirmation});
 }
 
 /// @nodoc
@@ -144,11 +144,11 @@ class _$_NotificationSettingsResponseDto
     extends _NotificationSettingsResponseDto {
   const _$_NotificationSettingsResponseDto(
       {@JsonKey(name: 'orderConfirmation', defaultValue: false)
-          required this.orderConfirmation,
+      required this.orderConfirmation,
       @JsonKey(name: 'paymentConfirmation', defaultValue: false)
-          required this.paymentConfirmation,
+      required this.paymentConfirmation,
       @JsonKey(name: 'ereturnConfirmation', defaultValue: false)
-          required this.ereturnConfirmation})
+      required this.ereturnConfirmation})
       : super._();
 
   factory _$_NotificationSettingsResponseDto.fromJson(
@@ -208,11 +208,11 @@ abstract class _NotificationSettingsResponseDto
     extends NotificationSettingsResponseDto {
   const factory _NotificationSettingsResponseDto(
           {@JsonKey(name: 'orderConfirmation', defaultValue: false)
-              required final bool orderConfirmation,
+          required final bool orderConfirmation,
           @JsonKey(name: 'paymentConfirmation', defaultValue: false)
-              required final bool paymentConfirmation,
+          required final bool paymentConfirmation,
           @JsonKey(name: 'ereturnConfirmation', defaultValue: false)
-              required final bool ereturnConfirmation}) =
+          required final bool ereturnConfirmation}) =
       _$_NotificationSettingsResponseDto;
   const _NotificationSettingsResponseDto._() : super._();
 

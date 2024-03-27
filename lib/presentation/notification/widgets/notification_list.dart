@@ -43,10 +43,19 @@ class _NotificationList extends StatelessWidget {
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            context.tr(notificationData.title.getOrDefaultValue('')),
-            key: WidgetKeys.notificationItemTitle,
-            style: Theme.of(context).textTheme.labelSmall,
+          Row(
+            children: [
+              if (notificationData.isMarketPlace)
+                const Padding(
+                  padding: EdgeInsets.only(right: 5),
+                  child: MarketPlaceIcon(),
+                ),
+              Text(
+                context.tr(notificationData.title.getOrDefaultValue('')),
+                key: WidgetKeys.notificationItemTitle,
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ],
           ),
           Text(
             notificationData.description,

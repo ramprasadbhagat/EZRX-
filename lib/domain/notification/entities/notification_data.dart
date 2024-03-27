@@ -23,6 +23,7 @@ class NotificationData with _$NotificationData {
     required StringValue paymentNumber,
     required StringValue paymentBatchAdditionalInfo,
     required EZReachBannerLink hyperLink,
+    required bool isMarketPlace,
   }) = _NotificationData;
 
   factory NotificationData.empty() => NotificationData(
@@ -37,6 +38,7 @@ class NotificationData with _$NotificationData {
         paymentNumber: StringValue(''),
         paymentBatchAdditionalInfo: StringValue(''),
         hyperLink: EZReachBannerLink(''),
+        isMarketPlace: false,
       );
 
   bool get isReturnEligible =>

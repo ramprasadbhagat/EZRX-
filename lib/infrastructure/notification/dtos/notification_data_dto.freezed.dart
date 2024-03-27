@@ -40,6 +40,8 @@ mixin _$NotificationDataDto {
   String get paymentNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   String get paymentBatchAdditionalInfo => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,7 +67,9 @@ abstract class $NotificationDataDtoCopyWith<$Res> {
       @JsonKey(name: 'orderNumber', defaultValue: '') String orderNumber,
       @JsonKey(name: 'paymentNumber', defaultValue: '') String paymentNumber,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      String paymentBatchAdditionalInfo});
+      String paymentBatchAdditionalInfo,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -91,6 +95,7 @@ class _$NotificationDataDtoCopyWithImpl<$Res, $Val extends NotificationDataDto>
     Object? orderNumber = null,
     Object? paymentNumber = null,
     Object? paymentBatchAdditionalInfo = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -133,6 +138,10 @@ class _$NotificationDataDtoCopyWithImpl<$Res, $Val extends NotificationDataDto>
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -157,7 +166,9 @@ abstract class _$$_NotificationDataDtoCopyWith<$Res>
       @JsonKey(name: 'orderNumber', defaultValue: '') String orderNumber,
       @JsonKey(name: 'paymentNumber', defaultValue: '') String paymentNumber,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      String paymentBatchAdditionalInfo});
+      String paymentBatchAdditionalInfo,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -181,6 +192,7 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
     Object? orderNumber = null,
     Object? paymentNumber = null,
     Object? paymentBatchAdditionalInfo = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_$_NotificationDataDto(
       id: null == id
@@ -223,6 +235,10 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -243,7 +259,9 @@ class _$_NotificationDataDto extends _NotificationDataDto {
       @JsonKey(name: 'paymentNumber', defaultValue: '')
       required this.paymentNumber,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      required this.paymentBatchAdditionalInfo})
+      required this.paymentBatchAdditionalInfo,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required this.isMarketPlace})
       : super._();
 
   factory _$_NotificationDataDto.fromJson(Map<String, dynamic> json) =>
@@ -279,10 +297,13 @@ class _$_NotificationDataDto extends _NotificationDataDto {
   @override
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   final String paymentBatchAdditionalInfo;
+  @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'NotificationDataDto(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, paymentNumber: $paymentNumber, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo)';
+    return 'NotificationDataDto(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, paymentNumber: $paymentNumber, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -307,7 +328,9 @@ class _$_NotificationDataDto extends _NotificationDataDto {
             (identical(other.paymentBatchAdditionalInfo,
                     paymentBatchAdditionalInfo) ||
                 other.paymentBatchAdditionalInfo ==
-                    paymentBatchAdditionalInfo));
+                    paymentBatchAdditionalInfo) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @JsonKey(ignore: true)
@@ -323,7 +346,8 @@ class _$_NotificationDataDto extends _NotificationDataDto {
       returnRequestId,
       orderNumber,
       paymentNumber,
-      paymentBatchAdditionalInfo);
+      paymentBatchAdditionalInfo,
+      isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
@@ -342,23 +366,24 @@ class _$_NotificationDataDto extends _NotificationDataDto {
 
 abstract class _NotificationDataDto extends NotificationDataDto {
   const factory _NotificationDataDto(
-          {@JsonKey(name: 'id', defaultValue: 0) required final int id,
-          @JsonKey(name: 'type', defaultValue: '') required final String type,
-          @JsonKey(name: 'title', defaultValue: '') required final String title,
-          @JsonKey(name: 'description', defaultValue: '')
-          required final String description,
-          @JsonKey(name: 'createdAt', defaultValue: '')
-          required final String createdAt,
-          @JsonKey(name: 'isRead') required final bool isRead,
-          @JsonKey(name: 'returnRequestNumber', defaultValue: '')
-          required final String returnRequestId,
-          @JsonKey(name: 'orderNumber', defaultValue: '')
-          required final String orderNumber,
-          @JsonKey(name: 'paymentNumber', defaultValue: '')
-          required final String paymentNumber,
-          @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-          required final String paymentBatchAdditionalInfo}) =
-      _$_NotificationDataDto;
+      {@JsonKey(name: 'id', defaultValue: 0) required final int id,
+      @JsonKey(name: 'type', defaultValue: '') required final String type,
+      @JsonKey(name: 'title', defaultValue: '') required final String title,
+      @JsonKey(name: 'description', defaultValue: '')
+      required final String description,
+      @JsonKey(name: 'createdAt', defaultValue: '')
+      required final String createdAt,
+      @JsonKey(name: 'isRead') required final bool isRead,
+      @JsonKey(name: 'returnRequestNumber', defaultValue: '')
+      required final String returnRequestId,
+      @JsonKey(name: 'orderNumber', defaultValue: '')
+      required final String orderNumber,
+      @JsonKey(name: 'paymentNumber', defaultValue: '')
+      required final String paymentNumber,
+      @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
+      required final String paymentBatchAdditionalInfo,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required final bool isMarketPlace}) = _$_NotificationDataDto;
   const _NotificationDataDto._() : super._();
 
   factory _NotificationDataDto.fromJson(Map<String, dynamic> json) =
@@ -394,6 +419,9 @@ abstract class _NotificationDataDto extends NotificationDataDto {
   @override
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   String get paymentBatchAdditionalInfo;
+  @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
   _$$_NotificationDataDtoCopyWith<_$_NotificationDataDto> get copyWith =>

@@ -10,8 +10,8 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
-import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class AupTCPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-            canPop: false,
+      canPop: false,
       child: BlocProvider(
         create: (context) => locator<AupTcBloc>()..add(AupTcEvent.show(user)),
         child: BlocBuilder<AupTcBloc, AupTcState>(
@@ -75,13 +75,12 @@ class AupTCPage extends StatelessWidget {
                                       fontWeight: FontWeight.w600,
                                     ),
                                 children: [
-                                  WidgetSpan(
+                                  const WidgetSpan(
                                     child: Padding(
-                                      padding: const EdgeInsets.only(right: 4),
-                                      child: SvgPicture.asset(
-                                        SvgImage.marketplaceIcon,
-                                        height: 28,
+                                      padding: EdgeInsets.only(right: 4),
+                                      child: MarketPlaceIcon(
                                         width: 28,
+                                        height: 28,
                                       ),
                                     ),
                                   ),
