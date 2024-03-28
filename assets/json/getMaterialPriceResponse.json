@@ -606,8 +606,7 @@
                 "ConditionNumber": "0079000848",
                 "OverriddenBy": null,
                 "MaxQuota": "0",
-                "RemainingQuota": null,
-                "__typename": "PriceRule"
+                "RemainingQuota": null
             },
             {
                 "Type": "%",
@@ -618,23 +617,19 @@
                     "RuleTier": [
                         {
                             "Rate": -7,
-                            "Quantity": 18,
-                            "__typename": "RuleTier"
+                            "Quantity": 18
                         },
                         {
                             "Rate": 0,
-                            "Quantity": 1,
-                            "__typename": "RuleTier"
+                            "Quantity": 1
                         }
-                    ],
-                    "__typename": "TieredRules"
+                    ]
                 },
                 "BonusEligible": true,
                 "ConditionNumber": "0086683743",
                 "OverriddenBy": null,
                 "MaxQuota": "0",
-                "RemainingQuota": null,
-                "__typename": "PriceRule"
+                "RemainingQuota": null
             }
         ],
         "Bonuses": [],
@@ -650,8 +645,7 @@
                         "ApplyBonus": true,
                         "Percentage": null,
                         "MinAmount": null,
-                        "ScaleBasis": "",
-                        "__typename": "PriceTier"
+                        "ScaleBasis": ""
                     },
                     {
                         "Sequence": 0,
@@ -661,11 +655,9 @@
                         "ApplyBonus": true,
                         "Percentage": null,
                         "MinAmount": null,
-                        "ScaleBasis": "",
-                        "__typename": "PriceTier"
+                        "ScaleBasis": ""
                     }
-                ],
-                "__typename": "TieredPricing"
+                ]
             }
         ],
         "Bundles": [],
@@ -679,8 +671,7 @@
         "OverridenRules": [],
         "OverridenRuleTier": [],
         "IsMOVExclusion": false,
-        "ComboDeals": null,
-        "__typename": "Price"
+        "ComboDeals": null
     },
     {
       "MaterialNumber": "000000000021041786",
@@ -702,8 +693,7 @@
       "OverridenRules": [],
       "OverridenRuleTier": [],
       "IsMOVExclusion": false,
-      "ComboDeals": null,
-      "__typename": "Price"
+      "ComboDeals": null
     },    
     {
       "MaterialNumber": "000000000021041796",
@@ -725,9 +715,210 @@
       "OverridenRules": [],
       "OverridenRuleTier": [],
       "IsMOVExclusion": false,
-      "ComboDeals": null,
-      "__typename": "Price"
-    }
+      "ComboDeals": null
+    },
+    {
+      "MaterialNumber": "000000000023238863",
+      "OldMaterialCode": "300HY43",
+      "ListPrice": 162.4,
+      "FinalIndividualPrice": 138.04000000000002,
+      "FinalTotalPrice": 0,
+      "PriceRules": [
+          {
+              "Type": "TWD",
+              "Rate": 162.4,
+              "Conditions": "ZLP0 - A901 - 0075352024",
+              "TieredRules": {
+                  "Tier": "C",
+                  "RuleTier": [
+                      {
+                          "Rate": 162.4,
+                          "Quantity": 1
+                      }
+                  ]
+              },
+              "BonusEligible": true,
+              "ConditionNumber": "0075352024",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
+          },
+          {
+              "Type": "%",
+              "Rate": 0,
+              "Conditions": "ZMG3 - A762 - 0066851906",
+              "TieredRules": {
+                  "Tier": "C",
+                  "RuleTier": [
+                      {
+                          "Rate": -15,
+                          "Quantity": 1
+                      },
+                      {
+                          "Rate": -20,
+                          "Quantity": 90
+                      },
+                      {
+                          "Rate": -26,
+                          "Quantity": 200
+                      }
+                  ]
+              },
+              "BonusEligible": true,
+              "ConditionNumber": "0066851906",
+              "OverriddenBy": null,
+              "MaxQuota": "0",
+              "RemainingQuota": null
+          }
+      ],
+      "Bonuses": [],
+      "TieredPricing": [
+          {
+              "Tier": "C",
+              "PriceTier": [
+                  {
+                      "Sequence": 0,
+                      "Quantity": 1,
+                      "Type": "",
+                      "Rate": 138.04000000000002,
+                      "ApplyBonus": true,
+                      "Percentage": null,
+                      "MinAmount": null,
+                      "ScaleBasis": ""
+                  },
+                  {
+                      "Sequence": 0,
+                      "Quantity": 90,
+                      "Type": "",
+                      "Rate": 129.92000000000002,
+                      "ApplyBonus": true,
+                      "Percentage": null,
+                      "MinAmount": null,
+                      "ScaleBasis": ""
+                  },
+                  {
+                      "Sequence": 0,
+                      "Quantity": 200,
+                      "Type": "",
+                      "Rate": 120.176,
+                      "ApplyBonus": true,
+                      "Percentage": null,
+                      "MinAmount": null,
+                      "ScaleBasis": ""
+                  }
+              ]
+          }
+      ],
+      "Bundles": [],
+      "Valid": true,
+      "AdditionalBonusEligible": true,
+      "ZMGDiscount": true,
+      "ZDP5MaxQuota": "",
+      "ZDP5RemainingQuota": "",
+      "ExceedQty": false,
+      "OverridenRulePresent": false,
+      "OverridenRules": [],
+      "OverridenRuleTier": [],
+      "IsMOVExclusion": false,
+      "ComboDeals": null
+  },
+  {
+    "MaterialNumber": "000000000023274806",
+    "OldMaterialCode": "300CZ35U",
+    "ListPrice": 162.4,
+    "FinalIndividualPrice": 138.04000000000002,
+    "FinalTotalPrice": 0,
+    "PriceRules": [
+        {
+            "Type": "TWD",
+            "Rate": 162.4,
+            "Conditions": "ZLP0 - A901 - 0084791431",
+            "TieredRules": null,
+            "BonusEligible": true,
+            "ConditionNumber": "0084791431",
+            "OverriddenBy": null,
+            "MaxQuota": "0",
+            "RemainingQuota": null
+        },
+        {
+            "Type": "%",
+            "Rate": 0,
+            "Conditions": "ZMG3 - A762 - 0066851906",
+            "TieredRules": {
+                "Tier": "C",
+                "RuleTier": [
+                    {
+                        "Rate": -15,
+                        "Quantity": 1
+                    },
+                    {
+                        "Rate": -20,
+                        "Quantity": 90
+                    },
+                    {
+                        "Rate": -26,
+                        "Quantity": 200
+                    }
+                ]
+            },
+            "BonusEligible": true,
+            "ConditionNumber": "0066851906",
+            "OverriddenBy": null,
+            "MaxQuota": "0",
+            "RemainingQuota": null
+        }
+    ],
+    "Bonuses": [],
+    "TieredPricing": [
+        {
+            "Tier": "C",
+            "PriceTier": [
+                {
+                    "Sequence": 0,
+                    "Quantity": 1,
+                    "Type": "",
+                    "Rate": 138.04000000000002,
+                    "ApplyBonus": true,
+                    "Percentage": null,
+                    "MinAmount": null,
+                    "ScaleBasis": ""
+                },
+                {
+                    "Sequence": 0,
+                    "Quantity": 90,
+                    "Type": "",
+                    "Rate": 129.92000000000002,
+                    "ApplyBonus": true,
+                    "Percentage": null,
+                    "MinAmount": null,
+                    "ScaleBasis": ""
+                },
+                {
+                    "Sequence": 0,
+                    "Quantity": 200,
+                    "Type": "",
+                    "Rate": 120.176,
+                    "ApplyBonus": true,
+                    "Percentage": null,
+                    "MinAmount": null,
+                    "ScaleBasis": ""
+                }
+            ]
+        }
+    ],
+    "Bundles": [],
+    "Valid": true,
+    "AdditionalBonusEligible": true,
+    "ZMGDiscount": true,
+    "ZDP5MaxQuota": "",
+    "ZDP5RemainingQuota": "",
+    "ExceedQty": false,
+    "OverridenRulePresent": false,
+    "OverridenRules": [],
+    "OverridenRuleTier": [],
+    "IsMOVExclusion": false,
+    "ComboDeals": null
+}
     ]
   }
 }

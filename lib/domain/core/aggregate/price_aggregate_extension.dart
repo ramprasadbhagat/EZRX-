@@ -106,13 +106,33 @@ extension PriceAggregateExtension on List<PriceAggregate> {
             element.isPreOrder && (!element.materialInfo.type.typeCombo),
       ).toList();
 
-  List<PriceAggregate> get priceAggregateWithDiscountedCount => map(
-        (item) => item.price.isTireDiscountEligible
+  List<PriceAggregate> get priceAggregateWithDiscountedCount => map((item) {
+        if (item.price.zmgDiscount) {
+          return item.copyWith(
+            discountedMaterialCount:
+                _zmgDiscountedMaterialCount(item.materialInfo),
+          );
+        }
+
+        return item.price.isTireDiscountEligible
             ? item.copyWith(
                 discountedMaterialCount: item.quantity,
               )
-            : item,
-      ).toList();
+            : item;
+      }).toList();
+
+  int _zmgDiscountedMaterialCount(MaterialInfo materialInfo) {
+    final materialsWithZMGDiscount = where(
+      (element) =>
+          element.price.zmgDiscount &&
+          materialInfo.materialGroup2 == element.materialInfo.materialGroup2,
+    );
+
+    return materialsWithZMGDiscount.fold<int>(
+      0,
+      (previousValue, element) => previousValue + element.quantity,
+    );
+  }
 
   double get originalTotalAmount => fold<double>(
         0,

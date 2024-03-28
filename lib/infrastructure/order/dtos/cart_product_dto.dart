@@ -78,6 +78,10 @@ class CartProductDto with _$CartProductDto {
         required bool isMarketPlace,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
         required String defaultMaterialDescription,
+    @JsonKey(name: 'materialGroup4', defaultValue: '')
+        required String materialGroup4,
+    @JsonKey(name: 'materialGroup2', defaultValue: '')
+        required String materialGroup2,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -132,6 +136,8 @@ class CartProductDto with _$CartProductDto {
       isMarketPlace: cartItemDetails.materialInfo.isMarketPlace,
       defaultMaterialDescription:
           cartItemDetails.materialInfo.defaultMaterialDescription,
+      materialGroup2: cartItemDetails.materialInfo.materialGroup2.getOrCrash(),
+      materialGroup4: cartItemDetails.materialInfo.materialGroup4.getOrCrash(),
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -170,6 +176,8 @@ class CartProductDto with _$CartProductDto {
       isSuspended: isSuspended,
       isPrincipalSuspended: isPrincipalSuspended,
       isMarketPlace: isMarketPlace,
+      materialGroup2: MaterialGroup.two(materialGroup2),
+      materialGroup4: MaterialGroup.four(materialGroup4),
     );
   }
 

@@ -82,6 +82,10 @@ mixin _$CartProductDto {
   bool get isMarketPlace => throw _privateConstructorUsedError;
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'materialGroup4', defaultValue: '')
+  String get materialGroup4 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'materialGroup2', defaultValue: '')
+  String get materialGroup2 => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -155,7 +159,11 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
           bool isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription});
+          String defaultMaterialDescription,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          String materialGroup4,
+      @JsonKey(name: 'materialGroup2', defaultValue: '')
+          String materialGroup2});
 
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
@@ -204,6 +212,8 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? maximumQty = null,
     Object? isMarketPlace = null,
     Object? defaultMaterialDescription = null,
+    Object? materialGroup4 = null,
+    Object? materialGroup2 = null,
   }) {
     return _then(_value.copyWith(
       productID: null == productID
@@ -326,6 +336,14 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      materialGroup4: null == materialGroup4
+          ? _value.materialGroup4
+          : materialGroup4 // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialGroup2: null == materialGroup2
+          ? _value.materialGroup2
+          : materialGroup2 // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -414,7 +432,11 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
           bool isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription});
+          String defaultMaterialDescription,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          String materialGroup4,
+      @JsonKey(name: 'materialGroup2', defaultValue: '')
+          String materialGroup2});
 
   @override
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
@@ -463,6 +485,8 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
     Object? maximumQty = null,
     Object? isMarketPlace = null,
     Object? defaultMaterialDescription = null,
+    Object? materialGroup4 = null,
+    Object? materialGroup2 = null,
   }) {
     return _then(_$_CartProductDto(
       productID: null == productID
@@ -585,6 +609,14 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      materialGroup4: null == materialGroup4
+          ? _value.materialGroup4
+          : materialGroup4 // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialGroup2: null == materialGroup2
+          ? _value.materialGroup2
+          : materialGroup2 // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -652,7 +684,11 @@ class _$_CartProductDto extends _CartProductDto {
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
           required this.isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          required this.defaultMaterialDescription})
+          required this.defaultMaterialDescription,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          required this.materialGroup4,
+      @JsonKey(name: 'materialGroup2', defaultValue: '')
+          required this.materialGroup2})
       : _bundleMaterials = bundleMaterials,
         _bonusMaterials = bonusMaterials,
         _comboMaterials = comboMaterials,
@@ -770,10 +806,16 @@ class _$_CartProductDto extends _CartProductDto {
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   final String defaultMaterialDescription;
+  @override
+  @JsonKey(name: 'materialGroup4', defaultValue: '')
+  final String materialGroup4;
+  @override
+  @JsonKey(name: 'materialGroup2', defaultValue: '')
+  final String materialGroup2;
 
   @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty, isMarketPlace: $isMarketPlace, defaultMaterialDescription: $defaultMaterialDescription)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty, isMarketPlace: $isMarketPlace, defaultMaterialDescription: $defaultMaterialDescription, materialGroup4: $materialGroup4, materialGroup2: $materialGroup2)';
   }
 
   @override
@@ -839,7 +881,11 @@ class _$_CartProductDto extends _CartProductDto {
             (identical(other.defaultMaterialDescription,
                     defaultMaterialDescription) ||
                 other.defaultMaterialDescription ==
-                    defaultMaterialDescription));
+                    defaultMaterialDescription) &&
+            (identical(other.materialGroup4, materialGroup4) ||
+                other.materialGroup4 == materialGroup4) &&
+            (identical(other.materialGroup2, materialGroup2) ||
+                other.materialGroup2 == materialGroup2));
   }
 
   @JsonKey(ignore: true)
@@ -875,7 +921,9 @@ class _$_CartProductDto extends _CartProductDto {
         const DeepCollectionEquality().hash(_comboMaterials),
         maximumQty,
         isMarketPlace,
-        defaultMaterialDescription
+        defaultMaterialDescription,
+        materialGroup4,
+        materialGroup2
       ]);
 
   @JsonKey(ignore: true)
@@ -894,67 +942,70 @@ class _$_CartProductDto extends _CartProductDto {
 
 abstract class _CartProductDto extends CartProductDto {
   const factory _CartProductDto(
-          {@JsonKey(name: 'productID', defaultValue: '')
-              required final String productID,
-          @JsonKey(name: 'parentID', defaultValue: '')
-              required final String parentID,
-          @JsonKey(name: 'type', defaultValue: '')
-              required final String type,
-          @JsonKey(name: 'quantity', defaultValue: 0)
-              required final int quantity,
-          @JsonKey(name: 'materialNumber', defaultValue: '')
-              required final String materialNumber,
-          @JsonKey(name: 'materialDescription', defaultValue: '')
-              required final String materialDescription,
-          @JsonKey(name: 'therapeuticClass', defaultValue: '')
-              required final String therapeuticClass,
-          @JsonKey(name: 'taxClassification', defaultValue: '')
-              required final String taxClassification,
-          @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-              required final bool isFOCMaterial,
-          @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-              required final String itemRegistrationNumber,
-          @JsonKey(name: 'genericMaterialName', defaultValue: '')
-              required final String genericMaterialName,
-          @JsonKey(name: 'principalName', defaultValue: '')
-              required final String principalName,
-          @JsonKey(name: 'principalCode', defaultValue: '')
-              required final String principalCode,
-          @JsonKey(name: 'counterOfferPrice', defaultValue: 0)
-              required final double counterOfferPrice,
-          @JsonKey(name: 'discountOverridePercentage', defaultValue: 0)
-              required final double counterOfferDiscount,
-          @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
-              required final String counterOfferCurrency,
-          @JsonKey(name: 'comment', defaultValue: '')
-              required final String remarks,
-          @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-              required final String governmentMaterialCode,
-          @JsonKey(name: 'bundleDetails')
-              final BundleDetailsDto bundleDetails,
-          @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
-              required final List<MaterialDto> bundleMaterials,
-          @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
-              required final List<BonusSampleItemDto> bonusMaterials,
-          @JsonKey(name: 'taxes', readValue: handleTax)
-              required final double tax,
-          @JsonKey(name: 'hidePrice', defaultValue: false)
-              required final bool hidePrice,
-          @JsonKey(name: 'suspensionStatus', defaultValue: false)
-              required final bool isSuspended,
-          @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
-              required final bool isPrincipalSuspended,
-          @JsonKey(name: 'comboDeals')
-              final PriceComboDealDto comboDeal,
-          @JsonKey(name: 'comboMaterials', defaultValue: [])
-              required final List<ComboMaterialItemDto> comboMaterials,
-          @JsonKey(name: 'maximumQty', defaultValue: 99999)
-              required final int maximumQty,
-          @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-              required final bool isMarketPlace,
-          @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-              required final String defaultMaterialDescription}) =
-      _$_CartProductDto;
+      {@JsonKey(name: 'productID', defaultValue: '')
+          required final String productID,
+      @JsonKey(name: 'parentID', defaultValue: '')
+          required final String parentID,
+      @JsonKey(name: 'type', defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'quantity', defaultValue: 0)
+          required final int quantity,
+      @JsonKey(name: 'materialNumber', defaultValue: '')
+          required final String materialNumber,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
+          required final String materialDescription,
+      @JsonKey(name: 'therapeuticClass', defaultValue: '')
+          required final String therapeuticClass,
+      @JsonKey(name: 'taxClassification', defaultValue: '')
+          required final String taxClassification,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          required final bool isFOCMaterial,
+      @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
+          required final String itemRegistrationNumber,
+      @JsonKey(name: 'genericMaterialName', defaultValue: '')
+          required final String genericMaterialName,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          required final String principalName,
+      @JsonKey(name: 'principalCode', defaultValue: '')
+          required final String principalCode,
+      @JsonKey(name: 'counterOfferPrice', defaultValue: 0)
+          required final double counterOfferPrice,
+      @JsonKey(name: 'discountOverridePercentage', defaultValue: 0)
+          required final double counterOfferDiscount,
+      @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
+          required final String counterOfferCurrency,
+      @JsonKey(name: 'comment', defaultValue: '')
+          required final String remarks,
+      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
+          required final String governmentMaterialCode,
+      @JsonKey(name: 'bundleDetails')
+          final BundleDetailsDto bundleDetails,
+      @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
+          required final List<MaterialDto> bundleMaterials,
+      @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
+          required final List<BonusSampleItemDto> bonusMaterials,
+      @JsonKey(name: 'taxes', readValue: handleTax)
+          required final double tax,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          required final bool hidePrice,
+      @JsonKey(name: 'suspensionStatus', defaultValue: false)
+          required final bool isSuspended,
+      @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
+          required final bool isPrincipalSuspended,
+      @JsonKey(name: 'comboDeals')
+          final PriceComboDealDto comboDeal,
+      @JsonKey(name: 'comboMaterials', defaultValue: [])
+          required final List<ComboMaterialItemDto> comboMaterials,
+      @JsonKey(name: 'maximumQty', defaultValue: 99999)
+          required final int maximumQty,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+          required final bool isMarketPlace,
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+          required final String defaultMaterialDescription,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          required final String materialGroup4,
+      @JsonKey(name: 'materialGroup2', defaultValue: '')
+          required final String materialGroup2}) = _$_CartProductDto;
   const _CartProductDto._() : super._();
 
   factory _CartProductDto.fromJson(Map<String, dynamic> json) =
@@ -1050,6 +1101,12 @@ abstract class _CartProductDto extends CartProductDto {
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   String get defaultMaterialDescription;
+  @override
+  @JsonKey(name: 'materialGroup4', defaultValue: '')
+  String get materialGroup4;
+  @override
+  @JsonKey(name: 'materialGroup2', defaultValue: '')
+  String get materialGroup2;
   @override
   @JsonKey(ignore: true)
   _$$_CartProductDtoCopyWith<_$_CartProductDto> get copyWith =>

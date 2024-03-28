@@ -58,6 +58,8 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
+      materialGroup4: json['materialGroup4'] as String? ?? '',
+      materialGroup2: json['materialGroup2'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
@@ -93,6 +95,8 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'maximumQty': instance.maximumQty,
       'isMarketPlace': instance.isMarketPlace,
       'defaultMaterialDescription': instance.defaultMaterialDescription,
+      'materialGroup4': instance.materialGroup4,
+      'materialGroup2': instance.materialGroup2,
     };
 
 _$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>

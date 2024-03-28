@@ -66,8 +66,7 @@
               "materialDescription": "190 NIQUITIN MINT LOZENGES2MG",
               "productCount": 1,
               "ItemId": "176834",
-              "Type": "Bonus",
-              "__typename": "Item"
+              "Type": "Bonus"
             }
           ]
         },
@@ -127,25 +126,21 @@
                 "Sequence": 1,
                 "Quantity": 5,
                 "Type": "MYR",
-                "Rate": 100,
-                "__typename": "BundleInformation"
+                "Rate": 100
               },
               {
                 "Sequence": 4,
                 "Quantity": 10,
                 "Type": "MYR",
-                "Rate": 90,
-                "__typename": "BundleInformation"
+                "Rate": 90
               },
               {
                 "Sequence": 7,
                 "Quantity": 20,
                 "Type": "MYR",
-                "Rate": 85,
-                "__typename": "BundleInformation"
+                "Rate": 85
               }
-            ],
-            "__typename": "Bundle"
+            ]
           },
           "BundleMaterials": [
             {
@@ -191,8 +186,7 @@
               "suspensionStatus": false,
               "principalCutoffStatus": false,
               "warehouseStorageCondition": "AC",
-              "ParentID": "0008896469",
-              "__typename": "Item"
+              "ParentID": "0008896469"
             },
             {
               "Type": "bundle",
@@ -237,8 +231,7 @@
               "suspensionStatus": false,
               "principalCutoffStatus": false,
               "warehouseStorageCondition": "AC",
-              "ParentID": "0008896469",
-              "__typename": "Item"
+              "ParentID": "0008896469"
             },
             {
               "Type": "bundle",
@@ -283,8 +276,7 @@
               "suspensionStatus": false,
               "principalCutoffStatus": false,
               "warehouseStorageCondition": "AC",
-              "ParentID": "0008896469",
-              "__typename": "Item"
+              "ParentID": "0008896469"
             }
           ],
           "ComboMaterials": null,
@@ -340,8 +332,7 @@
           "principalCutoffStatus": null,
           "warehouseStorageCondition": "",
           "IsGimmick": null,
-          "BonusMaterials": null,
-          "__typename": "Item"
+          "BonusMaterials": null
         },
         {
           "BundleDetails": null,
@@ -405,8 +396,143 @@
               "ComboDealType": "K5",
               "IsComboEligible": false,
               "FinalIndividualPrice": 8.37,
-              "PrimaryMaterialNumber": null,
-              "__typename": "Item"
+              "PrimaryMaterialNumber": null
+            },
+            {
+              "BundleDetails": null,
+              "BundleMaterials": null,
+              "ComboMaterials": null,
+              "ComboDeals": null,
+              "CounterOfferPrice": 0,
+              "CounterOfferCurrency": null,
+              "DiscountOverridePercentage": 0,
+              "isVaccine": false,
+              "TenderContractNumber": null,
+              "Comment": null,
+              "ProductID": "000000000023238863",
+              "ParentID": "",
+              "Type": "material",
+              "ItemSource": "EZRX",
+              "Quantity": 88,
+              "CreatedAt": "2024-03-27T04:19:47.494318Z",
+              "UpdatedAt": "2024-03-27T04:19:47.497894Z",
+              "principalCode": "0000105758",
+              "principalName": "荷蘭商歐嘉隆有限公司台灣分公司",
+              "materialNumber": "000000000023238863",
+              "materialDescription": "Hyzaar 100/12.5mg Tab  28's/Bx",
+              "therapeuticClass": "Angiot.II antag.comb+antihyp.\u0026/or diure.",
+              "itemBrand": "Hyzaar",
+              "oldMaterialCode": "300HY43",
+              "governmentMaterialCode": "BC24643100",
+              "materialGroup4": "E1",
+              "materialGroup2": "24",
+              "taxClassification": "Product : Full Tax",
+              "unitOfMeasurement": "EA",
+              "itemRegistrationNumber": "D024643",
+              "defaultMaterialDescription": "Hyzaar 100/12.5mg Tab  28's/Bx",
+              "genericMaterialName": "",
+              "language": "000000000023238863",
+              "taxM1": "1",
+              "taxes": [
+                  "5",
+                  "5",
+                  "5",
+                  "5",
+                  "5"
+              ],
+              "isSampleMaterial": false,
+              "hidePrice": false,
+              "hasValidTenderContract": null,
+              "hasMandatoryTenderContract": null,
+              "tenderOrderReason": null,
+              "isFOCMaterial": false,
+              "isFavourite": null,
+              "productCount": 88,
+              "productAddedAt": null,
+              "productUpdatedAt": null,
+              "minimumQty": null,
+              "maximumQty": null,
+              "orderedQty": 0,
+              "remainingQty": null,
+              "mov": 0,
+              "materialType": "",
+              "suspensionStatus": false,
+              "principalCutoffStatus": false,
+              "warehouseStorageCondition": "AC",
+              "IsGimmick": false,
+              "PromoStatus": null,
+              "PromoType": null,
+              "is26SeriesMaterial": null,
+              "BonusMaterials": null
+              
+            },
+            {
+              "BundleDetails": null,
+              "BundleMaterials": null,
+              "ComboMaterials": null,
+              "ComboDeals": null,
+              "CounterOfferPrice": 0,
+              "CounterOfferCurrency": null,
+              "DiscountOverridePercentage": 0,
+              "isVaccine": false,
+              "TenderContractNumber": null,
+              "Comment": null,
+              "ProductID": "000000000023274806",
+              "ParentID": "",
+              "Type": "material",
+              "ItemSource": "EZRX",
+              "Quantity": 90,
+              "CreatedAt": "2024-03-27T04:17:26.260595Z",
+              "UpdatedAt": "2024-03-27T04:20:59.764217Z",
+              "principalCode": "0000105758",
+              "principalName": "荷蘭商歐嘉隆有限公司台灣分公司",
+              "materialNumber": "000000000023274806",
+              "materialDescription": "COZAAR 100MG 28TAB TWN (TWN)",
+              "therapeuticClass": "All other non-therapeutic products",
+              "itemBrand": "COZAAR",
+              "oldMaterialCode": "300CZ35U",
+              "governmentMaterialCode": "BC23655100",
+              "materialGroup4": "CP",
+              "materialGroup2": "27",
+              "taxClassification": "Product : Full Tax",
+              "unitOfMeasurement": "EA",
+              "itemRegistrationNumber": "D023655",
+              "defaultMaterialDescription": "COZAAR 100MG 28TAB TWN (TWN)",
+              "genericMaterialName": "",
+              "language": "000000000023274806",
+              "taxM1": "1",
+              "taxes": [
+                  "5",
+                  "5",
+                  "5",
+                  "5",
+                  "5"
+              ],
+              "isSampleMaterial": false,
+              "hidePrice": false,
+              "hasValidTenderContract": null,
+              "hasMandatoryTenderContract": null,
+              "tenderOrderReason": null,
+              "isFOCMaterial": false,
+              "isFavourite": null,
+              "productCount": 2,
+              "productAddedAt": null,
+              "productUpdatedAt": null,
+              "minimumQty": null,
+              "maximumQty": null,
+              "orderedQty": 0,
+              "remainingQty": null,
+              "mov": 0,
+              "materialType": "",
+              "suspensionStatus": false,
+              "principalCutoffStatus": false,
+              "warehouseStorageCondition": "AC",
+              "IsGimmick": false,
+              "PromoStatus": null,
+              "PromoType": null,
+              "is26SeriesMaterial": null,
+              "BonusMaterials": null
+              
             },
             {
               "Type": "combo",
@@ -466,8 +592,7 @@
               "ComboDealType": "K5",
               "IsComboEligible": false,
               "FinalIndividualPrice": 1.4,
-              "PrimaryMaterialNumber": null,
-              "__typename": "Item"
+              "PrimaryMaterialNumber": null
             },
             {
               "Type": "combo",
@@ -527,8 +652,7 @@
               "ComboDealType": "K5",
               "IsComboEligible": false,
               "FinalIndividualPrice": 18.61,
-              "PrimaryMaterialNumber": null,
-              "__typename": "Item"
+              "PrimaryMaterialNumber": null
             }
           ],
           "ComboDeals": {
@@ -539,10 +663,8 @@
               "Type": "ZPRINC",
               "Value": [
                 "102756"
-              ],
-              "__typename": "ComboCategory"
-            },
-            "__typename": "ComboDealsInformation"
+              ]
+            }
           },
           "CounterOfferPrice": null,
           "CounterOfferCurrency": null,
@@ -595,8 +717,7 @@
           "principalCutoffStatus": null,
           "warehouseStorageCondition": "",
           "IsGimmick": null,
-          "BonusMaterials": null,
-          "__typename": "Item"
+          "BonusMaterials": null
         },
         {
           "ProductID": "000000000021041796",
