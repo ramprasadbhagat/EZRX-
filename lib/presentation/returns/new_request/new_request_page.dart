@@ -197,7 +197,7 @@ class NewRequestPage extends StatelessWidget {
                               ),
                               if (step == 1)
                                 Text(
-                                  '${state.selectedItems.length} ${'item(s) selected'.tr()}'
+                                  '${state.selectedItems.length} ${'items selected'.tr()}'
                                       .tr(),
                                   style: Theme.of(context).textTheme.titleSmall,
                                 ),

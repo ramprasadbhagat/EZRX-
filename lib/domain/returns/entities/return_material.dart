@@ -69,6 +69,10 @@ class ReturnMaterial with _$ReturnMaterial {
   String get displayPrincipalOrSellerName =>
       isMarketPlace ? 'Seller name' : 'Principal name';
 
+  String get displayBatch => isMarketPlace ? 'NA' : batch;
+
+  String get displayExpires => isMarketPlace ? 'NA' : expiryDate.dateString;
+
   ReturnItemDetails get validatedItemDetails =>
       ReturnItemDetails.empty().copyWith(
         materialNumber: materialNumber,

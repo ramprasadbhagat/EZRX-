@@ -8,16 +8,14 @@ import 'package:flutter/material.dart';
 
 class MaterialInfoWidget extends StatelessWidget {
   final bool showMpLogo;
+  final ReturnMaterial data;
 
   const MaterialInfoWidget({
     Key? key,
     required this.data,
     this.showMpLogo = false,
-    this.showBatchExp = true,
   }) : super(key: key);
 
-  final ReturnMaterial data;
-  final bool showBatchExp;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,27 +48,26 @@ class MaterialInfoWidget extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             key: WidgetKeys.itemTitleKey,
           ),
-          if (showBatchExp)
-            Wrap(
-              children: [
-                Text(
-                  '${'Batch'.tr()} ${data.batch} ',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: ZPColors.darkGray,
-                        fontSize: 12,
-                      ),
-                  key: WidgetKeys.itemBatchKey,
-                ),
-                Text(
-                  '(${'Expires'.tr()} ${data.expiryDate.dateString})',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: ZPColors.darkGray,
-                        fontSize: 12,
-                      ),
-                  key: WidgetKeys.itemExpiresKey,
-                ),
-              ],
-            ),
+          Wrap(
+            children: [
+              Text(
+                '${context.tr('Batch')}: ${data.displayBatch} - ',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.darkGray,
+                      fontSize: 12,
+                    ),
+                key: WidgetKeys.itemBatchKey,
+              ),
+              Text(
+                '${context.tr('Expires')}: ${data.displayExpires}',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.darkGray,
+                      fontSize: 12,
+                    ),
+                key: WidgetKeys.itemExpiresKey,
+              ),
+            ],
+          ),
           ReturnItemPrice(data: data),
         ],
       ),

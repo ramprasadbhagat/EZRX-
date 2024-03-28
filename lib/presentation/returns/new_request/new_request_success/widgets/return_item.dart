@@ -46,7 +46,6 @@ class _ReturnItem extends StatelessWidget {
               Expanded(
                 child: MaterialInfoWidget(
                   data: returnMaterial,
-                  showBatchExp: false,
                 ),
               ),
             ],

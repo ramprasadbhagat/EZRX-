@@ -38,7 +38,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
@@ -863,11 +862,6 @@ void main() {
     });
 
     testWidgets(' => Material info section check', (WidgetTester tester) async {
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrgConfigs: fakePHSalesOrgConfigs,
-        ),
-      );
       whenListen(
         newRequestBlocMock,
         Stream.fromIterable([
@@ -927,7 +921,7 @@ void main() {
         find.descendant(
           of: find.byType(MaterialInfoWidget),
           matching: find.text(
-            'Batch ${fakeReturnMaterial.batch} ',
+            'Batch: ${fakeReturnMaterial.displayBatch} - ',
           ),
         ),
         findsOneWidget,
@@ -937,7 +931,7 @@ void main() {
         find.descendant(
           of: find.byType(MaterialInfoWidget),
           matching: find.text(
-            '(Expires ${fakeReturnMaterial.expiryDate.dateString})',
+            'Expires: ${fakeReturnMaterial.displayExpires}',
           ),
         ),
         findsOneWidget,
@@ -1144,7 +1138,7 @@ void main() {
         returnUploadAttachmentButton,
         findsWidgets,
       );
-       await tester.fling(
+      await tester.fling(
         find.byKey(WidgetKeys.returnDetailsListView),
         const Offset(0.0, -1000.0),
         1000.0,

@@ -245,11 +245,11 @@ void main() {
       final batch = find.textContaining(
         'Batch'.tr(),
       );
-      expect(batch, findsOneWidget);
+      expect(batch, findsWidgets);
       final expires = find.textContaining(
         'EXP:'.tr(),
       );
-      expect(expires, findsOneWidget);
+      expect(expires, findsWidgets);
     });
     testWidgets(' => display Override Price for return material item',
         (WidgetTester tester) async {
