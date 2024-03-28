@@ -19,7 +19,9 @@ class BuyAgainButton extends StatelessWidget {
         if (viewByOrderHistoryItem.orderNumber ==
                 reOrderPermissionOrderNumber &&
             (currentRoutePath == 'main/orders_tab/orders/view_by_orders' ||
-                currentRoutePath == 'orders/view_by_order_details_page')) {
+                currentRoutePath == 'orders/view_by_order_details_page'||
+                currentRoutePath == 'orders/cart'
+                )) {
           context.read<ReOrderPermissionBloc>().add(
                 ReOrderPermissionEvent.resetOrderNumberWillUpsert(
                   orderNumberWillUpsert: OrderNumber(''),
