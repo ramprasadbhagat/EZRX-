@@ -15,6 +15,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.autoCorrect = false,
     this.keyboardType,
     this.initValue,
+    this.textColor,
     this.obscureText = false,
     this.onDone,
     this.onTap,
@@ -38,6 +39,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final bool autoCorrect;
   final TextInputType? keyboardType;
   final String? initValue;
+  final Color? textColor;
   final bool obscureText;
   final Function(String)? onDone;
   final Function()? onTap;
@@ -76,7 +78,10 @@ class TextFieldWithLabel extends StatelessWidget {
           inputFormatters: inputFormatters,
           obscuringCharacter: obscuringCharacter,
           key: fieldKey,
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(color: textColor),
           autocorrect: autoCorrect,
           enabled: isEnabled,
           controller: controller,

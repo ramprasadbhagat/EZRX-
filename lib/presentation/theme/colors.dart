@@ -96,6 +96,7 @@ abstract class ZPColors {
   static const Color priceWarning = Color.fromRGBO(253, 246, 237, 1);
   static const Color priceNegative = Color.fromRGBO(238, 66, 66, 1);
   static const Color warningTextColor = Color.fromRGBO(241, 104, 104, 1);
+  static const Color disableTextColor = Color.fromRGBO(154, 169, 177, 1);
 
   static const Color paleBlueGray = Color.fromRGBO(230, 238, 239, 1);
   static const Color lightSilver = Color.fromRGBO(233, 236, 238, 1);

@@ -228,19 +228,23 @@ class _UploadedFileList extends StatelessWidget {
                           IconButton(
                             icon: const Icon(Icons.delete_outline_outlined),
                             padding: const EdgeInsets.all(0.0),
-                            onPressed: () {
-                              context.read<ReturnRequestAttachmentBloc>().add(
-                                    ReturnRequestAttachmentEvent.deleteFile(
-                                      file: file,
-                                    ),
-                                  );
-                              context.read<NewRequestBloc>().add(
-                                    NewRequestEvent.toggleFiles(
-                                      files: [file],
-                                      included: false,
-                                      uuid: data.uuid,
-                                    ),
-                                  );
+                            onPressed: () async {
+                              final confirmed =
+                                  await _showConfirmBottomSheet(context);
+                              if ((confirmed ?? false) && context.mounted) {
+                                context.read<ReturnRequestAttachmentBloc>().add(
+                                      ReturnRequestAttachmentEvent.deleteFile(
+                                        file: file,
+                                      ),
+                                    );
+                                context.read<NewRequestBloc>().add(
+                                      NewRequestEvent.toggleFiles(
+                                        files: [file],
+                                        included: false,
+                                        uuid: data.uuid,
+                                      ),
+                                    );
+                              }
                             },
                           ),
                         ],
@@ -251,5 +255,18 @@ class _UploadedFileList extends StatelessWidget {
             ],
           )
         : const SizedBox.shrink();
+  }
+
+  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
+    return showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      builder: (_) => const ConfirmBottomSheet(
+        title: 'Remove item?',
+        content: 'This action cannot be undone',
+        confirmButtonText: 'Remove',
+      ),
+    );
   }
 }

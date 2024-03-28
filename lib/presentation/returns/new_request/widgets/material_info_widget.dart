@@ -59,7 +59,7 @@ class MaterialInfoWidget extends StatelessWidget {
                 key: WidgetKeys.itemBatchKey,
               ),
               Text(
-                '${context.tr('Expires')}: ${data.displayExpires}',
+                '${context.tr('Expires')}: ${data.displayExpiryDate}',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.darkGray,
                       fontSize: 12,

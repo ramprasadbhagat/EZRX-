@@ -22,8 +22,9 @@ class BalanceQuantityField extends StatelessWidget {
       initValue: data.balanceQuantity.stringValue,
       isEnabled: false,
       decoration: const InputDecoration(
-        fillColor: ZPColors.inputBorderColor,
+        fillColor: ZPColors.extraLightGrey3,
       ),
+      textColor: ZPColors.disableTextColor,
     );
   }
 }

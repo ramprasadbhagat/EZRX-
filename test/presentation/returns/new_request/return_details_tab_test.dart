@@ -522,8 +522,8 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       expect(returnDetailsListView, findsOneWidget);
-      expect(newRequestStep2RemoveIcon, findsOneWidget);
-      await tester.tap(newRequestStep2RemoveIcon);
+      expect(newRequestStep2RemoveIcon, findsWidgets);
+      await tester.tap(newRequestStep2RemoveIcon.first);
       await tester.pumpAndSettle();
       expect(
         find.descendant(
@@ -931,7 +931,7 @@ void main() {
         find.descendant(
           of: find.byType(MaterialInfoWidget),
           matching: find.text(
-            'Expires: ${fakeReturnMaterial.displayExpires}',
+            'Expires: ${fakeReturnMaterial.displayExpiryDate}',
           ),
         ),
         findsOneWidget,
@@ -1330,12 +1330,28 @@ void main() {
       expect(file, findsWidgets);
       expect(fileDeleteIcon, findsWidgets);
       await tester.fling(
-        find.byType(ListView),
+        find.byType(SingleChildScrollView),
         const Offset(0.0, -1500.0),
         1000.0,
       );
       await tester.tap(fileDeleteIcon.last);
       await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byType(ConfirmBottomSheet),
+          matching: find.text('Remove item?'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byType(ConfirmBottomSheet),
+          matching: find.text('This action cannot be undone'),
+        ),
+        findsOneWidget,
+      );
+      expect(confirmBottomSheetConfirmButton, findsOneWidget);
+      await tester.tap(confirmBottomSheetConfirmButton);
       verify(
         () => returnRequestAttachmentBlocMock.add(
           ReturnRequestAttachmentEvent.deleteFile(

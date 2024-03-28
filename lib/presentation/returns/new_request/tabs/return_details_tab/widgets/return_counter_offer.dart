@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnCounterOfferField extends StatelessWidget {
@@ -50,9 +51,12 @@ class ReturnCounterOfferField extends StatelessWidget {
                             hintText: context.tr('Request return unit price'),
                           )
                         : const InputDecoration(
-                            fillColor: ZPColors.inputBorderColor,
+                            fillColor: ZPColors.extraLightGrey3,
                             hintText: '0.00',
                           ),
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(21),
+                    ],
                     isEnabled: enabled,
                     mandatory: false,
                     initValue: initValue,

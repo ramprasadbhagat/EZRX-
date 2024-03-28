@@ -65,13 +65,13 @@ class _ToggleActiveButton extends StatelessWidget {
             Theme(
               data: Theme.of(context).copyWith(
                 colorScheme: const ColorScheme.light().copyWith(
-                  outline: ZPColors.extraLightGrey3,
+                  outline: ZPColors.lightGrey,
                 ),
               ),
               child: Switch(
                 key: WidgetKeys.toggleIncludeBonusButton,
                 activeTrackColor: returnItem.activeColor,
-                inactiveTrackColor: ZPColors.extraLightGrey3,
+                inactiveTrackColor: ZPColors.lightGrey,
                 thumbColor: MaterialStateProperty.resolveWith<Color?>(
                   (Set<MaterialState> states) => ZPColors.white,
                 ),
@@ -86,7 +86,7 @@ class _ToggleActiveButton extends StatelessWidget {
 
                     return const Icon(
                       Icons.close,
-                      color: ZPColors.extraLightGrey3,
+                      color: ZPColors.lightGrey,
                     );
                   },
                 ),

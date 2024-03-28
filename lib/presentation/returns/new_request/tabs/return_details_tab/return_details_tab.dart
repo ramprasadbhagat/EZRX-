@@ -10,6 +10,8 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
+import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -48,23 +50,40 @@ class ReturnDetailsTab extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.selectedItems != current.selectedItems,
       builder: (context, state) {
-        return ListView.builder(
+        return SingleChildScrollView(
           key: WidgetKeys.returnDetailsListView,
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
           ),
-          itemCount: state.selectedItems.length,
-          itemBuilder: (
-            context,
-            index,
-          ) {
-            final item = state.selectedItems[index];
-
-            return _ReturnMaterialWidget(
-              item: item,
-              detail: state.getReturnItemDetails(item.uuid),
-            );
-          },
+          child: Column(
+            children: [
+              if (state.selectedItems.isNotEmpty &&
+                  state.selectedItems.first.isMarketPlace)
+                Padding(
+                  padding: const EdgeInsets.only(top: 16, bottom: 5),
+                  child: Row(
+                    children: [
+                      const MarketPlaceRectangleLogo(),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: MarketPlaceSellerTitle(
+                          sellerName:
+                              state.selectedItems.first.principalName.name,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ...state.selectedItems
+                  .map(
+                    (item) => _ReturnMaterialWidget(
+                      item: item,
+                      detail: state.getReturnItemDetails(item.uuid),
+                    ),
+                  )
+                  .toList(),
+            ],
+          ),
         );
       },
     );
