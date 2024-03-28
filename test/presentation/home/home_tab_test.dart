@@ -987,7 +987,7 @@ void main() {
             EligibilityState.initial().copyWith(
               user: fakeClientUserAccessMarketPlace,
               salesOrgConfigs: fakeMYSalesOrgConfigs,
-              shipToInfo: fakeShipToInfoPeninsulaRegion,
+              customerCodeInfo: fakeMarketPlaceCustomerCode,
             ),
           );
 
@@ -1019,7 +1019,7 @@ void main() {
             EligibilityState.initial().copyWith(
               user: fakeClientUser,
               salesOrgConfigs: fakeMYSalesOrgConfigs,
-              shipToInfo: fakeShipToInfoPeninsulaRegion,
+              customerCodeInfo: fakeMarketPlaceCustomerCode,
             ),
           );
 
@@ -1107,7 +1107,8 @@ void main() {
         final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
         final ediBannerTitle = find.text('You are an EDI customer.');
         final ediBannerSubTitle = find.text(
-            'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',);
+          'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+        );
         expect(homeScreen, findsOneWidget);
         expect(ediBanner, findsOneWidget);
         expect(ediBannerTitle, findsOneWidget);
@@ -1132,7 +1133,8 @@ void main() {
         final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
         final ediBannerTitle = find.text('You are an EDI customer.');
         final ediBannerSubTitle = find.text(
-            'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',);
+          'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+        );
         expect(homeScreen, findsOneWidget);
         expect(ediBanner, findsNothing);
         expect(ediBannerTitle, findsNothing);

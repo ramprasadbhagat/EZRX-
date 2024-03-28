@@ -12,7 +12,7 @@ part of 'customer_code_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CustomerCodeDto _$CustomerCodeDtoFromJson(Map<String, dynamic> json) {
   return _CustomerCodeDto.fromJson(json);
@@ -82,6 +82,8 @@ mixin _$CustomerCodeDto {
   String get floor => throw _privateConstructorUsedError;
   @JsonKey(name: 'houseNumber1', defaultValue: '')
   String get houseNumber1 => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -134,7 +136,9 @@ abstract class $CustomerCodeDtoCopyWith<$Res> {
       @JsonKey(name: 'salesDeals', defaultValue: []) List<String> salesDeals,
       @JsonKey(name: 'country', defaultValue: '') String country,
       @JsonKey(name: 'floor', defaultValue: '') String floor,
-      @JsonKey(name: 'houseNumber1', defaultValue: '') String houseNumber1});
+      @JsonKey(name: 'houseNumber1', defaultValue: '') String houseNumber1,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -181,6 +185,7 @@ class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
     Object? country = null,
     Object? floor = null,
     Object? houseNumber1 = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       customerCodeSoldTo: null == customerCodeSoldTo
@@ -307,16 +312,20 @@ class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
           ? _value.houseNumber1
           : houseNumber1 // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_CustomerCodeDtoCopyWith<$Res>
+abstract class _$$CustomerCodeDtoImplCopyWith<$Res>
     implements $CustomerCodeDtoCopyWith<$Res> {
-  factory _$$_CustomerCodeDtoCopyWith(
-          _$_CustomerCodeDto value, $Res Function(_$_CustomerCodeDto) then) =
-      __$$_CustomerCodeDtoCopyWithImpl<$Res>;
+  factory _$$CustomerCodeDtoImplCopyWith(_$CustomerCodeDtoImpl value,
+          $Res Function(_$CustomerCodeDtoImpl) then) =
+      __$$CustomerCodeDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -358,15 +367,17 @@ abstract class _$$_CustomerCodeDtoCopyWith<$Res>
       @JsonKey(name: 'salesDeals', defaultValue: []) List<String> salesDeals,
       @JsonKey(name: 'country', defaultValue: '') String country,
       @JsonKey(name: 'floor', defaultValue: '') String floor,
-      @JsonKey(name: 'houseNumber1', defaultValue: '') String houseNumber1});
+      @JsonKey(name: 'houseNumber1', defaultValue: '') String houseNumber1,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
-class __$$_CustomerCodeDtoCopyWithImpl<$Res>
-    extends _$CustomerCodeDtoCopyWithImpl<$Res, _$_CustomerCodeDto>
-    implements _$$_CustomerCodeDtoCopyWith<$Res> {
-  __$$_CustomerCodeDtoCopyWithImpl(
-      _$_CustomerCodeDto _value, $Res Function(_$_CustomerCodeDto) _then)
+class __$$CustomerCodeDtoImplCopyWithImpl<$Res>
+    extends _$CustomerCodeDtoCopyWithImpl<$Res, _$CustomerCodeDtoImpl>
+    implements _$$CustomerCodeDtoImplCopyWith<$Res> {
+  __$$CustomerCodeDtoImplCopyWithImpl(
+      _$CustomerCodeDtoImpl _value, $Res Function(_$CustomerCodeDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -403,8 +414,9 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
     Object? country = null,
     Object? floor = null,
     Object? houseNumber1 = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_CustomerCodeDto(
+    return _then(_$CustomerCodeDtoImpl(
       customerCodeSoldTo: null == customerCodeSoldTo
           ? _value.customerCodeSoldTo
           : customerCodeSoldTo // ignore: cast_nullable_to_non_nullable
@@ -529,14 +541,18 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
           ? _value.houseNumber1
           : houseNumber1 // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_CustomerCodeDto extends _CustomerCodeDto {
-  const _$_CustomerCodeDto(
+class _$CustomerCodeDtoImpl extends _CustomerCodeDto {
+  const _$CustomerCodeDtoImpl(
       {@JsonKey(name: 'customerCodeSoldTo', defaultValue: '')
       required this.customerCodeSoldTo,
       @JsonKey(name: 'name1', defaultValue: '') required this.name1,
@@ -580,15 +596,17 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
       @JsonKey(name: 'country', defaultValue: '') required this.country,
       @JsonKey(name: 'floor', defaultValue: '') required this.floor,
       @JsonKey(name: 'houseNumber1', defaultValue: '')
-      required this.houseNumber1})
+      required this.houseNumber1,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required this.isMarketPlace})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
         _emailAddresses = emailAddresses,
         _salesDeals = salesDeals,
         super._();
 
-  factory _$_CustomerCodeDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CustomerCodeDtoFromJson(json);
+  factory _$CustomerCodeDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CustomerCodeDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'customerCodeSoldTo', defaultValue: '')
@@ -707,17 +725,20 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   @override
   @JsonKey(name: 'houseNumber1', defaultValue: '')
   final String houseNumber1;
+  @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, postalCode: $postalCode, division: $division, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTerm: $paymentTerm, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses, comboEligible: $comboEligible, salesDeals: $salesDeals, country: $country, floor: $floor, houseNumber1: $houseNumber1)';
+    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, postalCode: $postalCode, division: $division, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTerm: $paymentTerm, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses, comboEligible: $comboEligible, salesDeals: $salesDeals, country: $country, floor: $floor, houseNumber1: $houseNumber1, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerCodeDto &&
+            other is _$CustomerCodeDtoImpl &&
             (identical(other.customerCodeSoldTo, customerCodeSoldTo) ||
                 other.customerCodeSoldTo == customerCodeSoldTo) &&
             (identical(other.name1, name1) || other.name1 == name1) &&
@@ -764,7 +785,9 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
             (identical(other.country, country) || other.country == country) &&
             (identical(other.floor, floor) || other.floor == floor) &&
             (identical(other.houseNumber1, houseNumber1) ||
-                other.houseNumber1 == houseNumber1));
+                other.houseNumber1 == houseNumber1) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @JsonKey(ignore: true)
@@ -801,18 +824,20 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
         const DeepCollectionEquality().hash(_salesDeals),
         country,
         floor,
-        houseNumber1
+        houseNumber1,
+        isMarketPlace
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerCodeDtoCopyWith<_$_CustomerCodeDto> get copyWith =>
-      __$$_CustomerCodeDtoCopyWithImpl<_$_CustomerCodeDto>(this, _$identity);
+  _$$CustomerCodeDtoImplCopyWith<_$CustomerCodeDtoImpl> get copyWith =>
+      __$$CustomerCodeDtoImplCopyWithImpl<_$CustomerCodeDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CustomerCodeDtoToJson(
+    return _$$CustomerCodeDtoImplToJson(
       this,
     );
   }
@@ -866,11 +891,13 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
       @JsonKey(name: 'country', defaultValue: '') required final String country,
       @JsonKey(name: 'floor', defaultValue: '') required final String floor,
       @JsonKey(name: 'houseNumber1', defaultValue: '')
-      required final String houseNumber1}) = _$_CustomerCodeDto;
+      required final String houseNumber1,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required final bool isMarketPlace}) = _$CustomerCodeDtoImpl;
   const _CustomerCodeDto._() : super._();
 
   factory _CustomerCodeDto.fromJson(Map<String, dynamic> json) =
-      _$_CustomerCodeDto.fromJson;
+      _$CustomerCodeDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'customerCodeSoldTo', defaultValue: '')
@@ -966,7 +993,10 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
   @JsonKey(name: 'houseNumber1', defaultValue: '')
   String get houseNumber1;
   @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_CustomerCodeDtoCopyWith<_$_CustomerCodeDto> get copyWith =>
+  _$$CustomerCodeDtoImplCopyWith<_$CustomerCodeDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

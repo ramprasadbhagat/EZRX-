@@ -805,6 +805,7 @@ void setupLocator() {
       customerCodeQueryMutation: locator<CustomerCodeQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       config: locator<Config>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -814,6 +815,7 @@ void setupLocator() {
       remoteDataSource: locator<CustomerCodeRemoteDataSource>(),
       localCustomerCodeDataSource: locator<CustomerCodeLocalDataSource>(),
       accountSelectorStorage: locator<AccountSelectorStorage>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 

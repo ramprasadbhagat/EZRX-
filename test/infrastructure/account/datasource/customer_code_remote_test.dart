@@ -8,12 +8,16 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_search_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:mocktail/mocktail.dart';
+
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 void main() {
   late CustomerCodeRemoteDataSource remoteDataSource;
@@ -21,6 +25,10 @@ void main() {
   late int pageSize;
   late bool hideCustomer;
   late String mockCustomerCode;
+  final remoteConfigService = RemoteConfigServiceMock();
+  const fakeMarket = 'fake-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
 
   late Map<String, Object> variables;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -39,11 +47,14 @@ void main() {
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
+      when(() => remoteConfigService.enableMarketPlaceMarkets)
+          .thenReturn(fakeEnableMarketPlaceMarkets);
       remoteDataSource = CustomerCodeRemoteDataSource(
         httpService: service,
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
         config: Config(),
         customerCodeQueryMutation: CustomerCodeQueryMutation(),
+        remoteConfigService: remoteConfigService,
       );
       saleOrgName = '2601';
       pageSize = 20;
@@ -83,7 +94,7 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.customerCodeQueryMutation
-                  .getCustomerInfoBySearch(),
+                  .getCustomerInfoBySearch(fakeConfigValue),
               'variables': variables,
             }),
           );
@@ -94,6 +105,7 @@ void main() {
             pageSize: pageSize,
             hideCustomer: hideCustomer,
             offset: 0,
+            market: fakeMarket,
           );
           expect(
             result.soldToInformation.length,
@@ -123,7 +135,7 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.customerCodeQueryMutation
-                  .getCustomerInfoBySearch(),
+                  .getCustomerInfoBySearch(fakeConfigValue),
               'variables': variables,
             }),
           );
@@ -134,6 +146,7 @@ void main() {
             pageSize: pageSize,
             hideCustomer: hideCustomer,
             offset: 0,
+            market: fakeMarket,
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
@@ -159,7 +172,7 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.customerCodeQueryMutation
-                  .getCustomerInfoBySearch(),
+                  .getCustomerInfoBySearch(fakeConfigValue),
               'variables': variables,
             }),
           );
@@ -170,6 +183,7 @@ void main() {
             pageSize: pageSize,
             hideCustomer: hideCustomer,
             offset: 0,
+            market: fakeMarket,
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
@@ -223,7 +237,8 @@ void main() {
           );
           expect(
             result.soldToInformation.length,
-            res['data']['customerInformationSalesRep']['SoldToInformation'].length,
+            res['data']['customerInformationSalesRep']['SoldToInformation']
+                .length,
           );
         },
       );

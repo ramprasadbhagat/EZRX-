@@ -12,7 +12,7 @@ part of 'customer_code_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerCodeInfo {
@@ -33,13 +33,14 @@ mixin _$CustomerCodeInfo {
   List<EmailAddress> get emailAddresses => throw _privateConstructorUsedError;
   CustomerAttr7 get customerAttr7 => throw _privateConstructorUsedError;
   CustomerGrp4 get customerGrp4 => throw _privateConstructorUsedError;
-  CustomerCodeRegion get region => throw _privateConstructorUsedError;
+  String get region => throw _privateConstructorUsedError;
   bool get comboEligible => throw _privateConstructorUsedError;
   List<SalesDealNumber> get salesDeals => throw _privateConstructorUsedError;
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
   String get floor => throw _privateConstructorUsedError;
   String get houseNumber1 => throw _privateConstructorUsedError;
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerCodeInfoCopyWith<CustomerCodeInfo> get copyWith =>
@@ -68,13 +69,14 @@ abstract class $CustomerCodeInfoCopyWith<$Res> {
       List<EmailAddress> emailAddresses,
       CustomerAttr7 customerAttr7,
       CustomerGrp4 customerGrp4,
-      CustomerCodeRegion region,
+      String region,
       bool comboEligible,
       List<SalesDealNumber> salesDeals,
       PhoneNumber telephoneNumber,
       String country,
       String floor,
-      String houseNumber1});
+      String houseNumber1,
+      bool isMarketPlace});
 
   $CustomerNameCopyWith<$Res> get customerName;
   $CustomerAddressCopyWith<$Res> get customerAddress;
@@ -115,6 +117,7 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
     Object? country = null,
     Object? floor = null,
     Object? houseNumber1 = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       customerCodeSoldTo: null == customerCodeSoldTo
@@ -180,7 +183,7 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeRegion,
+              as String,
       comboEligible: null == comboEligible
           ? _value.comboEligible
           : comboEligible // ignore: cast_nullable_to_non_nullable
@@ -205,6 +208,10 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
           ? _value.houseNumber1
           : houseNumber1 // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -226,11 +233,11 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
 }
 
 /// @nodoc
-abstract class _$$_CustomerCodeInfoCopyWith<$Res>
+abstract class _$$CustomerCodeInfoImplCopyWith<$Res>
     implements $CustomerCodeInfoCopyWith<$Res> {
-  factory _$$_CustomerCodeInfoCopyWith(
-          _$_CustomerCodeInfo value, $Res Function(_$_CustomerCodeInfo) then) =
-      __$$_CustomerCodeInfoCopyWithImpl<$Res>;
+  factory _$$CustomerCodeInfoImplCopyWith(_$CustomerCodeInfoImpl value,
+          $Res Function(_$CustomerCodeInfoImpl) then) =
+      __$$CustomerCodeInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -249,13 +256,14 @@ abstract class _$$_CustomerCodeInfoCopyWith<$Res>
       List<EmailAddress> emailAddresses,
       CustomerAttr7 customerAttr7,
       CustomerGrp4 customerGrp4,
-      CustomerCodeRegion region,
+      String region,
       bool comboEligible,
       List<SalesDealNumber> salesDeals,
       PhoneNumber telephoneNumber,
       String country,
       String floor,
-      String houseNumber1});
+      String houseNumber1,
+      bool isMarketPlace});
 
   @override
   $CustomerNameCopyWith<$Res> get customerName;
@@ -264,11 +272,11 @@ abstract class _$$_CustomerCodeInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerCodeInfoCopyWithImpl<$Res>
-    extends _$CustomerCodeInfoCopyWithImpl<$Res, _$_CustomerCodeInfo>
-    implements _$$_CustomerCodeInfoCopyWith<$Res> {
-  __$$_CustomerCodeInfoCopyWithImpl(
-      _$_CustomerCodeInfo _value, $Res Function(_$_CustomerCodeInfo) _then)
+class __$$CustomerCodeInfoImplCopyWithImpl<$Res>
+    extends _$CustomerCodeInfoCopyWithImpl<$Res, _$CustomerCodeInfoImpl>
+    implements _$$CustomerCodeInfoImplCopyWith<$Res> {
+  __$$CustomerCodeInfoImplCopyWithImpl(_$CustomerCodeInfoImpl _value,
+      $Res Function(_$CustomerCodeInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -296,8 +304,9 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
     Object? country = null,
     Object? floor = null,
     Object? houseNumber1 = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_CustomerCodeInfo(
+    return _then(_$CustomerCodeInfoImpl(
       customerCodeSoldTo: null == customerCodeSoldTo
           ? _value.customerCodeSoldTo
           : customerCodeSoldTo // ignore: cast_nullable_to_non_nullable
@@ -361,7 +370,7 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeRegion,
+              as String,
       comboEligible: null == comboEligible
           ? _value.comboEligible
           : comboEligible // ignore: cast_nullable_to_non_nullable
@@ -386,14 +395,18 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
           ? _value.houseNumber1
           : houseNumber1 // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_CustomerCodeInfo extends _CustomerCodeInfo {
-  const _$_CustomerCodeInfo(
+class _$CustomerCodeInfoImpl extends _CustomerCodeInfo {
+  const _$CustomerCodeInfoImpl(
       {required this.customerCodeSoldTo,
       required this.customerName,
       required this.customerAddress,
@@ -415,7 +428,8 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
       required this.telephoneNumber,
       required this.country,
       required this.floor,
-      required this.houseNumber1})
+      required this.houseNumber1,
+      required this.isMarketPlace})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
         _emailAddresses = emailAddresses,
@@ -471,7 +485,7 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
   @override
   final CustomerGrp4 customerGrp4;
   @override
-  final CustomerCodeRegion region;
+  final String region;
   @override
   final bool comboEligible;
   final List<SalesDealNumber> _salesDeals;
@@ -490,17 +504,19 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
   final String floor;
   @override
   final String houseNumber1;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, division: $division, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTerm: $paymentTerm, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, emailAddresses: $emailAddresses, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, comboEligible: $comboEligible, salesDeals: $salesDeals, telephoneNumber: $telephoneNumber, country: $country, floor: $floor, houseNumber1: $houseNumber1)';
+    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, division: $division, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTerm: $paymentTerm, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, emailAddresses: $emailAddresses, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, comboEligible: $comboEligible, salesDeals: $salesDeals, telephoneNumber: $telephoneNumber, country: $country, floor: $floor, houseNumber1: $houseNumber1, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerCodeInfo &&
+            other is _$CustomerCodeInfoImpl &&
             (identical(other.customerCodeSoldTo, customerCodeSoldTo) ||
                 other.customerCodeSoldTo == customerCodeSoldTo) &&
             (identical(other.customerName, customerName) ||
@@ -540,7 +556,9 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
             (identical(other.country, country) || other.country == country) &&
             (identical(other.floor, floor) || other.floor == floor) &&
             (identical(other.houseNumber1, houseNumber1) ||
-                other.houseNumber1 == houseNumber1));
+                other.houseNumber1 == houseNumber1) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
@@ -567,14 +585,16 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
         telephoneNumber,
         country,
         floor,
-        houseNumber1
+        houseNumber1,
+        isMarketPlace
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerCodeInfoCopyWith<_$_CustomerCodeInfo> get copyWith =>
-      __$$_CustomerCodeInfoCopyWithImpl<_$_CustomerCodeInfo>(this, _$identity);
+  _$$CustomerCodeInfoImplCopyWith<_$CustomerCodeInfoImpl> get copyWith =>
+      __$$CustomerCodeInfoImplCopyWithImpl<_$CustomerCodeInfoImpl>(
+          this, _$identity);
 }
 
 abstract class _CustomerCodeInfo extends CustomerCodeInfo {
@@ -594,13 +614,14 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
       required final List<EmailAddress> emailAddresses,
       required final CustomerAttr7 customerAttr7,
       required final CustomerGrp4 customerGrp4,
-      required final CustomerCodeRegion region,
+      required final String region,
       required final bool comboEligible,
       required final List<SalesDealNumber> salesDeals,
       required final PhoneNumber telephoneNumber,
       required final String country,
       required final String floor,
-      required final String houseNumber1}) = _$_CustomerCodeInfo;
+      required final String houseNumber1,
+      required final bool isMarketPlace}) = _$CustomerCodeInfoImpl;
   const _CustomerCodeInfo._() : super._();
 
   @override
@@ -634,7 +655,7 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
   @override
   CustomerGrp4 get customerGrp4;
   @override
-  CustomerCodeRegion get region;
+  String get region;
   @override
   bool get comboEligible;
   @override
@@ -648,7 +669,9 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
   @override
   String get houseNumber1;
   @override
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_CustomerCodeInfoCopyWith<_$_CustomerCodeInfo> get copyWith =>
+  _$$CustomerCodeInfoImplCopyWith<_$CustomerCodeInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

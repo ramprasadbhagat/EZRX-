@@ -13,9 +13,12 @@ import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_
 import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_search_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/mock_other.dart';
 
 class CustomerCodeLocalDataSourceMock extends Mock
     implements CustomerCodeLocalDataSource {}
@@ -41,6 +44,8 @@ void main() {
   late AccountSelectorStorage accountSelectorStorageMock;
   late CustomerCodeLocalDataSource customerCodeLocalDataSourceMock;
   late CustomerCodeRemoteDataSource customerCodeRemoteDataSourceMock;
+  late DeviceStorage deviceStorage;
+  const fakeMarket = 'fake-market';
 
   setUpAll(() async {
     configMock = ConfigMock();
@@ -69,15 +74,18 @@ void main() {
         type: RoleType('internal_sales_rep'),
       ),
     );
+    deviceStorage = DeviceStorageMock();
 
     customerCodeRepository = CustomerCodeRepository(
       config: configMock,
       accountSelectorStorage: accountSelectorStorageMock,
       remoteDataSource: customerCodeRemoteDataSourceMock,
       localCustomerCodeDataSource: customerCodeLocalDataSourceMock,
+      deviceStorage: deviceStorage,
     );
 
     registerFallbackValue(AccountSelectorStorageDto.empty());
+    when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
   });
 
   group('CustomerCode Repository Test', () {
@@ -384,6 +392,7 @@ void main() {
           hideCustomer: hideCustomer,
           offset: offset,
           pageSize: pageSize,
+          market: fakeMarket,
         ),
       ).thenAnswer(
         (invocation) async => CustomerInformation.empty().copyWith(
@@ -401,6 +410,7 @@ void main() {
           hideCustomer: hideCustomer,
           offset: offset,
           pageSize: pageSize,
+          market: fakeMarket,
         ),
       ).thenAnswer(
         (invocation) async => CustomerInformation.empty().copyWith(
@@ -418,6 +428,7 @@ void main() {
           hideCustomer: hideCustomer,
           offset: offset,
           pageSize: pageSize,
+          market: fakeMarket,
         ),
       ).thenAnswer(
         (invocation) async => CustomerInformation.empty().copyWith(
@@ -457,6 +468,7 @@ void main() {
           hideCustomer: hideCustomer,
           offset: offset,
           pageSize: pageSize,
+          market: fakeMarket,
         ),
       ).thenAnswer(
         (invocation) async => CustomerInformation.empty().copyWith(
@@ -474,6 +486,7 @@ void main() {
           hideCustomer: hideCustomer,
           offset: offset,
           pageSize: pageSize,
+          market: fakeMarket,
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -484,6 +497,7 @@ void main() {
           hideCustomer: hideCustomer,
           offset: offset,
           pageSize: pageSize,
+          market: fakeMarket,
         ),
       ).thenAnswer(
         (invocation) async => CustomerInformation.empty().copyWith(

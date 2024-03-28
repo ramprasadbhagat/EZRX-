@@ -12,7 +12,7 @@ part of 'ship_to_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ShipToInfo {
@@ -27,7 +27,7 @@ mixin _$ShipToInfo {
   String get postalCode => throw _privateConstructorUsedError;
   String get houseNumber1 => throw _privateConstructorUsedError;
   String get telephoneNumber => throw _privateConstructorUsedError;
-  CustomerCodeRegion get region => throw _privateConstructorUsedError;
+  String get region => throw _privateConstructorUsedError;
   String get floor => throw _privateConstructorUsedError;
   String get plant => throw _privateConstructorUsedError;
   String get targetCustomerType => throw _privateConstructorUsedError;
@@ -58,7 +58,7 @@ abstract class $ShipToInfoCopyWith<$Res> {
       String postalCode,
       String houseNumber1,
       String telephoneNumber,
-      CustomerCodeRegion region,
+      String region,
       String floor,
       String plant,
       String targetCustomerType,
@@ -150,7 +150,7 @@ class _$ShipToInfoCopyWithImpl<$Res, $Val extends ShipToInfo>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeRegion,
+              as String,
       floor: null == floor
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
@@ -196,11 +196,11 @@ class _$ShipToInfoCopyWithImpl<$Res, $Val extends ShipToInfo>
 }
 
 /// @nodoc
-abstract class _$$_ShipToInfoCopyWith<$Res>
+abstract class _$$ShipToInfoImplCopyWith<$Res>
     implements $ShipToInfoCopyWith<$Res> {
-  factory _$$_ShipToInfoCopyWith(
-          _$_ShipToInfo value, $Res Function(_$_ShipToInfo) then) =
-      __$$_ShipToInfoCopyWithImpl<$Res>;
+  factory _$$ShipToInfoImplCopyWith(
+          _$ShipToInfoImpl value, $Res Function(_$ShipToInfoImpl) then) =
+      __$$ShipToInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -215,7 +215,7 @@ abstract class _$$_ShipToInfoCopyWith<$Res>
       String postalCode,
       String houseNumber1,
       String telephoneNumber,
-      CustomerCodeRegion region,
+      String region,
       String floor,
       String plant,
       String targetCustomerType,
@@ -230,11 +230,11 @@ abstract class _$$_ShipToInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ShipToInfoCopyWithImpl<$Res>
-    extends _$ShipToInfoCopyWithImpl<$Res, _$_ShipToInfo>
-    implements _$$_ShipToInfoCopyWith<$Res> {
-  __$$_ShipToInfoCopyWithImpl(
-      _$_ShipToInfo _value, $Res Function(_$_ShipToInfo) _then)
+class __$$ShipToInfoImplCopyWithImpl<$Res>
+    extends _$ShipToInfoCopyWithImpl<$Res, _$ShipToInfoImpl>
+    implements _$$ShipToInfoImplCopyWith<$Res> {
+  __$$ShipToInfoImplCopyWithImpl(
+      _$ShipToInfoImpl _value, $Res Function(_$ShipToInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -259,7 +259,7 @@ class __$$_ShipToInfoCopyWithImpl<$Res>
     Object? licenses = null,
     Object? customerBlock = null,
   }) {
-    return _then(_$_ShipToInfo(
+    return _then(_$ShipToInfoImpl(
       defaultShipToAddress: null == defaultShipToAddress
           ? _value.defaultShipToAddress
           : defaultShipToAddress // ignore: cast_nullable_to_non_nullable
@@ -307,7 +307,7 @@ class __$$_ShipToInfoCopyWithImpl<$Res>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeRegion,
+              as String,
       floor: null == floor
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
@@ -338,8 +338,8 @@ class __$$_ShipToInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ShipToInfo extends _ShipToInfo {
-  const _$_ShipToInfo(
+class _$ShipToInfoImpl extends _ShipToInfo {
+  const _$ShipToInfoImpl(
       {required this.defaultShipToAddress,
       required this.shipToCustomerCode,
       required this.shipToName,
@@ -384,7 +384,7 @@ class _$_ShipToInfo extends _ShipToInfo {
   @override
   final String telephoneNumber;
   @override
-  final CustomerCodeRegion region;
+  final String region;
   @override
   final String floor;
   @override
@@ -410,10 +410,10 @@ class _$_ShipToInfo extends _ShipToInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ShipToInfo &&
+            other is _$ShipToInfoImpl &&
             (identical(other.defaultShipToAddress, defaultShipToAddress) ||
                 other.defaultShipToAddress == defaultShipToAddress) &&
             (identical(other.shipToCustomerCode, shipToCustomerCode) ||
@@ -469,8 +469,8 @@ class _$_ShipToInfo extends _ShipToInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShipToInfoCopyWith<_$_ShipToInfo> get copyWith =>
-      __$$_ShipToInfoCopyWithImpl<_$_ShipToInfo>(this, _$identity);
+  _$$ShipToInfoImplCopyWith<_$ShipToInfoImpl> get copyWith =>
+      __$$ShipToInfoImplCopyWithImpl<_$ShipToInfoImpl>(this, _$identity);
 }
 
 abstract class _ShipToInfo extends ShipToInfo {
@@ -486,13 +486,13 @@ abstract class _ShipToInfo extends ShipToInfo {
       required final String postalCode,
       required final String houseNumber1,
       required final String telephoneNumber,
-      required final CustomerCodeRegion region,
+      required final String region,
       required final String floor,
       required final String plant,
       required final String targetCustomerType,
       required final String country,
       required final List<LicenseInfo> licenses,
-      required final CustomerBlock customerBlock}) = _$_ShipToInfo;
+      required final CustomerBlock customerBlock}) = _$ShipToInfoImpl;
   const _ShipToInfo._() : super._();
 
   @override
@@ -518,7 +518,7 @@ abstract class _ShipToInfo extends ShipToInfo {
   @override
   String get telephoneNumber;
   @override
-  CustomerCodeRegion get region;
+  String get region;
   @override
   String get floor;
   @override
@@ -533,6 +533,6 @@ abstract class _ShipToInfo extends ShipToInfo {
   CustomerBlock get customerBlock;
   @override
   @JsonKey(ignore: true)
-  _$$_ShipToInfoCopyWith<_$_ShipToInfo> get copyWith =>
+  _$$ShipToInfoImplCopyWith<_$ShipToInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

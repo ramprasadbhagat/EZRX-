@@ -1351,7 +1351,7 @@ void main() {
 
     test('return false when role can not access marketplace', () {
       final state = EligibilityState.initial().copyWith(
-        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        customerCodeInfo: fakeMarketPlaceCustomerCode,
         salesOrgConfigs: fakeMYSalesOrgConfigs,
         user: fakeInternalSalesRepUser,
       );
@@ -1361,7 +1361,7 @@ void main() {
 
     test('return true when role can access marketplace', () {
       final state = EligibilityState.initial().copyWith(
-        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        customerCodeInfo: fakeMarketPlaceCustomerCode,
         salesOrgConfigs: fakeMYSalesOrgConfigs,
         user: fakeClientUser,
       );
@@ -1373,7 +1373,7 @@ void main() {
   group('showMarketPlaceProduct getter', () {
     test('return false when marketplace disabled', () {
       final state = EligibilityState.initial().copyWith(
-        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        customerCodeInfo: fakeMarketPlaceCustomerCode,
         salesOrgConfigs: fakeMYSalesOrgConfigs,
         user: fakeInternalSalesRepUser,
       );
@@ -1383,7 +1383,7 @@ void main() {
 
     test('return false when marketplace is enable + user not accept TnC', () {
       final state = EligibilityState.initial().copyWith(
-        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        customerCodeInfo: fakeMarketPlaceCustomerCode,
         salesOrgConfigs: fakeMYSalesOrgConfigs,
         user: fakeClientUser,
       );
@@ -1393,7 +1393,7 @@ void main() {
 
     test('return true when marketplace is enable + user accept TnC', () {
       final state = EligibilityState.initial().copyWith(
-        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        customerCodeInfo: fakeMarketPlaceCustomerCode,
         salesOrgConfigs: fakeMYSalesOrgConfigs,
         user: fakeClientUserAccessMarketPlace,
       );
@@ -1413,7 +1413,7 @@ void main() {
 
     test('return false when accepted normal TnC and marketplace disable', () {
       final state = EligibilityState.initial().copyWith(
-        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        customerCodeInfo: fakeMarketPlaceCustomerCode,
         salesOrgConfigs: fakeMYSalesOrgConfigs,
         user: fakeExternalSalesRepUser.copyWith(acceptPrivacyPolicy: true),
       );
@@ -1425,7 +1425,7 @@ void main() {
         'return false when accepted normal TnC + marketplace enable + acceptance status is accepted/rejected',
         () {
       final state = EligibilityState.initial().copyWith(
-        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        customerCodeInfo: fakeMarketPlaceCustomerCode,
         salesOrgConfigs: fakeMYSalesOrgConfigs,
         user:
             fakeClientUserAccessMarketPlace.copyWith(acceptPrivacyPolicy: true),
@@ -1457,7 +1457,7 @@ void main() {
         'return false when accepted normal TnC + marketplace enable + acceptance status is unknown',
         () {
       final state = EligibilityState.initial().copyWith(
-        shipToInfo: fakeShipToInfoPeninsulaRegion,
+        customerCodeInfo: fakeMarketPlaceCustomerCode,
         salesOrgConfigs: fakeMYSalesOrgConfigs,
         user:
             fakeClientUserAccessMarketPlace.copyWith(acceptPrivacyPolicy: true),

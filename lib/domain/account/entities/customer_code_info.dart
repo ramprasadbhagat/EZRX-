@@ -29,13 +29,14 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required List<EmailAddress> emailAddresses,
     required CustomerAttr7 customerAttr7,
     required CustomerGrp4 customerGrp4,
-    required CustomerCodeRegion region,
+    required String region,
     required bool comboEligible,
     required List<SalesDealNumber> salesDeals,
     required PhoneNumber telephoneNumber,
     required String country,
     required String floor,
     required String houseNumber1,
+    required bool isMarketPlace,
   }) = _CustomerCodeInfo;
 
   factory CustomerCodeInfo.empty() => CustomerCodeInfo(
@@ -66,7 +67,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         billToInfos: <BillToInfo>[],
         customerAttr7: CustomerAttr7(''),
         customerGrp4: CustomerGrp4(''),
-        region: CustomerCodeRegion(''),
+        region: '',
         emailAddresses: <EmailAddress>[],
         comboEligible: false,
         salesDeals: [],
@@ -74,6 +75,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         country: '',
         floor: '',
         houseNumber1: '',
+        isMarketPlace: false,
       );
 
   bool get hasBillToInfo {

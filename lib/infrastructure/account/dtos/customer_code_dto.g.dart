@@ -6,8 +6,9 @@ part of 'customer_code_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CustomerCodeDto _$$_CustomerCodeDtoFromJson(Map<String, dynamic> json) =>
-    _$_CustomerCodeDto(
+_$CustomerCodeDtoImpl _$$CustomerCodeDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CustomerCodeDtoImpl(
       customerCodeSoldTo: json['customerCodeSoldTo'] as String? ?? '',
       name1: json['name1'] as String? ?? '',
       name2: json['name2'] as String? ?? '',
@@ -51,9 +52,12 @@ _$_CustomerCodeDto _$$_CustomerCodeDtoFromJson(Map<String, dynamic> json) =>
       country: json['country'] as String? ?? '',
       floor: json['floor'] as String? ?? '',
       houseNumber1: json['houseNumber1'] as String? ?? '',
+      isMarketPlace:
+          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_CustomerCodeDtoToJson(_$_CustomerCodeDto instance) =>
+Map<String, dynamic> _$$CustomerCodeDtoImplToJson(
+        _$CustomerCodeDtoImpl instance) =>
     <String, dynamic>{
       'customerCodeSoldTo': instance.customerCodeSoldTo,
       'name1': instance.name1,
@@ -86,4 +90,5 @@ Map<String, dynamic> _$$_CustomerCodeDtoToJson(_$_CustomerCodeDto instance) =>
       'country': instance.country,
       'floor': instance.floor,
       'houseNumber1': instance.houseNumber1,
+      'isMarketPlace': instance.isMarketPlace,
     };

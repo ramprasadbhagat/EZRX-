@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/bill_to_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/ship_to_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'customer_code_dto.freezed.dart';
@@ -16,7 +17,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
   const CustomerCodeDto._();
   const factory CustomerCodeDto({
     @JsonKey(name: 'customerCodeSoldTo', defaultValue: '')
-        required String customerCodeSoldTo,
+    required String customerCodeSoldTo,
     @JsonKey(name: 'name1', defaultValue: '') required String name1,
     @JsonKey(name: 'name2', defaultValue: '') required String name2,
     @JsonKey(name: 'name3', defaultValue: '') required String name3,
@@ -30,35 +31,37 @@ class CustomerCodeDto with _$CustomerCodeDto {
     @JsonKey(name: 'city1', defaultValue: '') required String city1,
     @JsonKey(name: 'city2', defaultValue: '') required String city2,
     @JsonKey(name: 'telephoneNumber', defaultValue: '')
-        required String telephoneNumber,
+    required String telephoneNumber,
     @JsonKey(name: 'postalCode', defaultValue: '') required String postalCode,
     @JsonKey(name: 'division', defaultValue: '') required String division,
     @JsonKey(name: 'customerClassification', defaultValue: '')
-        required String customerClassification,
+    required String customerClassification,
     @JsonKey(name: 'customerLocalGroup', defaultValue: '')
-        required String customerLocalGroup,
+    required String customerLocalGroup,
     @JsonKey(name: 'paymentTerm', defaultValue: '') required String paymentTerm,
     @JsonKey(name: 'paymentTermDescription', defaultValue: '')
-        required String paymentTermDescription,
+    required String paymentTermDescription,
     @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[])
-        required List<ShipToDto> shipToInfos,
+    required List<ShipToDto> shipToInfos,
     @JsonKey(name: 'billTo', defaultValue: <BillToDto>[])
-        required List<BillToDto> billToInfos,
+    required List<BillToDto> billToInfos,
     @JsonKey(name: 'customerAttr7', defaultValue: '')
-        required String customerAttr7,
+    required String customerAttr7,
     @JsonKey(name: 'customerGrp4', defaultValue: '')
-        required String customerGrp4,
+    required String customerGrp4,
     @JsonKey(name: 'region', defaultValue: '') required String region,
     @JsonKey(name: 'emailAddresses', defaultValue: [])
-        required List<String> emailAddresses,
+    required List<String> emailAddresses,
     @JsonKey(name: 'comboEligible', defaultValue: false)
-        required bool comboEligible,
+    required bool comboEligible,
     @JsonKey(name: 'salesDeals', defaultValue: [])
-        required List<String> salesDeals,
+    required List<String> salesDeals,
     @JsonKey(name: 'country', defaultValue: '') required String country,
     @JsonKey(name: 'floor', defaultValue: '') required String floor,
     @JsonKey(name: 'houseNumber1', defaultValue: '')
-        required String houseNumber1,
+    required String houseNumber1,
+    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    required bool isMarketPlace,
   }) = _CustomerCodeDto;
 
   CustomerCodeInfo toDomain() {
@@ -90,7 +93,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
       billToInfos: billToInfos.map((e) => e.toDomain()).toList(),
       customerAttr7: CustomerAttr7(customerAttr7),
       customerGrp4: CustomerGrp4(customerGrp4),
-      region: CustomerCodeRegion(region),
+      region: region,
       emailAddresses: emailAddresses.map((e) => EmailAddress(e)).toList(),
       comboEligible: comboEligible,
       salesDeals: salesDeals.map((e) => SalesDealNumber(e)).toList(),
@@ -98,6 +101,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
       country: country,
       floor: floor,
       houseNumber1: houseNumber1,
+      isMarketPlace: isMarketPlace,
     );
   }
 

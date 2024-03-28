@@ -8,19 +8,22 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_information_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_search_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
 class CustomerCodeRemoteDataSource {
-  HttpService httpService;
-  CustomerCodeQueryMutation customerCodeQueryMutation;
-  DataSourceExceptionHandler dataSourceExceptionHandler;
-  Config config;
+  final HttpService httpService;
+  final CustomerCodeQueryMutation customerCodeQueryMutation;
+  final DataSourceExceptionHandler dataSourceExceptionHandler;
+  final Config config;
+  final RemoteConfigService remoteConfigService;
 
   CustomerCodeRemoteDataSource({
     required this.httpService,
     required this.customerCodeQueryMutation,
     required this.dataSourceExceptionHandler,
     required this.config,
+    required this.remoteConfigService,
   });
 
   Future<CustomerInformation> getCustomerCodeList({
@@ -29,10 +32,13 @@ class CustomerCodeRemoteDataSource {
     required bool hideCustomer,
     required int pageSize,
     required int offset,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(
       () async {
-        final queryData = customerCodeQueryMutation.getCustomerInfoBySearch();
+        final queryData = customerCodeQueryMutation.getCustomerInfoBySearch(
+          remoteConfigService.enableMarketPlaceMarkets.contains(market),
+        );
 
         final variables = {
           'searchKey': customerCode,

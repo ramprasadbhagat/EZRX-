@@ -692,7 +692,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeMYSalesOrgConfigs,
-          shipToInfo: fakeShipToInfoPeninsulaRegion,
+          customerCodeInfo: fakeMarketPlaceCustomerCode,
           user: fakeClientUserAccessMarketPlace,
         ),
       );
@@ -792,7 +792,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeMYSalesOrgConfigs,
-          shipToInfo: fakeShipToInfoPeninsulaRegion,
+          customerCodeInfo: fakeMarketPlaceCustomerCode,
           user: fakeClientUserAccessMarketPlace,
         ),
       );
@@ -868,7 +868,7 @@ void main() {
       );
     });
 
-      testWidgets(
+    testWidgets(
       ' -> Find edi if customer info status is edi',
       (WidgetTester tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
@@ -882,7 +882,8 @@ void main() {
         final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
         final ediBannerTitle = find.text('You are an EDI customer.');
         final ediBannerSubTitle = find.text(
-            'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',);
+          'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+        );
         expect(ediBanner, findsOneWidget);
         expect(ediBannerTitle, findsOneWidget);
         expect(ediBannerSubTitle, findsOneWidget);
@@ -903,7 +904,8 @@ void main() {
         final ediBanner = find.byKey(WidgetKeys.ediUserBanner);
         final ediBannerTitle = find.text('You are an EDI customer.');
         final ediBannerSubTitle = find.text(
-            'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',);
+          'Ordering is disabled on eZRx+, please place your orders through the EDI system only.',
+        );
         expect(ediBanner, findsNothing);
         expect(ediBannerTitle, findsNothing);
         expect(ediBannerSubTitle, findsNothing);

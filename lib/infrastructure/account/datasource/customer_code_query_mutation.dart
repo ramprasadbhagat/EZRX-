@@ -1,6 +1,6 @@
 class CustomerCodeQueryMutation {
   // Query for fetching the customer information by search
-  String getCustomerInfoBySearch() {
+  String getCustomerInfoBySearch(bool enableMarketplace) {
     return '''
 query customerInformationSearch(
   \$salesOrganisation: String!
@@ -42,6 +42,7 @@ query customerInformationSearch(
       city1
       city2
       status
+      ${enableMarketplace ? 'isMarketPlace' : ''}
       shipTo {
         defaultShipToAddress
         shipToCustomerCode

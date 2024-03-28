@@ -585,19 +585,6 @@ class CustomerBlock extends ValueObject<String> {
   const CustomerBlock._(this.value);
 }
 
-class CustomerCodeRegion extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory CustomerCodeRegion(String input) =>
-      CustomerCodeRegion._(validateStringNotEmpty(input));
-
-  bool get enableMarketPlace =>
-      isRegionEnableMarketPlace(value.getOrElse(() => ''));
-
-  const CustomerCodeRegion._(this.value);
-}
-
 class MarketPlaceTnCAcceptance extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

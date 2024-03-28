@@ -14,9 +14,9 @@ class ShipToDto with _$ShipToDto {
   const ShipToDto._();
   const factory ShipToDto({
     @JsonKey(name: 'shipToCustomerCode', defaultValue: '')
-        required String shipToCustomerCode,
+    required String shipToCustomerCode,
     @JsonKey(name: 'defaultShipToAddress', defaultValue: true)
-        required bool defaultShipToAddress,
+    required bool defaultShipToAddress,
     @JsonKey(name: 'name1', defaultValue: '') required String name1,
     @JsonKey(name: 'name2', defaultValue: '') required String name2,
     @JsonKey(name: 'name3', defaultValue: '') required String name3,
@@ -31,20 +31,20 @@ class ShipToDto with _$ShipToDto {
     @JsonKey(name: 'city1', defaultValue: '') required String city1,
     @JsonKey(name: 'city2', defaultValue: '') required String city2,
     @JsonKey(name: 'telephoneNumber', defaultValue: '')
-        required String telephoneNumber,
+    required String telephoneNumber,
     @JsonKey(name: 'houseNumber1', defaultValue: '')
-        required String houseNumber1,
+    required String houseNumber1,
     @JsonKey(name: 'building', defaultValue: '') required String building,
     @JsonKey(name: 'region', defaultValue: '') required String region,
     @JsonKey(name: 'floor', defaultValue: '') required String floor,
     @JsonKey(name: 'plant', defaultValue: '') required String plant,
     @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
-        required List<LicenseDto> licenseDtoList,
+    required List<LicenseDto> licenseDtoList,
     @JsonKey(name: 'country', defaultValue: '') required String country,
     @JsonKey(name: 'targetCustomerType', defaultValue: '')
-        required String targetCustomerType,
+    required String targetCustomerType,
     @JsonKey(name: 'customerBlock', defaultValue: '')
-        required String customerBlock,
+    required String customerBlock,
   }) = _ShipToDto;
 
   factory ShipToDto.fromDomain(ShipToInfo shipToInfo) {
@@ -67,7 +67,7 @@ class ShipToDto with _$ShipToDto {
       telephoneNumber: shipToInfo.telephoneNumber,
       houseNumber1: shipToInfo.houseNumber1,
       building: shipToInfo.building,
-      region: shipToInfo.region.getOrDefaultValue(''),
+      region: shipToInfo.region,
       floor: shipToInfo.floor,
       plant: shipToInfo.plant,
       licenseDtoList:
@@ -104,7 +104,7 @@ class ShipToDto with _$ShipToDto {
       telephoneNumber: telephoneNumber,
       houseNumber1: houseNumber1,
       building: building,
-      region: CustomerCodeRegion(region),
+      region: region,
       floor: floor,
       plant: plant,
       licenses: licenseDtoList.isNotEmpty

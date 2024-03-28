@@ -161,7 +161,7 @@ void main() {
           when(() => mockEligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeMYSalesOrgConfigs,
-              shipToInfo: fakeShipToInfoPeninsulaRegion,
+              customerCodeInfo: fakeMarketPlaceCustomerCode,
               user: fakeClientUserAccessMarketPlace,
             ),
           );
@@ -313,7 +313,9 @@ void main() {
           final manufactureList = ['BAXTER HEALTHCARE -M', 'AMO IRELAND'];
           when(() => mockMaterialFilterBloc.state).thenReturn(
             MaterialFilterState.initial().copyWith.materialFilter(
-              manufactureMapOptions: {for (final e in manufactureList) e: false},
+              manufactureMapOptions: {
+                for (final e in manufactureList) e: false,
+              },
             ),
           );
           final expectedState = [
@@ -362,19 +364,21 @@ void main() {
       testWidgets(
         'Filter by manufacturers & sellers option is visible when eligible for marketplace',
         (tester) async {
-              await tester.binding.setSurfaceSize(const Size(480, 900));
-        tester.view.devicePixelRatio = 1;
+          await tester.binding.setSurfaceSize(const Size(480, 900));
+          tester.view.devicePixelRatio = 1;
           final manufactureList = ['BAXTER HEALTHCARE -M', 'AMO IRELAND'];
           when(() => mockEligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeMYSalesOrgConfigs,
-              shipToInfo: fakeShipToInfoPeninsulaRegion,
+              customerCodeInfo: fakeMarketPlaceCustomerCode,
               user: fakeClientUserAccessMarketPlace,
             ),
           );
           when(() => mockMaterialFilterBloc.state).thenReturn(
             MaterialFilterState.initial().copyWith.materialFilter(
-              manufactureMapOptions: {for (final e in manufactureList) e: false},
+              manufactureMapOptions: {
+                for (final e in manufactureList) e: false,
+              },
             ),
           );
 

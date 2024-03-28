@@ -315,7 +315,7 @@ class EligibilityState with _$EligibilityState {
 
   bool get isMarketPlaceEnabled {
     if (!salesOrgConfigs.enableMarketPlace) return false;
-    if (!shipToInfo.region.enableMarketPlace) return false;
+    if (!customerCodeInfo.isMarketPlace) return false;
     if (!user.role.type.canAccessMarketPlace) return false;
 
     return true;

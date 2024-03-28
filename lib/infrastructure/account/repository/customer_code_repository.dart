@@ -15,18 +15,21 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remot
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_search_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 
 class CustomerCodeRepository implements ICustomerCodeRepository {
   final Config config;
   final CustomerCodeRemoteDataSource remoteDataSource;
   final CustomerCodeLocalDataSource localCustomerCodeDataSource;
   final AccountSelectorStorage accountSelectorStorage;
+  final DeviceStorage deviceStorage;
 
   CustomerCodeRepository({
     required this.config,
     required this.remoteDataSource,
     required this.localCustomerCodeDataSource,
     required this.accountSelectorStorage,
+    required this.deviceStorage,
   });
 
   @override
@@ -73,6 +76,7 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
                     hideCustomer: hideCustomer,
                     pageSize: pageSize,
                     offset: offset,
+                    market: deviceStorage.currentMarket(),
                   );
             futureResults.add(response.soldToInformation);
             shipToCount += response.shipToCount;

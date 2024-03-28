@@ -1674,39 +1674,6 @@ void main() {
     );
   });
 
-  group('Customer Code Region value object', () {
-    test('enableMarketPlace should return true when region code is valid', () {
-      final validRegion = [
-        'JOH',
-        'KED',
-        'KEL',
-        'KUL',
-        'MEL',
-        'PAH',
-        'PEL',
-        'PER',
-        'PIN',
-        'PSK',
-        'SEL',
-        'SER',
-        'TRE',
-      ];
-
-      for (final region in validRegion) {
-        expect(CustomerCodeRegion(region).enableMarketPlace, true);
-      }
-    });
-
-    test('enableMarketPlace should return false when region code is invalid',
-        () {
-      final invalidRegion = ['', 'TEST'];
-
-      for (final region in invalidRegion) {
-        expect(CustomerCodeRegion(region).enableMarketPlace, false);
-      }
-    });
-  });
-
   group('MarketPlaceTCAcceptance value object', () {
     test('isUnknown getter', () {
       expect(MarketPlaceTnCAcceptance('0').isUnknown, true);

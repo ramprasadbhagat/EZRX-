@@ -32,6 +32,7 @@
                         "mintharam234567@outlook.com"
                     ],
                     "country": "MY",
+                    "isMarketPlace": false,
                     "shipTo": [
                         {
                             "defaultShipToAddress": false,
@@ -1318,6 +1319,7 @@
                     "city1": "PETALINGx",
                     "city2": "PETALING JAYAx",
                     "status": "",
+                    "isMarketPlace": true,
                     "shipTo": [
                         {
                             "defaultShipToAddress": true,

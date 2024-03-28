@@ -624,22 +624,3 @@ double countrySmallOrderThreshold(String country) {
 bool checkIfCustomerIsBlocked(String value) => value == 'blocked';
 
 bool salesOrgIsPhMdi(String salesOrg) => salesOrg == '2501';
-
-List<String> _peninsulaMalaysiaRegion = [
-  'JOH',
-  'KED',
-  'KEL',
-  'KUL',
-  'MEL',
-  'PAH',
-  'PEL',
-  'PER',
-  'PIN',
-  'PSK',
-  'SEL',
-  'SER',
-  'TRE',
-];
-
-bool isRegionEnableMarketPlace(String region) =>
-    [..._peninsulaMalaysiaRegion].contains(region);
