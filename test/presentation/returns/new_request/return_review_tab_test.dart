@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
@@ -523,7 +524,7 @@ void main() {
 
     testWidgets(' => display Override Price for return material item',
         (WidgetTester tester) async {
-                await tester.binding.setSurfaceSize(const Size(600, 900));
+      await tester.binding.setSurfaceSize(const Size(600, 900));
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
           selectedItems: [fakeReturnMaterial],
@@ -1112,5 +1113,22 @@ void main() {
         },
       );
     });
+  });
+  testWidgets(
+      ' => display Market place icon and seller name if contains MP items',
+      (WidgetTester tester) async {
+    when(() => newRequestBlocMock.state).thenReturn(
+      NewRequestState.initial().copyWith(
+        selectedItems: [
+          fakeReturnMaterial.copyWith(
+            isMarketPlace: true,
+          ),
+        ],
+      ),
+    );
+
+    await tester.pumpWidget(getScopedWidget());
+    await tester.pumpAndSettle();
+    expect(find.byType(MarketPlaceSellerTitle), findsOneWidget);
   });
 }

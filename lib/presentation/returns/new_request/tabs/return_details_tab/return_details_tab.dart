@@ -57,8 +57,7 @@ class ReturnDetailsTab extends StatelessWidget {
           ),
           child: Column(
             children: [
-              if (state.selectedItems.isNotEmpty &&
-                  state.selectedItems.first.isMarketPlace)
+              if (state.containsMPItems)
                 Padding(
                   padding: const EdgeInsets.only(top: 16, bottom: 5),
                   child: Row(

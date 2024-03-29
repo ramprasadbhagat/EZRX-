@@ -6,7 +6,7 @@ class _AdditionInfoSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16.0),
+      margin: const EdgeInsets.symmetric(vertical: 12.0),
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
       color: ZPColors.primary,
       width: double.infinity,
@@ -34,7 +34,6 @@ class _AdditionInfoSummary extends StatelessWidget {
                           style:
                               Theme.of(context).textTheme.labelMedium?.copyWith(
                                     color: ZPColors.white,
-                                    decoration: TextDecoration.underline,
                                   ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {

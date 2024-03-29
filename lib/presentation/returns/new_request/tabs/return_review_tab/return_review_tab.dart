@@ -51,7 +51,7 @@ class ReturnReviewTab extends StatelessWidget {
               children: [
                 if (state.containsMPItems)
                   Padding(
-                    padding: const EdgeInsets.only(top: 16, bottom: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Row(
                       children: [
                         const MarketPlaceRectangleLogo(),

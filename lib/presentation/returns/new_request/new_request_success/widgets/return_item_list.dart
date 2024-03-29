@@ -21,6 +21,22 @@ class _ReturnItemList extends StatelessWidget {
                     ),
               ),
               const SizedBox(height: 12),
+              if (state.containsMPItems)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    children: [
+                      const MarketPlaceRectangleLogo(),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: MarketPlaceSellerTitle(
+                          sellerName:
+                              state.selectedItems.first.principalName.name,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ...state.selectedItems
                   .map(
                     (e) => e.balanceQuantity.isGreaterThanZero
