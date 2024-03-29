@@ -53,6 +53,7 @@ query Cart($language: String) {
         principalName
         materialNumber
         materialDescription
+        defaultMaterialDescription
         productCount
         Type
       }

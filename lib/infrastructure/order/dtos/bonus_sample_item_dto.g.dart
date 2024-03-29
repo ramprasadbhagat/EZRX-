@@ -13,6 +13,8 @@ _$_BonusSampleItemDto _$$_BonusSampleItemDtoFromJson(
       qty: json['productCount'] as int? ?? 0,
       principalName: json['principalName'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
+      defaultMaterialDescription:
+          json['defaultMaterialDescription'] as String? ?? '',
       principalCode: json['principalCode'] as String? ?? '',
       itemId: json['itemId'] as String? ?? '',
       type: json['type'] as String? ?? '',
@@ -25,6 +27,7 @@ Map<String, dynamic> _$$_BonusSampleItemDtoToJson(
       'productCount': instance.qty,
       'principalName': instance.principalName,
       'materialDescription': instance.materialDescription,
+      'defaultMaterialDescription': instance.defaultMaterialDescription,
       'principalCode': instance.principalCode,
       'itemId': instance.itemId,
       'type': instance.type,

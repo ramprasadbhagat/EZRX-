@@ -16,14 +16,16 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
   const BonusSampleItemDto._();
   const factory BonusSampleItemDto({
     @JsonKey(name: 'materialNumber', defaultValue: '')
-        required String materialNumber,
+    required String materialNumber,
     @JsonKey(name: 'productCount', defaultValue: 0) required int qty,
     @JsonKey(name: 'principalName', defaultValue: '')
-        required String principalName,
+    required String principalName,
     @JsonKey(name: 'materialDescription', defaultValue: '')
-        required String materialDescription,
+    required String materialDescription,
+    @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+    required String defaultMaterialDescription,
     @JsonKey(name: 'principalCode', defaultValue: '')
-        required String principalCode,
+    required String principalCode,
     @JsonKey(name: 'itemId', defaultValue: '') required String itemId,
     @JsonKey(name: 'type', defaultValue: '') required String type,
   }) = _BonusSampleItemDto;
@@ -31,7 +33,9 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
   BonusSampleItem toDomain() {
     return BonusSampleItem(
       qty: MaterialQty(qty),
-      materialDescription: materialDescription,
+      materialDescription: materialDescription.isNotEmpty
+          ? materialDescription
+          : defaultMaterialDescription,
       materialNumber: MaterialNumber(materialNumber),
       principalData: PrincipalData(
         principalCode: PrincipalCode(principalCode),
@@ -52,6 +56,7 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
       principalName: bonus.principalData.principalName.getOrCrash(),
       itemId: bonus.itemId.getOrCrash(),
       type: bonus.type.getOrCrash(),
+      defaultMaterialDescription: '',
     );
   }
 

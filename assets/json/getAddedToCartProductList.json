@@ -54,7 +54,8 @@
               "principalCode": "0000101334",
               "principalName": "GLAXOSMITHKLINE CONSUMER",
               "materialNumber": "000000000021041790",
-              "materialDescription": "190 BREATH RIGHT KIDS 1 2'S-6",
+              "materialDescription": "",
+              "defaultMaterialDescription":"190 BREATH RIGHT KIDS 1 2'S-6",
               "productCount": 2,
               "ItemId": "141638",
               "Type": "Deals"
@@ -64,6 +65,7 @@
               "principalName": "GLAXOSMITHKLINE CONSUMER",
               "materialNumber": "000000000021041821",
               "materialDescription": "190 NIQUITIN MINT LOZENGES2MG",
+              "defaultMaterialDescription":"190 BREATH RIGHT KIDS 1 2'S-6",
               "productCount": 1,
               "ItemId": "176834",
               "Type": "Bonus"

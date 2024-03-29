@@ -73,10 +73,13 @@ void main() async {
               delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
-            data: jsonEncode({
-              'query': remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
-              'variables': {'language': fakeLanguage},
-            },),
+            data: jsonEncode(
+              {
+                'query':
+                    remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
+                'variables': {'language': fakeLanguage},
+              },
+            ),
           );
 
           final result = await remoteDataSource.getAddedToCartProductList(
@@ -88,6 +91,39 @@ void main() async {
             result,
             CartDto.fromJson(makeResponseCamelCase(jsonEncode(finalData)))
                 .toDomain(),
+          );
+        },
+      );
+
+      test(
+        'Find default material description if material description is empty for bonus materials',
+        () async {
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              getAddedToCartProductListJson,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode(
+              {
+                'query':
+                    remoteDataSource.cartQueryMutation.cart(fakeConfigValue),
+                'variables': {'language': fakeLanguage},
+              },
+            ),
+          );
+
+          final result = await remoteDataSource.getAddedToCartProductList(
+            market: fakeMarket,
+            language: fakeLanguage,
+          );
+
+          expect(
+            result
+                .cartProducts.first.bonusSampleItems.first.materialDescription,
+            "190 BREATH RIGHT KIDS 1 2'S-6",
           );
         },
       );

@@ -192,6 +192,7 @@ class CartQueryMutation {
         principalName
         materialNumber
         materialDescription
+        defaultMaterialDescription
         productCount
         ItemId
         Type
@@ -616,6 +617,7 @@ class CartQueryMutation {
             ItemId
             materialNumber
             materialDescription
+            defaultMaterialDescription
             productCount
             Type
           }
@@ -1145,6 +1147,7 @@ fragment ezrxItemsFields on Item {
     principalName
     materialNumber
     materialDescription
+    defaultMaterialDescription
     productCount
     ProductID
     ItemId
