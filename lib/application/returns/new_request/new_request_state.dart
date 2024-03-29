@@ -50,6 +50,9 @@ class NewRequestState with _$NewRequestState {
             details.balanceQty.getOrDefaultValue(0),
       );
 
+  bool get containsMPItems =>
+      selectedItems.any((element) => element.isMarketPlace);
+
   List<ReturnItemDetails> get allItemDetails =>
       invoiceDetails.expand((e) => e.returnItemDetailsList).toList();
 

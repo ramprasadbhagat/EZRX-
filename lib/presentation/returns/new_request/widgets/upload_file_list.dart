@@ -33,7 +33,7 @@ class UploadedFileList extends StatelessWidget {
               keyTextStyle: Theme.of(context).textTheme.titleSmall,
               keyFlex: 2,
               valueFlex: 3,
-              valueText: uploadedFiles.isEmpty ? '-' : '',
+              valueText: uploadedFiles.isEmpty ? 'N/A' : '',
             ),
             ...uploadedFiles
                 .map(
@@ -48,8 +48,8 @@ class UploadedFileList extends StatelessWidget {
                         (failure) =>
                             ErrorUtils.handleApiFailure(context, failure),
                         (success) => CustomSnackBar(
-                          messageText:
-                              context.tr('Attachments downloaded successfully.'),
+                          messageText: context
+                              .tr('Attachments downloaded successfully.'),
                         ).show(context),
                       ),
                     ),
