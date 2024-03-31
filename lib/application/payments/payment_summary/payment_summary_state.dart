@@ -18,16 +18,11 @@ class PaymentSummaryState with _$PaymentSummaryState {
         salesOrganization: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         failureOrSuccessOption: none(),
-        appliedFilter: PaymentSummaryFilter.empty(),
+        appliedFilter: PaymentSummaryFilter.defaultFilter(),
         searchKey: SearchKey.searchFilter(''),
         isFetching: false,
         canLoadMore: true,
         details: <PaymentSummaryDetails>[],
-      );
-
-  PaymentSummaryFilter get appliedFilterForSearch => appliedFilter.copyWith(
-        createdDateFrom: DateTimeStringValue(''),
-        createdDateTo: DateTimeStringValue(''),
       );
 
   bool get includeInprogressPayment =>

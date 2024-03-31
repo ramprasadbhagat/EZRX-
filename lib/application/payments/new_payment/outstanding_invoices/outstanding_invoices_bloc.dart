@@ -34,7 +34,7 @@ class OutstandingInvoicesBloc
         OutstandingInvoicesState.initial().copyWith(
           salesOrganisation: event.salesOrganisation,
           customerCodeInfo: event.customerCodeInfo,
-          appliedFilter: OutstandingInvoiceFilter.init(),
+          appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
         ),
       );
     });

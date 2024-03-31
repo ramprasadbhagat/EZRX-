@@ -22,7 +22,7 @@ void main() {
   });
 
   setUp(() {
-    paymentSummaryFilter = PaymentSummaryFilter.empty();
+    paymentSummaryFilter = PaymentSummaryFilter.defaultFilter();
     fakeToDate = DateTime.parse(
       DateFormat('yyyyMMdd').format(
         DateTime.now(),

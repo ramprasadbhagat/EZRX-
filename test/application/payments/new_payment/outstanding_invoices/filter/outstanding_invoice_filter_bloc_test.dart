@@ -18,7 +18,7 @@ void main() {
   });
 
   setUp(() {
-    outstandingInvoiceFilter = OutstandingInvoiceFilter.empty();
+    outstandingInvoiceFilter = OutstandingInvoiceFilter.defaultFilter();
     fakeEndDate = DateTime.parse(
       DateFormat('yyyyMMdd').format(
         DateTime.now(),

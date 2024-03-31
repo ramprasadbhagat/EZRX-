@@ -98,7 +98,8 @@ class InvoiceNumberSection extends StatelessWidget {
                                           context.read<AllInvoicesBloc>().add(
                                                 AllInvoicesEvent.fetch(
                                                   appliedFilter:
-                                                      AllInvoicesFilter.empty()
+                                                      AllInvoicesFilter
+                                                              .defaultFilter()
                                                           .copyWith(
                                                     searchKey:
                                                         SearchKey.searchFilter(

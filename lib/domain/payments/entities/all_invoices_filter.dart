@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,8 +22,31 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
   factory AllInvoicesFilter.empty() => AllInvoicesFilter(
         dueDateFrom: DateTimeStringValue(''),
         dueDateTo: DateTimeStringValue(''),
-        documentDateFrom: DateTimeStringValue(''),
-        documentDateTo: DateTimeStringValue(''),
+        documentDateFrom: DateTimeStringValue(
+        '',
+        ),
+        documentDateTo: DateTimeStringValue(
+         '',
+        ),
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
+        filterStatuses: <String>[],
+        searchKey: SearchKey(''),
+      );
+
+  factory AllInvoicesFilter.defaultFilter() => AllInvoicesFilter(
+        dueDateFrom: DateTimeStringValue(''),
+        dueDateTo: DateTimeStringValue(''),
+        documentDateFrom: DateTimeStringValue(
+          getDateStringByDateTime(
+            DateTime.now().subtract(
+              const Duration(days: 90),
+            ),
+          ),
+        ),
+        documentDateTo: DateTimeStringValue(
+          getDateStringByDateTime(DateTime.now()),
+        ),
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         filterStatuses: <String>[],

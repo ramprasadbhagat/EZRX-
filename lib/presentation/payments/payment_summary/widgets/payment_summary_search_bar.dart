@@ -19,27 +19,36 @@ class _PaymentSummarySearchBar extends StatelessWidget {
           hintText: 'Search by payment advice / voucher no.',
           enabled: !state.isFetching,
           initialValue: state.searchKey.searchValueOrEmpty,
-          onSearchChanged: (value) => context.read<PaymentSummaryBloc>().add(
-                PaymentSummaryEvent.fetch(
-                  appliedFilter: state.appliedFilterForSearch,
-                  searchKey: SearchKey.searchFilter(value),
-                ),
-              ),
-          onSearchSubmitted: (value) => context.read<PaymentSummaryBloc>().add(
-                PaymentSummaryEvent.fetch(
-                  appliedFilter: state.appliedFilterForSearch,
-                  searchKey: SearchKey.searchFilter(value),
-                ),
-              ),
+          onSearchChanged: (value) => _fetchPaymentSummary(
+            searchValue: value,
+            context: context,
+          ),
+          onSearchSubmitted: (value) => _fetchPaymentSummary(
+            searchValue: value,
+            context: context,
+          ),
           customValidator: (value) => SearchKey.searchFilter(value).isValid(),
-          onClear: () => context.read<PaymentSummaryBloc>().add(
-                PaymentSummaryEvent.fetch(
-                  appliedFilter: state.appliedFilterForSearch,
-                  searchKey: SearchKey.searchFilter(''),
-                ),
-              ),
+          onClear: () => _fetchPaymentSummary(
+            searchValue: '',
+            context: context,
+          ),
         );
       },
     );
+  }
+
+  void _fetchPaymentSummary({
+    required String searchValue,
+    required BuildContext context,
+  }) {
+    final appliedFilter = searchValue.isEmpty
+        ? PaymentSummaryFilter.defaultFilter()
+        : PaymentSummaryFilter.empty();
+    context.read<PaymentSummaryBloc>().add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: appliedFilter,
+            searchKey: SearchKey.searchFilter(searchValue),
+          ),
+        );
   }
 }

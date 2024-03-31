@@ -60,7 +60,7 @@ void main() {
         ),
         expect: () => [
           AvailableCreditFilterState.initial().copyWith(
-            filter: AvailableCreditFilter.init().copyWith(
+            filter: AvailableCreditFilter.defaultFilter().copyWith(
               amountValueFrom: RangeValue('10'),
             ),
           ),
@@ -74,7 +74,7 @@ void main() {
             .add(const AvailableCreditFilterEvent.setAmountTo(amountTo: '100')),
         expect: () => [
           AvailableCreditFilterState.initial().copyWith(
-            filter: AvailableCreditFilter.init().copyWith(
+            filter: AvailableCreditFilter.defaultFilter().copyWith(
               amountValueTo: RangeValue('100'),
             ),
           ),
@@ -85,7 +85,7 @@ void main() {
         'For "setValidationFailure" Event with Failure',
         build: () => AvailableCreditFilterBloc(),
         seed: () => AvailableCreditFilterState.initial().copyWith(
-          filter: AvailableCreditFilter.empty().copyWith(
+          filter: AvailableCreditFilter.defaultFilter().copyWith(
             amountValueFrom: RangeValue('100'),
             amountValueTo: RangeValue('10'),
           ),
@@ -94,7 +94,7 @@ void main() {
             bloc.add(const AvailableCreditFilterEvent.setValidationFailure()),
         expect: () => [
           AvailableCreditFilterState.initial().copyWith(
-            filter: AvailableCreditFilter.empty().copyWith(
+            filter: AvailableCreditFilter.defaultFilter().copyWith(
               amountValueFrom: RangeValue('100'),
               amountValueTo: RangeValue('10'),
             ),

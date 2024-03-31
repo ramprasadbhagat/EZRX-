@@ -79,7 +79,8 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
                           controller: _controller,
                           onRefresh: () => context.read<AllInvoicesBloc>().add(
                                 AllInvoicesEvent.fetch(
-                                  appliedFilter: AllInvoicesFilter.empty(),
+                                  appliedFilter:
+                                      AllInvoicesFilter.defaultFilter(),
                                 ),
                               ),
                           onLoadingMore: () =>

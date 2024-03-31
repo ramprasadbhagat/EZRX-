@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
@@ -80,7 +81,8 @@ class AvailableCreditsTab extends StatelessWidget {
                         onRefresh: () {
                           context.read<AvailableCreditsBloc>().add(
                                 AvailableCreditsEvent.fetch(
-                                  appliedFilter: AvailableCreditFilter.empty(),
+                                  appliedFilter:
+                                      AvailableCreditFilter.defaultFilter(),
                                   searchKey: SearchKey.searchFilter(''),
                                 ),
                               );
@@ -155,6 +157,12 @@ class _FilterTune extends StatelessWidget {
   }
 
   void _showFilterPage({required BuildContext context}) {
+        context.read<AvailableCreditFilterBloc>().add(
+          AvailableCreditFilterEvent.updateFilterToLastApplied(
+            lastAppliedFilter:
+                context.read<AvailableCreditsBloc>().state.appliedFilter,
+          ),
+        );
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

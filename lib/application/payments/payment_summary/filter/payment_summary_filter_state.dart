@@ -12,7 +12,7 @@ class PaymentSummaryFilterState with _$PaymentSummaryFilterState {
 
   factory PaymentSummaryFilterState.initial() => PaymentSummaryFilterState(
         salesOrg: SalesOrg(''),
-        filter: PaymentSummaryFilter.empty(),
+        filter: PaymentSummaryFilter.defaultFilter(),
         showErrorMessages: false,
       );
 

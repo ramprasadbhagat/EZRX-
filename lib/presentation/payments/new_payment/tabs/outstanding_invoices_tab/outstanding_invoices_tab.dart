@@ -115,7 +115,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
                           context.read<OutstandingInvoicesBloc>().add(
                                 OutstandingInvoicesEvent.fetch(
                                   appliedFilter:
-                                      OutstandingInvoiceFilter.empty(),
+                                      OutstandingInvoiceFilter.defaultFilter(),
                                   searchKey: state.searchKey,
                                 ),
                               );

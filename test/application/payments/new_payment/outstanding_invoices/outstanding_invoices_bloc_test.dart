@@ -55,7 +55,7 @@ void main() {
   });
 
   setUp(() {
-    fakeOutstandingInvoiceFilter = OutstandingInvoiceFilter.empty();
+    fakeOutstandingInvoiceFilter = OutstandingInvoiceFilter.defaultFilter();
     fakeSearchKey = SearchKey.searchFilter('ab');
     pageSize = config.pageSize;
   });
@@ -80,7 +80,7 @@ void main() {
           OutstandingInvoicesState.initial().copyWith(
             salesOrganisation: mockSalesOrganisation,
             customerCodeInfo: mockCustomerCodeInfo,
-            appliedFilter: OutstandingInvoiceFilter.init(),
+            appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
           ),
         ],
       );

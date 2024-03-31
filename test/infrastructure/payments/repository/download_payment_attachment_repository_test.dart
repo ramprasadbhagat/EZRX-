@@ -51,11 +51,14 @@ void main() {
   late DownloadPaymentAttachment downloadPaymentAttachment;
   late AttachmentFileBuffer attachmentFileBuffer;
   final filterListForInvoice =
-      AllInvoicesFilterDto.fromDomain(AllInvoicesFilter.empty()).toMapList;
+      AllInvoicesFilterDto.fromDomain(AllInvoicesFilter.defaultFilter())
+          .toMapList;
   final filterListForCredits =
-      AllCreditsFilterDto.fromDomain(AllCreditsFilter.empty()).toMapList;
+      AllCreditsFilterDto.fromDomain(AllCreditsFilter.defaultFilter())
+          .toMapList;
   final filterListForFullSummary =
-      FullSummaryFilterDto.fromDomain(FullSummaryFilter.empty()).toMapList;
+      FullSummaryFilterDto.fromDomain(FullSummaryFilter.defaultFilter())
+          .toMapList;
   final fakeError = MockException(message: 'fake-exception');
   final fileMock = FileMock();
 
@@ -94,7 +97,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeSalesOrganisation,
-          queryObject: AllInvoicesFilter.empty(),
+          queryObject: AllInvoicesFilter.defaultFilter(),
         );
         expect(
           result,
@@ -109,7 +112,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeSalesOrganisation,
-          queryObject: AllInvoicesFilter.empty(),
+          queryObject: AllInvoicesFilter.defaultFilter(),
         );
         expect(
           result,
@@ -132,7 +135,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeSalesOrganisation,
-          queryObject: AllInvoicesFilter.empty(),
+          queryObject: AllInvoicesFilter.defaultFilter(),
         );
         expect(
           result,
@@ -155,7 +158,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
-          queryObject: AllInvoicesFilter.empty(),
+          queryObject: AllInvoicesFilter.defaultFilter(),
         );
         expect(
           result,
@@ -175,7 +178,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchAllCreditUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeSalesOrganisation,
-          queryObject: AllCreditsFilter.empty(),
+          queryObject: AllCreditsFilter.defaultFilter(),
         );
         expect(
           result,
@@ -190,7 +193,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchAllCreditUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
-          queryObject: AllCreditsFilter.empty(),
+          queryObject: AllCreditsFilter.defaultFilter(),
         );
         expect(
           result,
@@ -213,7 +216,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchAllCreditUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
-          queryObject: AllCreditsFilter.empty(),
+          queryObject: AllCreditsFilter.defaultFilter(),
         );
         expect(
           result,
@@ -236,7 +239,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchAllCreditUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
-          queryObject: AllCreditsFilter.empty(),
+          queryObject: AllCreditsFilter.defaultFilter(),
         );
         expect(
           result,
@@ -256,7 +259,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
-          queryObject: FullSummaryFilter.empty(),
+          queryObject: FullSummaryFilter.defaultFilter(),
         );
         expect(
           result,
@@ -272,7 +275,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
-          queryObject: FullSummaryFilter.empty(),
+          queryObject: FullSummaryFilter.defaultFilter(),
         );
         expect(
           result,
@@ -295,7 +298,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
-          queryObject: FullSummaryFilter.empty(),
+          queryObject: FullSummaryFilter.defaultFilter(),
         );
         expect(
           result,
@@ -318,7 +321,7 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
-          queryObject: FullSummaryFilter.empty(),
+          queryObject: FullSummaryFilter.defaultFilter(),
         );
         expect(
           result,

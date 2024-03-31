@@ -230,7 +230,7 @@ void main() {
         );
         final expectedStates = [
           OutstandingInvoiceFilterState.initial().copyWith(
-            filter: OutstandingInvoiceFilter.empty().copyWith(
+            filter: OutstandingInvoiceFilter.defaultFilter().copyWith(
               documentDateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               documentDateTo:
@@ -279,7 +279,7 @@ void main() {
         );
         final expectedStates = [
           OutstandingInvoiceFilterState.initial().copyWith(
-            filter: OutstandingInvoiceFilter.empty().copyWith(
+            filter: OutstandingInvoiceFilter.defaultFilter().copyWith(
               documentDateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               documentDateTo:
@@ -328,7 +328,7 @@ void main() {
         );
         final expectedStates = [
           OutstandingInvoiceFilterState.initial().copyWith(
-            filter: OutstandingInvoiceFilter.empty().copyWith(
+            filter: OutstandingInvoiceFilter.defaultFilter().copyWith(
               dueDateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               dueDateTo:
@@ -376,7 +376,7 @@ void main() {
         );
         final expectedStates = [
           OutstandingInvoiceFilterState.initial().copyWith(
-            filter: OutstandingInvoiceFilter.empty().copyWith(
+            filter: OutstandingInvoiceFilter.defaultFilter().copyWith(
               dueDateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               dueDateTo:
@@ -495,7 +495,7 @@ void main() {
 
       when(() => outstandingInvoiceFilterBlocMock.state).thenReturn(
         OutstandingInvoiceFilterState.initial().copyWith(
-          filter: OutstandingInvoiceFilter.empty().copyWith(
+          filter: OutstandingInvoiceFilter.defaultFilter().copyWith(
             amountValueFrom: RangeValue('100'),
             amountValueTo: RangeValue('10'),
           ),

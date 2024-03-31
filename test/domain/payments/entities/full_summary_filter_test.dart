@@ -10,7 +10,7 @@ void main() {
     final documentDateTo = DateTimeStringValue('fake-document-date-to');
     final filterStatuses = ['fake-filter-status'];
     final searchKey = SearchKey('fake-search-key');
-    final fullSummaryFilter = FullSummaryFilter.empty().copyWith(
+    final fullSummaryFilter = FullSummaryFilter.defaultFilter().copyWith(
       dueDateFrom: dueDateFrom,
       dueDateTo: dueDateTo,
       documentDateFrom: documentDateFrom,

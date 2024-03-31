@@ -22,7 +22,7 @@ void main() {
   });
 
   setUp(() {
-    allInvoicesFilter = AllInvoicesFilter.empty();
+    allInvoicesFilter = AllInvoicesFilter.defaultFilter();
     fakeToDate = DateTime.parse(
       DateFormat('yyyyMMdd').format(
         DateTime.now(),

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/full_summary_filter_dto.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -45,6 +46,10 @@ void main() {
     {'field': 'netDueDate', 'value': fakeToDate, 'type': 'le'},
   ];
 
+  final filterFullSummary =
+      FullSummaryFilterDto.fromDomain(FullSummaryFilter.defaultFilter())
+          .toMapList;
+
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     configMock = ConfigMock();
@@ -75,7 +80,7 @@ void main() {
         final result = await allCreditsAndInvoicesRepository.filterInvoices(
           customerCodeInfo: CustomerCodeInfo.empty(),
           salesOrganisation: SalesOrganisation.empty(),
-          filter: AllInvoicesFilter.empty(),
+          filter: AllInvoicesFilter.defaultFilter(),
           pageSize: 1,
           offset: 0,
         );
@@ -93,7 +98,7 @@ void main() {
           customerCodeInfo: CustomerCodeInfo.empty(),
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3500')),
-          filter: AllInvoicesFilter.empty(),
+          filter: AllInvoicesFilter.defaultFilter(),
           pageSize: 1,
           offset: 0,
         );
@@ -118,7 +123,7 @@ void main() {
         final result = await allCreditsAndInvoicesRepository.filterInvoices(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeMYSalesOrganisation,
-          filter: AllInvoicesFilter.empty().copyWith(
+          filter: AllInvoicesFilter.defaultFilter().copyWith(
             dueDateFrom: DateTimeStringValue(fakeFromDate),
             dueDateTo: DateTimeStringValue(fakeToDate),
             documentDateFrom: DateTimeStringValue(fakeFromDate),
@@ -146,7 +151,7 @@ void main() {
           customerCodeInfo: CustomerCodeInfo.empty(),
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3500')),
-          filter: AllInvoicesFilter.empty(),
+          filter: AllInvoicesFilter.defaultFilter(),
           pageSize: 1,
           offset: 0,
         );
@@ -167,7 +172,7 @@ void main() {
         final result = await allCreditsAndInvoicesRepository.filterFullSummary(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          filter: FullSummaryFilter.empty(),
+          filter: FullSummaryFilter.defaultFilter(),
           pageSize: 1,
           offset: 0,
         );
@@ -184,7 +189,7 @@ void main() {
         final result = await allCreditsAndInvoicesRepository.filterFullSummary(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          filter: FullSummaryFilter.empty(),
+          filter: FullSummaryFilter.defaultFilter(),
           pageSize: 1,
           offset: 0,
         );
@@ -204,7 +209,7 @@ void main() {
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             offset: 0,
             pageSize: 24,
-            filterMap: <Map<String, dynamic>>[],
+            filterMap: filterFullSummary,
           ),
         ).thenAnswer(
           (invocation) async => mockList,
@@ -213,7 +218,7 @@ void main() {
         final result = await allCreditsAndInvoicesRepository.filterFullSummary(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          filter: FullSummaryFilter.empty(),
+          filter: FullSummaryFilter.defaultFilter(),
           pageSize: 24,
           offset: 0,
         );
@@ -228,14 +233,14 @@ void main() {
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             offset: 0,
             pageSize: 24,
-            filterMap: <Map<String, dynamic>>[],
+            filterMap: filterFullSummary,
           ),
         ).thenThrow(MockException());
 
         final result = await allCreditsAndInvoicesRepository.filterFullSummary(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
-          filter: FullSummaryFilter.empty(),
+          filter: FullSummaryFilter.defaultFilter(),
           pageSize: 24,
           offset: 0,
         );

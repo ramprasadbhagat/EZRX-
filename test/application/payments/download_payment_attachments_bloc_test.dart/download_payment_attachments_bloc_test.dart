@@ -58,7 +58,7 @@ void main() {
           () => downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
-            queryObject: AllInvoicesFilter.empty(),
+            queryObject: AllInvoicesFilter.defaultFilter(),
           ),
         ).thenAnswer(
           (invocation) async => const Left(fakeError),
@@ -66,7 +66,7 @@ void main() {
       },
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-          queryObject: AllInvoicesFilter.empty(),
+          queryObject: AllInvoicesFilter.defaultFilter(),
         ),
       ),
       expect: () => [
@@ -106,7 +106,7 @@ void main() {
           () => downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
-            queryObject: AllInvoicesFilter.empty(),
+            queryObject: AllInvoicesFilter.defaultFilter(),
           ),
         ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
@@ -125,7 +125,7 @@ void main() {
       },
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-          queryObject: AllInvoicesFilter.empty(),
+          queryObject: AllInvoicesFilter.defaultFilter(),
         ),
       ),
       expect: () => [
@@ -163,7 +163,7 @@ void main() {
           () => downloadPaymentAttachmentRepository.fetchAllCreditUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
-            queryObject: AllCreditsFilter.empty(),
+            queryObject: AllCreditsFilter.defaultFilter(),
           ),
         ).thenAnswer(
           (invocation) async => const Left(fakeError),
@@ -171,7 +171,7 @@ void main() {
       },
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-          queryObject: AllCreditsFilter.empty(),
+          queryObject: AllCreditsFilter.defaultFilter(),
         ),
       ),
       expect: () => [
@@ -211,7 +211,7 @@ void main() {
           () => downloadPaymentAttachmentRepository.fetchAllCreditUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
-            queryObject: AllCreditsFilter.empty(),
+            queryObject: AllCreditsFilter.defaultFilter(),
           ),
         ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
@@ -230,7 +230,7 @@ void main() {
       },
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-          queryObject: AllCreditsFilter.empty(),
+          queryObject: AllCreditsFilter.defaultFilter(),
         ),
       ),
       expect: () => [
@@ -471,7 +471,7 @@ void main() {
           () => downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
-            queryObject: FullSummaryFilter.empty(),
+            queryObject: FullSummaryFilter.defaultFilter(),
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -492,7 +492,7 @@ void main() {
       },
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
-          queryObject: FullSummaryFilter.empty(),
+          queryObject: FullSummaryFilter.defaultFilter(),
         ),
       ),
       expect: () => [
@@ -525,7 +525,7 @@ void main() {
           () => downloadPaymentAttachmentRepository.fetchFullSummaryUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
-            queryObject: FullSummaryFilter.empty(),
+            queryObject: FullSummaryFilter.defaultFilter(),
           ),
         ).thenAnswer(
           (invocation) async => const Left(fakeError),
@@ -533,7 +533,7 @@ void main() {
       },
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
-          queryObject: FullSummaryFilter.empty(),
+          queryObject: FullSummaryFilter.defaultFilter(),
         ),
       ),
       expect: () => [

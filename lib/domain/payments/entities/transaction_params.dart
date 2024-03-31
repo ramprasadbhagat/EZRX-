@@ -19,7 +19,7 @@ class TransactionParams with _$TransactionParams {
         customerCode: '',
         first: 0,
         after: 0,
-        filter: PaymentSummaryFilter.empty(),
+        filter: PaymentSummaryFilter.defaultFilter(),
         searchKey: SearchKey(''),
       );
 }

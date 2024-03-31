@@ -12,7 +12,7 @@ class OutstandingInvoiceFilterState with _$OutstandingInvoiceFilterState {
 
   factory OutstandingInvoiceFilterState.initial() =>
       OutstandingInvoiceFilterState(
-        filter: OutstandingInvoiceFilter.empty(),
+        filter: OutstandingInvoiceFilter.defaultFilter(),
         statusList: <StatusType>[
           StatusType('OPEN'),
           StatusType('OVERDUE'),

@@ -85,7 +85,7 @@ class OutstandingInvoiceFilterBloc
       ),
       resetFilters: (e) async => emit(
         OutstandingInvoiceFilterState.initial().copyWith(
-          filter: OutstandingInvoiceFilter.empty(),
+          filter: OutstandingInvoiceFilter.defaultFilter(),
         ),
       ),
     );

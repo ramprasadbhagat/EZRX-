@@ -143,7 +143,7 @@ void main() {
     testWidgets('=> _DocumentDateFilterState Test', (tester) async {
       when(() => fullSummaryFilterBlocMock.state).thenReturn(
         FullSummaryFilterState.initial().copyWith(
-          filter: FullSummaryFilter.empty().copyWith(
+          filter: FullSummaryFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -156,7 +156,7 @@ void main() {
 
       final expectedState = [
         FullSummaryFilterState.initial().copyWith(
-          filter: FullSummaryFilter.empty().copyWith(
+          filter: FullSummaryFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -206,7 +206,7 @@ void main() {
     });
 
     testWidgets('=> _ApplyButton Button Click Test', (tester) async {
-      final appliedFilter = FullSummaryFilter.empty().copyWith(
+      final appliedFilter = FullSummaryFilter.defaultFilter().copyWith(
         filterStatuses: ['fake-status'],
       );
       when(() => fullSummaryFilterBlocMock.state).thenReturn(
@@ -241,8 +241,8 @@ void main() {
     testWidgets('=> _ResetButton Test', (tester) async {
       when(() => fullSummaryFilterBlocMock.state).thenReturn(
         FullSummaryFilterState.initial().copyWith(
-          filter:
-              FullSummaryFilter.empty().copyWith(filterStatuses: ['Cleared']),
+          filter: FullSummaryFilter.defaultFilter()
+              .copyWith(filterStatuses: ['Cleared']),
         ),
       );
       await getWidget(tester);
@@ -257,7 +257,7 @@ void main() {
         () {
           fullSummaryBlocMock.add(
             FullSummaryEvent.fetch(
-              appliedFilter: FullSummaryFilter.empty(),
+              appliedFilter: FullSummaryFilter.defaultFilter(),
             ),
           );
         },

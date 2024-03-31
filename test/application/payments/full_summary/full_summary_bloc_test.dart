@@ -28,7 +28,7 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     fakeResult =
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
-    fullSummaryFilter = FullSummaryFilter.empty();
+    fullSummaryFilter = FullSummaryFilter.defaultFilter();
     repository = AllCreditsAndInvoicesRepositoryMock();
     config = Config()..appFlavor = Flavor.mock;
   });

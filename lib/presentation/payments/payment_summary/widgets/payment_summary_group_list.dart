@@ -32,7 +32,7 @@ class _PaymentSummaryGroupList extends StatelessWidget {
         controller: scrollController,
         onRefresh: () => context.read<PaymentSummaryBloc>().add(
               PaymentSummaryEvent.fetch(
-                appliedFilter: PaymentSummaryFilter.empty(),
+                appliedFilter: PaymentSummaryFilter.defaultFilter(),
                 searchKey: SearchKey.searchFilter(''),
               ),
             ),

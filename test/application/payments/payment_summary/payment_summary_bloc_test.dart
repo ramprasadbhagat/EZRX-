@@ -33,7 +33,7 @@ void main() {
   });
 
   setUp(() {
-    paymentSummaryFilter = PaymentSummaryFilter.empty();
+    paymentSummaryFilter = PaymentSummaryFilter.defaultFilter();
   });
 
   group('Payment Summary Bloc Test', () {

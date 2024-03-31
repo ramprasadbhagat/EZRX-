@@ -142,7 +142,7 @@ void main() {
     testWidgets('=> _DocumentDateFilterState Test', (tester) async {
       when(() => allCreditsFilterBlocMock.state).thenReturn(
         AllCreditsFilterState.initial().copyWith(
-          filter: AllCreditsFilter.empty().copyWith(
+          filter: AllCreditsFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -155,7 +155,7 @@ void main() {
 
       final expectedState = [
         AllCreditsFilterState.initial().copyWith(
-          filter: AllCreditsFilter.empty().copyWith(
+          filter: AllCreditsFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -208,7 +208,7 @@ void main() {
       when(() => allCreditsFilterBlocMock.state).thenReturn(
         AllCreditsFilterState.initial().copyWith(
           showErrorMessages: true,
-          filter: AllCreditsFilter.empty().copyWith(
+          filter: AllCreditsFilter.defaultFilter().copyWith(
             amountValueTo: RangeValue('12'),
           ),
         ),
@@ -240,7 +240,7 @@ void main() {
       when(() => allCreditsFilterBlocMock.state).thenReturn(
         AllCreditsFilterState.initial().copyWith(
           showErrorMessages: true,
-          filter: AllCreditsFilter.empty().copyWith(
+          filter: AllCreditsFilter.defaultFilter().copyWith(
             amountValueFrom: RangeValue('12'),
           ),
         ),
@@ -265,7 +265,7 @@ void main() {
     });
 
     testWidgets('=> _ApplyButton Button Click Test', (tester) async {
-      final appliedFilter = AllCreditsFilter.empty().copyWith(
+      final appliedFilter = AllCreditsFilter.defaultFilter().copyWith(
         amountValueFrom: RangeValue('100'),
         amountValueTo: RangeValue('200'),
       );
@@ -301,8 +301,8 @@ void main() {
     testWidgets('=> _ResetButton Test', (tester) async {
       when(() => allCreditsFilterBlocMock.state).thenReturn(
         AllCreditsFilterState.initial().copyWith(
-          filter:
-              AllCreditsFilter.empty().copyWith(filterStatuses: ['Cleared']),
+          filter: AllCreditsFilter.defaultFilter()
+              .copyWith(filterStatuses: ['Cleared']),
         ),
       );
       await getWidget(tester);
@@ -317,7 +317,7 @@ void main() {
         () {
           allCreditsBlocMock.add(
             AllCreditsEvent.fetch(
-              appliedFilter: AllCreditsFilter.empty(),
+              appliedFilter: AllCreditsFilter.defaultFilter(),
             ),
           );
         },
@@ -330,7 +330,7 @@ void main() {
       when(() => allCreditsFilterBlocMock.state).thenReturn(
         AllCreditsFilterState.initial().copyWith(
           showErrorMessages: true,
-          filter: AllCreditsFilter.empty().copyWith(
+          filter: AllCreditsFilter.defaultFilter().copyWith(
             amountValueFrom: RangeValue('15'),
             amountValueTo: RangeValue('12'),
           ),

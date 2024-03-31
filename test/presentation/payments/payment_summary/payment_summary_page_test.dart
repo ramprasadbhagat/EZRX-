@@ -333,7 +333,7 @@ void main() {
       verifyNever(
         () => outstandingInvoicesBlocMock.add(
           OutstandingInvoicesEvent.fetch(
-            appliedFilter: OutstandingInvoiceFilter.init(),
+            appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
             searchKey: SearchKey.search(''),
           ),
         ),
@@ -341,7 +341,7 @@ void main() {
       verifyNever(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
+            appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),
@@ -385,7 +385,7 @@ void main() {
       verify(
         () => paymentSummaryFilterBloc.add(
           PaymentSummaryFilterEvent.openFilterBottomSheet(
-            appliedFilter: PaymentSummaryFilter.empty(),
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
           ),
         ),
       ).called(1);
@@ -430,7 +430,7 @@ void main() {
     testWidgets('Payment Summary user filter success Test', (tester) async {
       when(() => paymentSummaryBloc.state).thenReturn(
         PaymentSummaryState.initial().copyWith(
-          appliedFilter: PaymentSummaryFilter.empty().copyWith(
+          appliedFilter: PaymentSummaryFilter.defaultFilter().copyWith(
             amountValueFrom: RangeValue('100'),
             amountValueTo: RangeValue('300'),
             filterStatuses: [FilterStatus('In Progress')],
@@ -458,7 +458,7 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-      expect(find.widgetWithText(CustomBadge, '2'), findsOneWidget);
+      expect(find.widgetWithText(CustomBadge, '3'), findsOneWidget);
       expect(find.byType(ListTile), findsOneWidget);
     });
 
@@ -529,10 +529,15 @@ void main() {
       await tester.enterText(find.byType(TextFormField), 'fake-keyword');
       await tester.pump(const Duration(seconds: 2));
 
+      final appliedFilterWithSearch = PaymentSummaryFilter.empty().copyWith(
+        createdDateFrom: DateTimeStringValue(''),
+        createdDateTo: DateTimeStringValue(''),
+      );
+
       verify(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.empty(),
+            appliedFilter: appliedFilterWithSearch,
             searchKey: SearchKey.searchFilter('fake-keyword'),
           ),
         ),
@@ -562,10 +567,15 @@ void main() {
 
       expect(SearchKey.searchFilter('fake-keyword').isValid(), true);
 
+      final appliedFilterWithSearch = PaymentSummaryFilter.empty().copyWith(
+        createdDateFrom: DateTimeStringValue(''),
+        createdDateTo: DateTimeStringValue(''),
+      );
+
       verify(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.empty(),
+            appliedFilter: appliedFilterWithSearch,
             searchKey: SearchKey.searchFilter('fake-keyword'),
           ),
         ),
@@ -597,7 +607,7 @@ void main() {
       verify(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.empty(),
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),
@@ -624,7 +634,7 @@ void main() {
         paymentSummaryFilterBloc,
         Stream.fromIterable([
           PaymentSummaryFilterState.initial().copyWith(
-            filter: PaymentSummaryFilter.empty().copyWith(filterStatuses: []),
+            filter: PaymentSummaryFilter.defaultFilter().copyWith(filterStatuses: []),
           ),
         ]),
       );
@@ -679,7 +689,7 @@ void main() {
         paymentSummaryFilterBloc,
         Stream.fromIterable([
           PaymentSummaryFilterState.initial().copyWith(
-            filter: PaymentSummaryFilter.empty()
+            filter: PaymentSummaryFilter.defaultFilter()
                 .copyWith(filterStatuses: [FilterStatus('In Progress')]),
           ),
         ]),
@@ -727,13 +737,13 @@ void main() {
       await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
 
-      verify(
+      verifyNever(
         () => paymentSummaryFilterBloc.add(
           PaymentSummaryFilterEvent.setCreatedDate(
             DateTimeRange(start: fakeFromDate, end: fakeToDate),
           ),
         ),
-      ).called(1);
+      );
     });
 
     testWidgets('Test find payment summary fromDocumentDateField',
@@ -752,13 +762,13 @@ void main() {
       await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
 
-      verify(
+      verifyNever(
         () => paymentSummaryFilterBloc.add(
           PaymentSummaryFilterEvent.setCreatedDate(
             DateTimeRange(start: fakeFromDate, end: fakeToDate),
           ),
         ),
-      ).called(1);
+      );
     });
 
     testWidgets('Test find payment summary amountValueFrom', (tester) async {
@@ -813,7 +823,7 @@ void main() {
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
             searchKey: SearchKey.searchFilter(''),
-            appliedFilter: PaymentSummaryFilter.empty(),
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
           ),
         ),
       ).called(2);
@@ -824,7 +834,7 @@ void main() {
       when(() => paymentSummaryFilterBloc.state).thenReturn(
         PaymentSummaryFilterState.initial().copyWith(
           showErrorMessages: true,
-          filter: PaymentSummaryFilter.empty().copyWith(
+          filter: PaymentSummaryFilter.defaultFilter().copyWith(
             amountValueFrom: RangeValue('15'),
             amountValueTo: RangeValue('12'),
           ),
@@ -936,7 +946,7 @@ void main() {
         (tester) async {
       when(() => paymentSummaryBloc.state).thenReturn(
         PaymentSummaryState.initial().copyWith(
-          appliedFilter: PaymentSummaryFilter.empty().copyWith(
+          appliedFilter: PaymentSummaryFilter.defaultFilter().copyWith(
             createdDateFrom: DateTimeStringValue('20231206'),
             createdDateTo: DateTimeStringValue('20231207'),
           ),
@@ -966,7 +976,7 @@ void main() {
       verify(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.empty().copyWith(
+            appliedFilter: PaymentSummaryFilter.defaultFilter().copyWith(
               createdDateFrom: DateTimeStringValue(''),
               createdDateTo: DateTimeStringValue(''),
             ),
@@ -1062,7 +1072,7 @@ void main() {
     testWidgets(
       'Payment Summary Filter amount filter check',
       (tester) async {
-        final filter = PaymentSummaryFilter.empty().copyWith(
+        final filter = PaymentSummaryFilter.defaultFilter().copyWith(
           amountValueFrom: RangeValue('12'),
           amountValueTo: RangeValue('15'),
         );
@@ -1112,7 +1122,7 @@ void main() {
     testWidgets(
       'Payment Summary Filter document date filter check',
       (tester) async {
-        final filter = PaymentSummaryFilter.empty().copyWith(
+        final filter = PaymentSummaryFilter.defaultFilter().copyWith(
           createdDateTo: DateTimeStringValue(fakeToDate.toString()),
           createdDateFrom: DateTimeStringValue(fakeFromDate.toString()),
         );
@@ -1155,7 +1165,7 @@ void main() {
       (tester) async {
         when(() => paymentSummaryBloc.state).thenReturn(
           PaymentSummaryState.initial().copyWith(
-            appliedFilter: PaymentSummaryFilter.empty().copyWith(
+            appliedFilter: PaymentSummaryFilter.defaultFilter().copyWith(
               amountValueFrom: RangeValue('12'),
               amountValueTo: RangeValue('15'),
             ),
@@ -1163,7 +1173,7 @@ void main() {
         );
         when(() => paymentSummaryFilterBloc.state).thenReturn(
           PaymentSummaryFilterState.initial().copyWith(
-            filter: PaymentSummaryFilter.empty().copyWith(
+            filter: PaymentSummaryFilter.defaultFilter().copyWith(
               createdDateTo: DateTimeStringValue(fakeToDate.toString()),
               createdDateFrom: DateTimeStringValue(fakeFromDate.toString()),
             ),
@@ -1184,7 +1194,7 @@ void main() {
         verify(
           () => paymentSummaryBloc.add(
             PaymentSummaryEvent.fetch(
-              appliedFilter: PaymentSummaryFilter.empty(),
+              appliedFilter: PaymentSummaryFilter.defaultFilter(),
               searchKey: SearchKey(''),
             ),
           ),

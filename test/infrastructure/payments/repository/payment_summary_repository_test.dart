@@ -33,7 +33,7 @@ void main() {
   late PaymentSummaryRemoteDataSource remoteDataSource;
   late List<PaymentSummaryDetails> fakePaymentList;
   late List<PaymentSummaryDetails> fakeTransactionList;
-  final fakeFilter = PaymentSummaryFilter.empty();
+  final fakeFilter = PaymentSummaryFilter.defaultFilter();
   final filterList = PaymentSummaryFilterDto.fromDomain(fakeFilter).toMapList;
   final searchMap = {
     'field': 'zzAdvice',

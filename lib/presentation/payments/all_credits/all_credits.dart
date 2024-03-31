@@ -85,7 +85,8 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
                           controller: _controller,
                           onRefresh: () => context.read<AllCreditsBloc>().add(
                                 AllCreditsEvent.fetch(
-                                  appliedFilter: AllCreditsFilter.empty(),
+                                  appliedFilter:
+                                      AllCreditsFilter.defaultFilter(),
                                 ),
                               ),
                           onLoadingMore: () =>

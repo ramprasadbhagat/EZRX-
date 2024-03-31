@@ -132,7 +132,7 @@ void main() {
     testWidgets('=> _DocumentDateFilterState Test', (tester) async {
       when(() => allInvoicesFilterBlocMock.state).thenReturn(
         AllInvoicesFilterState.initial().copyWith(
-          filter: AllInvoicesFilter.empty().copyWith(
+          filter: AllInvoicesFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -145,7 +145,7 @@ void main() {
 
       final expectedState = [
         AllInvoicesFilterState.initial().copyWith(
-          filter: AllInvoicesFilter.empty().copyWith(
+          filter: AllInvoicesFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -197,7 +197,7 @@ void main() {
     testWidgets('=> _DueDateFilterState Test', (tester) async {
       when(() => allInvoicesFilterBlocMock.state).thenReturn(
         AllInvoicesFilterState.initial().copyWith(
-          filter: AllInvoicesFilter.empty().copyWith(
+          filter: AllInvoicesFilter.defaultFilter().copyWith(
             dueDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -210,7 +210,7 @@ void main() {
 
       final expectedState = [
         AllInvoicesFilterState.initial().copyWith(
-          filter: AllInvoicesFilter.empty().copyWith(
+          filter: AllInvoicesFilter.defaultFilter().copyWith(
             dueDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
@@ -262,7 +262,7 @@ void main() {
       when(() => allInvoicesFilterBlocMock.state).thenReturn(
         AllInvoicesFilterState.initial().copyWith(
           showErrorMessages: true,
-          filter: AllInvoicesFilter.empty().copyWith(
+          filter: AllInvoicesFilter.defaultFilter().copyWith(
             amountValueTo: RangeValue('12'),
           ),
         ),
@@ -290,7 +290,7 @@ void main() {
       when(() => allInvoicesFilterBlocMock.state).thenReturn(
         AllInvoicesFilterState.initial().copyWith(
           showErrorMessages: true,
-          filter: AllInvoicesFilter.empty().copyWith(
+          filter: AllInvoicesFilter.defaultFilter().copyWith(
             amountValueFrom: RangeValue('12'),
           ),
         ),
@@ -315,7 +315,7 @@ void main() {
     });
 
     testWidgets('=> _ApplyButton Button Click Test', (tester) async {
-            await tester.binding.setSurfaceSize(const Size(480, 900));
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       await getWidget(tester);
       await tester.pumpAndSettle();
 
@@ -335,14 +335,14 @@ void main() {
     testWidgets('=> _ResetButton Test', (tester) async {
       when(() => allInvoicesBlocMock.state).thenReturn(
         AllInvoicesState.initial().copyWith(
-          appliedFilter:
-              AllInvoicesFilter.empty().copyWith(filterStatuses: ['Cleared']),
+          appliedFilter: AllInvoicesFilter.defaultFilter()
+              .copyWith(filterStatuses: ['Cleared']),
         ),
       );
       when(() => allInvoicesFilterBlocMock.state).thenReturn(
         AllInvoicesFilterState.initial().copyWith(
-          filter:
-              AllInvoicesFilter.empty().copyWith(filterStatuses: ['Cleared']),
+          filter: AllInvoicesFilter.defaultFilter()
+              .copyWith(filterStatuses: ['Cleared']),
         ),
       );
       await getWidget(tester);
@@ -356,7 +356,7 @@ void main() {
       verify(
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
-            appliedFilter: AllInvoicesFilter.empty(),
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
           ),
         ),
       ).called(1);
@@ -368,7 +368,7 @@ void main() {
       when(() => allInvoicesFilterBlocMock.state).thenReturn(
         AllInvoicesFilterState.initial().copyWith(
           showErrorMessages: true,
-          filter: AllInvoicesFilter.empty().copyWith(
+          filter: AllInvoicesFilter.defaultFilter().copyWith(
             amountValueFrom: RangeValue('15'),
             amountValueTo: RangeValue('12'),
           ),

@@ -304,7 +304,7 @@ void main() {
       verifyNever(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.empty(),
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),
@@ -411,7 +411,7 @@ void main() {
       verify(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.empty(),
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),
@@ -587,7 +587,7 @@ void main() {
       verify(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.empty(),
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),

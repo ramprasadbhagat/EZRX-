@@ -109,10 +109,11 @@ class _SummarySearchBar extends StatelessWidget {
     if (context.tabsRouter.current.name == AllInvoicesPageRoute.name) {
       context.read<AllInvoicesBloc>().add(
             AllInvoicesEvent.fetch(
-              appliedFilter:
-                  context.read<AllInvoicesBloc>().state.appliedFilter.copyWith(
-                        searchKey: SearchKey.searchFilter(searchKey),
-                      ),
+              appliedFilter: searchKey.isEmpty
+                  ? AllInvoicesFilter.defaultFilter()
+                  : AllInvoicesFilter.empty().copyWith(
+                      searchKey: SearchKey.searchFilter(searchKey),
+                    ),
             ),
           );
 
@@ -121,10 +122,11 @@ class _SummarySearchBar extends StatelessWidget {
     if (context.tabsRouter.current.name == AllCreditsPageRoute.name) {
       context.read<AllCreditsBloc>().add(
             AllCreditsEvent.fetch(
-              appliedFilter:
-                  context.read<AllCreditsBloc>().state.appliedFilter.copyWith(
-                        searchKey: SearchKey.searchFilter(searchKey),
-                      ),
+              appliedFilter: searchKey.isEmpty
+                  ? AllCreditsFilter.defaultFilter()
+                  : AllCreditsFilter.empty().copyWith(
+                      searchKey: SearchKey.searchFilter(searchKey),
+                    ),
             ),
           );
 
@@ -133,10 +135,11 @@ class _SummarySearchBar extends StatelessWidget {
     if (context.tabsRouter.current.name == FullSummaryPageRoute.name) {
       context.read<FullSummaryBloc>().add(
             FullSummaryEvent.fetch(
-              appliedFilter:
-                  context.read<FullSummaryBloc>().state.appliedFilter.copyWith(
-                        searchKey: SearchKey.searchFilter(searchKey),
-                      ),
+              appliedFilter: searchKey.isEmpty
+                  ? FullSummaryFilter.defaultFilter()
+                  : FullSummaryFilter.empty().copyWith(
+                      searchKey: SearchKey.searchFilter(searchKey),
+                    ),
             ),
           );
 

@@ -16,25 +16,30 @@ class AvailableCreditFilter with _$AvailableCreditFilter {
     required RangeValue amountValueTo,
   }) = _AvailableCreditFilter;
 
-  factory AvailableCreditFilter.empty() => AvailableCreditFilter(
-        documentDateFrom: DateTimeStringValue(''),
-        documentDateTo: DateTimeStringValue(''),
+   factory AvailableCreditFilter.empty() => AvailableCreditFilter(
+        documentDateFrom: DateTimeStringValue(
+         '',
+        ),
+        documentDateTo: DateTimeStringValue(
+          '',
+        ),
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
       );
 
-  factory AvailableCreditFilter.init() =>
-      AvailableCreditFilter.empty().copyWith(
+  factory AvailableCreditFilter.defaultFilter() => AvailableCreditFilter(
         documentDateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(
-              const Duration(days: 29),
+              const Duration(days: 90),
             ),
           ),
         ),
         documentDateTo: DateTimeStringValue(
           getDateStringByDateTime(DateTime.now()),
         ),
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
       );
 
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(

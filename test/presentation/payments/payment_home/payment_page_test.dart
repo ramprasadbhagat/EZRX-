@@ -368,7 +368,7 @@ void main() {
     verify(
       () => outstandingInvoicesBlocMock.add(
         OutstandingInvoicesEvent.fetch(
-          appliedFilter: OutstandingInvoiceFilter.init(),
+          appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
           searchKey: SearchKey.search(''),
         ),
       ),
@@ -376,7 +376,7 @@ void main() {
     verify(
       () => availableCreditsBlocMock.add(
         AvailableCreditsEvent.fetch(
-          appliedFilter: AvailableCreditFilter.init(),
+          appliedFilter: AvailableCreditFilter.defaultFilter(),
           searchKey: SearchKey.searchFilter(''),
         ),
       ),
@@ -409,7 +409,7 @@ void main() {
     verify(
       () => outstandingInvoicesBlocMock.add(
         OutstandingInvoicesEvent.fetch(
-          appliedFilter: OutstandingInvoiceFilter.init(),
+          appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
           searchKey: SearchKey.search(''),
         ),
       ),
@@ -417,7 +417,7 @@ void main() {
     verify(
       () => availableCreditsBlocMock.add(
         AvailableCreditsEvent.fetch(
-          appliedFilter: AvailableCreditFilter.init(),
+          appliedFilter: AvailableCreditFilter.defaultFilter(),
           searchKey: SearchKey.searchFilter(''),
         ),
       ),

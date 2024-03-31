@@ -530,10 +530,11 @@ class _ResetButton extends StatelessWidget {
                       .state
                       .filter
                       .excludeSearch !=
-                  AllInvoicesFilter.empty()) {
+                  AllInvoicesFilter.defaultFilter()) {
                 context.read<AllInvoicesBloc>().add(
                       AllInvoicesEvent.fetch(
-                        appliedFilter: AllInvoicesFilter.empty().copyWith(
+                        appliedFilter:
+                            AllInvoicesFilter.defaultFilter().copyWith(
                           searchKey: context
                               .read<AllInvoicesBloc>()
                               .state

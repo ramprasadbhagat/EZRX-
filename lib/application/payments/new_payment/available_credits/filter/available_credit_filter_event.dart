@@ -15,4 +15,7 @@ class AvailableCreditFilterEvent with _$AvailableCreditFilterEvent {
   const factory AvailableCreditFilterEvent.setValidationFailure() =
       _SetValidationFailure;
   const factory AvailableCreditFilterEvent.resetFilters() = _ResetFilters;
+   const factory AvailableCreditFilterEvent.updateFilterToLastApplied({
+    required AvailableCreditFilter lastAppliedFilter,
+  }) = _UpdateFiltersToLastApplied;
 }

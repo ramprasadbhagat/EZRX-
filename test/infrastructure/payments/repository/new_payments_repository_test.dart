@@ -135,7 +135,7 @@ void main() {
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
         final result = await nawPaymentsRepository.getOutstandingInvoices(
-          appliedFilter: OutstandingInvoiceFilter.empty().copyWith(
+          appliedFilter: OutstandingInvoiceFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
             dueDateFrom: DateTimeStringValue('-'),
@@ -161,7 +161,7 @@ void main() {
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.getOutstandingInvoices(
-          appliedFilter: OutstandingInvoiceFilter.empty().copyWith(
+          appliedFilter: OutstandingInvoiceFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
             dueDateFrom: DateTimeStringValue('-'),
@@ -200,7 +200,7 @@ void main() {
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
         final result = await nawPaymentsRepository.getAvailableCreditNotes(
-          appliedFilter: AvailableCreditFilter.empty().copyWith(
+          appliedFilter: AvailableCreditFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
           ),
@@ -224,7 +224,7 @@ void main() {
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.getAvailableCreditNotes(
-          appliedFilter: AvailableCreditFilter.empty().copyWith(
+          appliedFilter: AvailableCreditFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
           ),
@@ -521,7 +521,7 @@ void main() {
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
         final result = await nawPaymentsRepository.getOutstandingInvoices(
-          appliedFilter: OutstandingInvoiceFilter.empty().copyWith(
+          appliedFilter: OutstandingInvoiceFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue('2023-12-01'),
             documentDateTo: DateTimeStringValue('2023-12-28'),
           ),
@@ -550,7 +550,7 @@ void main() {
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
         final result = await nawPaymentsRepository.getOutstandingInvoices(
-          appliedFilter: OutstandingInvoiceFilter.empty().copyWith(
+          appliedFilter: OutstandingInvoiceFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
             dueDateFrom: DateTimeStringValue('-'),
@@ -582,7 +582,7 @@ void main() {
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.getOutstandingInvoices(
-          appliedFilter: OutstandingInvoiceFilter.empty().copyWith(
+          appliedFilter: OutstandingInvoiceFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
             dueDateFrom: DateTimeStringValue('-'),
@@ -614,7 +614,7 @@ void main() {
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
         final result = await nawPaymentsRepository.getAvailableCreditNotes(
-          appliedFilter: AvailableCreditFilter.empty().copyWith(
+          appliedFilter: AvailableCreditFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
           ),
@@ -644,7 +644,7 @@ void main() {
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.getAvailableCreditNotes(
-          appliedFilter: AvailableCreditFilter.empty().copyWith(
+          appliedFilter: AvailableCreditFilter.defaultFilter().copyWith(
             documentDateFrom: DateTimeStringValue('-'),
             documentDateTo: DateTimeStringValue('-'),
           ),

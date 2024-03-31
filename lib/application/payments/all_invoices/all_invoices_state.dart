@@ -19,7 +19,7 @@ class AllInvoicesState with _$AllInvoicesState {
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
-        appliedFilter: AllInvoicesFilter.empty(),
+        appliedFilter: AllInvoicesFilter.defaultFilter(),
         items: <CreditAndInvoiceItem>[],
       );
 }

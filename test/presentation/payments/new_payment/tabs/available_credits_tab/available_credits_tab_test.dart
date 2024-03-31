@@ -42,7 +42,7 @@ void main() {
   late List<CustomerOpenItem> fakeCredits;
   late Config configMock;
   const fakeSearchKey = '26';
-  final creditFilter = AvailableCreditFilter.empty().copyWith(
+  final creditFilter = AvailableCreditFilter.defaultFilter().copyWith(
     amountValueFrom: RangeValue('10'),
     amountValueTo: RangeValue('100'),
     documentDateFrom: DateTimeStringValue('-'),
@@ -189,6 +189,12 @@ void main() {
         ),
       );
 
+      final appliedFilterWithSearch =
+          AvailableCreditFilter.defaultFilter().copyWith(
+        documentDateFrom: DateTimeStringValue(''),
+        documentDateTo: DateTimeStringValue(''),
+      );
+
       verify(
         () => mixpanelServiceMock.trackEvent(
           eventName: MixpanelEvents.documentNumberSearched,
@@ -198,7 +204,7 @@ void main() {
       verify(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
+            appliedFilter: appliedFilterWithSearch,
             searchKey: SearchKey.searchFilter(fakeSearchKey),
           ),
         ),
@@ -217,7 +223,7 @@ void main() {
       verify(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
+            appliedFilter: appliedFilterWithSearch,
             searchKey: SearchKey.searchFilter(fakeSearchKey),
           ),
         ),
@@ -248,7 +254,7 @@ void main() {
       verify(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
+            appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),
@@ -417,7 +423,8 @@ void main() {
     testWidgets(
         'Apply filter test - Available Credit Amount Value Range Invalid',
         (tester) async {
-      final invalidCreditFilter = AvailableCreditFilter.empty().copyWith(
+      final invalidCreditFilter =
+          AvailableCreditFilter.defaultFilter().copyWith(
         amountValueFrom: RangeValue('100'),
         amountValueTo: RangeValue('10'),
         documentDateFrom: DateTimeStringValue('-'),
@@ -531,7 +538,7 @@ void main() {
       verify(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
+            appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),
@@ -578,7 +585,7 @@ void main() {
       final toDate = DateTimeStringValue('2023-09-20');
       when(() => availableCreditFilterBlocMock.state).thenReturn(
         AvailableCreditFilterState.initial().copyWith(
-          filter: AvailableCreditFilter.empty().copyWith(
+          filter: AvailableCreditFilter.defaultFilter().copyWith(
             documentDateFrom: fromDate,
             documentDateTo: toDate,
           ),
@@ -614,7 +621,7 @@ void main() {
       final toDate = DateTimeStringValue('2023-09-20');
       when(() => availableCreditFilterBlocMock.state).thenReturn(
         AvailableCreditFilterState.initial().copyWith(
-          filter: AvailableCreditFilter.empty().copyWith(
+          filter: AvailableCreditFilter.defaultFilter().copyWith(
             documentDateFrom: fromDate,
             documentDateTo: toDate,
           ),

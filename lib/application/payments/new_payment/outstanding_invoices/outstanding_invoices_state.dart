@@ -21,11 +21,11 @@ class OutstandingInvoicesState with _$OutstandingInvoicesState {
         isLoading: false,
         canLoadMore: true,
         items: <CustomerOpenItem>[],
-        appliedFilter: OutstandingInvoiceFilter.empty(),
+        appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
         searchKey: SearchKey.searchFilter(''),
       );
 
   bool get isSearchAndFilterEmpty =>
       searchKey.isValueEmpty &&
-      appliedFilter == OutstandingInvoiceFilter.empty();
+      appliedFilter == OutstandingInvoiceFilter.defaultFilter();
 }

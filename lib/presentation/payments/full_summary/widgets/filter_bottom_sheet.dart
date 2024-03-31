@@ -406,10 +406,10 @@ class _ResetButton extends StatelessWidget {
                   .state
                   .filter
                   .excludeSearch !=
-              FullSummaryFilter.empty()) {
+              FullSummaryFilter.defaultFilter()) {
             context.read<FullSummaryBloc>().add(
                   FullSummaryEvent.fetch(
-                    appliedFilter: FullSummaryFilter.empty().copyWith(
+                    appliedFilter: FullSummaryFilter.defaultFilter().copyWith(
                       searchKey: context
                           .read<FullSummaryBloc>()
                           .state

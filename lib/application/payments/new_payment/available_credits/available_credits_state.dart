@@ -19,12 +19,13 @@ class AvailableCreditsState with _$AvailableCreditsState {
         isLoading: false,
         canLoadMore: true,
         items: <CustomerOpenItem>[],
-        appliedFilter: AvailableCreditFilter.empty(),
+        appliedFilter: AvailableCreditFilter.defaultFilter(),
         searchKey: SearchKey.searchFilter(''),
         customerCodeInfo: CustomerCodeInfo.empty(),
         salesOrganization: SalesOrganisation.empty(),
       );
 
   bool get isSearchAndFilterEmpty =>
-      searchKey.isValueEmpty && appliedFilter == AvailableCreditFilter.empty();
+      searchKey.isValueEmpty &&
+      appliedFilter == AvailableCreditFilter.defaultFilter();
 }

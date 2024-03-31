@@ -13,12 +13,10 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
             key: state.searchKey.searchValueOrEmpty,
           ),
           onSearchChanged: (value) => _search(
-            appliedFilter: state.appliedFilter,
             context: context,
             searchKey: value,
           ),
           onSearchSubmitted: (value) => _search(
-            appliedFilter: state.appliedFilter,
             context: context,
             searchKey: value,
           ),
@@ -31,7 +29,6 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
           customValidator: (value) => SearchKey.searchFilter(value).isValid(),
           enabled: !state.isLoading,
           onClear: () => _search(
-            appliedFilter: state.appliedFilter,
             context: context,
             searchKey: '',
             onClear: true,
@@ -45,14 +42,16 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
   void _search({
     required BuildContext context,
     required String searchKey,
-    required AvailableCreditFilter appliedFilter,
     bool onClear = false,
   }) {
     if (!onClear && searchKey.isEmpty) return;
+
     trackMixpanelEvent(MixpanelEvents.documentNumberSearched);
     context.read<AvailableCreditsBloc>().add(
           AvailableCreditsEvent.fetch(
-            appliedFilter: appliedFilter,
+            appliedFilter: searchKey.isEmpty
+                ? AvailableCreditFilter.defaultFilter()
+                : AvailableCreditFilter.empty(),
             searchKey: SearchKey.searchFilter(searchKey),
           ),
         );

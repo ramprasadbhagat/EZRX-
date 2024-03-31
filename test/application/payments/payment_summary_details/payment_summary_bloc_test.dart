@@ -44,7 +44,7 @@ void main() {
       setUp: () {
         when(
           () => paymentSummaryMockRepository.fetchPaymentSummaryList(
-            filter: PaymentSummaryFilter.empty(),
+            filter: PaymentSummaryFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
@@ -57,7 +57,7 @@ void main() {
       },
       act: (PaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
-          appliedFilter: PaymentSummaryFilter.empty(),
+          appliedFilter: PaymentSummaryFilter.defaultFilter(),
           searchKey: SearchKey.searchFilter(''),
         ),
       ),
@@ -85,7 +85,7 @@ void main() {
       setUp: () {
         when(
           () => paymentSummaryMockRepository.fetchPaymentSummaryList(
-            filter: PaymentSummaryFilter.empty(),
+            filter: PaymentSummaryFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
@@ -98,7 +98,7 @@ void main() {
       },
       act: (PaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
-          appliedFilter: PaymentSummaryFilter.empty(),
+          appliedFilter: PaymentSummaryFilter.defaultFilter(),
           searchKey: SearchKey.searchFilter(''),
         ),
       ),
@@ -127,7 +127,7 @@ void main() {
       setUp: () {
         when(
           () => paymentSummaryMockRepository.fetchPaymentSummaryList(
-            filter: PaymentSummaryFilter.empty(),
+            filter: PaymentSummaryFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
@@ -168,7 +168,7 @@ void main() {
       setUp: () {
         when(
           () => paymentSummaryMockRepository.fetchPaymentSummaryList(
-            filter: PaymentSummaryFilter.empty(),
+            filter: PaymentSummaryFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,

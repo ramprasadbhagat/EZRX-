@@ -604,19 +604,19 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
               context.read<AllInvoicesBloc>().add(
                     AllInvoicesEvent.fetch(
-                      appliedFilter: AllInvoicesFilter.empty(),
+                      appliedFilter: AllInvoicesFilter.defaultFilter(),
                     ),
                   );
 
               context.read<AllCreditsBloc>().add(
                     AllCreditsEvent.fetch(
-                      appliedFilter: AllCreditsFilter.empty(),
+                      appliedFilter: AllCreditsFilter.defaultFilter(),
                     ),
                   );
 
               context.read<FullSummaryBloc>().add(
                     FullSummaryEvent.fetch(
-                      appliedFilter: FullSummaryFilter.empty(),
+                      appliedFilter: FullSummaryFilter.defaultFilter(),
                     ),
                   );
 

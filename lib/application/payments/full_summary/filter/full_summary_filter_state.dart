@@ -10,7 +10,7 @@ class FullSummaryFilterState with _$FullSummaryFilterState {
   }) = _FullSummaryFilterState;
 
   factory FullSummaryFilterState.initial() => FullSummaryFilterState(
-        filter: FullSummaryFilter.empty(),
+        filter: FullSummaryFilter.defaultFilter(),
         showErrorMessages: false,
         statuses: <String>[
           'Open',

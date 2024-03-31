@@ -395,7 +395,7 @@ void main() {
     });
 
     testWidgets('=> Test search Account summary invoice', (tester) async {
-      final allInvoicesFilter = AllInvoicesFilter.empty().copyWith(
+      final allInvoicesFilter = AllInvoicesFilter.defaultFilter().copyWith(
         searchKey: SearchKey('12345'),
       );
       when(() => allInvoicesBlocMock.state).thenReturn(
@@ -410,10 +410,17 @@ void main() {
       await tester.pumpAndSettle(
         Duration(milliseconds: locator<Config>().autoSearchTimeout),
       );
+
+      final appliedFilterWithSearch =
+          AllInvoicesFilter.defaultFilter().copyWith(
+        documentDateFrom: DateTimeStringValue(''),
+        documentDateTo: DateTimeStringValue(''),
+      );
+
       verify(
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
-            appliedFilter: allInvoicesFilter.copyWith(
+            appliedFilter: appliedFilterWithSearch.copyWith(
               searchKey: SearchKey.searchFilter('1'),
             ),
           ),
@@ -424,7 +431,7 @@ void main() {
       verify(
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
-            appliedFilter: allInvoicesFilter.copyWith(
+            appliedFilter: appliedFilterWithSearch.copyWith(
               searchKey: SearchKey.searchFilter('123'),
             ),
           ),
@@ -444,7 +451,7 @@ void main() {
     });
     testWidgets('=> Test search build when Account summary invoice',
         (tester) async {
-      final allInvoicesFilter = AllInvoicesFilter.empty().copyWith(
+      final allInvoicesFilter = AllInvoicesFilter.defaultFilter().copyWith(
         searchKey: SearchKey('12345'),
       );
       final expectedState = [
@@ -464,7 +471,7 @@ void main() {
       expect(accountSummarySearchBar, findsOneWidget);
     });
     testWidgets('=> Test search Account summary credit', (tester) async {
-      final allCreditsFilter = AllCreditsFilter.empty().copyWith(
+      final allCreditsFilter = AllCreditsFilter.defaultFilter().copyWith(
         searchKey: SearchKey('12345'),
       );
       when(() => allCreditsBlocMock.state).thenReturn(
@@ -472,6 +479,7 @@ void main() {
           appliedFilter: allCreditsFilter,
         ),
       );
+
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
       expect(creditsTab, findsOneWidget);
@@ -482,10 +490,16 @@ void main() {
       await tester.pumpAndSettle(
         Duration(milliseconds: locator<Config>().autoSearchTimeout),
       );
+
+      final appliedFilterWithSearch = AllCreditsFilter.defaultFilter().copyWith(
+        documentDateFrom: DateTimeStringValue(''),
+        documentDateTo: DateTimeStringValue(''),
+      );
+
       verify(
         () => allCreditsBlocMock.add(
           AllCreditsEvent.fetch(
-            appliedFilter: allCreditsFilter.copyWith(
+            appliedFilter: appliedFilterWithSearch.copyWith(
               searchKey: SearchKey.searchFilter('1'),
             ),
           ),
@@ -496,7 +510,7 @@ void main() {
       verify(
         () => allCreditsBlocMock.add(
           AllCreditsEvent.fetch(
-            appliedFilter: allCreditsFilter.copyWith(
+            appliedFilter: appliedFilterWithSearch.copyWith(
               searchKey: SearchKey.searchFilter('123'),
             ),
           ),
@@ -517,7 +531,7 @@ void main() {
 
     testWidgets('=> Test search build when Account summary credit',
         (tester) async {
-      final allCreditsFilter = AllCreditsFilter.empty().copyWith(
+      final allCreditsFilter = AllCreditsFilter.defaultFilter().copyWith(
         searchKey: SearchKey('12345'),
       );
       final expectedState = [
@@ -560,10 +574,16 @@ void main() {
       await tester.enterText(accountSummarySearchBar, '123');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
+
+      final appliedFilterWithSearch =
+          FullSummaryFilter.defaultFilter().copyWith(
+        documentDateFrom: DateTimeStringValue(''),
+        documentDateTo: DateTimeStringValue(''),
+      );
       verify(
         () => fullSummaryBlocMock.add(
           FullSummaryEvent.fetch(
-            appliedFilter: FullSummaryFilter.empty().copyWith(
+            appliedFilter: appliedFilterWithSearch.copyWith(
               searchKey: SearchKey.searchFilter('123'),
             ),
           ),
@@ -583,7 +603,7 @@ void main() {
       verify(
         () => mockDownloadPaymentAttachmentsBloc.add(
           DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
-            queryObject: FullSummaryFilter.empty(),
+            queryObject: FullSummaryFilter.defaultFilter(),
           ),
         ),
       ).called(1);
@@ -595,7 +615,7 @@ void main() {
           isLoading: true,
         ),
         FullSummaryState.initial().copyWith(
-          appliedFilter: FullSummaryFilter.empty().copyWith(
+          appliedFilter: FullSummaryFilter.defaultFilter().copyWith(
             filterStatuses: ['fake-status'],
           ),
         ),
@@ -615,7 +635,7 @@ void main() {
       verify(
         () => fullSummaryFilterBlocMock.add(
           FullSummaryFilterEvent.openFilterBottomSheet(
-            appliedFilter: FullSummaryFilter.empty().copyWith(
+            appliedFilter: FullSummaryFilter.defaultFilter().copyWith(
               filterStatuses: ['fake-status'],
             ),
           ),

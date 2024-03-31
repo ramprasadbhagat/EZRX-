@@ -349,7 +349,7 @@ class _ResetButton extends StatelessWidget {
                 const AvailableCreditFilterEvent.resetFilters(),
               );
           Navigator.of(context).pop(
-            AvailableCreditFilter.empty(),
+            AvailableCreditFilter.defaultFilter(),
           );
         },
         child: Text(

@@ -63,7 +63,7 @@ void main() {
               ),
               pageSize: config.pageSize,
               offset: 0,
-              appliedFilter: AvailableCreditFilter.empty(),
+              appliedFilter: AvailableCreditFilter.defaultFilter(),
               searchKey: SearchKey.searchFilter(''),
             ),
           ).thenAnswer(
@@ -72,12 +72,12 @@ void main() {
         },
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
+            appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
-          appliedFilter: AvailableCreditFilter.empty(),
+          appliedFilter: AvailableCreditFilter.defaultFilter(),
           items: openItems,
           salesOrganization: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('Fake-Sales-Org'),
@@ -126,19 +126,19 @@ void main() {
               ),
               pageSize: config.pageSize,
               offset: 0,
-              appliedFilter: AvailableCreditFilter.empty(),
+              appliedFilter: AvailableCreditFilter.defaultFilter(),
               searchKey: SearchKey.searchFilter(''),
             ),
           ).thenAnswer((invocation) async => Right(openItems));
         },
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
-            appliedFilter: AvailableCreditFilter.empty(),
+            appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
-          appliedFilter: AvailableCreditFilter.empty(),
+          appliedFilter: AvailableCreditFilter.defaultFilter(),
           items: openItems,
           salesOrganization: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('Fake-Sales-Org'),
@@ -177,7 +177,7 @@ void main() {
           config: config,
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
-          appliedFilter: AvailableCreditFilter.empty(),
+          appliedFilter: AvailableCreditFilter.defaultFilter(),
           items: openItems,
           salesOrganization: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('Fake-Sales-Org'),
@@ -197,7 +197,7 @@ void main() {
               ),
               pageSize: config.pageSize,
               offset: openItems.length,
-              appliedFilter: AvailableCreditFilter.empty(),
+              appliedFilter: AvailableCreditFilter.defaultFilter(),
               searchKey: SearchKey.searchFilter(''),
             ),
           ).thenAnswer(
@@ -239,7 +239,7 @@ void main() {
           config: config,
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
-          appliedFilter: AvailableCreditFilter.empty(),
+          appliedFilter: AvailableCreditFilter.defaultFilter(),
           items: openItems,
           salesOrganization: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('Fake-Sales-Org'),
@@ -259,7 +259,7 @@ void main() {
               ),
               pageSize: config.pageSize,
               offset: openItems.length,
-              appliedFilter: AvailableCreditFilter.empty(),
+              appliedFilter: AvailableCreditFilter.defaultFilter(),
               searchKey: SearchKey.searchFilter(''),
             ),
           ).thenAnswer((invocation) async => Right(openItems));

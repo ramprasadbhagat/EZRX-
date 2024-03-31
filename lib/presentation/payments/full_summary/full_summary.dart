@@ -74,7 +74,7 @@ class _FullSummaryPageState extends State<FullSummaryPage> {
                 controller: _controller,
                 onRefresh: () => context.read<FullSummaryBloc>().add(
                       FullSummaryEvent.fetch(
-                        appliedFilter: FullSummaryFilter.empty(),
+                        appliedFilter: FullSummaryFilter.defaultFilter(),
                       ),
                     ),
                 onLoadingMore: () => context.read<FullSummaryBloc>().add(

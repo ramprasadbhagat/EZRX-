@@ -129,7 +129,7 @@ void main() {
           () => allCreditsAndInvoicesRepository.filterInvoices(
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            filter: AllInvoicesFilter.empty().copyWith(
+            filter: AllInvoicesFilter.defaultFilter().copyWith(
               searchKey: SearchKey(
                 creditAndInvoiceItemList.first.searchKey.getValue(),
               ),
@@ -177,7 +177,7 @@ void main() {
           () => allCreditsAndInvoicesRepository.filterInvoices(
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            filter: AllInvoicesFilter.empty().copyWith(
+            filter: AllInvoicesFilter.defaultFilter().copyWith(
               searchKey: SearchKey(
                 creditAndInvoiceItemList.first.searchKey.getValue(),
               ),
@@ -214,7 +214,7 @@ void main() {
           () => allCreditsAndInvoicesRepository.filterInvoices(
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            filter: AllInvoicesFilter.empty().copyWith(
+            filter: AllInvoicesFilter.defaultFilter().copyWith(
               searchKey: SearchKey(
                 creditAndInvoiceItemList.first.searchKey.getValue(),
               ),

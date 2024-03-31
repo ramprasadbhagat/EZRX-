@@ -64,7 +64,7 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
   void initState() {
     context.read<PaymentSummaryBloc>().add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.empty(),
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
           ),
         );

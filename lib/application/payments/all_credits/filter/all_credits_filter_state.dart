@@ -10,7 +10,7 @@ class AllCreditsFilterState with _$AllCreditsFilterState {
   }) = _AllCreditsFilterState;
 
   factory AllCreditsFilterState.initial() => AllCreditsFilterState(
-        filter: AllCreditsFilter.empty(),
+        filter: AllCreditsFilter.defaultFilter(),
         showErrorMessages: false,
         statuses: <String>[
           'Open',

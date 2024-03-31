@@ -52,7 +52,7 @@ void main() {
       remoteDataSource: allCreditsAndInvoicesRemoteDataSourceMock,
     );
     mockList = List<CreditAndInvoiceItem>.empty();
-    allCreditsFilter = AllCreditsFilter.empty().copyWith(
+    allCreditsFilter = AllCreditsFilter.defaultFilter().copyWith(
       documentDateTo: DateTimeStringValue(
         getDateStringByDateTime(fakeToDate),
       ),
@@ -108,7 +108,7 @@ void main() {
           pageSize: 1,
           offset: 0,
           filterMap: AllCreditsFilterDto.fromDomain(
-            AllCreditsFilter.empty().copyWith(
+            AllCreditsFilter.defaultFilter().copyWith(
               documentDateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               documentDateTo:
@@ -143,7 +143,7 @@ void main() {
           pageSize: 1,
           offset: 0,
           filterMap: AllCreditsFilterDto.fromDomain(
-            AllCreditsFilter.empty().copyWith(
+            AllCreditsFilter.defaultFilter().copyWith(
               documentDateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               documentDateTo:
@@ -176,7 +176,7 @@ void main() {
           pageSize: 1,
           offset: 0,
           filterMap: AllCreditsFilterDto.fromDomain(
-            AllCreditsFilter.empty().copyWith(
+            AllCreditsFilter.defaultFilter().copyWith(
               documentDateFrom:
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
               documentDateTo:

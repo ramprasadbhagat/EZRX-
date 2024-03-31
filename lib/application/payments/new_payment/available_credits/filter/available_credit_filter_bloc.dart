@@ -57,7 +57,13 @@ class AvailableCreditFilterBloc
       ),
       resetFilters: (e) async => emit(
         AvailableCreditFilterState.initial().copyWith(
-          filter: AvailableCreditFilter.empty(),
+          filter: AvailableCreditFilter.defaultFilter(),
+        ),
+      ),
+      updateFilterToLastApplied: (e) async => emit(
+        state.copyWith(
+          filter: e.lastAppliedFilter,
+          showErrorMessage: false,
         ),
       ),
     );

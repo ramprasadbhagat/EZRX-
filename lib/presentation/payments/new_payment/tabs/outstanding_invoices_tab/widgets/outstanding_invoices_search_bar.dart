@@ -26,9 +26,9 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
             key: state.searchKey.searchValueOrEmpty,
           ),
           onSearchChanged: (value) =>
-              _search(context: context, state: state, searchKey: value),
+              _search(context: context, searchKey: value),
           onSearchSubmitted: (value) =>
-              _search(context: context, state: state, searchKey: value),
+              _search(context: context, searchKey: value),
           hintText: context.tr('Search'),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
@@ -37,7 +37,7 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
           ],
           customValidator: (value) => SearchKey.search(value).isValid(),
           enabled: !state.isLoading,
-          onClear: () => _search(context: context, state: state, searchKey: ''),
+          onClear: () => _search(context: context, searchKey: ''),
           initialValue: state.searchKey.searchValueOrEmpty,
         );
       },
@@ -46,13 +46,14 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
 
   void _search({
     required BuildContext context,
-    required OutstandingInvoicesState state,
     required String searchKey,
   }) {
     trackMixpanelEvent(MixpanelEvents.documentNumberSearched);
     context.read<OutstandingInvoicesBloc>().add(
           OutstandingInvoicesEvent.fetch(
-            appliedFilter: state.appliedFilter,
+            appliedFilter: searchKey.isEmpty
+                ? OutstandingInvoiceFilter.defaultFilter()
+                : OutstandingInvoiceFilter.empty(),
             searchKey: SearchKey.searchFilter(searchKey),
           ),
         );

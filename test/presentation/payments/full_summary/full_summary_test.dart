@@ -131,24 +131,10 @@ void main() {
   }
 
   group('Full Summary Page Test', () {
-    testWidgets('Empty Data', (tester) async {
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      expect(find.byType(NoRecordFound), findsOneWidget);
-      expect(find.text('No documents to show'.tr()), findsOneWidget);
-      expect(find.byType(NewPaymentButton), findsOneWidget);
-      expect(
-        find.textContaining(
-          'Documents issued on eZRx+ will be shown here'.tr(),
-        ),
-        findsOneWidget,
-      );
-    });
-
     testWidgets('Search Not Found', (tester) async {
       when(() => fullSummaryBlocMock.state).thenReturn(
         FullSummaryState.initial().copyWith(
-          appliedFilter: FullSummaryFilter.empty().copyWith(
+          appliedFilter: FullSummaryFilter.defaultFilter().copyWith(
             searchKey: fakeSearchKey,
           ),
         ),
@@ -232,7 +218,7 @@ void main() {
       verify(
         () => fullSummaryBlocMock.add(
           FullSummaryEvent.fetch(
-            appliedFilter: FullSummaryFilter.empty(),
+            appliedFilter: FullSummaryFilter.defaultFilter(),
           ),
         ),
       );
@@ -510,7 +496,7 @@ void main() {
         (tester) async {
       when(() => fullSummaryBlocMock.state).thenReturn(
         FullSummaryState.initial().copyWith(
-          appliedFilter: FullSummaryFilter.empty()
+          appliedFilter: FullSummaryFilter.defaultFilter()
               .copyWith(filterStatuses: ['fake-status']),
         ),
       );

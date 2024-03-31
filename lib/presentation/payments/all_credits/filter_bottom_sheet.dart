@@ -403,10 +403,10 @@ class _ResetButton extends StatelessWidget {
         key: WidgetKeys.filterResetButton,
         onPressed: () {
           if (context.read<AllCreditsFilterBloc>().state.filter.excludeSearch !=
-              AllCreditsFilter.empty()) {
+              AllCreditsFilter.defaultFilter()) {
             context.read<AllCreditsBloc>().add(
                   AllCreditsEvent.fetch(
-                    appliedFilter: AllCreditsFilter.empty().copyWith(
+                    appliedFilter: AllCreditsFilter.defaultFilter().copyWith(
                       searchKey: context
                           .read<AllCreditsBloc>()
                           .state

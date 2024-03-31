@@ -10,7 +10,7 @@ class AllInvoicesFilterState with _$AllInvoicesFilterState {
   }) = _AllInvoicesFilterState;
 
   factory AllInvoicesFilterState.initial() => AllInvoicesFilterState(
-        filter: AllInvoicesFilter.empty(),
+        filter: AllInvoicesFilter.defaultFilter(),
         showErrorMessages: false,
         statuses: <String>[
           'Open',

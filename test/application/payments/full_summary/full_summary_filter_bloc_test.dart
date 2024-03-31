@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   const fakeStatus = 'fake-status';
-  final fakeFullSummaryFilter = FullSummaryFilter.empty().copyWith(
+  final fakeFullSummaryFilter = FullSummaryFilter.defaultFilter().copyWith(
     filterStatuses: [fakeStatus],
   );
   final fakeDateRange = DateTimeRange(
@@ -53,7 +53,7 @@ void main() {
         ),
         expect: () => [
           FullSummaryFilterState.initial().copyWith(
-            showErrorMessages: true,
+            showErrorMessages: false,
           ),
         ],
       );

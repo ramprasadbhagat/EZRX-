@@ -18,7 +18,7 @@ class AllCreditsState with _$AllCreditsState {
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
-        appliedFilter: AllCreditsFilter.empty(),
+        appliedFilter: AllCreditsFilter.defaultFilter(),
         items: <CreditAndInvoiceItem>[],
         salesOrganisation: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),

@@ -24,7 +24,6 @@ void main() {
   late AllCreditsAndInvoicesRepository repository;
   late List<CreditAndInvoiceItem> creditAndInvoiceItemList;
 
-
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = AllCreditsAndInvoicesRepositoryMock();
@@ -35,7 +34,7 @@ void main() {
     fakeResult = [
       CreditAndInvoiceItem.empty(),
     ];
-    allInvoicesFilter = AllInvoicesFilter.empty();
+    allInvoicesFilter = AllInvoicesFilter.defaultFilter();
     exception = const ApiFailure.other('fake-error');
     creditAndInvoiceItemList =
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
@@ -90,7 +89,7 @@ void main() {
         },
         act: (AllInvoicesBloc bloc) => bloc.add(
           AllInvoicesEvent.fetch(
-            appliedFilter: AllInvoicesFilter.empty(),
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
           ),
         ),
         expect: () => [
@@ -124,7 +123,7 @@ void main() {
         },
         act: (AllInvoicesBloc bloc) => bloc.add(
           AllInvoicesEvent.fetch(
-            appliedFilter: AllInvoicesFilter.empty(),
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
           ),
         ),
         expect: () => [

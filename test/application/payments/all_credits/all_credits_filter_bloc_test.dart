@@ -22,7 +22,7 @@ void main() {
   });
 
   setUp(() {
-    allCreditsFilter = AllCreditsFilter.empty();
+    allCreditsFilter = AllCreditsFilter.defaultFilter();
     fakeToDate = DateTime.parse(
       DateFormat('yyyyMMdd').format(
         DateTime.now(),

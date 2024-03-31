@@ -479,7 +479,7 @@ class _ResetButton extends StatelessWidget {
                 const OutstandingInvoiceFilterEvent.resetFilters(),
               );
           Navigator.of(context).pop(
-            OutstandingInvoiceFilter.empty(),
+            OutstandingInvoiceFilter.defaultFilter(),
           );
         },
         child: Text(

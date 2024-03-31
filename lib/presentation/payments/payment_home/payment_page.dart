@@ -123,13 +123,13 @@ class PaymentPage extends StatelessWidget {
               state.principalCutoffs.canMakePayment) {
             context.read<OutstandingInvoicesBloc>().add(
                   OutstandingInvoicesEvent.fetch(
-                    appliedFilter: OutstandingInvoiceFilter.init(),
+                    appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
                     searchKey: SearchKey.search(''),
                   ),
                 );
             context.read<AvailableCreditsBloc>().add(
                   AvailableCreditsEvent.fetch(
-                    appliedFilter: AvailableCreditFilter.init(),
+                    appliedFilter: AvailableCreditFilter.defaultFilter(),
                     searchKey: SearchKey.searchFilter(''),
                   ),
                 );

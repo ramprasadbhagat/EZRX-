@@ -54,7 +54,7 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late List<CustomerOpenItem> fakeInvoices;
 
-  final invoiceFilter = OutstandingInvoiceFilter.empty().copyWith(
+  final invoiceFilter = OutstandingInvoiceFilter.defaultFilter().copyWith(
     amountValueFrom: RangeValue('1'),
     amountValueTo: RangeValue('10'),
     documentDateFrom: DateTimeStringValue('-'),
@@ -446,7 +446,7 @@ void main() {
       verify(
         () => outstandingInvoicesBlocMock.add(
           OutstandingInvoicesEvent.fetch(
-            appliedFilter: OutstandingInvoiceFilter.empty(),
+            appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
             searchKey: outstandingInvoicesBlocMock.state.searchKey,
           ),
         ),

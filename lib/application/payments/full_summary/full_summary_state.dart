@@ -19,7 +19,7 @@ class FullSummaryState with _$FullSummaryState {
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
-        appliedFilter: FullSummaryFilter.empty(),
+        appliedFilter: FullSummaryFilter.defaultFilter(),
         items: <CreditAndInvoiceItem>[],
       );
 }

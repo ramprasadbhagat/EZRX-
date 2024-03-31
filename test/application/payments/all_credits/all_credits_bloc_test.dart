@@ -32,7 +32,7 @@ void main() {
     fakeResult = [
       CreditAndInvoiceItem.empty(),
     ];
-    allCreditsFilter = AllCreditsFilter.empty();
+    allCreditsFilter = AllCreditsFilter.defaultFilter();
   });
 
   group(
@@ -83,7 +83,7 @@ void main() {
         act: (AllCreditsBloc bloc) {
           bloc.add(
             AllCreditsEvent.fetch(
-              appliedFilter: AllCreditsFilter.empty(),
+              appliedFilter: AllCreditsFilter.defaultFilter(),
             ),
           );
         },
@@ -122,7 +122,7 @@ void main() {
         },
         act: (AllCreditsBloc bloc) => bloc.add(
           AllCreditsEvent.fetch(
-            appliedFilter: AllCreditsFilter.empty(),
+            appliedFilter: AllCreditsFilter.defaultFilter(),
           ),
         ),
         expect: () => [
@@ -144,7 +144,7 @@ void main() {
           config: config,
         ),
         seed: () => AllCreditsState.initial().copyWith(
-          appliedFilter: AllCreditsFilter.empty().copyWith(
+          appliedFilter: AllCreditsFilter.defaultFilter().copyWith(
             searchKey: SearchKey('fake-search-key'),
           ),
         ),
@@ -165,7 +165,7 @@ void main() {
         },
         act: (AllCreditsBloc bloc) => bloc.add(
           AllCreditsEvent.fetch(
-            appliedFilter: AllCreditsFilter.empty().copyWith(
+            appliedFilter: AllCreditsFilter.defaultFilter().copyWith(
               searchKey: SearchKey('fake-search-key'),
             ),
           ),

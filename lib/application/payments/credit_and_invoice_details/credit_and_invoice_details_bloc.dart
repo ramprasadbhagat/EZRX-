@@ -87,7 +87,7 @@ class CreditAndInvoiceDetailsBloc
             await allCreditsAndInvoicesRepository.filterInvoices(
           salesOrganisation: state.salesOrganisation,
           customerCodeInfo: state.customerCodeInfo,
-          filter: AllInvoicesFilter.empty().copyWith(
+          filter: AllInvoicesFilter.defaultFilter().copyWith(
             searchKey: SearchKey(event.invoiceId),
           ),
           pageSize: 1,

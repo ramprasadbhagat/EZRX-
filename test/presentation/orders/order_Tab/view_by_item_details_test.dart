@@ -1243,7 +1243,7 @@ void main() {
       verify(
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
-            appliedFilter: AllInvoicesFilter.empty().copyWith(
+            appliedFilter: AllInvoicesFilter.defaultFilter().copyWith(
               searchKey: SearchKey.searchFilter(
                 fakeOrderHistoryItem.invoiceData.invoiceNumber
                     .getOrDefaultValue(''),
