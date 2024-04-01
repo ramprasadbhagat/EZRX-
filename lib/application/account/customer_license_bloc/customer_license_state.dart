@@ -2,6 +2,7 @@ part of 'customer_license_bloc.dart';
 
 @freezed
 class CustomerLicenseState with _$CustomerLicenseState {
+  const CustomerLicenseState._();
   const factory CustomerLicenseState({
     required bool isFetching,
     required bool canLoadMore,
@@ -15,4 +16,7 @@ class CustomerLicenseState with _$CustomerLicenseState {
         failureOrSuccessOption: none(),
         customerLicenses: <CustomerLicense>[],
       );
+
+  bool get isLicenseExpired => customerLicenses
+      .any((element) => !element.validTo.isDateMoreThanAWeekAway);
 }

@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -75,6 +76,10 @@ class PriceOverrideBlocMock
     extends MockBloc<PriceOverrideEvent, PriceOverrideState>
     implements PriceOverrideBloc {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
     implements OrderSummaryBloc {}
@@ -92,6 +97,7 @@ void main() {
   late SalesOrgBloc salesOrgBloc;
   late CustomerCodeBloc customerCodeBloc;
   late OrderEligibilityBloc orderEligibilityBloc;
+  late CustomerLicenseBloc customerLicenseBlocMock;
 
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
@@ -116,6 +122,7 @@ void main() {
     cartBloc = CartBlocMock();
     materialPriceBloc = MaterialPriceBlocMock();
     salesOrgBloc = SalesOrgBlocMock();
+    customerLicenseBlocMock = CustomerLicenseBlocMock();
     customerCodeBloc = CustomerCodeBlocMock();
     eligibilityBloc = EligibilityBlocMock();
     userBloc = UserBlocMock();
@@ -175,6 +182,8 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
       );
+      when(() => customerLicenseBlocMock.state)
+          .thenReturn(CustomerLicenseState.initial());
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
           selectedOrderType: OrderDocumentType.empty().copyWith(
@@ -208,6 +217,9 @@ void main() {
             BlocProvider<CartBloc>(create: (context) => cartBloc),
             BlocProvider<MaterialPriceBloc>(
               create: (context) => materialPriceBloc,
+            ),
+            BlocProvider<CustomerLicenseBloc>(
+              create: (context) => customerLicenseBlocMock,
             ),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
             BlocProvider<CustomerCodeBloc>(

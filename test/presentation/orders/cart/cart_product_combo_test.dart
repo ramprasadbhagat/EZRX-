@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
@@ -58,6 +59,10 @@ class OrderEligibilityBlocMock
     extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
     implements OrderEligibilityBloc {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
@@ -116,6 +121,7 @@ void main() {
   late OrderSummaryBloc orderSummaryBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late ComboDealListBloc comboDealListBlocMock;
+  late CustomerLicenseBloc customerLicenseBlocMock;
   late ComboDealMaterialDetailBloc comboDealMaterialDetailBlocMock;
 
   setUpAll(() async {
@@ -140,6 +146,7 @@ void main() {
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     comboDealListBlocMock = ComboDealListBlocMock();
+    customerLicenseBlocMock = CustomerLicenseBlocMock();
     comboDealMaterialDetailBlocMock = ComboDealMaterialDetailBlocMock();
 
     mockPriceList = {};
@@ -205,6 +212,8 @@ void main() {
           ),
         ),
       );
+      when(() => customerLicenseBlocMock.state)
+          .thenReturn(CustomerLicenseState.initial());
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
           selectedOrderType: OrderDocumentType.empty().copyWith(
@@ -306,6 +315,9 @@ void main() {
             ),
             BlocProvider<OrderEligibilityBloc>(
               create: (context) => orderEligibilityBloc,
+            ),
+            BlocProvider<CustomerLicenseBloc>(
+              create: (context) => customerLicenseBlocMock,
             ),
             BlocProvider<PriceOverrideBloc>(
               create: (context) => priceOverrideBloc,

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
@@ -24,6 +25,7 @@ import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
+import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
@@ -184,6 +186,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           key: WidgetKeys.scrollList,
           controller: _scrollController,
           children: [
+            const LicenseExpiredBanner(),
             const EdiUserBanner(),
             const _ProductImageSection(),
             const _BodyContent(),
@@ -493,6 +496,9 @@ class _FooterState extends State<_Footer> {
         Price.empty();
     final eligibilityState = context.read<EligibilityBloc>().state;
     if (eligibilityState.disableCreateOrder) return false;
+    if (context.read<CustomerLicenseBloc>().state.isLicenseExpired) {
+      return false;
+    }
     final materialWithoutPrice =
         eligibilityState.salesOrgConfigs.materialWithoutPrice;
     final materialInStock = (!stockInfo.inStock.isMaterialInStock

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -62,6 +63,10 @@ class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
@@ -95,6 +100,7 @@ void main() {
   late ProductDetailBlocMock productDetailBlocMock;
   late MaterialPriceBlocMock materialPriceBlocMock;
   late CustomerCodeBlocMock customerCodeBlocMock;
+  late CustomerLicenseBloc customerLicenseBlocMock;
   late CartBlocMock cartBlocMock;
   late OrderEligibilityBloc orderEligibilityBloc;
   late AppRouter autoRouterMock;
@@ -126,6 +132,7 @@ void main() {
         materialListBlocMock = MaterialListBlocMock();
         productDetailBlocMock = ProductDetailBlocMock();
         eligibilityBlocMock = EligibilityBlocMock();
+        customerLicenseBlocMock = CustomerLicenseBlocMock();
 
         materialPriceBlocMock = MaterialPriceBlocMock();
         customerCodeBlocMock = CustomerCodeBlocMock();
@@ -147,6 +154,8 @@ void main() {
             salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
+        when(() => customerLicenseBlocMock.state)
+            .thenReturn(CustomerLicenseState.initial());
         when(() => orderEligibilityBloc.state)
             .thenReturn(OrderEligibilityState.initial());
         when(() => productDetailBlocMock.state)
@@ -205,6 +214,9 @@ void main() {
               create: (context) => productImageBlocMock,
             ),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            BlocProvider<CustomerLicenseBloc>(
+              create: (context) => customerLicenseBlocMock,
+            ),
           ],
           child: const ProductsTab(),
         );

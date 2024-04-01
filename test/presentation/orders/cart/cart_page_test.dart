@@ -1,5 +1,6 @@
 // ignore_for_file: unused_local_variable
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -112,6 +113,10 @@ class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class TenderContractBlocMock
     extends MockBloc<TenderContractEvent, TenderContractState>
     implements TenderContractBloc {}
@@ -177,6 +182,7 @@ void main() {
   late List<PriceAggregate> mockCartItemDiscountBundles;
   late MaterialListBloc materialListBlocMock;
   late TenderContractBloc tenderContractBlocMock;
+  late CustomerLicenseBloc customerLicenseBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late DiscountOverrideBloc discountOverrideBlocMock;
   late List<PriceAggregate> mockCartItemWithDataListOverride;
@@ -265,6 +271,7 @@ void main() {
       announcementBlocMock = AnnouncementBlocMock();
       autoRouterMock = MockAppRouter();
       productImageBloc = ProductImageBlocMock();
+      customerLicenseBlocMock = CustomerLicenseBlocMock();
       paymentCustomerInformationMock = PaymentCustomerInformationMockBloc();
 
       mockPriceList = {};
@@ -588,6 +595,8 @@ void main() {
       );
       when(() => priceOverrideBloc.state)
           .thenReturn(PriceOverrideState.initial());
+      when(() => customerLicenseBlocMock.state)
+          .thenReturn(CustomerLicenseState.initial());
       when(() => additionalDetailsBlocMock.state)
           .thenReturn(AdditionalDetailsState.initial());
       when(() => comboDealListBlocMock.state)
@@ -665,6 +674,9 @@ void main() {
             ),
             BlocProvider<PaymentCustomerInformationBloc>(
               create: (context) => paymentCustomerInformationMock,
+            ),
+            BlocProvider<CustomerLicenseBloc>(
+              create: (context) => customerLicenseBlocMock,
             ),
           ],
           child: const CartPage(),

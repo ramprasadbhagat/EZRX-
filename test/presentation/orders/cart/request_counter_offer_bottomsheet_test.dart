@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -45,6 +46,10 @@ import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
@@ -60,6 +65,7 @@ void main() {
   late OrderSummaryBloc orderSummaryBlocMock;
   late List<PriceAggregate> cartItems;
   late OrderEligibilityBloc orderEligibilityBloc;
+  late CustomerLicenseBloc customerLicenseBlocMock;
   final cartPageFinder = find.byKey(WidgetKeys.cartPage);
 
   setUpAll(() async {
@@ -94,6 +100,7 @@ void main() {
         customerCodeBloc = CustomerCodeBlocMock();
         eligibilityBloc = EligibilityBlocMock();
         userBloc = UserBlocMock();
+        customerLicenseBlocMock = CustomerLicenseBlocMock();
         orderEligibilityBloc = OrderEligibilityBlocMock();
         priceOverrideBloc = PriceOverrideBlocMock();
         orderSummaryBlocMock = OrderSummaryBlocMock();
@@ -118,6 +125,8 @@ void main() {
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(),
         );
+        when(() => customerLicenseBlocMock.state)
+            .thenReturn(CustomerLicenseState.initial());
         when(() => orderEligibilityBloc.state).thenReturn(
           OrderEligibilityState.initial(),
         );
@@ -182,6 +191,9 @@ void main() {
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
           BlocProvider<AnnouncementBloc>(
             create: (context) => announcementBlocMock,
+          ),
+          BlocProvider<CustomerLicenseBloc>(
+            create: (context) => customerLicenseBlocMock,
           ),
         ],
         child: child,

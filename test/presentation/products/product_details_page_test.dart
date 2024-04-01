@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -47,6 +48,10 @@ class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class ProductImageMockBloc
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
@@ -72,6 +77,7 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late ProductDetailBloc productDetailBloc;
   final mockCartBloc = CartMocBloc();
+  late CustomerLicenseBloc customerLicenseBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
   final mockProductImageBloc = ProductImageMockBloc();
   late Map<MaterialNumber, Price> mockPriceList;
@@ -90,6 +96,7 @@ void main() {
       customerCodeBlocMock = CustomerCodeBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      customerLicenseBlocMock = CustomerLicenseBlocMock();
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
@@ -105,6 +112,8 @@ void main() {
           .thenReturn(ProductImageState.initial());
       when(() => comboDealListMockBloc.state)
           .thenReturn(ComboDealListState.initial());
+      when(() => customerLicenseBlocMock.state)
+          .thenReturn(CustomerLicenseState.initial());
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -149,6 +158,9 @@ void main() {
             ),
             BlocProvider<ComboDealListBloc>(
               create: (context) => comboDealListMockBloc,
+            ),
+            BlocProvider<CustomerLicenseBloc>(
+              create: (context) => customerLicenseBlocMock,
             ),
           ],
           child: Scaffold(

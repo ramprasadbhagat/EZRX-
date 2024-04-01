@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
@@ -68,6 +69,10 @@ class ProductDetailsMockBloc
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class ComboDealMaterialDetailBlocMock
     extends MockBloc<ComboDealMaterialDetailEvent, ComboDealMaterialDetailState>
     implements ComboDealMaterialDetailBloc {}
@@ -108,6 +113,7 @@ void main() {
   late MaterialInfo materialInfo;
   late StockInfo stockInfo;
   late StockInfo emptyStockInfo;
+  late CustomerLicenseBloc customerLicenseBlocMock;
   late Price materialPrice;
   late Price materialPriceForTireSection;
   final user = fakeClientUser;
@@ -222,6 +228,7 @@ void main() {
         cartMockBloc = CartMockBloc();
         eligibilityBlocMock = EligibilityBlocMock();
         autoRouterMock = MockAppRouter();
+        customerLicenseBlocMock = CustomerLicenseBlocMock();
 
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
@@ -248,6 +255,8 @@ void main() {
             .thenReturn(ComboDealListState.initial());
         when(() => comboDealMaterialDetailBlocMock.state)
             .thenReturn(ComboDealMaterialDetailState.initial());
+        when(() => customerLicenseBlocMock.state)
+            .thenReturn(CustomerLicenseState.initial());
       });
 
       RouteDataScope getScopedWidget() {
@@ -278,6 +287,9 @@ void main() {
             ),
             BlocProvider<ComboDealListBloc>(
               create: (context) => comboDealListMockBloc,
+            ),
+            BlocProvider<CustomerLicenseBloc>(
+              create: (context) => customerLicenseBlocMock,
             ),
           ],
           child: ProductDetailsPage(materialInfo: materialInfo),

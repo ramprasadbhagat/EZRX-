@@ -1,7 +1,9 @@
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
 import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner.dart';
@@ -29,90 +31,102 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     //BlocBuilder is required here as there is a delay in userbloc
     //due to delay UI is not updating according to accessright value
-    return BlocBuilder<EligibilityBloc, EligibilityState>(
+    return BlocBuilder<CustomerLicenseBloc, CustomerLicenseState>(
       buildWhen: (previous, current) =>
-          //check user role and accessRight as getter depends on both
+          previous.isLicenseExpired != current.isLicenseExpired,
+      builder: (context, customerLicenseState) {
+        return BlocBuilder<EligibilityBloc, EligibilityState>(
+          buildWhen: (previous, current) =>
+              //check user role and accessRight as getter depends on both
 
-          previous.salesOrgConfigs != current.salesOrgConfigs ||
-          previous.customerCodeInfo != current.customerCodeInfo ||
-          (previous.shipToInfo != current.shipToInfo && current.haveShipTo),
-      builder: (context, state) {
-        return Scaffold(
-          key: WidgetKeys.homeScreen,
-          appBar: CustomAppBar.homeTabAppBar(
-            title: const CustomerCodeSelector(
-              key: WidgetKeys.customerCodeSelector,
-            ),
-            actionWidget: const [
-              Padding(
-                padding: EdgeInsets.only(right: 16.0),
-                child: CartButton(),
+              previous.salesOrgConfigs != current.salesOrgConfigs ||
+              previous.customerCodeInfo != current.customerCodeInfo ||
+              (previous.shipToInfo != current.shipToInfo && current.haveShipTo),
+          builder: (context, state) {
+            return Scaffold(
+              key: WidgetKeys.homeScreen,
+              appBar: CustomAppBar.homeTabAppBar(
+                title: const CustomerCodeSelector(
+                  key: WidgetKeys.customerCodeSelector,
+                ),
+                actionWidget: const [
+                  Padding(
+                    padding: EdgeInsets.only(right: 16.0),
+                    child: CartButton(),
+                  ),
+                ],
+                customerBlockedOrSuspended: state.customerBlockOrSuspended,
+                isSearchBarVisible: state.user.userCanAccessProducts,
+                boxShadowColor: state.disableCreateOrder
+                    ? ZPColors.customerBlockedBannerColor
+                    : customerLicenseState.isLicenseExpired
+                        ? ZPColors.errorSnackBarColor
+                        : ZPColors.white,
               ),
-            ],
-            customerBlockedOrSuspended: state.customerBlockOrSuspended,
-            isSearchBarVisible: state.user.userCanAccessProducts,
-            boxShadowColor: state.disableCreateOrder
-                ? ZPColors.customerBlockedBannerColor
-                : ZPColors.white,
-          ),
-          //SingleChildScrollView and Column is needed
-          //as the ListView is rebuilding the BrowseProduct & BundleSection
-          //and it was recreating the BlocProvider
-          body: RefreshIndicator(
-            onRefresh: () async => context.read<SalesOrgBloc>().add(
-                  SalesOrgEvent.loadSavedOrganisation(
-                    salesOrganisations: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .user
-                        .userSalesOrganisations,
+              //SingleChildScrollView and Column is needed
+              //as the ListView is rebuilding the BrowseProduct & BundleSection
+              //and it was recreating the BlocProvider
+              body: RefreshIndicator(
+                onRefresh: () async => context.read<SalesOrgBloc>().add(
+                      SalesOrgEvent.loadSavedOrganisation(
+                        salesOrganisations: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .user
+                            .userSalesOrganisations,
+                      ),
+                    ),
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    children: [
+                      AnnouncementWidget(
+                        currentPath: const HomeTabRoute().path,
+                        key: WidgetKeys.homeTabAnnouncementWidget,
+                      ),
+                      const LicenseExpiredBanner(),
+                      const EdiUserBanner(),
+                      const QuickAccessMenuPanel(),
+                      const CarouselBanner(),
+                      BlocBuilder<EligibilityBloc, EligibilityState>(
+                        buildWhen: (previous, current) =>
+                            previous.marketPlaceEligible !=
+                            current.marketPlaceEligible,
+                        builder: (context, state) => state.marketPlaceEligible
+                            ? const ExploreMarketPlaceBanner()
+                            : const SizedBox(),
+                      ),
+                      BlocBuilder<EligibilityBloc, EligibilityState>(
+                        buildWhen: (previous, current) =>
+                            previous.comboDealEligible !=
+                            current.comboDealEligible,
+                        builder: (context, state) {
+                          if (state.comboDealEligible) {
+                            return const ComboOffersSection();
+                          }
+
+                          return const SizedBox.shrink();
+                        },
+                      ),
+                      if (state.haveShipTo &&
+                          state.user.userCanAccessProducts) ...[
+                        const ProductsOnOffer(),
+                        if (!state.salesOrgConfigs.disableBundles)
+                          const BundleSection(),
+                      ],
+                      if (state.haveShipTo &&
+                          state.user.userCanAccessOrderHistory)
+                        const RecentOrdersSection(),
+                      if (state.haveShipTo && state.user.userCanAccessProducts)
+                        const BrowseProduct(),
+                      const TopAdvertBoxBanner(),
+                      const AnnouncementSection(),
+                    ],
                   ),
                 ),
-            child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Column(
-                children: [
-                  AnnouncementWidget(
-                    currentPath: const HomeTabRoute().path,
-                    key: WidgetKeys.homeTabAnnouncementWidget,
-                  ),
-                  const EdiUserBanner(),
-                  const QuickAccessMenuPanel(),
-                  const CarouselBanner(),
-                  BlocBuilder<EligibilityBloc, EligibilityState>(
-                    buildWhen: (previous, current) =>
-                        previous.marketPlaceEligible !=
-                        current.marketPlaceEligible,
-                    builder: (context, state) => state.marketPlaceEligible
-                        ? const ExploreMarketPlaceBanner()
-                        : const SizedBox(),
-                  ),
-                  BlocBuilder<EligibilityBloc, EligibilityState>(
-                    buildWhen: (previous, current) =>
-                        previous.comboDealEligible != current.comboDealEligible,
-                    builder: (context, state) {
-                      if (state.comboDealEligible) {
-                        return const ComboOffersSection();
-                      }
-
-                      return const SizedBox.shrink();
-                    },
-                  ),
-                  if (state.haveShipTo && state.user.userCanAccessProducts) ...[
-                    const ProductsOnOffer(),
-                    if (!state.salesOrgConfigs.disableBundles)
-                      const BundleSection(),
-                  ],
-                  if (state.haveShipTo && state.user.userCanAccessOrderHistory)
-                    const RecentOrdersSection(),
-                  if (state.haveShipTo && state.user.userCanAccessProducts)
-                    const BrowseProduct(),
-                  const TopAdvertBoxBanner(),
-                  const AnnouncementSection(),
-                ],
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/order/re_order_permission/re_order_permis
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_status_section.dart';
@@ -54,6 +55,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                 : ListView(
                     key: WidgetKeys.scrollList,
                     children: <Widget>[
+                      const LicenseExpiredBanner(),
                       const EdiUserBanner(),
                       const OrderHeaderSection(),
                       if (eligibilityState.salesOrg.isID)

@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
+import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -342,6 +344,7 @@ class _CartPageState extends State<CartPage> {
               ),
               body: Column(
                 children: [
+                  const LicenseExpiredBanner(),
                   const EdiUserBanner(),
                   AnnouncementWidget(
                     currentPath: context.router.currentPath,

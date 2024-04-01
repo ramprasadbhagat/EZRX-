@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
@@ -509,6 +510,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       salesConfigs: state.salesOrgConfigs,
                       customerCodeInfo: state.customerCodeInfo,
                       shipToInfo: state.shipToInfo,
+                    ),
+                  );
+
+              context.read<CustomerLicenseBloc>().add(
+                    CustomerLicenseEvent.fetch(
+                      customerInfo: state.customerCodeInfo,
+                      salesOrganisation: state.salesOrganisation,
+                      user: state.user,
                     ),
                   );
 

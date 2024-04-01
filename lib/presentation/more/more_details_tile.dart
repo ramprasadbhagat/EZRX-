@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
@@ -209,15 +208,6 @@ class MoreDetailsTile {
         ),
         label: 'Profile',
         onTap: () {
-          context.read<CustomerLicenseBloc>().add(
-                CustomerLicenseEvent.fetch(
-                  customerInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  user: context.read<EligibilityBloc>().state.user,
-                ),
-              );
           context.read<UserBloc>().add(
                 UserEvent.selectLanguage(
                   context.read<UserBloc>().state.user.preferredLanguage,

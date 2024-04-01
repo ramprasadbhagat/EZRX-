@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -70,6 +71,10 @@ class PriceOverrideBlocMock
     extends MockBloc<PriceOverrideEvent, PriceOverrideState>
     implements PriceOverrideBloc {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
     implements OrderSummaryBloc {}
@@ -93,6 +98,7 @@ void main() {
   late OrderSummaryBloc orderSummaryBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late BonusMaterialBloc bonusMaterialBlocMock;
+  late CustomerLicenseBloc customerLicenseBlocMock;
 
   setUpAll(() async {
     locator.registerLazySingleton(
@@ -119,6 +125,7 @@ void main() {
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       bonusMaterialBlocMock = BonusMaterialBlocMock();
+      customerLicenseBlocMock = CustomerLicenseBlocMock();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -167,6 +174,8 @@ void main() {
           .thenReturn(AdditionalDetailsState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
+      when(() => customerLicenseBlocMock.state)
+          .thenReturn(CustomerLicenseState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => bonusMaterialBlocMock.state)
           .thenReturn(BonusMaterialState.initial());
@@ -201,6 +210,9 @@ void main() {
             ),
             BlocProvider<AdditionalDetailsBloc>(
               create: (context) => additionalDetailsBlocMock,
+            ),
+            BlocProvider<CustomerLicenseBloc>(
+              create: (context) => customerLicenseBlocMock,
             ),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(

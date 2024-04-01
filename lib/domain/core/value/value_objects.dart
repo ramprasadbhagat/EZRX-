@@ -184,6 +184,8 @@ class DateTimeStringValue extends ValueObject<String> {
 
   bool get aWeekDifference => differenceNGTWeek(dateTime);
 
+  bool get isDateMoreThanAWeekAway => checkIfDateMoreThanAWeekAway(dateTime);
+
   DateTimeStringValue get threeDaysAfter => DateTimeStringValue(
         getThreeDaysAfterString(
           dateTime,

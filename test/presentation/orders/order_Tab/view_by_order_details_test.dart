@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -128,6 +129,10 @@ class MockPoAttachmentBloc
     extends MockBloc<PoAttachmentEvent, PoAttachmentState>
     implements PoAttachmentBloc {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class MockMixpanelService extends Mock implements MixpanelService {}
 
 class PaymentCustomerInformationBlocMock extends MockBloc<
@@ -158,9 +163,11 @@ void main() {
   late ViewByOrder viewByOrderWithTax;
   late OrderHistoryDetailsOrderItem fakeOrderHistoryItem;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
+  late CustomerLicenseBloc customerLicenseBlocMock;
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
+    customerLicenseBlocMock = CustomerLicenseBlocMock();
     locator.registerFactory(() => reOrderPermissionBlocMock);
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());
@@ -219,6 +226,8 @@ void main() {
           user: fakeClientUser,
         ),
       );
+      when(() => customerLicenseBlocMock.state)
+          .thenReturn(CustomerLicenseState.initial());
       when(() => viewByOrderBlocMock.state)
           .thenReturn(ViewByOrderState.initial());
       when(() => customerCodeBlocMock.state)
@@ -315,6 +324,9 @@ void main() {
           ),
           BlocProvider<ViewByItemsBloc>(
             create: (context) => mockViewByItemsBloc,
+          ),
+          BlocProvider<CustomerLicenseBloc>(
+            create: (context) => customerLicenseBlocMock,
           ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<EligibilityBloc>(

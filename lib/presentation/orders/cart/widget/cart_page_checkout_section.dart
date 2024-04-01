@@ -126,7 +126,8 @@ class _CartPageCheckoutButton extends StatelessWidget {
                 : null,
             key: WidgetKeys.checkoutButton,
             onPressed: isFetching ||
-                    context.read<EligibilityBloc>().state.disableCreateOrder
+                    context.read<EligibilityBloc>().state.disableCreateOrder ||
+                    context.read<CustomerLicenseBloc>().state.isLicenseExpired
                 ? null
                 : () => _onCheckOutPressed(context),
             child: Text(context.tr('Check out')),

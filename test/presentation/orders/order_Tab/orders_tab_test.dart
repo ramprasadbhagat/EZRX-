@@ -1,6 +1,7 @@
 import 'package:auto_route/src/matcher/route_matcher.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -64,6 +65,10 @@ class CustomerCodeBlocMock
 
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class ConfigMock extends Mock implements Config {}
 
 class OrdersTabRouter extends AppRouter {
@@ -87,6 +92,7 @@ void main() {
   late ViewByItemFilterBloc viewByItemFilterBlocMock;
   late MixpanelService mixpanelServiceMock;
   late Config config;
+  late CustomerLicenseBloc customerLicenseBlocMock;
 
   setUpAll(() {
     locator.registerLazySingleton(() => config);
@@ -97,6 +103,7 @@ void main() {
     locator.registerFactory<AppRouter>(() => OrdersTabRouter());
     autoRouterMock = locator<AppRouter>();
     mixpanelServiceMock = locator<MixpanelService>();
+    customerLicenseBlocMock = CustomerLicenseBlocMock();
     config = ConfigMock();
   });
   setUp(() {
@@ -124,6 +131,8 @@ void main() {
         .thenReturn(ViewByOrderFilterState.initial());
     when(() => viewByItemFilterBlocMock.state)
         .thenReturn(ViewByItemFilterState.initial());
+    when(() => customerLicenseBlocMock.state)
+        .thenReturn(CustomerLicenseState.initial());
   });
 
   Widget testWidget(Widget widget) {
@@ -156,6 +165,9 @@ void main() {
         ),
         BlocProvider<ViewByItemFilterBloc>(
           create: (context) => viewByItemFilterBlocMock,
+        ),
+        BlocProvider<CustomerLicenseBloc>(
+          create: (context) => customerLicenseBlocMock,
         ),
       ],
       child: Material(child: widget),

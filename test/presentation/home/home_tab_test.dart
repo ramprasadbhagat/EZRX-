@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -76,6 +77,10 @@ class MockIntroBloc extends MockBloc<IntroEvent, IntroState>
 class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
+
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
 
 class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
     implements ViewByItemsBloc {}
@@ -155,6 +160,7 @@ void main() {
   late Notifications notifications;
   late DeepLinkingBloc deepLinkingBlocMock;
   late List<MaterialInfo> bundles;
+  late CustomerLicenseBloc customerLicenseBlocMock;
 
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -215,6 +221,7 @@ void main() {
       productImageBlocMock = ProductImageBlocMock();
       mockIntroBloc = MockIntroBloc();
       notificationBlocMock = NotificationBlocMock();
+      customerLicenseBlocMock = CustomerLicenseBlocMock();
 
       VisibilityDetectorController.instance.updateInterval = Duration.zero;
 
@@ -241,6 +248,8 @@ void main() {
       when(() => notificationBlocMock.state).thenReturn(
         NotificationState.initial(),
       );
+      when(() => customerLicenseBlocMock.state)
+          .thenReturn(CustomerLicenseState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => viewByItemsBlocMock.state)
@@ -334,6 +343,9 @@ void main() {
             ),
             BlocProvider<ProductImageBloc>(
               create: (context) => productImageBlocMock,
+            ),
+            BlocProvider<CustomerLicenseBloc>(
+              create: (context) => customerLicenseBlocMock,
             ),
           ],
           child: widget,

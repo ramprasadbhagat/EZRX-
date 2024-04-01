@@ -750,13 +750,14 @@ class __$$_CustomerLicenseStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerLicenseState implements _CustomerLicenseState {
+class _$_CustomerLicenseState extends _CustomerLicenseState {
   const _$_CustomerLicenseState(
       {required this.isFetching,
       required this.canLoadMore,
       required this.failureOrSuccessOption,
       required final List<CustomerLicense> customerLicenses})
-      : _customerLicenses = customerLicenses;
+      : _customerLicenses = customerLicenses,
+        super._();
 
   @override
   final bool isFetching;
@@ -809,13 +810,14 @@ class _$_CustomerLicenseState implements _CustomerLicenseState {
           this, _$identity);
 }
 
-abstract class _CustomerLicenseState implements CustomerLicenseState {
+abstract class _CustomerLicenseState extends CustomerLicenseState {
   const factory _CustomerLicenseState(
       {required final bool isFetching,
       required final bool canLoadMore,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final List<CustomerLicense>
           customerLicenses}) = _$_CustomerLicenseState;
+  const _CustomerLicenseState._() : super._();
 
   @override
   bool get isFetching;

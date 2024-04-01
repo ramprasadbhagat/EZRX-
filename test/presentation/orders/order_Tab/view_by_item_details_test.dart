@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -101,6 +102,10 @@ class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class ReOrderPermissionBlocMock
     extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
     implements ReOrderPermissionBloc {}
@@ -162,6 +167,7 @@ void main() {
   late ProductImageBloc mockProductImageBloc;
   late MaterialPriceBloc materialPriceBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
+  late CustomerLicenseBloc customerLicenseBlocMock;
 
   const fakeCreatedDate = '20230412';
   setUpAll(() async {
@@ -216,6 +222,7 @@ void main() {
       mockAuthBloc = MockAuthBloc();
       mockProductImageBloc = MockProductImageBloc();
       materialPriceBlocMock = MaterialPriceBlocMock();
+      customerLicenseBlocMock = CustomerLicenseBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
@@ -233,6 +240,8 @@ void main() {
       when(() => productImageBlocMock.state)
           .thenReturn(ProductImageState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => customerLicenseBlocMock.state)
+          .thenReturn(CustomerLicenseState.initial());
       when(() => allInvoicesBlocMock.state)
           .thenReturn(AllInvoicesState.initial());
       when(() => creditAndInvoiceDetailsBlocMock.state)
@@ -314,6 +323,9 @@ void main() {
           ),
           BlocProvider<PaymentCustomerInformationBloc>(
             create: ((context) => paymentCustomerInformationBlocMock),
+          ),
+          BlocProvider<CustomerLicenseBloc>(
+            create: (context) => customerLicenseBlocMock,
           ),
         ],
         child: const Material(

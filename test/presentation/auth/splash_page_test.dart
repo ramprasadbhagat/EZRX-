@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
@@ -147,6 +148,10 @@ class PaymentCustomerInformationBlocMock extends MockBloc<
 
 class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState>
     implements PaymentTermBloc {}
+
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
@@ -406,6 +411,7 @@ void main() {
   late ArticlesInfoBloc articlesInfoBlocMock;
   late FullSummaryBloc fullSummaryBlocMock;
   late ArticlesInfoFilterBloc articlesInfoFilterBlocMock;
+  late CustomerLicenseBloc customerLicenseBlocMock;
   late AnnouncementFilterBloc announcementFilterBlocMock;
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -518,6 +524,7 @@ void main() {
       articlesInfoBlocMock = ArticlesInfoBlocMock();
       productImageBloc = ProductImageBlocMock();
       articlesInfoFilterBlocMock = ArticlesInfoFilterBlocMock();
+      customerLicenseBlocMock = CustomerLicenseBlocMock();
       announcementFilterBlocMock = AnnouncementFilterBlocMock();
       resetPasswordBlocMock = ResetPasswordBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -636,6 +643,8 @@ void main() {
           .thenReturn(ResetPasswordState.initial());
       when(() => articlesInfoFilterBlocMock.state)
           .thenReturn(ArticlesInfoFilterState.initial());
+      when(() => customerLicenseBlocMock.state)
+          .thenReturn(CustomerLicenseState.initial());
       when(() => announcementFilterBlocMock.state)
           .thenReturn(AnnouncementFilterState.initial());
     });
@@ -815,6 +824,9 @@ void main() {
             ),
             BlocProvider<ArticlesInfoFilterBloc>(
               create: (context) => articlesInfoFilterBlocMock,
+            ),
+            BlocProvider<CustomerLicenseBloc>(
+              create: (context) => customerLicenseBlocMock,
             ),
             BlocProvider<AnnouncementFilterBloc>(
               create: (context) => announcementFilterBlocMock,

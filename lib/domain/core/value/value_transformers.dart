@@ -179,7 +179,8 @@ DateTime? tryParseDateTime(String input) {
       }
 
       //Case Date and Time and(MM/dd/yyyy HH:mm a)example: '01/30/2024 04:32 PM'
-      if (RegExp(r'^\d{1,2}/\d{1,2}/\d{4} \d{1,2}:\d{1,2} (AM|PM)$').hasMatch(input)) {
+      if (RegExp(r'^\d{1,2}/\d{1,2}/\d{4} \d{1,2}:\d{1,2} (AM|PM)$')
+          .hasMatch(input)) {
         return DateFormat(DateTimeFormatString.announcementDateFormat)
             .parse(input, false)
             .toLocal();
@@ -472,6 +473,12 @@ bool differenceNGTWeek(DateTime date) {
   return (!diff.isNegative) && diff < 7;
 }
 
+bool checkIfDateMoreThanAWeekAway(DateTime date) {
+  final diff = date.difference(DateTime.now()).inDays;
+
+  return diff > 7;
+}
+
 bool isApproved(String status) {
   return status == 'APPROVED';
 }
@@ -535,7 +542,7 @@ List<StatusType> getReturnStatusDetails(String status) {
 
     default:
       final normalizedStatus = bapiStatusType(status).toLowerCase();
-      
+
       return returnStatusList
           .skipWhile(
             (item) =>
