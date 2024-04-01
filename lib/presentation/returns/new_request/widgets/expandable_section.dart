@@ -36,13 +36,16 @@ class _ExpandableSectionState extends State<ExpandableSection> {
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                _isExpanded ? 'Hide details'.tr() : 'Show details'.tr(),
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: ZPColors.extraDarkGreen,
-                      fontWeight: FontWeight.w800,
-                    ),
+              Flexible(
+                child: Text(
+                  _isExpanded ? 'Hide details'.tr() : 'Show details'.tr(),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ZPColors.extraDarkGreen,
+                        fontWeight: FontWeight.w800,
+                      ),
+                ),
               ),
               const SizedBox(
                 width: 10,

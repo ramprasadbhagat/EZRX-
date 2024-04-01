@@ -50,39 +50,37 @@ class ReturnDetailsTab extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.selectedItems != current.selectedItems,
       builder: (context, state) {
-        return SingleChildScrollView(
+        return ListView(
           key: WidgetKeys.returnDetailsListView,
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
           ),
-          child: Column(
-            children: [
-              if (state.containsMPItems)
-                Padding(
-                  padding: const EdgeInsets.only(top: 16, bottom: 5),
-                  child: Row(
-                    children: [
-                      const MarketPlaceRectangleLogo(),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: MarketPlaceSellerTitle(
-                          sellerName:
-                              state.selectedItems.first.principalName.name,
-                        ),
+          children: [
+            if (state.containsMPItems)
+              Padding(
+                padding: const EdgeInsets.only(top: 16, bottom: 5),
+                child: Row(
+                  children: [
+                    const MarketPlaceRectangleLogo(),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: MarketPlaceSellerTitle(
+                        sellerName:
+                            state.selectedItems.first.principalName.name,
                       ),
-                    ],
-                  ),
-                ),
-              ...state.selectedItems
-                  .map(
-                    (item) => _ReturnMaterialWidget(
-                      item: item,
-                      detail: state.getReturnItemDetails(item.uuid),
                     ),
-                  )
-                  .toList(),
-            ],
-          ),
+                  ],
+                ),
+              ),
+            ...state.selectedItems
+                .map(
+                  (item) => _ReturnMaterialWidget(
+                    item: item,
+                    detail: state.getReturnItemDetails(item.uuid),
+                  ),
+                )
+                .toList(),
+          ],
         );
       },
     );

@@ -1331,7 +1331,7 @@ void main() {
       expect(file, findsWidgets);
       expect(fileDeleteIcon, findsWidgets);
       await tester.fling(
-        find.byType(SingleChildScrollView),
+        find.byType(ListView),
         const Offset(0.0, -1500.0),
         1000.0,
       );
