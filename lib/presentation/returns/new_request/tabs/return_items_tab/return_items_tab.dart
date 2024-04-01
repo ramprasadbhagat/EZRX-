@@ -40,6 +40,26 @@ class ReturnItemsTab extends StatelessWidget {
     return Column(
       children: [
         Padding(
+          padding: const EdgeInsets.fromLTRB(12, 24, 12, 4),
+          child: ListTile(
+            tileColor: ZPColors.blueAccent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                5,
+              ),
+            ),
+            horizontalTitleGap: 10,
+            subtitle: Text(
+              context.tr(
+                'Return requests can be created from invoices dated within the last 24 months ONLY.',
+              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: ZPColors.neutralsDarkBlack,
+                  ),
+            ),
+          ),
+        ),
+        Padding(
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
           child: Row(
             children: [

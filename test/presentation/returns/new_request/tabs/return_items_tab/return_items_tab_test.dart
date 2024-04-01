@@ -184,6 +184,19 @@ void main() {
     );
 
     testWidgets(
+      '=> display messages of return request in new return request page - step 1',
+      (tester) async {
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final msg = find.text(
+          'Return requests can be created from invoices dated within the last 24 months ONLY.'
+              .tr(),
+        );
+        expect(msg, findsOneWidget);
+      },
+    );
+
+    testWidgets(
       '=> display outside return policy tag when toggle is off in the sales org config',
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
@@ -362,7 +375,7 @@ void main() {
       expect(scrollListFinder, findsOneWidget);
       await tester.drag(
         scrollListFinder,
-        const Offset(0.0, -1000.0),
+        const Offset(0.0, -3000.0),
       );
       await tester.pumpAndSettle();
       verify(
