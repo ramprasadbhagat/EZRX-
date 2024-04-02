@@ -215,6 +215,8 @@ mixin _$PriceTierItemDto {
   double get minAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'scaleBasis', defaultValue: '')
   String get scaleBasis => throw _privateConstructorUsedError;
+  @JsonKey(name: 'promotionAmount', defaultValue: 0)
+  double get promotionAmount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -236,7 +238,9 @@ abstract class $PriceTierItemDtoCopyWith<$Res> {
       @JsonKey(name: 'rate', defaultValue: 0) double rate,
       @JsonKey(name: 'percentage', defaultValue: 0) double percentage,
       @JsonKey(name: 'minAmount', defaultValue: 0) double minAmount,
-      @JsonKey(name: 'scaleBasis', defaultValue: '') String scaleBasis});
+      @JsonKey(name: 'scaleBasis', defaultValue: '') String scaleBasis,
+      @JsonKey(name: 'promotionAmount', defaultValue: 0)
+      double promotionAmount});
 }
 
 /// @nodoc
@@ -260,6 +264,7 @@ class _$PriceTierItemDtoCopyWithImpl<$Res, $Val extends PriceTierItemDto>
     Object? percentage = null,
     Object? minAmount = null,
     Object? scaleBasis = null,
+    Object? promotionAmount = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -294,6 +299,10 @@ class _$PriceTierItemDtoCopyWithImpl<$Res, $Val extends PriceTierItemDto>
           ? _value.scaleBasis
           : scaleBasis // ignore: cast_nullable_to_non_nullable
               as String,
+      promotionAmount: null == promotionAmount
+          ? _value.promotionAmount
+          : promotionAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -314,7 +323,9 @@ abstract class _$$_PriceTierItemDtoCopyWith<$Res>
       @JsonKey(name: 'rate', defaultValue: 0) double rate,
       @JsonKey(name: 'percentage', defaultValue: 0) double percentage,
       @JsonKey(name: 'minAmount', defaultValue: 0) double minAmount,
-      @JsonKey(name: 'scaleBasis', defaultValue: '') String scaleBasis});
+      @JsonKey(name: 'scaleBasis', defaultValue: '') String scaleBasis,
+      @JsonKey(name: 'promotionAmount', defaultValue: 0)
+      double promotionAmount});
 }
 
 /// @nodoc
@@ -336,6 +347,7 @@ class __$$_PriceTierItemDtoCopyWithImpl<$Res>
     Object? percentage = null,
     Object? minAmount = null,
     Object? scaleBasis = null,
+    Object? promotionAmount = null,
   }) {
     return _then(_$_PriceTierItemDto(
       type: null == type
@@ -370,6 +382,10 @@ class __$$_PriceTierItemDtoCopyWithImpl<$Res>
           ? _value.scaleBasis
           : scaleBasis // ignore: cast_nullable_to_non_nullable
               as String,
+      promotionAmount: null == promotionAmount
+          ? _value.promotionAmount
+          : promotionAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -386,7 +402,9 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
       @JsonKey(name: 'rate', defaultValue: 0) required this.rate,
       @JsonKey(name: 'percentage', defaultValue: 0) required this.percentage,
       @JsonKey(name: 'minAmount', defaultValue: 0) required this.minAmount,
-      @JsonKey(name: 'scaleBasis', defaultValue: '') required this.scaleBasis})
+      @JsonKey(name: 'scaleBasis', defaultValue: '') required this.scaleBasis,
+      @JsonKey(name: 'promotionAmount', defaultValue: 0)
+      required this.promotionAmount})
       : super._();
 
   factory _$_PriceTierItemDto.fromJson(Map<String, dynamic> json) =>
@@ -416,10 +434,13 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
   @override
   @JsonKey(name: 'scaleBasis', defaultValue: '')
   final String scaleBasis;
+  @override
+  @JsonKey(name: 'promotionAmount', defaultValue: 0)
+  final double promotionAmount;
 
   @override
   String toString() {
-    return 'PriceTierItemDto(type: $type, applyBonus: $applyBonus, sequence: $sequence, quantity: $quantity, rate: $rate, percentage: $percentage, minAmount: $minAmount, scaleBasis: $scaleBasis)';
+    return 'PriceTierItemDto(type: $type, applyBonus: $applyBonus, sequence: $sequence, quantity: $quantity, rate: $rate, percentage: $percentage, minAmount: $minAmount, scaleBasis: $scaleBasis, promotionAmount: $promotionAmount)';
   }
 
   @override
@@ -440,13 +461,15 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
             (identical(other.minAmount, minAmount) ||
                 other.minAmount == minAmount) &&
             (identical(other.scaleBasis, scaleBasis) ||
-                other.scaleBasis == scaleBasis));
+                other.scaleBasis == scaleBasis) &&
+            (identical(other.promotionAmount, promotionAmount) ||
+                other.promotionAmount == promotionAmount));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, type, applyBonus, sequence,
-      quantity, rate, percentage, minAmount, scaleBasis);
+      quantity, rate, percentage, minAmount, scaleBasis, promotionAmount);
 
   @JsonKey(ignore: true)
   @override
@@ -475,7 +498,9 @@ abstract class _PriceTierItemDto extends PriceTierItemDto {
       @JsonKey(name: 'minAmount', defaultValue: 0)
       required final double minAmount,
       @JsonKey(name: 'scaleBasis', defaultValue: '')
-      required final String scaleBasis}) = _$_PriceTierItemDto;
+      required final String scaleBasis,
+      @JsonKey(name: 'promotionAmount', defaultValue: 0)
+      required final double promotionAmount}) = _$_PriceTierItemDto;
   const _PriceTierItemDto._() : super._();
 
   factory _PriceTierItemDto.fromJson(Map<String, dynamic> json) =
@@ -505,6 +530,9 @@ abstract class _PriceTierItemDto extends PriceTierItemDto {
   @override
   @JsonKey(name: 'scaleBasis', defaultValue: '')
   String get scaleBasis;
+  @override
+  @JsonKey(name: 'promotionAmount', defaultValue: 0)
+  double get promotionAmount;
   @override
   @JsonKey(ignore: true)
   _$$_PriceTierItemDtoCopyWith<_$_PriceTierItemDto> get copyWith =>

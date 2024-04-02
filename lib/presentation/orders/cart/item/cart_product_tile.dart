@@ -308,6 +308,23 @@ class _MaterialDetails extends StatelessWidget {
               ),
             ],
           ),
+          //todo add promotional info
+          if (cartItem.displayPromotionalDiscountForID)
+            Text(
+              '${cartItem.promotionValue.map(
+                    (e) => context.tr(
+                      e.message,
+                      namedArgs: e.arguments,
+                    ),
+                  ).join(',')} ${context.tr('offer applied')}',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: ZPColors.extraLightGrey4,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  key: WidgetKeys.cartPromotions(cartItem.getMaterialNumber.getValue()),
+            ),
           if (cartItem.price.isCounterOfferRequested)
             Text(
               context.tr('Requested counter offer'),

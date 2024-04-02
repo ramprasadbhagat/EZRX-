@@ -671,6 +671,7 @@ class WidgetKeys {
   static const Key cartZPProductSection = Key('cartZPProductSection');
   static const Key cartMPProductSection = Key('cartMPProductSection');
   static const Key cartMPProductSectionLabel = Key('cartMPProductSectionLabel');
+  static Key cartPromotions(String materialNumber) => Key('cartPromotion$materialNumber');
 
   //============================================================
   //  Checkout Page Keys

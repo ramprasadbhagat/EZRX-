@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
+import 'package:ezrxmobile/domain/core/error/tr_object.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
@@ -895,6 +896,24 @@ class PriceAggregate with _$PriceAggregate {
 
     return false;
   }
+
+  List<TRObject> get promotionValue {
+    return price.allPriceTireItem
+        .where((element) => element.promotionAmount.abs() > 0)
+        .map((element) {
+      return element.percentage > 0
+          ? TRObject(
+              '{discountValue} discount',
+              arguments: {'discountValue': '${element.promotionAmount.abs()}%'},
+            )
+          : TRObject(
+              'IDR ${element.promotionAmount.abs()}',
+            );
+    }).toList();
+  }
+
+  bool get displayPromotionalDiscountForID =>
+      promotionValue.isNotEmpty && salesOrgConfig.salesOrg.isID;
 }
 
 enum PriceType {

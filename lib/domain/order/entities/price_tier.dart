@@ -40,6 +40,7 @@ class PriceTierItem with _$PriceTierItem {
     required double percentage,
     required double minAmount,
     required ScaleBasis scaleBasis,
+    required double promotionAmount, 
   }) = _PriceTierItem;
 
   factory PriceTierItem.empty() => PriceTierItem(
@@ -51,5 +52,6 @@ class PriceTierItem with _$PriceTierItem {
         percentage: 0,
         minAmount: 0,
         scaleBasis: ScaleBasis(''),
+        promotionAmount:0,
       );
 }

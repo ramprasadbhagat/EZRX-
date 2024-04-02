@@ -50,6 +50,7 @@ class PriceTierItemDto with _$PriceTierItemDto {
     @JsonKey(name: 'percentage', defaultValue: 0) required double percentage,
     @JsonKey(name: 'minAmount', defaultValue: 0) required double minAmount,
     @JsonKey(name: 'scaleBasis', defaultValue: '') required String scaleBasis,
+    @JsonKey(name: 'promotionAmount', defaultValue: 0) required double promotionAmount,
   }) = _PriceTierItemDto;
 
   factory PriceTierItemDto.fromDomain(PriceTierItem priceTierItem) {
@@ -62,6 +63,7 @@ class PriceTierItemDto with _$PriceTierItemDto {
       percentage: priceTierItem.percentage,
       minAmount: priceTierItem.minAmount,
       scaleBasis: priceTierItem.scaleBasis.value.getOrElse(() => ''),
+      promotionAmount: priceTierItem.promotionAmount,
     );
   }
 
@@ -74,6 +76,7 @@ class PriceTierItemDto with _$PriceTierItemDto {
         percentage: percentage,
         minAmount: minAmount,
         scaleBasis: ScaleBasis(scaleBasis),
+        promotionAmount: promotionAmount,
       );
 
   factory PriceTierItemDto.fromJson(Map<String, dynamic> json) =>

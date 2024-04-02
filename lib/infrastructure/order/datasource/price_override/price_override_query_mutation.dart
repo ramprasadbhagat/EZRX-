@@ -68,6 +68,7 @@ query price(
                 Percentage
                 MinAmount
                 ScaleBasis
+                PromotionAmount
               }
             }
             Bundles {

@@ -167,6 +167,7 @@ mixin _$PriceTierItem {
   double get percentage => throw _privateConstructorUsedError;
   double get minAmount => throw _privateConstructorUsedError;
   ScaleBasis get scaleBasis => throw _privateConstructorUsedError;
+  double get promotionAmount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceTierItemCopyWith<PriceTierItem> get copyWith =>
@@ -187,7 +188,8 @@ abstract class $PriceTierItemCopyWith<$Res> {
       double rate,
       double percentage,
       double minAmount,
-      ScaleBasis scaleBasis});
+      ScaleBasis scaleBasis,
+      double promotionAmount});
 }
 
 /// @nodoc
@@ -211,6 +213,7 @@ class _$PriceTierItemCopyWithImpl<$Res, $Val extends PriceTierItem>
     Object? percentage = null,
     Object? minAmount = null,
     Object? scaleBasis = null,
+    Object? promotionAmount = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -245,6 +248,10 @@ class _$PriceTierItemCopyWithImpl<$Res, $Val extends PriceTierItem>
           ? _value.scaleBasis
           : scaleBasis // ignore: cast_nullable_to_non_nullable
               as ScaleBasis,
+      promotionAmount: null == promotionAmount
+          ? _value.promotionAmount
+          : promotionAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -265,7 +272,8 @@ abstract class _$$_PriceTierItemCopyWith<$Res>
       double rate,
       double percentage,
       double minAmount,
-      ScaleBasis scaleBasis});
+      ScaleBasis scaleBasis,
+      double promotionAmount});
 }
 
 /// @nodoc
@@ -287,6 +295,7 @@ class __$$_PriceTierItemCopyWithImpl<$Res>
     Object? percentage = null,
     Object? minAmount = null,
     Object? scaleBasis = null,
+    Object? promotionAmount = null,
   }) {
     return _then(_$_PriceTierItem(
       type: null == type
@@ -321,6 +330,10 @@ class __$$_PriceTierItemCopyWithImpl<$Res>
           ? _value.scaleBasis
           : scaleBasis // ignore: cast_nullable_to_non_nullable
               as ScaleBasis,
+      promotionAmount: null == promotionAmount
+          ? _value.promotionAmount
+          : promotionAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -336,7 +349,8 @@ class _$_PriceTierItem extends _PriceTierItem {
       required this.rate,
       required this.percentage,
       required this.minAmount,
-      required this.scaleBasis})
+      required this.scaleBasis,
+      required this.promotionAmount})
       : super._();
 
   @override
@@ -355,10 +369,12 @@ class _$_PriceTierItem extends _PriceTierItem {
   final double minAmount;
   @override
   final ScaleBasis scaleBasis;
+  @override
+  final double promotionAmount;
 
   @override
   String toString() {
-    return 'PriceTierItem(type: $type, applyBonus: $applyBonus, sequence: $sequence, quantity: $quantity, rate: $rate, percentage: $percentage, minAmount: $minAmount, scaleBasis: $scaleBasis)';
+    return 'PriceTierItem(type: $type, applyBonus: $applyBonus, sequence: $sequence, quantity: $quantity, rate: $rate, percentage: $percentage, minAmount: $minAmount, scaleBasis: $scaleBasis, promotionAmount: $promotionAmount)';
   }
 
   @override
@@ -379,12 +395,14 @@ class _$_PriceTierItem extends _PriceTierItem {
             (identical(other.minAmount, minAmount) ||
                 other.minAmount == minAmount) &&
             (identical(other.scaleBasis, scaleBasis) ||
-                other.scaleBasis == scaleBasis));
+                other.scaleBasis == scaleBasis) &&
+            (identical(other.promotionAmount, promotionAmount) ||
+                other.promotionAmount == promotionAmount));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, type, applyBonus, sequence,
-      quantity, rate, percentage, minAmount, scaleBasis);
+      quantity, rate, percentage, minAmount, scaleBasis, promotionAmount);
 
   @JsonKey(ignore: true)
   @override
@@ -402,7 +420,8 @@ abstract class _PriceTierItem extends PriceTierItem {
       required final double rate,
       required final double percentage,
       required final double minAmount,
-      required final ScaleBasis scaleBasis}) = _$_PriceTierItem;
+      required final ScaleBasis scaleBasis,
+      required final double promotionAmount}) = _$_PriceTierItem;
   const _PriceTierItem._() : super._();
 
   @override
@@ -421,6 +440,8 @@ abstract class _PriceTierItem extends PriceTierItem {
   double get minAmount;
   @override
   ScaleBasis get scaleBasis;
+  @override
+  double get promotionAmount;
   @override
   @JsonKey(ignore: true)
   _$$_PriceTierItemCopyWith<_$_PriceTierItem> get copyWith =>

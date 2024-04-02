@@ -53,7 +53,8 @@
                     "BonusQuantity": 1,
                     "LimitPerTransaction": 0,
                     "ConditionId": "0000205499",
-                    "OldMaterialCode": "190235496"                  }
+                    "OldMaterialCode": "190235496"
+                  }
                 ],
                 "Calculation": "913",
                 "QualifyingQuantity": 10
@@ -70,7 +71,8 @@
                     "BonusQuantity": 1,
                     "LimitPerTransaction": 0,
                     "ConditionId": "0000205499",
-                    "OldMaterialCode": "190235496"                  }
+                    "OldMaterialCode": "190235496"
+                  }
                 ],
                 "Calculation": "913",
                 "QualifyingQuantity": 10
@@ -143,7 +145,8 @@
                     "BonusQuantity": 1,
                     "LimitPerTransaction": 0,
                     "ConditionId": "0000205499",
-                    "OldMaterialCode": "190235496"                  }
+                    "OldMaterialCode": "190235496"
+                  }
                 ],
                 "Calculation": "913",
                 "QualifyingQuantity": 10
@@ -160,7 +163,8 @@
                     "BonusQuantity": 1,
                     "LimitPerTransaction": 0,
                     "ConditionId": "0000205499",
-                    "OldMaterialCode": "190235496"                  }
+                    "OldMaterialCode": "190235496"
+                  }
                 ],
                 "Calculation": "913",
                 "QualifyingQuantity": 10
@@ -180,7 +184,8 @@
                 "ApplyBonus": true,
                 "Percentage": null,
                 "MinAmount": null,
-                "ScaleBasis": ""
+                "ScaleBasis": "",
+                "PromotionAmount": -50
               },
               {
                 "Sequence": 0,
@@ -188,9 +193,10 @@
                 "Type": "",
                 "Rate": 97813.455,
                 "ApplyBonus": true,
-                "Percentage": null,
+                "Percentage": 5,
                 "MinAmount": null,
-                "ScaleBasis": ""
+                "ScaleBasis": "",
+                "PromotionAmount": -5
               }
             ]
           }
@@ -250,64 +256,65 @@
             ]
           }
         ],
-        "TieredPricing": 
-          [
-            {
-              "Tier": "C",
-              "PriceTier": [
-                {
-                  "Sequence": 0,
-                  "Quantity": 2,
-                  "Type": "",
-                  "Rate": 87785,
-                  "ApplyBonus": true,
-                  "Percentage": null,
-                  "MinAmount": 100,
-                  "ScaleBasis": "B"
-                },
-                {
-                  "Sequence": 0,
-                  "Quantity": 1,
-                  "Type": "",
-                  "Rate": 90500,
-                  "ApplyBonus": true,
-                  "Percentage": null,
-                  "MinAmount": 100,
-                  "ScaleBasis": "c"
-                },
-                {
-                  "Sequence": 0,
-                  "Quantity": 3,
-                  "Type": "",
-                  "Rate": 85500,
-                  "ApplyBonus": true,
-                  "Percentage": null,
-                  "MinAmount": null,
-                  "ScaleBasis": ""
-                },
-                {
-                  "Sequence": 0,
-                  "Quantity": 6,
-                  "Type": "",
-                  "Rate": 80500,
-                  "ApplyBonus": true,
-                  "Percentage": null,
-                  "MinAmount": null,
-                  "ScaleBasis": ""
-                },
-                {
-                  "Sequence": 0,
-                  "Quantity": 4,
-                  "Type": "",
-                  "Rate": 83500,
-                  "ApplyBonus": true,
-                  "Percentage": null,
-                  "MinAmount": null,
-                  "ScaleBasis": ""
-                }
-              ]
-            }
-          
+        "TieredPricing": [
+          {
+            "Tier": "C",
+            "PriceTier": [
+              {
+                "Sequence": 0,
+                "Quantity": 2,
+                "Type": "",
+                "Rate": 87785,
+                "ApplyBonus": true,
+                "Percentage": null,
+                "MinAmount": 100,
+                "ScaleBasis": "B"
+              },
+              {
+                "Sequence": 0,
+                "Quantity": 1,
+                "Type": "",
+                "Rate": 90500,
+                "ApplyBonus": true,
+                "Percentage": null,
+                "MinAmount": 100,
+                "ScaleBasis": "c"
+              },
+              {
+                "Sequence": 0,
+                "Quantity": 3,
+                "Type": "",
+                "Rate": 85500,
+                "ApplyBonus": true,
+                "Percentage": null,
+                "MinAmount": null,
+                "ScaleBasis": "",
+                "PromotionAmount": null
+              },
+              {
+                "Sequence": 0,
+                "Quantity": 6,
+                "Type": "",
+                "Rate": 80500,
+                "ApplyBonus": true,
+                "Percentage": null,
+                "MinAmount": null,
+                "ScaleBasis": "",
+                "PromotionAmount": null
+              },
+              {
+                "Sequence": 0,
+                "Quantity": 4,
+                "Type": "",
+                "Rate": 83500,
+                "ApplyBonus": true,
+                "Percentage": null,
+                "MinAmount": null,
+                "ScaleBasis": "",
+                "PromotionAmount": null
+              }
+            ]
+          }
         ],
         "Bundles": [],
         "Valid": true,
@@ -581,12 +588,12 @@
           "FlexibleGroup": "5000000018",
           "SalesDeal": "0040000110",
           "Category": {
-              "Type": "MATNR",
-              "Value": [
-                  "000000000021130726",
-                  "000000000021130718",
-                  "000000000021222875"
-              ]
+            "Type": "MATNR",
+            "Value": [
+              "000000000021130726",
+              "000000000021130718",
+              "000000000021222875"
+            ]
           }
         }
       },

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dart';
@@ -99,6 +100,7 @@ void main() {
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late BonusMaterialBloc bonusMaterialBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
+  late List<Price> mockMaterialPriceLocal;
 
   setUpAll(() async {
     locator.registerLazySingleton(
@@ -112,7 +114,7 @@ void main() {
     autoRouter = locator<AppRouter>();
   });
   setUp(
-    () {
+    () async {
       WidgetsFlutterBinding.ensureInitialized();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       cartBloc = CartBlocMock();
@@ -127,6 +129,8 @@ void main() {
       bonusMaterialBlocMock = BonusMaterialBlocMock();
       customerLicenseBlocMock = CustomerLicenseBlocMock();
 
+      mockMaterialPriceLocal =
+          await MaterialPriceLocalDataSource().getPriceList();
       mockPriceList = {};
       mockPriceList.putIfAbsent(
         MaterialNumber('000000000023168451'),
@@ -1026,6 +1030,62 @@ void main() {
 
           final taxLevelFinder = find.text('Total with tax:');
           expect(taxLevelFinder, findsNothing);
+        },
+      );
+
+      testWidgets(
+        'Show promotion in cart item for id market if promotion is not empty',
+        (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                cartItem.copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('21038302'),
+                    quantity: MaterialQty(1),
+                  ),
+                  price: mockMaterialPriceLocal.elementAt(1),
+                  salesOrgConfig: fakeIDSalesOrgConfigs,
+                ),
+              ],
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+
+          await tester.pumpAndSettle();
+
+          final promotionFinder =
+              find.byKey(WidgetKeys.cartPromotions('21038302'));
+          expect(promotionFinder, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Hide promotion in cart item for id market if promotion is empty',
+        (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                cartItem.copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('21038305'),
+                    quantity: MaterialQty(1),
+                  ),
+                  price: mockMaterialPriceLocal.first,
+                  salesOrgConfig: fakeIDSalesOrgConfigs,
+                ),
+              ],
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+
+          await tester.pumpAndSettle();
+
+          final promotionFinder =
+              find.byKey(WidgetKeys.cartPromotions('21038305'));
+          expect(promotionFinder, findsNothing);
         },
       );
     },

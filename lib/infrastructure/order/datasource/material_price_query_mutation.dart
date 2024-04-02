@@ -65,6 +65,7 @@ class MaterialPriceQueryMutation {
                 Percentage
                 MinAmount
                 ScaleBasis
+                PromotionAmount
               }
             }
             Bundles {
