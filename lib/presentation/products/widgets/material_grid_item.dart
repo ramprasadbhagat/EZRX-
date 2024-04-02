@@ -45,7 +45,7 @@ class MaterialGridItem extends StatelessWidget {
             Column(
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 4,
                   child: ColoredBox(
                     color: ZPColors.white,
                     child: Stack(
@@ -110,7 +110,7 @@ class MaterialGridItem extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Column(
@@ -124,6 +124,7 @@ class MaterialGridItem extends StatelessWidget {
                                 .salesOrgConfigs
                                 .enableGMC,
                           ),
+                          overflow: TextOverflow.ellipsis,
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.darkGray,

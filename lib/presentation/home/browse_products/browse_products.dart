@@ -97,7 +97,7 @@ class BrowseProduct extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 300,
+                        height: 360,
                         child: state.isFetching
                             ? const ProductLoadingShimmer(
                                 key: WidgetKeys.browseProductLoadingShimmer,
