@@ -60,7 +60,7 @@ parameters:
   - name: max_test_time 
     displayName: Max Test Time
     type: object
-    default: 3000
+    default: 10000
     values:
       - 3000
       - 1500
@@ -278,8 +278,20 @@ stages:
               echo "Testcase:" "${testSuite[0]}"
               echo "GeoLocation:" "${testSuite[1]}"
               echo "Using device:" "${{ parameters.device_name }}"
-            
 
+              check_parallel (){
+                random_number=$((1 + RANDOM % 30))
+                sleep $random_number
+                check_parallel="curl -k -u $BROWSERSTACK_CREDENTIALS -X GET "https://api-cloud.browserstack.com/app-automate/plan.json" "
+                parallel_res=`$check_parallel`
+                parallel_in_use=$(echo $parallel_res | jq '.parallel_sessions_running' )
+                max_parallel=$(echo $parallel_res | jq '.parallel_sessions_max_allowed' )
+                echo "We currently used all the parallel: $parallel_in_use / $max_parallel"
+              }
+              check_parallel
+
+              while  [ "$parallel_in_use" -eq "$max_parallel" ]; do echo "We currently used all the parallel: $parallel_in_use / $max_parallel, will sleep 30s"; sleep 30; check_parallel;  done
+              
               echo -e "\n"
               echo 'Uploading the App to Browserstack from $(System.DefaultWorkingDirectory)/build/app/outputs/apk/uat/debug/app-uat-debug.apk :'
 
@@ -324,18 +336,17 @@ stages:
                   val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
                   --header 'Content-Type: application/json' \
                   -u $BROWSERSTACK_CREDENTIALS \
-                  -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "geoLocation":"'"${testSuite[1]}}"'" , "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "deviceLogs":"true", "networkLogs":"true", "devices": ["'"${{ parameters.device_name }}"'"]}' )
+                  -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "geoLocation":"'"${testSuite[1]}}"'" , "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "autoGrantPermissions":"true", "deviceLogs":"true", "networkLogs":"true", "devices": ["'"${{ parameters.device_name }}"'"]}' )
                 else
                   val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
                   --header 'Content-Type: application/json' \
                   -u $BROWSERSTACK_CREDENTIALS \
-                  -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "deviceLogs":"true", "networkLogs":"true",  "devices": ["'"${{ parameters.device_name }}"'"]}' )
+                  -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "autoGrantPermissions":"true", "deviceLogs":"true", "networkLogs":"true",  "devices": ["'"${{ parameters.device_name }}"'"]}' )
                 fi
                 result_build_id=$(echo $val | sed 's/{.*"build_id":"*\([0-9a-zA-Z]*\)"*,*.*}/\1/')
                 echo "Build_Id : " $result_build_id                  
                 sleep 30 
               done
-
               
               buildStatus="running"
               buildMonitorStart=$SECONDS
@@ -405,7 +416,7 @@ stages:
               az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name dndstsharednpd/ezrxplus/template$(Build.BuildId) 
 
               if [ -n "$total_cases" ] && [ -n "$passed_cases" ]; then
-                if [ "$total_cases" -eq "0"]; then 
+                if [ "$total_cases" -eq "0" ]; then 
                   avg=0
                   echo "set avg: $avg cause Devision Error"
                   sed -i "s|${test_file}_per|${avg}%|g" .azure-pipelines/template.html 
