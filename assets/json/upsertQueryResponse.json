@@ -47,7 +47,8 @@
                     "suspensionStatus": false,
                     "principalCutoffStatus": false,
                     "warehouseStorageCondition": "AC",
-                    "BonusMaterials": null
+                    "BonusMaterials": null,
+                    "is26SeriesMaterial":false
                 },
                 {
                     "Type": "material",
@@ -98,7 +99,8 @@
                     "CounterOfferCurrency": "MYR",
                     "DiscountOverridePercentage": null,
                     "Comment": null,
-                    "BonusMaterials": null
+                    "BonusMaterials": null,
+                    "is26SeriesMaterial":false
                 },
                 {
                     "BundleDetails": null,
@@ -157,7 +159,8 @@
                     "principalCutoffStatus": true,
                     "warehouseStorageCondition": "AC",
                     "IsGimmick": false,
-                    "BonusMaterials": null
+                    "BonusMaterials": null,
+                    "is26SeriesMaterial":true
                 }
             ],
             "MarketplaceItems": [],

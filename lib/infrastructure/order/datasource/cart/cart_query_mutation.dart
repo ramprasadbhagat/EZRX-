@@ -187,6 +187,7 @@ class CartQueryMutation {
       principalCutoffStatus
       warehouseStorageCondition
       IsGimmick
+      is26SeriesMaterial
       BonusMaterials {
         principalCode
         principalName
@@ -609,7 +610,8 @@ class CartQueryMutation {
           warehouseStorageCondition
           CounterOfferPrice	
           CounterOfferCurrency
-          DiscountOverridePercentage	
+          DiscountOverridePercentage
+          is26SeriesMaterial	
           Comment
           BonusMaterials {
             principalCode
@@ -1136,6 +1138,7 @@ fragment ezrxItemsFields on Item {
   orderedQty
   remainingQty
   mov
+  is26SeriesMaterial
   ${enableMarketplace ? 'isMarketPlace' : ''}
   materialType
   suspensionStatus

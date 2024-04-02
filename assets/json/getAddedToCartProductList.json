@@ -49,6 +49,7 @@
           "principalCutoffStatus": false,
           "warehouseStorageCondition": "AC",
           "IsGimmick": false,
+          "is26SeriesMaterial":null,
           "BonusMaterials": [
             {
               "principalCode": "0000101334",
@@ -117,6 +118,7 @@
           "principalCutoffStatus": false,
           "warehouseStorageCondition": "AC",
           "IsGimmick": false,
+          "is26SeriesMaterial":false,
           "BonusMaterials": null
         },
         {
@@ -767,7 +769,8 @@
           "warehouseStorageCondition": "AC",
           "IsGimmick": false,
           "BonusMaterials": null,
-          "isMarketPlace": true
+          "isMarketPlace": true,
+          "is26SeriesMaterial":true
         }
       ],
       "MarketplaceItems": [],

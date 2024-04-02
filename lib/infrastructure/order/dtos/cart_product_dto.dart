@@ -28,60 +28,62 @@ class CartProductDto with _$CartProductDto {
     @JsonKey(name: 'type', defaultValue: '') required String type,
     @JsonKey(name: 'quantity', defaultValue: 0) required int quantity,
     @JsonKey(name: 'materialNumber', defaultValue: '')
-        required String materialNumber,
+    required String materialNumber,
     @JsonKey(name: 'materialDescription', defaultValue: '')
-        required String materialDescription,
+    required String materialDescription,
     @JsonKey(name: 'therapeuticClass', defaultValue: '')
-        required String therapeuticClass,
+    required String therapeuticClass,
     @JsonKey(name: 'taxClassification', defaultValue: '')
-        required String taxClassification,
+    required String taxClassification,
     @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-        required bool isFOCMaterial,
+    required bool isFOCMaterial,
     @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-        required String itemRegistrationNumber,
+    required String itemRegistrationNumber,
     @JsonKey(name: 'genericMaterialName', defaultValue: '')
-        required String genericMaterialName,
+    required String genericMaterialName,
     @JsonKey(name: 'principalName', defaultValue: '')
-        required String principalName,
+    required String principalName,
     @JsonKey(name: 'principalCode', defaultValue: '')
-        required String principalCode,
+    required String principalCode,
     @JsonKey(name: 'counterOfferPrice', defaultValue: 0)
-        required double counterOfferPrice,
+    required double counterOfferPrice,
     @JsonKey(name: 'discountOverridePercentage', defaultValue: 0)
-        required double counterOfferDiscount,
+    required double counterOfferDiscount,
     @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
-        required String counterOfferCurrency,
+    required String counterOfferCurrency,
     @JsonKey(name: 'comment', defaultValue: '') required String remarks,
     @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-        required String governmentMaterialCode,
+    required String governmentMaterialCode,
     @Default(BundleDetailsDto.empty)
     @JsonKey(name: 'bundleDetails')
-        BundleDetailsDto bundleDetails,
+    BundleDetailsDto bundleDetails,
     @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
-        required List<MaterialDto> bundleMaterials,
+    required List<MaterialDto> bundleMaterials,
     @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
-        required List<BonusSampleItemDto> bonusMaterials,
+    required List<BonusSampleItemDto> bonusMaterials,
     @JsonKey(name: 'taxes', readValue: handleTax) required double tax,
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'suspensionStatus', defaultValue: false)
-        required bool isSuspended,
+    required bool isSuspended,
     @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
-        required bool isPrincipalSuspended,
+    required bool isPrincipalSuspended,
     @Default(PriceComboDealDto.empty)
     @JsonKey(name: 'comboDeals')
-        PriceComboDealDto comboDeal,
+    PriceComboDealDto comboDeal,
     @JsonKey(name: 'comboMaterials', defaultValue: [])
-        required List<ComboMaterialItemDto> comboMaterials,
+    required List<ComboMaterialItemDto> comboMaterials,
     //maximumQty auto set to maximum limit if we get null from response
     @JsonKey(name: 'maximumQty', defaultValue: 99999) required int maximumQty,
     @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-        required bool isMarketPlace,
+    required bool isMarketPlace,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-        required String defaultMaterialDescription,
+    required String defaultMaterialDescription,
     @JsonKey(name: 'materialGroup4', defaultValue: '')
-        required String materialGroup4,
+    required String materialGroup4,
     @JsonKey(name: 'materialGroup2', defaultValue: '')
-        required String materialGroup2,
+    required String materialGroup2,
+    @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
+    required bool is26SeriesMaterial,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -138,6 +140,7 @@ class CartProductDto with _$CartProductDto {
           cartItemDetails.materialInfo.defaultMaterialDescription,
       materialGroup2: cartItemDetails.materialInfo.materialGroup2.getOrCrash(),
       materialGroup4: cartItemDetails.materialInfo.materialGroup4.getOrCrash(),
+      is26SeriesMaterial: cartItemDetails.is26SeriesMaterial,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -195,6 +198,7 @@ class CartProductDto with _$CartProductDto {
       bonusSampleItems: bonusMaterials.map((e) => e.toDomain()).toList(),
       comboMaterials: comboMaterials.map((e) => e.toDomain(comboDeal)).toList(),
       maximumQty: maximumQty,
+      is26SeriesMaterial: is26SeriesMaterial,
     );
   }
 
@@ -209,7 +213,7 @@ class BundleDetailsDto with _$BundleDetailsDto {
     @JsonKey(name: 'bundleName', defaultValue: '') required String bundleName,
     @JsonKey(name: 'bundleCode', defaultValue: '') required String bundleCode,
     @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-        required List<BundleInfoDto> bundleInfo,
+    required List<BundleInfoDto> bundleInfo,
   }) = _BundleDetailsDto;
   factory BundleDetailsDto.fromDomain(
     BundleDetails bundleDetails,

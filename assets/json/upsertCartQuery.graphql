@@ -50,6 +50,7 @@
       CounterOfferCurrency
       DiscountOverridePercentage	
       Comment
+      is26SeriesMaterial
       BonusMaterials {
         principalCode
         principalName

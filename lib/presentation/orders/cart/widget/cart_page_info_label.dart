@@ -5,6 +5,7 @@ class _CartPageInfoLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
       buildWhen: (previous, current) =>
           previous.activeErrorsList != current.activeErrorsList,

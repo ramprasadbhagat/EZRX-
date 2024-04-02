@@ -12,7 +12,7 @@ part of 'cart_product_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CartProductDto _$CartProductDtoFromJson(Map<String, dynamic> json) {
   return _CartProductDto.fromJson(json);
@@ -86,6 +86,8 @@ mixin _$CartProductDto {
   String get materialGroup4 => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialGroup2', defaultValue: '')
   String get materialGroup2 => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
+  bool get is26SeriesMaterial => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -100,70 +102,55 @@ abstract class $CartProductDtoCopyWith<$Res> {
       _$CartProductDtoCopyWithImpl<$Res, CartProductDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'productID', defaultValue: '')
-          String productID,
-      @JsonKey(name: 'parentID', defaultValue: '')
-          String parentID,
-      @JsonKey(name: 'type', defaultValue: '')
-          String type,
-      @JsonKey(name: 'quantity', defaultValue: 0)
-          int quantity,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
+      {@JsonKey(name: 'productID', defaultValue: '') String productID,
+      @JsonKey(name: 'parentID', defaultValue: '') String parentID,
+      @JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'quantity', defaultValue: 0) int quantity,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          String materialDescription,
+      String materialDescription,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-          String therapeuticClass,
+      String therapeuticClass,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-          String taxClassification,
-      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-          bool isFOCMaterial,
+      String taxClassification,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-          String itemRegistrationNumber,
+      String itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          String genericMaterialName,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-          String principalCode,
+      String genericMaterialName,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'counterOfferPrice', defaultValue: 0)
-          double counterOfferPrice,
+      double counterOfferPrice,
       @JsonKey(name: 'discountOverridePercentage', defaultValue: 0)
-          double counterOfferDiscount,
+      double counterOfferDiscount,
       @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
-          String counterOfferCurrency,
-      @JsonKey(name: 'comment', defaultValue: '')
-          String remarks,
+      String counterOfferCurrency,
+      @JsonKey(name: 'comment', defaultValue: '') String remarks,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-          String governmentMaterialCode,
-      @JsonKey(name: 'bundleDetails')
-          BundleDetailsDto bundleDetails,
+      String governmentMaterialCode,
+      @JsonKey(name: 'bundleDetails') BundleDetailsDto bundleDetails,
       @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
-          List<MaterialDto> bundleMaterials,
+      List<MaterialDto> bundleMaterials,
       @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
-          List<BonusSampleItemDto> bonusMaterials,
-      @JsonKey(name: 'taxes', readValue: handleTax)
-          double tax,
-      @JsonKey(name: 'hidePrice', defaultValue: false)
-          bool hidePrice,
-      @JsonKey(name: 'suspensionStatus', defaultValue: false)
-          bool isSuspended,
+      List<BonusSampleItemDto> bonusMaterials,
+      @JsonKey(name: 'taxes', readValue: handleTax) double tax,
+      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
+      @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
       @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
-          bool isPrincipalSuspended,
-      @JsonKey(name: 'comboDeals')
-          PriceComboDealDto comboDeal,
+      bool isPrincipalSuspended,
+      @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
-          List<ComboMaterialItemDto> comboMaterials,
-      @JsonKey(name: 'maximumQty', defaultValue: 99999)
-          int maximumQty,
+      List<ComboMaterialItemDto> comboMaterials,
+      @JsonKey(name: 'maximumQty', defaultValue: 99999) int maximumQty,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-          bool isMarketPlace,
+      bool isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription,
-      @JsonKey(name: 'materialGroup4', defaultValue: '')
-          String materialGroup4,
-      @JsonKey(name: 'materialGroup2', defaultValue: '')
-          String materialGroup2});
+      String defaultMaterialDescription,
+      @JsonKey(name: 'materialGroup4', defaultValue: '') String materialGroup4,
+      @JsonKey(name: 'materialGroup2', defaultValue: '') String materialGroup2,
+      @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
+      bool is26SeriesMaterial});
 
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
@@ -214,6 +201,7 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? defaultMaterialDescription = null,
     Object? materialGroup4 = null,
     Object? materialGroup2 = null,
+    Object? is26SeriesMaterial = null,
   }) {
     return _then(_value.copyWith(
       productID: null == productID
@@ -344,6 +332,10 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
               as String,
+      is26SeriesMaterial: null == is26SeriesMaterial
+          ? _value.is26SeriesMaterial
+          : is26SeriesMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -365,78 +357,63 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
 }
 
 /// @nodoc
-abstract class _$$_CartProductDtoCopyWith<$Res>
+abstract class _$$CartProductDtoImplCopyWith<$Res>
     implements $CartProductDtoCopyWith<$Res> {
-  factory _$$_CartProductDtoCopyWith(
-          _$_CartProductDto value, $Res Function(_$_CartProductDto) then) =
-      __$$_CartProductDtoCopyWithImpl<$Res>;
+  factory _$$CartProductDtoImplCopyWith(_$CartProductDtoImpl value,
+          $Res Function(_$CartProductDtoImpl) then) =
+      __$$CartProductDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'productID', defaultValue: '')
-          String productID,
-      @JsonKey(name: 'parentID', defaultValue: '')
-          String parentID,
-      @JsonKey(name: 'type', defaultValue: '')
-          String type,
-      @JsonKey(name: 'quantity', defaultValue: 0)
-          int quantity,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
+      {@JsonKey(name: 'productID', defaultValue: '') String productID,
+      @JsonKey(name: 'parentID', defaultValue: '') String parentID,
+      @JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'quantity', defaultValue: 0) int quantity,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          String materialDescription,
+      String materialDescription,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-          String therapeuticClass,
+      String therapeuticClass,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-          String taxClassification,
-      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-          bool isFOCMaterial,
+      String taxClassification,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-          String itemRegistrationNumber,
+      String itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          String genericMaterialName,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-          String principalCode,
+      String genericMaterialName,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'counterOfferPrice', defaultValue: 0)
-          double counterOfferPrice,
+      double counterOfferPrice,
       @JsonKey(name: 'discountOverridePercentage', defaultValue: 0)
-          double counterOfferDiscount,
+      double counterOfferDiscount,
       @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
-          String counterOfferCurrency,
-      @JsonKey(name: 'comment', defaultValue: '')
-          String remarks,
+      String counterOfferCurrency,
+      @JsonKey(name: 'comment', defaultValue: '') String remarks,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-          String governmentMaterialCode,
-      @JsonKey(name: 'bundleDetails')
-          BundleDetailsDto bundleDetails,
+      String governmentMaterialCode,
+      @JsonKey(name: 'bundleDetails') BundleDetailsDto bundleDetails,
       @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
-          List<MaterialDto> bundleMaterials,
+      List<MaterialDto> bundleMaterials,
       @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
-          List<BonusSampleItemDto> bonusMaterials,
-      @JsonKey(name: 'taxes', readValue: handleTax)
-          double tax,
-      @JsonKey(name: 'hidePrice', defaultValue: false)
-          bool hidePrice,
-      @JsonKey(name: 'suspensionStatus', defaultValue: false)
-          bool isSuspended,
+      List<BonusSampleItemDto> bonusMaterials,
+      @JsonKey(name: 'taxes', readValue: handleTax) double tax,
+      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
+      @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
       @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
-          bool isPrincipalSuspended,
-      @JsonKey(name: 'comboDeals')
-          PriceComboDealDto comboDeal,
+      bool isPrincipalSuspended,
+      @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
-          List<ComboMaterialItemDto> comboMaterials,
-      @JsonKey(name: 'maximumQty', defaultValue: 99999)
-          int maximumQty,
+      List<ComboMaterialItemDto> comboMaterials,
+      @JsonKey(name: 'maximumQty', defaultValue: 99999) int maximumQty,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-          bool isMarketPlace,
+      bool isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription,
-      @JsonKey(name: 'materialGroup4', defaultValue: '')
-          String materialGroup4,
-      @JsonKey(name: 'materialGroup2', defaultValue: '')
-          String materialGroup2});
+      String defaultMaterialDescription,
+      @JsonKey(name: 'materialGroup4', defaultValue: '') String materialGroup4,
+      @JsonKey(name: 'materialGroup2', defaultValue: '') String materialGroup2,
+      @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
+      bool is26SeriesMaterial});
 
   @override
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
@@ -445,11 +422,11 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CartProductDtoCopyWithImpl<$Res>
-    extends _$CartProductDtoCopyWithImpl<$Res, _$_CartProductDto>
-    implements _$$_CartProductDtoCopyWith<$Res> {
-  __$$_CartProductDtoCopyWithImpl(
-      _$_CartProductDto _value, $Res Function(_$_CartProductDto) _then)
+class __$$CartProductDtoImplCopyWithImpl<$Res>
+    extends _$CartProductDtoCopyWithImpl<$Res, _$CartProductDtoImpl>
+    implements _$$CartProductDtoImplCopyWith<$Res> {
+  __$$CartProductDtoImplCopyWithImpl(
+      _$CartProductDtoImpl _value, $Res Function(_$CartProductDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -487,8 +464,9 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
     Object? defaultMaterialDescription = null,
     Object? materialGroup4 = null,
     Object? materialGroup2 = null,
+    Object? is26SeriesMaterial = null,
   }) {
-    return _then(_$_CartProductDto(
+    return _then(_$CartProductDtoImpl(
       productID: null == productID
           ? _value.productID
           : productID // ignore: cast_nullable_to_non_nullable
@@ -617,85 +595,83 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value.materialGroup2
           : materialGroup2 // ignore: cast_nullable_to_non_nullable
               as String,
+      is26SeriesMaterial: null == is26SeriesMaterial
+          ? _value.is26SeriesMaterial
+          : is26SeriesMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_CartProductDto extends _CartProductDto {
-  const _$_CartProductDto(
-      {@JsonKey(name: 'productID', defaultValue: '')
-          required this.productID,
-      @JsonKey(name: 'parentID', defaultValue: '')
-          required this.parentID,
-      @JsonKey(name: 'type', defaultValue: '')
-          required this.type,
-      @JsonKey(name: 'quantity', defaultValue: 0)
-          required this.quantity,
+class _$CartProductDtoImpl extends _CartProductDto {
+  const _$CartProductDtoImpl(
+      {@JsonKey(name: 'productID', defaultValue: '') required this.productID,
+      @JsonKey(name: 'parentID', defaultValue: '') required this.parentID,
+      @JsonKey(name: 'type', defaultValue: '') required this.type,
+      @JsonKey(name: 'quantity', defaultValue: 0) required this.quantity,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber,
+      required this.materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          required this.materialDescription,
+      required this.materialDescription,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-          required this.therapeuticClass,
+      required this.therapeuticClass,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-          required this.taxClassification,
+      required this.taxClassification,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-          required this.isFOCMaterial,
+      required this.isFOCMaterial,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-          required this.itemRegistrationNumber,
+      required this.itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          required this.genericMaterialName,
+      required this.genericMaterialName,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required this.principalName,
+      required this.principalName,
       @JsonKey(name: 'principalCode', defaultValue: '')
-          required this.principalCode,
+      required this.principalCode,
       @JsonKey(name: 'counterOfferPrice', defaultValue: 0)
-          required this.counterOfferPrice,
+      required this.counterOfferPrice,
       @JsonKey(name: 'discountOverridePercentage', defaultValue: 0)
-          required this.counterOfferDiscount,
+      required this.counterOfferDiscount,
       @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
-          required this.counterOfferCurrency,
-      @JsonKey(name: 'comment', defaultValue: '')
-          required this.remarks,
+      required this.counterOfferCurrency,
+      @JsonKey(name: 'comment', defaultValue: '') required this.remarks,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-          required this.governmentMaterialCode,
+      required this.governmentMaterialCode,
       @JsonKey(name: 'bundleDetails')
-          this.bundleDetails = BundleDetailsDto.empty,
+      this.bundleDetails = BundleDetailsDto.empty,
       @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
-          required final List<MaterialDto> bundleMaterials,
+      required final List<MaterialDto> bundleMaterials,
       @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
-          required final List<BonusSampleItemDto> bonusMaterials,
-      @JsonKey(name: 'taxes', readValue: handleTax)
-          required this.tax,
-      @JsonKey(name: 'hidePrice', defaultValue: false)
-          required this.hidePrice,
+      required final List<BonusSampleItemDto> bonusMaterials,
+      @JsonKey(name: 'taxes', readValue: handleTax) required this.tax,
+      @JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
-          required this.isSuspended,
+      required this.isSuspended,
       @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
-          required this.isPrincipalSuspended,
-      @JsonKey(name: 'comboDeals')
-          this.comboDeal = PriceComboDealDto.empty,
+      required this.isPrincipalSuspended,
+      @JsonKey(name: 'comboDeals') this.comboDeal = PriceComboDealDto.empty,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
-          required final List<ComboMaterialItemDto> comboMaterials,
+      required final List<ComboMaterialItemDto> comboMaterials,
       @JsonKey(name: 'maximumQty', defaultValue: 99999)
-          required this.maximumQty,
+      required this.maximumQty,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-          required this.isMarketPlace,
+      required this.isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          required this.defaultMaterialDescription,
+      required this.defaultMaterialDescription,
       @JsonKey(name: 'materialGroup4', defaultValue: '')
-          required this.materialGroup4,
+      required this.materialGroup4,
       @JsonKey(name: 'materialGroup2', defaultValue: '')
-          required this.materialGroup2})
+      required this.materialGroup2,
+      @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
+      required this.is26SeriesMaterial})
       : _bundleMaterials = bundleMaterials,
         _bonusMaterials = bonusMaterials,
         _comboMaterials = comboMaterials,
         super._();
 
-  factory _$_CartProductDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CartProductDtoFromJson(json);
+  factory _$CartProductDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CartProductDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'productID', defaultValue: '')
@@ -812,17 +788,20 @@ class _$_CartProductDto extends _CartProductDto {
   @override
   @JsonKey(name: 'materialGroup2', defaultValue: '')
   final String materialGroup2;
+  @override
+  @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
+  final bool is26SeriesMaterial;
 
   @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty, isMarketPlace: $isMarketPlace, defaultMaterialDescription: $defaultMaterialDescription, materialGroup4: $materialGroup4, materialGroup2: $materialGroup2)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty, isMarketPlace: $isMarketPlace, defaultMaterialDescription: $defaultMaterialDescription, materialGroup4: $materialGroup4, materialGroup2: $materialGroup2, is26SeriesMaterial: $is26SeriesMaterial)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CartProductDto &&
+            other is _$CartProductDtoImpl &&
             (identical(other.productID, productID) ||
                 other.productID == productID) &&
             (identical(other.parentID, parentID) ||
@@ -885,7 +864,9 @@ class _$_CartProductDto extends _CartProductDto {
             (identical(other.materialGroup4, materialGroup4) ||
                 other.materialGroup4 == materialGroup4) &&
             (identical(other.materialGroup2, materialGroup2) ||
-                other.materialGroup2 == materialGroup2));
+                other.materialGroup2 == materialGroup2) &&
+            (identical(other.is26SeriesMaterial, is26SeriesMaterial) ||
+                other.is26SeriesMaterial == is26SeriesMaterial));
   }
 
   @JsonKey(ignore: true)
@@ -923,18 +904,20 @@ class _$_CartProductDto extends _CartProductDto {
         isMarketPlace,
         defaultMaterialDescription,
         materialGroup4,
-        materialGroup2
+        materialGroup2,
+        is26SeriesMaterial
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CartProductDtoCopyWith<_$_CartProductDto> get copyWith =>
-      __$$_CartProductDtoCopyWithImpl<_$_CartProductDto>(this, _$identity);
+  _$$CartProductDtoImplCopyWith<_$CartProductDtoImpl> get copyWith =>
+      __$$CartProductDtoImplCopyWithImpl<_$CartProductDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CartProductDtoToJson(
+    return _$$CartProductDtoImplToJson(
       this,
     );
   }
@@ -943,73 +926,69 @@ class _$_CartProductDto extends _CartProductDto {
 abstract class _CartProductDto extends CartProductDto {
   const factory _CartProductDto(
       {@JsonKey(name: 'productID', defaultValue: '')
-          required final String productID,
+      required final String productID,
       @JsonKey(name: 'parentID', defaultValue: '')
-          required final String parentID,
-      @JsonKey(name: 'type', defaultValue: '')
-          required final String type,
-      @JsonKey(name: 'quantity', defaultValue: 0)
-          required final int quantity,
+      required final String parentID,
+      @JsonKey(name: 'type', defaultValue: '') required final String type,
+      @JsonKey(name: 'quantity', defaultValue: 0) required final int quantity,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          required final String materialDescription,
+      required final String materialDescription,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-          required final String therapeuticClass,
+      required final String therapeuticClass,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-          required final String taxClassification,
+      required final String taxClassification,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-          required final bool isFOCMaterial,
+      required final bool isFOCMaterial,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-          required final String itemRegistrationNumber,
+      required final String itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          required final String genericMaterialName,
+      required final String genericMaterialName,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required final String principalName,
+      required final String principalName,
       @JsonKey(name: 'principalCode', defaultValue: '')
-          required final String principalCode,
+      required final String principalCode,
       @JsonKey(name: 'counterOfferPrice', defaultValue: 0)
-          required final double counterOfferPrice,
+      required final double counterOfferPrice,
       @JsonKey(name: 'discountOverridePercentage', defaultValue: 0)
-          required final double counterOfferDiscount,
+      required final double counterOfferDiscount,
       @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
-          required final String counterOfferCurrency,
-      @JsonKey(name: 'comment', defaultValue: '')
-          required final String remarks,
+      required final String counterOfferCurrency,
+      @JsonKey(name: 'comment', defaultValue: '') required final String remarks,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-          required final String governmentMaterialCode,
-      @JsonKey(name: 'bundleDetails')
-          final BundleDetailsDto bundleDetails,
+      required final String governmentMaterialCode,
+      @JsonKey(name: 'bundleDetails') final BundleDetailsDto bundleDetails,
       @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
-          required final List<MaterialDto> bundleMaterials,
+      required final List<MaterialDto> bundleMaterials,
       @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
-          required final List<BonusSampleItemDto> bonusMaterials,
-      @JsonKey(name: 'taxes', readValue: handleTax)
-          required final double tax,
+      required final List<BonusSampleItemDto> bonusMaterials,
+      @JsonKey(name: 'taxes', readValue: handleTax) required final double tax,
       @JsonKey(name: 'hidePrice', defaultValue: false)
-          required final bool hidePrice,
+      required final bool hidePrice,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
-          required final bool isSuspended,
+      required final bool isSuspended,
       @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
-          required final bool isPrincipalSuspended,
-      @JsonKey(name: 'comboDeals')
-          final PriceComboDealDto comboDeal,
+      required final bool isPrincipalSuspended,
+      @JsonKey(name: 'comboDeals') final PriceComboDealDto comboDeal,
       @JsonKey(name: 'comboMaterials', defaultValue: [])
-          required final List<ComboMaterialItemDto> comboMaterials,
+      required final List<ComboMaterialItemDto> comboMaterials,
       @JsonKey(name: 'maximumQty', defaultValue: 99999)
-          required final int maximumQty,
+      required final int maximumQty,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-          required final bool isMarketPlace,
+      required final bool isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          required final String defaultMaterialDescription,
+      required final String defaultMaterialDescription,
       @JsonKey(name: 'materialGroup4', defaultValue: '')
-          required final String materialGroup4,
+      required final String materialGroup4,
       @JsonKey(name: 'materialGroup2', defaultValue: '')
-          required final String materialGroup2}) = _$_CartProductDto;
+      required final String materialGroup2,
+      @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
+      required final bool is26SeriesMaterial}) = _$CartProductDtoImpl;
   const _CartProductDto._() : super._();
 
   factory _CartProductDto.fromJson(Map<String, dynamic> json) =
-      _$_CartProductDto.fromJson;
+      _$CartProductDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'productID', defaultValue: '')
@@ -1108,8 +1087,11 @@ abstract class _CartProductDto extends CartProductDto {
   @JsonKey(name: 'materialGroup2', defaultValue: '')
   String get materialGroup2;
   @override
+  @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
+  bool get is26SeriesMaterial;
+  @override
   @JsonKey(ignore: true)
-  _$$_CartProductDtoCopyWith<_$_CartProductDto> get copyWith =>
+  _$$CartProductDtoImplCopyWith<_$CartProductDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1139,12 +1121,10 @@ abstract class $BundleDetailsDtoCopyWith<$Res> {
       _$BundleDetailsDtoCopyWithImpl<$Res, BundleDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'bundleName', defaultValue: '')
-          String bundleName,
-      @JsonKey(name: 'bundleCode', defaultValue: '')
-          String bundleCode,
+      {@JsonKey(name: 'bundleName', defaultValue: '') String bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '') String bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-          List<BundleInfoDto> bundleInfo});
+      List<BundleInfoDto> bundleInfo});
 }
 
 /// @nodoc
@@ -1182,28 +1162,26 @@ class _$BundleDetailsDtoCopyWithImpl<$Res, $Val extends BundleDetailsDto>
 }
 
 /// @nodoc
-abstract class _$$_BundleDetailsDtoCopyWith<$Res>
+abstract class _$$BundleDetailsDtoImplCopyWith<$Res>
     implements $BundleDetailsDtoCopyWith<$Res> {
-  factory _$$_BundleDetailsDtoCopyWith(
-          _$_BundleDetailsDto value, $Res Function(_$_BundleDetailsDto) then) =
-      __$$_BundleDetailsDtoCopyWithImpl<$Res>;
+  factory _$$BundleDetailsDtoImplCopyWith(_$BundleDetailsDtoImpl value,
+          $Res Function(_$BundleDetailsDtoImpl) then) =
+      __$$BundleDetailsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'bundleName', defaultValue: '')
-          String bundleName,
-      @JsonKey(name: 'bundleCode', defaultValue: '')
-          String bundleCode,
+      {@JsonKey(name: 'bundleName', defaultValue: '') String bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '') String bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-          List<BundleInfoDto> bundleInfo});
+      List<BundleInfoDto> bundleInfo});
 }
 
 /// @nodoc
-class __$$_BundleDetailsDtoCopyWithImpl<$Res>
-    extends _$BundleDetailsDtoCopyWithImpl<$Res, _$_BundleDetailsDto>
-    implements _$$_BundleDetailsDtoCopyWith<$Res> {
-  __$$_BundleDetailsDtoCopyWithImpl(
-      _$_BundleDetailsDto _value, $Res Function(_$_BundleDetailsDto) _then)
+class __$$BundleDetailsDtoImplCopyWithImpl<$Res>
+    extends _$BundleDetailsDtoCopyWithImpl<$Res, _$BundleDetailsDtoImpl>
+    implements _$$BundleDetailsDtoImplCopyWith<$Res> {
+  __$$BundleDetailsDtoImplCopyWithImpl(_$BundleDetailsDtoImpl _value,
+      $Res Function(_$BundleDetailsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1213,7 +1191,7 @@ class __$$_BundleDetailsDtoCopyWithImpl<$Res>
     Object? bundleCode = null,
     Object? bundleInfo = null,
   }) {
-    return _then(_$_BundleDetailsDto(
+    return _then(_$BundleDetailsDtoImpl(
       bundleName: null == bundleName
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
@@ -1232,19 +1210,17 @@ class __$$_BundleDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BundleDetailsDto extends _BundleDetailsDto {
-  const _$_BundleDetailsDto(
-      {@JsonKey(name: 'bundleName', defaultValue: '')
-          required this.bundleName,
-      @JsonKey(name: 'bundleCode', defaultValue: '')
-          required this.bundleCode,
+class _$BundleDetailsDtoImpl extends _BundleDetailsDto {
+  const _$BundleDetailsDtoImpl(
+      {@JsonKey(name: 'bundleName', defaultValue: '') required this.bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '') required this.bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-          required final List<BundleInfoDto> bundleInfo})
+      required final List<BundleInfoDto> bundleInfo})
       : _bundleInfo = bundleInfo,
         super._();
 
-  factory _$_BundleDetailsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_BundleDetailsDtoFromJson(json);
+  factory _$BundleDetailsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BundleDetailsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'bundleName', defaultValue: '')
@@ -1267,10 +1243,10 @@ class _$_BundleDetailsDto extends _BundleDetailsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BundleDetailsDto &&
+            other is _$BundleDetailsDtoImpl &&
             (identical(other.bundleName, bundleName) ||
                 other.bundleName == bundleName) &&
             (identical(other.bundleCode, bundleCode) ||
@@ -1287,12 +1263,13 @@ class _$_BundleDetailsDto extends _BundleDetailsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BundleDetailsDtoCopyWith<_$_BundleDetailsDto> get copyWith =>
-      __$$_BundleDetailsDtoCopyWithImpl<_$_BundleDetailsDto>(this, _$identity);
+  _$$BundleDetailsDtoImplCopyWith<_$BundleDetailsDtoImpl> get copyWith =>
+      __$$BundleDetailsDtoImplCopyWithImpl<_$BundleDetailsDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BundleDetailsDtoToJson(
+    return _$$BundleDetailsDtoImplToJson(
       this,
     );
   }
@@ -1301,15 +1278,15 @@ class _$_BundleDetailsDto extends _BundleDetailsDto {
 abstract class _BundleDetailsDto extends BundleDetailsDto {
   const factory _BundleDetailsDto(
       {@JsonKey(name: 'bundleName', defaultValue: '')
-          required final String bundleName,
+      required final String bundleName,
       @JsonKey(name: 'bundleCode', defaultValue: '')
-          required final String bundleCode,
+      required final String bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-          required final List<BundleInfoDto> bundleInfo}) = _$_BundleDetailsDto;
+      required final List<BundleInfoDto> bundleInfo}) = _$BundleDetailsDtoImpl;
   const _BundleDetailsDto._() : super._();
 
   factory _BundleDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$_BundleDetailsDto.fromJson;
+      _$BundleDetailsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'bundleName', defaultValue: '')
@@ -1322,6 +1299,6 @@ abstract class _BundleDetailsDto extends BundleDetailsDto {
   List<BundleInfoDto> get bundleInfo;
   @override
   @JsonKey(ignore: true)
-  _$$_BundleDetailsDtoCopyWith<_$_BundleDetailsDto> get copyWith =>
+  _$$BundleDetailsDtoImplCopyWith<_$BundleDetailsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
