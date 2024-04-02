@@ -12,7 +12,7 @@ part of 'order_eligibility_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderEligibilityEvent {
@@ -126,10 +126,10 @@ class _$OrderEligibilityEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {User user,
@@ -147,11 +147,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$OrderEligibilityEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$OrderEligibilityEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -164,7 +164,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? shipInfo = null,
     Object? orderType = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -235,8 +235,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.user,
       required this.salesOrg,
       required this.configs,
@@ -263,10 +263,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
@@ -286,8 +286,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -412,7 +412,7 @@ abstract class _Initialized implements OrderEligibilityEvent {
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipInfo,
-      required final String orderType}) = _$_Initialized;
+      required final String orderType}) = _$InitializedImpl;
 
   User get user;
   SalesOrganisation get salesOrg;
@@ -421,14 +421,15 @@ abstract class _Initialized implements OrderEligibilityEvent {
   ShipToInfo get shipInfo;
   String get orderType;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateCopyWith<$Res> {
-  factory _$$_UpdateCopyWith(_$_Update value, $Res Function(_$_Update) then) =
-      __$$_UpdateCopyWithImpl<$Res>;
+abstract class _$$UpdateImplCopyWith<$Res> {
+  factory _$$UpdateImplCopyWith(
+          _$UpdateImpl value, $Res Function(_$UpdateImpl) then) =
+      __$$UpdateImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {List<PriceAggregate> cartItems,
@@ -440,10 +441,11 @@ abstract class _$$_UpdateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateCopyWithImpl<$Res>
-    extends _$OrderEligibilityEventCopyWithImpl<$Res, _$_Update>
-    implements _$$_UpdateCopyWith<$Res> {
-  __$$_UpdateCopyWithImpl(_$_Update _value, $Res Function(_$_Update) _then)
+class __$$UpdateImplCopyWithImpl<$Res>
+    extends _$OrderEligibilityEventCopyWithImpl<$Res, _$UpdateImpl>
+    implements _$$UpdateImplCopyWith<$Res> {
+  __$$UpdateImplCopyWithImpl(
+      _$UpdateImpl _value, $Res Function(_$UpdateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -456,7 +458,7 @@ class __$$_UpdateCopyWithImpl<$Res>
     Object? mpSubtotal = null,
     Object? subTotal = null,
   }) {
-    return _then(_$_Update(
+    return _then(_$UpdateImpl(
       cartItems: null == cartItems
           ? _value._cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
@@ -487,8 +489,8 @@ class __$$_UpdateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Update implements _Update {
-  const _$_Update(
+class _$UpdateImpl implements _Update {
+  const _$UpdateImpl(
       {required final List<PriceAggregate> cartItems,
       required this.orderType,
       required this.grandTotal,
@@ -522,10 +524,10 @@ class _$_Update implements _Update {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Update &&
+            other is _$UpdateImpl &&
             const DeepCollectionEquality()
                 .equals(other._cartItems, _cartItems) &&
             (identical(other.orderType, orderType) ||
@@ -553,8 +555,8 @@ class _$_Update implements _Update {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateCopyWith<_$_Update> get copyWith =>
-      __$$_UpdateCopyWithImpl<_$_Update>(this, _$identity);
+  _$$UpdateImplCopyWith<_$UpdateImpl> get copyWith =>
+      __$$UpdateImplCopyWithImpl<_$UpdateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -679,7 +681,7 @@ abstract class _Update implements OrderEligibilityEvent {
       required final double grandTotal,
       required final double zpSubtotal,
       required final double mpSubtotal,
-      required final double subTotal}) = _$_Update;
+      required final double subTotal}) = _$UpdateImpl;
 
   List<PriceAggregate> get cartItems;
   String get orderType;
@@ -688,32 +690,33 @@ abstract class _Update implements OrderEligibilityEvent {
   double get mpSubtotal;
   double get subTotal;
   @JsonKey(ignore: true)
-  _$$_UpdateCopyWith<_$_Update> get copyWith =>
+  _$$UpdateImplCopyWith<_$UpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ValidateOrderEligibilityCopyWith<$Res> {
-  factory _$$_ValidateOrderEligibilityCopyWith(
-          _$_ValidateOrderEligibility value,
-          $Res Function(_$_ValidateOrderEligibility) then) =
-      __$$_ValidateOrderEligibilityCopyWithImpl<$Res>;
+abstract class _$$ValidateOrderEligibilityImplCopyWith<$Res> {
+  factory _$$ValidateOrderEligibilityImplCopyWith(
+          _$ValidateOrderEligibilityImpl value,
+          $Res Function(_$ValidateOrderEligibilityImpl) then) =
+      __$$ValidateOrderEligibilityImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ValidateOrderEligibilityCopyWithImpl<$Res>
+class __$$ValidateOrderEligibilityImplCopyWithImpl<$Res>
     extends _$OrderEligibilityEventCopyWithImpl<$Res,
-        _$_ValidateOrderEligibility>
-    implements _$$_ValidateOrderEligibilityCopyWith<$Res> {
-  __$$_ValidateOrderEligibilityCopyWithImpl(_$_ValidateOrderEligibility _value,
-      $Res Function(_$_ValidateOrderEligibility) _then)
+        _$ValidateOrderEligibilityImpl>
+    implements _$$ValidateOrderEligibilityImplCopyWith<$Res> {
+  __$$ValidateOrderEligibilityImplCopyWithImpl(
+      _$ValidateOrderEligibilityImpl _value,
+      $Res Function(_$ValidateOrderEligibilityImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ValidateOrderEligibility implements _ValidateOrderEligibility {
-  const _$_ValidateOrderEligibility();
+class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
+  const _$ValidateOrderEligibilityImpl();
 
   @override
   String toString() {
@@ -721,10 +724,10 @@ class _$_ValidateOrderEligibility implements _ValidateOrderEligibility {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ValidateOrderEligibility);
+            other is _$ValidateOrderEligibilityImpl);
   }
 
   @override
@@ -844,7 +847,7 @@ class _$_ValidateOrderEligibility implements _ValidateOrderEligibility {
 }
 
 abstract class _ValidateOrderEligibility implements OrderEligibilityEvent {
-  const factory _ValidateOrderEligibility() = _$_ValidateOrderEligibility;
+  const factory _ValidateOrderEligibility() = _$ValidateOrderEligibilityImpl;
 }
 
 /// @nodoc
@@ -1015,11 +1018,12 @@ class _$OrderEligibilityStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderEligibilityStateCopyWith<$Res>
+abstract class _$$OrderEligibilityStateImplCopyWith<$Res>
     implements $OrderEligibilityStateCopyWith<$Res> {
-  factory _$$_OrderEligibilityStateCopyWith(_$_OrderEligibilityState value,
-          $Res Function(_$_OrderEligibilityState) then) =
-      __$$_OrderEligibilityStateCopyWithImpl<$Res>;
+  factory _$$OrderEligibilityStateImplCopyWith(
+          _$OrderEligibilityStateImpl value,
+          $Res Function(_$OrderEligibilityStateImpl) then) =
+      __$$OrderEligibilityStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1049,11 +1053,12 @@ abstract class _$$_OrderEligibilityStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderEligibilityStateCopyWithImpl<$Res>
-    extends _$OrderEligibilityStateCopyWithImpl<$Res, _$_OrderEligibilityState>
-    implements _$$_OrderEligibilityStateCopyWith<$Res> {
-  __$$_OrderEligibilityStateCopyWithImpl(_$_OrderEligibilityState _value,
-      $Res Function(_$_OrderEligibilityState) _then)
+class __$$OrderEligibilityStateImplCopyWithImpl<$Res>
+    extends _$OrderEligibilityStateCopyWithImpl<$Res,
+        _$OrderEligibilityStateImpl>
+    implements _$$OrderEligibilityStateImplCopyWith<$Res> {
+  __$$OrderEligibilityStateImplCopyWithImpl(_$OrderEligibilityStateImpl _value,
+      $Res Function(_$OrderEligibilityStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1072,7 +1077,7 @@ class __$$_OrderEligibilityStateCopyWithImpl<$Res>
     Object? subTotal = null,
     Object? showErrorMessage = null,
   }) {
-    return _then(_$_OrderEligibilityState(
+    return _then(_$OrderEligibilityStateImpl(
       cartItems: null == cartItems
           ? _value._cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
@@ -1127,8 +1132,8 @@ class __$$_OrderEligibilityStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderEligibilityState extends _OrderEligibilityState {
-  const _$_OrderEligibilityState(
+class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
+  const _$OrderEligibilityStateImpl(
       {required final List<PriceAggregate> cartItems,
       required this.configs,
       required this.salesOrg,
@@ -1181,10 +1186,10 @@ class _$_OrderEligibilityState extends _OrderEligibilityState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderEligibilityState &&
+            other is _$OrderEligibilityStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._cartItems, _cartItems) &&
             (identical(other.configs, configs) || other.configs == configs) &&
@@ -1228,9 +1233,9 @@ class _$_OrderEligibilityState extends _OrderEligibilityState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderEligibilityStateCopyWith<_$_OrderEligibilityState> get copyWith =>
-      __$$_OrderEligibilityStateCopyWithImpl<_$_OrderEligibilityState>(
-          this, _$identity);
+  _$$OrderEligibilityStateImplCopyWith<_$OrderEligibilityStateImpl>
+      get copyWith => __$$OrderEligibilityStateImplCopyWithImpl<
+          _$OrderEligibilityStateImpl>(this, _$identity);
 }
 
 abstract class _OrderEligibilityState extends OrderEligibilityState {
@@ -1246,7 +1251,7 @@ abstract class _OrderEligibilityState extends OrderEligibilityState {
       required final double zpSubtotal,
       required final double mpSubtotal,
       required final double subTotal,
-      required final bool showErrorMessage}) = _$_OrderEligibilityState;
+      required final bool showErrorMessage}) = _$OrderEligibilityStateImpl;
   const _OrderEligibilityState._() : super._();
 
   @override
@@ -1275,6 +1280,6 @@ abstract class _OrderEligibilityState extends OrderEligibilityState {
   bool get showErrorMessage;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderEligibilityStateCopyWith<_$_OrderEligibilityState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OrderEligibilityStateImplCopyWith<_$OrderEligibilityStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

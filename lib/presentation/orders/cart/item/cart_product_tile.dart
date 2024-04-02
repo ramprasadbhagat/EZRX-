@@ -326,7 +326,9 @@ class _MaterialDetails extends StatelessWidget {
                     color: ZPColors.extraLightGrey4,
                     fontStyle: FontStyle.italic,
                   ),
-                  key: WidgetKeys.cartPromotions(cartItem.getMaterialNumber.getValue()),
+              key: WidgetKeys.cartPromotions(
+                cartItem.getMaterialNumber.getValue(),
+              ),
             ),
           if (cartItem.price.isCounterOfferRequested)
             Text(

@@ -73,6 +73,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
         return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal & $displayMPMinOrderAmount for MP subtotal.';
       } else if (!zpSubtotalMOVEligible) {
         return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal.';
+      } else if (is26SeriesMaterialOnlyInCart) {
+        return 'Your cart must contain other commercial material to proceed checkout';
       } else {
         return 'Please ensure that minimum order value is at least $displayMPMinOrderAmount for MP subtotal.';
       }
@@ -295,13 +297,18 @@ class OrderEligibilityState with _$OrderEligibilityState {
       !isBundleQuantitySatisfies ||
       displayInvalidItemsBanner ||
       isNotAvailableToCheckoutForID ||
-      !isMinOrderValuePassed;
+      !isMinOrderValuePassed ||
+      is26SeriesMaterialOnlyInCart;
 
   List<bool> get activeErrorsList => [
         displayMovWarning,
         displayInvalidItemsWarning,
         isNotAvailableToCheckoutForID,
+        is26SeriesMaterialOnlyInCart,
       ].where((condition) => condition).toList();
 
   bool get hasMultipleErrors => activeErrorsList.length > 1;
+
+  bool get is26SeriesMaterialOnlyInCart => cartItems.isNotEmpty &&
+      cartItems.every((element) => element.is26SeriesMaterial);
 }

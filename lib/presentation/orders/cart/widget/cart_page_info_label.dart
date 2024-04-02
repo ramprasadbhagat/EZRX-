@@ -5,7 +5,6 @@ class _CartPageInfoLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
       buildWhen: (previous, current) =>
           previous.activeErrorsList != current.activeErrorsList,
@@ -33,6 +32,13 @@ class _CartPageInfoLabel extends StatelessWidget {
                       _ErrorText(
                         text: context.tr(
                           'You have exceeded the available quantity for this item.',
+                        ),
+                        showLeadingIcon: state.hasMultipleErrors,
+                      ),
+                    if (state.is26SeriesMaterialOnlyInCart)
+                      _ErrorText(
+                        text: context.tr(
+                          'Your cart must contain other commercial material to proceed checkout.',
                         ),
                         showLeadingIcon: state.hasMultipleErrors,
                       ),
