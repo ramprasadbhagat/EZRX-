@@ -11,8 +11,23 @@ part 'account_summary_event.dart';
 part 'account_summary_state.dart';
 part 'account_summary_bloc.freezed.dart';
 
-class AccountSummaryBloc
+class ZPAccountSummaryBloc extends AccountSummaryBloc {
+  ZPAccountSummaryBloc({required super.accountSummaryRepository});
+
+  @override
+  bool get isMarketplace => false;
+}
+
+class MPAccountSummaryBloc extends AccountSummaryBloc {
+  MPAccountSummaryBloc({required super.accountSummaryRepository});
+
+  @override
+  bool get isMarketplace => true;
+}
+
+abstract class AccountSummaryBloc
     extends Bloc<AccountSummaryEvent, AccountSummaryState> {
+  abstract final bool isMarketplace;
   final IAccountSummaryRepository accountSummaryRepository;
 
   AccountSummaryBloc({required this.accountSummaryRepository})
@@ -34,8 +49,12 @@ class AccountSummaryBloc
           ),
         );
 
-        final failureOrSuccess = await accountSummaryRepository
-            .fetchInvoiceSummary(custCode: e.custCode, salesOrg: e.salesOrg);
+        final failureOrSuccess =
+            await accountSummaryRepository.fetchInvoiceSummary(
+          custCode: e.custCode,
+          salesOrg: e.salesOrg,
+          isMarketPlace: isMarketplace,
+        );
 
         failureOrSuccess.fold(
           (failure) {
@@ -64,8 +83,12 @@ class AccountSummaryBloc
           ),
         );
 
-        final failureOrSuccess = await accountSummaryRepository
-            .fetchCreditSummary(custCode: e.custCode, salesOrg: e.salesOrg);
+        final failureOrSuccess =
+            await accountSummaryRepository.fetchCreditSummary(
+          custCode: e.custCode,
+          salesOrg: e.salesOrg,
+          isMarketPlace: isMarketplace,
+        );
 
         failureOrSuccess.fold(
           (failure) {

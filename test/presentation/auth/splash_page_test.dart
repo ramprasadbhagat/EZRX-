@@ -102,246 +102,12 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:upgrader/upgrader.dart';
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/mock_bloc.dart';
+import '../../common_mock_data/mock_other.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AnnouncementInfoBlocMock
-    extends MockBloc<AnnouncementInfoEvent, AnnouncementInfoState>
-    implements AnnouncementInfoBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class PriceOverrideBlocMock
-    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
-    implements PriceOverrideBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class AccountSummaryBlocMock
-    extends MockBloc<AccountSummaryEvent, AccountSummaryState>
-    implements AccountSummaryBloc {}
-
-class SalesRepBlocMock extends MockBloc<SalesRepEvent, SalesRepState>
-    implements SalesRepBloc {}
-
-class AupTcBlocMock extends MockBloc<AupTcEvent, AupTcState>
-    implements AupTcBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class PaymentCustomerInformationBlocMock extends MockBloc<
-        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
-    implements PaymentCustomerInformationBloc {}
-
-class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState>
-    implements PaymentTermBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class UserRestrictionListBlocMock
-    extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
-    implements UserRestrictionListBloc {}
-
-class MaterialFilterBlocMock
-    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
-    implements MaterialFilterBloc {}
-
-class OrderDocumentTypeBlocMock
-    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
-    implements OrderDocumentTypeBloc {}
-
-class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState>
-    implements UsageCodeBloc {}
-
-class ReturnRequestTypeCodeBlocMock
-    extends MockBloc<ReturnRequestTypeCodeEvent, ReturnRequestTypeCodeState>
-    implements ReturnRequestTypeCodeBloc {}
-
-class PolicyConfigurationListBlocMock
-    extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
-    implements PolicyConfigurationBloc {}
-
-class MaterialListBlocMock
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class ReturnApproverBlocMock
-    extends MockBloc<ReturnApproverEvent, ReturnApproverState>
-    implements ReturnApproverBloc {}
-
-class ReturnApproverFilterBlocMock
-    extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
-    implements ReturnApproverFilterBloc {}
-
-class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
-
-class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
-    implements DeepLinkingBloc {}
-
-class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
-    implements ViewByItemsBloc {}
-
-class OrderHistoryDetailsMockBloc
-    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
-    implements ViewByOrderDetailsBloc {}
-
-class ScanMaterialInfoBlocMock
-    extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
-    implements ScanMaterialInfoBloc {}
-
-class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
-    implements SettingBloc {}
-
-class OrderHistoryFilterMockBloc
-    extends MockBloc<ViewByItemFilterEvent, ViewByItemFilterState>
-    implements ViewByItemFilterBloc {}
-
-class ViewByOrderMockBloc extends MockBloc<ViewByOrderEvent, ViewByOrderState>
-    implements ViewByOrderBloc {}
-
-class PushNotificationServiceMock extends Mock
-    implements PushNotificationService {}
-
-class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
-    implements ChatBotBloc {}
-
-class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
-    implements IntroBloc {}
-
-class ResetPasswordBlocMock
-    extends MockBloc<ResetPasswordEvent, ResetPasswordState>
-    implements ResetPasswordBloc {}
-
-class MaterialPriceMockBloc
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class ReturnListByItemMockBloc
-    extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
-    implements ReturnListByItemBloc {}
-
-class ViewByItemDetailsMockBloc
-    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
-    implements ViewByItemDetailsBloc {}
-
-class ProductDetailMockBloc
-    extends MockBloc<ProductDetailEvent, ProductDetailState>
-    implements ProductDetailBloc {}
-
-class CreditAndInvoiceDetailsMockBloc
-    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
-    implements CreditAndInvoiceDetailsBloc {}
-
-class LoginFormMockBloc extends MockBloc<LoginFormEvent, LoginFormState>
-    implements LoginFormBloc {}
-
-class NotificationMockBloc
-    extends MockBloc<NotificationEvent, NotificationState>
-    implements NotificationBloc {}
-
-class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
-    implements AllInvoicesBloc {}
-
-class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
-    implements AllCreditsBloc {}
-
-class ViewByOrderFilterBlocMock
-    extends MockBloc<ViewByOrderFilterEvent, ViewByOrderFilterState>
-    implements ViewByOrderFilterBloc {}
-
-class PaymentSummaryDetailsBlocMock
-    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
-    implements PaymentSummaryDetailsBloc {}
-
-class ProductSearchBlocMock
-    extends MockBloc<ProductSearchEvent, ProductSearchState>
-    implements ProductSearchBloc {}
-
-class DownloadPaymentAttachmentsBlocMock extends MockBloc<
-        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
-    implements DownloadPaymentAttachmentsBloc {}
-
-class ReturnListByRequestBlocMock
-    extends MockBloc<ReturnListByRequestEvent, ReturnListByRequestState>
-    implements ReturnListByRequestBloc {}
-
-class PaymentSummaryBlocMock
-    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
-    implements PaymentSummaryBloc {}
-
-class SoaBlocMock extends MockBloc<SoaEvent, SoaState> implements SoaBloc {}
-
-class AdditionalDetailsBlocMock
-    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
-    implements AdditionalDetailsBloc {}
-
-class PaymentInProgressBlocMock
-    extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
-    implements PaymentInProgressBloc {}
-
-class ComboDealMaterialDetailBlocMock
-    extends MockBloc<ComboDealMaterialDetailEvent, ComboDealMaterialDetailState>
-    implements ComboDealMaterialDetailBloc {}
-
-class OrderSummaryBlocMock
-    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
-    implements OrderSummaryBloc {}
-
-class AvailableCreditsBlocMock
-    extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
-    implements AvailableCreditsBloc {}
-
-class OutstandingInvoicesBlocMock
-    extends MockBloc<OutstandingInvoicesEvent, OutstandingInvoicesState>
-    implements OutstandingInvoicesBloc {}
-
-class ReturnItemsBlocMock extends MockBloc<ReturnItemsEvent, ReturnItemsState>
-    implements ReturnItemsBloc {}
-
-class PaymentSummaryFilterBlocMock
-    extends MockBloc<PaymentSummaryFilterEvent, PaymentSummaryFilterState>
-    implements PaymentSummaryFilterBloc {}
-
-class ReOrderPermissionBlocMock
-    extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
-    implements ReOrderPermissionBloc {}
-
-class ArticlesInfoBlocMock
-    extends MockBloc<ArticlesInfoEvent, ArticlesInfoState>
-    implements ArticlesInfoBloc {}
-
-class FullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
-    implements FullSummaryBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class ArticlesInfoFilterBlocMock
-    extends MockBloc<ArticlesInfoFilterEvent, ArticlesInfoFilterState>
-    implements ArticlesInfoFilterBloc {}
-
-class AnnouncementFilterBlocMock
-    extends MockBloc<AnnouncementFilterEvent, AnnouncementFilterState>
-    implements AnnouncementFilterBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -352,7 +118,7 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late SalesRepBloc salesRepBlocMock;
   late AupTcBloc aupTcBlocMock;
-  late AccountSummaryBloc accountSummaryMock;
+  late ZPAccountSummaryBloc accountSummaryMock;
   late CartBloc cartBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late PaymentTermBloc paymentTermBlocMock;
@@ -383,9 +149,9 @@ void main() {
   late NotificationBloc mockNotificationBloc;
   late PriceOverrideBloc mockPriceOverrideBloc;
   late ResetPasswordBloc resetPasswordBlocMock;
-  final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
-  final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
-  final mockViewByOrderBloc = ViewByOrderMockBloc();
+  final mockOrderHistoryDetailsBloc = ViewByOrderDetailsBlocMock();
+  final mockOrderHistoryFilterBloc = ViewByItemFilterBlocMock();
+  final mockViewByOrderBloc = ViewByOrderBlocMock();
   late PushNotificationService pushNotificationServiceMock;
   final chatBotBloc = ChatBotMockBloc();
   late MaterialPriceBloc mockMaterialPriceBloc;
@@ -398,9 +164,9 @@ void main() {
   late ReturnListByRequestBloc returnListByRequestBlocMock;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBlocMock;
   late PaymentSummaryBloc paymentSummaryBlocMock;
-  late SoaBloc soaBlocMock;
+  late ZPSoaBloc soaBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
-  late PaymentInProgressBloc paymentInProgressBlocMock;
+  late ZPPaymentInProgressBloc paymentInProgressBlocMock;
   late ComboDealMaterialDetailBloc comboDealMaterialDetailBlocMock;
   late OrderSummaryBloc orderSummaryBlocMock;
   late AvailableCreditsBloc availableCreditsBlocMock;
@@ -470,7 +236,7 @@ void main() {
       fullSummaryBlocMock = FullSummaryBlocMock();
       authBlocMock = AuthBlocMock();
       userBlocMock = UserBlocMock();
-      accountSummaryMock = AccountSummaryBlocMock();
+      accountSummaryMock = ZPAccountSummaryBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       orderDocumentTypeMock = OrderDocumentTypeBlocMock();
       salesRepBlocMock = SalesRepBlocMock();
@@ -490,18 +256,18 @@ void main() {
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       announcementInfoBlocMock = AnnouncementInfoBlocMock();
-      deepLinkingBlocMock = DeepLinkingMockBloc();
+      deepLinkingBlocMock = DeepLinkingBlocMock();
       mockViewByItemsBloc = ViewByItemsBlocMock();
       scanMaterialInfoMockBloc = ScanMaterialInfoBlocMock();
       settingBlocMock = SettingMockBloc();
-      mockMaterialPriceBloc = MaterialPriceMockBloc();
+      mockMaterialPriceBloc = MaterialPriceBlocMock();
       introBlocMock = IntroBlocMock();
-      returnListByItemBlocMock = ReturnListByItemMockBloc();
-      viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
-      productDetailBloc = ProductDetailMockBloc();
-      creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
-      loginFormBloc = LoginFormMockBloc();
-      mockNotificationBloc = NotificationMockBloc();
+      returnListByItemBlocMock = ReturnListByItemBlocMock();
+      viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
+      productDetailBloc = ProductDetailBlocMock();
+      creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsBlocMock();
+      loginFormBloc = LoginFormBlocMock();
+      mockNotificationBloc = NotificationBlocMock();
       mockPriceOverrideBloc = PriceOverrideBlocMock();
       allInvoicesBlocMock = AllInvoicesBlocMock();
       allCreditsBlocMock = AllCreditsBlocMock();
@@ -511,9 +277,9 @@ void main() {
       returnListByRequestBlocMock = ReturnListByRequestBlocMock();
       downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
       paymentSummaryBlocMock = PaymentSummaryBlocMock();
-      soaBlocMock = SoaBlocMock();
+      soaBlocMock = ZPSoaBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
-      paymentInProgressBlocMock = PaymentInProgressBlocMock();
+      paymentInProgressBlocMock = ZPPaymentInProgressBlocMock();
       comboDealMaterialDetailBlocMock = ComboDealMaterialDetailBlocMock();
       orderSummaryBlocMock = OrderSummaryBlocMock();
       availableCreditsBlocMock = AvailableCreditsBlocMock();
@@ -721,7 +487,7 @@ void main() {
             BlocProvider<SettingBloc>(
               create: (context) => settingBlocMock,
             ),
-            BlocProvider<AccountSummaryBloc>(
+            BlocProvider<ZPAccountSummaryBloc>(
               create: (context) => accountSummaryMock,
             ),
             BlocProvider<ViewByItemFilterBloc>(
@@ -783,13 +549,13 @@ void main() {
             BlocProvider<PaymentSummaryBloc>(
               create: (context) => paymentSummaryBlocMock,
             ),
-            BlocProvider<SoaBloc>(
+            BlocProvider<ZPSoaBloc>(
               create: (context) => soaBlocMock,
             ),
             BlocProvider<AdditionalDetailsBloc>(
               create: (context) => additionalDetailsBlocMock,
             ),
-            BlocProvider<PaymentInProgressBloc>(
+            BlocProvider<ZPPaymentInProgressBloc>(
               create: (context) => paymentInProgressBlocMock,
             ),
             BlocProvider<ComboDealMaterialDetailBloc>(

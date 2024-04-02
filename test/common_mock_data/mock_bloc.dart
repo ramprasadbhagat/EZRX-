@@ -1,18 +1,55 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
+import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_filter/articles_info_filter_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
+import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
+import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
+import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
+import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
@@ -34,6 +71,7 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -56,21 +94,75 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
-class AupTcMockBloc extends MockBloc<AupTcEvent, AupTcState>
+class AupTcBlocMock extends MockBloc<AupTcEvent, AupTcState>
     implements AupTcBloc {}
 
-class DownloadPaymentAttachmentsBlocMock extends MockBloc<
-        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
-    implements DownloadPaymentAttachmentsBloc {}
+class DeepLinkingBlocMock extends MockBloc<DeepLinkingEvent, DeepLinkingState>
+    implements DeepLinkingBloc {}
 
-class PaymentCustomerInformationBlocMock extends MockBloc<
-        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
-    implements PaymentCustomerInformationBloc {}
+class LoginFormBlocMock extends MockBloc<LoginFormEvent, LoginFormState>
+    implements LoginFormBloc {}
+
+class NotificationBlocMock
+    extends MockBloc<NotificationEvent, NotificationState>
+    implements NotificationBloc {}
+
+class SalesRepBlocMock extends MockBloc<SalesRepEvent, SalesRepState>
+    implements SalesRepBloc {}
+
+class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState>
+    implements PaymentTermBloc {}
+
+class UserRestrictionListBlocMock
+    extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
+    implements UserRestrictionListBloc {}
+
+class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
+    implements SettingBloc {}
+
+class ChatBotMockBloc extends MockBloc<ChatBotEvent, ChatBotState>
+    implements ChatBotBloc {}
+
+class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
+    implements IntroBloc {}
+
+class ResetPasswordBlocMock
+    extends MockBloc<ResetPasswordEvent, ResetPasswordState>
+    implements ResetPasswordBloc {}
+
+class PolicyConfigurationListBlocMock
+    extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
+    implements PolicyConfigurationBloc {}
+
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
 
 //////////////////////Product//////////////////////////////////////////////
+class MaterialListBlocMock
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
+
+class MaterialFilterBlocMock
+    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
+    implements MaterialFilterBloc {}
+
+class ProductSearchBlocMock
+    extends MockBloc<ProductSearchEvent, ProductSearchState>
+    implements ProductSearchBloc {}
+
 class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
+
+class ProductDetailBlocMock
+    extends MockBloc<ProductDetailEvent, ProductDetailState>
+    implements ProductDetailBloc {}
+
+class ComboDealMaterialDetailBlocMock
+    extends MockBloc<ComboDealMaterialDetailEvent, ComboDealMaterialDetailState>
+    implements ComboDealMaterialDetailBloc {}
+
 ///////////////////////////////////////////////////////////////////////////
 
 /////////////////////////Price////////////////////////////////////////////
@@ -97,8 +189,16 @@ class OrderSummaryBlocMock
 class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
     implements ViewByOrderBloc {}
 
+class ViewByOrderFilterBlocMock
+    extends MockBloc<ViewByOrderFilterEvent, ViewByOrderFilterState>
+    implements ViewByOrderFilterBloc {}
+
 class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
     implements ViewByItemsBloc {}
+
+class ViewByItemFilterBlocMock
+    extends MockBloc<ViewByItemFilterEvent, ViewByItemFilterState>
+    implements ViewByItemFilterBloc {}
 
 class ViewByOrderDetailsBlocMock
     extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
@@ -116,9 +216,30 @@ class PoAttachmentBlocMock
     extends MockBloc<PoAttachmentEvent, PoAttachmentState>
     implements PoAttachmentBloc {}
 
+class ReOrderPermissionBlocMock
+    extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
+    implements ReOrderPermissionBloc {}
+
+class OrderDocumentTypeBlocMock
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
+
+class ScanMaterialInfoBlocMock
+    extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
+    implements ScanMaterialInfoBloc {}
+
 //////////////////////////////////////////////////////////////////////////
 
 ///////////////////////Payment///////////////////////////////////////////////
+
+class DownloadPaymentAttachmentsBlocMock extends MockBloc<
+        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
+    implements DownloadPaymentAttachmentsBloc {}
+
+class PaymentCustomerInformationBlocMock extends MockBloc<
+        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+    implements PaymentCustomerInformationBloc {}
+
 class BankInAccountBlocMock
     extends MockBloc<BankInAccountsEvent, BankInAccountsState>
     implements BankInAccountsBloc {}
@@ -127,9 +248,9 @@ class PaymentSummaryDetailsBlocMock
     extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
     implements PaymentSummaryDetailsBloc {}
 
-class AccountSummaryBlocMock
+class ZPAccountSummaryBlocMock
     extends MockBloc<AccountSummaryEvent, AccountSummaryState>
-    implements AccountSummaryBloc {}
+    implements ZPAccountSummaryBloc {}
 
 class OutstandingInvoicesBlocMock
     extends MockBloc<OutstandingInvoicesEvent, OutstandingInvoicesState>
@@ -150,9 +271,9 @@ class AvailableCreditFilterBlocMock
 class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
     implements NewPaymentBloc {}
 
-class PaymentInProgressBlocMock
+class ZPPaymentInProgressBlocMock
     extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
-    implements PaymentInProgressBloc {}
+    implements ZPPaymentInProgressBloc {}
 
 class PaymentSummaryBlocMock
     extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
@@ -161,6 +282,24 @@ class PaymentSummaryBlocMock
 class PaymentSummaryFilterBlocMock
     extends MockBloc<PaymentSummaryFilterEvent, PaymentSummaryFilterState>
     implements PaymentSummaryFilterBloc {}
+
+class ZPSoaBlocMock extends MockBloc<SoaEvent, SoaState> implements ZPSoaBloc {}
+
+class SoaFilterBlocMock extends MockBloc<SoaFilterEvent, SoaFilterState>
+    implements SoaFilterBloc {}
+
+class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
+    implements AllInvoicesBloc {}
+
+class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
+    implements AllCreditsBloc {}
+
+class FullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
+    implements FullSummaryBloc {}
+
+class CreditAndInvoiceDetailsBlocMock
+    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
+    implements CreditAndInvoiceDetailsBloc {}
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -174,4 +313,47 @@ class ReturnRequestAttachmentBlocMock
 
 class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState>
     implements UsageCodeBloc {}
+
+class ReturnRequestTypeCodeBlocMock
+    extends MockBloc<ReturnRequestTypeCodeEvent, ReturnRequestTypeCodeState>
+    implements ReturnRequestTypeCodeBloc {}
+
+class ReturnApproverBlocMock
+    extends MockBloc<ReturnApproverEvent, ReturnApproverState>
+    implements ReturnApproverBloc {}
+
+class ReturnApproverFilterBlocMock
+    extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
+    implements ReturnApproverFilterBloc {}
+
+class ReturnListByItemBlocMock
+    extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
+    implements ReturnListByItemBloc {}
+
+class ReturnListByRequestBlocMock
+    extends MockBloc<ReturnListByRequestEvent, ReturnListByRequestState>
+    implements ReturnListByRequestBloc {}
+
+class ReturnItemsBlocMock extends MockBloc<ReturnItemsEvent, ReturnItemsState>
+    implements ReturnItemsBloc {}
+
 /////////////////////////////////////////////////////////////////////////////
+
+///////////////////////Announcement & Article///////////////////////////////////
+class ArticlesInfoBlocMock
+    extends MockBloc<ArticlesInfoEvent, ArticlesInfoState>
+    implements ArticlesInfoBloc {}
+
+class ArticlesInfoFilterBlocMock
+    extends MockBloc<ArticlesInfoFilterEvent, ArticlesInfoFilterState>
+    implements ArticlesInfoFilterBloc {}
+
+class AnnouncementFilterBlocMock
+    extends MockBloc<AnnouncementFilterEvent, AnnouncementFilterState>
+    implements AnnouncementFilterBloc {}
+
+class AnnouncementInfoBlocMock
+    extends MockBloc<AnnouncementInfoEvent, AnnouncementInfoState>
+    implements AnnouncementInfoBloc {}
+////////////////////////////////////////////////////////////////////////////////
+

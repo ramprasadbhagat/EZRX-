@@ -72,7 +72,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: context
-                    .read<AccountSummaryBloc>()
+                    .read<ZPAccountSummaryBloc>()
                     .state
                     .outstandingBalance
                     .amount

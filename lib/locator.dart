@@ -1939,7 +1939,13 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(
-    () => SoaBloc(
+    () => ZPSoaBloc(
+      repository: locator<SoaRepository>(),
+    ),
+  );
+
+    locator.registerLazySingleton(
+    () => MPSoaBloc(
       repository: locator<SoaRepository>(),
     ),
   );
@@ -2004,7 +2010,13 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(
-    () => PaymentInProgressBloc(
+    () => ZPPaymentInProgressBloc(
+      repository: locator<PaymentInProgressRepository>(),
+    ),
+  );
+
+    locator.registerLazySingleton(
+    () => MPPaymentInProgressBloc(
       repository: locator<PaymentInProgressRepository>(),
     ),
   );
@@ -2534,7 +2546,13 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => AccountSummaryBloc(
+    () => ZPAccountSummaryBloc(
+      accountSummaryRepository: locator<AccountSummaryRepository>(),
+    ),
+  );
+
+    locator.registerLazySingleton(
+    () => MPAccountSummaryBloc(
       accountSummaryRepository: locator<AccountSummaryRepository>(),
     ),
   );

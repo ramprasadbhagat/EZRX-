@@ -38,20 +38,20 @@ class MoreTab extends StatelessWidget {
         child: ListView(
           key: WidgetKeys.moreTapListContent,
           children: [
-            const ProfileTile(), // Adds Profile Tile
-            const ServiceTile(), // Adds Service Tile
+            const ProfileTile(),
+            const SizedBox(height: 10),
+            const ServiceTile(),
             const Divider(
               color: ZPColors.accentColor,
-              height: 15,
+              endIndent: 16,
+              indent: 16,
+              height: 40,
             ),
+            const SettingsTile(),
             const SizedBox(
               height: 15,
             ),
-            const SettingsTile(), // Adds Settings Tile
-            const SizedBox(
-              height: 15,
-            ),
-            const HelpAndSupportTile(), // Adds Help and Support Tile
+            const HelpAndSupportTile(),
             const Divider(
               color: ZPColors.accentColor,
               height: 15,
@@ -62,25 +62,17 @@ class MoreTab extends StatelessWidget {
             ),
             const LoginOnBehalf(),
             TextButton.icon(
+              style: TextButton.styleFrom(alignment: Alignment.centerLeft),
               icon: const Padding(
                 padding: EdgeInsets.only(left: 8.0),
-                child: Icon(
-                  Icons.logout_outlined,
-                  color: ZPColors.red,
-                ),
+                child: Icon(Icons.logout_outlined, color: ZPColors.red),
               ),
-              label: Row(
+              label: Text(
+                context.tr('Log out'),
                 key: WidgetKeys.logOutTile,
-                mainAxisAlignment:
-                    MainAxisAlignment.start, // to align the icon to left
-                children: [
-                  Text(
-                    'Log out',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: ZPColors.red,
-                        ),
-                  ).tr(),
-                ],
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: ZPColors.red,
+                    ),
               ),
               onPressed: () => context.read<AuthBloc>().add(
                     const AuthEvent.logout(),

@@ -23,6 +23,7 @@ class PaymentInProgressRepository extends IPaymentInProgressRepository {
   Future<Either<ApiFailure, StringValue>> getPaymentInProgress({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -39,6 +40,7 @@ class PaymentInProgressRepository extends IPaymentInProgressRepository {
       final response = await remoteDataSource.getPaymentInProgress(
         customerCode: customerCodeInfo.customerCodeSoldTo,
         salesOrg: salesOrganization.salesOrg.getOrCrash(),
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(

@@ -374,7 +374,7 @@ void main() {
       ).thenAnswer((invocation) => Future(() => null));
       final finder = find.byWidgetPredicate(
         (widget) =>
-            widget is RichText && tapTextSpan(widget, 'Payment Summary'),
+            widget is RichText && tapTextSpan(widget, 'Payment summary'),
       );
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));

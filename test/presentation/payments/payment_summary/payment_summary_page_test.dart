@@ -55,7 +55,7 @@ void main() {
   late PaymentSummaryBloc paymentSummaryBloc;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBloc;
   late PaymentSummaryFilterBloc paymentSummaryFilterBloc;
-  late PaymentInProgressBloc paymentInProgressBlocMock;
+  late ZPPaymentInProgressBloc paymentInProgressBlocMock;
   late EligibilityBloc eligibilityBloc;
   late List<PaymentSummaryDetails> paymentSummaryList;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
@@ -107,7 +107,7 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     paymentSummaryBloc = PaymentSummaryBlocMock();
     downloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
-    paymentInProgressBlocMock = PaymentInProgressBlocMock();
+    paymentInProgressBlocMock = ZPPaymentInProgressBlocMock();
     paymentSummaryFilterBloc = PaymentSummaryFilterBlocMock();
     eligibilityBloc = EligibilityBlocMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
@@ -172,7 +172,7 @@ void main() {
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBloc,
           ),
-          BlocProvider<PaymentInProgressBloc>(
+          BlocProvider<ZPPaymentInProgressBloc>(
             create: (context) => paymentInProgressBlocMock,
           ),
           BlocProvider<PaymentSummaryDetailsBloc>(
@@ -634,7 +634,8 @@ void main() {
         paymentSummaryFilterBloc,
         Stream.fromIterable([
           PaymentSummaryFilterState.initial().copyWith(
-            filter: PaymentSummaryFilter.defaultFilter().copyWith(filterStatuses: []),
+            filter: PaymentSummaryFilter.defaultFilter()
+                .copyWith(filterStatuses: []),
           ),
         ]),
       );

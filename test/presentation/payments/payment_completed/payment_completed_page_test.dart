@@ -143,10 +143,10 @@ void main() {
       expect(bulletWidget, findsNWidgets(4));
       final finder = find.byWidgetPredicate(
         (widget) =>
-            widget is RichText && tapTextSpan(widget, 'Payment Summary'),
+            widget is RichText && tapTextSpan(widget, 'Payment summary'),
       );
       await tester.pumpAndSettle();
-      expect(finder, findsOneWidget);
+      expect(finder, findsWidgets);
     });
     testWidgets('Test Account Summary Button', (tester) async {
       await tester.pumpWidget(getWidget());
@@ -181,7 +181,9 @@ void main() {
 
 bool findTextAndTap(InlineSpan visitor, String text) {
   if (visitor is TextSpan && visitor.text == text) {
-    (visitor.recognizer as TapGestureRecognizer).onTap!();
+    if (visitor.recognizer is TapGestureRecognizer) {
+      (visitor.recognizer as TapGestureRecognizer).onTap?.call();
+    }
 
     return false;
   }

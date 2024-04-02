@@ -24,7 +24,7 @@ void main() {
   group('Payment In Progress Bloc Test', () {
     blocTest<PaymentInProgressBloc, PaymentInProgressState>(
       'Payment In Progress "initial" Event',
-      build: () => PaymentInProgressBloc(
+      build: () => ZPPaymentInProgressBloc(
         repository: repository,
       ),
       act: (PaymentInProgressBloc bloc) => bloc.add(
@@ -34,7 +34,7 @@ void main() {
     );
     blocTest<PaymentInProgressBloc, PaymentInProgressState>(
       'Payment In Progress "fetch" Event Success',
-      build: () => PaymentInProgressBloc(
+      build: () => ZPPaymentInProgressBloc(
         repository: repository,
       ),
       setUp: () {
@@ -42,6 +42,7 @@ void main() {
           () => repository.getPaymentInProgress(
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async =>
@@ -67,7 +68,7 @@ void main() {
     );
     blocTest<PaymentInProgressBloc, PaymentInProgressState>(
       'Payment In Progress "fetch" Event failure',
-      build: () => PaymentInProgressBloc(
+      build: () => ZPPaymentInProgressBloc(
         repository: repository,
       ),
       setUp: () {
@@ -75,6 +76,7 @@ void main() {
           () => repository.getPaymentInProgress(
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('Fake-Error')),

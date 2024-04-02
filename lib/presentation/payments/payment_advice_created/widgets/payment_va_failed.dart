@@ -54,7 +54,7 @@ class _PaymentVirtualAccountFailed extends StatelessWidget {
                     ),
                   ),
               child: Text(
-                context.tr('Payment Summary'),
+                context.tr('Payment summary'),
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.primary,
                     ),

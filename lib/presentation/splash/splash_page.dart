@@ -499,6 +499,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               _initializeProduct();
               _initializeCart(state);
               _initializeAccountSummary(state);
+              _initPaymentModule(state);
 
               context.read<EligibilityBloc>().add(
                     const EligibilityEvent.registerChatBot(),
@@ -597,13 +598,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     ),
                   );
 
-              context.read<SoaBloc>().add(
-                    SoaEvent.fetch(
-                      customerCodeInfo: state.customerCodeInfo,
-                      salesOrg: state.salesOrg,
-                    ),
-                  );
-
               context.read<AdditionalDetailsBloc>().add(
                     AdditionalDetailsEvent.initialized(
                       config: state.salesOrgConfigs,
@@ -626,25 +620,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               context.read<FullSummaryBloc>().add(
                     FullSummaryEvent.fetch(
                       appliedFilter: FullSummaryFilter.defaultFilter(),
-                    ),
-                  );
-
-              context.read<AccountSummaryBloc>().add(
-                    AccountSummaryEvent.fetchInvoiceSummary(
-                      custCode: state.customerCodeInfo.customerCodeSoldTo,
-                      salesOrg: state.salesOrganisation.salesOrg,
-                    ),
-                  );
-              context.read<AccountSummaryBloc>().add(
-                    AccountSummaryEvent.fetchCreditSummary(
-                      custCode: state.customerCodeInfo.customerCodeSoldTo,
-                      salesOrg: state.salesOrganisation.salesOrg,
-                    ),
-                  );
-              context.read<PaymentInProgressBloc>().add(
-                    PaymentInProgressEvent.fetch(
-                      salesOrganization: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
                     ),
                   );
 
@@ -1011,7 +986,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               redirectPaymentHome: () {
                 if (eligibilityState.isPaymentEnabled) {
-                  context.router.push(const PaymentPageRoute());
+                  context.router.push(PaymentPageRoute(isMarketPlace: false));
                 } else {
                   noAccessSnackbar.show(context);
                 }
@@ -1170,21 +1145,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     user: context.read<UserBloc>().state.user,
                   ),
                 );
-          },
-        ),
-        BlocListener<AccountSummaryBloc, AccountSummaryState>(
-          listenWhen: (previous, current) =>
-              previous.failureOrSuccessOption != current.failureOrSuccessOption,
-          listener: (context, state) {
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (success) {},
-              ),
-            );
           },
         ),
       ],
@@ -1383,6 +1343,66 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         );
   }
 
+  void _initPaymentModule(EligibilityState state) {
+    context.read<ZPAccountSummaryBloc>().add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: state.customerCodeInfo.customerCodeSoldTo,
+            salesOrg: state.salesOrganisation.salesOrg,
+          ),
+        );
+
+    context.read<ZPAccountSummaryBloc>().add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: state.customerCodeInfo.customerCodeSoldTo,
+            salesOrg: state.salesOrganisation.salesOrg,
+          ),
+        );
+
+    context.read<ZPPaymentInProgressBloc>().add(
+          PaymentInProgressEvent.fetch(
+            salesOrganization: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        );
+
+    context.read<ZPSoaBloc>().add(
+          SoaEvent.fetch(
+            customerCodeInfo: state.customerCodeInfo,
+            salesOrg: state.salesOrg,
+          ),
+        );
+
+    if (state.user.acceptMPTC.isAccept) {
+      context.read<MPAccountSummaryBloc>().add(
+            AccountSummaryEvent.fetchInvoiceSummary(
+              custCode: state.customerCodeInfo.customerCodeSoldTo,
+              salesOrg: state.salesOrganisation.salesOrg,
+            ),
+          );
+
+      context.read<MPAccountSummaryBloc>().add(
+            AccountSummaryEvent.fetchCreditSummary(
+              custCode: state.customerCodeInfo.customerCodeSoldTo,
+              salesOrg: state.salesOrganisation.salesOrg,
+            ),
+          );
+
+      context.read<MPPaymentInProgressBloc>().add(
+            PaymentInProgressEvent.fetch(
+              salesOrganization: state.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+            ),
+          );
+
+      context.read<MPSoaBloc>().add(
+            SoaEvent.fetch(
+              customerCodeInfo: state.customerCodeInfo,
+              salesOrg: state.salesOrg,
+            ),
+          );
+    }
+  }
+
   void _initBlocs(BuildContext context) {
     context
         .read<OrderDocumentTypeBloc>()
@@ -1414,10 +1434,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     context
         .read<ViewByItemFilterBloc>()
         .add(const ViewByItemFilterEvent.initialize());
-
-    context.read<AccountSummaryBloc>().add(
-          const AccountSummaryEvent.initialize(),
-        );
 
     context.read<NotificationBloc>().add(
           const NotificationEvent.fetch(),

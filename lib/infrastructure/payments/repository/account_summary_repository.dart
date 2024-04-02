@@ -23,6 +23,7 @@ class AccountSummaryRepository extends IAccountSummaryRepository {
   Future<Either<ApiFailure, OutstandingBalance>> fetchInvoiceSummary({
     required String custCode,
     required SalesOrg salesOrg,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -39,6 +40,7 @@ class AccountSummaryRepository extends IAccountSummaryRepository {
       final response = await remoteDataSource.fetchInvoiceSummary(
         customerCode: custCode,
         salesOrg: salesOrg.getOrCrash(),
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response);
@@ -53,6 +55,7 @@ class AccountSummaryRepository extends IAccountSummaryRepository {
   Future<Either<ApiFailure, CreditLimit>> fetchCreditSummary({
     required String custCode,
     required SalesOrg salesOrg,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -69,6 +72,7 @@ class AccountSummaryRepository extends IAccountSummaryRepository {
       final response = await remoteDataSource.fetchCreditLimit(
         customerCode: custCode,
         salesOrg: salesOrg.getOrCrash(),
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response);

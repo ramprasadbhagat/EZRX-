@@ -21,6 +21,7 @@ class PaymentInProgressRemoteDataSource {
   Future<List<StringValue>> getPaymentInProgress({
     required String customerCode,
     required String salesOrg,
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -32,6 +33,7 @@ class PaymentInProgressRemoteDataSource {
             'request': {
               'customerCode': customerCode,
               'salesOrg': salesOrg,
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
             },
           },
         },

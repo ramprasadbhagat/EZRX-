@@ -38,7 +38,7 @@ void main() {
 
     locator.registerSingleton(Config());
     locator.registerSingleton(AppRouter());
-    locator.registerSingleton<AupTcBloc>(AupTcMockBloc());
+    locator.registerSingleton<AupTcBloc>(AupTcBlocMock());
     locator<Config>().appFlavor = Flavor.mock;
     autoRouterMock = locator<AppRouter>();
     mockAupTcBloc = locator<AupTcBloc>();

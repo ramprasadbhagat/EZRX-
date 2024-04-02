@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -44,67 +43,15 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AccountSummaryBlocMock
-    extends MockBloc<AccountSummaryEvent, AccountSummaryState>
-    implements AccountSummaryBloc {}
-
-class AvailableCreditsBlocMock
-    extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
-    implements AvailableCreditsBloc {}
-
-class AvailableCreditFilterBlocMock
-    extends MockBloc<AvailableCreditFilterEvent, AvailableCreditFilterState>
-    implements AvailableCreditFilterBloc {}
-
-class PaymentInProgressBlocMock
-    extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
-    implements PaymentInProgressBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class DownloadPaymentAttachmentsBlocMock extends MockBloc<
-        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
-    implements DownloadPaymentAttachmentsBloc {}
-
-class OutstandingInvoicesBlocMock
-    extends MockBloc<OutstandingInvoicesEvent, OutstandingInvoicesState>
-    implements OutstandingInvoicesBloc {}
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class SoaBlocMock extends MockBloc<SoaEvent, SoaState> implements SoaBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MaterialPageXMock extends Mock implements MaterialPageX {}
-
-class SoaFilterBlocMock extends MockBloc<SoaFilterEvent, SoaFilterState>
-    implements SoaFilterBloc {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
-
 void main() {
-  late SoaBloc soaBloc;
+  late ZPSoaBloc soaBloc;
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
@@ -113,9 +60,9 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  late AccountSummaryBloc accountSummaryBlocMock;
+  late ZPAccountSummaryBloc accountSummaryBlocMock;
   late AccountSummaryState accountSummaryState;
-  late PaymentInProgressBloc paymentInProgressBloc;
+  late ZPPaymentInProgressBloc paymentInProgressBloc;
   late PaymentInProgressState paymentInProgressState;
   late AvailableCreditsBloc availableCreditsBlocMock;
   late AvailableCreditFilterBloc availableCreditFilterBloc;
@@ -154,10 +101,10 @@ void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(() => MockAppRouter());
+    locator.registerLazySingleton(() => AutoRouteMock());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
 
-    autoRouterMock = locator<MockAppRouter>();
+    autoRouterMock = locator<AutoRouteMock>();
 
     accountSummaryState = AccountSummaryState.initial().copyWith(
       creditLimit: CreditLimit.empty().copyWith(
@@ -177,15 +124,15 @@ void main() {
   });
 
   setUp(() async {
-    soaBloc = SoaBlocMock();
-    eligibilityBlocMock = EligibilityBlockMock();
+    soaBloc = ZPSoaBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     authBlocMock = AuthBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
-    accountSummaryBlocMock = AccountSummaryBlocMock();
-    paymentInProgressBloc = PaymentInProgressBlocMock();
+    accountSummaryBlocMock = ZPAccountSummaryBlocMock();
+    paymentInProgressBloc = ZPPaymentInProgressBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();
     availableCreditFilterBloc = AvailableCreditFilterBlocMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
@@ -237,7 +184,7 @@ void main() {
       usingLocalization: true,
       routeName: NewPaymentPageRoute.name,
       providers: [
-        BlocProvider<SoaBloc>(
+        BlocProvider<ZPSoaBloc>(
           create: (context) => soaBloc,
         ),
         BlocProvider<SalesOrgBloc>(
@@ -252,13 +199,13 @@ void main() {
         BlocProvider<CustomerCodeBloc>(
           create: (context) => customerCodeBlocMock,
         ),
-        BlocProvider<PaymentInProgressBloc>(
+        BlocProvider<ZPPaymentInProgressBloc>(
           create: (context) => paymentInProgressBloc,
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
         ),
-        BlocProvider<AccountSummaryBloc>(
+        BlocProvider<ZPAccountSummaryBloc>(
           create: (context) => accountSummaryBlocMock,
         ),
         BlocProvider<AvailableCreditsBloc>(
@@ -276,7 +223,7 @@ void main() {
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<SoaFilterBloc>(create: (context) => soaFilterBlocMock),
       ],
-      child: const PaymentPage(),
+      child: const PaymentPage(isMarketPlace: false),
     );
   }
 
@@ -509,29 +456,6 @@ void main() {
       expect(creditLimitRemaining, findsNothing);
       expect(totalCreditLimit, findsNothing);
     });
-
-    testWidgets('Check refresh', (WidgetTester tester) async {
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      expect(paymentHome, findsOneWidget);
-      expect(appBar, findsOneWidget);
-      expect(paymentHomeInProgressCard, findsOneWidget);
-      expect(inProgressAmount, findsOneWidget);
-      await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
-      expect(
-        find.byType(RefreshProgressIndicator),
-        findsOneWidget,
-      );
-      await tester.pumpAndSettle();
-      verify(
-        () => accountSummaryBlocMock.add(
-          AccountSummaryEvent.fetchCreditSummary(
-            custCode: '',
-            salesOrg: SalesOrg(''),
-          ),
-        ),
-      ).called(1);
-    });
   });
 
   group('Payment Home Invoice', () {
@@ -546,28 +470,6 @@ void main() {
       expect(totalOverdue, findsOneWidget);
     });
 
-    testWidgets('Check refresh', (WidgetTester tester) async {
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      expect(paymentHome, findsOneWidget);
-      expect(appBar, findsOneWidget);
-      expect(paymentHomeInProgressCard, findsOneWidget);
-      expect(inProgressAmount, findsOneWidget);
-      await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
-      expect(
-        find.byType(RefreshProgressIndicator),
-        findsOneWidget,
-      );
-      await tester.pumpAndSettle();
-      verify(
-        () => accountSummaryBlocMock.add(
-          AccountSummaryEvent.fetchInvoiceSummary(
-            custCode: '',
-            salesOrg: SalesOrg(''),
-          ),
-        ),
-      ).called(1);
-    });
     testWidgets('check loading', (WidgetTester tester) async {
       whenListen(
         accountSummaryBlocMock,
@@ -596,9 +498,10 @@ void main() {
   group('Payment Home In progress', () {
     testWidgets('Check progress widgets', (WidgetTester tester) async {
       await tester.pumpWidget(getWidget());
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(paymentHome, findsOneWidget);
       expect(appBar, findsOneWidget);
+      await tester.scrollUntilVisible(paymentHomeInProgressCard, 200);
       expect(paymentHomeInProgressCard, findsOneWidget);
       expect(inProgressAmount, findsOneWidget);
     });
@@ -611,6 +514,7 @@ void main() {
       await tester.pump();
       expect(paymentHome, findsOneWidget);
       expect(appBar, findsOneWidget);
+      await tester.scrollUntilVisible(paymentHomeInProgressCard, 200);
       expect(paymentHomeInProgressCard, findsOneWidget);
       expect(inProgressAmount, findsOneWidget);
       expect(
@@ -630,6 +534,7 @@ void main() {
       await tester.pump();
       expect(paymentHome, findsOneWidget);
       expect(appBar, findsOneWidget);
+      await tester.scrollUntilVisible(paymentHomeInProgressCard, 200);
       expect(paymentHomeInProgressCard, findsOneWidget);
 
       expect(inProgressAmount, findsOneWidget);
@@ -654,29 +559,6 @@ void main() {
       );
     });
 
-    testWidgets('Check refresh', (WidgetTester tester) async {
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      expect(paymentHome, findsOneWidget);
-      expect(appBar, findsOneWidget);
-      expect(paymentHomeInProgressCard, findsOneWidget);
-      expect(inProgressAmount, findsOneWidget);
-      await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
-      await tester.pump();
-      expect(
-        find.byType(RefreshProgressIndicator),
-        findsOneWidget,
-      );
-      await tester.pumpAndSettle();
-      verify(
-        () => paymentInProgressBloc.add(
-          PaymentInProgressEvent.fetch(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganization: SalesOrganisation.empty(),
-          ),
-        ),
-      ).called(1);
-    });
     testWidgets('check loading', (WidgetTester tester) async {
       whenListen(
         paymentInProgressBloc,
@@ -689,6 +571,7 @@ void main() {
       await tester.pump();
       expect(paymentHome, findsOneWidget);
       expect(appBar, findsOneWidget);
+      await tester.scrollUntilVisible(paymentHomeInProgressCard, 200);
       expect(paymentHomeInProgressCard, findsOneWidget);
       expect(inProgressAmount, findsOneWidget);
     });
@@ -1016,5 +899,52 @@ void main() {
         expect(customerBlockedBanner, findsOneWidget);
       },
     );
+  });
+
+  testWidgets('Payment home check refresh', (WidgetTester tester) async {
+    await tester.pumpWidget(getWidget());
+    await tester.pumpAndSettle();
+    await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
+    await tester.pump();
+    expect(
+      find.byType(RefreshProgressIndicator),
+      findsOneWidget,
+    );
+    await tester.pumpAndSettle();
+    verify(
+      () => soaBloc.add(
+        SoaEvent.fetch(
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrg: SalesOrg(''),
+        ),
+      ),
+    ).called(1);
+
+    verify(
+      () => accountSummaryBlocMock.add(
+        AccountSummaryEvent.fetchCreditSummary(
+          custCode: '',
+          salesOrg: SalesOrg(''),
+        ),
+      ),
+    ).called(1);
+
+    verify(
+      () => accountSummaryBlocMock.add(
+        AccountSummaryEvent.fetchInvoiceSummary(
+          custCode: '',
+          salesOrg: SalesOrg(''),
+        ),
+      ),
+    ).called(1);
+
+    verify(
+      () => paymentInProgressBloc.add(
+        PaymentInProgressEvent.fetch(
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrganization: SalesOrganisation.empty(),
+        ),
+      ),
+    ).called(1);
   });
 }

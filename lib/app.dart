@@ -345,8 +345,11 @@ class App extends StatelessWidget {
         BlocProvider<PaymentSummaryFilterBloc>(
           create: (context) => locator<PaymentSummaryFilterBloc>(),
         ),
-        BlocProvider<SoaBloc>(
-          create: (context) => locator<SoaBloc>(),
+        BlocProvider<ZPSoaBloc>(
+          create: (context) => locator<ZPSoaBloc>(),
+        ),
+        BlocProvider<MPSoaBloc>(
+          create: (context) => locator<MPSoaBloc>(),
         ),
         BlocProvider<SoaFilterBloc>(
           create: (context) => locator<SoaFilterBloc>(),
@@ -405,8 +408,11 @@ class App extends StatelessWidget {
         BlocProvider<IntroBloc>(
           create: (context) => locator<IntroBloc>(),
         ),
-        BlocProvider<AccountSummaryBloc>(
-          create: (context) => locator<AccountSummaryBloc>(),
+        BlocProvider<ZPAccountSummaryBloc>(
+          create: (context) => locator<ZPAccountSummaryBloc>(),
+        ),
+        BlocProvider<MPAccountSummaryBloc>(
+          create: (context) => locator<MPAccountSummaryBloc>(),
         ),
         BlocProvider<ProductSearchBloc>(
           create: (context) => locator<ProductSearchBloc>(),
@@ -484,8 +490,11 @@ class App extends StatelessWidget {
         BlocProvider<FaqBloc>(
           create: (context) => locator<FaqBloc>(),
         ),
-        BlocProvider<PaymentInProgressBloc>(
-          create: (context) => locator<PaymentInProgressBloc>(),
+        BlocProvider<ZPPaymentInProgressBloc>(
+          create: (context) => locator<ZPPaymentInProgressBloc>(),
+        ),
+        BlocProvider<MPPaymentInProgressBloc>(
+          create: (context) => locator<MPPaymentInProgressBloc>(),
         ),
         BlocProvider<CustomerLicenseBloc>(
           create: (context) => locator<CustomerLicenseBloc>(),

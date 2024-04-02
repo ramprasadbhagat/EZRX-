@@ -290,9 +290,13 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     PaymentPageRoute.name: (routeData) {
+      final args = routeData.argsAs<PaymentPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i22.PaymentPage(),
+        child: _i22.PaymentPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     ProfilePageRoute.name: (routeData) {
@@ -1414,14 +1418,36 @@ class ProductSuggestionPageRouteArgs {
 
 /// generated route for
 /// [_i22.PaymentPage]
-class PaymentPageRoute extends _i77.PageRouteInfo<void> {
-  const PaymentPageRoute()
-      : super(
+class PaymentPageRoute extends _i77.PageRouteInfo<PaymentPageRouteArgs> {
+  PaymentPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           PaymentPageRoute.name,
           path: 'payments',
+          args: PaymentPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'PaymentPageRoute';
+}
+
+class PaymentPageRouteArgs {
+  const PaymentPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'PaymentPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for

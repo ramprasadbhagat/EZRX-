@@ -9,19 +9,28 @@ class ServiceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      dense: true,
-      title: BlocBuilder<EligibilityBloc, EligibilityState>(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: BlocBuilder<EligibilityBloc, EligibilityState>(
         buildWhen: (previous, current) =>
             previous.isReturnsEnable != current.isReturnsEnable ||
             previous.isPaymentEnabled != current.isPaymentEnabled,
         builder: (context, state) {
-          return GridView.count(
+          final items = _getServiceTabs(context, state);
+
+          return GridView.builder(
+            padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: (MediaQuery.of(context).size.width / 80).round(),
-            childAspectRatio: 0.9,
             shrinkWrap: true,
-            children: _getServiceTabs(context, state).map((item) {
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              childAspectRatio: 1.6,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 20,
+            ),
+            itemBuilder: (context, index) {
+              final item = items[index];
+
               return InkWell(
                 key: item.key,
                 onTap: item.onTap,
@@ -29,17 +38,23 @@ class ServiceTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    item.icon,
+                    Expanded(child: item.icon),
                     const SizedBox(height: 4),
-                    Text(
-                      context.tr(item.label),
-                      style: Theme.of(context).textTheme.bodySmall,
-                      textAlign: TextAlign.center,
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          context.tr(item.label),
+                          style: Theme.of(context).textTheme.bodySmall,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
                   ],
                 ),
               );
-            }).toList(),
+            },
+            itemCount: items.length,
           );
         },
       ),
@@ -54,7 +69,11 @@ class ServiceTile extends StatelessWidget {
       if (state.user.userCanAccessOrderHistory)
         MoreDetailsTile.orderTab(context),
       if (state.isReturnsEnable) MoreDetailsTile.returnsTab(context),
-      if (state.isPaymentEnabled) MoreDetailsTile.paymentsTab(context),
+      if (state.isPaymentEnabled) ...[
+        MoreDetailsTile.paymentsTab(context),
+        if (state.user.acceptMPTC.isAccept)
+          MoreDetailsTile.marketplacePaymentsTab(context),
+      ],
       if (state.isIDMarket) MoreDetailsTile.eZPointTab(context),
     ];
   }

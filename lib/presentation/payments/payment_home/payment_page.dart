@@ -1,5 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
@@ -11,11 +17,8 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
-import 'package:ezrxmobile/domain/core/keyValue/key_value_pair.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_limit.dart';
-import 'package:ezrxmobile/domain/payments/entities/outstanding_balance.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
@@ -38,34 +41,21 @@ import 'package:ezrxmobile/presentation/payments/widgets/new_payment_button.dart
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/widgets/announcement_bottomsheet.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 part 'widgets/account_statement.dart';
-
 part 'widgets/payment_option.dart';
-
 part 'widgets/payment_summary.dart';
+part 'widgets/payment_total_credit.dart';
+part 'widgets/payment_total_invoice.dart';
+part 'widgets/payment_item_card.dart';
 
 class PaymentPage extends StatelessWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+  final bool isMarketPlace;
 
-  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
-    return showModalBottomSheet<bool>(
-      context: context,
-      enableDrag: false,
-      builder: (_) => ConfirmBottomSheet(
-        key: WidgetKeys.confirmBottomSheet,
-        title: 'We are closed for payment',
-        content:
-            "We are unable to proceed with the payment during the month's end. Please try again the following month. Thank you",
-        confirmButtonText: 'Close',
-        displayCancelButton: false,
-      ),
-    );
-  }
+  const PaymentPage({
+    Key? key,
+    required this.isMarketPlace,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,11 +68,6 @@ class PaymentPage extends StatelessWidget {
           isScrollControlled: true,
           enableDrag: false,
           isDismissible: false,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(16),
-            ),
-          ),
           builder: (_) => AnnouncementBottomSheet(
             maintenanceItem:
                 context.read<AnnouncementBloc>().state.maintenanceItem,
@@ -99,50 +84,13 @@ class PaymentPage extends StatelessWidget {
       key: WidgetKeys.paymentsTabPage,
       appBar: CustomAppBar.commonAppBar(
         key: WidgetKeys.paymentHomeAppBar,
-        title: Text(context.tr('Payments')),
+        title: Text(
+          context.tr(isMarketPlace ? 'MP Payments' : 'Payments'),
+        ),
         customerBlockedOrSuspended:
             context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
-      bottomNavigationBar: BlocListener<NewPaymentBloc, NewPaymentState>(
-        listenWhen: (previous, current) =>
-            previous.isFetchingPrincipalCutoffs !=
-                current.isFetchingPrincipalCutoffs &&
-            !current.isFetchingPrincipalCutoffs,
-        listener: (context, state) {
-          state.failureOrSuccessOption.fold(
-            () {},
-            (option) => option.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-
-          if (!state.salesOrganisation.salesOrg.isID ||
-              state.principalCutoffs.canMakePayment) {
-            context.read<OutstandingInvoicesBloc>().add(
-                  OutstandingInvoicesEvent.fetch(
-                    appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
-                    searchKey: SearchKey.search(''),
-                  ),
-                );
-            context.read<AvailableCreditsBloc>().add(
-                  AvailableCreditsEvent.fetch(
-                    appliedFilter: AvailableCreditFilter.defaultFilter(),
-                    searchKey: SearchKey.searchFilter(''),
-                  ),
-                );
-            context.read<AvailableCreditFilterBloc>().add(
-                  const AvailableCreditFilterEvent.initialize(),
-                );
-            context.router.push(const NewPaymentPageRoute());
-          } else {
-            _showConfirmBottomSheet(context);
-          }
-        },
-        child: const _NewPaymentButton(),
-      ),
+      bottomNavigationBar: const _NewPaymentButton(),
       body: RefreshIndicator(
         onRefresh: () async => _refreshPayment(context),
         child: ListView(
@@ -150,18 +98,18 @@ class PaymentPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           children: [
             AnnouncementWidget(currentPath: context.router.currentPath),
-            const _PaymentOptionMenu(),
+            _PaymentOptionMenu(isMarketPlace: isMarketPlace),
             const SizedBox(height: 20),
-            const _Invoice(),
+            _PaymentTotalInvoice(isMarketPlace: isMarketPlace),
             if (!salesOrgConfig.hideCredit) ...[
               const SizedBox(height: 20),
-              const _Credit(),
+              _PaymentTotalCredit(isMarketPlace: isMarketPlace),
             ],
             const SizedBox(height: 20),
-            const _PaymentSummary(),
+            _PaymentSummary(isMarketPlace: isMarketPlace),
             if (salesOrgConfig.statementOfAccountEnabled) ...[
               const SizedBox(height: 20),
-              const _AccountStatement(),
+              _AccountStatement(isMarketPlace: isMarketPlace),
             ],
             const SizedBox(height: 20),
           ],
@@ -172,32 +120,30 @@ class PaymentPage extends StatelessWidget {
 
   void _refreshPayment(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
-    context.read<PaymentInProgressBloc>().add(
+
+    context.paymentInProgressBloc(isMarketPlace).add(
           PaymentInProgressEvent.fetch(
-            salesOrganization:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
+            salesOrganization: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
           ),
         );
-    context.read<AccountSummaryBloc>().add(
+    context.accountSummaryBloc(isMarketPlace).add(
           AccountSummaryEvent.fetchInvoiceSummary(
             custCode: eligibilityState.customerCodeInfo.customerCodeSoldTo,
             salesOrg: eligibilityState.salesOrganisation.salesOrg,
           ),
         );
 
-    context.read<AccountSummaryBloc>().add(
+    context.accountSummaryBloc(isMarketPlace).add(
           AccountSummaryEvent.fetchCreditSummary(
             custCode: eligibilityState.customerCodeInfo.customerCodeSoldTo,
             salesOrg: eligibilityState.salesOrganisation.salesOrg,
           ),
         );
-    context.read<SoaBloc>().add(
+    context.soaBloc(isMarketPlace).add(
           SoaEvent.fetch(
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
-            salesOrg: context.read<EligibilityBloc>().state.salesOrg,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            salesOrg: eligibilityState.salesOrg,
           ),
         );
   }
@@ -208,7 +154,44 @@ class _NewPaymentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return BlocListener<NewPaymentBloc, NewPaymentState>(
+      listenWhen: (previous, current) =>
+          previous.isFetchingPrincipalCutoffs !=
+              current.isFetchingPrincipalCutoffs &&
+          !current.isFetchingPrincipalCutoffs,
+      listener: (context, state) {
+        state.failureOrSuccessOption.fold(
+          () {},
+          (option) => option.fold(
+            (failure) {
+              ErrorUtils.handleApiFailure(context, failure);
+            },
+            (_) {},
+          ),
+        );
+
+        if (!state.salesOrganisation.salesOrg.isID ||
+            state.principalCutoffs.canMakePayment) {
+          context.read<OutstandingInvoicesBloc>().add(
+                OutstandingInvoicesEvent.fetch(
+                  appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
+                  searchKey: SearchKey.search(''),
+                ),
+              );
+          context.read<AvailableCreditsBloc>().add(
+                AvailableCreditsEvent.fetch(
+                  appliedFilter: AvailableCreditFilter.defaultFilter(),
+                  searchKey: SearchKey.searchFilter(''),
+                ),
+              );
+          context.read<AvailableCreditFilterBloc>().add(
+                const AvailableCreditFilterEvent.initialize(),
+              );
+          context.router.push(const NewPaymentPageRoute());
+        } else {
+          _showConfirmBottomSheet(context);
+        }
+      },
       child: Container(
         decoration: const BoxDecoration(
           boxShadow: [
@@ -220,174 +203,26 @@ class _NewPaymentButton extends StatelessWidget {
           ],
           color: ZPColors.white,
         ),
-        padding: const EdgeInsets.only(
-          right: 16,
-          left: 16,
-          top: 16,
-          bottom: 30,
-        ),
-        child: NewPaymentButton.elevated(),
-      ),
-    );
-  }
-}
-
-class _Invoice extends StatelessWidget {
-  const _Invoice({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AccountSummaryBloc, AccountSummaryState>(
-      buildWhen: (previous, current) =>
-          previous.isFetchingOutstandingBalance !=
-          current.isFetchingOutstandingBalance,
-      builder: (context, state) {
-        return _ItemCard(
-          key: WidgetKeys.paymentHomeInvoiceCard,
-          keyVal: _getInvoices(outstandingBalance: state.outstandingBalance),
-          isFetching: state.isFetchingOutstandingBalance,
-        );
-      },
-    );
-  }
-
-  List<KeyValuePair> _getInvoices({
-    required OutstandingBalance outstandingBalance,
-  }) =>
-      [
-        KeyValuePair(
-          key: 'Total Outstanding',
-          value: outstandingBalance.amount.displayNAIfEmpty,
-          widgetKey: WidgetKeys.totalOutstanding,
-        ),
-        KeyValuePair(
-          key: 'Total Overdue',
-          value: outstandingBalance.overdue.displayNAIfEmpty,
-          widgetKey: WidgetKeys.totalOverdue,
-        ),
-      ];
-}
-
-class _Credit extends StatelessWidget {
-  const _Credit({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AccountSummaryBloc, AccountSummaryState>(
-      buildWhen: (previous, current) =>
-          previous.isFetchingCreditLimit != current.isFetchingCreditLimit,
-      builder: (context, state) {
-        return _ItemCard(
-          key: WidgetKeys.paymentHomeCreditCard,
-          keyVal: _getCredits(creditLimit: state.creditLimit),
-          isFetching: state.isFetchingCreditLimit,
-        );
-      },
-    );
-  }
-
-  List<KeyValuePair> _getCredits({
-    required CreditLimit creditLimit,
-  }) =>
-      [
-        KeyValuePair(
-          key: 'Total credit limit',
-          value: creditLimit.creditLimit.displayNAIfEmpty,
-          widgetKey: WidgetKeys.totalCreditLimit,
-        ),
-        KeyValuePair(
-          key: 'Credit limit utilized',
-          value: creditLimit.creditExposure.displayNAIfEmpty,
-          widgetKey: WidgetKeys.creditLimitUtilized,
-        ),
-        KeyValuePair(
-          key: 'Credit limit remaining',
-          value: creditLimit.creditBalance.displayNAIfEmpty,
-          widgetKey: WidgetKeys.creditLimitRemaining,
-        ),
-      ];
-}
-
-class _ItemCard extends StatefulWidget {
-  const _ItemCard({
-    required this.keyVal,
-    required this.isFetching,
-    Key? key,
-  }) : super(key: key);
-
-  final List<KeyValuePair> keyVal;
-  final bool isFetching;
-
-  @override
-  State<_ItemCard> createState() => _ItemCardState();
-}
-
-class _ItemCardState extends State<_ItemCard> {
-  bool obscured = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        color: ZPColors.lightSilver,
-        borderRadius: BorderRadius.all(
-          Radius.circular(8),
+        padding:
+            const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 30),
+        child: SafeArea(
+          child: NewPaymentButton.elevated(),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: widget.keyVal
-                .asMap()
-                .entries
-                .map(
-                  (e) => Padding(
-                    padding: const EdgeInsets.only(bottom: 5),
-                    child: Column(
-                      key: e.value.widgetKey,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          context.tr(e.value.key),
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        const SizedBox(height: 2),
-                        widget.isFetching
-                            ? SizedBox(
-                                width: 100,
-                                child: LoadingShimmer.tile(),
-                              )
-                            : PriceComponent(
-                                salesOrgConfig: context
-                                    .read<EligibilityBloc>()
-                                    .state
-                                    .salesOrgConfigs,
-                                price: e.value.value,
-                                obscured: obscured,
-                              ),
-                      ],
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
-          IconButton(
-            key: WidgetKeys.paymentHomeObscuredAmount,
-            padding: const EdgeInsets.all(0),
-            alignment: Alignment.topRight,
-            color: ZPColors.shadesGray,
-            icon: Icon(
-              obscured
-                  ? Icons.visibility_off_outlined
-                  : Icons.visibility_outlined,
-            ),
-            onPressed: () => setState(() => obscured = !obscured),
-          ),
-        ],
+    );
+  }
+
+  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
+    return showModalBottomSheet<bool>(
+      context: context,
+      enableDrag: false,
+      builder: (_) => ConfirmBottomSheet(
+        key: WidgetKeys.confirmBottomSheet,
+        title: 'We are closed for payment',
+        content:
+            "We are unable to proceed with the payment during the month's end. Please try again the following month. Thank you",
+        confirmButtonText: 'Close',
+        displayCancelButton: false,
       ),
     );
   }

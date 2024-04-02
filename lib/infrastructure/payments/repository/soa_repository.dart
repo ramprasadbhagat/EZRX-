@@ -26,6 +26,7 @@ class SoaRepository extends ISoaRepository {
   Future<Either<ApiFailure, List<Soa>>> fetchSoa({
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrg salesOrg,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -41,7 +42,8 @@ class SoaRepository extends ISoaRepository {
           ? '${salesOrg.getOrCrash()}${customerCodeInfo.customerCodeSoldTo}'
           : customerCodeInfo.customerCodeSoldTo;
 
-      final soaResponse = await remoteDataSource.getSoa(soaInput);
+      final soaResponse =
+          await remoteDataSource.getSoa(soaInput, isMarketPlace);
       final dateSortedSoaResponse = soaResponse
         ..sort(
           (a, b) => b.soaData.date.compareTo(a.soaData.date),

@@ -53,6 +53,7 @@ void main() {
             'input': {
               'customerCode': 'mock_customer_code',
               'salesOrg': '2001',
+              'isMarketPlace': true,
             },
           },
         });
@@ -71,6 +72,7 @@ void main() {
         final result = await remoteDataSource.getPaymentInProgress(
           customerCode: 'mock_customer_code',
           salesOrg: 'mock_salesOrg',
+          isMarketPlace: true,
         );
 
         final expectResult = <StringValue>[];
@@ -93,6 +95,7 @@ void main() {
             'input': {
               'customerCode': 'mock_customer_code',
               'salesOrg': 'mock_salesOrg',
+              'isMarketPlace': true,
             },
           },
         });
@@ -112,6 +115,7 @@ void main() {
             .getPaymentInProgress(
           customerCode: 'mock_customer_code',
           salesOrg: 'mock_salesOrg',
+          isMarketPlace: true,
         )
             .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
@@ -151,6 +155,7 @@ void main() {
             .getPaymentInProgress(
           customerCode: 'mock_customer_code',
           salesOrg: 'mock_salesOrg',
+          isMarketPlace: true,
         )
             .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());

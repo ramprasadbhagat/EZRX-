@@ -15,13 +15,14 @@ class SoaRemoteDataSource {
     required this.config,
   });
 
-  Future<List<Soa>> getSoa(String soaInput) async {
+  Future<List<Soa>> getSoa(String soaInput, bool isMarketPlace) async {
     final res = await httpService.request(
       method: 'POST',
       url: '${config.urlConstants}payment/listSoa',
       data: jsonEncode(
         {
           'customer_code': soaInput,
+          if (isMarketPlace) 'isMarketPlace': isMarketPlace,
         },
       ),
     );

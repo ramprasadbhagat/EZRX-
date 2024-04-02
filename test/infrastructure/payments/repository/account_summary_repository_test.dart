@@ -55,6 +55,7 @@ void main() {
       final result = await accountSummaryRepository.fetchInvoiceSummary(
         custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         salesOrg: fakeSalesOrg,
+        isMarketPlace: true,
       );
       expect(result.isRight(), true);
       expect(
@@ -75,6 +76,7 @@ void main() {
       final result = await accountSummaryRepository.fetchInvoiceSummary(
         custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         salesOrg: fakeSalesOrg,
+        isMarketPlace: true,
       );
       expect(result.isLeft(), true);
     });
@@ -86,6 +88,7 @@ void main() {
         () => accountSummaryRemoteDataSource.fetchInvoiceSummary(
           customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
           salesOrg: fakeSalesOrg.getValue(),
+          isMarketPlace: true,
         ),
       ).thenAnswer(
         (invocation) async => outstandingBalance,
@@ -94,6 +97,7 @@ void main() {
       final result = await accountSummaryRepository.fetchInvoiceSummary(
         custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         salesOrg: fakeSalesOrg,
+        isMarketPlace: true,
       );
       expect(result.isRight(), true);
       expect(
@@ -109,6 +113,7 @@ void main() {
         () => accountSummaryRemoteDataSource.fetchInvoiceSummary(
           customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
           salesOrg: fakeSalesOrg.getValue(),
+          isMarketPlace: true,
         ),
       ).thenThrow(
         (invocation) async => MockException(),
@@ -117,6 +122,7 @@ void main() {
       final result = await accountSummaryRepository.fetchInvoiceSummary(
         custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         salesOrg: fakeSalesOrg,
+        isMarketPlace: true,
       );
       expect(result.isLeft(), true);
     });
@@ -135,6 +141,7 @@ void main() {
       final result = await accountSummaryRepository.fetchCreditSummary(
         custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         salesOrg: fakeSalesOrg,
+        isMarketPlace: true,
       );
       expect(result.isRight(), true);
       expect(
@@ -155,6 +162,7 @@ void main() {
       final result = await accountSummaryRepository.fetchCreditSummary(
         custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         salesOrg: fakeSalesOrg,
+        isMarketPlace: true,
       );
       expect(result.isLeft(), true);
     });
@@ -166,6 +174,7 @@ void main() {
         () => accountSummaryRemoteDataSource.fetchCreditLimit(
           customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
           salesOrg: fakeSalesOrg.getValue(),
+          isMarketPlace: true,
         ),
       ).thenAnswer(
         (invocation) async => creditLimit,
@@ -174,6 +183,7 @@ void main() {
       final result = await accountSummaryRepository.fetchCreditSummary(
         custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         salesOrg: fakeSalesOrg,
+        isMarketPlace: true,
       );
       expect(result.isRight(), true);
       expect(
@@ -189,6 +199,7 @@ void main() {
         () => accountSummaryRemoteDataSource.fetchCreditLimit(
           customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
           salesOrg: fakeSalesOrg.getValue(),
+          isMarketPlace: true,
         ),
       ).thenThrow(
         (invocation) async => MockException(),
@@ -197,6 +208,7 @@ void main() {
       final result = await accountSummaryRepository.fetchCreditSummary(
         custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         salesOrg: fakeSalesOrg,
+        isMarketPlace: true,
       );
       expect(result.isLeft(), true);
     });

@@ -1,7 +1,11 @@
 part of '../payment_page.dart';
 
 class _AccountStatement extends StatelessWidget {
-  const _AccountStatement({Key? key}) : super(key: key);
+  final bool isMarketPlace;
+  const _AccountStatement({
+    Key? key,
+    required this.isMarketPlace,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class _AccountStatement extends StatelessWidget {
         );
       },
       child: BlocBuilder<SoaBloc, SoaState>(
+        bloc: context.soaBloc(isMarketPlace),
         buildWhen: (previous, current) => previous.soaList != current.soaList,
         builder: (context, state) {
           return Column(
@@ -33,7 +38,9 @@ class _AccountStatement extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SectionTitle(
-                title: 'Statement of accounts',
+                title: isMarketPlace
+                    ? 'MP Statement of accounts'
+                    : 'Statement of accounts',
                 onTapIconButton: () {
                   context
                       .read<SoaFilterBloc>()

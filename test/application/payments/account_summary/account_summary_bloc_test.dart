@@ -34,7 +34,7 @@ void main() {
     () {
       blocTest<AccountSummaryBloc, AccountSummaryState>(
         'Account Summary Initialize Event',
-        build: () => AccountSummaryBloc(
+        build: () => ZPAccountSummaryBloc(
           accountSummaryRepository: accountSummaryMockRepository,
         ),
         act: (AccountSummaryBloc bloc) => bloc.add(
@@ -47,7 +47,7 @@ void main() {
 
       blocTest<AccountSummaryBloc, AccountSummaryState>(
         'Account Summary "fetchInvoiceSummary" Event Success',
-        build: () => AccountSummaryBloc(
+        build: () => ZPAccountSummaryBloc(
           accountSummaryRepository: accountSummaryMockRepository,
         ),
         setUp: () {
@@ -55,6 +55,7 @@ void main() {
             () => accountSummaryMockRepository.fetchInvoiceSummary(
               custCode: mockCustomerCodeInfo.customerCodeSoldTo,
               salesOrg: salesOrg,
+              isMarketPlace: false,
             ),
           ).thenAnswer((invocation) async => Right(outstandingBalance));
         },
@@ -78,7 +79,7 @@ void main() {
 
       blocTest<AccountSummaryBloc, AccountSummaryState>(
         'Account Summary "fetchInvoiceSummary" Event failure',
-        build: () => AccountSummaryBloc(
+        build: () => ZPAccountSummaryBloc(
           accountSummaryRepository: accountSummaryMockRepository,
         ),
         setUp: () {
@@ -86,6 +87,7 @@ void main() {
             () => accountSummaryMockRepository.fetchInvoiceSummary(
               custCode: mockCustomerCodeInfo.customerCodeSoldTo,
               salesOrg: salesOrg,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -112,7 +114,7 @@ void main() {
 
       blocTest<AccountSummaryBloc, AccountSummaryState>(
         'Account Summary "fetchCreditSummary" Event Success',
-        build: () => AccountSummaryBloc(
+        build: () => ZPAccountSummaryBloc(
           accountSummaryRepository: accountSummaryMockRepository,
         ),
         setUp: () {
@@ -120,6 +122,7 @@ void main() {
             () => accountSummaryMockRepository.fetchCreditSummary(
               custCode: mockCustomerCodeInfo.customerCodeSoldTo,
               salesOrg: salesOrg,
+              isMarketPlace: false,
             ),
           ).thenAnswer((invocation) async => Right(creditLimit));
         },
@@ -143,7 +146,7 @@ void main() {
 
       blocTest<AccountSummaryBloc, AccountSummaryState>(
         'Account Summary "fetchCreditSummary" Event failure',
-        build: () => AccountSummaryBloc(
+        build: () => ZPAccountSummaryBloc(
           accountSummaryRepository: accountSummaryMockRepository,
         ),
         setUp: () {
@@ -151,6 +154,7 @@ void main() {
             () => accountSummaryMockRepository.fetchCreditSummary(
               custCode: mockCustomerCodeInfo.customerCodeSoldTo,
               salesOrg: salesOrg,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),

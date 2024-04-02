@@ -33,6 +33,7 @@ void main() {
   final data = jsonEncode(
     {
       'customer_code': '26010030082707',
+      'isMarketPlace': true,
     },
   );
   setUpAll(() {
@@ -61,6 +62,7 @@ void main() {
 
       final result = await remoteDataSource.getSoa(
         '26010030082707',
+        true,
       );
 
       expect(
@@ -85,6 +87,7 @@ void main() {
       await remoteDataSource
           .getSoa(
         '26010030082707',
+        true,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -112,6 +115,7 @@ void main() {
       await remoteDataSource
           .getSoa(
         '26010030082707',
+        true,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -133,6 +137,7 @@ void main() {
       await remoteDataSource
           .getSoa(
         '26010030082707',
+        true,
       )
           .onError((error, _) async {
         expect(error, isA<OtherException>());

@@ -53,6 +53,7 @@ void main() {
       final result = await paymentInProgressRepository.getPaymentInProgress(
         customerCodeInfo: CustomerCodeInfo.empty(),
         salesOrganization: SalesOrganisation.empty(),
+        isMarketPlace: true,
       );
       expect(result.isRight(), true);
     });
@@ -66,6 +67,7 @@ void main() {
       final result = await paymentInProgressRepository.getPaymentInProgress(
         customerCodeInfo: CustomerCodeInfo.empty(),
         salesOrganization: SalesOrganisation.empty(),
+        isMarketPlace: true,
       );
       expect(result.isLeft(), true);
     });
@@ -75,6 +77,7 @@ void main() {
         () => paymentInProgressRemoteDataSource.getPaymentInProgress(
           customerCode: 'mock_customer_code',
           salesOrg: 'mock_salesOrg',
+          isMarketPlace: true,
         ),
       ).thenAnswer(
         (invocation) async => [StringValue('100')],
@@ -85,6 +88,7 @@ void main() {
             .copyWith(customerCodeSoldTo: 'mock_customer_code'),
         salesOrganization: SalesOrganisation.empty()
             .copyWith(salesOrg: SalesOrg('mock_salesOrg')),
+        isMarketPlace: true,
       );
       expect(result.isRight(), true);
     });
@@ -95,6 +99,7 @@ void main() {
         () => paymentInProgressRemoteDataSource.getPaymentInProgress(
           customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
           salesOrg: fakeMYSalesOrganisation.salesOrg.getValue(),
+          isMarketPlace: true,
         ),
       ).thenAnswer(
         (invocation) async => [StringValue('')],
@@ -103,6 +108,7 @@ void main() {
       final result = await paymentInProgressRepository.getPaymentInProgress(
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganization: fakeMYSalesOrganisation,
+        isMarketPlace: true,
       );
       expect(result, Right(StringValue('')));
     });
@@ -113,6 +119,7 @@ void main() {
         () => paymentInProgressRemoteDataSource.getPaymentInProgress(
           customerCode: 'mock_customer_code',
           salesOrg: 'mock_salesOrg',
+          isMarketPlace: true,
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -121,6 +128,7 @@ void main() {
             .copyWith(customerCodeSoldTo: 'mock_customer_code'),
         salesOrganization: SalesOrganisation.empty()
             .copyWith(salesOrg: SalesOrg('mock_salesOrg')),
+        isMarketPlace: true,
       );
       expect(result.isLeft(), true);
     });

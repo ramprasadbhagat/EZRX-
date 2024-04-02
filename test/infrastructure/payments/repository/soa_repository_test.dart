@@ -65,6 +65,7 @@ void main() {
       final result = await repository.fetchSoa(
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrg: fakeMYSalesOrg,
+        isMarketPlace: true,
       );
       expect(
         result.isRight(),
@@ -85,6 +86,7 @@ void main() {
       final result = await repository.fetchSoa(
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrg: fakeMYSalesOrg,
+        isMarketPlace: true,
       );
       expect(
         result.isLeft(),
@@ -95,7 +97,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
       when(
-        () => remoteDataSource.getSoa('20010030082707'),
+        () => remoteDataSource.getSoa('20010030082707', true),
       ).thenAnswer(
         (invocation) async => fakeSoaMockList,
       );
@@ -103,6 +105,7 @@ void main() {
         customerCodeInfo:
             CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0030082707'),
         salesOrg: fakeMYSalesOrg,
+        isMarketPlace: true,
       );
       expect(
         result.isRight(),
@@ -113,7 +116,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
       when(
-        () => remoteDataSource.getSoa('20010030082707'),
+        () => remoteDataSource.getSoa('20010030082707', true),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
       );
@@ -121,6 +124,7 @@ void main() {
         customerCodeInfo:
             CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0030082707'),
         salesOrg: fakeMYSalesOrg,
+        isMarketPlace: true,
       );
       expect(
         result.isLeft(),
@@ -133,7 +137,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
       when(
-        () => remoteDataSource.getSoa('0030082707'),
+        () => remoteDataSource.getSoa('0030082707', true),
       ).thenAnswer(
         (invocation) async => fakeSoaMockList,
       );
@@ -141,6 +145,7 @@ void main() {
         customerCodeInfo:
             CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0030082707'),
         salesOrg: fakeSGSalesOrg,
+        isMarketPlace: true,
       );
       expect(
         result.isRight(),

@@ -16,7 +16,22 @@ part 'soa_event.dart';
 part 'soa_state.dart';
 part 'soa_bloc.freezed.dart';
 
-class SoaBloc extends Bloc<SoaEvent, SoaState> {
+class ZPSoaBloc extends SoaBloc {
+  ZPSoaBloc({required super.repository});
+
+  @override
+  bool get isMarketplace => false;
+}
+
+class MPSoaBloc extends SoaBloc {
+  MPSoaBloc({required super.repository});
+
+  @override
+  bool get isMarketplace => true;
+}
+
+abstract class SoaBloc extends Bloc<SoaEvent, SoaState> {
+  abstract final bool isMarketplace;
   final ISoaRepository repository;
   SoaBloc({required this.repository}) : super(SoaState.initial()) {
     on<SoaEvent>(_onEvent);
@@ -37,6 +52,7 @@ class SoaBloc extends Bloc<SoaEvent, SoaState> {
         final failureOrSuccess = await repository.fetchSoa(
           customerCodeInfo: e.customerCodeInfo,
           salesOrg: e.salesOrg,
+          isMarketPlace: isMarketplace,
         );
         failureOrSuccess.fold(
           (failure) => emit(

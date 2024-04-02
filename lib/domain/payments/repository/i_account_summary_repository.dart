@@ -8,10 +8,12 @@ abstract class IAccountSummaryRepository {
   Future<Either<ApiFailure, OutstandingBalance>> fetchInvoiceSummary({
     required String custCode,
     required SalesOrg salesOrg,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, CreditLimit>> fetchCreditSummary({
     required String custCode,
     required SalesOrg salesOrg,
+    required bool isMarketPlace,
   });
 }

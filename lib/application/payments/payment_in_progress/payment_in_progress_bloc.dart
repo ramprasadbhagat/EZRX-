@@ -13,8 +13,23 @@ part 'payment_in_progress_event.dart';
 part 'payment_in_progress_state.dart';
 part 'payment_in_progress_bloc.freezed.dart';
 
-class PaymentInProgressBloc
+class ZPPaymentInProgressBloc extends PaymentInProgressBloc {
+  ZPPaymentInProgressBloc({required super.repository});
+
+  @override
+  bool get isMarketplace => false;
+}
+
+class MPPaymentInProgressBloc extends PaymentInProgressBloc {
+  MPPaymentInProgressBloc({required super.repository});
+
+  @override
+  bool get isMarketplace => true;
+}
+
+abstract class PaymentInProgressBloc
     extends Bloc<PaymentInProgressEvent, PaymentInProgressState> {
+  abstract final bool isMarketplace;
   final IPaymentInProgressRepository repository;
   PaymentInProgressBloc({
     required this.repository,
@@ -38,6 +53,7 @@ class PaymentInProgressBloc
         final failureOrSuccess = await repository.getPaymentInProgress(
           customerCodeInfo: e.customerCodeInfo,
           salesOrganization: e.salesOrganization,
+          isMarketPlace: isMarketplace,
         );
         failureOrSuccess.fold(
           (failure) => emit(

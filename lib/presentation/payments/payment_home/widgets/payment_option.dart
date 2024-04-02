@@ -1,45 +1,95 @@
 part of '../payment_page.dart';
 
 class _PaymentOptionMenu extends StatelessWidget {
-  const _PaymentOptionMenu({Key? key}) : super(key: key);
+  final bool isMarketPlace;
 
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      key: WidgetKeys.paymentHomeOptionMenu,
-      alignment: Responsive.isMobile(context)
-          ? WrapAlignment.spaceBetween
-          : WrapAlignment.start,
-      runSpacing: MediaQuery.of(context).size.height * 0.02,
-      spacing: Responsive.isMobile(context) ? 0 : 10,
-      children: _getPaymentOptionItems(context)
-          .map(
-            (paymentOptionData) => _PaymentOption(
-              paymentOptionData: paymentOptionData,
-            ),
-          )
-          .toList(),
-    );
-  }
-}
-
-class _PaymentOption extends StatelessWidget {
-  final _PaymentOptionData paymentOptionData;
-  const _PaymentOption({
+  const _PaymentOptionMenu({
     Key? key,
-    required this.paymentOptionData,
+    required this.isMarketPlace,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
-    final width = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
+
+    return Wrap(
+      key: WidgetKeys.paymentHomeOptionMenu,
+      alignment: Responsive.isMobile(context)
+          ? WrapAlignment.spaceBetween
+          : WrapAlignment.start,
+      runSpacing: size.height * 0.02,
+      spacing: Responsive.isMobile(context) ? 0 : 10,
+      children: _getPaymentOptionItems(context)
+          .map(
+            (paymentOptionData) => _PaymentOption(
+              paymentOptionData: paymentOptionData,
+              height: isMarketPlace ? 83 : 62,
+              width: eligibilityState.paymentHomeItemWidthRatio * size.width,
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  List<_PaymentOptionData> _getPaymentOptionItems(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final suffix = isMarketPlace ? 'MP\n' : '';
+
+    return [
+      _PaymentOptionData(
+        key: WidgetKeys.accountSummaryMenu,
+        icon: 'account_summary.svg',
+        label: suffix + context.tr('Account summary'),
+        onTap: () => context.router.pushNamed('payments/invoice_credit'),
+      ),
+      _PaymentOptionData(
+        key: WidgetKeys.paymentSummaryMenu,
+        icon: 'payment_summary.svg',
+        label: suffix + context.tr('Payment summary'),
+        onTap: () => context.router.pushNamed('payments/payment_summary'),
+      ),
+      if (eligibilityState.salesOrgConfigs.statementOfAccountEnabled)
+        _PaymentOptionData(
+          key: WidgetKeys.statementOfAccountsMenu,
+          icon: 'statement_accounts.svg',
+          label: suffix + context.tr('Statement of accounts'),
+          onTap: () {
+            context
+                .read<SoaFilterBloc>()
+                .add(const SoaFilterEvent.initialized());
+            context.router.pushNamed('payments/statement_accounts');
+          },
+        ),
+      if (eligibilityState.salesOrg.isPaymentClaimEnabled)
+        _PaymentOptionData(
+          key: WidgetKeys.claimsMenu,
+          icon: 'claims.svg',
+          label: 'Claims',
+          onTap: () => {},
+        ),
+    ];
+  }
+}
+
+class _PaymentOption extends StatelessWidget {
+  final _PaymentOptionData paymentOptionData;
+  final double width;
+  final double height;
+
+  const _PaymentOption({
+    Key? key,
+    required this.paymentOptionData,
+    required this.width,
+    required this.height,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const iconSize = 40.0;
 
     return SizedBox(
-      width: eligibilityState.salesOrg.isPaymentClaimEnabled ||
-              !eligibilityState.salesOrgConfigs.statementOfAccountEnabled
-          ? width * 0.45
-          : width * 0.3,
+      width: width,
       child: GestureDetector(
         key: paymentOptionData.key,
         onTap: () {
@@ -52,21 +102,17 @@ class _PaymentOption extends StatelessWidget {
           paymentOptionData.onTap.call();
         },
         child: Stack(
-          alignment: AlignmentDirectional.bottomStart,
+          alignment: AlignmentDirectional.topCenter,
           children: [
             CustomCard(
-              margin: const EdgeInsets.all(0),
-              padding: const EdgeInsets.symmetric(
-                vertical: 10.0,
-              ),
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                height: 35,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10.0,
-                ),
+              width: double.infinity,
+              margin: const EdgeInsets.only(top: iconSize - 7),
+              padding: const EdgeInsets.all(10),
+              height: height,
+              child: Align(
+                alignment: Alignment.center,
                 child: Text(
-                  context.tr(paymentOptionData.label),
+                  paymentOptionData.label,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: ZPColors.darkTeal,
                       ),
@@ -74,13 +120,10 @@ class _PaymentOption extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              alignment: Alignment.topCenter,
-              height: 90,
-              child: SvgPicture.asset(
-                'assets/svg/${paymentOptionData.icon}',
-                height: kToolbarHeight * 0.75,
-              ),
+            SvgPicture.asset(
+              'assets/svg/${paymentOptionData.icon}',
+              height: iconSize,
+              width: iconSize,
             ),
           ],
         ),
@@ -100,46 +143,4 @@ class _PaymentOptionData {
     required this.label,
     required this.onTap,
   });
-}
-
-List<_PaymentOptionData> _getPaymentOptionItems(BuildContext context) {
-  final accountSummary = _PaymentOptionData(
-    key: WidgetKeys.accountSummaryMenu,
-    icon: 'account_summary.svg',
-    label: 'Account Summary',
-    onTap: () => context.router.pushNamed('payments/invoice_credit'),
-  );
-
-  final paymentSummary = _PaymentOptionData(
-    key: WidgetKeys.paymentSummaryMenu,
-    icon: 'payment_summary.svg',
-    label: 'Payment Summary',
-    onTap: () => context.router.pushNamed('payments/payment_summary'),
-  );
-
-  final accountStateMent = _PaymentOptionData(
-    key: WidgetKeys.statementOfAccountsMenu,
-    icon: 'statement_accounts.svg',
-    label: 'Statement of accounts',
-    onTap: () {
-      context.read<SoaFilterBloc>().add(const SoaFilterEvent.initialized());
-      context.router.pushNamed('payments/statement_accounts');
-    },
-  );
-
-  final claim = _PaymentOptionData(
-    key: WidgetKeys.claimsMenu,
-    icon: 'claims.svg',
-    label: 'Claims',
-    onTap: () => {},
-  );
-  final eligibilityState = context.read<EligibilityBloc>().state;
-
-  return [
-    accountSummary,
-    paymentSummary,
-    if (eligibilityState.salesOrgConfigs.statementOfAccountEnabled)
-      accountStateMent,
-    if (eligibilityState.salesOrg.isPaymentClaimEnabled) claim,
-  ];
 }

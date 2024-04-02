@@ -26,6 +26,7 @@ class AccountSummaryRemoteDataSource {
   Future<OutstandingBalance> fetchInvoiceSummary({
     required String customerCode,
     required String salesOrg,
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -37,6 +38,7 @@ class AccountSummaryRemoteDataSource {
             'request': {
               'customerCode': customerCode,
               'salesOrg': salesOrg,
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
             },
           },
         },
@@ -59,6 +61,7 @@ class AccountSummaryRemoteDataSource {
   Future<CreditLimit> fetchCreditLimit({
     required String customerCode,
     required String salesOrg,
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -70,6 +73,7 @@ class AccountSummaryRemoteDataSource {
             'request': {
               'customerCode': customerCode,
               'salesOrg': salesOrg,
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
             },
           },
         },

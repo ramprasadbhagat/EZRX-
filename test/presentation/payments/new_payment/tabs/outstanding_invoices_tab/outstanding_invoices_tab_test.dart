@@ -38,7 +38,7 @@ import '../../../../../utils/widget_utils.dart';
 import '../../../../../common_mock_data/mock_bloc.dart';
 
 void main() {
-  late AccountSummaryBloc accountSummaryBlocMock;
+  late ZPAccountSummaryBloc accountSummaryBlocMock;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
   late OutstandingInvoiceFilterBloc outstandingInvoiceFilterBlocMock;
   late AvailableCreditsBloc availableCreditsBlocMock;
@@ -70,7 +70,7 @@ void main() {
   });
 
   setUp(() async {
-    accountSummaryBlocMock = AccountSummaryBlocMock();
+    accountSummaryBlocMock = ZPAccountSummaryBlocMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
     outstandingInvoiceFilterBlocMock = OutstandingInvoiceFilterBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();
@@ -118,7 +118,7 @@ void main() {
       usingLocalization: true,
       routeName: NewPaymentPageRoute.name,
       providers: [
-        BlocProvider<AccountSummaryBloc>(
+        BlocProvider<ZPAccountSummaryBloc>(
           create: (context) => accountSummaryBlocMock,
         ),
         BlocProvider<OutstandingInvoicesBloc>(

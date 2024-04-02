@@ -41,7 +41,7 @@ class AccountSummary extends StatelessWidget {
       key: WidgetKeys.accountSummaryPage,
       appBar: CustomAppBar.commonAppBar(
         title: Text(
-          context.tr('Account Summary'),
+          context.tr('Account summary'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         customerBlockedOrSuspended:

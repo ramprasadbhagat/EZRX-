@@ -50,7 +50,7 @@ void main() {
   group('Soa Bloc', () {
     blocTest(
       'Initialize',
-      build: () => SoaBloc(
+      build: () => ZPSoaBloc(
         repository: soaRepositoryMock,
       ),
       seed: () => SoaState.initial().copyWith(appliedFilter: soaFilter),
@@ -61,7 +61,7 @@ void main() {
 
     blocTest(
       'Fetch Success',
-      build: () => SoaBloc(
+      build: () => ZPSoaBloc(
         repository: soaRepositoryMock,
       ),
       seed: () => SoaState.initial().copyWith(appliedFilter: soaFilter),
@@ -70,6 +70,7 @@ void main() {
           () => soaRepositoryMock.fetchSoa(
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrg: fakeSalesOrg,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -98,7 +99,7 @@ void main() {
 
     blocTest(
       'Fetch Failure',
-      build: () => SoaBloc(
+      build: () => ZPSoaBloc(
         repository: soaRepositoryMock,
       ),
       seed: () => SoaState.initial().copyWith(appliedFilter: soaFilter),
@@ -107,6 +108,7 @@ void main() {
           () => soaRepositoryMock.fetchSoa(
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrg: fakeSalesOrg,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -140,7 +142,7 @@ void main() {
 
     blocTest(
       'Update',
-      build: () => SoaBloc(
+      build: () => ZPSoaBloc(
         repository: soaRepositoryMock,
       ),
       act: (SoaBloc bloc) => bloc.add(

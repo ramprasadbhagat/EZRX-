@@ -8,6 +8,7 @@ class CustomCard extends StatelessWidget {
   final bool showShadow;
   final bool showBorder;
   final double? width;
+  final double? height;
   final Clip clipBehavior;
   final Color backgroundColor;
   final Color borderColor;
@@ -20,6 +21,7 @@ class CustomCard extends StatelessWidget {
     this.showShadow = true,
     this.showBorder = false,
     this.width,
+    this.height,
     this.clipBehavior = Clip.none,
     this.backgroundColor = ZPColors.whiteBgCard,
     this.borderColor = ZPColors.boxShadowGray,
@@ -31,6 +33,7 @@ class CustomCard extends StatelessWidget {
       margin: margin,
       padding: padding,
       width: width,
+      height: height,
       clipBehavior: clipBehavior,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(8)),

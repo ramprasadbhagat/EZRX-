@@ -26,7 +26,7 @@ class _PaymentAdvicePleaseNote extends StatelessWidget {
                     ),
                 children: [
                   TextSpan(
-                    text: context.tr('Payment Summary'),
+                    text: context.tr('Payment summary'),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: ZPColors.extraLightGrey4,
                           fontWeight: FontWeight.bold,

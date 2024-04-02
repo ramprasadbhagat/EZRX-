@@ -165,7 +165,19 @@ class MoreDetailsTile {
         ),
         label: 'Payments',
         onTap: () {
-          context.navigateTo(const PaymentPageRoute());
+          context.navigateTo(PaymentPageRoute(isMarketPlace: false));
+        },
+      );
+
+  factory MoreDetailsTile.marketplacePaymentsTab(BuildContext context) =>
+      MoreDetailsTile(
+        icon: const Icon(
+          Icons.account_balance_wallet_outlined,
+          color: ZPColors.greenIconColor,
+        ),
+        label: 'MP Payments',
+        onTap: () {
+          context.navigateTo(PaymentPageRoute(isMarketPlace: true));
         },
       );
 

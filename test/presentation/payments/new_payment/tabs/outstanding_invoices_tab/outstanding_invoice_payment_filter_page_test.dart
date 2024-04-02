@@ -77,7 +77,7 @@ void main() {
   });
 
   setUp(() async {
-    accountSummaryBlocMock = AccountSummaryBlocMock();
+    accountSummaryBlocMock = ZPAccountSummaryBlocMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
     outstandingInvoiceFilterBlocMock = OutstandingInvoiceFilterBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();

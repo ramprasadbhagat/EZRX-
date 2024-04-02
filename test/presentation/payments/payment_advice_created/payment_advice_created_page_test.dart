@@ -378,7 +378,7 @@ void main() {
             .single;
         findAndTapRichText(
           parent: richTextElement,
-          text: 'Payment Summary'.tr(),
+          text: 'Payment summary'.tr(),
         );
         await tester.pumpAndSettle();
         verify(
@@ -1159,7 +1159,7 @@ void main() {
           find.descendant(
             of: paymentAdviceFailed,
             matching: find.text(
-              'Payment Summary',
+              'Payment summary',
             ),
           ),
           findsOneWidget,

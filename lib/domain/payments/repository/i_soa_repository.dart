@@ -8,5 +8,6 @@ abstract class ISoaRepository {
   Future<Either<ApiFailure, List<Soa>>> fetchSoa({
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrg salesOrg,
+    required bool isMarketPlace,
   });
 }

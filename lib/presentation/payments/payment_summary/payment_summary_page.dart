@@ -84,7 +84,7 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
       appBar: CustomAppBar.commonAppBar(
         key: WidgetKeys.paymentSummaryAppBar,
         title: Text(
-          context.tr('Payment Summary'),
+          context.tr('Payment summary'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         customerBlockedOrSuspended:

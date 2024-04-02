@@ -8,5 +8,6 @@ abstract class IPaymentInProgressRepository {
   Future<Either<ApiFailure, StringValue>> getPaymentInProgress({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
+    required bool isMarketPlace,
   });
 }

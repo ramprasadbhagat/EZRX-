@@ -74,20 +74,13 @@ class _QuickAccessMenu extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: CustomCard(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 5.0,
-                vertical: 5.0,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 5.0,
-              ),
+              margin: const EdgeInsets.all(5),
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: Container(
                 alignment: Alignment.bottomCenter,
                 height: kToolbarHeight * 0.5,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10.0,
-                ),
+                constraints: const BoxConstraints(minWidth: 96),
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Text(
                   context.tr(quickAccessMenuData.label),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -141,7 +134,16 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     icon: 'payments_menu.svg',
     label: 'Payments',
     onTap: () {
-      context.navigateTo(const PaymentPageRoute());
+      context.navigateTo(PaymentPageRoute(isMarketPlace: false));
+    },
+  );
+
+  final homeQuickAccessMarketPlacePaymentMenu = _QuickAccessMenuData(
+    key: WidgetKeys.homeQuickAccessPaymentsMenu,
+    icon: 'marketplace_payment_menu.svg',
+    label: 'MP Payments',
+    onTap: () {
+      context.navigateTo(PaymentPageRoute(isMarketPlace: true));
     },
   );
 
@@ -177,7 +179,11 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     if (eligibilityState.user.userCanAccessOrderHistory)
       homeQuickAccessOrdersMenu,
     if (eligibilityState.isReturnsEnable) homeQuickAccessReturnsMenu,
-    if (eligibilityState.isPaymentEnabled) homeQuickAccessPaymentsMenu,
+    if (eligibilityState.isPaymentEnabled) ...[
+      homeQuickAccessPaymentsMenu,
+      if (eligibilityState.user.acceptMPTC.isAccept)
+        homeQuickAccessMarketPlacePaymentMenu,
+    ],
     if (eligibilityState.isIDMarket) homeQuickAccessEZPointMenu,
     // homeQuickAccessLoyaltyMenu,
     homeQuickAccessChatSupportMenu,
