@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
@@ -56,7 +57,10 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
       },
       addPendingLink: (event) async {
         emit(
-          DeepLinkingState.linkPending(event.link),
+          DeepLinkingState.linkPending(
+            event.link,
+            banner: event.banner,
+          ),
         );
         // ChatBot is managed by plugin and the ChatBot screen is an overlay.
         // For now, whenever we tap on the deep link, a screen opened from the
@@ -66,7 +70,7 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
       },
       consumePendingLink: (event) {
         state.whenOrNull(
-          linkPending: (link) {
+          linkPending: (link, banner) {
             if (link.isContactUs) {
               final failureOrSuccess = repository.getCurrentMarket();
 
@@ -117,7 +121,10 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.error(error),
                 ),
                 (materialNumber) => emit(
-                  DeepLinkingState.redirectProductDetail(materialNumber),
+                  DeepLinkingState.redirectProductDetail(
+                    materialNumber,
+                    banner: banner,
+                  ),
                 ),
               );
             } else if (link.isBundleDetail) {
@@ -130,7 +137,10 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.error(error),
                 ),
                 (materialNumber) => emit(
-                  DeepLinkingState.redirectBundleDetail(materialNumber),
+                  DeepLinkingState.redirectBundleDetail(
+                    materialNumber,
+                    banner: banner,
+                  ),
                 ),
               );
             } else if (link.isProductListing) {

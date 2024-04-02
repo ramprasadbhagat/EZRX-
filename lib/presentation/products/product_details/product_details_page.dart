@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_deta
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
@@ -59,8 +60,12 @@ part 'widget/stock_quantity.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final MaterialInfo materialInfo;
-  const ProductDetailsPage({Key? key, required this.materialInfo})
-      : super(key: key);
+  final EZReachBanner? banner;
+  const ProductDetailsPage({
+    Key? key,
+    required this.materialInfo,
+    this.banner,
+  }) : super(key: key);
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -193,7 +198,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             _SimilarProducts(),
           ],
         ),
-        bottomNavigationBar: const _Footer(),
+        bottomNavigationBar: _Footer(
+          banner: widget.banner,
+        ),
       ),
     );
   }
@@ -446,7 +453,11 @@ class _Description extends StatelessWidget {
 }
 
 class _Footer extends StatefulWidget {
-  const _Footer({Key? key}) : super(key: key);
+  final EZReachBanner? banner;
+  const _Footer({
+    Key? key,
+    this.banner,
+  }) : super(key: key);
 
   @override
   State<_Footer> createState() => _FooterState();
@@ -644,6 +655,7 @@ class _FooterState extends State<_Footer> {
                                   state,
                                   materialInfo,
                                   qty,
+                                  banner: widget.banner,
                                 );
 
                                 CustomSnackBar(
@@ -693,6 +705,7 @@ class _FooterState extends State<_Footer> {
                                           state: state,
                                           stateCart: stateCart,
                                           price: price,
+                                          banner: widget.banner,
                                           quantityText:
                                               _quantityEditingController.text,
                                         );
@@ -738,8 +751,9 @@ void _trackAddToCartSuccess(
   BuildContext context,
   CartState state,
   MaterialInfo material,
-  int qty,
-) {
+  int qty, {
+  EZReachBanner? banner,
+}) {
   final price = context
           .read<MaterialPriceBloc>()
           .state
@@ -761,6 +775,7 @@ void _trackAddToCartSuccess(
     MixpanelProps.productQty: qty,
     MixpanelProps.clickAt:
         RouterUtils.buildRouteTrackingName(context.router.currentPath),
+    MixpanelProps.bannerId: banner?.id ?? '',
   };
 
   //TODO: Revisit later to implement is_offer and tag for MixpanelProps when have a proper solution because current logic code for checking offer and tag of material is long and complicated, moving it here may cause the code become messy
@@ -787,16 +802,17 @@ void _addToCart({
   required CartState stateCart,
   required Price price,
   required String quantityText,
+  EZReachBanner? banner,
 }) {
   if (stateCart.cartProducts.isNotEmpty) {
     if (state.productDetailAggregate.materialInfo.isFOCMaterial &&
         !stateCart.containFocMaterialInCartProduct) {
-      _showDetailsPagePage(
+      _showDetailsPage(
         context: context,
       );
     } else if (!state.productDetailAggregate.materialInfo.isFOCMaterial &&
         stateCart.containFocMaterialInCartProduct) {
-      _showDetailsPagePage(
+      _showDetailsPage(
         context: context,
       );
     } else {
@@ -821,6 +837,7 @@ void _addToCart({
           state: state,
           stateCart: stateCart,
           quantityText: quantityText,
+          banner: banner,
         );
       }
     }
@@ -831,6 +848,7 @@ void _addToCart({
       state: state,
       stateCart: stateCart,
       quantityText: quantityText,
+      banner: banner,
     );
   }
 }
@@ -841,6 +859,7 @@ void upsertCart({
   required ProductDetailState state,
   required CartState stateCart,
   required String quantityText,
+  EZReachBanner? banner,
 }) {
   final materialNumber =
       state.productDetailAggregate.materialInfo.materialNumber;
@@ -864,6 +883,7 @@ void upsertCart({
                   materialNumber,
                 ),
           ),
+          banner: banner,
         ),
       );
 }
@@ -914,7 +934,7 @@ void _initComboDealAndNavigate({
   context.navigateTo(const ComboDetailPageRoute());
 }
 
-void _showDetailsPagePage({
+void _showDetailsPage({
   required BuildContext context,
 }) {
   showModalBottomSheet(

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:collection/collection.dart';
@@ -54,6 +55,8 @@ class DiscountOverrideRemoteDataSourceMock extends Mock
 class StockInfoLocalDataSourceMock extends Mock
     implements StockInfoLocalDataSource {}
 
+class MaterialBannerStorageMock extends Mock implements MaterialBannerStorage {}
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late Config mockConfig;
@@ -67,6 +70,7 @@ void main() {
   late AplSimulatorOrder aplSimulatorOrder;
   late AplSimulatorOrder aplSimulatorGetTotalPrice;
   late DeviceStorage deviceStorageMock;
+  late MaterialBannerStorage materialBannerStorageMock;
   const mockMarket = 'mockMarket';
 
   final fakeCartProducts = [
@@ -109,6 +113,7 @@ void main() {
     mixpanelService = MixpanelServiceMock();
     cartRemoteDataSource = CartRemoteDataSourceMock();
     deviceStorageMock = DeviceStorageMock();
+    materialBannerStorageMock = MaterialBannerStorageMock();
 
     cartRepository = CartRepository(
       mixpanelService: mixpanelService,
@@ -119,6 +124,7 @@ void main() {
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
       cartRemoteDataSource: cartRemoteDataSource,
       deviceStorage: deviceStorageMock,
+      materialBannerStorage: materialBannerStorageMock,
     );
 
     fakeCartProductsWithCombo
@@ -180,6 +186,9 @@ void main() {
     when(
       () => cartRemoteDataSource.deleteCart(),
     ).thenAnswer((invocation) async => unit);
+    when(
+      () => materialBannerStorageMock.clear(),
+    ).thenAnswer((invocation) => Future.value());
 
     final result = await cartRepository.clearCart();
     expect(result.isRight(), true);
@@ -278,123 +287,125 @@ void main() {
   });
 
   test(
-      'Test Update Material Deal Bonus for different material number - Success',
-      () async {
-    when(
-      () => stockInfoLocalDataSource.getMaterialStockInfoList(),
-    ).thenAnswer(
-      (invocation) async => materialStockInfo,
-    );
+    'Test Update Material Deal Bonus for different material number - Success',
+    () async {
+      when(
+        () => stockInfoLocalDataSource.getMaterialStockInfoList(),
+      ).thenAnswer(
+        (invocation) async => materialStockInfo,
+      );
 
-    final materials = [...fakeCartProducts];
-    final material = materials.first.copyWith(
-      materialInfo: MaterialInfo.empty().copyWith(
-        materialNumber: MaterialNumber('1234'),
-      ),
-      price: Price.empty().copyWith(
-        bonuses: [
-          PriceBonus.empty().copyWith(
-            items: [
-              PriceBonusItem.empty().copyWith(
-                bonusMaterials: [
-                  BonusMaterial.empty().copyWith(
-                    bonusQuantity: 1,
-                    qualifyingQuantity: 1,
-                    materialNumber: MaterialNumber(
-                      '1234',
+      final materials = [...fakeCartProducts];
+      final material = materials.first.copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('1234'),
+        ),
+        price: Price.empty().copyWith(
+          bonuses: [
+            PriceBonus.empty().copyWith(
+              items: [
+                PriceBonusItem.empty().copyWith(
+                  bonusMaterials: [
+                    BonusMaterial.empty().copyWith(
+                      bonusQuantity: 1,
+                      qualifyingQuantity: 1,
+                      materialNumber: MaterialNumber(
+                        '1234',
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        bonusSampleItems: [
+          BonusSampleItem.empty().copyWith(
+            materialNumber: MaterialNumber('fake-number'),
           ),
         ],
-      ),
-      bonusSampleItems: [
-        BonusSampleItem.empty().copyWith(
-          materialNumber: MaterialNumber('fake-number'),
-        ),
-      ],
-    );
-    materials.replaceRange(0, 1, [material]);
+      );
+      materials.replaceRange(0, 1, [material]);
 
-    final result = await cartRepository.updateMaterialDealBonus(
-      materials: materials,
-      shipToInfo: fakeShipToInfo,
-      salesOrganisation: fakeSalesOrganisation,
-      customerCodeInfo: fakeCustomerCodeInfo,
-      salesOrganisationConfigs: fakeSGSalesOrgConfigs,
-    );
-    if (result.isRight()) {
-      result.fold((l) => {}, (r) {
-        expect(
-          r.first.bonusSampleItems.length !=
-              fakeCartProducts.first.bonusSampleItems.length,
-          true,
-        );
-      });
-    }
-  });
+      final result = await cartRepository.updateMaterialDealBonus(
+        materials: materials,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisationConfigs: fakeSGSalesOrgConfigs,
+      );
+      if (result.isRight()) {
+        result.fold((l) => {}, (r) {
+          expect(
+            r.first.bonusSampleItems.length !=
+                fakeCartProducts.first.bonusSampleItems.length,
+            true,
+          );
+        });
+      }
+    },
+  );
 
   test(
-      'Test Update Material Deal Bonus with different material number - failure',
-      () async {
-    when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-    when(
-      () => stockInfoLocalDataSource.getMaterialStockInfoList(),
-    ).thenAnswer(
-      (invocation) async => [MaterialStockInfo.empty()],
-    );
+    'Test Update Material Deal Bonus with different material number - failure',
+    () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(
+        () => stockInfoLocalDataSource.getMaterialStockInfoList(),
+      ).thenAnswer(
+        (invocation) async => [MaterialStockInfo.empty()],
+      );
 
-    final materials = [...fakeCartProducts];
-    final material = materials.first.copyWith(
-      materialInfo: MaterialInfo.empty().copyWith(
-        materialNumber: MaterialNumber('1234'),
-      ),
-      price: Price.empty().copyWith(
-        bonuses: [
-          PriceBonus.empty().copyWith(
-            items: [
-              PriceBonusItem.empty().copyWith(
-                bonusMaterials: [
-                  BonusMaterial.empty().copyWith(
-                    bonusQuantity: 1,
-                    qualifyingQuantity: 1,
-                    materialNumber: MaterialNumber(
-                      '1234',
+      final materials = [...fakeCartProducts];
+      final material = materials.first.copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('1234'),
+        ),
+        price: Price.empty().copyWith(
+          bonuses: [
+            PriceBonus.empty().copyWith(
+              items: [
+                PriceBonusItem.empty().copyWith(
+                  bonusMaterials: [
+                    BonusMaterial.empty().copyWith(
+                      bonusQuantity: 1,
+                      qualifyingQuantity: 1,
+                      materialNumber: MaterialNumber(
+                        '1234',
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        bonusSampleItems: [
+          BonusSampleItem.empty().copyWith(
+            materialNumber: MaterialNumber('fake-number'),
           ),
         ],
-      ),
-      bonusSampleItems: [
-        BonusSampleItem.empty().copyWith(
-          materialNumber: MaterialNumber('fake-number'),
-        ),
-      ],
-    );
-    materials.replaceRange(0, 1, [material]);
+      );
+      materials.replaceRange(0, 1, [material]);
 
-    final result = await cartRepository.updateMaterialDealBonus(
-      materials: materials,
-      shipToInfo: fakeShipToInfo,
-      salesOrganisation: fakeSalesOrganisation,
-      customerCodeInfo: fakeCustomerCodeInfo,
-      salesOrganisationConfigs: fakeSGSalesOrgConfigs,
-    );
-    if (result.isRight()) {
-      result.fold((l) => {}, (r) {
-        expect(
-          r.first.bonusSampleItems.first.stockInfo.inStock ==
-              MaterialInStock(''),
-          true,
-        );
-      });
-    }
-  });
+      final result = await cartRepository.updateMaterialDealBonus(
+        materials: materials,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisationConfigs: fakeSGSalesOrgConfigs,
+      );
+      if (result.isRight()) {
+        result.fold((l) => {}, (r) {
+          expect(
+            r.first.bonusSampleItems.first.stockInfo.inStock ==
+                MaterialInStock(''),
+            true,
+          );
+        });
+      }
+    },
+  );
 
   test('Test Update Material Deal Bonus - Failure', () async {
     when(
@@ -921,7 +932,7 @@ void main() {
                   .getOrCrash(),
               'quantity': fakeCartProducts.materialInfos.first.quantity.intValue
                   .toString(),
-            }
+            },
           ],
           salesOrgCode: fakeSalesOrganisation.salesOrg.getOrCrash(),
         ),
@@ -948,7 +959,7 @@ void main() {
                   .getOrCrash(),
               'quantity': fakeCartProducts.materialInfos.first.quantity.intValue
                   .toString(),
-            }
+            },
           ],
           salesOrgCode: fakeSalesOrganisation.salesOrg.getOrCrash(),
         ),
@@ -1317,40 +1328,42 @@ void main() {
       expect(result, Right(fakeCartProducts));
     });
 
-    test('removeSelectedProducts remote test success - if upsert cart fails',
-        () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      final upsertCartRequest = CartProductRequest.toMaterialRequest(
-        salesOrg: fakeSalesOrganisation.salesOrg,
-        customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
-        language: 'EN',
-        materialInfo: fakeCartProducts.first.materialInfo,
-        itemId: fakeCartProducts.first.materialInfo.parentID,
-        quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
-        counterOfferDetails:
-            fakeCartProducts.first.materialInfo.counterOfferDetails,
-      );
-      when(
-        () => cartRemoteDataSource.upsertCartItems(
-          requestParams: [
-            CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
-          ],
-          market: mockMarket,
-        ),
-      ).thenThrow(fakeException);
+    test(
+      'removeSelectedProducts remote test success - if upsert cart fails',
+      () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        final upsertCartRequest = CartProductRequest.toMaterialRequest(
+          salesOrg: fakeSalesOrganisation.salesOrg,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          language: 'EN',
+          materialInfo: fakeCartProducts.first.materialInfo,
+          itemId: fakeCartProducts.first.materialInfo.parentID,
+          quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
+          counterOfferDetails:
+              fakeCartProducts.first.materialInfo.counterOfferDetails,
+        );
+        when(
+          () => cartRemoteDataSource.upsertCartItems(
+            requestParams: [
+              CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+            ],
+            market: mockMarket,
+          ),
+        ).thenThrow(fakeException);
 
-      final result = await cartRepository.removeSelectedProducts(
-        salesOrganisationConfig: fakeSGSalesOrgConfigs,
-        customerCodeInfo: fakeCustomerCodeInfo,
-        language: Language.english(),
-        products: fakeCartProducts.materialInfos,
-        salesOrganisation: fakeSalesOrganisation,
-        shipToInfo: fakeShipToInfo,
-      );
+        final result = await cartRepository.removeSelectedProducts(
+          salesOrganisationConfig: fakeSGSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          language: Language.english(),
+          products: fakeCartProducts.materialInfos,
+          salesOrganisation: fakeSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+        );
 
-      expect(result, Left(FailureHandler.handleFailure(fakeException)));
-    });
+        expect(result, Left(FailureHandler.handleFailure(fakeException)));
+      },
+    );
 
     test('upsertCartItems local test failure', () async {
       when(
@@ -1409,6 +1422,16 @@ void main() {
         ),
       ).thenAnswer(
         (invocation) async => fakeCartProducts,
+      );
+
+      when(
+        () => materialBannerStorageMock.delete(
+          materialNumbers: fakeCartProducts.first.bundle.materials
+              .map((e) => e.materialNumber.displayMatNo)
+              .toList(),
+        ),
+      ).thenAnswer(
+        (invocation) => Future.value(),
       );
 
       final result = await cartRepository.upsertCartItems(
@@ -1711,77 +1734,80 @@ void main() {
       expect(result.getOrElse(() => []), fakeCartProducts);
     });
 
-    test('upsertCart remote test success - update stock info - success',
-        () async {
-      final upsertCartRequest = CartProductRequest.toMaterialRequest(
-        salesOrg: fakeSalesOrganisation.salesOrg,
-        customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
-        language: 'EN',
-        materialInfo: fakeCartProducts.first.materialInfo,
-        itemId: fakeCartProducts.first.materialInfo.parentID,
-        quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
-        counterOfferDetails:
-            fakeCartProducts.first.materialInfo.counterOfferDetails,
-      );
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(
-        () => cartRemoteDataSource.upsertCart(
-          requestParams:
-              CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
-          market: mockMarket,
-        ),
-      ).thenAnswer(
-        (invocation) async => fakeCartProducts,
-      );
-      when(
-        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: [
-            fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
-          ],
-          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        ),
-      ).thenAnswer(
-        (invocation) async => materialStockInfo,
-      );
-
-      when(
-        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: [
-            fakeCartProducts.first.materialInfo.materialNumber.getOrCrash(),
-          ],
-          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        ),
-      ).thenAnswer(
-        (invocation) async => [
-          MaterialStockInfo.empty().copyWith(
-            materialNumber: fakeCartProducts.first.materialInfo.materialNumber,
-            stockInfos: [StockInfo.empty()],
+    test(
+      'upsertCart remote test success - update stock info - success',
+      () async {
+        final upsertCartRequest = CartProductRequest.toMaterialRequest(
+          salesOrg: fakeSalesOrganisation.salesOrg,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
+          language: 'EN',
+          materialInfo: fakeCartProducts.first.materialInfo,
+          itemId: fakeCartProducts.first.materialInfo.parentID,
+          quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
+          counterOfferDetails:
+              fakeCartProducts.first.materialInfo.counterOfferDetails,
+        );
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => cartRemoteDataSource.upsertCart(
+            requestParams:
+                CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+            market: mockMarket,
           ),
-        ],
-      );
+        ).thenAnswer(
+          (invocation) async => fakeCartProducts,
+        );
+        when(
+          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+            materialNumbers: [
+              fakeCartProducts.first.getMaterialNumber.getOrDefaultValue(''),
+            ],
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          ),
+        ).thenAnswer(
+          (invocation) async => materialStockInfo,
+        );
 
-      final result = await cartRepository.upsertCart(
-        counterOfferDetails:
-            fakeCartProducts.first.materialInfo.counterOfferDetails,
-        quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
-        language: Language.english(),
-        shipToInfo: fakeShipToInfo,
-        customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisationConfig: fakeMYSalesOrgConfigs,
-        salesOrganisation: fakeSalesOrganisation,
-        materialInfo: fakeCartProducts.first.materialInfo,
-        itemId: fakeCartProducts.first.materialInfo.parentID,
-      );
+        when(
+          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+            materialNumbers: [
+              fakeCartProducts.first.materialInfo.materialNumber.getOrCrash(),
+            ],
+            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          ),
+        ).thenAnswer(
+          (invocation) async => [
+            MaterialStockInfo.empty().copyWith(
+              materialNumber:
+                  fakeCartProducts.first.materialInfo.materialNumber,
+              stockInfos: [StockInfo.empty()],
+            ),
+          ],
+        );
 
-      expect(result.getOrElse(() => []), [
-        fakeCartProducts.first.copyWith(
-          stockInfoList: [StockInfo.empty()],
-        ),
-      ]);
-    });
+        final result = await cartRepository.upsertCart(
+          counterOfferDetails:
+              fakeCartProducts.first.materialInfo.counterOfferDetails,
+          quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
+          language: Language.english(),
+          shipToInfo: fakeShipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisationConfig: fakeMYSalesOrgConfigs,
+          salesOrganisation: fakeSalesOrganisation,
+          materialInfo: fakeCartProducts.first.materialInfo,
+          itemId: fakeCartProducts.first.materialInfo.parentID,
+        );
+
+        expect(result.getOrElse(() => []), [
+          fakeCartProducts.first.copyWith(
+            stockInfoList: [StockInfo.empty()],
+          ),
+        ]);
+      },
+    );
 
     test('upsertCart exceed maximum quantity', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);

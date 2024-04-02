@@ -24,7 +24,6 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
-import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
@@ -87,7 +86,6 @@ void main() {
   group('Price Aggregate Test', () {
     test('should return correct price aggregate object', () {
       final priceAggregate = PriceAggregate(
-        banner: EZReachBanner.empty(),
         price: emptyPrice,
         materialInfo: emptyMaterialInfo,
         bundle: emptyBundle,

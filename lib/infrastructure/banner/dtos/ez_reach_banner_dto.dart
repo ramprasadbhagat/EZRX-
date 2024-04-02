@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/banner/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 
 part 'ez_reach_banner_dto.freezed.dart';
 part 'ez_reach_banner_dto.g.dart';
@@ -10,31 +11,59 @@ part 'ez_reach_banner_dto.g.dart';
 class EZReachBannerDto with _$EZReachBannerDto {
   const EZReachBannerDto._();
 
+  @HiveType(typeId: 5)
   const factory EZReachBannerDto({
-    @JsonKey(name: 'bannerId', defaultValue: '') required String bannerId,
+    @JsonKey(name: 'bannerId', defaultValue: '')
+    @HiveField(0)
+    required String bannerId,
     @JsonKey(name: 'bannerCampaignName', defaultValue: '')
-        required String bannerCampaignName,
-    @JsonKey(name: 'startDate', defaultValue: '') required String startDate,
-    @JsonKey(name: 'bannerUrl', defaultValue: '') required String tabBannerUrl,
-    @JsonKey(name: 'endDate', defaultValue: '') required String endDate,
+    @HiveField(1)
+    required String bannerCampaignName,
+    @JsonKey(name: 'startDate', defaultValue: '')
+    @HiveField(2)
+    required String startDate,
+    @JsonKey(name: 'bannerUrl', defaultValue: '')
+    @HiveField(3)
+    required String tabBannerUrl,
+    @JsonKey(name: 'endDate', defaultValue: '')
+    @HiveField(4)
+    required String endDate,
     @JsonKey(name: 'websiteUrl', defaultValue: '')
-        required String navigationalURL,
-    @JsonKey(name: 'bannerCountId', defaultValue: 0) required int bannerCountId,
-    @JsonKey(name: 'salesRep', defaultValue: false) required bool salesRep,
-    @JsonKey(name: 'status', defaultValue: '') required String status,
-    @JsonKey(name: 'customers', defaultValue: false) required bool customers,
-    @JsonKey(name: 'companyName', defaultValue: '') required String companyName,
+    @HiveField(5)
+    required String navigationalURL,
+    @JsonKey(name: 'bannerCountId', defaultValue: 0)
+    @HiveField(6)
+    required int bannerCountId,
+    @JsonKey(name: 'salesRep', defaultValue: false)
+    @HiveField(7)
+    required bool salesRep,
+    @JsonKey(name: 'status', defaultValue: '')
+    @HiveField(8)
+    required String status,
+    @JsonKey(name: 'customers', defaultValue: false)
+    @HiveField(9)
+    required bool customers,
+    @JsonKey(name: 'companyName', defaultValue: '')
+    @HiveField(10)
+    required String companyName,
     @JsonKey(name: 'targetProduct', defaultValue: '')
-        required String targetProduct,
-    @JsonKey(name: 'keyWord', defaultValue: '') required String keyWord,
+    @HiveField(11)
+    required String targetProduct,
+    @JsonKey(name: 'keyWord', defaultValue: '')
+    @HiveField(12)
+    required String keyWord,
     @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
-        required List<String> bannerCampaignLocations,
+    @HiveField(13)
+    required List<String> bannerCampaignLocations,
     @JsonKey(name: 'salesOrg', defaultValue: <String>[])
-        required List<String> salesOrg,
+    @HiveField(14)
+    required List<String> salesOrg,
     @JsonKey(name: 'countryCode', defaultValue: <String>[])
-        required List<String> countryCode,
+    @HiveField(15)
+    required List<String> countryCode,
     @JsonKey(name: 'mobileBannerImg', defaultValue: '')
-        required String mobileBannerUrl,
+    @HiveField(16)
+    required String mobileBannerUrl,
   }) = _EZReachBannerDto;
 
   factory EZReachBannerDto.fromJson(Map<String, dynamic> json) =>

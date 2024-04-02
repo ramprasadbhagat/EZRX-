@@ -39,6 +39,7 @@ class CartEvent with _$CartEvent {
 
   const factory CartEvent.upsertCart({
     required PriceAggregate priceAggregate,
+    EZReachBanner? banner,
   }) = _UpsertCart;
 
   const factory CartEvent.addHistoryItemsToCart({
@@ -48,6 +49,7 @@ class CartEvent with _$CartEvent {
 
   const factory CartEvent.upsertCartItems({
     required PriceAggregate priceAggregate,
+    EZReachBanner? banner,
   }) = _UpsertCartItems;
 
   const factory CartEvent.getDetailsProductsAddedToCart({

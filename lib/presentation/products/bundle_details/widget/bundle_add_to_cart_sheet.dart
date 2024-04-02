@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -33,7 +34,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 
 class BundlesAddToCartSheet extends StatelessWidget {
-  const BundlesAddToCartSheet({Key? key}) : super(key: key);
+  final EZReachBanner? banner;
+  const BundlesAddToCartSheet({
+    Key? key,
+    this.banner,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +70,9 @@ class BundlesAddToCartSheet extends StatelessWidget {
               ),
             ),
           ),
-          const _BundleSheetFooter(),
+          _BundleSheetFooter(
+            banner: banner,
+          ),
         ],
       ),
     );
@@ -214,7 +221,8 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
 }
 
 class _BundleSheetFooter extends StatelessWidget {
-  const _BundleSheetFooter({Key? key}) : super(key: key);
+  final EZReachBanner? banner;
+  const _BundleSheetFooter({Key? key, this.banner}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -280,7 +288,11 @@ class _BundleSheetFooter extends StatelessWidget {
                           () {
                             if (!cartState.isUpserting &&
                                 cartState.cartProducts.isNotEmpty) {
-                              _trackAddToCartSuccess(context, state);
+                              _trackAddToCartSuccess(
+                                context,
+                                state,
+                                banner: banner,
+                              );
                               context.router.popForced();
                               CustomSnackBar(
                                 messageText: context
@@ -320,6 +332,7 @@ class _BundleSheetFooter extends StatelessWidget {
                             state: state,
                             stateCart: stateCart,
                             materialInCart: materialInCart,
+                            banner: banner,
                           ),
                           child: LoadingShimmer.withChild(
                             enabled: stateCart.isUpserting,
@@ -342,8 +355,9 @@ class _BundleSheetFooter extends StatelessWidget {
 
   void _trackAddToCartSuccess(
     BuildContext context,
-    BundleAddToCartState state,
-  ) {
+    BundleAddToCartState state, {
+    EZReachBanner? banner,
+  }) {
     final bundle = state.bundle;
     final props = <String, dynamic>{
       MixpanelProps.productName: bundle.name,
@@ -354,6 +368,7 @@ class _BundleSheetFooter extends StatelessWidget {
       MixpanelProps.productQty: state.totalCount,
       MixpanelProps.clickAt:
           RouterUtils.buildRouteTrackingName(context.router.currentPath),
+      MixpanelProps.bannerId: banner?.id ?? '',
     };
 
     trackMixpanelEvent(MixpanelEvents.addToCartSuccess, props: props);
@@ -377,6 +392,7 @@ class _BundleSheetFooter extends StatelessWidget {
     required BundleAddToCartState state,
     required CartState stateCart,
     required PriceAggregate materialInCart,
+    EZReachBanner? banner,
   }) {
     context.read<BundleAddToCartBloc>().add(
           BundleAddToCartEvent.validateQuantity(
@@ -407,6 +423,7 @@ class _BundleSheetFooter extends StatelessWidget {
                 ),
               ),
             ),
+            banner: banner,
           ),
         );
   }

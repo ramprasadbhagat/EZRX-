@@ -45,10 +45,12 @@ class CarouselBannerTile extends StatelessWidget {
             MixpanelProps.bannerRedirected: banner.navigationalURL.type,
           },
         );
+
         if (banner.navigationalURL.isInternalLink) {
           context.read<DeepLinkingBloc>().add(
                 DeepLinkingEvent.addPendingLink(
                   EzrxLink(banner.navigationalURL.getOrDefaultValue('')),
+                  banner: banner,
                 ),
               );
         } else if (banner.navigationalURL.isExternalLink) {

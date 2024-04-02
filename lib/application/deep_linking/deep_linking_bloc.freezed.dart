@@ -12,14 +12,15 @@ part of 'deep_linking_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(EzrxLink link) addPendingLink,
+    required TResult Function(EzrxLink link, EZReachBanner? banner)
+        addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
@@ -28,7 +29,7 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(EzrxLink link)? addPendingLink,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -37,7 +38,7 @@ mixin _$DeepLinkingEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(EzrxLink link)? addPendingLink,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -87,25 +88,25 @@ class _$DeepLinkingEventCopyWithImpl<$Res, $Val extends DeepLinkingEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$DeepLinkingEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$DeepLinkingEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize();
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl();
 
   @override
   String toString() {
@@ -113,9 +114,9 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialize);
+        (other.runtimeType == runtimeType && other is _$InitializeImpl);
   }
 
   @override
@@ -125,7 +126,8 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(EzrxLink link) addPendingLink,
+    required TResult Function(EzrxLink link, EZReachBanner? banner)
+        addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
@@ -137,7 +139,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(EzrxLink link)? addPendingLink,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -149,7 +151,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(EzrxLink link)? addPendingLink,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -197,106 +199,130 @@ class _$_Initialize implements _Initialize {
 }
 
 abstract class _Initialize implements DeepLinkingEvent {
-  const factory _Initialize() = _$_Initialize;
+  const factory _Initialize() = _$InitializeImpl;
 }
 
 /// @nodoc
-abstract class _$$_AddPendingLinkCopyWith<$Res> {
-  factory _$$_AddPendingLinkCopyWith(
-          _$_AddPendingLink value, $Res Function(_$_AddPendingLink) then) =
-      __$$_AddPendingLinkCopyWithImpl<$Res>;
+abstract class _$$AddPendingLinkImplCopyWith<$Res> {
+  factory _$$AddPendingLinkImplCopyWith(_$AddPendingLinkImpl value,
+          $Res Function(_$AddPendingLinkImpl) then) =
+      __$$AddPendingLinkImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({EzrxLink link});
+  $Res call({EzrxLink link, EZReachBanner? banner});
+
+  $EZReachBannerCopyWith<$Res>? get banner;
 }
 
 /// @nodoc
-class __$$_AddPendingLinkCopyWithImpl<$Res>
-    extends _$DeepLinkingEventCopyWithImpl<$Res, _$_AddPendingLink>
-    implements _$$_AddPendingLinkCopyWith<$Res> {
-  __$$_AddPendingLinkCopyWithImpl(
-      _$_AddPendingLink _value, $Res Function(_$_AddPendingLink) _then)
+class __$$AddPendingLinkImplCopyWithImpl<$Res>
+    extends _$DeepLinkingEventCopyWithImpl<$Res, _$AddPendingLinkImpl>
+    implements _$$AddPendingLinkImplCopyWith<$Res> {
+  __$$AddPendingLinkImplCopyWithImpl(
+      _$AddPendingLinkImpl _value, $Res Function(_$AddPendingLinkImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? link = null,
+    Object? banner = freezed,
   }) {
-    return _then(_$_AddPendingLink(
+    return _then(_$AddPendingLinkImpl(
       null == link
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
               as EzrxLink,
+      banner: freezed == banner
+          ? _value.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as EZReachBanner?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EZReachBannerCopyWith<$Res>? get banner {
+    if (_value.banner == null) {
+      return null;
+    }
+
+    return $EZReachBannerCopyWith<$Res>(_value.banner!, (value) {
+      return _then(_value.copyWith(banner: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$_AddPendingLink implements _AddPendingLink {
-  const _$_AddPendingLink(this.link);
+class _$AddPendingLinkImpl implements _AddPendingLink {
+  const _$AddPendingLinkImpl(this.link, {this.banner});
 
   @override
   final EzrxLink link;
+  @override
+  final EZReachBanner? banner;
 
   @override
   String toString() {
-    return 'DeepLinkingEvent.addPendingLink(link: $link)';
+    return 'DeepLinkingEvent.addPendingLink(link: $link, banner: $banner)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddPendingLink &&
-            (identical(other.link, link) || other.link == link));
+            other is _$AddPendingLinkImpl &&
+            (identical(other.link, link) || other.link == link) &&
+            (identical(other.banner, banner) || other.banner == banner));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, link);
+  int get hashCode => Object.hash(runtimeType, link, banner);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddPendingLinkCopyWith<_$_AddPendingLink> get copyWith =>
-      __$$_AddPendingLinkCopyWithImpl<_$_AddPendingLink>(this, _$identity);
+  _$$AddPendingLinkImplCopyWith<_$AddPendingLinkImpl> get copyWith =>
+      __$$AddPendingLinkImplCopyWithImpl<_$AddPendingLinkImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(EzrxLink link) addPendingLink,
+    required TResult Function(EzrxLink link, EZReachBanner? banner)
+        addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
   }) {
-    return addPendingLink(link);
+    return addPendingLink(link, banner);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(EzrxLink link)? addPendingLink,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
   }) {
-    return addPendingLink?.call(link);
+    return addPendingLink?.call(link, banner);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(EzrxLink link)? addPendingLink,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
     required TResult orElse(),
   }) {
     if (addPendingLink != null) {
-      return addPendingLink(link);
+      return addPendingLink(link, banner);
     }
     return orElse();
   }
@@ -337,19 +363,21 @@ class _$_AddPendingLink implements _AddPendingLink {
 }
 
 abstract class _AddPendingLink implements DeepLinkingEvent {
-  const factory _AddPendingLink(final EzrxLink link) = _$_AddPendingLink;
+  const factory _AddPendingLink(final EzrxLink link,
+      {final EZReachBanner? banner}) = _$AddPendingLinkImpl;
 
   EzrxLink get link;
+  EZReachBanner? get banner;
   @JsonKey(ignore: true)
-  _$$_AddPendingLinkCopyWith<_$_AddPendingLink> get copyWith =>
+  _$$AddPendingLinkImplCopyWith<_$AddPendingLinkImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ConsumePendingLinkCopyWith<$Res> {
-  factory _$$_ConsumePendingLinkCopyWith(_$_ConsumePendingLink value,
-          $Res Function(_$_ConsumePendingLink) then) =
-      __$$_ConsumePendingLinkCopyWithImpl<$Res>;
+abstract class _$$ConsumePendingLinkImplCopyWith<$Res> {
+  factory _$$ConsumePendingLinkImplCopyWith(_$ConsumePendingLinkImpl value,
+          $Res Function(_$ConsumePendingLinkImpl) then) =
+      __$$ConsumePendingLinkImplCopyWithImpl<$Res>;
   @useResult
   $Res call({CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo});
 
@@ -358,11 +386,11 @@ abstract class _$$_ConsumePendingLinkCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ConsumePendingLinkCopyWithImpl<$Res>
-    extends _$DeepLinkingEventCopyWithImpl<$Res, _$_ConsumePendingLink>
-    implements _$$_ConsumePendingLinkCopyWith<$Res> {
-  __$$_ConsumePendingLinkCopyWithImpl(
-      _$_ConsumePendingLink _value, $Res Function(_$_ConsumePendingLink) _then)
+class __$$ConsumePendingLinkImplCopyWithImpl<$Res>
+    extends _$DeepLinkingEventCopyWithImpl<$Res, _$ConsumePendingLinkImpl>
+    implements _$$ConsumePendingLinkImplCopyWith<$Res> {
+  __$$ConsumePendingLinkImplCopyWithImpl(_$ConsumePendingLinkImpl _value,
+      $Res Function(_$ConsumePendingLinkImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -371,7 +399,7 @@ class __$$_ConsumePendingLinkCopyWithImpl<$Res>
     Object? selectedCustomerCode = null,
     Object? selectedShipTo = null,
   }) {
-    return _then(_$_ConsumePendingLink(
+    return _then(_$ConsumePendingLinkImpl(
       selectedCustomerCode: null == selectedCustomerCode
           ? _value.selectedCustomerCode
           : selectedCustomerCode // ignore: cast_nullable_to_non_nullable
@@ -403,8 +431,8 @@ class __$$_ConsumePendingLinkCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ConsumePendingLink implements _ConsumePendingLink {
-  const _$_ConsumePendingLink(
+class _$ConsumePendingLinkImpl implements _ConsumePendingLink {
+  const _$ConsumePendingLinkImpl(
       {required this.selectedCustomerCode, required this.selectedShipTo});
 
   @override
@@ -418,10 +446,10 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ConsumePendingLink &&
+            other is _$ConsumePendingLinkImpl &&
             (identical(other.selectedCustomerCode, selectedCustomerCode) ||
                 other.selectedCustomerCode == selectedCustomerCode) &&
             (identical(other.selectedShipTo, selectedShipTo) ||
@@ -435,15 +463,16 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ConsumePendingLinkCopyWith<_$_ConsumePendingLink> get copyWith =>
-      __$$_ConsumePendingLinkCopyWithImpl<_$_ConsumePendingLink>(
+  _$$ConsumePendingLinkImplCopyWith<_$ConsumePendingLinkImpl> get copyWith =>
+      __$$ConsumePendingLinkImplCopyWithImpl<_$ConsumePendingLinkImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(EzrxLink link) addPendingLink,
+    required TResult Function(EzrxLink link, EZReachBanner? banner)
+        addPendingLink,
     required TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)
         consumePendingLink,
@@ -455,7 +484,7 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(EzrxLink link)? addPendingLink,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? addPendingLink,
     TResult? Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -467,7 +496,7 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(EzrxLink link)? addPendingLink,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? addPendingLink,
     TResult Function(
             CustomerCodeInfo selectedCustomerCode, ShipToInfo selectedShipTo)?
         consumePendingLink,
@@ -517,12 +546,12 @@ class _$_ConsumePendingLink implements _ConsumePendingLink {
 abstract class _ConsumePendingLink implements DeepLinkingEvent {
   const factory _ConsumePendingLink(
       {required final CustomerCodeInfo selectedCustomerCode,
-      required final ShipToInfo selectedShipTo}) = _$_ConsumePendingLink;
+      required final ShipToInfo selectedShipTo}) = _$ConsumePendingLinkImpl;
 
   CustomerCodeInfo get selectedCustomerCode;
   ShipToInfo get selectedShipTo;
   @JsonKey(ignore: true)
-  _$$_ConsumePendingLinkCopyWith<_$_ConsumePendingLink> get copyWith =>
+  _$$ConsumePendingLinkImplCopyWith<_$ConsumePendingLinkImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -531,10 +560,12 @@ mixin _$DeepLinkingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -554,9 +585,11 @@ mixin _$DeepLinkingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -575,9 +608,11 @@ mixin _$DeepLinkingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -680,24 +715,25 @@ class _$DeepLinkingStateCopyWithImpl<$Res, $Val extends DeepLinkingState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -705,9 +741,9 @@ class _$_Initial implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -717,10 +753,12 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -743,9 +781,11 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -767,9 +807,11 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -870,78 +912,102 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements DeepLinkingState {
-  const factory _Initial() = _$_Initial;
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$_LinkPendingCopyWith<$Res> {
-  factory _$$_LinkPendingCopyWith(
-          _$_LinkPending value, $Res Function(_$_LinkPending) then) =
-      __$$_LinkPendingCopyWithImpl<$Res>;
+abstract class _$$LinkPendingImplCopyWith<$Res> {
+  factory _$$LinkPendingImplCopyWith(
+          _$LinkPendingImpl value, $Res Function(_$LinkPendingImpl) then) =
+      __$$LinkPendingImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({EzrxLink link});
+  $Res call({EzrxLink link, EZReachBanner? banner});
+
+  $EZReachBannerCopyWith<$Res>? get banner;
 }
 
 /// @nodoc
-class __$$_LinkPendingCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_LinkPending>
-    implements _$$_LinkPendingCopyWith<$Res> {
-  __$$_LinkPendingCopyWithImpl(
-      _$_LinkPending _value, $Res Function(_$_LinkPending) _then)
+class __$$LinkPendingImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$LinkPendingImpl>
+    implements _$$LinkPendingImplCopyWith<$Res> {
+  __$$LinkPendingImplCopyWithImpl(
+      _$LinkPendingImpl _value, $Res Function(_$LinkPendingImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? link = null,
+    Object? banner = freezed,
   }) {
-    return _then(_$_LinkPending(
+    return _then(_$LinkPendingImpl(
       null == link
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
               as EzrxLink,
+      banner: freezed == banner
+          ? _value.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as EZReachBanner?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EZReachBannerCopyWith<$Res>? get banner {
+    if (_value.banner == null) {
+      return null;
+    }
+
+    return $EZReachBannerCopyWith<$Res>(_value.banner!, (value) {
+      return _then(_value.copyWith(banner: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$_LinkPending implements _LinkPending {
-  const _$_LinkPending(this.link);
+class _$LinkPendingImpl implements _LinkPending {
+  const _$LinkPendingImpl(this.link, {this.banner});
 
   @override
   final EzrxLink link;
+  @override
+  final EZReachBanner? banner;
 
   @override
   String toString() {
-    return 'DeepLinkingState.linkPending(link: $link)';
+    return 'DeepLinkingState.linkPending(link: $link, banner: $banner)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LinkPending &&
-            (identical(other.link, link) || other.link == link));
+            other is _$LinkPendingImpl &&
+            (identical(other.link, link) || other.link == link) &&
+            (identical(other.banner, banner) || other.banner == banner));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, link);
+  int get hashCode => Object.hash(runtimeType, link, banner);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LinkPendingCopyWith<_$_LinkPending> get copyWith =>
-      __$$_LinkPendingCopyWithImpl<_$_LinkPending>(this, _$identity);
+  _$$LinkPendingImplCopyWith<_$LinkPendingImpl> get copyWith =>
+      __$$LinkPendingImplCopyWithImpl<_$LinkPendingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -957,16 +1023,18 @@ class _$_LinkPending implements _LinkPending {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
   }) {
-    return linkPending(link);
+    return linkPending(link, banner);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -981,16 +1049,18 @@ class _$_LinkPending implements _LinkPending {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
   }) {
-    return linkPending?.call(link);
+    return linkPending?.call(link, banner);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -1007,7 +1077,7 @@ class _$_LinkPending implements _LinkPending {
     required TResult orElse(),
   }) {
     if (linkPending != null) {
-      return linkPending(link);
+      return linkPending(link, banner);
     }
     return orElse();
   }
@@ -1091,85 +1161,112 @@ class _$_LinkPending implements _LinkPending {
 }
 
 abstract class _LinkPending implements DeepLinkingState {
-  const factory _LinkPending(final EzrxLink link) = _$_LinkPending;
+  const factory _LinkPending(final EzrxLink link,
+      {final EZReachBanner? banner}) = _$LinkPendingImpl;
 
   EzrxLink get link;
+  EZReachBanner? get banner;
   @JsonKey(ignore: true)
-  _$$_LinkPendingCopyWith<_$_LinkPending> get copyWith =>
+  _$$LinkPendingImplCopyWith<_$LinkPendingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RedirectBundleDetailCopyWith<$Res> {
-  factory _$$_RedirectBundleDetailCopyWith(_$_RedirectBundleDetail value,
-          $Res Function(_$_RedirectBundleDetail) then) =
-      __$$_RedirectBundleDetailCopyWithImpl<$Res>;
+abstract class _$$RedirectBundleDetailImplCopyWith<$Res> {
+  factory _$$RedirectBundleDetailImplCopyWith(_$RedirectBundleDetailImpl value,
+          $Res Function(_$RedirectBundleDetailImpl) then) =
+      __$$RedirectBundleDetailImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({MaterialNumber materialNumber});
+  $Res call({MaterialNumber materialNumber, EZReachBanner? banner});
+
+  $EZReachBannerCopyWith<$Res>? get banner;
 }
 
 /// @nodoc
-class __$$_RedirectBundleDetailCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectBundleDetail>
-    implements _$$_RedirectBundleDetailCopyWith<$Res> {
-  __$$_RedirectBundleDetailCopyWithImpl(_$_RedirectBundleDetail _value,
-      $Res Function(_$_RedirectBundleDetail) _then)
+class __$$RedirectBundleDetailImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectBundleDetailImpl>
+    implements _$$RedirectBundleDetailImplCopyWith<$Res> {
+  __$$RedirectBundleDetailImplCopyWithImpl(_$RedirectBundleDetailImpl _value,
+      $Res Function(_$RedirectBundleDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? materialNumber = null,
+    Object? banner = freezed,
   }) {
-    return _then(_$_RedirectBundleDetail(
+    return _then(_$RedirectBundleDetailImpl(
       null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      banner: freezed == banner
+          ? _value.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as EZReachBanner?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EZReachBannerCopyWith<$Res>? get banner {
+    if (_value.banner == null) {
+      return null;
+    }
+
+    return $EZReachBannerCopyWith<$Res>(_value.banner!, (value) {
+      return _then(_value.copyWith(banner: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$_RedirectBundleDetail implements _RedirectBundleDetail {
-  const _$_RedirectBundleDetail(this.materialNumber);
+class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
+  const _$RedirectBundleDetailImpl(this.materialNumber, {this.banner});
 
   @override
   final MaterialNumber materialNumber;
+  @override
+  final EZReachBanner? banner;
 
   @override
   String toString() {
-    return 'DeepLinkingState.redirectBundleDetail(materialNumber: $materialNumber)';
+    return 'DeepLinkingState.redirectBundleDetail(materialNumber: $materialNumber, banner: $banner)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectBundleDetail &&
+            other is _$RedirectBundleDetailImpl &&
             (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber));
+                other.materialNumber == materialNumber) &&
+            (identical(other.banner, banner) || other.banner == banner));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber);
+  int get hashCode => Object.hash(runtimeType, materialNumber, banner);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectBundleDetailCopyWith<_$_RedirectBundleDetail> get copyWith =>
-      __$$_RedirectBundleDetailCopyWithImpl<_$_RedirectBundleDetail>(
-          this, _$identity);
+  _$$RedirectBundleDetailImplCopyWith<_$RedirectBundleDetailImpl>
+      get copyWith =>
+          __$$RedirectBundleDetailImplCopyWithImpl<_$RedirectBundleDetailImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -1185,16 +1282,18 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
   }) {
-    return redirectBundleDetail(materialNumber);
+    return redirectBundleDetail(materialNumber, banner);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -1209,16 +1308,18 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
   }) {
-    return redirectBundleDetail?.call(materialNumber);
+    return redirectBundleDetail?.call(materialNumber, banner);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -1235,7 +1336,7 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
     required TResult orElse(),
   }) {
     if (redirectBundleDetail != null) {
-      return redirectBundleDetail(materialNumber);
+      return redirectBundleDetail(materialNumber, banner);
     }
     return orElse();
   }
@@ -1319,86 +1420,112 @@ class _$_RedirectBundleDetail implements _RedirectBundleDetail {
 }
 
 abstract class _RedirectBundleDetail implements DeepLinkingState {
-  const factory _RedirectBundleDetail(final MaterialNumber materialNumber) =
-      _$_RedirectBundleDetail;
+  const factory _RedirectBundleDetail(final MaterialNumber materialNumber,
+      {final EZReachBanner? banner}) = _$RedirectBundleDetailImpl;
 
   MaterialNumber get materialNumber;
+  EZReachBanner? get banner;
   @JsonKey(ignore: true)
-  _$$_RedirectBundleDetailCopyWith<_$_RedirectBundleDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RedirectBundleDetailImplCopyWith<_$RedirectBundleDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RedirectProductDetailCopyWith<$Res> {
-  factory _$$_RedirectProductDetailCopyWith(_$_RedirectProductDetail value,
-          $Res Function(_$_RedirectProductDetail) then) =
-      __$$_RedirectProductDetailCopyWithImpl<$Res>;
+abstract class _$$RedirectProductDetailImplCopyWith<$Res> {
+  factory _$$RedirectProductDetailImplCopyWith(
+          _$RedirectProductDetailImpl value,
+          $Res Function(_$RedirectProductDetailImpl) then) =
+      __$$RedirectProductDetailImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({MaterialNumber materialNumber});
+  $Res call({MaterialNumber materialNumber, EZReachBanner? banner});
+
+  $EZReachBannerCopyWith<$Res>? get banner;
 }
 
 /// @nodoc
-class __$$_RedirectProductDetailCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectProductDetail>
-    implements _$$_RedirectProductDetailCopyWith<$Res> {
-  __$$_RedirectProductDetailCopyWithImpl(_$_RedirectProductDetail _value,
-      $Res Function(_$_RedirectProductDetail) _then)
+class __$$RedirectProductDetailImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectProductDetailImpl>
+    implements _$$RedirectProductDetailImplCopyWith<$Res> {
+  __$$RedirectProductDetailImplCopyWithImpl(_$RedirectProductDetailImpl _value,
+      $Res Function(_$RedirectProductDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? materialNumber = null,
+    Object? banner = freezed,
   }) {
-    return _then(_$_RedirectProductDetail(
+    return _then(_$RedirectProductDetailImpl(
       null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      banner: freezed == banner
+          ? _value.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as EZReachBanner?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EZReachBannerCopyWith<$Res>? get banner {
+    if (_value.banner == null) {
+      return null;
+    }
+
+    return $EZReachBannerCopyWith<$Res>(_value.banner!, (value) {
+      return _then(_value.copyWith(banner: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$_RedirectProductDetail implements _RedirectProductDetail {
-  const _$_RedirectProductDetail(this.materialNumber);
+class _$RedirectProductDetailImpl implements _RedirectProductDetail {
+  const _$RedirectProductDetailImpl(this.materialNumber, {this.banner});
 
   @override
   final MaterialNumber materialNumber;
+  @override
+  final EZReachBanner? banner;
 
   @override
   String toString() {
-    return 'DeepLinkingState.redirectProductDetail(materialNumber: $materialNumber)';
+    return 'DeepLinkingState.redirectProductDetail(materialNumber: $materialNumber, banner: $banner)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectProductDetail &&
+            other is _$RedirectProductDetailImpl &&
             (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber));
+                other.materialNumber == materialNumber) &&
+            (identical(other.banner, banner) || other.banner == banner));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber);
+  int get hashCode => Object.hash(runtimeType, materialNumber, banner);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectProductDetailCopyWith<_$_RedirectProductDetail> get copyWith =>
-      __$$_RedirectProductDetailCopyWithImpl<_$_RedirectProductDetail>(
-          this, _$identity);
+  _$$RedirectProductDetailImplCopyWith<_$RedirectProductDetailImpl>
+      get copyWith => __$$RedirectProductDetailImplCopyWithImpl<
+          _$RedirectProductDetailImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -1414,16 +1541,18 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
   }) {
-    return redirectProductDetail(materialNumber);
+    return redirectProductDetail(materialNumber, banner);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -1438,16 +1567,18 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
   }) {
-    return redirectProductDetail?.call(materialNumber);
+    return redirectProductDetail?.call(materialNumber, banner);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -1464,7 +1595,7 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
     required TResult orElse(),
   }) {
     if (redirectProductDetail != null) {
-      return redirectProductDetail(materialNumber);
+      return redirectProductDetail(materialNumber, banner);
     }
     return orElse();
   }
@@ -1548,32 +1679,34 @@ class _$_RedirectProductDetail implements _RedirectProductDetail {
 }
 
 abstract class _RedirectProductDetail implements DeepLinkingState {
-  const factory _RedirectProductDetail(final MaterialNumber materialNumber) =
-      _$_RedirectProductDetail;
+  const factory _RedirectProductDetail(final MaterialNumber materialNumber,
+      {final EZReachBanner? banner}) = _$RedirectProductDetailImpl;
 
   MaterialNumber get materialNumber;
+  EZReachBanner? get banner;
   @JsonKey(ignore: true)
-  _$$_RedirectProductDetailCopyWith<_$_RedirectProductDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RedirectProductDetailImplCopyWith<_$RedirectProductDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RedirectProductSuggestionCopyWith<$Res> {
-  factory _$$_RedirectProductSuggestionCopyWith(
-          _$_RedirectProductSuggestion value,
-          $Res Function(_$_RedirectProductSuggestion) then) =
-      __$$_RedirectProductSuggestionCopyWithImpl<$Res>;
+abstract class _$$RedirectProductSuggestionImplCopyWith<$Res> {
+  factory _$$RedirectProductSuggestionImplCopyWith(
+          _$RedirectProductSuggestionImpl value,
+          $Res Function(_$RedirectProductSuggestionImpl) then) =
+      __$$RedirectProductSuggestionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SearchKey searchKey});
 }
 
 /// @nodoc
-class __$$_RedirectProductSuggestionCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectProductSuggestion>
-    implements _$$_RedirectProductSuggestionCopyWith<$Res> {
-  __$$_RedirectProductSuggestionCopyWithImpl(
-      _$_RedirectProductSuggestion _value,
-      $Res Function(_$_RedirectProductSuggestion) _then)
+class __$$RedirectProductSuggestionImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res,
+        _$RedirectProductSuggestionImpl>
+    implements _$$RedirectProductSuggestionImplCopyWith<$Res> {
+  __$$RedirectProductSuggestionImplCopyWithImpl(
+      _$RedirectProductSuggestionImpl _value,
+      $Res Function(_$RedirectProductSuggestionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1581,7 +1714,7 @@ class __$$_RedirectProductSuggestionCopyWithImpl<$Res>
   $Res call({
     Object? searchKey = null,
   }) {
-    return _then(_$_RedirectProductSuggestion(
+    return _then(_$RedirectProductSuggestionImpl(
       null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -1592,8 +1725,8 @@ class __$$_RedirectProductSuggestionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
-  const _$_RedirectProductSuggestion(this.searchKey);
+class _$RedirectProductSuggestionImpl implements _RedirectProductSuggestion {
+  const _$RedirectProductSuggestionImpl(this.searchKey);
 
   @override
   final SearchKey searchKey;
@@ -1604,10 +1737,10 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectProductSuggestion &&
+            other is _$RedirectProductSuggestionImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
@@ -1618,18 +1751,20 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectProductSuggestionCopyWith<_$_RedirectProductSuggestion>
-      get copyWith => __$$_RedirectProductSuggestionCopyWithImpl<
-          _$_RedirectProductSuggestion>(this, _$identity);
+  _$$RedirectProductSuggestionImplCopyWith<_$RedirectProductSuggestionImpl>
+      get copyWith => __$$RedirectProductSuggestionImplCopyWithImpl<
+          _$RedirectProductSuggestionImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -1652,9 +1787,11 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -1676,9 +1813,11 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -1780,29 +1919,29 @@ class _$_RedirectProductSuggestion implements _RedirectProductSuggestion {
 
 abstract class _RedirectProductSuggestion implements DeepLinkingState {
   const factory _RedirectProductSuggestion(final SearchKey searchKey) =
-      _$_RedirectProductSuggestion;
+      _$RedirectProductSuggestionImpl;
 
   SearchKey get searchKey;
   @JsonKey(ignore: true)
-  _$$_RedirectProductSuggestionCopyWith<_$_RedirectProductSuggestion>
+  _$$RedirectProductSuggestionImplCopyWith<_$RedirectProductSuggestionImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RedirectOrderDetailCopyWith<$Res> {
-  factory _$$_RedirectOrderDetailCopyWith(_$_RedirectOrderDetail value,
-          $Res Function(_$_RedirectOrderDetail) then) =
-      __$$_RedirectOrderDetailCopyWithImpl<$Res>;
+abstract class _$$RedirectOrderDetailImplCopyWith<$Res> {
+  factory _$$RedirectOrderDetailImplCopyWith(_$RedirectOrderDetailImpl value,
+          $Res Function(_$RedirectOrderDetailImpl) then) =
+      __$$RedirectOrderDetailImplCopyWithImpl<$Res>;
   @useResult
   $Res call({OrderNumber orderNumber});
 }
 
 /// @nodoc
-class __$$_RedirectOrderDetailCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectOrderDetail>
-    implements _$$_RedirectOrderDetailCopyWith<$Res> {
-  __$$_RedirectOrderDetailCopyWithImpl(_$_RedirectOrderDetail _value,
-      $Res Function(_$_RedirectOrderDetail) _then)
+class __$$RedirectOrderDetailImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectOrderDetailImpl>
+    implements _$$RedirectOrderDetailImplCopyWith<$Res> {
+  __$$RedirectOrderDetailImplCopyWithImpl(_$RedirectOrderDetailImpl _value,
+      $Res Function(_$RedirectOrderDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1810,7 +1949,7 @@ class __$$_RedirectOrderDetailCopyWithImpl<$Res>
   $Res call({
     Object? orderNumber = null,
   }) {
-    return _then(_$_RedirectOrderDetail(
+    return _then(_$RedirectOrderDetailImpl(
       null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
@@ -1821,8 +1960,8 @@ class __$$_RedirectOrderDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RedirectOrderDetail implements _RedirectOrderDetail {
-  const _$_RedirectOrderDetail(this.orderNumber);
+class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
+  const _$RedirectOrderDetailImpl(this.orderNumber);
 
   @override
   final OrderNumber orderNumber;
@@ -1833,10 +1972,10 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectOrderDetail &&
+            other is _$RedirectOrderDetailImpl &&
             (identical(other.orderNumber, orderNumber) ||
                 other.orderNumber == orderNumber));
   }
@@ -1847,18 +1986,20 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectOrderDetailCopyWith<_$_RedirectOrderDetail> get copyWith =>
-      __$$_RedirectOrderDetailCopyWithImpl<_$_RedirectOrderDetail>(
+  _$$RedirectOrderDetailImplCopyWith<_$RedirectOrderDetailImpl> get copyWith =>
+      __$$RedirectOrderDetailImplCopyWithImpl<_$RedirectOrderDetailImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -1881,9 +2022,11 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -1905,9 +2048,11 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -2009,19 +2154,19 @@ class _$_RedirectOrderDetail implements _RedirectOrderDetail {
 
 abstract class _RedirectOrderDetail implements DeepLinkingState {
   const factory _RedirectOrderDetail(final OrderNumber orderNumber) =
-      _$_RedirectOrderDetail;
+      _$RedirectOrderDetailImpl;
 
   OrderNumber get orderNumber;
   @JsonKey(ignore: true)
-  _$$_RedirectOrderDetailCopyWith<_$_RedirectOrderDetail> get copyWith =>
+  _$$RedirectOrderDetailImplCopyWith<_$RedirectOrderDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RedirectReturnDetailCopyWith<$Res> {
-  factory _$$_RedirectReturnDetailCopyWith(_$_RedirectReturnDetail value,
-          $Res Function(_$_RedirectReturnDetail) then) =
-      __$$_RedirectReturnDetailCopyWithImpl<$Res>;
+abstract class _$$RedirectReturnDetailImplCopyWith<$Res> {
+  factory _$$RedirectReturnDetailImplCopyWith(_$RedirectReturnDetailImpl value,
+          $Res Function(_$RedirectReturnDetailImpl) then) =
+      __$$RedirectReturnDetailImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnRequestsId returnId});
 
@@ -2029,11 +2174,11 @@ abstract class _$$_RedirectReturnDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_RedirectReturnDetailCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectReturnDetail>
-    implements _$$_RedirectReturnDetailCopyWith<$Res> {
-  __$$_RedirectReturnDetailCopyWithImpl(_$_RedirectReturnDetail _value,
-      $Res Function(_$_RedirectReturnDetail) _then)
+class __$$RedirectReturnDetailImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectReturnDetailImpl>
+    implements _$$RedirectReturnDetailImplCopyWith<$Res> {
+  __$$RedirectReturnDetailImplCopyWithImpl(_$RedirectReturnDetailImpl _value,
+      $Res Function(_$RedirectReturnDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2041,7 +2186,7 @@ class __$$_RedirectReturnDetailCopyWithImpl<$Res>
   $Res call({
     Object? returnId = null,
   }) {
-    return _then(_$_RedirectReturnDetail(
+    return _then(_$RedirectReturnDetailImpl(
       null == returnId
           ? _value.returnId
           : returnId // ignore: cast_nullable_to_non_nullable
@@ -2060,8 +2205,8 @@ class __$$_RedirectReturnDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RedirectReturnDetail implements _RedirectReturnDetail {
-  const _$_RedirectReturnDetail(this.returnId);
+class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
+  const _$RedirectReturnDetailImpl(this.returnId);
 
   @override
   final ReturnRequestsId returnId;
@@ -2072,10 +2217,10 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectReturnDetail &&
+            other is _$RedirectReturnDetailImpl &&
             (identical(other.returnId, returnId) ||
                 other.returnId == returnId));
   }
@@ -2086,18 +2231,21 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectReturnDetailCopyWith<_$_RedirectReturnDetail> get copyWith =>
-      __$$_RedirectReturnDetailCopyWithImpl<_$_RedirectReturnDetail>(
-          this, _$identity);
+  _$$RedirectReturnDetailImplCopyWith<_$RedirectReturnDetailImpl>
+      get copyWith =>
+          __$$RedirectReturnDetailImplCopyWithImpl<_$RedirectReturnDetailImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -2120,9 +2268,11 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -2144,9 +2294,11 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -2248,19 +2400,20 @@ class _$_RedirectReturnDetail implements _RedirectReturnDetail {
 
 abstract class _RedirectReturnDetail implements DeepLinkingState {
   const factory _RedirectReturnDetail(final ReturnRequestsId returnId) =
-      _$_RedirectReturnDetail;
+      _$RedirectReturnDetailImpl;
 
   ReturnRequestsId get returnId;
   @JsonKey(ignore: true)
-  _$$_RedirectReturnDetailCopyWith<_$_RedirectReturnDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RedirectReturnDetailImplCopyWith<_$RedirectReturnDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RedirectPaymentDetailCopyWith<$Res> {
-  factory _$$_RedirectPaymentDetailCopyWith(_$_RedirectPaymentDetail value,
-          $Res Function(_$_RedirectPaymentDetail) then) =
-      __$$_RedirectPaymentDetailCopyWithImpl<$Res>;
+abstract class _$$RedirectPaymentDetailImplCopyWith<$Res> {
+  factory _$$RedirectPaymentDetailImplCopyWith(
+          _$RedirectPaymentDetailImpl value,
+          $Res Function(_$RedirectPaymentDetailImpl) then) =
+      __$$RedirectPaymentDetailImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PaymentSummaryDetails paymentIdentifierInfo});
 
@@ -2268,11 +2421,11 @@ abstract class _$$_RedirectPaymentDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_RedirectPaymentDetailCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectPaymentDetail>
-    implements _$$_RedirectPaymentDetailCopyWith<$Res> {
-  __$$_RedirectPaymentDetailCopyWithImpl(_$_RedirectPaymentDetail _value,
-      $Res Function(_$_RedirectPaymentDetail) _then)
+class __$$RedirectPaymentDetailImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectPaymentDetailImpl>
+    implements _$$RedirectPaymentDetailImplCopyWith<$Res> {
+  __$$RedirectPaymentDetailImplCopyWithImpl(_$RedirectPaymentDetailImpl _value,
+      $Res Function(_$RedirectPaymentDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2280,7 +2433,7 @@ class __$$_RedirectPaymentDetailCopyWithImpl<$Res>
   $Res call({
     Object? paymentIdentifierInfo = null,
   }) {
-    return _then(_$_RedirectPaymentDetail(
+    return _then(_$RedirectPaymentDetailImpl(
       null == paymentIdentifierInfo
           ? _value.paymentIdentifierInfo
           : paymentIdentifierInfo // ignore: cast_nullable_to_non_nullable
@@ -2300,8 +2453,8 @@ class __$$_RedirectPaymentDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
-  const _$_RedirectPaymentDetail(this.paymentIdentifierInfo);
+class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
+  const _$RedirectPaymentDetailImpl(this.paymentIdentifierInfo);
 
   @override
   final PaymentSummaryDetails paymentIdentifierInfo;
@@ -2312,10 +2465,10 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectPaymentDetail &&
+            other is _$RedirectPaymentDetailImpl &&
             (identical(other.paymentIdentifierInfo, paymentIdentifierInfo) ||
                 other.paymentIdentifierInfo == paymentIdentifierInfo));
   }
@@ -2326,18 +2479,20 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectPaymentDetailCopyWith<_$_RedirectPaymentDetail> get copyWith =>
-      __$$_RedirectPaymentDetailCopyWithImpl<_$_RedirectPaymentDetail>(
-          this, _$identity);
+  _$$RedirectPaymentDetailImplCopyWith<_$RedirectPaymentDetailImpl>
+      get copyWith => __$$RedirectPaymentDetailImplCopyWithImpl<
+          _$RedirectPaymentDetailImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -2360,9 +2515,11 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -2384,9 +2541,11 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -2489,34 +2648,34 @@ class _$_RedirectPaymentDetail implements _RedirectPaymentDetail {
 abstract class _RedirectPaymentDetail implements DeepLinkingState {
   const factory _RedirectPaymentDetail(
           final PaymentSummaryDetails paymentIdentifierInfo) =
-      _$_RedirectPaymentDetail;
+      _$RedirectPaymentDetailImpl;
 
   PaymentSummaryDetails get paymentIdentifierInfo;
   @JsonKey(ignore: true)
-  _$$_RedirectPaymentDetailCopyWith<_$_RedirectPaymentDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RedirectPaymentDetailImplCopyWith<_$RedirectPaymentDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RedirectPaymentHomeCopyWith<$Res> {
-  factory _$$_RedirectPaymentHomeCopyWith(_$_RedirectPaymentHome value,
-          $Res Function(_$_RedirectPaymentHome) then) =
-      __$$_RedirectPaymentHomeCopyWithImpl<$Res>;
+abstract class _$$RedirectPaymentHomeImplCopyWith<$Res> {
+  factory _$$RedirectPaymentHomeImplCopyWith(_$RedirectPaymentHomeImpl value,
+          $Res Function(_$RedirectPaymentHomeImpl) then) =
+      __$$RedirectPaymentHomeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_RedirectPaymentHomeCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectPaymentHome>
-    implements _$$_RedirectPaymentHomeCopyWith<$Res> {
-  __$$_RedirectPaymentHomeCopyWithImpl(_$_RedirectPaymentHome _value,
-      $Res Function(_$_RedirectPaymentHome) _then)
+class __$$RedirectPaymentHomeImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectPaymentHomeImpl>
+    implements _$$RedirectPaymentHomeImplCopyWith<$Res> {
+  __$$RedirectPaymentHomeImplCopyWithImpl(_$RedirectPaymentHomeImpl _value,
+      $Res Function(_$RedirectPaymentHomeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_RedirectPaymentHome implements _RedirectPaymentHome {
-  const _$_RedirectPaymentHome();
+class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
+  const _$RedirectPaymentHomeImpl();
 
   @override
   String toString() {
@@ -2524,9 +2683,10 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_RedirectPaymentHome);
+        (other.runtimeType == runtimeType &&
+            other is _$RedirectPaymentHomeImpl);
   }
 
   @override
@@ -2536,10 +2696,12 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -2562,9 +2724,11 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -2586,9 +2750,11 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -2689,24 +2855,25 @@ class _$_RedirectPaymentHome implements _RedirectPaymentHome {
 }
 
 abstract class _RedirectPaymentHome implements DeepLinkingState {
-  const factory _RedirectPaymentHome() = _$_RedirectPaymentHome;
+  const factory _RedirectPaymentHome() = _$RedirectPaymentHomeImpl;
 }
 
 /// @nodoc
-abstract class _$$_RedirectInvoiceDetailCopyWith<$Res> {
-  factory _$$_RedirectInvoiceDetailCopyWith(_$_RedirectInvoiceDetail value,
-          $Res Function(_$_RedirectInvoiceDetail) then) =
-      __$$_RedirectInvoiceDetailCopyWithImpl<$Res>;
+abstract class _$$RedirectInvoiceDetailImplCopyWith<$Res> {
+  factory _$$RedirectInvoiceDetailImplCopyWith(
+          _$RedirectInvoiceDetailImpl value,
+          $Res Function(_$RedirectInvoiceDetailImpl) then) =
+      __$$RedirectInvoiceDetailImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String invoiceNumber});
 }
 
 /// @nodoc
-class __$$_RedirectInvoiceDetailCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectInvoiceDetail>
-    implements _$$_RedirectInvoiceDetailCopyWith<$Res> {
-  __$$_RedirectInvoiceDetailCopyWithImpl(_$_RedirectInvoiceDetail _value,
-      $Res Function(_$_RedirectInvoiceDetail) _then)
+class __$$RedirectInvoiceDetailImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectInvoiceDetailImpl>
+    implements _$$RedirectInvoiceDetailImplCopyWith<$Res> {
+  __$$RedirectInvoiceDetailImplCopyWithImpl(_$RedirectInvoiceDetailImpl _value,
+      $Res Function(_$RedirectInvoiceDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2714,7 +2881,7 @@ class __$$_RedirectInvoiceDetailCopyWithImpl<$Res>
   $Res call({
     Object? invoiceNumber = null,
   }) {
-    return _then(_$_RedirectInvoiceDetail(
+    return _then(_$RedirectInvoiceDetailImpl(
       null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
@@ -2725,8 +2892,8 @@ class __$$_RedirectInvoiceDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
-  const _$_RedirectInvoiceDetail(this.invoiceNumber);
+class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
+  const _$RedirectInvoiceDetailImpl(this.invoiceNumber);
 
   @override
   final String invoiceNumber;
@@ -2737,10 +2904,10 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectInvoiceDetail &&
+            other is _$RedirectInvoiceDetailImpl &&
             (identical(other.invoiceNumber, invoiceNumber) ||
                 other.invoiceNumber == invoiceNumber));
   }
@@ -2751,18 +2918,20 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectInvoiceDetailCopyWith<_$_RedirectInvoiceDetail> get copyWith =>
-      __$$_RedirectInvoiceDetailCopyWithImpl<_$_RedirectInvoiceDetail>(
-          this, _$identity);
+  _$$RedirectInvoiceDetailImplCopyWith<_$RedirectInvoiceDetailImpl>
+      get copyWith => __$$RedirectInvoiceDetailImplCopyWithImpl<
+          _$RedirectInvoiceDetailImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -2785,9 +2954,11 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -2809,9 +2980,11 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -2913,34 +3086,34 @@ class _$_RedirectInvoiceDetail implements _RedirectInvoiceDetail {
 
 abstract class _RedirectInvoiceDetail implements DeepLinkingState {
   const factory _RedirectInvoiceDetail(final String invoiceNumber) =
-      _$_RedirectInvoiceDetail;
+      _$RedirectInvoiceDetailImpl;
 
   String get invoiceNumber;
   @JsonKey(ignore: true)
-  _$$_RedirectInvoiceDetailCopyWith<_$_RedirectInvoiceDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RedirectInvoiceDetailImplCopyWith<_$RedirectInvoiceDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RedirectFAQCopyWith<$Res> {
-  factory _$$_RedirectFAQCopyWith(
-          _$_RedirectFAQ value, $Res Function(_$_RedirectFAQ) then) =
-      __$$_RedirectFAQCopyWithImpl<$Res>;
+abstract class _$$RedirectFAQImplCopyWith<$Res> {
+  factory _$$RedirectFAQImplCopyWith(
+          _$RedirectFAQImpl value, $Res Function(_$RedirectFAQImpl) then) =
+      __$$RedirectFAQImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_RedirectFAQCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectFAQ>
-    implements _$$_RedirectFAQCopyWith<$Res> {
-  __$$_RedirectFAQCopyWithImpl(
-      _$_RedirectFAQ _value, $Res Function(_$_RedirectFAQ) _then)
+class __$$RedirectFAQImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectFAQImpl>
+    implements _$$RedirectFAQImplCopyWith<$Res> {
+  __$$RedirectFAQImplCopyWithImpl(
+      _$RedirectFAQImpl _value, $Res Function(_$RedirectFAQImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_RedirectFAQ implements _RedirectFAQ {
-  const _$_RedirectFAQ();
+class _$RedirectFAQImpl implements _RedirectFAQ {
+  const _$RedirectFAQImpl();
 
   @override
   String toString() {
@@ -2948,9 +3121,9 @@ class _$_RedirectFAQ implements _RedirectFAQ {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_RedirectFAQ);
+        (other.runtimeType == runtimeType && other is _$RedirectFAQImpl);
   }
 
   @override
@@ -2960,10 +3133,12 @@ class _$_RedirectFAQ implements _RedirectFAQ {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -2986,9 +3161,11 @@ class _$_RedirectFAQ implements _RedirectFAQ {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -3010,9 +3187,11 @@ class _$_RedirectFAQ implements _RedirectFAQ {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -3113,29 +3292,29 @@ class _$_RedirectFAQ implements _RedirectFAQ {
 }
 
 abstract class _RedirectFAQ implements DeepLinkingState {
-  const factory _RedirectFAQ() = _$_RedirectFAQ;
+  const factory _RedirectFAQ() = _$RedirectFAQImpl;
 }
 
 /// @nodoc
-abstract class _$$_RedirectAboutUsCopyWith<$Res> {
-  factory _$$_RedirectAboutUsCopyWith(
-          _$_RedirectAboutUs value, $Res Function(_$_RedirectAboutUs) then) =
-      __$$_RedirectAboutUsCopyWithImpl<$Res>;
+abstract class _$$RedirectAboutUsImplCopyWith<$Res> {
+  factory _$$RedirectAboutUsImplCopyWith(_$RedirectAboutUsImpl value,
+          $Res Function(_$RedirectAboutUsImpl) then) =
+      __$$RedirectAboutUsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_RedirectAboutUsCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectAboutUs>
-    implements _$$_RedirectAboutUsCopyWith<$Res> {
-  __$$_RedirectAboutUsCopyWithImpl(
-      _$_RedirectAboutUs _value, $Res Function(_$_RedirectAboutUs) _then)
+class __$$RedirectAboutUsImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectAboutUsImpl>
+    implements _$$RedirectAboutUsImplCopyWith<$Res> {
+  __$$RedirectAboutUsImplCopyWithImpl(
+      _$RedirectAboutUsImpl _value, $Res Function(_$RedirectAboutUsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_RedirectAboutUs implements _RedirectAboutUs {
-  const _$_RedirectAboutUs();
+class _$RedirectAboutUsImpl implements _RedirectAboutUs {
+  const _$RedirectAboutUsImpl();
 
   @override
   String toString() {
@@ -3143,9 +3322,9 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_RedirectAboutUs);
+        (other.runtimeType == runtimeType && other is _$RedirectAboutUsImpl);
   }
 
   @override
@@ -3155,10 +3334,12 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -3181,9 +3362,11 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -3205,9 +3388,11 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -3308,24 +3493,24 @@ class _$_RedirectAboutUs implements _RedirectAboutUs {
 }
 
 abstract class _RedirectAboutUs implements DeepLinkingState {
-  const factory _RedirectAboutUs() = _$_RedirectAboutUs;
+  const factory _RedirectAboutUs() = _$RedirectAboutUsImpl;
 }
 
 /// @nodoc
-abstract class _$$_RedirectContactUsCopyWith<$Res> {
-  factory _$$_RedirectContactUsCopyWith(_$_RedirectContactUs value,
-          $Res Function(_$_RedirectContactUs) then) =
-      __$$_RedirectContactUsCopyWithImpl<$Res>;
+abstract class _$$RedirectContactUsImplCopyWith<$Res> {
+  factory _$$RedirectContactUsImplCopyWith(_$RedirectContactUsImpl value,
+          $Res Function(_$RedirectContactUsImpl) then) =
+      __$$RedirectContactUsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AppMarket market});
 }
 
 /// @nodoc
-class __$$_RedirectContactUsCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectContactUs>
-    implements _$$_RedirectContactUsCopyWith<$Res> {
-  __$$_RedirectContactUsCopyWithImpl(
-      _$_RedirectContactUs _value, $Res Function(_$_RedirectContactUs) _then)
+class __$$RedirectContactUsImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectContactUsImpl>
+    implements _$$RedirectContactUsImplCopyWith<$Res> {
+  __$$RedirectContactUsImplCopyWithImpl(_$RedirectContactUsImpl _value,
+      $Res Function(_$RedirectContactUsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3333,7 +3518,7 @@ class __$$_RedirectContactUsCopyWithImpl<$Res>
   $Res call({
     Object? market = null,
   }) {
-    return _then(_$_RedirectContactUs(
+    return _then(_$RedirectContactUsImpl(
       null == market
           ? _value.market
           : market // ignore: cast_nullable_to_non_nullable
@@ -3344,8 +3529,8 @@ class __$$_RedirectContactUsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RedirectContactUs implements _RedirectContactUs {
-  const _$_RedirectContactUs(this.market);
+class _$RedirectContactUsImpl implements _RedirectContactUs {
+  const _$RedirectContactUsImpl(this.market);
 
   @override
   final AppMarket market;
@@ -3356,10 +3541,10 @@ class _$_RedirectContactUs implements _RedirectContactUs {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectContactUs &&
+            other is _$RedirectContactUsImpl &&
             (identical(other.market, market) || other.market == market));
   }
 
@@ -3369,18 +3554,20 @@ class _$_RedirectContactUs implements _RedirectContactUs {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectContactUsCopyWith<_$_RedirectContactUs> get copyWith =>
-      __$$_RedirectContactUsCopyWithImpl<_$_RedirectContactUs>(
+  _$$RedirectContactUsImplCopyWith<_$RedirectContactUsImpl> get copyWith =>
+      __$$RedirectContactUsImplCopyWithImpl<_$RedirectContactUsImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -3403,9 +3590,11 @@ class _$_RedirectContactUs implements _RedirectContactUs {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -3427,9 +3616,11 @@ class _$_RedirectContactUs implements _RedirectContactUs {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -3531,18 +3722,19 @@ class _$_RedirectContactUs implements _RedirectContactUs {
 
 abstract class _RedirectContactUs implements DeepLinkingState {
   const factory _RedirectContactUs(final AppMarket market) =
-      _$_RedirectContactUs;
+      _$RedirectContactUsImpl;
 
   AppMarket get market;
   @JsonKey(ignore: true)
-  _$$_RedirectContactUsCopyWith<_$_RedirectContactUs> get copyWith =>
+  _$$RedirectContactUsImplCopyWith<_$RedirectContactUsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ApiFailure failure});
 
@@ -3550,10 +3742,11 @@ abstract class _$$_ErrorCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_Error>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3561,7 +3754,7 @@ class __$$_ErrorCopyWithImpl<$Res>
   $Res call({
     Object? failure = null,
   }) {
-    return _then(_$_Error(
+    return _then(_$ErrorImpl(
       null == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -3580,8 +3773,8 @@ class __$$_ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error implements _Error {
-  const _$_Error(this.failure);
+class _$ErrorImpl implements _Error {
+  const _$ErrorImpl(this.failure);
 
   @override
   final ApiFailure failure;
@@ -3592,10 +3785,10 @@ class _$_Error implements _Error {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Error &&
+            other is _$ErrorImpl &&
             (identical(other.failure, failure) || other.failure == failure));
   }
 
@@ -3605,17 +3798,19 @@ class _$_Error implements _Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -3638,9 +3833,11 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -3662,9 +3859,11 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -3765,19 +3964,20 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements DeepLinkingState {
-  const factory _Error(final ApiFailure failure) = _$_Error;
+  const factory _Error(final ApiFailure failure) = _$ErrorImpl;
 
   ApiFailure get failure;
   @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RedirectResetPasswordCopyWith<$Res> {
-  factory _$$_RedirectResetPasswordCopyWith(_$_RedirectResetPassword value,
-          $Res Function(_$_RedirectResetPassword) then) =
-      __$$_RedirectResetPasswordCopyWithImpl<$Res>;
+abstract class _$$RedirectResetPasswordImplCopyWith<$Res> {
+  factory _$$RedirectResetPasswordImplCopyWith(
+          _$RedirectResetPasswordImpl value,
+          $Res Function(_$RedirectResetPasswordImpl) then) =
+      __$$RedirectResetPasswordImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ResetPasswordCred resetPasswordCred});
 
@@ -3785,11 +3985,11 @@ abstract class _$$_RedirectResetPasswordCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_RedirectResetPasswordCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectResetPassword>
-    implements _$$_RedirectResetPasswordCopyWith<$Res> {
-  __$$_RedirectResetPasswordCopyWithImpl(_$_RedirectResetPassword _value,
-      $Res Function(_$_RedirectResetPassword) _then)
+class __$$RedirectResetPasswordImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectResetPasswordImpl>
+    implements _$$RedirectResetPasswordImplCopyWith<$Res> {
+  __$$RedirectResetPasswordImplCopyWithImpl(_$RedirectResetPasswordImpl _value,
+      $Res Function(_$RedirectResetPasswordImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3797,7 +3997,7 @@ class __$$_RedirectResetPasswordCopyWithImpl<$Res>
   $Res call({
     Object? resetPasswordCred = null,
   }) {
-    return _then(_$_RedirectResetPassword(
+    return _then(_$RedirectResetPasswordImpl(
       null == resetPasswordCred
           ? _value.resetPasswordCred
           : resetPasswordCred // ignore: cast_nullable_to_non_nullable
@@ -3816,8 +4016,8 @@ class __$$_RedirectResetPasswordCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RedirectResetPassword implements _RedirectResetPassword {
-  const _$_RedirectResetPassword(this.resetPasswordCred);
+class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
+  const _$RedirectResetPasswordImpl(this.resetPasswordCred);
 
   @override
   final ResetPasswordCred resetPasswordCred;
@@ -3828,10 +4028,10 @@ class _$_RedirectResetPassword implements _RedirectResetPassword {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RedirectResetPassword &&
+            other is _$RedirectResetPasswordImpl &&
             (identical(other.resetPasswordCred, resetPasswordCred) ||
                 other.resetPasswordCred == resetPasswordCred));
   }
@@ -3842,18 +4042,20 @@ class _$_RedirectResetPassword implements _RedirectResetPassword {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RedirectResetPasswordCopyWith<_$_RedirectResetPassword> get copyWith =>
-      __$$_RedirectResetPasswordCopyWithImpl<_$_RedirectResetPassword>(
-          this, _$identity);
+  _$$RedirectResetPasswordImplCopyWith<_$RedirectResetPasswordImpl>
+      get copyWith => __$$RedirectResetPasswordImplCopyWithImpl<
+          _$RedirectResetPasswordImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(EzrxLink link) linkPending,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectBundleDetail,
-    required TResult Function(MaterialNumber materialNumber)
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
         redirectProductDetail,
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
@@ -3876,9 +4078,11 @@ class _$_RedirectResetPassword implements _RedirectResetPassword {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(EzrxLink link)? linkPending,
-    TResult? Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult? Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -3900,9 +4104,11 @@ class _$_RedirectResetPassword implements _RedirectResetPassword {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(EzrxLink link)? linkPending,
-    TResult Function(MaterialNumber materialNumber)? redirectBundleDetail,
-    TResult Function(MaterialNumber materialNumber)? redirectProductDetail,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
@@ -4004,10 +4210,10 @@ class _$_RedirectResetPassword implements _RedirectResetPassword {
 
 abstract class _RedirectResetPassword implements DeepLinkingState {
   const factory _RedirectResetPassword(
-      final ResetPasswordCred resetPasswordCred) = _$_RedirectResetPassword;
+      final ResetPasswordCred resetPasswordCred) = _$RedirectResetPasswordImpl;
 
   ResetPasswordCred get resetPasswordCred;
   @JsonKey(ignore: true)
-  _$$_RedirectResetPasswordCopyWith<_$_RedirectResetPassword> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RedirectResetPasswordImplCopyWith<_$RedirectResetPasswordImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

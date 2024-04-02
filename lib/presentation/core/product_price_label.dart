@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -37,7 +36,6 @@ class ProductPriceLabel extends StatelessWidget {
             context.read<EligibilityBloc>().state.salesOrgConfigs;
         if (itemPrice != null) {
           final priceAggregate = PriceAggregate(
-            banner: EZReachBanner.empty(),
             price: itemPrice,
             materialInfo: materialInfo,
             salesOrgConfig: salesOrgConfig,

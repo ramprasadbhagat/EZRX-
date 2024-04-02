@@ -12,14 +12,13 @@ part of 'price_aggregate.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PriceAggregate {
   Price get price => throw _privateConstructorUsedError;
   MaterialInfo get materialInfo => throw _privateConstructorUsedError;
   Bundle get bundle => throw _privateConstructorUsedError;
-  EZReachBanner get banner => throw _privateConstructorUsedError;
   SalesOrganisationConfigs get salesOrgConfig =>
       throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
@@ -51,7 +50,6 @@ abstract class $PriceAggregateCopyWith<$Res> {
       {Price price,
       MaterialInfo materialInfo,
       Bundle bundle,
-      EZReachBanner banner,
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
       int discountedMaterialCount,
@@ -68,7 +66,6 @@ abstract class $PriceAggregateCopyWith<$Res> {
   $PriceCopyWith<$Res> get price;
   $MaterialInfoCopyWith<$Res> get materialInfo;
   $BundleCopyWith<$Res> get bundle;
-  $EZReachBannerCopyWith<$Res> get banner;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
   $StockInfoCopyWith<$Res> get stockInfo;
   $TenderContractCopyWith<$Res> get tenderContract;
@@ -91,7 +88,6 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
     Object? price = null,
     Object? materialInfo = null,
     Object? bundle = null,
-    Object? banner = null,
     Object? salesOrgConfig = null,
     Object? quantity = null,
     Object? discountedMaterialCount = null,
@@ -118,10 +114,6 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
           ? _value.bundle
           : bundle // ignore: cast_nullable_to_non_nullable
               as Bundle,
-      banner: null == banner
-          ? _value.banner
-          : banner // ignore: cast_nullable_to_non_nullable
-              as EZReachBanner,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -199,14 +191,6 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
 
   @override
   @pragma('vm:prefer-inline')
-  $EZReachBannerCopyWith<$Res> get banner {
-    return $EZReachBannerCopyWith<$Res>(_value.banner, (value) {
-      return _then(_value.copyWith(banner: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
     return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
         (value) {
@@ -240,18 +224,17 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
 }
 
 /// @nodoc
-abstract class _$$_PriceAggregateCopyWith<$Res>
+abstract class _$$PriceAggregateImplCopyWith<$Res>
     implements $PriceAggregateCopyWith<$Res> {
-  factory _$$_PriceAggregateCopyWith(
-          _$_PriceAggregate value, $Res Function(_$_PriceAggregate) then) =
-      __$$_PriceAggregateCopyWithImpl<$Res>;
+  factory _$$PriceAggregateImplCopyWith(_$PriceAggregateImpl value,
+          $Res Function(_$PriceAggregateImpl) then) =
+      __$$PriceAggregateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {Price price,
       MaterialInfo materialInfo,
       Bundle bundle,
-      EZReachBanner banner,
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
       int discountedMaterialCount,
@@ -272,8 +255,6 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
   @override
   $BundleCopyWith<$Res> get bundle;
   @override
-  $EZReachBannerCopyWith<$Res> get banner;
-  @override
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
   @override
   $StockInfoCopyWith<$Res> get stockInfo;
@@ -284,11 +265,11 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceAggregateCopyWithImpl<$Res>
-    extends _$PriceAggregateCopyWithImpl<$Res, _$_PriceAggregate>
-    implements _$$_PriceAggregateCopyWith<$Res> {
-  __$$_PriceAggregateCopyWithImpl(
-      _$_PriceAggregate _value, $Res Function(_$_PriceAggregate) _then)
+class __$$PriceAggregateImplCopyWithImpl<$Res>
+    extends _$PriceAggregateCopyWithImpl<$Res, _$PriceAggregateImpl>
+    implements _$$PriceAggregateImplCopyWith<$Res> {
+  __$$PriceAggregateImplCopyWithImpl(
+      _$PriceAggregateImpl _value, $Res Function(_$PriceAggregateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -297,7 +278,6 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
     Object? price = null,
     Object? materialInfo = null,
     Object? bundle = null,
-    Object? banner = null,
     Object? salesOrgConfig = null,
     Object? quantity = null,
     Object? discountedMaterialCount = null,
@@ -311,7 +291,7 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
     Object? comboMaterials = null,
     Object? maximumQty = null,
   }) {
-    return _then(_$_PriceAggregate(
+    return _then(_$PriceAggregateImpl(
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -324,10 +304,6 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
           ? _value.bundle
           : bundle // ignore: cast_nullable_to_non_nullable
               as Bundle,
-      banner: null == banner
-          ? _value.banner
-          : banner // ignore: cast_nullable_to_non_nullable
-              as EZReachBanner,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -382,12 +358,11 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PriceAggregate extends _PriceAggregate {
-  const _$_PriceAggregate(
+class _$PriceAggregateImpl extends _PriceAggregate {
+  const _$PriceAggregateImpl(
       {required this.price,
       required this.materialInfo,
       required this.bundle,
-      required this.banner,
       required this.salesOrgConfig,
       required this.quantity,
       this.discountedMaterialCount = 0,
@@ -411,8 +386,6 @@ class _$_PriceAggregate extends _PriceAggregate {
   final MaterialInfo materialInfo;
   @override
   final Bundle bundle;
-  @override
-  final EZReachBanner banner;
   @override
   final SalesOrganisationConfigs salesOrgConfig;
   @override
@@ -463,19 +436,18 @@ class _$_PriceAggregate extends _PriceAggregate {
 
   @override
   String toString() {
-    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, banner: $banner, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList, bonusSampleItems: $bonusSampleItems, comboMaterials: $comboMaterials, maximumQty: $maximumQty)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList, bonusSampleItems: $bonusSampleItems, comboMaterials: $comboMaterials, maximumQty: $maximumQty)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceAggregate &&
+            other is _$PriceAggregateImpl &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.materialInfo, materialInfo) ||
                 other.materialInfo == materialInfo) &&
             (identical(other.bundle, bundle) || other.bundle == bundle) &&
-            (identical(other.banner, banner) || other.banner == banner) &&
             (identical(other.salesOrgConfig, salesOrgConfig) ||
                 other.salesOrgConfig == salesOrgConfig) &&
             (identical(other.quantity, quantity) ||
@@ -509,7 +481,6 @@ class _$_PriceAggregate extends _PriceAggregate {
       price,
       materialInfo,
       bundle,
-      banner,
       salesOrgConfig,
       quantity,
       discountedMaterialCount,
@@ -526,8 +497,9 @@ class _$_PriceAggregate extends _PriceAggregate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceAggregateCopyWith<_$_PriceAggregate> get copyWith =>
-      __$$_PriceAggregateCopyWithImpl<_$_PriceAggregate>(this, _$identity);
+  _$$PriceAggregateImplCopyWith<_$PriceAggregateImpl> get copyWith =>
+      __$$PriceAggregateImplCopyWithImpl<_$PriceAggregateImpl>(
+          this, _$identity);
 }
 
 abstract class _PriceAggregate extends PriceAggregate {
@@ -535,7 +507,6 @@ abstract class _PriceAggregate extends PriceAggregate {
       {required final Price price,
       required final MaterialInfo materialInfo,
       required final Bundle bundle,
-      required final EZReachBanner banner,
       required final SalesOrganisationConfigs salesOrgConfig,
       required final int quantity,
       final int discountedMaterialCount,
@@ -547,7 +518,7 @@ abstract class _PriceAggregate extends PriceAggregate {
       final List<StockInfo> stockInfoList,
       required final List<BonusSampleItem> bonusSampleItems,
       required final List<ComboMaterialItem> comboMaterials,
-      required final int maximumQty}) = _$_PriceAggregate;
+      required final int maximumQty}) = _$PriceAggregateImpl;
   const _PriceAggregate._() : super._();
 
   @override
@@ -556,8 +527,6 @@ abstract class _PriceAggregate extends PriceAggregate {
   MaterialInfo get materialInfo;
   @override
   Bundle get bundle;
-  @override
-  EZReachBanner get banner;
   @override
   SalesOrganisationConfigs get salesOrgConfig;
   @override
@@ -584,6 +553,6 @@ abstract class _PriceAggregate extends PriceAggregate {
   int get maximumQty;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceAggregateCopyWith<_$_PriceAggregate> get copyWith =>
+  _$$PriceAggregateImplCopyWith<_$PriceAggregateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

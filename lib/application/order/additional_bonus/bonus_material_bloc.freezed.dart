@@ -12,7 +12,7 @@ part of 'bonus_material_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BonusMaterialEvent {
@@ -175,9 +175,10 @@ class _$BonusMaterialEventCopyWithImpl<$Res, $Val extends BonusMaterialEvent>
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -198,10 +199,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -216,7 +218,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? isGimmickMaterialEnabled = null,
     Object? principalData = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -303,8 +305,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl(
       {required this.salesOrganisation,
       required this.configs,
       required this.customerCodeInfo,
@@ -337,10 +339,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.configs, configs) || other.configs == configs) &&
@@ -373,8 +375,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -551,7 +553,7 @@ abstract class _Fetch implements BonusMaterialEvent {
       required final User user,
       required final SearchKey searchKey,
       required final bool isGimmickMaterialEnabled,
-      required final PrincipalData principalData}) = _$_Fetch;
+      required final PrincipalData principalData}) = _$FetchImpl;
 
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
@@ -562,15 +564,15 @@ abstract class _Fetch implements BonusMaterialEvent {
   bool get isGimmickMaterialEnabled;
   PrincipalData get principalData;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreBonusItemCopyWith<$Res> {
-  factory _$$_LoadMoreBonusItemCopyWith(_$_LoadMoreBonusItem value,
-          $Res Function(_$_LoadMoreBonusItem) then) =
-      __$$_LoadMoreBonusItemCopyWithImpl<$Res>;
+abstract class _$$LoadMoreBonusItemImplCopyWith<$Res> {
+  factory _$$LoadMoreBonusItemImplCopyWith(_$LoadMoreBonusItemImpl value,
+          $Res Function(_$LoadMoreBonusItemImpl) then) =
+      __$$LoadMoreBonusItemImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -590,11 +592,11 @@ abstract class _$$_LoadMoreBonusItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoadMoreBonusItemCopyWithImpl<$Res>
-    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_LoadMoreBonusItem>
-    implements _$$_LoadMoreBonusItemCopyWith<$Res> {
-  __$$_LoadMoreBonusItemCopyWithImpl(
-      _$_LoadMoreBonusItem _value, $Res Function(_$_LoadMoreBonusItem) _then)
+class __$$LoadMoreBonusItemImplCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$LoadMoreBonusItemImpl>
+    implements _$$LoadMoreBonusItemImplCopyWith<$Res> {
+  __$$LoadMoreBonusItemImplCopyWithImpl(_$LoadMoreBonusItemImpl _value,
+      $Res Function(_$LoadMoreBonusItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -608,7 +610,7 @@ class __$$_LoadMoreBonusItemCopyWithImpl<$Res>
     Object? principalData = null,
     Object? isGimmickMaterialEnabled = null,
   }) {
-    return _then(_$_LoadMoreBonusItem(
+    return _then(_$LoadMoreBonusItemImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -691,8 +693,8 @@ class __$$_LoadMoreBonusItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
-  _$_LoadMoreBonusItem(
+class _$LoadMoreBonusItemImpl implements _LoadMoreBonusItem {
+  _$LoadMoreBonusItemImpl(
       {required this.salesOrganisation,
       required this.configs,
       required this.customerCodeInfo,
@@ -722,10 +724,10 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadMoreBonusItem &&
+            other is _$LoadMoreBonusItemImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.configs, configs) || other.configs == configs) &&
@@ -755,8 +757,8 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadMoreBonusItemCopyWith<_$_LoadMoreBonusItem> get copyWith =>
-      __$$_LoadMoreBonusItemCopyWithImpl<_$_LoadMoreBonusItem>(
+  _$$LoadMoreBonusItemImplCopyWith<_$LoadMoreBonusItemImpl> get copyWith =>
+      __$$LoadMoreBonusItemImplCopyWithImpl<_$LoadMoreBonusItemImpl>(
           this, _$identity);
 
   @override
@@ -933,7 +935,7 @@ abstract class _LoadMoreBonusItem implements BonusMaterialEvent {
       required final ShipToInfo shipToInfo,
       required final User user,
       required final PrincipalData principalData,
-      required final bool isGimmickMaterialEnabled}) = _$_LoadMoreBonusItem;
+      required final bool isGimmickMaterialEnabled}) = _$LoadMoreBonusItemImpl;
 
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
@@ -943,15 +945,16 @@ abstract class _LoadMoreBonusItem implements BonusMaterialEvent {
   PrincipalData get principalData;
   bool get isGimmickMaterialEnabled;
   @JsonKey(ignore: true)
-  _$$_LoadMoreBonusItemCopyWith<_$_LoadMoreBonusItem> get copyWith =>
+  _$$LoadMoreBonusItemImplCopyWith<_$LoadMoreBonusItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ValidateBonusQuantityCopyWith<$Res> {
-  factory _$$_ValidateBonusQuantityCopyWith(_$_ValidateBonusQuantity value,
-          $Res Function(_$_ValidateBonusQuantity) then) =
-      __$$_ValidateBonusQuantityCopyWithImpl<$Res>;
+abstract class _$$ValidateBonusQuantityImplCopyWith<$Res> {
+  factory _$$ValidateBonusQuantityImplCopyWith(
+          _$ValidateBonusQuantityImpl value,
+          $Res Function(_$ValidateBonusQuantityImpl) then) =
+      __$$ValidateBonusQuantityImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialInfo bonusMaterial});
 
@@ -959,11 +962,11 @@ abstract class _$$_ValidateBonusQuantityCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ValidateBonusQuantityCopyWithImpl<$Res>
-    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_ValidateBonusQuantity>
-    implements _$$_ValidateBonusQuantityCopyWith<$Res> {
-  __$$_ValidateBonusQuantityCopyWithImpl(_$_ValidateBonusQuantity _value,
-      $Res Function(_$_ValidateBonusQuantity) _then)
+class __$$ValidateBonusQuantityImplCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$ValidateBonusQuantityImpl>
+    implements _$$ValidateBonusQuantityImplCopyWith<$Res> {
+  __$$ValidateBonusQuantityImplCopyWithImpl(_$ValidateBonusQuantityImpl _value,
+      $Res Function(_$ValidateBonusQuantityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -971,7 +974,7 @@ class __$$_ValidateBonusQuantityCopyWithImpl<$Res>
   $Res call({
     Object? bonusMaterial = null,
   }) {
-    return _then(_$_ValidateBonusQuantity(
+    return _then(_$ValidateBonusQuantityImpl(
       bonusMaterial: null == bonusMaterial
           ? _value.bonusMaterial
           : bonusMaterial // ignore: cast_nullable_to_non_nullable
@@ -990,8 +993,8 @@ class __$$_ValidateBonusQuantityCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
-  _$_ValidateBonusQuantity({required this.bonusMaterial});
+class _$ValidateBonusQuantityImpl implements _ValidateBonusQuantity {
+  _$ValidateBonusQuantityImpl({required this.bonusMaterial});
 
   @override
   final MaterialInfo bonusMaterial;
@@ -1002,10 +1005,10 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ValidateBonusQuantity &&
+            other is _$ValidateBonusQuantityImpl &&
             (identical(other.bonusMaterial, bonusMaterial) ||
                 other.bonusMaterial == bonusMaterial));
   }
@@ -1016,9 +1019,9 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ValidateBonusQuantityCopyWith<_$_ValidateBonusQuantity> get copyWith =>
-      __$$_ValidateBonusQuantityCopyWithImpl<_$_ValidateBonusQuantity>(
-          this, _$identity);
+  _$$ValidateBonusQuantityImplCopyWith<_$ValidateBonusQuantityImpl>
+      get copyWith => __$$ValidateBonusQuantityImplCopyWithImpl<
+          _$ValidateBonusQuantityImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1185,19 +1188,20 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
 
 abstract class _ValidateBonusQuantity implements BonusMaterialEvent {
   factory _ValidateBonusQuantity({required final MaterialInfo bonusMaterial}) =
-      _$_ValidateBonusQuantity;
+      _$ValidateBonusQuantityImpl;
 
   MaterialInfo get bonusMaterial;
   @JsonKey(ignore: true)
-  _$$_ValidateBonusQuantityCopyWith<_$_ValidateBonusQuantity> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ValidateBonusQuantityImplCopyWith<_$ValidateBonusQuantityImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateBonusItemQuantityCopyWith<$Res> {
-  factory _$$_UpdateBonusItemQuantityCopyWith(_$_UpdateBonusItemQuantity value,
-          $Res Function(_$_UpdateBonusItemQuantity) then) =
-      __$$_UpdateBonusItemQuantityCopyWithImpl<$Res>;
+abstract class _$$UpdateBonusItemQuantityImplCopyWith<$Res> {
+  factory _$$UpdateBonusItemQuantityImplCopyWith(
+          _$UpdateBonusItemQuantityImpl value,
+          $Res Function(_$UpdateBonusItemQuantityImpl) then) =
+      __$$UpdateBonusItemQuantityImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialInfo updatedBonusItem});
 
@@ -1205,11 +1209,13 @@ abstract class _$$_UpdateBonusItemQuantityCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateBonusItemQuantityCopyWithImpl<$Res>
-    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_UpdateBonusItemQuantity>
-    implements _$$_UpdateBonusItemQuantityCopyWith<$Res> {
-  __$$_UpdateBonusItemQuantityCopyWithImpl(_$_UpdateBonusItemQuantity _value,
-      $Res Function(_$_UpdateBonusItemQuantity) _then)
+class __$$UpdateBonusItemQuantityImplCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res,
+        _$UpdateBonusItemQuantityImpl>
+    implements _$$UpdateBonusItemQuantityImplCopyWith<$Res> {
+  __$$UpdateBonusItemQuantityImplCopyWithImpl(
+      _$UpdateBonusItemQuantityImpl _value,
+      $Res Function(_$UpdateBonusItemQuantityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1217,7 +1223,7 @@ class __$$_UpdateBonusItemQuantityCopyWithImpl<$Res>
   $Res call({
     Object? updatedBonusItem = null,
   }) {
-    return _then(_$_UpdateBonusItemQuantity(
+    return _then(_$UpdateBonusItemQuantityImpl(
       updatedBonusItem: null == updatedBonusItem
           ? _value.updatedBonusItem
           : updatedBonusItem // ignore: cast_nullable_to_non_nullable
@@ -1236,8 +1242,8 @@ class __$$_UpdateBonusItemQuantityCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
-  _$_UpdateBonusItemQuantity({required this.updatedBonusItem});
+class _$UpdateBonusItemQuantityImpl implements _UpdateBonusItemQuantity {
+  _$UpdateBonusItemQuantityImpl({required this.updatedBonusItem});
 
   @override
   final MaterialInfo updatedBonusItem;
@@ -1248,10 +1254,10 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateBonusItemQuantity &&
+            other is _$UpdateBonusItemQuantityImpl &&
             (identical(other.updatedBonusItem, updatedBonusItem) ||
                 other.updatedBonusItem == updatedBonusItem));
   }
@@ -1262,10 +1268,9 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateBonusItemQuantityCopyWith<_$_UpdateBonusItemQuantity>
-      get copyWith =>
-          __$$_UpdateBonusItemQuantityCopyWithImpl<_$_UpdateBonusItemQuantity>(
-              this, _$identity);
+  _$$UpdateBonusItemQuantityImplCopyWith<_$UpdateBonusItemQuantityImpl>
+      get copyWith => __$$UpdateBonusItemQuantityImplCopyWithImpl<
+          _$UpdateBonusItemQuantityImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1433,29 +1438,30 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
 abstract class _UpdateBonusItemQuantity implements BonusMaterialEvent {
   factory _UpdateBonusItemQuantity(
           {required final MaterialInfo updatedBonusItem}) =
-      _$_UpdateBonusItemQuantity;
+      _$UpdateBonusItemQuantityImpl;
 
   MaterialInfo get updatedBonusItem;
   @JsonKey(ignore: true)
-  _$$_UpdateBonusItemQuantityCopyWith<_$_UpdateBonusItemQuantity>
+  _$$UpdateBonusItemQuantityImplCopyWith<_$UpdateBonusItemQuantityImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateAddedBonusItemsCopyWith<$Res> {
-  factory _$$_UpdateAddedBonusItemsCopyWith(_$_UpdateAddedBonusItems value,
-          $Res Function(_$_UpdateAddedBonusItems) then) =
-      __$$_UpdateAddedBonusItemsCopyWithImpl<$Res>;
+abstract class _$$UpdateAddedBonusItemsImplCopyWith<$Res> {
+  factory _$$UpdateAddedBonusItemsImplCopyWith(
+          _$UpdateAddedBonusItemsImpl value,
+          $Res Function(_$UpdateAddedBonusItemsImpl) then) =
+      __$$UpdateAddedBonusItemsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<BonusSampleItem> addedBonusItemList});
 }
 
 /// @nodoc
-class __$$_UpdateAddedBonusItemsCopyWithImpl<$Res>
-    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_UpdateAddedBonusItems>
-    implements _$$_UpdateAddedBonusItemsCopyWith<$Res> {
-  __$$_UpdateAddedBonusItemsCopyWithImpl(_$_UpdateAddedBonusItems _value,
-      $Res Function(_$_UpdateAddedBonusItems) _then)
+class __$$UpdateAddedBonusItemsImplCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$UpdateAddedBonusItemsImpl>
+    implements _$$UpdateAddedBonusItemsImplCopyWith<$Res> {
+  __$$UpdateAddedBonusItemsImplCopyWithImpl(_$UpdateAddedBonusItemsImpl _value,
+      $Res Function(_$UpdateAddedBonusItemsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1463,7 +1469,7 @@ class __$$_UpdateAddedBonusItemsCopyWithImpl<$Res>
   $Res call({
     Object? addedBonusItemList = null,
   }) {
-    return _then(_$_UpdateAddedBonusItems(
+    return _then(_$UpdateAddedBonusItemsImpl(
       addedBonusItemList: null == addedBonusItemList
           ? _value._addedBonusItemList
           : addedBonusItemList // ignore: cast_nullable_to_non_nullable
@@ -1474,8 +1480,8 @@ class __$$_UpdateAddedBonusItemsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
-  _$_UpdateAddedBonusItems(
+class _$UpdateAddedBonusItemsImpl implements _UpdateAddedBonusItems {
+  _$UpdateAddedBonusItemsImpl(
       {required final List<BonusSampleItem> addedBonusItemList})
       : _addedBonusItemList = addedBonusItemList;
 
@@ -1494,10 +1500,10 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateAddedBonusItems &&
+            other is _$UpdateAddedBonusItemsImpl &&
             const DeepCollectionEquality()
                 .equals(other._addedBonusItemList, _addedBonusItemList));
   }
@@ -1509,9 +1515,9 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateAddedBonusItemsCopyWith<_$_UpdateAddedBonusItems> get copyWith =>
-      __$$_UpdateAddedBonusItemsCopyWithImpl<_$_UpdateAddedBonusItems>(
-          this, _$identity);
+  _$$UpdateAddedBonusItemsImplCopyWith<_$UpdateAddedBonusItemsImpl>
+      get copyWith => __$$UpdateAddedBonusItemsImplCopyWithImpl<
+          _$UpdateAddedBonusItemsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1679,19 +1685,19 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
 abstract class _UpdateAddedBonusItems implements BonusMaterialEvent {
   factory _UpdateAddedBonusItems(
           {required final List<BonusSampleItem> addedBonusItemList}) =
-      _$_UpdateAddedBonusItems;
+      _$UpdateAddedBonusItemsImpl;
 
   List<BonusSampleItem> get addedBonusItemList;
   @JsonKey(ignore: true)
-  _$$_UpdateAddedBonusItemsCopyWith<_$_UpdateAddedBonusItems> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UpdateAddedBonusItemsImplCopyWith<_$UpdateAddedBonusItemsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateProductStockCopyWith<$Res> {
-  factory _$$_UpdateProductStockCopyWith(_$_UpdateProductStock value,
-          $Res Function(_$_UpdateProductStock) then) =
-      __$$_UpdateProductStockCopyWithImpl<$Res>;
+abstract class _$$UpdateProductStockImplCopyWith<$Res> {
+  factory _$$UpdateProductStockImplCopyWith(_$UpdateProductStockImpl value,
+          $Res Function(_$UpdateProductStockImpl) then) =
+      __$$UpdateProductStockImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -1707,11 +1713,11 @@ abstract class _$$_UpdateProductStockCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateProductStockCopyWithImpl<$Res>
-    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_UpdateProductStock>
-    implements _$$_UpdateProductStockCopyWith<$Res> {
-  __$$_UpdateProductStockCopyWithImpl(
-      _$_UpdateProductStock _value, $Res Function(_$_UpdateProductStock) _then)
+class __$$UpdateProductStockImplCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$UpdateProductStockImpl>
+    implements _$$UpdateProductStockImplCopyWith<$Res> {
+  __$$UpdateProductStockImplCopyWithImpl(_$UpdateProductStockImpl _value,
+      $Res Function(_$UpdateProductStockImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1723,7 +1729,7 @@ class __$$_UpdateProductStockCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? items = null,
   }) {
-    return _then(_$_UpdateProductStock(
+    return _then(_$UpdateProductStockImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -1782,8 +1788,8 @@ class __$$_UpdateProductStockCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateProductStock implements _UpdateProductStock {
-  const _$_UpdateProductStock(
+class _$UpdateProductStockImpl implements _UpdateProductStock {
+  const _$UpdateProductStockImpl(
       {required this.salesOrganisation,
       required this.configs,
       required this.customerCodeInfo,
@@ -1813,10 +1819,10 @@ class _$_UpdateProductStock implements _UpdateProductStock {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateProductStock &&
+            other is _$UpdateProductStockImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.configs, configs) || other.configs == configs) &&
@@ -1839,8 +1845,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateProductStockCopyWith<_$_UpdateProductStock> get copyWith =>
-      __$$_UpdateProductStockCopyWithImpl<_$_UpdateProductStock>(
+  _$$UpdateProductStockImplCopyWith<_$UpdateProductStockImpl> get copyWith =>
+      __$$UpdateProductStockImplCopyWithImpl<_$UpdateProductStockImpl>(
           this, _$identity);
 
   @override
@@ -2015,7 +2021,7 @@ abstract class _UpdateProductStock implements BonusMaterialEvent {
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final List<MaterialInfo> items}) = _$_UpdateProductStock;
+      required final List<MaterialInfo> items}) = _$UpdateProductStockImpl;
 
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
@@ -2023,7 +2029,7 @@ abstract class _UpdateProductStock implements BonusMaterialEvent {
   ShipToInfo get shipToInfo;
   List<MaterialInfo> get items;
   @JsonKey(ignore: true)
-  _$$_UpdateProductStockCopyWith<_$_UpdateProductStock> get copyWith =>
+  _$$UpdateProductStockImplCopyWith<_$UpdateProductStockImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2122,11 +2128,11 @@ class _$BonusMaterialStateCopyWithImpl<$Res, $Val extends BonusMaterialState>
 }
 
 /// @nodoc
-abstract class _$$_BonusMaterialStateCopyWith<$Res>
+abstract class _$$BonusMaterialStateImplCopyWith<$Res>
     implements $BonusMaterialStateCopyWith<$Res> {
-  factory _$$_BonusMaterialStateCopyWith(_$_BonusMaterialState value,
-          $Res Function(_$_BonusMaterialState) then) =
-      __$$_BonusMaterialStateCopyWithImpl<$Res>;
+  factory _$$BonusMaterialStateImplCopyWith(_$BonusMaterialStateImpl value,
+          $Res Function(_$BonusMaterialStateImpl) then) =
+      __$$BonusMaterialStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2141,11 +2147,11 @@ abstract class _$$_BonusMaterialStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BonusMaterialStateCopyWithImpl<$Res>
-    extends _$BonusMaterialStateCopyWithImpl<$Res, _$_BonusMaterialState>
-    implements _$$_BonusMaterialStateCopyWith<$Res> {
-  __$$_BonusMaterialStateCopyWithImpl(
-      _$_BonusMaterialState _value, $Res Function(_$_BonusMaterialState) _then)
+class __$$BonusMaterialStateImplCopyWithImpl<$Res>
+    extends _$BonusMaterialStateCopyWithImpl<$Res, _$BonusMaterialStateImpl>
+    implements _$$BonusMaterialStateImplCopyWith<$Res> {
+  __$$BonusMaterialStateImplCopyWithImpl(_$BonusMaterialStateImpl _value,
+      $Res Function(_$BonusMaterialStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2160,7 +2166,7 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
     Object? searchKey = null,
     Object? addedBonusItemsList = null,
   }) {
-    return _then(_$_BonusMaterialState(
+    return _then(_$BonusMaterialStateImpl(
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -2199,8 +2205,8 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BonusMaterialState extends _BonusMaterialState {
-  const _$_BonusMaterialState(
+class _$BonusMaterialStateImpl extends _BonusMaterialState {
+  const _$BonusMaterialStateImpl(
       {required this.isFetching,
       required this.isUpdatingStock,
       required this.failureOrSuccessOption,
@@ -2248,10 +2254,10 @@ class _$_BonusMaterialState extends _BonusMaterialState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BonusMaterialState &&
+            other is _$BonusMaterialStateImpl &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.isUpdatingStock, isUpdatingStock) ||
@@ -2285,8 +2291,8 @@ class _$_BonusMaterialState extends _BonusMaterialState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BonusMaterialStateCopyWith<_$_BonusMaterialState> get copyWith =>
-      __$$_BonusMaterialStateCopyWithImpl<_$_BonusMaterialState>(
+  _$$BonusMaterialStateImplCopyWith<_$BonusMaterialStateImpl> get copyWith =>
+      __$$BonusMaterialStateImplCopyWithImpl<_$BonusMaterialStateImpl>(
           this, _$identity);
 }
 
@@ -2300,7 +2306,7 @@ abstract class _BonusMaterialState extends BonusMaterialState {
       required final bool isBonusQtyValidated,
       required final SearchKey searchKey,
       required final List<BonusSampleItem>
-          addedBonusItemsList}) = _$_BonusMaterialState;
+          addedBonusItemsList}) = _$BonusMaterialStateImpl;
   const _BonusMaterialState._() : super._();
 
   @override
@@ -2321,6 +2327,6 @@ abstract class _BonusMaterialState extends BonusMaterialState {
   List<BonusSampleItem> get addedBonusItemsList;
   @override
   @JsonKey(ignore: true)
-  _$$_BonusMaterialStateCopyWith<_$_BonusMaterialState> get copyWith =>
+  _$$BonusMaterialStateImplCopyWith<_$BonusMaterialStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

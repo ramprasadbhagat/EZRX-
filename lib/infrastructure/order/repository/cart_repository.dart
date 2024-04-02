@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -18,6 +19,7 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
@@ -38,6 +40,7 @@ class CartRepository implements ICartRepository {
   final DiscountOverrideRemoteDataSource discountOverrideRemoteDataSource;
   final MixpanelService mixpanelService;
   final DeviceStorage deviceStorage;
+  final MaterialBannerStorage materialBannerStorage;
 
   CartRepository({
     required this.config,
@@ -48,6 +51,7 @@ class CartRepository implements ICartRepository {
     required this.cartLocalDataSource,
     required this.cartRemoteDataSource,
     required this.deviceStorage,
+    required this.materialBannerStorage,
   });
 
   @override
@@ -58,6 +62,7 @@ class CartRepository implements ICartRepository {
 
     try {
       await cartRemoteDataSource.deleteCart();
+      await materialBannerStorage.clear();
 
       return const Right(unit);
     } on Exception catch (e) {
@@ -444,6 +449,7 @@ class CartRepository implements ICartRepository {
     required ShipToInfo shipToInfo,
     required Language language,
     required RequestCounterOfferDetails counterOfferDetails,
+    EZReachBanner? banner,
   }) async {
     try {
       final products = [
@@ -476,6 +482,30 @@ class CartRepository implements ICartRepository {
           },
           (right) => right,
         );
+      }
+
+      if (product.quantity == 0) {
+        if (product.materialInfo.type.typeBundle) {
+          await materialBannerStorage.delete(
+            materialNumbers: product.bundle.materials
+                .map(
+                  (e) =>
+                      '${product.id.displayMatNo}_${e.materialNumber.displayMatNo}',
+                )
+                .toList(),
+          );
+        } else {
+          await materialBannerStorage.delete(
+            materialNumbers: [product.id.displayMatNo],
+          );
+        }
+      } else {
+        if (banner != null) {
+          await materialBannerStorage.set(
+            materialNumbers: [product.id.displayMatNo],
+            banner: banner,
+          );
+        }
       }
 
       return Right(productList);
@@ -544,6 +574,7 @@ class CartRepository implements ICartRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required Language language,
+    EZReachBanner? banner,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -571,6 +602,27 @@ class CartRepository implements ICartRepository {
           return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
         }).toList(),
       );
+      await materialBannerStorage.delete(
+        materialNumbers: product.bundle.materials
+            .where((item) => item.quantity.intValue == 0)
+            .map(
+              (e) =>
+                  '${product.id.displayMatNo}_${e.materialNumber.displayMatNo}',
+            )
+            .toList(),
+      );
+
+      if (banner != null) {
+        await materialBannerStorage.set(
+          materialNumbers: product.bundle.materials
+              .map(
+                (e) =>
+                    '${MaterialNumber(product.bundle.bundleCode).displayMatNo}_${e.materialNumber.displayMatNo}',
+              )
+              .toList(),
+          banner: banner,
+        );
+      }
 
       return Right(productList);
     } catch (e) {

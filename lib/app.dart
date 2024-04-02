@@ -68,6 +68,7 @@ import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
@@ -164,6 +165,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<ProductSuggestionHistoryStorage>().init();
   await locator<MixpanelService>().init();
   await locator<DatadogService>().init();
+  await locator<MaterialBannerStorage>().init();
 
   if (!kIsWeb) {
     await Wakelock.enable();

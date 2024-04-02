@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -38,8 +39,12 @@ part 'package:ezrxmobile/presentation/products/bundle_details/widget/outline_tex
 
 class BundleDetailPage extends StatefulWidget {
   final MaterialInfo materialInfo;
-  const BundleDetailPage({Key? key, required this.materialInfo})
-      : super(key: key);
+  final EZReachBanner? banner;
+  const BundleDetailPage({
+    Key? key,
+    required this.materialInfo,
+    this.banner,
+  }) : super(key: key);
 
   @override
   State<BundleDetailPage> createState() => _BundleDetailPageState();
@@ -141,7 +146,9 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
             const _BundleOfferDetails(),
           ],
         ),
-        bottomNavigationBar: const _AddToCartButton(),
+        bottomNavigationBar: _AddToCartButton(
+          banner: widget.banner,
+        ),
       ),
     );
   }
@@ -389,8 +396,10 @@ class _BundleOfferDetails extends StatelessWidget {
 }
 
 class _AddToCartButton extends StatelessWidget {
+  final EZReachBanner? banner;
   const _AddToCartButton({
     Key? key,
+    this.banner,
   }) : super(key: key);
 
   @override
@@ -429,6 +438,7 @@ class _AddToCartButton extends StatelessWidget {
                                 );
                             _showBundleAddToCartBottomSheet(
                               context: context,
+                              banner: banner,
                             );
                           },
                     child: Text('Add to cart'.tr()),
@@ -444,6 +454,7 @@ class _AddToCartButton extends StatelessWidget {
 
   void _showBundleAddToCartBottomSheet({
     required BuildContext context,
+    EZReachBanner? banner,
   }) {
     showModalBottomSheet(
       isDismissible: false,
@@ -451,7 +462,7 @@ class _AddToCartButton extends StatelessWidget {
       useSafeArea: true,
       context: context,
       builder: (_) {
-        return const BundlesAddToCartSheet();
+        return BundlesAddToCartSheet(banner: banner);
       },
     );
   }

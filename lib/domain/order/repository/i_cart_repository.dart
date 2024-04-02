@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -77,6 +78,7 @@ abstract class ICartRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required Language language,
+    EZReachBanner? banner,
   });
 
   Future<Either<ApiFailure, Cart>> getAddedToCartProductList({
@@ -122,6 +124,7 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
     required Language language,
     required RequestCounterOfferDetails counterOfferDetails,
+    EZReachBanner? banner,
   });
 
   Future<Either<ApiFailure, List<PriceAggregate>>>

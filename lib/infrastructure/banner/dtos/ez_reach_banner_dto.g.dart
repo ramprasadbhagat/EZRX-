@@ -3,6 +3,92 @@
 part of 'ez_reach_banner_dto.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class EZReachBannerDtoAdapter extends TypeAdapter<_$_EZReachBannerDto> {
+  @override
+  final int typeId = 5;
+
+  @override
+  _$_EZReachBannerDto read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_EZReachBannerDto(
+      bannerId: fields[0] as String,
+      bannerCampaignName: fields[1] as String,
+      startDate: fields[2] as String,
+      tabBannerUrl: fields[3] as String,
+      endDate: fields[4] as String,
+      navigationalURL: fields[5] as String,
+      bannerCountId: fields[6] as int,
+      salesRep: fields[7] as bool,
+      status: fields[8] as String,
+      customers: fields[9] as bool,
+      companyName: fields[10] as String,
+      targetProduct: fields[11] as String,
+      keyWord: fields[12] as String,
+      bannerCampaignLocations: (fields[13] as List).cast<String>(),
+      salesOrg: (fields[14] as List).cast<String>(),
+      countryCode: (fields[15] as List).cast<String>(),
+      mobileBannerUrl: fields[16] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_EZReachBannerDto obj) {
+    writer
+      ..writeByte(17)
+      ..writeByte(0)
+      ..write(obj.bannerId)
+      ..writeByte(1)
+      ..write(obj.bannerCampaignName)
+      ..writeByte(2)
+      ..write(obj.startDate)
+      ..writeByte(3)
+      ..write(obj.tabBannerUrl)
+      ..writeByte(4)
+      ..write(obj.endDate)
+      ..writeByte(5)
+      ..write(obj.navigationalURL)
+      ..writeByte(6)
+      ..write(obj.bannerCountId)
+      ..writeByte(7)
+      ..write(obj.salesRep)
+      ..writeByte(8)
+      ..write(obj.status)
+      ..writeByte(9)
+      ..write(obj.customers)
+      ..writeByte(10)
+      ..write(obj.companyName)
+      ..writeByte(11)
+      ..write(obj.targetProduct)
+      ..writeByte(12)
+      ..write(obj.keyWord)
+      ..writeByte(16)
+      ..write(obj.mobileBannerUrl)
+      ..writeByte(13)
+      ..write(obj.bannerCampaignLocations)
+      ..writeByte(14)
+      ..write(obj.salesOrg)
+      ..writeByte(15)
+      ..write(obj.countryCode);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EZReachBannerDtoAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

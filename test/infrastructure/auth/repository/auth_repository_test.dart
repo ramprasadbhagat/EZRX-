@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart'
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
@@ -62,6 +63,8 @@ class ClevertapServiceMock extends Mock implements ClevertapService {}
 class ProductSuggestionHistoryStorageMock extends Mock
     implements ProductSuggestionHistoryStorage {}
 
+class MaterialBannerStorageMock extends Mock implements MaterialBannerStorage {}
+
 class RoleNameMock extends Mock implements RoleName {}
 
 void main() {
@@ -77,6 +80,7 @@ void main() {
   late MixpanelService mixpanelService;
   late ClevertapService clevertapServiceMock;
   late ProductSuggestionHistoryStorage productSuggestionHistoryStorageMock;
+  late MaterialBannerStorage materialBannerStorageMock;
   late AuthRepository repository;
   late Config configMock;
 
@@ -145,7 +149,7 @@ void main() {
       clevertapServiceMock = ClevertapServiceMock();
       productSuggestionHistoryStorageMock =
           ProductSuggestionHistoryStorageMock();
-
+      materialBannerStorageMock = MaterialBannerStorageMock();
       repository = AuthRepository(
         mixpanelService: mixpanelService,
         remoteDataSource: remoteDataSourceMock,
@@ -160,6 +164,7 @@ void main() {
         settingStorage: settingStorageMock,
         clevertapService: clevertapServiceMock,
         productSuggestionHistoryStorage: productSuggestionHistoryStorageMock,
+        materialBannerStorage: materialBannerStorageMock,
       );
     },
   );
@@ -693,6 +698,12 @@ void main() {
         ).thenAnswer(
           (_) => Future.value(),
         );
+
+        when(
+          () => materialBannerStorageMock.clear(),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
         final result = await repository.logout();
         expect(result.isRight(), true);
       });
@@ -847,70 +858,78 @@ void main() {
         expect(result.isLeft(), true);
       });
 
-      test('test canBeAuthenticatedAndBioAvailable device not support',
-          () async {
-        when(
-          () => localAuthenticationMock.isDeviceSupported(),
-        ).thenAnswer(
-          (_) async => false,
-        );
+      test(
+        'test canBeAuthenticatedAndBioAvailable device not support',
+        () async {
+          when(
+            () => localAuthenticationMock.isDeviceSupported(),
+          ).thenAnswer(
+            (_) async => false,
+          );
 
-        final result = await repository.canBeAuthenticatedAndBioAvailable();
-        expect(result.isLeft(), true);
-      });
+          final result = await repository.canBeAuthenticatedAndBioAvailable();
+          expect(result.isLeft(), true);
+        },
+      );
 
-      test('test canBeAuthenticatedAndBioAvailable Cannot Check Biometrics',
-          () async {
-        when(
-          () => localAuthenticationMock.isDeviceSupported(),
-        ).thenAnswer(
-          (_) async => true,
-        );
-        when(
-          () => localAuthenticationMock.canCheckBiometrics,
-        ).thenAnswer(
-          (_) async => false,
-        );
-        final result = await repository.canBeAuthenticatedAndBioAvailable();
-        expect(result.isLeft(), true);
-      });
+      test(
+        'test canBeAuthenticatedAndBioAvailable Cannot Check Biometrics',
+        () async {
+          when(
+            () => localAuthenticationMock.isDeviceSupported(),
+          ).thenAnswer(
+            (_) async => true,
+          );
+          when(
+            () => localAuthenticationMock.canCheckBiometrics,
+          ).thenAnswer(
+            (_) async => false,
+          );
+          final result = await repository.canBeAuthenticatedAndBioAvailable();
+          expect(result.isLeft(), true);
+        },
+      );
 
-      test('test canBeAuthenticatedAndBioAvailable Cannot Check Biometrics',
-          () async {
-        when(
-          () => localAuthenticationMock.isDeviceSupported(),
-        ).thenAnswer(
-          (_) async => true,
-        );
-        when(
-          () => localAuthenticationMock.canCheckBiometrics,
-        ).thenAnswer(
-          (_) async => false,
-        );
-        final result = await repository.canBeAuthenticatedAndBioAvailable();
-        expect(result.isLeft(), true);
-      });
+      test(
+        'test canBeAuthenticatedAndBioAvailable Cannot Check Biometrics',
+        () async {
+          when(
+            () => localAuthenticationMock.isDeviceSupported(),
+          ).thenAnswer(
+            (_) async => true,
+          );
+          when(
+            () => localAuthenticationMock.canCheckBiometrics,
+          ).thenAnswer(
+            (_) async => false,
+          );
+          final result = await repository.canBeAuthenticatedAndBioAvailable();
+          expect(result.isLeft(), true);
+        },
+      );
 
-      test('test canBeAuthenticatedAndBioAvailable Not Available Biometrics',
-          () async {
-        when(
-          () => localAuthenticationMock.isDeviceSupported(),
-        ).thenAnswer(
-          (_) async => true,
-        );
-        when(
-          () => localAuthenticationMock.canCheckBiometrics,
-        ).thenAnswer(
-          (_) async => true,
-        );
-        when(
-          () => localAuthenticationMock.getAvailableBiometrics(),
-        ).thenAnswer(
-          (_) async => <BiometricType>[],
-        );
-        final result = await repository.canBeAuthenticatedAndBioAvailable();
-        expect(result.isLeft(), true);
-      });
+      test(
+        'test canBeAuthenticatedAndBioAvailable Not Available Biometrics',
+        () async {
+          when(
+            () => localAuthenticationMock.isDeviceSupported(),
+          ).thenAnswer(
+            (_) async => true,
+          );
+          when(
+            () => localAuthenticationMock.canCheckBiometrics,
+          ).thenAnswer(
+            (_) async => true,
+          );
+          when(
+            () => localAuthenticationMock.getAvailableBiometrics(),
+          ).thenAnswer(
+            (_) async => <BiometricType>[],
+          );
+          final result = await repository.canBeAuthenticatedAndBioAvailable();
+          expect(result.isLeft(), true);
+        },
+      );
 
       test('test canBeAuthenticatedAndBioAvailable Success', () async {
         when(
@@ -1003,7 +1022,7 @@ void main() {
         expect(result.isLeft(), true);
       });
 
-      test('test isBiometricEnabled success', () async {
+      test('test isBiometricEnabled success', () {
         when(
           () => settingStorageMock.isBiometricEnabled(),
         ).thenAnswer(
@@ -1014,7 +1033,7 @@ void main() {
         expect(result.isRight(), true);
       });
 
-      test('test isBiometricEnabled failure', () async {
+      test('test isBiometricEnabled failure', () {
         when(
           () => settingStorageMock.isBiometricEnabled(),
         ).thenThrow(

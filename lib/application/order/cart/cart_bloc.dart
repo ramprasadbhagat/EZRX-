@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/tr_object.dart';
@@ -391,6 +392,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               e.priceAggregate.materialInfo.counterOfferDetails.copyWith(
             counterOfferCurrency: state.config.currency,
           ),
+          banner: e.banner,
         );
 
         await failureOrSuccess.fold(
@@ -525,6 +527,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           shipToInfo: state.shipToInfo,
           product: e.priceAggregate,
           language: state.user.preferredLanguage,
+          banner: e.banner,
         );
 
         await failureOrSuccess.fold(

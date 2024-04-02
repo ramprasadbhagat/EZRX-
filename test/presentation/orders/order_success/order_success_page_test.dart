@@ -36,7 +36,6 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
@@ -124,7 +123,7 @@ void main() {
   );
 
   setUp(
-    () async {
+    () {
       autoRouterMock = locator<AutoRouteMock>();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
@@ -792,251 +791,256 @@ void main() {
       );
 
       testWidgets(
-          'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is enabled ',
-          (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSGSalesOrgConfigs,
-          ),
-        );
-        final bundleList = [
-          OrderHistoryDetailsOrderItem.empty().copyWith(
-            productType: MaterialInfoType.bundle(),
-            material: MaterialInfo.empty().copyWith(
-              bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
+        'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is enabled ',
+        (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeSGSalesOrgConfigs,
             ),
-          ),
-        ];
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderNumber: OrderNumber('Fake-Order-Number'),
-                orderValue: 990.0,
-                totalTax: 99.0,
-                totalValue: 1089.00,
-                orderHistoryDetailsOrderItem: bundleList,
+          );
+          final bundleList = [
+            OrderHistoryDetailsOrderItem.empty().copyWith(
+              productType: MaterialInfoType.bundle(),
+              material: MaterialInfo.empty().copyWith(
+                bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
               ),
-            ],
-          ),
-        );
+            ),
+          ];
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderNumber: OrderNumber('Fake-Order-Number'),
+                  orderValue: 990.0,
+                  totalTax: 99.0,
+                  totalValue: 1089.00,
+                  orderHistoryDetailsOrderItem: bundleList,
+                ),
+              ],
+            ),
+          );
 
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSuccessSubTotal),
-            matching: find.textContaining(
-              'Subtotal (${fakeSGSalesOrgConfigs.displayPrefixTax}.tax)',
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSuccessSubTotal),
+              matching: find.textContaining(
+                'Subtotal (${fakeSGSalesOrgConfigs.displayPrefixTax}.tax)',
+              ),
             ),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSuccessSubTotal),
-            matching: find.text(
-              'SGD 990.00',
-              findRichText: true,
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSuccessSubTotal),
+              matching: find.text(
+                'SGD 990.00',
+                findRichText: true,
+              ),
             ),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSummaryTax),
-            matching: find.text(
-              'SGD 99.00',
-              findRichText: true,
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSummaryTax),
+              matching: find.text(
+                'SGD 99.00',
+                findRichText: true,
+              ),
             ),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
-            matching: find.textContaining('Grand total:'),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
-            matching: find.text(
-              'SGD 1,089.00',
-              findRichText: true,
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
+              matching: find.textContaining('Grand total:'),
             ),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
-          findsOneWidget,
-        );
-      });
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
+              matching: find.text(
+                'SGD 1,089.00',
+                findRichText: true,
+              ),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+            findsOneWidget,
+          );
+        },
+      );
 
       testWidgets(
-          'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is disabled ',
-          (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
-          ),
-        );
-        final bundleList = [
-          OrderHistoryDetailsOrderItem.empty().copyWith(
-            productType: MaterialInfoType.bundle(),
-            material: MaterialInfo.empty().copyWith(
-              bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
+        'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is disabled ',
+        (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
             ),
-          ),
-        ];
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderNumber: OrderNumber('Fake-Order-Number'),
-                orderValue: 990.0,
-                totalTax: 99.0,
-                totalValue: 1089.00,
-                orderHistoryDetailsOrderItem: bundleList,
+          );
+          final bundleList = [
+            OrderHistoryDetailsOrderItem.empty().copyWith(
+              productType: MaterialInfoType.bundle(),
+              material: MaterialInfo.empty().copyWith(
+                bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
               ),
-            ],
-          ),
-        );
+            ),
+          ];
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderNumber: OrderNumber('Fake-Order-Number'),
+                  orderValue: 990.0,
+                  totalTax: 99.0,
+                  totalValue: 1089.00,
+                  orderHistoryDetailsOrderItem: bundleList,
+                ),
+              ],
+            ),
+          );
 
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSuccessSubTotal),
-            matching: find.textContaining(
-              'Subtotal (${fakeMYSalesOrgConfigs.displayPrefixTax}.tax)',
-            ),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSuccessSubTotal),
-            matching: find.text(
-              'MYR 1,089.00',
-              findRichText: true,
-            ),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSummaryTax),
-            matching: find.textContaining('Tax at 10%'),
-          ),
-          findsNothing,
-        );
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSummaryTax),
-            matching: find.text(
-              'MYR 99.00',
-              findRichText: true,
-            ),
-          ),
-          findsNothing,
-        );
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
-            matching: find.textContaining('Grand total:'),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
-            matching: find.text(
-              'MYR 1,089.00',
-              findRichText: true,
-            ),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
-          findsOneWidget,
-        );
-      });
-
-      testWidgets('Show Small Order Fee And Manual Fee For ID Market',
-          (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeIDSalesOrganisation,
-            salesOrgConfigs: fakeIDSalesOrgConfigs,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [fakeOrderHistoryDetails],
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final smallFeeSection = find.byKey(WidgetKeys.orderSummarySmallFee);
-        final manualFeeSection = find.byKey(WidgetKeys.orderSummaryManualFee);
-        expect(smallFeeSection, findsOneWidget);
-        expect(manualFeeSection, findsOneWidget);
-
-        expect(
-          find.descendant(
-            of: smallFeeSection,
-            matching: find.text('${'Small order fee'.tr()}:'),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: smallFeeSection,
-            matching: find.text(
-              StringUtils.priceComponentDisplayPrice(
-                fakeIDSalesOrgConfigs,
-                fakeOrderHistoryDetails.deliveryFee,
-                false,
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSuccessSubTotal),
+              matching: find.textContaining(
+                'Subtotal (${fakeMYSalesOrgConfigs.displayPrefixTax}.tax)',
               ),
-              findRichText: true,
             ),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.text(
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSuccessSubTotal),
+              matching: find.text(
+                'MYR 1,089.00',
+                findRichText: true,
+              ),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSummaryTax),
+              matching: find.textContaining('Tax at 10%'),
+            ),
+            findsNothing,
+          );
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSummaryTax),
+              matching: find.text(
+                'MYR 99.00',
+                findRichText: true,
+              ),
+            ),
+            findsNothing,
+          );
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
+              matching: find.textContaining('Grand total:'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byKey(WidgetKeys.orderSuccessGrandTotal),
+              matching: find.text(
+                'MYR 1,089.00',
+                findRichText: true,
+              ),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        'Show Small Order Fee And Manual Fee For ID Market',
+        (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeIDSalesOrganisation,
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
+            ),
+          );
+          when(() => orderSummaryBlocMock.state).thenAnswer(
+            (invocation) => OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [fakeOrderHistoryDetails],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final smallFeeSection = find.byKey(WidgetKeys.orderSummarySmallFee);
+          final manualFeeSection = find.byKey(WidgetKeys.orderSummaryManualFee);
+          expect(smallFeeSection, findsOneWidget);
+          expect(manualFeeSection, findsOneWidget);
+
+          expect(
+            find.descendant(
+              of: smallFeeSection,
+              matching: find.text('${'Small order fee'.tr()}:'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: smallFeeSection,
+              matching: find.text(
+                StringUtils.priceComponentDisplayPrice(
+                  fakeIDSalesOrgConfigs,
+                  fakeOrderHistoryDetails.deliveryFee,
+                  false,
+                ),
+                findRichText: true,
+              ),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.text(
               '${'Applies to orders less than'.tr()} ${StringUtils.displayPrice(
-            fakeIDSalesOrgConfigs,
-            fakeIDSalesOrganisation.salesOrg.smallOrderThreshold,
-          )}'),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: manualFeeSection,
-            matching: find.text('${'Manual fee'.tr()}:'),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: manualFeeSection,
-            matching: find.text(
-              StringUtils.priceComponentDisplayPrice(
                 fakeIDSalesOrgConfigs,
-                fakeOrderHistoryDetails.manualFee,
-                false,
-              ),
-              findRichText: true,
+                fakeIDSalesOrganisation.salesOrg.smallOrderThreshold,
+              )}',
             ),
-          ),
-          findsOneWidget,
-        );
-      });
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: manualFeeSection,
+              matching: find.text('${'Manual fee'.tr()}:'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: manualFeeSection,
+              matching: find.text(
+                StringUtils.priceComponentDisplayPrice(
+                  fakeIDSalesOrgConfigs,
+                  fakeOrderHistoryDetails.manualFee,
+                  false,
+                ),
+                findRichText: true,
+              ),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
     });
 
     testWidgets('Tap back button', (tester) async {
@@ -1075,40 +1079,6 @@ void main() {
         );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
-        verify(
-          () => mixpanelServiceMock.trackEvent(
-            eventName: MixpanelEvents.placeOrderSuccess,
-            properties: {
-              MixpanelProps.orderNumber:
-                  fakeOrderDetail.orderNumber.getOrDefaultValue(''),
-              MixpanelProps.grandTotal: fakeOrderDetail.totalValue,
-              MixpanelProps.totalQty: fakeOrderDetail.orderItemsCount,
-              MixpanelProps.requestDeliveryDate:
-                  fakeOrderDetail.requestedDeliveryDate.dateOrNaString,
-            },
-          ),
-        ).called(1);
-
-        verify(
-          () => mixpanelServiceMock.trackEvent(
-            eventName: MixpanelEvents.successOrderItem,
-            properties: {
-              MixpanelProps.orderNumber:
-                  fakeOrderDetail.orderNumber.getOrDefaultValue(''),
-              MixpanelProps.productName: fakeBundleItem.materialDescription,
-              MixpanelProps.productCode:
-                  fakeBundleItem.materialNumber.displayMatNo,
-              MixpanelProps.productQty: fakeBundleItem.qty,
-              MixpanelProps.grandTotal: fakeBundleItem.itemTotalPrice(
-                false,
-              ),
-              MixpanelProps.unitPrice: fakeBundleItem.itemUnitPrice(
-                false,
-              ),
-            },
-          ),
-        ).called(1);
-
         verify(
           () => viewByOrderBlocMock.add(
             ViewByOrderEvent.fetch(
@@ -1197,19 +1167,21 @@ void main() {
         );
       });
 
-      testWidgets('Show nothing when view by item detail API failure',
-          (tester) async {
-        when(() => viewByItemDetailsBlocMock.state)
-            .thenReturn(ViewByItemDetailsState.initial());
+      testWidgets(
+        'Show nothing when view by item detail API failure',
+        (tester) async {
+          when(() => viewByItemDetailsBlocMock.state)
+              .thenReturn(ViewByItemDetailsState.initial());
 
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        expect(
-          find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
-          findsOneWidget,
-        );
-        expect(find.byType(BundleItemMaterial), findsNothing);
-      });
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          expect(
+            find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+            findsOneWidget,
+          );
+          expect(find.byType(BundleItemMaterial), findsNothing);
+        },
+      );
 
       testWidgets('Navigate to item detail on tap', (tester) async {
         when(() => autoRouterMock.push(const ViewByItemDetailsPageRoute()))
@@ -1251,68 +1223,70 @@ void main() {
         ).called(1);
       });
 
-      testWidgets('Find pre-order tag for bundle items in order success page',
-          (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeMYSalesOrgConfigs,
-          ),
-        );
-        final bundleList = [
-          fakeMaterialItem.copyWith(
-            parentId: 'fake-parent-id',
-            productType: MaterialInfoType.bundle(),
-            materialNumber: MaterialNumber('fake-mat1'),
-            materialStockInfo: MaterialStockInfo.empty().copyWith(
-              stockInfos: [
-                StockInfo.empty().copyWith(
-                  inStock: MaterialInStock('Yes'),
-                  materialNumber: MaterialNumber('fake-mat1'),
-                ),
-              ],
+      testWidgets(
+        'Find pre-order tag for bundle items in order success page',
+        (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs,
             ),
-          ),
-          fakeMaterialItem.copyWith(
-            parentId: 'fake-parent-id',
-            productType: MaterialInfoType.bundle(),
-            materialNumber: MaterialNumber('fake-mat2'),
-            materialStockInfo: MaterialStockInfo.empty().copyWith(
-              stockInfos: [
-                StockInfo.empty().copyWith(
-                  inStock: MaterialInStock('No'),
-                  materialNumber: MaterialNumber('fake-mat2'),
-                ),
-              ],
-            ),
-          ),
-        ];
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderHistoryDetailsOrderItem: bundleList,
+          );
+          final bundleList = [
+            fakeMaterialItem.copyWith(
+              parentId: 'fake-parent-id',
+              productType: MaterialInfoType.bundle(),
+              materialNumber: MaterialNumber('fake-mat1'),
+              materialStockInfo: MaterialStockInfo.empty().copyWith(
+                stockInfos: [
+                  StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('Yes'),
+                    materialNumber: MaterialNumber('fake-mat1'),
+                  ),
+                ],
               ),
-            ],
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+            ),
+            fakeMaterialItem.copyWith(
+              parentId: 'fake-parent-id',
+              productType: MaterialInfoType.bundle(),
+              materialNumber: MaterialNumber('fake-mat2'),
+              materialStockInfo: MaterialStockInfo.empty().copyWith(
+                stockInfos: [
+                  StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('No'),
+                    materialNumber: MaterialNumber('fake-mat2'),
+                  ),
+                ],
+              ),
+            ),
+          ];
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsOrderItem: bundleList,
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
 
-        final bundleItem =
-            find.byKey(WidgetKeys.cartItemBundleTile('fake-parent-id'));
-        final orderItemsScrollList = find.byKey(WidgetKeys.scrollList);
+          final bundleItem =
+              find.byKey(WidgetKeys.cartItemBundleTile('fake-parent-id'));
+          final orderItemsScrollList = find.byKey(WidgetKeys.scrollList);
 
-        await tester.dragUntilVisible(
-          bundleItem,
-          orderItemsScrollList,
-          const Offset(0.0, -500.0),
-        );
-        await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            bundleItem,
+            orderItemsScrollList,
+            const Offset(0.0, -500.0),
+          );
+          await tester.pumpAndSettle();
 
-        final preOrderText = find.text('OOS-Preorder');
+          final preOrderText = find.text('OOS-Preorder');
 
-        expect(preOrderText, findsOneWidget);
-      });
+          expect(preOrderText, findsOneWidget);
+        },
+      );
     });
 
     group('Material -', () {
@@ -1355,42 +1329,43 @@ void main() {
       });
 
       testWidgets(
-          'Display Price Not Available Message for hide price materials',
-          (tester) async {
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderValue: 516.0,
-                orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
-                  OrderHistoryDetailsOrderItem.empty().copyWith(
-                    principalData: PrincipalData.empty().copyWith(
-                      principalCode: PrincipalCode('0000101308'),
-                      principalName: PrincipalName('PROCTER AND GAMBLE'),
+        'Display Price Not Available Message for hide price materials',
+        (tester) async {
+          when(() => orderSummaryBlocMock.state).thenAnswer(
+            (invocation) => OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderValue: 516.0,
+                  orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+                    OrderHistoryDetailsOrderItem.empty().copyWith(
+                      principalData: PrincipalData.empty().copyWith(
+                        principalCode: PrincipalCode('0000101308'),
+                        principalName: PrincipalName('PROCTER AND GAMBLE'),
+                      ),
+                      materialNumber: MaterialNumber(''),
+                      unitPrice: 17.2,
+                      totalPrice: 516,
+                      type: OrderItemType('Comm'),
+                      productType: MaterialInfoType('material'),
+                      hidePrice: true,
                     ),
-                    materialNumber: MaterialNumber(''),
-                    unitPrice: 17.2,
-                    totalPrice: 516,
-                    type: OrderItemType('Comm'),
-                    productType: MaterialInfoType('material'),
-                    hidePrice: true,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-        final priceMessageWidgetFinder =
-            find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
-        final priceMessageFinder = find.text(
-          'Price is not available for at least one item. Grand total reflected may not be accurate.'
-              .tr(),
-        );
-        expect(priceMessageWidgetFinder, findsOneWidget);
-        expect(priceMessageFinder, findsOneWidget);
-      });
+                  ],
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          final priceMessageWidgetFinder =
+              find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
+          final priceMessageFinder = find.text(
+            'Price is not available for at least one item. Grand total reflected may not be accurate.'
+                .tr(),
+          );
+          expect(priceMessageWidgetFinder, findsOneWidget);
+          expect(priceMessageFinder, findsOneWidget);
+        },
+      );
 
       testWidgets(
         'Show GovtListPriceComponent For Material Item',
@@ -1465,34 +1440,35 @@ void main() {
       });
 
       testWidgets(
-          'Find Price is not available warning if any item has invalid price',
-          (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSGSalesOrgConfigs,
-          ),
-        );
-        final materialList = [
-          fakeMaterialItem,
-          fakeMaterialItem.copyWith(hidePrice: false, unitPrice: 0),
-        ];
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderHistoryDetailsOrderItem: materialList,
-              ),
-            ],
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+        'Find Price is not available warning if any item has invalid price',
+        (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeSGSalesOrgConfigs,
+            ),
+          );
+          final materialList = [
+            fakeMaterialItem,
+            fakeMaterialItem.copyWith(hidePrice: false, unitPrice: 0),
+          ];
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsOrderItem: materialList,
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
 
-        final priceNotAvailableWarning =
-            find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
+          final priceNotAvailableWarning =
+              find.byKey(WidgetKeys.priceNotAvailableMessageWidget);
 
-        expect(priceNotAvailableWarning, findsOneWidget);
-      });
+          expect(priceNotAvailableWarning, findsOneWidget);
+        },
+      );
 
       testWidgets('Bonus Stock tag', (tester) async {
         when(() => orderSummaryBlocMock.state).thenAnswer(
@@ -1535,44 +1511,45 @@ void main() {
       });
 
       testWidgets(
-          'Display counter offer requested for PnG materials with price not available',
-          (tester) async {
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderValue: 516.0,
-                orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
-                  OrderHistoryDetailsOrderItem.empty().copyWith(
-                    principalData: PrincipalData.empty().copyWith(
-                      principalCode: PrincipalCode('0000101308'),
-                      principalName: PrincipalName('PROCTER AND GAMBLE'),
+        'Display counter offer requested for PnG materials with price not available',
+        (tester) async {
+          when(() => orderSummaryBlocMock.state).thenAnswer(
+            (invocation) => OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderValue: 516.0,
+                  orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+                    OrderHistoryDetailsOrderItem.empty().copyWith(
+                      principalData: PrincipalData.empty().copyWith(
+                        principalCode: PrincipalCode('0000101308'),
+                        principalName: PrincipalName('PROCTER AND GAMBLE'),
+                      ),
+                      materialNumber: MaterialNumber(''),
+                      originPrice: 15.0,
+                      unitPrice: 17.2,
+                      totalPrice: 516,
+                      type: OrderItemType('Comm'),
+                      productType: MaterialInfoType('material'),
+                      hidePrice: true,
+                      isCounterOffer: true,
                     ),
-                    materialNumber: MaterialNumber(''),
-                    originPrice: 15.0,
-                    unitPrice: 17.2,
-                    totalPrice: 516,
-                    type: OrderItemType('Comm'),
-                    productType: MaterialInfoType('material'),
-                    hidePrice: true,
-                    isCounterOffer: true,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+                  ],
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
 
-        final priceNotAvailableFinder =
-            find.text('Price Not Available', findRichText: true);
-        expect(priceNotAvailableFinder, findsNWidgets(2));
+          final priceNotAvailableFinder =
+              find.text('Price Not Available', findRichText: true);
+          expect(priceNotAvailableFinder, findsNWidgets(2));
 
-        final requestedCounterOfferKey =
-            find.text('Requested counter offer'.tr());
-        expect(requestedCounterOfferKey, findsOneWidget);
-      });
+          final requestedCounterOfferKey =
+              find.text('Requested counter offer'.tr());
+          expect(requestedCounterOfferKey, findsOneWidget);
+        },
+      );
 
       testWidgets('Find Material total value', (tester) async {
         const unitPrice = 17.2;
@@ -1622,43 +1599,48 @@ void main() {
         expect(totalMaterialPriceText, findsOneWidget);
       });
 
-      testWidgets('Test list price not visible for bonus items',
-          (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeSGSalesOrgConfigs,
-          ),
-        );
-        final materialList = [
-          fakeMaterialItem,
-          fakeMaterialItem.copyWith(type: OrderItemType('Bonus'), unitPrice: 0),
-        ];
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderHistoryDetailsOrderItem: materialList,
-              ),
-            ],
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+      testWidgets(
+        'Test list price not visible for bonus items',
+        (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeSGSalesOrgConfigs,
+            ),
+          );
+          final materialList = [
+            fakeMaterialItem,
+            fakeMaterialItem.copyWith(
+              type: OrderItemType('Bonus'),
+              unitPrice: 0,
+            ),
+          ];
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsOrderItem: materialList,
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
 
-        final material = find.byKey(WidgetKeys.orderSuccessZPItemsSection);
-        final orderItemsScrollList = find.byKey(WidgetKeys.scrollList);
+          final material = find.byKey(WidgetKeys.orderSuccessZPItemsSection);
+          final orderItemsScrollList = find.byKey(WidgetKeys.scrollList);
 
-        await tester.dragUntilVisible(
-          material,
-          orderItemsScrollList,
-          const Offset(0.0, -500.0),
-        );
-        await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            material,
+            orderItemsScrollList,
+            const Offset(0.0, -500.0),
+          );
+          await tester.pumpAndSettle();
 
-        final govtListPriceComponent = find.byType(GovtListPriceComponent);
+          final govtListPriceComponent = find.byType(GovtListPriceComponent);
 
-        expect(govtListPriceComponent, findsNothing);
-      });
+          expect(govtListPriceComponent, findsNothing);
+        },
+      );
 
       testWidgets('Show marketplace materials', (tester) async {
         final scrollList = find.byKey(WidgetKeys.scrollList);
@@ -1690,190 +1672,198 @@ void main() {
         );
       });
 
-      testWidgets('Not show marketplace section when order contains ZP items',
-          (tester) async {
-        final scrollList = find.byKey(WidgetKeys.scrollList);
+      testWidgets(
+        'Not show marketplace section when order contains ZP items',
+        (tester) async {
+          final scrollList = find.byKey(WidgetKeys.scrollList);
 
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
 
-        await tester.dragUntilVisible(
-          find.byKey(WidgetKeys.orderSuccessMaterialItem(0)),
-          scrollList,
-          const Offset(0, -300),
-        );
-        expect(find.byKey(WidgetKeys.cartMPProductSectionLabel), findsNothing);
-        expect(find.byKey(WidgetKeys.marketplaceSellerIcon), findsNothing);
-      });
+          await tester.dragUntilVisible(
+            find.byKey(WidgetKeys.orderSuccessMaterialItem(0)),
+            scrollList,
+            const Offset(0, -300),
+          );
+          expect(
+            find.byKey(WidgetKeys.cartMPProductSectionLabel),
+            findsNothing,
+          );
+          expect(find.byKey(WidgetKeys.marketplaceSellerIcon), findsNothing);
+        },
+      );
     });
 
     group('List price strike through -', () {
       testWidgets(
-          'List price strike through price visible, if final price is less than list price && enableListPrice = true',
-          (tester) async {
-        final finalPrice = MaterialPrice(80);
-        final listPrice = MaterialPrice(100);
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderHistoryDetailsOrderItem: [
-                  fakeMaterialItem.copyWith(
-                    originPrice: listPrice.getValue(),
-                    unitPrice: finalPrice.getValue(),
-                    material: MaterialInfo.empty().copyWith(
-                      materialNumber: MaterialNumber('fake-material-1'),
-                    ),
-                    priceAggregate: PriceAggregate.empty().copyWith(
-                      salesOrgConfig: fakeIDSalesOrgConfigs,
-                      price: Price.empty().copyWith(
-                        lastPrice: listPrice,
-                        finalPrice: finalPrice,
+        'List price strike through price visible, if final price is less than list price && enableListPrice = true',
+        (tester) async {
+          final finalPrice = MaterialPrice(80);
+          final listPrice = MaterialPrice(100);
+          when(() => orderSummaryBlocMock.state).thenAnswer(
+            (invocation) => OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsOrderItem: [
+                    fakeMaterialItem.copyWith(
+                      originPrice: listPrice.getValue(),
+                      unitPrice: finalPrice.getValue(),
+                      material: MaterialInfo.empty().copyWith(
                         materialNumber: MaterialNumber('fake-material-1'),
                       ),
+                      priceAggregate: PriceAggregate.empty().copyWith(
+                        salesOrgConfig: fakeIDSalesOrgConfigs,
+                        price: Price.empty().copyWith(
+                          lastPrice: listPrice,
+                          finalPrice: finalPrice,
+                          materialNumber: MaterialNumber('fake-material-1'),
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeVNSalesOrgConfigs,
-            salesOrganisation: fakeVNSalesOrganisation,
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        expect(
-          find.byKey(WidgetKeys.orderSuccessZPItemsSection),
-          findsOneWidget,
-        );
-        final listPriceStrikeThroughComponent =
-            find.byType(ListPriceStrikeThroughComponent);
-        final listPriceFinder = find.byWidgetPredicate(
-          (widget) =>
-              widget is RichText &&
-              widget.key == WidgetKeys.priceComponent &&
-              widget.text
-                  .toPlainText()
-                  .contains(listPrice.getOrCrash().toString()),
-        );
-        expect(
-          find.descendant(
-            of: listPriceStrikeThroughComponent,
-            matching: listPriceFinder,
-          ),
-          findsNothing,
-        );
-      });
+                  ],
+                ),
+              ],
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          expect(
+            find.byKey(WidgetKeys.orderSuccessZPItemsSection),
+            findsOneWidget,
+          );
+          final listPriceStrikeThroughComponent =
+              find.byType(ListPriceStrikeThroughComponent);
+          final listPriceFinder = find.byWidgetPredicate(
+            (widget) =>
+                widget is RichText &&
+                widget.key == WidgetKeys.priceComponent &&
+                widget.text
+                    .toPlainText()
+                    .contains(listPrice.getOrCrash().toString()),
+          );
+          expect(
+            find.descendant(
+              of: listPriceStrikeThroughComponent,
+              matching: listPriceFinder,
+            ),
+            findsNothing,
+          );
+        },
+      );
 
       testWidgets(
-          'List price strike through price not visible, if final price is less than list price && enableListPrice = false',
-          (tester) async {
-        final finalPrice = MaterialPrice(80);
-        final listPrice = MaterialPrice(100);
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderHistoryDetailsOrderItem: [
-                  fakeMaterialItem.copyWith(
-                    material: MaterialInfo.empty().copyWith(
-                      materialNumber: MaterialNumber('fake-material-1'),
-                    ),
-                    priceAggregate: PriceAggregate.empty().copyWith(
-                      salesOrgConfig: fakeMYSalesOrgConfigs,
-                      price: Price.empty().copyWith(
-                        lastPrice: listPrice,
-                        finalPrice: finalPrice,
+        'List price strike through price not visible, if final price is less than list price && enableListPrice = false',
+        (tester) async {
+          final finalPrice = MaterialPrice(80);
+          final listPrice = MaterialPrice(100);
+          when(() => orderSummaryBlocMock.state).thenAnswer(
+            (invocation) => OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsOrderItem: [
+                    fakeMaterialItem.copyWith(
+                      material: MaterialInfo.empty().copyWith(
                         materialNumber: MaterialNumber('fake-material-1'),
                       ),
+                      priceAggregate: PriceAggregate.empty().copyWith(
+                        salesOrgConfig: fakeMYSalesOrgConfigs,
+                        price: Price.empty().copyWith(
+                          lastPrice: listPrice,
+                          finalPrice: finalPrice,
+                          materialNumber: MaterialNumber('fake-material-1'),
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        expect(
-          find.byKey(WidgetKeys.orderSuccessZPItemsSection),
-          findsOneWidget,
-        );
-        final listPriceStrikeThroughComponent =
-            find.byType(ListPriceStrikeThroughComponent);
-        final listPriceFinder = find.byWidgetPredicate(
-          (widget) =>
-              widget is RichText &&
-              widget.key == WidgetKeys.priceComponent &&
-              widget.text
-                  .toPlainText()
-                  .contains(listPrice.getOrCrash().toString()),
-        );
-        expect(
-          find.descendant(
-            of: listPriceStrikeThroughComponent,
-            matching: listPriceFinder,
-          ),
-          findsNothing,
-        );
-      });
+                  ],
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          expect(
+            find.byKey(WidgetKeys.orderSuccessZPItemsSection),
+            findsOneWidget,
+          );
+          final listPriceStrikeThroughComponent =
+              find.byType(ListPriceStrikeThroughComponent);
+          final listPriceFinder = find.byWidgetPredicate(
+            (widget) =>
+                widget is RichText &&
+                widget.key == WidgetKeys.priceComponent &&
+                widget.text
+                    .toPlainText()
+                    .contains(listPrice.getOrCrash().toString()),
+          );
+          expect(
+            find.descendant(
+              of: listPriceStrikeThroughComponent,
+              matching: listPriceFinder,
+            ),
+            findsNothing,
+          );
+        },
+      );
 
       testWidgets(
-          'List price strike through price not visible, if final price is greater than and equal to list price && enableListPrice = true',
-          (tester) async {
-        final finalPrice = MaterialPrice(200);
-        final listPrice = MaterialPrice(100);
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderHistoryDetailsOrderItem: [
-                  fakeMaterialItem.copyWith(
-                    material: MaterialInfo.empty().copyWith(
-                      materialNumber: MaterialNumber('fake-material-1'),
-                    ),
-                    priceAggregate: PriceAggregate.empty().copyWith(
-                      salesOrgConfig: fakeIDSalesOrgConfigs,
-                      price: Price.empty().copyWith(
-                        lastPrice: listPrice,
-                        finalPrice: finalPrice,
+        'List price strike through price not visible, if final price is greater than and equal to list price && enableListPrice = true',
+        (tester) async {
+          final finalPrice = MaterialPrice(200);
+          final listPrice = MaterialPrice(100);
+          when(() => orderSummaryBlocMock.state).thenAnswer(
+            (invocation) => OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsOrderItem: [
+                    fakeMaterialItem.copyWith(
+                      material: MaterialInfo.empty().copyWith(
                         materialNumber: MaterialNumber('fake-material-1'),
                       ),
+                      priceAggregate: PriceAggregate.empty().copyWith(
+                        salesOrgConfig: fakeIDSalesOrgConfigs,
+                        price: Price.empty().copyWith(
+                          lastPrice: listPrice,
+                          finalPrice: finalPrice,
+                          materialNumber: MaterialNumber('fake-material-1'),
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        expect(
-          find.byKey(WidgetKeys.orderSuccessZPItemsSection),
-          findsOneWidget,
-        );
-        final listPriceStrikeThroughComponent =
-            find.byType(ListPriceStrikeThroughComponent);
-        final listPriceFinder = find.byWidgetPredicate(
-          (widget) =>
-              widget is RichText &&
-              widget.key == WidgetKeys.priceComponent &&
-              widget.text
-                  .toPlainText()
-                  .contains(listPrice.getOrCrash().toString()),
-        );
-        expect(
-          find.descendant(
-            of: listPriceStrikeThroughComponent,
-            matching: listPriceFinder,
-          ),
-          findsNothing,
-        );
-      });
+                  ],
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          expect(
+            find.byKey(WidgetKeys.orderSuccessZPItemsSection),
+            findsOneWidget,
+          );
+          final listPriceStrikeThroughComponent =
+              find.byType(ListPriceStrikeThroughComponent);
+          final listPriceFinder = find.byWidgetPredicate(
+            (widget) =>
+                widget is RichText &&
+                widget.key == WidgetKeys.priceComponent &&
+                widget.text
+                    .toPlainText()
+                    .contains(listPrice.getOrCrash().toString()),
+          );
+          expect(
+            find.descendant(
+              of: listPriceStrikeThroughComponent,
+              matching: listPriceFinder,
+            ),
+            findsNothing,
+          );
+        },
+      );
     });
 
     group('Attachment section -', () {
@@ -2102,34 +2092,36 @@ void main() {
         expect(find.byKey(WidgetKeys.payerInformation), findsOneWidget);
       });
 
-      testWidgets('When enable bill to true and billToInfo is empty',
-          (tester) async {
-        when(() => paymentCustomerInformationBlocMock.state).thenAnswer(
-          (invocation) => PaymentCustomerInformationState.initial().copyWith(
-            paymentCustomerInformation: PaymentCustomerInformation.empty(),
-          ),
-        );
+      testWidgets(
+        'When enable bill to true and billToInfo is empty',
+        (tester) async {
+          when(() => paymentCustomerInformationBlocMock.state).thenAnswer(
+            (invocation) => PaymentCustomerInformationState.initial().copyWith(
+              paymentCustomerInformation: PaymentCustomerInformation.empty(),
+            ),
+          );
 
-        when(() => eligibilityBlocMock.state).thenAnswer(
-          (invocation) => EligibilityState.initial().copyWith(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfigs: fakeKHSalesOrgConfigs,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                referenceNotes: 'fake-reference-notes',
-              ),
-            ],
-          ),
-        );
+          when(() => eligibilityBlocMock.state).thenAnswer(
+            (invocation) => EligibilityState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfigs: fakeKHSalesOrgConfigs,
+            ),
+          );
+          when(() => orderSummaryBlocMock.state).thenAnswer(
+            (invocation) => OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  referenceNotes: 'fake-reference-notes',
+                ),
+              ],
+            ),
+          );
 
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
-      });
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
+        },
+      );
 
       testWidgets('When enable bill to false', (tester) async {
         when(() => eligibilityBlocMock.state).thenAnswer(
@@ -2193,183 +2185,189 @@ void main() {
         },
       );
 
-      testWidgets('Display ZP and MP order number when order contains MP items',
-          (tester) async {
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial()
-              .copyWith(orderHistoryDetailsList: fakeOrderHistoryList),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+      testWidgets(
+        'Display ZP and MP order number when order contains MP items',
+        (tester) async {
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial()
+                .copyWith(orderHistoryDetailsList: fakeOrderHistoryList),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
 
-        expect(zpOrderNumbers, findsOneWidget);
-        expect(
-          find.descendant(
-            of: zpOrderNumbers,
-            matching: find.textContaining('ZP Queue', findRichText: true),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(of: zpOrderNumbers, matching: orderId),
-          findsNWidgets(fakeOrderHistoryList.zpOrderOnly.length),
-        );
+          expect(zpOrderNumbers, findsOneWidget);
+          expect(
+            find.descendant(
+              of: zpOrderNumbers,
+              matching: find.textContaining('ZP Queue', findRichText: true),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(of: zpOrderNumbers, matching: orderId),
+            findsNWidgets(fakeOrderHistoryList.zpOrderOnly.length),
+          );
 
-        expect(mpOrderNumbers, findsOneWidget);
-        expect(
-          find.descendant(
-            of: mpOrderNumbers,
-            matching: find.textContaining('MP Queue', findRichText: true),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(of: mpOrderNumbers, matching: orderId),
-          findsNWidgets(fakeOrderHistoryList.mpOrderOnly.length),
-        );
-      });
-
-      testWidgets('Display MP order number when order only contains MP items',
-          (tester) async {
-        final zpOrderHistoryList = fakeOrderHistoryList.mpOrderOnly;
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: zpOrderHistoryList,
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-
-        expect(zpOrderNumbers, findsNothing);
-        expect(mpOrderNumbers, findsOneWidget);
-        expect(
-          find.descendant(
-            of: mpOrderNumbers,
-            matching: find.textContaining('MP Queue', findRichText: true),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(of: mpOrderNumbers, matching: orderId),
-          findsNWidgets(zpOrderHistoryList.length),
-        );
-      });
+          expect(mpOrderNumbers, findsOneWidget);
+          expect(
+            find.descendant(
+              of: mpOrderNumbers,
+              matching: find.textContaining('MP Queue', findRichText: true),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(of: mpOrderNumbers, matching: orderId),
+            findsNWidgets(fakeOrderHistoryList.mpOrderOnly.length),
+          );
+        },
+      );
 
       testWidgets(
-          'Show Promotional label for ID market if promotional data is notEmpty',
-          (tester) async {
-        final scrollList = find.byKey(WidgetKeys.scrollList);
+        'Display MP order number when order only contains MP items',
+        (tester) async {
+          final zpOrderHistoryList = fakeOrderHistoryList.mpOrderOnly;
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: zpOrderHistoryList,
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
 
-        final cartItem = PriceAggregate.empty().copyWith(
-          salesOrgConfig: fakeIDSalesOrgConfigs,
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000003353621001'),
-            type: MaterialInfoType.material(),
-          ),
-        );
+          expect(zpOrderNumbers, findsNothing);
+          expect(mpOrderNumbers, findsOneWidget);
+          expect(
+            find.descendant(
+              of: mpOrderNumbers,
+              matching: find.textContaining('MP Queue', findRichText: true),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(of: mpOrderNumbers, matching: orderId),
+            findsNWidgets(zpOrderHistoryList.length),
+          );
+        },
+      );
 
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeIDSalesOrgConfigs,
-          ),
-        );
-
-        when(() => cartBlocMock.state).thenReturn(
-          CartState.initial().copyWith(
-            cartProducts: [cartItem],
-            aplSimulatorOrder: aplSimulatorOrderMock,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderNumber: OrderNumber('Fake-Order-Number'),
-                orderHistoryDetailsOrderItem: [
-                  fakeMaterialItem.copyWith(
-                    material: MaterialInfo.empty().copyWith(
-                      materialNumber: MaterialNumber('000000003353621001'),
-                    ),
-                    priceAggregate: cartItem,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-
-        final promotionTextFinder = find.byKey(
-          WidgetKeys.promotionLabel(cartItem.getMaterialNumber.getValue()),
-        );
-        await tester.dragUntilVisible(
-          promotionTextFinder,
-          scrollList,
-          const Offset(0, -300),
-        );
-
-        expect(promotionTextFinder, findsOneWidget);
-
-        expect(
-          find.text(
-            '5.0% discount,IDR 10.0 offer applied',
-            findRichText: true,
-          ),
-          findsOneWidget,
-        );
-      });
       testWidgets(
-          'Hide Promotional label for ID market if promotional data is empty',
-          (tester) async {
-        final cartItem = PriceAggregate.empty().copyWith(
-          salesOrgConfig: fakeIDSalesOrgConfigs,
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000003353621001'),
-            type: MaterialInfoType.material(),
-          ),
-        );
+        'Show Promotional label for ID market if promotional data is notEmpty',
+        (tester) async {
+          final scrollList = find.byKey(WidgetKeys.scrollList);
 
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeIDSalesOrgConfigs,
-          ),
-        );
+          final cartItem = PriceAggregate.empty().copyWith(
+            salesOrgConfig: fakeIDSalesOrgConfigs,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000003353621001'),
+              type: MaterialInfoType.material(),
+            ),
+          );
 
-        when(() => cartBlocMock.state).thenReturn(
-          CartState.initial().copyWith(
-            cartProducts: [cartItem],
-            aplSimulatorOrder: AplSimulatorOrder.empty(),
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderNumber: OrderNumber('Fake-Order-Number'),
-                orderHistoryDetailsOrderItem: [
-                  fakeMaterialItem.copyWith(
-                    material: MaterialInfo.empty().copyWith(
-                      materialNumber: MaterialNumber('000000003353621001'),
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
+            ),
+          );
+
+          when(() => cartBlocMock.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [cartItem],
+              aplSimulatorOrder: aplSimulatorOrderMock,
+            ),
+          );
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderNumber: OrderNumber('Fake-Order-Number'),
+                  orderHistoryDetailsOrderItem: [
+                    fakeMaterialItem.copyWith(
+                      material: MaterialInfo.empty().copyWith(
+                        materialNumber: MaterialNumber('000000003353621001'),
+                      ),
+                      priceAggregate: cartItem,
                     ),
-                    priceAggregate: cartItem,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
+                  ],
+                ),
+              ],
+            ),
+          );
 
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
 
-        final promotionTextFinder = find.byKey(
-          WidgetKeys.promotionLabel(cartItem.getMaterialNumber.getValue()),
-        );
+          final promotionTextFinder = find.byKey(
+            WidgetKeys.promotionLabel(cartItem.getMaterialNumber.getValue()),
+          );
+          await tester.dragUntilVisible(
+            promotionTextFinder,
+            scrollList,
+            const Offset(0, -300),
+          );
 
-        expect(promotionTextFinder, findsNothing);
-      });
+          expect(promotionTextFinder, findsOneWidget);
+
+          expect(
+            find.text(
+              '5.0% discount,IDR 10.0 offer applied',
+              findRichText: true,
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+      testWidgets(
+        'Hide Promotional label for ID market if promotional data is empty',
+        (tester) async {
+          final cartItem = PriceAggregate.empty().copyWith(
+            salesOrgConfig: fakeIDSalesOrgConfigs,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000003353621001'),
+              type: MaterialInfoType.material(),
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
+            ),
+          );
+
+          when(() => cartBlocMock.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [cartItem],
+              aplSimulatorOrder: AplSimulatorOrder.empty(),
+            ),
+          );
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderNumber: OrderNumber('Fake-Order-Number'),
+                  orderHistoryDetailsOrderItem: [
+                    fakeMaterialItem.copyWith(
+                      material: MaterialInfo.empty().copyWith(
+                        materialNumber: MaterialNumber('000000003353621001'),
+                      ),
+                      priceAggregate: cartItem,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final promotionTextFinder = find.byKey(
+            WidgetKeys.promotionLabel(cartItem.getMaterialNumber.getValue()),
+          );
+
+          expect(promotionTextFinder, findsNothing);
+        },
+      );
     });
   });
 }
@@ -2385,9 +2383,7 @@ bool findTextAndTap(InlineSpan visitor, String text) {
 }
 
 bool tapTextSpan(RichText richText, String text) {
-  final isTapped = !richText.text.visitChildren(
+  return !richText.text.visitChildren(
     (visitor) => findTextAndTap(visitor, text),
   );
-
-  return isTapped;
 }

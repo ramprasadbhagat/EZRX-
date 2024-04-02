@@ -3,13 +3,18 @@ part of 'deep_linking_bloc.dart';
 @freezed
 class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.initial() = _Initial;
-  const factory DeepLinkingState.linkPending(EzrxLink link) = _LinkPending;
+  const factory DeepLinkingState.linkPending(
+    EzrxLink link, {
+    EZReachBanner? banner,
+  }) = _LinkPending;
   const factory DeepLinkingState.redirectBundleDetail(
-    MaterialNumber materialNumber,
-  ) = _RedirectBundleDetail;
+    MaterialNumber materialNumber, {
+    EZReachBanner? banner,
+  }) = _RedirectBundleDetail;
   const factory DeepLinkingState.redirectProductDetail(
-    MaterialNumber materialNumber,
-  ) = _RedirectProductDetail;
+    MaterialNumber materialNumber, {
+    EZReachBanner? banner,
+  }) = _RedirectProductDetail;
   const factory DeepLinkingState.redirectProductSuggestion(
     SearchKey searchKey,
   ) = _RedirectProductSuggestion;

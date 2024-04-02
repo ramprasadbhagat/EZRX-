@@ -14,11 +14,12 @@
 import 'package:auto_route/auto_route.dart' as _i77;
 import 'package:flutter/material.dart' as _i78;
 
-import '../../domain/account/entities/sales_organisation.dart' as _i83;
+import '../../domain/account/entities/sales_organisation.dart' as _i84;
 import '../../domain/account/entities/user.dart' as _i80;
 import '../../domain/announcement_info/entities/announcement_article_info.dart'
-    as _i82;
+    as _i83;
 import '../../domain/auth/value/value_objects.dart' as _i79;
+import '../../domain/banner/entities/ez_reach_banner.dart' as _i82;
 import '../../domain/order/entities/material_info.dart' as _i81;
 import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i41;
 import '../account/change_password/change_password_page.dart' as _i13;
@@ -448,6 +449,7 @@ class AppRouter extends _i77.RootStackRouter {
         child: _i45.BundleDetailPage(
           key: args.key,
           materialInfo: args.materialInfo,
+          banner: args.banner,
         ),
       );
     },
@@ -458,6 +460,7 @@ class AppRouter extends _i77.RootStackRouter {
         child: _i46.ProductDetailsPage(
           key: args.key,
           materialInfo: args.materialInfo,
+          banner: args.banner,
         ),
       );
     },
@@ -1759,12 +1762,14 @@ class BundleDetailPageRoute
   BundleDetailPageRoute({
     _i78.Key? key,
     required _i81.MaterialInfo materialInfo,
+    _i82.EZReachBanner? banner,
   }) : super(
           BundleDetailPageRoute.name,
           path: 'orders/bundle_detail_page',
           args: BundleDetailPageRouteArgs(
             key: key,
             materialInfo: materialInfo,
+            banner: banner,
           ),
         );
 
@@ -1775,15 +1780,18 @@ class BundleDetailPageRouteArgs {
   const BundleDetailPageRouteArgs({
     this.key,
     required this.materialInfo,
+    this.banner,
   });
 
   final _i78.Key? key;
 
   final _i81.MaterialInfo materialInfo;
 
+  final _i82.EZReachBanner? banner;
+
   @override
   String toString() {
-    return 'BundleDetailPageRouteArgs{key: $key, materialInfo: $materialInfo}';
+    return 'BundleDetailPageRouteArgs{key: $key, materialInfo: $materialInfo, banner: $banner}';
   }
 }
 
@@ -1794,12 +1802,14 @@ class ProductDetailsPageRoute
   ProductDetailsPageRoute({
     _i78.Key? key,
     required _i81.MaterialInfo materialInfo,
+    _i82.EZReachBanner? banner,
   }) : super(
           ProductDetailsPageRoute.name,
           path: 'orders/material_details',
           args: ProductDetailsPageRouteArgs(
             key: key,
             materialInfo: materialInfo,
+            banner: banner,
           ),
         );
 
@@ -1810,15 +1820,18 @@ class ProductDetailsPageRouteArgs {
   const ProductDetailsPageRouteArgs({
     this.key,
     required this.materialInfo,
+    this.banner,
   });
 
   final _i78.Key? key;
 
   final _i81.MaterialInfo materialInfo;
 
+  final _i82.EZReachBanner? banner;
+
   @override
   String toString() {
-    return 'ProductDetailsPageRouteArgs{key: $key, materialInfo: $materialInfo}';
+    return 'ProductDetailsPageRouteArgs{key: $key, materialInfo: $materialInfo, banner: $banner}';
   }
 }
 
@@ -1852,7 +1865,7 @@ class AnnouncementsPageRoute extends _i77.PageRouteInfo<void> {
 class ArticleDetailsRoute extends _i77.PageRouteInfo<ArticleDetailsRouteArgs> {
   ArticleDetailsRoute({
     _i78.Key? key,
-    required _i82.AnnouncementArticleItem article,
+    required _i83.AnnouncementArticleItem article,
   }) : super(
           ArticleDetailsRoute.name,
           path: 'article_details',
@@ -1873,7 +1886,7 @@ class ArticleDetailsRouteArgs {
 
   final _i78.Key? key;
 
-  final _i82.AnnouncementArticleItem article;
+  final _i83.AnnouncementArticleItem article;
 
   @override
   String toString() {
@@ -1898,7 +1911,7 @@ class ReturnRequestDetailsRoute extends _i77.PageRouteInfo<void> {
 class SalesOrgSearchRoute extends _i77.PageRouteInfo<SalesOrgSearchRouteArgs> {
   SalesOrgSearchRoute({
     _i78.Key? key,
-    required List<_i83.SalesOrganisation> avialableSalesOrgList,
+    required List<_i84.SalesOrganisation> avialableSalesOrgList,
   }) : super(
           SalesOrgSearchRoute.name,
           path: 'salesOrg_search',
@@ -1919,7 +1932,7 @@ class SalesOrgSearchRouteArgs {
 
   final _i78.Key? key;
 
-  final List<_i83.SalesOrganisation> avialableSalesOrgList;
+  final List<_i84.SalesOrganisation> avialableSalesOrgList;
 
   @override
   String toString() {

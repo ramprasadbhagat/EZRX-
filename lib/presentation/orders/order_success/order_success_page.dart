@@ -18,9 +18,6 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
@@ -99,7 +96,6 @@ class OrderSuccessPage extends StatelessWidget {
                       ),
                     ),
                   );
-              _trackOrderSuccess(context, state);
               CustomSnackBar(
                 messageText: context.tr('Order submitted'),
               ).show(context);
@@ -110,52 +106,6 @@ class OrderSuccessPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _trackOrderSuccess(BuildContext context, OrderSummaryState state) {
-    final eligibilityState = context.read<EligibilityBloc>().state;
-    final isIDMarket = eligibilityState.salesOrg.isID;
-    final orderDetail = state.orderHistoryDetails;
-    final orderQueueNumber = orderDetail.orderNumber.getOrDefaultValue('');
-
-    trackMixpanelEvent(
-      MixpanelEvents.placeOrderSuccess,
-      props: {
-        if (orderDetail.processingStatus.isInQueue)
-          MixpanelProps.queueNumber: orderQueueNumber,
-        MixpanelProps.orderNumber: orderDetail.processingStatus.isInQueue
-            ? 'no order number'
-            : orderQueueNumber,
-        MixpanelProps.grandTotal: orderDetail.totalValue,
-        MixpanelProps.totalQty: orderDetail.orderItemsCount,
-        MixpanelProps.requestDeliveryDate:
-            orderDetail.requestedDeliveryDate.dateOrNaString,
-      },
-    );
-
-    for (final item in orderDetail.orderHistoryDetailsOrderItem) {
-      trackMixpanelEvent(
-        MixpanelEvents.successOrderItem,
-        props: {
-          if (orderDetail.processingStatus.isInQueue)
-            MixpanelProps.queueNumber: orderQueueNumber,
-          MixpanelProps.orderNumber: orderDetail.processingStatus.isInQueue
-              ? 'no order number'
-              : orderQueueNumber,
-          MixpanelProps.productName: item.materialDescription,
-          MixpanelProps.productCode: item.materialNumber.displayMatNo,
-          MixpanelProps.productQty: item.qty,
-          MixpanelProps.grandTotal: item.itemTotalPrice(
-            isIDMarket,
-          ),
-          MixpanelProps.unitPrice: item.itemUnitPrice(
-            isIDMarket,
-          ),
-        },
-      );
-
-      //TODO: Revisit later to implement is_tender, is_reorder, tag and added_from for MixpanelProps here
-    }
   }
 }
 

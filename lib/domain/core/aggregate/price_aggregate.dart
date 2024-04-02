@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
-import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
@@ -37,7 +36,6 @@ class PriceAggregate with _$PriceAggregate {
     required Price price,
     required MaterialInfo materialInfo,
     required Bundle bundle,
-    required EZReachBanner banner,
     required SalesOrganisationConfigs salesOrgConfig,
     required int quantity,
     @Default(0) int discountedMaterialCount,
@@ -54,7 +52,6 @@ class PriceAggregate with _$PriceAggregate {
 
   factory PriceAggregate.empty() => PriceAggregate(
         price: Price.empty(),
-        banner: EZReachBanner.empty(),
         materialInfo: MaterialInfo.empty(),
         bundle: Bundle.empty(),
         salesOrgConfig: SalesOrganisationConfigs.empty(),
@@ -514,7 +511,7 @@ class PriceAggregate with _$PriceAggregate {
             return remainQty;
           }
         });
-        
+
         return bonusMaterial.values.toList();
       case BonusMaterialCalculationEnum.calculation911:
       case BonusMaterialCalculationEnum.apl001:

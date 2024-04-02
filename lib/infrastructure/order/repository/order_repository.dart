@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -24,6 +23,10 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
@@ -43,7 +46,9 @@ class OrderRepository implements IOrderRepository {
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final Encryption encryption;
   final DeviceStorage deviceStorage;
+  final MaterialBannerStorage materialBannerStorage;
   final RemoteConfigService remoteConfigService;
+  final MixpanelService mixpanelService;
 
   OrderRepository({
     required this.config,
@@ -56,6 +61,8 @@ class OrderRepository implements IOrderRepository {
     required this.stockInfoLocalDataSource,
     required this.deviceStorage,
     required this.remoteConfigService,
+    required this.materialBannerStorage,
+    required this.mixpanelService,
   });
 
   @override
@@ -187,6 +194,11 @@ class OrderRepository implements IOrderRepository {
         shipTo: shipToInfo.shipToCustomerCode,
         market: deviceStorage.currentMarket(),
       );
+      await _trackOrderSuccess(
+        orderHistoryDetails,
+        salesOrganisation.salesOrg.isID,
+      );
+      await materialBannerStorage.clear();
 
       return Right(
         [
@@ -199,6 +211,49 @@ class OrderRepository implements IOrderRepository {
       return Left(
         FailureHandler.handleFailure(e),
       );
+    }
+  }
+
+  Future<void> _trackOrderSuccess(
+    OrderHistoryDetails orderDetail,
+    bool isIDMarket,
+  ) async {
+    final orderNumber = orderDetail.orderNumber.getOrDefaultValue('');
+    mixpanelService.trackEvent(
+      eventName: MixpanelEvents.placeOrderSuccess,
+      properties: {
+        MixpanelProps.orderNumber: orderNumber,
+        MixpanelProps.grandTotal: orderDetail.totalValue,
+        MixpanelProps.totalQty: orderDetail.orderItemsCount,
+        MixpanelProps.requestDeliveryDate:
+            orderDetail.requestedDeliveryDate.dateOrNaString,
+      },
+    );
+
+    for (final item in orderDetail.orderHistoryDetailsOrderItem) {
+      final bannerData = await materialBannerStorage.get(
+        materialNumber: item.productType.typeBundle
+            ? '${MaterialNumber(item.parentId).displayMatNo}_${item.materialNumber.displayMatNo}'
+            : item.materialNumber.displayMatNo,
+      );
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.successOrderItem,
+        properties: {
+          MixpanelProps.orderNumber: orderNumber,
+          MixpanelProps.productName: item.materialDescription,
+          MixpanelProps.productCode: item.materialNumber.displayMatNo,
+          MixpanelProps.productQty: item.qty,
+          MixpanelProps.grandTotal: item.itemTotalPrice(
+            isIDMarket,
+          ),
+          MixpanelProps.unitPrice: item.itemUnitPrice(
+            isIDMarket,
+          ),
+          MixpanelProps.bannerId: bannerData.bannerId,
+        },
+      );
+
+      //TODO: Revisit later to implement is_tender, is_reorder, tag and added_from for MixpanelProps here
     }
   }
 

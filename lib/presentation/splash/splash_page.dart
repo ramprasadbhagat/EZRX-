@@ -895,7 +895,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
             state.when(
               initial: () {},
-              linkPending: (_) {
+              linkPending: (_, __) {
                 context.read<DeepLinkingBloc>().add(
                       DeepLinkingEvent.consumePendingLink(
                         selectedCustomerCode: eligibilityState.customerCodeInfo,
@@ -903,7 +903,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       ),
                     );
               },
-              redirectProductDetail: (materialNumber) {
+              redirectProductDetail: (materialNumber, banner) {
                 if (eligibilityState.user.userCanAccessProducts) {
                   final materialInfo = MaterialInfo.empty().copyWith(
                     materialNumber: materialNumber,
@@ -924,13 +924,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       );
 
                   context.router.push(
-                    ProductDetailsPageRoute(materialInfo: materialInfo),
+                    ProductDetailsPageRoute(
+                      materialInfo: materialInfo,
+                      banner: banner,
+                    ),
                   );
                 } else {
                   noAccessSnackbar.show(context);
                 }
               },
-              redirectBundleDetail: (materialNumber) {
+              redirectBundleDetail: (materialNumber, banner) {
                 if (eligibilityState.user.userCanAccessProducts &&
                     !eligibilityState.salesOrgConfigs.disableBundles) {
                   context.router.push(
@@ -939,6 +942,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         materialNumber: materialNumber,
                         type: MaterialInfoType.bundle(),
                       ),
+                      banner: banner,
                     ),
                   );
                 } else {

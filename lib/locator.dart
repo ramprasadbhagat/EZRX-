@@ -219,6 +219,7 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_st
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/secure_storage.dart';
@@ -466,6 +467,7 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(() => DeviceStorage());
+  locator.registerLazySingleton(() => MaterialBannerStorage(hive: Hive));
   locator.registerLazySingleton(() => BannerStorage());
   locator.registerLazySingleton(
     () => DeviceRepository(
@@ -572,6 +574,7 @@ void setupLocator() {
       clevertapService: locator<ClevertapService>(),
       productSuggestionHistoryStorage:
           locator<ProductSuggestionHistoryStorage>(),
+      materialBannerStorage: locator<MaterialBannerStorage>(),
     ),
   );
 
@@ -906,6 +909,8 @@ void setupLocator() {
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
       deviceStorage: locator<DeviceStorage>(),
       remoteConfigService: locator<RemoteConfigService>(),
+      materialBannerStorage: locator<MaterialBannerStorage>(),
+      mixpanelService: locator<MixpanelService>(),
     ),
   );
 
@@ -1692,6 +1697,7 @@ void setupLocator() {
       cartLocalDataSource: locator<CartLocalDataSource>(),
       cartRemoteDataSource: locator<CartRemoteDataSource>(),
       deviceStorage: locator<DeviceStorage>(),
+      materialBannerStorage: locator<MaterialBannerStorage>(),
     ),
   );
 

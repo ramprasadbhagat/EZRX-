@@ -1,9 +1,13 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
+import 'package:ezrxmobile/infrastructure/banner/dtos/ez_reach_banner_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:mocktail/mocktail.dart';
@@ -76,6 +80,8 @@ class OrderRemoteDataSourceMock extends Mock implements OrderRemoteDataSource {}
 
 class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
+class MaterialBannerStorageMock extends Mock implements MaterialBannerStorage {}
+
 void main() {
   late Config mockConfig;
   late Encryption encryption;
@@ -103,6 +109,8 @@ void main() {
       fakeEnableMarketPlaceMarkets.contains(fakeMarketPlaceMarket);
   const fakeSecretKey = 'fake-key';
   final fakeError = MockException(message: 'fake-exception');
+  late MaterialBannerStorage materialBannerStorageMock;
+  late MixpanelService mixpanelService;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -110,6 +118,7 @@ void main() {
     mockConfig = MockConfig();
     orderLocalDataSource = OrderLocalDataSourceMock();
     orderRemoteDataSource = OrderRemoteDataSourceMock();
+    materialBannerStorageMock = MaterialBannerStorageMock();
     deviceStorage = DeviceStorageMock();
     remoteConfigService = RemoteConfigServiceMock();
     viewByOrderDetailsLocalDataSource = ViewByOrderDetailsLocalDataSourceMock();
@@ -117,6 +126,7 @@ void main() {
         ViewByOrderDetailsRemoteDataSourceMock();
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
+    mixpanelService = MixpanelServiceMock();
     encryption = EncryptionMock();
     orderEncryptionMock = OrderEncryption(
       data: 'fake-data',
@@ -133,6 +143,8 @@ void main() {
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       deviceStorage: deviceStorage,
       remoteConfigService: remoteConfigService,
+      materialBannerStorage: materialBannerStorageMock,
+      mixpanelService: mixpanelService,
     );
     final materialListResponse =
         await MaterialListLocalDataSource().getProductList();
@@ -303,97 +315,101 @@ void main() {
     expect(submitOrder.blockOrder, false);
   });
 
-  test('get submit order successfully locally with payment term validation ',
-      () async {
-    when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+  test(
+    'get submit order successfully locally with payment term validation ',
+    () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-    final cartMaterial = <PriceAggregate>[
-      PriceAggregate.empty().copyWith(
-        quantity: 2,
-        materialInfo: MaterialInfo.empty().copyWith(
-          materialNumber: MaterialNumber('000000000023001758'),
-          principalData: PrincipalData.empty()
-              .copyWith(principalCode: PrincipalCode('0000140332')),
-        ),
-        tenderContract: TenderContract.empty().copyWith(
-          contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
-          tenderOrderReason: TenderContractReason('reas'),
-        ),
-        salesOrgConfig: fakePHSalesOrgConfigs,
-      ),
-    ];
-
-    final submitOrder = SubmitOrder.empty().copyWith(
-      userName: deliveryInfoData.contactPerson.getValue().isNotEmpty
-          ? deliveryInfoData.contactPerson.getValue()
-          : fakeClientUser.fullName.toString(),
-      poReference: deliveryInfoData.poReference.getValue(),
-      referenceNotes: deliveryInfoData.referenceNote.getValue(),
-      specialInstructions: deliveryInfoData.deliveryInstruction.getValue(),
-      companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-      requestedDeliveryDate: deliveryInfoData.deliveryDate.getValue(),
-      poDate: deliveryInfoData.deliveryDate.getValue(),
-      telephone: deliveryInfoData.mobileNumber.getTelephone,
-      collectiveNumber: '',
-      paymentTerms: <PriceAggregate>[
+      final cartMaterial = <PriceAggregate>[
         PriceAggregate.empty().copyWith(
           quantity: 2,
           materialInfo: MaterialInfo.empty().copyWith(
             materialNumber: MaterialNumber('000000000023001758'),
+            principalData: PrincipalData.empty()
+                .copyWith(principalCode: PrincipalCode('0000140332')),
           ),
           tenderContract: TenderContract.empty().copyWith(
             contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
             tenderOrderReason: TenderContractReason('reas'),
           ),
+          salesOrgConfig: fakePHSalesOrgConfigs,
         ),
-      ].first.tenderContract.contractPaymentTerm.getValue(),
-      customer: SubmitOrderCustomer.empty().copyWith(
-        customerNumber: fakeCustomerCodeInfo.customerCodeSoldTo,
-        customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
-        division: fakeCustomerCodeInfo.division,
-        salesOrganisation: fakeSalesOrganisation.salesOrg.getOrCrash(),
-      ),
-      blockOrder: fakePHSalesOrgConfigs.enablePrincipalList &&
-          cartMaterial.any((item) => item.checkSalesCutOff),
-      products: <PriceAggregate>[
-        PriceAggregate.empty().copyWith(
-          quantity: 2,
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023001758'),
+      ];
+
+      final submitOrder = SubmitOrder.empty().copyWith(
+        userName: deliveryInfoData.contactPerson.getValue().isNotEmpty
+            ? deliveryInfoData.contactPerson.getValue()
+            : fakeClientUser.fullName.toString(),
+        poReference: deliveryInfoData.poReference.getValue(),
+        referenceNotes: deliveryInfoData.referenceNote.getValue(),
+        specialInstructions: deliveryInfoData.deliveryInstruction.getValue(),
+        companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+        requestedDeliveryDate: deliveryInfoData.deliveryDate.getValue(),
+        poDate: deliveryInfoData.deliveryDate.getValue(),
+        telephone: deliveryInfoData.mobileNumber.getTelephone,
+        collectiveNumber: '',
+        paymentTerms: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            quantity: 2,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+            ),
+            tenderContract: TenderContract.empty().copyWith(
+              contractPaymentTerm:
+                  TenderContractInfo.contractPaymentTerm('term'),
+              tenderOrderReason: TenderContractReason('reas'),
+            ),
           ),
-          tenderContract: TenderContract.empty().copyWith(
-            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
-            tenderOrderReason: TenderContractReason('reas'),
-          ),
+        ].first.tenderContract.contractPaymentTerm.getValue(),
+        customer: SubmitOrderCustomer.empty().copyWith(
+          customerNumber: fakeCustomerCodeInfo.customerCodeSoldTo,
+          customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
+          division: fakeCustomerCodeInfo.division,
+          salesOrganisation: fakeSalesOrganisation.salesOrg.getOrCrash(),
         ),
-      ].map((e) => e.toSubmitMaterialInfo()).toList(),
-    );
+        blockOrder: fakePHSalesOrgConfigs.enablePrincipalList &&
+            cartMaterial.any((item) => item.checkSalesCutOff),
+        products: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            quantity: 2,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+            ),
+            tenderContract: TenderContract.empty().copyWith(
+              contractPaymentTerm:
+                  TenderContractInfo.contractPaymentTerm('term'),
+              tenderOrderReason: TenderContractReason('reas'),
+            ),
+          ),
+        ].map((e) => e.toSubmitMaterialInfo()).toList(),
+      );
 
-    when(() => orderLocalDataSource.submitOrder()).thenAnswer(
-      (invocation) async => submitOrderResponseMock,
-    );
+      when(() => orderLocalDataSource.submitOrder()).thenAnswer(
+        (invocation) async => submitOrderResponseMock,
+      );
 
-    final result = await orderRepository.submitOrder(
-      shipToInfo: mockShipToInfo,
-      user: fakeClientUser,
-      cartProducts: cartMaterial,
-      grandTotal: 100.0,
-      customerCodeInfo: fakeCustomerCodeInfo,
-      salesOrganisation: fakeSalesOrganisation,
-      data: deliveryInfoData,
-      orderDocumentType: OrderDocumentType.empty()
-          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-      configs: fakePHSalesOrgConfigs,
-      orderValue: 100.0,
-      totalTax: 100,
-      smallOrderFee: 12500.0,
-    );
-    expect(
-      result,
-      Right(submitOrderResponseMock),
-    );
-    expect(submitOrder.blockOrder, false);
-  });
+      final result = await orderRepository.submitOrder(
+        shipToInfo: mockShipToInfo,
+        user: fakeClientUser,
+        cartProducts: cartMaterial,
+        grandTotal: 100.0,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        data: deliveryInfoData,
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+        configs: fakePHSalesOrgConfigs,
+        orderValue: 100.0,
+        totalTax: 100,
+        smallOrderFee: 12500.0,
+      );
+      expect(
+        result,
+        Right(submitOrderResponseMock),
+      );
+      expect(submitOrder.blockOrder, false);
+    },
+  );
   test('get submit order fail locally ', () async {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
@@ -769,79 +785,81 @@ void main() {
       );
     });
 
-    test('get submit order successfully Remote success with bonus item',
-        () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      final bonusCartMaterial = cartMaterials
-          .map(
-            (e) => e.copyWith(
-              bonusSampleItems: [
-                BonusSampleItem.empty().copyWith(
-                  principalData: PrincipalData(
-                    principalName: PrincipalName('fake-principle-name'),
-                    principalCode: PrincipalCode('fake-principle-code'),
+    test(
+      'get submit order successfully Remote success with bonus item',
+      () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        final bonusCartMaterial = cartMaterials
+            .map(
+              (e) => e.copyWith(
+                bonusSampleItems: [
+                  BonusSampleItem.empty().copyWith(
+                    principalData: PrincipalData(
+                      principalName: PrincipalName('fake-principle-name'),
+                      principalCode: PrincipalCode('fake-principle-code'),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )
-          .toList();
-      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+                ],
+              ),
+            )
+            .toList();
+        when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
 
-      when(
-        () => encryption.encryptionData(
-          data: SubmitOrderDto.fromDomain(
-            submitOrderMock.copyWith(
-              products: bonusCartMaterial
-                  .expand(
-                    (element) => !element.materialInfo.type.typeBundle
-                        ? [element.toSubmitMaterialInfo()]
-                        : element.bundle.materials.map(
-                            (el) => PriceAggregate.empty()
-                                .copyWith(
-                                  materialInfo: el,
-                                  quantity: el.quantity.intValue,
-                                  salesOrgConfig: element.salesOrgConfig,
-                                  bundle: element.bundle,
-                                )
-                                .toSubmitMaterialInfo(),
-                          ),
-                  )
-                  .toList(),
-            ),
-          ).toJson(),
-          secretKey: fakeSecretKey,
-        ),
-      ).thenReturn(orderEncryptionMock);
-      when(
-        () => orderRemoteDataSource.submitOrder(
-          orderEncryption: orderEncryptionMock,
-          enableMarketPlace: fakeConfigValue,
-        ),
-      ).thenAnswer(
-        (invocation) async => submitOrderResponseMock,
-      );
+        when(
+          () => encryption.encryptionData(
+            data: SubmitOrderDto.fromDomain(
+              submitOrderMock.copyWith(
+                products: bonusCartMaterial
+                    .expand(
+                      (element) => !element.materialInfo.type.typeBundle
+                          ? [element.toSubmitMaterialInfo()]
+                          : element.bundle.materials.map(
+                              (el) => PriceAggregate.empty()
+                                  .copyWith(
+                                    materialInfo: el,
+                                    quantity: el.quantity.intValue,
+                                    salesOrgConfig: element.salesOrgConfig,
+                                    bundle: element.bundle,
+                                  )
+                                  .toSubmitMaterialInfo(),
+                            ),
+                    )
+                    .toList(),
+              ),
+            ).toJson(),
+            secretKey: fakeSecretKey,
+          ),
+        ).thenReturn(orderEncryptionMock);
+        when(
+          () => orderRemoteDataSource.submitOrder(
+            orderEncryption: orderEncryptionMock,
+            enableMarketPlace: fakeConfigValue,
+          ),
+        ).thenAnswer(
+          (invocation) async => submitOrderResponseMock,
+        );
 
-      final result = await orderRepository.submitOrder(
-        shipToInfo: mockShipToInfo,
-        user: fakeClientUser,
-        cartProducts: bonusCartMaterial,
-        grandTotal: 100.0,
-        customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisation: fakeSalesOrganisation,
-        data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: fakePHSalesOrgConfigs,
-        orderValue: 100.0,
-        totalTax: 100,
-        smallOrderFee: 12500.0,
-      );
-      expect(
-        result,
-        Right(submitOrderResponseMock),
-      );
-    });
+        final result = await orderRepository.submitOrder(
+          shipToInfo: mockShipToInfo,
+          user: fakeClientUser,
+          cartProducts: bonusCartMaterial,
+          grandTotal: 100.0,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          data: deliveryInfoData,
+          orderDocumentType: OrderDocumentType.empty()
+              .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+          configs: fakePHSalesOrgConfigs,
+          orderValue: 100.0,
+          totalTax: 100,
+          smallOrderFee: 12500.0,
+        );
+        expect(
+          result,
+          Right(submitOrderResponseMock),
+        );
+      },
+    );
 
     test('get submit order successfully Remote fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
@@ -1002,26 +1020,77 @@ void main() {
     });
 
     test(
-        'submit order should contain deliveryFee as small order value string in ID market when order value <300000.00',
-        () async {
+      'submit order should contain deliveryFee as small order value string in ID market when order value <300000.00',
+      () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        final submitOrderMockIDMarket = submitOrderMock.copyWith(
+          requestedDeliveryDate: fakeIDSalesOrgConfigs.enableFutureDeliveryDay
+              ? deliveryInfoData.deliveryDate.getValue()
+              : '',
+          customer: submitOrderMock.customer.copyWith(
+            salesOrganisation:
+                fakeIDSalesOrganisation.salesOrg.getOrDefaultValue(''),
+          ),
+        );
+        when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+
+        when(
+          () => encryption.encryptionData(
+            data: SubmitOrderDto.fromDomain(
+              submitOrderMockIDMarket,
+            ).toJson()
+              ..addAll({'deliveryFee': '12500.0'}),
+            secretKey: fakeSecretKey,
+          ),
+        ).thenReturn(orderEncryptionMock);
+        when(
+          () => orderRemoteDataSource.submitOrder(
+            orderEncryption: orderEncryptionMock,
+            enableMarketPlace: fakeConfigValue,
+          ),
+        ).thenAnswer(
+          (invocation) async => submitOrderResponseMock,
+        );
+
+        final result = await orderRepository.submitOrder(
+          shipToInfo: mockShipToInfo,
+          user: fakeClientUser,
+          cartProducts: cartMaterials,
+          grandTotal: 100.0,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeIDSalesOrganisation,
+          data: deliveryInfoData,
+          orderDocumentType: OrderDocumentType.empty()
+              .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+          configs: fakeIDSalesOrgConfigs,
+          orderValue: 100.0,
+          totalTax: 100,
+          smallOrderFee: 12500.0,
+        );
+
+        expect(result, Right(submitOrderResponseMock));
+      },
+    );
+  });
+  test(
+    'submit order should contain deliveryFee as null string in ID market when order valye is >=300000.00',
+    () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       final submitOrderMockIDMarket = submitOrderMock.copyWith(
-        requestedDeliveryDate: fakeIDSalesOrgConfigs.enableFutureDeliveryDay
-            ? deliveryInfoData.deliveryDate.getValue()
-            : '',
+        orderValue: 310000.00,
         customer: submitOrderMock.customer.copyWith(
           salesOrganisation:
               fakeIDSalesOrganisation.salesOrg.getOrDefaultValue(''),
         ),
       );
-      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
 
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
       when(
         () => encryption.encryptionData(
           data: SubmitOrderDto.fromDomain(
             submitOrderMockIDMarket,
           ).toJson()
-            ..addAll({'deliveryFee': '12500.0'}),
+            ..addAll({'deliveryFee': 'null'}),
           secretKey: fakeSecretKey,
         ),
       ).thenReturn(orderEncryptionMock);
@@ -1044,64 +1113,15 @@ void main() {
         data: deliveryInfoData,
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: fakeIDSalesOrgConfigs,
-        orderValue: 100.0,
+        configs: fakePHSalesOrgConfigs,
+        orderValue: 310000.00,
         totalTax: 100,
         smallOrderFee: 12500.0,
       );
 
       expect(result, Right(submitOrderResponseMock));
-    });
-  });
-  test(
-      'submit order should contain deliveryFee as null string in ID market when order valye is >=300000.00',
-      () async {
-    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-    final submitOrderMockIDMarket = submitOrderMock.copyWith(
-      orderValue: 310000.00,
-      customer: submitOrderMock.customer.copyWith(
-        salesOrganisation:
-            fakeIDSalesOrganisation.salesOrg.getOrDefaultValue(''),
-      ),
-    );
-
-    when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
-    when(
-      () => encryption.encryptionData(
-        data: SubmitOrderDto.fromDomain(
-          submitOrderMockIDMarket,
-        ).toJson()
-          ..addAll({'deliveryFee': 'null'}),
-        secretKey: fakeSecretKey,
-      ),
-    ).thenReturn(orderEncryptionMock);
-    when(
-      () => orderRemoteDataSource.submitOrder(
-        orderEncryption: orderEncryptionMock,
-        enableMarketPlace: fakeConfigValue,
-      ),
-    ).thenAnswer(
-      (invocation) async => submitOrderResponseMock,
-    );
-
-    final result = await orderRepository.submitOrder(
-      shipToInfo: mockShipToInfo,
-      user: fakeClientUser,
-      cartProducts: cartMaterials,
-      grandTotal: 100.0,
-      customerCodeInfo: fakeCustomerCodeInfo,
-      salesOrganisation: fakeIDSalesOrganisation,
-      data: deliveryInfoData,
-      orderDocumentType: OrderDocumentType.empty()
-          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-      configs: fakePHSalesOrgConfigs,
-      orderValue: 310000.00,
-      totalTax: 100,
-      smallOrderFee: 12500.0,
-    );
-
-    expect(result, Right(submitOrderResponseMock));
-  });
+    },
+  );
 
   group('OrderRepository => getOrderHistoryDetails', () {
     test('Locally success', () async {
@@ -1159,6 +1179,25 @@ void main() {
         ),
       ).thenAnswer(
         (invocation) async => orderHistoryDetailsMock,
+      );
+      for (final item in orderHistoryDetailsMock.orderHistoryDetailsOrderItem) {
+        when(
+          () => materialBannerStorageMock.get(
+            materialNumber: item.productType.typeBundle
+                ? '${MaterialNumber(item.parentId).displayMatNo}_${item.materialNumber.displayMatNo}'
+                : item.materialNumber.displayMatNo,
+          ),
+        ).thenAnswer(
+          (invocation) async => EZReachBannerDto.fromDomain(
+            EZReachBanner.empty(),
+          ),
+        );
+      }
+
+      when(
+        () => materialBannerStorageMock.clear(),
+      ).thenAnswer(
+        (invocation) => Future.value(),
       );
 
       final result = await orderRepository.getOrderConfirmationDetail(
@@ -1270,25 +1309,27 @@ void main() {
   });
 
   group('OrderRepository => getConfirmedOrderStockInfo', () {
-    test('get submit order getConfirmedOrderStockInfo locally success',
-        () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+    test(
+      'get submit order getConfirmedOrderStockInfo locally success',
+      () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
-      when(() => stockInfoLocalDataSource.getMaterialStockInfoList())
-          .thenAnswer(
-        (invocation) async => stockInfoListMock,
-      );
+        when(() => stockInfoLocalDataSource.getMaterialStockInfoList())
+            .thenAnswer(
+          (invocation) async => stockInfoListMock,
+        );
 
-      final result = await orderRepository.getConfirmedOrderStockInfo(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrg: fakeSalesOrganisation.salesOrg,
-        orderHistoryDetailList: [orderHistoryDetailsMock],
-      );
-      expect(
-        result,
-        Right(stockInfoListMock),
-      );
-    });
+        final result = await orderRepository.getConfirmedOrderStockInfo(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrg: fakeSalesOrganisation.salesOrg,
+          orderHistoryDetailList: [orderHistoryDetailsMock],
+        );
+        expect(
+          result,
+          Right(stockInfoListMock),
+        );
+      },
+    );
 
     test('get submit order getConfirmedOrderStockInfo locally fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
@@ -1307,32 +1348,35 @@ void main() {
       );
     });
 
-    test('get submit order getConfirmedOrderStockInfo Remote success',
-        () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    test(
+      'get submit order getConfirmedOrderStockInfo Remote success',
+      () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
-      when(
-        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: orderHistoryDetailsMock.orderHistoryDetailsOrderItem
-              .map((e) => e.materialNumber.getOrDefaultValue(''))
-              .toList(),
-          salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
-          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        ),
-      ).thenAnswer(
-        (invocation) async => stockInfoListMock,
-      );
+        when(
+          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+            materialNumbers: orderHistoryDetailsMock
+                .orderHistoryDetailsOrderItem
+                .map((e) => e.materialNumber.getOrDefaultValue(''))
+                .toList(),
+            salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
+            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          ),
+        ).thenAnswer(
+          (invocation) async => stockInfoListMock,
+        );
 
-      final result = await orderRepository.getConfirmedOrderStockInfo(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrg: fakeSalesOrganisation.salesOrg,
-        orderHistoryDetailList: [orderHistoryDetailsMock],
-      );
-      expect(
-        result,
-        Right(stockInfoListMock),
-      );
-    });
+        final result = await orderRepository.getConfirmedOrderStockInfo(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrg: fakeSalesOrganisation.salesOrg,
+          orderHistoryDetailList: [orderHistoryDetailsMock],
+        );
+        expect(
+          result,
+          Right(stockInfoListMock),
+        );
+      },
+    );
 
     test('get submit order getConfirmedOrderStockInfo Remote fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);

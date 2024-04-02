@@ -12,7 +12,7 @@ part of 'cart_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CartEvent {
@@ -35,11 +35,15 @@ mixin _$CartEvent {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -76,11 +80,13 @@ mixin _$CartEvent {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -116,11 +122,13 @@ mixin _$CartEvent {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -251,10 +259,10 @@ class _$CartEventCopyWithImpl<$Res, $Val extends CartEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisationConfigs salesOrganisationConfigs,
@@ -271,11 +279,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -287,7 +295,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? user = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrganisationConfigs: null == salesOrganisationConfigs
           ? _value.salesOrganisationConfigs
           : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
@@ -355,8 +363,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.salesOrganisationConfigs,
       required this.salesOrganisation,
       required this.customerCodeInfo,
@@ -380,10 +388,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(
                     other.salesOrganisationConfigs, salesOrganisationConfigs) ||
                 other.salesOrganisationConfigs == salesOrganisationConfigs) &&
@@ -403,8 +411,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -426,11 +434,15 @@ class _$_Initialized implements _Initialized {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -471,11 +483,13 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -515,11 +529,13 @@ class _$_Initialized implements _Initialized {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -655,7 +671,7 @@ abstract class _Initialized implements CartEvent {
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final User user}) = _$_Initialized;
+      required final User user}) = _$InitializedImpl;
 
   SalesOrganisationConfigs get salesOrganisationConfigs;
   SalesOrganisation get salesOrganisation;
@@ -663,15 +679,16 @@ abstract class _Initialized implements CartEvent {
   ShipToInfo get shipToInfo;
   User get user;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_VerifyMaterialDealBonusCopyWith<$Res> {
-  factory _$$_VerifyMaterialDealBonusCopyWith(_$_VerifyMaterialDealBonus value,
-          $Res Function(_$_VerifyMaterialDealBonus) then) =
-      __$$_VerifyMaterialDealBonusCopyWithImpl<$Res>;
+abstract class _$$VerifyMaterialDealBonusImplCopyWith<$Res> {
+  factory _$$VerifyMaterialDealBonusImplCopyWith(
+          _$VerifyMaterialDealBonusImpl value,
+          $Res Function(_$VerifyMaterialDealBonusImpl) then) =
+      __$$VerifyMaterialDealBonusImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PriceAggregate item, List<PriceAggregate> items});
 
@@ -679,11 +696,12 @@ abstract class _$$_VerifyMaterialDealBonusCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_VerifyMaterialDealBonusCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_VerifyMaterialDealBonus>
-    implements _$$_VerifyMaterialDealBonusCopyWith<$Res> {
-  __$$_VerifyMaterialDealBonusCopyWithImpl(_$_VerifyMaterialDealBonus _value,
-      $Res Function(_$_VerifyMaterialDealBonus) _then)
+class __$$VerifyMaterialDealBonusImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$VerifyMaterialDealBonusImpl>
+    implements _$$VerifyMaterialDealBonusImplCopyWith<$Res> {
+  __$$VerifyMaterialDealBonusImplCopyWithImpl(
+      _$VerifyMaterialDealBonusImpl _value,
+      $Res Function(_$VerifyMaterialDealBonusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -692,7 +710,7 @@ class __$$_VerifyMaterialDealBonusCopyWithImpl<$Res>
     Object? item = null,
     Object? items = null,
   }) {
-    return _then(_$_VerifyMaterialDealBonus(
+    return _then(_$VerifyMaterialDealBonusImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -715,8 +733,8 @@ class __$$_VerifyMaterialDealBonusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
-  const _$_VerifyMaterialDealBonus(
+class _$VerifyMaterialDealBonusImpl implements _VerifyMaterialDealBonus {
+  const _$VerifyMaterialDealBonusImpl(
       {required this.item, required final List<PriceAggregate> items})
       : _items = items;
 
@@ -737,10 +755,10 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VerifyMaterialDealBonus &&
+            other is _$VerifyMaterialDealBonusImpl &&
             (identical(other.item, item) || other.item == item) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
@@ -752,10 +770,9 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VerifyMaterialDealBonusCopyWith<_$_VerifyMaterialDealBonus>
-      get copyWith =>
-          __$$_VerifyMaterialDealBonusCopyWithImpl<_$_VerifyMaterialDealBonus>(
-              this, _$identity);
+  _$$VerifyMaterialDealBonusImplCopyWith<_$VerifyMaterialDealBonusImpl>
+      get copyWith => __$$VerifyMaterialDealBonusImplCopyWithImpl<
+          _$VerifyMaterialDealBonusImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -777,11 +794,15 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -821,11 +842,13 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -864,11 +887,13 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -999,22 +1024,23 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
 
 abstract class _VerifyMaterialDealBonus implements CartEvent {
   const factory _VerifyMaterialDealBonus(
-      {required final PriceAggregate item,
-      required final List<PriceAggregate> items}) = _$_VerifyMaterialDealBonus;
+          {required final PriceAggregate item,
+          required final List<PriceAggregate> items}) =
+      _$VerifyMaterialDealBonusImpl;
 
   ///Todo: consider to remove it
   PriceAggregate get item;
   List<PriceAggregate> get items;
   @JsonKey(ignore: true)
-  _$$_VerifyMaterialDealBonusCopyWith<_$_VerifyMaterialDealBonus>
+  _$$VerifyMaterialDealBonusImplCopyWith<_$VerifyMaterialDealBonusImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AddBonusToCartItemCopyWith<$Res> {
-  factory _$$_AddBonusToCartItemCopyWith(_$_AddBonusToCartItem value,
-          $Res Function(_$_AddBonusToCartItem) then) =
-      __$$_AddBonusToCartItemCopyWithImpl<$Res>;
+abstract class _$$AddBonusToCartItemImplCopyWith<$Res> {
+  factory _$$AddBonusToCartItemImplCopyWith(_$AddBonusToCartItemImpl value,
+          $Res Function(_$AddBonusToCartItemImpl) then) =
+      __$$AddBonusToCartItemImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {MaterialInfo bonusMaterial,
@@ -1026,11 +1052,11 @@ abstract class _$$_AddBonusToCartItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AddBonusToCartItemCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_AddBonusToCartItem>
-    implements _$$_AddBonusToCartItemCopyWith<$Res> {
-  __$$_AddBonusToCartItemCopyWithImpl(
-      _$_AddBonusToCartItem _value, $Res Function(_$_AddBonusToCartItem) _then)
+class __$$AddBonusToCartItemImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$AddBonusToCartItemImpl>
+    implements _$$AddBonusToCartItemImplCopyWith<$Res> {
+  __$$AddBonusToCartItemImplCopyWithImpl(_$AddBonusToCartItemImpl _value,
+      $Res Function(_$AddBonusToCartItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1040,7 +1066,7 @@ class __$$_AddBonusToCartItemCopyWithImpl<$Res>
     Object? bonusItemId = null,
     Object? counterOfferDetails = null,
   }) {
-    return _then(_$_AddBonusToCartItem(
+    return _then(_$AddBonusToCartItemImpl(
       bonusMaterial: null == bonusMaterial
           ? _value.bonusMaterial
           : bonusMaterial // ignore: cast_nullable_to_non_nullable
@@ -1076,8 +1102,8 @@ class __$$_AddBonusToCartItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddBonusToCartItem implements _AddBonusToCartItem {
-  const _$_AddBonusToCartItem(
+class _$AddBonusToCartItemImpl implements _AddBonusToCartItem {
+  const _$AddBonusToCartItemImpl(
       {required this.bonusMaterial,
       required this.bonusItemId,
       required this.counterOfferDetails});
@@ -1095,10 +1121,10 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddBonusToCartItem &&
+            other is _$AddBonusToCartItemImpl &&
             (identical(other.bonusMaterial, bonusMaterial) ||
                 other.bonusMaterial == bonusMaterial) &&
             (identical(other.bonusItemId, bonusItemId) ||
@@ -1114,8 +1140,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddBonusToCartItemCopyWith<_$_AddBonusToCartItem> get copyWith =>
-      __$$_AddBonusToCartItemCopyWithImpl<_$_AddBonusToCartItem>(
+  _$$AddBonusToCartItemImplCopyWith<_$AddBonusToCartItemImpl> get copyWith =>
+      __$$AddBonusToCartItemImplCopyWithImpl<_$AddBonusToCartItemImpl>(
           this, _$identity);
 
   @override
@@ -1138,11 +1164,15 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -1182,11 +1212,13 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -1226,11 +1258,13 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -1365,39 +1399,39 @@ abstract class _AddBonusToCartItem implements CartEvent {
           {required final MaterialInfo bonusMaterial,
           required final StringValue bonusItemId,
           required final RequestCounterOfferDetails counterOfferDetails}) =
-      _$_AddBonusToCartItem;
+      _$AddBonusToCartItemImpl;
 
   MaterialInfo get bonusMaterial;
   StringValue get bonusItemId;
   RequestCounterOfferDetails get counterOfferDetails;
   @JsonKey(ignore: true)
-  _$$_AddBonusToCartItemCopyWith<_$_AddBonusToCartItem> get copyWith =>
+  _$$AddBonusToCartItemImplCopyWith<_$AddBonusToCartItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RemoveSampleBonusFromCartConfigCopyWith<$Res> {
-  factory _$$_RemoveSampleBonusFromCartConfigCopyWith(
-          _$_RemoveSampleBonusFromCartConfig value,
-          $Res Function(_$_RemoveSampleBonusFromCartConfig) then) =
-      __$$_RemoveSampleBonusFromCartConfigCopyWithImpl<$Res>;
+abstract class _$$RemoveSampleBonusFromCartConfigImplCopyWith<$Res> {
+  factory _$$RemoveSampleBonusFromCartConfigImplCopyWith(
+          _$RemoveSampleBonusFromCartConfigImpl value,
+          $Res Function(_$RemoveSampleBonusFromCartConfigImpl) then) =
+      __$$RemoveSampleBonusFromCartConfigImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_RemoveSampleBonusFromCartConfigCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_RemoveSampleBonusFromCartConfig>
-    implements _$$_RemoveSampleBonusFromCartConfigCopyWith<$Res> {
-  __$$_RemoveSampleBonusFromCartConfigCopyWithImpl(
-      _$_RemoveSampleBonusFromCartConfig _value,
-      $Res Function(_$_RemoveSampleBonusFromCartConfig) _then)
+class __$$RemoveSampleBonusFromCartConfigImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$RemoveSampleBonusFromCartConfigImpl>
+    implements _$$RemoveSampleBonusFromCartConfigImplCopyWith<$Res> {
+  __$$RemoveSampleBonusFromCartConfigImplCopyWithImpl(
+      _$RemoveSampleBonusFromCartConfigImpl _value,
+      $Res Function(_$RemoveSampleBonusFromCartConfigImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_RemoveSampleBonusFromCartConfig
+class _$RemoveSampleBonusFromCartConfigImpl
     implements _RemoveSampleBonusFromCartConfig {
-  const _$_RemoveSampleBonusFromCartConfig();
+  const _$RemoveSampleBonusFromCartConfigImpl();
 
   @override
   String toString() {
@@ -1405,10 +1439,10 @@ class _$_RemoveSampleBonusFromCartConfig
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoveSampleBonusFromCartConfig);
+            other is _$RemoveSampleBonusFromCartConfigImpl);
   }
 
   @override
@@ -1434,11 +1468,15 @@ class _$_RemoveSampleBonusFromCartConfig
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -1478,11 +1516,13 @@ class _$_RemoveSampleBonusFromCartConfig
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -1521,11 +1561,13 @@ class _$_RemoveSampleBonusFromCartConfig
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -1656,29 +1698,29 @@ class _$_RemoveSampleBonusFromCartConfig
 
 abstract class _RemoveSampleBonusFromCartConfig implements CartEvent {
   const factory _RemoveSampleBonusFromCartConfig() =
-      _$_RemoveSampleBonusFromCartConfig;
+      _$RemoveSampleBonusFromCartConfigImpl;
 }
 
 /// @nodoc
-abstract class _$$_ClearCartCopyWith<$Res> {
-  factory _$$_ClearCartCopyWith(
-          _$_ClearCart value, $Res Function(_$_ClearCart) then) =
-      __$$_ClearCartCopyWithImpl<$Res>;
+abstract class _$$ClearCartImplCopyWith<$Res> {
+  factory _$$ClearCartImplCopyWith(
+          _$ClearCartImpl value, $Res Function(_$ClearCartImpl) then) =
+      __$$ClearCartImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ClearCartCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_ClearCart>
-    implements _$$_ClearCartCopyWith<$Res> {
-  __$$_ClearCartCopyWithImpl(
-      _$_ClearCart _value, $Res Function(_$_ClearCart) _then)
+class __$$ClearCartImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$ClearCartImpl>
+    implements _$$ClearCartImplCopyWith<$Res> {
+  __$$ClearCartImplCopyWithImpl(
+      _$ClearCartImpl _value, $Res Function(_$ClearCartImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ClearCart implements _ClearCart {
-  const _$_ClearCart();
+class _$ClearCartImpl implements _ClearCart {
+  const _$ClearCartImpl();
 
   @override
   String toString() {
@@ -1686,9 +1728,9 @@ class _$_ClearCart implements _ClearCart {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ClearCart);
+        (other.runtimeType == runtimeType && other is _$ClearCartImpl);
   }
 
   @override
@@ -1714,11 +1756,15 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -1758,11 +1804,13 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -1801,11 +1849,13 @@ class _$_ClearCart implements _ClearCart {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -1935,30 +1985,31 @@ class _$_ClearCart implements _ClearCart {
 }
 
 abstract class _ClearCart implements CartEvent {
-  const factory _ClearCart() = _$_ClearCart;
+  const factory _ClearCart() = _$ClearCartImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchProductsAddedToCartCopyWith<$Res> {
-  factory _$$_FetchProductsAddedToCartCopyWith(
-          _$_FetchProductsAddedToCart value,
-          $Res Function(_$_FetchProductsAddedToCart) then) =
-      __$$_FetchProductsAddedToCartCopyWithImpl<$Res>;
+abstract class _$$FetchProductsAddedToCartImplCopyWith<$Res> {
+  factory _$$FetchProductsAddedToCartImplCopyWith(
+          _$FetchProductsAddedToCartImpl value,
+          $Res Function(_$FetchProductsAddedToCartImpl) then) =
+      __$$FetchProductsAddedToCartImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchProductsAddedToCartCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_FetchProductsAddedToCart>
-    implements _$$_FetchProductsAddedToCartCopyWith<$Res> {
-  __$$_FetchProductsAddedToCartCopyWithImpl(_$_FetchProductsAddedToCart _value,
-      $Res Function(_$_FetchProductsAddedToCart) _then)
+class __$$FetchProductsAddedToCartImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$FetchProductsAddedToCartImpl>
+    implements _$$FetchProductsAddedToCartImplCopyWith<$Res> {
+  __$$FetchProductsAddedToCartImplCopyWithImpl(
+      _$FetchProductsAddedToCartImpl _value,
+      $Res Function(_$FetchProductsAddedToCartImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
-  const _$_FetchProductsAddedToCart();
+class _$FetchProductsAddedToCartImpl implements _FetchProductsAddedToCart {
+  const _$FetchProductsAddedToCartImpl();
 
   @override
   String toString() {
@@ -1966,10 +2017,10 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchProductsAddedToCart);
+            other is _$FetchProductsAddedToCartImpl);
   }
 
   @override
@@ -1995,11 +2046,15 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -2039,11 +2094,13 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -2082,11 +2139,13 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -2216,38 +2275,44 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
 }
 
 abstract class _FetchProductsAddedToCart implements CartEvent {
-  const factory _FetchProductsAddedToCart() = _$_FetchProductsAddedToCart;
+  const factory _FetchProductsAddedToCart() = _$FetchProductsAddedToCartImpl;
 }
 
 /// @nodoc
-abstract class _$$_UpsertCartCopyWith<$Res> {
-  factory _$$_UpsertCartCopyWith(
-          _$_UpsertCart value, $Res Function(_$_UpsertCart) then) =
-      __$$_UpsertCartCopyWithImpl<$Res>;
+abstract class _$$UpsertCartImplCopyWith<$Res> {
+  factory _$$UpsertCartImplCopyWith(
+          _$UpsertCartImpl value, $Res Function(_$UpsertCartImpl) then) =
+      __$$UpsertCartImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PriceAggregate priceAggregate});
+  $Res call({PriceAggregate priceAggregate, EZReachBanner? banner});
 
   $PriceAggregateCopyWith<$Res> get priceAggregate;
+  $EZReachBannerCopyWith<$Res>? get banner;
 }
 
 /// @nodoc
-class __$$_UpsertCartCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_UpsertCart>
-    implements _$$_UpsertCartCopyWith<$Res> {
-  __$$_UpsertCartCopyWithImpl(
-      _$_UpsertCart _value, $Res Function(_$_UpsertCart) _then)
+class __$$UpsertCartImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$UpsertCartImpl>
+    implements _$$UpsertCartImplCopyWith<$Res> {
+  __$$UpsertCartImplCopyWithImpl(
+      _$UpsertCartImpl _value, $Res Function(_$UpsertCartImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? priceAggregate = null,
+    Object? banner = freezed,
   }) {
-    return _then(_$_UpsertCart(
+    return _then(_$UpsertCartImpl(
       priceAggregate: null == priceAggregate
           ? _value.priceAggregate
           : priceAggregate // ignore: cast_nullable_to_non_nullable
               as PriceAggregate,
+      banner: freezed == banner
+          ? _value.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as EZReachBanner?,
     ));
   }
 
@@ -2258,38 +2323,53 @@ class __$$_UpsertCartCopyWithImpl<$Res>
       return _then(_value.copyWith(priceAggregate: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EZReachBannerCopyWith<$Res>? get banner {
+    if (_value.banner == null) {
+      return null;
+    }
+
+    return $EZReachBannerCopyWith<$Res>(_value.banner!, (value) {
+      return _then(_value.copyWith(banner: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$_UpsertCart implements _UpsertCart {
-  const _$_UpsertCart({required this.priceAggregate});
+class _$UpsertCartImpl implements _UpsertCart {
+  const _$UpsertCartImpl({required this.priceAggregate, this.banner});
 
   @override
   final PriceAggregate priceAggregate;
+  @override
+  final EZReachBanner? banner;
 
   @override
   String toString() {
-    return 'CartEvent.upsertCart(priceAggregate: $priceAggregate)';
+    return 'CartEvent.upsertCart(priceAggregate: $priceAggregate, banner: $banner)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpsertCart &&
+            other is _$UpsertCartImpl &&
             (identical(other.priceAggregate, priceAggregate) ||
-                other.priceAggregate == priceAggregate));
+                other.priceAggregate == priceAggregate) &&
+            (identical(other.banner, banner) || other.banner == banner));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, priceAggregate);
+  int get hashCode => Object.hash(runtimeType, priceAggregate, banner);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpsertCartCopyWith<_$_UpsertCart> get copyWith =>
-      __$$_UpsertCartCopyWithImpl<_$_UpsertCart>(this, _$identity);
+  _$$UpsertCartImplCopyWith<_$UpsertCartImpl> get copyWith =>
+      __$$UpsertCartImplCopyWithImpl<_$UpsertCartImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2311,11 +2391,15 @@ class _$_UpsertCart implements _UpsertCart {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -2334,7 +2418,7 @@ class _$_UpsertCart implements _UpsertCart {
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
-    return upsertCart(priceAggregate);
+    return upsertCart(priceAggregate, banner);
   }
 
   @override
@@ -2355,11 +2439,13 @@ class _$_UpsertCart implements _UpsertCart {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -2377,7 +2463,7 @@ class _$_UpsertCart implements _UpsertCart {
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
-    return upsertCart?.call(priceAggregate);
+    return upsertCart?.call(priceAggregate, banner);
   }
 
   @override
@@ -2398,11 +2484,13 @@ class _$_UpsertCart implements _UpsertCart {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -2422,7 +2510,7 @@ class _$_UpsertCart implements _UpsertCart {
     required TResult orElse(),
   }) {
     if (upsertCart != null) {
-      return upsertCart(priceAggregate);
+      return upsertCart(priceAggregate, banner);
     }
     return orElse();
   }
@@ -2532,20 +2620,23 @@ class _$_UpsertCart implements _UpsertCart {
 }
 
 abstract class _UpsertCart implements CartEvent {
-  const factory _UpsertCart({required final PriceAggregate priceAggregate}) =
-      _$_UpsertCart;
+  const factory _UpsertCart(
+      {required final PriceAggregate priceAggregate,
+      final EZReachBanner? banner}) = _$UpsertCartImpl;
 
   PriceAggregate get priceAggregate;
+  EZReachBanner? get banner;
   @JsonKey(ignore: true)
-  _$$_UpsertCartCopyWith<_$_UpsertCart> get copyWith =>
+  _$$UpsertCartImplCopyWith<_$UpsertCartImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_addHistoryItemsToCartCopyWith<$Res> {
-  factory _$$_addHistoryItemsToCartCopyWith(_$_addHistoryItemsToCart value,
-          $Res Function(_$_addHistoryItemsToCart) then) =
-      __$$_addHistoryItemsToCartCopyWithImpl<$Res>;
+abstract class _$$addHistoryItemsToCartImplCopyWith<$Res> {
+  factory _$$addHistoryItemsToCartImplCopyWith(
+          _$addHistoryItemsToCartImpl value,
+          $Res Function(_$addHistoryItemsToCartImpl) then) =
+      __$$addHistoryItemsToCartImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {List<MaterialInfo> items,
@@ -2555,11 +2646,11 @@ abstract class _$$_addHistoryItemsToCartCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_addHistoryItemsToCartCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_addHistoryItemsToCart>
-    implements _$$_addHistoryItemsToCartCopyWith<$Res> {
-  __$$_addHistoryItemsToCartCopyWithImpl(_$_addHistoryItemsToCart _value,
-      $Res Function(_$_addHistoryItemsToCart) _then)
+class __$$addHistoryItemsToCartImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$addHistoryItemsToCartImpl>
+    implements _$$addHistoryItemsToCartImplCopyWith<$Res> {
+  __$$addHistoryItemsToCartImplCopyWithImpl(_$addHistoryItemsToCartImpl _value,
+      $Res Function(_$addHistoryItemsToCartImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2568,7 +2659,7 @@ class __$$_addHistoryItemsToCartCopyWithImpl<$Res>
     Object? items = null,
     Object? counterOfferDetails = null,
   }) {
-    return _then(_$_addHistoryItemsToCart(
+    return _then(_$addHistoryItemsToCartImpl(
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -2592,8 +2683,8 @@ class __$$_addHistoryItemsToCartCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
-  const _$_addHistoryItemsToCart(
+class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
+  const _$addHistoryItemsToCartImpl(
       {required final List<MaterialInfo> items,
       required this.counterOfferDetails})
       : _items = items;
@@ -2615,10 +2706,10 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_addHistoryItemsToCart &&
+            other is _$addHistoryItemsToCartImpl &&
             const DeepCollectionEquality().equals(other._items, _items) &&
             (identical(other.counterOfferDetails, counterOfferDetails) ||
                 other.counterOfferDetails == counterOfferDetails));
@@ -2631,9 +2722,9 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_addHistoryItemsToCartCopyWith<_$_addHistoryItemsToCart> get copyWith =>
-      __$$_addHistoryItemsToCartCopyWithImpl<_$_addHistoryItemsToCart>(
-          this, _$identity);
+  _$$addHistoryItemsToCartImplCopyWith<_$addHistoryItemsToCartImpl>
+      get copyWith => __$$addHistoryItemsToCartImplCopyWithImpl<
+          _$addHistoryItemsToCartImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2655,11 +2746,15 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -2699,11 +2794,13 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -2742,11 +2839,13 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -2879,44 +2978,50 @@ abstract class _addHistoryItemsToCart implements CartEvent {
   const factory _addHistoryItemsToCart(
           {required final List<MaterialInfo> items,
           required final RequestCounterOfferDetails counterOfferDetails}) =
-      _$_addHistoryItemsToCart;
+      _$addHistoryItemsToCartImpl;
 
   List<MaterialInfo> get items;
   RequestCounterOfferDetails get counterOfferDetails;
   @JsonKey(ignore: true)
-  _$$_addHistoryItemsToCartCopyWith<_$_addHistoryItemsToCart> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$addHistoryItemsToCartImplCopyWith<_$addHistoryItemsToCartImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpsertCartItemsCopyWith<$Res> {
-  factory _$$_UpsertCartItemsCopyWith(
-          _$_UpsertCartItems value, $Res Function(_$_UpsertCartItems) then) =
-      __$$_UpsertCartItemsCopyWithImpl<$Res>;
+abstract class _$$UpsertCartItemsImplCopyWith<$Res> {
+  factory _$$UpsertCartItemsImplCopyWith(_$UpsertCartItemsImpl value,
+          $Res Function(_$UpsertCartItemsImpl) then) =
+      __$$UpsertCartItemsImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PriceAggregate priceAggregate});
+  $Res call({PriceAggregate priceAggregate, EZReachBanner? banner});
 
   $PriceAggregateCopyWith<$Res> get priceAggregate;
+  $EZReachBannerCopyWith<$Res>? get banner;
 }
 
 /// @nodoc
-class __$$_UpsertCartItemsCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_UpsertCartItems>
-    implements _$$_UpsertCartItemsCopyWith<$Res> {
-  __$$_UpsertCartItemsCopyWithImpl(
-      _$_UpsertCartItems _value, $Res Function(_$_UpsertCartItems) _then)
+class __$$UpsertCartItemsImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$UpsertCartItemsImpl>
+    implements _$$UpsertCartItemsImplCopyWith<$Res> {
+  __$$UpsertCartItemsImplCopyWithImpl(
+      _$UpsertCartItemsImpl _value, $Res Function(_$UpsertCartItemsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? priceAggregate = null,
+    Object? banner = freezed,
   }) {
-    return _then(_$_UpsertCartItems(
+    return _then(_$UpsertCartItemsImpl(
       priceAggregate: null == priceAggregate
           ? _value.priceAggregate
           : priceAggregate // ignore: cast_nullable_to_non_nullable
               as PriceAggregate,
+      banner: freezed == banner
+          ? _value.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as EZReachBanner?,
     ));
   }
 
@@ -2927,38 +3032,54 @@ class __$$_UpsertCartItemsCopyWithImpl<$Res>
       return _then(_value.copyWith(priceAggregate: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EZReachBannerCopyWith<$Res>? get banner {
+    if (_value.banner == null) {
+      return null;
+    }
+
+    return $EZReachBannerCopyWith<$Res>(_value.banner!, (value) {
+      return _then(_value.copyWith(banner: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$_UpsertCartItems implements _UpsertCartItems {
-  const _$_UpsertCartItems({required this.priceAggregate});
+class _$UpsertCartItemsImpl implements _UpsertCartItems {
+  const _$UpsertCartItemsImpl({required this.priceAggregate, this.banner});
 
   @override
   final PriceAggregate priceAggregate;
+  @override
+  final EZReachBanner? banner;
 
   @override
   String toString() {
-    return 'CartEvent.upsertCartItems(priceAggregate: $priceAggregate)';
+    return 'CartEvent.upsertCartItems(priceAggregate: $priceAggregate, banner: $banner)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpsertCartItems &&
+            other is _$UpsertCartItemsImpl &&
             (identical(other.priceAggregate, priceAggregate) ||
-                other.priceAggregate == priceAggregate));
+                other.priceAggregate == priceAggregate) &&
+            (identical(other.banner, banner) || other.banner == banner));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, priceAggregate);
+  int get hashCode => Object.hash(runtimeType, priceAggregate, banner);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpsertCartItemsCopyWith<_$_UpsertCartItems> get copyWith =>
-      __$$_UpsertCartItemsCopyWithImpl<_$_UpsertCartItems>(this, _$identity);
+  _$$UpsertCartItemsImplCopyWith<_$UpsertCartItemsImpl> get copyWith =>
+      __$$UpsertCartItemsImplCopyWithImpl<_$UpsertCartItemsImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2980,11 +3101,15 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -3003,7 +3128,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
   }) {
-    return upsertCartItems(priceAggregate);
+    return upsertCartItems(priceAggregate, banner);
   }
 
   @override
@@ -3024,11 +3149,13 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -3046,7 +3173,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
   }) {
-    return upsertCartItems?.call(priceAggregate);
+    return upsertCartItems?.call(priceAggregate, banner);
   }
 
   @override
@@ -3067,11 +3194,13 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -3091,7 +3220,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     required TResult orElse(),
   }) {
     if (upsertCartItems != null) {
-      return upsertCartItems(priceAggregate);
+      return upsertCartItems(priceAggregate, banner);
     }
     return orElse();
   }
@@ -3202,31 +3331,33 @@ class _$_UpsertCartItems implements _UpsertCartItems {
 
 abstract class _UpsertCartItems implements CartEvent {
   const factory _UpsertCartItems(
-      {required final PriceAggregate priceAggregate}) = _$_UpsertCartItems;
+      {required final PriceAggregate priceAggregate,
+      final EZReachBanner? banner}) = _$UpsertCartItemsImpl;
 
   PriceAggregate get priceAggregate;
+  EZReachBanner? get banner;
   @JsonKey(ignore: true)
-  _$$_UpsertCartItemsCopyWith<_$_UpsertCartItems> get copyWith =>
+  _$$UpsertCartItemsImplCopyWith<_$UpsertCartItemsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetDetailsProductsAddedToCartCopyWith<$Res> {
-  factory _$$_GetDetailsProductsAddedToCartCopyWith(
-          _$_GetDetailsProductsAddedToCart value,
-          $Res Function(_$_GetDetailsProductsAddedToCart) then) =
-      __$$_GetDetailsProductsAddedToCartCopyWithImpl<$Res>;
+abstract class _$$GetDetailsProductsAddedToCartImplCopyWith<$Res> {
+  factory _$$GetDetailsProductsAddedToCartImplCopyWith(
+          _$GetDetailsProductsAddedToCartImpl value,
+          $Res Function(_$GetDetailsProductsAddedToCartImpl) then) =
+      __$$GetDetailsProductsAddedToCartImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<PriceAggregate> cartProducts});
 }
 
 /// @nodoc
-class __$$_GetDetailsProductsAddedToCartCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_GetDetailsProductsAddedToCart>
-    implements _$$_GetDetailsProductsAddedToCartCopyWith<$Res> {
-  __$$_GetDetailsProductsAddedToCartCopyWithImpl(
-      _$_GetDetailsProductsAddedToCart _value,
-      $Res Function(_$_GetDetailsProductsAddedToCart) _then)
+class __$$GetDetailsProductsAddedToCartImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$GetDetailsProductsAddedToCartImpl>
+    implements _$$GetDetailsProductsAddedToCartImplCopyWith<$Res> {
+  __$$GetDetailsProductsAddedToCartImplCopyWithImpl(
+      _$GetDetailsProductsAddedToCartImpl _value,
+      $Res Function(_$GetDetailsProductsAddedToCartImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3234,7 +3365,7 @@ class __$$_GetDetailsProductsAddedToCartCopyWithImpl<$Res>
   $Res call({
     Object? cartProducts = null,
   }) {
-    return _then(_$_GetDetailsProductsAddedToCart(
+    return _then(_$GetDetailsProductsAddedToCartImpl(
       cartProducts: null == cartProducts
           ? _value._cartProducts
           : cartProducts // ignore: cast_nullable_to_non_nullable
@@ -3245,9 +3376,9 @@ class __$$_GetDetailsProductsAddedToCartCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetDetailsProductsAddedToCart
+class _$GetDetailsProductsAddedToCartImpl
     implements _GetDetailsProductsAddedToCart {
-  const _$_GetDetailsProductsAddedToCart(
+  const _$GetDetailsProductsAddedToCartImpl(
       {required final List<PriceAggregate> cartProducts})
       : _cartProducts = cartProducts;
 
@@ -3265,10 +3396,10 @@ class _$_GetDetailsProductsAddedToCart
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetDetailsProductsAddedToCart &&
+            other is _$GetDetailsProductsAddedToCartImpl &&
             const DeepCollectionEquality()
                 .equals(other._cartProducts, _cartProducts));
   }
@@ -3280,9 +3411,10 @@ class _$_GetDetailsProductsAddedToCart
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetDetailsProductsAddedToCartCopyWith<_$_GetDetailsProductsAddedToCart>
-      get copyWith => __$$_GetDetailsProductsAddedToCartCopyWithImpl<
-          _$_GetDetailsProductsAddedToCart>(this, _$identity);
+  _$$GetDetailsProductsAddedToCartImplCopyWith<
+          _$GetDetailsProductsAddedToCartImpl>
+      get copyWith => __$$GetDetailsProductsAddedToCartImplCopyWithImpl<
+          _$GetDetailsProductsAddedToCartImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3304,11 +3436,15 @@ class _$_GetDetailsProductsAddedToCart
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -3348,11 +3484,13 @@ class _$_GetDetailsProductsAddedToCart
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -3391,11 +3529,13 @@ class _$_GetDetailsProductsAddedToCart
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -3527,29 +3667,30 @@ class _$_GetDetailsProductsAddedToCart
 abstract class _GetDetailsProductsAddedToCart implements CartEvent {
   const factory _GetDetailsProductsAddedToCart(
           {required final List<PriceAggregate> cartProducts}) =
-      _$_GetDetailsProductsAddedToCart;
+      _$GetDetailsProductsAddedToCartImpl;
 
   List<PriceAggregate> get cartProducts;
   @JsonKey(ignore: true)
-  _$$_GetDetailsProductsAddedToCartCopyWith<_$_GetDetailsProductsAddedToCart>
+  _$$GetDetailsProductsAddedToCartImplCopyWith<
+          _$GetDetailsProductsAddedToCartImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdatePriceProductCopyWith<$Res> {
-  factory _$$_UpdatePriceProductCopyWith(_$_UpdatePriceProduct value,
-          $Res Function(_$_UpdatePriceProduct) then) =
-      __$$_UpdatePriceProductCopyWithImpl<$Res>;
+abstract class _$$UpdatePriceProductImplCopyWith<$Res> {
+  factory _$$UpdatePriceProductImplCopyWith(_$UpdatePriceProductImpl value,
+          $Res Function(_$UpdatePriceProductImpl) then) =
+      __$$UpdatePriceProductImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Map<MaterialNumber, Price> priceProducts});
 }
 
 /// @nodoc
-class __$$_UpdatePriceProductCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_UpdatePriceProduct>
-    implements _$$_UpdatePriceProductCopyWith<$Res> {
-  __$$_UpdatePriceProductCopyWithImpl(
-      _$_UpdatePriceProduct _value, $Res Function(_$_UpdatePriceProduct) _then)
+class __$$UpdatePriceProductImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$UpdatePriceProductImpl>
+    implements _$$UpdatePriceProductImplCopyWith<$Res> {
+  __$$UpdatePriceProductImplCopyWithImpl(_$UpdatePriceProductImpl _value,
+      $Res Function(_$UpdatePriceProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3557,7 +3698,7 @@ class __$$_UpdatePriceProductCopyWithImpl<$Res>
   $Res call({
     Object? priceProducts = null,
   }) {
-    return _then(_$_UpdatePriceProduct(
+    return _then(_$UpdatePriceProductImpl(
       priceProducts: null == priceProducts
           ? _value._priceProducts
           : priceProducts // ignore: cast_nullable_to_non_nullable
@@ -3568,8 +3709,8 @@ class __$$_UpdatePriceProductCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdatePriceProduct implements _UpdatePriceProduct {
-  const _$_UpdatePriceProduct(
+class _$UpdatePriceProductImpl implements _UpdatePriceProduct {
+  const _$UpdatePriceProductImpl(
       {required final Map<MaterialNumber, Price> priceProducts})
       : _priceProducts = priceProducts;
 
@@ -3587,10 +3728,10 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdatePriceProduct &&
+            other is _$UpdatePriceProductImpl &&
             const DeepCollectionEquality()
                 .equals(other._priceProducts, _priceProducts));
   }
@@ -3602,8 +3743,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdatePriceProductCopyWith<_$_UpdatePriceProduct> get copyWith =>
-      __$$_UpdatePriceProductCopyWithImpl<_$_UpdatePriceProduct>(
+  _$$UpdatePriceProductImplCopyWith<_$UpdatePriceProductImpl> get copyWith =>
+      __$$UpdatePriceProductImplCopyWithImpl<_$UpdatePriceProductImpl>(
           this, _$identity);
 
   @override
@@ -3626,11 +3767,15 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -3670,11 +3815,13 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -3713,11 +3860,13 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -3849,34 +3998,34 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
 abstract class _UpdatePriceProduct implements CartEvent {
   const factory _UpdatePriceProduct(
           {required final Map<MaterialNumber, Price> priceProducts}) =
-      _$_UpdatePriceProduct;
+      _$UpdatePriceProductImpl;
 
   Map<MaterialNumber, Price> get priceProducts;
   @JsonKey(ignore: true)
-  _$$_UpdatePriceProductCopyWith<_$_UpdatePriceProduct> get copyWith =>
+  _$$UpdatePriceProductImplCopyWith<_$UpdatePriceProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateProductStockCopyWith<$Res> {
-  factory _$$_UpdateProductStockCopyWith(_$_UpdateProductStock value,
-          $Res Function(_$_UpdateProductStock) then) =
-      __$$_UpdateProductStockCopyWithImpl<$Res>;
+abstract class _$$UpdateProductStockImplCopyWith<$Res> {
+  factory _$$UpdateProductStockImplCopyWith(_$UpdateProductStockImpl value,
+          $Res Function(_$UpdateProductStockImpl) then) =
+      __$$UpdateProductStockImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_UpdateProductStockCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_UpdateProductStock>
-    implements _$$_UpdateProductStockCopyWith<$Res> {
-  __$$_UpdateProductStockCopyWithImpl(
-      _$_UpdateProductStock _value, $Res Function(_$_UpdateProductStock) _then)
+class __$$UpdateProductStockImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$UpdateProductStockImpl>
+    implements _$$UpdateProductStockImplCopyWith<$Res> {
+  __$$UpdateProductStockImplCopyWithImpl(_$UpdateProductStockImpl _value,
+      $Res Function(_$UpdateProductStockImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_UpdateProductStock implements _UpdateProductStock {
-  const _$_UpdateProductStock();
+class _$UpdateProductStockImpl implements _UpdateProductStock {
+  const _$UpdateProductStockImpl();
 
   @override
   String toString() {
@@ -3884,9 +4033,9 @@ class _$_UpdateProductStock implements _UpdateProductStock {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_UpdateProductStock);
+        (other.runtimeType == runtimeType && other is _$UpdateProductStockImpl);
   }
 
   @override
@@ -3912,11 +4061,15 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -3956,11 +4109,13 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -3999,11 +4154,13 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -4133,24 +4290,25 @@ class _$_UpdateProductStock implements _UpdateProductStock {
 }
 
 abstract class _UpdateProductStock implements CartEvent {
-  const factory _UpdateProductStock() = _$_UpdateProductStock;
+  const factory _UpdateProductStock() = _$UpdateProductStockImpl;
 }
 
 /// @nodoc
-abstract class _$$_RemoveInvalidProductsCopyWith<$Res> {
-  factory _$$_RemoveInvalidProductsCopyWith(_$_RemoveInvalidProducts value,
-          $Res Function(_$_RemoveInvalidProducts) then) =
-      __$$_RemoveInvalidProductsCopyWithImpl<$Res>;
+abstract class _$$RemoveInvalidProductsImplCopyWith<$Res> {
+  factory _$$RemoveInvalidProductsImplCopyWith(
+          _$RemoveInvalidProductsImpl value,
+          $Res Function(_$RemoveInvalidProductsImpl) then) =
+      __$$RemoveInvalidProductsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<MaterialInfo> invalidCartItems});
 }
 
 /// @nodoc
-class __$$_RemoveInvalidProductsCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_RemoveInvalidProducts>
-    implements _$$_RemoveInvalidProductsCopyWith<$Res> {
-  __$$_RemoveInvalidProductsCopyWithImpl(_$_RemoveInvalidProducts _value,
-      $Res Function(_$_RemoveInvalidProducts) _then)
+class __$$RemoveInvalidProductsImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$RemoveInvalidProductsImpl>
+    implements _$$RemoveInvalidProductsImplCopyWith<$Res> {
+  __$$RemoveInvalidProductsImplCopyWithImpl(_$RemoveInvalidProductsImpl _value,
+      $Res Function(_$RemoveInvalidProductsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -4158,7 +4316,7 @@ class __$$_RemoveInvalidProductsCopyWithImpl<$Res>
   $Res call({
     Object? invalidCartItems = null,
   }) {
-    return _then(_$_RemoveInvalidProducts(
+    return _then(_$RemoveInvalidProductsImpl(
       invalidCartItems: null == invalidCartItems
           ? _value._invalidCartItems
           : invalidCartItems // ignore: cast_nullable_to_non_nullable
@@ -4169,8 +4327,8 @@ class __$$_RemoveInvalidProductsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
-  const _$_RemoveInvalidProducts(
+class _$RemoveInvalidProductsImpl implements _RemoveInvalidProducts {
+  const _$RemoveInvalidProductsImpl(
       {required final List<MaterialInfo> invalidCartItems})
       : _invalidCartItems = invalidCartItems;
 
@@ -4189,10 +4347,10 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoveInvalidProducts &&
+            other is _$RemoveInvalidProductsImpl &&
             const DeepCollectionEquality()
                 .equals(other._invalidCartItems, _invalidCartItems));
   }
@@ -4204,9 +4362,9 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoveInvalidProductsCopyWith<_$_RemoveInvalidProducts> get copyWith =>
-      __$$_RemoveInvalidProductsCopyWithImpl<_$_RemoveInvalidProducts>(
-          this, _$identity);
+  _$$RemoveInvalidProductsImplCopyWith<_$RemoveInvalidProductsImpl>
+      get copyWith => __$$RemoveInvalidProductsImplCopyWithImpl<
+          _$RemoveInvalidProductsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4228,11 +4386,15 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -4272,11 +4434,13 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -4315,11 +4479,13 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -4451,31 +4617,31 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
 abstract class _RemoveInvalidProducts implements CartEvent {
   const factory _RemoveInvalidProducts(
           {required final List<MaterialInfo> invalidCartItems}) =
-      _$_RemoveInvalidProducts;
+      _$RemoveInvalidProductsImpl;
 
   List<MaterialInfo> get invalidCartItems;
   @JsonKey(ignore: true)
-  _$$_RemoveInvalidProductsCopyWith<_$_RemoveInvalidProducts> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RemoveInvalidProductsImplCopyWith<_$RemoveInvalidProductsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpsertCartItemsWithComboOffersCopyWith<$Res> {
-  factory _$$_UpsertCartItemsWithComboOffersCopyWith(
-          _$_UpsertCartItemsWithComboOffers value,
-          $Res Function(_$_UpsertCartItemsWithComboOffers) then) =
-      __$$_UpsertCartItemsWithComboOffersCopyWithImpl<$Res>;
+abstract class _$$UpsertCartItemsWithComboOffersImplCopyWith<$Res> {
+  factory _$$UpsertCartItemsWithComboOffersImplCopyWith(
+          _$UpsertCartItemsWithComboOffersImpl value,
+          $Res Function(_$UpsertCartItemsWithComboOffersImpl) then) =
+      __$$UpsertCartItemsWithComboOffersImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<PriceAggregate> priceAggregates, bool isDeleteCombo});
 }
 
 /// @nodoc
-class __$$_UpsertCartItemsWithComboOffersCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_UpsertCartItemsWithComboOffers>
-    implements _$$_UpsertCartItemsWithComboOffersCopyWith<$Res> {
-  __$$_UpsertCartItemsWithComboOffersCopyWithImpl(
-      _$_UpsertCartItemsWithComboOffers _value,
-      $Res Function(_$_UpsertCartItemsWithComboOffers) _then)
+class __$$UpsertCartItemsWithComboOffersImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$UpsertCartItemsWithComboOffersImpl>
+    implements _$$UpsertCartItemsWithComboOffersImplCopyWith<$Res> {
+  __$$UpsertCartItemsWithComboOffersImplCopyWithImpl(
+      _$UpsertCartItemsWithComboOffersImpl _value,
+      $Res Function(_$UpsertCartItemsWithComboOffersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -4484,7 +4650,7 @@ class __$$_UpsertCartItemsWithComboOffersCopyWithImpl<$Res>
     Object? priceAggregates = null,
     Object? isDeleteCombo = null,
   }) {
-    return _then(_$_UpsertCartItemsWithComboOffers(
+    return _then(_$UpsertCartItemsWithComboOffersImpl(
       priceAggregates: null == priceAggregates
           ? _value._priceAggregates
           : priceAggregates // ignore: cast_nullable_to_non_nullable
@@ -4499,9 +4665,9 @@ class __$$_UpsertCartItemsWithComboOffersCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpsertCartItemsWithComboOffers
+class _$UpsertCartItemsWithComboOffersImpl
     implements _UpsertCartItemsWithComboOffers {
-  const _$_UpsertCartItemsWithComboOffers(
+  const _$UpsertCartItemsWithComboOffersImpl(
       {required final List<PriceAggregate> priceAggregates,
       required this.isDeleteCombo})
       : _priceAggregates = priceAggregates;
@@ -4523,10 +4689,10 @@ class _$_UpsertCartItemsWithComboOffers
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpsertCartItemsWithComboOffers &&
+            other is _$UpsertCartItemsWithComboOffersImpl &&
             const DeepCollectionEquality()
                 .equals(other._priceAggregates, _priceAggregates) &&
             (identical(other.isDeleteCombo, isDeleteCombo) ||
@@ -4540,9 +4706,10 @@ class _$_UpsertCartItemsWithComboOffers
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpsertCartItemsWithComboOffersCopyWith<_$_UpsertCartItemsWithComboOffers>
-      get copyWith => __$$_UpsertCartItemsWithComboOffersCopyWithImpl<
-          _$_UpsertCartItemsWithComboOffers>(this, _$identity);
+  _$$UpsertCartItemsWithComboOffersImplCopyWith<
+          _$UpsertCartItemsWithComboOffersImpl>
+      get copyWith => __$$UpsertCartItemsWithComboOffersImplCopyWithImpl<
+          _$UpsertCartItemsWithComboOffersImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4564,11 +4731,15 @@ class _$_UpsertCartItemsWithComboOffers
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -4608,11 +4779,13 @@ class _$_UpsertCartItemsWithComboOffers
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -4651,11 +4824,13 @@ class _$_UpsertCartItemsWithComboOffers
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -4786,22 +4961,24 @@ class _$_UpsertCartItemsWithComboOffers
 
 abstract class _UpsertCartItemsWithComboOffers implements CartEvent {
   const factory _UpsertCartItemsWithComboOffers(
-      {required final List<PriceAggregate> priceAggregates,
-      required final bool isDeleteCombo}) = _$_UpsertCartItemsWithComboOffers;
+          {required final List<PriceAggregate> priceAggregates,
+          required final bool isDeleteCombo}) =
+      _$UpsertCartItemsWithComboOffersImpl;
 
   List<PriceAggregate> get priceAggregates;
   bool get isDeleteCombo;
   @JsonKey(ignore: true)
-  _$$_UpsertCartItemsWithComboOffersCopyWith<_$_UpsertCartItemsWithComboOffers>
+  _$$UpsertCartItemsWithComboOffersImplCopyWith<
+          _$UpsertCartItemsWithComboOffersImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateCartProductWithCounterOfferCopyWith<$Res> {
-  factory _$$_UpdateCartProductWithCounterOfferCopyWith(
-          _$_UpdateCartProductWithCounterOffer value,
-          $Res Function(_$_UpdateCartProductWithCounterOffer) then) =
-      __$$_UpdateCartProductWithCounterOfferCopyWithImpl<$Res>;
+abstract class _$$UpdateCartProductWithCounterOfferImplCopyWith<$Res> {
+  factory _$$UpdateCartProductWithCounterOfferImplCopyWith(
+          _$UpdateCartProductWithCounterOfferImpl value,
+          $Res Function(_$UpdateCartProductWithCounterOfferImpl) then) =
+      __$$UpdateCartProductWithCounterOfferImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Price overriddenProductPrice});
 
@@ -4809,12 +4986,13 @@ abstract class _$$_UpdateCartProductWithCounterOfferCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateCartProductWithCounterOfferCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_UpdateCartProductWithCounterOffer>
-    implements _$$_UpdateCartProductWithCounterOfferCopyWith<$Res> {
-  __$$_UpdateCartProductWithCounterOfferCopyWithImpl(
-      _$_UpdateCartProductWithCounterOffer _value,
-      $Res Function(_$_UpdateCartProductWithCounterOffer) _then)
+class __$$UpdateCartProductWithCounterOfferImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res,
+        _$UpdateCartProductWithCounterOfferImpl>
+    implements _$$UpdateCartProductWithCounterOfferImplCopyWith<$Res> {
+  __$$UpdateCartProductWithCounterOfferImplCopyWithImpl(
+      _$UpdateCartProductWithCounterOfferImpl _value,
+      $Res Function(_$UpdateCartProductWithCounterOfferImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -4822,7 +5000,7 @@ class __$$_UpdateCartProductWithCounterOfferCopyWithImpl<$Res>
   $Res call({
     Object? overriddenProductPrice = null,
   }) {
-    return _then(_$_UpdateCartProductWithCounterOffer(
+    return _then(_$UpdateCartProductWithCounterOfferImpl(
       overriddenProductPrice: null == overriddenProductPrice
           ? _value.overriddenProductPrice
           : overriddenProductPrice // ignore: cast_nullable_to_non_nullable
@@ -4841,9 +5019,9 @@ class __$$_UpdateCartProductWithCounterOfferCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateCartProductWithCounterOffer
+class _$UpdateCartProductWithCounterOfferImpl
     implements _UpdateCartProductWithCounterOffer {
-  const _$_UpdateCartProductWithCounterOffer(
+  const _$UpdateCartProductWithCounterOfferImpl(
       {required this.overriddenProductPrice});
 
   @override
@@ -4855,10 +5033,10 @@ class _$_UpdateCartProductWithCounterOffer
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateCartProductWithCounterOffer &&
+            other is _$UpdateCartProductWithCounterOfferImpl &&
             (identical(other.overriddenProductPrice, overriddenProductPrice) ||
                 other.overriddenProductPrice == overriddenProductPrice));
   }
@@ -4869,10 +5047,10 @@ class _$_UpdateCartProductWithCounterOffer
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateCartProductWithCounterOfferCopyWith<
-          _$_UpdateCartProductWithCounterOffer>
-      get copyWith => __$$_UpdateCartProductWithCounterOfferCopyWithImpl<
-          _$_UpdateCartProductWithCounterOffer>(this, _$identity);
+  _$$UpdateCartProductWithCounterOfferImplCopyWith<
+          _$UpdateCartProductWithCounterOfferImpl>
+      get copyWith => __$$UpdateCartProductWithCounterOfferImplCopyWithImpl<
+          _$UpdateCartProductWithCounterOfferImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4894,11 +5072,15 @@ class _$_UpdateCartProductWithCounterOffer
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -4938,11 +5120,13 @@ class _$_UpdateCartProductWithCounterOffer
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -4981,11 +5165,13 @@ class _$_UpdateCartProductWithCounterOffer
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -5117,35 +5303,37 @@ class _$_UpdateCartProductWithCounterOffer
 abstract class _UpdateCartProductWithCounterOffer implements CartEvent {
   const factory _UpdateCartProductWithCounterOffer(
           {required final Price overriddenProductPrice}) =
-      _$_UpdateCartProductWithCounterOffer;
+      _$UpdateCartProductWithCounterOfferImpl;
 
   Price get overriddenProductPrice;
   @JsonKey(ignore: true)
-  _$$_UpdateCartProductWithCounterOfferCopyWith<
-          _$_UpdateCartProductWithCounterOffer>
+  _$$UpdateCartProductWithCounterOfferImplCopyWith<
+          _$UpdateCartProductWithCounterOfferImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdatePriceForIdMarketCopyWith<$Res> {
-  factory _$$_UpdatePriceForIdMarketCopyWith(_$_UpdatePriceForIdMarket value,
-          $Res Function(_$_UpdatePriceForIdMarket) then) =
-      __$$_UpdatePriceForIdMarketCopyWithImpl<$Res>;
+abstract class _$$UpdatePriceForIdMarketImplCopyWith<$Res> {
+  factory _$$UpdatePriceForIdMarketImplCopyWith(
+          _$UpdatePriceForIdMarketImpl value,
+          $Res Function(_$UpdatePriceForIdMarketImpl) then) =
+      __$$UpdatePriceForIdMarketImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_UpdatePriceForIdMarketCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_UpdatePriceForIdMarket>
-    implements _$$_UpdatePriceForIdMarketCopyWith<$Res> {
-  __$$_UpdatePriceForIdMarketCopyWithImpl(_$_UpdatePriceForIdMarket _value,
-      $Res Function(_$_UpdatePriceForIdMarket) _then)
+class __$$UpdatePriceForIdMarketImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$UpdatePriceForIdMarketImpl>
+    implements _$$UpdatePriceForIdMarketImplCopyWith<$Res> {
+  __$$UpdatePriceForIdMarketImplCopyWithImpl(
+      _$UpdatePriceForIdMarketImpl _value,
+      $Res Function(_$UpdatePriceForIdMarketImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
-  const _$_UpdatePriceForIdMarket();
+class _$UpdatePriceForIdMarketImpl implements _UpdatePriceForIdMarket {
+  const _$UpdatePriceForIdMarketImpl();
 
   @override
   String toString() {
@@ -5153,10 +5341,10 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdatePriceForIdMarket);
+            other is _$UpdatePriceForIdMarketImpl);
   }
 
   @override
@@ -5182,11 +5370,15 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -5226,11 +5418,13 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -5269,11 +5463,13 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -5403,15 +5599,15 @@ class _$_UpdatePriceForIdMarket implements _UpdatePriceForIdMarket {
 }
 
 abstract class _UpdatePriceForIdMarket implements CartEvent {
-  const factory _UpdatePriceForIdMarket() = _$_UpdatePriceForIdMarket;
+  const factory _UpdatePriceForIdMarket() = _$UpdatePriceForIdMarketImpl;
 }
 
 /// @nodoc
-abstract class _$$_UpdateProductDeterminationCopyWith<$Res> {
-  factory _$$_UpdateProductDeterminationCopyWith(
-          _$_UpdateProductDetermination value,
-          $Res Function(_$_UpdateProductDetermination) then) =
-      __$$_UpdateProductDeterminationCopyWithImpl<$Res>;
+abstract class _$$UpdateProductDeterminationImplCopyWith<$Res> {
+  factory _$$UpdateProductDeterminationImplCopyWith(
+          _$UpdateProductDeterminationImpl value,
+          $Res Function(_$UpdateProductDeterminationImpl) then) =
+      __$$UpdateProductDeterminationImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {List<AplProduct> productDeterminationList,
@@ -5419,12 +5615,12 @@ abstract class _$$_UpdateProductDeterminationCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateProductDeterminationCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_UpdateProductDetermination>
-    implements _$$_UpdateProductDeterminationCopyWith<$Res> {
-  __$$_UpdateProductDeterminationCopyWithImpl(
-      _$_UpdateProductDetermination _value,
-      $Res Function(_$_UpdateProductDetermination) _then)
+class __$$UpdateProductDeterminationImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$UpdateProductDeterminationImpl>
+    implements _$$UpdateProductDeterminationImplCopyWith<$Res> {
+  __$$UpdateProductDeterminationImplCopyWithImpl(
+      _$UpdateProductDeterminationImpl _value,
+      $Res Function(_$UpdateProductDeterminationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -5433,7 +5629,7 @@ class __$$_UpdateProductDeterminationCopyWithImpl<$Res>
     Object? productDeterminationList = null,
     Object? updatedCartItems = null,
   }) {
-    return _then(_$_UpdateProductDetermination(
+    return _then(_$UpdateProductDeterminationImpl(
       productDeterminationList: null == productDeterminationList
           ? _value._productDeterminationList
           : productDeterminationList // ignore: cast_nullable_to_non_nullable
@@ -5448,8 +5644,8 @@ class __$$_UpdateProductDeterminationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateProductDetermination implements _UpdateProductDetermination {
-  const _$_UpdateProductDetermination(
+class _$UpdateProductDeterminationImpl implements _UpdateProductDetermination {
+  const _$UpdateProductDeterminationImpl(
       {required final List<AplProduct> productDeterminationList,
       required final List<PriceAggregate> updatedCartItems})
       : _productDeterminationList = productDeterminationList,
@@ -5479,10 +5675,10 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateProductDetermination &&
+            other is _$UpdateProductDeterminationImpl &&
             const DeepCollectionEquality().equals(
                 other._productDeterminationList, _productDeterminationList) &&
             const DeepCollectionEquality()
@@ -5498,9 +5694,9 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateProductDeterminationCopyWith<_$_UpdateProductDetermination>
-      get copyWith => __$$_UpdateProductDeterminationCopyWithImpl<
-          _$_UpdateProductDetermination>(this, _$identity);
+  _$$UpdateProductDeterminationImplCopyWith<_$UpdateProductDeterminationImpl>
+      get copyWith => __$$UpdateProductDeterminationImplCopyWithImpl<
+          _$UpdateProductDeterminationImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -5522,11 +5718,15 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -5567,11 +5767,13 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -5611,11 +5813,13 @@ class _$_UpdateProductDetermination implements _UpdateProductDetermination {
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -5749,38 +5953,38 @@ abstract class _UpdateProductDetermination implements CartEvent {
   const factory _UpdateProductDetermination(
           {required final List<AplProduct> productDeterminationList,
           required final List<PriceAggregate> updatedCartItems}) =
-      _$_UpdateProductDetermination;
+      _$UpdateProductDeterminationImpl;
 
   List<AplProduct> get productDeterminationList;
   List<PriceAggregate> get updatedCartItems;
   @JsonKey(ignore: true)
-  _$$_UpdateProductDeterminationCopyWith<_$_UpdateProductDetermination>
+  _$$UpdateProductDeterminationImplCopyWith<_$UpdateProductDeterminationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchGrandTotalPriceForIdMarketCopyWith<$Res> {
-  factory _$$_FetchGrandTotalPriceForIdMarketCopyWith(
-          _$_FetchGrandTotalPriceForIdMarket value,
-          $Res Function(_$_FetchGrandTotalPriceForIdMarket) then) =
-      __$$_FetchGrandTotalPriceForIdMarketCopyWithImpl<$Res>;
+abstract class _$$FetchGrandTotalPriceForIdMarketImplCopyWith<$Res> {
+  factory _$$FetchGrandTotalPriceForIdMarketImplCopyWith(
+          _$FetchGrandTotalPriceForIdMarketImpl value,
+          $Res Function(_$FetchGrandTotalPriceForIdMarketImpl) then) =
+      __$$FetchGrandTotalPriceForIdMarketImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchGrandTotalPriceForIdMarketCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_FetchGrandTotalPriceForIdMarket>
-    implements _$$_FetchGrandTotalPriceForIdMarketCopyWith<$Res> {
-  __$$_FetchGrandTotalPriceForIdMarketCopyWithImpl(
-      _$_FetchGrandTotalPriceForIdMarket _value,
-      $Res Function(_$_FetchGrandTotalPriceForIdMarket) _then)
+class __$$FetchGrandTotalPriceForIdMarketImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$FetchGrandTotalPriceForIdMarketImpl>
+    implements _$$FetchGrandTotalPriceForIdMarketImplCopyWith<$Res> {
+  __$$FetchGrandTotalPriceForIdMarketImplCopyWithImpl(
+      _$FetchGrandTotalPriceForIdMarketImpl _value,
+      $Res Function(_$FetchGrandTotalPriceForIdMarketImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_FetchGrandTotalPriceForIdMarket
+class _$FetchGrandTotalPriceForIdMarketImpl
     implements _FetchGrandTotalPriceForIdMarket {
-  const _$_FetchGrandTotalPriceForIdMarket();
+  const _$FetchGrandTotalPriceForIdMarketImpl();
 
   @override
   String toString() {
@@ -5788,10 +5992,10 @@ class _$_FetchGrandTotalPriceForIdMarket
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchGrandTotalPriceForIdMarket);
+            other is _$FetchGrandTotalPriceForIdMarketImpl);
   }
 
   @override
@@ -5817,11 +6021,15 @@ class _$_FetchGrandTotalPriceForIdMarket
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
     required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
     required TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)
         addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
     required TResult Function(Map<MaterialNumber, Price> priceProducts)
@@ -5861,11 +6069,13 @@ class _$_FetchGrandTotalPriceForIdMarket
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
     TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult? Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult? Function(Map<MaterialNumber, Price> priceProducts)?
@@ -5904,11 +6114,13 @@ class _$_FetchGrandTotalPriceForIdMarket
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
     TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
     TResult Function(List<MaterialInfo> items,
             RequestCounterOfferDetails counterOfferDetails)?
         addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
     TResult Function(Map<MaterialNumber, Price> priceProducts)?
@@ -6039,7 +6251,7 @@ class _$_FetchGrandTotalPriceForIdMarket
 
 abstract class _FetchGrandTotalPriceForIdMarket implements CartEvent {
   const factory _FetchGrandTotalPriceForIdMarket() =
-      _$_FetchGrandTotalPriceForIdMarket;
+      _$FetchGrandTotalPriceForIdMarketImpl;
 }
 
 /// @nodoc
@@ -6292,10 +6504,11 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
 }
 
 /// @nodoc
-abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
-  factory _$$_CartStateCopyWith(
-          _$_CartState value, $Res Function(_$_CartState) then) =
-      __$$_CartStateCopyWithImpl<$Res>;
+abstract class _$$CartStateImplCopyWith<$Res>
+    implements $CartStateCopyWith<$Res> {
+  factory _$$CartStateImplCopyWith(
+          _$CartStateImpl value, $Res Function(_$CartStateImpl) then) =
+      __$$CartStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -6337,11 +6550,11 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CartStateCopyWithImpl<$Res>
-    extends _$CartStateCopyWithImpl<$Res, _$_CartState>
-    implements _$$_CartStateCopyWith<$Res> {
-  __$$_CartStateCopyWithImpl(
-      _$_CartState _value, $Res Function(_$_CartState) _then)
+class __$$CartStateImplCopyWithImpl<$Res>
+    extends _$CartStateCopyWithImpl<$Res, _$CartStateImpl>
+    implements _$$CartStateImplCopyWith<$Res> {
+  __$$CartStateImplCopyWithImpl(
+      _$CartStateImpl _value, $Res Function(_$CartStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -6370,7 +6583,7 @@ class __$$_CartStateCopyWithImpl<$Res>
     Object? upsertBonusItemInProgressHashCode = null,
     Object? aplSimulatorOrder = null,
   }) {
-    return _then(_$_CartState(
+    return _then(_$CartStateImpl(
       cartProducts: null == cartProducts
           ? _value._cartProducts
           : cartProducts // ignore: cast_nullable_to_non_nullable
@@ -6466,8 +6679,8 @@ class __$$_CartStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CartState extends _CartState {
-  const _$_CartState(
+class _$CartStateImpl extends _CartState {
+  const _$CartStateImpl(
       {required final List<PriceAggregate> cartProducts,
       required this.apiFailureOrSuccessOption,
       required this.updateFailureOrSuccessOption,
@@ -6565,10 +6778,10 @@ class _$_CartState extends _CartState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CartState &&
+            other is _$CartStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._cartProducts, _cartProducts) &&
             (identical(other.apiFailureOrSuccessOption, apiFailureOrSuccessOption) ||
@@ -6647,8 +6860,8 @@ class _$_CartState extends _CartState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CartStateCopyWith<_$_CartState> get copyWith =>
-      __$$_CartStateCopyWithImpl<_$_CartState>(this, _$identity);
+  _$$CartStateImplCopyWith<_$CartStateImpl> get copyWith =>
+      __$$CartStateImplCopyWithImpl<_$CartStateImpl>(this, _$identity);
 }
 
 abstract class _CartState extends CartState {
@@ -6676,7 +6889,7 @@ abstract class _CartState extends CartState {
       required final User user,
       required final Map<MaterialNumber, ProductMetaData> additionInfo,
       required final List<int> upsertBonusItemInProgressHashCode,
-      required final AplSimulatorOrder aplSimulatorOrder}) = _$_CartState;
+      required final AplSimulatorOrder aplSimulatorOrder}) = _$CartStateImpl;
   const _CartState._() : super._();
 
   @override
@@ -6725,6 +6938,6 @@ abstract class _CartState extends CartState {
   AplSimulatorOrder get aplSimulatorOrder;
   @override
   @JsonKey(ignore: true)
-  _$$_CartStateCopyWith<_$_CartState> get copyWith =>
+  _$$CartStateImplCopyWith<_$CartStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
