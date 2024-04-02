@@ -171,8 +171,7 @@ class WidgetKeys {
   static Key searchSectionTab(String title) => Key('searchSectionTab$title');
   static Key bundleMaterialCount(String title) =>
       Key('bundleMaterialCount$title');
-       static const Key availableOfferList =
-      Key('availableOfferList');
+  static const Key availableOfferList = Key('availableOfferList');
   //============================================================
   //  MORE TAB BAR
   //============================================================
@@ -720,7 +719,8 @@ class WidgetKeys {
   static const Key quantityAndPrice = Key('quantityAndPrice');
   static const Key productImageSection = Key('productImageSection');
   static const Key bonusProductDetail = Key('bonusProductDetail');
-  static Key promotionLabel(String materialNumber) => Key('promotionLabel$materialNumber'); 
+  static Key promotionLabel(String materialNumber) =>
+      Key('promotionLabel$materialNumber');
 
   //============================================================
   //  Material List
@@ -1007,7 +1007,8 @@ class WidgetKeys {
   static Key announcementStatusFilter(String name, bool value) =>
       Key('announcementStatusFilter$name$value');
   static const Key announcementFilterIcon = Key('announcementFilterIcon');
-  static const Key announcementInfoDetailList = Key('announcementInfoDetailList');
+  static const Key announcementInfoDetailList =
+      Key('announcementInfoDetailList');
 
   //============================================================
   //  Article
@@ -1318,6 +1319,8 @@ class WidgetKeys {
   static const Key creditDetailTax = Key('creditDetailTax');
   static const Key creditDetailSmallOrderFee = Key('creditDetailSmallOrderFee');
   static const Key creditDetailManualFee = Key('creditDetailManualFee');
+  static const Key creditItemAmountAdjustmentMessageWidget =
+      Key('creditItemAmountAdjustmentMessageWidget');
 
   //===========================================================
   //  Account Summary Page - Full summary

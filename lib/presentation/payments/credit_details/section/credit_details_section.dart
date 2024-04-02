@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dar
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -143,28 +144,30 @@ class CreditDetailsSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  key: WidgetKeys.creditDetailSubTotal,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      context.tr(
-                        'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
+                if (creditItems.isNotEmpty)
+                  Row(
+                    key: WidgetKeys.creditDetailSubTotal,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        context.tr(
+                          'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
+                        ),
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    PriceComponent(
-                      type: PriceStyle.summaryPrice,
-                      salesOrgConfig: eligibilityState.salesOrgConfigs,
-                      price: eligibilityState
-                              .salesOrgConfigs.displaySubtotalTaxBreakdown
-                          ? creditItems.totalNetAmount.toString()
-                          : creditItems.totalGrossAmount.toString(),
-                    ),
-                  ],
-                ),
+                      PriceComponent(
+                        type: PriceStyle.summaryPrice,
+                        salesOrgConfig: eligibilityState.salesOrgConfigs,
+                        price: eligibilityState
+                                .salesOrgConfigs.displaySubtotalTaxBreakdown
+                            ? creditItems.totalNetAmount.toString()
+                            : creditItems.totalGrossAmount.toString(),
+                      ),
+                    ],
+                  ),
                 if (eligibilityState
-                    .salesOrgConfigs.displaySubtotalTaxBreakdown) ...[
+                        .salesOrgConfigs.displaySubtotalTaxBreakdown &&
+                    creditItems.isNotEmpty) ...[
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Row(
@@ -184,7 +187,8 @@ class CreditDetailsSection extends StatelessWidget {
                     ),
                   ),
                 ],
-                if (eligibilityState.salesOrg.showSmallOrderFee) ...[
+                if (eligibilityState.salesOrg.showSmallOrderFee &&
+                    creditItems.isNotEmpty) ...[
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Row(
@@ -214,7 +218,8 @@ class CreditDetailsSection extends StatelessWidget {
                         .copyWith(fontSize: 10),
                   ),
                 ],
-                if (eligibilityState.salesOrg.showManualFee)
+                if (eligibilityState.salesOrg.showManualFee &&
+                    creditItems.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Row(
@@ -256,6 +261,19 @@ class CreditDetailsSection extends StatelessWidget {
                     ),
                   ],
                 ),
+                if (creditItems.isEmpty)
+                  InfoLabel(
+                    key: WidgetKeys.creditItemAmountAdjustmentMessageWidget,
+                    icon: const Icon(
+                      Icons.error,
+                      color: ZPColors.warning,
+                    ),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    mainColor: ZPColors.priceWarning,
+                    textValue: context.tr(
+                      'Return items are not related to this credit note. The total may or may not reflect the tax amount adjustments.',
+                    ),
+                  ),
               ],
             ),
           ),
