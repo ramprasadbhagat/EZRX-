@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -19,6 +20,7 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -41,6 +43,7 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
@@ -139,6 +142,8 @@ class PaymentCustomerInformationBlocMock extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
 
+class MaterialPageXMock extends Mock implements MaterialPageX {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -164,6 +169,7 @@ void main() {
   late OrderHistoryDetailsOrderItem fakeOrderHistoryItem;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
+  late List<CustomerLicense> customerLicense;
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
@@ -173,14 +179,14 @@ void main() {
     registerFallbackValue(SalesOrganisation.empty());
     registerFallbackValue(ShipToInfo.empty());
     cartBlocMock = CartBlocMock();
-
-    autoRouterMock = locator<AppRouter>();
     customerCodeInfoList =
         await CustomerCodeLocalDataSource().getCustomerCodeList();
     locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
     viewByOrder = await ViewByOrderLocalDataSource().getViewByOrders();
     fakeOrderHistoryItem =
         viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first;
+    customerLicense =
+        await CustomerLicenseLocalDataSource().getCustomerLicense();
     viewByOrderWithCounterOffer = viewByOrder.copyWith(
       orderHeaders: [
         viewByOrder.orderHeaders.first.copyWith(
@@ -218,6 +224,7 @@ void main() {
       mockAuthBloc = MockAuthBloc();
       mockPoAttachmentBloc = MockPoAttachmentBloc();
       mockSalesOrgBloc = SalesOrgMockBloc();
+      autoRouterMock = MockAppRouter();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
@@ -242,6 +249,8 @@ void main() {
           .thenReturn(ProductImageState.initial());
       when(() => mockViewByItemsBloc.state)
           .thenReturn(ViewByItemsState.initial());
+      when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
+      when(() => autoRouterMock.currentPath).thenReturn('fake-path');
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           configs: fakeMYSalesOrgConfigs,
@@ -271,6 +280,8 @@ void main() {
       );
       when(() => mockPoAttachmentBloc.state)
           .thenReturn(PoAttachmentState.initial());
+
+      when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
 
       when(() => paymentCustomerInformationBlocMock.state).thenReturn(
         PaymentCustomerInformationState.initial(),
@@ -1452,6 +1463,9 @@ void main() {
     // });
 
     testWidgets('BundleItemMaterial is visible', (tester) async {
+      when(
+        () => autoRouterMock.push(const ViewByItemDetailsPageRoute()),
+      ).thenAnswer((invocation) => Future(() => null));
       final fakeOrderHistory = OrderHistory.empty().copyWith(
         orderHistoryItems: <OrderHistoryItem>[
           OrderHistoryItem.empty().copyWith(
@@ -2492,6 +2506,81 @@ void main() {
         );
 
         expect(buyAgainButton, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Find License expired banner in home tab',
+      (WidgetTester tester) async {
+        when(
+          () => autoRouterMock.push(const ProfilePageRoute()),
+        ).thenAnswer((invocation) => Future(() => null));
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+
+        when(() => customerLicenseBlocMock.state).thenReturn(
+          CustomerLicenseState.initial()
+              .copyWith(customerLicenses: customerLicense),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final licenseExpiredBanner =
+            find.byKey(WidgetKeys.licenseExpiredBanner);
+        final viewLicenseButton = find.byKey(WidgetKeys.viewLicenseButton);
+        final licenseExpiredBannerTitle = find.text(
+          'You have licenses that are about to expire or has expired.',
+        );
+        final licenseExpiredBannerSubTitle = find.text(
+          'To continue using eZRx+, please renew your license.',
+        );
+
+        expect(licenseExpiredBanner, findsOneWidget);
+        expect(licenseExpiredBannerTitle, findsOneWidget);
+        expect(licenseExpiredBannerSubTitle, findsOneWidget);
+
+        await tester.tap(viewLicenseButton);
+
+        verify(
+          () => autoRouterMock.push(const ProfilePageRoute()),
+        ).called(1);
+
+        await tester.pumpAndSettle();
+      },
+    );
+
+    testWidgets(
+      ' -> License expired banner not visible in home tab',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+
+        when(() => customerLicenseBlocMock.state).thenReturn(
+          CustomerLicenseState.initial().copyWith(customerLicenses: []),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final licenseExpiredBanner =
+            find.byKey(WidgetKeys.licenseExpiredBanner);
+        final licenseExpiredBannerTitle = find.text(
+          'You have licenses that are about to expire or has expired.',
+        );
+        final licenseExpiredBannerSubTitle = find.text(
+          'To continue using eZRx+, please renew your license.',
+        );
+
+        expect(licenseExpiredBanner, findsNothing);
+        expect(licenseExpiredBannerTitle, findsNothing);
+        expect(licenseExpiredBannerSubTitle, findsNothing);
       },
     );
   });

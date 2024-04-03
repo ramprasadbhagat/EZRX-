@@ -9,7 +9,7 @@ class CustomerLicenseLocalDataSource {
 
   Future<List<CustomerLicense>> getCustomerLicense() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/customerLicenses.json'),
+      await rootBundle.loadString('assets/json/customerLicensesResponse.json'),
     );
 
     return List.from(data['data']['customerLicenses']['Licenses'])

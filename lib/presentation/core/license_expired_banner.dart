@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/presentation/core/color_container.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class LicenseExpiredBanner extends StatelessWidget {
       builder: (context, state) {
         return state.isLicenseExpired
             ? ColorContainer(
+                key: WidgetKeys.licenseExpiredBanner,
                 color: ZPColors.errorSnackBarColor,
                 margin: const EdgeInsets.all(0),
                 padding: const EdgeInsets.symmetric(
@@ -40,6 +42,7 @@ class LicenseExpiredBanner extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   TextButton(
+                    key: WidgetKeys.viewLicenseButton,
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(EdgeInsets.zero),
                     ),

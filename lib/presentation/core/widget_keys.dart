@@ -1517,6 +1517,8 @@ class WidgetKeys {
   static Key aboutUsHeaderSection = const Key('aboutUsHeaderSection');
   static Key aboutUsCertificationsSection =
       const Key('aboutUsCertificationsSection');
+  static Key licenseExpiredBanner = const Key('licenseExpiredBanner');
+  static Key viewLicenseButton = const Key('viewLicenseButton');
   static Key aboutUsWhoWeAreSection = const Key('aboutUsWhoWeAreSection');
   static Key aboutUsWhyUsSection = const Key('aboutUsWhyUsSection');
   static Key aboutUsOutPartnersSection = const Key('aboutUsOutPartnersSection');

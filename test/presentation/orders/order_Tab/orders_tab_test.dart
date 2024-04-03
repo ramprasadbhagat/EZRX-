@@ -10,10 +10,12 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/vi
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -31,6 +33,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
@@ -45,6 +48,8 @@ class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
 class ViewByOrderFilterBlocMock
     extends MockBloc<ViewByOrderFilterEvent, ViewByOrderFilterState>
     implements ViewByOrderFilterBloc {}
+
+class MockAppRouter extends Mock implements AppRouter {}
 
 class ViewByItemFilterBlocMock
     extends MockBloc<ViewByItemFilterEvent, ViewByItemFilterState>
@@ -93,8 +98,9 @@ void main() {
   late MixpanelService mixpanelServiceMock;
   late Config config;
   late CustomerLicenseBloc customerLicenseBlocMock;
+  late List<CustomerLicense> customerLicense;
 
-  setUpAll(() {
+  setUpAll(() async {
     locator.registerLazySingleton(() => config);
     registerFallbackValue(<String, dynamic>{});
     registerFallbackValue(const ViewByOrderEvent.loadMore());
@@ -104,6 +110,8 @@ void main() {
     autoRouterMock = locator<AppRouter>();
     mixpanelServiceMock = locator<MixpanelService>();
     customerLicenseBlocMock = CustomerLicenseBlocMock();
+    customerLicense =
+        await CustomerLicenseLocalDataSource().getCustomerLicense();
     config = ConfigMock();
   });
   setUp(() {
@@ -921,6 +929,70 @@ void main() {
         expect(ediBanner, findsNothing);
         expect(ediBannerTitle, findsNothing);
         expect(ediBannerSubTitle, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Find License expired banner in home tab',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+
+        when(() => customerLicenseBlocMock.state).thenReturn(
+          CustomerLicenseState.initial()
+              .copyWith(customerLicenses: customerLicense),
+        );
+        await tester.pumpWidget(testWidget(const OrdersTab()));
+        await tester.pump();
+
+        final licenseExpiredBanner =
+            find.byKey(WidgetKeys.licenseExpiredBanner);
+
+        final licenseExpiredBannerTitle = find.text(
+          'You have licenses that are about to expire or has expired.',
+        );
+        final licenseExpiredBannerSubTitle = find.text(
+          'To continue using eZRx+, please renew your license.',
+        );
+
+        expect(licenseExpiredBanner, findsOneWidget);
+        expect(licenseExpiredBannerTitle, findsOneWidget);
+        expect(licenseExpiredBannerSubTitle, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> License expired banner not visible in home tab',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+
+        when(() => customerLicenseBlocMock.state).thenReturn(
+          CustomerLicenseState.initial().copyWith(customerLicenses: []),
+        );
+        await tester.pumpWidget(testWidget(const OrdersTab()));
+        await tester.pump();
+
+        final licenseExpiredBanner =
+            find.byKey(WidgetKeys.licenseExpiredBanner);
+        final licenseExpiredBannerTitle = find.text(
+          'You have licenses that are about to expire or has expired.',
+        );
+        final licenseExpiredBannerSubTitle = find.text(
+          'To continue using eZRx+, please renew your license.',
+        );
+
+        expect(licenseExpiredBanner, findsNothing);
+        expect(licenseExpiredBannerTitle, findsNothing);
+        expect(licenseExpiredBannerSubTitle, findsNothing);
       },
     );
   });
