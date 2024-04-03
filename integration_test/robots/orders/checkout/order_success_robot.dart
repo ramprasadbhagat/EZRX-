@@ -32,6 +32,15 @@ class OrderSuccessRobot extends CommonRobot {
     );
   }
 
+  void verifyMobileNumber(String text) {
+    expect(
+      find.byKey(
+        WidgetKeys.balanceTextRow('Contact number'.tr(), text),
+      ),
+      findsOneWidget,
+    );
+  }
+
   void verifyCustomerCode(String customerCode) {
     expect(
       tester

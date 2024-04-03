@@ -99,6 +99,16 @@ class CheckoutRobot {
     );
   }
 
+  void verifyLengthGreaterThan16MobileNumberMessage({required bool isVisible}) {
+    expect(
+      find.descendant(
+        of: contactNumberField,
+        matching: find.text('Please enter a valid phone number'.tr()),
+      ),
+      isVisible ? findsOneWidget : findsNothing,
+    );
+  }
+
   Future<void> enterReferenceNote(String text) async {
     await tester.tap(referenceNoteField);
     await tester.enterText(referenceNoteField, text);

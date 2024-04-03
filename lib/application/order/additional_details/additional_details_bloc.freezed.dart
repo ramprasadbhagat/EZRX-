@@ -12,7 +12,7 @@ part of 'additional_details_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AdditionalDetailsEvent {
@@ -31,6 +31,7 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
+    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,6 +47,7 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +63,7 @@ mixin _$AdditionalDetailsEvent {
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -81,6 +84,8 @@ mixin _$AdditionalDetailsEvent {
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
+    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
+        onValidateMobileNo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -97,6 +102,8 @@ mixin _$AdditionalDetailsEvent {
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -113,6 +120,8 @@ mixin _$AdditionalDetailsEvent {
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,10 +147,10 @@ class _$AdditionalDetailsEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo});
@@ -151,11 +160,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$AdditionalDetailsEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$AdditionalDetailsEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -164,7 +173,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? config = null,
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       config: null == config
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
@@ -195,8 +204,9 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized({required this.config, required this.customerCodeInfo});
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
+      {required this.config, required this.customerCodeInfo});
 
   @override
   final SalesOrganisationConfigs config;
@@ -209,10 +219,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.config, config) || other.config == config) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo));
@@ -224,8 +234,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -243,6 +253,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
+    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return initialized(config, customerCodeInfo);
   }
@@ -261,6 +272,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return initialized?.call(config, customerCodeInfo);
   }
@@ -279,6 +291,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -305,6 +318,8 @@ class _$_Initialized implements _Initialized {
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
+    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
+        onValidateMobileNo,
   }) {
     return initialized(this);
   }
@@ -324,6 +339,8 @@ class _$_Initialized implements _Initialized {
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
   }) {
     return initialized?.call(this);
   }
@@ -343,6 +360,8 @@ class _$_Initialized implements _Initialized {
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -355,33 +374,33 @@ class _$_Initialized implements _Initialized {
 abstract class _Initialized implements AdditionalDetailsEvent {
   const factory _Initialized(
       {required final SalesOrganisationConfigs config,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_Initialized;
+      required final CustomerCodeInfo customerCodeInfo}) = _$InitializedImpl;
 
   SalesOrganisationConfigs get config;
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AdditionalDetailsTextOnChangeCopyWith<$Res> {
-  factory _$$_AdditionalDetailsTextOnChangeCopyWith(
-          _$_AdditionalDetailsTextOnChange value,
-          $Res Function(_$_AdditionalDetailsTextOnChange) then) =
-      __$$_AdditionalDetailsTextOnChangeCopyWithImpl<$Res>;
+abstract class _$$AdditionalDetailsTextOnChangeImplCopyWith<$Res> {
+  factory _$$AdditionalDetailsTextOnChangeImplCopyWith(
+          _$AdditionalDetailsTextOnChangeImpl value,
+          $Res Function(_$AdditionalDetailsTextOnChangeImpl) then) =
+      __$$AdditionalDetailsTextOnChangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DeliveryInfoLabel label, String newValue});
 }
 
 /// @nodoc
-class __$$_AdditionalDetailsTextOnChangeCopyWithImpl<$Res>
+class __$$AdditionalDetailsTextOnChangeImplCopyWithImpl<$Res>
     extends _$AdditionalDetailsEventCopyWithImpl<$Res,
-        _$_AdditionalDetailsTextOnChange>
-    implements _$$_AdditionalDetailsTextOnChangeCopyWith<$Res> {
-  __$$_AdditionalDetailsTextOnChangeCopyWithImpl(
-      _$_AdditionalDetailsTextOnChange _value,
-      $Res Function(_$_AdditionalDetailsTextOnChange) _then)
+        _$AdditionalDetailsTextOnChangeImpl>
+    implements _$$AdditionalDetailsTextOnChangeImplCopyWith<$Res> {
+  __$$AdditionalDetailsTextOnChangeImplCopyWithImpl(
+      _$AdditionalDetailsTextOnChangeImpl _value,
+      $Res Function(_$AdditionalDetailsTextOnChangeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -390,7 +409,7 @@ class __$$_AdditionalDetailsTextOnChangeCopyWithImpl<$Res>
     Object? label = null,
     Object? newValue = null,
   }) {
-    return _then(_$_AdditionalDetailsTextOnChange(
+    return _then(_$AdditionalDetailsTextOnChangeImpl(
       label: null == label
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
@@ -405,9 +424,9 @@ class __$$_AdditionalDetailsTextOnChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdditionalDetailsTextOnChange
+class _$AdditionalDetailsTextOnChangeImpl
     implements _AdditionalDetailsTextOnChange {
-  const _$_AdditionalDetailsTextOnChange(
+  const _$AdditionalDetailsTextOnChangeImpl(
       {required this.label, required this.newValue});
 
   @override
@@ -421,10 +440,10 @@ class _$_AdditionalDetailsTextOnChange
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsTextOnChange &&
+            other is _$AdditionalDetailsTextOnChangeImpl &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.newValue, newValue) ||
                 other.newValue == newValue));
@@ -436,9 +455,10 @@ class _$_AdditionalDetailsTextOnChange
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdditionalDetailsTextOnChangeCopyWith<_$_AdditionalDetailsTextOnChange>
-      get copyWith => __$$_AdditionalDetailsTextOnChangeCopyWithImpl<
-          _$_AdditionalDetailsTextOnChange>(this, _$identity);
+  _$$AdditionalDetailsTextOnChangeImplCopyWith<
+          _$AdditionalDetailsTextOnChangeImpl>
+      get copyWith => __$$AdditionalDetailsTextOnChangeImplCopyWithImpl<
+          _$AdditionalDetailsTextOnChangeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -456,6 +476,7 @@ class _$_AdditionalDetailsTextOnChange
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
+    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return onTextChange(label, newValue);
   }
@@ -474,6 +495,7 @@ class _$_AdditionalDetailsTextOnChange
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return onTextChange?.call(label, newValue);
   }
@@ -492,6 +514,7 @@ class _$_AdditionalDetailsTextOnChange
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -518,6 +541,8 @@ class _$_AdditionalDetailsTextOnChange
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
+    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
+        onValidateMobileNo,
   }) {
     return onTextChange(this);
   }
@@ -537,6 +562,8 @@ class _$_AdditionalDetailsTextOnChange
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
   }) {
     return onTextChange?.call(this);
   }
@@ -556,6 +583,8 @@ class _$_AdditionalDetailsTextOnChange
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -569,39 +598,40 @@ abstract class _AdditionalDetailsTextOnChange
     implements AdditionalDetailsEvent {
   const factory _AdditionalDetailsTextOnChange(
       {required final DeliveryInfoLabel label,
-      required final String newValue}) = _$_AdditionalDetailsTextOnChange;
+      required final String newValue}) = _$AdditionalDetailsTextOnChangeImpl;
 
   DeliveryInfoLabel get label;
   String get newValue;
   @JsonKey(ignore: true)
-  _$$_AdditionalDetailsTextOnChangeCopyWith<_$_AdditionalDetailsTextOnChange>
+  _$$AdditionalDetailsTextOnChangeImplCopyWith<
+          _$AdditionalDetailsTextOnChangeImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AdditionalDetailsValidateFormCopyWith<$Res> {
-  factory _$$_AdditionalDetailsValidateFormCopyWith(
-          _$_AdditionalDetailsValidateForm value,
-          $Res Function(_$_AdditionalDetailsValidateForm) then) =
-      __$$_AdditionalDetailsValidateFormCopyWithImpl<$Res>;
+abstract class _$$AdditionalDetailsValidateFormImplCopyWith<$Res> {
+  factory _$$AdditionalDetailsValidateFormImplCopyWith(
+          _$AdditionalDetailsValidateFormImpl value,
+          $Res Function(_$AdditionalDetailsValidateFormImpl) then) =
+      __$$AdditionalDetailsValidateFormImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AdditionalDetailsValidateFormCopyWithImpl<$Res>
+class __$$AdditionalDetailsValidateFormImplCopyWithImpl<$Res>
     extends _$AdditionalDetailsEventCopyWithImpl<$Res,
-        _$_AdditionalDetailsValidateForm>
-    implements _$$_AdditionalDetailsValidateFormCopyWith<$Res> {
-  __$$_AdditionalDetailsValidateFormCopyWithImpl(
-      _$_AdditionalDetailsValidateForm _value,
-      $Res Function(_$_AdditionalDetailsValidateForm) _then)
+        _$AdditionalDetailsValidateFormImpl>
+    implements _$$AdditionalDetailsValidateFormImplCopyWith<$Res> {
+  __$$AdditionalDetailsValidateFormImplCopyWithImpl(
+      _$AdditionalDetailsValidateFormImpl _value,
+      $Res Function(_$AdditionalDetailsValidateFormImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AdditionalDetailsValidateForm
+class _$AdditionalDetailsValidateFormImpl
     implements _AdditionalDetailsValidateForm {
-  const _$_AdditionalDetailsValidateForm();
+  const _$AdditionalDetailsValidateFormImpl();
 
   @override
   String toString() {
@@ -609,10 +639,10 @@ class _$_AdditionalDetailsValidateForm
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsValidateForm);
+            other is _$AdditionalDetailsValidateFormImpl);
   }
 
   @override
@@ -634,6 +664,7 @@ class _$_AdditionalDetailsValidateForm
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
+    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return validateForm();
   }
@@ -652,6 +683,7 @@ class _$_AdditionalDetailsValidateForm
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return validateForm?.call();
   }
@@ -670,6 +702,7 @@ class _$_AdditionalDetailsValidateForm
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -696,6 +729,8 @@ class _$_AdditionalDetailsValidateForm
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
+    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
+        onValidateMobileNo,
   }) {
     return validateForm(this);
   }
@@ -715,6 +750,8 @@ class _$_AdditionalDetailsValidateForm
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
   }) {
     return validateForm?.call(this);
   }
@@ -734,6 +771,8 @@ class _$_AdditionalDetailsValidateForm
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -746,27 +785,27 @@ class _$_AdditionalDetailsValidateForm
 abstract class _AdditionalDetailsValidateForm
     implements AdditionalDetailsEvent {
   const factory _AdditionalDetailsValidateForm() =
-      _$_AdditionalDetailsValidateForm;
+      _$AdditionalDetailsValidateFormImpl;
 }
 
 /// @nodoc
-abstract class _$$_AdditionalDetailsAddPoDocumentCopyWith<$Res> {
-  factory _$$_AdditionalDetailsAddPoDocumentCopyWith(
-          _$_AdditionalDetailsAddPoDocument value,
-          $Res Function(_$_AdditionalDetailsAddPoDocument) then) =
-      __$$_AdditionalDetailsAddPoDocumentCopyWithImpl<$Res>;
+abstract class _$$AdditionalDetailsAddPoDocumentImplCopyWith<$Res> {
+  factory _$$AdditionalDetailsAddPoDocumentImplCopyWith(
+          _$AdditionalDetailsAddPoDocumentImpl value,
+          $Res Function(_$AdditionalDetailsAddPoDocumentImpl) then) =
+      __$$AdditionalDetailsAddPoDocumentImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<PoDocuments> poDocuments});
 }
 
 /// @nodoc
-class __$$_AdditionalDetailsAddPoDocumentCopyWithImpl<$Res>
+class __$$AdditionalDetailsAddPoDocumentImplCopyWithImpl<$Res>
     extends _$AdditionalDetailsEventCopyWithImpl<$Res,
-        _$_AdditionalDetailsAddPoDocument>
-    implements _$$_AdditionalDetailsAddPoDocumentCopyWith<$Res> {
-  __$$_AdditionalDetailsAddPoDocumentCopyWithImpl(
-      _$_AdditionalDetailsAddPoDocument _value,
-      $Res Function(_$_AdditionalDetailsAddPoDocument) _then)
+        _$AdditionalDetailsAddPoDocumentImpl>
+    implements _$$AdditionalDetailsAddPoDocumentImplCopyWith<$Res> {
+  __$$AdditionalDetailsAddPoDocumentImplCopyWithImpl(
+      _$AdditionalDetailsAddPoDocumentImpl _value,
+      $Res Function(_$AdditionalDetailsAddPoDocumentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -774,7 +813,7 @@ class __$$_AdditionalDetailsAddPoDocumentCopyWithImpl<$Res>
   $Res call({
     Object? poDocuments = null,
   }) {
-    return _then(_$_AdditionalDetailsAddPoDocument(
+    return _then(_$AdditionalDetailsAddPoDocumentImpl(
       poDocuments: null == poDocuments
           ? _value._poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
@@ -785,9 +824,9 @@ class __$$_AdditionalDetailsAddPoDocumentCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdditionalDetailsAddPoDocument
+class _$AdditionalDetailsAddPoDocumentImpl
     implements _AdditionalDetailsAddPoDocument {
-  const _$_AdditionalDetailsAddPoDocument(
+  const _$AdditionalDetailsAddPoDocumentImpl(
       {required final List<PoDocuments> poDocuments})
       : _poDocuments = poDocuments;
 
@@ -805,10 +844,10 @@ class _$_AdditionalDetailsAddPoDocument
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsAddPoDocument &&
+            other is _$AdditionalDetailsAddPoDocumentImpl &&
             const DeepCollectionEquality()
                 .equals(other._poDocuments, _poDocuments));
   }
@@ -820,9 +859,10 @@ class _$_AdditionalDetailsAddPoDocument
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdditionalDetailsAddPoDocumentCopyWith<_$_AdditionalDetailsAddPoDocument>
-      get copyWith => __$$_AdditionalDetailsAddPoDocumentCopyWithImpl<
-          _$_AdditionalDetailsAddPoDocument>(this, _$identity);
+  _$$AdditionalDetailsAddPoDocumentImplCopyWith<
+          _$AdditionalDetailsAddPoDocumentImpl>
+      get copyWith => __$$AdditionalDetailsAddPoDocumentImplCopyWithImpl<
+          _$AdditionalDetailsAddPoDocumentImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -840,6 +880,7 @@ class _$_AdditionalDetailsAddPoDocument
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
+    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return addPoDocument(poDocuments);
   }
@@ -858,6 +899,7 @@ class _$_AdditionalDetailsAddPoDocument
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return addPoDocument?.call(poDocuments);
   }
@@ -876,6 +918,7 @@ class _$_AdditionalDetailsAddPoDocument
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (addPoDocument != null) {
@@ -902,6 +945,8 @@ class _$_AdditionalDetailsAddPoDocument
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
+    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
+        onValidateMobileNo,
   }) {
     return addPoDocument(this);
   }
@@ -921,6 +966,8 @@ class _$_AdditionalDetailsAddPoDocument
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
   }) {
     return addPoDocument?.call(this);
   }
@@ -940,6 +987,8 @@ class _$_AdditionalDetailsAddPoDocument
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (addPoDocument != null) {
@@ -953,20 +1002,21 @@ abstract class _AdditionalDetailsAddPoDocument
     implements AdditionalDetailsEvent {
   const factory _AdditionalDetailsAddPoDocument(
           {required final List<PoDocuments> poDocuments}) =
-      _$_AdditionalDetailsAddPoDocument;
+      _$AdditionalDetailsAddPoDocumentImpl;
 
   List<PoDocuments> get poDocuments;
   @JsonKey(ignore: true)
-  _$$_AdditionalDetailsAddPoDocumentCopyWith<_$_AdditionalDetailsAddPoDocument>
+  _$$AdditionalDetailsAddPoDocumentImplCopyWith<
+          _$AdditionalDetailsAddPoDocumentImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AdditionalDetailsRemovePoDocumentCopyWith<$Res> {
-  factory _$$_AdditionalDetailsRemovePoDocumentCopyWith(
-          _$_AdditionalDetailsRemovePoDocument value,
-          $Res Function(_$_AdditionalDetailsRemovePoDocument) then) =
-      __$$_AdditionalDetailsRemovePoDocumentCopyWithImpl<$Res>;
+abstract class _$$AdditionalDetailsRemovePoDocumentImplCopyWith<$Res> {
+  factory _$$AdditionalDetailsRemovePoDocumentImplCopyWith(
+          _$AdditionalDetailsRemovePoDocumentImpl value,
+          $Res Function(_$AdditionalDetailsRemovePoDocumentImpl) then) =
+      __$$AdditionalDetailsRemovePoDocumentImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PoDocuments poDocument});
 
@@ -974,13 +1024,13 @@ abstract class _$$_AdditionalDetailsRemovePoDocumentCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AdditionalDetailsRemovePoDocumentCopyWithImpl<$Res>
+class __$$AdditionalDetailsRemovePoDocumentImplCopyWithImpl<$Res>
     extends _$AdditionalDetailsEventCopyWithImpl<$Res,
-        _$_AdditionalDetailsRemovePoDocument>
-    implements _$$_AdditionalDetailsRemovePoDocumentCopyWith<$Res> {
-  __$$_AdditionalDetailsRemovePoDocumentCopyWithImpl(
-      _$_AdditionalDetailsRemovePoDocument _value,
-      $Res Function(_$_AdditionalDetailsRemovePoDocument) _then)
+        _$AdditionalDetailsRemovePoDocumentImpl>
+    implements _$$AdditionalDetailsRemovePoDocumentImplCopyWith<$Res> {
+  __$$AdditionalDetailsRemovePoDocumentImplCopyWithImpl(
+      _$AdditionalDetailsRemovePoDocumentImpl _value,
+      $Res Function(_$AdditionalDetailsRemovePoDocumentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -988,7 +1038,7 @@ class __$$_AdditionalDetailsRemovePoDocumentCopyWithImpl<$Res>
   $Res call({
     Object? poDocument = null,
   }) {
-    return _then(_$_AdditionalDetailsRemovePoDocument(
+    return _then(_$AdditionalDetailsRemovePoDocumentImpl(
       poDocument: null == poDocument
           ? _value.poDocument
           : poDocument // ignore: cast_nullable_to_non_nullable
@@ -1007,9 +1057,9 @@ class __$$_AdditionalDetailsRemovePoDocumentCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdditionalDetailsRemovePoDocument
+class _$AdditionalDetailsRemovePoDocumentImpl
     implements _AdditionalDetailsRemovePoDocument {
-  const _$_AdditionalDetailsRemovePoDocument({required this.poDocument});
+  const _$AdditionalDetailsRemovePoDocumentImpl({required this.poDocument});
 
   @override
   final PoDocuments poDocument;
@@ -1020,10 +1070,10 @@ class _$_AdditionalDetailsRemovePoDocument
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsRemovePoDocument &&
+            other is _$AdditionalDetailsRemovePoDocumentImpl &&
             (identical(other.poDocument, poDocument) ||
                 other.poDocument == poDocument));
   }
@@ -1034,10 +1084,10 @@ class _$_AdditionalDetailsRemovePoDocument
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdditionalDetailsRemovePoDocumentCopyWith<
-          _$_AdditionalDetailsRemovePoDocument>
-      get copyWith => __$$_AdditionalDetailsRemovePoDocumentCopyWithImpl<
-          _$_AdditionalDetailsRemovePoDocument>(this, _$identity);
+  _$$AdditionalDetailsRemovePoDocumentImplCopyWith<
+          _$AdditionalDetailsRemovePoDocumentImpl>
+      get copyWith => __$$AdditionalDetailsRemovePoDocumentImplCopyWithImpl<
+          _$AdditionalDetailsRemovePoDocumentImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1055,6 +1105,7 @@ class _$_AdditionalDetailsRemovePoDocument
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
+    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return removePoDocument(poDocument);
   }
@@ -1073,6 +1124,7 @@ class _$_AdditionalDetailsRemovePoDocument
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return removePoDocument?.call(poDocument);
   }
@@ -1091,6 +1143,7 @@ class _$_AdditionalDetailsRemovePoDocument
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (removePoDocument != null) {
@@ -1117,6 +1170,8 @@ class _$_AdditionalDetailsRemovePoDocument
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
+    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
+        onValidateMobileNo,
   }) {
     return removePoDocument(this);
   }
@@ -1136,6 +1191,8 @@ class _$_AdditionalDetailsRemovePoDocument
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
   }) {
     return removePoDocument?.call(this);
   }
@@ -1155,6 +1212,8 @@ class _$_AdditionalDetailsRemovePoDocument
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (removePoDocument != null) {
@@ -1168,39 +1227,39 @@ abstract class _AdditionalDetailsRemovePoDocument
     implements AdditionalDetailsEvent {
   const factory _AdditionalDetailsRemovePoDocument(
           {required final PoDocuments poDocument}) =
-      _$_AdditionalDetailsRemovePoDocument;
+      _$AdditionalDetailsRemovePoDocumentImpl;
 
   PoDocuments get poDocument;
   @JsonKey(ignore: true)
-  _$$_AdditionalDetailsRemovePoDocumentCopyWith<
-          _$_AdditionalDetailsRemovePoDocument>
+  _$$AdditionalDetailsRemovePoDocumentImplCopyWith<
+          _$AdditionalDetailsRemovePoDocumentImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AdditionalDetailsRemoveAllPoDocumentCopyWith<$Res> {
-  factory _$$_AdditionalDetailsRemoveAllPoDocumentCopyWith(
-          _$_AdditionalDetailsRemoveAllPoDocument value,
-          $Res Function(_$_AdditionalDetailsRemoveAllPoDocument) then) =
-      __$$_AdditionalDetailsRemoveAllPoDocumentCopyWithImpl<$Res>;
+abstract class _$$AdditionalDetailsRemoveAllPoDocumentImplCopyWith<$Res> {
+  factory _$$AdditionalDetailsRemoveAllPoDocumentImplCopyWith(
+          _$AdditionalDetailsRemoveAllPoDocumentImpl value,
+          $Res Function(_$AdditionalDetailsRemoveAllPoDocumentImpl) then) =
+      __$$AdditionalDetailsRemoveAllPoDocumentImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AdditionalDetailsRemoveAllPoDocumentCopyWithImpl<$Res>
+class __$$AdditionalDetailsRemoveAllPoDocumentImplCopyWithImpl<$Res>
     extends _$AdditionalDetailsEventCopyWithImpl<$Res,
-        _$_AdditionalDetailsRemoveAllPoDocument>
-    implements _$$_AdditionalDetailsRemoveAllPoDocumentCopyWith<$Res> {
-  __$$_AdditionalDetailsRemoveAllPoDocumentCopyWithImpl(
-      _$_AdditionalDetailsRemoveAllPoDocument _value,
-      $Res Function(_$_AdditionalDetailsRemoveAllPoDocument) _then)
+        _$AdditionalDetailsRemoveAllPoDocumentImpl>
+    implements _$$AdditionalDetailsRemoveAllPoDocumentImplCopyWith<$Res> {
+  __$$AdditionalDetailsRemoveAllPoDocumentImplCopyWithImpl(
+      _$AdditionalDetailsRemoveAllPoDocumentImpl _value,
+      $Res Function(_$AdditionalDetailsRemoveAllPoDocumentImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AdditionalDetailsRemoveAllPoDocument
+class _$AdditionalDetailsRemoveAllPoDocumentImpl
     implements _AdditionalDetailsRemoveAllPoDocument {
-  const _$_AdditionalDetailsRemoveAllPoDocument();
+  const _$AdditionalDetailsRemoveAllPoDocumentImpl();
 
   @override
   String toString() {
@@ -1208,10 +1267,10 @@ class _$_AdditionalDetailsRemoveAllPoDocument
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsRemoveAllPoDocument);
+            other is _$AdditionalDetailsRemoveAllPoDocumentImpl);
   }
 
   @override
@@ -1233,6 +1292,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
+    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return removeAllPoDocument();
   }
@@ -1251,6 +1311,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return removeAllPoDocument?.call();
   }
@@ -1269,6 +1330,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (removeAllPoDocument != null) {
@@ -1295,6 +1357,8 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
+    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
+        onValidateMobileNo,
   }) {
     return removeAllPoDocument(this);
   }
@@ -1314,6 +1378,8 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
   }) {
     return removeAllPoDocument?.call(this);
   }
@@ -1333,6 +1399,8 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (removeAllPoDocument != null) {
@@ -1345,33 +1413,33 @@ class _$_AdditionalDetailsRemoveAllPoDocument
 abstract class _AdditionalDetailsRemoveAllPoDocument
     implements AdditionalDetailsEvent {
   const factory _AdditionalDetailsRemoveAllPoDocument() =
-      _$_AdditionalDetailsRemoveAllPoDocument;
+      _$AdditionalDetailsRemoveAllPoDocumentImpl;
 }
 
 /// @nodoc
-abstract class _$$_AdditionalDetailsToggleGreenDeliveryCopyWith<$Res> {
-  factory _$$_AdditionalDetailsToggleGreenDeliveryCopyWith(
-          _$_AdditionalDetailsToggleGreenDelivery value,
-          $Res Function(_$_AdditionalDetailsToggleGreenDelivery) then) =
-      __$$_AdditionalDetailsToggleGreenDeliveryCopyWithImpl<$Res>;
+abstract class _$$AdditionalDetailsToggleGreenDeliveryImplCopyWith<$Res> {
+  factory _$$AdditionalDetailsToggleGreenDeliveryImplCopyWith(
+          _$AdditionalDetailsToggleGreenDeliveryImpl value,
+          $Res Function(_$AdditionalDetailsToggleGreenDeliveryImpl) then) =
+      __$$AdditionalDetailsToggleGreenDeliveryImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AdditionalDetailsToggleGreenDeliveryCopyWithImpl<$Res>
+class __$$AdditionalDetailsToggleGreenDeliveryImplCopyWithImpl<$Res>
     extends _$AdditionalDetailsEventCopyWithImpl<$Res,
-        _$_AdditionalDetailsToggleGreenDelivery>
-    implements _$$_AdditionalDetailsToggleGreenDeliveryCopyWith<$Res> {
-  __$$_AdditionalDetailsToggleGreenDeliveryCopyWithImpl(
-      _$_AdditionalDetailsToggleGreenDelivery _value,
-      $Res Function(_$_AdditionalDetailsToggleGreenDelivery) _then)
+        _$AdditionalDetailsToggleGreenDeliveryImpl>
+    implements _$$AdditionalDetailsToggleGreenDeliveryImplCopyWith<$Res> {
+  __$$AdditionalDetailsToggleGreenDeliveryImplCopyWithImpl(
+      _$AdditionalDetailsToggleGreenDeliveryImpl _value,
+      $Res Function(_$AdditionalDetailsToggleGreenDeliveryImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AdditionalDetailsToggleGreenDelivery
+class _$AdditionalDetailsToggleGreenDeliveryImpl
     implements _AdditionalDetailsToggleGreenDelivery {
-  const _$_AdditionalDetailsToggleGreenDelivery();
+  const _$AdditionalDetailsToggleGreenDeliveryImpl();
 
   @override
   String toString() {
@@ -1379,10 +1447,10 @@ class _$_AdditionalDetailsToggleGreenDelivery
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsToggleGreenDelivery);
+            other is _$AdditionalDetailsToggleGreenDeliveryImpl);
   }
 
   @override
@@ -1404,6 +1472,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
+    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return toggleGreenDelivery();
   }
@@ -1422,6 +1491,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return toggleGreenDelivery?.call();
   }
@@ -1440,6 +1510,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (toggleGreenDelivery != null) {
@@ -1466,6 +1537,8 @@ class _$_AdditionalDetailsToggleGreenDelivery
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
+    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
+        onValidateMobileNo,
   }) {
     return toggleGreenDelivery(this);
   }
@@ -1485,6 +1558,8 @@ class _$_AdditionalDetailsToggleGreenDelivery
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
   }) {
     return toggleGreenDelivery?.call(this);
   }
@@ -1504,6 +1579,8 @@ class _$_AdditionalDetailsToggleGreenDelivery
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (toggleGreenDelivery != null) {
@@ -1516,15 +1593,15 @@ class _$_AdditionalDetailsToggleGreenDelivery
 abstract class _AdditionalDetailsToggleGreenDelivery
     implements AdditionalDetailsEvent {
   const factory _AdditionalDetailsToggleGreenDelivery() =
-      _$_AdditionalDetailsToggleGreenDelivery;
+      _$AdditionalDetailsToggleGreenDeliveryImpl;
 }
 
 /// @nodoc
-abstract class _$$_AdditionalDetailsInitiateFromHistoryCopyWith<$Res> {
-  factory _$$_AdditionalDetailsInitiateFromHistoryCopyWith(
-          _$_AdditionalDetailsInitiateFromHistory value,
-          $Res Function(_$_AdditionalDetailsInitiateFromHistory) then) =
-      __$$_AdditionalDetailsInitiateFromHistoryCopyWithImpl<$Res>;
+abstract class _$$AdditionalDetailsInitiateFromHistoryImplCopyWith<$Res> {
+  factory _$$AdditionalDetailsInitiateFromHistoryImplCopyWith(
+          _$AdditionalDetailsInitiateFromHistoryImpl value,
+          $Res Function(_$AdditionalDetailsInitiateFromHistoryImpl) then) =
+      __$$AdditionalDetailsInitiateFromHistoryImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DeliveryInfoData data, CustomerCodeInfo customerCodeInfo});
 
@@ -1533,13 +1610,13 @@ abstract class _$$_AdditionalDetailsInitiateFromHistoryCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AdditionalDetailsInitiateFromHistoryCopyWithImpl<$Res>
+class __$$AdditionalDetailsInitiateFromHistoryImplCopyWithImpl<$Res>
     extends _$AdditionalDetailsEventCopyWithImpl<$Res,
-        _$_AdditionalDetailsInitiateFromHistory>
-    implements _$$_AdditionalDetailsInitiateFromHistoryCopyWith<$Res> {
-  __$$_AdditionalDetailsInitiateFromHistoryCopyWithImpl(
-      _$_AdditionalDetailsInitiateFromHistory _value,
-      $Res Function(_$_AdditionalDetailsInitiateFromHistory) _then)
+        _$AdditionalDetailsInitiateFromHistoryImpl>
+    implements _$$AdditionalDetailsInitiateFromHistoryImplCopyWith<$Res> {
+  __$$AdditionalDetailsInitiateFromHistoryImplCopyWithImpl(
+      _$AdditionalDetailsInitiateFromHistoryImpl _value,
+      $Res Function(_$AdditionalDetailsInitiateFromHistoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1548,7 +1625,7 @@ class __$$_AdditionalDetailsInitiateFromHistoryCopyWithImpl<$Res>
     Object? data = null,
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_AdditionalDetailsInitiateFromHistory(
+    return _then(_$AdditionalDetailsInitiateFromHistoryImpl(
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -1579,9 +1656,9 @@ class __$$_AdditionalDetailsInitiateFromHistoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdditionalDetailsInitiateFromHistory
+class _$AdditionalDetailsInitiateFromHistoryImpl
     implements _AdditionalDetailsInitiateFromHistory {
-  const _$_AdditionalDetailsInitiateFromHistory(
+  const _$AdditionalDetailsInitiateFromHistoryImpl(
       {required this.data, required this.customerCodeInfo});
 
   @override
@@ -1595,10 +1672,10 @@ class _$_AdditionalDetailsInitiateFromHistory
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsInitiateFromHistory &&
+            other is _$AdditionalDetailsInitiateFromHistoryImpl &&
             (identical(other.data, data) || other.data == data) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo));
@@ -1610,10 +1687,10 @@ class _$_AdditionalDetailsInitiateFromHistory
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdditionalDetailsInitiateFromHistoryCopyWith<
-          _$_AdditionalDetailsInitiateFromHistory>
-      get copyWith => __$$_AdditionalDetailsInitiateFromHistoryCopyWithImpl<
-          _$_AdditionalDetailsInitiateFromHistory>(this, _$identity);
+  _$$AdditionalDetailsInitiateFromHistoryImplCopyWith<
+          _$AdditionalDetailsInitiateFromHistoryImpl>
+      get copyWith => __$$AdditionalDetailsInitiateFromHistoryImplCopyWithImpl<
+          _$AdditionalDetailsInitiateFromHistoryImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1631,6 +1708,7 @@ class _$_AdditionalDetailsInitiateFromHistory
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
+    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return initiateFromHistory(data, customerCodeInfo);
   }
@@ -1649,6 +1727,7 @@ class _$_AdditionalDetailsInitiateFromHistory
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return initiateFromHistory?.call(data, customerCodeInfo);
   }
@@ -1667,6 +1746,7 @@ class _$_AdditionalDetailsInitiateFromHistory
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
+    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (initiateFromHistory != null) {
@@ -1693,6 +1773,8 @@ class _$_AdditionalDetailsInitiateFromHistory
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
+    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
+        onValidateMobileNo,
   }) {
     return initiateFromHistory(this);
   }
@@ -1712,6 +1794,8 @@ class _$_AdditionalDetailsInitiateFromHistory
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
   }) {
     return initiateFromHistory?.call(this);
   }
@@ -1731,6 +1815,8 @@ class _$_AdditionalDetailsInitiateFromHistory
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
+    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (initiateFromHistory != null) {
@@ -1745,13 +1831,229 @@ abstract class _AdditionalDetailsInitiateFromHistory
   const factory _AdditionalDetailsInitiateFromHistory(
           {required final DeliveryInfoData data,
           required final CustomerCodeInfo customerCodeInfo}) =
-      _$_AdditionalDetailsInitiateFromHistory;
+      _$AdditionalDetailsInitiateFromHistoryImpl;
 
   DeliveryInfoData get data;
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
-  _$$_AdditionalDetailsInitiateFromHistoryCopyWith<
-          _$_AdditionalDetailsInitiateFromHistory>
+  _$$AdditionalDetailsInitiateFromHistoryImplCopyWith<
+          _$AdditionalDetailsInitiateFromHistoryImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AdditionalDetailsOnValidateMobileNoImplCopyWith<$Res> {
+  factory _$$AdditionalDetailsOnValidateMobileNoImplCopyWith(
+          _$AdditionalDetailsOnValidateMobileNoImpl value,
+          $Res Function(_$AdditionalDetailsOnValidateMobileNoImpl) then) =
+      __$$AdditionalDetailsOnValidateMobileNoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isValidMobileNo});
+}
+
+/// @nodoc
+class __$$AdditionalDetailsOnValidateMobileNoImplCopyWithImpl<$Res>
+    extends _$AdditionalDetailsEventCopyWithImpl<$Res,
+        _$AdditionalDetailsOnValidateMobileNoImpl>
+    implements _$$AdditionalDetailsOnValidateMobileNoImplCopyWith<$Res> {
+  __$$AdditionalDetailsOnValidateMobileNoImplCopyWithImpl(
+      _$AdditionalDetailsOnValidateMobileNoImpl _value,
+      $Res Function(_$AdditionalDetailsOnValidateMobileNoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isValidMobileNo = null,
+  }) {
+    return _then(_$AdditionalDetailsOnValidateMobileNoImpl(
+      isValidMobileNo: null == isValidMobileNo
+          ? _value.isValidMobileNo
+          : isValidMobileNo // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AdditionalDetailsOnValidateMobileNoImpl
+    implements _AdditionalDetailsOnValidateMobileNo {
+  const _$AdditionalDetailsOnValidateMobileNoImpl(
+      {required this.isValidMobileNo});
+
+  @override
+  final bool isValidMobileNo;
+
+  @override
+  String toString() {
+    return 'AdditionalDetailsEvent.onValidateMobileNo(isValidMobileNo: $isValidMobileNo)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AdditionalDetailsOnValidateMobileNoImpl &&
+            (identical(other.isValidMobileNo, isValidMobileNo) ||
+                other.isValidMobileNo == isValidMobileNo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isValidMobileNo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AdditionalDetailsOnValidateMobileNoImplCopyWith<
+          _$AdditionalDetailsOnValidateMobileNoImpl>
+      get copyWith => __$$AdditionalDetailsOnValidateMobileNoImplCopyWithImpl<
+          _$AdditionalDetailsOnValidateMobileNoImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(DeliveryInfoLabel label, String newValue)
+        onTextChange,
+    required TResult Function() validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
+    required TResult Function() toggleGreenDelivery,
+    required TResult Function(
+            DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
+        initiateFromHistory,
+    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
+  }) {
+    return onValidateMobileNo(isValidMobileNo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
+    TResult? Function()? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
+    TResult? Function()? toggleGreenDelivery,
+    TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
+        initiateFromHistory,
+    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
+  }) {
+    return onValidateMobileNo?.call(isValidMobileNo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
+    TResult Function()? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
+    TResult Function()? toggleGreenDelivery,
+    TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
+        initiateFromHistory,
+    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
+    required TResult orElse(),
+  }) {
+    if (onValidateMobileNo != null) {
+      return onValidateMobileNo(isValidMobileNo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_AdditionalDetailsTextOnChange value)
+        onTextChange,
+    required TResult Function(_AdditionalDetailsValidateForm value)
+        validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsInitiateFromHistory value)
+        initiateFromHistory,
+    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
+        onValidateMobileNo,
+  }) {
+    return onValidateMobileNo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
+        initiateFromHistory,
+    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
+  }) {
+    return onValidateMobileNo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsInitiateFromHistory value)?
+        initiateFromHistory,
+    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
+        onValidateMobileNo,
+    required TResult orElse(),
+  }) {
+    if (onValidateMobileNo != null) {
+      return onValidateMobileNo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AdditionalDetailsOnValidateMobileNo
+    implements AdditionalDetailsEvent {
+  const factory _AdditionalDetailsOnValidateMobileNo(
+          {required final bool isValidMobileNo}) =
+      _$AdditionalDetailsOnValidateMobileNoImpl;
+
+  bool get isValidMobileNo;
+  @JsonKey(ignore: true)
+  _$$AdditionalDetailsOnValidateMobileNoImplCopyWith<
+          _$AdditionalDetailsOnValidateMobileNoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1763,6 +2065,7 @@ mixin _$AdditionalDetailsState {
   bool get isPoAttachmentValidated => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
+  bool get isValidMobileNo => throw _privateConstructorUsedError;
   SalesOrganisationConfigs get config => throw _privateConstructorUsedError;
   DeliveryInfoLabel? get focusTo => throw _privateConstructorUsedError;
 
@@ -1784,6 +2087,7 @@ abstract class $AdditionalDetailsStateCopyWith<$Res> {
       bool isPoAttachmentValidated,
       bool isLoading,
       bool showErrorMessages,
+      bool isValidMobileNo,
       SalesOrganisationConfigs config,
       DeliveryInfoLabel? focusTo});
 
@@ -1811,6 +2115,7 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
     Object? isPoAttachmentValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
+    Object? isValidMobileNo = null,
     Object? config = null,
     Object? focusTo = freezed,
   }) {
@@ -1838,6 +2143,10 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidMobileNo: null == isValidMobileNo
+          ? _value.isValidMobileNo
+          : isValidMobileNo // ignore: cast_nullable_to_non_nullable
               as bool,
       config: null == config
           ? _value.config
@@ -1868,11 +2177,12 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AdditionalDetailsStateCopyWith<$Res>
+abstract class _$$AdditionalDetailsStateImplCopyWith<$Res>
     implements $AdditionalDetailsStateCopyWith<$Res> {
-  factory _$$_AdditionalDetailsStateCopyWith(_$_AdditionalDetailsState value,
-          $Res Function(_$_AdditionalDetailsState) then) =
-      __$$_AdditionalDetailsStateCopyWithImpl<$Res>;
+  factory _$$AdditionalDetailsStateImplCopyWith(
+          _$AdditionalDetailsStateImpl value,
+          $Res Function(_$AdditionalDetailsStateImpl) then) =
+      __$$AdditionalDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1882,6 +2192,7 @@ abstract class _$$_AdditionalDetailsStateCopyWith<$Res>
       bool isPoAttachmentValidated,
       bool isLoading,
       bool showErrorMessages,
+      bool isValidMobileNo,
       SalesOrganisationConfigs config,
       DeliveryInfoLabel? focusTo});
 
@@ -1892,12 +2203,13 @@ abstract class _$$_AdditionalDetailsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
+class __$$AdditionalDetailsStateImplCopyWithImpl<$Res>
     extends _$AdditionalDetailsStateCopyWithImpl<$Res,
-        _$_AdditionalDetailsState>
-    implements _$$_AdditionalDetailsStateCopyWith<$Res> {
-  __$$_AdditionalDetailsStateCopyWithImpl(_$_AdditionalDetailsState _value,
-      $Res Function(_$_AdditionalDetailsState) _then)
+        _$AdditionalDetailsStateImpl>
+    implements _$$AdditionalDetailsStateImplCopyWith<$Res> {
+  __$$AdditionalDetailsStateImplCopyWithImpl(
+      _$AdditionalDetailsStateImpl _value,
+      $Res Function(_$AdditionalDetailsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1909,10 +2221,11 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
     Object? isPoAttachmentValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
+    Object? isValidMobileNo = null,
     Object? config = null,
     Object? focusTo = freezed,
   }) {
-    return _then(_$_AdditionalDetailsState(
+    return _then(_$AdditionalDetailsStateImpl(
       deliveryInfoData: null == deliveryInfoData
           ? _value.deliveryInfoData
           : deliveryInfoData // ignore: cast_nullable_to_non_nullable
@@ -1937,6 +2250,10 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
+      isValidMobileNo: null == isValidMobileNo
+          ? _value.isValidMobileNo
+          : isValidMobileNo // ignore: cast_nullable_to_non_nullable
+              as bool,
       config: null == config
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
@@ -1951,14 +2268,15 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdditionalDetailsState extends _AdditionalDetailsState {
-  const _$_AdditionalDetailsState(
+class _$AdditionalDetailsStateImpl extends _AdditionalDetailsState {
+  const _$AdditionalDetailsStateImpl(
       {required this.deliveryInfoData,
       required this.orderId,
       required this.isValidated,
       required this.isPoAttachmentValidated,
       required this.isLoading,
       required this.showErrorMessages,
+      required this.isValidMobileNo,
       required this.config,
       this.focusTo})
       : super._();
@@ -1976,20 +2294,22 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
   @override
   final bool showErrorMessages;
   @override
+  final bool isValidMobileNo;
+  @override
   final SalesOrganisationConfigs config;
   @override
   final DeliveryInfoLabel? focusTo;
 
   @override
   String toString() {
-    return 'AdditionalDetailsState(deliveryInfoData: $deliveryInfoData, orderId: $orderId, isValidated: $isValidated, isPoAttachmentValidated: $isPoAttachmentValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages, config: $config, focusTo: $focusTo)';
+    return 'AdditionalDetailsState(deliveryInfoData: $deliveryInfoData, orderId: $orderId, isValidated: $isValidated, isPoAttachmentValidated: $isPoAttachmentValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages, isValidMobileNo: $isValidMobileNo, config: $config, focusTo: $focusTo)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsState &&
+            other is _$AdditionalDetailsStateImpl &&
             (identical(other.deliveryInfoData, deliveryInfoData) ||
                 other.deliveryInfoData == deliveryInfoData) &&
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
@@ -2002,6 +2322,8 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
                 other.isLoading == isLoading) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
+            (identical(other.isValidMobileNo, isValidMobileNo) ||
+                other.isValidMobileNo == isValidMobileNo) &&
             (identical(other.config, config) || other.config == config) &&
             (identical(other.focusTo, focusTo) || other.focusTo == focusTo));
   }
@@ -2015,15 +2337,16 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
       isPoAttachmentValidated,
       isLoading,
       showErrorMessages,
+      isValidMobileNo,
       config,
       focusTo);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdditionalDetailsStateCopyWith<_$_AdditionalDetailsState> get copyWith =>
-      __$$_AdditionalDetailsStateCopyWithImpl<_$_AdditionalDetailsState>(
-          this, _$identity);
+  _$$AdditionalDetailsStateImplCopyWith<_$AdditionalDetailsStateImpl>
+      get copyWith => __$$AdditionalDetailsStateImplCopyWithImpl<
+          _$AdditionalDetailsStateImpl>(this, _$identity);
 }
 
 abstract class _AdditionalDetailsState extends AdditionalDetailsState {
@@ -2034,8 +2357,9 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
       required final bool isPoAttachmentValidated,
       required final bool isLoading,
       required final bool showErrorMessages,
+      required final bool isValidMobileNo,
       required final SalesOrganisationConfigs config,
-      final DeliveryInfoLabel? focusTo}) = _$_AdditionalDetailsState;
+      final DeliveryInfoLabel? focusTo}) = _$AdditionalDetailsStateImpl;
   const _AdditionalDetailsState._() : super._();
 
   @override
@@ -2051,11 +2375,13 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
   @override
   bool get showErrorMessages;
   @override
+  bool get isValidMobileNo;
+  @override
   SalesOrganisationConfigs get config;
   @override
   DeliveryInfoLabel? get focusTo;
   @override
   @JsonKey(ignore: true)
-  _$$_AdditionalDetailsStateCopyWith<_$_AdditionalDetailsState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AdditionalDetailsStateImplCopyWith<_$AdditionalDetailsStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

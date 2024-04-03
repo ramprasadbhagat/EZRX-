@@ -467,7 +467,15 @@ class _MobileNumber extends StatelessWidget {
                 countries: [
                   context.read<EligibilityBloc>().state.salesOrg.country,
                 ],
-                onInputValidated: (bool value) {},
+                onInputValidated: (bool value) {
+                  if (value) {
+                    context.read<AdditionalDetailsBloc>().add(
+                          AdditionalDetailsEvent.onValidateMobileNo(
+                            isValidMobileNo: value,
+                          ),
+                        );
+                  }
+                },
                 autoValidateMode: additionalDetailsState.showErrorMessages
                     ? AutovalidateMode.always
                     : AutovalidateMode.disabled,
@@ -515,7 +523,12 @@ class _MobileNumber extends StatelessWidget {
                               context.tr('Mobile number is a required field'),
                           orElse: () => null,
                         ),
-                        (_) => null,
+                        (mobileNumber) => !context
+                                .read<AdditionalDetailsBloc>()
+                                .state
+                                .isValidMobileNo
+                            ? context.tr('Please enter a valid phone number')
+                            : null,
                       );
                 },
               ),

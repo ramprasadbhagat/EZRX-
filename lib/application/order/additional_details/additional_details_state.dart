@@ -11,6 +11,7 @@ class AdditionalDetailsState with _$AdditionalDetailsState {
     required bool isPoAttachmentValidated,
     required bool isLoading,
     required bool showErrorMessages,
+    required bool isValidMobileNo,
     required SalesOrganisationConfigs config,
     DeliveryInfoLabel? focusTo,
   }) = _AdditionalDetailsState;
@@ -22,6 +23,7 @@ class AdditionalDetailsState with _$AdditionalDetailsState {
         isPoAttachmentValidated: true,
         isLoading: false,
         showErrorMessages: false,
+        isValidMobileNo: false,
         config: SalesOrganisationConfigs.empty(),
       );
 }

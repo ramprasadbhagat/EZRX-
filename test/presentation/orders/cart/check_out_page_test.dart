@@ -1341,6 +1341,154 @@ void main() {
         );
       },
     );
+
+    testWidgets(
+      '=> test contsct number in place Order when  enableMobileNumber is true',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: false,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
+        final internationalPhoneNumberInputKey =
+            find.byKey(WidgetKeys.internationalPhoneNumberInput);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        expect(internationalPhoneNumberInputKey, findsOneWidget);
+
+        expect(
+          (tester.widget(internationalPhoneNumberInputKey)
+                  as InternationalPhoneNumberInput)
+              .validator
+              ?.call('MobileNumber field'),
+          'Mobile number is a required field',
+        );
+      },
+    );
+    testWidgets(
+      '=> test contsct number in place Order when  enableMobileNumber is true and entered a grether than 16 digit mobile number ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            deliveryInfoData: DeliveryInfoData.empty()
+                .copyWith(mobileNumber: MobileNumber('12345678901234567')),
+            isValidated: false,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
+        final internationalPhoneNumberInputKey =
+            find.byKey(WidgetKeys.internationalPhoneNumberInput);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        expect(internationalPhoneNumberInputKey, findsOneWidget);
+
+        expect(
+          (tester.widget(internationalPhoneNumberInputKey)
+                  as InternationalPhoneNumberInput)
+              .validator
+              ?.call('MobileNumber field'),
+          'Please enter a valid phone number',
+        );
+      },
+    );
+
+    testWidgets(
+      '=> test contsct number in place Order when  enableMobileNumber is true and entered a 16 digit mobile number ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            deliveryInfoData: DeliveryInfoData.empty()
+                .copyWith(mobileNumber: MobileNumber('+840312123123')),
+            isValidated: true,
+            isValidMobileNo: true,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: fakeVNSalesOrgConfigs,
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
+        final internationalPhoneNumberInputKey =
+            find.byKey(WidgetKeys.internationalPhoneNumberInput);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        await tester.enterText(internationalPhoneNumberInputKey, '0312123123');
+        await tester.pump();
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        expect(internationalPhoneNumberInputKey, findsOneWidget);
+
+        expect(
+          (tester.widget(internationalPhoneNumberInputKey)
+                  as InternationalPhoneNumberInput)
+              .validator
+              ?.call('MobileNumber field'),
+          null,
+        );
+      },
+    );
+
     testWidgets(
       '=> test Reference Note in place Order when referenceNote is true ',
       (tester) async {

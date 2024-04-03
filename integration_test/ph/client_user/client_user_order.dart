@@ -2306,6 +2306,55 @@ void main() {
       orderSuccessRobot.verifyPoReference(poReference);
       orderSuccessRobot.verifyDeliveryInstruction(deliveryInstruction);
     });
+    testWidgets(
+        'EZRX-T118 | Validate mobile no fields in checkout with valid phone number and go to order submitted',
+        (tester) async {
+      const poReference = 'po-reference';
+      const poReferenceNote = 'po-reference-note';
+      const contactPerson = 'contact-person';
+      const contactNumber = '1234567890';
+      const contactNumberWith17Digit = '12345678901234567';
+      const deliveryInstruction = 'delivery-instruction';
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await checkoutWithMaterial(materialNumber, 1000);
+
+      //verify
+      await checkoutRobot.verifyPoReferenceField(isVisible: true);
+      await checkoutRobot.verifyReferenceNoteField(isVisible: true);
+      await checkoutRobot.verifyContactPersonField(isVisible: true);
+      await checkoutRobot.verifyMobileNumberField(isVisible: true);
+      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+
+      await checkoutRobot.tapPlaceOrderButton();
+
+      checkoutRobot.verifyEmptyPoReferenceMessage(isVisible: true);
+      await checkoutRobot.enterPoReference(poReference);
+
+      checkoutRobot.verifyEmptyPoReferenceNoteErrorMessage(isVisible: true);
+      await checkoutRobot.enterReferenceNote(poReferenceNote);
+
+      checkoutRobot.verifyEmptyContactPersonErrorMessage(isVisible: true);
+      await checkoutRobot.enterContactPerson(contactPerson);
+
+      checkoutRobot.verifyEmptyContactNumberErrorMessage(isVisible: true);
+      await checkoutRobot.enterContactNumber(contactNumberWith17Digit);
+
+      await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+
+      await checkoutRobot.tapPlaceOrderButton();
+
+      checkoutRobot.verifyLengthGreaterThan16MobileNumberMessage(
+        isVisible: true,
+      );
+      await checkoutRobot.enterContactNumber(contactNumber);
+      await checkoutRobot.tapPlaceOrderButton();
+      orderSuccessRobot.verifyPage();
+      orderSuccessRobot.verifyPoReference(poReference);
+      orderSuccessRobot.verifyDeliveryInstruction(deliveryInstruction);
+      orderSuccessRobot.verifyMobileNumber('+63$contactNumber');
+    });
 
     testWidgets(
         'EZRX-T119 | Verify display material with/without counter offer applied in checkout',
