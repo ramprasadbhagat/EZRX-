@@ -90,7 +90,7 @@ class _OrderDetailHeader extends StatelessWidget {
               valueText: orderHeader.referenceNotes,
               valueTextStyle: textStyle,
             ),
-          if (eligibilityState.displayPaymentTerm)
+          if (!eligibilityState.salesOrgConfigs.disablePaymentTermsDisplay)
             BalanceTextRow(
               keyFlex: keyFlex,
               valueFlex: valueFlex,

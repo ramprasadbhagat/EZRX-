@@ -994,7 +994,7 @@ void main() {
         AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             paymentTerm:
-                PaymentTerm('fake_payment_term-fake_payment_term_description'),
+                PaymentTerm('fake_payment_term - fake_payment_term_description'),
           ),
         ),
       );
@@ -1027,7 +1027,7 @@ void main() {
       await tester.tap(paymentTermDropdownKeyFinder);
       await tester.pumpAndSettle();
       await tester
-          .tap(find.text('fake_payment_term-fake_payment_term_description'));
+          .tap(find.text('fake_payment_term - fake_payment_term_description'));
       await tester.pumpAndSettle();
     });
     testWidgets(

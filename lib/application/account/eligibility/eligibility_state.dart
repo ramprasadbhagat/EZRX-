@@ -125,11 +125,6 @@ class EligibilityState with _$EligibilityState {
         !salesOrgConfigs.disablePaymentTermsDisplay;
   }
 
-  bool get displayPaymentTerm {
-    return user.role.type.hasAdminAccess ||
-        !salesOrgConfigs.disablePaymentTermsDisplay;
-  }
-
   bool get validateOutOfStockValue => salesOrgConfigs.oosValue.isOosValueZero
       ? user.role.type.isSalesRepRole
       : true;

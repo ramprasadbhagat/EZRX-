@@ -22,8 +22,14 @@ class PaymentTerm with _$PaymentTerm {
         paymentTermDescription: '',
         paymentTermSubranking: 0,
       );
-
-  String get displayValue => '$paymentTermCode-$paymentTermDescription';
+  
+String get displayValue {
+    if (paymentTermCode.isEmpty && paymentTermDescription.isEmpty) {
+    return 'NA';
+    }
+    
+    return '${paymentTermCode.trim()}${paymentTermDescription.isNotEmpty ? ' - $paymentTermDescription' : ''}';
+}
 }
 
 extension PaymentTermListExtension on List<PaymentTerm> {

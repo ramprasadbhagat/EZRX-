@@ -168,13 +168,13 @@ void main() {
         expect(
           bloc.state.paymentTerms
               .displaySelected(value_object.PaymentTerm('0001')),
-          '0001-',
+          '0001',
         );
         expect(
           bloc.state.paymentTerms.displaySelected(
-            value_object.PaymentTerm('0001-Pay immediately (Standard SAP)'),
+            value_object.PaymentTerm('0001 - Pay immediately (Standard SAP)'),
           ),
-          '0001-Pay immediately (Standard SAP)',
+          '0001 - Pay immediately (Standard SAP)',
         );
         expect(
           bloc.state.paymentTerms

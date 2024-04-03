@@ -70,6 +70,7 @@ import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 void main() {
@@ -231,7 +232,7 @@ void main() {
   group('Test Order Success Page', () {
     group('Order header -', () {
       testWidgets(
-        'Payment Term',
+        'Show Payment Term when disablePaymentTermsDisplay is false',
         (tester) async {
           VisibilityDetectorController.instance.updateInterval = Duration.zero;
           when(() => eligibilityBlocMock.state).thenReturn(
@@ -256,6 +257,36 @@ void main() {
           final paymentTermWidget =
               find.byKey(WidgetKeys.balanceTextRow('Payment term', 'NA'));
           expect(paymentTermWidget, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Hide Payment Term when disablePaymentTermsDisplay is true',
+        (tester) async {
+          VisibilityDetectorController.instance.updateInterval = Duration.zero;
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeTWSalesOrgConfigs,
+              user: fakeZPAdminUser,
+            ),
+          );
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsPaymentTerm:
+                      OrderHistoryDetailsPaymentTerm.empty(),
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          final orderSuccessPage = find.byKey(WidgetKeys.orderSuccess);
+          expect(orderSuccessPage, findsOneWidget);
+          final paymentTermWidget =
+              find.byKey(WidgetKeys.balanceTextRow('Payment term', 'NA'));
+          expect(paymentTermWidget, findsNothing);
         },
       );
 

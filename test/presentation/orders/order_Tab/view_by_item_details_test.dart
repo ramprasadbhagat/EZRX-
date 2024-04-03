@@ -2077,7 +2077,7 @@ void main() {
       expect(requestedCounterOfferKey, findsOneWidget);
     });
 
-    testWidgets('Test Payment Term when disable payment term display is false',
+    testWidgets('Show Payment Term when disable payment term display is false',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenAnswer(
         (invocation) => EligibilityState.initial().copyWith(
@@ -2103,18 +2103,16 @@ void main() {
       await tester.pump();
       expect(find.byKey(WidgetKeys.paymentTerm), findsOneWidget);
 
-      expect(find.text('K001-30 Days from EOM, due EOM'), findsOneWidget);
+      expect(find.text('K001 - 30 Days from EOM, due EOM'), findsOneWidget);
     });
 
-    testWidgets('Test Payment Term when disable payment term display is enable',
+    testWidgets('Hide Payment Term when disable payment term display is enable',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenAnswer(
         (invocation) => EligibilityState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeMYSalesOrgConfigs.copyWith(
-            disablePaymentTermsDisplay:
-                true, //need this value to test this scenario
-          ),
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+          user: fakeZPAdminUser,
         ),
       );
 
@@ -2135,7 +2133,7 @@ void main() {
       await tester.pump();
       expect(find.byKey(WidgetKeys.paymentTerm), findsNothing);
 
-      expect(find.text('K001-30 Days from EOM, due EOM'), findsNothing);
+      expect(find.text('K001 - 30 Days from EOM, due EOM'), findsNothing);
     });
 
     testWidgets(

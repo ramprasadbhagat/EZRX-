@@ -387,6 +387,63 @@ void main() {
       expect(paymentTermWidget, findsOneWidget);
     });
 
+    testWidgets('Hide Payment Term when disablePaymentTermsDisplay is true',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+          user: fakeZPAdminUser,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsPaymentTerm:
+                OrderHistoryDetailsPaymentTerm.empty().copyWith(
+              paymentTermCode: PaymentTermCode(''),
+              paymentTermDescription: PaymentTermDescription(''),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final paymentTermWidget = find.byKey(WidgetKeys.paymentTermKey);
+      expect(paymentTermWidget, findsNothing);
+    });
+
+    testWidgets('Show Payment Term when disablePaymentTermsDisplay is false',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenAnswer(
+        (invocation) => EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsPaymentTerm:
+                OrderHistoryDetailsPaymentTerm.empty().copyWith(
+              paymentTermCode: PaymentTermCode(''),
+              paymentTermDescription: PaymentTermDescription(''),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final paymentTermWidget = find.byKey(WidgetKeys.paymentTermKey);
+      expect(paymentTermWidget, findsOneWidget);
+    });
+
     testWidgets('loaderImage  test ', (tester) async {
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
@@ -490,41 +547,6 @@ void main() {
         WidgetKeys.paymentTermKey,
       );
       expect(paymentTermsSection, findsNothing);
-    });
-
-    testWidgets('test PaymentTermsDisplay for rootadminUser', (tester) async {
-      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
-        ViewByOrderDetailsState.initial().copyWith(
-          isLoading: false,
-        ),
-      );
-
-      when(() => mockSalesOrgBloc.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          configs: fakeTWSalesOrgConfigs,
-        ),
-      );
-
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          user: fakeRootAdminUser,
-          salesOrgConfigs: fakeTWSalesOrgConfigs,
-        ),
-      );
-
-      await tester.pumpWidget(getScopedWidget());
-
-      await tester.pump();
-
-      final viewByOrderDetailsPageListView = find.byKey(WidgetKeys.scrollList);
-
-      expect(viewByOrderDetailsPageListView, findsOneWidget);
-
-      final paymentTermsSection = find.byKey(
-        WidgetKeys.paymentTermKey,
-      );
-
-      expect(paymentTermsSection, findsOneWidget);
     });
 
     testWidgets('test when disablePaymentTermsDisplay disabled',
