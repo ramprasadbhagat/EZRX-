@@ -4,8 +4,11 @@ class _SoaTile extends StatelessWidget {
   const _SoaTile({
     Key? key,
     required this.soa,
+    required this.isMarketPlace,
   }) : super(key: key);
   final Soa soa;
+  final bool isMarketPlace;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DownloadPaymentAttachmentsBloc,
@@ -13,65 +16,68 @@ class _SoaTile extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isDownloadInProgress != current.isDownloadInProgress,
       builder: (context, state) {
-        return Card(
+        return CustomCard(
           key: WidgetKeys.soaSearchResultsKey,
-          margin: const EdgeInsets.symmetric(
-            horizontal: 12.0,
-            vertical: 8.0,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
-              vertical: 5.0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
+          child: Row(
+            children: [
+              const SizedBox(width: 16),
+              if (isMarketPlace) ...[
+                MarketPlaceLogo.small(),
+                const SizedBox(width: 8),
+              ],
+              Expanded(
+                child: Text(
                   soa.soaData.simpleDateString,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelSmall!
+                      .copyWith(height: 1),
                   key: WidgetKeys.soaItemTextKey,
                 ),
-                TextButton.icon(
-                  key: WidgetKeys.genericKey(
-                    key: 'soaDownloadButton#${soa.soaData.simpleDateString}',
-                  ),
-                  onPressed: state.isDownloadInProgress
-                      ? null
-                      : () {
-                          trackMixpanelEvent(
-                            MixpanelEvents.paymentDocumentViewed,
-                          );
-                          context.read<DownloadPaymentAttachmentsBloc>().add(
-                                DownloadPaymentAttachmentEvent.downloadSOA(
-                                  soaData: soa.soaData,
-                                ),
-                              );
-                        },
-                  label: Text(
-                    context.tr('Download'),
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelSmall
-                        ?.copyWith(color: ZPColors.extraDarkGreen),
-                  ),
-                  icon: state.isDownloadInProgress &&
-                          SoaData(state.fileUrl.url) == soa.soaData
-                      ? LoadingAnimationWidget.discreteCircle(
-                          key: WidgetKeys.soaLoadingAnimationWidgetKey,
-                          color: ZPColors.primary,
-                          secondRingColor: ZPColors.secondary,
-                          thirdRingColor: ZPColors.orange,
-                          size: 18,
-                        )
-                      : const Icon(
-                          Icons.cloud_download_outlined,
-                          size: 20,
-                          color: ZPColors.extraDarkGreen,
-                        ),
+              ),
+              TextButton.icon(
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                 ),
-              ],
-            ),
+                key: WidgetKeys.genericKey(
+                  key: 'soaDownloadButton#${soa.soaData.simpleDateString}',
+                ),
+                onPressed: state.isDownloadInProgress
+                    ? null
+                    : () {
+                        trackMixpanelEvent(
+                          MixpanelEvents.paymentDocumentViewed,
+                        );
+                        context.read<DownloadPaymentAttachmentsBloc>().add(
+                              DownloadPaymentAttachmentEvent.downloadSOA(
+                                soaData: soa.soaData,
+                              ),
+                            );
+                      },
+                label: Text(
+                  context.tr('Download'),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelSmall
+                      ?.copyWith(color: ZPColors.extraDarkGreen),
+                ),
+                icon: state.isDownloadInProgress &&
+                        SoaData(state.fileUrl.url) == soa.soaData
+                    ? LoadingAnimationWidget.discreteCircle(
+                        key: WidgetKeys.soaLoadingAnimationWidgetKey,
+                        color: ZPColors.primary,
+                        secondRingColor: ZPColors.secondary,
+                        thirdRingColor: ZPColors.orange,
+                        size: 18,
+                      )
+                    : const Icon(
+                        Icons.cloud_download_outlined,
+                        size: 20,
+                        color: ZPColors.extraDarkGreen,
+                      ),
+              ),
+            ],
           ),
         );
       },

@@ -1372,7 +1372,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
 
-    if (state.user.acceptMPTC.isAccept) {
+    if (state.marketPlacePaymentEligible) {
       context.read<MPAccountSummaryBloc>().add(
             AccountSummaryEvent.fetchInvoiceSummary(
               custCode: state.customerCodeInfo.customerCodeSoldTo,

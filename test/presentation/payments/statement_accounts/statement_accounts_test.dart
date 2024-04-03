@@ -28,76 +28,27 @@ import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/soa_local.dart';
+import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class MockAnnouncementBloc
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class MockCustomerCodeBloc
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
-
-class MockSoaBloc extends MockBloc<SoaEvent, SoaState> implements SoaBloc {}
-
-class MockSoaFilterBloc extends MockBloc<SoaFilterEvent, SoaFilterState>
-    implements SoaFilterBloc {}
-
-class MockDownloadPaymentAttachmentsBloc extends MockBloc<
-        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
-    implements DownloadPaymentAttachmentsBloc {}
-
-class MockOutstandingInvoicesBloc
-    extends MockBloc<OutstandingInvoicesEvent, OutstandingInvoicesState>
-    implements OutstandingInvoicesBloc {}
-
-class MockAvailableCreditsBloc
-    extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
-    implements AvailableCreditsBloc {}
-
-class MockNewPaymentBloc extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class MockPaymentSummary
-    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
-    implements PaymentSummaryBloc {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
-
-final locator = GetIt.instance;
 
 void main() {
   late SalesOrgBloc mockSalesOrgBloc;
   late AppRouter autoRouterMock;
   late UserBloc mockUserBloc;
-  late EligibilityBloc eligibilityBlocMock;
   late PaymentSummaryBloc paymentSummaryBlocMock;
   late CustomerCodeBloc mockCustomerCodeBloc;
   late EligibilityBloc mockEligibilityBloc;
@@ -106,7 +57,8 @@ void main() {
   late OutstandingInvoicesBloc mockOutstandingInvoicesBloc;
   late AvailableCreditsBloc mockAvailableCreditsBloc;
   late NewPaymentBloc mockNewPaymentBloc;
-  late SoaBloc mockSoaBloc;
+  late ZPSoaBloc mockSoaBloc;
+  late MPSoaBloc mpMockSoaBloc;
   late SoaFilterBloc mockSoaFilterBloc;
   late AuthBloc mockAuthBloc;
   late List<Soa> fakeSoaList;
@@ -125,50 +77,47 @@ void main() {
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     fakeSoaList = await SoaLocalDataSource().getSoa();
   });
+
   setUp(() async {
-    mockSalesOrgBloc = MockSalesOrgBloc();
-    mockUserBloc = MockUserBloc();
-    eligibilityBlocMock = EligibilityBlockMock();
-    paymentSummaryBlocMock = MockPaymentSummary();
+    mockSalesOrgBloc = SalesOrgBlocMock();
+    mockUserBloc = UserBlocMock();
+    paymentSummaryBlocMock = PaymentSummaryBlocMock();
     autoRouterMock = locator<AppRouter>();
-    mockCustomerCodeBloc = MockCustomerCodeBloc();
-    mockEligibilityBloc = MockEligibilityBloc();
-    mockAuthBloc = MockAuthBloc();
-    mockAnnouncementBloc = MockAnnouncementBloc();
-    mockSoaBloc = MockSoaBloc();
-    mockSoaFilterBloc = MockSoaFilterBloc();
-    mockDownloadPaymentAttachmentsBloc = MockDownloadPaymentAttachmentsBloc();
-    mockAvailableCreditsBloc = MockAvailableCreditsBloc();
-    mockOutstandingInvoicesBloc = MockOutstandingInvoicesBloc();
-    mockNewPaymentBloc = MockNewPaymentBloc();
+    mockCustomerCodeBloc = CustomerCodeBlocMock();
+    mockEligibilityBloc = EligibilityBlocMock();
+    mockAuthBloc = AuthBlocMock();
+    mockAnnouncementBloc = AnnouncementBlocMock();
+    mockSoaBloc = ZPSoaBlocMock();
+    mockSoaFilterBloc = SoaFilterBlocMock();
+    mockDownloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
+    mockAvailableCreditsBloc = AvailableCreditsBlocMock();
+    mockOutstandingInvoicesBloc = OutstandingInvoicesBlocMock();
+    mockNewPaymentBloc = NewPaymentBlocMock();
+    mpMockSoaBloc = MPSoaBlocMock();
+
+    when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+    when(() => mockUserBloc.state).thenReturn(UserState.initial());
+    when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
+    when(() => mockCustomerCodeBloc.state)
+        .thenReturn(CustomerCodeState.initial());
+    when(() => mockEligibilityBloc.state)
+        .thenReturn(EligibilityState.initial());
+    when(() => mockAnnouncementBloc.state)
+        .thenReturn(AnnouncementState.initial());
+    when(() => mockSoaBloc.state).thenReturn(SoaState.initial());
+    when(() => mpMockSoaBloc.state).thenReturn(SoaState.initial());
+    when(() => mockSoaFilterBloc.state).thenReturn(SoaFilterState.initial());
+    when(() => mockDownloadPaymentAttachmentsBloc.state)
+        .thenReturn(DownloadPaymentAttachmentsState.initial());
+    when(() => mockAvailableCreditsBloc.state)
+        .thenReturn(AvailableCreditsState.initial());
+    when(() => mockOutstandingInvoicesBloc.state)
+        .thenReturn(OutstandingInvoicesState.initial());
+    when(() => mockNewPaymentBloc.state).thenReturn(NewPaymentState.initial());
   });
 
   group('Statement of accounts Page', () {
-    setUp(() {
-      when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
-      when(() => mockUserBloc.state).thenReturn(UserState.initial());
-      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
-      when(() => mockCustomerCodeBloc.state)
-          .thenReturn(CustomerCodeState.initial());
-      when(() => eligibilityBlocMock.state)
-          .thenReturn(EligibilityState.initial());
-      when(() => mockEligibilityBloc.state)
-          .thenReturn(EligibilityState.initial());
-      when(() => mockAnnouncementBloc.state)
-          .thenReturn(AnnouncementState.initial());
-      when(() => mockSoaBloc.state).thenReturn(SoaState.initial());
-      when(() => mockSoaFilterBloc.state).thenReturn(SoaFilterState.initial());
-      when(() => mockDownloadPaymentAttachmentsBloc.state)
-          .thenReturn(DownloadPaymentAttachmentsState.initial());
-      when(() => mockAvailableCreditsBloc.state)
-          .thenReturn(AvailableCreditsState.initial());
-      when(() => mockOutstandingInvoicesBloc.state)
-          .thenReturn(OutstandingInvoicesState.initial());
-      when(() => mockNewPaymentBloc.state)
-          .thenReturn(NewPaymentState.initial());
-    });
-
-    RouteDataScope getWUT() {
+    RouteDataScope getWUT({bool isMarketPlace = false}) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
@@ -185,14 +134,10 @@ void main() {
           BlocProvider<EligibilityBloc>(
             create: (context) => mockEligibilityBloc,
           ),
-          BlocProvider<EligibilityBloc>(
-            create: (context) => eligibilityBlocMock,
-          ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
-          BlocProvider<SoaBloc>(
-            create: (context) => mockSoaBloc,
-          ),
+          BlocProvider<ZPSoaBloc>(create: (context) => mockSoaBloc),
+          BlocProvider<MPSoaBloc>(create: (context) => mpMockSoaBloc),
           BlocProvider<SoaFilterBloc>(
             create: (context) => mockSoaFilterBloc,
           ),
@@ -212,9 +157,7 @@ void main() {
             create: (context) => paymentSummaryBlocMock,
           ),
         ],
-        child: const Scaffold(
-          body: StatementAccountsPage(),
-        ),
+        child: StatementAccountsPage(isMarketPlace: isMarketPlace),
       );
     }
 
@@ -277,8 +220,23 @@ void main() {
 
       await tester.pumpWidget(getWUT());
       await tester.pumpAndSettle();
+
+      expect(
+        find.descendant(
+          of: find.byType(AppBar),
+          matching: find.text('Statement of accounts'),
+        ),
+        findsOne,
+      );
       final findSoaItem = find.byKey(WidgetKeys.genericKey(key: 'SoaItem#0'));
       expect(findSoaItem, findsOneWidget);
+      expect(
+        find.descendant(
+          of: findSoaItem,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsNothing,
+      );
     });
 
     testWidgets('Body Test - Header Test', (tester) async {
@@ -297,7 +255,7 @@ void main() {
         ),
       ];
       whenListen(
-        eligibilityBlocMock,
+        mockEligibilityBloc,
         Stream.fromIterable(expectedStates),
       );
 
@@ -416,7 +374,7 @@ void main() {
         ),
       );
       when(
-        () => eligibilityBlocMock.state,
+        () => mockEligibilityBloc.state,
       ).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
@@ -497,7 +455,7 @@ void main() {
       );
 
       when(
-        () => eligibilityBlocMock.state,
+        () => mockEligibilityBloc.state,
       ).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty().copyWith(
@@ -539,7 +497,7 @@ void main() {
       );
 
       when(
-        () => eligibilityBlocMock.state,
+        () => mockEligibilityBloc.state,
       ).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty().copyWith(
@@ -606,6 +564,50 @@ void main() {
         expect(
           soaFilterbottomSheetFinder,
           findsNothing,
+        );
+        expect(find.byKey(WidgetKeys.soaFilterResultCount), findsNothing);
+      });
+
+      testWidgets('Filter result count not visible when none filter applied',
+          (tester) async {
+        when(() => mockSoaBloc.state).thenReturn(
+          SoaState.initial().copyWith(soaList: fakeSoaList),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.soaFilterButton),
+            matching: find.text('0'),
+          ),
+          findsOne,
+        );
+        expect(find.byKey(WidgetKeys.soaFilterResultCount), findsNothing);
+      });
+
+      testWidgets('Show Filter result count hide when filter is applied',
+          (tester) async {
+        when(() => mockSoaBloc.state).thenReturn(
+          SoaState.initial()
+              .copyWith(soaList: fakeSoaList, appliedFilter: applyFilter),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.soaFilterButton),
+            matching: find.text('1'),
+          ),
+          findsOne,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.soaFilterResultCount),
+            matching: find.text('4'),
+          ),
+          findsOne,
         );
       });
 
@@ -802,7 +804,7 @@ void main() {
           Stream.fromIterable(expectedStates),
         );
 
-         tester.view.physicalSize = const Size(480, 800);
+        tester.view.physicalSize = const Size(480, 800);
         tester.view.devicePixelRatio = 1;
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
@@ -850,7 +852,7 @@ void main() {
           Stream.fromIterable(expectedStates),
         );
 
-         tester.view.physicalSize = const Size(480, 800);
+        tester.view.physicalSize = const Size(480, 800);
         tester.view.devicePixelRatio = 1;
         await tester.pumpWidget(getWUT());
         await tester.pump();
@@ -900,8 +902,8 @@ void main() {
 
     testWidgets(
       ' -> Find Account Suspended Banner when Customer Code is blocked',
-      (WidgetTester tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
+      (tester) async {
+        when(() => mockEligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             customerCodeInfo: fakeBlockedCustomerCodeInfo,
           ),
@@ -918,8 +920,8 @@ void main() {
 
     testWidgets(
       ' -> Find Account Suspended Banner when ship to Code is blocked',
-      (WidgetTester tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
+      (tester) async {
+        when(() => mockEligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             shipToInfo: fakeBlockedShipToInfo,
           ),
@@ -933,5 +935,28 @@ void main() {
         expect(customerBlockedBanner, findsOneWidget);
       },
     );
+
+    testWidgets('-> Find marketplace logo && marketplace title in MP SOA',
+        (tester) async {
+      when(() => mpMockSoaBloc.state).thenReturn(
+        SoaState.initial().copyWith(soaList: fakeSoaList.take(1).toList()),
+      );
+
+      await tester.pumpWidget(getWUT(isMarketPlace: true));
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byType(AppBar),
+          matching: find.text('MP Statement of accounts'),
+        ),
+        findsOne,
+      );
+      final soaItem = find.byKey(WidgetKeys.soaSearchResultsKey);
+      expect(soaItem, findsOne);
+      expect(
+        find.descendant(of: soaItem, matching: find.byType(MarketPlaceLogo)),
+        findsOne,
+      );
+    });
   });
 }

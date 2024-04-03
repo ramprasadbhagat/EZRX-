@@ -671,7 +671,8 @@ class WidgetKeys {
   static const Key cartZPProductSection = Key('cartZPProductSection');
   static const Key cartMPProductSection = Key('cartMPProductSection');
   static const Key cartMPProductSectionLabel = Key('cartMPProductSectionLabel');
-  static Key cartPromotions(String materialNumber) => Key('cartPromotion$materialNumber');
+  static Key cartPromotions(String materialNumber) =>
+      Key('cartPromotion$materialNumber');
 
   //============================================================
   //  Checkout Page Keys
@@ -1465,6 +1466,7 @@ class WidgetKeys {
   static const Key soaItemTextKey = Key('soaItemText');
   static const Key soaPage = Key('soaPage');
   static const Key soaFilterButton = Key('soaFilterButton');
+  static const Key soaFilterResultCount = Key('soaFilterResultCount');
   static const Key soaSearchResultsKey = Key('soaSearchResults');
   //===========================================================
   //  Month Picker

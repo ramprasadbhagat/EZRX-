@@ -293,6 +293,9 @@ class EligibilityState with _$EligibilityState {
             : salesOrgConfigs.addOosMaterials.oosTag,
       );
 
+  bool get marketPlacePaymentEligible =>
+      user.acceptMPTC.isAccept && customerCodeInfo.isMarketPlace;
+
   bool get marketPlaceEligible {
     if (!isMarketPlaceEnabled) return false;
     if (!user.acceptMPTC.isAccept) return false;

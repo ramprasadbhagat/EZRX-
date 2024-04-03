@@ -181,7 +181,7 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     if (eligibilityState.isReturnsEnable) homeQuickAccessReturnsMenu,
     if (eligibilityState.isPaymentEnabled) ...[
       homeQuickAccessPaymentsMenu,
-      if (eligibilityState.user.acceptMPTC.isAccept)
+      if (eligibilityState.marketPlacePaymentEligible)
         homeQuickAccessMarketPlacePaymentMenu,
     ],
     if (eligibilityState.isIDMarket) homeQuickAccessEZPointMenu,

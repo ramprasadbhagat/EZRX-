@@ -1,55 +1,50 @@
 part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 
 class _Filter extends StatelessWidget {
-  const _Filter({Key? key}) : super(key: key);
+  final bool isMarketPlace;
+
+  const _Filter({Key? key, required this.isMarketPlace}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SoaBloc, SoaState>(
-      buildWhen: (previous, current) =>
-          previous.filterList != current.filterList,
-      builder: (context, state) {
-        return state.soaList.isNotEmpty
-            ? Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    BlocBuilder<SoaBloc, SoaState>(
-                      buildWhen: (previous, current) =>
-                          previous.isFetching != current.isFetching ||
-                          previous.appliedFilter != current.appliedFilter,
-                      builder: (context, state) {
-                        return CustomBadge(
-                          Icons.tune_outlined,
-                          key: WidgetKeys.soaFilterButton,
-                          badgeColor: ZPColors.orange,
-                          count: state.appliedFilter.appliedFilterCount,
-                          onPressed: () => state.isFetching
-                              ? null
-                              : _showFilterBottomSheet(context),
-                        );
-                      },
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      context.tr('Filter by month'),
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: ZPColors.neutralsBlack),
-                    ),
-                  ],
-                ),
-              )
-            : const SizedBox.shrink();
-      },
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        children: [
+          const SizedBox(width: 5),
+          BlocBuilder<SoaBloc, SoaState>(
+            bloc: context.soaBloc(isMarketPlace),
+            buildWhen: (previous, current) =>
+                previous.isFetching != current.isFetching ||
+                previous.appliedFilter != current.appliedFilter,
+            builder: (context, state) {
+              return CustomBadge(
+                Icons.tune_outlined,
+                key: WidgetKeys.soaFilterButton,
+                badgeColor: ZPColors.orange,
+                count: state.appliedFilter.appliedFilterCount,
+                onPressed: () =>
+                    state.isFetching ? null : _showFilterBottomSheet(context),
+              );
+            },
+          ),
+          const SizedBox(width: 5),
+          Text(
+            context.tr('Filter by month'),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(color: ZPColors.neutralsBlack),
+          ),
+        ],
+      ),
     );
   }
 
   void _showFilterBottomSheet(BuildContext context) {
     context.read<SoaFilterBloc>().add(
           SoaFilterEvent.setFilter(
-            context.read<SoaBloc>().state.appliedFilter,
+            context.soaBloc(isMarketPlace).state.appliedFilter,
           ),
         );
     showModalBottomSheet(
@@ -79,7 +74,7 @@ class _Filter extends StatelessWidget {
     required BuildContext context,
     required SoaFilter filter,
   }) {
-    final soaBloc = context.read<SoaBloc>();
+    final soaBloc = context.soaBloc(isMarketPlace);
     if (soaBloc.state.appliedFilter == filter) return;
     soaBloc.add(SoaEvent.updateFilter(soaFilter: filter));
   }

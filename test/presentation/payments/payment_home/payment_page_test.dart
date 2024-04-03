@@ -230,6 +230,7 @@ void main() {
   group('Payment Home Option menu check', () {
     testWidgets('Check payment option menu noClaim',
         (WidgetTester tester) async {
+      final soaRoute = StatementAccountsPageRoute(isMarketPlace: false);
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
@@ -240,8 +241,7 @@ void main() {
           .thenAnswer(
         (_) => Future.value(),
       );
-      when(() => autoRouterMock.pushNamed('payments/statement_accounts'))
-          .thenAnswer(
+      when(() => autoRouterMock.push(soaRoute)).thenAnswer(
         (_) => Future.value(),
       );
       when(() => autoRouterMock.pushNamed('payments/payment_summary'))
@@ -268,7 +268,7 @@ void main() {
         () => soaFilterBlocMock.add(const SoaFilterEvent.initialized()),
       ).called(1);
       verify(
-        () => autoRouterMock.pushNamed('payments/statement_accounts'),
+        () => autoRouterMock.push(soaRoute),
       ).called(1);
       await tester.tap(paymentSummaryMenu);
       verify(
@@ -738,6 +738,7 @@ void main() {
       expect(claimsMenu, findsNothing);
     });
     testWidgets('account summary navigation', (WidgetTester tester) async {
+      final soaRoute = StatementAccountsPageRoute(isMarketPlace: false);
       await tester.binding.setSurfaceSize(const Size(480, 900));
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -745,8 +746,7 @@ void main() {
           salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
-      when(() => autoRouterMock.pushNamed('payments/statement_accounts'))
-          .thenAnswer(
+      when(() => autoRouterMock.push(soaRoute)).thenAnswer(
         (_) => Future.value(),
       );
       await tester.pumpWidget(getWidget());
@@ -766,7 +766,7 @@ void main() {
       );
       await tester.pumpAndSettle();
       verify(
-        () => autoRouterMock.pushNamed('payments/statement_accounts'),
+        () => autoRouterMock.push(soaRoute),
       ).called(1);
     });
 
@@ -796,8 +796,10 @@ void main() {
       );
       await tester.binding.setSurfaceSize(const Size(480, 900));
       tester.view.devicePixelRatio = 1;
-      when(() => autoRouterMock.pushNamed('payments/statement_accounts'))
-          .thenAnswer(
+      when(
+        () => autoRouterMock
+            .push(StatementAccountsPageRoute(isMarketPlace: false)),
+      ).thenAnswer(
         (_) => Future.value(),
       );
       await tester.pumpWidget(getWidget());
@@ -842,8 +844,10 @@ void main() {
       );
 
       await tester.binding.setSurfaceSize(const Size(480, 900));
-      when(() => autoRouterMock.pushNamed('payments/statement_accounts'))
-          .thenAnswer(
+      when(
+        () => autoRouterMock
+            .push(StatementAccountsPageRoute(isMarketPlace: false)),
+      ).thenAnswer(
         (_) => Future.value(),
       );
       await tester.pumpWidget(getWidget());

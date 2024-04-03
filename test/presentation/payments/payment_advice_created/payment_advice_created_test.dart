@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/gestures.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -16,7 +15,6 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
@@ -40,73 +38,15 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AccountSummaryBlocMock
-    extends MockBloc<AccountSummaryEvent, AccountSummaryState>
-    implements AccountSummaryBloc {}
-
-class AvailableCreditsBlocMock
-    extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
-    implements AvailableCreditsBloc {}
-
-class PaymentInProgressBlocMock
-    extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
-    implements PaymentInProgressBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class DownloadPaymentAttachmentsBlocMock extends MockBloc<
-        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
-    implements DownloadPaymentAttachmentsBloc {}
-
-class OutstandingInvoicesBlocMock
-    extends MockBloc<OutstandingInvoicesEvent, OutstandingInvoicesState>
-    implements OutstandingInvoicesBloc {}
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class SoaBlocMock extends MockBloc<SoaEvent, SoaState> implements SoaBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class MaterialPageXMock extends Mock implements MaterialPageX {}
-
-class MockRouterDelegate extends Mock
-    implements RouterDelegate<RouteInformationParser> {}
-
-class MockPaymentSummaryDetailsBloc
-    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
-    implements PaymentSummaryDetailsBloc {}
-
-class PaymentSummaryBlocMock
-    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
-    implements PaymentSummaryBloc {}
-
 void main() {
-  late SoaBloc soaBloc;
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   late SalesOrgBloc salesOrgBlocMock;
   late NewPaymentBloc newPaymentBlocMock;
   late EligibilityBloc eligibilityBlocMock;
@@ -114,9 +54,9 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late NewPaymentMethod paymentMethodValueQr;
   late NewPaymentMethod paymentMethodValueBank;
-  late AccountSummaryBloc accountSummaryBlocMock;
+  late ZPAccountSummaryBloc accountSummaryBlocMock;
   late List<CustomerOpenItem> customerOpenItemList;
-  late PaymentInProgressBloc paymentInProgressBloc;
+  late ZPPaymentInProgressBloc paymentInProgressBloc;
   late AvailableCreditsBloc availableCreditsBlocMock;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
   late PaymentSummaryDetailsBloc mockPaymentSummaryDetailsBloc;
@@ -151,9 +91,9 @@ void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(() => AutoRouterMock());
-    autoRouterMock = locator<AutoRouterMock>();
-    locator.registerSingleton<MixpanelService>(MockMixpanelService());
+    locator.registerLazySingleton(() => AutoRouteMock());
+    autoRouterMock = locator<AutoRouteMock>();
+    locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
     customerOpenItemList =
         await NewPaymentLocalDataSource().getCustomerOpenItems();
     paymentMethodValueQr = NewPaymentMethod.empty()
@@ -161,18 +101,18 @@ void main() {
     paymentMethodValueBank = NewPaymentMethod.empty().copyWith(
       paymentMethod: PaymentMethodValue('Bank-In'),
     );
-    soaBloc = SoaBlocMock();
+
     authBlocMock = AuthBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
-    eligibilityBlocMock = EligibilityBlockMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
-    accountSummaryBlocMock = AccountSummaryBlocMock();
-    paymentInProgressBloc = PaymentInProgressBlocMock();
+    accountSummaryBlocMock = ZPAccountSummaryBlocMock();
+    paymentInProgressBloc = ZPPaymentInProgressBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
-    mockPaymentSummaryDetailsBloc = MockPaymentSummaryDetailsBloc();
+    mockPaymentSummaryDetailsBloc = PaymentSummaryDetailsBlocMock();
     downloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
     mockPaymentSummaryBloc = PaymentSummaryBlocMock();
 
@@ -198,7 +138,6 @@ void main() {
         .thenReturn(OutstandingInvoicesState.initial());
     when(() => downloadPaymentAttachmentsBloc.state)
         .thenReturn(DownloadPaymentAttachmentsState.initial());
-    when(() => soaBloc.state).thenReturn(SoaState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
@@ -213,9 +152,6 @@ void main() {
       usingLocalization: true,
       routeName: NewPaymentPageRoute.name,
       providers: [
-        BlocProvider<SoaBloc>(
-          create: (context) => soaBloc,
-        ),
         BlocProvider<SalesOrgBloc>(
           create: (context) => salesOrgBlocMock,
         ),
@@ -228,13 +164,13 @@ void main() {
         BlocProvider<CustomerCodeBloc>(
           create: (context) => customerCodeBlocMock,
         ),
-        BlocProvider<PaymentInProgressBloc>(
+        BlocProvider<ZPPaymentInProgressBloc>(
           create: (context) => paymentInProgressBloc,
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
         ),
-        BlocProvider<AccountSummaryBloc>(
+        BlocProvider<ZPAccountSummaryBloc>(
           create: (context) => accountSummaryBlocMock,
         ),
         BlocProvider<AvailableCreditsBloc>(

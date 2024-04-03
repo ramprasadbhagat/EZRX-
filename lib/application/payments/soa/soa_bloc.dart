@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa_filter.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_soa_repository.dart';

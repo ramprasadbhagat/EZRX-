@@ -71,7 +71,7 @@ class ServiceTile extends StatelessWidget {
       if (state.isReturnsEnable) MoreDetailsTile.returnsTab(context),
       if (state.isPaymentEnabled) ...[
         MoreDetailsTile.paymentsTab(context),
-        if (state.user.acceptMPTC.isAccept)
+        if (state.marketPlaceEligible)
           MoreDetailsTile.marketplacePaymentsTab(context),
       ],
       if (state.isIDMarket) MoreDetailsTile.eZPointTab(context),

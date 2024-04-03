@@ -400,9 +400,13 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     StatementAccountsPageRoute.name: (routeData) {
+      final args = routeData.argsAs<StatementAccountsPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i38.StatementAccountsPage(),
+        child: _i38.StatementAccountsPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     PaymentAdviceCreatedPageRoute.name: (routeData) {
@@ -1686,14 +1690,37 @@ class NewPaymentPageRoute extends _i77.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i38.StatementAccountsPage]
-class StatementAccountsPageRoute extends _i77.PageRouteInfo<void> {
-  const StatementAccountsPageRoute()
-      : super(
+class StatementAccountsPageRoute
+    extends _i77.PageRouteInfo<StatementAccountsPageRouteArgs> {
+  StatementAccountsPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           StatementAccountsPageRoute.name,
           path: 'payments/statement_accounts',
+          args: StatementAccountsPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'StatementAccountsPageRoute';
+}
+
+class StatementAccountsPageRouteArgs {
+  const StatementAccountsPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'StatementAccountsPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for

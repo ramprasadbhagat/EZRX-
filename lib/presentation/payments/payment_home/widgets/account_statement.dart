@@ -45,7 +45,9 @@ class _AccountStatement extends StatelessWidget {
                   context
                       .read<SoaFilterBloc>()
                       .add(const SoaFilterEvent.initialized());
-                  context.router.pushNamed('payments/statement_accounts');
+                  context.router.push(
+                    StatementAccountsPageRoute(isMarketPlace: isMarketPlace),
+                  );
                 },
               ),
               state.soaList.isNotEmpty

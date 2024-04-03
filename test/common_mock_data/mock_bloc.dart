@@ -285,6 +285,8 @@ class PaymentSummaryFilterBlocMock
 
 class ZPSoaBlocMock extends MockBloc<SoaEvent, SoaState> implements ZPSoaBloc {}
 
+class MPSoaBlocMock extends MockBloc<SoaEvent, SoaState> implements MPSoaBloc {}
+
 class SoaFilterBlocMock extends MockBloc<SoaFilterEvent, SoaFilterState>
     implements SoaFilterBloc {}
 

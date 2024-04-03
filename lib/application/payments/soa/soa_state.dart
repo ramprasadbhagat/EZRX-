@@ -36,11 +36,4 @@ class SoaState with _$SoaState {
           .toList()
       : soaList.getSoaListRespectMonth;
 
-  DateTimeStringValue get initialFilterFormDate => soaList.isNotEmpty
-      ? soaList.last.soaData.simpleDateStringValue
-      : SoaFilter.empty().fromDate;
-
-  DateTimeStringValue get initialFilterToDate => soaList.isNotEmpty
-      ? soaList.first.soaData.simpleDateStringValue
-      : SoaFilter.empty().toDate;
 }
