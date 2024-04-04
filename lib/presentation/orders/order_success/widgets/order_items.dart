@@ -112,7 +112,8 @@ class _MaterialItem extends StatelessWidget {
                           fontStyle: FontStyle.italic,
                         ),
                     key: WidgetKeys.promotionLabel(
-                        orderItem.priceAggregate.getMaterialNumber.getValue(),),
+                      orderItem.priceAggregate.getMaterialNumber.getValue(),
+                    ),
                   ),
               ],
             )

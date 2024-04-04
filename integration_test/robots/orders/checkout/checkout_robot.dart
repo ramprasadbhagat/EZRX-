@@ -713,4 +713,24 @@ class CheckoutRobot {
     await tester.tap(materialExpiryDateIcon);
     await tester.pumpAndSettle();
   }
+  //============================================================
+  //  Promotion For ID
+  //============================================================
+  void verifyAplPromotionLabelForItem({
+    required String materialNumber,
+  }) {
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key ==
+                WidgetKeys.promotionLabel(
+                  materialNumber,
+                ) &&
+            widget is Text &&
+            widget.data!.contains('offer applied'.tr()),
+      ),
+      findsOneWidget,
+    );
+  }
+  
 }

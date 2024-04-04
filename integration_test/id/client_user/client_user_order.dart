@@ -99,6 +99,7 @@ void main() {
   const orderNumber = 'e6dc4fe4-b9cb-11ee-9744-aebcc4cb434b';
   const orderMaterialNumber = 'AIABG3';
   const orderMaterialName = 'ABBOTIC GRANULES 30 ML';
+  const offerMaterialNumber = 'TM1537';
 
   var loginRequired = true;
   final materialStockInfo = StockInfo.empty();
@@ -904,6 +905,52 @@ void main() {
       orderPriceSummaryRobot.verifySheet(isVisible: false);
       checkoutRobot.verifyPlaceOrderButton();
     });
+    testWidgets(
+        'EZRX-T1356 | [ID] - Verify Apl promotion label with default component',
+        (tester) async {
+      const offerQty = 1;
+      const offerUnitPrice = 30600;
+      const totalPrice = 46465;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await checkoutWithMaterial(
+        offerMaterialNumber,
+        offerQty,
+        isPreOrder: true,
+      );
+
+      //verify
+      checkoutRobot.verifyPage();
+      checkoutRobot.verifyAddressSection();
+      checkoutRobot.verifyCustomerCode(customerCode);
+      checkoutRobot.verifyDeliveryTo(shipToCode);
+      await checkoutRobot.verifyYoursItemLabel(1);
+      await checkoutRobot.verifyMaterial(offerMaterialNumber);
+      checkoutRobot.verifyAplPromotionLabelForItem(
+        materialNumber: offerMaterialNumber,
+      );
+      await checkoutRobot
+          .verifySubTotalLabel(offerUnitPrice.priceDisplayForID(currency));
+      await checkoutRobot.verifyGrandTotalLabel(
+        totalPrice.priceDisplayForID(currency),
+      );
+      checkoutRobot.verifyStickyTotalQty(1);
+      checkoutRobot.verifyStickyGrandTotal(
+        totalPrice.priceDisplayForID(currency),
+      );
+      await checkoutRobot.tapStickyGrandTotal();
+      orderPriceSummaryRobot.verifySheet(isVisible: true);
+      orderPriceSummaryRobot.verifySubTotalLabel(
+        offerUnitPrice.priceDisplayForID(currency),
+      );
+      orderPriceSummaryRobot.verifyGrandTotalLabel(
+        totalPrice.priceDisplayForID(currency),
+      );
+      await orderPriceSummaryRobot.tapCloseButton();
+      orderPriceSummaryRobot.verifySheet(isVisible: false);
+      checkoutRobot.verifyPlaceOrderButton();
+    });
   });
 
   group('Order success -', () {
@@ -1003,6 +1050,75 @@ void main() {
     //     isFree: true,
     //   );
     // });
+
+    testWidgets(
+        'EZRX-T1357 | [ID] - Verify Apl promotion label with default component in order success',
+        (tester) async {
+      const offerQty = 1;
+      const offerUnitPrice = 30600;
+      const smallOrderFee = 12499;
+      const manualFee = 0;
+      const grandTotalPrice = 46465;
+      const totalSaving = 6766;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await checkoutWithMaterial(
+        offerMaterialNumber,
+        offerQty,
+        isPreOrder: true,
+      );
+
+      //verify
+      checkoutRobot.verifyPage();
+      checkoutRobot.verifyAddressSection();
+      checkoutRobot.verifyCustomerCode(customerCode);
+      checkoutRobot.verifyDeliveryTo(shipToCode);
+      await checkoutRobot.verifyYoursItemLabel(1);
+      await checkoutRobot.verifyMaterial(offerMaterialNumber);
+      checkoutRobot.verifyAplPromotionLabelForItem(
+        materialNumber: offerMaterialNumber,
+      );
+      await checkoutRobot
+          .verifySubTotalLabel(offerUnitPrice.priceDisplayForID(currency));
+      await checkoutRobot.verifyGrandTotalLabel(
+        grandTotalPrice.priceDisplayForID(currency),
+      );
+      checkoutRobot.verifyStickyTotalQty(1);
+      checkoutRobot.verifyStickyGrandTotal(
+        grandTotalPrice.priceDisplayForID(currency),
+      );
+      await checkoutRobot.tapStickyGrandTotal();
+      orderPriceSummaryRobot.verifySheet(isVisible: true);
+      orderPriceSummaryRobot.verifySubTotalLabel(
+        offerUnitPrice.priceDisplayForID(currency),
+      );
+      orderPriceSummaryRobot.verifyGrandTotalLabel(
+        grandTotalPrice.priceDisplayForID(currency),
+      );
+      await orderPriceSummaryRobot.tapCloseButton();
+      orderPriceSummaryRobot.verifySheet(isVisible: false);
+      checkoutRobot.verifyPlaceOrderButton();
+      await checkoutRobot.tapPlaceOrderButton();
+      await orderSuccessRobot.dismissSnackbar();
+
+      //verify
+      await orderSuccessRobot.verifyOrderSummarySection();
+      await orderSuccessRobot
+          .verifySubTotal(offerUnitPrice.priceDisplayForID(currency));
+      await orderSuccessRobot
+          .verifySmallOrderFee(smallOrderFee.priceDisplayForID(currency));
+      await orderSuccessRobot
+          .verifyManualFee(manualFee.priceDisplayForID(currency));
+      await orderSuccessRobot
+          .verifyGrandTotal(grandTotalPrice.priceDisplayForID(currency));
+      await orderSuccessRobot
+          .verifyTotalSaving(totalSaving.priceDisplayForID(currency));
+      await orderSuccessRobot.verifyOrderItemTotalQty(1);
+      orderSuccessRobot.verifyAplPromotionLabelForItem(
+        materialNumber: offerMaterialNumber,
+      );
+    });
   });
 
   group('Order Tab -', () {

@@ -331,4 +331,21 @@ class OrderSuccessRobot extends CommonRobot {
     await tester.tap(find.byKey(WidgetKeys.closeButton));
     await tester.pumpAndSettle();
   }
+
+  //============================================================
+  //  Promotion For ID
+  //============================================================
+  void verifyAplPromotionLabelForItem({
+    required String materialNumber,
+  }) {
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.promotionLabel(materialNumber) &&
+            widget is Text &&
+            widget.data!.contains('offer applied'.tr()),
+      ),
+      findsOneWidget,
+    );
+  }
 }

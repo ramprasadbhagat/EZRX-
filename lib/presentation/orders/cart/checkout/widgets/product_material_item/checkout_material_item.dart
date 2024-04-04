@@ -194,7 +194,7 @@ class _ProductDetails extends StatelessWidget {
                   ),
               key: WidgetKeys.promotionLabel(
                 cartItem.getMaterialNumber.getValue(),
-              ),
+              ),    
             ),
           if (cartItem.price.isCounterOfferRequested)
             Text(
