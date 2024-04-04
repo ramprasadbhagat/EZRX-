@@ -31,7 +31,7 @@ class BuyAgainButton extends StatelessWidget {
             () {},
             (either) => either.fold(
               (failure) {
-                ErrorUtils.handleReorderFailure(context, failure);
+                ErrorUtils.handleApiFailure(context, failure);
               },
               (_) {},
             ),
@@ -69,7 +69,7 @@ class BuyAgainButton extends StatelessWidget {
                           orderNumberWillUpsert: OrderNumber(''),
                         ),
                       );
-                  ErrorUtils.handleReorderFailure(context, failure);
+                  ErrorUtils.handleApiFailure(context, failure);
                 },
                 (_) {},
               ),
