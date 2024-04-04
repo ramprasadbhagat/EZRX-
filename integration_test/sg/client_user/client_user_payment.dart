@@ -96,6 +96,9 @@ void main() {
   // Current test data doesn't contain SOA and new payment test data so need to use different shipToCode
   const otherCustomerCode = '0030032073';
   const otherShipToCode = '0070042483';
+  const eCreditDownloadCustomerCode = '0030032073';
+  const eCreditDownloadShipToCode = '0070042482';
+
   const otherShipToAddress = 'Alexandra Hospital';
   const currency = 'SGD';
   const tax = 9;
@@ -647,10 +650,19 @@ void main() {
     final amountFrom = (creditPrice - 10.5).toStringAsFixed(2);
     final amountTo = (creditPrice + 10.5).toStringAsFixed(2);
     const openStatus = 'Open';
+    const creditIdWithDownloadUrl = '4080002024';
+    const creditIdWithoutDownloadUrl = '4080002078';
+    const creditPriceExcludeTaxWithDownloadUrl = 740.64;
+    const creditPriceExcludeTaxWithoutDownloadUrl = 1.00;
+    const creditPriceWithDownloadUrl = 799.89;
+    const creditPriceWithoutDownloadUrl = 1.09;
 
-    Future<void> goToAccountSummaryCreditPage(WidgetTester tester) async {
+    Future<void> goToAccountSummaryCreditPage(
+      WidgetTester tester, {
+      String userSelectedShipTo = shipToCode,
+    }) async {
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: userSelectedShipTo);
 
       await homeRobot.tapPaymentQuickAccess();
       await paymentHomeRobot.tapAccountSummaryMenu();
@@ -1091,6 +1103,93 @@ void main() {
         message: successSnackbarMessage,
       );
       await commonRobot.dismissSnackbar();
+    });
+    testWidgets('EZRX-19376 | Verify e-credit download in credit details page',
+        (tester) async {
+      //Redirect to account summary credit page
+      await goToAccountSummaryCreditPage(
+        tester,
+        userSelectedShipTo: eCreditDownloadShipToCode,
+      );
+
+      //search bar - valid input with on done keyboard button
+      await commonRobot.searchWithKeyboardAction(creditIdWithDownloadUrl);
+
+      //verify item
+      accountCreditsRobot.verifyCreditItem(
+        creditIdWithDownloadUrl,
+        openStatus,
+        creditPriceWithDownloadUrl.priceDisplay(currency),
+      );
+
+      //Tap on first item after search
+      await accountCreditsRobot.tapFirstCreditItem();
+
+      //verify Details page
+      accountCreditDetailsRobot.verify();
+      accountCreditDetailsRobot.verifyCreditDetailId(creditIdWithDownloadUrl);
+
+      //verify address
+      accountCreditDetailsRobot.verifyCustomerCode(eCreditDownloadCustomerCode);
+      accountCreditDetailsRobot.verifyDeliveryTo(eCreditDownloadShipToCode);
+      //credit summary
+      accountCreditDetailsRobot.verifyCreditItemSubtotalTotalPrice(
+        creditPriceExcludeTaxWithDownloadUrl.priceDisplay(currency),
+      );
+
+      accountCreditDetailsRobot.verifyCreditItemTotalPrice(
+        creditPriceWithDownloadUrl.priceDisplay(currency),
+      );
+      //find download e-credit button
+      accountCreditDetailsRobot.findDownLoadECreditButton();
+      await accountCreditDetailsRobot.tapDownLoadECreditButton();
+      //verify download success
+      await commonRobot.verifyCustomSnackBar(
+        message: successSnackbarMessage,
+      );
+      await commonRobot.dismissSnackbar();
+    });
+
+    testWidgets(
+        'EZRX-19376 | Verify e-credit download in credit details page when e-credit url is empty',
+        (tester) async {
+      //Redirect to account summary credit page
+      await goToAccountSummaryCreditPage(
+        tester,
+        userSelectedShipTo: eCreditDownloadShipToCode,
+      );
+
+      //search bar - valid input with on done keyboard button
+      await commonRobot.searchWithKeyboardAction(creditIdWithoutDownloadUrl);
+
+      //verify item
+      accountCreditsRobot.verifyCreditItem(
+        creditIdWithoutDownloadUrl,
+        openStatus,
+        creditPriceWithoutDownloadUrl.priceDisplay(currency),
+      );
+
+      //Tap on first item after search
+      await accountCreditsRobot.tapFirstCreditItem();
+
+      //verify Details page
+      accountCreditDetailsRobot.verify();
+      accountCreditDetailsRobot
+          .verifyCreditDetailId(creditIdWithoutDownloadUrl);
+
+      //verify address
+      accountCreditDetailsRobot.verifyCustomerCode(eCreditDownloadCustomerCode);
+      accountCreditDetailsRobot.verifyDeliveryTo(eCreditDownloadShipToCode);
+      //credit summary
+      accountCreditDetailsRobot.verifyCreditItemSubtotalTotalPrice(
+        creditPriceExcludeTaxWithoutDownloadUrl.priceDisplay(currency),
+      );
+
+      accountCreditDetailsRobot.verifyCreditItemTotalPrice(
+        creditPriceWithoutDownloadUrl.priceDisplay(currency),
+      );
+      //download e-credit button not visible
+      accountCreditDetailsRobot.verifyDownLoadECreditButtonNotVisible();
     });
   });
 

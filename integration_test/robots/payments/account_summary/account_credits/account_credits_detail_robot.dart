@@ -11,6 +11,7 @@ class AccountCreditDetailsRobot {
 
   //Finder
   final Finder _itemDetailsTile = find.byKey(WidgetKeys.creditDetailsTile);
+  final _downloadECreditButton = find.byKey(WidgetKeys.downloadECreditButton);
 
   //Robot Functions
   void verify() {
@@ -143,6 +144,19 @@ class AccountCreditDetailsRobot {
 
   void verifyReturnItems(int quantity) {
     expect(find.text('Return items ($quantity)'), findsOneWidget);
+  }
+
+  void findDownLoadECreditButton() {
+    expect(_downloadECreditButton, findsOneWidget);
+  }
+
+  void verifyDownLoadECreditButtonNotVisible() {
+    expect(_downloadECreditButton, findsNothing);
+  }
+
+  Future<void> tapDownLoadECreditButton() async {
+    await _tester.tap(_downloadECreditButton);
+    await _tester.pumpAndSettle();
   }
 
   Future<void> verifyReturnMaterial(
