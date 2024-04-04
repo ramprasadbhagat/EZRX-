@@ -4,7 +4,6 @@ import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/cred.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
@@ -122,7 +121,6 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<Either<ApiFailure, Login>> proxyLogin({
     required Username username,
-    required SalesOrg salesOrg,
   }) async {
     final usernameStr = username.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
@@ -137,7 +135,6 @@ class AuthRepository implements IAuthRepository {
     try {
       final login = await remoteDataSource.proxyLoginWithUsername(
         username: usernameStr,
-        salesOrg: salesOrg.getOrCrash(),
       );
 
       return Right(login);

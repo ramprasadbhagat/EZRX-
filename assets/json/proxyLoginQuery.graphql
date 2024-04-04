@@ -24,9 +24,6 @@
    "variables": {
     "request": {
       "username": "testclientadmin",
-      "salesOrg": [
-        "2001"
-      ]
     }
   }
 }

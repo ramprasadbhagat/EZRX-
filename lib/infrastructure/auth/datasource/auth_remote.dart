@@ -88,10 +88,7 @@ class AuthRemoteDataSource {
     });
   }
 
-  Future<Login> proxyLoginWithUsername({
-    required String username,
-    required String salesOrg,
-  }) async {
+  Future<Login> proxyLoginWithUsername({required String username}) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
@@ -102,7 +99,6 @@ class AuthRemoteDataSource {
             'variables': {
               'request': {
                 'username': username,
-                'salesOrg': [salesOrg],
               },
             },
           },

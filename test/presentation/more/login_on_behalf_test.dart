@@ -231,7 +231,6 @@ void main() {
               user: User.empty().copyWith(
                 role: Role.empty().copyWith(type: RoleType('zp_admin')),
               ),
-              salesOrg: SalesOrg(''),
             ),
           ),
         ).called(1);

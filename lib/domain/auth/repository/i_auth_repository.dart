@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/cred.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -34,7 +33,6 @@ abstract class IAuthRepository {
   Future<Either<ApiFailure, Cred>> loadCredential();
   Future<Either<ApiFailure, Login>> proxyLogin({
     required Username username,
-    required SalesOrg salesOrg,
   });
   Future<Either<ApiFailure, Unit>> isEligibleProxyLogin({
     required User user,

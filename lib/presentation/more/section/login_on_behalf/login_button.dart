@@ -18,11 +18,6 @@ class _LoginButton extends StatelessWidget {
               context.read<ProxyLoginFormBloc>().add(
                     ProxyLoginFormEvent.loginWithADButtonPressed(
                       user: context.read<EligibilityBloc>().state.user,
-                      salesOrg: context
-                          .read<SalesOrgBloc>()
-                          .state
-                          .salesOrganisation
-                          .salesOrg,
                     ),
                   );
             },

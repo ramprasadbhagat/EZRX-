@@ -266,7 +266,6 @@ void main() {
           );
 
           final result = await remoteDataSource.proxyLoginWithUsername(
-            salesOrg: '2001',
             username: 'username',
           );
 
@@ -301,7 +300,6 @@ void main() {
           await remoteDataSource
               .proxyLoginWithUsername(
             username: 'username',
-            salesOrg: '2001',
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());

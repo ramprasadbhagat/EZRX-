@@ -66,7 +66,6 @@ void main() {
         when(
           () => authRepoMock.proxyLogin(
             username: fakeUserName,
-            salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -78,7 +77,6 @@ void main() {
         ..add(const ProxyLoginFormEvent.usernameChanged('fake-proxy_user'))
         ..add(
           ProxyLoginFormEvent.loginWithADButtonPressed(
-            salesOrg: SalesOrg('2001'),
             user: fakeUser,
           ),
         ),
@@ -114,7 +112,6 @@ void main() {
         when(
           () => authRepoMock.proxyLogin(
             username: Username(''),
-            salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -125,7 +122,6 @@ void main() {
       act: (ProxyLoginFormBloc bloc) => bloc
         ..add(
           ProxyLoginFormEvent.loginWithADButtonPressed(
-            salesOrg: SalesOrg(''),
             user: fakeUser,
           ),
         ),
@@ -152,7 +148,6 @@ void main() {
         when(
           () => authRepoMock.proxyLogin(
             username: fakeUserName,
-            salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -186,7 +181,6 @@ void main() {
         ..add(const ProxyLoginFormEvent.usernameChanged('fake-proxy_user'))
         ..add(
           ProxyLoginFormEvent.loginWithADButtonPressed(
-            salesOrg: SalesOrg('2001'),
             user: fakeUser,
           ),
         ),
@@ -219,7 +213,6 @@ void main() {
         when(
           () => authRepoMock.proxyLogin(
             username: fakeUserName,
-            salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -252,7 +245,6 @@ void main() {
               username: Username('fake-user'),
               role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
             ),
-            salesOrg: SalesOrg('2001'),
           ),
         ),
       expect: () => [
@@ -285,7 +277,6 @@ void main() {
         when(
           () => authRepoMock.proxyLogin(
             username: fakeUserName,
-            salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -317,7 +308,6 @@ void main() {
             user: fakeUser.copyWith(
               role: Role.empty().copyWith(type: RoleType('zp_admin')),
             ),
-            salesOrg: SalesOrg('2001'),
           ),
         ),
       expect: () => [
@@ -352,7 +342,6 @@ void main() {
         when(
           () => authRepoMock.proxyLogin(
             username: fakeUserName,
-            salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -393,7 +382,6 @@ void main() {
             user: fakeUser.copyWith(
               role: Role.empty().copyWith(type: RoleType('zp_admin')),
             ),
-            salesOrg: SalesOrg('2001'),
           ),
         ),
       expect: () => [
@@ -429,7 +417,6 @@ void main() {
         when(
           () => authRepoMock.proxyLogin(
             username: fakeUserName,
-            salesOrg: SalesOrg('2001'),
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -461,7 +448,6 @@ void main() {
             user: fakeUser.copyWith(
               role: Role.empty().copyWith(type: RoleType('zp_admin')),
             ),
-            salesOrg: SalesOrg('2001'),
           ),
         ),
       expect: () => [

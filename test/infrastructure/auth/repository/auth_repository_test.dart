@@ -282,7 +282,6 @@ void main() {
           );
           final result = await repository.proxyLogin(
             username: fakeUserName,
-            salesOrg: fakeSalesOrg,
           );
           expect(result.isRight(), true);
         },
@@ -297,7 +296,6 @@ void main() {
           );
           final result = await repository.proxyLogin(
             username: fakeUserName,
-            salesOrg: fakeSalesOrg,
           );
           expect(result.isLeft(), true);
         },
@@ -310,7 +308,6 @@ void main() {
           when(
             () => remoteDataSourceMock.proxyLoginWithUsername(
               username: fakeUserName.getValue(),
-              salesOrg: fakeSalesOrg.getOrCrash(),
             ),
           ).thenAnswer(
             (_) async => Login.empty().copyWith(
@@ -320,7 +317,6 @@ void main() {
           );
           final result = await repository.proxyLogin(
             username: fakeUserName,
-            salesOrg: fakeSalesOrg,
           );
           expect(result.isRight(), true);
         },
@@ -333,12 +329,10 @@ void main() {
           when(
             () => remoteDataSourceMock.proxyLoginWithUsername(
               username: fakeUserName.getValue(),
-              salesOrg: fakeSalesOrg.getOrCrash(),
             ),
           ).thenThrow((_) => fakeError);
           final result = await repository.proxyLogin(
             username: fakeUserName,
-            salesOrg: fakeSalesOrg,
           );
           expect(result.isLeft(), true);
         },
