@@ -48,6 +48,20 @@ class CreditDetailsPage extends StatelessWidget {
                 creditItem: state.basicInfo,
                 creditItems: state.itemsInfo,
               ),
+              if (state.itemsInfo.groupList.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 12,
+                  ),
+                  child: Text(
+                    '${context.tr('Return items')} (${state.itemsInfo.length})',
+                    key: WidgetKeys.creditDetailsReturnItemCount,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: ZPColors.black,
+                        ),
+                  ),
+                ),
               CreditItemsSection(creditItems: state.itemsInfo.groupList),
             ],
           );

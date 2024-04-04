@@ -1185,6 +1185,8 @@ class WidgetKeys {
   static const Key newPaymentButton = Key('newPaymentButton');
   static const Key paymentSummaryRouteButton = Key('paymentSummaryRouteButton');
   static const Key accountSummaryButton = Key('accountSummaryButton');
+  static const Key creditDetailsReturnItemCount =
+      Key('creditDetailsReturnItemCount');
 
   //===========================================================
   //  New Payment

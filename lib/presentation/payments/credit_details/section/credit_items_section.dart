@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_details_group.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
@@ -33,17 +32,6 @@ class CreditItemsSection extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 10.0,
-              ),
-              child: Text(
-                '${context.tr('Return items')} (${context.read<CreditAndInvoiceDetailsBloc>().state.itemsInfo.length})',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.black,
-                    ),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Text(

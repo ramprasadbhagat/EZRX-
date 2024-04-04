@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -14,6 +15,7 @@ import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dar
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -58,6 +60,7 @@ void main() {
   late ProductImageBloc productImageBlocMock;
   late List<CreditAndInvoiceItem> customerDocumentDetails;
   late DownloadECreditBloc downloadECreditBlocMock;
+  late List<CustomerDocumentDetail> fakeDetails;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -66,6 +69,9 @@ void main() {
       () => MixpanelService(config: locator<Config>()),
     );
     autoRouterMock = locator<AppRouter>();
+    fakeDetails = (await CreditAndInvoiceDetailsLocalDataSource()
+            .getCreditAndInvoiceDetails())
+        .toList();
   });
 
   setUp(() async {
@@ -312,6 +318,30 @@ void main() {
             find.byKey(WidgetKeys.customerBlockedBanner);
 
         expect(customerBlockedBanner, findsOneWidget);
+      },
+    );
+    testWidgets(
+      ' -> Verify Return Item Section in credit details screen',
+      (WidgetTester tester) async {
+        when(() => productImageBlocMock.state).thenReturn(
+          ProductImageState.initial(),
+        );
+        when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+          CreditAndInvoiceDetailsState.initial().copyWith(
+            itemsInfo: fakeDetails,
+            // isLoading: false,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+
+        final textReturnItemCount =
+            find.byKey(WidgetKeys.creditDetailsReturnItemCount);
+        expect(textReturnItemCount, findsOneWidget);
+        expect(
+          (tester.widget(textReturnItemCount) as Text).data,
+          '${'Return items'.tr()} (${fakeDetails.length})',
+        );
       },
     );
   });

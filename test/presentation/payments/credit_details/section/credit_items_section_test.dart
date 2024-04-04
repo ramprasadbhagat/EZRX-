@@ -218,10 +218,6 @@ void main() {
       await getWidget(tester);
       await tester.pump();
 
-      final textReturnItemCount =
-          find.text('Return items (${fakeDetails.length})');
-      expect(textReturnItemCount, findsOneWidget);
-
       final principalName = find.text('fake-PN');
       expect(principalName, findsOneWidget);
 
