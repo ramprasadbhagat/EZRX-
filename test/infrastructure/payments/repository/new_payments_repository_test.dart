@@ -73,7 +73,6 @@ void main() {
     ),
   ];
   const fakeUserName = 'fakeUser';
-  const fakeDebitCreditCode = 'S';
   const fakeDebitCreditType = 'debit';
   const fakeOrderBy = 'netDueDate';
   const offset = 0;
@@ -194,7 +193,6 @@ void main() {
             pageSize: pageSize,
             salesOrg: fakeSalesOrg.getOrCrash(),
             debitCreditType: fakeDebitCreditType,
-            debitCreditCode: fakeDebitCreditCode,
             orderBy: fakeOrderBy,
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
@@ -257,7 +255,6 @@ void main() {
             pageSize: pageSize,
             salesOrg: fakeSalesOrg.getOrCrash(),
             debitCreditType: fakeDebitCreditType,
-            debitCreditCode: fakeDebitCreditCode,
             orderBy: fakeOrderBy,
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
@@ -292,7 +289,6 @@ void main() {
             pageSize: pageSize,
             salesOrg: fakeSalesOrg.getOrCrash(),
             debitCreditType: fakeDebitCreditType,
-            debitCreditCode: fakeDebitCreditCode,
             orderBy: fakeOrderBy,
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);

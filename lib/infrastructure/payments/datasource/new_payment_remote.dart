@@ -46,7 +46,6 @@ class NewPaymentRemoteDataSource {
       customerCode: customerCode,
       salesOrg: salesOrg,
       debitCreditType: 'debit',
-      debitCreditCode: 'S',
       orderBy: 'netDueDate',
       filterList: filterList,
       offset: offset,
@@ -65,7 +64,6 @@ class NewPaymentRemoteDataSource {
       customerCode: customerCode,
       salesOrg: salesOrg,
       debitCreditType: 'credit',
-      debitCreditCode: 'H',
       orderBy: 'postingKeyName',
       filterList: filterList,
       offset: offset,
@@ -177,7 +175,6 @@ class NewPaymentRemoteDataSource {
     required String customerCode,
     required String salesOrg,
     required String debitCreditType,
-    required String debitCreditCode,
     required String orderBy,
     required List<Map<String, String>> filterList,
     required int offset,
@@ -194,10 +191,6 @@ class NewPaymentRemoteDataSource {
         'field': orderBy,
       },
     };
-    filterList.add({
-      'field': 'debitCreditCode',
-      'value': debitCreditCode,
-    });
 
     requestParams.putIfAbsent('filterBy', () => filterList);
 

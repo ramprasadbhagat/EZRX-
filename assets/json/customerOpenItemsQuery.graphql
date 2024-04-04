@@ -54,10 +54,6 @@ query customerOpenItems($request: customerOpenItemsRequest!) {
                 "field":"documentDate",
                 "value":"2023-06-30",
                 "type":"le"
-            },
-            {
-                "field":"debitCreditCode",
-                "value":"S"
             }
         ]
     }
