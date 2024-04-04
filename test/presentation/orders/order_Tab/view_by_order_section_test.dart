@@ -18,6 +18,7 @@ import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.d
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -61,6 +62,8 @@ class ReOrderPermissionBlocMock
 
 class MockMixpanelService extends Mock implements MixpanelService {}
 
+class ClevertapServiceMock extends Mock implements ClevertapService {}
+
 class ViewByItemDetailsBlocMock
     extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
     implements ViewByItemDetailsBloc {}
@@ -84,6 +87,7 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerFactory(() => reOrderPermissionBlocMock);
     locator.registerSingleton<MixpanelService>(MockMixpanelService());
+    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     viewByOrder = await ViewByOrderLocalDataSource().getViewByOrders();
     locator.registerLazySingleton(() => AutoRouterMock());
     autoRouterMock = locator<AutoRouterMock>();

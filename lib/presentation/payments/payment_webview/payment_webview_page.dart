@@ -5,8 +5,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -192,18 +192,18 @@ class _WebviewBodyState extends State<_WebviewBody> {
     if (uri != null) {
       final isPaymentSuccess = uri.path.contains('my-account/thankyou');
       trackMixpanelEvent(
-        MixpanelEvents.paymentGatewayWebviewLoaded,
+        TrackingEvents.paymentGatewayWebviewLoaded,
         props: {
-          MixpanelProps.paymentGatewayRedirectUrl: uri.toString(),
-          MixpanelProps.market:
+          TrackingProps.paymentGatewayRedirectUrl: uri.toString(),
+          TrackingProps.market:
               _newPaymentState.salesOrganisation.salesOrg.country,
-          MixpanelProps.paymentGatewayzzHtmcs:
+          TrackingProps.paymentGatewayzzHtmcs:
               _newPaymentState.customerPaymentInfo.zzHtmcs,
-          MixpanelProps.username:
+          TrackingProps.username:
               _newPaymentState.user.fullName.displayFullName,
-          MixpanelProps.paymentAdviceId:
+          TrackingProps.paymentAdviceId:
               _newPaymentState.paymentInvoiceInfoPdf.zzAdvice,
-          MixpanelProps.paymentGatewaySuccess: isPaymentSuccess,
+          TrackingProps.paymentGatewaySuccess: isPaymentSuccess,
         },
       );
       if (isPaymentSuccess) {

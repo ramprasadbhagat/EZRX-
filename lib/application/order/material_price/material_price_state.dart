@@ -24,4 +24,20 @@ class MaterialPriceState with _$MaterialPriceState {
   Price getPriceForMaterial(MaterialNumber materialNumber) {
     return materialPrice[materialNumber] ?? Price.empty();
   }
+
+  bool displayOfferTag(MaterialInfo materialInfo, User user) {
+    final price = getPriceForMaterial(materialInfo.materialNumber);
+    final isHidePrice = materialInfo.hidePrice;
+    final isMYPnGSalesRep = salesOrganisation.salesOrg.isMY &&
+        user.role.type.isExternalSalesRep &&
+        materialInfo.isPnGPrinciple;
+    final displayOffers = !isHidePrice || isMYPnGSalesRep;
+    final inStockEligible = materialInfo.inStock ||
+        (!materialInfo.inStock &&
+            salesConfigs.addOosMaterials.getOrDefaultValue(false));
+
+    return (price.lastPrice != price.finalPrice) ||
+        displayOffers && (price.tiers.isNotEmpty && !isMYPnGSalesRep) ||
+        (price.bonuses.isNotEmpty && inStockEligible);
+  }
 }

@@ -1,7 +1,8 @@
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -231,15 +232,26 @@ class _BundleSectionItem extends StatelessWidget {
 
   void _bundleOnTap(BuildContext context, MaterialInfo materialInfo) {
     trackMixpanelEvent(
-      MixpanelEvents.productItemClicked,
+      TrackingEvents.productItemClicked,
       props: {
-        MixpanelProps.clickAt:
+        TrackingProps.clickAt:
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
-        MixpanelProps.isBundle: true,
-        MixpanelProps.productName: materialInfo.displayDescription,
-        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
-        MixpanelProps.productManufacturer: materialInfo.getManufactured,
-        MixpanelProps.section: 'Bundles',
+        TrackingProps.isBundle: true,
+        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer: materialInfo.getManufactured,
+        TrackingProps.section: 'Bundles',
+      },
+    );
+    trackClevertapEvent(
+      TrackingEvents.productItemClicked,
+      props: {
+        TrackingProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.router.currentPath),
+        TrackingProps.isBundle: true,
+        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer: materialInfo.getManufactured,
       },
     );
 

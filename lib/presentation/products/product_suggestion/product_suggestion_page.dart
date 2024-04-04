@@ -1,5 +1,7 @@
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -18,8 +20,6 @@ import 'package:ezrxmobile/application/order/product_search/product_search_bloc.
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-
 part 'package:ezrxmobile/presentation/products/product_suggestion/widgets/history_tile.dart';
 part 'package:ezrxmobile/presentation/products/product_suggestion/widgets/suggest_product_tile.dart';
 part 'package:ezrxmobile/presentation/products/product_suggestion/widgets/product_search_history_suggestion_section.dart';

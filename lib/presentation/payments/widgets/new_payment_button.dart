@@ -4,7 +4,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
@@ -12,8 +13,6 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NewPaymentButton extends StatelessWidget {
@@ -76,9 +75,9 @@ class NewPaymentButton extends StatelessWidget {
 
   void _toNewPayment(BuildContext context) {
     trackMixpanelEvent(
-      MixpanelEvents.newPaymentClicked,
+      TrackingEvents.newPaymentClicked,
       props: {
-        MixpanelProps.clickAt:
+        TrackingProps.clickAt:
             RouterUtils.buildRouteTrackingName(context.routeData.path),
       },
     );

@@ -19,9 +19,9 @@ class _ViewByOrder extends StatelessWidget {
           if (!context.read<ReOrderPermissionBloc>().state.isFetching &&
               !context.read<CartBloc>().state.isBuyAgain) {
             trackMixpanelEvent(
-              MixpanelEvents.orderDetailViewed,
+              TrackingEvents.orderDetailViewed,
               props: {
-                MixpanelProps.subTabFrom:
+                TrackingProps.subTabFrom:
                     RouterUtils.buildRouteTrackingName(context.routeData.path),
               },
             );

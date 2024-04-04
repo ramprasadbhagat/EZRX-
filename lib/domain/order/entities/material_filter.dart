@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,7 +22,7 @@ class MaterialFilter with _$MaterialFilter {
     required List<String> brandList,
     @Default(<String>[]) List<String> manufactureListSelected,
     @Default(<MaterialFilterCountry>[])
-        List<MaterialFilterCountry> countryListSelected,
+    List<MaterialFilterCountry> countryListSelected,
   }) = _MaterialFilter;
 
   factory MaterialFilter.empty() => const MaterialFilter(
@@ -64,12 +64,12 @@ class MaterialFilter with _$MaterialFilter {
 
     return {
       if (showProductFilter.isNotEmpty)
-        MixpanelProps.filterShowProduct: showProductFilter,
-      MixpanelProps.filterSortBy: sortBy.title,
+        TrackingProps.filterShowProduct: showProductFilter,
+      TrackingProps.filterSortBy: sortBy.title,
       if (manufactureListSelected.isNotEmpty)
-        MixpanelProps.filterManufacturer: manufactureListSelected,
+        TrackingProps.filterManufacturer: manufactureListSelected,
       if (countryListSelected.isNotEmpty)
-        MixpanelProps.filterCountryOfOrigin:
+        TrackingProps.filterCountryOfOrigin:
             countryListSelected.map((e) => e.name).toList(),
     };
   }

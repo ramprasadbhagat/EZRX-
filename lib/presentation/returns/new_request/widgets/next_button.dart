@@ -22,13 +22,13 @@ class _NextButton extends StatelessWidget {
                   );
               if (nextAllowed) {
                 trackMixpanelEvent(
-                  MixpanelEvents.newReturnRequestStep,
+                  TrackingEvents.newReturnRequestStep,
                   props: <String, dynamic>{
-                    MixpanelProps.step: step,
+                    TrackingProps.step: step,
                     if (step == 1)
-                      MixpanelProps.stepName: 'Select item(s) to return',
+                      TrackingProps.stepName: 'Select item(s) to return',
                     if (step == 2)
-                      MixpanelProps.stepName: 'Fill in return details',
+                      TrackingProps.stepName: 'Fill in return details',
                   },
                 );
                 tabController.animateTo(

@@ -46,7 +46,7 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
   }) {
     if (!onClear && searchKey.isEmpty) return;
 
-    trackMixpanelEvent(MixpanelEvents.documentNumberSearched);
+    trackMixpanelEvent(TrackingEvents.documentNumberSearched);
     context.read<AvailableCreditsBloc>().add(
           AvailableCreditsEvent.fetch(
             appliedFilter: searchKey.isEmpty

@@ -17,7 +17,7 @@ class _SubmitButton extends StatelessWidget {
             final reasonList = context.read<UsageCodeBloc>().state.usages;
 
             trackMixpanelEvent(
-              MixpanelEvents.returnRequestSuccess,
+              TrackingEvents.returnRequestSuccess,
               props: state.mixpanelTrackingInfo(reasonList: reasonList),
             );
             context.router.popAndPush(const NewRequestSuccessfulPageRoute());
@@ -25,9 +25,9 @@ class _SubmitButton extends StatelessWidget {
           (either) => either.fold(
             (failure) {
               trackMixpanelEvent(
-                MixpanelEvents.returnRequestFailure,
+                TrackingEvents.returnRequestFailure,
                 props: {
-                  MixpanelProps.errorMessage: context.tr(
+                  TrackingProps.errorMessage: context.tr(
                     failure.failureMessage.message,
                     namedArgs: failure.failureMessage.arguments,
                   ),
@@ -47,10 +47,10 @@ class _SubmitButton extends StatelessWidget {
             ? null
             : () {
                 trackMixpanelEvent(
-                  MixpanelEvents.newReturnRequestStep,
+                  TrackingEvents.newReturnRequestStep,
                   props: <String, dynamic>{
-                    MixpanelProps.step: 3,
-                    MixpanelProps.stepName: 'Review return details',
+                    TrackingProps.step: 3,
+                    TrackingProps.stepName: 'Review return details',
                   },
                 );
                 context.read<NewRequestBloc>().add(

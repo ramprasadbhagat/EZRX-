@@ -33,6 +33,7 @@ import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
@@ -51,6 +52,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
@@ -185,6 +187,7 @@ void main() {
     registerFallbackValue(ShipToInfo.empty());
 
     locator.registerLazySingleton<MixpanelService>(() => MockMixPanelService());
+    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<ProductDetailBloc>(() => productDetailMockBloc);
     materialInfo = await ProductDetailLocalDataSource().getProductDetails();
     similarProducts = await ProductDetailLocalDataSource().getSimilarProduct();

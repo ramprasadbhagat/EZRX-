@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
@@ -63,6 +64,8 @@ class MockAppRouter extends Mock implements AppRouter {}
 
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
+class ClevertapServiceMock extends Mock implements ClevertapService {}
+
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 void main() {
@@ -84,6 +87,9 @@ void main() {
     locator.registerLazySingleton(() => eligibilityBlocMock);
     locator.registerLazySingleton(() => materialListBlocMock);
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
+    locator
+        .registerLazySingleton<ClevertapService>(() => ClevertapServiceMock());
+
     autoRouterMock = locator<MockAppRouter>();
     eligibilityBlocMock = EligibilityBlocMock();
     materialListBlocMock = MaterialListBlocMock();

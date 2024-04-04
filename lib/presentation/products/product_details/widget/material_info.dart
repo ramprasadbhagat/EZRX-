@@ -4,8 +4,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -40,11 +40,11 @@ class MaterialInformation extends StatelessWidget {
       ),
       onTap: () {
         trackMixpanelEvent(
-          MixpanelEvents.productInfoViewed,
+          TrackingEvents.productInfoViewed,
           props: {
-            MixpanelProps.productName: materialInfo.displayDescription,
-            MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
-            MixpanelProps.productManufacturer: materialInfo.getManufactured,
+            TrackingProps.productName: materialInfo.displayDescription,
+            TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+            TrackingProps.productManufacturer: materialInfo.getManufactured,
           },
         );
         showModalBottomSheet(

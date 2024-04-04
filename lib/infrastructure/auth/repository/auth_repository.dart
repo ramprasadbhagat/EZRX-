@@ -16,6 +16,8 @@ import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
@@ -24,8 +26,6 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_sto
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:flutter/foundation.dart';
@@ -94,19 +94,24 @@ class AuthRepository implements IAuthRepository {
       );
       _registerMixpanelSuperProperties(login.user);
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.loginSuccess,
-        properties: {MixpanelProps.loginMethod: 'by_username'},
+        eventName: TrackingEvents.successfulLogin,
+        properties: {TrackingProps.loginMethod: 'by_username'},
+      );
+
+      clevertapService.trackEvent(
+        eventName: TrackingEvents.successfulLogin,
+        properties: {TrackingProps.loginMethod: 'by_username'},
       );
 
       return Right(login);
     } catch (e) {
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.loginFailure,
+        eventName: TrackingEvents.loginFailure,
         properties: {
-          MixpanelProps.username: usernameStr,
-          MixpanelProps.errorMessage:
+          TrackingProps.username: usernameStr,
+          TrackingProps.errorMessage:
               FailureHandler.handleFailure(e).nonTranslatedFailureMessage,
-          MixpanelProps.loginMethod: 'by_username',
+          TrackingProps.loginMethod: 'by_username',
         },
       );
 
@@ -191,8 +196,13 @@ class AuthRepository implements IAuthRepository {
       );
       _registerMixpanelSuperProperties(login.user);
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.loginSuccess,
-        properties: {MixpanelProps.loginMethod: 'sso'},
+        eventName: TrackingEvents.successfulLogin,
+        properties: {TrackingProps.loginMethod: 'sso'},
+      );
+
+      clevertapService.trackEvent(
+        eventName: TrackingEvents.successfulLogin,
+        properties: {TrackingProps.loginMethod: 'sso'},
       );
 
       return Right(login);
@@ -520,10 +530,10 @@ class AuthRepository implements IAuthRepository {
 
   void _sendSSOLoginError(ApiFailure failure) {
     mixpanelService.trackEvent(
-      eventName: MixpanelEvents.loginFailure,
+      eventName: TrackingEvents.loginFailure,
       properties: {
-        MixpanelProps.errorMessage: failure.nonTranslatedFailureMessage,
-        MixpanelProps.loginMethod: 'sso',
+        TrackingProps.errorMessage: failure.nonTranslatedFailureMessage,
+        TrackingProps.loginMethod: 'sso',
       },
     );
   }

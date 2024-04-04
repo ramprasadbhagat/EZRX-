@@ -1,6 +1,6 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 class MixpanelService {
@@ -17,7 +17,7 @@ class MixpanelService {
     mixpanel = await Mixpanel.init(
       config.mixpanelKey,
       trackAutomaticEvents: true,
-      superProperties: {MixpanelProps.platform: 'app'},
+      superProperties: {TrackingProps.platform: 'app'},
     );
   }
 
@@ -41,19 +41,19 @@ class MixpanelService {
     required String currency,
   }) {
     mixpanel.registerSuperProperties({
-      MixpanelProps.username: username,
-      MixpanelProps.salesOrg: salesOrg,
-      MixpanelProps.customerCode: customerCode,
-      MixpanelProps.shipToAddress: shipToAddress,
-      MixpanelProps.userRole: userRole,
-      MixpanelProps.market: market,
-      MixpanelProps.currency: currency,
+      TrackingProps.username: username,
+      TrackingProps.salesOrg: salesOrg,
+      TrackingProps.customerCode: customerCode,
+      TrackingProps.shipToAddress: shipToAddress,
+      TrackingProps.userRole: userRole,
+      TrackingProps.market: market,
+      TrackingProps.currency: currency,
     });
   }
 
   void onLogout() {
     mixpanel.clearSuperProperties();
-    mixpanel.registerSuperProperties({MixpanelProps.platform: 'app'});
+    mixpanel.registerSuperProperties({TrackingProps.platform: 'app'});
   }
 
   void setUser({
@@ -65,23 +65,23 @@ class MixpanelService {
   }) {
     mixpanel.identify(username);
     mixpanel.getPeople().set(
-          MixpanelProps.username,
+          TrackingProps.username,
           username,
         );
     mixpanel.getPeople().set(
-          MixpanelProps.firstName,
+          TrackingProps.firstName,
           firstName,
         );
     mixpanel.getPeople().set(
-          MixpanelProps.lastName,
+          TrackingProps.lastName,
           lastName,
         );
     mixpanel.getPeople().set(
-          MixpanelProps.email,
+          TrackingProps.email,
           email,
         );
     mixpanel.getPeople().set(
-          MixpanelProps.userRole,
+          TrackingProps.userRole,
           role,
         );
   }

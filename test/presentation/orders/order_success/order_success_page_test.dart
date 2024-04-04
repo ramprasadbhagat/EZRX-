@@ -35,7 +35,8 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
@@ -106,6 +107,8 @@ void main() {
       locator.registerLazySingleton(() => AutoRouteMock());
       locator
           .registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
+
+      locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
       mixpanelServiceMock = locator<MixpanelService>();
 
       fakeOrderHistoryDetails =
@@ -1238,7 +1241,7 @@ void main() {
 
         verify(
           () => mixpanelServiceMock.trackEvent(
-            eventName: MixpanelEvents.orderDetailViewed,
+            eventName: TrackingEvents.orderDetailViewed,
             properties: any(named: 'properties'),
           ),
         ).called(1);

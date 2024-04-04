@@ -191,6 +191,10 @@ class MaterialInfo with _$MaterialInfo {
         (element) => element.expiryDate.isValid() || element.batch.isValid(),
         orElse: () => StockInfo.empty(),
       );
+
+  bool displayOOSPreorderTag(bool hideStockDisplay) {
+    return !hideStockDisplay && !inStock && stockInfos.isNotEmpty;
+  }
 }
 
 @freezed

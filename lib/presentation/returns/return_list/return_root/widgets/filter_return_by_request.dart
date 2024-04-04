@@ -52,12 +52,12 @@ class _FilterReturnByRequest extends StatelessWidget {
     ).then((value) {
       if (value != null && value as ReturnFilter != stateFilter) {
         trackMixpanelEvent(
-          MixpanelEvents.returnRequestFiltered,
+          TrackingEvents.returnRequestFiltered,
           props: {
-            MixpanelProps.subTabFrom: RouterUtils.buildRouteTrackingName(
+            TrackingProps.subTabFrom: RouterUtils.buildRouteTrackingName(
               const ReturnByRequestPageRoute().path,
             ),
-            MixpanelProps.filterUsed: value.trackingInfo,
+            TrackingProps.filterUsed: value.trackingInfo,
           },
         );
         context.read<ReturnListByRequestBloc>().add(

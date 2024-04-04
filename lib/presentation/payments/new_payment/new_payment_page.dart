@@ -10,8 +10,8 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
@@ -197,10 +197,10 @@ class _NextButton extends StatelessWidget {
 
 void _trackProceedToNextStep(BuildContext context, int step) =>
     trackMixpanelEvent(
-      MixpanelEvents.paymentStep,
+      TrackingEvents.paymentStep,
       props: {
-        MixpanelProps.step: step,
-        MixpanelProps.stepName: _stepTitle(context, step),
+        TrackingProps.step: step,
+        TrackingProps.stepName: _stepTitle(context, step),
       },
     );
 

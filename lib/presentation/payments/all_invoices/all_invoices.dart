@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/new_payment_button.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -15,7 +16,6 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -173,7 +173,7 @@ class _InvoiceItem extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          trackMixpanelEvent(MixpanelEvents.paymentDocumentViewed);
+          trackMixpanelEvent(TrackingEvents.paymentDocumentViewed);
           context.read<CreditAndInvoiceDetailsBloc>().add(
                 CreditAndInvoiceDetailsEvent.fetch(
                   creditAndInvoiceItem: invoiceItem,

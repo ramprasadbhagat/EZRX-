@@ -63,7 +63,7 @@ class _PaymentSummaryItem extends StatelessWidget {
       child: ListTile(
         key: WidgetKeys.paymentSummaryTile,
         onTap: () {
-          trackMixpanelEvent(MixpanelEvents.paymentDocumentViewed);
+          trackMixpanelEvent(TrackingEvents.paymentDocumentViewed);
           context.read<PaymentSummaryDetailsBloc>().add(
                 PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
                   details: details,

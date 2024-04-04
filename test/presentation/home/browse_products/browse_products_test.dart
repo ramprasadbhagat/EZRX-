@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
@@ -52,6 +53,8 @@ class ProductDetailBlocMock
 
 class MockMixpanelService extends Mock implements MixpanelService {}
 
+class ClevertapServiceMock extends Mock implements ClevertapService {}
+
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 void main() {
@@ -81,6 +84,7 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     registerFallbackValue(const PageRouteInfo('HomeTabRoute', path: 'home'));
     locator.registerSingleton<MixpanelService>(MockMixpanelService());
+    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
     materialList = await MaterialListLocalDataSource().getMaterialList();
   });

@@ -84,4 +84,10 @@ class ProductDetailState with _$ProductDetailState {
       productDetailAggregate.stockInfo.displayBatchNumber(
         isMarketPlace: productDetailAggregate.materialInfo.isMarketPlace,
       );
+
+  bool displayOOSPreorderTag(bool hideStockDisplay) {
+    return !hideStockDisplay &&
+        !isDetailAndStockFetching &&
+        !productDetailAggregate.stockInfo.inStock.isMaterialInStock;
+  }
 }

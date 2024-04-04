@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -58,19 +58,19 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
       materialInfoScanner.barcodeCapture.isEnabled = true;
 
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.scanSuccess,
+        eventName: TrackingEvents.scanSuccess,
         properties: {
-          MixpanelProps.scanMethod: 'camera',
+          TrackingProps.scanMethod: 'camera',
         },
       );
 
       return const Right(true);
     } catch (e) {
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.scanFailed,
+        eventName: TrackingEvents.scanFailed,
         properties: {
-          MixpanelProps.scanMethod: 'camera',
-          MixpanelProps.errorMessage:
+          TrackingProps.scanMethod: 'camera',
+          TrackingProps.errorMessage:
               FailureHandler.handleFailure(e).nonTranslatedFailureMessage,
         },
       );
@@ -93,19 +93,19 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
       materialInfoScanner.barcodeCapture.isEnabled = true;
 
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.scanSuccess,
+        eventName: TrackingEvents.scanSuccess,
         properties: {
-          MixpanelProps.scanMethod: 'gallery',
+          TrackingProps.scanMethod: 'gallery',
         },
       );
 
       return const Right(true);
     } catch (e) {
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.scanFailed,
+        eventName: TrackingEvents.scanFailed,
         properties: {
-          MixpanelProps.scanMethod: 'gallery',
-          MixpanelProps.errorMessage:
+          TrackingProps.scanMethod: 'gallery',
+          TrackingProps.errorMessage:
               FailureHandler.handleFailure(e).nonTranslatedFailureMessage,
         },
       );

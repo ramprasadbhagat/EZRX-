@@ -8,8 +8,8 @@ import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
@@ -150,9 +150,9 @@ class _ReturnItem extends StatelessWidget {
                 key: WidgetKeys.returnItemTile,
                 onTap: () {
                   trackMixpanelEvent(
-                    MixpanelEvents.returnRequestViewed,
+                    TrackingEvents.returnRequestViewed,
                     props: {
-                      MixpanelProps.subTabFrom:
+                      TrackingProps.subTabFrom:
                           RouterUtils.buildRouteTrackingName(
                         context.routeData.path,
                       ),

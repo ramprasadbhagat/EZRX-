@@ -3,8 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
@@ -85,15 +85,15 @@ class MaterialGridItem extends StatelessWidget {
                             onTap: () {
                               if (!materialInfo.isFavourite) {
                                 trackMixpanelEvent(
-                                  MixpanelEvents.addProductToFavorite,
+                                  TrackingEvents.addProductToFavorite,
                                   props: {
-                                    MixpanelProps.productName:
+                                    TrackingProps.productName:
                                         materialInfo.displayDescription,
-                                    MixpanelProps.productCode: materialInfo
+                                    TrackingProps.productCode: materialInfo
                                         .materialNumber.displayMatNo,
-                                    MixpanelProps.productManufacturer:
+                                    TrackingProps.productManufacturer:
                                         materialInfo.getManufactured,
-                                    MixpanelProps.clickAt:
+                                    TrackingProps.clickAt:
                                         RouterUtils.buildRouteTrackingName(
                                       context.router.currentPath,
                                     ),

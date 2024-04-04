@@ -70,15 +70,15 @@ class _ShipToAddressSection extends StatelessWidget {
         ),
       );
       trackMixpanelEvent(
-        MixpanelEvents.shipToAddressSave,
+        TrackingEvents.shipToAddressSave,
         props: {
-          MixpanelProps.shipToAddress: shipToInfo.shipToCustomerCode,
+          TrackingProps.shipToAddress: shipToInfo.shipToCustomerCode,
         },
       );
       trackMixpanelEvent(
-        MixpanelEvents.customerCodeSave,
+        TrackingEvents.customerCodeSave,
         props: {
-          MixpanelProps.customerCode: customerCodeInfo.customerCodeSoldTo,
+          TrackingProps.customerCode: customerCodeInfo.customerCodeSoldTo,
         },
       );
     }

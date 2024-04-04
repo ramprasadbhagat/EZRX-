@@ -43,8 +43,8 @@ import 'package:ezrxmobile/domain/order/entities/payment_term.dart'
 import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
@@ -606,9 +606,9 @@ void main() {
         expect(checkoutPageFinder, findsOneWidget);
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.placeOrderFailure,
+            TrackingEvents.placeOrderFailure,
             props: {
-              MixpanelProps.errorMessage: 'Fake-error'.tr(),
+              TrackingProps.errorMessage: 'Fake-error'.tr(),
             },
           ),
         ).called(1);
@@ -993,8 +993,9 @@ void main() {
       when(() => additionalDetailsBlocMock.state).thenReturn(
         AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            paymentTerm:
-                PaymentTerm('fake_payment_term - fake_payment_term_description'),
+            paymentTerm: PaymentTerm(
+              'fake_payment_term - fake_payment_term_description',
+            ),
           ),
         ),
       );

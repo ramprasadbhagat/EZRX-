@@ -9,16 +9,17 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart';
-import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -49,6 +50,8 @@ class ProductDetailBlocMock
     implements ProductDetailBloc {}
 
 class MockMixpanelService extends Mock implements MixpanelService {}
+
+class ClevertapServiceMock extends Mock implements ClevertapService {}
 
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
@@ -88,6 +91,7 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     registerFallbackValue(const PageRouteInfo('HomeTabRoute', path: 'home'));
     locator.registerSingleton<MixpanelService>(MockMixpanelService());
+    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
     locator.registerLazySingleton(() => PackageInfoService());
     materialList = await MaterialListLocalDataSource().getMaterialList();
@@ -294,18 +298,30 @@ void main() {
         ).called(1);
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.productItemClicked,
+            TrackingEvents.productItemClicked,
             props: {
-              MixpanelProps.clickAt: RouterUtils.buildRouteTrackingName(
-                autoRouterMock.currentPath,
-              ),
-              MixpanelProps.isBundle: true,
-              MixpanelProps.productName: materialList.first.displayDescription,
-              MixpanelProps.productCode:
+              TrackingProps.clickAt: 'Home Page',
+              TrackingProps.isBundle: true,
+              TrackingProps.productName: materialList.first.displayDescription,
+              TrackingProps.productCode:
                   materialList.first.materialNumber.displayMatNo,
-              MixpanelProps.productManufacturer:
+              TrackingProps.productManufacturer:
                   materialList.first.getManufactured,
-              MixpanelProps.section: 'Bundles',
+              TrackingProps.section: 'Bundles',
+            },
+          ),
+        ).called(1);
+        verify(
+          () => trackClevertapEvent(
+            TrackingEvents.productItemClicked,
+            props: {
+              TrackingProps.clickAt: 'Home Page',
+              TrackingProps.isBundle: true,
+              TrackingProps.productName: materialList.first.displayDescription,
+              TrackingProps.productNumber:
+                  materialList.first.materialNumber.displayMatNo,
+              TrackingProps.productManufacturer:
+                  materialList.first.getManufactured,
             },
           ),
         ).called(1);

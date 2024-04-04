@@ -73,9 +73,9 @@ class _PaymentSummarySection extends StatelessWidget {
                           ? null
                           : () {
                               trackMixpanelEvent(
-                                MixpanelEvents.payNowClicked,
+                                TrackingEvents.payNowClicked,
                                 props: {
-                                  MixpanelProps.paymentAdviceId:
+                                  TrackingProps.paymentAdviceId:
                                       state.paymentInvoiceInfoPdf.zzAdvice,
                                 },
                               );
@@ -149,15 +149,23 @@ class _PaymentSummarySection extends StatelessWidget {
     if (uri != null && context.mounted) {
       if (uri.toString().isNotEmpty) {
         trackMixpanelEvent(
-          MixpanelEvents.paymentSuccess,
+          TrackingEvents.successfulPayment,
           props: {
-            MixpanelProps.paymentAmount: state.amountTotal,
-            MixpanelProps.paymentMethod:
+            TrackingProps.paymentAmount: state.amountTotal,
+            TrackingProps.paymentMethod:
                 state.selectedPaymentMethod.paymentMethod.getOrDefaultValue(''),
-            MixpanelProps.paymentDocumentCount: state.allSelectedItems.length,
-            MixpanelProps.paymentAdviceId: state.paymentInvoiceInfoPdf.zzAdvice,
+            TrackingProps.paymentDocumentCount: state.allSelectedItems.length,
+            TrackingProps.paymentAdviceId: state.paymentInvoiceInfoPdf.zzAdvice,
           },
         );
+        trackClevertapEvent(
+          TrackingEvents.successfulPayment,
+          props: {
+            TrackingProps.paymentMethod:
+                state.selectedPaymentMethod.paymentMethod.getOrDefaultValue(''),
+          },
+        );
+
         context.read<NewPaymentBloc>().add(
               NewPaymentEvent.updatePaymentGateway(
                 paymentUrl: uri,
@@ -175,13 +183,13 @@ class _PaymentSummarySection extends StatelessWidget {
       /// If payment is fails (No received redirect url with
       /// path payment/thank-you): Back to the payment overview page
       trackMixpanelEvent(
-        MixpanelEvents.paymentFailure,
+        TrackingEvents.paymentFailure,
         props: {
-          MixpanelProps.errorMessage: 'Payment failed in webview',
-          MixpanelProps.paymentMethod:
+          TrackingProps.errorMessage: 'Payment failed in webview',
+          TrackingProps.paymentMethod:
               state.selectedPaymentMethod.paymentMethod.getOrDefaultValue(''),
-          MixpanelProps.paymentDocumentCount: state.allSelectedItems.length,
-          MixpanelProps.paymentAdviceId: state.paymentInvoiceInfoPdf.zzAdvice,
+          TrackingProps.paymentDocumentCount: state.allSelectedItems.length,
+          TrackingProps.paymentAdviceId: state.paymentInvoiceInfoPdf.zzAdvice,
         },
       );
       if (context.mounted) {

@@ -11,8 +11,8 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -197,7 +197,7 @@ void main() {
 
       verify(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.documentNumberSearched,
+          eventName: TrackingEvents.documentNumberSearched,
           properties: null,
         ),
       ).called(1);
@@ -216,7 +216,7 @@ void main() {
 
       verify(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.documentNumberSearched,
+          eventName: TrackingEvents.documentNumberSearched,
           properties: null,
         ),
       ).called(1);
@@ -247,7 +247,7 @@ void main() {
 
       verify(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.documentNumberSearched,
+          eventName: TrackingEvents.documentNumberSearched,
           properties: null,
         ),
       ).called(1);
@@ -481,8 +481,8 @@ void main() {
       await tester.pumpAndSettle();
       verify(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.newPaymentFilterUsed,
-          properties: {MixpanelProps.filterUsed: creditFilter.trackingInfo},
+          eventName: TrackingEvents.newPaymentFilterUsed,
+          properties: {TrackingProps.filterUsed: creditFilter.trackingInfo},
         ),
       ).called(1);
       verify(

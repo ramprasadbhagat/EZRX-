@@ -60,4 +60,14 @@ class ClevertapService {
       {'MSG-push': false},
     );
   }
+
+  void trackEvent({
+    required String eventName,
+    required Map<String, dynamic> properties,
+  }) {
+    CleverTapPlugin.recordEvent(
+      eventName,
+      properties,
+    );
+  }
 }

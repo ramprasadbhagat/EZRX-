@@ -23,6 +23,7 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
@@ -44,6 +45,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
+import '../../common_mock_data/mock_other.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
@@ -122,6 +124,7 @@ void main() {
   setUpAll(() async {
     locator.registerFactory(() => MockAppRouter());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
+    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     autoRouterMock = locator<MockAppRouter>();
     orderEligibilityBloc = OrderEligibilityBlocMock();
     materialResponseMock = await MaterialListLocalDataSource().getProductList();

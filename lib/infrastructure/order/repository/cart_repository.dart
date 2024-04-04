@@ -261,38 +261,38 @@ class CartRepository implements ICartRepository {
         ) !=
         PriceAggregate.empty();
     final props = <String, dynamic>{
-      MixpanelProps.productName:
+      TrackProps.productName:
           cartItem.materials.first.materialInfo.materialDescription,
-      MixpanelProps.productNumber: cartItem
+      TrackProps.productNumber: cartItem
           .materials.first.materialInfo.materialNumber
           .getOrDefaultValue(''),
-      MixpanelProps.productManufacturer: cartItem
+      TrackProps.productManufacturer: cartItem
           .materials.first.materialInfo.principalData.principalName
           .getOrDefaultValue(''),
-      MixpanelProps.productCategory: cartItem
+      TrackProps.productCategory: cartItem
           .materials.first.materialInfo.materialGroup4.getMaterialGroup4Type,
-      MixpanelProps.productTotalPrice:
+      TrackProps.productTotalPrice:
           cartItem.materials.first.price.finalTotalPrice.getOrDefaultValue(0.0),
-      MixpanelProps.productQty: cartItem.materials.first.quantity,
-      MixpanelProps.bonusName: cartItem.materials.first.addedBonusList
+      TrackProps.productQty: cartItem.materials.first.quantity,
+      TrackProps.bonusName: cartItem.materials.first.addedBonusList
           .map(
             (e) => e.materialDescription,
           )
           .toList(),
-      MixpanelProps.bonusManufacturer: cartItem.materials.first.addedBonusList
+      TrackProps.bonusManufacturer: cartItem.materials.first.addedBonusList
           .map(
             (e) => e.materialInfo.principalData.principalName
                 .getOrDefaultValue(''),
           )
           .toList(),
-      MixpanelProps.bannerClicked: isBannerClicked,
-      MixpanelProps.bannerId: cartItem.materials.first.banner.id.toString(),
-      MixpanelProps.bannerTitle: cartItem.materials.first.banner.title,
-      MixpanelProps.bannerType: cartItem.materials.first.banner.category,
+      TrackProps.bannerClicked: isBannerClicked,
+      TrackProps.bannerId: cartItem.materials.first.banner.id.toString(),
+      TrackProps.bannerTitle: cartItem.materials.first.banner.title,
+      TrackProps.bannerType: cartItem.materials.first.banner.category,
     };
 
     mixpanelService.trackEvent(
-      eventName: MixpanelEvents.addToCartSuccess,
+      eventName: TrackEvents.addToCartSuccess,
       properties: props,
     );
   }*/

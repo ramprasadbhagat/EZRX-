@@ -4,7 +4,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +68,7 @@ class CartButton extends StatelessWidget {
                       size: iconSize,
                     ),
                     onPressed: () {
-                      trackMixpanelEvent(MixpanelEvents.cartIconClicked);
+                      trackMixpanelEvent(TrackingEvents.cartIconClicked);
 
                       final salesOrgConfig =
                           context.read<EligibilityBloc>().state.salesOrgConfigs;

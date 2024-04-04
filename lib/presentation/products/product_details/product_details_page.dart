@@ -16,10 +16,11 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
@@ -267,12 +268,6 @@ class _BodyContent extends StatelessWidget {
         final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
         final validateOutOfStockValue =
             context.read<EligibilityBloc>().state.validateOutOfStockValue;
-        final level = !config.hideStockDisplay &&
-                !state.isDetailAndStockFetching
-            ? !state.productDetailAggregate.stockInfo.inStock.isMaterialInStock
-                ? config.addOosMaterials.productTag(validateOutOfStockValue)
-                : ''
-            : '';
 
         return Column(
           key: WidgetKeys.bodyContentProductDetail,
@@ -310,10 +305,11 @@ class _BodyContent extends StatelessWidget {
                               ?.copyWith(color: ZPColors.darkGray),
                         ),
                       ),
-                      if (level.isNotEmpty)
+                      if (state.displayOOSPreorderTag(config.hideStockDisplay))
                         StatusLabel(
                           status: StatusType(
-                            level,
+                            config.addOosMaterials
+                                .productTag(validateOutOfStockValue),
                           ),
                         ),
                     ],
@@ -415,15 +411,15 @@ class _Description extends StatelessWidget {
                   onTap: () {
                     if (materialInfo.isFavourite) {
                       trackMixpanelEvent(
-                        MixpanelEvents.addProductToFavorite,
+                        TrackingEvents.addProductToFavorite,
                         props: {
-                          MixpanelProps.productName:
+                          TrackingProps.productName:
                               materialInfo.displayDescription,
-                          MixpanelProps.productCode:
+                          TrackingProps.productCode:
                               materialInfo.materialNumber.displayMatNo,
-                          MixpanelProps.productManufacturer:
+                          TrackingProps.productManufacturer:
                               materialInfo.getManufactured,
-                          MixpanelProps.clickAt:
+                          TrackingProps.clickAt:
                               RouterUtils.buildRouteTrackingName(
                             context.router.currentPath,
                           ),
@@ -754,10 +750,9 @@ void _trackAddToCartSuccess(
   int qty, {
   EZReachBanner? banner,
 }) {
-  final price = context
-          .read<MaterialPriceBloc>()
-          .state
-          .materialPrice[material.materialNumber] ??
+  final materialPriceState = context.read<MaterialPriceBloc>().state;
+  final eligibilityState = context.read<EligibilityBloc>().state;
+  final price = materialPriceState.materialPrice[material.materialNumber] ??
       Price.empty();
   final cartItem = state.cartProducts
       .firstWhere(
@@ -765,33 +760,73 @@ void _trackAddToCartSuccess(
         orElse: () => PriceAggregate.empty(),
       )
       .copyWith(quantity: qty, price: price);
+  final clickAt =
+      RouterUtils.buildRouteTrackingName(context.router.currentPath);
+  final isOffer = materialPriceState.displayOfferTag(
+    material,
+    eligibilityState.user,
+  );
+  final isOOSPreorder = context
+      .read<ProductDetailBloc>()
+      .state
+      .displayOOSPreorderTag(eligibilityState.salesOrgConfigs.hideStockDisplay);
 
-  final props = <String, dynamic>{
-    MixpanelProps.productName: cartItem.materialInfo.displayDescription,
-    MixpanelProps.productCode:
+  final tags = <String>[];
+  if (isOffer) tags.add('On Offer');
+  if (isOOSPreorder) {
+    tags.add(
+      eligibilityState.salesOrgConfigs.addOosMaterials.productTag(
+        eligibilityState.validateOutOfStockValue,
+      ),
+    );
+  }
+
+  final mixpanelProps = <String, dynamic>{
+    TrackingProps.productName: cartItem.materialInfo.displayDescription,
+    TrackingProps.productCode:
         cartItem.materialInfo.materialNumber.getOrDefaultValue(''),
-    MixpanelProps.productManufacturer: cartItem.materialInfo.getManufactured,
-    MixpanelProps.productTotalPrice: cartItem.finalPriceTotal,
-    MixpanelProps.productQty: qty,
-    MixpanelProps.clickAt:
-        RouterUtils.buildRouteTrackingName(context.router.currentPath),
-    MixpanelProps.bannerId: banner?.id ?? '',
+    TrackingProps.productManufacturer: cartItem.materialInfo.getManufactured,
+    TrackingProps.productTotalPrice: cartItem.finalPriceTotal,
+    TrackingProps.productQty: qty,
+    TrackingProps.clickAt: clickAt,
+    TrackingProps.bannerId: banner?.id ?? '',
+    TrackingProps.isOffer: isOffer,
+    TrackingProps.tag: tags.join(', '),
   };
 
-  //TODO: Revisit later to implement is_offer and tag for MixpanelProps when have a proper solution because current logic code for checking offer and tag of material is long and complicated, moving it here may cause the code become messy
+  final clevertapProps = <String, dynamic>{
+    TrackingProps.productName: cartItem.materialInfo.displayDescription,
+    TrackingProps.productNumber:
+        cartItem.materialInfo.materialNumber.getOrDefaultValue(''),
+    TrackingProps.productManufacturer: cartItem.materialInfo.getManufactured,
+    TrackingProps.productTotalPrice: cartItem.finalPriceTotal,
+    TrackingProps.productQty: qty,
+    TrackingProps.clickAt: clickAt,
+    TrackingProps.bannerId: banner?.id ?? '',
+    TrackingProps.isOffer: isOffer,
+    TrackingProps.tag: tags.join(', '),
+  };
 
-  trackMixpanelEvent(MixpanelEvents.addToCartSuccess, props: props);
+  trackMixpanelEvent(
+    TrackingEvents.addProductToCartSuccess,
+    props: mixpanelProps,
+  );
+
+  trackClevertapEvent(
+    TrackingEvents.addProductToCartSuccess,
+    props: clevertapProps,
+  );
 }
 
 void _trackAddToCartFailure(BuildContext context, ApiFailure failure) =>
     trackMixpanelEvent(
-      MixpanelEvents.addToCartFailed,
+      TrackingEvents.addToCartFailed,
       props: {
-        MixpanelProps.errorMessage: context.tr(
+        TrackingProps.errorMessage: context.tr(
           failure.failureMessage.message,
           namedArgs: failure.failureMessage.arguments,
         ),
-        MixpanelProps.viewFrom:
+        TrackingProps.viewFrom:
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
       },
     );

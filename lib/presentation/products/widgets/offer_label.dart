@@ -22,19 +22,8 @@ class OfferLabel extends StatelessWidget {
           current.getPriceForMaterial(materialInfo.materialNumber),
       builder: (context, state) {
         final eligibilityState = context.read<EligibilityBloc>().state;
-        final price = state.getPriceForMaterial(materialInfo.materialNumber);
-        final isHidePrice = materialInfo.hidePrice;
-        final isMYPnGSalesRep = eligibilityState.isMYExternalSalesRepUser &&
-            materialInfo.isPnGPrinciple;
-        final displayOffers = !isHidePrice || isMYPnGSalesRep;
-        final inStockEligible = materialInfo.inStock ||
-            (!materialInfo.inStock &&
-                eligibilityState.salesOrgConfigs.addOosMaterials
-                    .getOrDefaultValue(false));
 
-        return (price.lastPrice != price.finalPrice) ||
-                displayOffers && (price.tiers.isNotEmpty && !isMYPnGSalesRep) ||
-                (price.bonuses.isNotEmpty && inStockEligible)
+        return state.displayOfferTag(materialInfo, eligibilityState.user)
             ? iconOnly
                 ? ProductTag.onOfferIcon()
                 : ProductTag.onOfferTag()

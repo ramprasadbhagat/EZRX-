@@ -48,7 +48,7 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
     required BuildContext context,
     required String searchKey,
   }) {
-    trackMixpanelEvent(MixpanelEvents.documentNumberSearched);
+    trackMixpanelEvent(TrackingEvents.documentNumberSearched);
     context.read<OutstandingInvoicesBloc>().add(
           OutstandingInvoicesEvent.fetch(
             appliedFilter: searchKey.isEmpty

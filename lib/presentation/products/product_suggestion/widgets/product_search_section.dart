@@ -75,7 +75,7 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
               Icons.camera_alt_outlined,
             ),
             onPressed: () => {
-              trackMixpanelEvent(MixpanelEvents.scanClicked),
+              trackMixpanelEvent(TrackingEvents.scanClicked),
               context.router.pushNamed('orders/scan_material_info'),
               context.read<ScanMaterialInfoBloc>().add(
                     ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
@@ -94,10 +94,18 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
 
   void _trackSearchEvent(String keyword) {
     trackMixpanelEvent(
-      MixpanelEvents.productSearch,
+      TrackingEvents.productSearch,
       props: {
-        MixpanelProps.searchKeyword: keyword,
-        MixpanelProps.searchFrom:
+        TrackingProps.searchKeyword: keyword,
+        TrackingProps.searchFrom:
+            RouterUtils.buildRouteTrackingName(widget.parentRoute),
+      },
+    );
+    trackClevertapEvent(
+      TrackingEvents.productSearch,
+      props: {
+        TrackingProps.searchKeyword: keyword,
+        TrackingProps.searchFrom:
             RouterUtils.buildRouteTrackingName(widget.parentRoute),
       },
     );

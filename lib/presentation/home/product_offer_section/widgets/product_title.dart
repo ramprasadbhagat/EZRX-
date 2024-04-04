@@ -89,15 +89,15 @@ class _ProductTile extends StatelessWidget {
                                 onTap: () {
                                   if (materialInfo.isFavourite) {
                                     trackMixpanelEvent(
-                                      MixpanelEvents.addProductToFavorite,
+                                      TrackingEvents.addProductToFavorite,
                                       props: {
-                                        MixpanelProps.productName:
+                                        TrackingProps.productName:
                                             materialInfo.displayDescription,
-                                        MixpanelProps.productCode: materialInfo
+                                        TrackingProps.productCode: materialInfo
                                             .materialNumber.displayMatNo,
-                                        MixpanelProps.productManufacturer:
+                                        TrackingProps.productManufacturer:
                                             materialInfo.getManufactured,
-                                        MixpanelProps.clickAt:
+                                        TrackingProps.clickAt:
                                             RouterUtils.buildRouteTrackingName(
                                           context.router.currentPath,
                                         ),
@@ -142,15 +142,28 @@ class _ProductTile extends StatelessWidget {
 
   void _navigateToDetails(BuildContext context, MaterialInfo materialInfo) {
     trackMixpanelEvent(
-      MixpanelEvents.productItemClicked,
+      TrackingEvents.productItemClicked,
       props: {
-        MixpanelProps.clickAt:
+        TrackingProps.clickAt:
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
-        MixpanelProps.isBundle: false,
-        MixpanelProps.productName: materialInfo.displayDescription,
-        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
-        MixpanelProps.productManufacturer: materialInfo.getManufactured,
-        MixpanelProps.section: 'Products on offer',
+        TrackingProps.isBundle: false,
+        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer: materialInfo.getManufactured,
+        TrackingProps.section: 'Products on offer',
+        TrackingProps.tag: 'On Offer',
+      },
+    );
+    trackClevertapEvent(
+      TrackingEvents.productItemClicked,
+      props: {
+        TrackingProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.router.currentPath),
+        TrackingProps.isBundle: false,
+        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer: materialInfo.getManufactured,
+        TrackingProps.tag: 'On Offer',
       },
     );
 

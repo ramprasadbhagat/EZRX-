@@ -88,7 +88,7 @@ class _CreditsItem extends StatelessWidget {
   }
 
   void _onItemClick(BuildContext context) {
-    trackMixpanelEvent(MixpanelEvents.paymentDocumentViewed);
+    trackMixpanelEvent(TrackingEvents.paymentDocumentViewed);
     context.read<CreditAndInvoiceDetailsBloc>().add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: creditItem,

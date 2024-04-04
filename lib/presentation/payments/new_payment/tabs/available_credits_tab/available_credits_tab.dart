@@ -7,8 +7,8 @@ import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
@@ -157,7 +157,7 @@ class _FilterTune extends StatelessWidget {
   }
 
   void _showFilterPage({required BuildContext context}) {
-        context.read<AvailableCreditFilterBloc>().add(
+    context.read<AvailableCreditFilterBloc>().add(
           AvailableCreditFilterEvent.updateFilterToLastApplied(
             lastAppliedFilter:
                 context.read<AvailableCreditsBloc>().state.appliedFilter,
@@ -187,8 +187,8 @@ class _FilterTune extends StatelessWidget {
             context.read<AvailableCreditsBloc>().state.appliedFilter;
         if (newFilter != alreadyAppliedFilter) {
           trackMixpanelEvent(
-            MixpanelEvents.newPaymentFilterUsed,
-            props: {MixpanelProps.filterUsed: newFilter.trackingInfo},
+            TrackingEvents.newPaymentFilterUsed,
+            props: {TrackingProps.filterUsed: newFilter.trackingInfo},
           );
           context.read<AvailableCreditsBloc>().add(
                 AvailableCreditsEvent.fetch(

@@ -5,9 +5,9 @@ import 'package:ezrxmobile/application/order/product_search/product_search_bloc.
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
@@ -37,12 +37,12 @@ class CarouselBannerTile extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         trackMixpanelEvent(
-          MixpanelEvents.bannerClick,
+          TrackingEvents.bannerClick,
           props: {
-            MixpanelProps.bannerId: banner.id,
-            MixpanelProps.bannerTitle: banner.title,
-            MixpanelProps.bannerOrder: bannerPosition,
-            MixpanelProps.bannerRedirected: banner.navigationalURL.type,
+            TrackingProps.bannerId: banner.id,
+            TrackingProps.bannerTitle: banner.title,
+            TrackingProps.bannerOrder: bannerPosition,
+            TrackingProps.bannerRedirected: banner.navigationalURL.type,
           },
         );
 

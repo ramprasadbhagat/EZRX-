@@ -3,10 +3,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
@@ -134,16 +136,48 @@ class ProductsTab extends StatelessWidget {
   }
 
   void _productOnTap(BuildContext context, MaterialInfo materialInfo) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final clickAt =
+        RouterUtils.buildRouteTrackingName(context.router.currentPath);
+    final isOffer = context.read<MaterialPriceBloc>().state.displayOfferTag(
+          materialInfo,
+          eligibilityState.user,
+        );
+    final isOOSPreorder = materialInfo.displayOOSPreorderTag(
+      eligibilityState.salesOrgConfigs.hideStockDisplay,
+    );
+
+    final tags = <String>[];
+    if (isOffer) tags.add('On Offer');
+    if (isOOSPreorder) {
+      tags.add(
+        eligibilityState.salesOrgConfigs.addOosMaterials.productTag(
+          eligibilityState.validateOutOfStockValue,
+        ),
+      );
+    }
     trackMixpanelEvent(
-      MixpanelEvents.productItemClicked,
+      TrackingEvents.productItemClicked,
       props: {
-        MixpanelProps.clickAt:
-            RouterUtils.buildRouteTrackingName(context.router.currentPath),
-        MixpanelProps.isBundle: false,
-        MixpanelProps.productName: materialInfo.displayDescription,
-        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
-        MixpanelProps.productManufacturer: materialInfo.getManufactured,
-        MixpanelProps.section: 'All product',
+        TrackingProps.clickAt: clickAt,
+        TrackingProps.isBundle: false,
+        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer: materialInfo.getManufactured,
+        TrackingProps.section: 'All product',
+        TrackingProps.tag: tags.join(', '),
+      },
+    );
+
+    trackClevertapEvent(
+      TrackingEvents.productItemClicked,
+      props: {
+        TrackingProps.clickAt: clickAt,
+        TrackingProps.isBundle: false,
+        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer: materialInfo.getManufactured,
+        TrackingProps.tag: tags.join(', '),
       },
     );
 

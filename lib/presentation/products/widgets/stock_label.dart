@@ -21,11 +21,8 @@ class StockLabel extends StatelessWidget {
     final salesOrgConfig =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
-    return salesOrgConfig.hideStockDisplay ||
-            materialInfo.inStock ||
-            materialInfo.stockInfos.isEmpty
-        ? const SizedBox.shrink()
-        : Container(
+    return materialInfo.displayOOSPreorderTag(salesOrgConfig.hideStockDisplay)
+        ? Container(
             key: WidgetKeys.materialListStockLabel,
             child: ProductTag.preOrderTag(
               label: addOosMaterials.productTag(validateOutOfStockValue),
@@ -34,6 +31,7 @@ class StockLabel extends StatelessWidget {
               labelColor:
                   addOosMaterials.productTagLabelColor(validateOutOfStockValue),
             ),
-          );
+          )
+        : const SizedBox.shrink();
   }
 }

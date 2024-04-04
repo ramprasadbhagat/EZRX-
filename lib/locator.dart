@@ -464,6 +464,7 @@ void setupLocator() {
     () => RouterObserver(
       firebaseAnalyticsService: locator<FirebaseAnalyticsService>(),
       mixpanelService: locator<MixpanelService>(),
+      clevertapService: locator<ClevertapService>(),
     ),
   );
   locator.registerLazySingleton(() => DeviceStorage());
@@ -911,6 +912,7 @@ void setupLocator() {
       remoteConfigService: locator<RemoteConfigService>(),
       materialBannerStorage: locator<MaterialBannerStorage>(),
       mixpanelService: locator<MixpanelService>(),
+      clevertapService: locator<ClevertapService>(),
     ),
   );
 

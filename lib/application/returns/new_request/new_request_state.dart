@@ -129,18 +129,18 @@ class NewRequestState with _$NewRequestState {
     required List<Usage> reasonList,
   }) =>
       {
-        MixpanelProps.returnId: returnRequestId,
-        MixpanelProps.totalQty: allItemDetails.fold<int>(
+        TrackingProps.returnId: returnRequestId,
+        TrackingProps.totalQty: allItemDetails.fold<int>(
           0,
           (sum, e) => sum + e.returnQuantity.getIntValue,
         ),
-        MixpanelProps.totalPrice: returnTotal,
-        MixpanelProps.isSingle: invoiceDetails.length == 1,
-        MixpanelProps.isBonusIncluded: selectedItems
+        TrackingProps.totalPrice: returnTotal,
+        TrackingProps.isSingle: invoiceDetails.length == 1,
+        TrackingProps.isBonusIncluded: selectedItems
             .map((e) => e.bonusItems)
             .flattened
             .any((bonus) => isIncludeBonus(bonus.uuid)),
-        MixpanelProps.returnReason: allItemDetails
+        TrackingProps.returnReason: allItemDetails
             .map(
               (e) =>
                   reasonList
@@ -151,17 +151,17 @@ class NewRequestState with _$NewRequestState {
                   e.returnReason,
             )
             .toList(),
-        MixpanelProps.productName: allItemDetails
+        TrackingProps.productName: allItemDetails
             .map(
               (e) => getReturnMaterial(e.itemNumber).materialDescription,
             )
             .toList(),
-        MixpanelProps.productManufacturer: allItemDetails
+        TrackingProps.productManufacturer: allItemDetails
             .map(
               (e) => getReturnMaterial(e.itemNumber).principalName.name,
             )
             .toList(),
-        MixpanelProps.unitPrice:
+        TrackingProps.unitPrice:
             allItemDetails.map((e) => e.unitPrice.apiParameterValue).toList(),
       };
 }

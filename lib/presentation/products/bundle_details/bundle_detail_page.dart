@@ -7,8 +7,8 @@ import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/curved_rectangle_widget.dart';
@@ -213,14 +213,14 @@ class _BundleDetails extends StatelessWidget {
                     onTap: () {
                       if (material.isFavourite) {
                         trackMixpanelEvent(
-                          MixpanelEvents.addProductToFavorite,
+                          TrackingEvents.addProductToFavorite,
                           props: {
-                            MixpanelProps.productName: material.name,
-                            MixpanelProps.productCode:
+                            TrackingProps.productName: material.name,
+                            TrackingProps.productCode:
                                 material.materialNumber.displayMatNo,
-                            MixpanelProps.productManufacturer:
+                            TrackingProps.productManufacturer:
                                 material.getManufactured,
-                            MixpanelProps.clickAt:
+                            TrackingProps.clickAt:
                                 RouterUtils.buildRouteTrackingName(
                               context.router.currentPath,
                             ),
@@ -385,11 +385,11 @@ class _BundleOfferDetails extends StatelessWidget {
         .materialInfo;
 
     trackMixpanelEvent(
-      MixpanelEvents.productInfoViewed,
+      TrackingEvents.productInfoViewed,
       props: {
-        MixpanelProps.productName: materialInfo.name,
-        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
-        MixpanelProps.productManufacturer: materialInfo.getManufactured,
+        TrackingProps.productName: materialInfo.name,
+        TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer: materialInfo.getManufactured,
       },
     );
   }

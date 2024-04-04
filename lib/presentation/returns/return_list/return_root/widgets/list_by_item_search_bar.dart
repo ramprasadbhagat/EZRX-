@@ -38,10 +38,10 @@ class _ListByItemSearchBar extends StatelessWidget {
     final bloc = context.read<ReturnListByItemBloc>();
     final appliedFilter = bloc.state.appliedFilter;
     trackMixpanelEvent(
-      MixpanelEvents.returnRequestSearched,
+      TrackingEvents.returnRequestSearched,
       props: {
-        MixpanelProps.keyword: keyword,
-        MixpanelProps.subTabFrom: const ReturnByItemPageRoute().path,
+        TrackingProps.keyword: keyword,
+        TrackingProps.subTabFrom: const ReturnByItemPageRoute().path,
       },
     );
     bloc.add(

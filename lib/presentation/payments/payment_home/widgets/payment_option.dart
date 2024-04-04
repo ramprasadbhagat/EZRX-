@@ -95,9 +95,9 @@ class _PaymentOption extends StatelessWidget {
         key: paymentOptionData.key,
         onTap: () {
           trackMixpanelEvent(
-            MixpanelEvents.paymentQuickAccessClicked,
+            TrackingEvents.paymentQuickAccessClicked,
             props: {
-              MixpanelProps.quickAccess: paymentOptionData.label,
+              TrackingProps.quickAccess: paymentOptionData.label,
             },
           );
           paymentOptionData.onTap.call();

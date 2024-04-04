@@ -8,8 +8,8 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/widgets/new_request_button.dart';
@@ -105,9 +105,9 @@ void main() {
     await tester.tap(iconButton);
     verify(
       () => trackMixpanelEvent(
-        MixpanelEvents.newReturnRequestClicked,
+        TrackingEvents.newReturnRequestClicked,
         props: {
-          MixpanelProps.clickAt: ' Page',
+          TrackingProps.clickAt: ' Page',
         },
       ),
     ).called(1);

@@ -120,12 +120,12 @@ class _FilterElement extends StatelessWidget {
     required ViewByItemFilter filter,
   }) {
     trackMixpanelEvent(
-      MixpanelEvents.orderDetailFiltered,
+      TrackingEvents.orderDetailFiltered,
       props: {
-        MixpanelProps.subTabFrom: RouterUtils.buildRouteTrackingName(
+        TrackingProps.subTabFrom: RouterUtils.buildRouteTrackingName(
           const ViewByItemsPageRoute().path,
         ),
-        MixpanelProps.filterUsed: [
+        TrackingProps.filterUsed: [
           '${filter.orderDateFrom.dateString} - ${filter.orderDateTo.dateString}',
           ...filter.orderStatusList.map((e) => e.getOrDefaultValue('')),
         ],
@@ -144,12 +144,12 @@ class _FilterElement extends StatelessWidget {
     required ViewByOrdersFilter filter,
   }) {
     trackMixpanelEvent(
-      MixpanelEvents.orderDetailFiltered,
+      TrackingEvents.orderDetailFiltered,
       props: {
-        MixpanelProps.subTabFrom: RouterUtils.buildRouteTrackingName(
+        TrackingProps.subTabFrom: RouterUtils.buildRouteTrackingName(
           const ViewByOrdersPageRoute().path,
         ),
-        MixpanelProps.filterUsed: [
+        TrackingProps.filterUsed: [
           '${filter.orderDateFrom.dateString} - ${filter.orderDateTo.dateString}',
         ],
       },

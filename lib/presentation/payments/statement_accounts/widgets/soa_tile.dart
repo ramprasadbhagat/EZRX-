@@ -47,7 +47,7 @@ class _SoaTile extends StatelessWidget {
                     ? null
                     : () {
                         trackMixpanelEvent(
-                          MixpanelEvents.paymentDocumentViewed,
+                          TrackingEvents.paymentDocumentViewed,
                         );
                         context.read<DownloadPaymentAttachmentsBloc>().add(
                               DownloadPaymentAttachmentEvent.downloadSOA(

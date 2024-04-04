@@ -3,8 +3,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,8 +51,8 @@ class _FilterValueListState extends State<FilterValueList> {
                     ? null
                     : (value) {
                         trackMixpanelEvent(
-                          MixpanelEvents.productFilterClicked,
-                          props: {MixpanelProps.filterClicked: 'Favourites'},
+                          TrackingEvents.productFilterClicked,
+                          props: {TrackingProps.filterClicked: 'Favourites'},
                         );
                         context.read<MaterialFilterBloc>().add(
                               MaterialFilterEvent.updateSelectedMaterialFilter(
@@ -99,9 +99,9 @@ class _FilterValueListState extends State<FilterValueList> {
                           ? null
                           : (value) {
                               trackMixpanelEvent(
-                                MixpanelEvents.productFilterClicked,
+                                TrackingEvents.productFilterClicked,
                                 props: {
-                                  MixpanelProps.filterClicked: 'Covid-19',
+                                  TrackingProps.filterClicked: 'Covid-19',
                                 },
                               );
                               context.read<MaterialFilterBloc>().add(

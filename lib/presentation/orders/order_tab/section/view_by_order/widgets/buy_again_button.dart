@@ -19,9 +19,8 @@ class BuyAgainButton extends StatelessWidget {
         if (viewByOrderHistoryItem.orderNumber ==
                 reOrderPermissionOrderNumber &&
             (currentRoutePath == 'main/orders_tab/orders/view_by_orders' ||
-                currentRoutePath == 'orders/view_by_order_details_page'||
-                currentRoutePath == 'orders/cart'
-                )) {
+                currentRoutePath == 'orders/view_by_order_details_page' ||
+                currentRoutePath == 'orders/cart')) {
           context.read<ReOrderPermissionBloc>().add(
                 ReOrderPermissionEvent.resetOrderNumberWillUpsert(
                   orderNumberWillUpsert: OrderNumber(''),
@@ -133,13 +132,24 @@ class BuyAgainButton extends StatelessWidget {
         RouterUtils.buildRouteTrackingName(context.routeData.path);
     for (final item in items) {
       trackMixpanelEvent(
-        MixpanelEvents.buyAgainClicked,
+        TrackingEvents.buyAgainClicked,
         props: {
-          MixpanelProps.productName: item.materialDescription,
-          MixpanelProps.productCode: item.materialNumber.displayMatNo,
-          MixpanelProps.productManufacturer:
+          TrackingProps.productName: item.materialDescription,
+          TrackingProps.productCode: item.materialNumber.displayMatNo,
+          TrackingProps.productManufacturer:
               item.principalData.principalName.name,
-          MixpanelProps.clickAt: currentPage,
+          TrackingProps.clickAt: currentPage,
+        },
+      );
+
+      trackClevertapEvent(
+        TrackingEvents.reorderClicked,
+        props: {
+          TrackingProps.productName: item.materialDescription,
+          TrackingProps.productNumber: item.materialNumber.displayMatNo,
+          TrackingProps.productManufacturer:
+              item.principalData.principalName.name,
+          TrackingProps.clickAt: currentPage,
         },
       );
     }

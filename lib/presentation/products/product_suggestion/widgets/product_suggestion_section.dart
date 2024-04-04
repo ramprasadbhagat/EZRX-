@@ -16,13 +16,13 @@ class _ProductSuggestionSection extends StatelessWidget {
           previous.suggestedProductList.isEmpty,
       listener: (context, state) {
         trackMixpanelEvent(
-          MixpanelEvents.productSearch,
+          TrackingEvents.productSearch,
           props: {
-            MixpanelProps.searchKeyword: state.searchKey.getOrDefaultValue(''),
-            MixpanelProps.searchFrom:
+            TrackingProps.searchKeyword: state.searchKey.getOrDefaultValue(''),
+            TrackingProps.searchFrom:
                 RouterUtils.buildRouteTrackingName(parentRoute),
-            MixpanelProps.searchMethod: 'user typed',
-            MixpanelProps.searchResults: state.suggestedProductList.isEmpty
+            TrackingProps.searchMethod: 'user typed',
+            TrackingProps.searchResults: state.suggestedProductList.isEmpty
                 ? ['no result']
                 : state.suggestedProductList
                     .take(5)

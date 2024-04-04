@@ -5,9 +5,9 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/banner_storage.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -150,9 +150,9 @@ class _CustomTabBarState extends State<_CustomTabBar>
                     _currentPage = widget.routes.routeList[index];
                     tabsRouter.setActiveIndex(index);
                     trackMixpanelEvent(
-                      MixpanelEvents.bottomNavBarClicked,
+                      TrackingEvents.bottomNavBarClicked,
                       props: {
-                        MixpanelProps.navTab: widget.routes[index].label,
+                        TrackingProps.navTab: widget.routes[index].label,
                       },
                     );
                   },

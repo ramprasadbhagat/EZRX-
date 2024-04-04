@@ -3,8 +3,8 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
@@ -193,9 +193,9 @@ class _OrderItemTile extends StatelessWidget {
     OrderHistoryDetailsOrderItem orderItem,
   ) async {
     trackMixpanelEvent(
-      MixpanelEvents.orderDetailViewed,
+      TrackingEvents.orderDetailViewed,
       props: {
-        MixpanelProps.subTabFrom: RouterUtils.buildRouteTrackingName(
+        TrackingProps.subTabFrom: RouterUtils.buildRouteTrackingName(
           context.routeData.path,
         ),
       },

@@ -16,9 +16,9 @@ class _ViewByOrderItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         trackMixpanelEvent(
-          MixpanelEvents.orderDetailViewed,
+          TrackingEvents.orderDetailViewed,
           props: {
-            MixpanelProps.subTabFrom:
+            TrackingProps.subTabFrom:
                 RouterUtils.buildRouteTrackingName(context.routeData.path),
           },
         );

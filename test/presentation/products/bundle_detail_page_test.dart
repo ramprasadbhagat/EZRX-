@@ -23,6 +23,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -39,6 +40,7 @@ import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/mock_other.dart';
 import '../../utils/widget_utils.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -129,6 +131,7 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
+    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<ProductDetailBloc>(() => productDetailMockBloc);
     materialResponseMock = await MaterialListLocalDataSource().getProductList();
     bundle = MaterialInfo.empty().copyWith(
@@ -873,7 +876,7 @@ void main() {
           expect(ediBannerTitle, findsNothing);
           expect(ediBannerSubTitle, findsNothing);
 
-           expect(materialDetailsAddToCartButton, findsOneWidget);
+          expect(materialDetailsAddToCartButton, findsOneWidget);
           await tester.tap(materialDetailsAddToCartButton);
 
           expect(

@@ -7,6 +7,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
@@ -43,7 +45,6 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
@@ -131,6 +132,8 @@ class PoAttachmentBlocMock
 
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
+class ClevertapServiceMock extends Mock implements ClevertapService {}
+
 class MockProductImageBloc
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
@@ -184,6 +187,7 @@ void main() {
     mixpanelServiceMock = MixpanelServiceMock();
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
     locator.registerFactory<MixpanelService>(() => mixpanelServiceMock);
+    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<ReOrderPermissionBloc>(
       () => reOrderPermissionBlocMock,
     );
@@ -835,7 +839,7 @@ void main() {
 
         verify(
           () => mixpanelServiceMock.trackEvent(
-            eventName: MixpanelEvents.buyAgainClicked,
+            eventName: TrackingEvents.buyAgainClicked,
             properties: any(named: 'properties'),
           ),
         ).called(1);
@@ -960,7 +964,7 @@ void main() {
 
         verifyNever(
           () => mixpanelServiceMock.trackEvent(
-            eventName: MixpanelEvents.buyAgainClicked,
+            eventName: TrackingEvents.buyAgainClicked,
             properties: any(named: 'properties'),
           ),
         );

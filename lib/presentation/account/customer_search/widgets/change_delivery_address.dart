@@ -91,9 +91,9 @@ class _ConfirmChangeDeliveryAddressSection extends StatelessWidget {
                     .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
 
                 trackMixpanelEvent(
-                  MixpanelEvents.shipToAddressSave,
+                  TrackingEvents.shipToAddressSave,
                   props: {
-                    MixpanelProps.shipToAddress: shipToInfo.shipToCustomerCode,
+                    TrackingProps.shipToAddress: shipToInfo.shipToCustomerCode,
                   },
                 );
                 context.read<EligibilityBloc>().add(
@@ -106,9 +106,9 @@ class _ConfirmChangeDeliveryAddressSection extends StatelessWidget {
                       const CartEvent.clearCart(),
                     );
                 trackMixpanelEvent(
-                  MixpanelEvents.customerCodeSave,
+                  TrackingEvents.customerCodeSave,
                   props: {
-                    MixpanelProps.customerCode:
+                    TrackingProps.customerCode:
                         customerCodeInfo.customerCodeSoldTo,
                   },
                 );

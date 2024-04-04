@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/infrastructure/banner/dtos/ez_reach_banner_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
@@ -111,6 +112,7 @@ void main() {
   final fakeError = MockException(message: 'fake-exception');
   late MaterialBannerStorage materialBannerStorageMock;
   late MixpanelService mixpanelService;
+  late ClevertapService clevertapService;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -127,6 +129,7 @@ void main() {
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
     mixpanelService = MixpanelServiceMock();
+    clevertapService = ClevertapServiceMock();
     encryption = EncryptionMock();
     orderEncryptionMock = OrderEncryption(
       data: 'fake-data',
@@ -145,6 +148,7 @@ void main() {
       remoteConfigService: remoteConfigService,
       materialBannerStorage: materialBannerStorageMock,
       mixpanelService: mixpanelService,
+      clevertapService: clevertapService,
     );
     final materialListResponse =
         await MaterialListLocalDataSource().getProductList();

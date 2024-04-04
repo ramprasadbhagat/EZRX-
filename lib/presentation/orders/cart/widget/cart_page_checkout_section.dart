@@ -170,10 +170,10 @@ class _CartPageCheckoutButton extends StatelessWidget {
     if (!orderEligibilityState.isCheckoutDisabled) {
       FocusScope.of(context).requestFocus(FocusNode());
       trackMixpanelEvent(
-        MixpanelEvents.checkoutSuccess,
+        TrackingEvents.checkoutSuccess,
         props: {
-          MixpanelProps.grandTotal: cartState.grandTotalHidePriceMaterial,
-          MixpanelProps.totalQty: cartState.totalCartCount,
+          TrackingProps.grandTotal: cartState.grandTotalHidePriceMaterial,
+          TrackingProps.totalQty: cartState.totalCartCount,
         },
       );
       final preOrderItemExist = cartState.allMaterial.preOrderItems.isNotEmpty;
@@ -185,11 +185,11 @@ class _CartPageCheckoutButton extends StatelessWidget {
       }
     } else {
       trackMixpanelEvent(
-        MixpanelEvents.checkoutFailure,
+        TrackingEvents.checkoutFailure,
         props: {
-          MixpanelProps.grandTotal: cartState.grandTotalHidePriceMaterial,
-          MixpanelProps.totalQty: cartState.totalCartCount,
-          MixpanelProps.errorMessage:
+          TrackingProps.grandTotal: cartState.grandTotalHidePriceMaterial,
+          TrackingProps.totalQty: cartState.totalCartCount,
+          TrackingProps.errorMessage:
               orderEligibilityState.orderEligibleTrackingErrorMessage,
         },
       );

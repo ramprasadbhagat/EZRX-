@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -62,9 +62,9 @@ class _QuickAccessMenu extends StatelessWidget {
       onTap: () {
         quickAccessMenuData.onTap.call();
         trackMixpanelEvent(
-          MixpanelEvents.quickAccessClicked,
+          TrackingEvents.quickAccessClicked,
           props: {
-            MixpanelProps.quickAccess: quickAccessMenuData.label,
+            TrackingProps.quickAccess: quickAccessMenuData.label,
           },
         );
       },

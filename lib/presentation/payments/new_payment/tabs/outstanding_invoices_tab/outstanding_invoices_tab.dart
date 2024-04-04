@@ -9,8 +9,8 @@ import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
@@ -222,8 +222,8 @@ class _FilterTune extends StatelessWidget {
             context.read<OutstandingInvoicesBloc>().state.appliedFilter;
         if (newFilter != alreadyAppliedFilter) {
           trackMixpanelEvent(
-            MixpanelEvents.newPaymentFilterUsed,
-            props: {MixpanelProps.filterUsed: newFilter.trackingInfo},
+            TrackingEvents.newPaymentFilterUsed,
+            props: {TrackingProps.filterUsed: newFilter.trackingInfo},
           );
           context.read<OutstandingInvoicesBloc>().add(
                 OutstandingInvoicesEvent.fetch(

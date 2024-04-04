@@ -7,8 +7,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -123,9 +123,9 @@ class _SalesOrgItem extends StatelessWidget {
           ),
           onTap: () {
             trackMixpanelEvent(
-              MixpanelEvents.salesOrgSave,
+              TrackingEvents.salesOrgSave,
               props: {
-                MixpanelProps.salesOrg:
+                TrackingProps.salesOrg:
                     salesOrganisation.salesOrg.getOrDefaultValue(''),
               },
             );

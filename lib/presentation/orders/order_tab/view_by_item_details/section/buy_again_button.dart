@@ -68,16 +68,29 @@ class _BuyAgainButton extends StatelessWidget {
     final item = viewByItemDetailState.orderHistoryItem;
 
     trackMixpanelEvent(
-      MixpanelEvents.buyAgainClicked,
+      TrackingEvents.buyAgainClicked,
       props: {
-        MixpanelProps.productName: item.materialDescription,
-        MixpanelProps.productCode: item.materialNumber.displayMatNo,
-        MixpanelProps.productManufacturer:
+        TrackingProps.productName: item.materialDescription,
+        TrackingProps.productCode: item.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer:
             item.principalData.principalName.getOrDefaultValue(''),
-        MixpanelProps.clickAt:
+        TrackingProps.clickAt:
             RouterUtils.buildRouteTrackingName(context.routeData.path),
       },
     );
+
+    trackClevertapEvent(
+      TrackingEvents.reorderClicked,
+      props: {
+        TrackingProps.productName: item.materialDescription,
+        TrackingProps.productNumber: item.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer:
+            item.principalData.principalName.getOrDefaultValue(''),
+        TrackingProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.routeData.path),
+      },
+    );
+
     context.read<ReOrderPermissionBloc>().add(
           ReOrderPermissionEvent.fetchItem(
             orderHistoryDetail: viewByItemDetailState.orderHistory,

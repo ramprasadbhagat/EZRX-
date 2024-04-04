@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -27,6 +28,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../common_mock_data/mock_other.dart';
 import '../../utils/widget_utils.dart';
 
 class MockMixPanelService extends Mock implements MixpanelService {}
@@ -76,6 +78,7 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton<MixpanelService>(() => MockMixPanelService());
+    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerLazySingleton(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
     materialSearchResults =

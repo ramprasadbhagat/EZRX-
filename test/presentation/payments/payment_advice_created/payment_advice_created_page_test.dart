@@ -20,9 +20,10 @@ import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
@@ -39,6 +40,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -91,6 +93,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouterMock());
     locator.registerSingleton<MixpanelService>(MockMixpanelService());
+    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     registerFallbackValue((Route route) {
       return route.settings.name == PaymentPageRoute.name;
     });
@@ -781,12 +784,12 @@ void main() {
             .called(1);
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.paymentSuccess,
+            TrackingEvents.successfulPayment,
             props: {
-              MixpanelProps.paymentAmount: 0,
-              MixpanelProps.paymentMethod: '',
-              MixpanelProps.paymentDocumentCount: 0,
-              MixpanelProps.paymentAdviceId: '',
+              TrackingProps.paymentAmount: 0,
+              TrackingProps.paymentMethod: '',
+              TrackingProps.paymentDocumentCount: 0,
+              TrackingProps.paymentAdviceId: '',
             },
           ),
         ).called(1);
@@ -818,12 +821,12 @@ void main() {
             .called(1);
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.paymentFailure,
+            TrackingEvents.paymentFailure,
             props: {
-              MixpanelProps.errorMessage: 'Payment failed in webview',
-              MixpanelProps.paymentMethod: '',
-              MixpanelProps.paymentDocumentCount: 0,
-              MixpanelProps.paymentAdviceId: '',
+              TrackingProps.errorMessage: 'Payment failed in webview',
+              TrackingProps.paymentMethod: '',
+              TrackingProps.paymentDocumentCount: 0,
+              TrackingProps.paymentAdviceId: '',
             },
           ),
         ).called(1);

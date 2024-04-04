@@ -4,8 +4,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
@@ -218,11 +218,11 @@ class _CarouselBannerState extends State<CarouselBanner> {
   }) {
     final banner = context.read<BannerBloc>().state.banner[index];
     trackMixpanelEvent(
-      MixpanelEvents.bannerImpression,
+      TrackingEvents.bannerImpression,
       props: {
-        MixpanelProps.bannerId: banner.id,
-        MixpanelProps.bannerTitle: banner.title,
-        MixpanelProps.bannerOrder: index + 1,
+        TrackingProps.bannerId: banner.id,
+        TrackingProps.bannerTitle: banner.title,
+        TrackingProps.bannerOrder: index + 1,
       },
     );
   }

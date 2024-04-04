@@ -17,8 +17,8 @@ import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -470,10 +470,10 @@ void main() {
       ).called(1);
       verify(
         () => trackMixpanelEvent(
-          MixpanelEvents.newReturnRequestStep,
+          TrackingEvents.newReturnRequestStep,
           props: <String, dynamic>{
-            MixpanelProps.step: 2,
-            MixpanelProps.stepName: 'Fill in return details',
+            TrackingProps.step: 2,
+            TrackingProps.stepName: 'Fill in return details',
           },
         ),
       ).called(1);
@@ -534,10 +534,10 @@ void main() {
       await tester.pumpAndSettle();
       verify(
         () => trackMixpanelEvent(
-          MixpanelEvents.newReturnRequestStep,
+          TrackingEvents.newReturnRequestStep,
           props: <String, dynamic>{
-            MixpanelProps.step: 3,
-            MixpanelProps.stepName: 'Review return details',
+            TrackingProps.step: 3,
+            TrackingProps.stepName: 'Review return details',
           },
         ),
       ).called(1);
@@ -610,9 +610,9 @@ void main() {
       await tester.pumpAndSettle();
       verify(
         () => trackMixpanelEvent(
-          MixpanelEvents.returnRequestFailure,
+          TrackingEvents.returnRequestFailure,
           props: {
-            MixpanelProps.errorMessage: 'fake_error',
+            TrackingProps.errorMessage: 'fake_error',
           },
         ),
       ).called(1);
@@ -676,17 +676,17 @@ void main() {
       await tester.pumpAndSettle();
       verify(
         () => trackMixpanelEvent(
-          MixpanelEvents.returnRequestSuccess,
+          TrackingEvents.returnRequestSuccess,
           props: {
-            MixpanelProps.returnId: '',
-            MixpanelProps.totalQty: 0,
-            MixpanelProps.totalPrice: 0.0,
-            MixpanelProps.isSingle: false,
-            MixpanelProps.isBonusIncluded: false,
-            MixpanelProps.returnReason: [],
-            MixpanelProps.productName: [],
-            MixpanelProps.productManufacturer: [],
-            MixpanelProps.unitPrice: [],
+            TrackingProps.returnId: '',
+            TrackingProps.totalQty: 0,
+            TrackingProps.totalPrice: 0.0,
+            TrackingProps.isSingle: false,
+            TrackingProps.isBonusIncluded: false,
+            TrackingProps.returnReason: [],
+            TrackingProps.productName: [],
+            TrackingProps.productManufacturer: [],
+            TrackingProps.unitPrice: [],
           },
         ),
       ).called(1);

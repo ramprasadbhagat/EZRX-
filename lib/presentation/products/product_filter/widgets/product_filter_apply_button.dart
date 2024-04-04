@@ -13,7 +13,7 @@ class _ProductFilterApplyButton extends StatelessWidget {
         final selectedFilter =
             context.read<MaterialFilterBloc>().state.materialFilter;
         trackMixpanelEvent(
-          MixpanelEvents.productFilterApplied,
+          TrackingEvents.productFilterApplied,
           props: selectedFilter.trackingInfo,
         );
         Navigator.of(context).pop(selectedFilter);

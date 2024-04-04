@@ -11,9 +11,10 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
@@ -359,30 +360,49 @@ class _BundleSheetFooter extends StatelessWidget {
     EZReachBanner? banner,
   }) {
     final bundle = state.bundle;
-    final props = <String, dynamic>{
-      MixpanelProps.productName: bundle.name,
-      MixpanelProps.productCode: bundle.materialNumber.getOrDefaultValue(''),
-      MixpanelProps.productManufacturer: bundle.manufactured,
-      MixpanelProps.productTotalPrice:
+    final mixpanelProps = <String, dynamic>{
+      TrackingProps.productName: bundle.name,
+      TrackingProps.productCode: bundle.materialNumber.getOrDefaultValue(''),
+      TrackingProps.productManufacturer: bundle.manufactured,
+      TrackingProps.productTotalPrice:
           state.bundleOffer.rate * state.totalCount,
-      MixpanelProps.productQty: state.totalCount,
-      MixpanelProps.clickAt:
+      TrackingProps.productQty: state.totalCount,
+      TrackingProps.clickAt:
           RouterUtils.buildRouteTrackingName(context.router.currentPath),
-      MixpanelProps.bannerId: banner?.id ?? '',
+      TrackingProps.bannerId: banner?.id ?? '',
     };
 
-    trackMixpanelEvent(MixpanelEvents.addToCartSuccess, props: props);
+    final clevertapProps = <String, dynamic>{
+      TrackingProps.productName: bundle.name,
+      TrackingProps.productNumber: bundle.materialNumber.getOrDefaultValue(''),
+      TrackingProps.productManufacturer: bundle.manufactured,
+      TrackingProps.productTotalPrice:
+          state.bundleOffer.rate * state.totalCount,
+      TrackingProps.productQty: state.totalCount,
+      TrackingProps.clickAt:
+          RouterUtils.buildRouteTrackingName(context.router.currentPath),
+      TrackingProps.bannerId: banner?.id ?? '',
+    };
+
+    trackMixpanelEvent(
+      TrackingEvents.addProductToCartSuccess,
+      props: mixpanelProps,
+    );
+    trackClevertapEvent(
+      TrackingEvents.addProductToCartSuccess,
+      props: clevertapProps,
+    );
   }
 
   void _trackAddToCartFailure(BuildContext context, ApiFailure failure) =>
       trackMixpanelEvent(
-        MixpanelEvents.addToCartFailed,
+        TrackingEvents.addToCartFailed,
         props: {
-          MixpanelProps.errorMessage: context.tr(
+          TrackingProps.errorMessage: context.tr(
             failure.failureMessage.message,
             namedArgs: failure.failureMessage.arguments,
           ),
-          MixpanelProps.viewFrom:
+          TrackingProps.viewFrom:
               RouterUtils.buildRouteTrackingName(context.router.currentPath),
         },
       );

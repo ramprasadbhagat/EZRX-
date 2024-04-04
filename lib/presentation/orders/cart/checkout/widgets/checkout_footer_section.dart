@@ -113,9 +113,9 @@ class _CheckoutFooterSection extends StatelessWidget {
                       (either) => either.fold(
                         (failure) {
                           trackMixpanelEvent(
-                            MixpanelEvents.placeOrderFailure,
+                            TrackingEvents.placeOrderFailure,
                             props: {
-                              MixpanelProps.errorMessage: context.tr(
+                              TrackingProps.errorMessage: context.tr(
                                 failure.failureMessage.message,
                                 namedArgs: failure.failureMessage.arguments,
                               ),

@@ -10,6 +10,8 @@ import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
@@ -17,8 +19,6 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_sto
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -226,9 +226,9 @@ void main() {
           expect(result.isRight(), true);
           verify(
             () => mixpanelService.trackEvent(
-              eventName: MixpanelEvents.loginSuccess,
+              eventName: TrackingEvents.successfulLogin,
               properties: {
-                MixpanelProps.loginMethod: 'by_username',
+                TrackingProps.loginMethod: 'by_username',
               },
             ),
           ).called(1);
@@ -259,11 +259,11 @@ void main() {
           expect(result.isLeft(), true);
           verify(
             () => mixpanelService.trackEvent(
-              eventName: MixpanelEvents.loginFailure,
+              eventName: TrackingEvents.loginFailure,
               properties: {
-                MixpanelProps.username: fakeUserName.getValue(),
-                MixpanelProps.errorMessage: serverException.message,
-                MixpanelProps.loginMethod: 'by_username',
+                TrackingProps.username: fakeUserName.getValue(),
+                TrackingProps.errorMessage: serverException.message,
+                TrackingProps.loginMethod: 'by_username',
               },
             ),
           ).called(1);
@@ -620,9 +620,9 @@ void main() {
         final result = await repository.loginWithOkta();
         verify(
           () => mixpanelService.trackEvent(
-            eventName: MixpanelEvents.loginSuccess,
+            eventName: TrackingEvents.successfulLogin,
             properties: {
-              MixpanelProps.loginMethod: 'sso',
+              TrackingProps.loginMethod: 'sso',
             },
           ),
         ).called(1);
@@ -640,10 +640,10 @@ void main() {
         expect(result.isLeft(), true);
         verify(
           () => mixpanelService.trackEvent(
-            eventName: MixpanelEvents.loginFailure,
+            eventName: TrackingEvents.loginFailure,
             properties: {
-              MixpanelProps.loginMethod: 'sso',
-              MixpanelProps.errorMessage: fakeError.toString(),
+              TrackingProps.loginMethod: 'sso',
+              TrackingProps.errorMessage: fakeError.toString(),
             },
           ),
         ).called(1);

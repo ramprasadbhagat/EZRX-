@@ -7,8 +7,8 @@ import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +28,9 @@ class NewRequestButton extends StatelessWidget {
       label: 'New request'.tr(),
       onPress: () {
         trackMixpanelEvent(
-          MixpanelEvents.newReturnRequestClicked,
+          TrackingEvents.newReturnRequestClicked,
           props: {
-            MixpanelProps.clickAt:
+            TrackingProps.clickAt:
                 RouterUtils.buildRouteTrackingName(context.routeData.path),
           },
         );

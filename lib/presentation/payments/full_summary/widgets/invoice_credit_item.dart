@@ -22,7 +22,7 @@ class _InvoiceCreditItem extends StatelessWidget {
             ),
             child: ListTile(
               onTap: () {
-                trackMixpanelEvent(MixpanelEvents.paymentDocumentViewed);
+                trackMixpanelEvent(TrackingEvents.paymentDocumentViewed);
                 context.read<CreditAndInvoiceDetailsBloc>().add(
                       CreditAndInvoiceDetailsEvent.fetch(
                         creditAndInvoiceItem: data,

@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
@@ -1363,7 +1363,7 @@ void main() {
           await tester.pump();
           verify(
             () => mixpanelService.trackEvent(
-              eventName: MixpanelEvents.checkoutFailure,
+              eventName: TrackingEvents.checkoutFailure,
               properties: any(named: 'properties'),
             ),
           ).called(1);
@@ -2541,7 +2541,7 @@ void main() {
         await tester.pump();
         verify(
           () => mixpanelService.trackEvent(
-            eventName: MixpanelEvents.checkoutFailure,
+            eventName: TrackingEvents.checkoutFailure,
             properties: any(named: 'properties'),
           ),
         ).called(1);

@@ -77,15 +77,15 @@ class _PDFAdviceSection extends StatelessWidget {
           onError: (_, error) {
             if (eligibilityState.salesOrganisation.salesOrg.isSg) {
               trackMixpanelEvent(
-                MixpanelEvents.paymentFailure,
+                TrackingEvents.paymentFailure,
                 props: {
-                  MixpanelProps.errorMessage: 'Generating QR failed',
-                  MixpanelProps.paymentMethod: newPaymentState
+                  TrackingProps.errorMessage: 'Generating QR failed',
+                  TrackingProps.paymentMethod: newPaymentState
                       .selectedPaymentMethod.paymentMethod
                       .getOrDefaultValue(''),
-                  MixpanelProps.paymentDocumentCount:
+                  TrackingProps.paymentDocumentCount:
                       newPaymentState.allSelectedItems.length,
-                  MixpanelProps.paymentAdviceId:
+                  TrackingProps.paymentAdviceId:
                       newPaymentState.paymentInvoiceInfoPdf.zzAdvice,
                 },
               );
@@ -104,16 +104,25 @@ class _PDFAdviceSection extends StatelessWidget {
 
             if (eligibilityState.salesOrganisation.salesOrg.isSg) {
               trackMixpanelEvent(
-                MixpanelEvents.paymentSuccess,
+                TrackingEvents.successfulPayment,
                 props: {
-                  MixpanelProps.paymentAmount: newPaymentState.amountTotal,
-                  MixpanelProps.paymentMethod: newPaymentState
+                  TrackingProps.paymentAmount: newPaymentState.amountTotal,
+                  TrackingProps.paymentMethod: newPaymentState
                       .selectedPaymentMethod.paymentMethod
                       .getOrDefaultValue(''),
-                  MixpanelProps.paymentDocumentCount:
+                  TrackingProps.paymentDocumentCount:
                       newPaymentState.allSelectedItems.length,
-                  MixpanelProps.paymentAdviceId:
+                  TrackingProps.paymentAdviceId:
                       newPaymentState.paymentInvoiceInfoPdf.zzAdvice,
+                },
+              );
+
+              trackClevertapEvent(
+                TrackingEvents.successfulPayment,
+                props: {
+                  TrackingProps.paymentMethod: newPaymentState
+                      .selectedPaymentMethod.paymentMethod
+                      .getOrDefaultValue(''),
                 },
               );
             }

@@ -17,18 +17,19 @@ class _SuggestedProductTile extends StatelessWidget {
           key: WidgetKeys.searchedProduct(product.materialNumber.displayMatNo),
           onTap: () {
             trackMixpanelEvent(
-              MixpanelEvents.productSearch,
+              TrackingEvents.productSearch,
               props: {
-                MixpanelProps.searchKeyword: context
+                TrackingProps.searchKeyword: context
                     .read<ProductSearchBloc>()
                     .state
                     .searchKey
                     .getOrDefaultValue(''),
-                MixpanelProps.searchFrom:
+                TrackingProps.searchFrom:
                     RouterUtils.buildRouteTrackingName(parentRoute),
-                MixpanelProps.searchMethod: 'drop down list',
+                TrackingProps.searchMethod: 'drop down list',
               },
             );
+
             product.type.typeMaterial
                 ? context.router
                     .push(ProductDetailsPageRoute(materialInfo: product))

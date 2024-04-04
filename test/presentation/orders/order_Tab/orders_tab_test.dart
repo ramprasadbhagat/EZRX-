@@ -16,7 +16,7 @@ import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -362,7 +362,7 @@ void main() {
 
       verifyNever(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.orderDetailFiltered,
+          eventName: TrackingEvents.orderDetailFiltered,
           properties: any(named: 'properties'),
         ),
       );
@@ -421,7 +421,7 @@ void main() {
 
       verify(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.orderDetailFiltered,
+          eventName: TrackingEvents.orderDetailFiltered,
           properties: any(named: 'properties'),
         ),
       );
@@ -459,7 +459,7 @@ void main() {
 
       verify(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.orderDetailFiltered,
+          eventName: TrackingEvents.orderDetailFiltered,
           properties: any(named: 'properties'),
         ),
       );
@@ -494,7 +494,7 @@ void main() {
 
       verify(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.orderDetailFiltered,
+          eventName: TrackingEvents.orderDetailFiltered,
           properties: any(named: 'properties'),
         ),
       );
@@ -528,7 +528,7 @@ void main() {
 
       verify(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.orderDetailFiltered,
+          eventName: TrackingEvents.orderDetailFiltered,
           properties: any(named: 'properties'),
         ),
       );

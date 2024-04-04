@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/routes/overlay_router.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
@@ -9,10 +10,12 @@ import 'package:flutter/material.dart';
 
 class RouterObserver extends AutoRouterObserver {
   final FirebaseAnalyticsService firebaseAnalyticsService;
+  final ClevertapService clevertapService;
   final MixpanelService mixpanelService;
   RouterObserver({
     required this.firebaseAnalyticsService,
     required this.mixpanelService,
+    required this.clevertapService,
   });
 
   @override
@@ -22,7 +25,7 @@ class RouterObserver extends AutoRouterObserver {
       screenClass: 'Route',
       screenName: route.settings.name,
     );
-    _trackMixpanelEvent(route.navigator?.context.router.currentPath ?? '');
+    _trackEvent(route.navigator?.context.router.currentPath ?? '');
   }
 
   @override
@@ -30,7 +33,7 @@ class RouterObserver extends AutoRouterObserver {
     if (route is OverlayRouter || route is PopupRoute) return;
     final routeSetting = previousRoute?.settings;
     if (routeSetting is AutoRoutePage) {
-      _trackMixpanelEvent(routeSetting.routeData.path);
+      _trackEvent(routeSetting.routeData.path);
     }
   }
 
@@ -48,16 +51,21 @@ class RouterObserver extends AutoRouterObserver {
       screenClass: 'TabPageRoute',
       screenName: route.name,
     );
-    _trackMixpanelEvent(route.path);
+    _trackEvent(route.path);
   }
 
-  void _trackMixpanelEvent(String rawRoute) {
+  void _trackEvent(String rawRoute) {
     if (rawRoute.isNotEmpty) {
       final pageName = RouterUtils.buildRouteTrackingName(rawRoute);
 
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.pageViewVisited,
-        properties: {MixpanelProps.pageViewName: _getPageName(pageName)},
+        eventName: TrackingEvents.pageViewVisited,
+        properties: {TrackingProps.pageView: _getPageName(pageName)},
+      );
+
+      clevertapService.trackEvent(
+        eventName: TrackingEvents.pageViewVisited,
+        properties: {TrackingProps.pageView: _getPageName(pageName)},
       );
     }
   }

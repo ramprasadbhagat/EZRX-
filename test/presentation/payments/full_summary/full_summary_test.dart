@@ -13,7 +13,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -329,7 +329,7 @@ void main() {
 
       verify(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.paymentDocumentViewed,
+          eventName: TrackingEvents.paymentDocumentViewed,
           properties: null,
         ),
       ).called(1);
@@ -457,7 +457,7 @@ void main() {
 
       verify(
         () => mixpanelServiceMock.trackEvent(
-          eventName: MixpanelEvents.paymentDocumentViewed,
+          eventName: TrackingEvents.paymentDocumentViewed,
           properties: null,
         ),
       ).called(1);

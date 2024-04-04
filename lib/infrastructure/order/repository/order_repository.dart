@@ -20,12 +20,13 @@ import 'package:ezrxmobile/domain/order/entities/submit_order_customer.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
@@ -49,6 +50,7 @@ class OrderRepository implements IOrderRepository {
   final MaterialBannerStorage materialBannerStorage;
   final RemoteConfigService remoteConfigService;
   final MixpanelService mixpanelService;
+  final ClevertapService clevertapService;
 
   OrderRepository({
     required this.config,
@@ -63,6 +65,7 @@ class OrderRepository implements IOrderRepository {
     required this.remoteConfigService,
     required this.materialBannerStorage,
     required this.mixpanelService,
+    required this.clevertapService,
   });
 
   @override
@@ -218,42 +221,84 @@ class OrderRepository implements IOrderRepository {
     OrderHistoryDetails orderDetail,
     bool isIDMarket,
   ) async {
-    final orderNumber = orderDetail.orderNumber.getOrDefaultValue('');
+    final orderQueueNumber = orderDetail.orderNumber.getOrDefaultValue('');
+
     mixpanelService.trackEvent(
-      eventName: MixpanelEvents.placeOrderSuccess,
+      eventName: TrackingEvents.placeOrderSuccessOriginal,
       properties: {
-        MixpanelProps.orderNumber: orderNumber,
-        MixpanelProps.grandTotal: orderDetail.totalValue,
-        MixpanelProps.totalQty: orderDetail.orderItemsCount,
-        MixpanelProps.requestDeliveryDate:
+        TrackingProps.orderNumber: orderQueueNumber,
+        TrackingProps.grandTotal: orderDetail.totalValue,
+        TrackingProps.totalQty: orderDetail.orderItemsCount,
+        TrackingProps.requestDeliveryDate:
             orderDetail.requestedDeliveryDate.dateOrNaString,
       },
     );
 
+    clevertapService.trackEvent(
+      eventName: TrackingEvents.placeOrderSuccessOriginal,
+      properties: {
+        if (orderDetail.processingStatus.isInQueue)
+          TrackingProps.queueNumber: orderQueueNumber,
+        TrackingProps.orderNumber: orderDetail.processingStatus.isInQueue
+            ? 'no order number'
+            : orderQueueNumber,
+        TrackingProps.grandTotal: orderDetail.totalValue,
+        TrackingProps.lineNumber:
+            orderDetail.orderHistoryDetailsOrderItem.length,
+      },
+    );
+
     for (final item in orderDetail.orderHistoryDetailsOrderItem) {
+      final isOffer = item.showOfferTag;
+      final productTag = item.productTag;
+
+      final tags = <String>[];
+      if (isOffer) tags.add('On Offer');
+      if (productTag.getOrDefaultValue('').isNotEmpty) {
+        tags.add(productTag.displayStatusText);
+      }
       final bannerData = await materialBannerStorage.get(
         materialNumber: item.productType.typeBundle
             ? '${MaterialNumber(item.parentId).displayMatNo}_${item.materialNumber.displayMatNo}'
             : item.materialNumber.displayMatNo,
       );
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.successOrderItem,
+        eventName: TrackingEvents.successfulOrderItem,
         properties: {
-          MixpanelProps.orderNumber: orderNumber,
-          MixpanelProps.productName: item.materialDescription,
-          MixpanelProps.productCode: item.materialNumber.displayMatNo,
-          MixpanelProps.productQty: item.qty,
-          MixpanelProps.grandTotal: item.itemTotalPrice(
+          TrackingProps.orderNumber: orderQueueNumber,
+          TrackingProps.productName: item.materialDescription,
+          TrackingProps.productCode: item.materialNumber.displayMatNo,
+          TrackingProps.productQty: item.qty,
+          TrackingProps.grandTotal: item.itemTotalPrice(
             isIDMarket,
           ),
-          MixpanelProps.unitPrice: item.itemUnitPrice(
+          TrackingProps.unitPrice: item.itemUnitPrice(
             isIDMarket,
           ),
-          MixpanelProps.bannerId: bannerData.bannerId,
+          TrackingProps.bannerId: bannerData.bannerId,
+          TrackingProps.tag: tags.join(', '),
         },
       );
 
-      //TODO: Revisit later to implement is_tender, is_reorder, tag and added_from for MixpanelProps here
+      clevertapService.trackEvent(
+        eventName: TrackingEvents.successfulOrderItem,
+        properties: {
+          TrackingProps.orderNumber: orderQueueNumber,
+          TrackingProps.productName: item.materialDescription,
+          TrackingProps.productNumber: item.materialNumber.displayMatNo,
+          TrackingProps.productQty: item.qty,
+          TrackingProps.grandTotal: item.itemTotalPrice(
+            isIDMarket,
+          ),
+          TrackingProps.unitPrice: item.itemUnitPrice(
+            isIDMarket,
+          ),
+          TrackingProps.productManufacturer:
+              item.principalData.principalName.name,
+          TrackingProps.bannerId: bannerData.bannerId,
+          TrackingProps.tag: tags.join(', '),
+        },
+      );
     }
   }
 

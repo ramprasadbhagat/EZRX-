@@ -1,21 +1,43 @@
-class MixpanelProps {
+class TrackingProps {
+  //===========================================================
+  //  Common track properties
+  //============================================================
+  static String loginMethod = 'login_method';
+  static String pageView = 'pageview';
+  static String searchKeyword = 'search_keyword';
+  static String searchFrom = 'search_from';
+  static String productTotalPrice = 'product_total_price';
+  static String productQty = 'product_qty';
+  static String productNumber = 'product_number';
+  static String productName = 'product_name';
+  static String productManufacturer = 'product_manufacturer';
+  static String clickAt = 'click_at';
+  static String tag = 'tag';
+  static String fromBanner = 'from_banner';
+  static String bannerId = 'banner_id';
+  static String bannerTitle = 'banner_title';
+  static String isOffer = 'is_offer';
+  static String isBundle = 'is_bundle';
+  static String queueNumber = 'queue_number';
+  static String orderNumber = 'order_number';
+  static String grandTotal = 'grand_total';
+  static String lineNumber = 'line_number';
+  static String unitPrice = 'unit_price';
+  static String paymentMethod = 'payment_method';
+  //===========================================================
+  //  Only Mixpanel track properties
+  //===========================================================
   static String platform = 'platform';
   static String market = 'market';
   static String currency = 'currency';
-  static String loginMethod = 'login_method';
   static String errorMessage = 'error_msg';
   static String bannerClicked = 'banner_clicked';
-  static String bannerId = 'banner_id';
-  static String bannerTitle = 'banner_title';
   static String bannerOrder = 'banner_order';
   static String bannerRedirected = 'redirected';
   static String bannerType = 'banner_type';
   static String shipToAddress = 'ship_to_address';
   static String salesOrg = 'salesorg';
   static String customerCode = 'customer_code';
-  static String searchKeyword = 'search_keyword';
-  static String searchFrom = 'search_from';
-  static String pageViewName = 'pageview';
   static String username = 'username';
   static String userRole = 'user_role';
   static String firstName = 'first_name';
@@ -24,15 +46,7 @@ class MixpanelProps {
   static String scanMethod = 'scan_method';
   static String quickAccess = 'quick_access';
   static String navTab = 'nav_tab';
-  static String clickAt = 'click_at';
-  static String isBundle = 'is_bundle';
-  static String isOffer = 'is_offer';
-  static String tag = 'tag';
-  static String productName = 'product_name';
   static String productCode = 'product_code';
-  static String productManufacturer = 'product_manufacturer';
-  static String productTotalPrice = 'product_total_price';
-  static String productQty = 'product_qty';
   static String section = 'section';
   static String viewFrom = 'view_from';
   static String filterClicked = 'filter_clicked';
@@ -42,12 +56,8 @@ class MixpanelProps {
   static String filterCountryOfOrigin = 'country_or_origin';
   static String filterUsed = 'filter_used';
   static String totalQty = 'total_qty';
-  static String grandTotal = 'grand_total';
-  static String unitPrice = 'unit_price';
   static String subTabFrom = 'subtab_from';
   static String keyword = 'keyword';
-  static String orderNumber = 'order_number';
-  static String queueNumber = 'queue_number';
   static String requestDeliveryDate = 'request_delivery_date';
   static String step = 'step';
   static String stepName = 'step_name';
@@ -57,7 +67,6 @@ class MixpanelProps {
   static String returnId = 'return_request_id';
   static String isBonusIncluded = 'is_bonus_included';
   static String paymentAmount = 'payment_amount';
-  static String paymentMethod = 'payment_method';
   static String paymentAdviceId = 'payment_advice_id';
   static String paymentDocumentCount = 'document_count';
   static String paymentGatewayRedirectUrl = 'payment_gateway_redirect_url';

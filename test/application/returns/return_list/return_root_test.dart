@@ -19,8 +19,8 @@ import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -290,10 +290,10 @@ void main() {
         );
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.returnRequestSearched,
+            TrackingEvents.returnRequestSearched,
             props: {
-              MixpanelProps.keyword: 'du',
-              MixpanelProps.subTabFrom: const ReturnByItemPageRoute().path,
+              TrackingProps.keyword: 'du',
+              TrackingProps.subTabFrom: const ReturnByItemPageRoute().path,
             },
           ),
         ).called(1);
@@ -310,10 +310,10 @@ void main() {
         await tester.pumpAndSettle();
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.returnRequestSearched,
+            TrackingEvents.returnRequestSearched,
             props: {
-              MixpanelProps.keyword: 'dummy',
-              MixpanelProps.subTabFrom: const ReturnByItemPageRoute().path,
+              TrackingProps.keyword: 'dummy',
+              TrackingProps.subTabFrom: const ReturnByItemPageRoute().path,
             },
           ),
         ).called(1);
@@ -331,10 +331,10 @@ void main() {
         await tester.pumpAndSettle();
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.returnRequestSearched,
+            TrackingEvents.returnRequestSearched,
             props: {
-              MixpanelProps.keyword: '',
-              MixpanelProps.subTabFrom: const ReturnByItemPageRoute().path,
+              TrackingProps.keyword: '',
+              TrackingProps.subTabFrom: const ReturnByItemPageRoute().path,
             },
           ),
         ).called(1);
@@ -370,10 +370,10 @@ void main() {
         await tester.pumpAndSettle();
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.returnRequestSearched,
+            TrackingEvents.returnRequestSearched,
             props: {
-              MixpanelProps.keyword: 'dummy',
-              MixpanelProps.subTabFrom: const ReturnByRequestPageRoute().path,
+              TrackingProps.keyword: 'dummy',
+              TrackingProps.subTabFrom: const ReturnByRequestPageRoute().path,
             },
           ),
         ).called(1);
@@ -391,10 +391,10 @@ void main() {
         await tester.pumpAndSettle();
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.returnRequestSearched,
+            TrackingEvents.returnRequestSearched,
             props: {
-              MixpanelProps.keyword: '',
-              MixpanelProps.subTabFrom: const ReturnByRequestPageRoute().path,
+              TrackingProps.keyword: '',
+              TrackingProps.subTabFrom: const ReturnByRequestPageRoute().path,
             },
           ),
         ).called(1);
@@ -442,12 +442,12 @@ void main() {
         await tester.pumpAndSettle();
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.returnRequestFiltered,
+            TrackingEvents.returnRequestFiltered,
             props: {
-              MixpanelProps.subTabFrom: RouterUtils.buildRouteTrackingName(
+              TrackingProps.subTabFrom: RouterUtils.buildRouteTrackingName(
                 const ReturnByItemPageRoute().path,
               ),
-              MixpanelProps.filterUsed: [],
+              TrackingProps.filterUsed: [],
             },
           ),
         ).called(1);
@@ -500,12 +500,12 @@ void main() {
         await tester.pumpAndSettle();
         verify(
           () => trackMixpanelEvent(
-            MixpanelEvents.returnRequestFiltered,
+            TrackingEvents.returnRequestFiltered,
             props: {
-              MixpanelProps.subTabFrom: RouterUtils.buildRouteTrackingName(
+              TrackingProps.subTabFrom: RouterUtils.buildRouteTrackingName(
                 const ReturnByRequestPageRoute().path,
               ),
-              MixpanelProps.filterUsed: [],
+              TrackingProps.filterUsed: [],
             },
           ),
         ).called(1);

@@ -11,9 +11,10 @@ import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dar
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
@@ -107,32 +108,40 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
                     ),
                   );
               trackMixpanelEvent(
-                MixpanelEvents.paymentSuccess,
+                TrackingEvents.successfulPayment,
                 props: {
-                  MixpanelProps.paymentAmount: state.amountTotal,
-                  MixpanelProps.paymentMethod: state
+                  TrackingProps.paymentAmount: state.amountTotal,
+                  TrackingProps.paymentMethod: state
                       .selectedPaymentMethod.paymentMethod
                       .getOrDefaultValue(''),
-                  MixpanelProps.paymentDocumentCount:
+                  TrackingProps.paymentDocumentCount:
                       state.allSelectedItems.length,
-                  MixpanelProps.paymentAdviceId: state.createVirtualAccount.id,
+                  TrackingProps.paymentAdviceId: state.createVirtualAccount.id,
+                },
+              );
+              trackClevertapEvent(
+                TrackingEvents.successfulPayment,
+                props: {
+                  TrackingProps.paymentMethod: state
+                      .selectedPaymentMethod.paymentMethod
+                      .getOrDefaultValue(''),
                 },
               );
             },
             (either) => either.fold(
               (failure) {
                 trackMixpanelEvent(
-                  MixpanelEvents.paymentFailure,
+                  TrackingEvents.paymentFailure,
                   props: {
-                    MixpanelProps.errorMessage:
+                    TrackingProps.errorMessage:
                         'Creating Virtual Account for payment advise failure with error message: ${context.tr(
                       failure.failureMessage.message,
                       namedArgs: failure.failureMessage.arguments,
                     )}',
-                    MixpanelProps.paymentMethod: state
+                    TrackingProps.paymentMethod: state
                         .selectedPaymentMethod.paymentMethod
                         .getOrDefaultValue(''),
-                    MixpanelProps.paymentDocumentCount:
+                    TrackingProps.paymentDocumentCount:
                         state.allSelectedItems.length,
                   },
                 );
@@ -146,9 +155,9 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
           state.failureOrSuccessOption.fold(
             () {
               trackMixpanelEvent(
-                MixpanelEvents.generatePaymentAdviceSuccess,
+                TrackingEvents.generatePaymentAdviceSuccess,
                 props: {
-                  MixpanelProps.paymentMethod: state
+                  TrackingProps.paymentMethod: state
                       .selectedPaymentMethod.paymentMethod
                       .getOrDefaultValue(''),
                 },
@@ -157,27 +166,27 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
             (option) => option.fold(
               (failure) {
                 trackMixpanelEvent(
-                  MixpanelEvents.paymentFailure,
+                  TrackingEvents.paymentFailure,
                   props: {
-                    MixpanelProps.errorMessage:
+                    TrackingProps.errorMessage:
                         'Generating payment advise failure with error message: ${context.tr(
                       failure.failureMessage.message,
                       namedArgs: failure.failureMessage.arguments,
                     )}',
-                    MixpanelProps.paymentMethod: state
+                    TrackingProps.paymentMethod: state
                         .selectedPaymentMethod.paymentMethod
                         .getOrDefaultValue(''),
-                    MixpanelProps.paymentDocumentCount:
+                    TrackingProps.paymentDocumentCount:
                         state.allSelectedItems.length,
                   },
                 );
                 trackMixpanelEvent(
-                  MixpanelEvents.generatePaymentAdviceFailed,
+                  TrackingEvents.generatePaymentAdviceFailed,
                   props: {
-                    MixpanelProps.paymentMethod: state
+                    TrackingProps.paymentMethod: state
                         .selectedPaymentMethod.paymentMethod
                         .getOrDefaultValue(''),
-                    MixpanelProps.errorMessage: failure.failureMessage.message,
+                    TrackingProps.errorMessage: failure.failureMessage.message,
                   },
                 );
 
@@ -207,13 +216,13 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
                 (either) => either.fold(
                   (failure) async {
                     trackMixpanelEvent(
-                      MixpanelEvents.paymentFailure,
+                      TrackingEvents.paymentFailure,
                       props: {
-                        MixpanelProps.errorMessage: paymentErrorMessage,
-                        MixpanelProps.paymentMethod: state
+                        TrackingProps.errorMessage: paymentErrorMessage,
+                        TrackingProps.paymentMethod: state
                             .selectedPaymentMethod.paymentMethod
                             .getOrDefaultValue(''),
-                        MixpanelProps.paymentDocumentCount:
+                        TrackingProps.paymentDocumentCount:
                             state.allSelectedItems.length,
                       },
                     );

@@ -87,17 +87,30 @@ class _BundleGridItem extends StatelessWidget {
 
   void _bundleOnTap(BuildContext context, MaterialInfo materialInfo) {
     trackMixpanelEvent(
-      MixpanelEvents.productItemClicked,
+      TrackingEvents.productItemClicked,
       props: {
-        MixpanelProps.clickAt:
+        TrackingProps.clickAt:
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
-        MixpanelProps.isBundle: true,
-        MixpanelProps.productName: materialInfo.displayDescription,
-        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
-        MixpanelProps.productManufacturer: materialInfo.getManufactured,
-        MixpanelProps.section: 'All product',
+        TrackingProps.isBundle: true,
+        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer: materialInfo.getManufactured,
+        TrackingProps.section: 'All product',
       },
     );
+
+    trackClevertapEvent(
+      TrackingEvents.productItemClicked,
+      props: {
+        TrackingProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.router.currentPath),
+        TrackingProps.isBundle: true,
+        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productManufacturer: materialInfo.getManufactured,
+      },
+    );
+
     context.router.push(BundleDetailPageRoute(materialInfo: materialInfo));
   }
 }
