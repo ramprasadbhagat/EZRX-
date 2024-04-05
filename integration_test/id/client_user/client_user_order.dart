@@ -783,6 +783,43 @@ void main() {
       await oosPreOrderRobot.tapContinueButton();
       checkoutRobot.verifyPage();
     });
+
+    testWidgets(
+        'EZRX-T1356 | [ID] - Verify Apl promotion label with default component',
+        (tester) async {
+      const offerQty = 1;
+      const offerUnitPrice = 30600;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot
+          .searchWithKeyboardAction(offerMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(offerMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapCartButton();
+      cartRobot.verifyPage();
+      await cartRobot.verifyMaterial(offerMaterialNumber);
+      cartRobot.verifyMaterialNumber(offerMaterialNumber);
+      cartRobot.verifyMaterialQty(
+        offerMaterialNumber,
+        offerQty,
+      );
+      cartRobot.verifyMaterialUnitPrice(
+        offerMaterialNumber,
+        offerUnitPrice.priceDisplayForID(currency),
+      );
+      cartRobot.verifyMaterialTotalPrice(
+        offerMaterialNumber,
+        offerUnitPrice.priceDisplayForID(currency),
+      );
+      cartRobot.verifyAplPromotionLabelForItem(
+        materialNumber: offerMaterialNumber,
+      );
+    });
   });
 
   group('Checkout -', () {
