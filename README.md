@@ -6,11 +6,11 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 ### Require
 - [Vscode](https://code.visualstudio.com/)
 - [Flutter extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter)
-- [FVM](https://fvm.app/docs/getting_started/installation)
+- [FVM - to switch you device flutter version fast](https://fvm.app/docs/getting_started/installation)
+- [Version Lens - to check who is the line contributor](https://marketplace.visualstudio.com/items?itemName=pflannery.vscode-versionlens)
 
 ### Optional
 - [Bloc extension](https://marketplace.visualstudio.com/items?itemName=FelixAngelov.bloc)
-- [Version Lens](https://marketplace.visualstudio.com/items?itemName=pflannery.vscode-versionlens)
 - [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters)
 - [Flutter Coverage](https://marketplace.visualstudio.com/items?itemName=Flutterando.flutter-coverage)
 - [Edit csv](https://marketplace.visualstudio.com/items?itemName=janisdd.vscode-edit-csv)
