@@ -2,6 +2,7 @@ part of 'package:ezrxmobile/presentation/payments/account_summary/account_summar
 
 class _Export extends StatelessWidget {
   final String currentActiveTabName;
+
   const _Export({
     Key? key,
     required this.currentActiveTabName,
@@ -11,7 +12,10 @@ class _Export extends StatelessWidget {
     if (currentActiveTabName == AllInvoicesPageRoute.name) {
       context.read<DownloadPaymentAttachmentsBloc>().add(
             DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-              queryObject: context.read<AllInvoicesBloc>().state.appliedFilter,
+              queryObject: context
+                  .allInvoicesBloc(context.isMPPayment)
+                  .state
+                  .appliedFilter,
             ),
           );
 
@@ -20,7 +24,10 @@ class _Export extends StatelessWidget {
     if (currentActiveTabName == AllCreditsPageRoute.name) {
       context.read<DownloadPaymentAttachmentsBloc>().add(
             DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-              queryObject: context.read<AllCreditsBloc>().state.appliedFilter,
+              queryObject: context
+                  .allCreditsBloc(context.isMPPayment)
+                  .state
+                  .appliedFilter,
             ),
           );
 
@@ -29,7 +36,10 @@ class _Export extends StatelessWidget {
     if (currentActiveTabName == FullSummaryPageRoute.name) {
       context.read<DownloadPaymentAttachmentsBloc>().add(
             DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
-              queryObject: context.read<FullSummaryBloc>().state.appliedFilter,
+              queryObject: context
+                  .fullSummaryBloc(context.isMPPayment)
+                  .state
+                  .appliedFilter,
             ),
           );
 
@@ -59,7 +69,7 @@ class _Export extends StatelessWidget {
       child: IconButton(
         padding: EdgeInsets.zero,
         onPressed: () => _downloadAttachment(context),
-        color: ZPColors.primary,
+        color: ZPColors.extraDarkGreen,
         icon: const Icon(
           Icons.cloud_download_outlined,
         ),

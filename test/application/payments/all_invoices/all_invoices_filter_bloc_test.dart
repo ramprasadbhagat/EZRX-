@@ -4,22 +4,15 @@ import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'all_invoices_bloc_test.dart';
-
 void main() {
-  late AllCreditsAndInvoicesRepository repository;
+  WidgetsFlutterBinding.ensureInitialized();
   late AllInvoicesFilter allInvoicesFilter;
   late DateTime fakeToDate;
   late DateTime fakeFromDate;
   late DateTimeRange dateTimeRange;
-  setUpAll(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    repository = AllCreditsAndInvoicesRepositoryMock();
-  });
 
   setUp(() {
     allInvoicesFilter = AllInvoicesFilter.defaultFilter();
@@ -44,8 +37,7 @@ void main() {
   group('All invoices Filter Bloc', () {
     blocTest(
       'initialized',
-      build: () =>
-          AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
+      build: () => AllInvoicesFilterBloc(),
       act: (AllInvoicesFilterBloc bloc) {
         bloc.add(
           const AllInvoicesFilterEvent.initialized(),
@@ -58,8 +50,7 @@ void main() {
 
     blocTest(
       'Due Date Range Changed',
-      build: () =>
-          AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
+      build: () => AllInvoicesFilterBloc(),
       act: (AllInvoicesFilterBloc bloc) {
         bloc.add(
           AllInvoicesFilterEvent.setDueDate(
@@ -83,8 +74,7 @@ void main() {
 
     blocTest(
       'Document Date Range Changed',
-      build: () =>
-          AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
+      build: () => AllInvoicesFilterBloc(),
       act: (AllInvoicesFilterBloc bloc) {
         bloc.add(
           AllInvoicesFilterEvent.setDocumentDate(
@@ -107,8 +97,7 @@ void main() {
     );
     blocTest(
       'AmountValueToChanged',
-      build: () =>
-          AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
+      build: () => AllInvoicesFilterBloc(),
       seed: () => AllInvoicesFilterState.initial().copyWith(
         filter: allInvoicesFilter,
       ),
@@ -126,8 +115,7 @@ void main() {
 
     blocTest(
       'AmountValueFromChanged',
-      build: () =>
-          AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
+      build: () => AllInvoicesFilterBloc(),
       seed: () => AllInvoicesFilterState.initial().copyWith(
         filter: allInvoicesFilter,
       ),
@@ -145,8 +133,7 @@ void main() {
 
     blocTest(
       'Status Changed',
-      build: () =>
-          AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
+      build: () => AllInvoicesFilterBloc(),
       seed: () => AllInvoicesFilterState.initial().copyWith(
         filter: allInvoicesFilter.copyWith(
           dueDateTo: DateTimeStringValue(
@@ -182,8 +169,7 @@ void main() {
 
     blocTest(
       'validateFilters with all valid filters',
-      build: () =>
-          AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
+      build: () => AllInvoicesFilterBloc(),
       seed: () => AllInvoicesFilterState.initial().copyWith(
         filter: allInvoicesFilter.copyWith(
           dueDateTo: DateTimeStringValue(
@@ -213,8 +199,7 @@ void main() {
 
     blocTest(
       'validateFilters with invalid filters',
-      build: () =>
-          AllInvoicesFilterBloc(allCreditsAndInvoicesRepository: repository),
+      build: () => AllInvoicesFilterBloc(),
       seed: () => AllInvoicesFilterState.initial().copyWith(
         filter: allInvoicesFilter.copyWith(
           dueDateTo: DateTimeStringValue(

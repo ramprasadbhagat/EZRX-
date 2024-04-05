@@ -5,7 +5,6 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -26,49 +25,13 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_in
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
-    implements AllCreditsBloc {}
-
-class AllCreditsFilterBlocMock
-    extends MockBloc<AllCreditsFilterEvent, AllCreditsFilterState>
-    implements AllCreditsFilterBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class CreditAndInvoiceDetailsBlocMock
-    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
-    implements CreditAndInvoiceDetailsBloc {}
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class DownloadECreditBlocMock
-    extends MockBloc<DownloadECreditEvent, DownloadECreditState>
-    implements DownloadECreditBloc {}
-
 void main() {
-  late AllCreditsBloc allCreditsBlocMock;
+  late ZPAllCreditsBloc allCreditsBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late EligibilityBloc eligibilityBlocMock;
@@ -84,7 +47,7 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     creditItemList =
@@ -94,8 +57,8 @@ void main() {
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    allCreditsBlocMock = AllCreditsBlocMock();
-    eligibilityBlocMock = EligibilityBlockMock();
+    allCreditsBlocMock = ZPAllCreditsBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
     userBlocMock = UserBlocMock();
@@ -130,7 +93,7 @@ void main() {
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
       providers: [
-        BlocProvider<AllCreditsBloc>(
+        BlocProvider<ZPAllCreditsBloc>(
           create: (context) => allCreditsBlocMock,
         ),
         BlocProvider<AllCreditsFilterBloc>(
@@ -162,7 +125,7 @@ void main() {
           create: (context) => downloadECreditBlocMock,
         ),
       ],
-      child: const AllCreditsPage(),
+      child: const AllCreditsPage(isMarketPlace: false),
     );
   }
 

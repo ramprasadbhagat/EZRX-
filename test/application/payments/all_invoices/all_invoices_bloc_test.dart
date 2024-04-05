@@ -45,7 +45,7 @@ void main() {
     () {
       blocTest(
         'Initialize',
-        build: () => AllInvoicesBloc(
+        build: () => ZPAllInvoicesBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -70,7 +70,7 @@ void main() {
     () {
       blocTest(
         'fetch -> credits fetch fail',
-        build: () => AllInvoicesBloc(
+        build: () => ZPAllInvoicesBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -82,6 +82,7 @@ void main() {
               filter: allInvoicesFilter,
               offset: 0,
               pageSize: config.pageSize,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => Left(exception),
@@ -104,7 +105,7 @@ void main() {
 
       blocTest(
         'fetch -> invoices fetch success',
-        build: () => AllInvoicesBloc(
+        build: () => ZPAllInvoicesBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -116,6 +117,7 @@ void main() {
               filter: allInvoicesFilter,
               offset: 0,
               pageSize: config.pageSize,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(creditAndInvoiceItemList),
@@ -147,7 +149,7 @@ void main() {
   group('All Invoices Bloc load more', () {
     blocTest(
       'fetch -> invoices load more fail',
-      build: () => AllInvoicesBloc(
+      build: () => ZPAllInvoicesBloc(
         allCreditsAndInvoicesRepository: repository,
         config: config,
       ),
@@ -166,6 +168,7 @@ void main() {
             filter: allInvoicesFilter,
             offset: config.pageSize,
             pageSize: config.pageSize,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Left(exception),
@@ -194,7 +197,7 @@ void main() {
 
     blocTest(
       'fetch -> invoices load more success',
-      build: () => AllInvoicesBloc(
+      build: () => ZPAllInvoicesBloc(
         allCreditsAndInvoicesRepository: repository,
         config: config,
       ),
@@ -210,6 +213,7 @@ void main() {
             filter: allInvoicesFilter,
             offset: creditAndInvoiceItemList.length,
             pageSize: config.pageSize,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(creditAndInvoiceItemList),

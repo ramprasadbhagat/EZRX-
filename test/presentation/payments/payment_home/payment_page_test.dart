@@ -231,13 +231,14 @@ void main() {
     testWidgets('Check payment option menu noClaim',
         (WidgetTester tester) async {
       final soaRoute = StatementAccountsPageRoute(isMarketPlace: false);
+      final accountSummaryRoute = AccountSummaryRoute(isMarketPlace: false);
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
-      when(() => autoRouterMock.pushNamed('payments/invoice_credit'))
+      when(() => autoRouterMock.push(accountSummaryRoute))
           .thenAnswer(
         (_) => Future.value(),
       );
@@ -260,7 +261,7 @@ void main() {
       await tester.tap(accountSummaryMenu);
       await tester.pumpAndSettle();
       verify(
-        () => autoRouterMock.pushNamed('payments/invoice_credit'),
+        () => autoRouterMock.push(accountSummaryRoute),
       ).called(1);
       await tester.tap(statementOfAccountsMenu);
       await tester.pumpAndSettle();

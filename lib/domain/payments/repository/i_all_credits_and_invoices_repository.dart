@@ -14,6 +14,7 @@ abstract class IAllCreditsAndInvoicesRepository {
     required AllInvoicesFilter filter,
     required int pageSize,
     required int offset,
+    required bool isMarketPlace,
   });
   Future<Either<ApiFailure, List<CreditAndInvoiceItem>>> filterCredits({
     required SalesOrganisation salesOrganisation,
@@ -21,6 +22,7 @@ abstract class IAllCreditsAndInvoicesRepository {
     required int pageSize,
     required int offset,
     required AllCreditsFilter filter,
+    required bool isMarketPlace,
   });
   Future<Either<ApiFailure, List<CreditAndInvoiceItem>>> filterFullSummary({
     required SalesOrganisation salesOrganisation,
@@ -28,5 +30,6 @@ abstract class IAllCreditsAndInvoicesRepository {
     required int pageSize,
     required int offset,
     required FullSummaryFilter filter,
+    required bool isMarketPlace,
   });
 }

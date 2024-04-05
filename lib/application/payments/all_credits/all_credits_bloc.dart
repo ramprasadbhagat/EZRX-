@@ -14,9 +14,30 @@ part 'all_credits_event.dart';
 part 'all_credits_state.dart';
 part 'all_credits_bloc.freezed.dart';
 
-class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
+class ZPAllCreditsBloc extends AllCreditsBloc {
+  ZPAllCreditsBloc({
+    required super.allCreditsAndInvoicesRepository,
+    required super.config,
+  });
+
+  @override
+  bool get isMarketPlace => false;
+}
+
+class MPAllCreditsBloc extends AllCreditsBloc {
+  MPAllCreditsBloc({
+    required super.allCreditsAndInvoicesRepository,
+    required super.config,
+  });
+
+  @override
+  bool get isMarketPlace => true;
+}
+
+abstract class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
   final IAllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
   final Config config;
+  abstract final bool isMarketPlace;
 
   AllCreditsBloc({
     required this.allCreditsAndInvoicesRepository,
@@ -49,6 +70,7 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           filter: e.appliedFilter,
           pageSize: config.pageSize,
           offset: 0,
+          isMarketPlace: isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -92,6 +114,7 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           filter: state.appliedFilter,
           pageSize: config.pageSize,
           offset: state.items.length,
+          isMarketPlace: isMarketPlace,
         );
 
         failureOrSuccess.fold(

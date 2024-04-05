@@ -1,7 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
-import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -12,11 +11,7 @@ part 'all_credits_filter_bloc.freezed.dart';
 
 class AllCreditsFilterBloc
     extends Bloc<AllCreditsFilterEvent, AllCreditsFilterState> {
-  final IAllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
-
-  AllCreditsFilterBloc({
-    required this.allCreditsAndInvoicesRepository,
-  }) : super(AllCreditsFilterState.initial()) {
+  AllCreditsFilterBloc() : super(AllCreditsFilterState.initial()) {
     on<AllCreditsFilterEvent>(_onEvent);
   }
 

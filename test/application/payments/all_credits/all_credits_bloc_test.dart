@@ -40,7 +40,7 @@ void main() {
     () {
       blocTest(
         'Initialize',
-        build: () => AllCreditsBloc(
+        build: () => ZPAllCreditsBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -60,7 +60,7 @@ void main() {
     () {
       blocTest(
         'fetch -> credits fetch fail',
-        build: () => AllCreditsBloc(
+        build: () => ZPAllCreditsBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -73,6 +73,7 @@ void main() {
               filter: allCreditsFilter,
               offset: 0,
               pageSize: config.pageSize,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -102,7 +103,7 @@ void main() {
       );
       blocTest(
         'fetch -> credits fetch success',
-        build: () => AllCreditsBloc(
+        build: () => ZPAllCreditsBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -115,6 +116,7 @@ void main() {
               filter: allCreditsFilter,
               offset: 0,
               pageSize: config.pageSize,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(fakeResult),
@@ -139,7 +141,7 @@ void main() {
 
       blocTest(
         'fetch -> search and filter combine',
-        build: () => AllCreditsBloc(
+        build: () => ZPAllCreditsBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -158,6 +160,7 @@ void main() {
               ),
               offset: 0,
               pageSize: config.pageSize,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(fakeResult),
@@ -193,7 +196,7 @@ void main() {
   group('All Credits Bloc load more', () {
     blocTest(
       'fetch -> credits load more fail',
-      build: () => AllCreditsBloc(
+      build: () => ZPAllCreditsBloc(
         allCreditsAndInvoicesRepository: repository,
         config: config,
       ),
@@ -212,6 +215,7 @@ void main() {
             filter: allCreditsFilter,
             offset: config.pageSize,
             pageSize: config.pageSize,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -246,7 +250,7 @@ void main() {
 
     blocTest(
       'fetch -> credits load more success',
-      build: () => AllCreditsBloc(
+      build: () => ZPAllCreditsBloc(
         allCreditsAndInvoicesRepository: repository,
         config: config,
       ),
@@ -265,6 +269,7 @@ void main() {
             filter: allCreditsFilter,
             offset: config.pageSize,
             pageSize: config.pageSize,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(

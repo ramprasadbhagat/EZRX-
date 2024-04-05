@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -73,8 +74,8 @@ class _BodyContent extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     key: WidgetKeys.accountSummaryButton,
-                    onPressed: () =>
-                        context.router.pushNamed('payments/invoice_credit'),
+                    onPressed: () => context.router
+                        .push(AccountSummaryRoute(isMarketPlace: false)),
                     style:
                         Theme.of(context).elevatedButtonTheme.style!.copyWith(
                               backgroundColor: const MaterialStatePropertyAll(

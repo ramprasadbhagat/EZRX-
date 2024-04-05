@@ -100,6 +100,7 @@ void main() {
               filterMap: filterMap,
               offset: 0,
               pageSize: 20,
+              isMarketPlace: false,
             );
 
             final expectResult = <CreditAndInvoiceItem>[];
@@ -140,6 +141,7 @@ void main() {
               filterMap: filterMap,
               offset: 0,
               pageSize: 20,
+              isMarketPlace: false,
             )
                 .onError((error, _) {
               expect(error, isA<ServerException>());
@@ -178,6 +180,7 @@ void main() {
               filterMap: filterMap,
               offset: 0,
               pageSize: 20,
+              isMarketPlace: false,
             )
                 .onError((error, _) {
               expect(error, isA<ServerException>());
@@ -235,6 +238,7 @@ void main() {
               filterMap: filterMap,
               offset: 0,
               pageSize: 20,
+              isMarketPlace: false,
             );
 
             final expectResult = <CreditAndInvoiceItem>[];

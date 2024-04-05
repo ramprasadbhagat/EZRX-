@@ -23,6 +23,7 @@ class CustomSearchBar extends StatefulWidget {
     required this.customValidator,
     this.autofocus = false,
     this.searchSuffixIcon,
+    this.hintStyle,
   }) : super(key: key);
 
   final bool enabled;
@@ -36,6 +37,7 @@ class CustomSearchBar extends StatefulWidget {
   final bool Function(String) customValidator;
   final bool autofocus;
   final Widget? searchSuffixIcon;
+  final TextStyle? hintStyle;
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();
@@ -98,6 +100,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 onPressed: () => widget.onClear.call(),
               ),
         hintText: context.tr(widget.hintText),
+        hintStyle: widget.hintStyle,
       ),
     );
   }

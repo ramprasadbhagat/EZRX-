@@ -9,7 +9,6 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/credit_and_invoice_item_dto.dart';
 
-
 class AllCreditsAndInvoicesRemoteDataSource {
   HttpService httpService;
   AllCreditsAndInvoicesQueryMutation allCreditsAndInvoicesQueryMutation;
@@ -29,6 +28,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
     String sortDirection = 'desc',
     required int offset,
     required int pageSize,
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -52,6 +52,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
                 },
               ],
               'filterBy': filterMap,
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
             },
           },
         },
@@ -76,6 +77,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
     required int pageSize,
     required List<Map<String, dynamic>> filterMap,
     String sortDirection = 'desc',
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -99,6 +101,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
                 },
               ],
               'filterBy': filterMap,
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
             },
           },
         },
@@ -123,6 +126,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
     required int pageSize,
     required List<Map<String, dynamic>> filterMap,
     String sortDirection = 'desc',
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -145,6 +149,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
                 },
               ],
               'filterBy': filterMap,
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
             },
           },
         },

@@ -18,28 +18,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../utils/widget_utils.dart';
-
-class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
-    implements AllCreditsBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class AllCreditsFilterBlocMock
-    extends MockBloc<AllCreditsFilterEvent, AllCreditsFilterState>
-    implements AllCreditsFilterBloc {}
-
-class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
 
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;
-  late AllCreditsBloc allCreditsBlocMock;
+  late ZPAllCreditsBloc allCreditsBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late AppRouter autoRouterMock;
@@ -72,12 +56,12 @@ void main() {
     customerCodeBlocMock = CustomerCodeBlocMock();
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
-    allCreditsBlocMock = AllCreditsBlocMock();
+    allCreditsBlocMock = ZPAllCreditsBlocMock();
     when(() => allCreditsBlocMock.state).thenReturn(AllCreditsState.initial());
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
     when(() => allCreditsFilterBlocMock.state)
         .thenReturn(AllCreditsFilterState.initial());
-    eligibilityBlocMock = MockEligibilityBloc();
+    eligibilityBlocMock = EligibilityBlocMock();
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
   });
@@ -97,7 +81,7 @@ void main() {
           BlocProvider<AllCreditsFilterBloc>(
             create: (context) => allCreditsFilterBlocMock,
           ),
-          BlocProvider<AllCreditsBloc>(
+          BlocProvider<ZPAllCreditsBloc>(
             create: (context) => allCreditsBlocMock,
           ),
           BlocProvider<AllCreditsFilterBloc>(
@@ -109,7 +93,7 @@ void main() {
         ],
         child: const Scaffold(
           body: SingleChildScrollView(
-            child: AllCreditsFilterBottomSheet(),
+            child: AllCreditsFilterBottomSheet(isMarketPlace: false),
           ),
         ),
       ),

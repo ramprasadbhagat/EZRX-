@@ -83,6 +83,7 @@ void main() {
           filter: AllInvoicesFilter.defaultFilter(),
           pageSize: 1,
           offset: 0,
+          isMarketPlace: false,
         );
         expect(result, Right(mockList));
       });
@@ -101,6 +102,7 @@ void main() {
           filter: AllInvoicesFilter.defaultFilter(),
           pageSize: 1,
           offset: 0,
+          isMarketPlace: false,
         );
         expect(
           result,
@@ -116,6 +118,7 @@ void main() {
             filterMap: filterMap,
             pageSize: 1,
             offset: 0,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => mockList,
@@ -131,6 +134,7 @@ void main() {
           ),
           pageSize: 1,
           offset: 0,
+          isMarketPlace: false,
         );
         expect(result, Right(mockList));
       });
@@ -144,6 +148,7 @@ void main() {
             filterMap: filterMap,
             pageSize: 1,
             offset: 0,
+            isMarketPlace: false,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -154,6 +159,7 @@ void main() {
           filter: AllInvoicesFilter.defaultFilter(),
           pageSize: 1,
           offset: 0,
+          isMarketPlace: false,
         );
         expect(result.isLeft(), true);
       });
@@ -175,6 +181,7 @@ void main() {
           filter: FullSummaryFilter.defaultFilter(),
           pageSize: 1,
           offset: 0,
+          isMarketPlace: false,
         );
         expect(result, Right(mockList));
       });
@@ -192,6 +199,7 @@ void main() {
           filter: FullSummaryFilter.defaultFilter(),
           pageSize: 1,
           offset: 0,
+          isMarketPlace: false,
         );
         expect(
           result,
@@ -210,6 +218,7 @@ void main() {
             offset: 0,
             pageSize: 24,
             filterMap: filterFullSummary,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => mockList,
@@ -221,6 +230,7 @@ void main() {
           filter: FullSummaryFilter.defaultFilter(),
           pageSize: 24,
           offset: 0,
+          isMarketPlace: false,
         );
         expect(result, Right(mockList));
       });
@@ -234,6 +244,7 @@ void main() {
             offset: 0,
             pageSize: 24,
             filterMap: filterFullSummary,
+            isMarketPlace: false,
           ),
         ).thenThrow(MockException());
 
@@ -243,6 +254,7 @@ void main() {
           filter: FullSummaryFilter.defaultFilter(),
           pageSize: 24,
           offset: 0,
+          isMarketPlace: false,
         );
         expect(
           result,

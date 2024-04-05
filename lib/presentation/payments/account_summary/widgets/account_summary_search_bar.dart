@@ -2,6 +2,7 @@ part of 'package:ezrxmobile/presentation/payments/account_summary/account_summar
 
 class _AccountSummarySearchBar extends StatelessWidget {
   final String currentActiveTabName;
+
   const _AccountSummarySearchBar({
     required this.currentActiveTabName,
     Key? key,
@@ -11,36 +12,48 @@ class _AccountSummarySearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     if (currentActiveTabName == AllInvoicesPageRoute.name) {
       return BlocBuilder<AllInvoicesBloc, AllInvoicesState>(
+        bloc: context.allInvoicesBloc(context.isMPPayment),
         buildWhen: (previous, current) =>
             current.isLoading != previous.isLoading,
         builder: (context, state) {
           return _SummarySearchBar(
             isEnable: !state.isLoading,
             searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
+            hintText: context.isMPPayment
+                ? 'Search by MP full invoice number'
+                : 'Search by full invoice number',
           );
         },
       );
     }
     if (currentActiveTabName == AllCreditsPageRoute.name) {
       return BlocBuilder<AllCreditsBloc, AllCreditsState>(
+        bloc: context.allCreditsBloc(context.isMPPayment),
         buildWhen: (previous, current) =>
             previous.isLoading != current.isLoading,
         builder: (context, state) {
           return _SummarySearchBar(
             isEnable: !state.isLoading,
             searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
+            hintText: context.isMPPayment
+                ? 'Search by MP full credit note number'
+                : 'Search by full credit note number',
           );
         },
       );
     }
     if (currentActiveTabName == FullSummaryPageRoute.name) {
       return BlocBuilder<FullSummaryBloc, FullSummaryState>(
+        bloc: context.fullSummaryBloc(context.isMPPayment),
         buildWhen: (previous, current) =>
             previous.isLoading != current.isLoading,
         builder: (context, state) {
           return _SummarySearchBar(
             isEnable: !state.isLoading,
             searchKey: state.appliedFilter.searchKey.searchValueOrEmpty,
+            hintText: context.isMPPayment
+                ? 'Search by MP full invoice/credit number'
+                : 'Search by invoice/credit number',
           );
         },
       );
@@ -53,10 +66,13 @@ class _AccountSummarySearchBar extends StatelessWidget {
 class _SummarySearchBar extends StatelessWidget {
   final bool isEnable;
   final String searchKey;
+  final String hintText;
+
   const _SummarySearchBar({
     Key? key,
     required this.isEnable,
     required this.searchKey,
+    required this.hintText,
   }) : super(key: key);
 
   @override
@@ -64,6 +80,11 @@ class _SummarySearchBar extends StatelessWidget {
     return Expanded(
       child: CustomSearchBar(
         key: WidgetKeys.genericKey(key: searchKey),
+        hintText: hintText,
+        hintStyle: Theme.of(context)
+            .textTheme
+            .bodyLarge!
+            .copyWith(color: ZPColors.backgroundCloseButtonSnackBar),
         initialValue: searchKey,
         enabled: isEnable,
         onSearchChanged: (value) => _fetch(
@@ -93,21 +114,30 @@ class _SummarySearchBar extends StatelessWidget {
     //TODO: Will revisit this while enhancing the search implementation logic.
     var previousSearchKey = SearchKey('');
     if (context.tabsRouter.current.name == AllInvoicesPageRoute.name) {
-      previousSearchKey =
-          context.read<AllInvoicesBloc>().state.appliedFilter.searchKey;
+      previousSearchKey = context
+          .allInvoicesBloc(context.isMPPayment)
+          .state
+          .appliedFilter
+          .searchKey;
     } else if (context.tabsRouter.current.name == AllCreditsPageRoute.name) {
-      previousSearchKey =
-          context.read<AllCreditsBloc>().state.appliedFilter.searchKey;
+      previousSearchKey = context
+          .allCreditsBloc(context.isMPPayment)
+          .state
+          .appliedFilter
+          .searchKey;
     } else {
-      previousSearchKey =
-          context.read<FullSummaryBloc>().state.appliedFilter.searchKey;
+      previousSearchKey = context
+          .fullSummaryBloc(context.isMPPayment)
+          .state
+          .appliedFilter
+          .searchKey;
     }
 
     if (!onClear && searchKey.isEmpty ||
         searchKey == previousSearchKey.getOrDefaultValue('')) return;
 
     if (context.tabsRouter.current.name == AllInvoicesPageRoute.name) {
-      context.read<AllInvoicesBloc>().add(
+      context.allInvoicesBloc(context.isMPPayment).add(
             AllInvoicesEvent.fetch(
               appliedFilter: searchKey.isEmpty
                   ? AllInvoicesFilter.defaultFilter()
@@ -120,7 +150,7 @@ class _SummarySearchBar extends StatelessWidget {
       return;
     }
     if (context.tabsRouter.current.name == AllCreditsPageRoute.name) {
-      context.read<AllCreditsBloc>().add(
+      context.allCreditsBloc(context.isMPPayment).add(
             AllCreditsEvent.fetch(
               appliedFilter: searchKey.isEmpty
                   ? AllCreditsFilter.defaultFilter()
@@ -133,7 +163,7 @@ class _SummarySearchBar extends StatelessWidget {
       return;
     }
     if (context.tabsRouter.current.name == FullSummaryPageRoute.name) {
-      context.read<FullSummaryBloc>().add(
+      context.fullSummaryBloc(context.isMPPayment).add(
             FullSummaryEvent.fetch(
               appliedFilter: searchKey.isEmpty
                   ? FullSummaryFilter.defaultFilter()

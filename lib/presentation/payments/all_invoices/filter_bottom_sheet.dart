@@ -5,148 +5,154 @@ import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AllInvoicesFilterBottomSheet extends StatelessWidget {
-  const AllInvoicesFilterBottomSheet({Key? key}) : super(key: key);
+  final bool isMarketPlace;
+
+  const AllInvoicesFilterBottomSheet({
+    Key? key,
+    required this.isMarketPlace,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
-      buildWhen: (previous, current) =>
-          previous.showErrorMessages != current.showErrorMessages,
-      builder: (context, state) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          key: WidgetKeys.tempFilter,
-          children: <Widget>[
-            AppBar(
-              title: Text(
-                context.tr('Filter'),
+    return PaymentModule(
+      isMarketPlace: isMarketPlace,
+      child: BlocBuilder<AllInvoicesFilterBloc, AllInvoicesFilterState>(
+        buildWhen: (previous, current) =>
+            previous.showErrorMessages != current.showErrorMessages,
+        builder: (context, state) => SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            key: WidgetKeys.tempFilter,
+            children: <Widget>[
+              AppBar(
+                title: Text(
+                  context.tr('Filter'),
+                ),
+                automaticallyImplyLeading: false,
+                centerTitle: false,
+                elevation: 0,
+                actions: [
+                  IconButton(
+                    key: WidgetKeys.closeButton,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(
+                      Icons.clear,
+                      color: ZPColors.black,
+                    ),
+                  ),
+                ],
               ),
-              automaticallyImplyLeading: false,
-              centerTitle: false,
-              elevation: 0,
-              actions: [
-                IconButton(
-                  key: WidgetKeys.closeButton,
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(
-                    Icons.clear,
-                    color: ZPColors.black,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16.0,
+                  horizontal: 12.0,
+                ),
+                child: Form(
+                  autovalidateMode: state.showErrorMessages
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text(
+                          context.tr('Document date'),
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const _FromDocumentDateFilter(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(
+                              '-',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                          ),
+                          const _ToDocumentDateFilter(),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
+                        child: Text(
+                          context.tr('Due Date'),
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const _FromDueDateFilter(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(
+                              '-',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                          ),
+                          const _ToDueDateFilter(),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
+                        child: Text(
+                          context.tr('Amount range'),
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _AmountValueFromFilter(),
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              '-',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                          ),
+                          const _AmountValueToFilter(),
+                        ],
+                      ),
+                      (state.showErrorMessages &&
+                              !state.filter.isAmountValueRangeValid)
+                          ? ValueRangeError(
+                              valueName: context.tr('Amount'),
+                              isValid: state.filter.isAmountValueRangeValid,
+                            )
+                          : const SizedBox.shrink(),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
+                        child: Text(
+                          context.tr('Status'),
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ),
+                      const _StatusesSelector(),
+                      const SizedBox(height: 40),
+                      const Row(
+                        children: [
+                          _ResetButton(),
+                          SizedBox(width: 16),
+                          _ApplyButton(),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16.0,
-                horizontal: 12.0,
               ),
-              child: Form(
-                autovalidateMode: state.showErrorMessages
-                    ? AutovalidateMode.always
-                    : AutovalidateMode.disabled,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: Text(
-                        context.tr('Document date'),
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        const _FromDocumentDateFilter(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            '-',
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                        ),
-                        const _ToDocumentDateFilter(),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
-                      child: Text(
-                        context.tr('Due Date'),
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        const _FromDueDateFilter(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            '-',
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                        ),
-                        const _ToDueDateFilter(),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
-                      child: Text(
-                        context.tr('Amount range'),
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const _AmountValueFromFilter(),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Text(
-                            '-',
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                        ),
-                        const _AmountValueToFilter(),
-                      ],
-                    ),
-                    (state.showErrorMessages &&
-                            !state.filter.isAmountValueRangeValid)
-                        ? ValueRangeError(
-                            valueName: context.tr('Amount'),
-                            isValid: state.filter.isAmountValueRangeValid,
-                          )
-                        : const SizedBox.shrink(),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
-                      child: Text(
-                        context.tr('Status'),
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
-                    ),
-                    const _StatusesSelector(),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    const Row(
-                      children: [
-                        _ResetButton(),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        _ApplyButton(),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -531,12 +537,12 @@ class _ResetButton extends StatelessWidget {
                       .filter
                       .excludeSearch !=
                   AllInvoicesFilter.defaultFilter()) {
-                context.read<AllInvoicesBloc>().add(
+                context.allInvoicesBloc(context.isMPPayment).add(
                       AllInvoicesEvent.fetch(
                         appliedFilter:
                             AllInvoicesFilter.defaultFilter().copyWith(
                           searchKey: context
-                              .read<AllInvoicesBloc>()
+                              .allInvoicesBloc(context.isMPPayment)
                               .state
                               .appliedFilter
                               .searchKey,
@@ -558,7 +564,9 @@ class _ResetButton extends StatelessWidget {
 }
 
 class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({Key? key}) : super(key: key);
+  const _ApplyButton({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -572,8 +580,11 @@ class _ApplyButton extends StatelessWidget {
           );
           if (filterBloc.state.filter.isValid) {
             if (filterBloc.state.filter !=
-                context.read<AllInvoicesBloc>().state.appliedFilter) {
-              context.read<AllInvoicesBloc>().add(
+                context
+                    .allInvoicesBloc(context.isMPPayment)
+                    .state
+                    .appliedFilter) {
+              context.allInvoicesBloc(context.isMPPayment).add(
                     AllInvoicesEvent.fetch(
                       appliedFilter: filterBloc.state.filter,
                     ),

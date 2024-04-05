@@ -17,25 +17,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../utils/widget_utils.dart';
-
-class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
-    implements AllInvoicesBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class AllInvoicesFilterBlocMock
-    extends MockBloc<AllInvoicesFilterEvent, AllInvoicesFilterState>
-    implements AllInvoicesFilterBloc {}
 
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;
-  late AllInvoicesBloc allInvoicesBlocMock;
+  late ZPAllInvoicesBloc allInvoicesBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
   late AppRouter autoRouterMock;
@@ -67,7 +54,7 @@ void main() {
     customerCodeBlocMock = CustomerCodeBlocMock();
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
-    allInvoicesBlocMock = AllInvoicesBlocMock();
+    allInvoicesBlocMock = ZPAllInvoicesBlocMock();
     when(() => allInvoicesBlocMock.state)
         .thenReturn(AllInvoicesState.initial());
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
@@ -90,7 +77,7 @@ void main() {
           BlocProvider<AllInvoicesFilterBloc>(
             create: (context) => allInvoicesFilterBlocMock,
           ),
-          BlocProvider<AllInvoicesBloc>(
+          BlocProvider<ZPAllInvoicesBloc>(
             create: (context) => allInvoicesBlocMock,
           ),
           BlocProvider<AllInvoicesFilterBloc>(
@@ -99,7 +86,7 @@ void main() {
         ],
         child: const Scaffold(
           body: SingleChildScrollView(
-            child: AllInvoicesFilterBottomSheet(),
+            child: AllInvoicesFilterBottomSheet(isMarketPlace: false),
           ),
         ),
       ),
@@ -333,6 +320,7 @@ void main() {
     });
 
     testWidgets('=> _ResetButton Test', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
       when(() => allInvoicesBlocMock.state).thenReturn(
         AllInvoicesState.initial().copyWith(
           appliedFilter: AllInvoicesFilter.defaultFilter()

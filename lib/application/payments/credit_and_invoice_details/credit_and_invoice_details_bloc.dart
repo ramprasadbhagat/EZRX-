@@ -92,6 +92,7 @@ class CreditAndInvoiceDetailsBloc
           ),
           pageSize: 1,
           offset: 0,
+          isMarketPlace: false,
         );
 
         await searchFailureOrSuccess.fold(

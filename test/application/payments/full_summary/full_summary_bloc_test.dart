@@ -38,7 +38,7 @@ void main() {
     () {
       blocTest(
         'Initialize',
-        build: () => FullSummaryBloc(
+        build: () => ZPFullSummaryBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -58,7 +58,7 @@ void main() {
 
       blocTest(
         'Fetch Success',
-        build: () => FullSummaryBloc(
+        build: () => ZPFullSummaryBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -79,6 +79,7 @@ void main() {
               filter: fullSummaryFilter,
               offset: 0,
               pageSize: config.pageSize,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(fakeResult),
@@ -104,7 +105,7 @@ void main() {
 
       blocTest(
         'Fetch Failure',
-        build: () => FullSummaryBloc(
+        build: () => ZPFullSummaryBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -125,6 +126,7 @@ void main() {
               filter: fullSummaryFilter,
               offset: 0,
               pageSize: config.pageSize,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),
@@ -148,7 +150,7 @@ void main() {
 
       blocTest(
         'Loadmore Success',
-        build: () => FullSummaryBloc(
+        build: () => ZPFullSummaryBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -169,6 +171,7 @@ void main() {
               filter: fullSummaryFilter,
               offset: fakeResult.length,
               pageSize: config.pageSize,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(fakeResult),
@@ -195,7 +198,7 @@ void main() {
 
       blocTest(
         'Loadmore Failure',
-        build: () => FullSummaryBloc(
+        build: () => ZPFullSummaryBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
@@ -216,6 +219,7 @@ void main() {
               filter: fullSummaryFilter,
               offset: fakeResult.length,
               pageSize: config.pageSize,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => const Left(fakeError),

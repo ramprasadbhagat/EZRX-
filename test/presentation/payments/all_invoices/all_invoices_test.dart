@@ -31,39 +31,12 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
-    implements AllInvoicesBloc {}
-
-class AllInvoicesFilterBlocMock
-    extends MockBloc<AllInvoicesFilterEvent, AllInvoicesFilterState>
-    implements AllInvoicesFilterBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
 void main() {
-  late AllInvoicesBloc allInvoicesBlocMock;
+  late ZPAllInvoicesBloc allInvoicesBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late EligibilityBloc eligibilityBlocMock;
@@ -93,8 +66,8 @@ void main() {
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    allInvoicesBlocMock = AllInvoicesBlocMock();
-    eligibilityBlocMock = EligibilityBlockMock();
+    allInvoicesBlocMock = ZPAllInvoicesBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
     userBlocMock = UserBlocMock();
@@ -127,7 +100,7 @@ void main() {
       useMediaQuery: false,
       usingLocalization: true,
       providers: [
-        BlocProvider<AllInvoicesBloc>(
+        BlocProvider<ZPAllInvoicesBloc>(
           create: (context) => allInvoicesBlocMock,
         ),
         BlocProvider<EligibilityBloc>(
@@ -156,7 +129,7 @@ void main() {
           create: (context) => newPaymentBlocMock,
         ),
       ],
-      child: const AllInvoicesPage(),
+      child: const AllInvoicesPage(isMarketPlace: false),
     );
   }
 

@@ -14,9 +14,31 @@ part 'full_summary_event.dart';
 part 'full_summary_state.dart';
 part 'full_summary_bloc.freezed.dart';
 
-class FullSummaryBloc extends Bloc<FullSummaryEvent, FullSummaryState> {
+class ZPFullSummaryBloc extends FullSummaryBloc {
+  ZPFullSummaryBloc({
+    required super.allCreditsAndInvoicesRepository,
+    required super.config,
+  });
+
+  @override
+  bool get isMarketPlace => false;
+}
+
+class MPFullSummaryBloc extends FullSummaryBloc {
+  MPFullSummaryBloc({
+    required super.allCreditsAndInvoicesRepository,
+    required super.config,
+  });
+
+  @override
+  bool get isMarketPlace => true;
+}
+
+abstract class FullSummaryBloc
+    extends Bloc<FullSummaryEvent, FullSummaryState> {
   final IAllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
   final Config config;
+  abstract final bool isMarketPlace;
 
   FullSummaryBloc({
     required this.allCreditsAndInvoicesRepository,
@@ -49,6 +71,7 @@ class FullSummaryBloc extends Bloc<FullSummaryEvent, FullSummaryState> {
           filter: e.appliedFilter,
           pageSize: config.pageSize,
           offset: 0,
+          isMarketPlace: isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -92,6 +115,7 @@ class FullSummaryBloc extends Bloc<FullSummaryEvent, FullSummaryState> {
           filter: state.appliedFilter,
           pageSize: config.pageSize,
           offset: state.items.length,
+          isMarketPlace: isMarketPlace,
         );
 
         failureOrSuccess.fold(

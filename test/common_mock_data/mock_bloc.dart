@@ -36,8 +36,12 @@ import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.da
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_e_credit/download_e_credit_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/filter/full_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
@@ -290,18 +294,43 @@ class MPSoaBlocMock extends MockBloc<SoaEvent, SoaState> implements MPSoaBloc {}
 class SoaFilterBlocMock extends MockBloc<SoaFilterEvent, SoaFilterState>
     implements SoaFilterBloc {}
 
-class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
-    implements AllInvoicesBloc {}
+class ZPAllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
+    implements ZPAllInvoicesBloc {}
 
-class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
-    implements AllCreditsBloc {}
+class MPAllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
+    implements MPAllInvoicesBloc {}
 
-class FullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
-    implements FullSummaryBloc {}
+class AllInvoicesFilterBlocMock
+    extends MockBloc<AllInvoicesFilterEvent, AllInvoicesFilterState>
+    implements AllInvoicesFilterBloc {}
+
+class ZPAllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
+    implements ZPAllCreditsBloc {}
+
+class MPAllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
+    implements MPAllCreditsBloc {}
+
+class AllCreditsFilterBlocMock
+    extends MockBloc<AllCreditsFilterEvent, AllCreditsFilterState>
+    implements AllCreditsFilterBloc {}
+
+class ZPFullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
+    implements ZPFullSummaryBloc {}
+
+class MPFullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
+    implements MPFullSummaryBloc {}
+
+class FullSummaryFilterBlocMock
+    extends MockBloc<FullSummaryFilterEvent, FullSummaryFilterState>
+    implements FullSummaryFilterBloc {}
 
 class CreditAndInvoiceDetailsBlocMock
     extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
     implements CreditAndInvoiceDetailsBloc {}
+
+class DownloadECreditBlocMock
+    extends MockBloc<DownloadECreditEvent, DownloadECreditState>
+    implements DownloadECreditBloc {}
 
 //////////////////////////////////////////////////////////////////////////////
 

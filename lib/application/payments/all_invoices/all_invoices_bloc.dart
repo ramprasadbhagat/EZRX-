@@ -14,9 +14,31 @@ part 'all_invoices_event.dart';
 part 'all_invoices_state.dart';
 part 'all_invoices_bloc.freezed.dart';
 
-class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
+class ZPAllInvoicesBloc extends AllInvoicesBloc {
+  ZPAllInvoicesBloc({
+    required super.allCreditsAndInvoicesRepository,
+    required super.config,
+  });
+
+  @override
+  bool get isMarketPlace => false;
+}
+
+class MPAllInvoicesBloc extends AllInvoicesBloc {
+  MPAllInvoicesBloc({
+    required super.allCreditsAndInvoicesRepository,
+    required super.config,
+  });
+
+  @override
+  bool get isMarketPlace => true;
+}
+
+abstract class AllInvoicesBloc
+    extends Bloc<AllInvoicesEvent, AllInvoicesState> {
   final IAllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
   final Config config;
+  abstract final bool isMarketPlace;
 
   AllInvoicesBloc({
     required this.allCreditsAndInvoicesRepository,
@@ -49,6 +71,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
           filter: e.appliedFilter,
           pageSize: config.pageSize,
           offset: 0,
+          isMarketPlace: isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -92,6 +115,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
           filter: state.appliedFilter,
           pageSize: config.pageSize,
           offset: state.items.length,
+          isMarketPlace: isMarketPlace,
         );
 
         failureOrSuccess.fold(

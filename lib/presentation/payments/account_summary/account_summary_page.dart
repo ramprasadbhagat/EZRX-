@@ -6,7 +6,9 @@ import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:ezrxmobile/presentation/payments/full_summary/widgets/filter_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -33,81 +35,93 @@ part 'package:ezrxmobile/presentation/payments/account_summary/widgets/account_s
 part 'package:ezrxmobile/presentation/payments/account_summary/widgets/filter_tune_icon.dart';
 
 class AccountSummary extends StatelessWidget {
-  const AccountSummary({Key? key}) : super(key: key);
+  final bool isMarketPlace;
+
+  const AccountSummary({
+    Key? key,
+    required this.isMarketPlace,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: WidgetKeys.accountSummaryPage,
-      appBar: CustomAppBar.commonAppBar(
-        title: Text(
-          context.tr('Account summary'),
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        customerBlockedOrSuspended:
-            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
-      ),
-      body: Column(
-        children: [
-          AnnouncementWidget(
-            currentPath: context.router.currentPath,
+    return PaymentModule(
+      isMarketPlace: isMarketPlace,
+      child: Scaffold(
+        key: WidgetKeys.accountSummaryPage,
+        appBar: CustomAppBar.commonAppBar(
+          title: Text(
+            context
+                .tr(isMarketPlace ? 'MP Account summary' : 'Account summary'),
+            style: Theme.of(context).textTheme.labelLarge,
           ),
-          Expanded(
-            child: AutoTabsRouter.tabBar(
-              routes: const [
-                AllInvoicesPageRoute(),
-                AllCreditsPageRoute(),
-                FullSummaryPageRoute(),
-              ],
-              builder: (context, child, tabController) => Column(
-                children: [
-                  TabBar(
-                    controller: tabController,
-                    tabs: [
-                      Tab(
-                        key: WidgetKeys.invoiceTab,
-                        text: context.tr('Invoices'),
-                      ),
-                      Tab(
-                        key: WidgetKeys.creditsTab,
-                        text: context.tr('Credits'),
-                      ),
-                      Tab(
-                        key: WidgetKeys.summaryTab,
-                        text: context.tr('Summary'),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      12.0,
-                      12.0,
-                      12.0,
-                      0.0,
-                    ),
-                    child: Row(
-                      children: [
-                        _AccountSummarySearchBar(
-                          currentActiveTabName: context.tabsRouter.current.name,
-                          key: WidgetKeys.accountSummarySearchBar,
+          customerBlockedOrSuspended:
+              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
+        ),
+        body: Column(
+          children: [
+            AnnouncementWidget(
+              currentPath: context.router.currentPath,
+            ),
+            Expanded(
+              child: AutoTabsRouter.tabBar(
+                routes: [
+                  AllInvoicesPageRoute(isMarketPlace: isMarketPlace),
+                  AllCreditsPageRoute(isMarketPlace: isMarketPlace),
+                  FullSummaryPageRoute(isMarketPlace: isMarketPlace),
+                ],
+                builder: (context, child, tabController) => Column(
+                  children: [
+                    TabBar(
+                      controller: tabController,
+                      tabs: [
+                        Tab(
+                          key: WidgetKeys.invoiceTab,
+                          text: context.tr('Invoices'),
                         ),
-                        _FilterTuneIcon(
-                          currentActiveTabName: context.tabsRouter.current.name,
-                          key: WidgetKeys.accountSummaryFilterButton,
+                        Tab(
+                          key: WidgetKeys.creditsTab,
+                          text: context.tr('Credits'),
                         ),
-                        _Export(
-                          currentActiveTabName: context.tabsRouter.current.name,
-                          key: WidgetKeys.accountSummaryDownloadButton,
+                        Tab(
+                          key: WidgetKeys.summaryTab,
+                          text: context.tr('Summary'),
                         ),
                       ],
                     ),
-                  ),
-                  Expanded(child: child),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        12.0,
+                        12.0,
+                        12.0,
+                        0.0,
+                      ),
+                      child: Row(
+                        children: [
+                          _AccountSummarySearchBar(
+                            currentActiveTabName:
+                                context.tabsRouter.current.name,
+                            key: WidgetKeys.accountSummarySearchBar,
+                          ),
+                          _FilterTuneIcon(
+                            currentActiveTabName:
+                                context.tabsRouter.current.name,
+                            key: WidgetKeys.accountSummaryFilterButton,
+                          ),
+                          _Export(
+                            currentActiveTabName:
+                                context.tabsRouter.current.name,
+                            key: WidgetKeys.accountSummaryDownloadButton,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(child: child),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

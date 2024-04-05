@@ -156,8 +156,8 @@ void main() {
   final chatBotBloc = ChatBotMockBloc();
   late MaterialPriceBloc mockMaterialPriceBloc;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
-  late AllInvoicesBloc allInvoicesBlocMock;
-  late AllCreditsBloc allCreditsBlocMock;
+  late ZPAllInvoicesBloc allInvoicesBlocMock;
+  late ZPAllCreditsBloc allCreditsBlocMock;
   late ViewByOrderFilterBloc viewByOrderFilterBlocMock;
   late PaymentSummaryDetailsBloc paymentSummaryDetailsBlocMock;
   late ProductSearchBloc productSearchBlocMock;
@@ -175,7 +175,7 @@ void main() {
   late PaymentSummaryFilterBloc paymentSummaryFilterBlocMock;
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late ArticlesInfoBloc articlesInfoBlocMock;
-  late FullSummaryBloc fullSummaryBlocMock;
+  late ZPFullSummaryBloc fullSummaryBlocMock;
   late ArticlesInfoFilterBloc articlesInfoFilterBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
   late AnnouncementFilterBloc announcementFilterBlocMock;
@@ -233,7 +233,7 @@ void main() {
     setUp(() {
       locator = GetIt.instance;
       customerCodeBlocMock = CustomerCodeBlocMock();
-      fullSummaryBlocMock = FullSummaryBlocMock();
+      fullSummaryBlocMock = ZPFullSummaryBlocMock();
       authBlocMock = AuthBlocMock();
       userBlocMock = UserBlocMock();
       accountSummaryMock = ZPAccountSummaryBlocMock();
@@ -269,8 +269,8 @@ void main() {
       loginFormBloc = LoginFormBlocMock();
       mockNotificationBloc = NotificationBlocMock();
       mockPriceOverrideBloc = PriceOverrideBlocMock();
-      allInvoicesBlocMock = AllInvoicesBlocMock();
-      allCreditsBlocMock = AllCreditsBlocMock();
+      allInvoicesBlocMock = ZPAllInvoicesBlocMock();
+      allCreditsBlocMock = ZPAllCreditsBlocMock();
       viewByOrderFilterBlocMock = ViewByOrderFilterBlocMock();
       paymentSummaryDetailsBlocMock = PaymentSummaryDetailsBlocMock();
       productSearchBlocMock = ProductSearchBlocMock();
@@ -430,7 +430,7 @@ void main() {
             BlocProvider<UserRestrictionListBloc>(
               create: (context) => userRestrictionListBlocMock,
             ),
-            BlocProvider<FullSummaryBloc>(
+            BlocProvider<ZPFullSummaryBloc>(
               create: (context) => fullSummaryBlocMock,
             ),
             BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),
@@ -525,10 +525,10 @@ void main() {
             BlocProvider<PriceOverrideBloc>(
               create: (context) => mockPriceOverrideBloc,
             ),
-            BlocProvider<AllInvoicesBloc>(
+            BlocProvider<ZPAllInvoicesBloc>(
               create: (context) => allInvoicesBlocMock,
             ),
-            BlocProvider<AllCreditsBloc>(
+            BlocProvider<ZPAllCreditsBloc>(
               create: (context) => allCreditsBlocMock,
             ),
             BlocProvider<ViewByOrderFilterBloc>(

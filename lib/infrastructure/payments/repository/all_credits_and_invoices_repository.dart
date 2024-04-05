@@ -32,6 +32,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
     required AllInvoicesFilter filter,
     required int pageSize,
     required int offset,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -51,6 +52,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
         filterMap: AllInvoicesFilterDto.fromDomain(filter).toMapList,
         pageSize: pageSize,
         offset: offset,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response);
@@ -68,6 +70,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
     required int pageSize,
     required int offset,
     required AllCreditsFilter filter,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -90,6 +93,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
         filterMap: salesOrg.isID
             ? AllCreditsFilterDto.fromDomain(filter).toIDCreditFilterMapList
             : AllCreditsFilterDto.fromDomain(filter).toMapList,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response);
@@ -107,6 +111,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
     required int pageSize,
     required int offset,
     required FullSummaryFilter filter,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -127,6 +132,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
         pageSize: pageSize,
         offset: offset,
         filterMap: FullSummaryFilterDto.fromDomain(filter).toMapList,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response);

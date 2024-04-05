@@ -1946,7 +1946,7 @@ void setupLocator() {
     ),
   );
 
-    locator.registerLazySingleton(
+  locator.registerLazySingleton(
     () => MPSoaBloc(
       repository: locator<SoaRepository>(),
     ),
@@ -2017,7 +2017,7 @@ void setupLocator() {
     ),
   );
 
-    locator.registerLazySingleton(
+  locator.registerLazySingleton(
     () => MPPaymentInProgressBloc(
       repository: locator<PaymentInProgressRepository>(),
     ),
@@ -2292,16 +2292,20 @@ void setupLocator() {
   //
   //============================================================
   locator.registerLazySingleton(
-    () => AllInvoicesFilterBloc(
-      allCreditsAndInvoicesRepository:
-          locator<AllCreditsAndInvoicesRepository>(),
-    ),
+    () => AllInvoicesFilterBloc(),
   );
   locator.registerLazySingleton(
     () => FullSummaryFilterBloc(),
   );
   locator.registerFactory(
-    () => AllInvoicesBloc(
+    () => ZPAllInvoicesBloc(
+      allCreditsAndInvoicesRepository:
+          locator<AllCreditsAndInvoicesRepository>(),
+      config: locator<Config>(),
+    ),
+  );
+  locator.registerFactory(
+    () => MPAllInvoicesBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
       config: locator<Config>(),
@@ -2330,24 +2334,39 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(
-    () => AllCreditsBloc(
+    () => ZPAllCreditsBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
       config: locator<Config>(),
     ),
   );
+
   locator.registerLazySingleton(
-    () => FullSummaryBloc(
+    () => MPAllCreditsBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
       config: locator<Config>(),
     ),
   );
+
   locator.registerLazySingleton(
-    () => AllCreditsFilterBloc(
+    () => ZPFullSummaryBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
+      config: locator<Config>(),
     ),
+  );
+
+  locator.registerLazySingleton(
+    () => MPFullSummaryBloc(
+      allCreditsAndInvoicesRepository:
+          locator<AllCreditsAndInvoicesRepository>(),
+      config: locator<Config>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AllCreditsFilterBloc(),
   );
   locator.registerLazySingleton(
     () => CreditAndInvoiceDetailsRepository(
@@ -2553,7 +2572,7 @@ void setupLocator() {
     ),
   );
 
-    locator.registerLazySingleton(
+  locator.registerLazySingleton(
     () => MPAccountSummaryBloc(
       accountSummaryRepository: locator<AccountSummaryRepository>(),
     ),

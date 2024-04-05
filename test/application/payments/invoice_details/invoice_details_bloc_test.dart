@@ -136,6 +136,7 @@ void main() {
             ),
             pageSize: 1,
             offset: 0,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(creditAndInvoiceItemList),
@@ -184,6 +185,7 @@ void main() {
             ),
             pageSize: 1,
             offset: 0,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(fakeError),
@@ -221,6 +223,7 @@ void main() {
             ),
             pageSize: 1,
             offset: 0,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(creditAndInvoiceItemList),

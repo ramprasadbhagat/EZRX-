@@ -41,7 +41,9 @@ class _PaymentOptionMenu extends StatelessWidget {
         key: WidgetKeys.accountSummaryMenu,
         icon: 'account_summary.svg',
         label: suffix + context.tr('Account summary'),
-        onTap: () => context.router.pushNamed('payments/invoice_credit'),
+        onTap: () => context.router.push(
+          AccountSummaryRoute(isMarketPlace: isMarketPlace),
+        ),
       ),
       _PaymentOptionData(
         key: WidgetKeys.paymentSummaryMenu,

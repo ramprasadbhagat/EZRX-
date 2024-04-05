@@ -18,28 +18,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../utils/widget_utils.dart';
-
-class FullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
-    implements FullSummaryBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class FullSummaryFilterBlocMock
-    extends MockBloc<FullSummaryFilterEvent, FullSummaryFilterState>
-    implements FullSummaryFilterBloc {}
-
-class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
 
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;
-  late FullSummaryBloc fullSummaryBlocMock;
+  late ZPFullSummaryBloc fullSummaryBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late FullSummaryFilterBloc fullSummaryFilterBlocMock;
   late AppRouter autoRouterMock;
@@ -72,13 +56,13 @@ void main() {
     customerCodeBlocMock = CustomerCodeBlocMock();
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
-    fullSummaryBlocMock = FullSummaryBlocMock();
+    fullSummaryBlocMock = ZPFullSummaryBlocMock();
     when(() => fullSummaryBlocMock.state)
         .thenReturn(FullSummaryState.initial());
     fullSummaryFilterBlocMock = FullSummaryFilterBlocMock();
     when(() => fullSummaryFilterBlocMock.state)
         .thenReturn(FullSummaryFilterState.initial());
-    eligibilityBlocMock = MockEligibilityBloc();
+    eligibilityBlocMock = EligibilityBlocMock();
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
   });
@@ -98,7 +82,7 @@ void main() {
           BlocProvider<FullSummaryFilterBloc>(
             create: (context) => fullSummaryFilterBlocMock,
           ),
-          BlocProvider<FullSummaryBloc>(
+          BlocProvider<ZPFullSummaryBloc>(
             create: (context) => fullSummaryBlocMock,
           ),
           BlocProvider<FullSummaryFilterBloc>(
@@ -110,7 +94,7 @@ void main() {
         ],
         child: const Scaffold(
           body: SingleChildScrollView(
-            child: FullSummaryFilterBottomSheet(),
+            child: FullSummaryFilterBottomSheet(isMarketPlace: false),
           ),
         ),
       ),

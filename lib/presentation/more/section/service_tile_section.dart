@@ -13,8 +13,9 @@ class ServiceTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: BlocBuilder<EligibilityBloc, EligibilityState>(
         buildWhen: (previous, current) =>
-            previous.isReturnsEnable != current.isReturnsEnable ||
-            previous.isPaymentEnabled != current.isPaymentEnabled,
+            current.user != previous.user ||
+            current.salesOrgConfigs != previous.salesOrgConfigs ||
+            current.customerCodeInfo != previous.customerCodeInfo,
         builder: (context, state) {
           final items = _getServiceTabs(context, state);
 
@@ -71,7 +72,7 @@ class ServiceTile extends StatelessWidget {
       if (state.isReturnsEnable) MoreDetailsTile.returnsTab(context),
       if (state.isPaymentEnabled) ...[
         MoreDetailsTile.paymentsTab(context),
-        if (state.marketPlaceEligible)
+        if (state.marketPlacePaymentEligible)
           MoreDetailsTile.marketplacePaymentsTab(context),
       ],
       if (state.isIDMarket) MoreDetailsTile.eZPointTab(context),

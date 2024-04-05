@@ -79,6 +79,7 @@ void main() {
         pageSize: 1,
         offset: 0,
         filter: allCreditsFilter,
+        isMarketPlace: false,
       );
       expect(result.isRight(), true);
     });
@@ -96,6 +97,7 @@ void main() {
         pageSize: 1,
         offset: 0,
         filter: allCreditsFilter,
+        isMarketPlace: false,
       );
       expect(result.isLeft(), true);
     });
@@ -117,6 +119,7 @@ void main() {
               amountValueFrom: RangeValue('1000'),
             ),
           ).toMapList,
+          isMarketPlace: false,
         ),
       ).thenAnswer(
         (invocation) async => mockList,
@@ -130,6 +133,7 @@ void main() {
         pageSize: 1,
         offset: 0,
         filter: allCreditsFilter,
+        isMarketPlace: false,
       );
       expect(result.isRight(), true);
     });
@@ -152,6 +156,7 @@ void main() {
               amountValueFrom: RangeValue('1000'),
             ),
           ).toIDCreditFilterMapList,
+          isMarketPlace: false,
         ),
       ).thenAnswer(
         (invocation) async => mockList,
@@ -163,6 +168,7 @@ void main() {
         pageSize: 1,
         offset: 0,
         filter: allCreditsFilter,
+        isMarketPlace: false,
       );
       expect(result.isRight(), true);
     });
@@ -185,6 +191,7 @@ void main() {
               amountValueFrom: RangeValue('1000'),
             ),
           ).toMapList,
+          isMarketPlace: false,
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -195,6 +202,7 @@ void main() {
         pageSize: 1,
         offset: 0,
         filter: allCreditsFilter,
+        isMarketPlace: false,
       );
       expect(result.isLeft(), true);
     });

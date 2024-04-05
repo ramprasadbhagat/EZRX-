@@ -2,6 +2,7 @@ part of 'package:ezrxmobile/presentation/payments/account_summary/account_summar
 
 class _FilterTuneIcon extends StatelessWidget {
   final String currentActiveTabName;
+
   const _FilterTuneIcon({
     Key? key,
     required this.currentActiveTabName,
@@ -11,6 +12,7 @@ class _FilterTuneIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     if (currentActiveTabName == AllInvoicesPageRoute.name) {
       return BlocBuilder<AllInvoicesBloc, AllInvoicesState>(
+        bloc: context.allInvoicesBloc(context.isMPPayment),
         buildWhen: (previous, current) =>
             previous.appliedFilter.appliedFilterCount !=
                 current.appliedFilter.appliedFilterCount ||
@@ -25,13 +27,14 @@ class _FilterTuneIcon extends StatelessWidget {
     }
     if (currentActiveTabName == AllCreditsPageRoute.name) {
       return BlocBuilder<AllCreditsBloc, AllCreditsState>(
+        bloc: context.allCreditsBloc(context.isMPPayment),
         buildWhen: (previous, current) =>
             previous.appliedFilter.appliedFilterCount !=
                 current.appliedFilter.appliedFilterCount ||
             previous.isLoading != current.isLoading,
         builder: (context, state) {
           final count = state.appliedFilter.appliedFilterCount;
-          
+
           return _FilterElement(
             key: WidgetKeys.creditFilterApplied(count),
             isActive: !state.isLoading,
@@ -42,6 +45,7 @@ class _FilterTuneIcon extends StatelessWidget {
     }
     if (currentActiveTabName == FullSummaryPageRoute.name) {
       return BlocBuilder<FullSummaryBloc, FullSummaryState>(
+        bloc: context.fullSummaryBloc(context.isMPPayment),
         buildWhen: (previous, current) =>
             previous.appliedFilter.appliedFilterCount !=
                 current.appliedFilter.appliedFilterCount ||
@@ -83,20 +87,25 @@ class _FilterElement extends StatelessWidget {
     );
   }
 
-  void _showFilterPage(BuildContext context) {
+  Future<void> _showFilterPage(BuildContext context) async {
     final currentActiveTabName = context.tabsRouter.current.name;
     if (currentActiveTabName == AllInvoicesPageRoute.name) {
       context.read<AllInvoicesFilterBloc>().add(
             AllInvoicesFilterEvent.openFilterBottomSheet(
-              appliedFilter:
-                  context.read<AllInvoicesBloc>().state.appliedFilter,
+              appliedFilter: context
+                  .allInvoicesBloc(context.isMPPayment)
+                  .state
+                  .appliedFilter,
             ),
           );
     }
     if (currentActiveTabName == AllCreditsPageRoute.name) {
       context.read<AllCreditsFilterBloc>().add(
             AllCreditsFilterEvent.openFilterBottomSheet(
-              appliedFilter: context.read<AllCreditsBloc>().state.appliedFilter,
+              appliedFilter: context
+                  .allCreditsBloc(context.isMPPayment)
+                  .state
+                  .appliedFilter,
             ),
           );
     }
@@ -104,31 +113,35 @@ class _FilterElement extends StatelessWidget {
     if (currentActiveTabName == FullSummaryPageRoute.name) {
       context.read<FullSummaryFilterBloc>().add(
             FullSummaryFilterEvent.openFilterBottomSheet(
-              appliedFilter:
-                  context.read<FullSummaryBloc>().state.appliedFilter,
+              appliedFilter: context
+                  .fullSummaryBloc(context.isMPPayment)
+                  .state
+                  .appliedFilter,
             ),
           );
     }
 
-    showModalBottomSheet(
+    await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       enableDrag: false,
       isDismissible: false,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(16),
-        ),
-      ),
+      clipBehavior: Clip.hardEdge,
       builder: (_) {
         if (currentActiveTabName == AllInvoicesPageRoute.name) {
-          return const AllInvoicesFilterBottomSheet();
+          return AllInvoicesFilterBottomSheet(
+            isMarketPlace: context.isMPPayment,
+          );
         }
         if (currentActiveTabName == AllCreditsPageRoute.name) {
-          return const AllCreditsFilterBottomSheet();
+          return AllCreditsFilterBottomSheet(
+            isMarketPlace: context.isMPPayment,
+          );
         }
         if (currentActiveTabName == FullSummaryPageRoute.name) {
-          return const FullSummaryFilterBottomSheet();
+          return FullSummaryFilterBottomSheet(
+            isMarketPlace: context.isMPPayment,
+          );
         }
 
         return const SizedBox.shrink();

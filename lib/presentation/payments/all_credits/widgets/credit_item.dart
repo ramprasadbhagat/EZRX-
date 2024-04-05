@@ -23,12 +23,14 @@ class _CreditsItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Flexible(
+                if (context.isMPPayment) ...[
+                  MarketPlaceLogo.small(),
+                  const SizedBox(width: 8),
+                ],
+                Expanded(
                   child: Text(
-                    '${context.tr('Account credit')} #${creditItem.searchKey.getOrDefaultValue('')}',
+                    '${context.tr('Account credit')} #${creditItem.searchKey.displayNAIfEmpty}',
                     key: WidgetKeys.creditItemId(
                       creditItem.searchKey.getOrDefaultValue(''),
                     ),

@@ -3,6 +3,7 @@ part of 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
 class _CreditGroup extends StatelessWidget {
   final CreditAndInvoiceGroup data;
   final bool showDivider;
+
   const _CreditGroup({
     Key? key,
     required this.data,

@@ -1,5 +1,7 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,130 +13,134 @@ import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dar
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
 
 class AllCreditsFilterBottomSheet extends StatelessWidget {
-  const AllCreditsFilterBottomSheet({Key? key}) : super(key: key);
+  final bool isMarketPlace;
+
+  const AllCreditsFilterBottomSheet({
+    Key? key,
+    required this.isMarketPlace,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AllCreditsFilterBloc, AllCreditsFilterState>(
-      buildWhen: (previous, current) =>
-          previous.showErrorMessages != current.showErrorMessages,
-      builder: (context, state) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          key: WidgetKeys.tempFilter,
-          children: <Widget>[
-            AppBar(
-              title: Text(
-                context.tr('Filter'),
-              ),
-              automaticallyImplyLeading: false,
-              centerTitle: false,
-              elevation: 0,
-              actions: [
-                IconButton(
-                  key: WidgetKeys.closeButton,
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(
-                    Icons.clear,
-                    color: ZPColors.black,
-                  ),
+    return PaymentModule(
+      isMarketPlace: isMarketPlace,
+      child: BlocBuilder<AllCreditsFilterBloc, AllCreditsFilterState>(
+        buildWhen: (previous, current) =>
+            previous.showErrorMessages != current.showErrorMessages,
+        builder: (context, state) => SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            key: WidgetKeys.tempFilter,
+            children: <Widget>[
+              AppBar(
+                title: Text(
+                  context.tr('Filter'),
                 ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16.0,
-                horizontal: 12.0,
+                automaticallyImplyLeading: false,
+                centerTitle: false,
+                elevation: 0,
+                actions: [
+                  IconButton(
+                    key: WidgetKeys.closeButton,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(
+                      Icons.clear,
+                      color: ZPColors.black,
+                    ),
+                  ),
+                ],
               ),
-              child: Form(
-                autovalidateMode: state.showErrorMessages
-                    ? AutovalidateMode.always
-                    : AutovalidateMode.disabled,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: Text(
-                        context.tr('Document date'),
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        const _FromDocumentDateFilter(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            '-',
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16.0,
+                  horizontal: 12.0,
+                ),
+                child: Form(
+                  autovalidateMode: state.showErrorMessages
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text(
+                          context.tr('Document date'),
+                          style: Theme.of(context).textTheme.labelSmall,
                         ),
-                        const _ToDocumentDateFilter(),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
-                      child: Text(
-                        context.tr('Amount range'),
-                        style: Theme.of(context).textTheme.labelSmall,
                       ),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const _AmountValueFromFilter(),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Text(
-                            '-',
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                        ),
-                        const _AmountValueToFilter(),
-                      ],
-                    ),
-                    (state.showErrorMessages &&
-                            !state.filter.isAmountValueRangeValid)
-                        ? ValueRangeError(
-                            valueName: context.tr('Amount'),
-                            isValid: state.filter.isAmountValueRangeValid,
-                          )
-                        : const SizedBox.shrink(),
-                    if (!context.read<EligibilityBloc>().state.isIDMarket)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
+                          const _FromDocumentDateFilter(),
                           Padding(
-                            padding:
-                                const EdgeInsets.only(bottom: 16.0, top: 24.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Text(
-                              context.tr('Status'),
-                              style: Theme.of(context).textTheme.labelSmall,
+                              '-',
+                              style: Theme.of(context).textTheme.titleSmall,
                             ),
                           ),
-                          const _StatusesSelector(),
+                          const _ToDocumentDateFilter(),
                         ],
                       ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    const Row(
-                      children: [
-                        _ResetButton(),
-                        SizedBox(
-                          width: 16,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
+                        child: Text(
+                          context.tr('Amount range'),
+                          style: Theme.of(context).textTheme.labelSmall,
                         ),
-                        _ApplyButton(),
-                      ],
-                    ),
-                  ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _AmountValueFromFilter(),
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              '-',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                          ),
+                          const _AmountValueToFilter(),
+                        ],
+                      ),
+                      (state.showErrorMessages &&
+                              !state.filter.isAmountValueRangeValid)
+                          ? ValueRangeError(
+                              valueName: context.tr('Amount'),
+                              isValid: state.filter.isAmountValueRangeValid,
+                            )
+                          : const SizedBox.shrink(),
+                      if (!context.read<EligibilityBloc>().state.isIDMarket)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(bottom: 16.0, top: 24.0),
+                              child: Text(
+                                context.tr('Status'),
+                                style: Theme.of(context).textTheme.labelSmall,
+                              ),
+                            ),
+                            const _StatusesSelector(),
+                          ],
+                        ),
+                      const SizedBox(height: 40),
+                      const Row(
+                        children: [
+                          _ResetButton(),
+                          SizedBox(width: 16),
+                          _ApplyButton(),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -394,7 +400,9 @@ class _ToDocumentDateFilter extends StatelessWidget {
 }
 
 class _ResetButton extends StatelessWidget {
-  const _ResetButton({Key? key}) : super(key: key);
+  const _ResetButton({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -404,11 +412,11 @@ class _ResetButton extends StatelessWidget {
         onPressed: () {
           if (context.read<AllCreditsFilterBloc>().state.filter.excludeSearch !=
               AllCreditsFilter.defaultFilter()) {
-            context.read<AllCreditsBloc>().add(
+            context.allCreditsBloc(context.isMPPayment).add(
                   AllCreditsEvent.fetch(
                     appliedFilter: AllCreditsFilter.defaultFilter().copyWith(
                       searchKey: context
-                          .read<AllCreditsBloc>()
+                          .allCreditsBloc(context.isMPPayment)
                           .state
                           .appliedFilter
                           .searchKey,
@@ -428,7 +436,9 @@ class _ResetButton extends StatelessWidget {
 }
 
 class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({Key? key}) : super(key: key);
+  const _ApplyButton({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -442,8 +452,11 @@ class _ApplyButton extends StatelessWidget {
           );
           if (filterBloc.state.filter.isValid) {
             if (filterBloc.state.filter !=
-                context.read<AllCreditsBloc>().state.appliedFilter) {
-              context.read<AllCreditsBloc>().add(
+                context
+                    .allCreditsBloc(context.isMPPayment)
+                    .state
+                    .appliedFilter) {
+              context.allCreditsBloc(context.isMPPayment).add(
                     AllCreditsEvent.fetch(
                       appliedFilter: filterBloc.state.filter,
                     ),

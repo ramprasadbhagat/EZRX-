@@ -375,17 +375,26 @@ class App extends StatelessWidget {
         BlocProvider<FullSummaryFilterBloc>(
           create: (context) => locator<FullSummaryFilterBloc>(),
         ),
-        BlocProvider<AllInvoicesBloc>(
-          create: (context) => locator<AllInvoicesBloc>(),
+        BlocProvider<ZPAllInvoicesBloc>(
+          create: (context) => locator<ZPAllInvoicesBloc>(),
+        ),
+        BlocProvider<MPAllInvoicesBloc>(
+          create: (context) => locator<MPAllInvoicesBloc>(),
         ),
         BlocProvider<CreditAndInvoiceDetailsBloc>(
           create: (context) => locator<CreditAndInvoiceDetailsBloc>(),
         ),
-        BlocProvider<AllCreditsBloc>(
-          create: (context) => locator<AllCreditsBloc>(),
+        BlocProvider<ZPAllCreditsBloc>(
+          create: (context) => locator<ZPAllCreditsBloc>(),
         ),
-        BlocProvider<FullSummaryBloc>(
-          create: (context) => locator<FullSummaryBloc>(),
+        BlocProvider<MPAllCreditsBloc>(
+          create: (context) => locator<MPAllCreditsBloc>(),
+        ),
+        BlocProvider<ZPFullSummaryBloc>(
+          create: (context) => locator<ZPFullSummaryBloc>(),
+        ),
+        BlocProvider<MPFullSummaryBloc>(
+          create: (context) => locator<MPFullSummaryBloc>(),
         ),
         BlocProvider<OutstandingInvoicesBloc>(
           create: (context) => locator<OutstandingInvoicesBloc>(),

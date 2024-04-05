@@ -27,39 +27,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class FullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
-    implements FullSummaryBloc {}
-
-class FullSummaryFilterBlocMock
-    extends MockBloc<FullSummaryFilterEvent, FullSummaryFilterState>
-    implements FullSummaryFilterBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class CreditAndInvoiceDetailsBlocMock
-    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
-    implements CreditAndInvoiceDetailsBloc {}
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
 
 void main() {
   late AppRouter autoRouterMock;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
   late NewPaymentBloc newPaymentBlocMock;
-  late FullSummaryBloc fullSummaryBlocMock;
+  late ZPFullSummaryBloc fullSummaryBlocMock;
   late FullSummaryFilterBloc fullSummaryFilterBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late AnnouncementBloc announcementBlocMock;
@@ -72,11 +49,11 @@ void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
     creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
-    fullSummaryBlocMock = FullSummaryBlocMock();
+    fullSummaryBlocMock = ZPFullSummaryBlocMock();
     fullSummaryFilterBlocMock = FullSummaryFilterBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
@@ -110,7 +87,7 @@ void main() {
         BlocProvider<NewPaymentBloc>(
           create: (context) => newPaymentBlocMock,
         ),
-        BlocProvider<FullSummaryBloc>(
+        BlocProvider<ZPFullSummaryBloc>(
           create: (context) => fullSummaryBlocMock,
         ),
         BlocProvider<FullSummaryFilterBloc>(
@@ -126,7 +103,7 @@ void main() {
           create: (context) => authBlocMock,
         ),
       ],
-      child: const FullSummaryPage(),
+      child: const FullSummaryPage(isMarketPlace: false),
     );
   }
 

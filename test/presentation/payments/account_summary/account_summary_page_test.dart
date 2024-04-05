@@ -31,56 +31,20 @@ import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_f
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../utils/widget_utils.dart';
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AllCreditsFilterBlocMock
-    extends MockBloc<AllCreditsFilterEvent, AllCreditsFilterState>
-    implements AllCreditsFilterBloc {}
-
-class MockDownloadPaymentAttachmentsBloc extends MockBloc<
-        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
-    implements DownloadPaymentAttachmentsBloc {}
-
-class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
-    implements AllCreditsBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
-    implements AllInvoicesBloc {}
-
-class AllInvoicesFilterBlocMock
-    extends MockBloc<AllInvoicesFilterEvent, AllInvoicesFilterState>
-    implements AllInvoicesFilterBloc {}
-
-class FullSummaryFilterBlocMock
-    extends MockBloc<FullSummaryFilterEvent, FullSummaryFilterState>
-    implements FullSummaryFilterBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class FullSummaryBlocMock extends MockBloc<FullSummaryEvent, FullSummaryState>
-    implements FullSummaryBloc {}
 
 void main() {
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
-  late AllCreditsBloc allCreditsBlocMock;
-  late AllInvoicesBloc allInvoicesBlocMock;
+  late ZPAllCreditsBloc allCreditsBlocMock;
+  late ZPAllInvoicesBloc allInvoicesBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
-  late FullSummaryBloc fullSummaryBlocMock;
+  late ZPFullSummaryBloc fullSummaryBlocMock;
   late FullSummaryFilterBloc fullSummaryFilterBlocMock;
   late DownloadPaymentAttachmentsBloc mockDownloadPaymentAttachmentsBloc;
   final allCreditsFilter = AllCreditsFilter(
@@ -109,15 +73,15 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     authBlocMock = AuthBlocMock();
     autoRouterMock = locator<AppRouter>();
-    allCreditsBlocMock = AllCreditsBlocMock();
-    allInvoicesBlocMock = AllInvoicesBlocMock();
+    allCreditsBlocMock = ZPAllCreditsBlocMock();
+    allInvoicesBlocMock = ZPAllInvoicesBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
-    mockDownloadPaymentAttachmentsBloc = MockDownloadPaymentAttachmentsBloc();
+    mockDownloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
-    fullSummaryBlocMock = FullSummaryBlocMock();
+    fullSummaryBlocMock = ZPFullSummaryBlocMock();
     fullSummaryFilterBlocMock = FullSummaryFilterBlocMock();
   });
 
@@ -167,13 +131,13 @@ void main() {
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
         ),
-        BlocProvider<AllCreditsBloc>(
+        BlocProvider<ZPAllCreditsBloc>(
           create: (context) => allCreditsBlocMock,
         ),
         BlocProvider<AllCreditsFilterBloc>(
           create: (context) => allCreditsFilterBlocMock,
         ),
-        BlocProvider<AllInvoicesBloc>(
+        BlocProvider<ZPAllInvoicesBloc>(
           create: (context) => allInvoicesBlocMock,
         ),
         BlocProvider<AnnouncementBloc>(
@@ -189,14 +153,14 @@ void main() {
         BlocProvider<NewPaymentBloc>(
           create: (context) => newPaymentBlocMock,
         ),
-        BlocProvider<FullSummaryBloc>(
+        BlocProvider<ZPFullSummaryBloc>(
           create: (context) => fullSummaryBlocMock,
         ),
         BlocProvider<FullSummaryFilterBloc>(
           create: (context) => fullSummaryFilterBlocMock,
         ),
       ],
-      child: const AccountSummary(),
+      child: const AccountSummary(isMarketPlace: false),
     );
   }
 

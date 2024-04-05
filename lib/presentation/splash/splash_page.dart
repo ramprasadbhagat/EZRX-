@@ -498,8 +498,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               _initializeHomeTabDependencies(context, state);
               _initializeProduct();
               _initializeCart(state);
-              _initializeAccountSummary(state);
-              _initPaymentModule(state);
+              _initializePaymentModule(state);
 
               context.read<EligibilityBloc>().add(
                     const EligibilityEvent.registerChatBot(),
@@ -602,24 +601,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     AdditionalDetailsEvent.initialized(
                       config: state.salesOrgConfigs,
                       customerCodeInfo: state.customerCodeInfo,
-                    ),
-                  );
-
-              context.read<AllInvoicesBloc>().add(
-                    AllInvoicesEvent.fetch(
-                      appliedFilter: AllInvoicesFilter.defaultFilter(),
-                    ),
-                  );
-
-              context.read<AllCreditsBloc>().add(
-                    AllCreditsEvent.fetch(
-                      appliedFilter: AllCreditsFilter.defaultFilter(),
-                    ),
-                  );
-
-              context.read<FullSummaryBloc>().add(
-                    FullSummaryEvent.fetch(
-                      appliedFilter: FullSummaryFilter.defaultFilter(),
                     ),
                   );
 
@@ -1320,30 +1301,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     }
   }
 
-  /// Use for all account summary related initialized bloc event here
-  void _initializeAccountSummary(EligibilityState eligibilityState) {
-    context.read<AllInvoicesBloc>().add(
-          AllInvoicesEvent.initialized(
-            salesOrganisation: eligibilityState.salesOrganisation,
-            customerCodeInfo: eligibilityState.customerCodeInfo,
-          ),
-        );
+  void _initializePaymentModule(EligibilityState state) {
+    //============================================================
+    //  Payment Home
+    //
+    //============================================================
 
-    context.read<AllCreditsBloc>().add(
-          AllCreditsEvent.initialized(
-            salesOrganisation: eligibilityState.salesOrganisation,
-            customerCodeInfo: eligibilityState.customerCodeInfo,
-          ),
-        );
-    context.read<FullSummaryBloc>().add(
-          FullSummaryEvent.initialized(
-            salesOrganisation: eligibilityState.salesOrganisation,
-            customerCodeInfo: eligibilityState.customerCodeInfo,
-          ),
-        );
-  }
-
-  void _initPaymentModule(EligibilityState state) {
     context.read<ZPAccountSummaryBloc>().add(
           AccountSummaryEvent.fetchInvoiceSummary(
             custCode: state.customerCodeInfo.customerCodeSoldTo,
@@ -1372,7 +1335,56 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
 
+    //============================================================
+    //  Account Summary
+    //
+    //============================================================
+
+    context.read<ZPAllInvoicesBloc>()
+      ..add(
+        AllInvoicesEvent.initialized(
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+        ),
+      )
+      ..add(
+        AllInvoicesEvent.fetch(
+          appliedFilter: AllInvoicesFilter.defaultFilter(),
+        ),
+      );
+
+    context.read<ZPAllCreditsBloc>()
+      ..add(
+        AllCreditsEvent.initialized(
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+        ),
+      )
+      ..add(
+        AllCreditsEvent.fetch(
+          appliedFilter: AllCreditsFilter.defaultFilter(),
+        ),
+      );
+
+    context.read<ZPFullSummaryBloc>()
+      ..add(
+        FullSummaryEvent.initialized(
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+        ),
+      )
+      ..add(
+        FullSummaryEvent.fetch(
+          appliedFilter: FullSummaryFilter.defaultFilter(),
+        ),
+      );
+
     if (state.marketPlacePaymentEligible) {
+      //============================================================
+      //  Payment Home
+      //
+      //============================================================
+
       context.read<MPAccountSummaryBloc>().add(
             AccountSummaryEvent.fetchInvoiceSummary(
               custCode: state.customerCodeInfo.customerCodeSoldTo,
@@ -1400,6 +1412,50 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               salesOrg: state.salesOrg,
             ),
           );
+
+      //============================================================
+      //  Account Summary
+      //
+      //============================================================
+
+      context.read<MPAllInvoicesBloc>()
+        ..add(
+          AllInvoicesEvent.initialized(
+            salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
+          ),
+        );
+
+      context.read<MPAllCreditsBloc>()
+        ..add(
+          AllCreditsEvent.initialized(
+            salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.defaultFilter(),
+          ),
+        );
+
+      context.read<MPFullSummaryBloc>()
+        ..add(
+          FullSummaryEvent.initialized(
+            salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          FullSummaryEvent.fetch(
+            appliedFilter: FullSummaryFilter.defaultFilter(),
+          ),
+        );
     }
   }
 

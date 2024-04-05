@@ -21,10 +21,11 @@ class QuickAccessMenuPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
-          previous.salesOrgConfigs != current.salesOrgConfigs ||
-          previous.customerCodeInfo != current.customerCodeInfo,
+          current.user != previous.user ||
+          current.salesOrgConfigs != previous.salesOrgConfigs ||
+          current.customerCodeInfo != previous.customerCodeInfo,
       builder: (context, state) {
-        final quickAccessItems = _getQuickAccessItems(context);
+        final quickAccessItems = _getQuickAccessItems(context, state);
 
         return SizedBox(
           width: MediaQuery.of(context).size.width,
@@ -114,7 +115,10 @@ class _QuickAccessMenuData {
   });
 }
 
-List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
+List<_QuickAccessMenuData> _getQuickAccessItems(
+  BuildContext context,
+  EligibilityState eligibilityState,
+) {
   final homeQuickAccessOrdersMenu = _QuickAccessMenuData(
     key: WidgetKeys.homeQuickAccessOrdersMenu,
     icon: 'order_menu.svg',
@@ -171,8 +175,6 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     onTap: () =>
         context.read<ChatBotBloc>().add(const ChatBotEvent.startChatbot()),
   );
-
-  final eligibilityState = context.read<EligibilityBloc>().state;
 
   return <_QuickAccessMenuData>[
     // homeQuickAccessWebLoginMenu,

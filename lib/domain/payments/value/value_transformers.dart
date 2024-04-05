@@ -61,4 +61,4 @@ bool checkIsCreditByCode(String debitCreditCode) => debitCreditCode == 'H';
 
 String getReferenceListString(String referenceId) => referenceId.isNotEmpty
     ? referenceId.split(',').map((e) => '#${e.trim()}').join(', ')
-    : '';
+    : '-';

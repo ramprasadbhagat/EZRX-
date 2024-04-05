@@ -318,9 +318,13 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     AccountSummaryRoute.name: (routeData) {
+      final args = routeData.argsAs<AccountSummaryRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i26.AccountSummary(),
+        child: _i26.AccountSummary(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     HomeNavigationTabbarRoute.name: (routeData) {
@@ -541,21 +545,33 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     AllInvoicesPageRoute.name: (routeData) {
+      final args = routeData.argsAs<AllInvoicesPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i57.AllInvoicesPage(),
+        child: _i57.AllInvoicesPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     AllCreditsPageRoute.name: (routeData) {
+      final args = routeData.argsAs<AllCreditsPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i58.AllCreditsPage(),
+        child: _i58.AllCreditsPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     FullSummaryPageRoute.name: (routeData) {
+      final args = routeData.argsAs<FullSummaryPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i59.FullSummaryPage(),
+        child: _i59.FullSummaryPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     HomeTabRoute.name: (routeData) {
@@ -1492,15 +1508,38 @@ class PaymentSummaryPageRoute extends _i77.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i26.AccountSummary]
-class AccountSummaryRoute extends _i77.PageRouteInfo<void> {
-  const AccountSummaryRoute({List<_i77.PageRouteInfo>? children})
-      : super(
+class AccountSummaryRoute extends _i77.PageRouteInfo<AccountSummaryRouteArgs> {
+  AccountSummaryRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+    List<_i77.PageRouteInfo>? children,
+  }) : super(
           AccountSummaryRoute.name,
           path: 'payments/invoice_credit',
+          args: AccountSummaryRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AccountSummaryRoute';
+}
+
+class AccountSummaryRouteArgs {
+  const AccountSummaryRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'AccountSummaryRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for
@@ -2056,38 +2095,106 @@ class ComboDetailPageRoute extends _i77.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i57.AllInvoicesPage]
-class AllInvoicesPageRoute extends _i77.PageRouteInfo<void> {
-  const AllInvoicesPageRoute()
-      : super(
+class AllInvoicesPageRoute
+    extends _i77.PageRouteInfo<AllInvoicesPageRouteArgs> {
+  AllInvoicesPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           AllInvoicesPageRoute.name,
           path: 'all_invoices',
+          args: AllInvoicesPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'AllInvoicesPageRoute';
 }
 
+class AllInvoicesPageRouteArgs {
+  const AllInvoicesPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'AllInvoicesPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
+}
+
 /// generated route for
 /// [_i58.AllCreditsPage]
-class AllCreditsPageRoute extends _i77.PageRouteInfo<void> {
-  const AllCreditsPageRoute()
-      : super(
+class AllCreditsPageRoute extends _i77.PageRouteInfo<AllCreditsPageRouteArgs> {
+  AllCreditsPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           AllCreditsPageRoute.name,
           path: 'all_credits',
+          args: AllCreditsPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'AllCreditsPageRoute';
 }
 
+class AllCreditsPageRouteArgs {
+  const AllCreditsPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'AllCreditsPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
+}
+
 /// generated route for
 /// [_i59.FullSummaryPage]
-class FullSummaryPageRoute extends _i77.PageRouteInfo<void> {
-  const FullSummaryPageRoute()
-      : super(
+class FullSummaryPageRoute
+    extends _i77.PageRouteInfo<FullSummaryPageRouteArgs> {
+  FullSummaryPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           FullSummaryPageRoute.name,
           path: 'full_summary',
+          args: FullSummaryPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'FullSummaryPageRoute';
+}
+
+class FullSummaryPageRouteArgs {
+  const FullSummaryPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'FullSummaryPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for

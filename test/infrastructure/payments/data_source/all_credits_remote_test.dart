@@ -79,6 +79,7 @@ void main() {
           pageSize: 1,
           offset: 0,
           filterMap: [],
+          isMarketPlace: false,
         );
 
         final expectResult = <CreditAndInvoiceItem>[];
@@ -120,13 +121,16 @@ void main() {
           data: data,
         );
 
-        await remoteDataSource.filterCredits(
+        await remoteDataSource
+            .filterCredits(
           customerCode: 'mock_soldTo',
           salesOrg: 'mock_salesOrg',
           pageSize: 1,
           offset: 0,
           filterMap: [],
-        ).onError((error, stackTrace) async {
+          isMarketPlace: false,
+        )
+            .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
           return Future.value(List<CreditAndInvoiceItem>.empty());
         });
@@ -165,13 +169,16 @@ void main() {
           data: data,
         );
 
-        await remoteDataSource.filterCredits(
+        await remoteDataSource
+            .filterCredits(
           customerCode: 'mock_soldTo',
           salesOrg: 'mock_salesOrg',
           pageSize: 1,
           offset: 0,
           filterMap: [],
-        ).onError((error, stackTrace) async {
+          isMarketPlace: false,
+        )
+            .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
           return Future.value(List<CreditAndInvoiceItem>.empty());
         });

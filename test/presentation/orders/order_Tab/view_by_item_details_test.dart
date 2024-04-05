@@ -65,6 +65,8 @@ import 'package:ezrxmobile/domain/order/entities/payment_term.dart'
     as payment_term;
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
@@ -75,74 +77,6 @@ import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
-    implements ViewByItemsBloc {}
-
-class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
-    implements ViewByOrderBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ViewByItemDetailsBlockMock
-    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
-    implements ViewByItemDetailsBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class ReOrderPermissionBlocMock
-    extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
-    implements ReOrderPermissionBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
-    implements AllInvoicesBloc {}
-
-class CreditAndInvoiceDetailsBlocMock
-    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
-    implements CreditAndInvoiceDetailsBloc {}
-
-class ViewByOrderDetailsBlocMock
-    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
-    implements ViewByOrderDetailsBloc {}
-
-class PoAttachmentBlocMock
-    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
-    implements PoAttachmentBloc {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
-
-class ClevertapServiceMock extends Mock implements ClevertapService {}
-
-class MockProductImageBloc
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class PaymentCustomerInformationBlocMock extends MockBloc<
-        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
-    implements PaymentCustomerInformationBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -159,7 +93,8 @@ void main() {
   late OrderHistoryItem fakeOrderHistoryItem;
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late CartBloc cartBlocMock;
-  late AllInvoicesBloc allInvoicesBlocMock;
+  late ZPAllInvoicesBloc allInvoicesBlocMock;
+  late MPAllInvoicesBloc mpAllInvoicesBlocMock;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   late PoAttachmentBloc poAttachmentBlocMock;
@@ -189,10 +124,8 @@ void main() {
     locator.registerFactory<ReOrderPermissionBloc>(
       () => reOrderPermissionBlocMock,
     );
-    locator.registerFactory<AllInvoicesBloc>(
-      () => allInvoicesBlocMock,
-    );
-
+    locator.registerFactory<ZPAllInvoicesBloc>(() => allInvoicesBlocMock);
+    locator.registerFactory<MPAllInvoicesBloc>(() => mpAllInvoicesBlocMock);
     fakeItemList =
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
     fakeOrder = await ViewByOrderLocalDataSource().getViewByOrders();
@@ -217,18 +150,19 @@ void main() {
     setUp(() async {
       cartBlocMock = CartBlocMock();
       viewByItemsBlocMock = ViewByItemsBlocMock();
-      viewByItemDetailsBlocMock = ViewByItemDetailsBlockMock();
+      viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
       viewByOrderBlocMock = ViewByOrderBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       productImageBlocMock = ProductImageBlocMock();
-      allInvoicesBlocMock = AllInvoicesBlocMock();
+      allInvoicesBlocMock = ZPAllInvoicesBlocMock();
+      mpAllInvoicesBlocMock = MPAllInvoicesBlocMock();
       creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
       viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
       poAttachmentBlocMock = PoAttachmentBlocMock();
-      mockAuthBloc = MockAuthBloc();
-      mockProductImageBloc = MockProductImageBloc();
+      mockAuthBloc = AuthBlocMock();
+      mockProductImageBloc = ProductImageBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
       customerLicenseBlocMock = CustomerLicenseBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
@@ -253,7 +187,8 @@ void main() {
           .thenReturn(CustomerLicenseState.initial());
       when(() => allInvoicesBlocMock.state)
           .thenReturn(AllInvoicesState.initial());
-      //when(() => autoRouterMock.current).thenReturn(routeData);
+      when(() => mpAllInvoicesBlocMock.state)
+          .thenReturn(AllInvoicesState.initial());
       when(() => creditAndInvoiceDetailsBlocMock.state)
           .thenReturn(CreditAndInvoiceDetailsState.initial());
       when(() => viewByOrderDetailsBlocMock.state)
@@ -319,7 +254,7 @@ void main() {
           BlocProvider<ViewByOrderDetailsBloc>(
             create: ((context) => viewByOrderDetailsBlocMock),
           ),
-          BlocProvider<AllInvoicesBloc>(
+          BlocProvider<ZPAllInvoicesBloc>(
             create: ((context) => allInvoicesBlocMock),
           ),
           BlocProvider<PoAttachmentBloc>(
