@@ -155,7 +155,10 @@ void main() {
         .thenReturn(EligibilityState.initial());
   });
 
-  Future getWidget(tester) async {
+  Future getWidget(
+    tester, {
+    required List<CustomerDocumentDetail> creditItems,
+  }) async {
     return tester.pumpWidget(
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
@@ -187,7 +190,7 @@ void main() {
         child: Scaffold(
           body: CreditDetailsSection(
             creditItem: fakeInvoice,
-            creditItems: fakeItemList,
+            creditItems: creditItems,
           ),
         ),
       ),
@@ -210,7 +213,7 @@ void main() {
         CustomerCodeState.initial(),
       );
 
-      await getWidget(tester);
+      await getWidget(tester, creditItems: fakeItemList);
       await tester.pump();
 
       final item = find.byType(CreditDetailsSection);
@@ -385,6 +388,152 @@ void main() {
               false,
             ),
             findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+    },
+    variant: eligibilityStateVariant,
+  );
+  testWidgets(
+    'credit details section -- Display message for credit note without return items',
+    (tester) async {
+      final currentEligibilityState =
+          eligibilityStateVariant.currentValue ?? EligibilityState.initial();
+      final currentSalesOrgConfigs = currentEligibilityState.salesOrgConfigs;
+      when(() => eligibilityBlocMock.state).thenReturn(
+        currentEligibilityState,
+      );
+
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial(),
+      );
+
+      await getWidget(tester, creditItems: []);
+      await tester.pump();
+
+      final item = find.byType(CreditDetailsSection);
+      expect(item, findsOneWidget);
+
+      final textKey = find.text(
+        '${fakeInvoice.postingKeyName} #${fakeInvoice.searchKey.getOrCrash()}',
+      );
+      expect(textKey, findsOneWidget);
+
+      final textStatus =
+          find.text(fakeInvoice.invoiceProcessingStatus.getValue());
+      expect(textStatus, findsOneWidget);
+
+      final textDocumentDate =
+          find.byKey(Key('Document date${fakeInvoice.postingDate.dateString}'));
+      expect(textDocumentDate, findsOneWidget);
+
+      final textDocumentType =
+          find.byKey(Key('Document type${fakeInvoice.postingKeyName}'));
+      expect(textDocumentType, findsOneWidget);
+
+      final textReferenceNumber = find.byKey(
+        Key(
+          'Reference Number${fakeInvoice.invoiceReference.getOrDefaultValue('NA')}',
+        ),
+      );
+      expect(textReferenceNumber, findsOneWidget);
+
+      final textDetail =
+          find.byKey(Key('Details${fakeInvoice.postingKeyName}'));
+      expect(textDetail, findsOneWidget);
+
+      final textCreditSummary = find.text('Credit summary');
+      expect(textCreditSummary, findsOneWidget);
+
+      final creditDetailSubTotalFinder =
+          find.byKey(WidgetKeys.creditDetailSubTotal);
+      final creditDetailCreditTotalFinder =
+          find.byKey(WidgetKeys.creditDetailCreditTotal);
+      final creditDetailTax = find.byKey(WidgetKeys.creditDetailTax);
+      final creditItemAmountAdjustmentMessageWidget =
+          find.byKey(WidgetKeys.creditItemAmountAdjustmentMessageWidget);
+      expect(
+        find.descendant(
+          of: creditDetailSubTotalFinder,
+          matching: find.text(
+            'Subtotal (${currentSalesOrgConfigs.displayPrefixTax}.tax)',
+          ),
+        ),
+        findsNothing,
+      );
+
+      expect(
+        find.descendant(
+          of: creditDetailSubTotalFinder,
+          matching: find.text(
+            StringUtils.priceComponentDisplayPrice(
+              currentSalesOrgConfigs,
+              currentSalesOrgConfigs.displaySubtotalTaxBreakdown
+                  ? fakeItemList.totalNetAmount
+                  : fakeItemList.totalGrossAmount,
+              false,
+            ),
+            findRichText: true,
+          ),
+        ),
+        findsNothing,
+      );
+      if (currentSalesOrgConfigs.displaySubtotalTaxBreakdown) {
+        expect(
+          find.descendant(
+            of: creditDetailTax,
+            matching: find.text(
+              'Tax'.tr(),
+            ),
+          ),
+          findsNothing,
+        );
+
+        expect(
+          find.descendant(
+            of: creditDetailTax,
+            matching: find.text(
+              StringUtils.priceComponentDisplayPrice(
+                currentSalesOrgConfigs,
+                fakeItemList.totalTaxAmount,
+                false,
+              ),
+              findRichText: true,
+            ),
+          ),
+          findsNothing,
+        );
+      }
+      expect(
+        find.descendant(
+          of: creditDetailCreditTotalFinder,
+          matching: find.text(
+            'Credit total:'.tr(),
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: creditDetailCreditTotalFinder,
+          matching: find.text(
+            StringUtils.priceComponentDisplayPrice(
+              currentSalesOrgConfigs,
+              fakeInvoice.amountInTransactionCurrency,
+              false,
+            ),
+            findRichText: true,
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: creditItemAmountAdjustmentMessageWidget,
+          matching: find.text(
+            'Return items are not related to this credit note. The total may or may not reflect the tax amount adjustments.'
+                .tr(),
           ),
         ),
         findsOneWidget,
