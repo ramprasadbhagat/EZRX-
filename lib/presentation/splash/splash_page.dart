@@ -1138,7 +1138,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               upgrader: Upgrader(
                 messages: UpgraderLocalizationMessage(),
                 debugLogging: locator<Config>().appFlavor != Flavor.prod,
-                minAppVersion: '1.0.0',
+                // We're hardcode countryCode and languageCode here because of
+                // 'tagRegExpSource' in upgrader package only check text by English
+                countryCode: 'US',
+                languageCode: 'en',
               ),
               child: const _Splash(),
             ),
