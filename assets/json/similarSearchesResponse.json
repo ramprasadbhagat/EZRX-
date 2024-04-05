@@ -1,70 +1,147 @@
 {
     "data": {
-        "similarSearches": {
-            "materials": [
+        "GetAllProducts": {
+            "Count": 12,
+            "Products": [
                 {
-                    "principalName": "GLAXOSMITHKLINE CONSUMER",
-                    "principalCode": "0000101334",
-                    "materialNumber": "000000000021041735",
-                    "materialDescription": "190 POLIDENT ADHESIVE CREAM TUBE60G",
-                    "defaultMaterialDescription": "190 POLIDENT ADHESIVE CREAM TUBE60G",
-                    "itemBrand": "190 POLIDENT ADHESIV",
-                    "isFavourite": false,
-                    "warehouseStorageCondition": "AC",
-                    "suspensionStatus": false,
-                    "governmentMaterialCode": "KC00582214",
-                    "promoType": "",
-                    "promoStatus": false,
-                    "hidePrice": true,
-                    "isMarketPlace": true
-                },
-                {
-                    "principalName": "GLAXOSMITHKLINE CONSUMER",
-                    "principalCode": "0000101334",
+                    "Code": "000000000021247680",
+                    "Name": "DILANTIN 125MG/5ML ORSUS 1X8FLOZ BTL US",
+                    "PrincipalCode": "0000103892",
                     "materialNumber": "000000000021041773",
-                    "materialDescription": "190 BIOTENE D/MOUTHT/PASTE FM ORI 4.5OZ",
-                    "defaultMaterialDescription": "190 BIOTENE D/MOUTHT/PASTE FM ORI 4.5OZ",
-                    "itemBrand": "190 BIOTENE D/MOUTH",
-                    "isFavourite": false,
-                    "warehouseStorageCondition": "AC",
+                    "materialDescription": "",
+                    "Manufactured": "Pfizer PFE Private Limited test",
+                    "IsFavourite": false,
+                    "Type": "material",
+                    "HidePrice": true,
+                    "BundleInformation": null,
+                    "Data": [
+                        {
+                            "Active": false,
+                            "MaterialCode": "000000000021247680",
+                            "Manufactured": "Pfizer PFE Private Limited test",
+                            "MaterialDescription": "DILANTIN 125MG/5ML ORSUS 1X8FLOZ BTL US",
+                            "DefaultMaterialDescription": "DILANTIN 125MG/5ML ORSUS 1X8FLOZ BTL US",
+                            "GenericMaterialName": "RELPAX 40mg FCT 1x6 BLST SG",
+                            "MaterialImageURL": "",
+                            "GovernmentMaterialCode": "",
+                            "ItemRegistrationNumber": null
+                        }
+                    ],
+                    "DataTotalCount": 1,
+                    "DataTotalHidden": 0,
+                    "IsGimmick": false,
                     "suspensionStatus": false,
-                    "governmentMaterialCode": "KC00582215",
-                    "promoType": "",
-                    "promoStatus": false,
-                    "hidePrice": false,
+                    "hasValidTenderContract": null,
+                    "hasMandatoryTenderContract": null,
+                    "isFOCMaterial": false,
+                    "taxClassification": "",
                     "isMarketPlace": false
                 },
                 {
+                    "Code": "000000000021247679",
+                    "Name": "DILANTIN CAP 100MGX200 SING",
                     "principalName": "GLAXOSMITHKLINE CONSUMER",
-                    "principalCode": "0000101334",
-                    "materialNumber": "000000000021041774",
-                    "materialDescription": "190 PANADOL EXTEND(NEW)CAP665MG12'S/BX",
-                    "defaultMaterialDescription": "190 PANADOL EXTEND(NEW)CAP665MG12'S/BX",
-                    "itemBrand": "190 PANADOL EXTEND(N",
-                    "isFavourite": false,
-                    "warehouseStorageCondition": "AC",
+                    "PrincipalCode": "0000103892",
+                    "materialNumber": "",
+                    "materialDescription": "",
+                    "Manufactured": "",
+                    "IsFavourite": true,
+                    "Type": "material",
+                    "HidePrice": false,
+                    "BundleInformation": null,
+                    "Data": [
+                        {
+                            "Active": false,
+                            "MaterialCode": "000000000021247679",
+                            "Manufactured": "Pfizer PFE Private Limited test",
+                            "MaterialDescription": "DILANTIN CAP 100MGX200 SING",
+                            "DefaultMaterialDescription": "DILANTIN CAP 100MGX200 SING",
+                            "GenericMaterialName": "RELPAX 40mg FCT 1x6 BLST SG",
+                            "MaterialImageURL": "",
+                            "GovernmentMaterialCode": "",
+                            "ItemRegistrationNumber": null
+                        }
+                    ],
+                    "DataTotalCount": 1,
+                    "DataTotalHidden": 0,
+                    "IsGimmick": false,
                     "suspensionStatus": false,
-                    "governmentMaterialCode": "KC00582213",
-                    "promoType": "",
-                    "promoStatus": false,
-                    "hidePrice": false
+                    "hasValidTenderContract": null,
+                    "hasMandatoryTenderContract": null,
+                    "isFOCMaterial": false,
+                    "taxClassification": "",
+                    "isMarketPlace": true
                 },
                 {
-                    "principalName": "GLAXOSMITHKLINE CONSUMER",
-                    "principalCode": "0000101334",
-                    "materialNumber": "000000000021041813",
-                    "materialDescription": "190 PARODONTAX DAILYFLUORIDE 90G",
-                    "defaultMaterialDescription": "190 PARODONTAX DAILYFLUORIDE 90G",
-                    "itemBrand": "190 PARODONTAX DAILY",
-                    "isFavourite": false,
-                    "warehouseStorageCondition": "AC",
+                    "Code": "000000000021247678",
+                    "Name": "ETURION 40mg SMT 10x10 BLS SG",
+                    "PrincipalCode": "0000103892",
+                    "materialNumber": "",
+                    "materialDescription": "",
+                    "Manufactured": "Pfizer PFE Private Limited test",
+                    "IsFavourite": false,
+                    "Type": "material",
+                    "HidePrice": false,
+                    "BundleInformation": null,
+                    "Data": [
+                        {
+                            "Active": false,
+                            "MaterialCode": "000000000021247678",
+                            "Manufactured": "Pfizer PFE Private Limited test",
+                            "MaterialDescription": "ETURION 40mg SMT 10x10 BLS SG",
+                            "DefaultMaterialDescription": "ETURION 40mg SMT 10x10 BLS SG",
+                            "GenericMaterialName": "RELPAX 40mg FCT 1x6 BLST SG",
+                            "MaterialImageURL": "",
+                            "GovernmentMaterialCode": "",
+                            "ItemRegistrationNumber": null
+                        }
+                    ],
+                    "DataTotalCount": 1,
+                    "DataTotalHidden": 0,
+                    "IsGimmick": false,
                     "suspensionStatus": false,
-                    "governmentMaterialCode": "KC00582212",
-                    "promoType": "",
-                    "promoStatus": false,
-                    "hidePrice": false
+                    "hasValidTenderContract": null,
+                    "hasMandatoryTenderContract": null,
+                    "isFOCMaterial": false,
+                    "taxClassification": ""
+                },
+                {
+                    "Code": "000000000021247677",
+                    "Name": "EFEXOR 75MG 2X14 SG",
+                    "PrincipalCode": "0000103892",
+                    "materialNumber": "",
+                    "materialDescription": "",
+                    "Manufactured": "Pfizer PFE Private Limited test",
+                    "IsFavourite": false,
+                    "Type": "material",
+                    "HidePrice": false,
+                    "BundleInformation": null,
+                    "Data": [
+                        {
+                            "Active": false,
+                            "MaterialCode": "000000000021247677",
+                            "Manufactured": "Pfizer PFE Private Limited test",
+                            "MaterialDescription": "EFEXOR 75MG 2X14 SG",
+                            "DefaultMaterialDescription": "EFEXOR 75MG 2X14 SG",
+                            "GenericMaterialName": "RELPAX 40mg FCT 1x6 BLST SG",
+                            "MaterialImageURL": "",
+                            "GovernmentMaterialCode": "",
+                            "ItemRegistrationNumber": null
+                        }
+                    ],
+                    "DataTotalCount": 1,
+                    "DataTotalHidden": 0,
+                    "IsGimmick": false,
+                    "suspensionStatus": false,
+                    "hasValidTenderContract": null,
+                    "hasMandatoryTenderContract": null,
+                    "isFOCMaterial": false,
+                    "taxClassification": ""
                 }
             ]
         }
+    },
+    "extensions": {
+        "x-cached": false
     }
 }

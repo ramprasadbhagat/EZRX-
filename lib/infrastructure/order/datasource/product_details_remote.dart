@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_query.dart';
@@ -77,26 +78,31 @@ class ProductDetailRemoteDataSource {
       );
 
       final variables = {
-        'after': 0,
-        'first': 4,
-        'language': language,
-        'customerCode': customerCode,
-        'excludeMaterialNumber': materialNumber,
-        'resultCount': 1,
-        'shipToCode': shipToCode,
-        'principalCode': principalCode,
-        'salesOrg': salesOrg,
+        'request': {
+          'Customer': customerCode,
+          'SalesOrg': salesOrg,
+          'ShipTo': shipToCode,
+          'First': 4,
+          'After': 0,
+          'OrderByName': 'asc',
+          'Language': language,
+          'principalCodeList': principalCode,
+          'excludeMaterialNumber': materialNumber,
+        },
       };
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}license',
+        url: '${config.urlConstants}price',
         data: jsonEncode({
           'query': queryData,
           'variables': variables,
         }),
+        apiEndpoint: 'GetAllProductsRequest',
       );
       _exceptionChecker(res: res);
-      final finalData = res.data['data']['similarSearches']['materials'];
+      final finalData = makeResponseCamelCase(
+        jsonEncode(res.data['data']['GetAllProducts']['Products']),
+      );
 
       return List.from(finalData)
           .map((e) => MaterialDto.fromJson(e).toDomain())

@@ -1,39 +1,59 @@
-query similarSearches($principalCode: String, $first: Int, $after: Int, $language: String, $resultCount: Int, $excludeMaterialNumber: String, $customerCode: String!, $shipToCode: String!) {
-  similarSearches(
-    principalCode: $principalCode
-    first: $first
-    after: $after
-    language: $language
-    resultCount: $resultCount
-    excludeMaterialNumber: $excludeMaterialNumber
-    customerCode: $customerCode
-    shipToCode: $shipToCode
-  ) {
-    materials {
-      principalName
-      principalCode
+query (\$request: GetAllProductsRequest!) {
+  GetAllProducts(request: \$request) {
+    Count
+    Products {
+      Code
+      Name
+      PrincipalCode
       materialNumber
       materialDescription
-      defaultMaterialDescription
-      itemBrand
-      isFavourite
-      warehouseStorageCondition
-      suspensionStatus
-      governmentMaterialCode
-      promoType
-      promoStatus
-      hidePrice
+      Manufactured
+      IsFavourite
+      isFOCMaterial
+      ${enableMarketplace ? 'isMarketPlace' : ''}
+      materialGroup4
+      Type
+      HidePrice
+      BundleInformation {
+        BundleName
+        BundleCode
+        Conditions
+        BonusEligible
+        BundleInformation {
+          Sequence
+          Quantity
+          Type
+          Rate
+        }
+      }
+      Data {
+        Active
+        MaterialCode
+        Manufactured
+        MaterialDescription
+        DefaultMaterialDescription
+        GenericMaterialName
+        Manufactured
+        MaterialImageURL
+        GovernmentMaterialCode
+        ItemRegistrationNumber
+      }
+      DataTotalCount
+      DataTotalHidden
+      HidePrice
+      IsGimmick
     }
   }
 }
 
 variables:{
-  "principalCode": "0000101334",
-  "first": 4,
-  "after": 0,
-  "language": "EN",
-  "resultCount": 1,
-  "excludeMaterialNumber": "000000000021041821",
-  "customerCode": "0070149863",
-  "shipToCode": "0070149863"
+    "request": {
+        "Customer": "0070149863",
+        "ShipTo": "0070149863",
+        "First": 4,
+        "After": 0,
+        "isGimmick": false,
+        "OrderByName": "asc",
+        "Language": "EN",
+    }
 }

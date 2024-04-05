@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_query.dart';
@@ -53,15 +54,17 @@ void main() {
     () {
       test('Fetch similar product add salesOrg to request body', () async {
         final variables = {
-          'after': 0,
-          'first': 4,
-          'language': 'EN',
-          'customerCode': 'fake-customer-code',
-          'excludeMaterialNumber': '000000000021247709',
-          'resultCount': 1,
-          'shipToCode': 'fake-shipTo',
-          'principalCode': '0000102403',
-          'salesOrg': 'fake-salesOrg',
+          'request': {
+            'Customer': 'fake-customer-code',
+            'SalesOrg': 'fake-salesOrg',
+            'ShipTo': 'fake-shipTo',
+            'First': 4,
+            'After': 0,
+            'OrderByName': 'asc',
+            'Language': 'EN',
+            'principalCodeList': '0000102403',
+            'excludeMaterialNumber': '000000000021247709',
+          },
         };
 
         final res = json.decode(
@@ -70,7 +73,7 @@ void main() {
         );
 
         dioAdapter.onPost(
-          '/api/license',
+          '/api/price',
           (server) => server.reply(
             200,
             res,
@@ -93,7 +96,10 @@ void main() {
           salesOrg: 'fake-salesOrg',
           market: fakeMarket,
         );
-        final finalData = res['data']['similarSearches']['materials'];
+
+        final finalData = makeResponseCamelCase(
+          jsonEncode(res['data']['GetAllProducts']['Products']),
+        );
 
         expect(
           result,

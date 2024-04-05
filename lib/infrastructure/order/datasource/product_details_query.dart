@@ -43,42 +43,54 @@ class ProductDetailQuery {
 
   String getSimilarProductQuery(bool enableMarketplace) {
     return '''
-     query similarSearches(
-      \$principalCode: String, 
-      \$first: Int, 
-      \$after: Int,
-      \$language: String,
-      \$resultCount: Int, 
-      \$excludeMaterialNumber: String, 
-      \$customerCode: String!, 
-      \$salesOrg: String!, 
-      \$shipToCode: String!) {
-      similarSearches(
-        principalCode: \$principalCode
-        first: \$first
-        after: \$after
-        language: \$language
-        resultCount: \$resultCount
-        excludeMaterialNumber: \$excludeMaterialNumber
-        customerCode: \$customerCode
-        shipToCode: \$shipToCode
-        salesOrg: \$salesOrg
-      ) {
-        materials {
-          principalName
-          principalCode
-          materialNumber
-          materialDescription
-          defaultMaterialDescription
-          itemBrand
-          isFavourite
-          ${enableMarketplace ? 'isMarketPlace' : ''}
-          hidePrice
-          governmentMaterialCode
+      query (\$request: GetAllProductsRequest!) {
+        GetAllProducts(request: \$request) {
+          Count
+          Products {
+            Code
+            Name
+            PrincipalCode
+            materialNumber
+            materialDescription
+            Manufactured
+            IsFavourite
+            isFOCMaterial
+            ${enableMarketplace ? 'isMarketPlace' : ''}
+            materialGroup4
+            Type
+            HidePrice
+            BundleInformation {
+              BundleName
+              BundleCode
+              Conditions
+              BonusEligible
+              BundleInformation {
+                Sequence
+                Quantity
+                Type
+                Rate
+              }
+            }
+            Data {
+              Active
+              MaterialCode
+              Manufactured
+              MaterialDescription
+              DefaultMaterialDescription
+              GenericMaterialName
+              Manufactured
+              MaterialImageURL
+              GovernmentMaterialCode
+              ItemRegistrationNumber
+            }
+            DataTotalCount
+            DataTotalHidden
+            HidePrice
+            IsGimmick
+          }
         }
       }
-    }
-     ''';
+    ''';
   }
 
   String getProductMetaData() {
