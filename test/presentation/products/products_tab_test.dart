@@ -14,7 +14,6 @@ import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -44,7 +43,6 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
 import '../../common_mock_data/mock_other.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
@@ -120,7 +118,7 @@ void main() {
   late Map<MaterialNumber, Price> materialPriceMock;
   late List<PriceAggregate> mockCartItems;
   late UserBlocMock userBlocMock;
-  late List<CustomerLicense> customerLicense;
+  // late List<CustomerLicense> customerLicense;
   setUpAll(() async {
     locator.registerFactory(() => MockAppRouter());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
@@ -131,8 +129,8 @@ void main() {
     priceList = await MaterialPriceLocalDataSource().getPriceList();
 
     mockCartItems = await CartLocalDataSource().upsertCart();
-    customerLicense =
-        await CustomerLicenseLocalDataSource().getCustomerLicense();
+    // customerLicense =
+    //     await CustomerLicenseLocalDataSource().getCustomerLicense();
   });
 
   group(
@@ -994,50 +992,51 @@ void main() {
           expect(ediBannerSubTitle, findsNothing);
         },
       );
+      //TODO: will revisit to implement the logic once requirement is confirmed.
 
-      testWidgets(
-        ' -> Find License expired banner in home tab',
-        (WidgetTester tester) async {
-          when(
-            () => autoRouterMock.push(const ProfilePageRoute()),
-          ).thenAnswer((invocation) => Future(() => null));
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              customerCodeInfo: fakeCustomerCodeInfo,
-              salesOrgConfigs: fakeIDSalesOrgConfigs,
-            ),
-          );
+      // testWidgets(
+      //   ' -> Find License expired banner in home tab',
+      //   (WidgetTester tester) async {
+      //     when(
+      //       () => autoRouterMock.push(const ProfilePageRoute()),
+      //     ).thenAnswer((invocation) => Future(() => null));
+      //     when(() => eligibilityBlocMock.state).thenReturn(
+      //       EligibilityState.initial().copyWith(
+      //         customerCodeInfo: fakeCustomerCodeInfo,
+      //         salesOrgConfigs: fakeIDSalesOrgConfigs,
+      //       ),
+      //     );
 
-          when(() => customerLicenseBlocMock.state).thenReturn(
-            CustomerLicenseState.initial()
-                .copyWith(customerLicenses: customerLicense),
-          );
-          await tester.pumpWidget(getScopedWidget());
-          await tester.pump();
+      //     when(() => customerLicenseBlocMock.state).thenReturn(
+      //       CustomerLicenseState.initial()
+      //           .copyWith(customerLicenses: customerLicense),
+      //     );
+      //     await tester.pumpWidget(getScopedWidget());
+      //     await tester.pump();
 
-          final licenseExpiredBanner =
-              find.byKey(WidgetKeys.licenseExpiredBanner);
-          final viewLicenseButton = find.byKey(WidgetKeys.viewLicenseButton);
-          final licenseExpiredBannerTitle = find.text(
-            'You have licenses that are about to expire or has expired.',
-          );
-          final licenseExpiredBannerSubTitle = find.text(
-            'To continue using eZRx+, please renew your license.',
-          );
+      //     final licenseExpiredBanner =
+      //         find.byKey(WidgetKeys.licenseExpiredBanner);
+      //     final viewLicenseButton = find.byKey(WidgetKeys.viewLicenseButton);
+      //     final licenseExpiredBannerTitle = find.text(
+      //       'You have licenses that are about to expire or has expired.',
+      //     );
+      //     final licenseExpiredBannerSubTitle = find.text(
+      //       'To continue using eZRx+, please renew your license.',
+      //     );
 
-          expect(licenseExpiredBanner, findsOneWidget);
-          expect(licenseExpiredBannerTitle, findsOneWidget);
-          expect(licenseExpiredBannerSubTitle, findsOneWidget);
+      //     expect(licenseExpiredBanner, findsOneWidget);
+      //     expect(licenseExpiredBannerTitle, findsOneWidget);
+      //     expect(licenseExpiredBannerSubTitle, findsOneWidget);
 
-          await tester.tap(viewLicenseButton);
+      //     await tester.tap(viewLicenseButton);
 
-          verify(
-            () => autoRouterMock.push(const ProfilePageRoute()),
-          ).called(1);
+      //     verify(
+      //       () => autoRouterMock.push(const ProfilePageRoute()),
+      //     ).called(1);
 
-          await tester.pumpAndSettle();
-        },
-      );
+      //     await tester.pumpAndSettle();
+      //   },
+      // );
 
       testWidgets(
         ' -> License expired banner not visible in home tab',
