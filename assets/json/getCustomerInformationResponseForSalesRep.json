@@ -5,6 +5,7 @@
           "SoldToInformation": [
               {
                   "customerCodeSoldTo": "0030224907",
+                  "telephoneNumber": "03-56341212",
                   "name1": "รพ.เจริญกรุงประชารักษ์",
                   "name2": "",
                   "name3": "",
@@ -45,6 +46,7 @@
               },
               {
                   "customerCodeSoldTo": "0030240031",
+                  "telephoneNumber": "03-56341212",
                   "name1": "นพ. ยรรยง ผลพอตน",
                   "name2": "",
                   "name3": "",
@@ -85,6 +87,7 @@
               },
               {
                   "customerCodeSoldTo": "0030250030",
+                  "telephoneNumber": "03-56341212",
                   "name1": "คุณ นุชสุรางค์ วีระพันธ์ุ",
                   "name2": "(แอ็บบอต ลาบอแรตอรีส)",
                   "name3": "",

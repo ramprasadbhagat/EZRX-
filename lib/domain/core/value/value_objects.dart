@@ -375,11 +375,7 @@ class MobileNumber extends ValueObject<String> {
     return MobileNumber._(validateStringNotEmpty(input));
   }
 
-  String get getTelephone {
-    return getTelephoneNotGreaterThan16(value.getOrElse(() => ''));
-  }
-
-  String get displayLabel => naIfEmpty(getTelephone);
+  String get displayLabel => naIfEmpty(value.getOrElse(() => ''));
 
   const MobileNumber._(this.value);
 }

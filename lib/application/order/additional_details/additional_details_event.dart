@@ -26,9 +26,6 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
     required DeliveryInfoData data,
     required CustomerCodeInfo customerCodeInfo,
   }) = _AdditionalDetailsInitiateFromHistory;
-  const factory AdditionalDetailsEvent.onValidateMobileNo({
-    required bool isValidMobileNo,
-  }) = _AdditionalDetailsOnValidateMobileNo;
 }
 
 enum DeliveryInfoLabel {

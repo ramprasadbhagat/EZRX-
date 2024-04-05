@@ -10,6 +10,7 @@ query customerInformationSearch($salesOrganisation: String!, $searchKey: String!
     shipToCount
     SoldToInformation {
       customerCodeSoldTo
+      telephoneNumber
       name1
       name2
       name3

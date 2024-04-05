@@ -387,6 +387,8 @@ class PhoneNumber extends ValueObject<String> {
     return PhoneNumber._(validateStringNotEmpty(input));
   }
 
+  String get validPhoneNumber => getValidPhoneNumber(value.getOrElse(() => ''));
+
   String get displayTelephoneNumber {
     return naIfEmpty(value.getOrElse(() => ''));
   }

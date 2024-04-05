@@ -62,7 +62,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -930,7 +929,8 @@ void main() {
       final contactPersonKeyFinder =
           find.byKey(WidgetKeys.genericKey(key: 'contactPersonKey'));
       expect(contactPersonKeyFinder, findsOneWidget);
-      final mobileNumberFinder = find.byKey(WidgetKeys.mobileNumber);
+      final mobileNumberFinder =
+          find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
       expect(mobileNumberFinder, findsOneWidget);
       final deliveryInstructionKeyFinder =
           find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey'));
@@ -1368,8 +1368,8 @@ void main() {
             salesOrganisation: fakeVNSalesOrganisation,
           ),
         );
-        final internationalPhoneNumberInputKey =
-            find.byKey(WidgetKeys.internationalPhoneNumberInput);
+        final phoneNumberInputKey =
+            find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
 
@@ -1378,62 +1378,13 @@ void main() {
         await tester.tap(placeOrder);
         await tester.pump();
 
-        expect(internationalPhoneNumberInputKey, findsOneWidget);
+        expect(phoneNumberInputKey, findsOneWidget);
 
         expect(
-          (tester.widget(internationalPhoneNumberInputKey)
-                  as InternationalPhoneNumberInput)
+          (tester.widget(phoneNumberInputKey) as TextFormField)
               .validator
               ?.call('MobileNumber field'),
-          'Mobile number is a required field',
-        );
-      },
-    );
-    testWidgets(
-      '=> test contsct number in place Order when  enableMobileNumber is true and entered a grether than 16 digit mobile number ',
-      (tester) async {
-        when(() => additionalDetailsBlocMock.state).thenReturn(
-          AdditionalDetailsState.initial().copyWith(
-            deliveryInfoData: DeliveryInfoData.empty()
-                .copyWith(mobileNumber: MobileNumber('12345678901234567')),
-            isValidated: false,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            isSubmitting: true,
-          ),
-        );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeIDSalesOrgConfigs,
-            salesOrganisation: fakeIDSalesOrganisation,
-          ),
-        );
-        when(() => eligibilityBloc.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeVNSalesOrgConfigs,
-            salesOrganisation: fakeVNSalesOrganisation,
-          ),
-        );
-        final internationalPhoneNumberInputKey =
-            find.byKey(WidgetKeys.internationalPhoneNumberInput);
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
-
-        final placeOrder = find.text('Place order');
-        expect(placeOrder, findsOneWidget);
-        await tester.tap(placeOrder);
-        await tester.pump();
-
-        expect(internationalPhoneNumberInputKey, findsOneWidget);
-
-        expect(
-          (tester.widget(internationalPhoneNumberInputKey)
-                  as InternationalPhoneNumberInput)
-              .validator
-              ?.call('MobileNumber field'),
-          'Please enter a valid phone number',
+          'Contact number is a required field',
         );
       },
     );
@@ -1446,7 +1397,6 @@ void main() {
             deliveryInfoData: DeliveryInfoData.empty()
                 .copyWith(mobileNumber: MobileNumber('+840312123123')),
             isValidated: true,
-            isValidMobileNo: true,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenReturn(
@@ -1466,11 +1416,11 @@ void main() {
             salesOrganisation: fakeVNSalesOrganisation,
           ),
         );
-        final internationalPhoneNumberInputKey =
-            find.byKey(WidgetKeys.internationalPhoneNumberInput);
+        final phoneNumberInputKey =
+            find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        await tester.enterText(internationalPhoneNumberInputKey, '0312123123');
+        await tester.enterText(phoneNumberInputKey, '0312123123');
         await tester.pump();
 
         final placeOrder = find.text('Place order');
@@ -1478,11 +1428,10 @@ void main() {
         await tester.tap(placeOrder);
         await tester.pump();
 
-        expect(internationalPhoneNumberInputKey, findsOneWidget);
+        expect(phoneNumberInputKey, findsOneWidget);
 
         expect(
-          (tester.widget(internationalPhoneNumberInputKey)
-                  as InternationalPhoneNumberInput)
+          (tester.widget(phoneNumberInputKey) as TextFormField)
               .validator
               ?.call('MobileNumber field'),
           null,
@@ -1617,18 +1566,15 @@ void main() {
         await tester.tap(placeOrder);
         await tester.pump();
 
-        final customerMobileNumberKey = find.byKey(WidgetKeys.mobileNumber);
+        final customerMobileNumberKey =
+            find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
         expect(customerMobileNumberKey, findsOneWidget);
-        final internationalPhoneNumberInputKey =
-            find.byKey(WidgetKeys.internationalPhoneNumberInput);
-        expect(internationalPhoneNumberInputKey, findsOneWidget);
 
         expect(
-          (tester.widget(internationalPhoneNumberInputKey)
-                  as InternationalPhoneNumberInput)
+          (tester.widget(customerMobileNumberKey) as TextFormField)
               .validator
               ?.call('MobileNumber field'),
-          'Mobile number is a required field',
+          'Contact number is a required field',
         );
       },
     );
@@ -1671,7 +1617,7 @@ void main() {
         final customerContactPersonKey =
             find.byKey(const Key('contactPersonKey'));
         final customerContactNumber =
-            find.byKey(WidgetKeys.internationalPhoneNumberInput);
+            find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
         expect(customerContactPersonKey, findsOneWidget);
         expect(customerContactNumber, findsOneWidget);
         expect(
@@ -1684,7 +1630,7 @@ void main() {
         expect(
           find.descendant(
             of: customerContactNumber,
-            matching: find.text('Mobile number is a required field'),
+            matching: find.text('Contact number is a required field'),
           ),
           findsOneWidget,
         );
@@ -1713,7 +1659,7 @@ void main() {
         final customerContactPersonKey =
             find.byKey(const Key('contactPersonKey'));
         final customerContactNumber =
-            find.byKey(WidgetKeys.internationalPhoneNumberInput);
+            find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
         expect(customerContactPersonKey, findsNothing);
         expect(customerContactNumber, findsNothing);
       },

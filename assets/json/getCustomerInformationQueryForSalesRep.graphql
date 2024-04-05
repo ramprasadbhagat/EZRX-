@@ -3,6 +3,7 @@ query customerInformationSalesRep($customerInformationSalesRepInput: customerInf
     shipToCount
     SoldToInformation {
       customerCodeSoldTo
+      telephoneNumber
       name1
       name2
       name3

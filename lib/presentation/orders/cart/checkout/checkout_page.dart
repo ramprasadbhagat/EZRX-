@@ -40,9 +40,8 @@ import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_messa
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
 part 'widgets/delivery_info.dart';
 part 'widgets/request_delivery_date.dart';
 part 'widgets/product_bonus_item.dart';

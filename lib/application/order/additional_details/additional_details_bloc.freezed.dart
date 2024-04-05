@@ -31,7 +31,6 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
-    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,7 +46,6 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,7 +61,6 @@ mixin _$AdditionalDetailsEvent {
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -84,8 +81,6 @@ mixin _$AdditionalDetailsEvent {
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
-    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
-        onValidateMobileNo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -102,8 +97,6 @@ mixin _$AdditionalDetailsEvent {
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -120,8 +113,6 @@ mixin _$AdditionalDetailsEvent {
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -253,7 +244,6 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
-    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return initialized(config, customerCodeInfo);
   }
@@ -272,7 +262,6 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return initialized?.call(config, customerCodeInfo);
   }
@@ -291,7 +280,6 @@ class _$InitializedImpl implements _Initialized {
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -318,8 +306,6 @@ class _$InitializedImpl implements _Initialized {
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
-    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
-        onValidateMobileNo,
   }) {
     return initialized(this);
   }
@@ -339,8 +325,6 @@ class _$InitializedImpl implements _Initialized {
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
   }) {
     return initialized?.call(this);
   }
@@ -360,8 +344,6 @@ class _$InitializedImpl implements _Initialized {
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -476,7 +458,6 @@ class _$AdditionalDetailsTextOnChangeImpl
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
-    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return onTextChange(label, newValue);
   }
@@ -495,7 +476,6 @@ class _$AdditionalDetailsTextOnChangeImpl
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return onTextChange?.call(label, newValue);
   }
@@ -514,7 +494,6 @@ class _$AdditionalDetailsTextOnChangeImpl
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -541,8 +520,6 @@ class _$AdditionalDetailsTextOnChangeImpl
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
-    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
-        onValidateMobileNo,
   }) {
     return onTextChange(this);
   }
@@ -562,8 +539,6 @@ class _$AdditionalDetailsTextOnChangeImpl
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
   }) {
     return onTextChange?.call(this);
   }
@@ -583,8 +558,6 @@ class _$AdditionalDetailsTextOnChangeImpl
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -664,7 +637,6 @@ class _$AdditionalDetailsValidateFormImpl
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
-    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return validateForm();
   }
@@ -683,7 +655,6 @@ class _$AdditionalDetailsValidateFormImpl
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return validateForm?.call();
   }
@@ -702,7 +673,6 @@ class _$AdditionalDetailsValidateFormImpl
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -729,8 +699,6 @@ class _$AdditionalDetailsValidateFormImpl
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
-    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
-        onValidateMobileNo,
   }) {
     return validateForm(this);
   }
@@ -750,8 +718,6 @@ class _$AdditionalDetailsValidateFormImpl
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
   }) {
     return validateForm?.call(this);
   }
@@ -771,8 +737,6 @@ class _$AdditionalDetailsValidateFormImpl
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -880,7 +844,6 @@ class _$AdditionalDetailsAddPoDocumentImpl
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
-    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return addPoDocument(poDocuments);
   }
@@ -899,7 +862,6 @@ class _$AdditionalDetailsAddPoDocumentImpl
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return addPoDocument?.call(poDocuments);
   }
@@ -918,7 +880,6 @@ class _$AdditionalDetailsAddPoDocumentImpl
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (addPoDocument != null) {
@@ -945,8 +906,6 @@ class _$AdditionalDetailsAddPoDocumentImpl
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
-    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
-        onValidateMobileNo,
   }) {
     return addPoDocument(this);
   }
@@ -966,8 +925,6 @@ class _$AdditionalDetailsAddPoDocumentImpl
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
   }) {
     return addPoDocument?.call(this);
   }
@@ -987,8 +944,6 @@ class _$AdditionalDetailsAddPoDocumentImpl
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (addPoDocument != null) {
@@ -1105,7 +1060,6 @@ class _$AdditionalDetailsRemovePoDocumentImpl
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
-    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return removePoDocument(poDocument);
   }
@@ -1124,7 +1078,6 @@ class _$AdditionalDetailsRemovePoDocumentImpl
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return removePoDocument?.call(poDocument);
   }
@@ -1143,7 +1096,6 @@ class _$AdditionalDetailsRemovePoDocumentImpl
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (removePoDocument != null) {
@@ -1170,8 +1122,6 @@ class _$AdditionalDetailsRemovePoDocumentImpl
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
-    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
-        onValidateMobileNo,
   }) {
     return removePoDocument(this);
   }
@@ -1191,8 +1141,6 @@ class _$AdditionalDetailsRemovePoDocumentImpl
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
   }) {
     return removePoDocument?.call(this);
   }
@@ -1212,8 +1160,6 @@ class _$AdditionalDetailsRemovePoDocumentImpl
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (removePoDocument != null) {
@@ -1292,7 +1238,6 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
-    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return removeAllPoDocument();
   }
@@ -1311,7 +1256,6 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return removeAllPoDocument?.call();
   }
@@ -1330,7 +1274,6 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (removeAllPoDocument != null) {
@@ -1357,8 +1300,6 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
-    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
-        onValidateMobileNo,
   }) {
     return removeAllPoDocument(this);
   }
@@ -1378,8 +1319,6 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
   }) {
     return removeAllPoDocument?.call(this);
   }
@@ -1399,8 +1338,6 @@ class _$AdditionalDetailsRemoveAllPoDocumentImpl
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (removeAllPoDocument != null) {
@@ -1472,7 +1409,6 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
-    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return toggleGreenDelivery();
   }
@@ -1491,7 +1427,6 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return toggleGreenDelivery?.call();
   }
@@ -1510,7 +1445,6 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (toggleGreenDelivery != null) {
@@ -1537,8 +1471,6 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
-    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
-        onValidateMobileNo,
   }) {
     return toggleGreenDelivery(this);
   }
@@ -1558,8 +1490,6 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
   }) {
     return toggleGreenDelivery?.call(this);
   }
@@ -1579,8 +1509,6 @@ class _$AdditionalDetailsToggleGreenDeliveryImpl
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (toggleGreenDelivery != null) {
@@ -1708,7 +1636,6 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
-    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
   }) {
     return initiateFromHistory(data, customerCodeInfo);
   }
@@ -1727,7 +1654,6 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
     TResult? Function()? toggleGreenDelivery,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
   }) {
     return initiateFromHistory?.call(data, customerCodeInfo);
   }
@@ -1746,7 +1672,6 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
     TResult Function()? toggleGreenDelivery,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
-    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (initiateFromHistory != null) {
@@ -1773,8 +1698,6 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
         toggleGreenDelivery,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
-    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
-        onValidateMobileNo,
   }) {
     return initiateFromHistory(this);
   }
@@ -1794,8 +1717,6 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
         toggleGreenDelivery,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
   }) {
     return initiateFromHistory?.call(this);
   }
@@ -1815,8 +1736,6 @@ class _$AdditionalDetailsInitiateFromHistoryImpl
         toggleGreenDelivery,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
-    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
     required TResult orElse(),
   }) {
     if (initiateFromHistory != null) {
@@ -1842,222 +1761,6 @@ abstract class _AdditionalDetailsInitiateFromHistory
 }
 
 /// @nodoc
-abstract class _$$AdditionalDetailsOnValidateMobileNoImplCopyWith<$Res> {
-  factory _$$AdditionalDetailsOnValidateMobileNoImplCopyWith(
-          _$AdditionalDetailsOnValidateMobileNoImpl value,
-          $Res Function(_$AdditionalDetailsOnValidateMobileNoImpl) then) =
-      __$$AdditionalDetailsOnValidateMobileNoImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isValidMobileNo});
-}
-
-/// @nodoc
-class __$$AdditionalDetailsOnValidateMobileNoImplCopyWithImpl<$Res>
-    extends _$AdditionalDetailsEventCopyWithImpl<$Res,
-        _$AdditionalDetailsOnValidateMobileNoImpl>
-    implements _$$AdditionalDetailsOnValidateMobileNoImplCopyWith<$Res> {
-  __$$AdditionalDetailsOnValidateMobileNoImplCopyWithImpl(
-      _$AdditionalDetailsOnValidateMobileNoImpl _value,
-      $Res Function(_$AdditionalDetailsOnValidateMobileNoImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isValidMobileNo = null,
-  }) {
-    return _then(_$AdditionalDetailsOnValidateMobileNoImpl(
-      isValidMobileNo: null == isValidMobileNo
-          ? _value.isValidMobileNo
-          : isValidMobileNo // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AdditionalDetailsOnValidateMobileNoImpl
-    implements _AdditionalDetailsOnValidateMobileNo {
-  const _$AdditionalDetailsOnValidateMobileNoImpl(
-      {required this.isValidMobileNo});
-
-  @override
-  final bool isValidMobileNo;
-
-  @override
-  String toString() {
-    return 'AdditionalDetailsEvent.onValidateMobileNo(isValidMobileNo: $isValidMobileNo)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AdditionalDetailsOnValidateMobileNoImpl &&
-            (identical(other.isValidMobileNo, isValidMobileNo) ||
-                other.isValidMobileNo == isValidMobileNo));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, isValidMobileNo);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AdditionalDetailsOnValidateMobileNoImplCopyWith<
-          _$AdditionalDetailsOnValidateMobileNoImpl>
-      get copyWith => __$$AdditionalDetailsOnValidateMobileNoImplCopyWithImpl<
-          _$AdditionalDetailsOnValidateMobileNoImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
-        initialized,
-    required TResult Function(DeliveryInfoLabel label, String newValue)
-        onTextChange,
-    required TResult Function() validateForm,
-    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
-    required TResult Function(PoDocuments poDocument) removePoDocument,
-    required TResult Function() removeAllPoDocument,
-    required TResult Function() toggleGreenDelivery,
-    required TResult Function(
-            DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
-        initiateFromHistory,
-    required TResult Function(bool isValidMobileNo) onValidateMobileNo,
-  }) {
-    return onValidateMobileNo(isValidMobileNo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
-        initialized,
-    TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function()? validateForm,
-    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
-    TResult? Function(PoDocuments poDocument)? removePoDocument,
-    TResult? Function()? removeAllPoDocument,
-    TResult? Function()? toggleGreenDelivery,
-    TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
-        initiateFromHistory,
-    TResult? Function(bool isValidMobileNo)? onValidateMobileNo,
-  }) {
-    return onValidateMobileNo?.call(isValidMobileNo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
-        initialized,
-    TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function()? validateForm,
-    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
-    TResult Function(PoDocuments poDocument)? removePoDocument,
-    TResult Function()? removeAllPoDocument,
-    TResult Function()? toggleGreenDelivery,
-    TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
-        initiateFromHistory,
-    TResult Function(bool isValidMobileNo)? onValidateMobileNo,
-    required TResult orElse(),
-  }) {
-    if (onValidateMobileNo != null) {
-      return onValidateMobileNo(isValidMobileNo);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AdditionalDetailsTextOnChange value)
-        onTextChange,
-    required TResult Function(_AdditionalDetailsValidateForm value)
-        validateForm,
-    required TResult Function(_AdditionalDetailsAddPoDocument value)
-        addPoDocument,
-    required TResult Function(_AdditionalDetailsRemovePoDocument value)
-        removePoDocument,
-    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
-        removeAllPoDocument,
-    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
-        toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsInitiateFromHistory value)
-        initiateFromHistory,
-    required TResult Function(_AdditionalDetailsOnValidateMobileNo value)
-        onValidateMobileNo,
-  }) {
-    return onValidateMobileNo(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
-    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
-    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
-        removePoDocument,
-    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
-        removeAllPoDocument,
-    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
-        toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
-        initiateFromHistory,
-    TResult? Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
-  }) {
-    return onValidateMobileNo?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
-    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
-    TResult Function(_AdditionalDetailsRemovePoDocument value)?
-        removePoDocument,
-    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
-        removeAllPoDocument,
-    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
-        toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsInitiateFromHistory value)?
-        initiateFromHistory,
-    TResult Function(_AdditionalDetailsOnValidateMobileNo value)?
-        onValidateMobileNo,
-    required TResult orElse(),
-  }) {
-    if (onValidateMobileNo != null) {
-      return onValidateMobileNo(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AdditionalDetailsOnValidateMobileNo
-    implements AdditionalDetailsEvent {
-  const factory _AdditionalDetailsOnValidateMobileNo(
-          {required final bool isValidMobileNo}) =
-      _$AdditionalDetailsOnValidateMobileNoImpl;
-
-  bool get isValidMobileNo;
-  @JsonKey(ignore: true)
-  _$$AdditionalDetailsOnValidateMobileNoImplCopyWith<
-          _$AdditionalDetailsOnValidateMobileNoImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$AdditionalDetailsState {
   DeliveryInfoData get deliveryInfoData => throw _privateConstructorUsedError;
   String get orderId => throw _privateConstructorUsedError;
@@ -2065,7 +1768,6 @@ mixin _$AdditionalDetailsState {
   bool get isPoAttachmentValidated => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
-  bool get isValidMobileNo => throw _privateConstructorUsedError;
   SalesOrganisationConfigs get config => throw _privateConstructorUsedError;
   DeliveryInfoLabel? get focusTo => throw _privateConstructorUsedError;
 
@@ -2087,7 +1789,6 @@ abstract class $AdditionalDetailsStateCopyWith<$Res> {
       bool isPoAttachmentValidated,
       bool isLoading,
       bool showErrorMessages,
-      bool isValidMobileNo,
       SalesOrganisationConfigs config,
       DeliveryInfoLabel? focusTo});
 
@@ -2115,7 +1816,6 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
     Object? isPoAttachmentValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
-    Object? isValidMobileNo = null,
     Object? config = null,
     Object? focusTo = freezed,
   }) {
@@ -2143,10 +1843,6 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isValidMobileNo: null == isValidMobileNo
-          ? _value.isValidMobileNo
-          : isValidMobileNo // ignore: cast_nullable_to_non_nullable
               as bool,
       config: null == config
           ? _value.config
@@ -2192,7 +1888,6 @@ abstract class _$$AdditionalDetailsStateImplCopyWith<$Res>
       bool isPoAttachmentValidated,
       bool isLoading,
       bool showErrorMessages,
-      bool isValidMobileNo,
       SalesOrganisationConfigs config,
       DeliveryInfoLabel? focusTo});
 
@@ -2221,7 +1916,6 @@ class __$$AdditionalDetailsStateImplCopyWithImpl<$Res>
     Object? isPoAttachmentValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
-    Object? isValidMobileNo = null,
     Object? config = null,
     Object? focusTo = freezed,
   }) {
@@ -2250,10 +1944,6 @@ class __$$AdditionalDetailsStateImplCopyWithImpl<$Res>
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
-      isValidMobileNo: null == isValidMobileNo
-          ? _value.isValidMobileNo
-          : isValidMobileNo // ignore: cast_nullable_to_non_nullable
-              as bool,
       config: null == config
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
@@ -2276,7 +1966,6 @@ class _$AdditionalDetailsStateImpl extends _AdditionalDetailsState {
       required this.isPoAttachmentValidated,
       required this.isLoading,
       required this.showErrorMessages,
-      required this.isValidMobileNo,
       required this.config,
       this.focusTo})
       : super._();
@@ -2294,15 +1983,13 @@ class _$AdditionalDetailsStateImpl extends _AdditionalDetailsState {
   @override
   final bool showErrorMessages;
   @override
-  final bool isValidMobileNo;
-  @override
   final SalesOrganisationConfigs config;
   @override
   final DeliveryInfoLabel? focusTo;
 
   @override
   String toString() {
-    return 'AdditionalDetailsState(deliveryInfoData: $deliveryInfoData, orderId: $orderId, isValidated: $isValidated, isPoAttachmentValidated: $isPoAttachmentValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages, isValidMobileNo: $isValidMobileNo, config: $config, focusTo: $focusTo)';
+    return 'AdditionalDetailsState(deliveryInfoData: $deliveryInfoData, orderId: $orderId, isValidated: $isValidated, isPoAttachmentValidated: $isPoAttachmentValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages, config: $config, focusTo: $focusTo)';
   }
 
   @override
@@ -2322,8 +2009,6 @@ class _$AdditionalDetailsStateImpl extends _AdditionalDetailsState {
                 other.isLoading == isLoading) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
-            (identical(other.isValidMobileNo, isValidMobileNo) ||
-                other.isValidMobileNo == isValidMobileNo) &&
             (identical(other.config, config) || other.config == config) &&
             (identical(other.focusTo, focusTo) || other.focusTo == focusTo));
   }
@@ -2337,7 +2022,6 @@ class _$AdditionalDetailsStateImpl extends _AdditionalDetailsState {
       isPoAttachmentValidated,
       isLoading,
       showErrorMessages,
-      isValidMobileNo,
       config,
       focusTo);
 
@@ -2357,7 +2041,6 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
       required final bool isPoAttachmentValidated,
       required final bool isLoading,
       required final bool showErrorMessages,
-      required final bool isValidMobileNo,
       required final SalesOrganisationConfigs config,
       final DeliveryInfoLabel? focusTo}) = _$AdditionalDetailsStateImpl;
   const _AdditionalDetailsState._() : super._();
@@ -2374,8 +2057,6 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
   bool get isLoading;
   @override
   bool get showErrorMessages;
-  @override
-  bool get isValidMobileNo;
   @override
   SalesOrganisationConfigs get config;
   @override

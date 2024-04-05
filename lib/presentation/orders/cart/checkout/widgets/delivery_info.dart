@@ -122,7 +122,17 @@ class _DeliveryInfoState extends State<_DeliveryInfo> {
                                       FocusNode(),
                                 ),
                               if (config.enableMobileNumber)
-                                _MobileNumber(
+                                _TextFormField(
+                                  labelText: 'Contact number',
+                                  keyText: 'contactNumberKey',
+                                  hintText: 'Enter contact person number',
+                                  maxLength: 16,
+                                  label: DeliveryInfoLabel.mobileNumber,
+                                  keyboardType: TextInputType.phone,
+                                  deliveryInfoData: state.deliveryInfoData,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly,
+                                  ],
                                   focusNode: widget.focusNodes[
                                           DeliveryInfoLabel.mobileNumber] ??
                                       FocusNode(),
@@ -166,6 +176,7 @@ class _TextFormField extends StatefulWidget {
   final DeliveryInfoData deliveryInfoData;
   final FocusNode focusNode;
   final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
 
   const _TextFormField({
     required this.labelText,
@@ -176,6 +187,7 @@ class _TextFormField extends StatefulWidget {
     this.hintText = '',
     required this.focusNode,
     this.maxLength,
+    this.inputFormatters,
     Key? key,
   }) : super(key: key);
 
@@ -228,6 +240,8 @@ class _TextFormFieldState extends State<_TextFormField> {
         return widget.deliveryInfoData.contactPerson.getValue();
       case DeliveryInfoLabel.referenceNote:
         return widget.deliveryInfoData.referenceNote.getValue();
+      case DeliveryInfoLabel.mobileNumber:
+        return widget.deliveryInfoData.mobileNumber.getValue();
       default:
         return '';
     }
@@ -260,6 +274,7 @@ class _TextFormFieldState extends State<_TextFormField> {
                     ),
                   );
             },
+            inputFormatters: widget.inputFormatters,
             decoration: InputDecoration(
               contentPadding:
                   const EdgeInsets.only(left: 10, top: 12, bottom: 12),
@@ -314,6 +329,20 @@ class _TextFormFieldState extends State<_TextFormField> {
             .fold(
               (f) => f.maybeMap(
                 empty: (_) => context.tr('Contact person is a required field'),
+                orElse: () => null,
+              ),
+              (_) => null,
+            );
+      case DeliveryInfoLabel.mobileNumber:
+        return context
+            .read<AdditionalDetailsBloc>()
+            .state
+            .deliveryInfoData
+            .mobileNumber
+            .value
+            .fold(
+              (f) => f.maybeMap(
+                empty: (_) => context.tr('Contact number is a required field'),
                 orElse: () => null,
               ),
               (_) => null,
@@ -429,111 +458,6 @@ class _PaymentTerm extends StatelessWidget {
               ),
             );
           },
-        );
-      },
-    );
-  }
-}
-
-class _MobileNumber extends StatelessWidget {
-  final FocusNode focusNode;
-  const _MobileNumber({required this.focusNode});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
-      buildWhen: (previous, current) =>
-          previous.isLoading != current.isLoading ||
-          previous.showErrorMessages != current.showErrorMessages,
-      builder: (context, additionalDetailsState) {
-        final isLoading = additionalDetailsState.isLoading;
-
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: Column(
-            key: WidgetKeys.mobileNumber,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                context.tr('Contact number'),
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              InternationalPhoneNumberInput(
-                key: WidgetKeys.internationalPhoneNumberInput,
-                focusNode: focusNode,
-                countries: [
-                  context.read<EligibilityBloc>().state.salesOrg.country,
-                ],
-                onInputValidated: (bool value) {
-                  if (value) {
-                    context.read<AdditionalDetailsBloc>().add(
-                          AdditionalDetailsEvent.onValidateMobileNo(
-                            isValidMobileNo: value,
-                          ),
-                        );
-                  }
-                },
-                autoValidateMode: additionalDetailsState.showErrorMessages
-                    ? AutovalidateMode.always
-                    : AutovalidateMode.disabled,
-                ignoreBlank: false,
-                onInputChanged: isLoading
-                    ? null
-                    : (value) {
-                        if (value.phoneNumber == value.dialCode) {
-                          context.read<AdditionalDetailsBloc>().add(
-                                AdditionalDetailsEvent.onTextChange(
-                                  label: DeliveryInfoLabel.mobileNumber,
-                                  newValue: value.phoneNumber!
-                                      .replaceAll(value.dialCode ?? '', ''),
-                                ),
-                              );
-                        } else {
-                          context.read<AdditionalDetailsBloc>().add(
-                                AdditionalDetailsEvent.onTextChange(
-                                  label: DeliveryInfoLabel.mobileNumber,
-                                  newValue: value.phoneNumber!,
-                                ),
-                              );
-                        }
-                      },
-                formatInput: false,
-                selectorConfig: const SelectorConfig(
-                  selectorType: PhoneInputSelectorType.DROPDOWN,
-                  leadingPadding: 16,
-                  showFlags: true,
-                  setSelectorButtonAsPrefixIcon: true,
-                ),
-                inputDecoration: InputDecoration(
-                  hintText: context.tr('Enter contact person number'),
-                ),
-                validator: (_) {
-                  return context
-                      .read<AdditionalDetailsBloc>()
-                      .state
-                      .deliveryInfoData
-                      .mobileNumber
-                      .value
-                      .fold(
-                        (f) => f.maybeMap(
-                          empty: (_) =>
-                              context.tr('Mobile number is a required field'),
-                          orElse: () => null,
-                        ),
-                        (mobileNumber) => !context
-                                .read<AdditionalDetailsBloc>()
-                                .state
-                                .isValidMobileNo
-                            ? context.tr('Please enter a valid phone number')
-                            : null,
-                      );
-                },
-              ),
-            ],
-          ),
         );
       },
     );

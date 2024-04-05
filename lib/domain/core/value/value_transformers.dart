@@ -68,10 +68,8 @@ bool getInStock(String text) {
   return text == 'Yes';
 }
 
-String getTelephoneNotGreaterThan16(String text) {
-  return hasLengthGreaterThanN(text, 16)
-      ? text.characters.getRange(0, 16).toString()
-      : text;
+String getValidPhoneNumber(String text) {
+  return text.replaceAll(RegExp(r'[^\d]+'), '');
 }
 
 bool isMinCharacter({required String input, required int minLength}) =>

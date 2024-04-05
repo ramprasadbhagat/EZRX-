@@ -188,7 +188,7 @@ void main() {
           ? deliveryInfoData.deliveryDate.getValue()
           : '',
       poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-      telephone: deliveryInfoData.mobileNumber.getTelephone,
+      telephone: deliveryInfoData.mobileNumber.getOrDefaultValue(''),
       collectiveNumber: '',
       paymentTerms:
           cartMaterials.first.tenderContract.contractPaymentTerm.getValue(),
@@ -257,7 +257,7 @@ void main() {
       companyName: CompanyName(mockShipToInfo.shipToName.toString()),
       requestedDeliveryDate: deliveryInfoData.deliveryDate.getValue(),
       poDate: deliveryInfoData.deliveryDate.getValue(),
-      telephone: deliveryInfoData.mobileNumber.getTelephone,
+      telephone: deliveryInfoData.mobileNumber.getOrDefaultValue(''),
       collectiveNumber: '',
       paymentTerms: <PriceAggregate>[
         PriceAggregate.empty().copyWith(
@@ -350,7 +350,7 @@ void main() {
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
         requestedDeliveryDate: deliveryInfoData.deliveryDate.getValue(),
         poDate: deliveryInfoData.deliveryDate.getValue(),
-        telephone: deliveryInfoData.mobileNumber.getTelephone,
+        telephone: deliveryInfoData.mobileNumber.getOrDefaultValue(''),
         collectiveNumber: '',
         paymentTerms: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
@@ -963,7 +963,7 @@ void main() {
             ? deliveryInfoData.deliveryDate.getValue()
             : '',
         poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-        telephone: deliveryInfoData.mobileNumber.getTelephone,
+        telephone: deliveryInfoData.mobileNumber.getOrDefaultValue(''),
         collectiveNumber: '',
         paymentTerms: cartMaterialsCombo
             .first.tenderContract.contractPaymentTerm

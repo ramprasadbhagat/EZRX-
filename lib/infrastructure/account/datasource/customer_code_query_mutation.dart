@@ -21,6 +21,7 @@ query customerInformationSearch(
     shipToCount
     SoldToInformation {
       customerCodeSoldTo
+      telephoneNumber
       salesDeals
       paymentTerm
       paymentTermDescription
@@ -86,6 +87,7 @@ query customerInformationSearch(
           shipToCount
           SoldToInformation {
             customerCodeSoldTo
+            telephoneNumber
             name1
             name2
             name3

@@ -358,7 +358,7 @@ class OrderRepository implements IOrderRepository {
       companyName: CompanyName(shipToInfo.shipToName.toString()),
       requestedDeliveryDate: data.deliveryDate.getOrDefaultValue(''),
       poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-      telephone: data.mobileNumber.getTelephone,
+      telephone: data.mobileNumber.getOrDefaultValue(''),
       collectiveNumber: '',
       paymentTerms: data.paymentTerm.getPaymentTerm,
       customer: _getSubmitOrderCustomer(

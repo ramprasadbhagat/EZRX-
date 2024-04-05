@@ -304,25 +304,6 @@ void main() {
     });
   });
 
-  group('Contact Number value object', () {
-    test('should return value when contact number value is less than 16',
-        () async {
-      const input = '1234567890123';
-      final contactNumber = MobileNumber(input);
-      final result = contactNumber.getTelephone;
-      expect(result, '1234567890123');
-    });
-
-    test(
-        'should return value as substing from 0 to 16 when contact number value is more than 16',
-        () async {
-      const input = '123456789012345678';
-      final contactNumber = MobileNumber(input);
-      final result = contactNumber.getTelephone;
-      expect(result, '1234567890123456');
-    });
-  });
-
   group('Expiry Date value object', () {
     test('should return value when Expiry Date having valid date', () async {
       const input = '12042028';

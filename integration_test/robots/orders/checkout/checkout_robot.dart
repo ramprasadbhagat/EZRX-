@@ -23,9 +23,8 @@ class CheckoutRobot {
   final paymentTermField = find.byKey(WidgetKeys.paymentTermDropdownKey);
   final contactPersonField =
       find.byKey(WidgetKeys.genericKey(key: 'contactPersonKey'));
-  final contactNumberField =
-      find.byKey(WidgetKeys.internationalPhoneNumberInput);
-  final mobileNumberField = find.byKey(WidgetKeys.mobileNumber);
+  final mobileNumberField =
+      find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
   final deliveryInstructionField =
       find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey'));
   final poAttachmentSection = find.byType(PoAttachmentUpload);
@@ -102,8 +101,8 @@ class CheckoutRobot {
   void verifyLengthGreaterThan16MobileNumberMessage({required bool isVisible}) {
     expect(
       find.descendant(
-        of: contactNumberField,
-        matching: find.text('Please enter a valid phone number'.tr()),
+        of: mobileNumberField,
+        matching: find.text('Contact number is a required field'.tr()),
       ),
       isVisible ? findsOneWidget : findsNothing,
     );
@@ -137,8 +136,8 @@ class CheckoutRobot {
   }
 
   Future<void> enterContactNumber(String text) async {
-    await tester.tap(contactNumberField);
-    await tester.enterText(contactNumberField, text);
+    await tester.tap(mobileNumberField);
+    await tester.enterText(mobileNumberField, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
   }
@@ -146,8 +145,8 @@ class CheckoutRobot {
   void verifyEmptyContactNumberErrorMessage({required bool isVisible}) {
     expect(
       find.descendant(
-        of: contactNumberField,
-        matching: find.text('Mobile number is a required field'.tr()),
+        of: mobileNumberField,
+        matching: find.text('Contact number is a required field'.tr()),
       ),
       isVisible ? findsOneWidget : findsNothing,
     );
@@ -713,6 +712,7 @@ class CheckoutRobot {
     await tester.tap(materialExpiryDateIcon);
     await tester.pumpAndSettle();
   }
+
   //============================================================
   //  Promotion For ID
   //============================================================
@@ -732,5 +732,4 @@ class CheckoutRobot {
       findsOneWidget,
     );
   }
-  
 }

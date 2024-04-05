@@ -27,7 +27,7 @@ class AdditionalDetailsBloc
           config: value.config,
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             mobileNumber: MobileNumber(
-              value.customerCodeInfo.telephoneNumber.getValue(),
+              value.customerCodeInfo.telephoneNumber.validPhoneNumber,
             ),
           ),
         ),
@@ -37,13 +37,6 @@ class AdditionalDetailsBloc
         newValue: value.newValue,
         emit: emit,
       ),
-      onValidateMobileNo: (value) {
-        emit(
-          state.copyWith(
-            isValidMobileNo: value.isValidMobileNo,
-          ),
-        );
-      },
       validateForm: (value) async => _validateAdditionalDetails(
         emit: emit,
       ),
@@ -125,7 +118,7 @@ class AdditionalDetailsBloc
         ? state.deliveryInfoData.contactPerson.isValid()
         : true;
     final isContactNumberValid = state.config.enableMobileNumber
-        ? state.deliveryInfoData.mobileNumber.isValid() && state.isValidMobileNo
+        ? state.deliveryInfoData.mobileNumber.isValid()
         : true;
     final isPaymentTermValid = state.config.enablePaymentTerms
         ? state.deliveryInfoData.paymentTerm.isValid()
