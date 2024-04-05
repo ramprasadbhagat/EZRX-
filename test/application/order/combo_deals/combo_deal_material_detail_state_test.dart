@@ -167,7 +167,7 @@ void main() {
 
       expect(
         state.totalPriceSelectedItems,
-        2000,
+        3000,
       );
     });
     test(' => totalPriceDisplay should show the right result', () {
@@ -192,7 +192,7 @@ void main() {
 
       expect(
         state.totalPriceDisplay,
-        2000,
+        3000,
       );
     });
     test(' => allMaterialsNumber should show the right result', () {
@@ -240,7 +240,7 @@ void main() {
 
       expect(
         state.totalSelectedQuantity,
-        4,
+        6,
       );
     });
     test(' => currentPrincipalCode should show the right result', () {

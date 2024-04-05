@@ -701,7 +701,7 @@
       "OverridenRuleTier": [],
       "IsMOVExclusion": false,
       "ComboDeals": null
-    },    
+    },      
     {
       "MaterialNumber": "000000000021041796",
       "OldMaterialCode": "882097",
@@ -714,7 +714,7 @@
       "Bundles": [],
       "Valid": true,
       "AdditionalBonusEligible": true,
-      "ZMGDiscount": false,
+      "ZMGDiscount": true,
       "ZDP5MaxQuota": "",
       "ZDP5RemainingQuota": "",
       "ExceedQty": false,
@@ -725,7 +725,7 @@
       "ComboDeals": null
     },
     {
-      "MaterialNumber": "000000000023238863",
+      "MaterialNumber": "000000000021041768",
       "OldMaterialCode": "300HY43",
       "ListPrice": 162.4,
       "FinalIndividualPrice": 138.04000000000002,
@@ -830,7 +830,7 @@
       "ComboDeals": null
   },
   {
-    "MaterialNumber": "000000000023274806",
+    "MaterialNumber": "000000000021041786",
     "OldMaterialCode": "300CZ35U",
     "ListPrice": 162.4,
     "FinalIndividualPrice": 138.04000000000002,

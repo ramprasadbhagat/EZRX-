@@ -77,7 +77,7 @@ void main() {
     materialStockInfos =
         await StockInfoLocalDataSource().getMaterialStockInfoList();
 
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i <= 2; i++) {
       productList[i] = productList[i].copyWith(
         materialInfo: productList[i]
             .materialInfo

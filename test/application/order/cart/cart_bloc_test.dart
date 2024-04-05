@@ -2439,6 +2439,266 @@ void main() {
       );
 
       blocTest<CartBloc, CartState>(
+        'Cart updatePriceProduct with zmg individual discount',
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        seed: () => CartState.initial().copyWith(
+          cartProducts: [
+            cartProducts.cartProducts.first,
+            cartProducts.cartProducts[1],
+          ],
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        setUp: () {
+          when(
+            () => cartRepositoryMock.updateMaterialDealBonus(
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              materials: [
+                cartProducts.cartProducts.first.copyWith(
+                  price: prices[11],
+                  discountedMaterialCount: 19,
+                  salesOrgConfig: fakeMYSalesOrgConfigs,
+                  exceedQuantity: true,
+                ),
+                cartProducts.cartProducts[1].copyWith(
+                  price: prices.last,
+                  discountedMaterialCount: 10,
+                  salesOrgConfig: fakeMYSalesOrgConfigs,
+                  exceedQuantity: true,
+                ),
+              ],
+            ),
+          ).thenAnswer(
+            (invocation) async => Left(
+              fakeError,
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.updatePriceProduct(
+            priceProducts: {
+              cartProducts.cartProducts.first.getMaterialNumber: prices[11],
+              cartProducts.cartProducts[1].getMaterialNumber: prices.last,
+            },
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isMappingPrice: true,
+            cartProducts: [
+              cartProducts.cartProducts.first,
+              cartProducts.cartProducts[1],
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartProducts.cartProducts.first.copyWith(
+                price: prices[11],
+                discountedMaterialCount: 19,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+              cartProducts.cartProducts[1].copyWith(
+                price: prices.last,
+                discountedMaterialCount: 10,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            isFetchingBonus: true,
+            cartProducts: [
+              cartProducts.cartProducts.first.copyWith(
+                price: prices[11],
+                discountedMaterialCount: 19,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+              cartProducts.cartProducts[1].copyWith(
+                price: prices.last,
+                discountedMaterialCount: 10,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartProducts.cartProducts.first.copyWith(
+                price: prices[11],
+                discountedMaterialCount: 19,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+              cartProducts.cartProducts[1].copyWith(
+                price: prices.last,
+                discountedMaterialCount: 10,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            apiFailureOrSuccessOption: optionOf(
+              Left(
+                fakeError,
+              ),
+            ),
+          ),
+        ],
+      );
+
+      blocTest<CartBloc, CartState>(
+        'Cart updatePriceProduct with zmg group discount',
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        seed: () => CartState.initial().copyWith(
+          cartProducts: [
+            cartProducts.cartProducts.first,
+            cartProducts.cartProducts[2],
+          ],
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        setUp: () {
+          when(
+            () => cartRepositoryMock.updateMaterialDealBonus(
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              materials: [
+                cartProducts.cartProducts.first.copyWith(
+                  price: prices[11],
+                  discountedMaterialCount: 38,
+                  salesOrgConfig: fakeMYSalesOrgConfigs,
+                  exceedQuantity: true,
+                ),
+                cartProducts.cartProducts[2].copyWith(
+                  price: prices[10],
+                  discountedMaterialCount: 38,
+                  salesOrgConfig: fakeMYSalesOrgConfigs,
+                  exceedQuantity: true,
+                ),
+              ],
+            ),
+          ).thenAnswer(
+            (invocation) async => Left(
+              fakeError,
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.updatePriceProduct(
+            priceProducts: {
+              cartProducts.cartProducts.first.getMaterialNumber: prices[11],
+              cartProducts.cartProducts[2].getMaterialNumber: prices[10],
+            },
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isMappingPrice: true,
+            cartProducts: [
+              cartProducts.cartProducts.first,
+              cartProducts.cartProducts[2],
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartProducts.cartProducts.first.copyWith(
+                price: prices[11],
+                discountedMaterialCount: 38,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+              cartProducts.cartProducts[2].copyWith(
+                price: prices[10],
+                discountedMaterialCount: 38,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            isFetchingBonus: true,
+            cartProducts: [
+              cartProducts.cartProducts.first.copyWith(
+                price: prices[11],
+                discountedMaterialCount: 38,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+              cartProducts.cartProducts[2].copyWith(
+                price: prices[10],
+                discountedMaterialCount: 38,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              cartProducts.cartProducts.first.copyWith(
+                price: prices[11],
+                discountedMaterialCount: 38,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+              cartProducts.cartProducts[2].copyWith(
+                price: prices[10],
+                discountedMaterialCount: 38,
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+                exceedQuantity: true,
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            apiFailureOrSuccessOption: optionOf(
+              Left(
+                fakeError,
+              ),
+            ),
+          ),
+        ],
+      );
+
+      blocTest<CartBloc, CartState>(
         'Cart updatePriceProduct fail',
         build: () => CartBloc(cartRepositoryMock, productDetailRepository),
         seed: () => CartState.initial().copyWith(
@@ -4625,8 +4885,9 @@ void main() {
           );
           final currentState = previousState.copyWith(
             cartProducts: [
-              bundle.copyWith
-                  .bundle(materials: [...bundle.bundle.materials]..removeLast()),
+              bundle.copyWith.bundle(
+                materials: [...bundle.bundle.materials]..removeLast(),
+              ),
             ],
           );
           expect(
