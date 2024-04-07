@@ -26,7 +26,7 @@ class _NotificationList extends StatelessWidget {
       ),
       leading: Container(
         key: WidgetKeys.notificationItemIcon,
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: notificationData.title.iconBgColor,
           shape: BoxShape.circle,
@@ -54,6 +54,7 @@ class _NotificationList extends StatelessWidget {
                 context.tr(notificationData.title.getOrDefaultValue('')),
                 key: WidgetKeys.notificationItemTitle,
                 style: Theme.of(context).textTheme.labelSmall,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),

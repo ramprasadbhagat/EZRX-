@@ -685,8 +685,6 @@ class _FooterState extends State<_Footer> {
                                 state.isDetailAndStockFetching,
                             child: SizedBox(
                               width: double.infinity,
-                              height:
-                                  MediaQuery.of(context).size.height * 0.056,
                               child: ElevatedButton(
                                 onPressed: stateCart.isUpserting ||
                                         state.isDetailAndStockFetching ||
