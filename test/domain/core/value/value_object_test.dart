@@ -413,4 +413,54 @@ void main() {
       },
     );
   });
+
+  group('Material origin filter Value Object -', () {
+    test('supported types', () {
+      expect(MaterialOriginFilter.all(), MaterialOriginFilter(0));
+      expect(MaterialOriginFilter.zp(), MaterialOriginFilter(2));
+      expect(MaterialOriginFilter.mp(), MaterialOriginFilter(1));
+      expect(
+        MaterialOriginFilter.supportedTypes,
+        [
+          MaterialOriginFilter.all(),
+          MaterialOriginFilter.mp(),
+          MaterialOriginFilter.zp(),
+        ],
+      );
+    });
+
+    test('title getter', () {
+      expect(
+        MaterialOriginFilter.all().titleViewByItem,
+        'All',
+      );
+      expect(
+        MaterialOriginFilter.zp().titleViewByItem,
+        'ZP items',
+      );
+      expect(
+        MaterialOriginFilter.mp().titleViewByItem,
+        'MP items',
+      );
+      expect(
+        MaterialOriginFilter(-1).titleViewByItem,
+        '',
+      );
+    });
+    test('title getter view by order', () {
+      expect(
+        MaterialOriginFilter.all().titleViewByOrder,
+        'All',
+      );
+      expect(
+        MaterialOriginFilter.zp().titleViewByOrder,
+        'ZP orders',
+      );
+      expect(
+        MaterialOriginFilter.mp().titleViewByOrder,
+        'MP orders',
+      );
+      expect(MaterialOriginFilter(-1).titleViewByOrder, '');
+    });
+  });
 }

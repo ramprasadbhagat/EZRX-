@@ -1,5 +1,5 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'view_by_order_filter_dto.freezed.dart';
 part 'view_by_order_filter_dto.g.dart';
@@ -11,7 +11,7 @@ class ViewByOrdersFilterDto with _$ViewByOrdersFilterDto {
     @JsonKey(name: 'toDate', defaultValue: '') required String dateTo,
     @JsonKey(name: 'fromDate', defaultValue: '') required String dateFrom,
     @JsonKey(name: 'status', defaultValue: <String>[])
-        required List<String> orderStatus,
+    required List<String> orderStatus,
     @JsonKey(name: 'orderType', includeIfNull: false) int? orderType,
   }) = _ViewByOrdersFilterDto;
 
@@ -26,7 +26,7 @@ class ViewByOrdersFilterDto with _$ViewByOrdersFilterDto {
       orderStatus: viewByOrdersFilter.orderStatusList
           .map((e) => e.getOrDefaultValue(''))
           .toList(),
-      orderType: orderType == OrderHistoryType.all()
+      orderType: orderType == MaterialOriginFilter.all()
           ? null
           : orderType.getOrDefaultValue(0),
     );

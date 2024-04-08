@@ -15,15 +15,15 @@ class ViewByItemReturnFilterBloc
     on<ViewByItemReturnFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     ViewByItemReturnFilterEvent event,
     Emitter<ViewByItemReturnFilterState> emit,
-  ) async {
-    await event.map(
-      initialize: (e) async => emit(
+  ) {
+    event.map(
+      initialize: (e) => emit(
         ViewByItemReturnFilterState.initial(),
       ),
-      setReturnDate: (e) async => emit(
+      setReturnDate: (e) => emit(
         state.copyWith(
           filter: state.filter.copyWith(
             returnDateFrom: DateTimeStringValue(
@@ -35,19 +35,22 @@ class ViewByItemReturnFilterBloc
           ),
         ),
       ),
-      setAmountFrom: (e) async => emit(
+      setAmountFrom: (e) => emit(
         state.copyWith(
           filter: state.filter.copyWith(
             amountValueFrom: RangeValue(e.amountFrom),
           ),
         ),
       ),
-      setAmountTo: (e) async => emit(
+      setAmountTo: (e) => emit(
         state.copyWith(
           filter: state.filter.copyWith(
             amountValueTo: RangeValue(e.amountTo),
           ),
         ),
+      ),
+      setReturnType: (e) => emit(
+        state.copyWith.filter(materialOriginFilter: e.type),
       ),
       setReturnStatus: (e) {
         final selectedStatusList = List<StatusType>.from(
@@ -62,18 +65,18 @@ class ViewByItemReturnFilterBloc
           ),
         );
       },
-      setValidationFailure: (_) async => emit(
+      setValidationFailure: (_) => emit(
         state.copyWith(
           showErrorMessage: !state.filter.isReturnAmountValueRangeValid,
         ),
       ),
-      updateFilterToLastApplied: (e) async => emit(
+      updateFilterToLastApplied: (e) => emit(
         state.copyWith(
           filter: e.lastAppliedFilter,
           showErrorMessage: false,
         ),
       ),
-      resetFilters: (e) async => emit(
+      resetFilters: (e) => emit(
         ViewByItemReturnFilterState.initial().copyWith(
           filter: ReturnFilter.empty(),
         ),

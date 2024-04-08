@@ -12,14 +12,15 @@ part of 'view_by_order_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ViewByOrdersFilter {
   DateTimeStringValue get orderDateFrom => throw _privateConstructorUsedError;
   DateTimeStringValue get orderDateTo => throw _privateConstructorUsedError;
   List<StatusType> get orderStatusList => throw _privateConstructorUsedError;
-  OrderHistoryType get orderHistoryType => throw _privateConstructorUsedError;
+  MaterialOriginFilter get orderHistoryType =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByOrdersFilterCopyWith<ViewByOrdersFilter> get copyWith =>
@@ -36,7 +37,7 @@ abstract class $ViewByOrdersFilterCopyWith<$Res> {
       {DateTimeStringValue orderDateFrom,
       DateTimeStringValue orderDateTo,
       List<StatusType> orderStatusList,
-      OrderHistoryType orderHistoryType});
+      MaterialOriginFilter orderHistoryType});
 }
 
 /// @nodoc
@@ -73,33 +74,35 @@ class _$ViewByOrdersFilterCopyWithImpl<$Res, $Val extends ViewByOrdersFilter>
       orderHistoryType: null == orderHistoryType
           ? _value.orderHistoryType
           : orderHistoryType // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryType,
+              as MaterialOriginFilter,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ViewByOrderHistoryFilterCopyWith<$Res>
+abstract class _$$ViewByOrderHistoryFilterImplCopyWith<$Res>
     implements $ViewByOrdersFilterCopyWith<$Res> {
-  factory _$$_ViewByOrderHistoryFilterCopyWith(
-          _$_ViewByOrderHistoryFilter value,
-          $Res Function(_$_ViewByOrderHistoryFilter) then) =
-      __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>;
+  factory _$$ViewByOrderHistoryFilterImplCopyWith(
+          _$ViewByOrderHistoryFilterImpl value,
+          $Res Function(_$ViewByOrderHistoryFilterImpl) then) =
+      __$$ViewByOrderHistoryFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {DateTimeStringValue orderDateFrom,
       DateTimeStringValue orderDateTo,
       List<StatusType> orderStatusList,
-      OrderHistoryType orderHistoryType});
+      MaterialOriginFilter orderHistoryType});
 }
 
 /// @nodoc
-class __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>
-    extends _$ViewByOrdersFilterCopyWithImpl<$Res, _$_ViewByOrderHistoryFilter>
-    implements _$$_ViewByOrderHistoryFilterCopyWith<$Res> {
-  __$$_ViewByOrderHistoryFilterCopyWithImpl(_$_ViewByOrderHistoryFilter _value,
-      $Res Function(_$_ViewByOrderHistoryFilter) _then)
+class __$$ViewByOrderHistoryFilterImplCopyWithImpl<$Res>
+    extends _$ViewByOrdersFilterCopyWithImpl<$Res,
+        _$ViewByOrderHistoryFilterImpl>
+    implements _$$ViewByOrderHistoryFilterImplCopyWith<$Res> {
+  __$$ViewByOrderHistoryFilterImplCopyWithImpl(
+      _$ViewByOrderHistoryFilterImpl _value,
+      $Res Function(_$ViewByOrderHistoryFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,7 +113,7 @@ class __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>
     Object? orderStatusList = null,
     Object? orderHistoryType = null,
   }) {
-    return _then(_$_ViewByOrderHistoryFilter(
+    return _then(_$ViewByOrderHistoryFilterImpl(
       orderDateFrom: null == orderDateFrom
           ? _value.orderDateFrom
           : orderDateFrom // ignore: cast_nullable_to_non_nullable
@@ -126,15 +129,15 @@ class __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>
       orderHistoryType: null == orderHistoryType
           ? _value.orderHistoryType
           : orderHistoryType // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryType,
+              as MaterialOriginFilter,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
-  _$_ViewByOrderHistoryFilter(
+class _$ViewByOrderHistoryFilterImpl extends _ViewByOrderHistoryFilter {
+  _$ViewByOrderHistoryFilterImpl(
       {required this.orderDateFrom,
       required this.orderDateTo,
       required final List<StatusType> orderStatusList,
@@ -155,7 +158,7 @@ class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
   }
 
   @override
-  final OrderHistoryType orderHistoryType;
+  final MaterialOriginFilter orderHistoryType;
 
   @override
   String toString() {
@@ -163,10 +166,10 @@ class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByOrderHistoryFilter &&
+            other is _$ViewByOrderHistoryFilterImpl &&
             (identical(other.orderDateFrom, orderDateFrom) ||
                 other.orderDateFrom == orderDateFrom) &&
             (identical(other.orderDateTo, orderDateTo) ||
@@ -184,9 +187,9 @@ class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByOrderHistoryFilterCopyWith<_$_ViewByOrderHistoryFilter>
-      get copyWith => __$$_ViewByOrderHistoryFilterCopyWithImpl<
-          _$_ViewByOrderHistoryFilter>(this, _$identity);
+  _$$ViewByOrderHistoryFilterImplCopyWith<_$ViewByOrderHistoryFilterImpl>
+      get copyWith => __$$ViewByOrderHistoryFilterImplCopyWithImpl<
+          _$ViewByOrderHistoryFilterImpl>(this, _$identity);
 }
 
 abstract class _ViewByOrderHistoryFilter extends ViewByOrdersFilter {
@@ -194,8 +197,8 @@ abstract class _ViewByOrderHistoryFilter extends ViewByOrdersFilter {
           {required final DateTimeStringValue orderDateFrom,
           required final DateTimeStringValue orderDateTo,
           required final List<StatusType> orderStatusList,
-          required final OrderHistoryType orderHistoryType}) =
-      _$_ViewByOrderHistoryFilter;
+          required final MaterialOriginFilter orderHistoryType}) =
+      _$ViewByOrderHistoryFilterImpl;
   _ViewByOrderHistoryFilter._() : super._();
 
   @override
@@ -205,9 +208,9 @@ abstract class _ViewByOrderHistoryFilter extends ViewByOrdersFilter {
   @override
   List<StatusType> get orderStatusList;
   @override
-  OrderHistoryType get orderHistoryType;
+  MaterialOriginFilter get orderHistoryType;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByOrderHistoryFilterCopyWith<_$_ViewByOrderHistoryFilter>
+  _$$ViewByOrderHistoryFilterImplCopyWith<_$ViewByOrderHistoryFilterImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

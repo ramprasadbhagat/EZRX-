@@ -254,29 +254,3 @@ String getDeliveryDateTitle(String status) {
 bool isPaymentTermCodeOutsideOfSystem(String value) {
   return value == 'C024' || value == 'A007';
 }
-
-String getOrderHistoryTypeTitle(int value) {
-  switch (value) {
-    case 0:
-      return 'All';
-    case 1:
-      return 'MP items';
-    case 2:
-      return 'ZP items';
-    default:
-      return '';
-  }
-}
-
-String getViewByOrderHistoryTitle(int value) {
-  switch (value) {
-    case 0:
-      return 'All';
-    case 1:
-      return 'MP orders';
-    case 2:
-      return 'ZP orders';
-    default:
-      return '';
-  }
-}

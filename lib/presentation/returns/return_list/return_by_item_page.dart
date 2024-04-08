@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -167,6 +168,12 @@ class _ReturnItem extends StatelessWidget {
                     const ReturnRequestSummaryByItemDetailsRoute(),
                   );
                 },
+                labelLeading: data.isMarketPlace
+                    ? Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: MarketPlaceLogo.small(),
+                      )
+                    : null,
                 label: data.materialNumber.displayMatNo,
                 labelTrailing: data.prsfd.isBonus && !salesOrg.isID
                     ? const BonusTag(

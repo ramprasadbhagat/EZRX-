@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/returns/repository/i_return_list_repository.da
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_list_request_dto.dart';
@@ -30,6 +31,7 @@ class ReturnListRepository extends IReturnListRepository {
   final DeviceInfo deviceInfo;
   final PermissionService permissionService;
   final FileSystemHelper fileSystemHelper;
+  final DeviceStorage deviceStorage;
 
   ReturnListRepository({
     required this.config,
@@ -38,6 +40,7 @@ class ReturnListRepository extends IReturnListRepository {
     required this.permissionService,
     required this.deviceInfo,
     required this.fileSystemHelper,
+    required this.deviceStorage,
   });
 
   @override
@@ -74,6 +77,7 @@ class ReturnListRepository extends IReturnListRepository {
       final returnList = await remoteDataSource.fetchReturnByItems(
         requestParams:
             ReturnListRequestDto.fromDomain(returnListByItemRequest).toMap(),
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(returnList);

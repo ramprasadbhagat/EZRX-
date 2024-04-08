@@ -12,7 +12,7 @@ part of 'return_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnFilter {
@@ -21,6 +21,8 @@ mixin _$ReturnFilter {
   RangeValue get amountValueFrom => throw _privateConstructorUsedError;
   RangeValue get amountValueTo => throw _privateConstructorUsedError;
   List<StatusType> get returnStatusList => throw _privateConstructorUsedError;
+  MaterialOriginFilter get materialOriginFilter =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnFilterCopyWith<ReturnFilter> get copyWith =>
@@ -38,7 +40,8 @@ abstract class $ReturnFilterCopyWith<$Res> {
       DateTimeStringValue returnDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      List<StatusType> returnStatusList});
+      List<StatusType> returnStatusList,
+      MaterialOriginFilter materialOriginFilter});
 }
 
 /// @nodoc
@@ -59,6 +62,7 @@ class _$ReturnFilterCopyWithImpl<$Res, $Val extends ReturnFilter>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? returnStatusList = null,
+    Object? materialOriginFilter = null,
   }) {
     return _then(_value.copyWith(
       returnDateFrom: null == returnDateFrom
@@ -81,16 +85,20 @@ class _$ReturnFilterCopyWithImpl<$Res, $Val extends ReturnFilter>
           ? _value.returnStatusList
           : returnStatusList // ignore: cast_nullable_to_non_nullable
               as List<StatusType>,
+      materialOriginFilter: null == materialOriginFilter
+          ? _value.materialOriginFilter
+          : materialOriginFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialOriginFilter,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ReturnFilterCopyWith<$Res>
+abstract class _$$ReturnFilterImplCopyWith<$Res>
     implements $ReturnFilterCopyWith<$Res> {
-  factory _$$_ReturnFilterCopyWith(
-          _$_ReturnFilter value, $Res Function(_$_ReturnFilter) then) =
-      __$$_ReturnFilterCopyWithImpl<$Res>;
+  factory _$$ReturnFilterImplCopyWith(
+          _$ReturnFilterImpl value, $Res Function(_$ReturnFilterImpl) then) =
+      __$$ReturnFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -98,15 +106,16 @@ abstract class _$$_ReturnFilterCopyWith<$Res>
       DateTimeStringValue returnDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      List<StatusType> returnStatusList});
+      List<StatusType> returnStatusList,
+      MaterialOriginFilter materialOriginFilter});
 }
 
 /// @nodoc
-class __$$_ReturnFilterCopyWithImpl<$Res>
-    extends _$ReturnFilterCopyWithImpl<$Res, _$_ReturnFilter>
-    implements _$$_ReturnFilterCopyWith<$Res> {
-  __$$_ReturnFilterCopyWithImpl(
-      _$_ReturnFilter _value, $Res Function(_$_ReturnFilter) _then)
+class __$$ReturnFilterImplCopyWithImpl<$Res>
+    extends _$ReturnFilterCopyWithImpl<$Res, _$ReturnFilterImpl>
+    implements _$$ReturnFilterImplCopyWith<$Res> {
+  __$$ReturnFilterImplCopyWithImpl(
+      _$ReturnFilterImpl _value, $Res Function(_$ReturnFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -117,8 +126,9 @@ class __$$_ReturnFilterCopyWithImpl<$Res>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? returnStatusList = null,
+    Object? materialOriginFilter = null,
   }) {
-    return _then(_$_ReturnFilter(
+    return _then(_$ReturnFilterImpl(
       returnDateFrom: null == returnDateFrom
           ? _value.returnDateFrom
           : returnDateFrom // ignore: cast_nullable_to_non_nullable
@@ -139,19 +149,24 @@ class __$$_ReturnFilterCopyWithImpl<$Res>
           ? _value._returnStatusList
           : returnStatusList // ignore: cast_nullable_to_non_nullable
               as List<StatusType>,
+      materialOriginFilter: null == materialOriginFilter
+          ? _value.materialOriginFilter
+          : materialOriginFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialOriginFilter,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_ReturnFilter extends _ReturnFilter {
-  _$_ReturnFilter(
+class _$ReturnFilterImpl extends _ReturnFilter {
+  _$ReturnFilterImpl(
       {required this.returnDateFrom,
       required this.returnDateTo,
       required this.amountValueFrom,
       required this.amountValueTo,
-      required final List<StatusType> returnStatusList})
+      required final List<StatusType> returnStatusList,
+      required this.materialOriginFilter})
       : _returnStatusList = returnStatusList,
         super._();
 
@@ -173,15 +188,18 @@ class _$_ReturnFilter extends _ReturnFilter {
   }
 
   @override
+  final MaterialOriginFilter materialOriginFilter;
+
+  @override
   String toString() {
-    return 'ReturnFilter(returnDateFrom: $returnDateFrom, returnDateTo: $returnDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, returnStatusList: $returnStatusList)';
+    return 'ReturnFilter(returnDateFrom: $returnDateFrom, returnDateTo: $returnDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, returnStatusList: $returnStatusList, materialOriginFilter: $materialOriginFilter)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnFilter &&
+            other is _$ReturnFilterImpl &&
             (identical(other.returnDateFrom, returnDateFrom) ||
                 other.returnDateFrom == returnDateFrom) &&
             (identical(other.returnDateTo, returnDateTo) ||
@@ -191,7 +209,9 @@ class _$_ReturnFilter extends _ReturnFilter {
             (identical(other.amountValueTo, amountValueTo) ||
                 other.amountValueTo == amountValueTo) &&
             const DeepCollectionEquality()
-                .equals(other._returnStatusList, _returnStatusList));
+                .equals(other._returnStatusList, _returnStatusList) &&
+            (identical(other.materialOriginFilter, materialOriginFilter) ||
+                other.materialOriginFilter == materialOriginFilter));
   }
 
   @override
@@ -201,22 +221,25 @@ class _$_ReturnFilter extends _ReturnFilter {
       returnDateTo,
       amountValueFrom,
       amountValueTo,
-      const DeepCollectionEquality().hash(_returnStatusList));
+      const DeepCollectionEquality().hash(_returnStatusList),
+      materialOriginFilter);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnFilterCopyWith<_$_ReturnFilter> get copyWith =>
-      __$$_ReturnFilterCopyWithImpl<_$_ReturnFilter>(this, _$identity);
+  _$$ReturnFilterImplCopyWith<_$ReturnFilterImpl> get copyWith =>
+      __$$ReturnFilterImplCopyWithImpl<_$ReturnFilterImpl>(this, _$identity);
 }
 
 abstract class _ReturnFilter extends ReturnFilter {
   factory _ReturnFilter(
-      {required final DateTimeStringValue returnDateFrom,
-      required final DateTimeStringValue returnDateTo,
-      required final RangeValue amountValueFrom,
-      required final RangeValue amountValueTo,
-      required final List<StatusType> returnStatusList}) = _$_ReturnFilter;
+          {required final DateTimeStringValue returnDateFrom,
+          required final DateTimeStringValue returnDateTo,
+          required final RangeValue amountValueFrom,
+          required final RangeValue amountValueTo,
+          required final List<StatusType> returnStatusList,
+          required final MaterialOriginFilter materialOriginFilter}) =
+      _$ReturnFilterImpl;
   _ReturnFilter._() : super._();
 
   @override
@@ -230,7 +253,9 @@ abstract class _ReturnFilter extends ReturnFilter {
   @override
   List<StatusType> get returnStatusList;
   @override
+  MaterialOriginFilter get materialOriginFilter;
+  @override
   @JsonKey(ignore: true)
-  _$$_ReturnFilterCopyWith<_$_ReturnFilter> get copyWith =>
+  _$$ReturnFilterImplCopyWith<_$ReturnFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

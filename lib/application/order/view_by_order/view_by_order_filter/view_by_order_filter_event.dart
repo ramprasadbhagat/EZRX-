@@ -16,6 +16,6 @@ class ViewByOrderFilterEvent with _$ViewByOrderFilterEvent {
     required bool value,
   }) = _SetOrderStatus;
   const factory ViewByOrderFilterEvent.setOrderHistoryType({
-    required OrderHistoryType type,
+    required MaterialOriginFilter type,
   }) = _SetOrderHistoryType;
 }

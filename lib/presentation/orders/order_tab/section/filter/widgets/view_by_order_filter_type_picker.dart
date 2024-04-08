@@ -9,10 +9,10 @@ class _ViewByOrderFilterHistoryTypePicker extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.filter.orderHistoryType != current.filter.orderHistoryType,
       builder: (context, state) => Column(
-        children: OrderHistoryType.supportedTypes.map((type) {
+        children: MaterialOriginFilter.supportedTypes.map((type) {
           return ListTileTheme(
             horizontalTitleGap: 2,
-            child: RadioListTile<OrderHistoryType>(
+            child: RadioListTile<MaterialOriginFilter>(
               key: WidgetKeys.viewByOrderFilterRadioTitle(
                 type.titleViewByOrder,
                 state.filter.orderHistoryType == type,

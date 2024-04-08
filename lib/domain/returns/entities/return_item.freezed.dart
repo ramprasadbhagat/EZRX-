@@ -12,7 +12,7 @@ part of 'return_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnItem {
@@ -32,6 +32,7 @@ mixin _$ReturnItem {
   DateTimeStringValue get expiry => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
   Prsfd get prsfd => throw _privateConstructorUsedError;
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnItemCopyWith<ReturnItem> get copyWith =>
@@ -60,7 +61,8 @@ abstract class $ReturnItemCopyWith<$Res> {
       bool outsidePolicy,
       DateTimeStringValue expiry,
       ProductImages productImages,
-      Prsfd prsfd});
+      Prsfd prsfd,
+      bool isMarketPlace});
 
   $ProductImagesCopyWith<$Res> get productImages;
 }
@@ -94,6 +96,7 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
     Object? expiry = null,
     Object? productImages = null,
     Object? prsfd = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       requestId: null == requestId
@@ -160,6 +163,10 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
           ? _value.prsfd
           : prsfd // ignore: cast_nullable_to_non_nullable
               as Prsfd,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -173,11 +180,11 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
 }
 
 /// @nodoc
-abstract class _$$_ReturnItemCopyWith<$Res>
+abstract class _$$ReturnItemImplCopyWith<$Res>
     implements $ReturnItemCopyWith<$Res> {
-  factory _$$_ReturnItemCopyWith(
-          _$_ReturnItem value, $Res Function(_$_ReturnItem) then) =
-      __$$_ReturnItemCopyWithImpl<$Res>;
+  factory _$$ReturnItemImplCopyWith(
+          _$ReturnItemImpl value, $Res Function(_$ReturnItemImpl) then) =
+      __$$ReturnItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -196,18 +203,19 @@ abstract class _$$_ReturnItemCopyWith<$Res>
       bool outsidePolicy,
       DateTimeStringValue expiry,
       ProductImages productImages,
-      Prsfd prsfd});
+      Prsfd prsfd,
+      bool isMarketPlace});
 
   @override
   $ProductImagesCopyWith<$Res> get productImages;
 }
 
 /// @nodoc
-class __$$_ReturnItemCopyWithImpl<$Res>
-    extends _$ReturnItemCopyWithImpl<$Res, _$_ReturnItem>
-    implements _$$_ReturnItemCopyWith<$Res> {
-  __$$_ReturnItemCopyWithImpl(
-      _$_ReturnItem _value, $Res Function(_$_ReturnItem) _then)
+class __$$ReturnItemImplCopyWithImpl<$Res>
+    extends _$ReturnItemCopyWithImpl<$Res, _$ReturnItemImpl>
+    implements _$$ReturnItemImplCopyWith<$Res> {
+  __$$ReturnItemImplCopyWithImpl(
+      _$ReturnItemImpl _value, $Res Function(_$ReturnItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -229,8 +237,9 @@ class __$$_ReturnItemCopyWithImpl<$Res>
     Object? expiry = null,
     Object? productImages = null,
     Object? prsfd = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_ReturnItem(
+    return _then(_$ReturnItemImpl(
       requestId: null == requestId
           ? _value.requestId
           : requestId // ignore: cast_nullable_to_non_nullable
@@ -295,14 +304,18 @@ class __$$_ReturnItemCopyWithImpl<$Res>
           ? _value.prsfd
           : prsfd // ignore: cast_nullable_to_non_nullable
               as Prsfd,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_ReturnItem extends _ReturnItem {
-  const _$_ReturnItem(
+class _$ReturnItemImpl extends _ReturnItem {
+  const _$ReturnItemImpl(
       {required this.requestId,
       required this.requestDate,
       required this.itemQty,
@@ -318,7 +331,8 @@ class _$_ReturnItem extends _ReturnItem {
       required this.outsidePolicy,
       required this.expiry,
       required this.productImages,
-      required this.prsfd})
+      required this.prsfd,
+      required this.isMarketPlace})
       : super._();
 
   @override
@@ -353,17 +367,19 @@ class _$_ReturnItem extends _ReturnItem {
   final ProductImages productImages;
   @override
   final Prsfd prsfd;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, productImages: $productImages, prsfd: $prsfd)';
+    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, productImages: $productImages, prsfd: $prsfd, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnItem &&
+            other is _$ReturnItemImpl &&
             (identical(other.requestId, requestId) ||
                 other.requestId == requestId) &&
             (identical(other.requestDate, requestDate) ||
@@ -392,7 +408,9 @@ class _$_ReturnItem extends _ReturnItem {
             (identical(other.expiry, expiry) || other.expiry == expiry) &&
             (identical(other.productImages, productImages) ||
                 other.productImages == productImages) &&
-            (identical(other.prsfd, prsfd) || other.prsfd == prsfd));
+            (identical(other.prsfd, prsfd) || other.prsfd == prsfd) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
@@ -413,13 +431,14 @@ class _$_ReturnItem extends _ReturnItem {
       outsidePolicy,
       expiry,
       productImages,
-      prsfd);
+      prsfd,
+      isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnItemCopyWith<_$_ReturnItem> get copyWith =>
-      __$$_ReturnItemCopyWithImpl<_$_ReturnItem>(this, _$identity);
+  _$$ReturnItemImplCopyWith<_$ReturnItemImpl> get copyWith =>
+      __$$ReturnItemImplCopyWithImpl<_$ReturnItemImpl>(this, _$identity);
 }
 
 abstract class _ReturnItem extends ReturnItem {
@@ -439,7 +458,8 @@ abstract class _ReturnItem extends ReturnItem {
       required final bool outsidePolicy,
       required final DateTimeStringValue expiry,
       required final ProductImages productImages,
-      required final Prsfd prsfd}) = _$_ReturnItem;
+      required final Prsfd prsfd,
+      required final bool isMarketPlace}) = _$ReturnItemImpl;
   const _ReturnItem._() : super._();
 
   @override
@@ -475,7 +495,9 @@ abstract class _ReturnItem extends ReturnItem {
   @override
   Prsfd get prsfd;
   @override
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_ReturnItemCopyWith<_$_ReturnItem> get copyWith =>
+  _$$ReturnItemImplCopyWith<_$ReturnItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

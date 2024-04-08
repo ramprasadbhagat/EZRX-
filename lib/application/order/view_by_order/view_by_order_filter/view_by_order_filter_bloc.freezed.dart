@@ -12,7 +12,7 @@ part of 'view_by_order_filter_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ViewByOrderFilterEvent {
@@ -23,7 +23,7 @@ mixin _$ViewByOrderFilterEvent {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
-    required TResult Function(OrderHistoryType type) setOrderHistoryType,
+    required TResult Function(MaterialOriginFilter type) setOrderHistoryType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,7 +32,7 @@ mixin _$ViewByOrderFilterEvent {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
-    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult? Function(MaterialOriginFilter type)? setOrderHistoryType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,7 +41,7 @@ mixin _$ViewByOrderFilterEvent {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
-    TResult Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult Function(MaterialOriginFilter type)? setOrderHistoryType,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -95,10 +95,10 @@ class _$ViewByOrderFilterEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrganisation salesOrganisation});
 
@@ -106,11 +106,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ViewByOrderFilterEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ViewByOrderFilterEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_InitializedCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -137,8 +137,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized({required this.salesOrganisation});
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl({required this.salesOrganisation});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -149,10 +149,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation));
   }
@@ -163,8 +163,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -174,7 +174,7 @@ class _$_Initialized implements _Initialized {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
-    required TResult Function(OrderHistoryType type) setOrderHistoryType,
+    required TResult Function(MaterialOriginFilter type) setOrderHistoryType,
   }) {
     return initialized(salesOrganisation);
   }
@@ -186,7 +186,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
-    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult? Function(MaterialOriginFilter type)? setOrderHistoryType,
   }) {
     return initialized?.call(salesOrganisation);
   }
@@ -198,7 +198,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
-    TResult Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult Function(MaterialOriginFilter type)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -250,19 +250,19 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements ViewByOrderFilterEvent {
   const factory _Initialized(
-      {required final SalesOrganisation salesOrganisation}) = _$_Initialized;
+      {required final SalesOrganisation salesOrganisation}) = _$InitializedImpl;
 
   SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateCurrentFilterCopyWith<$Res> {
-  factory _$$_UpdateCurrentFilterCopyWith(_$_UpdateCurrentFilter value,
-          $Res Function(_$_UpdateCurrentFilter) then) =
-      __$$_UpdateCurrentFilterCopyWithImpl<$Res>;
+abstract class _$$UpdateCurrentFilterImplCopyWith<$Res> {
+  factory _$$UpdateCurrentFilterImplCopyWith(_$UpdateCurrentFilterImpl value,
+          $Res Function(_$UpdateCurrentFilterImpl) then) =
+      __$$UpdateCurrentFilterImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ViewByOrdersFilter currentFilter});
 
@@ -270,11 +270,12 @@ abstract class _$$_UpdateCurrentFilterCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateCurrentFilterCopyWithImpl<$Res>
-    extends _$ViewByOrderFilterEventCopyWithImpl<$Res, _$_UpdateCurrentFilter>
-    implements _$$_UpdateCurrentFilterCopyWith<$Res> {
-  __$$_UpdateCurrentFilterCopyWithImpl(_$_UpdateCurrentFilter _value,
-      $Res Function(_$_UpdateCurrentFilter) _then)
+class __$$UpdateCurrentFilterImplCopyWithImpl<$Res>
+    extends _$ViewByOrderFilterEventCopyWithImpl<$Res,
+        _$UpdateCurrentFilterImpl>
+    implements _$$UpdateCurrentFilterImplCopyWith<$Res> {
+  __$$UpdateCurrentFilterImplCopyWithImpl(_$UpdateCurrentFilterImpl _value,
+      $Res Function(_$UpdateCurrentFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -282,7 +283,7 @@ class __$$_UpdateCurrentFilterCopyWithImpl<$Res>
   $Res call({
     Object? currentFilter = null,
   }) {
-    return _then(_$_UpdateCurrentFilter(
+    return _then(_$UpdateCurrentFilterImpl(
       currentFilter: null == currentFilter
           ? _value.currentFilter
           : currentFilter // ignore: cast_nullable_to_non_nullable
@@ -301,8 +302,8 @@ class __$$_UpdateCurrentFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
-  const _$_UpdateCurrentFilter({required this.currentFilter});
+class _$UpdateCurrentFilterImpl implements _UpdateCurrentFilter {
+  const _$UpdateCurrentFilterImpl({required this.currentFilter});
 
   @override
   final ViewByOrdersFilter currentFilter;
@@ -313,10 +314,10 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateCurrentFilter &&
+            other is _$UpdateCurrentFilterImpl &&
             (identical(other.currentFilter, currentFilter) ||
                 other.currentFilter == currentFilter));
   }
@@ -327,8 +328,8 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateCurrentFilterCopyWith<_$_UpdateCurrentFilter> get copyWith =>
-      __$$_UpdateCurrentFilterCopyWithImpl<_$_UpdateCurrentFilter>(
+  _$$UpdateCurrentFilterImplCopyWith<_$UpdateCurrentFilterImpl> get copyWith =>
+      __$$UpdateCurrentFilterImplCopyWithImpl<_$UpdateCurrentFilterImpl>(
           this, _$identity);
 
   @override
@@ -339,7 +340,7 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
-    required TResult Function(OrderHistoryType type) setOrderHistoryType,
+    required TResult Function(MaterialOriginFilter type) setOrderHistoryType,
   }) {
     return updateCurrentFilter(currentFilter);
   }
@@ -351,7 +352,7 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
-    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult? Function(MaterialOriginFilter type)? setOrderHistoryType,
   }) {
     return updateCurrentFilter?.call(currentFilter);
   }
@@ -363,7 +364,7 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
-    TResult Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult Function(MaterialOriginFilter type)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (updateCurrentFilter != null) {
@@ -416,29 +417,29 @@ class _$_UpdateCurrentFilter implements _UpdateCurrentFilter {
 abstract class _UpdateCurrentFilter implements ViewByOrderFilterEvent {
   const factory _UpdateCurrentFilter(
           {required final ViewByOrdersFilter currentFilter}) =
-      _$_UpdateCurrentFilter;
+      _$UpdateCurrentFilterImpl;
 
   ViewByOrdersFilter get currentFilter;
   @JsonKey(ignore: true)
-  _$$_UpdateCurrentFilterCopyWith<_$_UpdateCurrentFilter> get copyWith =>
+  _$$UpdateCurrentFilterImplCopyWith<_$UpdateCurrentFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetDateRangeCopyWith<$Res> {
-  factory _$$_SetDateRangeCopyWith(
-          _$_SetDateRange value, $Res Function(_$_SetDateRange) then) =
-      __$$_SetDateRangeCopyWithImpl<$Res>;
+abstract class _$$SetDateRangeImplCopyWith<$Res> {
+  factory _$$SetDateRangeImplCopyWith(
+          _$SetDateRangeImpl value, $Res Function(_$SetDateRangeImpl) then) =
+      __$$SetDateRangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeRange dateRange});
 }
 
 /// @nodoc
-class __$$_SetDateRangeCopyWithImpl<$Res>
-    extends _$ViewByOrderFilterEventCopyWithImpl<$Res, _$_SetDateRange>
-    implements _$$_SetDateRangeCopyWith<$Res> {
-  __$$_SetDateRangeCopyWithImpl(
-      _$_SetDateRange _value, $Res Function(_$_SetDateRange) _then)
+class __$$SetDateRangeImplCopyWithImpl<$Res>
+    extends _$ViewByOrderFilterEventCopyWithImpl<$Res, _$SetDateRangeImpl>
+    implements _$$SetDateRangeImplCopyWith<$Res> {
+  __$$SetDateRangeImplCopyWithImpl(
+      _$SetDateRangeImpl _value, $Res Function(_$SetDateRangeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -446,7 +447,7 @@ class __$$_SetDateRangeCopyWithImpl<$Res>
   $Res call({
     Object? dateRange = null,
   }) {
-    return _then(_$_SetDateRange(
+    return _then(_$SetDateRangeImpl(
       null == dateRange
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
@@ -457,8 +458,8 @@ class __$$_SetDateRangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetDateRange implements _SetDateRange {
-  const _$_SetDateRange(this.dateRange);
+class _$SetDateRangeImpl implements _SetDateRange {
+  const _$SetDateRangeImpl(this.dateRange);
 
   @override
   final DateTimeRange dateRange;
@@ -469,10 +470,10 @@ class _$_SetDateRange implements _SetDateRange {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetDateRange &&
+            other is _$SetDateRangeImpl &&
             (identical(other.dateRange, dateRange) ||
                 other.dateRange == dateRange));
   }
@@ -483,8 +484,8 @@ class _$_SetDateRange implements _SetDateRange {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetDateRangeCopyWith<_$_SetDateRange> get copyWith =>
-      __$$_SetDateRangeCopyWithImpl<_$_SetDateRange>(this, _$identity);
+  _$$SetDateRangeImplCopyWith<_$SetDateRangeImpl> get copyWith =>
+      __$$SetDateRangeImplCopyWithImpl<_$SetDateRangeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -494,7 +495,7 @@ class _$_SetDateRange implements _SetDateRange {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
-    required TResult Function(OrderHistoryType type) setOrderHistoryType,
+    required TResult Function(MaterialOriginFilter type) setOrderHistoryType,
   }) {
     return setDateRange(dateRange);
   }
@@ -506,7 +507,7 @@ class _$_SetDateRange implements _SetDateRange {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
-    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult? Function(MaterialOriginFilter type)? setOrderHistoryType,
   }) {
     return setDateRange?.call(dateRange);
   }
@@ -518,7 +519,7 @@ class _$_SetDateRange implements _SetDateRange {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
-    TResult Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult Function(MaterialOriginFilter type)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (setDateRange != null) {
@@ -569,29 +570,30 @@ class _$_SetDateRange implements _SetDateRange {
 }
 
 abstract class _SetDateRange implements ViewByOrderFilterEvent {
-  const factory _SetDateRange(final DateTimeRange dateRange) = _$_SetDateRange;
+  const factory _SetDateRange(final DateTimeRange dateRange) =
+      _$SetDateRangeImpl;
 
   DateTimeRange get dateRange;
   @JsonKey(ignore: true)
-  _$$_SetDateRangeCopyWith<_$_SetDateRange> get copyWith =>
+  _$$SetDateRangeImplCopyWith<_$SetDateRangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetOrderStatusCopyWith<$Res> {
-  factory _$$_SetOrderStatusCopyWith(
-          _$_SetOrderStatus value, $Res Function(_$_SetOrderStatus) then) =
-      __$$_SetOrderStatusCopyWithImpl<$Res>;
+abstract class _$$SetOrderStatusImplCopyWith<$Res> {
+  factory _$$SetOrderStatusImplCopyWith(_$SetOrderStatusImpl value,
+          $Res Function(_$SetOrderStatusImpl) then) =
+      __$$SetOrderStatusImplCopyWithImpl<$Res>;
   @useResult
   $Res call({StatusType status, bool value});
 }
 
 /// @nodoc
-class __$$_SetOrderStatusCopyWithImpl<$Res>
-    extends _$ViewByOrderFilterEventCopyWithImpl<$Res, _$_SetOrderStatus>
-    implements _$$_SetOrderStatusCopyWith<$Res> {
-  __$$_SetOrderStatusCopyWithImpl(
-      _$_SetOrderStatus _value, $Res Function(_$_SetOrderStatus) _then)
+class __$$SetOrderStatusImplCopyWithImpl<$Res>
+    extends _$ViewByOrderFilterEventCopyWithImpl<$Res, _$SetOrderStatusImpl>
+    implements _$$SetOrderStatusImplCopyWith<$Res> {
+  __$$SetOrderStatusImplCopyWithImpl(
+      _$SetOrderStatusImpl _value, $Res Function(_$SetOrderStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -600,7 +602,7 @@ class __$$_SetOrderStatusCopyWithImpl<$Res>
     Object? status = null,
     Object? value = null,
   }) {
-    return _then(_$_SetOrderStatus(
+    return _then(_$SetOrderStatusImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -615,8 +617,8 @@ class __$$_SetOrderStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetOrderStatus implements _SetOrderStatus {
-  const _$_SetOrderStatus({required this.status, required this.value});
+class _$SetOrderStatusImpl implements _SetOrderStatus {
+  const _$SetOrderStatusImpl({required this.status, required this.value});
 
   @override
   final StatusType status;
@@ -629,10 +631,10 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetOrderStatus &&
+            other is _$SetOrderStatusImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.value, value) || other.value == value));
   }
@@ -643,8 +645,9 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetOrderStatusCopyWith<_$_SetOrderStatus> get copyWith =>
-      __$$_SetOrderStatusCopyWithImpl<_$_SetOrderStatus>(this, _$identity);
+  _$$SetOrderStatusImplCopyWith<_$SetOrderStatusImpl> get copyWith =>
+      __$$SetOrderStatusImplCopyWithImpl<_$SetOrderStatusImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -654,7 +657,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
-    required TResult Function(OrderHistoryType type) setOrderHistoryType,
+    required TResult Function(MaterialOriginFilter type) setOrderHistoryType,
   }) {
     return setOrderStatus(status, value);
   }
@@ -666,7 +669,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
-    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult? Function(MaterialOriginFilter type)? setOrderHistoryType,
   }) {
     return setOrderStatus?.call(status, value);
   }
@@ -678,7 +681,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
-    TResult Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult Function(MaterialOriginFilter type)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (setOrderStatus != null) {
@@ -731,30 +734,31 @@ class _$_SetOrderStatus implements _SetOrderStatus {
 abstract class _SetOrderStatus implements ViewByOrderFilterEvent {
   const factory _SetOrderStatus(
       {required final StatusType status,
-      required final bool value}) = _$_SetOrderStatus;
+      required final bool value}) = _$SetOrderStatusImpl;
 
   StatusType get status;
   bool get value;
   @JsonKey(ignore: true)
-  _$$_SetOrderStatusCopyWith<_$_SetOrderStatus> get copyWith =>
+  _$$SetOrderStatusImplCopyWith<_$SetOrderStatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetOrderHistoryTypeCopyWith<$Res> {
-  factory _$$_SetOrderHistoryTypeCopyWith(_$_SetOrderHistoryType value,
-          $Res Function(_$_SetOrderHistoryType) then) =
-      __$$_SetOrderHistoryTypeCopyWithImpl<$Res>;
+abstract class _$$SetOrderHistoryTypeImplCopyWith<$Res> {
+  factory _$$SetOrderHistoryTypeImplCopyWith(_$SetOrderHistoryTypeImpl value,
+          $Res Function(_$SetOrderHistoryTypeImpl) then) =
+      __$$SetOrderHistoryTypeImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({OrderHistoryType type});
+  $Res call({MaterialOriginFilter type});
 }
 
 /// @nodoc
-class __$$_SetOrderHistoryTypeCopyWithImpl<$Res>
-    extends _$ViewByOrderFilterEventCopyWithImpl<$Res, _$_SetOrderHistoryType>
-    implements _$$_SetOrderHistoryTypeCopyWith<$Res> {
-  __$$_SetOrderHistoryTypeCopyWithImpl(_$_SetOrderHistoryType _value,
-      $Res Function(_$_SetOrderHistoryType) _then)
+class __$$SetOrderHistoryTypeImplCopyWithImpl<$Res>
+    extends _$ViewByOrderFilterEventCopyWithImpl<$Res,
+        _$SetOrderHistoryTypeImpl>
+    implements _$$SetOrderHistoryTypeImplCopyWith<$Res> {
+  __$$SetOrderHistoryTypeImplCopyWithImpl(_$SetOrderHistoryTypeImpl _value,
+      $Res Function(_$SetOrderHistoryTypeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -762,22 +766,22 @@ class __$$_SetOrderHistoryTypeCopyWithImpl<$Res>
   $Res call({
     Object? type = null,
   }) {
-    return _then(_$_SetOrderHistoryType(
+    return _then(_$SetOrderHistoryTypeImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryType,
+              as MaterialOriginFilter,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SetOrderHistoryType implements _SetOrderHistoryType {
-  const _$_SetOrderHistoryType({required this.type});
+class _$SetOrderHistoryTypeImpl implements _SetOrderHistoryType {
+  const _$SetOrderHistoryTypeImpl({required this.type});
 
   @override
-  final OrderHistoryType type;
+  final MaterialOriginFilter type;
 
   @override
   String toString() {
@@ -785,10 +789,10 @@ class _$_SetOrderHistoryType implements _SetOrderHistoryType {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetOrderHistoryType &&
+            other is _$SetOrderHistoryTypeImpl &&
             (identical(other.type, type) || other.type == type));
   }
 
@@ -798,8 +802,8 @@ class _$_SetOrderHistoryType implements _SetOrderHistoryType {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetOrderHistoryTypeCopyWith<_$_SetOrderHistoryType> get copyWith =>
-      __$$_SetOrderHistoryTypeCopyWithImpl<_$_SetOrderHistoryType>(
+  _$$SetOrderHistoryTypeImplCopyWith<_$SetOrderHistoryTypeImpl> get copyWith =>
+      __$$SetOrderHistoryTypeImplCopyWithImpl<_$SetOrderHistoryTypeImpl>(
           this, _$identity);
 
   @override
@@ -810,7 +814,7 @@ class _$_SetOrderHistoryType implements _SetOrderHistoryType {
         updateCurrentFilter,
     required TResult Function(DateTimeRange dateRange) setDateRange,
     required TResult Function(StatusType status, bool value) setOrderStatus,
-    required TResult Function(OrderHistoryType type) setOrderHistoryType,
+    required TResult Function(MaterialOriginFilter type) setOrderHistoryType,
   }) {
     return setOrderHistoryType(type);
   }
@@ -822,7 +826,7 @@ class _$_SetOrderHistoryType implements _SetOrderHistoryType {
     TResult? Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult? Function(DateTimeRange dateRange)? setDateRange,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
-    TResult? Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult? Function(MaterialOriginFilter type)? setOrderHistoryType,
   }) {
     return setOrderHistoryType?.call(type);
   }
@@ -834,7 +838,7 @@ class _$_SetOrderHistoryType implements _SetOrderHistoryType {
     TResult Function(ViewByOrdersFilter currentFilter)? updateCurrentFilter,
     TResult Function(DateTimeRange dateRange)? setDateRange,
     TResult Function(StatusType status, bool value)? setOrderStatus,
-    TResult Function(OrderHistoryType type)? setOrderHistoryType,
+    TResult Function(MaterialOriginFilter type)? setOrderHistoryType,
     required TResult orElse(),
   }) {
     if (setOrderHistoryType != null) {
@@ -885,12 +889,12 @@ class _$_SetOrderHistoryType implements _SetOrderHistoryType {
 }
 
 abstract class _SetOrderHistoryType implements ViewByOrderFilterEvent {
-  const factory _SetOrderHistoryType({required final OrderHistoryType type}) =
-      _$_SetOrderHistoryType;
+  const factory _SetOrderHistoryType(
+      {required final MaterialOriginFilter type}) = _$SetOrderHistoryTypeImpl;
 
-  OrderHistoryType get type;
+  MaterialOriginFilter get type;
   @JsonKey(ignore: true)
-  _$$_SetOrderHistoryTypeCopyWith<_$_SetOrderHistoryType> get copyWith =>
+  _$$SetOrderHistoryTypeImplCopyWith<_$SetOrderHistoryTypeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -963,11 +967,12 @@ class _$ViewByOrderFilterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ViewByOrderFilterStateCopyWith<$Res>
+abstract class _$$ViewByOrderFilterStateImplCopyWith<$Res>
     implements $ViewByOrderFilterStateCopyWith<$Res> {
-  factory _$$_ViewByOrderFilterStateCopyWith(_$_ViewByOrderFilterState value,
-          $Res Function(_$_ViewByOrderFilterState) then) =
-      __$$_ViewByOrderFilterStateCopyWithImpl<$Res>;
+  factory _$$ViewByOrderFilterStateImplCopyWith(
+          _$ViewByOrderFilterStateImpl value,
+          $Res Function(_$ViewByOrderFilterStateImpl) then) =
+      __$$ViewByOrderFilterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({ViewByOrdersFilter filter, SalesOrganisation salesOrganisation});
@@ -979,12 +984,13 @@ abstract class _$$_ViewByOrderFilterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByOrderFilterStateCopyWithImpl<$Res>
+class __$$ViewByOrderFilterStateImplCopyWithImpl<$Res>
     extends _$ViewByOrderFilterStateCopyWithImpl<$Res,
-        _$_ViewByOrderFilterState>
-    implements _$$_ViewByOrderFilterStateCopyWith<$Res> {
-  __$$_ViewByOrderFilterStateCopyWithImpl(_$_ViewByOrderFilterState _value,
-      $Res Function(_$_ViewByOrderFilterState) _then)
+        _$ViewByOrderFilterStateImpl>
+    implements _$$ViewByOrderFilterStateImplCopyWith<$Res> {
+  __$$ViewByOrderFilterStateImplCopyWithImpl(
+      _$ViewByOrderFilterStateImpl _value,
+      $Res Function(_$ViewByOrderFilterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -993,7 +999,7 @@ class __$$_ViewByOrderFilterStateCopyWithImpl<$Res>
     Object? filter = null,
     Object? salesOrganisation = null,
   }) {
-    return _then(_$_ViewByOrderFilterState(
+    return _then(_$ViewByOrderFilterStateImpl(
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
@@ -1008,8 +1014,8 @@ class __$$_ViewByOrderFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByOrderFilterState extends _ViewByOrderFilterState {
-  const _$_ViewByOrderFilterState(
+class _$ViewByOrderFilterStateImpl extends _ViewByOrderFilterState {
+  const _$ViewByOrderFilterStateImpl(
       {required this.filter, required this.salesOrganisation})
       : super._();
 
@@ -1024,10 +1030,10 @@ class _$_ViewByOrderFilterState extends _ViewByOrderFilterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByOrderFilterState &&
+            other is _$ViewByOrderFilterStateImpl &&
             (identical(other.filter, filter) || other.filter == filter) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation));
@@ -1039,16 +1045,16 @@ class _$_ViewByOrderFilterState extends _ViewByOrderFilterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByOrderFilterStateCopyWith<_$_ViewByOrderFilterState> get copyWith =>
-      __$$_ViewByOrderFilterStateCopyWithImpl<_$_ViewByOrderFilterState>(
-          this, _$identity);
+  _$$ViewByOrderFilterStateImplCopyWith<_$ViewByOrderFilterStateImpl>
+      get copyWith => __$$ViewByOrderFilterStateImplCopyWithImpl<
+          _$ViewByOrderFilterStateImpl>(this, _$identity);
 }
 
 abstract class _ViewByOrderFilterState extends ViewByOrderFilterState {
   const factory _ViewByOrderFilterState(
           {required final ViewByOrdersFilter filter,
           required final SalesOrganisation salesOrganisation}) =
-      _$_ViewByOrderFilterState;
+      _$ViewByOrderFilterStateImpl;
   const _ViewByOrderFilterState._() : super._();
 
   @override
@@ -1057,6 +1063,6 @@ abstract class _ViewByOrderFilterState extends ViewByOrderFilterState {
   SalesOrganisation get salesOrganisation;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByOrderFilterStateCopyWith<_$_ViewByOrderFilterState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ViewByOrderFilterStateImplCopyWith<_$ViewByOrderFilterStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

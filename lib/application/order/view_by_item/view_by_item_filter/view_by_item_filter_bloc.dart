@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 part 'view_by_item_filter_bloc.freezed.dart';
 part 'view_by_item_filter_event.dart';

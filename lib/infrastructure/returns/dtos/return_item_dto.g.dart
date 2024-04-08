@@ -6,8 +6,8 @@ part of 'return_item_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnItemDto _$$_ReturnItemDtoFromJson(Map<String, dynamic> json) =>
-    _$_ReturnItemDto(
+_$ReturnItemDtoImpl _$$ReturnItemDtoImplFromJson(Map<String, dynamic> json) =>
+    _$ReturnItemDtoImpl(
       requestId: json['requestId'] as String? ?? '',
       requestDate: json['requestDate'] as String? ?? '',
       itemQty: json['itemQty'] as String? ?? '0',
@@ -24,9 +24,11 @@ _$_ReturnItemDto _$$_ReturnItemDtoFromJson(Map<String, dynamic> json) =>
       outsidePolicy: json['outsidePolicy'] as bool? ?? false,
       expiry: json['expiry'] as String? ?? '',
       prsfd: json['prsfd'] as String? ?? '',
+      isMarketPlace:
+          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_ReturnItemDtoToJson(_$_ReturnItemDto instance) =>
+Map<String, dynamic> _$$ReturnItemDtoImplToJson(_$ReturnItemDtoImpl instance) =>
     <String, dynamic>{
       'requestId': instance.requestId,
       'requestDate': instance.requestDate,
@@ -43,4 +45,5 @@ Map<String, dynamic> _$$_ReturnItemDtoToJson(_$_ReturnItemDto instance) =>
       'outsidePolicy': instance.outsidePolicy,
       'expiry': instance.expiry,
       'prsfd': instance.prsfd,
+      'isMarketPlace': instance.isMarketPlace,
     };

@@ -14,6 +14,7 @@ class ReturnFilter with _$ReturnFilter {
     required RangeValue amountValueFrom,
     required RangeValue amountValueTo,
     required List<StatusType> returnStatusList,
+    required MaterialOriginFilter materialOriginFilter,
   }) = _ReturnFilter;
 
   factory ReturnFilter.empty() => ReturnFilter(
@@ -22,6 +23,7 @@ class ReturnFilter with _$ReturnFilter {
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         returnStatusList: <StatusType>[],
+        materialOriginFilter: MaterialOriginFilter.all(),
       );
 
   DateTimeRange get getReturnDateFilterDateRange => DateTimeRange(

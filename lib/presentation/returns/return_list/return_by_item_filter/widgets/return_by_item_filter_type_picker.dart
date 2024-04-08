@@ -1,13 +1,14 @@
-part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
+part of 'package:ezrxmobile/presentation/returns/return_list/return_by_item_filter/return_by_item_filter_page.dart';
 
-class _ViewByItemFilterHistoryTypePicker extends StatelessWidget {
-  const _ViewByItemFilterHistoryTypePicker({Key? key}) : super(key: key);
+class _ReturnTypePicker extends StatelessWidget {
+  const _ReturnTypePicker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ViewByItemFilterBloc, ViewByItemFilterState>(
+    return BlocBuilder<ViewByItemReturnFilterBloc, ViewByItemReturnFilterState>(
       buildWhen: (previous, current) =>
-          previous.filter.orderHistoryType != current.filter.orderHistoryType,
+          previous.filter.materialOriginFilter !=
+          current.filter.materialOriginFilter,
       builder: (context, state) => Column(
         children: MaterialOriginFilter.supportedTypes.map((type) {
           return ListTileTheme(
@@ -15,7 +16,7 @@ class _ViewByItemFilterHistoryTypePicker extends StatelessWidget {
             child: RadioListTile<MaterialOriginFilter>(
               key: WidgetKeys.filterRadioTile(
                 type.titleViewByItem,
-                state.filter.orderHistoryType == type,
+                state.filter.materialOriginFilter == type,
               ),
               contentPadding: EdgeInsets.zero,
               title: Text(
@@ -27,11 +28,11 @@ class _ViewByItemFilterHistoryTypePicker extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               onChanged: (value) {
                 if (value == null) return;
-                context.read<ViewByItemFilterBloc>().add(
-                      ViewByItemFilterEvent.setOrderHistoryType(type: value),
+                context.read<ViewByItemReturnFilterBloc>().add(
+                      ViewByItemReturnFilterEvent.setReturnType(type: value),
                     );
               },
-              groupValue: state.filter.orderHistoryType,
+              groupValue: state.filter.materialOriginFilter,
               value: type,
             ),
           );

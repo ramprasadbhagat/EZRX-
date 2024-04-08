@@ -135,6 +135,26 @@ void main() {
       ],
     );
 
+    blocTest(
+      ' -> SetReturnType',
+      build: () => ViewByItemReturnFilterBloc(),
+      seed: () => ViewByItemReturnFilterState.initial().copyWith(
+        filter: returnFilter,
+      ),
+      act: (ViewByItemReturnFilterBloc bloc) => bloc.add(
+        ViewByItemReturnFilterEvent.setReturnType(
+          type: MaterialOriginFilter.mp(),
+        ),
+      ),
+      expect: () => [
+        ViewByItemReturnFilterState.initial().copyWith(
+          filter: returnFilter.copyWith(
+            materialOriginFilter: MaterialOriginFilter.mp(),
+          ),
+        ),
+      ],
+    );
+
     group(' -> setReturnStatus Event', () {
       blocTest(
         ' -> Add more status to Status list',

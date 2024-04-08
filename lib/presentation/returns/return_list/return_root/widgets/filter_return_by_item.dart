@@ -41,12 +41,7 @@ class _FilterReturnByItem extends StatelessWidget {
       isScrollControlled: true,
       enableDrag: false,
       isDismissible: false,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(16),
-        ),
-      ),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+      clipBehavior: Clip.hardEdge,
       builder: (_) {
         return const ReturnByItemFilterPage();
       },

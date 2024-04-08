@@ -4,7 +4,6 @@ import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
@@ -101,16 +100,16 @@ void main() {
         'Test Set Order history type',
         build: () => ViewByItemFilterBloc(),
         seed: () => ViewByItemFilterState.initial().copyWith.filter(
-              orderHistoryType: OrderHistoryType.zp(),
+              orderHistoryType: MaterialOriginFilter.zp(),
             ),
         act: (bloc) => bloc.add(
           ViewByItemFilterEvent.setOrderHistoryType(
-            type: OrderHistoryType.mp(),
+            type: MaterialOriginFilter.mp(),
           ),
         ),
         expect: () => [
           ViewByItemFilterState.initial().copyWith.filter(
-                orderHistoryType: OrderHistoryType.mp(),
+                orderHistoryType: MaterialOriginFilter.mp(),
               ),
         ],
       );

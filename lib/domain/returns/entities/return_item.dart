@@ -28,6 +28,7 @@ class ReturnItem with _$ReturnItem {
     required DateTimeStringValue expiry,
     required ProductImages productImages,
     required Prsfd prsfd,
+    required bool isMarketPlace,
   }) = _ReturnItem;
 
   factory ReturnItem.empty() => ReturnItem(
@@ -47,6 +48,7 @@ class ReturnItem with _$ReturnItem {
         outsidePolicy: false,
         productImages: ProductImages.empty(),
         prsfd: Prsfd(''),
+        isMarketPlace: false,
       );
 
   bool displayOutSidePolicy(bool allowReturnsOutsidePolicy) =>

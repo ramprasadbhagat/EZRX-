@@ -54,7 +54,8 @@
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "C10527042",
                             "outsidePolicy": false,
-                            "expiry": "20251101"
+                            "expiry": "20251101",
+                            "isMarketPlace": true
                         },
                         {
                             "prsfd": "X",

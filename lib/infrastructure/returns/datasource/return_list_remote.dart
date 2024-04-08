@@ -6,29 +6,35 @@ import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_item_dto.dart';
 import 'package:flutter/foundation.dart';
 
 class ReturnListRemoteDataSource {
-  HttpService httpService;
-  ReturnQuery queryMutation;
-  DataSourceExceptionHandler dataSourceExceptionHandler;
-  Config config;
+  final HttpService httpService;
+  final ReturnQuery queryMutation;
+  final DataSourceExceptionHandler dataSourceExceptionHandler;
+  final Config config;
+  final RemoteConfigService remoteConfigService;
 
   ReturnListRemoteDataSource({
     required this.httpService,
     required this.queryMutation,
     required this.dataSourceExceptionHandler,
     required this.config,
+    required this.remoteConfigService,
   });
 
   Future<List<ReturnItem>> fetchReturnByItems({
     required Map<String, dynamic> requestParams,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = queryMutation.getRequestsByItems();
+      final queryData = queryMutation.getRequestsByItems(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
 
       final res = await httpService.request(
         method: 'POST',

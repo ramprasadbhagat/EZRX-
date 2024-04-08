@@ -869,3 +869,29 @@ bool isContactUsLink(String path) => path == '/contact-us';
 bool isFaqLink(String path) => path == '/faq';
 
 bool isAboutUsLink(String path) => path == '/about-us';
+
+String getViewByItemTitle(int value) {
+  switch (value) {
+    case 0:
+      return 'All';
+    case 1:
+      return 'MP items';
+    case 2:
+      return 'ZP items';
+    default:
+      return '';
+  }
+}
+
+String getViewByOrderHistoryTitle(int value) {
+  switch (value) {
+    case 0:
+      return 'All';
+    case 1:
+      return 'MP orders';
+    case 2:
+      return 'ZP orders';
+    default:
+      return '';
+  }
+}

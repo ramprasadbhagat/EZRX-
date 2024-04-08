@@ -12,7 +12,7 @@ part of 'return_item_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnItemDto _$ReturnItemDtoFromJson(Map<String, dynamic> json) {
   return _ReturnItemDto.fromJson(json);
@@ -50,6 +50,8 @@ mixin _$ReturnItemDto {
   String get expiry => throw _privateConstructorUsedError;
   @JsonKey(name: 'prsfd', defaultValue: '')
   String get prsfd => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -79,7 +81,9 @@ abstract class $ReturnItemDtoCopyWith<$Res> {
       @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '') String expiry,
-      @JsonKey(name: 'prsfd', defaultValue: '') String prsfd});
+      @JsonKey(name: 'prsfd', defaultValue: '') String prsfd,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -110,6 +114,7 @@ class _$ReturnItemDtoCopyWithImpl<$Res, $Val extends ReturnItemDto>
     Object? outsidePolicy = null,
     Object? expiry = null,
     Object? prsfd = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       requestId: null == requestId
@@ -172,16 +177,20 @@ class _$ReturnItemDtoCopyWithImpl<$Res, $Val extends ReturnItemDto>
           ? _value.prsfd
           : prsfd // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ReturnItemDtoCopyWith<$Res>
+abstract class _$$ReturnItemDtoImplCopyWith<$Res>
     implements $ReturnItemDtoCopyWith<$Res> {
-  factory _$$_ReturnItemDtoCopyWith(
-          _$_ReturnItemDto value, $Res Function(_$_ReturnItemDto) then) =
-      __$$_ReturnItemDtoCopyWithImpl<$Res>;
+  factory _$$ReturnItemDtoImplCopyWith(
+          _$ReturnItemDtoImpl value, $Res Function(_$ReturnItemDtoImpl) then) =
+      __$$ReturnItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -200,15 +209,17 @@ abstract class _$$_ReturnItemDtoCopyWith<$Res>
       @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '') String expiry,
-      @JsonKey(name: 'prsfd', defaultValue: '') String prsfd});
+      @JsonKey(name: 'prsfd', defaultValue: '') String prsfd,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
-class __$$_ReturnItemDtoCopyWithImpl<$Res>
-    extends _$ReturnItemDtoCopyWithImpl<$Res, _$_ReturnItemDto>
-    implements _$$_ReturnItemDtoCopyWith<$Res> {
-  __$$_ReturnItemDtoCopyWithImpl(
-      _$_ReturnItemDto _value, $Res Function(_$_ReturnItemDto) _then)
+class __$$ReturnItemDtoImplCopyWithImpl<$Res>
+    extends _$ReturnItemDtoCopyWithImpl<$Res, _$ReturnItemDtoImpl>
+    implements _$$ReturnItemDtoImplCopyWith<$Res> {
+  __$$ReturnItemDtoImplCopyWithImpl(
+      _$ReturnItemDtoImpl _value, $Res Function(_$ReturnItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -229,8 +240,9 @@ class __$$_ReturnItemDtoCopyWithImpl<$Res>
     Object? outsidePolicy = null,
     Object? expiry = null,
     Object? prsfd = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_ReturnItemDto(
+    return _then(_$ReturnItemDtoImpl(
       requestId: null == requestId
           ? _value.requestId
           : requestId // ignore: cast_nullable_to_non_nullable
@@ -291,14 +303,18 @@ class __$$_ReturnItemDtoCopyWithImpl<$Res>
           ? _value.prsfd
           : prsfd // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnItemDto extends _ReturnItemDto {
-  const _$_ReturnItemDto(
+class _$ReturnItemDtoImpl extends _ReturnItemDto {
+  const _$ReturnItemDtoImpl(
       {@JsonKey(name: 'requestId', defaultValue: '') required this.requestId,
       @JsonKey(name: 'requestDate', defaultValue: '') required this.requestDate,
       @JsonKey(name: 'itemQty', defaultValue: '0') required this.itemQty,
@@ -318,11 +334,13 @@ class _$_ReturnItemDto extends _ReturnItemDto {
       @JsonKey(name: 'outsidePolicy', defaultValue: false)
       required this.outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '') required this.expiry,
-      @JsonKey(name: 'prsfd', defaultValue: '') required this.prsfd})
+      @JsonKey(name: 'prsfd', defaultValue: '') required this.prsfd,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required this.isMarketPlace})
       : super._();
 
-  factory _$_ReturnItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnItemDtoFromJson(json);
+  factory _$ReturnItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReturnItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'requestId', defaultValue: '')
@@ -369,17 +387,20 @@ class _$_ReturnItemDto extends _ReturnItemDto {
   @override
   @JsonKey(name: 'prsfd', defaultValue: '')
   final String prsfd;
+  @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'ReturnItemDto(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, prsfd: $prsfd)';
+    return 'ReturnItemDto(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, prsfd: $prsfd, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnItemDto &&
+            other is _$ReturnItemDtoImpl &&
             (identical(other.requestId, requestId) ||
                 other.requestId == requestId) &&
             (identical(other.requestDate, requestDate) ||
@@ -406,7 +427,9 @@ class _$_ReturnItemDto extends _ReturnItemDto {
             (identical(other.outsidePolicy, outsidePolicy) ||
                 other.outsidePolicy == outsidePolicy) &&
             (identical(other.expiry, expiry) || other.expiry == expiry) &&
-            (identical(other.prsfd, prsfd) || other.prsfd == prsfd));
+            (identical(other.prsfd, prsfd) || other.prsfd == prsfd) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @JsonKey(ignore: true)
@@ -427,17 +450,18 @@ class _$_ReturnItemDto extends _ReturnItemDto {
       batch,
       outsidePolicy,
       expiry,
-      prsfd);
+      prsfd,
+      isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnItemDtoCopyWith<_$_ReturnItemDto> get copyWith =>
-      __$$_ReturnItemDtoCopyWithImpl<_$_ReturnItemDto>(this, _$identity);
+  _$$ReturnItemDtoImplCopyWith<_$ReturnItemDtoImpl> get copyWith =>
+      __$$ReturnItemDtoImplCopyWithImpl<_$ReturnItemDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnItemDtoToJson(
+    return _$$ReturnItemDtoImplToJson(
       this,
     );
   }
@@ -470,12 +494,13 @@ abstract class _ReturnItemDto extends ReturnItemDto {
       @JsonKey(name: 'outsidePolicy', defaultValue: false)
       required final bool outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '') required final String expiry,
-      @JsonKey(name: 'prsfd', defaultValue: '')
-      required final String prsfd}) = _$_ReturnItemDto;
+      @JsonKey(name: 'prsfd', defaultValue: '') required final String prsfd,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required final bool isMarketPlace}) = _$ReturnItemDtoImpl;
   const _ReturnItemDto._() : super._();
 
   factory _ReturnItemDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnItemDto.fromJson;
+      _$ReturnItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'requestId', defaultValue: '')
@@ -523,7 +548,10 @@ abstract class _ReturnItemDto extends ReturnItemDto {
   @JsonKey(name: 'prsfd', defaultValue: '')
   String get prsfd;
   @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_ReturnItemDtoCopyWith<_$_ReturnItemDto> get copyWith =>
+  _$$ReturnItemDtoImplCopyWith<_$ReturnItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

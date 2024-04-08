@@ -13,7 +13,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -735,7 +734,7 @@ void main() {
       verify(
         () => viewByItemFilterBlocMock.add(
           ViewByItemFilterEvent.setOrderHistoryType(
-            type: OrderHistoryType.zp(),
+            type: MaterialOriginFilter.zp(),
           ),
         ),
       ).called(1);
@@ -836,7 +835,7 @@ void main() {
       verify(
         () => viewByOrderFilterBlocMock.add(
           ViewByOrderFilterEvent.setOrderHistoryType(
-            type: OrderHistoryType.mp(),
+            type: MaterialOriginFilter.mp(),
           ),
         ),
       ).called(1);

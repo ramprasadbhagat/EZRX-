@@ -1623,6 +1623,7 @@ void setupLocator() {
       queryMutation: locator<ReturnQuery>(),
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -1634,6 +1635,7 @@ void setupLocator() {
       deviceInfo: locator<DeviceInfo>(),
       fileSystemHelper: locator<FileSystemHelper>(),
       permissionService: locator<PermissionService>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 

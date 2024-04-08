@@ -931,29 +931,3 @@ class ScaleBasis extends ValueObject<String> {
   const ScaleBasis._(this.value);
 }
 
-class OrderHistoryType extends ValueObject<int> {
-  static final supportedTypes = [
-    OrderHistoryType.all(),
-    OrderHistoryType.mp(),
-    OrderHistoryType.zp(),
-  ];
-
-  @override
-  final Either<ValueFailure<int>, int> value;
-
-  factory OrderHistoryType(int input) => OrderHistoryType._(Right(input));
-
-  factory OrderHistoryType.all() => OrderHistoryType(0);
-
-  factory OrderHistoryType.mp() => OrderHistoryType(1);
-
-  factory OrderHistoryType.zp() => OrderHistoryType(2);
-
-  const OrderHistoryType._(this.value);
-
-  String get titleViewByItem =>
-      getOrderHistoryTypeTitle(value.getOrElse(() => -1));
-
-  String get titleViewByOrder =>
-      getViewByOrderHistoryTitle(value.getOrElse(() => -1));
-}

@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,14 +11,14 @@ class ViewByOrdersFilter with _$ViewByOrdersFilter {
     required DateTimeStringValue orderDateFrom,
     required DateTimeStringValue orderDateTo,
     required List<StatusType> orderStatusList,
-    required OrderHistoryType orderHistoryType,
+    required MaterialOriginFilter orderHistoryType,
   }) = _ViewByOrderHistoryFilter;
 
   factory ViewByOrdersFilter.empty() => ViewByOrdersFilter(
         orderDateFrom: DateTimeStringValue(''),
         orderDateTo: DateTimeStringValue(''),
         orderStatusList: <StatusType>[],
-        orderHistoryType: OrderHistoryType.all(),
+        orderHistoryType: MaterialOriginFilter.all(),
       );
 
   DateTimeRange get getOrderDateFilterDateRange => DateTimeRange(

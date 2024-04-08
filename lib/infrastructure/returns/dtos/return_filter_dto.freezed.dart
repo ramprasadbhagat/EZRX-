@@ -12,7 +12,7 @@ part of 'return_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnFilterDto _$ReturnFilterDtoFromJson(Map<String, dynamic> json) {
   return _ReturnFilterDto.fromJson(json);
@@ -30,6 +30,8 @@ mixin _$ReturnFilterDto {
   String get refundTotalTo => throw _privateConstructorUsedError;
   @JsonKey(name: 'status', defaultValue: <String>[])
   List<String> get statusList => throw _privateConstructorUsedError;
+  @JsonKey(name: 'returnType', includeIfNull: false)
+  int? get returnType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,16 +46,14 @@ abstract class $ReturnFilterDtoCopyWith<$Res> {
       _$ReturnFilterDtoCopyWithImpl<$Res, ReturnFilterDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'dateFrom', defaultValue: '')
-          String dateFrom,
-      @JsonKey(name: 'dateTo', defaultValue: '')
-          String dateTo,
+      {@JsonKey(name: 'dateFrom', defaultValue: '') String dateFrom,
+      @JsonKey(name: 'dateTo', defaultValue: '') String dateTo,
       @JsonKey(name: 'refundTotalFrom', defaultValue: '')
-          String refundTotalFrom,
-      @JsonKey(name: 'refundTotalTo', defaultValue: '')
-          String refundTotalTo,
+      String refundTotalFrom,
+      @JsonKey(name: 'refundTotalTo', defaultValue: '') String refundTotalTo,
       @JsonKey(name: 'status', defaultValue: <String>[])
-          List<String> statusList});
+      List<String> statusList,
+      @JsonKey(name: 'returnType', includeIfNull: false) int? returnType});
 }
 
 /// @nodoc
@@ -74,6 +74,7 @@ class _$ReturnFilterDtoCopyWithImpl<$Res, $Val extends ReturnFilterDto>
     Object? refundTotalFrom = null,
     Object? refundTotalTo = null,
     Object? statusList = null,
+    Object? returnType = freezed,
   }) {
     return _then(_value.copyWith(
       dateFrom: null == dateFrom
@@ -96,37 +97,39 @@ class _$ReturnFilterDtoCopyWithImpl<$Res, $Val extends ReturnFilterDto>
           ? _value.statusList
           : statusList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      returnType: freezed == returnType
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ReturnFilterDtoCopyWith<$Res>
+abstract class _$$ReturnFilterDtoImplCopyWith<$Res>
     implements $ReturnFilterDtoCopyWith<$Res> {
-  factory _$$_ReturnFilterDtoCopyWith(
-          _$_ReturnFilterDto value, $Res Function(_$_ReturnFilterDto) then) =
-      __$$_ReturnFilterDtoCopyWithImpl<$Res>;
+  factory _$$ReturnFilterDtoImplCopyWith(_$ReturnFilterDtoImpl value,
+          $Res Function(_$ReturnFilterDtoImpl) then) =
+      __$$ReturnFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'dateFrom', defaultValue: '')
-          String dateFrom,
-      @JsonKey(name: 'dateTo', defaultValue: '')
-          String dateTo,
+      {@JsonKey(name: 'dateFrom', defaultValue: '') String dateFrom,
+      @JsonKey(name: 'dateTo', defaultValue: '') String dateTo,
       @JsonKey(name: 'refundTotalFrom', defaultValue: '')
-          String refundTotalFrom,
-      @JsonKey(name: 'refundTotalTo', defaultValue: '')
-          String refundTotalTo,
+      String refundTotalFrom,
+      @JsonKey(name: 'refundTotalTo', defaultValue: '') String refundTotalTo,
       @JsonKey(name: 'status', defaultValue: <String>[])
-          List<String> statusList});
+      List<String> statusList,
+      @JsonKey(name: 'returnType', includeIfNull: false) int? returnType});
 }
 
 /// @nodoc
-class __$$_ReturnFilterDtoCopyWithImpl<$Res>
-    extends _$ReturnFilterDtoCopyWithImpl<$Res, _$_ReturnFilterDto>
-    implements _$$_ReturnFilterDtoCopyWith<$Res> {
-  __$$_ReturnFilterDtoCopyWithImpl(
-      _$_ReturnFilterDto _value, $Res Function(_$_ReturnFilterDto) _then)
+class __$$ReturnFilterDtoImplCopyWithImpl<$Res>
+    extends _$ReturnFilterDtoCopyWithImpl<$Res, _$ReturnFilterDtoImpl>
+    implements _$$ReturnFilterDtoImplCopyWith<$Res> {
+  __$$ReturnFilterDtoImplCopyWithImpl(
+      _$ReturnFilterDtoImpl _value, $Res Function(_$ReturnFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -137,8 +140,9 @@ class __$$_ReturnFilterDtoCopyWithImpl<$Res>
     Object? refundTotalFrom = null,
     Object? refundTotalTo = null,
     Object? statusList = null,
+    Object? returnType = freezed,
   }) {
-    return _then(_$_ReturnFilterDto(
+    return _then(_$ReturnFilterDtoImpl(
       dateFrom: null == dateFrom
           ? _value.dateFrom
           : dateFrom // ignore: cast_nullable_to_non_nullable
@@ -159,29 +163,32 @@ class __$$_ReturnFilterDtoCopyWithImpl<$Res>
           ? _value._statusList
           : statusList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      returnType: freezed == returnType
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnFilterDto extends _ReturnFilterDto {
-  const _$_ReturnFilterDto(
-      {@JsonKey(name: 'dateFrom', defaultValue: '')
-          required this.dateFrom,
-      @JsonKey(name: 'dateTo', defaultValue: '')
-          required this.dateTo,
+class _$ReturnFilterDtoImpl extends _ReturnFilterDto {
+  const _$ReturnFilterDtoImpl(
+      {@JsonKey(name: 'dateFrom', defaultValue: '') required this.dateFrom,
+      @JsonKey(name: 'dateTo', defaultValue: '') required this.dateTo,
       @JsonKey(name: 'refundTotalFrom', defaultValue: '')
-          required this.refundTotalFrom,
+      required this.refundTotalFrom,
       @JsonKey(name: 'refundTotalTo', defaultValue: '')
-          required this.refundTotalTo,
+      required this.refundTotalTo,
       @JsonKey(name: 'status', defaultValue: <String>[])
-          required final List<String> statusList})
+      required final List<String> statusList,
+      @JsonKey(name: 'returnType', includeIfNull: false) this.returnType})
       : _statusList = statusList,
         super._();
 
-  factory _$_ReturnFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnFilterDtoFromJson(json);
+  factory _$ReturnFilterDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReturnFilterDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'dateFrom', defaultValue: '')
@@ -205,15 +212,19 @@ class _$_ReturnFilterDto extends _ReturnFilterDto {
   }
 
   @override
+  @JsonKey(name: 'returnType', includeIfNull: false)
+  final int? returnType;
+
+  @override
   String toString() {
-    return 'ReturnFilterDto(dateFrom: $dateFrom, dateTo: $dateTo, refundTotalFrom: $refundTotalFrom, refundTotalTo: $refundTotalTo, statusList: $statusList)';
+    return 'ReturnFilterDto(dateFrom: $dateFrom, dateTo: $dateTo, refundTotalFrom: $refundTotalFrom, refundTotalTo: $refundTotalTo, statusList: $statusList, returnType: $returnType)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnFilterDto &&
+            other is _$ReturnFilterDtoImpl &&
             (identical(other.dateFrom, dateFrom) ||
                 other.dateFrom == dateFrom) &&
             (identical(other.dateTo, dateTo) || other.dateTo == dateTo) &&
@@ -222,7 +233,9 @@ class _$_ReturnFilterDto extends _ReturnFilterDto {
             (identical(other.refundTotalTo, refundTotalTo) ||
                 other.refundTotalTo == refundTotalTo) &&
             const DeepCollectionEquality()
-                .equals(other._statusList, _statusList));
+                .equals(other._statusList, _statusList) &&
+            (identical(other.returnType, returnType) ||
+                other.returnType == returnType));
   }
 
   @JsonKey(ignore: true)
@@ -233,17 +246,19 @@ class _$_ReturnFilterDto extends _ReturnFilterDto {
       dateTo,
       refundTotalFrom,
       refundTotalTo,
-      const DeepCollectionEquality().hash(_statusList));
+      const DeepCollectionEquality().hash(_statusList),
+      returnType);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnFilterDtoCopyWith<_$_ReturnFilterDto> get copyWith =>
-      __$$_ReturnFilterDtoCopyWithImpl<_$_ReturnFilterDto>(this, _$identity);
+  _$$ReturnFilterDtoImplCopyWith<_$ReturnFilterDtoImpl> get copyWith =>
+      __$$ReturnFilterDtoImplCopyWithImpl<_$ReturnFilterDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnFilterDtoToJson(
+    return _$$ReturnFilterDtoImplToJson(
       this,
     );
   }
@@ -252,19 +267,20 @@ class _$_ReturnFilterDto extends _ReturnFilterDto {
 abstract class _ReturnFilterDto extends ReturnFilterDto {
   const factory _ReturnFilterDto(
       {@JsonKey(name: 'dateFrom', defaultValue: '')
-          required final String dateFrom,
-      @JsonKey(name: 'dateTo', defaultValue: '')
-          required final String dateTo,
+      required final String dateFrom,
+      @JsonKey(name: 'dateTo', defaultValue: '') required final String dateTo,
       @JsonKey(name: 'refundTotalFrom', defaultValue: '')
-          required final String refundTotalFrom,
+      required final String refundTotalFrom,
       @JsonKey(name: 'refundTotalTo', defaultValue: '')
-          required final String refundTotalTo,
+      required final String refundTotalTo,
       @JsonKey(name: 'status', defaultValue: <String>[])
-          required final List<String> statusList}) = _$_ReturnFilterDto;
+      required final List<String> statusList,
+      @JsonKey(name: 'returnType', includeIfNull: false)
+      final int? returnType}) = _$ReturnFilterDtoImpl;
   const _ReturnFilterDto._() : super._();
 
   factory _ReturnFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnFilterDto.fromJson;
+      _$ReturnFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'dateFrom', defaultValue: '')
@@ -282,7 +298,10 @@ abstract class _ReturnFilterDto extends ReturnFilterDto {
   @JsonKey(name: 'status', defaultValue: <String>[])
   List<String> get statusList;
   @override
+  @JsonKey(name: 'returnType', includeIfNull: false)
+  int? get returnType;
+  @override
   @JsonKey(ignore: true)
-  _$$_ReturnFilterDtoCopyWith<_$_ReturnFilterDto> get copyWith =>
+  _$$ReturnFilterDtoImplCopyWith<_$ReturnFilterDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

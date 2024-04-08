@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_list_request.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_list_request_dto.dart';
@@ -36,6 +37,8 @@ class DeviceInfoMock extends Mock implements DeviceInfo {}
 
 class FileSystemHelperMock extends Mock implements FileSystemHelper {}
 
+class DeviceStorageMock extends Mock implements DeviceStorage {}
+
 void main() {
   late ReturnListRepository returnListRepository;
   late Config mockConfig;
@@ -45,11 +48,13 @@ void main() {
   late FileSystemHelper fileSystemHelper;
   late DeviceInfo deviceInfo;
   late PermissionService permissionService;
+  late DeviceStorage deviceStorage;
 
   final returnListByRequest = [ReturnItem.empty()];
   final errorMock = Exception('fake-error');
   final appliedFilterMock = ReturnFilter.empty();
   final searchKeyMock = SearchKey('fake-search-key');
+  const fakeMarket = 'fake-market';
   final buffer = Uint8List.fromList([1, 2, 3, 4, 5]);
   final returnListRequest = ReturnListRequest.empty().copyWith(
     customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
@@ -69,6 +74,7 @@ void main() {
     permissionService = PermissionServiceMock();
     deviceInfo = DeviceInfoMock();
     fileSystemHelper = FileSystemHelperMock();
+    deviceStorage = DeviceStorageMock();
 
     returnListRepository = ReturnListRepository(
       config: mockConfig,
@@ -77,6 +83,7 @@ void main() {
       deviceInfo: deviceInfo,
       fileSystemHelper: fileSystemHelper,
       permissionService: permissionService,
+      deviceStorage: deviceStorage,
     );
     inputParams = ReturnListRequestDto.fromDomain(returnListRequest).toMap();
   });
@@ -135,10 +142,12 @@ void main() {
       test(
         'Fetch Return List By Item Success Remote',
         () async {
+          when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
           when(
             () => returnListRemoteDataSource.fetchReturnByItems(
               requestParams: inputParams,
+              market: fakeMarket,
             ),
           ).thenAnswer(
             (invocation) async => returnListByRequest,
@@ -166,10 +175,12 @@ void main() {
       test(
         'Fetch Return List By Item Failure Remote',
         () async {
+          when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
           when(
             () => returnListRemoteDataSource.fetchReturnByItems(
               requestParams: inputParams,
+              market: fakeMarket,
             ),
           ).thenThrow(errorMock);
           final result = await returnListRepository.fetchReturnListByItem(

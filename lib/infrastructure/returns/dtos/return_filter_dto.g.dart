@@ -6,8 +6,9 @@ part of 'return_filter_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnFilterDto _$$_ReturnFilterDtoFromJson(Map<String, dynamic> json) =>
-    _$_ReturnFilterDto(
+_$ReturnFilterDtoImpl _$$ReturnFilterDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ReturnFilterDtoImpl(
       dateFrom: json['dateFrom'] as String? ?? '',
       dateTo: json['dateTo'] as String? ?? '',
       refundTotalFrom: json['refundTotalFrom'] as String? ?? '',
@@ -16,13 +17,25 @@ _$_ReturnFilterDto _$$_ReturnFilterDtoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
+      returnType: json['returnType'] as int?,
     );
 
-Map<String, dynamic> _$$_ReturnFilterDtoToJson(_$_ReturnFilterDto instance) =>
-    <String, dynamic>{
-      'dateFrom': instance.dateFrom,
-      'dateTo': instance.dateTo,
-      'refundTotalFrom': instance.refundTotalFrom,
-      'refundTotalTo': instance.refundTotalTo,
-      'status': instance.statusList,
-    };
+Map<String, dynamic> _$$ReturnFilterDtoImplToJson(
+    _$ReturnFilterDtoImpl instance) {
+  final val = <String, dynamic>{
+    'dateFrom': instance.dateFrom,
+    'dateTo': instance.dateTo,
+    'refundTotalFrom': instance.refundTotalFrom,
+    'refundTotalTo': instance.refundTotalTo,
+    'status': instance.statusList,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('returnType', instance.returnType);
+  return val;
+}

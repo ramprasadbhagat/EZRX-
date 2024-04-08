@@ -9,36 +9,18 @@ part 'return_filter_dto.g.dart';
 class ReturnFilterDto with _$ReturnFilterDto {
   const ReturnFilterDto._();
   const factory ReturnFilterDto({
-    @JsonKey(
-      name: 'dateFrom',
-      defaultValue: '',
-    )
-        required String dateFrom,
-    @JsonKey(
-      name: 'dateTo',
-      defaultValue: '',
-    )
-        required String dateTo,
-    @JsonKey(
-      name: 'refundTotalFrom',
-      defaultValue: '',
-    )
-        required String refundTotalFrom,
-    @JsonKey(
-      name: 'refundTotalTo',
-      defaultValue: '',
-    )
-        required String refundTotalTo,
-    @JsonKey(
-      name: 'status',
-      defaultValue: <String>[],
-    )
-        required List<String> statusList,
+    @JsonKey(name: 'dateFrom', defaultValue: '') required String dateFrom,
+    @JsonKey(name: 'dateTo', defaultValue: '') required String dateTo,
+    @JsonKey(name: 'refundTotalFrom', defaultValue: '')
+    required String refundTotalFrom,
+    @JsonKey(name: 'refundTotalTo', defaultValue: '')
+    required String refundTotalTo,
+    @JsonKey(name: 'status', defaultValue: <String>[])
+    required List<String> statusList,
+    @JsonKey(name: 'returnType', includeIfNull: false) int? returnType,
   }) = _ReturnFilterDto;
 
-  factory ReturnFilterDto.fromDomain(
-    ReturnFilter returnFilter,
-  ) {
+  factory ReturnFilterDto.fromDomain(ReturnFilter returnFilter) {
     return ReturnFilterDto(
       statusList:
           returnFilter.returnStatusList.map((e) => e.getOrCrash()).toList(),
@@ -46,16 +28,10 @@ class ReturnFilterDto with _$ReturnFilterDto {
       dateFrom: returnFilter.returnDateFrom.apiDateTimeString,
       refundTotalFrom: returnFilter.amountValueFrom.apiParameterValue,
       refundTotalTo: returnFilter.amountValueTo.apiParameterValue,
-    );
-  }
-
-  ReturnFilter toDomain() {
-    return ReturnFilter(
-      returnStatusList: statusList.map((e) => StatusType(e)).toList(),
-      returnDateTo: DateTimeStringValue(dateTo),
-      returnDateFrom: DateTimeStringValue(dateFrom),
-      amountValueFrom: RangeValue(refundTotalFrom),
-      amountValueTo: RangeValue(refundTotalTo),
+      returnType:
+          returnFilter.materialOriginFilter == MaterialOriginFilter.all()
+              ? null
+              : returnFilter.materialOriginFilter.getOrDefaultValue(0),
     );
   }
 

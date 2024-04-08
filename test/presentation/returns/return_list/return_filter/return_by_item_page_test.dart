@@ -17,8 +17,10 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_item_page.dart';
@@ -26,47 +28,12 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../common_mock_data/mock_bloc.dart';
+import '../../../../common_mock_data/mock_other.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../../utils/widget_utils.dart';
-
-class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class ReturnListByItemBlocMock
-    extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
-    implements ReturnListByItemBloc {}
-
-class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class MockAnnouncementBloc
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class MockCustomerCodeBloc
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
-
-class MockProductImageBloc
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MockReturnSummaryDetailsBloc
-    extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
-    implements ReturnSummaryDetailsBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-final locator = GetIt.instance;
 
 void main() {
   late SalesOrgBloc mockSalesOrgBloc;
@@ -87,18 +54,18 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
-    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
   });
   setUp(() async {
-    mockSalesOrgBloc = MockSalesOrgBloc();
-    mockUserBloc = MockUserBloc();
+    mockSalesOrgBloc = SalesOrgBlocMock();
+    mockUserBloc = UserBlocMock();
     autoRouterMock = locator<AppRouter>();
-    mockCustomerCodeBloc = MockCustomerCodeBloc();
-    mockEligibilityBloc = MockEligibilityBloc();
-    mockAuthBloc = MockAuthBloc();
-    mockAnnouncementBloc = MockAnnouncementBloc();
-    mockReturnSummaryDetailsBloc = MockReturnSummaryDetailsBloc();
-    mockProductImageBloc = MockProductImageBloc();
+    mockCustomerCodeBloc = CustomerCodeBlocMock();
+    mockEligibilityBloc = EligibilityBlocMock();
+    mockAuthBloc = AuthBlocMock();
+    mockAnnouncementBloc = AnnouncementBlocMock();
+    mockReturnSummaryDetailsBloc = ReturnSummaryDetailsBlocMock();
+    mockProductImageBloc = ProductImageBlocMock();
     mockReturnListByItemBloc = ReturnListByItemBlocMock();
     fakeReturnItemList = await ReturnListLocalDataSource().fetchReturnByItems();
   });
@@ -181,33 +148,22 @@ void main() {
 
         await tester.pumpWidget(getWUT());
         await tester.pump();
-
-        await tester.pump(const Duration(seconds: 2));
         expect(
           find.byKey(WidgetKeys.loaderImage),
           findsOneWidget,
         );
-        await tester.pump();
       });
 
       testWidgets('Return Item page Body Test - Success', (tester) async {
-        when(() => mockEligibilityBloc.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              customerCodeSoldTo: 'mock-customerCodeSoldTo',
-            ),
-          ),
-        );
         when(() => mockReturnListByItemBloc.state).thenReturn(
-          ReturnListByItemState.initial().copyWith(
-            isFetching: true,
-          ),
+          ReturnListByItemState.initial().copyWith(isFetching: true),
         );
         final expectedStates = [
           ReturnListByItemState.initial().copyWith(
-            returnItemList: [
-              fakeReturnItemList.first,
-            ],
+            returnItemList: fakeReturnItemList
+                .where((e) => !e.isMarketPlace)
+                .take(1)
+                .toList(),
           ),
         ];
         whenListen(
@@ -216,13 +172,13 @@ void main() {
         );
 
         await tester.pumpWidget(getWUT());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
-        await tester.pump(const Duration(seconds: 2));
         expect(
           find.byKey(WidgetKeys.returnItem('0')),
           findsOneWidget,
         );
+        expect(find.byType(MarketPlaceLogo), findsNothing);
         expect(
           find.byType(StatusLabel),
           findsOneWidget,
@@ -234,7 +190,29 @@ void main() {
           ),
           findsOneWidget,
         );
-        await tester.pump();
+      });
+
+      testWidgets('Return Item page Body Test with marketplace - Success',
+          (tester) async {
+        when(() => mockReturnListByItemBloc.state).thenReturn(
+          ReturnListByItemState.initial().copyWith(
+            returnItemList: fakeReturnItemList
+                .where((e) => e.isMarketPlace)
+                .take(1)
+                .toList(),
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.returnItem('0')),
+            matching: find.byType(MarketPlaceLogo),
+          ),
+          findsOne,
+        );
       });
       testWidgets(
         'Return Item page Body Test - Return Item Tap',
@@ -257,11 +235,8 @@ void main() {
           );
 
           await tester.pumpWidget(getWUT());
-          await tester.pump();
+          await tester.pumpAndSettle();
 
-          await tester.pump(
-            const Duration(seconds: 2),
-          );
           expect(
             find.byKey(WidgetKeys.returnItem('0')),
             findsOneWidget,
@@ -367,9 +342,7 @@ void main() {
         );
 
         await tester.pumpWidget(getWUT());
-        await tester.pump();
-
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pumpAndSettle();
         expect(
           find.byKey(WidgetKeys.returnItem('0')),
           findsOneWidget,

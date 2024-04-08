@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/core/product_images/entities/product_images.da
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
@@ -20,20 +21,22 @@ class ReturnItemDto with _$ReturnItemDto {
     @JsonKey(name: 'totalPrice', defaultValue: '') required String totalPrice,
     @JsonKey(name: 'status', defaultValue: '') required String status,
     @JsonKey(name: 'materialNumber', defaultValue: '')
-        required String materialNumber,
+    required String materialNumber,
     @JsonKey(name: 'materialName', defaultValue: '')
-        required String materialName,
+    required String materialName,
     @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-        required String defaultMaterialDescription,
+    required String defaultMaterialDescription,
     @JsonKey(name: 'orderNumber', defaultValue: '') required String orderNumber,
     @JsonKey(name: 'invoiceID', defaultValue: '') required String invoiceID,
     @JsonKey(name: 'customerName', defaultValue: '')
-        required String customerName,
+    required String customerName,
     @JsonKey(name: 'batch', defaultValue: '') required String batch,
     @JsonKey(name: 'outsidePolicy', defaultValue: false)
-        required bool outsidePolicy,
+    required bool outsidePolicy,
     @JsonKey(name: 'expiry', defaultValue: '') required String expiry,
     @JsonKey(name: 'prsfd', defaultValue: '') required String prsfd,
+    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    required bool isMarketPlace,
   }) = _ReturnItemDto;
 
   factory ReturnItemDto.fromDomain(
@@ -55,6 +58,7 @@ class ReturnItemDto with _$ReturnItemDto {
       outsidePolicy: returnItem.outsidePolicy,
       expiry: returnItem.expiry.getOrCrash(),
       prsfd: returnItem.prsfd.getOrDefaultValue(''),
+      isMarketPlace: returnItem.isMarketPlace,
     );
   }
 
@@ -76,7 +80,7 @@ class ReturnItemDto with _$ReturnItemDto {
       expiry: DateTimeStringValue(expiry),
       productImages: ProductImages.empty(),
       prsfd: Prsfd(prsfd),
-      
+      isMarketPlace: isMarketPlace,
     );
   }
 

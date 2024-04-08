@@ -1,48 +1,38 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/returns/return_list/return_filter/return_by_item_filter_page.dart';
+import 'package:ezrxmobile/presentation/returns/return_list/return_by_item_filter/return_by_item_filter_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../common_mock_data/customer_code_mock.dart';
+import '../../../../common_mock_data/mock_bloc.dart';
+import '../../../../common_mock_data/mock_other.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../../common_mock_data/user_mock.dart';
 import '../../../../utils/widget_utils.dart';
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ReturnListByItemBlocMock
-    extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
-    implements ReturnListByItemBloc {}
-
-class ViewByItemReturnFilterBlocMock
-    extends MockBloc<ViewByItemReturnFilterEvent, ViewByItemReturnFilterState>
-    implements ViewByItemReturnFilterBloc {}
-
-class AppRouterMock extends Mock implements AppRouter {}
 
 void main() {
   late ReturnListByItemBloc returnListByItemBloc;
   late EligibilityBloc eligibilityBloc;
   late ViewByItemReturnFilterBloc viewByItemReturnFilterBloc;
   late AppRouter appRouter;
-  final locator = GetIt.instance;
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    locator.registerLazySingleton(() => AppRouterMock());
+    locator.registerLazySingleton(() => AutoRouteMock());
     returnListByItemBloc = ReturnListByItemBlocMock();
     eligibilityBloc = EligibilityBlocMock();
     viewByItemReturnFilterBloc = ViewByItemReturnFilterBlocMock();
-    appRouter = locator<AppRouterMock>();
+    appRouter = locator<AutoRouteMock>();
     when(() => eligibilityBloc.state).thenReturn(
       EligibilityState.initial(),
     );
@@ -111,7 +101,7 @@ void main() {
       await tester.pumpWidget(getWidgetToTest());
       await tester.pump();
       expect(find.byType(ValueRangeError), findsOneWidget);
-      expect(find.text('Invalid Amount range!'.tr()), findsOneWidget);
+      expect(find.text('Invalid Amount range!'), findsOneWidget);
     });
 
     testWidgets('Return Date From Field', (tester) async {
@@ -246,6 +236,62 @@ void main() {
       verify(
         () => viewByItemReturnFilterBloc.add(
           const ViewByItemReturnFilterEvent.setValidationFailure(),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Should hide return type when user can not access marketplace',
+        (tester) async {
+      await tester.pumpWidget(getWidgetToTest());
+      await tester.pumpAndSettle();
+      expect(find.text('Show returns'), findsNothing);
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('All', true)),
+        findsNothing,
+      );
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('ZP items', false)),
+        findsNothing,
+      );
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('MP items', false)),
+        findsNothing,
+      );
+    });
+
+    testWidgets('Apply return type', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(600, 900));
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeMarketPlaceCustomerCode,
+          user: fakeClientUserAccessMarketPlace,
+        ),
+      );
+      await tester.pumpWidget(getWidgetToTest());
+      await tester.pumpAndSettle();
+      expect(find.text('Show returns'), findsOneWidget);
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('All', true)),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('ZP items', false)),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.filterRadioTile('MP items', false)),
+        findsOneWidget,
+      );
+
+      await tester.tap(
+        find.byKey(WidgetKeys.filterRadioTile('MP items', false)),
+      );
+      verify(
+        () => viewByItemReturnFilterBloc.add(
+          ViewByItemReturnFilterEvent.setReturnType(
+            type: MaterialOriginFilter.mp(),
+          ),
         ),
       ).called(1);
     });

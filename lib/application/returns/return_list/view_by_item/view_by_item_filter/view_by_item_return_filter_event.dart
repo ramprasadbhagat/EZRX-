@@ -19,6 +19,9 @@ class ViewByItemReturnFilterEvent with _$ViewByItemReturnFilterEvent {
     required StatusType status,
     required bool value,
   }) = _SetReturnStatus;
+  const factory ViewByItemReturnFilterEvent.setReturnType({
+    required MaterialOriginFilter type,
+  }) = _SetOrderHistoryType;
   const factory ViewByItemReturnFilterEvent.setValidationFailure() =
       _SetValidationFailure;
   const factory ViewByItemReturnFilterEvent.resetFilters() = _ResetFilters;

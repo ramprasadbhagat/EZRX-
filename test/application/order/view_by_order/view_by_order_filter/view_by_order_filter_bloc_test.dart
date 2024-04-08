@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -78,16 +77,16 @@ void main() {
       'Test Set Order history type view by order',
       build: () => ViewByOrderFilterBloc(),
       seed: () => ViewByOrderFilterState.initial().copyWith.filter(
-            orderHistoryType: OrderHistoryType.zp(),
+            orderHistoryType: MaterialOriginFilter.zp(),
           ),
       act: (bloc) => bloc.add(
         ViewByOrderFilterEvent.setOrderHistoryType(
-          type: OrderHistoryType.mp(),
+          type: MaterialOriginFilter.mp(),
         ),
       ),
       expect: () => [
         ViewByOrderFilterState.initial().copyWith.filter(
-              orderHistoryType: OrderHistoryType.mp(),
+              orderHistoryType: MaterialOriginFilter.mp(),
             ),
       ],
     );

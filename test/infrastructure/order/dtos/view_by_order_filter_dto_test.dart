@@ -1,5 +1,5 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_filter_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,7 +9,7 @@ void main() {
   group('Test view by item dto Order type -', () {
     test('fromDomain when order type is All', () {
       final request = ViewByOrdersFilter.empty()
-          .copyWith(orderHistoryType: OrderHistoryType.all());
+          .copyWith(orderHistoryType: MaterialOriginFilter.all());
 
       final variable = ViewByOrdersFilterDto.fromDomain(request);
 
@@ -18,7 +18,7 @@ void main() {
 
     test('fromDomain when order type is MP items', () {
       final request = ViewByOrdersFilter.empty()
-          .copyWith(orderHistoryType: OrderHistoryType.mp());
+          .copyWith(orderHistoryType: MaterialOriginFilter.mp());
 
       final variable = ViewByOrdersFilterDto.fromDomain(request);
 
@@ -27,7 +27,7 @@ void main() {
 
     test('fromDomain when order type is ZP items', () {
       final request = ViewByOrdersFilter.empty()
-          .copyWith(orderHistoryType: OrderHistoryType.zp());
+          .copyWith(orderHistoryType: MaterialOriginFilter.zp());
 
       final variable = ViewByOrdersFilterDto.fromDomain(request);
 

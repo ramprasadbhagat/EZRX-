@@ -525,3 +525,30 @@ class EzrxLink extends ValueObject<String> {
 
   const EzrxLink._(this.value);
 }
+
+class MaterialOriginFilter extends ValueObject<int> {
+  static final supportedTypes = [
+    MaterialOriginFilter.all(),
+    MaterialOriginFilter.mp(),
+    MaterialOriginFilter.zp(),
+  ];
+
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory MaterialOriginFilter(int input) =>
+      MaterialOriginFilter._(Right(input));
+
+  factory MaterialOriginFilter.all() => MaterialOriginFilter(0);
+
+  factory MaterialOriginFilter.mp() => MaterialOriginFilter(1);
+
+  factory MaterialOriginFilter.zp() => MaterialOriginFilter(2);
+
+  const MaterialOriginFilter._(this.value);
+
+  String get titleViewByItem => getViewByItemTitle(value.getOrElse(() => -1));
+
+  String get titleViewByOrder =>
+      getViewByOrderHistoryTitle(value.getOrElse(() => -1));
+}

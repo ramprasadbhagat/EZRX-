@@ -1,5 +1,5 @@
 class ReturnQuery {
-  String getRequestsByItems() {
+  String getRequestsByItems(bool enableMarketplace) {
     return '''
       query requestsByItems(\$request: requestsByItems!) {
         requestsByItems(request: \$request) {
@@ -21,6 +21,7 @@ class ReturnQuery {
               batch
               expiry
               outsidePolicy
+              ${enableMarketplace ? 'isMarketPlace' : ''}
             }
           }
           totalCount
