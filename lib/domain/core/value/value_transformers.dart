@@ -58,10 +58,6 @@ String naIfEmpty(String text) {
   return text.isEmpty ? 'NA' : text;
 }
 
-String zerosIfEmpty(String text) {
-  return text.isEmpty ? '00000000' : text;
-}
-
 bool checkIfTrimmedValueNotEmpty(String text) => text.trim().isNotEmpty;
 
 bool getInStock(String text) {
