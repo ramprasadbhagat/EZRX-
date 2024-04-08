@@ -148,8 +148,19 @@ Future<void> initialSetup({required Flavor flavor}) async {
       await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
     }
   } else {
-    debugPrint = (String? message, {int? wrapWidth}) {};
-    FlutterError.onError = _crashlytics.recordFlutterError;
+     FlutterError.onError = (errorDetails) {
+        _crashlytics.recordFlutterFatalError(errorDetails);
+      };
+      // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+      PlatformDispatcher.instance.onError = (error, stack) {
+        if (!kIsWeb) {
+          _crashlytics.recordError(error, stack);
+          
+          return true;
+        }
+
+        return false;
+      };
   }
 
   await locator<PackageInfoService>().init();
@@ -178,9 +189,10 @@ Future<void> initialSetup({required Flavor flavor}) async {
 
 Future<void> runAppWithCrashlyticsAndLocalization() async {
   final configuration = locator<DatadogService>().configuration;
-  await DatadogSdk.runApp(configuration, () {
-    runZonedGuarded(
-      () => runApp(
+  await DatadogSdk.runApp(
+    configuration,
+    () {
+      runApp(
         EasyLocalization(
           supportedLocales: const [
             Locale('en'),
@@ -202,14 +214,9 @@ Future<void> runAppWithCrashlyticsAndLocalization() async {
             },
           ),
         ),
-      ),
-      (error, stack) {
-        if (!kIsWeb) {
-          _crashlytics.recordError(error, stack);
-        }
-      },
-    );
-  });
+      );
+    },
+  );
 }
 
 class App extends StatelessWidget {
