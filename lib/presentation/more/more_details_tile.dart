@@ -90,7 +90,6 @@ class MoreDetailsTile {
           StaticHtmlViewerRoute(
             title: 'Terms of Use',
             htmlPath: context.read<EligibilityBloc>().state.user.tncStaticFile,
-            styleCss: locator<Config>().staticStyleCss,
           ),
         ),
       );
@@ -110,7 +109,6 @@ class MoreDetailsTile {
                 .state
                 .user
                 .privacyPolicyStaticFile,
-            styleCss: locator<Config>().staticStyleCss,
           ),
         ),
       );

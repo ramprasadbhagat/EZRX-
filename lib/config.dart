@@ -184,13 +184,6 @@ class Config {
     return 'assets/html/ezrx-terms_of_use_st.html';
   }
 
-  String get staticStyleCss {
-    return '''
-      var style = document.createElement('style');
-      style.innerHTML = 'body { padding: 4rem !important; padding-top: 2rem !important; text-align: left !important; }';
-      document.head.appendChild(style);
-    ''';
-  }
   //============================================================
   //  Firebase
   //
