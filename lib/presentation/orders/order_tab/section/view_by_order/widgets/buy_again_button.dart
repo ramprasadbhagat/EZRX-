@@ -60,6 +60,14 @@ class BuyAgainButton extends StatelessWidget {
                         counterOfferDetails: RequestCounterOfferDetails.empty(),
                       ),
                     );
+                context.read<AdditionalDetailsBloc>().add(
+                      AdditionalDetailsEvent.initiateFromHistory(
+                        data: DeliveryInfoData.empty().copyWith(
+                          mobileNumber: viewByOrderHistoryItem.telephoneNumber,
+                        ),
+                      ),
+                    );
+
                 context.router.push(const CartPageRoute());
               },
               (either) => either.fold(

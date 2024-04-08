@@ -12,7 +12,7 @@ part of 'user.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$User {
@@ -36,7 +36,7 @@ mixin _$User {
   bool get hasPriceOverride => throw _privateConstructorUsedError;
   Language get preferredLanguage => throw _privateConstructorUsedError;
   List<Language> get supportedLanguages => throw _privateConstructorUsedError;
-  MobileNumber get mobileNumber => throw _privateConstructorUsedError;
+  PhoneNumber get mobileNumber => throw _privateConstructorUsedError;
   MarketPlaceTnCAcceptance get acceptMPTC => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -68,7 +68,7 @@ abstract class $UserCopyWith<$Res> {
       bool hasPriceOverride,
       Language preferredLanguage,
       List<Language> supportedLanguages,
-      MobileNumber mobileNumber,
+      PhoneNumber mobileNumber,
       MarketPlaceTnCAcceptance acceptMPTC});
 
   $FullNameCopyWith<$Res> get fullName;
@@ -192,7 +192,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
-              as MobileNumber,
+              as PhoneNumber,
       acceptMPTC: null == acceptMPTC
           ? _value.acceptMPTC
           : acceptMPTC // ignore: cast_nullable_to_non_nullable
@@ -234,9 +234,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 }
 
 /// @nodoc
-abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
-      __$$_UserCopyWithImpl<$Res>;
+abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
+  factory _$$UserImplCopyWith(
+          _$UserImpl value, $Res Function(_$UserImpl) then) =
+      __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -259,7 +260,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool hasPriceOverride,
       Language preferredLanguage,
       List<Language> supportedLanguages,
-      MobileNumber mobileNumber,
+      PhoneNumber mobileNumber,
       MarketPlaceTnCAcceptance acceptMPTC});
 
   @override
@@ -273,9 +274,10 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
-    implements _$$_UserCopyWith<$Res> {
-  __$$_UserCopyWithImpl(_$_User _value, $Res Function(_$_User) _then)
+class __$$UserImplCopyWithImpl<$Res>
+    extends _$UserCopyWithImpl<$Res, _$UserImpl>
+    implements _$$UserImplCopyWith<$Res> {
+  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -303,7 +305,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? mobileNumber = null,
     Object? acceptMPTC = null,
   }) {
-    return _then(_$_User(
+    return _then(_$UserImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -383,7 +385,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
-              as MobileNumber,
+              as PhoneNumber,
       acceptMPTC: null == acceptMPTC
           ? _value.acceptMPTC
           : acceptMPTC // ignore: cast_nullable_to_non_nullable
@@ -394,8 +396,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 
 /// @nodoc
 
-class _$_User extends _User {
-  const _$_User(
+class _$UserImpl extends _User {
+  const _$UserImpl(
       {required this.id,
       required this.username,
       required this.email,
@@ -482,7 +484,7 @@ class _$_User extends _User {
   }
 
   @override
-  final MobileNumber mobileNumber;
+  final PhoneNumber mobileNumber;
   @override
   final MarketPlaceTnCAcceptance acceptMPTC;
 
@@ -492,10 +494,10 @@ class _$_User extends _User {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_User &&
+            other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.username, username) ||
                 other.username == username) &&
@@ -566,8 +568,8 @@ class _$_User extends _User {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserCopyWith<_$_User> get copyWith =>
-      __$$_UserCopyWithImpl<_$_User>(this, _$identity);
+  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
 }
 
 abstract class _User extends User {
@@ -591,8 +593,8 @@ abstract class _User extends User {
       required final bool hasPriceOverride,
       required final Language preferredLanguage,
       required final List<Language> supportedLanguages,
-      required final MobileNumber mobileNumber,
-      required final MarketPlaceTnCAcceptance acceptMPTC}) = _$_User;
+      required final PhoneNumber mobileNumber,
+      required final MarketPlaceTnCAcceptance acceptMPTC}) = _$UserImpl;
   const _User._() : super._();
 
   @override
@@ -634,10 +636,11 @@ abstract class _User extends User {
   @override
   List<Language> get supportedLanguages;
   @override
-  MobileNumber get mobileNumber;
+  PhoneNumber get mobileNumber;
   @override
   MarketPlaceTnCAcceptance get acceptMPTC;
   @override
   @JsonKey(ignore: true)
-  _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
+  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -26,7 +26,7 @@ class AdditionalDetailsBloc
         AdditionalDetailsState.initial().copyWith(
           config: value.config,
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
-            mobileNumber: MobileNumber(
+            mobileNumber: PhoneNumber(
               value.customerCodeInfo.telephoneNumber.validPhoneNumber,
             ),
           ),
@@ -89,8 +89,8 @@ class AdditionalDetailsBloc
         emit(
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: value.data.copyWith(
-              mobileNumber: MobileNumber(
-                value.customerCodeInfo.telephoneNumber.displayTelephoneNumber,
+              mobileNumber: PhoneNumber(
+                value.data.mobileNumber.validPhoneNumber,
               ),
             ),
           ),
@@ -190,7 +190,7 @@ class AdditionalDetailsBloc
         _emitAfterOnTextChange(
           emit: emit,
           deliveryInfoData: state.deliveryInfoData.copyWith(
-            mobileNumber: MobileNumber(newValue),
+            mobileNumber: PhoneNumber(newValue),
           ),
         );
         break;

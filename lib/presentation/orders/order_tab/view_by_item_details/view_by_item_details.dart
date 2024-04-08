@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';

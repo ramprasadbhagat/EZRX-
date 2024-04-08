@@ -25,6 +25,18 @@ class _BuyAgainButton extends StatelessWidget {
                       counterOfferDetails: RequestCounterOfferDetails.empty(),
                     ),
                   );
+
+              context.read<AdditionalDetailsBloc>().add(
+                    AdditionalDetailsEvent.initiateFromHistory(
+                      data: DeliveryInfoData.empty().copyWith(
+                        mobileNumber: context
+                            .read<ViewByItemDetailsBloc>()
+                            .state
+                            .orderHistoryItem
+                            .telephoneNumber,
+                      ),
+                    ),
+                  );
               context.router.pushNamed('orders/cart');
             },
             (either) => either.fold(

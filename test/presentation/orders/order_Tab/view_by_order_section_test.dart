@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
@@ -68,6 +69,10 @@ class ViewByItemDetailsBlocMock
     extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
     implements ViewByItemDetailsBloc {}
 
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 void main() {
@@ -82,6 +87,7 @@ void main() {
   late EligibilityBlocMock eligibilityBlocMock;
   late ViewByItemDetailsBloc mockViewByItemDetailsBloc;
   late MaterialPriceBloc materialPriceBlocMock;
+  late AdditionalDetailsBloc additionalDetailsBlocMock;
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
@@ -93,6 +99,7 @@ void main() {
     autoRouterMock = locator<AutoRouterMock>();
     cartBlocMock = CartBlocMock();
     materialPriceBlocMock = MaterialPriceBlocMock();
+    additionalDetailsBlocMock = AdditionalDetailsBlocMock();
   });
 
   setUp(() {
@@ -123,6 +130,9 @@ void main() {
     );
     when(() => materialPriceBlocMock.state).thenReturn(
       MaterialPriceState.initial(),
+    );
+    when(() => additionalDetailsBlocMock.state).thenReturn(
+      AdditionalDetailsState.initial(),
     );
   });
 
@@ -157,6 +167,9 @@ void main() {
         ),
         BlocProvider<MaterialPriceBloc>(
           create: ((context) => materialPriceBlocMock),
+        ),
+        BlocProvider<AdditionalDetailsBloc>(
+          create: (context) => additionalDetailsBlocMock,
         ),
       ],
       child: const Material(

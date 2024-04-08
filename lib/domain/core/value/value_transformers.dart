@@ -65,7 +65,7 @@ bool getInStock(String text) {
 }
 
 String getValidPhoneNumber(String text) {
-  return text.replaceAll(RegExp(r'[^\d]+'), '');
+  return text.replaceAll(RegExp(r'[^\d]+'), '').characters.take(16).toString();
 }
 
 bool isMinCharacter({required String input, required int minLength}) =>

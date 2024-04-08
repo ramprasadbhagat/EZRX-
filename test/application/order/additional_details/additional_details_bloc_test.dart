@@ -43,7 +43,7 @@ void main() {
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
               deliveryDate: DateTimeStringValue(''),
-              mobileNumber: MobileNumber(''),
+              mobileNumber: PhoneNumber(''),
             ),
             config: fakeIDSalesOrgConfigs,
           ),
@@ -65,7 +65,7 @@ void main() {
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
               deliveryDate: DateTimeStringValue(''),
-              mobileNumber: MobileNumber(''),
+              mobileNumber: PhoneNumber(''),
             ),
             config: fakeIDSalesOrgConfigs.copyWith(
               futureDeliveryDay: FutureDeliveryDay(''),
@@ -80,16 +80,12 @@ void main() {
         act: (bloc) => bloc.add(
           AdditionalDetailsEvent.initiateFromHistory(
             data: data,
-            customerCodeInfo: fakeCustomerCodeInfo.copyWith(
-              telephoneNumber: PhoneNumber('1234567890'),
-            ),
           ),
         ),
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              deliveryDate: DateTimeStringValue(''),
-              mobileNumber: MobileNumber('1234567890'),
+              mobileNumber: PhoneNumber(data.mobileNumber.validPhoneNumber),
             ),
           ),
         ],
@@ -197,7 +193,7 @@ void main() {
               referenceNote: ReferenceNote('Reference Note'),
               deliveryInstruction: DeliveryInstruction('Special Instruction'),
               paymentTerm: PaymentTerm('0001-Test'),
-              mobileNumber: MobileNumber('1234567890'),
+              mobileNumber: PhoneNumber('1234567890'),
             ),
           ),
         ],
@@ -210,7 +206,7 @@ void main() {
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poReference: PoReference('CO REF'),
             contactPerson: ContactPerson('PERSON'),
-            mobileNumber: MobileNumber(''),
+            mobileNumber: PhoneNumber(''),
             paymentTerm: PaymentTerm('0001-TEST'),
             referenceNote: ReferenceNote('Reference Note Test'),
             deliveryInstruction: DeliveryInstruction('Instruction Test'),
@@ -230,7 +226,7 @@ void main() {
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poReference: PoReference('CO REF'),
               contactPerson: ContactPerson('PERSON'),
-              mobileNumber: MobileNumber('1234567890'),
+              mobileNumber: PhoneNumber('1234567890'),
               paymentTerm: PaymentTerm('0001-TEST'),
               referenceNote: ReferenceNote('Reference Note Test'),
               deliveryInstruction: DeliveryInstruction('Instruction Test'),
@@ -247,7 +243,7 @@ void main() {
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poReference: PoReference('CO REF'),
             contactPerson: ContactPerson('PERSON'),
-            mobileNumber: MobileNumber('123456'),
+            mobileNumber: PhoneNumber('123456'),
             paymentTerm: PaymentTerm('0001-TEST'),
             referenceNote: ReferenceNote('Reference Note Test'),
             deliveryInstruction: DeliveryInstruction('Instruction Test'),
@@ -264,7 +260,7 @@ void main() {
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poReference: PoReference('CO REF'),
               contactPerson: ContactPerson('PERSON'),
-              mobileNumber: MobileNumber('123456'),
+              mobileNumber: PhoneNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
               referenceNote: ReferenceNote('Reference Note Test'),
               deliveryInstruction: DeliveryInstruction('Instruction Test'),
@@ -280,7 +276,7 @@ void main() {
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poReference: PoReference('CO REF'),
             contactPerson: ContactPerson(''),
-            mobileNumber: MobileNumber('123456'),
+            mobileNumber: PhoneNumber('123456'),
             paymentTerm: PaymentTerm('0001-TEST'),
             referenceNote: ReferenceNote('Reference Note Test'),
             deliveryInstruction: DeliveryInstruction('Instruction Test'),
@@ -301,7 +297,7 @@ void main() {
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poReference: PoReference('CO REF'),
               contactPerson: ContactPerson(''),
-              mobileNumber: MobileNumber('123456'),
+              mobileNumber: PhoneNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
               referenceNote: ReferenceNote('Reference Note Test'),
               deliveryInstruction: DeliveryInstruction('Instruction Test'),
@@ -317,7 +313,7 @@ void main() {
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poReference: PoReference('CO REF'),
             contactPerson: ContactPerson(''),
-            mobileNumber: MobileNumber('123456'),
+            mobileNumber: PhoneNumber('123456'),
             paymentTerm: PaymentTerm('0001-TEST'),
             greenDeliveryEnabled: false,
           ),
@@ -330,7 +326,7 @@ void main() {
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poReference: PoReference('CO REF'),
               contactPerson: ContactPerson(''),
-              mobileNumber: MobileNumber('123456'),
+              mobileNumber: PhoneNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
               greenDeliveryEnabled: true,
             ),
@@ -345,7 +341,7 @@ void main() {
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poReference: PoReference('CO REF'),
             contactPerson: ContactPerson(''),
-            mobileNumber: MobileNumber('123456'),
+            mobileNumber: PhoneNumber('123456'),
             paymentTerm: PaymentTerm('0001-TEST'),
             greenDeliveryEnabled: true,
           ),
@@ -358,7 +354,7 @@ void main() {
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poReference: PoReference('CO REF'),
               contactPerson: ContactPerson(''),
-              mobileNumber: MobileNumber('123456'),
+              mobileNumber: PhoneNumber('123456'),
               paymentTerm: PaymentTerm('0001-TEST'),
               greenDeliveryEnabled: false,
             ),

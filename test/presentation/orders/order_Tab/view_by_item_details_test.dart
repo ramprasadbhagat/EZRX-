@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -82,6 +83,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   late ViewByItemsBloc viewByItemsBlocMock;
+  late AdditionalDetailsBloc additionalDetailsBlocMock;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late AuthBloc mockAuthBloc;
   late CustomerCodeBloc customerCodeBlocMock;
@@ -166,6 +168,7 @@ void main() {
       materialPriceBlocMock = MaterialPriceBlocMock();
       customerLicenseBlocMock = CustomerLicenseBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
+      additionalDetailsBlocMock = AdditionalDetailsBlocMock();
 
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
@@ -209,6 +212,9 @@ void main() {
       );
       when(() => paymentCustomerInformationBlocMock.state).thenReturn(
         PaymentCustomerInformationState.initial(),
+      );
+      when(() => additionalDetailsBlocMock.state).thenReturn(
+        AdditionalDetailsState.initial(),
       );
     });
 
@@ -271,6 +277,9 @@ void main() {
           ),
           BlocProvider<CustomerLicenseBloc>(
             create: (context) => customerLicenseBlocMock,
+          ),
+          BlocProvider<AdditionalDetailsBloc>(
+            create: (context) => additionalDetailsBlocMock,
           ),
         ],
         child: const Material(

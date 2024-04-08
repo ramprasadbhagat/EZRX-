@@ -12,7 +12,7 @@ part of 'delivery_info_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DeliveryInfoData {
@@ -21,7 +21,7 @@ mixin _$DeliveryInfoData {
       throw _privateConstructorUsedError;
   ReferenceNote get referenceNote => throw _privateConstructorUsedError;
   ContactPerson get contactPerson => throw _privateConstructorUsedError;
-  MobileNumber get mobileNumber => throw _privateConstructorUsedError;
+  PhoneNumber get mobileNumber => throw _privateConstructorUsedError;
   PaymentTerm get paymentTerm => throw _privateConstructorUsedError;
   DateTimeStringValue get deliveryDate => throw _privateConstructorUsedError;
   List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $DeliveryInfoDataCopyWith<$Res> {
       DeliveryInstruction deliveryInstruction,
       ReferenceNote referenceNote,
       ContactPerson contactPerson,
-      MobileNumber mobileNumber,
+      PhoneNumber mobileNumber,
       PaymentTerm paymentTerm,
       DateTimeStringValue deliveryDate,
       List<PoDocuments> poDocuments,
@@ -93,7 +93,7 @@ class _$DeliveryInfoDataCopyWithImpl<$Res, $Val extends DeliveryInfoData>
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
-              as MobileNumber,
+              as PhoneNumber,
       paymentTerm: null == paymentTerm
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
@@ -115,11 +115,11 @@ class _$DeliveryInfoDataCopyWithImpl<$Res, $Val extends DeliveryInfoData>
 }
 
 /// @nodoc
-abstract class _$$_DeliveryInfoDataCopyWith<$Res>
+abstract class _$$DeliveryInfoDataImplCopyWith<$Res>
     implements $DeliveryInfoDataCopyWith<$Res> {
-  factory _$$_DeliveryInfoDataCopyWith(
-          _$_DeliveryInfoData value, $Res Function(_$_DeliveryInfoData) then) =
-      __$$_DeliveryInfoDataCopyWithImpl<$Res>;
+  factory _$$DeliveryInfoDataImplCopyWith(_$DeliveryInfoDataImpl value,
+          $Res Function(_$DeliveryInfoDataImpl) then) =
+      __$$DeliveryInfoDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -127,7 +127,7 @@ abstract class _$$_DeliveryInfoDataCopyWith<$Res>
       DeliveryInstruction deliveryInstruction,
       ReferenceNote referenceNote,
       ContactPerson contactPerson,
-      MobileNumber mobileNumber,
+      PhoneNumber mobileNumber,
       PaymentTerm paymentTerm,
       DateTimeStringValue deliveryDate,
       List<PoDocuments> poDocuments,
@@ -135,11 +135,11 @@ abstract class _$$_DeliveryInfoDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DeliveryInfoDataCopyWithImpl<$Res>
-    extends _$DeliveryInfoDataCopyWithImpl<$Res, _$_DeliveryInfoData>
-    implements _$$_DeliveryInfoDataCopyWith<$Res> {
-  __$$_DeliveryInfoDataCopyWithImpl(
-      _$_DeliveryInfoData _value, $Res Function(_$_DeliveryInfoData) _then)
+class __$$DeliveryInfoDataImplCopyWithImpl<$Res>
+    extends _$DeliveryInfoDataCopyWithImpl<$Res, _$DeliveryInfoDataImpl>
+    implements _$$DeliveryInfoDataImplCopyWith<$Res> {
+  __$$DeliveryInfoDataImplCopyWithImpl(_$DeliveryInfoDataImpl _value,
+      $Res Function(_$DeliveryInfoDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -155,7 +155,7 @@ class __$$_DeliveryInfoDataCopyWithImpl<$Res>
     Object? poDocuments = null,
     Object? greenDeliveryEnabled = null,
   }) {
-    return _then(_$_DeliveryInfoData(
+    return _then(_$DeliveryInfoDataImpl(
       poReference: null == poReference
           ? _value.poReference
           : poReference // ignore: cast_nullable_to_non_nullable
@@ -175,7 +175,7 @@ class __$$_DeliveryInfoDataCopyWithImpl<$Res>
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
-              as MobileNumber,
+              as PhoneNumber,
       paymentTerm: null == paymentTerm
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
@@ -198,8 +198,8 @@ class __$$_DeliveryInfoDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeliveryInfoData extends _DeliveryInfoData {
-  const _$_DeliveryInfoData(
+class _$DeliveryInfoDataImpl extends _DeliveryInfoData {
+  const _$DeliveryInfoDataImpl(
       {required this.poReference,
       required this.deliveryInstruction,
       required this.referenceNote,
@@ -221,7 +221,7 @@ class _$_DeliveryInfoData extends _DeliveryInfoData {
   @override
   final ContactPerson contactPerson;
   @override
-  final MobileNumber mobileNumber;
+  final PhoneNumber mobileNumber;
   @override
   final PaymentTerm paymentTerm;
   @override
@@ -243,10 +243,10 @@ class _$_DeliveryInfoData extends _DeliveryInfoData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeliveryInfoData &&
+            other is _$DeliveryInfoDataImpl &&
             (identical(other.poReference, poReference) ||
                 other.poReference == poReference) &&
             (identical(other.deliveryInstruction, deliveryInstruction) ||
@@ -283,8 +283,9 @@ class _$_DeliveryInfoData extends _DeliveryInfoData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeliveryInfoDataCopyWith<_$_DeliveryInfoData> get copyWith =>
-      __$$_DeliveryInfoDataCopyWithImpl<_$_DeliveryInfoData>(this, _$identity);
+  _$$DeliveryInfoDataImplCopyWith<_$DeliveryInfoDataImpl> get copyWith =>
+      __$$DeliveryInfoDataImplCopyWithImpl<_$DeliveryInfoDataImpl>(
+          this, _$identity);
 }
 
 abstract class _DeliveryInfoData extends DeliveryInfoData {
@@ -293,11 +294,11 @@ abstract class _DeliveryInfoData extends DeliveryInfoData {
       required final DeliveryInstruction deliveryInstruction,
       required final ReferenceNote referenceNote,
       required final ContactPerson contactPerson,
-      required final MobileNumber mobileNumber,
+      required final PhoneNumber mobileNumber,
       required final PaymentTerm paymentTerm,
       required final DateTimeStringValue deliveryDate,
       required final List<PoDocuments> poDocuments,
-      required final bool greenDeliveryEnabled}) = _$_DeliveryInfoData;
+      required final bool greenDeliveryEnabled}) = _$DeliveryInfoDataImpl;
   const _DeliveryInfoData._() : super._();
 
   @override
@@ -309,7 +310,7 @@ abstract class _DeliveryInfoData extends DeliveryInfoData {
   @override
   ContactPerson get contactPerson;
   @override
-  MobileNumber get mobileNumber;
+  PhoneNumber get mobileNumber;
   @override
   PaymentTerm get paymentTerm;
   @override
@@ -320,6 +321,6 @@ abstract class _DeliveryInfoData extends DeliveryInfoData {
   bool get greenDeliveryEnabled;
   @override
   @JsonKey(ignore: true)
-  _$$_DeliveryInfoDataCopyWith<_$_DeliveryInfoData> get copyWith =>
+  _$$DeliveryInfoDataImplCopyWith<_$DeliveryInfoDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

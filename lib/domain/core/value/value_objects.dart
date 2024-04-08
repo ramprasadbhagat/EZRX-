@@ -365,19 +365,6 @@ class PoNumberRequired extends ValueObject<bool> {
       getPoReferenceHintText(value.getOrElse(() => false));
 }
 
-class MobileNumber extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory MobileNumber(String input) {
-    return MobileNumber._(validateStringNotEmpty(input));
-  }
-
-  String get displayLabel => naIfEmpty(value.getOrElse(() => ''));
-
-  const MobileNumber._(this.value);
-}
-
 class Remarks extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

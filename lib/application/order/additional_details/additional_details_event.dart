@@ -24,7 +24,6 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
       _AdditionalDetailsToggleGreenDelivery;
   const factory AdditionalDetailsEvent.initiateFromHistory({
     required DeliveryInfoData data,
-    required CustomerCodeInfo customerCodeInfo,
   }) = _AdditionalDetailsInitiateFromHistory;
 }
 

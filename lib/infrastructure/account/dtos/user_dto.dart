@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/access_right_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_expiry_notification_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
@@ -23,70 +24,69 @@ class UserDto with _$UserDto {
   const UserDto._();
 
   const factory UserDto({
-    @JsonKey(name: 'id', defaultValue: '')
-        required String id,
-    @JsonKey(name: 'username', defaultValue: '')
-        required String username,
-    @JsonKey(name: 'email', defaultValue: '')
-        required String email,
-    @JsonKey(name: 'firstName', defaultValue: '')
-        required String firstName,
-    @JsonKey(name: 'lastName', defaultValue: '')
-        required String lastName,
-    @Default(RoleDto.emptyRoleDto)
-    @JsonKey(name: 'role')
-        RoleDto role,
+    @JsonKey(name: 'id', defaultValue: '') required String id,
+    @JsonKey(name: 'username', defaultValue: '') required String username,
+    @JsonKey(name: 'email', defaultValue: '') required String email,
+    @JsonKey(name: 'firstName', defaultValue: '') required String firstName,
+    @JsonKey(name: 'lastName', defaultValue: '') required String lastName,
+    @Default(RoleDto.emptyRoleDto) @JsonKey(name: 'role') RoleDto role,
     @JsonKey(name: 'customerCode', defaultValue: '')
-        required String customerCode,
+    required String customerCode,
     @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
-        required List<SalesOrganisationDto> userSalesOrganisations,
+    required List<SalesOrganisationDto> userSalesOrganisations,
     @JsonKey(name: 'salesOrganisations', defaultValue: [])
-        required List<String> salesOrganisations,
+    required List<String> salesOrganisations,
     @Default(AccessRightDto.emptyAccessRightDto)
     @JsonKey(name: 'accessRight')
-        AccessRightDto accessRight,
+    AccessRightDto accessRight,
     @JsonKey(name: 'emailNotifications', defaultValue: false)
-        required bool emailNotifications,
+    required bool emailNotifications,
     @JsonKey(name: 'mobileNotifications', defaultValue: false)
-        required bool mobileNotifications,
-    @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
-        required String languagePreference,
+    required bool mobileNotifications,
+    @JsonKey(
+      name: 'languagePreference',
+      readValue: handleEmptyLanguagePreference,
+    )
+    required String languagePreference,
     @JsonKey(name: 'enableOrderType', defaultValue: false)
-        required bool enableOrderType,
+    required bool enableOrderType,
     @JsonKey(name: 'acceptTC', defaultValue: true)
-        required bool acceptPrivacyPolicy,
+    required bool acceptPrivacyPolicy,
     @JsonKey(name: 'hasBonusOverride', defaultValue: false)
-        required bool hasBonusOverride,
+    required bool hasBonusOverride,
     @JsonKey(name: 'disableCreateOrder', defaultValue: false)
-        required bool disableCreateOrder,
+    required bool disableCreateOrder,
     @JsonKey(name: 'disableReturns', defaultValue: false)
-        required bool disableReturns,
+    required bool disableReturns,
     @JsonKey(name: 'disablePaymentAccess', defaultValue: false)
-        required bool disablePaymentAccess,
+    required bool disablePaymentAccess,
     @JsonKey(name: 'hasPriceOverride', defaultValue: false)
-        required bool hasPriceOverride,
+    required bool hasPriceOverride,
     @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
-        required bool disablePaymentNotification,
+    required bool disablePaymentNotification,
     @JsonKey(
       name: 'paymentNotification',
       defaultValue: <PaymentAdviceExpiryNotificationDto>[],
     )
-        required List<PaymentAdviceExpiryNotificationDto> paymentNotification,
-    @JsonKey(name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
-        required String preferredLanguage,
+    required List<PaymentAdviceExpiryNotificationDto> paymentNotification,
+    @JsonKey(
+      name: 'preferredLanguage',
+      readValue: handleEmptyLanguagePreference,
+    )
+    required String preferredLanguage,
     @JsonKey(
       name: 'supportedLanguages',
       readValue: handleSupportedLanguages,
       defaultValue: <String>[],
     )
-        required List<String> supportedLanguages,
+    required List<String> supportedLanguages,
     @JsonKey(name: 'MobileNumber', defaultValue: '')
-        required String mobileNumber,
+    required String mobileNumber,
     @JsonKey(
       name: 'acceptMPTC',
       readValue: handleMarketPlaceTnCAcceptance,
     )
-        required String acceptMPTC,
+    required String acceptMPTC,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -187,7 +187,7 @@ class UserDto with _$UserDto {
       disableReturns: disableReturns,
       hasPriceOverride: hasPriceOverride,
       preferredLanguage: Language(preferredLanguage),
-      mobileNumber: MobileNumber(mobileNumber),
+      mobileNumber: PhoneNumber(mobileNumber),
       supportedLanguages: supportedLanguages.map((e) => Language(e)).toList(),
       acceptMPTC: MarketPlaceTnCAcceptance(acceptMPTC),
     );

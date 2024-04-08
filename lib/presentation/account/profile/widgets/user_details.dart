@@ -77,7 +77,7 @@ class _UserDetails extends StatelessWidget {
                 keyFlex: 3,
                 valueFlex: 5,
                 keyText: context.tr('Contact number'),
-                valueText: state.user.mobileNumber.displayLabel,
+                valueText: state.user.mobileNumber.displayTelephoneNumber,
                 keyTextStyle: Theme.of(context)
                     .textTheme
                     .labelSmall

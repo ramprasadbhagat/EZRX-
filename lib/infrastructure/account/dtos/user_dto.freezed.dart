@@ -12,7 +12,7 @@ part of 'user_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
   return _UserDto.fromJson(json);
@@ -77,10 +77,7 @@ mixin _$UserDto {
   List<String> get supportedLanguages => throw _privateConstructorUsedError;
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   String get mobileNumber => throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'acceptMPTC',
-      defaultValue: '',
-      readValue: handleMarketPlaceTnCAcceptance)
+  @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
   String get acceptMPTC => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -140,10 +137,7 @@ abstract class $UserDtoCopyWith<$Res> {
           defaultValue: <String>[])
       List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber,
-      @JsonKey(
-          name: 'acceptMPTC',
-          defaultValue: '',
-          readValue: handleMarketPlaceTnCAcceptance)
+      @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
       String acceptMPTC});
 
   $RoleDtoCopyWith<$Res> get role;
@@ -316,10 +310,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
 }
 
 /// @nodoc
-abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
-  factory _$$_UserDtoCopyWith(
-          _$_UserDto value, $Res Function(_$_UserDto) then) =
-      __$$_UserDtoCopyWithImpl<$Res>;
+abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
+  factory _$$UserDtoImplCopyWith(
+          _$UserDtoImpl value, $Res Function(_$UserDtoImpl) then) =
+      __$$UserDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -369,10 +363,7 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           defaultValue: <String>[])
       List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber,
-      @JsonKey(
-          name: 'acceptMPTC',
-          defaultValue: '',
-          readValue: handleMarketPlaceTnCAcceptance)
+      @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
       String acceptMPTC});
 
   @override
@@ -382,10 +373,11 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserDtoCopyWithImpl<$Res>
-    extends _$UserDtoCopyWithImpl<$Res, _$_UserDto>
-    implements _$$_UserDtoCopyWith<$Res> {
-  __$$_UserDtoCopyWithImpl(_$_UserDto _value, $Res Function(_$_UserDto) _then)
+class __$$UserDtoImplCopyWithImpl<$Res>
+    extends _$UserDtoCopyWithImpl<$Res, _$UserDtoImpl>
+    implements _$$UserDtoImplCopyWith<$Res> {
+  __$$UserDtoImplCopyWithImpl(
+      _$UserDtoImpl _value, $Res Function(_$UserDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -418,7 +410,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? mobileNumber = null,
     Object? acceptMPTC = null,
   }) {
-    return _then(_$_UserDto(
+    return _then(_$UserDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -529,8 +521,8 @@ class __$$_UserDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserDto extends _UserDto {
-  const _$_UserDto(
+class _$UserDtoImpl extends _UserDto {
+  const _$UserDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'username', defaultValue: '') required this.username,
       @JsonKey(name: 'email', defaultValue: '') required this.email,
@@ -583,10 +575,7 @@ class _$_UserDto extends _UserDto {
       required final List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '')
       required this.mobileNumber,
-      @JsonKey(
-          name: 'acceptMPTC',
-          defaultValue: '',
-          readValue: handleMarketPlaceTnCAcceptance)
+      @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
       required this.acceptMPTC})
       : _userSalesOrganisations = userSalesOrganisations,
         _salesOrganisations = salesOrganisations,
@@ -594,8 +583,8 @@ class _$_UserDto extends _UserDto {
         _supportedLanguages = supportedLanguages,
         super._();
 
-  factory _$_UserDto.fromJson(Map<String, dynamic> json) =>
-      _$$_UserDtoFromJson(json);
+  factory _$UserDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -706,10 +695,7 @@ class _$_UserDto extends _UserDto {
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   final String mobileNumber;
   @override
-  @JsonKey(
-      name: 'acceptMPTC',
-      defaultValue: '',
-      readValue: handleMarketPlaceTnCAcceptance)
+  @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
   final String acceptMPTC;
 
   @override
@@ -718,10 +704,10 @@ class _$_UserDto extends _UserDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserDto &&
+            other is _$UserDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.username, username) ||
                 other.username == username) &&
@@ -810,12 +796,12 @@ class _$_UserDto extends _UserDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>
-      __$$_UserDtoCopyWithImpl<_$_UserDto>(this, _$identity);
+  _$$UserDtoImplCopyWith<_$UserDtoImpl> get copyWith =>
+      __$$UserDtoImplCopyWithImpl<_$UserDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserDtoToJson(
+    return _$$UserDtoImplToJson(
       this,
     );
   }
@@ -877,14 +863,11 @@ abstract class _UserDto extends UserDto {
       required final List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '')
       required final String mobileNumber,
-      @JsonKey(
-          name: 'acceptMPTC',
-          defaultValue: '',
-          readValue: handleMarketPlaceTnCAcceptance)
-      required final String acceptMPTC}) = _$_UserDto;
+      @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
+      required final String acceptMPTC}) = _$UserDtoImpl;
   const _UserDto._() : super._();
 
-  factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
+  factory _UserDto.fromJson(Map<String, dynamic> json) = _$UserDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -967,13 +950,10 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   String get mobileNumber;
   @override
-  @JsonKey(
-      name: 'acceptMPTC',
-      defaultValue: '',
-      readValue: handleMarketPlaceTnCAcceptance)
+  @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
   String get acceptMPTC;
   @override
   @JsonKey(ignore: true)
-  _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>
+  _$$UserDtoImplCopyWith<_$UserDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

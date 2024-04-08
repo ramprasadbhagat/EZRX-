@@ -1395,7 +1395,7 @@ void main() {
         when(() => additionalDetailsBlocMock.state).thenReturn(
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: DeliveryInfoData.empty()
-                .copyWith(mobileNumber: MobileNumber('+840312123123')),
+                .copyWith(mobileNumber: PhoneNumber('+840312123123')),
             isValidated: true,
           ),
         );

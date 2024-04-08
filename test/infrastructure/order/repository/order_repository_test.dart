@@ -164,7 +164,7 @@ void main() {
     deliveryInfoData = DeliveryInfoData.empty().copyWith(
       poReference: PoReference('CO REF'),
       contactPerson: ContactPerson('PERSON'),
-      mobileNumber: MobileNumber('123456'),
+      mobileNumber: PhoneNumber('123456'),
       paymentTerm: PaymentTerm(''),
       deliveryDate: DateTimeStringValue('01/02/2023'),
       deliveryInstruction: DeliveryInstruction('test'),

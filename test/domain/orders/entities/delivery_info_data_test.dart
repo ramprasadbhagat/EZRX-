@@ -16,7 +16,7 @@ void main() {
       );
       expect(emptyDeliveryInfoData.referenceNote, ReferenceNote(''));
       expect(emptyDeliveryInfoData.contactPerson, ContactPerson(''));
-      expect(emptyDeliveryInfoData.mobileNumber, MobileNumber(''));
+      expect(emptyDeliveryInfoData.mobileNumber, PhoneNumber(''));
       expect(emptyDeliveryInfoData.paymentTerm, PaymentTerm(''));
       expect(emptyDeliveryInfoData.deliveryDate, DateTimeStringValue(''));
       expect(emptyDeliveryInfoData.poDocuments, <PoDocuments>[]);

@@ -14,7 +14,7 @@ class DeliveryInfoData with _$DeliveryInfoData {
     required DeliveryInstruction deliveryInstruction,
     required ReferenceNote referenceNote,
     required ContactPerson contactPerson,
-    required MobileNumber mobileNumber,
+    required PhoneNumber mobileNumber,
     required PaymentTerm paymentTerm,
     required DateTimeStringValue deliveryDate,
     required List<PoDocuments> poDocuments,
@@ -31,7 +31,7 @@ class DeliveryInfoData with _$DeliveryInfoData {
       contactPerson: ContactPerson(
         orderHistoryDetails.orderBy.getOrDefaultValue(''),
       ),
-      mobileNumber: MobileNumber(
+      mobileNumber: PhoneNumber(
         orderHistoryDetails.telephoneNumber.getOrDefaultValue(''),
       ),
       deliveryInstruction: DeliveryInstruction(
@@ -55,12 +55,10 @@ class DeliveryInfoData with _$DeliveryInfoData {
         referenceNote: ReferenceNote(''),
         // collectiveNumber: CollectiveNumber(''),
         contactPerson: ContactPerson(''),
-        mobileNumber: MobileNumber(''),
+        mobileNumber: PhoneNumber(''),
         paymentTerm: PaymentTerm(''),
         deliveryDate: DateTimeStringValue(''),
         poDocuments: <PoDocuments>[],
         greenDeliveryEnabled: false,
       );
-
-
 }

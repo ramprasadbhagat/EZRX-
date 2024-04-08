@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
@@ -35,7 +36,7 @@ class User with _$User {
     required bool hasPriceOverride,
     required Language preferredLanguage,
     required List<Language> supportedLanguages,
-    required MobileNumber mobileNumber,
+    required PhoneNumber mobileNumber,
     required MarketPlaceTnCAcceptance acceptMPTC,
   }) = _User;
 
@@ -64,7 +65,7 @@ class User with _$User {
         hasPriceOverride: false,
         preferredLanguage: Language.english(),
         supportedLanguages: <Language>[],
-        mobileNumber: MobileNumber(''),
+        mobileNumber: PhoneNumber(''),
         acceptMPTC: MarketPlaceTnCAcceptance(''),
       );
 

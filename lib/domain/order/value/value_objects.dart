@@ -390,7 +390,7 @@ class PhoneNumber extends ValueObject<String> {
   String get validPhoneNumber => getValidPhoneNumber(value.getOrElse(() => ''));
 
   String get displayTelephoneNumber {
-    return naIfEmpty(value.getOrElse(() => ''));
+    return naIfEmpty(validPhoneNumber);
   }
 
   const PhoneNumber._(this.value);
