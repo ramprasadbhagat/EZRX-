@@ -41,8 +41,9 @@ class OutstandingInvoicesBloc
 
     on<_Fetch>(
       (event, emit) async {
+        if (!event.searchKey.isValid()) return;
+
         if (event.searchKey == state.searchKey &&
-            event.searchKey.isValid() &&
             event.appliedFilter == state.appliedFilter) {
           return;
         }

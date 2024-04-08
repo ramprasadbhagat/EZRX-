@@ -33,9 +33,13 @@ class AvailableCreditsBloc
     );
     on<_Fetch>(
       (value, emit) async {
-        if ((value.searchKey == state.searchKey &&
-                value.searchKey.validateNotEmpty) ||
-            !value.searchKey.isValid()) return;
+        if (!value.searchKey.isValid()) return;
+
+        if (value.searchKey == state.searchKey &&
+            value.appliedFilter == state.appliedFilter) {
+          return;
+        }
+
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),

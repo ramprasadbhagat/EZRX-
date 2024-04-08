@@ -31,7 +31,6 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
           onClear: () => _search(
             context: context,
             searchKey: '',
-            onClear: true,
           ),
           initialValue: state.searchKey.searchValueOrEmpty,
         );
@@ -42,10 +41,7 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
   void _search({
     required BuildContext context,
     required String searchKey,
-    bool onClear = false,
   }) {
-    if (!onClear && searchKey.isEmpty) return;
-
     trackMixpanelEvent(TrackingEvents.documentNumberSearched);
     context.read<AvailableCreditsBloc>().add(
           AvailableCreditsEvent.fetch(

@@ -86,7 +86,8 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
                 onRefresh: () =>
                     context.allCreditsBloc(widget.isMarketPlace).add(
                           AllCreditsEvent.fetch(
-                            appliedFilter: AllCreditsFilter.defaultFilter(),
+                            appliedFilter:
+                                AllCreditsFilter.defaultFilter(),
                           ),
                         ),
                 onLoadingMore: () =>

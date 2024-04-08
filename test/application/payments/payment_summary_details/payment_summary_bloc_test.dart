@@ -45,7 +45,7 @@ void main() {
         when(
           () => paymentSummaryMockRepository.fetchPaymentSummaryList(
             filter: PaymentSummaryFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.searchFilter('ab'),
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
             offset: offSet,
@@ -58,17 +58,19 @@ void main() {
       act: (PaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
           appliedFilter: PaymentSummaryFilter.defaultFilter(),
-          searchKey: SearchKey.searchFilter(''),
+          searchKey: SearchKey.searchFilter('ab'),
         ),
       ),
       expect: () => [
         PaymentSummaryState.initial().copyWith(
           isFetching: true,
           failureOrSuccessOption: none(),
+          searchKey: SearchKey.searchFilter('ab'),
         ),
         PaymentSummaryState.initial().copyWith(
           details: details,
           canLoadMore: false,
+          searchKey: SearchKey.searchFilter('ab'),
         ),
       ],
     );
@@ -86,7 +88,7 @@ void main() {
         when(
           () => paymentSummaryMockRepository.fetchPaymentSummaryList(
             filter: PaymentSummaryFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.searchFilter('ab'),
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
             offset: offSet,
@@ -99,18 +101,20 @@ void main() {
       act: (PaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
           appliedFilter: PaymentSummaryFilter.defaultFilter(),
-          searchKey: SearchKey.searchFilter(''),
+          searchKey: SearchKey.searchFilter('ab'),
         ),
       ),
       expect: () => [
         PaymentSummaryState.initial().copyWith(
           isFetching: true,
           failureOrSuccessOption: none(),
+          searchKey: SearchKey.searchFilter('ab'),
         ),
         PaymentSummaryState.initial().copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
           isFetching: false,
+          searchKey: SearchKey.searchFilter('ab'),
         ),
       ],
     );

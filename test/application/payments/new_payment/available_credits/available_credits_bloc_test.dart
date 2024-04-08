@@ -64,7 +64,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               appliedFilter: AvailableCreditFilter.defaultFilter(),
-              searchKey: SearchKey.searchFilter(''),
+              searchKey: SearchKey.searchFilter('ab'),
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -73,7 +73,7 @@ void main() {
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.searchFilter('ab'),
           ),
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
@@ -95,6 +95,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
+            searchKey: SearchKey.searchFilter('ab'),
           ),
           AvailableCreditsState.initial().copyWith(
             failureOrSuccessOption:
@@ -105,6 +106,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
+            searchKey: SearchKey.searchFilter('ab'),
           ),
         ],
       );
@@ -127,14 +129,14 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               appliedFilter: AvailableCreditFilter.defaultFilter(),
-              searchKey: SearchKey.searchFilter(''),
+              searchKey: SearchKey.searchFilter('ab'),
             ),
           ).thenAnswer((invocation) async => Right(openItems));
         },
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.searchFilter('ab'),
           ),
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
@@ -156,6 +158,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
+            searchKey: SearchKey.searchFilter('ab'),
           ),
           AvailableCreditsState.initial().copyWith(
             items: openItems,
@@ -166,8 +169,34 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
+            searchKey: SearchKey.searchFilter('ab'),
           ),
         ],
+      );
+
+      blocTest<AvailableCreditsBloc, AvailableCreditsState>(
+        'For "fetch" Event not success when searchKey is invalid',
+        build: () => AvailableCreditsBloc(
+          newPaymentRepository: newPaymentRepositoryMock,
+          config: config,
+        ),
+        act: (bloc) => bloc.add(
+          AvailableCreditsEvent.fetch(
+            appliedFilter: AvailableCreditFilter.defaultFilter(),
+            searchKey: SearchKey.searchFilter('a'),
+          ),
+        ),
+        seed: () => AvailableCreditsState.initial().copyWith(
+          appliedFilter: AvailableCreditFilter.defaultFilter(),
+          items: openItems,
+          salesOrganization: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('Fake-Sales-Org'),
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'Fake-CustomerCode',
+          ),
+        ),
+        expect: () => [],
       );
 
       blocTest<AvailableCreditsBloc, AvailableCreditsState>(

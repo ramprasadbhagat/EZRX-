@@ -53,7 +53,7 @@ void main() {
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.searchFilter('ab'),
             offset: offSet,
             pageSize: pageSize,
           ),
@@ -64,7 +64,7 @@ void main() {
       act: (PaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter(''),
+          searchKey: SearchKey.searchFilter('ab'),
         ),
       ),
       expect: () => [
@@ -72,11 +72,13 @@ void main() {
           isFetching: true,
           appliedFilter: paymentSummaryFilter,
           failureOrSuccessOption: none(),
+          searchKey: SearchKey.searchFilter('ab'),
         ),
         PaymentSummaryState.initial().copyWith(
           details: details,
           canLoadMore: false,
           appliedFilter: paymentSummaryFilter,
+          searchKey: SearchKey.searchFilter('ab'),
         ),
       ],
     );
@@ -97,7 +99,7 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             offset: offSet,
             filter: paymentSummaryFilter,
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.searchFilter('ab'),
             pageSize: pageSize,
           ),
         ).thenAnswer(
@@ -106,7 +108,7 @@ void main() {
       },
       act: (PaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
-          searchKey: SearchKey.searchFilter(''),
+          searchKey: SearchKey.searchFilter('ab'),
           appliedFilter: paymentSummaryFilter,
         ),
       ),
@@ -115,12 +117,14 @@ void main() {
           isFetching: true,
           failureOrSuccessOption: none(),
           appliedFilter: paymentSummaryFilter,
+          searchKey: SearchKey.searchFilter('ab'),
         ),
         PaymentSummaryState.initial().copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
           isFetching: false,
           appliedFilter: paymentSummaryFilter,
+          searchKey: SearchKey.searchFilter('ab'),
         ),
       ],
     );

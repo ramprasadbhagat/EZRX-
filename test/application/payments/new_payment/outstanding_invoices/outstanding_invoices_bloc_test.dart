@@ -35,6 +35,7 @@ void main() {
 
   late SalesOrg mockSalesOrg;
   late SalesOrganisation mockSalesOrganisation;
+  late SearchKey fakeInvalidSearchKey;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +58,7 @@ void main() {
   setUp(() {
     fakeOutstandingInvoiceFilter = OutstandingInvoiceFilter.defaultFilter();
     fakeSearchKey = SearchKey.searchFilter('ab');
+    fakeInvalidSearchKey = SearchKey.searchFilter('a');
     pageSize = config.pageSize;
   });
 
@@ -188,6 +190,26 @@ void main() {
           canLoadMore: fakeCustomerOpenItem.length >= pageSize,
         ),
       ],
+    );
+
+    blocTest(
+      'fetch -> Outstanding Invoices not fetch when search key is one character',
+      build: () => OutstandingInvoicesBloc(
+        newPaymentRepository: newPaymentRepository,
+        allCreditsAndInvoicesRepository: allCreditsAndInvoicesRepository,
+        config: config,
+      ),
+      seed: () => OutstandingInvoicesState.initial().copyWith(
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+      ),
+      act: (OutstandingInvoicesBloc bloc) => bloc.add(
+        OutstandingInvoicesEvent.fetch(
+          appliedFilter: fakeOutstandingInvoiceFilter,
+          searchKey: fakeInvalidSearchKey,
+        ),
+      ),
+      expect: () => [],
     );
   });
 

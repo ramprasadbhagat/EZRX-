@@ -87,7 +87,8 @@ class _FullSummaryPageState extends State<FullSummaryPage> {
                   onRefresh: () =>
                       context.fullSummaryBloc(widget.isMarketPlace).add(
                             FullSummaryEvent.fetch(
-                              appliedFilter: FullSummaryFilter.defaultFilter(),
+                              appliedFilter:
+                                  FullSummaryFilter.defaultFilter(),
                             ),
                           ),
                   onLoadingMore: () =>

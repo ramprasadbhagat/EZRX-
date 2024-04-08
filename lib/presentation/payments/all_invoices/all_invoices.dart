@@ -84,7 +84,8 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
                 onRefresh: () =>
                     context.allInvoicesBloc(widget.isMarketPlace).add(
                           AllInvoicesEvent.fetch(
-                            appliedFilter: AllInvoicesFilter.defaultFilter(),
+                            appliedFilter:
+                                AllInvoicesFilter.defaultFilter(),
                           ),
                         ),
                 onLoadingMore: () =>

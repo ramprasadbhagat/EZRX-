@@ -83,7 +83,7 @@ class AvailableCreditsTab extends StatelessWidget {
                                 AvailableCreditsEvent.fetch(
                                   appliedFilter:
                                       AvailableCreditFilter.defaultFilter(),
-                                  searchKey: SearchKey.searchFilter(''),
+                searchKey: SearchKey.searchFilter(''),
                                 ),
                               );
                         },

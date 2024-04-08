@@ -116,7 +116,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
                                 OutstandingInvoicesEvent.fetch(
                                   appliedFilter:
                                       OutstandingInvoiceFilter.defaultFilter(),
-                                  searchKey: state.searchKey,
+                searchKey: SearchKey.searchFilter(''),
                                 ),
                               );
                         },

@@ -38,8 +38,12 @@ class PaymentSummaryBloc
         ),
       ),
       fetch: (e) async {
-        if ((e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) ||
-            !e.searchKey.isValid()) return;
+        if (!e.searchKey.isValid()) return;
+
+        if (e.searchKey == state.searchKey &&
+            e.appliedFilter == state.appliedFilter) {
+          return;
+        }
 
         emit(
           state.copyWith(
