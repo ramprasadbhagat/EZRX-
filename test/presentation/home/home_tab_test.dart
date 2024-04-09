@@ -33,8 +33,6 @@ import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
-import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
@@ -57,81 +55,14 @@ import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/mock_bloc.dart';
+import '../../common_mock_data/mock_other.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
-
-class MaterialListBlocMock
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class MockAupTcBloc extends MockBloc<AupTcEvent, AupTcState>
-    implements AupTcBloc {}
-
-class MockIntroBloc extends MockBloc<IntroEvent, IntroState>
-    implements IntroBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
-    implements ViewByItemsBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class AnnouncementInfoBlocMock
-    extends MockBloc<AnnouncementInfoEvent, AnnouncementInfoState>
-    implements AnnouncementInfoBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class BannerBlocMock extends MockBloc<BannerEvent, BannerState>
-    implements BannerBloc {}
-
-class NotificationBlocMock
-    extends MockBloc<NotificationEvent, NotificationState>
-    implements NotificationBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class ProductSearchBlocMock
-    extends MockBloc<ProductSearchEvent, ProductSearchState>
-    implements ProductSearchBloc {}
-
-class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
-    implements DeepLinkingBloc {}
-
-class MockHTTPService extends Mock implements HttpService {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
-
-class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -147,13 +78,11 @@ void main() {
   late CartBlocMock cartBlocMock;
   late BannerBloc mockBannerBloc;
   late AuthBloc authBlocMock;
-  late MockAupTcBloc mockAupTcBloc;
-  late MockIntroBloc mockIntroBloc;
+  late AupTcBlocMock mockAupTcBloc;
+  late IntroBlocMock mockIntroBloc;
   late AnnouncementBloc announcementBlocMock;
   late UserBlocMock userBlocMock;
-  late HttpService mockHTTPService;
   late AppRouter autoRouterMock;
-  late RemoteConfigService remoteConfigServiceMock;
   late ProductSearchBloc productSearchBlocMock;
   late AnnouncementInfoBlocMock announcementInfoBlocMock;
   late ProductImageBlocMock productImageBlocMock;
@@ -180,19 +109,13 @@ void main() {
 
   setUpAll(() async {
     locator.registerFactory(() => mockCustomerCodeBloc);
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
+
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerFactory(() => mockBannerBloc);
     locator.registerLazySingleton(() => eligibilityBlocMock);
-    mockHTTPService = MockHTTPService();
     autoRouterMock = locator<AppRouter>();
-    locator.registerLazySingleton<HttpService>(
-      () => mockHTTPService,
-    );
-    locator.registerLazySingleton(() => remoteConfigServiceMock);
     locator.registerFactory(() => materialListBlocMock);
     locator.registerFactory(() => viewByItemsBlocMock);
     locator.registerFactory(() => notificationBlocMock);
@@ -206,7 +129,7 @@ void main() {
     setUp(() {
       mockCustomerCodeBloc = CustomerCodeBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
-      deepLinkingBlocMock = DeepLinkingMockBloc();
+      deepLinkingBlocMock = DeepLinkingBlocMock();
       materialListBlocMock = MaterialListBlocMock();
       viewByItemsBlocMock = ViewByItemsBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
@@ -216,13 +139,12 @@ void main() {
       announcementBlocMock = AnnouncementBlocMock();
       userBlocMock = UserBlocMock();
       cartBlocMock = CartBlocMock();
-      mockAupTcBloc = MockAupTcBloc();
-      mockHTTPService = MockHTTPService();
-      remoteConfigServiceMock = RemoteConfigServiceMock();
+      mockAupTcBloc = AupTcBlocMock();
+
       productSearchBlocMock = ProductSearchBlocMock();
       announcementInfoBlocMock = AnnouncementInfoBlocMock();
       productImageBlocMock = ProductImageBlocMock();
-      mockIntroBloc = MockIntroBloc();
+      mockIntroBloc = IntroBlocMock();
       notificationBlocMock = NotificationBlocMock();
       customerLicenseBlocMock = CustomerLicenseBlocMock();
 
@@ -648,6 +570,51 @@ void main() {
           expect(homeQuickAccessEZPointMenu, findsNothing);
         },
       );
+
+      group('MP payment', () {
+        testWidgets('visible when user can access marketplace', (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              user: fakeClientUserAccessMarketPlace,
+              customerCodeInfo: fakeMarketPlaceCustomerCode,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+
+          final icon = find.byKey(WidgetKeys.homeQuickAccessMPPaymentsMenu);
+          expect(icon, findsOneWidget);
+          expect(
+            find.descendant(of: icon, matching: find.text('MP Payments')),
+            findsOneWidget,
+          );
+
+          await tester.tap(icon);
+          await tester.pumpAndSettle();
+          expect(
+            autoRouterMock.currentPath,
+            PaymentPageRoute(isMarketPlace: true).path,
+          );
+        });
+
+        testWidgets('not visible when user can not access marketplace',
+            (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              user: fakeClient,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+
+          expect(
+            find.byKey(WidgetKeys.homeQuickAccessMPPaymentsMenu),
+            findsNothing,
+          );
+        });
+      });
     });
 
     group('Product accessright false', () {

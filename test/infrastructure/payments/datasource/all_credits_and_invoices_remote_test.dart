@@ -69,7 +69,7 @@ void main() {
   group(
     'All Credits And Invoices Remote Datasource',
     () {
-      group('All Credits And Invoices', () {
+      group('Invoice', () {
         test(
           'get All Credits And Invoices Success',
           () async {
@@ -113,6 +113,46 @@ void main() {
               result,
               expectResult,
             );
+          },
+        );
+
+        test(
+          'get All Credits And Invoices should include isMarketPlace when value is true',
+          () async {
+            final res = json.decode(
+              await rootBundle.loadString(
+                'assets/json/customerDocumentHeaderV2Response.json',
+              ),
+            );
+            final query = {...variables};
+            query['request']!['input']!['isMarketPlace'] = true;
+
+            dioAdapter.onPost(
+              '/api/ezpay',
+              (server) => server.reply(200, res),
+              data: jsonEncode({
+                'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
+                    .getDocumentHeaderListQuery(),
+                'variables': variables,
+              }),
+            );
+
+            final result = await remoteDataSource.filterInvoices(
+              customerCode: 'fake-customer-code',
+              salesOrg: 'fake-sale-org',
+              filterMap: filterMap,
+              offset: 0,
+              pageSize: 20,
+              isMarketPlace: true,
+            );
+
+            final expectResult = <CreditAndInvoiceItem>[];
+            for (final dynamic item in res['data']['customerDocumentHeaderV2']
+                ['documentHeaderList']) {
+              expectResult
+                  .add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+            }
+            expect(result, expectResult);
           },
         );
 
@@ -188,7 +228,200 @@ void main() {
             });
           },
         );
+      });
 
+      group('Credit', () {
+        test('=> filterCredits with status code 200', () async {
+          final res = json.decode(
+            await rootBundle.loadString(
+              'assets/json/customerDocumentHeaderV2Response.json',
+            ),
+          );
+
+          final data = jsonEncode({
+            'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
+                .getDocumentHeaderListQuery(),
+            'variables': {
+              'input': {
+                'customerCode': '0000100120',
+                'salesOrg': '2001',
+                'first': 1,
+                'after': 0,
+                'excelFor': 'Credit',
+              },
+            },
+          });
+
+          dioAdapter.onPost(
+            '/api/ezpay',
+            (server) => server.reply(
+              200,
+              res,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: data,
+          );
+
+          final result = await remoteDataSource.filterCredits(
+            customerCode: '0000100120',
+            salesOrg: '2001',
+            pageSize: 1,
+            offset: 0,
+            filterMap: [],
+            isMarketPlace: false,
+          );
+
+          final expectResult = <CreditAndInvoiceItem>[];
+          for (final dynamic item in res['data']['customerDocumentHeaderV2']
+              ['documentHeaderList']) {
+            expectResult.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+          }
+          expect(
+            result,
+            expectResult,
+          );
+        });
+
+        test('=> filterCredits should include isMarketPlace when value is true',
+            () async {
+          final res = json.decode(
+            await rootBundle.loadString(
+              'assets/json/customerDocumentHeaderV2Response.json',
+            ),
+          );
+
+          final data = jsonEncode({
+            'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
+                .getDocumentHeaderListQuery(),
+            'variables': {
+              'input': {
+                'customerCode': '0000100120',
+                'salesOrg': '2001',
+                'first': 1,
+                'after': 0,
+                'excelFor': 'Credit',
+                'isMarketPlace': true,
+              },
+            },
+          });
+
+          dioAdapter.onPost(
+            '/api/ezpay',
+            (server) => server.reply(200, res),
+            data: data,
+          );
+
+          final result = await remoteDataSource.filterCredits(
+            customerCode: '0000100120',
+            salesOrg: '2001',
+            pageSize: 1,
+            offset: 0,
+            filterMap: [],
+            isMarketPlace: true,
+          );
+
+          final expectResult = <CreditAndInvoiceItem>[];
+          for (final dynamic item in res['data']['customerDocumentHeaderV2']
+              ['documentHeaderList']) {
+            expectResult.add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+          }
+          expect(result, expectResult);
+        });
+
+        test('=> filterCredits status code not 200', () async {
+          final data = jsonEncode({
+            'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
+                .getDocumentHeaderListQuery(),
+            'variables': {
+              'input': {
+                'customerCode': 'mock_soldTo',
+                'salesOrg': 'mock_salesOrg',
+                'first': 1,
+                'after': 0,
+                'excelFor': 'Credit',
+                'orderBy': [],
+                'filterBy': [],
+              },
+            },
+          });
+
+          dioAdapter.onPost(
+            '/api/ezpay',
+            (server) => server.reply(
+              204,
+              {'data': []},
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: data,
+          );
+
+          await remoteDataSource
+              .filterCredits(
+            customerCode: 'mock_soldTo',
+            salesOrg: 'mock_salesOrg',
+            pageSize: 1,
+            offset: 0,
+            filterMap: [],
+            isMarketPlace: false,
+          )
+              .onError((error, stackTrace) async {
+            expect(error, isA<ServerException>());
+            return Future.value(List<CreditAndInvoiceItem>.empty());
+          });
+        });
+
+        test('=> filterCredits with error', () async {
+          final data = jsonEncode({
+            'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
+                .getDocumentHeaderListQuery(),
+            'variables': {
+              'input': {
+                'customerCode': 'mock_soldTo',
+                'salesOrg': 'mock_salesOrg',
+                'first': 1,
+                'after': 0,
+                'excelFor': 'Credit',
+                'orderBy': [],
+                'filterBy': [],
+              },
+            },
+          });
+
+          dioAdapter.onPost(
+            '/api/ezpay',
+            (server) => server.reply(
+              200,
+              {
+                'data': null,
+                'errors': [
+                  {'message': 'fake-error'},
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: data,
+          );
+
+          await remoteDataSource
+              .filterCredits(
+            customerCode: 'mock_soldTo',
+            salesOrg: 'mock_salesOrg',
+            pageSize: 1,
+            offset: 0,
+            filterMap: [],
+            isMarketPlace: false,
+          )
+              .onError((error, stackTrace) async {
+            expect(error, isA<ServerException>());
+            return Future.value(List<CreditAndInvoiceItem>.empty());
+          });
+        });
+      });
+
+      group('Full summary', () {
         test(
           'get filter full summary success',
           () async {
@@ -251,6 +484,64 @@ void main() {
               result,
               expectResult,
             );
+          },
+        );
+
+        test(
+          'get filter full summary should include isMarketPlace when value is true',
+          () async {
+            final variables = {
+              'request': {
+                'input': {
+                  'customerCode': 'fake-customer-code',
+                  'salesOrg': 'fake-sale-org',
+                  'first': 20,
+                  'after': 0,
+                  'excelFor': 'AccountSummary',
+                  'orderBy': [
+                    {
+                      'order': 'desc',
+                      'field': 'documentDate',
+                    }
+                  ],
+                  'filterBy': filterMap,
+                  'isMarketPlace': true,
+                },
+              },
+            };
+
+            final res = json.decode(
+              await rootBundle.loadString(
+                'assets/json/customerDocumentHeaderV2Response.json',
+              ),
+            );
+
+            dioAdapter.onPost(
+              '/api/ezpay',
+              (server) => server.reply(200, res),
+              data: jsonEncode({
+                'query': remoteDataSource.allCreditsAndInvoicesQueryMutation
+                    .getDocumentHeaderListQuery(),
+                'variables': variables,
+              }),
+            );
+
+            final result = await remoteDataSource.filterFullSummary(
+              customerCode: 'fake-customer-code',
+              salesOrg: 'fake-sale-org',
+              filterMap: filterMap,
+              offset: 0,
+              pageSize: 20,
+              isMarketPlace: true,
+            );
+
+            final expectResult = <CreditAndInvoiceItem>[];
+            for (final dynamic item in res['data']['customerDocumentHeaderV2']
+                ['documentHeaderList']) {
+              expectResult
+                  .add(CreditAndInvoiceItemDto.fromJson(item).toDomain());
+            }
+            expect(result, expectResult);
           },
         );
       });

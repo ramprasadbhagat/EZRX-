@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/download_e_credit/download_e_credit_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -32,6 +33,7 @@ import '../../../utils/widget_utils.dart';
 
 void main() {
   late ZPAllCreditsBloc allCreditsBlocMock;
+  late MPAllCreditsBloc mpAllCreditsBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late EligibilityBloc eligibilityBlocMock;
@@ -58,6 +60,7 @@ void main() {
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
     allCreditsBlocMock = ZPAllCreditsBlocMock();
+    mpAllCreditsBlocMock = MPAllCreditsBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
@@ -70,6 +73,8 @@ void main() {
     downloadECreditBlocMock = DownloadECreditBlocMock();
 
     when(() => allCreditsBlocMock.state).thenReturn(AllCreditsState.initial());
+    when(() => mpAllCreditsBlocMock.state)
+        .thenReturn(AllCreditsState.initial());
     when(() => allCreditsFilterBlocMock.state)
         .thenReturn(AllCreditsFilterState.initial());
     when(() => customerCodeBlocMock.state)
@@ -88,13 +93,16 @@ void main() {
         .thenReturn(DownloadECreditState.initial());
   });
 
-  Widget getWidget() {
+  Widget getWidget({bool isMarketPlace = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
       providers: [
         BlocProvider<ZPAllCreditsBloc>(
           create: (context) => allCreditsBlocMock,
+        ),
+        BlocProvider<MPAllCreditsBloc>(
+          create: (context) => mpAllCreditsBlocMock,
         ),
         BlocProvider<AllCreditsFilterBloc>(
           create: (context) => allCreditsFilterBlocMock,
@@ -125,7 +133,7 @@ void main() {
           create: (context) => downloadECreditBlocMock,
         ),
       ],
-      child: const AllCreditsPage(isMarketPlace: false),
+      child: AllCreditsPage(isMarketPlace: isMarketPlace),
     );
   }
 
@@ -373,6 +381,24 @@ void main() {
 
       final documentReferenceID = find.text('Gov. no 0810234244');
       expect(documentReferenceID, findsOneWidget);
+    });
+
+    testWidgets('=> Find marketplace logo in MP all credit', (tester) async {
+      when(() => mpAllCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial()
+            .copyWith(items: creditItemList.take(1).toList()),
+      );
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pump();
+
+      expect(creditsItemTile, findsOne);
+      expect(
+        find.descendant(
+          of: creditsItemTile,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsOne,
+      );
     });
   });
 }

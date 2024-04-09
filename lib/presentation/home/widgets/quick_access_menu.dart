@@ -143,7 +143,7 @@ List<_QuickAccessMenuData> _getQuickAccessItems(
   );
 
   final homeQuickAccessMarketPlacePaymentMenu = _QuickAccessMenuData(
-    key: WidgetKeys.homeQuickAccessPaymentsMenu,
+    key: WidgetKeys.homeQuickAccessMPPaymentsMenu,
     icon: 'marketplace_payment_menu.svg',
     label: 'MP Payments',
     onTap: () {

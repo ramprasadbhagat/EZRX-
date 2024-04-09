@@ -169,6 +169,7 @@ class MoreDetailsTile {
 
   factory MoreDetailsTile.marketplacePaymentsTab(BuildContext context) =>
       MoreDetailsTile(
+        key: WidgetKeys.mpPaymentsTile,
         icon: const Icon(
           Icons.account_balance_wallet_outlined,
           color: ZPColors.greenIconColor,

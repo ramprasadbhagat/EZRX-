@@ -60,7 +60,7 @@ void main() {
     );
 
     blocTest(
-      'Fetch Success',
+      'Fetch Success for ZP',
       build: () => ZPSoaBloc(
         repository: soaRepositoryMock,
       ),
@@ -77,6 +77,40 @@ void main() {
             mockSoaList,
           ),
         );
+      },
+      act: (SoaBloc bloc) => bloc.add(
+        SoaEvent.fetch(
+          customerCodeInfo: mockCustomerCodeInfo,
+          salesOrg: fakeSalesOrg,
+        ),
+      ),
+      expect: () => [
+        SoaState.initial().copyWith(
+          isFetching: true,
+        ),
+        SoaState.initial().copyWith(
+          soaList: mockSoaList,
+        ),
+      ],
+      verify: (SoaBloc bloc) => [
+        expect(bloc.state.soaList.length, 2),
+      ],
+    );
+
+    blocTest(
+      'Fetch Success for MP',
+      build: () => MPSoaBloc(
+        repository: soaRepositoryMock,
+      ),
+      seed: () => SoaState.initial().copyWith(appliedFilter: soaFilter),
+      setUp: () {
+        when(
+          () => soaRepositoryMock.fetchSoa(
+            customerCodeInfo: mockCustomerCodeInfo,
+            salesOrg: fakeSalesOrg,
+            isMarketPlace: true,
+          ),
+        ).thenAnswer((_) async => Right(mockSoaList));
       },
       act: (SoaBloc bloc) => bloc.add(
         SoaEvent.fetch(

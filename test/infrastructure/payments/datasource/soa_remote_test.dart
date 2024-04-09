@@ -33,7 +33,6 @@ void main() {
   final data = jsonEncode(
     {
       'customer_code': '26010030082707',
-      'isMarketPlace': true,
     },
   );
   setUpAll(() {
@@ -51,13 +50,37 @@ void main() {
 
       dioAdapter.onPost(
         '/api/payment/listSoa',
-        (server) => server.reply(
-          200,
-          res,
-          delay: const Duration(seconds: 1),
-        ),
-        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        (server) => server.reply(200, res),
         data: data,
+      );
+
+      final result = await remoteDataSource.getSoa(
+        '26010030082707',
+        false,
+      );
+
+      expect(
+        result,
+        List.from(res['data'])
+            .map((e) => SoaDto.fromJson(e).toDomain())
+            .toList(),
+      );
+    });
+
+    test('Get Soa should include isMarketPlace when value is true', () async {
+      final res = json.decode(
+        await rootBundle.loadString('assets/json/listSoaResponse.json'),
+      );
+
+      dioAdapter.onPost(
+        '/api/payment/listSoa',
+        (server) => server.reply(200, res),
+        data: jsonEncode(
+          {
+            'customer_code': '26010030082707',
+            'isMarketPlace': true,
+          },
+        ),
       );
 
       final result = await remoteDataSource.getSoa(
@@ -75,19 +98,14 @@ void main() {
     test('statuscode not equal to 200', () async {
       dioAdapter.onPost(
         '/api/payment/listSoa',
-        (server) => server.reply(
-          205,
-          {'data': []},
-          delay: const Duration(seconds: 1),
-        ),
-        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        (server) => server.reply(205, {'data': []}),
         data: data,
       );
 
       await remoteDataSource
           .getSoa(
         '26010030082707',
-        true,
+        false,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -106,16 +124,14 @@ void main() {
               {'message': 'fake-error'},
             ],
           },
-          delay: const Duration(seconds: 1),
         ),
-        headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: data,
       );
 
       await remoteDataSource
           .getSoa(
         '26010030082707',
-        true,
+        false,
       )
           .onError((error, _) async {
         expect(error, isA<ServerException>());
@@ -128,16 +144,14 @@ void main() {
         (other) => other.reply(
           200,
           {'data': []},
-          delay: const Duration(seconds: 1),
         ),
-        headers: {'Content-Type': 'application/json; charset=utf-8'},
         data: data,
       );
 
       await remoteDataSource
           .getSoa(
         '26010030082707',
-        true,
+        false,
       )
           .onError((error, _) async {
         expect(error, isA<OtherException>());

@@ -17,6 +17,7 @@ import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/full_summary/full_summary.dart';
@@ -37,6 +38,7 @@ void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
   late NewPaymentBloc newPaymentBlocMock;
   late ZPFullSummaryBloc fullSummaryBlocMock;
+  late MPFullSummaryBloc mpFullSummaryBlocMock;
   late FullSummaryFilterBloc fullSummaryFilterBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late AnnouncementBloc announcementBlocMock;
@@ -54,6 +56,7 @@ void main() {
     creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
     fullSummaryBlocMock = ZPFullSummaryBlocMock();
+    mpFullSummaryBlocMock = MPFullSummaryBlocMock();
     fullSummaryFilterBlocMock = FullSummaryFilterBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
@@ -64,6 +67,8 @@ void main() {
         .thenReturn(CreditAndInvoiceDetailsState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => fullSummaryBlocMock.state)
+        .thenReturn(FullSummaryState.initial());
+    when(() => mpFullSummaryBlocMock.state)
         .thenReturn(FullSummaryState.initial());
     when(() => fullSummaryFilterBlocMock.state)
         .thenReturn(FullSummaryFilterState.initial());
@@ -76,7 +81,7 @@ void main() {
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
   });
 
-  Widget getWidget() {
+  Widget getWidget({bool isMarketPlace = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
@@ -89,6 +94,9 @@ void main() {
         ),
         BlocProvider<ZPFullSummaryBloc>(
           create: (context) => fullSummaryBlocMock,
+        ),
+        BlocProvider<MPFullSummaryBloc>(
+          create: (context) => mpFullSummaryBlocMock,
         ),
         BlocProvider<FullSummaryFilterBloc>(
           create: (context) => fullSummaryFilterBlocMock,
@@ -103,7 +111,7 @@ void main() {
           create: (context) => authBlocMock,
         ),
       ],
-      child: const FullSummaryPage(isMarketPlace: false),
+      child: FullSummaryPage(isMarketPlace: isMarketPlace),
     );
   }
 
@@ -486,6 +494,25 @@ void main() {
               .tr(),
         ),
         findsOneWidget,
+      );
+    });
+
+    testWidgets('Find marketplace logo in MP full summary', (tester) async {
+      when(() => mpFullSummaryBlocMock.state).thenReturn(
+        FullSummaryState.initial()
+            .copyWith(items: fullSummaryList.take(1).toList()),
+      );
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pump();
+
+      final itemTile = find.byKey(WidgetKeys.invoiceCreditItem);
+      expect(itemTile, findsOne);
+      expect(
+        find.descendant(
+          of: itemTile,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsOne,
       );
     });
   });

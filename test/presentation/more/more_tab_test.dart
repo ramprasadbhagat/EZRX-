@@ -33,50 +33,13 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class MaterialListBlocMock
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class BannerBlocMock extends MockBloc<BannerEvent, BannerState>
-    implements BannerBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AnnouncementInfoBlocMock
-    extends MockBloc<AnnouncementInfoEvent, AnnouncementInfoState>
-    implements AnnouncementInfoBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class EZPointBlocMock extends MockBloc<EZPointEvent, EZPointState>
-    implements EZPointBloc {}
-
-class NotificationSettingsBlocMock
-    extends MockBloc<NotificationSettingsEvent, NotificationSettingsState>
-    implements NotificationSettingsBloc {}
 
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;
@@ -196,27 +159,10 @@ void main() {
     testWidgets(
       ' -> Hide returnsTile when disableReturn true',
       (WidgetTester tester) async {
-        VisibilityDetectorController.instance.updateInterval = Duration.zero;
-
-        final fakeUser = User.empty().copyWith(
-          disableReturns: true,
-          role: Role.empty().copyWith(
-            type: RoleType('client_user'),
-          ),
-          fullName: const FullName(firstName: 'test', lastName: 'test'),
-        );
-
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            user: fakeUser,
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
-          ),
-        );
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeUser,
+            user: fakeClient.copyWith(disableReturns: true),
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
 
@@ -728,5 +674,46 @@ void main() {
         expect(autoRouterMock.current.name, 'PdfViewPageRoute');
       },
     );
+
+    group('-> MP payment tile', () {
+      testWidgets('visible when user can access to marketplace',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeClientUserAccessMarketPlace,
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        final paymentsTile = find.byKey(WidgetKeys.mpPaymentsTile);
+        expect(paymentsTile, findsOne);
+        expect(
+          find.descendant(of: paymentsTile, matching: find.text('MP Payments')),
+          findsOne,
+        );
+        await tester.tap(paymentsTile);
+        await tester.pump();
+
+        expect(
+          autoRouterMock.currentPath,
+          PaymentPageRoute(isMarketPlace: true).path,
+        );
+      });
+
+      testWidgets('not visible when user can not access to marketplace',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeClient,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        expect(find.byKey(WidgetKeys.mpPaymentsTile), findsNothing);
+      });
+    });
   });
 }

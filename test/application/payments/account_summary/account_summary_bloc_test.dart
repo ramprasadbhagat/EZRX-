@@ -30,7 +30,7 @@ void main() {
   });
 
   group(
-    'Account Summary Bloc Test',
+    'Account Summary Bloc Test -',
     () {
       blocTest<AccountSummaryBloc, AccountSummaryState>(
         'Account Summary Initialize Event',
@@ -46,7 +46,7 @@ void main() {
       );
 
       blocTest<AccountSummaryBloc, AccountSummaryState>(
-        'Account Summary "fetchInvoiceSummary" Event Success',
+        'fetchInvoiceSummary for ZP success',
         build: () => ZPAccountSummaryBloc(
           accountSummaryRepository: accountSummaryMockRepository,
         ),
@@ -58,6 +58,38 @@ void main() {
               isMarketPlace: false,
             ),
           ).thenAnswer((invocation) async => Right(outstandingBalance));
+        },
+        act: (AccountSummaryBloc bloc) => bloc.add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: mockCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: salesOrg,
+          ),
+        ),
+        expect: () => [
+          AccountSummaryState.initial().copyWith(
+            isFetchingOutstandingBalance: true,
+            failureOrSuccessOption: none(),
+          ),
+          AccountSummaryState.initial().copyWith(
+            outstandingBalance: outstandingBalance,
+            isFetchingOutstandingBalance: false,
+          ),
+        ],
+      );
+
+      blocTest<AccountSummaryBloc, AccountSummaryState>(
+        'fetchInvoiceSummary for MP success',
+        build: () => MPAccountSummaryBloc(
+          accountSummaryRepository: accountSummaryMockRepository,
+        ),
+        setUp: () {
+          when(
+            () => accountSummaryMockRepository.fetchInvoiceSummary(
+              custCode: mockCustomerCodeInfo.customerCodeSoldTo,
+              salesOrg: salesOrg,
+              isMarketPlace: true,
+            ),
+          ).thenAnswer((_) async => Right(outstandingBalance));
         },
         act: (AccountSummaryBloc bloc) => bloc.add(
           AccountSummaryEvent.fetchInvoiceSummary(
@@ -113,7 +145,7 @@ void main() {
       );
 
       blocTest<AccountSummaryBloc, AccountSummaryState>(
-        'Account Summary "fetchCreditSummary" Event Success',
+        'fetchCreditSummary for ZP success',
         build: () => ZPAccountSummaryBloc(
           accountSummaryRepository: accountSummaryMockRepository,
         ),
@@ -125,6 +157,38 @@ void main() {
               isMarketPlace: false,
             ),
           ).thenAnswer((invocation) async => Right(creditLimit));
+        },
+        act: (AccountSummaryBloc bloc) => bloc.add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: mockCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: salesOrg,
+          ),
+        ),
+        expect: () => [
+          AccountSummaryState.initial().copyWith(
+            isFetchingCreditLimit: true,
+            failureOrSuccessOption: none(),
+          ),
+          AccountSummaryState.initial().copyWith(
+            creditLimit: creditLimit,
+            isFetchingCreditLimit: false,
+          ),
+        ],
+      );
+
+      blocTest<AccountSummaryBloc, AccountSummaryState>(
+        'fetchCreditSummary for MP success',
+        build: () => MPAccountSummaryBloc(
+          accountSummaryRepository: accountSummaryMockRepository,
+        ),
+        setUp: () {
+          when(
+            () => accountSummaryMockRepository.fetchCreditSummary(
+              custCode: mockCustomerCodeInfo.customerCodeSoldTo,
+              salesOrg: salesOrg,
+              isMarketPlace: true,
+            ),
+          ).thenAnswer((_) async => Right(creditLimit));
         },
         act: (AccountSummaryBloc bloc) => bloc.add(
           AccountSummaryEvent.fetchCreditSummary(

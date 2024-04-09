@@ -33,7 +33,7 @@ void main() {
       expect: () => [PaymentInProgressState.initial()],
     );
     blocTest<PaymentInProgressBloc, PaymentInProgressState>(
-      'Payment In Progress "fetch" Event Success',
+      'Payment In Progress "fetch" Event Success for ZP',
       build: () => ZPPaymentInProgressBloc(
         repository: repository,
       ),
@@ -45,8 +45,7 @@ void main() {
             isMarketPlace: false,
           ),
         ).thenAnswer(
-          (invocation) async =>
-              Right(StringValue('100')),
+          (invocation) async => Right(StringValue('100')),
         );
       },
       act: (PaymentInProgressBloc bloc) => bloc.add(
@@ -97,6 +96,38 @@ void main() {
           isFetching: false,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
+        ),
+      ],
+    );
+
+    blocTest<PaymentInProgressBloc, PaymentInProgressState>(
+      'Payment In Progress "fetch" Event Success for MP',
+      build: () => MPPaymentInProgressBloc(
+        repository: repository,
+      ),
+      setUp: () {
+        when(
+          () => repository.getPaymentInProgress(
+            customerCodeInfo: mockCustomerCodeInfo,
+            salesOrganization: mockSalesOrganisation,
+            isMarketPlace: true,
+          ),
+        ).thenAnswer((_) async => Right(StringValue('100')));
+      },
+      act: (PaymentInProgressBloc bloc) => bloc.add(
+        PaymentInProgressEvent.fetch(
+          salesOrganization: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+        ),
+      ),
+      expect: () => [
+        PaymentInProgressState.initial().copyWith(
+          isFetching: true,
+          failureOrSuccessOption: none(),
+        ),
+        PaymentInProgressState.initial().copyWith(
+          isFetching: false,
+          amount: StringValue('100'),
         ),
       ],
     );

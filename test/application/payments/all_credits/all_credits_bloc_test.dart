@@ -102,7 +102,7 @@ void main() {
         ],
       );
       blocTest(
-        'fetch -> credits fetch success',
+        'fetch -> credits fetch success for ZP',
         build: () => ZPAllCreditsBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
@@ -121,6 +121,42 @@ void main() {
           ).thenAnswer(
             (invocation) async => Right(fakeResult),
           );
+        },
+        act: (AllCreditsBloc bloc) => bloc.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.defaultFilter(),
+          ),
+        ),
+        expect: () => [
+          AllCreditsState.initial().copyWith(
+            isLoading: true,
+          ),
+          AllCreditsState.initial().copyWith(
+            items: fakeResult,
+            failureOrSuccessOption: none(),
+            canLoadMore: false,
+          ),
+        ],
+      );
+
+      blocTest(
+        'fetch -> credits fetch success for MP',
+        build: () => MPAllCreditsBloc(
+          allCreditsAndInvoicesRepository: repository,
+          config: config,
+        ),
+        seed: () => AllCreditsState.initial(),
+        setUp: () {
+          when(
+            () => repository.filterCredits(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              filter: allCreditsFilter,
+              offset: 0,
+              pageSize: config.pageSize,
+              isMarketPlace: true,
+            ),
+          ).thenAnswer((_) async => Right(fakeResult));
         },
         act: (AllCreditsBloc bloc) => bloc.add(
           AllCreditsEvent.fetch(
@@ -249,7 +285,7 @@ void main() {
     );
 
     blocTest(
-      'fetch -> credits load more success',
+      'fetch -> credits load more success for ZP',
       build: () => ZPAllCreditsBloc(
         allCreditsAndInvoicesRepository: repository,
         config: config,
@@ -278,6 +314,53 @@ void main() {
               fakeResult.first,
             ),
           ),
+        );
+      },
+      act: (AllCreditsBloc bloc) => bloc.add(
+        const AllCreditsEvent.loadMore(),
+      ),
+      expect: () => [
+        AllCreditsState.initial().copyWith(
+          items: List.filled(
+            config.pageSize,
+            fakeResult.first,
+          ),
+          isLoading: true,
+        ),
+        AllCreditsState.initial().copyWith(
+          items: List.filled(
+            config.pageSize * 2,
+            fakeResult.first,
+          ),
+        ),
+      ],
+    );
+
+    blocTest(
+      'fetch -> credits load more success for MP',
+      build: () => MPAllCreditsBloc(
+        allCreditsAndInvoicesRepository: repository,
+        config: config,
+      ),
+      seed: () => AllCreditsState.initial().copyWith(
+        isLoading: false,
+        items: List.filled(
+          config.pageSize,
+          fakeResult.first,
+        ),
+      ),
+      setUp: () {
+        when(
+          () => repository.filterCredits(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            filter: allCreditsFilter,
+            offset: config.pageSize,
+            pageSize: config.pageSize,
+            isMarketPlace: true,
+          ),
+        ).thenAnswer(
+          (_) async => Right(List.filled(config.pageSize, fakeResult.first)),
         );
       },
       act: (AllCreditsBloc bloc) => bloc.add(

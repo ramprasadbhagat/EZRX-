@@ -2,8 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
+import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -15,14 +16,11 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -32,41 +30,35 @@ import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 void main() {
   late ZPAllInvoicesBloc allInvoicesBlocMock;
+  late MPAllInvoicesBloc mpAllInvoicesBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late List<CreditAndInvoiceItem> allInvoicesData;
-  final thSalesOrganisation = SalesOrganisation.empty().copyWith(
-    salesOrg: SalesOrg('2900'),
-  );
-  final sgSalesOrganisation = SalesOrganisation.empty().copyWith(
-    salesOrg: SalesOrg('2601'),
-  );
   late NewPaymentBlocMock newPaymentBlocMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
+    locator.registerLazySingleton(() => MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
   });
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
     allInvoicesBlocMock = ZPAllInvoicesBlocMock();
+    mpAllInvoicesBlocMock = MPAllInvoicesBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
@@ -79,6 +71,8 @@ void main() {
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
 
     when(() => allInvoicesBlocMock.state)
+        .thenReturn(AllInvoicesState.initial());
+    when(() => mpAllInvoicesBlocMock.state)
         .thenReturn(AllInvoicesState.initial());
     when(() => allInvoicesFilterBlocMock.state)
         .thenReturn(AllInvoicesFilterState.initial());
@@ -94,7 +88,7 @@ void main() {
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
   });
 
-  Widget getWidget() {
+  Widget getWidget({bool isMarketPlace = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       useMediaQuery: false,
@@ -102,6 +96,9 @@ void main() {
       providers: [
         BlocProvider<ZPAllInvoicesBloc>(
           create: (context) => allInvoicesBlocMock,
+        ),
+        BlocProvider<MPAllInvoicesBloc>(
+          create: (context) => mpAllInvoicesBlocMock,
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
@@ -129,20 +126,15 @@ void main() {
           create: (context) => newPaymentBlocMock,
         ),
       ],
-      child: const AllInvoicesPage(isMarketPlace: false),
+      child: AllInvoicesPage(isMarketPlace: isMarketPlace),
     );
   }
 
   group('All Invoices Screen', () {
     testWidgets('=> Invoice Due date formatting for TH market', (tester) async {
-      when(() => salesOrgBlocMock.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          salesOrganisation: thSalesOrganisation,
-        ),
-      );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: thSalesOrganisation,
+          salesOrganisation: fakeTHSalesOrganisation,
         ),
       );
 
@@ -171,7 +163,7 @@ void main() {
     testWidgets('=> Invoice Due date formatting for SG market', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: sgSalesOrganisation,
+          salesOrganisation: fakeSGSalesOrganisation,
         ),
       );
 
@@ -350,14 +342,9 @@ void main() {
     });
 
     testWidgets('=> Invoice order Id', (tester) async {
-      when(() => salesOrgBlocMock.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          salesOrganisation: thSalesOrganisation,
-        ),
-      );
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrganisation: thSalesOrganisation,
+          salesOrganisation: fakeTHSalesOrganisation,
         ),
       );
 
@@ -423,6 +410,25 @@ void main() {
       final noRecordTextFinder = find.text('No invoice found');
 
       expect(noRecordTextFinder, findsOneWidget);
+    });
+
+    testWidgets('=> Find marketplace logo in MP all invoice', (tester) async {
+      when(() => mpAllInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial()
+            .copyWith(items: allInvoicesData.take(1).toList()),
+      );
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pump();
+
+      final invoiceItem = find.byKey(WidgetKeys.invoiceItem);
+      expect(invoiceItem, findsOne);
+      expect(
+        find.descendant(
+          of: invoiceItem,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsOne,
+      );
     });
   });
 }

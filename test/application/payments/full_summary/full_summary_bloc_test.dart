@@ -57,7 +57,7 @@ void main() {
       );
 
       blocTest(
-        'Fetch Success',
+        'Fetch Success for ZP',
         build: () => ZPFullSummaryBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
@@ -84,6 +84,51 @@ void main() {
           ).thenAnswer(
             (invocation) async => Right(fakeResult),
           );
+        },
+        expect: () => [
+          FullSummaryState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            isLoading: true,
+            appliedFilter: fullSummaryFilter,
+          ),
+          FullSummaryState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            appliedFilter: fullSummaryFilter,
+            items: fakeResult,
+            canLoadMore: fakeResult.length >= config.pageSize,
+            failureOrSuccessOption: optionOf(Right(fakeResult)),
+          ),
+        ],
+      );
+
+      blocTest(
+        'Fetch Success for MP',
+        build: () => MPFullSummaryBloc(
+          allCreditsAndInvoicesRepository: repository,
+          config: config,
+        ),
+        act: (FullSummaryBloc bloc) => bloc.add(
+          FullSummaryEvent.fetch(
+            appliedFilter: fullSummaryFilter,
+          ),
+        ),
+        seed: () => FullSummaryState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+        setUp: () {
+          when(
+            () => repository.filterFullSummary(
+              salesOrganisation: fakeSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              filter: fullSummaryFilter,
+              offset: 0,
+              pageSize: config.pageSize,
+              isMarketPlace: true,
+            ),
+          ).thenAnswer((_) async => Right(fakeResult));
         },
         expect: () => [
           FullSummaryState.initial().copyWith(
@@ -149,7 +194,7 @@ void main() {
       );
 
       blocTest(
-        'Loadmore Success',
+        'Loadmore Success for ZP',
         build: () => ZPFullSummaryBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
@@ -176,6 +221,52 @@ void main() {
           ).thenAnswer(
             (invocation) async => Right(fakeResult),
           );
+        },
+        expect: () => [
+          FullSummaryState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            canLoadMore: true,
+            items: fakeResult,
+            isLoading: true,
+            appliedFilter: fullSummaryFilter,
+          ),
+          FullSummaryState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            appliedFilter: fullSummaryFilter,
+            items: [...fakeResult, ...fakeResult],
+            canLoadMore: fakeResult.length >= config.pageSize,
+          ),
+        ],
+      );
+
+      blocTest(
+        'Loadmore Success for MP',
+        build: () => MPFullSummaryBloc(
+          allCreditsAndInvoicesRepository: repository,
+          config: config,
+        ),
+        act: (FullSummaryBloc bloc) => bloc.add(
+          const FullSummaryEvent.loadMore(),
+        ),
+        seed: () => FullSummaryState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          canLoadMore: true,
+          items: fakeResult,
+        ),
+        setUp: () {
+          when(
+            () => repository.filterFullSummary(
+              salesOrganisation: fakeSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              filter: fullSummaryFilter,
+              offset: fakeResult.length,
+              pageSize: config.pageSize,
+              isMarketPlace: true,
+            ),
+          ).thenAnswer((_) async => Right(fakeResult));
         },
         expect: () => [
           FullSummaryState.initial().copyWith(

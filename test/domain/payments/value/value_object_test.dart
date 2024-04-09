@@ -88,5 +88,10 @@ void main() {
         expect(result, '#0000100585, #0000100585');
       },
     );
+
+    test(
+      'get reference list string when data is empty',
+      () => expect(ReferenceId('').referenceListString, '-'),
+    );
   });
 }

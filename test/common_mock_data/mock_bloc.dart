@@ -1,5 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
+import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
+import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
@@ -10,6 +12,7 @@ import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
@@ -144,6 +147,16 @@ class CustomerLicenseBlocMock
     extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
     implements CustomerLicenseBloc {}
 
+class BannerBlocMock extends MockBloc<BannerEvent, BannerState>
+    implements BannerBloc {}
+
+class EZPointBlocMock extends MockBloc<EZPointEvent, EZPointState>
+    implements EZPointBloc {}
+
+class NotificationSettingsBlocMock
+    extends MockBloc<NotificationSettingsEvent, NotificationSettingsState>
+    implements NotificationSettingsBloc {}
+
 //////////////////////Product//////////////////////////////////////////////
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
@@ -258,6 +271,10 @@ class ZPAccountSummaryBlocMock
     extends MockBloc<AccountSummaryEvent, AccountSummaryState>
     implements ZPAccountSummaryBloc {}
 
+class MPAccountSummaryBlocMock
+    extends MockBloc<AccountSummaryEvent, AccountSummaryState>
+    implements MPAccountSummaryBloc {}
+
 class OutstandingInvoicesBlocMock
     extends MockBloc<OutstandingInvoicesEvent, OutstandingInvoicesState>
     implements OutstandingInvoicesBloc {}
@@ -280,6 +297,10 @@ class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
 class ZPPaymentInProgressBlocMock
     extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
     implements ZPPaymentInProgressBloc {}
+
+class MPPaymentInProgressBlocMock
+    extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
+    implements MPPaymentInProgressBloc {}
 
 class PaymentSummaryBlocMock
     extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>

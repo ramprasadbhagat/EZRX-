@@ -53,6 +53,45 @@ void main() {
             'input': {
               'customerCode': 'mock_customer_code',
               'salesOrg': '2001',
+            },
+          },
+        });
+
+        dioAdapter.onPost(
+          '/api/ezpay',
+          (server) => server.reply(200, res),
+          data: data,
+        );
+
+        final result = await remoteDataSource.getPaymentInProgress(
+          customerCode: 'mock_customer_code',
+          salesOrg: 'mock_salesOrg',
+          isMarketPlace: false,
+        );
+
+        final expectResult = <StringValue>[];
+        for (final dynamic item in res['data']['paymentInProgress']
+            ['results']) {
+          expectResult.add(PaymentInProgressDto.fromJson(item).toAmount);
+        }
+        expect(result, expectResult);
+      });
+
+      test(
+          'Payment in progress should include isMarketPlace when value is true',
+          () async {
+        final res = json.decode(
+          await rootBundle
+              .loadString('assets/json/paymentInProgressResponse.json'),
+        );
+
+        final data = jsonEncode({
+          'query':
+              remoteDataSource.paymentInProgressQuery.getPaymentInProgress(),
+          'variables': {
+            'input': {
+              'customerCode': 'mock_customer_code',
+              'salesOrg': '2001',
               'isMarketPlace': true,
             },
           },
@@ -60,12 +99,7 @@ void main() {
 
         dioAdapter.onPost(
           '/api/ezpay',
-          (server) => server.reply(
-            200,
-            res,
-            delay: const Duration(seconds: 1),
-          ),
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          (server) => server.reply(200, res),
           data: data,
         );
 
@@ -80,10 +114,7 @@ void main() {
             ['results']) {
           expectResult.add(PaymentInProgressDto.fromJson(item).toAmount);
         }
-        expect(
-          result,
-          expectResult,
-        );
+        expect(result, expectResult);
       });
 
       test('Payment in progress Remote Datasource Test status code 200',

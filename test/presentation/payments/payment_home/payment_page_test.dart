@@ -30,6 +30,7 @@ import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/soa_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -39,7 +40,6 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
@@ -48,21 +48,24 @@ import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 void main() {
-  late ZPSoaBloc soaBloc;
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   late SalesOrgBloc salesOrgBlocMock;
   late NewPaymentBloc newPaymentBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late ZPAccountSummaryBloc accountSummaryBlocMock;
+  late MPAccountSummaryBloc mpAccountSummaryBloc;
   late AccountSummaryState accountSummaryState;
   late ZPPaymentInProgressBloc paymentInProgressBloc;
+  late MPPaymentInProgressBloc mpPaymentInProgressBloc;
+  late ZPSoaBloc soaBloc;
+  late MPSoaBloc mpSoaBloc;
   late PaymentInProgressState paymentInProgressState;
   late AvailableCreditsBloc availableCreditsBlocMock;
   late AvailableCreditFilterBloc availableCreditFilterBloc;
@@ -103,9 +106,7 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AutoRouteMock());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
-
     autoRouterMock = locator<AutoRouteMock>();
-
     accountSummaryState = AccountSummaryState.initial().copyWith(
       creditLimit: CreditLimit.empty().copyWith(
         creditLimit: StringValue('101'),
@@ -124,6 +125,7 @@ void main() {
   });
 
   setUp(() async {
+    reset(autoRouterMock);
     soaBloc = ZPSoaBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     authBlocMock = AuthBlocMock();
@@ -138,6 +140,9 @@ void main() {
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
     downloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
     soaFilterBlocMock = SoaFilterBlocMock();
+    mpSoaBloc = MPSoaBlocMock();
+    mpAccountSummaryBloc = MPAccountSummaryBlocMock();
+    mpPaymentInProgressBloc = MPPaymentInProgressBlocMock();
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
     when(() => customerCodeBlocMock.state)
@@ -168,6 +173,11 @@ void main() {
     when(() => autoRouterMock.currentPath).thenReturn(PaymentPageRoute.name);
     when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
     when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+    when(() => mpSoaBloc.state).thenReturn(SoaState.initial());
+    when(() => mpAccountSummaryBloc.state)
+        .thenReturn(AccountSummaryState.initial());
+    when(() => mpPaymentInProgressBloc.state)
+        .thenReturn(PaymentInProgressState.initial());
   });
 
   //////////////////////////////Finder//////////////////////////////////////
@@ -178,7 +188,7 @@ void main() {
 
   ///////////////////////////////////////////////////////////////////////
 
-  Widget getWidget() {
+  Widget getWidget({bool isMarketPlace = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
@@ -186,6 +196,9 @@ void main() {
       providers: [
         BlocProvider<ZPSoaBloc>(
           create: (context) => soaBloc,
+        ),
+        BlocProvider<MPSoaBloc>(
+          create: (context) => mpSoaBloc,
         ),
         BlocProvider<SalesOrgBloc>(
           create: (context) => salesOrgBlocMock,
@@ -202,11 +215,17 @@ void main() {
         BlocProvider<ZPPaymentInProgressBloc>(
           create: (context) => paymentInProgressBloc,
         ),
+        BlocProvider<MPPaymentInProgressBloc>(
+          create: (context) => mpPaymentInProgressBloc,
+        ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
         ),
         BlocProvider<ZPAccountSummaryBloc>(
           create: (context) => accountSummaryBlocMock,
+        ),
+        BlocProvider<MPAccountSummaryBloc>(
+          create: (context) => mpAccountSummaryBloc,
         ),
         BlocProvider<AvailableCreditsBloc>(
           create: (context) => availableCreditsBlocMock,
@@ -223,7 +242,7 @@ void main() {
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<SoaFilterBloc>(create: (context) => soaFilterBlocMock),
       ],
-      child: const PaymentPage(isMarketPlace: false),
+      child: PaymentPage(isMarketPlace: isMarketPlace),
     );
   }
 
@@ -238,8 +257,7 @@ void main() {
           salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
-      when(() => autoRouterMock.push(accountSummaryRoute))
-          .thenAnswer(
+      when(() => autoRouterMock.push(accountSummaryRoute)).thenAnswer(
         (_) => Future.value(),
       );
       when(() => autoRouterMock.push(soaRoute)).thenAnswer(
@@ -295,143 +313,219 @@ void main() {
       expect(statementOfAccountsMenu, findsOneWidget);
       expect(claimsMenu, findsOneWidget);
     });
+
+    testWidgets('Check payment option in marketplace payment', (tester) async {
+      final accountSummaryRoute = AccountSummaryRoute(isMarketPlace: true);
+      final soaRoute = StatementAccountsPageRoute(isMarketPlace: true);
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          user: fakeClientUserAccessMarketPlace,
+        ),
+      );
+      when(() => autoRouterMock.push(accountSummaryRoute)).thenAnswer(
+        (_) => Future.value(),
+      );
+      when(() => autoRouterMock.push(soaRoute))
+          .thenAnswer((_) => Future.value());
+
+      when(() => autoRouterMock.pushNamed('payments/payment_summary'))
+          .thenAnswer(
+        (_) => Future.value(),
+      );
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pump();
+
+      expect(
+        find.descendant(
+          of: paymentSummaryMenu,
+          matching: find.text('MP\nPayment summary'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: accountSummaryMenu,
+          matching: find.text('MP\nAccount summary'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: statementOfAccountsMenu,
+          matching: find.text('MP\nStatement of accounts'),
+        ),
+        findsOneWidget,
+      );
+      expect(claimsMenu, findsNothing);
+
+      await tester.tap(accountSummaryMenu);
+      await tester.pumpAndSettle();
+      verify(
+        () => autoRouterMock.push(accountSummaryRoute),
+      ).called(1);
+
+      await tester.tap(statementOfAccountsMenu);
+      await tester.pumpAndSettle();
+      verify(
+        () => soaFilterBlocMock.add(const SoaFilterEvent.initialized()),
+      ).called(1);
+      verify(
+        () => autoRouterMock.push(soaRoute),
+      ).called(1);
+
+      await tester.tap(paymentSummaryMenu);
+      verify(
+        () => autoRouterMock.pushNamed('payments/payment_summary'),
+      ).called(1);
+    });
   });
 
-  testWidgets('Updating Principle cut off', (WidgetTester tester) async {
-    whenListen(
-      newPaymentBlocMock,
-      Stream.fromIterable([
-        NewPaymentState.initial().copyWith(
-          isFetchingPrincipalCutoffs: true,
-        ),
-        NewPaymentState.initial().copyWith(),
-      ]),
-    );
-    when(
-      () => autoRouterMock.push(const NewPaymentPageRoute()),
-    ).thenAnswer((invocation) => Future.value());
-    await tester.pumpWidget(getWidget());
-    await tester.pumpAndSettle();
+  group('Principle cut off', () {
+    testWidgets('Updating Principle cut off', (tester) async {
+      whenListen(
+        newPaymentBlocMock,
+        Stream.fromIterable([
+          NewPaymentState.initial().copyWith(
+            isFetchingPrincipalCutoffs: true,
+          ),
+          NewPaymentState.initial().copyWith(),
+        ]),
+      );
+      when(
+        () => autoRouterMock.push(const NewPaymentPageRoute()),
+      ).thenAnswer((invocation) => Future.value());
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
 
-    verify(
-      () => outstandingInvoicesBlocMock.add(
-        OutstandingInvoicesEvent.fetch(
-          appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
-          searchKey: SearchKey.search(''),
+      verify(
+        () => outstandingInvoicesBlocMock.add(
+          OutstandingInvoicesEvent.fetch(
+            appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
+            searchKey: SearchKey.search(''),
+          ),
         ),
-      ),
-    ).called(1);
-    verify(
-      () => availableCreditsBlocMock.add(
-        AvailableCreditsEvent.fetch(
-          appliedFilter: AvailableCreditFilter.defaultFilter(),
-          searchKey: SearchKey.searchFilter(''),
+      ).called(1);
+      verify(
+        () => availableCreditsBlocMock.add(
+          AvailableCreditsEvent.fetch(
+            appliedFilter: AvailableCreditFilter.defaultFilter(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
         ),
-      ),
-    ).called(1);
-    verify(
-      () => availableCreditFilterBloc.add(
-        const AvailableCreditFilterEvent.initialize(),
-      ),
-    ).called(1);
+      ).called(1);
+      verify(
+        () => availableCreditFilterBloc.add(
+          const AvailableCreditFilterEvent.initialize(),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Updating Principle cut off to 0', (tester) async {
+      whenListen(
+        newPaymentBlocMock,
+        Stream.fromIterable([
+          NewPaymentState.initial().copyWith(
+            isFetchingPrincipalCutoffs: true,
+          ),
+          NewPaymentState.initial().copyWith(
+            principalCutoffs: const PrincipalCutoffs(total: 0),
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        ]),
+      );
+      when(
+        () => autoRouterMock.push(const NewPaymentPageRoute()),
+      ).thenAnswer((invocation) => Future.value());
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      verify(
+        () => outstandingInvoicesBlocMock.add(
+          OutstandingInvoicesEvent.fetch(
+            appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
+            searchKey: SearchKey.search(''),
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => availableCreditsBlocMock.add(
+          AvailableCreditsEvent.fetch(
+            appliedFilter: AvailableCreditFilter.defaultFilter(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Updating Principle cut off for Id and closed for payment',
+        (tester) async {
+      whenListen(
+        newPaymentBlocMock,
+        Stream.fromIterable([
+          NewPaymentState.initial().copyWith(
+            isFetchingPrincipalCutoffs: true,
+          ),
+          NewPaymentState.initial().copyWith(
+            principalCutoffs: const PrincipalCutoffs(total: 100),
+            salesOrganisation: fakeIDSalesOrganisation,
+          ),
+        ]),
+      );
+      when(
+        () => autoRouterMock.push(const NewPaymentPageRoute()),
+      ).thenAnswer((invocation) => Future.value());
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(
+        confirmBottomSheet,
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: confirmBottomSheet,
+          matching: find.text('We are closed for payment'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: confirmBottomSheet,
+          matching: find.text(
+            "We are unable to proceed with the payment during the month's end. Please try again the following month. Thank you",
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Updating Principle cut off error', (tester) async {
+      whenListen(
+        newPaymentBlocMock,
+        Stream.fromIterable([
+          NewPaymentState.initial().copyWith(
+            isFetchingPrincipalCutoffs: true,
+          ),
+          NewPaymentState.initial().copyWith(
+            failureOrSuccessOption: optionOf(const Left(fakeError)),
+          ),
+        ]),
+      );
+      when(
+        () => autoRouterMock.push(const NewPaymentPageRoute()),
+      ).thenAnswer((invocation) => Future.value());
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byType(CustomSnackBar),
+          matching: find.text(fakeError.failureMessage.message),
+        ),
+        findsOneWidget,
+      );
+    });
   });
 
-  testWidgets('Updating Principle cut off to 0', (WidgetTester tester) async {
-    whenListen(
-      newPaymentBlocMock,
-      Stream.fromIterable([
-        NewPaymentState.initial().copyWith(
-          isFetchingPrincipalCutoffs: true,
-        ),
-        NewPaymentState.initial().copyWith(
-          principalCutoffs: const PrincipalCutoffs(total: 0),
-          salesOrganisation: fakeIDSalesOrganisation,
-        ),
-      ]),
-    );
-    when(
-      () => autoRouterMock.push(const NewPaymentPageRoute()),
-    ).thenAnswer((invocation) => Future.value());
-    await tester.pumpWidget(getWidget());
-    await tester.pumpAndSettle();
-    verify(
-      () => outstandingInvoicesBlocMock.add(
-        OutstandingInvoicesEvent.fetch(
-          appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
-          searchKey: SearchKey.search(''),
-        ),
-      ),
-    ).called(1);
-    verify(
-      () => availableCreditsBlocMock.add(
-        AvailableCreditsEvent.fetch(
-          appliedFilter: AvailableCreditFilter.defaultFilter(),
-          searchKey: SearchKey.searchFilter(''),
-        ),
-      ),
-    ).called(1);
-  });
-
-  testWidgets('Updating Principle cut off for Id and closed for payment',
-      (WidgetTester tester) async {
-    whenListen(
-      newPaymentBlocMock,
-      Stream.fromIterable([
-        NewPaymentState.initial().copyWith(
-          isFetchingPrincipalCutoffs: true,
-        ),
-        NewPaymentState.initial().copyWith(
-          principalCutoffs: const PrincipalCutoffs(total: 100),
-          salesOrganisation: fakeIDSalesOrganisation,
-        ),
-      ]),
-    );
-    await tester.pumpWidget(getWidget());
-    await tester.pumpAndSettle();
-    expect(
-      confirmBottomSheet,
-      findsOneWidget,
-    );
-    expect(
-      find.descendant(
-        of: confirmBottomSheet,
-        matching: find.text('We are closed for payment'),
-      ),
-      findsOneWidget,
-    );
-    expect(
-      find.descendant(
-        of: confirmBottomSheet,
-        matching: find.text(
-          "We are unable to proceed with the payment during the month's end. Please try again the following month. Thank you",
-        ),
-      ),
-      findsOneWidget,
-    );
-  });
-
-  testWidgets('Updating Principle cut off error', (WidgetTester tester) async {
-    whenListen(
-      newPaymentBlocMock,
-      Stream.fromIterable([
-        NewPaymentState.initial().copyWith(
-          isFetchingPrincipalCutoffs: true,
-        ),
-        NewPaymentState.initial().copyWith(
-          failureOrSuccessOption: optionOf(const Left(fakeError)),
-        ),
-      ]),
-    );
-    await tester.pumpWidget(getWidget());
-    await tester.pumpAndSettle();
-    expect(
-      find.descendant(
-        of: find.byType(CustomSnackBar),
-        matching: find.text(fakeError.failureMessage.message),
-      ),
-      findsOneWidget,
-    );
-  });
   group('Payment Home Credit', () {
     testWidgets('Check Credit Widgets', (WidgetTester tester) async {
       await tester.pumpWidget(getWidget());
@@ -622,7 +716,28 @@ void main() {
         () => autoRouterMock.pushNamed('payments/payment_summary'),
       ).called(1);
     });
+
+    testWidgets('payment summary in MP payment', (WidgetTester tester) async {
+      when(() => autoRouterMock.pushNamed('payments/payment_summary'))
+          .thenAnswer(
+        (_) => Future.value(),
+      );
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pumpAndSettle();
+
+      final sectionTile =
+          find.byKey(WidgetKeys.sectionTileIcon('MP Payment summary'));
+      await tester.scrollUntilVisible(sectionTile, 200);
+      await tester.pump();
+      expect(sectionTile, findsOne);
+      await tester.tap(sectionTile);
+      await tester.pumpAndSettle();
+      verify(
+        () => autoRouterMock.pushNamed('payments/payment_summary'),
+      ).called(1);
+    });
   });
+
   group('Payment Home Statement of account', () {
     testWidgets('Check statement of account', (WidgetTester tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -697,30 +812,6 @@ void main() {
       );
     });
 
-    testWidgets('Check refresh', (WidgetTester tester) async {
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      expect(paymentHome, findsOneWidget);
-      expect(appBar, findsOneWidget);
-      expect(paymentHomeInProgressCard, findsOneWidget);
-      expect(inProgressAmount, findsOneWidget);
-      await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
-      await tester.pump();
-      expect(
-        find.byType(RefreshProgressIndicator),
-        findsOneWidget,
-      );
-      await tester.pumpAndSettle();
-      verify(
-        () => soaBloc.add(
-          SoaEvent.fetch(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrg: SalesOrg(''),
-          ),
-        ),
-      ).called(1);
-    });
-
     testWidgets('No Statement of Accounts payment option for ID',
         (WidgetTester tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -766,6 +857,32 @@ void main() {
         find.byKey(WidgetKeys.sectionTileIcon('Statement of accounts'.tr())),
       );
       await tester.pumpAndSettle();
+      verify(
+        () => autoRouterMock.push(soaRoute),
+      ).called(1);
+    });
+
+    testWidgets('soa in MP payment', (tester) async {
+      final soaRoute = StatementAccountsPageRoute(isMarketPlace: true);
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakePHSalesOrganisation,
+          salesOrgConfigs: fakePHSalesOrgConfigs,
+        ),
+      );
+      when(() => autoRouterMock.push(soaRoute))
+          .thenAnswer((_) => Future.value());
+
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pumpAndSettle();
+      final section =
+          find.byKey(WidgetKeys.sectionTileIcon('MP Statement of accounts'));
+      await tester.scrollUntilVisible(section, 400);
+      await tester.pump();
+      expect(section, findsOneWidget);
+      await tester.tap(section);
+      await tester.pumpAndSettle();
+
       verify(
         () => autoRouterMock.push(soaRoute),
       ).called(1);
@@ -906,50 +1023,99 @@ void main() {
     );
   });
 
-  testWidgets('Payment home check refresh', (WidgetTester tester) async {
-    await tester.pumpWidget(getWidget());
-    await tester.pumpAndSettle();
-    await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
-    await tester.pump();
-    expect(
-      find.byType(RefreshProgressIndicator),
-      findsOneWidget,
-    );
-    await tester.pumpAndSettle();
-    verify(
-      () => soaBloc.add(
-        SoaEvent.fetch(
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          salesOrg: SalesOrg(''),
+  group('Refresh', () {
+    testWidgets('ZP payment', (WidgetTester tester) async {
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
+      await tester.pump();
+      expect(
+        find.byType(RefreshProgressIndicator),
+        findsOneWidget,
+      );
+      await tester.pumpAndSettle();
+      verify(
+        () => soaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrg(''),
+          ),
         ),
-      ),
-    ).called(1);
+      ).called(1);
 
-    verify(
-      () => accountSummaryBlocMock.add(
-        AccountSummaryEvent.fetchCreditSummary(
-          custCode: '',
-          salesOrg: SalesOrg(''),
+      verify(
+        () => accountSummaryBlocMock.add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: '',
+            salesOrg: SalesOrg(''),
+          ),
         ),
-      ),
-    ).called(1);
+      ).called(1);
 
-    verify(
-      () => accountSummaryBlocMock.add(
-        AccountSummaryEvent.fetchInvoiceSummary(
-          custCode: '',
-          salesOrg: SalesOrg(''),
+      verify(
+        () => accountSummaryBlocMock.add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: '',
+            salesOrg: SalesOrg(''),
+          ),
         ),
-      ),
-    ).called(1);
+      ).called(1);
 
-    verify(
-      () => paymentInProgressBloc.add(
-        PaymentInProgressEvent.fetch(
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          salesOrganization: SalesOrganisation.empty(),
+      verify(
+        () => paymentInProgressBloc.add(
+          PaymentInProgressEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: SalesOrganisation.empty(),
+          ),
         ),
-      ),
-    ).called(1);
+      ).called(1);
+    });
+
+    testWidgets('MP payment', (WidgetTester tester) async {
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pumpAndSettle();
+      await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
+      await tester.pump();
+      expect(
+        find.byType(RefreshProgressIndicator),
+        findsOneWidget,
+      );
+      await tester.pumpAndSettle();
+      verify(
+        () => mpSoaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => mpAccountSummaryBloc.add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: '',
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => mpAccountSummaryBloc.add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: '',
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => mpPaymentInProgressBloc.add(
+          PaymentInProgressEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: SalesOrganisation.empty(),
+          ),
+        ),
+      ).called(1);
+    });
   });
 }

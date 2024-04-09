@@ -131,6 +131,8 @@ class WidgetKeys {
       Key('homeQuickAccessReturnsMenu');
   static const Key homeQuickAccessPaymentsMenu =
       Key('homeQuickAccessPaymentsMenu');
+  static const Key homeQuickAccessMPPaymentsMenu =
+      Key('homeQuickAccessMPPaymentsMenu');
   static const Key homeQuickAccessEZPointMenu =
       Key('homeQuickAccessEZPointMenu');
   static const Key homeQuickAccessLoyaltyMenu =
@@ -182,6 +184,7 @@ class WidgetKeys {
       Key('profileTileSectionCustomerInformation');
   static const Key profileTile = Key('profileTile');
   static const Key paymentsTile = Key('paymentsTile');
+  static const Key mpPaymentsTile = Key('mpPaymentsTile');
   static const Key eZPointTile = Key('eZPointTile');
   static const Key returnsTile = Key('returnsTile');
   static const Key returnReviewItemKey = Key('returnReviewItemKey');

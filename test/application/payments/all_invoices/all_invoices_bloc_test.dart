@@ -104,7 +104,7 @@ void main() {
       );
 
       blocTest(
-        'fetch -> invoices fetch success',
+        'fetch -> invoices fetch success for ZP',
         build: () => ZPAllInvoicesBloc(
           allCreditsAndInvoicesRepository: repository,
           config: config,
@@ -122,6 +122,45 @@ void main() {
           ).thenAnswer(
             (invocation) async => Right(creditAndInvoiceItemList),
           );
+        },
+        act: (AllInvoicesBloc bloc) => bloc.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
+          ),
+        ),
+        expect: () => [
+          AllInvoicesState.initial().copyWith(
+            isLoading: true,
+          ),
+          AllInvoicesState.initial().copyWith(
+            items: creditAndInvoiceItemList,
+            failureOrSuccessOption: optionOf(
+              Right(
+                creditAndInvoiceItemList,
+              ),
+            ),
+            canLoadMore: false,
+          ),
+        ],
+      );
+
+      blocTest(
+        'fetch -> invoices fetch success for MP',
+        build: () => MPAllInvoicesBloc(
+          allCreditsAndInvoicesRepository: repository,
+          config: config,
+        ),
+        setUp: () {
+          when(
+            () => repository.filterInvoices(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              filter: allInvoicesFilter,
+              offset: 0,
+              pageSize: config.pageSize,
+              isMarketPlace: true,
+            ),
+          ).thenAnswer((_) async => Right(creditAndInvoiceItemList));
         },
         act: (AllInvoicesBloc bloc) => bloc.add(
           AllInvoicesEvent.fetch(
@@ -196,7 +235,7 @@ void main() {
     );
 
     blocTest(
-      'fetch -> invoices load more success',
+      'fetch -> invoices load more success for ZP',
       build: () => ZPAllInvoicesBloc(
         allCreditsAndInvoicesRepository: repository,
         config: config,
@@ -218,6 +257,51 @@ void main() {
         ).thenAnswer(
           (invocation) async => Right(creditAndInvoiceItemList),
         );
+      },
+      act: (AllInvoicesBloc bloc) => bloc.add(
+        const AllInvoicesEvent.loadMore(),
+      ),
+      expect: () {
+        final newList = [
+          ...creditAndInvoiceItemList,
+          ...creditAndInvoiceItemList,
+        ];
+        return [
+          AllInvoicesState.initial().copyWith(
+            items: creditAndInvoiceItemList,
+            appliedFilter: allInvoicesFilter,
+            isLoading: true,
+          ),
+          AllInvoicesState.initial().copyWith(
+            appliedFilter: allInvoicesFilter,
+            items: newList,
+            canLoadMore: false,
+          ),
+        ];
+      },
+    );
+
+    blocTest(
+      'fetch -> invoices load more success for MP',
+      build: () => ZPAllInvoicesBloc(
+        allCreditsAndInvoicesRepository: repository,
+        config: config,
+      ),
+      seed: () => AllInvoicesState.initial().copyWith(
+        items: creditAndInvoiceItemList,
+        appliedFilter: allInvoicesFilter,
+      ),
+      setUp: () {
+        when(
+          () => repository.filterInvoices(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            filter: allInvoicesFilter,
+            offset: creditAndInvoiceItemList.length,
+            pageSize: config.pageSize,
+            isMarketPlace: false,
+          ),
+        ).thenAnswer((_) async => Right(creditAndInvoiceItemList));
       },
       act: (AllInvoicesBloc bloc) => bloc.add(
         const AllInvoicesEvent.loadMore(),

@@ -6,11 +6,11 @@ import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.d
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/payments/full_summary/widgets/filter_bottom_sheet.dart';
 import 'package:file/file.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -37,14 +37,16 @@ import '../../../utils/widget_utils.dart';
 void main() {
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   late ZPAllCreditsBloc allCreditsBlocMock;
+  late MPAllCreditsBloc mpAllCreditsBlocMock;
   late ZPAllInvoicesBloc allInvoicesBlocMock;
+  late MPAllInvoicesBloc mpAllInvoicesBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
   late ZPFullSummaryBloc fullSummaryBlocMock;
+  late MPFullSummaryBloc mpFullSummaryBlocMock;
   late FullSummaryFilterBloc fullSummaryFilterBlocMock;
   late DownloadPaymentAttachmentsBloc mockDownloadPaymentAttachmentsBloc;
   final allCreditsFilter = AllCreditsFilter(
@@ -74,7 +76,9 @@ void main() {
     authBlocMock = AuthBlocMock();
     autoRouterMock = locator<AppRouter>();
     allCreditsBlocMock = ZPAllCreditsBlocMock();
+    mpAllCreditsBlocMock = MPAllCreditsBlocMock();
     allInvoicesBlocMock = ZPAllInvoicesBlocMock();
+    mpAllInvoicesBlocMock = MPAllInvoicesBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
@@ -82,11 +86,14 @@ void main() {
     mockDownloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
     fullSummaryBlocMock = ZPFullSummaryBlocMock();
+    mpFullSummaryBlocMock = MPFullSummaryBlocMock();
     fullSummaryFilterBlocMock = FullSummaryFilterBlocMock();
   });
 
   setUp(() async {
     when(() => allInvoicesBlocMock.state)
+        .thenReturn(AllInvoicesState.initial());
+    when(() => mpAllInvoicesBlocMock.state)
         .thenReturn(AllInvoicesState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
@@ -94,6 +101,8 @@ void main() {
         .thenReturn(AnnouncementState.initial());
     when(() => allCreditsFilterBlocMock.state)
         .thenReturn(AllCreditsFilterState.initial());
+    when(() => mpAllCreditsBlocMock.state)
+        .thenReturn(AllCreditsState.initial());
     when(() => mockDownloadPaymentAttachmentsBloc.state)
         .thenReturn(DownloadPaymentAttachmentsState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
@@ -104,6 +113,8 @@ void main() {
         .thenReturn(AllInvoicesFilterState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => fullSummaryBlocMock.state)
+        .thenReturn(FullSummaryState.initial());
+    when(() => mpFullSummaryBlocMock.state)
         .thenReturn(FullSummaryState.initial());
     when(() => fullSummaryFilterBlocMock.state)
         .thenReturn(FullSummaryFilterState.initial());
@@ -122,7 +133,7 @@ void main() {
   final fullSummaryTab = find.byKey(WidgetKeys.summaryTab);
   //////////////////////////////////////////////////////////////////////////////
 
-  Widget getWidget() {
+  Widget getWidget({bool isMarketPlace = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
@@ -134,11 +145,17 @@ void main() {
         BlocProvider<ZPAllCreditsBloc>(
           create: (context) => allCreditsBlocMock,
         ),
+        BlocProvider<MPAllCreditsBloc>(
+          create: (context) => mpAllCreditsBlocMock,
+        ),
         BlocProvider<AllCreditsFilterBloc>(
           create: (context) => allCreditsFilterBlocMock,
         ),
         BlocProvider<ZPAllInvoicesBloc>(
           create: (context) => allInvoicesBlocMock,
+        ),
+        BlocProvider<MPAllInvoicesBloc>(
+          create: (context) => mpAllInvoicesBlocMock,
         ),
         BlocProvider<AnnouncementBloc>(
           create: (context) => announcementBlocMock,
@@ -156,11 +173,14 @@ void main() {
         BlocProvider<ZPFullSummaryBloc>(
           create: (context) => fullSummaryBlocMock,
         ),
+        BlocProvider<MPFullSummaryBloc>(
+          create: (context) => mpFullSummaryBlocMock,
+        ),
         BlocProvider<FullSummaryFilterBloc>(
           create: (context) => fullSummaryFilterBlocMock,
         ),
       ],
-      child: const AccountSummary(isMarketPlace: false),
+      child: AccountSummary(isMarketPlace: isMarketPlace),
     );
   }
 
@@ -610,7 +630,7 @@ void main() {
 
     testWidgets(
       ' -> Find Account Suspended Banner when Customer Code is blocked',
-      (WidgetTester tester) async {
+      (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             customerCodeInfo: fakeBlockedCustomerCodeInfo,
@@ -628,7 +648,7 @@ void main() {
 
     testWidgets(
       ' -> Find Account Suspended Banner when ship to Code is blocked',
-      (WidgetTester tester) async {
+      (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             shipToInfo: fakeBlockedShipToInfo,
@@ -643,5 +663,69 @@ void main() {
         expect(customerBlockedBanner, findsOneWidget);
       },
     );
+
+    group('=> Test search bar hint text -', () {
+      testWidgets('ZP payment', (tester) async {
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        expect(
+          find.descendant(
+            of: accountSummarySearchBar,
+            matching: find.text('Search by full invoice number'),
+          ),
+          findsOne,
+        );
+        await tester.tap(creditsTab);
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: accountSummarySearchBar,
+            matching: find.text('Search by full credit note number'),
+          ),
+          findsOne,
+        );
+        await tester.tap(fullSummaryTab);
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: accountSummarySearchBar,
+            matching: find.text('Search by invoice/credit number'),
+          ),
+          findsOne,
+        );
+      });
+
+      testWidgets('MP payment', (tester) async {
+        await tester.pumpWidget(getWidget(isMarketPlace: true));
+        await tester.pump();
+
+        expect(
+          find.descendant(
+            of: accountSummarySearchBar,
+            matching: find.text('Search by MP full invoice number'),
+          ),
+          findsOne,
+        );
+        await tester.tap(creditsTab);
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: accountSummarySearchBar,
+            matching: find.text('Search by MP full credit note number'),
+          ),
+          findsOne,
+        );
+        await tester.tap(fullSummaryTab);
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: accountSummarySearchBar,
+            matching: find.text('Search by MP full invoice/credit number'),
+          ),
+          findsOne,
+        );
+      });
+    });
   });
 }
