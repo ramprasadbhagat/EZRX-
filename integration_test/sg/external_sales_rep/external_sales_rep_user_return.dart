@@ -185,7 +185,7 @@ void main() {
       toDate: toDateToNextForStep2,
     );
     await newReturnRobot.tapApply();
-    await newReturnRobot.tapZerothItem();
+    await newReturnRobot.tapItemAt(index: 0);
     await newReturnRobot.tapNextButton();
   }
 

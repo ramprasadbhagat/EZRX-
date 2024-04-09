@@ -167,6 +167,7 @@ class SecurityRobot extends CommonRobot {
 
   Future<void> fillToNewPasswordField(String password) async {
     await tester.tap(newPasswordTextField);
+    await tester.pumpAndSettle();
     await tester.enterText(newPasswordTextField, password);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();

@@ -212,11 +212,6 @@ class NewReturnStep1Robot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapZerothItem() async {
-    await tester.tap(item.at(0));
-    await tester.pumpAndSettle();
-  }
-
   Future<void> tapNextButton() async {
     await tester.tap(nextButton);
     await tester.pumpAndSettle();

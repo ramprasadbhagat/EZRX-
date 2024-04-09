@@ -2032,11 +2032,15 @@ void main() {
         await goToPaymentStep2Page(tester);
 
         await filterTheDateToGetItem();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+        newPaymentStep2Robot.verifyAtLeastOneItemFound(
+          isVn: true,
+        );
         await commonRobot.searchWithKeyboardAction(noResultCreditSearchKeyword);
         newPaymentStep2Robot.verifyNoItemFound();
         await commonRobot.tapClearSearch();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+        newPaymentStep2Robot.verifyAtLeastOneItemFound(
+          isVn: true,
+        );
       });
 
       testWidgets(
@@ -2045,7 +2049,9 @@ void main() {
         await goToPaymentStep2Page(tester);
 
         await filterTheDateToGetItem();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+        newPaymentStep2Robot.verifyAtLeastOneItemFound(
+          isVn: true,
+        );
         await commonRobot.searchWithKeyboardAction(noResultCreditSearchKeyword);
         newPaymentStep2Robot.verifyNoItemFound();
       });
@@ -2066,7 +2072,9 @@ void main() {
         await newPaymentStep2Robot.verifyOutOfRangeError();
         await commonRobot.cancelDateRangePicker();
         await newPaymentStep2Robot.tapResetFilter();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+        newPaymentStep2Robot.verifyAtLeastOneItemFound(
+          isVn: true,
+        );
       });
 
       testWidgets(
@@ -2083,10 +2091,14 @@ void main() {
           dateStringFormat: dateTimeFormat,
         );
         await newPaymentStep2Robot.tapApplyFilter();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+        newPaymentStep2Robot.verifyAtLeastOneItemFound(
+          isVn: true,
+        );
         await newPaymentStep2Robot.tapFilter();
         await newPaymentStep2Robot.tapResetFilter();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+        newPaymentStep2Robot.verifyAtLeastOneItemFound(
+          isVn: true,
+        );
       });
 
       testWidgets(
@@ -2111,7 +2123,9 @@ void main() {
         await goToPaymentStep2Page(tester);
 
         await filterTheDateToGetItem();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+        newPaymentStep2Robot.verifyAtLeastOneItemFound(
+          isVn: true,
+        );
         newPaymentStep2Robot.collectTheFirstItem();
         await commonRobot.pullToRefresh();
         await filterTheDateToGetItem();

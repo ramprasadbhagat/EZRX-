@@ -101,6 +101,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                               .textTheme
                               .labelLarge
                               ?.copyWith(color: ZPColors.neutralsBlack),
+                          key: WidgetKeys.viewByOrderOrderItems,
                         ),
                       ),
                       if (state.orderHistoryDetails.orderHistoryDetailsOrderItem

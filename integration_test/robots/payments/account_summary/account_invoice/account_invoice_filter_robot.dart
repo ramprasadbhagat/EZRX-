@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common/common_robot.dart';
+import '../../../common/extension.dart';
 
 class AccountInvoiceFilterRobot extends CommonRobot {
   AccountInvoiceFilterRobot(WidgetTester tester) : super(tester);
@@ -26,7 +27,14 @@ class AccountInvoiceFilterRobot extends CommonRobot {
 
   void verifyDefaultFilterApplied() {
     verifyNoStatusFilterApplied();
-    verifyDocumentDateRangeApplied('', '');
+    verifyDocumentDateRangeApplied(
+      DateTime.now()
+          .subtract(
+            const Duration(days: 90),
+          )
+          .displayDate,
+      DateTime.now().displayDate,
+    );
     verifyDueDateRangeApplied('', '');
     verifyAmountRangeApplied('', '');
     verifyResetButton();

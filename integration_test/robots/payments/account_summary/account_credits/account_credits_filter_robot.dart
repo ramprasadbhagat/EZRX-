@@ -3,6 +3,8 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../common/extension.dart';
+
 class AccountCreditsFilterRobot {
   final WidgetTester _tester;
 
@@ -26,8 +28,12 @@ class AccountCreditsFilterRobot {
 
   void verifyDefaultFilterApplied() {
     verifyDateRangeFilterApplied(
-      fromDate: '',
-      toDate: '',
+      fromDate: DateTime.now()
+          .subtract(
+            const Duration(days: 90),
+          )
+          .displayDate,
+      toDate: DateTime.now().displayDate,
     );
     verifyAmountRangeFilterApplied(fromAmount: '', toAmount: '');
     verifyStatusFilter(_openStatus, false);

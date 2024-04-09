@@ -57,6 +57,9 @@ class ProductItem with _$ProductItem {
         productItemXp: ProductItemXp.empty(),
         materialNumber: MaterialNumber(''),
       );
+
+  bool get isProductDetailsAvailable =>
+      promotionMaterial.isNotEmpty || productItemXp != ProductItemXp.empty();
 }
 
 @freezed

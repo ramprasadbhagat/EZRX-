@@ -100,6 +100,8 @@ class ViewByOrdersDetailRobot extends CommonRobot {
 
   Future<void> dragToVerifySummary() =>
       scrollEnsureFinderVisible(find.byType(OrderSummarySection));
+  Future<void> dragToVerifyItems() =>
+      scrollEnsureFinderVisible(find.byKey(WidgetKeys.viewByOrderOrderItems));
 
   void verifySubTotal(String value) {
     final subTotalWidget = find.byKey(WidgetKeys.viewByOrderSubtotalKey);

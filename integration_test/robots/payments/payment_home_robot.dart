@@ -62,13 +62,23 @@ class PaymentHomeRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapToAllObscureButton() async {
-    await tester.tap(paymentHomeObscuredAmount.first);
-    await tester.pump();
-    await tester.tap(paymentHomeObscuredAmount.at(1));
-    await tester.pump();
-    await tester.tap(paymentHomeObscuredAmount.at(2));
-    await tester.pumpAndSettle();
+  Future<void> tapToAllObscureButton({
+    bool tapOutstandingSection = true,
+    bool tapCreditSection = true,
+    bool tapPaymentSummarySection = true,
+  }) async {
+    if (tapOutstandingSection) {
+      await tester.tap(paymentHomeObscuredAmount.first);
+      await tester.pump();
+    }
+    if (tapCreditSection) {
+      await tester.tap(paymentHomeObscuredAmount.at(1));
+      await tester.pump();
+    }
+    if (tapPaymentSummarySection) {
+      await tester.tap(paymentHomeObscuredAmount.last);
+      await tester.pumpAndSettle();
+    }
   }
 
   Future<void> tapToAllObscureButtonForID() async {
@@ -103,14 +113,26 @@ class PaymentHomeRobot extends CommonRobot {
   }
 
   void verifyPaymentHomeOptionMenu({
-    bool isPH = false,
+    bool verifyClaimsMenu = false,
+    bool verifyStatementOfAccountsMenu = true,
+    bool verifyPaymentSummaryMenu = true,
+    bool verifyAccountSummaryMenu = true,
   }) {
-    expect(find.byKey(WidgetKeys.accountSummaryMenu), findsOneWidget);
-    expect(find.byKey(WidgetKeys.paymentSummaryMenu), findsOneWidget);
-    expect(find.byKey(WidgetKeys.statementOfAccountsMenu), findsOneWidget);
+    expect(
+      find.byKey(WidgetKeys.accountSummaryMenu),
+      verifyAccountSummaryMenu ? findsOneWidget : findsNothing,
+    );
+    expect(
+      find.byKey(WidgetKeys.paymentSummaryMenu),
+      verifyPaymentSummaryMenu ? findsOneWidget : findsNothing,
+    );
+    expect(
+      find.byKey(WidgetKeys.statementOfAccountsMenu),
+      verifyStatementOfAccountsMenu ? findsOneWidget : findsNothing,
+    );
     expect(
       find.byKey(WidgetKeys.claimsMenu),
-      isPH ? findsOneWidget : findsNothing,
+      verifyClaimsMenu ? findsOneWidget : findsNothing,
     );
   }
 

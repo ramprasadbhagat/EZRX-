@@ -3,6 +3,8 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../common/extension.dart';
+
 class AccountSummaryTabFilterRobot {
   final WidgetTester _tester;
   AccountSummaryTabFilterRobot(this._tester);
@@ -29,7 +31,14 @@ class AccountSummaryTabFilterRobot {
 
   void verifyDefaultFilterApplied() {
     verifyNoStatusFilterApplied();
-    verifyDocumentDateRangeApplied('', '');
+    verifyDocumentDateRangeApplied(
+      DateTime.now()
+          .subtract(
+            const Duration(days: 90),
+          )
+          .displayDate,
+      DateTime.now().displayDate,
+    );
     verifyDueDateRangeApplied('', '');
     verifyResetButton();
     verifyApplyButton();

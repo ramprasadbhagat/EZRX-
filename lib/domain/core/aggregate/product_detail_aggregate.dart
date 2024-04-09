@@ -25,7 +25,7 @@ class ProductDetailAggregate with _$ProductDetailAggregate {
       );
 
   bool get productDetailsAvailable =>
-      productItem != ProductItem.empty() ||
+      productItem.isProductDetailsAvailable ||
       materialInfo.productImages.description.isValid();
 
   bool isRemainingQuantityExceeded(int zdp5RemainingQuota) =>

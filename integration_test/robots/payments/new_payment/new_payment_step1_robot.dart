@@ -189,7 +189,7 @@ class NewPaymentStep1Robot {
         DateTime(
           currentTime.year,
           currentTime.month,
-          currentTime.day - 29,
+          currentTime.day - 90,
         ).displayDate,
       ),
       findsOneWidget,

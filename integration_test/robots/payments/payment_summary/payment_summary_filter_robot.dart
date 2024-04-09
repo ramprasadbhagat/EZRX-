@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -28,11 +29,19 @@ class PaymentSummaryFilterRobot {
     'Cancelled',
   ];
 
-  void verifyDefaultFilterApplied(List<String> statuses) {
+  void verifyDefaultFilterApplied(
+    List<String> statuses,
+  ) {
     verifyRadioListTileFilter(statuses);
     verifyDateRangeFilterApplied(
-      fromDate: '',
-      toDate: '',
+      fromDate: getDateStringByDateTime(
+        DateTime.now().subtract(
+          const Duration(days: 90),
+        ),
+      ),
+      toDate: getDateStringByDateTime(
+        DateTime.now(),
+      ),
     );
     verifyAmountRangeFilterApplied(
       fromAmount: '',

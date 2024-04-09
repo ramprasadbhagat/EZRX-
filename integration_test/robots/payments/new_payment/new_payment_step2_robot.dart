@@ -85,7 +85,7 @@ class NewPaymentStep2Robot {
         DateTime(
           DateTime.now().year,
           DateTime.now().month,
-          DateTime.now().day - 29,
+          DateTime.now().day - 90,
         ).displayDate,
       ),
       findsWidgets,
