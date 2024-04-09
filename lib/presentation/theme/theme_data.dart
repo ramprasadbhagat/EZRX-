@@ -454,8 +454,16 @@ ListTileThemeData _listTileTheme() {
 }
 
 DatePickerThemeData _datePickerTheme() {
-  return const DatePickerThemeData(
-    dayForegroundColor: MaterialStatePropertyAll(ZPColors.white),
+  return DatePickerThemeData(
+    dayForegroundColor: MaterialStateProperty.resolveWith((states) {
+      if (states.contains(MaterialState.selected)) {
+        return ZPColors.white;
+      } else if (states.contains(MaterialState.disabled)) {
+        return ZPColors.darkGray;
+      } else {
+        return ZPColors.black;
+      }
+    }),
     rangeSelectionBackgroundColor: ZPColors.extraLightGray,
     surfaceTintColor: ZPColors.extraLightGray,
   );
