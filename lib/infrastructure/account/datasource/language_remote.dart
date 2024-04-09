@@ -43,7 +43,6 @@ class LanguageRemoteDataSource {
         'query': queryData,
         'variables': variables,
       }),
-      apiEndpoint: 'updateLanguageAndHoliday',
     );
     _exceptionChecker(res: res);
 

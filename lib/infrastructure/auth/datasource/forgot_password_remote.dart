@@ -40,7 +40,6 @@ class ForgotPasswordRemoteDataSource {
             'variables': variable,
           },
         ),
-        apiEndpoint: 'requestResetPasswordLink',
       );
 
       _exceptionChecker(res: res);

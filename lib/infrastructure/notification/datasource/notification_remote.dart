@@ -45,7 +45,6 @@ class NotificationRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'getClevertapNotifications',
       );
 
       _notificationExceptionChecker(res: res);
@@ -66,7 +65,6 @@ class NotificationRemoteDataSource {
         data: jsonEncode({
           'query': queryData,
         }),
-        apiEndpoint: 'clearAllClevertapNotifications',
       );
 
       _notificationExceptionChecker(res: res);
@@ -88,7 +86,6 @@ class NotificationRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'changeClevertapNotificationStatus',
       );
 
       _notificationExceptionChecker(res: res);

@@ -43,7 +43,6 @@ class ViewByItemRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'orderHistoryFetchByItems',
       );
       _orderHistoryExceptionChecker(res: res);
 

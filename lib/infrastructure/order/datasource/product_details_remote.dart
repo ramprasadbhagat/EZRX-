@@ -97,7 +97,6 @@ class ProductDetailRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'GetAllProductsRequest',
       );
       _exceptionChecker(res: res);
       final finalData = makeResponseCamelCase(

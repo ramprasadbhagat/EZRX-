@@ -32,7 +32,6 @@ class HttpService {
     required String url,
     dynamic data = const {}, // can be Map<String, dynamic> or FormData
     ResponseType responseType = ResponseType.json,
-    String apiEndpoint = '',
     bool overrideBaseUrl = false,
     String cacheControl = '',
     Map<String, dynamic> headers = const <String, dynamic>{},
@@ -42,7 +41,6 @@ class HttpService {
 
       _dio.options.method = method;
       _dio.options.responseType = responseType;
-      _dio.options.headers['apiEndpoint'] = apiEndpoint;
       _dio.options.headers['cache-control'] = cacheControl;
       for (final headerInfo in headers.entries) {
         _dio.options.headers[headerInfo.key] = headerInfo.value;

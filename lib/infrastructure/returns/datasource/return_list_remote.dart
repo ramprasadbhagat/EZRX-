@@ -47,7 +47,6 @@ class ReturnListRemoteDataSource {
             },
           },
         ),
-        apiEndpoint: 'requestsByItems',
       );
       _returnRequestTypeCodeExceptionChecker(res: res);
 
@@ -90,7 +89,6 @@ class ReturnListRemoteDataSource {
             },
           },
         ),
-        apiEndpoint: 'requestsByUserV3',
       );
       _returnRequestTypeCodeExceptionChecker(res: res);
 

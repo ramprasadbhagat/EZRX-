@@ -41,7 +41,6 @@ class ChangePasswordRemoteDataSource {
             },
           },
         ),
-        apiEndpoint: 'changePassword',
       );
 
       _exceptionChecker(
@@ -72,7 +71,6 @@ class ChangePasswordRemoteDataSource {
             },
           },
         ),
-        apiEndpoint: 'resetPasswordV3',
       );
 
       _exceptionChecker(

@@ -47,7 +47,6 @@ class PaymentTermsRemoteDataSource {
           'query': queryAvailablePaymentTerms,
           'variables': availablePaymentTermsVariables,
         }),
-        apiEndpoint: 'availablePaymentTerm',
       );
 
       _paymentTermsExceptionChecker(res: resAvailablePaymentTerms);

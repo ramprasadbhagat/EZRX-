@@ -45,7 +45,6 @@ class PriceOverrideRemoteDataSource {
           'query': queryMaterialFilters,
           'variables': inputVariables,
         }),
-        apiEndpoint: 'price',
       );
 
       _priceOverrideExceptionChecker(res: priceList);

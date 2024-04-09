@@ -102,7 +102,6 @@ class NewPaymentRemoteDataSource {
           },
         },
       ),
-      apiEndpoint: 'addCustomerPayment',
     );
     _exceptionChecker(property: 'addCustomerPayment', res: res);
 
@@ -166,7 +165,6 @@ class NewPaymentRemoteDataSource {
           },
         },
       ),
-      apiEndpoint: 'updatePaymentGatewayMutation',
     );
     _exceptionChecker(property: 'updatePaymentGateway', res: res);
   }
@@ -271,7 +269,6 @@ class NewPaymentRemoteDataSource {
           },
         },
       ),
-      apiEndpoint: 'availablePaymentMethods',
     );
     _exceptionChecker(property: 'availablePaymentMethods', res: res);
 

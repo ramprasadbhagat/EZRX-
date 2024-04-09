@@ -103,7 +103,6 @@ class MaterialListRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'GetAllProductsRequest',
       );
       _materialListExceptionChecker(res: res);
       final finalData =
@@ -147,7 +146,6 @@ class MaterialListRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'GetAllProductsRequest',
       );
       _materialListExceptionChecker(res: res);
       final finalData =
@@ -188,7 +186,6 @@ class MaterialListRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'GetProductDetails',
       );
       _materialListExceptionChecker(res: res);
       final finalData = makeResponseCamelCase(

@@ -66,7 +66,6 @@ class ViewByOrderRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'orderHistoryV3',
       );
 
       _orderHistoryExceptionChecker(res: res);

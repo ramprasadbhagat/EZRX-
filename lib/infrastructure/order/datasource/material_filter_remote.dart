@@ -49,7 +49,6 @@ class MaterialFilterRemoteDataSource {
           'query': queryMaterialFilters,
           'variables': materialFilterInputVariables,
         }),
-        apiEndpoint: 'GetFilterListRequest',
       );
 
       _materialFilterExceptionChecker(res: resMaterialFilters);

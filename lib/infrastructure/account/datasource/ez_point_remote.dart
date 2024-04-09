@@ -34,7 +34,6 @@ class EZPointRemoteDataSource {
         'query': queryData,
         'variables': variables,
       }),
-      apiEndpoint: 'getEzPointToken',
     );
     _exceptionChecker(res: res);
 

@@ -41,7 +41,6 @@ class SalesOrgRemoteDataSource {
             },
           },
         }),
-        apiEndpoint: 'salesOrgConfigs',
       );
 
       _salesOrgExceptionChecker(res: res);

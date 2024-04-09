@@ -28,7 +28,6 @@ class UpdateSalesOrgRemoteDataSource {
           'query': updateSalesOrgQueryMutation.getUpdateSalesOrgConfigsQuery(),
           'variables': {'input': variableData},
         }),
-        apiEndpoint: 'updateSalesOrgConfig',
       );
 
       _updateSalesOrgExceptionChecker(res: res);

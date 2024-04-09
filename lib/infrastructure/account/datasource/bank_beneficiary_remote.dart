@@ -39,7 +39,6 @@ class BankBeneficiaryRemoteDataSource {
             },
           },
         ),
-        apiEndpoint: 'bankBeneficiary',
       );
       _bankBeneficiaryExceptionChecker(res: res);
 

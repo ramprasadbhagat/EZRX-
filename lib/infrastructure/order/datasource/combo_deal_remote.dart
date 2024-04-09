@@ -46,7 +46,6 @@ class ComboDealRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'price',
       );
       _comboDealExceptionChecker(res: res);
       final combos = res.data['data']['comboDealForMaterials'];
@@ -79,7 +78,6 @@ class ComboDealRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'price',
       );
       _comboDealExceptionChecker(res: res);
       final combo = res.data['data']['comboDealForPrincMatGrp'];

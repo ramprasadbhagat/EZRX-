@@ -27,7 +27,6 @@ class NotificationSettingsRemoteDataSource {
       data: jsonEncode({
         'query': queryData,
       }),
-      apiEndpoint: 'getNotificationSettings',
     );
     _exceptionChecker(res: res);
 
@@ -59,7 +58,6 @@ class NotificationSettingsRemoteDataSource {
         'query': queryData,
         'variables': variables,
       }),
-      apiEndpoint: 'setNotificationSettings',
     );
     _exceptionChecker(res: res);
 

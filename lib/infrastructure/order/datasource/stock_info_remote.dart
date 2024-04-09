@@ -41,7 +41,6 @@ class StockInfoRemoteDataSource {
             },
           },
         }),
-        apiEndpoint: 'getStockInformationLists',
       );
 
       _exceptionChecker(res: res);

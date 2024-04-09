@@ -44,7 +44,6 @@ class FavouriteRemoteDataSource {
               'variables': variables,
             },
           ),
-          apiEndpoint: 'addFavouriteMaterial',
         );
         _exceptionChecker(res: res);
         final finalData = res.data['data'];
@@ -72,7 +71,6 @@ class FavouriteRemoteDataSource {
               'variables': variables,
             },
           ),
-          apiEndpoint: 'removeFavouriteMaterial',
         );
         _exceptionChecker(res: res);
         final finalData = res.data['data'];
@@ -100,7 +98,6 @@ class FavouriteRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'materialDetails',
       );
       _exceptionChecker(res: res);
       final finalData = res.data['data']['materialDetails'];

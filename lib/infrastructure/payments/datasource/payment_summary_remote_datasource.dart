@@ -78,7 +78,6 @@ class PaymentSummaryRemoteDataSource {
             },
           },
         ),
-        apiEndpoint: 'listTransactions',
       );
       _exceptionChecker(response: response, property: 'listTransactions');
 

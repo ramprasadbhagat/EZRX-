@@ -42,7 +42,6 @@ class AdminPoAttachmentRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'getPOAttachmentQuery',
       );
       _getPoAttachmentExceptionChecker(res: res);
       final finalData = res.data['data']['getPOAttachment'];

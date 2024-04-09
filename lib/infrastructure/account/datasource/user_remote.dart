@@ -42,7 +42,6 @@ class UserRemoteDataSource {
           ),
           'variables': {'id': userId, 'ignoreCustomerCode': true},
         }),
-        apiEndpoint: 'userQuery',
       );
       _userExceptionChecker(res: res);
 
@@ -74,7 +73,6 @@ class UserRemoteDataSource {
             'isAcceptTC': true,
           },
         }),
-        apiEndpoint: 'updateAcceptanceStatus',
       );
       _userExceptionChecker(res: res);
 
@@ -91,7 +89,6 @@ class UserRemoteDataSource {
           'query': userQueryMutation.updateMarketPlaceTnCAcceptance(),
           'variables': {'isAcceptMPTC': value},
         }),
-        apiEndpoint: 'updateAcceptanceStatus',
       );
       _userExceptionChecker(res: res);
 
@@ -125,7 +122,6 @@ class UserRemoteDataSource {
               'variables': data,
             },
           ),
-          apiEndpoint: 'updateUserMutation',
         );
         _userExceptionChecker(res: res);
 

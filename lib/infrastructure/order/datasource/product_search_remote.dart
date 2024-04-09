@@ -67,7 +67,6 @@ class ProductSearchRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'GetAllProductsRequest',
       );
       _materialListExceptionChecker(res: res);
       final finalData =

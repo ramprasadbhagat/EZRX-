@@ -39,7 +39,6 @@ class OrderRemoteDataSource {
           'query': queryMutation.submitOrder(enableMarketPlace),
           'variables': variables,
         }),
-        apiEndpoint: 'submitOrderMutation',
       );
       _orderExceptionChecker(res: res);
       if (res.data['data']['submitOrder'] == null) {

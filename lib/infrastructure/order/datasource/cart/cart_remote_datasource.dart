@@ -133,7 +133,6 @@ class CartRemoteDataSource {
             'variables': variables,
           },
         ),
-        apiEndpoint: 'UpsertCartItems',
       );
 
       _exceptionChecker(res: res);
@@ -170,7 +169,6 @@ class CartRemoteDataSource {
             'variables': variables,
           },
         ),
-        apiEndpoint: 'aplSimulateOrder',
       );
 
       _exceptionChecker(res: res);
@@ -205,7 +203,6 @@ class CartRemoteDataSource {
             'variables': variables,
           },
         ),
-        apiEndpoint: 'AplGetTotalPrice',
       );
 
       _exceptionChecker(res: res);

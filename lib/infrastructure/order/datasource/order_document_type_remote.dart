@@ -35,7 +35,6 @@ class OrderDocumentTypeRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'orderDocumentType',
       );
 
       _orderDocumentTypeChecker(res: res);

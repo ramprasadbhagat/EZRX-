@@ -43,7 +43,6 @@ class PaymentCustomerInformationRemoteDataSource {
           'query': paymentCustomerInformationQuery,
           'variables': variables,
         }),
-        apiEndpoint: 'customerInformation',
       );
 
       _paymentCustomerInformationExceptionChecker(res: finalData);

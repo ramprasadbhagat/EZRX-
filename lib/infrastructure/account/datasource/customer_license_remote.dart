@@ -44,7 +44,6 @@ class CustomerLicenseRemoteDataSource {
         'query': queryData,
         'variables': variables,
       }),
-      apiEndpoint: 'customerLicenses',
     );
     _exceptionChecker(res: res);
 
@@ -54,7 +53,6 @@ class CustomerLicenseRemoteDataSource {
         .map((e) => CustomerLicenseDto.fromJson(e).toDomain)
         .toList();
   }
-
 
   void _exceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {

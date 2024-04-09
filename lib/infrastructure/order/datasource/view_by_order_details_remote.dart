@@ -54,7 +54,6 @@ class ViewByOrderDetailsRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'orderDetails',
       );
 
       _orderHistoryDetailsExceptionChecker(res: res);
@@ -98,7 +97,6 @@ class ViewByOrderDetailsRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'orderDetails',
       );
 
       _orderHistoryDetailsExceptionChecker(res: res);
