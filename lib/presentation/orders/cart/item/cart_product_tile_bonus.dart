@@ -48,7 +48,8 @@ class CartProductTileBonus extends StatelessWidget {
       child: CustomSlidable(
         extentRatio: 0.24,
         endActionPaneActions: [
-          if (context.read<EligibilityBloc>().state.isBonusSampleItemVisible)
+          if (context.read<EligibilityBloc>().state.isBonusSampleItemVisible &&
+              cartProduct.bonusPriceOverrideEligible)
             CustomSlidableAction(
               key: WidgetKeys.cartItemSwipeDeleteButtonForBonus,
               label: '',
@@ -268,7 +269,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
       padding: const EdgeInsets.only(top: 8.0),
       child: CartItemQuantityInput(
         isEnabled:
-            context.read<EligibilityBloc>().state.isBonusSampleItemVisible,
+            context.read<EligibilityBloc>().state.isBonusSampleItemVisible &&
+                widget.cartProduct.bonusPriceOverrideEligible,
         quantityAddKey: WidgetKeys.bonusOfferItemAddKey,
         quantityDeleteKey: WidgetKeys.bonusOfferItemDeleteKey,
         quantityTextKey: WidgetKeys.bonusOfferItemInputKey,

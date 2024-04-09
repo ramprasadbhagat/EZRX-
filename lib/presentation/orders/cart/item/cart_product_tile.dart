@@ -52,7 +52,6 @@ class CartProductTile extends StatelessWidget {
         orderEligibilityState.isMWPNotAllowedAndPresentInCart;
     final isSuspended = cartItem.isSuspendedMaterial ||
         cartItem.materialInfo.isPrincipalSuspended;
-    final is26SeriesMaterial = cartItem.is26SeriesMaterial;
     final isInvalidCartItem = isSuspended || isOOSNotAllowed || isMWPNotAllowed;
 
     return CustomCard(
@@ -94,9 +93,7 @@ class CartProductTile extends StatelessWidget {
             _ItemSubTotalSection(
               cartProduct: cartItem,
             ),
-            if (!isInvalidCartItem &&
-                !cartItem.materialInfo.isMarketPlace &&
-                !is26SeriesMaterial) ...[
+            if (!isInvalidCartItem && cartItem.bonusPriceOverrideEligible) ...[
               const Divider(
                 indent: 0,
                 endIndent: 0,

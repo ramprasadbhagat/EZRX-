@@ -1,4 +1,3 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
@@ -40,62 +39,15 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class CartRepositoryMock extends Mock implements CartRepository {}
-
-class OrderEligibilityBlocMock
-    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
-    implements OrderEligibilityBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class PriceOverrideBlocMock
-    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
-    implements PriceOverrideBloc {}
-
-class OrderSummaryBlocMock
-    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
-    implements OrderSummaryBloc {}
-
-class BonusMaterialBlocMock
-    extends MockBloc<BonusMaterialEvent, BonusMaterialState>
-    implements BonusMaterialBloc {}
 
 void main() {
   late CartBloc cartBloc;
@@ -464,6 +416,65 @@ void main() {
                 widget.endActionPaneActions.isNotEmpty,
           ),
           findsNothing,
+        );
+      });
+
+      testWidgets(
+          'Deal bonus cannot be deleted and update if item is marketplace',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItem.copyWith.materialInfo(isMarketPlace: true)],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial()
+              .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final bonusItem = WidgetKeys.cartItemBonus(
+          cartItem.materialInfo.materialNumber.displayMatNo,
+          cartItem.bonusSampleItems.first.materialNumber.displayMatNo,
+        );
+        await tester.dragUntilVisible(
+          find.byKey(bonusItem),
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -200),
+        );
+        await tester.pump();
+        expect(
+          find.byWidgetPredicate(
+            (widget) =>
+                widget.key == bonusItem &&
+                widget is CustomSlidable &&
+                widget.endActionPaneActions.isNotEmpty,
+          ),
+          findsNothing,
+        );
+        await tester.tap(
+          find.descendant(
+            of: find.byKey(bonusItem),
+            matching: find.byKey(WidgetKeys.bonusOfferItemAddKey),
+          ),
+        );
+        await tester.pump();
+
+        verifyNever(
+          () => cartBloc.add(
+            CartEvent.addBonusToCartItem(
+              bonusMaterial: MaterialInfo.empty().copyWith(
+                materialNumber: cartItem.bonusSampleItems.first.materialNumber,
+                parentID:
+                    cartItem.materialInfo.materialNumber.getOrDefaultValue(''),
+                quantity: MaterialQty(2),
+              ),
+              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              bonusItemId: cartItem.bonusSampleItems.first.itemId,
+            ),
+          ),
         );
       });
     },

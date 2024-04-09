@@ -916,6 +916,9 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get displayPromotionalDiscountForID =>
       promotionValue.isNotEmpty && salesOrgConfig.salesOrg.isID;
+
+  bool get bonusPriceOverrideEligible =>
+      !materialInfo.isMarketPlace && !is26SeriesMaterial;
 }
 
 enum PriceType {

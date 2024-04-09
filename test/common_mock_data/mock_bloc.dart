@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -204,6 +205,10 @@ class OrderEligibilityBlocMock
 class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
     implements OrderSummaryBloc {}
+
+class BonusMaterialBlocMock
+    extends MockBloc<BonusMaterialEvent, BonusMaterialState>
+    implements BonusMaterialBloc {}
 
 class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
     implements ViewByOrderBloc {}
