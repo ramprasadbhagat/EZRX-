@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -18,6 +19,7 @@ class ViewByItemRequest with _$ViewByItemRequest {
     required String orderNumber,
     required ViewByItemFilter viewByItemFilter,
     required bool isDetailsPage,
+    required MaterialOriginFilter materialOriginFilter,
   }) = _ViewByItemRequest;
 
   factory ViewByItemRequest.empty() => ViewByItemRequest(
@@ -31,5 +33,6 @@ class ViewByItemRequest with _$ViewByItemRequest {
         orderNumber: '',
         viewByItemFilter: ViewByItemFilter.empty(),
         isDetailsPage: false,
+        materialOriginFilter: MaterialOriginFilter.all(),
       );
 }

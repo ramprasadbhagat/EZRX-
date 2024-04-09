@@ -12,7 +12,7 @@ part of 'view_by_item_request.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ViewByItemRequest {
@@ -26,6 +26,8 @@ mixin _$ViewByItemRequest {
   String get orderNumber => throw _privateConstructorUsedError;
   ViewByItemFilter get viewByItemFilter => throw _privateConstructorUsedError;
   bool get isDetailsPage => throw _privateConstructorUsedError;
+  MaterialOriginFilter get materialOriginFilter =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByItemRequestCopyWith<ViewByItemRequest> get copyWith =>
@@ -48,7 +50,8 @@ abstract class $ViewByItemRequestCopyWith<$Res> {
       String searchKey,
       String orderNumber,
       ViewByItemFilter viewByItemFilter,
-      bool isDetailsPage});
+      bool isDetailsPage,
+      MaterialOriginFilter materialOriginFilter});
 
   $ViewByItemFilterCopyWith<$Res> get viewByItemFilter;
 }
@@ -76,6 +79,7 @@ class _$ViewByItemRequestCopyWithImpl<$Res, $Val extends ViewByItemRequest>
     Object? orderNumber = null,
     Object? viewByItemFilter = null,
     Object? isDetailsPage = null,
+    Object? materialOriginFilter = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -118,6 +122,10 @@ class _$ViewByItemRequestCopyWithImpl<$Res, $Val extends ViewByItemRequest>
           ? _value.isDetailsPage
           : isDetailsPage // ignore: cast_nullable_to_non_nullable
               as bool,
+      materialOriginFilter: null == materialOriginFilter
+          ? _value.materialOriginFilter
+          : materialOriginFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialOriginFilter,
     ) as $Val);
   }
 
@@ -131,11 +139,11 @@ class _$ViewByItemRequestCopyWithImpl<$Res, $Val extends ViewByItemRequest>
 }
 
 /// @nodoc
-abstract class _$$_ViewByItemRequestCopyWith<$Res>
+abstract class _$$ViewByItemRequestImplCopyWith<$Res>
     implements $ViewByItemRequestCopyWith<$Res> {
-  factory _$$_ViewByItemRequestCopyWith(_$_ViewByItemRequest value,
-          $Res Function(_$_ViewByItemRequest) then) =
-      __$$_ViewByItemRequestCopyWithImpl<$Res>;
+  factory _$$ViewByItemRequestImplCopyWith(_$ViewByItemRequestImpl value,
+          $Res Function(_$ViewByItemRequestImpl) then) =
+      __$$ViewByItemRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -148,18 +156,19 @@ abstract class _$$_ViewByItemRequestCopyWith<$Res>
       String searchKey,
       String orderNumber,
       ViewByItemFilter viewByItemFilter,
-      bool isDetailsPage});
+      bool isDetailsPage,
+      MaterialOriginFilter materialOriginFilter});
 
   @override
   $ViewByItemFilterCopyWith<$Res> get viewByItemFilter;
 }
 
 /// @nodoc
-class __$$_ViewByItemRequestCopyWithImpl<$Res>
-    extends _$ViewByItemRequestCopyWithImpl<$Res, _$_ViewByItemRequest>
-    implements _$$_ViewByItemRequestCopyWith<$Res> {
-  __$$_ViewByItemRequestCopyWithImpl(
-      _$_ViewByItemRequest _value, $Res Function(_$_ViewByItemRequest) _then)
+class __$$ViewByItemRequestImplCopyWithImpl<$Res>
+    extends _$ViewByItemRequestCopyWithImpl<$Res, _$ViewByItemRequestImpl>
+    implements _$$ViewByItemRequestImplCopyWith<$Res> {
+  __$$ViewByItemRequestImplCopyWithImpl(_$ViewByItemRequestImpl _value,
+      $Res Function(_$ViewByItemRequestImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -175,8 +184,9 @@ class __$$_ViewByItemRequestCopyWithImpl<$Res>
     Object? orderNumber = null,
     Object? viewByItemFilter = null,
     Object? isDetailsPage = null,
+    Object? materialOriginFilter = null,
   }) {
-    return _then(_$_ViewByItemRequest(
+    return _then(_$ViewByItemRequestImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -217,14 +227,18 @@ class __$$_ViewByItemRequestCopyWithImpl<$Res>
           ? _value.isDetailsPage
           : isDetailsPage // ignore: cast_nullable_to_non_nullable
               as bool,
+      materialOriginFilter: null == materialOriginFilter
+          ? _value.materialOriginFilter
+          : materialOriginFilter // ignore: cast_nullable_to_non_nullable
+              as MaterialOriginFilter,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_ViewByItemRequest extends _ViewByItemRequest {
-  _$_ViewByItemRequest(
+class _$ViewByItemRequestImpl extends _ViewByItemRequest {
+  _$ViewByItemRequestImpl(
       {required this.salesOrg,
       required this.customerCodeSoldTo,
       required this.shipToCustomerCode,
@@ -234,7 +248,8 @@ class _$_ViewByItemRequest extends _ViewByItemRequest {
       required this.searchKey,
       required this.orderNumber,
       required this.viewByItemFilter,
-      required this.isDetailsPage})
+      required this.isDetailsPage,
+      required this.materialOriginFilter})
       : super._();
 
   @override
@@ -257,17 +272,19 @@ class _$_ViewByItemRequest extends _ViewByItemRequest {
   final ViewByItemFilter viewByItemFilter;
   @override
   final bool isDetailsPage;
+  @override
+  final MaterialOriginFilter materialOriginFilter;
 
   @override
   String toString() {
-    return 'ViewByItemRequest(salesOrg: $salesOrg, customerCodeSoldTo: $customerCodeSoldTo, shipToCustomerCode: $shipToCustomerCode, language: $language, pageSize: $pageSize, offSet: $offSet, searchKey: $searchKey, orderNumber: $orderNumber, viewByItemFilter: $viewByItemFilter, isDetailsPage: $isDetailsPage)';
+    return 'ViewByItemRequest(salesOrg: $salesOrg, customerCodeSoldTo: $customerCodeSoldTo, shipToCustomerCode: $shipToCustomerCode, language: $language, pageSize: $pageSize, offSet: $offSet, searchKey: $searchKey, orderNumber: $orderNumber, viewByItemFilter: $viewByItemFilter, isDetailsPage: $isDetailsPage, materialOriginFilter: $materialOriginFilter)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByItemRequest &&
+            other is _$ViewByItemRequestImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.customerCodeSoldTo, customerCodeSoldTo) ||
@@ -286,7 +303,9 @@ class _$_ViewByItemRequest extends _ViewByItemRequest {
             (identical(other.viewByItemFilter, viewByItemFilter) ||
                 other.viewByItemFilter == viewByItemFilter) &&
             (identical(other.isDetailsPage, isDetailsPage) ||
-                other.isDetailsPage == isDetailsPage));
+                other.isDetailsPage == isDetailsPage) &&
+            (identical(other.materialOriginFilter, materialOriginFilter) ||
+                other.materialOriginFilter == materialOriginFilter));
   }
 
   @override
@@ -301,28 +320,31 @@ class _$_ViewByItemRequest extends _ViewByItemRequest {
       searchKey,
       orderNumber,
       viewByItemFilter,
-      isDetailsPage);
+      isDetailsPage,
+      materialOriginFilter);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByItemRequestCopyWith<_$_ViewByItemRequest> get copyWith =>
-      __$$_ViewByItemRequestCopyWithImpl<_$_ViewByItemRequest>(
+  _$$ViewByItemRequestImplCopyWith<_$ViewByItemRequestImpl> get copyWith =>
+      __$$ViewByItemRequestImplCopyWithImpl<_$ViewByItemRequestImpl>(
           this, _$identity);
 }
 
 abstract class _ViewByItemRequest extends ViewByItemRequest {
   factory _ViewByItemRequest(
-      {required final String salesOrg,
-      required final String customerCodeSoldTo,
-      required final String shipToCustomerCode,
-      required final String language,
-      required final int pageSize,
-      required final int offSet,
-      required final String searchKey,
-      required final String orderNumber,
-      required final ViewByItemFilter viewByItemFilter,
-      required final bool isDetailsPage}) = _$_ViewByItemRequest;
+          {required final String salesOrg,
+          required final String customerCodeSoldTo,
+          required final String shipToCustomerCode,
+          required final String language,
+          required final int pageSize,
+          required final int offSet,
+          required final String searchKey,
+          required final String orderNumber,
+          required final ViewByItemFilter viewByItemFilter,
+          required final bool isDetailsPage,
+          required final MaterialOriginFilter materialOriginFilter}) =
+      _$ViewByItemRequestImpl;
   _ViewByItemRequest._() : super._();
 
   @override
@@ -346,7 +368,9 @@ abstract class _ViewByItemRequest extends ViewByItemRequest {
   @override
   bool get isDetailsPage;
   @override
+  MaterialOriginFilter get materialOriginFilter;
+  @override
   @JsonKey(ignore: true)
-  _$$_ViewByItemRequestCopyWith<_$_ViewByItemRequest> get copyWith =>
+  _$$ViewByItemRequestImplCopyWith<_$ViewByItemRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

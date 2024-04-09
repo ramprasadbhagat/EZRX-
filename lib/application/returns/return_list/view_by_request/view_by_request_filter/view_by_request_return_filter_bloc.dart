@@ -16,15 +16,15 @@ class ViewByRequestReturnFilterBloc extends Bloc<ViewByRequestReturnFilterEvent,
     on<ViewByRequestReturnFilterEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(
+  void _onEvent(
     ViewByRequestReturnFilterEvent event,
     Emitter<ViewByRequestReturnFilterState> emit,
-  ) async {
-    await event.map(
+  ) {
+    event.map(
       initialize: (e) async => emit(
         ViewByRequestReturnFilterState.initial(),
       ),
-      setReturnDate: (e) async => emit(
+      setReturnDate: (e) => emit(
         state.copyWith(
           filter: state.filter.copyWith(
             returnDateFrom: DateTimeStringValue(
@@ -36,19 +36,22 @@ class ViewByRequestReturnFilterBloc extends Bloc<ViewByRequestReturnFilterEvent,
           ),
         ),
       ),
-      setAmountFrom: (e) async => emit(
+      setAmountFrom: (e) => emit(
         state.copyWith(
           filter: state.filter.copyWith(
             amountValueFrom: RangeValue(e.amountFrom),
           ),
         ),
       ),
-      setAmountTo: (e) async => emit(
+      setAmountTo: (e) => emit(
         state.copyWith(
           filter: state.filter.copyWith(
             amountValueTo: RangeValue(e.amountTo),
           ),
         ),
+      ),
+      setReturnType: (e) => emit(
+        state.copyWith.filter(materialOriginFilter: e.type),
       ),
       setReturnStatus: (e) {
         final selectedStatusList = List<StatusType>.from(
@@ -63,18 +66,18 @@ class ViewByRequestReturnFilterBloc extends Bloc<ViewByRequestReturnFilterEvent,
           ),
         );
       },
-      updateFilterToLastApplied: (e) async => emit(
+      updateFilterToLastApplied: (e) => emit(
         state.copyWith(
           filter: e.lastAppliedFilter,
           showErrorMessage: false,
         ),
       ),
-      setValidationFailure: (_) async => emit(
+      setValidationFailure: (_) => emit(
         state.copyWith(
           showErrorMessage: !state.filter.isReturnAmountValueRangeValid,
         ),
       ),
-      resetFilters: (e) async => emit(
+      resetFilters: (e) => emit(
         ViewByRequestReturnFilterState.initial().copyWith(
           filter: ReturnFilter.empty(),
         ),

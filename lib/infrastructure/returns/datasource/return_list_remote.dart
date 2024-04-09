@@ -72,9 +72,12 @@ class ReturnListRemoteDataSource {
 
   Future<List<ReturnItem>> fetchReturnByRequest({
     required Map<String, dynamic> requestParams,
+    required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = queryMutation.getRequestsByRequest();
+      final queryData = queryMutation.getRequestsByRequest(
+        remoteConfigService.enableMarketPlaceMarkets.contains(market),
+      );
 
       final res = await httpService.request(
         method: 'POST',

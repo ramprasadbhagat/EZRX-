@@ -15,6 +15,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 
+part 'package:ezrxmobile/presentation/returns/return_list/return_filter/widgets/return_by_request_filter_type_picker.dart';
+part 'package:ezrxmobile/presentation/returns/return_list/return_filter/widgets/return_by_request_filter_date_range_picker.dart';
+part 'package:ezrxmobile/presentation/returns/return_list/return_filter/widgets/return_by_request_filter_amount_range_input.dart';
+part 'package:ezrxmobile/presentation/returns/return_list/return_filter/widgets/return_by_request_filter_status_picker.dart';
+part 'package:ezrxmobile/presentation/returns/return_list/return_filter/widgets/return_by_request_filter_button.dart';
+
 class ReturnByRequestFilterPage extends StatelessWidget {
   const ReturnByRequestFilterPage({
     Key? key,
@@ -70,86 +76,42 @@ class _ReturnFilter extends StatelessWidget {
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                context.tr('Request date'),
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.neutralsBlack,
-                    ),
+              if (context
+                  .read<EligibilityBloc>()
+                  .state
+                  .marketPlaceEligible) ...[
+                const _FilterSectionLabel('Show returns'),
+                const SizedBox(height: 10),
+                const _ReturnTypePicker(),
+                const SizedBox(height: 16),
+              ],
+              const _FilterSectionLabel('Request date'),
+              const SizedBox(height: 12),
+              const _RequestDateRangePicker(),
+              const SizedBox(height: 20),
+              _FilterSectionLabel(
+                'Request amount (${salesOrgConfig.currency.code})',
               ),
-              const SizedBox(
-                height: 12,
-              ),
-              Row(
-                children: [
-                  const _FromRequestDateFilter(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      '-',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ),
-                  const _ToRequestDateFilter(),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                '${context.tr('Request amount')} (${salesOrgConfig.currency.code})',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.neutralsBlack,
-                    ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _AmountValueFromFilter(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      '-',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ),
-                  const _AmountValueToFilter(),
-                ],
-              ),
+              const SizedBox(height: 12),
+              const _RequestAmountRangeInput(),
               (!state.filter.isReturnAmountValueRangeValid)
                   ? ValueRangeError(
                       label: context.tr('Invalid Amount range!'),
                       isValid: state.filter.isReturnAmountValueRangeValid,
                     )
                   : const SizedBox.shrink(),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
-                child: Text(
-                  context.tr('Status'),
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ),
-              const _StatusesSelector(),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
+              const _FilterSectionLabel('Status'),
+              const _StatusPicker(),
+              const SizedBox(height: 20),
               const Row(
                 children: [
                   _ResetButton(),
-                  SizedBox(
-                    width: 12,
-                  ),
+                  SizedBox(width: 12),
                   _ApplyButton(),
                 ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
             ],
           ),
         );
@@ -158,312 +120,17 @@ class _ReturnFilter extends StatelessWidget {
   }
 }
 
-class _AmountValueToFilter extends StatelessWidget {
-  const _AmountValueToFilter({Key? key}) : super(key: key);
+class _FilterSectionLabel extends StatelessWidget {
+  final String text;
+  const _FilterSectionLabel(this.text, {Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ViewByRequestReturnFilterBloc,
-        ViewByRequestReturnFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.amountValueTo != current.filter.amountValueTo,
-      builder: (
-        context,
-        state,
-      ) {
-        return Expanded(
-          child: CustomNumericTextField.decimalNumber(
-            fieldKey: WidgetKeys.amountValueTo,
-            initValue: state.filter.amountValueTo.apiParameterValue,
-            onChanged: (value) =>
-                context.read<ViewByRequestReturnFilterBloc>().add(
-                      ViewByRequestReturnFilterEvent.setAmountTo(
-                        amountTo: value.isNotEmpty ? value : '',
-                      ),
-                    ),
-            decoration: InputDecoration(
-              labelText: context.tr('Amount to'),
-              labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.darkGray,
-                  ),
-            ),
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(ZPRegexes.twoDecimalOnly),
-            ],
+    return Text(
+      context.tr(text),
+      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+            color: ZPColors.neutralsBlack,
           ),
-        );
-      },
     );
-  }
-}
-
-class _AmountValueFromFilter extends StatelessWidget {
-  const _AmountValueFromFilter({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ViewByRequestReturnFilterBloc,
-        ViewByRequestReturnFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.amountValueFrom != current.filter.amountValueFrom,
-      builder: (
-        context,
-        state,
-      ) {
-        return Expanded(
-          child: CustomNumericTextField.decimalNumber(
-            fieldKey: WidgetKeys.amountValueFrom,
-            initValue: state.filter.amountValueFrom.apiParameterValue,
-            onChanged: (value) =>
-                context.read<ViewByRequestReturnFilterBloc>().add(
-                      ViewByRequestReturnFilterEvent.setAmountFrom(
-                        amountFrom: value.isNotEmpty ? value : '',
-                      ),
-                    ),
-            decoration: InputDecoration(
-              labelText: context.tr('Amount from'),
-              labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.darkGray,
-                  ),
-            ),
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(ZPRegexes.twoDecimalOnly),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _FromRequestDateFilter extends StatelessWidget {
-  const _FromRequestDateFilter({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ViewByRequestReturnFilterBloc,
-        ViewByRequestReturnFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.getReturnDateFilterDateRange !=
-          current.filter.getReturnDateFilterDateRange,
-      builder: (context, state) {
-        return Expanded(
-          child: TextFormField(
-            key: WidgetKeys.fromReturnDateField,
-            onTap: () async {
-              final returnByRequestFilterBloc =
-                  context.read<ViewByRequestReturnFilterBloc>();
-              final returnDateRange = await showDateRangePicker(
-                context: context,
-                firstDate: DateTime(1900),
-                lastDate: DateTime.now(),
-                initialDateRange: state.filter.getReturnDateFilterDateRange,
-              );
-              if (returnDateRange == null) return;
-              returnByRequestFilterBloc.add(
-                ViewByRequestReturnFilterEvent.setReturnDate(
-                  returnDateRange: returnDateRange,
-                ),
-              );
-            },
-            readOnly: true,
-            controller: TextEditingController(
-              text: state.filter.returnDateFrom.dateString,
-            ),
-            decoration: InputDecoration(
-              hintText: context.tr('Date from'),
-              hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.darkGray,
-                  ),
-              suffixIcon: const Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  Icons.calendar_month,
-                  size: 20,
-                ),
-              ),
-              suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-              focusedBorder:
-                  Theme.of(context).inputDecorationTheme.disabledBorder,
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _ToRequestDateFilter extends StatelessWidget {
-  const _ToRequestDateFilter({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ViewByRequestReturnFilterBloc,
-        ViewByRequestReturnFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.getReturnDateFilterDateRange !=
-          current.filter.getReturnDateFilterDateRange,
-      builder: (context, state) {
-        return Expanded(
-          child: TextFormField(
-            key: WidgetKeys.toReturnDateField,
-            onTap: () async {
-              final returnByRequestFilterBloc =
-                  context.read<ViewByRequestReturnFilterBloc>();
-              final returnDateRange = await showDateRangePicker(
-                context: context,
-                firstDate: DateTime(1900),
-                lastDate: DateTime.now(),
-                initialDateRange: state.filter.getReturnDateFilterDateRange,
-              );
-              if (returnDateRange == null) return;
-              returnByRequestFilterBloc.add(
-                ViewByRequestReturnFilterEvent.setReturnDate(
-                  returnDateRange: returnDateRange,
-                ),
-              );
-            },
-            readOnly: true,
-            controller: TextEditingController(
-              text: state.filter.returnDateTo.dateString,
-            ),
-            decoration: InputDecoration(
-              hintText: context.tr('Date to'),
-              hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.darkGray,
-                  ),
-              suffixIcon: const Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  Icons.calendar_month,
-                  size: 20,
-                ),
-              ),
-              suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-              focusedBorder:
-                  Theme.of(context).inputDecorationTheme.disabledBorder,
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _StatusesSelector extends StatelessWidget {
-  const _StatusesSelector({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ViewByRequestReturnFilterBloc,
-        ViewByRequestReturnFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.returnStatusList != current.filter.returnStatusList,
-      builder: (
-        context,
-        state,
-      ) {
-        return Column(
-          children: state.statusList.map((StatusType status) {
-            final value = state.filter.returnStatusList.contains(status);
-
-            return CheckboxListTile(
-              key: WidgetKeys.returnStatusFilter(
-                status.displayStatusForViewByRequest,
-                value,
-              ),
-              contentPadding: EdgeInsets.zero,
-              title: Text(
-                context.tr(status.displayStatusForViewByRequest),
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              controlAffinity: ListTileControlAffinity.leading,
-              dense: true,
-              visualDensity: VisualDensity.compact,
-              onChanged: (bool? value) {
-                context.read<ViewByRequestReturnFilterBloc>().add(
-                      ViewByRequestReturnFilterEvent.setReturnStatus(
-                        status: status,
-                        value: value ?? false,
-                      ),
-                    );
-              },
-              value: value,
-            );
-          }).toList(),
-        );
-      },
-    );
-  }
-}
-
-class _ResetButton extends StatelessWidget {
-  const _ResetButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: OutlinedButton(
-        key: WidgetKeys.filterResetButton,
-        onPressed: () {
-          context.read<ViewByRequestReturnFilterBloc>().add(
-                const ViewByRequestReturnFilterEvent.resetFilters(),
-              );
-          Navigator.of(context).pop(
-            ReturnFilter.empty(),
-          );
-        },
-        child: Text(
-          context.tr('Reset'),
-          style: const TextStyle(color: ZPColors.primary),
-        ),
-      ),
-    );
-  }
-}
-
-class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ViewByRequestReturnFilterBloc,
-        ViewByRequestReturnFilterState>(
-      buildWhen: (previous, current) => previous.filter != current.filter,
-      builder: (context, state) {
-        final lastAppliedFilter =
-            context.read<ReturnListByRequestBloc>().state.appliedFilter;
-        final currentFilter = state.filter;
-        final isEnable = lastAppliedFilter != currentFilter;
-
-        return Expanded(
-          child: ElevatedButton(
-            key: WidgetKeys.filterApplyButton,
-            onPressed: isEnable ? () => _onPressed(context: context) : null,
-            child: Text(
-              context.tr('Apply'),
-              style: const TextStyle(color: ZPColors.white),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  void _onPressed({
-    required BuildContext context,
-  }) {
-    final isValid = context
-        .read<ViewByRequestReturnFilterBloc>()
-        .state
-        .filter
-        .isReturnAmountValueRangeValid;
-    isValid
-        ? Navigator.of(context).pop(
-            context.read<ViewByRequestReturnFilterBloc>().state.filter,
-          )
-        : context.read<ViewByRequestReturnFilterBloc>().add(
-              const ViewByRequestReturnFilterEvent.setValidationFailure(),
-            );
   }
 }

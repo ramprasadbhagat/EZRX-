@@ -30,7 +30,7 @@ class ReturnQuery {
     ''';
   }
 
-  String getRequestsByRequest() {
+  String getRequestsByRequest(bool enableMarketplace) {
     return '''
       query requestsByUserV3(\$requestsByUserRequest: requestsByUserRequestV3!) {
         requestsByUserV3(request: \$requestsByUserRequest) {
@@ -41,6 +41,7 @@ class ReturnQuery {
             totalPrice
             status
             customerName
+            ${enableMarketplace ? 'isMarketPlace' : ''}
           }
           totalCount
         }

@@ -200,10 +200,12 @@ void main() {
       test(
         'Fetch Return Item By Request Success Remote',
         () async {
+          when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
           when(
             () => returnListRemoteDataSource.fetchReturnByRequest(
               requestParams: inputParams,
+              market: fakeMarket,
             ),
           ).thenAnswer((invocation) async => returnListByRequest);
 
@@ -281,10 +283,12 @@ void main() {
       test(
         'Fetch Return List By Request Failure Remote',
         () async {
+          when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
           when(
             () => returnListRemoteDataSource.fetchReturnByRequest(
               requestParams: inputParams,
+              market: fakeMarket,
             ),
           ).thenThrow(errorMock);
           final result = await returnListRepository.fetchReturnListByRequest(

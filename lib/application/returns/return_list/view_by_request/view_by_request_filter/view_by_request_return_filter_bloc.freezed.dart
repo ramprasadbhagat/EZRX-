@@ -12,7 +12,7 @@ part of 'view_by_request_return_filter_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ViewByRequestReturnFilterEvent {
@@ -25,6 +25,7 @@ mixin _$ViewByRequestReturnFilterEvent {
     required TResult Function(String amountFrom) setAmountFrom,
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function(MaterialOriginFilter type) setReturnType,
     required TResult Function() setValidationFailure,
     required TResult Function() resetFilters,
   }) =>
@@ -38,6 +39,7 @@ mixin _$ViewByRequestReturnFilterEvent {
     TResult? Function(String amountFrom)? setAmountFrom,
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function(MaterialOriginFilter type)? setReturnType,
     TResult? Function()? setValidationFailure,
     TResult? Function()? resetFilters,
   }) =>
@@ -50,6 +52,7 @@ mixin _$ViewByRequestReturnFilterEvent {
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function(MaterialOriginFilter type)? setReturnType,
     TResult Function()? setValidationFailure,
     TResult Function()? resetFilters,
     required TResult orElse(),
@@ -64,6 +67,7 @@ mixin _$ViewByRequestReturnFilterEvent {
     required TResult Function(_SetAmountFrom value) setAmountFrom,
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetOrderHistoryType value) setReturnType,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
     required TResult Function(_ResetFilters value) resetFilters,
   }) =>
@@ -77,6 +81,7 @@ mixin _$ViewByRequestReturnFilterEvent {
     TResult? Function(_SetAmountFrom value)? setAmountFrom,
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetOrderHistoryType value)? setReturnType,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
     TResult? Function(_ResetFilters value)? resetFilters,
   }) =>
@@ -90,6 +95,7 @@ mixin _$ViewByRequestReturnFilterEvent {
     TResult Function(_SetAmountFrom value)? setAmountFrom,
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetOrderHistoryType value)? setReturnType,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
     TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
@@ -119,25 +125,25 @@ class _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize();
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl();
 
   @override
   String toString() {
@@ -145,9 +151,9 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialize);
+        (other.runtimeType == runtimeType && other is _$InitializeImpl);
   }
 
   @override
@@ -163,6 +169,7 @@ class _$_Initialize implements _Initialize {
     required TResult Function(String amountFrom) setAmountFrom,
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function(MaterialOriginFilter type) setReturnType,
     required TResult Function() setValidationFailure,
     required TResult Function() resetFilters,
   }) {
@@ -179,6 +186,7 @@ class _$_Initialize implements _Initialize {
     TResult? Function(String amountFrom)? setAmountFrom,
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function(MaterialOriginFilter type)? setReturnType,
     TResult? Function()? setValidationFailure,
     TResult? Function()? resetFilters,
   }) {
@@ -194,6 +202,7 @@ class _$_Initialize implements _Initialize {
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function(MaterialOriginFilter type)? setReturnType,
     TResult Function()? setValidationFailure,
     TResult Function()? resetFilters,
     required TResult orElse(),
@@ -214,6 +223,7 @@ class _$_Initialize implements _Initialize {
     required TResult Function(_SetAmountFrom value) setAmountFrom,
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetOrderHistoryType value) setReturnType,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
     required TResult Function(_ResetFilters value) resetFilters,
   }) {
@@ -230,6 +240,7 @@ class _$_Initialize implements _Initialize {
     TResult? Function(_SetAmountFrom value)? setAmountFrom,
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetOrderHistoryType value)? setReturnType,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
     TResult? Function(_ResetFilters value)? resetFilters,
   }) {
@@ -246,6 +257,7 @@ class _$_Initialize implements _Initialize {
     TResult Function(_SetAmountFrom value)? setAmountFrom,
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetOrderHistoryType value)? setReturnType,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
     TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
@@ -258,15 +270,15 @@ class _$_Initialize implements _Initialize {
 }
 
 abstract class _Initialize implements ViewByRequestReturnFilterEvent {
-  const factory _Initialize() = _$_Initialize;
+  const factory _Initialize() = _$InitializeImpl;
 }
 
 /// @nodoc
-abstract class _$$_UpdateFiltersToLastAppliedCopyWith<$Res> {
-  factory _$$_UpdateFiltersToLastAppliedCopyWith(
-          _$_UpdateFiltersToLastApplied value,
-          $Res Function(_$_UpdateFiltersToLastApplied) then) =
-      __$$_UpdateFiltersToLastAppliedCopyWithImpl<$Res>;
+abstract class _$$UpdateFiltersToLastAppliedImplCopyWith<$Res> {
+  factory _$$UpdateFiltersToLastAppliedImplCopyWith(
+          _$UpdateFiltersToLastAppliedImpl value,
+          $Res Function(_$UpdateFiltersToLastAppliedImpl) then) =
+      __$$UpdateFiltersToLastAppliedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnFilter lastAppliedFilter});
 
@@ -274,13 +286,13 @@ abstract class _$$_UpdateFiltersToLastAppliedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateFiltersToLastAppliedCopyWithImpl<$Res>
+class __$$UpdateFiltersToLastAppliedImplCopyWithImpl<$Res>
     extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
-        _$_UpdateFiltersToLastApplied>
-    implements _$$_UpdateFiltersToLastAppliedCopyWith<$Res> {
-  __$$_UpdateFiltersToLastAppliedCopyWithImpl(
-      _$_UpdateFiltersToLastApplied _value,
-      $Res Function(_$_UpdateFiltersToLastApplied) _then)
+        _$UpdateFiltersToLastAppliedImpl>
+    implements _$$UpdateFiltersToLastAppliedImplCopyWith<$Res> {
+  __$$UpdateFiltersToLastAppliedImplCopyWithImpl(
+      _$UpdateFiltersToLastAppliedImpl _value,
+      $Res Function(_$UpdateFiltersToLastAppliedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -288,7 +300,7 @@ class __$$_UpdateFiltersToLastAppliedCopyWithImpl<$Res>
   $Res call({
     Object? lastAppliedFilter = null,
   }) {
-    return _then(_$_UpdateFiltersToLastApplied(
+    return _then(_$UpdateFiltersToLastAppliedImpl(
       lastAppliedFilter: null == lastAppliedFilter
           ? _value.lastAppliedFilter
           : lastAppliedFilter // ignore: cast_nullable_to_non_nullable
@@ -307,8 +319,8 @@ class __$$_UpdateFiltersToLastAppliedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
-  const _$_UpdateFiltersToLastApplied({required this.lastAppliedFilter});
+class _$UpdateFiltersToLastAppliedImpl implements _UpdateFiltersToLastApplied {
+  const _$UpdateFiltersToLastAppliedImpl({required this.lastAppliedFilter});
 
   @override
   final ReturnFilter lastAppliedFilter;
@@ -319,10 +331,10 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateFiltersToLastApplied &&
+            other is _$UpdateFiltersToLastAppliedImpl &&
             (identical(other.lastAppliedFilter, lastAppliedFilter) ||
                 other.lastAppliedFilter == lastAppliedFilter));
   }
@@ -333,9 +345,9 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateFiltersToLastAppliedCopyWith<_$_UpdateFiltersToLastApplied>
-      get copyWith => __$$_UpdateFiltersToLastAppliedCopyWithImpl<
-          _$_UpdateFiltersToLastApplied>(this, _$identity);
+  _$$UpdateFiltersToLastAppliedImplCopyWith<_$UpdateFiltersToLastAppliedImpl>
+      get copyWith => __$$UpdateFiltersToLastAppliedImplCopyWithImpl<
+          _$UpdateFiltersToLastAppliedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -347,6 +359,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     required TResult Function(String amountFrom) setAmountFrom,
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function(MaterialOriginFilter type) setReturnType,
     required TResult Function() setValidationFailure,
     required TResult Function() resetFilters,
   }) {
@@ -363,6 +376,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     TResult? Function(String amountFrom)? setAmountFrom,
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function(MaterialOriginFilter type)? setReturnType,
     TResult? Function()? setValidationFailure,
     TResult? Function()? resetFilters,
   }) {
@@ -378,6 +392,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function(MaterialOriginFilter type)? setReturnType,
     TResult Function()? setValidationFailure,
     TResult Function()? resetFilters,
     required TResult orElse(),
@@ -398,6 +413,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     required TResult Function(_SetAmountFrom value) setAmountFrom,
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetOrderHistoryType value) setReturnType,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
     required TResult Function(_ResetFilters value) resetFilters,
   }) {
@@ -414,6 +430,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     TResult? Function(_SetAmountFrom value)? setAmountFrom,
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetOrderHistoryType value)? setReturnType,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
     TResult? Function(_ResetFilters value)? resetFilters,
   }) {
@@ -430,6 +447,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     TResult Function(_SetAmountFrom value)? setAmountFrom,
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetOrderHistoryType value)? setReturnType,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
     TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
@@ -445,29 +463,29 @@ abstract class _UpdateFiltersToLastApplied
     implements ViewByRequestReturnFilterEvent {
   const factory _UpdateFiltersToLastApplied(
           {required final ReturnFilter lastAppliedFilter}) =
-      _$_UpdateFiltersToLastApplied;
+      _$UpdateFiltersToLastAppliedImpl;
 
   ReturnFilter get lastAppliedFilter;
   @JsonKey(ignore: true)
-  _$$_UpdateFiltersToLastAppliedCopyWith<_$_UpdateFiltersToLastApplied>
+  _$$UpdateFiltersToLastAppliedImplCopyWith<_$UpdateFiltersToLastAppliedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetReturnDateCopyWith<$Res> {
-  factory _$$_SetReturnDateCopyWith(
-          _$_SetReturnDate value, $Res Function(_$_SetReturnDate) then) =
-      __$$_SetReturnDateCopyWithImpl<$Res>;
+abstract class _$$SetReturnDateImplCopyWith<$Res> {
+  factory _$$SetReturnDateImplCopyWith(
+          _$SetReturnDateImpl value, $Res Function(_$SetReturnDateImpl) then) =
+      __$$SetReturnDateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeRange returnDateRange});
 }
 
 /// @nodoc
-class __$$_SetReturnDateCopyWithImpl<$Res>
-    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res, _$_SetReturnDate>
-    implements _$$_SetReturnDateCopyWith<$Res> {
-  __$$_SetReturnDateCopyWithImpl(
-      _$_SetReturnDate _value, $Res Function(_$_SetReturnDate) _then)
+class __$$SetReturnDateImplCopyWithImpl<$Res>
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
+        _$SetReturnDateImpl> implements _$$SetReturnDateImplCopyWith<$Res> {
+  __$$SetReturnDateImplCopyWithImpl(
+      _$SetReturnDateImpl _value, $Res Function(_$SetReturnDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -475,7 +493,7 @@ class __$$_SetReturnDateCopyWithImpl<$Res>
   $Res call({
     Object? returnDateRange = null,
   }) {
-    return _then(_$_SetReturnDate(
+    return _then(_$SetReturnDateImpl(
       returnDateRange: null == returnDateRange
           ? _value.returnDateRange
           : returnDateRange // ignore: cast_nullable_to_non_nullable
@@ -486,8 +504,8 @@ class __$$_SetReturnDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetReturnDate implements _SetReturnDate {
-  const _$_SetReturnDate({required this.returnDateRange});
+class _$SetReturnDateImpl implements _SetReturnDate {
+  const _$SetReturnDateImpl({required this.returnDateRange});
 
   @override
   final DateTimeRange returnDateRange;
@@ -498,10 +516,10 @@ class _$_SetReturnDate implements _SetReturnDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetReturnDate &&
+            other is _$SetReturnDateImpl &&
             (identical(other.returnDateRange, returnDateRange) ||
                 other.returnDateRange == returnDateRange));
   }
@@ -512,8 +530,8 @@ class _$_SetReturnDate implements _SetReturnDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetReturnDateCopyWith<_$_SetReturnDate> get copyWith =>
-      __$$_SetReturnDateCopyWithImpl<_$_SetReturnDate>(this, _$identity);
+  _$$SetReturnDateImplCopyWith<_$SetReturnDateImpl> get copyWith =>
+      __$$SetReturnDateImplCopyWithImpl<_$SetReturnDateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -525,6 +543,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     required TResult Function(String amountFrom) setAmountFrom,
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function(MaterialOriginFilter type) setReturnType,
     required TResult Function() setValidationFailure,
     required TResult Function() resetFilters,
   }) {
@@ -541,6 +560,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     TResult? Function(String amountFrom)? setAmountFrom,
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function(MaterialOriginFilter type)? setReturnType,
     TResult? Function()? setValidationFailure,
     TResult? Function()? resetFilters,
   }) {
@@ -556,6 +576,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function(MaterialOriginFilter type)? setReturnType,
     TResult Function()? setValidationFailure,
     TResult Function()? resetFilters,
     required TResult orElse(),
@@ -576,6 +597,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     required TResult Function(_SetAmountFrom value) setAmountFrom,
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetOrderHistoryType value) setReturnType,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
     required TResult Function(_ResetFilters value) resetFilters,
   }) {
@@ -592,6 +614,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     TResult? Function(_SetAmountFrom value)? setAmountFrom,
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetOrderHistoryType value)? setReturnType,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
     TResult? Function(_ResetFilters value)? resetFilters,
   }) {
@@ -608,6 +631,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     TResult Function(_SetAmountFrom value)? setAmountFrom,
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetOrderHistoryType value)? setReturnType,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
     TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
@@ -621,29 +645,29 @@ class _$_SetReturnDate implements _SetReturnDate {
 
 abstract class _SetReturnDate implements ViewByRequestReturnFilterEvent {
   const factory _SetReturnDate({required final DateTimeRange returnDateRange}) =
-      _$_SetReturnDate;
+      _$SetReturnDateImpl;
 
   DateTimeRange get returnDateRange;
   @JsonKey(ignore: true)
-  _$$_SetReturnDateCopyWith<_$_SetReturnDate> get copyWith =>
+  _$$SetReturnDateImplCopyWith<_$SetReturnDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetAmountFromCopyWith<$Res> {
-  factory _$$_SetAmountFromCopyWith(
-          _$_SetAmountFrom value, $Res Function(_$_SetAmountFrom) then) =
-      __$$_SetAmountFromCopyWithImpl<$Res>;
+abstract class _$$SetAmountFromImplCopyWith<$Res> {
+  factory _$$SetAmountFromImplCopyWith(
+          _$SetAmountFromImpl value, $Res Function(_$SetAmountFromImpl) then) =
+      __$$SetAmountFromImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String amountFrom});
 }
 
 /// @nodoc
-class __$$_SetAmountFromCopyWithImpl<$Res>
-    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res, _$_SetAmountFrom>
-    implements _$$_SetAmountFromCopyWith<$Res> {
-  __$$_SetAmountFromCopyWithImpl(
-      _$_SetAmountFrom _value, $Res Function(_$_SetAmountFrom) _then)
+class __$$SetAmountFromImplCopyWithImpl<$Res>
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
+        _$SetAmountFromImpl> implements _$$SetAmountFromImplCopyWith<$Res> {
+  __$$SetAmountFromImplCopyWithImpl(
+      _$SetAmountFromImpl _value, $Res Function(_$SetAmountFromImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -651,7 +675,7 @@ class __$$_SetAmountFromCopyWithImpl<$Res>
   $Res call({
     Object? amountFrom = null,
   }) {
-    return _then(_$_SetAmountFrom(
+    return _then(_$SetAmountFromImpl(
       amountFrom: null == amountFrom
           ? _value.amountFrom
           : amountFrom // ignore: cast_nullable_to_non_nullable
@@ -662,8 +686,8 @@ class __$$_SetAmountFromCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetAmountFrom implements _SetAmountFrom {
-  const _$_SetAmountFrom({required this.amountFrom});
+class _$SetAmountFromImpl implements _SetAmountFrom {
+  const _$SetAmountFromImpl({required this.amountFrom});
 
   @override
   final String amountFrom;
@@ -674,10 +698,10 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetAmountFrom &&
+            other is _$SetAmountFromImpl &&
             (identical(other.amountFrom, amountFrom) ||
                 other.amountFrom == amountFrom));
   }
@@ -688,8 +712,8 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetAmountFromCopyWith<_$_SetAmountFrom> get copyWith =>
-      __$$_SetAmountFromCopyWithImpl<_$_SetAmountFrom>(this, _$identity);
+  _$$SetAmountFromImplCopyWith<_$SetAmountFromImpl> get copyWith =>
+      __$$SetAmountFromImplCopyWithImpl<_$SetAmountFromImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -701,6 +725,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     required TResult Function(String amountFrom) setAmountFrom,
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function(MaterialOriginFilter type) setReturnType,
     required TResult Function() setValidationFailure,
     required TResult Function() resetFilters,
   }) {
@@ -717,6 +742,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     TResult? Function(String amountFrom)? setAmountFrom,
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function(MaterialOriginFilter type)? setReturnType,
     TResult? Function()? setValidationFailure,
     TResult? Function()? resetFilters,
   }) {
@@ -732,6 +758,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function(MaterialOriginFilter type)? setReturnType,
     TResult Function()? setValidationFailure,
     TResult Function()? resetFilters,
     required TResult orElse(),
@@ -752,6 +779,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     required TResult Function(_SetAmountFrom value) setAmountFrom,
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetOrderHistoryType value) setReturnType,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
     required TResult Function(_ResetFilters value) resetFilters,
   }) {
@@ -768,6 +796,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     TResult? Function(_SetAmountFrom value)? setAmountFrom,
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetOrderHistoryType value)? setReturnType,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
     TResult? Function(_ResetFilters value)? resetFilters,
   }) {
@@ -784,6 +813,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     TResult Function(_SetAmountFrom value)? setAmountFrom,
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetOrderHistoryType value)? setReturnType,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
     TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
@@ -797,29 +827,29 @@ class _$_SetAmountFrom implements _SetAmountFrom {
 
 abstract class _SetAmountFrom implements ViewByRequestReturnFilterEvent {
   const factory _SetAmountFrom({required final String amountFrom}) =
-      _$_SetAmountFrom;
+      _$SetAmountFromImpl;
 
   String get amountFrom;
   @JsonKey(ignore: true)
-  _$$_SetAmountFromCopyWith<_$_SetAmountFrom> get copyWith =>
+  _$$SetAmountFromImplCopyWith<_$SetAmountFromImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetAmountToCopyWith<$Res> {
-  factory _$$_SetAmountToCopyWith(
-          _$_SetAmountTo value, $Res Function(_$_SetAmountTo) then) =
-      __$$_SetAmountToCopyWithImpl<$Res>;
+abstract class _$$SetAmountToImplCopyWith<$Res> {
+  factory _$$SetAmountToImplCopyWith(
+          _$SetAmountToImpl value, $Res Function(_$SetAmountToImpl) then) =
+      __$$SetAmountToImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String amountTo});
 }
 
 /// @nodoc
-class __$$_SetAmountToCopyWithImpl<$Res>
-    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res, _$_SetAmountTo>
-    implements _$$_SetAmountToCopyWith<$Res> {
-  __$$_SetAmountToCopyWithImpl(
-      _$_SetAmountTo _value, $Res Function(_$_SetAmountTo) _then)
+class __$$SetAmountToImplCopyWithImpl<$Res>
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
+        _$SetAmountToImpl> implements _$$SetAmountToImplCopyWith<$Res> {
+  __$$SetAmountToImplCopyWithImpl(
+      _$SetAmountToImpl _value, $Res Function(_$SetAmountToImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -827,7 +857,7 @@ class __$$_SetAmountToCopyWithImpl<$Res>
   $Res call({
     Object? amountTo = null,
   }) {
-    return _then(_$_SetAmountTo(
+    return _then(_$SetAmountToImpl(
       amountTo: null == amountTo
           ? _value.amountTo
           : amountTo // ignore: cast_nullable_to_non_nullable
@@ -838,8 +868,8 @@ class __$$_SetAmountToCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetAmountTo implements _SetAmountTo {
-  const _$_SetAmountTo({required this.amountTo});
+class _$SetAmountToImpl implements _SetAmountTo {
+  const _$SetAmountToImpl({required this.amountTo});
 
   @override
   final String amountTo;
@@ -850,10 +880,10 @@ class _$_SetAmountTo implements _SetAmountTo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetAmountTo &&
+            other is _$SetAmountToImpl &&
             (identical(other.amountTo, amountTo) ||
                 other.amountTo == amountTo));
   }
@@ -864,8 +894,8 @@ class _$_SetAmountTo implements _SetAmountTo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetAmountToCopyWith<_$_SetAmountTo> get copyWith =>
-      __$$_SetAmountToCopyWithImpl<_$_SetAmountTo>(this, _$identity);
+  _$$SetAmountToImplCopyWith<_$SetAmountToImpl> get copyWith =>
+      __$$SetAmountToImplCopyWithImpl<_$SetAmountToImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -877,6 +907,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     required TResult Function(String amountFrom) setAmountFrom,
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function(MaterialOriginFilter type) setReturnType,
     required TResult Function() setValidationFailure,
     required TResult Function() resetFilters,
   }) {
@@ -893,6 +924,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     TResult? Function(String amountFrom)? setAmountFrom,
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function(MaterialOriginFilter type)? setReturnType,
     TResult? Function()? setValidationFailure,
     TResult? Function()? resetFilters,
   }) {
@@ -908,6 +940,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function(MaterialOriginFilter type)? setReturnType,
     TResult Function()? setValidationFailure,
     TResult Function()? resetFilters,
     required TResult orElse(),
@@ -928,6 +961,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     required TResult Function(_SetAmountFrom value) setAmountFrom,
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetOrderHistoryType value) setReturnType,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
     required TResult Function(_ResetFilters value) resetFilters,
   }) {
@@ -944,6 +978,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     TResult? Function(_SetAmountFrom value)? setAmountFrom,
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetOrderHistoryType value)? setReturnType,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
     TResult? Function(_ResetFilters value)? resetFilters,
   }) {
@@ -960,6 +995,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     TResult Function(_SetAmountFrom value)? setAmountFrom,
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetOrderHistoryType value)? setReturnType,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
     TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
@@ -972,29 +1008,30 @@ class _$_SetAmountTo implements _SetAmountTo {
 }
 
 abstract class _SetAmountTo implements ViewByRequestReturnFilterEvent {
-  const factory _SetAmountTo({required final String amountTo}) = _$_SetAmountTo;
+  const factory _SetAmountTo({required final String amountTo}) =
+      _$SetAmountToImpl;
 
   String get amountTo;
   @JsonKey(ignore: true)
-  _$$_SetAmountToCopyWith<_$_SetAmountTo> get copyWith =>
+  _$$SetAmountToImplCopyWith<_$SetAmountToImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetReturnStatusCopyWith<$Res> {
-  factory _$$_SetReturnStatusCopyWith(
-          _$_SetReturnStatus value, $Res Function(_$_SetReturnStatus) then) =
-      __$$_SetReturnStatusCopyWithImpl<$Res>;
+abstract class _$$SetReturnStatusImplCopyWith<$Res> {
+  factory _$$SetReturnStatusImplCopyWith(_$SetReturnStatusImpl value,
+          $Res Function(_$SetReturnStatusImpl) then) =
+      __$$SetReturnStatusImplCopyWithImpl<$Res>;
   @useResult
   $Res call({StatusType status, bool value});
 }
 
 /// @nodoc
-class __$$_SetReturnStatusCopyWithImpl<$Res>
+class __$$SetReturnStatusImplCopyWithImpl<$Res>
     extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
-        _$_SetReturnStatus> implements _$$_SetReturnStatusCopyWith<$Res> {
-  __$$_SetReturnStatusCopyWithImpl(
-      _$_SetReturnStatus _value, $Res Function(_$_SetReturnStatus) _then)
+        _$SetReturnStatusImpl> implements _$$SetReturnStatusImplCopyWith<$Res> {
+  __$$SetReturnStatusImplCopyWithImpl(
+      _$SetReturnStatusImpl _value, $Res Function(_$SetReturnStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1003,7 +1040,7 @@ class __$$_SetReturnStatusCopyWithImpl<$Res>
     Object? status = null,
     Object? value = null,
   }) {
-    return _then(_$_SetReturnStatus(
+    return _then(_$SetReturnStatusImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -1018,8 +1055,8 @@ class __$$_SetReturnStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetReturnStatus implements _SetReturnStatus {
-  const _$_SetReturnStatus({required this.status, required this.value});
+class _$SetReturnStatusImpl implements _SetReturnStatus {
+  const _$SetReturnStatusImpl({required this.status, required this.value});
 
   @override
   final StatusType status;
@@ -1032,10 +1069,10 @@ class _$_SetReturnStatus implements _SetReturnStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetReturnStatus &&
+            other is _$SetReturnStatusImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.value, value) || other.value == value));
   }
@@ -1046,8 +1083,9 @@ class _$_SetReturnStatus implements _SetReturnStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetReturnStatusCopyWith<_$_SetReturnStatus> get copyWith =>
-      __$$_SetReturnStatusCopyWithImpl<_$_SetReturnStatus>(this, _$identity);
+  _$$SetReturnStatusImplCopyWith<_$SetReturnStatusImpl> get copyWith =>
+      __$$SetReturnStatusImplCopyWithImpl<_$SetReturnStatusImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1059,6 +1097,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     required TResult Function(String amountFrom) setAmountFrom,
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function(MaterialOriginFilter type) setReturnType,
     required TResult Function() setValidationFailure,
     required TResult Function() resetFilters,
   }) {
@@ -1075,6 +1114,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     TResult? Function(String amountFrom)? setAmountFrom,
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function(MaterialOriginFilter type)? setReturnType,
     TResult? Function()? setValidationFailure,
     TResult? Function()? resetFilters,
   }) {
@@ -1090,6 +1130,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function(MaterialOriginFilter type)? setReturnType,
     TResult Function()? setValidationFailure,
     TResult Function()? resetFilters,
     required TResult orElse(),
@@ -1110,6 +1151,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     required TResult Function(_SetAmountFrom value) setAmountFrom,
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetOrderHistoryType value) setReturnType,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
     required TResult Function(_ResetFilters value) resetFilters,
   }) {
@@ -1126,6 +1168,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     TResult? Function(_SetAmountFrom value)? setAmountFrom,
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetOrderHistoryType value)? setReturnType,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
     TResult? Function(_ResetFilters value)? resetFilters,
   }) {
@@ -1142,6 +1185,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     TResult Function(_SetAmountFrom value)? setAmountFrom,
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetOrderHistoryType value)? setReturnType,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
     TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
@@ -1156,36 +1200,219 @@ class _$_SetReturnStatus implements _SetReturnStatus {
 abstract class _SetReturnStatus implements ViewByRequestReturnFilterEvent {
   const factory _SetReturnStatus(
       {required final StatusType status,
-      required final bool value}) = _$_SetReturnStatus;
+      required final bool value}) = _$SetReturnStatusImpl;
 
   StatusType get status;
   bool get value;
   @JsonKey(ignore: true)
-  _$$_SetReturnStatusCopyWith<_$_SetReturnStatus> get copyWith =>
+  _$$SetReturnStatusImplCopyWith<_$SetReturnStatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetValidationFailureCopyWith<$Res> {
-  factory _$$_SetValidationFailureCopyWith(_$_SetValidationFailure value,
-          $Res Function(_$_SetValidationFailure) then) =
-      __$$_SetValidationFailureCopyWithImpl<$Res>;
+abstract class _$$SetOrderHistoryTypeImplCopyWith<$Res> {
+  factory _$$SetOrderHistoryTypeImplCopyWith(_$SetOrderHistoryTypeImpl value,
+          $Res Function(_$SetOrderHistoryTypeImpl) then) =
+      __$$SetOrderHistoryTypeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialOriginFilter type});
 }
 
 /// @nodoc
-class __$$_SetValidationFailureCopyWithImpl<$Res>
+class __$$SetOrderHistoryTypeImplCopyWithImpl<$Res>
     extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
-        _$_SetValidationFailure>
-    implements _$$_SetValidationFailureCopyWith<$Res> {
-  __$$_SetValidationFailureCopyWithImpl(_$_SetValidationFailure _value,
-      $Res Function(_$_SetValidationFailure) _then)
+        _$SetOrderHistoryTypeImpl>
+    implements _$$SetOrderHistoryTypeImplCopyWith<$Res> {
+  __$$SetOrderHistoryTypeImplCopyWithImpl(_$SetOrderHistoryTypeImpl _value,
+      $Res Function(_$SetOrderHistoryTypeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+  }) {
+    return _then(_$SetOrderHistoryTypeImpl(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MaterialOriginFilter,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetOrderHistoryTypeImpl implements _SetOrderHistoryType {
+  const _$SetOrderHistoryTypeImpl({required this.type});
+
+  @override
+  final MaterialOriginFilter type;
+
+  @override
+  String toString() {
+    return 'ViewByRequestReturnFilterEvent.setReturnType(type: $type)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetOrderHistoryTypeImpl &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetOrderHistoryTypeImplCopyWith<_$SetOrderHistoryTypeImpl> get copyWith =>
+      __$$SetOrderHistoryTypeImplCopyWithImpl<_$SetOrderHistoryTypeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(ReturnFilter lastAppliedFilter)
+        updateFilterToLastApplied,
+    required TResult Function(DateTimeRange returnDateRange) setReturnDate,
+    required TResult Function(String amountFrom) setAmountFrom,
+    required TResult Function(String amountTo) setAmountTo,
+    required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function(MaterialOriginFilter type) setReturnType,
+    required TResult Function() setValidationFailure,
+    required TResult Function() resetFilters,
+  }) {
+    return setReturnType(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(ReturnFilter lastAppliedFilter)?
+        updateFilterToLastApplied,
+    TResult? Function(DateTimeRange returnDateRange)? setReturnDate,
+    TResult? Function(String amountFrom)? setAmountFrom,
+    TResult? Function(String amountTo)? setAmountTo,
+    TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function(MaterialOriginFilter type)? setReturnType,
+    TResult? Function()? setValidationFailure,
+    TResult? Function()? resetFilters,
+  }) {
+    return setReturnType?.call(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(ReturnFilter lastAppliedFilter)? updateFilterToLastApplied,
+    TResult Function(DateTimeRange returnDateRange)? setReturnDate,
+    TResult Function(String amountFrom)? setAmountFrom,
+    TResult Function(String amountTo)? setAmountTo,
+    TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function(MaterialOriginFilter type)? setReturnType,
+    TResult Function()? setValidationFailure,
+    TResult Function()? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (setReturnType != null) {
+      return setReturnType(type);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_UpdateFiltersToLastApplied value)
+        updateFilterToLastApplied,
+    required TResult Function(_SetReturnDate value) setReturnDate,
+    required TResult Function(_SetAmountFrom value) setAmountFrom,
+    required TResult Function(_SetAmountTo value) setAmountTo,
+    required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetOrderHistoryType value) setReturnType,
+    required TResult Function(_SetValidationFailure value) setValidationFailure,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return setReturnType(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_UpdateFiltersToLastApplied value)?
+        updateFilterToLastApplied,
+    TResult? Function(_SetReturnDate value)? setReturnDate,
+    TResult? Function(_SetAmountFrom value)? setAmountFrom,
+    TResult? Function(_SetAmountTo value)? setAmountTo,
+    TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetOrderHistoryType value)? setReturnType,
+    TResult? Function(_SetValidationFailure value)? setValidationFailure,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return setReturnType?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_UpdateFiltersToLastApplied value)?
+        updateFilterToLastApplied,
+    TResult Function(_SetReturnDate value)? setReturnDate,
+    TResult Function(_SetAmountFrom value)? setAmountFrom,
+    TResult Function(_SetAmountTo value)? setAmountTo,
+    TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetOrderHistoryType value)? setReturnType,
+    TResult Function(_SetValidationFailure value)? setValidationFailure,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (setReturnType != null) {
+      return setReturnType(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetOrderHistoryType implements ViewByRequestReturnFilterEvent {
+  const factory _SetOrderHistoryType(
+      {required final MaterialOriginFilter type}) = _$SetOrderHistoryTypeImpl;
+
+  MaterialOriginFilter get type;
+  @JsonKey(ignore: true)
+  _$$SetOrderHistoryTypeImplCopyWith<_$SetOrderHistoryTypeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetValidationFailureImplCopyWith<$Res> {
+  factory _$$SetValidationFailureImplCopyWith(_$SetValidationFailureImpl value,
+          $Res Function(_$SetValidationFailureImpl) then) =
+      __$$SetValidationFailureImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SetValidationFailureImplCopyWithImpl<$Res>
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
+        _$SetValidationFailureImpl>
+    implements _$$SetValidationFailureImplCopyWith<$Res> {
+  __$$SetValidationFailureImplCopyWithImpl(_$SetValidationFailureImpl _value,
+      $Res Function(_$SetValidationFailureImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SetValidationFailure implements _SetValidationFailure {
-  const _$_SetValidationFailure();
+class _$SetValidationFailureImpl implements _SetValidationFailure {
+  const _$SetValidationFailureImpl();
 
   @override
   String toString() {
@@ -1193,9 +1420,10 @@ class _$_SetValidationFailure implements _SetValidationFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SetValidationFailure);
+        (other.runtimeType == runtimeType &&
+            other is _$SetValidationFailureImpl);
   }
 
   @override
@@ -1211,6 +1439,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     required TResult Function(String amountFrom) setAmountFrom,
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function(MaterialOriginFilter type) setReturnType,
     required TResult Function() setValidationFailure,
     required TResult Function() resetFilters,
   }) {
@@ -1227,6 +1456,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     TResult? Function(String amountFrom)? setAmountFrom,
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function(MaterialOriginFilter type)? setReturnType,
     TResult? Function()? setValidationFailure,
     TResult? Function()? resetFilters,
   }) {
@@ -1242,6 +1472,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function(MaterialOriginFilter type)? setReturnType,
     TResult Function()? setValidationFailure,
     TResult Function()? resetFilters,
     required TResult orElse(),
@@ -1262,6 +1493,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     required TResult Function(_SetAmountFrom value) setAmountFrom,
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetOrderHistoryType value) setReturnType,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
     required TResult Function(_ResetFilters value) resetFilters,
   }) {
@@ -1278,6 +1510,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     TResult? Function(_SetAmountFrom value)? setAmountFrom,
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetOrderHistoryType value)? setReturnType,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
     TResult? Function(_ResetFilters value)? resetFilters,
   }) {
@@ -1294,6 +1527,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     TResult Function(_SetAmountFrom value)? setAmountFrom,
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetOrderHistoryType value)? setReturnType,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
     TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
@@ -1306,29 +1540,29 @@ class _$_SetValidationFailure implements _SetValidationFailure {
 }
 
 abstract class _SetValidationFailure implements ViewByRequestReturnFilterEvent {
-  const factory _SetValidationFailure() = _$_SetValidationFailure;
+  const factory _SetValidationFailure() = _$SetValidationFailureImpl;
 }
 
 /// @nodoc
-abstract class _$$_ResetFiltersCopyWith<$Res> {
-  factory _$$_ResetFiltersCopyWith(
-          _$_ResetFilters value, $Res Function(_$_ResetFilters) then) =
-      __$$_ResetFiltersCopyWithImpl<$Res>;
+abstract class _$$ResetFiltersImplCopyWith<$Res> {
+  factory _$$ResetFiltersImplCopyWith(
+          _$ResetFiltersImpl value, $Res Function(_$ResetFiltersImpl) then) =
+      __$$ResetFiltersImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ResetFiltersCopyWithImpl<$Res>
-    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res, _$_ResetFilters>
-    implements _$$_ResetFiltersCopyWith<$Res> {
-  __$$_ResetFiltersCopyWithImpl(
-      _$_ResetFilters _value, $Res Function(_$_ResetFilters) _then)
+class __$$ResetFiltersImplCopyWithImpl<$Res>
+    extends _$ViewByRequestReturnFilterEventCopyWithImpl<$Res,
+        _$ResetFiltersImpl> implements _$$ResetFiltersImplCopyWith<$Res> {
+  __$$ResetFiltersImplCopyWithImpl(
+      _$ResetFiltersImpl _value, $Res Function(_$ResetFiltersImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ResetFilters implements _ResetFilters {
-  const _$_ResetFilters();
+class _$ResetFiltersImpl implements _ResetFilters {
+  const _$ResetFiltersImpl();
 
   @override
   String toString() {
@@ -1336,9 +1570,9 @@ class _$_ResetFilters implements _ResetFilters {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ResetFilters);
+        (other.runtimeType == runtimeType && other is _$ResetFiltersImpl);
   }
 
   @override
@@ -1354,6 +1588,7 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function(String amountFrom) setAmountFrom,
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function(MaterialOriginFilter type) setReturnType,
     required TResult Function() setValidationFailure,
     required TResult Function() resetFilters,
   }) {
@@ -1370,6 +1605,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function(String amountFrom)? setAmountFrom,
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function(MaterialOriginFilter type)? setReturnType,
     TResult? Function()? setValidationFailure,
     TResult? Function()? resetFilters,
   }) {
@@ -1385,6 +1621,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function(MaterialOriginFilter type)? setReturnType,
     TResult Function()? setValidationFailure,
     TResult Function()? resetFilters,
     required TResult orElse(),
@@ -1405,6 +1642,7 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function(_SetAmountFrom value) setAmountFrom,
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetOrderHistoryType value) setReturnType,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
     required TResult Function(_ResetFilters value) resetFilters,
   }) {
@@ -1421,6 +1659,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function(_SetAmountFrom value)? setAmountFrom,
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetOrderHistoryType value)? setReturnType,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
     TResult? Function(_ResetFilters value)? resetFilters,
   }) {
@@ -1437,6 +1676,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function(_SetAmountFrom value)? setAmountFrom,
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetOrderHistoryType value)? setReturnType,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
     TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
@@ -1449,7 +1689,7 @@ class _$_ResetFilters implements _ResetFilters {
 }
 
 abstract class _ResetFilters implements ViewByRequestReturnFilterEvent {
-  const factory _ResetFilters() = _$_ResetFilters;
+  const factory _ResetFilters() = _$ResetFiltersImpl;
 }
 
 /// @nodoc
@@ -1523,12 +1763,12 @@ class _$ViewByRequestReturnFilterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ViewByRequestReturnFilterStateCopyWith<$Res>
+abstract class _$$ViewByRequestReturnFilterStateImplCopyWith<$Res>
     implements $ViewByRequestReturnFilterStateCopyWith<$Res> {
-  factory _$$_ViewByRequestReturnFilterStateCopyWith(
-          _$_ViewByRequestReturnFilterState value,
-          $Res Function(_$_ViewByRequestReturnFilterState) then) =
-      __$$_ViewByRequestReturnFilterStateCopyWithImpl<$Res>;
+  factory _$$ViewByRequestReturnFilterStateImplCopyWith(
+          _$ViewByRequestReturnFilterStateImpl value,
+          $Res Function(_$ViewByRequestReturnFilterStateImpl) then) =
+      __$$ViewByRequestReturnFilterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1541,13 +1781,13 @@ abstract class _$$_ViewByRequestReturnFilterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByRequestReturnFilterStateCopyWithImpl<$Res>
+class __$$ViewByRequestReturnFilterStateImplCopyWithImpl<$Res>
     extends _$ViewByRequestReturnFilterStateCopyWithImpl<$Res,
-        _$_ViewByRequestReturnFilterState>
-    implements _$$_ViewByRequestReturnFilterStateCopyWith<$Res> {
-  __$$_ViewByRequestReturnFilterStateCopyWithImpl(
-      _$_ViewByRequestReturnFilterState _value,
-      $Res Function(_$_ViewByRequestReturnFilterState) _then)
+        _$ViewByRequestReturnFilterStateImpl>
+    implements _$$ViewByRequestReturnFilterStateImplCopyWith<$Res> {
+  __$$ViewByRequestReturnFilterStateImplCopyWithImpl(
+      _$ViewByRequestReturnFilterStateImpl _value,
+      $Res Function(_$ViewByRequestReturnFilterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1557,7 +1797,7 @@ class __$$_ViewByRequestReturnFilterStateCopyWithImpl<$Res>
     Object? statusList = null,
     Object? showErrorMessage = null,
   }) {
-    return _then(_$_ViewByRequestReturnFilterState(
+    return _then(_$ViewByRequestReturnFilterStateImpl(
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
@@ -1576,9 +1816,9 @@ class __$$_ViewByRequestReturnFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByRequestReturnFilterState
+class _$ViewByRequestReturnFilterStateImpl
     extends _ViewByRequestReturnFilterState {
-  const _$_ViewByRequestReturnFilterState(
+  const _$ViewByRequestReturnFilterStateImpl(
       {required this.filter,
       required final List<StatusType> statusList,
       required this.showErrorMessage})
@@ -1604,10 +1844,10 @@ class _$_ViewByRequestReturnFilterState
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByRequestReturnFilterState &&
+            other is _$ViewByRequestReturnFilterStateImpl &&
             (identical(other.filter, filter) || other.filter == filter) &&
             const DeepCollectionEquality()
                 .equals(other._statusList, _statusList) &&
@@ -1622,9 +1862,10 @@ class _$_ViewByRequestReturnFilterState
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByRequestReturnFilterStateCopyWith<_$_ViewByRequestReturnFilterState>
-      get copyWith => __$$_ViewByRequestReturnFilterStateCopyWithImpl<
-          _$_ViewByRequestReturnFilterState>(this, _$identity);
+  _$$ViewByRequestReturnFilterStateImplCopyWith<
+          _$ViewByRequestReturnFilterStateImpl>
+      get copyWith => __$$ViewByRequestReturnFilterStateImplCopyWithImpl<
+          _$ViewByRequestReturnFilterStateImpl>(this, _$identity);
 }
 
 abstract class _ViewByRequestReturnFilterState
@@ -1633,7 +1874,7 @@ abstract class _ViewByRequestReturnFilterState
           {required final ReturnFilter filter,
           required final List<StatusType> statusList,
           required final bool showErrorMessage}) =
-      _$_ViewByRequestReturnFilterState;
+      _$ViewByRequestReturnFilterStateImpl;
   const _ViewByRequestReturnFilterState._() : super._();
 
   @override
@@ -1644,6 +1885,7 @@ abstract class _ViewByRequestReturnFilterState
   bool get showErrorMessage;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByRequestReturnFilterStateCopyWith<_$_ViewByRequestReturnFilterState>
+  _$$ViewByRequestReturnFilterStateImplCopyWith<
+          _$ViewByRequestReturnFilterStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

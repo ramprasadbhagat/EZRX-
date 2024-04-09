@@ -11,6 +11,7 @@ import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -184,6 +185,11 @@ class _ReturnItem extends StatelessWidget {
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      if (data.isMarketPlace)
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 8.0),
+                          child: MarketPlaceRectangleLogo(),
+                        ),
                       if (data.customerName.isNotEmpty &&
                           user.role.type.isSalesRepRole)
                         Padding(

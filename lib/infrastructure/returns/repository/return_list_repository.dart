@@ -122,6 +122,7 @@ class ReturnListRepository extends IReturnListRepository {
       final returnList = await remoteDataSource.fetchReturnByRequest(
         requestParams:
             ReturnListRequestDto.fromDomain(returnListByRequest).toMap(),
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(returnList);
