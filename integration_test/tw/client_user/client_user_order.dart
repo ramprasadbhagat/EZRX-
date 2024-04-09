@@ -141,7 +141,6 @@ void main() {
   const bonusMaterialNumberUnitPrice = 700;
   const contactPerson = 'contact-person';
   const contactNumber = '1234567890';
-  const alertTitle = '警報';
 
   var loginRequired = true;
 
@@ -477,9 +476,7 @@ void main() {
       }
       await notificationRobot.scrollAlertNotification();
       notificationRobot.verifyNotificationItems();
-      final itemTitle = notificationRobot.getFirstBasicNotificationTitle(
-        alertTitle: alertTitle,
-      );
+      final itemTitle = notificationRobot.getFirstBasicNotificationTitle();
       await notificationRobot.tapFirstBasicNotificationItem(itemTitle);
       if (itemTitle.startsWith(orderNotificationKeyword.tr())) {
         viewByOrdersDetailRobot.verifyPage();

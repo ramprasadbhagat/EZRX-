@@ -53,8 +53,11 @@ class CommonRobot {
     }
 
     await tester.enterText(dateRangeFields.first, fromDateString);
+    await tester.pump();
     await tester.enterText(dateRangeFields.last, toDateString);
+    await tester.pump();
     await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
     final buttons = find.descendant(
       of: find.byType(DateRangePickerDialog),
       matching: find.byType(TextButton),

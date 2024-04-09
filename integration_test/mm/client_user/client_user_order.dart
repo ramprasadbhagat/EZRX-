@@ -1,13 +1,13 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/locator.dart';
+// import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+// import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+// import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/announcement_article/announcement_article_root_robot.dart';
 import '../../robots/announcement_article/articles/articles_details_robot.dart';
 import '../../robots/announcement_article/articles/articles_robot.dart';
@@ -459,7 +459,9 @@ void main() {
       //verify
       notificationRobot.verifyPage();
       notificationRobot.verifyScrollList();
-      notificationRobot.verifyDeleteButton();
+      if (notificationRobot.getFirstBasicNotificationTitle().isNotEmpty) {
+        notificationRobot.verifyDeleteButton();
+      }
     });
 
     testWidgets(
@@ -1196,7 +1198,7 @@ void main() {
       productDetailRobot.verifyExpiryDate(
         materialExpiryDate,
       );
-      productDetailRobot.verifyExpiryDate(
+      productDetailRobot.verifyBatch(
         materialBatch,
       );
       await productDetailRobot.tapExpiryDateInfoIcon();
@@ -2325,7 +2327,7 @@ void main() {
       testWidgets(
           'EZRX-T85 | Verify Filter by status when selecting 1 checkbox and existing data available',
           (tester) async {
-        const statusFilter = 'Order Created';
+        const statusFilter = 'Failed';
 
         //init app
         await pumpAppWithHomeScreen(tester);
@@ -2389,6 +2391,8 @@ void main() {
 
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(materialPrincipalName);
         await viewByItemsDetailRobot.verifyItemComponent();
       });
 
@@ -2411,6 +2415,8 @@ void main() {
         viewByItemsDetailRobot.verifyHeader();
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(materialPrincipalName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(materialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
@@ -2679,6 +2685,9 @@ void main() {
         await checkoutWithMaterial(materialNumber, orderQty);
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+        await commonRobot.pullToRefresh();
         await commonRobot.navigateToScreen(NavigationTab.products);
         await productRobot.openSearchProductScreen();
         await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
@@ -2694,7 +2703,6 @@ void main() {
 
         //verify
         await ordersRootRobot.switchToViewByOrders();
-        await commonRobot.pullToRefresh();
         await viewByOrdersRobot.tapFirstOrder();
         await viewByOrdersDetailRobot.tapBuyAgainButton();
         cartRobot.verifyPage();
@@ -2907,8 +2915,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }

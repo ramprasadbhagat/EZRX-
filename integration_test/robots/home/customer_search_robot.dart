@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../common/extension.dart';
@@ -19,8 +20,11 @@ class CustomerSearchRobot {
     expect(customerSearchPage, findsOneWidget);
   }
 
+  bool get isCustomerSearchPageVisible =>
+      customerSearchPage.evaluate().isNotEmpty;
+
   Future<void> waitForCustomerCodePageToLoad() async {
-    await tester.pumpUntilVisible(customerSearchPage, maxIteration: 30);
+    await tester.pumpUntilVisible(customerSearchPage);
   }
 
   Future<void> selectCustomerSearch(String shipToCode) async {
@@ -64,9 +68,8 @@ class CustomerSearchRobot {
     await tester.tap(customerCodeSearchField);
     await tester.pump();
     await tester.enterText(customerCodeSearchField, customerCode);
-    await tester.pump();
     await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
+    await tester.pump(Durations.long2);
   }
 
   void findCustomerCode(String shipToCode) {

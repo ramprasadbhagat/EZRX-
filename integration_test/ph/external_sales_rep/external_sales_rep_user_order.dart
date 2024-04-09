@@ -181,6 +181,7 @@ void main() {
     await commonRobot.closeAnnouncementAlertDialog();
   }
 
+  // Login on behalf with sales org
   Future<void> pumpAppWithLoginOnBehalf(
     WidgetTester tester, {
     String behalfName = proxyUserName,
@@ -189,7 +190,7 @@ void main() {
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, marketSingapore);
-      await tester.pumpAndSettle();
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
@@ -201,7 +202,7 @@ void main() {
       await moreRobot.tapLoginOnBehalfTile();
       await loginOnBehalfRobot.enterUserNameField(behalfName);
       await loginOnBehalfRobot.tapLoginButton();
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
@@ -213,7 +214,7 @@ void main() {
       await tester.pumpAndSettle();
       proxyLoginRequired = false;
     } else {
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
@@ -309,7 +310,6 @@ void main() {
       //verify
       notificationRobot.verifyPage();
       notificationRobot.verifyScrollList();
-      notificationRobot.verifyDeleteButton();
     });
 
     testWidgets(

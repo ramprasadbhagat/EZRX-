@@ -137,7 +137,7 @@ class ProductDetailRobot extends CommonRobot {
         (tester.widget<RichText>(materialDetailsStock).text as TextSpan)
             .children;
     final result = richTextChildren!.any(
-      (element) => element.toPlainText().contains('${'Batch'.tr()}: $batch '),
+      (element) => element.toPlainText().contains('${'Batch'.tr()}: $batch'),
     );
     expect(result, true);
   }

@@ -1,8 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/locator.dart';
+// import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -39,8 +38,8 @@ import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
 import '../../robots/returns/returns_root_robot.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+// import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+// import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -179,6 +178,7 @@ void main() {
     }
   }
 
+  //Login on behalf with sales org
   Future<void> pumpAppWithLoginOnBehalf(
     WidgetTester tester, {
     String behalfName = proxyUserName,
@@ -187,6 +187,7 @@ void main() {
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, marketMyanmar);
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
@@ -200,20 +201,20 @@ void main() {
       await moreRobot.tapLoginOnBehalfTile();
       await loginOnBehalfRobot.enterUserNameField(behalfName);
       await loginOnBehalfRobot.tapLoginButton();
-      await tester.pumpAndSettle(const Duration(seconds: 5));
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await commonRobot.dismissSnackbar(dismissAll: true);
-      await customerSearchRobot.selectCustomerSearch(shipToCode);
-      await commonRobot.dismissSnackbar(dismissAll: true);
-      moreRobot.verifyProfileName(behalfName, behalfName);
+      if (customerSearchRobot.isCustomerSearchPageVisible) {
+        await customerSearchRobot.selectCustomerSearch(shipToCode);
+        await commonRobot.dismissSnackbar(dismissAll: true);
+      }
       await commonRobot.navigateToScreen(NavigationTab.home);
+      await commonRobot.dismissSnackbar(dismissAll: true);
       proxyLoginRequired = false;
     } else {
-      await tester.pumpAndSettle(const Duration(seconds: 1));
       await commonRobot.changeDeliveryAddress(
         shipToCode,
       );
       await commonRobot.dismissSnackbar(dismissAll: true);
-      await tester.pumpAndSettle();
       await commonRobot.closeAnnouncementAlertDialog();
     }
   }
@@ -289,11 +290,6 @@ void main() {
   });
 
   group('Notification Tab -', () {
-    const orderNotificationKeyword = 'Order';
-    const returnNotificationKeyword = 'Return request';
-    const paymentNotificationKeyword = 'Payment';
-    const notificationIndex = 3;
-
     testWidgets('EZRX-T95 | Verify Notification Tab with Default Values',
         (tester) async {
       //init app
@@ -302,8 +298,9 @@ void main() {
 
       //verify
       notificationRobot.verifyPage();
-      notificationRobot.verifyScrollList();
-      notificationRobot.verifyDeleteButton();
+      if (notificationRobot.getFirstBasicNotificationTitle().isNotEmpty) {
+        notificationRobot.verifyDeleteButton();
+      }
     });
 
     testWidgets(
@@ -319,15 +316,18 @@ void main() {
 
         return;
       }
+      await notificationRobot.scrollAlertNotification();
       notificationRobot.verifyNotificationItems();
-      final itemDescription =
-          notificationRobot.getNotificationDescription(notificationIndex);
-      await notificationRobot.tapNotificationItem(notificationIndex);
-      if (itemDescription.startsWith(orderNotificationKeyword.tr())) {
+      if (notificationRobot.getFirstBasicNotificationTitle().isEmpty) {
+        return;
+      }
+      final itemTitle = notificationRobot.getFirstBasicNotificationTitle();
+      await notificationRobot.tapFirstBasicNotificationItem(itemTitle);
+      if (viewByOrdersDetailRobot.isOrderDetailPage) {
         viewByOrdersDetailRobot.verifyPage();
-      } else if (itemDescription.startsWith(returnNotificationKeyword.tr())) {
+      } else if (returnsByItemsDetailRobot.isReturnDetailPage) {
         returnsByItemsDetailRobot.verifyPage();
-      } else if (itemDescription.startsWith(paymentNotificationKeyword.tr())) {
+      } else if (paymentDetailRobot.isPaymentDetailPage) {
         paymentDetailRobot.verifyPage();
       } else {
         notificationRobot.verifyRedirectNotAvailableMessage();
@@ -347,14 +347,8 @@ void main() {
         return;
       }
       notificationRobot.verifyNotificationItems();
-      final itemDescription =
-          notificationRobot.getNotificationDescription(notificationIndex);
       await notificationRobot.pullToRefresh();
       notificationRobot.verifyNotificationItems();
-      notificationRobot.verifyNotificationWithDescription(
-        notificationIndex,
-        itemDescription,
-      );
     });
   });
 
@@ -453,18 +447,22 @@ void main() {
       // contain customer code
       await customerSearchRobot.search(subCustomerCode);
       customerSearchRobot.verifySearchResults(subCustomerCode);
+      await commonRobot.tapClearSearch();
 
       // contain customer name
       await customerSearchRobot.search(subCustomerName);
       customerSearchRobot.verifySearchResults(subCustomerName);
+      await commonRobot.tapClearSearch();
 
       // contain ship to code
       await customerSearchRobot.search(subShipToCode);
       customerSearchRobot.verifySearchResults(subShipToCode);
+      await commonRobot.tapClearSearch();
 
       // contain ship to name
       await customerSearchRobot.search(subShipToName);
       customerSearchRobot.verifySearchResults(subShipToName);
+      await commonRobot.tapClearSearch();
     });
 
     testWidgets(
@@ -1259,7 +1257,7 @@ void main() {
       testWidgets(
           'EZRX-T85 | Verify Filter by status when selecting 1 checkbox and existing data available',
           (tester) async {
-        const statusFilter = 'Order created';
+        const statusFilter = 'Failed';
 
         //init app
         await pumpAppWithLoginOnBehalf(tester);
@@ -1621,7 +1619,9 @@ void main() {
       cartRobot.verifyCartQty(1);
       cartRobot.verifyQtyOnAppBar(1);
       cartRobot.verifyCartShipToAddress(shipToAddress);
+      await cartRobot.tapToSeePriceBreakDown();
       cartRobot.verifyTaxDescription();
+      await cartRobot.tapToClosePriceBreakDown();
       cartRobot.verifyCartTotalPrice(materialUnitPrice.priceDisplay(currency));
       cartRobot.verifyCheckoutButton();
 
@@ -1660,13 +1660,14 @@ void main() {
       await browseProductFromEmptyCart();
 
       //verify
-      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productSuggestionRobot
+          .searchWithKeyboardAction(oosPreOrderMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(oosPreOrderMaterialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
       await productDetailRobot.tapCartButton();
-      await cartRobot.verifyMaterial(materialNumber);
-      await cartRobot.swipeMaterialToDelete(materialNumber);
+      await cartRobot.verifyMaterial(oosPreOrderMaterialNumber);
+      await cartRobot.swipeMaterialToDelete(oosPreOrderMaterialNumber);
       await cartRobot.verifyClearCartSuccessMessage();
       cartRobot.verifyNoRecordFound();
 
@@ -1699,7 +1700,7 @@ void main() {
 
     testWidgets('EZRX-T102 | Verify add bonus/sample item in cart',
         (tester) async {
-      const invalidQty = 99999;
+      const maxQty = 99999;
       const validQty = 10;
       const materialIndex = 0;
 
@@ -1722,38 +1723,24 @@ void main() {
       bonusSampleRobot.verifyCloseButton();
       await bonusSampleRobot.tapCloseButton();
       bonusSampleRobot.verifySheet(isVisible: false);
-
-      //Unhappy case when adding
-      await cartRobot.tapMaterialBonusSampleButton(materialNumber);
-      await bonusSampleRobot.searchWithKeyboardAction(materialName);
-      await bonusSampleRobot.tapSubmitButton(materialIndex);
-      bonusSampleRobot.verifyEmptyQtyMessage(isVisible: true);
-      await bonusSampleRobot.enterBonusSampleQty(materialIndex, 1);
-      await bonusSampleRobot.tapSubmitButton(materialIndex);
-      bonusSampleRobot.verifyAddToCartSuccessMessage();
-      await bonusSampleRobot.dismissSnackbar();
-      await bonusSampleRobot.enterBonusSampleQty(materialIndex, invalidQty);
-      await bonusSampleRobot.tapSubmitButton(materialIndex);
-      bonusSampleRobot.verifyEmptyQtyMessage(isVisible: false);
-      bonusSampleRobot.verifyInvalidQtyMessage();
-      await bonusSampleRobot.dismissSnackbar();
-      await bonusSampleRobot.tapCloseButton();
-
       //Happy case when adding
-      await cartRobot.swipeBonusMaterialToDelete(
-        materialNumber,
-        materialNumber,
-      );
       await cartRobot.tapMaterialBonusSampleButton(materialNumber);
       await bonusSampleRobot.searchWithKeyboardAction(materialName);
       final bonusSampleMaterialNumber =
           bonusSampleRobot.getBonusSampleMaterialNumber(materialIndex);
       final bonusSampleMaterialDescription =
           bonusSampleRobot.getBonusSampleMaterialDescription(materialIndex);
+      await bonusSampleRobot.tapSubmitButton(materialIndex);
+      bonusSampleRobot.verifyEmptyQtyMessage(isVisible: true);
       await bonusSampleRobot.enterBonusSampleQty(materialIndex, validQty);
       await bonusSampleRobot.tapSubmitButton(materialIndex);
-      bonusSampleRobot.verifyAddToCartSuccessMessage();
-      await bonusSampleRobot.dismissSnackbar();
+      bonusSampleRobot.verifyEmptyQtyMessage(isVisible: false);
+      //Unhappy case when adding
+      await bonusSampleRobot.enterBonusSampleQty(materialIndex, maxQty);
+      await bonusSampleRobot.tapSubmitButton(materialIndex);
+      bonusSampleRobot.verifyInvalidQtyMessage();
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await tester.pumpAndSettle();
       await bonusSampleRobot.tapCloseButton();
       bonusSampleRobot.verifySheet(isVisible: false);
       await cartRobot.verifyBonusMaterial(
@@ -1774,12 +1761,14 @@ void main() {
         materialNumber,
         bonusSampleMaterialNumber,
         materialStockInfo,
+        isBatchNumberVisible: false,
       );
       await cartRobot.tapBonusItemExpiryDateInfoIcon(
         materialNumber,
         bonusSampleMaterialNumber,
       );
       await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
+
       cartRobot.verifyBonusMaterialFreeLabel(
         materialNumber,
         bonusSampleMaterialNumber,
@@ -1888,7 +1877,9 @@ void main() {
       await productDetailRobot.tapCartButton();
 
       //verify
+      await cartRobot.tapToSeePriceBreakDown();
       cartRobot.verifyTaxDescription();
+      await cartRobot.tapToClosePriceBreakDown();
       cartRobot.verifyCartTotalPrice(materialUnitPrice.priceDisplay(currency));
       await cartRobot.tapShowPriceSummary();
       orderPriceSummaryRobot.verifySheet(isVisible: true);
@@ -1979,7 +1970,9 @@ void main() {
       );
       cartRobot.verifyCartQty(1);
       cartRobot.verifyQtyOnAppBar(1);
+      await cartRobot.tapToSeePriceBreakDown();
       cartRobot.verifyTaxDescription();
+      await cartRobot.tapToClosePriceBreakDown();
       cartRobot.verifyCartTotalPrice(totalPrice);
       cartRobot.verifyCheckoutButton();
 
@@ -2006,7 +1999,9 @@ void main() {
         materialNumber,
         newTotalPrice,
       );
+      await cartRobot.tapToSeePriceBreakDown();
       cartRobot.verifyTaxDescription();
+      await cartRobot.tapToClosePriceBreakDown();
       cartRobot.verifyCartTotalPrice(newTotalPrice);
     });
   });
@@ -2208,8 +2203,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }

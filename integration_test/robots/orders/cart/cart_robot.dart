@@ -21,7 +21,7 @@ class CartRobot {
   final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
   final clearCartButton = find.byKey(WidgetKeys.cartClearButton);
   final defaultScrollOffset = const Offset(0, -200);
-  final defaultSwipeOffset = const Offset(-100, 0);
+  final defaultSwipeOffset = const Offset(-100, -60);
   final swipeDeleteButton = find.byKey(WidgetKeys.cartItemSwipeDeleteButton);
   final counterOfferButton = find.byKey(WidgetKeys.counterOfferPriceButtonKey);
   final bonusSampleButton = find.byKey(WidgetKeys.bonusSampleItemButtonKey);
@@ -183,6 +183,16 @@ class CartRobot {
     );
     await tester.tap(find.byKey(WidgetKeys.priceSummaryListTile));
     await tester.pumpAndSettle();
+  }
+
+  Future<void> tapToClosePriceBreakDown() async {
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(WidgetKeys.closeButton),
+        matching: find.text('Close'.tr()),
+      ),
+    );
+    await tester.pumpAndSettle(Durations.medium1);
   }
 
   Future<void> tapShowShipToAddressDetail() async {
