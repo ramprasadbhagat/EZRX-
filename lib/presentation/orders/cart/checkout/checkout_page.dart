@@ -23,6 +23,7 @@ import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/market_place_title_with_logo.dart';
@@ -107,6 +108,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ),
           body: Column(
             children: [
+              const LicenseExpiredBanner(),
               Expanded(
                 child: CustomScrollView(
                   key: WidgetKeys.checkoutScrollList,

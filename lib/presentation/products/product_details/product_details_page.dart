@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
@@ -503,9 +502,6 @@ class _FooterState extends State<_Footer> {
         Price.empty();
     final eligibilityState = context.read<EligibilityBloc>().state;
     if (eligibilityState.disableCreateOrder) return false;
-    if (context.read<CustomerLicenseBloc>().state.isLicenseExpired) {
-      return false;
-    }
     final materialWithoutPrice =
         eligibilityState.salesOrgConfigs.materialWithoutPrice;
     final materialInStock = (!stockInfo.inStock.isMaterialInStock

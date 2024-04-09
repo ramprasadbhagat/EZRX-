@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -95,6 +96,10 @@ class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState>
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class CustomerLicenseBlocMock
+    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
+    implements CustomerLicenseBloc {}
+
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
@@ -158,6 +163,7 @@ void main() {
   late Bundle fakeBundleList;
   late List<Price> priceList;
   late AplSimulatorOrder aplSimulatorOrder;
+  late CustomerLicenseBloc customerLicenseBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   final checkoutPageRouteRouteData = RouteData(
     route: const RouteMatch(
@@ -270,6 +276,7 @@ void main() {
       materialPriceBlocMock = MaterialPriceBlocMock();
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
+      customerLicenseBlocMock = CustomerLicenseBlocMock();
 
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial(),
@@ -277,6 +284,8 @@ void main() {
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial().copyWith(),
       );
+      when(() => customerLicenseBlocMock.state)
+          .thenReturn(CustomerLicenseState.initial());
       when(() => customerCodeBloc.state).thenReturn(
         CustomerCodeState.initial(),
       );
@@ -352,6 +361,9 @@ void main() {
             ),
             BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBloc,
+            ),
+            BlocProvider<CustomerLicenseBloc>(
+              create: (context) => customerLicenseBlocMock,
             ),
             BlocProvider<ComboDealListBloc>(
               create: (context) => comboDealListBloc,

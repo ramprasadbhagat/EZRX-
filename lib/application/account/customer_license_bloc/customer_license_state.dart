@@ -17,9 +17,6 @@ class CustomerLicenseState with _$CustomerLicenseState {
         customerLicenses: <CustomerLicense>[],
       );
 
-  //TODO: will revisit to refine the logic once requirement is confirmed.
-  bool get isLicenseExpired => false;
-
-  // bool get isLicenseExpired => customerLicenses
-  //     .any((element) => !element.validTo.isDateMoreThanAWeekAway);
+  bool get isLicenseExpired => customerLicenses
+      .any((element) => !element.validTo.isDateMoreThanAWeekAway);
 }
