@@ -97,9 +97,9 @@ class ViewByOrdersRobot extends CommonRobot {
     expect(
       find.byWidgetPredicate(
         (widget) =>
-            widget is Text &&
+            widget is RichText &&
             widget.key == WidgetKeys.viewByOrdersCodeLabelKey &&
-            widget.data!.contains(searchKey),
+            widget.text.toPlainText().contains(searchKey),
       ),
       findsNWidgets(orderItems.evaluate().length),
     );
@@ -145,7 +145,7 @@ class ViewByOrdersRobot extends CommonRobot {
   String getOrderIdText({required int index}) {
     const suffixText = '#';
     final labelText =
-        tester.widget<Text>(orderCodeLabel.at(index)).data ?? suffixText;
+        tester.widget<RichText>(orderCodeLabel.at(index)).text.toPlainText();
 
     return labelText.split(suffixText)[1];
   }

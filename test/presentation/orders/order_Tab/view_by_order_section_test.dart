@@ -25,6 +25,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.d
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -752,6 +753,36 @@ void main() {
         expect(
           find.byType(MarketPlaceLogo),
           findsNWidgets(mpItemsCount),
+        );
+      });
+
+      testWidgets('Display queue number and tooltip when order is on hold',
+          (tester) async {
+        final fakeOrderHistory = viewByOrder.orderHeaders.first
+            .copyWith(processingStatus: OrderStepValue('OnHold'));
+        when(() => mockViewByOrderBloc.state).thenReturn(
+          ViewByOrderState.initial().copyWith.viewByOrderList(
+            orderHeaders: [fakeOrderHistory],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        final orderItems = find.byKey(WidgetKeys.viewByOrdersItemKey);
+        expect(orderItems, findsOneWidget);
+        expect(
+          find.descendant(
+            of: orderItems,
+            matching: find.byType(QueueNumberInfoIcon),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          tester
+              .widget<RichText>(find.byKey(WidgetKeys.viewByOrdersCodeLabelKey))
+              .text
+              .toPlainText(),
+          contains('Queue #${fakeOrderHistory.orderNumber.getValue()}'),
         );
       });
     });

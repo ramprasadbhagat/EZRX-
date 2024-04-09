@@ -48,26 +48,30 @@ class _ViewByOrder extends StatelessWidget {
           children: [
             Row(
               children: [
+                if (viewByOrderHistoryItem.isMarketPlace)
+                  const Padding(
+                    padding: EdgeInsets.only(right: 8),
+                    child: MarketPlaceLogo(),
+                  ),
                 Flexible(
-                  child: Row(
-                    children: [
-                      if (viewByOrderHistoryItem.isMarketPlace)
-                        const Padding(
-                          padding: EdgeInsets.only(right: 8),
-                          child: MarketPlaceLogo(),
+                  child: RichText(
+                    key: WidgetKeys.viewByOrdersCodeLabelKey,
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.labelSmall,
+                      children: [
+                        TextSpan(
+                          text:
+                              '${context.tr(viewByOrderHistoryItem.processingStatus.prefix)} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
                         ),
-                      Expanded(
-                        child: Text(
-                          '${context.tr(viewByOrderHistoryItem.processingStatus.prefix)} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
-                          key: WidgetKeys.viewByOrdersCodeLabelKey,
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                      ),
-                    ],
+                        if (viewByOrderHistoryItem.processingStatus.isInQueue)
+                          const WidgetSpan(
+                            alignment: PlaceholderAlignment.middle,
+                            child: QueueNumberInfoIcon(),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
-                if (viewByOrderHistoryItem.processingStatus.isInQueue)
-                  const QueueNumberInfoIcon(),
                 if (eligibilityState.salesOrg.isID)
                   StatusLabel(
                     key: WidgetKeys.viewByOrderStatusKey,

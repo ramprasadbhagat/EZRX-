@@ -15,13 +15,13 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/view_by_item_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -30,48 +30,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class MockHTTPService extends Mock implements HttpService {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
-    implements ViewByItemsBloc {}
-
-class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ViewByOrderDetailsBlockMock
-    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
-    implements ViewByOrderDetailsBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class ViewByItemFilterMockBloc
-    extends MockBloc<ViewByItemFilterEvent, ViewByItemFilterState>
-    implements ViewByItemFilterBloc {}
-
-class ProductImageMockBloc
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class ViewByItemDetailsMockBloc
-    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
-    implements ViewByItemDetailsBloc {}
 
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;
@@ -81,10 +46,10 @@ void main() {
   late ViewByItemsBloc mockViewByItemsBloc;
   late ViewByOrderDetailsBloc mockViewByOrderDetailsBloc;
   late SalesOrgBloc mockSalesOrgBloc;
-  late UserMockBloc userBlocMock;
-  late ViewByItemFilterMockBloc mockViewByItemFilterBloc;
-  late ProductImageMockBloc mockProductImageBloc;
-  late ViewByItemDetailsMockBloc mockViewByItemDetailsBloc;
+  late UserBlocMock userBlocMock;
+  late ViewByItemFilterBlocMock mockViewByItemFilterBloc;
+  late ProductImageBlocMock mockProductImageBloc;
+  late ViewByItemDetailsBlocMock mockViewByItemDetailsBloc;
 
   final fakeOrderHistoryItems = [
     OrderHistoryItem.empty().copyWith(
@@ -109,18 +74,18 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     WidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     orderHistory = await ViewByItemLocalDataSource().getViewByItems();
     autoRouterMock = locator<AppRouter>();
     customerCodeBlocMock = CustomerCodeBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     mockViewByItemsBloc = ViewByItemsBlocMock();
-    mockViewByOrderDetailsBloc = ViewByOrderDetailsBlockMock();
+    mockViewByOrderDetailsBloc = ViewByOrderDetailsBlocMock();
     mockSalesOrgBloc = SalesOrgMockBloc();
-    userBlocMock = UserMockBloc();
-    mockViewByItemFilterBloc = ViewByItemFilterMockBloc();
-    mockProductImageBloc = ProductImageMockBloc();
-    mockViewByItemDetailsBloc = ViewByItemDetailsMockBloc();
+    userBlocMock = UserBlocMock();
+    mockViewByItemFilterBloc = ViewByItemFilterBlocMock();
+    mockProductImageBloc = ProductImageBlocMock();
+    mockViewByItemDetailsBloc = ViewByItemDetailsBlocMock();
   });
 
   group('View by Item In Order section', () {
@@ -482,6 +447,36 @@ void main() {
           )
           .data;
       expect(sellerText, startsWith('Sold by: '));
+    });
+
+    testWidgets('Display queue number and tooltip when order is on hold',
+        (tester) async {
+      final mockOrderHistory = orderHistory.orderHistoryItems.first
+          .copyWith(status: OrderStepValue('OnHold'));
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial()
+            .copyWith
+            .orderHistory(orderHistoryItems: [mockOrderHistory]),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final historyTile = find.byKey(WidgetKeys.viewByItemsOrderItemKey);
+      expect(historyTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byType(QueueNumberInfoIcon),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        tester
+            .widget<RichText>(find.byKey(WidgetKeys.commonTileItemHeader))
+            .text
+            .toPlainText(),
+        contains('Queue #${mockOrderHistory.orderNumber.getValue()}'),
+      );
     });
   });
 }

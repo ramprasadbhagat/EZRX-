@@ -259,6 +259,7 @@ class _HeaderItem extends StatelessWidget {
                           ),
                   children: [
                     WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
                       child: headerTextInfoIcon ?? const SizedBox.shrink(),
                     ),
                   ],

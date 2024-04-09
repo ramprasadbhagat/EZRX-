@@ -109,7 +109,8 @@ String getOrderStatus(String status) {
   }
 }
 
-bool checkIfInQueue(String value) => value.toLowerCase() == 'in queue';
+bool checkIfInQueue(String value) =>
+    isEqual(value, 'in queue') || isEqual(value, 'OnHold');
 
 String queueStateToOrderConfirmationIcon(bool isInQueue) =>
     isInQueue ? SvgImage.orderInQueue : SvgImage.orderCreated;

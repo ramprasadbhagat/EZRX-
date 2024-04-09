@@ -9,17 +9,20 @@ class QueueNumberInfoIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      constraints: const BoxConstraints(),
-      padding: const EdgeInsets.only(left: 4),
-      onPressed: () => showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        isDismissible: false,
-        builder: (_) => const UuidDescriptionBottomSheet(),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () => showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          isDismissible: false,
+          builder: (_) => const UuidDescriptionBottomSheet(),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Icon(Icons.info, size: 20, color: iconColor),
+        ),
       ),
-      color: iconColor,
-      icon: const Icon(Icons.info, size: 20),
     );
   }
 }
