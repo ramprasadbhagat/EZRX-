@@ -658,4 +658,25 @@ void main() {
       );
     });
   });
+  group('Phone Number Value Object -', () {
+    test('Valid Phone Number', () {
+      expect(
+        PhoneNumber('1984i32ijnjnbfjshdiuoiwer9283092803502hfdsjfk')
+            .validPhoneNumber,
+        '1984329283092803',
+      );
+    });
+
+    test('Display Telephone Number', () {
+      expect(
+        PhoneNumber('1984i32ijnjnbfjshdiuoiwer9283092803502hfdsjfk')
+            .displayTelephoneNumber,
+        '1984329283092803',
+      );
+      expect(
+        PhoneNumber('').displayTelephoneNumber,
+        'NA',
+      );
+    });
+  });
 }

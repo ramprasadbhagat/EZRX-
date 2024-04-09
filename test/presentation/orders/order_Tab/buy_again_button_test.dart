@@ -1,8 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/view_by_order_section.dart';
@@ -19,20 +23,30 @@ class ReOrderPermissionBlocMock
     extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
     implements ReOrderPermissionBloc {}
 
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late AppRouter autoRouterMock;
   late EligibilityBlocMock eligibilityBlocMock;
+  late AdditionalDetailsBloc additionalDetailsBlocMock;
+  late MaterialPriceBloc materialPriceBlocMock;
   late CartBlocMock cartBlocMock;
+  final fakePhoneNumber = PhoneNumber('0987378484');
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AutoRouteMock());
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
+    additionalDetailsBlocMock = AdditionalDetailsBlocMock();
+    materialPriceBlocMock = MaterialPriceBlocMock();
     locator.registerFactory(() => reOrderPermissionBlocMock);
     cartBlocMock = CartBlocMock();
     autoRouterMock = locator<AutoRouteMock>();
+
     eligibilityBlocMock = EligibilityBlocMock();
   });
   group('Order History Details Page', () {
@@ -42,6 +56,12 @@ void main() {
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial(),
+      );
+      when(() => additionalDetailsBlocMock.state).thenReturn(
+        AdditionalDetailsState.initial(),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial(),
       );
     });
 
@@ -59,6 +79,12 @@ void main() {
           ),
           BlocProvider<ReOrderPermissionBloc>(
             create: ((context) => reOrderPermissionBlocMock),
+          ),
+          BlocProvider<AdditionalDetailsBloc>(
+            create: (context) => additionalDetailsBlocMock,
+          ),
+          BlocProvider<MaterialPriceBloc>(
+            create: (context) => materialPriceBlocMock,
           ),
         ],
         child: Material(
@@ -122,6 +148,54 @@ void main() {
           ),
         ),
       );
+    });
+
+    testWidgets('Pass phone number to the Checkout page when reorder is valid',
+        (tester) async {
+      when(
+        () => autoRouterMock.push(const CartPageRoute()),
+      ).thenAnswer((invocation) => Future.value());
+
+      whenListen(
+        reOrderPermissionBlocMock,
+        Stream.fromIterable([
+          ReOrderPermissionState.initial().copyWith(
+            isFetching: true,
+          ),
+          ReOrderPermissionState.initial(),
+        ]),
+      );
+
+      await tester.pumpWidget(
+        getScopedWidget(
+          OrderHistoryDetails.empty()
+              .copyWith(telephoneNumber: fakePhoneNumber),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      verify(
+        () => cartBlocMock.add(
+          CartEvent.addHistoryItemsToCart(
+            items: [],
+            counterOfferDetails: RequestCounterOfferDetails.empty(),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => additionalDetailsBlocMock.add(
+          AdditionalDetailsEvent.initiateFromHistory(
+            data: DeliveryInfoData.empty().copyWith(
+              mobileNumber: fakePhoneNumber,
+            ),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => autoRouterMock.push(const CartPageRoute()),
+      ).called(1);
     });
   });
 }

@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
@@ -111,6 +112,7 @@ void main() {
   //late List<CustomerLicense> customerLicense;
 
   const fakeCreatedDate = '20230412';
+  final fakePhoneNumber = PhoneNumber('19877389922');
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerFactory(() => viewByOrderBlocMock);
@@ -143,6 +145,7 @@ void main() {
           expiryDate: DateTimeStringValue('2023-10-04'),
           invoiceData: InvoiceData.empty()
               .copyWith(invoiceNumber: StringValue('123456')),
+          telephoneNumber: fakePhoneNumber,
         );
 
     // customerLicense =
@@ -954,6 +957,11 @@ void main() {
         final fakeItem = MaterialInfo.empty().copyWith(
           quantity: MaterialQty(fakeOrderHistoryItem.qty),
         );
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem: fakeOrderHistoryItem,
+          ),
+        );
         whenListen(
           reOrderPermissionBlocMock,
           Stream.fromIterable([
@@ -967,6 +975,16 @@ void main() {
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
+
+        verify(
+          () => additionalDetailsBlocMock.add(
+            AdditionalDetailsEvent.initiateFromHistory(
+              data: DeliveryInfoData.empty().copyWith(
+                mobileNumber: fakePhoneNumber,
+              ),
+            ),
+          ),
+        ).called(1);
 
         verify(
           () => cartBlocMock.add(

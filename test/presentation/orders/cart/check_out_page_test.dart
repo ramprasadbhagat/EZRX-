@@ -1390,20 +1390,10 @@ void main() {
     );
 
     testWidgets(
-      '=> test contsct number in place Order when  enableMobileNumber is true and entered a 16 digit mobile number ',
+      '=> test format contact number with maximum 16 digit characters',
       (tester) async {
-        when(() => additionalDetailsBlocMock.state).thenReturn(
-          AdditionalDetailsState.initial().copyWith(
-            deliveryInfoData: DeliveryInfoData.empty()
-                .copyWith(mobileNumber: PhoneNumber('+840312123123')),
-            isValidated: true,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            isSubmitting: true,
-          ),
-        );
+        const phoneNumberUserInput = 'abc+-193847293849503827344';
+
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
             configs: fakeVNSalesOrgConfigs,
@@ -1420,25 +1410,48 @@ void main() {
             find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        await tester.enterText(phoneNumberInputKey, '0312123123');
+        await tester.enterText(phoneNumberInputKey, phoneNumberUserInput);
         await tester.pump();
-
-        final placeOrder = find.text('Place order');
-        expect(placeOrder, findsOneWidget);
-        await tester.tap(placeOrder);
-        await tester.pump();
-
-        expect(phoneNumberInputKey, findsOneWidget);
-
         expect(
           (tester.widget(phoneNumberInputKey) as TextFormField)
-              .validator
-              ?.call('MobileNumber field'),
-          null,
+              .controller
+              ?.text,
+          '1938472938495038',
         );
       },
     );
 
+    testWidgets(
+        '=> test update contact number field with the mobile number from state',
+        (tester) async {
+      const fakeMobileNumber = '0312123123';
+      when(() => additionalDetailsBlocMock.state).thenReturn(
+        AdditionalDetailsState.initial().copyWith(
+          deliveryInfoData: DeliveryInfoData.empty()
+              .copyWith(mobileNumber: PhoneNumber(fakeMobileNumber)),
+        ),
+      );
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: fakeVNSalesOrgConfigs,
+          salesOrganisation: fakeVNSalesOrganisation,
+        ),
+      );
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeVNSalesOrgConfigs,
+          salesOrganisation: fakeVNSalesOrganisation,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final phoneNumberInputKey =
+          find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
+      expect(
+        (tester.widget(phoneNumberInputKey) as TextFormField).controller?.text,
+        fakeMobileNumber,
+      );
+    });
     testWidgets(
       '=> test Reference Note in place Order when referenceNote is true ',
       (tester) async {
