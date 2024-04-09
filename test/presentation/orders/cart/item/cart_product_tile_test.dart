@@ -17,6 +17,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
@@ -79,6 +80,7 @@ void main() {
             materialInfo: MaterialInfo.empty().copyWith(
               materialNumber: MaterialNumber('fake-material-number'),
             ),
+            is26SeriesMaterial: true,
           ),
         ),
       ),
@@ -110,6 +112,22 @@ void main() {
           matching: find.byKey(WidgetKeys.materialDetailsStock),
         ),
         findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'Hide bonus and price counter section for 26 series material on SG market',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.bonusPriceOverrideSection),
+        findsNothing,
       );
     });
   });

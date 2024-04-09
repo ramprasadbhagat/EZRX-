@@ -3642,6 +3642,83 @@ void main() {
         );
       });
 
+      testWidgets(
+          'Display 26 series message when cart contain only 26 series material on SG market',
+          (tester) async {
+        final mockItem = mockCartItems.first.copyWith(
+          quantity: 2,
+          is26SeriesMaterial: true,
+          stockInfoList: [
+            StockInfo.empty().copyWith(
+              materialNumber: mockCartItems.first.getMaterialNumber,
+              stockQuantity: 10,
+            ),
+          ],
+          salesOrgConfig: fakeSGSalesOrgConfigs,
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [mockItem],
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [mockItem],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.text(
+            'Your cart must contain other commercial material to proceed checkout.'
+                .tr(),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Check checkout button disable when cart contain only 26 series material on SG market',
+          (tester) async {
+        final mockItem = mockCartItems.first.copyWith(
+          quantity: 5,
+          is26SeriesMaterial: true,
+          price: Price.empty().copyWith(finalPrice: MaterialPrice(400),),
+          stockInfoList: [
+            StockInfo.empty().copyWith(
+              materialNumber: mockCartItems.first.getMaterialNumber,
+              stockQuantity: 10,
+              inStock: MaterialInStock('Yes'),
+            ),
+          ],
+          salesOrgConfig: fakeSGSalesOrgConfigs,
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [mockItem],
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [mockItem],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final checkoutButton = find.widgetWithText(ElevatedButton, 'Check out');
+        expect(checkoutButton, findsOneWidget);
+        await tester.tap(checkoutButton);
+        await tester.pump();
+        verify(
+          () => mixpanelService.trackEvent(
+            eventName: TrackingEvents.checkoutFailure,
+            properties: any(named: 'properties'),
+          ),
+        ).called(1);
+      });
+
       group('Marketplace MOV validation -', () {
         testWidgets('When both zp MOV and mp MOV is not eligible',
             (tester) async {
