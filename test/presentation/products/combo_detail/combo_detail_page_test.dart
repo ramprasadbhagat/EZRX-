@@ -1094,6 +1094,11 @@ void main() {
               find.byKey(WidgetKeys.comboNotEligibleMessage);
           expect(notEligibleMessage, findsNothing);
 
+          final notEligibleMessageContent = find.text(
+            'You must select at least ${comboMaterialsMock.values.first.comboDeal.minPurchaseQty} items',
+          );
+          expect(notEligibleMessageContent, findsNothing);
+
           final totalUnitMessage =
               find.text('${comboMaterialsSeletedMock.length} items');
           expect(totalUnitMessage, findsOneWidget);
@@ -1268,6 +1273,11 @@ void main() {
               find.byKey(WidgetKeys.comboNotEligibleMessage);
           expect(notEligibleMessage, findsOneWidget);
 
+          final notEligibleMessageContent = find.text(
+            'You must select at least ${comboMaterialsMock.values.first.comboDeal.minPurchaseQty} more product.',
+          );
+          expect(notEligibleMessageContent, findsOneWidget);
+
           final materialsSelected = comboMaterialsSeletedMock.entries
               .where((element) => element.value)
               .toList();
@@ -1415,6 +1425,11 @@ void main() {
           final notEligibleMessage =
               find.byKey(WidgetKeys.comboNotEligibleMessage);
           expect(notEligibleMessage, findsOneWidget);
+
+          final notEligibleMessageContent = find.text(
+            'You must select at least ${comboMaterialsMock.values.first.comboDeal.schemeMinimumQtyRequirement} items.'.tr(),
+          );
+          expect(notEligibleMessageContent, findsOneWidget);
 
           final materialsSelected = comboMaterialsSeletedMock.entries
               .where((element) => element.value)
@@ -1576,6 +1591,11 @@ void main() {
           final notEligibleMessage =
               find.byKey(WidgetKeys.comboNotEligibleMessage);
           expect(notEligibleMessage, findsOneWidget);
+
+          final notEligibleMessageContent = find.text(
+            'You must select at least ${comboMaterialsMock.values.first.comboDeal.minPurchaseQty} more product.',
+          );
+          expect(notEligibleMessageContent, findsOneWidget);
 
           final materialsSelected = comboMaterialsSeletedMock.entries
               .where((element) => element.value)
@@ -1810,6 +1830,11 @@ void main() {
           final notEligibleMessage =
               find.byKey(WidgetKeys.comboNotEligibleMessage);
           expect(notEligibleMessage, findsOneWidget);
+
+          final notEligibleMessageContent = find.text(
+            'You must select at least ${comboMaterialsMock.values.first.comboDeal.schemeMinimumQtyRequirement} items.'.tr(),
+          );
+          expect(notEligibleMessageContent, findsOneWidget);
 
           final materialsSelected = comboMaterialsSeletedMock.entries
               .where((element) => element.value)
@@ -2065,6 +2090,12 @@ void main() {
           final notEligibleMessage =
               find.byKey(WidgetKeys.comboNotEligibleMessage);
           expect(notEligibleMessage, findsOneWidget);
+          final firstDiscount = comboMaterialsMock
+              .values.first.comboDeal.sortedMinTotalAmountTiers.firstOrNull;
+          final notEligibleMessageContent = find.text(
+            'Buy within \$${firstDiscount?.minTotalAmount} and \$${firstDiscount?.maxTotalAmount} to get ${firstDiscount?.discountInfo.rateDisplay}% Discount'.tr(),
+          );
+          expect(notEligibleMessageContent, findsOneWidget);
 
           final materialsSelected = comboMaterialsSeletedMock.entries
               .where((element) => element.value)
@@ -2265,7 +2296,7 @@ void main() {
           await tester.pump();
 
           final requirementMessage = find.text(
-            'Purchase min. ${comboMaterialsMock.values.first.comboDeal.minPurchaseQty} items from any of these products. Buy more save more.',
+            'Purchase min. ${comboMaterialsMock.values.first.comboDeal.minPurchaseQty} QTYs from any of these products. Buy more save more.',
           );
           expect(requirementMessage, findsOneWidget);
 
@@ -2310,6 +2341,10 @@ void main() {
           final notEligibleMessage =
               find.byKey(WidgetKeys.comboNotEligibleMessage);
           expect(notEligibleMessage, findsOneWidget);
+          final notEligibleMessageContent = find.text(
+            'You must select minimum ${comboMaterialsMock.values.first.comboDeal.schemeMinimumQtyRequirement} QTYs.'.tr(),
+          );
+          expect(notEligibleMessageContent, findsOneWidget);
 
           final materialsSelected = comboMaterialsSeletedMock.entries
               .where((element) => element.value)

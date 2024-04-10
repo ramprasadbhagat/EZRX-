@@ -311,10 +311,16 @@ class ComboDeal with _$ComboDeal {
     switch (scheme) {
       case ComboDealScheme.k1:
       case ComboDealScheme.k22:
-      case ComboDealScheme.k42:
       case ComboDealScheme.k4:
         return context.tr(
           'You must select at least {unit} items.',
+          namedArgs: {
+            'unit': minPurchaseQty.toString(),
+          },
+        );
+      case ComboDealScheme.k42:
+        return context.tr(
+          'You must select minimum {unit} QTYs.',
           namedArgs: {
             'unit': minPurchaseQty.toString(),
           },
@@ -570,9 +576,15 @@ extension ComboDealSchemeExt on ComboDealScheme {
           'Purchase different products with min. of its quantity. Buy more save more.',
         );
       case ComboDealScheme.k4:
-      case ComboDealScheme.k42:
         return context.tr(
           'Purchase min. {minQty} items from any of these products. Buy more save more.',
+          namedArgs: {
+            'minQty': minQty,
+          },
+        );
+      case ComboDealScheme.k42:
+        return context.tr(
+          'Purchase min. {minQty} QTYs from any of these products. Buy more save more.',
           namedArgs: {
             'minQty': minQty,
           },
