@@ -80,7 +80,6 @@ class EZReachBannerDto with _$EZReachBannerDto {
       isCustomer: customers,
       tabBannerUrl: tabBannerUrl,
       keyword: StringValue(keyWord),
-      isEZRXBanner: false,
     );
   }
 

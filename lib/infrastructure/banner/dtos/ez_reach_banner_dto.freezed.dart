@@ -12,7 +12,7 @@ part of 'ez_reach_banner_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 EZReachBannerDto _$EZReachBannerDtoFromJson(Map<String, dynamic> json) {
   return _EZReachBannerDto.fromJson(json);
@@ -238,11 +238,11 @@ class _$EZReachBannerDtoCopyWithImpl<$Res, $Val extends EZReachBannerDto>
 }
 
 /// @nodoc
-abstract class _$$_EZReachBannerDtoCopyWith<$Res>
+abstract class _$$EZReachBannerDtoImplCopyWith<$Res>
     implements $EZReachBannerDtoCopyWith<$Res> {
-  factory _$$_EZReachBannerDtoCopyWith(
-          _$_EZReachBannerDto value, $Res Function(_$_EZReachBannerDto) then) =
-      __$$_EZReachBannerDtoCopyWithImpl<$Res>;
+  factory _$$EZReachBannerDtoImplCopyWith(_$EZReachBannerDtoImpl value,
+          $Res Function(_$EZReachBannerDtoImpl) then) =
+      __$$EZReachBannerDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -294,11 +294,11 @@ abstract class _$$_EZReachBannerDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_EZReachBannerDtoCopyWithImpl<$Res>
-    extends _$EZReachBannerDtoCopyWithImpl<$Res, _$_EZReachBannerDto>
-    implements _$$_EZReachBannerDtoCopyWith<$Res> {
-  __$$_EZReachBannerDtoCopyWithImpl(
-      _$_EZReachBannerDto _value, $Res Function(_$_EZReachBannerDto) _then)
+class __$$EZReachBannerDtoImplCopyWithImpl<$Res>
+    extends _$EZReachBannerDtoCopyWithImpl<$Res, _$EZReachBannerDtoImpl>
+    implements _$$EZReachBannerDtoImplCopyWith<$Res> {
+  __$$EZReachBannerDtoImplCopyWithImpl(_$EZReachBannerDtoImpl _value,
+      $Res Function(_$EZReachBannerDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -322,7 +322,7 @@ class __$$_EZReachBannerDtoCopyWithImpl<$Res>
     Object? countryCode = null,
     Object? mobileBannerUrl = null,
   }) {
-    return _then(_$_EZReachBannerDto(
+    return _then(_$EZReachBannerDtoImpl(
       bannerId: null == bannerId
           ? _value.bannerId
           : bannerId // ignore: cast_nullable_to_non_nullable
@@ -398,8 +398,8 @@ class __$$_EZReachBannerDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 @HiveType(typeId: 5)
-class _$_EZReachBannerDto extends _EZReachBannerDto {
-  const _$_EZReachBannerDto(
+class _$EZReachBannerDtoImpl extends _EZReachBannerDto {
+  const _$EZReachBannerDtoImpl(
       {@JsonKey(name: 'bannerId', defaultValue: '')
       @HiveField(0)
       required this.bannerId,
@@ -456,8 +456,8 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
         _countryCode = countryCode,
         super._();
 
-  factory _$_EZReachBannerDto.fromJson(Map<String, dynamic> json) =>
-      _$$_EZReachBannerDtoFromJson(json);
+  factory _$EZReachBannerDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$EZReachBannerDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'bannerId', defaultValue: '')
@@ -553,10 +553,10 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EZReachBannerDto &&
+            other is _$EZReachBannerDtoImpl &&
             (identical(other.bannerId, bannerId) ||
                 other.bannerId == bannerId) &&
             (identical(other.bannerCampaignName, bannerCampaignName) ||
@@ -614,12 +614,13 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EZReachBannerDtoCopyWith<_$_EZReachBannerDto> get copyWith =>
-      __$$_EZReachBannerDtoCopyWithImpl<_$_EZReachBannerDto>(this, _$identity);
+  _$$EZReachBannerDtoImplCopyWith<_$EZReachBannerDtoImpl> get copyWith =>
+      __$$EZReachBannerDtoImplCopyWithImpl<_$EZReachBannerDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EZReachBannerDtoToJson(
+    return _$$EZReachBannerDtoImplToJson(
       this,
     );
   }
@@ -677,11 +678,11 @@ abstract class _EZReachBannerDto extends EZReachBannerDto {
       required final List<String> countryCode,
       @JsonKey(name: 'mobileBannerImg', defaultValue: '')
       @HiveField(16)
-      required final String mobileBannerUrl}) = _$_EZReachBannerDto;
+      required final String mobileBannerUrl}) = _$EZReachBannerDtoImpl;
   const _EZReachBannerDto._() : super._();
 
   factory _EZReachBannerDto.fromJson(Map<String, dynamic> json) =
-      _$_EZReachBannerDto.fromJson;
+      _$EZReachBannerDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'bannerId', defaultValue: '')
@@ -753,6 +754,6 @@ abstract class _EZReachBannerDto extends EZReachBannerDto {
   String get mobileBannerUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_EZReachBannerDtoCopyWith<_$_EZReachBannerDto> get copyWith =>
+  _$$EZReachBannerDtoImplCopyWith<_$EZReachBannerDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

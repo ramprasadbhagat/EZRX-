@@ -12,7 +12,7 @@ part of 'order_history_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderHistoryDetails {
@@ -283,11 +283,11 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryDetailsCopyWith<$Res>
+abstract class _$$OrderHistoryDetailsImplCopyWith<$Res>
     implements $OrderHistoryDetailsCopyWith<$Res> {
-  factory _$$_OrderHistoryDetailsCopyWith(_$_OrderHistoryDetails value,
-          $Res Function(_$_OrderHistoryDetails) then) =
-      __$$_OrderHistoryDetailsCopyWithImpl<$Res>;
+  factory _$$OrderHistoryDetailsImplCopyWith(_$OrderHistoryDetailsImpl value,
+          $Res Function(_$OrderHistoryDetailsImpl) then) =
+      __$$OrderHistoryDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -328,11 +328,11 @@ abstract class _$$_OrderHistoryDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsCopyWithImpl<$Res, _$_OrderHistoryDetails>
-    implements _$$_OrderHistoryDetailsCopyWith<$Res> {
-  __$$_OrderHistoryDetailsCopyWithImpl(_$_OrderHistoryDetails _value,
-      $Res Function(_$_OrderHistoryDetails) _then)
+class __$$OrderHistoryDetailsImplCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsCopyWithImpl<$Res, _$OrderHistoryDetailsImpl>
+    implements _$$OrderHistoryDetailsImplCopyWith<$Res> {
+  __$$OrderHistoryDetailsImplCopyWithImpl(_$OrderHistoryDetailsImpl _value,
+      $Res Function(_$OrderHistoryDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -369,7 +369,7 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
     Object? orderHistoryDetailsPoDocuments = null,
     Object? isMarketPlace = null,
   }) {
-    return _then(_$_OrderHistoryDetails(
+    return _then(_$OrderHistoryDetailsImpl(
       totalTax: null == totalTax
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
@@ -497,8 +497,8 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistoryDetails extends _OrderHistoryDetails {
-  _$_OrderHistoryDetails(
+class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
+  _$OrderHistoryDetailsImpl(
       {required this.totalTax,
       required this.orderValue,
       required this.deliveryFee,
@@ -616,10 +616,10 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryDetails &&
+            other is _$OrderHistoryDetailsImpl &&
             (identical(other.totalTax, totalTax) ||
                 other.totalTax == totalTax) &&
             (identical(other.orderValue, orderValue) ||
@@ -722,8 +722,8 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryDetailsCopyWith<_$_OrderHistoryDetails> get copyWith =>
-      __$$_OrderHistoryDetailsCopyWithImpl<_$_OrderHistoryDetails>(
+  _$$OrderHistoryDetailsImplCopyWith<_$OrderHistoryDetailsImpl> get copyWith =>
+      __$$OrderHistoryDetailsImplCopyWithImpl<_$OrderHistoryDetailsImpl>(
           this, _$identity);
 }
 
@@ -760,7 +760,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
           orderHistoryDetailsPaymentTerm,
       required final SpecialInstructions orderHistoryDetailsSpecialInstructions,
       required final List<PoDocuments> orderHistoryDetailsPoDocuments,
-      required final bool isMarketPlace}) = _$_OrderHistoryDetails;
+      required final bool isMarketPlace}) = _$OrderHistoryDetailsImpl;
   _OrderHistoryDetails._() : super._();
 
   @override
@@ -825,6 +825,6 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryDetailsCopyWith<_$_OrderHistoryDetails> get copyWith =>
+  _$$OrderHistoryDetailsImplCopyWith<_$OrderHistoryDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

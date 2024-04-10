@@ -13,7 +13,7 @@ class MaterialBannerStorage {
 
   Future<void> init() async {
     await hive.initFlutter();
-    Hive.registerAdapter(EZReachBannerDtoAdapter());
+    Hive.registerAdapter(EZReachBannerDtoImplAdapter());
     box = await hive.openBox(
       _boxName,
     );

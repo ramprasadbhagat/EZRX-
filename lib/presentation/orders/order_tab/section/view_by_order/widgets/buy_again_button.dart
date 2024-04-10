@@ -143,7 +143,7 @@ class BuyAgainButton extends StatelessWidget {
         TrackingEvents.buyAgainClicked,
         props: {
           TrackingProps.productName: item.materialDescription,
-          TrackingProps.productCode: item.materialNumber.displayMatNo,
+          TrackingProps.productNumber: item.materialNumber.displayMatNo,
           TrackingProps.productManufacturer:
               item.principalData.principalName.name,
           TrackingProps.clickAt: currentPage,

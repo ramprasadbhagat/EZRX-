@@ -93,8 +93,9 @@ class _ProductTile extends StatelessWidget {
                                       props: {
                                         TrackingProps.productName:
                                             materialInfo.displayDescription,
-                                        TrackingProps.productCode: materialInfo
-                                            .materialNumber.displayMatNo,
+                                        TrackingProps.productNumber:
+                                            materialInfo
+                                                .materialNumber.displayMatNo,
                                         TrackingProps.productManufacturer:
                                             materialInfo.getManufactured,
                                         TrackingProps.clickAt:
@@ -148,7 +149,7 @@ class _ProductTile extends StatelessWidget {
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
         TrackingProps.isBundle: false,
         TrackingProps.productName: materialInfo.displayDescription,
-        TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: materialInfo.getManufactured,
         TrackingProps.section: 'Products on offer',
         TrackingProps.tag: 'On Offer',

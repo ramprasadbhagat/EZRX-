@@ -303,7 +303,7 @@ void main() {
               TrackingProps.clickAt: 'Home Page',
               TrackingProps.isBundle: true,
               TrackingProps.productName: materialList.first.displayDescription,
-              TrackingProps.productCode:
+              TrackingProps.productNumber:
                   materialList.first.materialNumber.displayMatNo,
               TrackingProps.productManufacturer:
                   materialList.first.getManufactured,

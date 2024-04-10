@@ -12,7 +12,7 @@ part of 'ez_reach_banner.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$EZReachBanner {
@@ -29,7 +29,6 @@ mixin _$EZReachBanner {
   String get salesOrg => throw _privateConstructorUsedError;
   StringValue get keyword => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
-  bool get isEZRXBanner => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EZReachBannerCopyWith<EZReachBanner> get copyWith =>
@@ -55,8 +54,7 @@ abstract class $EZReachBannerCopyWith<$Res> {
       EZReachBannerLink navigationalURL,
       String salesOrg,
       StringValue keyword,
-      String category,
-      bool isEZRXBanner});
+      String category});
 }
 
 /// @nodoc
@@ -85,7 +83,6 @@ class _$EZReachBannerCopyWithImpl<$Res, $Val extends EZReachBanner>
     Object? salesOrg = null,
     Object? keyword = null,
     Object? category = null,
-    Object? isEZRXBanner = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -140,20 +137,16 @@ class _$EZReachBannerCopyWithImpl<$Res, $Val extends EZReachBanner>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
-      isEZRXBanner: null == isEZRXBanner
-          ? _value.isEZRXBanner
-          : isEZRXBanner // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_EZReachBannerCopyWith<$Res>
+abstract class _$$EZReachBannerImplCopyWith<$Res>
     implements $EZReachBannerCopyWith<$Res> {
-  factory _$$_EZReachBannerCopyWith(
-          _$_EZReachBanner value, $Res Function(_$_EZReachBanner) then) =
-      __$$_EZReachBannerCopyWithImpl<$Res>;
+  factory _$$EZReachBannerImplCopyWith(
+          _$EZReachBannerImpl value, $Res Function(_$EZReachBannerImpl) then) =
+      __$$EZReachBannerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -169,16 +162,15 @@ abstract class _$$_EZReachBannerCopyWith<$Res>
       EZReachBannerLink navigationalURL,
       String salesOrg,
       StringValue keyword,
-      String category,
-      bool isEZRXBanner});
+      String category});
 }
 
 /// @nodoc
-class __$$_EZReachBannerCopyWithImpl<$Res>
-    extends _$EZReachBannerCopyWithImpl<$Res, _$_EZReachBanner>
-    implements _$$_EZReachBannerCopyWith<$Res> {
-  __$$_EZReachBannerCopyWithImpl(
-      _$_EZReachBanner _value, $Res Function(_$_EZReachBanner) _then)
+class __$$EZReachBannerImplCopyWithImpl<$Res>
+    extends _$EZReachBannerCopyWithImpl<$Res, _$EZReachBannerImpl>
+    implements _$$EZReachBannerImplCopyWith<$Res> {
+  __$$EZReachBannerImplCopyWithImpl(
+      _$EZReachBannerImpl _value, $Res Function(_$EZReachBannerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -197,9 +189,8 @@ class __$$_EZReachBannerCopyWithImpl<$Res>
     Object? salesOrg = null,
     Object? keyword = null,
     Object? category = null,
-    Object? isEZRXBanner = null,
   }) {
-    return _then(_$_EZReachBanner(
+    return _then(_$EZReachBannerImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -252,18 +243,14 @@ class __$$_EZReachBannerCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
-      isEZRXBanner: null == isEZRXBanner
-          ? _value.isEZRXBanner
-          : isEZRXBanner // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_EZReachBanner extends _EZReachBanner {
-  const _$_EZReachBanner(
+class _$EZReachBannerImpl extends _EZReachBanner {
+  const _$EZReachBannerImpl(
       {required this.id,
       required this.serial,
       required this.isPreSalesOrg,
@@ -276,8 +263,7 @@ class _$_EZReachBanner extends _EZReachBanner {
       required this.navigationalURL,
       required this.salesOrg,
       required this.keyword,
-      required this.category,
-      required this.isEZRXBanner})
+      required this.category})
       : super._();
 
   @override
@@ -306,19 +292,17 @@ class _$_EZReachBanner extends _EZReachBanner {
   final StringValue keyword;
   @override
   final String category;
-  @override
-  final bool isEZRXBanner;
 
   @override
   String toString() {
-    return 'EZReachBanner(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, mobileBannerUrl: $mobileBannerUrl, tabBannerUrl: $tabBannerUrl, title: $title, description: $description, buttonLabel: $buttonLabel, navigationalURL: $navigationalURL, salesOrg: $salesOrg, keyword: $keyword, category: $category, isEZRXBanner: $isEZRXBanner)';
+    return 'EZReachBanner(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, mobileBannerUrl: $mobileBannerUrl, tabBannerUrl: $tabBannerUrl, title: $title, description: $description, buttonLabel: $buttonLabel, navigationalURL: $navigationalURL, salesOrg: $salesOrg, keyword: $keyword, category: $category)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EZReachBanner &&
+            other is _$EZReachBannerImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.serial, serial) || other.serial == serial) &&
             (identical(other.isPreSalesOrg, isPreSalesOrg) ||
@@ -340,9 +324,7 @@ class _$_EZReachBanner extends _EZReachBanner {
                 other.salesOrg == salesOrg) &&
             (identical(other.keyword, keyword) || other.keyword == keyword) &&
             (identical(other.category, category) ||
-                other.category == category) &&
-            (identical(other.isEZRXBanner, isEZRXBanner) ||
-                other.isEZRXBanner == isEZRXBanner));
+                other.category == category));
   }
 
   @override
@@ -360,14 +342,13 @@ class _$_EZReachBanner extends _EZReachBanner {
       navigationalURL,
       salesOrg,
       keyword,
-      category,
-      isEZRXBanner);
+      category);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EZReachBannerCopyWith<_$_EZReachBanner> get copyWith =>
-      __$$_EZReachBannerCopyWithImpl<_$_EZReachBanner>(this, _$identity);
+  _$$EZReachBannerImplCopyWith<_$EZReachBannerImpl> get copyWith =>
+      __$$EZReachBannerImplCopyWithImpl<_$EZReachBannerImpl>(this, _$identity);
 }
 
 abstract class _EZReachBanner extends EZReachBanner {
@@ -384,8 +365,7 @@ abstract class _EZReachBanner extends EZReachBanner {
       required final EZReachBannerLink navigationalURL,
       required final String salesOrg,
       required final StringValue keyword,
-      required final String category,
-      required final bool isEZRXBanner}) = _$_EZReachBanner;
+      required final String category}) = _$EZReachBannerImpl;
   const _EZReachBanner._() : super._();
 
   @override
@@ -415,9 +395,7 @@ abstract class _EZReachBanner extends EZReachBanner {
   @override
   String get category;
   @override
-  bool get isEZRXBanner;
-  @override
   @JsonKey(ignore: true)
-  _$$_EZReachBannerCopyWith<_$_EZReachBanner> get copyWith =>
+  _$$EZReachBannerImplCopyWith<_$EZReachBannerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

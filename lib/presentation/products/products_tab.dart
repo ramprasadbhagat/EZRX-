@@ -162,7 +162,7 @@ class ProductsTab extends StatelessWidget {
         TrackingProps.clickAt: clickAt,
         TrackingProps.isBundle: false,
         TrackingProps.productName: materialInfo.displayDescription,
-        TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: materialInfo.getManufactured,
         TrackingProps.section: 'All product',
         TrackingProps.tag: tags.join(', '),

@@ -46,7 +46,6 @@ class TrackingProps {
   static String scanMethod = 'scan_method';
   static String quickAccess = 'quick_access';
   static String navTab = 'nav_tab';
-  static String productCode = 'product_code';
   static String section = 'section';
   static String viewFrom = 'view_from';
   static String filterClicked = 'filter_clicked';

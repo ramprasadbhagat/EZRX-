@@ -226,11 +226,15 @@ class OrderRepository implements IOrderRepository {
     mixpanelService.trackEvent(
       eventName: TrackingEvents.placeOrderSuccessOriginal,
       properties: {
-        TrackingProps.orderNumber: orderQueueNumber,
+        if (orderDetail.processingStatus.isInQueue)
+          TrackingProps.queueNumber: orderQueueNumber,
+        TrackingProps.orderNumber: orderDetail.trackingOrderId,
         TrackingProps.grandTotal: orderDetail.totalValue,
         TrackingProps.totalQty: orderDetail.orderItemsCount,
         TrackingProps.requestDeliveryDate:
             orderDetail.requestedDeliveryDate.dateOrNaString,
+        TrackingProps.lineNumber:
+            orderDetail.orderHistoryDetailsOrderItem.length,
       },
     );
 
@@ -239,9 +243,7 @@ class OrderRepository implements IOrderRepository {
       properties: {
         if (orderDetail.processingStatus.isInQueue)
           TrackingProps.queueNumber: orderQueueNumber,
-        TrackingProps.orderNumber: orderDetail.processingStatus.isInQueue
-            ? 'no order number'
-            : orderQueueNumber,
+        TrackingProps.orderNumber: orderDetail.trackingOrderId,
         TrackingProps.grandTotal: orderDetail.totalValue,
         TrackingProps.lineNumber:
             orderDetail.orderHistoryDetailsOrderItem.length,
@@ -257,25 +259,29 @@ class OrderRepository implements IOrderRepository {
       if (productTag.getOrDefaultValue('').isNotEmpty) {
         tags.add(productTag.displayStatusText);
       }
-      final bannerData = await materialBannerStorage.get(
+      final bannerData = (await materialBannerStorage.get(
         materialNumber: item.productType.typeBundle
             ? '${MaterialNumber(item.parentId).displayMatNo}_${item.materialNumber.displayMatNo}'
             : item.materialNumber.displayMatNo,
-      );
+      ))
+          .toDomain();
+
       mixpanelService.trackEvent(
         eventName: TrackingEvents.successfulOrderItem,
         properties: {
           TrackingProps.orderNumber: orderQueueNumber,
           TrackingProps.productName: item.materialDescription,
-          TrackingProps.productCode: item.materialNumber.displayMatNo,
+          TrackingProps.productNumber: item.materialNumber.displayMatNo,
           TrackingProps.productQty: item.qty,
           TrackingProps.grandTotal: item.itemTotalPrice(
             isIDMarket,
           ),
-          TrackingProps.unitPrice: item.itemUnitPrice(
-            isIDMarket,
-          ),
-          TrackingProps.bannerId: bannerData.bannerId,
+          TrackingProps.unitPrice: item.unitPrice,
+          TrackingProps.productManufacturer:
+              item.principalData.principalName.name,
+          TrackingProps.fromBanner: bannerData.isNotEmpty,
+          TrackingProps.bannerId: bannerData.id,
+          TrackingProps.bannerTitle: bannerData.title,
           TrackingProps.tag: tags.join(', '),
         },
       );
@@ -290,12 +296,12 @@ class OrderRepository implements IOrderRepository {
           TrackingProps.grandTotal: item.itemTotalPrice(
             isIDMarket,
           ),
-          TrackingProps.unitPrice: item.itemUnitPrice(
-            isIDMarket,
-          ),
+          TrackingProps.unitPrice: item.unitPrice,
           TrackingProps.productManufacturer:
               item.principalData.principalName.name,
-          TrackingProps.bannerId: bannerData.bannerId,
+          TrackingProps.fromBanner: bannerData.isNotEmpty,
+          TrackingProps.bannerId: bannerData.id,
+          TrackingProps.bannerTitle: bannerData.title,
           TrackingProps.tag: tags.join(', '),
         },
       );

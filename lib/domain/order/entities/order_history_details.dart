@@ -175,6 +175,10 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
   double subTotal(bool showSubTotalExcludingTax) => showSubTotalExcludingTax
       ? orderValue //order value is excl tax
       : totalValue; //total value is incl tax
+
+  String get trackingOrderId => processingStatus.isInQueue
+      ? 'no order number'
+      : orderNumber.getOrDefaultValue('');
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetails> {

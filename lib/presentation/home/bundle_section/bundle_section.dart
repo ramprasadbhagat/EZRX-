@@ -238,7 +238,7 @@ class _BundleSectionItem extends StatelessWidget {
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
         TrackingProps.isBundle: true,
         TrackingProps.productName: materialInfo.displayDescription,
-        TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: materialInfo.getManufactured,
         TrackingProps.section: 'Bundles',
       },

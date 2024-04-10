@@ -414,7 +414,7 @@ class _Description extends StatelessWidget {
                         props: {
                           TrackingProps.productName:
                               materialInfo.displayDescription,
-                          TrackingProps.productCode:
+                          TrackingProps.productNumber:
                               materialInfo.materialNumber.displayMatNo,
                           TrackingProps.productManufacturer:
                               materialInfo.getManufactured,
@@ -777,13 +777,15 @@ void _trackAddToCartSuccess(
 
   final mixpanelProps = <String, dynamic>{
     TrackingProps.productName: cartItem.materialInfo.displayDescription,
-    TrackingProps.productCode:
+    TrackingProps.productNumber:
         cartItem.materialInfo.materialNumber.getOrDefaultValue(''),
     TrackingProps.productManufacturer: cartItem.materialInfo.getManufactured,
     TrackingProps.productTotalPrice: cartItem.finalPriceTotal,
     TrackingProps.productQty: qty,
     TrackingProps.clickAt: clickAt,
+    TrackingProps.fromBanner: banner != null,
     TrackingProps.bannerId: banner?.id ?? '',
+    TrackingProps.bannerTitle: banner?.title ?? '',
     TrackingProps.isOffer: isOffer,
     TrackingProps.tag: tags.join(', '),
   };
@@ -796,7 +798,9 @@ void _trackAddToCartSuccess(
     TrackingProps.productTotalPrice: cartItem.finalPriceTotal,
     TrackingProps.productQty: qty,
     TrackingProps.clickAt: clickAt,
+    TrackingProps.fromBanner: banner != null,
     TrackingProps.bannerId: banner?.id ?? '',
+    TrackingProps.bannerTitle: banner?.title ?? '',
     TrackingProps.isOffer: isOffer,
     TrackingProps.tag: tags.join(', '),
   };

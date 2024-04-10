@@ -115,7 +115,7 @@ class _MaterialDetailsToggleState extends State<MaterialDetailsToggle> {
       TrackingEvents.productDescriptionViewed,
       props: {
         TrackingProps.productName: materialInfo.displayDescription,
-        TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: materialInfo.getManufactured,
       },
     );

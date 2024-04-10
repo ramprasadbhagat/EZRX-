@@ -6,17 +6,17 @@ part of 'ez_reach_banner_dto.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class EZReachBannerDtoAdapter extends TypeAdapter<_$_EZReachBannerDto> {
+class EZReachBannerDtoImplAdapter extends TypeAdapter<_$EZReachBannerDtoImpl> {
   @override
   final int typeId = 5;
 
   @override
-  _$_EZReachBannerDto read(BinaryReader reader) {
+  _$EZReachBannerDtoImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_EZReachBannerDto(
+    return _$EZReachBannerDtoImpl(
       bannerId: fields[0] as String,
       bannerCampaignName: fields[1] as String,
       startDate: fields[2] as String,
@@ -38,7 +38,7 @@ class EZReachBannerDtoAdapter extends TypeAdapter<_$_EZReachBannerDto> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_EZReachBannerDto obj) {
+  void write(BinaryWriter writer, _$EZReachBannerDtoImpl obj) {
     writer
       ..writeByte(17)
       ..writeByte(0)
@@ -83,7 +83,7 @@ class EZReachBannerDtoAdapter extends TypeAdapter<_$_EZReachBannerDto> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is EZReachBannerDtoAdapter &&
+      other is EZReachBannerDtoImplAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -92,8 +92,9 @@ class EZReachBannerDtoAdapter extends TypeAdapter<_$_EZReachBannerDto> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_EZReachBannerDto _$$_EZReachBannerDtoFromJson(Map<String, dynamic> json) =>
-    _$_EZReachBannerDto(
+_$EZReachBannerDtoImpl _$$EZReachBannerDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$EZReachBannerDtoImpl(
       bannerId: json['bannerId'] as String? ?? '',
       bannerCampaignName: json['bannerCampaignName'] as String? ?? '',
       startDate: json['startDate'] as String? ?? '',
@@ -123,7 +124,8 @@ _$_EZReachBannerDto _$$_EZReachBannerDtoFromJson(Map<String, dynamic> json) =>
       mobileBannerUrl: json['mobileBannerImg'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_EZReachBannerDtoToJson(_$_EZReachBannerDto instance) =>
+Map<String, dynamic> _$$EZReachBannerDtoImplToJson(
+        _$EZReachBannerDtoImpl instance) =>
     <String, dynamic>{
       'bannerId': instance.bannerId,
       'bannerCampaignName': instance.bannerCampaignName,

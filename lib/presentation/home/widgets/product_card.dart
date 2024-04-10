@@ -70,7 +70,7 @@ class ProductCard extends StatelessWidget {
         TrackingProps.clickAt: clickAt,
         TrackingProps.isBundle: false,
         TrackingProps.productName: material.displayDescription,
-        TrackingProps.productCode: material.materialNumber.displayMatNo,
+        TrackingProps.productNumber: material.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: material.getManufactured,
         TrackingProps.section: section,
         TrackingProps.tag: tags.join(', '),

@@ -89,7 +89,7 @@ class MaterialGridItem extends StatelessWidget {
                                   props: {
                                     TrackingProps.productName:
                                         materialInfo.displayDescription,
-                                    TrackingProps.productCode: materialInfo
+                                    TrackingProps.productNumber: materialInfo
                                         .materialNumber.displayMatNo,
                                     TrackingProps.productManufacturer:
                                         materialInfo.getManufactured,

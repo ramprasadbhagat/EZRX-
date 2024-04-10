@@ -362,14 +362,16 @@ class _BundleSheetFooter extends StatelessWidget {
     final bundle = state.bundle;
     final mixpanelProps = <String, dynamic>{
       TrackingProps.productName: bundle.name,
-      TrackingProps.productCode: bundle.materialNumber.getOrDefaultValue(''),
+      TrackingProps.productNumber: bundle.materialNumber.getOrDefaultValue(''),
       TrackingProps.productManufacturer: bundle.manufactured,
       TrackingProps.productTotalPrice:
           state.bundleOffer.rate * state.totalCount,
       TrackingProps.productQty: state.totalCount,
       TrackingProps.clickAt:
           RouterUtils.buildRouteTrackingName(context.router.currentPath),
+      TrackingProps.fromBanner: banner != null,
       TrackingProps.bannerId: banner?.id ?? '',
+      TrackingProps.bannerTitle: banner?.title ?? '',
     };
 
     final clevertapProps = <String, dynamic>{
@@ -381,7 +383,9 @@ class _BundleSheetFooter extends StatelessWidget {
       TrackingProps.productQty: state.totalCount,
       TrackingProps.clickAt:
           RouterUtils.buildRouteTrackingName(context.router.currentPath),
+      TrackingProps.fromBanner: banner != null,
       TrackingProps.bannerId: banner?.id ?? '',
+      TrackingProps.bannerTitle: banner?.title ?? '',
     };
 
     trackMixpanelEvent(

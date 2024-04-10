@@ -216,7 +216,7 @@ class _BundleDetails extends StatelessWidget {
                           TrackingEvents.addProductToFavorite,
                           props: {
                             TrackingProps.productName: material.name,
-                            TrackingProps.productCode:
+                            TrackingProps.productNumber:
                                 material.materialNumber.displayMatNo,
                             TrackingProps.productManufacturer:
                                 material.getManufactured,
@@ -388,7 +388,7 @@ class _BundleOfferDetails extends StatelessWidget {
       TrackingEvents.productInfoViewed,
       props: {
         TrackingProps.productName: materialInfo.name,
-        TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: materialInfo.getManufactured,
       },
     );

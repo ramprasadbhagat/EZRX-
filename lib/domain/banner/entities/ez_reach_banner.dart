@@ -22,7 +22,6 @@ class EZReachBanner with _$EZReachBanner {
     required String salesOrg,
     required StringValue keyword,
     required String category,
-    required bool isEZRXBanner,
   }) = _EZReachBanner;
 
   factory EZReachBanner.empty() => EZReachBanner(
@@ -38,8 +37,8 @@ class EZReachBanner with _$EZReachBanner {
         salesOrg: '',
         keyword: StringValue(''),
         category: '',
-        isEZRXBanner: true,
         tabBannerUrl: '',
       );
-      
+
+  bool get isNotEmpty => this != EZReachBanner.empty();
 }

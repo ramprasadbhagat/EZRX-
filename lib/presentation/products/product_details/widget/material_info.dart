@@ -43,7 +43,8 @@ class MaterialInformation extends StatelessWidget {
           TrackingEvents.productInfoViewed,
           props: {
             TrackingProps.productName: materialInfo.displayDescription,
-            TrackingProps.productCode: materialInfo.materialNumber.displayMatNo,
+            TrackingProps.productNumber:
+                materialInfo.materialNumber.displayMatNo,
             TrackingProps.productManufacturer: materialInfo.getManufactured,
           },
         );
