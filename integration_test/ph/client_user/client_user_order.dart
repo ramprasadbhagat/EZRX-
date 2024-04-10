@@ -149,6 +149,7 @@ void main() {
   const password = 'St@ysafe01';
   const salesOrg = '2500';
   const customerCode = '0030013148';
+  const customerPhoneNumber = '3209619';
   const shipToCode = '0070015858';
   const shipToAddress = 'WATSONS PERSONAL CARE';
   const otherShipToCode = '0000002511';
@@ -2313,7 +2314,7 @@ void main() {
       const poReferenceNote = 'po-reference-note';
       const contactPerson = 'contact-person';
       const contactNumber = '1234567890';
-      const contactNumberWith17Digit = '12345678901234567';
+      const contactNumberWith17Digits = '12345678901234567';
       const deliveryInstruction = 'delivery-instruction';
 
       //init app
@@ -2326,6 +2327,11 @@ void main() {
       await checkoutRobot.verifyContactPersonField(isVisible: true);
       await checkoutRobot.verifyMobileNumberField(isVisible: true);
       await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      // Phone number verification
+      checkoutRobot.verifyContactNumberFieldHasText(customerPhoneNumber);
+      await checkoutRobot.enterContactNumber(contactNumberWith17Digits);
+      checkoutRobot.verifyMobileNumberFieldLessOrEqualTo16();
+      await checkoutRobot.enterContactNumber('');
 
       await checkoutRobot.tapPlaceOrderButton();
 
@@ -2339,21 +2345,15 @@ void main() {
       await checkoutRobot.enterContactPerson(contactPerson);
 
       checkoutRobot.verifyEmptyContactNumberErrorMessage(isVisible: true);
-      await checkoutRobot.enterContactNumber(contactNumberWith17Digit);
+      await checkoutRobot.enterContactNumber(contactNumber);
 
       await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
 
       await checkoutRobot.tapPlaceOrderButton();
-
-      checkoutRobot.verifyLengthGreaterThan16MobileNumberMessage(
-        isVisible: true,
-      );
-      await checkoutRobot.enterContactNumber(contactNumber);
-      await checkoutRobot.tapPlaceOrderButton();
       orderSuccessRobot.verifyPage();
       orderSuccessRobot.verifyPoReference(poReference);
       orderSuccessRobot.verifyDeliveryInstruction(deliveryInstruction);
-      orderSuccessRobot.verifyMobileNumber('+63$contactNumber');
+      orderSuccessRobot.verifyMobileNumber(contactNumber);
     });
 
     testWidgets(
@@ -2863,6 +2863,8 @@ void main() {
         //Need to tap offer tag because this is offer material
         await viewByItemsRobot.tapFirstOrder();
         viewByItemsDetailRobot.verifyHeader();
+        final contactNumberFromOrder =
+            viewByItemsDetailRobot.getOrderContactNumber();
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
         await viewByItemsDetailRobot.verifyItemComponent();
@@ -2877,6 +2879,9 @@ void main() {
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, qty);
+        await cartRobot.tapCheckoutButton();
+        checkoutRobot.verifyPage();
+        checkoutRobot.verifyContactNumberFieldHasText(contactNumberFromOrder);
       });
 
       testWidgets(
@@ -3117,6 +3122,9 @@ void main() {
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, qty);
+        await cartRobot.tapCheckoutButton();
+        checkoutRobot.verifyPage();
+        checkoutRobot.verifyContactNumberFieldHasText(contactNumber);
       });
     });
 
@@ -3189,10 +3197,15 @@ void main() {
         await ordersRootRobot.switchToViewByOrders();
         await commonRobot.pullToRefresh();
         await viewByOrdersRobot.tapFirstOrder();
+        final contactNumberFromOrder =
+            viewByOrdersDetailRobot.getOrderContactNumber();
         await viewByOrdersDetailRobot.tapBuyAgainButton();
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, orderQty + cartQty);
+        await cartRobot.tapCheckoutButton();
+        checkoutRobot.verifyPage();
+        checkoutRobot.verifyContactNumberFieldHasText(contactNumberFromOrder);
       });
 
       testWidgets(

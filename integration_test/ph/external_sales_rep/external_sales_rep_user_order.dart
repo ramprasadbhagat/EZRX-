@@ -2433,6 +2433,10 @@ void main() {
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, qty);
+        await cartRobot.tapCheckoutButton();
+        await oosPreOrderRobot.tapContinueButton();
+        checkoutRobot.verifyPage();
+        checkoutRobot.verifyContactNumberFieldHasText(mobileNumber);
       });
     });
 
@@ -2527,11 +2531,16 @@ void main() {
         await ordersRootRobot.switchToViewByOrders();
         await commonRobot.pullToRefresh();
         await viewByOrdersRobot.tapFirstOrder();
+        final contactNumberFromOrder =
+            viewByOrdersDetailRobot.getOrderContactNumber();
         await viewByOrdersDetailRobot.tapBuyAgainButton();
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, orderQty + cartQty);
-        // TODO: Revist when popup 'Reoder for this delivery address? is added to add new test step
+        await cartRobot.tapCheckoutButton();
+        await oosPreOrderRobot.tapContinueButton();
+        checkoutRobot.verifyPage();
+        checkoutRobot.verifyContactNumberFieldHasText(contactNumberFromOrder);
       });
 
       testWidgets(

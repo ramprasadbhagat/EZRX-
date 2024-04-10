@@ -98,16 +98,6 @@ class CheckoutRobot {
     );
   }
 
-  void verifyLengthGreaterThan16MobileNumberMessage({required bool isVisible}) {
-    expect(
-      find.descendant(
-        of: mobileNumberField,
-        matching: find.text('Contact number is a required field'.tr()),
-      ),
-      isVisible ? findsOneWidget : findsNothing,
-    );
-  }
-
   Future<void> enterReferenceNote(String text) async {
     await tester.tap(referenceNoteField);
     await tester.enterText(referenceNoteField, text);
@@ -137,6 +127,7 @@ class CheckoutRobot {
 
   Future<void> enterContactNumber(String text) async {
     await tester.tap(mobileNumberField);
+    await tester.pump();
     await tester.enterText(mobileNumberField, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
@@ -169,6 +160,13 @@ class CheckoutRobot {
 
   Future<void> verifyDeliveryInstructionField({required bool isVisible}) =>
       _verifyDeliveryInformationComponent(deliveryInstructionField, isVisible);
+
+  void verifyContactNumberFieldHasText(String text) {
+    expect(
+      tester.widget<TextFormField>(mobileNumberField).controller?.text,
+      text,
+    );
+  }
 
   Future<void> enterDeliveryInstruction(String text) async {
     await tester.tap(deliveryInstructionField);
@@ -730,6 +728,14 @@ class CheckoutRobot {
             widget.data!.contains('offer applied'.tr()),
       ),
       findsOneWidget,
+    );
+  }
+
+  void verifyMobileNumberFieldLessOrEqualTo16() {
+    expect(
+      tester.widget<TextFormField>(mobileNumberField).controller!.text.length <=
+          16,
+      true,
     );
   }
 }

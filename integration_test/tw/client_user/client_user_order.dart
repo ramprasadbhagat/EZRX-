@@ -106,6 +106,7 @@ void main() {
   const username = 'twclientuser';
   const password = 'St@ysafe01';
   const customerCode = '0000100891';
+  const customerPhoneNumber = '033281200';
   const shipToCode = '0070117663';
   const shipToAddress = '台灣明尼蘇達礦業製造（股）公';
   const otherCustomerCode = '0030038504';
@@ -1618,6 +1619,7 @@ void main() {
       await checkoutRobot.tapDeliveryInformationArrowButton();
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
       await checkoutRobot.verifyPaymentTermField(isVisible: true);
+      checkoutRobot.verifyContactNumberFieldHasText(customerPhoneNumber);
       await checkoutRobot.enterPaymentTerm(paymentTerm);
       await checkoutRobot.verifyContactPersonField(isVisible: true);
       await checkoutRobot.enterContactPerson(contactPerson);
@@ -2037,6 +2039,8 @@ void main() {
         //Need to tap offer tag because this is offer material
         await viewByItemsRobot.tapFirstOfferTag();
         viewByItemsDetailRobot.verifyHeader();
+        final contactNumberFromOrder =
+            viewByItemsDetailRobot.getOrderContactNumber();
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
         await viewByItemsDetailRobot.verifyItemComponent();
@@ -2050,6 +2054,9 @@ void main() {
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, qty);
+        await cartRobot.tapCheckoutButton();
+        checkoutRobot.verifyPage();
+        checkoutRobot.verifyContactNumberFieldHasText(contactNumberFromOrder);
       });
 
       testWidgets(
@@ -2248,6 +2255,9 @@ void main() {
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, qty);
+        await cartRobot.tapCheckoutButton();
+        checkoutRobot.verifyPage();
+        checkoutRobot.verifyContactNumberFieldHasText(contactNumber);
       });
     });
 
@@ -2311,10 +2321,15 @@ void main() {
         await ordersRootRobot.switchToViewByOrders();
         await commonRobot.pullToRefresh();
         await viewByOrdersRobot.tapFirstOrder();
+        final contactNumberFromOrder =
+            viewByOrdersDetailRobot.getOrderContactNumber();
         await viewByOrdersDetailRobot.tapBuyAgainButton();
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, orderQty + cartQty);
+        await cartRobot.tapCheckoutButton();
+        checkoutRobot.verifyPage();
+        checkoutRobot.verifyContactNumberFieldHasText(contactNumberFromOrder);
       });
 
       testWidgets(

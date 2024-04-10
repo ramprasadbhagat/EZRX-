@@ -189,6 +189,7 @@ class OrderHeaderSection extends StatelessWidget {
                 const SizedBox(height: 5),
                 BalanceTextRow(
                   keyText: context.tr('Contact number'),
+                  key: WidgetKeys.viewByOrderDetailsContactNumber,
                   valueText:
                       orderDetails.telephoneNumber.displayTelephoneNumber,
                   keyTextStyle:

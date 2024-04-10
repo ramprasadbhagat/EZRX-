@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_summary_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
@@ -13,6 +14,9 @@ class ViewByOrdersDetailRobot extends CommonRobot {
   ViewByOrdersDetailRobot(WidgetTester tester) : super(tester);
 
   final buyAgainButton = find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+  final contactNumberSection =
+      find.byKey(WidgetKeys.viewByOrderDetailsContactNumber);
+
   final _page = find.byType(ViewByOrderDetailsPage);
   late Finder _verifyingItem;
 
@@ -307,5 +311,14 @@ class ViewByOrdersDetailRobot extends CommonRobot {
       ),
       findsOneWidget,
     );
+  }
+
+  String getOrderContactNumber() {
+    final contactNumberText =
+        tester.widget<BalanceTextRow>(contactNumberSection).valueText;
+    if (contactNumberText == '-') {
+      return '';
+    }
+    return contactNumberText;
   }
 }

@@ -1446,6 +1446,8 @@ class WidgetKeys {
       const Key('viewByOrderDetailItems');
   static Key viewByOrderDetailOrderDate =
       const Key('viewByOrderDetailOrderDate');
+  static Key viewByOrderDetailsContactNumber =
+      const Key('viewByOrderDetailsContactNumber');
   static Key viewByOrderDetailItem(String materialNumber, bool isBonus) =>
       Key('viewByOrderDetailItem$materialNumber$isBonus');
 

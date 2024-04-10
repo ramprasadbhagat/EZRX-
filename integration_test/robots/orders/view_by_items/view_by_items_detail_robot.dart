@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
@@ -31,6 +32,8 @@ class ViewByItemsDetailRobot extends CommonRobot {
   final buyAgainButton = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
   final expandButton = find.byKey(WidgetKeys.viewByItemDetailExpandButton);
   final qtyLabel = find.byKey(WidgetKeys.cartItemProductQty);
+  final contactNumber =
+      find.byKey(WidgetKeys.viewByItemsOrderDetailsContactNumber);
 
   void verifyPage() {
     expect(find.byType(ViewByItemDetailsPage), findsOneWidget);
@@ -207,5 +210,14 @@ class ViewByItemsDetailRobot extends CommonRobot {
 
   void verifyCovidMaterialLabel() {
     expect(find.byKey(WidgetKeys.covidLabel), findsWidgets);
+  }
+
+  String getOrderContactNumber() {
+    final contactNumberText =
+        tester.widget<BalanceTextRow>(contactNumber).valueText;
+    if (contactNumberText == '-') {
+      return '';
+    }
+    return contactNumberText;
   }
 }
