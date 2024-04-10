@@ -69,7 +69,7 @@ class CustomerSearchRobot {
     await tester.pump();
     await tester.enterText(customerCodeSearchField, customerCode);
     await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pump(Durations.long2);
+    await tester.pumpAndSettle(Durations.long2);
   }
 
   void findCustomerCode(String shipToCode) {
