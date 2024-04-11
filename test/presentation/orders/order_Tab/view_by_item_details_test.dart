@@ -12,8 +12,8 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_lo
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
-import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
-import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';

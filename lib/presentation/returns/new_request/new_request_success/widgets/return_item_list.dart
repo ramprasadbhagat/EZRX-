@@ -24,17 +24,8 @@ class _ReturnItemList extends StatelessWidget {
               if (state.containsMPItems)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Row(
-                    children: [
-                      const MarketPlaceRectangleLogo(),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: MarketPlaceSellerTitle(
-                          sellerName:
-                              state.selectedItems.first.principalName.name,
-                        ),
-                      ),
-                    ],
+                  child: MarketPlaceSellerWithLogo(
+                    state.selectedItems.first.principalName.name,
                   ),
                 ),
               ...state.selectedItems

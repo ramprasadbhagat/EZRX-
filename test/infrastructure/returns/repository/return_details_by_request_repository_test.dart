@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_details_by_request_repository.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 
-class ConfigMock extends Mock implements Config {}
+import '../../../common_mock_data/mock_other.dart';
 
 class ReturnSummaryDetailsByRequestLocalMock extends Mock
     implements ReturnSummaryDetailsByRequestLocal {}
@@ -27,9 +28,12 @@ void main() {
   late RequestInformation successResult;
   final errorMock = Exception('fake-error');
   const fakeId = 'mock-id';
+  const fakeMarket = 'fake-market';
+  late DeviceStorage deviceStorage;
 
   setUpAll(
     () async {
+      deviceStorage = DeviceStorageMock();
       configMock = ConfigMock();
       returnSummaryDetailsByRequestLocalMock =
           ReturnSummaryDetailsByRequestLocalMock();
@@ -41,6 +45,7 @@ void main() {
             returnSummaryDetailsByRequestLocalMock,
         returnSummaryDetailsByRequestRemote:
             returnSummaryDetailsByRequestRemoteMock,
+        deviceStorage: deviceStorage,
       );
       successResult = await ReturnSummaryDetailsByRequestLocal()
           .getReturnSummaryDetailsByRequest();
@@ -89,10 +94,14 @@ void main() {
       test(
         'Get Return Summary Details By Request Success Remote',
         () async {
+          when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
           when(() => configMock.appFlavor).thenReturn(Flavor.uat);
           when(
             () => returnSummaryDetailsByRequestRemoteMock
-                .getReturnSummaryDetailsByRequest(returnRequestId: fakeId),
+                .getReturnSummaryDetailsByRequest(
+              returnRequestId: fakeId,
+              market: fakeMarket,
+            ),
           ).thenAnswer(
             (_) async => successResult,
           );
@@ -110,10 +119,14 @@ void main() {
       test(
         'Get Return Summary Details By Request Failure Remote',
         () async {
+          when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
           when(() => configMock.appFlavor).thenReturn(Flavor.uat);
           when(
             () => returnSummaryDetailsByRequestRemoteMock
-                .getReturnSummaryDetailsByRequest(returnRequestId: fakeId),
+                .getReturnSummaryDetailsByRequest(
+              returnRequestId: fakeId,
+              market: fakeMarket,
+            ),
           ).thenThrow(errorMock);
           final result = await repository.getReturnSummaryDetailsByRequest(
             returnRequestId: ReturnRequestsId(requestId: fakeId),

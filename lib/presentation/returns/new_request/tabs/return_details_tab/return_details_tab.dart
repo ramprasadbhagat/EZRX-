@@ -10,8 +10,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
-import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
-import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -59,17 +58,8 @@ class ReturnDetailsTab extends StatelessWidget {
             if (state.containsMPItems)
               Padding(
                 padding: const EdgeInsets.only(top: 16, bottom: 5),
-                child: Row(
-                  children: [
-                    const MarketPlaceRectangleLogo(),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: MarketPlaceSellerTitle(
-                        sellerName:
-                            state.selectedItems.first.principalName.name,
-                      ),
-                    ),
-                  ],
+                child: MarketPlaceSellerWithLogo(
+                  state.selectedItems.first.principalName.name,
                 ),
               ),
             ...state.selectedItems

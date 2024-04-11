@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/mock_other.dart';
 
 void main() {
   late ReturnSummaryDetailsRequestInformationRemote remoteDataSource;
@@ -23,15 +26,22 @@ void main() {
   );
   final dioAdapter = DioAdapter(dio: dio);
   final service = HttpService.mockDio(dio);
+  final remoteConfigService = RemoteConfigServiceMock();
+  const fakeMarket = 'fake-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
+      when(() => remoteConfigService.enableMarketPlaceMarkets)
+          .thenReturn(fakeEnableMarketPlaceMarkets);
       remoteDataSource = ReturnSummaryDetailsRequestInformationRemote(
         httpService: service,
         config: Config(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
         requestInformationQuery: RequestInformationQuery(),
+        remoteConfigService: remoteConfigService,
       );
     },
   );
@@ -48,7 +58,7 @@ void main() {
 
         final data = jsonEncode({
           'query': remoteDataSource.requestInformationQuery
-              .getReturnInformationQuery(),
+              .getReturnInformationQuery(fakeConfigValue),
           'variables': {
             'request': {
               'requestID': 'mock_id',
@@ -69,6 +79,7 @@ void main() {
 
         final result = await remoteDataSource.getRequestInformation(
           returnRequestId: 'mock_id',
+          market: fakeMarket,
         );
 
         expect(
@@ -81,7 +92,7 @@ void main() {
       test('=> getRequestInformation with status code not 200', () async {
         final data = jsonEncode({
           'query': remoteDataSource.requestInformationQuery
-              .getReturnInformationQuery(),
+              .getReturnInformationQuery(fakeConfigValue),
           'variables': {
             'request': {
               'invoiceID': 'mock_id',
@@ -104,6 +115,7 @@ void main() {
         await remoteDataSource
             .getRequestInformation(
           returnRequestId: 'mock_id',
+          market: fakeMarket,
         )
             .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
@@ -114,7 +126,7 @@ void main() {
       test('=> getRequestInformation with error', () async {
         final data = jsonEncode({
           'query': remoteDataSource.requestInformationQuery
-              .getReturnInformationQuery(),
+              .getReturnInformationQuery(fakeConfigValue),
           'variables': {
             'request': {
               'invoiceID': 'mock_id',
@@ -142,6 +154,7 @@ void main() {
         await remoteDataSource
             .getRequestInformation(
           returnRequestId: 'mock_id',
+          market: fakeMarket,
         )
             .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
@@ -152,7 +165,7 @@ void main() {
       test('=> getRequestInformation with data equal to null', () async {
         final data = jsonEncode({
           'query': remoteDataSource.requestInformationQuery
-              .getReturnInformationQuery(),
+              .getReturnInformationQuery(fakeConfigValue),
           'variables': {
             'request': {
               'invoiceID': 'mock_id',
@@ -177,6 +190,7 @@ void main() {
         await remoteDataSource
             .getRequestInformation(
           returnRequestId: 'mock_id',
+          market: fakeMarket,
         )
             .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
@@ -189,7 +203,7 @@ void main() {
           () async {
         final data = jsonEncode({
           'query': remoteDataSource.requestInformationQuery
-              .getReturnInformationQuery(),
+              .getReturnInformationQuery(fakeConfigValue),
           'variables': {
             'request': {
               'invoiceID': 'mock_id',
@@ -214,6 +228,7 @@ void main() {
         await remoteDataSource
             .getRequestInformation(
           returnRequestId: 'mock_id',
+          market: fakeMarket,
         )
             .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());

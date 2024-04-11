@@ -29,25 +29,8 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
           if (orderHistoryItem.isMarketPlace)
             Padding(
               padding: const EdgeInsets.only(top: 16, bottom: 6),
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const MarketPlaceRectangleLogo(),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: MarketPlaceSellerTitle(
-                      sellerName:
-                          orderHistoryItem.principalData.principalName.name,
-                      iconColor: Colors.white,
-                      textColor: ZPColors.white,
-                    ),
-                  ),
-                ],
+              child: MarketPlaceSellerWithLogo.elevated(
+                orderHistoryItem.principalData.principalName.name,
               ),
             ),
           const SizedBox(height: 10),

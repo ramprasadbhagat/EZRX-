@@ -12,7 +12,7 @@ part of 'return_request_information.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnRequestInformation {
@@ -49,6 +49,7 @@ mixin _$ReturnRequestInformation {
   int get initialQuantity => throw _privateConstructorUsedError;
   List<PriceOverrideTrail> get priceOverrideTrail =>
       throw _privateConstructorUsedError;
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnRequestInformationCopyWith<ReturnRequestInformation> get copyWith =>
@@ -91,7 +92,8 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       Remarks remarks,
       double overrideValue,
       int initialQuantity,
-      List<PriceOverrideTrail> priceOverrideTrail});
+      List<PriceOverrideTrail> priceOverrideTrail,
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -138,6 +140,7 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
     Object? overrideValue = null,
     Object? initialQuantity = null,
     Object? priceOverrideTrail = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       invoiceNo: null == invoiceNo
@@ -260,17 +263,21 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
           ? _value.priceOverrideTrail
           : priceOverrideTrail // ignore: cast_nullable_to_non_nullable
               as List<PriceOverrideTrail>,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ReturnRequestInformationCopyWith<$Res>
+abstract class _$$ReturnRequestInformationImplCopyWith<$Res>
     implements $ReturnRequestInformationCopyWith<$Res> {
-  factory _$$_ReturnRequestInformationCopyWith(
-          _$_ReturnRequestInformation value,
-          $Res Function(_$_ReturnRequestInformation) then) =
-      __$$_ReturnRequestInformationCopyWithImpl<$Res>;
+  factory _$$ReturnRequestInformationImplCopyWith(
+          _$ReturnRequestInformationImpl value,
+          $Res Function(_$ReturnRequestInformationImpl) then) =
+      __$$ReturnRequestInformationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -303,16 +310,18 @@ abstract class _$$_ReturnRequestInformationCopyWith<$Res>
       Remarks remarks,
       double overrideValue,
       int initialQuantity,
-      List<PriceOverrideTrail> priceOverrideTrail});
+      List<PriceOverrideTrail> priceOverrideTrail,
+      bool isMarketPlace});
 }
 
 /// @nodoc
-class __$$_ReturnRequestInformationCopyWithImpl<$Res>
+class __$$ReturnRequestInformationImplCopyWithImpl<$Res>
     extends _$ReturnRequestInformationCopyWithImpl<$Res,
-        _$_ReturnRequestInformation>
-    implements _$$_ReturnRequestInformationCopyWith<$Res> {
-  __$$_ReturnRequestInformationCopyWithImpl(_$_ReturnRequestInformation _value,
-      $Res Function(_$_ReturnRequestInformation) _then)
+        _$ReturnRequestInformationImpl>
+    implements _$$ReturnRequestInformationImplCopyWith<$Res> {
+  __$$ReturnRequestInformationImplCopyWithImpl(
+      _$ReturnRequestInformationImpl _value,
+      $Res Function(_$ReturnRequestInformationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -348,8 +357,9 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
     Object? overrideValue = null,
     Object? initialQuantity = null,
     Object? priceOverrideTrail = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_ReturnRequestInformation(
+    return _then(_$ReturnRequestInformationImpl(
       invoiceNo: null == invoiceNo
           ? _value.invoiceNo
           : invoiceNo // ignore: cast_nullable_to_non_nullable
@@ -470,14 +480,18 @@ class __$$_ReturnRequestInformationCopyWithImpl<$Res>
           ? _value._priceOverrideTrail
           : priceOverrideTrail // ignore: cast_nullable_to_non_nullable
               as List<PriceOverrideTrail>,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_ReturnRequestInformation extends _ReturnRequestInformation {
-  _$_ReturnRequestInformation(
+class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
+  _$ReturnRequestInformationImpl(
       {required this.invoiceNo,
       required this.expiryDate,
       required this.comment,
@@ -507,7 +521,8 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
       required this.remarks,
       required this.overrideValue,
       required this.initialQuantity,
-      required final List<PriceOverrideTrail> priceOverrideTrail})
+      required final List<PriceOverrideTrail> priceOverrideTrail,
+      required this.isMarketPlace})
       : _imageUrl = imageUrl,
         _attachments = attachments,
         _attachmentUrl = attachmentUrl,
@@ -608,15 +623,18 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
   }
 
   @override
+  final bool isMarketPlace;
+
+  @override
   String toString() {
-    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail)';
+    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnRequestInformation &&
+            other is _$ReturnRequestInformationImpl &&
             (identical(other.invoiceNo, invoiceNo) ||
                 other.invoiceNo == invoiceNo) &&
             (identical(other.expiryDate, expiryDate) ||
@@ -670,7 +688,9 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
             (identical(other.initialQuantity, initialQuantity) ||
                 other.initialQuantity == initialQuantity) &&
             const DeepCollectionEquality()
-                .equals(other._priceOverrideTrail, _priceOverrideTrail));
+                .equals(other._priceOverrideTrail, _priceOverrideTrail) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
@@ -705,50 +725,51 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
         remarks,
         overrideValue,
         initialQuantity,
-        const DeepCollectionEquality().hash(_priceOverrideTrail)
+        const DeepCollectionEquality().hash(_priceOverrideTrail),
+        isMarketPlace
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnRequestInformationCopyWith<_$_ReturnRequestInformation>
-      get copyWith => __$$_ReturnRequestInformationCopyWithImpl<
-          _$_ReturnRequestInformation>(this, _$identity);
+  _$$ReturnRequestInformationImplCopyWith<_$ReturnRequestInformationImpl>
+      get copyWith => __$$ReturnRequestInformationImplCopyWithImpl<
+          _$ReturnRequestInformationImpl>(this, _$identity);
 }
 
 abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   factory _ReturnRequestInformation(
-          {required final String invoiceNo,
-          required final DateTimeStringValue expiryDate,
-          required final StringValue comment,
-          required final String rejectReason,
-          required final String returnQuantity,
-          required final double unitPrice,
-          required final double totalPrice,
-          required final String returnOrderDesc,
-          required final MaterialNumber materialNumber,
-          required final String materialDescription,
-          required final String batch,
-          required final String materialGroup,
-          required final List<String> imageUrl,
-          required final List<String> attachments,
-          required final List<ReturnRequestAttachment> attachmentUrl,
-          required final DateTimeStringValue createdDate,
-          required final String principal,
-          required final PrincipalName principalName,
-          required final String bapiSalesDocNumber,
-          required final StatusType bapiStatus,
-          required final StatusType status,
-          required final StatusReason statusReason,
-          required final bool outsidePolicy,
-          required final DateTimeStringValue invoiceDate,
-          required final Prsfd prsfd,
-          required final List<ReturnRequestInformation> bonusInformation,
-          required final Remarks remarks,
-          required final double overrideValue,
-          required final int initialQuantity,
-          required final List<PriceOverrideTrail> priceOverrideTrail}) =
-      _$_ReturnRequestInformation;
+      {required final String invoiceNo,
+      required final DateTimeStringValue expiryDate,
+      required final StringValue comment,
+      required final String rejectReason,
+      required final String returnQuantity,
+      required final double unitPrice,
+      required final double totalPrice,
+      required final String returnOrderDesc,
+      required final MaterialNumber materialNumber,
+      required final String materialDescription,
+      required final String batch,
+      required final String materialGroup,
+      required final List<String> imageUrl,
+      required final List<String> attachments,
+      required final List<ReturnRequestAttachment> attachmentUrl,
+      required final DateTimeStringValue createdDate,
+      required final String principal,
+      required final PrincipalName principalName,
+      required final String bapiSalesDocNumber,
+      required final StatusType bapiStatus,
+      required final StatusType status,
+      required final StatusReason statusReason,
+      required final bool outsidePolicy,
+      required final DateTimeStringValue invoiceDate,
+      required final Prsfd prsfd,
+      required final List<ReturnRequestInformation> bonusInformation,
+      required final Remarks remarks,
+      required final double overrideValue,
+      required final int initialQuantity,
+      required final List<PriceOverrideTrail> priceOverrideTrail,
+      required final bool isMarketPlace}) = _$ReturnRequestInformationImpl;
   _ReturnRequestInformation._() : super._();
 
   @override
@@ -812,8 +833,10 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   @override
   List<PriceOverrideTrail> get priceOverrideTrail;
   @override
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_ReturnRequestInformationCopyWith<_$_ReturnRequestInformation>
+  _$$ReturnRequestInformationImplCopyWith<_$ReturnRequestInformationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -866,22 +889,22 @@ class _$PriceOverrideTrailCopyWithImpl<$Res, $Val extends PriceOverrideTrail>
 }
 
 /// @nodoc
-abstract class _$$_PriceOverrideTrailCopyWith<$Res>
+abstract class _$$PriceOverrideTrailImplCopyWith<$Res>
     implements $PriceOverrideTrailCopyWith<$Res> {
-  factory _$$_PriceOverrideTrailCopyWith(_$_PriceOverrideTrail value,
-          $Res Function(_$_PriceOverrideTrail) then) =
-      __$$_PriceOverrideTrailCopyWithImpl<$Res>;
+  factory _$$PriceOverrideTrailImplCopyWith(_$PriceOverrideTrailImpl value,
+          $Res Function(_$PriceOverrideTrailImpl) then) =
+      __$$PriceOverrideTrailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double overrideValue, OverrideRole overrideRole});
 }
 
 /// @nodoc
-class __$$_PriceOverrideTrailCopyWithImpl<$Res>
-    extends _$PriceOverrideTrailCopyWithImpl<$Res, _$_PriceOverrideTrail>
-    implements _$$_PriceOverrideTrailCopyWith<$Res> {
-  __$$_PriceOverrideTrailCopyWithImpl(
-      _$_PriceOverrideTrail _value, $Res Function(_$_PriceOverrideTrail) _then)
+class __$$PriceOverrideTrailImplCopyWithImpl<$Res>
+    extends _$PriceOverrideTrailCopyWithImpl<$Res, _$PriceOverrideTrailImpl>
+    implements _$$PriceOverrideTrailImplCopyWith<$Res> {
+  __$$PriceOverrideTrailImplCopyWithImpl(_$PriceOverrideTrailImpl _value,
+      $Res Function(_$PriceOverrideTrailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -890,7 +913,7 @@ class __$$_PriceOverrideTrailCopyWithImpl<$Res>
     Object? overrideValue = null,
     Object? overrideRole = null,
   }) {
-    return _then(_$_PriceOverrideTrail(
+    return _then(_$PriceOverrideTrailImpl(
       overrideValue: null == overrideValue
           ? _value.overrideValue
           : overrideValue // ignore: cast_nullable_to_non_nullable
@@ -905,8 +928,8 @@ class __$$_PriceOverrideTrailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PriceOverrideTrail extends _PriceOverrideTrail {
-  _$_PriceOverrideTrail(
+class _$PriceOverrideTrailImpl extends _PriceOverrideTrail {
+  _$PriceOverrideTrailImpl(
       {required this.overrideValue, required this.overrideRole})
       : super._();
 
@@ -921,10 +944,10 @@ class _$_PriceOverrideTrail extends _PriceOverrideTrail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceOverrideTrail &&
+            other is _$PriceOverrideTrailImpl &&
             (identical(other.overrideValue, overrideValue) ||
                 other.overrideValue == overrideValue) &&
             (identical(other.overrideRole, overrideRole) ||
@@ -937,15 +960,15 @@ class _$_PriceOverrideTrail extends _PriceOverrideTrail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceOverrideTrailCopyWith<_$_PriceOverrideTrail> get copyWith =>
-      __$$_PriceOverrideTrailCopyWithImpl<_$_PriceOverrideTrail>(
+  _$$PriceOverrideTrailImplCopyWith<_$PriceOverrideTrailImpl> get copyWith =>
+      __$$PriceOverrideTrailImplCopyWithImpl<_$PriceOverrideTrailImpl>(
           this, _$identity);
 }
 
 abstract class _PriceOverrideTrail extends PriceOverrideTrail {
   factory _PriceOverrideTrail(
       {required final double overrideValue,
-      required final OverrideRole overrideRole}) = _$_PriceOverrideTrail;
+      required final OverrideRole overrideRole}) = _$PriceOverrideTrailImpl;
   _PriceOverrideTrail._() : super._();
 
   @override
@@ -954,6 +977,6 @@ abstract class _PriceOverrideTrail extends PriceOverrideTrail {
   OverrideRole get overrideRole;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceOverrideTrailCopyWith<_$_PriceOverrideTrail> get copyWith =>
+  _$$PriceOverrideTrailImplCopyWith<_$PriceOverrideTrailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

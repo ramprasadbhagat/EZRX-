@@ -16,7 +16,7 @@ import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart'
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_suggestion/product_suggestion_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';

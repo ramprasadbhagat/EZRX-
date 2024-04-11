@@ -14,6 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/mock_other.dart';
 
 void main() {
   late ApproverReturnRequestInformationRemote remoteDataSource;
@@ -26,6 +29,10 @@ void main() {
   );
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
+  final remoteConfigService = RemoteConfigServiceMock();
+  const fakeMarket = 'fake-market';
+  final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
 
   final variables = {
     'request': {
@@ -35,12 +42,15 @@ void main() {
 
   setUpAll(
     () {
-      WidgetsFlutterBinding.ensureInitialized();
+            WidgetsFlutterBinding.ensureInitialized();
+      when(() => remoteConfigService.enableMarketPlaceMarkets)
+          .thenReturn(fakeEnableMarketPlaceMarkets);
       remoteDataSource = ApproverReturnRequestInformationRemote(
         httpService: service,
         config: Config(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
         approverReturnRequestInformationQuery: RequestInformationQuery(),
+        remoteConfigService: remoteConfigService,
       );
     },
   );
@@ -67,7 +77,7 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.approverReturnRequestInformationQuery
-                  .getReturnInformationQuery(),
+                  .getReturnInformationQuery(fakeConfigValue),
               'variables': variables,
             }),
           );
@@ -75,6 +85,7 @@ void main() {
           final result =
               await remoteDataSource.getApproverReturnRequestInformation(
             returnRequestId: 'fake-requestId',
+            market: fakeMarket,
           );
 
           expect(
@@ -98,7 +109,7 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.approverReturnRequestInformationQuery
-                  .getReturnInformationQuery(),
+                  .getReturnInformationQuery(fakeConfigValue),
               'variables': variables,
             }),
           );
@@ -106,6 +117,7 @@ void main() {
           await remoteDataSource
               .getApproverReturnRequestInformation(
             returnRequestId: 'fake-requestId',
+            market: fakeMarket,
           )
               .onError((error, _) {
             expect(error, isA<ServerException>());
@@ -132,7 +144,7 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.approverReturnRequestInformationQuery
-                  .getReturnInformationQuery(),
+                  .getReturnInformationQuery(fakeConfigValue),
               'variables': variables,
             }),
           );
@@ -140,6 +152,7 @@ void main() {
           await remoteDataSource
               .getApproverReturnRequestInformation(
             returnRequestId: 'fake-requestId',
+            market: fakeMarket,
           )
               .onError((error, _) {
             expect(error, isA<ServerException>());

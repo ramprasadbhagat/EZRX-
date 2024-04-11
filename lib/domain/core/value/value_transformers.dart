@@ -506,13 +506,21 @@ IconData getReturnStatusIcon(String status) {
     case 'Pending review':
       return Icons.query_builder;
     case 'Reviewed':
+    case 'Approved':
       return Icons.check;
+    case 'Rejected':
     case 'Failed':
       return Icons.cancel;
     default:
       return Icons.inventory_outlined;
   }
 }
+
+List<StatusType> getReturnByItemStatusDetail(String status) => [
+      if (status != 'Pending Approval') StatusType(status),
+      StatusType('Pending review'),
+      StatusType('Return request submitted'),
+    ];
 
 List<StatusType> getReturnStatusDetails(String status) {
   final returnStatusList = <StatusType>[

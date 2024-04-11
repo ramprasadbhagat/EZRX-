@@ -247,6 +247,7 @@ void _showDetailsPage({
     clipBehavior: Clip.antiAliasWithSaveLayer,
     builder: (_) {
       return ReturnStatusSection(
+        title: context.tr('Return request status'),
         customStep:
             requestInformationHeader.bapiStatus.displayReturnStatusDetails
                 .mapIndexed(

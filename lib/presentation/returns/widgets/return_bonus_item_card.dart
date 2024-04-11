@@ -19,35 +19,33 @@ class _ReturnBonusItemSection extends StatelessWidget {
       key: WidgetKeys.returnBonusItemCard,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Column(
-            children: [
-              if (bonusItem.displayOutSidePolicy(
-                context
-                    .read<EligibilityBloc>()
-                    .state
-                    .salesOrgConfigs
-                    .allowReturnsOutsidePolicy,
-              ))
-                const OutsideReturnPolicyTag(),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      context.tr('Bonus details'),
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
+        Column(
+          children: [
+            if (bonusItem.displayOutSidePolicy(
+              context
+                  .read<EligibilityBloc>()
+                  .state
+                  .salesOrgConfigs
+                  .allowReturnsOutsidePolicy,
+            ))
+              const OutsideReturnPolicyTag(),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    context.tr('Bonus details'),
+                    style: Theme.of(context).textTheme.labelSmall,
                   ),
-                  StatusLabel(
-                    status: StatusType(
-                      bonusItem.status.displayStatus,
-                    ),
+                ),
+                StatusLabel(
+                  status: StatusType(
+                    bonusItem.status.displayStatus,
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+            const SizedBox(height: _itemSpacing),
+          ],
         ),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 5),
@@ -82,7 +80,7 @@ class _ReturnBonusItemSection extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      '${context.tr('Batch')} ${bonusItem.batch} (${context.tr('Expires')} ${bonusItem.expiryDate.dateString})',
+                      '${context.tr('Batch')} ${bonusItem.displayBatch} (${context.tr('Expires')} ${bonusItem.displayExpiryDate})',
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall

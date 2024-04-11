@@ -13,71 +13,63 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
   const ReturnRequestInformationDto._();
 
   factory ReturnRequestInformationDto({
-    @JsonKey(name: 'invoiceNo', defaultValue: '')
-        required String invoiceNo,
-    @JsonKey(name: 'expiryDate', defaultValue: '')
-        required String expiryDate,
-    @JsonKey(name: 'comment', defaultValue: '')
-        required String comment,
+    @JsonKey(name: 'invoiceNo', defaultValue: '') required String invoiceNo,
+    @JsonKey(name: 'expiryDate', defaultValue: '') required String expiryDate,
+    @JsonKey(name: 'comment', defaultValue: '') required String comment,
     @JsonKey(name: 'rejectReason', defaultValue: '')
-        required String rejectReason,
+    required String rejectReason,
     @JsonKey(name: 'returnQuantity', defaultValue: '')
-        required String returnQuantity,
-    @JsonKey(name: 'unitPrice', defaultValue: '')
-        required String unitPrice,
-    @JsonKey(name: 'totalPrice', defaultValue: '')
-        required String totalPrice,
+    required String returnQuantity,
+    @JsonKey(name: 'unitPrice', defaultValue: '') required String unitPrice,
+    @JsonKey(name: 'totalPrice', defaultValue: '') required String totalPrice,
     @JsonKey(name: 'materialNumber', defaultValue: '')
-        required String materialNumber,
+    required String materialNumber,
     @JsonKey(name: 'materialDescription', defaultValue: '')
-        required String materialDescription,
-    @JsonKey(name: 'batch', defaultValue: '')
-        required String batch,
+    required String materialDescription,
+    @JsonKey(name: 'batch', defaultValue: '') required String batch,
     @JsonKey(name: 'returnOrderDesc', defaultValue: '')
-        required String returnOrderDesc,
+    required String returnOrderDesc,
     @JsonKey(name: 'materialGroup', defaultValue: '')
-        required String materialGroup,
+    required String materialGroup,
     @JsonKey(name: 'imageUrl', defaultValue: <String>[])
-        required List<String> imageUrl,
+    required List<String> imageUrl,
     @JsonKey(name: 'attachments', defaultValue: <String>[])
-        required List<String> attachments,
+    required List<String> attachments,
     @JsonKey(name: 'attachmentUrl', defaultValue: <ReturnAttachmentDto>[])
-        required List<ReturnAttachmentDto> attachmentUrl,
-    @JsonKey(name: 'createdDate', defaultValue: '')
-        required String createdDate,
-    @JsonKey(name: 'principal', defaultValue: '')
-        required String principal,
+    required List<ReturnAttachmentDto> attachmentUrl,
+    @JsonKey(name: 'createdDate', defaultValue: '') required String createdDate,
+    @JsonKey(name: 'principal', defaultValue: '') required String principal,
     @JsonKey(name: 'principalName', defaultValue: '')
-        required String principalName,
+    required String principalName,
     @JsonKey(name: 'bapiSalesDocNumber', defaultValue: '')
-        required String bapiSalesDocNumber,
-    @JsonKey(name: 'bapiStatus', defaultValue: '')
-        required String bapiStatus,
-    @JsonKey(name: 'status', defaultValue: '')
-        required String status,
+    required String bapiSalesDocNumber,
+    @JsonKey(name: 'bapiStatus', defaultValue: '') required String bapiStatus,
+    @JsonKey(name: 'status', defaultValue: '') required String status,
     @JsonKey(name: 'statusReason', defaultValue: '')
-        required String statusReason,
+    required String statusReason,
     @JsonKey(name: 'outsidePolicy', defaultValue: false)
-        required bool outsidePolicy,
-    @JsonKey(name: 'invoiceDate', defaultValue: '')
-        required String invoiceDate,
-    @JsonKey(name: 'prsfd', defaultValue: '')
-        required String prsfd,
-    @JsonKey(name: 'remarks', defaultValue: '')
-        required String remarks,
+    required bool outsidePolicy,
+    @JsonKey(name: 'invoiceDate', defaultValue: '') required String invoiceDate,
+    @JsonKey(name: 'prsfd', defaultValue: '') required String prsfd,
+    @JsonKey(name: 'remarks', defaultValue: '') required String remarks,
     @JsonKey(
       name: 'bonusInformation',
       defaultValue: <ReturnRequestInformationDto>[],
     )
-        required List<ReturnRequestInformationDto> bonusInformation,
+    required List<ReturnRequestInformationDto> bonusInformation,
     @StringToDoubleConverter()
     @JsonKey(name: 'overrideValue', defaultValue: 0)
-        required double overrideValue,
+    required double overrideValue,
     @StringToIntConverter()
     @JsonKey(name: 'initialQuantity', defaultValue: 0)
-        required int initialQuantity,
-    @JsonKey(name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
-        required List<PriceOverrideTrailDto> priceOverrideTrail,
+    required int initialQuantity,
+    @JsonKey(
+      name: 'priceOverrideTrail',
+      defaultValue: <PriceOverrideTrailDto>[],
+    )
+    required List<PriceOverrideTrailDto> priceOverrideTrail,
+    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    required bool isMarketPlace,
   }) = _ReturnRequestInformationDto;
 
   ReturnRequestInformation toDomain() {
@@ -112,6 +104,7 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       overrideValue: overrideValue,
       initialQuantity: initialQuantity,
       priceOverrideTrail: priceOverrideTrail.map((e) => e.toDomain()).toList(),
+      isMarketPlace: isMarketPlace,
     );
   }
 
@@ -128,9 +121,9 @@ class PriceOverrideTrailDto with _$PriceOverrideTrailDto {
   factory PriceOverrideTrailDto({
     @StringToDoubleConverter()
     @JsonKey(name: 'overrideValue', defaultValue: 0)
-        required double overrideValue,
+    required double overrideValue,
     @JsonKey(name: 'overriderRole', defaultValue: '')
-        required String overrideRole,
+    required String overrideRole,
   }) = _PriceOverrideTrailDto;
 
   PriceOverrideTrail toDomain() {

@@ -2,8 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
-import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/attachment_section.dart';
@@ -65,26 +64,9 @@ class OrderHeaderSection extends StatelessWidget {
                   orderDetails.orderHistoryDetailsOrderItem.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const MarketPlaceRectangleLogo(),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: MarketPlaceSellerTitle(
-                          sellerName: orderDetails.orderHistoryDetailsOrderItem
-                              .first.principalData.principalName.name,
-                          iconColor: Colors.white,
-                          iconSize: 20,
-                          textColor: ZPColors.white,
-                        ),
-                      ),
-                    ],
+                  child: MarketPlaceSellerWithLogo.elevated(
+                    orderDetails.orderHistoryDetailsOrderItem.first
+                        .principalData.principalName.name,
                   ),
                 ),
               BalanceTextRow(

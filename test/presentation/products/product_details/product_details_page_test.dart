@@ -41,7 +41,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
-import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';

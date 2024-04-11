@@ -1,5 +1,5 @@
 class RequestInformationQuery {
-  String getReturnInformationQuery() {
+  String getReturnInformationQuery(bool enableMarketplace) {
     return '''
        query requestInformationV2(\$request: requestInformationRequest!) {
   requestInformationV2(request: \$request) {
@@ -17,6 +17,7 @@ class RequestInformationQuery {
       totalItemCount
     }
     requestInformationV2 {
+      ${enableMarketplace ? 'isMarketPlace' : ''}
       invoiceNo
       expiryDate
       comment
@@ -54,6 +55,7 @@ class RequestInformationQuery {
       outsidePolicy
       invoiceDate
       bonusInformation {
+      ${enableMarketplace ? 'isMarketPlace' : ''}
       invoiceNo
       expiryDate
       comment

@@ -2,19 +2,20 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_details_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_other.dart';
+
 class ReturnSummaryLocalDataSourceMock extends Mock
     implements ReturnSummaryDetailsRequestInformationLocal {}
 
 class ReturnSummaryRemoteDataSourceMock extends Mock
     implements ReturnSummaryDetailsRequestInformationRemote {}
-
-class ConfigMock extends Mock implements Config {}
 
 void main() {
   late ReturnSummaryDetailsRequestInformationLocal
@@ -23,6 +24,9 @@ void main() {
       returnSummaryDetailsRequestInformationRemote;
   late Config config;
   late ReturnSummaryDetailsRepository returnSummaryDetailsRepository;
+  late DeviceStorage deviceStorage;
+
+  const fakeMarket = 'fake-market';
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +34,7 @@ void main() {
         ReturnSummaryLocalDataSourceMock();
     returnSummaryDetailsRequestInformationRemote =
         ReturnSummaryRemoteDataSourceMock();
+    deviceStorage = DeviceStorageMock();
     config = ConfigMock();
     returnSummaryDetailsRepository = ReturnSummaryDetailsRepository(
       config: config,
@@ -37,6 +42,7 @@ void main() {
           returnSummaryDetailsRequestInformationLocal,
       returnSummaryDetailsRequestInformationRemote:
           returnSummaryDetailsRequestInformationRemote,
+      deviceStorage: deviceStorage,
     );
   });
 
@@ -70,11 +76,13 @@ void main() {
     });
 
     test('=> getReturnInformation remote success', () async {
+      when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
       when(() => config.appFlavor).thenReturn(Flavor.uat);
       when(
         () =>
             returnSummaryDetailsRequestInformationRemote.getRequestInformation(
           returnRequestId: 'mock_id',
+          market: fakeMarket,
         ),
       ).thenAnswer(
         (invocation) async => RequestInformation.empty(),
@@ -87,11 +95,13 @@ void main() {
     });
 
     test('=> getReturnInformation remote failure', () async {
+      when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
       when(() => config.appFlavor).thenReturn(Flavor.uat);
       when(
         () =>
             returnSummaryDetailsRequestInformationRemote.getRequestInformation(
           returnRequestId: 'mock_id',
+          market: fakeMarket,
         ),
       ).thenThrow((invocation) async => MockException());
 

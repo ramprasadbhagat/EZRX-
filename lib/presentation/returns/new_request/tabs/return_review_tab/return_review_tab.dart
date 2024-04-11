@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/presentation/core/market_place_rectangle_logo.dart';
-import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/regexes.dart';
@@ -52,17 +51,8 @@ class ReturnReviewTab extends StatelessWidget {
                 if (state.containsMPItems)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Row(
-                      children: [
-                        const MarketPlaceRectangleLogo(),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: MarketPlaceSellerTitle(
-                            sellerName:
-                                state.selectedItems.first.principalName.name,
-                          ),
-                        ),
-                      ],
+                    child: MarketPlaceSellerWithLogo(
+                      state.selectedItems.first.principalName.name,
                     ),
                   ),
                 const _ReturnReferenceField(),

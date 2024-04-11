@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_summary_details_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_remote.dart';
 
@@ -15,11 +16,13 @@ class ReturnSummaryDetailsRepository
       returnSummaryDetailsRequestInformationLocal;
   final ReturnSummaryDetailsRequestInformationRemote
       returnSummaryDetailsRequestInformationRemote;
+  final DeviceStorage deviceStorage;
 
   ReturnSummaryDetailsRepository({
     required this.config,
     required this.returnSummaryDetailsRequestInformationLocal,
     required this.returnSummaryDetailsRequestInformationRemote,
+    required this.deviceStorage,
   });
 
   @override
@@ -42,6 +45,7 @@ class ReturnSummaryDetailsRepository
           await returnSummaryDetailsRequestInformationRemote
               .getRequestInformation(
         returnRequestId: returnRequestId.requestId,
+        market: deviceStorage.currentMarket(),
       );
 
       return Right(returnRequestInformation);

@@ -40,6 +40,7 @@
             "requestInformationV2": [
                 {
                     "invoiceNo": "1100001115",
+                    "isMarketPlace": false,
                     "returnValue": "11",
                     "actionRequired": [],
                     "expiryDate": "20170531",
@@ -127,6 +128,7 @@
                     "bonusInformation": [
                         {
                             "invoiceNo": "1100001115",
+                            "isMarketPlace": false,
                             "returnValue": "0",
                             "actionRequired": [],
                             "expiryDate": "20170531",

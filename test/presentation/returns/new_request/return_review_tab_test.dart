@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/presentation/core/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';

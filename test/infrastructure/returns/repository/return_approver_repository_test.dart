@@ -16,7 +16,7 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_rep
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockConfig extends Mock implements Config {}
+import '../../../common_mock_data/mock_other.dart';
 
 class ApproverReturnRequestsLocalMock extends Mock
     implements ApproverReturnRequestsLocal {}
@@ -37,9 +37,9 @@ void main() {
   late ApproverReturnRequestsRemote approverReturnRequestsRemoteMock;
   late ApproverReturnRequestInformationLocal
       approverReturnRequestInformationLocalMock;
-
   late ApproverReturnRequestInformationRemote
       approverReturnRequestInformationRemoteMock;
+  late DeviceStorageMock deviceStorageMock;
 
   late ReturnApproverFilter returnApproverFilter;
   final fakeToDate = DateTime.parse(
@@ -55,9 +55,11 @@ void main() {
       ),
     ),
   );
+  const fakeMarket = 'fake-market';
 
   setUpAll(() {
-    mockConfig = MockConfig();
+    deviceStorageMock = DeviceStorageMock();
+    mockConfig = ConfigMock();
     approverReturnRequestsLocalMock = ApproverReturnRequestsLocalMock();
     approverReturnRequestsRemoteMock = ApproverReturnRequestsRemoteMock();
     approverReturnRequestInformationLocalMock =
@@ -73,6 +75,7 @@ void main() {
           approverReturnRequestInformationRemoteMock,
       returnRequestLocalDataSource: approverReturnRequestsLocalMock,
       returnRequestRemoteDataSource: approverReturnRequestsRemoteMock,
+      deviceStorage: deviceStorageMock,
     );
     returnApproverFilter = ReturnApproverFilter.empty().copyWith(
       toInvoiceDate: DateTimeStringValue(
@@ -261,11 +264,13 @@ void main() {
       test(
         'Remote success getReturnInformation',
         () async {
+          when(() => deviceStorageMock.currentMarket()).thenReturn(fakeMarket);
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
           when(
             () => approverReturnRequestInformationRemoteMock
                 .getApproverReturnRequestInformation(
               returnRequestId: 'fake-requestId',
+              market: fakeMarket,
             ),
           ).thenAnswer(
             (invocation) async => RequestInformation.empty(),
@@ -286,11 +291,13 @@ void main() {
       test(
         'Remote fail getReturnInformation',
         () async {
+          when(() => deviceStorageMock.currentMarket()).thenReturn(fakeMarket);
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
           when(
             () => approverReturnRequestInformationRemoteMock
                 .getApproverReturnRequestInformation(
               returnRequestId: 'fake-requestId',
+              market: fakeMarket,
             ),
           ).thenThrow(const ApiFailure.serverTimeout());
 

@@ -39,6 +39,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required double overrideValue,
     required int initialQuantity,
     required List<PriceOverrideTrail> priceOverrideTrail,
+    required bool isMarketPlace,
   }) = _ReturnRequestInformation;
 
   factory ReturnRequestInformation.empty() => ReturnRequestInformation(
@@ -72,6 +73,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         overrideValue: 0.0,
         initialQuantity: 0,
         priceOverrideTrail: <PriceOverrideTrail>[],
+        isMarketPlace: false,
       );
 
   double get calculatedUnitPrice {
@@ -114,7 +116,18 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
 
   bool get isApprovedCounterOffer =>
       status.isApprovedStatus && isCounterOfferRequested;
+
   bool get isEmpty => this == ReturnRequestInformation.empty();
+
+  String get displayPrincipalOrSellerCode =>
+      isMarketPlace ? 'Seller code' : 'Principal code';
+
+  String get displayPrincipalOrSellerName =>
+      isMarketPlace ? 'Seller name' : 'Principal name';
+
+  String get displayBatch => isMarketPlace ? 'NA' : batch;
+
+  String get displayExpiryDate => isMarketPlace ? 'NA' : expiryDate.dateString;
 }
 
 @freezed

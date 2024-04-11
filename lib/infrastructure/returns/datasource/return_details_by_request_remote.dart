@@ -4,31 +4,38 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/request_information_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/request_information_dto.dart';
 
 class ReturnSummaryDetailsByRequestRemote {
-  HttpService httpService;
-  RequestInformationQuery requestInformationQuery;
-  DataSourceExceptionHandler dataSourceExceptionHandler;
-  Config config;
+  final HttpService httpService;
+  final RequestInformationQuery requestInformationQuery;
+  final DataSourceExceptionHandler dataSourceExceptionHandler;
+  final Config config;
+  final RemoteConfigService remoteConfigService;
+
   ReturnSummaryDetailsByRequestRemote({
     required this.httpService,
     required this.requestInformationQuery,
     required this.dataSourceExceptionHandler,
     required this.config,
+    required this.remoteConfigService,
   });
 
   Future<RequestInformation> getReturnSummaryDetailsByRequest({
     required String returnRequestId,
+    required String market,
   }) async {
     final res = await httpService.request(
       method: 'POST',
       url: '${config.urlConstants}ereturn',
       data: jsonEncode(
         {
-          'query': requestInformationQuery.getReturnInformationQuery(),
+          'query': requestInformationQuery.getReturnInformationQuery(
+            remoteConfigService.enableMarketPlaceMarkets.contains(market),
+          ),
           'variables': {
             'request': {
               'requestID': returnRequestId,

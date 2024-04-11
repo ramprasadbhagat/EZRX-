@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 
 class ReturnStatusSection extends StatelessWidget {
   final List<CustomStep> customStep;
+  final String title;
 
   const ReturnStatusSection({
     Key? key,
     required this.customStep,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,7 @@ class ReturnStatusSection extends StatelessWidget {
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(16.0, 16.0, 0, 0),
             title: Text(
-              context.tr('Return request status'),
+              title,
               style: Theme.of(context)
                   .textTheme
                   .labelLarge

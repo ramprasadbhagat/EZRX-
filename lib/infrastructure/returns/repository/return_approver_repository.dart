@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_approver_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_local.dart';
@@ -21,6 +22,7 @@ class ReturnApproverRepository implements IReturnApproverRepository {
       returnRequestInformationLocalDataSource;
   final ApproverReturnRequestInformationRemote
       returnRequestInformationRemoteDataSource;
+  final DeviceStorage deviceStorage;
 
   ReturnApproverRepository({
     required this.config,
@@ -28,6 +30,7 @@ class ReturnApproverRepository implements IReturnApproverRepository {
     required this.returnRequestRemoteDataSource,
     required this.returnRequestInformationLocalDataSource,
     required this.returnRequestInformationRemoteDataSource,
+    required this.deviceStorage,
   });
 
   @override
@@ -57,6 +60,7 @@ class ReturnApproverRepository implements IReturnApproverRepository {
               (e) async => await returnRequestInformationRemoteDataSource
                   .getApproverReturnRequestInformation(
                 returnRequestId: e.requestId,
+                market: deviceStorage.currentMarket(),
               ),
             )
             .toList(),

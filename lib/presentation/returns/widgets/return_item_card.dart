@@ -75,7 +75,7 @@ class ReturnItemCard extends StatelessWidget {
       subtitle: '',
       isQuantityRequired: false,
       headerText:
-          '${context.tr('Batch')} ${returnRequestInformation.batch} (${context.tr('Expires')} ${returnRequestInformation.expiryDate.dateString})',
+          '${context.tr('Batch')} ${returnRequestInformation.displayBatch} (${context.tr('Expires')} ${returnRequestInformation.displayExpiryDate})',
       quantity: returnRequestInformation.returnQuantity.toString(),
       isQuantityBelowImage: false,
       priceComponent: ReturnSummaryItemPrice(

@@ -6,9 +6,9 @@ part of 'return_request_information_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnRequestInformationDto _$$_ReturnRequestInformationDtoFromJson(
+_$ReturnRequestInformationDtoImpl _$$ReturnRequestInformationDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ReturnRequestInformationDto(
+    _$ReturnRequestInformationDtoImpl(
       invoiceNo: json['invoiceNo'] as String? ?? '',
       expiryDate: json['expiryDate'] as String? ?? '',
       comment: json['comment'] as String? ?? '',
@@ -63,10 +63,12 @@ _$_ReturnRequestInformationDto _$$_ReturnRequestInformationDtoFromJson(
                   PriceOverrideTrailDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      isMarketPlace:
+          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_ReturnRequestInformationDtoToJson(
-        _$_ReturnRequestInformationDto instance) =>
+Map<String, dynamic> _$$ReturnRequestInformationDtoImplToJson(
+        _$ReturnRequestInformationDtoImpl instance) =>
     <String, dynamic>{
       'invoiceNo': instance.invoiceNo,
       'expiryDate': instance.expiryDate,
@@ -102,11 +104,12 @@ Map<String, dynamic> _$$_ReturnRequestInformationDtoToJson(
           const StringToIntConverter().toJson(instance.initialQuantity),
       'priceOverrideTrail':
           instance.priceOverrideTrail.map((e) => e.toJson()).toList(),
+      'isMarketPlace': instance.isMarketPlace,
     };
 
-_$_PriceOverrideTrailDto _$$_PriceOverrideTrailDtoFromJson(
+_$PriceOverrideTrailDtoImpl _$$PriceOverrideTrailDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PriceOverrideTrailDto(
+    _$PriceOverrideTrailDtoImpl(
       overrideValue: json['overrideValue'] == null
           ? 0
           : const StringToDoubleConverter()
@@ -114,8 +117,8 @@ _$_PriceOverrideTrailDto _$$_PriceOverrideTrailDtoFromJson(
       overrideRole: json['overriderRole'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_PriceOverrideTrailDtoToJson(
-        _$_PriceOverrideTrailDto instance) =>
+Map<String, dynamic> _$$PriceOverrideTrailDtoImplToJson(
+        _$PriceOverrideTrailDtoImpl instance) =>
     <String, dynamic>{
       'overrideValue':
           const StringToDoubleConverter().toJson(instance.overrideValue),

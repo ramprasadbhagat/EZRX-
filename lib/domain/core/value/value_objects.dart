@@ -285,6 +285,9 @@ class StatusType extends ValueObject<String> {
 
   String get displayStatus => getReturnSummaryStatus(value.getOrElse(() => ''));
 
+  List<StatusType> get returnItemStatusDetail =>
+      getReturnByItemStatusDetail(displayStatus);
+
   String get displayPaymentStatus =>
       getPaymentStatus(value.getOrElse(() => ''));
 

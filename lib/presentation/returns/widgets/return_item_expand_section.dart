@@ -1,5 +1,9 @@
 part of 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 
+const _keyFlex = 4;
+const _valueFlex = 5;
+const _itemSpacing = 8.0;
+
 class _ReturnItemExpandSection extends StatelessWidget {
   const _ReturnItemExpandSection({
     Key? key,
@@ -65,43 +69,48 @@ class _MaterialDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.titleSmall!.copyWith(
+          color: ZPColors.neutralsBlack,
+        );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Text(
-            context.tr('Material details'),
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
+        Text(
+          context.tr('Material details'),
+          style: textStyle.copyWith(fontWeight: FontWeight.w600),
         ),
+        const SizedBox(height: _itemSpacing + 2),
         BalanceTextRow(
-          keyText: context.tr('Principal code').tr(),
-          keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
+          keyFlex: _keyFlex,
+          valueFlex: _valueFlex,
+          keyTextStyle: textStyle,
+          keyText: context.tr(requestInformation.displayPrincipalOrSellerCode),
           valueText: requestInformation.principal,
         ),
+        const SizedBox(height: _itemSpacing),
         BalanceTextRow(
-          keyText: context.tr('Principal name'),
-          keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
+          keyFlex: _keyFlex,
+          valueFlex: _valueFlex,
+          keyTextStyle: textStyle,
+          keyText: context.tr(requestInformation.displayPrincipalOrSellerName),
           valueText: requestInformation.principalName.name,
         ),
+        const SizedBox(height: _itemSpacing),
         BalanceTextRow(
+          keyFlex: _keyFlex,
+          valueFlex: _valueFlex,
+          keyTextStyle: textStyle,
           keyText: context.tr('Invoice number'),
-          keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
           valueText: requestInformation.invoiceNo,
         ),
+        const SizedBox(height: _itemSpacing),
         BalanceTextRow(
+          keyFlex: _keyFlex,
+          valueFlex: _valueFlex,
+          keyTextStyle: textStyle,
           key: WidgetKeys.returnItemDetailMaterialInvoiceDate,
           keyText: context.tr('Invoice date'),
-          keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
           valueText: requestInformation.invoiceDate.dateString,
         ),
       ],
@@ -123,35 +132,36 @@ class _ReturnDetailsSection extends StatelessWidget {
   final bool isBonusDetails;
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.titleSmall!.copyWith(
+          color: ZPColors.neutralsBlack,
+        );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 5,
-            bottom: 10,
-          ),
-          child: Text(
-            isBonusDetails
-                ? context.tr('Bonus return details')
-                : context.tr('Return details'),
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
+        Text(
+          isBonusDetails
+              ? context.tr('Bonus return details')
+              : context.tr('Return details'),
+          style: textStyle.copyWith(fontWeight: FontWeight.w600),
         ),
+        const SizedBox(height: _itemSpacing + 2),
         BalanceTextRow(
           keyText: context.tr('Reason'),
-          keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
+          keyFlex: _keyFlex,
+          valueFlex: _valueFlex,
+          keyTextStyle: textStyle,
           valueText: requestInformation.returnOrderDesc,
         ),
+        const SizedBox(height: _itemSpacing),
         BalanceTextRow(
           keyText: context.tr('Comments'),
-          keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
+          keyFlex: _keyFlex,
+          valueFlex: _valueFlex,
+          keyTextStyle: textStyle,
           valueText: requestInformation.remarks.displayText,
         ),
+        const SizedBox(height: _itemSpacing),
         _ReturnAttachmentSection(
           key: WidgetKeys.returnAttachmentSection,
           attachments: requestInformation.attachmentUrl,
@@ -178,37 +188,38 @@ class _ApprovalDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.titleSmall!.copyWith(
+          color: ZPColors.neutralsBlack,
+        );
+
     return requestInformation.status.showApprovalDetails
         ? Column(
             key: WidgetKeys.returnApprovalDetail,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 5,
-                  bottom: 10,
-                ),
-                child: Text(
-                  isBonusDetails
-                      ? context.tr('Bonus approval details')
-                      : context.tr('Approval details'),
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
+              Text(
+                isBonusDetails
+                    ? context.tr('Bonus approval details')
+                    : context.tr('Approval details'),
+                style: Theme.of(context).textTheme.labelMedium,
               ),
+              const SizedBox(height: _itemSpacing + 2),
               BalanceTextRow(
                 keyText: context.tr('Reason'),
                 valueText: requestInformation.statusReason.getOrDefault,
-                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: ZPColors.neutralsBlack,
-                    ),
+                keyFlex: _keyFlex,
+                valueFlex: _valueFlex,
+                keyTextStyle: textStyle,
               ),
+              const SizedBox(height: _itemSpacing),
               BalanceTextRow(
                 keyText: context.tr('Approval number'),
                 valueText: requestInformation.displayBapiStatus,
-                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: ZPColors.neutralsBlack,
-                    ),
+                keyFlex: _keyFlex,
+                valueFlex: _valueFlex,
+                keyTextStyle: textStyle,
               ),
+              const SizedBox(height: _itemSpacing),
               _ReturnAttachmentSection(
                 downloadingAttachments: downloadingAttachments,
                 downloadAttachment: downloadAttachment,
@@ -239,25 +250,27 @@ class _ReturnAttachmentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
+          color: ZPColors.neutralsBlack,
+        );
+
     return attachments.isEmpty
         ? BalanceTextRow(
+            keyFlex: _keyFlex,
+            valueFlex: _valueFlex,
             keyText: context.tr('Attachments'),
-            keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.neutralsBlack,
-                ),
+            keyTextStyle: textStyle,
             valueText: '-',
           )
-        : ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(
-              '${context.tr('Attachments')}:',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                  ),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.generate(
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${context.tr('Attachments')}:',
+                style: textStyle,
+              ),
+              const SizedBox(height: _itemSpacing - 2),
+              ...List.generate(
                 attachments.length,
                 (index) {
                   final attachment = attachments.elementAt(index);
@@ -271,7 +284,7 @@ class _ReturnAttachmentSection extends StatelessWidget {
                   );
                 },
               ),
-            ),
+            ],
           );
   }
 }

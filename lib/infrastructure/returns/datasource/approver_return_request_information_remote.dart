@@ -5,24 +5,29 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/request_information_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/request_information_dto.dart';
 
 class ApproverReturnRequestInformationRemote {
-  HttpService httpService;
-  RequestInformationQuery approverReturnRequestInformationQuery;
-  DataSourceExceptionHandler dataSourceExceptionHandler;
-  Config config;
+  final HttpService httpService;
+  final RequestInformationQuery approverReturnRequestInformationQuery;
+  final DataSourceExceptionHandler dataSourceExceptionHandler;
+  final Config config;
+  final RemoteConfigService remoteConfigService;
+
   ApproverReturnRequestInformationRemote({
     required this.httpService,
     required this.approverReturnRequestInformationQuery,
     required this.dataSourceExceptionHandler,
     required this.config,
+    required this.remoteConfigService,
   });
 
   Future<RequestInformation> getApproverReturnRequestInformation({
     required String returnRequestId,
+    required String market,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -30,7 +35,9 @@ class ApproverReturnRequestInformationRemote {
       data: jsonEncode(
         {
           'query':
-              approverReturnRequestInformationQuery.getReturnInformationQuery(),
+              approverReturnRequestInformationQuery.getReturnInformationQuery(
+            remoteConfigService.enableMarketPlaceMarkets.contains(market),
+          ),
           'variables': {
             'request': {
               'requestID': returnRequestId,

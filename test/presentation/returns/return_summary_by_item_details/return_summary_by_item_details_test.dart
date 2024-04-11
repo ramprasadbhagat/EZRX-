@@ -15,9 +15,13 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
@@ -30,36 +34,14 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 
-class ReturnSummaryDetailsBlocMock
-    extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
-    implements ReturnSummaryDetailsBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-final locator = GetIt.instance;
 void main() {
   late ReturnSummaryDetailsBlocMock returnSummaryDetailsBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
@@ -76,15 +58,10 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     autoRouterMock = locator<AppRouter>();
-    requestInformationMock =
-        (await ReturnSummaryDetailsRequestInformationLocal()
-                .getRequestInformation())
-            .returnRequestInformationList
-            .first;
-    returnRequestInformationHeader =
-        (await ReturnSummaryDetailsRequestInformationLocal()
-                .getRequestInformation())
-            .requestInformationHeader;
+    final mockData = await ReturnSummaryDetailsRequestInformationLocal()
+        .getRequestInformation();
+    requestInformationMock = mockData.returnRequestInformationList.first;
+    returnRequestInformationHeader = mockData.requestInformationHeader;
   });
 
   setUp(() {
@@ -214,7 +191,7 @@ void main() {
           expect(
             find.descendant(
               of: find.byType(StatusTrackerSection),
-              matching: find.text('Return request status'),
+              matching: find.text('Return status'),
             ),
             findsOneWidget,
           );
@@ -1098,6 +1075,84 @@ void main() {
             equals(errorMessage.tr()),
           );
         });
+      });
+
+      testWidgets('Return item details with marketplace return',
+          (tester) async {
+        final marketplaceReturn =
+            requestInformationMock.copyWith(isMarketPlace: true);
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial()
+              .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+        );
+        when(() => returnSummaryDetailsBlocMock.state).thenReturn(
+          ReturnSummaryDetailsState.initial().copyWith(
+            requestInformation: marketplaceReturn
+                .copyWith(bonusInformation: [marketplaceReturn]),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(find.byType(MarketPlaceRectangleLogo), findsOne);
+        expect(
+          find.descendant(
+            of: find.byType(MarketPlaceSellerTitle),
+            matching: find.text(marketplaceReturn.principalName.name),
+          ),
+          findsOne,
+        );
+        final returnTile = find.byKey(
+          WidgetKeys.returnItemDetailMaterial(
+            marketplaceReturn.materialNumber.displayMatNo,
+            marketplaceReturn.returnQuantity,
+            StringUtils.displayPrice(
+              fakeMYSalesOrgConfigs,
+              marketplaceReturn.totalPrice,
+            ),
+          ),
+        );
+        await tester.scrollUntilVisible(returnTile, 200);
+        await tester.pump();
+        final batchAndExpString = tester
+            .widget<RichText>(
+              find.descendant(
+                of: returnTile,
+                matching: find.byKey(WidgetKeys.commonTileItemHeader),
+              ),
+            )
+            .text
+            .toPlainText();
+        expect(batchAndExpString, contains('Batch NA (Expires NA)'));
+        await tester.tap(find.byKey(WidgetKeys.returnDetailShowDetailButton));
+        await tester.pump();
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Seller code',
+              marketplaceReturn.principal,
+            ),
+          ),
+          findsOne,
+        );
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Seller name',
+              marketplaceReturn.principalName.name,
+            ),
+          ),
+          findsOne,
+        );
+        final bonusTile = find.byKey(WidgetKeys.returnBonusItemCard);
+        await tester.scrollUntilVisible(bonusTile, 200);
+        await tester.pump();
+        expect(
+          find.descendant(
+            of: bonusTile,
+            matching: find.text('Batch NA (Expires NA)'),
+          ),
+          findsOne,
+        );
       });
     },
   );

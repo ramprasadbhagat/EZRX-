@@ -12,7 +12,7 @@ part of 'return_request_information_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnRequestInformationDto _$ReturnRequestInformationDtoFromJson(
     Map<String, dynamic> json) {
@@ -87,6 +87,8 @@ mixin _$ReturnRequestInformationDto {
   @JsonKey(name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
   List<PriceOverrideTrailDto> get priceOverrideTrail =>
       throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -147,7 +149,9 @@ abstract class $ReturnRequestInformationDtoCopyWith<$Res> {
       int initialQuantity,
       @JsonKey(
           name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
-      List<PriceOverrideTrailDto> priceOverrideTrail});
+      List<PriceOverrideTrailDto> priceOverrideTrail,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -194,6 +198,7 @@ class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
     Object? overrideValue = null,
     Object? initialQuantity = null,
     Object? priceOverrideTrail = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       invoiceNo: null == invoiceNo
@@ -316,17 +321,21 @@ class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
           ? _value.priceOverrideTrail
           : priceOverrideTrail // ignore: cast_nullable_to_non_nullable
               as List<PriceOverrideTrailDto>,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ReturnRequestInformationDtoCopyWith<$Res>
+abstract class _$$ReturnRequestInformationDtoImplCopyWith<$Res>
     implements $ReturnRequestInformationDtoCopyWith<$Res> {
-  factory _$$_ReturnRequestInformationDtoCopyWith(
-          _$_ReturnRequestInformationDto value,
-          $Res Function(_$_ReturnRequestInformationDto) then) =
-      __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>;
+  factory _$$ReturnRequestInformationDtoImplCopyWith(
+          _$ReturnRequestInformationDtoImpl value,
+          $Res Function(_$ReturnRequestInformationDtoImpl) then) =
+      __$$ReturnRequestInformationDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -374,17 +383,19 @@ abstract class _$$_ReturnRequestInformationDtoCopyWith<$Res>
       int initialQuantity,
       @JsonKey(
           name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
-      List<PriceOverrideTrailDto> priceOverrideTrail});
+      List<PriceOverrideTrailDto> priceOverrideTrail,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
-class __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>
+class __$$ReturnRequestInformationDtoImplCopyWithImpl<$Res>
     extends _$ReturnRequestInformationDtoCopyWithImpl<$Res,
-        _$_ReturnRequestInformationDto>
-    implements _$$_ReturnRequestInformationDtoCopyWith<$Res> {
-  __$$_ReturnRequestInformationDtoCopyWithImpl(
-      _$_ReturnRequestInformationDto _value,
-      $Res Function(_$_ReturnRequestInformationDto) _then)
+        _$ReturnRequestInformationDtoImpl>
+    implements _$$ReturnRequestInformationDtoImplCopyWith<$Res> {
+  __$$ReturnRequestInformationDtoImplCopyWithImpl(
+      _$ReturnRequestInformationDtoImpl _value,
+      $Res Function(_$ReturnRequestInformationDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -420,8 +431,9 @@ class __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>
     Object? overrideValue = null,
     Object? initialQuantity = null,
     Object? priceOverrideTrail = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_ReturnRequestInformationDto(
+    return _then(_$ReturnRequestInformationDtoImpl(
       invoiceNo: null == invoiceNo
           ? _value.invoiceNo
           : invoiceNo // ignore: cast_nullable_to_non_nullable
@@ -542,14 +554,18 @@ class __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>
           ? _value._priceOverrideTrail
           : priceOverrideTrail // ignore: cast_nullable_to_non_nullable
               as List<PriceOverrideTrailDto>,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
-  _$_ReturnRequestInformationDto(
+class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
+  _$ReturnRequestInformationDtoImpl(
       {@JsonKey(name: 'invoiceNo', defaultValue: '') required this.invoiceNo,
       @JsonKey(name: 'expiryDate', defaultValue: '') required this.expiryDate,
       @JsonKey(name: 'comment', defaultValue: '') required this.comment,
@@ -601,7 +617,9 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
       required this.initialQuantity,
       @JsonKey(
           name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
-      required final List<PriceOverrideTrailDto> priceOverrideTrail})
+      required final List<PriceOverrideTrailDto> priceOverrideTrail,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required this.isMarketPlace})
       : _imageUrl = imageUrl,
         _attachments = attachments,
         _attachmentUrl = attachmentUrl,
@@ -609,8 +627,9 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
         _priceOverrideTrail = priceOverrideTrail,
         super._();
 
-  factory _$_ReturnRequestInformationDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnRequestInformationDtoFromJson(json);
+  factory _$ReturnRequestInformationDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ReturnRequestInformationDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'invoiceNo', defaultValue: '')
@@ -738,15 +757,19 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
   }
 
   @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  final bool isMarketPlace;
+
+  @override
   String toString() {
-    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, returnOrderDesc: $returnOrderDesc, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, remarks: $remarks, bonusInformation: $bonusInformation, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail)';
+    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, returnOrderDesc: $returnOrderDesc, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, remarks: $remarks, bonusInformation: $bonusInformation, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnRequestInformationDto &&
+            other is _$ReturnRequestInformationDtoImpl &&
             (identical(other.invoiceNo, invoiceNo) ||
                 other.invoiceNo == invoiceNo) &&
             (identical(other.expiryDate, expiryDate) ||
@@ -800,7 +823,9 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
             (identical(other.initialQuantity, initialQuantity) ||
                 other.initialQuantity == initialQuantity) &&
             const DeepCollectionEquality()
-                .equals(other._priceOverrideTrail, _priceOverrideTrail));
+                .equals(other._priceOverrideTrail, _priceOverrideTrail) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @JsonKey(ignore: true)
@@ -836,19 +861,20 @@ class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
         const DeepCollectionEquality().hash(_bonusInformation),
         overrideValue,
         initialQuantity,
-        const DeepCollectionEquality().hash(_priceOverrideTrail)
+        const DeepCollectionEquality().hash(_priceOverrideTrail),
+        isMarketPlace
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnRequestInformationDtoCopyWith<_$_ReturnRequestInformationDto>
-      get copyWith => __$$_ReturnRequestInformationDtoCopyWithImpl<
-          _$_ReturnRequestInformationDto>(this, _$identity);
+  _$$ReturnRequestInformationDtoImplCopyWith<_$ReturnRequestInformationDtoImpl>
+      get copyWith => __$$ReturnRequestInformationDtoImplCopyWithImpl<
+          _$ReturnRequestInformationDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnRequestInformationDtoToJson(
+    return _$$ReturnRequestInformationDtoImplToJson(
       this,
     );
   }
@@ -916,12 +942,13 @@ abstract class _ReturnRequestInformationDto
       required final int initialQuantity,
       @JsonKey(
           name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
-      required final List<PriceOverrideTrailDto>
-          priceOverrideTrail}) = _$_ReturnRequestInformationDto;
+      required final List<PriceOverrideTrailDto> priceOverrideTrail,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required final bool isMarketPlace}) = _$ReturnRequestInformationDtoImpl;
   _ReturnRequestInformationDto._() : super._();
 
   factory _ReturnRequestInformationDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnRequestInformationDto.fromJson;
+      _$ReturnRequestInformationDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'invoiceNo', defaultValue: '')
@@ -1017,8 +1044,11 @@ abstract class _ReturnRequestInformationDto
   @JsonKey(name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
   List<PriceOverrideTrailDto> get priceOverrideTrail;
   @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_ReturnRequestInformationDtoCopyWith<_$_ReturnRequestInformationDto>
+  _$$ReturnRequestInformationDtoImplCopyWith<_$ReturnRequestInformationDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1085,11 +1115,12 @@ class _$PriceOverrideTrailDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PriceOverrideTrailDtoCopyWith<$Res>
+abstract class _$$PriceOverrideTrailDtoImplCopyWith<$Res>
     implements $PriceOverrideTrailDtoCopyWith<$Res> {
-  factory _$$_PriceOverrideTrailDtoCopyWith(_$_PriceOverrideTrailDto value,
-          $Res Function(_$_PriceOverrideTrailDto) then) =
-      __$$_PriceOverrideTrailDtoCopyWithImpl<$Res>;
+  factory _$$PriceOverrideTrailDtoImplCopyWith(
+          _$PriceOverrideTrailDtoImpl value,
+          $Res Function(_$PriceOverrideTrailDtoImpl) then) =
+      __$$PriceOverrideTrailDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1100,11 +1131,12 @@ abstract class _$$_PriceOverrideTrailDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceOverrideTrailDtoCopyWithImpl<$Res>
-    extends _$PriceOverrideTrailDtoCopyWithImpl<$Res, _$_PriceOverrideTrailDto>
-    implements _$$_PriceOverrideTrailDtoCopyWith<$Res> {
-  __$$_PriceOverrideTrailDtoCopyWithImpl(_$_PriceOverrideTrailDto _value,
-      $Res Function(_$_PriceOverrideTrailDto) _then)
+class __$$PriceOverrideTrailDtoImplCopyWithImpl<$Res>
+    extends _$PriceOverrideTrailDtoCopyWithImpl<$Res,
+        _$PriceOverrideTrailDtoImpl>
+    implements _$$PriceOverrideTrailDtoImplCopyWith<$Res> {
+  __$$PriceOverrideTrailDtoImplCopyWithImpl(_$PriceOverrideTrailDtoImpl _value,
+      $Res Function(_$PriceOverrideTrailDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1113,7 +1145,7 @@ class __$$_PriceOverrideTrailDtoCopyWithImpl<$Res>
     Object? overrideValue = null,
     Object? overrideRole = null,
   }) {
-    return _then(_$_PriceOverrideTrailDto(
+    return _then(_$PriceOverrideTrailDtoImpl(
       overrideValue: null == overrideValue
           ? _value.overrideValue
           : overrideValue // ignore: cast_nullable_to_non_nullable
@@ -1128,8 +1160,8 @@ class __$$_PriceOverrideTrailDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PriceOverrideTrailDto extends _PriceOverrideTrailDto {
-  _$_PriceOverrideTrailDto(
+class _$PriceOverrideTrailDtoImpl extends _PriceOverrideTrailDto {
+  _$PriceOverrideTrailDtoImpl(
       {@StringToDoubleConverter()
       @JsonKey(name: 'overrideValue', defaultValue: 0)
       required this.overrideValue,
@@ -1137,8 +1169,8 @@ class _$_PriceOverrideTrailDto extends _PriceOverrideTrailDto {
       required this.overrideRole})
       : super._();
 
-  factory _$_PriceOverrideTrailDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceOverrideTrailDtoFromJson(json);
+  factory _$PriceOverrideTrailDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PriceOverrideTrailDtoImplFromJson(json);
 
   @override
   @StringToDoubleConverter()
@@ -1154,10 +1186,10 @@ class _$_PriceOverrideTrailDto extends _PriceOverrideTrailDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceOverrideTrailDto &&
+            other is _$PriceOverrideTrailDtoImpl &&
             (identical(other.overrideValue, overrideValue) ||
                 other.overrideValue == overrideValue) &&
             (identical(other.overrideRole, overrideRole) ||
@@ -1171,13 +1203,13 @@ class _$_PriceOverrideTrailDto extends _PriceOverrideTrailDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceOverrideTrailDtoCopyWith<_$_PriceOverrideTrailDto> get copyWith =>
-      __$$_PriceOverrideTrailDtoCopyWithImpl<_$_PriceOverrideTrailDto>(
-          this, _$identity);
+  _$$PriceOverrideTrailDtoImplCopyWith<_$PriceOverrideTrailDtoImpl>
+      get copyWith => __$$PriceOverrideTrailDtoImplCopyWithImpl<
+          _$PriceOverrideTrailDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceOverrideTrailDtoToJson(
+    return _$$PriceOverrideTrailDtoImplToJson(
       this,
     );
   }
@@ -1189,11 +1221,11 @@ abstract class _PriceOverrideTrailDto extends PriceOverrideTrailDto {
       @JsonKey(name: 'overrideValue', defaultValue: 0)
       required final double overrideValue,
       @JsonKey(name: 'overriderRole', defaultValue: '')
-      required final String overrideRole}) = _$_PriceOverrideTrailDto;
+      required final String overrideRole}) = _$PriceOverrideTrailDtoImpl;
   _PriceOverrideTrailDto._() : super._();
 
   factory _PriceOverrideTrailDto.fromJson(Map<String, dynamic> json) =
-      _$_PriceOverrideTrailDto.fromJson;
+      _$PriceOverrideTrailDtoImpl.fromJson;
 
   @override
   @StringToDoubleConverter()
@@ -1204,6 +1236,6 @@ abstract class _PriceOverrideTrailDto extends PriceOverrideTrailDto {
   String get overrideRole;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceOverrideTrailDtoCopyWith<_$_PriceOverrideTrailDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PriceOverrideTrailDtoImplCopyWith<_$PriceOverrideTrailDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

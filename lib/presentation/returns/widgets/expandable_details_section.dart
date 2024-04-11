@@ -29,38 +29,35 @@ class __ExpandableDetailSectionState extends State<_ExpandableDetailSection> {
     return Column(
       children: [
         if (widget.isExpandable)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  isExpanded = !isExpanded;
-                });
-              },
-              child: Row(
-                key: WidgetKeys.returnDetailShowDetailButton,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    isExpanded
-                        ? context.tr('Hide details')
-                        : context.tr('Show details'),
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: ZPColors.extraDarkGreen,
-                          fontWeight: FontWeight.w800,
-                        ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Icon(
-                    isExpanded
-                        ? Icons.keyboard_arrow_up
-                        : Icons.keyboard_arrow_down,
-                    color: ZPColors.extraDarkGreen,
-                  ),
-                ],
-              ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                isExpanded = !isExpanded;
+              });
+            },
+            child: Row(
+              key: WidgetKeys.returnDetailShowDetailButton,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  isExpanded
+                      ? context.tr('Hide details')
+                      : context.tr('Show details'),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ZPColors.extraDarkGreen,
+                        fontWeight: FontWeight.w800,
+                      ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Icon(
+                  isExpanded
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
+                  color: ZPColors.extraDarkGreen,
+                ),
+              ],
             ),
           ),
         if (isExpanded)

@@ -1821,6 +1821,7 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       approverReturnRequestInformationQuery: locator<RequestInformationQuery>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -1833,6 +1834,7 @@ void setupLocator() {
           locator<ApproverReturnRequestInformationLocal>(),
       returnRequestInformationRemoteDataSource:
           locator<ApproverReturnRequestInformationRemote>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
@@ -2150,6 +2152,7 @@ void setupLocator() {
           locator<ReturnSummaryDetailsRequestInformationLocal>(),
       returnSummaryDetailsRequestInformationRemote:
           locator<ReturnSummaryDetailsRequestInformationRemote>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
@@ -2166,6 +2169,7 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       requestInformationQuery: locator<RequestInformationQuery>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -2192,6 +2196,7 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       requestInformationQuery: locator<RequestInformationQuery>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 
@@ -2202,6 +2207,7 @@ void setupLocator() {
           locator<ReturnSummaryDetailsByRequestLocal>(),
       returnSummaryDetailsByRequestRemote:
           locator<ReturnSummaryDetailsByRequestRemote>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
