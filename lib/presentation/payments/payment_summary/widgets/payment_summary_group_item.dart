@@ -80,8 +80,11 @@ class _PaymentSummaryItem extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            if (context.isMPPayment) ...[
+              MarketPlaceLogo.small(),
+              const SizedBox(width: 8),
+            ],
             Expanded(
-              flex: 2,
               child: Text(
                 '${salesOrg.paymentIdPretext} #${details.zzAdvice.getValue()}',
                 key: WidgetKeys.commonTileItemLabel,

@@ -925,7 +925,6 @@ class WidgetKeys {
   static const Key creditsTab = Key('creditsTab');
   static const Key summaryTab = Key('summaryTab');
   static const Key paymentSummaryPage = Key('paymentSummaryPage');
-  static const Key paymentSummaryAppBar = Key('paymentSummaryAppBar');
   static const Key paymentListLoading = Key('paymentListLoading');
   static Key paymentSummaryFilterStatus(String name) =>
       Key('paymentSummaryFilterStatus$name');

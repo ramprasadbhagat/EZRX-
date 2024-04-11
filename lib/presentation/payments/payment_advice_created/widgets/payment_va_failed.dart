@@ -35,7 +35,7 @@ class _PaymentVirtualAccountFailed extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 context.router.pushAndPopUntil(
-                  const PaymentSummaryPageRoute(),
+                  PaymentSummaryPageRoute(isMarketPlace: false),
                   predicate: (Route route) =>
                       route.settings.name == PaymentPageRoute.name,
                 );

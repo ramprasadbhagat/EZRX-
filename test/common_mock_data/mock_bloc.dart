@@ -307,9 +307,13 @@ class MPPaymentInProgressBlocMock
     extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
     implements MPPaymentInProgressBloc {}
 
-class PaymentSummaryBlocMock
+class ZPPaymentSummaryBlocMock
     extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
-    implements PaymentSummaryBloc {}
+    implements ZPPaymentSummaryBloc {}
+
+class MPPaymentSummaryBlocMock
+    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
+    implements MPPaymentSummaryBloc {}
 
 class PaymentSummaryFilterBlocMock
     extends MockBloc<PaymentSummaryFilterEvent, PaymentSummaryFilterState>

@@ -42,8 +42,8 @@ class _PaymentCompletedPleaseNote extends StatelessWidget {
                           color: ZPColors.extraDarkGreen,
                         ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () =>
-                          context.router.pushNamed('payments/payment_summary'),
+                      ..onTap = () => context.router
+                          .push(PaymentSummaryPageRoute(isMarketPlace: false)),
                   ),
                   TextSpan(
                     text: '" ${context.tr('page')}.',

@@ -49,7 +49,7 @@ void main() {
   late SalesOrgBloc mockSalesOrgBloc;
   late AppRouter autoRouterMock;
   late UserBloc mockUserBloc;
-  late PaymentSummaryBloc paymentSummaryBlocMock;
+  late ZPPaymentSummaryBloc paymentSummaryBlocMock;
   late CustomerCodeBloc mockCustomerCodeBloc;
   late EligibilityBloc mockEligibilityBloc;
   late AnnouncementBloc mockAnnouncementBloc;
@@ -81,7 +81,7 @@ void main() {
   setUp(() async {
     mockSalesOrgBloc = SalesOrgBlocMock();
     mockUserBloc = UserBlocMock();
-    paymentSummaryBlocMock = PaymentSummaryBlocMock();
+    paymentSummaryBlocMock = ZPPaymentSummaryBlocMock();
     autoRouterMock = locator<AppRouter>();
     mockCustomerCodeBloc = CustomerCodeBlocMock();
     mockEligibilityBloc = EligibilityBlocMock();
@@ -153,7 +153,7 @@ void main() {
           BlocProvider<NewPaymentBloc>(
             create: (context) => mockNewPaymentBloc,
           ),
-          BlocProvider<PaymentSummaryBloc>(
+          BlocProvider<ZPPaymentSummaryBloc>(
             create: (context) => paymentSummaryBlocMock,
           ),
         ],

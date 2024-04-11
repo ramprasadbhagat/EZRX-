@@ -346,8 +346,11 @@ class App extends StatelessWidget {
         BlocProvider<TenderContractListBloc>(
           create: (context) => locator<TenderContractListBloc>(),
         ),
-        BlocProvider<PaymentSummaryBloc>(
-          create: (context) => locator<PaymentSummaryBloc>(),
+        BlocProvider<ZPPaymentSummaryBloc>(
+          create: (context) => locator<ZPPaymentSummaryBloc>(),
+        ),
+        BlocProvider<MPPaymentSummaryBloc>(
+          create: (context) => locator<MPPaymentSummaryBloc>(),
         ),
         BlocProvider<PaymentSummaryFilterBloc>(
           create: (context) => locator<PaymentSummaryFilterBloc>(),

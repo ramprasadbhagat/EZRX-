@@ -15,5 +15,6 @@ abstract class IPaymentSummaryRepository {
     required SearchKey searchKey,
     required int offset,
     required int pageSize,
+    required bool isMarketPlace,
   });
 }

@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 
 class _Filter extends StatelessWidget {
-  final bool isMarketPlace;
-
-  const _Filter({Key? key, required this.isMarketPlace}) : super(key: key);
+  const _Filter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +11,7 @@ class _Filter extends StatelessWidget {
         children: [
           const SizedBox(width: 5),
           BlocBuilder<SoaBloc, SoaState>(
-            bloc: context.soaBloc(isMarketPlace),
+            bloc: context.soaBloc(context.isMPPayment),
             buildWhen: (previous, current) =>
                 previous.isFetching != current.isFetching ||
                 previous.appliedFilter != current.appliedFilter,
@@ -44,7 +42,7 @@ class _Filter extends StatelessWidget {
   void _showFilterBottomSheet(BuildContext context) {
     context.read<SoaFilterBloc>().add(
           SoaFilterEvent.setFilter(
-            context.soaBloc(isMarketPlace).state.appliedFilter,
+            context.soaBloc(context.isMPPayment).state.appliedFilter,
           ),
         );
     showModalBottomSheet(
@@ -74,7 +72,7 @@ class _Filter extends StatelessWidget {
     required BuildContext context,
     required SoaFilter filter,
   }) {
-    final soaBloc = context.soaBloc(isMarketPlace);
+    final soaBloc = context.soaBloc(context.isMPPayment);
     if (soaBloc.state.appliedFilter == filter) return;
     soaBloc.add(SoaEvent.updateFilter(soaFilter: filter));
   }

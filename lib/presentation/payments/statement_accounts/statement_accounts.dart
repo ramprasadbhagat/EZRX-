@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -60,86 +61,87 @@ class _StatementAccountsPageState extends State<StatementAccountsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: WidgetKeys.soaPage,
-      appBar: CustomAppBar.commonAppBar(
-        title: Text(
-          context.tr(
-            widget.isMarketPlace
-                ? 'MP Statement of accounts'
-                : 'Statement of accounts',
+    return PaymentModule(
+      isMarketPlace: widget.isMarketPlace,
+      child: Scaffold(
+        key: WidgetKeys.soaPage,
+        appBar: CustomAppBar.commonAppBar(
+          title: Text(
+            context.tr(
+              widget.isMarketPlace
+                  ? 'MP Statement of accounts'
+                  : 'Statement of accounts',
+            ),
           ),
+          customerBlockedOrSuspended:
+              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
         ),
-        customerBlockedOrSuspended:
-            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
-      ),
-      floatingActionButton: NewPaymentButton.scale(
-        controller: _scrollController,
-      ),
-      body: BlocConsumer<SoaBloc, SoaState>(
-        bloc: context.soaBloc(widget.isMarketPlace),
-        listenWhen: (previous, current) =>
-            previous.failureOrSuccessOption != current.failureOrSuccessOption,
-        listener: (context, state) {
-          state.failureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-        },
-        buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching ||
-            previous.filterList != current.filterList,
-        builder: (context, state) {
-          final eligibilityState = context.read<EligibilityBloc>().state;
+        floatingActionButton: NewPaymentButton.scale(
+          controller: _scrollController,
+        ),
+        body: BlocConsumer<SoaBloc, SoaState>(
+          bloc: context.soaBloc(widget.isMarketPlace),
+          listenWhen: (previous, current) =>
+              previous.failureOrSuccessOption != current.failureOrSuccessOption,
+          listener: (context, state) {
+            state.failureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {},
+              ),
+            );
+          },
+          buildWhen: (previous, current) =>
+              previous.isFetching != current.isFetching ||
+              previous.filterList != current.filterList,
+          builder: (context, state) {
+            final eligibilityState = context.read<EligibilityBloc>().state;
 
-          return AnnouncementBanner(
-            currentPath: context.router.currentPath,
-            child: ScrollList<Soa>(
-              header: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _Header(),
-                  if (state.soaList.isNotEmpty)
-                    _Filter(isMarketPlace: widget.isMarketPlace),
-                  if (state.appliedFilter.appliedFilterCount > 0)
-                    _FilterResultCount(state.filterList.length),
-                ],
-              ),
-              noRecordFoundWidget: Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.06,
+            return AnnouncementBanner(
+              currentPath: context.router.currentPath,
+              child: ScrollList<Soa>(
+                header: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const _Header(),
+                    if (state.soaList.isNotEmpty) const _Filter(),
+                    if (state.appliedFilter.appliedFilterCount > 0)
+                      _FilterResultCount(state.filterList.length),
+                  ],
                 ),
-                child: const NoRecordFound(
-                  key: WidgetKeys.soaNotFoundRecordKey,
-                  title: 'No statements available',
-                  subTitle: '',
-                  svgImage: SvgImage.emptyBox,
-                ),
-              ),
-              controller: _scrollController,
-              onRefresh: () => context.soaBloc(widget.isMarketPlace).add(
-                    SoaEvent.fetch(
-                      customerCodeInfo: eligibilityState.customerCodeInfo,
-                      salesOrg: eligibilityState.salesOrg,
-                    ),
+                noRecordFoundWidget: Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.06,
                   ),
-              isLoading: state.isFetching,
-              itemBuilder: (context, index, itemInfo) {
-                return _SoaTile(
-                  key: WidgetKeys.genericKey(key: 'SoaItem#$index'),
-                  soa: itemInfo,
-                  isMarketPlace: widget.isMarketPlace,
-                );
-              },
-              items: state.filterList,
-            ),
-          );
-        },
+                  child: const NoRecordFound(
+                    key: WidgetKeys.soaNotFoundRecordKey,
+                    title: 'No statements available',
+                    subTitle: '',
+                    svgImage: SvgImage.emptyBox,
+                  ),
+                ),
+                controller: _scrollController,
+                onRefresh: () => context.soaBloc(widget.isMarketPlace).add(
+                      SoaEvent.fetch(
+                        customerCodeInfo: eligibilityState.customerCodeInfo,
+                        salesOrg: eligibilityState.salesOrg,
+                      ),
+                    ),
+                isLoading: state.isFetching,
+                itemBuilder: (context, index, itemInfo) {
+                  return _SoaTile(
+                    key: WidgetKeys.genericKey(key: 'SoaItem#$index'),
+                    soa: itemInfo,
+                  );
+                },
+                items: state.filterList,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

@@ -312,9 +312,13 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     PaymentSummaryPageRoute.name: (routeData) {
+      final args = routeData.argsAs<PaymentSummaryPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i25.PaymentSummaryPage(),
+        child: _i25.PaymentSummaryPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     AccountSummaryRoute.name: (routeData) {
@@ -1496,14 +1500,37 @@ class EZPointWebviewPageRoute extends _i77.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i25.PaymentSummaryPage]
-class PaymentSummaryPageRoute extends _i77.PageRouteInfo<void> {
-  const PaymentSummaryPageRoute()
-      : super(
+class PaymentSummaryPageRoute
+    extends _i77.PageRouteInfo<PaymentSummaryPageRouteArgs> {
+  PaymentSummaryPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           PaymentSummaryPageRoute.name,
           path: 'payments/payment_summary',
+          args: PaymentSummaryPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'PaymentSummaryPageRoute';
+}
+
+class PaymentSummaryPageRouteArgs {
+  const PaymentSummaryPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'PaymentSummaryPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for

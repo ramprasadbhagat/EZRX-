@@ -163,7 +163,7 @@ void main() {
   late ProductSearchBloc productSearchBlocMock;
   late ReturnListByRequestBloc returnListByRequestBlocMock;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBlocMock;
-  late PaymentSummaryBloc paymentSummaryBlocMock;
+  late ZPPaymentSummaryBloc paymentSummaryBlocMock;
   late ZPSoaBloc soaBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late ZPPaymentInProgressBloc paymentInProgressBlocMock;
@@ -276,7 +276,7 @@ void main() {
       productSearchBlocMock = ProductSearchBlocMock();
       returnListByRequestBlocMock = ReturnListByRequestBlocMock();
       downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
-      paymentSummaryBlocMock = PaymentSummaryBlocMock();
+      paymentSummaryBlocMock = ZPPaymentSummaryBlocMock();
       soaBlocMock = ZPSoaBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       paymentInProgressBlocMock = ZPPaymentInProgressBlocMock();
@@ -546,7 +546,7 @@ void main() {
             BlocProvider<DownloadPaymentAttachmentsBloc>(
               create: (context) => downloadPaymentAttachmentsBlocMock,
             ),
-            BlocProvider<PaymentSummaryBloc>(
+            BlocProvider<ZPPaymentSummaryBloc>(
               create: (context) => paymentSummaryBlocMock,
             ),
             BlocProvider<ZPSoaBloc>(

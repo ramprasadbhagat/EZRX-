@@ -29,7 +29,7 @@ class _PaymentAdviceButton extends StatelessWidget {
                       details: state.details,
                     ),
                   );
-              context.read<PaymentSummaryBloc>().add(
+              context.paymentSummaryBloc(false).add(
                     PaymentSummaryEvent.fetch(
                       appliedFilter: PaymentSummaryFilter.defaultFilter(),
                       searchKey: SearchKey.searchFilter(''),

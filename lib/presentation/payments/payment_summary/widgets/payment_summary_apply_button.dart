@@ -14,7 +14,8 @@ class _PaymentSummaryApplyButton extends StatelessWidget {
             context.read<PaymentSummaryFilterBloc>().add(
                   const PaymentSummaryFilterEvent.validateFilters(),
                 );
-            final paymentSummaryBloc = context.read<PaymentSummaryBloc>();
+            final paymentSummaryBloc =
+                context.paymentSummaryBloc(context.isMPPayment);
             if (state.filter.isValid) {
               if (state.filter != paymentSummaryBloc.state.appliedFilter) {
                 paymentSummaryBloc.add(

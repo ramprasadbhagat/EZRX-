@@ -1,16 +1,14 @@
 part of '../payment_page.dart';
 
 class _PaymentSummary extends StatelessWidget {
-  final bool isMarketPlace;
   const _PaymentSummary({
     Key? key,
-    required this.isMarketPlace,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PaymentInProgressBloc, PaymentInProgressState>(
-      bloc: context.paymentInProgressBloc(isMarketPlace),
+      bloc: context.paymentInProgressBloc(context.isMPPayment),
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       listenWhen: (previous, current) =>
@@ -30,9 +28,12 @@ class _PaymentSummary extends StatelessWidget {
         return Column(
           children: [
             SectionTitle(
-              title: isMarketPlace ? 'MP Payment summary' :'Payment summary',
-              onTapIconButton: () =>
-                  context.router.pushNamed('payments/payment_summary'),
+              title: context.isMPPayment
+                  ? 'MP Payment summary'
+                  : 'Payment summary',
+              onTapIconButton: () => context.router.push(
+                PaymentSummaryPageRoute(isMarketPlace: context.isMPPayment),
+              ),
             ),
             _ItemCard(
               key: WidgetKeys.paymentHomeInProgressCard,

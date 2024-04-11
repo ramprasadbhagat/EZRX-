@@ -5,7 +5,8 @@ class _PaymentInProgressLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ZPPaymentInProgressBloc, PaymentInProgressState>(
+    return BlocBuilder<PaymentInProgressBloc, PaymentInProgressState>(
+      bloc: context.paymentInProgressBloc(context.isMPPayment),
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       builder: (context, state) {

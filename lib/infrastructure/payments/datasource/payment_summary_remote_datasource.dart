@@ -28,6 +28,7 @@ class PaymentSummaryRemoteDataSource {
     required List<Map<String, String>> filterList,
     required int offset,
     required int pageSize,
+    required bool isMarketPlace,
   }) async {
     final queryData = paymentSummaryQuery.getPaymentSummaryQuery();
     final request = {
@@ -40,6 +41,7 @@ class PaymentSummaryRemoteDataSource {
         {'order': 'desc', 'field': 'PaymentBatchAdditionalInfo'},
       ],
       'filterBy': filterList,
+      if (isMarketPlace) 'isMarketPlace': isMarketPlace,
     };
     final res = await httpService.request(
       method: 'POST',

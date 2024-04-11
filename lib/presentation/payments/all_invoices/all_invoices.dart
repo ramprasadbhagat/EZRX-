@@ -51,11 +51,11 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AnnouncementBanner(
-        currentPath: context.router.currentPath,
-        child: PaymentModule(
-          isMarketPlace: widget.isMarketPlace,
+    return PaymentModule(
+      isMarketPlace: widget.isMarketPlace,
+      child: Scaffold(
+        body: AnnouncementBanner(
+          currentPath: context.router.currentPath,
           child: BlocConsumer<AllInvoicesBloc, AllInvoicesState>(
             bloc: context.allInvoicesBloc(widget.isMarketPlace),
             listenWhen: (previous, current) =>
@@ -102,9 +102,9 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
             },
           ),
         ),
-      ),
-      floatingActionButton: NewPaymentButton.scale(
-        controller: _controller,
+        floatingActionButton: NewPaymentButton.scale(
+          controller: _controller,
+        ),
       ),
     );
   }

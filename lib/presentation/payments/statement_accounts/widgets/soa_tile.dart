@@ -1,13 +1,12 @@
 part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 
 class _SoaTile extends StatelessWidget {
+  final Soa soa;
+
   const _SoaTile({
     Key? key,
     required this.soa,
-    required this.isMarketPlace,
   }) : super(key: key);
-  final Soa soa;
-  final bool isMarketPlace;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class _SoaTile extends StatelessWidget {
           child: Row(
             children: [
               const SizedBox(width: 16),
-              if (isMarketPlace) ...[
+              if (context.isMPPayment) ...[
                 MarketPlaceLogo.small(),
                 const SizedBox(width: 8),
               ],

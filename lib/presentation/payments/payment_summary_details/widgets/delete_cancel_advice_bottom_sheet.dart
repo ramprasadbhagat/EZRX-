@@ -164,7 +164,7 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
       listener: (context, state) {
         state.failureOrSuccessOption.fold(
           () {
-            context.read<PaymentSummaryBloc>().add(
+            context.paymentSummaryBloc(false).add(
                   PaymentSummaryEvent.fetch(
                     appliedFilter: PaymentSummaryFilter.defaultFilter(),
                     searchKey: SearchKey.searchFilter(''),
@@ -181,7 +181,7 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
                     .popUntilRouteWithName(PaymentSummaryPageRoute.name);
               } else {
                 context.router.pushAndPopUntil(
-                  const PaymentSummaryPageRoute(),
+                  PaymentSummaryPageRoute(isMarketPlace: false),
                   predicate: (Route route) =>
                       route.settings.name == PaymentPageRoute.name,
                 );

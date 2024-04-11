@@ -40,34 +40,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class PaymentSummaryDetailsBlocMock
-    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
-    implements PaymentSummaryDetailsBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class AppRouterMock extends Mock implements AppRouter {}
-
-class PaymentSummaryBlocMock
-    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
-    implements PaymentSummaryBloc {}
 
 void main() {
   late AppRouter autoRouterMock;
@@ -78,7 +54,7 @@ void main() {
   late PaymentSummaryDetailsBloc paymentSummaryDetailsBlocMock;
   late PaymentInvoiceInfoPdf fakePaymentInvoiceInfoPdf;
   late PaymentSummaryDetails fakePaymentSummaryDetails;
-  late PaymentSummaryBloc mockPaymentSummaryBloc;
+  late ZPPaymentSummaryBloc mockPaymentSummaryBloc;
   late List<PaymentItem> paymentList;
   const fakeMockId = 'mock-id';
   const fakeError = Left(ApiFailure.other('fake-error'));
@@ -91,22 +67,22 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    locator.registerLazySingleton(() => AppRouterMock());
-    locator.registerSingleton<MixpanelService>(MockMixpanelService());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
+    locator.registerLazySingleton(() => AutoRouteMock());
+    locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
     registerFallbackValue((Route route) {
       return route.settings.name == PaymentPageRoute.name;
     });
     registerFallbackValue(Uint8List(0));
 
-    autoRouterMock = locator<AppRouterMock>();
+    autoRouterMock = locator<AutoRouteMock>();
     paymentList = await PaymentItemLocalDataSource().getPaymentItems();
     newPaymentBlocMock = NewPaymentBlocMock();
-    eligibilityBlocMock = EligibilityBlockMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     paymentSummaryDetailsBlocMock = PaymentSummaryDetailsBlocMock();
-    mockPaymentSummaryBloc = PaymentSummaryBlocMock();
+    mockPaymentSummaryBloc = ZPPaymentSummaryBlocMock();
 
     fakePaymentInvoiceInfoPdf =
         await NewPaymentLocalDataSource().getPaymentInvoiceInfoPdf();
@@ -164,7 +140,7 @@ void main() {
         BlocProvider<PaymentSummaryDetailsBloc>(
           create: (context) => paymentSummaryDetailsBlocMock,
         ),
-        BlocProvider<PaymentSummaryBloc>(
+        BlocProvider<ZPPaymentSummaryBloc>(
           create: (context) => mockPaymentSummaryBloc,
         ),
       ],
@@ -246,7 +222,7 @@ void main() {
         );
         when(
           () => autoRouterMock.popAndPush(
-            const PaymentSummaryPageRoute(),
+            PaymentSummaryPageRoute(isMarketPlace: false),
           ),
         ).thenAnswer((invocation) => Future.value());
         await tester.pumpWidget(getWidget());
@@ -256,7 +232,7 @@ void main() {
         await tester.tap(paymentSummaryButtonFinder);
         verify(
           () => autoRouterMock.popAndPush(
-            const PaymentSummaryPageRoute(),
+            PaymentSummaryPageRoute(isMarketPlace: false),
           ),
         ).called(1);
       });
@@ -360,6 +336,7 @@ void main() {
       });
 
       testWidgets('Tap on Payment Summary', (tester) async {
+        final route = PaymentSummaryPageRoute(isMarketPlace: false);
         when(() => newPaymentBlocMock.state).thenReturn(
           NewPaymentState.initial().copyWith(
             selectedPaymentMethod: NewPaymentMethod(
@@ -368,7 +345,7 @@ void main() {
             ),
           ),
         );
-        when(() => autoRouterMock.pushNamed('payments/payment_summary'))
+        when(() => autoRouterMock.push(route))
             .thenAnswer((invocation) => Future.value());
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -385,7 +362,7 @@ void main() {
         );
         await tester.pumpAndSettle();
         verify(
-          () => autoRouterMock.pushNamed('payments/payment_summary'),
+          () => autoRouterMock.push(route),
         ).called(1);
       });
 
@@ -856,7 +833,7 @@ void main() {
         await tester.pumpAndSettle();
         when(
           () => autoRouterMock.pushAndPopUntil(
-            const PaymentSummaryPageRoute(),
+            PaymentSummaryPageRoute(isMarketPlace: false),
             predicate: any(named: 'predicate'),
           ),
         ).thenAnswer((invocation) => Future.value());

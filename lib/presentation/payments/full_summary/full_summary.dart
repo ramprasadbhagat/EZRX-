@@ -52,14 +52,14 @@ class _FullSummaryPageState extends State<FullSummaryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: WidgetKeys.allSummaryPage,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 16),
-        child: AnnouncementBanner(
-          currentPath: context.router.currentPath,
-          child: PaymentModule(
-            isMarketPlace: widget.isMarketPlace,
+    return PaymentModule(
+      isMarketPlace: widget.isMarketPlace,
+      child: Scaffold(
+        key: WidgetKeys.allSummaryPage,
+        body: Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: AnnouncementBanner(
+            currentPath: context.router.currentPath,
             child: BlocConsumer<FullSummaryBloc, FullSummaryState>(
               bloc: context.fullSummaryBloc(widget.isMarketPlace),
               listenWhen: (previous, current) =>
@@ -105,9 +105,9 @@ class _FullSummaryPageState extends State<FullSummaryPage> {
             ),
           ),
         ),
-      ),
-      floatingActionButton: NewPaymentButton.scale(
-        controller: _controller,
+        floatingActionButton: NewPaymentButton.scale(
+          controller: _controller,
+        ),
       ),
     );
   }

@@ -53,12 +53,12 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AnnouncementBanner(
-        key: WidgetKeys.allCreditsPage,
-        currentPath: context.router.currentPath,
-        child: PaymentModule(
-          isMarketPlace: widget.isMarketPlace,
+    return PaymentModule(
+      isMarketPlace: widget.isMarketPlace,
+      child: Scaffold(
+        body: AnnouncementBanner(
+          key: WidgetKeys.allCreditsPage,
+          currentPath: context.router.currentPath,
           child: BlocConsumer<AllCreditsBloc, AllCreditsState>(
             bloc: context.allCreditsBloc(widget.isMarketPlace),
             listenWhen: (previous, current) =>
@@ -104,9 +104,9 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
             },
           ),
         ),
-      ),
-      floatingActionButton: NewPaymentButton.scale(
-        controller: _controller,
+        floatingActionButton: NewPaymentButton.scale(
+          controller: _controller,
+        ),
       ),
     );
   }

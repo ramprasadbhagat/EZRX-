@@ -40,6 +40,7 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
     required SearchKey searchKey,
     required int offset,
     required int pageSize,
+    required bool isMarketPlace,
   }) {
     final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
     final customerCode = customerCodeInfo.customerCodeSoldTo;
@@ -59,6 +60,7 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
             searchKey: searchKey,
             offset: offset,
             pageSize: pageSize,
+            isMarketPlace: isMarketPlace,
           );
   }
 
@@ -105,6 +107,7 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
     required SearchKey searchKey,
     required int offset,
     required int pageSize,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -130,6 +133,7 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
         offset: offset,
         filterList: filterList,
         pageSize: pageSize,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(paymentSummaryList);

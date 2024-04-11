@@ -1,11 +1,8 @@
 part of '../payment_page.dart';
 
 class _PaymentOptionMenu extends StatelessWidget {
-  final bool isMarketPlace;
-
   const _PaymentOptionMenu({
     Key? key,
-    required this.isMarketPlace,
   }) : super(key: key);
 
   @override
@@ -24,7 +21,7 @@ class _PaymentOptionMenu extends StatelessWidget {
           .map(
             (paymentOptionData) => _PaymentOption(
               paymentOptionData: paymentOptionData,
-              height: isMarketPlace ? 83 : 62,
+              height: context.isMPPayment ? 83 : 62,
               width: eligibilityState.paymentHomeItemWidthRatio * size.width,
             ),
           )
@@ -34,7 +31,7 @@ class _PaymentOptionMenu extends StatelessWidget {
 
   List<_PaymentOptionData> _getPaymentOptionItems(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
-    final suffix = isMarketPlace ? 'MP\n' : '';
+    final suffix = context.isMPPayment ? 'MP\n' : '';
 
     return [
       _PaymentOptionData(
@@ -42,14 +39,15 @@ class _PaymentOptionMenu extends StatelessWidget {
         icon: 'account_summary.svg',
         label: suffix + context.tr('Account summary'),
         onTap: () => context.router.push(
-          AccountSummaryRoute(isMarketPlace: isMarketPlace),
+          AccountSummaryRoute(isMarketPlace: context.isMPPayment),
         ),
       ),
       _PaymentOptionData(
         key: WidgetKeys.paymentSummaryMenu,
         icon: 'payment_summary.svg',
         label: suffix + context.tr('Payment summary'),
-        onTap: () => context.router.pushNamed('payments/payment_summary'),
+        onTap: () => context.router
+            .push(PaymentSummaryPageRoute(isMarketPlace: context.isMPPayment)),
       ),
       if (eligibilityState.salesOrgConfigs.statementOfAccountEnabled)
         _PaymentOptionData(
@@ -60,8 +58,9 @@ class _PaymentOptionMenu extends StatelessWidget {
             context
                 .read<SoaFilterBloc>()
                 .add(const SoaFilterEvent.initialized());
-            context.router
-                .push(StatementAccountsPageRoute(isMarketPlace: isMarketPlace));
+            context.router.push(
+              StatementAccountsPageRoute(isMarketPlace: context.isMPPayment),
+            );
           },
         ),
       if (eligibilityState.salesOrg.isPaymentClaimEnabled)

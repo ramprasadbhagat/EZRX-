@@ -6,6 +6,7 @@ class _PaymentSummaryFilterIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PaymentSummaryBloc, PaymentSummaryState>(
+      bloc: context.paymentSummaryBloc(context.isMPPayment),
       buildWhen: (previous, current) =>
           previous.appliedFilter.appliedFilterCount !=
               current.appliedFilter.appliedFilterCount ||
@@ -31,7 +32,9 @@ class _PaymentSummaryFilterIcon extends StatelessWidget {
                 top: Radius.circular(16),
               ),
             ),
-            builder: (_) => const _PaymentSummaryFilterBottomSheet(),
+            builder: (_) => _PaymentSummaryFilterBottomSheet(
+              isMarketPlace: context.isMPPayment,
+            ),
           );
         },
       ),

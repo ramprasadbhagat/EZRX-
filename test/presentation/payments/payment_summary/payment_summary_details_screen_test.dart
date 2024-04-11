@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -27,43 +28,12 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class MockAnnouncementBloc
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class MockCustomerCodeBloc
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MaterialPageXMock extends Mock implements MaterialPageX {}
-
-class PaymentSummaryBlocMock
-    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
-    implements PaymentSummaryBloc {}
-
-class MockPaymentSummaryDetailsBloc
-    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
-    implements PaymentSummaryDetailsBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-final locator = GetIt.instance;
 
 void main() {
   late SalesOrgBloc mockSalesOrgBloc;
@@ -71,7 +41,7 @@ void main() {
   late UserBloc mockUserBloc;
   late CustomerCodeBloc mockCustomerCodeBloc;
   late AnnouncementBloc mockAnnouncementBloc;
-  late PaymentSummaryBloc paymentSummaryBloc;
+  late ZPPaymentSummaryBloc paymentSummaryBloc;
   late PaymentSummaryDetailsBloc mockPaymentSummaryDetailsBloc;
   late AuthBloc mockAuthBloc;
   late EligibilityBloc eligibilityBlocMock;
@@ -88,7 +58,7 @@ void main() {
       stringMatch: 'payments/payment_summary/payment_summary_details',
       key: ValueKey('PaymentSummaryDetailsPageRoute'),
     ),
-    router: MockAppRouter(),
+    router: AutoRouteMock(),
     pendingChildren: [],
   );
 
@@ -100,7 +70,7 @@ void main() {
       stringMatch: 'payments/payment_summary',
       key: ValueKey('PaymentSummaryPageRoute'),
     ),
-    router: MockAppRouter(),
+    router: AutoRouteMock(),
     pendingChildren: [],
   );
 
@@ -116,15 +86,15 @@ void main() {
         await NewPaymentLocalDataSource().getPaymentInvoiceInfoPdf();
   });
   setUp(() async {
-    mockSalesOrgBloc = MockSalesOrgBloc();
-    mockUserBloc = MockUserBloc();
-    autoRouterMock = MockAppRouter();
-    mockCustomerCodeBloc = MockCustomerCodeBloc();
-    eligibilityBlocMock = EligibilityBlockMock();
-    mockAuthBloc = MockAuthBloc();
-    mockAnnouncementBloc = MockAnnouncementBloc();
-    paymentSummaryBloc = PaymentSummaryBlocMock();
-    mockPaymentSummaryDetailsBloc = MockPaymentSummaryDetailsBloc();
+    mockSalesOrgBloc = SalesOrgBlocMock();
+    mockUserBloc = UserBlocMock();
+    autoRouterMock = AutoRouteMock();
+    mockCustomerCodeBloc = CustomerCodeBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
+    mockAuthBloc = AuthBlocMock();
+    mockAnnouncementBloc = AnnouncementBlocMock();
+    paymentSummaryBloc = ZPPaymentSummaryBlocMock();
+    mockPaymentSummaryDetailsBloc = PaymentSummaryDetailsBlocMock();
     fakePaymentDetails = PaymentSummaryDetails.empty()
         .copyWith(status: FilterStatus('In Progress'));
     paymentSummaryPageMock = MaterialPageX(
@@ -171,7 +141,7 @@ void main() {
           ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
-          BlocProvider<PaymentSummaryBloc>(
+          BlocProvider<ZPPaymentSummaryBloc>(
             create: (context) => paymentSummaryBloc,
           ),
           BlocProvider<PaymentSummaryDetailsBloc>(

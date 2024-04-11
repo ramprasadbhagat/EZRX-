@@ -1,10 +1,8 @@
 part of '../payment_page.dart';
 
 class _AccountStatement extends StatelessWidget {
-  final bool isMarketPlace;
   const _AccountStatement({
     Key? key,
-    required this.isMarketPlace,
   }) : super(key: key);
 
   @override
@@ -30,7 +28,7 @@ class _AccountStatement extends StatelessWidget {
         );
       },
       child: BlocBuilder<SoaBloc, SoaState>(
-        bloc: context.soaBloc(isMarketPlace),
+        bloc: context.soaBloc(context.isMPPayment),
         buildWhen: (previous, current) => previous.soaList != current.soaList,
         builder: (context, state) {
           return Column(
@@ -38,7 +36,7 @@ class _AccountStatement extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SectionTitle(
-                title: isMarketPlace
+                title: context.isMPPayment
                     ? 'MP Statement of accounts'
                     : 'Statement of accounts',
                 onTapIconButton: () {
@@ -46,7 +44,9 @@ class _AccountStatement extends StatelessWidget {
                       .read<SoaFilterBloc>()
                       .add(const SoaFilterEvent.initialized());
                   context.router.push(
-                    StatementAccountsPageRoute(isMarketPlace: isMarketPlace),
+                    StatementAccountsPageRoute(
+                      isMarketPlace: context.isMPPayment,
+                    ),
                   );
                 },
               ),

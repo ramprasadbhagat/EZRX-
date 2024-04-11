@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/payments/extension.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -80,39 +81,42 @@ class PaymentPage extends StatelessWidget {
     final salesOrgConfig =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
-    return Scaffold(
-      key: WidgetKeys.paymentsTabPage,
-      appBar: CustomAppBar.commonAppBar(
-        key: WidgetKeys.paymentHomeAppBar,
-        title: Text(
-          context.tr(isMarketPlace ? 'MP Payments' : 'Payments'),
+    return PaymentModule(
+      isMarketPlace: isMarketPlace,
+      child: Scaffold(
+        key: WidgetKeys.paymentsTabPage,
+        appBar: CustomAppBar.commonAppBar(
+          key: WidgetKeys.paymentHomeAppBar,
+          title: Text(
+            context.tr(isMarketPlace ? 'MP Payments' : 'Payments'),
+          ),
+          customerBlockedOrSuspended:
+              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
         ),
-        customerBlockedOrSuspended:
-            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
-      ),
-      bottomNavigationBar: const _NewPaymentButton(),
-      body: RefreshIndicator(
-        onRefresh: () async => _refreshPayment(context),
-        child: ListView(
-          key: WidgetKeys.scrollList,
-          padding: const EdgeInsets.all(16.0),
-          children: [
-            AnnouncementWidget(currentPath: context.router.currentPath),
-            _PaymentOptionMenu(isMarketPlace: isMarketPlace),
-            const SizedBox(height: 20),
-            _PaymentTotalInvoice(isMarketPlace: isMarketPlace),
-            if (!salesOrgConfig.hideCredit) ...[
+        bottomNavigationBar: const _NewPaymentButton(),
+        body: RefreshIndicator(
+          onRefresh: () async => _refreshPayment(context),
+          child: ListView(
+            key: WidgetKeys.scrollList,
+            padding: const EdgeInsets.all(16.0),
+            children: [
+              AnnouncementWidget(currentPath: context.router.currentPath),
+              const _PaymentOptionMenu(),
               const SizedBox(height: 20),
-              _PaymentTotalCredit(isMarketPlace: isMarketPlace),
-            ],
-            const SizedBox(height: 20),
-            _PaymentSummary(isMarketPlace: isMarketPlace),
-            if (salesOrgConfig.statementOfAccountEnabled) ...[
+              const _PaymentTotalInvoice(),
+              if (!salesOrgConfig.hideCredit) ...[
+                const SizedBox(height: 20),
+                const _PaymentTotalCredit(),
+              ],
               const SizedBox(height: 20),
-              _AccountStatement(isMarketPlace: isMarketPlace),
+              const _PaymentSummary(),
+              if (salesOrgConfig.statementOfAccountEnabled) ...[
+                const SizedBox(height: 20),
+                const _AccountStatement(),
+              ],
+              const SizedBox(height: 20),
             ],
-            const SizedBox(height: 20),
-          ],
+          ),
         ),
       ),
     );

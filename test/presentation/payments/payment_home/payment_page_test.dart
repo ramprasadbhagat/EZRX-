@@ -251,6 +251,7 @@ void main() {
         (WidgetTester tester) async {
       final soaRoute = StatementAccountsPageRoute(isMarketPlace: false);
       final accountSummaryRoute = AccountSummaryRoute(isMarketPlace: false);
+      final paymentSummaryRoute = PaymentSummaryPageRoute(isMarketPlace: false);
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
@@ -263,8 +264,7 @@ void main() {
       when(() => autoRouterMock.push(soaRoute)).thenAnswer(
         (_) => Future.value(),
       );
-      when(() => autoRouterMock.pushNamed('payments/payment_summary'))
-          .thenAnswer(
+      when(() => autoRouterMock.push(paymentSummaryRoute)).thenAnswer(
         (_) => Future.value(),
       );
       await tester.pumpWidget(getWidget());
@@ -291,7 +291,7 @@ void main() {
       ).called(1);
       await tester.tap(paymentSummaryMenu);
       verify(
-        () => autoRouterMock.pushNamed('payments/payment_summary'),
+        () => autoRouterMock.push(paymentSummaryRoute),
       ).called(1);
     });
 
@@ -317,6 +317,7 @@ void main() {
     testWidgets('Check payment option in marketplace payment', (tester) async {
       final accountSummaryRoute = AccountSummaryRoute(isMarketPlace: true);
       final soaRoute = StatementAccountsPageRoute(isMarketPlace: true);
+      final paymentSummaryRoute = PaymentSummaryPageRoute(isMarketPlace: true);
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
@@ -330,10 +331,9 @@ void main() {
       when(() => autoRouterMock.push(soaRoute))
           .thenAnswer((_) => Future.value());
 
-      when(() => autoRouterMock.pushNamed('payments/payment_summary'))
-          .thenAnswer(
-        (_) => Future.value(),
-      );
+      when(() => autoRouterMock.push(paymentSummaryRoute))
+          .thenAnswer((_) => Future.value());
+
       await tester.pumpWidget(getWidget(isMarketPlace: true));
       await tester.pump();
 
@@ -377,7 +377,7 @@ void main() {
 
       await tester.tap(paymentSummaryMenu);
       verify(
-        () => autoRouterMock.pushNamed('payments/payment_summary'),
+        () => autoRouterMock.push(paymentSummaryRoute),
       ).called(1);
     });
   });
@@ -672,6 +672,7 @@ void main() {
     });
 
     testWidgets('payment summary fetch failure', (WidgetTester tester) async {
+      final paymentSummaryRoute = PaymentSummaryPageRoute(isMarketPlace: false);
       await tester.binding.setSurfaceSize(const Size(480, 900));
 
       whenListen(
@@ -684,8 +685,7 @@ void main() {
           ),
         ]),
       );
-      when(() => autoRouterMock.pushNamed('payments/payment_summary'))
-          .thenAnswer(
+      when(() => autoRouterMock.push(paymentSummaryRoute)).thenAnswer(
         (_) => Future.value(),
       );
       await tester.pumpWidget(getWidget());
@@ -713,15 +713,14 @@ void main() {
       );
       await tester.pumpAndSettle();
       verify(
-        () => autoRouterMock.pushNamed('payments/payment_summary'),
+        () => autoRouterMock.push(paymentSummaryRoute),
       ).called(1);
     });
 
     testWidgets('payment summary in MP payment', (WidgetTester tester) async {
-      when(() => autoRouterMock.pushNamed('payments/payment_summary'))
-          .thenAnswer(
-        (_) => Future.value(),
-      );
+      final route = PaymentSummaryPageRoute(isMarketPlace: true);
+      when(() => autoRouterMock.push(route)).thenAnswer((_) => Future.value());
+
       await tester.pumpWidget(getWidget(isMarketPlace: true));
       await tester.pumpAndSettle();
 
@@ -732,9 +731,7 @@ void main() {
       expect(sectionTile, findsOne);
       await tester.tap(sectionTile);
       await tester.pumpAndSettle();
-      verify(
-        () => autoRouterMock.pushNamed('payments/payment_summary'),
-      ).called(1);
+      verify(() => autoRouterMock.push(route)).called(1);
     });
   });
 

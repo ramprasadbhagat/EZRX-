@@ -10,6 +10,7 @@ class _PaymentSummaryGroupList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PaymentSummaryBloc, PaymentSummaryState>(
+      bloc: context.paymentSummaryBloc(context.isMPPayment),
       listenWhen: (previous, current) =>
           previous.failureOrSuccessOption != current.failureOrSuccessOption,
       listener: (context, state) {
@@ -30,15 +31,16 @@ class _PaymentSummaryGroupList extends StatelessWidget {
           title: 'No Payment Summary Found',
         ),
         controller: scrollController,
-        onRefresh: () => context.read<PaymentSummaryBloc>().add(
+        onRefresh: () => context.paymentSummaryBloc(context.isMPPayment).add(
               PaymentSummaryEvent.fetch(
                 appliedFilter: PaymentSummaryFilter.defaultFilter(),
                 searchKey: SearchKey.searchFilter(''),
               ),
             ),
-        onLoadingMore: () => context.read<PaymentSummaryBloc>().add(
-              const PaymentSummaryEvent.loadMore(),
-            ),
+        onLoadingMore: () =>
+            context.paymentSummaryBloc(context.isMPPayment).add(
+                  const PaymentSummaryEvent.loadMore(),
+                ),
         isLoading: state.isFetching,
         itemBuilder: (context, index, itemInfo) => _PaymentSummaryGroupItem(
           key: WidgetKeys.paymentSummaryItem,

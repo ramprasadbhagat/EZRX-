@@ -1884,11 +1884,19 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(
-    () => PaymentSummaryBloc(
+    () => ZPPaymentSummaryBloc(
       paymentSummaryRepository: locator<PaymentSummaryRepository>(),
       config: locator<Config>(),
     ),
   );
+
+  locator.registerLazySingleton(
+    () => MPPaymentSummaryBloc(
+      paymentSummaryRepository: locator<PaymentSummaryRepository>(),
+      config: locator<Config>(),
+    ),
+  );
+
   locator.registerLazySingleton(
     () => PaymentSummaryFilterBloc(
       paymentSummaryRepository: locator<PaymentSummaryRepository>(),

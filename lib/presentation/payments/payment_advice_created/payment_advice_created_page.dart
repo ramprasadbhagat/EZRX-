@@ -231,7 +231,7 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
                       if (confirmed ?? false) {
                         unawaited(
                           context.router.pushAndPopUntil(
-                            const PaymentSummaryPageRoute(),
+                            PaymentSummaryPageRoute(isMarketPlace: false),
                             predicate: (Route route) =>
                                 route.settings.name == PaymentPageRoute.name,
                           ),

@@ -72,6 +72,7 @@ void main() {
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeSalesOrganisation,
         searchKey: SearchKey(''),
+        isMarketPlace: true,
       );
       expect(
         result.isRight(),
@@ -89,6 +90,7 @@ void main() {
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeSalesOrganisation,
         searchKey: SearchKey('fake_search_key'),
+        isMarketPlace: true,
       );
       expect(
         result.isLeft(),
@@ -108,6 +110,7 @@ void main() {
             offset: 0,
             filterList: filterList,
             pageSize: mockConfig.pageSize,
+            isMarketPlace: false,
           ),
         ).thenAnswer((invocation) async => fakePaymentList);
 
@@ -118,6 +121,7 @@ void main() {
           pageSize: mockConfig.pageSize,
           salesOrganization: fakeSalesOrganisation,
           searchKey: SearchKey.searchFilter('fake_search_key'),
+          isMarketPlace: false,
         );
         expect(
           result.isRight(),
@@ -139,6 +143,7 @@ void main() {
             filterList:
                 PaymentSummaryFilterDto.fromDomain(fakeFilter).toMapList,
             pageSize: mockConfig.pageSize,
+            isMarketPlace: false,
           ),
         ).thenAnswer((invocation) async => fakePaymentList);
 
@@ -149,6 +154,7 @@ void main() {
           pageSize: mockConfig.pageSize,
           salesOrganization: fakeSalesOrganisation,
           searchKey: SearchKey.searchFilter(''),
+          isMarketPlace: false,
         );
         expect(
           result.isRight(),
@@ -168,6 +174,7 @@ void main() {
             offset: 0,
             filterList: filterList,
             pageSize: mockConfig.pageSize,
+            isMarketPlace: false,
           ),
         ).thenThrow(MockException());
         final result = await paymentSummaryRepository.fetchPaymentSummaryList(
@@ -177,6 +184,7 @@ void main() {
           pageSize: mockConfig.pageSize,
           salesOrganization: fakeSalesOrganisation,
           searchKey: SearchKey.searchFilter('fake_search_key'),
+          isMarketPlace: false,
         );
         expect(
           result.isLeft(),
@@ -198,6 +206,7 @@ void main() {
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeIDSalesOrganisation,
         searchKey: SearchKey(''),
+        isMarketPlace: false,
       );
       expect(
         result.isRight(),
@@ -219,6 +228,7 @@ void main() {
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeIDSalesOrganisation,
         searchKey: SearchKey(''),
+        isMarketPlace: false,
       );
       expect(
         result.isLeft(),
@@ -256,6 +266,7 @@ void main() {
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeIDSalesOrganisation,
         searchKey: SearchKey(''),
+        isMarketPlace: false,
       );
       expect(
         result.isRight(),
@@ -289,6 +300,7 @@ void main() {
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeIDSalesOrganisation,
         searchKey: SearchKey(''),
+        isMarketPlace: false,
       );
       expect(
         result.isLeft(),

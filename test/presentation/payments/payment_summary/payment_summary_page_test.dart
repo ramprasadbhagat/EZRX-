@@ -26,7 +26,10 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart'
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
+import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
+import 'package:ezrxmobile/presentation/core/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -35,7 +38,6 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
@@ -46,16 +48,16 @@ import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-final locator = GetIt.instance;
-
 void main() {
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
   late AnnouncementBloc announcementBlocMock;
-  late PaymentSummaryBloc paymentSummaryBloc;
+  late ZPPaymentSummaryBloc paymentSummaryBloc;
+  late MPPaymentSummaryBloc mpPaymentSummaryBloc;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBloc;
   late PaymentSummaryFilterBloc paymentSummaryFilterBloc;
   late ZPPaymentInProgressBloc paymentInProgressBlocMock;
+  late MPPaymentInProgressBloc mpPaymentInProgressBloc;
   late EligibilityBloc eligibilityBloc;
   late List<PaymentSummaryDetails> paymentSummaryList;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
@@ -105,9 +107,11 @@ void main() {
     authBlocMock = AuthBlocMock();
     autoRouterMock = locator<AppRouter>();
     announcementBlocMock = AnnouncementBlocMock();
-    paymentSummaryBloc = PaymentSummaryBlocMock();
+    paymentSummaryBloc = ZPPaymentSummaryBlocMock();
+    mpPaymentSummaryBloc = MPPaymentSummaryBlocMock();
     downloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
     paymentInProgressBlocMock = ZPPaymentInProgressBlocMock();
+    mpPaymentInProgressBloc = MPPaymentInProgressBlocMock();
     paymentSummaryFilterBloc = PaymentSummaryFilterBlocMock();
     eligibilityBloc = EligibilityBlocMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
@@ -131,6 +135,8 @@ void main() {
           .thenReturn(AnnouncementState.initial());
       when(() => paymentSummaryBloc.state)
           .thenReturn(PaymentSummaryState.initial());
+      when(() => mpPaymentSummaryBloc.state)
+          .thenReturn(PaymentSummaryState.initial());
       when(() => downloadPaymentAttachmentsBloc.state)
           .thenReturn(DownloadPaymentAttachmentsState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
@@ -138,6 +144,8 @@ void main() {
           .thenReturn(PaymentSummaryFilterState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
       when(() => paymentInProgressBlocMock.state)
+          .thenReturn(PaymentInProgressState.initial());
+      when(() => mpPaymentInProgressBloc.state)
           .thenReturn(PaymentInProgressState.initial());
       when(() => paymentSummaryDetailBlocMock.state)
           .thenReturn(PaymentSummaryDetailsState.initial());
@@ -149,7 +157,7 @@ void main() {
           .thenReturn(NewPaymentState.initial());
     });
 
-    RouteDataScope getWUT() {
+    RouteDataScope getWUT({bool isMarketPlace = false}) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
@@ -160,8 +168,11 @@ void main() {
           BlocProvider<AnnouncementBloc>(
             create: (context) => announcementBlocMock,
           ),
-          BlocProvider<PaymentSummaryBloc>(
+          BlocProvider<ZPPaymentSummaryBloc>(
             create: (context) => paymentSummaryBloc,
+          ),
+          BlocProvider<MPPaymentSummaryBloc>(
+            create: (context) => mpPaymentSummaryBloc,
           ),
           BlocProvider<DownloadPaymentAttachmentsBloc>(
             create: (context) => downloadPaymentAttachmentsBloc,
@@ -174,6 +185,9 @@ void main() {
           ),
           BlocProvider<ZPPaymentInProgressBloc>(
             create: (context) => paymentInProgressBlocMock,
+          ),
+          BlocProvider<MPPaymentInProgressBloc>(
+            create: (context) => mpPaymentInProgressBloc,
           ),
           BlocProvider<PaymentSummaryDetailsBloc>(
             create: (context) => paymentSummaryDetailBlocMock,
@@ -188,8 +202,8 @@ void main() {
             create: (context) => newPaymentBlocMock,
           ),
         ],
-        child: const Scaffold(
-          body: PaymentSummaryPage(),
+        child: Scaffold(
+          body: PaymentSummaryPage(isMarketPlace: isMarketPlace),
         ),
       );
     }
@@ -1271,5 +1285,38 @@ void main() {
         expect(customerBlockedBanner, findsOneWidget);
       },
     );
+
+    testWidgets('Payment summary in marketplace', (tester) async {
+      when(() => mpPaymentSummaryBloc.state).thenReturn(
+        PaymentSummaryState.initial().copyWith(
+          details: [paymentSummaryDetails],
+        ),
+      );
+
+      await tester.pumpWidget(getWUT(isMarketPlace: true));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.descendant(
+          of: find.byType(CustomAppBar),
+          matching: find.text('MP Payment summary'),
+        ),
+        findsOne,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.paymentSummarySearchBar),
+          matching: find.text('Search by MP payment advice / voucher no.'),
+        ),
+        findsOne,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.paymentSummaryTile),
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsOne,
+      );
+    });
   });
 }

@@ -37,9 +37,9 @@ void main() {
   });
 
   group('Payment Summary Bloc Test', () {
-    blocTest<PaymentSummaryBloc, PaymentSummaryState>(
+    blocTest<ZPPaymentSummaryBloc, PaymentSummaryState>(
       'Payment Summary "fetchPaymentSummaryList" Event Success',
-      build: () => PaymentSummaryBloc(
+      build: () => ZPPaymentSummaryBloc(
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
@@ -56,12 +56,13 @@ void main() {
             searchKey: SearchKey.searchFilter('ab'),
             offset: offSet,
             pageSize: pageSize,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(details),
         );
       },
-      act: (PaymentSummaryBloc bloc) => bloc.add(
+      act: (ZPPaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
           appliedFilter: paymentSummaryFilter,
           searchKey: SearchKey.searchFilter('ab'),
@@ -82,9 +83,57 @@ void main() {
         ),
       ],
     );
-    blocTest<PaymentSummaryBloc, PaymentSummaryState>(
+
+    blocTest<MPPaymentSummaryBloc, PaymentSummaryState>(
+      'Payment Summary "fetchPaymentSummaryList" Event Success in marketplace',
+      build: () => MPPaymentSummaryBloc(
+        paymentSummaryRepository: paymentSummaryMockRepository,
+        config: config,
+      ),
+      seed: () => PaymentSummaryState.initial().copyWith(
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganization: mockSalesOrganisation,
+      ),
+      setUp: () {
+        when(
+          () => paymentSummaryMockRepository.fetchPaymentSummaryList(
+            customerCodeInfo: mockCustomerCodeInfo,
+            salesOrganization: mockSalesOrganisation,
+            filter: paymentSummaryFilter,
+            searchKey: SearchKey.searchFilter('ab'),
+            offset: offSet,
+            pageSize: pageSize,
+            isMarketPlace: true,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(details),
+        );
+      },
+      act: (MPPaymentSummaryBloc bloc) => bloc.add(
+        PaymentSummaryEvent.fetch(
+          appliedFilter: paymentSummaryFilter,
+          searchKey: SearchKey.searchFilter('ab'),
+        ),
+      ),
+      expect: () => [
+        PaymentSummaryState.initial().copyWith(
+          isFetching: true,
+          appliedFilter: paymentSummaryFilter,
+          failureOrSuccessOption: none(),
+          searchKey: SearchKey.searchFilter('ab'),
+        ),
+        PaymentSummaryState.initial().copyWith(
+          details: details,
+          canLoadMore: false,
+          appliedFilter: paymentSummaryFilter,
+          searchKey: SearchKey.searchFilter('ab'),
+        ),
+      ],
+    );
+
+    blocTest<ZPPaymentSummaryBloc, PaymentSummaryState>(
       'Payment Summary "fetchPaymentSummaryList" Event failure',
-      build: () => PaymentSummaryBloc(
+      build: () => ZPPaymentSummaryBloc(
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
@@ -101,12 +150,13 @@ void main() {
             filter: paymentSummaryFilter,
             searchKey: SearchKey.searchFilter('ab'),
             pageSize: pageSize,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('Fake-Error')),
         );
       },
-      act: (PaymentSummaryBloc bloc) => bloc.add(
+      act: (ZPPaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
           searchKey: SearchKey.searchFilter('ab'),
           appliedFilter: paymentSummaryFilter,
@@ -128,9 +178,9 @@ void main() {
         ),
       ],
     );
-    blocTest<PaymentSummaryBloc, PaymentSummaryState>(
+    blocTest<ZPPaymentSummaryBloc, PaymentSummaryState>(
       'Payment Summary "loadMorePaymentSummary" Event Success',
-      build: () => PaymentSummaryBloc(
+      build: () => ZPPaymentSummaryBloc(
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
@@ -147,12 +197,13 @@ void main() {
             searchKey: SearchKey.searchFilter(''),
             offset: offSet,
             pageSize: pageSize,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(details),
         );
       },
-      act: (PaymentSummaryBloc bloc) => bloc.add(
+      act: (ZPPaymentSummaryBloc bloc) => bloc.add(
         const PaymentSummaryEvent.loadMore(),
       ),
       expect: () => [
@@ -171,9 +222,9 @@ void main() {
         ),
       ],
     );
-    blocTest<PaymentSummaryBloc, PaymentSummaryState>(
+    blocTest<ZPPaymentSummaryBloc, PaymentSummaryState>(
       'Payment Summary "loadMorePaymentSummary" Event failure',
-      build: () => PaymentSummaryBloc(
+      build: () => ZPPaymentSummaryBloc(
         paymentSummaryRepository: paymentSummaryMockRepository,
         config: config,
       ),
@@ -190,12 +241,13 @@ void main() {
             searchKey: SearchKey.searchFilter(''),
             offset: offSet,
             pageSize: pageSize,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('Fake-Error')),
         );
       },
-      act: (PaymentSummaryBloc bloc) => bloc.add(
+      act: (ZPPaymentSummaryBloc bloc) => bloc.add(
         const PaymentSummaryEvent.loadMore(),
       ),
       expect: () => [

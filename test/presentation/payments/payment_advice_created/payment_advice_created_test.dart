@@ -28,9 +28,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
@@ -50,18 +47,15 @@ void main() {
   late SalesOrgBloc salesOrgBlocMock;
   late NewPaymentBloc newPaymentBlocMock;
   late EligibilityBloc eligibilityBlocMock;
-  late CustomerCodeBloc customerCodeBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late NewPaymentMethod paymentMethodValueQr;
   late NewPaymentMethod paymentMethodValueBank;
-  late ZPAccountSummaryBloc accountSummaryBlocMock;
   late List<CustomerOpenItem> customerOpenItemList;
-  late ZPPaymentInProgressBloc paymentInProgressBloc;
   late AvailableCreditsBloc availableCreditsBlocMock;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
   late PaymentSummaryDetailsBloc mockPaymentSummaryDetailsBloc;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBloc;
-  late PaymentSummaryBloc mockPaymentSummaryBloc;
+  late ZPPaymentSummaryBloc mockPaymentSummaryBloc;
 
   //////////////////////Finder/////////////////////////////
 
@@ -107,23 +101,14 @@ void main() {
     newPaymentBlocMock = NewPaymentBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
-    customerCodeBlocMock = CustomerCodeBlocMock();
-    accountSummaryBlocMock = ZPAccountSummaryBlocMock();
-    paymentInProgressBloc = ZPPaymentInProgressBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
     mockPaymentSummaryDetailsBloc = PaymentSummaryDetailsBlocMock();
     downloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
-    mockPaymentSummaryBloc = PaymentSummaryBlocMock();
+    mockPaymentSummaryBloc = ZPPaymentSummaryBlocMock();
 
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
-    when(() => customerCodeBlocMock.state)
-        .thenReturn(CustomerCodeState.initial());
-    when(() => paymentInProgressBloc.state)
-        .thenReturn(PaymentInProgressState.initial());
-    when(() => accountSummaryBlocMock.state)
-        .thenReturn(AccountSummaryState.initial());
     when(() => availableCreditsBlocMock.state)
         .thenReturn(AvailableCreditsState.initial());
     when(() => eligibilityBlocMock.state)
@@ -161,17 +146,8 @@ void main() {
         BlocProvider<AnnouncementBloc>(
           create: (context) => announcementBlocMock,
         ),
-        BlocProvider<CustomerCodeBloc>(
-          create: (context) => customerCodeBlocMock,
-        ),
-        BlocProvider<ZPPaymentInProgressBloc>(
-          create: (context) => paymentInProgressBloc,
-        ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
-        ),
-        BlocProvider<ZPAccountSummaryBloc>(
-          create: (context) => accountSummaryBlocMock,
         ),
         BlocProvider<AvailableCreditsBloc>(
           create: (context) => availableCreditsBlocMock,
@@ -186,7 +162,7 @@ void main() {
           create: (context) => downloadPaymentAttachmentsBloc,
         ),
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-        BlocProvider<PaymentSummaryBloc>(
+        BlocProvider<ZPPaymentSummaryBloc>(
           create: (context) => mockPaymentSummaryBloc,
         ),
       ],
@@ -306,7 +282,8 @@ void main() {
       expect(paymentAdviceNotification, findsOneWidget);
 
       when(
-        () => autoRouterMock.pushNamed('payments/payment_summary'),
+        () =>
+            autoRouterMock.push(PaymentSummaryPageRoute(isMarketPlace: false)),
       ).thenAnswer((invocation) => Future(() => null));
       final finder = find.byWidgetPredicate(
         (widget) =>
@@ -467,7 +444,8 @@ void main() {
         ),
       );
       when(
-        () => autoRouterMock.popAndPush(const PaymentSummaryPageRoute()),
+        () => autoRouterMock
+            .popAndPush(PaymentSummaryPageRoute(isMarketPlace: false)),
       ).thenAnswer((invocation) => Future(() => null));
       await tester.pumpWidget(getWidget());
       await tester.pump();
@@ -491,7 +469,8 @@ void main() {
       await tester.tap(paymentSummaryButton);
       await tester.pump(const Duration(seconds: 1));
       verify(
-        () => autoRouterMock.popAndPush(const PaymentSummaryPageRoute()),
+        () => autoRouterMock
+            .popAndPush(PaymentSummaryPageRoute(isMarketPlace: false)),
       ).called(1);
       await tester.pump(const Duration(seconds: 1));
     });
@@ -531,7 +510,8 @@ void main() {
         ),
       );
       when(
-        () => autoRouterMock.popAndPush(const PaymentSummaryPageRoute()),
+        () => autoRouterMock
+            .popAndPush(PaymentSummaryPageRoute(isMarketPlace: false)),
       ).thenAnswer((invocation) => Future(() => null));
       await tester.pumpWidget(getWidget());
       await tester.pump();
@@ -593,7 +573,8 @@ void main() {
         ),
       );
       when(
-        () => autoRouterMock.popAndPush(const PaymentSummaryPageRoute()),
+        () => autoRouterMock
+            .popAndPush(PaymentSummaryPageRoute(isMarketPlace: false)),
       ).thenAnswer((invocation) => Future(() => null));
       await tester.pumpWidget(getWidget());
       await tester.pump();
@@ -656,7 +637,8 @@ void main() {
         ),
       );
       when(
-        () => autoRouterMock.popAndPush(const PaymentSummaryPageRoute()),
+        () => autoRouterMock
+            .popAndPush(PaymentSummaryPageRoute(isMarketPlace: false)),
       ).thenAnswer((invocation) => Future(() => null));
       await tester.pumpWidget(getWidget());
       await tester.pump();

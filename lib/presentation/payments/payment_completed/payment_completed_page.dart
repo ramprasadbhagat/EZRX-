@@ -111,7 +111,8 @@ class _BodyContent extends StatelessWidget {
                   child: ElevatedButton(
                     key: WidgetKeys.paymentSummaryRouteButton,
                     onPressed: () {
-                      context.router.pushNamed('payments/payment_summary');
+                      context.router
+                          .push(PaymentSummaryPageRoute(isMarketPlace: false));
                     },
                     style:
                         Theme.of(context).elevatedButtonTheme.style!.copyWith(

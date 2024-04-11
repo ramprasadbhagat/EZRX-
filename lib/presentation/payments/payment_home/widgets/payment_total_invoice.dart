@@ -1,17 +1,14 @@
 part of '../payment_page.dart';
 
 class _PaymentTotalInvoice extends StatelessWidget {
-  final bool isMarketPlace;
-
   const _PaymentTotalInvoice({
     Key? key,
-    required this.isMarketPlace,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountSummaryBloc, AccountSummaryState>(
-      bloc: context.accountSummaryBloc(isMarketPlace),
+      bloc: context.accountSummaryBloc(context.isMPPayment),
       buildWhen: (previous, current) =>
           previous.isFetchingOutstandingBalance !=
           current.isFetchingOutstandingBalance,

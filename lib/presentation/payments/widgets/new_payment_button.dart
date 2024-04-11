@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
@@ -10,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,8 +24,6 @@ class NewPaymentButton extends StatelessWidget {
   factory NewPaymentButton.elevated() => const NewPaymentButton._(null);
 
   const NewPaymentButton._(this.scrollController, {Key? key}) : super(key: key);
-
-  static const title = 'New payment';
 
   static const paymentFailureMessage =
       'You have a pending payment which has not been completed. Please create a new payment only after the existing one has been cleared.';
@@ -49,6 +47,8 @@ class NewPaymentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final title = context.isMPPayment ? 'Make a MP payment' : 'New payment';
+
     return BlocBuilder<NewPaymentBloc, NewPaymentState>(
       buildWhen: (previous, current) =>
           previous.isFetchingPrincipalCutoffs !=
@@ -84,7 +84,10 @@ class NewPaymentButton extends StatelessWidget {
 
     final eligibilityState = context.read<EligibilityBloc>().state;
     final cannotProcessPayment = eligibilityState.salesOrg.isID &&
-        context.read<PaymentSummaryBloc>().state.includeInprogressPayment;
+        context
+            .paymentSummaryBloc(context.isMPPayment)
+            .state
+            .includeInprogressPayment;
 
     if (cannotProcessPayment) {
       _showFailedBottomSheet(context);

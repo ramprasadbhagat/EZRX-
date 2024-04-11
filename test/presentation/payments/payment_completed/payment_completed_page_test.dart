@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -17,26 +16,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../utils/widget_utils.dart';
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class PaymentSummaryBlocMock
-    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
-    implements PaymentSummaryBloc {}
-
-class AppRouterMock extends Mock implements AppRouter {}
 
 void main() {
   late AppRouter autoRouterMock;
@@ -44,7 +25,7 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
-  late PaymentSummaryBloc paymentSummaryBlocMock;
+  late ZPPaymentSummaryBloc paymentSummaryBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -59,10 +40,10 @@ void main() {
     });
 
     newPaymentBlocMock = NewPaymentBlocMock();
-    eligibilityBlocMock = EligibilityBlockMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
-    paymentSummaryBlocMock = PaymentSummaryBlocMock();
+    paymentSummaryBlocMock = ZPPaymentSummaryBlocMock();
   });
 
   setUp(() {
@@ -95,7 +76,7 @@ void main() {
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
         ),
-        BlocProvider<PaymentSummaryBloc>(
+        BlocProvider<ZPPaymentSummaryBloc>(
           create: (context) => paymentSummaryBlocMock,
         ),
       ],
@@ -173,7 +154,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         autoRouterMock.current.path,
-        'payments/payment_summary',
+        PaymentSummaryPageRoute(isMarketPlace: false).path,
       );
     });
   });

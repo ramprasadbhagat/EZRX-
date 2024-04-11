@@ -8,6 +8,7 @@ class _PaymentSummarySearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PaymentSummaryBloc, PaymentSummaryState>(
+      bloc: context.paymentSummaryBloc(context.isMPPayment),
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching ||
           current.searchKey.isValueEmpty,
@@ -16,7 +17,9 @@ class _PaymentSummarySearchBar extends StatelessWidget {
           key: WidgetKeys.genericKey(
             key: state.searchKey.searchValueOrEmpty,
           ),
-          hintText: 'Search by payment advice / voucher no.',
+          hintText: context.isMPPayment
+              ? 'Search by MP payment advice / voucher no.'
+              : 'Search by payment advice / voucher no.',
           enabled: !state.isFetching,
           initialValue: state.searchKey.searchValueOrEmpty,
           onSearchChanged: (value) => _fetchPaymentSummary(
@@ -44,7 +47,7 @@ class _PaymentSummarySearchBar extends StatelessWidget {
     final appliedFilter = searchValue.isEmpty
         ? PaymentSummaryFilter.defaultFilter()
         : PaymentSummaryFilter.empty();
-    context.read<PaymentSummaryBloc>().add(
+    context.paymentSummaryBloc(context.isMPPayment).add(
           PaymentSummaryEvent.fetch(
             appliedFilter: appliedFilter,
             searchKey: SearchKey.searchFilter(searchValue),

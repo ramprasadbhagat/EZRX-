@@ -14,8 +14,29 @@ part 'payment_summary_event.dart';
 part 'payment_summary_state.dart';
 part 'payment_summary_bloc.freezed.dart';
 
-class PaymentSummaryBloc
+class ZPPaymentSummaryBloc extends PaymentSummaryBloc {
+  ZPPaymentSummaryBloc({
+    required super.paymentSummaryRepository,
+    required super.config,
+  });
+
+  @override
+  bool get isMarketplace => false;
+}
+
+class MPPaymentSummaryBloc extends PaymentSummaryBloc {
+  MPPaymentSummaryBloc({
+    required super.paymentSummaryRepository,
+    required super.config,
+  });
+
+  @override
+  bool get isMarketplace => true;
+}
+
+abstract class PaymentSummaryBloc
     extends Bloc<PaymentSummaryEvent, PaymentSummaryState> {
+  abstract final bool isMarketplace;
   final IPaymentSummaryRepository paymentSummaryRepository;
   final Config config;
 
@@ -64,6 +85,7 @@ class PaymentSummaryBloc
           pageSize: config.pageSize,
           filter: e.appliedFilter,
           searchKey: e.searchKey,
+          isMarketPlace: isMarketplace,
         );
 
         failureOrSuccess.fold(
@@ -103,6 +125,7 @@ class PaymentSummaryBloc
           offset: state.details.length,
           pageSize: config.pageSize,
           searchKey: state.searchKey,
+          isMarketPlace: isMarketplace,
         );
 
         failureOrSuccess.fold(

@@ -15,6 +15,7 @@ import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/attention_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/bank_account_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/bank_info.dart';

@@ -543,14 +543,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       shipToInfo: state.shipToInfo,
                     ),
                   );
-              context.read<PaymentSummaryDetailsBloc>().add(
-                    PaymentSummaryDetailsEvent.initialized(
-                      salesOrganization: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
-                      user: state.user,
-                      shipToInfo: state.shipToInfo,
-                    ),
-                  );
 
               context.read<ReturnListByRequestBloc>().add(
                     ReturnListByRequestEvent.initialized(
@@ -577,23 +569,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       customeCodeInfo: state.customerCodeInfo,
                       salesOrganisation: state.salesOrganisation,
                       selectedShipToCode: state.shipToInfo.shipToCustomerCode,
-                    ),
-                  );
-
-              context.read<PaymentSummaryBloc>().add(
-                    PaymentSummaryEvent.initialized(
-                      salesOrganization: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
-                    ),
-                  );
-
-              context.read<PaymentSummaryBloc>().add(
-                    PaymentSummaryEvent.fetch(
-                      appliedFilter: context
-                          .read<PaymentSummaryBloc>()
-                          .state
-                          .appliedFilter,
-                      searchKey: SearchKey.searchFilter(''),
                     ),
                   );
 
@@ -714,12 +689,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       ),
                     );
               }
-
-              context.read<PaymentSummaryFilterBloc>().add(
-                    PaymentSummaryFilterEvent.initialized(
-                      salesOrg: state.salesOrg,
-                    ),
-                  );
 
               context.read<ReOrderPermissionBloc>().add(
                     ReOrderPermissionEvent.initialized(
@@ -1382,6 +1351,41 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
       );
 
+    //============================================================
+    //  Payment Summary
+    //
+    //============================================================
+
+    context.read<ZPPaymentSummaryBloc>()
+      ..add(
+        PaymentSummaryEvent.initialized(
+          salesOrganization: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+        ),
+      )
+      ..add(
+        PaymentSummaryEvent.fetch(
+          appliedFilter:
+              context.read<ZPPaymentSummaryBloc>().state.appliedFilter,
+          searchKey: SearchKey.searchFilter(''),
+        ),
+      );
+
+    context.read<PaymentSummaryFilterBloc>().add(
+          PaymentSummaryFilterEvent.initialized(
+            salesOrg: state.salesOrg,
+          ),
+        );
+
+    context.read<PaymentSummaryDetailsBloc>().add(
+          PaymentSummaryDetailsEvent.initialized(
+            salesOrganization: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+            user: state.user,
+            shipToInfo: state.shipToInfo,
+          ),
+        );
+
     if (state.marketPlacePaymentEligible) {
       //============================================================
       //  Payment Home
@@ -1457,6 +1461,26 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ..add(
           FullSummaryEvent.fetch(
             appliedFilter: FullSummaryFilter.defaultFilter(),
+          ),
+        );
+
+      //============================================================
+      //  Payment Summary
+      //
+      //============================================================
+
+      context.read<MPPaymentSummaryBloc>()
+        ..add(
+          PaymentSummaryEvent.initialized(
+            salesOrganization: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter:
+                context.read<MPPaymentSummaryBloc>().state.appliedFilter,
+            searchKey: SearchKey.searchFilter(''),
           ),
         );
     }
