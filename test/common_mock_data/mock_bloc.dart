@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
@@ -147,6 +148,9 @@ class PolicyConfigurationListBlocMock
 class CustomerLicenseBlocMock
     extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
     implements CustomerLicenseBloc {}
+
+class AboutUsBlocMock extends MockBloc<AboutUsEvent, AboutUsState>
+    implements AboutUsBloc {}
 
 class BannerBlocMock extends MockBloc<BannerEvent, BannerState>
     implements BannerBloc {}

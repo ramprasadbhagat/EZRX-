@@ -18,20 +18,23 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AboutUsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(SalesOrg salesOrg) fetchAboutUsInfo,
+    required TResult Function(SalesOrg salesOrg) initialize,
+    required TResult Function() fetchAboutUsInfo,
+    required TResult Function() fetchAboutUsStaticInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(SalesOrg salesOrg)? fetchAboutUsInfo,
+    TResult? Function(SalesOrg salesOrg)? initialize,
+    TResult? Function()? fetchAboutUsInfo,
+    TResult? Function()? fetchAboutUsStaticInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(SalesOrg salesOrg)? fetchAboutUsInfo,
+    TResult Function(SalesOrg salesOrg)? initialize,
+    TResult Function()? fetchAboutUsInfo,
+    TResult Function()? fetchAboutUsStaticInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,22 @@ mixin _$AboutUsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_FetchAboutUsInfo value) fetchAboutUsInfo,
+    required TResult Function(_FetchAboutUsStaticInfo value)
+        fetchAboutUsStaticInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_FetchAboutUsInfo value)? fetchAboutUsInfo,
+    TResult? Function(_FetchAboutUsStaticInfo value)? fetchAboutUsStaticInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_FetchAboutUsInfo value)? fetchAboutUsInfo,
+    TResult Function(_FetchAboutUsStaticInfo value)? fetchAboutUsStaticInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,6 +86,8 @@ abstract class _$$_InitializeCopyWith<$Res> {
   factory _$$_InitializeCopyWith(
           _$_Initialize value, $Res Function(_$_Initialize) then) =
       __$$_InitializeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -88,117 +97,13 @@ class __$$_InitializeCopyWithImpl<$Res>
   __$$_InitializeCopyWithImpl(
       _$_Initialize _value, $Res Function(_$_Initialize) _then)
       : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Initialize implements _Initialize {
-  const _$_Initialize();
-
-  @override
-  String toString() {
-    return 'AboutUsEvent.initialize()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialize);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(SalesOrg salesOrg) fetchAboutUsInfo,
-  }) {
-    return initialize();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(SalesOrg salesOrg)? fetchAboutUsInfo,
-  }) {
-    return initialize?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(SalesOrg salesOrg)? fetchAboutUsInfo,
-    required TResult orElse(),
-  }) {
-    if (initialize != null) {
-      return initialize();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialize value) initialize,
-    required TResult Function(_FetchAboutUsInfo value) fetchAboutUsInfo,
-  }) {
-    return initialize(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_FetchAboutUsInfo value)? fetchAboutUsInfo,
-  }) {
-    return initialize?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_FetchAboutUsInfo value)? fetchAboutUsInfo,
-    required TResult orElse(),
-  }) {
-    if (initialize != null) {
-      return initialize(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initialize implements AboutUsEvent {
-  const factory _Initialize() = _$_Initialize;
-}
-
-/// @nodoc
-abstract class _$$_FetchAboutUsInfoCopyWith<$Res> {
-  factory _$$_FetchAboutUsInfoCopyWith(
-          _$_FetchAboutUsInfo value, $Res Function(_$_FetchAboutUsInfo) then) =
-      __$$_FetchAboutUsInfoCopyWithImpl<$Res>;
-  @useResult
-  $Res call({SalesOrg salesOrg});
-}
-
-/// @nodoc
-class __$$_FetchAboutUsInfoCopyWithImpl<$Res>
-    extends _$AboutUsEventCopyWithImpl<$Res, _$_FetchAboutUsInfo>
-    implements _$$_FetchAboutUsInfoCopyWith<$Res> {
-  __$$_FetchAboutUsInfoCopyWithImpl(
-      _$_FetchAboutUsInfo _value, $Res Function(_$_FetchAboutUsInfo) _then)
-      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_FetchAboutUsInfo(
+    return _then(_$_Initialize(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -209,22 +114,22 @@ class __$$_FetchAboutUsInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchAboutUsInfo implements _FetchAboutUsInfo {
-  const _$_FetchAboutUsInfo({required this.salesOrg});
+class _$_Initialize implements _Initialize {
+  const _$_Initialize({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'AboutUsEvent.fetchAboutUsInfo(salesOrg: $salesOrg)';
+    return 'AboutUsEvent.initialize(salesOrg: $salesOrg)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchAboutUsInfo &&
+            other is _$_Initialize &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -235,36 +140,39 @@ class _$_FetchAboutUsInfo implements _FetchAboutUsInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchAboutUsInfoCopyWith<_$_FetchAboutUsInfo> get copyWith =>
-      __$$_FetchAboutUsInfoCopyWithImpl<_$_FetchAboutUsInfo>(this, _$identity);
+  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
+      __$$_InitializeCopyWithImpl<_$_Initialize>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(SalesOrg salesOrg) fetchAboutUsInfo,
+    required TResult Function(SalesOrg salesOrg) initialize,
+    required TResult Function() fetchAboutUsInfo,
+    required TResult Function() fetchAboutUsStaticInfo,
   }) {
-    return fetchAboutUsInfo(salesOrg);
+    return initialize(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(SalesOrg salesOrg)? fetchAboutUsInfo,
+    TResult? Function(SalesOrg salesOrg)? initialize,
+    TResult? Function()? fetchAboutUsInfo,
+    TResult? Function()? fetchAboutUsStaticInfo,
   }) {
-    return fetchAboutUsInfo?.call(salesOrg);
+    return initialize?.call(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(SalesOrg salesOrg)? fetchAboutUsInfo,
+    TResult Function(SalesOrg salesOrg)? initialize,
+    TResult Function()? fetchAboutUsInfo,
+    TResult Function()? fetchAboutUsStaticInfo,
     required TResult orElse(),
   }) {
-    if (fetchAboutUsInfo != null) {
-      return fetchAboutUsInfo(salesOrg);
+    if (initialize != null) {
+      return initialize(salesOrg);
     }
     return orElse();
   }
@@ -274,6 +182,122 @@ class _$_FetchAboutUsInfo implements _FetchAboutUsInfo {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_FetchAboutUsInfo value) fetchAboutUsInfo,
+    required TResult Function(_FetchAboutUsStaticInfo value)
+        fetchAboutUsStaticInfo,
+  }) {
+    return initialize(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_FetchAboutUsInfo value)? fetchAboutUsInfo,
+    TResult? Function(_FetchAboutUsStaticInfo value)? fetchAboutUsStaticInfo,
+  }) {
+    return initialize?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_FetchAboutUsInfo value)? fetchAboutUsInfo,
+    TResult Function(_FetchAboutUsStaticInfo value)? fetchAboutUsStaticInfo,
+    required TResult orElse(),
+  }) {
+    if (initialize != null) {
+      return initialize(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initialize implements AboutUsEvent {
+  const factory _Initialize({required final SalesOrg salesOrg}) = _$_Initialize;
+
+  SalesOrg get salesOrg;
+  @JsonKey(ignore: true)
+  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchAboutUsInfoCopyWith<$Res> {
+  factory _$$_FetchAboutUsInfoCopyWith(
+          _$_FetchAboutUsInfo value, $Res Function(_$_FetchAboutUsInfo) then) =
+      __$$_FetchAboutUsInfoCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchAboutUsInfoCopyWithImpl<$Res>
+    extends _$AboutUsEventCopyWithImpl<$Res, _$_FetchAboutUsInfo>
+    implements _$$_FetchAboutUsInfoCopyWith<$Res> {
+  __$$_FetchAboutUsInfoCopyWithImpl(
+      _$_FetchAboutUsInfo _value, $Res Function(_$_FetchAboutUsInfo) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchAboutUsInfo implements _FetchAboutUsInfo {
+  const _$_FetchAboutUsInfo();
+
+  @override
+  String toString() {
+    return 'AboutUsEvent.fetchAboutUsInfo()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_FetchAboutUsInfo);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrg salesOrg) initialize,
+    required TResult Function() fetchAboutUsInfo,
+    required TResult Function() fetchAboutUsStaticInfo,
+  }) {
+    return fetchAboutUsInfo();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrg salesOrg)? initialize,
+    TResult? Function()? fetchAboutUsInfo,
+    TResult? Function()? fetchAboutUsStaticInfo,
+  }) {
+    return fetchAboutUsInfo?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrg salesOrg)? initialize,
+    TResult Function()? fetchAboutUsInfo,
+    TResult Function()? fetchAboutUsStaticInfo,
+    required TResult orElse(),
+  }) {
+    if (fetchAboutUsInfo != null) {
+      return fetchAboutUsInfo();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_FetchAboutUsInfo value) fetchAboutUsInfo,
+    required TResult Function(_FetchAboutUsStaticInfo value)
+        fetchAboutUsStaticInfo,
   }) {
     return fetchAboutUsInfo(this);
   }
@@ -283,6 +307,7 @@ class _$_FetchAboutUsInfo implements _FetchAboutUsInfo {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_FetchAboutUsInfo value)? fetchAboutUsInfo,
+    TResult? Function(_FetchAboutUsStaticInfo value)? fetchAboutUsStaticInfo,
   }) {
     return fetchAboutUsInfo?.call(this);
   }
@@ -292,6 +317,7 @@ class _$_FetchAboutUsInfo implements _FetchAboutUsInfo {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_FetchAboutUsInfo value)? fetchAboutUsInfo,
+    TResult Function(_FetchAboutUsStaticInfo value)? fetchAboutUsStaticInfo,
     required TResult orElse(),
   }) {
     if (fetchAboutUsInfo != null) {
@@ -302,17 +328,122 @@ class _$_FetchAboutUsInfo implements _FetchAboutUsInfo {
 }
 
 abstract class _FetchAboutUsInfo implements AboutUsEvent {
-  const factory _FetchAboutUsInfo({required final SalesOrg salesOrg}) =
-      _$_FetchAboutUsInfo;
+  const factory _FetchAboutUsInfo() = _$_FetchAboutUsInfo;
+}
 
-  SalesOrg get salesOrg;
-  @JsonKey(ignore: true)
-  _$$_FetchAboutUsInfoCopyWith<_$_FetchAboutUsInfo> get copyWith =>
-      throw _privateConstructorUsedError;
+/// @nodoc
+abstract class _$$_FetchAboutUsStaticInfoCopyWith<$Res> {
+  factory _$$_FetchAboutUsStaticInfoCopyWith(_$_FetchAboutUsStaticInfo value,
+          $Res Function(_$_FetchAboutUsStaticInfo) then) =
+      __$$_FetchAboutUsStaticInfoCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchAboutUsStaticInfoCopyWithImpl<$Res>
+    extends _$AboutUsEventCopyWithImpl<$Res, _$_FetchAboutUsStaticInfo>
+    implements _$$_FetchAboutUsStaticInfoCopyWith<$Res> {
+  __$$_FetchAboutUsStaticInfoCopyWithImpl(_$_FetchAboutUsStaticInfo _value,
+      $Res Function(_$_FetchAboutUsStaticInfo) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchAboutUsStaticInfo implements _FetchAboutUsStaticInfo {
+  const _$_FetchAboutUsStaticInfo();
+
+  @override
+  String toString() {
+    return 'AboutUsEvent.fetchAboutUsStaticInfo()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchAboutUsStaticInfo);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrg salesOrg) initialize,
+    required TResult Function() fetchAboutUsInfo,
+    required TResult Function() fetchAboutUsStaticInfo,
+  }) {
+    return fetchAboutUsStaticInfo();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrg salesOrg)? initialize,
+    TResult? Function()? fetchAboutUsInfo,
+    TResult? Function()? fetchAboutUsStaticInfo,
+  }) {
+    return fetchAboutUsStaticInfo?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrg salesOrg)? initialize,
+    TResult Function()? fetchAboutUsInfo,
+    TResult Function()? fetchAboutUsStaticInfo,
+    required TResult orElse(),
+  }) {
+    if (fetchAboutUsStaticInfo != null) {
+      return fetchAboutUsStaticInfo();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_FetchAboutUsInfo value) fetchAboutUsInfo,
+    required TResult Function(_FetchAboutUsStaticInfo value)
+        fetchAboutUsStaticInfo,
+  }) {
+    return fetchAboutUsStaticInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_FetchAboutUsInfo value)? fetchAboutUsInfo,
+    TResult? Function(_FetchAboutUsStaticInfo value)? fetchAboutUsStaticInfo,
+  }) {
+    return fetchAboutUsStaticInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_FetchAboutUsInfo value)? fetchAboutUsInfo,
+    TResult Function(_FetchAboutUsStaticInfo value)? fetchAboutUsStaticInfo,
+    required TResult orElse(),
+  }) {
+    if (fetchAboutUsStaticInfo != null) {
+      return fetchAboutUsStaticInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchAboutUsStaticInfo implements AboutUsEvent {
+  const factory _FetchAboutUsStaticInfo() = _$_FetchAboutUsStaticInfo;
 }
 
 /// @nodoc
 mixin _$AboutUsState {
+  SalesOrg get salesOrg => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   AboutUs get aboutUsInfo => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
@@ -330,7 +461,8 @@ abstract class $AboutUsStateCopyWith<$Res> {
       _$AboutUsStateCopyWithImpl<$Res, AboutUsState>;
   @useResult
   $Res call(
-      {bool isFetching,
+      {SalesOrg salesOrg,
+      bool isFetching,
       AboutUs aboutUsInfo,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
@@ -350,11 +482,16 @@ class _$AboutUsStateCopyWithImpl<$Res, $Val extends AboutUsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrg = null,
     Object? isFetching = null,
     Object? aboutUsInfo = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -388,7 +525,8 @@ abstract class _$$_AboutUsStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isFetching,
+      {SalesOrg salesOrg,
+      bool isFetching,
       AboutUs aboutUsInfo,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
@@ -407,11 +545,16 @@ class __$$_AboutUsStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrg = null,
     Object? isFetching = null,
     Object? aboutUsInfo = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_AboutUsState(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -432,10 +575,13 @@ class __$$_AboutUsStateCopyWithImpl<$Res>
 
 class _$_AboutUsState implements _AboutUsState {
   const _$_AboutUsState(
-      {required this.isFetching,
+      {required this.salesOrg,
+      required this.isFetching,
       required this.aboutUsInfo,
       required this.apiFailureOrSuccessOption});
 
+  @override
+  final SalesOrg salesOrg;
   @override
   final bool isFetching;
   @override
@@ -445,7 +591,7 @@ class _$_AboutUsState implements _AboutUsState {
 
   @override
   String toString() {
-    return 'AboutUsState(isFetching: $isFetching, aboutUsInfo: $aboutUsInfo, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'AboutUsState(salesOrg: $salesOrg, isFetching: $isFetching, aboutUsInfo: $aboutUsInfo, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -453,6 +599,8 @@ class _$_AboutUsState implements _AboutUsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AboutUsState &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.aboutUsInfo, aboutUsInfo) ||
@@ -463,8 +611,8 @@ class _$_AboutUsState implements _AboutUsState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isFetching, aboutUsInfo, apiFailureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, salesOrg, isFetching,
+      aboutUsInfo, apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -475,11 +623,14 @@ class _$_AboutUsState implements _AboutUsState {
 
 abstract class _AboutUsState implements AboutUsState {
   const factory _AboutUsState(
-      {required final bool isFetching,
+      {required final SalesOrg salesOrg,
+      required final bool isFetching,
       required final AboutUs aboutUsInfo,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption}) = _$_AboutUsState;
 
+  @override
+  SalesOrg get salesOrg;
   @override
   bool get isFetching;
   @override

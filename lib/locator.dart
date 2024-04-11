@@ -3119,7 +3119,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerFactory(
+  locator.registerLazySingleton(
     () => AboutUsBloc(
       repository: locator<AboutUsRepository>(),
     ),

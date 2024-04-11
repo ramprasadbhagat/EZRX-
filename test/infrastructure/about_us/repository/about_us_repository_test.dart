@@ -41,8 +41,9 @@ void main() {
 
   group('AboutUsRepository tests', () {
     test('get AboutUs Info successfully local', () async {
-      when(() => aboutUsLocalDataSource.getAboutUs())
-          .thenAnswer((invocation) async => AboutUs.empty());
+      when(
+        () => aboutUsLocalDataSource.getAboutUsStaticInfo(fakeSalesOrg.country),
+      ).thenAnswer((invocation) async => AboutUs.empty());
 
       final result = await aboutUsRepository.getAboutUsInfo(
         salesOrg: fakeSalesOrg,
@@ -53,8 +54,9 @@ void main() {
       );
     });
     test('get AboutUs Info fail local', () async {
-      when(() => aboutUsLocalDataSource.getAboutUs())
-          .thenThrow(MockException());
+      when(
+        () => aboutUsLocalDataSource.getAboutUsStaticInfo(fakeSalesOrg.country),
+      ).thenThrow(MockException());
 
       final result = await aboutUsRepository.getAboutUsInfo(
         salesOrg: fakeSalesOrg,

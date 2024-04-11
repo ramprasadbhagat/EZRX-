@@ -5,6 +5,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -60,6 +61,9 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
+
+class AboutUsBlocMock extends MockBloc<AboutUsEvent, AboutUsState>
+    implements AboutUsBloc {}
 
 class AccountSummaryBlocMock
     extends MockBloc<AccountSummaryEvent, AccountSummaryState>
@@ -143,6 +147,7 @@ void main() {
   late IntroBloc introBlocMock;
   late LoginFormBloc loginBlocMock;
   late AuthBloc authBlocMock;
+  late AboutUsBloc aboutUsBlocMock;
   late ScanMaterialInfoBloc scanMaterialInfoBlocMock;
   late AccountSummaryBloc accountSummaryMock;
   late AnnouncementBloc announcementBlocMock;
@@ -210,6 +215,7 @@ void main() {
       introBlocMock = IntroBlocMock();
       autoRouterMock = locator<AppRouter>();
       authBlocMock = AuthBlocMock();
+      aboutUsBlocMock = AboutUsBlocMock();
       scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
       accountSummaryMock = AccountSummaryBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
@@ -230,6 +236,7 @@ void main() {
           .thenReturn(AnnouncementState.initial());
       when(() => accountSummaryMock.state)
           .thenReturn(AccountSummaryState.initial());
+      when(() => aboutUsBlocMock.state).thenReturn(AboutUsState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
@@ -300,6 +307,9 @@ void main() {
               ),
               BlocProvider<ScanMaterialInfoBloc>(
                 create: (context) => scanMaterialInfoBlocMock,
+              ),
+              BlocProvider<AboutUsBloc>(
+                create: (context) => aboutUsBlocMock,
               ),
               BlocProvider<AccountSummaryBloc>(
                 create: (context) => accountSummaryMock,

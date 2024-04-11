@@ -21,7 +21,11 @@ class AboutUsBloc extends Bloc<AboutUsEvent, AboutUsState> {
     Emitter<AboutUsState> emit,
   ) async {
     await event.map(
-      initialize: (e) async => emit(AboutUsState.initial()),
+      initialize: (e) async => emit(
+        AboutUsState.initial().copyWith(
+          salesOrg: e.salesOrg,
+        ),
+      ),
       fetchAboutUsInfo: (e) async {
         emit(
           state.copyWith(
@@ -30,14 +34,36 @@ class AboutUsBloc extends Bloc<AboutUsEvent, AboutUsState> {
           ),
         );
         final failureOrSuccessOption = await repository.getAboutUsInfo(
-          salesOrg: e.salesOrg,
+          salesOrg: state.salesOrg,
         );
 
         failureOrSuccessOption.fold(
           (failure) {
+            add(const AboutUsEvent.fetchAboutUsStaticInfo());
+          },
+          (aboutUsInfo) {
             emit(
               state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
+                isFetching: false,
+                aboutUsInfo: aboutUsInfo,
+                apiFailureOrSuccessOption: none(),
+              ),
+            );
+          },
+        );
+      },
+      fetchAboutUsStaticInfo: (e) async {
+        final aboutUsFailureOrSuccessOption =
+            await repository.getAboutUsStaticInfo(
+          salesOrg: state.salesOrg,
+        );
+
+        aboutUsFailureOrSuccessOption.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption:
+                    optionOf(aboutUsFailureOrSuccessOption),
                 isFetching: false,
               ),
             );
@@ -47,7 +73,8 @@ class AboutUsBloc extends Bloc<AboutUsEvent, AboutUsState> {
               state.copyWith(
                 isFetching: false,
                 aboutUsInfo: aboutUsInfo,
-                apiFailureOrSuccessOption: none(),
+                apiFailureOrSuccessOption:
+                    optionOf(aboutUsFailureOrSuccessOption),
               ),
             );
           },

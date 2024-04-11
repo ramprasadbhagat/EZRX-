@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -60,105 +59,87 @@ class _AboutUsPageState extends State<AboutUsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => locator<AboutUsBloc>()
-        ..add(
-          AboutUsEvent.fetchAboutUsInfo(
-            salesOrg: context
-                .read<EligibilityBloc>()
-                .state
-                .salesOrganisation
-                .salesOrg,
-          ),
+    return Scaffold(
+      appBar: CustomAppBar.commonAppBar(
+        title: Text(
+          context.tr('About Us'),
         ),
-      child: Scaffold(
-        appBar: CustomAppBar.commonAppBar(
-          title: Text(
-            context.tr('About Us'),
-          ),
-          customerBlockedOrSuspended:
-              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
-        ),
-        body: BlocConsumer<AboutUsBloc, AboutUsState>(
-          listenWhen: (previous, current) =>
-              previous.apiFailureOrSuccessOption !=
-              current.apiFailureOrSuccessOption,
-          listener: (context, state) => state.apiFailureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) => ErrorUtils.handleApiFailure(context, failure),
-              (_) {},
-            ),
-          ),
-          buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching,
-          builder: (context, state) {
-            if (state.isFetching) {
-              return LoadingShimmer.logo(
-                key: WidgetKeys.loaderImage,
-              );
-            }
-            final aboutUsInfo = state.aboutUsInfo;
-
-            return RefreshIndicator(
-              onRefresh: () async => context.read<AboutUsBloc>().add(
-                    AboutUsEvent.fetchAboutUsInfo(
-                      salesOrg: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrganisation
-                          .salesOrg,
-                    ),
-                  ),
-              child: aboutUsInfo != AboutUs.empty()
-                  ? ListView(
-                      key: WidgetKeys.aboutUsListContent,
-                      controller: _scrollController,
-                      children: [
-                        CustomImage(
-                          imageUrl: aboutUsInfo.banner.media.src,
-                          errorWidget: const SizedBox.shrink(),
-                          width: double.infinity,
-                          height: 200,
-                        ),
-                        _HeaderSection(
-                          bannerTemplate: aboutUsInfo.banner,
-                        ),
-                        _OurCertificationsSection(
-                          certifications: aboutUsInfo.certifications,
-                        ),
-                        _WhoWeAreSection(
-                          whoWeAre: state.aboutUsInfo.whoWeAre,
-                        ),
-                        _OurPartnersSection(
-                          ourPartners: aboutUsInfo.ourPartners,
-                        ),
-                        ...aboutUsInfo.contentSplit.map(
-                          (e) => _ContentSplitSection(contentSplit: e),
-                        ),
-                      ],
-                    )
-                  : ListView(
-                      children: [
-                        SizedBox(height: MediaQuery.of(context).size.height),
-                      ],
-                    ),
-            );
-          },
-        ),
-        floatingActionButton: !_isScrollAtInitialPosition
-            ? FloatingActionButton(
-                key: WidgetKeys.aboutUsFloatingButton,
-                onPressed: () => _scrollToTop(),
-                mini: true,
-                backgroundColor: ZPColors.secondaryMustard,
-                child: const Icon(
-                  Icons.expand_less,
-                  color: ZPColors.black,
-                ),
-              )
-            : null,
+        customerBlockedOrSuspended:
+            context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
+      body: BlocConsumer<AboutUsBloc, AboutUsState>(
+        listenWhen: (previous, current) =>
+            previous.apiFailureOrSuccessOption !=
+            current.apiFailureOrSuccessOption,
+        listener: (context, state) => state.apiFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) => ErrorUtils.handleApiFailure(context, failure),
+            (_) {},
+          ),
+        ),
+        buildWhen: (previous, current) =>
+            previous.isFetching != current.isFetching,
+        builder: (context, state) {
+          if (state.isFetching) {
+            return LoadingShimmer.logo(
+              key: WidgetKeys.loaderImage,
+            );
+          }
+          final aboutUsInfo = state.aboutUsInfo;
+
+          return RefreshIndicator(
+            onRefresh: () async => context.read<AboutUsBloc>().add(
+                  const AboutUsEvent.fetchAboutUsInfo(),
+                ),
+            child: aboutUsInfo != AboutUs.empty()
+                ? ListView(
+                    key: WidgetKeys.aboutUsListContent,
+                    controller: _scrollController,
+                    children: [
+                      CustomImage(
+                        imageUrl: aboutUsInfo.banner.media.src,
+                        errorWidget: const SizedBox.shrink(),
+                        width: double.infinity,
+                        height: 200,
+                      ),
+                      _HeaderSection(
+                        bannerTemplate: aboutUsInfo.banner,
+                      ),
+                      _OurCertificationsSection(
+                        certifications: aboutUsInfo.certifications,
+                      ),
+                      _WhoWeAreSection(
+                        whoWeAre: state.aboutUsInfo.whoWeAre,
+                      ),
+                      _OurPartnersSection(
+                        ourPartners: aboutUsInfo.ourPartners,
+                      ),
+                      ...aboutUsInfo.contentSplit.map(
+                        (e) => _ContentSplitSection(contentSplit: e),
+                      ),
+                    ],
+                  )
+                : ListView(
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height),
+                    ],
+                  ),
+          );
+        },
+      ),
+      floatingActionButton: !_isScrollAtInitialPosition
+          ? FloatingActionButton(
+              key: WidgetKeys.aboutUsFloatingButton,
+              onPressed: () => _scrollToTop(),
+              mini: true,
+              backgroundColor: ZPColors.secondaryMustard,
+              child: const Icon(
+                Icons.expand_less,
+                color: ZPColors.black,
+              ),
+            )
+          : null,
     );
   }
 }

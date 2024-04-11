@@ -5,11 +5,12 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class AboutUsLocalDataSource {
-  Future<AboutUs> getAboutUs() async {
+  Future<AboutUs> getAboutUsStaticInfo(String country) async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/aboutUsResponse.json'),
+      await rootBundle
+          .loadString('assets/json/aboutUs${country}marketStaticContent.json'),
     );
 
-    return AboutUsDto.fromJson(res['data']['item']['components']).toDomain();
+    return AboutUsDto.fromJson(res).toDomain();
   }
 }

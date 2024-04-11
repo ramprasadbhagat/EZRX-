@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/domain/about_us/entities/about_us.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_local.dart';
 import 'package:ezrxmobile/infrastructure/about_us/repository/about_us_repository.dart';
@@ -10,18 +9,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/sales_organsiation_mock.dart';
+
 class AboutUsRepositoryRepo extends Mock implements AboutUsRepository {}
 
 void main() {
   late AboutUsRepositoryRepo repository;
   late AboutUs aboutUs;
-  final aboutUsState = AboutUsState.initial();
-  final salesOrg = SalesOrg('');
+  final aboutUsState = AboutUsState.initial().copyWith(
+    salesOrg: fakeMYSalesOrg,
+  );
+  final salesOrg = fakeMYSalesOrg;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = AboutUsRepositoryRepo();
-    aboutUs = await AboutUsLocalDataSource().getAboutUs();
+    aboutUs =
+        await AboutUsLocalDataSource().getAboutUsStaticInfo(salesOrg.country);
   });
 
   group('About Us Bloc', () {
@@ -30,7 +34,8 @@ void main() {
       build: () => AboutUsBloc(
         repository: repository,
       ),
-      act: (AboutUsBloc bloc) => bloc.add(const AboutUsEvent.initialize()),
+      act: (AboutUsBloc bloc) =>
+          bloc.add(AboutUsEvent.initialize(salesOrg: fakeMYSalesOrg)),
       expect: () => [aboutUsState],
     );
     blocTest(
@@ -38,6 +43,7 @@ void main() {
       build: () => AboutUsBloc(
         repository: repository,
       ),
+      seed: () => aboutUsState,
       setUp: () {
         when(
           () => repository.getAboutUsInfo(
@@ -48,12 +54,19 @@ void main() {
             ApiFailure.other('fake-error'),
           ),
         );
+        when(
+          () => repository.getAboutUsStaticInfo(
+            salesOrg: salesOrg,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
       },
       act: (AboutUsBloc bloc) => bloc
         ..add(
-          AboutUsEvent.fetchAboutUsInfo(
-            salesOrg: salesOrg,
-          ),
+          const AboutUsEvent.fetchAboutUsInfo(),
         ),
       expect: () => [
         aboutUsState.copyWith(isFetching: true),
@@ -80,11 +93,10 @@ void main() {
           ),
         );
       },
+      seed: () => aboutUsState,
       act: (AboutUsBloc bloc) => bloc
         ..add(
-          AboutUsEvent.fetchAboutUsInfo(
-            salesOrg: salesOrg,
-          ),
+          const AboutUsEvent.fetchAboutUsInfo(),
         ),
       expect: () => [
         aboutUsState.copyWith(isFetching: true),

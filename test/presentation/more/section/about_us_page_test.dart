@@ -48,7 +48,9 @@ void main() {
     aboutUsBloc = AboutUsBlocMock();
     eligibilityBloc = EligibilityBlockMock();
     appRouter = locator<AppRouter>();
-    aboutUs = (await AboutUsLocalDataSource().getAboutUs()).copyWith(
+    aboutUs = (await AboutUsLocalDataSource()
+            .getAboutUsStaticInfo(fakeMYSalesOrg.country))
+        .copyWith(
       banner: BannerTemplate.empty(),
       ourPartners: MediaListTemplate.empty(),
     );
@@ -66,6 +68,9 @@ void main() {
       providers: [
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBloc,
+        ),
+        BlocProvider<AboutUsBloc>(
+          create: (context) => aboutUsBloc,
         ),
       ],
       child: const AboutUsPage(),
@@ -170,7 +175,7 @@ void main() {
       await tester.pumpAndSettle();
       verify(
             () => aboutUsBloc.add(
-              AboutUsEvent.fetchAboutUsInfo(salesOrg: fakeMYSalesOrg),
+              const AboutUsEvent.fetchAboutUsInfo(),
             ),
           ).callCount >
           0;

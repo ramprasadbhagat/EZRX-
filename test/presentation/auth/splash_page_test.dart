@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -124,6 +125,7 @@ void main() {
   late PaymentTermBloc paymentTermBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
+  late AboutUsBloc aboutUsBlocMock;
   late UserRestrictionListBloc userRestrictionListBlocMock;
   late UsageCodeBloc usageCodeBlocMock;
   late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
@@ -268,6 +270,7 @@ void main() {
       creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsBlocMock();
       loginFormBloc = LoginFormBlocMock();
       mockNotificationBloc = NotificationBlocMock();
+      aboutUsBlocMock = AboutUsBlocMock();
       mockPriceOverrideBloc = PriceOverrideBlocMock();
       allInvoicesBlocMock = ZPAllInvoicesBlocMock();
       allCreditsBlocMock = ZPAllCreditsBlocMock();
@@ -313,6 +316,7 @@ void main() {
       when(() => salesRepBlocMock.state).thenReturn(SalesRepState.initial());
       when(() => aupTcBlocMock.state).thenReturn(AupTcState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => aboutUsBlocMock.state).thenReturn(AboutUsState.initial());
       when(() => paymentCustomerInformationBlocMock.state)
           .thenReturn(PaymentCustomerInformationState.initial());
       when(() => paymentTermBlocMock.state)
@@ -427,6 +431,9 @@ void main() {
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            BlocProvider<AboutUsBloc>(
+              create: (context) => aboutUsBlocMock,
+            ),
             BlocProvider<UserRestrictionListBloc>(
               create: (context) => userRestrictionListBlocMock,
             ),

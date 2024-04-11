@@ -7,4 +7,8 @@ abstract class IAboutUsRepository {
   Future<Either<ApiFailure, AboutUs>> getAboutUsInfo({
     required SalesOrg salesOrg,
   });
+
+  Future<Either<ApiFailure, AboutUs>> getAboutUsStaticInfo({
+    required SalesOrg salesOrg,
+  });
 }

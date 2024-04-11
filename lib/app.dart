@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
+import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
@@ -148,19 +149,19 @@ Future<void> initialSetup({required Flavor flavor}) async {
       await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
     }
   } else {
-     FlutterError.onError = (errorDetails) {
-        _crashlytics.recordFlutterFatalError(errorDetails);
-      };
-      // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-      PlatformDispatcher.instance.onError = (error, stack) {
-        if (!kIsWeb) {
-          _crashlytics.recordError(error, stack);
-          
-          return true;
-        }
+    FlutterError.onError = (errorDetails) {
+      _crashlytics.recordFlutterFatalError(errorDetails);
+    };
+    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+    PlatformDispatcher.instance.onError = (error, stack) {
+      if (!kIsWeb) {
+        _crashlytics.recordError(error, stack);
 
-        return false;
-      };
+        return true;
+      }
+
+      return false;
+    };
   }
 
   await locator<PackageInfoService>().init();
@@ -532,6 +533,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<DownloadECreditBloc>(
           create: (context) => locator<DownloadECreditBloc>(),
+        ),
+        BlocProvider<AboutUsBloc>(
+          create: (context) => locator<AboutUsBloc>(),
         ),
       ],
       child: MaterialApp.router(
