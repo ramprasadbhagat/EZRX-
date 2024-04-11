@@ -28,7 +28,8 @@ class _ReturnItem extends StatelessWidget {
                 .allowReturnsOutsidePolicy,
           ))
             const OutsideReturnPolicyTag(),
-          _ReturnMaterialExpAndStatus(returnMaterial: returnMaterial),
+          if (!returnMaterial.isMarketPlace)
+            _ReturnMaterialExpAndStatus(returnMaterial: returnMaterial),
           const SizedBox(height: 8.0),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,

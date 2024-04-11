@@ -26,8 +26,12 @@ class _PreviousButton extends StatelessWidget {
         : IconButton(
             key: WidgetKeys.backButton,
             onPressed: () {
+              final step = tabController.index;
+              context.read<NewRequestBloc>().add(
+                    NewRequestEvent.validateStep(step: step),
+                  );
               tabController.animateTo(
-                tabController.index - 1,
+                step - 1,
               );
             },
             icon: const Icon(Icons.chevron_left),

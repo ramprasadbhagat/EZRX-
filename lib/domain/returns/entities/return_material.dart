@@ -82,4 +82,8 @@ class ReturnMaterial with _$ReturnMaterial {
         unitPrice: unitPrice,
         balanceQty: balanceQuantity,
       );
+
+  List<ReturnMaterial> get bonusItemsBelongToZPorMP => isMarketPlace
+      ? bonusItems.map((e) => e.copyWith(isMarketPlace: true)).toList()
+      : bonusItems;
 }

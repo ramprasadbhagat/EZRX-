@@ -1,10 +1,12 @@
 part of 'package:ezrxmobile/presentation/returns/new_request/new_request_page.dart';
 
 class _NextButton extends StatelessWidget {
+  final bool validation;
   final TabController tabController;
   final bool nextAllowed;
   const _NextButton({
     Key? key,
+    required this.validation,
     required this.tabController,
     required this.nextAllowed,
   }) : super(key: key);
@@ -17,10 +19,12 @@ class _NextButton extends StatelessWidget {
           ? null
           : () {
               final step = tabController.index + 1;
+
               context.read<NewRequestBloc>().add(
                     NewRequestEvent.validateStep(step: step),
                   );
-              if (nextAllowed) {
+
+              if (validation) {
                 trackMixpanelEvent(
                   TrackingEvents.newReturnRequestStep,
                   props: <String, dynamic>{

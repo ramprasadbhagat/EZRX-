@@ -230,7 +230,11 @@ void main() {
     testWidgets(' => check Batch and EXP', (WidgetTester tester) async {
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
-          selectedItems: [fakeReturnMaterial],
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              isMarketPlace: false,
+            ),
+          ],
           invoiceDetails: [
             InvoiceDetails.empty().copyWith(
               returnItemDetailsList: [
@@ -252,6 +256,7 @@ void main() {
       );
       expect(expires, findsWidgets);
     });
+
     testWidgets(' => display Override Price for return material item',
         (WidgetTester tester) async {
       when(() => newRequestBlocMock.state).thenReturn(

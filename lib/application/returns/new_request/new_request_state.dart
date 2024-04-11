@@ -40,6 +40,11 @@ class NewRequestState with _$NewRequestState {
         (item) => selectedItems.first.isMarketPlace == item.isMarketPlace,
       );
 
+  bool get validateForStep1 =>
+      selectedItems.isNotEmpty && !areSelectedReturnItemsInvalid;
+
+  bool get validateForStep2 => isAdditionInfoValid && isReturnQuantityValid;
+
   bool get isAdditionInfoValid =>
       validItemDetails.isNotEmpty &&
       validItemDetails.every((details) => details.isValid);

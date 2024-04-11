@@ -232,16 +232,17 @@ class NewRequestPage extends StatelessWidget {
                                   const Spacer(),
                                   if (step == 1)
                                     _NextButton(
+                                      validation: state.validateForStep1,
                                       tabController: tabController,
-                                      nextAllowed: state
-                                              .selectedItems.isNotEmpty &&
-                                          !state.areSelectedReturnItemsInvalid,
+                                      nextAllowed: !state.showErrorMessages ||
+                                          state.validateForStep1,
                                     ),
                                   if (step == 2)
                                     _NextButton(
+                                      validation: state.validateForStep2,
                                       tabController: tabController,
-                                      nextAllowed: state.isAdditionInfoValid &&
-                                          state.isReturnQuantityValid,
+                                      nextAllowed: !state.showErrorMessages ||
+                                          state.validateForStep2,
                                     ),
                                   if (step == 3) const _SubmitButton(),
                                 ],

@@ -11,7 +11,7 @@ class _BonusItemSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bonusItems = returnItem.bonusItems;
+    final bonusItems = returnItem.bonusItemsBelongToZPorMP;
 
     return bonusItems.isEmpty
         ? const SizedBox.shrink()

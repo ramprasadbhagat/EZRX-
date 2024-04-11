@@ -12,7 +12,7 @@ part of 'new_request_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NewRequestEvent {
@@ -147,20 +147,20 @@ class _$NewRequestEventCopyWithImpl<$Res, $Val extends NewRequestEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -168,7 +168,7 @@ class __$$_InitializedCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -179,8 +179,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized({required this.salesOrg});
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -191,10 +191,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -205,8 +205,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -345,19 +345,19 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements NewRequestEvent {
   const factory _Initialized({required final SalesOrg salesOrg}) =
-      _$_Initialized;
+      _$InitializedImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ToggleReturnItemCopyWith<$Res> {
-  factory _$$_ToggleReturnItemCopyWith(
-          _$_ToggleReturnItem value, $Res Function(_$_ToggleReturnItem) then) =
-      __$$_ToggleReturnItemCopyWithImpl<$Res>;
+abstract class _$$ToggleReturnItemImplCopyWith<$Res> {
+  factory _$$ToggleReturnItemImplCopyWith(_$ToggleReturnItemImpl value,
+          $Res Function(_$ToggleReturnItemImpl) then) =
+      __$$ToggleReturnItemImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnMaterial item, bool selected});
 
@@ -365,11 +365,11 @@ abstract class _$$_ToggleReturnItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ToggleReturnItemCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_ToggleReturnItem>
-    implements _$$_ToggleReturnItemCopyWith<$Res> {
-  __$$_ToggleReturnItemCopyWithImpl(
-      _$_ToggleReturnItem _value, $Res Function(_$_ToggleReturnItem) _then)
+class __$$ToggleReturnItemImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$ToggleReturnItemImpl>
+    implements _$$ToggleReturnItemImplCopyWith<$Res> {
+  __$$ToggleReturnItemImplCopyWithImpl(_$ToggleReturnItemImpl _value,
+      $Res Function(_$ToggleReturnItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -378,7 +378,7 @@ class __$$_ToggleReturnItemCopyWithImpl<$Res>
     Object? item = null,
     Object? selected = null,
   }) {
-    return _then(_$_ToggleReturnItem(
+    return _then(_$ToggleReturnItemImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -401,8 +401,8 @@ class __$$_ToggleReturnItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ToggleReturnItem implements _ToggleReturnItem {
-  const _$_ToggleReturnItem({required this.item, required this.selected});
+class _$ToggleReturnItemImpl implements _ToggleReturnItem {
+  const _$ToggleReturnItemImpl({required this.item, required this.selected});
 
   @override
   final ReturnMaterial item;
@@ -415,10 +415,10 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ToggleReturnItem &&
+            other is _$ToggleReturnItemImpl &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.selected, selected) ||
                 other.selected == selected));
@@ -430,8 +430,9 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ToggleReturnItemCopyWith<_$_ToggleReturnItem> get copyWith =>
-      __$$_ToggleReturnItemCopyWithImpl<_$_ToggleReturnItem>(this, _$identity);
+  _$$ToggleReturnItemImplCopyWith<_$ToggleReturnItemImpl> get copyWith =>
+      __$$ToggleReturnItemImplCopyWithImpl<_$ToggleReturnItemImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -571,20 +572,20 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
 abstract class _ToggleReturnItem implements NewRequestEvent {
   const factory _ToggleReturnItem(
       {required final ReturnMaterial item,
-      required final bool selected}) = _$_ToggleReturnItem;
+      required final bool selected}) = _$ToggleReturnItemImpl;
 
   ReturnMaterial get item;
   bool get selected;
   @JsonKey(ignore: true)
-  _$$_ToggleReturnItemCopyWith<_$_ToggleReturnItem> get copyWith =>
+  _$$ToggleReturnItemImplCopyWith<_$ToggleReturnItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ToggleBonusItemCopyWith<$Res> {
-  factory _$$_ToggleBonusItemCopyWith(
-          _$_ToggleBonusItem value, $Res Function(_$_ToggleBonusItem) then) =
-      __$$_ToggleBonusItemCopyWithImpl<$Res>;
+abstract class _$$ToggleBonusItemImplCopyWith<$Res> {
+  factory _$$ToggleBonusItemImplCopyWith(_$ToggleBonusItemImpl value,
+          $Res Function(_$ToggleBonusItemImpl) then) =
+      __$$ToggleBonusItemImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnMaterial item, bool included});
 
@@ -592,11 +593,11 @@ abstract class _$$_ToggleBonusItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ToggleBonusItemCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_ToggleBonusItem>
-    implements _$$_ToggleBonusItemCopyWith<$Res> {
-  __$$_ToggleBonusItemCopyWithImpl(
-      _$_ToggleBonusItem _value, $Res Function(_$_ToggleBonusItem) _then)
+class __$$ToggleBonusItemImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$ToggleBonusItemImpl>
+    implements _$$ToggleBonusItemImplCopyWith<$Res> {
+  __$$ToggleBonusItemImplCopyWithImpl(
+      _$ToggleBonusItemImpl _value, $Res Function(_$ToggleBonusItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -605,7 +606,7 @@ class __$$_ToggleBonusItemCopyWithImpl<$Res>
     Object? item = null,
     Object? included = null,
   }) {
-    return _then(_$_ToggleBonusItem(
+    return _then(_$ToggleBonusItemImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -628,8 +629,8 @@ class __$$_ToggleBonusItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ToggleBonusItem implements _ToggleBonusItem {
-  const _$_ToggleBonusItem({required this.item, required this.included});
+class _$ToggleBonusItemImpl implements _ToggleBonusItem {
+  const _$ToggleBonusItemImpl({required this.item, required this.included});
 
   @override
   final ReturnMaterial item;
@@ -642,10 +643,10 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ToggleBonusItem &&
+            other is _$ToggleBonusItemImpl &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.included, included) ||
                 other.included == included));
@@ -657,8 +658,9 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ToggleBonusItemCopyWith<_$_ToggleBonusItem> get copyWith =>
-      __$$_ToggleBonusItemCopyWithImpl<_$_ToggleBonusItem>(this, _$identity);
+  _$$ToggleBonusItemImplCopyWith<_$ToggleBonusItemImpl> get copyWith =>
+      __$$ToggleBonusItemImplCopyWithImpl<_$ToggleBonusItemImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -798,20 +800,20 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
 abstract class _ToggleBonusItem implements NewRequestEvent {
   const factory _ToggleBonusItem(
       {required final ReturnMaterial item,
-      required final bool included}) = _$_ToggleBonusItem;
+      required final bool included}) = _$ToggleBonusItemImpl;
 
   ReturnMaterial get item;
   bool get included;
   @JsonKey(ignore: true)
-  _$$_ToggleBonusItemCopyWith<_$_ToggleBonusItem> get copyWith =>
+  _$$ToggleBonusItemImplCopyWith<_$ToggleBonusItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AdditionInfoChangedCopyWith<$Res> {
-  factory _$$_AdditionInfoChangedCopyWith(_$_AdditionInfoChanged value,
-          $Res Function(_$_AdditionInfoChanged) then) =
-      __$$_AdditionInfoChangedCopyWithImpl<$Res>;
+abstract class _$$AdditionInfoChangedImplCopyWith<$Res> {
+  factory _$$AdditionInfoChangedImplCopyWith(_$AdditionInfoChangedImpl value,
+          $Res Function(_$AdditionInfoChangedImpl) then) =
+      __$$AdditionInfoChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnItemDetails additionInfo});
 
@@ -819,11 +821,11 @@ abstract class _$$_AdditionInfoChangedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AdditionInfoChangedCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_AdditionInfoChanged>
-    implements _$$_AdditionInfoChangedCopyWith<$Res> {
-  __$$_AdditionInfoChangedCopyWithImpl(_$_AdditionInfoChanged _value,
-      $Res Function(_$_AdditionInfoChanged) _then)
+class __$$AdditionInfoChangedImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$AdditionInfoChangedImpl>
+    implements _$$AdditionInfoChangedImplCopyWith<$Res> {
+  __$$AdditionInfoChangedImplCopyWithImpl(_$AdditionInfoChangedImpl _value,
+      $Res Function(_$AdditionInfoChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -831,7 +833,7 @@ class __$$_AdditionInfoChangedCopyWithImpl<$Res>
   $Res call({
     Object? additionInfo = null,
   }) {
-    return _then(_$_AdditionInfoChanged(
+    return _then(_$AdditionInfoChangedImpl(
       additionInfo: null == additionInfo
           ? _value.additionInfo
           : additionInfo // ignore: cast_nullable_to_non_nullable
@@ -850,8 +852,8 @@ class __$$_AdditionInfoChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdditionInfoChanged implements _AdditionInfoChanged {
-  const _$_AdditionInfoChanged({required this.additionInfo});
+class _$AdditionInfoChangedImpl implements _AdditionInfoChanged {
+  const _$AdditionInfoChangedImpl({required this.additionInfo});
 
   @override
   final ReturnItemDetails additionInfo;
@@ -862,10 +864,10 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionInfoChanged &&
+            other is _$AdditionInfoChangedImpl &&
             (identical(other.additionInfo, additionInfo) ||
                 other.additionInfo == additionInfo));
   }
@@ -876,8 +878,8 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdditionInfoChangedCopyWith<_$_AdditionInfoChanged> get copyWith =>
-      __$$_AdditionInfoChangedCopyWithImpl<_$_AdditionInfoChanged>(
+  _$$AdditionInfoChangedImplCopyWith<_$AdditionInfoChangedImpl> get copyWith =>
+      __$$AdditionInfoChangedImplCopyWithImpl<_$AdditionInfoChangedImpl>(
           this, _$identity);
 
   @override
@@ -1017,20 +1019,21 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
 
 abstract class _AdditionInfoChanged implements NewRequestEvent {
   const factory _AdditionInfoChanged(
-      {required final ReturnItemDetails additionInfo}) = _$_AdditionInfoChanged;
+          {required final ReturnItemDetails additionInfo}) =
+      _$AdditionInfoChangedImpl;
 
   ReturnItemDetails get additionInfo;
   @JsonKey(ignore: true)
-  _$$_AdditionInfoChangedCopyWith<_$_AdditionInfoChanged> get copyWith =>
+  _$$AdditionInfoChangedImplCopyWith<_$AdditionInfoChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateRequestCounterOfferCopyWith<$Res> {
-  factory _$$_UpdateRequestCounterOfferCopyWith(
-          _$_UpdateRequestCounterOffer value,
-          $Res Function(_$_UpdateRequestCounterOffer) then) =
-      __$$_UpdateRequestCounterOfferCopyWithImpl<$Res>;
+abstract class _$$UpdateRequestCounterOfferImplCopyWith<$Res> {
+  factory _$$UpdateRequestCounterOfferImplCopyWith(
+          _$UpdateRequestCounterOfferImpl value,
+          $Res Function(_$UpdateRequestCounterOfferImpl) then) =
+      __$$UpdateRequestCounterOfferImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {CounterOfferValue counterOfferValue,
@@ -1039,12 +1042,12 @@ abstract class _$$_UpdateRequestCounterOfferCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateRequestCounterOfferCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_UpdateRequestCounterOffer>
-    implements _$$_UpdateRequestCounterOfferCopyWith<$Res> {
-  __$$_UpdateRequestCounterOfferCopyWithImpl(
-      _$_UpdateRequestCounterOffer _value,
-      $Res Function(_$_UpdateRequestCounterOffer) _then)
+class __$$UpdateRequestCounterOfferImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$UpdateRequestCounterOfferImpl>
+    implements _$$UpdateRequestCounterOfferImplCopyWith<$Res> {
+  __$$UpdateRequestCounterOfferImplCopyWithImpl(
+      _$UpdateRequestCounterOfferImpl _value,
+      $Res Function(_$UpdateRequestCounterOfferImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1054,7 +1057,7 @@ class __$$_UpdateRequestCounterOfferCopyWithImpl<$Res>
     Object? uuid = null,
     Object? isChangeMaterialCounterOffer = null,
   }) {
-    return _then(_$_UpdateRequestCounterOffer(
+    return _then(_$UpdateRequestCounterOfferImpl(
       counterOfferValue: null == counterOfferValue
           ? _value.counterOfferValue
           : counterOfferValue // ignore: cast_nullable_to_non_nullable
@@ -1073,8 +1076,8 @@ class __$$_UpdateRequestCounterOfferCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateRequestCounterOffer implements _UpdateRequestCounterOffer {
-  const _$_UpdateRequestCounterOffer(
+class _$UpdateRequestCounterOfferImpl implements _UpdateRequestCounterOffer {
+  const _$UpdateRequestCounterOfferImpl(
       {required this.counterOfferValue,
       required this.uuid,
       required this.isChangeMaterialCounterOffer});
@@ -1092,10 +1095,10 @@ class _$_UpdateRequestCounterOffer implements _UpdateRequestCounterOffer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateRequestCounterOffer &&
+            other is _$UpdateRequestCounterOfferImpl &&
             (identical(other.counterOfferValue, counterOfferValue) ||
                 other.counterOfferValue == counterOfferValue) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
@@ -1112,9 +1115,9 @@ class _$_UpdateRequestCounterOffer implements _UpdateRequestCounterOffer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateRequestCounterOfferCopyWith<_$_UpdateRequestCounterOffer>
-      get copyWith => __$$_UpdateRequestCounterOfferCopyWithImpl<
-          _$_UpdateRequestCounterOffer>(this, _$identity);
+  _$$UpdateRequestCounterOfferImplCopyWith<_$UpdateRequestCounterOfferImpl>
+      get copyWith => __$$UpdateRequestCounterOfferImplCopyWithImpl<
+          _$UpdateRequestCounterOfferImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1259,31 +1262,31 @@ abstract class _UpdateRequestCounterOffer implements NewRequestEvent {
           {required final CounterOfferValue counterOfferValue,
           required final String uuid,
           required final bool isChangeMaterialCounterOffer}) =
-      _$_UpdateRequestCounterOffer;
+      _$UpdateRequestCounterOfferImpl;
 
   CounterOfferValue get counterOfferValue;
   String get uuid;
   bool get isChangeMaterialCounterOffer;
   @JsonKey(ignore: true)
-  _$$_UpdateRequestCounterOfferCopyWith<_$_UpdateRequestCounterOffer>
+  _$$UpdateRequestCounterOfferImplCopyWith<_$UpdateRequestCounterOfferImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ToggleFilesCopyWith<$Res> {
-  factory _$$_ToggleFilesCopyWith(
-          _$_ToggleFiles value, $Res Function(_$_ToggleFiles) then) =
-      __$$_ToggleFilesCopyWithImpl<$Res>;
+abstract class _$$ToggleFilesImplCopyWith<$Res> {
+  factory _$$ToggleFilesImplCopyWith(
+          _$ToggleFilesImpl value, $Res Function(_$ToggleFilesImpl) then) =
+      __$$ToggleFilesImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String uuid, List<ReturnRequestAttachment> files, bool included});
 }
 
 /// @nodoc
-class __$$_ToggleFilesCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_ToggleFiles>
-    implements _$$_ToggleFilesCopyWith<$Res> {
-  __$$_ToggleFilesCopyWithImpl(
-      _$_ToggleFiles _value, $Res Function(_$_ToggleFiles) _then)
+class __$$ToggleFilesImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$ToggleFilesImpl>
+    implements _$$ToggleFilesImplCopyWith<$Res> {
+  __$$ToggleFilesImplCopyWithImpl(
+      _$ToggleFilesImpl _value, $Res Function(_$ToggleFilesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1293,7 +1296,7 @@ class __$$_ToggleFilesCopyWithImpl<$Res>
     Object? files = null,
     Object? included = null,
   }) {
-    return _then(_$_ToggleFiles(
+    return _then(_$ToggleFilesImpl(
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -1312,8 +1315,8 @@ class __$$_ToggleFilesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ToggleFiles implements _ToggleFiles {
-  const _$_ToggleFiles(
+class _$ToggleFilesImpl implements _ToggleFiles {
+  const _$ToggleFilesImpl(
       {required this.uuid,
       required final List<ReturnRequestAttachment> files,
       required this.included})
@@ -1338,10 +1341,10 @@ class _$_ToggleFiles implements _ToggleFiles {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ToggleFiles &&
+            other is _$ToggleFilesImpl &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             const DeepCollectionEquality().equals(other._files, _files) &&
             (identical(other.included, included) ||
@@ -1355,8 +1358,8 @@ class _$_ToggleFiles implements _ToggleFiles {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ToggleFilesCopyWith<_$_ToggleFiles> get copyWith =>
-      __$$_ToggleFilesCopyWithImpl<_$_ToggleFiles>(this, _$identity);
+  _$$ToggleFilesImplCopyWith<_$ToggleFilesImpl> get copyWith =>
+      __$$ToggleFilesImplCopyWithImpl<_$ToggleFilesImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1497,31 +1500,31 @@ abstract class _ToggleFiles implements NewRequestEvent {
   const factory _ToggleFiles(
       {required final String uuid,
       required final List<ReturnRequestAttachment> files,
-      required final bool included}) = _$_ToggleFiles;
+      required final bool included}) = _$ToggleFilesImpl;
 
   String get uuid;
   List<ReturnRequestAttachment> get files;
   bool get included;
   @JsonKey(ignore: true)
-  _$$_ToggleFilesCopyWith<_$_ToggleFiles> get copyWith =>
+  _$$ToggleFilesImplCopyWith<_$ToggleFilesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ValidateStepCopyWith<$Res> {
-  factory _$$_ValidateStepCopyWith(
-          _$_ValidateStep value, $Res Function(_$_ValidateStep) then) =
-      __$$_ValidateStepCopyWithImpl<$Res>;
+abstract class _$$ValidateStepImplCopyWith<$Res> {
+  factory _$$ValidateStepImplCopyWith(
+          _$ValidateStepImpl value, $Res Function(_$ValidateStepImpl) then) =
+      __$$ValidateStepImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int step});
 }
 
 /// @nodoc
-class __$$_ValidateStepCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_ValidateStep>
-    implements _$$_ValidateStepCopyWith<$Res> {
-  __$$_ValidateStepCopyWithImpl(
-      _$_ValidateStep _value, $Res Function(_$_ValidateStep) _then)
+class __$$ValidateStepImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$ValidateStepImpl>
+    implements _$$ValidateStepImplCopyWith<$Res> {
+  __$$ValidateStepImplCopyWithImpl(
+      _$ValidateStepImpl _value, $Res Function(_$ValidateStepImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1529,7 +1532,7 @@ class __$$_ValidateStepCopyWithImpl<$Res>
   $Res call({
     Object? step = null,
   }) {
-    return _then(_$_ValidateStep(
+    return _then(_$ValidateStepImpl(
       step: null == step
           ? _value.step
           : step // ignore: cast_nullable_to_non_nullable
@@ -1540,8 +1543,8 @@ class __$$_ValidateStepCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ValidateStep implements _ValidateStep {
-  const _$_ValidateStep({required this.step});
+class _$ValidateStepImpl implements _ValidateStep {
+  const _$ValidateStepImpl({required this.step});
 
   @override
   final int step;
@@ -1552,10 +1555,10 @@ class _$_ValidateStep implements _ValidateStep {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ValidateStep &&
+            other is _$ValidateStepImpl &&
             (identical(other.step, step) || other.step == step));
   }
 
@@ -1565,8 +1568,8 @@ class _$_ValidateStep implements _ValidateStep {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ValidateStepCopyWith<_$_ValidateStep> get copyWith =>
-      __$$_ValidateStepCopyWithImpl<_$_ValidateStep>(this, _$identity);
+  _$$ValidateStepImplCopyWith<_$ValidateStepImpl> get copyWith =>
+      __$$ValidateStepImplCopyWithImpl<_$ValidateStepImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1704,29 +1707,31 @@ class _$_ValidateStep implements _ValidateStep {
 }
 
 abstract class _ValidateStep implements NewRequestEvent {
-  const factory _ValidateStep({required final int step}) = _$_ValidateStep;
+  const factory _ValidateStep({required final int step}) = _$ValidateStepImpl;
 
   int get step;
   @JsonKey(ignore: true)
-  _$$_ValidateStepCopyWith<_$_ValidateStep> get copyWith =>
+  _$$ValidateStepImplCopyWith<_$ValidateStepImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ReturnReferenceChangedCopyWith<$Res> {
-  factory _$$_ReturnReferenceChangedCopyWith(_$_ReturnReferenceChanged value,
-          $Res Function(_$_ReturnReferenceChanged) then) =
-      __$$_ReturnReferenceChangedCopyWithImpl<$Res>;
+abstract class _$$ReturnReferenceChangedImplCopyWith<$Res> {
+  factory _$$ReturnReferenceChangedImplCopyWith(
+          _$ReturnReferenceChangedImpl value,
+          $Res Function(_$ReturnReferenceChangedImpl) then) =
+      __$$ReturnReferenceChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String returnReference});
 }
 
 /// @nodoc
-class __$$_ReturnReferenceChangedCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_ReturnReferenceChanged>
-    implements _$$_ReturnReferenceChangedCopyWith<$Res> {
-  __$$_ReturnReferenceChangedCopyWithImpl(_$_ReturnReferenceChanged _value,
-      $Res Function(_$_ReturnReferenceChanged) _then)
+class __$$ReturnReferenceChangedImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$ReturnReferenceChangedImpl>
+    implements _$$ReturnReferenceChangedImplCopyWith<$Res> {
+  __$$ReturnReferenceChangedImplCopyWithImpl(
+      _$ReturnReferenceChangedImpl _value,
+      $Res Function(_$ReturnReferenceChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1734,7 +1739,7 @@ class __$$_ReturnReferenceChangedCopyWithImpl<$Res>
   $Res call({
     Object? returnReference = null,
   }) {
-    return _then(_$_ReturnReferenceChanged(
+    return _then(_$ReturnReferenceChangedImpl(
       null == returnReference
           ? _value.returnReference
           : returnReference // ignore: cast_nullable_to_non_nullable
@@ -1745,8 +1750,8 @@ class __$$_ReturnReferenceChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
-  const _$_ReturnReferenceChanged(this.returnReference);
+class _$ReturnReferenceChangedImpl implements _ReturnReferenceChanged {
+  const _$ReturnReferenceChangedImpl(this.returnReference);
 
   @override
   final String returnReference;
@@ -1757,10 +1762,10 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnReferenceChanged &&
+            other is _$ReturnReferenceChangedImpl &&
             (identical(other.returnReference, returnReference) ||
                 other.returnReference == returnReference));
   }
@@ -1771,9 +1776,9 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnReferenceChangedCopyWith<_$_ReturnReferenceChanged> get copyWith =>
-      __$$_ReturnReferenceChangedCopyWithImpl<_$_ReturnReferenceChanged>(
-          this, _$identity);
+  _$$ReturnReferenceChangedImplCopyWith<_$ReturnReferenceChangedImpl>
+      get copyWith => __$$ReturnReferenceChangedImplCopyWithImpl<
+          _$ReturnReferenceChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1912,31 +1917,32 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
 
 abstract class _ReturnReferenceChanged implements NewRequestEvent {
   const factory _ReturnReferenceChanged(final String returnReference) =
-      _$_ReturnReferenceChanged;
+      _$ReturnReferenceChangedImpl;
 
   String get returnReference;
   @JsonKey(ignore: true)
-  _$$_ReturnReferenceChangedCopyWith<_$_ReturnReferenceChanged> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReturnReferenceChangedImplCopyWith<_$ReturnReferenceChangedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SpecialInstructionsChangedCopyWith<$Res> {
-  factory _$$_SpecialInstructionsChangedCopyWith(
-          _$_SpecialInstructionsChanged value,
-          $Res Function(_$_SpecialInstructionsChanged) then) =
-      __$$_SpecialInstructionsChangedCopyWithImpl<$Res>;
+abstract class _$$SpecialInstructionsChangedImplCopyWith<$Res> {
+  factory _$$SpecialInstructionsChangedImplCopyWith(
+          _$SpecialInstructionsChangedImpl value,
+          $Res Function(_$SpecialInstructionsChangedImpl) then) =
+      __$$SpecialInstructionsChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String specialInstructions});
 }
 
 /// @nodoc
-class __$$_SpecialInstructionsChangedCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_SpecialInstructionsChanged>
-    implements _$$_SpecialInstructionsChangedCopyWith<$Res> {
-  __$$_SpecialInstructionsChangedCopyWithImpl(
-      _$_SpecialInstructionsChanged _value,
-      $Res Function(_$_SpecialInstructionsChanged) _then)
+class __$$SpecialInstructionsChangedImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res,
+        _$SpecialInstructionsChangedImpl>
+    implements _$$SpecialInstructionsChangedImplCopyWith<$Res> {
+  __$$SpecialInstructionsChangedImplCopyWithImpl(
+      _$SpecialInstructionsChangedImpl _value,
+      $Res Function(_$SpecialInstructionsChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1944,7 +1950,7 @@ class __$$_SpecialInstructionsChangedCopyWithImpl<$Res>
   $Res call({
     Object? specialInstructions = null,
   }) {
-    return _then(_$_SpecialInstructionsChanged(
+    return _then(_$SpecialInstructionsChangedImpl(
       null == specialInstructions
           ? _value.specialInstructions
           : specialInstructions // ignore: cast_nullable_to_non_nullable
@@ -1955,8 +1961,8 @@ class __$$_SpecialInstructionsChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
-  const _$_SpecialInstructionsChanged(this.specialInstructions);
+class _$SpecialInstructionsChangedImpl implements _SpecialInstructionsChanged {
+  const _$SpecialInstructionsChangedImpl(this.specialInstructions);
 
   @override
   final String specialInstructions;
@@ -1967,10 +1973,10 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SpecialInstructionsChanged &&
+            other is _$SpecialInstructionsChangedImpl &&
             (identical(other.specialInstructions, specialInstructions) ||
                 other.specialInstructions == specialInstructions));
   }
@@ -1981,9 +1987,9 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SpecialInstructionsChangedCopyWith<_$_SpecialInstructionsChanged>
-      get copyWith => __$$_SpecialInstructionsChangedCopyWithImpl<
-          _$_SpecialInstructionsChanged>(this, _$identity);
+  _$$SpecialInstructionsChangedImplCopyWith<_$SpecialInstructionsChangedImpl>
+      get copyWith => __$$SpecialInstructionsChangedImplCopyWithImpl<
+          _$SpecialInstructionsChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2122,18 +2128,19 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
 
 abstract class _SpecialInstructionsChanged implements NewRequestEvent {
   const factory _SpecialInstructionsChanged(final String specialInstructions) =
-      _$_SpecialInstructionsChanged;
+      _$SpecialInstructionsChangedImpl;
 
   String get specialInstructions;
   @JsonKey(ignore: true)
-  _$$_SpecialInstructionsChangedCopyWith<_$_SpecialInstructionsChanged>
+  _$$SpecialInstructionsChangedImplCopyWith<_$SpecialInstructionsChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SubmitCopyWith<$Res> {
-  factory _$$_SubmitCopyWith(_$_Submit value, $Res Function(_$_Submit) then) =
-      __$$_SubmitCopyWithImpl<$Res>;
+abstract class _$$SubmitImplCopyWith<$Res> {
+  factory _$$SubmitImplCopyWith(
+          _$SubmitImpl value, $Res Function(_$SubmitImpl) then) =
+      __$$SubmitImplCopyWithImpl<$Res>;
   @useResult
   $Res call({CustomerCodeInfo customerCodeInfo, User user});
 
@@ -2142,10 +2149,11 @@ abstract class _$$_SubmitCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SubmitCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_Submit>
-    implements _$$_SubmitCopyWith<$Res> {
-  __$$_SubmitCopyWithImpl(_$_Submit _value, $Res Function(_$_Submit) _then)
+class __$$SubmitImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$SubmitImpl>
+    implements _$$SubmitImplCopyWith<$Res> {
+  __$$SubmitImplCopyWithImpl(
+      _$SubmitImpl _value, $Res Function(_$SubmitImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2154,7 +2162,7 @@ class __$$_SubmitCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? user = null,
   }) {
-    return _then(_$_Submit(
+    return _then(_$SubmitImpl(
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -2185,8 +2193,8 @@ class __$$_SubmitCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Submit implements _Submit {
-  const _$_Submit({required this.customerCodeInfo, required this.user});
+class _$SubmitImpl implements _Submit {
+  const _$SubmitImpl({required this.customerCodeInfo, required this.user});
 
   @override
   final CustomerCodeInfo customerCodeInfo;
@@ -2199,10 +2207,10 @@ class _$_Submit implements _Submit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Submit &&
+            other is _$SubmitImpl &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.user, user) || other.user == user));
@@ -2214,8 +2222,8 @@ class _$_Submit implements _Submit {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitCopyWith<_$_Submit> get copyWith =>
-      __$$_SubmitCopyWithImpl<_$_Submit>(this, _$identity);
+  _$$SubmitImplCopyWith<_$SubmitImpl> get copyWith =>
+      __$$SubmitImplCopyWithImpl<_$SubmitImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2355,12 +2363,12 @@ class _$_Submit implements _Submit {
 abstract class _Submit implements NewRequestEvent {
   const factory _Submit(
       {required final CustomerCodeInfo customerCodeInfo,
-      required final User user}) = _$_Submit;
+      required final User user}) = _$SubmitImpl;
 
   CustomerCodeInfo get customerCodeInfo;
   User get user;
   @JsonKey(ignore: true)
-  _$$_SubmitCopyWith<_$_Submit> get copyWith =>
+  _$$SubmitImplCopyWith<_$SubmitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2465,11 +2473,11 @@ class _$NewRequestStateCopyWithImpl<$Res, $Val extends NewRequestState>
 }
 
 /// @nodoc
-abstract class _$$_NewRequestStateCopyWith<$Res>
+abstract class _$$NewRequestStateImplCopyWith<$Res>
     implements $NewRequestStateCopyWith<$Res> {
-  factory _$$_NewRequestStateCopyWith(
-          _$_NewRequestState value, $Res Function(_$_NewRequestState) then) =
-      __$$_NewRequestStateCopyWithImpl<$Res>;
+  factory _$$NewRequestStateImplCopyWith(_$NewRequestStateImpl value,
+          $Res Function(_$NewRequestStateImpl) then) =
+      __$$NewRequestStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2485,11 +2493,11 @@ abstract class _$$_NewRequestStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NewRequestStateCopyWithImpl<$Res>
-    extends _$NewRequestStateCopyWithImpl<$Res, _$_NewRequestState>
-    implements _$$_NewRequestStateCopyWith<$Res> {
-  __$$_NewRequestStateCopyWithImpl(
-      _$_NewRequestState _value, $Res Function(_$_NewRequestState) _then)
+class __$$NewRequestStateImplCopyWithImpl<$Res>
+    extends _$NewRequestStateCopyWithImpl<$Res, _$NewRequestStateImpl>
+    implements _$$NewRequestStateImplCopyWith<$Res> {
+  __$$NewRequestStateImplCopyWithImpl(
+      _$NewRequestStateImpl _value, $Res Function(_$NewRequestStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2505,7 +2513,7 @@ class __$$_NewRequestStateCopyWithImpl<$Res>
     Object? returnRequestId = null,
     Object? salesOrg = null,
   }) {
-    return _then(_$_NewRequestState(
+    return _then(_$NewRequestStateImpl(
       selectedItems: null == selectedItems
           ? _value._selectedItems
           : selectedItems // ignore: cast_nullable_to_non_nullable
@@ -2548,8 +2556,8 @@ class __$$_NewRequestStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NewRequestState extends _NewRequestState {
-  const _$_NewRequestState(
+class _$NewRequestStateImpl extends _NewRequestState {
+  const _$NewRequestStateImpl(
       {required final List<ReturnMaterial> selectedItems,
       required final List<InvoiceDetails> invoiceDetails,
       required this.returnReference,
@@ -2600,10 +2608,10 @@ class _$_NewRequestState extends _NewRequestState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NewRequestState &&
+            other is _$NewRequestStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._selectedItems, _selectedItems) &&
             const DeepCollectionEquality()
@@ -2640,8 +2648,9 @@ class _$_NewRequestState extends _NewRequestState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NewRequestStateCopyWith<_$_NewRequestState> get copyWith =>
-      __$$_NewRequestStateCopyWithImpl<_$_NewRequestState>(this, _$identity);
+  _$$NewRequestStateImplCopyWith<_$NewRequestStateImpl> get copyWith =>
+      __$$NewRequestStateImplCopyWithImpl<_$NewRequestStateImpl>(
+          this, _$identity);
 }
 
 abstract class _NewRequestState extends NewRequestState {
@@ -2654,7 +2663,7 @@ abstract class _NewRequestState extends NewRequestState {
       required final bool isSubmitting,
       required final Option<Either<ApiFailure, String>> failureOrSuccessOption,
       required final String returnRequestId,
-      required final SalesOrg salesOrg}) = _$_NewRequestState;
+      required final SalesOrg salesOrg}) = _$NewRequestStateImpl;
   const _NewRequestState._() : super._();
 
   @override
@@ -2677,6 +2686,6 @@ abstract class _NewRequestState extends NewRequestState {
   SalesOrg get salesOrg;
   @override
   @JsonKey(ignore: true)
-  _$$_NewRequestStateCopyWith<_$_NewRequestState> get copyWith =>
+  _$$NewRequestStateImplCopyWith<_$NewRequestStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

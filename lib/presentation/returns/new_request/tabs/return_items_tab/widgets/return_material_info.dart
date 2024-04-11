@@ -63,7 +63,7 @@ class _ReturnMaterialInfo extends StatelessWidget {
             ],
           ),
           _BonusItemSection(
-            items: data.bonusItems,
+            items: data.bonusItemsBelongToZPorMP,
           ),
         ],
       ),

@@ -222,15 +222,14 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
           case 1:
             emit(
               state.copyWith(
-                showErrorMessages: state.selectedItems.isEmpty,
+                showErrorMessages: !state.validateForStep1,
               ),
             );
             break;
           case 2:
             emit(
               state.copyWith(
-                showErrorMessages:
-                    !state.isAdditionInfoValid || !state.isReturnQuantityValid,
+                showErrorMessages: !state.validateForStep2,
               ),
             );
             break;

@@ -27,7 +27,7 @@ class _ExpandableMaterialDetails extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         BalanceTextRow(
-          keyText: 'Principal code'.tr(),
+          keyText: materialDetail.displayPrincipalOrSellerCode.tr(),
           keyFlex: 2,
           valueFlex: 3,
           valueText: materialDetail.principalCode.getOrDefaultValue(''),
@@ -39,7 +39,7 @@ class _ExpandableMaterialDetails extends StatelessWidget {
               ),
         ),
         BalanceTextRow(
-          keyText: 'Principal name'.tr(),
+          keyText: materialDetail.displayPrincipalOrSellerName.tr(),
           keyFlex: 2,
           valueFlex: 3,
           valueText: materialDetail.principalName.name,

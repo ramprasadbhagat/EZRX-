@@ -239,7 +239,7 @@ void main() {
       await tester.pumpAndSettle();
       final nextButtonFinder =
           tester.widget(find.byKey(WidgetKeys.nextButton)) as ElevatedButton;
-      expect(nextButtonFinder.enabled, false);
+      expect(nextButtonFinder.enabled, true);
 
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
@@ -258,7 +258,7 @@ void main() {
       await tester.pumpAndSettle();
       final nextButtonFinder2 =
           tester.widget(find.byKey(WidgetKeys.nextButton)) as ElevatedButton;
-      expect(nextButtonFinder2.enabled, false);
+      expect(nextButtonFinder2.enabled, true);
     });
 
     testWidgets(
