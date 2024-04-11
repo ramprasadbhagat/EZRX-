@@ -217,6 +217,7 @@ class ValueRangeError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
+      key: WidgetKeys.amountRangeFilterError,
       padding: const EdgeInsets.only(
         top: 8.0,
       ),

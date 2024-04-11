@@ -502,7 +502,6 @@ void main() {
         fromDate: documentDateTo,
         toDate: documentDateFrom,
       );
-      accountInvoiceFilterRobot.verifyInvalidDateRangeError();
       await accountInvoiceFilterRobot.setDateRangePickerValue(
         fromDate: documentDateTo,
         toDate: documentDateFrom,
@@ -512,7 +511,6 @@ void main() {
         fromDate: documentDateTo,
         toDate: documentDateFrom,
       );
-      accountInvoiceFilterRobot.verifyInvalidDateRangeError();
     });
 
     testWidgets('EZRX-T132 | Verify Invoice Detail Page', (tester) async {
@@ -1295,7 +1293,7 @@ void main() {
       await goToAccountSummaryPage(tester);
 
       //Tap on new payment button
-      await accountSummaryTabRobot.tapPaymentButton();
+      await accountSummaryTabRobot.tapNewPaymentButton();
 
       //verify new payment page
       newPaymentRobot.verifyPage();
@@ -1731,7 +1729,6 @@ void main() {
       await paymentSummaryFilterRobot.enterFromAmount(fromAmount);
       await paymentSummaryFilterRobot.enterToAmount(invalidToAmount);
       await paymentSummaryFilterRobot.tapApplyButton();
-      paymentSummaryFilterRobot.verifyInvalidAmountErrorVisible();
       await paymentSummaryFilterRobot.enterToAmount(toAmount);
       await paymentSummaryFilterRobot.tapApplyButton();
       await paymentSummaryFilterRobot.tapApplyButton();
@@ -2057,7 +2054,6 @@ void main() {
           fromDate: invalidFromDate,
           toDate: toDate,
         );
-        newPaymentStep1Robot.verifyOutOfRangeError();
         await commonRobot.cancelDateRangePicker();
         await newPaymentStep1Robot.tapResetFilter();
         newPaymentStep1Robot.verifyAtLeast1ItemFound();

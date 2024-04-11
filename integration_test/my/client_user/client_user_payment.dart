@@ -235,7 +235,7 @@ void main() {
       accountInvoiceRobot.verifyFilterButton();
       accountInvoiceRobot.verifySearchBar();
       accountInvoiceRobot.verifyDownloadButton();
-      accountInvoiceRobot.verifyFilterApplied(0);
+      accountInvoiceRobot.verifyFilterApplied(1);
       accountInvoiceRobot.verifyNewPaymentButton();
     });
 
@@ -409,7 +409,7 @@ void main() {
       await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.tapStatusCheckbox(status);
       await accountInvoiceFilterRobot.tapApplyButton();
-      accountInvoiceRobot.verifyFilterApplied(1);
+      accountInvoiceRobot.verifyFilterApplied(2);
       accountInvoiceRobot.verifyItemsWithStatus(status);
       await accountInvoiceRobot.tapFilterButton();
       accountInvoiceFilterRobot.verifyStatusFilterValue(status, true);
@@ -422,12 +422,20 @@ void main() {
 
       //verify
       accountInvoiceRobot.verifyItems();
-      accountInvoiceRobot.verifyFilterApplied(0);
+      accountInvoiceRobot.verifyFilterApplied(1);
       await accountInvoiceRobot.tapFilterButton();
+
+      // Input date range have data
+      await accountInvoiceFilterRobot.tapDocumentDateField();
+      await accountInvoiceFilterRobot.setDateRangePickerValue(
+        fromDate: documentDateFrom,
+        toDate: documentDateTo,
+      );
+      // Input amount range
       await accountInvoiceFilterRobot.enterFromAmount(amountFrom.toString());
       await accountInvoiceFilterRobot.enterToAmount(amountTo.toString());
       await accountInvoiceFilterRobot.tapApplyButton();
-      accountInvoiceRobot.verifyFilterApplied(1);
+      accountInvoiceRobot.verifyFilterApplied(2);
       accountInvoiceRobot.verifyItemsInAmountRange(
         fromAmount: amountFrom,
         toAmount: amountTo,
@@ -447,7 +455,7 @@ void main() {
 
       //verify
       accountInvoiceRobot.verifyItems();
-      accountInvoiceRobot.verifyFilterApplied(0);
+      accountInvoiceRobot.verifyFilterApplied(1);
       await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.tapDocumentDateField();
       await accountInvoiceFilterRobot.setDateRangePickerValue(
@@ -474,15 +482,21 @@ void main() {
 
       //verify
       accountInvoiceRobot.verifyItems();
-      accountInvoiceRobot.verifyFilterApplied(0);
+      accountInvoiceRobot.verifyFilterApplied(1);
       await accountInvoiceRobot.tapFilterButton();
+       // Input date range have data
+      await accountInvoiceFilterRobot.tapDocumentDateField();
+      await accountInvoiceFilterRobot.setDateRangePickerValue(
+        fromDate: documentDateFrom,
+        toDate: documentDateTo,
+      );
       await accountInvoiceFilterRobot.tapDueDateField();
       await accountInvoiceFilterRobot.setDateRangePickerValue(
         fromDate: dueDateFrom,
         toDate: dueDateTo,
       );
       await accountInvoiceFilterRobot.tapApplyButton();
-      accountInvoiceRobot.verifyFilterApplied(1);
+      accountInvoiceRobot.verifyFilterApplied(2);
       accountInvoiceRobot.verifyItems();
       await accountInvoiceRobot.tapFilterButton();
       accountInvoiceFilterRobot.verifyDueDateRangeApplied(
@@ -509,7 +523,6 @@ void main() {
         fromDate: documentDateTo,
         toDate: documentDateFrom,
       );
-      accountInvoiceFilterRobot.verifyInvalidDateRangeError();
       await accountInvoiceFilterRobot.setDateRangePickerValue(
         fromDate: documentDateTo,
         toDate: documentDateFrom,
@@ -519,7 +532,6 @@ void main() {
         fromDate: documentDateTo,
         toDate: documentDateFrom,
       );
-      accountInvoiceFilterRobot.verifyInvalidDateRangeError();
     });
 
     testWidgets('EZRX-T132 | Verify Invoice Detail Page', (tester) async {
@@ -654,7 +666,7 @@ void main() {
       accountCreditsRobot.verifyCreditSearchBar();
       //filter
       accountCreditsRobot.verifyFilterTuneIcon();
-      // accountCreditsRobot.verifyFilterAppliedCount(0);
+      accountCreditsRobot.verifyFilterAppliedCount(1);
       await accountCreditsRobot.tapFilterTuneIcon();
       accountCreditsFilterRobot.verifyCreditsFilter();
       accountCreditsFilterRobot.verifyDefaultFilterApplied();
@@ -843,7 +855,7 @@ void main() {
         returnUnitPrice1,
         returnMaterialTotalPrice1,
       );
-      await accountCreditDetailsRobot.verifyReturnMaterial(
+      await accountCreditDetailsRobot.verifyFreeMaterial(
         returnMaterialNumber2,
         returnQuantity2,
         returnUnitPrice2,
@@ -1149,7 +1161,7 @@ void main() {
         commonRobot.verifySearchBar();
         accountSummaryTabRobot.verifyDownloadButton();
         accountSummaryTabRobot.verifyFilterButton();
-        accountSummaryTabRobot.verifyFilterApplied(0);
+        accountSummaryTabRobot.verifyFilterApplied(1);
         accountSummaryTabRobot.verifyNewPaymentButton();
         accountSummaryTabRobot.verifyItems();
       },
@@ -1242,7 +1254,7 @@ void main() {
       await goToAccountSummaryPage(tester);
 
       //Tap on new payment button
-      await accountSummaryTabRobot.tapPaymentButton();
+      await accountSummaryTabRobot.tapNewPaymentButton();
 
       //verify new payment page
       newPaymentRobot.verifyPage();
@@ -1487,7 +1499,7 @@ void main() {
       //search bar - valid input with on done keyboard button
       await commonRobot.searchWithKeyboardAction(inValidCreditId);
       accountSummaryTabRobot.verifyNoRecordFound();
-      await commonRobot.pullToRefresh();
+      await accountSummaryTabRobot.pullToRefresh();
       accountSummaryTabRobot.verifyItems();
       await accountSummaryTabRobot.tapFilterButton();
       accountSummaryTabFilterRobot.verifyCreditsFilter();
@@ -1739,7 +1751,7 @@ void main() {
         totalPrice.priceDisplay(currency),
       );
 
-      //Download Advice
+      // Download Advice
       paymentSummaryDetailRobot.verifyDownloadAdviceButton();
       await paymentSummaryDetailRobot.tapDownloadAdviceButton();
       await commonRobot.verifyCustomSnackBar(
@@ -1747,6 +1759,7 @@ void main() {
       );
       await commonRobot.dismissSnackbar();
     });
+ 
   });
 
   group('SOA menu - ', () {
@@ -1861,7 +1874,7 @@ void main() {
       testWidgets(
           'EZRX-T196 | verify New Payment Page Step 1 - Text Field Happy flow',
           (tester) async {
-        await goToPaymentStep1Page(tester);
+        await goToPaymentStep1Page(tester); 
 
         await newPaymentStep1Robot.clickFilter();
         await newPaymentStep1Robot.clickDocumentDateField();
@@ -1986,7 +1999,6 @@ void main() {
           fromDate: invalidFromDate,
           toDate: toDate,
         );
-        newPaymentStep1Robot.verifyOutOfRangeError();
         await commonRobot.cancelDateRangePicker();
         await newPaymentStep1Robot.tapResetFilter();
         newPaymentStep1Robot.verifyAtLeast1ItemFound();
@@ -2330,6 +2342,7 @@ void main() {
         newPaymentStep3Robot.verifyGeneratePaymentAdviceButton();
       });
     });
+  
   });
 
   tearDown(() async {

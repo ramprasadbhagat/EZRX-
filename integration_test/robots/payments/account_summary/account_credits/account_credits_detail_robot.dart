@@ -192,6 +192,39 @@ class AccountCreditDetailsRobot {
     );
   }
 
+  Future<void> verifyFreeMaterial(
+    String materialNumber,
+    int quantity,
+    String unitPrice,
+    String totalPrice,
+  ) async {
+    final returnMaterialFinder = find.byWidgetPredicate(
+      (widget) =>
+          widget is CommonTileItem &&
+          widget.label == materialNumber &&
+          widget.quantity == quantity.toString(),
+    );
+    await _scrollDown(returnMaterialFinder);
+    expect(
+      returnMaterialFinder,
+      findsAtLeastNWidgets(1),
+    );
+    expect(
+      find.descendant(
+        of: find.byType(CommonTileItem),
+        matching: _getPriceFinder(unitPrice),
+      ),
+      findsNothing,
+    );
+    expect(
+      find.descendant(
+        of: find.byType(CommonTileItem),
+        matching: _getPriceFinder(totalPrice),
+      ),
+      findsNothing,
+    );
+  }
+
   Finder _getPriceFinder(String price) => find.byWidgetPredicate(
         (widget) =>
             widget is RichText &&

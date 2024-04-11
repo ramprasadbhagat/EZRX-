@@ -28,11 +28,7 @@ class AccountCreditsFilterRobot {
 
   void verifyDefaultFilterApplied() {
     verifyDateRangeFilterApplied(
-      fromDate: DateTime.now()
-          .subtract(
-            const Duration(days: 90),
-          )
-          .displayDate,
+      fromDate: DateTime.now().subtract(const Duration(days: 90)).displayDate,
       toDate: DateTime.now().displayDate,
     );
     verifyAmountRangeFilterApplied(fromAmount: '', toAmount: '');

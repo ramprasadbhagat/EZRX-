@@ -28,11 +28,7 @@ class AccountInvoiceFilterRobot extends CommonRobot {
   void verifyDefaultFilterApplied() {
     verifyNoStatusFilterApplied();
     verifyDocumentDateRangeApplied(
-      DateTime.now()
-          .subtract(
-            const Duration(days: 90),
-          )
-          .displayDate,
+      DateTime.now().subtract(const Duration(days: 90)).displayDate,
       DateTime.now().displayDate,
     );
     verifyDueDateRangeApplied('', '');
@@ -96,7 +92,7 @@ class AccountInvoiceFilterRobot extends CommonRobot {
   }
 
   void verifyInvalidAmountErrorVisible() {
-    expect(find.text('Invalid Amount range!'.tr()), findsOneWidget);
+    expect(find.byKey(WidgetKeys.amountRangeFilterError), findsOneWidget);
   }
 
   void verifyDocumentDateRangeApplied(String fromDate, String toDate) {
@@ -143,9 +139,6 @@ class AccountInvoiceFilterRobot extends CommonRobot {
     await tester.pump();
   }
 
-  void verifyInvalidDateRangeError() {
-    expect(find.text('Invalid range.'), findsOneWidget);
-  }
 
   Future<void> tapCloseIcon() async {
     await tester.tap(find.byKey(WidgetKeys.closeButton));

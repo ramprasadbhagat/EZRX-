@@ -1236,6 +1236,7 @@ class WidgetKeys {
       Key('accountSummaryDownloadButton');
   static const Key accountSummaryPage = Key('accountSummaryPage');
   static const Key accountSummarySearchBar = Key('accountSummarySearchBar');
+  static const Key amountRangeFilterError = Key('amountRangeFilterError');
 
   //===========================================================
   //  Account summary details

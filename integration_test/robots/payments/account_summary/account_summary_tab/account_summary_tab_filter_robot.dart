@@ -32,11 +32,7 @@ class AccountSummaryTabFilterRobot {
   void verifyDefaultFilterApplied() {
     verifyNoStatusFilterApplied();
     verifyDocumentDateRangeApplied(
-      DateTime.now()
-          .subtract(
-            const Duration(days: 90),
-          )
-          .displayDate,
+      DateTime.now().subtract(const Duration(days: 90)).displayDate,
       DateTime.now().displayDate,
     );
     verifyDueDateRangeApplied('', '');

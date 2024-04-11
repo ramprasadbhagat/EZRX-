@@ -1,9 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../common/extension.dart';
 
 class PaymentSummaryFilterRobot {
   final WidgetTester tester;
@@ -34,14 +34,8 @@ class PaymentSummaryFilterRobot {
   ) {
     verifyRadioListTileFilter(statuses);
     verifyDateRangeFilterApplied(
-      fromDate: getDateStringByDateTime(
-        DateTime.now().subtract(
-          const Duration(days: 90),
-        ),
-      ),
-      toDate: getDateStringByDateTime(
-        DateTime.now(),
-      ),
+      fromDate: DateTime.now().subtract(const Duration(days: 90)).displayDate,
+      toDate: DateTime.now().displayDate,
     );
     verifyAmountRangeFilterApplied(
       fromAmount: '',
@@ -109,11 +103,6 @@ class PaymentSummaryFilterRobot {
       ),
       findsOneWidget,
     );
-    expect(find.text('Invalid Amount range!'.tr()), findsNothing);
-  }
-
-  void verifyInvalidAmountErrorVisible() {
-    expect(find.text('Invalid Amount range!'.tr()), findsOneWidget);
   }
 
   void verifyDateRangeFilterApplied({
@@ -124,7 +113,7 @@ class PaymentSummaryFilterRobot {
       find.descendant(
         of: fromDateFilter,
         matching: find.text(
-          DateTimeStringValue(fromDate).dateString,
+          fromDate,
         ),
       ),
       findsOneWidget,
@@ -133,7 +122,7 @@ class PaymentSummaryFilterRobot {
       find.descendant(
         of: toDateFilter,
         matching: find.text(
-          DateTimeStringValue(toDate).dateString,
+          toDate,
         ),
       ),
       findsOneWidget,

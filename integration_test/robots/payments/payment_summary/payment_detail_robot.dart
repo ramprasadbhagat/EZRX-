@@ -107,7 +107,7 @@ class PaymentSummaryDetailRobot extends CommonRobot {
     String invoicePrice,
   ) async {
     final widget = find.descendant(
-      of: find.byKey(WidgetKeys.paymentSummaryTitle('Total:')),
+      of: find.byKey(WidgetKeys.paymentSummaryTitle('${'Total'.tr()}:')),
       matching: _getPriceFinder(invoicePrice),
     );
     await scrollEnsureFinderVisible(widget);

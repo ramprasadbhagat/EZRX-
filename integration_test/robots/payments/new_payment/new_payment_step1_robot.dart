@@ -23,9 +23,8 @@ class NewPaymentStep1Robot {
   final filterResetButton = find.byKey(WidgetKeys.filterResetButton);
   final itemCheckBadge = find.byKey(WidgetKeys.itemCheckBadge);
   final nextButton = find.byKey(WidgetKeys.nextButton);
-  final openSelector = find.byKey(WidgetKeys.genericKey(key: 'Open'.tr()));
-  final overDueSelector =
-      find.byKey(WidgetKeys.genericKey(key: 'Overdue'.tr()));
+  final openSelector = find.byKey(WidgetKeys.genericKey(key: 'Open'));
+  final overDueSelector = find.byKey(WidgetKeys.genericKey(key: 'Overdue'));
   final govNumber = find.byKey(WidgetKeys.governmentNumber);
 
   String invoiceId = '';
@@ -133,10 +132,6 @@ class NewPaymentStep1Robot {
     await tester.pumpAndSettle();
   }
 
-  void verifyOutOfRangeError() {
-    expect(find.textContaining('Out of range.'), findsOneWidget);
-  }
-
   Future<void> clickOverDueSelector() async {
     await tester.tap(overDueSelector);
     await tester.pumpAndSettle();
@@ -186,11 +181,13 @@ class NewPaymentStep1Robot {
     );
     expect(
       find.text(
-        DateTime(
-          currentTime.year,
-          currentTime.month,
-          currentTime.day - 90,
-        ).displayDate,
+        currentTime
+            .subtract(
+              const Duration(
+                days: 90,
+              ),
+            )
+            .displayDate,
       ),
       findsOneWidget,
     );

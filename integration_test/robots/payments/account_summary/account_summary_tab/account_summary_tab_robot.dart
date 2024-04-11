@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
-import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +12,6 @@ class AccountSummaryTabRobot extends CommonRobot {
   final _allSummaryPage = find.byKey(WidgetKeys.allSummaryPage);
   final _filterButton = find.byKey(WidgetKeys.accountSummaryFilterButton);
   final _downloadButton = find.byKey(WidgetKeys.accountSummaryDownloadButton);
-  final _newPaymentButton = find.byType(ScaleButton);
   final _summaryItem = find.byKey(
     WidgetKeys.invoiceCreditItem,
   );
@@ -63,16 +61,25 @@ class AccountSummaryTabRobot extends CommonRobot {
   }
 
   void verifyNewPaymentButton() {
-    expect(_newPaymentButton, findsOneWidget);
+    expect(
+      find.descendant(of: _allSummaryPage, matching: _newPaymentButtonFinder),
+      findsOneWidget,
+    );
   }
 
   Future<void> tapNewPaymentButton() async {
-    await tester.tap(_newPaymentButton);
+    await tester.tap(
+      find.descendant(of: _allSummaryPage, matching: _newPaymentButtonFinder),
+    );
     await tester.pumpAndSettle();
   }
+  
 
   void verifyNoRecordFound() {
-    final widget = find.byType(NoRecordFound);
+    final widget = find.descendant(
+      of: _allSummaryPage,
+      matching: find.byType(NoRecordFound),
+    );
     expect(widget, findsOneWidget);
     expect(
       find.descendant(
@@ -88,6 +95,18 @@ class AccountSummaryTabRobot extends CommonRobot {
       ),
       findsOneWidget,
     );
+  }
+
+  @override
+  Future<void> pullToRefresh() async {
+    await tester.drag(
+      find.descendant(
+        of: _allSummaryPage,
+        matching: find.byKey(WidgetKeys.scrollList),
+      ),
+      const Offset(0, 500),
+    );
+    await tester.pumpAndSettle();
   }
 
   void verifyItems({bool isVn = false}) {
@@ -157,11 +176,6 @@ class AccountSummaryTabRobot extends CommonRobot {
       ),
       findsOneWidget,
     );
-  }
-
-  Future<void> tapPaymentButton() async {
-    await tester.tap(_newPaymentButtonFinder);
-    await tester.pumpAndSettle();
   }
 
   Future<void> tapFirstSummaryItem() async {
