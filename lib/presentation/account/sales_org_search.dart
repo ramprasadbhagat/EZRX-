@@ -1,10 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
@@ -132,12 +129,6 @@ class _SalesOrgItem extends StatelessWidget {
             context.read<SalesOrgBloc>().add(
                   SalesOrgEvent.selected(
                     salesOrganisation: salesOrganisation,
-                  ),
-                );
-            context.read<EligibilityBloc>().add(
-                  EligibilityEvent.selectedCustomerCode(
-                    customerCodeInfo: CustomerCodeInfo.empty(),
-                    shipToInfo: ShipToInfo.empty(),
                   ),
                 );
             context.router.pop();

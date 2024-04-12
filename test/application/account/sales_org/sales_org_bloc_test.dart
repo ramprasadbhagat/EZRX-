@@ -60,13 +60,11 @@ void main() {
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
           isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
-          salesOrgFailureOrSuccessOption:
-              optionOf(const Left(fakeError)),
+          salesOrgFailureOrSuccessOption: optionOf(const Left(fakeError)),
         ),
       ],
     );
@@ -94,7 +92,6 @@ void main() {
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
-          salesOrganisation: fakeMYSalesOrganisation,
           isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
@@ -120,15 +117,11 @@ void main() {
         ).thenAnswer(
           (invocation) async => Right(fakeMYSalesOrgConfigs),
         );
-
-        when(
-          () => salesOrgRepositoryMock.storeSalesOrg(
-            salesOrg: fakeMYSalesOrg.fullName,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(unit),
-        );
       },
+      seed: () => SalesOrgState.initial().copyWith(
+        salesOrganisation: fakeMYSalesOrganisation,
+        configs: fakeMYSalesOrgConfigs,
+      ),
       act: (bloc) => bloc.add(
         SalesOrgEvent.loadSavedOrganisation(
           salesOrganisations: [
@@ -139,8 +132,9 @@ void main() {
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
-          salesOrganisation: fakeMYSalesOrganisation,
           isLoading: true,
+          salesOrganisation: fakeMYSalesOrganisation,
+          configs: fakeMYSalesOrgConfigs,
         ),
         SalesOrgState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
@@ -183,7 +177,6 @@ void main() {
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
-          salesOrganisation: fakeMYSalesOrganisation,
           isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
@@ -287,12 +280,94 @@ void main() {
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
-          salesOrganisation: fakePHSalesOrganisation,
           isLoading: true,
         ),
         SalesOrgState.initial().copyWith(
           salesOrganisation: fakePHSalesOrganisation,
           configs: fakePHSalesOrgConfigs,
+        ),
+      ],
+    );
+
+    blocTest<SalesOrgBloc, SalesOrgState>(
+      'For "selected" Event with same SaleOrg',
+      build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
+      setUp: () {
+        when(
+          () => salesOrgRepositoryMock.getSalesOrganisationConfigs(
+            fakeMYSalesOrganisation,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(fakeMYSalesOrgConfigs),
+        );
+      },
+      act: (bloc) => bloc.add(
+        SalesOrgEvent.selected(salesOrganisation: fakeMYSalesOrganisation),
+      ),
+      seed: () => SalesOrgState.initial().copyWith(
+        salesOrganisation: fakeMYSalesOrganisation,
+        configs: fakeMYSalesOrgConfigs,
+      ),
+      expect: () => [
+        SalesOrgState.initial().copyWith(
+          isLoading: true,
+          salesOrganisation: fakeMYSalesOrganisation,
+          configs: fakeMYSalesOrgConfigs,
+        ),
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          configs: fakeMYSalesOrgConfigs,
+        ),
+      ],
+    );
+
+    blocTest<SalesOrgBloc, SalesOrgState>(
+      'For "selected" Event with difference SaleOrg',
+      build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
+      setUp: () {
+        when(
+          () => salesOrgRepositoryMock.getSalesOrganisationConfigs(
+            fakePhMDISalesOrganisation,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            fakePHSalesOrgConfigs.copyWith(
+              salesOrg: fakePhMDISalesOrg,
+            ),
+          ),
+        );
+        when(
+          () => salesOrgRepositoryMock.storeSalesOrg(
+            salesOrg: fakePhMDISalesOrg.fullName,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+      },
+      act: (bloc) => bloc.add(
+        SalesOrgEvent.selected(
+          salesOrganisation: fakePhMDISalesOrganisation,
+        ),
+      ),
+      seed: () => SalesOrgState.initial().copyWith(
+        salesOrganisation: fakePhMDISalesOrganisation,
+        configs: fakePHSalesOrgConfigs.copyWith(
+          salesOrg: fakePhMDISalesOrg,
+        ),
+      ),
+      expect: () => [
+        SalesOrgState.initial().copyWith(
+          isLoading: true,
+          salesOrganisation: fakePhMDISalesOrganisation,
+          configs: fakePHSalesOrgConfigs.copyWith(
+            salesOrg: fakePhMDISalesOrg,
+          ),
+        ),
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: fakePhMDISalesOrganisation,
+          configs: fakePHSalesOrgConfigs.copyWith(
+            salesOrg: fakePhMDISalesOrg,
+          ),
         ),
       ],
     );
