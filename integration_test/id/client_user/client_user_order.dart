@@ -12,6 +12,7 @@ import '../../robots/common/extension.dart';
 import '../../robots/home/customer_search_robot.dart';
 import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
+import '../../robots/more/profile_robot.dart';
 import '../../robots/orders/cart/cart_delivery_address_robot.dart';
 import '../../robots/orders/cart/cart_robot.dart';
 import '../../robots/orders/cart/oos_pre_order_robot.dart';
@@ -19,8 +20,10 @@ import '../../robots/orders/checkout/checkout_robot.dart';
 import '../../robots/orders/checkout/order_price_summary_robot.dart';
 import '../../robots/orders/checkout/order_success_robot.dart';
 import '../../robots/orders/orders_root_robot.dart';
+import '../../robots/orders/view_by_items/view_by_items_detail_robot.dart';
 import '../../robots/orders/view_by_items/view_by_items_filter_robot.dart';
 import '../../robots/orders/view_by_items/view_by_items_robot.dart';
+import '../../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
 import '../../robots/orders/view_by_orders/view_by_orders_filter_robot.dart';
 import '../../robots/orders/view_by_orders/view_by_orders_robot.dart';
 import '../../robots/products/filter_sort_product_robot.dart';
@@ -39,6 +42,9 @@ void main() {
   late FilterSortProductRobot filterSortProductRobot;
   late ProductSuggestionRobot productSuggestionRobot;
   late CartRobot cartRobot;
+  late ProfileRobot profileRobot;
+  late ViewByOrdersDetailRobot viewByOrdersDetailRobot;
+  late ViewByItemsDetailRobot viewByItemsDetailRobot;
   late OOSPreOrderRobot oosPreOrderRobot;
   late CartDeliveryAddressRobot cartDeliveryAddressDetailRobot;
   late OrderPriceSummaryRobot orderPriceSummaryRobot;
@@ -56,6 +62,9 @@ void main() {
     commonRobot = CommonRobot(tester);
     loginRobot = LoginRobot(tester);
     homeRobot = HomeRobot(tester);
+    profileRobot = ProfileRobot(tester);
+    viewByOrdersDetailRobot = ViewByOrdersDetailRobot(tester);
+    viewByItemsDetailRobot = ViewByItemsDetailRobot(tester);
     productRobot = ProductRobot(tester);
     productDetailRobot = ProductDetailRobot(tester);
     filterSortProductRobot = FilterSortProductRobot(tester);
@@ -80,11 +89,14 @@ void main() {
   const password = 'Pa55word@1234';
   const customerCode = '0000100164';
   const shipToCode = '0000100164';
+  const licenseExpiredShipToCode = '0000100232';
+  const orderId = '0100998752';
   const shipToAddress = 'MARGARETHA FARMA. AP.';
   const currency = 'IDR';
   const invalidLengthSearchKey = '1';
   const invalidSearchKey = 'auto-test-auto-test';
   const materialNumber = 'AIABG5';
+  const customerLicenseExpiredMaterial = 'DAAHOA10';
   const oosPreOrderMaterialNumber = 'DAOPPL20';
   const materialName = 'ABBOTIC GRANULES 250 MG / 50 ML';
   const materialPrincipalName = 'PT. ABBOTT INDONESIA';
@@ -156,6 +168,19 @@ void main() {
       await oosPreOrderRobot.tapContinueButton();
     }
   }
+
+  group('Home Tab - ', () {
+    testWidgets(
+        'EZRX-T1511 | Verify License Expired banner is visible in home tab',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester, shipToCode: licenseExpiredShipToCode);
+      homeRobot.findLicenseExpiredBanner();
+      homeRobot.findViewLicenseButton();
+      await homeRobot.tapViewLicenseButton();
+      profileRobot.verifyPageVisible();
+    });
+  });
 
   group('Product Tab - ', () {
     const sortByZToA = 'Z-A';
@@ -350,6 +375,19 @@ void main() {
       await productRobot.tapCartButton();
       cartRobot.verifyPage();
     });
+
+    testWidgets(
+        'EZRX-T1512 | Verify License Expired banner is visible in products tab',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester, shipToCode: licenseExpiredShipToCode);
+
+      await commonRobot.navigateToScreen(NavigationTab.products);
+
+      productRobot.findLicenseExpiredBanner();
+      productRobot.findViewLicenseButton();
+      await productRobot.tapViewLicenseButton();
+      profileRobot.verifyPageVisible();
+    });
   });
 
   group('Product Detail - ', () {
@@ -497,6 +535,25 @@ void main() {
       await productDetailRobot.tapBackButton();
       await productRobot.filterFavoritesInProductsScreen();
       productRobot.verifyProductFilter(nameProduct, matched: false);
+    });
+
+    testWidgets(
+        'EZRX-T1513 | Verify License Expired banner is visible in product details page',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester, shipToCode: licenseExpiredShipToCode);
+
+      await commonRobot.navigateToScreen(NavigationTab.products);
+      await productRobot.openSearchProductScreen();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(customerLicenseExpiredMaterial);
+      await productSuggestionRobot
+          .tapSearchResult(customerLicenseExpiredMaterial);
+      productDetailRobot.verifyProductNameDisplayed();
+
+      productDetailRobot.findLicenseExpiredBanner();
+      productDetailRobot.findViewLicenseButton();
+      await productDetailRobot.tapViewLicenseButton();
+      profileRobot.verifyPageVisible();
     });
   });
 
@@ -785,6 +842,22 @@ void main() {
     });
 
     testWidgets(
+        'EZRX-T1514 | Verify License Expired banner is visible in Cart page',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester, shipToCode: licenseExpiredShipToCode);
+
+      await homeRobot.tapMiniCartIcon();
+
+      //verify
+      cartRobot.verifyPage();
+
+      commonRobot.findLicenseExpiredBanner();
+      commonRobot.findViewLicenseButton();
+      await commonRobot.tapViewLicenseButton();
+      profileRobot.verifyPageVisible();
+    });
+
+    testWidgets(
         'EZRX-T1356 | [ID] - Verify Apl promotion label with default component',
         (tester) async {
       const offerQty = 1;
@@ -987,6 +1060,32 @@ void main() {
       await orderPriceSummaryRobot.tapCloseButton();
       orderPriceSummaryRobot.verifySheet(isVisible: false);
       checkoutRobot.verifyPlaceOrderButton();
+    });
+    testWidgets(
+        'EZRX-T1573 | Verify License Expired banner is visible in checkout page',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester, shipToCode: licenseExpiredShipToCode);
+
+      await commonRobot.navigateToScreen(NavigationTab.products);
+      await productRobot.openSearchProductScreen();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(customerLicenseExpiredMaterial);
+      await productSuggestionRobot
+          .tapSearchResult(customerLicenseExpiredMaterial);
+      productDetailRobot.verifyProductNameDisplayed();
+
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapCartButton();
+      cartRobot.verifyPage();
+      await cartRobot.verifyMaterial(customerLicenseExpiredMaterial);
+      cartRobot.verifyCheckoutButton();
+      await cartRobot.tapCheckoutButton();
+      checkoutRobot.verifyPage();
+      commonRobot.findLicenseExpiredBanner();
+      commonRobot.findViewLicenseButton();
+      await commonRobot.tapViewLicenseButton();
+      profileRobot.verifyPageVisible();
     });
   });
 
@@ -1305,6 +1404,50 @@ void main() {
         ordersRootRobot.verifyFilterApplied(0);
         viewByItemsRobot.verifyOrderItems();
       });
+
+      testWidgets(
+          'EZRX-T1515 | Verify License Expired banner is visible in View by items tab',
+          (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+          shipToCode: licenseExpiredShipToCode,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //verify
+        ordersRootRobot.verifyViewByItemsPage();
+
+        commonRobot.findLicenseExpiredBanner();
+        commonRobot.findViewLicenseButton();
+        await commonRobot.tapViewLicenseButton();
+        profileRobot.verifyPageVisible();
+      });
+
+      group('View by item detail -', () {
+        testWidgets(
+            'EZRX-T1516 | Verify License Expired banner is visible in View by items details page',
+            (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(
+            tester,
+            shipToCode: licenseExpiredShipToCode,
+          );
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+
+          //verify
+          ordersRootRobot.verifyViewByItemsPage();
+          await commonRobot.searchWithKeyboardAction(orderId);
+          await viewByItemsRobot.tapFirstOrder();
+
+          viewByItemsDetailRobot.verifyPage();
+
+          viewByItemsDetailRobot.findLicenseExpiredBanner();
+          viewByItemsDetailRobot.findViewLicenseButton();
+          await viewByItemsDetailRobot.tapViewLicenseButton();
+          profileRobot.verifyPageVisible();
+        });
+      });
     });
 
     group('View by orders - ', () {
@@ -1548,6 +1691,51 @@ void main() {
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, orderQty + cartQty);
+      });
+
+      testWidgets(
+          'EZRX-T1517 | Verify License Expired banner is visible in View by orders tab',
+          (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+          shipToCode: licenseExpiredShipToCode,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //verify
+        await ordersRootRobot.switchToViewByOrders();
+
+        commonRobot.findLicenseExpiredBanner();
+        commonRobot.findViewLicenseButton();
+        await commonRobot.tapViewLicenseButton();
+        profileRobot.verifyPageVisible();
+      });
+    });
+
+    group('View by order detail -', () {
+      testWidgets(
+          'EZRX-T1518 | Verify License Expired banner is visible in View by order details page',
+          (tester) async {
+        //init app
+        await pumpAppWithHomeScreen(
+          tester,
+          shipToCode: licenseExpiredShipToCode,
+        );
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //verify
+        await ordersRootRobot.switchToViewByOrders();
+        await commonRobot.searchWithKeyboardAction(orderId);
+        await viewByOrdersRobot.tapFirstOrder();
+
+        viewByOrdersDetailRobot.verifyPage();
+        viewByOrdersDetailRobot.verifyOrderId(orderId);
+
+        viewByOrdersDetailRobot.findLicenseExpiredBanner();
+        viewByOrdersDetailRobot.findViewLicenseButton();
+        await viewByOrdersDetailRobot.tapViewLicenseButton();
+        profileRobot.verifyPageVisible();
       });
     });
   });

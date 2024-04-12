@@ -29,6 +29,8 @@ class CommonRobot {
   final expiryDateBottomSheet =
       find.byKey(WidgetKeys.expiryDateInstructionSheet);
   final expiryDateBottomSheetCloseButton = find.byKey(WidgetKeys.closeButton);
+  final licenseExpiredBanner = find.byKey(WidgetKeys.licenseExpiredBanner);
+  final viewLicenseButton = find.byKey(WidgetKeys.viewLicenseButton);
 
   Future<void> setDateRangePickerValue({
     required DateTime fromDate,
@@ -414,5 +416,27 @@ class CommonRobot {
     );
     await tester.pumpAndSettle();
     expect(expiryDateBottomSheet, findsNothing);
+  }
+
+  void findLicenseExpiredBanner() {
+    final licenseExpiredBannerTitle = find.text(
+      'You have licenses that are about to expire or has expired.'.tr(),
+    );
+    final licenseExpiredBannerSubTitle = find.text(
+      'To continue using eZRx+, please renew your license.'.tr(),
+    );
+
+    expect(licenseExpiredBanner, findsOneWidget);
+    expect(licenseExpiredBannerTitle, findsOneWidget);
+    expect(licenseExpiredBannerSubTitle, findsOneWidget);
+  }
+
+  void findViewLicenseButton() {
+    expect(viewLicenseButton, findsOneWidget);
+  }
+
+  Future<void> tapViewLicenseButton() async {
+    await tester.tap(viewLicenseButton);
+    await tester.pumpAndSettle();
   }
 }
