@@ -24,7 +24,8 @@ class ContactUsDetailsRepository extends IContactUsDetailsRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final contactUsDetails = await localDataSource.getContactUsDetails();
+        final contactUsDetails =
+            await localDataSource.getContactUsDetails(market.country);
 
         return Right(contactUsDetails);
       } catch (e) {
@@ -40,6 +41,27 @@ class ContactUsDetailsRepository extends IContactUsDetailsRepository {
       );
 
       return Right(contactUsDetails);
+    } catch (e) {
+      return getContactUsStaticInfo(market: market);
+    }
+  }
+
+  Future<Either<ApiFailure, ContactUsDetails>> getContactUsStaticInfo({
+    required AppMarket market,
+  }) async {
+    try {
+      final contactUs = await localDataSource.getContactUsDetails(
+        market.country,
+      );
+
+      final email = config.getContactUsStaticEmail(market.country);
+
+      return Right(
+        contactUs.copyWith(
+          postloginSendToEmail: email,
+          preloginSendToEmail: email,
+        ),
+      );
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

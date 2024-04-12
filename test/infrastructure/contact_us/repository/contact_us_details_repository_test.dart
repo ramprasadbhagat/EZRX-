@@ -42,7 +42,8 @@ void main() {
   group('Contact Us Details Repository - ', () {
     test('get Contact Us Details successfully locally ', () async {
       when(
-        () => localDataSource.getContactUsDetails(),
+        () => localDataSource
+            .getContactUsDetails(fakeMYSalesOrg.appMarket.country),
       ).thenAnswer((invocation) async => ContactUsDetails.empty());
 
       final result = await repository.getContactUsDetails(
@@ -55,7 +56,8 @@ void main() {
     });
     test('get Contact Us Details fail locally ', () async {
       when(
-        () => localDataSource.getContactUsDetails(),
+        () => localDataSource
+            .getContactUsDetails(fakeMYSalesOrg.appMarket.country),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
       );

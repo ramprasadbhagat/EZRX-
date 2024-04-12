@@ -5,13 +5,13 @@ import 'package:ezrxmobile/infrastructure/contact_us/dtos/contact_us_details_dto
 import 'package:flutter/services.dart';
 
 class ContactUsDetailsLocalDataSource {
-  Future<ContactUsDetails> getContactUsDetails() async {
+  Future<ContactUsDetails> getContactUsDetails(String country) async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/contactUsDetailsResponse.json'),
+      await rootBundle.loadString(
+        'assets/json/contactUs${country}marketStaticContent.json',
+      ),
     );
 
-    return ContactUsDetailsDto.fromJson(
-      res['data']['item'],
-    ).toDomain;
+    return ContactUsDetailsDto.fromJson(res).toDomain;
   }
 }

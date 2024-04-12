@@ -108,7 +108,9 @@ void main() {
     locator.registerFactory(() => contactUsDetailsBlocMock);
     locator.registerFactory(() => mockContactUsBloc);
     contactUsDetails =
-        await ContactUsDetailsLocalDataSource().getContactUsDetails();
+        await ContactUsDetailsLocalDataSource().getContactUsDetails(
+      salesOrg.salesOrg.appMarket.country,
+    );
   });
   setUp(() async {
     mockSalesOrgBloc = MockSalesOrgBloc();

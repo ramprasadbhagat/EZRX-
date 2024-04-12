@@ -17,13 +17,13 @@ void main() {
   late ContactUsDetailsRepositoryMock repository;
   late ContactUsDetails contactUsDetails;
   final contactUsDetailsState = ContactUsDetailsState.initial();
-  final fakeMarket = AppMarket('fake');
+  final fakeMarket = AppMarket('KH');
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = ContactUsDetailsRepositoryMock();
-    contactUsDetails =
-        await ContactUsDetailsLocalDataSource().getContactUsDetails();
+    contactUsDetails = await ContactUsDetailsLocalDataSource()
+        .getContactUsDetails(fakeMarket.country);
   });
 
   group('Contact Us Details Bloc', () {

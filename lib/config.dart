@@ -470,4 +470,36 @@ class Config {
 
   String getUserGuidePdfUrl(String marketDomain) =>
       '${baseUrl(marketDomain: marketDomain)}${'/static/mobileUserGuide.pdf'}';
+
+  String getContactUsStaticEmail(String country) {
+    final contactUsEmailMapProd = {
+      'MY': 'myezrx@zuelligpharma.com',
+      'KR': 'support@ezrxplus.com',
+      'ID': 'feedback@zuelligpharma.com',
+      'KH': 'support@ezrxplus.com',
+      'MM': 'support@ezrxplus.com',
+      'PH': 'support@ezrxplus.com',
+      'SG': 'support@ezrxplus.com',
+      'TW': 'ezrx4u@zuelligpharma.com',
+      'TH': 'support@ezrxplus.com',
+      'VN': 'support@ezrxplus.com',
+    };
+
+    final contactUsEmailMapUat = {
+      'MY': 'support@ezrxplus.com',
+      'ID': 'feedback@zuelligpharma.com',
+      'KH': 'support@ezrxplus.com',
+      'MM': 'support@ezrxplus.com',
+      'PH': 'support@ezrxplus.com',
+      'SG': 'support@ezrxplus.com',
+      'TW': 'support@ezrxplus.com',
+      'TH': 'support@ezrxplus.com',
+      'VN': 'support@ezrxplus.com',
+    };
+
+    final contactUsEmailMap =
+        appFlavor == Flavor.prod ? contactUsEmailMapProd : contactUsEmailMapUat;
+
+    return contactUsEmailMap[country] ?? 'support@ezrxplus.com';
+  }
 }
