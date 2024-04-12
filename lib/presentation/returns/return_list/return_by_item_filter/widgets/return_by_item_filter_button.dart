@@ -1,4 +1,4 @@
-part of  'package:ezrxmobile/presentation/returns/return_list/return_by_item_filter/return_by_item_filter_page.dart';
+part of 'package:ezrxmobile/presentation/returns/return_list/return_by_item_filter/return_by_item_filter_page.dart';
 
 class _ResetButton extends StatelessWidget {
   const _ResetButton({Key? key}) : super(key: key);
@@ -33,15 +33,10 @@ class _ApplyButton extends StatelessWidget {
     return BlocBuilder<ViewByItemReturnFilterBloc, ViewByItemReturnFilterState>(
       buildWhen: (previous, current) => previous.filter != current.filter,
       builder: (context, state) {
-        final lastAppliedFilter =
-            context.read<ReturnListByItemBloc>().state.appliedFilter;
-        final currentFilter = state.filter;
-        final isEnable = lastAppliedFilter != currentFilter;
-
         return Expanded(
           child: ElevatedButton(
             key: WidgetKeys.filterApplyButton,
-            onPressed: isEnable ? () => _onPressed(context: context) : null,
+            onPressed: () => _onPressed(context: context),
             child: Text(
               'Apply'.tr(),
               style: const TextStyle(color: ZPColors.white),

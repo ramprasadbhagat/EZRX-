@@ -63,6 +63,16 @@ void main() {
   }
 
   group('Test ReturnByItemFilterPage', () {
+    testWidgets('Apply Button Enable', (tester) async {
+      await tester.pumpWidget(getWidgetToTest());
+      await tester.pumpAndSettle();
+      final applyButtonFinder = find.byKey(
+        WidgetKeys.filterApplyButton,
+      );
+      expect(applyButtonFinder, findsOneWidget);
+      expect(tester.widget<ElevatedButton>(applyButtonFinder).enabled, true);
+    });
+
     testWidgets('Amount text input should allow only 2 digit', (tester) async {
       await tester.pumpWidget(getWidgetToTest());
       await tester.pump();

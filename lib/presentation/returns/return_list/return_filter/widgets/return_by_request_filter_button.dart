@@ -34,15 +34,10 @@ class _ApplyButton extends StatelessWidget {
         ViewByRequestReturnFilterState>(
       buildWhen: (previous, current) => previous.filter != current.filter,
       builder: (context, state) {
-        final lastAppliedFilter =
-            context.read<ReturnListByRequestBloc>().state.appliedFilter;
-        final currentFilter = state.filter;
-        final isEnable = lastAppliedFilter != currentFilter;
-
         return Expanded(
           child: ElevatedButton(
             key: WidgetKeys.filterApplyButton,
-            onPressed: isEnable ? () => _onPressed(context: context) : null,
+            onPressed: () => _onPressed(context: context),
             child: Text(
               context.tr('Apply'),
               style: const TextStyle(color: ZPColors.white),
