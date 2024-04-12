@@ -53,9 +53,19 @@ class ReasonDropdown extends StatelessWidget {
                 ),
               )
               .toList(),
-          validator: (value) => (value ?? '').isEmpty
-              ? 'Return reason is required field.'.tr()
-              : null,
+          validator: (value) {
+            if ((value ?? '').isEmpty) {
+              return 'Return reason is required field.'.tr();
+            }
+
+            context.read<NewRequestBloc>().add(
+                  const NewRequestEvent.validateStep(
+                    step: 2,
+                  ),
+                );
+
+            return null;
+          },
           key: WidgetKeys.newRequestStep2ReasonDropdown,
         );
       },

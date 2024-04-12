@@ -62,6 +62,12 @@ class ReturnQuantityField extends StatelessWidget {
               return 'Return quantity cannot exceed balance quantity.'.tr();
             }
 
+            context.read<NewRequestBloc>().add(
+                  const NewRequestEvent.validateStep(
+                    step: 2,
+                  ),
+                );
+
             return null;
           },
         );

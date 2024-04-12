@@ -262,6 +262,45 @@ void main() {
     });
 
     testWidgets(
+        ' => Disable Next Button when the condition to pass step 2 is not meet',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg,
+          selectedItems: [
+            fakeReturnMaterial.copyWith(
+              isMarketPlace: true,
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final nextButtonFinderStep1 =
+          tester.widget(find.byKey(WidgetKeys.nextButton)) as ElevatedButton;
+      expect(nextButtonFinderStep1.enabled, true);
+      await tester.tap(find.byWidget(nextButtonFinderStep1));
+      await tester.pumpAndSettle();
+      verify(
+        () => newRequestBlocMock.add(
+          const NewRequestEvent.validateStep(step: 1),
+        ),
+      ).called(1);
+      expect(nextButtonFinderStep1.enabled, true);
+
+      final nextButtonFinderStep2 =
+          tester.widget(find.byKey(WidgetKeys.nextButton)) as ElevatedButton;
+      await tester.tap(find.byWidget(nextButtonFinderStep2));
+      await tester.pumpAndSettle();
+      verify(
+        () => newRequestBlocMock.add(
+          const NewRequestEvent.validateStep(step: 2),
+        ),
+      ).called(1);
+      expect(nextButtonFinderStep2.enabled, true);
+    });
+
+    testWidgets(
         ' => [SG market] NOT showing invalidSelectedReturnItemError when return items are from the different principals',
         (WidgetTester tester) async {
       when(() => newRequestBlocMock.state).thenReturn(
