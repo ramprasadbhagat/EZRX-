@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../common/extension.dart';
@@ -69,7 +68,7 @@ class CustomerSearchRobot {
     await tester.pump();
     await tester.enterText(customerCodeSearchField, customerCode);
     await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle(Durations.long2);
+    await tester.pumpAndSettle();
   }
 
   void findCustomerCode(String shipToCode) {

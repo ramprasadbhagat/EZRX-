@@ -259,4 +259,6 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   double get homeOfferListHeight => showGovtListPrice ? 170 : 150;
 
   bool get displayStockInfo => enableBatchNumber || expiryDateDisplay;
+
+  double get browseProductsCardHeight => showGovtListPrice ? 330 : 300;
 }

@@ -178,8 +178,9 @@ class CheckoutRobot {
   Future<void> enterPaymentTerm(String text) async {
     await tester.tap(paymentTermField);
     await tester.pumpAndSettle();
-    await tester
-        .tap(find.descendant(of: paymentTermField, matching: find.text(text)));
+    await tester.tap(
+      find.text(text),
+    );
     await tester.pumpAndSettle();
   }
 
@@ -568,7 +569,7 @@ class CheckoutRobot {
     await tester.dragUntilVisible(
       finder,
       find.byKey(WidgetKeys.checkoutScrollList),
-      Offset(0, reversed ? -100 : 100.0),
+      Offset(0, reversed ? 200 : -200.0),
     );
     expect(finder, findsOneWidget);
     await tester.pump();

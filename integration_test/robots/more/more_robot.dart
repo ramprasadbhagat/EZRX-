@@ -28,12 +28,25 @@ class MoreRobot extends CommonRobot {
     await closeAnnouncementAlertDialog();
   }
 
+  Future<void> scrollToProfileName() => tester.dragUntilVisible(
+        find.byKey(WidgetKeys.profileTileSection),
+        scrollList,
+        const Offset(0.0, 200),
+      );
+
+  bool isCorrectUser(String firstName, String lastName) {
+    return find
+        .textContaining(
+          '${'Hello'.tr()}, ${FullName(firstName: firstName, lastName: lastName).toTitleCase}',
+        )
+        .evaluate()
+        .isNotEmpty;
+  }
+
   void verifyProfileName(String firstName, String lastName) {
     expect(
-      find.textContaining(
-        '${'Hello'.tr()}, ${FullName(firstName: firstName, lastName: lastName).toTitleCase}',
-      ),
-      findsOneWidget,
+      isCorrectUser(firstName, lastName),
+      true,
     );
   }
 

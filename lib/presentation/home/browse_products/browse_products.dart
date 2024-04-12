@@ -97,7 +97,8 @@ class BrowseProduct extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 360,
+                        height: eligibilityState
+                            .salesOrgConfigs.browseProductsCardHeight,
                         child: state.isFetching
                             ? const ProductLoadingShimmer(
                                 key: WidgetKeys.browseProductLoadingShimmer,

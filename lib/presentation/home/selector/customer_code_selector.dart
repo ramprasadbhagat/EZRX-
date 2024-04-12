@@ -49,6 +49,7 @@ class CustomerCodeSelector extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: ZPColors.white,
                       ),
+                  key: WidgetKeys.customerCodeSelectShipTo,
                 ),
           subtitle: eligibilityState.isLoadingCustomerCode
               ? LoadingShimmer.tile()

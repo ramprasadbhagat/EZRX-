@@ -30,6 +30,7 @@ parameters:
       - integration_test__ph__external_sales_rep__external_sales_rep_user_return__ph
       
       - integration_test__tw__client_user__client_user_order__tw
+      - integration_test__tw__external_sales_rep__external_sales_rep_user_order__tw
 
       - integration_test__vn__client_user__client_user_order__vn
       - integration_test__vn__client_user__client_user_payment__vn

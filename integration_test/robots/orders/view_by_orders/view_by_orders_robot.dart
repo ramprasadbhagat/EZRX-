@@ -144,8 +144,10 @@ class ViewByOrdersRobot extends CommonRobot {
 
   String getOrderIdText({required int index}) {
     const suffixText = '#';
-    final labelText =
-        tester.widget<RichText>(orderCodeLabel.at(index)).text.toPlainText();
+    final labelText = tester
+        .widget<RichText>(orderCodeLabel.at(index))
+        .text
+        .toPlainText(includePlaceholders: false);
 
     return labelText.split(suffixText)[1];
   }

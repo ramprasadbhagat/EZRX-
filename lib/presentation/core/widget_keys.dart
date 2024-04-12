@@ -216,6 +216,7 @@ class WidgetKeys {
   static const Key customerSearchPage = Key('customerSearchPage');
   static const Key customerCodeList = Key('customerCodeList');
   static const Key customerCodeSelect = Key('customerCodeSelect');
+  static const Key customerCodeSelectShipTo = Key('customerCodeSelectShipTo');
   static const Key customerCodeSearch = Key('customerCodeSearchField');
   static const Key customerCodeSearchSuffixIcon =
       Key('customerCodeSearchSuffixIcon');

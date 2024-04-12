@@ -333,9 +333,10 @@ class CartRobot {
     String materialNumber,
     String bonusMaterialNumber,
   ) async {
-    await tester.drag(
+    await tester.fling(
       _bonusItem(materialNumber, bonusMaterialNumber),
       defaultSwipeOffset,
+      100,
     );
     await tester.pumpAndSettle();
     await tester.tap(
@@ -348,7 +349,7 @@ class CartRobot {
   }
 
   Future<void> swipeMaterialToDelete(String materialNumber) async {
-    await tester.drag(_materialItem(materialNumber), defaultSwipeOffset);
+    await tester.fling(_materialItem(materialNumber), defaultSwipeOffset, 100);
     await tester.pumpAndSettle();
     await tester.tap(
       find.descendant(
@@ -654,7 +655,7 @@ class CartRobot {
   }
 
   Future<void> swipeBundleToDelete(String bundleNumber) async {
-    await tester.drag(_bundleItem(bundleNumber), defaultSwipeOffset);
+    await tester.fling(_bundleItem(bundleNumber), defaultSwipeOffset, 100);
     await tester.pumpAndSettle();
     await tester.tap(
       find.descendant(

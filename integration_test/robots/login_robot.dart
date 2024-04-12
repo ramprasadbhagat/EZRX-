@@ -7,7 +7,7 @@ import 'common/common_robot.dart';
 
 class LoginRobot extends CommonRobot {
   LoginRobot(WidgetTester tester) : super(tester);
-
+  final loginPage = find.byKey(WidgetKeys.loginMobileScreen);
   final rememberMeCheckbox =
       find.byKey(WidgetKeys.loginRememberPasswordCheckbox);
   final forgotPasswordLink = find.byKey(WidgetKeys.forgotPasswordButton);
@@ -211,4 +211,6 @@ class LoginRobot extends CommonRobot {
       await scrollEnsureFinderVisible(announcementBanner.last);
     }
   }
+
+  bool get isLoginPage => loginPage.evaluate().isNotEmpty;
 }

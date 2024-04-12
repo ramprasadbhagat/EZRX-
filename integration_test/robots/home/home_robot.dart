@@ -53,10 +53,11 @@ class HomeRobot extends CommonRobot {
   final searchByProductField = find.byKey(WidgetKeys.searchProductField);
   final listView = find.byType(SingleChildScrollView).last;
   final homeBanner = find.byKey(WidgetKeys.homeBanner);
+  final customerCodeSelectShipTo =
+      find.byKey(WidgetKeys.customerCodeSelectShipTo);
 
   void verify() {
-    final home = find.byKey(WidgetKeys.homeScreen);
-    expect(home, findsOneWidget);
+    expect(homeTab, findsOneWidget);
   }
 
   void verifyEdiCustomer() {
@@ -406,5 +407,10 @@ class HomeRobot extends CommonRobot {
       const Offset(0, -250),
     );
     await tester.pump();
+  }
+
+  Future<bool> isCustomerCodeNotSelected(String shipToCode) async {
+    await tester.pumpUntilVisible(customerCodeSelectShipTo);
+    return tester.widget<Text>(customerCodeSelectShipTo).data != shipToCode;
   }
 }
