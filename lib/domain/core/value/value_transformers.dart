@@ -311,7 +311,7 @@ Color getStatusLabelColor(String statusType) {
     'Cancelled - license invalid / expired': ZPColors.lightRedStatusColor,
     'Cancelled - stock unavailable': ZPColors.lightRedStatusColor,
     'Cancelled by buyer': ZPColors.lightRedStatusColor,
-    'Cancelled by Seller': ZPColors.lightRedStatusColor,
+    'Cancelled by seller': ZPColors.lightRedStatusColor,
     'Overdue': ZPColors.lightRedStatusColor,
     'Rejected': ZPColors.lightRedStatusColor,
     'PoFailed': ZPColors.lightRedStatusColor,
