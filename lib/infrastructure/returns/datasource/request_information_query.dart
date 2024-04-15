@@ -15,6 +15,7 @@ class RequestInformationQuery {
       createdBy
       bapiStatus
       totalItemCount
+      ${enableMarketplace ? 'isMarketPlace' : ''}
     }
     requestInformationV2 {
       ${enableMarketplace ? 'isMarketPlace' : ''}

@@ -12,7 +12,7 @@ part of 'request_information_header_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 RequestInformationHeaderDto _$RequestInformationHeaderDtoFromJson(
     Map<String, dynamic> json) {
@@ -43,6 +43,8 @@ mixin _$RequestInformationHeaderDto {
   String get bapiStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'totalItemCount', defaultValue: '')
   String get totalItemCount => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -71,8 +73,9 @@ abstract class $RequestInformationHeaderDtoCopyWith<$Res> {
       @JsonKey(name: 'requestID', defaultValue: '') String requestID,
       @JsonKey(name: 'createdBy', defaultValue: '') String createdBy,
       @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus,
-      @JsonKey(name: 'totalItemCount', defaultValue: '')
-      String totalItemCount});
+      @JsonKey(name: 'totalItemCount', defaultValue: '') String totalItemCount,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -100,6 +103,7 @@ class _$RequestInformationHeaderDtoCopyWithImpl<$Res,
     Object? createdBy = null,
     Object? bapiStatus = null,
     Object? totalItemCount = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       returnReference: null == returnReference
@@ -146,17 +150,21 @@ class _$RequestInformationHeaderDtoCopyWithImpl<$Res,
           ? _value.totalItemCount
           : totalItemCount // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_RequestInformationHeaderDtoCopyWith<$Res>
+abstract class _$$RequestInformationHeaderDtoImplCopyWith<$Res>
     implements $RequestInformationHeaderDtoCopyWith<$Res> {
-  factory _$$_RequestInformationHeaderDtoCopyWith(
-          _$_RequestInformationHeaderDto value,
-          $Res Function(_$_RequestInformationHeaderDto) then) =
-      __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>;
+  factory _$$RequestInformationHeaderDtoImplCopyWith(
+          _$RequestInformationHeaderDtoImpl value,
+          $Res Function(_$RequestInformationHeaderDtoImpl) then) =
+      __$$RequestInformationHeaderDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -172,18 +180,19 @@ abstract class _$$_RequestInformationHeaderDtoCopyWith<$Res>
       @JsonKey(name: 'requestID', defaultValue: '') String requestID,
       @JsonKey(name: 'createdBy', defaultValue: '') String createdBy,
       @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus,
-      @JsonKey(name: 'totalItemCount', defaultValue: '')
-      String totalItemCount});
+      @JsonKey(name: 'totalItemCount', defaultValue: '') String totalItemCount,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
-class __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>
+class __$$RequestInformationHeaderDtoImplCopyWithImpl<$Res>
     extends _$RequestInformationHeaderDtoCopyWithImpl<$Res,
-        _$_RequestInformationHeaderDto>
-    implements _$$_RequestInformationHeaderDtoCopyWith<$Res> {
-  __$$_RequestInformationHeaderDtoCopyWithImpl(
-      _$_RequestInformationHeaderDto _value,
-      $Res Function(_$_RequestInformationHeaderDto) _then)
+        _$RequestInformationHeaderDtoImpl>
+    implements _$$RequestInformationHeaderDtoImplCopyWith<$Res> {
+  __$$RequestInformationHeaderDtoImplCopyWithImpl(
+      _$RequestInformationHeaderDtoImpl _value,
+      $Res Function(_$RequestInformationHeaderDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -200,8 +209,9 @@ class __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>
     Object? createdBy = null,
     Object? bapiStatus = null,
     Object? totalItemCount = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_RequestInformationHeaderDto(
+    return _then(_$RequestInformationHeaderDtoImpl(
       returnReference: null == returnReference
           ? _value.returnReference
           : returnReference // ignore: cast_nullable_to_non_nullable
@@ -246,14 +256,18 @@ class __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>
           ? _value.totalItemCount
           : totalItemCount // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
-  _$_RequestInformationHeaderDto(
+class _$RequestInformationHeaderDtoImpl extends _RequestInformationHeaderDto {
+  _$RequestInformationHeaderDtoImpl(
       {@JsonKey(name: 'returnReference', defaultValue: '')
       required this.returnReference,
       @JsonKey(name: 'specialInstructions', defaultValue: '')
@@ -267,11 +281,14 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
       @JsonKey(name: 'createdBy', defaultValue: '') required this.createdBy,
       @JsonKey(name: 'bapiStatus', defaultValue: '') required this.bapiStatus,
       @JsonKey(name: 'totalItemCount', defaultValue: '')
-      required this.totalItemCount})
+      required this.totalItemCount,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required this.isMarketPlace})
       : super._();
 
-  factory _$_RequestInformationHeaderDto.fromJson(Map<String, dynamic> json) =>
-      _$$_RequestInformationHeaderDtoFromJson(json);
+  factory _$RequestInformationHeaderDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$RequestInformationHeaderDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'returnReference', defaultValue: '')
@@ -306,17 +323,20 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
   @override
   @JsonKey(name: 'totalItemCount', defaultValue: '')
   final String totalItemCount;
+  @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'RequestInformationHeaderDto(returnReference: $returnReference, specialInstructions: $specialInstructions, createdDate: $createdDate, createdTime: $createdTime, cName1: $cName1, refundTotal: $refundTotal, soldTo: $soldTo, requestID: $requestID, createdBy: $createdBy, bapiStatus: $bapiStatus, totalItemCount: $totalItemCount)';
+    return 'RequestInformationHeaderDto(returnReference: $returnReference, specialInstructions: $specialInstructions, createdDate: $createdDate, createdTime: $createdTime, cName1: $cName1, refundTotal: $refundTotal, soldTo: $soldTo, requestID: $requestID, createdBy: $createdBy, bapiStatus: $bapiStatus, totalItemCount: $totalItemCount, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RequestInformationHeaderDto &&
+            other is _$RequestInformationHeaderDtoImpl &&
             (identical(other.returnReference, returnReference) ||
                 other.returnReference == returnReference) &&
             (identical(other.specialInstructions, specialInstructions) ||
@@ -336,7 +356,9 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
             (identical(other.bapiStatus, bapiStatus) ||
                 other.bapiStatus == bapiStatus) &&
             (identical(other.totalItemCount, totalItemCount) ||
-                other.totalItemCount == totalItemCount));
+                other.totalItemCount == totalItemCount) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @JsonKey(ignore: true)
@@ -353,18 +375,19 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
       requestID,
       createdBy,
       bapiStatus,
-      totalItemCount);
+      totalItemCount,
+      isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RequestInformationHeaderDtoCopyWith<_$_RequestInformationHeaderDto>
-      get copyWith => __$$_RequestInformationHeaderDtoCopyWithImpl<
-          _$_RequestInformationHeaderDto>(this, _$identity);
+  _$$RequestInformationHeaderDtoImplCopyWith<_$RequestInformationHeaderDtoImpl>
+      get copyWith => __$$RequestInformationHeaderDtoImplCopyWithImpl<
+          _$RequestInformationHeaderDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RequestInformationHeaderDtoToJson(
+    return _$$RequestInformationHeaderDtoImplToJson(
       this,
     );
   }
@@ -392,11 +415,13 @@ abstract class _RequestInformationHeaderDto
       @JsonKey(name: 'bapiStatus', defaultValue: '')
       required final String bapiStatus,
       @JsonKey(name: 'totalItemCount', defaultValue: '')
-      required final String totalItemCount}) = _$_RequestInformationHeaderDto;
+      required final String totalItemCount,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required final bool isMarketPlace}) = _$RequestInformationHeaderDtoImpl;
   _RequestInformationHeaderDto._() : super._();
 
   factory _RequestInformationHeaderDto.fromJson(Map<String, dynamic> json) =
-      _$_RequestInformationHeaderDto.fromJson;
+      _$RequestInformationHeaderDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'returnReference', defaultValue: '')
@@ -432,7 +457,10 @@ abstract class _RequestInformationHeaderDto
   @JsonKey(name: 'totalItemCount', defaultValue: '')
   String get totalItemCount;
   @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_RequestInformationHeaderDtoCopyWith<_$_RequestInformationHeaderDto>
+  _$$RequestInformationHeaderDtoImplCopyWith<_$RequestInformationHeaderDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

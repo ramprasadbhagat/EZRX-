@@ -6,6 +6,7 @@ part 'return_request_information_header.freezed.dart';
 
 @freezed
 class ReturnRequestInformationHeader with _$ReturnRequestInformationHeader {
+  const ReturnRequestInformationHeader._();
   factory ReturnRequestInformationHeader({
     required StringValue returnReference,
     required SpecialInstructions specialInstructions,
@@ -17,6 +18,7 @@ class ReturnRequestInformationHeader with _$ReturnRequestInformationHeader {
     required DateTimeStringValue createdDateTime,
     required StatusType bapiStatus,
     required String totalItemCount,
+    required bool isMarketPlace,
   }) = _ReturnRequestInformationHeader;
   factory ReturnRequestInformationHeader.empty() =>
       ReturnRequestInformationHeader(
@@ -30,5 +32,9 @@ class ReturnRequestInformationHeader with _$ReturnRequestInformationHeader {
         createdDateTime: DateTimeStringValue(''),
         bapiStatus: StatusType(''),
         totalItemCount: '',
+        isMarketPlace: false,
       );
+
+  String get displayGrandTotalOrTotalValue =>
+      isMarketPlace ? 'Total return value' : 'Grand total';
 }

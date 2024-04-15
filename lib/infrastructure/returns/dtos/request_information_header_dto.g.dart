@@ -6,9 +6,9 @@ part of 'request_information_header_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RequestInformationHeaderDto _$$_RequestInformationHeaderDtoFromJson(
+_$RequestInformationHeaderDtoImpl _$$RequestInformationHeaderDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_RequestInformationHeaderDto(
+    _$RequestInformationHeaderDtoImpl(
       returnReference: json['returnReference'] as String? ?? '',
       specialInstructions: json['specialInstructions'] as String? ?? '',
       createdDate: json['createdDate'] as String? ?? '',
@@ -20,10 +20,12 @@ _$_RequestInformationHeaderDto _$$_RequestInformationHeaderDtoFromJson(
       createdBy: json['createdBy'] as String? ?? '',
       bapiStatus: json['bapiStatus'] as String? ?? '',
       totalItemCount: json['totalItemCount'] as String? ?? '',
+      isMarketPlace:
+          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_RequestInformationHeaderDtoToJson(
-        _$_RequestInformationHeaderDto instance) =>
+Map<String, dynamic> _$$RequestInformationHeaderDtoImplToJson(
+        _$RequestInformationHeaderDtoImpl instance) =>
     <String, dynamic>{
       'returnReference': instance.returnReference,
       'specialInstructions': instance.specialInstructions,
@@ -36,4 +38,5 @@ Map<String, dynamic> _$$_RequestInformationHeaderDtoToJson(
       'createdBy': instance.createdBy,
       'bapiStatus': instance.bapiStatus,
       'totalItemCount': instance.totalItemCount,
+      'isMarketPlace': instance.isMarketPlace,
     };

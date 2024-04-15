@@ -60,6 +60,7 @@ class ReturnRequestDetails extends StatelessWidget {
                     key: WidgetKeys.returnRequestDetailScrollList,
                     children: [
                       RequestDetailsSection(
+                        requestInformation: state.requestInformation,
                         requestInformationHeader:
                             state.requestInformationHeader,
                       ),

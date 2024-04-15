@@ -1,9 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -15,8 +17,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class RequestDetailsSection extends StatelessWidget {
   const RequestDetailsSection({
     Key? key,
+    required this.requestInformation,
     required this.requestInformationHeader,
   }) : super(key: key);
+  final List<ReturnRequestInformation> requestInformation;
   final ReturnRequestInformationHeader requestInformationHeader;
 
   @override
@@ -26,6 +30,7 @@ class RequestDetailsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _ReturnDetailsSection(
+          requestInformation: requestInformation,
           requestInformationHeader: requestInformationHeader,
         ),
         StatusTrackerSection(
@@ -68,8 +73,10 @@ class RequestDetailsSection extends StatelessWidget {
 class _ReturnDetailsSection extends StatelessWidget {
   const _ReturnDetailsSection({
     Key? key,
+    required this.requestInformation,
     required this.requestInformationHeader,
   }) : super(key: key);
+  final List<ReturnRequestInformation> requestInformation;
   final ReturnRequestInformationHeader requestInformationHeader;
 
   @override
@@ -82,7 +89,7 @@ class _ReturnDetailsSection extends StatelessWidget {
             '${context.tr('Return')} #${requestInformationHeader.requestID}',
         valueText:
             requestInformationHeader.bapiStatus.displayStatusForViewByRequest,
-        keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+        keyTextStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
               color: ZPColors.white,
             ),
         isStatus: true,
@@ -90,6 +97,13 @@ class _ReturnDetailsSection extends StatelessWidget {
       ),
       subtitle: Column(
         children: [
+          if (requestInformationHeader.isMarketPlace)
+            Padding(
+              padding: const EdgeInsets.only(top: 5, bottom: 13),
+              child: MarketPlaceSellerWithLogo.elevated(
+                requestInformation.firstOrNull?.principalName.name ?? '',
+              ),
+            ),
           BalanceTextRow(
             key: WidgetKeys.returnRequestDetailRequestDate,
             keyText: 'Request date'.tr(),
@@ -166,7 +180,8 @@ class _InvoiceSummarySection extends StatelessWidget {
           ),
           _PriceWidget(
             key: WidgetKeys.returnRequestDetailGrandTotal,
-            title: '${context.tr('Grand total')}:',
+            title:
+                '${context.tr(requestInformationHeader.displayGrandTotalOrTotalValue)}:',
             price: requestInformationHeader.refundTotal.refundTotal.toString(),
             priceType: PriceStyle.grandTotalPrice,
           ),

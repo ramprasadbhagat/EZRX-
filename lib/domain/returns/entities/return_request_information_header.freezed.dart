@@ -12,7 +12,7 @@ part of 'return_request_information_header.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnRequestInformationHeader {
@@ -27,6 +27,7 @@ mixin _$ReturnRequestInformationHeader {
   DateTimeStringValue get createdDateTime => throw _privateConstructorUsedError;
   StatusType get bapiStatus => throw _privateConstructorUsedError;
   String get totalItemCount => throw _privateConstructorUsedError;
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnRequestInformationHeaderCopyWith<ReturnRequestInformationHeader>
@@ -51,7 +52,8 @@ abstract class $ReturnRequestInformationHeaderCopyWith<$Res> {
       RefundTotal refundTotal,
       DateTimeStringValue createdDateTime,
       StatusType bapiStatus,
-      String totalItemCount});
+      String totalItemCount,
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -78,6 +80,7 @@ class _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
     Object? createdDateTime = null,
     Object? bapiStatus = null,
     Object? totalItemCount = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       returnReference: null == returnReference
@@ -120,17 +123,21 @@ class _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
           ? _value.totalItemCount
           : totalItemCount // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ReturnRequestInformationHeaderCopyWith<$Res>
+abstract class _$$ReturnRequestInformationHeaderImplCopyWith<$Res>
     implements $ReturnRequestInformationHeaderCopyWith<$Res> {
-  factory _$$_ReturnRequestInformationHeaderCopyWith(
-          _$_ReturnRequestInformationHeader value,
-          $Res Function(_$_ReturnRequestInformationHeader) then) =
-      __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>;
+  factory _$$ReturnRequestInformationHeaderImplCopyWith(
+          _$ReturnRequestInformationHeaderImpl value,
+          $Res Function(_$ReturnRequestInformationHeaderImpl) then) =
+      __$$ReturnRequestInformationHeaderImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -143,17 +150,18 @@ abstract class _$$_ReturnRequestInformationHeaderCopyWith<$Res>
       RefundTotal refundTotal,
       DateTimeStringValue createdDateTime,
       StatusType bapiStatus,
-      String totalItemCount});
+      String totalItemCount,
+      bool isMarketPlace});
 }
 
 /// @nodoc
-class __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>
+class __$$ReturnRequestInformationHeaderImplCopyWithImpl<$Res>
     extends _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
-        _$_ReturnRequestInformationHeader>
-    implements _$$_ReturnRequestInformationHeaderCopyWith<$Res> {
-  __$$_ReturnRequestInformationHeaderCopyWithImpl(
-      _$_ReturnRequestInformationHeader _value,
-      $Res Function(_$_ReturnRequestInformationHeader) _then)
+        _$ReturnRequestInformationHeaderImpl>
+    implements _$$ReturnRequestInformationHeaderImplCopyWith<$Res> {
+  __$$ReturnRequestInformationHeaderImplCopyWithImpl(
+      _$ReturnRequestInformationHeaderImpl _value,
+      $Res Function(_$ReturnRequestInformationHeaderImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -169,8 +177,9 @@ class __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>
     Object? createdDateTime = null,
     Object? bapiStatus = null,
     Object? totalItemCount = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_ReturnRequestInformationHeader(
+    return _then(_$ReturnRequestInformationHeaderImpl(
       returnReference: null == returnReference
           ? _value.returnReference
           : returnReference // ignore: cast_nullable_to_non_nullable
@@ -211,15 +220,19 @@ class __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>
           ? _value.totalItemCount
           : totalItemCount // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_ReturnRequestInformationHeader
-    implements _ReturnRequestInformationHeader {
-  _$_ReturnRequestInformationHeader(
+class _$ReturnRequestInformationHeaderImpl
+    extends _ReturnRequestInformationHeader {
+  _$ReturnRequestInformationHeaderImpl(
       {required this.returnReference,
       required this.specialInstructions,
       required this.requestID,
@@ -229,7 +242,9 @@ class _$_ReturnRequestInformationHeader
       required this.refundTotal,
       required this.createdDateTime,
       required this.bapiStatus,
-      required this.totalItemCount});
+      required this.totalItemCount,
+      required this.isMarketPlace})
+      : super._();
 
   @override
   final StringValue returnReference;
@@ -251,17 +266,19 @@ class _$_ReturnRequestInformationHeader
   final StatusType bapiStatus;
   @override
   final String totalItemCount;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'ReturnRequestInformationHeader(returnReference: $returnReference, specialInstructions: $specialInstructions, requestID: $requestID, cName1: $cName1, soldTo: $soldTo, createdBy: $createdBy, refundTotal: $refundTotal, createdDateTime: $createdDateTime, bapiStatus: $bapiStatus, totalItemCount: $totalItemCount)';
+    return 'ReturnRequestInformationHeader(returnReference: $returnReference, specialInstructions: $specialInstructions, requestID: $requestID, cName1: $cName1, soldTo: $soldTo, createdBy: $createdBy, refundTotal: $refundTotal, createdDateTime: $createdDateTime, bapiStatus: $bapiStatus, totalItemCount: $totalItemCount, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnRequestInformationHeader &&
+            other is _$ReturnRequestInformationHeaderImpl &&
             (identical(other.returnReference, returnReference) ||
                 other.returnReference == returnReference) &&
             (identical(other.specialInstructions, specialInstructions) ||
@@ -279,7 +296,9 @@ class _$_ReturnRequestInformationHeader
             (identical(other.bapiStatus, bapiStatus) ||
                 other.bapiStatus == bapiStatus) &&
             (identical(other.totalItemCount, totalItemCount) ||
-                other.totalItemCount == totalItemCount));
+                other.totalItemCount == totalItemCount) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
@@ -294,18 +313,20 @@ class _$_ReturnRequestInformationHeader
       refundTotal,
       createdDateTime,
       bapiStatus,
-      totalItemCount);
+      totalItemCount,
+      isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnRequestInformationHeaderCopyWith<_$_ReturnRequestInformationHeader>
-      get copyWith => __$$_ReturnRequestInformationHeaderCopyWithImpl<
-          _$_ReturnRequestInformationHeader>(this, _$identity);
+  _$$ReturnRequestInformationHeaderImplCopyWith<
+          _$ReturnRequestInformationHeaderImpl>
+      get copyWith => __$$ReturnRequestInformationHeaderImplCopyWithImpl<
+          _$ReturnRequestInformationHeaderImpl>(this, _$identity);
 }
 
 abstract class _ReturnRequestInformationHeader
-    implements ReturnRequestInformationHeader {
+    extends ReturnRequestInformationHeader {
   factory _ReturnRequestInformationHeader(
           {required final StringValue returnReference,
           required final SpecialInstructions specialInstructions,
@@ -316,8 +337,10 @@ abstract class _ReturnRequestInformationHeader
           required final RefundTotal refundTotal,
           required final DateTimeStringValue createdDateTime,
           required final StatusType bapiStatus,
-          required final String totalItemCount}) =
-      _$_ReturnRequestInformationHeader;
+          required final String totalItemCount,
+          required final bool isMarketPlace}) =
+      _$ReturnRequestInformationHeaderImpl;
+  _ReturnRequestInformationHeader._() : super._();
 
   @override
   StringValue get returnReference;
@@ -340,7 +363,10 @@ abstract class _ReturnRequestInformationHeader
   @override
   String get totalItemCount;
   @override
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_ReturnRequestInformationHeaderCopyWith<_$_ReturnRequestInformationHeader>
+  _$$ReturnRequestInformationHeaderImplCopyWith<
+          _$ReturnRequestInformationHeaderImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

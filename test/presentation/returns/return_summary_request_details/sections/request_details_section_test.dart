@@ -700,7 +700,7 @@ void main() {
           .byKey(WidgetKeys.returnSummaryInfoIcon('Return quantity changed'));
       expect(itemQuantityFinder, findsOneWidget);
       expect(itemQuantityInfoIconFinder, findsOneWidget);
-       await tester.fling(
+      await tester.fling(
         find.byKey(WidgetKeys.returnRequestDetailScrollList),
         const Offset(0.0, -1000.0),
         1000.0,
@@ -727,6 +727,11 @@ void main() {
 
       when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
         ReturnDetailsByRequestState.initial().copyWith(
+          requestInformation: [
+            ReturnRequestInformation.empty().copyWith(
+              returnQuantity: '2',
+            ),
+          ],
           requestInformationHeader:
               ReturnRequestInformationHeader.empty().copyWith(
             totalItemCount: '2',
