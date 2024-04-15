@@ -78,8 +78,6 @@ class SalesOrgRepository implements ISalesOrgRepository {
         accountSelectorStorageDto: AccountSelectorStorageDto.fromDomain(
           accountSelector: accountSelector.copyWith(
             salesOrg: salesOrg,
-            customerCode: '',
-            shippingAddress: '',
           ),
         ),
       );

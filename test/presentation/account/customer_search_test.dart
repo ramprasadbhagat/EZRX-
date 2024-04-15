@@ -12,6 +12,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -200,7 +201,7 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      final customerSearchPage = find.byKey(const Key('customerSearchPage'));
+      final customerSearchPage = find.byKey(WidgetKeys.customerSearchPage);
       expect(customerSearchPage, findsOneWidget);
     });
     testWidgets(
@@ -381,6 +382,100 @@ void main() {
 
       expect(customerSearchPage, findsOneWidget);
       expect(shipToAddressFinder, findsOneWidget);
+    });
+
+    testWidgets(
+        'Test have customer code list and change sale org should reset selected shipTo and customer code',
+        (tester) async {
+      final expectedSalesOrgStates = [
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2501'),
+          ),
+          isLoading: true,
+        ),
+        SalesOrgState.initial().copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2500')),
+          isLoading: false,
+        ),
+      ];
+
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeList: customerInformationMock.soldToInformation,
+        ),
+      );
+
+      whenListen(
+        salesOrgBlocMock,
+        Stream.fromIterable(expectedSalesOrgStates),
+        initialState: SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2501'),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final customerSearchPage = find.byKey(WidgetKeys.customerSearchPage);
+      expect(customerSearchPage, findsOneWidget);
+      verify(
+        () => eligibilityBlocMock.add(
+          EligibilityEvent.selectedCustomerCode(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(
+        'Test have customer code list and change sale org when not have sale org previously should not reset selected shipTo and customer code',
+        (tester) async {
+      final expectedSalesOrgStates = [
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty(),
+          isLoading: true,
+        ),
+        SalesOrgState.initial().copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2500')),
+          isLoading: false,
+        ),
+      ];
+
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeList: customerInformationMock.soldToInformation,
+        ),
+      );
+
+      whenListen(
+        salesOrgBlocMock,
+        Stream.fromIterable(expectedSalesOrgStates),
+        initialState: SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2501'),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final customerSearchPage = find.byKey(WidgetKeys.customerSearchPage);
+      expect(customerSearchPage, findsOneWidget);
+      verifyNever(
+        () => eligibilityBlocMock.add(
+          EligibilityEvent.selectedCustomerCode(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ),
+      );
     });
 
     //TODO: Fix customer search widget because change flow of select customer code
@@ -677,104 +772,104 @@ void main() {
   //     );
   //   }
 
-    // testWidgets(
-    //   'Test when cart item is not empty',
-    //   (tester) async {
-    //     when(() => cartBlocMock.state)
-    //         .thenReturn(CartState.initial().copyWith(cartItems: [
-    //       CartItem.material(
-    //         PriceAggregate.empty().copyWith(
-    //           materialInfo: fakeMaterialInfo,
-    //         ),
-    //       ),
-    //     ]));
+  // testWidgets(
+  //   'Test when cart item is not empty',
+  //   (tester) async {
+  //     when(() => cartBlocMock.state)
+  //         .thenReturn(CartState.initial().copyWith(cartItems: [
+  //       CartItem.material(
+  //         PriceAggregate.empty().copyWith(
+  //           materialInfo: fakeMaterialInfo,
+  //         ),
+  //       ),
+  //     ]));
 
-    //     when(() => customerCodeBlocMock.state).thenReturn(
-    //       CustomerCodeState.initial().copyWith(customerCodeList: [
-    //         CustomerCodeInfo.empty().copyWith(
-    //           telephoneNumber: PhoneNumber('1234567890'),
-    //           customerCodeSoldTo: '123456789',
-    //           shipToInfos: <ShipToInfo>[
-    //             ShipToInfo.empty().copyWith(
-    //               shipToCustomerCode: '12345678',
-    //             ),
-    //           ],
-    //           paymentTermDescription: '30 days',
-    //         ),
-    //       ]),
-    //     );
+  //     when(() => customerCodeBlocMock.state).thenReturn(
+  //       CustomerCodeState.initial().copyWith(customerCodeList: [
+  //         CustomerCodeInfo.empty().copyWith(
+  //           telephoneNumber: PhoneNumber('1234567890'),
+  //           customerCodeSoldTo: '123456789',
+  //           shipToInfos: <ShipToInfo>[
+  //             ShipToInfo.empty().copyWith(
+  //               shipToCustomerCode: '12345678',
+  //             ),
+  //           ],
+  //           paymentTermDescription: '30 days',
+  //         ),
+  //       ]),
+  //     );
 
-    //     await tester.pumpWidget(getScopedWidget());
-    //     await tester.pump();
-    //     final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
-    //     expect(customerCodeSelect, findsOneWidget);
-    //     await tester.pump(const Duration(seconds: 1));
-    //     expect(find.byType(ListTile), findsWidgets);
-    //     await tester.tap(
-    //       find.byType(ListTile).first,
-    //     );
-    //     await tester.pump(const Duration(seconds: 1));
-    //     expect(find.text('Change Customer Code'), findsOneWidget);
-    //     await tester.tap(find.text('Cancel'));
-    //     await tester.pumpAndSettle(const Duration(seconds: 3));
-    //     await tester.tap(find.text('Change'));
-    //     await tester.pumpAndSettle(const Duration(seconds: 3));
-    //   },
-    // );
-    // testWidgets(
-    //   'Test when cartList is empty',
-    //   (tester) async {
-    //     when(() => cartBlocMock.state).thenReturn(CartState.initial());
+  //     await tester.pumpWidget(getScopedWidget());
+  //     await tester.pump();
+  //     final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
+  //     expect(customerCodeSelect, findsOneWidget);
+  //     await tester.pump(const Duration(seconds: 1));
+  //     expect(find.byType(ListTile), findsWidgets);
+  //     await tester.tap(
+  //       find.byType(ListTile).first,
+  //     );
+  //     await tester.pump(const Duration(seconds: 1));
+  //     expect(find.text('Change Customer Code'), findsOneWidget);
+  //     await tester.tap(find.text('Cancel'));
+  //     await tester.pumpAndSettle(const Duration(seconds: 3));
+  //     await tester.tap(find.text('Change'));
+  //     await tester.pumpAndSettle(const Duration(seconds: 3));
+  //   },
+  // );
+  // testWidgets(
+  //   'Test when cartList is empty',
+  //   (tester) async {
+  //     when(() => cartBlocMock.state).thenReturn(CartState.initial());
 
-    //     when(() => customerCodeBlocMock.state).thenReturn(
-    //       CustomerCodeState.initial().copyWith(
-    //         customerCodeList: [
-    //           CustomerCodeInfo.empty().copyWith(
-    //             telephoneNumber: PhoneNumber('1234567890'),
-    //             customerCodeSoldTo: '123456789',
-    //             shipToInfos: <ShipToInfo>[
-    //               ShipToInfo.empty().copyWith(
-    //                 shipToCustomerCode: '12345678',
-    //               ),
-    //             ],
-    //             paymentTermDescription: PaymentTermDescription('30 days'),
-    //           ),
-    //         ],
-    //       ),
-    //     );
-    //     when(() => eligibilityBlocMock.state).thenReturn(
-    //       EligibilityState.initial().copyWith(
-    //         customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-    //           telephoneNumber: PhoneNumber('1234567890'),
-    //           customerCodeSoldTo: '123456789',
-    //           shipToInfos: <ShipToInfo>[
-    //             ShipToInfo.empty().copyWith(
-    //               shipToCustomerCode: '12345678',
-    //             ),
-    //           ],
-    //           paymentTermDescription: PaymentTermDescription('30 days'),
-    //         ),
-    //       ),
-    //     );
-    //     when(() => salesOrgBlocMock.state).thenReturn(
-    //       SalesOrgState.initial().copyWith(
-    //         salesOrganisation:
-    //             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
-    //       ),
-    //     );
+  //     when(() => customerCodeBlocMock.state).thenReturn(
+  //       CustomerCodeState.initial().copyWith(
+  //         customerCodeList: [
+  //           CustomerCodeInfo.empty().copyWith(
+  //             telephoneNumber: PhoneNumber('1234567890'),
+  //             customerCodeSoldTo: '123456789',
+  //             shipToInfos: <ShipToInfo>[
+  //               ShipToInfo.empty().copyWith(
+  //                 shipToCustomerCode: '12345678',
+  //               ),
+  //             ],
+  //             paymentTermDescription: PaymentTermDescription('30 days'),
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //     when(() => eligibilityBlocMock.state).thenReturn(
+  //       EligibilityState.initial().copyWith(
+  //         customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+  //           telephoneNumber: PhoneNumber('1234567890'),
+  //           customerCodeSoldTo: '123456789',
+  //           shipToInfos: <ShipToInfo>[
+  //             ShipToInfo.empty().copyWith(
+  //               shipToCustomerCode: '12345678',
+  //             ),
+  //           ],
+  //           paymentTermDescription: PaymentTermDescription('30 days'),
+  //         ),
+  //       ),
+  //     );
+  //     when(() => salesOrgBlocMock.state).thenReturn(
+  //       SalesOrgState.initial().copyWith(
+  //         salesOrganisation:
+  //             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
+  //       ),
+  //     );
 
-    //     await tester.pumpWidget(getScopedWidget());
-    //     await tester.pump();
-    //     final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
-    //     expect(customerCodeSelect, findsOneWidget);
-    //     await tester.pump(const Duration(seconds: 1));
-    //     expect(find.byType(ListTile), findsWidgets);
-    //     await tester.tap(
-    //       find.byType(ListTile).first,
-    //     );
-    //     await tester.pump(const Duration(seconds: 1));
-    //     expect(find.text('Change Customer Code'), findsNothing);
-    //   },
-    // );
+  //     await tester.pumpWidget(getScopedWidget());
+  //     await tester.pump();
+  //     final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
+  //     expect(customerCodeSelect, findsOneWidget);
+  //     await tester.pump(const Duration(seconds: 1));
+  //     expect(find.byType(ListTile), findsWidgets);
+  //     await tester.tap(
+  //       find.byType(ListTile).first,
+  //     );
+  //     await tester.pump(const Duration(seconds: 1));
+  //     expect(find.text('Change Customer Code'), findsNothing);
+  //   },
+  // );
   // });
 }

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -76,21 +77,45 @@ class CustomerSearchPage extends StatelessWidget {
           },
         ),
         actions: [
-          BlocBuilder<SalesOrgBloc, SalesOrgState>(
-            buildWhen: (previous, current) {
-              return previous.salesOrg != current.salesOrg;
+          BlocConsumer<SalesOrgBloc, SalesOrgState>(
+            listenWhen: (previous, current) =>
+                (previous.isLoading != current.isLoading &&
+                    !current.isLoading) &&
+                (previous.salesOrganisation != SalesOrganisation.empty() &&
+                    previous.salesOrganisation != current.salesOrganisation),
+            listener: (context, state) {
+              context.read<EligibilityBloc>().add(
+                    EligibilityEvent.selectedCustomerCode(
+                      customerCodeInfo: CustomerCodeInfo.empty(),
+                      shipToInfo: ShipToInfo.empty(),
+                    ),
+                  );
             },
             builder: (context, state) {
-              return GestureDetector(
-                onTap: () {
-                  if (context
-                          .read<UserBloc>()
-                          .state
-                          .userSalesOrganisations
-                          .length >
-                      1) {
-                    context.read<SalesOrgBloc>().add(
-                          SalesOrgEvent.fetchAvailableSalesOrg(
+              return BlocBuilder<SalesOrgBloc, SalesOrgState>(
+                buildWhen: (previous, current) {
+                  return previous.salesOrg != current.salesOrg;
+                },
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () {
+                      if (context
+                              .read<UserBloc>()
+                              .state
+                              .userSalesOrganisations
+                              .length >
+                          1) {
+                        context.read<SalesOrgBloc>().add(
+                              SalesOrgEvent.fetchAvailableSalesOrg(
+                                avialableSalesOrgList: context
+                                    .read<UserBloc>()
+                                    .state
+                                    .user
+                                    .userSalesOrganisations,
+                              ),
+                            );
+                        context.router.push(
+                          SalesOrgSearchRoute(
                             avialableSalesOrgList: context
                                 .read<UserBloc>()
                                 .state
@@ -98,37 +123,30 @@ class CustomerSearchPage extends StatelessWidget {
                                 .userSalesOrganisations,
                           ),
                         );
-                    context.router.push(
-                      SalesOrgSearchRoute(
-                        avialableSalesOrgList: context
-                            .read<UserBloc>()
-                            .state
-                            .user
-                            .userSalesOrganisations,
-                      ),
-                    );
-                  }
-                },
-                child: Column(
-                  children: [
-                    ClipOval(
-                      child: SizedBox(
-                        height: 25.0,
-                        width: 25.0,
-                        child: SvgPicture.asset(
-                          state.salesOrg.countryFlag,
-                          fit: BoxFit.fill,
+                      }
+                    },
+                    child: Column(
+                      children: [
+                        ClipOval(
+                          child: SizedBox(
+                            height: 25.0,
+                            width: 25.0,
+                            child: SvgPicture.asset(
+                              state.salesOrg.countryFlag,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                         ),
-                      ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '${state.salesOrg.buName} ${state.salesOrg.getOrDefaultValue('')}',
+                          style: Theme.of(context).textTheme.bodySmall,
+                          key: WidgetKeys.changeSalesOrgButton,
+                        ).tr(),
+                      ],
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '${state.salesOrg.buName} ${state.salesOrg.getOrDefaultValue('')}',
-                      style: Theme.of(context).textTheme.bodySmall,
-                      key: WidgetKeys.changeSalesOrgButton,
-                    ).tr(),
-                  ],
-                ),
+                  );
+                },
               );
             },
           ),
