@@ -27,7 +27,7 @@ class FAQInfoRepository extends IFAQInfoRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final faqInfo = await localDataSource.getFAQInfo();
+        final faqInfo = await localDataSource.getFAQInfo(salesOrg.country);
 
         return Right(faqInfo);
       } catch (e) {
@@ -46,7 +46,40 @@ class FAQInfoRepository extends IFAQInfoRepository {
         after: after,
       );
 
+      if (announcementInfo.isFaqListEmpty) {
+        return getFAQStaticList(salesOrg: salesOrg);
+      }
+
       return Right(announcementInfo);
+    } catch (e) {
+      return getFAQStaticList(salesOrg: salesOrg);
+    }
+  }
+
+  Future<Either<ApiFailure, FAQInfo>> getFAQStaticList({
+    required SalesOrg salesOrg,
+  }) async {
+    try {
+      final staticFaqInfo = await localDataSource.getFAQInfo(
+        salesOrg.country,
+      );
+
+      final updatedFaqList = staticFaqInfo.faqList
+          .map(
+            (e) => e.answer.contains('baseURL')
+                ? e.copyWith(
+                    answer: e.answer.replaceAll(
+                      'baseURL',
+                      config.baseUrl(
+                        marketDomain: salesOrg.country.toLowerCase(),
+                      ),
+                    ),
+                  )
+                : e,
+          )
+          .toList();
+
+      return Right(staticFaqInfo.copyWith(faqList: updatedFaqList));
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),

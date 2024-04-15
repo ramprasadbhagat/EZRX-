@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/faq/faq_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/faq/entity/faq_info.dart';
@@ -13,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/sales_organsiation_mock.dart';
+
 class MockFAQInfoRepository extends Mock implements FAQInfoRepository {}
 
 void main() {
@@ -20,14 +21,14 @@ void main() {
   late FAQInfo faqInfo;
   late Config config;
   final faqState = FaqState.initial();
-  final salesOrg = SalesOrg('fake-salesOrg');
+  final salesOrg = fakeMYSalesOrg;
   const pageSize = 24;
   setUpAll(() async {
     config = Config()..appFlavor = Flavor.mock;
     WidgetsFlutterBinding.ensureInitialized();
     repository = MockFAQInfoRepository();
 
-    faqInfo = await FAQInfoLocalDataSource().getFAQInfo();
+    faqInfo = await FAQInfoLocalDataSource().getFAQInfo(salesOrg.country);
   });
   group('FAQ Bloc', () {
     blocTest(

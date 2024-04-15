@@ -11,10 +11,12 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/faq/entity/faq_category_group.dart';
 import 'package:ezrxmobile/domain/faq/entity/faq_info.dart';
 import 'package:ezrxmobile/domain/faq/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/faq/datasource/faq_local.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
+import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/faq/faq.dart';
 import 'package:ezrxmobile/presentation/faq/faq_info.dart';
@@ -63,7 +65,7 @@ void main() {
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerFactory<FaqBloc>(() => faqBlocMock);
-    faqList = await FAQInfoLocalDataSource().getFAQInfo();
+    faqList = await FAQInfoLocalDataSource().getFAQInfo(salesOrg.country);
   });
   group('FAQ Screen', () {
     setUp(() {
@@ -321,9 +323,11 @@ void main() {
         final itemKey2 =
             find.byKey(Key(faqList.faqList[2].category.getOrDefaultValue('')));
         expect(itemKey2, findsOneWidget);
-        await tester.drag(
-          itemKey,
-          const Offset(0, -10000),
+
+        await tester.dragUntilVisible(
+          find.text('Contact us'),
+          find.byType(ScrollList<FAQCategoryGroup>),
+          const Offset(0, -500),
         );
 
         await tester.pumpAndSettle();
@@ -415,6 +419,14 @@ void main() {
         await tester.pump(const Duration(seconds: 3));
 
         final contactUs = find.text('Contact us');
+
+        await tester.dragUntilVisible(
+          contactUs,
+          find.byType(ScrollList<FAQCategoryGroup>),
+          const Offset(0, -500),
+        );
+
+        await tester.pumpAndSettle();
 
         expect(contactUs, findsOneWidget);
         await tester.tap(

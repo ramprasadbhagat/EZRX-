@@ -15,4 +15,8 @@ class FAQInfo with _$FAQInfo {
         faqList: <FAQItem>[],
         endCursor: '',
       );
+
+  bool get isFaqListEmpty => faqList
+      .where((e) => e.question.isNotEmpty && e.answer.isNotEmpty)
+      .isEmpty;
 }

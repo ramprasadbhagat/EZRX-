@@ -4,8 +4,11 @@ import 'package:ezrxmobile/domain/faq/entity/faq_info.dart';
 import 'package:ezrxmobile/infrastructure/faq/datasource/faq_local.dart';
 import 'package:ezrxmobile/infrastructure/faq/datasource/faq_remote.dart';
 import 'package:ezrxmobile/infrastructure/faq/repository/faq_repository.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -18,19 +21,20 @@ class FAQInfoRemoteDataSourceMock extends Mock
     implements FAQInfoRemoteDataSource {}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   late Config mockConfig;
   late SalesOrg mockSalesOrg;
 
   late FAQInfoRemoteDataSource remoteDataSource;
   late FAQInfoLocalDataSource localDataSource;
   late FAQInfoRepository repository;
-  final faqMockList = FAQInfo.empty();
+  late FAQInfo faqMockList;
 
   const pageSize = 24;
 
-  setUpAll(() {
+  setUpAll(() async {
     mockConfig = MockConfig();
-    mockSalesOrg = MockSalesOrg();
+    mockSalesOrg = fakeMYSalesOrg;
     localDataSource = FAQInfoLocalDataSourceMock();
     remoteDataSource = FAQInfoRemoteDataSourceMock();
 
@@ -39,13 +43,15 @@ void main() {
       localDataSource: localDataSource,
       remoteDataSource: remoteDataSource,
     );
+    faqMockList =
+        await FAQInfoLocalDataSource().getFAQInfo(mockSalesOrg.country);
   });
   group('FAQRepository should - ', () {
     test(' get faqInfo successfully locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
       when(
-        () => localDataSource.getFAQInfo(),
+        () => localDataSource.getFAQInfo(mockSalesOrg.country),
       ).thenAnswer((invocation) async => faqMockList);
 
       final result = await repository.getFAQList(
@@ -62,7 +68,7 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
       when(
-        () => localDataSource.getFAQInfo(),
+        () => localDataSource.getFAQInfo(mockSalesOrg.country),
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
       );
@@ -84,18 +90,15 @@ void main() {
           .thenReturn('4A583EF3-A105-4A00-BC98-EC96A9967966');
       when(() => mockConfig.announcementApiUrlPath)
           .thenReturn('/api/announcement');
-      when(() => mockSalesOrg.faqVariablePath)
-          .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
-      when(() => mockSalesOrg.languageCodeForHelpAndSupport)
-          .thenReturn('my-MM');
+
       when(
         () => remoteDataSource.getFAQInfo(
           announcementUrlPath: '/api/announcement',
-          variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
+          variablePath: mockSalesOrg.faqVariablePath,
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
           pageSize: 24,
           after: '',
-          lang: 'my-MM',
+          lang: mockSalesOrg.languageCodeForHelpAndSupport,
         ),
       ).thenAnswer((invocation) async => faqMockList);
       final result = await repository.getFAQList(
@@ -110,7 +113,7 @@ void main() {
     });
     test(' get FaqInfo fail Remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(() => mockSalesOrg.languageCodeForHelpAndSupport).thenReturn('EN');
+
       when(
         () => remoteDataSource.getFAQInfo(
           announcementUrlPath: '/api/announcement',
@@ -123,13 +126,20 @@ void main() {
       ).thenThrow(
         (invocation) async => Exception('fake-error'),
       );
+      when(
+        () => localDataSource.getFAQInfo(
+          mockSalesOrg.country,
+        ),
+      ).thenAnswer(
+        (invocation) async => faqMockList,
+      );
       final result = await repository.getFAQList(
         salesOrg: mockSalesOrg,
         pageSize: pageSize,
         after: '',
       );
       expect(
-        result.isLeft(),
+        result.isRight(),
         true,
       );
     });

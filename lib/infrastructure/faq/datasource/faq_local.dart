@@ -5,11 +5,12 @@ import 'package:ezrxmobile/infrastructure/faq/dtos/faq_info_dto.dart';
 import 'package:flutter/services.dart';
 
 class FAQInfoLocalDataSource {
-  Future<FAQInfo> getFAQInfo() async {
+  Future<FAQInfo> getFAQInfo(String country) async {
     final res = json.decode(
-      await rootBundle.loadString('assets/json/getFAQResponse.json'),
+      await rootBundle
+          .loadString('assets/json/faq${country}marketStaticContent.json'),
     );
 
-    return FAQInfoDto.fromJson(res['data']['search']).toDomain;
+    return FAQInfoDto.fromJson(res).toDomain;
   }
 }
