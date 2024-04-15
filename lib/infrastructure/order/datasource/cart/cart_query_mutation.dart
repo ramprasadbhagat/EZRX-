@@ -565,6 +565,7 @@ class CartQueryMutation {
         ID
         UserID
         EzRxItems {
+          IsGimmick
           Type
           ProductID
           ItemSource
@@ -1138,6 +1139,7 @@ fragment ezrxItemsFields on Item {
   orderedQty
   remainingQty
   mov
+  IsGimmick
   is26SeriesMaterial
   ${enableMarketplace ? 'isMarketPlace' : ''}
   materialType

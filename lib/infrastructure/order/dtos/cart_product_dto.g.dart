@@ -6,8 +6,8 @@ part of 'cart_product_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CartProductDtoImpl _$$CartProductDtoImplFromJson(Map<String, dynamic> json) =>
-    _$CartProductDtoImpl(
+_$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
+    _$_CartProductDto(
       productID: json['productID'] as String? ?? '',
       parentID: json['parentID'] as String? ?? '',
       type: json['type'] as String? ?? '',
@@ -61,10 +61,10 @@ _$CartProductDtoImpl _$$CartProductDtoImplFromJson(Map<String, dynamic> json) =>
       materialGroup4: json['materialGroup4'] as String? ?? '',
       materialGroup2: json['materialGroup2'] as String? ?? '',
       is26SeriesMaterial: json['is26SeriesMaterial'] as bool? ?? false,
+      isGimmick: json['isGimmick'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$CartProductDtoImplToJson(
-        _$CartProductDtoImpl instance) =>
+Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
     <String, dynamic>{
       'productID': instance.productID,
       'parentID': instance.parentID,
@@ -100,11 +100,11 @@ Map<String, dynamic> _$$CartProductDtoImplToJson(
       'materialGroup4': instance.materialGroup4,
       'materialGroup2': instance.materialGroup2,
       'is26SeriesMaterial': instance.is26SeriesMaterial,
+      'isGimmick': instance.isGimmick,
     };
 
-_$BundleDetailsDtoImpl _$$BundleDetailsDtoImplFromJson(
-        Map<String, dynamic> json) =>
-    _$BundleDetailsDtoImpl(
+_$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>
+    _$_BundleDetailsDto(
       bundleName: json['bundleName'] as String? ?? '',
       bundleCode: json['bundleCode'] as String? ?? '',
       bundleInfo: (json['bundleInformation'] as List<dynamic>?)
@@ -113,8 +113,7 @@ _$BundleDetailsDtoImpl _$$BundleDetailsDtoImplFromJson(
           [],
     );
 
-Map<String, dynamic> _$$BundleDetailsDtoImplToJson(
-        _$BundleDetailsDtoImpl instance) =>
+Map<String, dynamic> _$$_BundleDetailsDtoToJson(_$_BundleDetailsDto instance) =>
     <String, dynamic>{
       'bundleName': instance.bundleName,
       'bundleCode': instance.bundleCode,

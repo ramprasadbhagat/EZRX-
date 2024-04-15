@@ -50,6 +50,7 @@
       CounterOfferCurrency
       DiscountOverridePercentage	
       Comment
+      IsGimmick
       is26SeriesMaterial
       BonusMaterials {
         principalCode

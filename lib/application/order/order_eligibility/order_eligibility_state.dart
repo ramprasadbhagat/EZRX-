@@ -73,8 +73,10 @@ class OrderEligibilityState with _$OrderEligibilityState {
         return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal & $displayMPMinOrderAmount for MP subtotal.';
       } else if (!zpSubtotalMOVEligible) {
         return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal.';
-      } else if (is26SeriesMaterialOnlyInCart) {
+      } else if (askUserToAddCommercialMaterial) {
         return 'Your cart must contain other commercial material to proceed checkout';
+      } else if (isGimmickMaterialNotAllowed) {
+        return 'Gimmick material $gimmickMaterialCode is not allowed';
       } else {
         return 'Please ensure that minimum order value is at least $displayMPMinOrderAmount for MP subtotal.';
       }
@@ -298,17 +300,38 @@ class OrderEligibilityState with _$OrderEligibilityState {
       displayInvalidItemsBanner ||
       isNotAvailableToCheckoutForID ||
       !isMinOrderValuePassed ||
-      is26SeriesMaterialOnlyInCart;
+      askUserToAddCommercialMaterial ||
+      isGimmickMaterialNotAllowed;
 
   List<bool> get activeErrorsList => [
         displayMovWarning,
         displayInvalidItemsWarning,
         isNotAvailableToCheckoutForID,
-        is26SeriesMaterialOnlyInCart,
+        askUserToAddCommercialMaterial,
+        isGimmickMaterialNotAllowed,
       ].where((condition) => condition).toList();
 
   bool get hasMultipleErrors => activeErrorsList.length > 1;
 
-  bool get is26SeriesMaterialOnlyInCart => cartItems.isNotEmpty &&
+  bool get is26SeriesMaterialOnlyInCart =>
+      cartItems.isNotEmpty &&
       cartItems.every((element) => element.is26SeriesMaterial);
+
+  String get gimmickMaterialCode => cartItems
+      .where((element) => element.isGimmickMaterial)
+      .map((e) => e.materialInfo.materialNumber.displayMatNo)
+      .toList()
+      .join(',');
+
+  bool get isGimmickMaterialPresentInCart =>
+      cartItems.isNotEmpty &&
+      cartItems.any((element) => element.isGimmickMaterial);
+
+  bool get isGimmickMaterialNotAllowed =>
+      (!configs.enableGimmickMaterial && isGimmickMaterialPresentInCart) ||
+      (!user.role.type.isSalesRepRole && isGimmickMaterialPresentInCart);
+
+  bool get askUserToAddCommercialMaterial =>
+      is26SeriesMaterialOnlyInCart ||
+      (configs.enableGimmickMaterial && cartItems.isGimmickMaterialOnlyInCart);
 }

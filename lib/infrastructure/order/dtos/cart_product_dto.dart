@@ -84,6 +84,8 @@ class CartProductDto with _$CartProductDto {
     required String materialGroup2,
     @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
     required bool is26SeriesMaterial,
+    @JsonKey(name: 'isGimmick', defaultValue: false)
+    required bool isGimmick,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -140,7 +142,8 @@ class CartProductDto with _$CartProductDto {
           cartItemDetails.materialInfo.defaultMaterialDescription,
       materialGroup2: cartItemDetails.materialInfo.materialGroup2.getOrCrash(),
       materialGroup4: cartItemDetails.materialInfo.materialGroup4.getOrCrash(),
-      is26SeriesMaterial: cartItemDetails.is26SeriesMaterial,
+      is26SeriesMaterial: cartItemDetails.is26SeriesMaterial, 
+      isGimmick: cartItemDetails.isGimmickMaterial,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -199,6 +202,7 @@ class CartProductDto with _$CartProductDto {
       comboMaterials: comboMaterials.map((e) => e.toDomain(comboDeal)).toList(),
       maximumQty: maximumQty,
       is26SeriesMaterial: is26SeriesMaterial,
+      isGimmickMaterial: isGimmick,
     );
   }
 

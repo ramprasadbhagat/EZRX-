@@ -12,7 +12,7 @@ part of 'price_aggregate.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$PriceAggregate {
@@ -35,6 +35,7 @@ mixin _$PriceAggregate {
       throw _privateConstructorUsedError;
   int get maximumQty => throw _privateConstructorUsedError;
   bool get is26SeriesMaterial => throw _privateConstructorUsedError;
+  bool get isGimmickMaterial => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceAggregateCopyWith<PriceAggregate> get copyWith =>
@@ -63,7 +64,8 @@ abstract class $PriceAggregateCopyWith<$Res> {
       List<BonusSampleItem> bonusSampleItems,
       List<ComboMaterialItem> comboMaterials,
       int maximumQty,
-      bool is26SeriesMaterial});
+      bool is26SeriesMaterial,
+      bool isGimmickMaterial});
 
   $PriceCopyWith<$Res> get price;
   $MaterialInfoCopyWith<$Res> get materialInfo;
@@ -103,6 +105,7 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
     Object? comboMaterials = null,
     Object? maximumQty = null,
     Object? is26SeriesMaterial = null,
+    Object? isGimmickMaterial = null,
   }) {
     return _then(_value.copyWith(
       price: null == price
@@ -169,6 +172,10 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
           ? _value.is26SeriesMaterial
           : is26SeriesMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
+      isGimmickMaterial: null == isGimmickMaterial
+          ? _value.isGimmickMaterial
+          : isGimmickMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -231,11 +238,11 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
 }
 
 /// @nodoc
-abstract class _$$PriceAggregateImplCopyWith<$Res>
+abstract class _$$_PriceAggregateCopyWith<$Res>
     implements $PriceAggregateCopyWith<$Res> {
-  factory _$$PriceAggregateImplCopyWith(_$PriceAggregateImpl value,
-          $Res Function(_$PriceAggregateImpl) then) =
-      __$$PriceAggregateImplCopyWithImpl<$Res>;
+  factory _$$_PriceAggregateCopyWith(
+          _$_PriceAggregate value, $Res Function(_$_PriceAggregate) then) =
+      __$$_PriceAggregateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -254,7 +261,8 @@ abstract class _$$PriceAggregateImplCopyWith<$Res>
       List<BonusSampleItem> bonusSampleItems,
       List<ComboMaterialItem> comboMaterials,
       int maximumQty,
-      bool is26SeriesMaterial});
+      bool is26SeriesMaterial,
+      bool isGimmickMaterial});
 
   @override
   $PriceCopyWith<$Res> get price;
@@ -273,11 +281,11 @@ abstract class _$$PriceAggregateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PriceAggregateImplCopyWithImpl<$Res>
-    extends _$PriceAggregateCopyWithImpl<$Res, _$PriceAggregateImpl>
-    implements _$$PriceAggregateImplCopyWith<$Res> {
-  __$$PriceAggregateImplCopyWithImpl(
-      _$PriceAggregateImpl _value, $Res Function(_$PriceAggregateImpl) _then)
+class __$$_PriceAggregateCopyWithImpl<$Res>
+    extends _$PriceAggregateCopyWithImpl<$Res, _$_PriceAggregate>
+    implements _$$_PriceAggregateCopyWith<$Res> {
+  __$$_PriceAggregateCopyWithImpl(
+      _$_PriceAggregate _value, $Res Function(_$_PriceAggregate) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -299,8 +307,9 @@ class __$$PriceAggregateImplCopyWithImpl<$Res>
     Object? comboMaterials = null,
     Object? maximumQty = null,
     Object? is26SeriesMaterial = null,
+    Object? isGimmickMaterial = null,
   }) {
-    return _then(_$PriceAggregateImpl(
+    return _then(_$_PriceAggregate(
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -365,14 +374,18 @@ class __$$PriceAggregateImplCopyWithImpl<$Res>
           ? _value.is26SeriesMaterial
           : is26SeriesMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
+      isGimmickMaterial: null == isGimmickMaterial
+          ? _value.isGimmickMaterial
+          : isGimmickMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$PriceAggregateImpl extends _PriceAggregate {
-  const _$PriceAggregateImpl(
+class _$_PriceAggregate extends _PriceAggregate {
+  const _$_PriceAggregate(
       {required this.price,
       required this.materialInfo,
       required this.bundle,
@@ -388,7 +401,8 @@ class _$PriceAggregateImpl extends _PriceAggregate {
       required final List<BonusSampleItem> bonusSampleItems,
       required final List<ComboMaterialItem> comboMaterials,
       required this.maximumQty,
-      this.is26SeriesMaterial = false})
+      this.is26SeriesMaterial = false,
+      this.isGimmickMaterial = false})
       : _stockInfoList = stockInfoList,
         _bonusSampleItems = bonusSampleItems,
         _comboMaterials = comboMaterials,
@@ -450,17 +464,20 @@ class _$PriceAggregateImpl extends _PriceAggregate {
   @override
   @JsonKey()
   final bool is26SeriesMaterial;
+  @override
+  @JsonKey()
+  final bool isGimmickMaterial;
 
   @override
   String toString() {
-    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList, bonusSampleItems: $bonusSampleItems, comboMaterials: $comboMaterials, maximumQty: $maximumQty, is26SeriesMaterial: $is26SeriesMaterial)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList, bonusSampleItems: $bonusSampleItems, comboMaterials: $comboMaterials, maximumQty: $maximumQty, is26SeriesMaterial: $is26SeriesMaterial, isGimmickMaterial: $isGimmickMaterial)';
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PriceAggregateImpl &&
+            other is _$_PriceAggregate &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.materialInfo, materialInfo) ||
                 other.materialInfo == materialInfo) &&
@@ -491,7 +508,9 @@ class _$PriceAggregateImpl extends _PriceAggregate {
             (identical(other.maximumQty, maximumQty) ||
                 other.maximumQty == maximumQty) &&
             (identical(other.is26SeriesMaterial, is26SeriesMaterial) ||
-                other.is26SeriesMaterial == is26SeriesMaterial));
+                other.is26SeriesMaterial == is26SeriesMaterial) &&
+            (identical(other.isGimmickMaterial, isGimmickMaterial) ||
+                other.isGimmickMaterial == isGimmickMaterial));
   }
 
   @override
@@ -512,14 +531,14 @@ class _$PriceAggregateImpl extends _PriceAggregate {
       const DeepCollectionEquality().hash(_bonusSampleItems),
       const DeepCollectionEquality().hash(_comboMaterials),
       maximumQty,
-      is26SeriesMaterial);
+      is26SeriesMaterial,
+      isGimmickMaterial);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PriceAggregateImplCopyWith<_$PriceAggregateImpl> get copyWith =>
-      __$$PriceAggregateImplCopyWithImpl<_$PriceAggregateImpl>(
-          this, _$identity);
+  _$$_PriceAggregateCopyWith<_$_PriceAggregate> get copyWith =>
+      __$$_PriceAggregateCopyWithImpl<_$_PriceAggregate>(this, _$identity);
 }
 
 abstract class _PriceAggregate extends PriceAggregate {
@@ -539,7 +558,8 @@ abstract class _PriceAggregate extends PriceAggregate {
       required final List<BonusSampleItem> bonusSampleItems,
       required final List<ComboMaterialItem> comboMaterials,
       required final int maximumQty,
-      final bool is26SeriesMaterial}) = _$PriceAggregateImpl;
+      final bool is26SeriesMaterial,
+      final bool isGimmickMaterial}) = _$_PriceAggregate;
   const _PriceAggregate._() : super._();
 
   @override
@@ -575,7 +595,9 @@ abstract class _PriceAggregate extends PriceAggregate {
   @override
   bool get is26SeriesMaterial;
   @override
+  bool get isGimmickMaterial;
+  @override
   @JsonKey(ignore: true)
-  _$$PriceAggregateImplCopyWith<_$PriceAggregateImpl> get copyWith =>
+  _$$_PriceAggregateCopyWith<_$_PriceAggregate> get copyWith =>
       throw _privateConstructorUsedError;
 }

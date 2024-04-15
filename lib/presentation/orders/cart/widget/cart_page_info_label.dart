@@ -35,10 +35,20 @@ class _CartPageInfoLabel extends StatelessWidget {
                         ),
                         showLeadingIcon: state.hasMultipleErrors,
                       ),
-                    if (state.is26SeriesMaterialOnlyInCart)
+                    if (state.askUserToAddCommercialMaterial)
                       _ErrorText(
                         text: context.tr(
                           'Your cart must contain other commercial material to proceed checkout.',
+                        ),
+                        showLeadingIcon: state.hasMultipleErrors,
+                      ),
+                    if (state.isGimmickMaterialNotAllowed)
+                      _ErrorText(
+                        text: context.tr(
+                          'Gimmick material {gimmikMaterialCode} is not allowed',
+                           namedArgs: {
+                            'gimmikMaterialCode': state.gimmickMaterialCode,
+                          },
                         ),
                         showLeadingIcon: state.hasMultipleErrors,
                       ),

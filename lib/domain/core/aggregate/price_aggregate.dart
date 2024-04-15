@@ -50,6 +50,7 @@ class PriceAggregate with _$PriceAggregate {
     required List<ComboMaterialItem> comboMaterials,
     required int maximumQty,
     @Default(false) bool is26SeriesMaterial,
+    @Default(false) bool isGimmickMaterial,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -83,6 +84,7 @@ class PriceAggregate with _$PriceAggregate {
         salesOrgConfig: salesOrgConfig,
         bonusSampleItems: bonusSampleItems,
         is26SeriesMaterial: is26SeriesMaterial,
+        isGimmickMaterial: isGimmickMaterial,
       );
     }
     if (materialInfo.type.typeCombo) {
