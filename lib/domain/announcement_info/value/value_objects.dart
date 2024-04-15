@@ -21,33 +21,6 @@ class HtmlContent extends ValueObject<String> {
   const HtmlContent._(this.value);
 }
 
-class Manufacturer extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory Manufacturer(String input) {
-    return Manufacturer._(right(input));
-  }
-
-  String get getManufacturerLabel =>
-      constructManufacturerBy(value.getOrElse(() => ''));
-
-  const Manufacturer._(this.value);
-}
-
-class Source extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory Source(String input) {
-    return Source._(right(input));
-  }
-
-  String get getSourceLabel => constructSourceBy(value.getOrElse(() => ''));
-
-  const Source._(this.value);
-}
-
 class Attachment extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

@@ -22,8 +22,8 @@ mixin _$AnnouncementInfoDetails {
   String get summary => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   DateTimeStringValue get publishedDate => throw _privateConstructorUsedError;
-  Manufacturer get manufacturer => throw _privateConstructorUsedError;
-  Source get source => throw _privateConstructorUsedError;
+  String get manufacturer => throw _privateConstructorUsedError;
+  String get source => throw _privateConstructorUsedError;
   String get tag => throw _privateConstructorUsedError;
   DateTimeStringValue get releaseDate => throw _privateConstructorUsedError;
   List<Attachment> get documents => throw _privateConstructorUsedError;
@@ -46,8 +46,8 @@ abstract class $AnnouncementInfoDetailsCopyWith<$Res> {
       String summary,
       String thumbnail,
       DateTimeStringValue publishedDate,
-      Manufacturer manufacturer,
-      Source source,
+      String manufacturer,
+      String source,
       String tag,
       DateTimeStringValue releaseDate,
       List<Attachment> documents});
@@ -107,11 +107,11 @@ class _$AnnouncementInfoDetailsCopyWithImpl<$Res,
       manufacturer: null == manufacturer
           ? _value.manufacturer
           : manufacturer // ignore: cast_nullable_to_non_nullable
-              as Manufacturer,
+              as String,
       source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as Source,
+              as String,
       tag: null == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
@@ -143,8 +143,8 @@ abstract class _$$_AnnouncementInfoDetailsCopyWith<$Res>
       String summary,
       String thumbnail,
       DateTimeStringValue publishedDate,
-      Manufacturer manufacturer,
-      Source source,
+      String manufacturer,
+      String source,
       String tag,
       DateTimeStringValue releaseDate,
       List<Attachment> documents});
@@ -202,11 +202,11 @@ class __$$_AnnouncementInfoDetailsCopyWithImpl<$Res>
       manufacturer: null == manufacturer
           ? _value.manufacturer
           : manufacturer // ignore: cast_nullable_to_non_nullable
-              as Manufacturer,
+              as String,
       source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as Source,
+              as String,
       tag: null == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
@@ -254,9 +254,9 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
   @override
   final DateTimeStringValue publishedDate;
   @override
-  final Manufacturer manufacturer;
+  final String manufacturer;
   @override
-  final Source source;
+  final String source;
   @override
   final String tag;
   @override
@@ -329,8 +329,8 @@ abstract class _AnnouncementInfoDetails extends AnnouncementInfoDetails {
       required final String summary,
       required final String thumbnail,
       required final DateTimeStringValue publishedDate,
-      required final Manufacturer manufacturer,
-      required final Source source,
+      required final String manufacturer,
+      required final String source,
       required final String tag,
       required final DateTimeStringValue releaseDate,
       required final List<Attachment> documents}) = _$_AnnouncementInfoDetails;
@@ -349,9 +349,9 @@ abstract class _AnnouncementInfoDetails extends AnnouncementInfoDetails {
   @override
   DateTimeStringValue get publishedDate;
   @override
-  Manufacturer get manufacturer;
+  String get manufacturer;
   @override
-  Source get source;
+  String get source;
   @override
   String get tag;
   @override

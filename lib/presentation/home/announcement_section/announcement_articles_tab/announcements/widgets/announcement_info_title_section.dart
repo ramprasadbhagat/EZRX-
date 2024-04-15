@@ -45,16 +45,8 @@ class _AnnouncementInfoTitleSection extends StatelessWidget {
                         textAlign: TextAlign.left,
                       ),
                     ),
-                  if (details.sourceAndOrAuthorLabel.isNotEmpty)
-                    FittedBox(
-                      child: Text(
-                        details.sourceAndOrAuthorLabel,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: ZPColors.neutralsGrey1,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
+                    AnnouncementManufactureSource(
+                      details: details,
                     ),
                   if (details.tag.isNotEmpty)
                     Container(

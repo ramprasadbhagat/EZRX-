@@ -33,14 +33,6 @@ String addBaseUrlToImgSrcWithMedia(String input) {
   return document.outerHtml;
 }
 
-String constructSourceBy(String source) {
-  return source.isEmpty ? '' : 'Sourced By $source';
-}
-
-String constructManufacturerBy(String manufacturer) {
-  return manufacturer.isEmpty ? '' : 'By $manufacturer';
-}
-
 String svgIconForFileType(String source) {
   switch (fileTypeFromPath(source)) {
     case '.pdf':

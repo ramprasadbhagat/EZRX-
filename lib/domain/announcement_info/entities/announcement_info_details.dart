@@ -15,8 +15,8 @@ class AnnouncementInfoDetails with _$AnnouncementInfoDetails {
     required String summary,
     required String thumbnail,
     required DateTimeStringValue publishedDate,
-    required Manufacturer manufacturer,
-    required Source source,
+    required String manufacturer,
+    required String source,
     required String tag,
     required DateTimeStringValue releaseDate,
     required List<Attachment> documents,
@@ -29,19 +29,10 @@ class AnnouncementInfoDetails with _$AnnouncementInfoDetails {
         summary: '',
         thumbnail: '',
         publishedDate: DateTimeStringValue(''),
-        manufacturer: Manufacturer(''),
-        source: Source(''),
+        manufacturer: '',
+        source: '',
         tag: '',
         releaseDate: DateTimeStringValue(''),
         documents: <Attachment>[],
       );
-
-  String get sourceAndOrAuthorLabel {
-    final manufacturerBy = manufacturer.getManufacturerLabel;
-    final sourceBy = source.getSourceLabel;
-    final divider =
-        manufacturerBy.isNotEmpty && sourceBy.isNotEmpty ? ' | ' : '';
-
-    return '$manufacturerBy$divider$sourceBy';
-  }
 }
