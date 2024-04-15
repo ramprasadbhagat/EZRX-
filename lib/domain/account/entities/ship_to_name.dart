@@ -21,5 +21,5 @@ class ShipToName with _$ShipToName {
       );
 
   @override
-  String toString() => '$name1 $name2 $name3 $name4';
+  String toString() => '$name1 $name2 $name3 $name4'.trim();
 }

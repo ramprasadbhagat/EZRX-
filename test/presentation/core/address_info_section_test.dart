@@ -71,8 +71,9 @@ void main() {
     testWidgets('Test customer code address in proper format', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          customerCodeInfo:  customerInformationMock.soldToInformation.last,
-          shipToInfo:  customerInformationMock.soldToInformation.last.shipToInfos.first,
+          customerCodeInfo: customerInformationMock.soldToInformation.last,
+          shipToInfo:
+              customerInformationMock.soldToInformation.last.shipToInfos.first,
         ),
       );
       await tester.pumpWidget(getWidget());
@@ -92,7 +93,7 @@ void main() {
         EligibilityState.initial().copyWith(
           customerCodeInfo: customerInformationMock.soldToInformation.last,
           shipToInfo:
-          customerInformationMock.soldToInformation.last.shipToInfos.first,
+              customerInformationMock.soldToInformation.last.shipToInfos.first,
         ),
       );
       await tester.pumpWidget(getWidget());
@@ -100,7 +101,7 @@ void main() {
       final customerCodeTextFinder =
           find.textContaining('Delivery to: 0070149863');
       final fullCustomerAddressFinder = find.textContaining(
-        'RSD HOSPITALS SDN BHD (SJMC)   t/a SUBANG JAYA MEDICAL CENTRE, NO 1 JALAN SS 12/1A, 47500 SUBANG, JAYA, PETALING, PETALING JAYA 47500',
+        'RSD HOSPITALS SDN BHD (SJMC) t/a SUBANG JAYA MEDICAL CENTRE, NO 1 JALAN SS 12/1A, 47500 SUBANG, JAYA, PETALING, PETALING JAYA 47500',
       );
 
       expect(customerCodeTextFinder, findsOneWidget);

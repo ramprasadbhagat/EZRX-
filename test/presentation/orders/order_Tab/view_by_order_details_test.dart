@@ -1240,7 +1240,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       const fullShipToAddress =
-          'RSD HOSPITALS SDN BHD (SJMC)   t/a SUBANG JAYA MEDICAL CENTRE, NO 1 JALAN SS 12/1A, 47500 SUBANG, JAYA, PETALING, PETALING JAYA 47500';
+          'RSD HOSPITALS SDN BHD (SJMC) t/a SUBANG JAYA MEDICAL CENTRE, NO 1 JALAN SS 12/1A, 47500 SUBANG, JAYA, PETALING, PETALING JAYA 47500';
       final shipToAddressFinder = find.textContaining(fullShipToAddress);
       expect(shipToAddressFinder, findsOneWidget);
     });

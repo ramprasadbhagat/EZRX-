@@ -81,7 +81,7 @@ double getDoubleParsedValue(String value) =>
 
 String getPaymentTermValue(String value) => value.isEmpty
     ? ''
-    : value.characters.getRange(0, value.indexOf('-')).string;
+    : value.characters.getRange(0, value.indexOf('-')).string.trim();
 
 PriceOverrideValue getPriceOverrideValue(double value) =>
     PriceOverrideValue(value);
