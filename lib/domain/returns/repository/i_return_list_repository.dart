@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
@@ -40,9 +39,11 @@ abstract class IReturnListRepository {
   Future<Either<ApiFailure, String>> getFileUrl({
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Username username,
+    required User user,
     required SalesOrg salesOrg,
     required bool isViewByReturn,
+    required ReturnFilter appliedFilter,
+    required SearchKey searchKey,
   });
 
   Future<Either<ApiFailure, File>> downloadFile({

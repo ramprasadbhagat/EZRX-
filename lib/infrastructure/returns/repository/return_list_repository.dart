@@ -4,12 +4,12 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_excel_list_request.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_list_request.dart';
@@ -20,6 +20,7 @@ import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/return_excel_list_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_list_request_dto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -161,9 +162,11 @@ class ReturnListRepository extends IReturnListRepository {
   Future<Either<ApiFailure, String>> getFileUrl({
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required Username username,
+    required User user,
     required SalesOrg salesOrg,
     required bool isViewByReturn,
+    required ReturnFilter appliedFilter,
+    required SearchKey searchKey,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -174,13 +177,22 @@ class ReturnListRepository extends IReturnListRepository {
         return Left(FailureHandler.handleFailure(e));
       }
     }
+
     try {
-      final fileUrl = await remoteDataSource.getFileUrl(
-        soldTo: customerCodeInfo.customerCodeSoldTo,
-        shipTo: shipToInfo.shipToCustomerCode,
-        username: username.getOrCrash(),
-        salesOrg: salesOrg.getOrCrash(),
+      final returnExcelListByItemRequest = _getReturnExcelListRequest(
+        customerCode: customerCodeInfo.customerCodeSoldTo,
         isViewByReturn: isViewByReturn,
+        shipToInfo: shipToInfo.shipToCustomerCode,
+        user: user,
+        appliedFilter: appliedFilter,
+        searchKey: searchKey,
+      );
+
+      final fileUrl = await remoteDataSource.getFileUrl(
+        salesOrg: salesOrg.getOrCrash(),
+        requestParams:
+            ReturnExcelListRequestDto.fromDomain(returnExcelListByItemRequest)
+                .toMap(),
       );
 
       return Right(fileUrl);
@@ -222,6 +234,23 @@ class ReturnListRepository extends IReturnListRepository {
         userName: user.username,
         after: offset,
         first: pageSize,
+        filter: appliedFilter,
+        searchKey: searchKey,
+      );
+
+  ReturnExcelListRequest _getReturnExcelListRequest({
+    required String customerCode,
+    required bool isViewByReturn,
+    required String shipToInfo,
+    required User user,
+    required ReturnFilter appliedFilter,
+    required SearchKey searchKey,
+  }) =>
+      ReturnExcelListRequest.empty().copyWith(
+        customerCode: customerCode,
+        isViewByReturn: isViewByReturn,
+        shipToInfo: shipToInfo,
+        userName: user.username,
         filter: appliedFilter,
         searchKey: searchKey,
       );

@@ -155,9 +155,11 @@ class ReturnListByRequestBloc
           final fileUrlFailureOrSuccess = await returnListRepository.getFileUrl(
             customerCodeInfo: state.customerCodeInfo,
             shipToInfo: state.shipInfo,
-            username: state.user.username,
+            user: state.user,
             salesOrg: state.salesOrg,
             isViewByReturn: true,
+            appliedFilter: state.appliedFilter,
+            searchKey: state.searchKey,
           );
           await fileUrlFailureOrSuccess.fold(
             (failure) async => emit(

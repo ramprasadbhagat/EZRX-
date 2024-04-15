@@ -12,7 +12,7 @@ part of 'return_list_by_item_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnListByItemEvent {
@@ -95,10 +95,10 @@ class _$ReturnListByItemEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrg salesOrg,
@@ -112,11 +112,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? user = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -174,8 +174,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.salesOrg,
       required this.shipInfo,
       required this.customerCodeInfo,
@@ -196,10 +196,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.shipInfo, shipInfo) ||
@@ -216,8 +216,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -306,21 +306,22 @@ abstract class _Initialized implements ReturnListByItemEvent {
       {required final SalesOrg salesOrg,
       required final ShipToInfo shipInfo,
       required final CustomerCodeInfo customerCodeInfo,
-      required final User user}) = _$_Initialized;
+      required final User user}) = _$InitializedImpl;
 
   SalesOrg get salesOrg;
   ShipToInfo get shipInfo;
   CustomerCodeInfo get customerCodeInfo;
   User get user;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnFilter appliedFilter, SearchKey searchKey});
 
@@ -328,10 +329,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -340,7 +342,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? appliedFilter = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       appliedFilter: null == appliedFilter
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
@@ -363,8 +365,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.appliedFilter, required this.searchKey});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.appliedFilter, required this.searchKey});
 
   @override
   final ReturnFilter appliedFilter;
@@ -377,10 +379,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter) &&
             (identical(other.searchKey, searchKey) ||
@@ -393,8 +395,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -481,35 +483,35 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements ReturnListByItemEvent {
   const factory _Fetch(
       {required final ReturnFilter appliedFilter,
-      required final SearchKey searchKey}) = _$_Fetch;
+      required final SearchKey searchKey}) = _$FetchImpl;
 
   ReturnFilter get appliedFilter;
   SearchKey get searchKey;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore();
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl();
 
   @override
   String toString() {
@@ -517,9 +519,9 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMore);
+        (other.runtimeType == runtimeType && other is _$LoadMoreImpl);
   }
 
   @override
@@ -608,29 +610,29 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements ReturnListByItemEvent {
-  const factory _LoadMore() = _$_LoadMore;
+  const factory _LoadMore() = _$LoadMoreImpl;
 }
 
 /// @nodoc
-abstract class _$$_DownloadFileCopyWith<$Res> {
-  factory _$$_DownloadFileCopyWith(
-          _$_DownloadFile value, $Res Function(_$_DownloadFile) then) =
-      __$$_DownloadFileCopyWithImpl<$Res>;
+abstract class _$$DownloadFileImplCopyWith<$Res> {
+  factory _$$DownloadFileImplCopyWith(
+          _$DownloadFileImpl value, $Res Function(_$DownloadFileImpl) then) =
+      __$$DownloadFileImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_DownloadFileCopyWithImpl<$Res>
-    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$_DownloadFile>
-    implements _$$_DownloadFileCopyWith<$Res> {
-  __$$_DownloadFileCopyWithImpl(
-      _$_DownloadFile _value, $Res Function(_$_DownloadFile) _then)
+class __$$DownloadFileImplCopyWithImpl<$Res>
+    extends _$ReturnListByItemEventCopyWithImpl<$Res, _$DownloadFileImpl>
+    implements _$$DownloadFileImplCopyWith<$Res> {
+  __$$DownloadFileImplCopyWithImpl(
+      _$DownloadFileImpl _value, $Res Function(_$DownloadFileImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_DownloadFile implements _DownloadFile {
-  const _$_DownloadFile();
+class _$DownloadFileImpl implements _DownloadFile {
+  const _$DownloadFileImpl();
 
   @override
   String toString() {
@@ -638,9 +640,9 @@ class _$_DownloadFile implements _DownloadFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_DownloadFile);
+        (other.runtimeType == runtimeType && other is _$DownloadFileImpl);
   }
 
   @override
@@ -729,7 +731,7 @@ class _$_DownloadFile implements _DownloadFile {
 }
 
 abstract class _DownloadFile implements ReturnListByItemEvent {
-  const factory _DownloadFile() = _$_DownloadFile;
+  const factory _DownloadFile() = _$DownloadFileImpl;
 }
 
 /// @nodoc
@@ -885,11 +887,12 @@ class _$ReturnListByItemStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnListByItemStateCopyWith<$Res>
+abstract class _$$ReturnListByItemStateImplCopyWith<$Res>
     implements $ReturnListByItemStateCopyWith<$Res> {
-  factory _$$_ReturnListByItemStateCopyWith(_$_ReturnListByItemState value,
-          $Res Function(_$_ReturnListByItemState) then) =
-      __$$_ReturnListByItemStateCopyWithImpl<$Res>;
+  factory _$$ReturnListByItemStateImplCopyWith(
+          _$ReturnListByItemStateImpl value,
+          $Res Function(_$ReturnListByItemStateImpl) then) =
+      __$$ReturnListByItemStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -916,11 +919,12 @@ abstract class _$$_ReturnListByItemStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnListByItemStateCopyWithImpl<$Res>
-    extends _$ReturnListByItemStateCopyWithImpl<$Res, _$_ReturnListByItemState>
-    implements _$$_ReturnListByItemStateCopyWith<$Res> {
-  __$$_ReturnListByItemStateCopyWithImpl(_$_ReturnListByItemState _value,
-      $Res Function(_$_ReturnListByItemState) _then)
+class __$$ReturnListByItemStateImplCopyWithImpl<$Res>
+    extends _$ReturnListByItemStateCopyWithImpl<$Res,
+        _$ReturnListByItemStateImpl>
+    implements _$$ReturnListByItemStateImplCopyWith<$Res> {
+  __$$ReturnListByItemStateImplCopyWithImpl(_$ReturnListByItemStateImpl _value,
+      $Res Function(_$ReturnListByItemStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -938,7 +942,7 @@ class __$$_ReturnListByItemStateCopyWithImpl<$Res>
     Object? searchKey = null,
     Object? isDownloadInProgress = null,
   }) {
-    return _then(_$_ReturnListByItemState(
+    return _then(_$ReturnListByItemStateImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -989,8 +993,8 @@ class __$$_ReturnListByItemStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnListByItemState extends _ReturnListByItemState {
-  const _$_ReturnListByItemState(
+class _$ReturnListByItemStateImpl extends _ReturnListByItemState {
+  const _$ReturnListByItemStateImpl(
       {required this.salesOrg,
       required this.shipInfo,
       required this.customerCodeInfo,
@@ -1040,10 +1044,10 @@ class _$_ReturnListByItemState extends _ReturnListByItemState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnListByItemState &&
+            other is _$ReturnListByItemStateImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.shipInfo, shipInfo) ||
@@ -1085,9 +1089,9 @@ class _$_ReturnListByItemState extends _ReturnListByItemState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnListByItemStateCopyWith<_$_ReturnListByItemState> get copyWith =>
-      __$$_ReturnListByItemStateCopyWithImpl<_$_ReturnListByItemState>(
-          this, _$identity);
+  _$$ReturnListByItemStateImplCopyWith<_$ReturnListByItemStateImpl>
+      get copyWith => __$$ReturnListByItemStateImplCopyWithImpl<
+          _$ReturnListByItemStateImpl>(this, _$identity);
 }
 
 abstract class _ReturnListByItemState extends ReturnListByItemState {
@@ -1102,7 +1106,7 @@ abstract class _ReturnListByItemState extends ReturnListByItemState {
       required final bool canLoadMore,
       required final ReturnFilter appliedFilter,
       required final SearchKey searchKey,
-      required final bool isDownloadInProgress}) = _$_ReturnListByItemState;
+      required final bool isDownloadInProgress}) = _$ReturnListByItemStateImpl;
   const _ReturnListByItemState._() : super._();
 
   @override
@@ -1129,6 +1133,6 @@ abstract class _ReturnListByItemState extends ReturnListByItemState {
   bool get isDownloadInProgress;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnListByItemStateCopyWith<_$_ReturnListByItemState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReturnListByItemStateImplCopyWith<_$ReturnListByItemStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -99,11 +99,8 @@ class ReturnListRemoteDataSource {
   }
 
   Future<String> getFileUrl({
-    required String soldTo,
-    required String shipTo,
-    required String username,
     required String salesOrg,
-    required bool isViewByReturn,
+    required Map<String, dynamic> requestParams,
   }) async {
     return await dataSourceExceptionHandler.handle(
       () async {
@@ -114,12 +111,7 @@ class ReturnListRemoteDataSource {
             {
               'query': queryMutation.getRequestsByItemsExcel(),
               'variables': {
-                'input': {
-                  'isViewByReturn': isViewByReturn,
-                  'soldTo': soldTo,
-                  'shipTo': shipTo,
-                  'username': username,
-                },
+                'input': requestParams,
               },
             },
           ),

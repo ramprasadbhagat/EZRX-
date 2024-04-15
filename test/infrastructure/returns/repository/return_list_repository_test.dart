@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_excel_list_request.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_list_request.dart';
@@ -12,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/return_excel_list_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_list_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_list_repository.dart';
 import 'package:flutter/foundation.dart';
@@ -45,6 +47,7 @@ void main() {
   late ReturnListLocalDataSource returnListLocalDataSource;
   late ReturnListRemoteDataSource returnListRemoteDataSource;
   late Map<String, dynamic> inputParams;
+  late Map<String, dynamic> returnExcelRequestParams;
   late FileSystemHelper fileSystemHelper;
   late DeviceInfo deviceInfo;
   late PermissionService permissionService;
@@ -63,6 +66,14 @@ void main() {
     userName: fakeClient.username,
     after: 0,
     first: 10,
+    filter: appliedFilterMock,
+    searchKey: searchKeyMock,
+  );
+
+  final returnExcelListRequest = ReturnExcelListRequest.empty().copyWith(
+    customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+    shipToInfo: fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+    userName: fakeClient.username,
     filter: appliedFilterMock,
     searchKey: searchKeyMock,
   );
@@ -86,6 +97,8 @@ void main() {
       deviceStorage: deviceStorage,
     );
     inputParams = ReturnListRequestDto.fromDomain(returnListRequest).toMap();
+    returnExcelRequestParams =
+        ReturnExcelListRequestDto.fromDomain(returnExcelListRequest).toMap();
   });
 
   group(
@@ -384,19 +397,18 @@ void main() {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
           when(
             () => returnListRemoteDataSource.getFileUrl(
-              soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
-              shipTo: fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
-              username: fakeRootAdminUser.username.getOrCrash(),
               salesOrg: fakeSalesOrg.getOrCrash(),
-              isViewByReturn: false,
+              requestParams: returnExcelRequestParams,
             ),
           ).thenAnswer((invocation) async => '');
           final result = await returnListRepository.getFileUrl(
             salesOrg: fakeSalesOrg,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            username: fakeRootAdminUser.username,
+            user: fakeRootAdminUser,
             isViewByReturn: false,
+            appliedFilter: appliedFilterMock,
+            searchKey: searchKeyMock,
           );
           expect(result.isRight(), true);
         },
@@ -413,8 +425,10 @@ void main() {
             salesOrg: fakeSalesOrg,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            username: fakeRootAdminUser.username,
+            user: fakeRootAdminUser,
             isViewByReturn: false,
+            appliedFilter: appliedFilterMock,
+            searchKey: searchKeyMock,
           );
           expect(result.isRight(), true);
         },
@@ -431,8 +445,10 @@ void main() {
             salesOrg: fakeSalesOrg,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            username: fakeRootAdminUser.username,
+            user: fakeRootAdminUser,
             isViewByReturn: false,
+            appliedFilter: appliedFilterMock,
+            searchKey: searchKeyMock,
           );
           expect(result.isLeft(), true);
         },
@@ -443,19 +459,18 @@ void main() {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
           when(
             () => returnListRemoteDataSource.getFileUrl(
-              soldTo: fakeCustomerCodeInfo.customerCodeSoldTo,
-              shipTo: fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
-              username: fakeRootAdminUser.username.getOrCrash(),
+              requestParams: returnExcelRequestParams,
               salesOrg: fakeSalesOrg.getOrCrash(),
-              isViewByReturn: false,
             ),
           ).thenThrow(errorMock);
           final result = await returnListRepository.getFileUrl(
             salesOrg: fakeSalesOrg,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            username: fakeRootAdminUser.username,
+            user: fakeRootAdminUser,
             isViewByReturn: false,
+            appliedFilter: appliedFilterMock,
+            searchKey: searchKeyMock,
           );
           expect(result.isLeft(), true);
         },
