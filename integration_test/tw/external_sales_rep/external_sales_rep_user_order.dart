@@ -1825,6 +1825,10 @@ void main() {
         await checkoutRobot.verifyPoReferenceField(isVisible: true);
         await checkoutRobot.verifyPaymentTermField(isVisible: true);
         await checkoutRobot.enterPaymentTerm(paymentTerm);
+        await checkoutRobot.enterContactNumber('');
+        await checkoutRobot.tapPlaceOrderButton();
+        checkoutRobot.verifyEmptyContactNumberErrorMessage(isVisible: true);
+        checkoutRobot.verifyEmptyContactPersonErrorMessage(isVisible: true);
         await checkoutRobot.verifyContactPersonField(isVisible: true);
         await checkoutRobot.enterContactPerson(contactPerson);
         await checkoutRobot.verifyMobileNumberField(isVisible: true);

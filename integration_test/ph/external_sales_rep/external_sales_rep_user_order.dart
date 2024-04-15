@@ -1729,10 +1729,13 @@ void main() {
       await checkoutRobot.verifyContactPersonField(isVisible: true);
       await checkoutRobot.verifyMobileNumberField(isVisible: true);
       await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+      await checkoutRobot.tapPlaceOrderButton();
+      checkoutRobot.verifyEmptyContactNumberErrorMessage(isVisible: true);
+      checkoutRobot.verifyEmptyContactPersonErrorMessage(isVisible: true);
       await checkoutRobot.enterPoReference(poReference);
       await checkoutRobot.enterReferenceNote(referenceNote);
       await checkoutRobot.enterContactPerson(contactPerson);
-      await checkoutRobot.enterContactPerson(mobileNumber);
+      await checkoutRobot.enterContactNumber(mobileNumber);
       await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
       await checkoutRobot.tapPlaceOrderButton();
       orderSuccessRobot.verifyPage();

@@ -1,11 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/announcement_article/announcement/announcement_detail_robot.dart';
 import '../../robots/announcement_article/announcement_article_root_robot.dart';
 import '../../robots/auth/forgot_password_robot.dart';
@@ -135,7 +132,7 @@ void main() {
   const materialNameHavingPriceNA = '0.3cc 31G Syr. 10Bag  8mm 100/Bx';
   const materialPrincipalNameHavingPriceNA = '新加坡商必帝(股)公司台灣分公司';
   // const suspendedMaterialNumber = '21034245';
-  const paymentTerm = 'T019-發票日起15天內付款';
+  const paymentTerm = 'T019 - 發票日起15天內付款';
   const bonusMaterialNumberTierQty = 10;
   const bonusMaterialName = '０．３ｃｃ塑膠胰島素空針３１號針頭　　';
   const bonusMaterialEnglishName = '0.3cc 31G Syr. 10Bag  8mm 100/Bx';
@@ -1621,12 +1618,15 @@ void main() {
       await checkoutRobot.verifyPaymentTermField(isVisible: true);
       checkoutRobot.verifyContactNumberFieldHasText(customerPhoneNumber);
       await checkoutRobot.enterPaymentTerm(paymentTerm);
+      await checkoutRobot.enterContactNumber('');
+      await checkoutRobot.tapPlaceOrderButton();
+      checkoutRobot.verifyEmptyContactNumberErrorMessage(isVisible: true);
+      checkoutRobot.verifyEmptyContactPersonErrorMessage(isVisible: true);
       await checkoutRobot.verifyContactPersonField(isVisible: true);
       await checkoutRobot.enterContactPerson(contactPerson);
       await checkoutRobot.verifyMobileNumberField(isVisible: true);
       await checkoutRobot.enterContactNumber(contactNumber);
       await checkoutRobot.tapPlaceOrderButton();
-      checkoutRobot.verifyEmptyPoReferenceMessage(isVisible: false);
       orderSuccessRobot.verifyPage();
       orderSuccessRobot.verifyPoReference(emptyPoReference);
       orderSuccessRobot.verifyDeliveryInstruction(emptyDeliveryInstruction);
@@ -2394,8 +2394,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }
