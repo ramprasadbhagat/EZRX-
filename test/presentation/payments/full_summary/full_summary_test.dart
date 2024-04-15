@@ -323,6 +323,7 @@ void main() {
         () => creditAndInvoiceDetailsBlocMock.add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: fullSummaryList.first,
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -453,6 +454,7 @@ void main() {
             creditAndInvoiceItem: fullSummaryList.first.copyWith(
               debitCreditCode: DebitCreditCode('H'),
             ),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -497,10 +499,12 @@ void main() {
       );
     });
 
-    testWidgets('Find marketplace logo in MP full summary', (tester) async {
+    testWidgets(
+        'Find marketplace logo in MP full summary and navigate to invoice',
+        (tester) async {
+      final item = fullSummaryList.firstWhere((e) => e.debitCreditCode.isDedit);
       when(() => mpFullSummaryBlocMock.state).thenReturn(
-        FullSummaryState.initial()
-            .copyWith(items: fullSummaryList.take(1).toList()),
+        FullSummaryState.initial().copyWith(items: [item]),
       );
       await tester.pumpWidget(getWidget(isMarketPlace: true));
       await tester.pump();
@@ -513,6 +517,20 @@ void main() {
           matching: find.byType(MarketPlaceLogo),
         ),
         findsOne,
+      );
+      await tester.tap(itemTile);
+      await tester.pump();
+      verify(
+        () => creditAndInvoiceDetailsBlocMock.add(
+          CreditAndInvoiceDetailsEvent.fetch(
+            creditAndInvoiceItem: item,
+            isMarketPlace: true,
+          ),
+        ),
+      ).called(1);
+      expect(
+        autoRouterMock.currentPath,
+        InvoiceDetailsPageRoute(isMarketPlace: true).path,
       );
     });
   });

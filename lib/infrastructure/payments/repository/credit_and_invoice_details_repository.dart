@@ -27,6 +27,7 @@ class CreditAndInvoiceDetailsRepository
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required CreditAndInvoiceItem creditAndInvoiceItem,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -47,6 +48,7 @@ class CreditAndInvoiceDetailsRepository
         fiscalYear: creditAndInvoiceItem.fiscalYear,
         searchKey: creditAndInvoiceItem.searchKey.getOrDefaultValue(''),
         accountingDocumentItem: creditAndInvoiceItem.accountingDocumentItem,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response);

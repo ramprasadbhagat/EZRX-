@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
@@ -788,9 +787,6 @@ class BatchNumber extends ValueObject<String> {
   }
 
   String get displayLabel => naIfEmpty(value.getOrElse(() => ''));
-  String get selectOrGetBatch {
-    return value.getOrElse(() => 'Select'.tr());
-  }
 
   const BatchNumber._(this.value);
 }
@@ -930,4 +926,3 @@ class ScaleBasis extends ValueObject<String> {
 
   const ScaleBasis._(this.value);
 }
-

@@ -70,6 +70,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           creditAndInvoiceItem: fakeInvoice,
+          isMarketPlace: true,
         );
         expect(result.isRight(), true);
       });
@@ -86,6 +87,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           creditAndInvoiceItem: fakeInvoice,
+          isMarketPlace: false,
         );
         expect(result.isLeft(), true);
       });
@@ -100,6 +102,7 @@ void main() {
             fiscalYear: fakeInvoice.fiscalYear,
             searchKey: fakeInvoice.searchKey.getOrDefaultValue(''),
             accountingDocumentItem: fakeInvoice.accountingDocumentItem,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => fakeCreditAndInvoiceDetails,
@@ -112,7 +115,9 @@ void main() {
           salesOrganisation: SalesOrganisation.empty()
               .copyWith(salesOrg: SalesOrg('mock_salesOrg')),
           creditAndInvoiceItem: fakeInvoice,
+          isMarketPlace: true,
         );
+
         expect(result.isRight(), true);
       });
 
@@ -127,6 +132,7 @@ void main() {
             fiscalYear: fakeInvoice.fiscalYear,
             searchKey: fakeInvoice.searchKey.getOrDefaultValue(''),
             accountingDocumentItem: fakeInvoice.accountingDocumentItem,
+            isMarketPlace: false,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -136,6 +142,7 @@ void main() {
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3500')),
           creditAndInvoiceItem: fakeInvoice,
+          isMarketPlace: false,
         );
         expect(result.isLeft(), true);
       });

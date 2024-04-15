@@ -1110,6 +1110,7 @@ void main() {
         () => creditAndInvoiceDetailsBlocMock.add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: fakeItemList.first,
+            isMarketPlace: fakeOrderHistoryItem.isMarketPlace,
           ),
         ),
       );
@@ -1158,6 +1159,7 @@ void main() {
         () => creditAndInvoiceDetailsBlocMock.add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: fakeItemList.first,
+            isMarketPlace: fakeOrderHistoryItem.isMarketPlace,
           ),
         ),
       ).called(1);
@@ -1214,6 +1216,7 @@ void main() {
         () => creditAndInvoiceDetailsBlocMock.add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: fakeItemList.first,
+            isMarketPlace: fakeOrderHistoryItem.isMarketPlace,
           ),
         ),
       ).called(1);

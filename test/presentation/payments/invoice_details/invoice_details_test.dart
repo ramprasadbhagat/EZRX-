@@ -1,10 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
@@ -14,7 +12,6 @@ import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credi
 import 'package:ezrxmobile/application/payments/download_e_invoice/download_e_invoice_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
@@ -24,7 +21,9 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
@@ -38,10 +37,11 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_mm_sales_org_config.dart';
@@ -53,46 +53,11 @@ import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
-
-class CreditAndInvoiceDetailsBlocMock
-    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
-    implements CreditAndInvoiceDetailsBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
-    implements ViewByOrderBloc {}
-
-class ViewByOrderDetailsBlocMock
-    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
-    implements ViewByOrderDetailsBloc {}
-
-class ViewByItemDetailsBlocMock
-    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
-    implements ViewByItemDetailsBloc {}
-
-class DownloadEInvoiceBlocMock
-    extends MockBloc<DownloadEInvoiceEvent, DownloadEInvoiceState>
-    implements DownloadEInvoiceBloc {}
-
-class DownloadPaymentAttachmentsBlocMock extends MockBloc<
-        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
-    implements DownloadPaymentAttachmentsBloc {}
 
 void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
-  late CustomerCodeBloc customerCodeBlocMock;
-
-  late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
@@ -146,11 +111,8 @@ void main() {
   );
 
   setUpAll(() async {
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
+    locator.registerLazySingleton(() => MixpanelServiceMock());
     locator.registerFactory<ViewByOrderBloc>(() => viewByOrderBlocMock);
     locator
         .registerFactory<DownloadEInvoiceBloc>(() => downloadEInvoiceBlocMock);
@@ -159,8 +121,6 @@ void main() {
 
     WidgetsFlutterBinding.ensureInitialized();
     creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
-    customerCodeBlocMock = CustomerCodeBlocMock();
-    userBlocMock = UserBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
@@ -187,10 +147,6 @@ void main() {
   setUp(() async {
     when(() => creditAndInvoiceDetailsBlocMock.state)
         .thenReturn(CreditAndInvoiceDetailsState.initial());
-    when(() => customerCodeBlocMock.state)
-        .thenReturn(CustomerCodeState.initial());
-
-    when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
@@ -211,7 +167,7 @@ void main() {
         .thenReturn(DownloadPaymentAttachmentsState.initial());
   });
 
-  Future getWidget(tester) async {
+  Future getWidget(tester, {bool isMarketPlace = false}) async {
     return tester.pumpWidget(
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
@@ -219,12 +175,6 @@ void main() {
         providers: [
           BlocProvider<CreditAndInvoiceDetailsBloc>(
             create: (context) => creditAndInvoiceDetailsBlocMock,
-          ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<UserBloc>(
-            create: (context) => userBlocMock,
           ),
           BlocProvider<SalesOrgBloc>(
             create: (context) => salesOrgBlocMock,
@@ -252,7 +202,7 @@ void main() {
             create: (context) => downloadPaymentAttachmentsBlocMock,
           ),
         ],
-        child: const InvoiceDetailsPage(),
+        child: InvoiceDetailsPage(isMarketPlace: isMarketPlace),
       ),
     );
   }
@@ -728,7 +678,7 @@ void main() {
 
         expect(
           find.textContaining(
-            '${'Batch'.tr()} ${invoiceDetail.batchNumber.getOrDefaultValue('')} (EXP:${invoiceDetail.expiryDate.dateString})',
+            'Batch: ${invoiceDetail.batchNumber.getOrDefaultValue('')} - Expires: ${invoiceDetail.expiryDate.dateString}',
             findRichText: true,
           ),
           currentSalesOrgConfigs.batchNumDisplay &&
@@ -912,5 +862,56 @@ void main() {
         expect(customerBlockedBanner, findsOneWidget);
       },
     );
+
+    testWidgets(
+        ' -> Find marketplace logo and display batch, expiry date as NA',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial()
+            .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+      );
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          itemsInfo: [fakeInvoiceDetail.first],
+        ),
+      );
+      await getWidget(tester, isMarketPlace: true);
+      await tester.pumpAndSettle();
+      final scrollList = find.byKey(WidgetKeys.invoiceDetailsPageListView);
+      final mpLogo = find.byType(MarketPlaceTitleWithLogo);
+      await tester.dragUntilVisible(
+        mpLogo,
+        scrollList,
+        const Offset(0, -200),
+      );
+      await tester.pump();
+      expect(mpLogo, findsOne);
+      final invoiceTile = find.byKey(WidgetKeys.invoiceDetailMaterial(0, 0));
+      await tester.dragUntilVisible(
+        invoiceTile,
+        scrollList,
+        const Offset(0, -200),
+      );
+      await tester.pump();
+      expect(
+        find.descendant(
+          of: find.byType(MarketPlaceSellerTitle),
+          matching: find.text(
+            fakeInvoiceDetail.first.principalData.principalName.name,
+          ),
+        ),
+        findsOne,
+      );
+      expect(
+        find.descendant(
+          of: invoiceTile,
+          matching: find.textContaining(
+            'Batch: NA - Expires: NA',
+            findRichText: true,
+          ),
+        ),
+        findsOne,
+      );
+    });
   });
 }

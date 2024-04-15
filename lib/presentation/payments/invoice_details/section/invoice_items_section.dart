@@ -1,6 +1,8 @@
 import 'package:collection/collection.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -33,38 +35,46 @@ class InvoiceItemsSection extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: customerDocumentDetail.groupList.length,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 45),
             itemBuilder: (context, index) {
+              final principalName = customerDocumentDetail.groupList
+                  .elementAt(index)
+                  .principalName
+                  .name;
+
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    child: Text(
-                      customerDocumentDetail.groupList
-                          .elementAt(index)
-                          .principalName
-                          .getOrDefaultValue(''),
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: ZPColors.black,
+                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    child: context.isMPPayment
+                        ? MarketPlaceSellerTitle(
+                            sellerName: principalName,
+                            iconSize: 20,
+                          )
+                        : Text(
+                            principalName,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(
+                                  color: ZPColors.black,
+                                ),
                           ),
-                    ),
                   ),
-                  Column(
-                    children: customerDocumentDetail.groupList
-                        .elementAt(index)
-                        .items
-                        .mapIndexed(
-                          (itemIndex, e) => _InvoiceItemDetail(
-                            key: WidgetKeys.invoiceDetailMaterial(
-                              index,
-                              itemIndex,
-                            ),
-                            customerDocumentDetail: e,
+                  ...customerDocumentDetail.groupList
+                      .elementAt(index)
+                      .items
+                      .mapIndexed(
+                        (itemIndex, e) => _InvoiceItemDetail(
+                          key: WidgetKeys.invoiceDetailMaterial(
+                            index,
+                            itemIndex,
                           ),
-                        )
-                        .toList(),
-                  ),
+                          customerDocumentDetail: e,
+                        ),
+                      )
+                      .toList(),
                 ],
               );
             },
@@ -86,10 +96,7 @@ class _InvoiceItemDetail extends StatelessWidget {
 
     return CommonTileItem(
       key: Key(customerDocumentDetail.batchNumber.getOrDefaultValue('')),
-      headerText: salesOrgConfigs.batchNumDisplay &&
-              customerDocumentDetail.batchNumHasData
-          ? '${context.tr('Batch')} ${customerDocumentDetail.batchNumber.getOrDefaultValue('')} (EXP:${customerDocumentDetail.expiryDate.dateString})'
-          : null,
+      headerText: _batchExpiryDateText(context),
       materialNumber: customerDocumentDetail.materialNumber,
       label: customerDocumentDetail.materialNumber.displayMatNo,
       subtitle: '',
@@ -98,7 +105,6 @@ class _InvoiceItemDetail extends StatelessWidget {
           '${customerDocumentDetail.billingQuantity.getOrDefaultValue(0)}',
       isQuantityBelowImage: true,
       isQuantityRequired: false,
-      statusWidget: const SizedBox.shrink(),
       footerWidget: QuantityAndPriceWithTax.invoice(
         taxValue: customerDocumentDetail.taxAmount,
         quantity: customerDocumentDetail.billingQuantity.getOrDefaultValue(0),
@@ -115,5 +121,22 @@ class _InvoiceItemDetail extends StatelessWidget {
             )
           : null,
     );
+  }
+
+  String _batchExpiryDateText(BuildContext context) {
+    final salesConfig = context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final displayedBatch = context.isMPPayment
+        ? 'NA'
+        : customerDocumentDetail.batchNumber.displayLabel;
+    final displayedExpiryDate = context.isMPPayment
+        ? 'NA'
+        : customerDocumentDetail.expiryDate.dateOrNaString;
+
+    return [
+      if (salesConfig.batchNumDisplay)
+        '${context.tr('Batch')}: $displayedBatch',
+      if (salesConfig.expiryDateDisplay)
+        '${context.tr('Expires')}: $displayedExpiryDate',
+    ].join(' - ');
   }
 }

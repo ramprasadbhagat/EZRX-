@@ -93,6 +93,7 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             creditAndInvoiceItem: fakeInvoice,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -103,6 +104,7 @@ void main() {
       act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
         CreditAndInvoiceDetailsEvent.fetch(
           creditAndInvoiceItem: fakeInvoice,
+          isMarketPlace: true,
         ),
       ),
       expect: () => [
@@ -146,6 +148,7 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             creditAndInvoiceItem: creditAndInvoiceItemList.first,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(customerDocumentDetailList),
@@ -154,6 +157,7 @@ void main() {
       act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
         CreditAndInvoiceDetailsEvent.fetchInvoiceById(
           invoiceId: creditAndInvoiceItemList.first.searchKey.getValue(),
+          isMarketPlace: false,
         ),
       ),
       expect: () => [
@@ -194,6 +198,7 @@ void main() {
       act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
         CreditAndInvoiceDetailsEvent.fetchInvoiceById(
           invoiceId: creditAndInvoiceItemList.first.searchKey.getValue(),
+          isMarketPlace: false,
         ),
       ),
       expect: () => [
@@ -233,6 +238,7 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             creditAndInvoiceItem: creditAndInvoiceItemList.first,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(fakeError),
@@ -241,6 +247,7 @@ void main() {
       act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
         CreditAndInvoiceDetailsEvent.fetchInvoiceById(
           invoiceId: creditAndInvoiceItemList.first.searchKey.getValue(),
+          isMarketPlace: false,
         ),
       ),
       expect: () => [

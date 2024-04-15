@@ -94,6 +94,7 @@ class _CreditsItem extends StatelessWidget {
     context.read<CreditAndInvoiceDetailsBloc>().add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: creditItem,
+            isMarketPlace: context.isMPPayment,
           ),
         );
     context.read<DownloadECreditBloc>().add(

@@ -317,6 +317,7 @@ void main() {
         () => creditAndInvoiceDetailsBlocMock.add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: creditItemList.first,
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -360,6 +361,7 @@ void main() {
         () => creditAndInvoiceDetailsBlocMock.add(
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: creditItemList.first,
+            isMarketPlace: false,
           ),
         ),
       );

@@ -948,12 +948,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               redirectInvoiceDetail: (invoiceNumber) {
                 if (eligibilityState.isPaymentEnabled) {
+                  //TODO: Implement deeplink for invoice in marketplace later
                   context.read<CreditAndInvoiceDetailsBloc>().add(
                         CreditAndInvoiceDetailsEvent.fetchInvoiceById(
                           invoiceId: invoiceNumber,
+                          isMarketPlace: false,
                         ),
                       );
-                  context.router.push(const InvoiceDetailsPageRoute());
+                  context.router
+                      .push(InvoiceDetailsPageRoute(isMarketPlace: false));
                 } else {
                   noAccessSnackbar.show(context);
                 }

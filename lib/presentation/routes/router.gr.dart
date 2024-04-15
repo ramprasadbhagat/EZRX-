@@ -384,9 +384,13 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     InvoiceDetailsPageRoute.name: (routeData) {
+      final args = routeData.argsAs<InvoiceDetailsPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i34.InvoiceDetailsPage(),
+        child: _i34.InvoiceDetailsPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     CreditDetailsPageRoute.name: (routeData) {
@@ -1707,14 +1711,37 @@ class AnnouncementInfoDetailsPageRoute extends _i77.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i34.InvoiceDetailsPage]
-class InvoiceDetailsPageRoute extends _i77.PageRouteInfo<void> {
-  const InvoiceDetailsPageRoute()
-      : super(
+class InvoiceDetailsPageRoute
+    extends _i77.PageRouteInfo<InvoiceDetailsPageRouteArgs> {
+  InvoiceDetailsPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           InvoiceDetailsPageRoute.name,
           path: 'payments/invoice_details',
+          args: InvoiceDetailsPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'InvoiceDetailsPageRoute';
+}
+
+class InvoiceDetailsPageRouteArgs {
+  const InvoiceDetailsPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'InvoiceDetailsPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for

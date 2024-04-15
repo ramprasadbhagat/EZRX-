@@ -52,6 +52,7 @@ class CreditAndInvoiceDetailsBloc
           salesOrganisation: state.salesOrganisation,
           customerCodeInfo: state.customerCodeInfo,
           creditAndInvoiceItem: event.creditAndInvoiceItem,
+          isMarketPlace: event.isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -114,6 +115,7 @@ class CreditAndInvoiceDetailsBloc
               salesOrganisation: state.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
               creditAndInvoiceItem: basicInfo,
+              isMarketPlace: event.isMarketPlace,
             );
 
             detailFailureOrSuccess.fold(

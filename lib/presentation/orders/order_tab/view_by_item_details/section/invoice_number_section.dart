@@ -94,10 +94,11 @@ class _InvoiceNumber extends StatelessWidget {
                 context.read<CreditAndInvoiceDetailsBloc>().add(
                       CreditAndInvoiceDetailsEvent.fetch(
                         creditAndInvoiceItem: state.items.first,
+                        isMarketPlace: isMarketPlace,
                       ),
                     );
                 context.router.push(
-                  const InvoiceDetailsPageRoute(),
+                  InvoiceDetailsPageRoute(isMarketPlace: isMarketPlace),
                 );
               }
             },

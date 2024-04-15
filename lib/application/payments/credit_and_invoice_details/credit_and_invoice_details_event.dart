@@ -8,8 +8,10 @@ class CreditAndInvoiceDetailsEvent with _$CreditAndInvoiceDetailsEvent {
   }) = _Initialized;
   const factory CreditAndInvoiceDetailsEvent.fetch({
     required CreditAndInvoiceItem creditAndInvoiceItem,
+    required bool isMarketPlace,
   }) = _Fetch;
   const factory CreditAndInvoiceDetailsEvent.fetchInvoiceById({
     required String invoiceId,
+    required bool isMarketPlace,
   }) = _FetchInvoiceById;
 }

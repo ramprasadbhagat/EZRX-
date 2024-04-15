@@ -12,7 +12,7 @@ part of 'credit_and_invoice_details_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CreditAndInvoiceDetailsEvent {
@@ -21,8 +21,11 @@ mixin _$CreditAndInvoiceDetailsEvent {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(CreditAndInvoiceItem creditAndInvoiceItem) fetch,
-    required TResult Function(String invoiceId) fetchInvoiceById,
+    required TResult Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)
+        fetch,
+    required TResult Function(String invoiceId, bool isMarketPlace)
+        fetchInvoiceById,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,8 +33,10 @@ mixin _$CreditAndInvoiceDetailsEvent {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(CreditAndInvoiceItem creditAndInvoiceItem)? fetch,
-    TResult? Function(String invoiceId)? fetchInvoiceById,
+    TResult? Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)?
+        fetch,
+    TResult? Function(String invoiceId, bool isMarketPlace)? fetchInvoiceById,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,8 +44,10 @@ mixin _$CreditAndInvoiceDetailsEvent {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(CreditAndInvoiceItem creditAndInvoiceItem)? fetch,
-    TResult Function(String invoiceId)? fetchInvoiceById,
+    TResult Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)?
+        fetch,
+    TResult Function(String invoiceId, bool isMarketPlace)? fetchInvoiceById,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -90,10 +97,10 @@ class _$CreditAndInvoiceDetailsEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
@@ -103,11 +110,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$CreditAndInvoiceDetailsEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$CreditAndInvoiceDetailsEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,7 +123,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -147,8 +154,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.salesOrganisation, required this.customerCodeInfo});
 
   @override
@@ -162,10 +169,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -179,8 +186,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -188,8 +195,11 @@ class _$_Initialized implements _Initialized {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(CreditAndInvoiceItem creditAndInvoiceItem) fetch,
-    required TResult Function(String invoiceId) fetchInvoiceById,
+    required TResult Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)
+        fetch,
+    required TResult Function(String invoiceId, bool isMarketPlace)
+        fetchInvoiceById,
   }) {
     return initialized(salesOrganisation, customerCodeInfo);
   }
@@ -200,8 +210,10 @@ class _$_Initialized implements _Initialized {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(CreditAndInvoiceItem creditAndInvoiceItem)? fetch,
-    TResult? Function(String invoiceId)? fetchInvoiceById,
+    TResult? Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)?
+        fetch,
+    TResult? Function(String invoiceId, bool isMarketPlace)? fetchInvoiceById,
   }) {
     return initialized?.call(salesOrganisation, customerCodeInfo);
   }
@@ -212,8 +224,10 @@ class _$_Initialized implements _Initialized {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(CreditAndInvoiceItem creditAndInvoiceItem)? fetch,
-    TResult Function(String invoiceId)? fetchInvoiceById,
+    TResult Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)?
+        fetch,
+    TResult Function(String invoiceId, bool isMarketPlace)? fetchInvoiceById,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -260,42 +274,49 @@ class _$_Initialized implements _Initialized {
 abstract class _Initialized implements CreditAndInvoiceDetailsEvent {
   const factory _Initialized(
       {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_Initialized;
+      required final CustomerCodeInfo customerCodeInfo}) = _$InitializedImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CreditAndInvoiceItem creditAndInvoiceItem});
+  $Res call({CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace});
 
   $CreditAndInvoiceItemCopyWith<$Res> get creditAndInvoiceItem;
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$CreditAndInvoiceDetailsEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$CreditAndInvoiceDetailsEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? creditAndInvoiceItem = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       creditAndInvoiceItem: null == creditAndInvoiceItem
           ? _value.creditAndInvoiceItem
           : creditAndInvoiceItem // ignore: cast_nullable_to_non_nullable
               as CreditAndInvoiceItem,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -311,34 +332,40 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.creditAndInvoiceItem});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl(
+      {required this.creditAndInvoiceItem, required this.isMarketPlace});
 
   @override
   final CreditAndInvoiceItem creditAndInvoiceItem;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'CreditAndInvoiceDetailsEvent.fetch(creditAndInvoiceItem: $creditAndInvoiceItem)';
+    return 'CreditAndInvoiceDetailsEvent.fetch(creditAndInvoiceItem: $creditAndInvoiceItem, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.creditAndInvoiceItem, creditAndInvoiceItem) ||
-                other.creditAndInvoiceItem == creditAndInvoiceItem));
+                other.creditAndInvoiceItem == creditAndInvoiceItem) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, creditAndInvoiceItem);
+  int get hashCode =>
+      Object.hash(runtimeType, creditAndInvoiceItem, isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -346,10 +373,13 @@ class _$_Fetch implements _Fetch {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(CreditAndInvoiceItem creditAndInvoiceItem) fetch,
-    required TResult Function(String invoiceId) fetchInvoiceById,
+    required TResult Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)
+        fetch,
+    required TResult Function(String invoiceId, bool isMarketPlace)
+        fetchInvoiceById,
   }) {
-    return fetch(creditAndInvoiceItem);
+    return fetch(creditAndInvoiceItem, isMarketPlace);
   }
 
   @override
@@ -358,10 +388,12 @@ class _$_Fetch implements _Fetch {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(CreditAndInvoiceItem creditAndInvoiceItem)? fetch,
-    TResult? Function(String invoiceId)? fetchInvoiceById,
+    TResult? Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)?
+        fetch,
+    TResult? Function(String invoiceId, bool isMarketPlace)? fetchInvoiceById,
   }) {
-    return fetch?.call(creditAndInvoiceItem);
+    return fetch?.call(creditAndInvoiceItem, isMarketPlace);
   }
 
   @override
@@ -370,12 +402,14 @@ class _$_Fetch implements _Fetch {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(CreditAndInvoiceItem creditAndInvoiceItem)? fetch,
-    TResult Function(String invoiceId)? fetchInvoiceById,
+    TResult Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)?
+        fetch,
+    TResult Function(String invoiceId, bool isMarketPlace)? fetchInvoiceById,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(creditAndInvoiceItem);
+      return fetch(creditAndInvoiceItem, isMarketPlace);
     }
     return orElse();
   }
@@ -417,75 +451,89 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements CreditAndInvoiceDetailsEvent {
   const factory _Fetch(
-      {required final CreditAndInvoiceItem creditAndInvoiceItem}) = _$_Fetch;
+      {required final CreditAndInvoiceItem creditAndInvoiceItem,
+      required final bool isMarketPlace}) = _$FetchImpl;
 
   CreditAndInvoiceItem get creditAndInvoiceItem;
+  bool get isMarketPlace;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchInvoiceByIdCopyWith<$Res> {
-  factory _$$_FetchInvoiceByIdCopyWith(
-          _$_FetchInvoiceById value, $Res Function(_$_FetchInvoiceById) then) =
-      __$$_FetchInvoiceByIdCopyWithImpl<$Res>;
+abstract class _$$FetchInvoiceByIdImplCopyWith<$Res> {
+  factory _$$FetchInvoiceByIdImplCopyWith(_$FetchInvoiceByIdImpl value,
+          $Res Function(_$FetchInvoiceByIdImpl) then) =
+      __$$FetchInvoiceByIdImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String invoiceId});
+  $Res call({String invoiceId, bool isMarketPlace});
 }
 
 /// @nodoc
-class __$$_FetchInvoiceByIdCopyWithImpl<$Res>
+class __$$FetchInvoiceByIdImplCopyWithImpl<$Res>
     extends _$CreditAndInvoiceDetailsEventCopyWithImpl<$Res,
-        _$_FetchInvoiceById> implements _$$_FetchInvoiceByIdCopyWith<$Res> {
-  __$$_FetchInvoiceByIdCopyWithImpl(
-      _$_FetchInvoiceById _value, $Res Function(_$_FetchInvoiceById) _then)
+        _$FetchInvoiceByIdImpl>
+    implements _$$FetchInvoiceByIdImplCopyWith<$Res> {
+  __$$FetchInvoiceByIdImplCopyWithImpl(_$FetchInvoiceByIdImpl _value,
+      $Res Function(_$FetchInvoiceByIdImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? invoiceId = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_FetchInvoiceById(
+    return _then(_$FetchInvoiceByIdImpl(
       invoiceId: null == invoiceId
           ? _value.invoiceId
           : invoiceId // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_FetchInvoiceById implements _FetchInvoiceById {
-  const _$_FetchInvoiceById({required this.invoiceId});
+class _$FetchInvoiceByIdImpl implements _FetchInvoiceById {
+  const _$FetchInvoiceByIdImpl(
+      {required this.invoiceId, required this.isMarketPlace});
 
   @override
   final String invoiceId;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'CreditAndInvoiceDetailsEvent.fetchInvoiceById(invoiceId: $invoiceId)';
+    return 'CreditAndInvoiceDetailsEvent.fetchInvoiceById(invoiceId: $invoiceId, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchInvoiceById &&
+            other is _$FetchInvoiceByIdImpl &&
             (identical(other.invoiceId, invoiceId) ||
-                other.invoiceId == invoiceId));
+                other.invoiceId == invoiceId) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, invoiceId);
+  int get hashCode => Object.hash(runtimeType, invoiceId, isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchInvoiceByIdCopyWith<_$_FetchInvoiceById> get copyWith =>
-      __$$_FetchInvoiceByIdCopyWithImpl<_$_FetchInvoiceById>(this, _$identity);
+  _$$FetchInvoiceByIdImplCopyWith<_$FetchInvoiceByIdImpl> get copyWith =>
+      __$$FetchInvoiceByIdImplCopyWithImpl<_$FetchInvoiceByIdImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -493,10 +541,13 @@ class _$_FetchInvoiceById implements _FetchInvoiceById {
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(CreditAndInvoiceItem creditAndInvoiceItem) fetch,
-    required TResult Function(String invoiceId) fetchInvoiceById,
+    required TResult Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)
+        fetch,
+    required TResult Function(String invoiceId, bool isMarketPlace)
+        fetchInvoiceById,
   }) {
-    return fetchInvoiceById(invoiceId);
+    return fetchInvoiceById(invoiceId, isMarketPlace);
   }
 
   @override
@@ -505,10 +556,12 @@ class _$_FetchInvoiceById implements _FetchInvoiceById {
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(CreditAndInvoiceItem creditAndInvoiceItem)? fetch,
-    TResult? Function(String invoiceId)? fetchInvoiceById,
+    TResult? Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)?
+        fetch,
+    TResult? Function(String invoiceId, bool isMarketPlace)? fetchInvoiceById,
   }) {
-    return fetchInvoiceById?.call(invoiceId);
+    return fetchInvoiceById?.call(invoiceId, isMarketPlace);
   }
 
   @override
@@ -517,12 +570,14 @@ class _$_FetchInvoiceById implements _FetchInvoiceById {
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(CreditAndInvoiceItem creditAndInvoiceItem)? fetch,
-    TResult Function(String invoiceId)? fetchInvoiceById,
+    TResult Function(
+            CreditAndInvoiceItem creditAndInvoiceItem, bool isMarketPlace)?
+        fetch,
+    TResult Function(String invoiceId, bool isMarketPlace)? fetchInvoiceById,
     required TResult orElse(),
   }) {
     if (fetchInvoiceById != null) {
-      return fetchInvoiceById(invoiceId);
+      return fetchInvoiceById(invoiceId, isMarketPlace);
     }
     return orElse();
   }
@@ -563,12 +618,14 @@ class _$_FetchInvoiceById implements _FetchInvoiceById {
 }
 
 abstract class _FetchInvoiceById implements CreditAndInvoiceDetailsEvent {
-  const factory _FetchInvoiceById({required final String invoiceId}) =
-      _$_FetchInvoiceById;
+  const factory _FetchInvoiceById(
+      {required final String invoiceId,
+      required final bool isMarketPlace}) = _$FetchInvoiceByIdImpl;
 
   String get invoiceId;
+  bool get isMarketPlace;
   @JsonKey(ignore: true)
-  _$$_FetchInvoiceByIdCopyWith<_$_FetchInvoiceById> get copyWith =>
+  _$$FetchInvoiceByIdImplCopyWith<_$FetchInvoiceByIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -684,12 +741,12 @@ class _$CreditAndInvoiceDetailsStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CreditAndInvoiceDetailsStateCopyWith<$Res>
+abstract class _$$CreditAndInvoiceDetailsStateImplCopyWith<$Res>
     implements $CreditAndInvoiceDetailsStateCopyWith<$Res> {
-  factory _$$_CreditAndInvoiceDetailsStateCopyWith(
-          _$_CreditAndInvoiceDetailsState value,
-          $Res Function(_$_CreditAndInvoiceDetailsState) then) =
-      __$$_CreditAndInvoiceDetailsStateCopyWithImpl<$Res>;
+  factory _$$CreditAndInvoiceDetailsStateImplCopyWith(
+          _$CreditAndInvoiceDetailsStateImpl value,
+          $Res Function(_$CreditAndInvoiceDetailsStateImpl) then) =
+      __$$CreditAndInvoiceDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -709,13 +766,13 @@ abstract class _$$_CreditAndInvoiceDetailsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreditAndInvoiceDetailsStateCopyWithImpl<$Res>
+class __$$CreditAndInvoiceDetailsStateImplCopyWithImpl<$Res>
     extends _$CreditAndInvoiceDetailsStateCopyWithImpl<$Res,
-        _$_CreditAndInvoiceDetailsState>
-    implements _$$_CreditAndInvoiceDetailsStateCopyWith<$Res> {
-  __$$_CreditAndInvoiceDetailsStateCopyWithImpl(
-      _$_CreditAndInvoiceDetailsState _value,
-      $Res Function(_$_CreditAndInvoiceDetailsState) _then)
+        _$CreditAndInvoiceDetailsStateImpl>
+    implements _$$CreditAndInvoiceDetailsStateImplCopyWith<$Res> {
+  __$$CreditAndInvoiceDetailsStateImplCopyWithImpl(
+      _$CreditAndInvoiceDetailsStateImpl _value,
+      $Res Function(_$CreditAndInvoiceDetailsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -728,7 +785,7 @@ class __$$_CreditAndInvoiceDetailsStateCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_CreditAndInvoiceDetailsState(
+    return _then(_$CreditAndInvoiceDetailsStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -759,8 +816,8 @@ class __$$_CreditAndInvoiceDetailsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CreditAndInvoiceDetailsState extends _CreditAndInvoiceDetailsState {
-  const _$_CreditAndInvoiceDetailsState(
+class _$CreditAndInvoiceDetailsStateImpl extends _CreditAndInvoiceDetailsState {
+  const _$CreditAndInvoiceDetailsStateImpl(
       {required this.isLoading,
       required this.failureOrSuccessOption,
       required final List<CustomerDocumentDetail> itemsInfo,
@@ -795,10 +852,10 @@ class _$_CreditAndInvoiceDetailsState extends _CreditAndInvoiceDetailsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreditAndInvoiceDetailsState &&
+            other is _$CreditAndInvoiceDetailsStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -826,9 +883,10 @@ class _$_CreditAndInvoiceDetailsState extends _CreditAndInvoiceDetailsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreditAndInvoiceDetailsStateCopyWith<_$_CreditAndInvoiceDetailsState>
-      get copyWith => __$$_CreditAndInvoiceDetailsStateCopyWithImpl<
-          _$_CreditAndInvoiceDetailsState>(this, _$identity);
+  _$$CreditAndInvoiceDetailsStateImplCopyWith<
+          _$CreditAndInvoiceDetailsStateImpl>
+      get copyWith => __$$CreditAndInvoiceDetailsStateImplCopyWithImpl<
+          _$CreditAndInvoiceDetailsStateImpl>(this, _$identity);
 }
 
 abstract class _CreditAndInvoiceDetailsState
@@ -840,7 +898,7 @@ abstract class _CreditAndInvoiceDetailsState
       required final CreditAndInvoiceItem basicInfo,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo
-          customerCodeInfo}) = _$_CreditAndInvoiceDetailsState;
+          customerCodeInfo}) = _$CreditAndInvoiceDetailsStateImpl;
   const _CreditAndInvoiceDetailsState._() : super._();
 
   @override
@@ -857,6 +915,7 @@ abstract class _CreditAndInvoiceDetailsState
   CustomerCodeInfo get customerCodeInfo;
   @override
   @JsonKey(ignore: true)
-  _$$_CreditAndInvoiceDetailsStateCopyWith<_$_CreditAndInvoiceDetailsState>
+  _$$CreditAndInvoiceDetailsStateImplCopyWith<
+          _$CreditAndInvoiceDetailsStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -10,10 +10,13 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_details_section.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_items_section.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/summary.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,74 +26,90 @@ part 'package:ezrxmobile/presentation/payments/invoice_details/widgets/order_ite
 part 'package:ezrxmobile/presentation/payments/invoice_details/widgets/download_e_invoice_button.dart';
 
 class InvoiceDetailsPage extends StatelessWidget {
-  const InvoiceDetailsPage({Key? key}) : super(key: key);
+  final bool isMarketPlace;
+
+  const InvoiceDetailsPage({
+    Key? key,
+    required this.isMarketPlace,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreditAndInvoiceDetailsBloc,
-        CreditAndInvoiceDetailsState>(
-      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
-      builder: (context, state) {
-        return Scaffold(
-          appBar: CustomAppBar.commonAppBar(
-            title: Text(
-              context.tr('Invoice details'),
+    return PaymentModule(
+      isMarketPlace: isMarketPlace,
+      child: BlocBuilder<CreditAndInvoiceDetailsBloc,
+          CreditAndInvoiceDetailsState>(
+        buildWhen: (previous, current) =>
+            previous.isLoading != current.isLoading,
+        builder: (context, state) {
+          return Scaffold(
+            appBar: CustomAppBar.commonAppBar(
+              title: Text(
+                context.tr('Invoice details'),
+              ),
+              customerBlockedOrSuspended: context
+                  .read<EligibilityBloc>()
+                  .state
+                  .customerBlockOrSuspended,
             ),
-            customerBlockedOrSuspended:
-                context.read<EligibilityBloc>().state.customerBlockOrSuspended,
-          ),
-          bottomNavigationBar: context
-                      .read<EligibilityBloc>()
-                      .state
-                      .salesOrg
-                      .showDownloadInvoiceButton &&
-                  !state.isLoading
-              ? const _DownloadEInvoiceButton()
-              : const SizedBox.shrink(),
-          body: AnnouncementBanner(
-            currentPath: context.router.currentPath,
-            child: state.isLoading
-                ? LoadingShimmer.logo(
-                    key: WidgetKeys.loaderImage,
-                  )
-                : ListView(
-                    key: WidgetKeys.invoiceDetailsPageListView,
-                    children: <Widget>[
-                      InvoiceDetailsSection(
-                        invoiceItem: state.basicInfo,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                          vertical: 16.0,
+            bottomNavigationBar: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .salesOrg
+                        .showDownloadInvoiceButton &&
+                    !state.isLoading
+                ? const _DownloadEInvoiceButton()
+                : const SizedBox.shrink(),
+            body: AnnouncementBanner(
+              currentPath: context.router.currentPath,
+              child: state.isLoading
+                  ? LoadingShimmer.logo(
+                      key: WidgetKeys.loaderImage,
+                    )
+                  : ListView(
+                      key: WidgetKeys.invoiceDetailsPageListView,
+                      children: <Widget>[
+                        InvoiceDetailsSection(
+                          invoiceItem: state.basicInfo,
                         ),
-                        child: AddressInfoSection.order(),
-                      ),
-                      const Divider(
-                        endIndent: 0,
-                        indent: 0,
-                        color: ZPColors.lightGray2,
-                        height: 16,
-                      ),
-                      InvoiceSummary(
-                        invoiceItem: state.basicInfo,
-                        customerDocumentDetail: state.itemsInfo,
-                      ),
-                      const Divider(
-                        endIndent: 0,
-                        indent: 0,
-                        color: ZPColors.lightGray2,
-                        height: 16,
-                      ),
-                      const _OrderItemCount(),
-                      InvoiceItemsSection(
-                        customerDocumentDetail: state.itemsInfo,
-                      ),
-                    ],
-                  ),
-          ),
-        );
-      },
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0,
+                            vertical: 16.0,
+                          ),
+                          child: AddressInfoSection.order(),
+                        ),
+                        const Divider(
+                          endIndent: 0,
+                          indent: 0,
+                          color: ZPColors.lightGray2,
+                          height: 16,
+                        ),
+                        InvoiceSummary(
+                          invoiceItem: state.basicInfo,
+                          customerDocumentDetail: state.itemsInfo,
+                        ),
+                        const Divider(
+                          endIndent: 0,
+                          indent: 0,
+                          color: ZPColors.lightGray2,
+                          height: 16,
+                        ),
+                        const _OrderItemCount(),
+                        if (context.isMPPayment)
+                          const Padding(
+                            padding: EdgeInsets.only(top: 24, left: 16),
+                            child: MarketPlaceTitleWithLogo(),
+                          ),
+                        InvoiceItemsSection(
+                          customerDocumentDetail: state.itemsInfo,
+                        ),
+                      ],
+                    ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

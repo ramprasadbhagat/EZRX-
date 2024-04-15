@@ -9,7 +9,7 @@ class _OrderItemCount extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16, top: 16),
       child: Text(
         '${context.tr('Order items')} (${context.read<CreditAndInvoiceDetailsBloc>().state.itemsInfo.length})',
-        style: Theme.of(context).textTheme.labelMedium,
+        style: Theme.of(context).textTheme.labelLarge,
       ),
     );
   }

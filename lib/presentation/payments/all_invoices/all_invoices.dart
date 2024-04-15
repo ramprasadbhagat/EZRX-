@@ -84,8 +84,7 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
                 onRefresh: () =>
                     context.allInvoicesBloc(widget.isMarketPlace).add(
                           AllInvoicesEvent.fetch(
-                            appliedFilter:
-                                AllInvoicesFilter.defaultFilter(),
+                            appliedFilter: AllInvoicesFilter.defaultFilter(),
                           ),
                         ),
                 onLoadingMore: () =>
@@ -184,10 +183,13 @@ class _InvoiceItem extends StatelessWidget {
           context.read<CreditAndInvoiceDetailsBloc>().add(
                 CreditAndInvoiceDetailsEvent.fetch(
                   creditAndInvoiceItem: invoiceItem,
+                  isMarketPlace: context.isMPPayment,
                 ),
               );
 
-          context.router.push(const InvoiceDetailsPageRoute());
+          context.router.push(
+            InvoiceDetailsPageRoute(isMarketPlace: context.isMPPayment),
+          );
         },
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

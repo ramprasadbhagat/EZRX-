@@ -46,6 +46,7 @@ import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.d
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_e_credit/download_e_credit_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_e_invoice/download_e_invoice_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/filter/full_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
@@ -367,6 +368,10 @@ class CreditAndInvoiceDetailsBlocMock
 class DownloadECreditBlocMock
     extends MockBloc<DownloadECreditEvent, DownloadECreditState>
     implements DownloadECreditBloc {}
+
+class DownloadEInvoiceBlocMock
+    extends MockBloc<DownloadEInvoiceEvent, DownloadEInvoiceState>
+    implements DownloadEInvoiceBloc {}
 
 //////////////////////////////////////////////////////////////////////////////
 

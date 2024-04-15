@@ -28,7 +28,7 @@ void main() {
   const fakeFiscalYear = '2023';
   const fakeBpCustomerNumber = '0030032223';
   const fakeAccountingDocumentItem = '001';
-  final variables = {
+  final variables = <String, Map<String, dynamic>>{
     'input': {
       'customerCode': '0030032223',
       'salesOrg': '2601',
@@ -72,7 +72,6 @@ void main() {
               (server) => server.reply(
                 200,
                 res,
-                delay: const Duration(seconds: 1),
               ),
               headers: {'Content-Type': 'application/json; charset=utf-8'},
               data: jsonEncode({
@@ -89,6 +88,55 @@ void main() {
               fiscalYear: fakeFiscalYear,
               searchKey: fakeAccountingDocument,
               accountingDocumentItem: fakeAccountingDocumentItem,
+              isMarketPlace: false,
+            );
+
+            final details = res['data']['customerDocumentDetails'];
+            final data = <CustomerDocumentDetail>[];
+            for (final dynamic detail in details) {
+              data.add(CustomerDocumentDetailDto.fromJson(detail).toDomain());
+            }
+
+            expect(
+              result,
+              data,
+            );
+          },
+        );
+
+        test(
+          'get Invoice Details should contain isMarketPlace when passing true value',
+          () async {
+            final res = json.decode(
+              await rootBundle.loadString(
+                'assets/json/customerDocumentDetailsResponse.json',
+              ),
+            );
+            final mpVariables = {...variables};
+            variables['input']!['isMarketPlace'] = true;
+
+            dioAdapter.onPost(
+              '/api/ezpay',
+              (server) => server.reply(
+                200,
+                res,
+              ),
+              headers: {'Content-Type': 'application/json; charset=utf-8'},
+              data: jsonEncode({
+                'query': remoteDataSource.creditAndInvoiceDetailsQueryMutation
+                    .getCreditAndInvoiceDetails(),
+                'variables': mpVariables,
+              }),
+            );
+
+            final result = await remoteDataSource.getCreditAndInvoiceDetails(
+              customerCode: 'fake-customer-code',
+              salesOrg: 'fake-sale-org',
+              bpCustomerNumber: fakeBpCustomerNumber,
+              fiscalYear: fakeFiscalYear,
+              searchKey: fakeAccountingDocument,
+              accountingDocumentItem: fakeAccountingDocumentItem,
+              isMarketPlace: true,
             );
 
             final details = res['data']['customerDocumentDetails'];
@@ -112,7 +160,6 @@ void main() {
               (server) => server.reply(
                 204,
                 {'data': []},
-                delay: const Duration(seconds: 1),
               ),
               headers: {'Content-Type': 'application/json; charset=utf-8'},
               data: jsonEncode({
@@ -130,6 +177,7 @@ void main() {
               fiscalYear: fakeFiscalYear,
               searchKey: fakeAccountingDocument,
               accountingDocumentItem: fakeAccountingDocumentItem,
+              isMarketPlace: false,
             )
                 .onError((error, _) {
               expect(error, isA<ServerException>());
@@ -151,7 +199,6 @@ void main() {
                     {'message': 'fake-error'},
                   ],
                 },
-                delay: const Duration(seconds: 1),
               ),
               headers: {'Content-Type': 'application/json; charset=utf-8'},
               data: jsonEncode({
@@ -169,6 +216,7 @@ void main() {
               fiscalYear: fakeFiscalYear,
               searchKey: fakeAccountingDocument,
               accountingDocumentItem: fakeAccountingDocumentItem,
+              isMarketPlace: false,
             )
                 .onError((error, _) {
               expect(error, isA<ServerException>());

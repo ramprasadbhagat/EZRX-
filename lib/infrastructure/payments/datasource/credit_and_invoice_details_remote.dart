@@ -28,6 +28,7 @@ class CreditAndInvoiceDetailsRemoteDataSource {
     required String fiscalYear,
     required String bpCustomerNumber,
     required String accountingDocumentItem,
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -44,6 +45,7 @@ class CreditAndInvoiceDetailsRemoteDataSource {
               'fiscalYear': fiscalYear,
               'bpCustomerNumber': bpCustomerNumber,
               'accountingDocumentItem': accountingDocumentItem,
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
             },
           },
         },

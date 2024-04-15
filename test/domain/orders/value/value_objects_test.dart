@@ -275,30 +275,6 @@ void main() {
     );
   });
 
-  group('BatchNumber Value Object', () {
-    test(
-      'BatchNumber available ',
-      () {
-        final valObj = BatchNumber('fake-batch');
-        expect(
-          valObj.selectOrGetBatch,
-          'fake-batch',
-        );
-      },
-    );
-
-    test(
-      'BatchNumber not available ',
-      () {
-        final valObj = BatchNumber('');
-        expect(
-          valObj.selectOrGetBatch,
-          'Select',
-        );
-      },
-    );
-  });
-
   group('Counter Offer Value Object', () {
     test('Counter Offer Value is not Valid', () {
       final emptyValue = CounterOfferValue('');

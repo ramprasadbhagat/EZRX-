@@ -24,6 +24,7 @@ class _InvoiceCreditItem extends StatelessWidget {
           context.read<CreditAndInvoiceDetailsBloc>().add(
                 CreditAndInvoiceDetailsEvent.fetch(
                   creditAndInvoiceItem: data,
+                  isMarketPlace: context.isMPPayment,
                 ),
               );
           if (data.debitCreditCode.isCredit) {
@@ -31,7 +32,9 @@ class _InvoiceCreditItem extends StatelessWidget {
 
             return;
           }
-          context.router.push(const InvoiceDetailsPageRoute());
+          context.router.push(
+            InvoiceDetailsPageRoute(isMarketPlace: context.isMPPayment),
+          );
         },
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

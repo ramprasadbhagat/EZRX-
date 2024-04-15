@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
@@ -47,11 +49,12 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late List<CreditAndInvoiceItem> allInvoicesData;
   late NewPaymentBlocMock newPaymentBlocMock;
+  late CreditAndInvoiceDetailsBlocMock creditAndInvoiceDetailsBlocMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => MixpanelServiceMock());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
   });
 
@@ -67,6 +70,7 @@ void main() {
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
+    creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
     allInvoicesData =
         await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList();
 
@@ -86,6 +90,8 @@ void main() {
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
+    when(() => creditAndInvoiceDetailsBlocMock.state)
+        .thenReturn(CreditAndInvoiceDetailsState.initial());
   });
 
   Widget getWidget({bool isMarketPlace = false}) {
@@ -124,6 +130,9 @@ void main() {
         ),
         BlocProvider<NewPaymentBloc>(
           create: (context) => newPaymentBlocMock,
+        ),
+        BlocProvider<CreditAndInvoiceDetailsBloc>(
+          create: (context) => creditAndInvoiceDetailsBlocMock,
         ),
       ],
       child: AllInvoicesPage(isMarketPlace: isMarketPlace),
@@ -412,7 +421,9 @@ void main() {
       expect(noRecordTextFinder, findsOneWidget);
     });
 
-    testWidgets('=> Find marketplace logo in MP all invoice', (tester) async {
+    testWidgets(
+        '=> Find marketplace logo in MP all invoice and navigate to invoice detail',
+        (tester) async {
       when(() => mpAllInvoicesBlocMock.state).thenReturn(
         AllInvoicesState.initial()
             .copyWith(items: allInvoicesData.take(1).toList()),
@@ -428,6 +439,21 @@ void main() {
           matching: find.byType(MarketPlaceLogo),
         ),
         findsOne,
+      );
+
+      await tester.tap(invoiceItem);
+      await tester.pump();
+      verify(
+        () => creditAndInvoiceDetailsBlocMock.add(
+          CreditAndInvoiceDetailsEvent.fetch(
+            creditAndInvoiceItem: allInvoicesData.first,
+            isMarketPlace: true,
+          ),
+        ),
+      ).called(1);
+      expect(
+        autoRouterMock.currentPath,
+        InvoiceDetailsPageRoute(isMarketPlace: true).path,
       );
     });
   });
