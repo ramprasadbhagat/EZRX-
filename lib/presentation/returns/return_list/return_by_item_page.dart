@@ -183,7 +183,7 @@ class _ReturnItem extends StatelessWidget {
                     : null,
                 title: data.materialName,
                 subtitle:
-                    'Batch ${data.batch} (Expires ${data.expiry.dateString})',
+                    'Batch: ${data.displayBatch} - Expires: ${data.displayExpiryDate}',
                 headerText: 'Return #${data.requestId}',
                 materialNumber: data.materialNumber,
                 quantity: data.itemQty.getOrDefaultValue('0'),

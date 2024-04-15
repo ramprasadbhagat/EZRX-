@@ -206,10 +206,20 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
 
+        final itemTile = find.byKey(WidgetKeys.returnItem('0'));
+
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.returnItem('0')),
+            of: itemTile,
             matching: find.byType(MarketPlaceLogo),
+          ),
+          findsOne,
+        );
+
+        expect(
+          find.descendant(
+            of: itemTile,
+            matching: find.text('Batch: NA - Expires: NA'),
           ),
           findsOne,
         );
