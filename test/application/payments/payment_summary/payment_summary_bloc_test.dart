@@ -265,5 +265,120 @@ void main() {
         ),
       ],
     );
+
+    blocTest<ZPPaymentSummaryBloc, PaymentSummaryState>(
+      'Payment Summary "fetchPaymentSummaryList" Event with empty search',
+      build: () => ZPPaymentSummaryBloc(
+        paymentSummaryRepository: paymentSummaryMockRepository,
+        config: config,
+      ),
+      seed: () => PaymentSummaryState.initial().copyWith(
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganization: mockSalesOrganisation,
+      ),
+      setUp: () {
+        when(
+          () => paymentSummaryMockRepository.fetchPaymentSummaryList(
+            customerCodeInfo: mockCustomerCodeInfo,
+            salesOrganization: mockSalesOrganisation,
+            filter: paymentSummaryFilter,
+            searchKey: SearchKey.searchFilter(''),
+            offset: offSet,
+            pageSize: pageSize,
+            isMarketPlace: false,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(details),
+        );
+      },
+      act: (ZPPaymentSummaryBloc bloc) => bloc.add(
+        PaymentSummaryEvent.fetch(
+          appliedFilter: paymentSummaryFilter,
+          searchKey: SearchKey.searchFilter(''),
+        ),
+      ),
+      expect: () => [
+        PaymentSummaryState.initial().copyWith(
+          isFetching: true,
+          appliedFilter: paymentSummaryFilter,
+          failureOrSuccessOption: none(),
+          searchKey: SearchKey.searchFilter(''),
+        ),
+        PaymentSummaryState.initial().copyWith(
+          details: details,
+          canLoadMore: false,
+          appliedFilter: paymentSummaryFilter,
+          searchKey: SearchKey.searchFilter(''),
+        ),
+      ],
+    );
+
+    blocTest<ZPPaymentSummaryBloc, PaymentSummaryState>(
+      'Payment Summary "fetchPaymentSummaryList" Event with search change',
+      build: () => ZPPaymentSummaryBloc(
+        paymentSummaryRepository: paymentSummaryMockRepository,
+        config: config,
+      ),
+      seed: () => PaymentSummaryState.initial().copyWith(
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganization: mockSalesOrganisation,
+        searchKey: SearchKey.searchFilter(''),
+      ),
+      setUp: () {
+        when(
+          () => paymentSummaryMockRepository.fetchPaymentSummaryList(
+            customerCodeInfo: mockCustomerCodeInfo,
+            salesOrganization: mockSalesOrganisation,
+            filter: paymentSummaryFilter,
+            searchKey: SearchKey.searchFilter('ab'),
+            offset: offSet,
+            pageSize: pageSize,
+            isMarketPlace: false,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(details),
+        );
+      },
+      act: (ZPPaymentSummaryBloc bloc) => bloc.add(
+        PaymentSummaryEvent.fetch(
+          appliedFilter: paymentSummaryFilter,
+          searchKey: SearchKey.searchFilter('ab'),
+        ),
+      ),
+      expect: () => [
+        PaymentSummaryState.initial().copyWith(
+          isFetching: true,
+          appliedFilter: paymentSummaryFilter,
+          failureOrSuccessOption: none(),
+          searchKey: SearchKey.searchFilter('ab'),
+        ),
+        PaymentSummaryState.initial().copyWith(
+          details: details,
+          canLoadMore: false,
+          appliedFilter: paymentSummaryFilter,
+          searchKey: SearchKey.searchFilter('ab'),
+        ),
+      ],
+    );
+
+    blocTest<ZPPaymentSummaryBloc, PaymentSummaryState>(
+      'Payment Summary "fetchPaymentSummaryList" Event with same search key',
+      build: () => ZPPaymentSummaryBloc(
+        paymentSummaryRepository: paymentSummaryMockRepository,
+        config: config,
+      ),
+      seed: () => PaymentSummaryState.initial().copyWith(
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganization: mockSalesOrganisation,
+        searchKey: SearchKey.searchFilter('ab'),
+      ),
+      act: (ZPPaymentSummaryBloc bloc) => bloc.add(
+        PaymentSummaryEvent.fetch(
+          appliedFilter: paymentSummaryFilter,
+          searchKey: SearchKey.searchFilter('ab'),
+        ),
+      ),
+      expect: () => [],
+    );
   });
 }

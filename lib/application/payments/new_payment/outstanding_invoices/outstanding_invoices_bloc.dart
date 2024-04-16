@@ -44,7 +44,7 @@ class OutstandingInvoicesBloc
         if (!event.searchKey.isValid()) return;
 
         if (event.searchKey == state.searchKey &&
-            event.appliedFilter == state.appliedFilter) {
+            event.searchKey.validateNotEmpty) {
           return;
         }
 

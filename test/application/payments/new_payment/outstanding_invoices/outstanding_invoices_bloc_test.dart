@@ -193,6 +193,27 @@ void main() {
     );
 
     blocTest(
+      'fetch -> Outstanding Invoices not fetch when search key is similar',
+      build: () => OutstandingInvoicesBloc(
+        newPaymentRepository: newPaymentRepository,
+        allCreditsAndInvoicesRepository: allCreditsAndInvoicesRepository,
+        config: config,
+      ),
+      seed: () => OutstandingInvoicesState.initial().copyWith(
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+        searchKey: fakeSearchKey,
+      ),
+      act: (OutstandingInvoicesBloc bloc) => bloc.add(
+        OutstandingInvoicesEvent.fetch(
+          appliedFilter: fakeOutstandingInvoiceFilter,
+          searchKey: fakeSearchKey,
+        ),
+      ),
+      expect: () => [],
+    );
+
+    blocTest(
       'fetch -> Outstanding Invoices not fetch when search key is one character',
       build: () => OutstandingInvoicesBloc(
         newPaymentRepository: newPaymentRepository,

@@ -200,6 +200,32 @@ void main() {
       );
 
       blocTest<AvailableCreditsBloc, AvailableCreditsState>(
+        'For "fetch" Event not success when searchKey is similar',
+        build: () => AvailableCreditsBloc(
+          newPaymentRepository: newPaymentRepositoryMock,
+          config: config,
+        ),
+        act: (bloc) => bloc.add(
+          AvailableCreditsEvent.fetch(
+            appliedFilter: AvailableCreditFilter.defaultFilter(),
+            searchKey: SearchKey.searchFilter('ab'),
+          ),
+        ),
+        seed: () => AvailableCreditsState.initial().copyWith(
+          appliedFilter: AvailableCreditFilter.defaultFilter(),
+          items: openItems,
+          salesOrganization: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('Fake-Sales-Org'),
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'Fake-CustomerCode',
+          ),
+          searchKey: SearchKey.searchFilter('ab'),
+        ),
+        expect: () => [],
+      );
+
+      blocTest<AvailableCreditsBloc, AvailableCreditsState>(
         'For "loadMore" Event with failure',
         build: () => AvailableCreditsBloc(
           newPaymentRepository: newPaymentRepositoryMock,

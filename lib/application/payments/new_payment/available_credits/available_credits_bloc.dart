@@ -36,7 +36,7 @@ class AvailableCreditsBloc
         if (!value.searchKey.isValid()) return;
 
         if (value.searchKey == state.searchKey &&
-            value.appliedFilter == state.appliedFilter) {
+            value.searchKey.validateNotEmpty) {
           return;
         }
 
