@@ -21,8 +21,12 @@ class ReturnCounterOfferField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
+    final newRequestBlocState = context.read<NewRequestBloc>().state;
 
-    return !eligibilityState.isReturnsOverrideEnable
+    return !newRequestBlocState
+                .getReturnItemReturnType(uuid)
+                .isCounterOfferElegible ||
+            !eligibilityState.isReturnsOverrideEnable
         ? const SizedBox.shrink()
         : Column(
             children: [
@@ -44,7 +48,9 @@ class ReturnCounterOfferField extends StatelessWidget {
                   return CustomNumericTextField.decimalNumber(
                     fieldKey: enabled
                         ? WidgetKeys.requestCounterOfferTextField(uuid)
-                        : WidgetKeys.requestCounterOfferTextField(initValue),
+                        : WidgetKeys.requestCounterOfferTextField(
+                            initValue,
+                          ),
                     labelText: labelText,
                     decoration: enabled
                         ? InputDecoration(

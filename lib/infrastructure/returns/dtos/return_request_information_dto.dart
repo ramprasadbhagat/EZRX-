@@ -18,6 +18,9 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
     @JsonKey(name: 'comment', defaultValue: '') required String comment,
     @JsonKey(name: 'rejectReason', defaultValue: '')
     required String rejectReason,
+    @JsonKey(name: 'returnTypeDesc', defaultValue: '')
+    required String returnTypeDesc,
+    @JsonKey(name: 'returnType', defaultValue: '') required String returnType,
     @JsonKey(name: 'returnQuantity', defaultValue: '')
     required String returnQuantity,
     @JsonKey(name: 'unitPrice', defaultValue: '') required String unitPrice,
@@ -103,6 +106,8 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       remarks: Remarks(remarks),
       overrideValue: overrideValue,
       initialQuantity: initialQuantity,
+      returnType: ReturnType(returnType),
+      returnTypeDesc: returnTypeDesc,
       priceOverrideTrail: priceOverrideTrail.map((e) => e.toDomain()).toList(),
       isMarketPlace: isMarketPlace,
     );

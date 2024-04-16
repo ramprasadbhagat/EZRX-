@@ -24,6 +24,8 @@ class RequestInformationQuery {
       comment
       remarks
       rejectReason
+      returnTypeDesc
+      returnType
       returnQuantity
       unitPrice
       totalPrice

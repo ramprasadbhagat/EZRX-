@@ -15,7 +15,9 @@ class _MaterialReturnDetailsSection extends StatelessWidget {
       labelText: context.tr('Material return details'),
       child: BlocBuilder<NewRequestBloc, NewRequestState>(
         buildWhen: (previous, current) =>
-            previous.showErrorMessages != current.showErrorMessages,
+            previous.showErrorMessages != current.showErrorMessages ||
+            previous.getReturnItemDetails(detail.uuid).returnType !=
+                current.getReturnItemDetails(detail.uuid).returnType,
         builder: (context, state) {
           return Form(
             autovalidateMode: state.showErrorMessages
@@ -23,6 +25,14 @@ class _MaterialReturnDetailsSection extends StatelessWidget {
                 : AutovalidateMode.disabled,
             child: Column(
               children: [
+                ReturnTypeSection(
+                  isDisable: !item.editDetailsAllowed,
+                  uuid: detail.uuid,
+                  assignmentNumber: detail.assignmentNumber,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
                 BalanceQuantityField(data: item),
                 const SizedBox(
                   height: 8,

@@ -20,6 +20,8 @@ mixin _$ReturnRequestInformation {
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   StringValue get comment => throw _privateConstructorUsedError;
   String get rejectReason => throw _privateConstructorUsedError;
+  String get returnTypeDesc => throw _privateConstructorUsedError;
+  ReturnType get returnType => throw _privateConstructorUsedError;
   String get returnQuantity => throw _privateConstructorUsedError;
   double get unitPrice => throw _privateConstructorUsedError;
   double get totalPrice => throw _privateConstructorUsedError;
@@ -67,6 +69,8 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       DateTimeStringValue expiryDate,
       StringValue comment,
       String rejectReason,
+      String returnTypeDesc,
+      ReturnType returnType,
       String returnQuantity,
       double unitPrice,
       double totalPrice,
@@ -114,6 +118,8 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
     Object? expiryDate = null,
     Object? comment = null,
     Object? rejectReason = null,
+    Object? returnTypeDesc = null,
+    Object? returnType = null,
     Object? returnQuantity = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
@@ -159,6 +165,14 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
           ? _value.rejectReason
           : rejectReason // ignore: cast_nullable_to_non_nullable
               as String,
+      returnTypeDesc: null == returnTypeDesc
+          ? _value.returnTypeDesc
+          : returnTypeDesc // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnType: null == returnType
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as ReturnType,
       returnQuantity: null == returnQuantity
           ? _value.returnQuantity
           : returnQuantity // ignore: cast_nullable_to_non_nullable
@@ -285,6 +299,8 @@ abstract class _$$ReturnRequestInformationImplCopyWith<$Res>
       DateTimeStringValue expiryDate,
       StringValue comment,
       String rejectReason,
+      String returnTypeDesc,
+      ReturnType returnType,
       String returnQuantity,
       double unitPrice,
       double totalPrice,
@@ -331,6 +347,8 @@ class __$$ReturnRequestInformationImplCopyWithImpl<$Res>
     Object? expiryDate = null,
     Object? comment = null,
     Object? rejectReason = null,
+    Object? returnTypeDesc = null,
+    Object? returnType = null,
     Object? returnQuantity = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
@@ -376,6 +394,14 @@ class __$$ReturnRequestInformationImplCopyWithImpl<$Res>
           ? _value.rejectReason
           : rejectReason // ignore: cast_nullable_to_non_nullable
               as String,
+      returnTypeDesc: null == returnTypeDesc
+          ? _value.returnTypeDesc
+          : returnTypeDesc // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnType: null == returnType
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as ReturnType,
       returnQuantity: null == returnQuantity
           ? _value.returnQuantity
           : returnQuantity // ignore: cast_nullable_to_non_nullable
@@ -496,6 +522,8 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
       required this.expiryDate,
       required this.comment,
       required this.rejectReason,
+      required this.returnTypeDesc,
+      required this.returnType,
       required this.returnQuantity,
       required this.unitPrice,
       required this.totalPrice,
@@ -538,6 +566,10 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
   final StringValue comment;
   @override
   final String rejectReason;
+  @override
+  final String returnTypeDesc;
+  @override
+  final ReturnType returnType;
   @override
   final String returnQuantity;
   @override
@@ -627,7 +659,7 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
 
   @override
   String toString() {
-    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail, isMarketPlace: $isMarketPlace)';
+    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnTypeDesc: $returnTypeDesc, returnType: $returnType, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -642,6 +674,10 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.rejectReason, rejectReason) ||
                 other.rejectReason == rejectReason) &&
+            (identical(other.returnTypeDesc, returnTypeDesc) ||
+                other.returnTypeDesc == returnTypeDesc) &&
+            (identical(other.returnType, returnType) ||
+                other.returnType == returnType) &&
             (identical(other.returnQuantity, returnQuantity) ||
                 other.returnQuantity == returnQuantity) &&
             (identical(other.unitPrice, unitPrice) ||
@@ -700,6 +736,8 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
         expiryDate,
         comment,
         rejectReason,
+        returnTypeDesc,
+        returnType,
         returnQuantity,
         unitPrice,
         totalPrice,
@@ -743,6 +781,8 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
       required final DateTimeStringValue expiryDate,
       required final StringValue comment,
       required final String rejectReason,
+      required final String returnTypeDesc,
+      required final ReturnType returnType,
       required final String returnQuantity,
       required final double unitPrice,
       required final double totalPrice,
@@ -780,6 +820,10 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   StringValue get comment;
   @override
   String get rejectReason;
+  @override
+  String get returnTypeDesc;
+  @override
+  ReturnType get returnType;
   @override
   String get returnQuantity;
   @override

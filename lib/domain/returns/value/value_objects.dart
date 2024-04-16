@@ -162,3 +162,27 @@ class StatusReason extends ValueObject<String> {
 
   const StatusReason._(this.value);
 }
+
+class ReturnType extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ReturnType(String input) {
+    return ReturnType._(validateStringNotEmpty(input));
+  }
+  factory ReturnType.returnItem() => ReturnType('500');
+  factory ReturnType.exchangeItem() => ReturnType('505');
+
+  String get returnTypeValue => getReturnValue(value.getOrElse(() => ''));
+
+  bool get isCounterOfferElegible =>
+      getisCounterOfferElegible(value.getOrElse(() => ''));
+
+  String get quantityHeading => getQuantityHeading(value.getOrElse(() => ''));
+
+  String get quantityHintText => getQuantityHintText(value.getOrElse(() => ''));
+  String get returnTypeBottomASheetBodyText =>
+      getreturnTypeBottomASheetBodyText(value.getOrElse(() => ''));
+
+  const ReturnType._(this.value);
+}

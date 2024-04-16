@@ -24,7 +24,8 @@ class ReturnItemPrice extends StatelessWidget {
     if (details == ReturnItemDetails.empty()) {
       details = data.validatedItemDetails;
     }
-    final isPriceOverrideValid = eligibilityState.isReturnsOverrideEnable &&
+    final isPriceOverrideValid = (details.returnType.isCounterOfferElegible &&
+            eligibilityState.isReturnsOverrideEnable) &&
         details.priceOverride.isValid();
 
     return Column(
@@ -43,7 +44,8 @@ class ReturnItemPrice extends StatelessWidget {
               ),
             PriceComponent(
               salesOrgConfig: eligibilityState.salesOrgConfigs,
-              price: details.priceOverride.isValid()
+              price: (details.returnType.isCounterOfferElegible &&
+                      details.priceOverride.isValid())
                   ? details.priceOverride.stringValue
                   : details.unitPrice.apiParameterValue,
               type: PriceStyle.summaryPrice,

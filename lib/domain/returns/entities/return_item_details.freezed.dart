@@ -12,7 +12,7 @@ part of 'return_item_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnItemDetails {
@@ -29,6 +29,7 @@ mixin _$ReturnItemDetails {
   bool get outsidePolicy => throw _privateConstructorUsedError;
   CounterOfferValue get priceOverride => throw _privateConstructorUsedError;
   String get returnReason => throw _privateConstructorUsedError;
+  ReturnType get returnType => throw _privateConstructorUsedError;
   IntegerValue get balanceQty => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -55,6 +56,7 @@ abstract class $ReturnItemDetailsCopyWith<$Res> {
       bool outsidePolicy,
       CounterOfferValue priceOverride,
       String returnReason,
+      ReturnType returnType,
       IntegerValue balanceQty});
 
   $UsageCopyWith<$Res> get usage;
@@ -85,6 +87,7 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
     Object? outsidePolicy = null,
     Object? priceOverride = null,
     Object? returnReason = null,
+    Object? returnType = null,
     Object? balanceQty = null,
   }) {
     return _then(_value.copyWith(
@@ -136,6 +139,10 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
           ? _value.returnReason
           : returnReason // ignore: cast_nullable_to_non_nullable
               as String,
+      returnType: null == returnType
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as ReturnType,
       balanceQty: null == balanceQty
           ? _value.balanceQty
           : balanceQty // ignore: cast_nullable_to_non_nullable
@@ -153,11 +160,11 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
 }
 
 /// @nodoc
-abstract class _$$_ReturnItemDetailsCopyWith<$Res>
+abstract class _$$ReturnItemDetailsImplCopyWith<$Res>
     implements $ReturnItemDetailsCopyWith<$Res> {
-  factory _$$_ReturnItemDetailsCopyWith(_$_ReturnItemDetails value,
-          $Res Function(_$_ReturnItemDetails) then) =
-      __$$_ReturnItemDetailsCopyWithImpl<$Res>;
+  factory _$$ReturnItemDetailsImplCopyWith(_$ReturnItemDetailsImpl value,
+          $Res Function(_$ReturnItemDetailsImpl) then) =
+      __$$ReturnItemDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -173,6 +180,7 @@ abstract class _$$_ReturnItemDetailsCopyWith<$Res>
       bool outsidePolicy,
       CounterOfferValue priceOverride,
       String returnReason,
+      ReturnType returnType,
       IntegerValue balanceQty});
 
   @override
@@ -180,11 +188,11 @@ abstract class _$$_ReturnItemDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnItemDetailsCopyWithImpl<$Res>
-    extends _$ReturnItemDetailsCopyWithImpl<$Res, _$_ReturnItemDetails>
-    implements _$$_ReturnItemDetailsCopyWith<$Res> {
-  __$$_ReturnItemDetailsCopyWithImpl(
-      _$_ReturnItemDetails _value, $Res Function(_$_ReturnItemDetails) _then)
+class __$$ReturnItemDetailsImplCopyWithImpl<$Res>
+    extends _$ReturnItemDetailsCopyWithImpl<$Res, _$ReturnItemDetailsImpl>
+    implements _$$ReturnItemDetailsImplCopyWith<$Res> {
+  __$$ReturnItemDetailsImplCopyWithImpl(_$ReturnItemDetailsImpl _value,
+      $Res Function(_$ReturnItemDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -202,9 +210,10 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
     Object? outsidePolicy = null,
     Object? priceOverride = null,
     Object? returnReason = null,
+    Object? returnType = null,
     Object? balanceQty = null,
   }) {
-    return _then(_$_ReturnItemDetails(
+    return _then(_$ReturnItemDetailsImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -253,6 +262,10 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
           ? _value.returnReason
           : returnReason // ignore: cast_nullable_to_non_nullable
               as String,
+      returnType: null == returnType
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as ReturnType,
       balanceQty: null == balanceQty
           ? _value.balanceQty
           : balanceQty // ignore: cast_nullable_to_non_nullable
@@ -263,8 +276,8 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnItemDetails extends _ReturnItemDetails {
-  const _$_ReturnItemDetails(
+class _$ReturnItemDetailsImpl extends _ReturnItemDetails {
+  const _$ReturnItemDetailsImpl(
       {required this.materialNumber,
       required this.itemNumber,
       required this.assignmentNumber,
@@ -277,6 +290,7 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
       required this.outsidePolicy,
       required this.priceOverride,
       required this.returnReason,
+      required this.returnType,
       required this.balanceQty})
       : _uploadedFiles = uploadedFiles,
         super._();
@@ -312,18 +326,20 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
   @override
   final String returnReason;
   @override
+  final ReturnType returnType;
+  @override
   final IntegerValue balanceQty;
 
   @override
   String toString() {
-    return 'ReturnItemDetails(materialNumber: $materialNumber, itemNumber: $itemNumber, assignmentNumber: $assignmentNumber, batch: $batch, returnQuantity: $returnQuantity, unitPrice: $unitPrice, usage: $usage, uploadedFiles: $uploadedFiles, remarks: $remarks, outsidePolicy: $outsidePolicy, priceOverride: $priceOverride, returnReason: $returnReason, balanceQty: $balanceQty)';
+    return 'ReturnItemDetails(materialNumber: $materialNumber, itemNumber: $itemNumber, assignmentNumber: $assignmentNumber, batch: $batch, returnQuantity: $returnQuantity, unitPrice: $unitPrice, usage: $usage, uploadedFiles: $uploadedFiles, remarks: $remarks, outsidePolicy: $outsidePolicy, priceOverride: $priceOverride, returnReason: $returnReason, returnType: $returnType, balanceQty: $balanceQty)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnItemDetails &&
+            other is _$ReturnItemDetailsImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.itemNumber, itemNumber) ||
@@ -345,6 +361,8 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
                 other.priceOverride == priceOverride) &&
             (identical(other.returnReason, returnReason) ||
                 other.returnReason == returnReason) &&
+            (identical(other.returnType, returnType) ||
+                other.returnType == returnType) &&
             (identical(other.balanceQty, balanceQty) ||
                 other.balanceQty == balanceQty));
   }
@@ -364,13 +382,14 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
       outsidePolicy,
       priceOverride,
       returnReason,
+      returnType,
       balanceQty);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnItemDetailsCopyWith<_$_ReturnItemDetails> get copyWith =>
-      __$$_ReturnItemDetailsCopyWithImpl<_$_ReturnItemDetails>(
+  _$$ReturnItemDetailsImplCopyWith<_$ReturnItemDetailsImpl> get copyWith =>
+      __$$ReturnItemDetailsImplCopyWithImpl<_$ReturnItemDetailsImpl>(
           this, _$identity);
 }
 
@@ -388,7 +407,8 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
       required final bool outsidePolicy,
       required final CounterOfferValue priceOverride,
       required final String returnReason,
-      required final IntegerValue balanceQty}) = _$_ReturnItemDetails;
+      required final ReturnType returnType,
+      required final IntegerValue balanceQty}) = _$ReturnItemDetailsImpl;
   const _ReturnItemDetails._() : super._();
 
   @override
@@ -416,9 +436,11 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
   @override
   String get returnReason;
   @override
+  ReturnType get returnType;
+  @override
   IntegerValue get balanceQty;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnItemDetailsCopyWith<_$_ReturnItemDetails> get copyWith =>
+  _$$ReturnItemDetailsImplCopyWith<_$ReturnItemDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

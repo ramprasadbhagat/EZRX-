@@ -34,6 +34,7 @@ class _BonusItemSection extends StatelessWidget {
                             bonusItem.editDetailsAllowed)
                           _MaterialBonusDetailsSection(
                             item: bonusItem,
+                            returnItem: returnItem,
                             detail: detail,
                             counterOfferEnabled: counterOfferEnabled,
                           ),

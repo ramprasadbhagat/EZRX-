@@ -43,6 +43,13 @@ class BonusMaterialReturnInfo extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         BalanceTextRow(
+          keyText: 'Return Type'.tr(),
+          keyTextStyle: Theme.of(context).textTheme.titleSmall,
+          keyFlex: 2,
+          valueFlex: 3,
+          valueText: returnItemDetail.returnType.returnTypeValue,
+        ),
+        BalanceTextRow(
           keyText: context.tr('Reason'),
           keyFlex: 2,
           valueFlex: 3,

@@ -147,6 +147,13 @@ class _ReturnDetailsSection extends StatelessWidget {
         ),
         const SizedBox(height: _itemSpacing + 2),
         BalanceTextRow(
+          keyText: context.tr('Return type'),
+          keyFlex: _keyFlex,
+          valueFlex: _valueFlex,
+          keyTextStyle: textStyle,
+          valueText: requestInformation.returnTypeDesc,
+        ),
+        BalanceTextRow(
           keyText: context.tr('Reason'),
           keyFlex: _keyFlex,
           valueFlex: _valueFlex,

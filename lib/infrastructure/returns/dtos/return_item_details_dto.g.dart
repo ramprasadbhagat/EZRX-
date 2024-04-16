@@ -6,9 +6,9 @@ part of 'return_item_details_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnItemDetailsDto _$$_ReturnItemDetailsDtoFromJson(
+_$ReturnItemDetailsDtoImpl _$$ReturnItemDetailsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ReturnItemDetailsDto(
+    _$ReturnItemDetailsDtoImpl(
       returnQuantity: json['returnQuantity'] as int? ?? 0,
       materialNumber: json['materialNumber'] as String? ?? '',
       lineNumber: json['lineNumber'] as String? ?? '',
@@ -22,8 +22,8 @@ _$_ReturnItemDetailsDto _$$_ReturnItemDetailsDtoFromJson(
       priceOverride: json['priceOverride'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ReturnItemDetailsDtoToJson(
-        _$_ReturnItemDetailsDto instance) =>
+Map<String, dynamic> _$$ReturnItemDetailsDtoImplToJson(
+        _$ReturnItemDetailsDtoImpl instance) =>
     <String, dynamic>{
       'returnQuantity': instance.returnQuantity,
       'materialNumber': instance.materialNumber,

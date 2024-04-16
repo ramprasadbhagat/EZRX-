@@ -47,3 +47,24 @@ bool isApproverOverride(String value) {
 
 String statusReason(String reason) =>
     reason.isNotEmpty ? reason : 'Updated at EZA';
+
+bool _isReturnType(String returnType) =>
+    returnType.isEmpty || returnType == '500';
+
+String getReturnValue(String returnType) =>
+    _isReturnType(returnType) ? 'Return' : 'Exchange';
+
+String getQuantityHeading(String returnType) =>
+    _isReturnType(returnType) ? 'Return quantity' : 'Exchange quantity';
+
+String getQuantityHintText(String returnType) => _isReturnType(returnType)
+    ? 'Enter return quantity'
+    : 'Enter exchange quantity';
+
+String getreturnTypeBottomASheetBodyText(String returnType) => _isReturnType(
+      returnType,
+    )
+        ? 'After your request is approved, you will receive a credit note'
+        : 'After your request is approved, you will receive a replacement item.';
+
+bool getisCounterOfferElegible(String returnType) => returnType == '500';

@@ -4,10 +4,12 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
   const _MaterialBonusDetailsSection({
     Key? key,
     required this.item,
+    required this.returnItem,
     required this.detail,
     required this.counterOfferEnabled,
   }) : super(key: key);
   final ReturnMaterial item;
+  final ReturnMaterial returnItem;
   final ReturnItemDetails detail;
   final bool counterOfferEnabled;
 
@@ -17,7 +19,9 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
       labelText: context.tr('Bonus return details'),
       child: BlocBuilder<NewRequestBloc, NewRequestState>(
         buildWhen: (previous, current) =>
-            previous.showErrorMessages != current.showErrorMessages,
+            previous.showErrorMessages != current.showErrorMessages ||
+            previous.getReturnItemDetails(detail.uuid).returnType !=
+                current.getReturnItemDetails(detail.uuid).returnType,
         builder: (context, state) {
           return Form(
             autovalidateMode: state.showErrorMessages
@@ -26,6 +30,14 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
             child: Column(
               key: WidgetKeys.materialBonusDetailsSection,
               children: [
+                ReturnTypeSection(
+                  isDisable: returnItem.editDetailsAllowed,
+                  uuid: detail.uuid,
+                  assignmentNumber: detail.assignmentNumber,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
                 BalanceQuantityField(data: item),
                 const SizedBox(
                   height: 8,
@@ -41,10 +53,13 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
                 ReturnValueField(
                   data: item,
                 ),
-                ReturnCounterOfferField(
-                  uuid: detail.uuid,
-                  enabled: counterOfferEnabled,
-                ),
+                if (state
+                    .getReturnItemReturnType(detail.uuid)
+                    .isCounterOfferElegible)
+                  ReturnCounterOfferField(
+                    uuid: detail.uuid,
+                    enabled: counterOfferEnabled,
+                  ),
                 const SizedBox(
                   height: 8,
                 ),

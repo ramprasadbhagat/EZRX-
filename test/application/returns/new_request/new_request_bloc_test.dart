@@ -584,7 +584,8 @@ void main() {
                 invoiceNumber: fakeReturnMaterial.assignmentNumber,
                 salesOrg: fakeSalesOrg,
                 returnItemDetailsList: [
-                  fakeReturnMaterial.validatedItemDetails,
+                  fakeReturnMaterial.validatedItemDetails
+                      .copyWith(returnType: ReturnType.returnItem()),
                 ],
               ),
             ],

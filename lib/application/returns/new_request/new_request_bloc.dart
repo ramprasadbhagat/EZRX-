@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_request_repository.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -82,6 +83,9 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
             e.included
                 ? returnItemDetailsList.add(
                     e.item.validatedItemDetails.copyWith(
+                      returnType: invoiceDetail.returnItemDetailsList.isNotEmpty
+                          ? invoiceDetail.returnItemDetailsList.first.returnType
+                          : ReturnType.returnItem(),
                       priceOverride:
                           invoiceDetail.returnItemDetailsList.isNotEmpty
                               ? invoiceDetail
@@ -280,6 +284,24 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
             ),
           ),
         );
+      },
+      updateSelectedReturnType: (value) {
+        final invoiceDetails = state.invoiceDetails.map((invoiceDetail) {
+          final detailsList = invoiceDetail.returnItemDetailsList
+              .map(
+                (returnItemDetail) =>
+                    value.assignmentNumber == returnItemDetail.assignmentNumber
+                        ? returnItemDetail.copyWith(
+                            returnType: value.returnType,
+                          )
+                        : returnItemDetail,
+              )
+              .toList();
+
+          return invoiceDetail.copyWith(returnItemDetailsList: detailsList);
+        }).toList();
+
+        emit(state.copyWith(invoiceDetails: invoiceDetails));
       },
     );
   }

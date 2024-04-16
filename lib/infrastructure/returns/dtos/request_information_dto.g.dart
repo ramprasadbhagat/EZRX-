@@ -6,9 +6,9 @@ part of 'request_information_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RequestInformationDto _$$_RequestInformationDtoFromJson(
+_$RequestInformationDtoImpl _$$RequestInformationDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_RequestInformationDto(
+    _$RequestInformationDtoImpl(
       requestHeader: RequestInformationHeaderDto.fromJson(
           json['requestHeader'] as Map<String, dynamic>),
       requestInformation: (json['requestInformationV2'] as List<dynamic>?)
@@ -18,8 +18,8 @@ _$_RequestInformationDto _$$_RequestInformationDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_RequestInformationDtoToJson(
-        _$_RequestInformationDto instance) =>
+Map<String, dynamic> _$$RequestInformationDtoImplToJson(
+        _$RequestInformationDtoImpl instance) =>
     <String, dynamic>{
       'requestHeader': instance.requestHeader.toJson(),
       'requestInformationV2':

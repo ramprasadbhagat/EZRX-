@@ -24,6 +24,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
     required bool outsidePolicy,
     required CounterOfferValue priceOverride,
     required String returnReason,
+    required ReturnType returnType,
     required IntegerValue balanceQty,
   }) = _ReturnItemDetails;
 
@@ -40,6 +41,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
         outsidePolicy: false,
         priceOverride: CounterOfferValue(''),
         returnReason: '',
+        returnType: ReturnType.returnItem(),
         balanceQty: IntegerValue('0'),
       );
 
@@ -49,7 +51,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
 
   double get returnValue =>
       returnQuantity.getIntValue *
-      (priceOverride.isValid()
+      ((returnType.isCounterOfferElegible && priceOverride.isValid())
           ? priceOverride.doubleValue
           : unitPrice.getOrDefaultValue(0));
 }

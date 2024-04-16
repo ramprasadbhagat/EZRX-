@@ -20,6 +20,7 @@ import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/reason_dropdown.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_counter_offer.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_quantity_field.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_type_section.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_value_field.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_info.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_info.dart';

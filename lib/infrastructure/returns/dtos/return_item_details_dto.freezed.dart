@@ -12,7 +12,7 @@ part of 'return_item_details_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnItemDetailsDto _$ReturnItemDetailsDtoFromJson(Map<String, dynamic> json) {
   return _ReturnItemDetailsDto.fromJson(json);
@@ -137,11 +137,11 @@ class _$ReturnItemDetailsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnItemDetailsDtoCopyWith<$Res>
+abstract class _$$ReturnItemDetailsDtoImplCopyWith<$Res>
     implements $ReturnItemDetailsDtoCopyWith<$Res> {
-  factory _$$_ReturnItemDetailsDtoCopyWith(_$_ReturnItemDetailsDto value,
-          $Res Function(_$_ReturnItemDetailsDto) then) =
-      __$$_ReturnItemDetailsDtoCopyWithImpl<$Res>;
+  factory _$$ReturnItemDetailsDtoImplCopyWith(_$ReturnItemDetailsDtoImpl value,
+          $Res Function(_$ReturnItemDetailsDtoImpl) then) =
+      __$$ReturnItemDetailsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -158,11 +158,11 @@ abstract class _$$_ReturnItemDetailsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnItemDetailsDtoCopyWithImpl<$Res>
-    extends _$ReturnItemDetailsDtoCopyWithImpl<$Res, _$_ReturnItemDetailsDto>
-    implements _$$_ReturnItemDetailsDtoCopyWith<$Res> {
-  __$$_ReturnItemDetailsDtoCopyWithImpl(_$_ReturnItemDetailsDto _value,
-      $Res Function(_$_ReturnItemDetailsDto) _then)
+class __$$ReturnItemDetailsDtoImplCopyWithImpl<$Res>
+    extends _$ReturnItemDetailsDtoCopyWithImpl<$Res, _$ReturnItemDetailsDtoImpl>
+    implements _$$ReturnItemDetailsDtoImplCopyWith<$Res> {
+  __$$ReturnItemDetailsDtoImplCopyWithImpl(_$ReturnItemDetailsDtoImpl _value,
+      $Res Function(_$ReturnItemDetailsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -179,7 +179,7 @@ class __$$_ReturnItemDetailsDtoCopyWithImpl<$Res>
     Object? outsidePolicy = null,
     Object? priceOverride = null,
   }) {
-    return _then(_$_ReturnItemDetailsDto(
+    return _then(_$ReturnItemDetailsDtoImpl(
       returnQuantity: null == returnQuantity
           ? _value.returnQuantity
           : returnQuantity // ignore: cast_nullable_to_non_nullable
@@ -226,8 +226,8 @@ class __$$_ReturnItemDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
-  const _$_ReturnItemDetailsDto(
+class _$ReturnItemDetailsDtoImpl extends _ReturnItemDetailsDto {
+  const _$ReturnItemDetailsDtoImpl(
       {@JsonKey(name: 'returnQuantity', defaultValue: 0)
       required this.returnQuantity,
       @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -246,8 +246,8 @@ class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
       : _url = url,
         super._();
 
-  factory _$_ReturnItemDetailsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnItemDetailsDtoFromJson(json);
+  factory _$ReturnItemDetailsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReturnItemDetailsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'returnQuantity', defaultValue: 0)
@@ -292,10 +292,10 @@ class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnItemDetailsDto &&
+            other is _$ReturnItemDetailsDtoImpl &&
             (identical(other.returnQuantity, returnQuantity) ||
                 other.returnQuantity == returnQuantity) &&
             (identical(other.materialNumber, materialNumber) ||
@@ -333,13 +333,14 @@ class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnItemDetailsDtoCopyWith<_$_ReturnItemDetailsDto> get copyWith =>
-      __$$_ReturnItemDetailsDtoCopyWithImpl<_$_ReturnItemDetailsDto>(
-          this, _$identity);
+  _$$ReturnItemDetailsDtoImplCopyWith<_$ReturnItemDetailsDtoImpl>
+      get copyWith =>
+          __$$ReturnItemDetailsDtoImplCopyWithImpl<_$ReturnItemDetailsDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnItemDetailsDtoToJson(
+    return _$$ReturnItemDetailsDtoImplToJson(
       this,
     );
   }
@@ -363,11 +364,11 @@ abstract class _ReturnItemDetailsDto extends ReturnItemDetailsDto {
       @JsonKey(name: 'outsidePolicy', defaultValue: false)
       required final bool outsidePolicy,
       @JsonKey(name: 'priceOverride', defaultValue: '')
-      required final String priceOverride}) = _$_ReturnItemDetailsDto;
+      required final String priceOverride}) = _$ReturnItemDetailsDtoImpl;
   const _ReturnItemDetailsDto._() : super._();
 
   factory _ReturnItemDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnItemDetailsDto.fromJson;
+      _$ReturnItemDetailsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'returnQuantity', defaultValue: 0)
@@ -401,6 +402,6 @@ abstract class _ReturnItemDetailsDto extends ReturnItemDetailsDto {
   String get priceOverride;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnItemDetailsDtoCopyWith<_$_ReturnItemDetailsDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReturnItemDetailsDtoImplCopyWith<_$ReturnItemDetailsDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -11,49 +11,48 @@ class ReturnItemDetailsDto with _$ReturnItemDetailsDto {
 
   const factory ReturnItemDetailsDto({
     @JsonKey(name: 'returnQuantity', defaultValue: 0)
-        required int returnQuantity,
+    required int returnQuantity,
     @JsonKey(
       name: 'materialNumber',
       defaultValue: '',
     )
-        required String materialNumber,
-    @JsonKey(name: 'lineNumber', defaultValue: '')
-        required String lineNumber,
+    required String materialNumber,
+    @JsonKey(name: 'lineNumber', defaultValue: '') required String lineNumber,
     @JsonKey(
       name: 'batch',
       defaultValue: '',
     )
-        required String batch,
+    required String batch,
     @JsonKey(
       name: 'returnReason',
       defaultValue: '',
     )
-        required String returnReason,
+    required String returnReason,
     @JsonKey(
       name: 'url',
       defaultValue: [],
     )
-        required List<String> url,
+    required List<String> url,
     @JsonKey(
       name: 'returnType',
       defaultValue: '',
     )
-        required String returnType,
+    required String returnType,
     @JsonKey(
       name: 'remarks',
       defaultValue: '',
     )
-        required String remarks,
+    required String remarks,
     @JsonKey(
       name: 'outsidePolicy',
       defaultValue: false,
     )
-        required bool outsidePolicy,
+    required bool outsidePolicy,
     @JsonKey(
       name: 'priceOverride',
       defaultValue: '',
     )
-        required String priceOverride,
+    required String priceOverride,
   }) = _ReturnItemDetailsDto;
 
   factory ReturnItemDetailsDto.fromDomain(ReturnItemDetails returnItemDetail) {
@@ -64,10 +63,12 @@ class ReturnItemDetailsDto with _$ReturnItemDetailsDto {
       returnQuantity: returnItemDetail.returnQuantity.getIntValue,
       returnReason: returnItemDetail.returnReason,
       url: returnItemDetail.uploadedFiles.map((e) => e.path).toList(),
-      returnType: '500',
+      returnType: returnItemDetail.returnType.getOrDefaultValue('500'),
       remarks: returnItemDetail.remarks.getOrDefaultValue(''),
       outsidePolicy: returnItemDetail.outsidePolicy,
-      priceOverride: returnItemDetail.priceOverride.getOrDefaultValue(''),
+      priceOverride: returnItemDetail.returnType.isCounterOfferElegible
+          ? returnItemDetail.priceOverride.getOrDefaultValue('')
+          : '',
     );
   }
 

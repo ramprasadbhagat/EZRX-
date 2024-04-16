@@ -29,6 +29,18 @@ class _ExpandableReturnDetail extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         BalanceTextRow(
+          keyText: 'Return Type'.tr(),
+          keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+          keyFlex: 2,
+          valueFlex: 3,
+          valueText: returnItemDetail.returnType.returnTypeValue,
+          valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        BalanceTextRow(
           keyText: 'Reason'.tr(),
           keyFlex: 2,
           valueFlex: 3,

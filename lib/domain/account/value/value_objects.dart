@@ -162,6 +162,7 @@ class SalesOrg extends ValueObject<String> {
   bool get showSmallOrderFee => isID;
 
   bool get showManualFee => isID;
+  bool get showReturnTypeSection => isTH;
 
   bool get showTaxDescription => isTH || isMM || isKH;
 

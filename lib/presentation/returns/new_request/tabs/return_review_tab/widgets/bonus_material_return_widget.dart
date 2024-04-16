@@ -96,6 +96,14 @@ class _BonusMaterialReturnInfoState extends State<BonusMaterialReturnWidget> {
           if (_isExpanded) const SizedBox(height: 8.0),
           if (_isExpanded)
             BalanceTextRow(
+              keyText: context.tr('Return Type'),
+              keyTextStyle: Theme.of(context).textTheme.titleSmall,
+              keyFlex: 2,
+              valueFlex: 3,
+              valueText: widget.returnItemDetail.returnType.returnTypeValue,
+            ),
+          if (_isExpanded)
+            BalanceTextRow(
               keyText: context.tr('Reason'),
               keyFlex: 2,
               valueFlex: 3,

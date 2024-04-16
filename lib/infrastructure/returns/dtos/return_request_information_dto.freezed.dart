@@ -29,6 +29,10 @@ mixin _$ReturnRequestInformationDto {
   String get comment => throw _privateConstructorUsedError;
   @JsonKey(name: 'rejectReason', defaultValue: '')
   String get rejectReason => throw _privateConstructorUsedError;
+  @JsonKey(name: 'returnTypeDesc', defaultValue: '')
+  String get returnTypeDesc => throw _privateConstructorUsedError;
+  @JsonKey(name: 'returnType', defaultValue: '')
+  String get returnType => throw _privateConstructorUsedError;
   @JsonKey(name: 'returnQuantity', defaultValue: '')
   String get returnQuantity => throw _privateConstructorUsedError;
   @JsonKey(name: 'unitPrice', defaultValue: '')
@@ -109,6 +113,8 @@ abstract class $ReturnRequestInformationDtoCopyWith<$Res> {
       @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'comment', defaultValue: '') String comment,
       @JsonKey(name: 'rejectReason', defaultValue: '') String rejectReason,
+      @JsonKey(name: 'returnTypeDesc', defaultValue: '') String returnTypeDesc,
+      @JsonKey(name: 'returnType', defaultValue: '') String returnType,
       @JsonKey(name: 'returnQuantity', defaultValue: '') String returnQuantity,
       @JsonKey(name: 'unitPrice', defaultValue: '') String unitPrice,
       @JsonKey(name: 'totalPrice', defaultValue: '') String totalPrice,
@@ -172,6 +178,8 @@ class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
     Object? expiryDate = null,
     Object? comment = null,
     Object? rejectReason = null,
+    Object? returnTypeDesc = null,
+    Object? returnType = null,
     Object? returnQuantity = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
@@ -216,6 +224,14 @@ class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
       rejectReason: null == rejectReason
           ? _value.rejectReason
           : rejectReason // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnTypeDesc: null == returnTypeDesc
+          ? _value.returnTypeDesc
+          : returnTypeDesc // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnType: null == returnType
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
               as String,
       returnQuantity: null == returnQuantity
           ? _value.returnQuantity
@@ -343,6 +359,8 @@ abstract class _$$ReturnRequestInformationDtoImplCopyWith<$Res>
       @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'comment', defaultValue: '') String comment,
       @JsonKey(name: 'rejectReason', defaultValue: '') String rejectReason,
+      @JsonKey(name: 'returnTypeDesc', defaultValue: '') String returnTypeDesc,
+      @JsonKey(name: 'returnType', defaultValue: '') String returnType,
       @JsonKey(name: 'returnQuantity', defaultValue: '') String returnQuantity,
       @JsonKey(name: 'unitPrice', defaultValue: '') String unitPrice,
       @JsonKey(name: 'totalPrice', defaultValue: '') String totalPrice,
@@ -405,6 +423,8 @@ class __$$ReturnRequestInformationDtoImplCopyWithImpl<$Res>
     Object? expiryDate = null,
     Object? comment = null,
     Object? rejectReason = null,
+    Object? returnTypeDesc = null,
+    Object? returnType = null,
     Object? returnQuantity = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
@@ -449,6 +469,14 @@ class __$$ReturnRequestInformationDtoImplCopyWithImpl<$Res>
       rejectReason: null == rejectReason
           ? _value.rejectReason
           : rejectReason // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnTypeDesc: null == returnTypeDesc
+          ? _value.returnTypeDesc
+          : returnTypeDesc // ignore: cast_nullable_to_non_nullable
+              as String,
+      returnType: null == returnType
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
               as String,
       returnQuantity: null == returnQuantity
           ? _value.returnQuantity
@@ -571,6 +599,9 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
       @JsonKey(name: 'comment', defaultValue: '') required this.comment,
       @JsonKey(name: 'rejectReason', defaultValue: '')
       required this.rejectReason,
+      @JsonKey(name: 'returnTypeDesc', defaultValue: '')
+      required this.returnTypeDesc,
+      @JsonKey(name: 'returnType', defaultValue: '') required this.returnType,
       @JsonKey(name: 'returnQuantity', defaultValue: '')
       required this.returnQuantity,
       @JsonKey(name: 'unitPrice', defaultValue: '') required this.unitPrice,
@@ -643,6 +674,12 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
   @override
   @JsonKey(name: 'rejectReason', defaultValue: '')
   final String rejectReason;
+  @override
+  @JsonKey(name: 'returnTypeDesc', defaultValue: '')
+  final String returnTypeDesc;
+  @override
+  @JsonKey(name: 'returnType', defaultValue: '')
+  final String returnType;
   @override
   @JsonKey(name: 'returnQuantity', defaultValue: '')
   final String returnQuantity;
@@ -762,7 +799,7 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
 
   @override
   String toString() {
-    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, returnOrderDesc: $returnOrderDesc, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, remarks: $remarks, bonusInformation: $bonusInformation, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail, isMarketPlace: $isMarketPlace)';
+    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnTypeDesc: $returnTypeDesc, returnType: $returnType, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, returnOrderDesc: $returnOrderDesc, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, remarks: $remarks, bonusInformation: $bonusInformation, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -777,6 +814,10 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.rejectReason, rejectReason) ||
                 other.rejectReason == rejectReason) &&
+            (identical(other.returnTypeDesc, returnTypeDesc) ||
+                other.returnTypeDesc == returnTypeDesc) &&
+            (identical(other.returnType, returnType) ||
+                other.returnType == returnType) &&
             (identical(other.returnQuantity, returnQuantity) ||
                 other.returnQuantity == returnQuantity) &&
             (identical(other.unitPrice, unitPrice) ||
@@ -836,6 +877,8 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
         expiryDate,
         comment,
         rejectReason,
+        returnTypeDesc,
+        returnType,
         returnQuantity,
         unitPrice,
         totalPrice,
@@ -890,6 +933,10 @@ abstract class _ReturnRequestInformationDto
       @JsonKey(name: 'comment', defaultValue: '') required final String comment,
       @JsonKey(name: 'rejectReason', defaultValue: '')
       required final String rejectReason,
+      @JsonKey(name: 'returnTypeDesc', defaultValue: '')
+      required final String returnTypeDesc,
+      @JsonKey(name: 'returnType', defaultValue: '')
+      required final String returnType,
       @JsonKey(name: 'returnQuantity', defaultValue: '')
       required final String returnQuantity,
       @JsonKey(name: 'unitPrice', defaultValue: '')
@@ -962,6 +1009,12 @@ abstract class _ReturnRequestInformationDto
   @override
   @JsonKey(name: 'rejectReason', defaultValue: '')
   String get rejectReason;
+  @override
+  @JsonKey(name: 'returnTypeDesc', defaultValue: '')
+  String get returnTypeDesc;
+  @override
+  @JsonKey(name: 'returnType', defaultValue: '')
+  String get returnType;
   @override
   @JsonKey(name: 'returnQuantity', defaultValue: '')
   String get returnQuantity;

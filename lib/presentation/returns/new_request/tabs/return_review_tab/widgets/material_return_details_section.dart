@@ -15,6 +15,13 @@ class _MaterialReturnDetailsSection extends StatelessWidget {
       child: Column(
         children: [
           BalanceTextRow(
+            keyText: 'Return Type'.tr(),
+            keyTextStyle: Theme.of(context).textTheme.titleSmall,
+            keyFlex: 2,
+            valueFlex: 3,
+            valueText: detail.returnType.returnTypeValue,
+          ),
+          BalanceTextRow(
             keyText: 'Reason'.tr(),
             keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,

@@ -23,13 +23,15 @@ class ReturnQuantityField extends StatelessWidget {
     return BlocBuilder<NewRequestBloc, NewRequestState>(
       buildWhen: (previous, current) =>
           previous.getReturnItemDetails(uuid).returnQuantity !=
-          current.getReturnItemDetails(uuid).returnQuantity,
+              current.getReturnItemDetails(uuid).returnQuantity ||
+          previous.getReturnItemDetails(uuid).returnType !=
+              current.getReturnItemDetails(uuid).returnType,
       builder: (context, state) {
         return CustomNumericTextField.wholeNumber(
           fieldKey: WidgetKeys.returnQuantityField(uuid),
-          labelText: 'Return quantity'.tr(),
+          labelText: state.getReturnItemReturnType(uuid).quantityHeading.tr(),
           decoration: InputDecoration(
-            hintText: 'Enter Return quantity'.tr(),
+            hintText: state.getReturnItemReturnType(uuid).quantityHintText.tr(),
           ),
           inputFormatters: <TextInputFormatter>[
             // limit charcter length to 6

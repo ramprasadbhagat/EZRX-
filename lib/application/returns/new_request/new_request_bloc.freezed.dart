@@ -37,6 +37,8 @@ mixin _$NewRequestEvent {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +57,8 @@ mixin _$NewRequestEvent {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,6 +77,8 @@ mixin _$NewRequestEvent {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -91,6 +97,8 @@ mixin _$NewRequestEvent {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -107,6 +115,7 @@ mixin _$NewRequestEvent {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -123,6 +132,7 @@ mixin _$NewRequestEvent {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -230,6 +240,8 @@ class _$InitializedImpl implements _Initialized {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) {
     return initialized(salesOrg);
   }
@@ -251,6 +263,8 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) {
     return initialized?.call(salesOrg);
   }
@@ -272,6 +286,8 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -296,6 +312,8 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) {
     return initialized(this);
   }
@@ -315,6 +333,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) {
     return initialized?.call(this);
   }
@@ -334,6 +353,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -456,6 +476,8 @@ class _$ToggleReturnItemImpl implements _ToggleReturnItem {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) {
     return toggleReturnItem(item, selected);
   }
@@ -477,6 +499,8 @@ class _$ToggleReturnItemImpl implements _ToggleReturnItem {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) {
     return toggleReturnItem?.call(item, selected);
   }
@@ -498,6 +522,8 @@ class _$ToggleReturnItemImpl implements _ToggleReturnItem {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (toggleReturnItem != null) {
@@ -522,6 +548,8 @@ class _$ToggleReturnItemImpl implements _ToggleReturnItem {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) {
     return toggleReturnItem(this);
   }
@@ -541,6 +569,7 @@ class _$ToggleReturnItemImpl implements _ToggleReturnItem {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) {
     return toggleReturnItem?.call(this);
   }
@@ -560,6 +589,7 @@ class _$ToggleReturnItemImpl implements _ToggleReturnItem {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (toggleReturnItem != null) {
@@ -684,6 +714,8 @@ class _$ToggleBonusItemImpl implements _ToggleBonusItem {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) {
     return toggleBonusItem(item, included);
   }
@@ -705,6 +737,8 @@ class _$ToggleBonusItemImpl implements _ToggleBonusItem {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) {
     return toggleBonusItem?.call(item, included);
   }
@@ -726,6 +760,8 @@ class _$ToggleBonusItemImpl implements _ToggleBonusItem {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (toggleBonusItem != null) {
@@ -750,6 +786,8 @@ class _$ToggleBonusItemImpl implements _ToggleBonusItem {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) {
     return toggleBonusItem(this);
   }
@@ -769,6 +807,7 @@ class _$ToggleBonusItemImpl implements _ToggleBonusItem {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) {
     return toggleBonusItem?.call(this);
   }
@@ -788,6 +827,7 @@ class _$ToggleBonusItemImpl implements _ToggleBonusItem {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (toggleBonusItem != null) {
@@ -904,6 +944,8 @@ class _$AdditionInfoChangedImpl implements _AdditionInfoChanged {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) {
     return additionInfoChanged(additionInfo);
   }
@@ -925,6 +967,8 @@ class _$AdditionInfoChangedImpl implements _AdditionInfoChanged {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) {
     return additionInfoChanged?.call(additionInfo);
   }
@@ -946,6 +990,8 @@ class _$AdditionInfoChangedImpl implements _AdditionInfoChanged {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (additionInfoChanged != null) {
@@ -970,6 +1016,8 @@ class _$AdditionInfoChangedImpl implements _AdditionInfoChanged {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) {
     return additionInfoChanged(this);
   }
@@ -989,6 +1037,7 @@ class _$AdditionInfoChangedImpl implements _AdditionInfoChanged {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) {
     return additionInfoChanged?.call(this);
   }
@@ -1008,6 +1057,7 @@ class _$AdditionInfoChangedImpl implements _AdditionInfoChanged {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (additionInfoChanged != null) {
@@ -1141,6 +1191,8 @@ class _$UpdateRequestCounterOfferImpl implements _UpdateRequestCounterOffer {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) {
     return updateRequestCounterOffer(
         counterOfferValue, uuid, isChangeMaterialCounterOffer);
@@ -1163,6 +1215,8 @@ class _$UpdateRequestCounterOfferImpl implements _UpdateRequestCounterOffer {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) {
     return updateRequestCounterOffer?.call(
         counterOfferValue, uuid, isChangeMaterialCounterOffer);
@@ -1185,6 +1239,8 @@ class _$UpdateRequestCounterOfferImpl implements _UpdateRequestCounterOffer {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (updateRequestCounterOffer != null) {
@@ -1210,6 +1266,8 @@ class _$UpdateRequestCounterOfferImpl implements _UpdateRequestCounterOffer {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) {
     return updateRequestCounterOffer(this);
   }
@@ -1229,6 +1287,7 @@ class _$UpdateRequestCounterOfferImpl implements _UpdateRequestCounterOffer {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) {
     return updateRequestCounterOffer?.call(this);
   }
@@ -1248,6 +1307,7 @@ class _$UpdateRequestCounterOfferImpl implements _UpdateRequestCounterOffer {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (updateRequestCounterOffer != null) {
@@ -1383,6 +1443,8 @@ class _$ToggleFilesImpl implements _ToggleFiles {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) {
     return toggleFiles(uuid, files, included);
   }
@@ -1404,6 +1466,8 @@ class _$ToggleFilesImpl implements _ToggleFiles {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) {
     return toggleFiles?.call(uuid, files, included);
   }
@@ -1425,6 +1489,8 @@ class _$ToggleFilesImpl implements _ToggleFiles {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (toggleFiles != null) {
@@ -1449,6 +1515,8 @@ class _$ToggleFilesImpl implements _ToggleFiles {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) {
     return toggleFiles(this);
   }
@@ -1468,6 +1536,7 @@ class _$ToggleFilesImpl implements _ToggleFiles {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) {
     return toggleFiles?.call(this);
   }
@@ -1487,6 +1556,7 @@ class _$ToggleFilesImpl implements _ToggleFiles {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (toggleFiles != null) {
@@ -1593,6 +1663,8 @@ class _$ValidateStepImpl implements _ValidateStep {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) {
     return validateStep(step);
   }
@@ -1614,6 +1686,8 @@ class _$ValidateStepImpl implements _ValidateStep {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) {
     return validateStep?.call(step);
   }
@@ -1635,6 +1709,8 @@ class _$ValidateStepImpl implements _ValidateStep {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (validateStep != null) {
@@ -1659,6 +1735,8 @@ class _$ValidateStepImpl implements _ValidateStep {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) {
     return validateStep(this);
   }
@@ -1678,6 +1756,7 @@ class _$ValidateStepImpl implements _ValidateStep {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) {
     return validateStep?.call(this);
   }
@@ -1697,6 +1776,7 @@ class _$ValidateStepImpl implements _ValidateStep {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (validateStep != null) {
@@ -1802,6 +1882,8 @@ class _$ReturnReferenceChangedImpl implements _ReturnReferenceChanged {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) {
     return returnReferenceChanged(returnReference);
   }
@@ -1823,6 +1905,8 @@ class _$ReturnReferenceChangedImpl implements _ReturnReferenceChanged {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) {
     return returnReferenceChanged?.call(returnReference);
   }
@@ -1844,6 +1928,8 @@ class _$ReturnReferenceChangedImpl implements _ReturnReferenceChanged {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (returnReferenceChanged != null) {
@@ -1868,6 +1954,8 @@ class _$ReturnReferenceChangedImpl implements _ReturnReferenceChanged {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) {
     return returnReferenceChanged(this);
   }
@@ -1887,6 +1975,7 @@ class _$ReturnReferenceChangedImpl implements _ReturnReferenceChanged {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) {
     return returnReferenceChanged?.call(this);
   }
@@ -1906,6 +1995,7 @@ class _$ReturnReferenceChangedImpl implements _ReturnReferenceChanged {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (returnReferenceChanged != null) {
@@ -2013,6 +2103,8 @@ class _$SpecialInstructionsChangedImpl implements _SpecialInstructionsChanged {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) {
     return specialInstructionsChanged(specialInstructions);
   }
@@ -2034,6 +2126,8 @@ class _$SpecialInstructionsChangedImpl implements _SpecialInstructionsChanged {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) {
     return specialInstructionsChanged?.call(specialInstructions);
   }
@@ -2055,6 +2149,8 @@ class _$SpecialInstructionsChangedImpl implements _SpecialInstructionsChanged {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (specialInstructionsChanged != null) {
@@ -2079,6 +2175,8 @@ class _$SpecialInstructionsChangedImpl implements _SpecialInstructionsChanged {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) {
     return specialInstructionsChanged(this);
   }
@@ -2098,6 +2196,7 @@ class _$SpecialInstructionsChangedImpl implements _SpecialInstructionsChanged {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) {
     return specialInstructionsChanged?.call(this);
   }
@@ -2117,6 +2216,7 @@ class _$SpecialInstructionsChangedImpl implements _SpecialInstructionsChanged {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (specialInstructionsChanged != null) {
@@ -2247,6 +2347,8 @@ class _$SubmitImpl implements _Submit {
         specialInstructionsChanged,
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
   }) {
     return submit(customerCodeInfo, user);
   }
@@ -2268,6 +2370,8 @@ class _$SubmitImpl implements _Submit {
     TResult? Function(String returnReference)? returnReferenceChanged,
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
   }) {
     return submit?.call(customerCodeInfo, user);
   }
@@ -2289,6 +2393,8 @@ class _$SubmitImpl implements _Submit {
     TResult Function(String returnReference)? returnReferenceChanged,
     TResult Function(String specialInstructions)? specialInstructionsChanged,
     TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -2313,6 +2419,8 @@ class _$SubmitImpl implements _Submit {
     required TResult Function(_SpecialInstructionsChanged value)
         specialInstructionsChanged,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
   }) {
     return submit(this);
   }
@@ -2332,6 +2440,7 @@ class _$SubmitImpl implements _Submit {
     TResult? Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
   }) {
     return submit?.call(this);
   }
@@ -2351,6 +2460,7 @@ class _$SubmitImpl implements _Submit {
     TResult Function(_SpecialInstructionsChanged value)?
         specialInstructionsChanged,
     TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -2369,6 +2479,236 @@ abstract class _Submit implements NewRequestEvent {
   User get user;
   @JsonKey(ignore: true)
   _$$SubmitImplCopyWith<_$SubmitImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$updateSelectedTypeImplCopyWith<$Res> {
+  factory _$$updateSelectedTypeImplCopyWith(_$updateSelectedTypeImpl value,
+          $Res Function(_$updateSelectedTypeImpl) then) =
+      __$$updateSelectedTypeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ReturnType returnType, String assignmentNumber});
+}
+
+/// @nodoc
+class __$$updateSelectedTypeImplCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$updateSelectedTypeImpl>
+    implements _$$updateSelectedTypeImplCopyWith<$Res> {
+  __$$updateSelectedTypeImplCopyWithImpl(_$updateSelectedTypeImpl _value,
+      $Res Function(_$updateSelectedTypeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? returnType = null,
+    Object? assignmentNumber = null,
+  }) {
+    return _then(_$updateSelectedTypeImpl(
+      returnType: null == returnType
+          ? _value.returnType
+          : returnType // ignore: cast_nullable_to_non_nullable
+              as ReturnType,
+      assignmentNumber: null == assignmentNumber
+          ? _value.assignmentNumber
+          : assignmentNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$updateSelectedTypeImpl implements _updateSelectedType {
+  const _$updateSelectedTypeImpl(
+      {required this.returnType, required this.assignmentNumber});
+
+  @override
+  final ReturnType returnType;
+  @override
+  final String assignmentNumber;
+
+  @override
+  String toString() {
+    return 'NewRequestEvent.updateSelectedReturnType(returnType: $returnType, assignmentNumber: $assignmentNumber)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$updateSelectedTypeImpl &&
+            (identical(other.returnType, returnType) ||
+                other.returnType == returnType) &&
+            (identical(other.assignmentNumber, assignmentNumber) ||
+                other.assignmentNumber == assignmentNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, returnType, assignmentNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$updateSelectedTypeImplCopyWith<_$updateSelectedTypeImpl> get copyWith =>
+      __$$updateSelectedTypeImplCopyWithImpl<_$updateSelectedTypeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
+        toggleReturnItem,
+    required TResult Function(ReturnMaterial item, bool included)
+        toggleBonusItem,
+    required TResult Function(ReturnItemDetails additionInfo)
+        additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
+    required TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)
+        toggleFiles,
+    required TResult Function(int step) validateStep,
+    required TResult Function(String returnReference) returnReferenceChanged,
+    required TResult Function(String specialInstructions)
+        specialInstructionsChanged,
+    required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
+        submit,
+    required TResult Function(ReturnType returnType, String assignmentNumber)
+        updateSelectedReturnType,
+  }) {
+    return updateSelectedReturnType(returnType, assignmentNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
+    TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
+    TResult? Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult? Function(int step)? validateStep,
+    TResult? Function(String returnReference)? returnReferenceChanged,
+    TResult? Function(String specialInstructions)? specialInstructionsChanged,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult? Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
+  }) {
+    return updateSelectedReturnType?.call(returnType, assignmentNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
+    TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
+    TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult Function(int step)? validateStep,
+    TResult Function(String returnReference)? returnReferenceChanged,
+    TResult Function(String specialInstructions)? specialInstructionsChanged,
+    TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    TResult Function(ReturnType returnType, String assignmentNumber)?
+        updateSelectedReturnType,
+    required TResult orElse(),
+  }) {
+    if (updateSelectedReturnType != null) {
+      return updateSelectedReturnType(returnType, assignmentNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_ToggleReturnItem value) toggleReturnItem,
+    required TResult Function(_ToggleBonusItem value) toggleBonusItem,
+    required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
+    required TResult Function(_ToggleFiles value) toggleFiles,
+    required TResult Function(_ValidateStep value) validateStep,
+    required TResult Function(_ReturnReferenceChanged value)
+        returnReferenceChanged,
+    required TResult Function(_SpecialInstructionsChanged value)
+        specialInstructionsChanged,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_updateSelectedType value)
+        updateSelectedReturnType,
+  }) {
+    return updateSelectedReturnType(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
+    TResult? Function(_ToggleFiles value)? toggleFiles,
+    TResult? Function(_ValidateStep value)? validateStep,
+    TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
+    TResult? Function(_SpecialInstructionsChanged value)?
+        specialInstructionsChanged,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_updateSelectedType value)? updateSelectedReturnType,
+  }) {
+    return updateSelectedReturnType?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
+    TResult Function(_ToggleFiles value)? toggleFiles,
+    TResult Function(_ValidateStep value)? validateStep,
+    TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
+    TResult Function(_SpecialInstructionsChanged value)?
+        specialInstructionsChanged,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_updateSelectedType value)? updateSelectedReturnType,
+    required TResult orElse(),
+  }) {
+    if (updateSelectedReturnType != null) {
+      return updateSelectedReturnType(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _updateSelectedType implements NewRequestEvent {
+  const factory _updateSelectedType(
+      {required final ReturnType returnType,
+      required final String assignmentNumber}) = _$updateSelectedTypeImpl;
+
+  ReturnType get returnType;
+  String get assignmentNumber;
+  @JsonKey(ignore: true)
+  _$$updateSelectedTypeImplCopyWith<_$updateSelectedTypeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

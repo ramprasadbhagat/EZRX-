@@ -12,7 +12,7 @@ part of 'request_information_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 RequestInformationDto _$RequestInformationDtoFromJson(
     Map<String, dynamic> json) {
@@ -93,11 +93,12 @@ class _$RequestInformationDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RequestInformationDtoCopyWith<$Res>
+abstract class _$$RequestInformationDtoImplCopyWith<$Res>
     implements $RequestInformationDtoCopyWith<$Res> {
-  factory _$$_RequestInformationDtoCopyWith(_$_RequestInformationDto value,
-          $Res Function(_$_RequestInformationDto) then) =
-      __$$_RequestInformationDtoCopyWithImpl<$Res>;
+  factory _$$RequestInformationDtoImplCopyWith(
+          _$RequestInformationDtoImpl value,
+          $Res Function(_$RequestInformationDtoImpl) then) =
+      __$$RequestInformationDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -113,11 +114,12 @@ abstract class _$$_RequestInformationDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RequestInformationDtoCopyWithImpl<$Res>
-    extends _$RequestInformationDtoCopyWithImpl<$Res, _$_RequestInformationDto>
-    implements _$$_RequestInformationDtoCopyWith<$Res> {
-  __$$_RequestInformationDtoCopyWithImpl(_$_RequestInformationDto _value,
-      $Res Function(_$_RequestInformationDto) _then)
+class __$$RequestInformationDtoImplCopyWithImpl<$Res>
+    extends _$RequestInformationDtoCopyWithImpl<$Res,
+        _$RequestInformationDtoImpl>
+    implements _$$RequestInformationDtoImplCopyWith<$Res> {
+  __$$RequestInformationDtoImplCopyWithImpl(_$RequestInformationDtoImpl _value,
+      $Res Function(_$RequestInformationDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -126,7 +128,7 @@ class __$$_RequestInformationDtoCopyWithImpl<$Res>
     Object? requestHeader = null,
     Object? requestInformation = null,
   }) {
-    return _then(_$_RequestInformationDto(
+    return _then(_$RequestInformationDtoImpl(
       requestHeader: null == requestHeader
           ? _value.requestHeader
           : requestHeader // ignore: cast_nullable_to_non_nullable
@@ -141,8 +143,8 @@ class __$$_RequestInformationDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RequestInformationDto extends _RequestInformationDto {
-  _$_RequestInformationDto(
+class _$RequestInformationDtoImpl extends _RequestInformationDto {
+  _$RequestInformationDtoImpl(
       {@JsonKey(name: 'requestHeader') required this.requestHeader,
       @JsonKey(
           name: 'requestInformationV2',
@@ -151,8 +153,8 @@ class _$_RequestInformationDto extends _RequestInformationDto {
       : _requestInformation = requestInformation,
         super._();
 
-  factory _$_RequestInformationDto.fromJson(Map<String, dynamic> json) =>
-      _$$_RequestInformationDtoFromJson(json);
+  factory _$RequestInformationDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RequestInformationDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'requestHeader')
@@ -175,10 +177,10 @@ class _$_RequestInformationDto extends _RequestInformationDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RequestInformationDto &&
+            other is _$RequestInformationDtoImpl &&
             (identical(other.requestHeader, requestHeader) ||
                 other.requestHeader == requestHeader) &&
             const DeepCollectionEquality()
@@ -193,13 +195,13 @@ class _$_RequestInformationDto extends _RequestInformationDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RequestInformationDtoCopyWith<_$_RequestInformationDto> get copyWith =>
-      __$$_RequestInformationDtoCopyWithImpl<_$_RequestInformationDto>(
-          this, _$identity);
+  _$$RequestInformationDtoImplCopyWith<_$RequestInformationDtoImpl>
+      get copyWith => __$$RequestInformationDtoImplCopyWithImpl<
+          _$RequestInformationDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RequestInformationDtoToJson(
+    return _$$RequestInformationDtoImplToJson(
       this,
     );
   }
@@ -213,11 +215,11 @@ abstract class _RequestInformationDto extends RequestInformationDto {
           name: 'requestInformationV2',
           defaultValue: <ReturnRequestInformationDto>[])
       required final List<ReturnRequestInformationDto>
-          requestInformation}) = _$_RequestInformationDto;
+          requestInformation}) = _$RequestInformationDtoImpl;
   _RequestInformationDto._() : super._();
 
   factory _RequestInformationDto.fromJson(Map<String, dynamic> json) =
-      _$_RequestInformationDto.fromJson;
+      _$RequestInformationDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'requestHeader')
@@ -229,6 +231,6 @@ abstract class _RequestInformationDto extends RequestInformationDto {
   List<ReturnRequestInformationDto> get requestInformation;
   @override
   @JsonKey(ignore: true)
-  _$$_RequestInformationDtoCopyWith<_$_RequestInformationDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RequestInformationDtoImplCopyWith<_$RequestInformationDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

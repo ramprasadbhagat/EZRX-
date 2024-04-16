@@ -421,6 +421,7 @@ class WidgetKeys {
       Key('materialReturnDetailsSection');
   static const Key newRequestSuccessMessage = Key('newRequestSuccessMessage');
   static const Key bonusItemSection = Key('bonusItemSection');
+  static Key selectByRadio(String type) => Key('radioSelection$type');
 
   //step 3
   static const Key newReturnBonusDetailsCard = Key('newReturnBonusDetailsCard');

@@ -48,4 +48,8 @@ class NewRequestEvent with _$NewRequestEvent {
     required CustomerCodeInfo customerCodeInfo,
     required User user,
   }) = _Submit;
+  const factory NewRequestEvent.updateSelectedReturnType({
+    required ReturnType returnType,
+    required String assignmentNumber,
+  }) = _updateSelectedType;
 }
