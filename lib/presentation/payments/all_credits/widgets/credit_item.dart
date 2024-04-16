@@ -102,6 +102,7 @@ class _CreditsItem extends StatelessWidget {
             eCredit: creditItem.searchKey.getOrDefaultValue(''),
           ),
         );
-    context.router.push(const CreditDetailsPageRoute());
+    context.router
+        .push(CreditDetailsPageRoute(isMarketPlace: context.isMPPayment));
   }
 }

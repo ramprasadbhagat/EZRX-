@@ -394,9 +394,13 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     CreditDetailsPageRoute.name: (routeData) {
+      final args = routeData.argsAs<CreditDetailsPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i35.CreditDetailsPage(),
+        child: _i35.CreditDetailsPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     PaymentWebviewPageRoute.name: (routeData) {
@@ -1746,14 +1750,37 @@ class InvoiceDetailsPageRouteArgs {
 
 /// generated route for
 /// [_i35.CreditDetailsPage]
-class CreditDetailsPageRoute extends _i77.PageRouteInfo<void> {
-  const CreditDetailsPageRoute()
-      : super(
+class CreditDetailsPageRoute
+    extends _i77.PageRouteInfo<CreditDetailsPageRouteArgs> {
+  CreditDetailsPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           CreditDetailsPageRoute.name,
           path: 'payments/credit_details',
+          args: CreditDetailsPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'CreditDetailsPageRoute';
+}
+
+class CreditDetailsPageRouteArgs {
+  const CreditDetailsPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'CreditDetailsPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for

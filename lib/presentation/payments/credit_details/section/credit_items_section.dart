@@ -1,14 +1,11 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_details_group.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/credit_invoice_detail_item_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreditItemsSection extends StatelessWidget {
   final List<CustomerDocumentDetailGroup> creditItems;
@@ -19,64 +16,38 @@ class CreditItemsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final salesOrgConfigs =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
-
     return ListView.builder(
       key: WidgetKeys.scrollList,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: creditItems.length,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       itemBuilder: (context, index) {
+        final principalName = creditItems[index].principalName.name;
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Text(
-                creditItems[index].principalName.getOrDefaultValue(''),
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: ZPColors.black,
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: context.isMPPayment
+                  ? MarketPlaceSellerTitle(sellerName: principalName)
+                  : Text(
+                      principalName,
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: ZPColors.black,
+                          ),
                     ),
-              ),
             ),
-            Column(
-              children: creditItems[index].items.map(
-                (creditItem) {
-                  return CommonTileItem(
-                    headerText: salesOrgConfigs.batchNumDisplay &&
-                            creditItem.batchNumHasData
-                        ? '${context.tr('Batch')} ${creditItem.batchNumber.getOrDefaultValue('')} (EXP:${creditItem.expiryDate.dateString})'
-                        : null,
-                    materialNumber: creditItem.materialNumber,
-                    label: removeLeadingZero(
-                      creditItem.materialNumber.getOrDefaultValue(''),
-                    ),
-                    subtitle: '',
-                    title: creditItem.billingDocumentItemText,
-                    quantity: creditItem.billingQuantity.stringValue,
-                    isQuantityBelowImage: true,
-                    isQuantityRequired: false,
-                    statusWidget: const SizedBox.shrink(),
-                    priceComponent: creditItem.isNotFree
-                        ? PriceComponent(
-                            key: WidgetKeys.invoiceDetailMaterialUnitPrice,
-                            salesOrgConfig: salesOrgConfigs,
-                            price: salesOrgConfigs.displaySubtotalTaxBreakdown
-                                ? creditItem.unitNetPrice.toString()
-                                : creditItem.unitGrossPrice.toString(),
-                          )
-                        : null,
-                    footerWidget: QuantityAndPriceWithTax.order(
-                      quantity: creditItem.billingQuantity.getOrDefaultValue(0),
-                      taxPercentage: creditItem.taxPercent,
-                      netPrice: creditItem.netPriceText,
-                    ),
-                  );
-                },
-              ).toList(),
-            ),
+            ...creditItems[index]
+                .items
+                .mapIndexed(
+                  (itemIndex, creditItem) => CreditInvoiceDetailItemTile(
+                    key: WidgetKeys.creditDetailMaterial(index, itemIndex),
+                    customerDocumentDetail: creditItem,
+                  ),
+                )
+                .toList(),
           ],
         );
       },

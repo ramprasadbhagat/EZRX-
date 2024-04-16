@@ -28,7 +28,9 @@ class _InvoiceCreditItem extends StatelessWidget {
                 ),
               );
           if (data.debitCreditCode.isCredit) {
-            context.router.push(const CreditDetailsPageRoute());
+            context.router.push(
+              CreditDetailsPageRoute(isMarketPlace: context.isMPPayment),
+            );
 
             return;
           }

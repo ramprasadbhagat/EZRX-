@@ -681,8 +681,7 @@ void main() {
             'Batch: ${invoiceDetail.batchNumber.getOrDefaultValue('')} - Expires: ${invoiceDetail.expiryDate.dateString}',
             findRichText: true,
           ),
-          currentSalesOrgConfigs.batchNumDisplay &&
-                  invoiceDetail.batchNumHasData
+          currentSalesOrgConfigs.batchNumDisplay
               ? findsOneWidget
               : findsNothing,
         );

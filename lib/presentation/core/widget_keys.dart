@@ -1326,6 +1326,11 @@ class WidgetKeys {
   static const Key creditDetailManualFee = Key('creditDetailManualFee');
   static const Key creditItemAmountAdjustmentMessageWidget =
       Key('creditItemAmountAdjustmentMessageWidget');
+  //============================================================
+  //  Credit detail
+  //============================================================
+  static Key creditDetailMaterial(int groupIndex, int index) =>
+      Key('creditDetailMaterial$groupIndex$index');
 
   //===========================================================
   //  Account Summary Page - Full summary

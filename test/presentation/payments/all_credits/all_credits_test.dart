@@ -385,7 +385,9 @@ void main() {
       expect(documentReferenceID, findsOneWidget);
     });
 
-    testWidgets('=> Find marketplace logo in MP all credit', (tester) async {
+    testWidgets(
+        '=> Find marketplace logo in MP all credit and navigate to credit detail',
+        (tester) async {
       when(() => mpAllCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial()
             .copyWith(items: creditItemList.take(1).toList()),
@@ -400,6 +402,20 @@ void main() {
           matching: find.byType(MarketPlaceLogo),
         ),
         findsOne,
+      );
+      await tester.tap(creditsItemTile);
+      await tester.pump();
+      verify(
+        () => creditAndInvoiceDetailsBlocMock.add(
+          CreditAndInvoiceDetailsEvent.fetch(
+            creditAndInvoiceItem: creditItemList.first,
+            isMarketPlace: true,
+          ),
+        ),
+      ).called(1);
+      expect(
+        autoRouterMock.currentPath,
+        CreditDetailsPageRoute(isMarketPlace: true).path,
       );
     });
   });

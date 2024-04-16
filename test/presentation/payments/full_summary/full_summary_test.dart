@@ -533,5 +533,41 @@ void main() {
         InvoiceDetailsPageRoute(isMarketPlace: true).path,
       );
     });
+
+    testWidgets(
+        'Find marketplace logo in MP full summary and navigate to credit',
+        (tester) async {
+      final item =
+          fullSummaryList.firstWhere((e) => e.debitCreditCode.isCredit);
+      when(() => mpFullSummaryBlocMock.state).thenReturn(
+        FullSummaryState.initial().copyWith(items: [item]),
+      );
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pump();
+
+      final itemTile = find.byKey(WidgetKeys.invoiceCreditItem);
+      expect(itemTile, findsOne);
+      expect(
+        find.descendant(
+          of: itemTile,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsOne,
+      );
+      await tester.tap(itemTile);
+      await tester.pump();
+      verify(
+        () => creditAndInvoiceDetailsBlocMock.add(
+          CreditAndInvoiceDetailsEvent.fetch(
+            creditAndInvoiceItem: item,
+            isMarketPlace: true,
+          ),
+        ),
+      ).called(1);
+      expect(
+        autoRouterMock.currentPath,
+        CreditDetailsPageRoute(isMarketPlace: true).path,
+      );
+    });
   });
 }
