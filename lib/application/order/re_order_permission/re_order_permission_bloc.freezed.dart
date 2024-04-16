@@ -22,7 +22,8 @@ mixin _$ReOrderPermissionEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)
         initialized,
     required TResult Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -41,7 +42,8 @@ mixin _$ReOrderPermissionEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)?
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
         initialized,
     TResult? Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -59,7 +61,8 @@ mixin _$ReOrderPermissionEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)?
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
         initialized,
     TResult Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -131,12 +134,14 @@ abstract class _$$_InitializedCopyWith<$Res> {
       {CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       SalesOrganisation salesOrganisation,
-      SalesOrganisationConfigs salesOrganisationConfigs});
+      SalesOrganisationConfigs salesOrganisationConfigs,
+      User user});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -154,6 +159,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? salesOrganisation = null,
     Object? salesOrganisationConfigs = null,
+    Object? user = null,
   }) {
     return _then(_$_Initialized(
       customerCodeInfo: null == customerCodeInfo
@@ -172,6 +178,10 @@ class __$$_InitializedCopyWithImpl<$Res>
           ? _value.salesOrganisationConfigs
           : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
@@ -207,6 +217,14 @@ class __$$_InitializedCopyWithImpl<$Res>
       return _then(_value.copyWith(salesOrganisationConfigs: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -216,7 +234,8 @@ class _$_Initialized implements _Initialized {
       {required this.customerCodeInfo,
       required this.shipToInfo,
       required this.salesOrganisation,
-      required this.salesOrganisationConfigs});
+      required this.salesOrganisationConfigs,
+      required this.user});
 
   @override
   final CustomerCodeInfo customerCodeInfo;
@@ -226,10 +245,12 @@ class _$_Initialized implements _Initialized {
   final SalesOrganisation salesOrganisation;
   @override
   final SalesOrganisationConfigs salesOrganisationConfigs;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'ReOrderPermissionEvent.initialized(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs)';
+    return 'ReOrderPermissionEvent.initialized(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, user: $user)';
   }
 
   @override
@@ -245,12 +266,13 @@ class _$_Initialized implements _Initialized {
                 other.salesOrganisation == salesOrganisation) &&
             (identical(
                     other.salesOrganisationConfigs, salesOrganisationConfigs) ||
-                other.salesOrganisationConfigs == salesOrganisationConfigs));
+                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, customerCodeInfo, shipToInfo,
-      salesOrganisation, salesOrganisationConfigs);
+      salesOrganisation, salesOrganisationConfigs, user);
 
   @JsonKey(ignore: true)
   @override
@@ -265,7 +287,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)
         initialized,
     required TResult Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -278,7 +301,7 @@ class _$_Initialized implements _Initialized {
         resetOrderNumberWillUpsert,
   }) {
     return initialized(customerCodeInfo, shipToInfo, salesOrganisation,
-        salesOrganisationConfigs);
+        salesOrganisationConfigs, user);
   }
 
   @override
@@ -288,7 +311,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)?
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
         initialized,
     TResult? Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -300,7 +324,7 @@ class _$_Initialized implements _Initialized {
         resetOrderNumberWillUpsert,
   }) {
     return initialized?.call(customerCodeInfo, shipToInfo, salesOrganisation,
-        salesOrganisationConfigs);
+        salesOrganisationConfigs, user);
   }
 
   @override
@@ -310,7 +334,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)?
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
         initialized,
     TResult Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -324,7 +349,7 @@ class _$_Initialized implements _Initialized {
   }) {
     if (initialized != null) {
       return initialized(customerCodeInfo, shipToInfo, salesOrganisation,
-          salesOrganisationConfigs);
+          salesOrganisationConfigs, user);
     }
     return orElse();
   }
@@ -372,16 +397,17 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements ReOrderPermissionEvent {
   const factory _Initialized(
-          {required final CustomerCodeInfo customerCodeInfo,
-          required final ShipToInfo shipToInfo,
-          required final SalesOrganisation salesOrganisation,
-          required final SalesOrganisationConfigs salesOrganisationConfigs}) =
-      _$_Initialized;
+      {required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs salesOrganisationConfigs,
+      required final User user}) = _$_Initialized;
 
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get salesOrganisationConfigs;
+  User get user;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
@@ -482,7 +508,8 @@ class _$_FetchOrder implements _FetchOrder {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)
         initialized,
     required TResult Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -504,7 +531,8 @@ class _$_FetchOrder implements _FetchOrder {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)?
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
         initialized,
     TResult? Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -526,7 +554,8 @@ class _$_FetchOrder implements _FetchOrder {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)?
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
         initialized,
     TResult Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -694,7 +723,8 @@ class _$_FetchItem implements _FetchItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)
         initialized,
     required TResult Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -716,7 +746,8 @@ class _$_FetchItem implements _FetchItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)?
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
         initialized,
     TResult? Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -737,7 +768,8 @@ class _$_FetchItem implements _FetchItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)?
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
         initialized,
     TResult Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -881,7 +913,8 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)
         initialized,
     required TResult Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -903,7 +936,8 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)?
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
         initialized,
     TResult? Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -924,7 +958,8 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrganisationConfigs)?
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
         initialized,
     TResult Function(
             List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -1006,6 +1041,7 @@ mixin _$ReOrderPermissionState {
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   SalesOrganisationConfigs get salesOrganisationConfigs =>
       throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReOrderPermissionStateCopyWith<ReOrderPermissionState> get copyWith =>
@@ -1026,12 +1062,14 @@ abstract class $ReOrderPermissionStateCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       SalesOrganisation salesOrganisation,
-      SalesOrganisationConfigs salesOrganisationConfigs});
+      SalesOrganisationConfigs salesOrganisationConfigs,
+      User user});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -1056,6 +1094,7 @@ class _$ReOrderPermissionStateCopyWithImpl<$Res,
     Object? shipToInfo = null,
     Object? salesOrganisation = null,
     Object? salesOrganisationConfigs = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       validOrderItems: null == validOrderItems
@@ -1090,6 +1129,10 @@ class _$ReOrderPermissionStateCopyWithImpl<$Res,
           ? _value.salesOrganisationConfigs
           : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ) as $Val);
   }
 
@@ -1125,6 +1168,14 @@ class _$ReOrderPermissionStateCopyWithImpl<$Res,
       return _then(_value.copyWith(salesOrganisationConfigs: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1143,7 +1194,8 @@ abstract class _$$_ReOrderPermissionStateCopyWith<$Res>
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       SalesOrganisation salesOrganisation,
-      SalesOrganisationConfigs salesOrganisationConfigs});
+      SalesOrganisationConfigs salesOrganisationConfigs,
+      User user});
 
   @override
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -1153,6 +1205,8 @@ abstract class _$$_ReOrderPermissionStateCopyWith<$Res>
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -1175,6 +1229,7 @@ class __$$_ReOrderPermissionStateCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? salesOrganisation = null,
     Object? salesOrganisationConfigs = null,
+    Object? user = null,
   }) {
     return _then(_$_ReOrderPermissionState(
       validOrderItems: null == validOrderItems
@@ -1209,6 +1264,10 @@ class __$$_ReOrderPermissionStateCopyWithImpl<$Res>
           ? _value.salesOrganisationConfigs
           : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 }
@@ -1224,7 +1283,8 @@ class _$_ReOrderPermissionState extends _ReOrderPermissionState {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.salesOrganisation,
-      required this.salesOrganisationConfigs})
+      required this.salesOrganisationConfigs,
+      required this.user})
       : _validOrderItems = validOrderItems,
         super._();
 
@@ -1250,10 +1310,12 @@ class _$_ReOrderPermissionState extends _ReOrderPermissionState {
   final SalesOrganisation salesOrganisation;
   @override
   final SalesOrganisationConfigs salesOrganisationConfigs;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'ReOrderPermissionState(validOrderItems: $validOrderItems, isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, orderNumberWillUpsert: $orderNumberWillUpsert, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs)';
+    return 'ReOrderPermissionState(validOrderItems: $validOrderItems, isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, orderNumberWillUpsert: $orderNumberWillUpsert, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, user: $user)';
   }
 
   @override
@@ -1277,7 +1339,8 @@ class _$_ReOrderPermissionState extends _ReOrderPermissionState {
                 other.salesOrganisation == salesOrganisation) &&
             (identical(
                     other.salesOrganisationConfigs, salesOrganisationConfigs) ||
-                other.salesOrganisationConfigs == salesOrganisationConfigs));
+                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
@@ -1290,7 +1353,8 @@ class _$_ReOrderPermissionState extends _ReOrderPermissionState {
       customerCodeInfo,
       shipToInfo,
       salesOrganisation,
-      salesOrganisationConfigs);
+      salesOrganisationConfigs,
+      user);
 
   @JsonKey(ignore: true)
   @override
@@ -1309,8 +1373,8 @@ abstract class _ReOrderPermissionState extends ReOrderPermissionState {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final SalesOrganisation salesOrganisation,
-      required final SalesOrganisationConfigs
-          salesOrganisationConfigs}) = _$_ReOrderPermissionState;
+      required final SalesOrganisationConfigs salesOrganisationConfigs,
+      required final User user}) = _$_ReOrderPermissionState;
   const _ReOrderPermissionState._() : super._();
 
   @override
@@ -1329,6 +1393,8 @@ abstract class _ReOrderPermissionState extends ReOrderPermissionState {
   SalesOrganisation get salesOrganisation;
   @override
   SalesOrganisationConfigs get salesOrganisationConfigs;
+  @override
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_ReOrderPermissionStateCopyWith<_$_ReOrderPermissionState> get copyWith =>

@@ -2,7 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/re_order_permission.dart';
@@ -28,6 +30,8 @@ class ReOrderPermissionRepository implements IReOrderPermissionRepository {
     required List<MaterialNumber> materialNumbers,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required User user,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -58,6 +62,9 @@ class ReOrderPermissionRepository implements IReOrderPermissionRepository {
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCode: shipToInfo.shipToCustomerCode,
         salesOrg: salesOrganisation.salesOrg.getValue(),
+        isSalesRepUser: user.role.type.isSalesRepRole,
+        isEnableGimmickMaterial: salesOrganisationConfigs.enableGimmickMaterial,
+        userName: user.username.getValue(),
       );
       final validMaterialNumbers =
           reOrderPermission.validMaterials.map((e) => e.materialNumber);

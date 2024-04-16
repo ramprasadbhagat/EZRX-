@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -61,6 +62,8 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         materialNumbers: fakeMaterialNumbers,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
       );
       expect(
         result.isLeft(),
@@ -79,6 +82,8 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         materialNumbers: fakeMaterialNumbers,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
       );
       expect(
         result.isRight(),
@@ -95,6 +100,9 @@ void main() {
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           materialNumbers:
               fakeMaterialNumbers.map((e) => e.getOrCrash()).toList(),
+          isEnableGimmickMaterial: fakeSalesOrganisationConfigs.enableGimmickMaterial,
+          isSalesRepUser: fakeSalesRepUser.role.type.isSalesRepRole,
+          userName: fakeSalesRepUser.username.getValue(), 
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -103,6 +111,8 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         materialNumbers: fakeMaterialNumbers,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
       );
       expect(
         result.isLeft(),
@@ -118,6 +128,8 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeIDSalesOrganisation,
         materialNumbers: fakeMaterialNumbers,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
       );
 
       final expectedResult = ReOrderPermission(
@@ -139,6 +151,10 @@ void main() {
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           materialNumbers:
               fakeMaterialNumbers.map((e) => e.getOrCrash()).toList(),
+          isEnableGimmickMaterial:
+              fakeSalesOrganisationConfigs.enableGimmickMaterial,
+          isSalesRepUser: fakeSalesRepUser.role.type.isSalesRepRole,
+          userName: fakeSalesRepUser.username.getValue(),     
         ),
       ).thenAnswer(
         (invocation) async => getReorderPermissionResponseMock,
@@ -149,6 +165,8 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         materialNumbers: fakeMaterialNumbers,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
       );
       expect(
         result.isRight(),
@@ -167,6 +185,10 @@ void main() {
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           materialNumbers:
               fakeMaterialNumbers.map((e) => e.getOrCrash()).toList(),
+          isEnableGimmickMaterial:
+              fakeSalesOrganisationConfigs.enableGimmickMaterial,
+          isSalesRepUser: fakeSalesRepUser.role.type.isSalesRepRole,
+          userName: fakeSalesRepUser.username.getValue(),    
         ),
       ).thenAnswer(
         (invocation) async => ReOrderPermission.empty(),
@@ -177,6 +199,8 @@ void main() {
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
         materialNumbers: fakeMaterialNumbers,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
       );
       expect(result, const Left(ApiFailure.allReorderItemInvalid()));
     });

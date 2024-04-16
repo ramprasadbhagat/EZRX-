@@ -19,6 +19,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class ReOrderPermissionRepositoryMock extends Mock
     implements ReOrderPermissionRepository {}
@@ -38,6 +39,7 @@ void main() {
     customerCodeInfo: fakeCustomerCodeInfo,
     salesOrganisation: fakeMYSalesOrganisation,
     shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+    user: fakeSalesRepUser,
   );
 
   setUpAll(() async {
@@ -75,6 +77,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeMYSalesOrganisation,
           shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          user: fakeSalesRepUser,
         ),
       ),
       expect: () => [initializedState],
@@ -94,6 +97,8 @@ void main() {
                 .toList(),
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeSalesRepUser, 
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           ),
         ).thenAnswer(
           (invocation) async => Right(mockReOrderPermission),
@@ -133,6 +138,8 @@ void main() {
                 .toList(),
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeSalesRepUser,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -192,6 +199,8 @@ void main() {
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeSalesRepUser,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -230,6 +239,8 @@ void main() {
             materialNumbers: [fakeOrderHistoryItem.materialNumber],
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+            user: fakeSalesRepUser,
           ),
         ).thenAnswer(
           (_) async => Right(
@@ -272,6 +283,8 @@ void main() {
             materialNumbers: [fakeOrderHistoryItem.materialNumber],
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeSalesRepUser,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           ),
         ).thenAnswer(
           (_) async => Right(
@@ -335,6 +348,8 @@ void main() {
             materialNumbers: [fakeOrderHistoryItem.materialNumber],
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeSalesRepUser,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           ),
         ).thenAnswer(
           (_) async => Right(ReOrderPermission.empty()),

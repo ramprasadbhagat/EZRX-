@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -42,6 +43,7 @@ class ReOrderPermissionBloc
           salesOrganisation: e.salesOrganisation,
           salesOrganisationConfigs: e.salesOrganisationConfigs,
           shipToInfo: e.shipToInfo,
+          user: e.user,
         ),
       ),
       fetchOrder: (e) async {
@@ -61,6 +63,8 @@ class ReOrderPermissionBloc
               .toList(),
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
+          salesOrganisationConfigs: state.salesOrganisationConfigs,
+          user: state.user,
         );
 
         failureOrSuccess.fold(
@@ -111,6 +115,8 @@ class ReOrderPermissionBloc
           materialNumbers: [reOrderItem.materialNumber],
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
+          salesOrganisationConfigs: state.salesOrganisationConfigs,
+          user: state.user,
         );
 
         failureOrSuccess.fold(

@@ -3,6 +3,7 @@ query getMaterialPermissions($for: MaterialPermissonsFor!) {
         permissions
         message
         success
+        isGimmick
     }
 }
 

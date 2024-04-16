@@ -85,6 +85,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
             shipToInfo: eligibilityState.shipToInfo,
             salesOrganisation: eligibilityState.salesOrganisation,
             salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+            user: eligibilityState.user,
           ),
         ),
       child: Scaffold(

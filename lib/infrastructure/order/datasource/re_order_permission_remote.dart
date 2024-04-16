@@ -24,6 +24,9 @@ class ReOrderPermissionRemoteDataSource {
     required String customerCode,
     required String shipToCode,
     required String salesOrg,
+    required bool isSalesRepUser,
+    required String userName,
+    required bool isEnableGimmickMaterial,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -39,6 +42,8 @@ class ReOrderPermissionRemoteDataSource {
               'salesOrganisation': salesOrg,
               'cached': false,
               'invalidateCache': false,
+              if (isSalesRepUser) 'username': userName,
+              if (isSalesRepUser) 'gimmickMaterial': isEnableGimmickMaterial,
             },
           },
         },

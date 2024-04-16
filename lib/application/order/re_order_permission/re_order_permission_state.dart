@@ -13,6 +13,7 @@ class ReOrderPermissionState with _$ReOrderPermissionState {
     required ShipToInfo shipToInfo,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrganisationConfigs,
+    required User user,
   }) = _ReOrderPermissionState;
 
   factory ReOrderPermissionState.initial() => ReOrderPermissionState(
@@ -24,6 +25,7 @@ class ReOrderPermissionState with _$ReOrderPermissionState {
         shipToInfo: ShipToInfo.empty(),
         salesOrganisation: SalesOrganisation.empty(),
         salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+        user: User.empty(),
       );
 
   List<MaterialInfo> availableProducts(

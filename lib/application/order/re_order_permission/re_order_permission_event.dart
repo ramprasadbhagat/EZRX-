@@ -7,6 +7,7 @@ class ReOrderPermissionEvent with _$ReOrderPermissionEvent {
     required ShipToInfo shipToInfo,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrganisationConfigs,
+    required User user,
   }) = _Initialized;
   const factory ReOrderPermissionEvent.fetchOrder({
     required List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
