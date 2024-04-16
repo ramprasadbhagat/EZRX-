@@ -22,13 +22,13 @@ parameters:
       - integration_test__sg__client_user__client_user_return__sg
       - integration_test__sg__external_sales_rep__external_sales_rep_user_order__sg
       - integration_test__sg__external_sales_rep__external_sales_rep_user_return__sg
-      
+
       - integration_test__ph__client_user__client_user_return__ph
       - integration_test__ph__client_user__client_user_order__ph
       - integration_test__ph__client_user__client_user_payment__ph
       - integration_test__ph__external_sales_rep__external_sales_rep_user_order__ph
       - integration_test__ph__external_sales_rep__external_sales_rep_user_return__ph
-      
+
       - integration_test__tw__client_user__client_user_order__tw
       - integration_test__tw__external_sales_rep__external_sales_rep_user_order__tw
 
@@ -41,6 +41,7 @@ parameters:
 
       - integration_test__th__client_user__client_user_order__th
       - integration_test__th__client_user__client_user_payment__th
+      - integration_test__th__external_sales_rep__external_sales_rep_user_order__th
 
   - name: preset_config_files
     type: object 

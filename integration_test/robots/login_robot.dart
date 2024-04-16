@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'common/common_robot.dart';
+import 'common/extension.dart';
 
 class LoginRobot extends CommonRobot {
   LoginRobot(WidgetTester tester) : super(tester);
@@ -39,6 +41,10 @@ class LoginRobot extends CommonRobot {
   }
 
   Future<void> skipIntroIfHas() async {
+    await tester.pumpUntilVisible(
+      find.byType(IntroPage),
+      maxIteration: 5,
+    );
     if (skipIntroButton.evaluate().isNotEmpty) {
       await tapSkipIntroButton();
       await tester.pumpAndSettle(const Duration(seconds: 2));

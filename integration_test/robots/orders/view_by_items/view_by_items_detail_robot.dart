@@ -21,6 +21,8 @@ class ViewByItemsDetailRobot extends CommonRobot {
   final addressSection = find.byType(AddressInfoSection);
   final itemDetailSection = find.byType(ItemDetailsSection);
   final otherItemDetailSection = find.byType(OtherItemDetailsSection);
+  final otherItem =
+      find.byKey(WidgetKeys.viewByItemDetailOtherItemExpandSection);
   final orderItem = find.byType(CommonTileItem);
   final offerTag = find.byKey(WidgetKeys.offerTag);
   final bundleTag = find.byKey(WidgetKeys.bundleTag);
@@ -96,6 +98,9 @@ class ViewByItemsDetailRobot extends CommonRobot {
     );
   }
 
+  Future<void> scrollToExpandButton() =>
+      scrollEnsureFinderVisible(expandButton);
+
   void verifyExpandButton({bool isVisible = true}) =>
       expect(expandButton, isVisible ? findsOneWidget : findsNothing);
 
@@ -163,7 +168,7 @@ class ViewByItemsDetailRobot extends CommonRobot {
   Future<void> verifyOtherItemsComponent({bool isVisible = true}) async {
     await scrollEnsureFinderVisible(otherItemDetailSection);
     expect(
-      find.descendant(of: otherItemDetailSection, matching: orderItem),
+      find.descendant(of: otherItemDetailSection, matching: otherItem),
       isVisible ? findsWidgets : findsNothing,
     );
   }

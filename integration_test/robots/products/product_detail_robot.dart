@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/show_offer_dialog_widget.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
-import 'package:ezrxmobile/presentation/products/product_details/widget/similar_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -29,6 +28,8 @@ class ProductDetailRobot extends CommonRobot {
   final govtMaterialListPrice = find.byKey(WidgetKeys.govtMaterialListPrice);
   final expandIcon = find.byKey(WidgetKeys.expandIcon);
   final expiryDateIcon = find.byKey(WidgetKeys.expiryDateInfoIcon);
+  final similarProduct =
+      find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
@@ -335,6 +336,13 @@ class ProductDetailRobot extends CommonRobot {
   }
 
   Future<void> tapAddToCart() async {
+    await tester.pumpUntilVisible(
+      find.descendant(
+        of: addToCartButton,
+        matching: find.text('Add to cart'),
+      ),
+      maxIteration: 2,
+    );
     await tester.tap(addToCartButton);
     await tester.pumpUntilVisible(find.byKey(WidgetKeys.customSnackBar));
   }
@@ -447,14 +455,18 @@ class ProductDetailRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.closeButton), findsOneWidget);
   }
 
+  bool checkHasRelateProduct() {
+    return similarProduct.evaluate().isNotEmpty;
+  }
+
   Future<void> verifyRelateProductDisplayed() async {
-    await scrollEnsureFinderVisible(find.byType(SimilarProduct));
+    await scrollEnsureFinderVisible(similarProduct);
     expect(relatedMaterialCard, findsWidgets);
   }
 
   Future<void> dragMaterialDetailsInfoTileDisplayed() async {
     await tester.dragUntilVisible(
-      find.byType(SimilarProduct),
+      similarProduct,
       materialDetailsInfoTile,
       const Offset(0, -100),
     );

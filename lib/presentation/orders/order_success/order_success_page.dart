@@ -136,6 +136,7 @@ class _BodyContent extends StatelessWidget {
                   ),
                   if (state.orderHistoryDetailsList.isNotEmpty)
                     Column(
+                      key: WidgetKeys.orderSuccessDetail,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(

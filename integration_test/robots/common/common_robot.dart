@@ -289,11 +289,15 @@ class CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> scrollEnsureFinderVisible(Finder finder) async {
+  Future<void> scrollEnsureFinderVisible(
+    Finder finder, {
+    int maxIteration = 50,
+    reversed = false,
+  }) async {
     await tester.dragUntilVisible(
       finder,
       find.byKey(WidgetKeys.scrollList),
-      const Offset(0.0, -200),
+      Offset(0.0, reversed ? 200 : -200),
     );
     await tester.pump();
   }
@@ -305,6 +309,10 @@ class CommonRobot {
   Future<void> closeAnnouncementAlertDialog() async {
     //close dialog if present
     final closeAlertDialog = find.byKey(WidgetKeys.closeAlertDialog);
+    await tester.pumpUntilVisible(
+      closeAlertDialog,
+      maxIteration: 3,
+    );
     if (closeAlertDialog.evaluate().isNotEmpty) {
       await tester.tap(closeAlertDialog);
       await tester.pumpAndSettle();

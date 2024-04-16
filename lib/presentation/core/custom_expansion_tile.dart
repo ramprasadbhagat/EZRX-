@@ -28,6 +28,7 @@ class ExpansionTile extends StatefulWidget {
   /// be non-null.
   const ExpansionTile({
     Key? key,
+    this.expandWidgetkey,
     this.headerBackgroundColor,
     this.leading,
     required this.title,
@@ -89,6 +90,9 @@ class ExpansionTile extends StatefulWidget {
   final bool threeLineTitle;
 
   final double? radius;
+
+  /// The key for the expanded widget.
+  final Key? expandWidgetkey;
 
   @override
   ExpansionTileState createState() => ExpansionTileState();
@@ -250,7 +254,12 @@ class ExpansionTileState extends State<ExpansionTile>
     return AnimatedBuilder(
       animation: _controller.view,
       builder: _buildChildren,
-      child: closed ? null : Column(children: widget.children),
+      child: closed
+          ? null
+          : Column(
+              key: widget.expandWidgetkey,
+              children: widget.children,
+            ),
     );
   }
 }

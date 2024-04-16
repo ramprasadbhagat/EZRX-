@@ -278,8 +278,15 @@ class CheckoutRobot {
   //  Material
   //============================================================
 
-  Future<void> verifyMaterialPrincipal(String text) =>
-      _scrollUntilVisible(principalLabel);
+  Future<void> verifyMaterialPrincipal(String principalName) =>
+      _scrollUntilVisible(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget.key == WidgetKeys.cartPrincipalLabel &&
+              widget is Text &&
+              widget.data == principalName,
+        ),
+      );
 
   Future<void> verifyMaterial(String materialNumber) =>
       _scrollUntilVisible(_material(materialNumber));
@@ -487,7 +494,9 @@ class CheckoutRobot {
     String materialNumber,
     String bonusMaterialNumber,
   ) =>
-      _scrollUntilVisible(_bonusItem(materialNumber, bonusMaterialNumber));
+      _scrollUntilVisible(
+        _bonusItem(materialNumber, bonusMaterialNumber),
+      );
 
   void verifyBonusMaterialDescription(
     String materialNumber,
@@ -737,6 +746,13 @@ class CheckoutRobot {
       tester.widget<TextFormField>(mobileNumberField).controller!.text.length <=
           16,
       true,
+    );
+  }
+
+  void verifyTaxDescription() {
+    expect(
+      find.text('Applies to materials with full tax'.tr()),
+      findsOneWidget,
     );
   }
 }

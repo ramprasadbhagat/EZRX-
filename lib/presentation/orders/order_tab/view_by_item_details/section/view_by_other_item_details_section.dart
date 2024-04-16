@@ -27,6 +27,7 @@ class OtherItemDetailsSection extends StatelessWidget {
           key: WidgetKeys.viewByItemDetailExpandButton,
           style: Theme.of(context).textTheme.labelMedium,
         ),
+        expandWidgetkey: WidgetKeys.viewByItemDetailOtherItemExpandSection,
         children: otherItems.getViewByOrderItemDetailsList
             .mapIndexed(
               (index, e) => Column(

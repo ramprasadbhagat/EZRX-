@@ -838,6 +838,7 @@ class WidgetKeys {
   static const Key orderSuccessAttachmentShowButton =
       Key('orderSuccessAttachmentShowButton');
   static const Key orderSummaryTotalSaving = Key('orderSummaryTotalSaving');
+  static const Key orderSuccessDetail = Key('orderSuccessDetail');
 
   //============================================================
   //  Order History
@@ -1404,6 +1405,8 @@ class WidgetKeys {
       Key('viewByItemsOrderDetailsReferenceNote');
   static Key viewByOrderFilterRadioTitle(String name, bool isSelected) =>
       Key('viewByOrderFilterRadioTitle$name$isSelected');
+  static Key viewByItemDetailOtherItemExpandSection =
+      const Key('viewByItemDetailOtherItemExpandSection');
 
   //============================================================
   // View By Orders

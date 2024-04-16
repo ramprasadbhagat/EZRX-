@@ -23,6 +23,13 @@ class OrderSuccessRobot extends CommonRobot {
     );
   }
 
+  void verifyReferenceNote(String text) {
+    expect(
+      find.byKey(WidgetKeys.balanceTextRow('Reference note'.tr(), text)),
+      findsOneWidget,
+    );
+  }
+
   void verifyDeliveryInstruction(String text) {
     expect(
       find.byKey(
@@ -347,5 +354,9 @@ class OrderSuccessRobot extends CommonRobot {
       ),
       findsOneWidget,
     );
+  }
+
+  Future<void> verifyOrderSuccessDetail() async {
+    await tester.pumpUntilVisible(find.byKey(WidgetKeys.orderSuccessDetail));
   }
 }
