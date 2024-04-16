@@ -3,6 +3,7 @@
 //ignore_for_file: unused-files
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -147,9 +148,10 @@ class _TierItem extends StatelessWidget {
       purchaseQuantity =
           '${context.tr('Purchase quantity')}: ${priceTier.minAmount}';
     }
-    final offerTitleText = saleConfigs.salesOrg.isID
-        ? '${context.tr('off total price')} ${priceTier.percentage}%'
-        : '${priceTier.percentage}% ${context.tr('off total price')}';
+    final offerTitleText =
+        context.read<UserBloc>().state.user.preferredLanguage.isIndonesian
+            ? '${context.tr('off total price')} ${priceTier.percentage}%'
+            : '${priceTier.percentage}% ${context.tr('off total price')}';
 
     return Column(
       mainAxisSize: MainAxisSize.min,

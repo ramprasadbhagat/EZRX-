@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -41,6 +42,8 @@ class MaterialPriceBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 class ProductDetailsMockBloc
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
@@ -49,9 +52,11 @@ void main() {
   late MaterialPriceBlocMock materialPriceBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late AppRouter autoRouterMock;
+  late UserBloc userBlocMock;
   late MaterialInfo materialInfoMock;
   late Price materialPrice;
   final productDetailMockBloc = ProductDetailsMockBloc();
+  userBlocMock = UserBlocMock();
   final availableOfferFinder = find.byKey(WidgetKeys.availableOfferColumnKey);
   final bonus = PriceBonus.empty().copyWith(
     items: [
@@ -116,6 +121,7 @@ void main() {
           .thenReturn(EligibilityState.initial());
       when(() => productDetailMockBloc.state)
           .thenReturn(ProductDetailState.initial());
+      when(() => userBlocMock.state).thenReturn(UserState.initial());
     });
 
     Widget getScopedWidget() {
@@ -131,6 +137,9 @@ void main() {
           ),
           BlocProvider<ProductDetailBloc>(
             create: ((context) => productDetailMockBloc),
+          ),
+          BlocProvider<UserBloc>(
+            create: (context) => userBlocMock,
           ),
         ],
         child: Material(
@@ -489,7 +498,7 @@ void main() {
 
     testWidgets('Available Offer Item test sorted Bonus offer listing ',
         (tester) async {
-       await tester.binding.setSurfaceSize(const Size(480, 1200));
+      await tester.binding.setSurfaceSize(const Size(480, 1200));
       tester.view.devicePixelRatio = 1;
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(

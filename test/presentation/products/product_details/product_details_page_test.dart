@@ -3,6 +3,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
@@ -69,6 +70,8 @@ class MaterialListMockBloc
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 class ProductDetailsMockBloc
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
@@ -106,6 +109,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   late MaterialListBloc materialListMockBloc;
+  late UserBloc userBlocMock;
   late ProductDetailBloc productDetailMockBloc;
   late ProductImageBloc mockProductImageBloc;
   late MaterialPriceBloc materialPriceMockBloc;
@@ -243,6 +247,7 @@ void main() {
         eligibilityBlocMock = EligibilityBlocMock();
         autoRouterMock = MockAppRouter();
         customerLicenseBlocMock = CustomerLicenseBlocMock();
+        userBlocMock = UserBlocMock();
 
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
@@ -271,6 +276,7 @@ void main() {
             .thenReturn(ComboDealMaterialDetailState.initial());
         when(() => customerLicenseBlocMock.state)
             .thenReturn(CustomerLicenseState.initial());
+        when(() => userBlocMock.state).thenReturn(UserState.initial());
       });
 
       RouteDataScope getScopedWidget() {
@@ -304,6 +310,9 @@ void main() {
             ),
             BlocProvider<CustomerLicenseBloc>(
               create: (context) => customerLicenseBlocMock,
+            ),
+            BlocProvider<UserBloc>(
+              create: (context) => userBlocMock,
             ),
           ],
           child: ProductDetailsPage(materialInfo: materialInfo),
@@ -2589,6 +2598,39 @@ void main() {
 
         final offerTitle =
             find.text('IDR 5,000 off total price', findRichText: true);
+        expect(offerTitle, findsOneWidget);
+      });
+
+      testWidgets('Find promotion percentage title', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                materialNumber: MaterialNumber('TCW20'),
+                quantity: MaterialQty(1),
+              ),
+            ),
+            inputQty: 1,
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {
+              MaterialNumber('TCW20'): materialPriceForMultipleTirePrice,
+            },
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final offerTitle = find.text('7.0% off total price');
         expect(offerTitle, findsOneWidget);
       });
 

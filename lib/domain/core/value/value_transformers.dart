@@ -817,6 +817,8 @@ String languageCodeToLanguageCumCountryCode(String languageCode) {
 
 bool checkIfMandarin(String languageCode) => languageCode == 'ZH';
 
+bool checkIfIndonesian(String languageCode) => languageCode == 'ID';
+
 String toSupportedLanguage(String value) {
   final supportedLanguageList = ['TH', 'ZH', 'MY', 'VI', 'ID', 'KM'];
 

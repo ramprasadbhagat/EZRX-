@@ -469,6 +469,8 @@ class Language extends ValueObject<String> {
 
   bool get isMandarin => checkIfMandarin(value.getOrElse(() => ''));
 
+  bool get isIndonesian => checkIfIndonesian(value.getOrElse(() => ''));
+
   Locale get locale => toLocale(languageCode);
 
   const Language._(this.value);
