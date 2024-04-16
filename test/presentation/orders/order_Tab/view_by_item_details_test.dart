@@ -1121,7 +1121,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfigs: fakeMYSalesOrgConfigs,
-          user: fakeSalesRepUser.copyWith(disablePaymentAccess: true),
+          user: fakeSalesRepUser,
         ),
       );
 

@@ -26,6 +26,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/repository/mixpanel_repo
 
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
@@ -832,6 +833,17 @@ void main() {
   );
 
   test(
+    'disable payment for rootadmin when disablePayment on',
+    () {
+      final eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeRootAdminUser,
+        salesOrgConfigs: fakeTWSalesOrgConfigs,
+      );
+
+      expect(eligibilityState.isPaymentEnabled, false);
+    },
+  );
+  test(
     'isSalesRepAndBonusEligible',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
@@ -1164,6 +1176,19 @@ void main() {
           user: fakeUser.copyWith(
             role: Role.empty().copyWith(type: RoleType('client_user')),
           ),
+          salesOrgConfigs:
+              fakeSGSalesOrgConfigs.copyWith(disableReturnsAccess: true),
+        );
+
+        expect(eligibilityState.isReturnsEnable, false);
+      },
+    );
+
+    test(
+      'disable returns access enable for rootadmin account',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeRootAdminUser,
           salesOrgConfigs:
               fakeSGSalesOrgConfigs.copyWith(disableReturnsAccess: true),
         );

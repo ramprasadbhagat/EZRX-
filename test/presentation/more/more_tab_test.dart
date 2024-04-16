@@ -37,6 +37,7 @@ import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
@@ -161,7 +162,7 @@ void main() {
       (WidgetTester tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            user: fakeClient.copyWith(disableReturns: true),
+            user: fakeClientUser.copyWith(disableReturns: true),
             salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
@@ -351,49 +352,13 @@ void main() {
     );
 
     testWidgets(
-      ' -> Hidden paymentsTile when Enable Payment Configuration is on',
-      (WidgetTester tester) async {
-        VisibilityDetectorController.instance.updateInterval = Duration.zero;
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              //Philippine market: ZPC PH
-              salesOrg: SalesOrg('2500'),
-            ),
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              //Enable Payment Configuration is on
-              disablePayment: false,
-            ),
-          ),
-        );
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: User.empty().copyWith(
-              role: Role.empty().copyWith(
-                type: RoleType('client_user'),
-              ),
-              fullName: const FullName(firstName: 'test', lastName: 'test'),
-            ),
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final paymentsTile = find.byKey(WidgetKeys.paymentsTile);
-        expect(paymentsTile, findsNothing);
-      },
-    );
-
-    testWidgets(
       ' -> Show paymentsTile when Enable Payment Configuration is on',
       (WidgetTester tester) async {
         VisibilityDetectorController.instance.updateInterval = Duration.zero;
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakePHSalesOrganisation,
-            salesOrgConfigs: fakePHSalesOrgConfigs.copyWith(
-              disablePayment: false,
-            ),
+            salesOrgConfigs: fakePHSalesOrgConfigs,
           ),
         );
         when(() => userBlocMock.state).thenReturn(
@@ -407,32 +372,23 @@ void main() {
         await getWidget(tester);
         await tester.pump();
         final paymentsTile = find.byKey(WidgetKeys.paymentsTile);
-        expect(paymentsTile, findsNothing);
+        expect(paymentsTile, findsOneWidget);
       },
     );
 
     testWidgets(
-      ' -> Hidden paymentsTile when Enable Payment Configuration is on',
+      ' -> Hidden paymentsTile when Enable Payment Configuration is off',
       (WidgetTester tester) async {
         VisibilityDetectorController.instance.updateInterval = Duration.zero;
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              //Philippine market: ZPC PH
-              salesOrg: SalesOrg('2500'),
-            ),
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              //Enable Payment Configuration is on
-              disablePayment: false,
-            ),
+            salesOrganisation: fakeTWSalesOrganisation,
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
           ),
         );
         when(() => userBlocMock.state).thenReturn(
           UserState.initial().copyWith(
-            user: User.empty().copyWith(
-              role: Role.empty().copyWith(
-                type: RoleType('client_user'),
-              ),
+            user: fakeRootAdminUser.copyWith(
               fullName: const FullName(firstName: 'test', lastName: 'test'),
             ),
           ),
@@ -536,25 +492,18 @@ void main() {
     testWidgets(
       ' -> Test Service tile buildWhen payment not show',
       (WidgetTester tester) async {
-        final expectedState = [
+        when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            user: fakeClientUser,
-          ),
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrganisation: fakeTWSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrgConfigs: fakeIDSalesOrgConfigs.copyWith(
-              disablePayment: true,
-            ),
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
             user: fakeZPAdminUser,
           ),
-        ];
-
-        whenListen(eligibilityBlocMock, Stream.fromIterable(expectedState));
+        );
         await getWidget(tester);
         await tester.pump();
         final returnsTileFinder = find.byKey(WidgetKeys.returnsTile);
-        expect(returnsTileFinder, findsOneWidget);
+        expect(returnsTileFinder, findsNothing);
         final paymentsTileFinder = find.byKey(WidgetKeys.paymentsTile);
         expect(paymentsTileFinder, findsNothing);
       },

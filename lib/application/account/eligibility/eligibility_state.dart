@@ -29,34 +29,36 @@ class EligibilityState with _$EligibilityState {
       );
 
   bool get isReturnsEnable {
-    if (user.disableReturns) return false;
-
     if (user.role.type.isSalesRepRole &&
         salesOrgConfigs.disableReturnsAccessSR) {
       return false;
     }
 
-    if (user.role.type.isCustomer && salesOrgConfigs.disableReturnsAccess) {
+    if (salesOrgConfigs.disableReturnsAccess) {
       return false;
     }
+
+    if (user.isCustomerWithReturnDisable) return false;
 
     return true;
   }
 
   bool get isPaymentEnabled {
-    if (salesOrg.isSg && customerCodeInfo.paymentTerm.isOutsideOfSystem) {
+    if (user.role.type.isSalesRepRole) {
       return false;
     }
 
-    if (user.role.type.hasAdminAccess) {
-      return true;
+    if (salesOrg.isSg && customerCodeInfo.paymentTerm.isOutsideOfSystem) {
+      return false;
     }
 
     if (salesOrgConfigs.disablePayment) {
       return false;
     }
 
-    return user.isCustomerWithPaymentsEnable;
+    if (user.isCustomerWithPaymentsDisable) return false;
+
+    return true;
   }
 
   bool get canOrderCovidMaterial {
