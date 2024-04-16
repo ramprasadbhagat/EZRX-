@@ -52,7 +52,6 @@ class LoginRobot extends CommonRobot {
     }
     if (introGetStartedButton.evaluate().isNotEmpty) {
       await tapIntroGetStartedButton();
-      await tester.pumpAndSettle(const Duration(seconds: 2));
     }
   }
 
@@ -132,7 +131,7 @@ class LoginRobot extends CommonRobot {
 
   Future<void> tapIntroGetStartedButton() async {
     await tester.tap(introGetStartedButton);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(seconds: 2));
   }
 
   void verifyDefaultValueSelector(String marketValue) {

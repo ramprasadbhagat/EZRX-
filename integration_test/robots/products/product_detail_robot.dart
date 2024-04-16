@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/show_offer_dialog_widget.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
@@ -345,6 +346,24 @@ class ProductDetailRobot extends CommonRobot {
     );
     await tester.tap(addToCartButton);
     await tester.pumpUntilVisible(find.byKey(WidgetKeys.customSnackBar));
+  }
+
+  bool get isOosPreOrderMaterial => find
+      .descendant(
+        of: find.byType(StatusLabel),
+        matching: find.text('OOS-Preorder'.tr()),
+      )
+      .evaluate()
+      .isNotEmpty;
+
+  void verifyAddToCartButtonDisable() {
+    final addToCartElevatedButton = tester.widget<ElevatedButton>(
+      find.descendant(
+        of: addToCartButton,
+        matching: find.byType(ElevatedButton),
+      ),
+    );
+    expect(addToCartElevatedButton.onPressed, null);
   }
 
   void verifyAddToCartSuccessMessage({bool isVisible = true}) => expect(

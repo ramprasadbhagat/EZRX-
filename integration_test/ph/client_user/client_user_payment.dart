@@ -141,7 +141,7 @@ void main() {
       await goToPaymentHomePage(tester);
 
       paymentHomeRobot.verifyNewPaymentsButton();
-      paymentHomeRobot.verifyPaymentHomeOptionMenu();
+      paymentHomeRobot.verifyPaymentHomeOptionMenu(verifyClaimsMenu: true);
       paymentHomeRobot.verifyPaymentHomeInvoiceCard();
       paymentHomeRobot.verifyPaymentHomeCreditCard();
       paymentHomeRobot.verifyPaymentHomeInProgressCard();

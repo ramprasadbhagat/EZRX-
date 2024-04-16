@@ -5,7 +5,7 @@ echo "Presetting sales org config for ID."
 
 loginApiResponse=$(curl -s --location 'https://uat-id.ezrx.com/api/license' \
 --header 'Content-Type: application/json' \
---data '{"variables": { "input": { "username": "rootadmin", "password": "Pa55word@1234" } }, "query": "query LoginV4($input: loginV4Input!) { loginV4(input: $input) { eZRxJWT } }"}')
+--data '{"variables": { "input": { "username": "auto_root_admin", "password": "Pa55word@1234" } }, "query": "query LoginV4($input: loginV4Input!) { loginV4(input: $input) { eZRxJWT } }"}')
 response=$(echo $loginApiResponse | sed -e 's/^.*"eZRxJWT":"\([^"]*\)".*$/\1/')
 updateSalesorgconfigMutationReq=$(curl --location 'https://uat-id.ezrx.com/api/license' \
 --header 'Content-Type: application/json' \
@@ -31,16 +31,14 @@ updateSalesorgconfigMutationReq=$(curl --location 'https://uat-id.ezrx.com/api/l
       "supportURL": "",
       "minOrderAmount": "100.00",
       "smallOrderFee": 0,
-      "vatValue": 0,
+      "vatValue": 11,
       "enableFutureDeliveryDay": false,
-      "netPriceOverride": true,
+      "netPriceOverride": false,
       "futureDeliveryDay": "7",
       "plantNumber": "",
-      "languageFilter": false,
-      "languageValue": "",
       "materialWithoutPrice": true,
       "enablePaymentTerms": false,
-      "enableAnalytics": false,
+      "enableAnalytics": true,
       "enablePartialPayment": false,
       "enableUnreferencedReturn": false,
       "disableReturnsAccess": false,
@@ -48,10 +46,10 @@ updateSalesorgconfigMutationReq=$(curl --location 'https://uat-id.ezrx.com/api/l
       "disableReturnsAccessSR": false,
       "enableMobileNumber": false,
       "enableRemarks": false,
-      "enableListPrice": true,
+      "enableListPrice": false,
       "enableTaxDisplay": false,
-      "addOosMaterials": true,
-      "oosValue": 1,
+      "addOosMaterials": false,
+      "oosValue": null,
       "enableDefaultMD": false,
       "enableZDP5": false,
       "enableZDP8Override": false,
@@ -87,11 +85,11 @@ updateSalesorgconfigMutationReq=$(curl --location 'https://uat-id.ezrx.com/api/l
       "enableBillTo": true,
       "disablePaymentTermsDisplay": false,
       "hideStockDisplay": false,
-      "showPOAttachment": false,
+      "showPOAttachment": true,
       "enablePOAttachmentRequired": false,
       "enableLoyaltyScheme": false,
       "disableOverrideFieldCustomer": false,
-      "disableOverrideFieldSR": false,
+      "disableOverrideFieldSR": true,
       "disableOverrideApprovalCustomer": false,
       "disableOverrideApprovalSR": false,
       "disableDeliveryDate": true,
@@ -99,10 +97,14 @@ updateSalesorgconfigMutationReq=$(curl --location 'https://uat-id.ezrx.com/api/l
       "disableApproverActions": false,
       "disableUserRestrictions": false,
       "hideCredit": true,
+      "statementOfAccountEnabled": false,
       "enableComboDeals": false,
       "authorizedsalesRep": [],
       "comboDealsUserRole": null,
-      "enableMarketPlace": false
+      "mpMinOrderAmount": "0",
+      "mpSmallOrderFeeUserRoles": [],
+      "enableMPSmallOrderFee": false,
+      "mpSmallOrderFee": 0
     }
   }
 }

@@ -160,6 +160,7 @@ class SecurityRobot extends CommonRobot {
 
   Future<void> fillToCurrentPasswordField(String currentPassword) async {
     await tester.tap(currentPasswordField);
+    await tester.pump();
     await tester.enterText(currentPasswordField, currentPassword);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
@@ -167,7 +168,7 @@ class SecurityRobot extends CommonRobot {
 
   Future<void> fillToNewPasswordField(String password) async {
     await tester.tap(newPasswordTextField);
-    await tester.pumpAndSettle();
+    await tester.pump();
     await tester.enterText(newPasswordTextField, password);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
@@ -180,6 +181,7 @@ class SecurityRobot extends CommonRobot {
 
   Future<void> fillToConfirmPasswordField(String password) async {
     await tester.tap(confirmPasswordField);
+    await tester.pump();
     await tester.enterText(confirmPasswordField, password);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();

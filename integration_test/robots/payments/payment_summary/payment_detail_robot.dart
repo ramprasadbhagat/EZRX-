@@ -114,18 +114,20 @@ class PaymentSummaryDetailRobot extends CommonRobot {
     expect(widget, findsOneWidget);
   }
 
-  void verifyPaymentSummaryDetailForID(
+  Future<void> verifyPaymentSummaryDetailForID(
     String title,
     double invoicePrice,
     String currency,
-  ) {
+  ) async {
+    final paymentSummaryTitle = find.byKey(
+      WidgetKeys.paymentSummaryTitle(
+        title,
+      ),
+    );
+    await scrollEnsureFinderVisible(paymentSummaryTitle);
     expect(
       find.descendant(
-        of: find.byKey(
-          WidgetKeys.paymentSummaryTitle(
-            title,
-          ),
-        ),
+        of: paymentSummaryTitle,
         matching: _getPriceFinder(
           invoicePrice.priceDisplayForID(currency),
         ),

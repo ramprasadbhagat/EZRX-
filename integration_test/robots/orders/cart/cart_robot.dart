@@ -33,6 +33,8 @@ class CartRobot {
     expect(cartPage, findsOneWidget);
   }
 
+  bool get isCartPage => cartPage.evaluate().isNotEmpty;
+
   Future<void> verifyCovidMaterial(String materialNumber) async {
     await verifyMaterial(materialNumber);
     expect(find.byKey(WidgetKeys.covidLabel), findsOneWidget);
@@ -138,20 +140,6 @@ class CartRobot {
     );
   }
 
-  void verifySmallOrderFee({
-    required bool isMinOrderValue,
-  }) {
-    expect(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget.key == WidgetKeys.checkoutSummarySmallOrderFeePrice &&
-            widget is PriceComponent &&
-            (widget.price).contains(isMinOrderValue ? '12500' : '0'),
-      ),
-      findsOneWidget,
-    );
-  }
-
   void verifyCartQty(int qty) {
     expect(
       find.byWidgetPredicate(
@@ -182,7 +170,13 @@ class CartRobot {
       findsOneWidget,
     );
     await tester.tap(find.byKey(WidgetKeys.priceSummaryListTile));
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(Durations.medium1);
+  }
+
+  String get getSmallOrderFeeValue {
+    final smallOrderFeeFinder =
+        find.byKey(WidgetKeys.checkoutSummarySmallOrderFeePrice);
+    return tester.widget<PriceComponent>(smallOrderFeeFinder).price;
   }
 
   Future<void> tapToClosePriceBreakDown() async {

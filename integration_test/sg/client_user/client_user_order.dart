@@ -3798,6 +3798,11 @@ void main() {
         await checkoutWithMaterial(materialNumber, orderQty);
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        await ordersRootRobot.switchToViewByOrders();
+        await commonRobot.pullToRefresh();
+
         await commonRobot.navigateToScreen(NavigationTab.products);
         await productRobot.openSearchProductScreen();
         await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
@@ -3813,7 +3818,6 @@ void main() {
 
         //verify
         await ordersRootRobot.switchToViewByOrders();
-        await commonRobot.pullToRefresh();
         await viewByOrdersRobot.tapFirstOrder();
         await viewByOrdersDetailRobot.tapBuyAgainButton();
         cartRobot.verifyPage();

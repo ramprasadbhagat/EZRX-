@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
 import 'package:flutter/material.dart';
@@ -557,14 +558,15 @@ class CheckoutRobot {
 
   void verifyBonusMaterialTag(
     String materialNumber,
-    String bonusMaterialNumber,
-  ) {
+    String bonusMaterialNumber, {
+    bool isVisible = true,
+  }) {
     expect(
       find.descendant(
         of: _bonusItem(materialNumber, bonusMaterialNumber),
         matching: find.byType(BonusTag),
       ),
-      findsOneWidget,
+      isVisible ? findsOneWidget : findsNothing,
     );
   }
 
@@ -719,6 +721,31 @@ class CheckoutRobot {
     expect(materialExpiryDateIcon, findsOneWidget);
     await tester.tap(materialExpiryDateIcon);
     await tester.pumpAndSettle();
+  }
+
+  Future<void> tapToSeePriceBreakDown() async {
+    expect(
+      find.byKey(WidgetKeys.priceSummaryListTile),
+      findsOneWidget,
+    );
+    await tester.tap(find.byKey(WidgetKeys.priceSummaryListTile));
+    await tester.pumpAndSettle(Durations.medium1);
+  }
+
+  String get getSmallOrderFeeValue {
+    final smallOrderFeeFinder =
+        find.byKey(WidgetKeys.checkoutSummarySmallOrderFeePrice);
+    return tester.widget<PriceComponent>(smallOrderFeeFinder.at(0)).price;
+  }
+
+  Future<void> tapToClosePriceBreakDown() async {
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(WidgetKeys.closeButton),
+        matching: find.text('Close'.tr()),
+      ),
+    );
+    await tester.pumpAndSettle(Durations.medium1);
   }
 
   //============================================================

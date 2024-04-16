@@ -251,7 +251,9 @@ class OrderSuccessRobot extends CommonRobot {
     );
   }
 
-  void verifyMaterialBonusTag() {
+  void verifyMaterialBonusTag({
+    bool isVisible = true,
+  }) {
     expect(
       find.descendant(
         of: find.descendant(
@@ -260,7 +262,7 @@ class OrderSuccessRobot extends CommonRobot {
         ),
         matching: find.text('Bonus'.tr()),
       ),
-      findsOneWidget,
+      isVisible ? findsOneWidget : findsNothing,
     );
   }
 

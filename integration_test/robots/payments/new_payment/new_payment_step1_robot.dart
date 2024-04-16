@@ -148,7 +148,7 @@ class NewPaymentStep1Robot {
   }
 
   void verifyAtLeast1ItemIsCheck() {
-    expect(itemCheckBadge, findsAtLeastNWidgets(2));
+    expect(itemCheckBadge, findsAtLeastNWidgets(1));
   }
 
   void verifyNoItemIsCheck() {

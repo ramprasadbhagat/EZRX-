@@ -46,8 +46,8 @@ class PaymentSummaryFilterRobot {
   void verifyDefaultFilterAppliedForID() {
     verifyRadioListTileFilterForID();
     verifyDateRangeFilterApplied(
-      fromDate: '',
-      toDate: '',
+      fromDate: DateTime.now().subtract(const Duration(days: 90)).displayDate,
+      toDate: DateTime.now().displayDate,
     );
     verifyAmountRangeFilterApplied(
       fromAmount: '',
@@ -75,14 +75,18 @@ class PaymentSummaryFilterRobot {
 
   Future<void> enterFromAmount(String text) async {
     await tester.tap(fromAmountFilter);
+    await tester.pump();
     await tester.enterText(fromAmountFilter, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
   }
 
   Future<void> enterToAmount(String text) async {
     await tester.tap(toAmountFilter);
+    await tester.pump();
     await tester.enterText(toAmountFilter, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
   }
 
   void verifyAmountRangeFilterApplied({
