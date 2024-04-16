@@ -115,6 +115,7 @@ class PriceComponent extends StatelessWidget {
       text: TextSpan(
         children: _getTextSpan(context),
       ),
+      maxLines: 2,
       overflow: TextOverflow.ellipsis,
     );
   }

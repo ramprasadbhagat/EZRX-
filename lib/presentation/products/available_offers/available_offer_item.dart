@@ -156,13 +156,20 @@ class _TierItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          offerTitleText,
-          style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                color: ZPColors.primary,
+        priceTier.percentage > 0
+            ? Text(
+                offerTitleText,
+                style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                      color: ZPColors.primary,
+                    ),
+                key: WidgetKeys.productPriceOfferTitle,
+              )
+            : PriceComponent(
+                price: '${priceTier.promotionAmount.abs()}',
+                trailingText: 'off total price',
+                salesOrgConfig: saleConfigs,
+                type: PriceStyle.bundleActiveOfferPrice,
               ),
-          key: WidgetKeys.productPriceOfferTitle,
-        ),
         PriceComponent(
           price: priceTier.rate.toStringAsFixed(0),
           salesOrgConfig: saleConfigs,

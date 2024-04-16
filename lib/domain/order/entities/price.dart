@@ -71,7 +71,14 @@ class Price with _$Price {
   }
 
   List<PriceTierItem> get priceTireItem =>
-      tiers.isNotEmpty ? tiers.first.getItems : <PriceTierItem>[];
+      tiers.expand((element) => element.items).toList()
+        ..sort(
+          (
+            PriceTierItem a,
+            PriceTierItem b,
+          ) =>
+              a.rate.compareTo(b.rate),
+        );
 
   bool get isTireDiscountEligible => tiers.isNotEmpty;
 

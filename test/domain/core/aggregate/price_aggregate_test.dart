@@ -1920,6 +1920,25 @@ void main() {
       );
     });
 
+    test(
+      'Find final price with multiple tiering bonus ',
+      () {
+        final price = materialPriceListFromLocal.firstWhere(
+          (element) => element.materialNumber == MaterialNumber('TCW20'),
+          orElse: () => Price.empty(),
+        );
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          quantity: 10,
+          price: price,
+          discountedMaterialCount: 1,
+        );
+        expect(
+          customPriceAggregate.finalPrice,
+          115528,
+        );
+      },
+    );
+
     // test('PriceAggregate multiple Bonus Deal with multiple material', () {
     //   final price = materialPriceListFromLocal.firstWhere(
     //     (element) =>

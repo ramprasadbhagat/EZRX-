@@ -120,6 +120,7 @@ void main() {
   late CustomerLicenseBloc customerLicenseBlocMock;
   late Price materialPrice;
   late Price materialPriceForTireSection;
+  late Price materialPriceForMultipleTirePrice;
   final user = fakeClientUser;
   final materialNumber = MaterialNumber('00000111111');
   late ProductImages productImage;
@@ -199,6 +200,10 @@ void main() {
         (await MaterialPriceLocalDataSource().getPriceList()).firstWhere(
       (element) =>
           element.materialNumber == MaterialNumber('000000000021038302'),
+    );
+    materialPriceForMultipleTirePrice =
+        (await MaterialPriceLocalDataSource().getPriceList()).firstWhere(
+      (element) => element.materialNumber == MaterialNumber('TCW20'),
     );
     stockInfo = (await StockInfoLocalDataSource().getMaterialStockInfoList())
         .first
@@ -2549,6 +2554,42 @@ void main() {
           ),
           findsOneWidget,
         );
+      });
+
+      testWidgets(
+          'Find promotion amount when discount percentage is not greater than zero',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                materialNumber: MaterialNumber('TCW20'),
+                quantity: MaterialQty(1),
+              ),
+            ),
+            inputQty: 1,
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {
+              MaterialNumber('TCW20'): materialPriceForMultipleTirePrice,
+            },
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final offerTitle =
+            find.text('IDR 5,000 off total price', findRichText: true);
+        expect(offerTitle, findsOneWidget);
       });
 
       testWidgets(

@@ -925,6 +925,102 @@
     "OverridenRuleTier": [],
     "IsMOVExclusion": false,
     "ComboDeals": null
+},
+{
+  "MaterialNumber": "TCW20",
+  "OldMaterialCode": "",
+  "ListPrice": 129600,
+  "FinalIndividualPrice": 115528,
+  "FinalTotalPrice": 115528,
+  "PriceRules": [
+      {
+          "Type": "IDR",
+          "Rate": 1296,
+          "Conditions": "ZPR0 - A800 - 0009030881",
+          "TieredRules": null,
+          "BonusEligible": true,
+          "ConditionNumber": "0009030881",
+          "OverriddenBy": null,
+          "MaxQuota": "0",
+          "RemainingQuota": null
+      }
+  ],
+  "Bonuses": [
+      {
+          "BonusTiers": [
+              {
+                  "BonusMaterial": [
+                      {
+                          "Id": 3,
+                          "MaterialNumber": "TCW20",
+                          "MaterialDescription": "BANDAGES TATTOO WP, COOL",
+                          "Calculation": "001",
+                          "BonusRatio": 1,
+                          "QualifyingQuantity": 1,
+                          "BonusQuantity": 1,
+                          "LimitPerTransaction": 0,
+                          "ConditionId": "0000026265",
+                          "OldMaterialCode": null
+                      }
+                  ],
+                  "Calculation": "001",
+                  "QualifyingQuantity": 1
+              }
+          ]
+      }
+  ],
+  "TieredPricing": [
+      {
+          "Tier": "",
+          "PriceTier": [
+              {
+                  "Sequence": 0,
+                  "Quantity": 0,
+                  "Type": "amount",
+                  "Rate": 124600,
+                  "ApplyBonus": false,
+                  "Percentage": null,
+                  "MinAmount": 0,
+                  "ScaleBasis": "",
+                  "AcSeq": "ZP30",
+                  "AcNo": "50",
+                  "PromotionAmount": -5000,
+                  "CondType": "ZEDR"
+              }
+          ]
+      },
+      {
+          "Tier": "",
+          "PriceTier": [
+              {
+                  "Sequence": 0,
+                  "Quantity": 0,
+                  "Type": "amount",
+                  "Rate": 115528,
+                  "ApplyBonus": false,
+                  "Percentage": 7,
+                  "MinAmount": 0,
+                  "ScaleBasis": "",
+                  "AcSeq": "ZP30",
+                  "AcNo": "50",
+                  "PromotionAmount": -7,
+                  "CondType": "ZEDP"
+              }
+          ]
+      }
+  ],
+  "Bundles": [],
+  "Valid": true,
+  "AdditionalBonusEligible": false,
+  "ZMGDiscount": false,
+  "ZDP5MaxQuota": "",
+  "ZDP5RemainingQuota": "0",
+  "ExceedQty": false,
+  "OverridenRulePresent": false,
+  "OverridenRules": [],
+  "OverridenRuleTier": [],
+  "IsMOVExclusion": false,
+  "ComboDeals": null
 }
     ]
   }
