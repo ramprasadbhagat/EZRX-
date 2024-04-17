@@ -185,7 +185,7 @@ class PushNotificationService {
       if (message == null) return;
       _redirectTothePage(message);
     });
-    
+
     return null;
   }
 

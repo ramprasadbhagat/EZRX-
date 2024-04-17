@@ -82,8 +82,8 @@ run_vn_external_order_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/vn/${EXTERNALSALESREPORDER}
 run_kh_client_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${CLIENTUSER}
-run_kh_external_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${EXTERNALSALESREP}
+run_kh_external_order_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${EXTERNALSALESREPORDER}
 run_mm_client_order_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/mm/${CLIENTUSERORDER} 
 run_mm_external_order_test:

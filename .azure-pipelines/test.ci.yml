@@ -38,6 +38,7 @@ parameters:
 
       - integration_test__mm__client_user__client_user_order__my
       - integration_test__mm__external_sales_rep__external_sales_rep_user_order__my
+      - integration_test__kh__external_sales_rep__external_sales_rep_user_order__kh
 
       - integration_test__th__client_user__client_user_order__th
       - integration_test__th__client_user__client_user_payment__th
@@ -55,6 +56,7 @@ parameters:
       - integration_test__vn__reset_sales_org_config
       - integration_test__mm__reset_sales_org_config
       - integration_test__th__reset_sales_org_config
+      - integration_test__kh__reset_sales_org_config
 
   - name: build_mode 
     displayName: Build Mode
