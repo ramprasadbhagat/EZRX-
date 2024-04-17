@@ -98,6 +98,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeSalesOrganisation,
           queryObject: AllInvoicesFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -113,6 +114,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeSalesOrganisation,
           queryObject: AllInvoicesFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -128,6 +130,7 @@ void main() {
             excelFor: 'Debit',
             queryObject: filterListForInvoice,
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            isMarketPlace: true,
           ),
         ).thenAnswer((invocation) async => downloadPaymentAttachment);
 
@@ -136,6 +139,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeSalesOrganisation,
           queryObject: AllInvoicesFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -151,6 +155,7 @@ void main() {
             excelFor: 'Debit',
             queryObject: filterListForInvoice,
             salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
+            isMarketPlace: false,
           ),
         ).thenThrow(fakeError);
 
@@ -159,6 +164,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
           queryObject: AllInvoicesFilter.defaultFilter(),
+          isMarketPlace: false,
         );
         expect(
           result,
@@ -179,6 +185,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeSalesOrganisation,
           queryObject: AllCreditsFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -194,6 +201,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
           queryObject: AllCreditsFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -209,6 +217,7 @@ void main() {
             excelFor: 'Credit',
             queryObject: filterListForCredits,
             salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
+            isMarketPlace: true,
           ),
         ).thenAnswer((invocation) async => downloadPaymentAttachment);
 
@@ -217,6 +226,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
           queryObject: AllCreditsFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -232,6 +242,7 @@ void main() {
             excelFor: 'Credit',
             queryObject: filterListForCredits,
             salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
+            isMarketPlace: false,
           ),
         ).thenThrow(fakeError);
 
@@ -240,6 +251,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
           queryObject: AllCreditsFilter.defaultFilter(),
+          isMarketPlace: false,
         );
         expect(
           result,
@@ -260,6 +272,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
           queryObject: FullSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -276,6 +289,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
           queryObject: FullSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -291,6 +305,7 @@ void main() {
             excelFor: 'AccountSummary',
             queryObject: filterListForFullSummary,
             salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
+            isMarketPlace: false,
           ),
         ).thenAnswer((invocation) async => downloadPaymentAttachment);
 
@@ -299,6 +314,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
           queryObject: FullSummaryFilter.defaultFilter(),
+          isMarketPlace: false,
         );
         expect(
           result,
@@ -314,6 +330,7 @@ void main() {
             excelFor: 'AccountSummary',
             queryObject: filterListForFullSummary,
             salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
+            isMarketPlace: true,
           ),
         ).thenThrow(fakeError);
 
@@ -322,6 +339,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
           queryObject: FullSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,

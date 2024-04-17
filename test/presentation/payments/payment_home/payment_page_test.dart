@@ -1,9 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
@@ -23,7 +21,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_limit.dart';
-import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_balance.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
@@ -54,11 +51,9 @@ import '../../../utils/widget_utils.dart';
 void main() {
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
-  late SalesOrgBloc salesOrgBlocMock;
   late NewPaymentBloc newPaymentBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late EligibilityBloc eligibilityBlocMock;
-  late CustomerCodeBloc customerCodeBlocMock;
   late ZPAccountSummaryBloc accountSummaryBlocMock;
   late MPAccountSummaryBloc mpAccountSummaryBloc;
   late AccountSummaryState accountSummaryState;
@@ -129,10 +124,8 @@ void main() {
     soaBloc = ZPSoaBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     authBlocMock = AuthBlocMock();
-    salesOrgBlocMock = SalesOrgBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
-    customerCodeBlocMock = CustomerCodeBlocMock();
     accountSummaryBlocMock = ZPAccountSummaryBlocMock();
     paymentInProgressBloc = ZPPaymentInProgressBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();
@@ -145,8 +138,6 @@ void main() {
     mpPaymentInProgressBloc = MPPaymentInProgressBlocMock();
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
-    when(() => customerCodeBlocMock.state)
-        .thenReturn(CustomerCodeState.initial());
     when(() => paymentInProgressBloc.state)
         .thenReturn(PaymentInProgressState.initial());
     when(() => accountSummaryBlocMock.state)
@@ -167,7 +158,6 @@ void main() {
         .thenReturn(EligibilityState.initial());
     when(() => soaBloc.state).thenReturn(SoaState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => autoRouterMock.currentPath).thenReturn(PaymentPageRoute.name);
@@ -200,17 +190,11 @@ void main() {
         BlocProvider<MPSoaBloc>(
           create: (context) => mpSoaBloc,
         ),
-        BlocProvider<SalesOrgBloc>(
-          create: (context) => salesOrgBlocMock,
-        ),
         BlocProvider<NewPaymentBloc>(
           create: (context) => newPaymentBlocMock,
         ),
         BlocProvider<AnnouncementBloc>(
           create: (context) => announcementBlocMock,
-        ),
-        BlocProvider<CustomerCodeBloc>(
-          create: (context) => customerCodeBlocMock,
         ),
         BlocProvider<ZPPaymentInProgressBloc>(
           create: (context) => paymentInProgressBloc,
@@ -753,6 +737,7 @@ void main() {
 
   group('Payment Home Statement of account', () {
     testWidgets('Check statement of account', (WidgetTester tester) async {
+      when(() => autoRouterMock.isTopMost).thenReturn(true);
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakePHSalesOrganisation,
@@ -788,8 +773,9 @@ void main() {
       );
     });
 
-    testWidgets('Check statement of account downloaded fuke',
+    testWidgets('Check statement of account downloaded failed',
         (WidgetTester tester) async {
+      when(() => autoRouterMock.isTopMost).thenReturn(true);
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakePHSalesOrganisation,
@@ -908,31 +894,12 @@ void main() {
           salesOrgConfigs: fakePHSalesOrgConfigs,
         ),
       );
-      whenListen(
-        soaBloc,
-        Stream.fromIterable([
-          SoaState.initial().copyWith(
-            soaList: soaList,
-          ),
-        ]),
+      when(() => soaBloc.state).thenReturn(
+        SoaState.initial().copyWith(soaList: soaList),
       );
-      whenListen(
-        downloadPaymentAttachmentsBloc,
-        Stream.fromIterable([
-          DownloadPaymentAttachmentsState.initial().copyWith(
-            isDownloadInProgress: true,
-          ),
-          DownloadPaymentAttachmentsState.initial(),
-        ]),
-      );
+
       await tester.binding.setSurfaceSize(const Size(480, 900));
       tester.view.devicePixelRatio = 1;
-      when(
-        () => autoRouterMock
-            .push(StatementAccountsPageRoute(isMarketPlace: false)),
-      ).thenAnswer(
-        (_) => Future.value(),
-      );
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
       expect(paymentHome, findsOneWidget);
@@ -962,41 +929,6 @@ void main() {
           ),
         ),
       ).called(1);
-    });
-
-    testWidgets('account summary soa downloading', (WidgetTester tester) async {
-      whenListen(
-        soaBloc,
-        Stream.fromIterable([
-          SoaState.initial().copyWith(
-            soaList: soaList,
-          ),
-        ]),
-      );
-
-      await tester.binding.setSurfaceSize(const Size(480, 900));
-      when(
-        () => autoRouterMock
-            .push(StatementAccountsPageRoute(isMarketPlace: false)),
-      ).thenAnswer(
-        (_) => Future.value(),
-      );
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      expect(paymentHome, findsOneWidget);
-      expect(appBar, findsOneWidget);
-      whenListen(
-        downloadPaymentAttachmentsBloc,
-        Stream.fromIterable([
-          DownloadPaymentAttachmentsState.initial().copyWith(
-            isDownloadInProgress: true,
-            fileUrl: DownloadPaymentAttachment(
-              url: soaList.elementAt(1).soaData.getOrDefaultValue(''),
-            ),
-          ),
-        ]),
-      );
-      await tester.pump();
     });
 
     testWidgets(

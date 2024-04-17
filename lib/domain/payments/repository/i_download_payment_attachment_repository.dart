@@ -19,18 +19,21 @@ abstract class IDownloadPaymentAttachmentRepository {
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required AllInvoicesFilter queryObject,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, DownloadPaymentAttachment>> fetchAllCreditUrl({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required AllCreditsFilter queryObject,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, DownloadPaymentAttachment>> fetchFullSummaryUrl({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required FullSummaryFilter queryObject,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, DownloadPaymentAttachment>> fetchPaymentSummaryUrl({

@@ -67,6 +67,14 @@ void main() {
     filterStatuses: ['Pending'],
     searchKey: SearchKey('fake-search-key'),
   );
+  final fullSummaryFilter = FullSummaryFilter(
+    documentDateFrom: DateTimeStringValue('20221011'),
+    documentDateTo: DateTimeStringValue('20231011'),
+    dueDateFrom: DateTimeStringValue('20221011'),
+    dueDateTo: DateTimeStringValue('20231011'),
+    filterStatuses: ['Open'],
+    searchKey: SearchKey('fake-search-key'),
+  );
   late NewPaymentBlocMock newPaymentBlocMock;
 
   setUpAll(() async {
@@ -201,6 +209,7 @@ void main() {
         () => mockDownloadPaymentAttachmentsBloc.add(
           DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
             queryObject: allInvoicesFilter,
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -225,6 +234,7 @@ void main() {
         () => mockDownloadPaymentAttachmentsBloc.add(
           DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
             queryObject: allCreditsFilter,
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -576,6 +586,9 @@ void main() {
     });
 
     testWidgets('=> Test Full Summary Export Button', (tester) async {
+      when(() => fullSummaryBlocMock.state).thenReturn(
+        FullSummaryState.initial().copyWith(appliedFilter: fullSummaryFilter),
+      );
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
       expect(fullSummaryTab, findsOneWidget);
@@ -587,7 +600,8 @@ void main() {
       verify(
         () => mockDownloadPaymentAttachmentsBloc.add(
           DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
-            queryObject: FullSummaryFilter.defaultFilter(),
+            queryObject: fullSummaryFilter,
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -726,6 +740,61 @@ void main() {
           findsOne,
         );
       });
+    });
+
+    testWidgets('=> Test export button in MP payment', (tester) async {
+      when(() => mpAllInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(appliedFilter: allInvoicesFilter),
+      );
+      when(() => mpAllCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(appliedFilter: allCreditsFilter),
+      );
+      when(() => mpFullSummaryBlocMock.state).thenReturn(
+        FullSummaryState.initial().copyWith(appliedFilter: fullSummaryFilter),
+      );
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pumpAndSettle();
+      expect(accountSummaryDownloadButton, findsOneWidget);
+      await tester.tap(accountSummaryDownloadButton);
+      await tester.pump();
+
+      verify(
+        () => mockDownloadPaymentAttachmentsBloc.add(
+          DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
+            queryObject: allInvoicesFilter,
+            isMarketPlace: true,
+          ),
+        ),
+      ).called(1);
+
+      await tester.tap(creditsTab);
+      await tester.pumpAndSettle();
+      expect(accountSummaryDownloadButton, findsOneWidget);
+      await tester.tap(accountSummaryDownloadButton);
+      await tester.pump();
+
+      verify(
+        () => mockDownloadPaymentAttachmentsBloc.add(
+          DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
+            queryObject: allCreditsFilter,
+            isMarketPlace: true,
+          ),
+        ),
+      ).called(1);
+
+      await tester.tap(fullSummaryTab);
+      await tester.pumpAndSettle();
+      expect(accountSummaryDownloadButton, findsOneWidget);
+      await tester.tap(accountSummaryDownloadButton);
+      await tester.pump();
+      verify(
+        () => mockDownloadPaymentAttachmentsBloc.add(
+          DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
+            queryObject: fullSummaryFilter,
+            isMarketPlace: true,
+          ),
+        ),
+      ).called(1);
     });
   });
 }

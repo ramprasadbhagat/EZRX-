@@ -16,6 +16,7 @@ class _Export extends StatelessWidget {
                   .allInvoicesBloc(context.isMPPayment)
                   .state
                   .appliedFilter,
+              isMarketPlace: context.isMPPayment,
             ),
           );
 
@@ -28,6 +29,7 @@ class _Export extends StatelessWidget {
                   .allCreditsBloc(context.isMPPayment)
                   .state
                   .appliedFilter,
+              isMarketPlace: context.isMPPayment,
             ),
           );
 
@@ -40,6 +42,7 @@ class _Export extends StatelessWidget {
                   .fullSummaryBloc(context.isMPPayment)
                   .state
                   .appliedFilter,
+              isMarketPlace: context.isMPPayment,
             ),
           );
 

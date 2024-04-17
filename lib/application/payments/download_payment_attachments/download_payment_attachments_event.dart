@@ -8,14 +8,17 @@ class DownloadPaymentAttachmentEvent with _$DownloadPaymentAttachmentEvent {
   }) = _Initialized;
   const factory DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl({
     required AllInvoicesFilter queryObject,
+    required bool isMarketPlace,
   }) = _FetchAllInvoiceUrl;
 
   const factory DownloadPaymentAttachmentEvent.fetchAllCreditUrl({
     required AllCreditsFilter queryObject,
+    required bool isMarketPlace,
   }) = _FetchAllCreditUrl;
 
   const factory DownloadPaymentAttachmentEvent.fetchFullSummaryUrl({
     required FullSummaryFilter queryObject,
+    required bool isMarketPlace,
   }) = _FetchFullSummaryUrl;
 
   const factory DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl() =

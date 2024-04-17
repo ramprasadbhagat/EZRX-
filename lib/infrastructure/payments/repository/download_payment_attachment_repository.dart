@@ -58,6 +58,7 @@ class DownloadPaymentAttachmentRepository
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required AllInvoicesFilter queryObject,
+    required bool isMarketPlace,
   }) async {
     final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
     final customerCode = customerCodeInfo.customerCodeSoldTo;
@@ -77,6 +78,7 @@ class DownloadPaymentAttachmentRepository
         customerCode: customerCode,
         excelFor: 'Debit',
         queryObject: AllInvoicesFilterDto.fromDomain(queryObject).toMapList,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(paymentSummaryStatus);
@@ -90,6 +92,7 @@ class DownloadPaymentAttachmentRepository
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required AllCreditsFilter queryObject,
+    required bool isMarketPlace,
   }) async {
     final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
     final customerCode = customerCodeInfo.customerCodeSoldTo;
@@ -109,6 +112,7 @@ class DownloadPaymentAttachmentRepository
         customerCode: customerCode,
         excelFor: 'Credit',
         queryObject: AllCreditsFilterDto.fromDomain(queryObject).toMapList,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(paymentSummaryStatus);
@@ -122,6 +126,7 @@ class DownloadPaymentAttachmentRepository
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required FullSummaryFilter queryObject,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -138,6 +143,7 @@ class DownloadPaymentAttachmentRepository
         customerCode: customerCodeInfo.customerCodeSoldTo,
         excelFor: 'AccountSummary',
         queryObject: FullSummaryFilterDto.fromDomain(queryObject).toMapList,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(paymentSummaryStatus);

@@ -32,6 +32,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
     required String customerCode,
     required String excelFor,
     required List<Map<String, dynamic>> queryObject,
+    required bool isMarketPlace,
   }) async {
     final queryData = downloadPaymentAttachmentQuery.getFileUrl();
     final request = {
@@ -45,6 +46,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
           'field': 'documentDate',
         },
       ],
+      if (isMarketPlace) 'isMarketPlace': isMarketPlace,
     };
     final res = await httpService.request(
       method: 'POST',

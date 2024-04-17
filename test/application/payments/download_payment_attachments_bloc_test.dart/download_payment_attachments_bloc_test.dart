@@ -59,6 +59,7 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             queryObject: AllInvoicesFilter.defaultFilter(),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => const Left(fakeError),
@@ -67,6 +68,7 @@ void main() {
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
           queryObject: AllInvoicesFilter.defaultFilter(),
+          isMarketPlace: true,
         ),
       ),
       expect: () => [
@@ -107,6 +109,7 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             queryObject: AllInvoicesFilter.defaultFilter(),
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
@@ -126,6 +129,7 @@ void main() {
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
           queryObject: AllInvoicesFilter.defaultFilter(),
+          isMarketPlace: false,
         ),
       ),
       expect: () => [
@@ -164,6 +168,7 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             queryObject: AllCreditsFilter.defaultFilter(),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => const Left(fakeError),
@@ -172,6 +177,7 @@ void main() {
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
           queryObject: AllCreditsFilter.defaultFilter(),
+          isMarketPlace: true,
         ),
       ),
       expect: () => [
@@ -212,6 +218,7 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             queryObject: AllCreditsFilter.defaultFilter(),
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
@@ -231,6 +238,7 @@ void main() {
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
           queryObject: AllCreditsFilter.defaultFilter(),
+          isMarketPlace: false,
         ),
       ),
       expect: () => [
@@ -472,6 +480,7 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             queryObject: FullSummaryFilter.defaultFilter(),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -493,6 +502,7 @@ void main() {
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
           queryObject: FullSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
         ),
       ),
       expect: () => [
@@ -526,6 +536,7 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             queryObject: FullSummaryFilter.defaultFilter(),
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(fakeError),
@@ -534,6 +545,7 @@ void main() {
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchFullSummaryUrl(
           queryObject: FullSummaryFilter.defaultFilter(),
+          isMarketPlace: false,
         ),
       ),
       expect: () => [

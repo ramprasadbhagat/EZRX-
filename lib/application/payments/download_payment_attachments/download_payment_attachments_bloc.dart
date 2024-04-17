@@ -51,6 +51,7 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           customerCodeInfo: state.customerCodeInfo,
           salesOrganization: state.salesOrganization,
           queryObject: event.queryObject,
+          isMarketPlace: event.isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -83,6 +84,7 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           queryObject: event.queryObject,
           customerCodeInfo: state.customerCodeInfo,
           salesOrganization: state.salesOrganization,
+          isMarketPlace: event.isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -115,6 +117,7 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           queryObject: event.queryObject,
           customerCodeInfo: state.customerCodeInfo,
           salesOrganization: state.salesOrganization,
+          isMarketPlace: event.isMarketPlace,
         );
 
         failureOrSuccess.fold(

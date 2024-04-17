@@ -13,6 +13,7 @@ class _AccountStatement extends StatelessWidget {
           previous.isDownloadInProgress != current.isDownloadInProgress &&
           !current.isDownloadInProgress,
       listener: (context, state) {
+        if (!context.router.isTopMost) return;
         state.failureOrSuccessOption.fold(
           () {},
           (either) => either.fold(
