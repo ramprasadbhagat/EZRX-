@@ -23,11 +23,13 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/create_payment_invoice_pdf.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 import 'package:ezrxmobile/presentation/payments/payment_webview/payment_webview_page.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/attention_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/bank_account_section.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/price_text.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/transfer_methods_section.dart';
@@ -65,7 +67,12 @@ part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/pa
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_va_failed.dart';
 
 class PaymentAdviceCreatedPage extends StatelessWidget {
-  const PaymentAdviceCreatedPage({Key? key}) : super(key: key);
+  final bool isMarketPlace;
+
+  const PaymentAdviceCreatedPage({
+    Key? key,
+    required this.isMarketPlace,
+  }) : super(key: key);
 
   static const paymentErrorMessage =
       'Unable to generate payment advice as at least one of the selected invoices/credit notes have already been selected for another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.';
@@ -89,216 +96,226 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NewPaymentBloc, NewPaymentState>(
-      listenWhen: (previous, current) =>
-          previous.isFetchingInvoiceInfoPdf !=
-              current.isFetchingInvoiceInfoPdf ||
-          (previous.isCreatingVirtualAccount !=
-                  current.isCreatingVirtualAccount &&
-              !current.isCreatingVirtualAccount),
-      listener: (context, state) {
-        if (state.canFetchPaymentDetails) {
-          state.failureOrSuccessOption.fold(
-            () {
-              context.read<PaymentSummaryDetailsBloc>().add(
-                    PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-                      details: PaymentSummaryDetails.fromCreateVirtualAccount(
-                        state.createVirtualAccount,
-                      ),
-                    ),
-                  );
-              trackMixpanelEvent(
-                TrackingEvents.successfulPayment,
-                props: {
-                  TrackingProps.paymentAmount: state.amountTotal,
-                  TrackingProps.paymentMethod: state
-                      .selectedPaymentMethod.paymentMethod
-                      .getOrDefaultValue(''),
-                  TrackingProps.paymentDocumentCount:
-                      state.allSelectedItems.length,
-                  TrackingProps.paymentAdviceId: state.createVirtualAccount.id,
-                },
-              );
-              trackClevertapEvent(
-                TrackingEvents.successfulPayment,
-                props: {
-                  TrackingProps.paymentMethod: state
-                      .selectedPaymentMethod.paymentMethod
-                      .getOrDefaultValue(''),
-                },
-              );
-            },
-            (either) => either.fold(
-              (failure) {
-                trackMixpanelEvent(
-                  TrackingEvents.paymentFailure,
-                  props: {
-                    TrackingProps.errorMessage:
-                        'Creating Virtual Account for payment advise failure with error message: ${context.tr(
-                      failure.failureMessage.message,
-                      namedArgs: failure.failureMessage.arguments,
-                    )}',
-                    TrackingProps.paymentMethod: state
-                        .selectedPaymentMethod.paymentMethod
-                        .getOrDefaultValue(''),
-                    TrackingProps.paymentDocumentCount:
-                        state.allSelectedItems.length,
-                  },
-                );
-              },
-              (_) {},
-            ),
-          );
-        }
-
-        if (!state.isFetchingInvoiceInfoPdf) {
-          state.failureOrSuccessOption.fold(
-            () {
-              trackMixpanelEvent(
-                TrackingEvents.generatePaymentAdviceSuccess,
-                props: {
-                  TrackingProps.paymentMethod: state
-                      .selectedPaymentMethod.paymentMethod
-                      .getOrDefaultValue(''),
-                },
-              );
-            },
-            (option) => option.fold(
-              (failure) {
-                trackMixpanelEvent(
-                  TrackingEvents.paymentFailure,
-                  props: {
-                    TrackingProps.errorMessage:
-                        'Generating payment advise failure with error message: ${context.tr(
-                      failure.failureMessage.message,
-                      namedArgs: failure.failureMessage.arguments,
-                    )}',
-                    TrackingProps.paymentMethod: state
-                        .selectedPaymentMethod.paymentMethod
-                        .getOrDefaultValue(''),
-                    TrackingProps.paymentDocumentCount:
-                        state.allSelectedItems.length,
-                  },
-                );
-                trackMixpanelEvent(
-                  TrackingEvents.generatePaymentAdviceFailed,
-                  props: {
-                    TrackingProps.paymentMethod: state
-                        .selectedPaymentMethod.paymentMethod
-                        .getOrDefaultValue(''),
-                    TrackingProps.errorMessage: failure.failureMessage.message,
-                  },
-                );
-
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (r) {},
-            ),
-          );
-        }
-      },
-      buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching ||
-          previous.createVirtualAccountFailed !=
-              current.createVirtualAccountFailed,
-      builder: (context, state) {
-        return BlocListener<NewPaymentBloc, NewPaymentState>(
-          listenWhen: (previous, current) =>
-              previous.isLoading != current.isLoading,
-          listener: (context, state) {
-            if (!state.isLoading) {
-              state.failureOrSuccessOption.fold(
-                () {
-                  context.read<NewPaymentBloc>().add(
-                        const NewPaymentEvent.fetchInvoiceInfoPdf(),
-                      );
-                },
-                (either) => either.fold(
-                  (failure) async {
-                    trackMixpanelEvent(
-                      TrackingEvents.paymentFailure,
-                      props: {
-                        TrackingProps.errorMessage: paymentErrorMessage,
-                        TrackingProps.paymentMethod: state
-                            .selectedPaymentMethod.paymentMethod
-                            .getOrDefaultValue(''),
-                        TrackingProps.paymentDocumentCount:
-                            state.allSelectedItems.length,
-                      },
-                    );
-                    final confirmed = await _showConfirmBottomSheet(context);
-                    if (context.mounted) {
-                      if (confirmed ?? false) {
-                        unawaited(
-                          context.router.pushAndPopUntil(
-                            PaymentSummaryPageRoute(isMarketPlace: false),
-                            predicate: (Route route) =>
-                                route.settings.name == PaymentPageRoute.name,
-                          ),
-                        );
-                      } else {
-                        unawaited(
-                          context.router.pushAndPopUntil(
-                            const NewPaymentPageRoute(),
-                            predicate: (Route route) =>
-                                route.settings.name == PaymentPageRoute.name,
-                          ),
-                        );
-                      }
-                    }
-                  },
-                  (_) {},
-                ),
-              );
-            }
-          },
-          child: Scaffold(
-            appBar: CustomAppBar.commonAppBar(
-              automaticallyImplyLeading: false,
-              leadingWidth: state.canDisplayCrossButton ? null : 5,
-              title: Text(
-                context.tr(state.paymentAdviceGenerateTitle),
-              ),
-              leadingWidget: state.canDisplayCrossButton
-                  ? IconButton(
-                      key: WidgetKeys.closeButton,
-                      onPressed: () => context.popRoute(),
-                      icon: const CircleAvatar(
-                        maxRadius: 16,
-                        backgroundColor: ZPColors.transparent,
-                        child: Icon(
-                          Icons.close,
-                          color: ZPColors.neutralsBlack,
+    return PaymentModule(
+      isMarketPlace: isMarketPlace,
+      child: BlocConsumer<NewPaymentBloc, NewPaymentState>(
+        listenWhen: (previous, current) =>
+            previous.isFetchingInvoiceInfoPdf !=
+                current.isFetchingInvoiceInfoPdf ||
+            (previous.isCreatingVirtualAccount !=
+                    current.isCreatingVirtualAccount &&
+                !current.isCreatingVirtualAccount),
+        listener: (context, state) {
+          if (state.canFetchPaymentDetails) {
+            state.failureOrSuccessOption.fold(
+              () {
+                context.read<PaymentSummaryDetailsBloc>().add(
+                      PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+                        details: PaymentSummaryDetails.fromCreateVirtualAccount(
+                          state.createVirtualAccount,
                         ),
+                        isMarketPlace: context.isMPPayment,
                       ),
-                    )
-                  : const SizedBox.shrink(),
-              customerBlockedOrSuspended: context
-                  .read<EligibilityBloc>()
-                  .state
-                  .customerBlockOrSuspended,
-            ),
-            body: state.createVirtualAccountFailed
-                ? _PaymentVirtualAccountFailed()
-                : Column(
-                    children: [
-                      Expanded(
-                        child: state.isFetching
-                            ? _PaymentAdviceWaiting(
-                                isPaymentGateway: state.selectedPaymentMethod
-                                    .paymentMethod.isPaymentGateway,
-                              )
-                            : const _PaymentAdviceBodySection(),
-                      ),
-                      if (state.selectedPaymentMethod.paymentMethod
-                              .isPaymentGateway ||
-                          !state.isFetching)
-                        const _PaymentAdviceFooterSection(),
-                    ],
+                    );
+                trackMixpanelEvent(
+                  TrackingEvents.successfulPayment,
+                  props: {
+                    TrackingProps.paymentAmount: state.amountTotal,
+                    TrackingProps.paymentMethod: state
+                        .selectedPaymentMethod.paymentMethod
+                        .getOrDefaultValue(''),
+                    TrackingProps.paymentDocumentCount:
+                        state.allSelectedItems.length,
+                    TrackingProps.paymentAdviceId:
+                        state.createVirtualAccount.id,
+                  },
+                );
+                trackClevertapEvent(
+                  TrackingEvents.successfulPayment,
+                  props: {
+                    TrackingProps.paymentMethod: state
+                        .selectedPaymentMethod.paymentMethod
+                        .getOrDefaultValue(''),
+                  },
+                );
+              },
+              (either) => either.fold(
+                (failure) {
+                  trackMixpanelEvent(
+                    TrackingEvents.paymentFailure,
+                    props: {
+                      TrackingProps.errorMessage:
+                          'Creating Virtual Account for payment advise failure with error message: ${context.tr(
+                        failure.failureMessage.message,
+                        namedArgs: failure.failureMessage.arguments,
+                      )}',
+                      TrackingProps.paymentMethod: state
+                          .selectedPaymentMethod.paymentMethod
+                          .getOrDefaultValue(''),
+                      TrackingProps.paymentDocumentCount:
+                          state.allSelectedItems.length,
+                    },
+                  );
+                },
+                (_) {},
+              ),
+            );
+          }
+
+          if (!state.isFetchingInvoiceInfoPdf) {
+            state.failureOrSuccessOption.fold(
+              () {
+                trackMixpanelEvent(
+                  TrackingEvents.generatePaymentAdviceSuccess,
+                  props: {
+                    TrackingProps.paymentMethod: state
+                        .selectedPaymentMethod.paymentMethod
+                        .getOrDefaultValue(''),
+                  },
+                );
+              },
+              (option) => option.fold(
+                (failure) {
+                  trackMixpanelEvent(
+                    TrackingEvents.paymentFailure,
+                    props: {
+                      TrackingProps.errorMessage:
+                          'Generating payment advise failure with error message: ${context.tr(
+                        failure.failureMessage.message,
+                        namedArgs: failure.failureMessage.arguments,
+                      )}',
+                      TrackingProps.paymentMethod: state
+                          .selectedPaymentMethod.paymentMethod
+                          .getOrDefaultValue(''),
+                      TrackingProps.paymentDocumentCount:
+                          state.allSelectedItems.length,
+                    },
+                  );
+                  trackMixpanelEvent(
+                    TrackingEvents.generatePaymentAdviceFailed,
+                    props: {
+                      TrackingProps.paymentMethod: state
+                          .selectedPaymentMethod.paymentMethod
+                          .getOrDefaultValue(''),
+                      TrackingProps.errorMessage:
+                          failure.failureMessage.message,
+                    },
+                  );
+
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (r) {},
+              ),
+            );
+          }
+        },
+        buildWhen: (previous, current) =>
+            previous.isFetching != current.isFetching ||
+            previous.createVirtualAccountFailed !=
+                current.createVirtualAccountFailed,
+        builder: (context, state) {
+          return BlocListener<NewPaymentBloc, NewPaymentState>(
+            listenWhen: (previous, current) =>
+                previous.isLoading != current.isLoading,
+            listener: (context, state) {
+              if (!state.isLoading) {
+                state.failureOrSuccessOption.fold(
+                  () {
+                    context.read<NewPaymentBloc>().add(
+                          const NewPaymentEvent.fetchInvoiceInfoPdf(),
+                        );
+                  },
+                  (either) => either.fold(
+                    (failure) async {
+                      trackMixpanelEvent(
+                        TrackingEvents.paymentFailure,
+                        props: {
+                          TrackingProps.errorMessage: paymentErrorMessage,
+                          TrackingProps.paymentMethod: state
+                              .selectedPaymentMethod.paymentMethod
+                              .getOrDefaultValue(''),
+                          TrackingProps.paymentDocumentCount:
+                              state.allSelectedItems.length,
+                        },
+                      );
+                      final confirmed = await _showConfirmBottomSheet(context);
+                      if (context.mounted) {
+                        if (confirmed ?? false) {
+                          unawaited(
+                            context.router.pushAndPopUntil(
+                              PaymentSummaryPageRoute(
+                                isMarketPlace: context.isMPPayment,
+                              ),
+                              predicate: (Route route) =>
+                                  route.settings.name == PaymentPageRoute.name,
+                            ),
+                          );
+                        } else {
+                          unawaited(
+                            context.router.pushAndPopUntil(
+                              NewPaymentPageRoute(
+                                isMarketPlace: context.isMPPayment,
+                              ),
+                              predicate: (Route route) =>
+                                  route.settings.name == PaymentPageRoute.name,
+                            ),
+                          );
+                        }
+                      }
+                    },
+                    (_) {},
                   ),
-          ),
-        );
-      },
+                );
+              }
+            },
+            child: Scaffold(
+              appBar: CustomAppBar.commonAppBar(
+                automaticallyImplyLeading: false,
+                leadingWidth: state.canDisplayCrossButton ? null : 5,
+                title: Text(
+                  context.tr(state.paymentAdviceGenerateTitle),
+                ),
+                leadingWidget: state.canDisplayCrossButton
+                    ? IconButton(
+                        key: WidgetKeys.closeButton,
+                        onPressed: () => context.popRoute(),
+                        icon: const CircleAvatar(
+                          maxRadius: 16,
+                          backgroundColor: ZPColors.transparent,
+                          child: Icon(
+                            Icons.close,
+                            color: ZPColors.neutralsBlack,
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                customerBlockedOrSuspended: context
+                    .read<EligibilityBloc>()
+                    .state
+                    .customerBlockOrSuspended,
+              ),
+              body: state.createVirtualAccountFailed
+                  ? _PaymentVirtualAccountFailed()
+                  : Column(
+                      children: [
+                        Expanded(
+                          child: state.isFetching
+                              ? _PaymentAdviceWaiting(
+                                  isPaymentGateway: state.selectedPaymentMethod
+                                      .paymentMethod.isPaymentGateway,
+                                )
+                              : const _PaymentAdviceBodySection(),
+                        ),
+                        if (state.selectedPaymentMethod.paymentMethod
+                                .isPaymentGateway ||
+                            !state.isFetching)
+                          const _PaymentAdviceFooterSection(),
+                      ],
+                    ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

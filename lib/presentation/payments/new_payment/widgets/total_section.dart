@@ -79,7 +79,9 @@ class _TotalAmountSection extends StatelessWidget {
                             );
                         unawaited(
                           context.router.pushAndPopUntil(
-                            const PaymentAdviceCreatedPageRoute(),
+                            PaymentAdviceCreatedPageRoute(
+                              isMarketPlace: context.isMPPayment,
+                            ),
                             predicate: (Route route) =>
                                 route.settings.name == PaymentPageRoute.name,
                           ),

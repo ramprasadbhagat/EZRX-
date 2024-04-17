@@ -191,7 +191,11 @@ class _NewPaymentButton extends StatelessWidget {
           context.read<AvailableCreditFilterBloc>().add(
                 const AvailableCreditFilterEvent.initialize(),
               );
-          context.router.push(const NewPaymentPageRoute());
+          context.router.push(
+            NewPaymentPageRoute(
+              isMarketPlace: context.isMPPayment,
+            ),
+          );
         } else {
           _showConfirmBottomSheet(context);
         }

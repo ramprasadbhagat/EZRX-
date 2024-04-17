@@ -121,10 +121,15 @@ class _NotificationList extends StatelessWidget {
                 paymentBatchAdditionalInfo:
                     notificationData.paymentBatchAdditionalInfo,
               ),
+              isMarketPlace: false,
             ),
           );
       //Navigate to Payment Detail Page
-      context.router.push(const PaymentSummaryDetailsPageRoute());
+      context.router.push(
+        PaymentSummaryDetailsPageRoute(
+          isMarketPlace: false,
+        ),
+      );
     } else {
       CustomSnackBar(
         icon: const Icon(

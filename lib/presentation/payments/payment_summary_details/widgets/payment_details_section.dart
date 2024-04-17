@@ -33,6 +33,7 @@ class _PaymentDetailsSection extends StatelessWidget {
                         PaymentSummaryDetailsEvent
                             .fetchPaymentSummaryDetailsInfo(
                           details: state.details,
+                          isMarketPlace: context.isMPPayment,
                         ),
                       );
                 },

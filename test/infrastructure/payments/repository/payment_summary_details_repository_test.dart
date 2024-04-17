@@ -61,6 +61,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             details: details,
             salesOrganization: fakeIDSalesOrganisation,
+            isMarketPlace: true,
           );
           expect(result.isRight(), true);
         },
@@ -75,6 +76,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             details: details,
             salesOrganization: fakeIDSalesOrganisation,
+            isMarketPlace: false,
           );
           expect(result.isLeft(), true);
         },
@@ -94,6 +96,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             details: details,
             salesOrganization: fakeIDSalesOrganisation,
+            isMarketPlace: false,
           );
           expect(result.isLeft(), true);
         },
@@ -116,6 +119,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             details: details,
             salesOrganization: fakeIDSalesOrganisation,
+            isMarketPlace: true,
           );
           expect(result.isRight(), true);
         },
@@ -132,6 +136,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             details: details,
             salesOrganization: fakeEmptySalesOrganisation,
+            isMarketPlace: true,
           );
 
           expect(result.isRight(), true);
@@ -147,6 +152,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             details: details,
             salesOrganization: fakeEmptySalesOrganisation,
+            isMarketPlace: false,
           );
 
           expect(result.isLeft(), true);
@@ -162,6 +168,7 @@ void main() {
               customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
               filterBy: PaymentSummaryDetailsDto.fromDomain(details).filterBy,
               salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+              isMarketPlace: true,
             ),
           ).thenAnswer(
             (_) async =>
@@ -171,6 +178,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             details: details,
             salesOrganization: fakeVNSalesOrganisation,
+            isMarketPlace: true,
           );
 
           expect(result.isRight(), true);
@@ -185,12 +193,14 @@ void main() {
               customerCode: CustomerCodeInfo.empty().customerCodeSoldTo,
               filterBy: PaymentSummaryDetailsDto.fromDomain(details).filterBy,
               salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+              isMarketPlace: false,
             ),
           ).thenThrow(MockException());
           final result = await repository.fetchPaymentSummaryDetailsInfo(
             customerCodeInfo: CustomerCodeInfo.empty(),
             details: details,
             salesOrganization: fakeVNSalesOrganisation,
+            isMarketPlace: false,
           );
 
           expect(result.isLeft(), true);

@@ -121,6 +121,7 @@ class _PaymentAdviceNextStep extends StatelessWidget {
                                     PaymentSummaryDetails.fromPaymentInvoicePDF(
                                   paymentInvoicePDF,
                                 ),
+                                isMarketPlace: context.isMPPayment,
                               ),
                             );
 

@@ -27,6 +27,7 @@ class _PaymentAdviceButton extends StatelessWidget {
               context.read<PaymentSummaryDetailsBloc>().add(
                     PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
                       details: state.details,
+                      isMarketPlace: context.isMPPayment,
                     ),
                   );
               context.paymentSummaryBloc(false).add(

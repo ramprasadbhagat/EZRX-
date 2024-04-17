@@ -12,7 +12,7 @@ part of 'payment_summary_details_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PaymentSummaryDetailsDto _$PaymentSummaryDetailsDtoFromJson(
     Map<String, dynamic> json) {
@@ -270,12 +270,12 @@ class _$PaymentSummaryDetailsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentSummaryDetailsDtoCopyWith<$Res>
+abstract class _$$PaymentSummaryDetailsDtoImplCopyWith<$Res>
     implements $PaymentSummaryDetailsDtoCopyWith<$Res> {
-  factory _$$_PaymentSummaryDetailsDtoCopyWith(
-          _$_PaymentSummaryDetailsDto value,
-          $Res Function(_$_PaymentSummaryDetailsDto) then) =
-      __$$_PaymentSummaryDetailsDtoCopyWithImpl<$Res>;
+  factory _$$PaymentSummaryDetailsDtoImplCopyWith(
+          _$PaymentSummaryDetailsDtoImpl value,
+          $Res Function(_$PaymentSummaryDetailsDtoImpl) then) =
+      __$$PaymentSummaryDetailsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -319,12 +319,13 @@ abstract class _$$_PaymentSummaryDetailsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentSummaryDetailsDtoCopyWithImpl<$Res>
+class __$$PaymentSummaryDetailsDtoImplCopyWithImpl<$Res>
     extends _$PaymentSummaryDetailsDtoCopyWithImpl<$Res,
-        _$_PaymentSummaryDetailsDto>
-    implements _$$_PaymentSummaryDetailsDtoCopyWith<$Res> {
-  __$$_PaymentSummaryDetailsDtoCopyWithImpl(_$_PaymentSummaryDetailsDto _value,
-      $Res Function(_$_PaymentSummaryDetailsDto) _then)
+        _$PaymentSummaryDetailsDtoImpl>
+    implements _$$PaymentSummaryDetailsDtoImplCopyWith<$Res> {
+  __$$PaymentSummaryDetailsDtoImplCopyWithImpl(
+      _$PaymentSummaryDetailsDtoImpl _value,
+      $Res Function(_$PaymentSummaryDetailsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -356,7 +357,7 @@ class __$$_PaymentSummaryDetailsDtoCopyWithImpl<$Res>
     Object? paymentBatchAdditionalInfo = null,
     Object? filterBy = null,
   }) {
-    return _then(_$_PaymentSummaryDetailsDto(
+    return _then(_$PaymentSummaryDetailsDtoImpl(
       paymentID: null == paymentID
           ? _value.paymentID
           : paymentID // ignore: cast_nullable_to_non_nullable
@@ -463,8 +464,8 @@ class __$$_PaymentSummaryDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentSummaryDetailsDto extends _PaymentSummaryDetailsDto {
-  const _$_PaymentSummaryDetailsDto(
+class _$PaymentSummaryDetailsDtoImpl extends _PaymentSummaryDetailsDto {
+  const _$PaymentSummaryDetailsDtoImpl(
       {@JsonKey(name: 'paymentID', defaultValue: '') required this.paymentID,
       @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
       required this.valueDate,
@@ -510,8 +511,8 @@ class _$_PaymentSummaryDetailsDto extends _PaymentSummaryDetailsDto {
       : _filterBy = filterBy,
         super._();
 
-  factory _$_PaymentSummaryDetailsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentSummaryDetailsDtoFromJson(json);
+  factory _$PaymentSummaryDetailsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentSummaryDetailsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'paymentID', defaultValue: '')
@@ -600,10 +601,10 @@ class _$_PaymentSummaryDetailsDto extends _PaymentSummaryDetailsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentSummaryDetailsDto &&
+            other is _$PaymentSummaryDetailsDtoImpl &&
             (identical(other.paymentID, paymentID) ||
                 other.paymentID == paymentID) &&
             (identical(other.valueDate, valueDate) ||
@@ -691,13 +692,13 @@ class _$_PaymentSummaryDetailsDto extends _PaymentSummaryDetailsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentSummaryDetailsDtoCopyWith<_$_PaymentSummaryDetailsDto>
-      get copyWith => __$$_PaymentSummaryDetailsDtoCopyWithImpl<
-          _$_PaymentSummaryDetailsDto>(this, _$identity);
+  _$$PaymentSummaryDetailsDtoImplCopyWith<_$PaymentSummaryDetailsDtoImpl>
+      get copyWith => __$$PaymentSummaryDetailsDtoImplCopyWithImpl<
+          _$PaymentSummaryDetailsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentSummaryDetailsDtoToJson(
+    return _$$PaymentSummaryDetailsDtoImplToJson(
       this,
     );
   }
@@ -750,11 +751,11 @@ abstract class _PaymentSummaryDetailsDto extends PaymentSummaryDetailsDto {
       required final String accountingDocExternalReference,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
       required final String paymentBatchAdditionalInfo,
-      final Map<String, dynamic> filterBy}) = _$_PaymentSummaryDetailsDto;
+      final Map<String, dynamic> filterBy}) = _$PaymentSummaryDetailsDtoImpl;
   const _PaymentSummaryDetailsDto._() : super._();
 
   factory _PaymentSummaryDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$_PaymentSummaryDetailsDto.fromJson;
+      _$PaymentSummaryDetailsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'paymentID', defaultValue: '')
@@ -832,6 +833,6 @@ abstract class _PaymentSummaryDetailsDto extends PaymentSummaryDetailsDto {
   Map<String, dynamic> get filterBy;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentSummaryDetailsDtoCopyWith<_$_PaymentSummaryDetailsDto>
+  _$$PaymentSummaryDetailsDtoImplCopyWith<_$PaymentSummaryDetailsDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

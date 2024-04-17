@@ -144,7 +144,9 @@ void main() {
           create: (context) => mockPaymentSummaryBloc,
         ),
       ],
-      child: const PaymentAdviceCreatedPage(),
+      child: const PaymentAdviceCreatedPage(
+        isMarketPlace: false,
+      ),
     );
   }
 
@@ -652,6 +654,7 @@ void main() {
               details: PaymentSummaryDetails.fromPaymentInvoicePDF(
                 PaymentInvoiceInfoPdf.empty(),
               ),
+              isMarketPlace: false,
             ),
           ),
         ).called(1);
@@ -709,6 +712,7 @@ void main() {
                 accountingDocExternalReference: '',
                 paymentItems: paymentList,
               ),
+              isMarketPlace: false,
             ),
           ),
         ).called(1);
@@ -880,7 +884,9 @@ void main() {
         await tester.pumpAndSettle();
         when(
           () => autoRouterMock.pushAndPopUntil(
-            const NewPaymentPageRoute(),
+            NewPaymentPageRoute(
+              isMarketPlace: false,
+            ),
             predicate: any(named: 'predicate'),
           ),
         ).thenAnswer((invocation) => Future.value());
@@ -990,6 +996,7 @@ void main() {
           () => paymentSummaryDetailsBlocMock.add(
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
               details: PaymentSummaryDetails.empty(),
+              isMarketPlace: true,
             ),
           ),
         );
@@ -1058,6 +1065,7 @@ void main() {
                 paymentID: StringValue(createVirtualAccount.id),
                 zzAdvice: StringValue(createVirtualAccount.id),
               ),
+              isMarketPlace: false,
             ),
           ),
         ).called(1);

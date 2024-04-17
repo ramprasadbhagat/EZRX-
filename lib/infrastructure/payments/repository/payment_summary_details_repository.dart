@@ -31,6 +31,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required PaymentSummaryDetails details,
+    required bool isMarketPlace,
   }) {
     final salesOrg = salesOrganization.salesOrg;
     final customerCode = customerCodeInfo.customerCodeSoldTo;
@@ -45,6 +46,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
             salesOrg: salesOrg,
             customerCode: customerCode,
             filterBy: PaymentSummaryDetailsDto.fromDomain(details).filterBy,
+            isMarketPlace: isMarketPlace,
           );
   }
 
@@ -79,6 +81,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
     required SalesOrg salesOrg,
     required String customerCode,
     required Map<String, dynamic> filterBy,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -94,6 +97,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
         customerCode: customerCode,
         salesOrg: salesOrg.getOrCrash(),
         filterBy: filterBy,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(details);

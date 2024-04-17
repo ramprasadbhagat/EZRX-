@@ -20,6 +20,8 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/price_text.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -38,7 +40,11 @@ part 'package:ezrxmobile/presentation/payments/new_payment/widgets/new_payment_f
 part 'package:ezrxmobile/presentation/payments/new_payment/widgets/select_all_section.dart';
 
 class NewPaymentPage extends StatelessWidget {
-  const NewPaymentPage({Key? key}) : super(key: key);
+  final bool isMarketPlace;
+  const NewPaymentPage({
+    Key? key,
+    required this.isMarketPlace,
+  }) : super(key: key);
 
   List<PageRouteInfo<void>> _getTabs({
     bool isID = false,
@@ -56,43 +62,48 @@ class NewPaymentPage extends StatelessWidget {
 
     final tabs = _getTabs(isID: isID);
 
-    return AutoTabsRouter.tabBar(
-      routes: tabs,
-      physics: const NeverScrollableScrollPhysics(),
-      builder: (context, child, tabController) {
-        final step = tabController.index + 1;
+    return PaymentModule(
+      isMarketPlace: isMarketPlace,
+      child: AutoTabsRouter.tabBar(
+        routes: tabs,
+        physics: const NeverScrollableScrollPhysics(),
+        builder: (context, child, tabController) {
+          final step = tabController.index + 1;
 
-        return Scaffold(
-          key: WidgetKeys.newPaymentPage,
-          appBar: CustomAppBar.commonAppBar(
-            title: Text(
-              context.tr('New payment'),
+          return Scaffold(
+            key: WidgetKeys.newPaymentPage,
+            appBar: CustomAppBar.commonAppBar(
+              title: Text(
+                context.tr('New payment'),
+              ),
+              customerBlockedOrSuspended: context
+                  .read<EligibilityBloc>()
+                  .state
+                  .customerBlockOrSuspended,
+              leadingWidget: _PreviousButton(
+                tabController: tabController,
+                step: step,
+              ),
             ),
-            customerBlockedOrSuspended:
-                context.read<EligibilityBloc>().state.customerBlockOrSuspended,
-            leadingWidget: _PreviousButton(
-              tabController: tabController,
-              step: step,
+            body: AnnouncementBanner(
+              currentPath: context.router.currentPath,
+              child: Column(
+                children: [
+                  _NewPaymentBody(
+                    currentStep: step,
+                    totalTabs: tabs.length,
+                    child: child,
+                  ),
+                  _NewPaymentFooter(
+                    currentStep: step,
+                    tabController: tabController,
+                  ),
+                ],
+              ),
             ),
-          ),
-          body: AnnouncementBanner(
-            currentPath: context.router.currentPath,
-            child: Column(
-              children: [
-                _NewPaymentBody(
-                  currentStep: step,
-                  totalTabs: tabs.length,
-                  child: child,
-                ),
-                _NewPaymentFooter(
-                  currentStep: step,
-                  tabController: tabController,
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

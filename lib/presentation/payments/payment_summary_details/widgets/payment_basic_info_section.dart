@@ -31,6 +31,15 @@ class _PaymentBasicInfoSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (context.isMPPayment)
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8.0),
+                  decoration: BoxDecoration(
+                    color: ZPColors.white,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const MarketPlaceRectangleLogo(),
+                ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -513,6 +513,7 @@ void main() {
               paymentAmount: 250,
               status: FilterStatus('In Progress'),
             ),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);

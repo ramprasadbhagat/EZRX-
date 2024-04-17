@@ -394,7 +394,11 @@ void main() {
         ]),
       );
       when(
-        () => autoRouterMock.push(const NewPaymentPageRoute()),
+        () => autoRouterMock.push(
+          NewPaymentPageRoute(
+            isMarketPlace: false,
+          ),
+        ),
       ).thenAnswer((invocation) => Future.value());
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
@@ -436,7 +440,11 @@ void main() {
         ]),
       );
       when(
-        () => autoRouterMock.push(const NewPaymentPageRoute()),
+        () => autoRouterMock.push(
+          NewPaymentPageRoute(
+            isMarketPlace: false,
+          ),
+        ),
       ).thenAnswer((invocation) => Future.value());
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
@@ -473,7 +481,11 @@ void main() {
         ]),
       );
       when(
-        () => autoRouterMock.push(const NewPaymentPageRoute()),
+        () => autoRouterMock.push(
+          NewPaymentPageRoute(
+            isMarketPlace: false,
+          ),
+        ),
       ).thenAnswer((invocation) => Future.value());
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
@@ -512,7 +524,11 @@ void main() {
         ]),
       );
       when(
-        () => autoRouterMock.push(const NewPaymentPageRoute()),
+        () => autoRouterMock.push(
+          NewPaymentPageRoute(
+            isMarketPlace: false,
+          ),
+        ),
       ).thenAnswer((invocation) => Future.value());
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();

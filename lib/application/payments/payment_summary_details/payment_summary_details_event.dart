@@ -10,6 +10,7 @@ class PaymentSummaryDetailsEvent with _$PaymentSummaryDetailsEvent {
   }) = _Initialized;
   const factory PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo({
     required PaymentSummaryDetails details,
+    required bool isMarketPlace,
   }) = _FetchPaymentSummaryDetailsEvent;
 
   const factory PaymentSummaryDetailsEvent.fetchPaymentSummaryList() =

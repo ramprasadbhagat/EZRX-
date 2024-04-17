@@ -929,13 +929,19 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               redirectPaymentDetail: (paymentIdentifierInfo) {
                 if (eligibilityState.isPaymentEnabled) {
+                  //TODO: Implement deeplink for payment summary in marketplace later
                   context.read<PaymentSummaryDetailsBloc>().add(
                         PaymentSummaryDetailsEvent
                             .fetchPaymentSummaryDetailsInfo(
                           details: paymentIdentifierInfo,
+                          isMarketPlace: false,
                         ),
                       );
-                  context.router.push(const PaymentSummaryDetailsPageRoute());
+                  context.router.push(
+                    PaymentSummaryDetailsPageRoute(
+                      isMarketPlace: false,
+                    ),
+                  );
                 } else {
                   noAccessSnackbar.show(context);
                 }

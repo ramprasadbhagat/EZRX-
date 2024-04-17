@@ -12,6 +12,7 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -20,6 +21,7 @@ import 'package:ezrxmobile/presentation/payments/widgets/attention_section.dart'
 import 'package:ezrxmobile/presentation/payments/widgets/bank_account_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/bank_info.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/detail_info_section.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/transfer_methods_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -40,52 +42,59 @@ part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/p
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/qr_code_transfer_section.dart';
 
 class PaymentSummaryDetailsPage extends StatelessWidget {
+  final bool isMarketPlace;
+
   const PaymentSummaryDetailsPage({
     Key? key,
+    required this.isMarketPlace,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
-      listenWhen: (previous, current) =>
-          previous.isLoading != current.isLoading &&
-          previous.failureOrSuccessOption != current.failureOrSuccessOption,
-      listener: (context, state) => state.failureOrSuccessOption.fold(
-        () {},
-        (either) => either.fold(
-          (failure) {
-            ErrorUtils.handleApiFailure(context, failure);
-          },
-          (_) {},
-        ),
-      ),
-      child: Scaffold(
-        key: WidgetKeys.paymentSummaryDetailsPage,
-        appBar: CustomAppBar.commonAppBar(
-          title: Text(
-            context.tr('Payment details'),
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-          customerBlockedOrSuspended:
-              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
-          leadingWidget: IconButton(
-            key: WidgetKeys.paymentSummaryDetailsBackButton,
-            icon: const Icon(Icons.arrow_back_ios_sharp),
-            onPressed: () => context.router.pop(),
+    return PaymentModule(
+      isMarketPlace: isMarketPlace,
+      child:
+          BlocListener<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
+        listenWhen: (previous, current) =>
+            previous.isLoading != current.isLoading &&
+            previous.failureOrSuccessOption != current.failureOrSuccessOption,
+        listener: (context, state) => state.failureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              ErrorUtils.handleApiFailure(context, failure);
+            },
+            (_) {},
           ),
         ),
-        bottomNavigationBar: const _PaymentAdviceButton(),
-        body: AnnouncementBanner(
-          currentPath: context.router.currentPath,
-          child: ListView(
-            key: WidgetKeys.scrollList,
-            children: const [
-              _PaymentDetailsSection(),
-              _PaymentSummarySection(),
-              _PaymentItemSection(),
-              SizedBox(
-                height: 16,
-              ),
-            ],
+        child: Scaffold(
+          key: WidgetKeys.paymentSummaryDetailsPage,
+          appBar: CustomAppBar.commonAppBar(
+            title: Text(
+              context.tr('Payment details'),
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            customerBlockedOrSuspended:
+                context.read<EligibilityBloc>().state.customerBlockOrSuspended,
+            leadingWidget: IconButton(
+              key: WidgetKeys.paymentSummaryDetailsBackButton,
+              icon: const Icon(Icons.arrow_back_ios_sharp),
+              onPressed: () => context.router.pop(),
+            ),
+          ),
+          bottomNavigationBar: const _PaymentAdviceButton(),
+          body: AnnouncementBanner(
+            currentPath: context.router.currentPath,
+            child: ListView(
+              key: WidgetKeys.scrollList,
+              children: const [
+                _PaymentDetailsSection(),
+                _PaymentSummarySection(),
+                _PaymentItemSection(),
+                SizedBox(
+                  height: 16,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -67,10 +67,13 @@ class _PaymentSummaryItem extends StatelessWidget {
           context.read<PaymentSummaryDetailsBloc>().add(
                 PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
                   details: details,
+                  isMarketPlace: context.isMPPayment,
                 ),
               );
           context.router.push(
-            const PaymentSummaryDetailsPageRoute(),
+            PaymentSummaryDetailsPageRoute(
+              isMarketPlace: context.isMPPayment,
+            ),
           );
         },
         contentPadding: const EdgeInsets.symmetric(

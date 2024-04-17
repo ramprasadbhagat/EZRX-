@@ -366,9 +366,13 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     PaymentSummaryDetailsPageRoute.name: (routeData) {
+      final args = routeData.argsAs<PaymentSummaryDetailsPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i31.PaymentSummaryDetailsPage(),
+        child: _i31.PaymentSummaryDetailsPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     ScanMaterialInfoRoute.name: (routeData) {
@@ -410,9 +414,13 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     NewPaymentPageRoute.name: (routeData) {
+      final args = routeData.argsAs<NewPaymentPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i37.NewPaymentPage(),
+        child: _i37.NewPaymentPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     StatementAccountsPageRoute.name: (routeData) {
@@ -426,9 +434,13 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     PaymentAdviceCreatedPageRoute.name: (routeData) {
+      final args = routeData.argsAs<PaymentAdviceCreatedPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i39.PaymentAdviceCreatedPage(),
+        child: _i39.PaymentAdviceCreatedPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     PaymentCompletedPageRoute.name: (routeData) {
@@ -1679,14 +1691,37 @@ class ReturnRootRoute extends _i77.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i31.PaymentSummaryDetailsPage]
-class PaymentSummaryDetailsPageRoute extends _i77.PageRouteInfo<void> {
-  const PaymentSummaryDetailsPageRoute()
-      : super(
+class PaymentSummaryDetailsPageRoute
+    extends _i77.PageRouteInfo<PaymentSummaryDetailsPageRouteArgs> {
+  PaymentSummaryDetailsPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           PaymentSummaryDetailsPageRoute.name,
           path: 'payments/payment_summary/payment_summary_details',
+          args: PaymentSummaryDetailsPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'PaymentSummaryDetailsPageRoute';
+}
+
+class PaymentSummaryDetailsPageRouteArgs {
+  const PaymentSummaryDetailsPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'PaymentSummaryDetailsPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for
@@ -1797,15 +1832,38 @@ class PaymentWebviewPageRoute extends _i77.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i37.NewPaymentPage]
-class NewPaymentPageRoute extends _i77.PageRouteInfo<void> {
-  const NewPaymentPageRoute({List<_i77.PageRouteInfo>? children})
-      : super(
+class NewPaymentPageRoute extends _i77.PageRouteInfo<NewPaymentPageRouteArgs> {
+  NewPaymentPageRoute({
+    List<_i77.PageRouteInfo>? children,
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           NewPaymentPageRoute.name,
           path: 'payments/new_payment',
           initialChildren: children,
+          args: NewPaymentPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'NewPaymentPageRoute';
+}
+
+class NewPaymentPageRouteArgs {
+  const NewPaymentPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'NewPaymentPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for
@@ -1845,14 +1903,37 @@ class StatementAccountsPageRouteArgs {
 
 /// generated route for
 /// [_i39.PaymentAdviceCreatedPage]
-class PaymentAdviceCreatedPageRoute extends _i77.PageRouteInfo<void> {
-  const PaymentAdviceCreatedPageRoute()
-      : super(
+class PaymentAdviceCreatedPageRoute
+    extends _i77.PageRouteInfo<PaymentAdviceCreatedPageRouteArgs> {
+  PaymentAdviceCreatedPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           PaymentAdviceCreatedPageRoute.name,
           path: 'payments/payment_advice_created',
+          args: PaymentAdviceCreatedPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'PaymentAdviceCreatedPageRoute';
+}
+
+class PaymentAdviceCreatedPageRouteArgs {
+  const PaymentAdviceCreatedPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'PaymentAdviceCreatedPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for

@@ -42,6 +42,7 @@ class _PaymentAdviceBodyAPLSection extends StatelessWidget {
                         PaymentSummaryDetailsEvent
                             .fetchPaymentSummaryDetailsInfo(
                           details: state.details,
+                          isMarketPlace: context.isMPPayment,
                         ),
                       );
                 },

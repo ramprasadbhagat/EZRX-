@@ -21,6 +21,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
@@ -32,6 +33,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/mock_other.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -102,6 +104,40 @@ void main() {
       child: const SizedBox(),
     );
   });
+
+  Future getWidget(tester, {bool isMarketPlace = false}) async {
+    return tester.pumpWidget(
+      WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<AuthBloc>(
+            create: (context) => mockAuthBloc,
+          ),
+          BlocProvider<PaymentSummaryDetailsBloc>(
+            create: (context) => mockPaymentSummaryDetailsBloc,
+          ),
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => mockSalesOrgBloc,
+          ),
+          BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
+          BlocProvider<AnnouncementBloc>(
+            create: (context) => mockAnnouncementBloc,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => mockCustomerCodeBloc,
+          ),
+          BlocProvider<ZPPaymentSummaryBloc>(
+            create: (context) => paymentSummaryBloc,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+        ],
+        child: PaymentSummaryDetailsPage(isMarketPlace: isMarketPlace),
+      ),
+    );
+  }
 
   group('Payment Summary Details Page', () {
     setUp(() {
@@ -179,7 +215,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pump();
@@ -225,7 +263,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -266,7 +306,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -320,7 +362,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -473,7 +517,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -541,7 +587,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: false,
+          ),
         ),
       );
       await tester.pump();
@@ -550,6 +598,7 @@ void main() {
         () => mockPaymentSummaryDetailsBloc.add(
           PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
             details: mockPaymentDetails,
+            isMarketPlace: false,
           ),
         ),
       );
@@ -608,7 +657,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -633,7 +684,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -654,7 +707,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -676,7 +731,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -703,7 +760,9 @@ void main() {
 
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -733,7 +792,9 @@ void main() {
         );
         await tester.pumpWidget(
           getWUT(
-            child: const PaymentSummaryDetailsPage(),
+            child: const PaymentSummaryDetailsPage(
+              isMarketPlace: true,
+            ),
           ),
         );
         await tester.pumpAndSettle();
@@ -757,7 +818,9 @@ void main() {
       );
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pump();
@@ -802,7 +865,9 @@ void main() {
       );
       await tester.pumpWidget(
         getWUT(
-          child: const PaymentSummaryDetailsPage(),
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: true,
+          ),
         ),
       );
       await tester.pump();
@@ -818,6 +883,20 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets(' -> Find marketplace logo', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial()
+            .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+      );
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        PaymentSummaryDetailsState.initial(),
+      );
+      await getWidget(tester, isMarketPlace: true);
+      final mpLogo = find.byType(MarketPlaceRectangleLogo);
+      await tester.pump();
+      expect(mpLogo, findsOne);
     });
   });
 }

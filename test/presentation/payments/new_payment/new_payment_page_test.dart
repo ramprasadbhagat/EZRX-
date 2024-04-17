@@ -343,7 +343,9 @@ void main() {
           create: (context) => bankInAccountsBlocMock,
         ),
       ],
-      child: const NewPaymentPage(),
+      child: const NewPaymentPage(
+        isMarketPlace: false,
+      ),
     );
   }
 

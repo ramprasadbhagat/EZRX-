@@ -122,6 +122,7 @@ void main() {
             salesOrganization: fakeIDSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             details: details,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(details),
@@ -142,6 +143,7 @@ void main() {
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
           details: details,
+          isMarketPlace: true,
         ),
       ),
       expect: () => [
@@ -193,6 +195,7 @@ void main() {
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             details: details,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(details),
@@ -215,6 +218,7 @@ void main() {
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
           details: details,
+          isMarketPlace: true,
         ),
       ),
       skip: 4,
@@ -257,6 +261,7 @@ void main() {
             details: details.copyWith(
               paymentBatchAdditionalInfo: StringValue(''),
             ),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(details),
@@ -281,6 +286,7 @@ void main() {
           details: details.copyWith(
             paymentBatchAdditionalInfo: StringValue(''),
           ),
+          isMarketPlace: true,
         ),
       ),
       skip: 5,
@@ -313,6 +319,7 @@ void main() {
             details: details.copyWith(
               paymentBatchAdditionalInfo: StringValue(''),
             ),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -353,6 +360,7 @@ void main() {
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
           details:
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
+          isMarketPlace: true,
         ),
       ),
       expect: () => [
@@ -428,6 +436,7 @@ void main() {
             details: details.copyWith(
               paymentBatchAdditionalInfo: StringValue(''),
             ),
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),
@@ -452,6 +461,7 @@ void main() {
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
           details:
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
+          isMarketPlace: false,
         ),
       ),
       skip: 1,

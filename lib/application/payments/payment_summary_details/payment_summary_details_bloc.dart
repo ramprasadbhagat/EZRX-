@@ -62,6 +62,7 @@ class PaymentSummaryDetailsBloc
             customerCodeInfo: state.customerCodeInfo,
             salesOrganization: state.salesOrganization,
             details: event.details,
+            isMarketPlace: event.isMarketPlace,
           );
           failureOrSuccess.fold(
             (failure) {

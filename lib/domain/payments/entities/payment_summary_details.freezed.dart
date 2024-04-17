@@ -12,7 +12,7 @@ part of 'payment_summary_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentSummaryDetails {
@@ -229,11 +229,12 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
+abstract class _$$PaymentSummaryDetailsImplCopyWith<$Res>
     implements $PaymentSummaryDetailsCopyWith<$Res> {
-  factory _$$_PaymentSummaryDetailsCopyWith(_$_PaymentSummaryDetails value,
-          $Res Function(_$_PaymentSummaryDetails) then) =
-      __$$_PaymentSummaryDetailsCopyWithImpl<$Res>;
+  factory _$$PaymentSummaryDetailsImplCopyWith(
+          _$PaymentSummaryDetailsImpl value,
+          $Res Function(_$PaymentSummaryDetailsImpl) then) =
+      __$$PaymentSummaryDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -265,11 +266,12 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
-    extends _$PaymentSummaryDetailsCopyWithImpl<$Res, _$_PaymentSummaryDetails>
-    implements _$$_PaymentSummaryDetailsCopyWith<$Res> {
-  __$$_PaymentSummaryDetailsCopyWithImpl(_$_PaymentSummaryDetails _value,
-      $Res Function(_$_PaymentSummaryDetails) _then)
+class __$$PaymentSummaryDetailsImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsCopyWithImpl<$Res,
+        _$PaymentSummaryDetailsImpl>
+    implements _$$PaymentSummaryDetailsImplCopyWith<$Res> {
+  __$$PaymentSummaryDetailsImplCopyWithImpl(_$PaymentSummaryDetailsImpl _value,
+      $Res Function(_$PaymentSummaryDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -301,7 +303,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
     Object? accountingDocExternalReference = null,
     Object? paymentItems = null,
   }) {
-    return _then(_$_PaymentSummaryDetails(
+    return _then(_$PaymentSummaryDetailsImpl(
       paymentID: null == paymentID
           ? _value.paymentID
           : paymentID // ignore: cast_nullable_to_non_nullable
@@ -408,8 +410,8 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
-  const _$_PaymentSummaryDetails(
+class _$PaymentSummaryDetailsImpl extends _PaymentSummaryDetails {
+  const _$PaymentSummaryDetailsImpl(
       {required this.paymentID,
       required this.paymentDate,
       required this.paymentAmount,
@@ -500,10 +502,10 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentSummaryDetails &&
+            other is _$PaymentSummaryDetailsImpl &&
             (identical(other.paymentID, paymentID) ||
                 other.paymentID == paymentID) &&
             (identical(other.paymentDate, paymentDate) ||
@@ -591,9 +593,9 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentSummaryDetailsCopyWith<_$_PaymentSummaryDetails> get copyWith =>
-      __$$_PaymentSummaryDetailsCopyWithImpl<_$_PaymentSummaryDetails>(
-          this, _$identity);
+  _$$PaymentSummaryDetailsImplCopyWith<_$PaymentSummaryDetailsImpl>
+      get copyWith => __$$PaymentSummaryDetailsImplCopyWithImpl<
+          _$PaymentSummaryDetailsImpl>(this, _$identity);
 }
 
 abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
@@ -623,7 +625,7 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
           required final StringValue paymentBatchAdditionalInfo,
           required final String accountingDocExternalReference,
           required final List<PaymentItem> paymentItems}) =
-      _$_PaymentSummaryDetails;
+      _$PaymentSummaryDetailsImpl;
   const _PaymentSummaryDetails._() : super._();
 
   @override
@@ -678,6 +680,6 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   List<PaymentItem> get paymentItems;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentSummaryDetailsCopyWith<_$_PaymentSummaryDetails> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PaymentSummaryDetailsImplCopyWith<_$PaymentSummaryDetailsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

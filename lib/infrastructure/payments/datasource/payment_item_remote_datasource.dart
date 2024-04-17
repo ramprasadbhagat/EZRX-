@@ -18,6 +18,7 @@ class PaymentItemRemoteDataSource {
   PaymentItemQuery paymentItemQuery;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
+
   PaymentItemRemoteDataSource({
     required this.config,
     required this.dataSourceExceptionHandler,
@@ -64,6 +65,7 @@ class PaymentItemRemoteDataSource {
     required String customerCode,
     required String salesOrg,
     required Map<String, dynamic> filterBy,
+    required bool isMarketPlace,
   }) async {
     final queryData = paymentItemQuery.getPaymentSummaryQuery();
 
@@ -71,6 +73,7 @@ class PaymentItemRemoteDataSource {
       'customerCode': customerCode,
       'salesOrg': salesOrg,
       'filterBy': [filterBy],
+      if (isMarketPlace) 'isMarketPlace': isMarketPlace,
     };
 
     final res = await httpService.request(

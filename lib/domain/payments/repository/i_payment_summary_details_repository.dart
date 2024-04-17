@@ -13,6 +13,7 @@ abstract class IPaymentSummaryDetailsRepository {
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required PaymentSummaryDetails details,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, List<PaymentItem>>> fetchPaymentList({

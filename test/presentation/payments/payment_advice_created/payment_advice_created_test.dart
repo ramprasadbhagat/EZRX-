@@ -166,7 +166,9 @@ void main() {
           create: (context) => mockPaymentSummaryBloc,
         ),
       ],
-      child: const PaymentAdviceCreatedPage(),
+      child: const PaymentAdviceCreatedPage(
+        isMarketPlace: false,
+      ),
     );
   }
 
@@ -416,6 +418,7 @@ void main() {
                 zzAdvice: 'fake-zzadvice',
               ),
             ),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);

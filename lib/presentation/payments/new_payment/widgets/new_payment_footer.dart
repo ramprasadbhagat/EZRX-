@@ -2,7 +2,7 @@ part of 'package:ezrxmobile/presentation/payments/new_payment/new_payment_page.d
 
 class _NewPaymentFooter extends StatelessWidget {
   final int currentStep;
-    final TabController tabController;
+  final TabController tabController;
 
   const _NewPaymentFooter({
     required this.currentStep,
@@ -27,9 +27,9 @@ class _NewPaymentFooter extends StatelessWidget {
           ),
         ),
         child: BlocBuilder<NewPaymentBloc, NewPaymentState>(
-             buildWhen: (previous, current) =>
-                  previous.selectedInvoices != current.selectedInvoices ||
-                  previous.selectedCredits != current.selectedCredits,
+          buildWhen: (previous, current) =>
+              previous.selectedInvoices != current.selectedInvoices ||
+              previous.selectedCredits != current.selectedCredits,
           builder: (context, state) {
             return Column(
               children: [
@@ -101,11 +101,14 @@ class _NewPaymentFooter extends StatelessWidget {
                                   context.read<NewPaymentBloc>().add(
                                         const NewPaymentEvent.pay(),
                                       );
-                                      context.router.pushAndPopUntil(
-                    const PaymentAdviceCreatedPageRoute(),
-                    predicate: (Route route) =>
-                        route.settings.name == PaymentPageRoute.name,
-                  );
+                                  context.router.pushAndPopUntil(
+                                    PaymentAdviceCreatedPageRoute(
+                                      isMarketPlace: context.isMPPayment,
+                                    ),
+                                    predicate: (Route route) =>
+                                        route.settings.name ==
+                                        PaymentPageRoute.name,
+                                  );
                                 },
                           child: LoadingShimmer.withChild(
                             enabled: state.isLoading,

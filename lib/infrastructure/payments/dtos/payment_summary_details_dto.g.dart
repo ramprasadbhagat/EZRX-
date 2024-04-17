@@ -6,9 +6,9 @@ part of 'payment_summary_details_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PaymentSummaryDetailsDto _$$_PaymentSummaryDetailsDtoFromJson(
+_$PaymentSummaryDetailsDtoImpl _$$PaymentSummaryDetailsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PaymentSummaryDetailsDto(
+    _$PaymentSummaryDetailsDtoImpl(
       paymentID: json['paymentID'] as String? ?? '',
       valueDate: paymentDate(json, 'valueDate') as String? ?? '',
       paymentAmount: (json['paymentAmount'] as num?)?.toDouble() ?? 0.0,
@@ -39,8 +39,8 @@ _$_PaymentSummaryDetailsDto _$$_PaymentSummaryDetailsDtoFromJson(
           const <String, dynamic>{},
     );
 
-Map<String, dynamic> _$$_PaymentSummaryDetailsDtoToJson(
-        _$_PaymentSummaryDetailsDto instance) =>
+Map<String, dynamic> _$$PaymentSummaryDetailsDtoImplToJson(
+        _$PaymentSummaryDetailsDtoImpl instance) =>
     <String, dynamic>{
       'paymentID': instance.paymentID,
       'valueDate': instance.valueDate,
