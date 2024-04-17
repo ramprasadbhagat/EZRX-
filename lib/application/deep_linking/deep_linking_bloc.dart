@@ -218,6 +218,8 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
               emit(const DeepLinkingState.redirectFAQ());
             } else if (link.isAboutUs) {
               emit(const DeepLinkingState.redirectAboutUs());
+            } else if (link.isUserGuide) {
+              emit(const DeepLinkingState.redirectUserGuide());
             } else {
               emit(
                 const DeepLinkingState.error(

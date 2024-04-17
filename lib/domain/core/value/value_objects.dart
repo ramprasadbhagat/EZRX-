@@ -515,6 +515,8 @@ class EzrxLink extends ValueObject<String> {
 
   bool get isAboutUs => isAboutUsLink(uri.path);
 
+  bool get isUserGuide => isUserGuideLink(uri.path);
+
   const EzrxLink._(this.value);
 }
 

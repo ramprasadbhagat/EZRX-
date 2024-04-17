@@ -971,6 +971,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               redirectAboutUs: () {
                 context.router.push(const AboutUsPageRoute());
               },
+              redirectUserGuide: () {
+                context.navigateTo(
+                  PdfViewPageRoute(
+                    url: locator<Config>().getUserGuidePdfUrl(
+                      eligibilityState.salesOrg.country.toLowerCase(),
+                    ),
+                    titleText: 'User guide',
+                  ),
+                );
+              },
               error: (error) {
                 ErrorUtils.handleApiFailure(context, error);
               },

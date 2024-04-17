@@ -36,6 +36,7 @@ class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.redirectContactUs(
     AppMarket market,
   ) = _RedirectContactUs;
+  const factory DeepLinkingState.redirectUserGuide() = _RedirectUserGuide;
   const factory DeepLinkingState.error(ApiFailure failure) = _Error;
   const factory DeepLinkingState.redirectResetPassword(
     ResetPasswordCred resetPasswordCred,
