@@ -391,7 +391,7 @@ void main() {
         () => outstandingInvoicesBlocMock.add(
           OutstandingInvoicesEvent.fetch(
             appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.searchFilter(''),
           ),
         ),
       ).called(1);
@@ -436,7 +436,7 @@ void main() {
         () => outstandingInvoicesBlocMock.add(
           OutstandingInvoicesEvent.fetch(
             appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.searchFilter(''),
           ),
         ),
       ).called(1);

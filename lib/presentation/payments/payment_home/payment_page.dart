@@ -179,7 +179,7 @@ class _NewPaymentButton extends StatelessWidget {
           context.read<OutstandingInvoicesBloc>().add(
                 OutstandingInvoicesEvent.fetch(
                   appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
-                  searchKey: SearchKey.search(''),
+                  searchKey: SearchKey.searchFilter(''),
                 ),
               );
           context.read<AvailableCreditsBloc>().add(
