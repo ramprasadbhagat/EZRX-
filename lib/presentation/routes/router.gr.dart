@@ -408,7 +408,7 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     PaymentWebviewPageRoute.name: (routeData) {
-      return _i77.MaterialPageX<dynamic>(
+      return _i77.MaterialPageX<Uri>(
         routeData: routeData,
         child: const _i36.PaymentWebviewPage(),
       );
@@ -1834,17 +1834,17 @@ class PaymentWebviewPageRoute extends _i77.PageRouteInfo<void> {
 /// [_i37.NewPaymentPage]
 class NewPaymentPageRoute extends _i77.PageRouteInfo<NewPaymentPageRouteArgs> {
   NewPaymentPageRoute({
-    List<_i77.PageRouteInfo>? children,
     _i78.Key? key,
     required bool isMarketPlace,
+    List<_i77.PageRouteInfo>? children,
   }) : super(
           NewPaymentPageRoute.name,
           path: 'payments/new_payment',
-          initialChildren: children,
           args: NewPaymentPageRouteArgs(
             key: key,
             isMarketPlace: isMarketPlace,
           ),
+          initialChildren: children,
         );
 
   static const String name = 'NewPaymentPageRoute';

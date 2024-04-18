@@ -276,7 +276,7 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       path: 'payments/credit_details',
       page: CreditDetailsPage,
     ),
-    AutoRoute(
+    AutoRoute<Uri>(
       path: 'payments/payments_webview',
       page: PaymentWebviewPage,
     ),
