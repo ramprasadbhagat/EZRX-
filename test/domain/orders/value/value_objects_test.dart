@@ -614,11 +614,11 @@ void main() {
     test('Order confirmation message prefix', () {
       expect(
         OrderStepValue('OnHold').orderConfirmationPrefixMessage,
-        'Currently SAP system is under maintenance. Your order has been placed on eZRx+ but has not yet been made on SAP, and it will be queued in the SAP system to be created. We’ll send a confirmation to',
+        'Your order is being created, please do not place a duplicate order while this order is being processed. We will send a confirmation email to',
       );
       expect(
         OrderStepValue('in queue').orderConfirmationPrefixMessage,
-        'Currently SAP system is under maintenance. Your order has been placed on eZRx+ but has not yet been made on SAP, and it will be queued in the SAP system to be created. We’ll send a confirmation to',
+        'Your order is being created, please do not place a duplicate order while this order is being processed. We will send a confirmation email to',
       );
 
       expect(
@@ -630,12 +630,12 @@ void main() {
     test('Order confirmation message suffix', () {
       expect(
         OrderStepValue('OnHold').orderConfirmationSuffixMessage,
-        'once your order is created in SAP.',
+        'once your order is successfully created.',
       );
 
       expect(
         OrderStepValue('in queue').orderConfirmationSuffixMessage,
-        'once your order is created in SAP.',
+        'once your order is successfully created.',
       );
 
       expect(
