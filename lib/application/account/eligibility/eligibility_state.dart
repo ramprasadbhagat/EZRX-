@@ -321,8 +321,11 @@ class EligibilityState with _$EligibilityState {
     return true;
   }
 
-  bool get customerBlockOrSuspended =>
-      isAccountSuspended || shipToInfo.customerBlock.isCustomerBlocked;
+  bool get customerBlockOrSuspended {
+    if (salesOrg.isID) return shipToInfo.customerBlock.isCustomerBlocked;
+
+    return isAccountSuspended || shipToInfo.customerBlock.isCustomerBlocked;
+  }
 
   bool get isEDI => customerCodeInfo.status.isEDI;
 

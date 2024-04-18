@@ -382,6 +382,34 @@ void main() {
         expect(customerBlockedBanner, findsOneWidget);
       },
     );
+
+    testWidgets(
+      ' -> Find customer blocked banner not visible when value of customerBlock field is not blocked for ID market',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo.copyWith(
+              status: Status('01 - Overall Blocked'),
+            ),
+            shipToInfo: fakeShipToInfo.copyWith(
+              customerBlock: CustomerBlock('not blocked'),
+              status: Status('01 - Overall Blocked'),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final homeScreen = find.byKey(
+          WidgetKeys.homeScreen,
+        );
+        final customerBlockedBanner =
+            find.byKey(WidgetKeys.customerBlockedBanner);
+        expect(homeScreen, findsOneWidget);
+        expect(customerBlockedBanner, findsNothing);
+      },
+    );
     testWidgets(
       ' -> Find Bundle Section for id market',
       (WidgetTester tester) async {

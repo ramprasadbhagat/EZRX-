@@ -142,6 +142,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
       mpSubtotal >= configs.mpMinOrderAmount;
 
   bool get isAccountSuspended {
+    if (salesOrg.salesOrg.isID) return shipInfo.customerBlock.isCustomerBlocked;
+
     return customerCodeInfo.status.isSuspended || shipInfo.status.isSuspended;
   }
 
