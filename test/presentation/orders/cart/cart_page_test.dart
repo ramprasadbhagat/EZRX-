@@ -3719,6 +3719,107 @@ void main() {
         ).called(1);
       });
 
+      testWidgets(
+          'Display Cart must include Commercial material message when cart contain only Gimmick material',
+          (tester) async {
+        final mockItem = mockCartItems.first.copyWith(
+          quantity: 1,
+          isGimmickMaterial: true,
+          salesOrgConfig: fakeTWSalesOrgConfigs,
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [mockItem],
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [mockItem],
+            configs: fakeTWSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.text(
+            'Your cart must contain other commercial material to proceed checkout.'
+                .tr(),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Check checkout button disable when cart contain only Gimmick material',
+          (tester) async {
+        final mockItem = mockCartItems.first.copyWith(
+          quantity: 1,
+          isGimmickMaterial: true,
+          salesOrgConfig: fakeTWSalesOrgConfigs,
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [mockItem],
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [mockItem],
+            configs: fakeTWSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final checkoutButton = find.widgetWithText(ElevatedButton, 'Check out');
+        expect(checkoutButton, findsOneWidget);
+        await tester.tap(checkoutButton);
+        await tester.pump();
+        verify(
+          () => mixpanelService.trackEvent(
+            eventName: TrackingEvents.checkoutFailure,
+            properties: any(named: 'properties'),
+          ),
+        ).called(1);
+      });
+
+      testWidgets(
+          'Display Gimmick material [Material code] is not allowed message when cart contain Gimmick material and Enable Gimmick Materials toggle is Off in Sale Org Configuration',
+          (tester) async {
+        final mockItem = mockCartItems.first.copyWith(
+          quantity: 1,
+          isGimmickMaterial: true,
+          salesOrgConfig: fakeTWSalesOrgConfigs.copyWith(
+            enableGimmickMaterial: false,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [mockItem],
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [mockItem],
+            configs: fakeTWSalesOrgConfigs.copyWith(
+              enableGimmickMaterial: false,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.text(
+            'Gimmick material ${mockCartItems.first.getMaterialNumber.displayMatNo} is not allowed'
+                .tr(),
+          ),
+          findsOneWidget,
+        );
+      });
+
       group('Marketplace MOV validation -', () {
         testWidgets('When both zp MOV and mp MOV is not eligible',
             (tester) async {
