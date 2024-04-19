@@ -1195,9 +1195,12 @@ void main() {
         );
 
         final expectedStates = [
-          CustomerLicenseState.initial(),
+          CustomerLicenseState.initial().copyWith(
+            salesOrganization: fakeIDSalesOrganisation,
+          ),
           CustomerLicenseState.initial().copyWith(
             customerLicenses: customerLicense,
+            salesOrganization: fakeIDSalesOrganisation,
           ),
         ];
         whenListen(

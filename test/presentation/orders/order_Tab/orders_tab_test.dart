@@ -942,8 +942,10 @@ void main() {
         );
 
         when(() => customerLicenseBlocMock.state).thenReturn(
-          CustomerLicenseState.initial()
-              .copyWith(customerLicenses: customerLicense),
+          CustomerLicenseState.initial().copyWith(
+            customerLicenses: customerLicense,
+            salesOrganization: fakeIDSalesOrganisation,
+          ),
         );
         await tester.pumpWidget(testWidget(const OrdersTab()));
         await tester.pump();

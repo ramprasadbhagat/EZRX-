@@ -519,9 +519,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   .add(AboutUsEvent.initialize(salesOrg: state.salesOrg));
 
               context.read<CustomerLicenseBloc>().add(
-                    CustomerLicenseEvent.fetch(
+                    CustomerLicenseEvent.initialized(
                       customerInfo: state.customerCodeInfo,
-                      salesOrganisation: state.salesOrganisation,
+                      salesOrganization: state.salesOrganisation,
                       user: state.user,
                     ),
                   );

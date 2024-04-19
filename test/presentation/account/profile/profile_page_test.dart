@@ -7,10 +7,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -227,11 +225,7 @@ void main() {
       await tester.pumpAndSettle();
       verify(
         () => customerLicenseBloc.add(
-          CustomerLicenseEvent.fetch(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerInfo: CustomerCodeInfo.empty(),
-            user: User.empty(),
-          ),
+          const CustomerLicenseEvent.fetch(),
         ),
       ).called(1);
     });
@@ -261,11 +255,7 @@ void main() {
       await tester.pumpAndSettle(const Duration(microseconds: 500));
       verify(
         () => customerLicenseBloc.add(
-          CustomerLicenseEvent.loadMore(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerInfo: CustomerCodeInfo.empty(),
-            user: User.empty(),
-          ),
+          const CustomerLicenseEvent.loadMore(),
         ),
       ).called(1);
     });

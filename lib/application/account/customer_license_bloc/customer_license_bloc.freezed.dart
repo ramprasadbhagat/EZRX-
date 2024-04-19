@@ -18,35 +18,29 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CustomerLicenseEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrganisation,
+    required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)
-        fetch,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)
-        loadMore,
+        initialized,
+    required TResult Function() fetch,
+    required TResult Function() loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation,
+    TResult? Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)?
-        fetch,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)?
-        loadMore,
+        initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation,
+    TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)?
-        fetch,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)?
-        loadMore,
+        initialized,
+    TResult Function()? fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -98,6 +92,15 @@ abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisation salesOrganization,
+      CustomerCodeInfo customerInfo,
+      User user});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganization;
+  $CustomerCodeInfoCopyWith<$Res> get customerInfo;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -107,69 +110,133 @@ class __$$_InitializedCopyWithImpl<$Res>
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrganization = null,
+    Object? customerInfo = null,
+    Object? user = null,
+  }) {
+    return _then(_$_Initialized(
+      salesOrganization: null == salesOrganization
+          ? _value.salesOrganization
+          : salesOrganization // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerInfo: null == customerInfo
+          ? _value.customerInfo
+          : customerInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganization {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganization, (value) {
+      return _then(_value.copyWith(salesOrganization: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerInfo, (value) {
+      return _then(_value.copyWith(customerInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+  const _$_Initialized(
+      {required this.salesOrganization,
+      required this.customerInfo,
+      required this.user});
+
+  @override
+  final SalesOrganisation salesOrganization;
+  @override
+  final CustomerCodeInfo customerInfo;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'CustomerLicenseEvent.initialized()';
+    return 'CustomerLicenseEvent.initialized(salesOrganization: $salesOrganization, customerInfo: $customerInfo, user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.salesOrganization, salesOrganization) ||
+                other.salesOrganization == salesOrganization) &&
+            (identical(other.customerInfo, customerInfo) ||
+                other.customerInfo == customerInfo) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrganization, customerInfo, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrganisation,
+    required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)
-        fetch,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)
-        loadMore,
+        initialized,
+    required TResult Function() fetch,
+    required TResult Function() loadMore,
   }) {
-    return initialized();
+    return initialized(salesOrganization, customerInfo, user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation,
+    TResult? Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)?
-        fetch,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)?
-        loadMore,
+        initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? loadMore,
   }) {
-    return initialized?.call();
+    return initialized?.call(salesOrganization, customerInfo, user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation,
+    TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)?
-        fetch,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)?
-        loadMore,
+        initialized,
+    TResult Function()? fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized();
+      return initialized(salesOrganization, customerInfo, user);
     }
     return orElse();
   }
@@ -210,22 +277,23 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements CustomerLicenseEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized(
+      {required final SalesOrganisation salesOrganization,
+      required final CustomerCodeInfo customerInfo,
+      required final User user}) = _$_Initialized;
+
+  SalesOrganisation get salesOrganization;
+  CustomerCodeInfo get customerInfo;
+  User get user;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerInfo,
-      User user});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerInfo;
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -234,139 +302,63 @@ class __$$_FetchCopyWithImpl<$Res>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrganisation = null,
-    Object? customerInfo = null,
-    Object? user = null,
-  }) {
-    return _then(_$_Fetch(
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerInfo: null == customerInfo
-          ? _value.customerInfo
-          : customerInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerInfo, (value) {
-      return _then(_value.copyWith(customerInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch(
-      {required this.salesOrganisation,
-      required this.customerInfo,
-      required this.user});
-
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerInfo;
-  @override
-  final User user;
+  const _$_Fetch();
 
   @override
   String toString() {
-    return 'CustomerLicenseEvent.fetch(salesOrganisation: $salesOrganisation, customerInfo: $customerInfo, user: $user)';
+    return 'CustomerLicenseEvent.fetch()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerInfo, customerInfo) ||
-                other.customerInfo == customerInfo) &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_Fetch);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrganisation, customerInfo, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrganisation,
+    required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)
-        fetch,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)
-        loadMore,
+        initialized,
+    required TResult Function() fetch,
+    required TResult Function() loadMore,
   }) {
-    return fetch(salesOrganisation, customerInfo, user);
+    return fetch();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation,
+    TResult? Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)?
-        fetch,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)?
-        loadMore,
+        initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? loadMore,
   }) {
-    return fetch?.call(salesOrganisation, customerInfo, user);
+    return fetch?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation,
+    TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)?
-        fetch,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)?
-        loadMore,
+        initialized,
+    TResult Function()? fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrganisation, customerInfo, user);
+      return fetch();
     }
     return orElse();
   }
@@ -407,17 +399,7 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements CustomerLicenseEvent {
-  const factory _Fetch(
-      {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerInfo,
-      required final User user}) = _$_Fetch;
-
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerInfo;
-  User get user;
-  @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _Fetch() = _$_Fetch;
 }
 
 /// @nodoc
@@ -425,15 +407,6 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   factory _$$_LoadMoreCopyWith(
           _$_LoadMore value, $Res Function(_$_LoadMore) then) =
       __$$_LoadMoreCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerInfo,
-      User user});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerInfo;
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -443,139 +416,63 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrganisation = null,
-    Object? customerInfo = null,
-    Object? user = null,
-  }) {
-    return _then(_$_LoadMore(
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerInfo: null == customerInfo
-          ? _value.customerInfo
-          : customerInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerInfo, (value) {
-      return _then(_value.copyWith(customerInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore(
-      {required this.salesOrganisation,
-      required this.customerInfo,
-      required this.user});
-
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerInfo;
-  @override
-  final User user;
+  const _$_LoadMore();
 
   @override
   String toString() {
-    return 'CustomerLicenseEvent.loadMore(salesOrganisation: $salesOrganisation, customerInfo: $customerInfo, user: $user)';
+    return 'CustomerLicenseEvent.loadMore()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_LoadMore &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerInfo, customerInfo) ||
-                other.customerInfo == customerInfo) &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_LoadMore);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrganisation, customerInfo, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrganisation,
+    required TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)
-        fetch,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)
-        loadMore,
+        initialized,
+    required TResult Function() fetch,
+    required TResult Function() loadMore,
   }) {
-    return loadMore(salesOrganisation, customerInfo, user);
+    return loadMore();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrganisation,
+    TResult? Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)?
-        fetch,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)?
-        loadMore,
+        initialized,
+    TResult? Function()? fetch,
+    TResult? Function()? loadMore,
   }) {
-    return loadMore?.call(salesOrganisation, customerInfo, user);
+    return loadMore?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrganisation,
+    TResult Function(SalesOrganisation salesOrganization,
             CustomerCodeInfo customerInfo, User user)?
-        fetch,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerInfo, User user)?
-        loadMore,
+        initialized,
+    TResult Function()? fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(salesOrganisation, customerInfo, user);
+      return loadMore();
     }
     return orElse();
   }
@@ -616,17 +513,7 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements CustomerLicenseEvent {
-  const factory _LoadMore(
-      {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerInfo,
-      required final User user}) = _$_LoadMore;
-
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerInfo;
-  User get user;
-  @JsonKey(ignore: true)
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _LoadMore() = _$_LoadMore;
 }
 
 /// @nodoc
@@ -637,6 +524,9 @@ mixin _$CustomerLicenseState {
       throw _privateConstructorUsedError;
   List<CustomerLicense> get customerLicenses =>
       throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganization => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerInfo => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerLicenseStateCopyWith<CustomerLicenseState> get copyWith =>
@@ -653,7 +543,14 @@ abstract class $CustomerLicenseStateCopyWith<$Res> {
       {bool isFetching,
       bool canLoadMore,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<CustomerLicense> customerLicenses});
+      List<CustomerLicense> customerLicenses,
+      SalesOrganisation salesOrganization,
+      CustomerCodeInfo customerInfo,
+      User user});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganization;
+  $CustomerCodeInfoCopyWith<$Res> get customerInfo;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -674,6 +571,9 @@ class _$CustomerLicenseStateCopyWithImpl<$Res,
     Object? canLoadMore = null,
     Object? failureOrSuccessOption = null,
     Object? customerLicenses = null,
+    Object? salesOrganization = null,
+    Object? customerInfo = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       isFetching: null == isFetching
@@ -692,7 +592,43 @@ class _$CustomerLicenseStateCopyWithImpl<$Res,
           ? _value.customerLicenses
           : customerLicenses // ignore: cast_nullable_to_non_nullable
               as List<CustomerLicense>,
+      salesOrganization: null == salesOrganization
+          ? _value.salesOrganization
+          : salesOrganization // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerInfo: null == customerInfo
+          ? _value.customerInfo
+          : customerInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganization {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganization, (value) {
+      return _then(_value.copyWith(salesOrganization: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerInfo, (value) {
+      return _then(_value.copyWith(customerInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
@@ -708,7 +644,17 @@ abstract class _$$_CustomerLicenseStateCopyWith<$Res>
       {bool isFetching,
       bool canLoadMore,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<CustomerLicense> customerLicenses});
+      List<CustomerLicense> customerLicenses,
+      SalesOrganisation salesOrganization,
+      CustomerCodeInfo customerInfo,
+      User user});
+
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganization;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerInfo;
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -726,6 +672,9 @@ class __$$_CustomerLicenseStateCopyWithImpl<$Res>
     Object? canLoadMore = null,
     Object? failureOrSuccessOption = null,
     Object? customerLicenses = null,
+    Object? salesOrganization = null,
+    Object? customerInfo = null,
+    Object? user = null,
   }) {
     return _then(_$_CustomerLicenseState(
       isFetching: null == isFetching
@@ -744,6 +693,18 @@ class __$$_CustomerLicenseStateCopyWithImpl<$Res>
           ? _value._customerLicenses
           : customerLicenses // ignore: cast_nullable_to_non_nullable
               as List<CustomerLicense>,
+      salesOrganization: null == salesOrganization
+          ? _value.salesOrganization
+          : salesOrganization // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerInfo: null == customerInfo
+          ? _value.customerInfo
+          : customerInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 }
@@ -755,7 +716,10 @@ class _$_CustomerLicenseState extends _CustomerLicenseState {
       {required this.isFetching,
       required this.canLoadMore,
       required this.failureOrSuccessOption,
-      required final List<CustomerLicense> customerLicenses})
+      required final List<CustomerLicense> customerLicenses,
+      required this.salesOrganization,
+      required this.customerInfo,
+      required this.user})
       : _customerLicenses = customerLicenses,
         super._();
 
@@ -775,8 +739,15 @@ class _$_CustomerLicenseState extends _CustomerLicenseState {
   }
 
   @override
+  final SalesOrganisation salesOrganization;
+  @override
+  final CustomerCodeInfo customerInfo;
+  @override
+  final User user;
+
+  @override
   String toString() {
-    return 'CustomerLicenseState(isFetching: $isFetching, canLoadMore: $canLoadMore, failureOrSuccessOption: $failureOrSuccessOption, customerLicenses: $customerLicenses)';
+    return 'CustomerLicenseState(isFetching: $isFetching, canLoadMore: $canLoadMore, failureOrSuccessOption: $failureOrSuccessOption, customerLicenses: $customerLicenses, salesOrganization: $salesOrganization, customerInfo: $customerInfo, user: $user)';
   }
 
   @override
@@ -791,7 +762,12 @@ class _$_CustomerLicenseState extends _CustomerLicenseState {
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             const DeepCollectionEquality()
-                .equals(other._customerLicenses, _customerLicenses));
+                .equals(other._customerLicenses, _customerLicenses) &&
+            (identical(other.salesOrganization, salesOrganization) ||
+                other.salesOrganization == salesOrganization) &&
+            (identical(other.customerInfo, customerInfo) ||
+                other.customerInfo == customerInfo) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
@@ -800,7 +776,10 @@ class _$_CustomerLicenseState extends _CustomerLicenseState {
       isFetching,
       canLoadMore,
       failureOrSuccessOption,
-      const DeepCollectionEquality().hash(_customerLicenses));
+      const DeepCollectionEquality().hash(_customerLicenses),
+      salesOrganization,
+      customerInfo,
+      user);
 
   @JsonKey(ignore: true)
   @override
@@ -815,8 +794,10 @@ abstract class _CustomerLicenseState extends CustomerLicenseState {
       {required final bool isFetching,
       required final bool canLoadMore,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final List<CustomerLicense>
-          customerLicenses}) = _$_CustomerLicenseState;
+      required final List<CustomerLicense> customerLicenses,
+      required final SalesOrganisation salesOrganization,
+      required final CustomerCodeInfo customerInfo,
+      required final User user}) = _$_CustomerLicenseState;
   const _CustomerLicenseState._() : super._();
 
   @override
@@ -827,6 +808,12 @@ abstract class _CustomerLicenseState extends CustomerLicenseState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   List<CustomerLicense> get customerLicenses;
+  @override
+  SalesOrganisation get salesOrganization;
+  @override
+  CustomerCodeInfo get customerInfo;
+  @override
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerLicenseStateCopyWith<_$_CustomerLicenseState> get copyWith =>

@@ -31,7 +31,17 @@ class CustomerLicenseBloc
     Emitter<CustomerLicenseState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => CustomerLicenseState.initial(),
+      initialized: (e) async {
+        emit(
+          CustomerLicenseState.initial().copyWith(
+            salesOrganization: e.salesOrganization,
+            customerInfo: e.customerInfo,
+            user: e.user,
+          ),
+        );
+
+        add(const CustomerLicenseEvent.fetch());
+      },
       fetch: (_Fetch e) async {
         emit(
           state.copyWith(
@@ -43,11 +53,11 @@ class CustomerLicenseBloc
         );
         final failureOrSuccessOption =
             await customerLicenseRepository.getCustomerLicense(
-          customerCode: e.customerInfo,
+          customerCode: state.customerInfo,
           offset: 0,
-          salesOrganisation: e.salesOrganisation,
+          salesOrganisation: state.salesOrganization,
           pageSize: config.pageSize,
-          user: e.user,
+          user: state.user,
         );
 
         failureOrSuccessOption.fold(
@@ -77,11 +87,11 @@ class CustomerLicenseBloc
         );
         final failureOrSuccessOption =
             await customerLicenseRepository.getCustomerLicense(
-          customerCode: e.customerInfo,
+          customerCode: state.customerInfo,
           offset: state.customerLicenses.length,
-          salesOrganisation: e.salesOrganisation,
+          salesOrganisation: state.salesOrganization,
           pageSize: config.pageSize,
-          user: e.user,
+          user: state.user,
         );
 
         failureOrSuccessOption.fold(

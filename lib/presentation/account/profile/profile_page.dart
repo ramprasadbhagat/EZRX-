@@ -65,30 +65,10 @@ class ProfilePage extends StatelessWidget {
               ),
               controller: ScrollController(),
               onRefresh: () => context.read<CustomerLicenseBloc>().add(
-                    CustomerLicenseEvent.fetch(
-                      customerInfo: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrganisation: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrganisation,
-                      user: context.read<EligibilityBloc>().state.user,
-                    ),
+                    const CustomerLicenseEvent.fetch(),
                   ),
               onLoadingMore: () => context.read<CustomerLicenseBloc>().add(
-                    CustomerLicenseEvent.loadMore(
-                      customerInfo: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrganisation: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrganisation,
-                      user: context.read<EligibilityBloc>().state.user,
-                    ),
+                    const CustomerLicenseEvent.loadMore(),
                   ),
               isLoading: state.isFetching,
               itemBuilder: (context, index, item) => _LicenseTile(
