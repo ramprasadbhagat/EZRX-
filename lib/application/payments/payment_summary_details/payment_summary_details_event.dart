@@ -26,4 +26,6 @@ class PaymentSummaryDetailsEvent with _$PaymentSummaryDetailsEvent {
   const factory PaymentSummaryDetailsEvent.deleteAdvice() = _DeleteAdvice;
 
   const factory PaymentSummaryDetailsEvent.cancelAdvice() = _CancelAdvice;
+
+  const factory PaymentSummaryDetailsEvent.viewSavedAdvice() = _ViewSavedAdvice;
 }

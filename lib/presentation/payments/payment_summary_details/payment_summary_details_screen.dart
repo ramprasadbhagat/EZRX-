@@ -55,7 +55,6 @@ class PaymentSummaryDetailsPage extends StatelessWidget {
       child:
           BlocListener<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
         listenWhen: (previous, current) =>
-            previous.isLoading != current.isLoading &&
             previous.failureOrSuccessOption != current.failureOrSuccessOption,
         listener: (context, state) => state.failureOrSuccessOption.fold(
           () {},

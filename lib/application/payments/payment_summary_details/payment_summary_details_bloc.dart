@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/bank_instruction.dart';
@@ -55,6 +56,7 @@ class PaymentSummaryDetailsBloc
             state.copyWith(
               isDetailFetching: true,
               failureOrSuccessOption: none(),
+              savedAdvice: AttachmentFileBuffer.empty(),
             ),
           );
           final failureOrSuccess =
@@ -96,6 +98,7 @@ class PaymentSummaryDetailsBloc
           emit(
             state.copyWith(
               details: event.details,
+              savedAdvice: AttachmentFileBuffer.empty(),
             ),
           );
           if (!state.salesOrganization.salesOrg.isID) {
@@ -205,10 +208,11 @@ class PaymentSummaryDetailsBloc
                   ),
                 );
               },
-              (success) {
+              (attachmentBuffer) {
                 emit(
                   state.copyWith(
                     failureOrSuccessOption: none(),
+                    savedAdvice: attachmentBuffer,
                     isSavingAdvice: false,
                   ),
                 );
@@ -305,6 +309,17 @@ class PaymentSummaryDetailsBloc
               isCancelingAdvice: false,
               failureOrSuccessOption: none(),
             ),
+          ),
+        );
+      },
+      viewSavedAdvice: (e) async {
+        final failureOrSuccessOption = await newPaymentRepository
+            .viewSavedAdvice(savedAdvice: state.savedAdvice);
+
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: optionOf(failureOrSuccessOption),
+            savedAdvice: AttachmentFileBuffer.empty(),
           ),
         );
       },

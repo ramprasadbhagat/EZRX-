@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
@@ -836,8 +837,8 @@ void main() {
               pdfData: Uint8List.fromList([0, 1]),
             ),
           ).thenAnswer(
-            (invocation) async => const Right(
-              unit,
+            (invocation) async => Right(
+              AttachmentFileBuffer.empty(),
             ),
           );
         },

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:open_file_safe/open_file_safe.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -304,18 +305,17 @@ class NewPaymentRepository extends INewPaymentRepository {
   }
 
   @override
-  Future<Either<ApiFailure, Unit>> saveFile({
+  Future<Either<ApiFailure, AttachmentFileBuffer>> saveFile({
     required Uint8List pdfData,
   }) async {
     try {
-      await fileSystemHelper.getDownloadedFile(
-        AttachmentFileBuffer(
-          buffer: pdfData,
-          name: 'invoice_${DateTime.now().millisecondsSinceEpoch}.pdf',
-        ),
+      final attachmentBuffer = AttachmentFileBuffer(
+        buffer: pdfData,
+        name: 'invoice_${DateTime.now().millisecondsSinceEpoch}.pdf',
       );
+      await fileSystemHelper.getDownloadedFile(attachmentBuffer);
 
-      return const Right(unit);
+      return Right(attachmentBuffer);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -428,6 +428,22 @@ class NewPaymentRepository extends INewPaymentRepository {
       return Left(
         FailureHandler.handleFailure(e),
       );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> viewSavedAdvice({
+    required AttachmentFileBuffer savedAdvice,
+  }) async {
+    try {
+      final result = await fileSystemHelper.openFile(savedAdvice);
+      if (result.type != ResultType.done) {
+        return Left(ApiFailure.openDownloadedFileError(result.message));
+      }
+
+      return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/bank_instruction.dart';
@@ -687,7 +688,9 @@ void main() {
             pdfData: fakeRawFile,
           ),
         ).thenAnswer(
-          (invocation) async => const Right(unit),
+          (invocation) async => Right(
+            AttachmentFileBuffer.empty(),
+          ),
         );
       },
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(

@@ -640,9 +640,7 @@ void main() {
         ),
       );
       final expectedStates = [
-        initialState.copyWith(
-          isCancelingAdvice: true,
-        ),
+        initialState,
         initialState.copyWith(
           details: mockPaymentDetails,
           failureOrSuccessOption:

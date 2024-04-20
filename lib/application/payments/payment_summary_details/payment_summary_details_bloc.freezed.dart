@@ -12,7 +12,7 @@ part of 'payment_summary_details_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$PaymentSummaryDetailsEvent {
@@ -29,6 +29,7 @@ mixin _$PaymentSummaryDetailsEvent {
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
     required TResult Function() cancelAdvice,
+    required TResult Function() viewSavedAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +48,7 @@ mixin _$PaymentSummaryDetailsEvent {
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
     TResult? Function()? cancelAdvice,
+    TResult? Function()? viewSavedAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +67,7 @@ mixin _$PaymentSummaryDetailsEvent {
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
     TResult Function()? cancelAdvice,
+    TResult Function()? viewSavedAdvice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -80,6 +83,7 @@ mixin _$PaymentSummaryDetailsEvent {
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
     required TResult Function(_CancelAdvice value) cancelAdvice,
+    required TResult Function(_ViewSavedAdvice value) viewSavedAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -94,6 +98,7 @@ mixin _$PaymentSummaryDetailsEvent {
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
     TResult? Function(_CancelAdvice value)? cancelAdvice,
+    TResult? Function(_ViewSavedAdvice value)? viewSavedAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -108,6 +113,7 @@ mixin _$PaymentSummaryDetailsEvent {
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
     TResult Function(_CancelAdvice value)? cancelAdvice,
+    TResult Function(_ViewSavedAdvice value)? viewSavedAdvice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,10 +140,10 @@ class _$PaymentSummaryDetailsEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$InitializedImplCopyWith<$Res> {
-  factory _$$InitializedImplCopyWith(
-          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
-      __$$InitializedImplCopyWithImpl<$Res>;
+abstract class _$$_InitializedCopyWith<$Res> {
+  factory _$$_InitializedCopyWith(
+          _$_Initialized value, $Res Function(_$_Initialized) then) =
+      __$$_InitializedCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganization,
@@ -152,11 +158,11 @@ abstract class _$$InitializedImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$InitializedImplCopyWithImpl<$Res>
-    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$InitializedImpl>
-    implements _$$InitializedImplCopyWith<$Res> {
-  __$$InitializedImplCopyWithImpl(
-      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
+class __$$_InitializedCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$_Initialized>
+    implements _$$_InitializedCopyWith<$Res> {
+  __$$_InitializedCopyWithImpl(
+      _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -167,7 +173,7 @@ class __$$InitializedImplCopyWithImpl<$Res>
     Object? user = null,
     Object? shipToInfo = null,
   }) {
-    return _then(_$InitializedImpl(
+    return _then(_$_Initialized(
       salesOrganization: null == salesOrganization
           ? _value.salesOrganization
           : salesOrganization // ignore: cast_nullable_to_non_nullable
@@ -222,8 +228,8 @@ class __$$InitializedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitializedImpl implements _Initialized {
-  const _$InitializedImpl(
+class _$_Initialized implements _Initialized {
+  const _$_Initialized(
       {required this.salesOrganization,
       required this.customerCodeInfo,
       required this.user,
@@ -244,10 +250,10 @@ class _$InitializedImpl implements _Initialized {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InitializedImpl &&
+            other is _$_Initialized &&
             (identical(other.salesOrganization, salesOrganization) ||
                 other.salesOrganization == salesOrganization) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -264,8 +270,8 @@ class _$InitializedImpl implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
-      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -281,6 +287,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
     required TResult Function() cancelAdvice,
+    required TResult Function() viewSavedAdvice,
   }) {
     return initialized(salesOrganization, customerCodeInfo, user, shipToInfo);
   }
@@ -302,6 +309,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
     TResult? Function()? cancelAdvice,
+    TResult? Function()? viewSavedAdvice,
   }) {
     return initialized?.call(
         salesOrganization, customerCodeInfo, user, shipToInfo);
@@ -324,6 +332,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
     TResult Function()? cancelAdvice,
+    TResult Function()? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -345,6 +354,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
     required TResult Function(_CancelAdvice value) cancelAdvice,
+    required TResult Function(_ViewSavedAdvice value) viewSavedAdvice,
   }) {
     return initialized(this);
   }
@@ -362,6 +372,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
     TResult? Function(_CancelAdvice value)? cancelAdvice,
+    TResult? Function(_ViewSavedAdvice value)? viewSavedAdvice,
   }) {
     return initialized?.call(this);
   }
@@ -379,6 +390,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
     TResult Function(_CancelAdvice value)? cancelAdvice,
+    TResult Function(_ViewSavedAdvice value)? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -393,23 +405,23 @@ abstract class _Initialized implements PaymentSummaryDetailsEvent {
       {required final SalesOrganisation salesOrganization,
       required final CustomerCodeInfo customerCodeInfo,
       required final User user,
-      required final ShipToInfo shipToInfo}) = _$InitializedImpl;
+      required final ShipToInfo shipToInfo}) = _$_Initialized;
 
   SalesOrganisation get salesOrganization;
   CustomerCodeInfo get customerCodeInfo;
   User get user;
   ShipToInfo get shipToInfo;
   @JsonKey(ignore: true)
-  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchPaymentSummaryDetailsEventImplCopyWith<$Res> {
-  factory _$$FetchPaymentSummaryDetailsEventImplCopyWith(
-          _$FetchPaymentSummaryDetailsEventImpl value,
-          $Res Function(_$FetchPaymentSummaryDetailsEventImpl) then) =
-      __$$FetchPaymentSummaryDetailsEventImplCopyWithImpl<$Res>;
+abstract class _$$_FetchPaymentSummaryDetailsEventCopyWith<$Res> {
+  factory _$$_FetchPaymentSummaryDetailsEventCopyWith(
+          _$_FetchPaymentSummaryDetailsEvent value,
+          $Res Function(_$_FetchPaymentSummaryDetailsEvent) then) =
+      __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>;
   @useResult
   $Res call({PaymentSummaryDetails details, bool isMarketPlace});
 
@@ -417,13 +429,13 @@ abstract class _$$FetchPaymentSummaryDetailsEventImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$FetchPaymentSummaryDetailsEventImplCopyWithImpl<$Res>
+class __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>
     extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res,
-        _$FetchPaymentSummaryDetailsEventImpl>
-    implements _$$FetchPaymentSummaryDetailsEventImplCopyWith<$Res> {
-  __$$FetchPaymentSummaryDetailsEventImplCopyWithImpl(
-      _$FetchPaymentSummaryDetailsEventImpl _value,
-      $Res Function(_$FetchPaymentSummaryDetailsEventImpl) _then)
+        _$_FetchPaymentSummaryDetailsEvent>
+    implements _$$_FetchPaymentSummaryDetailsEventCopyWith<$Res> {
+  __$$_FetchPaymentSummaryDetailsEventCopyWithImpl(
+      _$_FetchPaymentSummaryDetailsEvent _value,
+      $Res Function(_$_FetchPaymentSummaryDetailsEvent) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -432,7 +444,7 @@ class __$$FetchPaymentSummaryDetailsEventImplCopyWithImpl<$Res>
     Object? details = null,
     Object? isMarketPlace = null,
   }) {
-    return _then(_$FetchPaymentSummaryDetailsEventImpl(
+    return _then(_$_FetchPaymentSummaryDetailsEvent(
       details: null == details
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
@@ -455,9 +467,9 @@ class __$$FetchPaymentSummaryDetailsEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchPaymentSummaryDetailsEventImpl
+class _$_FetchPaymentSummaryDetailsEvent
     implements _FetchPaymentSummaryDetailsEvent {
-  const _$FetchPaymentSummaryDetailsEventImpl(
+  const _$_FetchPaymentSummaryDetailsEvent(
       {required this.details, required this.isMarketPlace});
 
   @override
@@ -471,10 +483,10 @@ class _$FetchPaymentSummaryDetailsEventImpl
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchPaymentSummaryDetailsEventImpl &&
+            other is _$_FetchPaymentSummaryDetailsEvent &&
             (identical(other.details, details) || other.details == details) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
                 other.isMarketPlace == isMarketPlace));
@@ -486,10 +498,10 @@ class _$FetchPaymentSummaryDetailsEventImpl
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchPaymentSummaryDetailsEventImplCopyWith<
-          _$FetchPaymentSummaryDetailsEventImpl>
-      get copyWith => __$$FetchPaymentSummaryDetailsEventImplCopyWithImpl<
-          _$FetchPaymentSummaryDetailsEventImpl>(this, _$identity);
+  _$$_FetchPaymentSummaryDetailsEventCopyWith<
+          _$_FetchPaymentSummaryDetailsEvent>
+      get copyWith => __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<
+          _$_FetchPaymentSummaryDetailsEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -505,6 +517,7 @@ class _$FetchPaymentSummaryDetailsEventImpl
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
     required TResult Function() cancelAdvice,
+    required TResult Function() viewSavedAdvice,
   }) {
     return fetchPaymentSummaryDetailsInfo(details, isMarketPlace);
   }
@@ -526,6 +539,7 @@ class _$FetchPaymentSummaryDetailsEventImpl
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
     TResult? Function()? cancelAdvice,
+    TResult? Function()? viewSavedAdvice,
   }) {
     return fetchPaymentSummaryDetailsInfo?.call(details, isMarketPlace);
   }
@@ -547,6 +561,7 @@ class _$FetchPaymentSummaryDetailsEventImpl
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
     TResult Function()? cancelAdvice,
+    TResult Function()? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryDetailsInfo != null) {
@@ -568,6 +583,7 @@ class _$FetchPaymentSummaryDetailsEventImpl
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
     required TResult Function(_CancelAdvice value) cancelAdvice,
+    required TResult Function(_ViewSavedAdvice value) viewSavedAdvice,
   }) {
     return fetchPaymentSummaryDetailsInfo(this);
   }
@@ -585,6 +601,7 @@ class _$FetchPaymentSummaryDetailsEventImpl
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
     TResult? Function(_CancelAdvice value)? cancelAdvice,
+    TResult? Function(_ViewSavedAdvice value)? viewSavedAdvice,
   }) {
     return fetchPaymentSummaryDetailsInfo?.call(this);
   }
@@ -602,6 +619,7 @@ class _$FetchPaymentSummaryDetailsEventImpl
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
     TResult Function(_CancelAdvice value)? cancelAdvice,
+    TResult Function(_ViewSavedAdvice value)? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryDetailsInfo != null) {
@@ -614,42 +632,40 @@ class _$FetchPaymentSummaryDetailsEventImpl
 abstract class _FetchPaymentSummaryDetailsEvent
     implements PaymentSummaryDetailsEvent {
   const factory _FetchPaymentSummaryDetailsEvent(
-          {required final PaymentSummaryDetails details,
-          required final bool isMarketPlace}) =
-      _$FetchPaymentSummaryDetailsEventImpl;
+      {required final PaymentSummaryDetails details,
+      required final bool isMarketPlace}) = _$_FetchPaymentSummaryDetailsEvent;
 
   PaymentSummaryDetails get details;
   bool get isMarketPlace;
   @JsonKey(ignore: true)
-  _$$FetchPaymentSummaryDetailsEventImplCopyWith<
-          _$FetchPaymentSummaryDetailsEventImpl>
+  _$$_FetchPaymentSummaryDetailsEventCopyWith<
+          _$_FetchPaymentSummaryDetailsEvent>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchPaymentSummaryListEventImplCopyWith<$Res> {
-  factory _$$FetchPaymentSummaryListEventImplCopyWith(
-          _$FetchPaymentSummaryListEventImpl value,
-          $Res Function(_$FetchPaymentSummaryListEventImpl) then) =
-      __$$FetchPaymentSummaryListEventImplCopyWithImpl<$Res>;
+abstract class _$$_FetchPaymentSummaryListEventCopyWith<$Res> {
+  factory _$$_FetchPaymentSummaryListEventCopyWith(
+          _$_FetchPaymentSummaryListEvent value,
+          $Res Function(_$_FetchPaymentSummaryListEvent) then) =
+      __$$_FetchPaymentSummaryListEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FetchPaymentSummaryListEventImplCopyWithImpl<$Res>
+class __$$_FetchPaymentSummaryListEventCopyWithImpl<$Res>
     extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res,
-        _$FetchPaymentSummaryListEventImpl>
-    implements _$$FetchPaymentSummaryListEventImplCopyWith<$Res> {
-  __$$FetchPaymentSummaryListEventImplCopyWithImpl(
-      _$FetchPaymentSummaryListEventImpl _value,
-      $Res Function(_$FetchPaymentSummaryListEventImpl) _then)
+        _$_FetchPaymentSummaryListEvent>
+    implements _$$_FetchPaymentSummaryListEventCopyWith<$Res> {
+  __$$_FetchPaymentSummaryListEventCopyWithImpl(
+      _$_FetchPaymentSummaryListEvent _value,
+      $Res Function(_$_FetchPaymentSummaryListEvent) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$FetchPaymentSummaryListEventImpl
-    implements _FetchPaymentSummaryListEvent {
-  const _$FetchPaymentSummaryListEventImpl();
+class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
+  const _$_FetchPaymentSummaryListEvent();
 
   @override
   String toString() {
@@ -657,10 +673,10 @@ class _$FetchPaymentSummaryListEventImpl
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchPaymentSummaryListEventImpl);
+            other is _$_FetchPaymentSummaryListEvent);
   }
 
   @override
@@ -680,6 +696,7 @@ class _$FetchPaymentSummaryListEventImpl
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
     required TResult Function() cancelAdvice,
+    required TResult Function() viewSavedAdvice,
   }) {
     return fetchPaymentSummaryList();
   }
@@ -701,6 +718,7 @@ class _$FetchPaymentSummaryListEventImpl
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
     TResult? Function()? cancelAdvice,
+    TResult? Function()? viewSavedAdvice,
   }) {
     return fetchPaymentSummaryList?.call();
   }
@@ -722,6 +740,7 @@ class _$FetchPaymentSummaryListEventImpl
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
     TResult Function()? cancelAdvice,
+    TResult Function()? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryList != null) {
@@ -743,6 +762,7 @@ class _$FetchPaymentSummaryListEventImpl
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
     required TResult Function(_CancelAdvice value) cancelAdvice,
+    required TResult Function(_ViewSavedAdvice value) viewSavedAdvice,
   }) {
     return fetchPaymentSummaryList(this);
   }
@@ -760,6 +780,7 @@ class _$FetchPaymentSummaryListEventImpl
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
     TResult? Function(_CancelAdvice value)? cancelAdvice,
+    TResult? Function(_ViewSavedAdvice value)? viewSavedAdvice,
   }) {
     return fetchPaymentSummaryList?.call(this);
   }
@@ -777,6 +798,7 @@ class _$FetchPaymentSummaryListEventImpl
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
     TResult Function(_CancelAdvice value)? cancelAdvice,
+    TResult Function(_ViewSavedAdvice value)? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryList != null) {
@@ -789,30 +811,30 @@ class _$FetchPaymentSummaryListEventImpl
 abstract class _FetchPaymentSummaryListEvent
     implements PaymentSummaryDetailsEvent {
   const factory _FetchPaymentSummaryListEvent() =
-      _$FetchPaymentSummaryListEventImpl;
+      _$_FetchPaymentSummaryListEvent;
 }
 
 /// @nodoc
-abstract class _$$FetchBankInstructionImplCopyWith<$Res> {
-  factory _$$FetchBankInstructionImplCopyWith(_$FetchBankInstructionImpl value,
-          $Res Function(_$FetchBankInstructionImpl) then) =
-      __$$FetchBankInstructionImplCopyWithImpl<$Res>;
+abstract class _$$_FetchBankInstructionCopyWith<$Res> {
+  factory _$$_FetchBankInstructionCopyWith(_$_FetchBankInstruction value,
+          $Res Function(_$_FetchBankInstruction) then) =
+      __$$_FetchBankInstructionCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FetchBankInstructionImplCopyWithImpl<$Res>
+class __$$_FetchBankInstructionCopyWithImpl<$Res>
     extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res,
-        _$FetchBankInstructionImpl>
-    implements _$$FetchBankInstructionImplCopyWith<$Res> {
-  __$$FetchBankInstructionImplCopyWithImpl(_$FetchBankInstructionImpl _value,
-      $Res Function(_$FetchBankInstructionImpl) _then)
+        _$_FetchBankInstruction>
+    implements _$$_FetchBankInstructionCopyWith<$Res> {
+  __$$_FetchBankInstructionCopyWithImpl(_$_FetchBankInstruction _value,
+      $Res Function(_$_FetchBankInstruction) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$FetchBankInstructionImpl implements _FetchBankInstruction {
-  const _$FetchBankInstructionImpl();
+class _$_FetchBankInstruction implements _FetchBankInstruction {
+  const _$_FetchBankInstruction();
 
   @override
   String toString() {
@@ -820,10 +842,9 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FetchBankInstructionImpl);
+        (other.runtimeType == runtimeType && other is _$_FetchBankInstruction);
   }
 
   @override
@@ -843,6 +864,7 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
     required TResult Function() cancelAdvice,
+    required TResult Function() viewSavedAdvice,
   }) {
     return fetchBankInstruction();
   }
@@ -864,6 +886,7 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
     TResult? Function()? cancelAdvice,
+    TResult? Function()? viewSavedAdvice,
   }) {
     return fetchBankInstruction?.call();
   }
@@ -885,6 +908,7 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
     TResult Function()? cancelAdvice,
+    TResult Function()? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (fetchBankInstruction != null) {
@@ -906,6 +930,7 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
     required TResult Function(_CancelAdvice value) cancelAdvice,
+    required TResult Function(_ViewSavedAdvice value) viewSavedAdvice,
   }) {
     return fetchBankInstruction(this);
   }
@@ -923,6 +948,7 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
     TResult? Function(_CancelAdvice value)? cancelAdvice,
+    TResult? Function(_ViewSavedAdvice value)? viewSavedAdvice,
   }) {
     return fetchBankInstruction?.call(this);
   }
@@ -940,6 +966,7 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
     TResult Function(_CancelAdvice value)? cancelAdvice,
+    TResult Function(_ViewSavedAdvice value)? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (fetchBankInstruction != null) {
@@ -950,29 +977,29 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
 }
 
 abstract class _FetchBankInstruction implements PaymentSummaryDetailsEvent {
-  const factory _FetchBankInstruction() = _$FetchBankInstructionImpl;
+  const factory _FetchBankInstruction() = _$_FetchBankInstruction;
 }
 
 /// @nodoc
-abstract class _$$FetchAdviceImplCopyWith<$Res> {
-  factory _$$FetchAdviceImplCopyWith(
-          _$FetchAdviceImpl value, $Res Function(_$FetchAdviceImpl) then) =
-      __$$FetchAdviceImplCopyWithImpl<$Res>;
+abstract class _$$_FetchAdviceCopyWith<$Res> {
+  factory _$$_FetchAdviceCopyWith(
+          _$_FetchAdvice value, $Res Function(_$_FetchAdvice) then) =
+      __$$_FetchAdviceCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FetchAdviceImplCopyWithImpl<$Res>
-    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$FetchAdviceImpl>
-    implements _$$FetchAdviceImplCopyWith<$Res> {
-  __$$FetchAdviceImplCopyWithImpl(
-      _$FetchAdviceImpl _value, $Res Function(_$FetchAdviceImpl) _then)
+class __$$_FetchAdviceCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$_FetchAdvice>
+    implements _$$_FetchAdviceCopyWith<$Res> {
+  __$$_FetchAdviceCopyWithImpl(
+      _$_FetchAdvice _value, $Res Function(_$_FetchAdvice) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$FetchAdviceImpl implements _FetchAdvice {
-  const _$FetchAdviceImpl();
+class _$_FetchAdvice implements _FetchAdvice {
+  const _$_FetchAdvice();
 
   @override
   String toString() {
@@ -980,9 +1007,9 @@ class _$FetchAdviceImpl implements _FetchAdvice {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchAdviceImpl);
+        (other.runtimeType == runtimeType && other is _$_FetchAdvice);
   }
 
   @override
@@ -1002,6 +1029,7 @@ class _$FetchAdviceImpl implements _FetchAdvice {
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
     required TResult Function() cancelAdvice,
+    required TResult Function() viewSavedAdvice,
   }) {
     return fetchAdvice();
   }
@@ -1023,6 +1051,7 @@ class _$FetchAdviceImpl implements _FetchAdvice {
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
     TResult? Function()? cancelAdvice,
+    TResult? Function()? viewSavedAdvice,
   }) {
     return fetchAdvice?.call();
   }
@@ -1044,6 +1073,7 @@ class _$FetchAdviceImpl implements _FetchAdvice {
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
     TResult Function()? cancelAdvice,
+    TResult Function()? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (fetchAdvice != null) {
@@ -1065,6 +1095,7 @@ class _$FetchAdviceImpl implements _FetchAdvice {
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
     required TResult Function(_CancelAdvice value) cancelAdvice,
+    required TResult Function(_ViewSavedAdvice value) viewSavedAdvice,
   }) {
     return fetchAdvice(this);
   }
@@ -1082,6 +1113,7 @@ class _$FetchAdviceImpl implements _FetchAdvice {
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
     TResult? Function(_CancelAdvice value)? cancelAdvice,
+    TResult? Function(_ViewSavedAdvice value)? viewSavedAdvice,
   }) {
     return fetchAdvice?.call(this);
   }
@@ -1099,6 +1131,7 @@ class _$FetchAdviceImpl implements _FetchAdvice {
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
     TResult Function(_CancelAdvice value)? cancelAdvice,
+    TResult Function(_ViewSavedAdvice value)? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (fetchAdvice != null) {
@@ -1109,29 +1142,29 @@ class _$FetchAdviceImpl implements _FetchAdvice {
 }
 
 abstract class _FetchAdvice implements PaymentSummaryDetailsEvent {
-  const factory _FetchAdvice() = _$FetchAdviceImpl;
+  const factory _FetchAdvice() = _$_FetchAdvice;
 }
 
 /// @nodoc
-abstract class _$$SaveAdviceImplCopyWith<$Res> {
-  factory _$$SaveAdviceImplCopyWith(
-          _$SaveAdviceImpl value, $Res Function(_$SaveAdviceImpl) then) =
-      __$$SaveAdviceImplCopyWithImpl<$Res>;
+abstract class _$$_SaveAdviceCopyWith<$Res> {
+  factory _$$_SaveAdviceCopyWith(
+          _$_SaveAdvice value, $Res Function(_$_SaveAdvice) then) =
+      __$$_SaveAdviceCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SaveAdviceImplCopyWithImpl<$Res>
-    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$SaveAdviceImpl>
-    implements _$$SaveAdviceImplCopyWith<$Res> {
-  __$$SaveAdviceImplCopyWithImpl(
-      _$SaveAdviceImpl _value, $Res Function(_$SaveAdviceImpl) _then)
+class __$$_SaveAdviceCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$_SaveAdvice>
+    implements _$$_SaveAdviceCopyWith<$Res> {
+  __$$_SaveAdviceCopyWithImpl(
+      _$_SaveAdvice _value, $Res Function(_$_SaveAdvice) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SaveAdviceImpl implements _SaveAdvice {
-  const _$SaveAdviceImpl();
+class _$_SaveAdvice implements _SaveAdvice {
+  const _$_SaveAdvice();
 
   @override
   String toString() {
@@ -1139,9 +1172,9 @@ class _$SaveAdviceImpl implements _SaveAdvice {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SaveAdviceImpl);
+        (other.runtimeType == runtimeType && other is _$_SaveAdvice);
   }
 
   @override
@@ -1161,6 +1194,7 @@ class _$SaveAdviceImpl implements _SaveAdvice {
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
     required TResult Function() cancelAdvice,
+    required TResult Function() viewSavedAdvice,
   }) {
     return saveAdvice();
   }
@@ -1182,6 +1216,7 @@ class _$SaveAdviceImpl implements _SaveAdvice {
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
     TResult? Function()? cancelAdvice,
+    TResult? Function()? viewSavedAdvice,
   }) {
     return saveAdvice?.call();
   }
@@ -1203,6 +1238,7 @@ class _$SaveAdviceImpl implements _SaveAdvice {
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
     TResult Function()? cancelAdvice,
+    TResult Function()? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (saveAdvice != null) {
@@ -1224,6 +1260,7 @@ class _$SaveAdviceImpl implements _SaveAdvice {
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
     required TResult Function(_CancelAdvice value) cancelAdvice,
+    required TResult Function(_ViewSavedAdvice value) viewSavedAdvice,
   }) {
     return saveAdvice(this);
   }
@@ -1241,6 +1278,7 @@ class _$SaveAdviceImpl implements _SaveAdvice {
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
     TResult? Function(_CancelAdvice value)? cancelAdvice,
+    TResult? Function(_ViewSavedAdvice value)? viewSavedAdvice,
   }) {
     return saveAdvice?.call(this);
   }
@@ -1258,6 +1296,7 @@ class _$SaveAdviceImpl implements _SaveAdvice {
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
     TResult Function(_CancelAdvice value)? cancelAdvice,
+    TResult Function(_ViewSavedAdvice value)? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (saveAdvice != null) {
@@ -1268,29 +1307,29 @@ class _$SaveAdviceImpl implements _SaveAdvice {
 }
 
 abstract class _SaveAdvice implements PaymentSummaryDetailsEvent {
-  const factory _SaveAdvice() = _$SaveAdviceImpl;
+  const factory _SaveAdvice() = _$_SaveAdvice;
 }
 
 /// @nodoc
-abstract class _$$DeleteAdviceImplCopyWith<$Res> {
-  factory _$$DeleteAdviceImplCopyWith(
-          _$DeleteAdviceImpl value, $Res Function(_$DeleteAdviceImpl) then) =
-      __$$DeleteAdviceImplCopyWithImpl<$Res>;
+abstract class _$$_DeleteAdviceCopyWith<$Res> {
+  factory _$$_DeleteAdviceCopyWith(
+          _$_DeleteAdvice value, $Res Function(_$_DeleteAdvice) then) =
+      __$$_DeleteAdviceCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DeleteAdviceImplCopyWithImpl<$Res>
-    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$DeleteAdviceImpl>
-    implements _$$DeleteAdviceImplCopyWith<$Res> {
-  __$$DeleteAdviceImplCopyWithImpl(
-      _$DeleteAdviceImpl _value, $Res Function(_$DeleteAdviceImpl) _then)
+class __$$_DeleteAdviceCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$_DeleteAdvice>
+    implements _$$_DeleteAdviceCopyWith<$Res> {
+  __$$_DeleteAdviceCopyWithImpl(
+      _$_DeleteAdvice _value, $Res Function(_$_DeleteAdvice) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$DeleteAdviceImpl implements _DeleteAdvice {
-  const _$DeleteAdviceImpl();
+class _$_DeleteAdvice implements _DeleteAdvice {
+  const _$_DeleteAdvice();
 
   @override
   String toString() {
@@ -1298,9 +1337,9 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DeleteAdviceImpl);
+        (other.runtimeType == runtimeType && other is _$_DeleteAdvice);
   }
 
   @override
@@ -1320,6 +1359,7 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
     required TResult Function() cancelAdvice,
+    required TResult Function() viewSavedAdvice,
   }) {
     return deleteAdvice();
   }
@@ -1341,6 +1381,7 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
     TResult? Function()? cancelAdvice,
+    TResult? Function()? viewSavedAdvice,
   }) {
     return deleteAdvice?.call();
   }
@@ -1362,6 +1403,7 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
     TResult Function()? cancelAdvice,
+    TResult Function()? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (deleteAdvice != null) {
@@ -1383,6 +1425,7 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
     required TResult Function(_CancelAdvice value) cancelAdvice,
+    required TResult Function(_ViewSavedAdvice value) viewSavedAdvice,
   }) {
     return deleteAdvice(this);
   }
@@ -1400,6 +1443,7 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
     TResult? Function(_CancelAdvice value)? cancelAdvice,
+    TResult? Function(_ViewSavedAdvice value)? viewSavedAdvice,
   }) {
     return deleteAdvice?.call(this);
   }
@@ -1417,6 +1461,7 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
     TResult Function(_CancelAdvice value)? cancelAdvice,
+    TResult Function(_ViewSavedAdvice value)? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (deleteAdvice != null) {
@@ -1427,29 +1472,29 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
 }
 
 abstract class _DeleteAdvice implements PaymentSummaryDetailsEvent {
-  const factory _DeleteAdvice() = _$DeleteAdviceImpl;
+  const factory _DeleteAdvice() = _$_DeleteAdvice;
 }
 
 /// @nodoc
-abstract class _$$CancelAdviceImplCopyWith<$Res> {
-  factory _$$CancelAdviceImplCopyWith(
-          _$CancelAdviceImpl value, $Res Function(_$CancelAdviceImpl) then) =
-      __$$CancelAdviceImplCopyWithImpl<$Res>;
+abstract class _$$_CancelAdviceCopyWith<$Res> {
+  factory _$$_CancelAdviceCopyWith(
+          _$_CancelAdvice value, $Res Function(_$_CancelAdvice) then) =
+      __$$_CancelAdviceCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CancelAdviceImplCopyWithImpl<$Res>
-    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$CancelAdviceImpl>
-    implements _$$CancelAdviceImplCopyWith<$Res> {
-  __$$CancelAdviceImplCopyWithImpl(
-      _$CancelAdviceImpl _value, $Res Function(_$CancelAdviceImpl) _then)
+class __$$_CancelAdviceCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$_CancelAdvice>
+    implements _$$_CancelAdviceCopyWith<$Res> {
+  __$$_CancelAdviceCopyWithImpl(
+      _$_CancelAdvice _value, $Res Function(_$_CancelAdvice) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$CancelAdviceImpl implements _CancelAdvice {
-  const _$CancelAdviceImpl();
+class _$_CancelAdvice implements _CancelAdvice {
+  const _$_CancelAdvice();
 
   @override
   String toString() {
@@ -1457,9 +1502,9 @@ class _$CancelAdviceImpl implements _CancelAdvice {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CancelAdviceImpl);
+        (other.runtimeType == runtimeType && other is _$_CancelAdvice);
   }
 
   @override
@@ -1479,6 +1524,7 @@ class _$CancelAdviceImpl implements _CancelAdvice {
     required TResult Function() saveAdvice,
     required TResult Function() deleteAdvice,
     required TResult Function() cancelAdvice,
+    required TResult Function() viewSavedAdvice,
   }) {
     return cancelAdvice();
   }
@@ -1500,6 +1546,7 @@ class _$CancelAdviceImpl implements _CancelAdvice {
     TResult? Function()? saveAdvice,
     TResult? Function()? deleteAdvice,
     TResult? Function()? cancelAdvice,
+    TResult? Function()? viewSavedAdvice,
   }) {
     return cancelAdvice?.call();
   }
@@ -1521,6 +1568,7 @@ class _$CancelAdviceImpl implements _CancelAdvice {
     TResult Function()? saveAdvice,
     TResult Function()? deleteAdvice,
     TResult Function()? cancelAdvice,
+    TResult Function()? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (cancelAdvice != null) {
@@ -1542,6 +1590,7 @@ class _$CancelAdviceImpl implements _CancelAdvice {
     required TResult Function(_SaveAdvice value) saveAdvice,
     required TResult Function(_DeleteAdvice value) deleteAdvice,
     required TResult Function(_CancelAdvice value) cancelAdvice,
+    required TResult Function(_ViewSavedAdvice value) viewSavedAdvice,
   }) {
     return cancelAdvice(this);
   }
@@ -1559,6 +1608,7 @@ class _$CancelAdviceImpl implements _CancelAdvice {
     TResult? Function(_SaveAdvice value)? saveAdvice,
     TResult? Function(_DeleteAdvice value)? deleteAdvice,
     TResult? Function(_CancelAdvice value)? cancelAdvice,
+    TResult? Function(_ViewSavedAdvice value)? viewSavedAdvice,
   }) {
     return cancelAdvice?.call(this);
   }
@@ -1576,6 +1626,7 @@ class _$CancelAdviceImpl implements _CancelAdvice {
     TResult Function(_SaveAdvice value)? saveAdvice,
     TResult Function(_DeleteAdvice value)? deleteAdvice,
     TResult Function(_CancelAdvice value)? cancelAdvice,
+    TResult Function(_ViewSavedAdvice value)? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (cancelAdvice != null) {
@@ -1586,7 +1637,172 @@ class _$CancelAdviceImpl implements _CancelAdvice {
 }
 
 abstract class _CancelAdvice implements PaymentSummaryDetailsEvent {
-  const factory _CancelAdvice() = _$CancelAdviceImpl;
+  const factory _CancelAdvice() = _$_CancelAdvice;
+}
+
+/// @nodoc
+abstract class _$$_ViewSavedAdviceCopyWith<$Res> {
+  factory _$$_ViewSavedAdviceCopyWith(
+          _$_ViewSavedAdvice value, $Res Function(_$_ViewSavedAdvice) then) =
+      __$$_ViewSavedAdviceCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ViewSavedAdviceCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$_ViewSavedAdvice>
+    implements _$$_ViewSavedAdviceCopyWith<$Res> {
+  __$$_ViewSavedAdviceCopyWithImpl(
+      _$_ViewSavedAdvice _value, $Res Function(_$_ViewSavedAdvice) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ViewSavedAdvice implements _ViewSavedAdvice {
+  const _$_ViewSavedAdvice();
+
+  @override
+  String toString() {
+    return 'PaymentSummaryDetailsEvent.viewSavedAdvice()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ViewSavedAdvice);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(PaymentSummaryDetails details, bool isMarketPlace)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function() fetchPaymentSummaryList,
+    required TResult Function() fetchBankInstruction,
+    required TResult Function() fetchAdvice,
+    required TResult Function() saveAdvice,
+    required TResult Function() deleteAdvice,
+    required TResult Function() cancelAdvice,
+    required TResult Function() viewSavedAdvice,
+  }) {
+    return viewSavedAdvice();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(PaymentSummaryDetails details, bool isMarketPlace)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function()? fetchPaymentSummaryList,
+    TResult? Function()? fetchBankInstruction,
+    TResult? Function()? fetchAdvice,
+    TResult? Function()? saveAdvice,
+    TResult? Function()? deleteAdvice,
+    TResult? Function()? cancelAdvice,
+    TResult? Function()? viewSavedAdvice,
+  }) {
+    return viewSavedAdvice?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(PaymentSummaryDetails details, bool isMarketPlace)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function()? fetchPaymentSummaryList,
+    TResult Function()? fetchBankInstruction,
+    TResult Function()? fetchAdvice,
+    TResult Function()? saveAdvice,
+    TResult Function()? deleteAdvice,
+    TResult Function()? cancelAdvice,
+    TResult Function()? viewSavedAdvice,
+    required TResult orElse(),
+  }) {
+    if (viewSavedAdvice != null) {
+      return viewSavedAdvice();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchPaymentSummaryDetailsEvent value)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function(_FetchPaymentSummaryListEvent value)
+        fetchPaymentSummaryList,
+    required TResult Function(_FetchBankInstruction value) fetchBankInstruction,
+    required TResult Function(_FetchAdvice value) fetchAdvice,
+    required TResult Function(_SaveAdvice value) saveAdvice,
+    required TResult Function(_DeleteAdvice value) deleteAdvice,
+    required TResult Function(_CancelAdvice value) cancelAdvice,
+    required TResult Function(_ViewSavedAdvice value) viewSavedAdvice,
+  }) {
+    return viewSavedAdvice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult? Function(_FetchBankInstruction value)? fetchBankInstruction,
+    TResult? Function(_FetchAdvice value)? fetchAdvice,
+    TResult? Function(_SaveAdvice value)? saveAdvice,
+    TResult? Function(_DeleteAdvice value)? deleteAdvice,
+    TResult? Function(_CancelAdvice value)? cancelAdvice,
+    TResult? Function(_ViewSavedAdvice value)? viewSavedAdvice,
+  }) {
+    return viewSavedAdvice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult Function(_FetchBankInstruction value)? fetchBankInstruction,
+    TResult Function(_FetchAdvice value)? fetchAdvice,
+    TResult Function(_SaveAdvice value)? saveAdvice,
+    TResult Function(_DeleteAdvice value)? deleteAdvice,
+    TResult Function(_CancelAdvice value)? cancelAdvice,
+    TResult Function(_ViewSavedAdvice value)? viewSavedAdvice,
+    required TResult orElse(),
+  }) {
+    if (viewSavedAdvice != null) {
+      return viewSavedAdvice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ViewSavedAdvice implements PaymentSummaryDetailsEvent {
+  const factory _ViewSavedAdvice() = _$_ViewSavedAdvice;
 }
 
 /// @nodoc
@@ -1607,6 +1823,7 @@ mixin _$PaymentSummaryDetailsState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   BankInstruction get bankInstruction => throw _privateConstructorUsedError;
+  AttachmentFileBuffer get savedAdvice => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentSummaryDetailsStateCopyWith<PaymentSummaryDetailsState>
@@ -1634,7 +1851,8 @@ abstract class $PaymentSummaryDetailsStateCopyWith<$Res> {
       bool isDeletingPayment,
       bool isCancelingAdvice,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      BankInstruction bankInstruction});
+      BankInstruction bankInstruction,
+      AttachmentFileBuffer savedAdvice});
 
   $PaymentSummaryDetailsCopyWith<$Res> get details;
   $SalesOrganisationCopyWith<$Res> get salesOrganization;
@@ -1643,6 +1861,7 @@ abstract class $PaymentSummaryDetailsStateCopyWith<$Res> {
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
   $BankInstructionCopyWith<$Res> get bankInstruction;
+  $AttachmentFileBufferCopyWith<$Res> get savedAdvice;
 }
 
 /// @nodoc
@@ -1673,6 +1892,7 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
     Object? isCancelingAdvice = null,
     Object? failureOrSuccessOption = null,
     Object? bankInstruction = null,
+    Object? savedAdvice = null,
   }) {
     return _then(_value.copyWith(
       details: null == details
@@ -1731,6 +1951,10 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
           ? _value.bankInstruction
           : bankInstruction // ignore: cast_nullable_to_non_nullable
               as BankInstruction,
+      savedAdvice: null == savedAdvice
+          ? _value.savedAdvice
+          : savedAdvice // ignore: cast_nullable_to_non_nullable
+              as AttachmentFileBuffer,
     ) as $Val);
   }
 
@@ -1790,15 +2014,23 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
       return _then(_value.copyWith(bankInstruction: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AttachmentFileBufferCopyWith<$Res> get savedAdvice {
+    return $AttachmentFileBufferCopyWith<$Res>(_value.savedAdvice, (value) {
+      return _then(_value.copyWith(savedAdvice: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$PaymentSummaryDetailsStateImplCopyWith<$Res>
+abstract class _$$_PaymentSummaryDetailsStateCopyWith<$Res>
     implements $PaymentSummaryDetailsStateCopyWith<$Res> {
-  factory _$$PaymentSummaryDetailsStateImplCopyWith(
-          _$PaymentSummaryDetailsStateImpl value,
-          $Res Function(_$PaymentSummaryDetailsStateImpl) then) =
-      __$$PaymentSummaryDetailsStateImplCopyWithImpl<$Res>;
+  factory _$$_PaymentSummaryDetailsStateCopyWith(
+          _$_PaymentSummaryDetailsState value,
+          $Res Function(_$_PaymentSummaryDetailsState) then) =
+      __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1815,7 +2047,8 @@ abstract class _$$PaymentSummaryDetailsStateImplCopyWith<$Res>
       bool isDeletingPayment,
       bool isCancelingAdvice,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      BankInstruction bankInstruction});
+      BankInstruction bankInstruction,
+      AttachmentFileBuffer savedAdvice});
 
   @override
   $PaymentSummaryDetailsCopyWith<$Res> get details;
@@ -1831,16 +2064,18 @@ abstract class _$$PaymentSummaryDetailsStateImplCopyWith<$Res>
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
   @override
   $BankInstructionCopyWith<$Res> get bankInstruction;
+  @override
+  $AttachmentFileBufferCopyWith<$Res> get savedAdvice;
 }
 
 /// @nodoc
-class __$$PaymentSummaryDetailsStateImplCopyWithImpl<$Res>
+class __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>
     extends _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
-        _$PaymentSummaryDetailsStateImpl>
-    implements _$$PaymentSummaryDetailsStateImplCopyWith<$Res> {
-  __$$PaymentSummaryDetailsStateImplCopyWithImpl(
-      _$PaymentSummaryDetailsStateImpl _value,
-      $Res Function(_$PaymentSummaryDetailsStateImpl) _then)
+        _$_PaymentSummaryDetailsState>
+    implements _$$_PaymentSummaryDetailsStateCopyWith<$Res> {
+  __$$_PaymentSummaryDetailsStateCopyWithImpl(
+      _$_PaymentSummaryDetailsState _value,
+      $Res Function(_$_PaymentSummaryDetailsState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1860,8 +2095,9 @@ class __$$PaymentSummaryDetailsStateImplCopyWithImpl<$Res>
     Object? isCancelingAdvice = null,
     Object? failureOrSuccessOption = null,
     Object? bankInstruction = null,
+    Object? savedAdvice = null,
   }) {
-    return _then(_$PaymentSummaryDetailsStateImpl(
+    return _then(_$_PaymentSummaryDetailsState(
       details: null == details
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
@@ -1918,14 +2154,18 @@ class __$$PaymentSummaryDetailsStateImplCopyWithImpl<$Res>
           ? _value.bankInstruction
           : bankInstruction // ignore: cast_nullable_to_non_nullable
               as BankInstruction,
+      savedAdvice: null == savedAdvice
+          ? _value.savedAdvice
+          : savedAdvice // ignore: cast_nullable_to_non_nullable
+              as AttachmentFileBuffer,
     ));
   }
 }
 
 /// @nodoc
 
-class _$PaymentSummaryDetailsStateImpl extends _PaymentSummaryDetailsState {
-  const _$PaymentSummaryDetailsStateImpl(
+class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
+  const _$_PaymentSummaryDetailsState(
       {required this.details,
       required this.salesOrganization,
       required this.customerCodeInfo,
@@ -1939,7 +2179,8 @@ class _$PaymentSummaryDetailsStateImpl extends _PaymentSummaryDetailsState {
       required this.isDeletingPayment,
       required this.isCancelingAdvice,
       required this.failureOrSuccessOption,
-      required this.bankInstruction})
+      required this.bankInstruction,
+      required this.savedAdvice})
       : super._();
 
   @override
@@ -1970,17 +2211,19 @@ class _$PaymentSummaryDetailsStateImpl extends _PaymentSummaryDetailsState {
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
   final BankInstruction bankInstruction;
+  @override
+  final AttachmentFileBuffer savedAdvice;
 
   @override
   String toString() {
-    return 'PaymentSummaryDetailsState(details: $details, salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, user: $user, isDetailFetching: $isDetailFetching, isListLoading: $isListLoading, isFetchingAdvice: $isFetchingAdvice, isSavingAdvice: $isSavingAdvice, shipToInfo: $shipToInfo, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isDeletingPayment: $isDeletingPayment, isCancelingAdvice: $isCancelingAdvice, failureOrSuccessOption: $failureOrSuccessOption, bankInstruction: $bankInstruction)';
+    return 'PaymentSummaryDetailsState(details: $details, salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, user: $user, isDetailFetching: $isDetailFetching, isListLoading: $isListLoading, isFetchingAdvice: $isFetchingAdvice, isSavingAdvice: $isSavingAdvice, shipToInfo: $shipToInfo, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isDeletingPayment: $isDeletingPayment, isCancelingAdvice: $isCancelingAdvice, failureOrSuccessOption: $failureOrSuccessOption, bankInstruction: $bankInstruction, savedAdvice: $savedAdvice)';
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PaymentSummaryDetailsStateImpl &&
+            other is _$_PaymentSummaryDetailsState &&
             (identical(other.details, details) || other.details == details) &&
             (identical(other.salesOrganization, salesOrganization) ||
                 other.salesOrganization == salesOrganization) &&
@@ -2006,7 +2249,9 @@ class _$PaymentSummaryDetailsStateImpl extends _PaymentSummaryDetailsState {
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.bankInstruction, bankInstruction) ||
-                other.bankInstruction == bankInstruction));
+                other.bankInstruction == bankInstruction) &&
+            (identical(other.savedAdvice, savedAdvice) ||
+                other.savedAdvice == savedAdvice));
   }
 
   @override
@@ -2025,14 +2270,15 @@ class _$PaymentSummaryDetailsStateImpl extends _PaymentSummaryDetailsState {
       isDeletingPayment,
       isCancelingAdvice,
       failureOrSuccessOption,
-      bankInstruction);
+      bankInstruction,
+      savedAdvice);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PaymentSummaryDetailsStateImplCopyWith<_$PaymentSummaryDetailsStateImpl>
-      get copyWith => __$$PaymentSummaryDetailsStateImplCopyWithImpl<
-          _$PaymentSummaryDetailsStateImpl>(this, _$identity);
+  _$$_PaymentSummaryDetailsStateCopyWith<_$_PaymentSummaryDetailsState>
+      get copyWith => __$$_PaymentSummaryDetailsStateCopyWithImpl<
+          _$_PaymentSummaryDetailsState>(this, _$identity);
 }
 
 abstract class _PaymentSummaryDetailsState extends PaymentSummaryDetailsState {
@@ -2050,8 +2296,9 @@ abstract class _PaymentSummaryDetailsState extends PaymentSummaryDetailsState {
       required final bool isDeletingPayment,
       required final bool isCancelingAdvice,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final BankInstruction
-          bankInstruction}) = _$PaymentSummaryDetailsStateImpl;
+      required final BankInstruction bankInstruction,
+      required final AttachmentFileBuffer
+          savedAdvice}) = _$_PaymentSummaryDetailsState;
   const _PaymentSummaryDetailsState._() : super._();
 
   @override
@@ -2083,7 +2330,9 @@ abstract class _PaymentSummaryDetailsState extends PaymentSummaryDetailsState {
   @override
   BankInstruction get bankInstruction;
   @override
+  AttachmentFileBuffer get savedAdvice;
+  @override
   @JsonKey(ignore: true)
-  _$$PaymentSummaryDetailsStateImplCopyWith<_$PaymentSummaryDetailsStateImpl>
+  _$$_PaymentSummaryDetailsStateCopyWith<_$_PaymentSummaryDetailsState>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -73,6 +73,8 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.articleannuncementTagFetchingError() =
       _ArticleannuncementTagFetchingError;
   const factory ApiFailure.attachmentDownloadError() = _AttachmentDownloadError;
+  const factory ApiFailure.openDownloadedFileError(String message) =
+      _OpenDownloadedFileError;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -165,6 +167,8 @@ extension ApiFailureExt on ApiFailure {
         marketplaceTnCAcceptanceError: (_) => const TRObject(
           'Unable to update acceptance status',
         ),
+        openDownloadedFileError: (openFileError) =>
+            TRObject(openFileError.message),
       );
   String get nonTranslatedFailureMessage {
     var fullMessage = failureMessage.message;

@@ -17,7 +17,7 @@ class _PaymentAdviceButton extends StatelessWidget {
             final eligibilityState = context.read<EligibilityBloc>().state;
             if (!state.isSavingAdvice && !eligibilityState.salesOrg.isID) {
               CustomSnackBar(
-                messageText: context.tr('Download Successful'),
+                messageText: context.tr('Payment advice has been downloaded.'),
               ).show(context);
             }
             if (!state.isCancelingAdvice && eligibilityState.salesOrg.isID) {
@@ -50,7 +50,8 @@ class _PaymentAdviceButton extends StatelessWidget {
           previous.isSavingAdvice != current.isSavingAdvice ||
           previous.isFetchingAdvice != current.isFetchingAdvice ||
           previous.isDeletingPayment != current.isDeletingPayment ||
-          previous.isCancelingAdvice != current.isCancelingAdvice,
+          previous.isCancelingAdvice != current.isCancelingAdvice ||
+          previous.savedAdvice != current.savedAdvice,
       builder: (context, state) {
         final eligibilityState = context.read<EligibilityBloc>().state;
         var buttons = _getDefaultButtons(state);
@@ -101,9 +102,8 @@ class _PaymentAdviceButton extends StatelessWidget {
     PaymentSummaryDetailsState state,
   ) =>
       [
-        if (!state.details.status.getIsSuccessfulOrProcessed)
-          _DeleteAdviceButton(state: state),
-        if (!state.details.status.getIsSuccessfulOrProcessed)
+        if (state.showDeleteAdviceButton) _DeleteAdviceButton(state: state),
+        if (state.showDeleteAdviceButton)
           const SizedBox(
             width: 16,
           ),
@@ -185,18 +185,22 @@ class _DownloadAdviceButton extends StatelessWidget {
           child: LoadingShimmer.withChild(
             enabled: state.isSavingAdvice,
             child: Text(
-              context.tr('Download advice'),
+              state.isSavedAdviceEmpty
+                  ? context.tr('Download advice')
+                  : context.tr('Open payment advice'),
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: ZPColors.primary,
                   ),
             ),
           ),
         ),
-        onPressed: () {
-          context.read<PaymentSummaryDetailsBloc>().add(
-                const PaymentSummaryDetailsEvent.saveAdvice(),
-              );
-        },
+        onPressed: () => state.isSavedAdviceEmpty
+            ? context.read<PaymentSummaryDetailsBloc>().add(
+                  const PaymentSummaryDetailsEvent.saveAdvice(),
+                )
+            : context.read<PaymentSummaryDetailsBloc>().add(
+                  const PaymentSummaryDetailsEvent.viewSavedAdvice(),
+                ),
       ),
     );
   }

@@ -19,6 +19,7 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
     required bool isCancelingAdvice,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required BankInstruction bankInstruction,
+    required AttachmentFileBuffer savedAdvice,
   }) = _PaymentSummaryDetailsState;
 
   factory PaymentSummaryDetailsState.initial() => PaymentSummaryDetailsState(
@@ -36,6 +37,7 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
         isDeletingPayment: false,
         bankInstruction: BankInstruction.empty(),
         isCancelingAdvice: false,
+        savedAdvice: AttachmentFileBuffer.empty(),
       );
 
   bool get isLoading => isDetailFetching || isListLoading;
@@ -58,4 +60,9 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
 
   String get adviceDeletedMessage =>
       '${salesOrganization.salesOrg.paymentIdPretext} #${details.zzAdvice.displayDashIfEmpty} has been deleted';
+
+  bool get isSavedAdviceEmpty => savedAdvice == AttachmentFileBuffer.empty();
+
+  bool get showDeleteAdviceButton =>
+      !details.status.getIsSuccessfulOrProcessed && isSavedAdviceEmpty;
 }
