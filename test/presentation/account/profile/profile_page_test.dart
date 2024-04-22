@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
+import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -258,6 +259,33 @@ void main() {
           const CustomerLicenseEvent.loadMore(),
         ),
       ).called(1);
+    });
+
+    testWidgets('Find License number', (tester) async {
+      // final customerLicenseBloc = locator<CustomerLicenseBloc>();
+      when(() => customerLicenseBlocMock.state).thenReturn(
+        CustomerLicenseState.initial().copyWith(
+          customerLicenses: [
+            customerLicensesListMock.first.copyWith(
+              licenseNumbers: StringValue('fake-license-number'),
+              licenseDescription: StringValue(''),
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+
+      await tester.dragUntilVisible(
+        find.text('License information:'),
+        find.byType(ScrollList),
+        const Offset(0.0, -500),
+      );
+      await tester.pumpAndSettle();
+      final licenseNumber =
+          find.text('License no: - fake-license-number', findRichText: true);
+      expect(licenseNumber, findsOneWidget);
     });
 
     testWidgets('Language Dropdown test', (tester) async {

@@ -45,7 +45,7 @@ class _LicenseTile extends StatelessWidget {
                   children: <TextSpan>[
                     const TextSpan(text: ' - '),
                     TextSpan(
-                      text: customerLicense.licenseDescription.displayNAIfEmpty,
+                      text: customerLicense.licenseNumbers.displayNAIfEmpty,
                     ),
                   ],
                 ),
