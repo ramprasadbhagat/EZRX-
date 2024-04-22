@@ -45,13 +45,9 @@ class LoginRobot extends CommonRobot {
       find.byType(IntroPage),
       maxIteration: 5,
     );
-    if (skipIntroButton.evaluate().isNotEmpty) {
-      await tapSkipIntroButton();
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-      return;
-    }
-    if (introGetStartedButton.evaluate().isNotEmpty) {
+    while (introGetStartedButton.evaluate().isNotEmpty) {
       await tapIntroGetStartedButton();
+      await tester.pumpAndSettle(const Duration(seconds: 2));
     }
   }
 
@@ -122,7 +118,7 @@ class LoginRobot extends CommonRobot {
 
   Future<void> tapSkipIntroButton() async {
     await tester.tap(skipIntroButton);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(seconds: 2));
   }
 
   void findIntroGetStartedButton() {

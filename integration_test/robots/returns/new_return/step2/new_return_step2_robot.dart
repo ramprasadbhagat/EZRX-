@@ -125,8 +125,6 @@ class NewReturnStep2Robot {
     await tester.pumpAndSettle();
     await tester.tap(find.text(reason));
     await tester.pumpAndSettle();
-    await tester.tap(nextButton);
-    await tester.pumpAndSettle();
   }
 
   Future<void> tapNextButton() async {
@@ -170,8 +168,6 @@ class NewReturnStep2Robot {
       await tester.tap(find.text(reason));
       await tester.pumpAndSettle();
     }
-    await tester.tap(nextButton);
-    await tester.pumpAndSettle();
   }
 
   void verifyNextToStep3(String materialNumber, String materialName) {
