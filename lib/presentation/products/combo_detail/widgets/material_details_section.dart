@@ -86,6 +86,7 @@ class _MaterialImageSection extends StatelessWidget {
         ),
         if (isFixed)
           Container(
+            key: WidgetKeys.comboDetailFixedTag,
             padding: const EdgeInsets.symmetric(
               horizontal: 8,
               vertical: 2,

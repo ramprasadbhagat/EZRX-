@@ -58,6 +58,7 @@ class WidgetKeys {
   static Key statusTracker(String status) => Key('statusTracker$status');
   static const Key offerTag = Key('offerTag');
   static const Key bundleTag = Key('bundleTag');
+  static const Key comboOfferTag = Key('comboOfferTag');
   static const Key priceTextData = Key('priceTextData');
   static const Key priceTextTitle = Key('priceTextTitle');
   static const Key radioPaymentGateway = Key('radioPaymentGateway');
@@ -308,15 +309,13 @@ class WidgetKeys {
   //============================================================
   static const Key comboDealDetailPage = Key('comboDealDetailPage');
   static const Key getComboDealButton = Key('getComboDealButton');
-  static const Key comboTitleLoading = Key('comboTitleLoading');
   static const Key combodealsBody = Key('combodealsBody');
   static const Key exploreComboDealsButtton = Key('exploreComboDealsButtton');
   static const Key comboRequirementTitleLoading =
       Key('comboRequirementTitleLoading');
   static const Key comboRequirementSubTitleLoading =
       Key('comboRequirementSubTitleLoading');
-  static const Key comboFixedList = Key('comboFixedList');
-  static const Key comboMaterialList = Key('comboMaterialList');
+
   static const Key comboNotEligibleMessage = Key('comboNotEligibleMessage');
   static const Key comboNextDealInfo = Key('comboNextDealInfo');
   static const Key comboRateDiscounted = Key('comboRateDiscounted');
@@ -330,6 +329,14 @@ class WidgetKeys {
   static Key comboDeteleConfirmButton = const Key('comboDeteleConfirmButton');
   static Key comboBestDealIcon = const Key('comboBestDealIcon');
   static Key comboNextDealIcon = const Key('comboNextDealIcon');
+  static const Key comboDealSubtotal = Key('comboDetailSubtotal');
+  static const Key comboDealSubtotalDiscounted = Key('comboDetailSubtotal');
+  static const Key comboDealAddOrEditComboButton =
+      Key('comboDealAddOrEditComboButton');
+  static const Key comboDealMaterialItemDiscountTag =
+      Key('comboDealMaterialItemDiscountTag');
+  static const Key comboDealMaterialItemNextTierDiscount =
+      Key('comboDealMaterialItemNextTierDiscount');
 
   //============================================================
   //  PolicyConfiguration page Keys
@@ -910,6 +917,8 @@ class WidgetKeys {
   static const Key expiryDateInstructionSheet =
       Key('expiryDateInstructionSheet');
   static const Key materialAddToCartButton = Key('materialAddToCartButton');
+  static const Key comboOfferSection = Key('comboOfferSection');
+
   //============================================================
   //  bundle Details
   //============================================================
@@ -922,6 +931,34 @@ class WidgetKeys {
   static const Key addBundleRate = Key('addBundleRate');
   static const Key bundleAddToCartButton = Key('bundleAddToCartButton');
 
+  //============================================================
+  //  Combo Details
+  //============================================================
+  static const Key comboDetailTitleLoading = Key('comboDetailTitleLoading');
+  static const Key comboDetailAppBarTitle = Key('comboDetailAppBarTitle');
+  static const Key comboDetailRequirement = Key('comboDetailRequirement');
+  static const Key comboDetailFixedList = Key('comboFixedList');
+  static const Key comboDetailFixedWarningMessage =
+      Key('comboDetailFixedWarningMessage');
+  static const Key comboDetailMaterialList = Key('comboMaterialList');
+  static const Key comboDetailOrderForListTile =
+      Key('comboDetailOrderForListTile');
+  static const Key comboDetailTotalDiscountedPercent =
+      Key('comboDetailTotalDiscountedPercent');
+  static const Key comboDetailTotalUnits = Key('comboDetailTotalUnits');
+  static const Key comboDetailFixedTag = Key('comboDetailFixedTag');
+
+  static const Key comboMaterialDiscountedPrice =
+      Key('comboMaterialDiscountedPrice');
+
+  static const Key comboMaterialOriginalPrice = Key('itemSubtotalPrice');
+
+  static const Key itemSubtotalPrice = Key('itemSubtotalPrice');
+
+  static const Key itemOriginalSubtotalPrice = Key('itemOriginalSubtotalPrice');
+
+  static const Key comboMaterialQuantityInput =
+      Key('comboMaterialQuantityInput');
   //============================================================
   //  Payment Summary
   //============================================================

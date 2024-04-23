@@ -153,7 +153,7 @@ class SecurityRobot extends CommonRobot {
 
   void verifyConditionValidationPassword(String text, bool status) {
     expect(
-      ((tester.widget<Text>(find.textContaining(text.tr()))).style)?.color,
+      ((tester.widget<Text>(find.text(text.tr()))).style)?.color,
       status ? ZPColors.passwordValidationsColor : ZPColors.red,
     );
   }

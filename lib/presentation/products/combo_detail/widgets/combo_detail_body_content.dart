@@ -36,7 +36,7 @@ class _ComboDetailBodyContent extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5.0),
           child: ScrollList<PriceAggregate>(
-            key: WidgetKeys.comboMaterialList,
+            key: WidgetKeys.comboDetailMaterialList,
             noRecordFoundWidget: const NoRecordFound(
               svgImage: SvgImage.faqSearch,
             ),
@@ -53,7 +53,7 @@ class _ComboDetailBodyContent extends StatelessWidget {
                       return state.mandatoryMaterials.isEmpty
                           ? const SizedBox.shrink()
                           : Column(
-                              key: WidgetKeys.comboFixedList,
+                              key: WidgetKeys.comboDetailFixedList,
                               children: state.mandatoryMaterials.values
                                   .map(
                                     (item) => LoadingShimmer.withChild(
@@ -76,6 +76,7 @@ class _ComboDetailBodyContent extends StatelessWidget {
                       context.tr(
                         'Select at least one product from the below section to receive offered price',
                       ),
+                      key: WidgetKeys.comboDetailFixedWarningMessage,
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                   ),

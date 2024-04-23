@@ -36,6 +36,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
             ),
             ListTile(
               dense: true,
+              key: WidgetKeys.comboDetailOrderForListTile,
               onTap: () => _showSumaryInfo(context),
               visualDensity: const VisualDensity(vertical: -4, horizontal: -2),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -82,6 +83,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                                 ),
                               },
                             ),
+                            key: WidgetKeys.comboDetailTotalDiscountedPercent,
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       fontWeight: FontWeight.w600,
@@ -91,7 +93,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                           ),
                         const Spacer(),
                         PriceComponent(
-                          key: WidgetKeys.grandTotalKey,
+                          key: WidgetKeys.comboDealSubtotal,
                           salesOrgConfig: context
                               .read<EligibilityBloc>()
                               .state
@@ -113,10 +115,11 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                           context,
                           totalUnit: state.totalQuantityUnit,
                         ),
+                        key: WidgetKeys.comboDetailTotalUnits,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       PriceComponent(
-                        key: WidgetKeys.grandTotalKey,
+                        key: WidgetKeys.comboDealSubtotalDiscounted,
                         salesOrgConfig: context
                             .read<EligibilityBloc>()
                             .state
@@ -254,7 +257,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
                     previous.isEnableAddToCart != current.isEnableAddToCart,
                 builder: (context, state) {
                   return ElevatedButton(
-                    key: WidgetKeys.checkoutButton,
+                    key: WidgetKeys.comboDealAddOrEditComboButton,
                     onPressed: state.isEnableAddToCart
                         ? () {
                             context.read<CartBloc>().add(

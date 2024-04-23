@@ -51,6 +51,7 @@ class _ItemSubTotalSection extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         PriceComponent(
+                          key: WidgetKeys.itemOriginalSubtotalPrice,
                           salesOrgConfig: context
                               .read<EligibilityBloc>()
                               .state
@@ -61,6 +62,7 @@ class _ItemSubTotalSection extends StatelessWidget {
                       ],
                     ),
                   PriceComponent(
+                    key: WidgetKeys.itemSubtotalPrice,
                     salesOrgConfig:
                         context.read<EligibilityBloc>().state.salesOrgConfigs,
                     price: state.currentDeal.scheme.displayOriginalPrice

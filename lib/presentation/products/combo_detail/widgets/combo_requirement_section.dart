@@ -6,6 +6,7 @@ class _ComboRequirementSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.comboDetailRequirement,
       showBorder: true,
       showShadow: false,
       width: double.infinity,

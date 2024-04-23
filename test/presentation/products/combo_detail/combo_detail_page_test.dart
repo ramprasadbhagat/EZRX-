@@ -294,7 +294,7 @@ void main() {
           final appbarTitle = find.text('Combo K1');
           expect(appbarTitle, findsNothing);
 
-          final appbarLoading = find.byKey(WidgetKeys.comboTitleLoading);
+          final appbarLoading = find.byKey(WidgetKeys.comboDetailTitleLoading);
           expect(appbarLoading, findsOneWidget);
 
           final comboRequirementLoading =
@@ -339,7 +339,7 @@ void main() {
           await tester.pump();
           final appbarTitle = find.text('Combo K1');
 
-          final appbarLoading = find.byKey(WidgetKeys.comboTitleLoading);
+          final appbarLoading = find.byKey(WidgetKeys.comboDetailTitleLoading);
 
           final comboRequirementLoading =
               find.byKey(WidgetKeys.comboRequirementTitleLoading);
@@ -625,7 +625,8 @@ void main() {
           final totalMaterials = find.byKey(WidgetKeys.totalMaterialItemCount);
           expect(totalMaterials, findsOneWidget);
 
-          final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
+          final comboMaterialList =
+              find.byKey(WidgetKeys.comboDetailMaterialList);
           expect(comboMaterialList, findsOneWidget);
 
           final materialImage = find.byKey(
@@ -1011,7 +1012,7 @@ void main() {
 
           await tester.pump();
 
-          final comboFixedList = find.byKey(WidgetKeys.comboFixedList);
+          final comboFixedList = find.byKey(WidgetKeys.comboDetailFixedList);
           expect(comboFixedList, findsNothing);
 
           final selectAtLeastMessage = find.text(
@@ -1025,7 +1026,8 @@ void main() {
           final totalMaterials = find.byKey(WidgetKeys.totalMaterialItemCount);
           expect(totalMaterials, findsOneWidget);
 
-          final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
+          final comboMaterialList =
+              find.byKey(WidgetKeys.comboDetailMaterialList);
           expect(comboMaterialList, findsOneWidget);
 
           final cartItemQuantityInputKey =
@@ -1110,7 +1112,7 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsOneWidget);
 
-          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
 
           await tester.tap(checkoutButton);
@@ -1228,7 +1230,7 @@ void main() {
 
           await tester.pump();
 
-          final comboFixedList = find.byKey(WidgetKeys.comboFixedList);
+          final comboFixedList = find.byKey(WidgetKeys.comboDetailFixedList);
           expect(comboFixedList, findsOneWidget);
 
           final selectAtLeastMessage = find.text(
@@ -1242,7 +1244,8 @@ void main() {
           final totalMaterials = find.byKey(WidgetKeys.totalMaterialItemCount);
           expect(totalMaterials, findsOneWidget);
 
-          final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
+          final comboMaterialList =
+              find.byKey(WidgetKeys.comboDetailMaterialList);
           expect(comboMaterialList, findsOneWidget);
 
           final fixedItem =
@@ -1293,7 +1296,7 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );
@@ -1396,7 +1399,7 @@ void main() {
 
           await tester.pump();
 
-          final comboFixedList = find.byKey(WidgetKeys.comboFixedList);
+          final comboFixedList = find.byKey(WidgetKeys.comboDetailFixedList);
           expect(comboFixedList, findsNothing);
 
           final selectAtLeastMessage = find.text(
@@ -1410,7 +1413,8 @@ void main() {
           final totalMaterials = find.byKey(WidgetKeys.totalMaterialItemCount);
           expect(totalMaterials, findsOneWidget);
 
-          final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
+          final comboMaterialList =
+              find.byKey(WidgetKeys.comboDetailMaterialList);
           expect(comboMaterialList, findsOneWidget);
         },
       );
@@ -1446,7 +1450,7 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );
@@ -1562,7 +1566,7 @@ void main() {
 
           await tester.pump();
 
-          final comboFixedList = find.byKey(WidgetKeys.comboFixedList);
+          final comboFixedList = find.byKey(WidgetKeys.comboDetailFixedList);
           expect(comboFixedList, findsNothing);
 
           final selectAtLeastMessage = find.text(
@@ -1576,7 +1580,8 @@ void main() {
           final totalMaterials = find.byKey(WidgetKeys.totalMaterialItemCount);
           expect(totalMaterials, findsOneWidget);
 
-          final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
+          final comboMaterialList =
+              find.byKey(WidgetKeys.comboDetailMaterialList);
           expect(comboMaterialList, findsOneWidget);
         },
       );
@@ -1609,7 +1614,7 @@ void main() {
               find.byKey(WidgetKeys.comboRateDiscounted);
           expect(comboRateDiscounted, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );
@@ -1801,7 +1806,7 @@ void main() {
 
           await tester.pump();
 
-          final comboFixedList = find.byKey(WidgetKeys.comboFixedList);
+          final comboFixedList = find.byKey(WidgetKeys.comboDetailFixedList);
           expect(comboFixedList, findsNothing);
 
           final selectAtLeastMessage = find.text(
@@ -1815,7 +1820,8 @@ void main() {
           final totalMaterials = find.byKey(WidgetKeys.totalMaterialItemCount);
           expect(totalMaterials, findsOneWidget);
 
-          final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
+          final comboMaterialList =
+              find.byKey(WidgetKeys.comboDetailMaterialList);
           expect(comboMaterialList, findsOneWidget);
         },
       );
@@ -1851,7 +1857,7 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );
@@ -2037,7 +2043,7 @@ void main() {
 
           await tester.pump();
 
-          final comboFixedList = find.byKey(WidgetKeys.comboFixedList);
+          final comboFixedList = find.byKey(WidgetKeys.comboDetailFixedList);
           expect(comboFixedList, findsNothing);
 
           final selectAtLeastMessage = find.text(
@@ -2051,11 +2057,12 @@ void main() {
           final totalMaterials = find.byKey(WidgetKeys.totalMaterialItemCount);
           expect(totalMaterials, findsOneWidget);
 
-          final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
+          final comboMaterialList =
+              find.byKey(WidgetKeys.comboDetailMaterialList);
           expect(comboMaterialList, findsOneWidget);
 
           await tester.fling(
-            find.byKey(WidgetKeys.comboMaterialList),
+            find.byKey(WidgetKeys.comboDetailMaterialList),
             const Offset(0.0, -5000.0),
             800.0,
           );
@@ -2112,7 +2119,7 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );
@@ -2312,7 +2319,7 @@ void main() {
 
           await tester.pump();
 
-          final comboFixedList = find.byKey(WidgetKeys.comboFixedList);
+          final comboFixedList = find.byKey(WidgetKeys.comboDetailFixedList);
           expect(comboFixedList, findsNothing);
 
           final selectAtLeastMessage = find.text(
@@ -2326,7 +2333,8 @@ void main() {
           final totalMaterials = find.byKey(WidgetKeys.totalMaterialItemCount);
           expect(totalMaterials, findsOneWidget);
 
-          final comboMaterialList = find.byKey(WidgetKeys.comboMaterialList);
+          final comboMaterialList =
+              find.byKey(WidgetKeys.comboDetailMaterialList);
           expect(comboMaterialList, findsOneWidget);
         },
       );
@@ -2361,7 +2369,7 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );

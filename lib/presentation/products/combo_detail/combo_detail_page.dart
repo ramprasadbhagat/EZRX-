@@ -69,13 +69,14 @@ class ComboDetailPage extends StatelessWidget {
           appBar: AppBar(
             title: state.isFetchingComboInfo
                 ? SizedBox(
-                    key: WidgetKeys.comboTitleLoading,
+                    key: WidgetKeys.comboDetailTitleLoading,
                     width: 100,
                     height: 20,
                     child: LoadingShimmer.tile(),
                   )
                 : Text(
                     context.tr(state.currentDeal.scheme.comboDealTitleAppbar),
+                    key: WidgetKeys.comboDetailAppBarTitle,
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
             centerTitle: false,

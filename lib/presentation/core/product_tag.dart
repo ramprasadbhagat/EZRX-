@@ -97,6 +97,7 @@ class ProductTag extends StatelessWidget {
       );
   factory ProductTag.comboOffer({TextStyle? labelStyle}) => ProductTag._(
         labelTag: 'Combo offer',
+        key: WidgetKeys.comboOfferTag,
         backgroundColor: ZPColors.skyBlueColor,
         iconData: Icons.discount_outlined,
         hasIcon: true,

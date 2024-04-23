@@ -55,6 +55,8 @@ class HomeRobot extends CommonRobot {
   final homeBanner = find.byKey(WidgetKeys.homeBanner);
   final customerCodeSelectShipTo =
       find.byKey(WidgetKeys.customerCodeSelectShipTo);
+  final comboOffer = find.byKey(WidgetKeys.combodealsBody);
+  final exploreComboDeal = find.byKey(WidgetKeys.exploreComboDealsButtton);
 
   void verify() {
     expect(homeTab, findsOneWidget);
@@ -412,5 +414,15 @@ class HomeRobot extends CommonRobot {
   Future<bool> isCustomerCodeNotSelected(String shipToCode) async {
     await tester.pumpUntilVisible(customerCodeSelectShipTo);
     return tester.widget<Text>(customerCodeSelectShipTo).data != shipToCode;
+  }
+
+  void findComboOffer() {
+    expect(productsOnOffer, findsOneWidget);
+  }
+
+  Future<void> tapExploreComboDeal() async {
+    expect(exploreComboDeal, findsOneWidget);
+    await tester.tap(exploreComboDeal);
+    await tester.pumpAndSettle();
   }
 }

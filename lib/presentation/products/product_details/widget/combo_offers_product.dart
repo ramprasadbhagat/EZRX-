@@ -80,6 +80,7 @@ class ComboOffersProduct extends StatelessWidget {
           }
 
           return Container(
+            key: WidgetKeys.comboOfferSection,
             padding: const EdgeInsets.all(16),
             margin:
                 const EdgeInsets.symmetric(horizontal: 12).copyWith(top: 32),

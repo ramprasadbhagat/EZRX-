@@ -40,6 +40,17 @@ class ProductRobot extends CommonRobot {
     );
   }
 
+  void verifyComboOfferLabel() {
+    final cardCount = materialCard.evaluate().length;
+    expect(
+      find.descendant(
+        of: materialCard,
+        matching: find.byKey(WidgetKeys.comboOfferTag),
+      ),
+      findsNWidgets(cardCount),
+    );
+  }
+
   void verifyCartButtonVisible() {
     expect(cartButton, findsOneWidget);
   }

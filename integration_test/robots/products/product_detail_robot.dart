@@ -502,4 +502,18 @@ class ProductDetailRobot extends CommonRobot {
 
   Finder _productImage(int index, bool isSelected) =>
       find.byKey(WidgetKeys.genericKey(key: 'selected$index$isSelected'));
+
+  void verifyComboOfferLabel() => expect(
+        find.descendant(
+          of: body,
+          matching: find.byKey(WidgetKeys.comboOfferTag),
+        ),
+        findsOneWidget,
+      );
+
+  Future<void> verifyAndTapGetComboDeal() async {
+    expect(find.byKey(WidgetKeys.comboOfferSection), findsOneWidget);
+    await tester.tap(find.byKey(WidgetKeys.getComboDealButton));
+    await tester.pumpAndSettle();
+  }
 }

@@ -53,6 +53,7 @@ class _MaterialDetails extends StatelessWidget {
                       .enableGMC,
                 ),
                 maxLines: 2,
+                key: WidgetKeys.materialDetailsMaterialNumber,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.darkGray,
@@ -68,6 +69,7 @@ class _MaterialDetails extends StatelessWidget {
                     if (canDisplayNextTierDiscount)
                       Expanded(
                         child: Text(
+                          key: WidgetKeys.comboDealMaterialItemNextTierDiscount,
                           context.tr(
                             'Next tier {discountRate}% discount',
                             namedArgs: {
@@ -87,11 +89,13 @@ class _MaterialDetails extends StatelessWidget {
                 onTap: onTapName,
                 child: Text(
                   comboItem.materialInfo.displayDescription,
+                  key: WidgetKeys.materialDetailsMaterialDescription,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
               Text(
                 comboItem.materialInfo.getManufactured,
+                key: WidgetKeys.manufacturerMaterials,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontSize: 10,
                       color: ZPColors.neutralsGrey1,
@@ -152,6 +156,7 @@ class _MaterialPriceSection extends StatelessWidget {
             children: [
               if (materialComboRate > 0)
                 PriceComponent(
+                  key: WidgetKeys.comboMaterialOriginalPrice,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: comboItem.display(PriceType.listPrice),
@@ -159,6 +164,7 @@ class _MaterialPriceSection extends StatelessWidget {
                 ),
               const SizedBox(width: 4),
               PriceComponent(
+                key: WidgetKeys.comboMaterialDiscountedPrice,
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: comboItem
@@ -171,6 +177,7 @@ class _MaterialPriceSection extends StatelessWidget {
             ],
           )
         : PriceComponent(
+            key: WidgetKeys.comboMaterialDiscountedPrice,
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,
             price: comboItem.display(PriceType.listPrice),

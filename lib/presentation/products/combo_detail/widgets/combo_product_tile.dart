@@ -19,9 +19,6 @@ class _ComboProductTile extends StatelessWidget {
     final bloc = context.read<ComboDealMaterialDetailBloc>();
 
     return Padding(
-      key: WidgetKeys.comboItemProductTile(
-        comboItem.getMaterialNumber.getValue(),
-      ),
       padding: const EdgeInsets.symmetric(horizontal: 12).copyWith(bottom: 24),
       child: BlocBuilder<ComboDealMaterialDetailBloc,
           ComboDealMaterialDetailState>(
@@ -29,6 +26,9 @@ class _ComboProductTile extends StatelessWidget {
             previous.selectedItems != current.selectedItems,
         builder: (_, state) {
           return EdgeCheckbox(
+            key: WidgetKeys.comboItemProductTile(
+              comboItem.getMaterialNumber.displayMatNo,
+            ),
             onChanged: isFixed
                 ? (_) {}
                 : (value) => bloc.add(

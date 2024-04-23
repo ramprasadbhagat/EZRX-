@@ -120,4 +120,6 @@ run_id_client_order_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENTUSERORDER} 
 run_id_client_payment_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENTUSERPAYMENT} 
+run_kh_client_order_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${CLIENTUSERORDER} 
 	
