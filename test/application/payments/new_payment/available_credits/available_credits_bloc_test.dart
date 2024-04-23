@@ -65,6 +65,7 @@ void main() {
               offset: 0,
               appliedFilter: AvailableCreditFilter.defaultFilter(),
               searchKey: SearchKey.searchFilter('ab'),
+              isMarketPlace: true,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -74,6 +75,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter('ab'),
+            isMarketPlace: true,
           ),
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
@@ -130,6 +132,7 @@ void main() {
               offset: 0,
               appliedFilter: AvailableCreditFilter.defaultFilter(),
               searchKey: SearchKey.searchFilter('ab'),
+              isMarketPlace: false,
             ),
           ).thenAnswer((invocation) async => Right(openItems));
         },
@@ -137,6 +140,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter('ab'),
+            isMarketPlace: false,
           ),
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
@@ -184,6 +188,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter('a'),
+            isMarketPlace: true,
           ),
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
@@ -209,6 +214,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter('ab'),
+            isMarketPlace: true,
           ),
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
@@ -254,13 +260,14 @@ void main() {
               offset: openItems.length,
               appliedFilter: AvailableCreditFilter.defaultFilter(),
               searchKey: SearchKey.searchFilter(''),
+              isMarketPlace: true,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
           );
         },
         act: (bloc) => bloc.add(
-          const AvailableCreditsEvent.loadMore(),
+          const AvailableCreditsEvent.loadMore(isMarketPlace: true),
         ),
         expect: () => [
           AvailableCreditsState.initial().copyWith(
@@ -316,11 +323,12 @@ void main() {
               offset: openItems.length,
               appliedFilter: AvailableCreditFilter.defaultFilter(),
               searchKey: SearchKey.searchFilter(''),
+              isMarketPlace: false,
             ),
           ).thenAnswer((invocation) async => Right(openItems));
         },
         act: (bloc) => bloc.add(
-          const AvailableCreditsEvent.loadMore(),
+          const AvailableCreditsEvent.loadMore(isMarketPlace: false),
         ),
         expect: () => [
           AvailableCreditsState.initial().copyWith(

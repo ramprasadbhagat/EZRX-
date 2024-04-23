@@ -25,6 +25,7 @@ import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoices_tab.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,7 +113,7 @@ void main() {
     fakeInvoices = await NewPaymentLocalDataSource().getCustomerOpenItems();
   });
 
-  Widget getWidget() {
+  Widget getWidget({bool isMarketPlace = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
@@ -153,8 +154,11 @@ void main() {
           create: (context) => eligibilityBlocMock,
         ),
       ],
-      child: const Scaffold(
-        body: OutstandingInvoicesTab(),
+      child: PaymentModule(
+        isMarketPlace: isMarketPlace,
+        child: const Scaffold(
+          body: OutstandingInvoicesTab(),
+        ),
       ),
     );
   }
@@ -185,6 +189,7 @@ void main() {
           OutstandingInvoicesEvent.fetch(
             appliedFilter: outstandingInvoicesBlocMock.state.appliedFilter,
             searchKey: SearchKey.search('26'),
+            isMarketPlace: true,
           ),
         ),
       );
@@ -205,6 +210,7 @@ void main() {
           OutstandingInvoicesEvent.fetch(
             appliedFilter: outstandingInvoicesBlocMock.state.appliedFilter,
             searchKey: SearchKey.search('26'),
+            isMarketPlace: true,
           ),
         ),
       );
@@ -226,6 +232,7 @@ void main() {
           OutstandingInvoicesEvent.fetch(
             appliedFilter: outstandingInvoicesBlocMock.state.appliedFilter,
             searchKey: SearchKey.search('26'),
+            isMarketPlace: true,
           ),
         ),
       );
@@ -287,6 +294,7 @@ void main() {
           OutstandingInvoicesEvent.fetch(
             appliedFilter: outstandingInvoicesBlocMock.state.appliedFilter,
             searchKey: SearchKey.search(''),
+            isMarketPlace: true,
           ),
         ),
       );
@@ -448,6 +456,7 @@ void main() {
           OutstandingInvoicesEvent.fetch(
             appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
             searchKey: outstandingInvoicesBlocMock.state.searchKey,
+            isMarketPlace: true,
           ),
         ),
       );
@@ -480,7 +489,9 @@ void main() {
 
       verify(
         () => outstandingInvoicesBlocMock.add(
-          const OutstandingInvoicesEvent.loadMore(),
+          const OutstandingInvoicesEvent.loadMore(
+            isMarketPlace: false,
+          ),
         ),
       );
     });
@@ -564,6 +575,7 @@ void main() {
           OutstandingInvoicesEvent.fetch(
             appliedFilter: invoiceFilter,
             searchKey: outstandingInvoicesBlocMock.state.searchKey,
+            isMarketPlace: true,
           ),
         ),
       );

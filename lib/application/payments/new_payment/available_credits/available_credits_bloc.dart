@@ -58,6 +58,7 @@ class AvailableCreditsBloc
           offset: 0,
           appliedFilter: value.appliedFilter,
           searchKey: value.searchKey,
+          isMarketPlace: value.isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -102,6 +103,7 @@ class AvailableCreditsBloc
         offset: state.items.length,
         appliedFilter: state.appliedFilter,
         searchKey: state.searchKey,
+        isMarketPlace: value.isMarketPlace,
       );
 
       failureOrSuccess.fold(

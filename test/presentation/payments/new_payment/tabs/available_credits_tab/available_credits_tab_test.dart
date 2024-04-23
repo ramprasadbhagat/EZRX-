@@ -22,6 +22,7 @@ import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credit_payment_filter_page.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credits_tab.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -93,8 +94,11 @@ void main() {
           create: (context) => eligibilityBlocMock,
         ),
       ],
-      child: const Scaffold(
-        body: AvailableCreditsTab(),
+      child: const PaymentModule(
+        isMarketPlace: false,
+        child: Scaffold(
+          body: AvailableCreditsTab(),
+        ),
       ),
     );
   }
@@ -147,6 +151,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: creditFilter,
             searchKey: availableCreditsBlocMock.state.searchKey,
+            isMarketPlace: false,
           ),
         ),
       );
@@ -206,6 +211,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: appliedFilterWithSearch,
             searchKey: SearchKey.searchFilter(fakeSearchKey),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -225,6 +231,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: appliedFilterWithSearch,
             searchKey: SearchKey.searchFilter(fakeSearchKey),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -256,6 +263,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -415,7 +423,7 @@ void main() {
 
       verify(
         () => availableCreditsBlocMock.add(
-          const AvailableCreditsEvent.loadMore(),
+          const AvailableCreditsEvent.loadMore(isMarketPlace: false),
         ),
       );
     });
@@ -490,6 +498,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: creditFilter,
             searchKey: SearchKey.searchFilter(''),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -540,6 +549,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);

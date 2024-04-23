@@ -10,6 +10,9 @@ class OutstandingInvoicesEvent with _$OutstandingInvoicesEvent {
   const factory OutstandingInvoicesEvent.fetch({
     required OutstandingInvoiceFilter appliedFilter,
     required SearchKey searchKey,
+    required bool isMarketPlace,
   }) = _Fetch;
-  const factory OutstandingInvoicesEvent.loadMore() = _LoadMore;
+  const factory OutstandingInvoicesEvent.loadMore({
+    required bool isMarketPlace,
+  }) = _LoadMore;
 }

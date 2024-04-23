@@ -20,11 +20,14 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
             context: context,
             searchKey: value,
           ),
-          hintText: context.tr('Search'),
+          hintText: context.tr(
+            context.isMPPayment
+                ? 'Search by MP Document/order number'
+                : 'Search',
+          ),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
-            // Only digits
-            FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+            FilteringTextInputFormatter.digitsOnly,
           ],
           customValidator: (value) => SearchKey.searchFilter(value).isValid(),
           enabled: !state.isLoading,
@@ -49,6 +52,7 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
                 ? AvailableCreditFilter.defaultFilter()
                 : AvailableCreditFilter.empty(),
             searchKey: SearchKey.searchFilter(searchKey),
+            isMarketPlace: context.isMPPayment,
           ),
         );
   }

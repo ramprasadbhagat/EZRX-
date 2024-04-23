@@ -120,7 +120,6 @@ void main() {
           BlocProvider<SalesOrgBloc>(
             create: (context) => mockSalesOrgBloc,
           ),
-          BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
           BlocProvider<AnnouncementBloc>(
             create: (context) => mockAnnouncementBloc,
           ),

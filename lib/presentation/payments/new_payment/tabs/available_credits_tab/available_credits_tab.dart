@@ -16,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credit_payment_filter_page.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/widgets/credit_item_card.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -72,7 +73,11 @@ class AvailableCreditsTab extends StatelessWidget {
                       key: WidgetKeys.loaderImage,
                     )
                   : Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      padding: const EdgeInsets.only(
+                        left: 12,
+                        right: 12,
+                        top: 24,
+                      ),
                       child: ScrollList<CustomerOpenItem>(
                         noRecordFoundWidget: NoRecordFound.newPaymentCredits(
                           isSearchAndFilterEmpty: state.isSearchAndFilterEmpty,
@@ -83,21 +88,21 @@ class AvailableCreditsTab extends StatelessWidget {
                                 AvailableCreditsEvent.fetch(
                                   appliedFilter:
                                       AvailableCreditFilter.defaultFilter(),
-                searchKey: SearchKey.searchFilter(''),
+                                  searchKey: SearchKey.searchFilter(''),
+                                  isMarketPlace: context.isMPPayment,
                                 ),
                               );
                         },
                         onLoadingMore: () {
                           context.read<AvailableCreditsBloc>().add(
-                                const AvailableCreditsEvent.loadMore(),
+                                AvailableCreditsEvent.loadMore(
+                                  isMarketPlace: context.isMPPayment,
+                                ),
                               );
                         },
                         isLoading: state.isLoading,
-                        itemBuilder: (context, index, item) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: _PaymentItem(
-                            data: item,
-                          ),
+                        itemBuilder: (context, index, item) => _PaymentItem(
+                          data: item,
                         ),
                         items: state.items,
                       ),
@@ -121,6 +126,7 @@ class _PaymentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      margin: const EdgeInsets.only(bottom: 24),
       key: WidgetKeys.creditPaymentItem,
       child: BlocBuilder<NewPaymentBloc, NewPaymentState>(
         builder: (context, state) {
@@ -129,10 +135,7 @@ class _PaymentItem extends StatelessWidget {
                   NewPaymentEvent.toggleCredit(selected: value, item: data),
                 ),
             value: state.selectedCredits.contains(data),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: CreditItemCard(customerOpenItem: data),
-            ),
+            body: CreditItemCard(customerOpenItem: data),
           );
         },
       ),
@@ -144,6 +147,9 @@ class _FilterTune extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AvailableCreditsBloc, AvailableCreditsState>(
+      buildWhen: (previous, current) =>
+          previous.appliedFilter.appliedFilterCount !=
+          current.appliedFilter.appliedFilterCount,
       builder: (context, state) {
         return CustomBadge(
           Icons.tune_outlined,
@@ -168,11 +174,6 @@ class _FilterTune extends StatelessWidget {
       isScrollControlled: true,
       enableDrag: true,
       isDismissible: false,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(16),
-        ),
-      ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (_) {
         return const AvailableCreditPaymentFilterPage(
@@ -195,6 +196,7 @@ class _FilterTune extends StatelessWidget {
                   appliedFilter: newFilter,
                   searchKey:
                       context.read<AvailableCreditsBloc>().state.searchKey,
+                  isMarketPlace: context.isMPPayment,
                 ),
               );
         }

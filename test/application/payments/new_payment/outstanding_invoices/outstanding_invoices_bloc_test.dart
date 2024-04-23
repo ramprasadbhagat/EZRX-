@@ -110,6 +110,7 @@ void main() {
             appliedFilter: fakeOutstandingInvoiceFilter,
             searchKey: fakeSearchKey,
             offset: 0,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -121,6 +122,7 @@ void main() {
         OutstandingInvoicesEvent.fetch(
           appliedFilter: fakeOutstandingInvoiceFilter,
           searchKey: fakeSearchKey,
+          isMarketPlace: true,
         ),
       ),
       expect: () => [
@@ -162,6 +164,7 @@ void main() {
             appliedFilter: fakeOutstandingInvoiceFilter,
             searchKey: fakeSearchKey,
             offset: 0,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -173,6 +176,7 @@ void main() {
         OutstandingInvoicesEvent.fetch(
           appliedFilter: fakeOutstandingInvoiceFilter,
           searchKey: fakeSearchKey,
+          isMarketPlace: false,
         ),
       ),
       expect: () => [
@@ -208,6 +212,7 @@ void main() {
         OutstandingInvoicesEvent.fetch(
           appliedFilter: fakeOutstandingInvoiceFilter,
           searchKey: fakeSearchKey,
+          isMarketPlace: true,
         ),
       ),
       expect: () => [],
@@ -228,6 +233,7 @@ void main() {
         OutstandingInvoicesEvent.fetch(
           appliedFilter: fakeOutstandingInvoiceFilter,
           searchKey: fakeInvalidSearchKey,
+          isMarketPlace: true,
         ),
       ),
       expect: () => [],
@@ -257,6 +263,7 @@ void main() {
             appliedFilter: fakeOutstandingInvoiceFilter,
             searchKey: fakeSearchKey,
             offset: fakeCustomerOpenItem.length,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -265,7 +272,9 @@ void main() {
         );
       },
       act: (OutstandingInvoicesBloc bloc) => bloc.add(
-        const OutstandingInvoicesEvent.loadMore(),
+        const OutstandingInvoicesEvent.loadMore(
+          isMarketPlace: true,
+        ),
       ),
       expect: () => [
         OutstandingInvoicesState.initial().copyWith(
@@ -310,6 +319,7 @@ void main() {
             appliedFilter: fakeOutstandingInvoiceFilter,
             searchKey: fakeSearchKey,
             offset: fakeCustomerOpenItem.length,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -318,7 +328,9 @@ void main() {
         );
       },
       act: (OutstandingInvoicesBloc bloc) => bloc.add(
-        const OutstandingInvoicesEvent.loadMore(),
+        const OutstandingInvoicesEvent.loadMore(
+          isMarketPlace: false,
+        ),
       ),
       expect: () {
         final newList = [

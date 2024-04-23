@@ -71,9 +71,12 @@ class _NewPaymentFooter extends StatelessWidget {
                     ],
                   ),
                 if (state.negativeAmount)
-                  const InfoLabel(
-                    textValue:
-                        'Total credit amount cannot exceed invoice amount.',
+                  InfoLabel(
+                    margin: EdgeInsets.zero,
+                    mainColor: ZPColors.errorSnackBarColor,
+                    textValue: context.tr(
+                      'Total credit amount cannot exceed invoice amount.',
+                    ),
                   ),
                 _WarningLabelVirtualBank(
                   currentStep: currentStep,

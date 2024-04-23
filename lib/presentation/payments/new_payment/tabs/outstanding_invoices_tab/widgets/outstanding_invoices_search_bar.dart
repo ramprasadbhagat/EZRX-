@@ -29,11 +29,14 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
               _search(context: context, searchKey: value),
           onSearchSubmitted: (value) =>
               _search(context: context, searchKey: value),
-          hintText: context.tr('Search'),
+          hintText: context.tr(
+            context.isMPPayment
+                ? 'Search by MP Document/order number'
+                : 'Search',
+          ),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
-            // Only digits
-            FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+            FilteringTextInputFormatter.digitsOnly,
           ],
           customValidator: (value) => SearchKey.search(value).isValid(),
           enabled: !state.isLoading,
@@ -55,6 +58,7 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
                 ? OutstandingInvoiceFilter.defaultFilter()
                 : OutstandingInvoiceFilter.empty(),
             searchKey: SearchKey.searchFilter(searchKey),
+            isMarketPlace: context.isMPPayment,
           ),
         );
   }

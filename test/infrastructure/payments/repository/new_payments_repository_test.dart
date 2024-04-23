@@ -146,6 +146,7 @@ void main() {
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
           searchKey: SearchKey(''),
+          isMarketPlace: true,
         );
         expect(
           result.isRight(),
@@ -172,6 +173,7 @@ void main() {
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
           searchKey: SearchKey(''),
+          isMarketPlace: true,
         );
         expect(
           result.isLeft(),
@@ -194,6 +196,7 @@ void main() {
             salesOrg: fakeSalesOrg.getOrCrash(),
             debitCreditType: fakeDebitCreditType,
             orderBy: fakeOrderBy,
+            isMarketPlace: true,
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
@@ -208,6 +211,7 @@ void main() {
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
           searchKey: SearchKey(''),
+          isMarketPlace: true,
         );
         expect(
           result.isRight(),
@@ -232,6 +236,7 @@ void main() {
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
           searchKey: SearchKey(''),
+          isMarketPlace: true,
         );
         expect(
           result.isLeft(),
@@ -256,6 +261,7 @@ void main() {
             salesOrg: fakeSalesOrg.getOrCrash(),
             debitCreditType: fakeDebitCreditType,
             orderBy: fakeOrderBy,
+            isMarketPlace: false,
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
@@ -290,6 +296,7 @@ void main() {
             salesOrg: fakeSalesOrg.getOrCrash(),
             debitCreditType: fakeDebitCreditType,
             orderBy: fakeOrderBy,
+            isMarketPlace: false,
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
@@ -501,6 +508,7 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             pageSize: pageSize,
             offset: offset,
+            isMarketPlace: true,
             filterList: [
               {
                 'field': 'documentDate',
@@ -526,6 +534,7 @@ void main() {
           pageSize: pageSize,
           salesOrganisation: fakeIDSalesOrganisation,
           searchKey: SearchKey(''),
+          isMarketPlace: true,
         );
         expect(
           result.isRight(),
@@ -542,6 +551,7 @@ void main() {
             pageSize: pageSize,
             offset: offset,
             filterList: fakeFilterList,
+            isMarketPlace: true,
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
@@ -558,6 +568,7 @@ void main() {
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
           searchKey: SearchKey('fake'),
+          isMarketPlace: true,
         );
         expect(
           result.isRight(),
@@ -574,6 +585,7 @@ void main() {
             pageSize: pageSize,
             offset: offset,
             filterList: fakeFilterList,
+            isMarketPlace: true,
           ),
         ).thenThrow((invocation) => MockException());
 
@@ -590,6 +602,7 @@ void main() {
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
           searchKey: SearchKey('fake'),
+          isMarketPlace: true,
         );
         expect(
           result.isLeft(),
@@ -606,6 +619,7 @@ void main() {
             pageSize: pageSize,
             offset: offset,
             filterList: fakeFilterList,
+            isMarketPlace: true,
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
@@ -620,6 +634,7 @@ void main() {
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
           searchKey: SearchKey('fake'),
+          isMarketPlace: true,
         );
         expect(
           result.isRight(),
@@ -636,6 +651,7 @@ void main() {
             pageSize: pageSize,
             offset: offset,
             filterList: fakeFilterList,
+            isMarketPlace: false,
           ),
         ).thenThrow((invocation) => MockException());
 
@@ -650,6 +666,7 @@ void main() {
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
           searchKey: SearchKey('fake'),
+          isMarketPlace: false,
         );
         expect(
           result.isLeft(),

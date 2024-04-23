@@ -66,6 +66,7 @@ class OutstandingInvoicesBloc
           offset: 0,
           appliedFilter: event.appliedFilter,
           searchKey: event.searchKey,
+          isMarketPlace: event.isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -110,6 +111,7 @@ class OutstandingInvoicesBloc
           offset: state.items.length,
           appliedFilter: state.appliedFilter,
           searchKey: state.searchKey,
+          isMarketPlace: event.isMarketPlace,
         );
 
         failureOrSuccess.fold(

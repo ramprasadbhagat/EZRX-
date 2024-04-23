@@ -10,6 +10,9 @@ class AvailableCreditsEvent with _$AvailableCreditsEvent {
   const factory AvailableCreditsEvent.fetch({
     required AvailableCreditFilter appliedFilter,
     required SearchKey searchKey,
+    required bool isMarketPlace,
   }) = _Fetch;
-  const factory AvailableCreditsEvent.loadMore() = _LoadMore;
+  const factory AvailableCreditsEvent.loadMore({
+    required bool isMarketPlace,
+  }) = _LoadMore;
 }

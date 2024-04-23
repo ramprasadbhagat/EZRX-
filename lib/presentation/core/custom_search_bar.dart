@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,7 +24,6 @@ class CustomSearchBar extends StatefulWidget {
     required this.customValidator,
     this.autofocus = false,
     this.searchSuffixIcon,
-    this.hintStyle,
   }) : super(key: key);
 
   final bool enabled;
@@ -37,7 +37,6 @@ class CustomSearchBar extends StatefulWidget {
   final bool Function(String) customValidator;
   final bool autofocus;
   final Widget? searchSuffixIcon;
-  final TextStyle? hintStyle;
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();
@@ -100,7 +99,10 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 onPressed: () => widget.onClear.call(),
               ),
         hintText: context.tr(widget.hintText),
-        hintStyle: widget.hintStyle,
+        hintStyle: Theme.of(context)
+            .textTheme
+            .bodyLarge!
+            .copyWith(color: ZPColors.backgroundCloseButtonSnackBar),
       ),
     );
   }

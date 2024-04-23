@@ -352,6 +352,7 @@ void main() {
           OutstandingInvoicesEvent.fetch(
             appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
             searchKey: SearchKey.search(''),
+            isMarketPlace: true,
           ),
         ),
       );
@@ -360,6 +361,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
+            isMarketPlace: false,
           ),
         ),
       );

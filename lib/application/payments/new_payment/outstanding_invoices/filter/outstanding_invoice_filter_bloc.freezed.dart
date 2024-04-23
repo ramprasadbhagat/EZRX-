@@ -12,7 +12,7 @@ part of 'outstanding_invoice_filter_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OutstandingInvoiceFilterEvent {
@@ -132,25 +132,25 @@ class _$OutstandingInvoiceFilterEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize();
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl();
 
   @override
   String toString() {
@@ -158,9 +158,9 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialize);
+        (other.runtimeType == runtimeType && other is _$InitializeImpl);
   }
 
   @override
@@ -284,15 +284,15 @@ class _$_Initialize implements _Initialize {
 }
 
 abstract class _Initialize implements OutstandingInvoiceFilterEvent {
-  const factory _Initialize() = _$_Initialize;
+  const factory _Initialize() = _$InitializeImpl;
 }
 
 /// @nodoc
-abstract class _$$_UpdateFiltersToLastAppliedCopyWith<$Res> {
-  factory _$$_UpdateFiltersToLastAppliedCopyWith(
-          _$_UpdateFiltersToLastApplied value,
-          $Res Function(_$_UpdateFiltersToLastApplied) then) =
-      __$$_UpdateFiltersToLastAppliedCopyWithImpl<$Res>;
+abstract class _$$UpdateFiltersToLastAppliedImplCopyWith<$Res> {
+  factory _$$UpdateFiltersToLastAppliedImplCopyWith(
+          _$UpdateFiltersToLastAppliedImpl value,
+          $Res Function(_$UpdateFiltersToLastAppliedImpl) then) =
+      __$$UpdateFiltersToLastAppliedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({OutstandingInvoiceFilter lastAppliedFilter});
 
@@ -300,13 +300,13 @@ abstract class _$$_UpdateFiltersToLastAppliedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateFiltersToLastAppliedCopyWithImpl<$Res>
+class __$$UpdateFiltersToLastAppliedImplCopyWithImpl<$Res>
     extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res,
-        _$_UpdateFiltersToLastApplied>
-    implements _$$_UpdateFiltersToLastAppliedCopyWith<$Res> {
-  __$$_UpdateFiltersToLastAppliedCopyWithImpl(
-      _$_UpdateFiltersToLastApplied _value,
-      $Res Function(_$_UpdateFiltersToLastApplied) _then)
+        _$UpdateFiltersToLastAppliedImpl>
+    implements _$$UpdateFiltersToLastAppliedImplCopyWith<$Res> {
+  __$$UpdateFiltersToLastAppliedImplCopyWithImpl(
+      _$UpdateFiltersToLastAppliedImpl _value,
+      $Res Function(_$UpdateFiltersToLastAppliedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -314,7 +314,7 @@ class __$$_UpdateFiltersToLastAppliedCopyWithImpl<$Res>
   $Res call({
     Object? lastAppliedFilter = null,
   }) {
-    return _then(_$_UpdateFiltersToLastApplied(
+    return _then(_$UpdateFiltersToLastAppliedImpl(
       lastAppliedFilter: null == lastAppliedFilter
           ? _value.lastAppliedFilter
           : lastAppliedFilter // ignore: cast_nullable_to_non_nullable
@@ -334,8 +334,8 @@ class __$$_UpdateFiltersToLastAppliedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
-  const _$_UpdateFiltersToLastApplied({required this.lastAppliedFilter});
+class _$UpdateFiltersToLastAppliedImpl implements _UpdateFiltersToLastApplied {
+  const _$UpdateFiltersToLastAppliedImpl({required this.lastAppliedFilter});
 
   @override
   final OutstandingInvoiceFilter lastAppliedFilter;
@@ -346,10 +346,10 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateFiltersToLastApplied &&
+            other is _$UpdateFiltersToLastAppliedImpl &&
             (identical(other.lastAppliedFilter, lastAppliedFilter) ||
                 other.lastAppliedFilter == lastAppliedFilter));
   }
@@ -360,9 +360,9 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateFiltersToLastAppliedCopyWith<_$_UpdateFiltersToLastApplied>
-      get copyWith => __$$_UpdateFiltersToLastAppliedCopyWithImpl<
-          _$_UpdateFiltersToLastApplied>(this, _$identity);
+  _$$UpdateFiltersToLastAppliedImplCopyWith<_$UpdateFiltersToLastAppliedImpl>
+      get copyWith => __$$UpdateFiltersToLastAppliedImplCopyWithImpl<
+          _$UpdateFiltersToLastAppliedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -485,29 +485,29 @@ abstract class _UpdateFiltersToLastApplied
     implements OutstandingInvoiceFilterEvent {
   const factory _UpdateFiltersToLastApplied(
           {required final OutstandingInvoiceFilter lastAppliedFilter}) =
-      _$_UpdateFiltersToLastApplied;
+      _$UpdateFiltersToLastAppliedImpl;
 
   OutstandingInvoiceFilter get lastAppliedFilter;
   @JsonKey(ignore: true)
-  _$$_UpdateFiltersToLastAppliedCopyWith<_$_UpdateFiltersToLastApplied>
+  _$$UpdateFiltersToLastAppliedImplCopyWith<_$UpdateFiltersToLastAppliedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetDocumentDateCopyWith<$Res> {
-  factory _$$_SetDocumentDateCopyWith(
-          _$_SetDocumentDate value, $Res Function(_$_SetDocumentDate) then) =
-      __$$_SetDocumentDateCopyWithImpl<$Res>;
+abstract class _$$SetDocumentDateImplCopyWith<$Res> {
+  factory _$$SetDocumentDateImplCopyWith(_$SetDocumentDateImpl value,
+          $Res Function(_$SetDocumentDateImpl) then) =
+      __$$SetDocumentDateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeRange documentDateRange});
 }
 
 /// @nodoc
-class __$$_SetDocumentDateCopyWithImpl<$Res>
+class __$$SetDocumentDateImplCopyWithImpl<$Res>
     extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res,
-        _$_SetDocumentDate> implements _$$_SetDocumentDateCopyWith<$Res> {
-  __$$_SetDocumentDateCopyWithImpl(
-      _$_SetDocumentDate _value, $Res Function(_$_SetDocumentDate) _then)
+        _$SetDocumentDateImpl> implements _$$SetDocumentDateImplCopyWith<$Res> {
+  __$$SetDocumentDateImplCopyWithImpl(
+      _$SetDocumentDateImpl _value, $Res Function(_$SetDocumentDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -515,7 +515,7 @@ class __$$_SetDocumentDateCopyWithImpl<$Res>
   $Res call({
     Object? documentDateRange = null,
   }) {
-    return _then(_$_SetDocumentDate(
+    return _then(_$SetDocumentDateImpl(
       documentDateRange: null == documentDateRange
           ? _value.documentDateRange
           : documentDateRange // ignore: cast_nullable_to_non_nullable
@@ -526,8 +526,8 @@ class __$$_SetDocumentDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetDocumentDate implements _SetDocumentDate {
-  const _$_SetDocumentDate({required this.documentDateRange});
+class _$SetDocumentDateImpl implements _SetDocumentDate {
+  const _$SetDocumentDateImpl({required this.documentDateRange});
 
   @override
   final DateTimeRange documentDateRange;
@@ -538,10 +538,10 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetDocumentDate &&
+            other is _$SetDocumentDateImpl &&
             (identical(other.documentDateRange, documentDateRange) ||
                 other.documentDateRange == documentDateRange));
   }
@@ -552,8 +552,9 @@ class _$_SetDocumentDate implements _SetDocumentDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetDocumentDateCopyWith<_$_SetDocumentDate> get copyWith =>
-      __$$_SetDocumentDateCopyWithImpl<_$_SetDocumentDate>(this, _$identity);
+  _$$SetDocumentDateImplCopyWith<_$SetDocumentDateImpl> get copyWith =>
+      __$$SetDocumentDateImplCopyWithImpl<_$SetDocumentDateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -674,29 +675,29 @@ class _$_SetDocumentDate implements _SetDocumentDate {
 
 abstract class _SetDocumentDate implements OutstandingInvoiceFilterEvent {
   const factory _SetDocumentDate(
-      {required final DateTimeRange documentDateRange}) = _$_SetDocumentDate;
+      {required final DateTimeRange documentDateRange}) = _$SetDocumentDateImpl;
 
   DateTimeRange get documentDateRange;
   @JsonKey(ignore: true)
-  _$$_SetDocumentDateCopyWith<_$_SetDocumentDate> get copyWith =>
+  _$$SetDocumentDateImplCopyWith<_$SetDocumentDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetDueDateCopyWith<$Res> {
-  factory _$$_SetDueDateCopyWith(
-          _$_SetDueDate value, $Res Function(_$_SetDueDate) then) =
-      __$$_SetDueDateCopyWithImpl<$Res>;
+abstract class _$$SetDueDateImplCopyWith<$Res> {
+  factory _$$SetDueDateImplCopyWith(
+          _$SetDueDateImpl value, $Res Function(_$SetDueDateImpl) then) =
+      __$$SetDueDateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeRange dueDateRange});
 }
 
 /// @nodoc
-class __$$_SetDueDateCopyWithImpl<$Res>
-    extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res, _$_SetDueDate>
-    implements _$$_SetDueDateCopyWith<$Res> {
-  __$$_SetDueDateCopyWithImpl(
-      _$_SetDueDate _value, $Res Function(_$_SetDueDate) _then)
+class __$$SetDueDateImplCopyWithImpl<$Res>
+    extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res, _$SetDueDateImpl>
+    implements _$$SetDueDateImplCopyWith<$Res> {
+  __$$SetDueDateImplCopyWithImpl(
+      _$SetDueDateImpl _value, $Res Function(_$SetDueDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -704,7 +705,7 @@ class __$$_SetDueDateCopyWithImpl<$Res>
   $Res call({
     Object? dueDateRange = null,
   }) {
-    return _then(_$_SetDueDate(
+    return _then(_$SetDueDateImpl(
       dueDateRange: null == dueDateRange
           ? _value.dueDateRange
           : dueDateRange // ignore: cast_nullable_to_non_nullable
@@ -715,8 +716,8 @@ class __$$_SetDueDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetDueDate implements _SetDueDate {
-  const _$_SetDueDate({required this.dueDateRange});
+class _$SetDueDateImpl implements _SetDueDate {
+  const _$SetDueDateImpl({required this.dueDateRange});
 
   @override
   final DateTimeRange dueDateRange;
@@ -727,10 +728,10 @@ class _$_SetDueDate implements _SetDueDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetDueDate &&
+            other is _$SetDueDateImpl &&
             (identical(other.dueDateRange, dueDateRange) ||
                 other.dueDateRange == dueDateRange));
   }
@@ -741,8 +742,8 @@ class _$_SetDueDate implements _SetDueDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetDueDateCopyWith<_$_SetDueDate> get copyWith =>
-      __$$_SetDueDateCopyWithImpl<_$_SetDueDate>(this, _$identity);
+  _$$SetDueDateImplCopyWith<_$SetDueDateImpl> get copyWith =>
+      __$$SetDueDateImplCopyWithImpl<_$SetDueDateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -863,29 +864,29 @@ class _$_SetDueDate implements _SetDueDate {
 
 abstract class _SetDueDate implements OutstandingInvoiceFilterEvent {
   const factory _SetDueDate({required final DateTimeRange dueDateRange}) =
-      _$_SetDueDate;
+      _$SetDueDateImpl;
 
   DateTimeRange get dueDateRange;
   @JsonKey(ignore: true)
-  _$$_SetDueDateCopyWith<_$_SetDueDate> get copyWith =>
+  _$$SetDueDateImplCopyWith<_$SetDueDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetAmountFromCopyWith<$Res> {
-  factory _$$_SetAmountFromCopyWith(
-          _$_SetAmountFrom value, $Res Function(_$_SetAmountFrom) then) =
-      __$$_SetAmountFromCopyWithImpl<$Res>;
+abstract class _$$SetAmountFromImplCopyWith<$Res> {
+  factory _$$SetAmountFromImplCopyWith(
+          _$SetAmountFromImpl value, $Res Function(_$SetAmountFromImpl) then) =
+      __$$SetAmountFromImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String amountFrom});
 }
 
 /// @nodoc
-class __$$_SetAmountFromCopyWithImpl<$Res>
-    extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res, _$_SetAmountFrom>
-    implements _$$_SetAmountFromCopyWith<$Res> {
-  __$$_SetAmountFromCopyWithImpl(
-      _$_SetAmountFrom _value, $Res Function(_$_SetAmountFrom) _then)
+class __$$SetAmountFromImplCopyWithImpl<$Res>
+    extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res,
+        _$SetAmountFromImpl> implements _$$SetAmountFromImplCopyWith<$Res> {
+  __$$SetAmountFromImplCopyWithImpl(
+      _$SetAmountFromImpl _value, $Res Function(_$SetAmountFromImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -893,7 +894,7 @@ class __$$_SetAmountFromCopyWithImpl<$Res>
   $Res call({
     Object? amountFrom = null,
   }) {
-    return _then(_$_SetAmountFrom(
+    return _then(_$SetAmountFromImpl(
       amountFrom: null == amountFrom
           ? _value.amountFrom
           : amountFrom // ignore: cast_nullable_to_non_nullable
@@ -904,8 +905,8 @@ class __$$_SetAmountFromCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetAmountFrom implements _SetAmountFrom {
-  const _$_SetAmountFrom({required this.amountFrom});
+class _$SetAmountFromImpl implements _SetAmountFrom {
+  const _$SetAmountFromImpl({required this.amountFrom});
 
   @override
   final String amountFrom;
@@ -916,10 +917,10 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetAmountFrom &&
+            other is _$SetAmountFromImpl &&
             (identical(other.amountFrom, amountFrom) ||
                 other.amountFrom == amountFrom));
   }
@@ -930,8 +931,8 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetAmountFromCopyWith<_$_SetAmountFrom> get copyWith =>
-      __$$_SetAmountFromCopyWithImpl<_$_SetAmountFrom>(this, _$identity);
+  _$$SetAmountFromImplCopyWith<_$SetAmountFromImpl> get copyWith =>
+      __$$SetAmountFromImplCopyWithImpl<_$SetAmountFromImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1052,29 +1053,29 @@ class _$_SetAmountFrom implements _SetAmountFrom {
 
 abstract class _SetAmountFrom implements OutstandingInvoiceFilterEvent {
   const factory _SetAmountFrom({required final String amountFrom}) =
-      _$_SetAmountFrom;
+      _$SetAmountFromImpl;
 
   String get amountFrom;
   @JsonKey(ignore: true)
-  _$$_SetAmountFromCopyWith<_$_SetAmountFrom> get copyWith =>
+  _$$SetAmountFromImplCopyWith<_$SetAmountFromImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetAmountToCopyWith<$Res> {
-  factory _$$_SetAmountToCopyWith(
-          _$_SetAmountTo value, $Res Function(_$_SetAmountTo) then) =
-      __$$_SetAmountToCopyWithImpl<$Res>;
+abstract class _$$SetAmountToImplCopyWith<$Res> {
+  factory _$$SetAmountToImplCopyWith(
+          _$SetAmountToImpl value, $Res Function(_$SetAmountToImpl) then) =
+      __$$SetAmountToImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String amountTo});
 }
 
 /// @nodoc
-class __$$_SetAmountToCopyWithImpl<$Res>
-    extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res, _$_SetAmountTo>
-    implements _$$_SetAmountToCopyWith<$Res> {
-  __$$_SetAmountToCopyWithImpl(
-      _$_SetAmountTo _value, $Res Function(_$_SetAmountTo) _then)
+class __$$SetAmountToImplCopyWithImpl<$Res>
+    extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res, _$SetAmountToImpl>
+    implements _$$SetAmountToImplCopyWith<$Res> {
+  __$$SetAmountToImplCopyWithImpl(
+      _$SetAmountToImpl _value, $Res Function(_$SetAmountToImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1082,7 +1083,7 @@ class __$$_SetAmountToCopyWithImpl<$Res>
   $Res call({
     Object? amountTo = null,
   }) {
-    return _then(_$_SetAmountTo(
+    return _then(_$SetAmountToImpl(
       amountTo: null == amountTo
           ? _value.amountTo
           : amountTo // ignore: cast_nullable_to_non_nullable
@@ -1093,8 +1094,8 @@ class __$$_SetAmountToCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetAmountTo implements _SetAmountTo {
-  const _$_SetAmountTo({required this.amountTo});
+class _$SetAmountToImpl implements _SetAmountTo {
+  const _$SetAmountToImpl({required this.amountTo});
 
   @override
   final String amountTo;
@@ -1105,10 +1106,10 @@ class _$_SetAmountTo implements _SetAmountTo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetAmountTo &&
+            other is _$SetAmountToImpl &&
             (identical(other.amountTo, amountTo) ||
                 other.amountTo == amountTo));
   }
@@ -1119,8 +1120,8 @@ class _$_SetAmountTo implements _SetAmountTo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetAmountToCopyWith<_$_SetAmountTo> get copyWith =>
-      __$$_SetAmountToCopyWithImpl<_$_SetAmountTo>(this, _$identity);
+  _$$SetAmountToImplCopyWith<_$SetAmountToImpl> get copyWith =>
+      __$$SetAmountToImplCopyWithImpl<_$SetAmountToImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1240,32 +1241,33 @@ class _$_SetAmountTo implements _SetAmountTo {
 }
 
 abstract class _SetAmountTo implements OutstandingInvoiceFilterEvent {
-  const factory _SetAmountTo({required final String amountTo}) = _$_SetAmountTo;
+  const factory _SetAmountTo({required final String amountTo}) =
+      _$SetAmountToImpl;
 
   String get amountTo;
   @JsonKey(ignore: true)
-  _$$_SetAmountToCopyWith<_$_SetAmountTo> get copyWith =>
+  _$$SetAmountToImplCopyWith<_$SetAmountToImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetOutstandingInvoiceStatusCopyWith<$Res> {
-  factory _$$_SetOutstandingInvoiceStatusCopyWith(
-          _$_SetOutstandingInvoiceStatus value,
-          $Res Function(_$_SetOutstandingInvoiceStatus) then) =
-      __$$_SetOutstandingInvoiceStatusCopyWithImpl<$Res>;
+abstract class _$$SetOutstandingInvoiceStatusImplCopyWith<$Res> {
+  factory _$$SetOutstandingInvoiceStatusImplCopyWith(
+          _$SetOutstandingInvoiceStatusImpl value,
+          $Res Function(_$SetOutstandingInvoiceStatusImpl) then) =
+      __$$SetOutstandingInvoiceStatusImplCopyWithImpl<$Res>;
   @useResult
   $Res call({StatusType status, bool value});
 }
 
 /// @nodoc
-class __$$_SetOutstandingInvoiceStatusCopyWithImpl<$Res>
+class __$$SetOutstandingInvoiceStatusImplCopyWithImpl<$Res>
     extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res,
-        _$_SetOutstandingInvoiceStatus>
-    implements _$$_SetOutstandingInvoiceStatusCopyWith<$Res> {
-  __$$_SetOutstandingInvoiceStatusCopyWithImpl(
-      _$_SetOutstandingInvoiceStatus _value,
-      $Res Function(_$_SetOutstandingInvoiceStatus) _then)
+        _$SetOutstandingInvoiceStatusImpl>
+    implements _$$SetOutstandingInvoiceStatusImplCopyWith<$Res> {
+  __$$SetOutstandingInvoiceStatusImplCopyWithImpl(
+      _$SetOutstandingInvoiceStatusImpl _value,
+      $Res Function(_$SetOutstandingInvoiceStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1274,7 +1276,7 @@ class __$$_SetOutstandingInvoiceStatusCopyWithImpl<$Res>
     Object? status = null,
     Object? value = null,
   }) {
-    return _then(_$_SetOutstandingInvoiceStatus(
+    return _then(_$SetOutstandingInvoiceStatusImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -1289,8 +1291,9 @@ class __$$_SetOutstandingInvoiceStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetOutstandingInvoiceStatus implements _SetOutstandingInvoiceStatus {
-  const _$_SetOutstandingInvoiceStatus(
+class _$SetOutstandingInvoiceStatusImpl
+    implements _SetOutstandingInvoiceStatus {
+  const _$SetOutstandingInvoiceStatusImpl(
       {required this.status, required this.value});
 
   @override
@@ -1304,10 +1307,10 @@ class _$_SetOutstandingInvoiceStatus implements _SetOutstandingInvoiceStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetOutstandingInvoiceStatus &&
+            other is _$SetOutstandingInvoiceStatusImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.value, value) || other.value == value));
   }
@@ -1318,9 +1321,9 @@ class _$_SetOutstandingInvoiceStatus implements _SetOutstandingInvoiceStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetOutstandingInvoiceStatusCopyWith<_$_SetOutstandingInvoiceStatus>
-      get copyWith => __$$_SetOutstandingInvoiceStatusCopyWithImpl<
-          _$_SetOutstandingInvoiceStatus>(this, _$identity);
+  _$$SetOutstandingInvoiceStatusImplCopyWith<_$SetOutstandingInvoiceStatusImpl>
+      get copyWith => __$$SetOutstandingInvoiceStatusImplCopyWithImpl<
+          _$SetOutstandingInvoiceStatusImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1443,36 +1446,36 @@ abstract class _SetOutstandingInvoiceStatus
     implements OutstandingInvoiceFilterEvent {
   const factory _SetOutstandingInvoiceStatus(
       {required final StatusType status,
-      required final bool value}) = _$_SetOutstandingInvoiceStatus;
+      required final bool value}) = _$SetOutstandingInvoiceStatusImpl;
 
   StatusType get status;
   bool get value;
   @JsonKey(ignore: true)
-  _$$_SetOutstandingInvoiceStatusCopyWith<_$_SetOutstandingInvoiceStatus>
+  _$$SetOutstandingInvoiceStatusImplCopyWith<_$SetOutstandingInvoiceStatusImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetValidationFailureCopyWith<$Res> {
-  factory _$$_SetValidationFailureCopyWith(_$_SetValidationFailure value,
-          $Res Function(_$_SetValidationFailure) then) =
-      __$$_SetValidationFailureCopyWithImpl<$Res>;
+abstract class _$$SetValidationFailureImplCopyWith<$Res> {
+  factory _$$SetValidationFailureImplCopyWith(_$SetValidationFailureImpl value,
+          $Res Function(_$SetValidationFailureImpl) then) =
+      __$$SetValidationFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SetValidationFailureCopyWithImpl<$Res>
+class __$$SetValidationFailureImplCopyWithImpl<$Res>
     extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res,
-        _$_SetValidationFailure>
-    implements _$$_SetValidationFailureCopyWith<$Res> {
-  __$$_SetValidationFailureCopyWithImpl(_$_SetValidationFailure _value,
-      $Res Function(_$_SetValidationFailure) _then)
+        _$SetValidationFailureImpl>
+    implements _$$SetValidationFailureImplCopyWith<$Res> {
+  __$$SetValidationFailureImplCopyWithImpl(_$SetValidationFailureImpl _value,
+      $Res Function(_$SetValidationFailureImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SetValidationFailure implements _SetValidationFailure {
-  const _$_SetValidationFailure();
+class _$SetValidationFailureImpl implements _SetValidationFailure {
+  const _$SetValidationFailureImpl();
 
   @override
   String toString() {
@@ -1480,9 +1483,10 @@ class _$_SetValidationFailure implements _SetValidationFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SetValidationFailure);
+        (other.runtimeType == runtimeType &&
+            other is _$SetValidationFailureImpl);
   }
 
   @override
@@ -1606,29 +1610,29 @@ class _$_SetValidationFailure implements _SetValidationFailure {
 }
 
 abstract class _SetValidationFailure implements OutstandingInvoiceFilterEvent {
-  const factory _SetValidationFailure() = _$_SetValidationFailure;
+  const factory _SetValidationFailure() = _$SetValidationFailureImpl;
 }
 
 /// @nodoc
-abstract class _$$_ResetFiltersCopyWith<$Res> {
-  factory _$$_ResetFiltersCopyWith(
-          _$_ResetFilters value, $Res Function(_$_ResetFilters) then) =
-      __$$_ResetFiltersCopyWithImpl<$Res>;
+abstract class _$$ResetFiltersImplCopyWith<$Res> {
+  factory _$$ResetFiltersImplCopyWith(
+          _$ResetFiltersImpl value, $Res Function(_$ResetFiltersImpl) then) =
+      __$$ResetFiltersImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ResetFiltersCopyWithImpl<$Res>
-    extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res, _$_ResetFilters>
-    implements _$$_ResetFiltersCopyWith<$Res> {
-  __$$_ResetFiltersCopyWithImpl(
-      _$_ResetFilters _value, $Res Function(_$_ResetFilters) _then)
+class __$$ResetFiltersImplCopyWithImpl<$Res>
+    extends _$OutstandingInvoiceFilterEventCopyWithImpl<$Res,
+        _$ResetFiltersImpl> implements _$$ResetFiltersImplCopyWith<$Res> {
+  __$$ResetFiltersImplCopyWithImpl(
+      _$ResetFiltersImpl _value, $Res Function(_$ResetFiltersImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ResetFilters implements _ResetFilters {
-  const _$_ResetFilters();
+class _$ResetFiltersImpl implements _ResetFilters {
+  const _$ResetFiltersImpl();
 
   @override
   String toString() {
@@ -1636,9 +1640,9 @@ class _$_ResetFilters implements _ResetFilters {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ResetFilters);
+        (other.runtimeType == runtimeType && other is _$ResetFiltersImpl);
   }
 
   @override
@@ -1762,7 +1766,7 @@ class _$_ResetFilters implements _ResetFilters {
 }
 
 abstract class _ResetFilters implements OutstandingInvoiceFilterEvent {
-  const factory _ResetFilters() = _$_ResetFilters;
+  const factory _ResetFilters() = _$ResetFiltersImpl;
 }
 
 /// @nodoc
@@ -1836,12 +1840,12 @@ class _$OutstandingInvoiceFilterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OutstandingInvoiceFilterStateCopyWith<$Res>
+abstract class _$$OutstandingInvoiceFilterStateImplCopyWith<$Res>
     implements $OutstandingInvoiceFilterStateCopyWith<$Res> {
-  factory _$$_OutstandingInvoiceFilterStateCopyWith(
-          _$_OutstandingInvoiceFilterState value,
-          $Res Function(_$_OutstandingInvoiceFilterState) then) =
-      __$$_OutstandingInvoiceFilterStateCopyWithImpl<$Res>;
+  factory _$$OutstandingInvoiceFilterStateImplCopyWith(
+          _$OutstandingInvoiceFilterStateImpl value,
+          $Res Function(_$OutstandingInvoiceFilterStateImpl) then) =
+      __$$OutstandingInvoiceFilterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1854,13 +1858,13 @@ abstract class _$$_OutstandingInvoiceFilterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OutstandingInvoiceFilterStateCopyWithImpl<$Res>
+class __$$OutstandingInvoiceFilterStateImplCopyWithImpl<$Res>
     extends _$OutstandingInvoiceFilterStateCopyWithImpl<$Res,
-        _$_OutstandingInvoiceFilterState>
-    implements _$$_OutstandingInvoiceFilterStateCopyWith<$Res> {
-  __$$_OutstandingInvoiceFilterStateCopyWithImpl(
-      _$_OutstandingInvoiceFilterState _value,
-      $Res Function(_$_OutstandingInvoiceFilterState) _then)
+        _$OutstandingInvoiceFilterStateImpl>
+    implements _$$OutstandingInvoiceFilterStateImplCopyWith<$Res> {
+  __$$OutstandingInvoiceFilterStateImplCopyWithImpl(
+      _$OutstandingInvoiceFilterStateImpl _value,
+      $Res Function(_$OutstandingInvoiceFilterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1870,7 +1874,7 @@ class __$$_OutstandingInvoiceFilterStateCopyWithImpl<$Res>
     Object? statusList = null,
     Object? showErrorMessage = null,
   }) {
-    return _then(_$_OutstandingInvoiceFilterState(
+    return _then(_$OutstandingInvoiceFilterStateImpl(
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
@@ -1889,8 +1893,9 @@ class __$$_OutstandingInvoiceFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OutstandingInvoiceFilterState extends _OutstandingInvoiceFilterState {
-  const _$_OutstandingInvoiceFilterState(
+class _$OutstandingInvoiceFilterStateImpl
+    extends _OutstandingInvoiceFilterState {
+  const _$OutstandingInvoiceFilterStateImpl(
       {required this.filter,
       required final List<StatusType> statusList,
       required this.showErrorMessage})
@@ -1916,10 +1921,10 @@ class _$_OutstandingInvoiceFilterState extends _OutstandingInvoiceFilterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OutstandingInvoiceFilterState &&
+            other is _$OutstandingInvoiceFilterStateImpl &&
             (identical(other.filter, filter) || other.filter == filter) &&
             const DeepCollectionEquality()
                 .equals(other._statusList, _statusList) &&
@@ -1934,17 +1939,19 @@ class _$_OutstandingInvoiceFilterState extends _OutstandingInvoiceFilterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OutstandingInvoiceFilterStateCopyWith<_$_OutstandingInvoiceFilterState>
-      get copyWith => __$$_OutstandingInvoiceFilterStateCopyWithImpl<
-          _$_OutstandingInvoiceFilterState>(this, _$identity);
+  _$$OutstandingInvoiceFilterStateImplCopyWith<
+          _$OutstandingInvoiceFilterStateImpl>
+      get copyWith => __$$OutstandingInvoiceFilterStateImplCopyWithImpl<
+          _$OutstandingInvoiceFilterStateImpl>(this, _$identity);
 }
 
 abstract class _OutstandingInvoiceFilterState
     extends OutstandingInvoiceFilterState {
   const factory _OutstandingInvoiceFilterState(
-      {required final OutstandingInvoiceFilter filter,
-      required final List<StatusType> statusList,
-      required final bool showErrorMessage}) = _$_OutstandingInvoiceFilterState;
+          {required final OutstandingInvoiceFilter filter,
+          required final List<StatusType> statusList,
+          required final bool showErrorMessage}) =
+      _$OutstandingInvoiceFilterStateImpl;
   const _OutstandingInvoiceFilterState._() : super._();
 
   @override
@@ -1955,6 +1962,7 @@ abstract class _OutstandingInvoiceFilterState
   bool get showErrorMessage;
   @override
   @JsonKey(ignore: true)
-  _$$_OutstandingInvoiceFilterStateCopyWith<_$_OutstandingInvoiceFilterState>
+  _$$OutstandingInvoiceFilterStateImplCopyWith<
+          _$OutstandingInvoiceFilterStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

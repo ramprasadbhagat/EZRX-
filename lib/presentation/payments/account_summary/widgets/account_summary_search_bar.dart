@@ -81,10 +81,6 @@ class _SummarySearchBar extends StatelessWidget {
       child: CustomSearchBar(
         key: WidgetKeys.genericKey(key: searchKey),
         hintText: hintText,
-        hintStyle: Theme.of(context)
-            .textTheme
-            .bodyLarge!
-            .copyWith(color: ZPColors.backgroundCloseButtonSnackBar),
         initialValue: searchKey,
         enabled: isEnable,
         onSearchChanged: (value) => _fetch(

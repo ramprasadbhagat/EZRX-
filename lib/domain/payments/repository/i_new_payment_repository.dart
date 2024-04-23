@@ -28,6 +28,7 @@ abstract class INewPaymentRepository {
     required int offset,
     required OutstandingInvoiceFilter appliedFilter,
     required SearchKey searchKey,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, List<CustomerOpenItem>>> getAvailableCreditNotes({
@@ -37,6 +38,7 @@ abstract class INewPaymentRepository {
     required int offset,
     required AvailableCreditFilter appliedFilter,
     required SearchKey searchKey,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, PaymentInfo>> pay({

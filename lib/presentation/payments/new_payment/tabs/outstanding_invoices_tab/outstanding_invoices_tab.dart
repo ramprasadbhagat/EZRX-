@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
@@ -19,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoice_payment_filter_page.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/widgets/invoice_item_card.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -72,7 +72,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: context
-                    .read<ZPAccountSummaryBloc>()
+                    .accountSummaryBloc(context.isMPPayment)
                     .state
                     .outstandingBalance
                     .amount
@@ -117,12 +117,15 @@ class OutstandingInvoicesTab extends StatelessWidget {
                                   appliedFilter:
                                       OutstandingInvoiceFilter.defaultFilter(),
                                   searchKey: SearchKey.searchFilter(''),
+                                  isMarketPlace: context.isMPPayment,
                                 ),
                               );
                         },
                         onLoadingMore: () {
                           context.read<OutstandingInvoicesBloc>().add(
-                                const OutstandingInvoicesEvent.loadMore(),
+                                OutstandingInvoicesEvent.loadMore(
+                                  isMarketPlace: context.isMPPayment,
+                                ),
                               );
                         },
                         isLoading: state.isLoading,
@@ -179,6 +182,9 @@ class _FilterTune extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OutstandingInvoicesBloc, OutstandingInvoicesState>(
+      buildWhen: (previous, current) =>
+          previous.appliedFilter.appliedFilterCount !=
+          current.appliedFilter.appliedFilterCount,
       builder: (context, state) {
         return CustomBadge(
           Icons.tune_outlined,
@@ -230,6 +236,7 @@ class _FilterTune extends StatelessWidget {
                   appliedFilter: newFilter,
                   searchKey:
                       context.read<OutstandingInvoicesBloc>().state.searchKey,
+                  isMarketPlace: context.isMPPayment,
                 ),
               );
         }

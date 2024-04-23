@@ -392,6 +392,7 @@ void main() {
           OutstandingInvoicesEvent.fetch(
             appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -400,6 +401,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -437,6 +439,7 @@ void main() {
           OutstandingInvoicesEvent.fetch(
             appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -445,6 +448,7 @@ void main() {
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
             searchKey: SearchKey.searchFilter(''),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);

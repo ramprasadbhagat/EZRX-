@@ -41,6 +41,7 @@ class NewPaymentRemoteDataSource {
     required int offset,
     required int pageSize,
     required List<Map<String, String>> filterList,
+    required bool isMarketPlace,
   }) async {
     return await getCustomerOpenItems(
       customerCode: customerCode,
@@ -50,6 +51,7 @@ class NewPaymentRemoteDataSource {
       filterList: filterList,
       offset: offset,
       pageSize: pageSize,
+      isMarketPlace: isMarketPlace,
     );
   }
 
@@ -59,6 +61,7 @@ class NewPaymentRemoteDataSource {
     required int offset,
     required int pageSize,
     required List<Map<String, String>> filterList,
+    required bool isMarketPlace,
   }) async {
     return await getCustomerOpenItems(
       customerCode: customerCode,
@@ -68,6 +71,7 @@ class NewPaymentRemoteDataSource {
       filterList: filterList,
       offset: offset,
       pageSize: pageSize,
+      isMarketPlace: isMarketPlace,
     );
   }
 
@@ -177,6 +181,7 @@ class NewPaymentRemoteDataSource {
     required List<Map<String, String>> filterList,
     required int offset,
     required int pageSize,
+    required bool isMarketPlace,
   }) async {
     final requestParams = <String, dynamic>{
       'customerCode': customerCode,
@@ -188,6 +193,7 @@ class NewPaymentRemoteDataSource {
         'order': 'desc',
         'field': orderBy,
       },
+      if (isMarketPlace) 'isMarketPlace': isMarketPlace,
     };
 
     requestParams.putIfAbsent('filterBy', () => filterList);

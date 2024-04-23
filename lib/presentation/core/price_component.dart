@@ -78,7 +78,7 @@ class PriceComponent extends StatelessWidget {
     //amount
     final obscuredValue = amount.replaceAll(RegExp(r'[0-9]'), '*');
     final amountString = obscured ? obscuredValue : amount;
-    if (type == PriceStyle.creditSummaryPrice) {
+    if (type == PriceStyle.creditSummaryPrice || _isNegativePrice) {
       textSpans.add(
         TextSpan(
           text: '($amountString)',
@@ -272,6 +272,7 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.commonPrice:
     case PriceStyle.creditSummaryPrice:
     case PriceStyle.bundleActiveOfferPrice:
+    case PriceStyle.negativePrice:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             color: ZPColors.primary,
           );

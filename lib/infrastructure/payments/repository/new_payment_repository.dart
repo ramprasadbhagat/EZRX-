@@ -60,6 +60,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required int offset,
     required OutstandingInvoiceFilter appliedFilter,
     required SearchKey searchKey,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -97,6 +98,7 @@ class NewPaymentRepository extends INewPaymentRepository {
         pageSize: pageSize,
         offset: offset,
         filterList: filterList,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response);
@@ -115,6 +117,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required int offset,
     required AvailableCreditFilter appliedFilter,
     required SearchKey searchKey,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -143,6 +146,7 @@ class NewPaymentRepository extends INewPaymentRepository {
         pageSize: pageSize,
         offset: offset,
         filterList: filterList,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response);

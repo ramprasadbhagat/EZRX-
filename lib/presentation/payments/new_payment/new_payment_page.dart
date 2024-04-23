@@ -17,6 +17,7 @@ import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -41,6 +42,7 @@ part 'package:ezrxmobile/presentation/payments/new_payment/widgets/select_all_se
 
 class NewPaymentPage extends StatelessWidget {
   final bool isMarketPlace;
+
   const NewPaymentPage({
     Key? key,
     required this.isMarketPlace,
@@ -73,17 +75,22 @@ class NewPaymentPage extends StatelessWidget {
           return Scaffold(
             key: WidgetKeys.newPaymentPage,
             appBar: CustomAppBar.commonAppBar(
-              title: Text(
-                context.tr('New payment'),
+              titleSpacing: 12,
+              automaticallyImplyLeading: false,
+              title: Row(
+                children: [
+                  _PreviousButton(
+                    tabController: tabController,
+                    step: step,
+                  ),
+                  const SizedBox(width: 8),
+                  const Expanded(child: _AppBarTitle()),
+                ],
               ),
               customerBlockedOrSuspended: context
                   .read<EligibilityBloc>()
                   .state
                   .customerBlockOrSuspended,
-              leadingWidget: _PreviousButton(
-                tabController: tabController,
-                step: step,
-              ),
             ),
             body: AnnouncementBanner(
               currentPath: context.router.currentPath,
@@ -108,6 +115,37 @@ class NewPaymentPage extends StatelessWidget {
   }
 }
 
+class _AppBarTitle extends StatelessWidget {
+  const _AppBarTitle();
+
+  @override
+  Widget build(BuildContext context) {
+    return FittedBox(
+      alignment: Alignment.centerLeft,
+      fit: BoxFit.scaleDown,
+      child: Text.rich(
+        TextSpan(
+          style: Theme.of(context).textTheme.labelLarge,
+          children: [
+            if (context.isMPPayment) ...[
+              const WidgetSpan(
+                child: MarketPlaceIcon(height: 24, width: 24),
+                alignment: PlaceholderAlignment.middle,
+              ),
+              const WidgetSpan(child: SizedBox(width: 8)),
+            ],
+            TextSpan(
+              text: context.tr(
+                context.isMPPayment ? 'Make a MP payment' : 'New payment',
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _PreviousButton extends StatelessWidget {
   final TabController tabController;
   final int step;
@@ -120,23 +158,19 @@ class _PreviousButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return step == 1
-        ? IconButton(
-            key: WidgetKeys.closeButton,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.close),
-          )
-        : IconButton(
-            key: WidgetKeys.backButton,
-            onPressed: () {
-              tabController.animateTo(
-                tabController.index - 1,
-              );
-            },
-            icon: const Icon(Icons.chevron_left),
-          );
+    return SizedBox(
+      height: 32,
+      width: 32,
+      child: IconButton(
+        key: step == 1 ? WidgetKeys.closeButton : WidgetKeys.backButton,
+        onPressed: () => step == 1
+            ? Navigator.pop(context)
+            : tabController.animateTo(tabController.index - 1),
+        iconSize: 24,
+        padding: EdgeInsets.zero,
+        icon: Icon(step == 1 ? Icons.close : Icons.chevron_left),
+      ),
+    );
   }
 }
 
