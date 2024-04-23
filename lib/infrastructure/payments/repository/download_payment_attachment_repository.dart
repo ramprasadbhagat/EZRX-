@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_remote_datasource.dart';
@@ -25,6 +26,7 @@ import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/full_summary_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_filter_dto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -156,6 +158,8 @@ class DownloadPaymentAttachmentRepository
   Future<Either<ApiFailure, DownloadPaymentAttachment>> fetchPaymentSummaryUrl({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
+    required PaymentSummaryFilter paymentSummaryFilter,
+    required bool isMarketPlace,
   }) async {
     final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
     final customerCode = customerCodeInfo.customerCodeSoldTo;
@@ -174,6 +178,9 @@ class DownloadPaymentAttachmentRepository
           await remoteDataSource.getPaymentSummaryFileDownloadUrl(
         salesOrg: salesOrgCode,
         customerCode: customerCode,
+        filterBy:
+            PaymentSummaryFilterDto.fromDomain(paymentSummaryFilter).toMapList,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(paymentSummaryStatus);

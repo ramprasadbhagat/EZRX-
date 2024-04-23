@@ -265,7 +265,10 @@ void main() {
 
       verify(
         () => downloadPaymentAttachmentsBloc.add(
-          const DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(),
+          DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
+            paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+            isMarketPlace: false,
+          ),
         ),
       ).called(1);
     });

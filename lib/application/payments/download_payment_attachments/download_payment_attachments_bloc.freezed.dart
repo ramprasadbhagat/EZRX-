@@ -27,7 +27,9 @@ mixin _$DownloadPaymentAttachmentEvent {
         fetchAllCreditUrl,
     required TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)
         fetchFullSummaryUrl,
-    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)
+        fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -46,7 +48,9 @@ mixin _$DownloadPaymentAttachmentEvent {
         fetchAllCreditUrl,
     TResult? Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -64,7 +68,9 @@ mixin _$DownloadPaymentAttachmentEvent {
         fetchAllCreditUrl,
     TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -241,7 +247,9 @@ class _$InitializedImpl implements _Initialized {
         fetchAllCreditUrl,
     required TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)
         fetchFullSummaryUrl,
-    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)
+        fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -263,7 +271,9 @@ class _$InitializedImpl implements _Initialized {
         fetchAllCreditUrl,
     TResult? Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -284,7 +294,9 @@ class _$InitializedImpl implements _Initialized {
         fetchAllCreditUrl,
     TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -459,7 +471,9 @@ class _$FetchAllInvoiceUrlImpl implements _FetchAllInvoiceUrl {
         fetchAllCreditUrl,
     required TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)
         fetchFullSummaryUrl,
-    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)
+        fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -481,7 +495,9 @@ class _$FetchAllInvoiceUrlImpl implements _FetchAllInvoiceUrl {
         fetchAllCreditUrl,
     TResult? Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -502,7 +518,9 @@ class _$FetchAllInvoiceUrlImpl implements _FetchAllInvoiceUrl {
         fetchAllCreditUrl,
     TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -677,7 +695,9 @@ class _$FetchAllCreditUrlImpl implements _FetchAllCreditUrl {
         fetchAllCreditUrl,
     required TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)
         fetchFullSummaryUrl,
-    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)
+        fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -699,7 +719,9 @@ class _$FetchAllCreditUrlImpl implements _FetchAllCreditUrl {
         fetchAllCreditUrl,
     TResult? Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -720,7 +742,9 @@ class _$FetchAllCreditUrlImpl implements _FetchAllCreditUrl {
         fetchAllCreditUrl,
     TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -895,7 +919,9 @@ class _$FetchFullSummaryUrlImpl implements _FetchFullSummaryUrl {
         fetchAllCreditUrl,
     required TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)
         fetchFullSummaryUrl,
-    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)
+        fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -917,7 +943,9 @@ class _$FetchFullSummaryUrlImpl implements _FetchFullSummaryUrl {
         fetchAllCreditUrl,
     TResult? Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -938,7 +966,9 @@ class _$FetchFullSummaryUrlImpl implements _FetchFullSummaryUrl {
         fetchAllCreditUrl,
     TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -1023,6 +1053,10 @@ abstract class _$$FetchPaymentSummaryUrlImplCopyWith<$Res> {
           _$FetchPaymentSummaryUrlImpl value,
           $Res Function(_$FetchPaymentSummaryUrlImpl) then) =
       __$$FetchPaymentSummaryUrlImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace});
+
+  $PaymentSummaryFilterCopyWith<$Res> get paymentSummaryFilter;
 }
 
 /// @nodoc
@@ -1034,27 +1068,72 @@ class __$$FetchPaymentSummaryUrlImplCopyWithImpl<$Res>
       _$FetchPaymentSummaryUrlImpl _value,
       $Res Function(_$FetchPaymentSummaryUrlImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? paymentSummaryFilter = null,
+    Object? isMarketPlace = null,
+  }) {
+    return _then(_$FetchPaymentSummaryUrlImpl(
+      paymentSummaryFilter: null == paymentSummaryFilter
+          ? _value.paymentSummaryFilter
+          : paymentSummaryFilter // ignore: cast_nullable_to_non_nullable
+              as PaymentSummaryFilter,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentSummaryFilterCopyWith<$Res> get paymentSummaryFilter {
+    return $PaymentSummaryFilterCopyWith<$Res>(_value.paymentSummaryFilter,
+        (value) {
+      return _then(_value.copyWith(paymentSummaryFilter: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
-  const _$FetchPaymentSummaryUrlImpl();
+  const _$FetchPaymentSummaryUrlImpl(
+      {required this.paymentSummaryFilter, required this.isMarketPlace});
+
+  @override
+  final PaymentSummaryFilter paymentSummaryFilter;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl()';
+    return 'DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(paymentSummaryFilter: $paymentSummaryFilter, isMarketPlace: $isMarketPlace)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchPaymentSummaryUrlImpl);
+            other is _$FetchPaymentSummaryUrlImpl &&
+            (identical(other.paymentSummaryFilter, paymentSummaryFilter) ||
+                other.paymentSummaryFilter == paymentSummaryFilter) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, paymentSummaryFilter, isMarketPlace);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchPaymentSummaryUrlImplCopyWith<_$FetchPaymentSummaryUrlImpl>
+      get copyWith => __$$FetchPaymentSummaryUrlImplCopyWithImpl<
+          _$FetchPaymentSummaryUrlImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1068,14 +1147,16 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
         fetchAllCreditUrl,
     required TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)
         fetchFullSummaryUrl,
-    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)
+        fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
     required TResult Function(DownloadPaymentAttachment eInvoice)
         downloadEInvoice,
   }) {
-    return fetchPaymentSummaryUrl();
+    return fetchPaymentSummaryUrl(paymentSummaryFilter, isMarketPlace);
   }
 
   @override
@@ -1090,13 +1171,15 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
         fetchAllCreditUrl,
     TResult? Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
     TResult? Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
   }) {
-    return fetchPaymentSummaryUrl?.call();
+    return fetchPaymentSummaryUrl?.call(paymentSummaryFilter, isMarketPlace);
   }
 
   @override
@@ -1111,7 +1194,9 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
         fetchAllCreditUrl,
     TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -1119,7 +1204,7 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryUrl != null) {
-      return fetchPaymentSummaryUrl();
+      return fetchPaymentSummaryUrl(paymentSummaryFilter, isMarketPlace);
     }
     return orElse();
   }
@@ -1180,7 +1265,15 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
 
 abstract class _FetchPaymentSummaryUrl
     implements DownloadPaymentAttachmentEvent {
-  const factory _FetchPaymentSummaryUrl() = _$FetchPaymentSummaryUrlImpl;
+  const factory _FetchPaymentSummaryUrl(
+      {required final PaymentSummaryFilter paymentSummaryFilter,
+      required final bool isMarketPlace}) = _$FetchPaymentSummaryUrlImpl;
+
+  PaymentSummaryFilter get paymentSummaryFilter;
+  bool get isMarketPlace;
+  @JsonKey(ignore: true)
+  _$$FetchPaymentSummaryUrlImplCopyWith<_$FetchPaymentSummaryUrlImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1270,7 +1363,9 @@ class _$DownloadPaymentAttachmentImpl implements _DownloadPaymentAttachment {
         fetchAllCreditUrl,
     required TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)
         fetchFullSummaryUrl,
-    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)
+        fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -1292,7 +1387,9 @@ class _$DownloadPaymentAttachmentImpl implements _DownloadPaymentAttachment {
         fetchAllCreditUrl,
     TResult? Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -1313,7 +1410,9 @@ class _$DownloadPaymentAttachmentImpl implements _DownloadPaymentAttachment {
         fetchAllCreditUrl,
     TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -1465,7 +1564,9 @@ class _$DownloadSOAImpl implements _DownloadSOA {
         fetchAllCreditUrl,
     required TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)
         fetchFullSummaryUrl,
-    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)
+        fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -1487,7 +1588,9 @@ class _$DownloadSOAImpl implements _DownloadSOA {
         fetchAllCreditUrl,
     TResult? Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -1508,7 +1611,9 @@ class _$DownloadSOAImpl implements _DownloadSOA {
         fetchAllCreditUrl,
     TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -1671,7 +1776,9 @@ class _$DownloadEInvoiceImpl implements _DownloadEInvoice {
         fetchAllCreditUrl,
     required TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)
         fetchFullSummaryUrl,
-    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)
+        fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -1693,7 +1800,9 @@ class _$DownloadEInvoiceImpl implements _DownloadEInvoice {
         fetchAllCreditUrl,
     TResult? Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -1714,7 +1823,9 @@ class _$DownloadEInvoiceImpl implements _DownloadEInvoice {
         fetchAllCreditUrl,
     TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)?
         fetchFullSummaryUrl,
-    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(
+            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
+        fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,

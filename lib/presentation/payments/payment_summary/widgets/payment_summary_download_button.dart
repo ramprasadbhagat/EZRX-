@@ -44,8 +44,13 @@ class _PaymentSummaryDownloadButton extends StatelessWidget {
               key: WidgetKeys.paymentSummaryDownloadButton,
               onPressed: () =>
                   context.read<DownloadPaymentAttachmentsBloc>().add(
-                        const DownloadPaymentAttachmentEvent
-                            .fetchPaymentSummaryUrl(),
+                        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
+                          paymentSummaryFilter: context
+                              .paymentSummaryBloc(context.isMPPayment)
+                              .state
+                              .appliedFilter,
+                          isMarketPlace: context.isMPPayment,
+                        ),
                       ),
               icon: const Icon(Icons.cloud_download_outlined),
             ),

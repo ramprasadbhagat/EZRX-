@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -149,6 +150,8 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
             await paymentAttachmentRepository.fetchPaymentSummaryUrl(
           customerCodeInfo: state.customerCodeInfo,
           salesOrganization: state.salesOrganization,
+          paymentSummaryFilter: event.paymentSummaryFilter,
+          isMarketPlace: event.isMarketPlace,
         );
 
         failureOrSuccess.fold(

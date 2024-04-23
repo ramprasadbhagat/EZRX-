@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:universal_io/io.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -276,13 +277,18 @@ void main() {
           () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
+            paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => const Left(fakeError),
         );
       },
       act: (bloc) => bloc.add(
-        const DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(),
+        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
+          paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
+        ),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
@@ -321,6 +327,8 @@ void main() {
           () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
+            paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
@@ -338,7 +346,10 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        const DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(),
+        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
+          paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
+        ),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
@@ -375,6 +386,8 @@ void main() {
           () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
+            paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
@@ -385,7 +398,10 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        const DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(),
+        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
+          paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
+        ),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
@@ -424,6 +440,8 @@ void main() {
           () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
+            paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(downloadPaymentAttachmentMockData),
@@ -441,7 +459,10 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        const DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(),
+        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
+          paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
+        ),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(

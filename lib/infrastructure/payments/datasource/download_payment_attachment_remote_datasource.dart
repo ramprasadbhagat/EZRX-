@@ -69,11 +69,15 @@ class DownloadPaymentAttachmentRemoteDataSource {
   Future<DownloadPaymentAttachment> getPaymentSummaryFileDownloadUrl({
     required String salesOrg,
     required String customerCode,
+    required List<Map<String, dynamic>> filterBy,
+    required bool isMarketPlace,
   }) async {
     final queryData = downloadPaymentAttachmentQuery.getPaymentSummaryFileUrl();
     final request = {
       'salesOrg': salesOrg,
       'customerCode': customerCode,
+      'filterBy': filterBy,
+      if (isMarketPlace) 'isMarketPlace': isMarketPlace,
     };
     final res = await httpService.request(
       method: 'POST',

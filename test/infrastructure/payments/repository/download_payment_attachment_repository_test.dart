@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
@@ -16,6 +17,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_a
 import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/all_invoices_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/full_summary_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/download_payment_attachment_repository.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -58,6 +60,9 @@ void main() {
           .toMapList;
   final filterListForFullSummary =
       FullSummaryFilterDto.fromDomain(FullSummaryFilter.defaultFilter())
+          .toMapList;
+  final filterListForPaymentSummary =
+      PaymentSummaryFilterDto.fromDomain(PaymentSummaryFilter.defaultFilter())
           .toMapList;
   final fakeError = MockException(message: 'fake-exception');
   final fileMock = FileMock();
@@ -359,6 +364,8 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
+          paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -375,6 +382,8 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
+          paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -388,6 +397,8 @@ void main() {
           () => remoteDataSource.getPaymentSummaryFileDownloadUrl(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
+            filterBy: filterListForPaymentSummary,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => downloadPaymentAttachment,
@@ -397,6 +408,8 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
+          paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+          isMarketPlace: true,
         );
         expect(
           result,
@@ -410,6 +423,8 @@ void main() {
           () => remoteDataSource.getPaymentSummaryFileDownloadUrl(
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             salesOrg: fakeMYSalesOrganisation.salesOrg.getOrCrash(),
+            filterBy: filterListForPaymentSummary,
+            isMarketPlace: false,
           ),
         ).thenThrow(fakeError);
 
@@ -417,6 +432,8 @@ void main() {
             await downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
+          paymentSummaryFilter: PaymentSummaryFilter.defaultFilter(),
+          isMarketPlace: false,
         );
         expect(
           result,

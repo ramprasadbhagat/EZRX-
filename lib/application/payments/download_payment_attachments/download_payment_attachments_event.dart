@@ -21,8 +21,10 @@ class DownloadPaymentAttachmentEvent with _$DownloadPaymentAttachmentEvent {
     required bool isMarketPlace,
   }) = _FetchFullSummaryUrl;
 
-  const factory DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl() =
-      _FetchPaymentSummaryUrl;
+  const factory DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl({
+    required PaymentSummaryFilter paymentSummaryFilter,
+    required bool isMarketPlace,
+  }) = _FetchPaymentSummaryUrl;
 
   const factory DownloadPaymentAttachmentEvent.downloadPaymentAttachment({
     required DownloadPaymentAttachment files,

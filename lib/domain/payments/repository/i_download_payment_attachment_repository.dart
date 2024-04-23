@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -39,6 +40,8 @@ abstract class IDownloadPaymentAttachmentRepository {
   Future<Either<ApiFailure, DownloadPaymentAttachment>> fetchPaymentSummaryUrl({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
+    required PaymentSummaryFilter paymentSummaryFilter,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, File>> downloadFiles({
