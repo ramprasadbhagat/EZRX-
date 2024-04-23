@@ -9,7 +9,7 @@ class TenderContractLocalDataSource {
 
   Future<List<TenderContract>> getTenderContractDetails() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/tenderContractsResponse.json'),
+      await rootBundle.loadString('assets/json/getTenderContractDetails.json'),
     );
 
     final finalData =

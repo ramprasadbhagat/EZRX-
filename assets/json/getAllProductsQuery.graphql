@@ -36,6 +36,8 @@ query ($request: GetAllProductsRequest!) {
       DataTotalHidden
       HidePrice
       IsGimmick
+      hasValidTenderContract
+      hasMandatoryTenderContract
     }
   }
 }
@@ -48,6 +50,7 @@ variables:{
         "First": 12,
         "After": 0,
         "isGimmick": false,
+        "isTender": false,
         "OrderByName": "asc",
         "Language": "EN",
         "salesDeal":[],

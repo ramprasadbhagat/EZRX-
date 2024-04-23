@@ -12,7 +12,7 @@ part of 'material_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialFilter {
@@ -22,6 +22,7 @@ mixin _$MaterialFilter {
   bool get bundleOffers => throw _privateConstructorUsedError;
   bool get comboOffers => throw _privateConstructorUsedError;
   bool get isProductOffer => throw _privateConstructorUsedError;
+  bool get isTender => throw _privateConstructorUsedError;
   Sort get sortBy => throw _privateConstructorUsedError;
   bool get hasAccessToCovidMaterial => throw _privateConstructorUsedError;
   Map<String, bool> get manufactureMapOptions =>
@@ -52,6 +53,7 @@ abstract class $MaterialFilterCopyWith<$Res> {
       bool bundleOffers,
       bool comboOffers,
       bool isProductOffer,
+      bool isTender,
       Sort sortBy,
       bool hasAccessToCovidMaterial,
       Map<String, bool> manufactureMapOptions,
@@ -80,6 +82,7 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
     Object? bundleOffers = null,
     Object? comboOffers = null,
     Object? isProductOffer = null,
+    Object? isTender = null,
     Object? sortBy = null,
     Object? hasAccessToCovidMaterial = null,
     Object? manufactureMapOptions = null,
@@ -112,6 +115,10 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
       isProductOffer: null == isProductOffer
           ? _value.isProductOffer
           : isProductOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isTender: null == isTender
+          ? _value.isTender
+          : isTender // ignore: cast_nullable_to_non_nullable
               as bool,
       sortBy: null == sortBy
           ? _value.sortBy
@@ -146,11 +153,11 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
 }
 
 /// @nodoc
-abstract class _$$_MaterialFilterCopyWith<$Res>
+abstract class _$$MaterialFilterImplCopyWith<$Res>
     implements $MaterialFilterCopyWith<$Res> {
-  factory _$$_MaterialFilterCopyWith(
-          _$_MaterialFilter value, $Res Function(_$_MaterialFilter) then) =
-      __$$_MaterialFilterCopyWithImpl<$Res>;
+  factory _$$MaterialFilterImplCopyWith(_$MaterialFilterImpl value,
+          $Res Function(_$MaterialFilterImpl) then) =
+      __$$MaterialFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -160,6 +167,7 @@ abstract class _$$_MaterialFilterCopyWith<$Res>
       bool bundleOffers,
       bool comboOffers,
       bool isProductOffer,
+      bool isTender,
       Sort sortBy,
       bool hasAccessToCovidMaterial,
       Map<String, bool> manufactureMapOptions,
@@ -170,11 +178,11 @@ abstract class _$$_MaterialFilterCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialFilterCopyWithImpl<$Res>
-    extends _$MaterialFilterCopyWithImpl<$Res, _$_MaterialFilter>
-    implements _$$_MaterialFilterCopyWith<$Res> {
-  __$$_MaterialFilterCopyWithImpl(
-      _$_MaterialFilter _value, $Res Function(_$_MaterialFilter) _then)
+class __$$MaterialFilterImplCopyWithImpl<$Res>
+    extends _$MaterialFilterCopyWithImpl<$Res, _$MaterialFilterImpl>
+    implements _$$MaterialFilterImplCopyWith<$Res> {
+  __$$MaterialFilterImplCopyWithImpl(
+      _$MaterialFilterImpl _value, $Res Function(_$MaterialFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -186,6 +194,7 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
     Object? bundleOffers = null,
     Object? comboOffers = null,
     Object? isProductOffer = null,
+    Object? isTender = null,
     Object? sortBy = null,
     Object? hasAccessToCovidMaterial = null,
     Object? manufactureMapOptions = null,
@@ -194,7 +203,7 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
     Object? manufactureListSelected = null,
     Object? countryListSelected = null,
   }) {
-    return _then(_$_MaterialFilter(
+    return _then(_$MaterialFilterImpl(
       isFavourite: null == isFavourite
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
@@ -218,6 +227,10 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
       isProductOffer: null == isProductOffer
           ? _value.isProductOffer
           : isProductOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isTender: null == isTender
+          ? _value.isTender
+          : isTender // ignore: cast_nullable_to_non_nullable
               as bool,
       sortBy: null == sortBy
           ? _value.sortBy
@@ -253,14 +266,15 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialFilter extends _MaterialFilter {
-  const _$_MaterialFilter(
+class _$MaterialFilterImpl extends _MaterialFilter {
+  const _$MaterialFilterImpl(
       {this.isFavourite = false,
       this.isMarketPlace = false,
       this.isCovidSelected = false,
       this.bundleOffers = false,
       this.comboOffers = false,
       this.isProductOffer = false,
+      this.isTender = false,
       this.sortBy = Sort.az,
       this.hasAccessToCovidMaterial = false,
       required final Map<String, bool> manufactureMapOptions,
@@ -294,6 +308,9 @@ class _$_MaterialFilter extends _MaterialFilter {
   @override
   @JsonKey()
   final bool isProductOffer;
+  @override
+  @JsonKey()
+  final bool isTender;
   @override
   @JsonKey()
   final Sort sortBy;
@@ -348,14 +365,14 @@ class _$_MaterialFilter extends _MaterialFilter {
 
   @override
   String toString() {
-    return 'MaterialFilter(isFavourite: $isFavourite, isMarketPlace: $isMarketPlace, isCovidSelected: $isCovidSelected, bundleOffers: $bundleOffers, comboOffers: $comboOffers, isProductOffer: $isProductOffer, sortBy: $sortBy, hasAccessToCovidMaterial: $hasAccessToCovidMaterial, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
+    return 'MaterialFilter(isFavourite: $isFavourite, isMarketPlace: $isMarketPlace, isCovidSelected: $isCovidSelected, bundleOffers: $bundleOffers, comboOffers: $comboOffers, isProductOffer: $isProductOffer, isTender: $isTender, sortBy: $sortBy, hasAccessToCovidMaterial: $hasAccessToCovidMaterial, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialFilter &&
+            other is _$MaterialFilterImpl &&
             (identical(other.isFavourite, isFavourite) ||
                 other.isFavourite == isFavourite) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
@@ -368,6 +385,8 @@ class _$_MaterialFilter extends _MaterialFilter {
                 other.comboOffers == comboOffers) &&
             (identical(other.isProductOffer, isProductOffer) ||
                 other.isProductOffer == isProductOffer) &&
+            (identical(other.isTender, isTender) ||
+                other.isTender == isTender) &&
             (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
             (identical(
                     other.hasAccessToCovidMaterial, hasAccessToCovidMaterial) ||
@@ -393,6 +412,7 @@ class _$_MaterialFilter extends _MaterialFilter {
       bundleOffers,
       comboOffers,
       isProductOffer,
+      isTender,
       sortBy,
       hasAccessToCovidMaterial,
       const DeepCollectionEquality().hash(_manufactureMapOptions),
@@ -404,8 +424,9 @@ class _$_MaterialFilter extends _MaterialFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialFilterCopyWith<_$_MaterialFilter> get copyWith =>
-      __$$_MaterialFilterCopyWithImpl<_$_MaterialFilter>(this, _$identity);
+  _$$MaterialFilterImplCopyWith<_$MaterialFilterImpl> get copyWith =>
+      __$$MaterialFilterImplCopyWithImpl<_$MaterialFilterImpl>(
+          this, _$identity);
 }
 
 abstract class _MaterialFilter extends MaterialFilter {
@@ -416,6 +437,7 @@ abstract class _MaterialFilter extends MaterialFilter {
           final bool bundleOffers,
           final bool comboOffers,
           final bool isProductOffer,
+          final bool isTender,
           final Sort sortBy,
           final bool hasAccessToCovidMaterial,
           required final Map<String, bool> manufactureMapOptions,
@@ -423,7 +445,7 @@ abstract class _MaterialFilter extends MaterialFilter {
           required final List<String> brandList,
           final List<String> manufactureListSelected,
           final List<MaterialFilterCountry> countryListSelected}) =
-      _$_MaterialFilter;
+      _$MaterialFilterImpl;
   const _MaterialFilter._() : super._();
 
   @override
@@ -438,6 +460,8 @@ abstract class _MaterialFilter extends MaterialFilter {
   bool get comboOffers;
   @override
   bool get isProductOffer;
+  @override
+  bool get isTender;
   @override
   Sort get sortBy;
   @override
@@ -454,7 +478,7 @@ abstract class _MaterialFilter extends MaterialFilter {
   List<MaterialFilterCountry> get countryListSelected;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialFilterCopyWith<_$_MaterialFilter> get copyWith =>
+  _$$MaterialFilterImplCopyWith<_$MaterialFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -508,22 +532,24 @@ class _$MaterialFilterCountryCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MaterialFilterCountryCopyWith<$Res>
+abstract class _$$MaterialFilterCountryImplCopyWith<$Res>
     implements $MaterialFilterCountryCopyWith<$Res> {
-  factory _$$_MaterialFilterCountryCopyWith(_$_MaterialFilterCountry value,
-          $Res Function(_$_MaterialFilterCountry) then) =
-      __$$_MaterialFilterCountryCopyWithImpl<$Res>;
+  factory _$$MaterialFilterCountryImplCopyWith(
+          _$MaterialFilterCountryImpl value,
+          $Res Function(_$MaterialFilterCountryImpl) then) =
+      __$$MaterialFilterCountryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String code, String name});
 }
 
 /// @nodoc
-class __$$_MaterialFilterCountryCopyWithImpl<$Res>
-    extends _$MaterialFilterCountryCopyWithImpl<$Res, _$_MaterialFilterCountry>
-    implements _$$_MaterialFilterCountryCopyWith<$Res> {
-  __$$_MaterialFilterCountryCopyWithImpl(_$_MaterialFilterCountry _value,
-      $Res Function(_$_MaterialFilterCountry) _then)
+class __$$MaterialFilterCountryImplCopyWithImpl<$Res>
+    extends _$MaterialFilterCountryCopyWithImpl<$Res,
+        _$MaterialFilterCountryImpl>
+    implements _$$MaterialFilterCountryImplCopyWith<$Res> {
+  __$$MaterialFilterCountryImplCopyWithImpl(_$MaterialFilterCountryImpl _value,
+      $Res Function(_$MaterialFilterCountryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -532,7 +558,7 @@ class __$$_MaterialFilterCountryCopyWithImpl<$Res>
     Object? code = null,
     Object? name = null,
   }) {
-    return _then(_$_MaterialFilterCountry(
+    return _then(_$MaterialFilterCountryImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -547,8 +573,8 @@ class __$$_MaterialFilterCountryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialFilterCountry extends _MaterialFilterCountry {
-  const _$_MaterialFilterCountry({required this.code, required this.name})
+class _$MaterialFilterCountryImpl extends _MaterialFilterCountry {
+  const _$MaterialFilterCountryImpl({required this.code, required this.name})
       : super._();
 
   @override
@@ -562,10 +588,10 @@ class _$_MaterialFilterCountry extends _MaterialFilterCountry {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialFilterCountry &&
+            other is _$MaterialFilterCountryImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -576,15 +602,15 @@ class _$_MaterialFilterCountry extends _MaterialFilterCountry {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialFilterCountryCopyWith<_$_MaterialFilterCountry> get copyWith =>
-      __$$_MaterialFilterCountryCopyWithImpl<_$_MaterialFilterCountry>(
-          this, _$identity);
+  _$$MaterialFilterCountryImplCopyWith<_$MaterialFilterCountryImpl>
+      get copyWith => __$$MaterialFilterCountryImplCopyWithImpl<
+          _$MaterialFilterCountryImpl>(this, _$identity);
 }
 
 abstract class _MaterialFilterCountry extends MaterialFilterCountry {
   const factory _MaterialFilterCountry(
       {required final String code,
-      required final String name}) = _$_MaterialFilterCountry;
+      required final String name}) = _$MaterialFilterCountryImpl;
   const _MaterialFilterCountry._() : super._();
 
   @override
@@ -593,6 +619,6 @@ abstract class _MaterialFilterCountry extends MaterialFilterCountry {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialFilterCountryCopyWith<_$_MaterialFilterCountry> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MaterialFilterCountryImplCopyWith<_$MaterialFilterCountryImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

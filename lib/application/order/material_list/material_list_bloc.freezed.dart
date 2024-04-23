@@ -12,7 +12,7 @@ part of 'material_list_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialListEvent {
@@ -139,10 +139,10 @@ class _$MaterialListEventCopyWithImpl<$Res, $Val extends MaterialListEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -161,11 +161,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$MaterialListEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -178,7 +178,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? user = null,
     Object? selectedMaterialFilter = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -258,8 +258,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.salesOrganisation,
       required this.configs,
       required this.customerCodeInfo,
@@ -286,10 +286,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.configs, configs) || other.configs == configs) &&
@@ -309,8 +309,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -444,12 +444,13 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements MaterialListEvent {
   const factory _Initialized(
-      {required final SalesOrganisation salesOrganisation,
-      required final SalesOrganisationConfigs configs,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final User user,
-      required final MaterialFilter selectedMaterialFilter}) = _$_Initialized;
+          {required final SalesOrganisation salesOrganisation,
+          required final SalesOrganisationConfigs configs,
+          required final CustomerCodeInfo customerCodeInfo,
+          required final ShipToInfo shipToInfo,
+          required final User user,
+          required final MaterialFilter selectedMaterialFilter}) =
+      _$InitializedImpl;
 
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get configs;
@@ -458,30 +459,30 @@ abstract class _Initialized implements MaterialListEvent {
   User get user;
   MaterialFilter get selectedMaterialFilter;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_WatchFavoriteStatusCopyWith<$Res> {
-  factory _$$_WatchFavoriteStatusCopyWith(_$_WatchFavoriteStatus value,
-          $Res Function(_$_WatchFavoriteStatus) then) =
-      __$$_WatchFavoriteStatusCopyWithImpl<$Res>;
+abstract class _$$WatchFavoriteStatusImplCopyWith<$Res> {
+  factory _$$WatchFavoriteStatusImplCopyWith(_$WatchFavoriteStatusImpl value,
+          $Res Function(_$WatchFavoriteStatusImpl) then) =
+      __$$WatchFavoriteStatusImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_WatchFavoriteStatusCopyWithImpl<$Res>
-    extends _$MaterialListEventCopyWithImpl<$Res, _$_WatchFavoriteStatus>
-    implements _$$_WatchFavoriteStatusCopyWith<$Res> {
-  __$$_WatchFavoriteStatusCopyWithImpl(_$_WatchFavoriteStatus _value,
-      $Res Function(_$_WatchFavoriteStatus) _then)
+class __$$WatchFavoriteStatusImplCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$WatchFavoriteStatusImpl>
+    implements _$$WatchFavoriteStatusImplCopyWith<$Res> {
+  __$$WatchFavoriteStatusImplCopyWithImpl(_$WatchFavoriteStatusImpl _value,
+      $Res Function(_$WatchFavoriteStatusImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
-  const _$_WatchFavoriteStatus();
+class _$WatchFavoriteStatusImpl implements _WatchFavoriteStatus {
+  const _$WatchFavoriteStatusImpl();
 
   @override
   String toString() {
@@ -489,9 +490,10 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_WatchFavoriteStatus);
+        (other.runtimeType == runtimeType &&
+            other is _$WatchFavoriteStatusImpl);
   }
 
   @override
@@ -625,14 +627,14 @@ class _$_WatchFavoriteStatus implements _WatchFavoriteStatus {
 }
 
 abstract class _WatchFavoriteStatus implements MaterialListEvent {
-  const factory _WatchFavoriteStatus() = _$_WatchFavoriteStatus;
+  const factory _WatchFavoriteStatus() = _$WatchFavoriteStatusImpl;
 }
 
 /// @nodoc
-abstract class _$$_UpdateFavoriteStatusCopyWith<$Res> {
-  factory _$$_UpdateFavoriteStatusCopyWith(_$_UpdateFavoriteStatus value,
-          $Res Function(_$_UpdateFavoriteStatus) then) =
-      __$$_UpdateFavoriteStatusCopyWithImpl<$Res>;
+abstract class _$$UpdateFavoriteStatusImplCopyWith<$Res> {
+  factory _$$UpdateFavoriteStatusImplCopyWith(_$UpdateFavoriteStatusImpl value,
+          $Res Function(_$UpdateFavoriteStatusImpl) then) =
+      __$$UpdateFavoriteStatusImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialInfo updatedMaterial});
 
@@ -640,11 +642,11 @@ abstract class _$$_UpdateFavoriteStatusCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateFavoriteStatusCopyWithImpl<$Res>
-    extends _$MaterialListEventCopyWithImpl<$Res, _$_UpdateFavoriteStatus>
-    implements _$$_UpdateFavoriteStatusCopyWith<$Res> {
-  __$$_UpdateFavoriteStatusCopyWithImpl(_$_UpdateFavoriteStatus _value,
-      $Res Function(_$_UpdateFavoriteStatus) _then)
+class __$$UpdateFavoriteStatusImplCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$UpdateFavoriteStatusImpl>
+    implements _$$UpdateFavoriteStatusImplCopyWith<$Res> {
+  __$$UpdateFavoriteStatusImplCopyWithImpl(_$UpdateFavoriteStatusImpl _value,
+      $Res Function(_$UpdateFavoriteStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -652,7 +654,7 @@ class __$$_UpdateFavoriteStatusCopyWithImpl<$Res>
   $Res call({
     Object? updatedMaterial = null,
   }) {
-    return _then(_$_UpdateFavoriteStatus(
+    return _then(_$UpdateFavoriteStatusImpl(
       updatedMaterial: null == updatedMaterial
           ? _value.updatedMaterial
           : updatedMaterial // ignore: cast_nullable_to_non_nullable
@@ -671,8 +673,8 @@ class __$$_UpdateFavoriteStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
-  const _$_UpdateFavoriteStatus({required this.updatedMaterial});
+class _$UpdateFavoriteStatusImpl implements _UpdateFavoriteStatus {
+  const _$UpdateFavoriteStatusImpl({required this.updatedMaterial});
 
   @override
   final MaterialInfo updatedMaterial;
@@ -683,10 +685,10 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateFavoriteStatus &&
+            other is _$UpdateFavoriteStatusImpl &&
             (identical(other.updatedMaterial, updatedMaterial) ||
                 other.updatedMaterial == updatedMaterial));
   }
@@ -697,9 +699,10 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateFavoriteStatusCopyWith<_$_UpdateFavoriteStatus> get copyWith =>
-      __$$_UpdateFavoriteStatusCopyWithImpl<_$_UpdateFavoriteStatus>(
-          this, _$identity);
+  _$$UpdateFavoriteStatusImplCopyWith<_$UpdateFavoriteStatusImpl>
+      get copyWith =>
+          __$$UpdateFavoriteStatusImplCopyWithImpl<_$UpdateFavoriteStatusImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -830,18 +833,20 @@ class _$_UpdateFavoriteStatus implements _UpdateFavoriteStatus {
 
 abstract class _UpdateFavoriteStatus implements MaterialListEvent {
   const factory _UpdateFavoriteStatus(
-      {required final MaterialInfo updatedMaterial}) = _$_UpdateFavoriteStatus;
+          {required final MaterialInfo updatedMaterial}) =
+      _$UpdateFavoriteStatusImpl;
 
   MaterialInfo get updatedMaterial;
   @JsonKey(ignore: true)
-  _$$_UpdateFavoriteStatusCopyWith<_$_UpdateFavoriteStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UpdateFavoriteStatusImplCopyWith<_$UpdateFavoriteStatusImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialFilter selectedMaterialFilter});
 
@@ -849,10 +854,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$MaterialListEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -860,7 +866,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? selectedMaterialFilter = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       selectedMaterialFilter: null == selectedMaterialFilter
           ? _value.selectedMaterialFilter
           : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
@@ -880,8 +886,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  _$_Fetch({required this.selectedMaterialFilter});
+class _$FetchImpl implements _Fetch {
+  _$FetchImpl({required this.selectedMaterialFilter});
 
   @override
   final MaterialFilter selectedMaterialFilter;
@@ -892,10 +898,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
                 other.selectedMaterialFilter == selectedMaterialFilter));
   }
@@ -906,8 +912,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1038,29 +1044,29 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements MaterialListEvent {
   factory _Fetch({required final MaterialFilter selectedMaterialFilter}) =
-      _$_Fetch;
+      _$FetchImpl;
 
   MaterialFilter get selectedMaterialFilter;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchStockCopyWith<$Res> {
-  factory _$$_FetchStockCopyWith(
-          _$_FetchStock value, $Res Function(_$_FetchStock) then) =
-      __$$_FetchStockCopyWithImpl<$Res>;
+abstract class _$$FetchStockImplCopyWith<$Res> {
+  factory _$$FetchStockImplCopyWith(
+          _$FetchStockImpl value, $Res Function(_$FetchStockImpl) then) =
+      __$$FetchStockImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<MaterialInfo> materials});
 }
 
 /// @nodoc
-class __$$_FetchStockCopyWithImpl<$Res>
-    extends _$MaterialListEventCopyWithImpl<$Res, _$_FetchStock>
-    implements _$$_FetchStockCopyWith<$Res> {
-  __$$_FetchStockCopyWithImpl(
-      _$_FetchStock _value, $Res Function(_$_FetchStock) _then)
+class __$$FetchStockImplCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$FetchStockImpl>
+    implements _$$FetchStockImplCopyWith<$Res> {
+  __$$FetchStockImplCopyWithImpl(
+      _$FetchStockImpl _value, $Res Function(_$FetchStockImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1068,7 +1074,7 @@ class __$$_FetchStockCopyWithImpl<$Res>
   $Res call({
     Object? materials = null,
   }) {
-    return _then(_$_FetchStock(
+    return _then(_$FetchStockImpl(
       materials: null == materials
           ? _value._materials
           : materials // ignore: cast_nullable_to_non_nullable
@@ -1079,8 +1085,8 @@ class __$$_FetchStockCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchStock implements _FetchStock {
-  _$_FetchStock({required final List<MaterialInfo> materials})
+class _$FetchStockImpl implements _FetchStock {
+  _$FetchStockImpl({required final List<MaterialInfo> materials})
       : _materials = materials;
 
   final List<MaterialInfo> _materials;
@@ -1097,10 +1103,10 @@ class _$_FetchStock implements _FetchStock {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchStock &&
+            other is _$FetchStockImpl &&
             const DeepCollectionEquality()
                 .equals(other._materials, _materials));
   }
@@ -1112,8 +1118,8 @@ class _$_FetchStock implements _FetchStock {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchStockCopyWith<_$_FetchStock> get copyWith =>
-      __$$_FetchStockCopyWithImpl<_$_FetchStock>(this, _$identity);
+  _$$FetchStockImplCopyWith<_$FetchStockImpl> get copyWith =>
+      __$$FetchStockImplCopyWithImpl<_$FetchStockImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1244,29 +1250,29 @@ class _$_FetchStock implements _FetchStock {
 
 abstract class _FetchStock implements MaterialListEvent {
   factory _FetchStock({required final List<MaterialInfo> materials}) =
-      _$_FetchStock;
+      _$FetchStockImpl;
 
   List<MaterialInfo> get materials;
   @JsonKey(ignore: true)
-  _$$_FetchStockCopyWith<_$_FetchStock> get copyWith =>
+  _$$FetchStockImplCopyWith<_$FetchStockImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateSearchKeyCopyWith<$Res> {
-  factory _$$_UpdateSearchKeyCopyWith(
-          _$_UpdateSearchKey value, $Res Function(_$_UpdateSearchKey) then) =
-      __$$_UpdateSearchKeyCopyWithImpl<$Res>;
+abstract class _$$UpdateSearchKeyImplCopyWith<$Res> {
+  factory _$$UpdateSearchKeyImplCopyWith(_$UpdateSearchKeyImpl value,
+          $Res Function(_$UpdateSearchKeyImpl) then) =
+      __$$UpdateSearchKeyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String searchKey});
 }
 
 /// @nodoc
-class __$$_UpdateSearchKeyCopyWithImpl<$Res>
-    extends _$MaterialListEventCopyWithImpl<$Res, _$_UpdateSearchKey>
-    implements _$$_UpdateSearchKeyCopyWith<$Res> {
-  __$$_UpdateSearchKeyCopyWithImpl(
-      _$_UpdateSearchKey _value, $Res Function(_$_UpdateSearchKey) _then)
+class __$$UpdateSearchKeyImplCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$UpdateSearchKeyImpl>
+    implements _$$UpdateSearchKeyImplCopyWith<$Res> {
+  __$$UpdateSearchKeyImplCopyWithImpl(
+      _$UpdateSearchKeyImpl _value, $Res Function(_$UpdateSearchKeyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1274,7 +1280,7 @@ class __$$_UpdateSearchKeyCopyWithImpl<$Res>
   $Res call({
     Object? searchKey = null,
   }) {
-    return _then(_$_UpdateSearchKey(
+    return _then(_$UpdateSearchKeyImpl(
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -1285,8 +1291,8 @@ class __$$_UpdateSearchKeyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateSearchKey implements _UpdateSearchKey {
-  const _$_UpdateSearchKey({required this.searchKey});
+class _$UpdateSearchKeyImpl implements _UpdateSearchKey {
+  const _$UpdateSearchKeyImpl({required this.searchKey});
 
   @override
   final String searchKey;
@@ -1297,10 +1303,10 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateSearchKey &&
+            other is _$UpdateSearchKeyImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
@@ -1311,8 +1317,9 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
-      __$$_UpdateSearchKeyCopyWithImpl<_$_UpdateSearchKey>(this, _$identity);
+  _$$UpdateSearchKeyImplCopyWith<_$UpdateSearchKeyImpl> get copyWith =>
+      __$$UpdateSearchKeyImplCopyWithImpl<_$UpdateSearchKeyImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1443,34 +1450,34 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
 
 abstract class _UpdateSearchKey implements MaterialListEvent {
   const factory _UpdateSearchKey({required final String searchKey}) =
-      _$_UpdateSearchKey;
+      _$UpdateSearchKeyImpl;
 
   String get searchKey;
   @JsonKey(ignore: true)
-  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
+  _$$UpdateSearchKeyImplCopyWith<_$UpdateSearchKeyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$MaterialListEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore();
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl();
 
   @override
   String toString() {
@@ -1478,9 +1485,9 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMore);
+        (other.runtimeType == runtimeType && other is _$LoadMoreImpl);
   }
 
   @override
@@ -1614,14 +1621,14 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements MaterialListEvent {
-  const factory _LoadMore() = _$_LoadMore;
+  const factory _LoadMore() = _$LoadMoreImpl;
 }
 
 /// @nodoc
-abstract class _$$_AddFavouriteCopyWith<$Res> {
-  factory _$$_AddFavouriteCopyWith(
-          _$_AddFavourite value, $Res Function(_$_AddFavourite) then) =
-      __$$_AddFavouriteCopyWithImpl<$Res>;
+abstract class _$$AddFavouriteImplCopyWith<$Res> {
+  factory _$$AddFavouriteImplCopyWith(
+          _$AddFavouriteImpl value, $Res Function(_$AddFavouriteImpl) then) =
+      __$$AddFavouriteImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialInfo item});
 
@@ -1629,11 +1636,11 @@ abstract class _$$_AddFavouriteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AddFavouriteCopyWithImpl<$Res>
-    extends _$MaterialListEventCopyWithImpl<$Res, _$_AddFavourite>
-    implements _$$_AddFavouriteCopyWith<$Res> {
-  __$$_AddFavouriteCopyWithImpl(
-      _$_AddFavourite _value, $Res Function(_$_AddFavourite) _then)
+class __$$AddFavouriteImplCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$AddFavouriteImpl>
+    implements _$$AddFavouriteImplCopyWith<$Res> {
+  __$$AddFavouriteImplCopyWithImpl(
+      _$AddFavouriteImpl _value, $Res Function(_$AddFavouriteImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1641,7 +1648,7 @@ class __$$_AddFavouriteCopyWithImpl<$Res>
   $Res call({
     Object? item = null,
   }) {
-    return _then(_$_AddFavourite(
+    return _then(_$AddFavouriteImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -1660,8 +1667,8 @@ class __$$_AddFavouriteCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddFavourite implements _AddFavourite {
-  _$_AddFavourite({required this.item});
+class _$AddFavouriteImpl implements _AddFavourite {
+  _$AddFavouriteImpl({required this.item});
 
   @override
   final MaterialInfo item;
@@ -1672,10 +1679,10 @@ class _$_AddFavourite implements _AddFavourite {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddFavourite &&
+            other is _$AddFavouriteImpl &&
             (identical(other.item, item) || other.item == item));
   }
 
@@ -1685,8 +1692,8 @@ class _$_AddFavourite implements _AddFavourite {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
-      __$$_AddFavouriteCopyWithImpl<_$_AddFavourite>(this, _$identity);
+  _$$AddFavouriteImplCopyWith<_$AddFavouriteImpl> get copyWith =>
+      __$$AddFavouriteImplCopyWithImpl<_$AddFavouriteImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1816,19 +1823,20 @@ class _$_AddFavourite implements _AddFavourite {
 }
 
 abstract class _AddFavourite implements MaterialListEvent {
-  factory _AddFavourite({required final MaterialInfo item}) = _$_AddFavourite;
+  factory _AddFavourite({required final MaterialInfo item}) =
+      _$AddFavouriteImpl;
 
   MaterialInfo get item;
   @JsonKey(ignore: true)
-  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
+  _$$AddFavouriteImplCopyWith<_$AddFavouriteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeleteFavouriteCopyWith<$Res> {
-  factory _$$_DeleteFavouriteCopyWith(
-          _$_DeleteFavourite value, $Res Function(_$_DeleteFavourite) then) =
-      __$$_DeleteFavouriteCopyWithImpl<$Res>;
+abstract class _$$DeleteFavouriteImplCopyWith<$Res> {
+  factory _$$DeleteFavouriteImplCopyWith(_$DeleteFavouriteImpl value,
+          $Res Function(_$DeleteFavouriteImpl) then) =
+      __$$DeleteFavouriteImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialInfo item});
 
@@ -1836,11 +1844,11 @@ abstract class _$$_DeleteFavouriteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DeleteFavouriteCopyWithImpl<$Res>
-    extends _$MaterialListEventCopyWithImpl<$Res, _$_DeleteFavourite>
-    implements _$$_DeleteFavouriteCopyWith<$Res> {
-  __$$_DeleteFavouriteCopyWithImpl(
-      _$_DeleteFavourite _value, $Res Function(_$_DeleteFavourite) _then)
+class __$$DeleteFavouriteImplCopyWithImpl<$Res>
+    extends _$MaterialListEventCopyWithImpl<$Res, _$DeleteFavouriteImpl>
+    implements _$$DeleteFavouriteImplCopyWith<$Res> {
+  __$$DeleteFavouriteImplCopyWithImpl(
+      _$DeleteFavouriteImpl _value, $Res Function(_$DeleteFavouriteImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1848,7 +1856,7 @@ class __$$_DeleteFavouriteCopyWithImpl<$Res>
   $Res call({
     Object? item = null,
   }) {
-    return _then(_$_DeleteFavourite(
+    return _then(_$DeleteFavouriteImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -1867,8 +1875,8 @@ class __$$_DeleteFavouriteCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeleteFavourite implements _DeleteFavourite {
-  _$_DeleteFavourite({required this.item});
+class _$DeleteFavouriteImpl implements _DeleteFavourite {
+  _$DeleteFavouriteImpl({required this.item});
 
   @override
   final MaterialInfo item;
@@ -1879,10 +1887,10 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteFavourite &&
+            other is _$DeleteFavouriteImpl &&
             (identical(other.item, item) || other.item == item));
   }
 
@@ -1892,8 +1900,9 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeleteFavouriteCopyWith<_$_DeleteFavourite> get copyWith =>
-      __$$_DeleteFavouriteCopyWithImpl<_$_DeleteFavourite>(this, _$identity);
+  _$$DeleteFavouriteImplCopyWith<_$DeleteFavouriteImpl> get copyWith =>
+      __$$DeleteFavouriteImplCopyWithImpl<_$DeleteFavouriteImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2024,11 +2033,11 @@ class _$_DeleteFavourite implements _DeleteFavourite {
 
 abstract class _DeleteFavourite implements MaterialListEvent {
   factory _DeleteFavourite({required final MaterialInfo item}) =
-      _$_DeleteFavourite;
+      _$DeleteFavouriteImpl;
 
   MaterialInfo get item;
   @JsonKey(ignore: true)
-  _$$_DeleteFavouriteCopyWith<_$_DeleteFavourite> get copyWith =>
+  _$$DeleteFavouriteImplCopyWith<_$DeleteFavouriteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2225,11 +2234,11 @@ class _$MaterialListStateCopyWithImpl<$Res, $Val extends MaterialListState>
 }
 
 /// @nodoc
-abstract class _$$_MaterialListStateCopyWith<$Res>
+abstract class _$$MaterialListStateImplCopyWith<$Res>
     implements $MaterialListStateCopyWith<$Res> {
-  factory _$$_MaterialListStateCopyWith(_$_MaterialListState value,
-          $Res Function(_$_MaterialListState) then) =
-      __$$_MaterialListStateCopyWithImpl<$Res>;
+  factory _$$MaterialListStateImplCopyWith(_$MaterialListStateImpl value,
+          $Res Function(_$MaterialListStateImpl) then) =
+      __$$MaterialListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2263,11 +2272,11 @@ abstract class _$$_MaterialListStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialListStateCopyWithImpl<$Res>
-    extends _$MaterialListStateCopyWithImpl<$Res, _$_MaterialListState>
-    implements _$$_MaterialListStateCopyWith<$Res> {
-  __$$_MaterialListStateCopyWithImpl(
-      _$_MaterialListState _value, $Res Function(_$_MaterialListState) _then)
+class __$$MaterialListStateImplCopyWithImpl<$Res>
+    extends _$MaterialListStateCopyWithImpl<$Res, _$MaterialListStateImpl>
+    implements _$$MaterialListStateImplCopyWith<$Res> {
+  __$$MaterialListStateImplCopyWithImpl(_$MaterialListStateImpl _value,
+      $Res Function(_$MaterialListStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2288,7 +2297,7 @@ class __$$_MaterialListStateCopyWithImpl<$Res>
     Object? searchKey = null,
     Object? selectedMaterialFilter = null,
   }) {
-    return _then(_$_MaterialListState(
+    return _then(_$MaterialListStateImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -2351,8 +2360,8 @@ class __$$_MaterialListStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialListState extends _MaterialListState {
-  const _$_MaterialListState(
+class _$MaterialListStateImpl extends _MaterialListState {
+  const _$MaterialListStateImpl(
       {required this.salesOrganisation,
       required this.configs,
       required this.customerCodeInfo,
@@ -2411,10 +2420,10 @@ class _$_MaterialListState extends _MaterialListState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialListState &&
+            other is _$MaterialListStateImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.configs, configs) || other.configs == configs) &&
@@ -2465,8 +2474,8 @@ class _$_MaterialListState extends _MaterialListState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialListStateCopyWith<_$_MaterialListState> get copyWith =>
-      __$$_MaterialListStateCopyWithImpl<_$_MaterialListState>(
+  _$$MaterialListStateImplCopyWith<_$MaterialListStateImpl> get copyWith =>
+      __$$MaterialListStateImplCopyWithImpl<_$MaterialListStateImpl>(
           this, _$identity);
 }
 
@@ -2487,7 +2496,7 @@ abstract class _MaterialListState extends MaterialListState {
           required final int nextPageIndex,
           required final SearchKey searchKey,
           required final MaterialFilter selectedMaterialFilter}) =
-      _$_MaterialListState;
+      _$MaterialListStateImpl;
   const _MaterialListState._() : super._();
 
   @override
@@ -2520,6 +2529,6 @@ abstract class _MaterialListState extends MaterialListState {
   MaterialFilter get selectedMaterialFilter;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialListStateCopyWith<_$_MaterialListState> get copyWith =>
+  _$$MaterialListStateImplCopyWith<_$MaterialListStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

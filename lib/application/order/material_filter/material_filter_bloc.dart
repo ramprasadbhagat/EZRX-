@@ -168,6 +168,14 @@ class MaterialFilterBloc
               ),
             );
             break;
+          case MaterialFilterType.isTender:
+            emit(
+              state.copyWith(
+                materialFilter:
+                    state.materialFilter.copyWith(isTender: e.key as bool),
+              ),
+            );
+            break;
           default:
             break;
         }
@@ -199,6 +207,7 @@ class MaterialFilterBloc
           state.copyWith(
             materialFilter: state.materialFilter.copyWith(
               isFavourite: e.selectedMaterialFilter.isFavourite,
+              isTender: e.selectedMaterialFilter.isTender,
               sortBy: e.selectedMaterialFilter.sortBy,
               bundleOffers: e.selectedMaterialFilter.bundleOffers,
               isProductOffer: e.selectedMaterialFilter.isProductOffer,

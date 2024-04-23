@@ -36,6 +36,8 @@ class ProductDetailQuery {
         governmentMaterialCode
         itemRegistrationNumber
         suspensionStatus
+        hasMandatoryTenderContract
+        hasValidTenderContract
       }
     }
      ''';

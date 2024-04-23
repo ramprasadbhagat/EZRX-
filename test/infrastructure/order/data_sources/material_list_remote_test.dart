@@ -64,6 +64,7 @@ void main() {
         'SearchKey': '',
         'fromAddBonus': true,
         'isMarketPlace': true,
+        'isTender': true,
       },
     };
     final res = json.decode(
@@ -108,6 +109,7 @@ void main() {
       showSampleItem: true,
       market: fakeMarket,
       isMarketPlace: true,
+      isTender: true,
     );
 
     final finalData =
@@ -176,6 +178,7 @@ void main() {
       showSampleItem: false,
       market: fakeMarket,
       isMarketPlace: false,
+      isTender: false,
     );
 
     final finalData =

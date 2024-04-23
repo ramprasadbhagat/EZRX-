@@ -146,7 +146,8 @@ enum PriceStyle {
   materialListPriceStrikeThrough,
   govtMaterialListPrice,
   returnOriginPriceStrikeThrough,
-  oosPreOrderItemPrice
+  oosPreOrderItemPrice,
+  tenderPrice
 }
 
 Color _priceTextColor(PriceStyle type) {
@@ -343,6 +344,8 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
       return Theme.of(context).textTheme.bodyLarge!.copyWith(
             color: ZPColors.neutralsGrey1,
           );
+    case PriceStyle.tenderPrice:
+      return Theme.of(context).textTheme.labelSmall!;
     case PriceStyle.returnBonusPrice:
     default:
       return Theme.of(context)

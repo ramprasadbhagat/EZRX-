@@ -68,40 +68,19 @@ class _ToggleActiveButton extends StatelessWidget {
                   outline: ZPColors.lightGrey,
                 ),
               ),
-              child: Switch(
+              child: SwitchWidget(
                 key: WidgetKeys.toggleIncludeBonusButton,
-                activeTrackColor: returnItem.activeColor,
-                inactiveTrackColor: ZPColors.lightGrey,
-                thumbColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) => ZPColors.white,
-                ),
-                thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.selected)) {
-                      return const Icon(
-                        Icons.check,
-                        color: ZPColors.textButtonColor,
-                      );
-                    }
-
-                    return const Icon(
-                      Icons.close,
-                      color: ZPColors.lightGrey,
-                    );
-                  },
-                ),
+                disable: !returnItem.balanceQuantity.isGreaterThanZero,
                 value: bonusItem.balanceQuantity.isGreaterThanZero &&
                     state.isIncludeBonus(bonusItem.uuid),
-                onChanged: returnItem.balanceQuantity.isGreaterThanZero
-                    ? (bool value) {
-                        context.read<NewRequestBloc>().add(
-                              NewRequestEvent.toggleBonusItem(
-                                item: bonusItem,
-                                included: value,
-                              ),
-                            );
-                      }
-                    : null,
+                onChanged: (bool value) {
+                  context.read<NewRequestBloc>().add(
+                        NewRequestEvent.toggleBonusItem(
+                          item: bonusItem,
+                          included: value,
+                        ),
+                      );
+                },
               ),
             ),
           ],

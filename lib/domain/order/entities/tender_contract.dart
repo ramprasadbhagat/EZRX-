@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,38 +12,38 @@ class TenderContract with _$TenderContract {
   const factory TenderContract({
     required TenderContractNumber contractNumber,
     required TenderContractNumber contractItemNumber,
-    required TenderContractInfo contractReference,
+    required StringValue contractReference,
     required TenderContractReason tenderOrderReason,
     required TenderContractNumber tenderVisaNumber,
-    required TenderContractInfo salesDistrict,
-    required TenderContractInfo tenderPackageDescription,
+    required StringValue salesDistrict,
+    required StringValue tenderPackageDescription,
     required TenderPrice tenderPrice,
     required int pricingUnit,
     required int remainingTenderQuantity,
     required int contractQuantity,
-    required TenderContractInfo contractExpiryDate,
+    required DateTimeStringValue contractExpiryDate,
     required TenderContractNumber announcementLetterNumber,
     required bool isNearToExpire,
-    required TenderContractInfo contractPaymentTerm,
+    required StringValue contractPaymentTerm,
   }) = _TenderContract;
 
   factory TenderContract.empty() => TenderContract(
         contractNumber: TenderContractNumber.tenderContractNumber(''),
         contractItemNumber: TenderContractNumber.tenderContractItemNumber(''),
-        contractReference: TenderContractInfo.tenderContractReference(''),
+        contractReference: StringValue(''),
         tenderOrderReason: TenderContractReason(''),
         tenderVisaNumber: TenderContractNumber.tenderVisaNumber(''),
-        salesDistrict: TenderContractInfo.salesDistrict(''),
-        tenderPackageDescription: TenderContractInfo.packageDescription(''),
+        salesDistrict: StringValue(''),
+        tenderPackageDescription: StringValue(''),
         tenderPrice: TenderPrice('0'),
         pricingUnit: 0,
         remainingTenderQuantity: 0,
         contractQuantity: 0,
-        contractExpiryDate: TenderContractInfo.contractExpiryDate(''),
+        contractExpiryDate: DateTimeStringValue(''),
         announcementLetterNumber:
             TenderContractNumber.announcementLetterNumber(''),
         isNearToExpire: false,
-        contractPaymentTerm: TenderContractInfo.contractPaymentTerm(''),
+        contractPaymentTerm: StringValue(''),
       );
 
   factory TenderContract.noContract() => TenderContract.empty().copyWith(
@@ -58,13 +59,15 @@ class TenderContract with _$TenderContract {
         contractNumber: TenderContractNumber.tenderContractNumber(
           tenderContact.tenderContractNumber,
         ),
-        contractReference: TenderContractInfo.tenderContractReference(
+        contractReference: StringValue(
           tenderContact.tenderContractReference,
         ),
       );
 
   double get tenderPriceByPricingUnit =>
       pricingUnit == 0 ? 0 : tenderPrice.tenderPrice / pricingUnit;
+
+  bool get isNotEmpty => this != TenderContract.empty();
 }
 
 extension TenderContractListExtension on List<TenderContract> {
@@ -95,4 +98,9 @@ extension TenderContractListExtension on List<TenderContract> {
             orElse: () => withNoContractItem.first,
           );
   }
+
+  TenderContract get firstAvailableContract => firstWhere(
+        (element) => element.remainingTenderQuantity > 0,
+        orElse: () => TenderContract.empty(),
+      );
 }

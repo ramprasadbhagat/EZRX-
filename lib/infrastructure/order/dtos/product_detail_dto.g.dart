@@ -6,8 +6,9 @@ part of 'product_detail_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ProductDetailDto _$$_ProductDetailDtoFromJson(Map<String, dynamic> json) =>
-    _$_ProductDetailDto(
+_$ProductDetailDtoImpl _$$ProductDetailDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ProductDetailDtoImpl(
       materialNumber: json['materialNumber'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
       principalCode: json['principalCode'] as String? ?? '',
@@ -31,9 +32,13 @@ _$_ProductDetailDto _$$_ProductDetailDtoFromJson(Map<String, dynamic> json) =>
       isSuspended: json['suspensionStatus'] as bool? ?? false,
       isMarketPlace:
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+      hasMandatoryTenderContract:
+          json['hasMandatoryTenderContract'] as bool? ?? false,
+      hasValidTenderContract: json['hasValidTenderContract'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_ProductDetailDtoToJson(_$_ProductDetailDto instance) =>
+Map<String, dynamic> _$$ProductDetailDtoImplToJson(
+        _$ProductDetailDtoImpl instance) =>
     <String, dynamic>{
       'materialNumber': instance.materialNumber,
       'materialDescription': instance.materialDescription,
@@ -56,4 +61,6 @@ Map<String, dynamic> _$$_ProductDetailDtoToJson(_$_ProductDetailDto instance) =>
       'promoStatus': instance.promoStatus,
       'suspensionStatus': instance.isSuspended,
       'isMarketPlace': instance.isMarketPlace,
+      'hasMandatoryTenderContract': instance.hasMandatoryTenderContract,
+      'hasValidTenderContract': instance.hasValidTenderContract,
     };

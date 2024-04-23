@@ -12,33 +12,31 @@ part of 'tender_contract.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TenderContract {
   TenderContractNumber get contractNumber => throw _privateConstructorUsedError;
   TenderContractNumber get contractItemNumber =>
       throw _privateConstructorUsedError;
-  TenderContractInfo get contractReference =>
-      throw _privateConstructorUsedError;
+  StringValue get contractReference => throw _privateConstructorUsedError;
   TenderContractReason get tenderOrderReason =>
       throw _privateConstructorUsedError;
   TenderContractNumber get tenderVisaNumber =>
       throw _privateConstructorUsedError;
-  TenderContractInfo get salesDistrict => throw _privateConstructorUsedError;
-  TenderContractInfo get tenderPackageDescription =>
+  StringValue get salesDistrict => throw _privateConstructorUsedError;
+  StringValue get tenderPackageDescription =>
       throw _privateConstructorUsedError;
   TenderPrice get tenderPrice => throw _privateConstructorUsedError;
   int get pricingUnit => throw _privateConstructorUsedError;
   int get remainingTenderQuantity => throw _privateConstructorUsedError;
   int get contractQuantity => throw _privateConstructorUsedError;
-  TenderContractInfo get contractExpiryDate =>
+  DateTimeStringValue get contractExpiryDate =>
       throw _privateConstructorUsedError;
   TenderContractNumber get announcementLetterNumber =>
       throw _privateConstructorUsedError;
   bool get isNearToExpire => throw _privateConstructorUsedError;
-  TenderContractInfo get contractPaymentTerm =>
-      throw _privateConstructorUsedError;
+  StringValue get contractPaymentTerm => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TenderContractCopyWith<TenderContract> get copyWith =>
@@ -54,19 +52,19 @@ abstract class $TenderContractCopyWith<$Res> {
   $Res call(
       {TenderContractNumber contractNumber,
       TenderContractNumber contractItemNumber,
-      TenderContractInfo contractReference,
+      StringValue contractReference,
       TenderContractReason tenderOrderReason,
       TenderContractNumber tenderVisaNumber,
-      TenderContractInfo salesDistrict,
-      TenderContractInfo tenderPackageDescription,
+      StringValue salesDistrict,
+      StringValue tenderPackageDescription,
       TenderPrice tenderPrice,
       int pricingUnit,
       int remainingTenderQuantity,
       int contractQuantity,
-      TenderContractInfo contractExpiryDate,
+      DateTimeStringValue contractExpiryDate,
       TenderContractNumber announcementLetterNumber,
       bool isNearToExpire,
-      TenderContractInfo contractPaymentTerm});
+      StringValue contractPaymentTerm});
 }
 
 /// @nodoc
@@ -110,7 +108,7 @@ class _$TenderContractCopyWithImpl<$Res, $Val extends TenderContract>
       contractReference: null == contractReference
           ? _value.contractReference
           : contractReference // ignore: cast_nullable_to_non_nullable
-              as TenderContractInfo,
+              as StringValue,
       tenderOrderReason: null == tenderOrderReason
           ? _value.tenderOrderReason
           : tenderOrderReason // ignore: cast_nullable_to_non_nullable
@@ -122,11 +120,11 @@ class _$TenderContractCopyWithImpl<$Res, $Val extends TenderContract>
       salesDistrict: null == salesDistrict
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
-              as TenderContractInfo,
+              as StringValue,
       tenderPackageDescription: null == tenderPackageDescription
           ? _value.tenderPackageDescription
           : tenderPackageDescription // ignore: cast_nullable_to_non_nullable
-              as TenderContractInfo,
+              as StringValue,
       tenderPrice: null == tenderPrice
           ? _value.tenderPrice
           : tenderPrice // ignore: cast_nullable_to_non_nullable
@@ -146,7 +144,7 @@ class _$TenderContractCopyWithImpl<$Res, $Val extends TenderContract>
       contractExpiryDate: null == contractExpiryDate
           ? _value.contractExpiryDate
           : contractExpiryDate // ignore: cast_nullable_to_non_nullable
-              as TenderContractInfo,
+              as DateTimeStringValue,
       announcementLetterNumber: null == announcementLetterNumber
           ? _value.announcementLetterNumber
           : announcementLetterNumber // ignore: cast_nullable_to_non_nullable
@@ -158,43 +156,43 @@ class _$TenderContractCopyWithImpl<$Res, $Val extends TenderContract>
       contractPaymentTerm: null == contractPaymentTerm
           ? _value.contractPaymentTerm
           : contractPaymentTerm // ignore: cast_nullable_to_non_nullable
-              as TenderContractInfo,
+              as StringValue,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_TenderContractCopyWith<$Res>
+abstract class _$$TenderContractImplCopyWith<$Res>
     implements $TenderContractCopyWith<$Res> {
-  factory _$$_TenderContractCopyWith(
-          _$_TenderContract value, $Res Function(_$_TenderContract) then) =
-      __$$_TenderContractCopyWithImpl<$Res>;
+  factory _$$TenderContractImplCopyWith(_$TenderContractImpl value,
+          $Res Function(_$TenderContractImpl) then) =
+      __$$TenderContractImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {TenderContractNumber contractNumber,
       TenderContractNumber contractItemNumber,
-      TenderContractInfo contractReference,
+      StringValue contractReference,
       TenderContractReason tenderOrderReason,
       TenderContractNumber tenderVisaNumber,
-      TenderContractInfo salesDistrict,
-      TenderContractInfo tenderPackageDescription,
+      StringValue salesDistrict,
+      StringValue tenderPackageDescription,
       TenderPrice tenderPrice,
       int pricingUnit,
       int remainingTenderQuantity,
       int contractQuantity,
-      TenderContractInfo contractExpiryDate,
+      DateTimeStringValue contractExpiryDate,
       TenderContractNumber announcementLetterNumber,
       bool isNearToExpire,
-      TenderContractInfo contractPaymentTerm});
+      StringValue contractPaymentTerm});
 }
 
 /// @nodoc
-class __$$_TenderContractCopyWithImpl<$Res>
-    extends _$TenderContractCopyWithImpl<$Res, _$_TenderContract>
-    implements _$$_TenderContractCopyWith<$Res> {
-  __$$_TenderContractCopyWithImpl(
-      _$_TenderContract _value, $Res Function(_$_TenderContract) _then)
+class __$$TenderContractImplCopyWithImpl<$Res>
+    extends _$TenderContractCopyWithImpl<$Res, _$TenderContractImpl>
+    implements _$$TenderContractImplCopyWith<$Res> {
+  __$$TenderContractImplCopyWithImpl(
+      _$TenderContractImpl _value, $Res Function(_$TenderContractImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -216,7 +214,7 @@ class __$$_TenderContractCopyWithImpl<$Res>
     Object? isNearToExpire = null,
     Object? contractPaymentTerm = null,
   }) {
-    return _then(_$_TenderContract(
+    return _then(_$TenderContractImpl(
       contractNumber: null == contractNumber
           ? _value.contractNumber
           : contractNumber // ignore: cast_nullable_to_non_nullable
@@ -228,7 +226,7 @@ class __$$_TenderContractCopyWithImpl<$Res>
       contractReference: null == contractReference
           ? _value.contractReference
           : contractReference // ignore: cast_nullable_to_non_nullable
-              as TenderContractInfo,
+              as StringValue,
       tenderOrderReason: null == tenderOrderReason
           ? _value.tenderOrderReason
           : tenderOrderReason // ignore: cast_nullable_to_non_nullable
@@ -240,11 +238,11 @@ class __$$_TenderContractCopyWithImpl<$Res>
       salesDistrict: null == salesDistrict
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
-              as TenderContractInfo,
+              as StringValue,
       tenderPackageDescription: null == tenderPackageDescription
           ? _value.tenderPackageDescription
           : tenderPackageDescription // ignore: cast_nullable_to_non_nullable
-              as TenderContractInfo,
+              as StringValue,
       tenderPrice: null == tenderPrice
           ? _value.tenderPrice
           : tenderPrice // ignore: cast_nullable_to_non_nullable
@@ -264,7 +262,7 @@ class __$$_TenderContractCopyWithImpl<$Res>
       contractExpiryDate: null == contractExpiryDate
           ? _value.contractExpiryDate
           : contractExpiryDate // ignore: cast_nullable_to_non_nullable
-              as TenderContractInfo,
+              as DateTimeStringValue,
       announcementLetterNumber: null == announcementLetterNumber
           ? _value.announcementLetterNumber
           : announcementLetterNumber // ignore: cast_nullable_to_non_nullable
@@ -276,15 +274,15 @@ class __$$_TenderContractCopyWithImpl<$Res>
       contractPaymentTerm: null == contractPaymentTerm
           ? _value.contractPaymentTerm
           : contractPaymentTerm // ignore: cast_nullable_to_non_nullable
-              as TenderContractInfo,
+              as StringValue,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_TenderContract extends _TenderContract {
-  const _$_TenderContract(
+class _$TenderContractImpl extends _TenderContract {
+  const _$TenderContractImpl(
       {required this.contractNumber,
       required this.contractItemNumber,
       required this.contractReference,
@@ -307,15 +305,15 @@ class _$_TenderContract extends _TenderContract {
   @override
   final TenderContractNumber contractItemNumber;
   @override
-  final TenderContractInfo contractReference;
+  final StringValue contractReference;
   @override
   final TenderContractReason tenderOrderReason;
   @override
   final TenderContractNumber tenderVisaNumber;
   @override
-  final TenderContractInfo salesDistrict;
+  final StringValue salesDistrict;
   @override
-  final TenderContractInfo tenderPackageDescription;
+  final StringValue tenderPackageDescription;
   @override
   final TenderPrice tenderPrice;
   @override
@@ -325,13 +323,13 @@ class _$_TenderContract extends _TenderContract {
   @override
   final int contractQuantity;
   @override
-  final TenderContractInfo contractExpiryDate;
+  final DateTimeStringValue contractExpiryDate;
   @override
   final TenderContractNumber announcementLetterNumber;
   @override
   final bool isNearToExpire;
   @override
-  final TenderContractInfo contractPaymentTerm;
+  final StringValue contractPaymentTerm;
 
   @override
   String toString() {
@@ -339,10 +337,10 @@ class _$_TenderContract extends _TenderContract {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TenderContract &&
+            other is _$TenderContractImpl &&
             (identical(other.contractNumber, contractNumber) ||
                 other.contractNumber == contractNumber) &&
             (identical(other.contractItemNumber, contractItemNumber) ||
@@ -400,28 +398,28 @@ class _$_TenderContract extends _TenderContract {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TenderContractCopyWith<_$_TenderContract> get copyWith =>
-      __$$_TenderContractCopyWithImpl<_$_TenderContract>(this, _$identity);
+  _$$TenderContractImplCopyWith<_$TenderContractImpl> get copyWith =>
+      __$$TenderContractImplCopyWithImpl<_$TenderContractImpl>(
+          this, _$identity);
 }
 
 abstract class _TenderContract extends TenderContract {
   const factory _TenderContract(
-          {required final TenderContractNumber contractNumber,
-          required final TenderContractNumber contractItemNumber,
-          required final TenderContractInfo contractReference,
-          required final TenderContractReason tenderOrderReason,
-          required final TenderContractNumber tenderVisaNumber,
-          required final TenderContractInfo salesDistrict,
-          required final TenderContractInfo tenderPackageDescription,
-          required final TenderPrice tenderPrice,
-          required final int pricingUnit,
-          required final int remainingTenderQuantity,
-          required final int contractQuantity,
-          required final TenderContractInfo contractExpiryDate,
-          required final TenderContractNumber announcementLetterNumber,
-          required final bool isNearToExpire,
-          required final TenderContractInfo contractPaymentTerm}) =
-      _$_TenderContract;
+      {required final TenderContractNumber contractNumber,
+      required final TenderContractNumber contractItemNumber,
+      required final StringValue contractReference,
+      required final TenderContractReason tenderOrderReason,
+      required final TenderContractNumber tenderVisaNumber,
+      required final StringValue salesDistrict,
+      required final StringValue tenderPackageDescription,
+      required final TenderPrice tenderPrice,
+      required final int pricingUnit,
+      required final int remainingTenderQuantity,
+      required final int contractQuantity,
+      required final DateTimeStringValue contractExpiryDate,
+      required final TenderContractNumber announcementLetterNumber,
+      required final bool isNearToExpire,
+      required final StringValue contractPaymentTerm}) = _$TenderContractImpl;
   const _TenderContract._() : super._();
 
   @override
@@ -429,15 +427,15 @@ abstract class _TenderContract extends TenderContract {
   @override
   TenderContractNumber get contractItemNumber;
   @override
-  TenderContractInfo get contractReference;
+  StringValue get contractReference;
   @override
   TenderContractReason get tenderOrderReason;
   @override
   TenderContractNumber get tenderVisaNumber;
   @override
-  TenderContractInfo get salesDistrict;
+  StringValue get salesDistrict;
   @override
-  TenderContractInfo get tenderPackageDescription;
+  StringValue get tenderPackageDescription;
   @override
   TenderPrice get tenderPrice;
   @override
@@ -447,15 +445,15 @@ abstract class _TenderContract extends TenderContract {
   @override
   int get contractQuantity;
   @override
-  TenderContractInfo get contractExpiryDate;
+  DateTimeStringValue get contractExpiryDate;
   @override
   TenderContractNumber get announcementLetterNumber;
   @override
   bool get isNearToExpire;
   @override
-  TenderContractInfo get contractPaymentTerm;
+  StringValue get contractPaymentTerm;
   @override
   @JsonKey(ignore: true)
-  _$$_TenderContractCopyWith<_$_TenderContract> get copyWith =>
+  _$$TenderContractImplCopyWith<_$TenderContractImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

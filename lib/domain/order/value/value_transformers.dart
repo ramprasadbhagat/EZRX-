@@ -255,3 +255,19 @@ String getDeliveryDateTitle(String status) {
 bool isPaymentTermCodeOutsideOfSystem(String value) {
   return value == 'C024' || value == 'A007';
 }
+
+String getTenderOrderReasonTitle(String status) {
+  switch (status) {
+    case '730':
+      return 'Tender with Contract';
+    case '705':
+      return 'Guaranteed Order';
+    case '715':
+      return 'Extended Term';
+    case '700':
+      return 'Loan';
+    case '735':
+    default:
+      return 'Non-Contract Tender';
+  }
+}

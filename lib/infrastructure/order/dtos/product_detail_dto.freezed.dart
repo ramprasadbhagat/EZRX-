@@ -12,7 +12,7 @@ part of 'product_detail_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ProductDetailDto _$ProductDetailDtoFromJson(Map<String, dynamic> json) {
   return _ProductDetailDto.fromJson(json);
@@ -62,6 +62,10 @@ mixin _$ProductDetailDto {
   bool get isSuspended => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
+  bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+  bool get hasValidTenderContract => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -104,7 +108,11 @@ abstract class $ProductDetailDtoCopyWith<$Res> {
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      bool isMarketPlace});
+      bool isMarketPlace,
+      @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
+      bool hasMandatoryTenderContract,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+      bool hasValidTenderContract});
 }
 
 /// @nodoc
@@ -141,6 +149,8 @@ class _$ProductDetailDtoCopyWithImpl<$Res, $Val extends ProductDetailDto>
     Object? promoStatus = null,
     Object? isSuspended = null,
     Object? isMarketPlace = null,
+    Object? hasMandatoryTenderContract = null,
+    Object? hasValidTenderContract = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -227,16 +237,24 @@ class _$ProductDetailDtoCopyWithImpl<$Res, $Val extends ProductDetailDto>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasMandatoryTenderContract: null == hasMandatoryTenderContract
+          ? _value.hasMandatoryTenderContract
+          : hasMandatoryTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasValidTenderContract: null == hasValidTenderContract
+          ? _value.hasValidTenderContract
+          : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ProductDetailDtoCopyWith<$Res>
+abstract class _$$ProductDetailDtoImplCopyWith<$Res>
     implements $ProductDetailDtoCopyWith<$Res> {
-  factory _$$_ProductDetailDtoCopyWith(
-          _$_ProductDetailDto value, $Res Function(_$_ProductDetailDto) then) =
-      __$$_ProductDetailDtoCopyWithImpl<$Res>;
+  factory _$$ProductDetailDtoImplCopyWith(_$ProductDetailDtoImpl value,
+          $Res Function(_$ProductDetailDtoImpl) then) =
+      __$$ProductDetailDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -268,15 +286,19 @@ abstract class _$$_ProductDetailDtoCopyWith<$Res>
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      bool isMarketPlace});
+      bool isMarketPlace,
+      @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
+      bool hasMandatoryTenderContract,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+      bool hasValidTenderContract});
 }
 
 /// @nodoc
-class __$$_ProductDetailDtoCopyWithImpl<$Res>
-    extends _$ProductDetailDtoCopyWithImpl<$Res, _$_ProductDetailDto>
-    implements _$$_ProductDetailDtoCopyWith<$Res> {
-  __$$_ProductDetailDtoCopyWithImpl(
-      _$_ProductDetailDto _value, $Res Function(_$_ProductDetailDto) _then)
+class __$$ProductDetailDtoImplCopyWithImpl<$Res>
+    extends _$ProductDetailDtoCopyWithImpl<$Res, _$ProductDetailDtoImpl>
+    implements _$$ProductDetailDtoImplCopyWith<$Res> {
+  __$$ProductDetailDtoImplCopyWithImpl(_$ProductDetailDtoImpl _value,
+      $Res Function(_$ProductDetailDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -303,8 +325,10 @@ class __$$_ProductDetailDtoCopyWithImpl<$Res>
     Object? promoStatus = null,
     Object? isSuspended = null,
     Object? isMarketPlace = null,
+    Object? hasMandatoryTenderContract = null,
+    Object? hasValidTenderContract = null,
   }) {
-    return _then(_$_ProductDetailDto(
+    return _then(_$ProductDetailDtoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -389,14 +413,22 @@ class __$$_ProductDetailDtoCopyWithImpl<$Res>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasMandatoryTenderContract: null == hasMandatoryTenderContract
+          ? _value.hasMandatoryTenderContract
+          : hasMandatoryTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasValidTenderContract: null == hasValidTenderContract
+          ? _value.hasValidTenderContract
+          : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProductDetailDto extends _ProductDetailDto {
-  _$_ProductDetailDto(
+class _$ProductDetailDtoImpl extends _ProductDetailDto {
+  _$ProductDetailDtoImpl(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
       required this.materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
@@ -433,11 +465,15 @@ class _$_ProductDetailDto extends _ProductDetailDto {
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required this.isSuspended,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required this.isMarketPlace})
+      required this.isMarketPlace,
+      @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
+      required this.hasMandatoryTenderContract,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+      required this.hasValidTenderContract})
       : super._();
 
-  factory _$_ProductDetailDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ProductDetailDtoFromJson(json);
+  factory _$ProductDetailDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductDetailDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -502,17 +538,23 @@ class _$_ProductDetailDto extends _ProductDetailDto {
   @override
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   final bool isMarketPlace;
+  @override
+  @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
+  final bool hasMandatoryTenderContract;
+  @override
+  @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+  final bool hasValidTenderContract;
 
   @override
   String toString() {
-    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, promoType: $promoType, promoStatus: $promoStatus, isSuspended: $isSuspended, isMarketPlace: $isMarketPlace)';
+    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, promoType: $promoType, promoStatus: $promoStatus, isSuspended: $isSuspended, isMarketPlace: $isMarketPlace, hasMandatoryTenderContract: $hasMandatoryTenderContract, hasValidTenderContract: $hasValidTenderContract)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductDetailDto &&
+            other is _$ProductDetailDtoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
@@ -555,7 +597,13 @@ class _$_ProductDetailDto extends _ProductDetailDto {
             (identical(other.isSuspended, isSuspended) ||
                 other.isSuspended == isSuspended) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
-                other.isMarketPlace == isMarketPlace));
+                other.isMarketPlace == isMarketPlace) &&
+            (identical(other.hasMandatoryTenderContract,
+                    hasMandatoryTenderContract) ||
+                other.hasMandatoryTenderContract ==
+                    hasMandatoryTenderContract) &&
+            (identical(other.hasValidTenderContract, hasValidTenderContract) ||
+                other.hasValidTenderContract == hasValidTenderContract));
   }
 
   @JsonKey(ignore: true)
@@ -582,18 +630,21 @@ class _$_ProductDetailDto extends _ProductDetailDto {
         promoType,
         promoStatus,
         isSuspended,
-        isMarketPlace
+        isMarketPlace,
+        hasMandatoryTenderContract,
+        hasValidTenderContract
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductDetailDtoCopyWith<_$_ProductDetailDto> get copyWith =>
-      __$$_ProductDetailDtoCopyWithImpl<_$_ProductDetailDto>(this, _$identity);
+  _$$ProductDetailDtoImplCopyWith<_$ProductDetailDtoImpl> get copyWith =>
+      __$$ProductDetailDtoImplCopyWithImpl<_$ProductDetailDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProductDetailDtoToJson(
+    return _$$ProductDetailDtoImplToJson(
       this,
     );
   }
@@ -641,11 +692,15 @@ abstract class _ProductDetailDto extends ProductDetailDto {
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required final bool isSuspended,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required final bool isMarketPlace}) = _$_ProductDetailDto;
+      required final bool isMarketPlace,
+      @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
+      required final bool hasMandatoryTenderContract,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+      required final bool hasValidTenderContract}) = _$ProductDetailDtoImpl;
   _ProductDetailDto._() : super._();
 
   factory _ProductDetailDto.fromJson(Map<String, dynamic> json) =
-      _$_ProductDetailDto.fromJson;
+      _$ProductDetailDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -711,7 +766,13 @@ abstract class _ProductDetailDto extends ProductDetailDto {
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
+  @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
+  bool get hasMandatoryTenderContract;
+  @override
+  @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+  bool get hasValidTenderContract;
+  @override
   @JsonKey(ignore: true)
-  _$$_ProductDetailDtoCopyWith<_$_ProductDetailDto> get copyWith =>
+  _$$ProductDetailDtoImplCopyWith<_$ProductDetailDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

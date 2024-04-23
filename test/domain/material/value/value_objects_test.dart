@@ -217,9 +217,8 @@ void main() {
         'should return value when Tender Contract Reference value having valid value',
         () async {
       const input = '124655';
-      final tenderContractInfo =
-          TenderContractInfo.tenderContractReference(input);
-      final result = tenderContractInfo.displayContractReference;
+      final tenderContractInfo = StringValue(input);
+      final result = tenderContractInfo.displayNAIfEmpty;
       expect(result, '124655');
     });
 
@@ -227,9 +226,8 @@ void main() {
         'should return NA when Tender Contract Reference value having empty value',
         () async {
       const input = '';
-      final tenderContractInfo =
-          TenderContractInfo.tenderContractReference(input);
-      final result = tenderContractInfo.displayContractReference;
+      final tenderContractInfo = StringValue(input);
+      final result = tenderContractInfo.displayNAIfEmpty;
       expect(result, 'NA');
     });
 
@@ -237,8 +235,8 @@ void main() {
         'should return value when Tender Contract Info sales district having valid value',
         () async {
       const input = '124655';
-      final tenderContractInfo = TenderContractInfo.salesDistrict(input);
-      final result = tenderContractInfo.displaySalesDistrict;
+      final tenderContractInfo = StringValue(input);
+      final result = tenderContractInfo.displayNAIfEmpty;
       expect(result, '124655');
     });
 
@@ -246,8 +244,8 @@ void main() {
         'should return NA when Tender Contract Info sales district value having empty value',
         () async {
       const input = '';
-      final tenderContractInfo = TenderContractInfo.salesDistrict(input);
-      final result = tenderContractInfo.displaySalesDistrict;
+      final tenderContractInfo = StringValue(input);
+      final result = tenderContractInfo.displayNAIfEmpty;
       expect(result, 'NA');
     });
 
@@ -255,8 +253,8 @@ void main() {
         'should return value when Tender Contract Info package description having valid value',
         () async {
       const input = '124655';
-      final tenderContractInfo = TenderContractInfo.packageDescription(input);
-      final result = tenderContractInfo.displayTenderPackageDescription;
+      final tenderContractInfo = StringValue(input);
+      final result = tenderContractInfo.displayNAIfEmpty;
       expect(result, '124655');
     });
 
@@ -264,8 +262,8 @@ void main() {
         'should return NA when Tender Contract Info package description value having empty value',
         () async {
       const input = '';
-      final tenderContractInfo = TenderContractInfo.packageDescription(input);
-      final result = tenderContractInfo.displayTenderPackageDescription;
+      final tenderContractInfo = StringValue(input);
+      final result = tenderContractInfo.displayNAIfEmpty;
       expect(result, 'NA');
     });
 
@@ -273,16 +271,16 @@ void main() {
         'should return value when Tender Contract expiryDate having valid value',
         () async {
       const input = '12042015';
-      final tenderContractInfo = TenderContractInfo.contractExpiryDate(input);
-      final result = tenderContractInfo.displayContractExpiryDate;
+      final tenderContractInfo = StringValue(input);
+      final result = tenderContractInfo.displayNAIfEmpty;
       expect(result, '12042015');
     });
 
     test('should return NA when Tender Contract expiryDate having empty value',
         () async {
       const input = '';
-      final tenderContractInfo = TenderContractInfo.contractExpiryDate(input);
-      final result = tenderContractInfo.displayContractExpiryDate;
+      final tenderContractInfo = StringValue(input);
+      final result = tenderContractInfo.displayNAIfEmpty;
       expect(result, 'NA');
     });
 
@@ -290,16 +288,16 @@ void main() {
         'should return value when Tender Contract paymentTerm having valid value',
         () async {
       const input = '12042015';
-      final tenderContractInfo = TenderContractInfo.contractPaymentTerm(input);
-      final result = tenderContractInfo.displayContractPaymentTerm;
+      final tenderContractInfo = StringValue(input);
+      final result = tenderContractInfo.displayNAIfEmpty;
       expect(result, '12042015');
     });
 
     test('should return NA when Tender Contract paymentTerm having empty value',
         () async {
       const input = '';
-      final tenderContractInfo = TenderContractInfo.contractPaymentTerm(input);
-      final result = tenderContractInfo.displayContractPaymentTerm;
+      final tenderContractInfo = StringValue(input);
+      final result = tenderContractInfo.displayNAIfEmpty;
       expect(result, 'NA');
     });
   });

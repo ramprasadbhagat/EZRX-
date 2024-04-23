@@ -15,6 +15,7 @@ class MaterialFilter with _$MaterialFilter {
     @Default(false) bool bundleOffers,
     @Default(false) bool comboOffers,
     @Default(false) bool isProductOffer,
+    @Default(false) bool isTender,
     @Default(Sort.az) Sort sortBy,
     @Default(false) bool hasAccessToCovidMaterial,
     required Map<String, bool> manufactureMapOptions,
@@ -61,6 +62,7 @@ class MaterialFilter with _$MaterialFilter {
     if (isProductOffer) showProductFilter.add('Items with offers');
     if (bundleOffers) showProductFilter.add('Bundle offers');
     if (isMarketPlace) showProductFilter.add('Marketplace items');
+    if (isTender) showProductFilter.add('Tender Contract');
 
     return {
       if (showProductFilter.isNotEmpty)

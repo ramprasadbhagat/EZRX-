@@ -42,6 +42,8 @@ import 'package:ezrxmobile/presentation/products/product_details/widget/material
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/similar_product.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/product_stock_info.dart';
+import 'package:ezrxmobile/presentation/products/product_details/widget/tender_contracts.dart';
+import 'package:ezrxmobile/presentation/products/product_details/widget/tender_tag.dart';
 import 'package:ezrxmobile/presentation/products/widgets/combo_offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
@@ -330,6 +332,10 @@ class _BodyContent extends StatelessWidget {
               indent: 0,
               thickness: 0.5,
             ),
+            if (materialInfo.hasValidTenderContract)
+              TenderContracts(
+                materialInfo: materialInfo,
+              ),
             ComboOffersProduct(materialNumber: materialInfo.materialNumber),
             AvailableOffer(materialNumber: materialInfo.materialNumber),
             MaterialInformation(materialInfo: materialInfo),

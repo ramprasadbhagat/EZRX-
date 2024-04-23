@@ -33,4 +33,5 @@ enum MaterialFilterType {
   manufactured,
   brand,
   comboOffers,
+  isTender,
 }

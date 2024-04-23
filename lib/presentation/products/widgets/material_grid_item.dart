@@ -15,6 +15,7 @@ import 'package:ezrxmobile/presentation/products/widgets/combo_offer_label.dart'
 import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_label.dart';
+import 'package:ezrxmobile/presentation/products/widgets/tender_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
@@ -74,8 +75,14 @@ class MaterialGridItem extends StatelessWidget {
                         ),
                         Align(
                           alignment: Alignment.bottomLeft,
-                          child: CovidLabel(
-                            materialInfo: materialInfo,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              CovidLabel(
+                                materialInfo: materialInfo,
+                              ),
+                              TenderLabel(materialInfo: materialInfo),
+                            ],
                           ),
                         ),
                         Align(
@@ -112,7 +119,8 @@ class MaterialGridItem extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

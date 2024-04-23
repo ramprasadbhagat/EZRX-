@@ -28,6 +28,8 @@
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
                     "IsGimmick": false,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "isMarketPlace":true
                 },
                 {
@@ -91,8 +93,8 @@
                     "DataTotalHidden": 0,
                     "IsGimmick": null,
                     "suspensionStatus": false,
-                    "hasValidTenderContract": null,
-                    "hasMandatoryTenderContract": null,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": true,
                     "isFOCMaterial": false,
                     "taxClassification": "",
                     "__typename": "Product"
@@ -121,6 +123,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "IsGimmick": false
                 },
                 {
@@ -147,6 +151,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "IsGimmick": false
                 },
                 {
@@ -173,6 +179,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "IsGimmick": false
                 },
                 {
@@ -199,6 +207,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "IsGimmick": false
                 },
                 {
@@ -225,6 +235,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "IsGimmick": false
                 },
                 {
@@ -251,6 +263,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "IsGimmick": false
                 },
                 {
@@ -277,6 +291,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "IsGimmick": false
                 },
                 {
@@ -303,6 +319,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "IsGimmick": false
                 },
                 {
@@ -329,6 +347,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "IsGimmick": false
                 },
                 {
@@ -355,6 +375,8 @@
                     ],
                     "DataTotalCount": 1,
                     "DataTotalHidden": 0,
+                    "hasValidTenderContract": true,
+                    "hasMandatoryTenderContract": false,
                     "IsGimmick": false
                 },
                 {

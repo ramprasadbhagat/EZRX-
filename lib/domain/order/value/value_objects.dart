@@ -513,54 +513,10 @@ class TenderContractReason extends ValueObject<String> {
     return naIfEmpty(removeLeadingZero(value.getOrElse(() => '-')));
   }
 
+  String get tenderContractReasonTitle =>
+      getTenderOrderReasonTitle(value.getOrElse(() => '-'));
+
   const TenderContractReason._(this.value);
-}
-
-class TenderContractInfo extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory TenderContractInfo.tenderContractReference(String input) {
-    return TenderContractInfo._(Right(input));
-  }
-
-  factory TenderContractInfo.salesDistrict(String input) {
-    return TenderContractInfo._(Right(input));
-  }
-
-  factory TenderContractInfo.packageDescription(String input) {
-    return TenderContractInfo._(Right(input));
-  }
-
-  factory TenderContractInfo.contractExpiryDate(String input) {
-    return TenderContractInfo._(Right(input));
-  }
-
-  factory TenderContractInfo.contractPaymentTerm(String input) {
-    return TenderContractInfo._(Right(input));
-  }
-
-  String get displayContractReference {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
-
-  String get displaySalesDistrict {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
-
-  String get displayTenderPackageDescription {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
-
-  String get displayContractExpiryDate {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
-
-  String get displayContractPaymentTerm {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
-
-  const TenderContractInfo._(this.value);
 }
 
 class PoReference extends ValueObject<String> {

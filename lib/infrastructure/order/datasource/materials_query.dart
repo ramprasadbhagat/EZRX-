@@ -42,6 +42,8 @@ class MaterialsWithMetaQuery {
             DataTotalHidden
             HidePrice
             IsGimmick
+            hasValidTenderContract
+            hasMandatoryTenderContract
           }
         }
       }

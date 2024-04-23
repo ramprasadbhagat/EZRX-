@@ -9,13 +9,13 @@ class ProductTag extends StatelessWidget {
   final String labelTag;
   final bool hasIcon;
   final String assetIconSvg;
-  final bool isCovidTag;
   final TextStyle? labelStyle;
   final Color backgroundColor;
   final Color textColor;
   final Color? iconColor;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
+  final BorderRadiusGeometry? borderRadius;
   final IconData iconData;
   const ProductTag._({
     Key? key,
@@ -23,13 +23,13 @@ class ProductTag extends StatelessWidget {
     this.hasIcon = false,
     this.assetIconSvg = '',
     this.iconData = Icons.local_offer_outlined,
-    this.isCovidTag = false,
     this.labelStyle,
     required this.backgroundColor,
     required this.textColor,
     this.iconColor,
     this.margin,
     this.padding,
+    this.borderRadius,
   }) : super(key: key);
 
   factory ProductTag.bundleOffer({TextStyle? labelStyle}) => ProductTag._(
@@ -69,7 +69,13 @@ class ProductTag extends StatelessWidget {
         textColor: ZPColors.skyBlueColor,
         assetIconSvg: SvgImage.coronavirus,
         hasIcon: true,
-        isCovidTag: true,
+        padding: const EdgeInsets.symmetric(vertical: 4.0).copyWith(
+          left: 8.0,
+          right: 4.0,
+        ),
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(4.0),
+        ),
         labelStyle: labelStyle,
       );
   factory ProductTag.onOfferIcon() => const ProductTag._(
@@ -99,27 +105,29 @@ class ProductTag extends StatelessWidget {
         iconColor: ZPColors.white,
         margin: EdgeInsets.zero,
       );
+  factory ProductTag.tenderTag() => const ProductTag._(
+        labelTag: 'Tender Available',
+        backgroundColor: ZPColors.skyBlueColor,
+        textColor: ZPColors.white,
+        padding: EdgeInsets.fromLTRB(16, 4, 8, 4),
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(8.0),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ??
-          (isCovidTag
-              ? const EdgeInsets.symmetric(vertical: 4.0).copyWith(
-                  left: 8.0,
-                  right: 4.0,
-                )
-              : const EdgeInsets.symmetric(horizontal: 12, vertical: 4)),
+      padding:
+          padding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       margin: margin ?? const EdgeInsets.only(top: 8),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: isCovidTag
-            ? const BorderRadius.only(
-                topRight: Radius.circular(4.0),
-              )
-            : const BorderRadius.only(
-                topRight: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
+        borderRadius: borderRadius ??
+            const BorderRadius.only(
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

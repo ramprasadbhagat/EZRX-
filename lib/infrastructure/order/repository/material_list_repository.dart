@@ -90,6 +90,7 @@ class MaterialListRepository implements IMaterialListRepository {
         showSampleItem: false,
         market: deviceStorage.currentMarket(),
         isMarketPlace: selectedMaterialFilter.isMarketPlace,
+        isTender: selectedMaterialFilter.isTender,
       );
 
       final bundleData = await getBundleData(
@@ -312,6 +313,7 @@ class MaterialListRepository implements IMaterialListRepository {
         showSampleItem: true,
         market: deviceStorage.currentMarket(),
         isMarketPlace: false,
+        isTender: false,
       );
 
       return Right(materialListData);

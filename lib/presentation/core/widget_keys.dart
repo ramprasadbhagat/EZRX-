@@ -69,6 +69,7 @@ class WidgetKeys {
   static const Key governmentNumber = Key('governmentNumber');
   static const Key billToCustomerCode = Key('billToCustomerCode');
   static const Key billToAddress = Key('billToAddress');
+  static const Key tenderTag = Key('tenderTag');
 
   //============================================================
   //  PRE-ORDER-MODAL

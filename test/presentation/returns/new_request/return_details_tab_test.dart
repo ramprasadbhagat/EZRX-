@@ -21,6 +21,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/presentation/core/switch_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/return_details_tab.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_counter_offer.dart';
@@ -475,7 +476,7 @@ void main() {
       final toggleIncludeBonusButton =
           find.byKey(WidgetKeys.toggleIncludeBonusButton);
       final bonusToggleIncludeBonusButton =
-          tester.widget<Switch>(toggleIncludeBonusButton);
+          tester.widget<SwitchWidget>(toggleIncludeBonusButton);
       expect(bonusToggleIncludeBonusButton.value, true);
       await tester.tap(toggleIncludeBonusButton);
       await tester.pumpAndSettle();
@@ -770,8 +771,12 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final switchWdt = tester.widget<Switch>(toggleIncludeBonusButton);
-
+      final switchWdt = tester.widget<Switch>(
+        find.descendant(
+          of: toggleIncludeBonusButton,
+          matching: find.byType(Switch),
+        ),
+      );
       expect(
         switchWdt.activeTrackColor,
         ZPColors.toggleOnDisableState,
@@ -798,7 +803,12 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final switchWdt = tester.widget<Switch>(toggleIncludeBonusButton);
+      final switchWdt = tester.widget<Switch>(
+        find.descendant(
+          of: toggleIncludeBonusButton,
+          matching: find.byType(Switch),
+        ),
+      );
 
       expect(
         switchWdt.activeTrackColor,

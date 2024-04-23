@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,15 +18,15 @@ class TenderContractDto with _$TenderContractDto {
     @JsonKey(name: 'tenderVisaNumber') required String tenderVisaNumber,
     @JsonKey(name: 'salesDistrict') required String salesDistrict,
     @JsonKey(name: 'tenderPackageDescription')
-        required String tenderPackageDescription,
+    required String tenderPackageDescription,
     @JsonKey(name: 'tenderPrice') required String tenderPrice,
     @JsonKey(name: 'pricingUnit') required int pricingUnit,
     @JsonKey(name: 'remainingTenderQuantity')
-        required int remainingTenderQuantity,
+    required int remainingTenderQuantity,
     @JsonKey(name: 'contractQuantity') required int contractQuantity,
     @JsonKey(name: 'contractExpiryDate') required String contractExpiryDate,
     @JsonKey(name: 'announcementLetterNumber')
-        required String announcementLetterNumber,
+    required String announcementLetterNumber,
     @JsonKey(name: 'isNearToExpire') required bool isNearToExpire,
     @JsonKey(name: 'contractPaymentTerm') required String contractPaymentTerm,
   }) = _TenderContractDto;
@@ -57,25 +58,21 @@ class TenderContractDto with _$TenderContractDto {
       contractNumber: TenderContractNumber.tenderContractNumber(contractNumber),
       contractItemNumber:
           TenderContractNumber.tenderContractItemNumber(contractItemNumber),
-      contractReference:
-          TenderContractInfo.tenderContractReference(contractReference),
+      contractReference: StringValue(contractReference),
       tenderOrderReason: TenderContractReason(tenderOrderReason),
       tenderVisaNumber: TenderContractNumber.tenderVisaNumber(tenderVisaNumber),
-      salesDistrict: TenderContractInfo.salesDistrict(salesDistrict),
-      tenderPackageDescription:
-          TenderContractInfo.packageDescription(tenderPackageDescription),
+      salesDistrict: StringValue(salesDistrict),
+      tenderPackageDescription: StringValue(tenderPackageDescription),
       tenderPrice: TenderPrice(tenderPrice),
       pricingUnit: pricingUnit,
       remainingTenderQuantity: remainingTenderQuantity,
       contractQuantity: contractQuantity,
-      contractExpiryDate:
-          TenderContractInfo.contractExpiryDate(contractExpiryDate),
+      contractExpiryDate: DateTimeStringValue(contractExpiryDate),
       announcementLetterNumber: TenderContractNumber.announcementLetterNumber(
         announcementLetterNumber,
       ),
       isNearToExpire: isNearToExpire,
-      contractPaymentTerm:
-          TenderContractInfo.contractPaymentTerm(contractPaymentTerm),
+      contractPaymentTerm: StringValue(contractPaymentTerm),
     );
   }
 

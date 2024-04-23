@@ -240,7 +240,7 @@ void main() {
               .copyWith(principalCode: PrincipalCode('0000140332')),
         ),
         tenderContract: TenderContract.empty().copyWith(
-          contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+          contractPaymentTerm: StringValue('term'),
           tenderOrderReason: TenderContractReason('reas'),
         ),
         salesOrgConfig: fakePHSalesOrgConfigs,
@@ -266,7 +266,7 @@ void main() {
             materialNumber: MaterialNumber('000000000023001758'),
           ),
           tenderContract: TenderContract.empty().copyWith(
-            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+            contractPaymentTerm: StringValue('term'),
             tenderOrderReason: TenderContractReason('reas'),
           ),
         ),
@@ -286,7 +286,7 @@ void main() {
             materialNumber: MaterialNumber('000000000023001758'),
           ),
           tenderContract: TenderContract.empty().copyWith(
-            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+            contractPaymentTerm: StringValue('term'),
             tenderOrderReason: TenderContractReason('reas'),
           ),
         ),
@@ -333,7 +333,7 @@ void main() {
                 .copyWith(principalCode: PrincipalCode('0000140332')),
           ),
           tenderContract: TenderContract.empty().copyWith(
-            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+            contractPaymentTerm: StringValue('term'),
             tenderOrderReason: TenderContractReason('reas'),
           ),
           salesOrgConfig: fakePHSalesOrgConfigs,
@@ -359,8 +359,7 @@ void main() {
               materialNumber: MaterialNumber('000000000023001758'),
             ),
             tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
+              contractPaymentTerm: StringValue('term'),
               tenderOrderReason: TenderContractReason('reas'),
             ),
           ),
@@ -380,8 +379,7 @@ void main() {
               materialNumber: MaterialNumber('000000000023001758'),
             ),
             tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
+              contractPaymentTerm: StringValue('term'),
               tenderOrderReason: TenderContractReason('reas'),
             ),
           ),

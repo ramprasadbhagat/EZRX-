@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
@@ -56,7 +57,7 @@ class OrderHistoryDetailsBonusAggregate
           contractNumber: TenderContractNumber.tenderContractNumber(
             tenderContractDetails.tenderContractNumber,
           ),
-          contractReference: TenderContractInfo.tenderContractReference(
+          contractReference: StringValue(
             tenderContractDetails.tenderContractReference,
           ),
         ),

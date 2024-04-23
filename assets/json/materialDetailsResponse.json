@@ -22,7 +22,9 @@
             "suspensionStatus": false,
             "promoStatus": false,
             "promoType": "",
-            "isMarketPlace": true
+            "isMarketPlace": true,
+            "hasMandatoryTenderContract": true,
+            "hasValidTenderContract": true
         }
     }
 }

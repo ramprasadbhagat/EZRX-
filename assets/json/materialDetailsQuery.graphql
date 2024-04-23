@@ -33,6 +33,8 @@ query materialDetails(
     suspensionStatus
     promoStatus
     promoType
+    hasMandatoryTenderContract
+    hasValidTenderContract
   }
 }
 

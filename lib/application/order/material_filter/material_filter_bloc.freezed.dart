@@ -12,7 +12,7 @@ part of 'material_filter_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialFilterEvent {
@@ -129,25 +129,25 @@ class _$MaterialFilterEventCopyWithImpl<$Res, $Val extends MaterialFilterEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$MaterialFilterEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$MaterialFilterEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -155,9 +155,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -281,13 +281,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements MaterialFilterEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_fetchCopyWith<$Res> {
-  factory _$$_fetchCopyWith(_$_fetch value, $Res Function(_$_fetch) then) =
-      __$$_fetchCopyWithImpl<$Res>;
+abstract class _$$fetchImplCopyWith<$Res> {
+  factory _$$fetchImplCopyWith(
+          _$fetchImpl value, $Res Function(_$fetchImpl) then) =
+      __$$fetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -303,10 +304,11 @@ abstract class _$$_fetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_fetchCopyWithImpl<$Res>
-    extends _$MaterialFilterEventCopyWithImpl<$Res, _$_fetch>
-    implements _$$_fetchCopyWith<$Res> {
-  __$$_fetchCopyWithImpl(_$_fetch _value, $Res Function(_$_fetch) _then)
+class __$$fetchImplCopyWithImpl<$Res>
+    extends _$MaterialFilterEventCopyWithImpl<$Res, _$fetchImpl>
+    implements _$$fetchImplCopyWith<$Res> {
+  __$$fetchImplCopyWithImpl(
+      _$fetchImpl _value, $Res Function(_$fetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -318,7 +320,7 @@ class __$$_fetchCopyWithImpl<$Res>
     Object? user = null,
     Object? hasAccessToCovidMaterial = null,
   }) {
-    return _then(_$_fetch(
+    return _then(_$fetchImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -377,8 +379,8 @@ class __$$_fetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_fetch implements _fetch {
-  const _$_fetch(
+class _$fetchImpl implements _fetch {
+  const _$fetchImpl(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
@@ -402,10 +404,10 @@ class _$_fetch implements _fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_fetch &&
+            other is _$fetchImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -425,8 +427,8 @@ class _$_fetch implements _fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_fetchCopyWith<_$_fetch> get copyWith =>
-      __$$_fetchCopyWithImpl<_$_fetch>(this, _$identity);
+  _$$fetchImplCopyWith<_$fetchImpl> get copyWith =>
+      __$$fetchImplCopyWithImpl<_$fetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -554,7 +556,7 @@ abstract class _fetch implements MaterialFilterEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final User user,
-      required final bool hasAccessToCovidMaterial}) = _$_fetch;
+      required final bool hasAccessToCovidMaterial}) = _$fetchImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
@@ -562,28 +564,28 @@ abstract class _fetch implements MaterialFilterEvent {
   User get user;
   bool get hasAccessToCovidMaterial;
   @JsonKey(ignore: true)
-  _$$_fetchCopyWith<_$_fetch> get copyWith =>
+  _$$fetchImplCopyWith<_$fetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_updateSelectedMaterialFilterCopyWith<$Res> {
-  factory _$$_updateSelectedMaterialFilterCopyWith(
-          _$_updateSelectedMaterialFilter value,
-          $Res Function(_$_updateSelectedMaterialFilter) then) =
-      __$$_updateSelectedMaterialFilterCopyWithImpl<$Res>;
+abstract class _$$updateSelectedMaterialFilterImplCopyWith<$Res> {
+  factory _$$updateSelectedMaterialFilterImplCopyWith(
+          _$updateSelectedMaterialFilterImpl value,
+          $Res Function(_$updateSelectedMaterialFilterImpl) then) =
+      __$$updateSelectedMaterialFilterImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialFilterType filterType, Object key});
 }
 
 /// @nodoc
-class __$$_updateSelectedMaterialFilterCopyWithImpl<$Res>
+class __$$updateSelectedMaterialFilterImplCopyWithImpl<$Res>
     extends _$MaterialFilterEventCopyWithImpl<$Res,
-        _$_updateSelectedMaterialFilter>
-    implements _$$_updateSelectedMaterialFilterCopyWith<$Res> {
-  __$$_updateSelectedMaterialFilterCopyWithImpl(
-      _$_updateSelectedMaterialFilter _value,
-      $Res Function(_$_updateSelectedMaterialFilter) _then)
+        _$updateSelectedMaterialFilterImpl>
+    implements _$$updateSelectedMaterialFilterImplCopyWith<$Res> {
+  __$$updateSelectedMaterialFilterImplCopyWithImpl(
+      _$updateSelectedMaterialFilterImpl _value,
+      $Res Function(_$updateSelectedMaterialFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -592,7 +594,7 @@ class __$$_updateSelectedMaterialFilterCopyWithImpl<$Res>
     Object? filterType = null,
     Object? key = null,
   }) {
-    return _then(_$_updateSelectedMaterialFilter(
+    return _then(_$updateSelectedMaterialFilterImpl(
       null == filterType
           ? _value.filterType
           : filterType // ignore: cast_nullable_to_non_nullable
@@ -604,8 +606,9 @@ class __$$_updateSelectedMaterialFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
-  const _$_updateSelectedMaterialFilter(this.filterType, this.key);
+class _$updateSelectedMaterialFilterImpl
+    implements _updateSelectedMaterialFilter {
+  const _$updateSelectedMaterialFilterImpl(this.filterType, this.key);
 
   @override
   final MaterialFilterType filterType;
@@ -618,10 +621,10 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_updateSelectedMaterialFilter &&
+            other is _$updateSelectedMaterialFilterImpl &&
             (identical(other.filterType, filterType) ||
                 other.filterType == filterType) &&
             const DeepCollectionEquality().equals(other.key, key));
@@ -634,9 +637,10 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_updateSelectedMaterialFilterCopyWith<_$_updateSelectedMaterialFilter>
-      get copyWith => __$$_updateSelectedMaterialFilterCopyWithImpl<
-          _$_updateSelectedMaterialFilter>(this, _$identity);
+  _$$updateSelectedMaterialFilterImplCopyWith<
+          _$updateSelectedMaterialFilterImpl>
+      get copyWith => __$$updateSelectedMaterialFilterImplCopyWithImpl<
+          _$updateSelectedMaterialFilterImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -758,21 +762,22 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
 abstract class _updateSelectedMaterialFilter implements MaterialFilterEvent {
   const factory _updateSelectedMaterialFilter(
           final MaterialFilterType filterType, final Object key) =
-      _$_updateSelectedMaterialFilter;
+      _$updateSelectedMaterialFilterImpl;
 
   MaterialFilterType get filterType;
   Object get key;
   @JsonKey(ignore: true)
-  _$$_updateSelectedMaterialFilterCopyWith<_$_updateSelectedMaterialFilter>
+  _$$updateSelectedMaterialFilterImplCopyWith<
+          _$updateSelectedMaterialFilterImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_initSelectedMaterialFilterCopyWith<$Res> {
-  factory _$$_initSelectedMaterialFilterCopyWith(
-          _$_initSelectedMaterialFilter value,
-          $Res Function(_$_initSelectedMaterialFilter) then) =
-      __$$_initSelectedMaterialFilterCopyWithImpl<$Res>;
+abstract class _$$initSelectedMaterialFilterImplCopyWith<$Res> {
+  factory _$$initSelectedMaterialFilterImplCopyWith(
+          _$initSelectedMaterialFilterImpl value,
+          $Res Function(_$initSelectedMaterialFilterImpl) then) =
+      __$$initSelectedMaterialFilterImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialFilter selectedMaterialFilter});
 
@@ -780,13 +785,13 @@ abstract class _$$_initSelectedMaterialFilterCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_initSelectedMaterialFilterCopyWithImpl<$Res>
+class __$$initSelectedMaterialFilterImplCopyWithImpl<$Res>
     extends _$MaterialFilterEventCopyWithImpl<$Res,
-        _$_initSelectedMaterialFilter>
-    implements _$$_initSelectedMaterialFilterCopyWith<$Res> {
-  __$$_initSelectedMaterialFilterCopyWithImpl(
-      _$_initSelectedMaterialFilter _value,
-      $Res Function(_$_initSelectedMaterialFilter) _then)
+        _$initSelectedMaterialFilterImpl>
+    implements _$$initSelectedMaterialFilterImplCopyWith<$Res> {
+  __$$initSelectedMaterialFilterImplCopyWithImpl(
+      _$initSelectedMaterialFilterImpl _value,
+      $Res Function(_$initSelectedMaterialFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -794,7 +799,7 @@ class __$$_initSelectedMaterialFilterCopyWithImpl<$Res>
   $Res call({
     Object? selectedMaterialFilter = null,
   }) {
-    return _then(_$_initSelectedMaterialFilter(
+    return _then(_$initSelectedMaterialFilterImpl(
       null == selectedMaterialFilter
           ? _value.selectedMaterialFilter
           : selectedMaterialFilter // ignore: cast_nullable_to_non_nullable
@@ -814,8 +819,8 @@ class __$$_initSelectedMaterialFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
-  const _$_initSelectedMaterialFilter(this.selectedMaterialFilter);
+class _$initSelectedMaterialFilterImpl implements _initSelectedMaterialFilter {
+  const _$initSelectedMaterialFilterImpl(this.selectedMaterialFilter);
 
   @override
   final MaterialFilter selectedMaterialFilter;
@@ -826,10 +831,10 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_initSelectedMaterialFilter &&
+            other is _$initSelectedMaterialFilterImpl &&
             (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
                 other.selectedMaterialFilter == selectedMaterialFilter));
   }
@@ -840,9 +845,9 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_initSelectedMaterialFilterCopyWith<_$_initSelectedMaterialFilter>
-      get copyWith => __$$_initSelectedMaterialFilterCopyWithImpl<
-          _$_initSelectedMaterialFilter>(this, _$identity);
+  _$$initSelectedMaterialFilterImplCopyWith<_$initSelectedMaterialFilterImpl>
+      get copyWith => __$$initSelectedMaterialFilterImplCopyWithImpl<
+          _$initSelectedMaterialFilterImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -964,29 +969,29 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
 abstract class _initSelectedMaterialFilter implements MaterialFilterEvent {
   const factory _initSelectedMaterialFilter(
           final MaterialFilter selectedMaterialFilter) =
-      _$_initSelectedMaterialFilter;
+      _$initSelectedMaterialFilterImpl;
 
   MaterialFilter get selectedMaterialFilter;
   @JsonKey(ignore: true)
-  _$$_initSelectedMaterialFilterCopyWith<_$_initSelectedMaterialFilter>
+  _$$initSelectedMaterialFilterImplCopyWith<_$initSelectedMaterialFilterImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_updateSearchKeyCopyWith<$Res> {
-  factory _$$_updateSearchKeyCopyWith(
-          _$_updateSearchKey value, $Res Function(_$_updateSearchKey) then) =
-      __$$_updateSearchKeyCopyWithImpl<$Res>;
+abstract class _$$updateSearchKeyImplCopyWith<$Res> {
+  factory _$$updateSearchKeyImplCopyWith(_$updateSearchKeyImpl value,
+          $Res Function(_$updateSearchKeyImpl) then) =
+      __$$updateSearchKeyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String searchKey});
 }
 
 /// @nodoc
-class __$$_updateSearchKeyCopyWithImpl<$Res>
-    extends _$MaterialFilterEventCopyWithImpl<$Res, _$_updateSearchKey>
-    implements _$$_updateSearchKeyCopyWith<$Res> {
-  __$$_updateSearchKeyCopyWithImpl(
-      _$_updateSearchKey _value, $Res Function(_$_updateSearchKey) _then)
+class __$$updateSearchKeyImplCopyWithImpl<$Res>
+    extends _$MaterialFilterEventCopyWithImpl<$Res, _$updateSearchKeyImpl>
+    implements _$$updateSearchKeyImplCopyWith<$Res> {
+  __$$updateSearchKeyImplCopyWithImpl(
+      _$updateSearchKeyImpl _value, $Res Function(_$updateSearchKeyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -994,7 +999,7 @@ class __$$_updateSearchKeyCopyWithImpl<$Res>
   $Res call({
     Object? searchKey = null,
   }) {
-    return _then(_$_updateSearchKey(
+    return _then(_$updateSearchKeyImpl(
       null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -1005,8 +1010,8 @@ class __$$_updateSearchKeyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_updateSearchKey implements _updateSearchKey {
-  const _$_updateSearchKey(this.searchKey);
+class _$updateSearchKeyImpl implements _updateSearchKey {
+  const _$updateSearchKeyImpl(this.searchKey);
 
   @override
   final String searchKey;
@@ -1017,10 +1022,10 @@ class _$_updateSearchKey implements _updateSearchKey {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_updateSearchKey &&
+            other is _$updateSearchKeyImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
@@ -1031,8 +1036,9 @@ class _$_updateSearchKey implements _updateSearchKey {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_updateSearchKeyCopyWith<_$_updateSearchKey> get copyWith =>
-      __$$_updateSearchKeyCopyWithImpl<_$_updateSearchKey>(this, _$identity);
+  _$$updateSearchKeyImplCopyWith<_$updateSearchKeyImpl> get copyWith =>
+      __$$updateSearchKeyImplCopyWithImpl<_$updateSearchKeyImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1152,34 +1158,35 @@ class _$_updateSearchKey implements _updateSearchKey {
 }
 
 abstract class _updateSearchKey implements MaterialFilterEvent {
-  const factory _updateSearchKey(final String searchKey) = _$_updateSearchKey;
+  const factory _updateSearchKey(final String searchKey) =
+      _$updateSearchKeyImpl;
 
   String get searchKey;
   @JsonKey(ignore: true)
-  _$$_updateSearchKeyCopyWith<_$_updateSearchKey> get copyWith =>
+  _$$updateSearchKeyImplCopyWith<_$updateSearchKeyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_resetFilterCopyWith<$Res> {
-  factory _$$_resetFilterCopyWith(
-          _$_resetFilter value, $Res Function(_$_resetFilter) then) =
-      __$$_resetFilterCopyWithImpl<$Res>;
+abstract class _$$resetFilterImplCopyWith<$Res> {
+  factory _$$resetFilterImplCopyWith(
+          _$resetFilterImpl value, $Res Function(_$resetFilterImpl) then) =
+      __$$resetFilterImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_resetFilterCopyWithImpl<$Res>
-    extends _$MaterialFilterEventCopyWithImpl<$Res, _$_resetFilter>
-    implements _$$_resetFilterCopyWith<$Res> {
-  __$$_resetFilterCopyWithImpl(
-      _$_resetFilter _value, $Res Function(_$_resetFilter) _then)
+class __$$resetFilterImplCopyWithImpl<$Res>
+    extends _$MaterialFilterEventCopyWithImpl<$Res, _$resetFilterImpl>
+    implements _$$resetFilterImplCopyWith<$Res> {
+  __$$resetFilterImplCopyWithImpl(
+      _$resetFilterImpl _value, $Res Function(_$resetFilterImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_resetFilter implements _resetFilter {
-  const _$_resetFilter();
+class _$resetFilterImpl implements _resetFilter {
+  const _$resetFilterImpl();
 
   @override
   String toString() {
@@ -1187,9 +1194,9 @@ class _$_resetFilter implements _resetFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_resetFilter);
+        (other.runtimeType == runtimeType && other is _$resetFilterImpl);
   }
 
   @override
@@ -1313,7 +1320,7 @@ class _$_resetFilter implements _resetFilter {
 }
 
 abstract class _resetFilter implements MaterialFilterEvent {
-  const factory _resetFilter() = _$_resetFilter;
+  const factory _resetFilter() = _$resetFilterImpl;
 }
 
 /// @nodoc
@@ -1415,11 +1422,11 @@ class _$MaterialFilterStateCopyWithImpl<$Res, $Val extends MaterialFilterState>
 }
 
 /// @nodoc
-abstract class _$$_MaterialFilterStateCopyWith<$Res>
+abstract class _$$MaterialFilterStateImplCopyWith<$Res>
     implements $MaterialFilterStateCopyWith<$Res> {
-  factory _$$_MaterialFilterStateCopyWith(_$_MaterialFilterState value,
-          $Res Function(_$_MaterialFilterState) then) =
-      __$$_MaterialFilterStateCopyWithImpl<$Res>;
+  factory _$$MaterialFilterStateImplCopyWith(_$MaterialFilterStateImpl value,
+          $Res Function(_$MaterialFilterStateImpl) then) =
+      __$$MaterialFilterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1437,11 +1444,11 @@ abstract class _$$_MaterialFilterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialFilterStateCopyWithImpl<$Res>
-    extends _$MaterialFilterStateCopyWithImpl<$Res, _$_MaterialFilterState>
-    implements _$$_MaterialFilterStateCopyWith<$Res> {
-  __$$_MaterialFilterStateCopyWithImpl(_$_MaterialFilterState _value,
-      $Res Function(_$_MaterialFilterState) _then)
+class __$$MaterialFilterStateImplCopyWithImpl<$Res>
+    extends _$MaterialFilterStateCopyWithImpl<$Res, _$MaterialFilterStateImpl>
+    implements _$$MaterialFilterStateImplCopyWith<$Res> {
+  __$$MaterialFilterStateImplCopyWithImpl(_$MaterialFilterStateImpl _value,
+      $Res Function(_$MaterialFilterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1454,7 +1461,7 @@ class __$$_MaterialFilterStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? hasAccessToCovidMaterial = null,
   }) {
-    return _then(_$_MaterialFilterState(
+    return _then(_$MaterialFilterStateImpl(
       materialFilter: null == materialFilter
           ? _value.materialFilter
           : materialFilter // ignore: cast_nullable_to_non_nullable
@@ -1485,8 +1492,8 @@ class __$$_MaterialFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialFilterState extends _MaterialFilterState {
-  const _$_MaterialFilterState(
+class _$MaterialFilterStateImpl extends _MaterialFilterState {
+  const _$MaterialFilterStateImpl(
       {required this.materialFilter,
       required this.searchKey,
       required this.salesOrganisation,
@@ -1514,10 +1521,10 @@ class _$_MaterialFilterState extends _MaterialFilterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialFilterState &&
+            other is _$MaterialFilterStateImpl &&
             (identical(other.materialFilter, materialFilter) ||
                 other.materialFilter == materialFilter) &&
             (identical(other.searchKey, searchKey) ||
@@ -1547,20 +1554,21 @@ class _$_MaterialFilterState extends _MaterialFilterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialFilterStateCopyWith<_$_MaterialFilterState> get copyWith =>
-      __$$_MaterialFilterStateCopyWithImpl<_$_MaterialFilterState>(
+  _$$MaterialFilterStateImplCopyWith<_$MaterialFilterStateImpl> get copyWith =>
+      __$$MaterialFilterStateImplCopyWithImpl<_$MaterialFilterStateImpl>(
           this, _$identity);
 }
 
 abstract class _MaterialFilterState extends MaterialFilterState {
   const factory _MaterialFilterState(
-      {required final MaterialFilter materialFilter,
-      required final SearchKey searchKey,
-      required final SalesOrganisation salesOrganisation,
-      required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption,
-      required final bool isFetching,
-      required final bool hasAccessToCovidMaterial}) = _$_MaterialFilterState;
+          {required final MaterialFilter materialFilter,
+          required final SearchKey searchKey,
+          required final SalesOrganisation salesOrganisation,
+          required final Option<Either<ApiFailure, dynamic>>
+              apiFailureOrSuccessOption,
+          required final bool isFetching,
+          required final bool hasAccessToCovidMaterial}) =
+      _$MaterialFilterStateImpl;
   const _MaterialFilterState._() : super._();
 
   @override
@@ -1577,6 +1585,6 @@ abstract class _MaterialFilterState extends MaterialFilterState {
   bool get hasAccessToCovidMaterial;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialFilterStateCopyWith<_$_MaterialFilterState> get copyWith =>
+  _$$MaterialFilterStateImplCopyWith<_$MaterialFilterStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

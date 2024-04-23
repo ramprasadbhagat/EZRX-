@@ -202,6 +202,7 @@ void main() {
             showSampleItem: false,
             market: fakeMarket,
             isMarketPlace: fakeMaterialFilter.isMarketPlace,
+            isTender: fakeMaterialFilter.isTender,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -256,6 +257,7 @@ void main() {
             showSampleItem: false,
             market: fakeMarket,
             isMarketPlace: fakeMaterialFilterWithComboOffers.isMarketPlace,
+            isTender: fakeMaterialFilter.isTender,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,
@@ -656,6 +658,7 @@ void main() {
             showSampleItem: true,
             market: fakeMarket,
             isMarketPlace: false,
+            isTender: false,
           ),
         ).thenThrow((invocation) async => MockException());
 
@@ -705,6 +708,7 @@ void main() {
             showSampleItem: true,
             market: fakeMarket,
             isMarketPlace: false,
+            isTender: false,
           ),
         ).thenAnswer(
           (invocation) async => fakeMaterialResponse,

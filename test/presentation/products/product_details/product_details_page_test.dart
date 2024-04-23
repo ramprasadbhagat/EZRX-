@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_deta
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -98,6 +99,10 @@ class ComboDealListMockBloc
     extends MockBloc<ComboDealListEvent, ComboDealListState>
     implements ComboDealListBloc {}
 
+class TenderContractDetailBlocMock
+    extends MockBloc<TenderContractDetailEvent, TenderContractDetailState>
+    implements TenderContractDetailBloc {}
+
 class MockAppRouter extends Mock implements AppRouter {}
 
 class MockMixPanelService extends Mock implements MixpanelService {}
@@ -115,6 +120,7 @@ void main() {
   late MaterialPriceBloc materialPriceMockBloc;
   late ComboDealListBloc comboDealListMockBloc;
   late ComboDealMaterialDetailBloc comboDealMaterialDetailBlocMock;
+  late TenderContractDetailBloc tenderContractDetailBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late CartBloc cartMockBloc;
   late AppRouter autoRouterMock;
@@ -194,6 +200,9 @@ void main() {
     locator.registerLazySingleton<MixpanelService>(() => MockMixPanelService());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<ProductDetailBloc>(() => productDetailMockBloc);
+    locator.registerFactory<TenderContractDetailBloc>(
+      () => tenderContractDetailBlocMock,
+    );
     materialInfo = await ProductDetailLocalDataSource().getProductDetails();
     similarProducts = await ProductDetailLocalDataSource().getSimilarProduct();
     materialPrice =
@@ -238,6 +247,7 @@ void main() {
     () {
       setUp(() {
         materialListMockBloc = MaterialListMockBloc();
+        tenderContractDetailBlocMock = TenderContractDetailBlocMock();
         productDetailMockBloc = ProductDetailsMockBloc();
         mockProductImageBloc = ProductImageMockBloc();
         materialPriceMockBloc = MaterialPriceMockBloc();
@@ -261,6 +271,8 @@ void main() {
             .thenReturn(ProductDetailState.initial());
         when(() => mockProductImageBloc.state)
             .thenReturn(ProductImageState.initial());
+        when(() => tenderContractDetailBlocMock.state)
+            .thenReturn(TenderContractDetailState.initial());
         when(() => materialPriceMockBloc.state)
             .thenReturn(MaterialPriceState.initial());
         when(() => cartMockBloc.state).thenReturn(CartState.initial());
