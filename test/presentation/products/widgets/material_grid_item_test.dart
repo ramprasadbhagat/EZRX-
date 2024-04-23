@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -28,6 +29,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class ProductImageBlocMock
@@ -261,6 +263,32 @@ void main() {
             findsNothing,
           );
         });
+      },
+    );
+
+    testWidgets(
+      'Show tender tender tag',
+      (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeVNSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(
+          getScopedWidget(
+            materialInfo: MaterialInfo.empty().copyWith(
+              hasValidTenderContract: true,
+            ),
+          ),
+        );
+        await tester.pump();
+
+        expect(
+          find.text(
+            'Tender Available'.tr(),
+          ),
+          findsOneWidget,
+        );
       },
     );
     group('MarketPlace', () {

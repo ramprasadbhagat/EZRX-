@@ -49,6 +49,7 @@ void main() {
               ),
               ProductTag.covidTag(),
               ProductTag.onOfferTag(),
+              ProductTag.tenderTag(),
             ],
           ),
         ),
@@ -111,6 +112,20 @@ void main() {
 
       expect(titleTag, findsOneWidget);
       expect(backgroundColorTag, ZPColors.orange);
+    });
+
+    testWidgets('Display tender tag', (tester) async {
+      await tester.pumpWidget(getProductTagWidget());
+      await tester.pumpAndSettle();
+
+      final titleTag = find.text('Tender Available'.tr());
+      final backgroundColorTag =
+          ((tester.widget(find.byType(Container).at(4)) as Container).decoration
+                  as BoxDecoration)
+              .color;
+
+      expect(titleTag, findsOneWidget);
+      expect(backgroundColorTag, ZPColors.skyBlueColor);
     });
   });
 }

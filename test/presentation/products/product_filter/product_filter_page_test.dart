@@ -20,6 +20,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -539,6 +540,32 @@ void main() {
           find.byKey(WidgetKeys.showProductCheckbox('Combo offers')),
           findsNothing,
         );
+      });
+
+      testWidgets('Show Tender Contract Filter For VN market', (tester) async {
+        when(() => mockEligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final tenderContractItemsTitleFinder =
+            find.byKey(WidgetKeys.showProductCheckbox('Tender Contract'));
+        expect(
+          tenderContractItemsTitleFinder,
+          findsOneWidget,
+        );
+        await tester.tap(tenderContractItemsTitleFinder);
+        verify(
+          () => mockMaterialFilterBloc.add(
+            const MaterialFilterEvent.updateSelectedMaterialFilter(
+              MaterialFilterType.isTender,
+              true,
+            ),
+          ),
+        ).called(1);
       });
     },
   );

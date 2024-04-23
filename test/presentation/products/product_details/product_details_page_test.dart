@@ -33,6 +33,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
@@ -41,9 +42,11 @@ import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/switch_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
@@ -138,6 +141,7 @@ void main() {
   late ComboDeal mockComboDeal;
   late ProductDetailAggregate zpMaterialDetail;
   late List<CustomerLicense> customerLicense;
+  late List<TenderContract> tenderContractList;
 
   final price = Price.empty().copyWith(
     comboDeal: PriceComboDeal.empty().copyWith(
@@ -205,6 +209,8 @@ void main() {
     );
     materialInfo = await ProductDetailLocalDataSource().getProductDetails();
     similarProducts = await ProductDetailLocalDataSource().getSimilarProduct();
+    tenderContractList =
+        await TenderContractLocalDataSource().getTenderContractDetails();
     materialPrice =
         (await MaterialPriceLocalDataSource().getPriceList()).firstWhere(
       (element) => element.materialNumber == materialInfo.materialNumber,
@@ -3073,6 +3079,259 @@ void main() {
             expect(licenseExpiredBannerSubTitle, findsNothing);
           },
         );
+      });
+      group('Tender Contract -', () {
+        testWidgets(
+            'Show Tender Tag And Tender Contracts when hasValidTenderContract is true',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                  hasMandatoryTenderContract: false,
+                ),
+              ),
+            ),
+          );
+
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          verify(
+            () => tenderContractDetailBlocMock.add(
+              const TenderContractDetailEvent.toggleSwitch(
+                enable: false,
+              ),
+            ),
+          ).called(1);
+          final tenderTag = find.byKey(WidgetKeys.tenderTag);
+          final tenderContracts =
+              find.byKey(WidgetKeys.materialUseTenderContract);
+          final tenderSwitch = find.byType(SwitchWidget);
+          final contracts = find.byKey(WidgetKeys.materialTenderContracts);
+          expect(tenderTag, findsOneWidget);
+          expect(
+            find.descendant(
+              of: tenderTag,
+              matching: find.text('Tender Available'.tr()),
+            ),
+            findsOneWidget,
+          );
+          expect(tenderContracts, findsOneWidget);
+          expect(
+            find.descendant(
+              of: tenderContracts,
+              matching: find.text('Use Tender Contract'.tr()),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: tenderContracts,
+              matching: tenderSwitch,
+            ),
+            findsOneWidget,
+          );
+          await tester.tap(tenderSwitch);
+          await tester.pumpAndSettle();
+          verify(
+            () => tenderContractDetailBlocMock.add(
+              const TenderContractDetailEvent.toggleSwitch(
+                enable: false,
+              ),
+            ),
+          ).called(1);
+          expect(contracts, findsOneWidget);
+        });
+
+        testWidgets('Hide Tender Contracts if tenderContractList empty',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                ),
+              ),
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final tenderContracts =
+              find.byKey(WidgetKeys.materialUseTenderContract);
+
+          expect(tenderContracts, findsNothing);
+        });
+
+        testWidgets('Tender Contract Item', (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                  hasMandatoryTenderContract: false,
+                ),
+              ),
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial()
+                .copyWith(salesOrgConfigs: fakeVNSalesOrgConfigs),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final contractSection =
+              find.byKey(WidgetKeys.materialTenderContracts);
+
+          final contractItem = find.byKey(
+            WidgetKeys.materialTenderContractItem('0040005178', false),
+          );
+
+          await tester.dragUntilVisible(
+            contractSection,
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0.0, -200),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('0040005178'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('735 - ${'Non-Contract Tender'.tr()}'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('Price'.tr()),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text(
+                'VND 952,380,952.00',
+                findRichText: true,
+              ),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('Quantity Available'.tr()),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('259/1481'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('Expiry Date'.tr()),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('259/1481'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('Reference'.tr()),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('835348340324'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('Material Visa No.'.tr()),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('NA'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('Sale District'.tr()),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('HCM'),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('Announcement Letter No.'.tr()),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: contractItem,
+              matching: find.text('VAT 10% - 8%'),
+            ),
+            findsOneWidget,
+          );
+          await tester.tap(contractItem);
+          verify(
+            () => tenderContractDetailBlocMock.add(
+              TenderContractDetailEvent.select(
+                tenderContract: tenderContractList.first,
+              ),
+            ),
+          );
+        });
       });
     },
   );

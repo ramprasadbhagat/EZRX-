@@ -6,7 +6,7 @@
           "contractNumber": "0040005178",
           "contractItemNumber": "000010",
           "contractReference": "835348340324",
-          "tenderOrderReason": "",
+          "tenderOrderReason": "735",
           "tenderVisaNumber": "",
           "salesDistrict": "HCM",
           "tenderPackageDescription": "",
@@ -15,7 +15,7 @@
           "remainingTenderQuantity": 259,
           "contractQuantity": 1481,
           "contractExpiryDate": "99991231",
-          "announcementLetterNumber": "",
+          "announcementLetterNumber": "VAT 10% - 8%",
           "isNearToExpire": false,
           "contractPaymentTerm": "E002"
         },

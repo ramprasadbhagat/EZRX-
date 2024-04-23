@@ -40,6 +40,7 @@ void main() {
   const fakeProductOffersFilterKey = true;
   const fakeSortByFilterKey = Sort.za;
   const fakeMarketPlaceFilterKey = true;
+  const fakeTenderContractFilterKey = true;
 
   group('Material Filter Bloc', () {
     setUp(() async {
@@ -476,6 +477,26 @@ void main() {
           ),
         ];
       },
+    );
+
+    blocTest(
+      'Selected Material Filter Tender Contract',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      seed: () => filterState,
+      act: (MaterialFilterBloc bloc) => bloc.add(
+        const MaterialFilterEvent.updateSelectedMaterialFilter(
+          MaterialFilterType.isTender,
+          fakeTenderContractFilterKey,
+        ),
+      ),
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          materialFilter: filterState.materialFilter
+              .copyWith(isTender: fakeTenderContractFilterKey),
+        ),
+      ],
     );
 
     test('Test Display Material Filter', () {

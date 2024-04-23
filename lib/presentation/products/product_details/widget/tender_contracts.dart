@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/switch_widget.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,6 +43,7 @@ class TenderContracts extends StatelessWidget {
           }
 
           return Column(
+            key: WidgetKeys.materialUseTenderContract,
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -73,6 +75,7 @@ class TenderContracts extends StatelessWidget {
                 SizedBox(
                   height: 375,
                   child: ListView.separated(
+                    key: WidgetKeys.materialTenderContracts,
                     scrollDirection: Axis.horizontal,
                     itemCount: state.tenderContractList.length,
                     separatorBuilder: (context, index) => const SizedBox(
@@ -85,6 +88,11 @@ class TenderContracts extends StatelessWidget {
                           currentContract == state.selectedTenderContract;
 
                       return InkWell(
+                        key: WidgetKeys.materialTenderContractItem(
+                          currentContract
+                              .contractNumber.displayTenderContractNumber,
+                          isSelected,
+                        ),
                         onTap: () =>
                             context.read<TenderContractDetailBloc>().add(
                                   TenderContractDetailEvent.select(
@@ -128,14 +136,18 @@ class TenderContracts extends StatelessWidget {
                                                   color: ZPColors.neutralsGrey1,
                                                 ),
                                           ),
-                                          Text(
-                                            '${currentContract.tenderOrderReason.displayTenderContractReason} - ${context.tr(currentContract.tenderOrderReason.tenderContractReasonTitle)}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelSmall
-                                                ?.copyWith(
-                                                  color: ZPColors.neutralsBlack,
-                                                ),
+                                          FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: Text(
+                                              '${currentContract.tenderOrderReason.displayTenderContractReason} - ${context.tr(currentContract.tenderOrderReason.tenderContractReasonTitle)}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall
+                                                  ?.copyWith(
+                                                    color:
+                                                        ZPColors.neutralsBlack,
+                                                  ),
+                                            ),
                                           ),
                                         ],
                                       ),

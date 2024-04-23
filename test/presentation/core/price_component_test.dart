@@ -174,5 +174,26 @@ void main() {
         findsOneWidget,
       );
     });
+
+    testWidgets('PriceComponent with tenderPrice style',
+        (WidgetTester tester) async {
+      price = '50.00';
+      type = PriceStyle.tenderPrice;
+      await tester.pumpWidget(
+        getWidget(),
+      );
+      await tester.pump();
+      final priceComponentWidget = find.byKey(
+        WidgetKeys.priceComponent,
+      );
+      expect(priceComponentWidget, findsOneWidget);
+      expect(
+        find.text(
+          '${salesOrgConfig.currency.code} 50.00',
+          findRichText: true,
+        ),
+        findsOneWidget,
+      );
+    });
   });
 }

@@ -665,4 +665,37 @@ void main() {
       );
     });
   });
+
+  group('Tender Contract Reason Value Object -', () {
+    test('Get tender contract reason title for code 735', () {
+      expect(
+        TenderContractReason('735').tenderContractReasonTitle,
+        'Non-Contract Tender',
+      );
+    });
+    test('Get tender contract reason title for code 730', () {
+      expect(
+        TenderContractReason('730').tenderContractReasonTitle,
+        'Tender with Contract',
+      );
+    });
+    test('Get tender contract reason title for code 705', () {
+      expect(
+        TenderContractReason('705').tenderContractReasonTitle,
+        'Guaranteed Order',
+      );
+    });
+    test('Get tender contract reason title for code 715', () {
+      expect(
+        TenderContractReason('715').tenderContractReasonTitle,
+        'Extended Term',
+      );
+    });
+    test('Get tender contract reason title for code 700', () {
+      expect(
+        TenderContractReason('700').tenderContractReasonTitle,
+        'Loan',
+      );
+    });
+  });
 }

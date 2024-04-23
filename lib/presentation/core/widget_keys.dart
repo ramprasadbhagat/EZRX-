@@ -918,6 +918,13 @@ class WidgetKeys {
       Key('expiryDateInstructionSheet');
   static const Key materialAddToCartButton = Key('materialAddToCartButton');
   static const Key comboOfferSection = Key('comboOfferSection');
+  static const Key materialUseTenderContract = Key('materialUseTenderContract');
+  static Key materialTenderContractItem(
+    String contractNumber,
+    bool isSelected,
+  ) =>
+      Key('materialTenderContractItem$contractNumber$isSelected');
+  static const Key materialTenderContracts = Key('materialTenderContracts');
 
   //============================================================
   //  bundle Details
