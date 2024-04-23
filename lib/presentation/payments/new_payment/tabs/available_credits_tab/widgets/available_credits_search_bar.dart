@@ -21,9 +21,7 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
             searchKey: value,
           ),
           hintText: context.tr(
-            context.isMPPayment
-                ? 'Search by MP Document/order number'
-                : 'Search',
+            context.isMPPayment ? 'Search by MP document number' : 'Search',
           ),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[

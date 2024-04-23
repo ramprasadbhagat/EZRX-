@@ -58,13 +58,13 @@ void main() {
     autoRouterMock = locator<AppRouter>();
     mixpanelServiceMock = locator<MixpanelService>();
     configMock = locator<Config>();
-    availableCreditFilterBlocMock = AvailableCreditFilterBlocMock();
-    newPaymentBlocMock = NewPaymentBlocMock();
-    eligibilityBlocMock = EligibilityBlocMock();
     fakeCredits = await NewPaymentLocalDataSource().getCustomerOpenItems();
   });
 
   setUp(() async {
+    availableCreditFilterBlocMock = AvailableCreditFilterBlocMock();
+    newPaymentBlocMock = NewPaymentBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();
     when(() => availableCreditsBlocMock.state)
         .thenReturn(AvailableCreditsState.initial());
@@ -73,9 +73,10 @@ void main() {
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    clearInteractions(mixpanelServiceMock);
   });
 
-  Widget getWidget() {
+  Widget getWidget({bool isMarketPlace = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
@@ -94,9 +95,9 @@ void main() {
           create: (context) => eligibilityBlocMock,
         ),
       ],
-      child: const PaymentModule(
-        isMarketPlace: false,
-        child: Scaffold(
+      child: PaymentModule(
+        isMarketPlace: isMarketPlace,
+        child: const Scaffold(
           body: AvailableCreditsTab(),
         ),
       ),
@@ -178,6 +179,34 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets('Search bar hint text in MP', (tester) async {
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pumpAndSettle();
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is CustomSearchBar &&
+              (widget.hintText == 'Search by MP document number'),
+        ),
+        findsOneWidget,
+      );
+
+      final textFormField = find.byType(TextFormField);
+      expect(textFormField, findsOneWidget);
+      await tester.enterText(textFormField, fakeSearchKey);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
+      verify(
+        () => availableCreditsBlocMock.add(
+          AvailableCreditsEvent.fetch(
+            appliedFilter: AvailableCreditFilter.empty(),
+            searchKey: SearchKey.searchFilter(fakeSearchKey),
+            isMarketPlace: true,
+          ),
+        ),
+      ).called(1);
     });
 
     testWidgets('Search Change And Submit Test', (tester) async {

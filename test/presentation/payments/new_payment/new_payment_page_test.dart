@@ -1,9 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
@@ -16,21 +14,21 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/new_payment_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
@@ -39,7 +37,9 @@ import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 import '../../../common_mock_data/mock_bloc.dart';
 
-void main() {
+void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late MPAccountSummaryBloc mpAccountSummaryBlocMock;
   late ZPAccountSummaryBloc accountSummaryBlocMock;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
   late OutstandingInvoiceFilterBloc outstandingInvoiceFilterBlocMock;
@@ -47,197 +47,19 @@ void main() {
   late AvailableCreditFilterBloc availableCreditFilterBlocMock;
   late NewPaymentBloc newPaymentBlocMock;
   late EligibilityBloc eligibilityBlocMock;
-  late CustomerCodeBloc customerCodeBlocMock;
-  late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   const error = Left(ApiFailure.other('fake-error'));
   late BankInAccountBlocMock bankInAccountsBlocMock;
-  final fakeInvoices = [
-    CustomerOpenItem(
-      status: StatusType('Overdue'),
-      accountingDocument: 'fake-AD',
-      billingDocument: 'fake-BD',
-      netDueDate: DateTimeStringValue('2023041107'),
-      documentDate: DateTimeStringValue('2013-04-11'),
-      amountInTransactionCurrency: 100,
-      documentReferenceID: StringValue('fake-DRI'),
-      postingKeyName: 'fake-PN',
-      transactionCurrency: Currency('fake-TC'),
-      companyCode: 'fake-CC',
-      paymentAmountInDisplayCrcy: 50,
-      partialPaymentHistoryDesc: 'fake-PPHD',
-      accountingDocumentItemRef: 'fake-ADIR',
-      accountingDocumentItem: 'fake-ADI',
-      isDisputed: 'fake-ID',
-      fiscalYear: '2020',
-      openAmountInDisplayCrcy: 50,
-      displayCurrency: Currency('fake-DC'),
-      totalAmountInDisplayCrcy: 100,
-      cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
-      cashDiscountAmountInDspCrcy: 0,
-      debitCreditCode: 'S',
-      bpCustomerNumber: 'fake-BPN',
-      accountingDocExternalReference: 'fake-ADER',
-      openAmountInTransCrcy: 50,
-      orderId: StringValue(''),
-      postingDate: DateTimeStringValue('2016-07-31'),
-    ),
-    CustomerOpenItem(
-      status: StatusType('Overdue'),
-      accountingDocument: 'fake-AD',
-      billingDocument: 'fake-BD',
-      netDueDate: DateTimeStringValue('2023041107'),
-      documentDate: DateTimeStringValue('2013-04-11'),
-      amountInTransactionCurrency: 100,
-      documentReferenceID: StringValue('fake-DRI'),
-      postingKeyName: 'fake-PN',
-      transactionCurrency: Currency('fake-TC'),
-      companyCode: 'fake-CC',
-      paymentAmountInDisplayCrcy: 50,
-      partialPaymentHistoryDesc: 'fake-PPHD',
-      accountingDocumentItemRef: 'fake-ADIR',
-      accountingDocumentItem: 'fake-ADI',
-      isDisputed: 'fake-ID',
-      fiscalYear: '2020',
-      openAmountInDisplayCrcy: 50,
-      displayCurrency: Currency('fake-DC'),
-      totalAmountInDisplayCrcy: 100,
-      cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
-      cashDiscountAmountInDspCrcy: 0,
-      debitCreditCode: 'S',
-      bpCustomerNumber: 'fake-BPN',
-      accountingDocExternalReference: 'fake-ADER',
-      openAmountInTransCrcy: 50,
-      orderId: StringValue(''),
-      postingDate: DateTimeStringValue('2016-07-31'),
-    ),
-    CustomerOpenItem(
-      status: StatusType('Overdue'),
-      accountingDocument: 'fake-AD',
-      billingDocument: 'fake-BD',
-      netDueDate: DateTimeStringValue('2023041107'),
-      documentDate: DateTimeStringValue('2013-04-11'),
-      amountInTransactionCurrency: 100,
-      documentReferenceID: StringValue('fake-DRI'),
-      postingKeyName: 'fake-PN',
-      transactionCurrency: Currency('fake-TC'),
-      companyCode: 'fake-CC',
-      paymentAmountInDisplayCrcy: 50,
-      partialPaymentHistoryDesc: 'fake-PPHD',
-      accountingDocumentItemRef: 'fake-ADIR',
-      accountingDocumentItem: 'fake-ADI',
-      isDisputed: 'fake-ID',
-      fiscalYear: '2020',
-      openAmountInDisplayCrcy: 50,
-      displayCurrency: Currency('fake-DC'),
-      totalAmountInDisplayCrcy: 100,
-      cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
-      cashDiscountAmountInDspCrcy: 0,
-      debitCreditCode: 'S',
-      bpCustomerNumber: 'fake-BPN',
-      accountingDocExternalReference: 'fake-ADER',
-      openAmountInTransCrcy: 50,
-      orderId: StringValue(''),
-      postingDate: DateTimeStringValue('2016-07-31'),
-    ),
-  ];
-
-  final fakeCredits = [
-    CustomerOpenItem(
-      status: StatusType('Overdue'),
-      accountingDocument: 'fake-AD',
-      billingDocument: 'fake-BD',
-      netDueDate: DateTimeStringValue('2023041107'),
-      documentDate: DateTimeStringValue('2013-04-11'),
-      amountInTransactionCurrency: 100,
-      documentReferenceID: StringValue('fake-DRI'),
-      postingKeyName: 'fake-PN',
-      transactionCurrency: Currency('fake-TC'),
-      companyCode: 'fake-CC',
-      paymentAmountInDisplayCrcy: 50,
-      partialPaymentHistoryDesc: 'fake-PPHD',
-      accountingDocumentItemRef: 'fake-ADIR',
-      accountingDocumentItem: 'fake-ADI',
-      isDisputed: 'fake-ID',
-      fiscalYear: '2020',
-      openAmountInDisplayCrcy: 50,
-      displayCurrency: Currency('fake-DC'),
-      totalAmountInDisplayCrcy: 100,
-      cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
-      cashDiscountAmountInDspCrcy: 0,
-      debitCreditCode: 'S',
-      bpCustomerNumber: 'fake-BPN',
-      accountingDocExternalReference: 'fake-ADER',
-      openAmountInTransCrcy: 50,
-      orderId: StringValue(''),
-      postingDate: DateTimeStringValue('2016-07-31'),
-    ),
-    CustomerOpenItem(
-      status: StatusType('Overdue'),
-      accountingDocument: 'fake-AD',
-      billingDocument: 'fake-BD',
-      netDueDate: DateTimeStringValue('2023041107'),
-      documentDate: DateTimeStringValue('2013-04-11'),
-      amountInTransactionCurrency: 100,
-      documentReferenceID: StringValue('fake-DRI'),
-      postingKeyName: 'fake-PN',
-      transactionCurrency: Currency('fake-TC'),
-      companyCode: 'fake-CC',
-      paymentAmountInDisplayCrcy: 50,
-      partialPaymentHistoryDesc: 'fake-PPHD',
-      accountingDocumentItemRef: 'fake-ADIR',
-      accountingDocumentItem: 'fake-ADI',
-      isDisputed: 'fake-ID',
-      fiscalYear: '2020',
-      openAmountInDisplayCrcy: 50,
-      displayCurrency: Currency('fake-DC'),
-      totalAmountInDisplayCrcy: 100,
-      cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
-      cashDiscountAmountInDspCrcy: 0,
-      debitCreditCode: 'S',
-      bpCustomerNumber: 'fake-BPN',
-      accountingDocExternalReference: 'fake-ADER',
-      openAmountInTransCrcy: 50,
-      orderId: StringValue(''),
-      postingDate: DateTimeStringValue('2016-07-31'),
-    ),
-    CustomerOpenItem(
-      status: StatusType('Overdue'),
-      accountingDocument: 'fake-AD',
-      billingDocument: 'fake-BD',
-      netDueDate: DateTimeStringValue('2023041107'),
-      documentDate: DateTimeStringValue('2013-04-11'),
-      amountInTransactionCurrency: 100,
-      documentReferenceID: StringValue('fake-DRI'),
-      postingKeyName: 'fake-PN',
-      transactionCurrency: Currency('fake-TC'),
-      companyCode: 'fake-CC',
-      paymentAmountInDisplayCrcy: 50,
-      partialPaymentHistoryDesc: 'fake-PPHD',
-      accountingDocumentItemRef: 'fake-ADIR',
-      accountingDocumentItem: 'fake-ADI',
-      isDisputed: 'fake-ID',
-      fiscalYear: '2020',
-      openAmountInDisplayCrcy: 50,
-      displayCurrency: Currency('fake-DC'),
-      totalAmountInDisplayCrcy: 100,
-      cashDiscountDueDate: DateTimeStringValue('2023-04-11'),
-      cashDiscountAmountInDspCrcy: 0,
-      debitCreditCode: 'S',
-      bpCustomerNumber: 'fake-BPN',
-      accountingDocExternalReference: 'fake-ADER',
-      openAmountInTransCrcy: 50,
-      orderId: StringValue(''),
-      postingDate: DateTimeStringValue('2016-07-31'),
-    ),
-  ];
+  final fakeData = await NewPaymentLocalDataSource().getCustomerOpenItems();
+  final fakeInvoices = fakeData;
+  final fakeCredits = fakeData
+      .map((e) => e.copyWith(openAmountInTransCrcy: -e.openAmountInTransCrcy))
+      .toList();
 
   setUpAll(() async {
-    TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
@@ -252,14 +74,15 @@ void main() {
     availableCreditsBlocMock = AvailableCreditsBlocMock();
     availableCreditFilterBlocMock = AvailableCreditFilterBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
-    customerCodeBlocMock = CustomerCodeBlocMock();
-    userBlocMock = UserBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     bankInAccountsBlocMock = BankInAccountBlocMock();
+    mpAccountSummaryBlocMock = MPAccountSummaryBlocMock();
 
     when(() => accountSummaryBlocMock.state)
+        .thenReturn(AccountSummaryState.initial());
+    when(() => mpAccountSummaryBlocMock.state)
         .thenReturn(AccountSummaryState.initial());
     when(() => outstandingInvoicesBlocMock.state)
         .thenReturn(OutstandingInvoicesState.initial());
@@ -270,9 +93,6 @@ void main() {
     when(() => availableCreditFilterBlocMock.state)
         .thenReturn(AvailableCreditFilterState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
-    when(() => customerCodeBlocMock.state)
-        .thenReturn(CustomerCodeState.initial());
-    when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
@@ -299,7 +119,7 @@ void main() {
 
   ///////////////////////////////////////////////////////////////////////
 
-  Widget getWidget() {
+  Widget getWidget({bool isMarketPlace = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
@@ -307,6 +127,9 @@ void main() {
       providers: [
         BlocProvider<ZPAccountSummaryBloc>(
           create: (context) => accountSummaryBlocMock,
+        ),
+        BlocProvider<MPAccountSummaryBloc>(
+          create: (context) => mpAccountSummaryBlocMock,
         ),
         BlocProvider<OutstandingInvoicesBloc>(
           create: (context) => outstandingInvoicesBlocMock,
@@ -326,12 +149,6 @@ void main() {
         BlocProvider<NewPaymentBloc>(
           create: (context) => newPaymentBlocMock,
         ),
-        BlocProvider<CustomerCodeBloc>(
-          create: (context) => customerCodeBlocMock,
-        ),
-        BlocProvider<UserBloc>(
-          create: (context) => userBlocMock,
-        ),
         BlocProvider<SalesOrgBloc>(
           create: (context) => salesOrgBlocMock,
         ),
@@ -343,8 +160,8 @@ void main() {
           create: (context) => bankInAccountsBlocMock,
         ),
       ],
-      child: const NewPaymentPage(
-        isMarketPlace: false,
+      child: NewPaymentPage(
+        isMarketPlace: isMarketPlace,
       ),
     );
   }
@@ -506,7 +323,12 @@ void main() {
         final value =
             (tester.firstWidget(nextButton1) as ElevatedButton).enabled;
         expect(value, true);
-        expect(find.text('50.00'), findsWidgets);
+        expect(
+          find.text(
+            fakeInvoices.first.openAmountInTransCrcy.toStringAsFixed(2),
+          ),
+          findsWidgets,
+        );
       });
     });
 
@@ -1208,5 +1030,38 @@ void main() {
         expect(customerBlockedBanner, findsOneWidget);
       },
     );
+
+    group('=> Appbar', () {
+      testWidgets('- ZP payment', (tester) async {
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byType(AppBar),
+            matching: find.textContaining('New payment', findRichText: true),
+          ),
+          findsOne,
+        );
+      });
+
+      testWidgets('- MP payment', (tester) async {
+        await tester.pumpWidget(getWidget(isMarketPlace: true));
+        await tester.pumpAndSettle();
+        final appBar = find.byType(AppBar);
+        expect(
+          find.descendant(
+            of: appBar,
+            matching:
+                find.textContaining('Make a MP payment', findRichText: true),
+          ),
+          findsOne,
+        );
+        expect(
+          find.descendant(of: appBar, matching: find.byType(MarketPlaceIcon)),
+          findsOne,
+        );
+      });
+    });
   });
 }
