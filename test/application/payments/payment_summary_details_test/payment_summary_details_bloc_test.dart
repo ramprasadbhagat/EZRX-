@@ -1014,5 +1014,36 @@ void main() {
         ),
       ],
     );
+    blocTest<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
+      '=> View downloaded advice',
+      build: () => PaymentSummaryDetailsBloc(
+        paymentItemRepository: paymentSummaryDetailsMockRepository,
+        newPaymentRepository: newPaymentRepository,
+        deviceRepository: deviceRepository,
+        bankInstructionRepository: bankInstructionRepository,
+      ),
+      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+        savedAdvice: AttachmentFileBuffer.empty()
+            .copyWith(buffer: fakeRawFile, name: 'fake-name'),
+      ),
+      setUp: () {
+        when(
+          () => newPaymentRepository.viewSavedAdvice(
+            savedAdvice: AttachmentFileBuffer.empty()
+                .copyWith(buffer: fakeRawFile, name: 'fake-name'),
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+      },
+      act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
+        const PaymentSummaryDetailsEvent.viewSavedAdvice(),
+      ),
+      expect: () => [
+        PaymentSummaryDetailsState.initial().copyWith(
+          failureOrSuccessOption: optionOf(const Right(unit)),
+        ),
+      ],
+    );
   });
 }

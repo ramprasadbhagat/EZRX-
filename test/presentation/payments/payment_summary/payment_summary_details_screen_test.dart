@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
@@ -850,6 +851,31 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets('Test open payment advice button', (tester) async {
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        PaymentSummaryDetailsState.initial().copyWith(
+          savedAdvice: AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
+        ),
+      );
+      await tester.pumpWidget(
+        getWUT(
+          child: const PaymentSummaryDetailsPage(
+            isMarketPlace: false,
+          ),
+        ),
+      );
+      await tester.pump();
+      final openAdviceButton = find.byKey(WidgetKeys.downloadAdviceButtonKey);
+      final openAdviceText = find.text('Open payment advice');
+      expect(openAdviceText, findsOneWidget);
+      await tester.tap(openAdviceButton);
+      verify(
+        () => mockPaymentSummaryDetailsBloc
+            .add(const PaymentSummaryDetailsEvent.viewSavedAdvice()),
+      ).called(1);
+      await tester.pump();
     });
 
     testWidgets('Check delete payment advice content when status is failed',

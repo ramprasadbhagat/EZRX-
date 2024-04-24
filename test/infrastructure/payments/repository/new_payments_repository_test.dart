@@ -1,9 +1,11 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
@@ -31,6 +33,7 @@ import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_reposi
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:open_file_safe/open_file_safe.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -1166,6 +1169,63 @@ void main() {
 
         final result = await nawPaymentsRepository.getPrincipalCutoffs(
           shipToInfo: fakeShipToInfo,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('Open saved advice file success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => fileSystemHelper.openFile(
+            AttachmentFileBuffer.empty(),
+          ),
+        ).thenAnswer((invocation) async => OpenResult());
+
+        final result = await nawPaymentsRepository.viewSavedAdvice(
+          savedAdvice: AttachmentFileBuffer.empty(),
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+
+      test('Open saved advice file failure with default failure type',
+          () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => fileSystemHelper.openFile(
+            AttachmentFileBuffer.empty(),
+          ),
+        ).thenAnswer(
+          (invocation) async =>
+              OpenResult(type: ResultType.error, message: 'fake-error'),
+        );
+
+        final result = await nawPaymentsRepository.viewSavedAdvice(
+          savedAdvice: AttachmentFileBuffer.empty(),
+        );
+        expect(
+          result,
+          const Left(ApiFailure.openDownloadedFileError('fake-error')),
+        );
+      });
+
+      test('Open saved advice file failure with exception', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => fileSystemHelper.openFile(
+            AttachmentFileBuffer.empty(),
+          ),
+        ).thenThrow(
+          (invocation) => MockException(),
+        );
+
+        final result = await nawPaymentsRepository.viewSavedAdvice(
+          savedAdvice: AttachmentFileBuffer.empty(),
         );
         expect(
           result.isLeft(),
