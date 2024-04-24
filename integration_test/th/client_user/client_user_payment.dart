@@ -1888,7 +1888,7 @@ void main() {
     final defaultPaymentMethod = 'Payment Gateway'.tr();
 
     Future<void> filterTheDateToGetItem() async {
-      await newPaymentStep2Robot.tapFilter();
+      await newPaymentStep2Robot.clickFilter();
       await newPaymentStep2Robot.clickDocumentDateField();
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
@@ -2181,7 +2181,7 @@ void main() {
           (tester) async {
         await goToPaymentStep2Page(tester);
 
-        await newPaymentStep2Robot.tapFilter();
+        await newPaymentStep2Robot.clickFilter();
         newPaymentStep2Robot.verifyDefaultFilter();
         await newPaymentStep2Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
@@ -2199,7 +2199,7 @@ void main() {
           (tester) async {
         await goToPaymentStep2Page(tester);
 
-        await newPaymentStep2Robot.tapFilter();
+        await newPaymentStep2Robot.clickFilter();
         newPaymentStep2Robot.verifyDefaultFilter();
         await newPaymentStep2Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
@@ -2211,7 +2211,7 @@ void main() {
           newPaymentStep2Robot.verifyNoItemFound();
         } else {
           newPaymentStep2Robot.verifyAtLeastOneItemFound();
-          await newPaymentStep2Robot.tapFilter();
+          await newPaymentStep2Robot.clickFilter();
           await newPaymentStep2Robot.tapResetFilter();
           newPaymentStep2Robot.verifyAtLeastOneItemFound();
         }

@@ -1743,7 +1743,7 @@ void main() {
     final defaultPaymentMethod = 'Payment Gateway'.tr();
 
     Future<void> filterTheDateToGetItem() async {
-      await newPaymentStep2Robot.tapFilter();
+      await newPaymentStep2Robot.clickFilter();
       await newPaymentStep2Robot.clickDocumentDateField();
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
@@ -2011,7 +2011,7 @@ void main() {
         await commonRobot.searchWithKeyboardAction(noResultCreditSearchKeyword);
         newPaymentStep2Robot.verifyNoItemFound();
         await commonRobot.tapClearSearch();
-        await newPaymentStep2Robot.tapFilter();
+        await newPaymentStep2Robot.clickFilter();
         newPaymentStep2Robot.verifyDefaultFilter();
       });
 
@@ -2031,7 +2031,7 @@ void main() {
           (tester) async {
         await goToPaymentStep2Page(tester);
 
-        await newPaymentStep2Robot.tapFilter();
+        await newPaymentStep2Robot.clickFilter();
         newPaymentStep2Robot.verifyDefaultFilter();
         await newPaymentStep2Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
@@ -2040,7 +2040,7 @@ void main() {
         );
         await commonRobot.cancelDateRangePicker();
         await newPaymentStep2Robot.tapResetFilter();
-        await newPaymentStep2Robot.tapFilter();
+        await newPaymentStep2Robot.clickFilter();
         newPaymentStep2Robot.verifyDefaultFilter();
       });
 
@@ -2049,7 +2049,7 @@ void main() {
           (tester) async {
         await goToPaymentStep2Page(tester);
 
-        await newPaymentStep2Robot.tapFilter();
+        await newPaymentStep2Robot.clickFilter();
         newPaymentStep2Robot.verifyDefaultFilter();
         await newPaymentStep2Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
@@ -2058,7 +2058,7 @@ void main() {
         );
         await newPaymentStep2Robot.tapApplyFilter();
         newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
-        await newPaymentStep2Robot.tapFilter();
+        await newPaymentStep2Robot.clickFilter();
         await newPaymentStep2Robot.tapResetFilter();
       });
 

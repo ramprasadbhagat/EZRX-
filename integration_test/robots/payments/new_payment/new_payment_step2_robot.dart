@@ -47,7 +47,7 @@ class NewPaymentStep2Robot {
     );
   }
 
-  Future<void> tapFilter() async {
+  Future<void> clickFilter() async {
     await tester.tap(filterBadge);
     await tester.pumpAndSettle();
   }

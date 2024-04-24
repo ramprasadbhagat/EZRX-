@@ -484,7 +484,7 @@ void main() {
       accountInvoiceRobot.verifyItems();
       accountInvoiceRobot.verifyFilterApplied(1);
       await accountInvoiceRobot.tapFilterButton();
-       // Input date range have data
+      // Input date range have data
       await accountInvoiceFilterRobot.tapDocumentDateField();
       await accountInvoiceFilterRobot.setDateRangePickerValue(
         fromDate: documentDateFrom,
@@ -1759,7 +1759,6 @@ void main() {
       );
       await commonRobot.dismissSnackbar();
     });
- 
   });
 
   group('SOA menu - ', () {
@@ -1834,7 +1833,7 @@ void main() {
     final defaultPaymentMethod = 'Payment Gateway'.tr();
 
     Future<void> filterTheDateToGetItem() async {
-      await newPaymentStep2Robot.tapFilter();
+      await newPaymentStep2Robot.clickFilter();
       await newPaymentStep2Robot.clickDocumentDateField();
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
@@ -1874,7 +1873,7 @@ void main() {
       testWidgets(
           'EZRX-T196 | verify New Payment Page Step 1 - Text Field Happy flow',
           (tester) async {
-        await goToPaymentStep1Page(tester); 
+        await goToPaymentStep1Page(tester);
 
         await newPaymentStep1Robot.clickFilter();
         await newPaymentStep1Robot.clickDocumentDateField();
@@ -2131,7 +2130,7 @@ void main() {
           (tester) async {
         await goToPaymentStep2Page(tester);
 
-        await newPaymentStep2Robot.tapFilter();
+        await newPaymentStep2Robot.clickFilter();
         newPaymentStep2Robot.verifyDefaultFilter();
         await newPaymentStep2Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
@@ -2156,7 +2155,7 @@ void main() {
           (tester) async {
         await goToPaymentStep2Page(tester);
 
-        await newPaymentStep2Robot.tapFilter();
+        await newPaymentStep2Robot.clickFilter();
         newPaymentStep2Robot.verifyDefaultFilter();
         await newPaymentStep2Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
@@ -2172,7 +2171,7 @@ void main() {
           }
         }
         newPaymentStep2Robot.verifyAtLeastOneItemFound();
-        await newPaymentStep2Robot.tapFilter();
+        await newPaymentStep2Robot.clickFilter();
         await newPaymentStep2Robot.tapResetFilter();
         newPaymentStep2Robot.verifyAtLeastOneItemFound();
       });
@@ -2342,7 +2341,6 @@ void main() {
         newPaymentStep3Robot.verifyGeneratePaymentAdviceButton();
       });
     });
-  
   });
 
   tearDown(() async {
