@@ -165,6 +165,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required String paymentMethod,
     required User user,
     required ShipToInfo shipToInfo,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -197,6 +198,7 @@ class NewPaymentRepository extends INewPaymentRepository {
             customerOpenItems.first.transactionCurrency.getValue(),
         userName: user.username.getValue(),
         shipToCode: shipToInfo.shipToCustomerCode,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response);
@@ -248,6 +250,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required CustomerCodeInfo customerCodeInfo,
     required User user,
     required CustomerPaymentInfo paymentInfo,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -270,6 +273,7 @@ class NewPaymentRepository extends INewPaymentRepository {
         paymentBatchAdditionalInfo: paymentInfo.paymentBatchAdditionalInfo,
         paymentId: paymentInfo.paymentID,
         zzAdviceNumber: paymentInfo.zzAdvice,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(invoiceInfoPdf);
@@ -283,6 +287,7 @@ class NewPaymentRepository extends INewPaymentRepository {
   @override
   Future<Either<ApiFailure, List<NewPaymentMethod>>> fetchPaymentMethods({
     required SalesOrganisation salesOrganisation,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -298,6 +303,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     try {
       final response = await remoteDataSource.fetchPaymentMethods(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response.reversed.toList());
@@ -330,6 +336,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required CustomerPaymentFilter filter,
+    required bool isMarketPlace,
   }) async {
     final baseUrl = config.baseUrl(
       marketDomain: AppMarket(deviceStorage.currentMarket()).marketDomain,
@@ -354,6 +361,7 @@ class NewPaymentRepository extends INewPaymentRepository {
         customerCode: customerCodeInfo.customerCodeSoldTo,
         filter: CustomerPaymentFilterDto.fromDomain(filter),
         baseUrl: baseUrl,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(response);

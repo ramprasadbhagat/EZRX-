@@ -48,12 +48,14 @@ abstract class INewPaymentRepository {
     required String paymentMethod,
     required User user,
     required ShipToInfo shipToInfo,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, CustomerPaymentInfo>> getCustomerPayment({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required CustomerPaymentFilter filter,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, Unit>> updatePaymentGateway({
@@ -66,6 +68,7 @@ abstract class INewPaymentRepository {
     required CustomerCodeInfo customerCodeInfo,
     required User user,
     required CustomerPaymentInfo paymentInfo,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, AttachmentFileBuffer>> saveFile({
@@ -78,6 +81,7 @@ abstract class INewPaymentRepository {
 
   Future<Either<ApiFailure, List<NewPaymentMethod>>> fetchPaymentMethods({
     required SalesOrganisation salesOrganisation,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, CreateVirtualAccount>> createVirtualAccount({

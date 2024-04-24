@@ -11,7 +11,9 @@ class _PaymentCancelAdviceButton extends StatelessWidget {
       enableDrag: false,
       isDismissible: false,
       isScrollControlled: true,
-      builder: (_) => DeleteCancelAdviceBottomSheet.cancel(),
+      builder: (_) => DeleteCancelAdviceBottomSheet.cancel(
+        isMarketPlace: context.isMPPayment,
+      ),
     );
   }
 

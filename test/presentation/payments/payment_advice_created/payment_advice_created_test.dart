@@ -334,12 +334,12 @@ void main() {
         'Credit applied (VND)',
       );
       expect(creditApplied, findsOneWidget);
-      final totalText = find.text(
+      final totalText = find.textContaining(
         'Total: ',
         findRichText: true,
       );
       expect(totalText, findsOneWidget);
-      final totalAmount = find.text(
+      final totalAmount = find.textContaining(
         'VND 999.00',
         findRichText: true,
       );

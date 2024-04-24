@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -18,7 +19,10 @@ import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+    as custom;
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
@@ -31,7 +35,6 @@ import 'package:ezrxmobile/presentation/payments/widgets/attention_section.dart'
 import 'package:ezrxmobile/presentation/payments/widgets/bank_account_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/price_text.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/transfer_methods_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -40,31 +43,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:printing/printing.dart';
-import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
-    as custom;
-part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_document.dart';
 
-part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_save_pdf_button.dart';
-
-part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_next_step.dart';
-
-part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payments_advice_message.dart';
-
-part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_summary_section.dart';
-
-part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_please_note.dart';
-
-part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_buttons.dart';
-
-part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_footer_section.dart';
-
-part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_body_section.dart';
-
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_app_bar.dart';
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_body_apl_section.dart';
-
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_body_section.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_buttons.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_document.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_footer_section.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_next_step.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_advice_please_note.dart';
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_cancel_advice_button.dart';
-
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_save_pdf_button.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_summary_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_va_failed.dart';
+part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payments_advice_message.dart';
 
 class PaymentAdviceCreatedPage extends StatelessWidget {
   final bool isMarketPlace;
@@ -86,7 +78,8 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
         title: 'Invoice/credit already in use',
         content: paymentErrorMessage,
         cancelButtonText: 'Back',
-        confirmButtonText: 'Payment summary',
+        confirmButtonText:
+            context.isMPPayment ? 'MP Payment summary' : 'Payment summary',
         iconWidget: SvgPicture.asset(
           SvgImage.alert,
         ),
@@ -271,24 +264,8 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
             child: Scaffold(
               appBar: CustomAppBar.commonAppBar(
                 automaticallyImplyLeading: false,
-                leadingWidth: state.canDisplayCrossButton ? null : 5,
-                title: Text(
-                  context.tr(state.paymentAdviceGenerateTitle),
-                ),
-                leadingWidget: state.canDisplayCrossButton
-                    ? IconButton(
-                        key: WidgetKeys.closeButton,
-                        onPressed: () => context.popRoute(),
-                        icon: const CircleAvatar(
-                          maxRadius: 16,
-                          backgroundColor: ZPColors.transparent,
-                          child: Icon(
-                            Icons.close,
-                            color: ZPColors.neutralsBlack,
-                          ),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
+                titleSpacing: 20,
+                title: _PaymentAdviceAppBar(state: state),
                 customerBlockedOrSuspended: context
                     .read<EligibilityBloc>()
                     .state
@@ -361,3 +338,4 @@ class _PaymentAdviceWaiting extends StatelessWidget {
     );
   }
 }
+

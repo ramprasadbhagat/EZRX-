@@ -53,18 +53,28 @@ class _PaymentSummarySection extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Text(
-                      '${context.tr('Total')}: ',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ZPColors.darkGray,
-                          ),
+                    Expanded(
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '${context.tr('Total')}: ',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(color: ZPColors.darkGray),
+                            ),
+                            WidgetSpan(
+                              child: PriceComponent(
+                                salesOrgConfig:
+                                    context.read<SalesOrgBloc>().state.configs,
+                                price: state.amountTotal.abs().toString(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    PriceComponent(
-                      salesOrgConfig:
-                          context.read<SalesOrgBloc>().state.configs,
-                      price: state.amountTotal.abs().toString(),
-                    ),
-                    const Spacer(),
                     ElevatedButton(
                       key: WidgetKeys.payButton,
                       onPressed: state.isFetching ||
@@ -95,9 +105,6 @@ class _PaymentSummarySection extends StatelessWidget {
                         enabled: state.isLoading,
                         child: Text(
                           context.tr('Pay now'),
-                          style: const TextStyle(
-                            color: ZPColors.white,
-                          ),
                         ),
                       ),
                     ),

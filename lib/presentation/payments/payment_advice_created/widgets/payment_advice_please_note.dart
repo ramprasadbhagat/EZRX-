@@ -32,8 +32,11 @@ class _PaymentAdvicePleaseNote extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () => context.router
-                          .push(PaymentSummaryPageRoute(isMarketPlace: false)),
+                      ..onTap = () => context.router.push(
+                            PaymentSummaryPageRoute(
+                              isMarketPlace: context.isMPPayment,
+                            ),
+                          ),
                   ),
                   TextSpan(
                     text: '" ${context.tr('page')}.',

@@ -116,7 +116,11 @@ class _NewPaymentFooter extends StatelessWidget {
                           child: LoadingShimmer.withChild(
                             enabled: state.isLoading,
                             child: Text(
-                              context.tr('Generate payment advice'),
+                              context.tr(
+                                context.isMPPayment
+                                    ? 'Generate MP payment advice'
+                                    : 'Generate payment advice',
+                              ),
                               style: const TextStyle(
                                 color: ZPColors.white,
                               ),

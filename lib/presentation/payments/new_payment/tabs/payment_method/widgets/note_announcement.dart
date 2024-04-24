@@ -17,7 +17,7 @@ class _NoteAnnouncement extends StatelessWidget {
             'Please note that once the Payment Advice is created, you can no longer add or remove invoices/credit notes',
           )}. ',
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: ZPColors.shadesBlack,
+                color: ZPColors.infoTextBlueColor,
               ),
         ),
         const SizedBox(height: 4),

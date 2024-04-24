@@ -99,6 +99,7 @@ class NewPaymentButton extends StatelessWidget {
             customerCodeInfo: eligibilityState.customerCodeInfo,
             salesOrganisation: eligibilityState.salesOrganisation,
             shipToInfo: eligibilityState.shipToInfo,
+            isMarketPlace: context.isMPPayment,
           ),
         )
         ..add(const NewPaymentEvent.getPrincipalCutoffs());

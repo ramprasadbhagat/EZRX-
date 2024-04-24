@@ -1,6 +1,8 @@
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 part 'with_child.dart';
@@ -11,6 +13,7 @@ enum LoadingShimmerType {
   withChild,
   tile,
   logo,
+  circular,
 }
 
 class LoadingShimmer extends StatelessWidget {
@@ -55,6 +58,9 @@ class LoadingShimmer extends StatelessWidget {
     );
   }
 
+  factory LoadingShimmer.circular() =>
+      const LoadingShimmer._(type: LoadingShimmerType.circular);
+
   @override
   Widget build(BuildContext context) {
     switch (type) {
@@ -67,8 +73,14 @@ class LoadingShimmer extends StatelessWidget {
         return const _Logo();
       case LoadingShimmerType.tile:
         return _Tile(enabled: enabled!, line: line!);
-      default:
-        return const SizedBox.shrink();
+      case LoadingShimmerType.circular:
+        return LoadingAnimationWidget.discreteCircle(
+          key: WidgetKeys.loader,
+          color: ZPColors.primary,
+          secondRingColor: ZPColors.secondary,
+          thirdRingColor: ZPColors.orange,
+          size: 30,
+        );
     }
   }
 }

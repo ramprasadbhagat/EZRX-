@@ -30,7 +30,7 @@ class _PaymentAdviceButton extends StatelessWidget {
                       isMarketPlace: context.isMPPayment,
                     ),
                   );
-              context.paymentSummaryBloc(false).add(
+              context.paymentSummaryBloc(context.isMPPayment).add(
                     PaymentSummaryEvent.fetch(
                       appliedFilter: PaymentSummaryFilter.defaultFilter(),
                       searchKey: SearchKey.searchFilter(''),
@@ -127,6 +127,7 @@ class _DeleteAdviceButton extends StatelessWidget {
       builder: (_) => DeleteCancelAdviceBottomSheet.delete(
         paymentAdviceNumber: paymentAdviceNumber,
         isInProgress: state.details.status.getIsInProgress,
+        isMarketPlace: context.isMPPayment,
       ),
     );
   }
@@ -146,12 +147,13 @@ class _DeleteAdviceButton extends StatelessWidget {
           child: LoadingShimmer.withChild(
             enabled: state.isDeletingPayment,
             child: Text(
-              'Delete advice'.tr(),
+              context.tr('Delete advice'),
               style: Theme.of(context)
                   .textTheme
                   .labelMedium
                   ?.copyWith(color: ZPColors.red),
-            ).tr(),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
         onPressed: () {
@@ -191,6 +193,7 @@ class _DownloadAdviceButton extends StatelessWidget {
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: ZPColors.primary,
                   ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),
@@ -219,7 +222,9 @@ class _CancelAdviceButton extends StatelessWidget {
       enableDrag: false,
       isDismissible: false,
       isScrollControlled: true,
-      builder: (_) => DeleteCancelAdviceBottomSheet.cancel(),
+      builder: (_) => DeleteCancelAdviceBottomSheet.cancel(
+        isMarketPlace: context.isMPPayment,
+      ),
     );
   }
 
@@ -243,6 +248,7 @@ class _CancelAdviceButton extends StatelessWidget {
                   .textTheme
                   .labelMedium
                   ?.copyWith(color: ZPColors.red),
+              textAlign: TextAlign.center,
             ),
           ),
         ),

@@ -80,7 +80,6 @@ void main() {
           (server) => server.reply(
             200,
             res,
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -94,6 +93,54 @@ void main() {
           customerInvoices: [],
           userName: 'rootadmin',
           shipToCode: fakeShipToCode,
+          isMarketPlace: false,
+        );
+
+        expect(
+          result,
+          PaymentInfoDto.fromJson(res['data']['addCustomerPayment']).toDomain(),
+        );
+      });
+
+      test('pay should inclue isMarketPlace when value is true', () async {
+        final res = json.decode(
+          await rootBundle.loadString('assets/json/payResponseVN.json'),
+        );
+
+        final data = jsonEncode({
+          'query': newPaymentRemoteDataSource.newPaymentQuery.payQuery(),
+          'variables': {
+            'input': {
+              'customerCode': 'fake-customer-code',
+              'customerInvoice': [],
+              'paymentMethod': 'Payment Gateway',
+              'salesOrg': 'fake-salesOrg',
+              'transactionCurrency': 'VND',
+              'userName': 'rootadmin',
+              'isMarketPlace': true,
+            },
+          },
+        });
+
+        dioAdapter.onPost(
+          '/api/ezpay',
+          (server) => server.reply(
+            200,
+            res,
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: data,
+        );
+
+        final result = await newPaymentRemoteDataSource.pay(
+          customerCode: fakeCustomerCode,
+          salesOrg: fakeSalesOrg,
+          paymentMethod: 'Payment Gateway',
+          transactionCurrency: 'VND',
+          customerInvoices: [],
+          userName: 'rootadmin',
+          shipToCode: fakeShipToCode,
+          isMarketPlace: true,
         );
 
         expect(
@@ -122,7 +169,6 @@ void main() {
           (server) => server.reply(
             205,
             {'data': {}},
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -137,6 +183,7 @@ void main() {
           customerInvoices: [],
           userName: 'rootadmin',
           shipToCode: fakeShipToCode,
+          isMarketPlace: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -169,7 +216,6 @@ void main() {
                 {'message': 'fake-error'},
               ],
             },
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -184,6 +230,7 @@ void main() {
           customerInvoices: [],
           userName: 'rootadmin',
           shipToCode: fakeShipToCode,
+          isMarketPlace: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -224,7 +271,6 @@ void main() {
           (server) => server.reply(
             200,
             res,
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -239,6 +285,61 @@ void main() {
           paymentId: 'fake-paymentId',
           salesOrg: 'fake-salesOrg',
           zzAdviceNumber: 'fake-adviceNumber',
+          isMarketPlace: false,
+        );
+
+        expect(
+          result,
+          PaymentInvoiceInfoPdfDto.fromJson(res['data']['paymentInvoicePdf'])
+              .toDomain(),
+        );
+      });
+
+      test('paymentInvoicePdf should include isMarketPlace when value is true',
+          () async {
+        final res = json.decode(
+          await rootBundle
+              .loadString('assets/json/paymentInvoiceInfoPdfResponse.json'),
+        );
+
+        final data = jsonEncode({
+          'query': newPaymentRemoteDataSource.newPaymentQuery
+              .getPaymentInvoiceInfoPdf(),
+          'variables': {
+            'request': {
+              'accountingDocExternalReference':
+                  'fake-accountingDocExternalReference',
+              'customerCode': 'fake-customerCode',
+              'customerName': 'fake-customerName',
+              'payer': 'fake-customerCode',
+              'paymentBatchAdditionalInfo': 'fake-paymentBatchAdditionalInfo',
+              'paymentId': 'fake-paymentId',
+              'salesOrg': 'fake-salesOrg',
+              'isMarketPlace': true,
+            },
+          },
+        });
+
+        dioAdapter.onPost(
+          '/api/ezpay',
+          (server) => server.reply(
+            200,
+            res,
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: data,
+        );
+
+        final result =
+            await newPaymentRemoteDataSource.getPaymentInvoiceInfoPdf(
+          accountingDocExternalReference: 'fake-accountingDocExternalReference',
+          customerCode: 'fake-customerCode',
+          customerName: 'fake-customerName',
+          paymentBatchAdditionalInfo: 'fake-paymentBatchAdditionalInfo',
+          paymentId: 'fake-paymentId',
+          salesOrg: 'fake-salesOrg',
+          zzAdviceNumber: 'fake-adviceNumber',
+          isMarketPlace: true,
         );
 
         expect(
@@ -271,7 +372,6 @@ void main() {
           (server) => server.reply(
             205,
             {'data': {}},
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -286,6 +386,7 @@ void main() {
           paymentId: 'fake-paymentId',
           salesOrg: 'fake-salesOrg',
           zzAdviceNumber: 'fake-adviceNumber',
+          isMarketPlace: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -321,7 +422,6 @@ void main() {
                 {'message': 'fake-error'},
               ],
             },
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -336,6 +436,7 @@ void main() {
           paymentId: 'fake-paymentId',
           salesOrg: 'fake-salesOrg',
           zzAdviceNumber: 'fake-adviceNumber',
+          isMarketPlace: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -372,7 +473,6 @@ void main() {
           (server) => server.reply(
             200,
             res,
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -415,7 +515,6 @@ void main() {
           (server) => server.reply(
             205,
             res,
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -459,7 +558,6 @@ void main() {
           (server) => server.reply(
             200,
             res,
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -467,6 +565,49 @@ void main() {
 
         final result = await newPaymentRemoteDataSource.fetchPaymentMethods(
           salesOrg: 'fake-salesOrg',
+          isMarketPlace: false,
+        );
+
+        expect(
+          result.length,
+          List.from(res['data']['availablePaymentMethods'])
+              .map((e) => PaymentMethodDto.fromJson(e).toDomain())
+              .toList()
+              .length,
+        );
+      });
+
+      test('fetchPaymentMethod should contain isMarketPlace when value is true',
+          () async {
+        final res = json.decode(
+          await rootBundle
+              .loadString('assets/json/paymentMethodsResponse.json'),
+        );
+
+        final data = jsonEncode({
+          'query': newPaymentRemoteDataSource.newPaymentQuery
+              .fetchPaymentMethodQuery(),
+          'variables': {
+            'request': {
+              'salesOrg': 'fake-salesOrg',
+              'isMarketPlace': true,
+            },
+          },
+        });
+
+        dioAdapter.onPost(
+          '/api/ezpay',
+          (server) => server.reply(
+            200,
+            res,
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: data,
+        );
+
+        final result = await newPaymentRemoteDataSource.fetchPaymentMethods(
+          salesOrg: 'fake-salesOrg',
+          isMarketPlace: true,
         );
 
         expect(
@@ -494,7 +635,6 @@ void main() {
           (server) => server.reply(
             205,
             {'data': {}},
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -503,6 +643,7 @@ void main() {
         await newPaymentRemoteDataSource
             .fetchPaymentMethods(
           salesOrg: 'fake-salesOrg',
+          isMarketPlace: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -531,7 +672,6 @@ void main() {
                 {'message': 'fake-error'},
               ],
             },
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -540,6 +680,7 @@ void main() {
         await newPaymentRemoteDataSource
             .fetchPaymentMethods(
           salesOrg: 'fake-salesOrg',
+          isMarketPlace: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());

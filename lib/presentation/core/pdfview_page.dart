@@ -1,12 +1,11 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class PdfViewPage extends StatelessWidget {
   final String url;
@@ -38,13 +37,7 @@ class PdfViewPage extends StatelessWidget {
           url,
           placeholder: (double progress) => Align(
             alignment: Alignment.center,
-            child: LoadingAnimationWidget.discreteCircle(
-              key: WidgetKeys.loader,
-              color: ZPColors.primary,
-              secondRingColor: ZPColors.secondary,
-              thirdRingColor: ZPColors.orange,
-              size: 30,
-            ),
+            child: LoadingShimmer.circular(),
           ),
           errorWidget: (error) => Center(
             key: WidgetKeys.errorLoadingUrl,

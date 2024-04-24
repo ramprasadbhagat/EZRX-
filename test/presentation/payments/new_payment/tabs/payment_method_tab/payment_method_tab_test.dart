@@ -29,31 +29,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../common_mock_data/mock_bloc.dart';
+import '../../../../../common_mock_data/mock_other.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../../utils/widget_utils.dart';
-
-class NewPaymentBlocMock extends MockBloc<NewPaymentEvent, NewPaymentState>
-    implements NewPaymentBloc {}
-
-class BankInAccountBlocMock
-    extends MockBloc<BankInAccountsEvent, BankInAccountsState>
-    implements BankInAccountsBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class PaymentSummaryDetailsBlocMock
-    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
-    implements PaymentSummaryDetailsBloc {}
-
-class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
-
-class AppRouterMock extends Mock implements AppRouter {}
 
 void main() {
   late NewPaymentBloc newPaymentBlocMock;
@@ -68,9 +48,9 @@ void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(() => AppRouterMock());
+    locator.registerLazySingleton(() => AutoRouteMock());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
-    autoRouterMock = locator<AppRouterMock>();
+    autoRouterMock = locator<AutoRouteMock>();
   });
 
   setUp(() async {
@@ -78,7 +58,7 @@ void main() {
     newPaymentBlocMock = NewPaymentBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
     bankInAccountsBlocMock = BankInAccountBlocMock();
-    eligibilityBlocMock = EligibilityBlockMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     paymentSummaryDetailsBlocMock = PaymentSummaryDetailsBlocMock();
     registerFallbackValue((Route route) {
       return route.settings.name == PaymentPageRoute.name;
@@ -220,6 +200,26 @@ void main() {
     group('Payment selector -', () {
       const selectedIndex = 0;
 
+      testWidgets('Fetch payment methods when pull to refresh', (tester) async {
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        await tester.fling(
+          find.byKey(WidgetKeys.paymentMethodListView),
+          const Offset(0.0, 300.0),
+          800.0,
+        );
+        await tester.pump();
+        expect(
+          find.byType(RefreshProgressIndicator),
+          findsOneWidget,
+        );
+        await tester.pumpAndSettle();
+        verify(
+          () => newPaymentBlocMock
+              .add(const NewPaymentEvent.fetchAvailablePaymentMethods()),
+        ).called(1);
+      });
+
       testWidgets('Show shimmer when loading', (tester) async {
         when(() => newPaymentBlocMock.state).thenReturn(
           NewPaymentState.initial().copyWith(isFetchingPaymentMethod: true),
@@ -243,6 +243,23 @@ void main() {
             matching: find.byKey(WidgetKeys.paymentMethodTile),
           ),
           findsNothing,
+        );
+      });
+
+      testWidgets('Show no record found when there is no payment method',
+          (tester) async {
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final paymentMethodSelector =
+            find.byKey(WidgetKeys.paymentMethodSelector);
+        expect(paymentMethodSelector, findsOneWidget);
+        expect(
+          find.descendant(
+            of: paymentMethodSelector,
+            matching: find.text('No available payment method'),
+          ),
+          findsOneWidget,
         );
       });
 

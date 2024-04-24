@@ -25,58 +25,72 @@ class _PaymentMethodSelector extends StatelessWidget {
       builder: (context, state) {
         final isID = context.read<EligibilityBloc>().state.salesOrg.isID;
 
-        return state.isFetchingPaymentMethod
-            ? LoadingShimmer.tile()
-            : Wrap(
-                children: [
-                  if (state.paymentMethods.isNotEmpty)
-                    isID
-                        ? _APLPaymentSelectorWidget(
-                            paymentMethods: state.paymentMethods,
-                            selectedPaymentMethod: state.selectedPaymentMethod,
-                          )
-                        : Row(
-                            children: state.paymentMethods
-                                .map(
-                                  (paymentMethod) => Padding(
-                                    padding: const EdgeInsets.only(right: 8),
-                                    child: InkWell(
-                                      key: WidgetKeys.paymentMethodTile,
-                                      onTap: () {
-                                        context.read<NewPaymentBloc>().add(
-                                              NewPaymentEvent
-                                                  .updatePaymentMethodSelected(
-                                                paymentMethodSelected:
-                                                    paymentMethod,
-                                              ),
-                                            );
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Radio(
-                                            key: WidgetKeys.paymentMethodRadio,
-                                            value: paymentMethod.paymentMethod,
-                                            groupValue: state
-                                                .selectedPaymentMethod
-                                                .paymentMethod,
-                                            onChanged: null,
-                                          ),
-                                          Text(
-                                            paymentMethod.paymentMethod
-                                                .getValue(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium,
-                                          ),
-                                        ],
+        if (state.isFetchingPaymentMethod) {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(top: 30, bottom: 10),
+            child: LoadingShimmer.circular(),
+          );
+        }
+
+        if (state.paymentMethods.isEmpty) {
+          return Container(
+            padding: const EdgeInsets.only(top: 20),
+            alignment: Alignment.center,
+            child: Text(
+              context.tr('No available payment method'),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontStyle: FontStyle.italic,
+                  ),
+            ),
+          );
+        }
+
+        return Wrap(
+          children: [
+            isID
+                ? _APLPaymentSelectorWidget(
+                    paymentMethods: state.paymentMethods,
+                    selectedPaymentMethod: state.selectedPaymentMethod,
+                  )
+                : Row(
+                    children: state.paymentMethods
+                        .map(
+                          (paymentMethod) => Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: InkWell(
+                              key: WidgetKeys.paymentMethodTile,
+                              onTap: () {
+                                context.read<NewPaymentBloc>().add(
+                                      NewPaymentEvent
+                                          .updatePaymentMethodSelected(
+                                        paymentMethodSelected: paymentMethod,
                                       ),
-                                    ),
+                                    );
+                              },
+                              child: Row(
+                                children: [
+                                  Radio(
+                                    key: WidgetKeys.paymentMethodRadio,
+                                    value: paymentMethod.paymentMethod,
+                                    groupValue: state
+                                        .selectedPaymentMethod.paymentMethod,
+                                    onChanged: null,
                                   ),
-                                )
-                                .toList(),
+                                  Text(
+                                    paymentMethod.paymentMethod.getValue(),
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                ],
-              );
+                        )
+                        .toList(),
+                  ),
+          ],
+        );
       },
     );
   }

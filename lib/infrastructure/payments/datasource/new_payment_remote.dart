@@ -83,6 +83,7 @@ class NewPaymentRemoteDataSource {
     required String transactionCurrency,
     required String userName,
     required String shipToCode,
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -100,6 +101,7 @@ class NewPaymentRemoteDataSource {
               'shipToCode': shipToCode,
               'transactionCurrency': transactionCurrency,
               'userName': userName,
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
               'isV2':
                   true, //TODO: Remove this field when BE deployed payment to UAT on all market
             },
@@ -118,6 +120,7 @@ class NewPaymentRemoteDataSource {
     required String salesOrg,
     required CustomerPaymentFilterDto filter,
     required String baseUrl,
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -131,6 +134,7 @@ class NewPaymentRemoteDataSource {
               'salesOrg': salesOrg,
               'filterBy': filter.toMapList,
               'orderBy': [],
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
             },
           },
         },
@@ -231,6 +235,7 @@ class NewPaymentRemoteDataSource {
     required String paymentBatchAdditionalInfo,
     required String paymentId,
     required String zzAdviceNumber,
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -248,6 +253,7 @@ class NewPaymentRemoteDataSource {
               'zzAdvice': zzAdviceNumber,
               'paymentId': paymentId,
               'salesOrg': salesOrg,
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
             },
           },
         },
@@ -261,6 +267,7 @@ class NewPaymentRemoteDataSource {
 
   Future<List<NewPaymentMethod>> fetchPaymentMethods({
     required String salesOrg,
+    required bool isMarketPlace,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -271,6 +278,7 @@ class NewPaymentRemoteDataSource {
           'variables': {
             'request': {
               'salesOrg': salesOrg,
+              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
             },
           },
         },

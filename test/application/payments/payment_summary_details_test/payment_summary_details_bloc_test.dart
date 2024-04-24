@@ -113,6 +113,7 @@ void main() {
             salesOrganisation: fakeIDSalesOrganisation,
             user: fakeClientUser,
             paymentInfo: customerPaymentInfo,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
@@ -186,6 +187,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             user: fakeClientUser,
             paymentInfo: customerPaymentInfo,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
@@ -250,6 +252,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             user: fakeClientUser,
             paymentInfo: customerPaymentInfo,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
@@ -346,6 +349,7 @@ void main() {
             paymentInfo: customerPaymentInfo.copyWith(
               paymentBatchAdditionalInfo: '',
             ),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
@@ -448,6 +452,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             user: fakeClientUser,
             paymentInfo: CustomerPaymentInfo.empty(),
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
@@ -502,6 +507,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             user: fakeClientUser,
             paymentInfo: customerPaymentInfo,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
@@ -514,7 +520,9 @@ void main() {
         details: details,
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
-        const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
+        const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(
+          isMarketPlace: true,
+        ),
       ),
       skip: 3,
       expect: () => [
@@ -555,7 +563,9 @@ void main() {
         details: details,
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
-        const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
+        const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(
+          isMarketPlace: false,
+        ),
       ),
       skip: 1,
       expect: () => [
@@ -624,6 +634,7 @@ void main() {
             salesOrganisation: fakeSalesOrganisation,
             user: fakeClientUser,
             paymentInfo: customerPaymentInfo,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),
@@ -636,7 +647,9 @@ void main() {
         details: details,
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
-        const PaymentSummaryDetailsEvent.fetchAdvice(),
+        const PaymentSummaryDetailsEvent.fetchAdvice(
+          isMarketPlace: false,
+        ),
       ),
       skip: 1,
       expect: () => [

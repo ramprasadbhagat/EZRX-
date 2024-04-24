@@ -76,6 +76,7 @@ class _PaymentGatewayAdviceMessage extends StatelessWidget {
       key: WidgetKeys.paymentGatewayAdviceMessage,
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!state.salesOrganisation.salesOrg.isPaymentNeedOpenWebView)
             Align(

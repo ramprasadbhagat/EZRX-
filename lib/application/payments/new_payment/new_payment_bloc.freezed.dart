@@ -12,15 +12,20 @@ part of 'new_payment_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NewPaymentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -46,8 +51,10 @@ mixin _$NewPaymentEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -71,8 +78,10 @@ mixin _$NewPaymentEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -94,6 +103,8 @@ mixin _$NewPaymentEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -114,6 +125,8 @@ mixin _$NewPaymentEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -134,6 +147,8 @@ mixin _$NewPaymentEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -173,16 +188,17 @@ class _$NewPaymentEventCopyWithImpl<$Res, $Val extends NewPaymentEvent>
 }
 
 /// @nodoc
-abstract class _$$_initializedCopyWith<$Res> {
-  factory _$$_initializedCopyWith(
-          _$_initialized value, $Res Function(_$_initialized) then) =
-      __$$_initializedCopyWithImpl<$Res>;
+abstract class _$$initializedImplCopyWith<$Res> {
+  factory _$$initializedImplCopyWith(
+          _$initializedImpl value, $Res Function(_$initializedImpl) then) =
+      __$$initializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      User user});
+      User user,
+      bool isMarketPlace});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -191,11 +207,11 @@ abstract class _$$_initializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_initializedCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_initialized>
-    implements _$$_initializedCopyWith<$Res> {
-  __$$_initializedCopyWithImpl(
-      _$_initialized _value, $Res Function(_$_initialized) _then)
+class __$$initializedImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$initializedImpl>
+    implements _$$initializedImplCopyWith<$Res> {
+  __$$initializedImplCopyWithImpl(
+      _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -205,8 +221,9 @@ class __$$_initializedCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? user = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_initialized(
+    return _then(_$initializedImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -223,6 +240,10 @@ class __$$_initializedCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -261,12 +282,13 @@ class __$$_initializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_initialized implements _initialized {
-  const _$_initialized(
+class _$initializedImpl implements _initialized {
+  const _$initializedImpl(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.user});
+      required this.user,
+      required this.isMarketPlace});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -276,42 +298,51 @@ class _$_initialized implements _initialized {
   final ShipToInfo shipToInfo;
   @override
   final User user;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'NewPaymentEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user)';
+    return 'NewPaymentEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_initialized &&
+            other is _$initializedImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, customerCodeInfo, shipToInfo, user);
+  int get hashCode => Object.hash(runtimeType, salesOrganisation,
+      customerCodeInfo, shipToInfo, user, isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_initializedCopyWith<_$_initialized> get copyWith =>
-      __$$_initializedCopyWithImpl<_$_initialized>(this, _$identity);
+  _$$initializedImplCopyWith<_$initializedImpl> get copyWith =>
+      __$$initializedImplCopyWithImpl<_$initializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -330,7 +361,8 @@ class _$_initialized implements _initialized {
     required TResult Function() createVirtualAccount,
     required TResult Function() getPrincipalCutoffs,
   }) {
-    return initialized(salesOrganisation, customerCodeInfo, shipToInfo, user);
+    return initialized(
+        salesOrganisation, customerCodeInfo, shipToInfo, user, isMarketPlace);
   }
 
   @override
@@ -340,8 +372,10 @@ class _$_initialized implements _initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -359,7 +393,7 @@ class _$_initialized implements _initialized {
     TResult? Function()? getPrincipalCutoffs,
   }) {
     return initialized?.call(
-        salesOrganisation, customerCodeInfo, shipToInfo, user);
+        salesOrganisation, customerCodeInfo, shipToInfo, user, isMarketPlace);
   }
 
   @override
@@ -369,8 +403,10 @@ class _$_initialized implements _initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -389,7 +425,8 @@ class _$_initialized implements _initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(salesOrganisation, customerCodeInfo, shipToInfo, user);
+      return initialized(
+          salesOrganisation, customerCodeInfo, shipToInfo, user, isMarketPlace);
     }
     return orElse();
   }
@@ -398,6 +435,8 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -421,6 +460,8 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -444,6 +485,8 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -473,32 +516,255 @@ abstract class _initialized implements NewPaymentEvent {
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final User user}) = _$_initialized;
+      required final User user,
+      required final bool isMarketPlace}) = _$initializedImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   User get user;
+  bool get isMarketPlace;
   @JsonKey(ignore: true)
-  _$$_initializedCopyWith<_$_initialized> get copyWith =>
+  _$$initializedImplCopyWith<_$initializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SelectAllInvoicesCopyWith<$Res> {
-  factory _$$_SelectAllInvoicesCopyWith(_$_SelectAllInvoices value,
-          $Res Function(_$_SelectAllInvoices) then) =
-      __$$_SelectAllInvoicesCopyWithImpl<$Res>;
+abstract class _$$FetchAvailablePaymentMethodsImplCopyWith<$Res> {
+  factory _$$FetchAvailablePaymentMethodsImplCopyWith(
+          _$FetchAvailablePaymentMethodsImpl value,
+          $Res Function(_$FetchAvailablePaymentMethodsImpl) then) =
+      __$$FetchAvailablePaymentMethodsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FetchAvailablePaymentMethodsImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res,
+        _$FetchAvailablePaymentMethodsImpl>
+    implements _$$FetchAvailablePaymentMethodsImplCopyWith<$Res> {
+  __$$FetchAvailablePaymentMethodsImplCopyWithImpl(
+      _$FetchAvailablePaymentMethodsImpl _value,
+      $Res Function(_$FetchAvailablePaymentMethodsImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FetchAvailablePaymentMethodsImpl
+    implements _FetchAvailablePaymentMethods {
+  const _$FetchAvailablePaymentMethodsImpl();
+
+  @override
+  String toString() {
+    return 'NewPaymentEvent.fetchAvailablePaymentMethods()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchAvailablePaymentMethodsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
+        initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
+    required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
+    required TResult Function(CustomerOpenItem item, bool selected)
+        toggleInvoice,
+    required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
+    required TResult Function(CustomerOpenItem item, bool selected)
+        toggleCredit,
+    required TResult Function() pay,
+    required TResult Function(PaymentInfo paymentInfo) getCustomerPayment,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
+    required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(NewPaymentMethod paymentMethodSelected)
+        updatePaymentMethodSelected,
+    required TResult Function(PaymentMethodOption paymentMethodOptionSelected)
+        updatePaymentMethodOptionSelected,
+    required TResult Function() createVirtualAccount,
+    required TResult Function() getPrincipalCutoffs,
+  }) {
+    return fetchAvailablePaymentMethods();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)?
+        initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
+    TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
+    TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
+    TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
+    TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
+    TResult? Function()? pay,
+    TResult? Function(PaymentInfo paymentInfo)? getCustomerPayment,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
+    TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(NewPaymentMethod paymentMethodSelected)?
+        updatePaymentMethodSelected,
+    TResult? Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function()? createVirtualAccount,
+    TResult? Function()? getPrincipalCutoffs,
+  }) {
+    return fetchAvailablePaymentMethods?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)?
+        initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
+    TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
+    TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
+    TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
+    TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
+    TResult Function()? pay,
+    TResult Function(PaymentInfo paymentInfo)? getCustomerPayment,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
+    TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(NewPaymentMethod paymentMethodSelected)?
+        updatePaymentMethodSelected,
+    TResult Function(PaymentMethodOption paymentMethodOptionSelected)?
+        updatePaymentMethodOptionSelected,
+    TResult Function()? createVirtualAccount,
+    TResult Function()? getPrincipalCutoffs,
+    required TResult orElse(),
+  }) {
+    if (fetchAvailablePaymentMethods != null) {
+      return fetchAvailablePaymentMethods();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
+    required TResult Function(_SelectAllInvoices value) updateAllInvoices,
+    required TResult Function(_ToggleInvoice value) toggleInvoice,
+    required TResult Function(_SelectAllCredits value) updateAllCredits,
+    required TResult Function(_ToggleCredit value) toggleCredit,
+    required TResult Function(_Pay value) pay,
+    required TResult Function(_GetCustomerPayment value) getCustomerPayment,
+    required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
+    required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
+    required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
+    required TResult Function(_UpdatePaymentMethodOptionSelected value)
+        updatePaymentMethodOptionSelected,
+    required TResult Function(_CreateVirtualAccount value) createVirtualAccount,
+    required TResult Function(_GetPrincipalCutoffs value) getPrincipalCutoffs,
+  }) {
+    return fetchAvailablePaymentMethods(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
+    TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
+    TResult? Function(_ToggleInvoice value)? toggleInvoice,
+    TResult? Function(_SelectAllCredits value)? updateAllCredits,
+    TResult? Function(_ToggleCredit value)? toggleCredit,
+    TResult? Function(_Pay value)? pay,
+    TResult? Function(_GetCustomerPayment value)? getCustomerPayment,
+    TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
+    TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
+    TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
+    TResult? Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult? Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult? Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
+  }) {
+    return fetchAvailablePaymentMethods?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
+    TResult Function(_SelectAllInvoices value)? updateAllInvoices,
+    TResult Function(_ToggleInvoice value)? toggleInvoice,
+    TResult Function(_SelectAllCredits value)? updateAllCredits,
+    TResult Function(_ToggleCredit value)? toggleCredit,
+    TResult Function(_Pay value)? pay,
+    TResult Function(_GetCustomerPayment value)? getCustomerPayment,
+    TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
+    TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
+    TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
+    TResult Function(_UpdatePaymentMethodOptionSelected value)?
+        updatePaymentMethodOptionSelected,
+    TResult Function(_CreateVirtualAccount value)? createVirtualAccount,
+    TResult Function(_GetPrincipalCutoffs value)? getPrincipalCutoffs,
+    required TResult orElse(),
+  }) {
+    if (fetchAvailablePaymentMethods != null) {
+      return fetchAvailablePaymentMethods(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchAvailablePaymentMethods implements NewPaymentEvent {
+  const factory _FetchAvailablePaymentMethods() =
+      _$FetchAvailablePaymentMethodsImpl;
+}
+
+/// @nodoc
+abstract class _$$SelectAllInvoicesImplCopyWith<$Res> {
+  factory _$$SelectAllInvoicesImplCopyWith(_$SelectAllInvoicesImpl value,
+          $Res Function(_$SelectAllInvoicesImpl) then) =
+      __$$SelectAllInvoicesImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<CustomerOpenItem> items});
 }
 
 /// @nodoc
-class __$$_SelectAllInvoicesCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_SelectAllInvoices>
-    implements _$$_SelectAllInvoicesCopyWith<$Res> {
-  __$$_SelectAllInvoicesCopyWithImpl(
-      _$_SelectAllInvoices _value, $Res Function(_$_SelectAllInvoices) _then)
+class __$$SelectAllInvoicesImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$SelectAllInvoicesImpl>
+    implements _$$SelectAllInvoicesImplCopyWith<$Res> {
+  __$$SelectAllInvoicesImplCopyWithImpl(_$SelectAllInvoicesImpl _value,
+      $Res Function(_$SelectAllInvoicesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -506,7 +772,7 @@ class __$$_SelectAllInvoicesCopyWithImpl<$Res>
   $Res call({
     Object? items = null,
   }) {
-    return _then(_$_SelectAllInvoices(
+    return _then(_$SelectAllInvoicesImpl(
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -517,8 +783,8 @@ class __$$_SelectAllInvoicesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SelectAllInvoices implements _SelectAllInvoices {
-  const _$_SelectAllInvoices({required final List<CustomerOpenItem> items})
+class _$SelectAllInvoicesImpl implements _SelectAllInvoices {
+  const _$SelectAllInvoicesImpl({required final List<CustomerOpenItem> items})
       : _items = items;
 
   final List<CustomerOpenItem> _items;
@@ -535,10 +801,10 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SelectAllInvoices &&
+            other is _$SelectAllInvoicesImpl &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
@@ -549,16 +815,21 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SelectAllInvoicesCopyWith<_$_SelectAllInvoices> get copyWith =>
-      __$$_SelectAllInvoicesCopyWithImpl<_$_SelectAllInvoices>(
+  _$$SelectAllInvoicesImplCopyWith<_$SelectAllInvoicesImpl> get copyWith =>
+      __$$SelectAllInvoicesImplCopyWithImpl<_$SelectAllInvoicesImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -587,8 +858,10 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -615,8 +888,10 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -644,6 +919,8 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -667,6 +944,8 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -690,6 +969,8 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -716,19 +997,19 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
 
 abstract class _SelectAllInvoices implements NewPaymentEvent {
   const factory _SelectAllInvoices(
-      {required final List<CustomerOpenItem> items}) = _$_SelectAllInvoices;
+      {required final List<CustomerOpenItem> items}) = _$SelectAllInvoicesImpl;
 
   List<CustomerOpenItem> get items;
   @JsonKey(ignore: true)
-  _$$_SelectAllInvoicesCopyWith<_$_SelectAllInvoices> get copyWith =>
+  _$$SelectAllInvoicesImplCopyWith<_$SelectAllInvoicesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ToggleInvoiceCopyWith<$Res> {
-  factory _$$_ToggleInvoiceCopyWith(
-          _$_ToggleInvoice value, $Res Function(_$_ToggleInvoice) then) =
-      __$$_ToggleInvoiceCopyWithImpl<$Res>;
+abstract class _$$ToggleInvoiceImplCopyWith<$Res> {
+  factory _$$ToggleInvoiceImplCopyWith(
+          _$ToggleInvoiceImpl value, $Res Function(_$ToggleInvoiceImpl) then) =
+      __$$ToggleInvoiceImplCopyWithImpl<$Res>;
   @useResult
   $Res call({CustomerOpenItem item, bool selected});
 
@@ -736,11 +1017,11 @@ abstract class _$$_ToggleInvoiceCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ToggleInvoiceCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_ToggleInvoice>
-    implements _$$_ToggleInvoiceCopyWith<$Res> {
-  __$$_ToggleInvoiceCopyWithImpl(
-      _$_ToggleInvoice _value, $Res Function(_$_ToggleInvoice) _then)
+class __$$ToggleInvoiceImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$ToggleInvoiceImpl>
+    implements _$$ToggleInvoiceImplCopyWith<$Res> {
+  __$$ToggleInvoiceImplCopyWithImpl(
+      _$ToggleInvoiceImpl _value, $Res Function(_$ToggleInvoiceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -749,7 +1030,7 @@ class __$$_ToggleInvoiceCopyWithImpl<$Res>
     Object? item = null,
     Object? selected = null,
   }) {
-    return _then(_$_ToggleInvoice(
+    return _then(_$ToggleInvoiceImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -772,8 +1053,8 @@ class __$$_ToggleInvoiceCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ToggleInvoice implements _ToggleInvoice {
-  const _$_ToggleInvoice({required this.item, required this.selected});
+class _$ToggleInvoiceImpl implements _ToggleInvoice {
+  const _$ToggleInvoiceImpl({required this.item, required this.selected});
 
   @override
   final CustomerOpenItem item;
@@ -786,10 +1067,10 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ToggleInvoice &&
+            other is _$ToggleInvoiceImpl &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.selected, selected) ||
                 other.selected == selected));
@@ -801,15 +1082,20 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ToggleInvoiceCopyWith<_$_ToggleInvoice> get copyWith =>
-      __$$_ToggleInvoiceCopyWithImpl<_$_ToggleInvoice>(this, _$identity);
+  _$$ToggleInvoiceImplCopyWith<_$ToggleInvoiceImpl> get copyWith =>
+      __$$ToggleInvoiceImplCopyWithImpl<_$ToggleInvoiceImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -838,8 +1124,10 @@ class _$_ToggleInvoice implements _ToggleInvoice {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -866,8 +1154,10 @@ class _$_ToggleInvoice implements _ToggleInvoice {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -895,6 +1185,8 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -918,6 +1210,8 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -941,6 +1235,8 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -968,30 +1264,30 @@ class _$_ToggleInvoice implements _ToggleInvoice {
 abstract class _ToggleInvoice implements NewPaymentEvent {
   const factory _ToggleInvoice(
       {required final CustomerOpenItem item,
-      required final bool selected}) = _$_ToggleInvoice;
+      required final bool selected}) = _$ToggleInvoiceImpl;
 
   CustomerOpenItem get item;
   bool get selected;
   @JsonKey(ignore: true)
-  _$$_ToggleInvoiceCopyWith<_$_ToggleInvoice> get copyWith =>
+  _$$ToggleInvoiceImplCopyWith<_$ToggleInvoiceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SelectAllCreditsCopyWith<$Res> {
-  factory _$$_SelectAllCreditsCopyWith(
-          _$_SelectAllCredits value, $Res Function(_$_SelectAllCredits) then) =
-      __$$_SelectAllCreditsCopyWithImpl<$Res>;
+abstract class _$$SelectAllCreditsImplCopyWith<$Res> {
+  factory _$$SelectAllCreditsImplCopyWith(_$SelectAllCreditsImpl value,
+          $Res Function(_$SelectAllCreditsImpl) then) =
+      __$$SelectAllCreditsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<CustomerOpenItem> items});
 }
 
 /// @nodoc
-class __$$_SelectAllCreditsCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_SelectAllCredits>
-    implements _$$_SelectAllCreditsCopyWith<$Res> {
-  __$$_SelectAllCreditsCopyWithImpl(
-      _$_SelectAllCredits _value, $Res Function(_$_SelectAllCredits) _then)
+class __$$SelectAllCreditsImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$SelectAllCreditsImpl>
+    implements _$$SelectAllCreditsImplCopyWith<$Res> {
+  __$$SelectAllCreditsImplCopyWithImpl(_$SelectAllCreditsImpl _value,
+      $Res Function(_$SelectAllCreditsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -999,7 +1295,7 @@ class __$$_SelectAllCreditsCopyWithImpl<$Res>
   $Res call({
     Object? items = null,
   }) {
-    return _then(_$_SelectAllCredits(
+    return _then(_$SelectAllCreditsImpl(
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -1010,8 +1306,8 @@ class __$$_SelectAllCreditsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SelectAllCredits implements _SelectAllCredits {
-  const _$_SelectAllCredits({required final List<CustomerOpenItem> items})
+class _$SelectAllCreditsImpl implements _SelectAllCredits {
+  const _$SelectAllCreditsImpl({required final List<CustomerOpenItem> items})
       : _items = items;
 
   final List<CustomerOpenItem> _items;
@@ -1028,10 +1324,10 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SelectAllCredits &&
+            other is _$SelectAllCreditsImpl &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
@@ -1042,15 +1338,21 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SelectAllCreditsCopyWith<_$_SelectAllCredits> get copyWith =>
-      __$$_SelectAllCreditsCopyWithImpl<_$_SelectAllCredits>(this, _$identity);
+  _$$SelectAllCreditsImplCopyWith<_$SelectAllCreditsImpl> get copyWith =>
+      __$$SelectAllCreditsImplCopyWithImpl<_$SelectAllCreditsImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -1079,8 +1381,10 @@ class _$_SelectAllCredits implements _SelectAllCredits {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -1107,8 +1411,10 @@ class _$_SelectAllCredits implements _SelectAllCredits {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -1136,6 +1442,8 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -1159,6 +1467,8 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -1182,6 +1492,8 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -1208,19 +1520,19 @@ class _$_SelectAllCredits implements _SelectAllCredits {
 
 abstract class _SelectAllCredits implements NewPaymentEvent {
   const factory _SelectAllCredits(
-      {required final List<CustomerOpenItem> items}) = _$_SelectAllCredits;
+      {required final List<CustomerOpenItem> items}) = _$SelectAllCreditsImpl;
 
   List<CustomerOpenItem> get items;
   @JsonKey(ignore: true)
-  _$$_SelectAllCreditsCopyWith<_$_SelectAllCredits> get copyWith =>
+  _$$SelectAllCreditsImplCopyWith<_$SelectAllCreditsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ToggleCreditCopyWith<$Res> {
-  factory _$$_ToggleCreditCopyWith(
-          _$_ToggleCredit value, $Res Function(_$_ToggleCredit) then) =
-      __$$_ToggleCreditCopyWithImpl<$Res>;
+abstract class _$$ToggleCreditImplCopyWith<$Res> {
+  factory _$$ToggleCreditImplCopyWith(
+          _$ToggleCreditImpl value, $Res Function(_$ToggleCreditImpl) then) =
+      __$$ToggleCreditImplCopyWithImpl<$Res>;
   @useResult
   $Res call({CustomerOpenItem item, bool selected});
 
@@ -1228,11 +1540,11 @@ abstract class _$$_ToggleCreditCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ToggleCreditCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_ToggleCredit>
-    implements _$$_ToggleCreditCopyWith<$Res> {
-  __$$_ToggleCreditCopyWithImpl(
-      _$_ToggleCredit _value, $Res Function(_$_ToggleCredit) _then)
+class __$$ToggleCreditImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$ToggleCreditImpl>
+    implements _$$ToggleCreditImplCopyWith<$Res> {
+  __$$ToggleCreditImplCopyWithImpl(
+      _$ToggleCreditImpl _value, $Res Function(_$ToggleCreditImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1241,7 +1553,7 @@ class __$$_ToggleCreditCopyWithImpl<$Res>
     Object? item = null,
     Object? selected = null,
   }) {
-    return _then(_$_ToggleCredit(
+    return _then(_$ToggleCreditImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -1264,8 +1576,8 @@ class __$$_ToggleCreditCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ToggleCredit implements _ToggleCredit {
-  const _$_ToggleCredit({required this.item, required this.selected});
+class _$ToggleCreditImpl implements _ToggleCredit {
+  const _$ToggleCreditImpl({required this.item, required this.selected});
 
   @override
   final CustomerOpenItem item;
@@ -1278,10 +1590,10 @@ class _$_ToggleCredit implements _ToggleCredit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ToggleCredit &&
+            other is _$ToggleCreditImpl &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.selected, selected) ||
                 other.selected == selected));
@@ -1293,15 +1605,20 @@ class _$_ToggleCredit implements _ToggleCredit {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ToggleCreditCopyWith<_$_ToggleCredit> get copyWith =>
-      __$$_ToggleCreditCopyWithImpl<_$_ToggleCredit>(this, _$identity);
+  _$$ToggleCreditImplCopyWith<_$ToggleCreditImpl> get copyWith =>
+      __$$ToggleCreditImplCopyWithImpl<_$ToggleCreditImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -1330,8 +1647,10 @@ class _$_ToggleCredit implements _ToggleCredit {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -1358,8 +1677,10 @@ class _$_ToggleCredit implements _ToggleCredit {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -1387,6 +1708,8 @@ class _$_ToggleCredit implements _ToggleCredit {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -1410,6 +1733,8 @@ class _$_ToggleCredit implements _ToggleCredit {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -1433,6 +1758,8 @@ class _$_ToggleCredit implements _ToggleCredit {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -1460,33 +1787,33 @@ class _$_ToggleCredit implements _ToggleCredit {
 abstract class _ToggleCredit implements NewPaymentEvent {
   const factory _ToggleCredit(
       {required final CustomerOpenItem item,
-      required final bool selected}) = _$_ToggleCredit;
+      required final bool selected}) = _$ToggleCreditImpl;
 
   CustomerOpenItem get item;
   bool get selected;
   @JsonKey(ignore: true)
-  _$$_ToggleCreditCopyWith<_$_ToggleCredit> get copyWith =>
+  _$$ToggleCreditImplCopyWith<_$ToggleCreditImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_PayCopyWith<$Res> {
-  factory _$$_PayCopyWith(_$_Pay value, $Res Function(_$_Pay) then) =
-      __$$_PayCopyWithImpl<$Res>;
+abstract class _$$PayImplCopyWith<$Res> {
+  factory _$$PayImplCopyWith(_$PayImpl value, $Res Function(_$PayImpl) then) =
+      __$$PayImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_PayCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_Pay>
-    implements _$$_PayCopyWith<$Res> {
-  __$$_PayCopyWithImpl(_$_Pay _value, $Res Function(_$_Pay) _then)
+class __$$PayImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$PayImpl>
+    implements _$$PayImplCopyWith<$Res> {
+  __$$PayImplCopyWithImpl(_$PayImpl _value, $Res Function(_$PayImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Pay implements _Pay {
-  const _$_Pay();
+class _$PayImpl implements _Pay {
+  const _$PayImpl();
 
   @override
   String toString() {
@@ -1494,9 +1821,9 @@ class _$_Pay implements _Pay {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Pay);
+        (other.runtimeType == runtimeType && other is _$PayImpl);
   }
 
   @override
@@ -1505,9 +1832,14 @@ class _$_Pay implements _Pay {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -1536,8 +1868,10 @@ class _$_Pay implements _Pay {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -1564,8 +1898,10 @@ class _$_Pay implements _Pay {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -1593,6 +1929,8 @@ class _$_Pay implements _Pay {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -1616,6 +1954,8 @@ class _$_Pay implements _Pay {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -1639,6 +1979,8 @@ class _$_Pay implements _Pay {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -1664,14 +2006,14 @@ class _$_Pay implements _Pay {
 }
 
 abstract class _Pay implements NewPaymentEvent {
-  const factory _Pay() = _$_Pay;
+  const factory _Pay() = _$PayImpl;
 }
 
 /// @nodoc
-abstract class _$$_GetCustomerPaymentCopyWith<$Res> {
-  factory _$$_GetCustomerPaymentCopyWith(_$_GetCustomerPayment value,
-          $Res Function(_$_GetCustomerPayment) then) =
-      __$$_GetCustomerPaymentCopyWithImpl<$Res>;
+abstract class _$$GetCustomerPaymentImplCopyWith<$Res> {
+  factory _$$GetCustomerPaymentImplCopyWith(_$GetCustomerPaymentImpl value,
+          $Res Function(_$GetCustomerPaymentImpl) then) =
+      __$$GetCustomerPaymentImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PaymentInfo paymentInfo});
 
@@ -1679,11 +2021,11 @@ abstract class _$$_GetCustomerPaymentCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_GetCustomerPaymentCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_GetCustomerPayment>
-    implements _$$_GetCustomerPaymentCopyWith<$Res> {
-  __$$_GetCustomerPaymentCopyWithImpl(
-      _$_GetCustomerPayment _value, $Res Function(_$_GetCustomerPayment) _then)
+class __$$GetCustomerPaymentImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$GetCustomerPaymentImpl>
+    implements _$$GetCustomerPaymentImplCopyWith<$Res> {
+  __$$GetCustomerPaymentImplCopyWithImpl(_$GetCustomerPaymentImpl _value,
+      $Res Function(_$GetCustomerPaymentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1691,7 +2033,7 @@ class __$$_GetCustomerPaymentCopyWithImpl<$Res>
   $Res call({
     Object? paymentInfo = null,
   }) {
-    return _then(_$_GetCustomerPayment(
+    return _then(_$GetCustomerPaymentImpl(
       paymentInfo: null == paymentInfo
           ? _value.paymentInfo
           : paymentInfo // ignore: cast_nullable_to_non_nullable
@@ -1710,8 +2052,8 @@ class __$$_GetCustomerPaymentCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetCustomerPayment implements _GetCustomerPayment {
-  const _$_GetCustomerPayment({required this.paymentInfo});
+class _$GetCustomerPaymentImpl implements _GetCustomerPayment {
+  const _$GetCustomerPaymentImpl({required this.paymentInfo});
 
   @override
   final PaymentInfo paymentInfo;
@@ -1722,10 +2064,10 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetCustomerPayment &&
+            other is _$GetCustomerPaymentImpl &&
             (identical(other.paymentInfo, paymentInfo) ||
                 other.paymentInfo == paymentInfo));
   }
@@ -1736,16 +2078,21 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetCustomerPaymentCopyWith<_$_GetCustomerPayment> get copyWith =>
-      __$$_GetCustomerPaymentCopyWithImpl<_$_GetCustomerPayment>(
+  _$$GetCustomerPaymentImplCopyWith<_$GetCustomerPaymentImpl> get copyWith =>
+      __$$GetCustomerPaymentImplCopyWithImpl<_$GetCustomerPaymentImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -1774,8 +2121,10 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -1802,8 +2151,10 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -1831,6 +2182,8 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -1854,6 +2207,8 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -1877,6 +2232,8 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -1903,29 +2260,29 @@ class _$_GetCustomerPayment implements _GetCustomerPayment {
 
 abstract class _GetCustomerPayment implements NewPaymentEvent {
   const factory _GetCustomerPayment({required final PaymentInfo paymentInfo}) =
-      _$_GetCustomerPayment;
+      _$GetCustomerPaymentImpl;
 
   PaymentInfo get paymentInfo;
   @JsonKey(ignore: true)
-  _$$_GetCustomerPaymentCopyWith<_$_GetCustomerPayment> get copyWith =>
+  _$$GetCustomerPaymentImplCopyWith<_$GetCustomerPaymentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdatePaymentGatewayCopyWith<$Res> {
-  factory _$$_UpdatePaymentGatewayCopyWith(_$_UpdatePaymentGateway value,
-          $Res Function(_$_UpdatePaymentGateway) then) =
-      __$$_UpdatePaymentGatewayCopyWithImpl<$Res>;
+abstract class _$$UpdatePaymentGatewayImplCopyWith<$Res> {
+  factory _$$UpdatePaymentGatewayImplCopyWith(_$UpdatePaymentGatewayImpl value,
+          $Res Function(_$UpdatePaymentGatewayImpl) then) =
+      __$$UpdatePaymentGatewayImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Uri paymentUrl});
 }
 
 /// @nodoc
-class __$$_UpdatePaymentGatewayCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_UpdatePaymentGateway>
-    implements _$$_UpdatePaymentGatewayCopyWith<$Res> {
-  __$$_UpdatePaymentGatewayCopyWithImpl(_$_UpdatePaymentGateway _value,
-      $Res Function(_$_UpdatePaymentGateway) _then)
+class __$$UpdatePaymentGatewayImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$UpdatePaymentGatewayImpl>
+    implements _$$UpdatePaymentGatewayImplCopyWith<$Res> {
+  __$$UpdatePaymentGatewayImplCopyWithImpl(_$UpdatePaymentGatewayImpl _value,
+      $Res Function(_$UpdatePaymentGatewayImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1933,7 +2290,7 @@ class __$$_UpdatePaymentGatewayCopyWithImpl<$Res>
   $Res call({
     Object? paymentUrl = null,
   }) {
-    return _then(_$_UpdatePaymentGateway(
+    return _then(_$UpdatePaymentGatewayImpl(
       paymentUrl: null == paymentUrl
           ? _value.paymentUrl
           : paymentUrl // ignore: cast_nullable_to_non_nullable
@@ -1944,8 +2301,8 @@ class __$$_UpdatePaymentGatewayCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
-  const _$_UpdatePaymentGateway({required this.paymentUrl});
+class _$UpdatePaymentGatewayImpl implements _UpdatePaymentGateway {
+  const _$UpdatePaymentGatewayImpl({required this.paymentUrl});
 
   @override
   final Uri paymentUrl;
@@ -1956,10 +2313,10 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdatePaymentGateway &&
+            other is _$UpdatePaymentGatewayImpl &&
             (identical(other.paymentUrl, paymentUrl) ||
                 other.paymentUrl == paymentUrl));
   }
@@ -1970,16 +2327,22 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdatePaymentGatewayCopyWith<_$_UpdatePaymentGateway> get copyWith =>
-      __$$_UpdatePaymentGatewayCopyWithImpl<_$_UpdatePaymentGateway>(
-          this, _$identity);
+  _$$UpdatePaymentGatewayImplCopyWith<_$UpdatePaymentGatewayImpl>
+      get copyWith =>
+          __$$UpdatePaymentGatewayImplCopyWithImpl<_$UpdatePaymentGatewayImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -2008,8 +2371,10 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -2036,8 +2401,10 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -2065,6 +2432,8 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -2088,6 +2457,8 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -2111,6 +2482,8 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -2137,34 +2510,34 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
 
 abstract class _UpdatePaymentGateway implements NewPaymentEvent {
   const factory _UpdatePaymentGateway({required final Uri paymentUrl}) =
-      _$_UpdatePaymentGateway;
+      _$UpdatePaymentGatewayImpl;
 
   Uri get paymentUrl;
   @JsonKey(ignore: true)
-  _$$_UpdatePaymentGatewayCopyWith<_$_UpdatePaymentGateway> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UpdatePaymentGatewayImplCopyWith<_$UpdatePaymentGatewayImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchInvoiceInfoPdfCopyWith<$Res> {
-  factory _$$_FetchInvoiceInfoPdfCopyWith(_$_FetchInvoiceInfoPdf value,
-          $Res Function(_$_FetchInvoiceInfoPdf) then) =
-      __$$_FetchInvoiceInfoPdfCopyWithImpl<$Res>;
+abstract class _$$FetchInvoiceInfoPdfImplCopyWith<$Res> {
+  factory _$$FetchInvoiceInfoPdfImplCopyWith(_$FetchInvoiceInfoPdfImpl value,
+          $Res Function(_$FetchInvoiceInfoPdfImpl) then) =
+      __$$FetchInvoiceInfoPdfImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchInvoiceInfoPdfCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_FetchInvoiceInfoPdf>
-    implements _$$_FetchInvoiceInfoPdfCopyWith<$Res> {
-  __$$_FetchInvoiceInfoPdfCopyWithImpl(_$_FetchInvoiceInfoPdf _value,
-      $Res Function(_$_FetchInvoiceInfoPdf) _then)
+class __$$FetchInvoiceInfoPdfImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$FetchInvoiceInfoPdfImpl>
+    implements _$$FetchInvoiceInfoPdfImplCopyWith<$Res> {
+  __$$FetchInvoiceInfoPdfImplCopyWithImpl(_$FetchInvoiceInfoPdfImpl _value,
+      $Res Function(_$FetchInvoiceInfoPdfImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
-  const _$_FetchInvoiceInfoPdf();
+class _$FetchInvoiceInfoPdfImpl implements _FetchInvoiceInfoPdf {
+  const _$FetchInvoiceInfoPdfImpl();
 
   @override
   String toString() {
@@ -2172,9 +2545,10 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_FetchInvoiceInfoPdf);
+        (other.runtimeType == runtimeType &&
+            other is _$FetchInvoiceInfoPdfImpl);
   }
 
   @override
@@ -2183,9 +2557,14 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -2214,8 +2593,10 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -2242,8 +2623,10 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -2271,6 +2654,8 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -2294,6 +2679,8 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -2317,6 +2704,8 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -2342,24 +2731,24 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
 }
 
 abstract class _FetchInvoiceInfoPdf implements NewPaymentEvent {
-  const factory _FetchInvoiceInfoPdf() = _$_FetchInvoiceInfoPdf;
+  const factory _FetchInvoiceInfoPdf() = _$FetchInvoiceInfoPdfImpl;
 }
 
 /// @nodoc
-abstract class _$$_SaveInvoicePdfCopyWith<$Res> {
-  factory _$$_SaveInvoicePdfCopyWith(
-          _$_SaveInvoicePdf value, $Res Function(_$_SaveInvoicePdf) then) =
-      __$$_SaveInvoicePdfCopyWithImpl<$Res>;
+abstract class _$$SaveInvoicePdfImplCopyWith<$Res> {
+  factory _$$SaveInvoicePdfImplCopyWith(_$SaveInvoicePdfImpl value,
+          $Res Function(_$SaveInvoicePdfImpl) then) =
+      __$$SaveInvoicePdfImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Uint8List dataInvoicePdf});
 }
 
 /// @nodoc
-class __$$_SaveInvoicePdfCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_SaveInvoicePdf>
-    implements _$$_SaveInvoicePdfCopyWith<$Res> {
-  __$$_SaveInvoicePdfCopyWithImpl(
-      _$_SaveInvoicePdf _value, $Res Function(_$_SaveInvoicePdf) _then)
+class __$$SaveInvoicePdfImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$SaveInvoicePdfImpl>
+    implements _$$SaveInvoicePdfImplCopyWith<$Res> {
+  __$$SaveInvoicePdfImplCopyWithImpl(
+      _$SaveInvoicePdfImpl _value, $Res Function(_$SaveInvoicePdfImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2367,7 +2756,7 @@ class __$$_SaveInvoicePdfCopyWithImpl<$Res>
   $Res call({
     Object? dataInvoicePdf = null,
   }) {
-    return _then(_$_SaveInvoicePdf(
+    return _then(_$SaveInvoicePdfImpl(
       dataInvoicePdf: null == dataInvoicePdf
           ? _value.dataInvoicePdf
           : dataInvoicePdf // ignore: cast_nullable_to_non_nullable
@@ -2378,8 +2767,8 @@ class __$$_SaveInvoicePdfCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SaveInvoicePdf implements _SaveInvoicePdf {
-  const _$_SaveInvoicePdf({required this.dataInvoicePdf});
+class _$SaveInvoicePdfImpl implements _SaveInvoicePdf {
+  const _$SaveInvoicePdfImpl({required this.dataInvoicePdf});
 
   @override
   final Uint8List dataInvoicePdf;
@@ -2390,10 +2779,10 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SaveInvoicePdf &&
+            other is _$SaveInvoicePdfImpl &&
             const DeepCollectionEquality()
                 .equals(other.dataInvoicePdf, dataInvoicePdf));
   }
@@ -2405,15 +2794,21 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SaveInvoicePdfCopyWith<_$_SaveInvoicePdf> get copyWith =>
-      __$$_SaveInvoicePdfCopyWithImpl<_$_SaveInvoicePdf>(this, _$identity);
+  _$$SaveInvoicePdfImplCopyWith<_$SaveInvoicePdfImpl> get copyWith =>
+      __$$SaveInvoicePdfImplCopyWithImpl<_$SaveInvoicePdfImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -2442,8 +2837,10 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -2470,8 +2867,10 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -2499,6 +2898,8 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -2522,6 +2923,8 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -2545,6 +2948,8 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -2571,20 +2976,20 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
 
 abstract class _SaveInvoicePdf implements NewPaymentEvent {
   const factory _SaveInvoicePdf({required final Uint8List dataInvoicePdf}) =
-      _$_SaveInvoicePdf;
+      _$SaveInvoicePdfImpl;
 
   Uint8List get dataInvoicePdf;
   @JsonKey(ignore: true)
-  _$$_SaveInvoicePdfCopyWith<_$_SaveInvoicePdf> get copyWith =>
+  _$$SaveInvoicePdfImplCopyWith<_$SaveInvoicePdfImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdatePaymentMethodSelectedCopyWith<$Res> {
-  factory _$$_UpdatePaymentMethodSelectedCopyWith(
-          _$_UpdatePaymentMethodSelected value,
-          $Res Function(_$_UpdatePaymentMethodSelected) then) =
-      __$$_UpdatePaymentMethodSelectedCopyWithImpl<$Res>;
+abstract class _$$UpdatePaymentMethodSelectedImplCopyWith<$Res> {
+  factory _$$UpdatePaymentMethodSelectedImplCopyWith(
+          _$UpdatePaymentMethodSelectedImpl value,
+          $Res Function(_$UpdatePaymentMethodSelectedImpl) then) =
+      __$$UpdatePaymentMethodSelectedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({NewPaymentMethod paymentMethodSelected});
 
@@ -2592,12 +2997,13 @@ abstract class _$$_UpdatePaymentMethodSelectedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdatePaymentMethodSelectedCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_UpdatePaymentMethodSelected>
-    implements _$$_UpdatePaymentMethodSelectedCopyWith<$Res> {
-  __$$_UpdatePaymentMethodSelectedCopyWithImpl(
-      _$_UpdatePaymentMethodSelected _value,
-      $Res Function(_$_UpdatePaymentMethodSelected) _then)
+class __$$UpdatePaymentMethodSelectedImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res,
+        _$UpdatePaymentMethodSelectedImpl>
+    implements _$$UpdatePaymentMethodSelectedImplCopyWith<$Res> {
+  __$$UpdatePaymentMethodSelectedImplCopyWithImpl(
+      _$UpdatePaymentMethodSelectedImpl _value,
+      $Res Function(_$UpdatePaymentMethodSelectedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2605,7 +3011,7 @@ class __$$_UpdatePaymentMethodSelectedCopyWithImpl<$Res>
   $Res call({
     Object? paymentMethodSelected = null,
   }) {
-    return _then(_$_UpdatePaymentMethodSelected(
+    return _then(_$UpdatePaymentMethodSelectedImpl(
       paymentMethodSelected: null == paymentMethodSelected
           ? _value.paymentMethodSelected
           : paymentMethodSelected // ignore: cast_nullable_to_non_nullable
@@ -2625,8 +3031,10 @@ class __$$_UpdatePaymentMethodSelectedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
-  const _$_UpdatePaymentMethodSelected({required this.paymentMethodSelected});
+class _$UpdatePaymentMethodSelectedImpl
+    implements _UpdatePaymentMethodSelected {
+  const _$UpdatePaymentMethodSelectedImpl(
+      {required this.paymentMethodSelected});
 
   @override
   final NewPaymentMethod paymentMethodSelected;
@@ -2637,10 +3045,10 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdatePaymentMethodSelected &&
+            other is _$UpdatePaymentMethodSelectedImpl &&
             (identical(other.paymentMethodSelected, paymentMethodSelected) ||
                 other.paymentMethodSelected == paymentMethodSelected));
   }
@@ -2651,16 +3059,21 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdatePaymentMethodSelectedCopyWith<_$_UpdatePaymentMethodSelected>
-      get copyWith => __$$_UpdatePaymentMethodSelectedCopyWithImpl<
-          _$_UpdatePaymentMethodSelected>(this, _$identity);
+  _$$UpdatePaymentMethodSelectedImplCopyWith<_$UpdatePaymentMethodSelectedImpl>
+      get copyWith => __$$UpdatePaymentMethodSelectedImplCopyWithImpl<
+          _$UpdatePaymentMethodSelectedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -2689,8 +3102,10 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -2717,8 +3132,10 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -2746,6 +3163,8 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -2769,6 +3188,8 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -2792,6 +3213,8 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -2819,20 +3242,20 @@ class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
 abstract class _UpdatePaymentMethodSelected implements NewPaymentEvent {
   const factory _UpdatePaymentMethodSelected(
           {required final NewPaymentMethod paymentMethodSelected}) =
-      _$_UpdatePaymentMethodSelected;
+      _$UpdatePaymentMethodSelectedImpl;
 
   NewPaymentMethod get paymentMethodSelected;
   @JsonKey(ignore: true)
-  _$$_UpdatePaymentMethodSelectedCopyWith<_$_UpdatePaymentMethodSelected>
+  _$$UpdatePaymentMethodSelectedImplCopyWith<_$UpdatePaymentMethodSelectedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdatePaymentMethodOptionSelectedCopyWith<$Res> {
-  factory _$$_UpdatePaymentMethodOptionSelectedCopyWith(
-          _$_UpdatePaymentMethodOptionSelected value,
-          $Res Function(_$_UpdatePaymentMethodOptionSelected) then) =
-      __$$_UpdatePaymentMethodOptionSelectedCopyWithImpl<$Res>;
+abstract class _$$UpdatePaymentMethodOptionSelectedImplCopyWith<$Res> {
+  factory _$$UpdatePaymentMethodOptionSelectedImplCopyWith(
+          _$UpdatePaymentMethodOptionSelectedImpl value,
+          $Res Function(_$UpdatePaymentMethodOptionSelectedImpl) then) =
+      __$$UpdatePaymentMethodOptionSelectedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PaymentMethodOption paymentMethodOptionSelected});
 
@@ -2840,13 +3263,13 @@ abstract class _$$_UpdatePaymentMethodOptionSelectedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdatePaymentMethodOptionSelectedCopyWithImpl<$Res>
+class __$$UpdatePaymentMethodOptionSelectedImplCopyWithImpl<$Res>
     extends _$NewPaymentEventCopyWithImpl<$Res,
-        _$_UpdatePaymentMethodOptionSelected>
-    implements _$$_UpdatePaymentMethodOptionSelectedCopyWith<$Res> {
-  __$$_UpdatePaymentMethodOptionSelectedCopyWithImpl(
-      _$_UpdatePaymentMethodOptionSelected _value,
-      $Res Function(_$_UpdatePaymentMethodOptionSelected) _then)
+        _$UpdatePaymentMethodOptionSelectedImpl>
+    implements _$$UpdatePaymentMethodOptionSelectedImplCopyWith<$Res> {
+  __$$UpdatePaymentMethodOptionSelectedImplCopyWithImpl(
+      _$UpdatePaymentMethodOptionSelectedImpl _value,
+      $Res Function(_$UpdatePaymentMethodOptionSelectedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2854,7 +3277,7 @@ class __$$_UpdatePaymentMethodOptionSelectedCopyWithImpl<$Res>
   $Res call({
     Object? paymentMethodOptionSelected = null,
   }) {
-    return _then(_$_UpdatePaymentMethodOptionSelected(
+    return _then(_$UpdatePaymentMethodOptionSelectedImpl(
       paymentMethodOptionSelected: null == paymentMethodOptionSelected
           ? _value.paymentMethodOptionSelected
           : paymentMethodOptionSelected // ignore: cast_nullable_to_non_nullable
@@ -2874,9 +3297,9 @@ class __$$_UpdatePaymentMethodOptionSelectedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdatePaymentMethodOptionSelected
+class _$UpdatePaymentMethodOptionSelectedImpl
     implements _UpdatePaymentMethodOptionSelected {
-  const _$_UpdatePaymentMethodOptionSelected(
+  const _$UpdatePaymentMethodOptionSelectedImpl(
       {required this.paymentMethodOptionSelected});
 
   @override
@@ -2888,10 +3311,10 @@ class _$_UpdatePaymentMethodOptionSelected
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdatePaymentMethodOptionSelected &&
+            other is _$UpdatePaymentMethodOptionSelectedImpl &&
             (identical(other.paymentMethodOptionSelected,
                     paymentMethodOptionSelected) ||
                 other.paymentMethodOptionSelected ==
@@ -2904,17 +3327,22 @@ class _$_UpdatePaymentMethodOptionSelected
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdatePaymentMethodOptionSelectedCopyWith<
-          _$_UpdatePaymentMethodOptionSelected>
-      get copyWith => __$$_UpdatePaymentMethodOptionSelectedCopyWithImpl<
-          _$_UpdatePaymentMethodOptionSelected>(this, _$identity);
+  _$$UpdatePaymentMethodOptionSelectedImplCopyWith<
+          _$UpdatePaymentMethodOptionSelectedImpl>
+      get copyWith => __$$UpdatePaymentMethodOptionSelectedImplCopyWithImpl<
+          _$UpdatePaymentMethodOptionSelectedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -2943,8 +3371,10 @@ class _$_UpdatePaymentMethodOptionSelected
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -2971,8 +3401,10 @@ class _$_UpdatePaymentMethodOptionSelected
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -3000,6 +3432,8 @@ class _$_UpdatePaymentMethodOptionSelected
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -3023,6 +3457,8 @@ class _$_UpdatePaymentMethodOptionSelected
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -3046,6 +3482,8 @@ class _$_UpdatePaymentMethodOptionSelected
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -3073,35 +3511,35 @@ class _$_UpdatePaymentMethodOptionSelected
 abstract class _UpdatePaymentMethodOptionSelected implements NewPaymentEvent {
   const factory _UpdatePaymentMethodOptionSelected(
           {required final PaymentMethodOption paymentMethodOptionSelected}) =
-      _$_UpdatePaymentMethodOptionSelected;
+      _$UpdatePaymentMethodOptionSelectedImpl;
 
   PaymentMethodOption get paymentMethodOptionSelected;
   @JsonKey(ignore: true)
-  _$$_UpdatePaymentMethodOptionSelectedCopyWith<
-          _$_UpdatePaymentMethodOptionSelected>
+  _$$UpdatePaymentMethodOptionSelectedImplCopyWith<
+          _$UpdatePaymentMethodOptionSelectedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CreateVirtualAccountCopyWith<$Res> {
-  factory _$$_CreateVirtualAccountCopyWith(_$_CreateVirtualAccount value,
-          $Res Function(_$_CreateVirtualAccount) then) =
-      __$$_CreateVirtualAccountCopyWithImpl<$Res>;
+abstract class _$$CreateVirtualAccountImplCopyWith<$Res> {
+  factory _$$CreateVirtualAccountImplCopyWith(_$CreateVirtualAccountImpl value,
+          $Res Function(_$CreateVirtualAccountImpl) then) =
+      __$$CreateVirtualAccountImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CreateVirtualAccountCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_CreateVirtualAccount>
-    implements _$$_CreateVirtualAccountCopyWith<$Res> {
-  __$$_CreateVirtualAccountCopyWithImpl(_$_CreateVirtualAccount _value,
-      $Res Function(_$_CreateVirtualAccount) _then)
+class __$$CreateVirtualAccountImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$CreateVirtualAccountImpl>
+    implements _$$CreateVirtualAccountImplCopyWith<$Res> {
+  __$$CreateVirtualAccountImplCopyWithImpl(_$CreateVirtualAccountImpl _value,
+      $Res Function(_$CreateVirtualAccountImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_CreateVirtualAccount implements _CreateVirtualAccount {
-  const _$_CreateVirtualAccount();
+class _$CreateVirtualAccountImpl implements _CreateVirtualAccount {
+  const _$CreateVirtualAccountImpl();
 
   @override
   String toString() {
@@ -3109,9 +3547,10 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_CreateVirtualAccount);
+        (other.runtimeType == runtimeType &&
+            other is _$CreateVirtualAccountImpl);
   }
 
   @override
@@ -3120,9 +3559,14 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -3151,8 +3595,10 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -3179,8 +3625,10 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -3208,6 +3656,8 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -3231,6 +3681,8 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -3254,6 +3706,8 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -3279,29 +3733,29 @@ class _$_CreateVirtualAccount implements _CreateVirtualAccount {
 }
 
 abstract class _CreateVirtualAccount implements NewPaymentEvent {
-  const factory _CreateVirtualAccount() = _$_CreateVirtualAccount;
+  const factory _CreateVirtualAccount() = _$CreateVirtualAccountImpl;
 }
 
 /// @nodoc
-abstract class _$$_GetPrincipalCutoffsCopyWith<$Res> {
-  factory _$$_GetPrincipalCutoffsCopyWith(_$_GetPrincipalCutoffs value,
-          $Res Function(_$_GetPrincipalCutoffs) then) =
-      __$$_GetPrincipalCutoffsCopyWithImpl<$Res>;
+abstract class _$$GetPrincipalCutoffsImplCopyWith<$Res> {
+  factory _$$GetPrincipalCutoffsImplCopyWith(_$GetPrincipalCutoffsImpl value,
+          $Res Function(_$GetPrincipalCutoffsImpl) then) =
+      __$$GetPrincipalCutoffsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_GetPrincipalCutoffsCopyWithImpl<$Res>
-    extends _$NewPaymentEventCopyWithImpl<$Res, _$_GetPrincipalCutoffs>
-    implements _$$_GetPrincipalCutoffsCopyWith<$Res> {
-  __$$_GetPrincipalCutoffsCopyWithImpl(_$_GetPrincipalCutoffs _value,
-      $Res Function(_$_GetPrincipalCutoffs) _then)
+class __$$GetPrincipalCutoffsImplCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$GetPrincipalCutoffsImpl>
+    implements _$$GetPrincipalCutoffsImplCopyWith<$Res> {
+  __$$GetPrincipalCutoffsImplCopyWithImpl(_$GetPrincipalCutoffsImpl _value,
+      $Res Function(_$GetPrincipalCutoffsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_GetPrincipalCutoffs implements _GetPrincipalCutoffs {
-  const _$_GetPrincipalCutoffs();
+class _$GetPrincipalCutoffsImpl implements _GetPrincipalCutoffs {
+  const _$GetPrincipalCutoffsImpl();
 
   @override
   String toString() {
@@ -3309,9 +3763,10 @@ class _$_GetPrincipalCutoffs implements _GetPrincipalCutoffs {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetPrincipalCutoffs);
+        (other.runtimeType == runtimeType &&
+            other is _$GetPrincipalCutoffsImpl);
   }
 
   @override
@@ -3320,9 +3775,14 @@ class _$_GetPrincipalCutoffs implements _GetPrincipalCutoffs {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isMarketPlace)
         initialized,
+    required TResult Function() fetchAvailablePaymentMethods,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
@@ -3351,8 +3811,10 @@ class _$_GetPrincipalCutoffs implements _GetPrincipalCutoffs {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult? Function()? fetchAvailablePaymentMethods,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -3379,8 +3841,10 @@ class _$_GetPrincipalCutoffs implements _GetPrincipalCutoffs {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            bool isMarketPlace)?
         initialized,
+    TResult Function()? fetchAvailablePaymentMethods,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
@@ -3408,6 +3872,8 @@ class _$_GetPrincipalCutoffs implements _GetPrincipalCutoffs {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchAvailablePaymentMethods value)
+        fetchAvailablePaymentMethods,
     required TResult Function(_SelectAllInvoices value) updateAllInvoices,
     required TResult Function(_ToggleInvoice value) toggleInvoice,
     required TResult Function(_SelectAllCredits value) updateAllCredits,
@@ -3431,6 +3897,8 @@ class _$_GetPrincipalCutoffs implements _GetPrincipalCutoffs {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult? Function(_ToggleInvoice value)? toggleInvoice,
     TResult? Function(_SelectAllCredits value)? updateAllCredits,
@@ -3454,6 +3922,8 @@ class _$_GetPrincipalCutoffs implements _GetPrincipalCutoffs {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchAvailablePaymentMethods value)?
+        fetchAvailablePaymentMethods,
     TResult Function(_SelectAllInvoices value)? updateAllInvoices,
     TResult Function(_ToggleInvoice value)? toggleInvoice,
     TResult Function(_SelectAllCredits value)? updateAllCredits,
@@ -3479,7 +3949,7 @@ class _$_GetPrincipalCutoffs implements _GetPrincipalCutoffs {
 }
 
 abstract class _GetPrincipalCutoffs implements NewPaymentEvent {
-  const factory _GetPrincipalCutoffs() = _$_GetPrincipalCutoffs;
+  const factory _GetPrincipalCutoffs() = _$GetPrincipalCutoffsImpl;
 }
 
 /// @nodoc
@@ -3512,6 +3982,7 @@ mixin _$NewPaymentState {
       throw _privateConstructorUsedError;
   bool get isFetchingPrincipalCutoffs => throw _privateConstructorUsedError;
   PrincipalCutoffs get principalCutoffs => throw _privateConstructorUsedError;
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewPaymentStateCopyWith<NewPaymentState> get copyWith =>
@@ -3544,7 +4015,8 @@ abstract class $NewPaymentStateCopyWith<$Res> {
       bool createVirtualAccountFailed,
       CreateVirtualAccount createVirtualAccount,
       bool isFetchingPrincipalCutoffs,
-      PrincipalCutoffs principalCutoffs});
+      PrincipalCutoffs principalCutoffs,
+      bool isMarketPlace});
 
   $CustomerPaymentInfoCopyWith<$Res> get customerPaymentInfo;
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
@@ -3590,6 +4062,7 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
     Object? createVirtualAccount = null,
     Object? isFetchingPrincipalCutoffs = null,
     Object? principalCutoffs = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       customerPaymentInfo: null == customerPaymentInfo
@@ -3672,6 +4145,10 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
           ? _value.principalCutoffs
           : principalCutoffs // ignore: cast_nullable_to_non_nullable
               as PrincipalCutoffs,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -3753,11 +4230,11 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
 }
 
 /// @nodoc
-abstract class _$$_NewPaymentStateCopyWith<$Res>
+abstract class _$$NewPaymentStateImplCopyWith<$Res>
     implements $NewPaymentStateCopyWith<$Res> {
-  factory _$$_NewPaymentStateCopyWith(
-          _$_NewPaymentState value, $Res Function(_$_NewPaymentState) then) =
-      __$$_NewPaymentStateCopyWithImpl<$Res>;
+  factory _$$NewPaymentStateImplCopyWith(_$NewPaymentStateImpl value,
+          $Res Function(_$NewPaymentStateImpl) then) =
+      __$$NewPaymentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -3780,7 +4257,8 @@ abstract class _$$_NewPaymentStateCopyWith<$Res>
       bool createVirtualAccountFailed,
       CreateVirtualAccount createVirtualAccount,
       bool isFetchingPrincipalCutoffs,
-      PrincipalCutoffs principalCutoffs});
+      PrincipalCutoffs principalCutoffs,
+      bool isMarketPlace});
 
   @override
   $CustomerPaymentInfoCopyWith<$Res> get customerPaymentInfo;
@@ -3803,11 +4281,11 @@ abstract class _$$_NewPaymentStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NewPaymentStateCopyWithImpl<$Res>
-    extends _$NewPaymentStateCopyWithImpl<$Res, _$_NewPaymentState>
-    implements _$$_NewPaymentStateCopyWith<$Res> {
-  __$$_NewPaymentStateCopyWithImpl(
-      _$_NewPaymentState _value, $Res Function(_$_NewPaymentState) _then)
+class __$$NewPaymentStateImplCopyWithImpl<$Res>
+    extends _$NewPaymentStateCopyWithImpl<$Res, _$NewPaymentStateImpl>
+    implements _$$NewPaymentStateImplCopyWith<$Res> {
+  __$$NewPaymentStateImplCopyWithImpl(
+      _$NewPaymentStateImpl _value, $Res Function(_$NewPaymentStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3833,8 +4311,9 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
     Object? createVirtualAccount = null,
     Object? isFetchingPrincipalCutoffs = null,
     Object? principalCutoffs = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_NewPaymentState(
+    return _then(_$NewPaymentStateImpl(
       customerPaymentInfo: null == customerPaymentInfo
           ? _value.customerPaymentInfo
           : customerPaymentInfo // ignore: cast_nullable_to_non_nullable
@@ -3915,14 +4394,18 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
           ? _value.principalCutoffs
           : principalCutoffs // ignore: cast_nullable_to_non_nullable
               as PrincipalCutoffs,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_NewPaymentState extends _NewPaymentState {
-  const _$_NewPaymentState(
+class _$NewPaymentStateImpl extends _NewPaymentState {
+  const _$NewPaymentStateImpl(
       {required this.customerPaymentInfo,
       required this.failureOrSuccessOption,
       required this.isLoading,
@@ -3942,7 +4425,8 @@ class _$_NewPaymentState extends _NewPaymentState {
       required this.createVirtualAccountFailed,
       required this.createVirtualAccount,
       required this.isFetchingPrincipalCutoffs,
-      required this.principalCutoffs})
+      required this.principalCutoffs,
+      required this.isMarketPlace})
       : _selectedInvoices = selectedInvoices,
         _selectedCredits = selectedCredits,
         _paymentMethods = paymentMethods,
@@ -4007,17 +4491,19 @@ class _$_NewPaymentState extends _NewPaymentState {
   final bool isFetchingPrincipalCutoffs;
   @override
   final PrincipalCutoffs principalCutoffs;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'NewPaymentState(customerPaymentInfo: $customerPaymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, isCreatingVirtualAccount: $isCreatingVirtualAccount, createVirtualAccountFailed: $createVirtualAccountFailed, createVirtualAccount: $createVirtualAccount, isFetchingPrincipalCutoffs: $isFetchingPrincipalCutoffs, principalCutoffs: $principalCutoffs)';
+    return 'NewPaymentState(customerPaymentInfo: $customerPaymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, isCreatingVirtualAccount: $isCreatingVirtualAccount, createVirtualAccountFailed: $createVirtualAccountFailed, createVirtualAccount: $createVirtualAccount, isFetchingPrincipalCutoffs: $isFetchingPrincipalCutoffs, principalCutoffs: $principalCutoffs, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NewPaymentState &&
+            other is _$NewPaymentStateImpl &&
             (identical(other.customerPaymentInfo, customerPaymentInfo) ||
                 other.customerPaymentInfo == customerPaymentInfo) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -4060,7 +4546,9 @@ class _$_NewPaymentState extends _NewPaymentState {
                 other.isFetchingPrincipalCutoffs ==
                     isFetchingPrincipalCutoffs) &&
             (identical(other.principalCutoffs, principalCutoffs) ||
-                other.principalCutoffs == principalCutoffs));
+                other.principalCutoffs == principalCutoffs) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
@@ -4085,14 +4573,16 @@ class _$_NewPaymentState extends _NewPaymentState {
         createVirtualAccountFailed,
         createVirtualAccount,
         isFetchingPrincipalCutoffs,
-        principalCutoffs
+        principalCutoffs,
+        isMarketPlace
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NewPaymentStateCopyWith<_$_NewPaymentState> get copyWith =>
-      __$$_NewPaymentStateCopyWithImpl<_$_NewPaymentState>(this, _$identity);
+  _$$NewPaymentStateImplCopyWith<_$NewPaymentStateImpl> get copyWith =>
+      __$$NewPaymentStateImplCopyWithImpl<_$NewPaymentStateImpl>(
+          this, _$identity);
 }
 
 abstract class _NewPaymentState extends NewPaymentState {
@@ -4116,7 +4606,8 @@ abstract class _NewPaymentState extends NewPaymentState {
       required final bool createVirtualAccountFailed,
       required final CreateVirtualAccount createVirtualAccount,
       required final bool isFetchingPrincipalCutoffs,
-      required final PrincipalCutoffs principalCutoffs}) = _$_NewPaymentState;
+      required final PrincipalCutoffs principalCutoffs,
+      required final bool isMarketPlace}) = _$NewPaymentStateImpl;
   const _NewPaymentState._() : super._();
 
   @override
@@ -4160,7 +4651,9 @@ abstract class _NewPaymentState extends NewPaymentState {
   @override
   PrincipalCutoffs get principalCutoffs;
   @override
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_NewPaymentStateCopyWith<_$_NewPaymentState> get copyWith =>
+  _$$NewPaymentStateImplCopyWith<_$NewPaymentStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

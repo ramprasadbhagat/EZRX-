@@ -85,7 +85,9 @@ class PaymentSummaryDetailsBloc
 
               if (!state.salesOrganization.salesOrg.isID) {
                 add(
-                  const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
+                  PaymentSummaryDetailsEvent.fetchPaymentSummaryList(
+                    isMarketPlace: event.isMarketPlace,
+                  ),
                 );
               } else {
                 add(
@@ -103,7 +105,9 @@ class PaymentSummaryDetailsBloc
           );
           if (!state.salesOrganization.salesOrg.isID) {
             add(
-              const PaymentSummaryDetailsEvent.fetchPaymentSummaryList(),
+              PaymentSummaryDetailsEvent.fetchPaymentSummaryList(
+                isMarketPlace: event.isMarketPlace,
+              ),
             );
           } else {
             add(
@@ -129,7 +133,11 @@ class PaymentSummaryDetailsBloc
             );
           },
           (paymentItemList) {
-            add(const PaymentSummaryDetailsEvent.fetchAdvice());
+            add(
+              PaymentSummaryDetailsEvent.fetchAdvice(
+                isMarketPlace: event.isMarketPlace,
+              ),
+            );
             emit(
               state.copyWith(
                 details: state.details.copyWith(
@@ -221,7 +229,7 @@ class PaymentSummaryDetailsBloc
           },
         );
       },
-      fetchAdvice: (_) async {
+      fetchAdvice: (event) async {
         emit(state.copyWith(isFetchingAdvice: true));
         final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
           paymentBatchAdditionalInfo:
@@ -237,6 +245,7 @@ class PaymentSummaryDetailsBloc
           salesOrganisation: state.salesOrganization,
           user: state.user,
           paymentInfo: customerPaymentInfo,
+          isMarketPlace: event.isMarketPlace,
         );
         failureOrSuccess.fold(
           (failure) => emit(

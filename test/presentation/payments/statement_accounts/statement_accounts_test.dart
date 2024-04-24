@@ -403,6 +403,7 @@ void main() {
             ),
             shipToInfo: ShipToInfo.empty(),
             user: User.empty(),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);
@@ -437,6 +438,7 @@ void main() {
             ),
             shipToInfo: ShipToInfo.empty(),
             user: User.empty(),
+            isMarketPlace: false,
           ),
         ),
       );
@@ -537,6 +539,7 @@ void main() {
             ),
             shipToInfo: ShipToInfo.empty(),
             user: User.empty(),
+            isMarketPlace: false,
           ),
         ),
       ).called(1);

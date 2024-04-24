@@ -35,69 +35,75 @@ class PaymentMethodTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final saleOrg = context.read<EligibilityBloc>().state.salesOrg;
 
-    return ListView(
-      key: WidgetKeys.paymentMethodListView,
-      children: [
-        if (!saleOrg.isID) const _NoteAnnouncement(),
-        DetailsInfoSection(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          label: saleOrg.isID ? '' : 'Select payment method',
-          labelStyle: Theme.of(context).textTheme.labelMedium,
-          child: Column(
-            children: [
-              if (saleOrg.isPH) const _WarningAnnouncement(),
-              const _PaymentMethodSelector(),
-              BlocConsumer<NewPaymentBloc, NewPaymentState>(
-                listenWhen: (previous, current) =>
-                    previous.selectedPaymentMethod !=
-                        current.selectedPaymentMethod &&
-                    current.selectedPaymentMethod.paymentMethod.isBankIn,
-                listener: (context, state) {
-                  context.read<BankInAccountsBloc>().add(
-                        BankInAccountsEvent.bankInFetch(
-                          salesOrg: saleOrg,
-                        ),
-                      );
-                },
-                buildWhen: (previous, current) =>
-                    previous.selectedPaymentMethod !=
-                    current.selectedPaymentMethod,
-                builder: (context, state) {
-                  return state.selectedPaymentMethod.paymentMethod.isBankIn
-                      ? BlocBuilder<BankInAccountsBloc, BankInAccountsState>(
-                          buildWhen: (previous, current) =>
-                              previous.isFetching != current.isFetching ||
-                              previous.bankInAccounts != current.bankInAccounts,
-                          builder: (context, state) {
-                            return state.isFetching
-                                ? LoadingShimmer.logo(
-                                    key: WidgetKeys.loaderImage,
-                                  )
-                                : BankInfo(
-                                    key: WidgetKeys.bankInAccountInfo,
-                                    bankInAccounts: state.bankInAccounts,
-                                  );
-                          },
-                        )
-                      : const SizedBox.shrink();
-                },
-              ),
-            ],
+    return RefreshIndicator(
+      onRefresh: () async => context
+          .read<NewPaymentBloc>()
+          .add(const NewPaymentEvent.fetchAvailablePaymentMethods()),
+      child: ListView(
+        key: WidgetKeys.paymentMethodListView,
+        children: [
+          if (!saleOrg.isID) const _NoteAnnouncement(),
+          DetailsInfoSection(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            label: saleOrg.isID ? '' : 'Select payment method',
+            labelStyle: Theme.of(context).textTheme.labelMedium,
+            child: Column(
+              children: [
+                if (saleOrg.isPH) const _WarningAnnouncement(),
+                const _PaymentMethodSelector(),
+                BlocConsumer<NewPaymentBloc, NewPaymentState>(
+                  listenWhen: (previous, current) =>
+                      previous.selectedPaymentMethod !=
+                          current.selectedPaymentMethod &&
+                      current.selectedPaymentMethod.paymentMethod.isBankIn,
+                  listener: (context, state) {
+                    context.read<BankInAccountsBloc>().add(
+                          BankInAccountsEvent.bankInFetch(
+                            salesOrg: saleOrg,
+                          ),
+                        );
+                  },
+                  buildWhen: (previous, current) =>
+                      previous.selectedPaymentMethod !=
+                      current.selectedPaymentMethod,
+                  builder: (context, state) {
+                    return state.selectedPaymentMethod.paymentMethod.isBankIn
+                        ? BlocBuilder<BankInAccountsBloc, BankInAccountsState>(
+                            buildWhen: (previous, current) =>
+                                previous.isFetching != current.isFetching ||
+                                previous.bankInAccounts !=
+                                    current.bankInAccounts,
+                            builder: (context, state) {
+                              return state.isFetching
+                                  ? LoadingShimmer.logo(
+                                      key: WidgetKeys.loaderImage,
+                                    )
+                                  : BankInfo(
+                                      key: WidgetKeys.bankInAccountInfo,
+                                      bankInAccounts: state.bankInAccounts,
+                                    );
+                            },
+                          )
+                        : const SizedBox.shrink();
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-        DetailsInfoSection(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          label: 'Payment details',
-          child: Column(
-            children: [
-              const SizedBox(height: 20),
-              AddressInfoSection.noAction(),
-              const SizedBox(height: 20),
-            ],
+          DetailsInfoSection(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            label: 'Payment details',
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                AddressInfoSection.noAction(),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
-        ),
-        const _PaymentItemListView(),
-      ],
+          const _PaymentItemListView(),
+        ],
+      ),
     );
   }
 }

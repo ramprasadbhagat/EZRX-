@@ -49,14 +49,24 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             user: e.user,
             customerCodeInfo: e.customerCodeInfo,
             salesOrganisation: e.salesOrganisation,
-            isFetchingPaymentMethod: true,
+            isFetchingPaymentMethod: false,
             shipToInfo: e.shipToInfo,
             createVirtualAccountFailed: false,
+            isMarketPlace: e.isMarketPlace,
+          ),
+        );
+      },
+      fetchAvailablePaymentMethods: (e) async {
+        emit(
+          state.copyWith(
+            isFetchingPaymentMethod: true,
+            failureOrSuccessOption: none(),
           ),
         );
 
         final failureOrSuccess = await newPaymentRepository.fetchPaymentMethods(
           salesOrganisation: state.salesOrganisation,
+          isMarketPlace: state.isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -151,6 +161,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
           ],
           user: state.user,
           shipToInfo: state.shipToInfo,
+          isMarketPlace: state.isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -188,6 +199,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
           salesOrganisation: state.salesOrganisation,
           user: state.user,
           paymentInfo: state.customerPaymentInfo,
+          isMarketPlace: state.isMarketPlace,
         );
 
         failureOrSuccess.fold(
@@ -268,6 +280,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             paymentBatchAdditionalInfo:
                 e.paymentInfo.paymentBatchAdditionalInfo,
           ),
+          isMarketPlace: state.isMarketPlace,
         );
 
         failureOrSuccess.fold(

@@ -100,39 +100,54 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        setUp: () {
-          when(
-            () => newPaymentRepository.fetchPaymentMethods(
-              salesOrganisation: SalesOrganisation.empty(),
-            ),
-          ).thenAnswer(
-            (invocation) async => Right(
-              [NewPaymentMethod.empty()],
-            ),
-          );
-        },
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.initialized(
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             shipToInfo: ShipToInfo.empty(),
             user: User.empty(),
+            isMarketPlace: true,
           ),
+        ),
+        expect: () => [
+          NewPaymentState.initial().copyWith(isMarketPlace: true),
+        ],
+      );
+
+      blocTest(
+        'Fetch payment method success',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        seed: () => NewPaymentState.initial().copyWith(isMarketPlace: true),
+        setUp: () {
+          when(
+            () => newPaymentRepository.fetchPaymentMethods(
+              salesOrganisation: SalesOrganisation.empty(),
+              isMarketPlace: true,
+            ),
+          ).thenAnswer((_) async => Right([NewPaymentMethod.empty()]));
+        },
+        act: (NewPaymentBloc bloc) => bloc.add(
+          const NewPaymentEvent.fetchAvailablePaymentMethods(),
         ),
         expect: () => [
           NewPaymentState.initial().copyWith(
             isFetchingPaymentMethod: true,
+            isMarketPlace: true,
           ),
           NewPaymentState.initial().copyWith(
             isFetchingPaymentMethod: false,
             paymentMethods: [NewPaymentMethod.empty()],
             selectedPaymentMethod: NewPaymentMethod.empty(),
+            isMarketPlace: true,
           ),
         ],
       );
 
       blocTest(
-        'Initialize with Payment Method fail',
+        'Fetch payment Method fail',
         build: () => NewPaymentBloc(
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
@@ -141,20 +156,12 @@ void main() {
           when(
             () => newPaymentRepository.fetchPaymentMethods(
               salesOrganisation: SalesOrganisation.empty(),
+              isMarketPlace: false,
             ),
-          ).thenAnswer(
-            (invocation) async => const Left(
-              ApiFailure.other('fake-error'),
-            ),
-          );
+          ).thenAnswer((_) async => const Left(ApiFailure.other('fake-error')));
         },
         act: (NewPaymentBloc bloc) => bloc.add(
-          NewPaymentEvent.initialized(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            user: User.empty(),
-          ),
+          const NewPaymentEvent.fetchAvailablePaymentMethods(),
         ),
         expect: () => [
           NewPaymentState.initial().copyWith(
@@ -163,9 +170,7 @@ void main() {
           NewPaymentState.initial().copyWith(
             isFetchingPaymentMethod: false,
             failureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('fake-error'),
-              ),
+              const Left(ApiFailure.other('fake-error')),
             ),
             paymentMethods: [],
             selectedPaymentMethod: NewPaymentMethod.empty(),
@@ -334,6 +339,7 @@ void main() {
               paymentMethod: 'Payment Gateway',
               customerOpenItems: fakeCustomerOpenItemSelected,
               shipToInfo: ShipToInfo.empty(),
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -373,6 +379,7 @@ void main() {
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
           selectedPaymentMethod: fakePaymentMethodValues.first,
+          isMarketPlace: true,
         ),
         setUp: () {
           when(
@@ -383,6 +390,7 @@ void main() {
               paymentMethod: 'Payment Gateway',
               customerOpenItems: fakeCustomerOpenItemSelected,
               shipToInfo: ShipToInfo.empty(),
+              isMarketPlace: true,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -394,6 +402,7 @@ void main() {
               salesOrganisation: SalesOrganisation.empty(),
               customerCodeInfo: CustomerCodeInfo.empty(),
               filter: CustomerPaymentFilter.empty(),
+              isMarketPlace: true,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -408,12 +417,14 @@ void main() {
             selectedInvoices: fakeCustomerOpenItemSelected,
             paymentMethods: fakePaymentMethodValues,
             selectedPaymentMethod: fakePaymentMethodValues.first,
+            isMarketPlace: true,
           ),
           NewPaymentState.initial().copyWith(
             customerPaymentInfo: fakePaymentInfo,
             selectedInvoices: fakeCustomerOpenItemSelected,
             paymentMethods: fakePaymentMethodValues,
             selectedPaymentMethod: fakePaymentMethodValues.first,
+            isMarketPlace: true,
           ),
         ],
       );
@@ -443,6 +454,7 @@ void main() {
                 ...fakeCustomerOpenItemSelected,
                 ...fakeCreditSelected,
               ],
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -454,6 +466,7 @@ void main() {
               salesOrganisation: SalesOrganisation.empty(),
               customerCodeInfo: CustomerCodeInfo.empty(),
               filter: CustomerPaymentFilter.empty(),
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -667,6 +680,7 @@ void main() {
         seed: () => NewPaymentState.initial().copyWith(
           isLoading: false,
           customerPaymentInfo: fakePaymentInfo,
+          isMarketPlace: true,
         ),
         setUp: () {
           when(
@@ -675,6 +689,7 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty(),
               paymentInfo: fakePaymentInfo,
               user: User.empty(),
+              isMarketPlace: true,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -682,12 +697,12 @@ void main() {
             ),
           );
         },
-        act: (NewPaymentBloc bloc) => bloc.add(
-          const NewPaymentEvent.fetchInvoiceInfoPdf(),
-        ),
+        act: (NewPaymentBloc bloc) =>
+            bloc.add(const NewPaymentEvent.fetchInvoiceInfoPdf()),
         expect: () => [
           NewPaymentState.initial().copyWith(
             isFetchingInvoiceInfoPdf: true,
+            isMarketPlace: true,
           ),
           NewPaymentState.initial().copyWith(
             failureOrSuccessOption: optionOf(
@@ -695,6 +710,7 @@ void main() {
                 ApiFailure.other('fake-error'),
               ),
             ),
+            isMarketPlace: true,
           ),
         ],
       );
@@ -716,6 +732,7 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty(),
               paymentInfo: fakePaymentInfo,
               user: User.empty(),
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -723,9 +740,8 @@ void main() {
             ),
           );
         },
-        act: (NewPaymentBloc bloc) => bloc.add(
-          const NewPaymentEvent.fetchInvoiceInfoPdf(),
-        ),
+        act: (NewPaymentBloc bloc) =>
+            bloc.add(const NewPaymentEvent.fetchInvoiceInfoPdf()),
         expect: () => [
           NewPaymentState.initial().copyWith(
             isFetchingInvoiceInfoPdf: true,

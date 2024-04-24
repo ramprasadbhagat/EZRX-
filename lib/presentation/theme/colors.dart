@@ -125,6 +125,7 @@ abstract class ZPColors {
   static const Color elevatedDisableColor = Color.fromRGBO(154, 169, 177, 1);
   static const Color tenderUnselectBg = Color.fromRGBO(246, 246, 246, 1);
   static const Color tenderUnselectBorder = Color.fromRGBO(224, 224, 224, 1);
+  static const Color infoTextBlueColor = Color.fromRGBO(37, 72, 120, 1);
 
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,

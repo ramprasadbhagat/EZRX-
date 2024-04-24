@@ -13,13 +13,16 @@ class PaymentSummaryDetailsEvent with _$PaymentSummaryDetailsEvent {
     required bool isMarketPlace,
   }) = _FetchPaymentSummaryDetailsEvent;
 
-  const factory PaymentSummaryDetailsEvent.fetchPaymentSummaryList() =
-      _FetchPaymentSummaryListEvent;
+  const factory PaymentSummaryDetailsEvent.fetchPaymentSummaryList({
+    required bool isMarketPlace,
+  }) = _FetchPaymentSummaryListEvent;
 
   const factory PaymentSummaryDetailsEvent.fetchBankInstruction() =
       _FetchBankInstruction;
 
-  const factory PaymentSummaryDetailsEvent.fetchAdvice() = _FetchAdvice;
+  const factory PaymentSummaryDetailsEvent.fetchAdvice({
+    required bool isMarketPlace,
+  }) = _FetchAdvice;
 
   const factory PaymentSummaryDetailsEvent.saveAdvice() = _SaveAdvice;
 

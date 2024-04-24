@@ -373,6 +373,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             shipToInfo: ShipToInfo.empty(),
             user: fakeClientUser,
+            isMarketPlace: false,
           ),
         ),
       ).called(1);

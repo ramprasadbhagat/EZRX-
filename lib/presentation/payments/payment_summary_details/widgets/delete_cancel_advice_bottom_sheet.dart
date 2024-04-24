@@ -4,79 +4,89 @@ class DeleteCancelAdviceBottomSheet extends StatelessWidget {
   final String paymentAdviceNumber;
   final bool isDelete;
   final bool isInProgress;
+  final bool isMarketPlace;
+
   const DeleteCancelAdviceBottomSheet({
     Key? key,
     required this.paymentAdviceNumber,
     required this.isDelete,
+    required this.isMarketPlace,
     this.isInProgress = false,
   }) : super(key: key);
 
   factory DeleteCancelAdviceBottomSheet.delete({
     required String paymentAdviceNumber,
+    required bool isMarketPlace,
     bool isInProgress = false,
     Key? key,
   }) =>
       DeleteCancelAdviceBottomSheet(
         isDelete: true,
+        isMarketPlace: isMarketPlace,
         paymentAdviceNumber: paymentAdviceNumber,
         isInProgress: isInProgress,
         key: key,
       );
 
   factory DeleteCancelAdviceBottomSheet.cancel({
+    required bool isMarketPlace,
     Key? key,
   }) =>
       DeleteCancelAdviceBottomSheet(
         isDelete: false,
+        isMarketPlace: isMarketPlace,
         key: key,
         paymentAdviceNumber: '',
       );
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      key: WidgetKeys.deleteCancelAdviceBottomSheet,
-      padding: const EdgeInsets.only(
-        top: 20,
-        left: 20,
-        right: 20,
-        bottom: 60,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '${context.tr(
-              isDelete ? 'Delete payment advice' : 'Cancel payment advice',
-            )}?',
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: ZPColors.primary,
-                ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          if (isDelete)
-            _DeletePaymentAdviceContent(
-              paymentAdviceNumber: paymentAdviceNumber,
-              isInProgress: isInProgress,
-            )
-          else
+    return PaymentModule(
+      isMarketPlace: isMarketPlace,
+      child: Padding(
+        key: WidgetKeys.deleteCancelAdviceBottomSheet,
+        padding: const EdgeInsets.only(
+          top: 20,
+          left: 20,
+          right: 20,
+          bottom: 60,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Text(
-              context.tr(
-                'Once cancelled, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.',
-              ),
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.extraLightGrey4,
+              '${context.tr(
+                isDelete ? 'Delete payment advice' : 'Cancel payment advice',
+              )}?',
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: ZPColors.primary,
                   ),
             ),
-          const SizedBox(
-            height: 30,
-          ),
-          _DeleteCancelAdviceButtons(
-            isDelete: isDelete,
-          ),
-        ],
+            const SizedBox(
+              height: 5,
+            ),
+            if (isDelete)
+              _DeletePaymentAdviceContent(
+                paymentAdviceNumber: paymentAdviceNumber,
+                isInProgress: isInProgress,
+              )
+            else
+              Text(
+                context.tr(
+                  'Once cancelled, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.',
+                ),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.extraLightGrey4,
+                    ),
+              ),
+            const SizedBox(
+              height: 30,
+            ),
+            _DeleteCancelAdviceButtons(
+              isDelete: isDelete,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -138,7 +148,8 @@ class _DeletePaymentAdviceContent extends StatelessWidget {
 
     return Text(
       context.tr(
-        'Once deleted, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.',
+        'Payment advice #{adviceNumber} will be permanently deleted once you proceed. Please create a new payment advice for these invoices to complete the payment.',
+        namedArgs: {'adviceNumber': paymentAdviceNumber},
       ),
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             color: ZPColors.extraLightGrey4,
@@ -164,7 +175,7 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
       listener: (context, state) {
         state.failureOrSuccessOption.fold(
           () {
-            context.paymentSummaryBloc(false).add(
+            context.paymentSummaryBloc(context.isMPPayment).add(
                   PaymentSummaryEvent.fetch(
                     appliedFilter: PaymentSummaryFilter.defaultFilter(),
                     searchKey: SearchKey.searchFilter(''),
@@ -181,7 +192,7 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
                     .popUntilRouteWithName(PaymentSummaryPageRoute.name);
               } else {
                 context.router.pushAndPopUntil(
-                  PaymentSummaryPageRoute(isMarketPlace: false),
+                  PaymentSummaryPageRoute(isMarketPlace: context.isMPPayment),
                   predicate: (Route route) =>
                       route.settings.name == PaymentPageRoute.name,
                 );

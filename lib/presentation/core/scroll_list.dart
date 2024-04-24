@@ -4,7 +4,6 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ScrollList<T> extends StatefulWidget {
   final VoidCallback? onRefresh;
@@ -129,12 +128,7 @@ class _LoadingMoreIndicator extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             vertical: 10,
           ),
-          child: LoadingAnimationWidget.discreteCircle(
-            color: ZPColors.primary,
-            secondRingColor: ZPColors.secondary,
-            thirdRingColor: ZPColors.orange,
-            size: 30,
-          ),
+          child: LoadingShimmer.circular(),
         );
       },
     );

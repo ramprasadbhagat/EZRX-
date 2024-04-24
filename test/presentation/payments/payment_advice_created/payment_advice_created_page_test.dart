@@ -29,6 +29,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
@@ -118,7 +119,7 @@ void main() {
     });
   }
 
-  Widget getWidget() {
+  Widget getWidget({bool isMarketPlace = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       useMediaQuery: true,
@@ -144,13 +145,35 @@ void main() {
           create: (context) => mockPaymentSummaryBloc,
         ),
       ],
-      child: const PaymentAdviceCreatedPage(
-        isMarketPlace: false,
-      ),
+      child: PaymentAdviceCreatedPage(isMarketPlace: isMarketPlace),
     );
   }
 
   group('Payment Advice Created Page Test =>', () {
+    group('Payment advice app bar title', () {
+      testWidgets('Display marketplace icon in MP flow', (tester) async {
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(isMarketPlace: true),
+        );
+        await tester.pumpWidget(getWidget(isMarketPlace: true));
+        await tester.pump();
+        expect(
+          find.descendant(
+            of: find.byType(AppBar),
+            matching: find.byType(MarketPlaceIcon),
+          ),
+          findsOne,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(AppBar),
+            matching: find.textContaining('MP Payment advice generated'),
+          ),
+          findsOne,
+        );
+      });
+    });
+
     group('Payment Advice Created Page Test for Bank In Method', () {
       testWidgets('Test Display', (tester) async {
         when(() => newPaymentBlocMock.state).thenReturn(
@@ -661,8 +684,7 @@ void main() {
         expect(find.text('${'Delete payment advice'.tr()}?'), findsOneWidget);
         expect(
           find.text(
-            'Once deleted, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.'
-                .tr(),
+            'Payment advice # will be permanently deleted once you proceed. Please create a new payment advice for these invoices to complete the payment.',
           ),
           findsOneWidget,
         );
@@ -934,9 +956,8 @@ void main() {
         await tester.pumpAndSettle();
 
         verify(
-          () => newPaymentBlocMock.add(
-            const NewPaymentEvent.fetchInvoiceInfoPdf(),
-          ),
+          () => newPaymentBlocMock
+              .add(const NewPaymentEvent.fetchInvoiceInfoPdf()),
         ).called(1);
       });
     });

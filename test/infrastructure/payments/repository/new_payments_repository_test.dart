@@ -272,6 +272,7 @@ void main() {
           paymentMethod: '',
           salesOrganisation: fakeSalesOrganisation,
           shipToInfo: fakeShipToInfo,
+          isMarketPlace: true,
         );
         expect(
           result.isRight(),
@@ -307,6 +308,7 @@ void main() {
           paymentMethod: '',
           salesOrganisation: fakeSalesOrganisation,
           shipToInfo: fakeShipToInfo,
+          isMarketPlace: false,
         );
         expect(
           result.isLeft(),
@@ -435,6 +437,7 @@ void main() {
           ),
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          isMarketPlace: true,
         );
         expect(
           result.isRight(),
@@ -458,6 +461,7 @@ void main() {
           ),
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          isMarketPlace: true,
         );
         expect(
           result.isLeft(),
@@ -474,6 +478,7 @@ void main() {
         final result = await nawPaymentsRepository.fetchPaymentMethods(
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          isMarketPlace: true,
         );
         expect(
           result.isRight(),
@@ -490,6 +495,7 @@ void main() {
         final result = await nawPaymentsRepository.fetchPaymentMethods(
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          isMarketPlace: false,
         );
         expect(
           result.isLeft(),
@@ -691,6 +697,7 @@ void main() {
             transactionCurrency: '',
             userName: fakeUserName,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
+            isMarketPlace: true,
           ),
         ).thenAnswer((invocation) async => paymentInfo);
 
@@ -701,6 +708,7 @@ void main() {
           paymentMethod: '',
           salesOrganisation: fakeSalesOrganisation,
           shipToInfo: fakeShipToInfo,
+          isMarketPlace: true,
         );
         expect(
           result.isRight(),
@@ -725,6 +733,7 @@ void main() {
             transactionCurrency: '',
             userName: fakeUserName,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
+            isMarketPlace: false,
           ),
         ).thenThrow((invocation) => MockException());
 
@@ -736,6 +745,7 @@ void main() {
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
           shipToInfo: fakeShipToInfo,
+          isMarketPlace: false,
         );
         expect(
           result.isLeft(),
@@ -783,6 +793,7 @@ void main() {
             accountingDocExternalReference: '123',
             paymentBatchAdditionalInfo: '123',
             zzAdviceNumber: '092323EZ34245',
+            isMarketPlace: false,
           ),
         ).thenAnswer((invocation) async => PaymentInvoiceInfoPdf.empty());
 
@@ -797,6 +808,7 @@ void main() {
           ),
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          isMarketPlace: false,
         );
         expect(
           result.isRight(),
@@ -815,6 +827,7 @@ void main() {
             accountingDocExternalReference: '123',
             paymentBatchAdditionalInfo: '123',
             zzAdviceNumber: '092323EZ34245',
+            isMarketPlace: true,
           ),
         ).thenThrow((invocation) => MockException());
 
@@ -828,6 +841,7 @@ void main() {
           ),
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          isMarketPlace: true,
         );
         expect(
           result.isLeft(),
@@ -840,12 +854,14 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.fetchPaymentMethods(
             salesOrg: fakeSalesOrg.getValue(),
+            isMarketPlace: true,
           ),
         ).thenAnswer((invocation) async => [NewPaymentMethod.empty()]);
 
         final result = await nawPaymentsRepository.fetchPaymentMethods(
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          isMarketPlace: true,
         );
         expect(
           result.isRight(),
@@ -858,12 +874,14 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.fetchPaymentMethods(
             salesOrg: fakeSalesOrg.getValue(),
+            isMarketPlace: false,
           ),
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.fetchPaymentMethods(
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          isMarketPlace: false,
         );
         expect(
           result.isLeft(),
@@ -905,6 +923,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
           filter: CustomerPaymentFilter.empty(),
+          isMarketPlace: false,
         );
         expect(
           result.isRight(),
@@ -924,6 +943,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
           filter: CustomerPaymentFilter.empty(),
+          isMarketPlace: true,
         );
         expect(
           result.isLeft(),
@@ -941,6 +961,7 @@ void main() {
               CustomerPaymentFilter.empty(),
             ),
             baseUrl: domain,
+            isMarketPlace: false,
           ),
         ).thenAnswer((invocation) async => customerPaymentInfo);
 
@@ -948,6 +969,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
           filter: CustomerPaymentFilter.empty(),
+          isMarketPlace: false,
         );
         expect(
           result.isRight(),
@@ -965,6 +987,7 @@ void main() {
               CustomerPaymentFilter.empty(),
             ),
             baseUrl: domain,
+            isMarketPlace: true,
           ),
         ).thenThrow((invocation) => MockException());
 
@@ -972,6 +995,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
           filter: CustomerPaymentFilter.empty(),
+          isMarketPlace: true,
         );
         expect(
           result.isLeft(),

@@ -46,29 +46,31 @@ class _TotalAmountSection extends StatelessWidget {
       padding: const EdgeInsets.only(top: 8),
       child: Row(
         children: [
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: '${context.tr('Total')}: ',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ZPColors.darkGray,
-                      ),
-                ),
-                WidgetSpan(
-                  child: PriceComponent(
-                    key: WidgetKeys.totalAmountToPay,
-                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                    price: state.amountTotal.abs().toString(),
-                    type: state.negativeAmount
-                        ? PriceStyle.negativePrice
-                        : PriceStyle.commonPrice,
+          Expanded(
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: '${context.tr('Total')}: ',
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: ZPColors.darkGray,
+                        ),
                   ),
-                ),
-              ],
+                  WidgetSpan(
+                    child: PriceComponent(
+                      key: WidgetKeys.totalAmountToPay,
+                      salesOrgConfig:
+                          context.read<SalesOrgBloc>().state.configs,
+                      price: state.amountTotal.abs().toString(),
+                      type: state.negativeAmount
+                          ? PriceStyle.negativePrice
+                          : PriceStyle.commonPrice,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          const Spacer(),
           if (currentStep == 1)
             _NextButton(
               tabController: tabController,

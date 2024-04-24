@@ -74,6 +74,7 @@ class _BodyContent extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     key: WidgetKeys.accountSummaryButton,
+                    //TODO: Use context.isMPPayment for this in later ticket for this screen
                     onPressed: () => context.router
                         .push(AccountSummaryRoute(isMarketPlace: false)),
                     style:
@@ -111,6 +112,7 @@ class _BodyContent extends StatelessWidget {
                   child: ElevatedButton(
                     key: WidgetKeys.paymentSummaryRouteButton,
                     onPressed: () {
+                      //TODO: Use context.isMPPayment for this in later ticket for this screen
                       context.router
                           .push(PaymentSummaryPageRoute(isMarketPlace: false));
                     },

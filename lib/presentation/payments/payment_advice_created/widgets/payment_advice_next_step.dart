@@ -14,6 +14,7 @@ class _PaymentAdviceNextStep extends StatelessWidget {
       isScrollControlled: true,
       builder: (_) => DeleteCancelAdviceBottomSheet.delete(
         paymentAdviceNumber: paymentAdviceNumber,
+        isMarketPlace: context.isMPPayment,
       ),
     );
   }
@@ -102,10 +103,8 @@ class _PaymentAdviceNextStep extends StatelessWidget {
                     ),
                 children: [
                   TextSpan(
-                    text: context.tr(
-                      'delete',
-                    ),
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    text: context.tr('delete'),
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
                           color: ZPColors.extraDarkGreen,
                         ),
                     recognizer: TapGestureRecognizer()

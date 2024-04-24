@@ -25,6 +25,7 @@ class NewPaymentState with _$NewPaymentState {
     required CreateVirtualAccount createVirtualAccount,
     required bool isFetchingPrincipalCutoffs,
     required PrincipalCutoffs principalCutoffs,
+    required bool isMarketPlace,
   }) = _NewPaymentState;
 
   factory NewPaymentState.initial() => NewPaymentState(
@@ -48,6 +49,7 @@ class NewPaymentState with _$NewPaymentState {
         createVirtualAccount: CreateVirtualAccount.empty(),
         isFetchingPrincipalCutoffs: false,
         principalCutoffs: PrincipalCutoffs.empty(),
+        isMarketPlace: false,
       );
 
   double get amountTotal =>
@@ -93,6 +95,8 @@ class NewPaymentState with _$NewPaymentState {
         ? selectedPaymentMethod.paymentMethod.isPaymentGateway
             ? 'Please be patient ...'
             : 'Generating payment advice...'
-        : 'Payment advice generated';
+        : isMarketPlace
+            ? 'MP Payment advice generated'
+            : 'Payment advice generated';
   }
 }

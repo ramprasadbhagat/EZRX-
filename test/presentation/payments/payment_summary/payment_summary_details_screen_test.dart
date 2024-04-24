@@ -417,6 +417,7 @@ void main() {
         getWUT(
           child: DeleteCancelAdviceBottomSheet.delete(
             paymentAdviceNumber: '09EZ230000544601',
+            isMarketPlace: false,
           ),
         ),
       );
@@ -466,6 +467,7 @@ void main() {
         getWUT(
           child: DeleteCancelAdviceBottomSheet.delete(
             paymentAdviceNumber: '09EZ230000544601',
+            isMarketPlace: false,
           ),
         ),
       );
@@ -876,7 +878,7 @@ void main() {
 
       expect(
         find.text(
-          'Once deleted, payment advice cannot be recovered. You will be required to create a new payment advice to complete payment.',
+          'Payment advice #fake_id will be permanently deleted once you proceed. Please create a new payment advice for these invoices to complete the payment.',
         ),
         findsOneWidget,
       );

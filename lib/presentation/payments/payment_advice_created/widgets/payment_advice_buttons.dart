@@ -55,7 +55,9 @@ class _PaymentAdviceButtons extends StatelessWidget {
                     ),
                     onPressed: () {
                       context.router.popAndPush(
-                        PaymentSummaryPageRoute(isMarketPlace: false),
+                        PaymentSummaryPageRoute(
+                          isMarketPlace: context.isMPPayment,
+                        ),
                       );
                     },
                   ),

@@ -7,7 +7,11 @@ class NewPaymentEvent with _$NewPaymentEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
+    required bool isMarketPlace,
   }) = _initialized;
+
+  const factory NewPaymentEvent.fetchAvailablePaymentMethods() =
+      _FetchAvailablePaymentMethods;
 
   const factory NewPaymentEvent.updateAllInvoices({
     required List<CustomerOpenItem> items,

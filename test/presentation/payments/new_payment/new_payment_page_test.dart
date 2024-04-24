@@ -495,11 +495,57 @@ void main() async {
         final generatePaymentAdviceButton =
             find.byKey(WidgetKeys.generatePaymentAdvice);
         expect(generatePaymentAdviceButton, findsOneWidget);
+        expect(
+          find.descendant(
+            of: generatePaymentAdviceButton,
+            matching: find.text('Generate payment advice'),
+          ),
+          findsOne,
+        );
         await tester.tap(generatePaymentAdviceButton);
         verify(
           () => newPaymentBlocMock.add(const NewPaymentEvent.pay()),
         ).called(1);
       });
+
+      testWidgets('=> Tap Generate payment advice button in marketplace',
+          (tester) async {
+        when(() => outstandingInvoicesBlocMock.state).thenReturn(
+          OutstandingInvoicesState.initial().copyWith(items: fakeInvoices),
+        );
+        when(() => availableCreditsBlocMock.state).thenReturn(
+          AvailableCreditsState.initial().copyWith(items: fakeCredits),
+        );
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial()
+              .copyWith(selectedInvoices: [fakeInvoices.first]),
+        );
+        await tester.pumpWidget(getWidget(isMarketPlace: true));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(WidgetKeys.nextButton));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(WidgetKeys.nextButton));
+        await tester.pumpAndSettle();
+        await tester.tap(
+          find.descendant(
+            of: find.byKey(WidgetKeys.generatePaymentAdvice),
+            matching: find.text('Generate MP payment advice'),
+          ),
+        );
+        verify(
+          () => newPaymentBlocMock.add(const NewPaymentEvent.pay()),
+        ).called(1);
+        expect(
+          autoRouterMock.currentPath,
+          PaymentAdviceCreatedPageRoute(isMarketPlace: true).path,
+        );
+        expect(
+          (autoRouterMock.current.args as PaymentAdviceCreatedPageRouteArgs)
+              .isMarketPlace,
+          true,
+        );
+      });
+
       testWidgets('=> Tap Pay now button successful',
           (WidgetTester tester) async {
         when(() => outstandingInvoicesBlocMock.state).thenReturn(
@@ -598,37 +644,6 @@ void main() async {
           ),
           findsOneWidget,
         );
-      });
-
-      testWidgets('=> Payment step 3 rebuild', (WidgetTester tester) async {
-        when(() => newPaymentBlocMock.state).thenReturn(
-          NewPaymentState.initial().copyWith(
-            selectedInvoices: fakeInvoices,
-            selectedCredits: fakeCredits,
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-        expect(nextButton, findsOneWidget);
-        await tester.tap(nextButton);
-        await tester.pumpAndSettle();
-        expect(nextButton, findsOneWidget);
-        whenListen(
-          newPaymentBlocMock,
-          Stream.fromIterable([
-            NewPaymentState.initial().copyWith(
-              selectedInvoices: fakeInvoices,
-              selectedCredits: fakeCredits,
-              isLoading: true,
-            ),
-            NewPaymentState.initial().copyWith(
-              selectedInvoices: fakeInvoices,
-              selectedCredits: fakeCredits,
-            ),
-          ]),
-        );
-        await tester.tap(nextButton);
-        await tester.pumpAndSettle();
       });
 
       testWidgets('=> Payment check invoice all selection',

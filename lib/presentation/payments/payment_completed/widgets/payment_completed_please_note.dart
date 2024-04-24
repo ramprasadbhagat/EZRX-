@@ -41,6 +41,7 @@ class _PaymentCompletedPleaseNote extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: ZPColors.extraDarkGreen,
                         ),
+                    //TODO: Use context.isMPPayment for this in later ticket for this screen
                     recognizer: TapGestureRecognizer()
                       ..onTap = () => context.router
                           .push(PaymentSummaryPageRoute(isMarketPlace: false)),
