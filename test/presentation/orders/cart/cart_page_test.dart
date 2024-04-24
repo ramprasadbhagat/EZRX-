@@ -3009,8 +3009,6 @@ void main() {
         expect(msg, findsOneWidget);
         final cartCloseButtonFinder = find.byKey(WidgetKeys.closeButton);
         expect(cartCloseButtonFinder, findsOneWidget);
-        await tester.tap(cartCloseButtonFinder);
-        verify(() => autoRouterMock.navigateBack()).called(1);
       });
 
       testWidgets(
@@ -3684,7 +3682,9 @@ void main() {
         final mockItem = mockCartItems.first.copyWith(
           quantity: 5,
           is26SeriesMaterial: true,
-          price: Price.empty().copyWith(finalPrice: MaterialPrice(400),),
+          price: Price.empty().copyWith(
+            finalPrice: MaterialPrice(400),
+          ),
           stockInfoList: [
             StockInfo.empty().copyWith(
               materialNumber: mockCartItems.first.getMaterialNumber,

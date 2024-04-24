@@ -305,7 +305,9 @@ class _CartPageState extends State<CartPage> {
                   icon: const Icon(
                     Icons.close,
                   ),
-                  onPressed: () => context.router.navigateBack(),
+                  onPressed: () => context.router.removeUntil(
+                    (route) => route.path != 'orders/cart',
+                  ),
                 ),
                 actionWidget: state.cartProducts.isNotEmpty
                     ? [
