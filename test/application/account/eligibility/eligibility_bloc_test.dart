@@ -1193,7 +1193,7 @@ void main() {
               fakeSGSalesOrgConfigs.copyWith(disableReturnsAccess: true),
         );
 
-        expect(eligibilityState.isReturnsEnable, false);
+        expect(eligibilityState.isReturnsEnable, true);
       },
     );
   });

@@ -29,16 +29,16 @@ class EligibilityState with _$EligibilityState {
       );
 
   bool get isReturnsEnable {
-    if (user.role.type.isSalesRepRole &&
-        salesOrgConfigs.disableReturnsAccessSR) {
+    final salesRepRoleAndDisabled =
+        user.role.type.isSalesRepRole && salesOrgConfigs.disableReturnsAccessSR;
+
+    final customerAndDisabled =
+        user.role.type.isCustomer && salesOrgConfigs.disableReturnsAccess;
+
+    // If returns are disabled at user level respective of their role, return false
+    if (user.disableReturns || salesRepRoleAndDisabled || customerAndDisabled) {
       return false;
     }
-
-    if (salesOrgConfigs.disableReturnsAccess) {
-      return false;
-    }
-
-    if (user.isCustomerWithReturnDisable) return false;
 
     return true;
   }

@@ -35,6 +35,7 @@ import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
@@ -318,6 +319,24 @@ void main() {
     );
 
     testWidgets(
+      ' -> Show returnTile when Disable Returns for Customers is ON and Disable Returns for SalesRep is OFF for SalesRep User',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs.copyWith(
+              disableReturnsAccess: true,
+            ),
+            user: fakeSalesRepUser,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        expect(returnsTile, findsOneWidget);
+      },
+    );
+
+    testWidgets(
       ' -> Hide paymentsTile when Enable Payment Configuration is off',
       (WidgetTester tester) async {
         VisibilityDetectorController.instance.updateInterval = Duration.zero;
@@ -503,7 +522,7 @@ void main() {
         await getWidget(tester);
         await tester.pump();
         final returnsTileFinder = find.byKey(WidgetKeys.returnsTile);
-        expect(returnsTileFinder, findsNothing);
+        expect(returnsTileFinder, findsOneWidget);
         final paymentsTileFinder = find.byKey(WidgetKeys.paymentsTile);
         expect(paymentsTileFinder, findsNothing);
       },

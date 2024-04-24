@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
@@ -227,5 +228,29 @@ void main() {
         },
       );
     });
+
+    group('Test homeQuickAccessReturnMenu', () {
+    
+      testWidgets(
+        ' -> Show returnTile when Disable Returns for Customers is ON and Disable Returns for SalesRep is OFF for SalesRep User',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeMYSalesOrgConfigs.copyWith(
+                disableReturnsAccess: true,
+              ),
+              user: fakeSalesRepUser,
+            ),
+          );
+
+          await getWidget(tester);
+          await tester.pumpAndSettle();
+          final returnTile =
+              find.byKey(WidgetKeys.homeQuickAccessReturnsMenu);
+          expect(returnTile, findsOneWidget);
+        },
+      );
+    });
+
   });
 }

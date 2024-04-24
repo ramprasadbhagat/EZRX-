@@ -180,7 +180,4 @@ class User with _$User {
 
   bool get isCustomerWithPaymentsDisable =>
       role.type.isCustomer && disablePaymentAccess;
-
-  bool get isCustomerWithReturnDisable =>
-      role.type.isCustomer && disableReturns;
 }
