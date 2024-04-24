@@ -209,6 +209,7 @@ void main() {
   final covidMaterialUnitPrice = 'Price Not Available'.tr();
   final covidMaterialTotalPrice = covidMaterialUnitPrice;
   const cartTotalPriceForCovidMaterial = 0.0;
+  const twentySixSeriesMaterialNumber = '26031206';
 
   var loginRequired = true;
 
@@ -1316,6 +1317,19 @@ void main() {
       productSuggestionRobot.verifyClearHistoryBottomSheet(isVisible: false);
       productSuggestionRobot.verifySearchHistory(isVisible: false);
       productSuggestionRobot.verifyNoSearchHistory();
+    });
+
+    testWidgets(
+        'EZRX-T1435 | Check whether Customer user able to see sample material (26 series) in Product tab or not',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+
+      await productRobot.navigateToScreen(NavigationTab.products);
+      productRobot.verifySearchBarVisible();
+      await productRobot.openSearchProductScreen();
+       await productSuggestionRobot
+          .searchWithKeyboardAction(twentySixSeriesMaterialNumber);
+      productSuggestionRobot.verifyNoRecordFound();
     });
   });
 

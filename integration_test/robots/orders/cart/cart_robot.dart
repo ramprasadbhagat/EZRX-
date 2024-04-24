@@ -990,4 +990,18 @@ class CartRobot {
       findsOneWidget,
     );
   }
+
+  //============================================================
+  //  26 series material for SG
+  //============================================================
+
+  void verifyTwentySixSeriesMessage() {
+    expect(
+      find.text(
+        'Your cart must contain other commercial material to proceed checkout.'
+            .tr(),
+      ),
+      findsOneWidget,
+    );
+  }
 }

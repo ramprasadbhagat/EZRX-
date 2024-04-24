@@ -155,6 +155,9 @@ void main() {
   const bonusMaterialNumberTierQty = 6;
   const bonusMaterialNumberUnitPrice = 10.60;
   const anotherMaterialNumber = '23008054';
+  const twentySixSeriesUserName = 'sgfre_n.cho';
+  const twentySixSeriesShipToCode = '0070042061';
+  const twentySixSeriesMaterialNumber = '26031206';
 
   final materialStockInfo =
       StockInfo.empty().copyWith(expiryDate: DateTimeStringValue('2025-12-31'));
@@ -1321,6 +1324,41 @@ void main() {
       await productRobot.filterFavoritesInProductsScreen();
       productRobot.verifyProductFilter(materialName, matched: false);
     });
+
+    testWidgets(
+        'EZRX-T1438 | [SG]  Check whether salesrep user able to see sample material (26 series) in Product details page tab or not ',
+        (tester) async {
+
+      final productPrice = 'Price Not Available'.tr();    
+
+      //init app
+      await pumpAppWithLoginOnBehalf(
+        tester,
+        behalfName: twentySixSeriesUserName,
+      );
+
+      // select customer code
+      commonRobot.verifyCustomerCodeSelector();
+      await commonRobot.tapCustomerCodeSelector();
+      customerSearchRobot.verifyPage();
+      customerSearchRobot.findCustomerCodeSearchField();
+      await customerSearchRobot.search(twentySixSeriesShipToCode);
+
+      // change address
+      customerSearchRobot.findCustomerCode(twentySixSeriesShipToCode);
+      await customerSearchRobot.tapOnCustomerCode(twentySixSeriesShipToCode);
+
+      await browseProductFromEmptyCart();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(twentySixSeriesMaterialNumber);
+      await productSuggestionRobot
+          .tapSearchResult(twentySixSeriesMaterialNumber);
+
+      //verify Price Not Available
+      productDetailRobot.verifyCurrentProductPrice(productPrice);
+      //verify Add to Cart button
+      await productDetailRobot.tapAddToCart();
+    });
   });
 
   group('Cart -', () {
@@ -2154,6 +2192,54 @@ void main() {
       // await productDetailRobot.tapCartButton();
       // cartRobot.verifyPage();
       // cartRobot.verifyNoRecordFound();
+    });
+
+    testWidgets(
+        'EZRX-T1439 | [SG] Check whether salesrep user cart page with sample materials whether counter offer and add bonus displaying or not ',
+        (tester) async {
+      //init app
+      await pumpAppWithLoginOnBehalf(
+        tester,
+        behalfName: twentySixSeriesUserName,
+      );
+
+      // select customer code
+      commonRobot.verifyCustomerCodeSelector();
+      await commonRobot.tapCustomerCodeSelector();
+      customerSearchRobot.verifyPage();
+      customerSearchRobot.findCustomerCodeSearchField();
+      await customerSearchRobot.search(twentySixSeriesShipToCode);
+
+      // change address
+      customerSearchRobot.findCustomerCode(twentySixSeriesShipToCode);
+      await customerSearchRobot.tapOnCustomerCode(twentySixSeriesShipToCode);
+
+      await browseProductFromEmptyCart();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(twentySixSeriesMaterialNumber);
+      await productSuggestionRobot
+          .tapSearchResult(twentySixSeriesMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+
+      //verify cart item
+      cartRobot.verifyClearCartButton();
+      await cartRobot.verifyMaterial(twentySixSeriesMaterialNumber);
+      cartRobot.verifyMaterialNumber(twentySixSeriesMaterialNumber);
+      cartRobot.verifyMaterialImage(twentySixSeriesMaterialNumber);
+      cartRobot.verifyMaterialQty(twentySixSeriesMaterialNumber, 1);
+
+      //verify Bonus and counter offer not visible
+      cartRobot.verifyMaterialBonusSampleButton(
+        twentySixSeriesMaterialNumber,
+        isVisible: false,
+      );
+      cartRobot.verifyMaterialCounterOfferButton(
+        twentySixSeriesMaterialNumber,
+        isVisible: false,
+      );
+      //verify 26 series message when cart contain only 26 series material
+      cartRobot.verifyTwentySixSeriesMessage();
     });
   });
 
