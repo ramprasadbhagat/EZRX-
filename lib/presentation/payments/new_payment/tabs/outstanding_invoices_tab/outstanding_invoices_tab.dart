@@ -182,9 +182,7 @@ class _FilterTune extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OutstandingInvoicesBloc, OutstandingInvoicesState>(
-      buildWhen: (previous, current) =>
-          previous.appliedFilter.appliedFilterCount !=
-          current.appliedFilter.appliedFilterCount,
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return CustomBadge(
           Icons.tune_outlined,
