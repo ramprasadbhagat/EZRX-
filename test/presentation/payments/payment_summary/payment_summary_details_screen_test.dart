@@ -868,7 +868,7 @@ void main() {
       );
       await tester.pump();
       final openAdviceButton = find.byKey(WidgetKeys.downloadAdviceButtonKey);
-      final openAdviceText = find.text('Open payment advice');
+      final openAdviceText = find.text('Open advice');
       expect(openAdviceText, findsOneWidget);
       await tester.tap(openAdviceButton);
       verify(

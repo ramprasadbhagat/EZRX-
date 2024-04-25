@@ -182,14 +182,13 @@ class _DownloadAdviceButton extends StatelessWidget {
             color: ZPColors.primary,
           ),
         ),
-        child: SizedBox(
-          height: 20,
+        child: FittedBox(
           child: LoadingShimmer.withChild(
             enabled: state.isSavingAdvice,
             child: Text(
               state.isSavedAdviceEmpty
                   ? context.tr('Download advice')
-                  : context.tr('Open payment advice'),
+                  : context.tr('Open advice'),
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: ZPColors.primary,
                   ),
