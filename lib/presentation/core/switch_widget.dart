@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class SwitchWidget extends StatelessWidget {
   final bool value;
   final bool disable;
-  final Function(bool)? onChanged;
+  final Function(bool) onChanged;
   const SwitchWidget({
     super.key,
     this.disable = false,
     this.value = false,
-    this.onChanged,
+    required this.onChanged,
   });
 
   @override
@@ -37,7 +37,7 @@ class SwitchWidget extends StatelessWidget {
         },
       ),
       value: value,
-      onChanged: disable ? null : onChanged,
+      onChanged: onChanged,
     );
   }
 }

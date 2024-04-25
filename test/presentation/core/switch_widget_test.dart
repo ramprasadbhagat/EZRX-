@@ -22,8 +22,10 @@ void main() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
-      child: const Material(
-        child: SwitchWidget(),
+      child: Material(
+        child: SwitchWidget(
+          onChanged: (value) => null,
+        ),
       ),
     );
   }

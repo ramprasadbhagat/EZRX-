@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
@@ -56,6 +57,10 @@ class ProductImageMockBloc
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class TenderContractDetailBlocMock
+    extends MockBloc<TenderContractDetailEvent, TenderContractDetailState>
+    implements TenderContractDetailBloc {}
+
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
@@ -82,15 +87,20 @@ void main() {
   final mockProductImageBloc = ProductImageMockBloc();
   late Map<MaterialNumber, Price> mockPriceList;
   final comboDealListMockBloc = ComboDealListMockBloc();
+  late TenderContractDetailBloc tenderContractDetailBloc;
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerFactory<ProductDetailBloc>(() => productDetailBloc);
+    locator.registerFactory<TenderContractDetailBloc>(
+      () => tenderContractDetailBloc,
+    );
     // locator.registerFactory<ProductDetailEvent>(() => productDetailBloc);
   });
   group('ProductDetail page', () {
     setUp(() {
       userBlocMock = UserBlocMock();
+      tenderContractDetailBloc = TenderContractDetailBlocMock();
       autoRouterMock = locator<AppRouter>();
       productDetailBloc = ProductDetailMockBloc();
       customerCodeBlocMock = CustomerCodeBlocMock();
@@ -102,6 +112,8 @@ void main() {
           .thenReturn(EligibilityState.initial());
       when(() => productDetailBloc.state)
           .thenReturn(ProductDetailState.initial());
+      when(() => tenderContractDetailBloc.state)
+          .thenReturn(TenderContractDetailState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dar
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -135,73 +136,77 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             materialInfo: widget.materialInfo,
           ),
         ),
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: CustomAppBar.commonAppBar(
-          automaticallyImplyLeading: false,
-          backGroundColor:
-              _isScrollAtInitialPosition ? Colors.transparent : ZPColors.white,
-          leadingWidget: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: CircleAvatar(
-              maxRadius: 16,
-              backgroundColor: _isScrollAtInitialPosition
-                  ? ZPColors.darkGray
-                  : ZPColors.transparent,
-              child: Icon(
-                Icons.chevron_left,
-                color: _isScrollAtInitialPosition
-                    ? ZPColors.white
-                    : ZPColors.black,
-                key: WidgetKeys.materialDetailsPageBack,
-              ),
-            ),
-          ),
-          actionWidget: [
-            Padding(
-              key: WidgetKeys.materialDetailsPageCartIcon,
-              padding: const EdgeInsets.all(10),
-              child: CartButton(
-                backgroundCartColor: _isScrollAtInitialPosition
+      child: BlocProvider<TenderContractDetailBloc>(
+        create: (context) => locator<TenderContractDetailBloc>(),
+        child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: CustomAppBar.commonAppBar(
+            automaticallyImplyLeading: false,
+            backGroundColor: _isScrollAtInitialPosition
+                ? Colors.transparent
+                : ZPColors.white,
+            leadingWidget: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: CircleAvatar(
+                maxRadius: 16,
+                backgroundColor: _isScrollAtInitialPosition
                     ? ZPColors.darkGray
                     : ZPColors.transparent,
-                cartColor: _isScrollAtInitialPosition
-                    ? ZPColors.white
-                    : ZPColors.black,
-                iconSize: 20,
-                positionTop: -8,
-                isPriceResetApplicable: true,
+                child: Icon(
+                  Icons.chevron_left,
+                  color: _isScrollAtInitialPosition
+                      ? ZPColors.white
+                      : ZPColors.black,
+                  key: WidgetKeys.materialDetailsPageBack,
+                ),
               ),
             ),
-          ],
-          customerBlockedOrSuspended:
-              context.read<EligibilityBloc>().state.customerBlockOrSuspended,
-        ),
-        floatingActionButton: !_isScrollAtInitialPosition
-            ? FloatingActionButton(
-                key: WidgetKeys.materialDetailsFloatingButton,
-                onPressed: () => _scrollToTop(),
-                mini: true,
-                backgroundColor: ZPColors.secondaryMustard,
-                child: const Icon(
-                  Icons.expand_less,
-                  color: ZPColors.black,
+            actionWidget: [
+              Padding(
+                key: WidgetKeys.materialDetailsPageCartIcon,
+                padding: const EdgeInsets.all(10),
+                child: CartButton(
+                  backgroundCartColor: _isScrollAtInitialPosition
+                      ? ZPColors.darkGray
+                      : ZPColors.transparent,
+                  cartColor: _isScrollAtInitialPosition
+                      ? ZPColors.white
+                      : ZPColors.black,
+                  iconSize: 20,
+                  positionTop: -8,
+                  isPriceResetApplicable: true,
                 ),
-              )
-            : const SizedBox.shrink(),
-        body: ListView(
-          key: WidgetKeys.scrollList,
-          controller: _scrollController,
-          children: [
-            const LicenseExpiredBanner(),
-            const EdiUserBanner(),
-            const _ProductImageSection(),
-            const _BodyContent(),
-            _SimilarProducts(),
-          ],
-        ),
-        bottomNavigationBar: _Footer(
-          banner: widget.banner,
+              ),
+            ],
+            customerBlockedOrSuspended:
+                context.read<EligibilityBloc>().state.customerBlockOrSuspended,
+          ),
+          floatingActionButton: !_isScrollAtInitialPosition
+              ? FloatingActionButton(
+                  key: WidgetKeys.materialDetailsFloatingButton,
+                  onPressed: () => _scrollToTop(),
+                  mini: true,
+                  backgroundColor: ZPColors.secondaryMustard,
+                  child: const Icon(
+                    Icons.expand_less,
+                    color: ZPColors.black,
+                  ),
+                )
+              : const SizedBox.shrink(),
+          body: ListView(
+            key: WidgetKeys.scrollList,
+            controller: _scrollController,
+            children: [
+              const LicenseExpiredBanner(),
+              const EdiUserBanner(),
+              const _ProductImageSection(),
+              const _BodyContent(),
+              _SimilarProducts(),
+            ],
+          ),
+          bottomNavigationBar: _Footer(
+            banner: widget.banner,
+          ),
         ),
       ),
     );
@@ -483,6 +488,12 @@ class _FooterState extends State<_Footer> {
       context
           .read<ProductDetailBloc>()
           .add(ProductDetailEvent.updateQty(qty: qty));
+
+      context.read<TenderContractDetailBloc>().add(
+            TenderContractDetailEvent.updateQty(
+              qty: qty,
+            ),
+          );
     });
     super.initState();
   }
@@ -568,173 +579,199 @@ class _FooterState extends State<_Footer> {
           builder: (context, state) {
             final materialInfo = state.productDetailAggregate.materialInfo;
 
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (materialInfo.isSuspended)
-                  InfoLabel(
-                    textValue:
-                        context.tr('This material is currently suspended'),
-                    key: WidgetKeys.productDetailSuspended,
-                    margin: const EdgeInsets.only(
-                      top: 16,
-                      bottom: 8,
-                    ),
-                  ),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            return BlocBuilder<TenderContractDetailBloc,
+                TenderContractDetailState>(
+              buildWhen: (previous, current) =>
+                  previous.isExceedQty != current.isExceedQty,
+              builder: (context, tenderState) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Expanded(
-                      flex: 5,
-                      child: CartItemQuantityInput(
-                        key: WidgetKeys.materialDetailsQuantityInput,
-                        addPressed: (value) {
-                          context.read<ProductDetailBloc>().add(
-                                ProductDetailEvent
-                                    .fetchItemQuantityForZdp5Discount(
-                                  quantity: int.parse(
-                                    _quantityEditingController.text,
-                                  ),
-                                ),
-                              );
-                        },
-                        controller: _quantityEditingController,
-                        isEnabled: !materialInfo.isSuspended,
-                        onFieldChange: (value) {},
-                        onSubmit: (value) {
-                          context.read<ProductDetailBloc>().add(
-                                ProductDetailEvent
-                                    .fetchItemQuantityForZdp5Discount(
-                                  quantity: int.parse(
-                                    _quantityEditingController.text,
-                                  ),
-                                ),
-                              );
-                        },
-                        quantityAddKey: WidgetKeys.productDetailQuantityAddKey,
-                        quantityDeleteKey:
-                            WidgetKeys.productDetailQuantityDeleteKey,
-                        quantityTextKey:
-                            WidgetKeys.productDetailQuantityTextKey,
-                        minusPressed: (value) {
-                          context.read<ProductDetailBloc>().add(
-                                ProductDetailEvent
-                                    .fetchItemQuantityForZdp5Discount(
-                                  quantity: int.parse(
-                                    _quantityEditingController.text,
-                                  ),
-                                ),
-                              );
-                        },
-                        height: MediaQuery.of(context).size.height * 0.056,
+                    if (materialInfo.isSuspended)
+                      InfoLabel(
+                        textValue:
+                            context.tr('This material is currently suspended'),
+                        key: WidgetKeys.productDetailSuspended,
+                        margin: const EdgeInsets.only(
+                          top: 16,
+                          bottom: 8,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      flex: 4,
-                      key: WidgetKeys.materialDetailsAddToCartButton,
-                      child: BlocConsumer<CartBloc, CartState>(
-                        listenWhen: (previous, current) =>
-                            previous.isUpserting != current.isUpserting,
-                        listener: (context, state) {
-                          if (context.routeData != context.router.current) {
-                            return;
-                          }
-
-                          state.apiFailureOrSuccessOption.fold(
-                            () {
-                              if (!state.isUpserting &&
-                                  context.router.current.path ==
-                                      'orders/material_details') {
-                                _trackAddToCartSuccess(
-                                  context,
-                                  state,
-                                  materialInfo,
-                                  qty,
-                                  banner: widget.banner,
-                                );
-
-                                CustomSnackBar(
-                                  key: WidgetKeys
-                                      .materialDetailsAddToCartSnackBar,
-                                  messageText:
-                                      context.tr('Item has been added to cart'),
-                                ).show(context);
-                              }
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: CartItemQuantityInput(
+                            key: WidgetKeys.materialDetailsQuantityInput,
+                            addPressed: (value) {
+                              context.read<ProductDetailBloc>().add(
+                                    ProductDetailEvent
+                                        .fetchItemQuantityForZdp5Discount(
+                                      quantity: int.parse(
+                                        _quantityEditingController.text,
+                                      ),
+                                    ),
+                                  );
                             },
-                            (either) => either.fold(
-                              (failure) =>
-                                  _trackAddToCartFailure(context, failure),
-                              (_) {},
-                            ),
-                          );
-                        },
-                        buildWhen: (previous, current) =>
-                            previous.isUpserting != current.isUpserting ||
-                            previous.isFetching != current.isFetching ||
-                            previous.isClearing != current.isClearing,
-                        builder: (context, stateCart) {
-                          final price = context
-                                  .read<MaterialPriceBloc>()
-                                  .state
-                                  .materialPrice[materialInfo.materialNumber] ??
-                              Price.empty();
+                            controller: _quantityEditingController,
+                            isEnabled: !materialInfo.isSuspended,
+                            onFieldChange: (value) {},
+                            onSubmit: (value) {
+                              context.read<ProductDetailBloc>().add(
+                                    ProductDetailEvent
+                                        .fetchItemQuantityForZdp5Discount(
+                                      quantity: int.parse(
+                                        _quantityEditingController.text,
+                                      ),
+                                    ),
+                                  );
+                            },
+                            quantityAddKey:
+                                WidgetKeys.productDetailQuantityAddKey,
+                            quantityDeleteKey:
+                                WidgetKeys.productDetailQuantityDeleteKey,
+                            quantityTextKey:
+                                WidgetKeys.productDetailQuantityTextKey,
+                            minusPressed: (value) {
+                              context.read<ProductDetailBloc>().add(
+                                    ProductDetailEvent
+                                        .fetchItemQuantityForZdp5Discount(
+                                      quantity: int.parse(
+                                        _quantityEditingController.text,
+                                      ),
+                                    ),
+                                  );
+                            },
+                            height: MediaQuery.of(context).size.height * 0.056,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          flex: 4,
+                          key: WidgetKeys.materialDetailsAddToCartButton,
+                          child: BlocConsumer<CartBloc, CartState>(
+                            listenWhen: (previous, current) =>
+                                previous.isUpserting != current.isUpserting,
+                            listener: (context, state) {
+                              if (context.routeData != context.router.current) {
+                                return;
+                              }
 
-                          return LoadingShimmer.withChild(
-                            enabled: stateCart.isUpserting ||
-                                state.isDetailAndStockFetching,
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: stateCart.isUpserting ||
-                                        state.isDetailAndStockFetching ||
-                                        !isEligibleForAddToCart(
-                                          context: context,
-                                          productDetailState: state,
-                                        )
-                                    ? null
-                                    : () {
-                                        _addToCart(
-                                          context: context,
-                                          state: state,
-                                          stateCart: stateCart,
-                                          price: price,
-                                          banner: widget.banner,
-                                          quantityText:
-                                              _quantityEditingController.text,
-                                        );
-                                      },
-                                child: Text(
-                                  context.tr('Add to cart'),
-                                  style: const TextStyle(
-                                    color: ZPColors.white,
+                              state.apiFailureOrSuccessOption.fold(
+                                () {
+                                  if (!state.isUpserting &&
+                                      context.router.current.path ==
+                                          'orders/material_details') {
+                                    _trackAddToCartSuccess(
+                                      context,
+                                      state,
+                                      materialInfo,
+                                      qty,
+                                      banner: widget.banner,
+                                    );
+
+                                    CustomSnackBar(
+                                      key: WidgetKeys
+                                          .materialDetailsAddToCartSnackBar,
+                                      messageText: context
+                                          .tr('Item has been added to cart'),
+                                    ).show(context);
+                                  }
+                                },
+                                (either) => either.fold(
+                                  (failure) =>
+                                      _trackAddToCartFailure(context, failure),
+                                  (_) {},
+                                ),
+                              );
+                            },
+                            buildWhen: (previous, current) =>
+                                previous.isUpserting != current.isUpserting ||
+                                previous.isFetching != current.isFetching ||
+                                previous.isClearing != current.isClearing,
+                            builder: (context, stateCart) {
+                              final price = context
+                                          .read<MaterialPriceBloc>()
+                                          .state
+                                          .materialPrice[
+                                      materialInfo.materialNumber] ??
+                                  Price.empty();
+
+                              return LoadingShimmer.withChild(
+                                enabled: stateCart.isUpserting ||
+                                    state.isDetailAndStockFetching,
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed: stateCart.isUpserting ||
+                                            state.isDetailAndStockFetching ||
+                                            !isEligibleForAddToCart(
+                                              context: context,
+                                              productDetailState: state,
+                                            ) ||
+                                            tenderState.isExceedQty
+                                        ? null
+                                        : () {
+                                            _addToCart(
+                                              context: context,
+                                              state: state,
+                                              stateCart: stateCart,
+                                              price: price,
+                                              banner: widget.banner,
+                                              quantityText:
+                                                  _quantityEditingController
+                                                      .text,
+                                            );
+                                          },
+                                    child: Text(
+                                      context.tr('Add to cart'),
+                                      style: const TextStyle(
+                                        color: ZPColors.white,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          );
-                        },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (context
+                        .read<EligibilityBloc>()
+                        .state
+                        .salesOrg
+                        .isID) ...[
+                      if (state.eligibleForStockError)
+                        ErrorTextWithIcon(
+                          valueText: context.tr(
+                            'You have exceed the available qty for this item',
+                          ),
+                        ),
+                      _StockQuantity(
+                        state: state,
                       ),
+                    ],
+                    if (tenderState.isExceedQty)
+                      ErrorTextWithIcon(
+                        valueText: context.tr(
+                          'Maximum tender qty: {maxQty}',
+                          namedArgs: {
+                            'maxQty': tenderState
+                                .currentTenderContract.remainingTenderQuantity
+                                .toString(),
+                          },
+                        ),
+                      ),
+                    SizedBox(
+                      height: MediaQuery.of(context).viewInsets.bottom * 1.2,
                     ),
                   ],
-                ),
-                if (context.read<EligibilityBloc>().state.salesOrg.isID) ...[
-                  if (state.eligibleForStockError)
-                    ErrorTextWithIcon(
-                      valueText: context.tr(
-                        'You have exceed the available qty for this item',
-                      ),
-                    ),
-                  _StockQuantity(
-                    state: state,
-                  ),
-                ],
-                SizedBox(
-                  height: MediaQuery.of(context).viewInsets.bottom * 1.2,
-                ),
-              ],
+                );
+              },
             );
           },
         ),

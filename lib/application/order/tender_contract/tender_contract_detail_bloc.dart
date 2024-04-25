@@ -78,6 +78,13 @@ class TenderContractDetailBloc
           ),
         );
       },
+      updateQty: (e) {
+        emit(
+          state.copyWith(
+            inputQty: e.qty,
+          ),
+        );
+      },
     );
   }
 }

@@ -25,6 +25,7 @@ mixin _$TenderContractDetailEvent {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)
         fetch,
+    required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
   }) =>
@@ -38,6 +39,7 @@ mixin _$TenderContractDetailEvent {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)?
         fetch,
+    TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
   }) =>
@@ -51,6 +53,7 @@ mixin _$TenderContractDetailEvent {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)?
         fetch,
+    TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
     required TResult orElse(),
@@ -60,6 +63,7 @@ mixin _$TenderContractDetailEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
   }) =>
@@ -68,6 +72,7 @@ mixin _$TenderContractDetailEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
   }) =>
@@ -76,6 +81,7 @@ mixin _$TenderContractDetailEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
     required TResult orElse(),
@@ -147,6 +153,7 @@ class _$InitializedImpl implements _Initialized {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)
         fetch,
+    required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
   }) {
@@ -163,6 +170,7 @@ class _$InitializedImpl implements _Initialized {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)?
         fetch,
+    TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
   }) {
@@ -179,6 +187,7 @@ class _$InitializedImpl implements _Initialized {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)?
         fetch,
+    TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
     required TResult orElse(),
@@ -194,6 +203,7 @@ class _$InitializedImpl implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
   }) {
@@ -205,6 +215,7 @@ class _$InitializedImpl implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
   }) {
@@ -216,6 +227,7 @@ class _$InitializedImpl implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
     required TResult orElse(),
@@ -367,6 +379,7 @@ class _$FetchImpl implements _Fetch {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)
         fetch,
+    required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
   }) {
@@ -384,6 +397,7 @@ class _$FetchImpl implements _Fetch {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)?
         fetch,
+    TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
   }) {
@@ -401,6 +415,7 @@ class _$FetchImpl implements _Fetch {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)?
         fetch,
+    TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
     required TResult orElse(),
@@ -417,6 +432,7 @@ class _$FetchImpl implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
   }) {
@@ -428,6 +444,7 @@ class _$FetchImpl implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
   }) {
@@ -439,6 +456,7 @@ class _$FetchImpl implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
     required TResult orElse(),
@@ -463,6 +481,172 @@ abstract class _Fetch implements TenderContractDetailEvent {
   MaterialNumber get materialNumber;
   @JsonKey(ignore: true)
   _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateQtyImplCopyWith<$Res> {
+  factory _$$UpdateQtyImplCopyWith(
+          _$UpdateQtyImpl value, $Res Function(_$UpdateQtyImpl) then) =
+      __$$UpdateQtyImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int qty});
+}
+
+/// @nodoc
+class __$$UpdateQtyImplCopyWithImpl<$Res>
+    extends _$TenderContractDetailEventCopyWithImpl<$Res, _$UpdateQtyImpl>
+    implements _$$UpdateQtyImplCopyWith<$Res> {
+  __$$UpdateQtyImplCopyWithImpl(
+      _$UpdateQtyImpl _value, $Res Function(_$UpdateQtyImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? qty = null,
+  }) {
+    return _then(_$UpdateQtyImpl(
+      qty: null == qty
+          ? _value.qty
+          : qty // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateQtyImpl implements _UpdateQty {
+  const _$UpdateQtyImpl({required this.qty});
+
+  @override
+  final int qty;
+
+  @override
+  String toString() {
+    return 'TenderContractDetailEvent.updateQty(qty: $qty)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateQtyImpl &&
+            (identical(other.qty, qty) || other.qty == qty));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, qty);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateQtyImplCopyWith<_$UpdateQtyImpl> get copyWith =>
+      __$$UpdateQtyImplCopyWithImpl<_$UpdateQtyImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialNumber materialNumber)
+        fetch,
+    required TResult Function(int qty) updateQty,
+    required TResult Function(TenderContract tenderContract) select,
+    required TResult Function(bool enable) toggleSwitch,
+  }) {
+    return updateQty(qty);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialNumber materialNumber)?
+        fetch,
+    TResult? Function(int qty)? updateQty,
+    TResult? Function(TenderContract tenderContract)? select,
+    TResult? Function(bool enable)? toggleSwitch,
+  }) {
+    return updateQty?.call(qty);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialNumber materialNumber)?
+        fetch,
+    TResult Function(int qty)? updateQty,
+    TResult Function(TenderContract tenderContract)? select,
+    TResult Function(bool enable)? toggleSwitch,
+    required TResult orElse(),
+  }) {
+    if (updateQty != null) {
+      return updateQty(qty);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_Select value) select,
+    required TResult Function(_ToggleSwitch value) toggleSwitch,
+  }) {
+    return updateQty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_Select value)? select,
+    TResult? Function(_ToggleSwitch value)? toggleSwitch,
+  }) {
+    return updateQty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_Select value)? select,
+    TResult Function(_ToggleSwitch value)? toggleSwitch,
+    required TResult orElse(),
+  }) {
+    if (updateQty != null) {
+      return updateQty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateQty implements TenderContractDetailEvent {
+  const factory _UpdateQty({required final int qty}) = _$UpdateQtyImpl;
+
+  int get qty;
+  @JsonKey(ignore: true)
+  _$$UpdateQtyImplCopyWith<_$UpdateQtyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -548,6 +732,7 @@ class _$SelectImpl implements _Select {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)
         fetch,
+    required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
   }) {
@@ -564,6 +749,7 @@ class _$SelectImpl implements _Select {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)?
         fetch,
+    TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
   }) {
@@ -580,6 +766,7 @@ class _$SelectImpl implements _Select {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)?
         fetch,
+    TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
     required TResult orElse(),
@@ -595,6 +782,7 @@ class _$SelectImpl implements _Select {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
   }) {
@@ -606,6 +794,7 @@ class _$SelectImpl implements _Select {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
   }) {
@@ -617,6 +806,7 @@ class _$SelectImpl implements _Select {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
     required TResult orElse(),
@@ -709,6 +899,7 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)
         fetch,
+    required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
   }) {
@@ -725,6 +916,7 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)?
         fetch,
+    TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
   }) {
@@ -741,6 +933,7 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
             ShipToInfo shipToInfo,
             MaterialNumber materialNumber)?
         fetch,
+    TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
     required TResult orElse(),
@@ -756,6 +949,7 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
   }) {
@@ -767,6 +961,7 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
   }) {
@@ -778,6 +973,7 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
     required TResult orElse(),
@@ -809,6 +1005,7 @@ mixin _$TenderContractDetailState {
   bool get isFetching => throw _privateConstructorUsedError;
   TenderContract get selectedTenderContract =>
       throw _privateConstructorUsedError;
+  int get inputQty => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TenderContractDetailStateCopyWith<TenderContractDetailState> get copyWith =>
@@ -826,7 +1023,8 @@ abstract class $TenderContractDetailStateCopyWith<$Res> {
       bool tenderContractEnable,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching,
-      TenderContract selectedTenderContract});
+      TenderContract selectedTenderContract,
+      int inputQty});
 
   $TenderContractCopyWith<$Res> get selectedTenderContract;
 }
@@ -850,6 +1048,7 @@ class _$TenderContractDetailStateCopyWithImpl<$Res,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
     Object? selectedTenderContract = null,
+    Object? inputQty = null,
   }) {
     return _then(_value.copyWith(
       tenderContractList: null == tenderContractList
@@ -872,6 +1071,10 @@ class _$TenderContractDetailStateCopyWithImpl<$Res,
           ? _value.selectedTenderContract
           : selectedTenderContract // ignore: cast_nullable_to_non_nullable
               as TenderContract,
+      inputQty: null == inputQty
+          ? _value.inputQty
+          : inputQty // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -899,7 +1102,8 @@ abstract class _$$TenderContractDetailStateImplCopyWith<$Res>
       bool tenderContractEnable,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching,
-      TenderContract selectedTenderContract});
+      TenderContract selectedTenderContract,
+      int inputQty});
 
   @override
   $TenderContractCopyWith<$Res> get selectedTenderContract;
@@ -923,6 +1127,7 @@ class __$$TenderContractDetailStateImplCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
     Object? selectedTenderContract = null,
+    Object? inputQty = null,
   }) {
     return _then(_$TenderContractDetailStateImpl(
       tenderContractList: null == tenderContractList
@@ -945,20 +1150,26 @@ class __$$TenderContractDetailStateImplCopyWithImpl<$Res>
           ? _value.selectedTenderContract
           : selectedTenderContract // ignore: cast_nullable_to_non_nullable
               as TenderContract,
+      inputQty: null == inputQty
+          ? _value.inputQty
+          : inputQty // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$TenderContractDetailStateImpl implements _TenderContractDetailState {
+class _$TenderContractDetailStateImpl extends _TenderContractDetailState {
   const _$TenderContractDetailStateImpl(
       {required final List<TenderContract> tenderContractList,
       required this.tenderContractEnable,
       required this.apiFailureOrSuccessOption,
       required this.isFetching,
-      required this.selectedTenderContract})
-      : _tenderContractList = tenderContractList;
+      required this.selectedTenderContract,
+      required this.inputQty})
+      : _tenderContractList = tenderContractList,
+        super._();
 
   final List<TenderContract> _tenderContractList;
   @override
@@ -977,10 +1188,12 @@ class _$TenderContractDetailStateImpl implements _TenderContractDetailState {
   final bool isFetching;
   @override
   final TenderContract selectedTenderContract;
+  @override
+  final int inputQty;
 
   @override
   String toString() {
-    return 'TenderContractDetailState(tenderContractList: $tenderContractList, tenderContractEnable: $tenderContractEnable, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, selectedTenderContract: $selectedTenderContract)';
+    return 'TenderContractDetailState(tenderContractList: $tenderContractList, tenderContractEnable: $tenderContractEnable, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, selectedTenderContract: $selectedTenderContract, inputQty: $inputQty)';
   }
 
   @override
@@ -998,7 +1211,9 @@ class _$TenderContractDetailStateImpl implements _TenderContractDetailState {
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.selectedTenderContract, selectedTenderContract) ||
-                other.selectedTenderContract == selectedTenderContract));
+                other.selectedTenderContract == selectedTenderContract) &&
+            (identical(other.inputQty, inputQty) ||
+                other.inputQty == inputQty));
   }
 
   @override
@@ -1008,7 +1223,8 @@ class _$TenderContractDetailStateImpl implements _TenderContractDetailState {
       tenderContractEnable,
       apiFailureOrSuccessOption,
       isFetching,
-      selectedTenderContract);
+      selectedTenderContract,
+      inputQty);
 
   @JsonKey(ignore: true)
   @override
@@ -1018,15 +1234,16 @@ class _$TenderContractDetailStateImpl implements _TenderContractDetailState {
           _$TenderContractDetailStateImpl>(this, _$identity);
 }
 
-abstract class _TenderContractDetailState implements TenderContractDetailState {
+abstract class _TenderContractDetailState extends TenderContractDetailState {
   const factory _TenderContractDetailState(
-          {required final List<TenderContract> tenderContractList,
-          required final bool tenderContractEnable,
-          required final Option<Either<ApiFailure, dynamic>>
-              apiFailureOrSuccessOption,
-          required final bool isFetching,
-          required final TenderContract selectedTenderContract}) =
-      _$TenderContractDetailStateImpl;
+      {required final List<TenderContract> tenderContractList,
+      required final bool tenderContractEnable,
+      required final Option<Either<ApiFailure, dynamic>>
+          apiFailureOrSuccessOption,
+      required final bool isFetching,
+      required final TenderContract selectedTenderContract,
+      required final int inputQty}) = _$TenderContractDetailStateImpl;
+  const _TenderContractDetailState._() : super._();
 
   @override
   List<TenderContract> get tenderContractList;
@@ -1038,6 +1255,8 @@ abstract class _TenderContractDetailState implements TenderContractDetailState {
   bool get isFetching;
   @override
   TenderContract get selectedTenderContract;
+  @override
+  int get inputQty;
   @override
   @JsonKey(ignore: true)
   _$$TenderContractDetailStateImplCopyWith<_$TenderContractDetailStateImpl>

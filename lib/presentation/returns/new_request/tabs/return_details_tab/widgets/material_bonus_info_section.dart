@@ -74,6 +74,9 @@ class _ToggleActiveButton extends StatelessWidget {
                 value: bonusItem.balanceQuantity.isGreaterThanZero &&
                     state.isIncludeBonus(bonusItem.uuid),
                 onChanged: (bool value) {
+                  if (!returnItem.balanceQuantity.isGreaterThanZero) {
+                    return;
+                  }
                   context.read<NewRequestBloc>().add(
                         NewRequestEvent.toggleBonusItem(
                           item: bonusItem,

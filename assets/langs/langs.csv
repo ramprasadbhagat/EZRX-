@@ -1503,3 +1503,5 @@ Tender with Contract,Tender with Contract,เปิดประมูลที�
 Guaranteed Order,Guaranteed Order,การสั่งซื้อที่รับประกัน,保证订单,Order အာမခံပါသည်။,Đơn đặt hàng được đảm bảo,ធានាការបញ្ជាទិញ,Pesanan Terjamin,보장 주문
 Extended Term,Extended Term,ขยายระยะเวลา,延長期限,ကာလသတ်မှတ်ချိန် நீட்டிချဲ့ခြင်း,Gia hạn thời hạn,ពន្ធន់កំណត់ពេល,Perpanjangan Jangka Waktu,연장 기간 
 Loan,Loan,กู้เงิน,貸款,ချေးငွေ,Vay tiền,ខ្ចីប្រាក់,Pinjaman,대출
+Maximum tender qty: {maxQty},Maximum tender qty: {maxQty},ปริมาณการเสนอราคาสูงสุด: {maxQty},最高投標數量: {maxQty},လက်မှတ်တင် ကمية: {maxQty},Số lượng dự thầu tối đa: {maxQty},ចំនួន​សំណើ​ สูง​បំផុត៖ {maxQty},Jumlah penawaran maksimum: {maxQty},최대 입찰 수량: {maxQty} 
+This is a mandatory contract,This is a mandatory contract,สัญญานี้เป็นข้อผูกพันที่จำเป็น,這是一份強制性合同,ဒါက မဖြစ်မနေ စာချုပ်ပါ။,Đây là một hợp đồng bắt buộc,សัญญានេះជាកាតព្តែជំពាក់បំណុលបង្ខំ,Ini adalah kontrak wajib,이것은 필수 계약입니다

@@ -9,6 +9,9 @@ class TenderContractDetailEvent with _$TenderContractDetailEvent {
     required ShipToInfo shipToInfo,
     required MaterialNumber materialNumber,
   }) = _Fetch;
+  const factory TenderContractDetailEvent.updateQty({
+    required int qty,
+  }) = _UpdateQty;
   const factory TenderContractDetailEvent.select({
     required TenderContract tenderContract,
   }) = _Select;
