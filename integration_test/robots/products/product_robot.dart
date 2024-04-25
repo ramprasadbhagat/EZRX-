@@ -51,6 +51,17 @@ class ProductRobot extends CommonRobot {
     );
   }
 
+  void verifyTenderAvailableLabel() {
+    final cardCount = materialCard.evaluate().length;
+    expect(
+      find.descendant(
+        of: materialCard,
+        matching: find.byKey(WidgetKeys.tenderTag),
+      ),
+      findsNWidgets(cardCount),
+    );
+  }
+
   void verifyCartButtonVisible() {
     expect(cartButton, findsOneWidget);
   }

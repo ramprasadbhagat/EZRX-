@@ -22,6 +22,7 @@ class _ProductImageSection extends StatelessWidget {
             );
 
             return Column(
+              key: WidgetKeys.imageSectionProductDetail,
               children: [
                 Stack(
                   children: [

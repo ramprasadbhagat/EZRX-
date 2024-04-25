@@ -107,6 +107,7 @@ class ProductTag extends StatelessWidget {
         margin: EdgeInsets.zero,
       );
   factory ProductTag.tenderTag() => const ProductTag._(
+        key: WidgetKeys.tenderTag,
         labelTag: 'Tender Available',
         backgroundColor: ZPColors.skyBlueColor,
         textColor: ZPColors.white,

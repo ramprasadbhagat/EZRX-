@@ -919,13 +919,19 @@ class WidgetKeys {
   static const Key materialAddToCartButton = Key('materialAddToCartButton');
   static const Key comboOfferSection = Key('comboOfferSection');
   static const Key materialUseTenderContract = Key('materialUseTenderContract');
+  static const Key materialUseTenderContractToggle =
+      Key('materialUseTenderContractToggle');
   static Key materialTenderContractItem(
     String contractNumber,
     bool isSelected,
   ) =>
       Key('materialTenderContractItem$contractNumber$isSelected');
+  static const Key materialTenderContractNumber =
+      Key('materialTenderContractNumber');
   static const Key materialTenderContracts = Key('materialTenderContracts');
-
+  static const Key materialTenderContractRadio =
+      Key('materialTenderContractRadio');
+  static const Key imageSectionProductDetail = Key('imageSectionProductDetail');
   //============================================================
   //  bundle Details
   //============================================================

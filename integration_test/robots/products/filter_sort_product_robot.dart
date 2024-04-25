@@ -148,11 +148,15 @@ class FilterSortProductRobot extends CommonRobot {
   void verifyDefaultFilterProduct({
     bool verifyFavourite = true,
     bool verifyItemWithOffer = true,
+    bool verifyTenderContract = false,
     bool verifyBundleOffer = true,
     bool verifyManufacturerVisible = true,
     bool verifyCountryOfOriginVisible = true,
   }) {
     if (verifyFavourite) verifyCheckboxCheckedShowProduct('Favourites', false);
+    if (verifyTenderContract) {
+      verifyCheckboxCheckedShowProduct('Tender Contract', false);
+    }
     if (verifyItemWithOffer) {
       verifyCheckboxCheckedShowProduct('Items with offers', false);
     }

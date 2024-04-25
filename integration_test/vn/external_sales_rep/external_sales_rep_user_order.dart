@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -37,8 +36,6 @@ import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
 import '../../robots/returns/returns_root_robot.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -118,8 +115,8 @@ void main() {
   }
 
   const marketVietnam = 'Vietnam';
-  const username = 'vnrootadmin';
-  const password = 'St@ysafe01';
+  const username = 'auto_root_admin';
+  const password = 'Pa55word@1234';
   const proxyUserName = 'vnexternalsalesrep';
   const customerCode = '0030282241';
   const shipToCode = '0071209479';
@@ -153,28 +150,29 @@ void main() {
   const anotherMaterialNumber = bonusMaterialNumber;
   const poReference = 'test Po Reference';
   const deliveryInstruction = 'test Delivery Instruction';
+  const mandatoryTenderContractMaterialNumber = '21129929';
 
-  var loginRequired = true;
-  var proxyLoginRequired = true;
+  const firstName = 'VNExternalSR';
+  const lastName = 'User20';
 
   Future<void> pumpAppWithLogin(
-    WidgetTester tester,
-  ) async {
+    WidgetTester tester, {
+    String shipToCode = shipToCode,
+  }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    if (loginRequired) {
+    if (loginRobot.isLoginPage) {
       await loginRobot.loginToHomeScreen(username, password, marketVietnam);
-      await tester.pumpAndSettle();
       await customerSearchRobot.selectCustomerSearch(shipToCode);
+      await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
-      loginRequired = false;
+    } else {
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.changeDeliveryAddress(
+        shipToCode,
+      );
+      await commonRobot.closeAnnouncementAlertDialog();
     }
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-    await commonRobot.dismissSnackbar(dismissAll: true);
-    await commonRobot.changeDeliveryAddress(
-      shipToCode,
-    );
-    await commonRobot.closeAnnouncementAlertDialog();
   }
 
   Future<void> pumpAppWithLoginOnBehalf(
@@ -183,37 +181,36 @@ void main() {
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    if (loginRequired) {
+    if (loginRobot.isLoginPage) {
       await loginRobot.loginToHomeScreen(username, password, marketVietnam);
-      await tester.pumpAndSettle();
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
+      customerSearchRobot.verifyPage();
       await customerSearchRobot.selectCustomerSearch(shipToCode);
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
-      loginRequired = false;
     }
-    if (proxyLoginRequired) {
-      await commonRobot.navigateToScreen(NavigationTab.more);
+    await commonRobot.navigateToScreen(NavigationTab.more);
+    await moreRobot.scrollToProfileName();
+    if (!moreRobot.isCorrectUser(firstName, lastName)) {
       await moreRobot.verifyLoginOnBehalfTile();
       await moreRobot.tapLoginOnBehalfTile();
       await loginOnBehalfRobot.enterUserNameField(behalfName);
       await loginOnBehalfRobot.tapLoginButton();
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
+      customerSearchRobot.verifyPage();
       await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       await commonRobot.dismissSnackbar(dismissAll: true);
-      moreRobot.verifyProfileName(behalfName, behalfName);
+      await moreRobot.scrollToProfileName();
+      moreRobot.verifyProfileName(firstName, lastName);
       await commonRobot.navigateToScreen(NavigationTab.home);
-      proxyLoginRequired = false;
     } else {
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await commonRobot.navigateToScreen(NavigationTab.home);
       await commonRobot.dismissSnackbar(dismissAll: true);
-      await commonRobot.changeDeliveryAddress(
-        shipToCode,
-      );
-      await commonRobot.dismissSnackbar(dismissAll: true);
-      await tester.pumpAndSettle();
-      await commonRobot.closeAnnouncementAlertDialog();
+      if (await homeRobot.isCustomerCodeNotSelected(shipToCode)) {
+        await homeRobot.changeDeliveryAddress(shipToCode);
+      }
     }
   }
 
@@ -745,6 +742,7 @@ void main() {
       filterSortProductRobot.verifySheet();
       filterSortProductRobot.verifyDefaultFilterProduct(
         verifyBundleOffer: false,
+        verifyTenderContract: true,
       );
       await filterSortProductRobot.tapToBackIcon();
       filterSortProductRobot.verifySheet(isVisible: false);
@@ -898,6 +896,7 @@ void main() {
       await productRobot.openFilterProductScreen();
       filterSortProductRobot.verifyDefaultFilterProduct(
         verifyBundleOffer: false,
+        verifyTenderContract: true,
       );
       await filterSortProductRobot.chooseSortProductsBy(sortByZToA);
       filterSortProductRobot.verifyRadioSort(
@@ -916,7 +915,23 @@ void main() {
       await productRobot.openFilterProductScreen();
       filterSortProductRobot.verifyDefaultFilterProduct(
         verifyBundleOffer: false,
+        verifyTenderContract: true,
       );
+    });
+
+    testWidgets('EZRX-T1712 | Verify Filter By Tender Contract',
+        (tester) async {
+      const offerCheckbox = 'Tender Contract';
+      await pumpAppWithLoginOnBehalf(tester);
+      await productRobot.navigateToScreen(NavigationTab.products);
+      await productRobot.openFilterProductScreen();
+
+      await filterSortProductRobot.tapProductTypeCheckbox(offerCheckbox);
+      await filterSortProductRobot.tapFilterApplyButton();
+      productRobot.verifyTenderAvailableLabel();
+      await productRobot.tapFirstMaterial();
+      productDetailRobot.verifyPage();
+      productDetailRobot.verifyTenderAvailableLabel();
     });
 
     testWidgets('EZRX-T34 | Verify filter by favorite', (tester) async {
@@ -1175,6 +1190,28 @@ void main() {
       await productDetailRobot.tapBackButton();
       await productRobot.filterFavoritesInProductsScreen();
       productRobot.verifyProductFilter(materialName, matched: false);
+    });
+
+    testWidgets(
+        'EZRX-T1713 | Verify Tender Contracts on the product detail page',
+        (tester) async {
+      await pumpAppWithLoginOnBehalf(tester);
+
+      await productRobot.openSearchProductScreen();
+
+      await productSuggestionRobot
+          .searchWithKeyboardAction(mandatoryTenderContractMaterialNumber);
+      await productSuggestionRobot
+          .tapSearchResult(mandatoryTenderContractMaterialNumber);
+      productDetailRobot.verifyTenderContractSection();
+      productDetailRobot.verifyUseTenderContractToggle(true);
+      productDetailRobot.verifyTenderContractItems(true);
+      await productDetailRobot.tapUseTenderContractToggle();
+      productDetailRobot.verifyUseTenderContractToggle(true);
+      productDetailRobot.verifyTenderContractItem(index: 0, isSelected: true);
+      await productDetailRobot.tapSecondTenderContractItem();
+      productDetailRobot.verifyTenderContractItem(index: 0, isSelected: false);
+      productDetailRobot.verifyTenderContractItem(index: 1, isSelected: true);
     });
   });
 
@@ -2668,8 +2705,8 @@ void main() {
     // });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }

@@ -22,6 +22,7 @@ class ProductDetailRobot extends CommonRobot {
   final addToCartSuccessMessage =
       find.byKey(WidgetKeys.materialDetailsAddToCartSnackBar);
   final body = find.byKey(WidgetKeys.bodyContentProductDetail);
+  final imageSection = find.byKey(WidgetKeys.imageSectionProductDetail);
   final offerBottomSheetCloseButton = find.byKey(WidgetKeys.closeButton);
   final closeMaterialInformationDialog =
       find.byKey(WidgetKeys.closeMaterialInformationDialog);
@@ -31,6 +32,13 @@ class ProductDetailRobot extends CommonRobot {
   final expiryDateIcon = find.byKey(WidgetKeys.expiryDateInfoIcon);
   final similarProduct =
       find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
+  final tenderContractSection =
+      find.byKey(WidgetKeys.materialUseTenderContract);
+  final tenderContractToggle =
+      find.byKey(WidgetKeys.materialUseTenderContractToggle);
+
+  final materialTenderContracts =
+      find.byKey(WidgetKeys.materialTenderContracts);
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
@@ -57,6 +65,14 @@ class ProductDetailRobot extends CommonRobot {
         find.descendant(
           of: body,
           matching: find.byKey(WidgetKeys.offerTag),
+        ),
+        findsOneWidget,
+      );
+
+  void verifyTenderAvailableLabel() => expect(
+        find.descendant(
+          of: imageSection,
+          matching: find.byKey(WidgetKeys.tenderTag),
         ),
         findsOneWidget,
       );
@@ -516,5 +532,56 @@ class ProductDetailRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.comboOfferSection), findsOneWidget);
     await tester.tap(find.byKey(WidgetKeys.getComboDealButton));
     await tester.pumpAndSettle(Durations.long2);
+  }
+
+  void verifyTenderContractSection() =>
+      expect(tenderContractSection, findsOneWidget);
+
+  void verifyUseTenderContractToggle(bool enable) {
+    final toggle = find.descendant(
+      of: tenderContractToggle,
+      matching: find.byType(Switch),
+    );
+    expect(toggle, findsOneWidget);
+    expect(tester.widget<Switch>(toggle).value, enable);
+  }
+
+  Future<void> tapUseTenderContractToggle() async {
+    await tester.tap(tenderContractToggle);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyTenderContractItems(bool isDisplayed) => expect(
+        find.byKey(WidgetKeys.materialTenderContracts),
+        isDisplayed ? findsOneWidget : findsNothing,
+      );
+
+  void verifyTenderContractItem({
+    required int index,
+    bool isSelected = false,
+  }) {
+    final tenderContractNumber = tester
+            .widget<Text>(
+              find.byKey(WidgetKeys.materialTenderContractNumber).at(index),
+            )
+            .data ??
+        '';
+    expect(
+      find.byKey(
+        WidgetKeys.materialTenderContractItem(
+          tenderContractNumber,
+          isSelected,
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  Future<void> tapSecondTenderContractItem() async {
+    final radio = find.byKey(WidgetKeys.materialTenderContractRadio).at(1);
+    await tester.fling(materialTenderContracts, const Offset(-100, 0), 50);
+    await tester.pumpAndSettle();
+    await tester.tap(radio);
+    await tester.pumpAndSettle();
   }
 }

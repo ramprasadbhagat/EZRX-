@@ -67,6 +67,7 @@ class _TenderContractsState extends State<TenderContracts> {
                     ),
                   ),
                   SwitchWidget(
+                    key: WidgetKeys.materialUseTenderContractToggle,
                     disable: widget.materialInfo.hasMandatoryTenderContract,
                     value: state.tenderContractEnable,
                     onChanged: (value) {
@@ -148,6 +149,8 @@ class _TenderContractsState extends State<TenderContracts> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
+                                          key: WidgetKeys
+                                              .materialTenderContractNumber,
                                           currentContract.contractNumber
                                               .displayTenderContractNumber,
                                           style: Theme.of(context)
@@ -175,6 +178,8 @@ class _TenderContractsState extends State<TenderContracts> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 8),
                                     child: Radio(
+                                      key: WidgetKeys
+                                          .materialTenderContractRadio,
                                       value: currentContract,
                                       fillColor: MaterialStateProperty
                                           .resolveWith<Color>(

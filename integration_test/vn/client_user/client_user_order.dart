@@ -1,10 +1,7 @@
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/announcement_article/announcement_article_root_robot.dart';
 import '../../robots/auth/forgot_password_robot.dart';
 import '../../robots/common/common_robot.dart';
@@ -127,6 +124,7 @@ void main() {
   const shipToAddress = 'LG VINA COSMETICS CO., LTD';
   const shipToCode = '0071192102';
   const otherShipToCode = '0000003070';
+  const tenderShipToCode = '0071192868';
 
   const billToCustomerCode = '0030277787';
   const billToShipToCode = '0071205149';
@@ -160,6 +158,9 @@ void main() {
   const bonusMaterialNumberTierQty = 10;
   const bonusMaterialNumberUnitPrice = 2156000;
   const bonusMaterialName = 'ARCHITECT CA 19-9XR RGT 400TEST';
+
+  const nonMandatoryTenderContractMaterialNumber = '21128147';
+  const mandatoryTenderContractMaterialNumber = '21128148';
 
   const poReference = 'Auto-test-po-reference';
   const deliveryInstruction = 'Auto-test-delivery-instruction';
@@ -810,7 +811,9 @@ void main() {
 
       await productRobot.openFilterProductScreen();
       filterSortProductRobot.verifySheet();
-      filterSortProductRobot.verifyDefaultFilterProduct();
+      filterSortProductRobot.verifyDefaultFilterProduct(
+        verifyTenderContract: true,
+      );
       await filterSortProductRobot.tapToBackIcon();
       filterSortProductRobot.verifySheet(isVisible: false);
 
@@ -824,6 +827,22 @@ void main() {
 
       await productRobot.tapCustomerCodeSelector();
       customerSearchRobot.verifyPage();
+    });
+
+    testWidgets('EZRX-T1712 | Verify Filter By Tender Contract',
+        (tester) async {
+      const offerCheckbox = 'Tender Contract';
+
+      await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+      await productRobot.navigateToScreen(NavigationTab.products);
+      await productRobot.openFilterProductScreen();
+
+      await filterSortProductRobot.tapProductTypeCheckbox(offerCheckbox);
+      await filterSortProductRobot.tapFilterApplyButton();
+      productRobot.verifyTenderAvailableLabel();
+      await productRobot.tapFirstMaterial();
+      productDetailRobot.verifyPage();
+      productDetailRobot.verifyTenderAvailableLabel();
     });
 
     testWidgets('EZRX-38 | Verify Filter by product on offer', (tester) async {
@@ -1235,6 +1254,42 @@ void main() {
       await productDetailRobot.tapBackButton();
       await productRobot.filterFavoritesInProductsScreen();
       productRobot.verifyProductFilter(materialName, matched: false);
+    });
+
+    testWidgets(
+        'EZRX-T1713 | Verify Tender Contracts on the product detail page',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+
+      // Non-mandatory tender contract material
+      await productRobot.openSearchProductScreen();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(nonMandatoryTenderContractMaterialNumber);
+      await productSuggestionRobot
+          .tapSearchResult(nonMandatoryTenderContractMaterialNumber);
+      productDetailRobot.verifyTenderContractSection();
+      productDetailRobot.verifyUseTenderContractToggle(false);
+      productDetailRobot.verifyTenderContractItems(false);
+      await productDetailRobot.tapUseTenderContractToggle();
+      productDetailRobot.verifyUseTenderContractToggle(true);
+      productDetailRobot.verifyTenderContractItems(true);
+      productDetailRobot.verifyTenderContractItem(index: 0, isSelected: true);
+      await productDetailRobot.tapBackButton();
+
+      // mandatory tender contract material
+      await productSuggestionRobot
+          .searchWithKeyboardAction(mandatoryTenderContractMaterialNumber);
+      await productSuggestionRobot
+          .tapSearchResult(mandatoryTenderContractMaterialNumber);
+      productDetailRobot.verifyTenderContractSection();
+      productDetailRobot.verifyUseTenderContractToggle(true);
+      productDetailRobot.verifyTenderContractItems(true);
+      await productDetailRobot.tapUseTenderContractToggle();
+      productDetailRobot.verifyUseTenderContractToggle(true);
+      productDetailRobot.verifyTenderContractItem(index: 0, isSelected: true);
+      await productDetailRobot.tapSecondTenderContractItem();
+      productDetailRobot.verifyTenderContractItem(index: 0, isSelected: false);
+      productDetailRobot.verifyTenderContractItem(index: 1, isSelected: true);
     });
   });
 
@@ -2435,8 +2490,8 @@ void main() {
   //TODO : WE NEED TO COVER STRIKE THROUGH PRICE, RIGHT NOW WE DON'T HAVE DATA
   //TODO : WE NEED TO COVER ZDP5 FEATURE LATER, ONCE THE TEST DATA GET READY
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }
