@@ -590,7 +590,7 @@ void main() {
       await tester.pumpWidget(getWidgetToTest(priceAggregate));
       await tester.pump();
       await tester.tap(
-        find.byKey(WidgetKeys.cartItemAddKey).first,
+        find.byKey(WidgetKeys.increaseQuantityKey).first,
       );
       await tester.pumpAndSettle();
       verify(
@@ -635,7 +635,7 @@ void main() {
       );
       await tester.pumpAndSettle();
       await tester.tap(
-        find.byKey(WidgetKeys.cartItemDeleteKey).first,
+        find.byKey(WidgetKeys.decreaseQuantityKey).first,
       );
       await tester.pumpAndSettle();
       verify(

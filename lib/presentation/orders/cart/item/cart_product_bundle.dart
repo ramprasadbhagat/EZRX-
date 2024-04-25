@@ -389,8 +389,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
               Expanded(
                 child: CartItemQuantityInput(
                   isEnabled: true,
-                  quantityAddKey: WidgetKeys.cartItemAddKey,
-                  quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
+                  quantityAddKey: WidgetKeys.increaseQuantityKey,
+                  quantityDeleteKey: WidgetKeys.decreaseQuantityKey,
                   quantityTextKey: WidgetKeys.quantityInputTextKey,
                   controller: _controller,
                   onFieldChange: (value) {},

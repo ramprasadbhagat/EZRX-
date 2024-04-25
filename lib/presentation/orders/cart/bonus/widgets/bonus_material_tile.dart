@@ -191,8 +191,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
           child: CartItemQuantityInput(
             height: 40,
             isEnabled: !isBonusMaterialLoading,
-            quantityAddKey: WidgetKeys.cartItemAddKey,
-            quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
+            quantityAddKey: WidgetKeys.increaseQuantityKey,
+            quantityDeleteKey: WidgetKeys.decreaseQuantityKey,
             quantityTextKey: WidgetKeys.quantityInputTextKey,
             controller: _controller,
             onFieldChange: (value) => context.read<BonusMaterialBloc>().add(

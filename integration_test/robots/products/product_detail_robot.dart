@@ -512,8 +512,9 @@ class ProductDetailRobot extends CommonRobot {
       );
 
   Future<void> verifyAndTapGetComboDeal() async {
+    await scrollEnsureFinderVisible(find.byKey(WidgetKeys.getComboDealButton));
     expect(find.byKey(WidgetKeys.comboOfferSection), findsOneWidget);
     await tester.tap(find.byKey(WidgetKeys.getComboDealButton));
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(Durations.long2);
   }
 }

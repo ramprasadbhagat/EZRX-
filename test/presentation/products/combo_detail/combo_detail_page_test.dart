@@ -1033,10 +1033,11 @@ void main() {
           final cartItemQuantityInputKey =
               find.byType(CartItemQuantityInput).first;
           expect(cartItemQuantityInputKey, findsOneWidget);
-          final cartItemAddKey = find.byKey(WidgetKeys.cartItemAddKey).first;
+          final cartItemAddKey =
+              find.byKey(WidgetKeys.increaseQuantityKey).first;
           expect(cartItemAddKey, findsOneWidget);
           final cartItemDeleteKey =
-              find.byKey(WidgetKeys.cartItemDeleteKey).first;
+              find.byKey(WidgetKeys.decreaseQuantityKey).first;
           expect(cartItemDeleteKey, findsOneWidget);
           final quantityInputTextKey =
               find.byKey(WidgetKeys.quantityInputTextKey).first;
@@ -1112,7 +1113,8 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsOneWidget);
 
-          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
+          final checkoutButton =
+              find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
 
           await tester.tap(checkoutButton);
@@ -1296,7 +1298,8 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
+          final checkoutButton =
+              find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );
@@ -1431,7 +1434,8 @@ void main() {
           expect(notEligibleMessage, findsOneWidget);
 
           final notEligibleMessageContent = find.text(
-            'You must select at least ${comboMaterialsMock.values.first.comboDeal.schemeMinimumQtyRequirement} items.'.tr(),
+            'You must select at least ${comboMaterialsMock.values.first.comboDeal.schemeMinimumQtyRequirement} items.'
+                .tr(),
           );
           expect(notEligibleMessageContent, findsOneWidget);
 
@@ -1450,7 +1454,8 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
+          final checkoutButton =
+              find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );
@@ -1614,7 +1619,8 @@ void main() {
               find.byKey(WidgetKeys.comboRateDiscounted);
           expect(comboRateDiscounted, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
+          final checkoutButton =
+              find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );
@@ -1838,7 +1844,8 @@ void main() {
           expect(notEligibleMessage, findsOneWidget);
 
           final notEligibleMessageContent = find.text(
-            'You must select at least ${comboMaterialsMock.values.first.comboDeal.schemeMinimumQtyRequirement} items.'.tr(),
+            'You must select at least ${comboMaterialsMock.values.first.comboDeal.schemeMinimumQtyRequirement} items.'
+                .tr(),
           );
           expect(notEligibleMessageContent, findsOneWidget);
 
@@ -1857,7 +1864,8 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
+          final checkoutButton =
+              find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );
@@ -2100,7 +2108,8 @@ void main() {
           final firstDiscount = comboMaterialsMock
               .values.first.comboDeal.sortedMinTotalAmountTiers.firstOrNull;
           final notEligibleMessageContent = find.text(
-            'Buy within \$${firstDiscount?.minTotalAmount} and \$${firstDiscount?.maxTotalAmount} to get ${firstDiscount?.discountInfo.rateDisplay}% Discount'.tr(),
+            'Buy within \$${firstDiscount?.minTotalAmount} and \$${firstDiscount?.maxTotalAmount} to get ${firstDiscount?.discountInfo.rateDisplay}% Discount'
+                .tr(),
           );
           expect(notEligibleMessageContent, findsOneWidget);
 
@@ -2119,7 +2128,8 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
+          final checkoutButton =
+              find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );
@@ -2350,7 +2360,8 @@ void main() {
               find.byKey(WidgetKeys.comboNotEligibleMessage);
           expect(notEligibleMessage, findsOneWidget);
           final notEligibleMessageContent = find.text(
-            'You must select minimum ${comboMaterialsMock.values.first.comboDeal.schemeMinimumQtyRequirement} QTYs.'.tr(),
+            'You must select minimum ${comboMaterialsMock.values.first.comboDeal.schemeMinimumQtyRequirement} QTYs.'
+                .tr(),
           );
           expect(notEligibleMessageContent, findsOneWidget);
 
@@ -2369,7 +2380,8 @@ void main() {
           final nextDealInfo = find.byKey(WidgetKeys.comboNextDealInfo);
           expect(nextDealInfo, findsNothing);
 
-          final checkoutButton = find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
+          final checkoutButton =
+              find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
           expect(checkoutButton, findsOneWidget);
         },
       );

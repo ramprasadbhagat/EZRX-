@@ -565,8 +565,8 @@ class WidgetKeys {
   //============================================================
   //  Quantity Input Widget Keys
   //============================================================
-  static const Key cartItemAddKey = Key('cartItemAddKey');
-  static const Key cartItemDeleteKey = Key('cartItemDeleteKey');
+  static const Key increaseQuantityKey = Key('increaseQuantityKey');
+  static const Key decreaseQuantityKey = Key('decreaseQuantityKey');
   static const Key quantityInputTextKey = Key('quantityInputTextKey');
   static const Key cartProductImage = Key('cartProductImage');
   static const Key startBrowsingProducts = Key('startBrowsingProducts');
@@ -958,7 +958,8 @@ class WidgetKeys {
   static const Key comboMaterialDiscountedPrice =
       Key('comboMaterialDiscountedPrice');
 
-  static const Key comboMaterialOriginalPrice = Key('itemSubtotalPrice');
+  static const Key comboMaterialOriginalPrice =
+      Key('comboMaterialOriginalPrice');
 
   static const Key itemSubtotalPrice = Key('itemSubtotalPrice');
 

@@ -369,7 +369,7 @@ class CartRobot {
     await tester.tap(
       find.descendant(
         of: _materialItem(materialNumber),
-        matching: find.byKey(WidgetKeys.cartItemAddKey),
+        matching: find.byKey(WidgetKeys.increaseQuantityKey),
       ),
     );
     await tester.pumpAndSettle();
@@ -379,7 +379,7 @@ class CartRobot {
     await tester.tap(
       find.descendant(
         of: _materialItem(materialNumber),
-        matching: find.byKey(WidgetKeys.cartItemDeleteKey),
+        matching: find.byKey(WidgetKeys.decreaseQuantityKey),
       ),
     );
     await tester.pumpAndSettle();
@@ -682,7 +682,7 @@ class CartRobot {
     await tester.tap(
       find.descendant(
         of: _bundleMaterial(bundleNumber, materialNumber),
-        matching: find.byKey(WidgetKeys.cartItemAddKey),
+        matching: find.byKey(WidgetKeys.increaseQuantityKey),
       ),
     );
     await tester.pumpAndSettle();
@@ -695,7 +695,7 @@ class CartRobot {
     await tester.tap(
       find.descendant(
         of: _bundleMaterial(bundleNumber, materialNumber),
-        matching: find.byKey(WidgetKeys.cartItemDeleteKey),
+        matching: find.byKey(WidgetKeys.decreaseQuantityKey),
       ),
     );
     await tester.pumpAndSettle();

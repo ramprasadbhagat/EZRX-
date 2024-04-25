@@ -688,9 +688,9 @@ void main() {
         expect(materialKey, findsOneWidget);
         final cartItemQuantityInputKey = find.byType(CartItemQuantityInput);
         expect(cartItemQuantityInputKey, findsOneWidget);
-        final cartItemAddKey = find.byKey(WidgetKeys.cartItemAddKey);
+        final cartItemAddKey = find.byKey(WidgetKeys.increaseQuantityKey);
         expect(cartItemAddKey, findsOneWidget);
-        final cartItemDeleteKey = find.byKey(WidgetKeys.cartItemDeleteKey);
+        final cartItemDeleteKey = find.byKey(WidgetKeys.decreaseQuantityKey);
         expect(cartItemDeleteKey, findsOneWidget);
         final quantityInputTextKey =
             find.byKey(WidgetKeys.quantityInputTextKey);
@@ -747,9 +747,9 @@ void main() {
         expect(materialKey, findsOneWidget);
         final cartItemQuantityInputKey = find.byType(CartItemQuantityInput);
         expect(cartItemQuantityInputKey, findsOneWidget);
-        final cartItemAddKey = find.byKey(WidgetKeys.cartItemAddKey);
+        final cartItemAddKey = find.byKey(WidgetKeys.increaseQuantityKey);
         expect(cartItemAddKey, findsOneWidget);
-        final cartItemDeleteKey = find.byKey(WidgetKeys.cartItemDeleteKey);
+        final cartItemDeleteKey = find.byKey(WidgetKeys.decreaseQuantityKey);
         expect(cartItemDeleteKey, findsOneWidget);
         final quantityInputTextKey =
             find.byKey(WidgetKeys.quantityInputTextKey);

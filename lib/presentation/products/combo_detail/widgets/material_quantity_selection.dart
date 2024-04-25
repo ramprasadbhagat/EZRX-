@@ -55,8 +55,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
         child: CartItemQuantityInput(
           isEnabled: true,
           key: WidgetKeys.comboMaterialQuantityInput,
-          quantityAddKey: WidgetKeys.cartItemAddKey,
-          quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
+          quantityAddKey: WidgetKeys.increaseQuantityKey,
+          quantityDeleteKey: WidgetKeys.decreaseQuantityKey,
           quantityTextKey: WidgetKeys.quantityInputTextKey,
           minimumQty: widget.comboDealMaterial.minQty,
           controller: _controller,
