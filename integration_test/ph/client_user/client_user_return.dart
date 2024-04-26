@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/locator.dart';
+// import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+// import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+// import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/common/common_robot.dart';
 import '../../robots/common/enum.dart';
 import '../../robots/common/extension.dart';
@@ -60,17 +60,17 @@ void main() {
 
   //Return detail data
   const returnStatus = 'Pending Approval';
-  const returnId = 'EZRE-250023000802';
-  const returnIdWithBonus = 'EZRE-250024001345';
-  const returnReference = 'NA';
-  const specialInstructions = 'NA';
-  const materialNumber = '21000053';
-  const materialName = "10010317 SCHOLL HEELGRIPS 'S";
+  const returnId = 'EZRE-250024001345';
+  const returnIdWithBonus = 'EZRE-250024001551';
+  const returnReference = '-';
+  const specialInstructions = '-';
+  const materialNumber = '23001761';
+  const materialName = 'ATORVASTATIN CALCIUM 10MG';
   const materialQty = 1;
-  final materialPrice = 151.79.priceDisplay(currency);
-  const materialPrincipalName = 'RECKITT BENCKISER (SINGAPORE) PTE';
-  const materialPrincipalCode = '0000100486';
-  const materialInvoiceNumber = '1510000244';
+  const materialPrice = 1217.54;
+  const materialPrincipalName = 'Otsuka (Philippines)';
+  const materialPrincipalCode = '0000100468';
+  const materialInvoiceNumber = '1510000747';
   const materialReturnReason = 'Did Not Order';
   const materialReturnComments = '-';
 
@@ -97,14 +97,13 @@ void main() {
   final reason = 'Wrong Bill-To'.tr();
   const materialId = materialNumber;
   const materialTitle = materialName;
-  const materialUUID = '1510000744000010';
+  const materialUUID = '1510000752000010';
 
   //Return detail data
   const returnRequestStatus = 'Pending Review';
-  final returnSubTotal = materialPrice;
-  final returnGrandTotal = materialPrice;
-
-  var loginRequired = true;
+  //include bonus
+  const returnSubTotal = materialPrice;
+  const returnGrandTotal = materialPrice;
 
   void initializeRobot(WidgetTester tester) {
     loginRobot = LoginRobot(tester);
@@ -123,6 +122,7 @@ void main() {
     customerSearchRobot = CustomerSearchRobot(tester);
   }
 
+  // Login with sales org
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
     String shipToCode = shipToCode,
@@ -130,13 +130,13 @@ void main() {
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    if (loginRequired) {
+    if (loginRobot.isLoginPage) {
       await loginRobot.loginToHomeScreen(username, password, market);
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
         salesOrg,
       );
-      loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
     } else {
@@ -145,6 +145,7 @@ void main() {
         await commonRobot.tapCustomerCodeSelector();
         await tester.pumpAndSettle();
       }
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
         salesOrg,
@@ -306,8 +307,6 @@ void main() {
         toDate: toDate,
       );
       await returnsByItemsFilterRobot.tapApplyButton();
-      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
@@ -316,6 +315,9 @@ void main() {
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByItemsRobot.verifyReturnsWithProductCodeVisible(materialNumber);
+      await commonRobot.tapClearSearch();
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
     });
 
     testWidgets(
@@ -561,7 +563,7 @@ void main() {
       returnsByItemsDetailRobot.verifyMaterialVisible(
         materialNumber,
         materialQty,
-        materialPrice,
+        materialPrice.priceDisplay(currency),
       );
       returnsByItemsDetailRobot.verifyMaterialDetailCollapsed(true);
     });
@@ -736,11 +738,11 @@ void main() {
     testWidgets(
         'EZRX-T149 | Verify Filter by Request amount when having result found in View by return requests tab',
         (tester) async {
-      const fromAmount = '100.123400';
-      const toAmount = '500.20';
+      const fromAmount = '1000.123400';
+      const toAmount = '1500.20';
       const invalidToAmount = '1';
-      const formattedFromAmount = '100.12';
-      const formattedToAmount = '500.2';
+      const formattedFromAmount = '1000.12';
+      const formattedToAmount = '1500.2';
       await goToReturns(tester: tester);
 
       //verify
@@ -862,8 +864,11 @@ void main() {
       returnsByRequestDetailRobot.verifyReturnAddressVisible(shipToAddress);
       returnsByRequestDetailRobot.verifyCustomerCodeVisible(customerCode);
       returnsByRequestDetailRobot.verifyDeliveryToVisible(shipToCode);
-      returnsByRequestDetailRobot.verifySubTotalVisible(returnSubTotal);
-      returnsByRequestDetailRobot.verifyGrandTotalVisible(returnGrandTotal);
+      returnsByRequestDetailRobot.verifySubTotalVisible(
+        returnSubTotal.excludeTax().priceDisplay(currency),
+      );
+      returnsByRequestDetailRobot
+          .verifyGrandTotalVisible(returnGrandTotal.priceDisplay(currency));
       await returnsByRequestDetailRobot.verifyMaterialVisible(
         index: materialIndex,
         materialNumber: materialNumber,
@@ -1138,8 +1143,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }

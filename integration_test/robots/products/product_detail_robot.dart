@@ -508,6 +508,8 @@ class ProductDetailRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  bool get relatedProductExist => relatedMaterialCard.evaluate().isNotEmpty;
+
   Future<void> tapFirstRelateProduct() async {
     await tester.tap(relatedMaterialCard.first);
     await tester.pumpAndSettle();

@@ -224,7 +224,7 @@ class CommonRobot {
 
   Future<void> searchWithKeyboardAction(String text) async {
     await tester.tap(searchBar);
-    await tester.pumpAndSettle();
+    await tester.pump();
     await tester.enterText(searchBar, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
@@ -232,7 +232,7 @@ class CommonRobot {
 
   Future<void> autoSearch(String text) async {
     await tester.tap(searchBar);
-    await tester.pumpAndSettle();
+    await tester.pump();
     await tester.enterText(searchBar, text);
     await tester.pumpAndSettle(
       Duration(milliseconds: locator<Config>().autoSearchTimeout),
@@ -242,7 +242,7 @@ class CommonRobot {
   Future<void> searchWithSearchIcon(String text) async {
     await tester.pumpUntilVisible(searchBar);
     await tester.tap(searchBar);
-    await tester.pumpAndSettle();
+    await tester.pump();
     await tester.enterText(searchBar, text);
     await tester.tap(find.byKey(WidgetKeys.searchIconKey));
     await tester.pumpAndSettle();

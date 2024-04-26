@@ -77,6 +77,7 @@ class CheckoutRobot {
 
   Future<void> enterPoReference(String text) async {
     await tester.tap(poReferenceField);
+    await tester.pump();
     await tester.enterText(poReferenceField, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
@@ -84,6 +85,7 @@ class CheckoutRobot {
 
   Future<void> enterContactPerson(String text) async {
     await tester.tap(contactPersonField);
+    await tester.pump();
     await tester.enterText(contactPersonField, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();

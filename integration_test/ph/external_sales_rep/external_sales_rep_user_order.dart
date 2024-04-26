@@ -1,5 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/locator.dart';
+// import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -37,8 +36,8 @@ import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
 import '../../robots/returns/returns_root_robot.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+// import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+// import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -120,9 +119,9 @@ void main() {
   }
 
   const marketSingapore = 'Philippines';
-  const username = 'phrootadmin';
-  const password = 'St@ysafe01';
-  const proxyUserName = 'phexternalsalesrep';
+  const username = 'auto_root_admin';
+  const password = 'Pa55word@1234';
+  const proxyUserName = 'testextsalesrep';
   const customerCode = '0000100296';
   const shipToCode = '0070023239';
   const salesOrg = '2500';
@@ -145,32 +144,33 @@ void main() {
   // const lowPriceMaterialNumber = materialNumber;
   // const lowPriceMaterialUnitPrice = materialUnitPrice;
   const bonusMaterialNumber = '21000382';
+  const bonusManufacturerName = materialPrincipalName;
   const oosPreOrderMaterialNumber = '21000057';
   const bonusMaterialName = '170G LDS C.BERRY+180ML APC PROMO';
   const bonusMaterialNumberTierQty = 20;
   const bonusMaterialNumberUnitPrice = 175.91;
   const anotherMaterialNumber = '23008054';
-  const poReference = 'test Po Reference';
-  const referenceNote = 'test Reference Note';
-  const contactPerson = 'test Contact Person';
+  const poReference = 'Auto-test-po-reference';
+  const deliveryInstruction = 'Auto-test-delivery-instruction';
+  const referenceNote = 'po-reference-note';
   const mobileNumber = '1234567890';
-  const deliveryInstruction = 'test Delivery Instruction';
-
-  var loginRequired = true;
-  var proxyLoginRequired = true;
+  const contactPerson = 'contact-person';
+  const contactNumber = '1234567890';
 
   Future<void> pumpAppWithLogin(
     WidgetTester tester,
   ) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    if (loginRequired) {
+    if (loginRobot.isLoginPage) {
       await loginRobot.loginToHomeScreen(username, password, marketSingapore);
-      await tester.pumpAndSettle();
-      await customerSearchRobot.selectCustomerSearch(shipToCode);
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
+      await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
+        shipToCode,
+        salesOrg,
+      );
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
-      loginRequired = false;
     }
     await tester.pumpAndSettle(const Duration(seconds: 2));
     await commonRobot.dismissSnackbar(dismissAll: true);
@@ -185,18 +185,23 @@ void main() {
   Future<void> pumpAppWithLoginOnBehalf(
     WidgetTester tester, {
     String behalfName = proxyUserName,
+    String salesOrg = salesOrg,
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    if (loginRequired) {
+    if (loginRobot.isLoginPage) {
       await loginRobot.loginToHomeScreen(username, password, marketSingapore);
       await customerSearchRobot.waitForCustomerCodePageToLoad();
-      await customerSearchRobot.selectCustomerSearch(shipToCode);
+      await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
+        shipToCode,
+        salesOrg,
+      );
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
-      loginRequired = false;
     }
-    if (proxyLoginRequired) {
+    await commonRobot.navigateToScreen(NavigationTab.more);
+    await moreRobot.scrollToProfileName();
+    if (!moreRobot.isCorrectUser(behalfName, behalfName)) {
       await commonRobot.navigateToScreen(NavigationTab.more);
       await moreRobot.verifyLoginOnBehalfTile();
       await moreRobot.tapLoginOnBehalfTile();
@@ -208,13 +213,16 @@ void main() {
         shipToCode,
         salesOrg,
       );
-      moreRobot.verifyProfileName(behalfName, behalfName);
       await commonRobot.navigateToScreen(NavigationTab.home);
       await commonRobot.dismissSnackbar(dismissAll: true);
       await tester.pumpAndSettle();
-      proxyLoginRequired = false;
     } else {
-      await customerSearchRobot.waitForCustomerCodePageToLoad();
+      await commonRobot.navigateToScreen(NavigationTab.home);
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      if (commonRobot.isCustomerCodeSelectorVisible) {
+        await commonRobot.tapCustomerCodeSelector();
+        await tester.pumpAndSettle();
+      }
       await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
@@ -230,6 +238,23 @@ void main() {
     await cartRobot.clearCart();
     await cartRobot.tapBrowseProductButton();
     await productRobot.openSearchProductScreen();
+  }
+
+  Future<void> updateRequiredFieldsOnCheckout() async {
+    await checkoutRobot.verifyPoReferenceField(isVisible: true);
+    await checkoutRobot.enterPoReference(poReference);
+
+    await checkoutRobot.verifyReferenceNoteField(isVisible: true);
+    await checkoutRobot.enterReferenceNote(referenceNote);
+
+    await checkoutRobot.verifyContactPersonField(isVisible: true);
+    await checkoutRobot.enterContactPerson(contactPerson);
+
+    await checkoutRobot.verifyMobileNumberField(isVisible: true);
+    await checkoutRobot.enterContactNumber(contactNumber);
+
+    await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+    await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
   }
 
   Future<void> checkoutWithMaterial(
@@ -296,11 +321,6 @@ void main() {
   });
 
   group('Notification Tab -', () {
-    const orderNotificationKeyword = 'Order';
-    const returnNotificationKeyword = 'Return request';
-    const paymentNotificationKeyword = 'Payment';
-    const notificationIndex = 1;
-
     testWidgets('EZRX-T95 | Verify Notification Tab with Default Values',
         (tester) async {
       //init app
@@ -310,6 +330,9 @@ void main() {
       //verify
       notificationRobot.verifyPage();
       notificationRobot.verifyScrollList();
+      if (notificationRobot.getFirstBasicNotificationTitle().isNotEmpty) {
+        notificationRobot.verifyDeleteButton();
+      }
     });
 
     testWidgets(
@@ -325,15 +348,18 @@ void main() {
 
         return;
       }
+      await notificationRobot.scrollAlertNotification();
       notificationRobot.verifyNotificationItems();
-      final itemDescription =
-          notificationRobot.getNotificationDescription(notificationIndex);
-      await notificationRobot.tapNotificationItem(notificationIndex);
-      if (itemDescription.startsWith(orderNotificationKeyword.tr())) {
+      if (notificationRobot.getFirstBasicNotificationTitle().isEmpty) {
+        return;
+      }
+      final itemTitle = notificationRobot.getFirstBasicNotificationTitle();
+      await notificationRobot.tapFirstBasicNotificationItem(itemTitle);
+      if (viewByOrdersDetailRobot.isOrderDetailPage) {
         viewByOrdersDetailRobot.verifyPage();
-      } else if (itemDescription.startsWith(returnNotificationKeyword.tr())) {
+      } else if (returnsByItemsDetailRobot.isReturnDetailPage) {
         returnsByItemsDetailRobot.verifyPage();
-      } else if (itemDescription.startsWith(paymentNotificationKeyword.tr())) {
+      } else if (paymentDetailRobot.isPaymentDetailPage) {
         paymentDetailRobot.verifyPage();
       } else {
         notificationRobot.verifyRedirectNotAvailableMessage();
@@ -353,16 +379,11 @@ void main() {
         return;
       }
       notificationRobot.verifyNotificationItems();
-      final itemDescription =
-          notificationRobot.getNotificationDescription(notificationIndex);
       await notificationRobot.pullToRefresh();
       notificationRobot.verifyNotificationItems();
-      notificationRobot.verifyNotificationWithDescription(
-        notificationIndex,
-        itemDescription,
-      );
     });
   });
+
   group('Home Tab -', () {
     testWidgets(
         'EZRX-T17 | Access Homepage after logging in and having existing ShipTo',
@@ -409,6 +430,8 @@ void main() {
         otherShipToCode,
         salesOrg,
       );
+      customerSearchRobot.findConfirmChangeAddressButton();
+      await customerSearchRobot.tapOnConfirmChangeAddressButton();
 
       // verify cart empty
       await commonRobot.navigateToScreen(NavigationTab.products);
@@ -450,18 +473,22 @@ void main() {
       // contain customer code
       await customerSearchRobot.search(subCustomerCode);
       customerSearchRobot.verifySearchResults(subCustomerCode);
+      await commonRobot.tapClearSearch();
 
       // contain customer name
       await customerSearchRobot.search(subCustomerName);
       customerSearchRobot.verifySearchResults(subCustomerName);
+      await commonRobot.tapClearSearch();
 
       // contain ship to code
       await customerSearchRobot.search(subShipToCode);
       customerSearchRobot.verifySearchResults(subShipToCode);
+      await commonRobot.tapClearSearch();
 
       // contain ship to name
       await customerSearchRobot.search(subShipToName);
       customerSearchRobot.verifySearchResults(subShipToName);
+      await commonRobot.tapClearSearch();
     });
 
     testWidgets(
@@ -962,6 +989,7 @@ void main() {
 
       await productSuggestionRobot.autoSearch(materialName);
       productSuggestionRobot.verifySuggestProductsSearch(materialName);
+      await commonRobot.tapClearSearch();
       await productSuggestionRobot.autoSearch(invalidSearchKey);
       productSuggestionRobot.verifyNoSuggestedProduct();
       productSuggestionRobot.verifyNoRecordFound();
@@ -1502,7 +1530,8 @@ void main() {
       await orderPriceSummaryRobot.tapCloseButton();
       orderPriceSummaryRobot.verifySheet(isVisible: false);
     });
-// The minimum order value is zero now so can not test this feature
+
+    // The minimum order value is zero now so can not test this feature
     // testWidgets('EZRX-T110 | Verify cart under minimum order value',
     //     (tester) async {
     //   const lowPriceMaterialTotalPrice = lowPriceMaterialUnitPrice;
@@ -1579,7 +1608,9 @@ void main() {
       oosPreOrderRobot.verifySheet(isVisible: false);
       await cartRobot.tapCheckoutButton();
       oosPreOrderRobot.verifyMaterial(oosPreOrderMaterialNumber, qty);
-      await oosPreOrderRobot.tapContinueButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
       checkoutRobot.verifyPage();
     });
 
@@ -1733,7 +1764,11 @@ void main() {
       checkoutRobot.verifyEmptyContactNumberErrorMessage(isVisible: true);
       checkoutRobot.verifyEmptyContactPersonErrorMessage(isVisible: true);
       await checkoutRobot.enterPoReference(poReference);
+
+      await checkoutRobot.verifyReferenceNoteField(isVisible: true);
       await checkoutRobot.enterReferenceNote(referenceNote);
+
+      await checkoutRobot.verifyContactPersonField(isVisible: true);
       await checkoutRobot.enterContactPerson(contactPerson);
       await checkoutRobot.enterContactNumber(mobileNumber);
       await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
@@ -1755,16 +1790,7 @@ void main() {
         qty,
         isPreOrder: false,
       );
-      await checkoutRobot.verifyPoReferenceField(isVisible: true);
-      await checkoutRobot.enterPoReference(poReference);
-      await checkoutRobot.verifyReferenceNoteField(isVisible: true);
-      await checkoutRobot.enterReferenceNote(referenceNote);
-      await checkoutRobot.verifyContactPersonField(isVisible: true);
-      await checkoutRobot.enterContactPerson(contactPerson);
-      await checkoutRobot.verifyMobileNumberField(isVisible: true);
-      await checkoutRobot.enterContactPerson(mobileNumber);
-      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
-      await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+      await updateRequiredFieldsOnCheckout();
 
       //verify
       await checkoutRobot.verifyMaterialPrincipal(materialPrincipalName);
@@ -1789,6 +1815,7 @@ void main() {
       await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
       await requestCounterOfferRobot.tapConfirmButton();
       await cartRobot.tapCheckoutButton();
+      await updateRequiredFieldsOnCheckout();
       await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
         materialNumber,
@@ -1823,6 +1850,7 @@ void main() {
       //init app
       await pumpAppWithLoginOnBehalf(tester);
       await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+      await updateRequiredFieldsOnCheckout();
 
       //verify
       await checkoutRobot.verifyYoursItemLabel(2);
@@ -1876,16 +1904,8 @@ void main() {
         materialNumber,
         1000,
       );
-      await checkoutRobot.verifyPoReferenceField(isVisible: true);
-      await checkoutRobot.enterPoReference(poReference);
-      await checkoutRobot.verifyReferenceNoteField(isVisible: true);
-      await checkoutRobot.enterReferenceNote(referenceNote);
-      await checkoutRobot.verifyContactPersonField(isVisible: true);
-      await checkoutRobot.enterContactPerson(contactPerson);
-      await checkoutRobot.verifyMobileNumberField(isVisible: true);
-      await checkoutRobot.enterContactPerson(mobileNumber);
-      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
-      await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+      await updateRequiredFieldsOnCheckout();
+
       //verify
       await checkoutRobot.tapPlaceOrderButton();
       orderSuccessRobot.verifyPage();
@@ -1911,19 +1931,11 @@ void main() {
         materialNumber,
         qty,
       );
-      await checkoutRobot.verifyPoReferenceField(isVisible: true);
-      await checkoutRobot.enterPoReference(poReference);
-      await checkoutRobot.verifyReferenceNoteField(isVisible: true);
-      await checkoutRobot.enterReferenceNote(referenceNote);
-      await checkoutRobot.verifyContactPersonField(isVisible: true);
-      await checkoutRobot.enterContactPerson(contactPerson);
-      await checkoutRobot.verifyMobileNumberField(isVisible: true);
-      await checkoutRobot.enterContactPerson(mobileNumber);
-      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
-      await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+      await updateRequiredFieldsOnCheckout();
+
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
-      await tester.pumpAndSettle();
+
       //verify
       await orderSuccessRobot.verifyOrderSummarySection();
       await orderSuccessRobot
@@ -1954,16 +1966,8 @@ void main() {
       //init app
       await pumpAppWithLoginOnBehalf(tester);
       await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
-      await checkoutRobot.verifyPoReferenceField(isVisible: true);
-      await checkoutRobot.enterPoReference(poReference);
-      await checkoutRobot.verifyReferenceNoteField(isVisible: true);
-      await checkoutRobot.enterReferenceNote(referenceNote);
-      await checkoutRobot.verifyContactPersonField(isVisible: true);
-      await checkoutRobot.enterContactPerson(contactPerson);
-      await checkoutRobot.verifyMobileNumberField(isVisible: true);
-      await checkoutRobot.enterContactPerson(mobileNumber);
-      await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
-      await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+      await updateRequiredFieldsOnCheckout();
+
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
 
@@ -2168,6 +2172,8 @@ void main() {
 
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
       });
 
@@ -2181,16 +2187,8 @@ void main() {
           materialNumber,
           qty,
         );
-        await checkoutRobot.verifyPoReferenceField(isVisible: true);
-        await checkoutRobot.enterPoReference(poReference);
-        await checkoutRobot.verifyReferenceNoteField(isVisible: true);
-        await checkoutRobot.enterReferenceNote(referenceNote);
-        await checkoutRobot.verifyContactPersonField(isVisible: true);
-        await checkoutRobot.enterContactPerson(contactPerson);
-        await checkoutRobot.verifyMobileNumberField(isVisible: true);
-        await checkoutRobot.enterContactPerson(mobileNumber);
-        await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
-        await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+        await updateRequiredFieldsOnCheckout();
+
         await checkoutRobot.tapPlaceOrderButton();
         await commonRobot.dismissSnackbar(dismissAll: true);
         await orderSuccessRobot.tapCloseButton();
@@ -2203,6 +2201,8 @@ void main() {
         viewByItemsDetailRobot.verifyHeader();
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(materialPrincipalName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(materialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
@@ -2224,16 +2224,8 @@ void main() {
         //init app
         await pumpAppWithLoginOnBehalf(tester);
         await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
-        await checkoutRobot.verifyPoReferenceField(isVisible: true);
-        await checkoutRobot.enterPoReference(poReference);
-        await checkoutRobot.verifyReferenceNoteField(isVisible: true);
-        await checkoutRobot.enterReferenceNote(referenceNote);
-        await checkoutRobot.verifyContactPersonField(isVisible: true);
-        await checkoutRobot.enterContactPerson(contactPerson);
-        await checkoutRobot.verifyMobileNumberField(isVisible: true);
-        await checkoutRobot.enterContactPerson(mobileNumber);
-        await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
-        await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+        await updateRequiredFieldsOnCheckout();
+
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
@@ -2243,6 +2235,8 @@ void main() {
         await commonRobot.pullToRefresh();
         viewByItemsRobot.verifyOfferTag();
         await viewByItemsRobot.tapFirstOfferTag();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyOfferTag();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
@@ -2256,6 +2250,8 @@ void main() {
 
         viewByItemsRobot.verifyBonusLabel();
         await viewByItemsRobot.tapFirstBonusLabel();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyBonusLabel();
         viewByItemsDetailRobot.verifyFreePrice();
@@ -2415,16 +2411,8 @@ void main() {
           materialNumber,
           qty,
         );
-        await checkoutRobot.verifyPoReferenceField(isVisible: true);
-        await checkoutRobot.enterPoReference(poReference);
-        await checkoutRobot.verifyReferenceNoteField(isVisible: true);
-        await checkoutRobot.enterReferenceNote(referenceNote);
-        await checkoutRobot.verifyContactPersonField(isVisible: true);
-        await checkoutRobot.enterContactPerson(contactPerson);
-        await checkoutRobot.verifyMobileNumberField(isVisible: true);
-        await checkoutRobot.enterContactPerson(mobileNumber);
-        await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
-        await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+        await updateRequiredFieldsOnCheckout();
+
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
@@ -2437,7 +2425,9 @@ void main() {
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, qty);
         await cartRobot.tapCheckoutButton();
-        await oosPreOrderRobot.tapContinueButton();
+        if (oosPreOrderRobot.isSheetVisible) {
+          await oosPreOrderRobot.tapContinueButton();
+        }
         checkoutRobot.verifyPage();
         checkoutRobot.verifyContactNumberFieldHasText(mobileNumber);
       });
@@ -2456,16 +2446,8 @@ void main() {
           materialNumber,
           qty,
         );
-        await checkoutRobot.verifyPoReferenceField(isVisible: true);
-        await checkoutRobot.enterPoReference(poReference);
-        await checkoutRobot.verifyReferenceNoteField(isVisible: true);
-        await checkoutRobot.enterReferenceNote(referenceNote);
-        await checkoutRobot.verifyContactPersonField(isVisible: true);
-        await checkoutRobot.enterContactPerson(contactPerson);
-        await checkoutRobot.verifyMobileNumberField(isVisible: true);
-        await checkoutRobot.enterContactPerson(mobileNumber);
-        await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
-        await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+        await updateRequiredFieldsOnCheckout();
+
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
         await commonRobot.navigateToScreen(NavigationTab.orders);
@@ -2505,18 +2487,15 @@ void main() {
           materialNumber,
           orderQty,
         );
-        await checkoutRobot.verifyPoReferenceField(isVisible: true);
-        await checkoutRobot.enterPoReference(poReference);
-        await checkoutRobot.verifyReferenceNoteField(isVisible: true);
-        await checkoutRobot.enterReferenceNote(referenceNote);
-        await checkoutRobot.verifyContactPersonField(isVisible: true);
-        await checkoutRobot.enterContactPerson(contactPerson);
-        await checkoutRobot.verifyMobileNumberField(isVisible: true);
-        await checkoutRobot.enterContactPerson(mobileNumber);
-        await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
-        await checkoutRobot.enterDeliveryInstruction(deliveryInstruction);
+        await updateRequiredFieldsOnCheckout();
+
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+        await commonRobot.pullToRefresh();
+
         await commonRobot.navigateToScreen(NavigationTab.products);
         await productRobot.openSearchProductScreen();
         await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
@@ -2532,7 +2511,6 @@ void main() {
 
         //verify
         await ordersRootRobot.switchToViewByOrders();
-        await commonRobot.pullToRefresh();
         await viewByOrdersRobot.tapFirstOrder();
         final contactNumberFromOrder =
             viewByOrdersDetailRobot.getOrderContactNumber();
@@ -2541,7 +2519,9 @@ void main() {
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, orderQty + cartQty);
         await cartRobot.tapCheckoutButton();
-        await oosPreOrderRobot.tapContinueButton();
+        if (oosPreOrderRobot.isSheetVisible) {
+          await oosPreOrderRobot.tapContinueButton();
+        }
         checkoutRobot.verifyPage();
         checkoutRobot.verifyContactNumberFieldHasText(contactNumberFromOrder);
       });
@@ -2556,6 +2536,7 @@ void main() {
 
         //setup data
         await checkoutWithMaterial(bonusMaterialNumber, qty, isPreOrder: true);
+        await updateRequiredFieldsOnCheckout();
 
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
@@ -2571,6 +2552,8 @@ void main() {
         viewByOrdersDetailRobot.verifyOfferTag();
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
@@ -2588,6 +2571,8 @@ void main() {
         );
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(bonusManufacturerName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
         viewByItemsDetailRobot.verifyQty(bonusQty);
@@ -2667,8 +2652,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }

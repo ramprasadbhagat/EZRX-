@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/locator.dart';
+// import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+// import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+// import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/common/common_robot.dart';
 import '../../robots/common/extension.dart';
 import '../../robots/home/customer_search_robot.dart';
@@ -83,9 +83,9 @@ void main() {
 
   //Initialize Variable
   const market = 'Philippines';
+  const salesOrg = '2500';
   const username = 'phclientuser';
   const password = 'St@ysafe01';
-  const salesOrg = '2500';
   const customerCode = '0030013148';
   const shipToCode = '0070015858';
   const shipToAddress = 'WATSONS PERSONAL CARE';
@@ -94,6 +94,7 @@ void main() {
 
   var loginRequired = true;
 
+  // Login with sales org
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
     String shipToCode = shipToCode,
@@ -103,6 +104,7 @@ void main() {
     await runAppForTesting(tester);
     if (loginRequired) {
       await loginRobot.loginToHomeScreen(username, password, market);
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
         salesOrg,
@@ -116,6 +118,7 @@ void main() {
         await commonRobot.tapCustomerCodeSelector();
         await tester.pumpAndSettle();
       }
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
         salesOrg,
@@ -2338,8 +2341,8 @@ void main() {
     // });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }

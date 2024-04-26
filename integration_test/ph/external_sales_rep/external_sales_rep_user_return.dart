@@ -3,9 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
-import '../../core/test_locator.dart';
+// import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+// import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+// import '../../core/test_locator.dart';
 import '../../robots/common/common_robot.dart';
 import '../../robots/common/enum.dart';
 import '../../robots/common/extension.dart';
@@ -47,9 +47,10 @@ void main() {
 
   // initialize variables
   const marketSingapore = 'Philippines';
-  const username = 'phrootadmin';
-  const password = 'St@ysafe01';
-  const proxyUserName = 'phexternalsalesrep';
+  const username = 'auto_root_admin';
+  const password = 'Pa55word@1234';
+  const salesOrg = '2500';
+  const proxyUserName = 'testextsalesrep';
   const customerCode = '0000100296';
   const shipToCode = '0070023239';
   const shipToAddress = 'PASCUAL ANALGESIC';
@@ -96,7 +97,7 @@ void main() {
   final reason = 'Expired Within Policy'.tr();
   const materialId = materialNumber;
   final materialTitle = materialName.toUpperCase();
-  const materialUUID = '1510000561000010';
+  const materialUUID = '1510000575000010';
 
   //Return detail data
   const returnRequestStatus = 'Pending Review';
@@ -125,9 +126,11 @@ void main() {
     loginOnBehalfRobot = LoginOnBehalfRobot(tester);
   }
 
+  // Login on behalf with sales org
   Future<void> pumpAppWithLoginOnBehalf(
     WidgetTester tester, {
     String behalfName = proxyUserName,
+    String salesOrg = salesOrg,
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
@@ -145,23 +148,26 @@ void main() {
       await moreRobot.tapLoginOnBehalfTile();
       await loginOnBehalfRobot.enterUserNameField(behalfName);
       await loginOnBehalfRobot.tapLoginButton();
-      await Future.delayed(const Duration(seconds: 2));
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
-        '2500',
+        salesOrg,
       );
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
       moreRobot.verifyProfileName(behalfName, behalfName);
       proxyLoginRequired = false;
-      await commonRobot.navigateToScreen(NavigationTab.home);
     } else {
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      if (commonRobot.isCustomerCodeSelectorVisible) {
+        await commonRobot.tapCustomerCodeSelector();
+        await tester.pumpAndSettle();
+      }
       await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.changeSalesOrgAndSelectCustomerSearch(
         shipToCode,
-        '2500',
+        salesOrg,
       );
       await commonRobot.dismissSnackbar(dismissAll: true);
     }
@@ -281,6 +287,7 @@ void main() {
       returnsRootRobot.verifyViewByItemsPageVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByItemsRobot.verifyReturnItemsVisible();
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(invalidLengthSearchKey);
@@ -325,8 +332,6 @@ void main() {
         toDate: toDate,
       );
       await returnsByItemsFilterRobot.tapApplyButton();
-      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
@@ -335,6 +340,9 @@ void main() {
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByItemsRobot.verifyReturnsWithProductCodeVisible(materialNumber);
+      await commonRobot.tapClearSearch();
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
     });
 
     testWidgets(
@@ -666,6 +674,7 @@ void main() {
       returnsRootRobot.verifyViewByRequestPageVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByRequestRobot.verifyReturnRequestVisible();
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.autoSearch(invalidLengthSearchKey);
@@ -996,10 +1005,11 @@ void main() {
         toDate: toDateToNext,
       );
       await newReturnRobot.tapApply();
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnRobot.verifyStep2Visible();
     });
+
     testWidgets(
         'EZRX-T233 | Verify new return request Step 1 of 3: Text fields - UnHappy flow',
         (tester) async {
@@ -1011,7 +1021,7 @@ void main() {
       await commonRobot.dismissSnackbar();
       await commonRobot.searchWithKeyboardAction(inValidSearchKey);
       await newReturnRobot.verifySnackbarVisible();
-      await commonRobot.dismissSnackbar();
+      await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.searchWithKeyboardAction(noResultSearchKey);
       newReturnRobot.verifyNoItemFound();
     });
@@ -1114,8 +1124,7 @@ void main() {
         toDate: toDateToNextForStep2,
       );
       await newReturnRobot.tapApply();
-      await tester.pump(const Duration(seconds: 1));
-      await newReturnRobot.tapItemAt(index: 1);
+      await newReturnRobot.tapItemAt(index: 0);
       await newReturnRobot.tapNextButton();
       newReturnStep2Robot.verifyReturnDetailDisplayedWithBonus(
         materialId,
@@ -1172,8 +1181,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }

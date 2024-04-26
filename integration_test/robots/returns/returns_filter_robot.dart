@@ -39,14 +39,18 @@ abstract class ReturnsFilterRobot {
 
   Future<void> enterFromAmount(String text) async {
     await tester.tap(fromAmountFilter);
+    await tester.pump();
     await tester.enterText(fromAmountFilter, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump(Durations.long2);
   }
 
   Future<void> enterToAmount(String text) async {
     await tester.tap(toAmountFilter);
+    await tester.pump();
     await tester.enterText(toAmountFilter, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump(Durations.long2);
   }
 
   void verifyAmountRangeFilterApplied({

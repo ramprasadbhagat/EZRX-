@@ -166,7 +166,7 @@ class ViewByItemsDetailRobot extends CommonRobot {
       );
 
   Future<void> verifyOtherItemsComponent({bool isVisible = true}) async {
-    await scrollEnsureFinderVisible(otherItemDetailSection);
+    if (isVisible) await scrollEnsureFinderVisible(otherItemDetailSection);
     expect(
       find.descendant(of: otherItemDetailSection, matching: otherItem),
       isVisible ? findsWidgets : findsNothing,

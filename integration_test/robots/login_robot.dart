@@ -47,7 +47,6 @@ class LoginRobot extends CommonRobot {
     );
     while (introGetStartedButton.evaluate().isNotEmpty) {
       await tapIntroGetStartedButton();
-      await tester.pumpAndSettle(const Duration(seconds: 2));
     }
   }
 
