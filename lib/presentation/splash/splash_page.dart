@@ -1054,9 +1054,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     const CustomerCodeEvent.fetch(),
                   );
 
-                context.read<AnnouncementInfoBloc>().add(
-                      const AnnouncementInfoEvent.fetch(),
-                    );
                 // context.read<HomePageBloc>().add(const HomePageEvent.refresh());
               }
             }
