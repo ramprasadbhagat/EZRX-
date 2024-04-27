@@ -13,6 +13,7 @@ import '../../robots/login_robot.dart';
 import '../../robots/more/login_on_behalf_robot.dart';
 import '../../robots/more/more_robot.dart';
 import '../../robots/notification/notification_robot.dart';
+import '../../robots/orders/cart/bonus_sample_robot.dart';
 import '../../robots/orders/cart/cart_delivery_address_robot.dart';
 import '../../robots/orders/cart/cart_robot.dart';
 import '../../robots/orders/cart/oos_pre_order_robot.dart';
@@ -70,6 +71,7 @@ void main() {
   late ReturnsByItemsDetailRobot returnsByItemsDetailRobot;
 
   late PaymentSummaryDetailRobot paymentDetailRobot;
+  late BonusSampleRobot bonusSampleRobot;
 
   void initializeRobot(WidgetTester tester) {
     commonRobot = CommonRobot(tester);
@@ -105,6 +107,7 @@ void main() {
     returnsByItemsDetailRobot = ReturnsByItemsDetailRobot(tester);
 
     paymentDetailRobot = PaymentSummaryDetailRobot(tester);
+    bonusSampleRobot = BonusSampleRobot(tester);
   }
 
   const username = 'auto_root_admin';
@@ -134,6 +137,8 @@ void main() {
   const suspendedMaterialNumber = '21081162';
   const contactPerson = 'contact-person';
   const contactNumber = '1234567890';
+  const shipToCodeForGimmick = '0070100010';
+  const materialNumberForGimmick = '23168627';
 
   Future<void> pumpAppWithLogin(
     WidgetTester tester, {
@@ -158,6 +163,7 @@ void main() {
   Future<void> pumpAppWithLoginOnBehalf(
     WidgetTester tester, {
     String behalfName = proxyUserName,
+    String shipToCode = shipToCode,
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
@@ -1003,6 +1009,23 @@ void main() {
       productSuggestionRobot.verifyClearHistoryBottomSheet(isVisible: false);
       productSuggestionRobot.verifySearchHistory(isVisible: false);
       productSuggestionRobot.verifyNoSearchHistory();
+    });
+
+    testWidgets(
+        'EZRX-T1663 | Verify Do not display Gimmicks materials in material list when Enable Gimmick Materials toggle is Off in Sale Org Configuration ',
+        (tester) async {
+      //init app
+      await pumpAppWithLoginOnBehalf(
+        tester,
+        shipToCode: shipToCodeForGimmick,
+      );
+
+      await productRobot.navigateToScreen(NavigationTab.products);
+      productRobot.verifySearchBarVisible();
+      await productRobot.openSearchProductScreen();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(materialNumberForGimmick);
+      productSuggestionRobot.verifySearchResults(materialNumberForGimmick);
     });
   });
 
@@ -1935,6 +1958,70 @@ void main() {
     });
   });
 
+  group('Cart', () {
+    testWidgets(
+        'EZRX-T1662 | Verify Your cart must contain other commercial material to proceed checkout message when cart contain only Gimmick material',
+        (tester) async {
+      //init app
+      await pumpAppWithLoginOnBehalf(
+        tester,
+        shipToCode: shipToCodeForGimmick,
+      );
+
+      await browseProductFromEmptyCart();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(materialNumberForGimmick);
+      await productSuggestionRobot.tapSearchResult(materialNumberForGimmick);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+
+      //verify cart item
+      cartRobot.verifyClearCartButton();
+      await cartRobot.verifyMaterial(materialNumberForGimmick);
+      cartRobot.verifyMaterialNumber(materialNumberForGimmick);
+      cartRobot.verifyMaterialImage(materialNumberForGimmick);
+      cartRobot.verifyMaterialQty(materialNumberForGimmick, 1);
+
+      //verify gimmick material message
+      cartRobot.verifyGimmickMaterialMessage();
+    });
+
+    testWidgets(
+        'EZRX-T1662 | verify gimmick material in bonus override when gimmick material is on in sales org config',
+        (tester) async {
+      //init app
+      await pumpAppWithLoginOnBehalf(
+        tester,
+        shipToCode: shipToCodeForGimmick,
+      );
+
+      await browseProductFromEmptyCart();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(materialNumberForGimmick);
+      await productSuggestionRobot.tapSearchResult(materialNumberForGimmick);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+
+      //verify cart item
+      cartRobot.verifyClearCartButton();
+      await cartRobot.verifyMaterial(materialNumberForGimmick);
+      cartRobot.verifyMaterialNumber(materialNumberForGimmick);
+      cartRobot.verifyMaterialImage(materialNumberForGimmick);
+      cartRobot.verifyMaterialQty(materialNumberForGimmick, 1);
+
+      // verify gimmick material in bonus override
+      cartRobot.verifyMaterialBonusSampleButton(materialNumberForGimmick);
+      await cartRobot.tapMaterialBonusSampleButton(materialNumberForGimmick);
+      bonusSampleRobot.verifySheet(isVisible: true);
+      bonusSampleRobot.verifySearchBar();
+      await bonusSampleRobot.searchWithKeyboardAction(materialNumberForGimmick);
+      bonusSampleRobot.verifyBonusSampleItems();
+      bonusSampleRobot.verifyCloseButton();
+      await bonusSampleRobot.tapCloseButton();
+      bonusSampleRobot.verifySheet(isVisible: false);
+    });
+  });
+  
   // tearDown(() async {
   //   locator<ZephyrService>().setNameAndStatus();
   //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);

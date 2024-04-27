@@ -1004,4 +1004,18 @@ class CartRobot {
       findsOneWidget,
     );
   }
+
+  //============================================================
+  //  Gimmick material
+  //============================================================
+
+  void verifyGimmickMaterialMessage() {
+    expect(
+      find.text(
+        'Your cart must contain other commercial material to proceed checkout.'
+            .tr(),
+      ),
+      findsOneWidget,
+    );
+  }
 }

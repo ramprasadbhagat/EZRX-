@@ -147,6 +147,9 @@ void main() {
   const referenceNote = 'Auto-test-reference-note';
   const orderCode = '200337693';
   const taxPercent = 7;
+  const proxyUserNameForGimmick = 'testintsalesrep';
+  const shipToCodeForGimmick = '0071153502';
+  const materialNumberForGimmick = '23263235';
 
   Future<void> pumpAppWithLogin(
     WidgetTester tester, {
@@ -1022,6 +1025,30 @@ void main() {
       productSuggestionRobot.verifyClearHistoryBottomSheet(isVisible: false);
       productSuggestionRobot.verifySearchHistory(isVisible: false);
       productSuggestionRobot.verifyNoSearchHistory();
+    });
+
+    testWidgets(
+        'EZRX-T1663 | Verify Do not display Gimmicks materials in material list when Enable Gimmick Materials toggle is Off in Sale Org Configuration',
+        (tester) async {
+      //init app
+      await pumpAppWithLoginOnBehalf(
+        tester,
+        behalfName: proxyUserNameForGimmick,
+        shipToCode: shipToCodeForGimmick,
+      );
+
+      await productRobot.navigateToScreen(NavigationTab.products);
+      productRobot.verifySearchBarVisible();
+      await productRobot.openSearchProductScreen();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(materialNumberForGimmick);
+      productSuggestionRobot.verifyNoRecordFound();
+      await productSuggestionRobot.tapToBackButton();
+
+      // logout because doing login on behalf
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.findLogout();
+      await moreRobot.tapLogout();
     });
   });
 
@@ -2304,6 +2331,41 @@ void main() {
       cartRobot.verifyCartTotalPrice(
         newTotalPrice.includeTax(taxPercent).priceDisplay(currency),
       );
+    });
+
+    testWidgets('EZRX-T1663 | Verify Do not show gimmick material in the bonus material search when Enable Gimmick Materials toggle is Off in Sale Org Configuration',
+        (tester) async {
+      //init app
+      await pumpAppWithLoginOnBehalf(
+        tester,
+        behalfName: proxyUserNameForGimmick,
+        shipToCode: shipToCodeForGimmick,
+      );
+      await browseProductFromEmptyCart();
+
+      //verify display
+      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(materialNumber);
+      cartRobot.verifyMaterialBonusSampleButton(materialNumber);
+      await cartRobot.tapMaterialBonusSampleButton(materialNumber);
+      bonusSampleRobot.verifySheet(isVisible: true);
+      bonusSampleRobot.verifySearchBar();
+      await bonusSampleRobot.searchWithKeyboardAction(materialNumberForGimmick);
+      bonusSampleRobot.verifyNoRecordFound();
+      bonusSampleRobot.verifyCloseButton();
+      await bonusSampleRobot.tapCloseButton();
+      bonusSampleRobot.verifySheet(isVisible: false);
+      await cartRobot.tapCloseButton();
+      await productDetailRobot.tapBackButton();
+      await productSuggestionRobot.tapToBackButton();
+
+      // logout because doing login on behalf
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.findLogout();
+      await moreRobot.tapLogout();
     });
   });
 

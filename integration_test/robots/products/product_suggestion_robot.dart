@@ -108,4 +108,12 @@ class ProductSuggestionRobot extends CommonRobot {
     );
     await tester.pumpUntilVisible(noSearchHistory);
   }
+
+  Future<void> tapToBackButton() async {
+    // Find the leading icon using the default icon (typically the back button)
+    final backButton = find.byIcon(Icons.arrow_back);
+    expect(backButton, findsOneWidget);
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
+  }
 }

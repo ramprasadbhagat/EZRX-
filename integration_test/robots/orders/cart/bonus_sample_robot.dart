@@ -135,4 +135,23 @@ class BonusSampleRobot extends CommonRobot {
       findsNWidgets(itemCount),
     );
   }
+
+  void verifyNoRecordFound() {
+    expect(
+      find.byKey(WidgetKeys.noRecordsFoundSearchIcon),
+      findsOneWidget,
+    );
+    expect(
+      find.textContaining(
+        'Looks like you don’t have any bonus/sample items'.tr(),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.textContaining(
+        'Try adjusting the search or another product from cart'.tr(),
+      ),
+      findsOneWidget,
+    );
+  }
 }
