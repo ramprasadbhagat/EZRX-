@@ -931,6 +931,8 @@ class WidgetKeys {
   static const Key materialTenderContractRadio =
       Key('materialTenderContractRadio');
   static const Key imageSectionProductDetail = Key('imageSectionProductDetail');
+  static const Key customSnackBarDismissable = Key('customSnackBarDismissable');
+
   //============================================================
   //  bundle Details
   //============================================================

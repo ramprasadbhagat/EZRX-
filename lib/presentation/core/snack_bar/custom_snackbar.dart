@@ -96,67 +96,88 @@ class _ActualSnackbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              ConstrainedBox(
-                constraints: const BoxConstraints.tightFor(width: 42.0),
-                child: icon,
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 10,
-                        left: 4.0,
-                        right: 8.0,
-                        bottom: 10,
-                      ),
-                      child: Text(
-                        messageText,
-                        key: WidgetKeys.customSnackBarMessage,
-                        style: textStyle ??
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: ZPColors.primary,
-                                ),
-                      ),
+    return Dismissible(
+      key: WidgetKeys.customSnackBarDismissable,
+      direction: DismissDirection.horizontal,
+      onDismissed: (direction) async {
+        await dismiss();
+      },
+      child: GestureDetector(
+        onPanUpdate: (details) async {
+          final deltaY = details.delta.dy;
+          const threshold = 20;
+
+          // Dismiss when swiping up or top only.
+          if (deltaY.abs() > threshold && deltaY < 0) {
+            await dismiss();
+          }
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  ConstrainedBox(
+                    constraints: const BoxConstraints.tightFor(width: 42.0),
+                    child: icon,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                            left: 4.0,
+                            right: 8.0,
+                            bottom: 10,
+                          ),
+                          child: Text(
+                            messageText,
+                            key: WidgetKeys.customSnackBarMessage,
+                            style: textStyle ??
+                                Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      color: ZPColors.primary,
+                                    ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 4),
-                child: Row(
-                  children: [
-                    mainButton ?? const SizedBox.shrink(),
-                    IconButton(
-                      key: WidgetKeys.snackBarDismissButton,
-                      onPressed: () async {
-                        await dismiss();
-                      },
-                      icon: const Icon(
-                        Icons.close,
-                        color: ZPColors.backgroundCloseButtonSnackBar,
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 4),
+                    child: Row(
+                      children: [
+                        mainButton ?? const SizedBox.shrink(),
+                        IconButton(
+                          key: WidgetKeys.snackBarDismissButton,
+                          onPressed: () async {
+                            await dismiss();
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: ZPColors.backgroundCloseButtonSnackBar,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
