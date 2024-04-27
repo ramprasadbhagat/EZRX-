@@ -768,6 +768,37 @@ void main() {
         );
       });
 
+      testWidgets(
+          'is not visible when marketPlace is not enabled and the item is MP',
+          (tester) async {
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem:
+                fakeOrderHistoryItem.copyWith(isMarketPlace: true),
+            salesOrgConfig: fakeSGSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final button = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+        expect(button, findsNothing);
+      });
+
+      testWidgets('is visible when marketPlace is enabled and the item is MP',
+          (tester) async {
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem:
+                fakeOrderHistoryItem.copyWith(isMarketPlace: true),
+            salesOrgConfig: fakeMYSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final button = find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+        expect(button, findsOneWidget);
+      });
+
       testWidgets('is visible when user role is not sales rep', (tester) async {
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(

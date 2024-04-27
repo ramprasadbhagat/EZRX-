@@ -112,10 +112,10 @@ class _ViewByOrder extends StatelessWidget {
                 ],
               ),
             ),
-            if (context
-                .read<ViewByOrderBloc>()
-                .state
-                .displayBuyAgainButton(viewByOrderHistoryItem.type))
+            if (context.read<ViewByOrderBloc>().state.displayBuyAgainButton(
+                  viewByOrderHistoryItem.type,
+                  viewByOrderHistoryItem.isMarketPlace,
+                ))
               BuyAgainButton(
                 viewByOrderHistoryItem: viewByOrderHistoryItem,
                 key: WidgetKeys.viewByOrderBuyAgainButtonKey,

@@ -34,11 +34,17 @@ class ViewByOrderState with _$ViewByOrderState {
         shipToInfo: ShipToInfo.empty(),
       );
 
-  bool displayBuyAgainButton(DocumentType type) {
+  bool displayBuyAgainButton(
+    DocumentType type,
+    bool isMarketPlace,
+  ) {
     if (user.disableCreateOrder) {
       return false;
     }
     if (customerCodeInfo.status.isEDI) {
+      return false;
+    }
+    if (!salesOrgConfigs.enableMarketPlace && isMarketPlace) {
       return false;
     }
     final isCovidOrderType =

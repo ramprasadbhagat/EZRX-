@@ -38,6 +38,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -121,11 +122,17 @@ void main() {
         .thenReturn(ViewByItemDetailsState.initial());
     when(() => eligibilityBlocMock.state).thenReturn(
       EligibilityState.initial().copyWith(
-        user: fakeClientUser.copyWith(enableOrderType: true),
+        user: fakeClientUser.copyWith(
+          enableOrderType: true,
+          acceptMPTC: MarketPlaceTnCAcceptance.accept(),
+          acceptPrivacyPolicy: true,
+        ),
         salesOrganisation: fakeSGSalesOrganisation,
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
         customerCodeInfo: CustomerCodeInfo.empty().copyWith(
           customerAttr7: CustomerAttr7('ZEV'),
           customerGrp4: CustomerGrp4('VR'),
+          isMarketPlace: true,
         ),
       ),
     );
@@ -308,6 +315,7 @@ void main() {
       when(() => mockViewByOrderBloc.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           viewByOrderList: viewByOrder,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
 
@@ -367,6 +375,7 @@ void main() {
         ViewByOrderState.initial().copyWith(
           viewByOrderList: viewByOrder
               .copyWith(orderHeaders: [viewByOrder.orderHeaders.first]),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       whenListen(
@@ -437,6 +446,7 @@ void main() {
         ViewByOrderState.initial().copyWith(
           viewByOrderList: viewByOrder
               .copyWith(orderHeaders: [viewByOrder.orderHeaders.first]),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       when(() => reOrderPermissionBlocMock.state).thenReturn(
@@ -488,6 +498,7 @@ void main() {
         ViewByOrderState.initial().copyWith(
           viewByOrderList: viewByOrder
               .copyWith(orderHeaders: [viewByOrder.orderHeaders.first]),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
       whenListen(
@@ -784,6 +795,54 @@ void main() {
               .toPlainText(),
           contains('Queue #${fakeOrderHistory.orderNumber.getValue()}'),
         );
+      });
+
+      testWidgets(
+          'Buy Again Button not shown for MP orders when marketPlace is not enabled',
+          (tester) async {
+        when(() => mockViewByOrderBloc.state).thenReturn(
+          ViewByOrderState.initial().copyWith(
+            viewByOrderList: viewByOrder.copyWith(
+              orderHeaders: [
+                OrderHistoryDetails.empty().copyWith(
+                  isMarketPlace: true,
+                ),
+              ],
+            ),
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final buyAgainButton =
+            find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+
+        expect(buyAgainButton, findsNothing);
+      });
+
+      testWidgets(
+          'Buy Again Button shown for MP orders when marketPlace is enabled',
+          (tester) async {
+        when(() => mockViewByOrderBloc.state).thenReturn(
+          ViewByOrderState.initial().copyWith(
+            viewByOrderList: viewByOrder.copyWith(
+              orderHeaders: [
+                OrderHistoryDetails.empty().copyWith(
+                  isMarketPlace: true,
+                ),
+              ],
+            ),
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final buyAgainButton =
+            find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+
+        expect(buyAgainButton, findsOneWidget);
       });
     });
   });

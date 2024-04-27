@@ -54,6 +54,9 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
     if (customerCodeInfo.status.isEDI) {
       return false;
     }
+    if (!configs.enableMarketPlace && orderHistoryDetails.isMarketPlace) {
+      return false;
+    }
     final isCovidOrderType = (configs.salesOrg.isPH &&
             orderHistoryDetails.type.isCovidOrderTypeForPH) ||
         (configs.salesOrg.isSg &&

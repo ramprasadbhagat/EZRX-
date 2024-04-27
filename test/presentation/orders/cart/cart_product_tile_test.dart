@@ -973,7 +973,9 @@ void main() {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: [
-              mpMaterial.copyWith(salesOrgConfig: fakeSGSalesOrgConfigs),
+              mpMaterial.copyWith(
+                salesOrgConfig: fakeSGSalesOrgConfigs,
+              ),
             ],
           ),
         );

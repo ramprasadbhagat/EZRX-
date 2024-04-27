@@ -1001,6 +1001,46 @@ void main() {
     });
 
     testWidgets(
+        'Buy Again Button not shown for MP order detail when marketPlace is not enabled',
+        (tester) async {
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          configs: fakeSGSalesOrgConfigs,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            isMarketPlace: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final buyAgainButton =
+          find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+
+      expect(buyAgainButton, findsNothing);
+    });
+
+    testWidgets(
+        'Buy Again Button shown for MP order detail when marketPlace is enabled',
+        (tester) async {
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          configs: fakeMYSalesOrgConfigs,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            isMarketPlace: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final buyAgainButton =
+          find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+
+      expect(buyAgainButton, findsOneWidget);
+    });
+
+    testWidgets(
         'Buy again button not visible when disable create order flag is true',
         (tester) async {
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(

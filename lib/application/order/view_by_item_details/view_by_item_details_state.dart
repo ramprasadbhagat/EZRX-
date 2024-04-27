@@ -59,6 +59,10 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
       return false;
     }
 
+    if (!salesOrgConfig.enableMarketPlace && orderHistoryItem.isMarketPlace) {
+      return false;
+    }
+
     if (isCovidForNonCustomer) {
       return false;
     }
