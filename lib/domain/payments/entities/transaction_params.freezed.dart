@@ -12,7 +12,7 @@ part of 'transaction_params.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TransactionParams {
@@ -20,7 +20,6 @@ mixin _$TransactionParams {
   int get first => throw _privateConstructorUsedError;
   int get after => throw _privateConstructorUsedError;
   PaymentSummaryFilter get filter => throw _privateConstructorUsedError;
-  SearchKey get searchKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransactionParamsCopyWith<TransactionParams> get copyWith =>
@@ -34,11 +33,7 @@ abstract class $TransactionParamsCopyWith<$Res> {
       _$TransactionParamsCopyWithImpl<$Res, TransactionParams>;
   @useResult
   $Res call(
-      {String customerCode,
-      int first,
-      int after,
-      PaymentSummaryFilter filter,
-      SearchKey searchKey});
+      {String customerCode, int first, int after, PaymentSummaryFilter filter});
 
   $PaymentSummaryFilterCopyWith<$Res> get filter;
 }
@@ -60,7 +55,6 @@ class _$TransactionParamsCopyWithImpl<$Res, $Val extends TransactionParams>
     Object? first = null,
     Object? after = null,
     Object? filter = null,
-    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       customerCode: null == customerCode
@@ -79,10 +73,6 @@ class _$TransactionParamsCopyWithImpl<$Res, $Val extends TransactionParams>
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryFilter,
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
     ) as $Val);
   }
 
@@ -96,30 +86,26 @@ class _$TransactionParamsCopyWithImpl<$Res, $Val extends TransactionParams>
 }
 
 /// @nodoc
-abstract class _$$_TransactionParamsCopyWith<$Res>
+abstract class _$$TransactionParamsImplCopyWith<$Res>
     implements $TransactionParamsCopyWith<$Res> {
-  factory _$$_TransactionParamsCopyWith(_$_TransactionParams value,
-          $Res Function(_$_TransactionParams) then) =
-      __$$_TransactionParamsCopyWithImpl<$Res>;
+  factory _$$TransactionParamsImplCopyWith(_$TransactionParamsImpl value,
+          $Res Function(_$TransactionParamsImpl) then) =
+      __$$TransactionParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String customerCode,
-      int first,
-      int after,
-      PaymentSummaryFilter filter,
-      SearchKey searchKey});
+      {String customerCode, int first, int after, PaymentSummaryFilter filter});
 
   @override
   $PaymentSummaryFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
-class __$$_TransactionParamsCopyWithImpl<$Res>
-    extends _$TransactionParamsCopyWithImpl<$Res, _$_TransactionParams>
-    implements _$$_TransactionParamsCopyWith<$Res> {
-  __$$_TransactionParamsCopyWithImpl(
-      _$_TransactionParams _value, $Res Function(_$_TransactionParams) _then)
+class __$$TransactionParamsImplCopyWithImpl<$Res>
+    extends _$TransactionParamsCopyWithImpl<$Res, _$TransactionParamsImpl>
+    implements _$$TransactionParamsImplCopyWith<$Res> {
+  __$$TransactionParamsImplCopyWithImpl(_$TransactionParamsImpl _value,
+      $Res Function(_$TransactionParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -129,9 +115,8 @@ class __$$_TransactionParamsCopyWithImpl<$Res>
     Object? first = null,
     Object? after = null,
     Object? filter = null,
-    Object? searchKey = null,
   }) {
-    return _then(_$_TransactionParams(
+    return _then(_$TransactionParamsImpl(
       customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
@@ -148,23 +133,18 @@ class __$$_TransactionParamsCopyWithImpl<$Res>
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryFilter,
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_TransactionParams extends _TransactionParams {
-  const _$_TransactionParams(
+class _$TransactionParamsImpl extends _TransactionParams {
+  const _$TransactionParamsImpl(
       {required this.customerCode,
       required this.first,
       required this.after,
-      required this.filter,
-      required this.searchKey})
+      required this.filter})
       : super._();
 
   @override
@@ -175,37 +155,33 @@ class _$_TransactionParams extends _TransactionParams {
   final int after;
   @override
   final PaymentSummaryFilter filter;
-  @override
-  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'TransactionParams(customerCode: $customerCode, first: $first, after: $after, filter: $filter, searchKey: $searchKey)';
+    return 'TransactionParams(customerCode: $customerCode, first: $first, after: $after, filter: $filter)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TransactionParams &&
+            other is _$TransactionParamsImpl &&
             (identical(other.customerCode, customerCode) ||
                 other.customerCode == customerCode) &&
             (identical(other.first, first) || other.first == first) &&
             (identical(other.after, after) || other.after == after) &&
-            (identical(other.filter, filter) || other.filter == filter) &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+            (identical(other.filter, filter) || other.filter == filter));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, customerCode, first, after, filter, searchKey);
+      Object.hash(runtimeType, customerCode, first, after, filter);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TransactionParamsCopyWith<_$_TransactionParams> get copyWith =>
-      __$$_TransactionParamsCopyWithImpl<_$_TransactionParams>(
+  _$$TransactionParamsImplCopyWith<_$TransactionParamsImpl> get copyWith =>
+      __$$TransactionParamsImplCopyWithImpl<_$TransactionParamsImpl>(
           this, _$identity);
 }
 
@@ -214,8 +190,7 @@ abstract class _TransactionParams extends TransactionParams {
       {required final String customerCode,
       required final int first,
       required final int after,
-      required final PaymentSummaryFilter filter,
-      required final SearchKey searchKey}) = _$_TransactionParams;
+      required final PaymentSummaryFilter filter}) = _$TransactionParamsImpl;
   const _TransactionParams._() : super._();
 
   @override
@@ -227,9 +202,7 @@ abstract class _TransactionParams extends TransactionParams {
   @override
   PaymentSummaryFilter get filter;
   @override
-  SearchKey get searchKey;
-  @override
   @JsonKey(ignore: true)
-  _$$_TransactionParamsCopyWith<_$_TransactionParams> get copyWith =>
+  _$$TransactionParamsImplCopyWith<_$TransactionParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

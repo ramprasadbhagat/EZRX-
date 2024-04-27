@@ -1,21 +1,15 @@
 import 'package:dartz/dartz.dart';
+
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/transaction_params.dart';
-
 import 'package:ezrxmobile/domain/payments/repository/i_payment_summary_repository.dart';
-
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
-
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_local_datasource.dart';
-
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/transaction_params_dto.dart';
@@ -37,7 +31,6 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required PaymentSummaryFilter filter,
-    required SearchKey searchKey,
     required int offset,
     required int pageSize,
     required bool isMarketPlace,
@@ -49,7 +42,6 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
         ? _getTransactionList(
             customerCode: customerCode,
             filter: filter,
-            searchKey: searchKey,
             offset: offset,
             pageSize: pageSize,
           )
@@ -57,7 +49,6 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
             salesOrgCode: salesOrgCode,
             customerCode: customerCode,
             filter: filter,
-            searchKey: searchKey,
             offset: offset,
             pageSize: pageSize,
             isMarketPlace: isMarketPlace,
@@ -67,7 +58,6 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
   Future<Either<ApiFailure, List<PaymentSummaryDetails>>> _getTransactionList({
     required String customerCode,
     required PaymentSummaryFilter filter,
-    required SearchKey searchKey,
     required int offset,
     required int pageSize,
   }) async {
@@ -86,7 +76,6 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
           TransactionParams(
             customerCode: customerCode,
             filter: filter,
-            searchKey: searchKey,
             first: pageSize,
             after: offset,
           ),
@@ -104,7 +93,6 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
     required String salesOrgCode,
     required String customerCode,
     required PaymentSummaryFilter filter,
-    required SearchKey searchKey,
     required int offset,
     required int pageSize,
     required bool isMarketPlace,
@@ -119,19 +107,11 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
       }
     }
     try {
-      final filterList = PaymentSummaryFilterDto.fromDomain(filter).toMapList;
-
-      if (searchKey.validateNotEmpty) {
-        final searchMap = <String, String>{};
-        searchMap.putIfAbsent('field', () => 'zzAdvice');
-        searchMap.putIfAbsent('value', () => searchKey.upperCaseValue);
-        filterList.add(searchMap);
-      }
       final paymentSummaryList = await remoteDataSource.getPaymentSummary(
         customerCode: customerCode,
         salesOrg: salesOrgCode,
         offset: offset,
-        filterList: filterList,
+        filterList: PaymentSummaryFilterDto.fromDomain(filter).toMapList,
         pageSize: pageSize,
         isMarketPlace: isMarketPlace,
       );

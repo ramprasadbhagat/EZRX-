@@ -10,13 +10,13 @@ class _PaymentSummaryResetButton extends StatelessWidget {
         key: WidgetKeys.filterResetButton,
         onPressed: () {
           final bloc = context.paymentSummaryBloc(context.isMPPayment);
-          if (bloc.state.appliedFilter !=
-                  PaymentSummaryFilter.defaultFilter() ||
-              bloc.state.searchKey != SearchKey.searchFilter('')) {
+          if (bloc.state.appliedFilter.excludeSearch !=
+              PaymentSummaryFilter.defaultFilter()) {
             bloc.add(
               PaymentSummaryEvent.fetch(
-                appliedFilter: PaymentSummaryFilter.defaultFilter(),
-                searchKey: SearchKey.searchFilter(''),
+                appliedFilter: PaymentSummaryFilter.defaultFilter().copyWith(
+                  searchKey: bloc.state.appliedFilter.searchKey,
+                ),
               ),
             );
           }

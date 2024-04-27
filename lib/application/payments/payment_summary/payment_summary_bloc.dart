@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -59,11 +58,7 @@ abstract class PaymentSummaryBloc
         ),
       ),
       fetch: (e) async {
-        if (!e.searchKey.isValid()) return;
-
-        if (e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) {
-          return;
-        }
+        if (!e.appliedFilter.searchKey.isValid()) return;
 
         emit(
           state.copyWith(
@@ -72,7 +67,6 @@ abstract class PaymentSummaryBloc
             details: <PaymentSummaryDetails>[],
             failureOrSuccessOption: none(),
             appliedFilter: e.appliedFilter,
-            searchKey: e.searchKey,
           ),
         );
 
@@ -83,7 +77,6 @@ abstract class PaymentSummaryBloc
           offset: state.details.length,
           pageSize: config.pageSize,
           filter: e.appliedFilter,
-          searchKey: e.searchKey,
           isMarketPlace: isMarketplace,
         );
 
@@ -123,7 +116,6 @@ abstract class PaymentSummaryBloc
           filter: state.appliedFilter,
           offset: state.details.length,
           pageSize: config.pageSize,
-          searchKey: state.searchKey,
           isMarketPlace: isMarketplace,
         );
 

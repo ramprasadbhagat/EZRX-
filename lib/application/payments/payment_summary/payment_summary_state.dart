@@ -10,7 +10,6 @@ class PaymentSummaryState with _$PaymentSummaryState {
     required bool isFetching,
     required bool canLoadMore,
     required PaymentSummaryFilter appliedFilter,
-    required SearchKey searchKey,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _PaymentSummaryState;
 
@@ -19,7 +18,6 @@ class PaymentSummaryState with _$PaymentSummaryState {
         customerCodeInfo: CustomerCodeInfo.empty(),
         failureOrSuccessOption: none(),
         appliedFilter: PaymentSummaryFilter.defaultFilter(),
-        searchKey: SearchKey.searchFilter(''),
         isFetching: false,
         canLoadMore: true,
         details: <PaymentSummaryDetails>[],

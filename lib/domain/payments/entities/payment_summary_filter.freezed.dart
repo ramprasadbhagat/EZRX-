@@ -12,7 +12,7 @@ part of 'payment_summary_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentSummaryFilter {
@@ -21,6 +21,7 @@ mixin _$PaymentSummaryFilter {
   RangeValue get amountValueFrom => throw _privateConstructorUsedError;
   RangeValue get amountValueTo => throw _privateConstructorUsedError;
   List<FilterStatus> get filterStatuses => throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentSummaryFilterCopyWith<PaymentSummaryFilter> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $PaymentSummaryFilterCopyWith<$Res> {
       DateTimeStringValue createdDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      List<FilterStatus> filterStatuses});
+      List<FilterStatus> filterStatuses,
+      SearchKey searchKey});
 }
 
 /// @nodoc
@@ -60,6 +62,7 @@ class _$PaymentSummaryFilterCopyWithImpl<$Res,
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       createdDateFrom: null == createdDateFrom
@@ -82,16 +85,20 @@ class _$PaymentSummaryFilterCopyWithImpl<$Res,
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as List<FilterStatus>,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PaymentSummaryFilterCopyWith<$Res>
+abstract class _$$PaymentSummaryFilterImplCopyWith<$Res>
     implements $PaymentSummaryFilterCopyWith<$Res> {
-  factory _$$_PaymentSummaryFilterCopyWith(_$_PaymentSummaryFilter value,
-          $Res Function(_$_PaymentSummaryFilter) then) =
-      __$$_PaymentSummaryFilterCopyWithImpl<$Res>;
+  factory _$$PaymentSummaryFilterImplCopyWith(_$PaymentSummaryFilterImpl value,
+          $Res Function(_$PaymentSummaryFilterImpl) then) =
+      __$$PaymentSummaryFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,15 +106,16 @@ abstract class _$$_PaymentSummaryFilterCopyWith<$Res>
       DateTimeStringValue createdDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      List<FilterStatus> filterStatuses});
+      List<FilterStatus> filterStatuses,
+      SearchKey searchKey});
 }
 
 /// @nodoc
-class __$$_PaymentSummaryFilterCopyWithImpl<$Res>
-    extends _$PaymentSummaryFilterCopyWithImpl<$Res, _$_PaymentSummaryFilter>
-    implements _$$_PaymentSummaryFilterCopyWith<$Res> {
-  __$$_PaymentSummaryFilterCopyWithImpl(_$_PaymentSummaryFilter _value,
-      $Res Function(_$_PaymentSummaryFilter) _then)
+class __$$PaymentSummaryFilterImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryFilterCopyWithImpl<$Res, _$PaymentSummaryFilterImpl>
+    implements _$$PaymentSummaryFilterImplCopyWith<$Res> {
+  __$$PaymentSummaryFilterImplCopyWithImpl(_$PaymentSummaryFilterImpl _value,
+      $Res Function(_$PaymentSummaryFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,8 +126,9 @@ class __$$_PaymentSummaryFilterCopyWithImpl<$Res>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
-    return _then(_$_PaymentSummaryFilter(
+    return _then(_$PaymentSummaryFilterImpl(
       createdDateFrom: null == createdDateFrom
           ? _value.createdDateFrom
           : createdDateFrom // ignore: cast_nullable_to_non_nullable
@@ -140,19 +149,24 @@ class __$$_PaymentSummaryFilterCopyWithImpl<$Res>
           ? _value._filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as List<FilterStatus>,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_PaymentSummaryFilter extends _PaymentSummaryFilter {
-  _$_PaymentSummaryFilter(
+class _$PaymentSummaryFilterImpl extends _PaymentSummaryFilter {
+  _$PaymentSummaryFilterImpl(
       {required this.createdDateFrom,
       required this.createdDateTo,
       required this.amountValueFrom,
       required this.amountValueTo,
-      required final List<FilterStatus> filterStatuses})
+      required final List<FilterStatus> filterStatuses,
+      required this.searchKey})
       : _filterStatuses = filterStatuses,
         super._();
 
@@ -173,15 +187,18 @@ class _$_PaymentSummaryFilter extends _PaymentSummaryFilter {
   }
 
   @override
+  final SearchKey searchKey;
+
+  @override
   String toString() {
-    return 'PaymentSummaryFilter(createdDateFrom: $createdDateFrom, createdDateTo: $createdDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
+    return 'PaymentSummaryFilter(createdDateFrom: $createdDateFrom, createdDateTo: $createdDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentSummaryFilter &&
+            other is _$PaymentSummaryFilterImpl &&
             (identical(other.createdDateFrom, createdDateFrom) ||
                 other.createdDateFrom == createdDateFrom) &&
             (identical(other.createdDateTo, createdDateTo) ||
@@ -191,7 +208,9 @@ class _$_PaymentSummaryFilter extends _PaymentSummaryFilter {
             (identical(other.amountValueTo, amountValueTo) ||
                 other.amountValueTo == amountValueTo) &&
             const DeepCollectionEquality()
-                .equals(other._filterStatuses, _filterStatuses));
+                .equals(other._filterStatuses, _filterStatuses) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
@@ -201,24 +220,26 @@ class _$_PaymentSummaryFilter extends _PaymentSummaryFilter {
       createdDateTo,
       amountValueFrom,
       amountValueTo,
-      const DeepCollectionEquality().hash(_filterStatuses));
+      const DeepCollectionEquality().hash(_filterStatuses),
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentSummaryFilterCopyWith<_$_PaymentSummaryFilter> get copyWith =>
-      __$$_PaymentSummaryFilterCopyWithImpl<_$_PaymentSummaryFilter>(
-          this, _$identity);
+  _$$PaymentSummaryFilterImplCopyWith<_$PaymentSummaryFilterImpl>
+      get copyWith =>
+          __$$PaymentSummaryFilterImplCopyWithImpl<_$PaymentSummaryFilterImpl>(
+              this, _$identity);
 }
 
 abstract class _PaymentSummaryFilter extends PaymentSummaryFilter {
   factory _PaymentSummaryFilter(
-          {required final DateTimeStringValue createdDateFrom,
-          required final DateTimeStringValue createdDateTo,
-          required final RangeValue amountValueFrom,
-          required final RangeValue amountValueTo,
-          required final List<FilterStatus> filterStatuses}) =
-      _$_PaymentSummaryFilter;
+      {required final DateTimeStringValue createdDateFrom,
+      required final DateTimeStringValue createdDateTo,
+      required final RangeValue amountValueFrom,
+      required final RangeValue amountValueTo,
+      required final List<FilterStatus> filterStatuses,
+      required final SearchKey searchKey}) = _$PaymentSummaryFilterImpl;
   _PaymentSummaryFilter._() : super._();
 
   @override
@@ -232,7 +253,9 @@ abstract class _PaymentSummaryFilter extends PaymentSummaryFilter {
   @override
   List<FilterStatus> get filterStatuses;
   @override
+  SearchKey get searchKey;
+  @override
   @JsonKey(ignore: true)
-  _$$_PaymentSummaryFilterCopyWith<_$_PaymentSummaryFilter> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PaymentSummaryFilterImplCopyWith<_$PaymentSummaryFilterImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

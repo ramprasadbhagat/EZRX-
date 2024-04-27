@@ -12,7 +12,7 @@ part of 'payment_summary_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PaymentSummaryFilterDto _$PaymentSummaryFilterDtoFromJson(
     Map<String, dynamic> json) {
@@ -31,6 +31,8 @@ mixin _$PaymentSummaryFilterDto {
   String get amountValueTo => throw _privateConstructorUsedError;
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   String get filterStatuses => throw _privateConstructorUsedError;
+  @JsonKey(name: 'zzAdvice', defaultValue: '')
+  String get searchKey => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,8 +53,8 @@ abstract class $PaymentSummaryFilterDtoCopyWith<$Res> {
       @JsonKey(name: 'amountValueFrom', defaultValue: '')
       String amountValueFrom,
       @JsonKey(name: 'amountValueTo', defaultValue: '') String amountValueTo,
-      @JsonKey(name: 'filterStatuses', defaultValue: '')
-      String filterStatuses});
+      @JsonKey(name: 'filterStatuses', defaultValue: '') String filterStatuses,
+      @JsonKey(name: 'zzAdvice', defaultValue: '') String searchKey});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$PaymentSummaryFilterDtoCopyWithImpl<$Res,
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       createdDateFrom: null == createdDateFrom
@@ -96,16 +99,21 @@ class _$PaymentSummaryFilterDtoCopyWithImpl<$Res,
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as String,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PaymentSummaryFilterDtoCopyWith<$Res>
+abstract class _$$PaymentSummaryFilterDtoImplCopyWith<$Res>
     implements $PaymentSummaryFilterDtoCopyWith<$Res> {
-  factory _$$_PaymentSummaryFilterDtoCopyWith(_$_PaymentSummaryFilterDto value,
-          $Res Function(_$_PaymentSummaryFilterDto) then) =
-      __$$_PaymentSummaryFilterDtoCopyWithImpl<$Res>;
+  factory _$$PaymentSummaryFilterDtoImplCopyWith(
+          _$PaymentSummaryFilterDtoImpl value,
+          $Res Function(_$PaymentSummaryFilterDtoImpl) then) =
+      __$$PaymentSummaryFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,17 +123,18 @@ abstract class _$$_PaymentSummaryFilterDtoCopyWith<$Res>
       @JsonKey(name: 'amountValueFrom', defaultValue: '')
       String amountValueFrom,
       @JsonKey(name: 'amountValueTo', defaultValue: '') String amountValueTo,
-      @JsonKey(name: 'filterStatuses', defaultValue: '')
-      String filterStatuses});
+      @JsonKey(name: 'filterStatuses', defaultValue: '') String filterStatuses,
+      @JsonKey(name: 'zzAdvice', defaultValue: '') String searchKey});
 }
 
 /// @nodoc
-class __$$_PaymentSummaryFilterDtoCopyWithImpl<$Res>
+class __$$PaymentSummaryFilterDtoImplCopyWithImpl<$Res>
     extends _$PaymentSummaryFilterDtoCopyWithImpl<$Res,
-        _$_PaymentSummaryFilterDto>
-    implements _$$_PaymentSummaryFilterDtoCopyWith<$Res> {
-  __$$_PaymentSummaryFilterDtoCopyWithImpl(_$_PaymentSummaryFilterDto _value,
-      $Res Function(_$_PaymentSummaryFilterDto) _then)
+        _$PaymentSummaryFilterDtoImpl>
+    implements _$$PaymentSummaryFilterDtoImplCopyWith<$Res> {
+  __$$PaymentSummaryFilterDtoImplCopyWithImpl(
+      _$PaymentSummaryFilterDtoImpl _value,
+      $Res Function(_$PaymentSummaryFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -136,8 +145,9 @@ class __$$_PaymentSummaryFilterDtoCopyWithImpl<$Res>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
+    Object? searchKey = null,
   }) {
-    return _then(_$_PaymentSummaryFilterDto(
+    return _then(_$PaymentSummaryFilterDtoImpl(
       createdDateFrom: null == createdDateFrom
           ? _value.createdDateFrom
           : createdDateFrom // ignore: cast_nullable_to_non_nullable
@@ -158,14 +168,18 @@ class __$$_PaymentSummaryFilterDtoCopyWithImpl<$Res>
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
               as String,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentSummaryFilterDto extends _PaymentSummaryFilterDto {
-  const _$_PaymentSummaryFilterDto(
+class _$PaymentSummaryFilterDtoImpl extends _PaymentSummaryFilterDto {
+  const _$PaymentSummaryFilterDtoImpl(
       {@JsonKey(name: 'createdDateFrom', defaultValue: '')
       required this.createdDateFrom,
       @JsonKey(name: 'createdDateTo', defaultValue: '')
@@ -175,11 +189,12 @@ class _$_PaymentSummaryFilterDto extends _PaymentSummaryFilterDto {
       @JsonKey(name: 'amountValueTo', defaultValue: '')
       required this.amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-      required this.filterStatuses})
+      required this.filterStatuses,
+      @JsonKey(name: 'zzAdvice', defaultValue: '') required this.searchKey})
       : super._();
 
-  factory _$_PaymentSummaryFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentSummaryFilterDtoFromJson(json);
+  factory _$PaymentSummaryFilterDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentSummaryFilterDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'createdDateFrom', defaultValue: '')
@@ -196,17 +211,20 @@ class _$_PaymentSummaryFilterDto extends _PaymentSummaryFilterDto {
   @override
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   final String filterStatuses;
+  @override
+  @JsonKey(name: 'zzAdvice', defaultValue: '')
+  final String searchKey;
 
   @override
   String toString() {
-    return 'PaymentSummaryFilterDto(createdDateFrom: $createdDateFrom, createdDateTo: $createdDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses)';
+    return 'PaymentSummaryFilterDto(createdDateFrom: $createdDateFrom, createdDateTo: $createdDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentSummaryFilterDto &&
+            other is _$PaymentSummaryFilterDtoImpl &&
             (identical(other.createdDateFrom, createdDateFrom) ||
                 other.createdDateFrom == createdDateFrom) &&
             (identical(other.createdDateTo, createdDateTo) ||
@@ -216,25 +234,26 @@ class _$_PaymentSummaryFilterDto extends _PaymentSummaryFilterDto {
             (identical(other.amountValueTo, amountValueTo) ||
                 other.amountValueTo == amountValueTo) &&
             (identical(other.filterStatuses, filterStatuses) ||
-                other.filterStatuses == filterStatuses));
+                other.filterStatuses == filterStatuses) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, createdDateFrom, createdDateTo,
-      amountValueFrom, amountValueTo, filterStatuses);
+      amountValueFrom, amountValueTo, filterStatuses, searchKey);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentSummaryFilterDtoCopyWith<_$_PaymentSummaryFilterDto>
-      get copyWith =>
-          __$$_PaymentSummaryFilterDtoCopyWithImpl<_$_PaymentSummaryFilterDto>(
-              this, _$identity);
+  _$$PaymentSummaryFilterDtoImplCopyWith<_$PaymentSummaryFilterDtoImpl>
+      get copyWith => __$$PaymentSummaryFilterDtoImplCopyWithImpl<
+          _$PaymentSummaryFilterDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentSummaryFilterDtoToJson(
+    return _$$PaymentSummaryFilterDtoImplToJson(
       this,
     );
   }
@@ -251,11 +270,13 @@ abstract class _PaymentSummaryFilterDto extends PaymentSummaryFilterDto {
       @JsonKey(name: 'amountValueTo', defaultValue: '')
       required final String amountValueTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-      required final String filterStatuses}) = _$_PaymentSummaryFilterDto;
+      required final String filterStatuses,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+      required final String searchKey}) = _$PaymentSummaryFilterDtoImpl;
   const _PaymentSummaryFilterDto._() : super._();
 
   factory _PaymentSummaryFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_PaymentSummaryFilterDto.fromJson;
+      _$PaymentSummaryFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'createdDateFrom', defaultValue: '')
@@ -273,7 +294,10 @@ abstract class _PaymentSummaryFilterDto extends PaymentSummaryFilterDto {
   @JsonKey(name: 'filterStatuses', defaultValue: '')
   String get filterStatuses;
   @override
+  @JsonKey(name: 'zzAdvice', defaultValue: '')
+  String get searchKey;
+  @override
   @JsonKey(ignore: true)
-  _$$_PaymentSummaryFilterDtoCopyWith<_$_PaymentSummaryFilterDto>
+  _$$PaymentSummaryFilterDtoImplCopyWith<_$PaymentSummaryFilterDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

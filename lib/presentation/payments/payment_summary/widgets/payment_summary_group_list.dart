@@ -34,7 +34,6 @@ class _PaymentSummaryGroupList extends StatelessWidget {
         onRefresh: () => context.paymentSummaryBloc(context.isMPPayment).add(
               PaymentSummaryEvent.fetch(
                 appliedFilter: PaymentSummaryFilter.defaultFilter(),
-                searchKey: SearchKey.searchFilter(''),
               ),
             ),
         onLoadingMore: () =>

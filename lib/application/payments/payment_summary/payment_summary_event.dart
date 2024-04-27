@@ -9,7 +9,6 @@ class PaymentSummaryEvent with _$PaymentSummaryEvent {
 
   const factory PaymentSummaryEvent.fetch({
     required PaymentSummaryFilter appliedFilter,
-    required SearchKey searchKey,
   }) = _Fetch;
 
   const factory PaymentSummaryEvent.loadMore() = _LoadMore;

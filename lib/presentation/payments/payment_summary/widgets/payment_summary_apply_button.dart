@@ -21,7 +21,6 @@ class _PaymentSummaryApplyButton extends StatelessWidget {
                 paymentSummaryBloc.add(
                   PaymentSummaryEvent.fetch(
                     appliedFilter: state.filter,
-                    searchKey: paymentSummaryBloc.state.searchKey,
                   ),
                 );
               }

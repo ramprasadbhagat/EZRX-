@@ -12,7 +12,7 @@ part of 'payment_summary_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentSummaryEvent {
@@ -21,9 +21,7 @@ mixin _$PaymentSummaryEvent {
     required TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)
         initialized,
-    required TResult Function(
-            PaymentSummaryFilter appliedFilter, SearchKey searchKey)
-        fetch,
+    required TResult Function(PaymentSummaryFilter appliedFilter) fetch,
     required TResult Function() loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -32,8 +30,7 @@ mixin _$PaymentSummaryEvent {
     TResult? Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)?
         initialized,
-    TResult? Function(PaymentSummaryFilter appliedFilter, SearchKey searchKey)?
-        fetch,
+    TResult? Function(PaymentSummaryFilter appliedFilter)? fetch,
     TResult? Function()? loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,8 +39,7 @@ mixin _$PaymentSummaryEvent {
     TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)?
         initialized,
-    TResult Function(PaymentSummaryFilter appliedFilter, SearchKey searchKey)?
-        fetch,
+    TResult Function(PaymentSummaryFilter appliedFilter)? fetch,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) =>
@@ -91,10 +87,10 @@ class _$PaymentSummaryEventCopyWithImpl<$Res, $Val extends PaymentSummaryEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {CustomerCodeInfo customerCodeInfo, SalesOrganisation salesOrganization});
@@ -104,11 +100,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$PaymentSummaryEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -117,7 +113,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? salesOrganization = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -148,8 +144,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.customerCodeInfo, required this.salesOrganization});
 
   @override
@@ -163,10 +159,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrganization, salesOrganization) ||
@@ -180,8 +176,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -189,9 +185,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)
         initialized,
-    required TResult Function(
-            PaymentSummaryFilter appliedFilter, SearchKey searchKey)
-        fetch,
+    required TResult Function(PaymentSummaryFilter appliedFilter) fetch,
     required TResult Function() loadMore,
   }) {
     return initialized(customerCodeInfo, salesOrganization);
@@ -203,8 +197,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)?
         initialized,
-    TResult? Function(PaymentSummaryFilter appliedFilter, SearchKey searchKey)?
-        fetch,
+    TResult? Function(PaymentSummaryFilter appliedFilter)? fetch,
     TResult? Function()? loadMore,
   }) {
     return initialized?.call(customerCodeInfo, salesOrganization);
@@ -216,8 +209,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)?
         initialized,
-    TResult Function(PaymentSummaryFilter appliedFilter, SearchKey searchKey)?
-        fetch,
+    TResult Function(PaymentSummaryFilter appliedFilter)? fetch,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) {
@@ -265,47 +257,44 @@ class _$_Initialized implements _Initialized {
 abstract class _Initialized implements PaymentSummaryEvent {
   const factory _Initialized(
       {required final CustomerCodeInfo customerCodeInfo,
-      required final SalesOrganisation salesOrganization}) = _$_Initialized;
+      required final SalesOrganisation salesOrganization}) = _$InitializedImpl;
 
   CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganization;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PaymentSummaryFilter appliedFilter, SearchKey searchKey});
+  $Res call({PaymentSummaryFilter appliedFilter});
 
   $PaymentSummaryFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$PaymentSummaryEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? appliedFilter = null,
-    Object? searchKey = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       appliedFilter: null == appliedFilter
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryFilter,
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
     ));
   }
 
@@ -320,38 +309,34 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.appliedFilter, required this.searchKey});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.appliedFilter});
 
   @override
   final PaymentSummaryFilter appliedFilter;
-  @override
-  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'PaymentSummaryEvent.fetch(appliedFilter: $appliedFilter, searchKey: $searchKey)';
+    return 'PaymentSummaryEvent.fetch(appliedFilter: $appliedFilter)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.appliedFilter, appliedFilter) ||
-                other.appliedFilter == appliedFilter) &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.appliedFilter == appliedFilter));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, appliedFilter, searchKey);
+  int get hashCode => Object.hash(runtimeType, appliedFilter);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -359,12 +344,10 @@ class _$_Fetch implements _Fetch {
     required TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)
         initialized,
-    required TResult Function(
-            PaymentSummaryFilter appliedFilter, SearchKey searchKey)
-        fetch,
+    required TResult Function(PaymentSummaryFilter appliedFilter) fetch,
     required TResult Function() loadMore,
   }) {
-    return fetch(appliedFilter, searchKey);
+    return fetch(appliedFilter);
   }
 
   @override
@@ -373,11 +356,10 @@ class _$_Fetch implements _Fetch {
     TResult? Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)?
         initialized,
-    TResult? Function(PaymentSummaryFilter appliedFilter, SearchKey searchKey)?
-        fetch,
+    TResult? Function(PaymentSummaryFilter appliedFilter)? fetch,
     TResult? Function()? loadMore,
   }) {
-    return fetch?.call(appliedFilter, searchKey);
+    return fetch?.call(appliedFilter);
   }
 
   @override
@@ -386,13 +368,12 @@ class _$_Fetch implements _Fetch {
     TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)?
         initialized,
-    TResult Function(PaymentSummaryFilter appliedFilter, SearchKey searchKey)?
-        fetch,
+    TResult Function(PaymentSummaryFilter appliedFilter)? fetch,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(appliedFilter, searchKey);
+      return fetch(appliedFilter);
     }
     return orElse();
   }
@@ -433,37 +414,35 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements PaymentSummaryEvent {
-  const factory _Fetch(
-      {required final PaymentSummaryFilter appliedFilter,
-      required final SearchKey searchKey}) = _$_Fetch;
+  const factory _Fetch({required final PaymentSummaryFilter appliedFilter}) =
+      _$FetchImpl;
 
   PaymentSummaryFilter get appliedFilter;
-  SearchKey get searchKey;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$PaymentSummaryEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore();
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl();
 
   @override
   String toString() {
@@ -471,9 +450,9 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMore);
+        (other.runtimeType == runtimeType && other is _$LoadMoreImpl);
   }
 
   @override
@@ -485,9 +464,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)
         initialized,
-    required TResult Function(
-            PaymentSummaryFilter appliedFilter, SearchKey searchKey)
-        fetch,
+    required TResult Function(PaymentSummaryFilter appliedFilter) fetch,
     required TResult Function() loadMore,
   }) {
     return loadMore();
@@ -499,8 +476,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)?
         initialized,
-    TResult? Function(PaymentSummaryFilter appliedFilter, SearchKey searchKey)?
-        fetch,
+    TResult? Function(PaymentSummaryFilter appliedFilter)? fetch,
     TResult? Function()? loadMore,
   }) {
     return loadMore?.call();
@@ -512,8 +488,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganization)?
         initialized,
-    TResult Function(PaymentSummaryFilter appliedFilter, SearchKey searchKey)?
-        fetch,
+    TResult Function(PaymentSummaryFilter appliedFilter)? fetch,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) {
@@ -559,7 +534,7 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements PaymentSummaryEvent {
-  const factory _LoadMore() = _$_LoadMore;
+  const factory _LoadMore() = _$LoadMoreImpl;
 }
 
 /// @nodoc
@@ -570,7 +545,6 @@ mixin _$PaymentSummaryState {
   bool get isFetching => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   PaymentSummaryFilter get appliedFilter => throw _privateConstructorUsedError;
-  SearchKey get searchKey => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -592,7 +566,6 @@ abstract class $PaymentSummaryStateCopyWith<$Res> {
       bool isFetching,
       bool canLoadMore,
       PaymentSummaryFilter appliedFilter,
-      SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganization;
@@ -619,7 +592,6 @@ class _$PaymentSummaryStateCopyWithImpl<$Res, $Val extends PaymentSummaryState>
     Object? isFetching = null,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
-    Object? searchKey = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -647,10 +619,6 @@ class _$PaymentSummaryStateCopyWithImpl<$Res, $Val extends PaymentSummaryState>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryFilter,
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -684,11 +652,11 @@ class _$PaymentSummaryStateCopyWithImpl<$Res, $Val extends PaymentSummaryState>
 }
 
 /// @nodoc
-abstract class _$$_PaymentSummaryStateCopyWith<$Res>
+abstract class _$$PaymentSummaryStateImplCopyWith<$Res>
     implements $PaymentSummaryStateCopyWith<$Res> {
-  factory _$$_PaymentSummaryStateCopyWith(_$_PaymentSummaryState value,
-          $Res Function(_$_PaymentSummaryState) then) =
-      __$$_PaymentSummaryStateCopyWithImpl<$Res>;
+  factory _$$PaymentSummaryStateImplCopyWith(_$PaymentSummaryStateImpl value,
+          $Res Function(_$PaymentSummaryStateImpl) then) =
+      __$$PaymentSummaryStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -698,7 +666,6 @@ abstract class _$$_PaymentSummaryStateCopyWith<$Res>
       bool isFetching,
       bool canLoadMore,
       PaymentSummaryFilter appliedFilter,
-      SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   @override
@@ -710,11 +677,11 @@ abstract class _$$_PaymentSummaryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentSummaryStateCopyWithImpl<$Res>
-    extends _$PaymentSummaryStateCopyWithImpl<$Res, _$_PaymentSummaryState>
-    implements _$$_PaymentSummaryStateCopyWith<$Res> {
-  __$$_PaymentSummaryStateCopyWithImpl(_$_PaymentSummaryState _value,
-      $Res Function(_$_PaymentSummaryState) _then)
+class __$$PaymentSummaryStateImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryStateCopyWithImpl<$Res, _$PaymentSummaryStateImpl>
+    implements _$$PaymentSummaryStateImplCopyWith<$Res> {
+  __$$PaymentSummaryStateImplCopyWithImpl(_$PaymentSummaryStateImpl _value,
+      $Res Function(_$PaymentSummaryStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -726,10 +693,9 @@ class __$$_PaymentSummaryStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
-    Object? searchKey = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_PaymentSummaryState(
+    return _then(_$PaymentSummaryStateImpl(
       salesOrganization: null == salesOrganization
           ? _value.salesOrganization
           : salesOrganization // ignore: cast_nullable_to_non_nullable
@@ -754,10 +720,6 @@ class __$$_PaymentSummaryStateCopyWithImpl<$Res>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryFilter,
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -768,15 +730,14 @@ class __$$_PaymentSummaryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentSummaryState extends _PaymentSummaryState {
-  const _$_PaymentSummaryState(
+class _$PaymentSummaryStateImpl extends _PaymentSummaryState {
+  const _$PaymentSummaryStateImpl(
       {required this.salesOrganization,
       required this.customerCodeInfo,
       required final List<PaymentSummaryDetails> details,
       required this.isFetching,
       required this.canLoadMore,
       required this.appliedFilter,
-      required this.searchKey,
       required this.failureOrSuccessOption})
       : _details = details,
         super._();
@@ -800,20 +761,18 @@ class _$_PaymentSummaryState extends _PaymentSummaryState {
   @override
   final PaymentSummaryFilter appliedFilter;
   @override
-  final SearchKey searchKey;
-  @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'PaymentSummaryState(salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, details: $details, isFetching: $isFetching, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, searchKey: $searchKey, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'PaymentSummaryState(salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, details: $details, isFetching: $isFetching, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentSummaryState &&
+            other is _$PaymentSummaryStateImpl &&
             (identical(other.salesOrganization, salesOrganization) ||
                 other.salesOrganization == salesOrganization) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -825,8 +784,6 @@ class _$_PaymentSummaryState extends _PaymentSummaryState {
                 other.canLoadMore == canLoadMore) &&
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter) &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption));
   }
@@ -840,14 +797,13 @@ class _$_PaymentSummaryState extends _PaymentSummaryState {
       isFetching,
       canLoadMore,
       appliedFilter,
-      searchKey,
       failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentSummaryStateCopyWith<_$_PaymentSummaryState> get copyWith =>
-      __$$_PaymentSummaryStateCopyWithImpl<_$_PaymentSummaryState>(
+  _$$PaymentSummaryStateImplCopyWith<_$PaymentSummaryStateImpl> get copyWith =>
+      __$$PaymentSummaryStateImplCopyWithImpl<_$PaymentSummaryStateImpl>(
           this, _$identity);
 }
 
@@ -859,9 +815,8 @@ abstract class _PaymentSummaryState extends PaymentSummaryState {
       required final bool isFetching,
       required final bool canLoadMore,
       required final PaymentSummaryFilter appliedFilter,
-      required final SearchKey searchKey,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_PaymentSummaryState;
+          failureOrSuccessOption}) = _$PaymentSummaryStateImpl;
   const _PaymentSummaryState._() : super._();
 
   @override
@@ -877,11 +832,9 @@ abstract class _PaymentSummaryState extends PaymentSummaryState {
   @override
   PaymentSummaryFilter get appliedFilter;
   @override
-  SearchKey get searchKey;
-  @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentSummaryStateCopyWith<_$_PaymentSummaryState> get copyWith =>
+  _$$PaymentSummaryStateImplCopyWith<_$PaymentSummaryStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

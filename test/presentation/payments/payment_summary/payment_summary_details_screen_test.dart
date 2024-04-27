@@ -317,7 +317,6 @@ void main() {
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
             appliedFilter: PaymentSummaryFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
           ),
         ),
       );
@@ -427,7 +426,6 @@ void main() {
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
             appliedFilter: PaymentSummaryFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
           ),
         ),
       );
@@ -609,7 +607,6 @@ void main() {
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
             appliedFilter: PaymentSummaryFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
           ),
         ),
       ).called(1);

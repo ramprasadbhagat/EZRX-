@@ -11,17 +11,17 @@ class _PaymentSummarySearchBar extends StatelessWidget {
       bloc: context.paymentSummaryBloc(context.isMPPayment),
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching ||
-          current.searchKey.isValueEmpty,
+          previous.appliedFilter.searchKey != current.appliedFilter.searchKey,
       builder: (context, state) {
+        final searchKey = state.appliedFilter.searchKey;
+
         return CustomSearchBar(
-          key: WidgetKeys.genericKey(
-            key: state.searchKey.searchValueOrEmpty,
-          ),
+          key: WidgetKeys.genericKey(key: searchKey.searchValueOrEmpty),
           hintText: context.isMPPayment
               ? 'Search by MP payment advice / voucher no.'
               : 'Search by payment advice / voucher no.',
           enabled: !state.isFetching,
-          initialValue: state.searchKey.searchValueOrEmpty,
+          initialValue: searchKey.searchValueOrEmpty,
           onSearchChanged: (value) => _fetchPaymentSummary(
             searchValue: value,
             context: context,
@@ -44,14 +44,19 @@ class _PaymentSummarySearchBar extends StatelessWidget {
     required String searchValue,
     required BuildContext context,
   }) {
-    final appliedFilter = searchValue.isEmpty
-        ? PaymentSummaryFilter.defaultFilter()
-        : PaymentSummaryFilter.empty();
-    context.paymentSummaryBloc(context.isMPPayment).add(
-          PaymentSummaryEvent.fetch(
-            appliedFilter: appliedFilter,
-            searchKey: SearchKey.searchFilter(searchValue),
-          ),
-        );
+    final bloc = context.paymentSummaryBloc(context.isMPPayment);
+    final currenSearchValue =
+        bloc.state.appliedFilter.searchKey.getOrDefaultValue('');
+    if (currenSearchValue != searchValue) {
+      bloc.add(
+        PaymentSummaryEvent.fetch(
+          appliedFilter: searchValue.isEmpty
+              ? PaymentSummaryFilter.defaultFilter()
+              : PaymentSummaryFilter.empty().copyWith(
+                  searchKey: SearchKey.searchFilter(searchValue),
+                ),
+        ),
+      );
+    }
   }
 }

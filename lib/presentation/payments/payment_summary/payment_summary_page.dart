@@ -73,7 +73,6 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
     context.paymentSummaryBloc(widget.isMarketPlace).add(
           PaymentSummaryEvent.fetch(
             appliedFilter: PaymentSummaryFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
           ),
         );
     super.initState();

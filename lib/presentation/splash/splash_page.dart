@@ -1389,7 +1389,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         PaymentSummaryEvent.fetch(
           appliedFilter:
               context.read<ZPPaymentSummaryBloc>().state.appliedFilter,
-          searchKey: SearchKey.searchFilter(''),
         ),
       );
 
@@ -1502,7 +1501,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           PaymentSummaryEvent.fetch(
             appliedFilter:
                 context.read<MPPaymentSummaryBloc>().state.appliedFilter,
-            searchKey: SearchKey.searchFilter(''),
           ),
         );
     }

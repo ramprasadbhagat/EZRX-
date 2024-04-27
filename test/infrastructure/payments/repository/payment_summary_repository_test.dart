@@ -33,13 +33,9 @@ void main() {
   late PaymentSummaryRemoteDataSource remoteDataSource;
   late List<PaymentSummaryDetails> fakePaymentList;
   late List<PaymentSummaryDetails> fakeTransactionList;
-  final fakeFilter = PaymentSummaryFilter.defaultFilter();
+  final fakeFilter = PaymentSummaryFilter.defaultFilter()
+      .copyWith(searchKey: SearchKey('FAKE_SEARCH_KEY'));
   final filterList = PaymentSummaryFilterDto.fromDomain(fakeFilter).toMapList;
-  final searchMap = {
-    'field': 'zzAdvice',
-    'value': SearchKey.searchFilter('FAKE_SEARCH_KEY').searchValueOrEmpty,
-  };
-  filterList.add(searchMap);
 
   setUpAll(
     () async {
@@ -71,7 +67,6 @@ void main() {
         offset: 0,
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeSalesOrganisation,
-        searchKey: SearchKey(''),
         isMarketPlace: true,
       );
       expect(
@@ -89,7 +84,6 @@ void main() {
         offset: 0,
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeSalesOrganisation,
-        searchKey: SearchKey('fake_search_key'),
         isMarketPlace: true,
       );
       expect(
@@ -120,7 +114,6 @@ void main() {
           offset: 0,
           pageSize: mockConfig.pageSize,
           salesOrganization: fakeSalesOrganisation,
-          searchKey: SearchKey.searchFilter('fake_search_key'),
           isMarketPlace: false,
         );
         expect(
@@ -153,7 +146,6 @@ void main() {
           offset: 0,
           pageSize: mockConfig.pageSize,
           salesOrganization: fakeSalesOrganisation,
-          searchKey: SearchKey.searchFilter(''),
           isMarketPlace: false,
         );
         expect(
@@ -183,7 +175,6 @@ void main() {
           offset: 0,
           pageSize: mockConfig.pageSize,
           salesOrganization: fakeSalesOrganisation,
-          searchKey: SearchKey.searchFilter('fake_search_key'),
           isMarketPlace: false,
         );
         expect(
@@ -205,7 +196,6 @@ void main() {
         offset: 0,
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeIDSalesOrganisation,
-        searchKey: SearchKey(''),
         isMarketPlace: false,
       );
       expect(
@@ -227,7 +217,6 @@ void main() {
         offset: 0,
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeIDSalesOrganisation,
-        searchKey: SearchKey(''),
         isMarketPlace: false,
       );
       expect(
@@ -251,7 +240,6 @@ void main() {
             TransactionParams(
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               filter: fakeFilter,
-              searchKey: SearchKey(''),
               first: mockConfig.pageSize,
               after: 0,
             ),
@@ -265,7 +253,6 @@ void main() {
         offset: 0,
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeIDSalesOrganisation,
-        searchKey: SearchKey(''),
         isMarketPlace: false,
       );
       expect(
@@ -285,7 +272,6 @@ void main() {
             TransactionParams(
               customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
               filter: fakeFilter,
-              searchKey: SearchKey(''),
               first: mockConfig.pageSize,
               after: 0,
             ),
@@ -299,7 +285,6 @@ void main() {
         offset: 0,
         pageSize: mockConfig.pageSize,
         salesOrganization: fakeIDSalesOrganisation,
-        searchKey: SearchKey(''),
         isMarketPlace: false,
       );
       expect(

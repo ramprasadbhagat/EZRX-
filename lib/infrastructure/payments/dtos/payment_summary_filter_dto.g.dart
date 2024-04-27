@@ -6,22 +6,24 @@ part of 'payment_summary_filter_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PaymentSummaryFilterDto _$$_PaymentSummaryFilterDtoFromJson(
+_$PaymentSummaryFilterDtoImpl _$$PaymentSummaryFilterDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PaymentSummaryFilterDto(
+    _$PaymentSummaryFilterDtoImpl(
       createdDateFrom: json['createdDateFrom'] as String? ?? '',
       createdDateTo: json['createdDateTo'] as String? ?? '',
       amountValueFrom: json['amountValueFrom'] as String? ?? '',
       amountValueTo: json['amountValueTo'] as String? ?? '',
       filterStatuses: json['filterStatuses'] as String? ?? '',
+      searchKey: json['zzAdvice'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_PaymentSummaryFilterDtoToJson(
-        _$_PaymentSummaryFilterDto instance) =>
+Map<String, dynamic> _$$PaymentSummaryFilterDtoImplToJson(
+        _$PaymentSummaryFilterDtoImpl instance) =>
     <String, dynamic>{
       'createdDateFrom': instance.createdDateFrom,
       'createdDateTo': instance.createdDateTo,
       'amountValueFrom': instance.amountValueFrom,
       'amountValueTo': instance.amountValueTo,
       'filterStatuses': instance.filterStatuses,
+      'zzAdvice': instance.searchKey,
     };

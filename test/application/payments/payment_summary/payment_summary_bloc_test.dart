@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_repository.dart';
@@ -53,7 +52,6 @@ void main() {
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
-            searchKey: SearchKey.searchFilter('ab'),
             offset: offSet,
             pageSize: pageSize,
             isMarketPlace: false,
@@ -65,7 +63,6 @@ void main() {
       act: (ZPPaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter('ab'),
         ),
       ),
       expect: () => [
@@ -73,13 +70,11 @@ void main() {
           isFetching: true,
           appliedFilter: paymentSummaryFilter,
           failureOrSuccessOption: none(),
-          searchKey: SearchKey.searchFilter('ab'),
         ),
         PaymentSummaryState.initial().copyWith(
           details: details,
           canLoadMore: false,
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter('ab'),
         ),
       ],
     );
@@ -100,7 +95,6 @@ void main() {
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
-            searchKey: SearchKey.searchFilter('ab'),
             offset: offSet,
             pageSize: pageSize,
             isMarketPlace: true,
@@ -112,7 +106,6 @@ void main() {
       act: (MPPaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter('ab'),
         ),
       ),
       expect: () => [
@@ -120,13 +113,11 @@ void main() {
           isFetching: true,
           appliedFilter: paymentSummaryFilter,
           failureOrSuccessOption: none(),
-          searchKey: SearchKey.searchFilter('ab'),
         ),
         PaymentSummaryState.initial().copyWith(
           details: details,
           canLoadMore: false,
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter('ab'),
         ),
       ],
     );
@@ -148,7 +139,6 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             offset: offSet,
             filter: paymentSummaryFilter,
-            searchKey: SearchKey.searchFilter('ab'),
             pageSize: pageSize,
             isMarketPlace: false,
           ),
@@ -158,7 +148,6 @@ void main() {
       },
       act: (ZPPaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
-          searchKey: SearchKey.searchFilter('ab'),
           appliedFilter: paymentSummaryFilter,
         ),
       ),
@@ -167,14 +156,12 @@ void main() {
           isFetching: true,
           failureOrSuccessOption: none(),
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter('ab'),
         ),
         PaymentSummaryState.initial().copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
           isFetching: false,
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter('ab'),
         ),
       ],
     );
@@ -194,7 +181,6 @@ void main() {
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
-            searchKey: SearchKey.searchFilter(''),
             offset: offSet,
             pageSize: pageSize,
             isMarketPlace: false,
@@ -238,7 +224,6 @@ void main() {
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
-            searchKey: SearchKey.searchFilter(''),
             offset: offSet,
             pageSize: pageSize,
             isMarketPlace: false,
@@ -282,7 +267,6 @@ void main() {
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
-            searchKey: SearchKey.searchFilter(''),
             offset: offSet,
             pageSize: pageSize,
             isMarketPlace: false,
@@ -294,7 +278,6 @@ void main() {
       act: (ZPPaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter(''),
         ),
       ),
       expect: () => [
@@ -302,13 +285,11 @@ void main() {
           isFetching: true,
           appliedFilter: paymentSummaryFilter,
           failureOrSuccessOption: none(),
-          searchKey: SearchKey.searchFilter(''),
         ),
         PaymentSummaryState.initial().copyWith(
           details: details,
           canLoadMore: false,
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter(''),
         ),
       ],
     );
@@ -322,7 +303,6 @@ void main() {
       seed: () => PaymentSummaryState.initial().copyWith(
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganization: mockSalesOrganisation,
-        searchKey: SearchKey.searchFilter(''),
       ),
       setUp: () {
         when(
@@ -330,7 +310,6 @@ void main() {
             customerCodeInfo: mockCustomerCodeInfo,
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
-            searchKey: SearchKey.searchFilter('ab'),
             offset: offSet,
             pageSize: pageSize,
             isMarketPlace: false,
@@ -342,7 +321,6 @@ void main() {
       act: (ZPPaymentSummaryBloc bloc) => bloc.add(
         PaymentSummaryEvent.fetch(
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter('ab'),
         ),
       ),
       expect: () => [
@@ -350,35 +328,13 @@ void main() {
           isFetching: true,
           appliedFilter: paymentSummaryFilter,
           failureOrSuccessOption: none(),
-          searchKey: SearchKey.searchFilter('ab'),
         ),
         PaymentSummaryState.initial().copyWith(
           details: details,
           canLoadMore: false,
           appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter('ab'),
         ),
       ],
-    );
-
-    blocTest<ZPPaymentSummaryBloc, PaymentSummaryState>(
-      'Payment Summary "fetchPaymentSummaryList" Event with same search key',
-      build: () => ZPPaymentSummaryBloc(
-        paymentSummaryRepository: paymentSummaryMockRepository,
-        config: config,
-      ),
-      seed: () => PaymentSummaryState.initial().copyWith(
-        customerCodeInfo: mockCustomerCodeInfo,
-        salesOrganization: mockSalesOrganisation,
-        searchKey: SearchKey.searchFilter('ab'),
-      ),
-      act: (ZPPaymentSummaryBloc bloc) => bloc.add(
-        PaymentSummaryEvent.fetch(
-          appliedFilter: paymentSummaryFilter,
-          searchKey: SearchKey.searchFilter('ab'),
-        ),
-      ),
-      expect: () => [],
     );
   });
 }

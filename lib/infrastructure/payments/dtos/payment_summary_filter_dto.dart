@@ -7,31 +7,17 @@ part 'payment_summary_filter_dto.g.dart';
 class PaymentSummaryFilterDto with _$PaymentSummaryFilterDto {
   const PaymentSummaryFilterDto._();
   const factory PaymentSummaryFilterDto({
-    @JsonKey(
-      name: 'createdDateFrom',
-      defaultValue: '',
-    )
-        required String createdDateFrom,
-    @JsonKey(
-      name: 'createdDateTo',
-      defaultValue: '',
-    )
-        required String createdDateTo,
-    @JsonKey(
-      name: 'amountValueFrom',
-      defaultValue: '',
-    )
-        required String amountValueFrom,
-    @JsonKey(
-      name: 'amountValueTo',
-      defaultValue: '',
-    )
-        required String amountValueTo,
-    @JsonKey(
-      name: 'filterStatuses',
-      defaultValue: '',
-    )
-        required String filterStatuses,
+    @JsonKey(name: 'createdDateFrom', defaultValue: '')
+    required String createdDateFrom,
+    @JsonKey(name: 'createdDateTo', defaultValue: '')
+    required String createdDateTo,
+    @JsonKey(name: 'amountValueFrom', defaultValue: '')
+    required String amountValueFrom,
+    @JsonKey(name: 'amountValueTo', defaultValue: '')
+    required String amountValueTo,
+    @JsonKey(name: 'filterStatuses', defaultValue: '')
+    required String filterStatuses,
+    @JsonKey(name: 'zzAdvice', defaultValue: '') required String searchKey,
   }) = _PaymentSummaryFilterDto;
 
   factory PaymentSummaryFilterDto.fromDomain(
@@ -44,6 +30,7 @@ class PaymentSummaryFilterDto with _$PaymentSummaryFilterDto {
       amountValueTo: tempFilter.amountValueTo.apiParameterValue,
       filterStatuses:
           tempFilter.filterStatuses.map((e) => e.getValue()).join(','),
+      searchKey: tempFilter.searchKey.upperCaseValue,
     );
   }
 
@@ -51,6 +38,11 @@ class PaymentSummaryFilterDto with _$PaymentSummaryFilterDto {
       _$PaymentSummaryFilterDtoFromJson(json);
 
   List<Map<String, String>> get toMapList => <Map<String, String>>[
+        if (searchKey.isNotEmpty)
+          {
+            'field': 'zzAdvice',
+            'value': searchKey,
+          },
         if (createdDateFrom.isNotEmpty && createdDateFrom != '-')
           {
             'field': 'createdDate',

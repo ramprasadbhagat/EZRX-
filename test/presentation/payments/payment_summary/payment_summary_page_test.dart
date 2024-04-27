@@ -536,7 +536,8 @@ void main() {
       expect(
         find.byKey(
           WidgetKeys.genericKey(
-            key: paymentSummaryBloc.state.searchKey.searchValueOrEmpty,
+            key: paymentSummaryBloc
+                .state.appliedFilter.searchKey.searchValueOrEmpty,
           ),
         ),
         findsOneWidget,
@@ -558,8 +559,9 @@ void main() {
       verify(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: appliedFilterWithSearch,
-            searchKey: SearchKey.searchFilter('fake-keyword'),
+            appliedFilter: appliedFilterWithSearch.copyWith(
+              searchKey: SearchKey.searchFilter('fake-keyword'),
+            ),
           ),
         ),
       ).called(1);
@@ -571,7 +573,8 @@ void main() {
       expect(
         find.byKey(
           WidgetKeys.genericKey(
-            key: paymentSummaryBloc.state.searchKey.searchValueOrEmpty,
+            key: paymentSummaryBloc
+                .state.appliedFilter.searchKey.searchValueOrEmpty,
           ),
         ),
         findsOneWidget,
@@ -596,17 +599,18 @@ void main() {
       verify(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: appliedFilterWithSearch,
-            searchKey: SearchKey.searchFilter('fake-keyword'),
+            appliedFilter: appliedFilterWithSearch.copyWith(
+              searchKey: SearchKey.searchFilter('fake-keyword'),
+            ),
           ),
         ),
       ).called(2);
     });
     testWidgets('Payment Summary search onClear Test', (tester) async {
       when(() => paymentSummaryBloc.state).thenReturn(
-        PaymentSummaryState.initial().copyWith(
-          searchKey: SearchKey.searchFilter('fake-keyword'),
-        ),
+        PaymentSummaryState.initial().copyWith.appliedFilter(
+              searchKey: SearchKey.searchFilter('fake-keyword'),
+            ),
       );
 
       await tester.pumpWidget(getWUT());
@@ -629,7 +633,6 @@ void main() {
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
             appliedFilter: PaymentSummaryFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
           ),
         ),
       ).called(2);
@@ -844,7 +847,6 @@ void main() {
       verify(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            searchKey: SearchKey.searchFilter(''),
             appliedFilter: PaymentSummaryFilter.defaultFilter(),
           ),
         ),
@@ -981,7 +983,8 @@ void main() {
       expect(
         find.byKey(
           WidgetKeys.genericKey(
-            key: paymentSummaryBloc.state.searchKey.searchValueOrEmpty,
+            key: paymentSummaryBloc
+                .state.appliedFilter.searchKey.searchValueOrEmpty,
           ),
         ),
         findsOneWidget,
@@ -1001,8 +1004,8 @@ void main() {
             appliedFilter: PaymentSummaryFilter.defaultFilter().copyWith(
               createdDateFrom: DateTimeStringValue(''),
               createdDateTo: DateTimeStringValue(''),
+              searchKey: SearchKey.searchFilter('fake-keyword'),
             ),
-            searchKey: SearchKey.searchFilter('fake-keyword'),
           ),
         ),
       ).called(1);
@@ -1134,7 +1137,6 @@ void main() {
           () => paymentSummaryBloc.add(
             PaymentSummaryEvent.fetch(
               appliedFilter: filter,
-              searchKey: SearchKey(''),
             ),
           ),
         ).called(1);
@@ -1175,7 +1177,6 @@ void main() {
           () => paymentSummaryBloc.add(
             PaymentSummaryEvent.fetch(
               appliedFilter: filter,
-              searchKey: SearchKey(''),
             ),
           ),
         ).called(1);
@@ -1217,7 +1218,6 @@ void main() {
           () => paymentSummaryBloc.add(
             PaymentSummaryEvent.fetch(
               appliedFilter: PaymentSummaryFilter.defaultFilter(),
-              searchKey: SearchKey(''),
             ),
           ),
         ).called(1);

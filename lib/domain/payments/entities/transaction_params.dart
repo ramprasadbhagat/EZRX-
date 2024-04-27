@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,7 +11,6 @@ class TransactionParams with _$TransactionParams {
     required int first,
     required int after,
     required PaymentSummaryFilter filter,
-    required SearchKey searchKey,
   }) = _TransactionParams;
 
   factory TransactionParams.empty() => TransactionParams(
@@ -20,6 +18,5 @@ class TransactionParams with _$TransactionParams {
         first: 0,
         after: 0,
         filter: PaymentSummaryFilter.defaultFilter(),
-        searchKey: SearchKey(''),
       );
 }

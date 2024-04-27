@@ -31,7 +31,7 @@ class TransactionParamsDto with _$TransactionParamsDto {
       customer: entity.customerCode,
       createdStartDate: entity.filter.createdDateFrom.apiDateTimeString,
       createdEndDate: entity.filter.createdDateTo.apiDateTimeString,
-      search: entity.searchKey.searchValueOrEmpty,
+      search: entity.filter.searchKey.searchValueOrEmpty,
       amountMin: entity.filter.amountValueFrom.intValue,
       amountMax: entity.filter.amountValueTo.intValue,
       status:

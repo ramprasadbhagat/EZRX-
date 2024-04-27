@@ -33,7 +33,6 @@ class _PaymentAdviceButton extends StatelessWidget {
               context.paymentSummaryBloc(context.isMPPayment).add(
                     PaymentSummaryEvent.fetch(
                       appliedFilter: PaymentSummaryFilter.defaultFilter(),
-                      searchKey: SearchKey.searchFilter(''),
                     ),
                   );
             }

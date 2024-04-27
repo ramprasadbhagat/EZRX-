@@ -14,6 +14,7 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
     required RangeValue amountValueFrom,
     required RangeValue amountValueTo,
     required List<FilterStatus> filterStatuses,
+    required SearchKey searchKey,
   }) = _PaymentSummaryFilter;
 
   factory PaymentSummaryFilter.empty() => PaymentSummaryFilter(
@@ -26,9 +27,10 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         filterStatuses: <FilterStatus>[],
+        searchKey: SearchKey(''),
       );
 
-        factory PaymentSummaryFilter.defaultFilter() => PaymentSummaryFilter(
+  factory PaymentSummaryFilter.defaultFilter() => PaymentSummaryFilter(
         createdDateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(
@@ -42,8 +44,12 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         filterStatuses: <FilterStatus>[],
+        searchKey: SearchKey(''),
       );
 
+  PaymentSummaryFilter get excludeSearch => copyWith(
+        searchKey: SearchKey(''),
+      );
 
   DateTimeRange get getCreatedDateFilterDateRange => DateTimeRange(
         start: createdDateFrom.dateTime,
