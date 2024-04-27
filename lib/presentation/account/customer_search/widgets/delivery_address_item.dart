@@ -10,15 +10,12 @@ class _DeliveryAddressItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return custom.ExpansionTile(
       initiallyExpanded: true,
-      trailingWidgetPadding: 20,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20),
       iconColor: ZPColors.textButtonColor,
-      title: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: _TitleSection(
-          prefixText: customerCodeInfo.customerCodeSoldTo,
-          suffixText: customerCodeInfo.customerName.name1,
-          titleColor: ZPColors.textButtonColor,
-        ),
+      title: _TitleSection(
+        prefixText: customerCodeInfo.customerCodeSoldTo,
+        suffixText: customerCodeInfo.customerName.name1,
+        titleColor: ZPColors.textButtonColor,
       ),
       children: [
         Column(

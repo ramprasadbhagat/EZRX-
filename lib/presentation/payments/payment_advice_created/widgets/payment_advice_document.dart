@@ -16,17 +16,14 @@ class _PaymentAdviceDocument extends StatelessWidget {
                   key: WidgetKeys.paymentAdviceDocumentHeader,
                   headerBackgroundColor: ZPColors.lightSilver,
                   radius: 8,
-                  trailingWidgetPadding: 16,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                   threeLineTitle: true,
-                  title: Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Text(
-                      context.tr('Payment Advice Document'),
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: ZPColors.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
+                  title: Text(
+                    context.tr('Payment Advice Document'),
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: ZPColors.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                   children: [
                     state.isFetchingInvoiceInfoPdf

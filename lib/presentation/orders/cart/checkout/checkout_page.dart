@@ -25,6 +25,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
@@ -43,12 +44,15 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-part 'widgets/delivery_info.dart';
-part 'widgets/request_delivery_date.dart';
-part 'widgets/product_bonus_item.dart';
-part 'widgets/product_scroll_list.dart';
-part 'widgets/total_items.dart';
-part 'widgets/checkout_footer_section.dart';
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+    as custom;
+part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/delivery_info.dart';
+part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/request_delivery_date.dart';
+part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bonus_item.dart';
+part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_scroll_list.dart';
+part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/total_items.dart';
+part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/checkout_footer_section.dart';
+part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/market_place_delivery_info.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -66,11 +70,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
     DeliveryInfoLabel.mobileNumber: FocusNode(),
     DeliveryInfoLabel.paymentTerm: FocusNode(),
   };
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -127,17 +126,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         child: PayerInformation(expanded: false),
                       ),
                     ),
-                    _DeliveryInfo(focusNodes: _focusNodes),
-                    const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
-                    const SliverToBoxAdapter(
-                      child: Divider(
-                        indent: 0,
-                        thickness: 1,
-                        endIndent: 0,
-                        height: 1,
-                        color: ZPColors.extraLightGrey2,
-                      ),
+                    SliverToBoxAdapter(
+                      child: _DeliveryInfo(focusNodes: _focusNodes),
                     ),
+                    if (cartState.cartProducts.containMPMaterial)
+                      SliverToBoxAdapter(
+                        child: _MarketPlaceDeliveryInfo(
+                          mpItems: cartState.cartProducts.mpMaterialOnly,
+                        ),
+                      ),
                     const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
                     const SliverToBoxAdapter(child: _TotalItems()),
                     const SliverToBoxAdapter(child: SizedBox(height: 12.0)),

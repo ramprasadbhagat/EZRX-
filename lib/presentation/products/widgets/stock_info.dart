@@ -1,8 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/presentation/core/info_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/info_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -50,16 +51,18 @@ class StockInfoWidget extends StatelessWidget {
                 ),
                 WidgetSpan(
                   alignment: PlaceholderAlignment.middle,
-                  child: IconButton(
+                  child: InfoIcon(
                     key: WidgetKeys.expiryDateInfoIcon,
-                    splashRadius: 15,
-                    constraints: const BoxConstraints(),
-                    padding: EdgeInsets.zero,
-                    onPressed: () => showModalBottomSheet(
+                    onTap: () => showModalBottomSheet(
                       context: context,
-                      builder: (context) => const _ExpiryDateInstruction(),
+                      builder: (context) => InfoBottomSheet(
+                        key: WidgetKeys.expiryDateInstructionSheet,
+                        title: context.tr('Expiry date'),
+                        description:
+                            '${context.tr('Expiry date displayed is for reference, actual product may vary')}.',
+                        buttonTitle: context.tr('Got it'),
+                      ),
                     ),
-                    icon: const Icon(Icons.info, size: 18),
                   ),
                 ),
               ],
@@ -70,50 +73,5 @@ class StockInfoWidget extends StatelessWidget {
     }
 
     return const SizedBox.shrink();
-  }
-}
-
-class _ExpiryDateInstruction extends StatelessWidget {
-  const _ExpiryDateInstruction({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-        child: Column(
-          key: WidgetKeys.expiryDateInstructionSheet,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              context.tr('Expiry date'),
-              style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    color: ZPColors.primary,
-                    fontSize: 20,
-                  ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '${context.tr('Expiry date displayed is for reference, actual product may vary')}.',
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ZPColors.neutralsGrey1,
-                  ),
-            ),
-            const SizedBox(height: 35),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                key: WidgetKeys.closeButton,
-                onPressed: () => context.router.pop(),
-                child: Text(context.tr('Got it')),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

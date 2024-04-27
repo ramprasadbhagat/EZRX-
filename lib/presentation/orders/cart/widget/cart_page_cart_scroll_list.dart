@@ -71,7 +71,9 @@ class _CartPageCartScrollList extends StatelessWidget {
                                     horizontal: 8,
                                   ),
                                   color: Colors.white,
-                                  child: const MarketPlaceTitleWithLogo(),
+                                  child: const MarketPlaceTitleWithLogo(
+                                    showToolTip: true,
+                                  ),
                                 ),
                               _CartPageScrollListItem(
                                 key: WidgetKeys.cartItemTile(index),

@@ -37,11 +37,15 @@ class ExpansionTile extends StatefulWidget {
     this.onExpansionChanged,
     this.children = const <Widget>[],
     this.trailing,
-    this.trailingWidgetPadding = 0.0,
+    this.contentPadding = EdgeInsets.zero,
     this.initiallyExpanded = false,
     this.keepHeaderBorder = false,
     this.threeLineTitle = false,
     this.radius,
+    this.childrenPadding = EdgeInsets.zero,
+    this.boxBorder = const Border(),
+    this.maintainState = false,
+    this.expandedCrossAxisAlignment,
   }) : super(key: key);
 
   /// A widget to display before the title.
@@ -79,7 +83,7 @@ class ExpansionTile extends StatefulWidget {
   final Widget? trailing;
 
   /// A padding from right of trailing widget.
-  final double trailingWidgetPadding;
+  final EdgeInsets contentPadding;
 
   /// Specifies if the list tile is initially expanded (true) or collapsed (false, the default).
   final bool initiallyExpanded;
@@ -93,6 +97,34 @@ class ExpansionTile extends StatefulWidget {
 
   /// The key for the expanded widget.
   final Key? expandWidgetkey;
+
+  // The padding around children widgets
+  final EdgeInsets childrenPadding;
+
+  // The border around the tile
+  final BoxBorder boxBorder;
+
+  /// Specifies whether the state of the children is maintained when the tile expands and collapses.
+  ///
+  /// When true, the children are kept in the tree while the tile is collapsed.
+  /// When false (default), the children are removed from the tree when the tile is
+  /// collapsed and recreated upon expansion.
+  final bool maintainState;
+
+  /// Specifies the alignment of each child within [children] when the tile is expanded.
+  ///
+  /// The internals of the expanded tile make use of a [Column] widget for
+  /// [children], and the `crossAxisAlignment` parameter is passed directly into
+  /// the [Column].
+  ///
+  /// Modifying this property controls the cross axis alignment of each child
+  /// within its [Column]. The width of the [Column] that houses [children] will
+  /// be the same as the widest child widget in [children]. The width of the
+  /// [Column] might not be equal to the width of the expanded tile.
+  ///
+  /// When the value is null, the value of [expandedCrossAxisAlignment] is
+  /// [CrossAxisAlignment.center].
+  final CrossAxisAlignment? expandedCrossAxisAlignment;
 
   @override
   ExpansionTileState createState() => ExpansionTileState();
@@ -170,10 +202,7 @@ class ExpansionTileState extends State<ExpansionTile>
     return Container(
       decoration: BoxDecoration(
         color: _backgroundColor.value ?? Colors.transparent,
-        border: const Border(
-          top: BorderSide(color: Colors.transparent),
-          bottom: BorderSide(color: Colors.transparent),
-        ),
+        border: widget.boxBorder,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -196,7 +225,7 @@ class ExpansionTileState extends State<ExpansionTile>
                       )
                     : null,
                 child: ListTile(
-                  contentPadding: const EdgeInsets.all(0),
+                  contentPadding: widget.contentPadding,
                   onTap: _handleTap,
                   leading: widget.leading,
                   title: DefaultTextStyle(
@@ -206,18 +235,14 @@ class ExpansionTileState extends State<ExpansionTile>
                         .copyWith(color: titleColor),
                     child: widget.title,
                   ),
-                  trailing: Padding(
-                    padding:
-                        EdgeInsets.only(right: widget.trailingWidgetPadding),
-                    child: widget.trailing ??
-                        RotationTransition(
-                          turns: _iconTurns,
-                          child: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: widget.iconColor ?? Colors.black54,
-                          ),
+                  trailing: widget.trailing ??
+                      RotationTransition(
+                        turns: _iconTurns,
+                        child: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: widget.iconColor ?? Colors.black54,
                         ),
-                  ),
+                      ),
                 ),
               ),
             ),
@@ -250,16 +275,28 @@ class ExpansionTileState extends State<ExpansionTile>
   @override
   Widget build(BuildContext context) {
     final closed = !_isExpanded && _controller.isDismissed;
+    final shouldRemoveChildren = closed && !widget.maintainState;
+
+    final Widget result = Offstage(
+      offstage: closed,
+      child: TickerMode(
+        enabled: !closed,
+        child: Padding(
+          padding: widget.childrenPadding,
+          child: Column(
+            crossAxisAlignment:
+                widget.expandedCrossAxisAlignment ?? CrossAxisAlignment.center,
+            key: widget.expandWidgetkey,
+            children: widget.children,
+          ),
+        ),
+      ),
+    );
 
     return AnimatedBuilder(
       animation: _controller.view,
       builder: _buildChildren,
-      child: closed
-          ? null
-          : Column(
-              key: widget.expandWidgetkey,
-              children: widget.children,
-            ),
+      child: shouldRemoveChildren ? null : result,
     );
   }
 }

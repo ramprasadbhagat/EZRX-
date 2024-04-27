@@ -699,7 +699,6 @@ class WidgetKeys {
   static const Key uploadAttachmentKey = Key('uploadAttachment');
   static const Key attachmentsTileKey = Key('attachmentsTile');
   static const Key selectDate = Key('selectDate');
-  static const Key additionalDetailsForm = Key('additionalDetailsForm');
   static const Key poAttachmentFileUploadButton =
       Key('poAttachmentFileUploadButton');
   static const Key poAttachmentPhotoUploadButton =

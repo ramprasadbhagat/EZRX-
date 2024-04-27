@@ -2,12 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -62,11 +58,11 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
@@ -81,80 +77,16 @@ import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-class AdditionalDetailsBlocMock
-    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
-    implements AdditionalDetailsBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState>
-    implements PaymentTermBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class PoAttachmentBlocMock
-    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
-    implements PoAttachmentBloc {}
-
-class OrderSummaryBlocMock
-    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
-    implements OrderSummaryBloc {}
-
-class ComboDealListBlocMock
-    extends MockBloc<ComboDealListEvent, ComboDealListState>
-    implements ComboDealListBloc {}
-
-class OrderDocumentTypeBlocMock
-    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
-    implements OrderDocumentTypeBloc {}
-
-class PriceOverrideBlocMock
-    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
-    implements PriceOverrideBloc {}
-
-class OrderEligibilityBlocMock
-    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
-    implements OrderEligibilityBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class PaymentCustomerInformationBlocMock extends MockBloc<
-        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
-    implements PaymentCustomerInformationBloc {}
-
 void main() {
   late CartBloc cartBloc;
-  late SalesOrgBloc salesOrgBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late PaymentTermBloc paymentTermBlocMock;
   late AppRouter autoRouterMock;
   late EligibilityBloc eligibilityBloc;
-  late CustomerCodeBloc customerCodeBloc;
   late OrderSummaryBloc orderSummaryBlocMock;
   late PoAttachmentBloc poAttachmentBloc;
   late PriceOverrideBloc priceOverrideBloc;
   late ComboDealListBloc comboDealListBloc;
-  final userBlocMock = UserMockBloc();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late OrderEligibilityBloc orderEligibilityBlocMock;
@@ -173,7 +105,7 @@ void main() {
       stringMatch: 'orders/cart/checkout',
       key: ValueKey('CheckoutPageRoute'),
     ),
-    router: MockAppRouter(),
+    router: AutoRouteMock(),
     pendingChildren: [],
   );
 
@@ -208,7 +140,7 @@ void main() {
 
   setUpAll(() async {
     locator.registerFactory(() => AutoRouteMock());
-    locator.registerSingleton<MixpanelService>(MockMixpanelService());
+    locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
 
     autoRouterMock = locator<AutoRouteMock>();
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
@@ -252,22 +184,16 @@ void main() {
       find.byKey(WidgetKeys.checkoutSummaryTaxPrice);
   final checkoutSummaryTotalSaving =
       find.byKey(WidgetKeys.checkoutSummaryTotalSaving);
+  final checkoutDeliveryArrowButtonFinder =
+      find.byKey(WidgetKeys.checkoutDeliveryArrowButton);
 
   //////////////////////////////////////////////////////////////////////////
   group('Checkout Page Test', () {
     setUp(() async {
-      locator = GetIt.instance;
-      when(() => userBlocMock.state).thenReturn(
-        UserState.initial().copyWith(
-          user: fakeClientOrderTypeEnabled,
-        ),
-      );
       eligibilityBloc = EligibilityBlocMock();
-      salesOrgBlocMock = SalesOrgBlocMock();
       cartBloc = CartBlocMock();
       paymentTermBlocMock = PaymentTermBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
-      customerCodeBloc = CustomerCodeBlocMock();
       orderSummaryBlocMock = OrderSummaryBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       poAttachmentBloc = PoAttachmentBlocMock();
@@ -286,9 +212,6 @@ void main() {
       );
       when(() => customerLicenseBlocMock.state)
           .thenReturn(CustomerLicenseState.initial());
-      when(() => customerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial(),
-      );
       when(() => poAttachmentBloc.state).thenReturn(
         PoAttachmentState.initial(),
       );
@@ -303,7 +226,6 @@ void main() {
       );
       when(() => paymentTermBlocMock.state)
           .thenReturn(PaymentTermState.initial());
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => additionalDetailsBlocMock.state)
           .thenReturn(AdditionalDetailsState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
@@ -325,64 +247,48 @@ void main() {
       );
     });
     Widget getScopedWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          usingLocalization: true,
-          providers: [
-            BlocProvider<PaymentTermBloc>(
-              create: (context) => paymentTermBlocMock,
-            ),
-            BlocProvider<AdditionalDetailsBloc>(
-              create: (context) => additionalDetailsBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<PoAttachmentBloc>(
-              create: (context) => poAttachmentBloc,
-            ),
-            BlocProvider<PriceOverrideBloc>(
-              create: (context) => priceOverrideBloc,
-            ),
-            BlocProvider<OrderSummaryBloc>(
-              create: (context) => orderSummaryBlocMock,
-            ),
-            BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeBlocMock,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBloc,
-            ),
-            BlocProvider<CustomerLicenseBloc>(
-              create: (context) => customerLicenseBlocMock,
-            ),
-            BlocProvider<ComboDealListBloc>(
-              create: (context) => comboDealListBloc,
-            ),
-            BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-            BlocProvider<CartBloc>(create: (context) => cartBloc),
-            BlocProvider<MaterialPriceBloc>(
-              create: (context) => materialPriceBlocMock,
-            ),
-            BlocProvider<OrderEligibilityBloc>(
-              create: (context) => orderEligibilityBlocMock,
-            ),
-            BlocProvider<PaymentCustomerInformationBloc>(
-              create: ((context) => paymentCustomerInformationBlocMock),
-            ),
-          ],
-          child: const Material(
-            child: CheckoutPage(),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<PaymentTermBloc>(
+            create: (context) => paymentTermBlocMock,
           ),
+          BlocProvider<AdditionalDetailsBloc>(
+            create: (context) => additionalDetailsBlocMock,
+          ),
+          BlocProvider<PoAttachmentBloc>(
+            create: (context) => poAttachmentBloc,
+          ),
+          BlocProvider<PriceOverrideBloc>(
+            create: (context) => priceOverrideBloc,
+          ),
+          BlocProvider<OrderSummaryBloc>(
+            create: (context) => orderSummaryBlocMock,
+          ),
+          BlocProvider<OrderDocumentTypeBloc>(
+            create: (context) => orderDocumentTypeBlocMock,
+          ),
+          BlocProvider<CustomerLicenseBloc>(
+            create: (context) => customerLicenseBlocMock,
+          ),
+          BlocProvider<ComboDealListBloc>(
+            create: (context) => comboDealListBloc,
+          ),
+          BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
+          BlocProvider<CartBloc>(create: (context) => cartBloc),
+          BlocProvider<MaterialPriceBloc>(
+            create: (context) => materialPriceBlocMock,
+          ),
+          BlocProvider<OrderEligibilityBloc>(
+            create: (context) => orderEligibilityBlocMock,
+          ),
+          BlocProvider<PaymentCustomerInformationBloc>(
+            create: ((context) => paymentCustomerInformationBlocMock),
+          ),
+        ],
+        child: const Material(
+          child: CheckoutPage(),
         ),
       );
     }
@@ -653,7 +559,7 @@ void main() {
         );
 
         await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
         expect(checkoutPageFinder, findsOneWidget);
@@ -662,10 +568,7 @@ void main() {
         expect(deliveryInformationTextFinder, findsOneWidget);
         final checkoutScrollListFinder =
             find.byKey(WidgetKeys.checkoutScrollList);
-        final checkoutDeliveryArrowButtonFinder =
-            find.byKey(WidgetKeys.checkoutDeliveryArrowButton);
         expect(checkoutDeliveryArrowButtonFinder, findsOneWidget);
-        await tester.tap(checkoutDeliveryArrowButtonFinder);
         final pOReferenceKeyFinder =
             find.byKey(WidgetKeys.genericKey(key: 'pOReferenceKey'));
         expect(pOReferenceKeyFinder, findsOneWidget);
@@ -1039,8 +942,9 @@ void main() {
       expect(paymentTermDropdownKeyFinder, findsOneWidget);
       await tester.tap(paymentTermDropdownKeyFinder);
       await tester.pumpAndSettle();
-      await tester
-          .tap(find.text('fake_payment_term - fake_payment_term_description'));
+      await tester.tap(
+        find.text('fake_payment_term - fake_payment_term_description').last,
+      );
       await tester.pumpAndSettle();
     });
     testWidgets(
@@ -1322,12 +1226,7 @@ void main() {
             isSubmitting: true,
           ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeIDSalesOrgConfigs,
-            salesOrganisation: fakeIDSalesOrganisation,
-          ),
-        );
+
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeIDSalesOrgConfigs,
@@ -1368,12 +1267,7 @@ void main() {
             isSubmitting: true,
           ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeIDSalesOrgConfigs,
-            salesOrganisation: fakeIDSalesOrganisation,
-          ),
-        );
+
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeVNSalesOrgConfigs,
@@ -1406,12 +1300,6 @@ void main() {
       (tester) async {
         const phoneNumberUserInput = 'abc+-193847293849503827344';
 
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeVNSalesOrgConfigs,
-            salesOrganisation: fakeVNSalesOrganisation,
-          ),
-        );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeVNSalesOrgConfigs,
@@ -1422,6 +1310,7 @@ void main() {
             find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
+
         await tester.enterText(phoneNumberInputKey, phoneNumberUserInput);
         await tester.pump();
         expect(
@@ -1443,12 +1332,7 @@ void main() {
               .copyWith(mobileNumber: PhoneNumber(fakeMobileNumber)),
         ),
       );
-      when(() => salesOrgBlocMock.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          configs: fakeVNSalesOrgConfigs,
-          salesOrganisation: fakeVNSalesOrganisation,
-        ),
-      );
+
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeVNSalesOrgConfigs,
@@ -1456,6 +1340,8 @@ void main() {
         ),
       );
       await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      await tester.tap(checkoutDeliveryArrowButtonFinder);
       await tester.pump();
       final phoneNumberInputKey =
           find.byKey(WidgetKeys.genericKey(key: 'contactNumberKey'));
@@ -1477,12 +1363,7 @@ void main() {
             isSubmitting: true,
           ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeTHSalesOrgConfigs,
-            salesOrganisation: fakeTHSalesOrganisation,
-          ),
-        );
+
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeTHSalesOrgConfigs,
@@ -1523,12 +1404,7 @@ void main() {
             isSubmitting: true,
           ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeTWSalesOrgConfigs,
-            salesOrganisation: fakeTWSalesOrganisation,
-          ),
-        );
+
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeTWSalesOrgConfigs,
@@ -1570,12 +1446,7 @@ void main() {
             isSubmitting: true,
           ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeVNSalesOrgConfigs,
-            salesOrganisation: fakeVNSalesOrganisation,
-          ),
-        );
+
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeVNSalesOrgConfigs,
@@ -1623,12 +1494,6 @@ void main() {
           ]),
         );
 
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeVNSalesOrgConfigs,
-            salesOrganisation: fakeVNSalesOrganisation,
-          ),
-        );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeVNSalesOrgConfigs,
@@ -1665,12 +1530,6 @@ void main() {
     testWidgets(
       '=> test Contact Person in place Order when EnableMobileNumber is false ',
       (tester) async {
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeTWSalesOrgConfigs,
-            salesOrganisation: fakeTWSalesOrganisation,
-          ),
-        );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeTWSalesOrgConfigs,
@@ -1705,17 +1564,7 @@ void main() {
             ),
           ),
         );
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            isSubmitting: true,
-          ),
-        );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeIDSalesOrgConfigs,
-            salesOrganisation: fakeIDSalesOrganisation,
-          ),
-        );
+
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeIDSalesOrgConfigs,
@@ -1745,14 +1594,17 @@ void main() {
         );
 
         await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
-
-        final placeOrder = find.text('Place order');
-        expect(placeOrder, findsOneWidget);
-        await tester.tap(placeOrder);
-        await tester.pump();
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(WidgetKeys.snackBarDismissButton));
+        await tester.pumpAndSettle();
 
         final poAttachmentUploadKey = find.byType(PoAttachmentUpload);
+        await tester.dragUntilVisible(
+          poAttachmentUploadKey,
+          find.byKey(WidgetKeys.checkoutScrollList),
+          const Offset(0.0, -200.0),
+        );
+        await tester.pump();
         expect(poAttachmentUploadKey, findsOneWidget);
         verify(
           () => additionalDetailsBlocMock.add(
@@ -1814,6 +1666,7 @@ void main() {
         ).called(1);
       },
     );
+
     testWidgets(
       '=> test PoAttachment Upload in place Order check uploaded list',
       (tester) async {
@@ -1830,13 +1683,6 @@ void main() {
                 ),
               ],
             ),
-          ),
-        );
-
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeIDSalesOrgConfigs,
-            salesOrganisation: fakeIDSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
@@ -1917,51 +1763,6 @@ void main() {
       },
     );
     testWidgets(
-      '=> test PoAttachment Upload in place Order when showPOAttachment is true  and the bloc return error  ',
-      (tester) async {
-        when(() => additionalDetailsBlocMock.state).thenReturn(
-          AdditionalDetailsState.initial().copyWith(
-            isValidated: true,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            isSubmitting: true,
-          ),
-        );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeIDSalesOrgConfigs,
-            salesOrganisation: fakeIDSalesOrganisation,
-          ),
-        );
-        when(() => eligibilityBloc.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeIDSalesOrgConfigs,
-            salesOrganisation: fakeIDSalesOrganisation,
-          ),
-        );
-
-        final expectedState = [
-          PoAttachmentState.initial().copyWith(
-            failureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('fake_error'))),
-          ),
-        ];
-        whenListen(
-          poAttachmentBloc,
-          Stream.fromIterable(expectedState),
-        );
-
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
-
-        final poAttachmentUploadKey = find.byType(PoAttachmentUpload);
-        expect(poAttachmentUploadKey, findsOneWidget);
-      },
-    );
-
-    testWidgets(
       '=> test PoAttachment Upload in place Order when showPOAttachment is true  and the bloc return none  ',
       (tester) async {
         when(() => additionalDetailsBlocMock.state).thenReturn(
@@ -1974,12 +1775,7 @@ void main() {
             isSubmitting: true,
           ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeIDSalesOrgConfigs,
-            salesOrganisation: fakeIDSalesOrganisation,
-          ),
-        );
+
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeIDSalesOrgConfigs,
@@ -2024,12 +1820,6 @@ void main() {
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
             isSubmitting: true,
-          ),
-        );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
 
@@ -2159,12 +1949,7 @@ void main() {
             isSubmitting: true,
           ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeTWSalesOrgConfigs,
-            salesOrganisation: fakeTWSalesOrganisation,
-          ),
-        );
+
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeTWSalesOrgConfigs,
@@ -2197,12 +1982,6 @@ void main() {
             isSubmitting: true,
           ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeMYSalesOrganisation,
-          ),
-        );
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
@@ -2219,10 +1998,6 @@ void main() {
     testWidgets(
       '=> Show tax details on material level when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for vn with material level tax',
       (tester) async {
-        final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: fakeVNSalesOrganisation,
-          configs: fakeVNSalesOrgConfigs,
-        );
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[
             PriceAggregate.empty().copyWith(
@@ -2240,10 +2015,6 @@ void main() {
             ),
           ],
           config: fakeVNSalesOrgConfigs,
-        );
-
-        when(() => salesOrgBlocMock.state).thenReturn(
-          salesOrgState,
         );
 
         when(() => cartBloc.state).thenReturn(
@@ -2291,10 +2062,6 @@ void main() {
     testWidgets(
       '=> Do not Show tax details on total when displaySubtotalTaxBreakdown is disabled for ph',
       (tester) async {
-        final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: fakePHSalesOrganisation,
-          configs: fakePHSalesOrgConfigs,
-        );
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[
             PriceAggregate.empty().copyWith(
@@ -2315,9 +2082,6 @@ void main() {
           config: fakePHSalesOrgConfigs,
         );
 
-        when(() => salesOrgBlocMock.state).thenReturn(
-          salesOrgState,
-        );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakePHSalesOrganisation,
@@ -2443,14 +2207,6 @@ void main() {
     testWidgets(
       '=> Do not Show delivery Instruction textfield  when displaySubtotalTaxBreakdown is false',
       (tester) async {
-        final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: fakeVNSalesOrganisation,
-          configs: fakeMYSalesOrgConfigs,
-        );
-
-        when(() => salesOrgBlocMock.state).thenReturn(
-          salesOrgState,
-        );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
 
@@ -2464,19 +2220,11 @@ void main() {
     testWidgets(
       '=> Do not Show delivery Instruction textfield  when displaySubtotalTaxBreakdown is true',
       (tester) async {
-        final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: fakeVNSalesOrganisation,
-          configs: fakeMYSalesOrgConfigs,
-        );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrganisation: fakeVNSalesOrganisation,
             salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
-        );
-
-        when(() => salesOrgBlocMock.state).thenReturn(
-          salesOrgState,
         );
 
         await tester.pumpWidget(getScopedWidget());

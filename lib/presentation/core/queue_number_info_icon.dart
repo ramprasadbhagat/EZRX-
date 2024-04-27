@@ -1,4 +1,6 @@
-import 'package:ezrxmobile/presentation/core/uuid_description_bottom_sheet.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/info_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/info_icon.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -9,18 +11,18 @@ class QueueNumberInfoIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: () => showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          isDismissible: false,
-          builder: (_) => const UuidDescriptionBottomSheet(),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(4),
-          child: Icon(Icons.info, size: 20, color: iconColor),
+    return InfoIcon(
+      iconColor: iconColor,
+      onTap: () => showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        isDismissible: false,
+        builder: (_) => InfoBottomSheet(
+          title: context.tr('What\'s this number?'),
+          description: context.tr(
+            'Your order has been placed on ezrx but has not yet been made on SAP, and it will be queued in the SAP system to be created.',
+          ),
+          buttonTitle: context.tr('Close'),
         ),
       ),
     );

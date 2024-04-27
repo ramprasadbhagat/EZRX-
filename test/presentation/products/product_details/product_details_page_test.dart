@@ -2310,8 +2310,6 @@ void main() {
 
         testWidgets('Should display icon with tooltip along with expiry date',
             (tester) async {
-          when(() => autoRouterMock.pop())
-              .thenAnswer((_) => Future.value(true));
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrganisation: fakeMYSalesOrganisation,
@@ -2346,8 +2344,8 @@ void main() {
             findsOneWidget,
           );
           await tester.tap(closeButton);
-
-          verify(() => autoRouterMock.pop()).called(1);
+          await tester.pumpAndSettle();
+          expect(bottomSheet, findsNothing);
         });
       });
 

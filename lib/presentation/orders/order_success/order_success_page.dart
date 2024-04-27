@@ -209,7 +209,7 @@ class _BodyContent extends StatelessWidget {
                           const SizedBox(height: 12),
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: MarketPlaceTitleWithLogo(),
+                            child: MarketPlaceTitleWithLogo(showToolTip: true),
                           ),
                           _BundleItemSection(
                             bundleItems: mpItems.bundleItemDetailsList,

@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_type_info_bottomsheet.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/info_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/info_icon.dart';
 import 'package:flutter/material.dart';
 
 class ReturnTypeInfoIcon extends StatelessWidget {
@@ -12,17 +13,17 @@ class ReturnTypeInfoIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () => showModalBottomSheet(
+    return InfoIcon(
+      onTap: () => showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         isDismissible: false,
-        builder: (_) => ReturnTypeInfoBottomSheet(
-          returnType: returnType,
+        builder: (_) => InfoBottomSheet(
+          title: '${context.tr('Type')}: ${returnType.returnTypeValue}',
+          description: context.tr(returnType.returnTypeBottomASheetBodyText),
+          buttonTitle: context.tr('Got it'),
         ),
       ),
-      color: ZPColors.primary,
-      icon: const Icon(Icons.info, size: 20),
     );
   }
 }

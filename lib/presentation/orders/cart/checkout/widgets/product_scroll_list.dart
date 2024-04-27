@@ -137,7 +137,7 @@ class _DividerAndMarketPlaceTitle extends StatelessWidget {
           ),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-          child: MarketPlaceTitleWithLogo(),
+          child: MarketPlaceTitleWithLogo(showToolTip: true),
         ),
       ],
     );

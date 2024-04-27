@@ -1,6 +1,6 @@
 part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 
-class _DeliveryInfo extends StatefulWidget {
+class _DeliveryInfo extends StatelessWidget {
   final Map<DeliveryInfoLabel, FocusNode> focusNodes;
   const _DeliveryInfo({
     Key? key,
@@ -8,161 +8,111 @@ class _DeliveryInfo extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<_DeliveryInfo> createState() => _DeliveryInfoState();
-}
-
-class _DeliveryInfoState extends State<_DeliveryInfo> {
-  final ValueNotifier<bool> _isDisplayDeliveryInfo = ValueNotifier<bool>(true);
-
-  @override
-  void dispose() {
-    _isDisplayDeliveryInfo.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      sliver: SliverToBoxAdapter(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  context.tr('Delivery information'),
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge
-                      ?.copyWith(color: ZPColors.neutralsBlack),
-                ),
-                IconButton(
-                  key: WidgetKeys.checkoutDeliveryArrowButton,
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    _isDisplayDeliveryInfo.value =
-                        !_isDisplayDeliveryInfo.value;
-                  },
-                  icon: ValueListenableBuilder<bool>(
-                    builder: (context, value, child) => Icon(
-                      _isDisplayDeliveryInfo.value
-                          ? Icons.expand_less_outlined
-                          : Icons.expand_more_outlined,
-                    ),
-                    valueListenable: _isDisplayDeliveryInfo,
-                  ),
-                  splashRadius: 24,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            ValueListenableBuilder<bool>(
-              valueListenable: _isDisplayDeliveryInfo,
-              builder: (context, value, child) => _isDisplayDeliveryInfo.value
-                  ? BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
-                      buildWhen: (previous, current) => previous != current,
-                      builder: (context, state) {
-                        final config = context
-                            .read<EligibilityBloc>()
-                            .state
-                            .salesOrgConfigs;
+    return BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
 
-                        return Form(
-                          key: WidgetKeys.additionalDetailsForm,
-                          autovalidateMode: state.showErrorMessages
-                              ? AutovalidateMode.always
-                              : AutovalidateMode.disabled,
-                          child: Column(
-                            children: [
-                              _TextFormField(
-                                labelText: 'PO reference',
-                                keyText: 'pOReferenceKey',
-                                hintText:
-                                    config.poNumberRequired.poReferenceHintText,
-                                label: DeliveryInfoLabel.poReference,
-                                deliveryInfoData: state.deliveryInfoData,
-                                focusNode: widget.focusNodes[
-                                        DeliveryInfoLabel.poReference] ??
-                                    FocusNode(),
-                                maxLength: 35,
-                              ),
-                              if (config.enableFutureDeliveryDay)
-                                const _RequestDeliveryDate(),
-                              if (config.enableReferenceNote)
-                                _TextFormField(
-                                  labelText: 'Reference note',
-                                  keyText: 'referenceNoteKey',
-                                  hintText: 'Enter reference note',
-                                  label: DeliveryInfoLabel.referenceNote,
-                                  deliveryInfoData: state.deliveryInfoData,
-                                  focusNode: widget.focusNodes[
-                                          DeliveryInfoLabel.referenceNote] ??
-                                      FocusNode(),
-                                ),
-                              if (config.enablePaymentTerms)
-                                _PaymentTerm(
-                                  deliveryInfoData: state.deliveryInfoData,
-                                  focusNode: widget.focusNodes[
-                                          DeliveryInfoLabel.paymentTerm] ??
-                                      FocusNode(),
-                                ),
-                              if (config.enableMobileNumber)
-                                _TextFormField(
-                                  labelText: 'Contact person',
-                                  keyText: 'contactPersonKey',
-                                  hintText: 'Enter contact person name',
-                                  maxLength: 35,
-                                  label: DeliveryInfoLabel.contactPerson,
-                                  deliveryInfoData: state.deliveryInfoData,
-                                  focusNode: widget.focusNodes[
-                                          DeliveryInfoLabel.contactPerson] ??
-                                      FocusNode(),
-                                ),
-                              if (config.enableMobileNumber)
-                                _TextFormField(
-                                  labelText: 'Contact number',
-                                  keyText: 'contactNumberKey',
-                                  hintText: 'Enter contact person number',
-                                  maxLength: 16,
-                                  label: DeliveryInfoLabel.mobileNumber,
-                                  keyboardType: TextInputType.phone,
-                                  deliveryInfoData: state.deliveryInfoData,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.digitsOnly,
-                                  ],
-                                  focusNode: widget.focusNodes[
-                                          DeliveryInfoLabel.mobileNumber] ??
-                                      FocusNode(),
-                                ),
-                              if (config.enableSpecialInstructions)
-                                _TextFormField(
-                                  labelText: 'Delivery instructions',
-                                  keyText: 'deliveryInstructionKey',
-                                  hintText:
-                                      'Enter delivery instructions(Optional)',
-                                  keyboardType: TextInputType.multiline,
-                                  label: DeliveryInfoLabel.deliveryInstruction,
-                                  deliveryInfoData: state.deliveryInfoData,
-                                  focusNode: widget.focusNodes[DeliveryInfoLabel
-                                          .deliveryInstruction] ??
-                                      FocusNode(),
-                                  maxLength: 132,
-                                ),
-                              if (config.showPOAttachment)
-                                const PoAttachmentUpload(),
-                            ],
-                          ),
-                        );
-                      },
-                    )
-                  : const SizedBox.shrink(),
+        return Form(
+          autovalidateMode: state.showErrorMessages
+              ? AutovalidateMode.always
+              : AutovalidateMode.disabled,
+          child: custom.ExpansionTile(
+            initiallyExpanded: true,
+            maintainState: true,
+            title: Text(
+              context.tr('Delivery information'),
+              key: WidgetKeys.checkoutDeliveryArrowButton,
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(color: ZPColors.neutralsBlack),
             ),
-          ],
-        ),
-      ),
+            threeLineTitle: true,
+            iconColor: ZPColors.neutralsBlack,
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            childrenPadding: const EdgeInsets.only(
+              left: 15,
+              right: 15,
+              bottom: 16,
+            ),
+            boxBorder: const Border(
+              bottom: BorderSide(color: ZPColors.extraLightGrey2),
+            ),
+            children: [
+              _TextFormField(
+                labelText: 'PO reference',
+                keyText: 'pOReferenceKey',
+                hintText: config.poNumberRequired.poReferenceHintText,
+                label: DeliveryInfoLabel.poReference,
+                deliveryInfoData: state.deliveryInfoData,
+                focusNode:
+                    focusNodes[DeliveryInfoLabel.poReference] ?? FocusNode(),
+                maxLength: 35,
+              ),
+              if (config.enableFutureDeliveryDay) const _RequestDeliveryDate(),
+              if (config.enableReferenceNote)
+                _TextFormField(
+                  labelText: 'Reference note',
+                  keyText: 'referenceNoteKey',
+                  hintText: 'Enter reference note',
+                  label: DeliveryInfoLabel.referenceNote,
+                  deliveryInfoData: state.deliveryInfoData,
+                  focusNode: focusNodes[DeliveryInfoLabel.referenceNote] ??
+                      FocusNode(),
+                ),
+              if (config.enablePaymentTerms)
+                _PaymentTerm(
+                  deliveryInfoData: state.deliveryInfoData,
+                  focusNode:
+                      focusNodes[DeliveryInfoLabel.paymentTerm] ?? FocusNode(),
+                ),
+              if (config.enableMobileNumber)
+                _TextFormField(
+                  labelText: 'Contact person',
+                  keyText: 'contactPersonKey',
+                  hintText: 'Enter contact person name',
+                  maxLength: 35,
+                  label: DeliveryInfoLabel.contactPerson,
+                  deliveryInfoData: state.deliveryInfoData,
+                  focusNode: focusNodes[DeliveryInfoLabel.contactPerson] ??
+                      FocusNode(),
+                ),
+              if (config.enableMobileNumber)
+                _TextFormField(
+                  labelText: 'Contact number',
+                  keyText: 'contactNumberKey',
+                  hintText: 'Enter contact person number',
+                  maxLength: 16,
+                  label: DeliveryInfoLabel.mobileNumber,
+                  keyboardType: TextInputType.phone,
+                  deliveryInfoData: state.deliveryInfoData,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
+                  focusNode:
+                      focusNodes[DeliveryInfoLabel.mobileNumber] ?? FocusNode(),
+                ),
+              if (config.enableSpecialInstructions)
+                _TextFormField(
+                  labelText: 'Delivery instructions',
+                  keyText: 'deliveryInstructionKey',
+                  hintText: 'Enter delivery instructions(Optional)',
+                  keyboardType: TextInputType.multiline,
+                  label: DeliveryInfoLabel.deliveryInstruction,
+                  deliveryInfoData: state.deliveryInfoData,
+                  focusNode:
+                      focusNodes[DeliveryInfoLabel.deliveryInstruction] ??
+                          FocusNode(),
+                  maxLength: 132,
+                ),
+              if (config.showPOAttachment) const PoAttachmentUpload(),
+            ],
+          ),
+        );
+      },
     );
   }
 }
