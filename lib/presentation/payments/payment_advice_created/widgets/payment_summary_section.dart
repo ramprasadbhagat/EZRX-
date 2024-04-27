@@ -33,15 +33,6 @@ class _PaymentSummarySection extends StatelessWidget {
                       title: 'Amount payable',
                       salesOrgConfig: configs,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                      ),
-                      child: Text(
-                        '-',
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                    ),
                     PriceText(
                       data: '(${StringUtils.displayNumber(
                         state.selectedCredits.amountTotal.abs(),

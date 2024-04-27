@@ -7,7 +7,7 @@ void main() {
   group('AvailableCreditFilter dto ', () {
     test('AvailableCreditFilter toMapList', () {
       final availableCreditFilter = AvailableCreditFilter(
-        amountValueFrom: RangeValue('0'),
+        amountValueFrom: RangeValue('4'),
         amountValueTo: RangeValue('100'),
         documentDateFrom: DateTimeStringValue('20221011'),
         documentDateTo: DateTimeStringValue('20231011'),
@@ -17,8 +17,8 @@ void main() {
       final toMapList = [
         {'field': 'documentDate', 'value': '2022-10-11', 'type': 'ge'},
         {'field': 'documentDate', 'value': '2023-10-11', 'type': 'le'},
-        {'field': 'openAmountInTransCrcy', 'value': '0.0', 'type': 'ge'},
-        {'field': 'openAmountInTransCrcy', 'value': '100.0', 'type': 'le'},
+        {'field': 'openAmountInTransCrcy', 'value': '-100.0', 'type': 'ge'},
+        {'field': 'openAmountInTransCrcy', 'value': '-4.0', 'type': 'le'},
       ];
       expect(availableCreditFilterDto.toMapList, toMapList);
     });

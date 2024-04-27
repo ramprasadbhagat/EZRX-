@@ -8,26 +8,14 @@ part 'available_credit_filter_dto.g.dart';
 class AvailableCreditFilterDto with _$AvailableCreditFilterDto {
   const AvailableCreditFilterDto._();
   const factory AvailableCreditFilterDto({
-    @JsonKey(
-      name: 'documentDateFrom',
-      defaultValue: '',
-    )
-        required String documentDateFrom,
-    @JsonKey(
-      name: 'documentDateTo',
-      defaultValue: '',
-    )
-        required String documentDateTo,
-    @JsonKey(
-      name: 'amountInTransactionCurrencyFrom',
-      defaultValue: '',
-    )
-        required String amountInTransactionCurrencyFrom,
-    @JsonKey(
-      name: 'amountInTransactionCurrencyTo',
-      defaultValue: '',
-    )
-        required String amountInTransactionCurrencyTo,
+    @JsonKey(name: 'documentDateFrom', defaultValue: '')
+    required String documentDateFrom,
+    @JsonKey(name: 'documentDateTo', defaultValue: '')
+    required String documentDateTo,
+    @JsonKey(name: 'amountInTransactionCurrencyFrom', defaultValue: '')
+    required String amountInTransactionCurrencyFrom,
+    @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
+    required String amountInTransactionCurrencyTo,
   }) = _AvailableCreditFilterDto;
 
   factory AvailableCreditFilterDto.fromDomain(
@@ -87,14 +75,14 @@ class AvailableCreditFilterDto with _$AvailableCreditFilterDto {
       filterMap.add(
         _mapData(
           field: 'openAmountInTransCrcy',
-          date: amountInTransactionCurrencyFrom,
+          date: '-$amountInTransactionCurrencyTo',
           type: 'ge',
         ),
       );
       filterMap.add(
         _mapData(
           field: 'openAmountInTransCrcy',
-          date: amountInTransactionCurrencyTo,
+          date: '-$amountInTransactionCurrencyFrom',
           type: 'le',
         ),
       );

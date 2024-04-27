@@ -16,16 +16,19 @@ class CreditItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Column(
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${customerOpenItem.postingKeyName} #${customerOpenItem.accountingDocument}',
-                style: Theme.of(context).textTheme.labelSmall,
+                '${context.tr('Credit Note')} #${customerOpenItem.accountingDocument}',
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
                 key: WidgetKeys.accountingDocument,
               ),
               Text(
@@ -36,30 +39,34 @@ class CreditItemCard extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, bottom: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (context
-                    .read<EligibilityBloc>()
-                    .state
-                    .salesOrg
-                    .showGovNumber)
-                  Text(
-                    '${context.tr('Gov. no')} ${customerOpenItem.documentReferenceID.displayDashIfEmpty}',
-                    style: Theme.of(context).textTheme.labelSmall,
-                    key: WidgetKeys.governmentNumber,
+          if (context.read<EligibilityBloc>().state.salesOrg.showGovNumber) ...[
+            const SizedBox(height: 4),
+            Text(
+              '${context.tr('Gov. no')} ${customerOpenItem.documentReferenceID.displayDashIfEmpty}',
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: ZPColors.neutralsBlack,
                   ),
-                PriceComponent(
-                  key: WidgetKeys.creditIdPrice,
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price:
-                      customerOpenItem.openAmountInTransCrcy.abs().toString(),
-                ),
-              ],
+              key: WidgetKeys.governmentNumber,
             ),
+          ],
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                customerOpenItem.postingKeyName,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
+              ),
+              PriceComponent(
+                key: WidgetKeys.creditIdPrice,
+                type: PriceStyle.comboSubTotalExclTax,
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                price: customerOpenItem.openAmountInTransCrcy.abs().toString(),
+              ),
+            ],
           ),
         ],
       ),

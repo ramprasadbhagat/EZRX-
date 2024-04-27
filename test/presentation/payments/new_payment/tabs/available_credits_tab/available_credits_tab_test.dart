@@ -340,16 +340,32 @@ void main() {
 
       await tester.pumpWidget(getWidget());
       await tester.pump();
-
-      final availableText = find.text('Invoice #1100001163');
-      expect(availableText, findsOneWidget);
-
-      final dateText = find.text('31 Jul 2016');
-      expect(dateText, findsOneWidget);
-
-      final documentReferenceID = find.text('Gov. no 0800072883');
-      expect(documentReferenceID, findsOneWidget);
-
+      final creditCard = find.byKey(WidgetKeys.creditPaymentItem);
+      expect(
+        find.descendant(
+          of: creditCard,
+          matching: find.text('Credit Note #1100001163'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(of: creditCard, matching: find.text('31 Jul 2016')),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: creditCard,
+          matching: find.text('Gov. no 0800072883'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: creditCard,
+          matching: find.text('Invoice'),
+        ),
+        findsOneWidget,
+      );
       expect(
         find.byWidgetPredicate(
           (widget) =>
@@ -384,16 +400,32 @@ void main() {
 
       await tester.pumpWidget(getWidget());
       await tester.pump();
-
-      final availableText = find.text('Invoice #1100001163');
-      expect(availableText, findsOneWidget);
-
-      final dateText = find.text('31 Jul 2016');
-      expect(dateText, findsOneWidget);
-
-      final documentReferenceID = find.text('Gov. no 0800072883');
-      expect(documentReferenceID, findsOneWidget);
-
+      final creditCard = find.byKey(WidgetKeys.creditPaymentItem);
+      expect(
+        find.descendant(
+          of: creditCard,
+          matching: find.text('Credit Note #1100001163'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(of: creditCard, matching: find.text('31 Jul 2016')),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: creditCard,
+          matching: find.text('Gov. no 0800072883'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: creditCard,
+          matching: find.text('Invoice'),
+        ),
+        findsOneWidget,
+      );
       expect(
         find.byWidgetPredicate(
           (widget) =>

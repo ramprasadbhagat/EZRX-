@@ -14,7 +14,7 @@ class _NoteAnnouncement extends StatelessWidget {
       children: [
         Text(
           '${context.tr(
-            'Please note that once the Payment Advice is created, you can no longer add or remove invoices/credit notes',
+            'Please note that once the Payment Advice is generated, you can no longer add or remove invoices/credit notes',
           )}. ',
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 color: ZPColors.infoTextBlueColor,

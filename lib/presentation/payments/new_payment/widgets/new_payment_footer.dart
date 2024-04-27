@@ -51,15 +51,6 @@ class _NewPaymentFooter extends StatelessWidget {
                         title: context.tr('Amount payable'),
                         salesOrgConfig: configs,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                        ),
-                        child: Text(
-                          '-',
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                      ),
                       PriceText(
                         data: '(${StringUtils.displayNumber(
                           state.selectedCredits.amountTotal.abs(),
