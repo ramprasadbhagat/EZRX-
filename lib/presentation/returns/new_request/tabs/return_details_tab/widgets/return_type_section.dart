@@ -91,46 +91,42 @@ class CustomRadioTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          Radio(
-            key: WidgetKeys.selectByRadio(title),
-            visualDensity: const VisualDensity(
-              horizontal: -4.0,
-              vertical: -4.0,
-            ),
-            groupValue: groupValue,
-            value: value,
-            fillColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) =>
-                  isDisabled ? ZPColors.lightGray : ZPColors.primary,
-            ),
-            onChanged: isDisabled
-                ? null
-                : (ReturnType? value) => context.read<NewRequestBloc>().add(
-                      NewRequestEvent.updateSelectedReturnType(
-                        returnType: value!,
-                        assignmentNumber: assignmentNumber,
-                      ),
+    return Row(
+      children: [
+        Radio(
+          key: WidgetKeys.selectByRadio(title),
+          visualDensity: const VisualDensity(
+            horizontal: -4.0,
+            vertical: -4.0,
+          ),
+          groupValue: groupValue,
+          value: value,
+          fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) =>
+                isDisabled ? ZPColors.lightGray : ZPColors.primary,
+          ),
+          onChanged: isDisabled
+              ? null
+              : (ReturnType? value) => context.read<NewRequestBloc>().add(
+                    NewRequestEvent.updateSelectedReturnType(
+                      returnType: value!,
+                      assignmentNumber: assignmentNumber,
                     ),
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          Text(
-            title,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color:
-                      isDisabled ? ZPColors.lightGray : ZPColors.neutralsBlack,
-                ),
-          ),
-          ReturnTypeInfoIcon(
-            returnType: value,
-          ),
-        ],
-      ),
+                  ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: isDisabled ? ZPColors.lightGray : ZPColors.neutralsBlack,
+              ),
+        ),
+        ReturnTypeInfoIcon(
+          returnType: value,
+        ),
+      ],
     );
   }
 }
