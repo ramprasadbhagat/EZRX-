@@ -63,6 +63,8 @@ class RequestInformationQuery {
       expiryDate
       comment
       rejectReason
+      returnTypeDesc
+      returnType
       returnQuantity
       unitPrice
       totalPrice
