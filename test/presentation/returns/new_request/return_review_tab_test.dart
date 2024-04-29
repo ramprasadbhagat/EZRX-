@@ -235,6 +235,7 @@ void main() {
                 fakeReturnItemDetails.copyWith(
                   returnReason: fakeUsageList.first.usageCode,
                   remarks: remarks,
+                  returnType: ReturnType.returnItem(),
                 ),
               ],
             ),
@@ -261,6 +262,104 @@ void main() {
         find.descendant(
           of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
           matching: find.widgetWithText(ExpandableInfo, 'Return details'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Return Type',
+              ReturnType.returnItem().returnTypeValue,
+            ),
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Reason',
+              fakeUsageList.first.usageDescription,
+            ),
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Comments',
+              remarks.getValue(),
+            ),
+          ),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byType(UploadedFileList),
+        ),
+        findsOneWidget,
+      );
+    });
+    testWidgets(
+        ' =>  Body Test - Return details section when return type is Exchange',
+        (tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial.copyWith(bonusItems: [])],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails.copyWith(
+                  returnReason: fakeUsageList.first.usageCode,
+                  remarks: remarks,
+                  returnType: ReturnType.exchangeItem(),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+
+      when(() => usageCodeBlocMock.state).thenReturn(
+        UsageCodeState.initial().copyWith(
+          usages: fakeUsageList,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(WidgetKeys.returnDetailsSectionKey),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.widgetWithText(ExpandableInfo, 'Return details'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.genericKey(key: 'selectedItem#0')),
+          matching: find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Return Type',
+              ReturnType.exchangeItem().returnTypeValue,
+            ),
+          ),
         ),
         findsOneWidget,
       );

@@ -511,6 +511,13 @@ void main() {
             ),
             findsOneWidget,
           );
+          final returnType = find.byKey(
+            WidgetKeys.balanceTextRow(
+              'Return type',
+              requestInformationMock.returnTypeDesc,
+            ),
+          );
+          expect(returnType, findsWidgets);
           final reason = find.byKey(
             WidgetKeys.balanceTextRow(
               'Reason',

@@ -237,6 +237,196 @@ void main() {
       ).called(1);
     });
 
+    testWidgets(' => tap return type exchange button',
+        (WidgetTester tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation,
+        ),
+      );
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial.copyWith(bonusItems: [])],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              salesOrg: fakeSalesOrg,
+              returnItemDetailsList: [
+                fakeReturnItemDetails,
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final returnRedioButton =
+          find.byKey(WidgetKeys.selectByRadio('Return'.tr()));
+      final exchangeRedioButton =
+          find.byKey(WidgetKeys.selectByRadio('Exchange'.tr()));
+      expect(returnRedioButton, findsOneWidget);
+      expect(exchangeRedioButton, findsOneWidget);
+      await tester.pumpAndSettle();
+      await tester.tap(exchangeRedioButton);
+      await tester.pumpAndSettle();
+      verify(
+        () => newRequestBlocMock.add(
+          NewRequestEvent.updateSelectedReturnType(
+            returnType: ReturnType.exchangeItem(),
+            assignmentNumber: fakeReturnItemDetails.assignmentNumber,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(' => Selected return type as exchange and verify the fields ',
+        (WidgetTester tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation,
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
+        ),
+      );
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial.copyWith(bonusItems: [])],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              salesOrg: fakeSalesOrg,
+              returnItemDetailsList: [
+                fakeReturnItemDetails.copyWith(
+                  returnType: ReturnType.exchangeItem(),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final returnRedioButton =
+          find.byKey(WidgetKeys.selectByRadio('Return'.tr()));
+      final exchangeRedioButton =
+          find.byKey(WidgetKeys.selectByRadio('Exchange'.tr()));
+      expect(returnRedioButton, findsOneWidget);
+      expect(exchangeRedioButton, findsOneWidget);
+      final returnCounterOfferField = find.byKey(
+        WidgetKeys.requestCounterOfferTextField(fakeReturnItemDetails.uuid),
+      );
+      expect(returnCounterOfferField, findsNothing);
+      final returnQuantityField = find.byKey(
+        WidgetKeys.returnQuantityField(fakeReturnMaterial.uuid),
+      );
+      final returnQuantityFieldHintText =
+          find.text(ReturnType.exchangeItem().quantityHintText.tr());
+      expect(
+        returnQuantityField,
+        findsOneWidget,
+      );
+      expect(
+        returnQuantityFieldHintText,
+        findsOneWidget,
+      );
+    });
+    testWidgets(' => tap return type exchange button while having bonus item ',
+        (WidgetTester tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation,
+        ),
+      );
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              salesOrg: fakeSalesOrg,
+              returnItemDetailsList: [
+                fakeReturnItemDetails,
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final returnRedioButton =
+          find.byKey(WidgetKeys.selectByRadio('Return'.tr()));
+      final exchangeRedioButton =
+          find.byKey(WidgetKeys.selectByRadio('Exchange'.tr()));
+      expect(returnRedioButton, findsNWidgets(2));
+      expect(exchangeRedioButton, findsNWidgets(2));
+      await tester.pumpAndSettle();
+      await tester.tap(exchangeRedioButton.first);
+      await tester.pumpAndSettle();
+      verify(
+        () => newRequestBlocMock.add(
+          NewRequestEvent.updateSelectedReturnType(
+            returnType: ReturnType.exchangeItem(),
+            assignmentNumber: fakeReturnItemDetails.assignmentNumber,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(
+        ' => Selected return type as exchange and verify the fields for bonus',
+        (WidgetTester tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation,
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
+        ),
+      );
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              salesOrg: fakeSalesOrg,
+              returnItemDetailsList: [
+                fakeReturnItemDetails.copyWith(
+                  returnType: ReturnType.exchangeItem(),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final returnRedioButton =
+          find.byKey(WidgetKeys.selectByRadio('Return'.tr()));
+      final exchangeRedioButton =
+          find.byKey(WidgetKeys.selectByRadio('Exchange'.tr()));
+      expect(returnRedioButton, findsNWidgets(2));
+      expect(exchangeRedioButton, findsNWidgets(2));
+      final returnCounterOfferField = find.byKey(
+        WidgetKeys.requestCounterOfferTextField(fakeReturnItemDetails.uuid),
+      );
+      expect(returnCounterOfferField, findsNothing);
+      final returnQuantityField = find.byKey(
+        WidgetKeys.returnQuantityField(fakeReturnMaterial.uuid),
+      );
+      final returnQuantityFieldHintText =
+          find.text(ReturnType.exchangeItem().quantityHintText.tr());
+      expect(
+        returnQuantityField,
+        findsNWidgets(2),
+      );
+      expect(
+        returnQuantityFieldHintText,
+        findsNWidgets(2),
+      );
+    });
+
     testWidgets(
         ' => bonus quantity is low balance hide MaterialBonusDetailsSection',
         (WidgetTester tester) async {
