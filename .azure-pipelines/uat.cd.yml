@@ -63,6 +63,24 @@ stages:
         script: |
           fvm flutter build ipa --flavor uat -t lib/main_uat.dart --release --export-options-plist=ios/config/uat/exportOptions.plist
 
+    - task: Bash@3
+      displayName: 'Install Firebase Tools'
+      inputs:
+        targetType: 'inline'
+        script: 'curl -sL firebase.tools | bash'
+        workingDirectory: '$(Agent.ToolsDirectory)'
+
+    - task: Bash@3
+      displayName: 'Upload IPA to Firebase'
+      inputs:
+        targetType: 'inline'
+        script: |
+          firebase appdistribution:distribute *.ipa \
+          --app "$(FIREBASE_UAT_IOS_APP_ID)" \
+          --token "$(FIREBASE_CI_TOKEN)" \
+          --groups "$(FIREBASE_UAT_TESTER_GROUP)"
+        workingDirectory: 'build/ios/ipa'
+
     - task: AppStoreRelease@1
       displayName: 'Upload to the App Store TestFlight track'
       inputs:
@@ -149,6 +167,24 @@ stages:
         script: |
           fvm flutter build appbundle --flavor uat -t lib/main_uat.dart --release
 
+    - task: Bash@3
+      displayName: 'Install Firebase Tools'
+      inputs:
+        targetType: 'inline'
+        script: 'curl -sL firebase.tools | bash'
+        workingDirectory: '$(Agent.ToolsDirectory)'
+
+    - task: Bash@3
+      displayName: 'Upload AAB to Firebase'
+      inputs:
+        targetType: 'inline'
+        script: |
+          firebase appdistribution:distribute *.aab \
+          --app "$(FIREBASE_UAT_ANDROID_APP_ID)" \
+          --token "$(FIREBASE_CI_TOKEN)" \
+          --groups "$(FIREBASE_UAT_TESTER_GROUP)"
+        workingDirectory: 'build/app/outputs/bundle/uatRelease'
+
     - task: AppCenterDistribute@3
       displayName: Upload to Microsoft Appcenter eZRx Uat
       continueOnError: true
@@ -171,40 +207,40 @@ stages:
         bundleFile: 'build/app/outputs/bundle/uatRelease/*.aab'
         track: 'internal'
         rolloutToUserFraction: true
-        # changesNotSentForReview: true
+        changesNotSentForReview: true
 
 
-- stage: WebUatStage
-  dependsOn: []
-  displayName: WebUatStage
-  jobs:
+# - stage: WebUatStage
+#   dependsOn: []
+#   displayName: WebUatStage
+#   jobs:
 
-  - job: WebUatJob
-    displayName: WebUatJob
-    steps:
+#   - job: WebUatJob
+#     displayName: WebUatJob
+#     steps:
 
-    - task: Bash@3
-      displayName: flutter & firebase setup
-      inputs:
-        targetType: 'inline'
-        script: |
-          brew tap leoafarias/fvm
-          brew install fvm
-          echo Y | fvm global 3.19.4
-          fvm flutter pub get
-          brew install firebase-cli
+#     - task: Bash@3
+#       displayName: flutter & firebase setup
+#       inputs:
+#         targetType: 'inline'
+#         script: |
+#           brew tap leoafarias/fvm
+#           brew install fvm
+#           echo Y | fvm global 3.19.4
+#           fvm flutter pub get
+#           brew install firebase-cli
 
-    - task: Bash@3
-      displayName: build Web Uat and upload to firebase hosting
-      inputs:
-        targetType: 'inline'
-        script: |
-          fvm flutter build web -t lib/main_uat.dart --release
-          firebase deploy --token "$(FIREBASE_UAT_TOKEN)"
+#     - task: Bash@3
+#       displayName: build Web Uat and upload to firebase hosting
+#       inputs:
+#         targetType: 'inline'
+#         script: |
+#           fvm flutter build web -t lib/main_uat.dart --release
+#           firebase deploy --token "$(FIREBASE_UAT_TOKEN)"
 
 
 - stage: MSTeamsNotificationStage
-  dependsOn: [IOSUatStage,AndroidUatStage,WebUatStage]
+  dependsOn: [IOSUatStage,AndroidUatStage]
   displayName: MSTeamsNotificationStage
   jobs:
   - job: MSTeamsNotificationUatJob
@@ -236,28 +272,19 @@ stages:
                 "@type": "OpenUri",
                 "name": "Android",
                 "targets": [
-                  { "os": "default", "uri": "$(APPCENTER_APP_URL_UAT_ANDROID)" }
+                  { "os": "default", "uri": "https://appdistribution.firebase.google.com/testerapps/$(FIREBASE_UAT_ANDROID_APP_ID)" }
                 ]
               },
               {
                 "@type": "OpenUri",
                 "name": "IOS",
                 "targets": [
-                  { "os": "default", "uri": "$(TESTFLIGHT_APP_URL_UAT_IOS)" }
-                ]
-              },
-              {
-                "@type": "OpenUri",
-                "name": "Web",
-                "targets": [
-                  { "os": "default", "uri": "$(FIREBASE_URL_UAT_WEB)" }
+                  { "os": "default", "uri": "https://appdistribution.firebase.google.com/testerapps/$(FIREBASE_UAT_IOS_APP_ID)" }
                 ]
               }]
             }]
           }'
-
       env:
-        APPCENTER_APP_URL_UAT_ANDROID: '$(APPCENTER_APP_URL_UAT_ANDROID)'
-        TESTFLIGHT_APP_URL_UAT_IOS: '$(TESTFLIGHT_APP_URL_UAT_IOS)'
-        FIREBASE_URL_UAT_WEB: '$(FIREBASE_URL_UAT_WEB)'
+        FIREBASE_UAT_ANDROID_APP_ID: '$(FIREBASE_UAT_ANDROID_APP_ID)'
+        FIREBASE_UAT_IOS_APP_ID: '$(FIREBASE_UAT_IOS_APP_ID)'
         MICROSOFT_TEAMS_BUILD_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_CHANNEL)'

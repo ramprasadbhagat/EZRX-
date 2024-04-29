@@ -122,8 +122,8 @@ Let's assume that we test loading_more function for load a page 2
 ### Android SDK Version
 Make the below changes to your /eZRx Mobile/android/local.properties
 - flutter.minSdkVersion=24
-- flutter.targetSdkVersion=33
-- flutter.compileSdkVersion=33
+- flutter.targetSdkVersion=34
+- flutter.compileSdkVersion=34
 
 ### How to run both iOS and Android simulator in a same time
 1. Command + P => Flutter: Select Device

@@ -63,6 +63,24 @@ stages:
         script: |
           fvm flutter build ipa --flavor prod -t lib/main_prod.dart --release --export-options-plist=ios/config/prod/exportOptions.plist
 
+    - task: Bash@3
+      displayName: 'Install Firebase Tools'
+      inputs:
+        targetType: 'inline'
+        script: 'curl -sL firebase.tools | bash'
+        workingDirectory: '$(Agent.ToolsDirectory)'
+
+    - task: Bash@3
+      displayName: 'Upload IPA to Firebase'
+      inputs:
+        targetType: 'inline'
+        script: |
+          firebase appdistribution:distribute *.ipa \
+          --app "$(FIREBASE_PROD_IOS_APP_ID)" \
+          --token "$(FIREBASE_CI_TOKEN)" \
+          --groups "$(FIREBASE_PROD_TESTER_GROUP)"
+        workingDirectory: 'build/ios/ipa'
+
     - task: AppStoreRelease@1
       displayName: 'Upload to the App Store TestFlight track'
       inputs:
@@ -148,6 +166,24 @@ stages:
         targetType: 'inline'
         script: |
           fvm flutter build appbundle --flavor prod -t lib/main_prod.dart --release
+
+    - task: Bash@3
+      displayName: 'Install Firebase Tools'
+      inputs:
+        targetType: 'inline'
+        script: 'curl -sL firebase.tools | bash'
+        workingDirectory: '$(Agent.ToolsDirectory)'
+
+    - task: Bash@3
+      displayName: 'Upload AAB to Firebase'
+      inputs:
+        targetType: 'inline'
+        script: |
+          firebase appdistribution:distribute *.aab \
+          --app "$(FIREBASE_PROD_ANDROID_APP_ID)" \
+          --token "$(FIREBASE_CI_TOKEN)" \
+          --groups "$(FIREBASE_PROD_TESTER_GROUP)"
+        workingDirectory: 'build/app/outputs/bundle/prodRelease'
 
     - task: AppCenterDistribute@3
       displayName: Upload to Microsoft Appcenter
