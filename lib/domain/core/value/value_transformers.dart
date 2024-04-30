@@ -866,11 +866,17 @@ bool isOrderDetailLink(String path) =>
 bool isReturnSummaryDetailLink(String path) =>
     path == '/my-account/return-summary-details';
 
-bool isPaymentSummaryInvoiceDetailLink(String path) =>
+bool isZPPaymentSummaryDetailLink(String path) =>
     path == '/payments/payment-summary/invoice-details';
 
-bool isAccountSummaryInvoiceDetailLink(String path) =>
+bool isMPPaymentSummaryDetailLink(String path) =>
+    path == '/marketplace-payments/payment-summary/invoice-details';
+
+bool isZPInvoiceDetailLink(String path) =>
     path == '/payments/account-summary/invoice-details';
+
+bool isMPInvoiceDetailLink(String path) =>
+    path == '/marketplace-payments/account-summary/invoice-details';
 
 bool isMyAccountPaymentLink(String path) => path == '/my-account/payments';
 

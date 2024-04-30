@@ -186,7 +186,8 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.redirectReturnDetail(returnId),
                 ),
               );
-            } else if (link.isPaymentSummaryInvoiceDetail) {
+            } else if (link.isZPPaymentSummaryDetail ||
+                link.isMPPaymentSummaryDetail) {
               final failureOrSuccess =
                   repository.extractPaymentIdentifierInfo(link: link.uri);
 
@@ -196,11 +197,12 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                 ),
                 (paymentBatchAdditionalInfo) => emit(
                   DeepLinkingState.redirectPaymentDetail(
-                    paymentBatchAdditionalInfo,
+                    paymentIdentifierInfo: paymentBatchAdditionalInfo,
+                    isMarketPlace: link.isMPPaymentSummaryDetail,
                   ),
                 ),
               );
-            } else if (link.isAccountSummaryInvoiceDetail) {
+            } else if (link.isZPInvoiceDetail || link.isMPInvoiceDetail) {
               final failureOrSuccess =
                   repository.extractInvoiceNumber(link: link.uri);
 
@@ -209,7 +211,10 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   DeepLinkingState.error(error),
                 ),
                 (invoiceNumber) => emit(
-                  DeepLinkingState.redirectInvoiceDetail(invoiceNumber),
+                  DeepLinkingState.redirectInvoiceDetail(
+                    invoiceNumber: invoiceNumber,
+                    isMarketPlace: link.isMPInvoiceDetail,
+                  ),
                 ),
               );
             } else if (link.isMyAccountPayment) {

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
-import 'package:get_it/get_it.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,14 +22,10 @@ import '../../common_mock_data/customer_code_mock.dart';
 class DeepLinkingRepositoryMock extends Mock
     implements IDeepLinkingRepository {}
 
-final locator = GetIt.instance;
-
 void main() {
   late IDeepLinkingRepository repository;
-
   late ChatBotService chatBotService;
   const fakeStream = Stream<EzrxLink>.empty();
-
   final fakeCustomerCode = fakeCustomerCodeInfo;
   final fakeShipToCode = fakeShipToInfo;
   const fakeError = ApiFailure.other('fake-error');
@@ -41,10 +37,13 @@ void main() {
   const bundleDetailsLink = '/bundle-details';
   const productListingLink = '/product-listing';
   const returnSummaryLink = '/my-account/return-summary-details';
-  const paymentSummaryInvoiceDetailsLink =
+  const zpPaymentSummaryDetailLink =
       '/payments/payment-summary/invoice-details';
-  const accountSummaryInvoiceDetailsLink =
-      '/payments/account-summary/invoice-details';
+  const mpPaymentSummaryDetailLink =
+      '/marketplace-payments/payment-summary/invoice-details';
+  const zpInvoiceDetailLink = '/payments/account-summary/invoice-details';
+  const mpInvoiceDetailLink =
+      '/marketplace-payments/account-summary/invoice-details';
   const paymentLink = '/my-account/payments';
   const faqLink = '/faq';
   const resetPasswordLink =
@@ -52,7 +51,6 @@ void main() {
 
   setUpAll(() {
     repository = DeepLinkingRepositoryMock();
-
     chatBotService = ChatBotServiceMock();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
   });
@@ -490,7 +488,7 @@ void main() {
       ],
     );
     blocTest<DeepLinkingBloc, DeepLinkingState>(
-      'Consume redirect Payment Summary invoice Details success',
+      'Consume redirect ZP Payment Summary invoice Details success',
       build: () => DeepLinkingBloc(
         repository: repository,
         chatBotService: chatBotService,
@@ -498,7 +496,7 @@ void main() {
       setUp: () {
         when(
           () => repository.extractPaymentIdentifierInfo(
-            link: Uri(path: paymentSummaryInvoiceDetailsLink),
+            link: Uri(path: zpPaymentSummaryDetailLink),
           ),
         ).thenReturn(
           Right(
@@ -509,7 +507,7 @@ void main() {
         );
       },
       seed: () => DeepLinkingState.linkPending(
-        EzrxLink(paymentSummaryInvoiceDetailsLink),
+        EzrxLink(zpPaymentSummaryDetailLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -519,12 +517,52 @@ void main() {
       ),
       expect: () => [
         DeepLinkingState.redirectPaymentDetail(
-          PaymentSummaryDetails.empty().copyWith(
+          paymentIdentifierInfo: PaymentSummaryDetails.empty().copyWith(
             paymentID: StringValue('fake-payment-id'),
           ),
+          isMarketPlace: false,
         ),
       ],
     );
+
+    blocTest<DeepLinkingBloc, DeepLinkingState>(
+      'Consume redirect MP Payment Summary invoice Details success',
+      build: () => DeepLinkingBloc(
+        repository: repository,
+        chatBotService: chatBotService,
+      ),
+      setUp: () {
+        when(
+          () => repository.extractPaymentIdentifierInfo(
+            link: Uri(path: mpPaymentSummaryDetailLink),
+          ),
+        ).thenReturn(
+          Right(
+            PaymentSummaryDetails.empty().copyWith(
+              paymentID: StringValue('fake-payment-id'),
+            ),
+          ),
+        );
+      },
+      seed: () => DeepLinkingState.linkPending(
+        EzrxLink(mpPaymentSummaryDetailLink),
+      ),
+      act: (bloc) => bloc.add(
+        DeepLinkingEvent.consumePendingLink(
+          selectedCustomerCode: fakeCustomerCode,
+          selectedShipTo: fakeShipToCode,
+        ),
+      ),
+      expect: () => [
+        DeepLinkingState.redirectPaymentDetail(
+          paymentIdentifierInfo: PaymentSummaryDetails.empty().copyWith(
+            paymentID: StringValue('fake-payment-id'),
+          ),
+          isMarketPlace: true,
+        ),
+      ],
+    );
+
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect Payment Summary invoice Details failure',
       build: () => DeepLinkingBloc(
@@ -534,12 +572,12 @@ void main() {
       setUp: () {
         when(
           () => repository.extractPaymentIdentifierInfo(
-            link: Uri(path: paymentSummaryInvoiceDetailsLink),
+            link: Uri(path: zpPaymentSummaryDetailLink),
           ),
         ).thenReturn(const Left(fakeError));
       },
       seed: () => DeepLinkingState.linkPending(
-        EzrxLink(paymentSummaryInvoiceDetailsLink),
+        EzrxLink(zpPaymentSummaryDetailLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -553,7 +591,7 @@ void main() {
     );
 
     blocTest<DeepLinkingBloc, DeepLinkingState>(
-      'Consume redirect Account Summary invoice Details success',
+      'Consume redirect ZP invoice Details success',
       build: () => DeepLinkingBloc(
         repository: repository,
         chatBotService: chatBotService,
@@ -561,12 +599,12 @@ void main() {
       setUp: () {
         when(
           () => repository.extractInvoiceNumber(
-            link: Uri(path: accountSummaryInvoiceDetailsLink),
+            link: Uri(path: zpInvoiceDetailLink),
           ),
         ).thenReturn(const Right('fake-invoice-number'));
       },
       seed: () => DeepLinkingState.linkPending(
-        EzrxLink(accountSummaryInvoiceDetailsLink),
+        EzrxLink(zpInvoiceDetailLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(
@@ -575,12 +613,15 @@ void main() {
         ),
       ),
       expect: () => [
-        const DeepLinkingState.redirectInvoiceDetail('fake-invoice-number'),
+        const DeepLinkingState.redirectInvoiceDetail(
+          invoiceNumber: 'fake-invoice-number',
+          isMarketPlace: false,
+        ),
       ],
     );
 
     blocTest<DeepLinkingBloc, DeepLinkingState>(
-      'Consume redirect Account Summary invoice Details failure',
+      'Consume redirect MP invoice Details success',
       build: () => DeepLinkingBloc(
         repository: repository,
         chatBotService: chatBotService,
@@ -588,12 +629,42 @@ void main() {
       setUp: () {
         when(
           () => repository.extractInvoiceNumber(
-            link: Uri(path: accountSummaryInvoiceDetailsLink),
+            link: Uri(path: mpInvoiceDetailLink),
+          ),
+        ).thenReturn(const Right('fake-invoice-number'));
+      },
+      seed: () => DeepLinkingState.linkPending(
+        EzrxLink(mpInvoiceDetailLink),
+      ),
+      act: (bloc) => bloc.add(
+        DeepLinkingEvent.consumePendingLink(
+          selectedCustomerCode: fakeCustomerCode,
+          selectedShipTo: fakeShipToCode,
+        ),
+      ),
+      expect: () => [
+        const DeepLinkingState.redirectInvoiceDetail(
+          invoiceNumber: 'fake-invoice-number',
+          isMarketPlace: true,
+        ),
+      ],
+    );
+
+    blocTest<DeepLinkingBloc, DeepLinkingState>(
+      'Consume redirect invoice details failure',
+      build: () => DeepLinkingBloc(
+        repository: repository,
+        chatBotService: chatBotService,
+      ),
+      setUp: () {
+        when(
+          () => repository.extractInvoiceNumber(
+            link: Uri(path: zpInvoiceDetailLink),
           ),
         ).thenReturn(const Left(fakeError));
       },
       seed: () => DeepLinkingState.linkPending(
-        EzrxLink(accountSummaryInvoiceDetailsLink),
+        EzrxLink(zpInvoiceDetailLink),
       ),
       act: (bloc) => bloc.add(
         DeepLinkingEvent.consumePendingLink(

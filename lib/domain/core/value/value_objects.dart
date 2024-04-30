@@ -501,11 +501,13 @@ class EzrxLink extends ValueObject<String> {
 
   bool get isReturnSummaryDetail => isReturnSummaryDetailLink(uri.path);
 
-  bool get isPaymentSummaryInvoiceDetail =>
-      isPaymentSummaryInvoiceDetailLink(uri.path);
+  bool get isZPPaymentSummaryDetail => isZPPaymentSummaryDetailLink(uri.path);
 
-  bool get isAccountSummaryInvoiceDetail =>
-      isAccountSummaryInvoiceDetailLink(uri.path);
+  bool get isMPPaymentSummaryDetail => isMPPaymentSummaryDetailLink(uri.path);
+
+  bool get isZPInvoiceDetail => isZPInvoiceDetailLink(uri.path);
+
+  bool get isMPInvoiceDetail => isMPInvoiceDetailLink(uri.path);
 
   bool get isMyAccountPayment => isMyAccountPaymentLink(uri.path);
 

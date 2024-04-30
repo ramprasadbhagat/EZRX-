@@ -570,10 +570,12 @@ mixin _$DeepLinkingState {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -594,10 +596,12 @@ mixin _$DeepLinkingState {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -618,10 +622,12 @@ mixin _$DeepLinkingState {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -769,10 +775,12 @@ class _$InitialImpl implements _Initial {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -796,10 +804,12 @@ class _$InitialImpl implements _Initial {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -823,10 +833,12 @@ class _$InitialImpl implements _Initial {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -1024,10 +1036,12 @@ class _$LinkPendingImpl implements _LinkPending {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -1051,10 +1065,12 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -1078,10 +1094,12 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -1289,10 +1307,12 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -1316,10 +1336,12 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -1343,10 +1365,12 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -1554,10 +1578,12 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -1581,10 +1607,12 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -1608,10 +1636,12 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -1799,10 +1829,12 @@ class _$RedirectProductSuggestionImpl implements _RedirectProductSuggestion {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -1826,10 +1858,12 @@ class _$RedirectProductSuggestionImpl implements _RedirectProductSuggestion {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -1853,10 +1887,12 @@ class _$RedirectProductSuggestionImpl implements _RedirectProductSuggestion {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -2040,10 +2076,12 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -2067,10 +2105,12 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -2094,10 +2134,12 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -2292,10 +2334,12 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -2319,10 +2363,12 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -2346,10 +2392,12 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -2463,7 +2511,7 @@ abstract class _$$RedirectPaymentDetailImplCopyWith<$Res> {
           $Res Function(_$RedirectPaymentDetailImpl) then) =
       __$$RedirectPaymentDetailImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PaymentSummaryDetails paymentIdentifierInfo});
+  $Res call({PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace});
 
   $PaymentSummaryDetailsCopyWith<$Res> get paymentIdentifierInfo;
 }
@@ -2480,12 +2528,17 @@ class __$$RedirectPaymentDetailImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? paymentIdentifierInfo = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_$RedirectPaymentDetailImpl(
-      null == paymentIdentifierInfo
+      paymentIdentifierInfo: null == paymentIdentifierInfo
           ? _value.paymentIdentifierInfo
           : paymentIdentifierInfo // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryDetails,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -2502,14 +2555,17 @@ class __$$RedirectPaymentDetailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
-  const _$RedirectPaymentDetailImpl(this.paymentIdentifierInfo);
+  const _$RedirectPaymentDetailImpl(
+      {required this.paymentIdentifierInfo, required this.isMarketPlace});
 
   @override
   final PaymentSummaryDetails paymentIdentifierInfo;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'DeepLinkingState.redirectPaymentDetail(paymentIdentifierInfo: $paymentIdentifierInfo)';
+    return 'DeepLinkingState.redirectPaymentDetail(paymentIdentifierInfo: $paymentIdentifierInfo, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -2518,11 +2574,14 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
         (other.runtimeType == runtimeType &&
             other is _$RedirectPaymentDetailImpl &&
             (identical(other.paymentIdentifierInfo, paymentIdentifierInfo) ||
-                other.paymentIdentifierInfo == paymentIdentifierInfo));
+                other.paymentIdentifierInfo == paymentIdentifierInfo) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, paymentIdentifierInfo);
+  int get hashCode =>
+      Object.hash(runtimeType, paymentIdentifierInfo, isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
@@ -2545,10 +2604,12 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -2557,7 +2618,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
   }) {
-    return redirectPaymentDetail(paymentIdentifierInfo);
+    return redirectPaymentDetail(paymentIdentifierInfo, isMarketPlace);
   }
 
   @override
@@ -2572,10 +2633,12 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -2584,7 +2647,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
   }) {
-    return redirectPaymentDetail?.call(paymentIdentifierInfo);
+    return redirectPaymentDetail?.call(paymentIdentifierInfo, isMarketPlace);
   }
 
   @override
@@ -2599,10 +2662,12 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -2613,7 +2678,7 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult orElse(),
   }) {
     if (redirectPaymentDetail != null) {
-      return redirectPaymentDetail(paymentIdentifierInfo);
+      return redirectPaymentDetail(paymentIdentifierInfo, isMarketPlace);
     }
     return orElse();
   }
@@ -2701,10 +2766,11 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
 
 abstract class _RedirectPaymentDetail implements DeepLinkingState {
   const factory _RedirectPaymentDetail(
-          final PaymentSummaryDetails paymentIdentifierInfo) =
-      _$RedirectPaymentDetailImpl;
+      {required final PaymentSummaryDetails paymentIdentifierInfo,
+      required final bool isMarketPlace}) = _$RedirectPaymentDetailImpl;
 
   PaymentSummaryDetails get paymentIdentifierInfo;
+  bool get isMarketPlace;
   @JsonKey(ignore: true)
   _$$RedirectPaymentDetailImplCopyWith<_$RedirectPaymentDetailImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -2760,10 +2826,12 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -2787,10 +2855,12 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -2814,10 +2884,12 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -2925,7 +2997,7 @@ abstract class _$$RedirectInvoiceDetailImplCopyWith<$Res> {
           $Res Function(_$RedirectInvoiceDetailImpl) then) =
       __$$RedirectInvoiceDetailImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String invoiceNumber});
+  $Res call({String invoiceNumber, bool isMarketPlace});
 }
 
 /// @nodoc
@@ -2940,12 +3012,17 @@ class __$$RedirectInvoiceDetailImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? invoiceNumber = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_$RedirectInvoiceDetailImpl(
-      null == invoiceNumber
+      invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2953,14 +3030,17 @@ class __$$RedirectInvoiceDetailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
-  const _$RedirectInvoiceDetailImpl(this.invoiceNumber);
+  const _$RedirectInvoiceDetailImpl(
+      {required this.invoiceNumber, required this.isMarketPlace});
 
   @override
   final String invoiceNumber;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'DeepLinkingState.redirectInvoiceDetail(invoiceNumber: $invoiceNumber)';
+    return 'DeepLinkingState.redirectInvoiceDetail(invoiceNumber: $invoiceNumber, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -2969,11 +3049,13 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
         (other.runtimeType == runtimeType &&
             other is _$RedirectInvoiceDetailImpl &&
             (identical(other.invoiceNumber, invoiceNumber) ||
-                other.invoiceNumber == invoiceNumber));
+                other.invoiceNumber == invoiceNumber) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, invoiceNumber);
+  int get hashCode => Object.hash(runtimeType, invoiceNumber, isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
@@ -2996,10 +3078,12 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -3008,7 +3092,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
   }) {
-    return redirectInvoiceDetail(invoiceNumber);
+    return redirectInvoiceDetail(invoiceNumber, isMarketPlace);
   }
 
   @override
@@ -3023,10 +3107,12 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -3035,7 +3121,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
   }) {
-    return redirectInvoiceDetail?.call(invoiceNumber);
+    return redirectInvoiceDetail?.call(invoiceNumber, isMarketPlace);
   }
 
   @override
@@ -3050,10 +3136,12 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -3064,7 +3152,7 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult orElse(),
   }) {
     if (redirectInvoiceDetail != null) {
-      return redirectInvoiceDetail(invoiceNumber);
+      return redirectInvoiceDetail(invoiceNumber, isMarketPlace);
     }
     return orElse();
   }
@@ -3151,10 +3239,12 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
 }
 
 abstract class _RedirectInvoiceDetail implements DeepLinkingState {
-  const factory _RedirectInvoiceDetail(final String invoiceNumber) =
-      _$RedirectInvoiceDetailImpl;
+  const factory _RedirectInvoiceDetail(
+      {required final String invoiceNumber,
+      required final bool isMarketPlace}) = _$RedirectInvoiceDetailImpl;
 
   String get invoiceNumber;
+  bool get isMarketPlace;
   @JsonKey(ignore: true)
   _$$RedirectInvoiceDetailImplCopyWith<_$RedirectInvoiceDetailImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -3209,10 +3299,12 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -3236,10 +3328,12 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -3263,10 +3357,12 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -3416,10 +3512,12 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -3443,10 +3541,12 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -3470,10 +3570,12 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -3650,10 +3752,12 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -3677,10 +3781,12 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -3704,10 +3810,12 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -3863,10 +3971,12 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -3890,10 +4000,12 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -3917,10 +4029,12 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -4106,10 +4220,12 @@ class _$ErrorImpl implements _Error {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -4133,10 +4249,12 @@ class _$ErrorImpl implements _Error {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -4160,10 +4278,12 @@ class _$ErrorImpl implements _Error {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,
@@ -4357,10 +4477,12 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult Function(SearchKey searchKey) redirectProductSuggestion,
     required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
     required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
-    required TResult Function(PaymentSummaryDetails paymentIdentifierInfo)
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
     required TResult Function() redirectPaymentHome,
-    required TResult Function(String invoiceNumber) redirectInvoiceDetail,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
     required TResult Function() redirectAboutUs,
     required TResult Function(AppMarket market) redirectContactUs,
@@ -4384,10 +4506,12 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult? Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult? Function()? redirectPaymentHome,
-    TResult? Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
     TResult? Function()? redirectAboutUs,
     TResult? Function(AppMarket market)? redirectContactUs,
@@ -4411,10 +4535,12 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(SearchKey searchKey)? redirectProductSuggestion,
     TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
     TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
-    TResult Function(PaymentSummaryDetails paymentIdentifierInfo)?
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
     TResult Function()? redirectPaymentHome,
-    TResult Function(String invoiceNumber)? redirectInvoiceDetail,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
     TResult Function()? redirectAboutUs,
     TResult Function(AppMarket market)? redirectContactUs,

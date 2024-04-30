@@ -24,13 +24,15 @@ class DeepLinkingState with _$DeepLinkingState {
   const factory DeepLinkingState.redirectReturnDetail(
     ReturnRequestsId returnId,
   ) = _RedirectReturnDetail;
-  const factory DeepLinkingState.redirectPaymentDetail(
-    PaymentSummaryDetails paymentIdentifierInfo,
-  ) = _RedirectPaymentDetail;
+  const factory DeepLinkingState.redirectPaymentDetail({
+    required PaymentSummaryDetails paymentIdentifierInfo,
+    required bool isMarketPlace,
+  }) = _RedirectPaymentDetail;
   const factory DeepLinkingState.redirectPaymentHome() = _RedirectPaymentHome;
-  const factory DeepLinkingState.redirectInvoiceDetail(
-    String invoiceNumber,
-  ) = _RedirectInvoiceDetail;
+  const factory DeepLinkingState.redirectInvoiceDetail({
+    required String invoiceNumber,
+    required bool isMarketPlace,
+  }) = _RedirectInvoiceDetail;
   const factory DeepLinkingState.redirectFAQ() = _RedirectFAQ;
   const factory DeepLinkingState.redirectAboutUs() = _RedirectAboutUs;
   const factory DeepLinkingState.redirectContactUs(

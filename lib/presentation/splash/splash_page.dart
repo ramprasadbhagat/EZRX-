@@ -927,19 +927,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   noAccessSnackbar.show(context);
                 }
               },
-              redirectPaymentDetail: (paymentIdentifierInfo) {
+              redirectPaymentDetail: (paymentIdentifierInfo, isMarketPlace) {
                 if (eligibilityState.isPaymentEnabled) {
-                  //TODO: Implement deeplink for payment summary in marketplace later
                   context.read<PaymentSummaryDetailsBloc>().add(
                         PaymentSummaryDetailsEvent
                             .fetchPaymentSummaryDetailsInfo(
                           details: paymentIdentifierInfo,
-                          isMarketPlace: false,
+                          isMarketPlace: isMarketPlace,
                         ),
                       );
                   context.router.push(
                     PaymentSummaryDetailsPageRoute(
-                      isMarketPlace: false,
+                      isMarketPlace: isMarketPlace,
                     ),
                   );
                 } else {
@@ -953,17 +952,17 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   noAccessSnackbar.show(context);
                 }
               },
-              redirectInvoiceDetail: (invoiceNumber) {
+              redirectInvoiceDetail: (invoiceNumber, isMarketPlace) {
                 if (eligibilityState.isPaymentEnabled) {
-                  //TODO: Implement deeplink for invoice in marketplace later
                   context.read<CreditAndInvoiceDetailsBloc>().add(
                         CreditAndInvoiceDetailsEvent.fetchInvoiceById(
                           invoiceId: invoiceNumber,
-                          isMarketPlace: false,
+                          isMarketPlace: isMarketPlace,
                         ),
                       );
-                  context.router
-                      .push(InvoiceDetailsPageRoute(isMarketPlace: false));
+                  context.router.push(
+                    InvoiceDetailsPageRoute(isMarketPlace: isMarketPlace),
+                  );
                 } else {
                   noAccessSnackbar.show(context);
                 }
