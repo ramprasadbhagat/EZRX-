@@ -163,10 +163,12 @@ void main() {
     await runAppForTesting(tester);
     if (loginRobot.isLoginPage) {
       await loginRobot.loginToHomeScreen(username, password, marketVietnam);
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
     } else {
+      await tester.pumpAndSettle(const Duration(seconds: 2));
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.changeDeliveryAddress(
         shipToCode,
@@ -175,6 +177,7 @@ void main() {
     }
   }
 
+  // Login on behalf with sales org
   Future<void> pumpAppWithLoginOnBehalf(
     WidgetTester tester, {
     String behalfName = proxyUserName,
@@ -1121,9 +1124,8 @@ void main() {
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
-      await productSuggestionRobot
-          .searchWithKeyboardAction(oosPreOrderMaterialNumber);
-      await productSuggestionRobot.tapSearchResult(oosPreOrderMaterialNumber);
+      await productSuggestionRobot.searchWithKeyboardAction(bonusMaterial);
+      await productSuggestionRobot.tapSearchResult(bonusMaterial);
       await productDetailRobot.verifyRelateProductDisplayed();
       await productDetailRobot.tapFirstRelateProduct();
       productDetailRobot.verifyPage();
@@ -1391,14 +1393,19 @@ void main() {
       await productSuggestionRobot.tapSearchResult(materialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapBackButton();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(bonusMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(bonusMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
       await productDetailRobot.tapCartButton();
-      cartRobot.verifyCartQty(1);
+      cartRobot.verifyCartQty(2);
       await cartRobot.tapClearCartButton();
       await cartRobot.verifyClearCartSuccessMessage();
+      await commonRobot.dismissSnackbar(dismissAll: true);
       cartRobot.verifyNoRecordFound();
       cartRobot.verifyQtyOnAppBar(0);
-      await cartRobot.tapBrowseProductButton();
-      productRobot.verifyPageVisible();
     });
 
     testWidgets('EZRX-T102 | Verify add bonus/sample item in cart',
@@ -1941,7 +1948,7 @@ void main() {
       await orderSuccessRobot
           .verifySubTotal((materialUnitPrice * qty).priceDisplay(currency));
       await orderSuccessRobot.verifyGrandTotal(
-        ((materialUnitPrice * qty)).priceDisplay(currency),
+        ((materialUnitPrice * qty)).includeTax(tax).priceDisplay(currency),
       );
       await orderSuccessRobot.verifyOrderItemTotalQty(1);
       await orderSuccessRobot.startVerifyMaterial(index: 0);
@@ -1994,8 +2001,8 @@ void main() {
       );
       orderSuccessRobot.verifyMaterialTotalPrice(totalPrice);
       await orderSuccessRobot.startVerifyMaterial(index: 1);
-      orderSuccessRobot.verifyMaterialNumber(bonusMaterialNumber);
-      orderSuccessRobot.verifyMateriaDescription(bonusMaterialName);
+      orderSuccessRobot.verifyMaterialNumber(bonusMaterial);
+      orderSuccessRobot.verifyMateriaDescription(freeMaterialName);
       orderSuccessRobot.verifyItemQty(bonusQty);
       orderSuccessRobot.verifyMaterialBonusTag();
       orderSuccessRobot.verifyMaterialUnitPrice(
@@ -2188,6 +2195,8 @@ void main() {
 
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
+        await viewByItemsDetailRobot
+            .verifyManufacturerName(materialPrincipalName);
         await viewByItemsDetailRobot.verifyItemComponent();
       });
 
@@ -2198,7 +2207,7 @@ void main() {
         //init app
         await pumpAppWithLoginOnBehalf(tester);
         await checkoutWithMaterial(
-          bonusMaterialNumber,
+          materialNumber,
           qty,
         );
         await checkoutRobot.verifyPoReferenceField(isVisible: true);
@@ -2215,19 +2224,17 @@ void main() {
         //verify
         ordersRootRobot.verifyViewByItemsPage();
         await commonRobot.pullToRefresh();
-        //Need to tap offer tag because this is offer material
-        await viewByItemsRobot.tapFirstOfferTag();
+        await viewByItemsRobot.tapFirstOrder();
         viewByItemsDetailRobot.verifyHeader();
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyMaterialNumber(materialNumber);
         viewByItemsDetailRobot.verifyQty(qty);
-        // Uncomment this when test data is material without offer
-        // await viewByItemsDetailRobot.verifyOtherItemsComponent(
-        //   isVisible: false,
-        // );
-        // viewByItemsDetailRobot.verifyExpandButton(isVisible: false);
+        await viewByItemsDetailRobot.verifyOtherItemsComponent(
+          isVisible: false,
+        );
+        viewByItemsDetailRobot.verifyExpandButton(isVisible: false);
         viewByItemsDetailRobot.verifyBuyAgainButton(
           isVisible: false,
         );
@@ -2275,7 +2282,7 @@ void main() {
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyBonusLabel();
         viewByItemsDetailRobot.verifyFreePrice();
-        viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
+        viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterial);
         viewByItemsDetailRobot.verifyQty(bonusQty);
         await viewByItemsDetailRobot.verifyOtherItemsComponent();
         await viewByItemsDetailRobot.startVerifyOtherItem(0);
@@ -2583,7 +2590,7 @@ void main() {
         viewByItemsDetailRobot.verifyOfferTag();
         await viewByItemsDetailRobot.tapToBackScreen();
         await viewByOrdersDetailRobot.startVerifyMaterial(
-          bonusMaterialNumber,
+          bonusMaterial,
           isBonus: true,
         );
         viewByOrdersDetailRobot.verifyQty(bonusQty);
@@ -2595,7 +2602,7 @@ void main() {
         await viewByOrdersDetailRobot.tapVerifyingItem();
         viewByItemsDetailRobot.verifyPage();
         await viewByItemsDetailRobot.verifyItemComponent();
-        viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterialNumber);
+        viewByItemsDetailRobot.verifyMaterialNumber(bonusMaterial);
         viewByItemsDetailRobot.verifyQty(bonusQty);
         viewByItemsDetailRobot.verifyBonusLabel();
         await viewByItemsDetailRobot.tapToBackScreen();
@@ -2605,11 +2612,11 @@ void main() {
         cartRobot.verifyMaterialQty(bonusMaterialNumber, qty);
         await cartRobot.verifyBonusMaterial(
           bonusMaterialNumber,
-          bonusMaterialNumber,
+          bonusMaterial,
         );
         await cartRobot.verifyBonusMaterialQty(
           bonusMaterialNumber,
-          bonusMaterialNumber,
+          bonusMaterial,
           bonusQty,
         );
       });
@@ -2619,9 +2626,9 @@ void main() {
   group('Profile -', () {
     void verifyAllComponentsVisible() {
       profileRobot.verifyAccountAndBusinessDetailsVisible(
-        firstName: proxyUserName,
-        lastName: proxyUserName,
-        email: 'mdas@zuelligpharma.com',
+        firstName: 'VNExternalSR',
+        lastName: 'User20',
+        email: 'jhchoo@zuelligpharma.com',
         username: proxyUserName,
         mobilePhone: 'NA',
         language: 'English',

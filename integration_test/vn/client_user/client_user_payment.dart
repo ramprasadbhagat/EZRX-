@@ -1,18 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/common/common_robot.dart';
+import '../../robots/common/enum.dart';
 import '../../robots/common/extension.dart';
 import '../../robots/home/customer_search_robot.dart';
 import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
+import '../../robots/more/more_robot.dart';
+import '../../robots/more/profile_robot.dart';
 import '../../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
+import '../../robots/payments/account_summary/account_credits/account_credits_detail_robot.dart';
 import '../../robots/payments/account_summary/account_credits/account_credits_filter_robot.dart';
+import '../../robots/payments/account_summary/account_credits/account_credits_robot.dart';
 import '../../robots/payments/account_summary/account_invoice/account_invoice_detail_robot.dart';
 import '../../robots/payments/account_summary/account_invoice/account_invoice_filter_robot.dart';
 import '../../robots/payments/account_summary/account_invoice/account_invoice_robot.dart';
@@ -27,7 +29,7 @@ import '../../robots/payments/payment_home_robot.dart';
 import '../../robots/payments/payment_summary/payment_detail_robot.dart';
 import '../../robots/payments/payment_summary/payment_summary_filter_robot.dart';
 import '../../robots/payments/payment_summary/payment_summary_robot.dart';
-import '../../robots/payments/soa/statement_of_account_robot.dart';
+// import '../../robots/payments/soa/statement_of_account_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -38,11 +40,11 @@ void main() {
   late PaymentHomeRobot paymentHomeRobot;
   late PaymentSummaryRobot paymentSummaryRobot;
   late PaymentSummaryDetailRobot paymentSummaryDetailRobot;
-  late StatementOfAccountRobot statementAccountRobot;
+  // late StatementOfAccountRobot statementAccountRobot;
   late NewPaymentRobot newPaymentRobot;
   late AccountSummaryRootRobot accountSummaryRootRobot;
-  // late AccountCreditsRobot accountCreditsRobot;
-  // late AccountCreditDetailsRobot accountCreditDetailsRobot;
+  late AccountCreditsRobot accountCreditsRobot;
+  late AccountCreditDetailsRobot accountCreditDetailsRobot;
   late AccountCreditsFilterRobot accountCreditsFilterRobot;
   late AccountSummaryTabRobot accountSummaryTabRobot;
   late AccountSummaryTabFilterRobot accountSummaryTabFilterRobot;
@@ -56,6 +58,8 @@ void main() {
   late NewPaymentStep3Robot newPaymentStep3Robot;
   late ViewByOrdersDetailRobot viewByOrdersDetailRobot;
   late CustomerSearchRobot customerSearchRobot;
+  late ProfileRobot profileRobot;
+  late MoreRobot moreRobot;
 
   void initializeRobot(WidgetTester tester) {
     commonRobot = CommonRobot(tester);
@@ -63,12 +67,12 @@ void main() {
     homeRobot = HomeRobot(tester);
     paymentHomeRobot = PaymentHomeRobot(tester);
     paymentSummaryRobot = PaymentSummaryRobot(tester);
-    statementAccountRobot = StatementOfAccountRobot(tester);
+    // statementAccountRobot = StatementOfAccountRobot(tester);
     newPaymentRobot = NewPaymentRobot(tester);
     accountSummaryRootRobot = AccountSummaryRootRobot(tester);
-    // accountCreditsRobot = AccountCreditsRobot(tester);
+    accountCreditsRobot = AccountCreditsRobot(tester);
     accountCreditsFilterRobot = AccountCreditsFilterRobot(tester);
-    // accountCreditDetailsRobot = AccountCreditDetailsRobot(tester);
+    accountCreditDetailsRobot = AccountCreditDetailsRobot(tester);
     accountInvoiceRobot = AccountInvoiceRobot(tester);
     accountInvoiceFilterRobot = AccountInvoiceFilterRobot(tester);
     accountInvoiceDetailRobot = AccountInvoiceDetailRobot(tester);
@@ -82,12 +86,14 @@ void main() {
     accountSummaryTabRobot = AccountSummaryTabRobot(tester);
     accountSummaryTabFilterRobot = AccountSummaryTabFilterRobot(tester);
     customerSearchRobot = CustomerSearchRobot(tester);
+    moreRobot = MoreRobot(tester);
+    profileRobot = ProfileRobot(tester);
   }
 
   //Initialize Variable
   const market = 'Vietnam';
-  const username = 'auto_client_user';
-  const password = 'Pa55word@1234';
+  const username = 'vnclientuser';
+  const password = 'St@ysafe01';
   const customerCode = '0000102668';
   const shipToCode = '0071192102';
   const shipToAddress = 'LG VINA COSMETICS CO., LTD';
@@ -116,6 +122,15 @@ void main() {
     }
   }
 
+  Future<String> getDateFormatBasedOnUserLanguage() async {
+    await commonRobot.navigateToScreen(NavigationTab.more);
+    await moreRobot.tapProfileTile();
+    final language = profileRobot.getLanguage();
+    await commonRobot.tapToBackScreen();
+    await commonRobot.navigateToScreen(NavigationTab.home);
+    return language == 'English' ? 'MM/dd/yyyy' : 'dd/MM/yyyy';
+  }
+
   group('Payment Home Page - ', () {
     Future<void> goToPaymentHomePage(WidgetTester tester) async {
       //init app
@@ -130,7 +145,9 @@ void main() {
       await goToPaymentHomePage(tester);
 
       paymentHomeRobot.verifyNewPaymentsButton();
-      paymentHomeRobot.verifyPaymentHomeOptionMenu();
+      paymentHomeRobot.verifyPaymentHomeOptionMenu(
+        verifyStatementOfAccountsMenu: false,
+      );
       paymentHomeRobot.verifyPaymentHomeInvoiceCard();
       paymentHomeRobot.verifyPaymentHomeCreditCard();
       paymentHomeRobot.verifyPaymentHomeInProgressCard();
@@ -174,10 +191,6 @@ void main() {
       paymentSummaryRobot.verifyPageVisible();
       await commonRobot.tapToBackScreen();
 
-      await paymentHomeRobot.navigateToStatementOfAccountScreen();
-      statementAccountRobot.verifySOAPage();
-      await commonRobot.tapToBackScreen();
-
       await paymentHomeRobot.tapNewPayment();
       newPaymentRobot.verifyPage();
     });
@@ -190,7 +203,7 @@ void main() {
     final dueDateTo = documentDateTo;
     const amountFrom = 23657500.0;
     const amountTo = 23657600.0;
-    const invoiceStatus = 'Overdue';
+    const invoiceStatus = 'In Progress';
     const invalidLengthSearchKey = '1';
     const invalidSearchKey = '1234567890';
 
@@ -211,7 +224,21 @@ void main() {
     const invoiceSubtotal = materialTotalPrice1;
     const taxPercentage = 5;
 
-    Future<void> goToAccountSummaryInvoicePage(WidgetTester tester) async {
+    Future<void> getFilterDataDocumentDate({
+      required String dateTimeFormat,
+    }) async {
+      await accountInvoiceRobot.tapFilterButton();
+      await accountInvoiceFilterRobot.tapDocumentDateField();
+      await accountInvoiceFilterRobot.setDateRangePickerValue(
+        fromDate: documentDateFrom,
+        toDate: documentDateTo,
+        dateStringFormat: dateTimeFormat,
+      );
+      await accountInvoiceFilterRobot.tapApplyButton();
+    }
+
+    testWidgets('EZRX-T265 | Verify Invoice Page - all initial Fields',
+        (tester) async {
       //init app
       await pumpAppWithHomeScreen(tester);
 
@@ -220,23 +247,6 @@ void main() {
       accountSummaryRootRobot.verifyRootPage();
       accountSummaryRootRobot.verifyTabBar();
       accountSummaryRootRobot.verifyInvoicesPage();
-    }
-
-    Future<void> getFilterDataDocumentDate() async {
-      await accountInvoiceRobot.tapFilterButton();
-      await accountInvoiceFilterRobot.tapDocumentDateField();
-      await accountInvoiceFilterRobot.setDateRangePickerValue(
-        fromDate: documentDateFrom,
-        toDate: documentDateTo,
-      );
-      await accountInvoiceFilterRobot.tapApplyButton();
-    }
-
-    testWidgets('EZRX-T265 | Verify Invoice Page - all initial Fields',
-        (tester) async {
-      //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
-
       //verify
       accountSummaryRootRobot.verifyRootPage();
       accountSummaryRootRobot.verifyTabBar();
@@ -250,7 +260,14 @@ void main() {
 
     testWidgets('EZRX-T133 | Verify new Payment Feature', (tester) async {
       //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
+      //init app
+      await pumpAppWithHomeScreen(tester);
+
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
 
       //verify
       accountInvoiceRobot.verifyNewPaymentButton();
@@ -260,12 +277,19 @@ void main() {
 
     testWidgets('EZRX-T161 | Verify pull to refresh', (tester) async {
       //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
 
       if (accountInvoiceRobot.noRecordFound) {
         accountInvoiceRobot.verifyNoRecordFound();
       }
-      await getFilterDataDocumentDate();
+      await getFilterDataDocumentDate(dateTimeFormat: dateFormat);
 
       //verify
       accountInvoiceRobot.verifyItems(isVn: true);
@@ -283,10 +307,15 @@ void main() {
     testWidgets(
         'EZRX-T129 | Verify search invoice by inputting invalid keyword on Invoices Tab - Unhappy Flow',
         (tester) async {
-      //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
-
-      await getFilterDataDocumentDate();
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await getFilterDataDocumentDate(dateTimeFormat: dateFormat);
 
       //verify
       accountInvoiceRobot.verifyItems(isVn: true);
@@ -309,6 +338,7 @@ void main() {
       await accountInvoiceFilterRobot.setDateRangePickerValue(
         fromDate: documentDateFrom,
         toDate: documentDateTo,
+        dateStringFormat: dateFormat,
       );
       await accountInvoiceFilterRobot.tapApplyButton();
       accountInvoiceRobot.verifyItems(isVn: true);
@@ -322,11 +352,16 @@ void main() {
     testWidgets(
         'EZRX-T130 | Verify search invoice by inputting valid keyword on Invoices Tab - happy Flow',
         (tester) async {
-      //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
-
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
       //verify
-      await getFilterDataDocumentDate();
+      await getFilterDataDocumentDate(dateTimeFormat: dateFormat);
 
       await accountInvoiceRobot.searchWithSearchIcon(invoiceId);
       await accountInvoiceRobot.waitAutoSearchDuration();
@@ -351,9 +386,15 @@ void main() {
         'EZRX-T267 | Verify search invoice by inputting valid keyword on Invoice Tab - on keyboard done',
         (tester) async {
       //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
-
-      await getFilterDataDocumentDate();
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await getFilterDataDocumentDate(dateTimeFormat: dateFormat);
 
       //verify
       accountInvoiceRobot.verifyItems(isVn: true);
@@ -366,10 +407,15 @@ void main() {
     testWidgets('EZRX-T281 | Verify filter tune icon - Filter by status',
         (tester) async {
       const status = 'Overdue';
-      //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
-
-      await getFilterDataDocumentDate();
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await getFilterDataDocumentDate(dateTimeFormat: dateFormat);
 
       //verify
       await accountInvoiceRobot.tapFilterButton();
@@ -381,36 +427,40 @@ void main() {
       accountInvoiceFilterRobot.verifyStatusFilterValue(status, true);
     });
 
-    // TODO: Fail because of API 500, will check later
+    testWidgets('EZRX-T280 | Verify filter tune icon - Filter by Amount value',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
 
-    // testWidgets('EZRX-T280 | Verify filter tune icon - Filter by Amount value',
-    //     (tester) async {
-    //   //Redirect to invoice page
-    //   await goToAccountSummaryInvoicePage(tester);
-    //   await getFilterDataDocumentDate();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
 
-    //   await accountInvoiceRobot.tapFilterButton();
-    //   await accountInvoiceFilterRobot.enterFromAmount(amountFrom.toString());
-    //   await accountInvoiceFilterRobot.enterToAmount(amountTo.toString());
-    //   await accountInvoiceFilterRobot.tapApplyButton();
-    //   accountInvoiceRobot.verifyFilterApplied(2);
-    //   accountInvoiceRobot.verifyItemsInAmountRange(
-    //     fromAmount: amountFrom,
-    //     toAmount: amountTo,
-    //     currency: currency,
-    //   );
-    //   await accountInvoiceRobot.tapFilterButton();
-    //   accountInvoiceFilterRobot.verifyAmountRangeApplied(
-    //     amountFrom.toString(),
-    //     amountTo.toString(),
-    //   );
-    // });
+      await accountInvoiceRobot.tapFilterButton();
+      await accountInvoiceFilterRobot.enterFromAmount(amountFrom.toString());
+      await accountInvoiceFilterRobot.enterToAmount(amountTo.toString());
+      await accountInvoiceFilterRobot.tapApplyButton();
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      accountInvoiceRobot.verifyFilterApplied(2);
+      await accountInvoiceRobot.tapFilterButton();
+      accountInvoiceFilterRobot.verifyAmountRangeApplied(
+        amountFrom.toString(),
+        amountTo.toString(),
+      );
+    });
 
     testWidgets('EZRX-T278 | Verify filter tune icon - Filter by document date',
         (tester) async {
-      //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
-
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
       //verify
       accountInvoiceRobot.verifyFilterApplied(1);
       await accountInvoiceRobot.tapFilterButton();
@@ -418,6 +468,7 @@ void main() {
       await accountInvoiceFilterRobot.setDateRangePickerValue(
         fromDate: documentDateFrom,
         toDate: documentDateTo,
+        dateStringFormat: dateFormat,
       );
       await accountInvoiceFilterRobot.tapApplyButton();
       accountInvoiceRobot.verifyFilterApplied(1);
@@ -434,10 +485,15 @@ void main() {
 
     testWidgets('EZRX-T279 | Verify filter tune icon - Filter by due date',
         (tester) async {
-      //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
-
-      await getFilterDataDocumentDate();
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await getFilterDataDocumentDate(dateTimeFormat: dateFormat);
 
       //verify
       accountInvoiceRobot.verifyFilterApplied(1);
@@ -446,6 +502,7 @@ void main() {
       await accountInvoiceFilterRobot.setDateRangePickerValue(
         fromDate: dueDateFrom,
         toDate: dueDateTo,
+        dateStringFormat: dateFormat,
       );
       await accountInvoiceFilterRobot.tapApplyButton();
       accountInvoiceRobot.verifyFilterApplied(2);
@@ -460,10 +517,15 @@ void main() {
     testWidgets(
         'EZRX-T277 | Verify filter tune icon - all features unhappy flow',
         (tester) async {
-      //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
-
-      await getFilterDataDocumentDate();
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await getFilterDataDocumentDate(dateTimeFormat: dateFormat);
 
       //verify
       accountInvoiceRobot.verifyItems(
@@ -478,23 +540,31 @@ void main() {
       await accountInvoiceFilterRobot.setDateRangePickerValue(
         fromDate: documentDateTo,
         toDate: documentDateFrom,
+        dateStringFormat: dateFormat,
       );
       await accountInvoiceFilterRobot.setDateRangePickerValue(
         fromDate: documentDateTo,
         toDate: documentDateFrom,
+        dateStringFormat: dateFormat,
       );
       await accountInvoiceFilterRobot.tapDueDateField();
       await accountInvoiceFilterRobot.setDateRangePickerValue(
         fromDate: documentDateTo,
         toDate: documentDateFrom,
+        dateStringFormat: dateFormat,
       );
     });
 
     testWidgets('EZRX-T132 | Verify Invoice Detail Page', (tester) async {
-      //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
-
-      await getFilterDataDocumentDate();
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await getFilterDataDocumentDate(dateTimeFormat: dateFormat);
 
       //verify
       accountInvoiceRobot.verifyItems(isVn: true);
@@ -520,9 +590,8 @@ void main() {
       viewByOrdersDetailRobot.verifyCustomerCode(customerCode);
       viewByOrdersDetailRobot.verifyDeliveryTo(shipToCode);
       await viewByOrdersDetailRobot.dragToVerifySummary();
-      viewByOrdersDetailRobot.verifySubTotal(
-        invoiceSubtotal.priceDisplay(currency),
-      );
+      viewByOrdersDetailRobot
+          .verifySubTotal(invoiceSubtotal.excludeTax().priceDisplay(currency));
       viewByOrdersDetailRobot.verifyTax(
         invoiceSubtotal.taxValue(taxPercentage).priceDisplay(currency),
       );
@@ -564,10 +633,15 @@ void main() {
 
     testWidgets('EZRX-T560 | Export Button Feature - Download Invoices',
         (tester) async {
-      //Redirect to invoice page
-      await goToAccountSummaryInvoicePage(tester);
-
-      await getFilterDataDocumentDate();
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await getFilterDataDocumentDate(dateTimeFormat: dateFormat);
 
       //verify download success
       accountInvoiceRobot.verifyDownloadButton();
@@ -579,492 +653,680 @@ void main() {
     });
   });
 
-  //TODO: Fail because of no data for testing, data provided got empty
-
-  // group('Account summary menu - credit tab', () {
-  //   //date
-  //   final currentDate = DateTime.now();
-  //   final startFilterDate = DateTime(2000, 1, 1);
-  //   const inValidCreditId = '1232136712';
-  //   //material info
-  //   const creditId = '0580000003';
-  //   const creditStatus = 'Cleared';
-  //   final creditPrice = 2643391.0.priceDisplay(currency);
-  //   Future<void> goToAccountSummaryCreditPage(WidgetTester tester) async {
-  //     //init app
-  //     await pumpAppWithHomeScreen(tester);
-
-  //     await homeRobot.tapPaymentQuickAccess();
-  //     await paymentHomeRobot.tapAccountSummaryMenu();
-  //     accountSummaryRootRobot.verifyRootPage();
-  //     accountSummaryRootRobot.verifyTabBar();
-  //     accountSummaryRootRobot.verifyInvoicesPage();
-  //     await accountSummaryRootRobot.switchToCreditPage();
-  //     accountSummaryRootRobot.verifyCreditsPage();
-  //     accountCreditsRobot.verify();
-  //   }
-
-  //   Future<void> applyFilterDateToGetData({
-  //     DateTime? fromDate,
-  //     DateTime? toDate,
-  //   }) async {
-  //     accountCreditsRobot.verifyFilterTuneIcon();
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-  //     accountCreditsFilterRobot.verifyCreditsFilter();
-  //     await accountCreditsFilterRobot.tapFromDateField();
-  //     await commonRobot.setDateRangePickerValue(
-  //       fromDate: fromDate ?? startFilterDate,
-  //       toDate: toDate ?? currentDate,
-  //     );
-  //     accountCreditsFilterRobot.verifyDateRangeFilterApplied(
-  //       fromDate: fromDate?.displayDate ?? startFilterDate.displayDate,
-  //       toDate: toDate?.displayDate ?? currentDate.displayDate,
-  //     );
-  //     await accountCreditsFilterRobot.tapApplyButton();
-  //     //verify filter applied count
-  //     accountCreditsRobot.verifyFilterAppliedCount(1);
-  //     //verify at least one credit item
-  //     accountCreditsRobot.verifyCreditItemsList();
-  //   }
-
-  //   testWidgets('EZRX-T264 | verify Credit Page - all initial Fields',
-  //       (tester) async {
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //search bar
-  //     accountCreditsRobot.verifyCreditSearchBar();
-  //     //filter
-  //     accountCreditsRobot.verifyFilterTuneIcon();
-  //     accountCreditsRobot.verifyFilterAppliedCount(1);
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-  //     accountCreditsFilterRobot.verifyCreditsFilter();
-  //     accountCreditsFilterRobot.verifyDefaultFilterApplied();
-  //     await accountCreditsFilterRobot.tapCloseButton();
-  //     accountCreditsFilterRobot.verifyCreditsFilter(isVisible: false);
-  //     //download button
-  //     accountCreditsRobot.verifyDownloadButton();
-  //     //new payment button
-  //     accountCreditsRobot.verifyNewPaymentButton();
-  //   });
-
-  //   testWidgets(
-  //       'EZRX-T158 | Verify search credits by inputting invalid keyword on Credits Tab - Unhappy Flow',
-  //       (tester) async {
-  //     const inValidShortText = '1';
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     await applyFilterDateToGetData();
-
-  //     //search bar
-  //     accountCreditsRobot.verifyCreditSearchBar();
-  //     await commonRobot.autoSearch(inValidShortText);
-  //     await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
-  //       isVisible: false,
-  //     );
-  //     await commonRobot.searchWithKeyboardAction(inValidShortText);
-  //     await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
-
-  //     //No credit found - keyboard done
-  //     await commonRobot.searchWithKeyboardAction(inValidCreditId);
-  //     accountCreditsRobot.verifyNoCreditFound();
-  //     await commonRobot.tapClearSearch();
-
-  //     //No credit found - auto search
-  //     await commonRobot.autoSearch(inValidCreditId);
-  //     accountCreditsRobot.verifyNoCreditFound();
-  //     await commonRobot.tapClearSearch();
-
-  //     //No credit found - search icon
-  //     await commonRobot.searchWithSearchIcon(inValidCreditId);
-  //     accountCreditsRobot.verifyNoCreditFound();
-  //     await commonRobot.tapClearSearch();
-  //   });
-
-  //   testWidgets(
-  //       'EZRX-T266 | Verify search credit by inputting valid keyword on Credits Tab - on keyboard done',
-  //       (tester) async {
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //filter applied
-  //     await applyFilterDateToGetData();
-
-  //     //search bar - valid input with on done keyboard button
-  //     await commonRobot.searchWithKeyboardAction(creditId);
-  //     accountCreditsRobot.verifyCreditItem(creditId, creditStatus, creditPrice);
-  //   });
-
-  //   testWidgets(
-  //       'EZRX-T159 | Verify search credit by inputting valid keyword on Credits Tab - Happy flow - Every feature',
-  //       (tester) async {
-  //     const govNumber = '';
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //filter applied
-  //     await applyFilterDateToGetData();
-
-  //     //search bar - valid input with on done keyboard button
-  //     await commonRobot.searchWithKeyboardAction(creditId);
-  //     accountCreditsRobot.verifyCreditItem(creditId, creditStatus, creditPrice);
-  //     accountCreditsRobot.verifyCreditItemGovNumberForVN(creditId, govNumber);
-  //     await commonRobot.tapClearSearch();
-
-  //     //search bar -  valid input with on auto search
-  //     await commonRobot.autoSearch(creditId);
-  //     accountCreditsRobot.verifyCreditItem(creditId, creditStatus, creditPrice);
-  //     await commonRobot.tapClearSearch();
-
-  //     //search bar -  valid input with on search icon
-  //     await commonRobot.searchWithSearchIcon(creditId);
-  //     accountCreditsRobot.verifyCreditItem(creditId, creditStatus, creditPrice);
-  //     await commonRobot.tapClearSearch();
-
-  //     //search bar - combine keyboard done & auto search
-  //     await commonRobot.searchWithKeyboardAction(creditId);
-  //     accountCreditsRobot.verifyCreditItem(creditId, creditStatus, creditPrice);
-  //     await commonRobot.waitAutoSearchDuration();
-  //     commonRobot.verifyLoadingImage(isVisible: false);
-  //     await commonRobot.tapClearSearch();
-
-  //     //search bar - combine search icon & auto search
-  //     await commonRobot.searchWithSearchIcon(creditId);
-  //     accountCreditsRobot.verifyCreditItem(creditId, creditStatus, creditPrice);
-  //     await commonRobot.waitAutoSearchDuration();
-  //     commonRobot.verifyLoadingImage(isVisible: false);
-  //     await commonRobot.tapClearSearch();
-  //   });
-
-  //   testWidgets('EZRX-T162 | verify pull to refresh', (tester) async {
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //filter applied
-  //     await applyFilterDateToGetData();
-
-  //     //search bar - valid input with on done keyboard button
-  //     await commonRobot.searchWithKeyboardAction(inValidCreditId);
-  //     accountCreditsRobot.verifyNoCreditFound();
-  //     await commonRobot.pullToRefresh();
-  //     if (accountCreditsRobot.noCreditFound) {
-  //       accountCreditsRobot.verifyNoCreditFound();
-  //     } else {
-  //       accountCreditsRobot.verifyCreditItemsList();
-  //     }
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-  //     accountCreditsFilterRobot.verifyCreditsFilter();
-  //     accountCreditsFilterRobot.verifyDefaultFilterApplied();
-  //     await accountCreditsFilterRobot.tapCloseButton();
-  //   });
-
-  //   testWidgets(
-  //       'EZRX-T164 | Verify new Payment Button Feature - Create new payment',
-  //       (tester) async {
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //Tap on new payment button
-  //     await accountCreditsRobot.tapPaymentButton();
-
-  //     //verify new payment page
-  //     newPaymentRobot.verifyPage();
-
-  //     //close
-  //     await newPaymentRobot.tapCloseButton();
-
-  //     //verify credit page
-  //     accountCreditsRobot.verify();
-  //   });
-
-  //   // TODO: failing right now as Mobile have issue, asked wasim & ujwal to create bug ticket
-
-  //   testWidgets('EZRX-T169 | verify Credits Detail Page', (tester) async {
-  //     //variables
-  //     const documentType = 'Credit memo';
-  //     const referenceNumber = 'NA';
-  //     // const documentDate = '23 Jun 2017'; //we need to cover once BE resolve
-  //     const returnMaterialNumber1 = '11002232';
-  //     const returnMaterialNumber2 = '13024707';
-  //     const returnMaterialNumber3 = '13025839';
-  //     const returnQuantity1 = 2;
-  //     const returnQuantity2 = 1;
-  //     const returnQuantity3 = 1;
-  //     const returnUnitPrice1 = 94.66;
-  //     const returnUnitPrice2 = 398.89;
-  //     const returnUnitPrice3 = 483.55;
-
-  //     const returnMaterialTotalPrice1 = (returnUnitPrice1 * returnQuantity1);
-  //     const returnMaterialTotalPrice2 = (returnUnitPrice2 * returnQuantity2);
-  //     const returnMaterialTotalPrice3 = (returnUnitPrice3 * returnQuantity3);
-
-  //     const totalReturnQuantity = 3;
-
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //filter applied
-  //     await applyFilterDateToGetData();
-
-  //     //search bar - valid input with on done keyboard button
-  //     await commonRobot.searchWithKeyboardAction(creditId);
-
-  //     //verify item
-  //     accountCreditsRobot.verifyCreditItem(creditId, creditStatus, creditPrice);
-
-  //     //Tap on first item after search
-  //     await accountCreditsRobot.tapFirstCreditItem();
-
-  //     //verify Details page
-  //     accountCreditDetailsRobot.verify();
-  //     accountCreditDetailsRobot.verifyCreditDetailId(creditId);
-  //     accountCreditDetailsRobot.verifyCreditDetailStatus(creditStatus);
-  //     accountCreditDetailsRobot.verifyCreditDetailDocumentDate();
-  //     accountCreditDetailsRobot.verifyCreditDetailDocumentType(documentType);
-  //     accountCreditDetailsRobot
-  //         .verifyCreditDetailReferenceNumber(referenceNumber);
-  //     accountCreditDetailsRobot.verifyCreditDetails(documentType);
-  //     //verify address
-  //     accountCreditDetailsRobot.verifyCustomerCode(customerCode);
-  //     accountCreditDetailsRobot.verifyOrderAddress(shipToAddress);
-  //     accountCreditDetailsRobot.verifyDeliveryTo(shipToCode);
-  //     //credit summary
-  //     accountCreditDetailsRobot.verifyCreditItemSubtotalTotalPrice(creditPrice);
-  //     accountCreditDetailsRobot.verifyCreditItemTotalPrice(creditPrice);
-  //     //return items
-  //     accountCreditDetailsRobot.verifyReturnItems(totalReturnQuantity);
-  //     await accountCreditDetailsRobot.verifyReturnMaterial(
-  //       returnMaterialNumber1,
-  //       returnQuantity1,
-  //       returnUnitPrice1.priceDisplay(currency),
-  //       returnMaterialTotalPrice1.priceDisplay(currency),
-  //     );
-  //     await accountCreditDetailsRobot.verifyReturnMaterial(
-  //       returnMaterialNumber2,
-  //       returnQuantity2,
-  //       returnUnitPrice2.priceDisplay(currency),
-  //       returnMaterialTotalPrice2.priceDisplay(currency),
-  //     );
-  //     await accountCreditDetailsRobot.verifyReturnMaterial(
-  //       returnMaterialNumber3,
-  //       returnQuantity3,
-  //       returnUnitPrice3.priceDisplay(currency),
-  //       returnMaterialTotalPrice3.priceDisplay(currency),
-  //     );
-  //   });
-
-  //   testWidgets('EZRX-T268 | Verify filter tune icon - Filter by document date',
-  //       (tester) async {
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //filter applied
-  //     await applyFilterDateToGetData();
-
-  //     //verify Document Date in range
-  //     accountCreditsRobot.verifyCreditsCreatedGroupInDateRange(
-  //       fromDate: startFilterDate,
-  //       toDate: currentDate,
-  //     );
-  //   });
-
-  //   testWidgets('EZRX-T270 | Verify filter tune icon - Filter by status',
-  //       (tester) async {
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //filter applied
-  //     await applyFilterDateToGetData();
-
-  //     //tap on filter icon
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-
-  //     //Apply status - Cleared
-  //     accountCreditsFilterRobot.verifyStatusFilter(creditStatus, false);
-  //     await accountCreditsFilterRobot.tapToChangeStatusCheckbox(creditStatus);
-  //     accountCreditsFilterRobot.verifyStatusFilter(creditStatus, true);
-  //     await accountCreditsFilterRobot.tapApplyButton();
-  //     accountCreditsRobot.verifyCreditsItemListWithStatus(creditStatus);
-  //   });
-
-  //   testWidgets('EZRX-T269 | Verify filter tune icon - Filter by Amount value',
-  //       (tester) async {
-  //     const fromAmount = '2643300';
-  //     const toAmount = '2643500';
-
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //filter applied
-  //     await applyFilterDateToGetData();
-  //     //Tap on filter icon
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-
-  //     //Apply status - Amount
-  //     await accountCreditsFilterRobot.enterFromAmount(fromAmount.toString());
-  //     await accountCreditsFilterRobot.enterToAmount(toAmount.toString());
-  //     accountCreditsFilterRobot.verifyAmountRangeFilterApplied(
-  //       fromAmount: fromAmount,
-  //       toAmount: toAmount,
-  //     );
-  //     await accountCreditsFilterRobot.tapApplyButton();
-  //     accountCreditsRobot.verifyFilterAppliedCount(2);
-  //     //verify amount credit filter list
-  //     accountCreditsRobot.verifyCreditsInAmountRange(
-  //       fromAmount: double.parse(fromAmount),
-  //       toAmount: double.parse(toAmount),
-  //       currency: currency,
-  //     );
-  //   });
-
-  //   testWidgets('EZRX-T178 | Verify filter tune icon - all features happy flow',
-  //       (tester) async {
-  //     //variable
-  //     final fromDate = DateTime(2016, 10, 10);
-  //     final toDate = DateTime(2024, 2, 15);
-  //     const clearedStatus = 'Cleared';
-  //     const openStatus = 'Open';
-  //     const fromAmount = '20000';
-  //     const toAmount = '2643600';
-
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //Apply status - Document Date
-  //     await applyFilterDateToGetData(fromDate: fromDate, toDate: toDate);
-
-  //     //verify document date & status filter applied
-  //     accountCreditsRobot.verifyCreditsCreatedGroupInDateRange(
-  //       fromDate: fromDate,
-  //       toDate: toDate,
-  //     );
-  //     //Tap on filter icon
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-
-  //     //Apply status - Amount
-  //     await accountCreditsFilterRobot.enterFromAmount(fromAmount.toString());
-  //     await accountCreditsFilterRobot.enterToAmount(toAmount.toString());
-  //     accountCreditsFilterRobot.verifyAmountRangeFilterApplied(
-  //       fromAmount: fromAmount,
-  //       toAmount: toAmount,
-  //     );
-  //     await accountCreditsFilterRobot.tapApplyButton();
-  //     accountCreditsRobot.verifyFilterAppliedCount(2);
-  //     //verify amount credit filter list
-  //     accountCreditsRobot.verifyCreditsInAmountRange(
-  //       fromAmount: double.parse(fromAmount),
-  //       toAmount: double.parse(toAmount),
-  //       currency: currency,
-  //     );
-  //     //verify document date credit filter list
-  //     accountCreditsRobot.verifyCreditsCreatedGroupInDateRange(
-  //       fromDate: fromDate,
-  //       toDate: toDate,
-  //     );
-
-  //     //Tap on filter icon
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-  //     //Apply status - cleared
-  //     accountCreditsFilterRobot.verifyStatusFilter(clearedStatus, false);
-  //     await accountCreditsFilterRobot.tapToChangeStatusCheckbox(clearedStatus);
-  //     accountCreditsFilterRobot.verifyStatusFilter(clearedStatus, true);
-  //     await accountCreditsFilterRobot.tapApplyButton();
-  //     //verify clear status credit filter list
-  //     accountCreditsRobot.verifyCreditsItemListWithStatus(clearedStatus);
-  //     //Tap on filter icon
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-  //     //Apply status - open
-  //     accountCreditsFilterRobot.verifyStatusFilter(openStatus, false);
-  //     await accountCreditsFilterRobot.tapToChangeStatusCheckbox(openStatus);
-  //     accountCreditsFilterRobot.verifyStatusFilter(openStatus, true);
-  //     await accountCreditsFilterRobot.tapApplyButton();
-  //     accountCreditsRobot.verifyFilterAppliedCount(3);
-
-  //     //verify document date credit filter list
-  //     accountCreditsRobot.verifyCreditsCreatedGroupInDateRange(
-  //       fromDate: fromDate,
-  //       toDate: toDate,
-  //     );
-  //     //Again verify amount credit filter list
-  //     accountCreditsRobot.verifyCreditsInAmountRange(
-  //       fromAmount: double.parse(fromAmount),
-  //       toAmount: double.parse(toAmount),
-  //       currency: currency,
-  //     );
-
-  //     //verify reset feature
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-  //     await accountCreditsFilterRobot.tapResetButton();
-  //     //verify credit item list
-  //     if (accountCreditsRobot.noCreditFound) {
-  //       accountCreditsRobot.verifyNoCreditFound();
-  //     } else {
-  //       accountCreditsRobot.verifyCreditItemsList();
-  //     }
-  //     //verify filter
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-  //     accountCreditsFilterRobot.verifyDefaultFilterApplied();
-  //     await accountCreditsFilterRobot.tapCloseButton();
-  //   });
-
-  //   testWidgets(
-  //       'EZRX-T271 | Verify filter tune icon - all features unhappy flow',
-  //       (tester) async {
-  //     //variable
-
-  //     const fromAmount = '1100.0';
-  //     const toAmount = '1000.0';
-
-  //     //Redirect to account summary credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     //filter applied
-  //     await applyFilterDateToGetData();
-  //     //Tap on filter icon
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-
-  //     //Apply status - cleared
-  //     accountCreditsFilterRobot.verifyStatusFilter(creditStatus, false);
-  //     await accountCreditsFilterRobot.tapToChangeStatusCheckbox(creditStatus);
-  //     accountCreditsFilterRobot.verifyStatusFilter(creditStatus, true);
-  //     await accountCreditsFilterRobot.tapApplyButton();
-  //     //verify clear status credit filter list
-  //     accountCreditsRobot.verifyCreditsItemListWithStatus(
-  //       creditStatus,
-  //       isVisible: true,
-  //     );
-  //     accountCreditsRobot.verifyFilterAppliedCount(2);
-
-  //     //Tap on filter icon
-  //     await accountCreditsRobot.tapFilterTuneIcon();
-  //     accountCreditsFilterRobot.verifyCreditsFilter();
-  //     await accountCreditsFilterRobot.enterFromAmount(fromAmount.toString());
-  //     await accountCreditsFilterRobot.enterToAmount(toAmount.toString());
-  //     accountCreditsFilterRobot.verifyAmountRangeFilterApplied(
-  //       fromAmount: fromAmount,
-  //       toAmount: toAmount,
-  //     );
-  //     await accountCreditsFilterRobot.tapApplyButton();
-  //     accountCreditsFilterRobot.verifyInvalidAmountError();
-  //   });
-
-  //   testWidgets('EZRX-T561 | Export Button Feature - Download Credits',
-  //       (tester) async {
-  //     //Redirect to credit page
-  //     await goToAccountSummaryCreditPage(tester);
-
-  //     await applyFilterDateToGetData();
-
-  //     //verify download success
-  //     accountCreditsRobot.verifyDownloadButton();
-  //     await accountCreditsRobot.tapDownloadButton();
-  //     await commonRobot.verifyCustomSnackBar(
-  //       message: successSnackbarMessage,
-  //     );
-  //     await commonRobot.dismissSnackbar();
-  //   });
-  // });
+  group('Account summary menu - credit tab', () {
+    //date
+    final currentDate = DateTime.now();
+    final pastTwentyYearsDate =
+        currentDate.subtract(const Duration(days: 7200));
+    const inValidCreditId = '1232136712';
+    //material info
+    const creditId = '0580000003';
+    const creditStatus = 'Cleared';
+    final creditPrice = 2643391.0.priceDisplay(currency);
+
+    Future<void> applyFilterDateToGetDataIfPresent({
+      DateTime? fromDate,
+      DateTime? toDate,
+      required String dateFormat,
+    }) async {
+      accountCreditsRobot.verifyFilterTuneIcon();
+      await accountCreditsRobot.tapFilterTuneIcon();
+      accountCreditsFilterRobot.verifyCreditsFilter();
+      await accountCreditsFilterRobot.tapFromDateField();
+      await commonRobot.setDateRangePickerValue(
+        fromDate: fromDate ?? pastTwentyYearsDate,
+        toDate: toDate ?? currentDate,
+        dateStringFormat: dateFormat,
+      );
+      accountCreditsFilterRobot.verifyDateRangeFilterApplied(
+        fromDate: fromDate?.displayDate ?? pastTwentyYearsDate.displayDate,
+        toDate: toDate?.displayDate ?? currentDate.displayDate,
+      );
+      await accountCreditsFilterRobot.tapApplyButton();
+      //verify filter applied count
+      accountCreditsRobot.verifyFilterAppliedCount(1);
+      //verify at least one credit item
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        accountCreditsRobot.verifyCreditItemsList();
+      }
+    }
+
+    testWidgets('EZRX-T264 | verify Credit Page - all initial Fields',
+        (tester) async {
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      //search bar
+      accountCreditsRobot.verifyCreditSearchBar();
+      //filter
+      accountCreditsRobot.verifyFilterTuneIcon();
+      // accountCreditsRobot.verifyFilterAppliedCount(0);
+      await accountCreditsRobot.tapFilterTuneIcon();
+      accountCreditsFilterRobot.verifyCreditsFilter();
+      accountCreditsFilterRobot.verifyDefaultFilterApplied();
+      await accountCreditsFilterRobot.tapCloseButton();
+      accountCreditsFilterRobot.verifyCreditsFilter(isVisible: false);
+      //download button
+      accountCreditsRobot.verifyDownloadButton();
+      //new payment button
+      accountCreditsRobot.verifyNewPaymentButton();
+    });
+
+    testWidgets(
+        'EZRX-T158 | Verify search credits by inputting invalid keyword on Credits Tab - Unhappy Flow',
+        (tester) async {
+      const inValidShortText = '1';
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      await applyFilterDateToGetDataIfPresent(dateFormat: dateFormat);
+
+      //search bar
+      accountCreditsRobot.verifyCreditSearchBar();
+      await commonRobot.autoSearch(inValidShortText);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+        isVisible: false,
+      );
+      await commonRobot.searchWithKeyboardAction(inValidShortText);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
+
+      //No credit found - keyboard done
+      await commonRobot.searchWithKeyboardAction(inValidCreditId);
+      accountCreditsRobot.verifyNoCreditFound();
+      await commonRobot.tapClearSearch();
+
+      //No credit found - auto search
+      await commonRobot.autoSearch(inValidCreditId);
+      accountCreditsRobot.verifyNoCreditFound();
+      await commonRobot.tapClearSearch();
+
+      //No credit found - search icon
+      await commonRobot.searchWithSearchIcon(inValidCreditId);
+      accountCreditsRobot.verifyNoCreditFound();
+      await commonRobot.tapClearSearch();
+    });
+
+    testWidgets(
+        'EZRX-T266 | Verify search credit by inputting valid keyword on Credits Tab - on keyboard done',
+        (tester) async {
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+      //filter applied
+      await applyFilterDateToGetDataIfPresent(dateFormat: dateFormat);
+
+      //search bar - valid input with on done keyboard button
+      await commonRobot.searchWithKeyboardAction(creditId);
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        accountCreditsRobot.verifyCreditItem(
+          creditId,
+          creditStatus,
+          creditPrice,
+        );
+      }
+    });
+
+    testWidgets(
+        'EZRX-T159 | Verify search credit by inputting valid keyword on Credits Tab - Happy flow - Every feature',
+        (tester) async {
+      const govNumber = '';
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+      //filter applied
+      await applyFilterDateToGetDataIfPresent(dateFormat: dateFormat);
+
+      //search bar - valid input with on done keyboard button
+      await commonRobot.searchWithKeyboardAction(creditId);
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        accountCreditsRobot.verifyCreditItem(
+          creditId,
+          creditStatus,
+          creditPrice,
+        );
+      }
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        accountCreditsRobot.verifyCreditItemGovNumberForVN(creditId, govNumber);
+      }
+      await commonRobot.tapClearSearch();
+
+      //search bar -  valid input with on auto search
+      await commonRobot.autoSearch(creditId);
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        accountCreditsRobot.verifyCreditItem(
+          creditId,
+          creditStatus,
+          creditPrice,
+        );
+      }
+      await commonRobot.tapClearSearch();
+
+      //search bar -  valid input with on search icon
+      await commonRobot.searchWithSearchIcon(creditId);
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        accountCreditsRobot.verifyCreditItem(
+          creditId,
+          creditStatus,
+          creditPrice,
+        );
+      }
+      await commonRobot.tapClearSearch();
+
+      //search bar - combine keyboard done & auto search
+      await commonRobot.searchWithKeyboardAction(creditId);
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        accountCreditsRobot.verifyCreditItem(
+          creditId,
+          creditStatus,
+          creditPrice,
+        );
+      }
+      await commonRobot.waitAutoSearchDuration();
+      commonRobot.verifyLoadingImage(isVisible: false);
+      await commonRobot.tapClearSearch();
+
+      //search bar - combine search icon & auto search
+      await commonRobot.searchWithSearchIcon(creditId);
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        accountCreditsRobot.verifyCreditItem(
+          creditId,
+          creditStatus,
+          creditPrice,
+        );
+      }
+      await commonRobot.waitAutoSearchDuration();
+      commonRobot.verifyLoadingImage(isVisible: false);
+      await commonRobot.tapClearSearch();
+    });
+
+    testWidgets('EZRX-T162 | verify pull to refresh', (tester) async {
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      //filter applied
+      await applyFilterDateToGetDataIfPresent(dateFormat: dateFormat);
+
+      //search bar - valid input with on done keyboard button
+      await commonRobot.searchWithKeyboardAction(inValidCreditId);
+      accountCreditsRobot.verifyNoCreditFound();
+      await commonRobot.pullToRefresh();
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        accountCreditsRobot.verifyCreditItemsList();
+      }
+      await accountCreditsRobot.tapFilterTuneIcon();
+      accountCreditsFilterRobot.verifyCreditsFilter();
+      accountCreditsFilterRobot.verifyDefaultFilterApplied();
+      await accountCreditsFilterRobot.tapCloseButton();
+    });
+
+    testWidgets(
+        'EZRX-T164 | Verify new Payment Button Feature - Create new payment',
+        (tester) async {
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      //Tap on new payment button
+      await accountCreditsRobot.tapPaymentButton();
+
+      //verify new payment page
+      newPaymentRobot.verifyPage();
+
+      //close
+      await newPaymentRobot.tapCloseButton();
+
+      //verify credit page
+      accountCreditsRobot.verify();
+    });
+
+    // TODO: failing right now as Mobile have issue, asked wasim & ujwal to create bug ticket
+
+    testWidgets('EZRX-T169 | verify Credits Detail Page', (tester) async {
+      //variables
+      const documentType = 'Credit memo';
+      const referenceNumber = 'NA';
+      // const documentDate = '23 Jun 2017'; //we need to cover once BE resolve
+      const returnMaterialNumber1 = '11002232';
+      const returnMaterialNumber2 = '13024707';
+      const returnMaterialNumber3 = '13025839';
+      const returnQuantity1 = 2;
+      const returnQuantity2 = 1;
+      const returnQuantity3 = 1;
+      const returnUnitPrice1 = 94.66;
+      const returnUnitPrice2 = 398.89;
+      const returnUnitPrice3 = 483.55;
+
+      const returnMaterialTotalPrice1 = (returnUnitPrice1 * returnQuantity1);
+      const returnMaterialTotalPrice2 = (returnUnitPrice2 * returnQuantity2);
+      const returnMaterialTotalPrice3 = (returnUnitPrice3 * returnQuantity3);
+
+      const totalReturnQuantity = 3;
+
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      //filter applied
+      await applyFilterDateToGetDataIfPresent(dateFormat: dateFormat);
+
+      //search bar - valid input with on done keyboard button
+      await commonRobot.searchWithKeyboardAction(creditId);
+
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        //verify item
+        accountCreditsRobot.verifyCreditItem(
+          creditId,
+          creditStatus,
+          creditPrice,
+        );
+      }
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        //Tap on first item after search
+        await accountCreditsRobot.tapFirstCreditItem();
+
+        //verify Details page
+        accountCreditDetailsRobot.verify();
+        accountCreditDetailsRobot.verifyCreditDetailId(creditId);
+        accountCreditDetailsRobot.verifyCreditDetailStatus(creditStatus);
+        accountCreditDetailsRobot.verifyCreditDetailDocumentDate();
+        accountCreditDetailsRobot.verifyCreditDetailDocumentType(documentType);
+        accountCreditDetailsRobot
+            .verifyCreditDetailReferenceNumber(referenceNumber);
+        accountCreditDetailsRobot.verifyCreditDetails(documentType);
+        //verify address
+        accountCreditDetailsRobot.verifyCustomerCode(customerCode);
+        accountCreditDetailsRobot.verifyOrderAddress(shipToAddress);
+        accountCreditDetailsRobot.verifyDeliveryTo(shipToCode);
+        //credit summary
+        accountCreditDetailsRobot
+            .verifyCreditItemSubtotalTotalPrice(creditPrice);
+        accountCreditDetailsRobot.verifyCreditItemTotalPrice(creditPrice);
+        //return items
+        accountCreditDetailsRobot.verifyReturnItems(totalReturnQuantity);
+        await accountCreditDetailsRobot.verifyReturnMaterial(
+          returnMaterialNumber1,
+          returnQuantity1,
+          returnUnitPrice1.priceDisplay(currency),
+          returnMaterialTotalPrice1.priceDisplay(currency),
+        );
+        await accountCreditDetailsRobot.verifyReturnMaterial(
+          returnMaterialNumber2,
+          returnQuantity2,
+          returnUnitPrice2.priceDisplay(currency),
+          returnMaterialTotalPrice2.priceDisplay(currency),
+        );
+        await accountCreditDetailsRobot.verifyReturnMaterial(
+          returnMaterialNumber3,
+          returnQuantity3,
+          returnUnitPrice3.priceDisplay(currency),
+          returnMaterialTotalPrice3.priceDisplay(currency),
+        );
+      }
+    });
+
+    testWidgets('EZRX-T268 | Verify filter tune icon - Filter by document date',
+        (tester) async {
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      //filter applied
+      await applyFilterDateToGetDataIfPresent(
+        dateFormat: dateFormat,
+        fromDate: pastTwentyYearsDate,
+        toDate: currentDate,
+      );
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        //verify Document Date in range
+        accountCreditsRobot.verifyCreditsCreatedGroupInDateRange(
+          fromDate: pastTwentyYearsDate,
+          toDate: currentDate,
+        );
+      }
+    });
+
+    testWidgets('EZRX-T270 | Verify filter tune icon - Filter by status',
+        (tester) async {
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      //filter applied
+      await applyFilterDateToGetDataIfPresent(dateFormat: dateFormat);
+
+      //tap on filter icon
+      await accountCreditsRobot.tapFilterTuneIcon();
+
+      //Apply status - Cleared
+      accountCreditsFilterRobot.verifyStatusFilter(creditStatus, false);
+      await accountCreditsFilterRobot.tapToChangeStatusCheckbox(creditStatus);
+      accountCreditsFilterRobot.verifyStatusFilter(creditStatus, true);
+      await accountCreditsFilterRobot.tapApplyButton();
+      accountCreditsRobot.verifyCreditsItemListWithStatus(creditStatus);
+    });
+
+    testWidgets('EZRX-T269 | Verify filter tune icon - Filter by Amount value',
+        (tester) async {
+      const fromAmount = '2643300';
+      const toAmount = '2643500';
+
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      //filter applied
+      await applyFilterDateToGetDataIfPresent(dateFormat: dateFormat);
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        //Tap on filter icon
+        await accountCreditsRobot.tapFilterTuneIcon();
+
+        //Apply status - Amount
+        await accountCreditsFilterRobot.enterFromAmount(fromAmount.toString());
+        await accountCreditsFilterRobot.enterToAmount(toAmount.toString());
+        accountCreditsFilterRobot.verifyAmountRangeFilterApplied(
+          fromAmount: fromAmount,
+          toAmount: toAmount,
+        );
+        await accountCreditsFilterRobot.tapApplyButton();
+        accountCreditsRobot.verifyFilterAppliedCount(2);
+        //verify amount credit filter list
+        accountCreditsRobot.verifyCreditsInAmountRange(
+          fromAmount: double.parse(fromAmount),
+          toAmount: double.parse(toAmount),
+          currency: currency,
+        );
+      }
+    });
+
+    testWidgets('EZRX-T178 | Verify filter tune icon - all features happy flow',
+        (tester) async {
+      //variable
+      final fromDate = DateTime(2016, 10, 10);
+      final toDate = DateTime(2024, 2, 15);
+      const clearedStatus = 'Cleared';
+      const openStatus = 'Open';
+      const fromAmount = '20000';
+      const toAmount = '2643600';
+
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      //filter applied
+      await applyFilterDateToGetDataIfPresent(
+        dateFormat: dateFormat,
+        fromDate: fromDate,
+        toDate: toDate,
+      );
+      if (accountCreditsRobot.noCreditFound) {
+        accountCreditsRobot.verifyNoCreditFound();
+      } else {
+        //verify document date & status filter applied
+        accountCreditsRobot.verifyCreditsCreatedGroupInDateRange(
+          fromDate: fromDate,
+          toDate: toDate,
+        );
+        //Tap on filter icon
+        await accountCreditsRobot.tapFilterTuneIcon();
+
+        //Apply status - Amount
+        await accountCreditsFilterRobot.enterFromAmount(fromAmount.toString());
+        await accountCreditsFilterRobot.enterToAmount(toAmount.toString());
+        accountCreditsFilterRobot.verifyAmountRangeFilterApplied(
+          fromAmount: fromAmount,
+          toAmount: toAmount,
+        );
+        await accountCreditsFilterRobot.tapApplyButton();
+        accountCreditsRobot.verifyFilterAppliedCount(2);
+        //verify amount credit filter list
+        accountCreditsRobot.verifyCreditsInAmountRange(
+          fromAmount: double.parse(fromAmount),
+          toAmount: double.parse(toAmount),
+          currency: currency,
+        );
+        //verify document date credit filter list
+        accountCreditsRobot.verifyCreditsCreatedGroupInDateRange(
+          fromDate: fromDate,
+          toDate: toDate,
+        );
+
+        //Tap on filter icon
+        await accountCreditsRobot.tapFilterTuneIcon();
+        //Apply status - cleared
+        accountCreditsFilterRobot.verifyStatusFilter(clearedStatus, false);
+        await accountCreditsFilterRobot
+            .tapToChangeStatusCheckbox(clearedStatus);
+        accountCreditsFilterRobot.verifyStatusFilter(clearedStatus, true);
+        await accountCreditsFilterRobot.tapApplyButton();
+        //verify clear status credit filter list
+        accountCreditsRobot.verifyCreditsItemListWithStatus(clearedStatus);
+        //Tap on filter icon
+        await accountCreditsRobot.tapFilterTuneIcon();
+        //Apply status - open
+        accountCreditsFilterRobot.verifyStatusFilter(openStatus, false);
+        await accountCreditsFilterRobot.tapToChangeStatusCheckbox(openStatus);
+        accountCreditsFilterRobot.verifyStatusFilter(openStatus, true);
+        await accountCreditsFilterRobot.tapApplyButton();
+        accountCreditsRobot.verifyFilterAppliedCount(3);
+
+        //verify document date credit filter list
+        accountCreditsRobot.verifyCreditsCreatedGroupInDateRange(
+          fromDate: fromDate,
+          toDate: toDate,
+        );
+        //Again verify amount credit filter list
+        accountCreditsRobot.verifyCreditsInAmountRange(
+          fromAmount: double.parse(fromAmount),
+          toAmount: double.parse(toAmount),
+          currency: currency,
+        );
+
+        //verify reset feature
+        await accountCreditsRobot.tapFilterTuneIcon();
+        await accountCreditsFilterRobot.tapResetButton();
+        //verify credit item list
+        if (accountCreditsRobot.noCreditFound) {
+          accountCreditsRobot.verifyNoCreditFound();
+        } else {
+          accountCreditsRobot.verifyCreditItemsList();
+        }
+        //verify filter
+        await accountCreditsRobot.tapFilterTuneIcon();
+        accountCreditsFilterRobot.verifyDefaultFilterApplied();
+        await accountCreditsFilterRobot.tapCloseButton();
+      }
+    });
+
+    testWidgets(
+        'EZRX-T271 | Verify filter tune icon - all features unhappy flow',
+        (tester) async {
+      //variable
+
+      const fromAmount = '1100.0';
+      const toAmount = '1000.0';
+
+      //Redirect to account summary credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      //filter applied
+      await applyFilterDateToGetDataIfPresent(dateFormat: dateFormat);
+      //Tap on filter icon
+      await accountCreditsRobot.tapFilterTuneIcon();
+
+      //Apply status - cleared
+      accountCreditsFilterRobot.verifyStatusFilter(creditStatus, false);
+      await accountCreditsFilterRobot.tapToChangeStatusCheckbox(creditStatus);
+      accountCreditsFilterRobot.verifyStatusFilter(creditStatus, true);
+      await accountCreditsFilterRobot.tapApplyButton();
+      //verify clear status credit filter list
+      accountCreditsRobot.verifyCreditsItemListWithStatus(
+        creditStatus,
+        isVisible: true,
+      );
+      accountCreditsRobot.verifyFilterAppliedCount(2);
+
+      //Tap on filter icon
+      await accountCreditsRobot.tapFilterTuneIcon();
+      accountCreditsFilterRobot.verifyCreditsFilter();
+      await accountCreditsFilterRobot.enterFromAmount(fromAmount.toString());
+      await accountCreditsFilterRobot.enterToAmount(toAmount.toString());
+      accountCreditsFilterRobot.verifyAmountRangeFilterApplied(
+        fromAmount: fromAmount,
+        toAmount: toAmount,
+      );
+      await accountCreditsFilterRobot.tapApplyButton();
+      accountCreditsFilterRobot.verifyInvalidAmountError();
+    });
+
+    testWidgets('EZRX-T561 | Export Button Feature - Download Credits',
+        (tester) async {
+      //Redirect to credit page
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToCreditPage();
+      accountSummaryRootRobot.verifyCreditsPage();
+      accountCreditsRobot.verify();
+
+      await applyFilterDateToGetDataIfPresent(dateFormat: dateFormat);
+
+      //verify download success
+      accountCreditsRobot.verifyDownloadButton();
+      await accountCreditsRobot.tapDownloadButton();
+      await commonRobot.verifyCustomSnackBar(
+        message: successSnackbarMessage,
+      );
+      await commonRobot.dismissSnackbar();
+    });
+  });
 
   group('Account Summary menu - summary tab', () {
     const creditIdStatus = 'Overdue';
@@ -1093,6 +1355,7 @@ void main() {
       required DateTime fromDate,
       required DateTime toDate,
       required bool isDocumentDate,
+      required String dateFormat,
     }) async {
       accountSummaryTabRobot.verifyFilterButton();
       await accountSummaryTabRobot.tapFilterButton();
@@ -1105,6 +1368,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: dateFormat,
       );
       await accountSummaryTabFilterRobot.tapApplyButton();
     }
@@ -1302,14 +1566,25 @@ void main() {
 
     testWidgets('EZRX-T553 | Verify filter tune icon - Filter by document date',
         (tester) async {
-      //Got to Summary Page
-      await goToAccountSummaryPage(tester);
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToSummaryPage();
+      accountSummaryRootRobot.verifySummaryPage();
+      accountSummaryTabRobot.verifyPage();
 
       //filter applied
       await applyFilterDateToGetData(
         fromDate: fromDate,
         toDate: toDate,
         isDocumentDate: true,
+        dateFormat: dateFormat,
       );
 
       //verify Document Date in range
@@ -1321,14 +1596,25 @@ void main() {
 
     testWidgets('EZRX-T568 | Verify filter tune icon - Filter by due date',
         (tester) async {
-      //Got to Summary Page
-      await goToAccountSummaryPage(tester);
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToSummaryPage();
+      accountSummaryRootRobot.verifySummaryPage();
+      accountSummaryTabRobot.verifyPage();
 
       //filter applied
       await applyFilterDateToGetData(
         fromDate: fromDate,
         toDate: toDate,
         isDocumentDate: false,
+        dateFormat: dateFormat,
       );
 
       //verify Document Date in range
@@ -1340,14 +1626,24 @@ void main() {
 
     testWidgets('EZRX-T570 | Verify filter tune icon - all features',
         (tester) async {
-      //Got to Summary Page
-      await goToAccountSummaryPage(tester);
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+      await accountSummaryRootRobot.switchToSummaryPage();
+      accountSummaryRootRobot.verifySummaryPage();
+      accountSummaryTabRobot.verifyPage();
 
       //filter applied - Document Date
       await applyFilterDateToGetData(
         fromDate: fromDate,
         toDate: toDate,
         isDocumentDate: true,
+        dateFormat: dateFormat,
       );
 
       //verify Document Date in range
@@ -1362,6 +1658,7 @@ void main() {
         fromDate: fromDate,
         toDate: toDate,
         isDocumentDate: false,
+        dateFormat: dateFormat,
       );
 
       //verify Document Date in range
@@ -1562,8 +1859,14 @@ void main() {
     });
 
     testWidgets('EZRX-T188 | Verify Filter Tune Icon', (tester) async {
-      //navigate to page
-      await goToPaymentSummaryPage(tester);
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      final dateFormat = await getDateFormatBasedOnUserLanguage();
+      //Redirect to payment summary page
+      await homeRobot.tapPaymentQuickAccess();
+      paymentHomeRobot.verifyPage();
+      await paymentHomeRobot.tapPaymentSummaryMenu();
+      paymentSummaryRobot.verifyPageVisible();
 
       //verify
       paymentSummaryRobot.verifyPageVisible();
@@ -1575,6 +1878,7 @@ void main() {
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: dateFormat,
       );
       await paymentSummaryFilterRobot.tapApplyButton();
       paymentSummaryRobot.verifyFilterApplied(1);
@@ -1585,7 +1889,6 @@ void main() {
       await paymentSummaryFilterRobot.enterToAmount(invalidToAmount);
       await paymentSummaryFilterRobot.tapApplyButton();
       await paymentSummaryFilterRobot.enterToAmount(toAmount);
-      await paymentSummaryFilterRobot.tapApplyButton();
       await paymentSummaryFilterRobot.tapApplyButton();
       await paymentSummaryRobot.tapFilterButton();
       paymentSummaryFilterRobot.verifyAmountRangeFilterApplied(
@@ -1623,6 +1926,7 @@ void main() {
       paymentSummaryRobot.verifyPaymentSummaryGroupListVisible();
     });
 
+    //TODO: need to run once, as right now we have cache issue.
     testWidgets(
         'EZRX-T565 | verify Payment Summary Details Page with download invoice',
         (tester) async {
@@ -1667,8 +1971,8 @@ void main() {
     });
   });
 
-  //TODO:
-  // *** need data for this */
+  // //TODO:
+  // // *** need data for this */
 
   // group('SOA menu - ', () {
   //   Future<void> goToStatementOfAccountPage(WidgetTester tester) async {
@@ -1742,12 +2046,13 @@ void main() {
     final invalidFromDate = DateTime(2099, 1, 1);
     final defaultPaymentMethod = 'Payment Gateway'.tr();
 
-    Future<void> filterTheDateToGetItem() async {
+    Future<void> filterTheDateToGetItem({required String dateFormat}) async {
       await newPaymentStep2Robot.clickFilter();
       await newPaymentStep2Robot.clickDocumentDateField();
       await commonRobot.setDateRangePickerValue(
         fromDate: fromDate,
         toDate: toDate,
+        dateStringFormat: dateFormat,
       );
       await newPaymentStep2Robot.tapApplyFilter();
     }
@@ -1783,13 +2088,21 @@ void main() {
       testWidgets(
           'EZRX-T196 | verify New Payment Page Step 1 - Text Field Happy flow',
           (tester) async {
-        await goToPaymentStep1Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
 
         await newPaymentStep1Robot.clickFilter();
         await newPaymentStep1Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.tapApplyFilter();
         await commonRobot.searchWithKeyboardAction(validKeyword);
@@ -1803,7 +2116,15 @@ void main() {
       testWidgets(
           'EZRX-T197 | verify New Payment Page Step 1 - Filter Tune Icon Feature - Happy flow',
           (tester) async {
-        await goToPaymentStep1Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
 
         await newPaymentStep1Robot.clickFilter();
         newPaymentStep1Robot.verifyDefaultFilter();
@@ -1811,11 +2132,13 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.clickDueDateField();
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.clickOpenSelector();
         await newPaymentStep1Robot.tapApplyFilter();
@@ -1832,13 +2155,22 @@ void main() {
       testWidgets(
           'EZRX-T198 | verify New Payment Page Step 1 - All button Feature',
           (tester) async {
-        await goToPaymentStep1Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
 
         await newPaymentStep1Robot.clickFilter();
         await newPaymentStep1Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.tapApplyFilter();
         await newPaymentStep1Robot.tapAllCheckbox();
@@ -1854,13 +2186,22 @@ void main() {
       testWidgets(
           'EZRX-T199 | verify New Payment Page Step 1 - Next Button Feature - Go to step 2',
           (tester) async {
-        await goToPaymentStep1Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
 
         await newPaymentStep1Robot.clickFilter();
         await newPaymentStep1Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.tapApplyFilter();
         invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
@@ -1876,13 +2217,22 @@ void main() {
       testWidgets(
           'EZRX-T200 | verify New Payment Page Step 1 - pull to refresh features',
           (tester) async {
-        await goToPaymentStep1Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
 
         await newPaymentStep1Robot.clickFilter();
         await newPaymentStep1Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.tapApplyFilter();
         newPaymentStep1Robot.collectTheFirstItem();
@@ -1892,6 +2242,7 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.tapApplyFilter();
         newPaymentStep1Robot.verifyTheFirstItemAfterRefresh();
@@ -1900,7 +2251,15 @@ void main() {
       testWidgets(
           'EZRX-T223 | verify New Payment Page Step 1 - Filter Tune Icon Feature - Un Happy flow',
           (tester) async {
-        await goToPaymentStep1Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
 
         await newPaymentStep1Robot.clickFilter();
         newPaymentStep1Robot.verifyDefaultFilter();
@@ -1908,6 +2267,7 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: invalidFromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await commonRobot.cancelDateRangePicker();
         await newPaymentStep1Robot.tapResetFilter();
@@ -1917,13 +2277,22 @@ void main() {
       testWidgets(
           'EZRX-T254 | verify New Payment Page Step 1 - Textfield search on clear button',
           (tester) async {
-        await goToPaymentStep1Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
 
         await newPaymentStep1Robot.clickFilter();
         await newPaymentStep1Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.tapApplyFilter();
         newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
@@ -1936,18 +2305,24 @@ void main() {
       testWidgets(
           'EZRX-T253 | verify New Payment Page Step 1 - Textfield search on done keyboard button',
           (tester) async {
-        await goToPaymentStep1Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
 
         await newPaymentStep1Robot.clickFilter();
         await newPaymentStep1Robot.clickDocumentDateField();
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.tapApplyFilter();
-        invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
-        invoiceIdPrice = newPaymentStep1Robot.getFirstInvoiceIdPrice;
-        await commonRobot.searchWithKeyboardAction(invoiceId);
         newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
         await commonRobot.searchWithKeyboardAction(inValidKeyword);
         newPaymentStep1Robot.verifyNoItemFound();
@@ -1960,6 +2335,8 @@ void main() {
       Future<void> goToPaymentStep2Page(WidgetTester tester) async {
         //init app
         await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+
         //Redirect to Payment Step1 page
         await homeRobot.tapPaymentQuickAccess();
         paymentHomeRobot.verifyPage();
@@ -1971,6 +2348,7 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.tapApplyFilter();
         invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
@@ -1991,9 +2369,34 @@ void main() {
       testWidgets(
           'EZRX-T255 | verify New Payment Page Step 2 - Text Field Unhappy flow',
           (tester) async {
-        await goToPaymentStep2Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
 
-        await filterTheDateToGetItem();
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
+
+        await newPaymentStep1Robot.clickFilter();
+        await newPaymentStep1Robot.clickDocumentDateField();
+        await commonRobot.setDateRangePickerValue(
+          fromDate: fromDate,
+          toDate: toDate,
+          dateStringFormat: dateFormat,
+        );
+        await newPaymentStep1Robot.tapApplyFilter();
+        invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
+        invoiceIdPrice = newPaymentStep1Robot.getFirstInvoiceIdPrice;
+        await commonRobot.searchWithKeyboardAction(invoiceId);
+        newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
+        await newPaymentStep1Robot.clickFirstItem();
+        await newPaymentStep1Robot.tapNextButton();
+        newPaymentStep2Robot.verifyPage();
+        newPaymentStep2Robot.verifyStep2InitialField(invoiceIdPrice);
+
+        await filterTheDateToGetItem(dateFormat: dateFormat);
         await commonRobot.searchWithKeyboardAction('0');
         await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         await commonRobot.dismissSnackbar();
@@ -2004,32 +2407,116 @@ void main() {
       testWidgets(
           'EZRX-T256 | verify New Payment Page Step 2 - Text Field Textfield search on clear button',
           (tester) async {
-        await goToPaymentStep2Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
 
-        await filterTheDateToGetItem();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
-        await commonRobot.searchWithKeyboardAction(noResultCreditSearchKeyword);
-        newPaymentStep2Robot.verifyNoItemFound();
-        await commonRobot.tapClearSearch();
-        await newPaymentStep2Robot.clickFilter();
-        newPaymentStep2Robot.verifyDefaultFilter();
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
+
+        await newPaymentStep1Robot.clickFilter();
+        await newPaymentStep1Robot.clickDocumentDateField();
+        await commonRobot.setDateRangePickerValue(
+          fromDate: fromDate,
+          toDate: toDate,
+          dateStringFormat: dateFormat,
+        );
+        await newPaymentStep1Robot.tapApplyFilter();
+        invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
+        invoiceIdPrice = newPaymentStep1Robot.getFirstInvoiceIdPrice;
+        await commonRobot.searchWithKeyboardAction(invoiceId);
+        newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
+        await newPaymentStep1Robot.clickFirstItem();
+        await newPaymentStep1Robot.tapNextButton();
+        newPaymentStep2Robot.verifyPage();
+        newPaymentStep2Robot.verifyStep2InitialField(invoiceIdPrice);
+
+        await filterTheDateToGetItem(dateFormat: dateFormat);
+        if (newPaymentStep2Robot.noRecordFound) {
+          newPaymentStep2Robot.verifyNoItemFound();
+        } else {
+          await commonRobot
+              .searchWithKeyboardAction(noResultCreditSearchKeyword);
+          newPaymentStep2Robot.verifyNoItemFound();
+          await commonRobot.tapClearSearch();
+          await newPaymentStep2Robot.clickFilter();
+          newPaymentStep2Robot.verifyDefaultFilter();
+        }
       });
 
       testWidgets(
           'EZRX-T257 | verify New Payment Page Step 2 - Text Field search on done keyboard button',
           (tester) async {
-        await goToPaymentStep2Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
 
-        await filterTheDateToGetItem();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
-        await commonRobot.searchWithKeyboardAction(noResultCreditSearchKeyword);
-        newPaymentStep2Robot.verifyNoItemFound();
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
+
+        await newPaymentStep1Robot.clickFilter();
+        await newPaymentStep1Robot.clickDocumentDateField();
+        await commonRobot.setDateRangePickerValue(
+          fromDate: fromDate,
+          toDate: toDate,
+          dateStringFormat: dateFormat,
+        );
+        await newPaymentStep1Robot.tapApplyFilter();
+        invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
+        invoiceIdPrice = newPaymentStep1Robot.getFirstInvoiceIdPrice;
+        await commonRobot.searchWithKeyboardAction(invoiceId);
+        newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
+        await newPaymentStep1Robot.clickFirstItem();
+        await newPaymentStep1Robot.tapNextButton();
+        newPaymentStep2Robot.verifyPage();
+        newPaymentStep2Robot.verifyStep2InitialField(invoiceIdPrice);
+
+        await filterTheDateToGetItem(dateFormat: dateFormat);
+        if (newPaymentStep2Robot.noRecordFound) {
+          newPaymentStep2Robot.verifyNoItemFound();
+        } else {
+          newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+          await commonRobot
+              .searchWithKeyboardAction(noResultCreditSearchKeyword);
+          newPaymentStep2Robot.verifyNoItemFound();
+        }
       });
 
       testWidgets(
           'EZRX-T258 | verify New Payment Page Step 2 - Filter Tune Icon Feature - Un Happy flow',
           (tester) async {
-        await goToPaymentStep2Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
+
+        await newPaymentStep1Robot.clickFilter();
+        await newPaymentStep1Robot.clickDocumentDateField();
+        await commonRobot.setDateRangePickerValue(
+          fromDate: fromDate,
+          toDate: toDate,
+          dateStringFormat: dateFormat,
+        );
+        await newPaymentStep1Robot.tapApplyFilter();
+        invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
+        invoiceIdPrice = newPaymentStep1Robot.getFirstInvoiceIdPrice;
+        await commonRobot.searchWithKeyboardAction(invoiceId);
+        newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
+        await newPaymentStep1Robot.clickFirstItem();
+        await newPaymentStep1Robot.tapNextButton();
+        newPaymentStep2Robot.verifyPage();
+        newPaymentStep2Robot.verifyStep2InitialField(invoiceIdPrice);
 
         await newPaymentStep2Robot.clickFilter();
         newPaymentStep2Robot.verifyDefaultFilter();
@@ -2037,7 +2524,9 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: invalidFromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
+        await newPaymentStep2Robot.verifyOutOfRangeError();
         await commonRobot.cancelDateRangePicker();
         await newPaymentStep2Robot.tapResetFilter();
         await newPaymentStep2Robot.clickFilter();
@@ -2047,7 +2536,32 @@ void main() {
       testWidgets(
           'EZRX-T259 | verify New Payment Page Step 2 - Filter Tune Icon Feature - Happy flow',
           (tester) async {
-        await goToPaymentStep2Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
+
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
+
+        await newPaymentStep1Robot.clickFilter();
+        await newPaymentStep1Robot.clickDocumentDateField();
+        await commonRobot.setDateRangePickerValue(
+          fromDate: fromDate,
+          toDate: toDate,
+          dateStringFormat: dateFormat,
+        );
+        await newPaymentStep1Robot.tapApplyFilter();
+        invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
+        invoiceIdPrice = newPaymentStep1Robot.getFirstInvoiceIdPrice;
+        await commonRobot.searchWithKeyboardAction(invoiceId);
+        newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
+        await newPaymentStep1Robot.clickFirstItem();
+        await newPaymentStep1Robot.tapNextButton();
+        newPaymentStep2Robot.verifyPage();
+        newPaymentStep2Robot.verifyStep2InitialField(invoiceIdPrice);
 
         await newPaymentStep2Robot.clickFilter();
         newPaymentStep2Robot.verifyDefaultFilter();
@@ -2055,19 +2569,54 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep2Robot.tapApplyFilter();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
-        await newPaymentStep2Robot.clickFilter();
-        await newPaymentStep2Robot.tapResetFilter();
+        if (newPaymentStep2Robot.noRecordFound) {
+          newPaymentStep2Robot.verifyNoItemFound();
+        } else {
+          newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+          await newPaymentStep2Robot.clickFilter();
+          await newPaymentStep2Robot.tapResetFilter();
+          if (newPaymentStep2Robot.noRecordFound) {
+            newPaymentStep2Robot.verifyNoItemFound();
+          } else {
+            newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+          }
+        }
       });
 
       testWidgets(
           'EZRX-T260 | verify New Payment Page Step 2 - All button Feature',
           (tester) async {
-        await goToPaymentStep2Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
 
-        await filterTheDateToGetItem();
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
+
+        await newPaymentStep1Robot.clickFilter();
+        await newPaymentStep1Robot.clickDocumentDateField();
+        await commonRobot.setDateRangePickerValue(
+          fromDate: fromDate,
+          toDate: toDate,
+          dateStringFormat: dateFormat,
+        );
+        await newPaymentStep1Robot.tapApplyFilter();
+        invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
+        invoiceIdPrice = newPaymentStep1Robot.getFirstInvoiceIdPrice;
+        await commonRobot.searchWithKeyboardAction(invoiceId);
+        newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
+        await newPaymentStep1Robot.clickFirstItem();
+        await newPaymentStep1Robot.tapNextButton();
+        newPaymentStep2Robot.verifyPage();
+        newPaymentStep2Robot.verifyStep2InitialField(invoiceIdPrice);
+
+        await filterTheDateToGetItem(dateFormat: dateFormat);
         newPaymentStep2Robot.verifyCheckboxStatus(false);
         await newPaymentStep2Robot.tapAllCheckbox();
         newPaymentStep2Robot.verifyCheckboxStatus(true);
@@ -2081,23 +2630,77 @@ void main() {
       testWidgets(
           'EZRX-T261 | verify New Payment Page Step 2 - pull to refresh features',
           (tester) async {
-        await goToPaymentStep2Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
 
-        await filterTheDateToGetItem();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
-        newPaymentStep2Robot.collectTheFirstItem();
-        await commonRobot.pullToRefresh();
-        await filterTheDateToGetItem();
-        newPaymentStep2Robot.verifyTheFirstItemAfterRefresh();
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
+
+        await newPaymentStep1Robot.clickFilter();
+        await newPaymentStep1Robot.clickDocumentDateField();
+        await commonRobot.setDateRangePickerValue(
+          fromDate: fromDate,
+          toDate: toDate,
+          dateStringFormat: dateFormat,
+        );
+        await newPaymentStep1Robot.tapApplyFilter();
+        invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
+        invoiceIdPrice = newPaymentStep1Robot.getFirstInvoiceIdPrice;
+        await commonRobot.searchWithKeyboardAction(invoiceId);
+        newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
+        await newPaymentStep1Robot.clickFirstItem();
+        await newPaymentStep1Robot.tapNextButton();
+        newPaymentStep2Robot.verifyPage();
+        newPaymentStep2Robot.verifyStep2InitialField(invoiceIdPrice);
+
+        await filterTheDateToGetItem(dateFormat: dateFormat);
+        if (newPaymentStep2Robot.noRecordFound) {
+          newPaymentStep2Robot.verifyNoItemFound();
+        } else {
+          newPaymentStep2Robot.verifyAtLeastOneItemFound(isVn: true);
+          newPaymentStep2Robot.collectTheFirstItem();
+          await commonRobot.pullToRefresh();
+          await filterTheDateToGetItem(dateFormat: dateFormat);
+          newPaymentStep2Robot.verifyTheFirstItemAfterRefresh();
+        }
       });
 
       testWidgets(
           'EZRX-T564 | verify New Payment Page Step 2 - Next Button Feature - Go to step 3 without credit',
           (tester) async {
         const newCreditIdPrice = 0.0;
-        await goToPaymentStep2Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
 
-        await filterTheDateToGetItem();
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
+
+        await newPaymentStep1Robot.clickFilter();
+        await newPaymentStep1Robot.clickDocumentDateField();
+        await commonRobot.setDateRangePickerValue(
+          fromDate: fromDate,
+          toDate: toDate,
+          dateStringFormat: dateFormat,
+        );
+        await newPaymentStep1Robot.tapApplyFilter();
+        invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
+        invoiceIdPrice = newPaymentStep1Robot.getFirstInvoiceIdPrice;
+        await commonRobot.searchWithKeyboardAction(invoiceId);
+        newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
+        await newPaymentStep1Robot.clickFirstItem();
+        await newPaymentStep1Robot.tapNextButton();
+        newPaymentStep2Robot.verifyPage();
+        newPaymentStep2Robot.verifyStep2InitialField(invoiceIdPrice);
+
+        await filterTheDateToGetItem(dateFormat: dateFormat);
         creditId = newPaymentStep2Robot.getFirstCreditId(invoiceIdPrice);
         newPaymentStep2Robot.verifyThePriceAndButton(
           invoiceIdPrice,
@@ -2114,9 +2717,34 @@ void main() {
       testWidgets(
           'EZRX-T262 | verify New Payment Page Step 2 - Next Button Feature - Go to step 3 with credit',
           (tester) async {
-        await goToPaymentStep2Page(tester);
+        //init app
+        await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
 
-        await filterTheDateToGetItem();
+        //Redirect to Payment Step1 page
+        await homeRobot.tapPaymentQuickAccess();
+        paymentHomeRobot.verifyPage();
+        await paymentHomeRobot.tapNewPayment();
+        newPaymentStep1Robot.verifyPage();
+
+        await newPaymentStep1Robot.clickFilter();
+        await newPaymentStep1Robot.clickDocumentDateField();
+        await commonRobot.setDateRangePickerValue(
+          fromDate: fromDate,
+          toDate: toDate,
+          dateStringFormat: dateFormat,
+        );
+        await newPaymentStep1Robot.tapApplyFilter();
+        invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
+        invoiceIdPrice = newPaymentStep1Robot.getFirstInvoiceIdPrice;
+        await commonRobot.searchWithKeyboardAction(invoiceId);
+        newPaymentStep1Robot.verifyAtLeast1ItemFound(isVn: true);
+        await newPaymentStep1Robot.clickFirstItem();
+        await newPaymentStep1Robot.tapNextButton();
+        newPaymentStep2Robot.verifyPage();
+        newPaymentStep2Robot.verifyStep2InitialField(invoiceIdPrice);
+
+        await filterTheDateToGetItem(dateFormat: dateFormat);
         creditId = newPaymentStep2Robot.getFirstCreditId(invoiceIdPrice);
         creditIdPrice = newPaymentStep2Robot.getFirstCreditIdPrice(
           invoiceIdPrice,
@@ -2145,6 +2773,7 @@ void main() {
       ) async {
         //init app
         await pumpAppWithHomeScreen(tester);
+        final dateFormat = await getDateFormatBasedOnUserLanguage();
         //Redirect to Payment Step1 page
         await homeRobot.tapPaymentQuickAccess();
         paymentHomeRobot.verifyPage();
@@ -2156,6 +2785,7 @@ void main() {
         await commonRobot.setDateRangePickerValue(
           fromDate: fromDate,
           toDate: toDate,
+          dateStringFormat: dateFormat,
         );
         await newPaymentStep1Robot.tapApplyFilter();
         invoiceId = newPaymentStep1Robot.getFirstInvoiceId;
@@ -2169,7 +2799,7 @@ void main() {
         newPaymentStep2Robot.verifyPage();
 
         newPaymentStep2Robot.verifyStep2InitialField(invoiceIdPrice);
-        await filterTheDateToGetItem();
+        await filterTheDateToGetItem(dateFormat: dateFormat);
         newPaymentStep2Robot.verifyThePriceAndButton(
           invoiceIdPrice,
           0.0,
@@ -2204,8 +2834,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }

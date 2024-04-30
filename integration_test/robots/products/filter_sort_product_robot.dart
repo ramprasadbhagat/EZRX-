@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../common/common_robot.dart';
+import '../common/extension.dart';
 
 class FilterSortProductRobot extends CommonRobot {
   final manufacturerLabel = find.byKey(WidgetKeys.filterManufacturerButton);
@@ -143,6 +144,11 @@ class FilterSortProductRobot extends CommonRobot {
     for (final e in listSuggest) {
       expect(e, contains(keyword));
     }
+  }
+
+  Future<void> pumpUntilFilterBySectionLoaded() async {
+    await tester.pumpUntilVisible(manufacturerLabel);
+    verifyFilterManufacturerVisible();
   }
 
   void verifyDefaultFilterProduct({

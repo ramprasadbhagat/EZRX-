@@ -1,4 +1,6 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -56,6 +58,13 @@ class ProfileRobot {
     //       .initialValue,
     //   text,
     // );
+  }
+
+  String getLanguage() {
+    return (tester.widget(find.byKey(WidgetKeys.profilePageLanguageDropdown))
+            as DropdownButtonFormField2<Language>)
+        .initialValue!
+        .languageString;
   }
 
   void verifyAccountAndBusinessDetailsVisible({

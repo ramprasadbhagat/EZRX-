@@ -334,7 +334,7 @@ class CommonRobot {
         tester.widget<ExpansionTile>(payerInformationVn).initiallyExpanded;
     if (!isExpanded) {
       await tester.tap(find.byKey(WidgetKeys.billToCustomerCode));
-      await tester.pump();
+      await tester.pumpAndSettle();
     }
     expect(
       find.descendant(
