@@ -88,7 +88,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           pageSize: config.pageSize,
           offset: 0,
           selectedMaterialFilter: e.selectedMaterialFilter,
-          language: state.user.preferredLanguage,
+          user: state.user,
         );
         if (emit.isDone) return;
         failureOrSuccess.fold(
@@ -137,7 +137,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         pageSize: config.pageSize,
         offset: state.materialList.length,
         selectedMaterialFilter: state.selectedMaterialFilter,
-        language: state.user.preferredLanguage,
+        user: state.user,
       );
       failureOrSuccess.fold(
         (failure) => emit(

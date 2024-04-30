@@ -47,7 +47,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required int pageSize,
     required int offset,
     required MaterialFilter selectedMaterialFilter,
-    required Language language,
+    required User user,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -68,8 +68,10 @@ class MaterialListRepository implements IMaterialListRepository {
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCode: shipToInfo.shipToCustomerCode,
         pageSize: pageSize,
-        language: language.languageCode,
-        gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
+        language: user.preferredLanguage.languageCode,
+        gimmickMaterial: user.role.type.isSalesRepRole
+            ? salesOrgConfig.enableGimmickMaterial
+            : false,
         isFavourite: selectedMaterialFilter.isFavourite,
         isCovidSelected: selectedMaterialFilter.isCovidSelectedFilterValue,
         type: selectedMaterialFilter.type,
@@ -98,7 +100,7 @@ class MaterialListRepository implements IMaterialListRepository {
         materials: materialListData.products,
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
-        language: language,
+        language: user.preferredLanguage,
       );
 
       return Right(
@@ -296,7 +298,8 @@ class MaterialListRepository implements IMaterialListRepository {
         shipToCode: shipToInfo.shipToCustomerCode,
         pageSize: pageSize,
         language: user.settings.languagePreference.languageCode,
-        gimmickMaterial: enableGimmickMaterial,
+        gimmickMaterial:
+            user.role.type.isSalesRepRole ? enableGimmickMaterial : false,
         type: '',
         countryListCode: [],
         isFavourite: false,

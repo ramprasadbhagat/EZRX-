@@ -262,7 +262,7 @@ void main() async {
           pageSize: fakePageSize,
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
-          preferredLanguage: fakeClientUser.preferredLanguage,
+          user: fakeClientUser,
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -281,7 +281,7 @@ void main() async {
           pageSize: fakePageSize,
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
-          preferredLanguage: fakeClientUser.preferredLanguage,
+          user: fakeClientUser,
         );
 
         expect(result, Right(fakeMaterialResponse));
@@ -323,7 +323,7 @@ void main() async {
           pageSize: fakePageSize,
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
-          preferredLanguage: fakeClientUser.preferredLanguage,
+          user: fakeClientUser,
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -372,7 +372,7 @@ void main() async {
           pageSize: fakePageSize,
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
-          preferredLanguage: fakeClientUser.preferredLanguage,
+          user: fakeClientUser,
         );
 
         expect(result, const Left(ApiFailure.other(fakeException)));
@@ -421,7 +421,7 @@ void main() async {
           pageSize: fakePageSize,
           offset: fakeOffset,
           materialFilter: MaterialFilter.empty(),
-          preferredLanguage: fakeClientUser.preferredLanguage,
+          user: fakeClientUser,
         );
 
         expect(result, Right(fakeMaterialResponse));

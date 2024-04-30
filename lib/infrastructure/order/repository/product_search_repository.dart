@@ -46,7 +46,7 @@ class ProductSearchRepository implements IProductSearchRepository {
     required int pageSize,
     required int offset,
     required MaterialFilter materialFilter,
-    required Language preferredLanguage,
+    required User user,
   }) async {
     final customerCode = customerCodeInfo.customerCodeSoldTo;
     final salesOrg = salesOrganization.salesOrg.getOrCrash();
@@ -74,8 +74,10 @@ class ProductSearchRepository implements IProductSearchRepository {
       final materialList = await remoteDataSource.getSearchedMaterialList(
         customerCode: customerCode,
         salesOrgCode: salesOrg,
-        gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
-        language: preferredLanguage.languageCode,
+        gimmickMaterial: user.role.type.isSalesRepRole
+            ? salesOrgConfig.enableGimmickMaterial
+            : false,
+        language: user.preferredLanguage.languageCode,
         shipToCode: shipToCode,
         searchKey: searchKey.getOrCrash(),
         offset: offset,
@@ -156,7 +158,9 @@ class ProductSearchRepository implements IProductSearchRepository {
       final materialList = await remoteDataSource.getSearchedMaterialList(
         customerCode: customerCode,
         salesOrgCode: salesOrg,
-        gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
+        gimmickMaterial: user.role.type.isSalesRepRole
+            ? salesOrgConfig.enableGimmickMaterial
+            : false,
         language: user.settings.languagePreference.languageCode,
         shipToCode: shipToCode,
         searchKey: '',

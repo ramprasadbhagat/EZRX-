@@ -109,6 +109,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
           shipToInfo: shipToInfo,
+          user: fakeClientUser,
         ),
         build: () {
           when(
@@ -121,7 +122,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
-              preferredLanguage: fakeClientUser.preferredLanguage,
+              user: fakeClientUser,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -144,6 +145,7 @@ void main() {
             isSearching: true,
             canLoadMore: true,
             apiFailureOrSuccessOption: none(),
+            user: fakeClientUser,
           ),
           ProductSearchState.initial().copyWith(
             configs: fakeMYSalesOrgConfigs,
@@ -155,6 +157,7 @@ void main() {
             isSearching: false,
             canLoadMore: true,
             searchKey: SearchKey('diff-search-key'),
+            user: fakeClientUser,
           ),
         ],
       );
@@ -166,6 +169,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           searchKey: SearchKey(''),
+          user: fakeClientUser,
         ),
         build: () {
           when(
@@ -178,7 +182,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
-              preferredLanguage: fakeClientUser.preferredLanguage,
+              user: fakeClientUser,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -200,6 +204,7 @@ void main() {
             isSearching: true,
             canLoadMore: true,
             apiFailureOrSuccessOption: none(),
+            user: fakeClientUser,
           ),
           ProductSearchState.initial().copyWith(
             configs: fakeMYSalesOrgConfigs,
@@ -211,6 +216,7 @@ void main() {
             isSearching: false,
             canLoadMore: true,
             searchKey: searchKey,
+            user: fakeClientUser,
           ),
         ],
       );
@@ -223,6 +229,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           searchKey: SearchKey(''),
+          user: fakeClientUser,
         ),
         build: () {
           when(
@@ -235,7 +242,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
-              preferredLanguage: fakeClientUser.preferredLanguage,
+              user: fakeClientUser,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -259,6 +266,7 @@ void main() {
             isSearching: true,
             canLoadMore: true,
             apiFailureOrSuccessOption: none(),
+            user: fakeClientUser,
           ),
           ProductSearchState.initial().copyWith(
             salesOrganization: fakeMYSalesOrganisation,
@@ -274,6 +282,7 @@ void main() {
             ),
             suggestedProductList: <MaterialInfo>[],
             isSearching: false,
+            user: fakeClientUser,
           ),
         ],
       );
@@ -287,6 +296,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           searchKey: searchKey,
+          user: fakeClientUser,
         ),
         build: () {
           when(
@@ -299,7 +309,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
-              preferredLanguage: fakeClientUser.preferredLanguage,
+              user: fakeClientUser,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -322,6 +332,7 @@ void main() {
             isSearching: true,
             canLoadMore: true,
             apiFailureOrSuccessOption: none(),
+            user: fakeClientUser,
           ),
           ProductSearchState.initial().copyWith(
             salesOrganization: fakeMYSalesOrganisation,
@@ -333,6 +344,7 @@ void main() {
             isSearching: false,
             canLoadMore: true,
             searchKey: SearchKey('diff-search-key'),
+            user: fakeClientUser,
           ),
         ],
       );
@@ -351,6 +363,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           salesOrganization: fakeMYSalesOrganisation,
           shipToInfo: shipToInfo,
+          user: fakeClientUser,
         ),
         build: () {
           when(
@@ -363,7 +376,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 24,
               materialFilter: MaterialFilter.empty(),
-              preferredLanguage: fakeClientUser.preferredLanguage,
+              user: fakeClientUser,
             ),
           ).thenAnswer((_) async => Right(fakeResponse2));
           return productSearchBloc;
@@ -382,6 +395,7 @@ void main() {
             isSearching: true,
             canLoadMore: true,
             searchKey: searchKey,
+            user: fakeClientUser,
           ),
           ProductSearchState.initial().copyWith(
             configs: fakeMYSalesOrgConfigs,
@@ -395,6 +409,7 @@ void main() {
             isSearching: false,
             canLoadMore: true,
             searchKey: searchKey,
+            user: fakeClientUser,
           ),
         ],
       );
@@ -412,7 +427,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
-              preferredLanguage: fakeClientUser.preferredLanguage,
+              user: fakeClientUser,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
@@ -446,6 +461,7 @@ void main() {
           isSearching: false,
           canLoadMore: true,
           searchKey: searchKey,
+          user: fakeClientUser,
         ),
         build: () {
           when(
@@ -458,7 +474,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 24,
               materialFilter: MaterialFilter.empty(),
-              preferredLanguage: fakeClientUser.preferredLanguage,
+              user: fakeClientUser,
             ),
           ).thenAnswer(
             (_) async => const Left(
@@ -481,6 +497,7 @@ void main() {
             isSearching: true,
             canLoadMore: true,
             searchKey: searchKey,
+            user: fakeClientUser,
           ),
           ProductSearchState.initial().copyWith(
             configs: fakeMYSalesOrgConfigs,
@@ -495,6 +512,7 @@ void main() {
                 ApiFailure.other('fake-error'),
               ),
             ),
+            user: fakeClientUser,
           ),
         ],
       );

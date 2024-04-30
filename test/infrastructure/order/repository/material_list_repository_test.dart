@@ -114,7 +114,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
-          language: fakeClientUser.preferredLanguage,
+          user: fakeClientUser,
         );
         expect(
           result.isLeft(),
@@ -136,7 +136,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
-          language: fakeClientUser.preferredLanguage,
+          user: fakeClientUser,
         );
         expect(
           result.isRight(),
@@ -214,7 +214,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
-          language: fakeClientUser.preferredLanguage,
+          user: fakeClientUser,
         );
         expect(
           result.isLeft(),
@@ -271,7 +271,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           selectedMaterialFilter: fakeMaterialFilterWithComboOffers,
           shipToInfo: fakeShipToInfo,
-          language: fakeClientUser.preferredLanguage,
+          user: fakeClientUser,
         );
         expect(
           result.isRight(),

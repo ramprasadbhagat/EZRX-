@@ -94,7 +94,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           pageSize: config.pageSize,
           offset: state.suggestedProductList.length,
           materialFilter: state.materialFilter,
-          preferredLanguage: state.user.preferredLanguage,
+          user: state.user,
         );
 
         failureOrSuccess.fold(
@@ -141,7 +141,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           pageSize: config.pageSize,
           offset: state.suggestedProductList.length,
           materialFilter: state.materialFilter,
-          preferredLanguage: state.user.preferredLanguage,
+          user: state.user,
         );
 
         failureOrSuccess.fold(

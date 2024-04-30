@@ -21,7 +21,7 @@ abstract class IMaterialListRepository {
     required int pageSize,
     required int offset,
     required MaterialFilter selectedMaterialFilter,
-    required Language language,
+    required User user,
   });
 
   Future<Either<ApiFailure, MaterialResponse>> getComboDealMaterials({

@@ -93,7 +93,7 @@ void main() {
             pageSize: config.pageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            language: Language.english(),
+            user: fakeClientUser,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -150,7 +150,7 @@ void main() {
             salesOrgConfig: fakeSGSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            language: fakeClientUser.preferredLanguage,
+            user: fakeClientUser,
             pageSize: config.pageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
@@ -232,7 +232,7 @@ void main() {
             pageSize: config.pageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            language: Language.english(),
+            user: fakeClientUser,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -309,7 +309,7 @@ void main() {
             pageSize: config.pageSize,
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            language: Language.english(),
+            user: fakeClientUser,
           ),
         ).thenAnswer(
           (invocation) async => Right(materialResponseMock),
@@ -370,7 +370,7 @@ void main() {
             pageSize: config.pageSize,
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            language: Language.english(),
+            user: fakeClientUser,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -418,7 +418,7 @@ void main() {
             pageSize: config.pageSize,
             offset: 24,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            language: Language.english(),
+            user: fakeClientUser,
           ),
         ).thenAnswer(
           (invocation) async => Right(
