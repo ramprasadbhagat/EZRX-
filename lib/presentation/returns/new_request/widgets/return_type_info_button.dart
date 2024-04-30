@@ -19,7 +19,8 @@ class ReturnTypeInfoIcon extends StatelessWidget {
         isScrollControlled: true,
         isDismissible: false,
         builder: (_) => InfoBottomSheet(
-          title: '${context.tr('Type')}: ${returnType.returnTypeValue}',
+          title:
+              '${context.tr('Type')}: ${context.tr(returnType.returnTypeValue)}',
           description: context.tr(returnType.returnTypeBottomASheetBodyText),
           buttonTitle: context.tr('Got it'),
         ),

@@ -64,7 +64,7 @@ String getQuantityHintText(String returnType) => _isReturnType(returnType)
 String getreturnTypeBottomASheetBodyText(String returnType) => _isReturnType(
       returnType,
     )
-        ? 'After your request is approved, you will receive a credit note'
+        ? 'After your request is approved, you will receive a credit note.'
         : 'After your request is approved, you will receive a replacement item.';
 
 bool getisCounterOfferElegible(String returnType) => returnType == '500';
