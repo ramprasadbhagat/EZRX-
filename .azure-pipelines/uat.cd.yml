@@ -207,7 +207,6 @@ stages:
         bundleFile: 'build/app/outputs/bundle/uatRelease/*.aab'
         track: 'internal'
         rolloutToUserFraction: true
-        changesNotSentForReview: true
 
 
 # - stage: WebUatStage
