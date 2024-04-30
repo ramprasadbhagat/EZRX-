@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/product_images/entities/product_images.da
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -51,6 +52,11 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required bool hidePrice,
     required StringValue referenceNotes,
     required bool isMarketPlace,
+    required TenderContractNumber tenderContractNumber,
+    required TenderContractNumber tenderContractReference,
+    required int tenderPriceUnit,
+    required TenderPrice tenderPrice,
+    required TenderContractReason tenderOrderReason,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -87,6 +93,12 @@ class OrderHistoryItem with _$OrderHistoryItem {
         principalData: PrincipalData.empty(),
         referenceNotes: StringValue(''),
         isMarketPlace: false,
+        tenderContractNumber: TenderContractNumber.tenderContractNumber(''),
+        tenderContractReference:
+            TenderContractNumber.tenderContractReference(''),
+        tenderPriceUnit: 0,
+        tenderPrice: TenderPrice('0'),
+        tenderOrderReason: TenderContractReason(''),
       );
 
   bool get isOfferItem => !isBundle && !isBonusMaterial && promoStatus;
@@ -176,6 +188,16 @@ class OrderHistoryItem with _$OrderHistoryItem {
       unitPrice == 0 ? 0 : (tax * 100 / unitPrice).roundToDouble();
 
   String get manufacturerPrefix => isMarketPlace ? 'Sold by' : '';
+
+  TenderContract get orderItemTenderContract => TenderContract.empty().copyWith(
+        tenderOrderReason: tenderOrderReason,
+        contractNumber: tenderContractNumber,
+        contractReference: StringValue(
+          tenderContractReference.getValue(),
+        ),
+        pricingUnit: tenderPriceUnit,
+        tenderPrice: tenderPrice,
+      );
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {

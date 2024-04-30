@@ -860,7 +860,15 @@ class WidgetKeys {
   static Key orderHistoryBundleItemMaterial(String materialNumber) =>
       Key('orderHistoryBundleItemMaterial$materialNumber');
   static const Key paymentTerm = Key('paymentTerm');
-
+  static const Key tenderExpandableSection = Key('tenderExpandableSection');
+  static const Key tenderOrderReason = Key('tenderOrderReason');
+  static const Key tenderContractNumber = Key('tenderContractNumber');
+  static const Key tenderContractReference = Key('tenderContractReference');
+  static const Key tenderContractPrice = Key('tenderContractPrice');
+  static const Key viewOrderByItemTileSubTitle =
+      Key('viewOrderByItemTileSubTitle');
+  static const Key viewOrderByItemTileTitle = Key('viewOrderByItemTileTitle');
+  static const Key viewOrderByItemTileLabel = Key('viewOrderByItemTileLabel');
   //============================================================
   //  Material Details
   //============================================================
@@ -1461,7 +1469,8 @@ class WidgetKeys {
       Key('viewByOrderFilterRadioTitle$name$isSelected');
   static Key viewByItemDetailOtherItemExpandSection =
       const Key('viewByItemDetailOtherItemExpandSection');
-
+  static const Key viewByItemsOrderDetailOrderOrQueueNumber =
+      Key('viewByItemsOrderDetailOrderOrQueueNumber');
   //============================================================
   // View By Orders
   //============================================================

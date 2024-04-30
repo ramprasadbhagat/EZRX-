@@ -19,8 +19,9 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/view_by_item_section.dart';
@@ -50,7 +51,6 @@ void main() {
   late ViewByItemFilterBlocMock mockViewByItemFilterBloc;
   late ProductImageBlocMock mockProductImageBloc;
   late ViewByItemDetailsBlocMock mockViewByItemDetailsBloc;
-
   final fakeOrderHistoryItems = [
     OrderHistoryItem.empty().copyWith(
       materialNumber: MaterialNumber('fakeMaterialNumber'),
@@ -413,7 +413,10 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      expect(find.text('Invoice #${fakeInvoice.getOrCrash()}'), findsOneWidget);
+      expect(
+        find.textContaining('Invoice #${fakeInvoice.getOrCrash()}'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('Display marketplace icon and seller when order is from MP',
@@ -429,23 +432,23 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
+
       final historyTile = find.byKey(WidgetKeys.viewByItemsOrderItemKey);
       expect(historyTile, findsOneWidget);
       expect(
         find.descendant(
           of: historyTile,
-          matching: find.byType(MarketPlaceLogo),
+          matching: find.byType(MarketPlaceIcon),
         ),
         findsOneWidget,
       );
+
       final sellerText = tester
           .widget<Text>(
-            find.descendant(
-              of: historyTile,
-              matching: find.byKey(WidgetKeys.commonTileItemSubTitle),
-            ),
+            find.byKey(WidgetKeys.viewOrderByItemTileSubTitle),
           )
           .data;
+
       expect(sellerText, startsWith('Sold by: '));
     });
 
@@ -472,10 +475,174 @@ void main() {
       );
       expect(
         tester
-            .widget<RichText>(find.byKey(WidgetKeys.commonTileItemHeader))
+            .widget<RichText>(
+              find.byKey(WidgetKeys.viewByItemsOrderDetailOrderOrQueueNumber),
+            )
             .text
             .toPlainText(),
         contains('Queue #${mockOrderHistory.orderNumber.getValue()}'),
+      );
+    });
+
+    testWidgets('Display tender information when collapsed', (tester) async {
+      final fakeTenderOrderReason = TenderContractReason('fake-Reason');
+      final fakeTenderContractNumber =
+          TenderContractNumber.tenderContractNumber('fake-Number');
+      final fakeTenderPrice = TenderPrice('11832000');
+      final fakeTenderContractReference =
+          TenderContractNumber.tenderContractReference('fake-Reference');
+      final orderHistoryList = orderHistory.copyWith(
+        orderHistoryItems: [
+          orderHistory.orderHistoryItems
+              .firstWhere((e) => !e.tenderOrderReason.isEmpty)
+              .copyWith(
+                tenderContractNumber: fakeTenderContractNumber,
+                tenderOrderReason: fakeTenderOrderReason,
+                tenderPrice: fakeTenderPrice,
+                tenderContractReference: fakeTenderContractReference,
+              ),
+        ],
+      );
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(orderHistory: orderHistoryList),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final historyTile = find.byKey(WidgetKeys.viewByItemsOrderItemKey);
+      expect(historyTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byType(ExpansionTile),
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.tenderOrderReason &&
+                widget is Text &&
+                widget.data!.contains(
+                  '${fakeTenderOrderReason.getOrCrash()} - Contract Tender',
+                ),
+          ),
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.tenderContractNumber &&
+                widget is Text &&
+                widget.data == fakeTenderContractNumber.getOrCrash(),
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Display tender information when expanded', (tester) async {
+      final fakeTenderOrderReason = TenderContractReason('fake-Reason');
+      final fakeTenderContractNumber =
+          TenderContractNumber.tenderContractNumber('fake-Number');
+      final fakeTenderPrice = TenderPrice('11832000');
+      final fakeTenderContractReference =
+          TenderContractNumber.tenderContractReference('fake-Reference');
+      final orderHistoryList = orderHistory.copyWith(
+        orderHistoryItems: [
+          orderHistory.orderHistoryItems
+              .firstWhere((e) => !e.tenderOrderReason.isEmpty)
+              .copyWith(
+                tenderContractNumber: fakeTenderContractNumber,
+                tenderOrderReason: fakeTenderOrderReason,
+                tenderPrice: fakeTenderPrice,
+                tenderContractReference: fakeTenderContractReference,
+              ),
+        ],
+      );
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(orderHistory: orderHistoryList),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final historyTile = find.byKey(WidgetKeys.viewByItemsOrderItemKey);
+      final tenderExpandableSection =
+          find.byKey(WidgetKeys.tenderExpandableSection);
+
+      expect(historyTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byType(ExpansionTile),
+        ),
+        findsOneWidget,
+      );
+
+      await tester.tap(find.byKey(WidgetKeys.tenderExpandableSection));
+      await tester.pump();
+
+      expect(
+        find.descendant(
+          of: tenderExpandableSection,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.tenderContractReference &&
+                widget is Text &&
+                widget.data == fakeTenderContractReference.getOrCrash(),
+          ),
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.descendant(
+          of: tenderExpandableSection,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.tenderContractPrice &&
+                widget is PriceComponent &&
+                widget.price == fakeTenderPrice.getOrCrash(),
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'Do not display tender information when Tender Order Reason is empty',
+        (tester) async {
+      final orderHistoryList = orderHistory.copyWith(
+        orderHistoryItems: [
+          orderHistory.orderHistoryItems
+              .firstWhere((e) => e.tenderOrderReason.isEmpty),
+        ],
+      );
+
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(orderHistory: orderHistoryList),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final historyTile = find.byKey(WidgetKeys.viewByItemsOrderItemKey);
+      expect(historyTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byType(ExpansionTile),
+        ),
+        findsNothing,
       );
     });
   });

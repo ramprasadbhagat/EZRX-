@@ -32,6 +32,7 @@ class StatusLabel extends StatelessWidget {
         key: WidgetKeys.paymentSummaryTextStatus,
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: valueColor,
+              fontWeight: FontWeight.w600,
             ),
       ),
     );

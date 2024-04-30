@@ -12,7 +12,7 @@ part of 'order_history_item_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OrderHistoryItemDto _$OrderHistoryItemDtoFromJson(Map<String, dynamic> json) {
   return _OrderHistoryItemDto.fromJson(json);
@@ -87,6 +87,16 @@ mixin _$OrderHistoryItemDto {
   String get referenceNotes => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  String get tenderContractNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TenderContractReference', defaultValue: '')
+  String get tenderContractReference => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+  String get tenderOrderReason => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+  int get tenderPriceUnit => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TenderPrice', defaultValue: '')
+  String get tenderPrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -142,7 +152,15 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      bool isMarketPlace});
+      bool isMarketPlace,
+      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      String tenderContractNumber,
+      @JsonKey(name: 'TenderContractReference', defaultValue: '')
+      String tenderContractReference,
+      @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+      String tenderOrderReason,
+      @JsonKey(name: 'TenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
+      @JsonKey(name: 'TenderPrice', defaultValue: '') String tenderPrice});
 }
 
 /// @nodoc
@@ -191,6 +209,11 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? hidePrice = null,
     Object? referenceNotes = null,
     Object? isMarketPlace = null,
+    Object? tenderContractNumber = null,
+    Object? tenderContractReference = null,
+    Object? tenderOrderReason = null,
+    Object? tenderPriceUnit = null,
+    Object? tenderPrice = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -325,16 +348,36 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      tenderContractNumber: null == tenderContractNumber
+          ? _value.tenderContractNumber
+          : tenderContractNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      tenderContractReference: null == tenderContractReference
+          ? _value.tenderContractReference
+          : tenderContractReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      tenderOrderReason: null == tenderOrderReason
+          ? _value.tenderOrderReason
+          : tenderOrderReason // ignore: cast_nullable_to_non_nullable
+              as String,
+      tenderPriceUnit: null == tenderPriceUnit
+          ? _value.tenderPriceUnit
+          : tenderPriceUnit // ignore: cast_nullable_to_non_nullable
+              as int,
+      tenderPrice: null == tenderPrice
+          ? _value.tenderPrice
+          : tenderPrice // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
+abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
     implements $OrderHistoryItemDtoCopyWith<$Res> {
-  factory _$$_OrderHistoryItemDtoCopyWith(_$_OrderHistoryItemDto value,
-          $Res Function(_$_OrderHistoryItemDto) then) =
-      __$$_OrderHistoryItemDtoCopyWithImpl<$Res>;
+  factory _$$OrderHistoryItemDtoImplCopyWith(_$OrderHistoryItemDtoImpl value,
+          $Res Function(_$OrderHistoryItemDtoImpl) then) =
+      __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -379,15 +422,23 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
       @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      bool isMarketPlace});
+      bool isMarketPlace,
+      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      String tenderContractNumber,
+      @JsonKey(name: 'TenderContractReference', defaultValue: '')
+      String tenderContractReference,
+      @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+      String tenderOrderReason,
+      @JsonKey(name: 'TenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
+      @JsonKey(name: 'TenderPrice', defaultValue: '') String tenderPrice});
 }
 
 /// @nodoc
-class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryItemDtoCopyWithImpl<$Res, _$_OrderHistoryItemDto>
-    implements _$$_OrderHistoryItemDtoCopyWith<$Res> {
-  __$$_OrderHistoryItemDtoCopyWithImpl(_$_OrderHistoryItemDto _value,
-      $Res Function(_$_OrderHistoryItemDto) _then)
+class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
+    extends _$OrderHistoryItemDtoCopyWithImpl<$Res, _$OrderHistoryItemDtoImpl>
+    implements _$$OrderHistoryItemDtoImplCopyWith<$Res> {
+  __$$OrderHistoryItemDtoImplCopyWithImpl(_$OrderHistoryItemDtoImpl _value,
+      $Res Function(_$OrderHistoryItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -426,8 +477,13 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
     Object? hidePrice = null,
     Object? referenceNotes = null,
     Object? isMarketPlace = null,
+    Object? tenderContractNumber = null,
+    Object? tenderContractReference = null,
+    Object? tenderOrderReason = null,
+    Object? tenderPriceUnit = null,
+    Object? tenderPrice = null,
   }) {
-    return _then(_$_OrderHistoryItemDto(
+    return _then(_$OrderHistoryItemDtoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -560,14 +616,34 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      tenderContractNumber: null == tenderContractNumber
+          ? _value.tenderContractNumber
+          : tenderContractNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      tenderContractReference: null == tenderContractReference
+          ? _value.tenderContractReference
+          : tenderContractReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      tenderOrderReason: null == tenderOrderReason
+          ? _value.tenderOrderReason
+          : tenderOrderReason // ignore: cast_nullable_to_non_nullable
+              as String,
+      tenderPriceUnit: null == tenderPriceUnit
+          ? _value.tenderPriceUnit
+          : tenderPriceUnit // ignore: cast_nullable_to_non_nullable
+              as int,
+      tenderPrice: null == tenderPrice
+          ? _value.tenderPrice
+          : tenderPrice // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
-  const _$_OrderHistoryItemDto(
+class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
+  const _$OrderHistoryItemDtoImpl(
       {@JsonKey(name: 'MaterialCode', defaultValue: '')
       required this.materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
@@ -616,12 +692,22 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       @JsonKey(name: 'referenceNotes', defaultValue: '')
       required this.referenceNotes,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required this.isMarketPlace})
+      required this.isMarketPlace,
+      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      required this.tenderContractNumber,
+      @JsonKey(name: 'TenderContractReference', defaultValue: '')
+      required this.tenderContractReference,
+      @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+      required this.tenderOrderReason,
+      @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+      required this.tenderPriceUnit,
+      @JsonKey(name: 'TenderPrice', defaultValue: '')
+      required this.tenderPrice})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
 
-  factory _$_OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_OrderHistoryItemDtoFromJson(json);
+  factory _$OrderHistoryItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderHistoryItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'MaterialCode', defaultValue: '')
@@ -729,17 +815,32 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @override
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   final bool isMarketPlace;
+  @override
+  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  final String tenderContractNumber;
+  @override
+  @JsonKey(name: 'TenderContractReference', defaultValue: '')
+  final String tenderContractReference;
+  @override
+  @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+  final String tenderOrderReason;
+  @override
+  @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+  final int tenderPriceUnit;
+  @override
+  @JsonKey(name: 'TenderPrice', defaultValue: '')
+  final String tenderPrice;
 
   @override
   String toString() {
-    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, governmentMaterialCode: $governmentMaterialCode, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace)';
+    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, governmentMaterialCode: $governmentMaterialCode, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderOrderReason: $tenderOrderReason, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryItemDto &&
+            other is _$OrderHistoryItemDtoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
@@ -801,7 +902,18 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
             (identical(other.referenceNotes, referenceNotes) ||
                 other.referenceNotes == referenceNotes) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
-                other.isMarketPlace == isMarketPlace));
+                other.isMarketPlace == isMarketPlace) &&
+            (identical(other.tenderContractNumber, tenderContractNumber) ||
+                other.tenderContractNumber == tenderContractNumber) &&
+            (identical(
+                    other.tenderContractReference, tenderContractReference) ||
+                other.tenderContractReference == tenderContractReference) &&
+            (identical(other.tenderOrderReason, tenderOrderReason) ||
+                other.tenderOrderReason == tenderOrderReason) &&
+            (identical(other.tenderPriceUnit, tenderPriceUnit) ||
+                other.tenderPriceUnit == tenderPriceUnit) &&
+            (identical(other.tenderPrice, tenderPrice) ||
+                other.tenderPrice == tenderPrice));
   }
 
   @JsonKey(ignore: true)
@@ -840,19 +952,24 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
         principalCode,
         hidePrice,
         referenceNotes,
-        isMarketPlace
+        isMarketPlace,
+        tenderContractNumber,
+        tenderContractReference,
+        tenderOrderReason,
+        tenderPriceUnit,
+        tenderPrice
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>
-      __$$_OrderHistoryItemDtoCopyWithImpl<_$_OrderHistoryItemDto>(
+  _$$OrderHistoryItemDtoImplCopyWith<_$OrderHistoryItemDtoImpl> get copyWith =>
+      __$$OrderHistoryItemDtoImplCopyWithImpl<_$OrderHistoryItemDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderHistoryItemDtoToJson(
+    return _$$OrderHistoryItemDtoImplToJson(
       this,
     );
   }
@@ -920,11 +1037,21 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       @JsonKey(name: 'referenceNotes', defaultValue: '')
       required final String referenceNotes,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required final bool isMarketPlace}) = _$_OrderHistoryItemDto;
+      required final bool isMarketPlace,
+      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      required final String tenderContractNumber,
+      @JsonKey(name: 'TenderContractReference', defaultValue: '')
+      required final String tenderContractReference,
+      @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+      required final String tenderOrderReason,
+      @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+      required final int tenderPriceUnit,
+      @JsonKey(name: 'TenderPrice', defaultValue: '')
+      required final String tenderPrice}) = _$OrderHistoryItemDtoImpl;
   const _OrderHistoryItemDto._() : super._();
 
   factory _OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =
-      _$_OrderHistoryItemDto.fromJson;
+      _$OrderHistoryItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'MaterialCode', defaultValue: '')
@@ -1026,7 +1153,22 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
+  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  String get tenderContractNumber;
+  @override
+  @JsonKey(name: 'TenderContractReference', defaultValue: '')
+  String get tenderContractReference;
+  @override
+  @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+  String get tenderOrderReason;
+  @override
+  @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+  int get tenderPriceUnit;
+  @override
+  @JsonKey(name: 'TenderPrice', defaultValue: '')
+  String get tenderPrice;
+  @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>
+  _$$OrderHistoryItemDtoImplCopyWith<_$OrderHistoryItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

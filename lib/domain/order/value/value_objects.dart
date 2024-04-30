@@ -472,6 +472,10 @@ class TenderContractNumber extends ValueObject<String> {
     return TenderContractNumber._(Right(input));
   }
 
+  factory TenderContractNumber.tenderContractReference(String input) {
+    return TenderContractNumber._(Right(input));
+  }
+
   String get displayTenderContractNumber {
     return naIfEmpty(value.getOrElse(() => '-'));
   }
@@ -490,6 +494,10 @@ class TenderContractNumber extends ValueObject<String> {
 
   String get displayAnnouncementLetterNumber {
     return naIfEmpty(removeLeadingZero(value.getOrElse(() => '-')));
+  }
+
+  String get displayTenderContractReference {
+    return getTenderContractNumber(value.getOrElse(() => ''));
   }
 
   const TenderContractNumber._(this.value);

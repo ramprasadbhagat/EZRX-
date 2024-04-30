@@ -6,9 +6,9 @@ part of 'order_history_item_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
+_$OrderHistoryItemDtoImpl _$$OrderHistoryItemDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_OrderHistoryItemDto(
+    _$OrderHistoryItemDtoImpl(
       materialNumber: json['MaterialCode'] as String? ?? '',
       materialDescription: json['MaterialDescription'] as String? ?? '',
       qty: json['Qty'] as int? ?? 0,
@@ -46,10 +46,15 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
       referenceNotes: json['referenceNotes'] as String? ?? '',
       isMarketPlace:
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+      tenderContractNumber: json['TenderContractNumber'] as String? ?? '',
+      tenderContractReference: json['TenderContractReference'] as String? ?? '',
+      tenderOrderReason: json['TenderOrderReason'] as String? ?? '',
+      tenderPriceUnit: json['TenderPriceUnit'] as int? ?? 0,
+      tenderPrice: json['TenderPrice'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
-        _$_OrderHistoryItemDto instance) =>
+Map<String, dynamic> _$$OrderHistoryItemDtoImplToJson(
+        _$OrderHistoryItemDtoImpl instance) =>
     <String, dynamic>{
       'MaterialCode': instance.materialNumber,
       'MaterialDescription': instance.materialDescription,
@@ -86,4 +91,9 @@ Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
       'HidePrice': instance.hidePrice,
       'referenceNotes': instance.referenceNotes,
       'isMarketPlace': instance.isMarketPlace,
+      'TenderContractNumber': instance.tenderContractNumber,
+      'TenderContractReference': instance.tenderContractReference,
+      'TenderOrderReason': instance.tenderOrderReason,
+      'TenderPriceUnit': instance.tenderPriceUnit,
+      'TenderPrice': instance.tenderPrice,
     };

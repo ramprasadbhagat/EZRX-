@@ -36,48 +36,10 @@ class _ViewByOrderItem extends StatelessWidget {
           const ViewByItemDetailsPageRoute(),
         );
       },
-      child: CommonTileItem(
+      child: _ViewByOrderItemTile(
         key: WidgetKeys.viewByItemsOrderItemKey,
-        labelLeading: orderHistoryItem.isMarketPlace
-            ? Padding(
-                padding: const EdgeInsets.only(right: 4),
-                child: MarketPlaceLogo.small(),
-              )
-            : null,
-        label: orderHistoryItem.combinationCode(
-          showGMCPart: salesOrgConfigs.enableGMC,
-        ),
-        title: orderHistoryItem.materialDescription,
-        subtitle: (orderHistoryItem.manufacturerPrefix.isNotEmpty
-                ? '${context.tr(orderHistoryItem.manufacturerPrefix)}: '
-                : '') +
-            orderHistoryItem.principalData.principalName.name,
-        isCovidItem: (salesOrgConfigs.salesOrg.isPH &&
-                orderHistoryItem.orderType.isCovidOrderTypeForPH) ||
-            (salesOrgConfigs.salesOrg.isSg &&
-                orderHistoryItem.orderType.isCovidOrderTypeForSG),
-        headerText:
-            '${context.tr(orderHistoryItem.status.prefix)} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
-        headerTextInfoIcon: orderHistoryItem.status.isInQueue
-            ? const QueueNumberInfoIcon()
-            : null,
-        statusWidget: StatusLabel(
-          key: WidgetKeys.orderItemStatusKey,
-          status: StatusType(
-            orderHistoryItem.status.displayOrderStatus,
-          ),
-        ),
-        quantity: orderHistoryItem.qty.toString(),
-        footerWidget: _InvoiceNumber(
-          orderHistoryItem: orderHistoryItem,
-        ),
-        materialNumber: orderHistoryItem.materialNumber,
-        isQuantityBelowImage: false,
-        isQuantityRequired: true,
-        statusTag:
-            salesOrgConfigs.salesOrg.isID ? null : orderHistoryItem.productTag,
-        showOfferTag: orderHistoryItem.isOfferItem,
-        showBundleTag: orderHistoryItem.isBundle,
+        orderHistoryItem: orderHistoryItem,
+        salesOrgConfigs: salesOrgConfigs,
       ),
     );
   }

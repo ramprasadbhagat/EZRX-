@@ -147,7 +147,8 @@ enum PriceStyle {
   govtMaterialListPrice,
   returnOriginPriceStrikeThrough,
   oosPreOrderItemPrice,
-  tenderPrice
+  tenderPrice,
+  tenderViewOrderByItemPrice,
 }
 
 Color _priceTextColor(PriceStyle type) {
@@ -158,6 +159,8 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.comboSubTotalExclTax:
     case PriceStyle.creditSummaryPrice:
     case PriceStyle.govtMaterialListPrice:
+    case PriceStyle.tenderViewOrderByItemPrice:
+    case PriceStyle.tenderPrice:
       return ZPColors.primary;
 
     case PriceStyle.summaryPrice:
@@ -233,6 +236,12 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.credits:
       priceTextStyle = Theme.of(context).textTheme.titleSmall!.copyWith(
             fontWeight: FontWeight.w900,
+          );
+      break;
+    case PriceStyle.tenderViewOrderByItemPrice:
+    case PriceStyle.tenderPrice:
+      priceTextStyle = Theme.of(context).textTheme.labelMedium!.copyWith(
+            fontWeight: FontWeight.bold,
           );
       break;
     case PriceStyle.grandTotalPrice:
@@ -347,6 +356,11 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
           );
     case PriceStyle.tenderPrice:
       return Theme.of(context).textTheme.labelSmall!;
+    case PriceStyle.tenderViewOrderByItemPrice:
+      return Theme.of(context).textTheme.titleMedium!.copyWith(
+            fontWeight: FontWeight.bold,
+            color: ZPColors.primary,
+          );
     case PriceStyle.returnBonusPrice:
     default:
       return Theme.of(context)
