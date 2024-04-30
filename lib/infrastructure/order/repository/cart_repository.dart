@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -461,7 +460,7 @@ class CartRepository implements ICartRepository {
       var productList = <PriceAggregate>[];
 
       for (final productData in products) {
-        final cartProducts = await upsertCart(
+        final upserCartResult = await upsertCart(
           materialInfo: productData,
           salesOrganisation: salesOrganisation,
           salesOrganisationConfig: salesOrganisationConfig,
@@ -473,15 +472,8 @@ class CartRepository implements ICartRepository {
           counterOfferDetails: productData.counterOfferDetails,
         );
 
-        productList = cartProducts.fold(
-          (left) {
-            if (left == const ApiFailure.cartHasDifferentAddress()) {
-              throw const CartException.cartHasDifferentAddress();
-            }
-            throw left.failureMessage;
-          },
-          (right) => right,
-        );
+        if (upserCartResult.isLeft()) return upserCartResult;
+        productList = upserCartResult.getOrElse(() => <PriceAggregate>[]);
       }
 
       if (product.quantity == 0) {

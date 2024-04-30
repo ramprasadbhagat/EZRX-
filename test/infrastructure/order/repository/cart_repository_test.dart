@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
@@ -1842,7 +1843,7 @@ void main() {
       final materialInfo = MaterialInfo.empty().copyWith(
         materialNumber: MaterialNumber('fake-material-number'),
         type: MaterialInfoType('material'),
-        parentID: 'fake-parent-Id',
+        sampleBonusItemId: 'fake-parent-Id',
         quantity: MaterialQty(1),
       );
       final upsertCartRequest = CartProductRequest.toMaterialRequest(
@@ -1850,7 +1851,7 @@ void main() {
         customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
         shipToCustomerCode: fakeShipToInfo.shipToCustomerCode,
         quantity: 1,
-        itemId: 'fake-item-Id',
+        itemId: 'fake-parent-Id',
         language: 'EN',
         materialInfo: materialInfo,
         counterOfferDetails: RequestCounterOfferDetails.empty(),
@@ -1861,9 +1862,7 @@ void main() {
               CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
           market: mockMarket,
         ),
-      ).thenThrow(
-        (invocation) async => MockException(),
-      );
+      ).thenThrow(const CartException.cartHasDifferentAddress());
 
       final result = await cartRepository.upsertCartWithBonus(
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -1876,7 +1875,38 @@ void main() {
         ),
         salesOrganisationConfig: fakeMYSalesOrgConfigs,
       );
-      expect(result.isLeft(), true);
+      expect(result, const Left(ApiFailure.cartHasDifferentAddress()));
+    });
+
+    test('upsertCartWithBonus test when qty > maximum qty', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+      final materialInfo = MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('fake-material-number'),
+        type: MaterialInfoType('material'),
+        sampleBonusItemId: 'fake-parent-Id',
+      );
+
+      final result = await cartRepository.upsertCartWithBonus(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        shipToInfo: fakeShipToInfo,
+        counterOfferDetails: RequestCounterOfferDetails.empty(),
+        language: Language.english(),
+        product: PriceAggregate.empty().copyWith(
+          materialInfo: materialInfo,
+          quantity: mockConfig.maximumCartQuantity + 1,
+        ),
+        salesOrganisationConfig: fakeMYSalesOrgConfigs,
+      );
+      expect(
+        result,
+        Left(
+          ApiFailure.maximumCartQuantityExceed(
+            mockConfig.maximumCartQuantity.toString(),
+          ),
+        ),
+      );
     });
 
     test('upsertCartWithBonus test success', () async {
