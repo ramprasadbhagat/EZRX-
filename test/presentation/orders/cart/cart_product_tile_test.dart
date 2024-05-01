@@ -1090,6 +1090,40 @@ void main() {
           expect(promotionFinder, findsNothing);
         },
       );
+
+      testWidgets(
+          'Show Counter offer price when price has isValid false and isPriceOverride is true',
+          (tester) async {
+        const finalPrice = 500.00;
+
+        final cartItems = cartItem.copyWith(
+          quantity: 2,
+          price: Price.empty().copyWith(
+            isPriceOverride: true,
+            isValid: false,
+            finalPrice: MaterialPrice(finalPrice),
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItems],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final priceNotAvailableFinder = find.descendant(
+          of: find.byKey(WidgetKeys.cartItemProductUnitPrice),
+          matching: find.text('SGD ${finalPrice.toStringAsFixed(2)}', findRichText: true),
+        );
+        expect(priceNotAvailableFinder, findsOneWidget);
+      });
     },
   );
 }

@@ -386,9 +386,13 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   String display(PriceType priceType) {
+    final applyCounterOfferOnFinalPrice = price.isCounterOfferRequested &&
+        (priceType == PriceType.finalPrice ||
+            priceType == PriceType.finalPriceTotal);
+
     if (invalidPrice ||
         price.finalPrice.isUnavailable ||
-        !price.isValid ||
+        (!price.isValid && !applyCounterOfferOnFinalPrice) ||
         !price.isValidMaterial) return 'Price Not Available';
 
     double result;
