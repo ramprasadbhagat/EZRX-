@@ -1,5 +1,9 @@
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -12,6 +16,7 @@ import '../../robots/announcement_article/articles/articles_robot.dart';
 import '../../robots/auth/forgot_password_robot.dart';
 import '../../robots/common/common_robot.dart';
 import '../../robots/common/enum.dart';
+import '../../robots/common/extension.dart';
 import '../../robots/home/customer_search_robot.dart';
 import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
@@ -20,7 +25,13 @@ import '../../robots/more/more_robot.dart';
 import '../../robots/more/profile_robot.dart';
 import '../../robots/more/security_robot.dart';
 import '../../robots/notification/notification_robot.dart';
+import '../../robots/orders/cart/bonus_sample_robot.dart';
+import '../../robots/orders/cart/cart_delivery_address_robot.dart';
 import '../../robots/orders/cart/cart_robot.dart';
+import '../../robots/orders/cart/oos_pre_order_robot.dart';
+import '../../robots/orders/cart/request_counter_offer_robot.dart';
+import '../../robots/orders/checkout/checkout_robot.dart';
+import '../../robots/orders/checkout/order_price_summary_robot.dart';
 import '../../robots/orders/orders_root_robot.dart';
 import '../../robots/orders/view_by_items/view_by_items_detail_robot.dart';
 import '../../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
@@ -32,7 +43,6 @@ import '../../robots/products/product_detail_robot.dart';
 import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
-import '../../robots/returns/returns_root_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -59,11 +69,17 @@ void main() {
   late ProductSuggestionRobot productSuggestionRobot;
   late CartRobot cartRobot;
 
+  late OOSPreOrderRobot oosPreOrderRobot;
+  late CartDeliveryAddressRobot cartDeliveryAddressDetailRobot;
+  late RequestCounterOfferRobot requestCounterOfferRobot;
+  late BonusSampleRobot bonusSampleRobot;
+  late OrderPriceSummaryRobot orderPriceSummaryRobot;
+  late CheckoutRobot checkoutRobot;
+
   late OrdersRootRobot ordersRootRobot;
   late ViewByItemsDetailRobot viewByItemsDetailRobot;
   late ViewByOrdersDetailRobot viewByOrdersDetailRobot;
 
-  late ReturnsRootRobot returnsRootRobot;
   late ReturnsByItemsDetailRobot returnsByItemsDetailRobot;
   late PaymentSummaryDetailRobot paymentDetailRobot;
   late PaymentHomeRobot paymentHomeRobot;
@@ -90,11 +106,17 @@ void main() {
     filterSortProductRobot = FilterSortProductRobot(tester);
     productSuggestionRobot = ProductSuggestionRobot(tester);
     cartRobot = CartRobot(tester);
+    oosPreOrderRobot = OOSPreOrderRobot(tester);
+    cartDeliveryAddressDetailRobot = CartDeliveryAddressRobot(tester);
+    requestCounterOfferRobot = RequestCounterOfferRobot(tester);
+    bonusSampleRobot = BonusSampleRobot(tester);
+    orderPriceSummaryRobot = OrderPriceSummaryRobot(tester);
+    checkoutRobot = CheckoutRobot(tester);
+
     ordersRootRobot = OrdersRootRobot(tester);
     viewByItemsDetailRobot = ViewByItemsDetailRobot(tester);
     viewByOrdersDetailRobot = ViewByOrdersDetailRobot(tester);
 
-    returnsRootRobot = ReturnsRootRobot(tester);
     returnsByItemsDetailRobot = ReturnsByItemsDetailRobot(tester);
     paymentDetailRobot = PaymentSummaryDetailRobot(tester);
     paymentHomeRobot = PaymentHomeRobot(tester);
@@ -104,25 +126,124 @@ void main() {
   const marketCambodia = 'Cambodia';
   const username = 'khclientuser';
   const password = 'St@ysafe01';
+  const currency = 'USD';
+  const customerCode = '0030333258';
   const shipToCode = '0071264617';
-  const otherShipToCode = '0071262814';
+  const shipToAddress = 'Dr. Dy Bopha';
+  const minOrderAmount = 20.0;
+  const taxForMaterial = 10;
+
+  const otherShipToCode = '0071262518';
   const invalidLengthSearchKey = '1';
   const invalidSearchKey = 'auto-test-auto-test';
   const invalidNumberSearchKey = '1231762381236123';
 
+  // Material item
   const materialNumber = '23340071';
   const materialName = 'ALLERGYL CP 25MG BT 10 x 10';
   const materialPrincipalName = 'PharmaProduct Manufacturing';
+  const materialUnitPrice = 1.91;
+  final materialStockInfo = StockInfo.empty();
   const materialExpiryDate = 'NA';
   const materialUnitMeasurement = 'EA';
   const materialCountryOfOrigin = 'Cambodia';
+
   const searchKeywordMaterialName = 'rhinoril';
   const searchKeywordMaterialCode = '2334';
   const searchKeywordMaterialCodeNotValid = '19029';
 
   const multiImageMaterialNumber = '21223395';
   const suspendedMaterialNumber = '23340070';
+
+  //Bonus
   const bonusMaterialNumber = '23340072';
+  const bonusMaterialNumberTierQty = 10;
+  // const bonusMaterialNumberUnitPrice = 0.45;
+  // const bonusManufacturerName = 'PharmaProduct Manufacturing';
+  final bonusMaterialStockInfo = StockInfo.empty();
+  const bonusMaterialName = 'ALLERGYL SP 60ML FL  60ML';
+
+  const oosPreOrderMaterialNumber = '21223395';
+  final oosPreOrderMaterialStockInfo = StockInfo.empty();
+
+  //K1
+  const comboDealIdK1 = '5000000191-0040000157';
+  const comboK1MaterialNumber = '21223399';
+  const comboK1MaterialExpiryDate = '01 May 2030';
+  const comboK1MaterialName = 'DALACIN T SOL. 1% solu 1% 10ml 10X1';
+  const comboK1MaterialPrincipalName = 'Pfizer Global Trading (VC)';
+
+  //K2.1
+  const comboDealIdK21 = '5000000192-0040000158';
+  const comboK21FixedMaterialNumber = '21223394';
+  const comboK21FixedMaterialName = "ALDACTONE 25MG 10x10 10x10' 25mg 10";
+  const comboK21FixedMaterialPrincipalName = 'Pfizer Global Trading (VC)';
+  const comboK21FixedMaterialExpiryDate = '28 Jun 2030';
+
+  const comboK21OptionalMaterialNumber = '21223409';
+  const comboK21OptionalMaterialName = 'NEURONTIN CAP 300 MG Capsul 300mg 3';
+  const comboK21OptionalMaterialPrincipalName = 'Pfizer Global Trading (VC)';
+  const comboK21OptionalMaterialExpiryDate = '31 Oct 2030';
+
+  //K2.2
+  const comboDealIdK22 = '5000000193-0040000159';
+  const comboK22MaterialNumber = '23340300';
+  const comboK22MaterialName = 'SAFORELLE SA   250ml';
+  const comboK22MaterialPrincipalName = 'DEPOMEX CO.,LTD';
+  const comboK22MaterialExpiryDate = '22 Aug 2026';
+  const comboK22MinQty = 2;
+
+  //K3
+  const comboDealIdK3 = '5000000194-0040000160';
+  const comboK3MaterialNumberFirstItem = '23340227';
+  const comboK3MaterialName = 'KINAL GEL 500MG/50MG BT 10x10';
+  const comboK3MaterialPrincipalName = 'PharmaProduct Manufacturing';
+  const comboK3MaterialExpiryDate = '24 May 2030';
+
+  const comboK3MaterialNumberSecondItem = '23340216';
+  const comboK3MaterialNumberThirdItem = '23340114';
+  const comboK3MaterialNumberFourItem = '23340187';
+
+  const comboK3NextDealDiscount = '13';
+  const comboK3NextDealUnit = '1';
+
+  //K4.1
+  const comboDealIdK41 = '5000000195-0040000161';
+  const comboK41MaterialNumber = '21130719';
+  const comboK41MaterialName = 'DUPHASTON TAB';
+  const comboK41MaterialPrincipalName = 'Abbott Products Operations A.G';
+  const comboK41MaterialExpiryDate = '27 Apr 2050';
+  const comboK41MinQty = 5;
+  const comboK41BestDealQuantity = 20;
+  const comboK41SecondDealQuantity = 10;
+
+  const comboK41NextDealUnit =
+      comboK41BestDealQuantity - comboK41SecondDealQuantity;
+
+  const comboK41NextDealDiscount = '10';
+
+  //K4.2
+  const comboDealIdK42 = '5000000177-0040000146';
+  const comboK42MaterialNumber = '21223395';
+  const comboK42MaterialName = "CARDURA 2MG 10X10'S Tablet 2mg 10X1";
+  const comboK42MaterialPrincipalName = 'Pfizer Global Trading (VC)';
+  const comboK42MaterialExpiryDate = 'NA';
+
+  const comboK42NextDealMinQty = 50;
+  const comboK42BestDealMinQty = 100;
+
+  //K5
+  const comboDealIdK5 = '5000000153-0040000132';
+  const comboK5MaterialNumber = '21222875';
+  const comboK5MaterialName = 'ZPKH Batch Managed Mat';
+  const comboK5MaterialPrincipalName = 'Abbott Products Operations A.G';
+  const comboK5MaterialExpiryDate = '30 Apr 2050';
+  const comboK5MaterialPrice = 20;
+  const comboK5NextDealMinQty = 3;
+  const comboK5BestDealQuantity = 5;
+  const comboK5NextDealDiscount = 9;
+  const comboK5NextealMinAmount = 50;
+  const comboK5BestDealMinAmount = 100;
 
   var loginRequired = true;
 
@@ -151,6 +272,103 @@ void main() {
     await cartRobot.clearCart();
     await cartRobot.tapBrowseProductButton();
     await productRobot.openSearchProductScreen();
+  }
+
+  Future<void> openAndVerifyComboDetail(
+    WidgetTester tester, {
+    required String materialNumber,
+  }) async {
+    await productRobot.searchWithKeyboardAction(materialNumber);
+    await productSuggestionRobot.tapSearchResult(materialNumber);
+    productDetailRobot.verifyComboOfferLabel();
+    await productDetailRobot.verifyAndTapGetComboDeal();
+    comboDetailRobot.verifyPage();
+
+    comboDetailRobot.verifyComboDetailInformation();
+    comboDetailRobot.verifySearchBar();
+  }
+
+  Future<void> pressCloseButtonToolbar(WidgetTester tester) async {
+    await commonRobot.tapToBackIcon();
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(WidgetKeys.confirmBottomSheetConfirmButton));
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> addComboAndOpenCart(
+    WidgetTester tester, {
+    required ComboDealScheme scheme,
+    required String materialNumber,
+  }) async {
+    await openAndVerifyComboDetail(
+      tester,
+      materialNumber: materialNumber,
+    );
+    switch (scheme) {
+      case ComboDealScheme.k1:
+      case ComboDealScheme.kWithSuffix:
+        break;
+      case ComboDealScheme.k21:
+        await comboDetailRobot.verifyOnSelectFixedComboMaterial(materialNumber);
+        await comboDetailRobot.verifyOnSelectOptionalComboMaterial(
+          comboK21OptionalMaterialNumber,
+        );
+        break;
+      case ComboDealScheme.k22:
+        await comboDetailRobot
+            .verifyOnSelectOptionalComboMaterial(comboK22MaterialNumber);
+        comboDetailRobot.verifyAddToCartButtonDisableDisplayed();
+
+        await comboDetailRobot.changeMaterialQuantity(
+          materialNumber: comboK22MaterialNumber,
+          quantity: comboK22MinQty,
+        );
+        break;
+
+      case ComboDealScheme.k3:
+        await comboDetailRobot.verifyOnSelectOptionalComboMaterial(
+          comboK3MaterialNumberFirstItem,
+        );
+        await comboDetailRobot.verifyOnSelectOptionalComboMaterial(
+          comboK3MaterialNumberSecondItem,
+        );
+        break;
+
+      case ComboDealScheme.k4:
+        await comboDetailRobot
+            .verifyOnSelectOptionalComboMaterial(comboK41MaterialNumber);
+        await comboDetailRobot.changeMaterialQuantity(
+          materialNumber: comboK41MaterialNumber,
+          quantity: comboK41SecondDealQuantity,
+        );
+        break;
+
+      case ComboDealScheme.k42:
+        await comboDetailRobot.verifyOnSelectOptionalComboMaterial(
+          comboK42MaterialNumber,
+        );
+        await comboDetailRobot.changeMaterialQuantity(
+          materialNumber: comboK42MaterialNumber,
+          quantity: comboK42NextDealMinQty,
+        );
+        break;
+
+      case ComboDealScheme.k5:
+        await comboDetailRobot.verifyOnSelectOptionalComboMaterial(
+          comboK5MaterialNumber,
+        );
+        await comboDetailRobot.changeMaterialQuantity(
+          materialNumber: comboK5MaterialNumber,
+          quantity: comboK5NextDealMinQty,
+        );
+        break;
+    }
+
+    await comboDetailRobot.tapToAddToCartButton();
+    await pressCloseButtonToolbar(tester);
+    await homeRobot.tapMiniCartIcon();
+    await tester.pumpUntilVisible(find.byType(CartProductCombo));
   }
 
   group('Authentication -', () {
@@ -661,19 +879,19 @@ void main() {
       ordersRootRobot.verifyPage();
     });
 
-    testWidgets(
-        'EZRX-T23 | Verify click on Returns action in Top navigation menu',
-        (tester) async {
-      //init app
-      await pumpAppWithHomeScreen(tester);
+    // testWidgets(
+    //     'EZRX-T23 | Verify click on Returns action in Top navigation menu',
+    //     (tester) async {
+    //   //init app
+    //   await pumpAppWithHomeScreen(tester);
 
-      //tap on home quick access return
-      homeRobot.findQuickAccessReturns();
-      await homeRobot.tapReturnsQuickAccess();
+    //   //tap on home quick access return
+    //   homeRobot.findQuickAccessReturns();
+    //   await homeRobot.tapReturnsQuickAccess();
 
-      //verify go to returns page
-      returnsRootRobot.verifyRootPageVisible();
-    });
+    //   //verify go to returns page
+    //   returnsRootRobot.verifyRootPageVisible();
+    // });
 
     testWidgets(
         'EZRX-T24 | Verify click on Payments action in Top navigation menu',
@@ -866,9 +1084,6 @@ void main() {
       productRobot.verifyPageVisible();
 
       productRobot.verifyComboOfferLabel();
-      productDetailRobot.verifyPage();
-      productDetailRobot.verifyComboOfferLabel();
-      await productDetailRobot.tapBackButton();
 
       await productRobot.openFilterProductScreen();
       filterSortProductRobot.verifyCheckboxCheckedShowProduct(
@@ -1490,6 +1705,7 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productRobot.searchWithKeyboardAction(comboMaterialNumber);
       await productSuggestionRobot.tapSearchResult(comboMaterialNumber);
+      await tester.pump(Durations.medium1);
       productDetailRobot.verifyComboOfferLabel();
       await productDetailRobot.verifyAndTapGetComboDeal();
       comboDetailRobot.verifyPage();
@@ -2066,9 +2282,7 @@ void main() {
   });
 
   group('Combo detail -', () {
-    const comboMaterialNumber = '21223399';
-
-    Future<void> openAndVerifyComboDetail(
+    Future<void> openHomeAndComboDetail(
       WidgetTester tester, {
       required String materialNumber,
       String? otherShipToCode,
@@ -2079,23 +2293,17 @@ void main() {
       );
 
       await commonRobot.navigateToScreen(NavigationTab.products);
-      await productRobot.openSearchProductScreen();
-      await productRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
-      productDetailRobot.verifyComboOfferLabel();
-      await productDetailRobot.verifyAndTapGetComboDeal();
-      comboDetailRobot.verifyPage();
+      await browseProductFromEmptyCart();
 
-      comboDetailRobot.verifyComboDetailInformation();
-      comboDetailRobot.verifySearchBar();
+      await openAndVerifyComboDetail(tester, materialNumber: materialNumber);
     }
 
     testWidgets(
         'EZRX-T1395 | Verify Search Product by inputting keyword contains Product name Combo Detail',
         (tester) async {
-      await openAndVerifyComboDetail(
+      await openHomeAndComboDetail(
         tester,
-        materialNumber: comboMaterialNumber,
+        materialNumber: comboK1MaterialNumber,
       );
 
       await comboDetailRobot
@@ -2107,9 +2315,9 @@ void main() {
     testWidgets(
         'EZRX-T1396 | Verify Search Product by inputting keyword contains Product code Combo Detail',
         (tester) async {
-      await openAndVerifyComboDetail(
+      await openHomeAndComboDetail(
         tester,
-        materialNumber: comboMaterialNumber,
+        materialNumber: comboK1MaterialNumber,
       );
 
       await comboDetailRobot
@@ -2121,9 +2329,9 @@ void main() {
     testWidgets(
         'EZRX-T1397 | Verify Search Product by inputting keyword not contain Product name/code Combo Detail',
         (tester) async {
-      await openAndVerifyComboDetail(
+      await openHomeAndComboDetail(
         tester,
-        materialNumber: comboMaterialNumber,
+        materialNumber: comboK1MaterialNumber,
       );
 
       await comboDetailRobot
@@ -2135,44 +2343,48 @@ void main() {
     testWidgets(
         'EZRX-T1676 | Verify action click on decrease quantity cannot smaller than min quantity',
         (tester) async {
-      await openAndVerifyComboDetail(
+      await openHomeAndComboDetail(
         tester,
-        materialNumber: comboMaterialNumber,
+        materialNumber: comboK1MaterialNumber,
       );
 
       await comboDetailRobot.decreaseMaterialQuantity(
-        materialNumber: comboMaterialNumber,
+        materialNumber: comboK1MaterialNumber,
         currentQuantity: 5,
         enableDecreaseButton: false,
       );
 
       await comboDetailRobot.increaseMaterialQuantity(
-        materialNumber: comboMaterialNumber,
+        materialNumber: comboK1MaterialNumber,
         currentQuantity: 5,
       );
 
       await comboDetailRobot.decreaseMaterialQuantity(
-        materialNumber: comboMaterialNumber,
+        materialNumber: comboK1MaterialNumber,
         currentQuantity: 6,
       );
 
       await comboDetailRobot.decreaseMaterialQuantity(
-        materialNumber: comboMaterialNumber,
+        materialNumber: comboK1MaterialNumber,
         currentQuantity: 5,
         enableDecreaseButton: false,
       );
     });
 
-    group('K1', () {
-      // K1
-      const comboK1MaterialNumber = '21223399';
-      const comboK1MaterialExpiryDate = '01 May 2030';
-      const comboK1FixedMaterialName = 'DALACIN T SOL. 1% solu 1% 10ml 10X1';
-      const comboK1FixedMaterialPrincipalName = 'Pfizer Global Trading (VC)';
+    testWidgets('EZRX-T1786 | Verify Add Combo to Cart', (tester) async {
+      await openHomeAndComboDetail(
+        tester,
+        materialNumber: comboK1MaterialNumber,
+      );
 
+      await comboDetailRobot.tapToAddToCartButton();
+      comboDetailRobot.verifyEditComboDetailEligibility();
+    });
+
+    group('K1', () {
       testWidgets('EZRX-T1289 | Verify Combo K1 via Product detail',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK1MaterialNumber,
         );
@@ -2180,8 +2392,8 @@ void main() {
         await comboDetailRobot.verifyComboMaterialInformation(
           materialNumberMatNo: comboK1MaterialNumber,
           expiryDate: comboK1MaterialExpiryDate,
-          materialName: comboK1FixedMaterialName,
-          materialManufacturer: comboK1FixedMaterialPrincipalName,
+          materialName: comboK1MaterialName,
+          materialManufacturer: comboK1MaterialPrincipalName,
         );
 
         comboDetailRobot.verifyComboK1Displayed();
@@ -2189,7 +2401,7 @@ void main() {
 
       testWidgets('EZRX-T1391 | Verify Combo Deal Eligible on Combo K1',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK1MaterialNumber,
         );
@@ -2201,22 +2413,9 @@ void main() {
     });
 
     group('K2.1', () {
-      // K2.1
-      const comboK21FixedMaterialNumber = '21223394';
-      const comboK21FixedMaterialName = "ALDACTONE 25MG 10x10 10x10' 25mg 10";
-      const comboK21FixedMaterialPrincipalName = 'Pfizer Global Trading (VC)';
-      const comboK21FixedMaterialExpiryDate = '28 Jun 2030';
-
-      const comboK21OptionalMaterialNumber = '21223409';
-      const comboK21OptionalMaterialName =
-          'NEURONTIN CAP 300 MG Capsul 300mg 3';
-      const comboK21OptionalMaterialPrincipalName =
-          'Pfizer Global Trading (VC)';
-      const comboK21OptionalMaterialExpiryDate = '31 Oct 2030';
-
       testWidgets('EZRX-T1380 | Verify Combo K2.1 via Product detail',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK21FixedMaterialNumber,
         );
@@ -2241,7 +2440,7 @@ void main() {
 
       testWidgets('EZRX-T1393 | Verify Combo Deal Eligible on Combo K2.1',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK21FixedMaterialNumber,
         );
@@ -2256,16 +2455,9 @@ void main() {
     });
 
     group('K2.2', () {
-      // K2.2
-      const comboK22MaterialNumber = '23340300';
-      const comboK22MaterialName = 'SAFORELLE SA   250ml';
-      const comboK22MaterialPrincipalName = 'DEPOMEX CO.,LTD';
-      const comboK22MaterialExpiryDate = '22 Aug 2026';
-      const minQty = 2;
-
       testWidgets('EZRX-T1715 | Verify Combo K2.2 via Product detail',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK22MaterialNumber,
         );
@@ -2278,12 +2470,14 @@ void main() {
           materialName: comboK22MaterialName,
           materialManufacturer: comboK22MaterialPrincipalName,
         );
-        comboDetailRobot.verifyComboK22Displayed(minQty: minQty.toString());
+        comboDetailRobot.verifyComboK22Displayed(
+          minQty: comboK22MinQty.toString(),
+        );
       });
 
       testWidgets('EZRX-T1716 | Verify Combo Best Deal Eligible on Combo K2.2',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK22MaterialNumber,
         );
@@ -2294,7 +2488,7 @@ void main() {
 
         await comboDetailRobot.changeMaterialQuantity(
           materialNumber: comboK22MaterialNumber,
-          quantity: minQty,
+          quantity: comboK22MinQty,
         );
         comboDetailRobot.verifyAddToCartButtonEnableDisplayed();
         comboDetailRobot.verifyBestDealDisplay();
@@ -2302,22 +2496,9 @@ void main() {
     });
 
     group('K3', () {
-      // K3
-      const comboK3MaterialNumberFirstItem = '23340227';
-      const comboK3MaterialName = 'KINAL GEL 500MG/50MG BT 10x10';
-      const comboK3MaterialPrincipalName = 'PharmaProduct Manufacturing';
-      const comboK3MaterialExpiryDate = '24 May 2030';
-
-      const comboK3MaterialNumberSecondItem = '23340216';
-      const comboK3MaterialNumberThirdItem = '23340114';
-      const comboK3MaterialNumberFourItem = '23340187';
-
-      const nextDealDiscount = '13';
-      const nextDealUnit = '1';
-
       testWidgets('EZRX-T1381 | Verify Combo K3 via Product detail',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK3MaterialNumberFirstItem,
         );
@@ -2335,7 +2516,7 @@ void main() {
 
       testWidgets('EZRX-T1394 | Verify Combo Next Deal Eligible on Combo K3',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK3MaterialNumberFirstItem,
         );
@@ -2350,14 +2531,14 @@ void main() {
         comboDetailRobot.verifyAddToCartButtonEnableDisplayed();
         comboDetailRobot.verifyNextDealDisplay(
           scheme: ComboDealScheme.k3,
-          unit: nextDealUnit,
-          discount: nextDealDiscount,
+          unit: comboK3NextDealUnit,
+          discount: comboK3NextDealDiscount,
         );
       });
 
       testWidgets('EZRX-T1394 | Verify Combo Best Deal Eligible on Combo K3',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK3MaterialNumberFirstItem,
         );
@@ -2371,8 +2552,8 @@ void main() {
         );
         comboDetailRobot.verifyNextDealDisplay(
           scheme: ComboDealScheme.k3,
-          unit: nextDealUnit,
-          discount: nextDealDiscount,
+          unit: comboK3NextDealUnit,
+          discount: comboK3NextDealDiscount,
         );
 
         comboDetailRobot.verifyAddToCartButtonEnableDisplayed();
@@ -2387,21 +2568,9 @@ void main() {
     });
 
     group('K4.1', () {
-      // K4.1
-      const comboK41MaterialNumber = '21130719';
-      const comboK41MaterialName = 'DUPHASTON TAB';
-      const comboK41MaterialPrincipalName = 'Abbott Products Operations A.G';
-      const comboK41MaterialExpiryDate = '27 Apr 2050';
-      const minQty = 5;
-      const bestDealQuantity = 20;
-
-      const nextDealUnit = bestDealQuantity - minQty;
-
-      const nextDealDiscount = '10';
-
       testWidgets('EZRX-T1718 | Verify Combo K4.1 via Product detail',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK41MaterialNumber,
         );
@@ -2414,12 +2583,14 @@ void main() {
           materialName: comboK41MaterialName,
           materialManufacturer: comboK41MaterialPrincipalName,
         );
-        comboDetailRobot.verifyComboK41Displayed(minQty: minQty.toString());
+        comboDetailRobot.verifyComboK41Displayed(
+          minQty: comboK41MinQty.toString(),
+        );
       });
 
       testWidgets('EZRX-T1750 | Verify Combo Next Deal Eligible on Combo K4.1',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK41MaterialNumber,
         );
@@ -2433,19 +2604,19 @@ void main() {
         comboDetailRobot.verifyAddToCartButtonDisableDisplayed();
         await comboDetailRobot.changeMaterialQuantity(
           materialNumber: comboK41MaterialNumber,
-          quantity: minQty,
+          quantity: comboK41SecondDealQuantity,
         );
         comboDetailRobot.verifyAddToCartButtonEnableDisplayed();
         comboDetailRobot.verifyNextDealDisplay(
           scheme: ComboDealScheme.k4,
-          unit: nextDealUnit.toString(),
-          discount: nextDealDiscount,
+          unit: comboK41NextDealUnit.toString(),
+          discount: comboK41NextDealDiscount,
         );
       });
 
       testWidgets('EZRX-T1719 | Verify Combo Best Deal Eligible on Combo K4.1',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK41MaterialNumber,
         );
@@ -2459,38 +2630,26 @@ void main() {
         comboDetailRobot.verifyAddToCartButtonDisableDisplayed();
         await comboDetailRobot.changeMaterialQuantity(
           materialNumber: comboK41MaterialNumber,
-          quantity: minQty,
+          quantity: comboK41SecondDealQuantity,
         );
         comboDetailRobot.verifyAddToCartButtonEnableDisplayed();
         comboDetailRobot.verifyNextDealDisplay(
           scheme: ComboDealScheme.k4,
-          unit: nextDealUnit.toString(),
-          discount: nextDealDiscount,
+          unit: comboK41NextDealUnit.toString(),
+          discount: comboK41NextDealDiscount,
         );
         await comboDetailRobot.changeMaterialQuantity(
           materialNumber: comboK41MaterialNumber,
-          quantity: bestDealQuantity,
+          quantity: comboK41BestDealQuantity,
         );
         comboDetailRobot.verifyBestDealDisplay();
       });
     });
 
     group('K4.2', () {
-      // K4.2
-      const comboK42MaterialNumber = '21223395';
-      const comboK42MaterialName = "CARDURA 2MG 10X10'S Tablet 2mg 10X1";
-      const comboK42MaterialPrincipalName = 'Pfizer Global Trading (VC)';
-      const comboK42MaterialExpiryDate = 'NA';
-
-      const nextDealMinQty = 50;
-      const bestDealMinQty = 100;
-
-      //TODO: Remove this shipto code when test data provided for K4.2 and K5
-      const otherShipToCode = '0071262518';
-
       testWidgets('EZRX-T1386 | Verify Combo K4.2 via Product detail',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK42MaterialNumber,
           otherShipToCode: otherShipToCode,
@@ -2509,7 +2668,7 @@ void main() {
 
       testWidgets('EZRX-T1398 | Verify Combo Next Deal Eligible on Combo K4.2',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK42MaterialNumber,
           otherShipToCode: otherShipToCode,
@@ -2524,19 +2683,19 @@ void main() {
         comboDetailRobot.verifyAddToCartButtonDisableDisplayed();
         await comboDetailRobot.changeMaterialQuantity(
           materialNumber: comboK42MaterialNumber,
-          quantity: nextDealMinQty,
+          quantity: comboK42NextDealMinQty,
         );
         comboDetailRobot.verifyAddToCartButtonEnableDisplayed();
         comboDetailRobot.verifyNextDealDisplay(
           scheme: ComboDealScheme.k42,
-          unit: nextDealMinQty.toString(),
+          unit: comboK42NextDealMinQty.toString(),
           discount: '',
         );
       });
 
       testWidgets('EZRX-T1775 | Verify Combo Best Deal Eligible on Combo K4.2',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK42MaterialNumber,
           otherShipToCode: otherShipToCode,
@@ -2551,42 +2710,26 @@ void main() {
         comboDetailRobot.verifyAddToCartButtonDisableDisplayed();
         await comboDetailRobot.changeMaterialQuantity(
           materialNumber: comboK42MaterialNumber,
-          quantity: nextDealMinQty,
+          quantity: comboK42NextDealMinQty,
         );
         comboDetailRobot.verifyAddToCartButtonEnableDisplayed();
         comboDetailRobot.verifyNextDealDisplay(
           scheme: ComboDealScheme.k42,
-          unit: nextDealMinQty.toString(),
+          unit: comboK42NextDealMinQty.toString(),
           discount: '',
         );
         await comboDetailRobot.changeMaterialQuantity(
           materialNumber: comboK42MaterialNumber,
-          quantity: bestDealMinQty,
+          quantity: comboK42BestDealMinQty,
         );
         comboDetailRobot.verifyBestDealDisplay();
       });
     });
 
     group('K5', () {
-      // K5
-      const comboK5MaterialNumber = '21222875';
-      const comboK5MaterialName = 'ZPKH Batch Managed Mat';
-      const comboK5MaterialPrincipalName = 'Abbott Products Operations A.G';
-      const comboK5MaterialExpiryDate = '30 Apr 2050';
-
-      const materialPrice = 20;
-      const nextDealMinQty = 3;
-      const bestDealMinQty = 5;
-
-      const nextDealDiscount = 9;
-
-      const bestDealMinAmount = 100;
-      //TODO: Remove this shipto code when test data provided for K4.2 and K5
-      const otherShipToCode = '0071262518';
-
       testWidgets('EZRX-T1387 | Verify Combo K5 via Product detail',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK5MaterialNumber,
           otherShipToCode: otherShipToCode,
@@ -2604,7 +2747,7 @@ void main() {
 
       testWidgets('EZRX-T1399 | Verify Combo Next Deal Eligible on Combo K5',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK5MaterialNumber,
           otherShipToCode: otherShipToCode,
@@ -2615,21 +2758,21 @@ void main() {
         comboDetailRobot.verifyAddToCartButtonDisableDisplayed();
         await comboDetailRobot.changeMaterialQuantity(
           materialNumber: comboK5MaterialNumber,
-          quantity: nextDealMinQty,
+          quantity: comboK5NextDealMinQty,
         );
         comboDetailRobot.verifyAddToCartButtonEnableDisplayed();
-        const nextDealAmountNeedMore =
-            (bestDealMinAmount - (nextDealMinQty * materialPrice));
+        const nextDealAmountNeedMore = comboK5BestDealMinAmount -
+            (comboK5NextDealMinQty * comboK5MaterialPrice);
         comboDetailRobot.verifyNextDealDisplay(
           scheme: ComboDealScheme.k5,
           unit: nextDealAmountNeedMore.toDouble().toString(),
-          discount: nextDealDiscount.toString(),
+          discount: comboK5NextDealDiscount.toString(),
         );
       });
 
       testWidgets('EZRX-T1776 | Verify Combo Best Deal Eligible on Combo K5',
           (tester) async {
-        await openAndVerifyComboDetail(
+        await openHomeAndComboDetail(
           tester,
           materialNumber: comboK5MaterialNumber,
           otherShipToCode: otherShipToCode,
@@ -2640,22 +2783,810 @@ void main() {
         comboDetailRobot.verifyAddToCartButtonDisableDisplayed();
         await comboDetailRobot.changeMaterialQuantity(
           materialNumber: comboK5MaterialNumber,
-          quantity: nextDealMinQty,
+          quantity: comboK5NextDealMinQty,
         );
         comboDetailRobot.verifyAddToCartButtonEnableDisplayed();
-        const nextDealAmountNeedMore =
-            bestDealMinAmount - (nextDealMinQty * materialPrice);
+        const nextDealAmountNeedMore = comboK5BestDealMinAmount -
+            (comboK5NextDealMinQty * comboK5MaterialPrice);
         comboDetailRobot.verifyNextDealDisplay(
           scheme: ComboDealScheme.k5,
           unit: nextDealAmountNeedMore.toDouble().toString(),
-          discount: nextDealDiscount.toString(),
+          discount: comboK5NextDealDiscount.toString(),
         );
 
         await comboDetailRobot.changeMaterialQuantity(
           materialNumber: comboK5MaterialNumber,
-          quantity: bestDealMinQty,
+          quantity: comboK5BestDealQuantity,
         );
         comboDetailRobot.verifyBestDealDisplay();
+      });
+    });
+  });
+
+  group('Cart -', () {
+    testWidgets('EZRX-T98 | Verify material in cart + change material qty',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productDetailRobot.tapAddToCart();
+      productDetailRobot.verifyCartButtonQty(1);
+      await productDetailRobot.tapCartButton();
+
+      //verify
+      cartRobot.verifyClearCartButton();
+      await cartRobot.verifyMaterial(materialNumber);
+      cartRobot.verifyManufacturerName(materialPrincipalName);
+      cartRobot.verifyMaterialNumber(materialNumber);
+      cartRobot.verifyMaterialImage(materialNumber);
+      cartRobot.verifyMaterialQty(materialNumber, 1);
+      cartRobot.verifyMaterialDescription(materialNumber, materialName);
+      cartRobot.verifyMaterialExpiryDateAndBatch(
+        materialNumber,
+        materialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await cartRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
+      cartRobot.verifyMaterialUnitPrice(
+        materialNumber,
+        materialUnitPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyMaterialTotalPrice(
+        materialNumber,
+        materialUnitPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyCartQty(1);
+      cartRobot.verifyQtyOnAppBar(1);
+      cartRobot.verifyCartShipToAddress(shipToAddress);
+      cartRobot.verifyCartTotalPrice(
+        materialUnitPrice.includeTax(taxForMaterial).priceDisplay(currency),
+      );
+      cartRobot.verifyCheckoutButton();
+
+      var totalPrice = materialUnitPrice;
+      await cartRobot.increaseMaterialQty(materialNumber);
+      totalPrice = materialUnitPrice * 2;
+      cartRobot.verifyMaterialQty(materialNumber, 2);
+      cartRobot.verifyMaterialTotalPrice(
+        materialNumber,
+        totalPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyCartTotalPrice(
+        totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
+      );
+
+      await cartRobot.changeMaterialQty(materialNumber, 10);
+      totalPrice = materialUnitPrice * 10;
+      cartRobot.verifyMaterialQty(materialNumber, 10);
+      cartRobot.verifyMaterialTotalPrice(
+        materialNumber,
+        totalPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyCartTotalPrice(
+        totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
+      );
+
+      await cartRobot.decreaseMaterialQty(materialNumber);
+      totalPrice = materialUnitPrice * 9;
+      cartRobot.verifyMaterialQty(materialNumber, 9);
+      cartRobot.verifyMaterialTotalPrice(
+        materialNumber,
+        totalPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyCartTotalPrice(
+        totalPrice.includeTax(taxForMaterial).priceDisplay(currency),
+      );
+    });
+
+    testWidgets('EZRX-T101 | Verify material on offer with bonus in cart',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot
+          .searchWithKeyboardAction(bonusMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(bonusMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(bonusMaterialNumber);
+      cartRobot.verifyMaterialQty(bonusMaterialNumber, 1);
+      cartRobot.verifyMaterialOfferTag(bonusMaterialNumber);
+      await cartRobot.changeMaterialQty(
+        bonusMaterialNumber,
+        bonusMaterialNumberTierQty,
+      );
+      await cartRobot.verifyBonusMaterial(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+      );
+      await cartRobot.verifyBonusMaterialQty(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+        1,
+      );
+      cartRobot.verifyBonusMaterialFreeLabel(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+      );
+      cartRobot.verifyBonusMaterialTag(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+      );
+      cartRobot.verifyBonusMaterialDescription(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+        bonusMaterialName,
+      );
+      cartRobot.verifyBonusItemExpiryDateAndBatch(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+        bonusMaterialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await cartRobot.tapBonusItemExpiryDateInfoIcon(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+      );
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
+      cartRobot.verifyBonusMaterialImage(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+      );
+      var newBonusQty = 2;
+      await cartRobot.changeMaterialQty(
+        bonusMaterialNumber,
+        bonusMaterialNumberTierQty * newBonusQty,
+      );
+      await cartRobot.verifyBonusMaterialQty(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+        newBonusQty,
+      );
+      await cartRobot.decreaseBonusMaterialQty(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+      );
+      newBonusQty--;
+      await cartRobot.verifyBonusMaterialQty(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+        newBonusQty,
+      );
+      await cartRobot.increaseBonusMaterialQty(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+      );
+      newBonusQty++;
+      await cartRobot.verifyBonusMaterialQty(
+        bonusMaterialNumber,
+        bonusMaterialNumber,
+        newBonusQty,
+      );
+    });
+
+    testWidgets('EZRX-T108 | Verify remove item in cart', (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(materialNumber);
+      await cartRobot.swipeMaterialToDelete(materialNumber);
+      await cartRobot.verifyClearCartSuccessMessage();
+      cartRobot.verifyNoRecordFound();
+      await cartRobot.tapBrowseProductButton();
+      await productRobot.openSearchProductScreen();
+    });
+
+    testWidgets('EZRX-T113 | Verify clear cart', (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapBackButton();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(bonusMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(bonusMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      cartRobot.verifyCartQty(2);
+      await cartRobot.tapClearCartButton();
+      await cartRobot.verifyClearCartSuccessMessage();
+      cartRobot.verifyNoRecordFound();
+      cartRobot.verifyQtyOnAppBar(0);
+      await cartRobot.tapBrowseProductButton();
+      productRobot.verifyPageVisible();
+    });
+
+    testWidgets('EZRX-T102 | Verify add bonus/sample item in cart',
+        (tester) async {
+      const maxQty = 99999;
+      const validQty = 10;
+      const materialIndex = 0;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify display
+      await productSuggestionRobot
+          .searchWithKeyboardAction(bonusMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(bonusMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(bonusMaterialNumber);
+      cartRobot.verifyMaterialBonusSampleButton(bonusMaterialNumber);
+      await cartRobot.tapMaterialBonusSampleButton(bonusMaterialNumber);
+      bonusSampleRobot.verifySheet(isVisible: true);
+      bonusSampleRobot.verifySearchBar();
+      await bonusSampleRobot.searchWithKeyboardAction(bonusMaterialNumber);
+      bonusSampleRobot.verifyBonusSampleItems();
+      bonusSampleRobot.verifyCloseButton();
+      await bonusSampleRobot.tapCloseButton();
+      bonusSampleRobot.verifySheet(isVisible: false);
+      //Happy case when adding
+      await cartRobot.tapMaterialBonusSampleButton(bonusMaterialNumber);
+      await bonusSampleRobot.searchWithKeyboardAction(bonusMaterialName);
+      final bonusSampleMaterialNumber =
+          bonusSampleRobot.getBonusSampleMaterialNumber(materialIndex);
+      final bonusSampleMaterialDescription =
+          bonusSampleRobot.getBonusSampleMaterialDescription(materialIndex);
+      await bonusSampleRobot.tapSubmitButton(materialIndex);
+      bonusSampleRobot.verifyEmptyQtyMessage(isVisible: true);
+      await bonusSampleRobot.enterBonusSampleQty(materialIndex, validQty);
+      await bonusSampleRobot.tapSubmitButton(materialIndex);
+      bonusSampleRobot.verifyEmptyQtyMessage(isVisible: false);
+      //Unhappy case when adding
+      await bonusSampleRobot.enterBonusSampleQty(materialIndex, maxQty);
+      await bonusSampleRobot.tapSubmitButton(materialIndex);
+      bonusSampleRobot.verifyInvalidQtyMessage();
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await tester.pumpAndSettle();
+      await bonusSampleRobot.tapCloseButton();
+      bonusSampleRobot.verifySheet(isVisible: false);
+      await cartRobot.verifyBonusMaterial(
+        bonusMaterialNumber,
+        bonusSampleMaterialNumber,
+      );
+      await cartRobot.verifyBonusMaterialQty(
+        bonusMaterialNumber,
+        bonusSampleMaterialNumber,
+        validQty,
+      );
+      cartRobot.verifyBonusMaterialDescription(
+        bonusMaterialNumber,
+        bonusSampleMaterialNumber,
+        bonusSampleMaterialDescription,
+      );
+      cartRobot.verifyBonusItemExpiryDateAndBatch(
+        bonusMaterialNumber,
+        bonusSampleMaterialNumber,
+        materialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await cartRobot.tapBonusItemExpiryDateInfoIcon(
+        bonusMaterialNumber,
+        bonusSampleMaterialNumber,
+      );
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
+
+      cartRobot.verifyBonusMaterialFreeLabel(
+        bonusMaterialNumber,
+        bonusSampleMaterialNumber,
+      );
+      cartRobot.verifyBonusMaterialTag(
+        bonusMaterialNumber,
+        bonusSampleMaterialNumber,
+      );
+      cartRobot.verifyBonusMaterialImage(
+        bonusMaterialNumber,
+        bonusSampleMaterialNumber,
+      );
+    });
+
+    testWidgets('EZRX-T105 | Verify counter offer price with remark',
+        (tester) async {
+      const newUnitPrice = materialUnitPrice + 100;
+      const remark = 'AUTO-TEST';
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(materialNumber);
+      cartRobot.verifyMaterialUnitPrice(
+        materialNumber,
+        materialUnitPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyMaterialCounterOfferButton(materialNumber);
+      await cartRobot.tapMaterialCounterOfferButton(materialNumber);
+      requestCounterOfferRobot.verifySheet(isVisible: true);
+      requestCounterOfferRobot.verifyListPrice(
+        materialUnitPrice.priceDisplay(currency),
+        isVisible: false,
+      );
+      requestCounterOfferRobot.verifyOfferPrice(
+        materialUnitPrice.priceDisplay(currency),
+      );
+      requestCounterOfferRobot.verifyPriceTextField();
+      requestCounterOfferRobot.verifyPriceText('');
+      requestCounterOfferRobot.verifyRemarkTextField();
+      requestCounterOfferRobot.verifyRemarkText('');
+      requestCounterOfferRobot.verifyRemarkMaximumLengthMessage();
+      requestCounterOfferRobot.verifyConfirmButton();
+      requestCounterOfferRobot.verifyCancelButton();
+      await requestCounterOfferRobot.tapCancelButton();
+      requestCounterOfferRobot.verifySheet(isVisible: false);
+      cartRobot.verifyMaterialUnitPrice(
+        materialNumber,
+        materialUnitPrice.priceDisplay(currency),
+      );
+
+      await cartRobot.tapMaterialCounterOfferButton(materialNumber);
+      await requestCounterOfferRobot.tapConfirmButton();
+      requestCounterOfferRobot.verifyPriceTextEmptyMessage();
+      await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
+      await requestCounterOfferRobot.enterRemark(remark);
+      await requestCounterOfferRobot.tapConfirmButton();
+      requestCounterOfferRobot.verifySheet(isVisible: false);
+      cartRobot.verifyMaterialUnitPrice(
+        materialNumber,
+        newUnitPrice.priceDisplay(currency),
+      );
+      await cartRobot.tapMaterialCounterOfferButton(materialNumber);
+      requestCounterOfferRobot
+          .verifyOfferPrice(newUnitPrice.priceDisplay(currency));
+      requestCounterOfferRobot.verifyPriceText(newUnitPrice.toStringAsFixed(2));
+      requestCounterOfferRobot.verifyRemarkText(remark);
+    });
+
+    testWidgets('EZRX-T114 | Verify address information in cart',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(materialNumber);
+      cartRobot.verifyCartQty(1);
+      await cartRobot.tapShowShipToAddressDetail();
+      cartDeliveryAddressDetailRobot.verifySheet(isVisible: true);
+      cartDeliveryAddressDetailRobot.verifyCustomerCode(customerCode);
+      cartDeliveryAddressDetailRobot.verifyShipToCode(shipToCode);
+      await cartDeliveryAddressDetailRobot.tapCloseButton();
+      cartDeliveryAddressDetailRobot.verifySheet(isVisible: false);
+    });
+
+    testWidgets('EZRX-T97 | Verify price summary in cart', (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productDetailRobot.tapAddToCart();
+      productDetailRobot.verifyCartButtonQty(1);
+      await productDetailRobot.tapCartButton();
+
+      //verify
+      cartRobot.verifyCartTotalPrice(
+        materialUnitPrice.includeTax(taxForMaterial).priceDisplay(currency),
+      );
+      await cartRobot.tapShowPriceSummary();
+      orderPriceSummaryRobot.verifySheet(isVisible: true);
+      orderPriceSummaryRobot
+          .verifySubTotalLabel(materialUnitPrice.priceDisplay(currency));
+      orderPriceSummaryRobot.verifyGrandTotalLabel(
+        materialUnitPrice.includeTax(taxForMaterial).priceDisplay(currency),
+      );
+      await orderPriceSummaryRobot.tapCloseButton();
+      orderPriceSummaryRobot.verifySheet(isVisible: false);
+    });
+
+    testWidgets('EZRX-T110 | Verify cart under minimum order value',
+        (tester) async {
+      final validQty = (minOrderAmount / materialUnitPrice).ceil();
+      final validTotalPrice = materialUnitPrice * validQty;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(materialNumber);
+      cartRobot.verifyMaterialQty(materialNumber, 1);
+      cartRobot.verifyMaterialUnitPrice(
+        materialNumber,
+        materialUnitPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyMaterialTotalPrice(
+        materialNumber,
+        materialUnitPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyCartTotalPrice(
+        materialUnitPrice.includeTax(taxForMaterial).priceDisplay(currency),
+      );
+      await cartRobot.tapCheckoutButton();
+      cartRobot.verifyMOVWarningMessage(
+        minOrderAmount.priceDisplay(currency),
+        isVisible: true,
+      );
+      await cartRobot.changeMaterialQty(materialNumber, validQty);
+      cartRobot.verifyMaterialQty(materialNumber, validQty);
+      cartRobot.verifyMaterialTotalPrice(
+        materialNumber,
+        validTotalPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyCartTotalPrice(
+        validTotalPrice.includeTax(taxForMaterial).priceDisplay(currency),
+      );
+      cartRobot.verifyMOVWarningMessage(
+        minOrderAmount.priceDisplay(currency),
+        isVisible: false,
+      );
+    });
+
+    testWidgets('EZRX-T115 | Verify checkout cart when having pre-order items',
+        (tester) async {
+      const qty = 100;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot
+          .searchWithKeyboardAction(oosPreOrderMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(oosPreOrderMaterialNumber);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(oosPreOrderMaterialNumber);
+      cartRobot.verifyMaterialOOSPreOrderStatus(oosPreOrderMaterialNumber);
+      await cartRobot.changeMaterialQty(oosPreOrderMaterialNumber, qty);
+      await cartRobot.tapCheckoutButton();
+      oosPreOrderRobot.verifySheet(isVisible: true);
+      oosPreOrderRobot.verifyCancelButton();
+      oosPreOrderRobot.verifyContinueButton();
+      oosPreOrderRobot.verifyWarningMessage();
+      oosPreOrderRobot.verifyMaterial(oosPreOrderMaterialNumber, qty);
+      await oosPreOrderRobot.tapCancelButton();
+      cartRobot.verifyPage();
+      oosPreOrderRobot.verifySheet(isVisible: false);
+      await cartRobot.tapCheckoutButton();
+      oosPreOrderRobot.verifyMaterial(oosPreOrderMaterialNumber, qty);
+      oosPreOrderRobot.verifyExpiryDateAndBatch(
+        oosPreOrderMaterialNumber,
+        oosPreOrderMaterialStockInfo,
+        isBatchNumberVisible: false,
+      );
+      await oosPreOrderRobot.tapExpiryDateInfoIcon(oosPreOrderMaterialNumber);
+      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
+      await oosPreOrderRobot.tapContinueButton();
+      checkoutRobot.verifyPage();
+    });
+
+    group('Combo - ', () {
+      testWidgets('EZRX-T1862 | Verify Combo K1 in cart', (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.products);
+        await browseProductFromEmptyCart();
+
+        await addComboAndOpenCart(
+          tester,
+          materialNumber: comboK1MaterialNumber,
+          scheme: ComboDealScheme.k1,
+        );
+
+        cartRobot.verifyComboHeaderAndFooter(
+          priceComboDealId: comboDealIdK1,
+          comboConditionFinder: comboDetailRobot.getComboConditionMessageFinder(
+            scheme: ComboDealScheme.k1,
+            unit: '',
+          ),
+          comboTitleFinder: comboDetailRobot.getComboTitleFinder(
+            scheme: ComboDealScheme.k1,
+          ),
+          scheme: ComboDealScheme.k1,
+        );
+        cartRobot.verifyComboMaterial(
+          priceComboDealId: comboDealIdK1,
+          materialNumber: comboK1MaterialNumber,
+          materialName: comboK1MaterialName,
+          principalName: comboK1MaterialPrincipalName,
+          scheme: ComboDealScheme.k1,
+        );
+      });
+
+      testWidgets('EZRX-T1868 | Verify Combo K2.1 in cart', (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.products);
+        await browseProductFromEmptyCart();
+
+        await addComboAndOpenCart(
+          tester,
+          materialNumber: comboK21FixedMaterialNumber,
+          scheme: ComboDealScheme.k21,
+        );
+
+        cartRobot.verifyComboHeaderAndFooter(
+          priceComboDealId: comboDealIdK21,
+          comboConditionFinder: comboDetailRobot.getComboConditionMessageFinder(
+            scheme: ComboDealScheme.k21,
+            unit: '',
+          ),
+          comboTitleFinder: comboDetailRobot.getComboTitleFinder(
+            scheme: ComboDealScheme.k21,
+          ),
+          scheme: ComboDealScheme.k21,
+        );
+        cartRobot.verifyComboMaterial(
+          priceComboDealId: comboDealIdK21,
+          materialNumber: comboK21FixedMaterialNumber,
+          materialName: comboK21FixedMaterialName,
+          principalName: comboK21FixedMaterialPrincipalName,
+          scheme: ComboDealScheme.k21,
+        );
+      });
+
+      testWidgets('EZRX-T1869 | Verify Combo K2.2 in cart', (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.products);
+        await browseProductFromEmptyCart();
+
+        await addComboAndOpenCart(
+          tester,
+          materialNumber: comboK22MaterialNumber,
+          scheme: ComboDealScheme.k22,
+        );
+
+        cartRobot.verifyComboHeaderAndFooter(
+          priceComboDealId: comboDealIdK22,
+          comboConditionFinder: comboDetailRobot.getComboConditionMessageFinder(
+            scheme: ComboDealScheme.k22,
+            unit: comboK22MinQty.toString(),
+          ),
+          comboTitleFinder: comboDetailRobot.getComboTitleFinder(
+            scheme: ComboDealScheme.k22,
+          ),
+          scheme: ComboDealScheme.k22,
+        );
+        cartRobot.verifyComboMaterial(
+          priceComboDealId: comboDealIdK22,
+          materialNumber: comboK22MaterialNumber,
+          materialName: comboK22MaterialName,
+          principalName: comboK22MaterialPrincipalName,
+          scheme: ComboDealScheme.k22,
+        );
+      });
+
+      testWidgets('EZRX-T1870 | Verify Combo K3 in cart', (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.products);
+        await browseProductFromEmptyCart();
+
+        await addComboAndOpenCart(
+          tester,
+          materialNumber: comboK3MaterialNumberFirstItem,
+          scheme: ComboDealScheme.k3,
+        );
+
+        cartRobot.verifyComboHeaderAndFooter(
+          priceComboDealId: comboDealIdK3,
+          comboConditionFinder: comboDetailRobot.getComboConditionMessageFinder(
+            scheme: ComboDealScheme.k3,
+            unit: '',
+          ),
+          comboTitleFinder: comboDetailRobot.getComboTitleFinder(
+            scheme: ComboDealScheme.k3,
+          ),
+          scheme: ComboDealScheme.k3,
+        );
+        cartRobot.verifyComboMaterial(
+          priceComboDealId: comboDealIdK3,
+          materialNumber: comboK3MaterialNumberFirstItem,
+          materialName: comboK3MaterialName,
+          principalName: comboK3MaterialPrincipalName,
+          scheme: ComboDealScheme.k3,
+        );
+      });
+
+      testWidgets('EZRX-T1876 | Verify Combo K4.1 in cart', (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.products);
+        await browseProductFromEmptyCart();
+
+        await addComboAndOpenCart(
+          tester,
+          materialNumber: comboK41MaterialNumber,
+          scheme: ComboDealScheme.k4,
+        );
+
+        cartRobot.verifyComboHeaderAndFooter(
+          priceComboDealId: comboDealIdK41,
+          comboConditionFinder: comboDetailRobot.getComboConditionMessageFinder(
+            scheme: ComboDealScheme.k4,
+            unit: comboK41MinQty.toString(),
+          ),
+          comboTitleFinder: comboDetailRobot.getComboTitleFinder(
+            scheme: ComboDealScheme.k4,
+          ),
+          scheme: ComboDealScheme.k4,
+        );
+        cartRobot.verifyComboMaterial(
+          priceComboDealId: comboDealIdK41,
+          materialNumber: comboK41MaterialNumber,
+          materialName: comboK41MaterialName,
+          principalName: comboK41MaterialPrincipalName,
+          scheme: ComboDealScheme.k4,
+        );
+      });
+
+      testWidgets('EZRX-T1877 | Verify Combo K4.2 in cart', (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+          shipToCode: otherShipToCode,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.products);
+        await browseProductFromEmptyCart();
+
+        await addComboAndOpenCart(
+          tester,
+          materialNumber: comboK42MaterialNumber,
+          scheme: ComboDealScheme.k42,
+        );
+
+        cartRobot.verifyComboHeaderAndFooter(
+          priceComboDealId: comboDealIdK42,
+          comboConditionFinder: comboDetailRobot.getComboConditionMessageFinder(
+            scheme: ComboDealScheme.k42,
+            unit: comboK42NextDealMinQty.toString(),
+          ),
+          comboTitleFinder: comboDetailRobot.getComboTitleFinder(
+            scheme: ComboDealScheme.k42,
+          ),
+          scheme: ComboDealScheme.k42,
+        );
+        cartRobot.verifyComboMaterial(
+          priceComboDealId: comboDealIdK42,
+          materialNumber: comboK42MaterialNumber,
+          materialName: comboK42MaterialName,
+          principalName: comboK42MaterialPrincipalName,
+          scheme: ComboDealScheme.k42,
+        );
+      });
+
+      testWidgets('EZRX-T1879 | Verify Combo K5 in cart', (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+          shipToCode: otherShipToCode,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.products);
+        await browseProductFromEmptyCart();
+
+        await addComboAndOpenCart(
+          tester,
+          materialNumber: comboK5MaterialNumber,
+          scheme: ComboDealScheme.k5,
+        );
+
+        cartRobot.verifyComboHeaderAndFooter(
+          priceComboDealId: comboDealIdK5,
+          comboConditionFinder: comboDetailRobot.getComboConditionMessageFinder(
+            scheme: ComboDealScheme.k5,
+            unit: comboK5NextealMinAmount.toDouble().toStringAsFixed(1),
+          ),
+          comboTitleFinder: comboDetailRobot.getComboTitleFinder(
+            scheme: ComboDealScheme.k5,
+          ),
+          scheme: ComboDealScheme.k5,
+        );
+        cartRobot.verifyComboMaterial(
+          priceComboDealId: comboDealIdK5,
+          materialNumber: comboK5MaterialNumber,
+          materialName: comboK5MaterialName,
+          principalName: comboK5MaterialPrincipalName,
+          scheme: ComboDealScheme.k5,
+        );
+      });
+
+      testWidgets('EZRX-T1883 | Verify Material and Combo in cart',
+          (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.products);
+        await browseProductFromEmptyCart();
+
+        await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+        await productSuggestionRobot.tapSearchResult(materialNumber);
+        await productDetailRobot.tapAddToCart();
+        await productDetailRobot.dismissSnackbar();
+        await productDetailRobot.tapBackButton();
+
+        await addComboAndOpenCart(
+          tester,
+          materialNumber: comboK1MaterialNumber,
+          scheme: ComboDealScheme.k1,
+        );
+        cartRobot.verifyPage();
+
+        cartRobot.verifyComboHeaderAndFooter(
+          priceComboDealId: comboDealIdK1,
+          comboConditionFinder: comboDetailRobot.getComboConditionMessageFinder(
+            scheme: ComboDealScheme.k1,
+            unit: '',
+          ),
+          comboTitleFinder: comboDetailRobot.getComboTitleFinder(
+            scheme: ComboDealScheme.k1,
+          ),
+          scheme: ComboDealScheme.k1,
+        );
+        cartRobot.verifyComboMaterial(
+          priceComboDealId: comboDealIdK1,
+          materialNumber: comboK1MaterialNumber,
+          materialName: comboK1MaterialName,
+          principalName: comboK1MaterialPrincipalName,
+          scheme: ComboDealScheme.k1,
+        );
+
+        await cartRobot.verifyMaterial(materialNumber);
+        cartRobot.verifyMaterialQty(materialNumber, 1);
+        cartRobot.verifyMaterialUnitPrice(
+          materialNumber,
+          materialUnitPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialTotalPrice(
+          materialNumber,
+          materialUnitPrice.priceDisplay(currency),
+        );
       });
     });
   });

@@ -201,6 +201,7 @@ class _MaterialDetails extends StatelessWidget {
             children: [
               Text(
                 comboMaterialItem.productId.displayMatNo,
+                key: WidgetKeys.cartItemProductMaterialNumber,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -219,10 +220,12 @@ class _MaterialDetails extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             comboMaterialItem.materialDescription,
+            key: WidgetKeys.cartItemProductMaterialDescription,
             style: Theme.of(context).textTheme.labelMedium,
           ),
           Text(
             comboMaterialItem.principalData.principalName.name,
+            key: WidgetKeys.cartItemProductPrincipalName,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontSize: 10,
                   color: ZPColors.neutralsGrey1,
@@ -236,6 +239,7 @@ class _MaterialDetails extends StatelessWidget {
                           context.read<EligibilityBloc>().state.salesOrgConfigs,
                       price: comboMaterialItem.originalPriceDisplay,
                       type: PriceStyle.comboOfferPrice,
+                      key: WidgetKeys.cartComboItemProductOriginalPrice,
                     ),
                     const SizedBox(width: 4),
                     PriceComponent(
@@ -243,6 +247,7 @@ class _MaterialDetails extends StatelessWidget {
                           context.read<EligibilityBloc>().state.salesOrgConfigs,
                       price: comboMaterialItem.discountedPriceDisplay,
                       type: PriceStyle.comboOfferPriceDiscounted,
+                      key: WidgetKeys.cartComboItemProductDiscountedPrice,
                     ),
                   ],
                 )
@@ -251,6 +256,7 @@ class _MaterialDetails extends StatelessWidget {
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: comboMaterialItem.originalPriceDisplay,
                   type: PriceStyle.comboOfferPriceDiscounted,
+                  key: WidgetKeys.cartComboItemProductDiscountedPrice,
                 ),
         ],
       ),

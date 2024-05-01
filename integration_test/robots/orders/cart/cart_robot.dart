@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
@@ -1014,6 +1015,183 @@ class CartRobot {
       find.text(
         'Your cart must contain other commercial material to proceed checkout.'
             .tr(),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  Finder _comboItem(String priceComboDealId) =>
+      find.byKey(WidgetKeys.cartItemComboTile(priceComboDealId));
+
+  Finder _comboMaterialItem({
+    required String priceComboDealId,
+    required String materialNumber,
+  }) =>
+      find.descendant(
+        of: _comboItem(priceComboDealId),
+        matching: _materialItem(materialNumber),
+      );
+
+  void verifyComboHeaderAndFooter({
+    required String priceComboDealId,
+    required Finder comboTitleFinder,
+    required Finder comboConditionFinder,
+    required ComboDealScheme scheme,
+  }) {
+    // Header
+    expect(
+      _comboItem(priceComboDealId),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: _comboItem(priceComboDealId),
+        matching: find.byKey(WidgetKeys.comboOfferTag),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: _comboItem(priceComboDealId),
+        matching: find.byKey(WidgetKeys.comboOfferTag),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: _comboItem(priceComboDealId),
+        matching: find.byKey(WidgetKeys.cartItemEditCombo(priceComboDealId)),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: _comboItem(priceComboDealId),
+        matching: find.byKey(WidgetKeys.cartItemDeleteCombo(priceComboDealId)),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: _comboItem(priceComboDealId),
+        matching: comboTitleFinder,
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: _comboItem(priceComboDealId),
+        matching: comboConditionFinder,
+      ),
+      findsOneWidget,
+    );
+
+    // Footer
+    expect(
+      find.descendant(
+        of: _comboItem(priceComboDealId),
+        matching: find.text(
+          'Combo subtotal (excl. tax):'.tr(),
+        ),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: _comboItem(priceComboDealId),
+        matching: find.byKey(WidgetKeys.cartItemComboTotalPrice),
+      ),
+      findsOneWidget,
+    );
+
+    expect(
+      find.descendant(
+        of: _comboItem(priceComboDealId),
+        matching: find.byKey(WidgetKeys.comboNextDealInfo),
+      ),
+      scheme.haveFixedMaterials ? findsNothing : findsOneWidget,
+    );
+  }
+
+  void verifyComboMaterial({
+    required ComboDealScheme scheme,
+    required String priceComboDealId,
+    required String materialNumber,
+    required String materialName,
+    required String principalName,
+  }) {
+    expect(
+      _comboMaterialItem(
+        priceComboDealId: priceComboDealId,
+        materialNumber: materialNumber,
+      ),
+      findsOneWidget,
+    );
+
+    expect(
+      find.descendant(
+        of: _comboMaterialItem(
+          priceComboDealId: priceComboDealId,
+          materialNumber: materialNumber,
+        ),
+        matching: find.byType(CustomImage),
+      ),
+      findsOneWidget,
+    );
+
+    expect(
+      find.descendant(
+        of: _comboMaterialItem(
+          priceComboDealId: priceComboDealId,
+          materialNumber: materialNumber,
+        ),
+        matching: find.text(materialNumber),
+      ),
+      findsOneWidget,
+    );
+
+    expect(
+      find.descendant(
+        of: _comboMaterialItem(
+          priceComboDealId: priceComboDealId,
+          materialNumber: materialNumber,
+        ),
+        matching: find.byKey(WidgetKeys.comboDealMaterialItemDiscountTag),
+      ),
+      scheme.displayDiscountedSubTotal || scheme.displayDiscountedPrice
+          ? findsOneWidget
+          : findsNothing,
+    );
+
+    expect(
+      find.descendant(
+        of: _comboMaterialItem(
+          priceComboDealId: priceComboDealId,
+          materialNumber: materialNumber,
+        ),
+        matching: find.text(principalName),
+      ),
+      findsOneWidget,
+    );
+
+    expect(
+      find.descendant(
+        of: _comboMaterialItem(
+          priceComboDealId: priceComboDealId,
+          materialNumber: materialNumber,
+        ),
+        matching: find.byKey(WidgetKeys.cartComboItemProductOriginalPrice),
+      ),
+      scheme.displayDiscountedPrice ? findsOneWidget : findsNothing,
+    );
+
+    expect(
+      find.descendant(
+        of: _comboMaterialItem(
+          priceComboDealId: priceComboDealId,
+          materialNumber: materialNumber,
+        ),
+        matching: find.byKey(WidgetKeys.cartComboItemProductDiscountedPrice),
       ),
       findsOneWidget,
     );

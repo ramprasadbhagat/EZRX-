@@ -644,6 +644,7 @@ class WidgetKeys {
       Key('cartItemProductTotalPriceWithTaxAmount');
   static const Key cartItemProductCounterOfferLabel =
       Key('cartItemProductCounterOfferLabel');
+
   static Key cartItemBundleTile(String bundleNumber) =>
       Key('cartItemBundleTile$bundleNumber');
   static const Key cartItemBundleNumber = Key('cartItemBundleNumber');
@@ -686,6 +687,17 @@ class WidgetKeys {
   static const Key cartMPProductSectionLabel = Key('cartMPProductSectionLabel');
   static Key cartPromotions(String materialNumber) =>
       Key('cartPromotion$materialNumber');
+  static Key cartItemComboTile(String priceComboDealId) =>
+      Key('cartItemComboTile$priceComboDealId');
+  static Key cartItemEditCombo(String priceComboDealId) =>
+      Key('cartItemEditCombo$priceComboDealId');
+  static Key cartItemDeleteCombo(String priceComboDealId) =>
+      Key('cartItemDeleteCombo$priceComboDealId');
+  static const Key cartComboItemProductOriginalPrice =
+      Key('cartComboItemProductOriginalPrice');
+  static const Key cartComboItemProductDiscountedPrice =
+      Key('cartComboItemProductDiscountedPrice');
+  static const Key cartItemComboTotalPrice = Key('cartItemComboTotalPrice');
 
   //============================================================
   //  Checkout Page Keys

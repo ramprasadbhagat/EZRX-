@@ -15,6 +15,11 @@ class ComboDetailRobot extends CommonRobot {
     expect(comboDetail, findsOneWidget);
   }
 
+  Finder getComboTitleFinder({
+    required ComboDealScheme scheme,
+  }) =>
+      find.text(scheme.comboDealTitleAppbar);
+
 // All Combo Schemes information
   void verifyComboDetailInformation() {
     expect(find.byKey(WidgetKeys.comboDetailAppBarTitle), findsOneWidget);
@@ -127,8 +132,8 @@ class ComboDetailRobot extends CommonRobot {
 
   void verifyComboK1Displayed() {
     expect(
-      find.text(
-        'Combo K1'.tr(),
+      getComboTitleFinder(
+        scheme: ComboDealScheme.k1,
       ),
       findsOneWidget,
     );
@@ -136,8 +141,9 @@ class ComboDetailRobot extends CommonRobot {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.comboDetailRequirement),
-        matching: find.text(
-          'Purchase all items with min. of its quantity.'.tr(),
+        matching: getComboConditionMessageFinder(
+          scheme: ComboDealScheme.k1,
+          unit: '',
         ),
       ),
       findsOneWidget,
@@ -171,8 +177,8 @@ class ComboDetailRobot extends CommonRobot {
 
   void verifyComboK21Displayed() {
     expect(
-      find.text(
-        'Combo K2.1'.tr(),
+      getComboTitleFinder(
+        scheme: ComboDealScheme.k21,
       ),
       findsOneWidget,
     );
@@ -180,9 +186,9 @@ class ComboDetailRobot extends CommonRobot {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.comboDetailRequirement),
-        matching: find.text(
-          'Purchase FIXED product with min. of its quantity and any product in the list.'
-              .tr(),
+        matching: getComboConditionMessageFinder(
+          scheme: ComboDealScheme.k21,
+          unit: '',
         ),
       ),
       findsOneWidget,
@@ -221,8 +227,8 @@ class ComboDetailRobot extends CommonRobot {
 
   void verifyComboK22Displayed({required String minQty}) {
     expect(
-      find.text(
-        'Combo K2.2'.tr(),
+      getComboTitleFinder(
+        scheme: ComboDealScheme.k22,
       ),
       findsOneWidget,
     );
@@ -230,12 +236,9 @@ class ComboDetailRobot extends CommonRobot {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.comboDetailRequirement),
-        matching: find.text(
-          'Purchase any products with min. {minQty} of total quantity.'.tr(
-            namedArgs: {
-              'minQty': minQty,
-            },
-          ),
+        matching: getComboConditionMessageFinder(
+          scheme: ComboDealScheme.k22,
+          unit: minQty,
         ),
       ),
       findsOneWidget,
@@ -268,8 +271,8 @@ class ComboDetailRobot extends CommonRobot {
 
   void verifyComboK3Displayed() {
     expect(
-      find.text(
-        'Combo K3'.tr(),
+      getComboTitleFinder(
+        scheme: ComboDealScheme.k3,
       ),
       findsOneWidget,
     );
@@ -277,9 +280,9 @@ class ComboDetailRobot extends CommonRobot {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.comboDetailRequirement),
-        matching: find.text(
-          'Purchase different products with min. of its quantity. Buy more save more.'
-              .tr(),
+        matching: getComboConditionMessageFinder(
+          scheme: ComboDealScheme.k3,
+          unit: '',
         ),
       ),
       findsOneWidget,
@@ -312,8 +315,8 @@ class ComboDetailRobot extends CommonRobot {
 
   void verifyComboK41Displayed({required String minQty}) {
     expect(
-      find.text(
-        'Combo K4'.tr(),
+      getComboTitleFinder(
+        scheme: ComboDealScheme.k4,
       ),
       findsOneWidget,
     );
@@ -321,13 +324,9 @@ class ComboDetailRobot extends CommonRobot {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.comboDetailRequirement),
-        matching: find.text(
-          'Purchase min. {minQty} items from any of these products. Buy more save more.'
-              .tr(
-            namedArgs: {
-              'minQty': minQty,
-            },
-          ),
+        matching: getComboConditionMessageFinder(
+          scheme: ComboDealScheme.k4,
+          unit: minQty,
         ),
       ),
       findsOneWidget,
@@ -360,8 +359,8 @@ class ComboDetailRobot extends CommonRobot {
 
   void verifyComboK42Displayed() {
     expect(
-      find.text(
-        'Combo K4.2'.tr(),
+      getComboTitleFinder(
+        scheme: ComboDealScheme.k42,
       ),
       findsOneWidget,
     );
@@ -369,11 +368,9 @@ class ComboDetailRobot extends CommonRobot {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.comboDetailRequirement),
-        matching: find.text(
-          'Purchase min. {minQty} QTYs from any of these products. Buy more save more.'
-              .tr(
-            namedArgs: {'minQty': '50'},
-          ),
+        matching: getComboConditionMessageFinder(
+          scheme: ComboDealScheme.k42,
+          unit: '50',
         ),
       ),
       findsOneWidget,
@@ -406,8 +403,8 @@ class ComboDetailRobot extends CommonRobot {
 
   void verifyComboK5Displayed() {
     expect(
-      find.text(
-        'Combo K5'.tr(),
+      getComboTitleFinder(
+        scheme: ComboDealScheme.k5,
       ),
       findsOneWidget,
     );
@@ -415,9 +412,9 @@ class ComboDetailRobot extends CommonRobot {
     expect(
       find.descendant(
         of: find.byKey(WidgetKeys.comboDetailRequirement),
-        matching: find.text(
-          'Purchase min. \${amount} from these products. Buy more save more.'
-              .tr(namedArgs: {'amount': '50.0'}),
+        matching: getComboConditionMessageFinder(
+          scheme: ComboDealScheme.k5,
+          unit: '50.0',
         ),
       ),
       findsOneWidget,
@@ -798,6 +795,25 @@ class ComboDetailRobot extends CommonRobot {
     expect(tester.widget<ElevatedButton>(addToCartButton).enabled, true);
   }
 
+  Future<void> tapToAddToCartButton() async {
+    final addToCartButton =
+        find.byKey(WidgetKeys.comboDealAddOrEditComboButton);
+    await tester.tap(addToCartButton);
+    await tester.pumpUntilVisible(find.byKey(WidgetKeys.customSnackBar));
+  }
+
+  void verifyEditComboDetailEligibility() {
+    final deleteButton = find.byKey(WidgetKeys.comboDeteleButton);
+    expect(deleteButton, findsOneWidget);
+
+    final updateCartText = find.descendant(
+      of: find.byKey(WidgetKeys.comboDealAddOrEditComboButton),
+      matching: find.text('Update cart'.tr()),
+    );
+
+    expect(updateCartText, findsOneWidget);
+  }
+
   Future<void> _tapToComboMaterial(String materialNumber) async {
     final comboMaterial =
         find.byKey(WidgetKeys.comboItemProductTile(materialNumber));
@@ -807,5 +823,67 @@ class ComboDetailRobot extends CommonRobot {
 
     await tester.tap(comboMaterial);
     await tester.pumpAndSettle();
+  }
+
+  Finder getComboConditionMessageFinder({
+    required ComboDealScheme scheme,
+    required String unit,
+  }) {
+    var comboConditionMessage = '';
+    switch (scheme) {
+      case ComboDealScheme.k1:
+        comboConditionMessage =
+            'Purchase all items with min. of its quantity.'.tr();
+        break;
+      case ComboDealScheme.k21:
+        comboConditionMessage =
+            'Purchase FIXED product with min. of its quantity and any product in the list.'
+                .tr();
+        break;
+      case ComboDealScheme.k22:
+        comboConditionMessage =
+            'Purchase any products with min. {minQty} of total quantity.'.tr(
+          namedArgs: {
+            'minQty': unit,
+          },
+        );
+        break;
+      case ComboDealScheme.k3:
+        comboConditionMessage =
+            'Purchase different products with min. of its quantity. Buy more save more.'
+                .tr();
+        break;
+      case ComboDealScheme.k4:
+        comboConditionMessage =
+            'Purchase min. {minQty} items from any of these products. Buy more save more.'
+                .tr(
+          namedArgs: {
+            'minQty': unit,
+          },
+        );
+        break;
+      case ComboDealScheme.k42:
+        comboConditionMessage =
+            'Purchase min. {minQty} QTYs from any of these products. Buy more save more.'
+                .tr(
+          namedArgs: {
+            'minQty': unit,
+          },
+        );
+        break;
+      case ComboDealScheme.k5:
+        comboConditionMessage =
+            'Purchase min. \${amount} from these products. Buy more save more.'
+                .tr(
+          namedArgs: {
+            'amount': unit,
+          },
+        );
+        break;
+      case ComboDealScheme.kWithSuffix:
+        break;
+    }
+
+    return find.text(comboConditionMessage);
   }
 }

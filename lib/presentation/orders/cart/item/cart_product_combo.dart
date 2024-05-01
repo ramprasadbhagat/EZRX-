@@ -52,6 +52,7 @@ class CartProductCombo extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: CustomSlidable(
         extentRatio: 0.24,
+        key: WidgetKeys.cartItemComboTile(_priceComboDeal.id),
         endActionPaneActions: canEditable
             ? [
                 CustomSlidableAction(
@@ -76,6 +77,7 @@ class CartProductCombo extends StatelessWidget {
                 if (canEditable) ...[
                   if (salesOrgConfig.comboDealEligible)
                     TextButton.icon(
+                      key: WidgetKeys.cartItemEditCombo(_priceComboDeal.id),
                       onPressed: () {
                         final comboDeal = context
                             .read<ComboDealListBloc>()
@@ -137,6 +139,7 @@ class CartProductCombo extends StatelessWidget {
                     ),
                   const SizedBox(width: 10),
                   TextButton.icon(
+                    key: WidgetKeys.cartItemDeleteCombo(_priceComboDeal.id),
                     onPressed: () => _showDeleteComboBottomSheet(
                       context,
                       cartItem: cartItem,
@@ -186,6 +189,9 @@ class CartProductCombo extends StatelessWidget {
                   ...cartItem.comboMaterials
                       .map(
                         (e) => CartProductComboItem(
+                          key: WidgetKeys.cartItemProductTile(
+                            e.materialInfo.materialNumber.displayMatNo,
+                          ),
                           comboMaterialItem: e,
                           comboScheme: _comboScheme,
                         ),
@@ -345,7 +351,7 @@ class _ComboSubTotalSection extends StatelessWidget {
                     ),
               ),
               PriceComponent(
-                key: WidgetKeys.cartItemProductTotalPrice,
+                key: WidgetKeys.cartItemComboTotalPrice,
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: cartProduct.comboSubTotalExclTax.toString(),
