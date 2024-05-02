@@ -208,6 +208,7 @@ void main() {
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             details: details,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(paymentList),
@@ -275,6 +276,7 @@ void main() {
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             details: details,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(paymentList),
@@ -337,6 +339,7 @@ void main() {
             details: details.copyWith(
               paymentBatchAdditionalInfo: StringValue(''),
             ),
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(paymentList),
@@ -496,6 +499,7 @@ void main() {
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             details: details,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => Right(paymentList),
@@ -551,6 +555,7 @@ void main() {
             salesOrganization: fakeSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             details: details,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),

@@ -111,6 +111,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required PaymentSummaryDetails details,
+    required bool isMarketPlace,
   }) async {
     final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
     final customerCode = customerCodeInfo.customerCodeSoldTo;
@@ -131,6 +132,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
         paymentBatchAdditionalInfo:
             details.paymentBatchAdditionalInfo.getOrDefaultValue(''),
         accountingDocExternalReference: details.accountingDocExternalReference,
+        isMarketPlace: isMarketPlace,
       );
 
       return Right(paymentItemList);

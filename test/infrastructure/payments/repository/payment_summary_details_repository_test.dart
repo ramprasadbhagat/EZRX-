@@ -8,8 +8,8 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_details_repository.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -21,8 +21,6 @@ class PaymentItemLocalDataSourceMock extends Mock
 
 class PaymentItemRemoteDataSourceMock extends Mock
     implements PaymentItemRemoteDataSource {}
-
-final locator = GetIt.instance;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -220,6 +218,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganization: fakeVNSalesOrganisation,
             details: PaymentSummaryDetails.empty(),
+            isMarketPlace: false,
           );
 
           expect(result.isRight(), true);
@@ -236,6 +235,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganization: fakeVNSalesOrganisation,
             details: PaymentSummaryDetails.empty(),
+            isMarketPlace: true,
           );
 
           expect(result.isLeft(), true);
@@ -256,6 +256,7 @@ void main() {
                   paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
               paymentID: paymentSummaryDetails.paymentID.getOrCrash(),
               salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+              isMarketPlace: true,
             ),
           ).thenAnswer(
             (_) async => PaymentItemLocalDataSource().getPaymentItems(),
@@ -264,6 +265,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganization: fakeVNSalesOrganisation,
             details: paymentSummaryDetails,
+            isMarketPlace: true,
           );
 
           expect(result.isRight(), true);
@@ -284,12 +286,14 @@ void main() {
                   paymentSummaryDetails.paymentBatchAdditionalInfo.getOrCrash(),
               paymentID: paymentSummaryDetails.paymentID.getOrCrash(),
               salesOrg: fakeVNSalesOrganisation.salesOrg.getOrCrash(),
+              isMarketPlace: false,
             ),
           ).thenThrow(MockException());
           final result = await repository.fetchPaymentList(
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganization: fakeVNSalesOrganisation,
             details: paymentSummaryDetails,
+            isMarketPlace: false,
           );
 
           expect(result.isLeft(), true);

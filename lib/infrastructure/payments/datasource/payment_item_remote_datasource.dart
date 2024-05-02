@@ -32,6 +32,7 @@ class PaymentItemRemoteDataSource {
     required String paymentID,
     required String paymentBatchAdditionalInfo,
     required String accountingDocExternalReference,
+    required bool isMarketPlace,
   }) async {
     final queryData = paymentItemQuery.getPaymentItemQuery();
     final request = {
@@ -40,6 +41,7 @@ class PaymentItemRemoteDataSource {
       'paymentBatchAdditionalInfo': paymentBatchAdditionalInfo,
       'paymentID': paymentID,
       'accountingDocExternalReference': accountingDocExternalReference,
+      if (isMarketPlace) 'isMarketPlace': isMarketPlace,
     };
     final res = await httpService.request(
       method: 'POST',
