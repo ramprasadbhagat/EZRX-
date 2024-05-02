@@ -37,7 +37,7 @@ class RequestCounterOfferRobot {
 
   Future<void> tapConfirmButton() async {
     await tester.tap(confirmButton);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(Durations.long2);
   }
 
   void verifyListPrice(String price, {bool isVisible = true}) {
@@ -68,7 +68,7 @@ class RequestCounterOfferRobot {
     await tester.tap(priceTextField);
     await tester.enterText(priceTextField, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(Durations.medium2);
   }
 
   void verifyPriceText(String text) {

@@ -13,9 +13,10 @@ class ViewByItemsRobot extends CommonRobot {
 
   final orderGroups = find.byKey(WidgetKeys.viewByItemsOrderGroupKey);
   final orderItems = find.byKey(WidgetKeys.viewByItemsOrderItemKey);
-  final orderId = find.byKey(WidgetKeys.commonTileItemHeader);
-  final productName = find.byKey(WidgetKeys.commonTileItemTitle);
-  final productId = find.byKey(WidgetKeys.commonTileItemLabel);
+  final orderId =
+      find.byKey(WidgetKeys.viewByItemsOrderDetailOrderOrQueueNumber);
+  final productName = find.byKey(WidgetKeys.viewOrderByItemTileTitle);
+  final productId = find.byKey(WidgetKeys.viewOrderByItemTileLabel);
   final productQty = find.byKey(WidgetKeys.commonTileItemQty);
   final orderStatus = find.byKey(WidgetKeys.orderItemStatusKey);
   final bonusLabel = find.byKey(WidgetKeys.commonTileItemStatusLabel);
@@ -96,7 +97,7 @@ class ViewByItemsRobot extends CommonRobot {
     expect(
       find.byWidgetPredicate(
         (widget) =>
-            widget.key == WidgetKeys.commonTileItemTitle &&
+            widget.key == WidgetKeys.viewOrderByItemTileTitle &&
             widget is Text &&
             widget.data!.contains(searchKey),
       ),
@@ -109,7 +110,7 @@ class ViewByItemsRobot extends CommonRobot {
     expect(
       find.byWidgetPredicate(
         (widget) =>
-            widget.key == WidgetKeys.commonTileItemLabel &&
+            widget.key == WidgetKeys.viewOrderByItemTileLabel &&
             widget is Text &&
             widget.data!.contains(searchKey),
       ),
@@ -123,7 +124,7 @@ class ViewByItemsRobot extends CommonRobot {
       find.byWidgetPredicate(
         (widget) =>
             widget is RichText &&
-            widget.key == WidgetKeys.commonTileItemHeader &&
+            widget.key == WidgetKeys.viewByItemsOrderDetailOrderOrQueueNumber &&
             widget.text.toPlainText().contains(searchKey),
       ),
       findsAtLeastNWidgets(1),

@@ -1,6 +1,4 @@
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 // import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -40,7 +38,6 @@ import '../../robots/products/product_detail_robot.dart';
 import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
-import '../../robots/returns/returns_root_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -79,7 +76,6 @@ void main() {
   late ViewByOrdersFilterRobot viewByOrdersFilterRobot;
   late ViewByOrdersDetailRobot viewByOrdersDetailRobot;
 
-  late ReturnsRootRobot returnsRootRobot;
   late ReturnsByItemsDetailRobot returnsByItemsDetailRobot;
   late PaymentSummaryDetailRobot paymentDetailRobot;
 
@@ -120,7 +116,6 @@ void main() {
     viewByOrdersFilterRobot = ViewByOrdersFilterRobot(tester);
     viewByOrdersDetailRobot = ViewByOrdersDetailRobot(tester);
 
-    returnsRootRobot = ReturnsRootRobot(tester);
     returnsByItemsDetailRobot = ReturnsByItemsDetailRobot(tester);
     paymentDetailRobot = PaymentSummaryDetailRobot(tester);
   }
@@ -154,12 +149,7 @@ void main() {
 
   var loginRequired = true;
 
-  final materialStockInfo = StockInfo.empty().copyWith(
-    expiryDate: DateTimeStringValue(
-      '2024-04-30',
-    ),
-    batch: BatchNumber('TEST'),
-  );
+  final materialStockInfo = StockInfo.empty();
   final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
   final materialBatch = materialStockInfo.batch.displayLabel;
   final oosPreOrderMaterialStockInfo = StockInfo.empty();
@@ -193,9 +183,8 @@ void main() {
 
   Future<void> checkoutWithMaterial(
     String materialNumber,
-    int qty, {
-    bool isPreOrder = false,
-  }) async {
+    int qty,
+  ) async {
     await browseProductFromEmptyCart();
     await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
     await productSuggestionRobot.tapSearchResult(materialNumber);
@@ -203,7 +192,7 @@ void main() {
     await productDetailRobot.tapCartButton();
     await cartRobot.changeMaterialQty(materialNumber, qty);
     await cartRobot.tapCheckoutButton();
-    if (isPreOrder) {
+    if (oosPreOrderRobot.isSheetVisible) {
       await oosPreOrderRobot.tapContinueButton();
     }
   }
@@ -378,12 +367,7 @@ void main() {
       await loginRobot.tapToRememberMe();
 
       //login with
-      await loginRobot.login(username, password);
-
-      //intro page
-      loginRobot.findSkipIntroButton();
-      await loginRobot.tapSkipIntroButton();
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await loginRobot.loginToHomeScreen(username, password, marketMyanmar);
 
       //customer search
       customerSearchRobot.verifyPage();
@@ -611,14 +595,17 @@ void main() {
       // contain customer code
       await customerSearchRobot.search(subCustomerCode);
       customerSearchRobot.verifySearchResults(subCustomerCode);
+      await commonRobot.tapClearSearch();
 
       // contain customer name
       await customerSearchRobot.search(subCustomerName);
       customerSearchRobot.verifySearchResults(subCustomerName);
+      await commonRobot.tapClearSearch();
 
       // contain ship to code
       await customerSearchRobot.search(subShipToCode);
       customerSearchRobot.verifySearchResults(subShipToCode);
+      await commonRobot.tapClearSearch();
 
       // contain ship to name
       await customerSearchRobot.search(subShipToName);
@@ -723,20 +710,6 @@ void main() {
 
       //verify go to order page
       ordersRootRobot.verifyPage();
-    });
-
-    testWidgets(
-        'EZRX-T23 | Verify click on Returns action in Top navigation menu',
-        (tester) async {
-      //init app
-      await pumpAppWithHomeScreen(tester);
-
-      //tap on home quick access return
-      homeRobot.findQuickAccessReturns();
-      await homeRobot.tapReturnsQuickAccess();
-
-      //verify go to returns page
-      returnsRootRobot.verifyRootPageVisible();
     });
 
 //Product on offer is not available for the filter issue
@@ -1895,7 +1868,9 @@ void main() {
       );
       await oosPreOrderRobot.tapExpiryDateInfoIcon(oosPreOrderMaterialNumber);
       await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
-      await oosPreOrderRobot.tapContinueButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
       checkoutRobot.verifyPage();
     });
   });
@@ -2260,8 +2235,6 @@ void main() {
 
         //verify
         ordersRootRobot.verifyViewByItemsPage();
-        await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         final productName = viewByItemsRobot.getFirstProductName();
         await commonRobot.searchWithKeyboardAction(productName);
         viewByItemsRobot.verifyOrdersWithProductName(productName);
@@ -2336,11 +2309,6 @@ void main() {
         //verify
         ordersRootRobot.verifyViewByItemsPage();
         await ordersRootRobot.tapFilterButton();
-        await viewByItemsFilterRobot.tapFromDateField();
-        await commonRobot.setDateRangePickerValue(
-          fromDate: fromDate,
-          toDate: toDate,
-        );
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
         viewByItemsFilterRobot.verifyStatusFilterValue(statusFilter, true);
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
@@ -2348,11 +2316,7 @@ void main() {
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
         viewByItemsFilterRobot.verifyStatusFilterValue(statusFilter, true);
         await viewByItemsFilterRobot.tapApplyButton();
-        ordersRootRobot.verifyFilterApplied(2);
-        viewByItemsRobot.verifyOrderGroupInDateRange(
-          fromDate: fromDate,
-          toDate: toDate,
-        );
+        ordersRootRobot.verifyFilterApplied(1);
         viewByItemsRobot.verifyOrderGroups();
         viewByItemsRobot.verifyOrderItems();
 

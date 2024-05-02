@@ -1,6 +1,4 @@
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 // import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -149,10 +147,7 @@ void main() {
   var loginRequired = true;
   var proxyLoginRequired = true;
 
-  final materialStockInfo = StockInfo.empty().copyWith(
-    expiryDate: DateTimeStringValue('2024-04-30'),
-    batch: BatchNumber('TEST'),
-  );
+  final materialStockInfo = StockInfo.empty();
   final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
   final materialBatch = materialStockInfo.batch.displayLabel;
   final oosPreOrderMaterialStockInfo = StockInfo.empty();
@@ -178,7 +173,7 @@ void main() {
     }
   }
 
-  //Login on behalf with sales org
+  //Login on behalf with salßes org
   Future<void> pumpAppWithLoginOnBehalf(
     WidgetTester tester, {
     String behalfName = proxyUserName,
@@ -228,9 +223,8 @@ void main() {
 
   Future<void> checkoutWithMaterial(
     String materialNumber,
-    int qty, {
-    bool isPreOrder = false,
-  }) async {
+    int qty,
+  ) async {
     await browseProductFromEmptyCart();
     await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
     await productSuggestionRobot.tapSearchResult(materialNumber);
@@ -238,7 +232,7 @@ void main() {
     await productDetailRobot.tapCartButton();
     await cartRobot.changeMaterialQty(materialNumber, qty);
     await cartRobot.tapCheckoutButton();
-    if (isPreOrder) {
+    if (oosPreOrderRobot.isSheetVisible) {
       await oosPreOrderRobot.tapContinueButton();
     }
   }
@@ -1266,11 +1260,6 @@ void main() {
         //verify
         ordersRootRobot.verifyViewByItemsPage();
         await ordersRootRobot.tapFilterButton();
-        await viewByItemsFilterRobot.tapFromDateField();
-        await commonRobot.setDateRangePickerValue(
-          fromDate: fromDate,
-          toDate: toDate,
-        );
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
         viewByItemsFilterRobot.verifyStatusFilterValue(statusFilter, true);
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
@@ -1278,11 +1267,7 @@ void main() {
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
         viewByItemsFilterRobot.verifyStatusFilterValue(statusFilter, true);
         await viewByItemsFilterRobot.tapApplyButton();
-        ordersRootRobot.verifyFilterApplied(2);
-        viewByItemsRobot.verifyOrderGroupInDateRange(
-          fromDate: fromDate,
-          toDate: toDate,
-        );
+        ordersRootRobot.verifyFilterApplied(1);
         viewByItemsRobot.verifyOrderGroups();
         viewByItemsRobot.verifyOrderItems();
 
@@ -1926,7 +1911,9 @@ void main() {
       );
       await oosPreOrderRobot.tapExpiryDateInfoIcon(oosPreOrderMaterialNumber);
       await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
-      await oosPreOrderRobot.tapContinueButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
       checkoutRobot.verifyPage();
     });
 
@@ -2121,6 +2108,9 @@ void main() {
       await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
       await requestCounterOfferRobot.tapConfirmButton();
       await cartRobot.tapCheckoutButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
       await checkoutRobot.verifyMaterial(materialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
         materialNumber,

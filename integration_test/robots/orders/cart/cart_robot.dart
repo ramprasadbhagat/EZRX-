@@ -119,7 +119,7 @@ class CartRobot {
 
   Future<void> tapCheckoutButton() async {
     await tester.tap(checkoutButton);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(Durations.long2);
   }
 
   void verifyQtyOnAppBar(int qty) {
