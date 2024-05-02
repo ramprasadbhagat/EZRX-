@@ -43,6 +43,7 @@ class ClevertapService {
     required String username,
     required String email,
     required String role,
+    required String market,
   }) async {
     await CleverTapPlugin.onUserLogin(
       {
@@ -51,6 +52,8 @@ class ClevertapService {
         'Email': email,
         'Role': role,
         'MSG-push': true,
+        'market': market,
+        'platform': 'app',
       },
     );
   }

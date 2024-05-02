@@ -93,6 +93,7 @@ class UserRepository implements IUserRepository {
           username: user.username.getOrDefaultValue(''),
           email: user.email.getOrDefaultValue(''),
           role: user.role.name,
+          market: deviceStorage.currentMarket().toUpperCase(),
         );
       }
 

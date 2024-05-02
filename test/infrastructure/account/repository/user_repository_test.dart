@@ -394,6 +394,7 @@ void main() {
             username: mockUser.username.getOrDefaultValue(''),
             email: mockUser.email.getOrDefaultValue(''),
             role: mockUser.role.name,
+            market: mockMarket.toUpperCase(),
           ),
         ).thenAnswer((_) => Future.value());
 

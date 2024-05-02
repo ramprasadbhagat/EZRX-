@@ -48,6 +48,7 @@ class MixpanelService {
       TrackingProps.userRole: userRole,
       TrackingProps.market: market,
       TrackingProps.currency: currency,
+      TrackingProps.platform: 'app',
     });
   }
 
