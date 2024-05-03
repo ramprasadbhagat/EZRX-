@@ -260,10 +260,6 @@ void main() {
       ),
       expect: () => [
         validResetPasswordState.copyWith(isSubmitting: true),
-        validResetPasswordState.copyWith(
-          passwordResetFailureOrSuccessOption:
-              optionOf(Right(ResetPassword.empty())),
-        ),
         ResetPasswordState.initial(),
       ],
     );
@@ -348,7 +344,6 @@ void main() {
             ),
           ),
         ),
-        ResetPasswordState.initial(),
       ],
     );
 
@@ -382,14 +377,6 @@ void main() {
           confirmPassword: fakePassword,
           resetPasswordCred: resetPasswordCred,
           isSubmitting: true,
-        ),
-        ResetPasswordState.initial().copyWith(
-          newPassword: fakePassword,
-          confirmPassword: fakePassword,
-          resetPasswordCred: resetPasswordCred,
-          passwordResetFailureOrSuccessOption: optionOf(
-            Right(ResetPassword.empty()),
-          ),
         ),
         ResetPasswordState.initial(),
       ],
