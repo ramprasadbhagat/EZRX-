@@ -8,11 +8,14 @@ class FavouriteIcon extends StatelessWidget {
   final VoidCallback onTap;
   final BoxConstraints? constraints;
   final bool enable;
+  final double? iconSize;
+
   const FavouriteIcon({
     Key? key,
     required this.isFavourite,
-    this.visualDensity,
     required this.onTap,
+    this.iconSize,
+    this.visualDensity,
     this.constraints,
     this.enable = true,
   }) : super(key: key);
@@ -27,6 +30,7 @@ class FavouriteIcon extends StatelessWidget {
       padding: EdgeInsets.zero,
       constraints: constraints,
       key: WidgetKeys.favoritesIcon,
+      iconSize: iconSize,
       icon: Icon(
         isFavourite ? Icons.favorite : Icons.favorite_border_outlined,
         color: ZPColors.darkYellow,

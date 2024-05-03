@@ -42,7 +42,8 @@ class InfoLabel extends StatelessWidget {
           Expanded(
             child: Text(
               textValue,
-              style: textStyle ?? Theme.of(context).textTheme.bodyMedium,
+              style: (textStyle ?? Theme.of(context).textTheme.bodyMedium)
+                  ?.copyWith(color: textColor),
             ),
           ),
         ],

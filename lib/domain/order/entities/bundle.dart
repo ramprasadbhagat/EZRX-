@@ -57,8 +57,11 @@ class Bundle with _$Bundle {
 
   BundleInfo get currentBundleInfo => sortedBundleInformation.lastWhere(
         (bundleInfo) => totalQty >= bundleInfo.quantity,
-        orElse: () => BundleInfo.empty(),
+        orElse: () => minimumQuantityBundleMaterial,
       );
+
+  bool get miniumQtySatisfied =>
+      totalQty >= minimumQuantityBundleMaterial.quantity;
 
   int get totalQty => materials.fold(
         0,

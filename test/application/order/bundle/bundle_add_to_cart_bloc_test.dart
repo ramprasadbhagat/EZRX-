@@ -2,43 +2,32 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main() {
-  late MaterialInfo bundleMock;
-  late List<MaterialInfo> bundleMaterialsMocks;
-  late BundleAddToCartState initialState;
-  late BundleAddToCartState stateAfterSet;
-  late BundleAddToCartState stateAfterUpdateQuantity;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final bundleMock =
+      (await MaterialBundleListLocalDatasource().getMaterialBundleList()).first;
+  final bundleMaterialsMocks = await MaterialBundleListLocalDatasource()
+      .getMaterialBundleListForSalesRep();
+  final stateAfterSet = BundleAddToCartState.initial().copyWith(
+    materialInfo: bundleMock.copyWith.bundle(materials: bundleMaterialsMocks),
+  );
   const quantity = 10;
-  late BundleAddToCartState mockState;
-  setUpAll(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    bundleMock =
-        (await MaterialBundleListLocalDatasource().getMaterialBundleList())
-            .first;
-    bundleMaterialsMocks = await MaterialBundleListLocalDatasource()
-        .getMaterialBundleListForSalesRep();
-    initialState = BundleAddToCartState.initial();
-    stateAfterSet = BundleAddToCartState.initial().copyWith(
-      bundle: bundleMock,
-      bundleMaterials: bundleMaterialsMocks,
-    );
-    stateAfterUpdateQuantity = stateAfterSet.copyWith(
-      bundleMaterials: bundleMaterialsMocks
+  final stateAfterUpdateQuantity = stateAfterSet.copyWith(
+    materialInfo: bundleMock.copyWith.bundle(
+      materials: bundleMaterialsMocks
           .map(
             (element) => element.materialNumber == bundleMock.materialNumber
                 ? element.copyWith(quantity: MaterialQty(quantity))
                 : element,
           )
           .toList(),
-    );
-  });
+    ),
+  );
 
   group('Bundle Add To Cart Bloc test', () {
     blocTest<BundleAddToCartBloc, BundleAddToCartState>(
@@ -46,28 +35,26 @@ void main() {
       build: () => BundleAddToCartBloc(),
       act: (BundleAddToCartBloc bloc) =>
           bloc.add(const BundleAddToCartEvent.initialized()),
-      expect: () => [initialState],
+      expect: () => [BundleAddToCartState.initial()],
     );
 
     blocTest<BundleAddToCartBloc, BundleAddToCartState>(
       'Set the bundle and bundleMaterials',
       build: () => BundleAddToCartBloc(),
       act: (BundleAddToCartBloc bloc) => bloc.add(
-        BundleAddToCartEvent.set(
-          bundle: bundleMock,
-          bundleMaterials: bundleMaterialsMocks,
-        ),
+        BundleAddToCartEvent.set(bundle: bundleMock),
       ),
-      expect: () => [stateAfterSet],
+      expect: () => [
+        BundleAddToCartState.initial().copyWith(
+          materialInfo: bundleMock,
+        ),
+      ],
     );
 
     blocTest(
       'Update the quantity',
       build: () => BundleAddToCartBloc(),
-      seed: () => BundleAddToCartState.initial().copyWith(
-        bundle: bundleMock,
-        bundleMaterials: bundleMaterialsMocks,
-      ),
+      seed: () => stateAfterSet,
       act: (BundleAddToCartBloc bloc) => bloc.add(
         BundleAddToCartEvent.updateQuantity(
           materialNumber: bundleMock.materialNumber,
@@ -78,65 +65,24 @@ void main() {
     );
   });
   group('Bundle Add To Cart State test', () {
-    setUpAll(() {
-      mockState = stateAfterUpdateQuantity.copyWith(
-        bundle: bundleMock.copyWith(
-          bundle: Bundle.empty().copyWith(
-            bundleInformation: [
-              BundleInfo.empty().copyWith(quantity: 1),
-              BundleInfo.empty().copyWith(quantity: 2),
-            ],
-          ),
-        ),
-      );
-    });
-    test('Check totalCount', () {
-      expect(mockState.totalCount, 10);
-    });
-    test('Check bundleOffer', () {
-      expect(
-        mockState.bundleOffer,
-        BundleInfo.empty().copyWith(quantity: 2),
-      );
-    });
-    test('Check bundleOffer orElse case', () {
-      expect(
-        mockState
-            .copyWith(
-              bundle: bundleMock.copyWith(
-                bundle: Bundle.empty().copyWith(
-                  bundleInformation: [
-                    BundleInfo.empty().copyWith(quantity: 100),
-                    BundleInfo.empty().copyWith(quantity: 100),
-                  ],
-                ),
-              ),
-            )
-            .bundleOffer,
-        BundleInfo.empty().copyWith(quantity: 100),
-      );
-    });
     test('Check bundleMaterialsSelected', () {
       expect(
-        mockState.bundleMaterialsSelected,
-        stateAfterUpdateQuantity.bundleMaterials
+        stateAfterUpdateQuantity.bundleMaterialsSelected,
+        stateAfterUpdateQuantity.materialInfo.bundle.materials
             .where((element) => element.quantity.intValue > 0)
             .toList(),
       );
     });
-    test('Check isBundleCountSatisfied', () {
-      expect(mockState.isBundleCountSatisfied, true);
-    });
 
     test('Check selectedMaterialInfo', () {
       expect(
-        mockState.selectedMaterialInfo(
+        stateAfterUpdateQuantity.selectedMaterialInfo(
           PriceAggregate.empty().copyWith(
             bundle: Bundle.empty().copyWith(materials: bundleMaterialsMocks),
           ),
         ),
         [
-          stateAfterUpdateQuantity.bundleMaterials
+          stateAfterUpdateQuantity.materialInfo.bundle.materials
               .where((element) => element.quantity.intValue > 0)
               .toList()
               .first
@@ -146,9 +92,9 @@ void main() {
     });
     test('Check selectedMaterialInfo orElse case', () {
       expect(
-        mockState.selectedMaterialInfo(PriceAggregate.empty()),
+        stateAfterUpdateQuantity.selectedMaterialInfo(PriceAggregate.empty()),
         [
-          stateAfterUpdateQuantity.bundleMaterials
+          stateAfterUpdateQuantity.materialInfo.bundle.materials
               .where((element) => element.quantity.intValue > 0)
               .toList()
               .first

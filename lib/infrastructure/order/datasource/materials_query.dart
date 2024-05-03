@@ -37,6 +37,7 @@ class MaterialsWithMetaQuery {
               GenericMaterialName
               Manufactured
               GovernmentMaterialCode
+              ${enableMarketplace ? 'isMarketPlace' : ''}
             }
             DataTotalCount
             DataTotalHidden
@@ -79,12 +80,11 @@ class MaterialsWithMetaQuery {
           DefaultMaterialDescription
           GenericMaterialName
           ItemRegistrationNumber
-          __typename
+          ${enableMarketplace ? 'isMarketPlace' : ''}
         }
         DataTotalCount
         DataTotalHidden
         IsGimmick
-        __typename
       }
     }
     ''';

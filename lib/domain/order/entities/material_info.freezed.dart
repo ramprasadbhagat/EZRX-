@@ -12,7 +12,7 @@ part of 'material_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialInfo {
@@ -402,11 +402,11 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
 }
 
 /// @nodoc
-abstract class _$$_MaterialInfoCopyWith<$Res>
+abstract class _$$MaterialInfoImplCopyWith<$Res>
     implements $MaterialInfoCopyWith<$Res> {
-  factory _$$_MaterialInfoCopyWith(
-          _$_MaterialInfo value, $Res Function(_$_MaterialInfo) then) =
-      __$$_MaterialInfoCopyWithImpl<$Res>;
+  factory _$$MaterialInfoImplCopyWith(
+          _$MaterialInfoImpl value, $Res Function(_$MaterialInfoImpl) then) =
+      __$$MaterialInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -467,11 +467,11 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialInfoCopyWithImpl<$Res>
-    extends _$MaterialInfoCopyWithImpl<$Res, _$_MaterialInfo>
-    implements _$$_MaterialInfoCopyWith<$Res> {
-  __$$_MaterialInfoCopyWithImpl(
-      _$_MaterialInfo _value, $Res Function(_$_MaterialInfo) _then)
+class __$$MaterialInfoImplCopyWithImpl<$Res>
+    extends _$MaterialInfoCopyWithImpl<$Res, _$MaterialInfoImpl>
+    implements _$$MaterialInfoImplCopyWith<$Res> {
+  __$$MaterialInfoImplCopyWithImpl(
+      _$MaterialInfoImpl _value, $Res Function(_$MaterialInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -521,7 +521,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? counterOfferDetails = null,
     Object? sampleBonusItemId = null,
   }) {
-    return _then(_$_MaterialInfo(
+    return _then(_$MaterialInfoImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -700,8 +700,8 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialInfo extends _MaterialInfo {
-  const _$_MaterialInfo(
+class _$MaterialInfoImpl extends _MaterialInfo {
+  const _$MaterialInfoImpl(
       {required this.name,
       required this.principalData,
       required this.materialNumber,
@@ -862,10 +862,10 @@ class _$_MaterialInfo extends _MaterialInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialInfo &&
+            other is _$MaterialInfoImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.principalData, principalData) ||
                 other.principalData == principalData) &&
@@ -999,8 +999,8 @@ class _$_MaterialInfo extends _MaterialInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialInfoCopyWith<_$_MaterialInfo> get copyWith =>
-      __$$_MaterialInfoCopyWithImpl<_$_MaterialInfo>(this, _$identity);
+  _$$MaterialInfoImplCopyWith<_$MaterialInfoImpl> get copyWith =>
+      __$$MaterialInfoImplCopyWithImpl<_$MaterialInfoImpl>(this, _$identity);
 }
 
 abstract class _MaterialInfo extends MaterialInfo {
@@ -1047,7 +1047,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final bool isFOCMaterial,
       required final String ean,
       required final RequestCounterOfferDetails counterOfferDetails,
-      required final String sampleBonusItemId}) = _$_MaterialInfo;
+      required final String sampleBonusItemId}) = _$MaterialInfoImpl;
   const _MaterialInfo._() : super._();
 
   @override
@@ -1138,7 +1138,7 @@ abstract class _MaterialInfo extends MaterialInfo {
   String get sampleBonusItemId;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialInfoCopyWith<_$_MaterialInfo> get copyWith =>
+  _$$MaterialInfoImplCopyWith<_$MaterialInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1150,6 +1150,7 @@ mixin _$MaterialData {
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
   StringValue get governmentMaterialCode => throw _privateConstructorUsedError;
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialDataCopyWith<MaterialData> get copyWith =>
@@ -1168,7 +1169,8 @@ abstract class $MaterialDataCopyWith<$Res> {
       StringValue materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
-      StringValue governmentMaterialCode});
+      StringValue governmentMaterialCode,
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -1190,6 +1192,7 @@ class _$MaterialDataCopyWithImpl<$Res, $Val extends MaterialData>
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
     Object? governmentMaterialCode = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -1216,16 +1219,20 @@ class _$MaterialDataCopyWithImpl<$Res, $Val extends MaterialData>
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_MaterialDataCopyWith<$Res>
+abstract class _$$MaterialDataImplCopyWith<$Res>
     implements $MaterialDataCopyWith<$Res> {
-  factory _$$_MaterialDataCopyWith(
-          _$_MaterialData value, $Res Function(_$_MaterialData) then) =
-      __$$_MaterialDataCopyWithImpl<$Res>;
+  factory _$$MaterialDataImplCopyWith(
+          _$MaterialDataImpl value, $Res Function(_$MaterialDataImpl) then) =
+      __$$MaterialDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1234,15 +1241,16 @@ abstract class _$$_MaterialDataCopyWith<$Res>
       StringValue materialDescription,
       String defaultMaterialDescription,
       String genericMaterialName,
-      StringValue governmentMaterialCode});
+      StringValue governmentMaterialCode,
+      bool isMarketPlace});
 }
 
 /// @nodoc
-class __$$_MaterialDataCopyWithImpl<$Res>
-    extends _$MaterialDataCopyWithImpl<$Res, _$_MaterialData>
-    implements _$$_MaterialDataCopyWith<$Res> {
-  __$$_MaterialDataCopyWithImpl(
-      _$_MaterialData _value, $Res Function(_$_MaterialData) _then)
+class __$$MaterialDataImplCopyWithImpl<$Res>
+    extends _$MaterialDataCopyWithImpl<$Res, _$MaterialDataImpl>
+    implements _$$MaterialDataImplCopyWith<$Res> {
+  __$$MaterialDataImplCopyWithImpl(
+      _$MaterialDataImpl _value, $Res Function(_$MaterialDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1254,8 +1262,9 @@ class __$$_MaterialDataCopyWithImpl<$Res>
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
     Object? governmentMaterialCode = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_MaterialData(
+    return _then(_$MaterialDataImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -1280,20 +1289,25 @@ class __$$_MaterialDataCopyWithImpl<$Res>
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_MaterialData extends _MaterialData {
-  _$_MaterialData(
+class _$MaterialDataImpl extends _MaterialData {
+  _$MaterialDataImpl(
       {required this.materialNumber,
       required this.manufactured,
       required this.materialDescription,
       required this.defaultMaterialDescription,
       required this.genericMaterialName,
-      required this.governmentMaterialCode})
+      required this.governmentMaterialCode,
+      required this.isMarketPlace})
       : super._();
 
   @override
@@ -1308,17 +1322,19 @@ class _$_MaterialData extends _MaterialData {
   final String genericMaterialName;
   @override
   final StringValue governmentMaterialCode;
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'MaterialData(materialNumber: $materialNumber, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, governmentMaterialCode: $governmentMaterialCode)';
+    return 'MaterialData(materialNumber: $materialNumber, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, governmentMaterialCode: $governmentMaterialCode, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialData &&
+            other is _$MaterialDataImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.manufactured, manufactured) ||
@@ -1332,7 +1348,9 @@ class _$_MaterialData extends _MaterialData {
             (identical(other.genericMaterialName, genericMaterialName) ||
                 other.genericMaterialName == genericMaterialName) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
-                other.governmentMaterialCode == governmentMaterialCode));
+                other.governmentMaterialCode == governmentMaterialCode) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
@@ -1343,13 +1361,14 @@ class _$_MaterialData extends _MaterialData {
       materialDescription,
       defaultMaterialDescription,
       genericMaterialName,
-      governmentMaterialCode);
+      governmentMaterialCode,
+      isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialDataCopyWith<_$_MaterialData> get copyWith =>
-      __$$_MaterialDataCopyWithImpl<_$_MaterialData>(this, _$identity);
+  _$$MaterialDataImplCopyWith<_$MaterialDataImpl> get copyWith =>
+      __$$MaterialDataImplCopyWithImpl<_$MaterialDataImpl>(this, _$identity);
 }
 
 abstract class _MaterialData extends MaterialData {
@@ -1359,7 +1378,8 @@ abstract class _MaterialData extends MaterialData {
       required final StringValue materialDescription,
       required final String defaultMaterialDescription,
       required final String genericMaterialName,
-      required final StringValue governmentMaterialCode}) = _$_MaterialData;
+      required final StringValue governmentMaterialCode,
+      required final bool isMarketPlace}) = _$MaterialDataImpl;
   _MaterialData._() : super._();
 
   @override
@@ -1375,8 +1395,10 @@ abstract class _MaterialData extends MaterialData {
   @override
   StringValue get governmentMaterialCode;
   @override
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_MaterialDataCopyWith<_$_MaterialData> get copyWith =>
+  _$$MaterialDataImplCopyWith<_$MaterialDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1429,22 +1451,22 @@ class _$MaterialResponseCopyWithImpl<$Res, $Val extends MaterialResponse>
 }
 
 /// @nodoc
-abstract class _$$_MaterialResponseCopyWith<$Res>
+abstract class _$$MaterialResponseImplCopyWith<$Res>
     implements $MaterialResponseCopyWith<$Res> {
-  factory _$$_MaterialResponseCopyWith(
-          _$_MaterialResponse value, $Res Function(_$_MaterialResponse) then) =
-      __$$_MaterialResponseCopyWithImpl<$Res>;
+  factory _$$MaterialResponseImplCopyWith(_$MaterialResponseImpl value,
+          $Res Function(_$MaterialResponseImpl) then) =
+      __$$MaterialResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int count, List<MaterialInfo> products});
 }
 
 /// @nodoc
-class __$$_MaterialResponseCopyWithImpl<$Res>
-    extends _$MaterialResponseCopyWithImpl<$Res, _$_MaterialResponse>
-    implements _$$_MaterialResponseCopyWith<$Res> {
-  __$$_MaterialResponseCopyWithImpl(
-      _$_MaterialResponse _value, $Res Function(_$_MaterialResponse) _then)
+class __$$MaterialResponseImplCopyWithImpl<$Res>
+    extends _$MaterialResponseCopyWithImpl<$Res, _$MaterialResponseImpl>
+    implements _$$MaterialResponseImplCopyWith<$Res> {
+  __$$MaterialResponseImplCopyWithImpl(_$MaterialResponseImpl _value,
+      $Res Function(_$MaterialResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1453,7 +1475,7 @@ class __$$_MaterialResponseCopyWithImpl<$Res>
     Object? count = null,
     Object? products = null,
   }) {
-    return _then(_$_MaterialResponse(
+    return _then(_$MaterialResponseImpl(
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -1468,8 +1490,8 @@ class __$$_MaterialResponseCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialResponse extends _MaterialResponse {
-  _$_MaterialResponse(
+class _$MaterialResponseImpl extends _MaterialResponse {
+  _$MaterialResponseImpl(
       {required this.count, required final List<MaterialInfo> products})
       : _products = products,
         super._();
@@ -1490,10 +1512,10 @@ class _$_MaterialResponse extends _MaterialResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialResponse &&
+            other is _$MaterialResponseImpl &&
             (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality().equals(other._products, _products));
   }
@@ -1505,14 +1527,15 @@ class _$_MaterialResponse extends _MaterialResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialResponseCopyWith<_$_MaterialResponse> get copyWith =>
-      __$$_MaterialResponseCopyWithImpl<_$_MaterialResponse>(this, _$identity);
+  _$$MaterialResponseImplCopyWith<_$MaterialResponseImpl> get copyWith =>
+      __$$MaterialResponseImplCopyWithImpl<_$MaterialResponseImpl>(
+          this, _$identity);
 }
 
 abstract class _MaterialResponse extends MaterialResponse {
   factory _MaterialResponse(
       {required final int count,
-      required final List<MaterialInfo> products}) = _$_MaterialResponse;
+      required final List<MaterialInfo> products}) = _$MaterialResponseImpl;
   _MaterialResponse._() : super._();
 
   @override
@@ -1521,6 +1544,6 @@ abstract class _MaterialResponse extends MaterialResponse {
   List<MaterialInfo> get products;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialResponseCopyWith<_$_MaterialResponse> get copyWith =>
+  _$$MaterialResponseImplCopyWith<_$MaterialResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

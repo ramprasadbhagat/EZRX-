@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,13 +24,12 @@ class BundleAddToCartBloc
       initialized: (_) => emit(BundleAddToCartState.initial()),
       set: (_Set e) => emit(
         state.copyWith(
-          bundle: e.bundle,
-          bundleMaterials: e.bundleMaterials,
+          materialInfo: e.bundle,
         ),
       ),
-      updateQuantity: (_UpdateQuantity e) => emit(
-        state.copyWith(
-          bundleMaterials: state.bundleMaterials
+      updateQuantity: (e) => emit(
+        state.copyWith.materialInfo.bundle(
+          materials: state.materialInfo.bundle.materials
               .map(
                 (element) => element.materialNumber == e.materialNumber
                     ? element.copyWith(quantity: MaterialQty(e.quantity))
@@ -41,8 +38,8 @@ class BundleAddToCartBloc
               .toList(),
         ),
       ),
-      validateQuantity: (_ValidateQuantity e) =>
-          emit(state.copyWith(showErrorMessage: e.isError)),
+      validateQuantity: (e) =>
+          emit(state.copyWith(showErrorMessage: e.showErrorMessage)),
     );
   }
 }

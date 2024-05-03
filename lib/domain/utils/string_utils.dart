@@ -36,18 +36,6 @@ class StringUtils {
     return '${salesOrgConfig.currency.code} ${formatPrice(salesOrgConfig, price)}';
   }
 
-  static String displayNaIfPriceIsZero(
-    SalesOrganisationConfigs salesOrgConfig,
-    double price,
-  ) {
-    return price == 0
-        ? 'N.A.'
-        : displayPrice(
-            salesOrgConfig,
-            price,
-          );
-  }
-
   static String displayNumber(
     double price,
   ) {

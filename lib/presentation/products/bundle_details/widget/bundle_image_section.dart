@@ -12,8 +12,8 @@ class _BundleImageSection extends StatelessWidget {
           previous.productDetailAggregate != current.productDetailAggregate ||
           previous.selectedImageIndex != current.selectedImageIndex,
       builder: (context, state) {
-        final bundleMaterials =
-            state.productDetailAggregate.materialInfo.bundle.materials;
+        final materialInfo = state.productDetailAggregate.materialInfo;
+        final bundleMaterials = materialInfo.bundle.materials;
 
         final selectedMaterial = bundleMaterials.isNotEmpty
             ? bundleMaterials.elementAt(state.selectedImageIndex)
@@ -48,6 +48,10 @@ class _BundleImageSection extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            if (materialInfo.isMarketPlace) ...[
+                              const MarketPlaceRectangleLogo(),
+                              const SizedBox(height: 4),
+                            ],
                             _OutlineText(
                               selectedMaterial.materialNumber.displayMatNo,
                               key: WidgetKeys.bundleMaterialItem(

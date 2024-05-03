@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -17,6 +16,7 @@ import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart';
@@ -31,38 +31,17 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MaterialListBlocMock
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ProductDetailBlocMock
-    extends MockBloc<ProductDetailEvent, ProductDetailState>
-    implements ProductDetailBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class ClevertapServiceMock extends Mock implements ClevertapService {}
-
-class MaterialPageXMock extends Mock implements MaterialPageX {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 void main() {
   late MaterialListBlocMock materialListBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late ProductDetailBloc productDetailBlocMock;
   late AppRouter autoRouterMock;
-  late UserBlocMock userBlocMock;
   final locator = GetIt.instance;
   late List<MaterialInfo> materialList;
   late MaterialResponse materialResponseMock;
@@ -74,7 +53,7 @@ void main() {
       stringMatch: 'home',
       key: ValueKey('HomeTabRoute'),
     ),
-    router: MockAppRouter(),
+    router: AutoRouteMock(),
     pendingChildren: [],
   );
   final fakeMaterialData = MaterialData(
@@ -84,13 +63,14 @@ void main() {
     defaultMaterialDescription: 'defaultMaterialDescription',
     genericMaterialName: '1234567',
     governmentMaterialCode: StringValue('1234567'),
+    isMarketPlace: false,
   );
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     registerFallbackValue(const PageRouteInfo('HomeTabRoute', path: 'home'));
-    locator.registerSingleton<MixpanelService>(MockMixpanelService());
+    locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
     locator.registerLazySingleton(() => PackageInfoService());
@@ -100,12 +80,11 @@ void main() {
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    autoRouterMock = MockAppRouter();
+    autoRouterMock = AutoRouteMock();
     productDetailBlocMock = ProductDetailBlocMock();
     when(() => autoRouterMock.currentPath).thenReturn('home');
     when(() => autoRouterMock.current).thenReturn(routeData);
     materialListBlocMock = MaterialListBlocMock();
-    userBlocMock = UserBlocMock();
     when(() => materialListBlocMock.state)
         .thenReturn(MaterialListState.initial());
     eligibilityBlocMock = EligibilityBlocMock();
@@ -113,9 +92,6 @@ void main() {
         .thenReturn(EligibilityState.initial());
     when(() => productDetailBlocMock.state)
         .thenReturn(ProductDetailState.initial());
-    when(() => userBlocMock.state).thenReturn(
-      UserState.initial(),
-    );
   });
 
   Future getWidget(tester) async {
@@ -133,7 +109,6 @@ void main() {
           BlocProvider<ProductDetailBloc>(
             create: (context) => productDetailBlocMock,
           ),
-          BlocProvider<UserBloc>(create: (context) => userBlocMock),
         ],
         child: const Scaffold(body: BundleSection()),
       ),
@@ -231,11 +206,6 @@ void main() {
         when(() => materialListBlocMock.state).thenReturn(
           MaterialListState.initial().copyWith(
             materialList: materialList,
-          ),
-        );
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeClientUser,
           ),
         );
 
@@ -403,6 +373,22 @@ void main() {
           materialResponseMock.products[1].bundle.bundleCode,
         );
         expect(bundleCode, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Find marketplace icon & sellername in marketplace bundle',
+      (WidgetTester tester) async {
+        final bundle = materialResponseMock.products
+            .firstWhere((e) => e.type.typeBundle && e.isMarketPlace);
+        when(() => materialListBlocMock.state).thenReturn(
+          MaterialListState.initial().copyWith(materialList: [bundle]),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        expect(find.byType(MarketPlaceLogo), findsOneWidget);
+        expect(find.text('Sold by: ${bundle.manufactured}'), findsOne);
       },
     );
 

@@ -3,6 +3,7 @@ import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -161,13 +162,21 @@ class _BundleSectionItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          materialInfo.bundle.bundleCode,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.darkerGrey,
-                                  ),
-                          key: WidgetKeys.bundlesNumber,
+                        Row(
+                          children: [
+                            if (materialInfo.isMarketPlace) ...[
+                              MarketPlaceLogo.small(),
+                              const SizedBox(width: 4),
+                            ],
+                            Text(
+                              materialInfo.bundle.bundleCode,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(color: ZPColors.neutralsGrey1),
+                              key: WidgetKeys.bundlesNumber,
+                            ),
+                          ],
                         ),
                         Text(
                           materialInfo.bundle.bundleName.getOrDefaultValue(''),
@@ -175,12 +184,15 @@ class _BundleSectionItem extends StatelessWidget {
                           key: WidgetKeys.bundlesDescription,
                         ),
                         Text(
-                          materialInfo.manufactured,
+                          (materialInfo.manufacturerPrefix.isNotEmpty
+                                  ? '${context.tr(materialInfo.manufacturerPrefix)}: '
+                                  : '') +
+                              materialInfo.getManufactured,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.darkerGrey,
+                                    color: ZPColors.neutralsGrey1,
                                   ),
                           key: WidgetKeys.bundlesManufactured,
                         ),

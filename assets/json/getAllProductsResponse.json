@@ -521,7 +521,8 @@
                     ],
                     "DataTotalCount": 6,
                     "DataTotalHidden": 3,
-                    "IsGimmick": null
+                    "IsGimmick": null,
+                    "isMarketPlace":true
                 }
             ]
         }

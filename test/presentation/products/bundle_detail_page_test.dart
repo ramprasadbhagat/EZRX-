@@ -1,17 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -26,7 +21,9 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/bundle_detail_page.dart';
@@ -35,78 +32,28 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/mock_other.dart';
 import '../../utils/widget_utils.dart';
 
-class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MaterialListMockBloc
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class ProductDetailsMockBloc
-    extends MockBloc<ProductDetailEvent, ProductDetailState>
-    implements ProductDetailBloc {}
-
-class CartMockBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class ProductImageMockBloc
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MaterialPriceMockBloc
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MaterialPageXMock extends Mock implements MaterialPageX {}
-
-class MixpanelMock extends Mock implements Mixpanel {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
-
-class BundleAddToCartBlocMock
-    extends MockBloc<BundleAddToCartEvent, BundleAddToCartState>
-    implements BundleAddToCartBloc {}
-
-final locator = GetIt.instance;
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-
-  final mockSalesOrgBloc = SalesOrgMockBloc();
-  final userBlocMock = UserMockBloc();
-  final materialListMockBloc = MaterialListMockBloc();
+  final materialListMockBloc = MaterialListBlocMock();
   late ProductDetailBloc productDetailMockBloc;
-  final mockProductImageBloc = ProductImageMockBloc();
-  final materialPriceMockBloc = MaterialPriceMockBloc();
+  final mockProductImageBloc = ProductImageBlocMock();
+  final materialPriceMockBloc = MaterialPriceBlocMock();
   late EligibilityBlocMock eligibilityBlocMock;
-  late CustomerCodeBloc customerCodeBlocMock;
   late CartBloc cartMockBloc;
   late AppRouter autoRouterMock;
   late MaterialInfo bundle;
   late BundleAddToCartBloc bundleAddToCartBloc;
   late MaterialResponse materialResponseMock;
   //////////////////////Finder//////////////////////////////////////////////////
-  final bundleImage = find.byKey(
-    WidgetKeys.bundleImage,
-  );
+  final bundleImage = find.byKey(WidgetKeys.bundleImage);
   final bundleDetailsCarousel = find.byKey(WidgetKeys.bundleDetailsCarousel);
   final materialDetailsImageCounterFinder =
       find.byKey(WidgetKeys.materialDetailsImageCounter);
@@ -129,7 +76,6 @@ void main() {
   /////////////////////////////////////////////////////////////////////////////
 
   setUpAll(() async {
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<ProductDetailBloc>(() => productDetailMockBloc);
@@ -171,22 +117,13 @@ void main() {
     'Bundle Details Page',
     () {
       setUp(() {
-        customerCodeBlocMock = CustomerCodeBlocMock();
-        cartMockBloc = CartMockBloc();
+        cartMockBloc = CartBlocMock();
         eligibilityBlocMock = EligibilityBlocMock();
-        autoRouterMock = MockAppRouter();
-        productDetailMockBloc = ProductDetailsMockBloc();
+        autoRouterMock = AutoRouteMock();
+        productDetailMockBloc = ProductDetailBlocMock();
         bundleAddToCartBloc = BundleAddToCartBlocMock();
-
-        when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(),
-        );
-        when(() => customerCodeBlocMock.state)
-            .thenReturn(CustomerCodeState.initial());
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(),
-        );
+        when(() => eligibilityBlocMock.state)
+            .thenReturn(EligibilityState.initial().copyWith());
         when(() => materialListMockBloc.state)
             .thenReturn(MaterialListState.initial());
         when(() => productDetailMockBloc.state)
@@ -199,9 +136,8 @@ void main() {
         when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
         when(() => productDetailMockBloc.state)
             .thenReturn(ProductDetailState.initial());
-        when(() => bundleAddToCartBloc.state).thenReturn(
-          BundleAddToCartState.initial(),
-        );
+        when(() => bundleAddToCartBloc.state)
+            .thenReturn(BundleAddToCartState.initial());
         when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
         when(() => autoRouterMock.popForced())
             .thenAnswer((invocation) async => true);
@@ -213,11 +149,6 @@ void main() {
           usingLocalization: true,
           useMediaQuery: false,
           providers: [
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<EligibilityBloc>(
               create: ((context) => eligibilityBlocMock),
             ),
@@ -527,20 +458,20 @@ void main() {
           ),
         );
         when(() => bundleAddToCartBloc.state).thenReturn(
-          BundleAddToCartState.initial().copyWith(
-            bundleMaterials: bundle.bundle.materials
-                .map(
-                  (e) => e.copyWith(
-                    quantity: MaterialQty(2),
-                    stockInfos: [
-                      StockInfo.empty().copyWith(
-                        inStock: MaterialInStock('Yes'),
+          BundleAddToCartState.initial().copyWith.materialInfo.bundle(
+                materials: bundle.bundle.materials
+                    .map(
+                      (e) => e.copyWith(
+                        quantity: MaterialQty(2),
+                        stockInfos: [
+                          StockInfo.empty().copyWith(
+                            inStock: MaterialInStock('Yes'),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                )
-                .toList(),
-          ),
+                    )
+                    .toList(),
+              ),
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
@@ -549,10 +480,7 @@ void main() {
         await tester.pumpAndSettle();
         verify(
           () => bundleAddToCartBloc.add(
-            BundleAddToCartEvent.set(
-              bundle: bundle,
-              bundleMaterials: bundle.bundle.materials,
-            ),
+            BundleAddToCartEvent.set(bundle: bundle),
           ),
         ).called(1);
         expect(bundleAddToCartSheet, findsOneWidget);
@@ -585,10 +513,10 @@ void main() {
         verify(
           () => bundleAddToCartBloc.add(
             const BundleAddToCartEvent.validateQuantity(
-              isError: false,
+              showErrorMessage: false,
             ),
           ),
-        ).called(3);
+        ).called(2);
       });
 
       testWidgets('add bundle item quantity test', (tester) async {
@@ -600,19 +528,19 @@ void main() {
           ),
         );
         when(() => bundleAddToCartBloc.state).thenReturn(
-          BundleAddToCartState.initial().copyWith(
-            bundleMaterials: bundle.bundle.materials
-                .map(
-                  (e) => e.copyWith(
-                    stockInfos: [
-                      StockInfo.empty().copyWith(
-                        inStock: MaterialInStock('Yes'),
+          BundleAddToCartState.initial().copyWith.materialInfo.bundle(
+                materials: bundle.bundle.materials
+                    .map(
+                      (e) => e.copyWith(
+                        stockInfos: [
+                          StockInfo.empty().copyWith(
+                            inStock: MaterialInStock('Yes'),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                )
-                .toList(),
-          ),
+                    )
+                    .toList(),
+              ),
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
@@ -623,7 +551,6 @@ void main() {
           () => bundleAddToCartBloc.add(
             BundleAddToCartEvent.set(
               bundle: bundle,
-              bundleMaterials: bundle.bundle.materials,
             ),
           ),
         ).called(1);
@@ -677,20 +604,20 @@ void main() {
           ),
         );
         when(() => bundleAddToCartBloc.state).thenReturn(
-          BundleAddToCartState.initial().copyWith(
-            bundleMaterials: bundle.bundle.materials
-                .map(
-                  (e) => e.copyWith(
-                    quantity: MaterialQty(2),
-                    stockInfos: [
-                      StockInfo.empty().copyWith(
-                        inStock: MaterialInStock('Yes'),
+          BundleAddToCartState.initial().copyWith.materialInfo.bundle(
+                materials: bundle.bundle.materials
+                    .map(
+                      (e) => e.copyWith(
+                        quantity: MaterialQty(2),
+                        stockInfos: [
+                          StockInfo.empty().copyWith(
+                            inStock: MaterialInStock('Yes'),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                )
-                .toList(),
-          ),
+                    )
+                    .toList(),
+              ),
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
@@ -701,7 +628,6 @@ void main() {
           () => bundleAddToCartBloc.add(
             BundleAddToCartEvent.set(
               bundle: bundle,
-              bundleMaterials: bundle.bundle.materials,
             ),
           ),
         ).called(1);
@@ -823,6 +749,26 @@ void main() {
         final price =
             find.text(materialResponseMock.products[12].bundle.bundleCode);
         expect(price, findsOneWidget);
+      });
+
+      testWidgets('Find marketplace logo in image section MP bundle detail',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialResponseMock.products
+                  .firstWhere((e) => e.type.typeBundle && e.isMarketPlace)
+                  .copyWith
+                  .bundle(
+                materials: [MaterialInfo.empty()],
+              ),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(find.byType(MarketPlaceRectangleLogo), findsOne);
       });
 
       testWidgets(

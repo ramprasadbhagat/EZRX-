@@ -100,7 +100,8 @@ class PriceComponent extends StatelessWidget {
         type == PriceStyle.bundleListPriceStrikeThrough ||
         type == PriceStyle.bundleActiveOfferPrice ||
         type == PriceStyle.materialListPriceStrikeThrough ||
-        type == PriceStyle.bundleFinalPrice) {
+        type == PriceStyle.bundleFinalPrice ||
+        type == PriceStyle.bundleAddToCartPrice) {
       textSpans
           .add(TextSpan(text: ' $trailingText', style: currencyCodeTextStyle));
     }
@@ -124,6 +125,7 @@ class PriceComponent extends StatelessWidget {
 enum PriceStyle {
   commonPrice,
   bundlePrice,
+  bundleAddToCartPrice,
   bundleActiveOfferPrice,
   bundleFinalPrice,
   bundleListPriceStrikeThrough,
@@ -170,7 +172,8 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.bundlePrice:
     case PriceStyle.bonusPrice:
       return ZPColors.neutralsBlack;
-
+    case PriceStyle.bundleAddToCartPrice:
+      return ZPColors.skyBlueColor;
     case PriceStyle.comboOfferPrice:
     case PriceStyle.comboOfferPriceDiscounted:
       return ZPColors.darkerGrey;
@@ -251,6 +254,10 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       priceTextStyle = Theme.of(context).textTheme.labelMedium;
       break;
     case PriceStyle.bundlePrice:
+      priceTextStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
+            fontSize: 24,
+          );
+    case PriceStyle.bundleAddToCartPrice:
       priceTextStyle = Theme.of(context).textTheme.labelLarge;
       break;
     case PriceStyle.discountPrice:
@@ -312,6 +319,11 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.bundlePrice:
       return Theme.of(context).textTheme.labelLarge!.copyWith(
             color: ZPColors.neutralsBlack,
+            fontSize: 24,
+          );
+    case PriceStyle.bundleAddToCartPrice:
+      return Theme.of(context).textTheme.labelLarge!.copyWith(
+            color: ZPColors.skyBlueColor,
           );
     case PriceStyle.paymentInProgressPrice:
       return Theme.of(context)

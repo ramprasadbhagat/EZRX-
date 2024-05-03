@@ -4,36 +4,19 @@ part of 'bundle_add_to_cart_bloc.dart';
 class BundleAddToCartState with _$BundleAddToCartState {
   const BundleAddToCartState._();
   const factory BundleAddToCartState({
-    required MaterialInfo bundle,
-    required List<MaterialInfo> bundleMaterials,
+    required MaterialInfo materialInfo,
     required bool showErrorMessage,
   }) = _BundleAddToCartState;
 
   factory BundleAddToCartState.initial() => BundleAddToCartState(
-        bundle: MaterialInfo.empty(),
-        bundleMaterials: <MaterialInfo>[],
+        materialInfo: MaterialInfo.empty(),
         showErrorMessage: false,
       );
 
-  int get totalCount => bundleMaterials.fold<int>(
-        0,
-        (sum, element) => sum + element.quantity.intValue,
-      );
-
-  BundleInfo get bundleOffer =>
-      bundle.bundle.sortedBundleInformation.reversed.firstWhere(
-        (element) => element.quantity <= totalCount,
-        orElse: () =>
-            bundle.bundle.sortedBundleInformation.firstOrNull ??
-            BundleInfo.empty(),
-      );
-
-  List<MaterialInfo> get bundleMaterialsSelected => bundleMaterials
-      .where((element) => element.quantity.intValue > 0)
-      .toList();
-
-  bool get isBundleCountSatisfied =>
-      totalCount >= bundle.bundle.minimumQuantityBundleMaterial.quantity;
+  List<MaterialInfo> get bundleMaterialsSelected =>
+      materialInfo.bundle.materials
+          .where((element) => element.quantity.intValue > 0)
+          .toList();
 
   int _materialInCart(PriceAggregate materialInCart, MaterialInfo info) =>
       materialInCart.bundle.materials
@@ -55,5 +38,6 @@ class BundleAddToCartState with _$BundleAddToCartState {
           )
           .toList();
 
-  bool get displayErrorMessage => showErrorMessage && !isBundleCountSatisfied;
+  bool get displayErrorMessage =>
+      showErrorMessage && !materialInfo.bundle.miniumQtySatisfied;
 }

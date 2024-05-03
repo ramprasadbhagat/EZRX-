@@ -1,11 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -31,6 +27,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.d
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/products_tab.dart';
 import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
@@ -44,6 +41,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../common_mock_data/mock_other.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
@@ -54,78 +52,27 @@ import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
-class MaterialListBlocMock
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ProductDetailBlocMock
-    extends MockBloc<ProductDetailEvent, ProductDetailState>
-    implements ProductDetailBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class MaterialPageXMock extends Mock implements MaterialPageX {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class MaterialFilterBlocMock
-    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
-    implements MaterialFilterBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
-
-class OrderEligibilityBlocMock
-    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
-    implements OrderEligibilityBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
 void main() {
   late MaterialListBlocMock materialListBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late ProductDetailBlocMock productDetailBlocMock;
   late MaterialPriceBlocMock materialPriceBlocMock;
-  late CustomerCodeBlocMock customerCodeBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
   late CartBlocMock cartBlocMock;
   late OrderEligibilityBloc orderEligibilityBloc;
   late AppRouter autoRouterMock;
   late MaterialFilterBlocMock materialFilterBlocMock;
   late ProductImageBlocMock productImageBlocMock;
-  late SalesOrgBlocMock salesOrgBlocMock;
   late MaterialResponse materialResponseMock;
   late List<Price> priceList;
   late Map<MaterialNumber, Price> materialPriceMock;
   late List<PriceAggregate> mockCartItems;
-  late UserBlocMock userBlocMock;
   late List<CustomerLicense> customerLicense;
   setUpAll(() async {
-    locator.registerFactory(() => MockAppRouter());
+    locator.registerFactory(() => AutoRouteMock());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
-    autoRouterMock = locator<MockAppRouter>();
+    autoRouterMock = locator<AutoRouteMock>();
     orderEligibilityBloc = OrderEligibilityBlocMock();
     materialResponseMock = await MaterialListLocalDataSource().getProductList();
     priceList = await MaterialPriceLocalDataSource().getPriceList();
@@ -147,15 +94,12 @@ void main() {
         customerLicenseBlocMock = CustomerLicenseBlocMock();
 
         materialPriceBlocMock = MaterialPriceBlocMock();
-        customerCodeBlocMock = CustomerCodeBlocMock();
         materialFilterBlocMock = MaterialFilterBlocMock();
         productImageBlocMock = ProductImageBlocMock();
         cartBlocMock = CartBlocMock();
-        salesOrgBlocMock = SalesOrgBlocMock();
         materialPriceMock = Map.fromEntries(
           priceList.map((price) => MapEntry(price.materialNumber, price)),
         );
-        userBlocMock = UserBlocMock();
         when(() => autoRouterMock.pushNamed(any())).thenAnswer(
           (_) => Future.value(),
         );
@@ -174,20 +118,13 @@ void main() {
             .thenReturn(ProductDetailState.initial());
         when(() => materialPriceBlocMock.state)
             .thenReturn(MaterialPriceState.initial());
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(isFetching: false),
-        );
         when(() => autoRouterMock.currentPath).thenReturn('fake-path');
         when(() => cartBlocMock.state).thenReturn(CartState.initial());
-        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
         when(() => materialFilterBlocMock.state)
             .thenReturn(MaterialFilterState.initial());
         when(() => productImageBlocMock.state)
             .thenReturn(ProductImageState.initial());
         when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial(),
-        );
         resetMocktailState();
       });
 
@@ -202,14 +139,8 @@ void main() {
             BlocProvider<EligibilityBloc>(
               create: (context) => eligibilityBlocMock,
             ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
             BlocProvider<CartBloc>(
               create: (context) => cartBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => salesOrgBlocMock,
             ),
             BlocProvider<ProductDetailBloc>(
               create: (context) => productDetailBlocMock,
@@ -226,7 +157,6 @@ void main() {
             BlocProvider<ProductImageBloc>(
               create: (context) => productImageBlocMock,
             ),
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<CustomerLicenseBloc>(
               create: (context) => customerLicenseBlocMock,
             ),
@@ -526,6 +456,47 @@ void main() {
       );
 
       testWidgets(
+        '=> Test MP bundle item',
+        (tester) async {
+          final bundle = materialResponseMock.products
+              .firstWhere((e) => e.type.typeBundle && e.isMarketPlace);
+          when(() => materialListBlocMock.state).thenReturn(
+            MaterialListState.initial().copyWith(materialList: [bundle]),
+          );
+
+          when(
+            () => autoRouterMock
+                .push(BundleDetailPageRoute(materialInfo: bundle)),
+          ).thenAnswer((_) async => true);
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          final bundleFinder = find.byKey(WidgetKeys.materialListBundleCard);
+          expect(
+            find.descendant(
+              of: bundleFinder,
+              matching: find.byType(MarketPlaceLogo),
+            ),
+            findsOne,
+          );
+          expect(
+            find.descendant(
+              of: bundleFinder,
+              matching: find.text('Sold by: ${bundle.manufactured}'),
+            ),
+            findsOne,
+          );
+          await tester.tap(bundleFinder);
+          await tester.pumpAndSettle();
+
+          verify(
+            () => autoRouterMock
+                .push(BundleDetailPageRoute(materialInfo: bundle)),
+          ).called(1);
+        },
+      );
+
+      testWidgets(
         '=> Test material not found',
         (tester) async {
           await tester.pumpWidget(getScopedWidget());
@@ -703,19 +674,6 @@ void main() {
             shipToInfo: fakeShipToInfo,
           ),
         );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            salesOrganisation: fakePHSalesOrganisation,
-            configs: fakePHSalesOrgConfigs,
-          ),
-        );
-
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeClientAdmin,
-          ),
-        );
-
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final covidFilterButton = find.text(

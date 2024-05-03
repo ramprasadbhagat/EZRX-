@@ -13,6 +13,7 @@ class _BundleGridItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => _bundleOnTap(context, materialInfo),
       child: CustomCard(
+        clipBehavior: Clip.hardEdge,
         key: WidgetKeys.materialListBundleCard,
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(0),
@@ -32,12 +33,20 @@ class _BundleGridItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          materialInfo.bundle.bundleCode,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.darkGray,
-                                  ),
+                        Row(
+                          children: [
+                            if (materialInfo.isMarketPlace) ...[
+                              MarketPlaceLogo.small(),
+                              const SizedBox(width: 4),
+                            ],
+                            Text(
+                              materialInfo.bundle.bundleCode,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(color: ZPColors.neutralsGrey1),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 2),
                         Text(
@@ -48,10 +57,13 @@ class _BundleGridItem extends StatelessWidget {
                         ),
                         const SizedBox(height: 3),
                         Text(
-                          materialInfo.manufactured,
+                          (materialInfo.manufacturerPrefix.isNotEmpty
+                                  ? '${context.tr(materialInfo.manufacturerPrefix)}: '
+                                  : '') +
+                              materialInfo.getManufactured,
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.darkGray,
+                                    color: ZPColors.neutralsGrey1,
                                     fontSize: 10,
                                   ),
                           maxLines: 1,
@@ -64,21 +76,18 @@ class _BundleGridItem extends StatelessWidget {
                 ],
               ),
             ),
-            Column(
-              children: materialInfo.listingVisibleMaterial
-                  .map((e) => _BundleMaterial(materialData: e))
-                  .toList(),
-            ),
-            materialInfo.isMaterialHiddenOnListing
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 9),
-                    child: Text(
-                      '+ ${materialInfo.data.skip(materialInfo.listingVisibleMaterial.length).length} materials',
-                      style: Theme.of(context).textTheme.bodySmall,
-                      maxLines: 1,
-                    ),
-                  )
-                : const SizedBox.shrink(),
+            ...materialInfo.listingVisibleMaterial
+                .map((e) => _BundleMaterial(materialData: e))
+                .toList(),
+            if (materialInfo.isMaterialHiddenOnListing)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 9),
+                child: Text(
+                  '+ ${materialInfo.data.skip(materialInfo.listingVisibleMaterial.length).length} materials',
+                  style: Theme.of(context).textTheme.bodySmall,
+                  maxLines: 1,
+                ),
+              ),
           ],
         ),
       ),

@@ -20,6 +20,7 @@ import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -192,6 +193,10 @@ class ComboDealMaterialDetailBlocMock
 class ComboDealListBlocMock
     extends MockBloc<ComboDealListEvent, ComboDealListState>
     implements ComboDealListBloc {}
+
+class BundleAddToCartBlocMock
+    extends MockBloc<BundleAddToCartEvent, BundleAddToCartState>
+    implements BundleAddToCartBloc {}
 
 ///////////////////////////////////////////////////////////////////////////
 

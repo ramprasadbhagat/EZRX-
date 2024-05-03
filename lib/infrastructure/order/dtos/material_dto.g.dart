@@ -6,8 +6,8 @@ part of 'material_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
-    _$_MaterialDto(
+_$MaterialDtoImpl _$$MaterialDtoImplFromJson(Map<String, dynamic> json) =>
+    _$MaterialDtoImpl(
       governmentMaterialCode: json['governmentMaterialCode'] as String? ?? '',
       therapeuticClass: json['therapeuticClass'] as String? ?? '',
       itemBrand: json['itemBrand'] as String? ?? '',
@@ -56,7 +56,7 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
+Map<String, dynamic> _$$MaterialDtoImplToJson(_$MaterialDtoImpl instance) =>
     <String, dynamic>{
       'governmentMaterialCode': instance.governmentMaterialCode,
       'therapeuticClass': instance.therapeuticClass,
@@ -96,8 +96,9 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'isMarketPlace': instance.isMarketPlace,
     };
 
-_$_MaterialDataDto _$$_MaterialDataDtoFromJson(Map<String, dynamic> json) =>
-    _$_MaterialDataDto(
+_$MaterialDataDtoImpl _$$MaterialDataDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MaterialDataDtoImpl(
       code: materialNumberReadValue(json, 'code') as String? ?? '',
       manufactured: json['manufactured'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
@@ -105,9 +106,12 @@ _$_MaterialDataDto _$$_MaterialDataDtoFromJson(Map<String, dynamic> json) =>
           json['defaultMaterialDescription'] as String? ?? '',
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
       governmentMaterialCode: json['governmentMaterialCode'] as String? ?? '',
+      isMarketPlace:
+          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_MaterialDataDtoToJson(_$_MaterialDataDto instance) =>
+Map<String, dynamic> _$$MaterialDataDtoImplToJson(
+        _$MaterialDataDtoImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'manufactured': instance.manufactured,
@@ -115,11 +119,12 @@ Map<String, dynamic> _$$_MaterialDataDtoToJson(_$_MaterialDataDto instance) =>
       'defaultMaterialDescription': instance.defaultMaterialDescription,
       'genericMaterialName': instance.genericMaterialName,
       'governmentMaterialCode': instance.governmentMaterialCode,
+      'isMarketPlace': instance.isMarketPlace,
     };
 
-_$_MaterialResponseDto _$$_MaterialResponseDtoFromJson(
+_$MaterialResponseDtoImpl _$$MaterialResponseDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_MaterialResponseDto(
+    _$MaterialResponseDtoImpl(
       count: json['count'] as int? ?? 0,
       products: (json['products'] as List<dynamic>?)
               ?.map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
@@ -127,8 +132,8 @@ _$_MaterialResponseDto _$$_MaterialResponseDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_MaterialResponseDtoToJson(
-        _$_MaterialResponseDto instance) =>
+Map<String, dynamic> _$$MaterialResponseDtoImplToJson(
+        _$MaterialResponseDtoImpl instance) =>
     <String, dynamic>{
       'count': instance.count,
       'products': instance.products.map((e) => e.toJson()).toList(),

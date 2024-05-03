@@ -17,7 +17,7 @@ class BundleInfo with _$BundleInfo {
   factory BundleInfo.empty() => BundleInfo(
         sequence: 1,
         quantity: 1,
-        type: DiscountType('%'),
-        rate: -10,
+        type: DiscountType(''),
+        rate: 0,
       );
 }

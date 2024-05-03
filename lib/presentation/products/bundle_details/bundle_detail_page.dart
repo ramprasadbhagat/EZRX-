@@ -14,9 +14,11 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/curved_rectangle_widget.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
@@ -33,6 +35,7 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 part 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_image_section.dart';
 part 'package:ezrxmobile/presentation/products/bundle_details/widget/outline_text.dart';
@@ -136,11 +139,10 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
               child: ProductTag.bundleOffer(),
             ),
             const _BundleDetails(),
-            const SizedBox(height: 10),
             const Divider(
               indent: 0,
               endIndent: 0,
-              height: 15,
+              height: 40,
               color: ZPColors.lightGray2,
             ),
             const _BundleOfferDetails(),
@@ -187,13 +189,15 @@ class _BundleDetails extends StatelessWidget {
         final material = state.productDetailAggregate.materialInfo;
 
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 material.bundle.bundleCode,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.neutralsGrey1,
+                    ),
                 key: WidgetKeys.bundleOfferCode,
               ),
               Row(
@@ -204,11 +208,17 @@ class _BundleDetails extends StatelessWidget {
                       : Expanded(
                           child: Text(
                             material.name,
-                            style: Theme.of(context).textTheme.labelLarge,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  fontSize: 20,
+                                ),
                             key: WidgetKeys.bundleOfferName,
                           ),
                         ),
                   FavouriteIcon(
+                    iconSize: 32,
                     isFavourite: material.isFavourite,
                     onTap: () {
                       if (material.isFavourite) {
@@ -275,72 +285,86 @@ class _BundleOfferDetails extends StatelessWidget {
             state.productDetailAggregate.materialInfo.bundle.bundleInformation;
 
         return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ListTile(
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 key: WidgetKeys.bundleOfferSummary,
-                contentPadding: EdgeInsets.zero,
-                minLeadingWidth: 5,
-                isThreeLine: true,
-                leading: const Icon(
-                  Icons.discount_outlined,
-                ),
-                title: Text(
-                  context.tr('Bundle offer'),
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                subtitle: Text(
-                  context.tr(
-                    'Mix and match bundled products and buy more for better deals.',
+                children: [
+                  SvgPicture.asset(
+                    SvgImage.bundleOfferIcon,
+                    height: 18,
+                    width: 18,
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          context.tr('Bundle offer'),
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          context.tr(
+                            'Mix and match bundled products and buy more for better deals.',
+                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(color: ZPColors.neutralsGrey1),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              if (bundleInformation.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                CurvedRectangleWidget(
+                  key: WidgetKeys.bundleInformation,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  semiCircleCount: 8,
+                  semiCircleRadius: 16,
+                  width: double.infinity,
+                  backgroundColor: ZPColors.lightBlueColor,
+                  borderColor: ZPColors.lightBlueBorderColor,
+                  child: Column(
+                    children: state.productDetailAggregate.materialInfo.bundle
+                        .sortedBundleInformation
+                        .map(
+                          (e) => BalanceTextRow(
+                            keyFlex: 3,
+                            keyText: '${StringUtils.displayPrice(
+                              context
+                                  .read<EligibilityBloc>()
+                                  .state
+                                  .salesOrgConfigs,
+                              e.rate,
+                            )} ${context.tr('per item')}',
+                            keyTextStyle: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(fontWeight: FontWeight.w600),
+                            valueFlex: 4,
+                            valueText:
+                                'Total purchase quantity:${e.quantity} or more',
+                            valueTextStyle: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(color: ZPColors.darkGray),
+                          ),
+                        )
+                        .toList(),
                   ),
                 ),
-              ),
-              bundleInformation.isNotEmpty
-                  ? CurvedRectangleWidget(
-                      key: WidgetKeys.bundleInformation,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
-                      ),
-                      semiCircleCount: 8,
-                      semiCircleRadius: 16,
-                      width: double.infinity,
-                      backgroundColor: ZPColors.lightBlueColor,
-                      borderColor: ZPColors.lightBlueBorderColor,
-                      child: Column(
-                        children: state.productDetailAggregate.materialInfo
-                            .bundle.sortedBundleInformation
-                            .map(
-                              (e) => BalanceTextRow(
-                                keyFlex: 3,
-                                keyText: '${StringUtils.displayPrice(
-                                  context
-                                      .read<EligibilityBloc>()
-                                      .state
-                                      .salesOrgConfigs,
-                                  e.rate,
-                                )} ${context.tr('per item')}',
-                                keyTextStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(fontWeight: FontWeight.w600),
-                                valueFlex: 4,
-                                valueText:
-                                    'Total purchase quantity:${e.quantity} or more',
-                                valueTextStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(color: ZPColors.darkGray),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
+              ],
               ListTile(
                 key: WidgetKeys.bundleOfferMaterialInfo,
                 onTap: () {
@@ -365,17 +389,14 @@ class _BundleOfferDetails extends StatelessWidget {
     );
   }
 
-  void _showMaterialDescriptionSheet({
-    required BuildContext context,
-  }) {
-    showModalBottomSheet(
-      context: context,
-      builder: (_) => BlocProvider<ProductDetailBloc>.value(
-        value: context.read<ProductDetailBloc>(),
-        child: const BundleMaterialDescription(),
-      ),
-    );
-  }
+  void _showMaterialDescriptionSheet({required BuildContext context}) =>
+      showModalBottomSheet(
+        context: context,
+        builder: (_) => BlocProvider<ProductDetailBloc>.value(
+          value: context.read<ProductDetailBloc>(),
+          child: const BundleMaterialDescription(),
+        ),
+      );
 
   void _trackShowProductInfo(BuildContext context) {
     final materialInfo = context
@@ -431,10 +452,7 @@ class _AddToCartButton extends StatelessWidget {
                                 .productDetailAggregate
                                 .materialInfo;
                             context.read<BundleAddToCartBloc>().add(
-                                  BundleAddToCartEvent.set(
-                                    bundle: bundle,
-                                    bundleMaterials: bundle.bundle.materials,
-                                  ),
+                                  BundleAddToCartEvent.set(bundle: bundle),
                                 );
                             _showBundleAddToCartBottomSheet(
                               context: context,
@@ -461,9 +479,9 @@ class _AddToCartButton extends StatelessWidget {
       isScrollControlled: true,
       useSafeArea: true,
       context: context,
-      builder: (_) {
-        return BundlesAddToCartSheet(banner: banner);
-      },
+      constraints:
+          BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+      builder: (_) => BundlesAddToCartSheet(banner: banner),
     );
   }
 }

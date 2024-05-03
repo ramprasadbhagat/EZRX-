@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -19,6 +22,8 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -29,10 +34,8 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_i
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ezrxmobile/presentation/core/price_component.dart';
+const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20);
 
 class BundlesAddToCartSheet extends StatelessWidget {
   final EZReachBanner? banner;
@@ -43,37 +46,59 @@ class BundlesAddToCartSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bundleAddToCartState = context.read<BundleAddToCartBloc>().state;
+    final materialInfo = context.read<BundleAddToCartBloc>().state.materialInfo;
+    final bundle = materialInfo.bundle;
 
     return Padding(
       key: WidgetKeys.bundleAddToCartSheet,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            context.tr('Add bundle to cart'),
-            style: Theme.of(context).textTheme.labelLarge,
+          Padding(
+            padding: _horizontalPadding,
+            child: Row(
+              children: [
+                if (materialInfo.isMarketPlace) ...[
+                  const MarketPlaceRectangleLogo(),
+                  const SizedBox(width: 8),
+                ],
+                Text(
+                  context.tr('Add bundle to cart'),
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: ZPColors.primary,
+                        fontSize: 20,
+                      ),
+                ),
+              ],
+            ),
           ),
-          InfoLabel(
-            textValue:
-                '${context.tr('Please note that the minimum total purchase quantity for this bundle offer is')} ${bundleAddToCartState.bundle.bundle.minimumQuantityBundleMaterial.quantity}.',
-            key: WidgetKeys.addBundleMinimumQty,
+          Padding(
+            padding: _horizontalPadding,
+            child: InfoLabel(
+              textValue:
+                  '${context.tr('Please note that the minimum total purchase quantity for this bundle offer is')} ${bundle.minimumQuantityBundleMaterial.quantity}.',
+              key: WidgetKeys.addBundleMinimumQty,
+              textColor: ZPColors.infoTextBlueColor,
+            ),
           ),
           Expanded(
-            child: ListView.builder(
-              key: WidgetKeys.scrollList,
-              itemCount: bundleAddToCartState.bundleMaterials.length,
-              itemBuilder: (context, index) => _BundleMaterialListTile(
-                materialInfo:
-                    bundleAddToCartState.bundleMaterials.elementAt(index),
+            child: Scrollbar(
+              thumbVisibility: true,
+              child: ListView.separated(
+                padding: _horizontalPadding,
+                key: WidgetKeys.scrollList,
+                itemCount: bundle.materials.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 16),
+                itemBuilder: (context, index) => _BundleMaterialListTile(
+                  materialInfo: bundle.materials.elementAt(index),
+                ),
               ),
             ),
           ),
-          _BundleSheetFooter(
-            banner: banner,
-          ),
+          _BundleSheetFooter(banner: banner),
+          const SizedBox(height: 16),
         ],
       ),
     );
@@ -99,9 +124,7 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
   void initState() {
     super.initState();
     context.read<BundleAddToCartBloc>().add(
-          const BundleAddToCartEvent.validateQuantity(
-            isError: false,
-          ),
+          const BundleAddToCartEvent.validateQuantity(showErrorMessage: false),
         );
   }
 
@@ -126,6 +149,7 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
         CustomCard(
           showShadow: false,
           showBorder: true,
+          clipBehavior: Clip.hardEdge,
           child: ProductImage(
             materialNumber: widget.materialInfo.materialNumber,
             height: MediaQuery.of(context).size.height * 0.1,
@@ -145,7 +169,7 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
             children: [
               Row(
                 children: [
-                  Expanded(
+                  Flexible(
                     child: Text(
                       widget.materialInfo.combinationCode(
                         showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
@@ -154,9 +178,7 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
                     ),
                   ),
                   if (!widget.materialInfo.inStock) ...[
-                    const SizedBox(
-                      width: 5,
-                    ),
+                    const SizedBox(width: 5),
                     StatusLabel(
                       status: StatusType(
                         addOosMaterials.productTag(validateOutOfStockValue),
@@ -230,124 +252,140 @@ class _BundleSheetFooter extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            color: ZPColors.lightGray,
-          ),
-        ),
+        border: Border(top: BorderSide(color: ZPColors.lightGray)),
       ),
       child: BlocBuilder<BundleAddToCartBloc, BundleAddToCartState>(
         buildWhen: (previous, current) =>
-            previous.totalCount != current.totalCount ||
+            previous.materialInfo.bundle.materials !=
+                current.materialInfo.bundle.materials ||
             previous.showErrorMessage != current.showErrorMessage,
         builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Total quantity: ${state.totalCount}',
-                style: Theme.of(context).textTheme.bodyLarge,
-                key: WidgetKeys.addBundleTotalQty,
-              ),
-              if (state.displayErrorMessage)
-                ErrorTextWithIcon(
-                  key: WidgetKeys.addBundleInvalidQtyWarning,
-                  textPadding: EdgeInsets.zero,
-                  valueText:
-                      '${context.tr('Minimum total purchase qty')}: ${state.bundle.bundle.minimumQuantityBundleMaterial.quantity}',
-                ),
-              PriceComponent(
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: state.bundleOffer.rate.toString(),
-                type: PriceStyle.bundlePrice,
-                trailingText: context.tr('per item'),
-                key: WidgetKeys.addBundleRate,
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      key: WidgetKeys.cancelBundleMaterialAddToCart,
-                      onPressed: () {
-                        context.router.pop();
-                      },
-                      child: Text(context.tr('Cancel')),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: BlocConsumer<CartBloc, CartState>(
-                      listenWhen: (previous, current) =>
-                          previous.isUpserting != current.isUpserting,
-                      listener: (context, cartState) {
-                        cartState.apiFailureOrSuccessOption.fold(
-                          () {
-                            if (!cartState.isUpserting &&
-                                cartState.cartProducts.isNotEmpty) {
-                              _trackAddToCartSuccess(
-                                context,
-                                state,
-                                banner: banner,
-                              );
-                              context.router.popForced();
-                              CustomSnackBar(
-                                messageText: context
-                                    .tr('Bundle has been added to cart.'),
-                              ).show(context);
-                            }
-                          },
-                          (either) {
-                            either.fold(
-                              (failure) =>
-                                  _trackAddToCartFailure(context, failure),
-                              (_) {},
-                            );
-                            context.router.pop();
-                          },
-                        );
-                      },
-                      builder: (context, stateCart) {
-                        final materialInCart = stateCart.cartProducts
-                                .where(
-                                  (element) =>
-                                      element.bundle.bundleCode ==
-                                      context
-                                          .read<BundleAddToCartBloc>()
-                                          .state
-                                          .bundle
-                                          .materialNumber
-                                          .getValue(),
-                                )
-                                .firstOrNull ??
-                            PriceAggregate.empty();
+          final configs = context.read<EligibilityBloc>().state.salesOrgConfigs;
+          final bundle = state.materialInfo.bundle;
 
-                        return ElevatedButton(
-                          key: WidgetKeys.bundleAddToCartSheetSubmitButton,
-                          onPressed: () => _addBundlesToCart(
-                            context,
-                            state: state,
-                            stateCart: stateCart,
-                            materialInCart: materialInCart,
-                            banner: banner,
-                          ),
-                          child: LoadingShimmer.withChild(
-                            enabled: stateCart.isUpserting,
-                            child: Text(
-                              context.tr('Add to cart'),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+          return Padding(
+            padding: _horizontalPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text.rich(
+                  key: WidgetKeys.addBundleTotalQty,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.neutralsGrey1,
+                      ),
+                  TextSpan(
+                    children: [
+                      const TextSpan(text: 'Total quantity: '),
+                      TextSpan(
+                        text: '${bundle.totalQty}',
+                        style: const TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ],
+                ),
+                if (state.displayErrorMessage)
+                  ErrorTextWithIcon(
+                    key: WidgetKeys.addBundleInvalidQtyWarning,
+                    textPadding: EdgeInsets.zero,
+                    valueText:
+                        '${context.tr('Minimum total purchase qty')}: ${bundle.minimumQuantityBundleMaterial.quantity}',
+                  ),
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    PriceComponent(
+                      salesOrgConfig: configs,
+                      price: bundle.currentBundleInfo.rate.toString(),
+                      type: PriceStyle.bundleAddToCartPrice,
+                      trailingText: context.tr('per item'),
+                      key: WidgetKeys.addBundleRate,
+                    ),
+                    if (bundle.showStrikeThroughPrice) ...[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4, top: 3),
+                        child: PriceComponent(
+                          salesOrgConfig: configs,
+                          price: bundle.minimumQuantityBundleMaterial.rate
+                              .toString(),
+                          type: PriceStyle.bundleListPriceStrikeThrough,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        key: WidgetKeys.cancelBundleMaterialAddToCart,
+                        onPressed: () {
+                          context.router.pop();
+                        },
+                        child: Text(context.tr('Cancel')),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: BlocConsumer<CartBloc, CartState>(
+                        listenWhen: (previous, current) =>
+                            previous.isUpserting != current.isUpserting,
+                        listener: (context, cartState) {
+                          cartState.apiFailureOrSuccessOption.fold(
+                            () {
+                              if (!cartState.isUpserting &&
+                                  cartState.cartProducts.isNotEmpty) {
+                                _trackAddToCartSuccess(
+                                  context,
+                                  state,
+                                  banner: banner,
+                                );
+                                context.router.popForced();
+                                CustomSnackBar(
+                                  messageText: context
+                                      .tr('Bundle has been added to cart.'),
+                                ).show(context);
+                              }
+                            },
+                            (either) {
+                              either.fold(
+                                (failure) =>
+                                    _trackAddToCartFailure(context, failure),
+                                (_) {},
+                              );
+                              context.router.pop();
+                            },
+                          );
+                        },
+                        builder: (context, stateCart) {
+                          return ElevatedButton(
+                            key: WidgetKeys.bundleAddToCartSheetSubmitButton,
+                            onPressed: state.displayErrorMessage ||
+                                    stateCart.isUpserting
+                                ? null
+                                : () => _addBundlesToCart(
+                                      context,
+                                      state: state,
+                                      stateCart: stateCart,
+                                      banner: banner,
+                                    ),
+                            child: LoadingShimmer.withChild(
+                              enabled: stateCart.isUpserting,
+                              child: Text(
+                                context.tr('Add to cart'),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           );
         },
       ),
@@ -359,14 +397,13 @@ class _BundleSheetFooter extends StatelessWidget {
     BundleAddToCartState state, {
     EZReachBanner? banner,
   }) {
-    final bundle = state.bundle;
+    final bundle = state.materialInfo;
     final mixpanelProps = <String, dynamic>{
       TrackingProps.productName: bundle.name,
       TrackingProps.productNumber: bundle.materialNumber.getOrDefaultValue(''),
       TrackingProps.productManufacturer: bundle.manufactured,
-      TrackingProps.productTotalPrice:
-          state.bundleOffer.rate * state.totalCount,
-      TrackingProps.productQty: state.totalCount,
+      TrackingProps.productTotalPrice: bundle.bundle.totalPrice,
+      TrackingProps.productQty: bundle.bundle.totalQty,
       TrackingProps.clickAt:
           RouterUtils.buildRouteTrackingName(context.router.currentPath),
       TrackingProps.fromBanner: banner != null,
@@ -378,9 +415,8 @@ class _BundleSheetFooter extends StatelessWidget {
       TrackingProps.productName: bundle.name,
       TrackingProps.productNumber: bundle.materialNumber.getOrDefaultValue(''),
       TrackingProps.productManufacturer: bundle.manufactured,
-      TrackingProps.productTotalPrice:
-          state.bundleOffer.rate * state.totalCount,
-      TrackingProps.productQty: state.totalCount,
+      TrackingProps.productTotalPrice: bundle.bundle.totalPrice,
+      TrackingProps.productQty: bundle.bundle.totalQty,
       TrackingProps.clickAt:
           RouterUtils.buildRouteTrackingName(context.router.currentPath),
       TrackingProps.fromBanner: banner != null,
@@ -415,20 +451,31 @@ class _BundleSheetFooter extends StatelessWidget {
     BuildContext context, {
     required BundleAddToCartState state,
     required CartState stateCart,
-    required PriceAggregate materialInCart,
     EZReachBanner? banner,
   }) {
     context.read<BundleAddToCartBloc>().add(
-          BundleAddToCartEvent.validateQuantity(
-            isError: !state.isBundleCountSatisfied,
-          ),
+          const BundleAddToCartEvent.validateQuantity(showErrorMessage: true),
         );
 
-    if (!state.isBundleCountSatisfied || stateCart.isUpserting) return;
+    if (!state.materialInfo.bundle.miniumQtySatisfied ||
+        stateCart.isUpserting) {
+      return;
+    }
+
+    final materialInCart = stateCart
+        .findItemById(MaterialNumber(state.materialInfo.bundle.bundleCode));
+    final addToCartBundle = PriceAggregate.empty().copyWith(
+      bundle: Bundle.empty().copyWith(
+        materials: state.selectedMaterialInfo(materialInCart),
+        bundleCode: state.materialInfo.materialNumber.getValue(),
+        bundleName: BundleName(state.materialInfo.materialDescription),
+      ),
+    );
 
     if (stateCart.containFocMaterialInCartProduct) {
       _showCovidWarningMessageBottomSheet(
         context: context,
+        addToCartBundle: addToCartBundle,
       );
 
       return;
@@ -436,17 +483,7 @@ class _BundleSheetFooter extends StatelessWidget {
 
     context.read<CartBloc>().add(
           CartEvent.upsertCartItems(
-            priceAggregate: PriceAggregate.empty().copyWith(
-              bundle: Bundle.empty().copyWith(
-                materials: state.selectedMaterialInfo(
-                  materialInCart,
-                ),
-                bundleCode: state.bundle.materialNumber.getValue(),
-                bundleName: BundleName(
-                  state.bundle.materialDescription,
-                ),
-              ),
-            ),
+            priceAggregate: addToCartBundle,
             banner: banner,
           ),
         );
@@ -454,36 +491,13 @@ class _BundleSheetFooter extends StatelessWidget {
 
   void _showCovidWarningMessageBottomSheet({
     required BuildContext context,
-  }) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      isDismissible: false,
-      builder: (_) {
-        final bundleAddToCartState = context.read<BundleAddToCartBloc>().state;
-        final materialInCart =
-            context.read<CartBloc>().state.cartProducts.firstWhere(
-                  (element) =>
-                      element.bundle.bundleCode ==
-                      bundleAddToCartState.bundle.materialNumber.getValue(),
-                  orElse: () => PriceAggregate.empty(),
-                );
-
-        return AddToCartErrorSection(
-          priceAggregate: PriceAggregate.empty().copyWith(
-            bundle: Bundle.empty().copyWith(
-              materials: bundleAddToCartState.selectedMaterialInfo(
-                materialInCart,
-              ),
-              bundleCode: bundleAddToCartState.bundle.materialNumber.getValue(),
-              bundleName: BundleName(
-                bundleAddToCartState.bundle.materialDescription,
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
+    required PriceAggregate addToCartBundle,
+  }) =>
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        enableDrag: false,
+        isDismissible: false,
+        builder: (_) => AddToCartErrorSection(priceAggregate: addToCartBundle),
+      );
 }

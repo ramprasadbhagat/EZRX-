@@ -40,4 +40,5 @@ abstract class SvgImage {
   static const String resetPasswordSuccessLogo =
       '${_basePath}reset_password_success_logo.svg';
   static const String tenderIcon = '${_basePath}tender_icon.svg';
+  static const String bundleOfferIcon = '${_basePath}bundle_offer_icon.svg';
 }

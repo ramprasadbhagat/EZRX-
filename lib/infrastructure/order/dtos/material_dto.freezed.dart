@@ -12,7 +12,7 @@ part of 'material_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MaterialDto _$MaterialDtoFromJson(Map<String, dynamic> json) {
   return _MaterialDto.fromJson(json);
@@ -374,11 +374,11 @@ class _$MaterialDtoCopyWithImpl<$Res, $Val extends MaterialDto>
 }
 
 /// @nodoc
-abstract class _$$_MaterialDtoCopyWith<$Res>
+abstract class _$$MaterialDtoImplCopyWith<$Res>
     implements $MaterialDtoCopyWith<$Res> {
-  factory _$$_MaterialDtoCopyWith(
-          _$_MaterialDto value, $Res Function(_$_MaterialDto) then) =
-      __$$_MaterialDtoCopyWithImpl<$Res>;
+  factory _$$MaterialDtoImplCopyWith(
+          _$MaterialDtoImpl value, $Res Function(_$MaterialDtoImpl) then) =
+      __$$MaterialDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -440,11 +440,11 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialDtoCopyWithImpl<$Res>
-    extends _$MaterialDtoCopyWithImpl<$Res, _$_MaterialDto>
-    implements _$$_MaterialDtoCopyWith<$Res> {
-  __$$_MaterialDtoCopyWithImpl(
-      _$_MaterialDto _value, $Res Function(_$_MaterialDto) _then)
+class __$$MaterialDtoImplCopyWithImpl<$Res>
+    extends _$MaterialDtoCopyWithImpl<$Res, _$MaterialDtoImpl>
+    implements _$$MaterialDtoImplCopyWith<$Res> {
+  __$$MaterialDtoImplCopyWithImpl(
+      _$MaterialDtoImpl _value, $Res Function(_$MaterialDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -487,7 +487,7 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
     Object? isSuspended = null,
     Object? isMarketPlace = null,
   }) {
-    return _then(_$_MaterialDto(
+    return _then(_$MaterialDtoImpl(
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
@@ -638,8 +638,8 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MaterialDto extends _MaterialDto {
-  const _$_MaterialDto(
+class _$MaterialDtoImpl extends _MaterialDto {
+  const _$MaterialDtoImpl(
       {@JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       required this.governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
@@ -707,8 +707,8 @@ class _$_MaterialDto extends _MaterialDto {
         _bundles = bundles,
         super._();
 
-  factory _$_MaterialDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaterialDtoFromJson(json);
+  factory _$MaterialDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MaterialDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
@@ -841,10 +841,10 @@ class _$_MaterialDto extends _MaterialDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialDto &&
+            other is _$MaterialDtoImpl &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode) &&
             (identical(other.therapeuticClass, therapeuticClass) ||
@@ -959,12 +959,12 @@ class _$_MaterialDto extends _MaterialDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialDtoCopyWith<_$_MaterialDto> get copyWith =>
-      __$$_MaterialDtoCopyWithImpl<_$_MaterialDto>(this, _$identity);
+  _$$MaterialDtoImplCopyWith<_$MaterialDtoImpl> get copyWith =>
+      __$$MaterialDtoImplCopyWithImpl<_$MaterialDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MaterialDtoToJson(
+    return _$$MaterialDtoImplToJson(
       this,
     );
   }
@@ -1038,11 +1038,11 @@ abstract class _MaterialDto extends MaterialDto {
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required final bool isSuspended,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required final bool isMarketPlace}) = _$_MaterialDto;
+      required final bool isMarketPlace}) = _$MaterialDtoImpl;
   const _MaterialDto._() : super._();
 
   factory _MaterialDto.fromJson(Map<String, dynamic> json) =
-      _$_MaterialDto.fromJson;
+      _$MaterialDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
@@ -1156,7 +1156,7 @@ abstract class _MaterialDto extends MaterialDto {
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialDtoCopyWith<_$_MaterialDto> get copyWith =>
+  _$$MaterialDtoImplCopyWith<_$MaterialDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1178,6 +1178,8 @@ mixin _$MaterialDataDto {
   String get genericMaterialName => throw _privateConstructorUsedError;
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1203,7 +1205,9 @@ abstract class $MaterialDataDtoCopyWith<$Res> {
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
       String genericMaterialName,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      String governmentMaterialCode});
+      String governmentMaterialCode,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
@@ -1225,6 +1229,7 @@ class _$MaterialDataDtoCopyWithImpl<$Res, $Val extends MaterialDataDto>
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
     Object? governmentMaterialCode = null,
+    Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
       code: null == code
@@ -1251,16 +1256,20 @@ class _$MaterialDataDtoCopyWithImpl<$Res, $Val extends MaterialDataDto>
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_MaterialDataDtoCopyWith<$Res>
+abstract class _$$MaterialDataDtoImplCopyWith<$Res>
     implements $MaterialDataDtoCopyWith<$Res> {
-  factory _$$_MaterialDataDtoCopyWith(
-          _$_MaterialDataDto value, $Res Function(_$_MaterialDataDto) then) =
-      __$$_MaterialDataDtoCopyWithImpl<$Res>;
+  factory _$$MaterialDataDtoImplCopyWith(_$MaterialDataDtoImpl value,
+          $Res Function(_$MaterialDataDtoImpl) then) =
+      __$$MaterialDataDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1275,15 +1284,17 @@ abstract class _$$_MaterialDataDtoCopyWith<$Res>
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
       String genericMaterialName,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      String governmentMaterialCode});
+      String governmentMaterialCode,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      bool isMarketPlace});
 }
 
 /// @nodoc
-class __$$_MaterialDataDtoCopyWithImpl<$Res>
-    extends _$MaterialDataDtoCopyWithImpl<$Res, _$_MaterialDataDto>
-    implements _$$_MaterialDataDtoCopyWith<$Res> {
-  __$$_MaterialDataDtoCopyWithImpl(
-      _$_MaterialDataDto _value, $Res Function(_$_MaterialDataDto) _then)
+class __$$MaterialDataDtoImplCopyWithImpl<$Res>
+    extends _$MaterialDataDtoCopyWithImpl<$Res, _$MaterialDataDtoImpl>
+    implements _$$MaterialDataDtoImplCopyWith<$Res> {
+  __$$MaterialDataDtoImplCopyWithImpl(
+      _$MaterialDataDtoImpl _value, $Res Function(_$MaterialDataDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1295,8 +1306,9 @@ class __$$_MaterialDataDtoCopyWithImpl<$Res>
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
     Object? governmentMaterialCode = null,
+    Object? isMarketPlace = null,
   }) {
-    return _then(_$_MaterialDataDto(
+    return _then(_$MaterialDataDtoImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -1321,14 +1333,18 @@ class __$$_MaterialDataDtoCopyWithImpl<$Res>
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as String,
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_MaterialDataDto extends _MaterialDataDto {
-  _$_MaterialDataDto(
+class _$MaterialDataDtoImpl extends _MaterialDataDto {
+  _$MaterialDataDtoImpl(
       {@JsonKey(
           name: 'code', defaultValue: '', readValue: materialNumberReadValue)
       required this.code,
@@ -1341,11 +1357,13 @@ class _$_MaterialDataDto extends _MaterialDataDto {
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
       required this.genericMaterialName,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      required this.governmentMaterialCode})
+      required this.governmentMaterialCode,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required this.isMarketPlace})
       : super._();
 
-  factory _$_MaterialDataDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaterialDataDtoFromJson(json);
+  factory _$MaterialDataDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MaterialDataDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'code', defaultValue: '', readValue: materialNumberReadValue)
@@ -1365,17 +1383,20 @@ class _$_MaterialDataDto extends _MaterialDataDto {
   @override
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   final String governmentMaterialCode;
+  @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'MaterialDataDto(code: $code, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, governmentMaterialCode: $governmentMaterialCode)';
+    return 'MaterialDataDto(code: $code, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, governmentMaterialCode: $governmentMaterialCode, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialDataDto &&
+            other is _$MaterialDataDtoImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.manufactured, manufactured) ||
                 other.manufactured == manufactured) &&
@@ -1388,7 +1409,9 @@ class _$_MaterialDataDto extends _MaterialDataDto {
             (identical(other.genericMaterialName, genericMaterialName) ||
                 other.genericMaterialName == genericMaterialName) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
-                other.governmentMaterialCode == governmentMaterialCode));
+                other.governmentMaterialCode == governmentMaterialCode) &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @JsonKey(ignore: true)
@@ -1400,17 +1423,19 @@ class _$_MaterialDataDto extends _MaterialDataDto {
       materialDescription,
       defaultMaterialDescription,
       genericMaterialName,
-      governmentMaterialCode);
+      governmentMaterialCode,
+      isMarketPlace);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialDataDtoCopyWith<_$_MaterialDataDto> get copyWith =>
-      __$$_MaterialDataDtoCopyWithImpl<_$_MaterialDataDto>(this, _$identity);
+  _$$MaterialDataDtoImplCopyWith<_$MaterialDataDtoImpl> get copyWith =>
+      __$$MaterialDataDtoImplCopyWithImpl<_$MaterialDataDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MaterialDataDtoToJson(
+    return _$$MaterialDataDtoImplToJson(
       this,
     );
   }
@@ -1430,11 +1455,13 @@ abstract class _MaterialDataDto extends MaterialDataDto {
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
       required final String genericMaterialName,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      required final String governmentMaterialCode}) = _$_MaterialDataDto;
+      required final String governmentMaterialCode,
+      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      required final bool isMarketPlace}) = _$MaterialDataDtoImpl;
   _MaterialDataDto._() : super._();
 
   factory _MaterialDataDto.fromJson(Map<String, dynamic> json) =
-      _$_MaterialDataDto.fromJson;
+      _$MaterialDataDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'code', defaultValue: '', readValue: materialNumberReadValue)
@@ -1455,8 +1482,11 @@ abstract class _MaterialDataDto extends MaterialDataDto {
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode;
   @override
+  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  bool get isMarketPlace;
+  @override
   @JsonKey(ignore: true)
-  _$$_MaterialDataDtoCopyWith<_$_MaterialDataDto> get copyWith =>
+  _$$MaterialDataDtoImplCopyWith<_$MaterialDataDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1519,11 +1549,11 @@ class _$MaterialResponseDtoCopyWithImpl<$Res, $Val extends MaterialResponseDto>
 }
 
 /// @nodoc
-abstract class _$$_MaterialResponseDtoCopyWith<$Res>
+abstract class _$$MaterialResponseDtoImplCopyWith<$Res>
     implements $MaterialResponseDtoCopyWith<$Res> {
-  factory _$$_MaterialResponseDtoCopyWith(_$_MaterialResponseDto value,
-          $Res Function(_$_MaterialResponseDto) then) =
-      __$$_MaterialResponseDtoCopyWithImpl<$Res>;
+  factory _$$MaterialResponseDtoImplCopyWith(_$MaterialResponseDtoImpl value,
+          $Res Function(_$MaterialResponseDtoImpl) then) =
+      __$$MaterialResponseDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1533,11 +1563,11 @@ abstract class _$$_MaterialResponseDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialResponseDtoCopyWithImpl<$Res>
-    extends _$MaterialResponseDtoCopyWithImpl<$Res, _$_MaterialResponseDto>
-    implements _$$_MaterialResponseDtoCopyWith<$Res> {
-  __$$_MaterialResponseDtoCopyWithImpl(_$_MaterialResponseDto _value,
-      $Res Function(_$_MaterialResponseDto) _then)
+class __$$MaterialResponseDtoImplCopyWithImpl<$Res>
+    extends _$MaterialResponseDtoCopyWithImpl<$Res, _$MaterialResponseDtoImpl>
+    implements _$$MaterialResponseDtoImplCopyWith<$Res> {
+  __$$MaterialResponseDtoImplCopyWithImpl(_$MaterialResponseDtoImpl _value,
+      $Res Function(_$MaterialResponseDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1546,7 +1576,7 @@ class __$$_MaterialResponseDtoCopyWithImpl<$Res>
     Object? count = null,
     Object? products = null,
   }) {
-    return _then(_$_MaterialResponseDto(
+    return _then(_$MaterialResponseDtoImpl(
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -1561,16 +1591,16 @@ class __$$_MaterialResponseDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MaterialResponseDto extends _MaterialResponseDto {
-  _$_MaterialResponseDto(
+class _$MaterialResponseDtoImpl extends _MaterialResponseDto {
+  _$MaterialResponseDtoImpl(
       {@JsonKey(name: 'count', defaultValue: 0) required this.count,
       @JsonKey(name: 'products', defaultValue: <MaterialDto>[])
       required final List<MaterialDto> products})
       : _products = products,
         super._();
 
-  factory _$_MaterialResponseDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaterialResponseDtoFromJson(json);
+  factory _$MaterialResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MaterialResponseDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'count', defaultValue: 0)
@@ -1590,10 +1620,10 @@ class _$_MaterialResponseDto extends _MaterialResponseDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialResponseDto &&
+            other is _$MaterialResponseDtoImpl &&
             (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality().equals(other._products, _products));
   }
@@ -1606,13 +1636,13 @@ class _$_MaterialResponseDto extends _MaterialResponseDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialResponseDtoCopyWith<_$_MaterialResponseDto> get copyWith =>
-      __$$_MaterialResponseDtoCopyWithImpl<_$_MaterialResponseDto>(
+  _$$MaterialResponseDtoImplCopyWith<_$MaterialResponseDtoImpl> get copyWith =>
+      __$$MaterialResponseDtoImplCopyWithImpl<_$MaterialResponseDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MaterialResponseDtoToJson(
+    return _$$MaterialResponseDtoImplToJson(
       this,
     );
   }
@@ -1622,11 +1652,11 @@ abstract class _MaterialResponseDto extends MaterialResponseDto {
   factory _MaterialResponseDto(
       {@JsonKey(name: 'count', defaultValue: 0) required final int count,
       @JsonKey(name: 'products', defaultValue: <MaterialDto>[])
-      required final List<MaterialDto> products}) = _$_MaterialResponseDto;
+      required final List<MaterialDto> products}) = _$MaterialResponseDtoImpl;
   _MaterialResponseDto._() : super._();
 
   factory _MaterialResponseDto.fromJson(Map<String, dynamic> json) =
-      _$_MaterialResponseDto.fromJson;
+      _$MaterialResponseDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'count', defaultValue: 0)
@@ -1636,6 +1666,6 @@ abstract class _MaterialResponseDto extends MaterialResponseDto {
   List<MaterialDto> get products;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialResponseDtoCopyWith<_$_MaterialResponseDto> get copyWith =>
+  _$$MaterialResponseDtoImplCopyWith<_$MaterialResponseDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,39 +12,35 @@ part of 'bundle_add_to_cart_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BundleAddToCartEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            MaterialInfo bundle, List<MaterialInfo> bundleMaterials)
-        set,
+    required TResult Function(MaterialInfo bundle) set,
     required TResult Function(MaterialNumber materialNumber, int quantity)
         updateQuantity,
-    required TResult Function(bool isError) validateQuantity,
+    required TResult Function(bool showErrorMessage) validateQuantity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(MaterialInfo bundle, List<MaterialInfo> bundleMaterials)?
-        set,
+    TResult? Function(MaterialInfo bundle)? set,
     TResult? Function(MaterialNumber materialNumber, int quantity)?
         updateQuantity,
-    TResult? Function(bool isError)? validateQuantity,
+    TResult? Function(bool showErrorMessage)? validateQuantity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(MaterialInfo bundle, List<MaterialInfo> bundleMaterials)?
-        set,
+    TResult Function(MaterialInfo bundle)? set,
     TResult Function(MaterialNumber materialNumber, int quantity)?
         updateQuantity,
-    TResult Function(bool isError)? validateQuantity,
+    TResult Function(bool showErrorMessage)? validateQuantity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -95,25 +91,25 @@ class _$BundleAddToCartEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$BundleAddToCartEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$BundleAddToCartEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -121,9 +117,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -133,12 +129,10 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            MaterialInfo bundle, List<MaterialInfo> bundleMaterials)
-        set,
+    required TResult Function(MaterialInfo bundle) set,
     required TResult Function(MaterialNumber materialNumber, int quantity)
         updateQuantity,
-    required TResult Function(bool isError) validateQuantity,
+    required TResult Function(bool showErrorMessage) validateQuantity,
   }) {
     return initialized();
   }
@@ -147,11 +141,10 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(MaterialInfo bundle, List<MaterialInfo> bundleMaterials)?
-        set,
+    TResult? Function(MaterialInfo bundle)? set,
     TResult? Function(MaterialNumber materialNumber, int quantity)?
         updateQuantity,
-    TResult? Function(bool isError)? validateQuantity,
+    TResult? Function(bool showErrorMessage)? validateQuantity,
   }) {
     return initialized?.call();
   }
@@ -160,11 +153,10 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(MaterialInfo bundle, List<MaterialInfo> bundleMaterials)?
-        set,
+    TResult Function(MaterialInfo bundle)? set,
     TResult Function(MaterialNumber materialNumber, int quantity)?
         updateQuantity,
-    TResult Function(bool isError)? validateQuantity,
+    TResult Function(bool showErrorMessage)? validateQuantity,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -212,41 +204,36 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements BundleAddToCartEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_SetCopyWith<$Res> {
-  factory _$$_SetCopyWith(_$_Set value, $Res Function(_$_Set) then) =
-      __$$_SetCopyWithImpl<$Res>;
+abstract class _$$SetImplCopyWith<$Res> {
+  factory _$$SetImplCopyWith(_$SetImpl value, $Res Function(_$SetImpl) then) =
+      __$$SetImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({MaterialInfo bundle, List<MaterialInfo> bundleMaterials});
+  $Res call({MaterialInfo bundle});
 
   $MaterialInfoCopyWith<$Res> get bundle;
 }
 
 /// @nodoc
-class __$$_SetCopyWithImpl<$Res>
-    extends _$BundleAddToCartEventCopyWithImpl<$Res, _$_Set>
-    implements _$$_SetCopyWith<$Res> {
-  __$$_SetCopyWithImpl(_$_Set _value, $Res Function(_$_Set) _then)
+class __$$SetImplCopyWithImpl<$Res>
+    extends _$BundleAddToCartEventCopyWithImpl<$Res, _$SetImpl>
+    implements _$$SetImplCopyWith<$Res> {
+  __$$SetImplCopyWithImpl(_$SetImpl _value, $Res Function(_$SetImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? bundle = null,
-    Object? bundleMaterials = null,
   }) {
-    return _then(_$_Set(
+    return _then(_$SetImpl(
       bundle: null == bundle
           ? _value.bundle
           : bundle // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      bundleMaterials: null == bundleMaterials
-          ? _value._bundleMaterials
-          : bundleMaterials // ignore: cast_nullable_to_non_nullable
-              as List<MaterialInfo>,
     ));
   }
 
@@ -261,86 +248,70 @@ class __$$_SetCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Set implements _Set {
-  const _$_Set(
-      {required this.bundle, required final List<MaterialInfo> bundleMaterials})
-      : _bundleMaterials = bundleMaterials;
+class _$SetImpl implements _Set {
+  const _$SetImpl({required this.bundle});
 
   @override
   final MaterialInfo bundle;
-  final List<MaterialInfo> _bundleMaterials;
-  @override
-  List<MaterialInfo> get bundleMaterials {
-    if (_bundleMaterials is EqualUnmodifiableListView) return _bundleMaterials;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bundleMaterials);
-  }
 
   @override
   String toString() {
-    return 'BundleAddToCartEvent.set(bundle: $bundle, bundleMaterials: $bundleMaterials)';
+    return 'BundleAddToCartEvent.set(bundle: $bundle)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Set &&
-            (identical(other.bundle, bundle) || other.bundle == bundle) &&
-            const DeepCollectionEquality()
-                .equals(other._bundleMaterials, _bundleMaterials));
+            other is _$SetImpl &&
+            (identical(other.bundle, bundle) || other.bundle == bundle));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, bundle,
-      const DeepCollectionEquality().hash(_bundleMaterials));
+  int get hashCode => Object.hash(runtimeType, bundle);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetCopyWith<_$_Set> get copyWith =>
-      __$$_SetCopyWithImpl<_$_Set>(this, _$identity);
+  _$$SetImplCopyWith<_$SetImpl> get copyWith =>
+      __$$SetImplCopyWithImpl<_$SetImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            MaterialInfo bundle, List<MaterialInfo> bundleMaterials)
-        set,
+    required TResult Function(MaterialInfo bundle) set,
     required TResult Function(MaterialNumber materialNumber, int quantity)
         updateQuantity,
-    required TResult Function(bool isError) validateQuantity,
+    required TResult Function(bool showErrorMessage) validateQuantity,
   }) {
-    return set(bundle, bundleMaterials);
+    return set(bundle);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(MaterialInfo bundle, List<MaterialInfo> bundleMaterials)?
-        set,
+    TResult? Function(MaterialInfo bundle)? set,
     TResult? Function(MaterialNumber materialNumber, int quantity)?
         updateQuantity,
-    TResult? Function(bool isError)? validateQuantity,
+    TResult? Function(bool showErrorMessage)? validateQuantity,
   }) {
-    return set?.call(bundle, bundleMaterials);
+    return set?.call(bundle);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(MaterialInfo bundle, List<MaterialInfo> bundleMaterials)?
-        set,
+    TResult Function(MaterialInfo bundle)? set,
     TResult Function(MaterialNumber materialNumber, int quantity)?
         updateQuantity,
-    TResult Function(bool isError)? validateQuantity,
+    TResult Function(bool showErrorMessage)? validateQuantity,
     required TResult orElse(),
   }) {
     if (set != null) {
-      return set(bundle, bundleMaterials);
+      return set(bundle);
     }
     return orElse();
   }
@@ -384,31 +355,29 @@ class _$_Set implements _Set {
 }
 
 abstract class _Set implements BundleAddToCartEvent {
-  const factory _Set(
-      {required final MaterialInfo bundle,
-      required final List<MaterialInfo> bundleMaterials}) = _$_Set;
+  const factory _Set({required final MaterialInfo bundle}) = _$SetImpl;
 
   MaterialInfo get bundle;
-  List<MaterialInfo> get bundleMaterials;
   @JsonKey(ignore: true)
-  _$$_SetCopyWith<_$_Set> get copyWith => throw _privateConstructorUsedError;
+  _$$SetImplCopyWith<_$SetImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateQuantityCopyWith<$Res> {
-  factory _$$_UpdateQuantityCopyWith(
-          _$_UpdateQuantity value, $Res Function(_$_UpdateQuantity) then) =
-      __$$_UpdateQuantityCopyWithImpl<$Res>;
+abstract class _$$UpdateQuantityImplCopyWith<$Res> {
+  factory _$$UpdateQuantityImplCopyWith(_$UpdateQuantityImpl value,
+          $Res Function(_$UpdateQuantityImpl) then) =
+      __$$UpdateQuantityImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialNumber materialNumber, int quantity});
 }
 
 /// @nodoc
-class __$$_UpdateQuantityCopyWithImpl<$Res>
-    extends _$BundleAddToCartEventCopyWithImpl<$Res, _$_UpdateQuantity>
-    implements _$$_UpdateQuantityCopyWith<$Res> {
-  __$$_UpdateQuantityCopyWithImpl(
-      _$_UpdateQuantity _value, $Res Function(_$_UpdateQuantity) _then)
+class __$$UpdateQuantityImplCopyWithImpl<$Res>
+    extends _$BundleAddToCartEventCopyWithImpl<$Res, _$UpdateQuantityImpl>
+    implements _$$UpdateQuantityImplCopyWith<$Res> {
+  __$$UpdateQuantityImplCopyWithImpl(
+      _$UpdateQuantityImpl _value, $Res Function(_$UpdateQuantityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -417,7 +386,7 @@ class __$$_UpdateQuantityCopyWithImpl<$Res>
     Object? materialNumber = null,
     Object? quantity = null,
   }) {
-    return _then(_$_UpdateQuantity(
+    return _then(_$UpdateQuantityImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -432,8 +401,8 @@ class __$$_UpdateQuantityCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateQuantity implements _UpdateQuantity {
-  const _$_UpdateQuantity(
+class _$UpdateQuantityImpl implements _UpdateQuantity {
+  const _$UpdateQuantityImpl(
       {required this.materialNumber, required this.quantity});
 
   @override
@@ -447,10 +416,10 @@ class _$_UpdateQuantity implements _UpdateQuantity {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateQuantity &&
+            other is _$UpdateQuantityImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.quantity, quantity) ||
@@ -463,19 +432,18 @@ class _$_UpdateQuantity implements _UpdateQuantity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateQuantityCopyWith<_$_UpdateQuantity> get copyWith =>
-      __$$_UpdateQuantityCopyWithImpl<_$_UpdateQuantity>(this, _$identity);
+  _$$UpdateQuantityImplCopyWith<_$UpdateQuantityImpl> get copyWith =>
+      __$$UpdateQuantityImplCopyWithImpl<_$UpdateQuantityImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            MaterialInfo bundle, List<MaterialInfo> bundleMaterials)
-        set,
+    required TResult Function(MaterialInfo bundle) set,
     required TResult Function(MaterialNumber materialNumber, int quantity)
         updateQuantity,
-    required TResult Function(bool isError) validateQuantity,
+    required TResult Function(bool showErrorMessage) validateQuantity,
   }) {
     return updateQuantity(materialNumber, quantity);
   }
@@ -484,11 +452,10 @@ class _$_UpdateQuantity implements _UpdateQuantity {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(MaterialInfo bundle, List<MaterialInfo> bundleMaterials)?
-        set,
+    TResult? Function(MaterialInfo bundle)? set,
     TResult? Function(MaterialNumber materialNumber, int quantity)?
         updateQuantity,
-    TResult? Function(bool isError)? validateQuantity,
+    TResult? Function(bool showErrorMessage)? validateQuantity,
   }) {
     return updateQuantity?.call(materialNumber, quantity);
   }
@@ -497,11 +464,10 @@ class _$_UpdateQuantity implements _UpdateQuantity {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(MaterialInfo bundle, List<MaterialInfo> bundleMaterials)?
-        set,
+    TResult Function(MaterialInfo bundle)? set,
     TResult Function(MaterialNumber materialNumber, int quantity)?
         updateQuantity,
-    TResult Function(bool isError)? validateQuantity,
+    TResult Function(bool showErrorMessage)? validateQuantity,
     required TResult orElse(),
   }) {
     if (updateQuantity != null) {
@@ -551,41 +517,41 @@ class _$_UpdateQuantity implements _UpdateQuantity {
 abstract class _UpdateQuantity implements BundleAddToCartEvent {
   const factory _UpdateQuantity(
       {required final MaterialNumber materialNumber,
-      required final int quantity}) = _$_UpdateQuantity;
+      required final int quantity}) = _$UpdateQuantityImpl;
 
   MaterialNumber get materialNumber;
   int get quantity;
   @JsonKey(ignore: true)
-  _$$_UpdateQuantityCopyWith<_$_UpdateQuantity> get copyWith =>
+  _$$UpdateQuantityImplCopyWith<_$UpdateQuantityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ValidateQuantityCopyWith<$Res> {
-  factory _$$_ValidateQuantityCopyWith(
-          _$_ValidateQuantity value, $Res Function(_$_ValidateQuantity) then) =
-      __$$_ValidateQuantityCopyWithImpl<$Res>;
+abstract class _$$ValidateQuantityImplCopyWith<$Res> {
+  factory _$$ValidateQuantityImplCopyWith(_$ValidateQuantityImpl value,
+          $Res Function(_$ValidateQuantityImpl) then) =
+      __$$ValidateQuantityImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool isError});
+  $Res call({bool showErrorMessage});
 }
 
 /// @nodoc
-class __$$_ValidateQuantityCopyWithImpl<$Res>
-    extends _$BundleAddToCartEventCopyWithImpl<$Res, _$_ValidateQuantity>
-    implements _$$_ValidateQuantityCopyWith<$Res> {
-  __$$_ValidateQuantityCopyWithImpl(
-      _$_ValidateQuantity _value, $Res Function(_$_ValidateQuantity) _then)
+class __$$ValidateQuantityImplCopyWithImpl<$Res>
+    extends _$BundleAddToCartEventCopyWithImpl<$Res, _$ValidateQuantityImpl>
+    implements _$$ValidateQuantityImplCopyWith<$Res> {
+  __$$ValidateQuantityImplCopyWithImpl(_$ValidateQuantityImpl _value,
+      $Res Function(_$ValidateQuantityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isError = null,
+    Object? showErrorMessage = null,
   }) {
-    return _then(_$_ValidateQuantity(
-      isError: null == isError
-          ? _value.isError
-          : isError // ignore: cast_nullable_to_non_nullable
+    return _then(_$ValidateQuantityImpl(
+      showErrorMessage: null == showErrorMessage
+          ? _value.showErrorMessage
+          : showErrorMessage // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -593,74 +559,72 @@ class __$$_ValidateQuantityCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ValidateQuantity implements _ValidateQuantity {
-  const _$_ValidateQuantity({required this.isError});
+class _$ValidateQuantityImpl implements _ValidateQuantity {
+  const _$ValidateQuantityImpl({required this.showErrorMessage});
 
   @override
-  final bool isError;
+  final bool showErrorMessage;
 
   @override
   String toString() {
-    return 'BundleAddToCartEvent.validateQuantity(isError: $isError)';
+    return 'BundleAddToCartEvent.validateQuantity(showErrorMessage: $showErrorMessage)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ValidateQuantity &&
-            (identical(other.isError, isError) || other.isError == isError));
+            other is _$ValidateQuantityImpl &&
+            (identical(other.showErrorMessage, showErrorMessage) ||
+                other.showErrorMessage == showErrorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isError);
+  int get hashCode => Object.hash(runtimeType, showErrorMessage);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ValidateQuantityCopyWith<_$_ValidateQuantity> get copyWith =>
-      __$$_ValidateQuantityCopyWithImpl<_$_ValidateQuantity>(this, _$identity);
+  _$$ValidateQuantityImplCopyWith<_$ValidateQuantityImpl> get copyWith =>
+      __$$ValidateQuantityImplCopyWithImpl<_$ValidateQuantityImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            MaterialInfo bundle, List<MaterialInfo> bundleMaterials)
-        set,
+    required TResult Function(MaterialInfo bundle) set,
     required TResult Function(MaterialNumber materialNumber, int quantity)
         updateQuantity,
-    required TResult Function(bool isError) validateQuantity,
+    required TResult Function(bool showErrorMessage) validateQuantity,
   }) {
-    return validateQuantity(isError);
+    return validateQuantity(showErrorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(MaterialInfo bundle, List<MaterialInfo> bundleMaterials)?
-        set,
+    TResult? Function(MaterialInfo bundle)? set,
     TResult? Function(MaterialNumber materialNumber, int quantity)?
         updateQuantity,
-    TResult? Function(bool isError)? validateQuantity,
+    TResult? Function(bool showErrorMessage)? validateQuantity,
   }) {
-    return validateQuantity?.call(isError);
+    return validateQuantity?.call(showErrorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(MaterialInfo bundle, List<MaterialInfo> bundleMaterials)?
-        set,
+    TResult Function(MaterialInfo bundle)? set,
     TResult Function(MaterialNumber materialNumber, int quantity)?
         updateQuantity,
-    TResult Function(bool isError)? validateQuantity,
+    TResult Function(bool showErrorMessage)? validateQuantity,
     required TResult orElse(),
   }) {
     if (validateQuantity != null) {
-      return validateQuantity(isError);
+      return validateQuantity(showErrorMessage);
     }
     return orElse();
   }
@@ -704,19 +668,18 @@ class _$_ValidateQuantity implements _ValidateQuantity {
 }
 
 abstract class _ValidateQuantity implements BundleAddToCartEvent {
-  const factory _ValidateQuantity({required final bool isError}) =
-      _$_ValidateQuantity;
+  const factory _ValidateQuantity({required final bool showErrorMessage}) =
+      _$ValidateQuantityImpl;
 
-  bool get isError;
+  bool get showErrorMessage;
   @JsonKey(ignore: true)
-  _$$_ValidateQuantityCopyWith<_$_ValidateQuantity> get copyWith =>
+  _$$ValidateQuantityImplCopyWith<_$ValidateQuantityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$BundleAddToCartState {
-  MaterialInfo get bundle => throw _privateConstructorUsedError;
-  List<MaterialInfo> get bundleMaterials => throw _privateConstructorUsedError;
+  MaterialInfo get materialInfo => throw _privateConstructorUsedError;
   bool get showErrorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -730,12 +693,9 @@ abstract class $BundleAddToCartStateCopyWith<$Res> {
           $Res Function(BundleAddToCartState) then) =
       _$BundleAddToCartStateCopyWithImpl<$Res, BundleAddToCartState>;
   @useResult
-  $Res call(
-      {MaterialInfo bundle,
-      List<MaterialInfo> bundleMaterials,
-      bool showErrorMessage});
+  $Res call({MaterialInfo materialInfo, bool showErrorMessage});
 
-  $MaterialInfoCopyWith<$Res> get bundle;
+  $MaterialInfoCopyWith<$Res> get materialInfo;
 }
 
 /// @nodoc
@@ -752,19 +712,14 @@ class _$BundleAddToCartStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bundle = null,
-    Object? bundleMaterials = null,
+    Object? materialInfo = null,
     Object? showErrorMessage = null,
   }) {
     return _then(_value.copyWith(
-      bundle: null == bundle
-          ? _value.bundle
-          : bundle // ignore: cast_nullable_to_non_nullable
+      materialInfo: null == materialInfo
+          ? _value.materialInfo
+          : materialInfo // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      bundleMaterials: null == bundleMaterials
-          ? _value.bundleMaterials
-          : bundleMaterials // ignore: cast_nullable_to_non_nullable
-              as List<MaterialInfo>,
       showErrorMessage: null == showErrorMessage
           ? _value.showErrorMessage
           : showErrorMessage // ignore: cast_nullable_to_non_nullable
@@ -774,54 +729,46 @@ class _$BundleAddToCartStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $MaterialInfoCopyWith<$Res> get bundle {
-    return $MaterialInfoCopyWith<$Res>(_value.bundle, (value) {
-      return _then(_value.copyWith(bundle: value) as $Val);
+  $MaterialInfoCopyWith<$Res> get materialInfo {
+    return $MaterialInfoCopyWith<$Res>(_value.materialInfo, (value) {
+      return _then(_value.copyWith(materialInfo: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_BundleAddToCartStateCopyWith<$Res>
+abstract class _$$BundleAddToCartStateImplCopyWith<$Res>
     implements $BundleAddToCartStateCopyWith<$Res> {
-  factory _$$_BundleAddToCartStateCopyWith(_$_BundleAddToCartState value,
-          $Res Function(_$_BundleAddToCartState) then) =
-      __$$_BundleAddToCartStateCopyWithImpl<$Res>;
+  factory _$$BundleAddToCartStateImplCopyWith(_$BundleAddToCartStateImpl value,
+          $Res Function(_$BundleAddToCartStateImpl) then) =
+      __$$BundleAddToCartStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {MaterialInfo bundle,
-      List<MaterialInfo> bundleMaterials,
-      bool showErrorMessage});
+  $Res call({MaterialInfo materialInfo, bool showErrorMessage});
 
   @override
-  $MaterialInfoCopyWith<$Res> get bundle;
+  $MaterialInfoCopyWith<$Res> get materialInfo;
 }
 
 /// @nodoc
-class __$$_BundleAddToCartStateCopyWithImpl<$Res>
-    extends _$BundleAddToCartStateCopyWithImpl<$Res, _$_BundleAddToCartState>
-    implements _$$_BundleAddToCartStateCopyWith<$Res> {
-  __$$_BundleAddToCartStateCopyWithImpl(_$_BundleAddToCartState _value,
-      $Res Function(_$_BundleAddToCartState) _then)
+class __$$BundleAddToCartStateImplCopyWithImpl<$Res>
+    extends _$BundleAddToCartStateCopyWithImpl<$Res, _$BundleAddToCartStateImpl>
+    implements _$$BundleAddToCartStateImplCopyWith<$Res> {
+  __$$BundleAddToCartStateImplCopyWithImpl(_$BundleAddToCartStateImpl _value,
+      $Res Function(_$BundleAddToCartStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bundle = null,
-    Object? bundleMaterials = null,
+    Object? materialInfo = null,
     Object? showErrorMessage = null,
   }) {
-    return _then(_$_BundleAddToCartState(
-      bundle: null == bundle
-          ? _value.bundle
-          : bundle // ignore: cast_nullable_to_non_nullable
+    return _then(_$BundleAddToCartStateImpl(
+      materialInfo: null == materialInfo
+          ? _value.materialInfo
+          : materialInfo // ignore: cast_nullable_to_non_nullable
               as MaterialInfo,
-      bundleMaterials: null == bundleMaterials
-          ? _value._bundleMaterials
-          : bundleMaterials // ignore: cast_nullable_to_non_nullable
-              as List<MaterialInfo>,
       showErrorMessage: null == showErrorMessage
           ? _value.showErrorMessage
           : showErrorMessage // ignore: cast_nullable_to_non_nullable
@@ -832,71 +779,56 @@ class __$$_BundleAddToCartStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BundleAddToCartState extends _BundleAddToCartState {
-  const _$_BundleAddToCartState(
-      {required this.bundle,
-      required final List<MaterialInfo> bundleMaterials,
-      required this.showErrorMessage})
-      : _bundleMaterials = bundleMaterials,
-        super._();
+class _$BundleAddToCartStateImpl extends _BundleAddToCartState {
+  const _$BundleAddToCartStateImpl(
+      {required this.materialInfo, required this.showErrorMessage})
+      : super._();
 
   @override
-  final MaterialInfo bundle;
-  final List<MaterialInfo> _bundleMaterials;
-  @override
-  List<MaterialInfo> get bundleMaterials {
-    if (_bundleMaterials is EqualUnmodifiableListView) return _bundleMaterials;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bundleMaterials);
-  }
-
+  final MaterialInfo materialInfo;
   @override
   final bool showErrorMessage;
 
   @override
   String toString() {
-    return 'BundleAddToCartState(bundle: $bundle, bundleMaterials: $bundleMaterials, showErrorMessage: $showErrorMessage)';
+    return 'BundleAddToCartState(materialInfo: $materialInfo, showErrorMessage: $showErrorMessage)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BundleAddToCartState &&
-            (identical(other.bundle, bundle) || other.bundle == bundle) &&
-            const DeepCollectionEquality()
-                .equals(other._bundleMaterials, _bundleMaterials) &&
+            other is _$BundleAddToCartStateImpl &&
+            (identical(other.materialInfo, materialInfo) ||
+                other.materialInfo == materialInfo) &&
             (identical(other.showErrorMessage, showErrorMessage) ||
                 other.showErrorMessage == showErrorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, bundle,
-      const DeepCollectionEquality().hash(_bundleMaterials), showErrorMessage);
+  int get hashCode => Object.hash(runtimeType, materialInfo, showErrorMessage);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BundleAddToCartStateCopyWith<_$_BundleAddToCartState> get copyWith =>
-      __$$_BundleAddToCartStateCopyWithImpl<_$_BundleAddToCartState>(
-          this, _$identity);
+  _$$BundleAddToCartStateImplCopyWith<_$BundleAddToCartStateImpl>
+      get copyWith =>
+          __$$BundleAddToCartStateImplCopyWithImpl<_$BundleAddToCartStateImpl>(
+              this, _$identity);
 }
 
 abstract class _BundleAddToCartState extends BundleAddToCartState {
   const factory _BundleAddToCartState(
-      {required final MaterialInfo bundle,
-      required final List<MaterialInfo> bundleMaterials,
-      required final bool showErrorMessage}) = _$_BundleAddToCartState;
+      {required final MaterialInfo materialInfo,
+      required final bool showErrorMessage}) = _$BundleAddToCartStateImpl;
   const _BundleAddToCartState._() : super._();
 
   @override
-  MaterialInfo get bundle;
-  @override
-  List<MaterialInfo> get bundleMaterials;
+  MaterialInfo get materialInfo;
   @override
   bool get showErrorMessage;
   @override
   @JsonKey(ignore: true)
-  _$$_BundleAddToCartStateCopyWith<_$_BundleAddToCartState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$BundleAddToCartStateImplCopyWith<_$BundleAddToCartStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -207,6 +207,7 @@ class MaterialData with _$MaterialData {
     required String defaultMaterialDescription,
     required String genericMaterialName,
     required StringValue governmentMaterialCode,
+    required bool isMarketPlace,
   }) = _MaterialData;
 
   factory MaterialData.empty() => MaterialData(
@@ -216,6 +217,7 @@ class MaterialData with _$MaterialData {
         defaultMaterialDescription: '',
         genericMaterialName: '',
         governmentMaterialCode: StringValue(''),
+        isMarketPlace: false,
       );
 
   String get displayDescription => materialDescription.isTrimmedValueNotEmpty
@@ -229,6 +231,7 @@ class MaterialData with _$MaterialData {
         genericMaterialName: genericMaterialName,
         productImages: ProductImages.empty(),
         governmentMaterialCode: governmentMaterialCode,
+        isMarketPlace: isMarketPlace,
       );
 }
 

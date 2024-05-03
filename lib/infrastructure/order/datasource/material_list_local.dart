@@ -49,7 +49,8 @@ class MaterialListLocalDataSource {
         'assets/json/getProductDetailsResponse.json',
       ),
     );
-    final finalData = data['data']['GetProductDetails'];
+    final finalData =
+        makeResponseCamelCase(jsonEncode(data['data']['GetProductDetails']));
 
     return MaterialDto.fromJson(finalData).toDomain();
   }
