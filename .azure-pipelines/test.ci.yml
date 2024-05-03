@@ -4,72 +4,44 @@ trigger:
     - test.uat.*
 
 parameters:
-  - name: testFiles
-    type: object 
-    displayName: Path File ( use "__" instead of "/", no need to define file extension(default is dart) and define the region at the end of file __[region] )
+  - name: region
+    type: string 
+    displayName: Region (Select Region You Want To Test)
     default:
-      - integration_test__my__client_user__client_user_order__my
-      - integration_test__my__client_user__client_user_payment__my
-      - integration_test__my__client_user__client_user_return__my
-      - integration_test__my__external_sales_rep__external_sales_rep_user_order__my
-      - integration_test__my__external_sales_rep__external_sales_rep_user_return__my
+    values:
+      - my
+      - id
+      - sg
+      - ph
+      - tw
+      - vn
+      - mm
+      - th
+      - kh
 
-      - integration_test__id__client_user__client_user_order__id
-      - integration_test__id__client_user__client_user_payment__id
+  - name: client_user_order
+    type: boolean
+    default: false
+  - name: client_user_payment
+    type: boolean
+    default: false
+  - name: client_user_return
+    type: boolean
+    default: false
+  - name: external_sales_rep_user_order
+    type: boolean
+    default: false   
+  - name: external_sales_rep_user_return
+    type: boolean
+    default: false  
 
-      - integration_test__sg__client_user__client_user_order__sg
-      - integration_test__sg__client_user__client_user_payment__sg
-      - integration_test__sg__client_user__client_user_return__sg
-      - integration_test__sg__external_sales_rep__external_sales_rep_user_order__sg
-      - integration_test__sg__external_sales_rep__external_sales_rep_user_return__sg
-
-      - integration_test__ph__client_user__client_user_return__ph
-      - integration_test__ph__client_user__client_user_order__ph
-      - integration_test__ph__client_user__client_user_payment__ph
-      - integration_test__ph__external_sales_rep__external_sales_rep_user_order__ph
-      - integration_test__ph__external_sales_rep__external_sales_rep_user_return__ph
-
-      - integration_test__tw__client_user__client_user_order__tw
-      - integration_test__tw__external_sales_rep__external_sales_rep_user_order__tw
-
-      - integration_test__vn__client_user__client_user_order__vn
-      - integration_test__vn__client_user__client_user_payment__vn
-      - integration_test__vn__external_sales_rep__external_sales_rep_user_order__vn
-
-      - integration_test__mm__client_user__client_user_order__my
-      - integration_test__mm__external_sales_rep__external_sales_rep_user_order__my
-      - integration_test__kh__external_sales_rep__external_sales_rep_user_order__kh
-
-      - integration_test__th__client_user__client_user_order__th
-      - integration_test__th__client_user__client_user_payment__th
-      - integration_test__th__external_sales_rep__external_sales_rep_user_order__th
-
-  - name: preset_config_files
-    type: object 
-    displayName: Preset Sales Org Configs File ( use "__" instead of "/", no need to define file extension(default is sh) )
-    default:
-      - integration_test__my__reset_sales_org_config
-      - integration_test__id__reset_sales_org_config
-      - integration_test__sg__reset_sales_org_config
-      - integration_test__ph__reset_sales_org_config
-      - integration_test__tw__reset_sales_org_config
-      - integration_test__vn__reset_sales_org_config
-      - integration_test__mm__reset_sales_org_config
-      - integration_test__th__reset_sales_org_config
-      - integration_test__kh__reset_sales_org_config
-
-  - name: build_mode 
-    displayName: Build Mode
-    type: string
-    default: debug 
-    values: 
-      - debug
 
   - name: max_test_time 
     displayName: Max Test Time
-    type: object
+    type: string
     default: 10000
     values:
+      - 10000
       - 3000
       - 1500
       - 1000 
@@ -85,16 +57,7 @@ parameters:
       - 'Google Pixel 6-12.0'
       - 'Samsung Galaxy S23-13.0'
       - 'Samsung Galaxy S21 Plus-11.0'
-      - 'OnePlus 9-11.0'
-      
-
-  - name: build_pool 
-    displayName: Build Pool
-    type: string
-    default: dnd-azdevops-flutter33  
-    values: 
-      - devops-flutter33
-      - dnd-azdevops-flutter33       
+      - 'OnePlus 9-11.0'   
       
 pool:   
   name: dnd-azdevops-flutter33
@@ -120,7 +83,7 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          az storage blob upload --connection-string $AZURE_STORAGE_CONNECTION_STRING --container-name devops-operations --overwrite --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name dndstsharednpd/ezrxplus/template$(Build.BuildId)
+          az storage blob upload --connection-string $AZURE_STORAGE_CONNECTION_STRING --container-name devops-operations --overwrite --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name ezrxplus-mobile-msteams/template$(Build.BuildId)
       env: 
         AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
 
@@ -130,16 +93,12 @@ stages:
   - job: BuildApplication
     displayName: Build Application 
     steps:  
-      - ${{ each presetConfigFile in parameters.preset_config_files }}: 
-        - task: Bash@3
-          inputs:
-            targetType: 'inline'
-            script: |
-              preset_file_param=${{ presetConfigFile }}
-              preset_file=$(echo $preset_file_param | sed 's|__|/|g')
-              chmod 777 $preset_file.sh
-              ./$preset_file.sh
-          displayName: Preset Sales Org Configs ${{ presetConfigFile }}
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: |
+            ./integration_test/${{ parameters.region }}/reset_sales_org_config.sh
+        displayName: Preset Sales Org Configs For ${{ parameters.region }}
 
       - task: DownloadSecureFile@1
         name: localprop
@@ -203,13 +162,14 @@ stages:
   dependsOn: [BuildApplication]
   displayName: Android UAT Regression Job
   jobs:
-  - ${{ each testFile in parameters.testFiles }}: 
-      - job: RunIntegrationTest${{ testFile }}
+  - ${{ each testFile in parameters }}: 
+      - job: RunIntegrationTest${{ testFile.Key }}
+        condition: and(succeeded(), eq('${{ testFile.Value }}', true))
         timeoutInMinutes: 90 
         cancelTimeoutInMinutes: 5
-        displayName: ${{ testFile }}
+        displayName: ${{ testFile.Key }}
         pool:   
-          name: ${{ parameters.build_pool }}
+          name: dnd-azdevops-flutter33 
         steps:
 
         - task: DownloadBuildArtifacts@1
@@ -253,13 +213,12 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              test_file_param=${{ testFile }}
-              test_file=$(echo $test_file_param | rev | cut -d "_" -f 3- | rev | sed 's|__|/|g')
+              test_file=$(find integration_test/${{ parameters.region }}/ -type f -regextype posix-awk -regex '.*\.dart' | grep ${{ testFile.Key }} )
               pushd android	 
               source /etc/profile.d/gradle.sh
               flutter pub get 
               gradle wrapper
-              ./gradlew app:assembleUatDebug -Ptarget="$test_file.dart"
+              ./gradlew app:assembleUatDebug -Ptarget="$(Build.SourcesDirectory)/$test_file"
 
               build_status=$(echo $?)
               if [ "$build_status" == 0 ]
@@ -278,13 +237,12 @@ stages:
             script: |
               BROWSERSTACK_CREDENTIALS=$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESSKEY
 
-              test_file_param=${{ testFile }}
-              region=$(echo $test_file_param | rev | cut -d "_" -f -1 | rev)
-              test_file=$(echo $test_file_param | rev | cut -d "_" -f 3- | rev | sed 's|__|/|g')
-              testSuite=("$test_file.dart" "${region^^}")
+              test_file=${{ testFile.Key }}
+              region=${{ parameters.region }}
+              testSuite=("integration_test/$region/$test_file.dart" "${region^^}")
               
               echo "Testcase:" "${testSuite[0]}"
-              echo "GeoLocation:" "${testSuite[1]}"
+              echo "GeoLocation:" "$region"
               echo "Using device:" "${{ parameters.device_name }}"
 
               check_parallel (){
@@ -303,7 +261,7 @@ stages:
               echo -e "\n"
               echo 'Uploading the App to Browserstack from $(System.DefaultWorkingDirectory)/build/app/outputs/apk/uat/debug/app-uat-debug.apk :'
 
-              cmd="curl -u $BROWSERSTACK_CREDENTIALS -X POST "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/app" -F "file=@$(System.DefaultWorkingDirectory)/build/app/outputs/apk/uat/debug/app-uat-debug.apk" -F "custom_id=${{ testFile }}""
+              cmd="curl -u $BROWSERSTACK_CREDENTIALS -X POST "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/app" -F "file=@$(System.DefaultWorkingDirectory)/build/app/outputs/apk/uat/debug/app-uat-debug.apk" -F "custom_id=${{ testFile.Key }}""
               app_url=`$cmd | sed -En 's/.*"app_url":"([^"]*).*/\1/p'`
               echo -e "\n"
               echo "app_url : " $app_url
@@ -311,7 +269,7 @@ stages:
               echo -e "\n"
               echo 'Uploading the test suite to Browserstack from $(System.ArtifactsDirectory)/androidTestFile/app-uat-debug-androidTest.apk :'
 
-              cmd="curl -u $BROWSERSTACK_CREDENTIALS -X POST "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/test-suite" -F "file=@$(System.ArtifactsDirectory)/androidTestFile/app-uat-debug-androidTest.apk" -F "custom_id=${{ testFile }}""
+              cmd="curl -u $BROWSERSTACK_CREDENTIALS -X POST "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/test-suite" -F "file=@$(System.ArtifactsDirectory)/androidTestFile/app-uat-debug-androidTest.apk" -F "custom_id=${{ testFile.Key }}""
               test_suite_url=`$cmd | sed -En 's/.*"test_suite_url":"([^"]*).*/\1/p'` 
               echo -e "\n"
               echo "test_suite_url : " $test_suite_url
@@ -392,8 +350,7 @@ stages:
               echo "The total time taken for the test execution in seconds is :" $duration                     
 
               file_without_intergration=$(echo ${test_file} | cut -d '/' -f 2-)
-
-              echo "##vso[task.setvariable variable=region]$region"   
+ 
               echo "##vso[task.setvariable variable=buildDetails]$buildDetails"   
               echo "##vso[task.setvariable variable=result_build_id]$result_build_id" 
               echo "##vso[task.setvariable variable=file_without_intergration]$file_without_intergration"   
@@ -410,7 +367,7 @@ stages:
             azureSubscription: 'devops-dd-sc'
             scriptType: 'bash'
             scriptLocation: 'inlineScript'
-            inlineScript: |
+            inlineScript: |                                          
               BROWSERSTACK_CREDENTIALS=$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESSKEY
               result_build_id=$(result_build_id)
               test_file=$(file_without_intergration)
@@ -421,13 +378,14 @@ stages:
               passed_cases=$(curl -X GET "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/builds/${result_build_id}" -u $BROWSERSTACK_CREDENTIALS | jq '.devices[].sessions[].testcases.status.passed')
               echo "Total Cases Passed: $passed_cases"
 
-              az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name dndstsharednpd/ezrxplus/template$(Build.BuildId) 
+              az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name ezrxplus-mobile-msteams/template$(Build.BuildId) 
 
               if [ -n "$total_cases" ] && [ -n "$passed_cases" ]; then
                 if [ "$total_cases" -eq "0" ]; then 
                   avg=0
                   echo "set avg: $avg cause Devision Error"
                   sed -i "s|${test_file}_per|${avg}%|g" .azure-pipelines/template.html 
+                  sed -i "s|${test_file}_link|$buildDetails|g" .azure-pipelines/template.html 
                 else
                   avg=$(python3 -c "print(int(( $passed_cases / $total_cases)*100))")
                   sed -i "s|${test_file}_link|$buildDetails|g" .azure-pipelines/template.html 
@@ -440,7 +398,7 @@ stages:
                 sed -i "s|${test_file}_per|${avg}%|g" .azure-pipelines/template.html 
               fi
 
-              az storage blob upload --connection-string $AZURE_STORAGE_CONNECTION_STRING --container-name devops-operations --overwrite --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name dndstsharednpd/ezrxplus/template$(Build.BuildId)
+              az storage blob upload --connection-string $AZURE_STORAGE_CONNECTION_STRING --container-name devops-operations --overwrite --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name ezrxplus-mobile-msteams/template$(Build.BuildId)
               cat .azure-pipelines/template.html
           env: 
             AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
@@ -470,16 +428,18 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name dndstsharednpd/ezrxplus/template$(Build.BuildId) 
+          az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name ezrxplus-mobile-msteams/template$(Build.BuildId) 
+          region=${{ parameters.region }}
+          sed -E -i "s|region|$region|g" ./.azure-pipelines/template.html           
           sed -E -i "s|<a.*_per|NA|g" ./.azure-pipelines/template.html
           w3m -dump .azure-pipelines/template.html   
 
     - task: Bash@3
-      displayName: Push Notification
+      displayName: Define Template Notification
       inputs:
         targetType: 'inline'
         script: |
-          regions=( my sg th ph vn tw kh mm id)
+          regions=( ${{ parameters.region }} )
           for region in ${regions[@]}
           do
             avg=$(grep -Eo "${region}.*[0-9]+%" .azure-pipelines/template.html | grep -Eo '[0-9]+%' | grep -Eo '[0-9]+')
@@ -497,9 +457,19 @@ stages:
               sed -i "s|${region}_avg|${average}%|g" ./.azure-pipelines/template.html
             fi
           done
+        
           sed -E -i "s|>.*_avg|>NA|g" ./.azure-pipelines/template.html
           buildUrl="$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"
+          username="$(Build.RequestedFor)"
+          build_id="$(Build.BuildId)"
+          branch_name="$(Build.SourceBranchName)"      
           sed -E -i "s|build_url_link|$buildUrl|g" ./.azure-pipelines/template.html
+          sed -E -i "s|user_name|$username|g" ./.azure-pipelines/template.html
+          sed -E -i "s|build_id|$build_id|g" ./.azure-pipelines/template.html
+          sed -E -i "s|branch_name|$branch_name|g" ./.azure-pipelines/template.html                  
+          sed -E -i "s|build_time|$build_time|g" ./.azure-pipelines/template.html                  
+
+          cat .azure-pipelines/template.html
 
     - task: Bash@3
       displayName: Push Notification
@@ -524,14 +494,18 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          buildUrl="$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"        
-          TITLE="Some Integration Test Case Fail"
+          buildUrl="$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"      
+          username="$(Build.RequestedFor)"
+          build_id="$(Build.BuildId)"
+          branch_name="$(Build.SourceBranchName)"
+          TITLE="Integration For ${{ parameters.region }} Triggered By $username on $branch_name Fail"
+
           curl --location --request POST '$(MICROSOFT_TEAMS_BUILD_CHANNEL)' \
           --header 'Content-Type: text/plain' \
           --data-raw '{
             "@type": "MessageCard",
             "@context": "http://schema.org/extensions",
-            "summary": "Some Integration Test Case Fail",
+            "summary": "Integration For ${{ parameters.region }} Fail",
             "sections": [{
               "activityTitle": "'"$TITLE"'",
                 "markdown": true
@@ -550,4 +524,3 @@ stages:
           }'  
       env:
         MICROSOFT_TEAMS_BUILD_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_CHANNEL)'          
-
