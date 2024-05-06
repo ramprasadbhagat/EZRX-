@@ -23,19 +23,23 @@ class LoadingShimmer extends StatelessWidget {
     this.child,
     this.enabled,
     this.line,
+    this.center = true,
   }) : super(key: key);
   final LoadingShimmerType type;
   final Widget? child;
   final bool? enabled;
   final int? line;
+  final bool center;
 
   factory LoadingShimmer.withChild({
     required Widget child,
     bool enabled = true,
+    bool center = true,
   }) {
     return LoadingShimmer._(
       type: LoadingShimmerType.withChild,
       enabled: enabled,
+      center: center,
       child: child,
     );
   }
@@ -67,6 +71,7 @@ class LoadingShimmer extends StatelessWidget {
       case LoadingShimmerType.withChild:
         return _WithChild(
           enabled: enabled!,
+          center: center,
           child: child!,
         );
       case LoadingShimmerType.logo:

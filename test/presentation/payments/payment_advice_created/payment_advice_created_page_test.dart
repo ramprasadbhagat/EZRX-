@@ -29,6 +29,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
@@ -687,6 +688,31 @@ void main() {
             'Payment advice # will be permanently deleted once you proceed. Please create a new payment advice for these invoices to complete the payment.',
           ),
           findsOneWidget,
+        );
+      });
+
+      testWidgets('Can not tap delete when loading', (tester) async {
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial().copyWith(isFetchingInvoiceInfoPdf: true),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final deleteTextWithLoadingEffect = find.descendant(
+          of: find.byType(LoadingShimmer),
+          matching: find.text('delete'),
+        );
+        expect(deleteTextWithLoadingEffect, findsOne);
+        await tester.tap(deleteTextWithLoadingEffect);
+        await tester.pump();
+        verifyNever(
+          () => paymentSummaryDetailsBlocMock.add(
+            PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+              details: PaymentSummaryDetails.fromPaymentInvoicePDF(
+                PaymentInvoiceInfoPdf.empty(),
+              ),
+              isMarketPlace: false,
+            ),
+          ),
         );
       });
 

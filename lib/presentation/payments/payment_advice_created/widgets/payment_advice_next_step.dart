@@ -3,22 +3,6 @@ part of 'package:ezrxmobile/presentation/payments/payment_advice_created/payment
 class _PaymentAdviceNextStep extends StatelessWidget {
   const _PaymentAdviceNextStep({Key? key}) : super(key: key);
 
-  Future<bool?> _showDeleteBottomSheet(
-    BuildContext context, {
-    required String paymentAdviceNumber,
-  }) {
-    return showModalBottomSheet(
-      context: context,
-      enableDrag: false,
-      isDismissible: false,
-      isScrollControlled: true,
-      builder: (_) => DeleteCancelAdviceBottomSheet.delete(
-        paymentAdviceNumber: paymentAdviceNumber,
-        isMarketPlace: context.isMPPayment,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -92,56 +76,7 @@ class _PaymentAdviceNextStep extends StatelessWidget {
               ),
             ),
           ),
-          BulletWidget(
-            content: RichText(
-              text: TextSpan(
-                text: context.tr(
-                  'If there\'s any error in the selected invoice/credit notes, please ',
-                ),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: ZPColors.extraLightGrey4,
-                    ),
-                children: [
-                  TextSpan(
-                    text: context.tr('delete'),
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: ZPColors.extraDarkGreen,
-                        ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        final paymentInvoicePDF = context
-                            .read<NewPaymentBloc>()
-                            .state
-                            .paymentInvoiceInfoPdf;
-                        context.read<PaymentSummaryDetailsBloc>().add(
-                              PaymentSummaryDetailsEvent
-                                  .fetchPaymentSummaryDetailsInfo(
-                                details:
-                                    PaymentSummaryDetails.fromPaymentInvoicePDF(
-                                  paymentInvoicePDF,
-                                ),
-                                isMarketPlace: context.isMPPayment,
-                              ),
-                            );
-
-                        _showDeleteBottomSheet(
-                          context,
-                          paymentAdviceNumber: paymentInvoicePDF.zzAdvice,
-                        );
-                      },
-                  ),
-                  TextSpan(
-                    text: context.tr(
-                      ' this payment advice and generate a new payment advice.',
-                    ),
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: ZPColors.extraLightGrey4,
-                        ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const BulletWidget(content: _DeletePaymentAviceNote()),
           BulletWidget(
             content: RichText(
               text: TextSpan(
@@ -155,6 +90,92 @@ class _PaymentAdviceNextStep extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _DeletePaymentAviceNote extends StatelessWidget {
+  const _DeletePaymentAviceNote();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<NewPaymentBloc, NewPaymentState>(
+      buildWhen: (previous, current) =>
+          previous.isFetchingInvoiceInfoPdf != current.isFetchingInvoiceInfoPdf,
+      builder: (context, state) {
+        return RichText(
+          text: TextSpan(
+            text: context.tr(
+              'If there\'s any error in the selected invoice/credit notes, please ',
+            ),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: ZPColors.extraLightGrey4,
+                ),
+            children: [
+              state.isFetchingInvoiceInfoPdf
+                  ? WidgetSpan(
+                      alignment: PlaceholderAlignment.top,
+                      child: LoadingShimmer.withChild(
+                        center: false,
+                        child: Text(
+                          context.tr('delete'),
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      ),
+                    )
+                  : TextSpan(
+                      text: context.tr('delete'),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: ZPColors.extraDarkGreen,
+                          ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          context.read<PaymentSummaryDetailsBloc>().add(
+                                PaymentSummaryDetailsEvent
+                                    .fetchPaymentSummaryDetailsInfo(
+                                  details: PaymentSummaryDetails
+                                      .fromPaymentInvoicePDF(
+                                    state.paymentInvoiceInfoPdf,
+                                  ),
+                                  isMarketPlace: context.isMPPayment,
+                                ),
+                              );
+
+                          _showDeleteBottomSheet(
+                            context,
+                            paymentAdviceNumber:
+                                state.paymentInvoiceInfoPdf.zzAdvice,
+                          );
+                        },
+                    ),
+              TextSpan(
+                text: context.tr(
+                  ' this payment advice and generate a new payment advice.',
+                ),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: ZPColors.extraLightGrey4,
+                    ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<bool?> _showDeleteBottomSheet(
+    BuildContext context, {
+    required String paymentAdviceNumber,
+  }) {
+    return showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      isDismissible: false,
+      isScrollControlled: true,
+      builder: (_) => DeleteCancelAdviceBottomSheet.delete(
+        paymentAdviceNumber: paymentAdviceNumber,
+        isMarketPlace: context.isMPPayment,
       ),
     );
   }

@@ -5,21 +5,23 @@ class _WithChild extends StatelessWidget {
     Key? key,
     required this.child,
     required this.enabled,
+    this.center = true,
   }) : super(key: key);
   final Widget child;
   final bool enabled;
+  final bool center;
 
   @override
   Widget build(BuildContext context) {
-    if (!enabled) return Center(child: child);
+    final widget = !enabled
+        ? child
+        : Shimmer.fromColors(
+            baseColor: ZPColors.lightGray,
+            highlightColor: ZPColors.white,
+            enabled: true,
+            child: child,
+          );
 
-    return Center(
-      child: Shimmer.fromColors(
-        baseColor: ZPColors.lightGray,
-        highlightColor: ZPColors.white,
-        enabled: true,
-        child: child,
-      ),
-    );
+    return center ? Center(child: widget) : widget;
   }
 }
