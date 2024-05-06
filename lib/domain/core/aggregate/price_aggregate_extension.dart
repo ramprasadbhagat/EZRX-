@@ -251,6 +251,9 @@ extension PriceAggregateExtension on List<PriceAggregate> {
       !this[index].materialInfo.type.typeDealOrOverrideBonus &&
       showManufacturerName(index);
 
-  bool get isGimmickMaterialOnlyInCart => isNotEmpty &&
-      every((element) => element.isGimmickMaterial);
+  bool get isGimmickMaterialOnlyInCart =>
+      isNotEmpty && every((element) => element.isGimmickMaterial);
+
+  List<String> get manufacturers =>
+      map((e) => e.materialInfo.getManufactured).toSet().toList();
 }

@@ -65,14 +65,24 @@ class _CartPageCartScrollList extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               if (index == 0)
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 12,
-                                    horizontal: 8,
-                                  ),
+                                ColoredBox(
                                   color: Colors.white,
-                                  child: const MarketPlaceTitleWithLogo(
-                                    showToolTip: true,
+                                  child: Column(
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 12,
+                                          left: 12,
+                                        ),
+                                        child: MarketPlaceTitleWithLogo(
+                                          showToolTip: true,
+                                        ),
+                                      ),
+                                      MarketPlaceDeliveryInfo.cart(
+                                        context,
+                                        sellers: mpMaterials.manufacturers,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               _CartPageScrollListItem(

@@ -32,6 +32,7 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
@@ -156,7 +157,8 @@ class _BodyContent extends StatelessWidget {
                         const Divider(
                           indent: 0,
                           endIndent: 0,
-                          thickness: 0.2,
+                          thickness: 1,
+                          color: ZPColors.extraLightGrey2,
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -165,16 +167,23 @@ class _BodyContent extends StatelessWidget {
                         const Divider(
                           indent: 0,
                           endIndent: 0,
-                          thickness: 0.2,
+                          thickness: 1,
+                          color: ZPColors.extraLightGrey2,
                         ),
+                        if (mpItems.isNotEmpty)
+                          MarketPlaceDeliveryInfo.checkout(
+                            context,
+                            sellers: mpItems.manufacturers,
+                          ),
                         _OrderSummary(
                           orderHistoryDetailList: state.orderHistoryDetailsList,
                         ),
                         const Divider(
                           indent: 0,
                           endIndent: 0,
-                          thickness: 0.2,
                           height: 15,
+                          thickness: 1,
+                          color: ZPColors.extraLightGrey2,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -202,7 +211,8 @@ class _BodyContent extends StatelessWidget {
                           const SizedBox(height: 12),
                           const Divider(
                             height: 24,
-                            thickness: 0.4,
+                            thickness: 1,
+                            color: ZPColors.extraLightGrey2,
                           ),
                         ],
                         if (mpItems.isNotEmpty) ...[

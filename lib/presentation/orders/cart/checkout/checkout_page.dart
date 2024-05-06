@@ -25,7 +25,6 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
@@ -38,6 +37,7 @@ import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bun
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_material_item/checkout_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
 import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -52,7 +52,6 @@ part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bonus
 part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_scroll_list.dart';
 part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/total_items.dart';
 part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/checkout_footer_section.dart';
-part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/market_place_delivery_info.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -131,8 +130,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     if (cartState.cartProducts.containMPMaterial)
                       SliverToBoxAdapter(
-                        child: _MarketPlaceDeliveryInfo(
-                          mpItems: cartState.cartProducts.mpMaterialOnly,
+                        child: MarketPlaceDeliveryInfo.checkout(
+                          context,
+                          sellers: cartState
+                              .cartProducts.mpMaterialOnly.manufacturers,
                         ),
                       ),
                     const SliverToBoxAdapter(child: SizedBox(height: 32.0)),

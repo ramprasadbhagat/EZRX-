@@ -3,6 +3,7 @@ import 'package:ezrxmobile/presentation/core/info_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/info_icon.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class MarketPlaceTitleWithLogo extends StatelessWidget {
@@ -26,7 +27,10 @@ class MarketPlaceTitleWithLogo extends StatelessWidget {
         const SizedBox(width: 2),
         Text(
           context.tr('Marketplace'),
-          style: Theme.of(context).textTheme.labelLarge,
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge
+              ?.copyWith(color: ZPColors.neutralsBlack),
         ),
         if (showToolTip) ...[
           const SizedBox(width: 4),

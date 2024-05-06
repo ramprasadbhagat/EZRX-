@@ -216,6 +216,9 @@ extension ViewByOrderDetailsListExtension
   List<OrderHistoryDetailsOrderItem> get mpItemOnly =>
       where((e) => e.isMarketPlace).toList();
 
+  List<String> get manufacturers =>
+      map((e) => e.principalData.principalName.name).toSet().toList();
+
   bool get containsMaterialsWithInvalidPrice =>
       any((element) => element.hasInValidPrice);
 

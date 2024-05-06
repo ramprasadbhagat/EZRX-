@@ -7,6 +7,7 @@ import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:auto_route/auto_route.dart';
@@ -3966,6 +3967,13 @@ void main() {
               matching: find.byKey(WidgetKeys.cartMPProductSectionLabel),
             ),
             findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: mpSection,
+              matching: find.byType(MarketPlaceDeliveryInfo),
+            ),
+            findsOne,
           );
           final lastMPItem = find.descendant(
             of: mpSection,

@@ -49,11 +49,13 @@ import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_info
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bundle_item/checkout_bundle_item.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -2963,7 +2965,9 @@ void main() {
 
       expect(preOrderText, findsOneWidget);
     });
-    testWidgets('Find Marketplace Title and Marketplace Icon', (tester) async {
+    testWidgets(
+        'Find Marketplace Title, Marketplace Delivery info Marketplace Icon',
+        (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeMYSalesOrgConfigs,
@@ -2982,19 +2986,21 @@ void main() {
 
       final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
       expect(scrollListFinder, findsOneWidget);
-
       await tester.dragUntilVisible(
-        find.text('Marketplace'),
+        find.byType(MarketPlaceDeliveryInfo),
         scrollListFinder,
         const Offset(0.0, -500.0),
       );
-
+      await tester.dragUntilVisible(
+        find.byType(MarketPlaceTitleWithLogo),
+        scrollListFinder,
+        const Offset(0.0, -500.0),
+      );
       await tester.dragUntilVisible(
         find.byType(MarketPlaceSellerTitle),
         scrollListFinder,
         const Offset(0.0, -500.0),
       );
-
       await tester.pumpAndSettle();
     });
   });

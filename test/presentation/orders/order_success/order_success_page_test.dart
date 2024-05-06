@@ -49,6 +49,7 @@ import 'package:ezrxmobile/presentation/core/list_price_strike_through_component
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_material.dart';
@@ -1687,6 +1688,13 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
+        final marketplaceDeliveryInfo = find.byType(MarketPlaceDeliveryInfo);
+        await tester.dragUntilVisible(
+          marketplaceDeliveryInfo,
+          scrollList,
+          const Offset(0, -300),
+        );
+        expect(marketplaceDeliveryInfo, findsOneWidget);
         final marketplaceSectionTitle =
             find.byKey(WidgetKeys.cartMPProductSectionLabel);
         await tester.dragUntilVisible(
