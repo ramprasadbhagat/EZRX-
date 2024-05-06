@@ -202,6 +202,10 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
   bool get hasInValidPrice =>
       !type.isMaterialTypeBonus && (hidePrice || unitPrice == 0);
+
+  String get itemOriginPrice => !priceAggregate.price.isValid
+      ? 'Price Not Available'
+      : originPrice.toString();
 }
 
 extension ViewByOrderDetailsListExtension

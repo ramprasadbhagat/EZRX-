@@ -1898,6 +1898,64 @@ void main() {
           );
         },
       );
+
+      testWidgets(
+        'Show Counter offer price when price has isValid false and isPriceOverride is true',
+        (tester) async {
+          when(() => orderSummaryBlocMock.state).thenAnswer(
+            (invocation) => OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsOrderItem: [
+                    fakeMaterialItem.copyWith(
+                      material: MaterialInfo.empty().copyWith(
+                        materialNumber: MaterialNumber('fake-material-1'),
+                      ),
+                      isCounterOffer: true,
+                      priceAggregate: PriceAggregate.empty().copyWith(
+                        salesOrgConfig: fakeSGSalesOrgConfigs,
+                        price: Price.empty().copyWith(
+                          finalPrice: MaterialPrice(200),
+                          isPriceOverride: true,
+                          isValid: false,
+                          materialNumber: MaterialNumber('fake-material-1'),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          
+          expect(
+            find.byKey(WidgetKeys.orderSuccessZPItemsSection),
+            findsOneWidget,
+          );
+
+          final orderItemPriceStrikeThrough =
+              find.byKey(WidgetKeys.orderItemPriceStrikeThrough);
+
+          final listPriceFinder = find.byWidgetPredicate(
+            (widget) =>
+                widget is RichText &&
+                widget.key == WidgetKeys.priceComponent &&
+                widget.text
+                    .toPlainText()
+                    .contains('Price Not Available'),
+          );
+
+          expect(
+            find.descendant(
+              of: orderItemPriceStrikeThrough,
+              matching: listPriceFinder,
+            ),
+            findsOneWidget,
+          );
+        },
+      );
     });
 
     group('Attachment section -', () {

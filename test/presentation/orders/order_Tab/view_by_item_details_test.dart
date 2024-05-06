@@ -2044,39 +2044,6 @@ void main() {
       expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
     });
 
-    testWidgets(
-        'Display counter offer requested for PnG materials with price not available',
-        (tester) async {
-      await tester.binding.setSurfaceSize(const Size(480, 900));
-
-      final pnGMaterial =
-          mockViewByItemsOrderHistory.orderHistoryItems.last.copyWith(
-        originPrice: 80.00,
-        isCounterOffer: true,
-      );
-      when(() => viewByItemDetailsBlocMock.state).thenReturn(
-        ViewByItemDetailsState.initial().copyWith(
-          isLoading: false,
-          orderHistoryItem: pnGMaterial,
-          orderHistory: OrderHistory.empty().copyWith(
-            orderHistoryItems: [pnGMaterial],
-          ),
-        ),
-      );
-
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pumpAndSettle();
-      final priceNotAvailableFinder = find.text(
-        'Price Not Available',
-        findRichText: true,
-      );
-      expect(priceNotAvailableFinder, findsNWidgets(2));
-
-      final requestedCounterOfferKey =
-          find.text('Requested counter offer'.tr());
-      expect(requestedCounterOfferKey, findsOneWidget);
-    });
-
     testWidgets('Show Payment Term when disable payment term display is false',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenAnswer(

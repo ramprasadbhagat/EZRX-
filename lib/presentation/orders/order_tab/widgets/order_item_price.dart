@@ -32,6 +32,7 @@ class OrderItemPrice extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 4.0),
                 child: PriceComponent(
+                  key: WidgetKeys.orderItemPriceStrikeThrough,
                   salesOrgConfig: configs,
                   price: originPrice,
                   type: PriceStyle.counterOfferPrice,

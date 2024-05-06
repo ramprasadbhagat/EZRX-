@@ -71,6 +71,7 @@ class WidgetKeys {
   static const Key billToCustomerCode = Key('billToCustomerCode');
   static const Key billToAddress = Key('billToAddress');
   static const Key tenderTag = Key('tenderTag');
+  static const Key orderItemPriceStrikeThrough = Key('orderItemPriceStrikeThrough');
 
   //============================================================
   //  PRE-ORDER-MODAL

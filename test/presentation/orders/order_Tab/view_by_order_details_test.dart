@@ -1715,43 +1715,6 @@ void main() {
     });
 
     testWidgets(
-        '=> Display counter offer when order history item is conter offer one',
-        (tester) async {
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
-        ),
-      );
-      when(() => viewByOrderBlocMock.state).thenReturn(
-        ViewByOrderState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
-          viewByOrderList: viewByOrderWithCounterOffer,
-        ),
-      );
-      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
-        ViewByOrderDetailsState.initial().copyWith(
-          orderHistoryDetails: viewByOrderWithCounterOffer.orderHeaders.first,
-        ),
-      );
-
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pumpAndSettle();
-      await tester.fling(
-        find.byType(ListView),
-        const Offset(0.0, -1000.0),
-        1000.0,
-      );
-      final orderItemPrice = find.byType(OrderItemPrice);
-      expect(orderItemPrice, findsOneWidget);
-      final requestCounterOfferTxt = find.text('Requested counter offer'.tr());
-      expect(requestCounterOfferTxt, findsOneWidget);
-    });
-
-    testWidgets(
         '=> NOT display counter offer when order history item is NOT conter offer one',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -2390,51 +2353,6 @@ void main() {
       expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
     });
 
-    testWidgets(
-        'Display counter offer requested for PnG materials with price not available',
-        (tester) async {
-      final materialNumber = MaterialNumber('000000000021247719');
-      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
-        ViewByOrderDetailsState.initial().copyWith(
-          isLoading: false,
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderValue: 516.0,
-            orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
-              OrderHistoryDetailsOrderItem.empty().copyWith(
-                principalData: PrincipalData.empty().copyWith(
-                  principalCode: PrincipalCode('0000101308'),
-                  principalName: PrincipalName('PROCTER AND GAMBLE'),
-                ),
-                materialNumber: materialNumber,
-                unitPrice: 17.2,
-                originPrice: 15.0,
-                totalPrice: 516,
-                type: OrderItemType('Comm'),
-                productType: MaterialInfoType('material'),
-                hidePrice: true,
-                isCounterOffer: true,
-              ),
-            ],
-          ),
-        ),
-      );
-
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pump();
-      await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
-      await tester.pumpAndSettle();
-      final viewByOrderDetailsItemFinder = find.byKey(
-        WidgetKeys.viewByOrderDetailItem(materialNumber.displayMatNo, false),
-      );
-      expect(viewByOrderDetailsItemFinder, findsOneWidget);
-      final priceNotAvailableFinder =
-          find.text('Price Not Available', findRichText: true);
-      expect(priceNotAvailableFinder, findsNWidgets(2));
-
-      final requestedCounterOfferKey =
-          find.text('Requested counter offer'.tr());
-      expect(requestedCounterOfferKey, findsOneWidget);
-    });
     testWidgets(
         'Show seller and MP logo at header + Display batch & expiry date NA with MP orders',
         (tester) async {

@@ -34,7 +34,7 @@ class ViewByItemOrderItemTile extends StatelessWidget {
                     eligibilityState.salesOrg.isID,
                   ),
                   originPrice: orderHistoryItem.originPrice.toString(),
-                  showPreviousPrice: orderHistoryItem.isCounterOffer,
+                  showPreviousPrice: false,
                   hidePrice: orderHistoryItem.hidePrice,
                 ),
               ],

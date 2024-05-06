@@ -92,7 +92,7 @@ class _MaterialItem extends StatelessWidget {
                   unitPrice: orderItem.itemUnitPrice(
                     isIDMarket,
                   ),
-                  originPrice: orderItem.originPrice.toString(),
+                  originPrice: orderItem.itemOriginPrice,
                   showPreviousPrice: orderItem.isCounterOffer,
                   hidePrice: orderItem.hidePrice,
                 ),
@@ -117,7 +117,7 @@ class _MaterialItem extends StatelessWidget {
                   ),
               ],
             )
-          : null,
+          : const SizedBox.shrink(),
       title: orderItem.materialDescription,
       quantity: '${orderItem.qty}',
       isQuantityBelowImage: false,
@@ -133,7 +133,7 @@ class _MaterialItem extends StatelessWidget {
                     .outOfStockProductStatus.displayStatusTextColor,
               ),
             )
-          : null,
+          : const SizedBox.shrink(),
       footerWidget: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
