@@ -88,9 +88,8 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     return double.parse((totalPrice / int.parse(returnQuantity)).toString());
   }
 
-  String get displayBapiStatus => !bapiStatus.isSuccess
-      ? bapiStatus.getIntermediateStatus
-      : bapiSalesDocNumber;
+  String get displayNAIfBapiStatusIsNotSuccess =>
+      bapiStatus.isSuccess ? bapiSalesDocNumber : 'NA';
 
   bool displayOutSidePolicy(bool allowReturnsOutsidePolicy) =>
       outsidePolicy && allowReturnsOutsidePolicy;

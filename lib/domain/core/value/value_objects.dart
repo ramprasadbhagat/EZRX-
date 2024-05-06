@@ -303,11 +303,7 @@ class StatusType extends ValueObject<String> {
   bool get getIsBapiStatusFailed =>
       isBapiStatusFailed(value.getOrElse(() => ''));
 
-  String get getIntermediateStatus => bapiStatusType(
-        value.getOrElse(() => ''),
-      );
-
-  bool get isSuccess => getIntermediateStatus == 'Success';
+  bool get isSuccess => isBapiStatusSuccess(value.getOrElse(() => ''));
 
   IconData get displayReturnStatusIcon =>
       getReturnStatusIcon(value.getOrElse(() => ''));

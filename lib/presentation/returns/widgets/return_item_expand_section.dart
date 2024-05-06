@@ -221,7 +221,7 @@ class _ApprovalDetailsSection extends StatelessWidget {
               const SizedBox(height: _itemSpacing),
               BalanceTextRow(
                 keyText: context.tr('Approval number'),
-                valueText: requestInformation.displayBapiStatus,
+                valueText: requestInformation.displayNAIfBapiStatusIsNotSuccess,
                 keyFlex: _keyFlex,
                 valueFlex: _valueFlex,
                 keyTextStyle: textStyle,
