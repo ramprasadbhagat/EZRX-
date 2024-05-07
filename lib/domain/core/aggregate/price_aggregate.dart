@@ -360,10 +360,10 @@ class PriceAggregate with _$PriceAggregate {
         : unitPrice * quantity;
   }
 
-  double get discountedListPrice => price.priceTireItem
+  double get discountedListPrice => price.tiers
       .firstWhere(
         (element) => discountedMaterialCount >= element.quantity,
-        orElse: () => price.priceTireItem.last,
+        orElse: () => price.tiers.last,
       )
       .rate;
 
@@ -376,7 +376,7 @@ class PriceAggregate with _$PriceAggregate {
                   : 0)));
 
   String get displayZdp5Price {
-    return price.priceTireItem
+    return price.tiers
         .firstWhere(
           (element) => materialInfo.quantity.intValue >= element.quantity,
           orElse: () => PriceTierItem.empty(),
@@ -821,7 +821,7 @@ class PriceAggregate with _$PriceAggregate {
   int get stockQuantity => productStockInfo.stockQuantity;
 
   bool get tireItemPriceDisplay =>
-      (price.priceTireItem.isNotEmpty && materialInfo.quantity.intValue >= 1);
+      (price.tiers.isNotEmpty && materialInfo.quantity.intValue >= 1);
 
   int get getTotalQuantityOfBundleProduct => bundle.materials.fold(
         0,
@@ -896,7 +896,7 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   List<TRObject> get promotionValue {
-    return price.allPriceTireItem
+    return price.tiers
         .where((element) => element.promotionAmount.abs() > 0)
         .map((element) {
       return element.percentage > 0

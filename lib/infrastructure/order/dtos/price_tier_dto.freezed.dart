@@ -20,8 +20,6 @@ PriceTierDto _$PriceTierDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PriceTierDto {
-  @JsonKey(name: 'tier', defaultValue: '')
-  String get tier => throw _privateConstructorUsedError;
   @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
   List<PriceTierItemDto> get items => throw _privateConstructorUsedError;
 
@@ -38,8 +36,7 @@ abstract class $PriceTierDtoCopyWith<$Res> {
       _$PriceTierDtoCopyWithImpl<$Res, PriceTierDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'tier', defaultValue: '') String tier,
-      @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
+      {@JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
       List<PriceTierItemDto> items});
 }
 
@@ -56,14 +53,9 @@ class _$PriceTierDtoCopyWithImpl<$Res, $Val extends PriceTierDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tier = null,
     Object? items = null,
   }) {
     return _then(_value.copyWith(
-      tier: null == tier
-          ? _value.tier
-          : tier // ignore: cast_nullable_to_non_nullable
-              as String,
       items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
@@ -81,8 +73,7 @@ abstract class _$$_PriceTierDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'tier', defaultValue: '') String tier,
-      @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
+      {@JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
       List<PriceTierItemDto> items});
 }
 
@@ -97,14 +88,9 @@ class __$$_PriceTierDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tier = null,
     Object? items = null,
   }) {
     return _then(_$_PriceTierDto(
-      tier: null == tier
-          ? _value.tier
-          : tier // ignore: cast_nullable_to_non_nullable
-              as String,
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -117,8 +103,7 @@ class __$$_PriceTierDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PriceTierDto extends _PriceTierDto {
   const _$_PriceTierDto(
-      {@JsonKey(name: 'tier', defaultValue: '') required this.tier,
-      @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
+      {@JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
       required final List<PriceTierItemDto> items})
       : _items = items,
         super._();
@@ -126,9 +111,6 @@ class _$_PriceTierDto extends _PriceTierDto {
   factory _$_PriceTierDto.fromJson(Map<String, dynamic> json) =>
       _$$_PriceTierDtoFromJson(json);
 
-  @override
-  @JsonKey(name: 'tier', defaultValue: '')
-  final String tier;
   final List<PriceTierItemDto> _items;
   @override
   @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
@@ -140,7 +122,7 @@ class _$_PriceTierDto extends _PriceTierDto {
 
   @override
   String toString() {
-    return 'PriceTierDto(tier: $tier, items: $items)';
+    return 'PriceTierDto(items: $items)';
   }
 
   @override
@@ -148,14 +130,13 @@ class _$_PriceTierDto extends _PriceTierDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceTierDto &&
-            (identical(other.tier, tier) || other.tier == tier) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, tier, const DeepCollectionEquality().hash(_items));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
@@ -173,17 +154,13 @@ class _$_PriceTierDto extends _PriceTierDto {
 
 abstract class _PriceTierDto extends PriceTierDto {
   const factory _PriceTierDto(
-      {@JsonKey(name: 'tier', defaultValue: '') required final String tier,
-      @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
+      {@JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
       required final List<PriceTierItemDto> items}) = _$_PriceTierDto;
   const _PriceTierDto._() : super._();
 
   factory _PriceTierDto.fromJson(Map<String, dynamic> json) =
       _$_PriceTierDto.fromJson;
 
-  @override
-  @JsonKey(name: 'tier', defaultValue: '')
-  String get tier;
   @override
   @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
   List<PriceTierItemDto> get items;

@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PriceTier {
-  String get tier => throw _privateConstructorUsedError;
   List<PriceTierItem> get items => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +28,7 @@ abstract class $PriceTierCopyWith<$Res> {
   factory $PriceTierCopyWith(PriceTier value, $Res Function(PriceTier) then) =
       _$PriceTierCopyWithImpl<$Res, PriceTier>;
   @useResult
-  $Res call({String tier, List<PriceTierItem> items});
+  $Res call({List<PriceTierItem> items});
 }
 
 /// @nodoc
@@ -45,14 +44,9 @@ class _$PriceTierCopyWithImpl<$Res, $Val extends PriceTier>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tier = null,
     Object? items = null,
   }) {
     return _then(_value.copyWith(
-      tier: null == tier
-          ? _value.tier
-          : tier // ignore: cast_nullable_to_non_nullable
-              as String,
       items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
@@ -68,7 +62,7 @@ abstract class _$$_PriceTierCopyWith<$Res> implements $PriceTierCopyWith<$Res> {
       __$$_PriceTierCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String tier, List<PriceTierItem> items});
+  $Res call({List<PriceTierItem> items});
 }
 
 /// @nodoc
@@ -82,14 +76,9 @@ class __$$_PriceTierCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tier = null,
     Object? items = null,
   }) {
     return _then(_$_PriceTier(
-      tier: null == tier
-          ? _value.tier
-          : tier // ignore: cast_nullable_to_non_nullable
-              as String,
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -101,13 +90,10 @@ class __$$_PriceTierCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PriceTier extends _PriceTier {
-  const _$_PriceTier(
-      {required this.tier, required final List<PriceTierItem> items})
+  const _$_PriceTier({required final List<PriceTierItem> items})
       : _items = items,
         super._();
 
-  @override
-  final String tier;
   final List<PriceTierItem> _items;
   @override
   List<PriceTierItem> get items {
@@ -118,7 +104,7 @@ class _$_PriceTier extends _PriceTier {
 
   @override
   String toString() {
-    return 'PriceTier(tier: $tier, items: $items)';
+    return 'PriceTier(items: $items)';
   }
 
   @override
@@ -126,13 +112,12 @@ class _$_PriceTier extends _PriceTier {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PriceTier &&
-            (identical(other.tier, tier) || other.tier == tier) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, tier, const DeepCollectionEquality().hash(_items));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
@@ -142,13 +127,10 @@ class _$_PriceTier extends _PriceTier {
 }
 
 abstract class _PriceTier extends PriceTier {
-  const factory _PriceTier(
-      {required final String tier,
-      required final List<PriceTierItem> items}) = _$_PriceTier;
+  const factory _PriceTier({required final List<PriceTierItem> items}) =
+      _$_PriceTier;
   const _PriceTier._() : super._();
 
-  @override
-  String get tier;
   @override
   List<PriceTierItem> get items;
   @override

@@ -10,16 +10,14 @@ class PriceTierDto with _$PriceTierDto {
   const PriceTierDto._();
 
   const factory PriceTierDto({
-    @JsonKey(name: 'tier', defaultValue: '') required String tier,
     @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
         required List<PriceTierItemDto> items,
   }) = _PriceTierDto;
 
-  factory PriceTierDto.fromDomain(PriceTier priceTier) {
+  factory PriceTierDto.fromDomain(List<PriceTierItem> priceTier) {
     return PriceTierDto(
-      tier: priceTier.tier,
       items:
-          priceTier.items.map((e) => PriceTierItemDto.fromDomain(e)).toList(),
+          priceTier.map((e) => PriceTierItemDto.fromDomain(e)).toList(),
     );
   }
 
@@ -28,7 +26,6 @@ class PriceTierDto with _$PriceTierDto {
       ..sort((a, b) => a.quantity.compareTo(b.quantity));
 
     return PriceTier(
-      tier: tier,
       items: sortedItem,
     );
   }

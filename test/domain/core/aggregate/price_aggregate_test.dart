@@ -69,18 +69,13 @@ void main() {
   );
 
   final priceTiers = [
-    PriceTier.empty().copyWith(
-      tier: 'C',
-      items: [
-        PriceTierItem.empty().copyWith(
-          rate: 41,
-          quantity: 5,
-        ),
-        PriceTierItem.empty().copyWith(
-          rate: 20,
-          quantity: 10,
-        ),
-      ],
+     PriceTierItem.empty().copyWith(
+      rate: 20,
+      quantity: 10,
+    ),
+    PriceTierItem.empty().copyWith(
+      rate: 41,
+      quantity: 5,
     ),
   ];
   group('Price Aggregate Test', () {
@@ -292,7 +287,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
+              PriceTierItem.empty(),
             ],
           ),
         );
@@ -314,7 +309,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
+              PriceTierItem.empty(),
             ],
           ),
         );
@@ -382,7 +377,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
+              PriceTierItem.empty(),
             ],
           ),
           salesOrgConfig: fakeVNSalesOrgConfigs,
@@ -405,7 +400,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
+              PriceTierItem.empty(),
             ],
           ),
           salesOrgConfig: fakeVNSalesOrgConfigs,
@@ -428,7 +423,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
+              PriceTierItem.empty(),
             ],
           ),
           salesOrgConfig: fakeVNSalesOrgConfigs,
@@ -448,7 +443,7 @@ void main() {
           price: emptyPrice.copyWith(
             zmgDiscount: true,
             tiers: [
-              PriceTier.empty().copyWith(items: [PriceTierItem.empty()]),
+              PriceTierItem.empty(),
             ],
           ),
           salesOrgConfig: fakeVNSalesOrgConfigs,
@@ -501,17 +496,13 @@ void main() {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           price: emptyPrice.copyWith(
             tiers: [
-              PriceTier.empty().copyWith(
-                items: [
-                  PriceTierItem.empty(),
-                ],
-              ),
+              PriceTierItem.empty(),
             ],
           ),
         );
         expect(
           customPriceAggregate.discountedListPrice,
-          customPriceAggregate.price.priceTireItem.first.rate,
+          customPriceAggregate.price.tiers.first.rate,
         );
       },
     );
@@ -1934,7 +1925,38 @@ void main() {
         );
         expect(
           customPriceAggregate.finalPrice,
-          115528,
+          124600,
+        );
+      },
+    );
+
+    test(
+      'Find final price with multiple tiering bonus where rate increases with quantity',
+      () {
+        final price = materialPriceListFromLocal.firstWhere(
+          (element) =>
+              element.materialNumber == MaterialNumber('000000000021041773'),
+          orElse: () => Price.empty(),
+        );
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          quantity: 100,
+          price: price.copyWith(
+            tiers: [
+              PriceTierItem.empty().copyWith(
+                rate: 20,
+                quantity: 10,
+              ),
+              PriceTierItem.empty().copyWith(
+                rate: 10,
+                quantity: 5,
+              ),
+            ],
+          ),
+          discountedMaterialCount: 12,
+        );
+        expect(
+          customPriceAggregate.finalPrice,
+          20,
         );
       },
     );
@@ -2085,18 +2107,13 @@ void main() {
       'Find final price with tiering bonus from toSubmitMaterialInfo',
       () {
         final priceTiers = [
-          PriceTier.empty().copyWith(
-            tier: 'C',
-            items: [
-              PriceTierItem.empty().copyWith(
-                rate: 41,
-                quantity: 5,
-              ),
-              PriceTierItem.empty().copyWith(
-                rate: 20,
-                quantity: 10,
-              ),
-            ],
+          PriceTierItem.empty().copyWith(
+            rate: 20,
+            quantity: 10,
+          ),
+          PriceTierItem.empty().copyWith(
+            rate: 41,
+            quantity: 5,
           ),
         ];
         final customPriceAggregate = emptyPriceAggregate.copyWith(
@@ -2221,7 +2238,7 @@ void main() {
 
       expect(
         customPriceAggregate.finalCheckoutTotalForAllMaterial,
-        '${priceTiers.first.items.first.rate * quantity}',
+        '${priceTiers.last.rate * quantity}',
       );
     });
 
@@ -2254,7 +2271,7 @@ void main() {
 
       expect(
         customPriceAggregate.toSubmitMaterialInfo().price,
-        priceTiers.first.items.first.rate,
+        priceTiers.last.rate,
       );
     });
   });

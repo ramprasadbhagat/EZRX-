@@ -27,7 +27,7 @@ void main() {
     test('Test fromDomain', () {
       final configs = PriceTierDto.fromDomain(
         PriceTierDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
-            .toDomain(),
+            .toDomain().items,
       );
       expect(configs.items[0].quantity, 10);
     });
@@ -35,7 +35,7 @@ void main() {
     test('Test tojson', () {
       final configs = PriceTierDto.fromDomain(
         PriceTierDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
-            .toDomain(),
+            .toDomain().items,
       ).toJson();
       expect(configs['priceTier'][0]['quantity'], 10);
     });

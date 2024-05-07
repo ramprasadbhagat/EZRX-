@@ -128,14 +128,9 @@ final mockZmgCartItemList = <PriceAggregate>[
       materialNumber: MaterialNumber('000000000023168459'),
       zmgDiscount: true,
       tiers: [
-        PriceTier.empty().copyWith(
-          tier: 'c',
-          items: [
-            priceTierItem1,
-            priceTierItem2,
-            priceTierItem3,
-          ],
-        ),
+        priceTierItem1,
+        priceTierItem2,
+        priceTierItem3,
       ],
     ),
   ),
@@ -153,14 +148,9 @@ final mockZmgCartItemList = <PriceAggregate>[
       materialNumber: MaterialNumber('000000000023168460'),
       zmgDiscount: true,
       tiers: [
-        PriceTier.empty().copyWith(
-          tier: 'c',
-          items: [
-            priceTierItem4,
-            priceTierItem5,
-            priceTierItem6,
-          ],
-        ),
+        priceTierItem4,
+        priceTierItem5,
+        priceTierItem6,
       ],
     ),
   ),

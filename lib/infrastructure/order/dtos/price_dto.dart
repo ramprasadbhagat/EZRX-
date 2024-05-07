@@ -69,7 +69,18 @@ class PriceDto with _$PriceDto {
         finalPrice: MaterialPrice(finalIndividualPrice),
         finalTotalPrice: MaterialPrice(finalTotalPrice),
         rules: rules.map((e) => e.toDomain()).toList(),
-        tiers: tiers.map((e) => e.toDomain()).toList(),
+        tiers: tiers
+            .map((e) => e.toDomain())
+            .toList()
+            .expand((element) => element.items)
+            .toList()
+          ..sort(
+            (
+              a,
+              b,
+            ) =>
+                b.quantity.compareTo(a.quantity),
+          ),
         bonuses: bonuses.map((e) => e.toDomain()).toList(),
         bundles: bundles.map((e) => e.toDomain()).toList(),
         isValid: isValid,
@@ -96,7 +107,11 @@ class PriceDto with _$PriceDto {
       finalIndividualPrice: price.finalPrice.getOrDefaultValue(0),
       finalTotalPrice: price.finalTotalPrice.getOrDefaultValue(0),
       rules: price.rules.map((e) => PriceRuleDto.fromDomain(e)).toList(),
-      tiers: price.tiers.map((e) => PriceTierDto.fromDomain(e)).toList(),
+      tiers: [
+        PriceTierDto.fromDomain(
+          price.tiers,
+        ),
+      ],
       bonuses: price.bonuses.map((e) => PriceBonusDto.fromDomain(e)).toList(),
       bundles: price.bundles.map((e) => PriceBundleDto.fromDomain(e)).toList(),
       isValid: price.isValid,

@@ -8,23 +8,12 @@ class PriceTier with _$PriceTier {
   const PriceTier._();
 
   const factory PriceTier({
-    required String tier,
     required List<PriceTierItem> items,
   }) = _PriceTier;
 
   factory PriceTier.empty() => const PriceTier(
-        tier: '',
         items: [],
       );
-
-  List<PriceTierItem> get getItems => List<PriceTierItem>.from(items)
-    ..sort(
-      (
-        PriceTierItem a,
-        PriceTierItem b,
-      ) =>
-          b.quantity.compareTo(a.quantity),
-    );
 }
 
 @freezed

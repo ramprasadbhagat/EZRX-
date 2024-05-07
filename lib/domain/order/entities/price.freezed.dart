@@ -22,7 +22,7 @@ mixin _$Price {
   MaterialPrice get finalPrice => throw _privateConstructorUsedError;
   MaterialPrice get finalTotalPrice => throw _privateConstructorUsedError;
   List<PriceRule> get rules => throw _privateConstructorUsedError;
-  List<PriceTier> get tiers => throw _privateConstructorUsedError;
+  List<PriceTierItem> get tiers => throw _privateConstructorUsedError;
   List<PriceBonus> get bonuses => throw _privateConstructorUsedError;
   List<PriceBundle> get bundles => throw _privateConstructorUsedError;
   bool get isValid => throw _privateConstructorUsedError;
@@ -59,7 +59,7 @@ abstract class $PriceCopyWith<$Res> {
       MaterialPrice finalPrice,
       MaterialPrice finalTotalPrice,
       List<PriceRule> rules,
-      List<PriceTier> tiers,
+      List<PriceTierItem> tiers,
       List<PriceBonus> bonuses,
       List<PriceBundle> bundles,
       bool isValid,
@@ -149,7 +149,7 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
       tiers: null == tiers
           ? _value.tiers
           : tiers // ignore: cast_nullable_to_non_nullable
-              as List<PriceTier>,
+              as List<PriceTierItem>,
       bonuses: null == bonuses
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
@@ -247,7 +247,7 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
       MaterialPrice finalPrice,
       MaterialPrice finalTotalPrice,
       List<PriceRule> rules,
-      List<PriceTier> tiers,
+      List<PriceTierItem> tiers,
       List<PriceBonus> bonuses,
       List<PriceBundle> bundles,
       bool isValid,
@@ -334,7 +334,7 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
       tiers: null == tiers
           ? _value._tiers
           : tiers // ignore: cast_nullable_to_non_nullable
-              as List<PriceTier>,
+              as List<PriceTierItem>,
       bonuses: null == bonuses
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
@@ -421,7 +421,7 @@ class _$_Price extends _Price {
       required this.finalPrice,
       required this.finalTotalPrice,
       required final List<PriceRule> rules,
-      required final List<PriceTier> tiers,
+      required final List<PriceTierItem> tiers,
       required final List<PriceBonus> bonuses,
       required final List<PriceBundle> bundles,
       required this.isValid,
@@ -466,9 +466,9 @@ class _$_Price extends _Price {
     return EqualUnmodifiableListView(_rules);
   }
 
-  final List<PriceTier> _tiers;
+  final List<PriceTierItem> _tiers;
   @override
-  List<PriceTier> get tiers {
+  List<PriceTierItem> get tiers {
     if (_tiers is EqualUnmodifiableListView) return _tiers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tiers);
@@ -642,7 +642,7 @@ abstract class _Price extends Price {
       required final MaterialPrice finalPrice,
       required final MaterialPrice finalTotalPrice,
       required final List<PriceRule> rules,
-      required final List<PriceTier> tiers,
+      required final List<PriceTierItem> tiers,
       required final List<PriceBonus> bonuses,
       required final List<PriceBundle> bundles,
       required final bool isValid,
@@ -676,7 +676,7 @@ abstract class _Price extends Price {
   @override
   List<PriceRule> get rules;
   @override
-  List<PriceTier> get tiers;
+  List<PriceTierItem> get tiers;
   @override
   List<PriceBonus> get bonuses;
   @override

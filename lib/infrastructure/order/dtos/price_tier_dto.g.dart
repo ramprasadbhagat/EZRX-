@@ -8,7 +8,6 @@ part of 'price_tier_dto.dart';
 
 _$_PriceTierDto _$$_PriceTierDtoFromJson(Map<String, dynamic> json) =>
     _$_PriceTierDto(
-      tier: json['tier'] as String? ?? '',
       items: (json['priceTier'] as List<dynamic>?)
               ?.map((e) => PriceTierItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -17,7 +16,6 @@ _$_PriceTierDto _$$_PriceTierDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_PriceTierDtoToJson(_$_PriceTierDto instance) =>
     <String, dynamic>{
-      'tier': instance.tier,
       'priceTier': instance.items.map((e) => e.toJson()).toList(),
     };
 

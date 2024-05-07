@@ -50,7 +50,7 @@ void main() {
   late ApiFailure fakeErrorWithDifferentDeliveryAddress;
   late ShipToInfo shipToInfo;
   late PriceAggregate bundleItem;
-  late List<PriceTier> priceTiers;
+  late List<PriceTierItem> priceTiers;
   late List<PriceBonusItem> priceBonus;
   late List<BonusMaterial> bonusMaterial;
   late List<CartState> expectedCartState;
@@ -76,18 +76,13 @@ void main() {
     aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
 
     priceTiers = [
-      PriceTier.empty().copyWith(
-        tier: 'C',
-        items: [
-          PriceTierItem.empty().copyWith(
-            rate: 41,
-            quantity: 5,
-          ),
-          PriceTierItem.empty().copyWith(
-            rate: 20,
-            quantity: 10,
-          ),
-        ],
+      PriceTierItem.empty().copyWith(
+        rate: 41,
+        quantity: 5,
+      ),
+      PriceTierItem.empty().copyWith(
+        rate: 20,
+        quantity: 10,
       ),
     ];
 

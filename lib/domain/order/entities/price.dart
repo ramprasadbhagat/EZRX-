@@ -21,7 +21,7 @@ class Price with _$Price {
     required MaterialPrice finalPrice,
     required MaterialPrice finalTotalPrice,
     required List<PriceRule> rules,
-    required List<PriceTier> tiers,
+    required List<PriceTierItem> tiers,
     required List<PriceBonus> bonuses,
     required List<PriceBundle> bundles,
     required bool isValid,
@@ -65,20 +65,6 @@ class Price with _$Price {
         priceOverride: PriceOverrideValue(0),
         comboDeal: PriceComboDeal.empty(),
       );
-
-  List<PriceTierItem> get allPriceTireItem {
-    return tiers.expand((element) => element.getItems).toList();
-  }
-
-  List<PriceTierItem> get priceTireItem =>
-      tiers.expand((element) => element.items).toList()
-        ..sort(
-          (
-            PriceTierItem a,
-            PriceTierItem b,
-          ) =>
-              a.rate.compareTo(b.rate),
-        );
 
   bool get isTireDiscountEligible => tiers.isNotEmpty;
 

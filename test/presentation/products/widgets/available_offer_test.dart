@@ -220,7 +220,7 @@ void main() {
           MaterialPriceState.initial().copyWith(
             materialPrice: {
               materialInfoMock.materialNumber: materialPrice.copyWith(
-                tiers: [PriceTier.empty().copyWith(tier: 'fake_tier')],
+                tiers: [PriceTierItem.empty()],
                 bonuses: [bonus],
               ),
             },
@@ -286,7 +286,7 @@ void main() {
         MaterialPriceState.initial().copyWith(
           materialPrice: {
             materialInfoMock.materialNumber: materialPrice.copyWith(
-              tiers: [PriceTier.empty()],
+              tiers: [PriceTierItem.empty()],
             ),
           },
         ),
@@ -511,7 +511,7 @@ void main() {
           materialPrice: {
             materialInfoMock.materialNumber: materialPrice.copyWith(
               bonuses: [unsortedBonus],
-              tiers: <PriceTier>[],
+              tiers: <PriceTierItem>[],
             ),
           },
         ),

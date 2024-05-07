@@ -57,7 +57,7 @@ class AvailableOffer extends StatelessWidget {
           children: [
             _AvailableOfferLabel(
               bonusMaterialList: bonusMaterialList,
-              priceTiersList: price.allPriceTireItem.reversed.toList(),
+              priceTiersList: price.tiers.reversed.toList(),
             ),
             if (isId)
               Padding(
@@ -74,7 +74,7 @@ class AvailableOffer extends StatelessWidget {
               ),
             _AvailableOfferScrollList(
               bonusMaterialList: bonusMaterialList,
-              priceTiersList: price.allPriceTireItem.reversed.toList(),
+              priceTiersList: price.tiers.reversed.toList(),
               showTierPrice: showTierPrice,
             ),
           ],

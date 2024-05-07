@@ -468,18 +468,13 @@ void main() async {
               fakeCartProduct.first.copyWith(
                 price: Price.empty().copyWith(
                   tiers: [
-                    PriceTier.empty().copyWith(
-                      tier: 'C',
-                      items: [
-                        PriceTierItem.empty().copyWith(
-                          rate: 41,
-                          quantity: 5,
-                        ),
-                        PriceTierItem.empty().copyWith(
-                          rate: 20,
-                          quantity: 10,
-                        ),
-                      ],
+                    PriceTierItem.empty().copyWith(
+                      rate: 41,
+                      quantity: 5,
+                    ),
+                    PriceTierItem.empty().copyWith(
+                      rate: 20,
+                      quantity: 10,
                     ),
                   ],
                 ),
@@ -537,18 +532,13 @@ void main() async {
             materialPrice: {
               MaterialNumber('123456789'): Price.empty().copyWith(
                 tiers: [
-                  PriceTier.empty().copyWith(
-                    tier: 'C',
-                    items: [
-                      PriceTierItem.empty().copyWith(
-                        rate: 41,
-                        quantity: 5,
-                      ),
-                      PriceTierItem.empty().copyWith(
-                        rate: 20,
-                        quantity: 10,
-                      ),
-                    ],
+                  PriceTierItem.empty().copyWith(
+                    rate: 41,
+                    quantity: 5,
+                  ),
+                  PriceTierItem.empty().copyWith(
+                    rate: 20,
+                    quantity: 10,
                   ),
                 ],
               ),

@@ -107,7 +107,7 @@ void main() {
           for (final number in fakeMaterialQuery)
             number.materialNumber: Price.empty().copyWith(
               rules: [PriceRule.empty()],
-              tiers: [PriceTier.empty()],
+              tiers: [PriceTierItem.empty()],
               bonuses: [PriceBonus.empty()],
             ),
         },
@@ -130,7 +130,7 @@ void main() {
               for (final number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
                   rules: [PriceRule.empty()],
-                  tiers: [PriceTier.empty()],
+                  tiers: [PriceTierItem.empty()],
                   bonuses: [PriceBonus.empty()],
                 ),
             },
@@ -144,7 +144,7 @@ void main() {
               for (final number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
                   rules: [PriceRule.empty()],
-                  tiers: [PriceTier.empty()],
+                  tiers: [PriceTierItem.empty()],
                   bonuses: [PriceBonus.empty()],
                 ),
             },
@@ -301,7 +301,7 @@ void main() {
           for (final number in fakeMaterialQuery)
             number.materialNumber: Price.empty().copyWith(
               rules: [PriceRule.empty()],
-              tiers: [PriceTier.empty()],
+              tiers: [PriceTierItem.empty()],
               bonuses: [PriceBonus.empty()],
             ),
         },
@@ -324,7 +324,7 @@ void main() {
               for (final number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
                   rules: [PriceRule.empty()],
-                  tiers: [PriceTier.empty()],
+                  tiers: [PriceTierItem.empty()],
                   bonuses: [PriceBonus.empty()],
                 ),
             },
@@ -338,7 +338,7 @@ void main() {
               for (final number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
                   rules: [PriceRule.empty()],
-                  tiers: [PriceTier.empty()],
+                  tiers: [PriceTierItem.empty()],
                   bonuses: [PriceBonus.empty()],
                 ),
             },
