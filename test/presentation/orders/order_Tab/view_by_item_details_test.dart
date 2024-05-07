@@ -6,7 +6,6 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
-import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
@@ -145,8 +144,7 @@ void main() {
           governmentMaterialCode: 'fakegovernmentMaterialCode',
           batch: StringValue('fake-batch-number'),
           expiryDate: DateTimeStringValue('2023-10-04'),
-          invoiceData: InvoiceData.empty()
-              .copyWith(invoiceNumber: StringValue('123456')),
+          invoiceNumber: StringValue('123456'),
           telephoneNumber: fakePhoneNumber,
         );
 
@@ -1195,7 +1193,7 @@ void main() {
         ),
       ).called(1);
       final invoiceNoTextFinder = find.text(
-        fakeOrderHistoryItem.invoiceData.invoiceNumber.getOrDefaultValue(''),
+        fakeOrderHistoryItem.invoiceNumber.getOrDefaultValue(''),
       );
       expect(invoiceNoTextFinder, findsWidgets);
       final iconFinder =
@@ -1252,7 +1250,7 @@ void main() {
         ),
       ).called(1);
       final invoiceNoTextFinder = find.text(
-        fakeOrderHistoryItem.invoiceData.invoiceNumber.getOrDefaultValue(''),
+        fakeOrderHistoryItem.invoiceNumber.getOrDefaultValue(''),
       );
       expect(invoiceNoTextFinder, findsWidgets);
       final iconFinder =
@@ -1265,8 +1263,7 @@ void main() {
           AllInvoicesEvent.fetch(
             appliedFilter: AllInvoicesFilter.defaultFilter().copyWith(
               searchKey: SearchKey.searchFilter(
-                fakeOrderHistoryItem.invoiceData.invoiceNumber
-                    .getOrDefaultValue(''),
+                fakeOrderHistoryItem.invoiceNumber.getOrDefaultValue(''),
               ),
             ),
           ),

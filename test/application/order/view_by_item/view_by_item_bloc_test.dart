@@ -60,8 +60,9 @@ void main() {
       )
           .map(
             (orderItem) => orderItem.copyWith(
-              invoiceData:
-                  invoiceMapDataMock[orderItem.hashId] ?? orderItem.invoiceData,
+              invoiceNumber:
+                  invoiceMapDataMock[orderItem.hashId]?.invoiceNumber ??
+                      orderItem.invoiceNumber,
             ),
           )
           .toList();
@@ -373,8 +374,9 @@ void main() {
         )
             .map(
               (orderItem) => orderItem.copyWith(
-                invoiceData: invoiceMapDataMock[orderItem.hashId] ??
-                    orderItem.invoiceData,
+                invoiceNumber:
+                    invoiceMapDataMock[orderItem.hashId]?.invoiceNumber ??
+                        orderItem.invoiceNumber,
               ),
             )
             .toList();

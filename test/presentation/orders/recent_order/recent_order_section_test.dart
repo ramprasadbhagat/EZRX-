@@ -216,11 +216,9 @@ void main() {
       await tester.tap(find.byKey(WidgetKeys.listRecentlyOrdered).first);
       verify(
         () => viewByItemDetailsBlocMock.add(
-          ViewByItemDetailsEvent.setItemOrderDetails(
-            orderHistory: fakeOrderHistory,
-            orderHistoryItem: fakeOrderHistory.orderHistoryItems.first,
-            disableDeliveryDateForZyllemStatus:
-                fakeMYSalesOrgConfigs.disableDeliveryDate,
+          ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+            orderNumber: fakeOrderHistory.orderHistoryItems.first.orderNumber,
+            lineNumber: fakeOrderHistory.orderHistoryItems.first.lineNumber,
           ),
         ),
       ).called(1);

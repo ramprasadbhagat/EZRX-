@@ -1133,16 +1133,6 @@ void main() {
           ),
         ).called(1);
 
-        verify(
-          () => viewByItemDetailsBlocMock.add(
-            ViewByItemDetailsEvent.searchOrderHistory(
-              searchKey: SearchKey(
-                fakeOrderDetail.orderNumber.getOrDefaultValue(''),
-              ),
-            ),
-          ),
-        ).called(1);
-
         expect(
           find.descendant(
             of: find.byKey(WidgetKeys.customSnackBar),
@@ -1202,26 +1192,19 @@ void main() {
         );
       });
 
-      testWidgets(
-        'Show nothing when view by item detail API failure',
-        (tester) async {
-          when(() => viewByItemDetailsBlocMock.state)
-              .thenReturn(ViewByItemDetailsState.initial());
-
-          await tester.pumpWidget(getWidget());
-          await tester.pump();
-          expect(
-            find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
-            findsOneWidget,
-          );
-          expect(find.byType(BundleItemMaterial), findsNothing);
-        },
-      );
-
       testWidgets('Navigate to item detail on tap', (tester) async {
         when(() => autoRouterMock.push(const ViewByItemDetailsPageRoute()))
             .thenAnswer((_) => Future.value(true));
-
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderNumber: fakeOrderNumber,
+                orderHistoryDetailsOrderItem: [fakeBundleItem],
+              ),
+            ],
+          ),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final item = find.byKey(
@@ -1249,10 +1232,9 @@ void main() {
 
         verify(
           () => viewByItemDetailsBlocMock.add(
-            ViewByItemDetailsEvent.setItemOrderDetails(
-              orderHistory: fakeOrderHistory,
-              orderHistoryItem: fakeOrderHistory.orderHistoryItems[1],
-              disableDeliveryDateForZyllemStatus: false,
+            ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+              orderNumber: fakeOrderNumber,
+              lineNumber: fakeOrderHistory.orderHistoryItems[1].lineNumber,
             ),
           ),
         ).called(1);
@@ -1937,7 +1919,7 @@ void main() {
           );
           await tester.pumpWidget(getWidget());
           await tester.pump();
-          
+
           expect(
             find.byKey(WidgetKeys.orderSuccessZPItemsSection),
             findsOneWidget,
@@ -1950,9 +1932,7 @@ void main() {
             (widget) =>
                 widget is RichText &&
                 widget.key == WidgetKeys.priceComponent &&
-                widget.text
-                    .toPlainText()
-                    .contains('Price Not Available'),
+                widget.text.toPlainText().contains('Price Not Available'),
           );
 
           expect(

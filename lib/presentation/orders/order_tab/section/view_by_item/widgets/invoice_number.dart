@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/view_by_item_section.dart';
 
 class _InvoiceNumber extends StatelessWidget {
-  final InvoiceData invoiceData;
+  final StringValue invoiceData;
   const _InvoiceNumber({Key? key, required this.invoiceData}) : super(key: key);
 
   @override
@@ -10,7 +10,7 @@ class _InvoiceNumber extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isFetchingInvoices != current.isFetchingInvoices,
       builder: (context, state) {
-        if (!state.isFetchingInvoices && invoiceData.invoiceNumberIsEmpty) {
+        if (!state.isFetchingInvoices && !invoiceData.isNotEmpty) {
           return const SizedBox.shrink();
         }
 
@@ -18,7 +18,7 @@ class _InvoiceNumber extends StatelessWidget {
           child: LoadingShimmer.withChild(
             enabled: state.isFetchingInvoices,
             child: Text(
-              '|  ${context.tr('Invoice')} #${invoiceData.invoiceNumber.getOrDefaultValue('')}',
+              '|  ${context.tr('Invoice')} #${invoiceData.getOrDefaultValue('')}',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.black,
                   ),

@@ -31,7 +31,7 @@ mixin _$OrderHistoryItem {
   DocumentType get orderType => throw _privateConstructorUsedError;
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   POReference get pOReference => throw _privateConstructorUsedError;
-  InvoiceData get invoiceData => throw _privateConstructorUsedError;
+  StringValue get invoiceNumber => throw _privateConstructorUsedError;
   bool get isBonusMaterial => throw _privateConstructorUsedError;
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
@@ -88,7 +88,7 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       DocumentType orderType,
       DateTimeStringValue expiryDate,
       POReference pOReference,
-      InvoiceData invoiceData,
+      StringValue invoiceNumber,
       bool isBonusMaterial,
       PhoneNumber telephoneNumber,
       ProductImages productImages,
@@ -112,7 +112,6 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       TenderPrice tenderPrice,
       TenderContractReason tenderOrderReason});
 
-  $InvoiceDataCopyWith<$Res> get invoiceData;
   $ProductImagesCopyWith<$Res> get productImages;
   $PrincipalDataCopyWith<$Res> get principalData;
 }
@@ -145,7 +144,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
     Object? orderType = null,
     Object? expiryDate = null,
     Object? pOReference = null,
-    Object? invoiceData = null,
+    Object? invoiceNumber = null,
     Object? isBonusMaterial = null,
     Object? telephoneNumber = null,
     Object? productImages = null,
@@ -230,10 +229,10 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
               as POReference,
-      invoiceData: null == invoiceData
-          ? _value.invoiceData
-          : invoiceData // ignore: cast_nullable_to_non_nullable
-              as InvoiceData,
+      invoiceNumber: null == invoiceNumber
+          ? _value.invoiceNumber
+          : invoiceNumber // ignore: cast_nullable_to_non_nullable
+              as StringValue,
       isBonusMaterial: null == isBonusMaterial
           ? _value.isBonusMaterial
           : isBonusMaterial // ignore: cast_nullable_to_non_nullable
@@ -327,14 +326,6 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
 
   @override
   @pragma('vm:prefer-inline')
-  $InvoiceDataCopyWith<$Res> get invoiceData {
-    return $InvoiceDataCopyWith<$Res>(_value.invoiceData, (value) {
-      return _then(_value.copyWith(invoiceData: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $ProductImagesCopyWith<$Res> get productImages {
     return $ProductImagesCopyWith<$Res>(_value.productImages, (value) {
       return _then(_value.copyWith(productImages: value) as $Val);
@@ -374,7 +365,7 @@ abstract class _$$OrderHistoryItemImplCopyWith<$Res>
       DocumentType orderType,
       DateTimeStringValue expiryDate,
       POReference pOReference,
-      InvoiceData invoiceData,
+      StringValue invoiceNumber,
       bool isBonusMaterial,
       PhoneNumber telephoneNumber,
       ProductImages productImages,
@@ -398,8 +389,6 @@ abstract class _$$OrderHistoryItemImplCopyWith<$Res>
       TenderPrice tenderPrice,
       TenderContractReason tenderOrderReason});
 
-  @override
-  $InvoiceDataCopyWith<$Res> get invoiceData;
   @override
   $ProductImagesCopyWith<$Res> get productImages;
   @override
@@ -432,7 +421,7 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
     Object? orderType = null,
     Object? expiryDate = null,
     Object? pOReference = null,
-    Object? invoiceData = null,
+    Object? invoiceNumber = null,
     Object? isBonusMaterial = null,
     Object? telephoneNumber = null,
     Object? productImages = null,
@@ -517,10 +506,10 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
               as POReference,
-      invoiceData: null == invoiceData
-          ? _value.invoiceData
-          : invoiceData // ignore: cast_nullable_to_non_nullable
-              as InvoiceData,
+      invoiceNumber: null == invoiceNumber
+          ? _value.invoiceNumber
+          : invoiceNumber // ignore: cast_nullable_to_non_nullable
+              as StringValue,
       isBonusMaterial: null == isBonusMaterial
           ? _value.isBonusMaterial
           : isBonusMaterial // ignore: cast_nullable_to_non_nullable
@@ -632,7 +621,7 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
       required this.orderType,
       required this.expiryDate,
       required this.pOReference,
-      required this.invoiceData,
+      required this.invoiceNumber,
       required this.isBonusMaterial,
       required this.telephoneNumber,
       required this.productImages,
@@ -689,7 +678,7 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
   @override
   final POReference pOReference;
   @override
-  final InvoiceData invoiceData;
+  final StringValue invoiceNumber;
   @override
   final bool isBonusMaterial;
   @override
@@ -744,7 +733,7 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
 
   @override
   String toString() {
-    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, lineNumber: $lineNumber, principalData: $principalData, governmentMaterialCode: $governmentMaterialCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, tenderOrderReason: $tenderOrderReason)';
+    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, invoiceNumber: $invoiceNumber, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, lineNumber: $lineNumber, principalData: $principalData, governmentMaterialCode: $governmentMaterialCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, tenderOrderReason: $tenderOrderReason)';
   }
 
   @override
@@ -778,8 +767,8 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
                 other.expiryDate == expiryDate) &&
             (identical(other.pOReference, pOReference) ||
                 other.pOReference == pOReference) &&
-            (identical(other.invoiceData, invoiceData) ||
-                other.invoiceData == invoiceData) &&
+            (identical(other.invoiceNumber, invoiceNumber) ||
+                other.invoiceNumber == invoiceNumber) &&
             (identical(other.isBonusMaterial, isBonusMaterial) ||
                 other.isBonusMaterial == isBonusMaterial) &&
             (identical(other.telephoneNumber, telephoneNumber) ||
@@ -845,7 +834,7 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
         orderType,
         expiryDate,
         pOReference,
-        invoiceData,
+        invoiceNumber,
         isBonusMaterial,
         telephoneNumber,
         productImages,
@@ -895,7 +884,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
           required final DocumentType orderType,
           required final DateTimeStringValue expiryDate,
           required final POReference pOReference,
-          required final InvoiceData invoiceData,
+          required final StringValue invoiceNumber,
           required final bool isBonusMaterial,
           required final PhoneNumber telephoneNumber,
           required final ProductImages productImages,
@@ -952,7 +941,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   POReference get pOReference;
   @override
-  InvoiceData get invoiceData;
+  StringValue get invoiceNumber;
   @override
   bool get isBonusMaterial;
   @override

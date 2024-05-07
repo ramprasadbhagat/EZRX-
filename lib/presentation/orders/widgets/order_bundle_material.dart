@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
@@ -22,14 +22,13 @@ class BundleItemMaterial extends StatelessWidget {
   const BundleItemMaterial({
     Key? key,
     required this.orderItem,
-    required this.orderHistory,
+    required this.orderNumber,
   }) : super(key: key);
   final OrderHistoryDetailsOrderItem orderItem;
-  final OrderHistory orderHistory;
+  final OrderNumber orderNumber;
 
   Future _goToViewByItemDetail(
     BuildContext context,
-    OrderHistory orderHistory,
   ) async {
     trackMixpanelEvent(
       TrackingEvents.orderDetailViewed,
@@ -40,16 +39,10 @@ class BundleItemMaterial extends StatelessWidget {
       },
     );
 
-    final eligibilityState = context.read<EligibilityBloc>().state;
     context.read<ViewByItemDetailsBloc>().add(
-          ViewByItemDetailsEvent.setItemOrderDetails(
-            orderHistory: orderHistory,
-            orderHistoryItem: orderHistory.orderHistoryItems.firstWhere(
-              (e) => e.lineNumber == orderItem.lineNumber,
-              orElse: () => orderHistory.orderHistoryItems.first,
-            ),
-            disableDeliveryDateForZyllemStatus:
-                eligibilityState.salesOrgConfigs.disableDeliveryDate,
+          ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+            orderNumber: orderNumber,
+            lineNumber: orderItem.lineNumber,
           ),
         );
 
@@ -66,7 +59,7 @@ class BundleItemMaterial extends StatelessWidget {
       key: WidgetKeys.orderHistoryBundleItemMaterial(
         orderItem.materialNumber.displayMatNo,
       ),
-      onTap: () => _goToViewByItemDetail(context, orderHistory),
+      onTap: () => _goToViewByItemDetail(context),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         child: Row(

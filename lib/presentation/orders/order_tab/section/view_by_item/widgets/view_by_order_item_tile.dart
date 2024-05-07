@@ -153,7 +153,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
                     ),
                   ),
                   _InvoiceNumber(
-                    invoiceData: orderHistoryItem.invoiceData,
+                    invoiceData: orderHistoryItem.invoiceNumber,
                   ),
                 ],
               ),

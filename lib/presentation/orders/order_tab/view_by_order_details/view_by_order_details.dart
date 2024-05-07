@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
@@ -106,7 +107,9 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                       ),
                       if (state.orderHistoryDetails.orderHistoryDetailsOrderItem
                           .bundleItemDetailsList.isNotEmpty)
-                        const _BundleItemDetailsSection(),
+                        _BundleItemDetailsSection(
+                          orderNumber: state.orderHistoryDetails.orderNumber,
+                        ),
                       if (state.orderHistoryDetails.orderHistoryDetailsOrderItem
                           .materialItemDetailsList.isNotEmpty)
                         OrderItemDetailsSection(

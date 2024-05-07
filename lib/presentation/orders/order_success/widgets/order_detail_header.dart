@@ -178,11 +178,6 @@ class _OrderNumberList extends StatelessWidget {
                         context.read<ViewByOrderDetailsBloc>().add(
                               ViewByOrderDetailsEvent.fetch(orderNumber: e),
                             );
-                        context.read<ViewByItemDetailsBloc>().add(
-                              ViewByItemDetailsEvent.searchOrderHistory(
-                                searchKey: SearchKey(e.getValue()),
-                              ),
-                            );
                         context.router
                             .push(const ViewByOrderDetailsPageRoute());
                       },

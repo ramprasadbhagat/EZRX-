@@ -6,8 +6,9 @@ part of 'order_history_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrderHistoryDto _$$_OrderHistoryDtoFromJson(Map<String, dynamic> json) =>
-    _$_OrderHistoryDto(
+_$OrderHistoryDtoImpl _$$OrderHistoryDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$OrderHistoryDtoImpl(
       orderBasicInformation: OrderHistoryBasicInfoDto.fromJson(
           json['OrderBasicInformation'] as Map<String, dynamic>),
       orderItems: (json['OrderItems'] as List<dynamic>)
@@ -15,7 +16,8 @@ _$_OrderHistoryDto _$$_OrderHistoryDtoFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_OrderHistoryDtoToJson(_$_OrderHistoryDto instance) =>
+Map<String, dynamic> _$$OrderHistoryDtoImplToJson(
+        _$OrderHistoryDtoImpl instance) =>
     <String, dynamic>{
       'OrderBasicInformation': instance.orderBasicInformation.toJson(),
       'OrderItems': instance.orderItems.map((e) => e.toJson()).toList(),

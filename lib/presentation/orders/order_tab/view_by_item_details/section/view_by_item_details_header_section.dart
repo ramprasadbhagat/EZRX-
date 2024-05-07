@@ -49,8 +49,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
           const SizedBox(height: 8),
           InvoiceNumberSection(
             key: WidgetKeys.viewByItemsOrderDetailInvoiceNumber,
-            invoiceNumber: orderHistoryItem.invoiceData.invoiceNumber
-                .getOrDefaultValue(''),
+            invoiceNumber: orderHistoryItem.invoiceNumber.getOrDefaultValue(''),
             isMarketPlace: orderHistoryItem.isMarketPlace,
           ),
           const SizedBox(height: 8),

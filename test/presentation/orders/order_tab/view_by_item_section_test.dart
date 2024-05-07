@@ -9,7 +9,6 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -352,10 +351,9 @@ void main() {
       );
       verify(
         () => mockViewByItemDetailsBloc.add(
-          ViewByItemDetailsEvent.setItemOrderDetails(
-            orderHistory: orderHistoryList,
-            orderHistoryItem: orderHistoryList.orderHistoryItems.first,
-            disableDeliveryDateForZyllemStatus: false,
+          ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+            orderNumber: orderHistoryList.orderHistoryItems.first.orderNumber,
+            lineNumber: orderHistoryList.orderHistoryItems.first.lineNumber,
           ),
         ),
       ).called(1);
@@ -369,8 +367,7 @@ void main() {
       final orderHistoryList = orderHistory.copyWith(
         orderHistoryItems: [
           fakeOrderHistoryItems.first.copyWith(
-            invoiceData: InvoiceData.empty()
-                .copyWith(invoiceNumber: StringValue('fake-Invoice')),
+            invoiceNumber: StringValue('fake-Invoice'),
           ),
         ],
       );
@@ -400,8 +397,7 @@ void main() {
       final orderHistoryList = orderHistory.copyWith(
         orderHistoryItems: [
           fakeOrderHistoryItems.first.copyWith(
-            invoiceData:
-                InvoiceData.empty().copyWith(invoiceNumber: fakeInvoice),
+            invoiceNumber: fakeInvoice,
           ),
         ],
       );

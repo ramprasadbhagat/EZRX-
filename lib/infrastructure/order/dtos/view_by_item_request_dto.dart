@@ -63,7 +63,9 @@ class ViewByItemRequestDto with _$ViewByItemRequestDto {
 
   Map<String, dynamic> toMapJson() => toJson()
     ..removeWhere(
-      (key, value) => ((value is String && value.isEmpty) ||
-          (value is List<String> && value.isEmpty)),
+      (key, value) =>
+          ((value is String && value.isEmpty) ||
+              (value is List<String> && value.isEmpty)) ||
+          (isDetailsPage && (key == 'first' || key == 'after')),
     );
 }

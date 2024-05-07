@@ -1595,10 +1595,9 @@ void main() {
       await tester.pumpAndSettle();
       verify(
         () => mockViewByItemDetailsBloc.add(
-          ViewByItemDetailsEvent.setItemOrderDetails(
-            orderHistory: fakeOrderHistory,
-            orderHistoryItem: fakeOrderHistory.orderHistoryItems.first,
-            disableDeliveryDateForZyllemStatus: false,
+          ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+            orderNumber: fakeOrderHistory.orderHistoryItems.first.orderNumber,
+            lineNumber: fakeOrderHistory.orderHistoryItems.first.lineNumber,
           ),
         ),
       ).called(1);

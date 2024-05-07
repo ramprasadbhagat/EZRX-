@@ -30,13 +30,6 @@ class _ViewByOrder extends StatelessWidget {
                     orderNumber: viewByOrderHistoryItem.orderNumber,
                   ),
                 );
-            context.read<ViewByItemDetailsBloc>().add(
-                  ViewByItemDetailsEvent.searchOrderHistory(
-                    searchKey: SearchKey(
-                      viewByOrderHistoryItem.orderNumber.getValue(),
-                    ),
-                  ),
-                );
             context.router.push(
               const ViewByOrderDetailsPageRoute(),
             );

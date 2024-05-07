@@ -1,7 +1,11 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
 
 class _BundleItemDetailsSection extends StatelessWidget {
-  const _BundleItemDetailsSection({Key? key}) : super(key: key);
+  final OrderNumber orderNumber;
+  const _BundleItemDetailsSection({
+    Key? key,
+    required this.orderNumber,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,10 @@ class _BundleItemDetailsSection extends StatelessWidget {
             children: state.orderHistoryDetails.orderHistoryDetailsOrderItem
                 .bundleItemDetailsList
                 .map(
-                  (e) => OrderBundleItem(viewByOrdersGroup: e),
+                  (e) => OrderBundleItem(
+                    viewByOrdersGroup: e,
+                    orderNumber: orderNumber,
+                  ),
                 )
                 .toList(),
           ),

@@ -1,6 +1,6 @@
-import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +17,10 @@ import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_material.dar
 class OrderBundleItem extends StatelessWidget {
   const OrderBundleItem({
     Key? key,
+    required this.orderNumber,
     required this.viewByOrdersGroup,
   }) : super(key: key);
+  final OrderNumber orderNumber;
   final ViewByOrdersGroup viewByOrdersGroup;
 
   @override
@@ -72,24 +74,15 @@ class OrderBundleItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
-              BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
-                buildWhen: (previous, current) =>
-                    previous.orderHistory.orderHistoryItems !=
-                    current.orderHistory.orderHistoryItems,
-                builder: (context, state) =>
-                    state.orderHistory.orderHistoryItems.isEmpty
-                        ? const SizedBox.shrink()
-                        : Column(
-                            children: viewByOrdersGroup.viewByOrderItem
-                                .map(
-                                  (orderHistoryDetailsOrderItem) =>
-                                      BundleItemMaterial(
-                                    orderItem: orderHistoryDetailsOrderItem,
-                                    orderHistory: state.orderHistory,
-                                  ),
-                                )
-                                .toList(),
-                          ),
+              Column(
+                children: viewByOrdersGroup.viewByOrderItem
+                    .map(
+                      (orderHistoryDetailsOrderItem) => BundleItemMaterial(
+                        orderItem: orderHistoryDetailsOrderItem,
+                        orderNumber: orderNumber,
+                      ),
+                    )
+                    .toList(),
               ),
               Padding(
                 padding:

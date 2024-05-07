@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -88,13 +87,6 @@ class OrderSuccessPage extends StatelessWidget {
                     ViewByItemsEvent.fetch(
                       viewByItemFilter: ViewByItemFilter.empty(),
                       searchKey: SearchKey.searchFilter(''),
-                    ),
-                  );
-              context.read<ViewByItemDetailsBloc>().add(
-                    ViewByItemDetailsEvent.searchOrderHistory(
-                      searchKey: SearchKey(
-                        state.orderHistoryDetails.orderNumber.getValue(),
-                      ),
                     ),
                   );
               CustomSnackBar(
@@ -203,6 +195,7 @@ class _BodyContent extends StatelessWidget {
                         ),
                         _BundleItemSection(
                           bundleItems: zpItems.bundleItemDetailsList,
+                          orderNumber: state.orderHistoryDetails.orderNumber,
                         ),
                         _MaterialItemSection(
                           orderItems: zpItems.materialItemDetailsList,
@@ -223,6 +216,7 @@ class _BodyContent extends StatelessWidget {
                           ),
                           _BundleItemSection(
                             bundleItems: mpItems.bundleItemDetailsList,
+                            orderNumber: state.orderHistoryDetails.orderNumber,
                           ),
                           _MaterialItemSection(
                             orderItems: mpItems.materialItemDetailsList,

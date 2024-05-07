@@ -389,15 +389,6 @@ void main() {
           ),
         ),
       ).called(1);
-      verify(
-        () => viewByItemDetailsBlocMock.add(
-          ViewByItemDetailsEvent.searchOrderHistory(
-            searchKey: SearchKey(
-              fakeInvoice.orderId.getOrDefaultValue(''),
-            ),
-          ),
-        ),
-      ).called(1);
       expect(autoRouterMock.current.name, ViewByOrderDetailsPageRoute.name);
     });
 

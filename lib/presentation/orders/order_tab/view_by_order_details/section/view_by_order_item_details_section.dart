@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
@@ -12,7 +12,6 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -58,23 +57,10 @@ class OrderItemDetailsSection extends StatelessWidget {
                       height: 16,
                     ),
                   ],
-                  BlocBuilder<ViewByItemDetailsBloc, ViewByItemDetailsState>(
-                    buildWhen: (previous, current) =>
-                        previous.orderHistory.orderHistoryItems !=
-                        current.orderHistory.orderHistoryItems,
-                    builder: (context, state) =>
-                        state.orderHistory.orderHistoryItems.isEmpty
-                            ? const SizedBox.shrink()
-                            : Column(
-                                children: e.viewByOrderItem
-                                    .mapIndexed(
-                                      (index, e) => _OrderItemTile(
-                                        orderHistory: state.orderHistory,
-                                        orderItem: e,
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
+                  ...e.viewByOrderItem.map(
+                    (item) => _OrderItemTile(
+                      orderItem: item,
+                    ),
                   ),
                 ],
               ),
@@ -87,12 +73,10 @@ class OrderItemDetailsSection extends StatelessWidget {
 
 class _OrderItemTile extends StatelessWidget {
   final OrderHistoryDetailsOrderItem orderItem;
-  final OrderHistory orderHistory;
 
   const _OrderItemTile({
     Key? key,
     required this.orderItem,
-    required this.orderHistory,
   }) : super(key: key);
 
   @override
@@ -107,7 +91,6 @@ class _OrderItemTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       onTap: () => _goToViewByItemDetail(
         context,
-        orderHistory,
         orderItem,
       ),
       key: WidgetKeys.viewByOrderDetailItem(
@@ -189,7 +172,6 @@ class _OrderItemTile extends StatelessWidget {
 
   Future _goToViewByItemDetail(
     BuildContext context,
-    OrderHistory orderHistory,
     OrderHistoryDetailsOrderItem orderItem,
   ) async {
     trackMixpanelEvent(
@@ -201,18 +183,12 @@ class _OrderItemTile extends StatelessWidget {
       },
     );
 
-    final eligibilityState = context.read<EligibilityBloc>().state;
-    final orderHistoryItem = orderHistory.orderHistoryItems.firstWhere(
-      (e) => e.lineNumber == orderItem.lineNumber,
-      orElse: () => orderHistory.orderHistoryItems.first,
-    );
-
+    final orderHistoryDetails =
+        context.read<ViewByOrderDetailsBloc>().state.orderHistoryDetails;
     context.read<ViewByItemDetailsBloc>().add(
-          ViewByItemDetailsEvent.setItemOrderDetails(
-            orderHistory: orderHistory,
-            orderHistoryItem: orderHistoryItem,
-            disableDeliveryDateForZyllemStatus:
-                eligibilityState.salesOrgConfigs.disableDeliveryDate,
+          ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+            orderNumber: orderHistoryDetails.orderNumber,
+            lineNumber: orderItem.lineNumber,
           ),
         );
 

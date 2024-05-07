@@ -31,14 +31,6 @@ abstract class IViewByItemRepository {
     required SalesOrganisation salesOrganisation,
   });
 
-  Future<Either<ApiFailure, OrderHistory>> searchOrderHistory({
-    required CustomerCodeInfo soldTo,
-    required User user,
-    required SearchKey searchKey,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  });
-
   Future<Either<ApiFailure, Map<StringValue, InvoiceData>>>
       getOrdersInvoiceData({
     required List<OrderNumber> orderNumbers,

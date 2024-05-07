@@ -103,11 +103,6 @@ class _NotificationList extends StatelessWidget {
             ),
           );
 
-      context.read<ViewByItemDetailsBloc>().add(
-            ViewByItemDetailsEvent.searchOrderHistory(
-              searchKey: SearchKey(notificationData.orderNumber.getValue()),
-            ),
-          );
       //Navigate to Order Detail Page
       context.router.push(const ViewByOrderDetailsPageRoute());
     }

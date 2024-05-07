@@ -18,20 +18,11 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
     required bool isExpanded,
   }) = _updateIsExpanded;
 
-  const factory ViewByItemDetailsEvent.setItemOrderDetails({
-    required OrderHistory orderHistory,
-    required OrderHistoryItem orderHistoryItem,
-    required bool disableDeliveryDateForZyllemStatus,
-  }) = _SetItemOrderDetails;
-
-  const factory ViewByItemDetailsEvent.searchOrderHistory({
-    required SearchKey searchKey,
-  }) = _SearchOrderHistory;
-
   const factory ViewByItemDetailsEvent.fetchOrdersInvoiceData({
     required List<OrderHistoryItem> orderHistoryItems,
   }) = _FetchOrdersInvoiceData;
   const factory ViewByItemDetailsEvent.fetchOrderHistoryDetails({
-    required SearchKey searchKey,
+    required LineNumber lineNumber,
+    required OrderNumber orderNumber,
   }) = _FetchOrderHistoryDetails;
 }

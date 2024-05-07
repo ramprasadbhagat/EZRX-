@@ -222,14 +222,10 @@ class _ProductTile extends StatelessWidget {
     BuildContext context,
     OrderHistoryItem orderHistoryItem,
   ) {
-    final eligibilityState = context.read<EligibilityBloc>().state;
-
     context.read<ViewByItemDetailsBloc>().add(
-          ViewByItemDetailsEvent.setItemOrderDetails(
-            orderHistory: context.read<ViewByItemsBloc>().state.orderHistory,
-            orderHistoryItem: orderHistoryItem,
-            disableDeliveryDateForZyllemStatus:
-                eligibilityState.salesOrgConfigs.disableDeliveryDate,
+          ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+            orderNumber: orderHistoryItem.orderNumber,
+            lineNumber: orderHistoryItem.lineNumber,
           ),
         );
 

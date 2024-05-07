@@ -1,9 +1,11 @@
 part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 
 class _BundleItemSection extends StatelessWidget {
+  final OrderNumber orderNumber;
   final List<ViewByOrdersGroup> bundleItems;
   const _BundleItemSection({
     Key? key,
+    required this.orderNumber,
     required this.bundleItems,
   }) : super(key: key);
 
@@ -21,6 +23,7 @@ class _BundleItemSection extends StatelessWidget {
             .map(
               (e) => OrderBundleItem(
                 viewByOrdersGroup: e,
+                orderNumber: orderNumber,
               ),
             )
             .toList(),

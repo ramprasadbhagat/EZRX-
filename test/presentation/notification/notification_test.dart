@@ -14,7 +14,6 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -401,14 +400,6 @@ void main() {
           ),
         ),
       ).called(1);
-
-      verify(
-        () => viewByItemDetailsBlocMock.add(
-          ViewByItemDetailsEvent.searchOrderHistory(
-            searchKey: SearchKey(notificationList.first.orderNumber.getValue()),
-          ),
-        ),
-      );
     });
 
     testWidgets(

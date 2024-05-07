@@ -686,15 +686,7 @@ void main() {
             ),
           ),
         ).called(1);
-        verify(
-          () => mockViewByItemDetailsBloc.add(
-            ViewByItemDetailsEvent.searchOrderHistory(
-              searchKey: SearchKey(
-                viewByOrder.orderHeaders.first.orderNumber.getValue(),
-              ),
-            ),
-          ),
-        ).called(1);
+
         verify(
           () => autoRouterMock.push(const ViewByOrderDetailsPageRoute()),
         ).called(1);

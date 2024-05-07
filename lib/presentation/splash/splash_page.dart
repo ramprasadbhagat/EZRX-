@@ -46,7 +46,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -904,11 +903,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 if (eligibilityState.user.userCanAccessOrderHistory) {
                   context.read<ViewByOrderDetailsBloc>().add(
                         ViewByOrderDetailsEvent.fetch(orderNumber: orderNumber),
-                      );
-                  context.read<ViewByItemDetailsBloc>().add(
-                        ViewByItemDetailsEvent.searchOrderHistory(
-                          searchKey: SearchKey(orderNumber.getValue()),
-                        ),
                       );
 
                   context.router.push(const ViewByOrderDetailsPageRoute());
