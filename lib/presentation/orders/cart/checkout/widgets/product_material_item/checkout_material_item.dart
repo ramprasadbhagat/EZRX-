@@ -145,13 +145,10 @@ class _ProductDetails extends StatelessWidget {
               PreOrderLabel(stockInfo: cartItem.productStockInfo),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(
-              cartItem.materialInfo.displayDescription,
-              key: WidgetKeys.cartItemProductMaterialDescription,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
+          Text(
+            cartItem.materialInfo.displayDescription,
+            key: WidgetKeys.cartItemProductMaterialDescription,
+            style: Theme.of(context).textTheme.labelSmall,
           ),
           StockInfoWidget(
             stockInfo: cartItem.stockInfoValid,
@@ -173,6 +170,7 @@ class _ProductDetails extends StatelessWidget {
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartItem.display(PriceType.finalPrice),
+                  type: PriceStyle.cartMaterialUnitPrice,
                 ),
               ),
             ],
@@ -194,7 +192,7 @@ class _ProductDetails extends StatelessWidget {
                   ),
               key: WidgetKeys.promotionLabel(
                 cartItem.getMaterialNumber.getValue(),
-              ),    
+              ),
             ),
           if (cartItem.price.isCounterOfferRequested)
             Text(

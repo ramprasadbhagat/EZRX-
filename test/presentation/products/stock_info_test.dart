@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -17,9 +16,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../utils/widget_utils.dart';
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
+import '../home/product_offer_section_test.dart';
 
 void main() {
   late AppRouter autoRouterMock;
@@ -28,16 +25,14 @@ void main() {
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
-
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     autoRouterMock = locator<AppRouter>();
     eligibilityBlocMock = EligibilityBlocMock();
-    when(() => eligibilityBlocMock.state).thenReturn(
-      EligibilityState.initial(),
-    );
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
-  RouteDataScope getScopedWidget() {
+  RouteDataScope getScopedWidget({bool showToolTip = true}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
@@ -50,6 +45,7 @@ void main() {
         child: StockInfoWidget(
           stockInfo: StockInfo.empty(),
           materialInfo: MaterialInfo.empty(),
+          showToolTip: showToolTip,
         ),
       ),
     );
@@ -67,7 +63,7 @@ void main() {
       expect(find.byKey(WidgetKeys.materialDetailsStock), findsOneWidget);
       expect(
         find.textContaining(
-          '${'EXP'.tr()}: NA',
+          '${'Expires'.tr()}: NA',
           findRichText: true,
         ),
         findsOneWidget,
@@ -94,6 +90,27 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets('Display Expiry Date without tooltip when showToolTip is false',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(showToolTip: false));
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.materialDetailsStock), findsOneWidget);
+      expect(
+        find.textContaining(
+          '${'Expires'.tr()}: NA',
+          findRichText: true,
+        ),
+        findsOneWidget,
+      );
+
+      expect(expDateIcon, findsNothing);
     });
 
     testWidgets('Display Batch Number When config enabled', (tester) async {
@@ -131,7 +148,7 @@ void main() {
       expect(find.byKey(WidgetKeys.materialDetailsStock), findsOneWidget);
       expect(
         find.textContaining(
-          '${'EXP'.tr()}: NA',
+          '${'Expires'.tr()}: NA',
           findRichText: true,
         ),
         findsOneWidget,

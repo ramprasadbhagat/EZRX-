@@ -32,6 +32,7 @@ class ProductStockInfo extends StatelessWidget {
         return StockInfoWidget(
           stockInfo: stockInfo,
           materialInfo: state.productDetailAggregate.materialInfo,
+          showToolTip: true,
         );
       },
     );

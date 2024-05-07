@@ -12,9 +12,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class StockInfoWidget extends StatelessWidget {
   final StockInfo stockInfo;
   final MaterialInfo materialInfo;
+  final bool showToolTip;
+
   const StockInfoWidget({
     required this.stockInfo,
     required this.materialInfo,
+    this.showToolTip = false,
     Key? key,
   }) : super(key: key);
 
@@ -25,14 +28,14 @@ class StockInfoWidget extends StatelessWidget {
         eligibilityState.salesOrgConfigs.enableBatchNumber;
     if (eligibilityState.salesOrgConfigs.displayStockInfo) {
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5.0),
+        padding: const EdgeInsets.symmetric(vertical: 1),
         child: RichText(
           key: WidgetKeys.materialDetailsStock,
           text: TextSpan(
             style: Theme.of(context)
                 .textTheme
                 .bodySmall
-                ?.copyWith(color: ZPColors.darkGray),
+                ?.copyWith(color: ZPColors.neutralsGrey1),
             children: [
               if (enableBatchNumber)
                 TextSpan(
@@ -42,29 +45,31 @@ class StockInfoWidget extends StatelessWidget {
               if (eligibilityState.salesOrgConfigs.expiryDateDisplay) ...[
                 if (enableBatchNumber) const TextSpan(text: ' - '),
                 TextSpan(
-                  text: '${context.tr('EXP')}: ${stockInfo.displayExpiryDate(
+                  text:
+                      '${context.tr('Expires')}: ${stockInfo.displayExpiryDate(
                     isMarketPlace: materialInfo.isMarketPlace,
                     isPhMdi: eligibilityState.salesOrg.isPhMdi,
                     isAbbotPrincipalCode:
                         materialInfo.principalData.principalCode.isAbbot,
                   )}',
                 ),
-                WidgetSpan(
-                  alignment: PlaceholderAlignment.middle,
-                  child: InfoIcon(
-                    key: WidgetKeys.expiryDateInfoIcon,
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      builder: (context) => InfoBottomSheet(
-                        key: WidgetKeys.expiryDateInstructionSheet,
-                        title: context.tr('Expiry date'),
-                        description:
-                            '${context.tr('Expiry date displayed is for reference, actual product may vary')}.',
-                        buttonTitle: context.tr('Got it'),
+                if (showToolTip)
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.middle,
+                    child: InfoIcon(
+                      key: WidgetKeys.expiryDateInfoIcon,
+                      onTap: () => showModalBottomSheet(
+                        context: context,
+                        builder: (context) => InfoBottomSheet(
+                          key: WidgetKeys.expiryDateInstructionSheet,
+                          title: context.tr('Expiry date'),
+                          description:
+                              '${context.tr('Expiry date displayed is for reference, actual product may vary')}.',
+                          buttonTitle: context.tr('Got it'),
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
             ],
           ),

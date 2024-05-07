@@ -38,12 +38,9 @@ class _MaterialDetails extends StatelessWidget {
                 ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(
-              cartItem.materialInfo.displayDescription,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
+          Text(
+            cartItem.materialInfo.displayDescription,
+            style: Theme.of(context).textTheme.labelSmall,
           ),
           StockInfoWidget(
             materialInfo: cartItem.materialInfo,
@@ -60,7 +57,7 @@ class _MaterialDetails extends StatelessWidget {
                       key: WidgetKeys.preOrderModalItemFinalPrice,
                       salesOrgConfig: eligibilityState.salesOrgConfigs,
                       price: cartItem.display(PriceType.finalPrice),
-                      type: PriceStyle.oosPreOrderItemPrice,
+                      type: PriceStyle.cartMaterialUnitPrice,
                     ),
                   ],
                 ),

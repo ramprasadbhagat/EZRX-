@@ -1548,7 +1548,7 @@ void main() {
         materialExpiryDate,
       );
       await productDetailRobot.tapExpiryDateInfoIcon();
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
+      await productDetailRobot.verifyExpiryDateBottomSheetAndTapClose();
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
@@ -2828,8 +2828,6 @@ void main() {
         materialStockInfo,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
         materialUnitPrice.priceDisplay(currency),
@@ -2929,11 +2927,6 @@ void main() {
         bonusMaterialStockInfo,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapBonusItemExpiryDateInfoIcon(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyBonusMaterialImage(
         bonusMaterialNumber,
         bonusMaterialNumber,
@@ -3080,12 +3073,6 @@ void main() {
         materialStockInfo,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapBonusItemExpiryDateInfoIcon(
-        bonusMaterialNumber,
-        bonusSampleMaterialNumber,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
-
       cartRobot.verifyBonusMaterialFreeLabel(
         bonusMaterialNumber,
         bonusSampleMaterialNumber,
@@ -3289,8 +3276,6 @@ void main() {
         oosPreOrderMaterialStockInfo,
         isBatchNumberVisible: false,
       );
-      await oosPreOrderRobot.tapExpiryDateInfoIcon(oosPreOrderMaterialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       await oosPreOrderRobot.tapContinueButton();
       checkoutRobot.verifyPage();
     });

@@ -113,33 +113,30 @@ class _MaterialDetails extends StatelessWidget {
               PreOrderLabel(stockInfo: cartItem.productStockInfo),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(
-              cartItem.materialDescription,
-              key: WidgetKeys.cartItemProductMaterialDescription,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelMedium
-                  ?.copyWith(color: ZPColors.neutralsBlack),
-            ),
-          ),
           Text(
-            cartItem.principalData.principalName.getOrDefaultValue(''),
-            key: WidgetKeys.cartItemProductPrincipalName,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontSize: 10.0,
-                  color: ZPColors.extraLightGrey4,
-                ),
+            cartItem.materialDescription,
+            key: WidgetKeys.cartItemProductMaterialDescription,
+            style: Theme.of(context)
+                .textTheme
+                .labelMedium
+                ?.copyWith(color: ZPColors.neutralsBlack),
           ),
           StockInfoWidget(
             stockInfo: cartItem.bundleStockInfoValid,
             materialInfo: cartItem,
           ),
+          Text(
+            cartItem.getManufactured,
+            key: WidgetKeys.cartItemProductPrincipalName,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontSize: 10.0,
+                  color: ZPColors.neutralsGrey1,
+                ),
+          ),
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              'Qty: ${cartItem.quantity.getOrDefaultValue(0)}',
+              '${context.tr('Qty')}: ${cartItem.quantity.getOrDefaultValue(0)}',
               key: WidgetKeys.cartItemProductQty,
               style: Theme.of(context)
                   .textTheme

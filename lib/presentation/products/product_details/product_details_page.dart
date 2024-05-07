@@ -320,6 +320,7 @@ class _BodyContent extends StatelessWidget {
                         ),
                     ],
                   ),
+                  const SizedBox(height: 8),
                   _Description(
                     materialInfo: materialInfo,
                   ),
@@ -381,16 +382,21 @@ class _Description extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Text(
                 materialInfo.defaultMaterialDescription,
                 key: WidgetKeys.materialDetailsMaterialDescription,
-                style: Theme.of(context).textTheme.labelSmall,
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(fontSize: 20),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
+            const SizedBox(width: 4),
             BlocConsumer<ProductDetailBloc, ProductDetailState>(
               listenWhen: (previous, current) =>
                   previous.productDetailAggregate.materialInfo.isFavourite !=
@@ -417,7 +423,9 @@ class _Description extends StatelessWidget {
                   key: WidgetKeys.materialDetailsFavoriteIcon,
                   isFavourite:
                       state.productDetailAggregate.materialInfo.isFavourite,
-                  constraints: const BoxConstraints(),
+                  visualDensity:
+                      const VisualDensity(horizontal: -4, vertical: -4),
+                  iconSize: 32,
                   onTap: () {
                     if (materialInfo.isFavourite) {
                       trackMixpanelEvent(

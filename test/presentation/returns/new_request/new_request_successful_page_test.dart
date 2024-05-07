@@ -252,7 +252,7 @@ void main() {
       );
       expect(batch, findsWidgets);
       final expires = find.textContaining(
-        'EXP:'.tr(),
+        'Expires:'.tr(),
       );
       expect(expires, findsWidgets);
     });

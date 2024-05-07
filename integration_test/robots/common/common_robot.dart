@@ -26,9 +26,6 @@ class CommonRobot {
   final productsTab = find.byKey(WidgetKeys.productsTab);
   final cartButton = find.byType(CartButton);
   final payerInformationVn = find.byKey(WidgetKeys.payerInformation);
-  final expiryDateBottomSheet =
-      find.byKey(WidgetKeys.expiryDateInstructionSheet);
-  final expiryDateBottomSheetCloseButton = find.byKey(WidgetKeys.closeButton);
   final licenseExpiredBanner = find.byKey(WidgetKeys.licenseExpiredBanner);
   final viewLicenseButton = find.byKey(WidgetKeys.viewLicenseButton);
 
@@ -390,41 +387,6 @@ class CommonRobot {
   //============================================================
   //  Expiry date info bottomsheet
   //============================================================
-
-  Future<void> verifyExpiryDateBottomSheetAndTapClose() async {
-    expect(expiryDateBottomSheet, findsOneWidget);
-    expect(
-      find.descendant(
-        of: expiryDateBottomSheet,
-        matching: find.text('Expiry date'.tr()),
-      ),
-      findsOneWidget,
-    );
-    expect(
-      find.descendant(
-        of: expiryDateBottomSheet,
-        matching: find.text(
-          '${'Expiry date displayed is for reference, actual product may vary'.tr()}.',
-        ),
-      ),
-      findsOneWidget,
-    );
-    expect(
-      find.descendant(
-        of: expiryDateBottomSheetCloseButton,
-        matching: find.text('Got it'.tr()),
-      ),
-      findsOneWidget,
-    );
-    await tester.tap(
-      find.descendant(
-        of: expiryDateBottomSheet,
-        matching: expiryDateBottomSheetCloseButton,
-      ),
-    );
-    await tester.pumpAndSettle();
-    expect(expiryDateBottomSheet, findsNothing);
-  }
 
   void findLicenseExpiredBanner() {
     final licenseExpiredBannerTitle = find.text(

@@ -434,7 +434,7 @@ void main() {
         materialExpiryDate,
       );
       await productDetailRobot.tapExpiryDateInfoIcon();
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
+      await productDetailRobot.verifyExpiryDateBottomSheetAndTapClose();
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
@@ -634,8 +634,6 @@ void main() {
         materialStockInfo,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
         materialUnitPrice.priceDisplayForID(currency),
@@ -873,8 +871,6 @@ void main() {
           StockInfo.empty(),
           isBatchNumberVisible: false,
         );
-        await oosPreOrderRobot.tapExpiryDateInfoIcon(oosMaterialNumber);
-        await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
         await oosPreOrderRobot.tapCancelButton();
         cartRobot.verifyPage();
         oosPreOrderRobot.verifySheet(isVisible: false);
@@ -972,8 +968,6 @@ void main() {
         materialStockInfo,
         isBatchNumberVisible: false,
       );
-      await checkoutRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       await updateAndVerifySmallOrderFee();
       //we need to update the small order fee first, then we can finalize grand total value
       final grandTotalPrice =

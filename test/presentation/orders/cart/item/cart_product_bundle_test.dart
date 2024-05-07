@@ -126,7 +126,7 @@ void main() async {
       find.descendant(
         of: stockWidget,
         matching: find.textContaining(
-          'Batch: NA - EXP: NA',
+          'Batch: NA - Expires: NA',
           findRichText: true,
         ),
       ),

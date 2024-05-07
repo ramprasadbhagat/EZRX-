@@ -1,12 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -44,7 +41,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
-import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
@@ -70,6 +66,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
@@ -82,80 +80,16 @@ import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-class MockHTTPService extends Mock implements HttpService {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
-    implements ViewByOrderBloc {}
-
-class ViewByItemDetailsBlocMock
-    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
-    implements ViewByItemDetailsBloc {}
-
-class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ViewByOrderDetailsBlockMock
-    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
-    implements ViewByOrderDetailsBloc {}
-
-class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
-    implements ViewByItemsBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class ReOrderPermissionBlocMock
-    extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
-    implements ReOrderPermissionBloc {}
-
-class MockProductImageBloc
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MockPoAttachmentBloc
-    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
-    implements PoAttachmentBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class PaymentCustomerInformationBlocMock extends MockBloc<
-        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
-    implements PaymentCustomerInformationBloc {}
-
-class MaterialPageXMock extends Mock implements MaterialPageX {}
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   final viewByOrderBlocMock = ViewByOrderBlocMock();
   final mockViewByItemDetailsBloc = ViewByItemDetailsBlocMock();
   final mockViewByItemsBloc = ViewByItemsBlocMock();
-  final viewByOrderDetailsBlocMock = ViewByOrderDetailsBlockMock();
+  final viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
   late SalesOrgMockBloc mockSalesOrgBloc;
-  final userBlocMock = UserMockBloc();
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late AuthBloc mockAuthBloc;
-  late CustomerCodeBloc customerCodeBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
   late EligibilityBlocMock eligibilityBlocMock;
@@ -181,7 +115,7 @@ void main() {
     cartBlocMock = CartBlocMock();
     customerCodeInfoList =
         await CustomerCodeLocalDataSource().getCustomerCodeList();
-    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     viewByOrder = await ViewByOrderLocalDataSource().getViewByOrders();
     fakeOrderHistoryItem =
         viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first;
@@ -217,28 +151,19 @@ void main() {
   });
   group('Order History Details Page', () {
     setUp(() async {
-      customerCodeBlocMock = CustomerCodeBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
-      mockProductImageBloc = MockProductImageBloc();
-      mockAuthBloc = MockAuthBloc();
-      mockPoAttachmentBloc = MockPoAttachmentBloc();
+      mockProductImageBloc = ProductImageBlocMock();
+      mockAuthBloc = AuthBlocMock();
+      mockPoAttachmentBloc = PoAttachmentBlocMock();
       mockSalesOrgBloc = SalesOrgMockBloc();
-      autoRouterMock = MockAppRouter();
+      autoRouterMock = AutoRouteMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
-
-      when(() => userBlocMock.state).thenReturn(
-        UserState.initial().copyWith(
-          user: fakeClientUser,
-        ),
-      );
       when(() => customerLicenseBlocMock.state)
           .thenReturn(CustomerLicenseState.initial());
       when(() => viewByOrderBlocMock.state)
           .thenReturn(ViewByOrderState.initial());
-      when(() => customerCodeBlocMock.state)
-          .thenReturn(CustomerCodeState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
       when(() => viewByOrderDetailsBlocMock.state)
@@ -317,7 +242,6 @@ void main() {
           BlocProvider<AuthBloc>(
             create: (context) => mockAuthBloc,
           ),
-          BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<AnnouncementBloc>(
             create: (context) => announcementBlocMock,
           ),
@@ -326,9 +250,6 @@ void main() {
           ),
           BlocProvider<ViewByItemDetailsBloc>(
             create: (context) => mockViewByItemDetailsBloc,
-          ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBlocMock,
           ),
           BlocProvider<ViewByOrderDetailsBloc>(
             create: (context) => viewByOrderDetailsBlocMock,
@@ -954,7 +875,7 @@ void main() {
       await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
       );
       expect(expectedDelivery, findsNothing);
     });
@@ -994,7 +915,7 @@ void main() {
       await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeBatch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeBatch.displayDashIfEmpty}\n(${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
         findRichText: true,
       );
       expect(expectedDelivery, findsOneWidget);
@@ -2416,7 +2337,7 @@ void main() {
           .widget<RichText>(find.byKey(WidgetKeys.commonTileItemHeader))
           .text
           .toPlainText();
-      expect(batchExpiryDate, contains('Batch NA (EXP: NA)'));
+      expect(batchExpiryDate, contains('Batch: NA (Expires: NA)'));
     });
 
     testWidgets(

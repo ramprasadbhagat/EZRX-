@@ -100,7 +100,7 @@ class ComboDetailRobot extends CommonRobot {
     expect(
       find.descendant(
         of: materialItemDetail,
-        matching: find.text('${'EXP'.tr()}: $expiryDate'),
+        matching: find.text('${'Expires'.tr()}: $expiryDate'),
       ),
       findsOneWidget,
     );

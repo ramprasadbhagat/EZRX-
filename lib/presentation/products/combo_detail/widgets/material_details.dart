@@ -107,12 +107,7 @@ class _MaterialDetails extends StatelessWidget {
                   .salesOrgConfigs
                   .expiryDateDisplay)
                 Text(
-                  context.tr(
-                    'EXP: {date}',
-                    namedArgs: {
-                      'date': comboItem.stockInfo.expiryDate.dateOrNaString,
-                    },
-                  ),
+                  '${context.tr('Expires')}: ${comboItem.stockInfo.expiryDate.dateOrNaString}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontSize: 10,
                         color: ZPColors.neutralsGrey1,

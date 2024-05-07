@@ -2170,7 +2170,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
           expect(
-            find.textContaining('EXP: 30 Nov 2025', findRichText: true),
+            find.textContaining('Expires: 30 Nov 2025', findRichText: true),
             findsOneWidget,
           );
 
@@ -2210,7 +2210,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
           expect(
-            find.textContaining('EXP: NA', findRichText: true),
+            find.textContaining('Expires: NA', findRichText: true),
             findsOneWidget,
           );
 
@@ -2249,7 +2249,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
           expect(
-            find.textContaining('EXP: 30 Nov 2025', findRichText: true),
+            find.textContaining('Expires: 30 Nov 2025', findRichText: true),
             findsOneWidget,
           );
 
@@ -2288,7 +2288,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
           expect(
-            find.textContaining('EXP: 30 Nov 2025', findRichText: true),
+            find.textContaining('Expires: 30 Nov 2025', findRichText: true),
             findsNothing,
           );
 
@@ -2319,7 +2319,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pumpAndSettle();
           expect(
-            find.textContaining('EXP: NA', findRichText: true),
+            find.textContaining('Expires: NA', findRichText: true),
             findsOneWidget,
           );
           final infoIcon = find.byKey(WidgetKeys.expiryDateInfoIcon);
@@ -2367,7 +2367,7 @@ void main() {
           findsOneWidget,
         );
         expect(
-          find.textContaining('EXP: NA', findRichText: true),
+          find.textContaining('Expires: NA', findRichText: true),
           findsOneWidget,
         );
       });

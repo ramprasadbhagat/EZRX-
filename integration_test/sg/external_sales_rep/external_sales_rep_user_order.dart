@@ -1186,7 +1186,7 @@ void main() {
         materialExpiryDate,
       );
       await productDetailRobot.tapExpiryDateInfoIcon();
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
+      await productDetailRobot.verifyExpiryDateBottomSheetAndTapClose();
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
@@ -1328,8 +1328,7 @@ void main() {
     testWidgets(
         'EZRX-T1438 | [SG]  Check whether salesrep user able to see sample material (26 series) in Product details page tab or not ',
         (tester) async {
-
-      final productPrice = 'Price Not Available'.tr();    
+      final productPrice = 'Price Not Available'.tr();
 
       //init app
       await pumpAppWithLoginOnBehalf(
@@ -1388,8 +1387,6 @@ void main() {
         materialStockInfo,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
         materialUnitPrice.priceDisplay(currency),
@@ -1717,11 +1714,6 @@ void main() {
         bonusMaterialStockInfo,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapBonusItemExpiryDateInfoIcon(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyBonusMaterialImage(
         bonusMaterialNumber,
         bonusMaterialNumber,
@@ -1883,11 +1875,6 @@ void main() {
         materialStockInfo,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapBonusItemExpiryDateInfoIcon(
-        materialNumber,
-        bonusSampleMaterialNumber,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyBonusMaterialFreeLabel(
         materialNumber,
         bonusSampleMaterialNumber,
@@ -2094,8 +2081,6 @@ void main() {
         oosPreOrderMaterialStockInfo,
         isBatchNumberVisible: false,
       );
-      await oosPreOrderRobot.tapExpiryDateInfoIcon(oosPreOrderMaterialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       await oosPreOrderRobot.tapContinueButton();
       checkoutRobot.verifyPage();
     });
@@ -2343,8 +2328,6 @@ void main() {
         materialStockInfo,
         isBatchNumberVisible: false,
       );
-      await checkoutRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       checkoutRobot.verifyMaterialImage(materialNumber);
       checkoutRobot.verifyMaterialUnitPrice(
         materialNumber,
@@ -2499,11 +2482,6 @@ void main() {
         bonusMaterialStockInfo,
         isBatchNumberVisible: false,
       );
-      await checkoutRobot.tapBonusMaterialExpiryDateInfoIcon(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       checkoutRobot.verifyBonusMaterialImage(
         bonusMaterialNumber,
         bonusMaterialNumber,

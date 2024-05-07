@@ -1175,7 +1175,7 @@ void main() {
         materialBatch,
       );
       await productDetailRobot.tapExpiryDateInfoIcon();
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
+      await productDetailRobot.verifyExpiryDateBottomSheetAndTapClose();
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
@@ -1386,8 +1386,6 @@ void main() {
         materialNumber,
         materialStockInfo,
       );
-      await cartRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
         materialUnitPrice.priceDisplay(currency),
@@ -1866,8 +1864,6 @@ void main() {
         oosPreOrderMaterialNumber,
         oosPreOrderMaterialStockInfo,
       );
-      await oosPreOrderRobot.tapExpiryDateInfoIcon(oosPreOrderMaterialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       if (oosPreOrderRobot.isSheetVisible) {
         await oosPreOrderRobot.tapContinueButton();
       }
@@ -2033,8 +2029,6 @@ void main() {
         materialNumber,
         materialStockInfo,
       );
-      await checkoutRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       await checkoutRobot
           .verifySubTotalLabel(totalPrice.priceDisplay(currency));
       await checkoutRobot.verifyGrandTotalLabel(

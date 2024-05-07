@@ -832,7 +832,7 @@ void main() async {
             matching: find.descendant(
               of: find.byType(StockInfoWidget),
               matching: find.textContaining(
-                'Batch: NA - EXP: NA',
+                'Batch: NA - Expires: NA',
                 findRichText: true,
               ),
             ),

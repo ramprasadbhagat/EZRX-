@@ -401,7 +401,7 @@ void main() async {
 
       expect(
         find.textContaining(
-          '${'EXP'.tr()}: NA',
+          '${'Expires'.tr()}: NA',
           findRichText: true,
         ),
         findsOneWidget,
@@ -614,8 +614,10 @@ void main() async {
               fakeBundleMaterials.first.materialNumber.displayMatNo,
             ),
           ),
-          matching:
-              find.textContaining('Batch: NA - EXP: NA', findRichText: true),
+          matching: find.textContaining(
+            'Batch: NA - Expires: NA',
+            findRichText: true,
+          ),
         ),
         findsOne,
       );

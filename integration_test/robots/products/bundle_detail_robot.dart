@@ -16,7 +16,6 @@ class BundleDetailRobot extends CommonRobot {
       find.byKey(WidgetKeys.bundleAddToCartSheetSubmitButton);
   final sheetInvalidQtyWarning =
       find.byKey(WidgetKeys.addBundleInvalidQtyWarning);
-  final expiryDateIcon = find.byKey(WidgetKeys.expiryDateInfoIcon);
 
   void verifyPage() {
     final bundlesDetail = find.byKey(WidgetKeys.bundleDetailPage);
@@ -114,8 +113,8 @@ class BundleDetailRobot extends CommonRobot {
         WidgetKeys.bundleMaterialDetails(materialNumber),
       );
       final texts = <String>[];
-      if (isBatchNumberVisible) texts.add('${'Batch:'.tr()} $batchNumber');
-      if (isExpiryDateVisible) texts.add('${'EXP:'.tr()} $expiryDate');
+      if (isBatchNumberVisible) texts.add('${'Batch'.tr()}: $batchNumber');
+      if (isExpiryDateVisible) texts.add('${'Expires'.tr()}: $expiryDate');
       final stockText = texts.join(' - ');
       await scrollEnsureFinderVisible(itemTile);
       expect(
@@ -131,11 +130,6 @@ class BundleDetailRobot extends CommonRobot {
         findsOneWidget,
       );
     }
-  }
-
-  Future<void> tapExpiryDateInfoIcon() async {
-    await tester.tap(expiryDateIcon.last);
-    await tester.pumpAndSettle();
   }
 
   void verifyAddBundleMinimumQty(int value) => _findWidgetContainText(

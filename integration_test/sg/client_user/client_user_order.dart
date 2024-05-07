@@ -1349,7 +1349,7 @@ void main() {
         materialExpiryDate,
       );
       await productDetailRobot.tapExpiryDateInfoIcon();
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
+      await productDetailRobot.verifyExpiryDateBottomSheetAndTapClose();
       productDetailRobot.verifyProductPriceDisplayed();
       productDetailRobot.verifyMaterialDetailsInfoTileDisplayed();
       productDetailRobot.verifyProductDetailsQuantityInputPriceDisplayed();
@@ -1513,8 +1513,6 @@ void main() {
         stockInfoList: bundleStockInfoList,
         isBatchNumberVisible: false,
       );
-      await bundleDetailRobot.tapExpiryDateInfoIcon();
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
     });
 
     testWidgets('EZRX-T212 | Verify add and navigate to cart in bundle detail',
@@ -1870,8 +1868,6 @@ void main() {
         materialStockInfo,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
         materialUnitPrice.priceDisplay(currency),
@@ -2056,11 +2052,6 @@ void main() {
         bundleStockInfoList.first,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapBundleItemExpiryDateInfoIcon(
-        bundleNumber,
-        bundleMaterialNumber1,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyBundleItemPrincipalName(
         bundleNumber,
         bundleMaterialNumber1,
@@ -2094,11 +2085,6 @@ void main() {
         bundleStockInfoList.elementAt(1),
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapBundleItemExpiryDateInfoIcon(
-        bundleNumber,
-        bundleMaterialNumber2,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyBundleItemPrincipalName(
         bundleNumber,
         bundleMaterialNumber2,
@@ -2326,11 +2312,6 @@ void main() {
         bonusMaterialStockInfo,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapBonusItemExpiryDateInfoIcon(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       cartRobot.verifyBonusMaterialImage(
         bonusMaterialNumber,
         bonusMaterialNumber,
@@ -2490,12 +2471,6 @@ void main() {
         materialStockInfo,
         isBatchNumberVisible: false,
       );
-      await cartRobot.tapBonusItemExpiryDateInfoIcon(
-        materialNumber,
-        bonusSampleMaterialNumber,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
-
       cartRobot.verifyBonusMaterialFreeLabel(
         materialNumber,
         bonusSampleMaterialNumber,
@@ -2708,8 +2683,6 @@ void main() {
         oosPreOrderMaterialStockInfo,
         isBatchNumberVisible: false,
       );
-      await oosPreOrderRobot.tapExpiryDateInfoIcon(oosPreOrderMaterialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       await oosPreOrderRobot.tapContinueButton();
       checkoutRobot.verifyPage();
     });
@@ -2836,8 +2809,6 @@ void main() {
         materialStockInfo,
         isBatchNumberVisible: false,
       );
-      await checkoutRobot.tapMaterialExpiryDateInfoIcon(materialNumber);
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       checkoutRobot.verifyMaterialUnitPrice(
         materialNumber,
         newUnitPrice.priceDisplay(currency),
@@ -2901,11 +2872,6 @@ void main() {
         bundleStockInfoList.first,
         isBatchNumberVisible: false,
       );
-      await checkoutRobot.tapBundleItemExpiryDateInfoIcon(
-        bundleNumber,
-        bundleMaterialNumber1,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       checkoutRobot.verifyBundleItemPrincipal(
         bundleNumber,
         bundleMaterialNumber1,
@@ -2929,11 +2895,6 @@ void main() {
         bundleStockInfoList.elementAt(1),
         isBatchNumberVisible: false,
       );
-      await checkoutRobot.tapBundleItemExpiryDateInfoIcon(
-        bundleNumber,
-        bundleMaterialNumber2,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       checkoutRobot.verifyBundleItemPrincipal(
         bundleNumber,
         bundleMaterialNumber2,
@@ -3042,11 +3003,6 @@ void main() {
         bonusMaterialStockInfo,
         isBatchNumberVisible: false,
       );
-      await checkoutRobot.tapBonusMaterialExpiryDateInfoIcon(
-        bonusMaterialNumber,
-        bonusMaterialNumber,
-      );
-      await commonRobot.verifyExpiryDateBottomSheetAndTapClose();
       checkoutRobot.verifyBonusMaterialImage(
         bonusMaterialNumber,
         bonusMaterialNumber,

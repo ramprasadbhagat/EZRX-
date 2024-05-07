@@ -144,7 +144,8 @@ class ProductDetailRobot extends CommonRobot {
         (tester.widget<RichText>(materialDetailsStock).text as TextSpan)
             .children;
     final result = richTextChildren!.any(
-      (element) => element.toPlainText().contains('${'EXP'.tr()}: $expiryDate'),
+      (element) =>
+          element.toPlainText().contains('${'Expires'.tr()}: $expiryDate'),
     );
     expect(result, true);
   }
@@ -164,6 +165,47 @@ class ProductDetailRobot extends CommonRobot {
     expect(expiryDateIcon, findsOneWidget);
     await tester.tap(expiryDateIcon);
     await tester.pumpAndSettle();
+  }
+
+  Future<void> verifyExpiryDateBottomSheetAndTapClose() async {
+    final expiryDateBottomSheet =
+        find.byKey(WidgetKeys.expiryDateInstructionSheet);
+    final expiryDateBottomSheetCloseButton = find.descendant(
+      of: expiryDateBottomSheet,
+      matching: find.byKey(WidgetKeys.closeButton),
+    );
+    expect(expiryDateBottomSheet, findsOneWidget);
+    expect(
+      find.descendant(
+        of: expiryDateBottomSheet,
+        matching: find.text('Expiry date'.tr()),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: expiryDateBottomSheet,
+        matching: find.text(
+          '${'Expiry date displayed is for reference, actual product may vary'.tr()}.',
+        ),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: expiryDateBottomSheetCloseButton,
+        matching: find.text('Got it'.tr()),
+      ),
+      findsOneWidget,
+    );
+    await tester.tap(
+      find.descendant(
+        of: expiryDateBottomSheet,
+        matching: expiryDateBottomSheetCloseButton,
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(expiryDateBottomSheet, findsNothing);
   }
 
   void verifyProductPriceDisplayed() {

@@ -75,11 +75,11 @@ class ViewByItemOrderItemTile extends StatelessWidget {
 
   String _batchExpiryDateText(BuildContext context) {
     if (orderHistoryItem.isMarketPlace) {
-      return '${context.tr('Batch')} NA (${context.tr('EXP')}: NA)';
+      return '${context.tr('Batch')}: NA (${context.tr('Expires')}: NA)';
     }
 
     if (orderHistoryItem.batchNumHasData) {
-      return '${context.tr('Batch')}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${context.tr('EXP')}: ${orderHistoryItem.expiryDate.dateOrDashString})';
+      return '${context.tr('Batch')}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${context.tr('Expires')}: ${orderHistoryItem.expiryDate.dateOrDashString})';
     }
 
     return '';

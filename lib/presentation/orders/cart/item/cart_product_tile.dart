@@ -276,13 +276,10 @@ class _MaterialDetails extends StatelessWidget {
               PreOrderLabel(stockInfo: cartItem.productStockInfo),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(
-              cartItem.materialInfo.displayDescription,
-              key: WidgetKeys.cartItemProductMaterialDescription,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
+          Text(
+            cartItem.materialInfo.displayDescription,
+            key: WidgetKeys.cartItemProductMaterialDescription,
+            style: Theme.of(context).textTheme.labelSmall,
           ),
           StockInfoWidget(
             stockInfo: cartItem.stockInfoValid,
@@ -290,13 +287,15 @@ class _MaterialDetails extends StatelessWidget {
           ),
           Row(
             children: [
-              if (cartItem.displayCutOffListPrice)
+              if (cartItem.displayCutOffListPrice) ...[
                 PriceComponent(
                   key: WidgetKeys.cartItemCutOffListPrice,
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
                   price: cartItem.display(PriceType.listPrice),
                   type: PriceStyle.counterOfferPrice,
                 ),
+                const SizedBox(width: 4),
+              ],
               LoadingShimmer.withChild(
                 enabled: cartState.priceUnderLoadingShimmer ||
                     context.read<MaterialPriceBloc>().state.isFetching,
@@ -304,6 +303,7 @@ class _MaterialDetails extends StatelessWidget {
                   key: WidgetKeys.cartItemProductUnitPrice,
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
                   price: cartItem.display(PriceType.finalPrice),
+                  type: PriceStyle.cartMaterialUnitPrice,
                 ),
               ),
             ],
@@ -439,7 +439,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
+      padding: const EdgeInsets.only(top: 4),
       child: Column(
         children: [
           Focus(

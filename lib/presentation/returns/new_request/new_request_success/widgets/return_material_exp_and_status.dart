@@ -17,14 +17,14 @@ class _ReturnMaterialExpAndStatus extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${'Batch'.tr()} ${returnMaterial.batch}} ',
+              '${context.tr('Batch')} ${returnMaterial.batch}} ',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.extraLightGrey4,
                     fontSize: 12,
                   ),
             ),
             Text(
-              '(${'EXP:'.tr()} ${returnMaterial.expiryDate.dateString})',
+              '(${context.tr('Expires')}: ${returnMaterial.expiryDate.dateString})',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.extraLightGrey4,
                     fontSize: 12,

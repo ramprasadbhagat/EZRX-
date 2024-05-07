@@ -130,14 +130,11 @@ class _ProductDetails extends StatelessWidget {
                 ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(
-              bonusItem.materialDescription,
-              key: WidgetKeys.cartItemBonusMaterialDescription,
-              maxLines: 2,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
+          Text(
+            bonusItem.materialDescription,
+            key: WidgetKeys.cartItemBonusMaterialDescription,
+            maxLines: 2,
+            style: Theme.of(context).textTheme.labelSmall,
           ),
           StockInfoWidget(
             materialInfo: cartProduct.materialInfo,

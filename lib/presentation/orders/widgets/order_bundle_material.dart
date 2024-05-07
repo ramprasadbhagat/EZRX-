@@ -109,7 +109,7 @@ class BundleItemMaterial extends StatelessWidget {
                   ),
                   if (configs.batchNumDisplay)
                     Text(
-                      '${'Batch'.tr()}: ${orderItem.batch.displayDashIfEmpty} (${context.tr('EXP')}: ${orderItem.expiryDate.dateOrDashString})',
+                      '${'Batch'.tr()}: ${orderItem.batch.displayDashIfEmpty} (${context.tr('Expires')}: ${orderItem.expiryDate.dateOrDashString})',
                       maxLines: 1,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),

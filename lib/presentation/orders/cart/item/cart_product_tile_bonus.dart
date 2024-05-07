@@ -171,23 +171,21 @@ class _MaterialDetails extends StatelessWidget {
                       color: ZPColors.darkGray,
                     ),
               ),
-              const SizedBox(
-                width: 4,
-              ),
-              if (eligibilityState.salesOrg.showBonus) const BonusTag(),
+              const SizedBox(width: 4),
+              if (eligibilityState.salesOrg.showBonus) ...[
+                const BonusTag(),
+                const SizedBox(width: 4),
+              ],
               PreOrderLabel(
                 stockInfo: bonusItem.stockInfo,
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(
-              bonusItem.materialDescription,
-              key: WidgetKeys.cartItemBonusMaterialDescription,
-              maxLines: 2,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
+          Text(
+            bonusItem.materialDescription,
+            key: WidgetKeys.cartItemBonusMaterialDescription,
+            maxLines: 2,
+            style: Theme.of(context).textTheme.labelSmall,
           ),
           StockInfoWidget(
             materialInfo: cartProduct.materialInfo,
@@ -266,7 +264,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
+      padding: const EdgeInsets.only(top: 4),
       child: CartItemQuantityInput(
         isEnabled:
             context.read<EligibilityBloc>().state.isBonusSampleItemVisible &&

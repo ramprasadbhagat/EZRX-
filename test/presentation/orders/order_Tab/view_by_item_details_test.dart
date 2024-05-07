@@ -675,7 +675,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
       );
       expect(expectedDelivery, findsNothing);
     });
@@ -702,7 +702,7 @@ void main() {
         const Offset(0, -300),
       );
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
         findRichText: true,
       );
       expect(expectedDelivery, findsOneWidget);
@@ -2150,7 +2150,7 @@ void main() {
           .widget<RichText>(find.byKey(WidgetKeys.commonTileItemHeader))
           .text
           .toPlainText();
-      expect(batchExpiryDate, contains('Batch NA (EXP: NA)'));
+      expect(batchExpiryDate, contains('Batch: NA (Expires: NA)'));
     });
 
     testWidgets(
