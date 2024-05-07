@@ -101,10 +101,10 @@ extension PriceAggregateExtension on List<PriceAggregate> {
   PriceComboDeal get firstPriceComboDeal =>
       isEmpty ? PriceComboDeal.empty() : first.price.comboDeal;
 
-  List<PriceAggregate> get preOrderItems => where(
-        (element) =>
-            element.isPreOrder && (!element.materialInfo.type.typeCombo),
-      ).toList();
+  List<PriceAggregate> get preOrderItems =>
+      expand((e) => [e, ...e.bonusMaterialPriceAggregate])
+          .where((e) => e.isPreOrder && (!e.materialInfo.type.typeCombo))
+          .toList();
 
   List<PriceAggregate> get priceAggregateWithDiscountedCount => map((item) {
         if (item.price.zmgDiscount) {
@@ -233,8 +233,12 @@ extension PriceAggregateExtension on List<PriceAggregate> {
           .compareTo(a.materialInfo.type.sortPriority),
     )
     ..sort((a, b) {
-      if (a.materialInfo.type.typeMaterial &&
-          b.materialInfo.type.typeMaterial) {
+      final aType = a.materialInfo.type;
+      final bType = b.materialInfo.type;
+      // If item is commercial material or bonus material
+      // => sort by manufacturer to ensure displaying group of item correctly
+      if ((aType.typeMaterial || aType.typeDealOrOverrideBonus) &&
+          aType == bType) {
         return a.materialInfo.getManufactured
             .compareTo(b.materialInfo.getManufactured);
       }
@@ -246,10 +250,6 @@ extension PriceAggregateExtension on List<PriceAggregate> {
       index == 0 ||
       this[index].materialInfo.getManufactured !=
           this[index - 1].materialInfo.getManufactured;
-
-  bool showOOSManufacturerName(int index) =>
-      !this[index].materialInfo.type.typeDealOrOverrideBonus &&
-      showManufacturerName(index);
 
   bool get isGimmickMaterialOnlyInCart =>
       isNotEmpty && every((element) => element.isGimmickMaterial);

@@ -11,14 +11,9 @@ class _BottomSection extends StatelessWidget {
           endIndent: 0,
           height: 15,
         ),
-        const SizedBox(
-          height: 10,
-        ),
+        const SizedBox(height: 10),
         Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-          ),
+          padding: _horizontalPadding,
           child: Row(
             children: [
               Expanded(
@@ -31,9 +26,7 @@ class _BottomSection extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 12,
-              ),
+              const SizedBox(width: 16),
               Expanded(
                 child: ElevatedButton(
                   key: WidgetKeys.preOrderModalContinueButton,
@@ -46,9 +39,6 @@ class _BottomSection extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        const SizedBox(
-          height: 20,
         ),
       ],
     );

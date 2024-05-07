@@ -24,6 +24,7 @@ import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_ca
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
@@ -36,6 +37,7 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
@@ -267,6 +269,13 @@ class ScanMaterialInfoBlocMock
     extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
     implements ScanMaterialInfoBloc {}
 
+class DiscountOverrideBlocMock
+    extends MockBloc<DiscountOverrideEvent, DiscountOverrideState>
+    implements DiscountOverrideBloc {}
+
+class TenderContractBlocMock
+    extends MockBloc<TenderContractEvent, TenderContractState>
+    implements TenderContractBloc {}
 //////////////////////////////////////////////////////////////////////////
 
 ///////////////////////Payment///////////////////////////////////////////////

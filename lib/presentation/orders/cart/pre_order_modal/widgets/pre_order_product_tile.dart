@@ -11,6 +11,7 @@ class _PreOrderProductTile extends StatelessWidget {
         cartProduct.getMaterialNumber.displayMatNo,
         isBonus: cartProduct.materialInfo.type.typeDealOrOverrideBonus,
       ),
+      margin: const EdgeInsets.only(bottom: _itemSpacing),
       padding: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,

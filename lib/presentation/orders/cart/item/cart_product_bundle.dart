@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -90,25 +91,21 @@ class _BundleDetailsSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
             children: [
               Text(
                 cartItem.bundle.bundleCode,
                 key: WidgetKeys.cartItemBundleNumber,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.neutralsBlack,
                     ),
               ),
               Text(
-                '${context.tr('Total quantity: ')}${currentBundle.totalQty}',
+                '${context.tr('Total quantity')}: ${currentBundle.totalQty}',
                 key: WidgetKeys.cartItemBundleQty,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.neutralsBlack,
                     ),
@@ -122,44 +119,57 @@ class _BundleDetailsSection extends StatelessWidget {
                 'Minimum total purchase qty: ${cartItem.bundle.minimumQuantityBundleMaterial.quantity}',
               ),
             ),
-          Text(
-            cartItem.bundle.bundleName.getValue(),
-            key: WidgetKeys.cartItemBundleName,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: ZPColors.neutralsBlack,
-                ),
-          ),
           RichText(
+            key: WidgetKeys.cartItemBundleName,
             text: TextSpan(
-              text:
-                  '${currentBundleOffer.type.getOrDefaultValue('')} ${currentBundleOffer.rate} ${context.tr('per item')} ',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                    decoration: TextDecoration.none,
+              children: [
+                if (cartItem.materialInfo.isMarketPlace) ...[
+                  WidgetSpan(
+                    child: MarketPlaceLogo.small(),
+                    alignment: PlaceholderAlignment.middle,
                   ),
-              children: <TextSpan>[
-                if (cartItem.bundle.showStrikeThroughPrice)
-                  TextSpan(
-                    text:
-                        '${currentBundleOffer.type.getOrDefaultValue('')} ${cartItem.bundle.bundleInformation.firstOrNull?.rate} ${context.tr('per item')}',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: ZPColors.darkGray,
-                          decoration: TextDecoration.lineThrough,
-                        ),
-                  ),
+                  const WidgetSpan(child: SizedBox(width: 8)),
+                ],
+                TextSpan(
+                  text: cartItem.bundle.bundleName.name,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
+                ),
               ],
             ),
+          ),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              if (currentBundle.showStrikeThroughPrice)
+                Padding(
+                  padding: const EdgeInsets.only(right: 4),
+                  child: PriceComponent(
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                    price: currentBundle.minimumQuantityBundleMaterial.rate
+                        .toString(),
+                    trailingText: context.tr('per item'),
+                    type: PriceStyle.bundleListPriceStrikeThrough,
+                  ),
+                ),
+              PriceComponent(
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                price: currentBundleOffer.rate.toString(),
+                type: PriceStyle.bundleCartPrice,
+                trailingText: context.tr('per item'),
+                key: WidgetKeys.addBundleRate,
+              ),
+            ],
           ),
           if (cartItem.isBundleMinimumQuantitySatisfies)
             Text(
               '${context.tr('Purchase')} ${currentBundleOffer.quantity} ${context.tr('or more for')} ${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate} ${context.tr('per item')}',
               key: WidgetKeys.cartItemBundleRate,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ZPColors.darkGray,
+                    color: ZPColors.neutralsGrey1,
                     fontStyle: FontStyle.italic,
                   ),
             ),
@@ -266,28 +276,23 @@ class _MaterialDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              Flexible(
-                child: Text(
-                  cartItem.combinationCode(
-                    showGMCPart: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .salesOrgConfigs
-                        .enableGMC,
-                  ),
-                  key: WidgetKeys.cartItemProductMaterialNumber,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
+              Text(
+                cartItem.combinationCode(
+                  showGMCPart: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .salesOrgConfigs
+                      .enableGMC,
                 ),
+                key: WidgetKeys.cartItemProductMaterialNumber,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
               ),
-              const SizedBox(
-                width: 4,
-              ),
+              const SizedBox(width: 4),
               PreOrderLabel(stockInfo: cartItem.productStockInfo),
             ],
           ),
@@ -302,17 +307,17 @@ class _MaterialDetails extends StatelessWidget {
                   ?.copyWith(color: ZPColors.neutralsBlack),
             ),
           ),
+          StockInfoWidget(
+            stockInfo: cartItem.bundleStockInfoValid,
+            materialInfo: cartItem,
+          ),
           Text(
             cartItem.principalData.principalName.getValue(),
             key: WidgetKeys.cartItemProductPrincipalName,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontSize: 10.0,
-                  color: ZPColors.extraLightGrey4,
+                  color: ZPColors.neutralsGrey1,
                 ),
-          ),
-          StockInfoWidget(
-            stockInfo: cartItem.bundleStockInfoValid,
-            materialInfo: cartItem,
           ),
           _MaterialQuantitySection(
             cartItem: cartItem,
@@ -583,10 +588,8 @@ class _BundleSubTotalSection extends StatelessWidget {
         children: [
           Text(
             context.tr('Bundle subtotal:'),
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                  color: ZPColors.darkGray,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: ZPColors.neutralsGrey1,
                 ),
           ),
           PriceComponent(

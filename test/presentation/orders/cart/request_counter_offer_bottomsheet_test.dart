@@ -46,10 +46,6 @@ import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
@@ -1324,7 +1320,7 @@ void main() {
       expect(
         find.descendant(
           of: listPriceStrikeThroughComponent,
-          matching: find.text('List price : VND 20.00 ', findRichText: true),
+          matching: find.text('List price : VND 20.00', findRichText: true),
         ),
         findsOneWidget,
       );

@@ -1,56 +1,67 @@
 part of 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 
 class _PreOrderScrollSection extends StatelessWidget {
-  const _PreOrderScrollSection({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
-
-  final CartState state;
+  const _PreOrderScrollSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final preOrderItems = state.allMaterial.preOrderItems;
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) =>
+          previous.cartProducts.preOrderItems !=
+          current.cartProducts.preOrderItems,
+      builder: (context, state) {
+        final preOrderItems = [
+          ...state.cartProducts.zpMaterialOnly.preOrderItems.sortToDisplay,
+          ...state.cartProducts.mpMaterialOnly.preOrderItems.sortToDisplay,
+        ];
 
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: ScrollList<PriceAggregate>(
+        return ListView.builder(
+          shrinkWrap: true,
+          padding: _horizontalPadding,
           key: WidgetKeys.preOrderModalItemList,
-          noRecordFoundWidget: const SizedBox.shrink(),
-          controller: ScrollController(),
-          onRefresh: null,
-          isLoading: false,
-          itemBuilder: (context, index, item) {
-            final isDifferentSeller =
-                preOrderItems.showOOSManufacturerName(index);
+          itemCount: preOrderItems.length,
+          itemBuilder: (_, index) {
+            final item = preOrderItems[index];
+
+            if (item.materialInfo.type.typeBundle) {
+              return Column(
+                children: [
+                  if (index != 0) const _Divider(),
+                  _PreOrderBundleTile(cartProduct: item),
+                ],
+              );
+            }
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
               children: [
-                if (index != 0 && isDifferentSeller)
-                  const Divider(
-                    color: ZPColors.lightGray2,
-                    indent: 0,
-                    endIndent: 0,
-                    height: 10,
-                    thickness: 1,
-                  ),
-                if (isDifferentSeller)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
-                    child: _ManufacturerName(
-                      cartProduct: item.materialInfo,
-                    ),
-                  ),
-                _PreOrderProductTile(
-                  cartProduct: item,
-                ),
+                if (preOrderItems.showManufacturerName(index)) ...[
+                  if (index != 0) const _Divider(),
+                  _ManufacturerName(cartProduct: item.materialInfo),
+                  const SizedBox(height: _itemSpacing),
+                ],
+                _PreOrderProductTile(cartProduct: item),
               ],
             );
           },
-          items: preOrderItems,
+        );
+      },
+    );
+  }
+}
+
+class _Divider extends StatelessWidget {
+  const _Divider();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.only(bottom: _itemSpacing),
+      child: ColoredBox(
+        color: ZPColors.lightGray2,
+        child: SizedBox(
+          height: 1,
+          width: double.infinity,
         ),
       ),
     );

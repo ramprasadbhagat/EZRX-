@@ -84,8 +84,7 @@ class CartProductDto with _$CartProductDto {
     required String materialGroup2,
     @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
     required bool is26SeriesMaterial,
-    @JsonKey(name: 'isGimmick', defaultValue: false)
-    required bool isGimmick,
+    @JsonKey(name: 'isGimmick', defaultValue: false) required bool isGimmick,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -142,7 +141,7 @@ class CartProductDto with _$CartProductDto {
           cartItemDetails.materialInfo.defaultMaterialDescription,
       materialGroup2: cartItemDetails.materialInfo.materialGroup2.getOrCrash(),
       materialGroup4: cartItemDetails.materialInfo.materialGroup4.getOrCrash(),
-      is26SeriesMaterial: cartItemDetails.is26SeriesMaterial, 
+      is26SeriesMaterial: cartItemDetails.is26SeriesMaterial,
       isGimmick: cartItemDetails.isGimmickMaterial,
     );
   }
@@ -195,7 +194,15 @@ class CartProductDto with _$CartProductDto {
         bundleName: BundleName(bundleDetails.bundleName),
         bundleInformation:
             bundleDetails.bundleInfo.map((e) => e.toDomain()).toList(),
-        materials: bundleMaterials.map((e) => e.toDomain()).toList(),
+        //Override with value from materialInfo to display batch & exp correctly
+        //(for now BE return isMarketPlace as null)
+        materials: bundleMaterials
+            .map(
+              (e) => e
+                  .toDomain()
+                  .copyWith(isMarketPlace: toMaterialInfo.isMarketPlace),
+            )
+            .toList(),
       ),
       quantity: quantity,
       bonusSampleItems: bonusMaterials.map((e) => e.toDomain()).toList(),

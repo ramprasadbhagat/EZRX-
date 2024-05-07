@@ -140,19 +140,12 @@ class _CartPageCheckoutButton extends StatelessWidget {
     final cartState = context.read<CartBloc>().state;
     showModalBottomSheet(
       context: context,
-      isScrollControlled: cartState.isHavingMoreThanOnePreOrderInCart,
+      isScrollControlled: true,
       enableDrag: false,
       isDismissible: false,
       useSafeArea: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(16),
-        ),
-      ),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      builder: (_) {
-        return const PreOrderModal();
-      },
+      clipBehavior: Clip.hardEdge,
+      builder: (_) => const PreOrderModal(),
     ).then(
       (value) {
         if (value == null) return;
@@ -175,7 +168,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
           TrackingProps.totalQty: cartState.totalCartCount,
         },
       );
-      final preOrderItemExist = cartState.allMaterial.preOrderItems.isNotEmpty;
+      final preOrderItemExist = cartState.cartProducts.preOrderItems.isNotEmpty;
       if (preOrderItemExist) {
         _showPreOrderModal(context: context);
       } else {

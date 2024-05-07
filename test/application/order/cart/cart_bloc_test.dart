@@ -194,10 +194,9 @@ void main() {
       priceAggregates
           .expand(
             (e) => e.materialInfo.type.typeBundle
-                ? e.bundleMaterialsPriceAggregate
-                : [e],
+                ? e.bundle.materials
+                : [e.materialInfo],
           )
-          .map((e) => e.materialInfo)
           .toList();
 
   group(
@@ -4047,44 +4046,6 @@ void main() {
             isMappingPrice: true,
           );
           expect(cartBlocState.priceUnderLoadingShimmer, true);
-        },
-      );
-
-      test(
-        'Testing CartBloc state isHavingMoreThanOnePreOrderInCart',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: priceAggregates
-                .map(
-                  (e) => e.copyWith(
-                    materialInfo: MaterialInfo.empty().copyWith(
-                      isSampleMaterial: true,
-                    ),
-                    price: prices.first,
-                    salesOrgConfig: fakeMYSalesOrgConfigs,
-                  ),
-                )
-                .toList(),
-          );
-          expect(cartBlocState.isHavingMoreThanOnePreOrderInCart, true);
-        },
-      );
-      test(
-        'Testing CartBloc state allMaterial',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: priceAggregates,
-          );
-          expect(
-            cartBlocState.allMaterial,
-            priceAggregates
-                .expand(
-                  (e) => e.materialInfo.type.typeBundle
-                      ? e.bundleMaterialsPriceAggregate
-                      : [e],
-                )
-                .toList(),
-          );
         },
       );
 

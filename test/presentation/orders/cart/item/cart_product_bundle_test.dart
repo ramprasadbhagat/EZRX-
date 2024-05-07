@@ -1,43 +1,34 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
+import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../common_mock_data/mock_bloc.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../utils/widget_utils.dart';
 
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class OrderEligibilityBlocMock
-    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
-    implements OrderEligibilityBloc {}
-
-void main() {
+void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
   late AppRouter autoRouterMock;
   late CartBloc cartBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late OrderEligibilityBloc orderEligibilityBlocMock;
+  final bundle = (await CartLocalDataSource().getAddedToCartProductList())
+      .cartProducts
+      .firstWhere((e) => e.materialInfo.type.typeBundle);
 
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
@@ -55,7 +46,7 @@ void main() {
         .thenReturn(OrderEligibilityState.initial());
   });
 
-  Widget getScopedWidget() {
+  Widget getScopedWidget({required PriceAggregate cartItem}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
@@ -74,16 +65,8 @@ void main() {
         ),
       ],
       child: Material(
-        child: CartProductBundle(
-          cartItem: PriceAggregate.empty().copyWith(
-            bundle: Bundle.empty().copyWith(
-              materials: [
-                MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('fake-number'),
-                ),
-              ],
-            ),
-          ),
+        child: SingleChildScrollView(
+          child: CartProductBundle(cartItem: cartItem),
         ),
       ),
     );
@@ -95,18 +78,59 @@ void main() {
         salesOrgConfigs: fakeMYSalesOrgConfigs,
       ),
     );
-    await tester.pumpWidget(getScopedWidget());
-    await tester.pump();
+    await tester.pumpWidget(getScopedWidget(cartItem: bundle));
+    await tester.pumpAndSettle();
     expect(
       find.descendant(
         of: find.byKey(
           WidgetKeys.cartItemProductTile(
-            MaterialNumber('fake-number').displayMatNo,
+            bundle.bundle.materials.first.materialNumber.displayMatNo,
           ),
         ),
         matching: find.byKey(WidgetKeys.materialDetailsStock),
       ),
       findsOneWidget,
+    );
+  });
+
+  testWidgets('Show MP logo + Batch & Expiry as NA for marketplace bundle',
+      (tester) async {
+    final mpBundle = bundle.copyWith(
+      materialInfo: bundle.materialInfo.copyWith(isMarketPlace: true),
+      bundle: bundle.bundle.copyWith(
+        materials: bundle.bundle.materials
+            .map((e) => e.copyWith(isMarketPlace: true))
+            .toList(),
+      ),
+    );
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs:
+            fakeMYSalesOrgConfigs.copyWith(enableBatchNumber: true),
+      ),
+    );
+
+    await tester.pumpWidget(
+      getScopedWidget(cartItem: mpBundle),
+    );
+    await tester.pumpAndSettle();
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.cartItemBundleName),
+        matching: find.byType(MarketPlaceLogo),
+      ),
+      findsOne,
+    );
+    final stockWidget = find.byType(StockInfoWidget);
+    expect(
+      find.descendant(
+        of: stockWidget,
+        matching: find.textContaining(
+          'Batch: NA - EXP: NA',
+          findRichText: true,
+        ),
+      ),
+      findsNWidgets(stockWidget.evaluate().length),
     );
   });
 }

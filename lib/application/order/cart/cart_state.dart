@@ -334,17 +334,6 @@ class CartState with _$CartState {
           !isOOSOrderPresent) &&
       isBundleQuantitySatisfies;
 
-  List<PriceAggregate> get allMaterial => cartProducts
-      .expand(
-        (e) => e.materialInfo.type.typeBundle
-            ? e.bundleMaterialsPriceAggregate
-            : [e, ...e.bonusMaterialPriceAggregate],
-      )
-      .toList();
-
-  bool get isHavingMoreThanOnePreOrderInCart =>
-      cartProducts.where((e) => e.isPreOrder).toList().length > 1;
-
   bool get priceUnderLoadingShimmer =>
       isUpserting || isUpdatingStock || isMappingPrice;
 

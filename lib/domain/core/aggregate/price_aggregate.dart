@@ -771,17 +771,6 @@ class PriceAggregate with _$PriceAggregate {
         stockInfos.any((stock) => !stock.inStock.isMaterialInStock);
   }
 
-  List<PriceAggregate> get bundleMaterialsPriceAggregate => bundle.materials
-      .map(
-        (e) => PriceAggregate.empty().copyWith(
-          materialInfo: e,
-          stockInfoList: e.stockInfos,
-          quantity: e.quantity.intValue,
-          salesOrgConfig: salesOrgConfig,
-        ),
-      )
-      .toList();
-
   List<BonusSampleItem> getNewlyAddedItems(List<BonusSampleItem> oldBonusList) {
     final oldOverrideBonusIds = oldBonusList
         .where((element) => !element.type.typeDealBonus)
@@ -888,6 +877,7 @@ class PriceAggregate with _$PriceAggregate {
             type: e.type,
             materialNumber: e.materialNumber,
             materialDescription: e.materialDescription,
+            principalData: e.principalData,
           ),
           salesOrgConfig: salesOrgConfig,
           stockInfoList: [e.stockInfo],

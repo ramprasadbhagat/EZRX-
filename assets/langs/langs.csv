@@ -1178,7 +1178,7 @@ Purchase FIXED product with min. of its quantity and any product in the list.,Pu
 Purchase any products with min. {minQty} of total quantity.,Purchase any products with min. {minQty} of total quantity.,Purchase any products with min. {minQty} of total quantity.,Purchase any products with min. {minQty} of total quantity.,Purchase any products with min. {minQty} of total quantity.,Purchase any products with min. {minQty} of total quantity.,ទិញផលិតផលណាមួយជាមួយអប្បបរមា {minQty} នៃបរិមាណសរុប,Beli produk apa pun dengan min. {minQty} Total Kuantitas.,Purchase any products with min. {minQty} of total quantity.
 per item,per item,ต่อหนึ่งชิ้น,每件,ကုန်အတွင်း,mỗi sản phẩm,ក្នុងមួយផលិតផល,per item,개당
 Per item,Per item,Per item,Per item,Per item,Per item,ក្នុងមួយផលិតផល,Per item,Per item
-Total Quantity,Total Quantity,Total Quantity,Total Quantity,Total Quantity,Total Quantity,បរិមាណ​សរុប,Jumlah total,Total Quantity
+Total quantity,Total quantity,Total quantity,Total quantity,Total quantity,Total quantity,បរិមាណ​សរុប,Jumlah total,Total Quantity
 Total SKUs,Total SKUs,Total SKUs,Total SKUs,Total SKUs,Total SKUs,SKUs សរុប,Total Skus,Total SKUs
 Total Order Amount,Total Order Amount,Total Order Amount,Total Order Amount,Total Order Amount,Total Order Amount,ចំនួនទឹកប្រាក់បញ្ជាទិញសរុប,Jumlah pesanan total,Total Order Amount
 Combo K1,Combo K1,Combo K1,Combo K1,Combo K1,Combo K1,កញ្ចប់ស្គីមCombo K1,Combo K1,Combo K1

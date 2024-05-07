@@ -172,7 +172,11 @@ class MaterialDto with _$MaterialDto {
       remarks: remarks,
       genericMaterialName: genericMaterialName,
       ean: ean,
-      data: data.map((e) => e.toDomain()).toList(),
+      //Override with value from materialInfo to display batch & exp correctly
+      //(for now BE return isMarketPlace as null)
+      data: data
+          .map((e) => e.toDomain().copyWith(isMarketPlace: isMarketPlace))
+          .toList(),
       dataTotalCount: dataTotalCount,
       dataTotalHidden: DataTotalHidden(dataTotalHidden),
       isFavourite: isFavourite,

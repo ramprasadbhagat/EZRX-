@@ -600,6 +600,8 @@ class WidgetKeys {
       isBonus
           ? Key('preOrderBonusMaterial$materialNumber')
           : Key('preOrderMaterial$materialNumber');
+  static Key preOrderBundle(String bundleCode) =>
+      Key('preOrderBundle$bundleCode');
 
   static const Key preOrderMaterialQty = Key('preOrderMaterialQty');
   static const Key bonusOfferItemAddKey = Key('bonusOfferItemAddKey');

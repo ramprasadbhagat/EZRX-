@@ -33,6 +33,7 @@ class ProductTag extends StatelessWidget {
   }) : super(key: key);
 
   factory ProductTag.bundleOffer({TextStyle? labelStyle}) => ProductTag._(
+        key: WidgetKeys.bundleTag,
         labelTag: 'Bundle offer',
         backgroundColor: ZPColors.skyBlueColor,
         assetIconSvg: SvgImage.bonusOffer,

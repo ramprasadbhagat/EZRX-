@@ -7,8 +7,8 @@ class InfoLabel extends StatelessWidget {
   final double radius;
   final String textValue;
   final TextStyle? textStyle;
-  final EdgeInsets margin;
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry padding;
   final Widget icon;
   const InfoLabel({
     Key? key,

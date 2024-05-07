@@ -1,19 +1,6 @@
-import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
-import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
-import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
-import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
@@ -24,96 +11,39 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
+import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
-import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-class AdditionalDetailsBlocMock
-    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
-    implements AdditionalDetailsBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState>
-    implements PaymentTermBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class PoAttachmentBlocMock
-    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
-    implements PoAttachmentBloc {}
-
-class OrderSummaryBlocMock
-    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
-    implements OrderSummaryBloc {}
-
-class ComboDealListBlocMock
-    extends MockBloc<ComboDealListEvent, ComboDealListState>
-    implements ComboDealListBloc {}
-
-class OrderDocumentTypeBlocMock
-    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
-    implements OrderDocumentTypeBloc {}
-
-class PriceOverrideBlocMock
-    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
-    implements PriceOverrideBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-void main() {
+void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
   late CartBloc cartBloc;
-  late SalesOrgBloc salesOrgBlocMock;
-  late AdditionalDetailsBloc additionalDetailsBlocMock;
-  late PaymentTermBloc paymentTermBlocMock;
   late AppRouter autoRouterMock;
   late EligibilityBloc eligibilityBloc;
-  late CustomerCodeBloc customerCodeBloc;
-  late OrderSummaryBloc orderSummaryBlocMock;
-  late PoAttachmentBloc poAttachmentBloc;
-  late PriceOverrideBloc priceOverrideBloc;
-  late ComboDealListBloc comboDealListBloc;
   late ProductImageBloc productImageBloc;
   late MaterialPriceBloc materialPriceBlocMock;
-  final userBlocMock = UserMockBloc();
-  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
+  final fakeCart =
+      (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
   final fakeCartProduct = <PriceAggregate>[
     PriceAggregate.empty().copyWith(
       materialInfo: MaterialInfo.empty().copyWith(
@@ -160,120 +90,37 @@ void main() {
 
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
-    locator.registerSingleton<MixpanelService>(MockMixpanelService());
-
+    locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
   });
   group('Pre Order Modal Test', () {
     setUp(() {
-      locator = GetIt.instance;
-      when(() => userBlocMock.state).thenReturn(
-        UserState.initial().copyWith(
-          user: fakeClientOrderTypeEnabled,
-        ),
-      );
       eligibilityBloc = EligibilityBlocMock();
-      salesOrgBlocMock = SalesOrgBlocMock();
       cartBloc = CartBlocMock();
-      paymentTermBlocMock = PaymentTermBlocMock();
-      additionalDetailsBlocMock = AdditionalDetailsBlocMock();
-      customerCodeBloc = CustomerCodeBlocMock();
       autoRouterMock = locator<AppRouter>();
-      orderSummaryBlocMock = OrderSummaryBlocMock();
-      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
-      poAttachmentBloc = PoAttachmentBlocMock();
-      priceOverrideBloc = PriceOverrideBlocMock();
-      comboDealListBloc = ComboDealListBlocMock();
       productImageBloc = ProductImageBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
-
-      when(() => orderDocumentTypeBlocMock.state).thenReturn(
-        OrderDocumentTypeState.initial(),
-      );
-      when(() => orderSummaryBlocMock.state).thenReturn(
-        OrderSummaryState.initial().copyWith(),
-      );
-      when(() => customerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial(),
-      );
-      when(() => poAttachmentBloc.state).thenReturn(
-        PoAttachmentState.initial(),
-      );
-      when(() => priceOverrideBloc.state).thenReturn(
-        PriceOverrideState.initial(),
-      );
-      when(() => comboDealListBloc.state).thenReturn(
-        ComboDealListState.initial(),
-      );
-      when(() => cartBloc.state).thenReturn(
-        CartState.initial().copyWith(isFetching: false),
-      );
-      when(() => paymentTermBlocMock.state)
-          .thenReturn(PaymentTermState.initial());
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-      when(() => additionalDetailsBlocMock.state)
-          .thenReturn(AdditionalDetailsState.initial());
+      when(() => cartBloc.state).thenReturn(CartState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
-      when(() => productImageBloc.state).thenReturn(
-        ProductImageState.initial(),
-      );
-      when(() => materialPriceBlocMock.state).thenReturn(
-        MaterialPriceState.initial(),
-      );
+      when(() => productImageBloc.state)
+          .thenReturn(ProductImageState.initial());
+      when(() => materialPriceBlocMock.state)
+          .thenReturn(MaterialPriceState.initial());
     });
     Widget getScopedWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          usingLocalization: true,
-          providers: [
-            BlocProvider<PaymentTermBloc>(
-              create: (context) => paymentTermBlocMock,
-            ),
-            BlocProvider<AdditionalDetailsBloc>(
-              create: (context) => additionalDetailsBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<PoAttachmentBloc>(
-              create: (context) => poAttachmentBloc,
-            ),
-            BlocProvider<PriceOverrideBloc>(
-              create: (context) => priceOverrideBloc,
-            ),
-            BlocProvider<OrderSummaryBloc>(
-              create: (context) => orderSummaryBlocMock,
-            ),
-            BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeBlocMock,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBloc,
-            ),
-            BlocProvider<ComboDealListBloc>(
-              create: (context) => comboDealListBloc,
-            ),
-            BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-            BlocProvider<CartBloc>(create: (context) => cartBloc),
-            BlocProvider<ProductImageBloc>(
-              create: (context) => productImageBloc,
-            ),
-            BlocProvider<MaterialPriceBloc>(
-              create: (context) => materialPriceBlocMock,
-            ),
-          ],
-          child: const Material(
-            child: PreOrderModal(),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
+          BlocProvider<CartBloc>(create: (context) => cartBloc),
+          BlocProvider<ProductImageBloc>(create: (context) => productImageBloc),
+          BlocProvider<MaterialPriceBloc>(
+            create: (context) => materialPriceBlocMock,
           ),
+        ],
+        child: const Material(
+          child: PreOrderModal(),
         ),
       );
     }
@@ -809,6 +656,200 @@ void main() {
         find.text('fake-material-description'),
         findsOneWidget,
       );
+    });
+
+    group('Bundle', () {
+      final bundle = fakeCart
+          .firstWhere((e) => e.materialInfo.type.typeBundle)
+          .copyWith(salesOrgConfig: fakeMYSalesOrgConfigs);
+
+      testWidgets('Display bundle', (tester) async {
+        final bundleMaterial = bundle.bundle.materials.first;
+        when(() => cartBloc.state)
+            .thenReturn(CartState.initial().copyWith(cartProducts: [bundle]));
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial()
+              .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final bundleTile =
+            find.byKey(WidgetKeys.preOrderBundle(bundle.bundle.bundleCode));
+        expect(bundleTile, findsOne);
+        expect(
+          find.descendant(
+            of: bundleTile,
+            matching: find.byKey(WidgetKeys.bundleTag),
+          ),
+          findsOne,
+        );
+        expect(
+          tester
+              .widget<Text>(
+                find.descendant(
+                  of: bundleTile,
+                  matching: find.byKey(WidgetKeys.cartItemBundleNumber),
+                ),
+              )
+              .data,
+          equals(bundle.bundle.bundleCode),
+        );
+        expect(
+          tester
+              .widget<Text>(
+                find.descendant(
+                  of: bundleTile,
+                  matching: find.byKey(WidgetKeys.cartItemBundleQty),
+                ),
+              )
+              .data,
+          equals('Total quantity: ${bundle.bundle.totalQty}'),
+        );
+        expect(
+          tester
+              .widget<RichText>(
+                find.descendant(
+                  of: bundleTile,
+                  matching: find.byKey(WidgetKeys.cartItemBundleName),
+                ),
+              )
+              .text
+              .toPlainText(),
+          contains(bundle.bundle.bundleName.name),
+        );
+        final materialTile = find.byKey(
+          WidgetKeys.cartItemProductTile(
+            bundleMaterial.materialNumber.displayMatNo,
+          ),
+        );
+        expect(
+          find.descendant(of: bundleTile, matching: materialTile),
+          findsOne,
+        );
+        expect(
+          tester
+              .widget<Text>(
+                find.descendant(
+                  of: materialTile,
+                  matching:
+                      find.byKey(WidgetKeys.cartItemProductMaterialNumber),
+                ),
+              )
+              .data,
+          equals(bundleMaterial.materialNumber.displayMatNo),
+        );
+        expect(
+          find.descendant(
+            of: materialTile,
+            matching: find.descendant(
+              of: find.byType(StatusLabel),
+              matching: find.text('OOS-Preorder'),
+            ),
+          ),
+          findsOne,
+        );
+        expect(
+          tester
+              .widget<Text>(
+                find.descendant(
+                  of: materialTile,
+                  matching:
+                      find.byKey(WidgetKeys.cartItemProductMaterialDescription),
+                ),
+              )
+              .data,
+          equals(bundleMaterial.materialDescription),
+        );
+        expect(
+          tester
+              .widget<Text>(
+                find.descendant(
+                  of: materialTile,
+                  matching: find.byKey(WidgetKeys.cartItemProductPrincipalName),
+                ),
+              )
+              .data,
+          equals(bundleMaterial.getManufactured),
+        );
+        expect(
+          find.descendant(
+            of: materialTile,
+            matching: find.byType(StockInfoWidget),
+          ),
+          findsOne,
+        );
+        expect(
+          tester
+              .widget<Text>(
+                find.descendant(
+                  of: materialTile,
+                  matching: find.byKey(WidgetKeys.cartItemProductQty),
+                ),
+              )
+              .data,
+          equals('Qty: ${bundleMaterial.quantity.intValue}'),
+        );
+      });
+
+      testWidgets(
+          'Display marketplace logo + Batch & expiry date as NA for MP bundle',
+          (tester) async {
+        final mpBundle = bundle.copyWith(
+          materialInfo: bundle.materialInfo.copyWith(isMarketPlace: true),
+          bundle: bundle.bundle.copyWith(
+            materials: bundle.bundle.materials
+                .map((e) => e.copyWith(isMarketPlace: true))
+                .toList(),
+          ),
+        );
+        final bundleMaterial = mpBundle.bundle.materials.first;
+        when(() => cartBloc.state)
+            .thenReturn(CartState.initial().copyWith(cartProducts: [mpBundle]));
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs:
+                fakeMYSalesOrgConfigs.copyWith(enableBatchNumber: true),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final bundleTile =
+            find.byKey(WidgetKeys.preOrderBundle(mpBundle.bundle.bundleCode));
+        expect(
+          find.descendant(
+            of: bundleTile,
+            matching: find.descendant(
+              of: find.byKey(WidgetKeys.cartItemBundleName),
+              matching: find.byType(MarketPlaceLogo),
+            ),
+          ),
+          findsOne,
+        );
+        final materialTile = find.byKey(
+          WidgetKeys.cartItemProductTile(
+            bundleMaterial.materialNumber.displayMatNo,
+          ),
+        );
+        expect(
+          find.descendant(of: bundleTile, matching: materialTile),
+          findsOne,
+        );
+        expect(
+          find.descendant(
+            of: materialTile,
+            matching: find.descendant(
+              of: find.byType(StockInfoWidget),
+              matching: find.textContaining(
+                'Batch: NA - EXP: NA',
+                findRichText: true,
+              ),
+            ),
+          ),
+          findsOne,
+        );
+      });
     });
   });
 }

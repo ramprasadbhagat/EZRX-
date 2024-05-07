@@ -96,12 +96,7 @@ class PriceComponent extends StatelessWidget {
     if (type == PriceStyle.credits) {
       textSpans.add(TextSpan(text: ')', style: singleCommaTextStyle));
     }
-    if (type == PriceStyle.bundlePrice ||
-        type == PriceStyle.bundleListPriceStrikeThrough ||
-        type == PriceStyle.bundleActiveOfferPrice ||
-        type == PriceStyle.materialListPriceStrikeThrough ||
-        type == PriceStyle.bundleFinalPrice ||
-        type == PriceStyle.bundleAddToCartPrice) {
+    if (trailingText.isNotEmpty) {
       textSpans
           .add(TextSpan(text: ' $trailingText', style: currencyCodeTextStyle));
     }
@@ -126,6 +121,7 @@ enum PriceStyle {
   commonPrice,
   bundlePrice,
   bundleAddToCartPrice,
+  bundleCartPrice,
   bundleActiveOfferPrice,
   bundleFinalPrice,
   bundleListPriceStrikeThrough,
@@ -171,6 +167,7 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.grandTotalPrice:
     case PriceStyle.bundlePrice:
     case PriceStyle.bonusPrice:
+    case PriceStyle.bundleCartPrice:
       return ZPColors.neutralsBlack;
     case PriceStyle.bundleAddToCartPrice:
       return ZPColors.skyBlueColor;
@@ -178,7 +175,6 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.comboOfferPriceDiscounted:
       return ZPColors.darkerGrey;
 
-    case PriceStyle.bundleListPriceStrikeThrough:
     case PriceStyle.counterOfferPrice:
     case PriceStyle.taxPrice:
     case PriceStyle.comboSubTotalItemWithTax:
@@ -189,6 +185,7 @@ Color _priceTextColor(PriceStyle type) {
 
     case PriceStyle.negativePrice:
       return ZPColors.priceNegative;
+    case PriceStyle.bundleListPriceStrikeThrough:
     case PriceStyle.oosPreOrderItemPrice:
       return ZPColors.neutralsGrey1;
     default:
@@ -223,6 +220,7 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.materialListPriceStrikeThrough:
       priceTextStyle = Theme.of(context).textTheme.bodySmall!;
       break;
+    case PriceStyle.bundleCartPrice:
     case PriceStyle.bonusPrice:
     case PriceStyle.summaryPrice:
     case PriceStyle.returnBonusPrice:
@@ -297,6 +295,10 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
             color: ZPColors.extraLightGrey4,
           );
     case PriceStyle.bundleListPriceStrikeThrough:
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
+            color: ZPColors.neutralsGrey1,
+            decoration: TextDecoration.lineThrough,
+          );
     case PriceStyle.materialListPriceStrikeThrough:
     case PriceStyle.counterOfferPrice:
       return Theme.of(context).textTheme.bodySmall!.copyWith(
@@ -374,6 +376,7 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
             color: ZPColors.primary,
           );
     case PriceStyle.returnBonusPrice:
+    case PriceStyle.bundleCartPrice:
     default:
       return Theme.of(context)
           .textTheme

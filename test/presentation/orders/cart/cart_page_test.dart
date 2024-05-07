@@ -33,10 +33,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 
 import 'package:mocktail/mocktail.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -52,7 +49,6 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_blo
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -66,12 +62,12 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
@@ -84,97 +80,11 @@ import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class CartRepositoryMock extends Mock implements CartRepository {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class MaterialListBlocMock
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class TenderContractBlocMock
-    extends MockBloc<TenderContractEvent, TenderContractState>
-    implements TenderContractBloc {}
-
-class OrderDocumentTypeBlocMock
-    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
-    implements OrderDocumentTypeBloc {}
-
-class DiscountOverrideRepositoryMock extends Mock
-    implements DiscountOverrideRepository {}
-
-class DiscountOverrideBlocMock
-    extends MockBloc<DiscountOverrideEvent, DiscountOverrideState>
-    implements DiscountOverrideBloc {}
-
-class OrderEligibilityBlocMock
-    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
-    implements OrderEligibilityBloc {}
-
-class PriceOverrideBlocMock
-    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
-    implements PriceOverrideBloc {}
-
-class OrderSummaryBlocMock
-    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
-    implements OrderSummaryBloc {}
-
-class ComboDealListBlocMock
-    extends MockBloc<ComboDealListEvent, ComboDealListState>
-    implements ComboDealListBloc {}
-
-class AdditionalDetailsBlocMock
-    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
-    implements AdditionalDetailsBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class MaterialPageXMock extends Mock implements MaterialPageX {}
-
-class PaymentCustomerInformationMockBloc extends MockBloc<
-        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
-    implements PaymentCustomerInformationBloc {}
-
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
   late EligibilityBloc eligibilityBloc;
   late PaymentCustomerInformationBloc paymentCustomerInformationBloc;
-  late UserBloc userBloc;
-  late SalesOrgBloc salesOrgBloc;
-  late CustomerCodeBloc customerCodeBloc;
   late ProductImageBloc productImageBloc;
   late List<PriceAggregate> mockCartItemWithDataList;
   late List<PriceAggregate> mockCartItemWithDataList2;
@@ -202,7 +112,7 @@ void main() {
   late List<PriceAggregate> mockCartBundleItems;
   late List<ComboMaterialItem> fakeComboMaterialItems;
   late AplSimulatorOrder aplSimulatorOrder;
-  late PaymentCustomerInformationMockBloc paymentCustomerInformationMock;
+  late PaymentCustomerInformationBloc paymentCustomerInformationMock;
   late List<PriceAggregate> mockCartItemWithAllType;
   final routeData = RouteData(
     route: const RouteMatch(
@@ -212,7 +122,7 @@ void main() {
       stringMatch: 'orders/cart',
       key: ValueKey('CartsPageRoute'),
     ),
-    router: MockAppRouter(),
+    router: AutoRouteMock(),
     pendingChildren: [],
   );
   late MixpanelService mixpanelService;
@@ -225,21 +135,17 @@ void main() {
       stringMatch: 'orders/cart/checkout',
       key: ValueKey('CheckoutPageRoute'),
     ),
-    router: MockAppRouter(),
+    router: AutoRouteMock(),
     pendingChildren: [],
   );
 
   setUpAll(() async {
-    mixpanelService = MockMixpanelService();
+    mixpanelService = MixpanelServiceMock();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton<MixpanelService>(() => mixpanelService);
-    locator.registerLazySingleton(() => DiscountOverrideRepositoryMock());
-    locator.registerFactory(
-      () => DiscountOverrideBloc(repository: DiscountOverrideRepositoryMock()),
-    );
     locator.registerFactory(() => AppRouter());
     locator.registerFactory<TenderContractBloc>(() => tenderContractBlocMock);
-    autoRouterMock = MockAppRouter();
+    autoRouterMock = AutoRouteMock();
     mockCartItemWithAllType =
         (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
@@ -258,10 +164,7 @@ void main() {
       comboDealListBlocMock = ComboDealListBlocMock();
       cartBloc = CartBlocMock();
       materialPriceBloc = MaterialPriceBlocMock();
-      salesOrgBloc = SalesOrgBlocMock();
-      customerCodeBloc = CustomerCodeBlocMock();
       eligibilityBloc = EligibilityBlocMock();
-      userBloc = UserBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       discountOverrideBlocMock = DiscountOverrideBlocMock();
@@ -270,10 +173,10 @@ void main() {
       orderSummaryBlocMock = OrderSummaryBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
-      autoRouterMock = MockAppRouter();
+      autoRouterMock = AutoRouteMock();
       productImageBloc = ProductImageBlocMock();
       customerLicenseBlocMock = CustomerLicenseBlocMock();
-      paymentCustomerInformationMock = PaymentCustomerInformationMockBloc();
+      paymentCustomerInformationMock = PaymentCustomerInformationBlocMock();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -309,7 +212,7 @@ void main() {
               ),
             ],
             bundleInformation: [],
-            bundleCode: '',
+            bundleCode: 'fake-bundle-code',
             bundleName: BundleName('test'),
           ),
           materialInfo: MaterialInfo.empty().copyWith(
@@ -557,7 +460,6 @@ void main() {
           salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
-      when(() => userBloc.state).thenReturn(UserState.initial());
       when(() => discountOverrideBlocMock.state)
           .thenReturn(DiscountOverrideState.initial());
       when(
@@ -566,24 +468,12 @@ void main() {
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial().copyWith(),
       );
-      when(() => salesOrgBloc.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          configs: fakeSGSalesOrgConfigs,
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2601'),
-          ),
-        ),
-      );
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerCodeSoldTo: '1234',
           ),
         ),
-      );
-      when(() => userBloc.state).thenReturn(
-        UserState.initial()
-            .copyWith(user: User.empty().copyWith(hasBonusOverride: false)),
       );
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
@@ -631,14 +521,9 @@ void main() {
           autoRouterMock: autoRouterMock,
           usingLocalization: true,
           providers: [
-            BlocProvider<UserBloc>(create: (context) => userBloc),
             BlocProvider<CartBloc>(create: (context) => cartBloc),
             BlocProvider<MaterialPriceBloc>(
               create: (context) => materialPriceBloc,
-            ),
-            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBloc,
             ),
             BlocProvider<ComboDealListBloc>(
               create: (context) => comboDealListBlocMock,
@@ -908,7 +793,7 @@ void main() {
         await tester.pump();
         expect(find.byKey(WidgetKeys.preOrderModel), findsOneWidget);
         expect(
-          find.byKey(const ValueKey('preOrderMaterialfake-material-1')),
+          find.byKey(WidgetKeys.preOrderBundle('fake-bundle-code')),
           findsOneWidget,
         );
       });
@@ -1031,13 +916,6 @@ void main() {
       testWidgets(
         'Do not Show tax details on material level when displayItemTaxBreakdown is disabled for vn',
         (tester) async {
-          when(() => salesOrgBloc.state).thenReturn(
-            SalesOrgState.initial().copyWith(
-              salesOrganisation: fakePHSalesOrganisation,
-              configs: fakePHSalesOrgConfigs,
-            ),
-          );
-
           when(() => cartBloc.state).thenReturn(
             CartState.initial().copyWith(
               cartProducts: <PriceAggregate>[
@@ -1100,10 +978,6 @@ void main() {
       testWidgets(
         'Show tax details on material level when displayItemTaxBreakdown is enabled for vn with material level tax',
         (tester) async {
-          final salesOrgState = SalesOrgState.initial().copyWith(
-            salesOrganisation: fakeVNSalesOrganisation,
-            configs: fakeVNSalesOrgConfigs,
-          );
           final cartState = CartState.initial().copyWith(
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
@@ -1123,9 +997,6 @@ void main() {
             ],
           );
 
-          when(() => salesOrgBloc.state).thenReturn(
-            salesOrgState,
-          );
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeVNSalesOrgConfigs,
@@ -2600,11 +2471,6 @@ void main() {
               salesOrgConfigs: fakeIDSalesOrgConfigs,
             ),
           );
-          when(() => salesOrgBloc.state).thenReturn(
-            SalesOrgState.initial().copyWith(
-              configs: fakeIDSalesOrgConfigs,
-            ),
-          );
           await tester.pumpWidget(getWidget());
 
           await tester.pump();
@@ -2649,11 +2515,6 @@ void main() {
           when(() => eligibilityBloc.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeIDSalesOrgConfigs,
-            ),
-          );
-          when(() => salesOrgBloc.state).thenReturn(
-            SalesOrgState.initial().copyWith(
-              configs: fakeIDSalesOrgConfigs,
             ),
           );
           await tester.pumpWidget(getWidget());

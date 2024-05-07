@@ -501,8 +501,8 @@ class CartRobot {
         matching: find.byWidgetPredicate(
           (widget) =>
               widget.key == WidgetKeys.cartItemBundleName &&
-              widget is Text &&
-              widget.data == text,
+              widget is RichText &&
+              widget.text.toPlainText().contains(text),
         ),
       ),
       findsOneWidget,

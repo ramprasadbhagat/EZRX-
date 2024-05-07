@@ -16,14 +16,11 @@ class _ManufacturerName extends StatelessWidget {
             padding: EdgeInsets.only(right: 8.0),
             child: MarketPlaceLogo(),
           ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12.0),
-          child: Text(
-            cartProduct.principalData.principalName.getValue(),
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: ZPColors.neutralsBlack,
-                ),
-          ),
+        Text(
+          cartProduct.getManufactured,
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
         ),
       ],
     );
