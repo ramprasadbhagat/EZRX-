@@ -6,14 +6,13 @@ class _AllMaterialItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: cartItem.bundle.materials
-          .map(
-            (e) => _MaterialDetailsSection(
-              cartItem: e,
-            ),
-          )
-          .toList(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        children: cartItem.bundle.materials
+            .map((e) => _MaterialDetailsSection(cartItem: e))
+            .toList(),
+      ),
     );
   }
 }
@@ -28,20 +27,14 @@ class _MaterialDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: WidgetKeys.cartItemProductTile(
-        cartItem.materialNumber.displayMatNo,
-      ),
-      padding: const EdgeInsets.all(8.0),
+      key: WidgetKeys.cartItemProductTile(cartItem.materialNumber.displayMatNo),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _MaterialImageSection(cartProduct: cartItem),
-          const SizedBox(
-            width: 8,
-          ),
-          _MaterialDetails(
-            cartItem: cartItem,
-          ),
+          const SizedBox(width: 8),
+          _MaterialDetails(cartItem: cartItem),
         ],
       ),
     );
@@ -55,23 +48,19 @@ class _MaterialImageSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        BlocBuilder<CartBloc, CartState>(
-          builder: (context, state) {
-            return CustomCard(
-              showShadow: false,
-              showBorder: true,
-              child: CustomImage(
-                imageUrl: state.additionInfo[cartProduct.materialNumber]
-                        ?.productImages.first.thumbNail ??
-                    '',
-                fit: BoxFit.fill,
-              ),
-            );
-          },
-        ),
-      ],
+    return BlocBuilder<CartBloc, CartState>(
+      builder: (context, state) {
+        return CustomCard(
+          showShadow: false,
+          showBorder: true,
+          child: CustomImage(
+            imageUrl: state.additionInfo[cartProduct.materialNumber]
+                    ?.productImages.first.thumbNail ??
+                '',
+            fit: BoxFit.fill,
+          ),
+        );
+      },
     );
   }
 }

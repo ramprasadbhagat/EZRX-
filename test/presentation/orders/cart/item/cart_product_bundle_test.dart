@@ -26,9 +26,8 @@ void main() async {
   late EligibilityBloc eligibilityBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late OrderEligibilityBloc orderEligibilityBlocMock;
-  final bundle = (await CartLocalDataSource().getAddedToCartProductList())
-      .cartProducts
-      .firstWhere((e) => e.materialInfo.type.typeBundle);
+  final fakeCart =
+      (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
 
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
@@ -73,6 +72,9 @@ void main() async {
   }
 
   testWidgets('Check stock detail display', (tester) async {
+    final bundle = fakeCart.firstWhere(
+      (e) => e.materialInfo.type.typeBundle && !e.materialInfo.isMarketPlace,
+    );
     when(() => eligibilityBlocMock.state).thenReturn(
       EligibilityState.initial().copyWith(
         salesOrgConfigs: fakeMYSalesOrgConfigs,
@@ -95,13 +97,8 @@ void main() async {
 
   testWidgets('Show MP logo + Batch & Expiry as NA for marketplace bundle',
       (tester) async {
-    final mpBundle = bundle.copyWith(
-      materialInfo: bundle.materialInfo.copyWith(isMarketPlace: true),
-      bundle: bundle.bundle.copyWith(
-        materials: bundle.bundle.materials
-            .map((e) => e.copyWith(isMarketPlace: true))
-            .toList(),
-      ),
+    final mpBundle = fakeCart.firstWhere(
+      (e) => e.materialInfo.type.typeBundle && e.materialInfo.isMarketPlace,
     );
     when(() => eligibilityBlocMock.state).thenReturn(
       EligibilityState.initial().copyWith(

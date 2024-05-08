@@ -649,11 +649,14 @@ void main() async {
     });
 
     group('Bundle', () {
-      final bundle = fakeCart
-          .firstWhere((e) => e.materialInfo.type.typeBundle)
-          .copyWith(salesOrgConfig: fakeMYSalesOrgConfigs);
-
       testWidgets('Display bundle', (tester) async {
+        final bundle = fakeCart
+            .firstWhere(
+              (e) =>
+                  e.materialInfo.type.typeBundle &&
+                  !e.materialInfo.isMarketPlace,
+            )
+            .copyWith(salesOrgConfig: fakeMYSalesOrgConfigs);
         final bundleMaterial = bundle.bundle.materials.first;
         when(() => cartBloc.state)
             .thenReturn(CartState.initial().copyWith(cartProducts: [bundle]));
@@ -785,14 +788,13 @@ void main() async {
       testWidgets(
           'Display marketplace logo + Batch & expiry date as NA for MP bundle',
           (tester) async {
-        final mpBundle = bundle.copyWith(
-          materialInfo: bundle.materialInfo.copyWith(isMarketPlace: true),
-          bundle: bundle.bundle.copyWith(
-            materials: bundle.bundle.materials
-                .map((e) => e.copyWith(isMarketPlace: true))
-                .toList(),
-          ),
-        );
+        final mpBundle = fakeCart
+            .firstWhere(
+              (e) =>
+                  e.materialInfo.type.typeBundle &&
+                  e.materialInfo.isMarketPlace,
+            )
+            .copyWith(salesOrgConfig: fakeMYSalesOrgConfigs);
         final bundleMaterial = mpBundle.bundle.materials.first;
         when(() => cartBloc.state)
             .thenReturn(CartState.initial().copyWith(cartProducts: [mpBundle]));

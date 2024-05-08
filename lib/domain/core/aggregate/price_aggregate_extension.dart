@@ -254,6 +254,16 @@ extension PriceAggregateExtension on List<PriceAggregate> {
   bool get isGimmickMaterialOnlyInCart =>
       isNotEmpty && every((element) => element.isGimmickMaterial);
 
-  List<String> get manufacturers =>
-      map((e) => e.materialInfo.getManufactured).toSet().toList();
+  List<String> get manufacturers => expand<String>((e) {
+        if (e.materialInfo.type.typeBundle) {
+          return e.bundle.materials.map((e) => e.getManufactured).toList();
+        }
+
+        if (e.materialInfo.type.typeCombo) {
+          return e.comboMaterials
+              .map((e) => e.principalData.principalName.name);
+        }
+
+        return [e.materialInfo.getManufactured];
+      }).toSet().toList();
 }

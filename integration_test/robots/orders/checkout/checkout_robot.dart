@@ -387,8 +387,8 @@ class CheckoutRobot {
       matching: find.byKey(WidgetKeys.cartItemBundleName),
     );
     expect(
-      tester.widget<Text>(label).data,
-      equals(bundleName),
+      tester.widget<RichText>(label).text.toPlainText(),
+      contains(bundleName),
     );
   }
 

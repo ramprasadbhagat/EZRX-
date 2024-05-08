@@ -48,6 +48,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -56,6 +57,7 @@ import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart'
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bundle_item/checkout_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
+import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -3002,6 +3004,68 @@ void main() {
         const Offset(0.0, -500.0),
       );
       await tester.pumpAndSettle();
+    });
+
+    testWidgets(
+        'Display marketplace icon and batch & expiry date as NA for MP bundle',
+        (tester) async {
+      final mpBundle = mockCartItems.firstWhere(
+        (e) => e.materialInfo.type.typeBundle && e.materialInfo.isMarketPlace,
+      );
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs:
+              fakeMYSalesOrgConfigs.copyWith(enableBatchNumber: true),
+        ),
+      );
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          cartProducts: [mpBundle],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final scrollList = find.byKey(WidgetKeys.checkoutScrollList);
+      final bundleTile =
+          find.byKey(WidgetKeys.cartItemBundleTile(mpBundle.bundle.bundleCode));
+      await tester.dragUntilVisible(
+        bundleTile,
+        scrollList,
+        const Offset(0, -300),
+      );
+      await tester.pump();
+      expect(
+        find.descendant(
+          of: bundleTile,
+          matching: find.descendant(
+            of: find.byKey(WidgetKeys.cartItemBundleName),
+            matching: find.byType(MarketPlaceLogo),
+          ),
+        ),
+        findsOne,
+      );
+      final materialTile = find.byKey(
+        WidgetKeys.cartItemProductTile(
+          mpBundle.bundle.materials.first.materialNumber.displayMatNo,
+        ),
+      );
+      expect(find.descendant(of: bundleTile, matching: materialTile), findsOne);
+      final stockWidget = find.descendant(
+        of: materialTile,
+        matching: find.byType(StockInfoWidget),
+      );
+      expect(
+        find.descendant(
+          of: stockWidget,
+          matching: find.textContaining(
+            'Batch: NA - Expires: NA',
+            findRichText: true,
+          ),
+        ),
+        findsOne,
+      );
     });
   });
 }

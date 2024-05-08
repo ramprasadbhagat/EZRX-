@@ -18,7 +18,7 @@ class _CheckoutProductBonusItem extends StatelessWidget {
         bonusItem.materialNumber.displayMatNo,
       ),
       showBorder: true,
-      margin: const EdgeInsets.all(15),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
       child: Column(
         children: [
           _ProductDetailsSection(

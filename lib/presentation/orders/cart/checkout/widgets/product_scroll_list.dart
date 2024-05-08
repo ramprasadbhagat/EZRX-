@@ -33,8 +33,8 @@ class _ProductScrollList extends StatelessWidget {
                 ),
               if (item.materialInfo.type.typeCombo)
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20)
-                      .copyWith(bottom: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
                   child: CartProductCombo(cartItem: item),
                 ),
             ],
@@ -136,7 +136,7 @@ class _DividerAndMarketPlaceTitle extends StatelessWidget {
             child: _Divider(),
           ),
         const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
           child: MarketPlaceTitleWithLogo(showToolTip: true),
         ),
       ],

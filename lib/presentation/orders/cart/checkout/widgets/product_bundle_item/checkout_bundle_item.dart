@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -7,8 +6,9 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
-import 'package:ezrxmobile/presentation/core/icon_label.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
@@ -28,26 +28,22 @@ class CheckoutBundleItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          IconLabel(
-            icon: Icons.local_offer_outlined,
-            labelText: context.tr('Bundle offer'),
-            iconSize: 24,
-            labelStyle: Theme.of(context)
-                .textTheme
-                .labelSmall
-                ?.copyWith(fontSize: 12, color: ZPColors.white),
+          ProductTag.bundleOffer(),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _BundleDetailsSection(cartItem: cartItem),
+                _AllMaterialItem(cartItem: cartItem),
+                _TotalQtySection(cartProduct: cartItem),
+              ],
+            ),
           ),
-          _BundleDetailsSection(
-            cartItem: cartItem,
-          ),
-          _AllMaterialItem(
-            cartItem: cartItem,
-          ),
-          _TotalQtySection(cartProduct: cartItem),
         ],
       ),
     );

@@ -15,26 +15,22 @@ class _TotalQtySection extends StatelessWidget {
         .findItemById(MaterialNumber(cartProduct.bundle.bundleCode))
         .bundle;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            '${context.tr('Total qty')}: ${currentBundle.totalQty.toString()}',
-            key: WidgetKeys.cartItemBundleQty,
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.neutralsBlack,
-                ),
-          ),
-          PriceComponent(
-            key: WidgetKeys.cartItemBundleTotalPrice,
-            salesOrgConfig:
-                context.read<EligibilityBloc>().state.salesOrgConfigs,
-            price: currentBundle.totalPrice.toString(),
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          '${context.tr('Total qty')}: ${currentBundle.totalQty.toString()}',
+          key: WidgetKeys.cartItemBundleQty,
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        PriceComponent(
+          key: WidgetKeys.cartItemBundleTotalPrice,
+          salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
+          price: currentBundle.totalPrice.toString(),
+        ),
+      ],
     );
   }
 }

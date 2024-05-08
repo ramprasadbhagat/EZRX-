@@ -14,61 +14,72 @@ class _BundleDetailsSection extends StatelessWidget {
         .bundle
         .currentBundleInfo;
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            cartItem.bundle.bundleCode,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: ZPColors.neutralsBlack,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          cartItem.bundle.bundleCode,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        const SizedBox(height: 4),
+        RichText(
+          key: WidgetKeys.cartItemBundleName,
+          text: TextSpan(
+            children: [
+              if (cartItem.materialInfo.isMarketPlace) ...[
+                WidgetSpan(
+                  child: MarketPlaceLogo.medium(),
+                  alignment: PlaceholderAlignment.middle,
                 ),
-          ),
-          Text(
-            cartItem.bundle.bundleName.getOrDefaultValue(''),
-            key: WidgetKeys.cartItemBundleName,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: ZPColors.neutralsBlack,
-                ),
-          ),
-          RichText(
-            text: TextSpan(
-              text:
-                  '${currentBundleOffer.type.getOrDefaultValue('')} ${currentBundleOffer.rate}  ${context.tr('per item')} ',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                    decoration: TextDecoration.none,
-                  ),
-              children: <TextSpan>[
-                if (cartItem.bundle.showStrikeThroughPrice)
-                  TextSpan(
-                    text:
-                        '${currentBundleOffer.type.getOrDefaultValue('')} ${cartItem.bundle.bundleInformation.firstOrNull?.rate} ${context.tr('per item')}',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: ZPColors.darkGray,
-                          decoration: TextDecoration.lineThrough,
-                        ),
-                  ),
+                const WidgetSpan(child: SizedBox(width: 8)),
               ],
-            ),
+              TextSpan(
+                text: cartItem.bundle.bundleName.name,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
+              ),
+            ],
           ),
-          Text(
-            '${context.tr('Purchase')} ${currentBundleOffer.quantity} ${context.tr('or more for')} ${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate} ${context.tr('per item')}',
-            key: WidgetKeys.cartItemBundleRate,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: ZPColors.darkGray,
-                  fontStyle: FontStyle.italic,
+        ),
+        const SizedBox(height: 4),
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            if (cartItem.bundle.showStrikeThroughPrice)
+              Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: PriceComponent(
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: cartItem.bundle.minimumQuantityBundleMaterial.rate
+                      .toString(),
+                  trailingText: context.tr('per item'),
+                  type: PriceStyle.bundleListPriceStrikeThrough,
                 ),
-          ),
-        ],
-      ),
+              ),
+            PriceComponent(
+              salesOrgConfig:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
+              price: currentBundleOffer.rate.toString(),
+              type: PriceStyle.bundleCartPrice,
+              trailingText: context.tr('per item'),
+              key: WidgetKeys.addBundleRate,
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(
+          '${context.tr('Purchase')} ${currentBundleOffer.quantity} ${context.tr('or more for')} ${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate} ${context.tr('per item')}',
+          key: WidgetKeys.cartItemBundleRate,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: ZPColors.neutralsGrey1,
+                fontStyle: FontStyle.italic,
+              ),
+        ),
+      ],
     );
   }
 }

@@ -41,7 +41,7 @@ class CartProductCombo extends StatelessWidget {
       ComboDealScheme.k1;
 
   PriceComboDeal get _priceComboDeal =>
-      cartItem.comboMaterials.first.comboDeals;
+      cartItem.comboMaterials.firstOrNull?.comboDeals ?? PriceComboDeal.empty();
 
   @override
   Widget build(BuildContext context) {
