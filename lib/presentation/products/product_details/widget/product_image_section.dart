@@ -16,9 +16,10 @@ class _ProductImageSection extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.productImageMap != current.productImageMap,
           builder: (context, productImageState) {
+            final materialInfo =
+                productDetailState.productDetailAggregate.materialInfo;
             final productImage = productImageState.getMaterialImage(
-              productDetailState
-                  .productDetailAggregate.materialInfo.materialNumber,
+              materialInfo.materialNumber,
             );
 
             return Column(
@@ -43,8 +44,7 @@ class _ProductImageSection extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if (productDetailState.productDetailAggregate
-                              .materialInfo.isMarketPlace)
+                          if (materialInfo.isMarketPlace)
                             const MarketPlaceRectangleLogo(),
                           const Spacer(),
                           if (productImage.image.isNotEmpty)
@@ -64,12 +64,10 @@ class _ProductImageSection extends StatelessWidget {
                       left: 0,
                       child: Column(
                         children: [
-                          if (productDetailState.productDetailAggregate
-                              .materialInfo.hasValidTenderContract)
+                          if (materialInfo.hasValidTenderContract)
                             const TenderTag(),
                           CovidLabel(
-                            materialInfo: productDetailState
-                                .productDetailAggregate.materialInfo,
+                            materialInfo: materialInfo,
                             padding: const EdgeInsets.symmetric(
                               horizontal: 16,
                               vertical: 8,

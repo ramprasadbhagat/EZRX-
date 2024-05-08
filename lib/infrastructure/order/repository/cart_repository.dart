@@ -373,6 +373,7 @@ class CartRepository implements ICartRepository {
     required String itemId,
     required int quantity,
     required RequestCounterOfferDetails counterOfferDetails,
+    required String tenderContractNumber,
   }) async {
     if (quantity > config.maximumCartQuantity) {
       return Left(
@@ -401,6 +402,7 @@ class CartRepository implements ICartRepository {
         itemId: itemId,
         quantity: quantity,
         counterOfferDetails: counterOfferDetails,
+        tenderContractNumber: tenderContractNumber,
       );
 
       final productList = await cartRemoteDataSource.upsertCart(
@@ -470,6 +472,8 @@ class CartRepository implements ICartRepository {
           itemId: productData.sampleBonusItemId,
           quantity: productData.quantity.intValue,
           counterOfferDetails: productData.counterOfferDetails,
+          tenderContractNumber:
+              product.tenderContract.contractNumber.getOrDefaultValue(''),
         );
 
         if (upserCartResult.isLeft()) return upserCartResult;
@@ -547,6 +551,7 @@ class CartRepository implements ICartRepository {
             itemId: itemId,
             quantity: materialInfo.quantity.intValue,
             counterOfferDetails: counterOfferDetails,
+            tenderContractNumber: '',
           );
 
           return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
@@ -650,6 +655,7 @@ class CartRepository implements ICartRepository {
             itemId: materialInfo.sampleBonusItemId,
             quantity: materialInfo.quantity.intValue,
             counterOfferDetails: materialInfo.counterOfferDetails,
+            tenderContractNumber: '',
           );
 
           return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
@@ -821,6 +827,7 @@ class CartRepository implements ICartRepository {
             itemId: materialInfo.sampleBonusItemId,
             quantity: materialInfo.quantity.intValue,
             counterOfferDetails: materialInfo.counterOfferDetails,
+            tenderContractNumber: '',
           );
 
           return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();

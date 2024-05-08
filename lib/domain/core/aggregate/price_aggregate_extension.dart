@@ -266,4 +266,38 @@ extension PriceAggregateExtension on List<PriceAggregate> {
 
         return [e.materialInfo.getManufactured];
       }).toSet().toList();
+
+  bool get hasTenderContract => any(
+        (element) =>
+            !element.tenderContract.tenderOrderReason.isEmpty &&
+            element.tenderContract.contractNumber.isValid(),
+      );
+  bool get hasTenderContractWithReason730 => any(
+        (element) =>
+            (element.materialInfo.hasValidTenderContract &&
+                element.tenderContract.contractNumber.isValid()) &&
+            element.tenderContract.tenderOrderReason.is730,
+      );
+
+  bool get hasNonMandatoryTenderContract => any(
+        (element) =>
+            element.tenderContract.contractNumber.isValid() &&
+            !element.materialInfo.hasMandatoryTenderContract,
+      );
+
+  bool get hasMandatoryTenderContract => any(
+        (element) =>
+            element.tenderContract.contractNumber.isValid() &&
+            element.materialInfo.hasMandatoryTenderContract,
+      );
+
+  bool get hasNonTenderContractMaterials => any(
+        (element) =>
+            !element.tenderContract.contractNumber.isValid() ||
+            element.tenderContract.tenderOrderReason.isEmpty,
+      );
+
+  List<String> get tenderReasons => map(
+        (e) => e.tenderContract.tenderOrderReason.displayTenderContractReason,
+      ).toSet().toList();
 }

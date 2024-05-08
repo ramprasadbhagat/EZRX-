@@ -32,8 +32,8 @@
           "taxes": [],
           "isSampleMaterial": false,
           "hidePrice": false,
-          "hasValidTenderContract": null,
-          "hasMandatoryTenderContract": null,
+          "hasValidTenderContract": true,
+          "hasMandatoryTenderContract": false,
           "isFOCMaterial": null,
           "isFavourite": null,
           "productCount": 19,
@@ -50,6 +50,8 @@
           "warehouseStorageCondition": "AC",
           "IsGimmick": false,
           "is26SeriesMaterial":null,
+          "tenderOrderReason": "715",
+          "TenderContractNumber": "0040026800",
           "BonusMaterials": [
             {
               "principalCode": "0000101334",
@@ -119,7 +121,9 @@
           "warehouseStorageCondition": "AC",
           "IsGimmick": false,
           "is26SeriesMaterial":false,
-          "BonusMaterials": null
+          "BonusMaterials": null,
+          "tenderOrderReason": "715",
+          "TenderContractNumber": "0040026800"
         },
         {
           "ProductID": "000000000021041796",
@@ -514,9 +518,9 @@
               ],
               "isSampleMaterial": false,
               "hidePrice": false,
-              "hasValidTenderContract": null,
-              "hasMandatoryTenderContract": null,
-              "tenderOrderReason": null,
+              "hasValidTenderContract": false,
+              "hasMandatoryTenderContract": true,
+              "tenderOrderReason": "730",
               "isFOCMaterial": false,
               "isFavourite": null,
               "productCount": 88,

@@ -28,4 +28,10 @@ class TenderContractDetailState with _$TenderContractDetailState {
   bool get isExceedQty =>
       currentTenderContract.remainingTenderQuantity < inputQty &&
       currentTenderContract.isNotEmpty;
+
+  bool get isNonContractAvailable =>
+      tenderContractEnable && currentTenderContract.isEmpty;
+
+  bool get isInsufficientQuantity =>
+      tenderContractEnable && isNonContractAvailable;
 }

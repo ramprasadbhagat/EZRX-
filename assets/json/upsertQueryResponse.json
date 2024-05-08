@@ -48,7 +48,9 @@
                     "principalCutoffStatus": false,
                     "warehouseStorageCondition": "AC",
                     "BonusMaterials": null,
-                    "is26SeriesMaterial":false
+                    "is26SeriesMaterial":false,
+                    "TenderContractNumber": "0040026800",
+                    "tenderOrderReason": "715"
                 },
                 {
                     "Type": "material",
@@ -100,7 +102,9 @@
                     "DiscountOverridePercentage": null,
                     "Comment": null,
                     "BonusMaterials": null,
-                    "is26SeriesMaterial":false
+                    "is26SeriesMaterial":false,
+                    "TenderContractNumber": "0040026800",
+                    "tenderOrderReason": "715"
                 },
                 {
                     "BundleDetails": null,
@@ -111,7 +115,6 @@
                     "CounterOfferCurrency": null,
                     "DiscountOverridePercentage": null,
                     "isVaccine": false,
-                    "TenderContractNumber": null,
                     "Comment": null,
                     "ProductID": "000000000023072563",
                     "ParentID": "",
@@ -160,7 +163,9 @@
                     "warehouseStorageCondition": "AC",
                     "IsGimmick": false,
                     "BonusMaterials": null,
-                    "is26SeriesMaterial":true
+                    "is26SeriesMaterial":true,
+                    "TenderContractNumber": "0040026800",
+                    "tenderOrderReason": "715"
                 }
             ],
             "MarketplaceItems": [],

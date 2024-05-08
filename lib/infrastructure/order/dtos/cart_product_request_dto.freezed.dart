@@ -12,7 +12,7 @@ part of 'cart_product_request_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CartProductRequestDto _$CartProductRequestDtoFromJson(
     Map<String, dynamic> json) {
@@ -49,6 +49,8 @@ mixin _$CartProductRequestDto {
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'ItemId', defaultValue: '')
   String get itemId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  String get tenderContractNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -79,7 +81,9 @@ abstract class $CartProductRequestDtoCopyWith<$Res> {
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       String counterOfferCurrency,
       @JsonKey(name: 'Type', defaultValue: '') String type,
-      @JsonKey(name: 'ItemId', defaultValue: '') String itemId});
+      @JsonKey(name: 'ItemId', defaultValue: '') String itemId,
+      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      String tenderContractNumber});
 }
 
 /// @nodoc
@@ -110,6 +114,7 @@ class _$CartProductRequestDtoCopyWithImpl<$Res,
     Object? counterOfferCurrency = null,
     Object? type = null,
     Object? itemId = null,
+    Object? tenderContractNumber = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -168,16 +173,21 @@ class _$CartProductRequestDtoCopyWithImpl<$Res,
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
               as String,
+      tenderContractNumber: null == tenderContractNumber
+          ? _value.tenderContractNumber
+          : tenderContractNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_CartProductRequestDtoCopyWith<$Res>
+abstract class _$$CartProductRequestDtoImplCopyWith<$Res>
     implements $CartProductRequestDtoCopyWith<$Res> {
-  factory _$$_CartProductRequestDtoCopyWith(_$_CartProductRequestDto value,
-          $Res Function(_$_CartProductRequestDto) then) =
-      __$$_CartProductRequestDtoCopyWithImpl<$Res>;
+  factory _$$CartProductRequestDtoImplCopyWith(
+          _$CartProductRequestDtoImpl value,
+          $Res Function(_$CartProductRequestDtoImpl) then) =
+      __$$CartProductRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -197,15 +207,18 @@ abstract class _$$_CartProductRequestDtoCopyWith<$Res>
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       String counterOfferCurrency,
       @JsonKey(name: 'Type', defaultValue: '') String type,
-      @JsonKey(name: 'ItemId', defaultValue: '') String itemId});
+      @JsonKey(name: 'ItemId', defaultValue: '') String itemId,
+      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      String tenderContractNumber});
 }
 
 /// @nodoc
-class __$$_CartProductRequestDtoCopyWithImpl<$Res>
-    extends _$CartProductRequestDtoCopyWithImpl<$Res, _$_CartProductRequestDto>
-    implements _$$_CartProductRequestDtoCopyWith<$Res> {
-  __$$_CartProductRequestDtoCopyWithImpl(_$_CartProductRequestDto _value,
-      $Res Function(_$_CartProductRequestDto) _then)
+class __$$CartProductRequestDtoImplCopyWithImpl<$Res>
+    extends _$CartProductRequestDtoCopyWithImpl<$Res,
+        _$CartProductRequestDtoImpl>
+    implements _$$CartProductRequestDtoImplCopyWith<$Res> {
+  __$$CartProductRequestDtoImplCopyWithImpl(_$CartProductRequestDtoImpl _value,
+      $Res Function(_$CartProductRequestDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -225,8 +238,9 @@ class __$$_CartProductRequestDtoCopyWithImpl<$Res>
     Object? counterOfferCurrency = null,
     Object? type = null,
     Object? itemId = null,
+    Object? tenderContractNumber = null,
   }) {
-    return _then(_$_CartProductRequestDto(
+    return _then(_$CartProductRequestDtoImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -283,14 +297,18 @@ class __$$_CartProductRequestDtoCopyWithImpl<$Res>
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
               as String,
+      tenderContractNumber: null == tenderContractNumber
+          ? _value.tenderContractNumber
+          : tenderContractNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_CartProductRequestDto extends _CartProductRequestDto {
-  const _$_CartProductRequestDto(
+class _$CartProductRequestDtoImpl extends _CartProductRequestDto {
+  const _$CartProductRequestDtoImpl(
       {@JsonKey(name: 'SalesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'CustomerCode', defaultValue: '')
       required this.customerCode,
@@ -309,11 +327,13 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       required this.counterOfferCurrency,
       @JsonKey(name: 'Type', defaultValue: '') required this.type,
-      @JsonKey(name: 'ItemId', defaultValue: '') required this.itemId})
+      @JsonKey(name: 'ItemId', defaultValue: '') required this.itemId,
+      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      required this.tenderContractNumber})
       : super._();
 
-  factory _$_CartProductRequestDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CartProductRequestDtoFromJson(json);
+  factory _$CartProductRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CartProductRequestDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'SalesOrg', defaultValue: '')
@@ -357,17 +377,20 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
   @override
   @JsonKey(name: 'ItemId', defaultValue: '')
   final String itemId;
+  @override
+  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  final String tenderContractNumber;
 
   @override
   String toString() {
-    return 'CartProductRequestDto(salesOrg: $salesOrg, customerCode: $customerCode, shipTo: $shipTo, productNumber: $productNumber, quantity: $quantity, itemSource: $itemSource, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type, itemId: $itemId)';
+    return 'CartProductRequestDto(salesOrg: $salesOrg, customerCode: $customerCode, shipTo: $shipTo, productNumber: $productNumber, quantity: $quantity, itemSource: $itemSource, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type, itemId: $itemId, tenderContractNumber: $tenderContractNumber)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CartProductRequestDto &&
+            other is _$CartProductRequestDtoImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.customerCode, customerCode) ||
@@ -391,7 +414,9 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
                 other.counterOfferCurrency == counterOfferCurrency) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.itemId, itemId) || other.itemId == itemId));
+            (identical(other.itemId, itemId) || other.itemId == itemId) &&
+            (identical(other.tenderContractNumber, tenderContractNumber) ||
+                other.tenderContractNumber == tenderContractNumber));
   }
 
   @JsonKey(ignore: true)
@@ -411,18 +436,19 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
       comment,
       counterOfferCurrency,
       type,
-      itemId);
+      itemId,
+      tenderContractNumber);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CartProductRequestDtoCopyWith<_$_CartProductRequestDto> get copyWith =>
-      __$$_CartProductRequestDtoCopyWithImpl<_$_CartProductRequestDto>(
-          this, _$identity);
+  _$$CartProductRequestDtoImplCopyWith<_$CartProductRequestDtoImpl>
+      get copyWith => __$$CartProductRequestDtoImplCopyWithImpl<
+          _$CartProductRequestDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CartProductRequestDtoToJson(
+    return _$$CartProductRequestDtoImplToJson(
       this,
     );
   }
@@ -452,12 +478,14 @@ abstract class _CartProductRequestDto extends CartProductRequestDto {
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       required final String counterOfferCurrency,
       @JsonKey(name: 'Type', defaultValue: '') required final String type,
-      @JsonKey(name: 'ItemId', defaultValue: '')
-      required final String itemId}) = _$_CartProductRequestDto;
+      @JsonKey(name: 'ItemId', defaultValue: '') required final String itemId,
+      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      required final String
+          tenderContractNumber}) = _$CartProductRequestDtoImpl;
   const _CartProductRequestDto._() : super._();
 
   factory _CartProductRequestDto.fromJson(Map<String, dynamic> json) =
-      _$_CartProductRequestDto.fromJson;
+      _$CartProductRequestDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'SalesOrg', defaultValue: '')
@@ -502,7 +530,10 @@ abstract class _CartProductRequestDto extends CartProductRequestDto {
   @JsonKey(name: 'ItemId', defaultValue: '')
   String get itemId;
   @override
+  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  String get tenderContractNumber;
+  @override
   @JsonKey(ignore: true)
-  _$$_CartProductRequestDtoCopyWith<_$_CartProductRequestDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CartProductRequestDtoImplCopyWith<_$CartProductRequestDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

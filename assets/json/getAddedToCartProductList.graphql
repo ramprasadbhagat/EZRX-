@@ -48,6 +48,8 @@ query Cart($language: String) {
       principalCutoffStatus
       warehouseStorageCondition
       IsGimmick
+      tenderOrderReason
+      TenderContractNumber
       BonusMaterials {
         principalCode
         principalName

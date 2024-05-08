@@ -58,6 +58,7 @@ abstract class ICartRepository {
     required int quantity,
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
+    required String tenderContractNumber,
   });
 
   Future<Either<ApiFailure, List<PriceAggregate>>> addHistoryItemsToCart({

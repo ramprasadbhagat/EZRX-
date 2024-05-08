@@ -85,6 +85,7 @@ class PriceAggregate with _$PriceAggregate {
         bonusSampleItems: bonusSampleItems,
         is26SeriesMaterial: is26SeriesMaterial,
         isGimmickMaterial: isGimmickMaterial,
+        tenderContract: tenderContract,
       );
     }
     if (materialInfo.type.typeCombo) {

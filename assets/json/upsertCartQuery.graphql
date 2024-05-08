@@ -61,6 +61,8 @@
         productCount
         Type
       }
+      TenderContractNumber
+      tenderOrderReason
     }
     MarketplaceItems {
       ProductID
@@ -426,6 +428,7 @@
       "ParentID": "",
       "CounterOfferCurrency": "MYR",
       "Type": "material",
+      "TenderContractNumber": "0040026800"
       "ItemId": ""
     }
   }

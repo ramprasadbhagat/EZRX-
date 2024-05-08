@@ -1334,6 +1334,7 @@ void main() {
               materialInfo: priceAggregates.first.materialInfo
                   .copyWith(quantity: MaterialQty(1)),
               quantity: 1,
+              tenderContractNumber: '',
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -1395,6 +1396,7 @@ void main() {
                 quantity: MaterialQty(1),
               ),
               quantity: 1,
+              tenderContractNumber: '',
             ),
           ).thenAnswer(
             (invocation) async => Right(

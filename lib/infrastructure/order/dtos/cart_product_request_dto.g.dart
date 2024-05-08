@@ -6,14 +6,14 @@ part of 'cart_product_request_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CartProductRequestDto _$$_CartProductRequestDtoFromJson(
+_$CartProductRequestDtoImpl _$$CartProductRequestDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CartProductRequestDto(
+    _$CartProductRequestDtoImpl(
       salesOrg: json['SalesOrg'] as String? ?? '',
       customerCode: json['CustomerCode'] as String? ?? '',
       shipTo: json['ShipToID'] as String? ?? '',
       productNumber: json['ProductID'] as String? ?? '',
-      quantity: json['Quantity'] as int? ?? 0,
+      quantity: (json['Quantity'] as num?)?.toInt() ?? 0,
       itemSource: json['ItemSource'] as String? ?? 'EZRX',
       language: json['Language'] as String? ?? 'EN',
       parentID: json['ParentID'] as String? ?? '',
@@ -24,10 +24,11 @@ _$_CartProductRequestDto _$$_CartProductRequestDtoFromJson(
       counterOfferCurrency: json['CounterOfferCurrency'] as String? ?? '',
       type: json['Type'] as String? ?? '',
       itemId: json['ItemId'] as String? ?? '',
+      tenderContractNumber: json['TenderContractNumber'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CartProductRequestDtoToJson(
-        _$_CartProductRequestDto instance) =>
+Map<String, dynamic> _$$CartProductRequestDtoImplToJson(
+        _$CartProductRequestDtoImpl instance) =>
     <String, dynamic>{
       'SalesOrg': instance.salesOrg,
       'CustomerCode': instance.customerCode,
@@ -43,4 +44,5 @@ Map<String, dynamic> _$$_CartProductRequestDtoToJson(
       'CounterOfferCurrency': instance.counterOfferCurrency,
       'Type': instance.type,
       'ItemId': instance.itemId,
+      'TenderContractNumber': instance.tenderContractNumber,
     };

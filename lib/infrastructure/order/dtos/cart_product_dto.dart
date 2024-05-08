@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle_details.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
@@ -85,6 +86,14 @@ class CartProductDto with _$CartProductDto {
     @JsonKey(name: 'is26SeriesMaterial', defaultValue: false)
     required bool is26SeriesMaterial,
     @JsonKey(name: 'isGimmick', defaultValue: false) required bool isGimmick,
+    @JsonKey(name: 'tenderContractNumber', defaultValue: '')
+    required String tenderContractNumber,
+    @JsonKey(name: 'tenderOrderReason', defaultValue: '')
+    required String tenderOrderReason,
+    @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+    required bool hasValidTenderContract,
+    @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
+    required bool hasMandatoryTenderContract,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -143,6 +152,14 @@ class CartProductDto with _$CartProductDto {
       materialGroup4: cartItemDetails.materialInfo.materialGroup4.getOrCrash(),
       is26SeriesMaterial: cartItemDetails.is26SeriesMaterial,
       isGimmick: cartItemDetails.isGimmickMaterial,
+      hasMandatoryTenderContract:
+          cartItemDetails.materialInfo.hasMandatoryTenderContract,
+      hasValidTenderContract:
+          cartItemDetails.materialInfo.hasValidTenderContract,
+      tenderContractNumber:
+          cartItemDetails.tenderContract.contractNumber.getOrCrash(),
+      tenderOrderReason:
+          cartItemDetails.tenderContract.tenderOrderReason.getOrCrash(),
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -183,6 +200,8 @@ class CartProductDto with _$CartProductDto {
       isMarketPlace: isMarketPlace,
       materialGroup2: MaterialGroup.two(materialGroup2),
       materialGroup4: MaterialGroup.four(materialGroup4),
+      hasMandatoryTenderContract: hasMandatoryTenderContract,
+      hasValidTenderContract: hasValidTenderContract,
     );
   }
 
@@ -210,6 +229,11 @@ class CartProductDto with _$CartProductDto {
       maximumQty: maximumQty,
       is26SeriesMaterial: is26SeriesMaterial,
       isGimmickMaterial: isGimmick,
+      tenderContract: TenderContract.empty().copyWith(
+        tenderOrderReason: TenderContractReason(tenderOrderReason),
+        contractNumber:
+            TenderContractNumber.tenderContractItemNumber(tenderContractNumber),
+      ),
     );
   }
 

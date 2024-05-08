@@ -34,7 +34,7 @@ import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section_for_covid.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
@@ -123,16 +123,16 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return BlocProvider<ProductDetailBloc>(
       create: (context) => locator<ProductDetailBloc>()
         ..add(
           ProductDetailEvent.fetch(
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
-            shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
-            user: context.read<EligibilityBloc>().state.user,
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+            user: eligibilityState.user,
             materialInfo: widget.materialInfo,
           ),
         ),
@@ -179,7 +179,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               ),
             ],
             customerBlockedOrSuspended:
-                context.read<EligibilityBloc>().state.customerBlockOrSuspended,
+                eligibilityState.customerBlockOrSuspended,
           ),
           floatingActionButton: !_isScrollAtInitialPosition
               ? FloatingActionButton(
@@ -234,6 +234,8 @@ class _BodyContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return BlocConsumer<ProductDetailBloc, ProductDetailState>(
       listenWhen: (previous, current) =>
           previous.failureOrSuccessOption != current.failureOrSuccessOption,
@@ -253,10 +255,7 @@ class _BodyContent extends StatelessWidget {
               if (state.productDetailAggregate.similarProduct.isNotEmpty) {
                 context.read<MaterialPriceBloc>().add(
                       MaterialPriceEvent.fetch(
-                        comboDealEligible: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .comboDealEligible,
+                        comboDealEligible: eligibilityState.comboDealEligible,
                         materials: state.productDetailAggregate.similarProduct,
                       ),
                     );
@@ -271,9 +270,9 @@ class _BodyContent extends StatelessWidget {
           previous.productDetailAggregate != current.productDetailAggregate,
       builder: (context, state) {
         final materialInfo = state.productDetailAggregate.materialInfo;
-        final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
+        final config = eligibilityState.salesOrgConfigs;
         final validateOutOfStockValue =
-            context.read<EligibilityBloc>().state.validateOutOfStockValue;
+            eligibilityState.validateOutOfStockValue;
 
         return Column(
           key: WidgetKeys.bodyContentProductDetail,
@@ -338,7 +337,8 @@ class _BodyContent extends StatelessWidget {
               indent: 0,
               thickness: 0.5,
             ),
-            if (materialInfo.hasValidTenderContract)
+            if (materialInfo.hasValidTenderContract &&
+                eligibilityState.salesOrg.isTenderEligible)
               TenderContracts(
                 materialInfo: materialInfo,
               ),
@@ -496,12 +496,13 @@ class _FooterState extends State<_Footer> {
       context
           .read<ProductDetailBloc>()
           .add(ProductDetailEvent.updateQty(qty: qty));
-
-      context.read<TenderContractDetailBloc>().add(
-            TenderContractDetailEvent.updateQty(
-              qty: qty,
-            ),
-          );
+      if (context.read<EligibilityBloc>().state.salesOrg.isTenderEligible) {
+        context.read<TenderContractDetailBloc>().add(
+              TenderContractDetailEvent.updateQty(
+                qty: qty,
+              ),
+            );
+      }
     });
     super.initState();
   }
@@ -517,6 +518,7 @@ class _FooterState extends State<_Footer> {
   bool isEligibleForAddToCart({
     required BuildContext context,
     required ProductDetailState productDetailState,
+    required TenderContractDetailState tenderState,
   }) {
     final stockInfo = productDetailState.productDetailAggregate.stockInfo;
     final materialInfo = productDetailState.productDetailAggregate.materialInfo;
@@ -534,13 +536,16 @@ class _FooterState extends State<_Footer> {
         : true);
     final validQty = !eligibilityState.salesOrg.isID ||
         !productDetailState.eligibleForStockError;
+    final tenderExceedQty =
+        tenderState.isExceedQty && eligibilityState.salesOrg.isTenderEligible;
 
     return !materialInfo.isSuspended &&
         (materialInfo.isFOCMaterial
             ? (materialWithoutPrice && materialInStock)
             : !(price.finalPrice.isEmpty && !materialWithoutPrice) &&
                 materialInStock) &&
-        validQty;
+        validQty &&
+        !tenderExceedQty;
   }
 
   @override
@@ -719,14 +724,14 @@ class _FooterState extends State<_Footer> {
                                             !isEligibleForAddToCart(
                                               context: context,
                                               productDetailState: state,
-                                            ) ||
-                                            tenderState.isExceedQty
+                                              tenderState: tenderState,
+                                            )
                                         ? null
                                         : () {
                                             _addToCart(
                                               context: context,
                                               state: state,
-                                              stateCart: stateCart,
+                                              cartState: stateCart,
                                               price: price,
                                               banner: widget.banner,
                                               quantityText:
@@ -748,11 +753,7 @@ class _FooterState extends State<_Footer> {
                         ),
                       ],
                     ),
-                    if (context
-                        .read<EligibilityBloc>()
-                        .state
-                        .salesOrg
-                        .isID) ...[
+                    if (eligibilityState.salesOrg.isID) ...[
                       if (state.eligibleForStockError)
                         ErrorTextWithIcon(
                           valueText: context.tr(
@@ -763,7 +764,8 @@ class _FooterState extends State<_Footer> {
                         state: state,
                       ),
                     ],
-                    if (tenderState.isExceedQty)
+                    if (tenderState.isExceedQty &&
+                        eligibilityState.salesOrg.isTenderEligible)
                       ErrorTextWithIcon(
                         valueText: context.tr(
                           'Maximum tender qty: {maxQty}',
@@ -883,21 +885,59 @@ void _trackAddToCartFailure(BuildContext context, ApiFailure failure) =>
 void _addToCart({
   required BuildContext context,
   required ProductDetailState state,
-  required CartState stateCart,
+  required CartState cartState,
   required Price price,
   required String quantityText,
   EZReachBanner? banner,
 }) {
-  if (stateCart.cartProducts.isNotEmpty) {
+  final tenderContractDetailState =
+      context.read<TenderContractDetailBloc>().state;
+  final cartProducts = cartState.cartProducts;
+  final isTenderEligible =
+      context.read<EligibilityBloc>().state.salesOrg.isTenderEligible;
+
+  if (isTenderEligible && tenderContractDetailState.isInsufficientQuantity) {
+    CustomSnackBar(
+      icon: const Icon(
+        Icons.info,
+        color: ZPColors.error,
+      ),
+      backgroundColor: ZPColors.errorSnackBarColor,
+      messageText: context.tr(
+        'Insufficient available quantity. Tender contract is no longer available.',
+      ),
+    ).show(context);
+
+    return;
+  }
+  final tenderContractValidationMsg = _checkValidTenderContractAndReturnMsg(
+    cartProducts: cartState.cartProducts,
+    context: context,
+  );
+  if (isTenderEligible && tenderContractValidationMsg.isNotEmpty) {
+    _showTenderContractWarningPage(
+      context: context,
+      contentText: tenderContractValidationMsg,
+      price: price,
+      quantityText: quantityText,
+      banner: banner,
+    );
+
+    return;
+  }
+
+  if (cartProducts.isNotEmpty) {
     if (state.productDetailAggregate.materialInfo.isFOCMaterial &&
-        !stateCart.containFocMaterialInCartProduct) {
+        !cartState.containFocMaterialInCartProduct) {
       _showDetailsPage(
         context: context,
+        banner: banner,
       );
     } else if (!state.productDetailAggregate.materialInfo.isFOCMaterial &&
-        stateCart.containFocMaterialInCartProduct) {
+        cartState.containFocMaterialInCartProduct) {
       _showDetailsPage(
         context: context,
+        banner: banner,
       );
     } else {
       final materialNumber = context
@@ -906,11 +946,11 @@ void _addToCart({
           .productDetailAggregate
           .materialInfo
           .materialNumber;
-      if (stateCart.getCurrentComboItemByComboDealId(price.comboDeal.id) !=
+      if (cartState.getCurrentComboItemByComboDealId(price.comboDeal.id) !=
           PriceAggregate.empty()) {
         _initComboDealAndNavigate(
           context: context,
-          cartState: stateCart,
+          cartState: cartState,
           materialNumber: materialNumber,
           price: price,
         );
@@ -919,9 +959,10 @@ void _addToCart({
           context: context,
           price: price,
           state: state,
-          stateCart: stateCart,
+          stateCart: cartState,
           quantityText: quantityText,
           banner: banner,
+          tenderContractState: tenderContractDetailState,
         );
       }
     }
@@ -930,9 +971,10 @@ void _addToCart({
       context: context,
       price: price,
       state: state,
-      stateCart: stateCart,
+      stateCart: cartState,
       quantityText: quantityText,
       banner: banner,
+      tenderContractState: tenderContractDetailState,
     );
   }
 }
@@ -942,6 +984,7 @@ void upsertCart({
   required Price price,
   required ProductDetailState state,
   required CartState stateCart,
+  required TenderContractDetailState tenderContractState,
   required String quantityText,
   EZReachBanner? banner,
 }) {
@@ -966,6 +1009,7 @@ void upsertCart({
             bonusSampleItems: context.read<CartBloc>().state.productBonusList(
                   materialNumber,
                 ),
+            tenderContract: tenderContractState.currentTenderContract,
           ),
           banner: banner,
         ),
@@ -1020,6 +1064,7 @@ void _initComboDealAndNavigate({
 
 void _showDetailsPage({
   required BuildContext context,
+  EZReachBanner? banner,
 }) {
   showModalBottomSheet(
     context: context,
@@ -1028,8 +1073,15 @@ void _showDetailsPage({
     isDismissible: false,
     clipBehavior: Clip.antiAliasWithSaveLayer,
     builder: (_) {
+      return AddToCartErrorSection.forCovid(
+        cartContainsFocProduct:
+            context.read<CartBloc>().state.containFocMaterialInCartProduct,
+        context: context,
+      );
+    },
+  ).then((value) {
+    if (value != null) {
       final productDetailsState = context.read<ProductDetailBloc>().state;
-      final cartState = context.read<CartBloc>().state;
       final materialNumber = productDetailsState
           .productDetailAggregate.materialInfo.materialNumber;
       final price = context
@@ -1037,25 +1089,91 @@ void _showDetailsPage({
               .state
               .materialPrice[materialNumber] ??
           Price.empty();
+      upsertCart(
+        context: context,
+        price: price,
+        state: context.read<ProductDetailBloc>().state,
+        stateCart: context.read<CartBloc>().state,
+        tenderContractState: context.read<TenderContractDetailBloc>().state,
+        quantityText: productDetailsState.inputQty.toString(),
+        banner: banner,
+      );
+    }
+  });
+}
 
-      return AddToCartErrorSection(
-        priceAggregate: PriceAggregate.empty().copyWith(
-          materialInfo:
-              productDetailsState.productDetailAggregate.materialInfo.copyWith(
-            counterOfferDetails:
-                cartState.productCounterOfferDetails(materialNumber),
-          ),
-          price: price,
-          salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
-          quantity: cartState.getQuantityOfProduct(
-                productNumber: materialNumber,
-              ) +
-              productDetailsState.inputQty,
-          bonusSampleItems: cartState.productBonusList(
-            materialNumber,
-          ),
-        ),
+String _checkValidTenderContractAndReturnMsg({
+  required BuildContext context,
+  required List<PriceAggregate> cartProducts,
+}) {
+  final tenderContractDetailState =
+      context.read<TenderContractDetailBloc>().state;
+  final tenderContractEnable = tenderContractDetailState.tenderContractEnable;
+  final tenderOrderReason =
+      tenderContractDetailState.currentTenderContract.tenderOrderReason;
+
+  if (!tenderContractEnable && !cartProducts.hasTenderContract) {
+    return '';
+  } else if (!tenderContractEnable && cartProducts.hasTenderContract) {
+    return context.tr(
+      'Other materials cannot be ordered while materials from the {reason} tender contract are in your cart. By proceeding, your current cart will be cleared.',
+      namedArgs: {'reason': cartProducts.tenderReasons.join(', ')},
+    );
+  } else {
+    if (tenderContractEnable &&
+        (cartProducts.hasNonTenderContractMaterials ||
+            (cartProducts.isNotEmpty &&
+                (!cartProducts.hasTenderContractWithReason730 &&
+                    tenderOrderReason.is730)))) {
+      return context.tr(
+        'Materials from the {reason} tender contract cannot be added to your cart if you have other materials in your cart. By proceeding, your current cart will be cleared.',
+        namedArgs: {
+          'reason': tenderOrderReason.displayTenderContractReason,
+        },
+      );
+    } else if (tenderContractEnable &&
+        (cartProducts.hasTenderContractWithReason730 &&
+            !tenderOrderReason.is730)) {
+      return context.tr(
+        'Other materials cannot be ordered while materials from the {reason} tender contract are in your cart. By proceeding, your current cart will be cleared.',
+        namedArgs: {'reason': '730'},
+      );
+    }
+
+    return '';
+  }
+}
+
+void _showTenderContractWarningPage({
+  required BuildContext context,
+  required String contentText,
+  required Price price,
+  required String quantityText,
+  EZReachBanner? banner,
+}) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    enableDrag: false,
+    isDismissible: false,
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    builder: (_) {
+      return AddToCartErrorSection.forTenderContract(
+        contentText: contentText,
+        context: context,
       );
     },
-  );
+  ).then((value) {
+    if (value != null) {
+      upsertCart(
+        context: context,
+        price: price,
+        state: context.read<ProductDetailBloc>().state,
+        stateCart: context.read<CartBloc>().state,
+        tenderContractState: context.read<TenderContractDetailBloc>().state,
+        quantityText: quantityText,
+        banner: banner,
+      );
+    }
+  });
 }

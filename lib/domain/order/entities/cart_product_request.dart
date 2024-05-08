@@ -24,6 +24,7 @@ class CartProductRequest with _$CartProductRequest {
     required String counterOfferCurrency,
     required String type,
     required String itemId,
+    required String tenderContractNumber,
   }) = _CartProductRequest;
 
   factory CartProductRequest.empty() => CartProductRequest(
@@ -40,6 +41,7 @@ class CartProductRequest with _$CartProductRequest {
         counterOfferCurrency: '',
         type: '',
         itemId: '',
+        tenderContractNumber: '',
       );
 
   factory CartProductRequest.toMaterialRequest({
@@ -51,6 +53,7 @@ class CartProductRequest with _$CartProductRequest {
     required int quantity,
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
+    required String tenderContractNumber,
   }) =>
       CartProductRequest(
         salesOrg: salesOrg,
@@ -67,6 +70,7 @@ class CartProductRequest with _$CartProductRequest {
         comment: counterOfferDetails.comment.getOrDefaultValue(''),
         type: materialInfo.type.getOrDefaultValue(''),
         itemId: itemId,
+        tenderContractNumber: tenderContractNumber,
       );
 
   factory CartProductRequest.toBundlesRequest({

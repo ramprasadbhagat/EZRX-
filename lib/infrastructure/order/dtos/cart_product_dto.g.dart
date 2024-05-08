@@ -6,12 +6,12 @@ part of 'cart_product_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
-    _$_CartProductDto(
+_$CartProductDtoImpl _$$CartProductDtoImplFromJson(Map<String, dynamic> json) =>
+    _$CartProductDtoImpl(
       productID: json['productID'] as String? ?? '',
       parentID: json['parentID'] as String? ?? '',
       type: json['type'] as String? ?? '',
-      quantity: json['quantity'] as int? ?? 0,
+      quantity: (json['quantity'] as num?)?.toInt() ?? 0,
       materialNumber: json['materialNumber'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
       therapeuticClass: json['therapeuticClass'] as String? ?? '',
@@ -53,7 +53,7 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
                   ComboMaterialItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      maximumQty: json['maximumQty'] as int? ?? 99999,
+      maximumQty: (json['maximumQty'] as num?)?.toInt() ?? 99999,
       isMarketPlace:
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
       defaultMaterialDescription:
@@ -62,9 +62,15 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
       materialGroup2: json['materialGroup2'] as String? ?? '',
       is26SeriesMaterial: json['is26SeriesMaterial'] as bool? ?? false,
       isGimmick: json['isGimmick'] as bool? ?? false,
+      tenderContractNumber: json['tenderContractNumber'] as String? ?? '',
+      tenderOrderReason: json['tenderOrderReason'] as String? ?? '',
+      hasValidTenderContract: json['hasValidTenderContract'] as bool? ?? false,
+      hasMandatoryTenderContract:
+          json['hasMandatoryTenderContract'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
+Map<String, dynamic> _$$CartProductDtoImplToJson(
+        _$CartProductDtoImpl instance) =>
     <String, dynamic>{
       'productID': instance.productID,
       'parentID': instance.parentID,
@@ -101,10 +107,15 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'materialGroup2': instance.materialGroup2,
       'is26SeriesMaterial': instance.is26SeriesMaterial,
       'isGimmick': instance.isGimmick,
+      'tenderContractNumber': instance.tenderContractNumber,
+      'tenderOrderReason': instance.tenderOrderReason,
+      'hasValidTenderContract': instance.hasValidTenderContract,
+      'hasMandatoryTenderContract': instance.hasMandatoryTenderContract,
     };
 
-_$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>
-    _$_BundleDetailsDto(
+_$BundleDetailsDtoImpl _$$BundleDetailsDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BundleDetailsDtoImpl(
       bundleName: json['bundleName'] as String? ?? '',
       bundleCode: json['bundleCode'] as String? ?? '',
       bundleInfo: (json['bundleInformation'] as List<dynamic>?)
@@ -113,7 +124,8 @@ _$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>
           [],
     );
 
-Map<String, dynamic> _$$_BundleDetailsDtoToJson(_$_BundleDetailsDto instance) =>
+Map<String, dynamic> _$$BundleDetailsDtoImplToJson(
+        _$BundleDetailsDtoImpl instance) =>
     <String, dynamic>{
       'bundleName': instance.bundleName,
       'bundleCode': instance.bundleCode,

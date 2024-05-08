@@ -689,6 +689,7 @@ void main() {
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: 'fake-item-Id',
               quantity: materialInfo.quantity.intValue,
+              tenderContractNumber: '',
             );
 
             return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
@@ -739,6 +740,7 @@ void main() {
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: 'fake-item-Id',
               quantity: materialInfo.quantity.intValue,
+              tenderContractNumber: '',
             );
 
             return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
@@ -1198,6 +1200,7 @@ void main() {
               itemId: materialInfo.sampleBonusItemId,
               quantity: materialInfo.quantity.intValue,
               counterOfferDetails: materialInfo.counterOfferDetails,
+              tenderContractNumber: '',
             );
 
             return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
@@ -1249,6 +1252,7 @@ void main() {
               itemId: materialInfo.sampleBonusItemId,
               quantity: materialInfo.quantity.intValue,
               counterOfferDetails: materialInfo.counterOfferDetails,
+              tenderContractNumber: '',
             );
 
             return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();
@@ -1305,6 +1309,7 @@ void main() {
         quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
         counterOfferDetails:
             fakeCartProducts.first.materialInfo.counterOfferDetails,
+        tenderContractNumber: '',
       );
 
       when(
@@ -1343,6 +1348,7 @@ void main() {
           quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
           counterOfferDetails:
               fakeCartProducts.first.materialInfo.counterOfferDetails,
+          tenderContractNumber: '',
         );
         when(
           () => cartRemoteDataSource.upsertCartItems(
@@ -1642,6 +1648,7 @@ void main() {
           parentID: 'fake-parent-Id',
         ),
         itemId: 'fake-item-Id',
+        tenderContractNumber: '',
       );
       expect(result.isRight(), true);
     });
@@ -1668,6 +1675,7 @@ void main() {
           parentID: 'fake-parent-Id',
         ),
         itemId: 'fake-item-Id',
+        tenderContractNumber: '',
       );
       expect(result.isLeft(), true);
     });
@@ -1683,6 +1691,7 @@ void main() {
         quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
         counterOfferDetails:
             fakeCartProducts.first.materialInfo.counterOfferDetails,
+        tenderContractNumber: '',
       );
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
@@ -1730,6 +1739,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         materialInfo: fakeCartProducts.first.materialInfo,
         itemId: fakeCartProducts.first.materialInfo.parentID,
+        tenderContractNumber: '',
       );
 
       expect(result.getOrElse(() => []), fakeCartProducts);
@@ -1748,6 +1758,7 @@ void main() {
           quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
           counterOfferDetails:
               fakeCartProducts.first.materialInfo.counterOfferDetails,
+          tenderContractNumber: '',
         );
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
@@ -1800,6 +1811,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           materialInfo: fakeCartProducts.first.materialInfo,
           itemId: fakeCartProducts.first.materialInfo.parentID,
+          tenderContractNumber: '',
         );
 
         expect(result.getOrElse(() => []), [
@@ -1826,6 +1838,7 @@ void main() {
           parentID: 'fake-parent-Id',
         ),
         itemId: 'fake-item-Id',
+        tenderContractNumber: '',
       );
       expect(result.isLeft(), true);
       expect(
@@ -1855,6 +1868,9 @@ void main() {
         language: 'EN',
         materialInfo: materialInfo,
         counterOfferDetails: RequestCounterOfferDetails.empty(),
+        tenderContractNumber: fakeCartProducts
+            .first.tenderContract.contractNumber
+            .getOrDefaultValue(''),
       );
       when(
         () => cartRemoteDataSource.upsertCart(
@@ -1920,6 +1936,9 @@ void main() {
         quantity: 1,
         counterOfferDetails:
             fakeCartProducts.first.materialInfo.counterOfferDetails,
+        tenderContractNumber: fakeCartProducts
+            .first.tenderContract.contractNumber
+            .getOrDefaultValue(''),
       );
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
@@ -1958,6 +1977,7 @@ void main() {
         quantity: fakeCartProducts.first.materialInfo.quantity.intValue,
         counterOfferDetails:
             fakeCartProducts.first.materialInfo.counterOfferDetails,
+        tenderContractNumber: '',
       );
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
@@ -2004,6 +2024,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         materialInfo: fakeCartProducts.first.materialInfo,
         itemId: fakeCartProducts.first.materialInfo.parentID,
+        tenderContractNumber: '',
       );
 
       expect(result.getOrElse(() => []), [

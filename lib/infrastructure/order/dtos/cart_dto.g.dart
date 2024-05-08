@@ -6,7 +6,8 @@ part of 'cart_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CartDto _$$_CartDtoFromJson(Map<String, dynamic> json) => _$_CartDto(
+_$CartDtoImpl _$$CartDtoImplFromJson(Map<String, dynamic> json) =>
+    _$CartDtoImpl(
       cartProducts: (json['ezRxItems'] as List<dynamic>?)
               ?.map((e) => CartProductDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -15,7 +16,7 @@ _$_CartDto _$$_CartDtoFromJson(Map<String, dynamic> json) => _$_CartDto(
       cartShipToCustomerCode: json['shipToCustomerCode'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CartDtoToJson(_$_CartDto instance) =>
+Map<String, dynamic> _$$CartDtoImplToJson(_$CartDtoImpl instance) =>
     <String, dynamic>{
       'ezRxItems': instance.cartProducts.map((e) => e.toJson()).toList(),
       'customerCode': instance.cartCustomerCode,

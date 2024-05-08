@@ -68,6 +68,8 @@ class TenderContract with _$TenderContract {
       pricingUnit == 0 ? 0 : tenderPrice.tenderPrice / pricingUnit;
 
   bool get isNotEmpty => this != TenderContract.empty();
+
+  bool get isEmpty => this == TenderContract.empty();
 }
 
 extension TenderContractListExtension on List<TenderContract> {

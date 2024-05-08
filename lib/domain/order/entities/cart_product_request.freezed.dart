@@ -12,7 +12,7 @@ part of 'cart_product_request.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CartProductRequest {
@@ -29,6 +29,7 @@ mixin _$CartProductRequest {
   String get counterOfferCurrency => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get itemId => throw _privateConstructorUsedError;
+  String get tenderContractNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CartProductRequestCopyWith<CartProductRequest> get copyWith =>
@@ -54,7 +55,8 @@ abstract class $CartProductRequestCopyWith<$Res> {
       String comment,
       String counterOfferCurrency,
       String type,
-      String itemId});
+      String itemId,
+      String tenderContractNumber});
 }
 
 /// @nodoc
@@ -83,6 +85,7 @@ class _$CartProductRequestCopyWithImpl<$Res, $Val extends CartProductRequest>
     Object? counterOfferCurrency = null,
     Object? type = null,
     Object? itemId = null,
+    Object? tenderContractNumber = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -137,16 +140,20 @@ class _$CartProductRequestCopyWithImpl<$Res, $Val extends CartProductRequest>
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
               as String,
+      tenderContractNumber: null == tenderContractNumber
+          ? _value.tenderContractNumber
+          : tenderContractNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_CartProductRequestCopyWith<$Res>
+abstract class _$$CartProductRequestImplCopyWith<$Res>
     implements $CartProductRequestCopyWith<$Res> {
-  factory _$$_CartProductRequestCopyWith(_$_CartProductRequest value,
-          $Res Function(_$_CartProductRequest) then) =
-      __$$_CartProductRequestCopyWithImpl<$Res>;
+  factory _$$CartProductRequestImplCopyWith(_$CartProductRequestImpl value,
+          $Res Function(_$CartProductRequestImpl) then) =
+      __$$CartProductRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -162,15 +169,16 @@ abstract class _$$_CartProductRequestCopyWith<$Res>
       String comment,
       String counterOfferCurrency,
       String type,
-      String itemId});
+      String itemId,
+      String tenderContractNumber});
 }
 
 /// @nodoc
-class __$$_CartProductRequestCopyWithImpl<$Res>
-    extends _$CartProductRequestCopyWithImpl<$Res, _$_CartProductRequest>
-    implements _$$_CartProductRequestCopyWith<$Res> {
-  __$$_CartProductRequestCopyWithImpl(
-      _$_CartProductRequest _value, $Res Function(_$_CartProductRequest) _then)
+class __$$CartProductRequestImplCopyWithImpl<$Res>
+    extends _$CartProductRequestCopyWithImpl<$Res, _$CartProductRequestImpl>
+    implements _$$CartProductRequestImplCopyWith<$Res> {
+  __$$CartProductRequestImplCopyWithImpl(_$CartProductRequestImpl _value,
+      $Res Function(_$CartProductRequestImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -189,8 +197,9 @@ class __$$_CartProductRequestCopyWithImpl<$Res>
     Object? counterOfferCurrency = null,
     Object? type = null,
     Object? itemId = null,
+    Object? tenderContractNumber = null,
   }) {
-    return _then(_$_CartProductRequest(
+    return _then(_$CartProductRequestImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -243,14 +252,18 @@ class __$$_CartProductRequestCopyWithImpl<$Res>
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
               as String,
+      tenderContractNumber: null == tenderContractNumber
+          ? _value.tenderContractNumber
+          : tenderContractNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_CartProductRequest extends _CartProductRequest {
-  const _$_CartProductRequest(
+class _$CartProductRequestImpl extends _CartProductRequest {
+  const _$CartProductRequestImpl(
       {required this.salesOrg,
       required this.customerCode,
       required this.shipToId,
@@ -263,7 +276,8 @@ class _$_CartProductRequest extends _CartProductRequest {
       required this.comment,
       required this.counterOfferCurrency,
       required this.type,
-      required this.itemId})
+      required this.itemId,
+      required this.tenderContractNumber})
       : super._();
 
   @override
@@ -292,17 +306,19 @@ class _$_CartProductRequest extends _CartProductRequest {
   final String type;
   @override
   final String itemId;
+  @override
+  final String tenderContractNumber;
 
   @override
   String toString() {
-    return 'CartProductRequest(salesOrg: $salesOrg, customerCode: $customerCode, shipToId: $shipToId, productNumber: $productNumber, quantity: $quantity, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, discountOverridePercentage: $discountOverridePercentage, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type, itemId: $itemId)';
+    return 'CartProductRequest(salesOrg: $salesOrg, customerCode: $customerCode, shipToId: $shipToId, productNumber: $productNumber, quantity: $quantity, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, discountOverridePercentage: $discountOverridePercentage, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type, itemId: $itemId, tenderContractNumber: $tenderContractNumber)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CartProductRequest &&
+            other is _$CartProductRequestImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.customerCode, customerCode) ||
@@ -327,7 +343,9 @@ class _$_CartProductRequest extends _CartProductRequest {
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
                 other.counterOfferCurrency == counterOfferCurrency) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.itemId, itemId) || other.itemId == itemId));
+            (identical(other.itemId, itemId) || other.itemId == itemId) &&
+            (identical(other.tenderContractNumber, tenderContractNumber) ||
+                other.tenderContractNumber == tenderContractNumber));
   }
 
   @override
@@ -345,13 +363,14 @@ class _$_CartProductRequest extends _CartProductRequest {
       comment,
       counterOfferCurrency,
       type,
-      itemId);
+      itemId,
+      tenderContractNumber);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CartProductRequestCopyWith<_$_CartProductRequest> get copyWith =>
-      __$$_CartProductRequestCopyWithImpl<_$_CartProductRequest>(
+  _$$CartProductRequestImplCopyWith<_$CartProductRequestImpl> get copyWith =>
+      __$$CartProductRequestImplCopyWithImpl<_$CartProductRequestImpl>(
           this, _$identity);
 }
 
@@ -369,7 +388,8 @@ abstract class _CartProductRequest extends CartProductRequest {
       required final String comment,
       required final String counterOfferCurrency,
       required final String type,
-      required final String itemId}) = _$_CartProductRequest;
+      required final String itemId,
+      required final String tenderContractNumber}) = _$CartProductRequestImpl;
   const _CartProductRequest._() : super._();
 
   @override
@@ -399,7 +419,9 @@ abstract class _CartProductRequest extends CartProductRequest {
   @override
   String get itemId;
   @override
+  String get tenderContractNumber;
+  @override
   @JsonKey(ignore: true)
-  _$$_CartProductRequestCopyWith<_$_CartProductRequest> get copyWith =>
+  _$$CartProductRequestImplCopyWith<_$CartProductRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

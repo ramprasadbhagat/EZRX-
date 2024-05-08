@@ -12,7 +12,7 @@ part of 'cart_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CartDto _$CartDtoFromJson(Map<String, dynamic> json) {
   return _CartDto.fromJson(json);
@@ -80,10 +80,10 @@ class _$CartDtoCopyWithImpl<$Res, $Val extends CartDto>
 }
 
 /// @nodoc
-abstract class _$$_CartDtoCopyWith<$Res> implements $CartDtoCopyWith<$Res> {
-  factory _$$_CartDtoCopyWith(
-          _$_CartDto value, $Res Function(_$_CartDto) then) =
-      __$$_CartDtoCopyWithImpl<$Res>;
+abstract class _$$CartDtoImplCopyWith<$Res> implements $CartDtoCopyWith<$Res> {
+  factory _$$CartDtoImplCopyWith(
+          _$CartDtoImpl value, $Res Function(_$CartDtoImpl) then) =
+      __$$CartDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -95,10 +95,11 @@ abstract class _$$_CartDtoCopyWith<$Res> implements $CartDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CartDtoCopyWithImpl<$Res>
-    extends _$CartDtoCopyWithImpl<$Res, _$_CartDto>
-    implements _$$_CartDtoCopyWith<$Res> {
-  __$$_CartDtoCopyWithImpl(_$_CartDto _value, $Res Function(_$_CartDto) _then)
+class __$$CartDtoImplCopyWithImpl<$Res>
+    extends _$CartDtoCopyWithImpl<$Res, _$CartDtoImpl>
+    implements _$$CartDtoImplCopyWith<$Res> {
+  __$$CartDtoImplCopyWithImpl(
+      _$CartDtoImpl _value, $Res Function(_$CartDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +109,7 @@ class __$$_CartDtoCopyWithImpl<$Res>
     Object? cartCustomerCode = null,
     Object? cartShipToCustomerCode = null,
   }) {
-    return _then(_$_CartDto(
+    return _then(_$CartDtoImpl(
       cartProducts: null == cartProducts
           ? _value._cartProducts
           : cartProducts // ignore: cast_nullable_to_non_nullable
@@ -127,8 +128,8 @@ class __$$_CartDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CartDto extends _CartDto {
-  const _$_CartDto(
+class _$CartDtoImpl extends _CartDto {
+  const _$CartDtoImpl(
       {@JsonKey(name: 'ezRxItems', defaultValue: <CartProductDto>[])
       required final List<CartProductDto> cartProducts,
       @JsonKey(name: 'customerCode', defaultValue: '')
@@ -138,8 +139,8 @@ class _$_CartDto extends _CartDto {
       : _cartProducts = cartProducts,
         super._();
 
-  factory _$_CartDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CartDtoFromJson(json);
+  factory _$CartDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CartDtoImplFromJson(json);
 
   final List<CartProductDto> _cartProducts;
   @override
@@ -163,10 +164,10 @@ class _$_CartDto extends _CartDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CartDto &&
+            other is _$CartDtoImpl &&
             const DeepCollectionEquality()
                 .equals(other._cartProducts, _cartProducts) &&
             (identical(other.cartCustomerCode, cartCustomerCode) ||
@@ -186,12 +187,12 @@ class _$_CartDto extends _CartDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CartDtoCopyWith<_$_CartDto> get copyWith =>
-      __$$_CartDtoCopyWithImpl<_$_CartDto>(this, _$identity);
+  _$$CartDtoImplCopyWith<_$CartDtoImpl> get copyWith =>
+      __$$CartDtoImplCopyWithImpl<_$CartDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CartDtoToJson(
+    return _$$CartDtoImplToJson(
       this,
     );
   }
@@ -204,10 +205,10 @@ abstract class _CartDto extends CartDto {
       @JsonKey(name: 'customerCode', defaultValue: '')
       required final String cartCustomerCode,
       @JsonKey(name: 'shipToCustomerCode', defaultValue: '')
-      required final String cartShipToCustomerCode}) = _$_CartDto;
+      required final String cartShipToCustomerCode}) = _$CartDtoImpl;
   const _CartDto._() : super._();
 
-  factory _CartDto.fromJson(Map<String, dynamic> json) = _$_CartDto.fromJson;
+  factory _CartDto.fromJson(Map<String, dynamic> json) = _$CartDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'ezRxItems', defaultValue: <CartProductDto>[])
@@ -220,6 +221,6 @@ abstract class _CartDto extends CartDto {
   String get cartShipToCustomerCode;
   @override
   @JsonKey(ignore: true)
-  _$$_CartDtoCopyWith<_$_CartDto> get copyWith =>
+  _$$CartDtoImplCopyWith<_$CartDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

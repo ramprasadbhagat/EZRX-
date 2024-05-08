@@ -12,23 +12,25 @@ class CartProductRequestDto with _$CartProductRequestDto {
   const factory CartProductRequestDto({
     @JsonKey(name: 'SalesOrg', defaultValue: '') required String salesOrg,
     @JsonKey(name: 'CustomerCode', defaultValue: '')
-        required String customerCode,
+    required String customerCode,
     @JsonKey(name: 'ShipToID', defaultValue: '') required String shipTo,
     @JsonKey(name: 'ProductID', defaultValue: '') required String productNumber,
     @JsonKey(name: 'Quantity', defaultValue: 0) required int quantity,
     @JsonKey(name: 'ItemSource', defaultValue: 'EZRX')
-        required String itemSource,
+    required String itemSource,
     @JsonKey(name: 'Language', defaultValue: 'EN') required String language,
     @JsonKey(name: 'ParentID', defaultValue: '') required String parentID,
     @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
-        required double counterOfferPrice,
+    required double counterOfferPrice,
     @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0.0)
-        required double counterOfferDiscount,
+    required double counterOfferDiscount,
     @JsonKey(name: 'Comment', defaultValue: '') required String comment,
     @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
-        required String counterOfferCurrency,
+    required String counterOfferCurrency,
     @JsonKey(name: 'Type', defaultValue: '') required String type,
     @JsonKey(name: 'ItemId', defaultValue: '') required String itemId,
+    @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+    required String tenderContractNumber,
   }) = _CartProductRequestDto;
 
   factory CartProductRequestDto.fromDomain(
@@ -49,6 +51,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
       counterOfferCurrency: cartProductRequest.counterOfferCurrency,
       type: cartProductRequest.type,
       itemId: cartProductRequest.itemId,
+      tenderContractNumber: cartProductRequest.tenderContractNumber,
     );
   }
 
@@ -67,6 +70,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
       counterOfferCurrency: counterOfferCurrency,
       type: type,
       itemId: itemId,
+      tenderContractNumber: tenderContractNumber,
     );
   }
 

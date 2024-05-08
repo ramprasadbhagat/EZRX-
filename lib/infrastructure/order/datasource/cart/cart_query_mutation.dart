@@ -187,6 +187,8 @@ class CartQueryMutation {
       principalCutoffStatus
       warehouseStorageCondition
       IsGimmick
+      tenderOrderReason
+      TenderContractNumber
       is26SeriesMaterial
       BonusMaterials {
         principalCode
@@ -565,6 +567,8 @@ class CartQueryMutation {
         ID
         UserID
         EzRxItems {
+          TenderContractNumber
+          tenderOrderReason
           IsGimmick
           Type
           ProductID

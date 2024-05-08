@@ -591,7 +591,7 @@ void main() {
                   type: MaterialInfoType.material(),
                 ),
                 price: materialPrice,
-                quantity: cartQty + inputQty,
+                quantity: inputQty,
                 salesOrgConfig: fakeMYSalesOrgConfigs,
               ),
             ),
@@ -3099,6 +3099,12 @@ void main() {
               tenderContractEnable: true,
             ),
           );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           verify(
@@ -3160,6 +3166,12 @@ void main() {
             ),
           );
 
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
 
@@ -3181,8 +3193,10 @@ void main() {
             ),
           );
           when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial()
-                .copyWith(salesOrgConfigs: fakeVNSalesOrgConfigs),
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
           );
           when(() => tenderContractDetailBlocMock.state).thenReturn(
             TenderContractDetailState.initial().copyWith(

@@ -29,7 +29,7 @@ import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section_for_covid.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -475,7 +475,6 @@ class _BundleSheetFooter extends StatelessWidget {
     if (stateCart.containFocMaterialInCartProduct) {
       _showCovidWarningMessageBottomSheet(
         context: context,
-        addToCartBundle: addToCartBundle,
       );
 
       return;
@@ -491,13 +490,30 @@ class _BundleSheetFooter extends StatelessWidget {
 
   void _showCovidWarningMessageBottomSheet({
     required BuildContext context,
-    required PriceAggregate addToCartBundle,
-  }) =>
-      showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        enableDrag: false,
-        isDismissible: false,
-        builder: (_) => AddToCartErrorSection(priceAggregate: addToCartBundle),
-      );
+  }) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      isDismissible: false,
+      builder: (_) {
+        return AddToCartErrorSection.forCovid(
+          cartContainsFocProduct:
+              context.read<CartBloc>().state.containFocMaterialInCartProduct,
+          context: context,
+        );
+      },
+    ).then((value) {
+      if (value != null) {
+        final bundleAddToCartState = context.read<BundleAddToCartBloc>().state;
+        final cartState = context.read<CartBloc>().state;
+        _addBundlesToCart(
+          context,
+          state: bundleAddToCartState,
+          stateCart: cartState,
+          banner: banner,
+        );
+      }
+    });
+  }
 }
