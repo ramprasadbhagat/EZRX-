@@ -60,7 +60,7 @@ parameters:
       - 'OnePlus 9-11.0'   
       
 pool:   
-  name: dnd-azdevops-flutter33
+  name: dnd-azdevops-flutter44
 
 resources:
 - repo: self
