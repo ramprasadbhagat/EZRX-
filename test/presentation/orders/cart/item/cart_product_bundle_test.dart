@@ -29,6 +29,49 @@ void main() async {
   final fakeCart =
       (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
 
+  Finder materialItem(String materialNumber) =>
+      find.byKey(WidgetKeys.cartItemProductTile(materialNumber));
+
+  Finder bundleItem(String bundleNumber) =>
+      find.byKey(WidgetKeys.cartItemBundleTile(bundleNumber));
+
+  Finder bundleMaterial(String bundleNumber, String materialNumber) =>
+      find.descendant(
+        of: bundleItem(bundleNumber),
+        matching: materialItem(materialNumber),
+      );
+
+  void verifyBundleItemQty(
+    String bundleNumber,
+    String materialNumber,
+    int qty,
+  ) {
+    expect(
+      find.descendant(
+        of: find.descendant(
+          of: bundleMaterial(bundleNumber, materialNumber),
+          matching: find.byKey(WidgetKeys.quantityInputTextKey),
+        ),
+        matching: find.text(qty.toString()),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  Future<void> decreaseBundleItemQty(
+    String bundleNumber,
+    String materialNumber,
+    WidgetTester tester,
+  ) async {
+    await tester.tap(
+      find.descendant(
+        of: bundleMaterial(bundleNumber, materialNumber),
+        matching: find.byKey(WidgetKeys.decreaseQuantityKey),
+      ),
+    );
+    await tester.pumpAndSettle();
+  }
+
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
@@ -128,6 +171,46 @@ void main() async {
         ),
       ),
       findsNWidgets(stockWidget.evaluate().length),
+    );
+  });
+
+  testWidgets('Bundle minimum quantity validation', (tester) async {
+    final bundle = fakeCart.firstWhere(
+      (e) => e.materialInfo.type.typeBundle && !e.materialInfo.isMarketPlace,
+    );
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeMYSalesOrgConfigs,
+      ),
+    );
+
+    when(() => cartBlocMock.state).thenReturn(
+      CartState.initial().copyWith(
+        cartProducts: [bundle],
+      ),
+    );
+
+    await tester.pumpWidget(getScopedWidget(cartItem: bundle));
+    await tester.pumpAndSettle();
+
+    final bundleNumber = bundle.bundle.bundleCode;
+
+    final materials = bundle.bundle.materials;
+
+    final materialNumber2 = materials.elementAt(1).materialNumber.displayMatNo;
+    var materialQty2 = materials.elementAt(1).quantity.intValue;
+
+    await decreaseBundleItemQty(
+      bundleNumber,
+      materialNumber2,
+      tester,
+    );
+    materialQty2--;
+
+    verifyBundleItemQty(
+      bundleNumber,
+      materialNumber2,
+      materialQty2,
     );
   });
 }

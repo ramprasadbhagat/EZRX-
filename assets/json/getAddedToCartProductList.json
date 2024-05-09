@@ -199,6 +199,12 @@
             "BundleCode": "0008896469",
             "BundleInformation": [
               {
+                "Sequence": 7,
+                "Quantity": 20,
+                "Type": "MYR",
+                "Rate": 85
+              },
+              {
                 "Sequence": 1,
                 "Quantity": 5,
                 "Type": "MYR",
@@ -209,12 +215,6 @@
                 "Quantity": 10,
                 "Type": "MYR",
                 "Rate": 90
-              },
-              {
-                "Sequence": 7,
-                "Quantity": 20,
-                "Type": "MYR",
-                "Rate": 85
               }
             ]
           },

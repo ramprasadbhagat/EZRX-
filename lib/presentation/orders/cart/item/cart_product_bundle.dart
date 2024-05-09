@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -382,6 +381,12 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
         .bundle
         .totalQty;
 
+    //Bundle minimum quantity is the first quantity which is sorted with respect to sequence.
+    final bundleMinQty = totalQuantityOfProductBundle >
+            widget.bundle.minimumQuantityBundleMaterial.quantity
+        ? 1
+        : totalQuantityOfProductBundle;
+
     return Column(
       children: [
         Row(
@@ -399,12 +404,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                 onSubmit: (value) => _callCartUpsertItemsEvent(quantity: value),
                 isLoading: context.read<CartBloc>().state.isUpserting &&
                     _qty != _controller.text,
-                minimumQty: totalQuantityOfProductBundle >
-                        (widget.bundle.bundleInformation.firstOrNull
-                                ?.quantity ??
-                            1)
-                    ? 1
-                    : totalQuantityOfProductBundle,
+                minimumQty: bundleMinQty,
               ),
             ),
             IconButton(
