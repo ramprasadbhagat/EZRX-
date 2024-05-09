@@ -50,11 +50,13 @@ class _NotificationList extends StatelessWidget {
                   padding: EdgeInsets.only(right: 5),
                   child: MarketPlaceIcon(),
                 ),
-              Text(
-                context.tr(notificationData.title.getOrDefaultValue('')),
-                key: WidgetKeys.notificationItemTitle,
-                style: Theme.of(context).textTheme.labelSmall,
-                overflow: TextOverflow.ellipsis,
+              Expanded(
+                child: Text(
+                  context.tr(notificationData.title.getOrDefaultValue('')),
+                  key: WidgetKeys.notificationItemTitle,
+                  style: Theme.of(context).textTheme.labelSmall,
+                  overflow: TextOverflow.visible,
+                ),
               ),
             ],
           ),
