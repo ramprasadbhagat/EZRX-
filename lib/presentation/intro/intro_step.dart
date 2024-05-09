@@ -74,7 +74,9 @@ class IntroStep extends StatelessWidget {
                         onPressed: isLastPage ? getStarted : nextPage,
                         child: Text(
                           context.tr(
-                            isLastPage ? 'Get started' : 'Next',
+                            isLastPage
+                                ? context.tr('Get started')
+                                : context.tr('Next'),
                           ),
                           style: Theme.of(context)
                               .textTheme
