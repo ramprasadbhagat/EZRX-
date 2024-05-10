@@ -198,7 +198,12 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
               }
 
               CustomSnackBar(
-                messageText: context.tr(state.adviceDeletedMessage),
+                messageText: context.tr(
+                  'PA {ID} has been deleted',
+                  namedArgs: {
+                    'ID': '#${state.details.zzAdvice.displayDashIfEmpty}',
+                  },
+                ),
               ).show(context);
             }
           },

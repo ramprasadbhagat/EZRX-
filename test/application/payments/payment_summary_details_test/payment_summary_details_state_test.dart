@@ -78,44 +78,5 @@ void main() {
         'NA',
       );
     });
-
-    test('=> adviceDeletedMessage should return correct value with ID market',
-        () {
-      final state = PaymentSummaryDetailsState.initial();
-
-      // Modify the state to have Id market salesOrg
-      final modifiedState = state.copyWith(
-        salesOrganization: fakeIDSalesOrganisation,
-        details: PaymentSummaryDetails.empty().copyWith(
-          createdDate: DateTimeStringValue('2023-09-11'),
-          zzAdvice: StringValue('1234567890'),
-        ),
-      );
-
-      expect(
-        modifiedState.adviceDeletedMessage,
-        'PR #1234567890 has been deleted',
-      );
-    });
-
-    test(
-        '=> adviceDeletedMessage should return correct value with not ID market',
-        () {
-      final state = PaymentSummaryDetailsState.initial();
-
-      // Modify the state to have Id market salesOrg
-      final modifiedState = state.copyWith(
-        salesOrganization: fakeSalesOrganisation,
-        details: PaymentSummaryDetails.empty().copyWith(
-          createdDate: DateTimeStringValue('2023-09-11'),
-          zzAdvice: StringValue('1234567890'),
-        ),
-      );
-
-      expect(
-        modifiedState.adviceDeletedMessage,
-        'PA #1234567890 has been deleted',
-      );
-    });
   });
 }

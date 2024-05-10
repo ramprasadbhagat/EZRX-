@@ -58,9 +58,6 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
         : details.adviceExpiryText;
   }
 
-  String get adviceDeletedMessage =>
-      '${salesOrganization.salesOrg.paymentIdPretext} #${details.zzAdvice.displayDashIfEmpty} has been deleted';
-
   bool get isSavedAdviceEmpty => savedAdvice == AttachmentFileBuffer.empty();
 
   bool get showDeleteAdviceButton =>
