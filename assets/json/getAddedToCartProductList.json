@@ -52,6 +52,7 @@
           "is26SeriesMaterial":null,
           "tenderOrderReason": "715",
           "TenderContractNumber": "0040026800",
+          "isCovid" : false,
           "BonusMaterials": [
             {
               "principalCode": "0000101334",
@@ -121,6 +122,7 @@
           "warehouseStorageCondition": "AC",
           "IsGimmick": false,
           "is26SeriesMaterial":false,
+          "isCovid" : false,
           "BonusMaterials": null,
           "tenderOrderReason": "715",
           "TenderContractNumber": "0040026800"
@@ -170,6 +172,7 @@
           "principalCutoffStatus": false,
           "warehouseStorageCondition": "AC",
           "IsGimmick": false,
+          "isCovid" : false,
           "BonusMaterials": [
             {
               "principalCode": "0000101334",
@@ -842,7 +845,8 @@
           "IsGimmick": false,
           "BonusMaterials": null,
           "isMarketPlace": true,
-          "is26SeriesMaterial":true
+          "is26SeriesMaterial":true,
+          "isCovid" : false
         },
         {
           "BundleDetails": {

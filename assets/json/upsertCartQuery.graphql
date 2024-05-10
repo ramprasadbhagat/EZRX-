@@ -52,6 +52,7 @@
       Comment
       IsGimmick
       is26SeriesMaterial
+      isCovid
       BonusMaterials {
         principalCode
         principalName

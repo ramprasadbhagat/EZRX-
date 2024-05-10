@@ -51,6 +51,7 @@ class PriceAggregate with _$PriceAggregate {
     required int maximumQty,
     @Default(false) bool is26SeriesMaterial,
     @Default(false) bool isGimmickMaterial,
+    @Default(false) bool isCovid,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -86,6 +87,7 @@ class PriceAggregate with _$PriceAggregate {
         is26SeriesMaterial: is26SeriesMaterial,
         isGimmickMaterial: isGimmickMaterial,
         tenderContract: tenderContract,
+        isCovid: isCovid,
       );
     }
     if (materialInfo.type.typeCombo) {
@@ -915,7 +917,7 @@ class PriceAggregate with _$PriceAggregate {
       promotionValue.isNotEmpty && salesOrgConfig.salesOrg.isID;
 
   bool get bonusPriceOverrideEligible =>
-      !materialInfo.isMarketPlace && !is26SeriesMaterial;
+      !materialInfo.isMarketPlace && !is26SeriesMaterial && !isCovid;
 }
 
 enum PriceType {

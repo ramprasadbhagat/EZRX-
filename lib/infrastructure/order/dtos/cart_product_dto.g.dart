@@ -6,12 +6,12 @@ part of 'cart_product_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CartProductDtoImpl _$$CartProductDtoImplFromJson(Map<String, dynamic> json) =>
-    _$CartProductDtoImpl(
+_$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
+    _$_CartProductDto(
       productID: json['productID'] as String? ?? '',
       parentID: json['parentID'] as String? ?? '',
       type: json['type'] as String? ?? '',
-      quantity: (json['quantity'] as num?)?.toInt() ?? 0,
+      quantity: json['quantity'] as int? ?? 0,
       materialNumber: json['materialNumber'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
       therapeuticClass: json['therapeuticClass'] as String? ?? '',
@@ -53,7 +53,7 @@ _$CartProductDtoImpl _$$CartProductDtoImplFromJson(Map<String, dynamic> json) =>
                   ComboMaterialItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      maximumQty: (json['maximumQty'] as num?)?.toInt() ?? 99999,
+      maximumQty: json['maximumQty'] as int? ?? 99999,
       isMarketPlace:
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
       defaultMaterialDescription:
@@ -67,10 +67,10 @@ _$CartProductDtoImpl _$$CartProductDtoImplFromJson(Map<String, dynamic> json) =>
       hasValidTenderContract: json['hasValidTenderContract'] as bool? ?? false,
       hasMandatoryTenderContract:
           json['hasMandatoryTenderContract'] as bool? ?? false,
+      isCovid: json['isCovid'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$CartProductDtoImplToJson(
-        _$CartProductDtoImpl instance) =>
+Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
     <String, dynamic>{
       'productID': instance.productID,
       'parentID': instance.parentID,
@@ -111,11 +111,11 @@ Map<String, dynamic> _$$CartProductDtoImplToJson(
       'tenderOrderReason': instance.tenderOrderReason,
       'hasValidTenderContract': instance.hasValidTenderContract,
       'hasMandatoryTenderContract': instance.hasMandatoryTenderContract,
+      'isCovid': instance.isCovid,
     };
 
-_$BundleDetailsDtoImpl _$$BundleDetailsDtoImplFromJson(
-        Map<String, dynamic> json) =>
-    _$BundleDetailsDtoImpl(
+_$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>
+    _$_BundleDetailsDto(
       bundleName: json['bundleName'] as String? ?? '',
       bundleCode: json['bundleCode'] as String? ?? '',
       bundleInfo: (json['bundleInformation'] as List<dynamic>?)
@@ -124,8 +124,7 @@ _$BundleDetailsDtoImpl _$$BundleDetailsDtoImplFromJson(
           [],
     );
 
-Map<String, dynamic> _$$BundleDetailsDtoImplToJson(
-        _$BundleDetailsDtoImpl instance) =>
+Map<String, dynamic> _$$_BundleDetailsDtoToJson(_$_BundleDetailsDto instance) =>
     <String, dynamic>{
       'bundleName': instance.bundleName,
       'bundleCode': instance.bundleCode,

@@ -50,7 +50,8 @@
                     "BonusMaterials": null,
                     "is26SeriesMaterial":false,
                     "TenderContractNumber": "0040026800",
-                    "tenderOrderReason": "715"
+                    "tenderOrderReason": "715",
+                    "isCovid" : false
                 },
                 {
                     "Type": "material",
@@ -104,7 +105,8 @@
                     "BonusMaterials": null,
                     "is26SeriesMaterial":false,
                     "TenderContractNumber": "0040026800",
-                    "tenderOrderReason": "715"
+                    "tenderOrderReason": "715",
+                    "isCovid" : false
                 },
                 {
                     "BundleDetails": null,
@@ -165,7 +167,8 @@
                     "BonusMaterials": null,
                     "is26SeriesMaterial":true,
                     "TenderContractNumber": "0040026800",
-                    "tenderOrderReason": "715"
+                    "tenderOrderReason": "715",
+                    "isCovid" : false
                 }
             ],
             "MarketplaceItems": [],

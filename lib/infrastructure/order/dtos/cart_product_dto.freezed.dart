@@ -12,7 +12,7 @@ part of 'cart_product_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 CartProductDto _$CartProductDtoFromJson(Map<String, dynamic> json) {
   return _CartProductDto.fromJson(json);
@@ -98,6 +98,8 @@ mixin _$CartProductDto {
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isCovid', defaultValue: false)
+  bool get isCovid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -169,7 +171,8 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
       bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      bool hasMandatoryTenderContract});
+      bool hasMandatoryTenderContract,
+      @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid});
 
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
@@ -226,6 +229,7 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? tenderOrderReason = null,
     Object? hasValidTenderContract = null,
     Object? hasMandatoryTenderContract = null,
+    Object? isCovid = null,
   }) {
     return _then(_value.copyWith(
       productID: null == productID
@@ -380,6 +384,10 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.hasMandatoryTenderContract
           : hasMandatoryTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCovid: null == isCovid
+          ? _value.isCovid
+          : isCovid // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -401,11 +409,11 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
 }
 
 /// @nodoc
-abstract class _$$CartProductDtoImplCopyWith<$Res>
+abstract class _$$_CartProductDtoCopyWith<$Res>
     implements $CartProductDtoCopyWith<$Res> {
-  factory _$$CartProductDtoImplCopyWith(_$CartProductDtoImpl value,
-          $Res Function(_$CartProductDtoImpl) then) =
-      __$$CartProductDtoImplCopyWithImpl<$Res>;
+  factory _$$_CartProductDtoCopyWith(
+          _$_CartProductDto value, $Res Function(_$_CartProductDto) then) =
+      __$$_CartProductDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -466,7 +474,8 @@ abstract class _$$CartProductDtoImplCopyWith<$Res>
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
       bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      bool hasMandatoryTenderContract});
+      bool hasMandatoryTenderContract,
+      @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid});
 
   @override
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
@@ -475,11 +484,11 @@ abstract class _$$CartProductDtoImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$CartProductDtoImplCopyWithImpl<$Res>
-    extends _$CartProductDtoCopyWithImpl<$Res, _$CartProductDtoImpl>
-    implements _$$CartProductDtoImplCopyWith<$Res> {
-  __$$CartProductDtoImplCopyWithImpl(
-      _$CartProductDtoImpl _value, $Res Function(_$CartProductDtoImpl) _then)
+class __$$_CartProductDtoCopyWithImpl<$Res>
+    extends _$CartProductDtoCopyWithImpl<$Res, _$_CartProductDto>
+    implements _$$_CartProductDtoCopyWith<$Res> {
+  __$$_CartProductDtoCopyWithImpl(
+      _$_CartProductDto _value, $Res Function(_$_CartProductDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -523,8 +532,9 @@ class __$$CartProductDtoImplCopyWithImpl<$Res>
     Object? tenderOrderReason = null,
     Object? hasValidTenderContract = null,
     Object? hasMandatoryTenderContract = null,
+    Object? isCovid = null,
   }) {
-    return _then(_$CartProductDtoImpl(
+    return _then(_$_CartProductDto(
       productID: null == productID
           ? _value.productID
           : productID // ignore: cast_nullable_to_non_nullable
@@ -677,14 +687,18 @@ class __$$CartProductDtoImplCopyWithImpl<$Res>
           ? _value.hasMandatoryTenderContract
           : hasMandatoryTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCovid: null == isCovid
+          ? _value.isCovid
+          : isCovid // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$CartProductDtoImpl extends _CartProductDto {
-  const _$CartProductDtoImpl(
+class _$_CartProductDto extends _CartProductDto {
+  const _$_CartProductDto(
       {@JsonKey(name: 'productID', defaultValue: '') required this.productID,
       @JsonKey(name: 'parentID', defaultValue: '') required this.parentID,
       @JsonKey(name: 'type', defaultValue: '') required this.type,
@@ -751,14 +765,15 @@ class _$CartProductDtoImpl extends _CartProductDto {
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
       required this.hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      required this.hasMandatoryTenderContract})
+      required this.hasMandatoryTenderContract,
+      @JsonKey(name: 'isCovid', defaultValue: false) required this.isCovid})
       : _bundleMaterials = bundleMaterials,
         _bonusMaterials = bonusMaterials,
         _comboMaterials = comboMaterials,
         super._();
 
-  factory _$CartProductDtoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CartProductDtoImplFromJson(json);
+  factory _$_CartProductDto.fromJson(Map<String, dynamic> json) =>
+      _$$_CartProductDtoFromJson(json);
 
   @override
   @JsonKey(name: 'productID', defaultValue: '')
@@ -893,17 +908,20 @@ class _$CartProductDtoImpl extends _CartProductDto {
   @override
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
   final bool hasMandatoryTenderContract;
+  @override
+  @JsonKey(name: 'isCovid', defaultValue: false)
+  final bool isCovid;
 
   @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty, isMarketPlace: $isMarketPlace, defaultMaterialDescription: $defaultMaterialDescription, materialGroup4: $materialGroup4, materialGroup2: $materialGroup2, is26SeriesMaterial: $is26SeriesMaterial, isGimmick: $isGimmick, tenderContractNumber: $tenderContractNumber, tenderOrderReason: $tenderOrderReason, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, governmentMaterialCode: $governmentMaterialCode, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, tax: $tax, hidePrice: $hidePrice, isSuspended: $isSuspended, isPrincipalSuspended: $isPrincipalSuspended, comboDeal: $comboDeal, comboMaterials: $comboMaterials, maximumQty: $maximumQty, isMarketPlace: $isMarketPlace, defaultMaterialDescription: $defaultMaterialDescription, materialGroup4: $materialGroup4, materialGroup2: $materialGroup2, is26SeriesMaterial: $is26SeriesMaterial, isGimmick: $isGimmick, tenderContractNumber: $tenderContractNumber, tenderOrderReason: $tenderOrderReason, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, isCovid: $isCovid)';
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CartProductDtoImpl &&
+            other is _$_CartProductDto &&
             (identical(other.productID, productID) ||
                 other.productID == productID) &&
             (identical(other.parentID, parentID) ||
@@ -980,7 +998,8 @@ class _$CartProductDtoImpl extends _CartProductDto {
             (identical(other.hasMandatoryTenderContract,
                     hasMandatoryTenderContract) ||
                 other.hasMandatoryTenderContract ==
-                    hasMandatoryTenderContract));
+                    hasMandatoryTenderContract) &&
+            (identical(other.isCovid, isCovid) || other.isCovid == isCovid));
   }
 
   @JsonKey(ignore: true)
@@ -1024,19 +1043,19 @@ class _$CartProductDtoImpl extends _CartProductDto {
         tenderContractNumber,
         tenderOrderReason,
         hasValidTenderContract,
-        hasMandatoryTenderContract
+        hasMandatoryTenderContract,
+        isCovid
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CartProductDtoImplCopyWith<_$CartProductDtoImpl> get copyWith =>
-      __$$CartProductDtoImplCopyWithImpl<_$CartProductDtoImpl>(
-          this, _$identity);
+  _$$_CartProductDtoCopyWith<_$_CartProductDto> get copyWith =>
+      __$$_CartProductDtoCopyWithImpl<_$_CartProductDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CartProductDtoImplToJson(
+    return _$$_CartProductDtoToJson(
       this,
     );
   }
@@ -1113,11 +1132,13 @@ abstract class _CartProductDto extends CartProductDto {
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
       required final bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      required final bool hasMandatoryTenderContract}) = _$CartProductDtoImpl;
+      required final bool hasMandatoryTenderContract,
+      @JsonKey(name: 'isCovid', defaultValue: false)
+      required final bool isCovid}) = _$_CartProductDto;
   const _CartProductDto._() : super._();
 
   factory _CartProductDto.fromJson(Map<String, dynamic> json) =
-      _$CartProductDtoImpl.fromJson;
+      _$_CartProductDto.fromJson;
 
   @override
   @JsonKey(name: 'productID', defaultValue: '')
@@ -1234,8 +1255,11 @@ abstract class _CartProductDto extends CartProductDto {
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
   bool get hasMandatoryTenderContract;
   @override
+  @JsonKey(name: 'isCovid', defaultValue: false)
+  bool get isCovid;
+  @override
   @JsonKey(ignore: true)
-  _$$CartProductDtoImplCopyWith<_$CartProductDtoImpl> get copyWith =>
+  _$$_CartProductDtoCopyWith<_$_CartProductDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1306,11 +1330,11 @@ class _$BundleDetailsDtoCopyWithImpl<$Res, $Val extends BundleDetailsDto>
 }
 
 /// @nodoc
-abstract class _$$BundleDetailsDtoImplCopyWith<$Res>
+abstract class _$$_BundleDetailsDtoCopyWith<$Res>
     implements $BundleDetailsDtoCopyWith<$Res> {
-  factory _$$BundleDetailsDtoImplCopyWith(_$BundleDetailsDtoImpl value,
-          $Res Function(_$BundleDetailsDtoImpl) then) =
-      __$$BundleDetailsDtoImplCopyWithImpl<$Res>;
+  factory _$$_BundleDetailsDtoCopyWith(
+          _$_BundleDetailsDto value, $Res Function(_$_BundleDetailsDto) then) =
+      __$$_BundleDetailsDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1321,11 +1345,11 @@ abstract class _$$BundleDetailsDtoImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$BundleDetailsDtoImplCopyWithImpl<$Res>
-    extends _$BundleDetailsDtoCopyWithImpl<$Res, _$BundleDetailsDtoImpl>
-    implements _$$BundleDetailsDtoImplCopyWith<$Res> {
-  __$$BundleDetailsDtoImplCopyWithImpl(_$BundleDetailsDtoImpl _value,
-      $Res Function(_$BundleDetailsDtoImpl) _then)
+class __$$_BundleDetailsDtoCopyWithImpl<$Res>
+    extends _$BundleDetailsDtoCopyWithImpl<$Res, _$_BundleDetailsDto>
+    implements _$$_BundleDetailsDtoCopyWith<$Res> {
+  __$$_BundleDetailsDtoCopyWithImpl(
+      _$_BundleDetailsDto _value, $Res Function(_$_BundleDetailsDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1335,7 +1359,7 @@ class __$$BundleDetailsDtoImplCopyWithImpl<$Res>
     Object? bundleCode = null,
     Object? bundleInfo = null,
   }) {
-    return _then(_$BundleDetailsDtoImpl(
+    return _then(_$_BundleDetailsDto(
       bundleName: null == bundleName
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
@@ -1354,8 +1378,8 @@ class __$$BundleDetailsDtoImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BundleDetailsDtoImpl extends _BundleDetailsDto {
-  const _$BundleDetailsDtoImpl(
+class _$_BundleDetailsDto extends _BundleDetailsDto {
+  const _$_BundleDetailsDto(
       {@JsonKey(name: 'bundleName', defaultValue: '') required this.bundleName,
       @JsonKey(name: 'bundleCode', defaultValue: '') required this.bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
@@ -1363,8 +1387,8 @@ class _$BundleDetailsDtoImpl extends _BundleDetailsDto {
       : _bundleInfo = bundleInfo,
         super._();
 
-  factory _$BundleDetailsDtoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BundleDetailsDtoImplFromJson(json);
+  factory _$_BundleDetailsDto.fromJson(Map<String, dynamic> json) =>
+      _$$_BundleDetailsDtoFromJson(json);
 
   @override
   @JsonKey(name: 'bundleName', defaultValue: '')
@@ -1387,10 +1411,10 @@ class _$BundleDetailsDtoImpl extends _BundleDetailsDto {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BundleDetailsDtoImpl &&
+            other is _$_BundleDetailsDto &&
             (identical(other.bundleName, bundleName) ||
                 other.bundleName == bundleName) &&
             (identical(other.bundleCode, bundleCode) ||
@@ -1407,13 +1431,12 @@ class _$BundleDetailsDtoImpl extends _BundleDetailsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BundleDetailsDtoImplCopyWith<_$BundleDetailsDtoImpl> get copyWith =>
-      __$$BundleDetailsDtoImplCopyWithImpl<_$BundleDetailsDtoImpl>(
-          this, _$identity);
+  _$$_BundleDetailsDtoCopyWith<_$_BundleDetailsDto> get copyWith =>
+      __$$_BundleDetailsDtoCopyWithImpl<_$_BundleDetailsDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BundleDetailsDtoImplToJson(
+    return _$$_BundleDetailsDtoToJson(
       this,
     );
   }
@@ -1426,11 +1449,11 @@ abstract class _BundleDetailsDto extends BundleDetailsDto {
       @JsonKey(name: 'bundleCode', defaultValue: '')
       required final String bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-      required final List<BundleInfoDto> bundleInfo}) = _$BundleDetailsDtoImpl;
+      required final List<BundleInfoDto> bundleInfo}) = _$_BundleDetailsDto;
   const _BundleDetailsDto._() : super._();
 
   factory _BundleDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$BundleDetailsDtoImpl.fromJson;
+      _$_BundleDetailsDto.fromJson;
 
   @override
   @JsonKey(name: 'bundleName', defaultValue: '')
@@ -1443,6 +1466,6 @@ abstract class _BundleDetailsDto extends BundleDetailsDto {
   List<BundleInfoDto> get bundleInfo;
   @override
   @JsonKey(ignore: true)
-  _$$BundleDetailsDtoImplCopyWith<_$BundleDetailsDtoImpl> get copyWith =>
+  _$$_BundleDetailsDtoCopyWith<_$_BundleDetailsDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

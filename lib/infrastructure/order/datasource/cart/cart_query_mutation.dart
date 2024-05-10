@@ -190,6 +190,7 @@ class CartQueryMutation {
       tenderOrderReason
       TenderContractNumber
       is26SeriesMaterial
+      isCovid
       BonusMaterials {
         principalCode
         principalName
@@ -616,7 +617,8 @@ class CartQueryMutation {
           CounterOfferPrice	
           CounterOfferCurrency
           DiscountOverridePercentage
-          is26SeriesMaterial	
+          is26SeriesMaterial
+          isCovid	
           Comment
           BonusMaterials {
             principalCode
@@ -1145,6 +1147,7 @@ fragment ezrxItemsFields on Item {
   mov
   IsGimmick
   is26SeriesMaterial
+  isCovid
   ${enableMarketplace ? 'isMarketPlace' : ''}
   materialType
   suspensionStatus

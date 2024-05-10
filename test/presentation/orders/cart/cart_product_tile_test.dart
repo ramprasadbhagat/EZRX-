@@ -1124,6 +1124,72 @@ void main() {
         );
         expect(priceNotAvailableFinder, findsOneWidget);
       });
+
+      testWidgets('Counter offer button not visible for covid material',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItem.copyWith(isCovid: true)],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final counterOfferButton =
+            find.byKey(WidgetKeys.counterOfferPriceButtonKey);
+        expect(counterOfferButton, findsNothing);
+      });
+
+      testWidgets('Bonus override button not visible for covid material',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                quantity: 2,
+                materialInfo: MaterialInfo.empty().copyWith(
+                  type: MaterialInfoType('material'),
+                  materialNumber: MaterialNumber('000000000023168451'),
+                  materialDescription: ' Triglyceride Mosys D',
+                  principalData: PrincipalData.empty().copyWith(
+                    principalName: PrincipalName('台灣拜耳股份有限公司'),
+                  ),
+                  quantity: MaterialQty(2),
+                  hidePrice: false,
+                  isFOCMaterial: false,
+                ),
+                price: Price.empty().copyWith(
+                  additionalBonusEligible: true,
+                ),
+                isCovid: true,
+              ),
+            ],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeSGSalesOrgConfigs,
+            selectedOrderType: OrderDocumentType.empty().copyWith(
+              documentType: DocumentType('ZPOR'),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final bonusOverrideButton =
+            find.byKey(WidgetKeys.bonusSampleItemButtonKey);
+        expect(bonusOverrideButton, findsNothing);
+      });
     },
   );
 }

@@ -94,6 +94,7 @@ class CartProductDto with _$CartProductDto {
     required bool hasValidTenderContract,
     @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
     required bool hasMandatoryTenderContract,
+    @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -160,6 +161,7 @@ class CartProductDto with _$CartProductDto {
           cartItemDetails.tenderContract.contractNumber.getOrCrash(),
       tenderOrderReason:
           cartItemDetails.tenderContract.tenderOrderReason.getOrCrash(),
+      isCovid: cartItemDetails.isCovid,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -234,6 +236,7 @@ class CartProductDto with _$CartProductDto {
         contractNumber:
             TenderContractNumber.tenderContractItemNumber(tenderContractNumber),
       ),
+      isCovid: isCovid,
     );
   }
 
