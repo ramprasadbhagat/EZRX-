@@ -226,11 +226,6 @@ class _NextButton extends StatelessWidget {
       onPressed: enabled
           ? () {
               final step = tabController.index + 1;
-              if (step == 2) {
-                context
-                    .read<NewPaymentBloc>()
-                    .add(const NewPaymentEvent.fetchAvailablePaymentMethods());
-              }
               _trackProceedToNextStep(context, step);
               tabController.animateTo(step);
             }

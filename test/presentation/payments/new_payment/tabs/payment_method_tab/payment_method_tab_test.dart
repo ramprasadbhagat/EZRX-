@@ -150,6 +150,11 @@ void main() {
       );
       expect(find.byType(AddressInfoSection), findsOneWidget);
       expect(find.byKey(WidgetKeys.invoiceCreditListView), findsOneWidget);
+      verify(
+        () => newPaymentBlocMock.add(
+          const NewPaymentEvent.fetchAvailablePaymentMethods(),
+        ),
+      ).called(1);
     });
 
     group('Create payment advise note -', () {
@@ -217,7 +222,7 @@ void main() {
         verify(
           () => newPaymentBlocMock
               .add(const NewPaymentEvent.fetchAvailablePaymentMethods()),
-        ).called(1);
+        ).called(2);
       });
 
       testWidgets('Show shimmer when loading', (tester) async {

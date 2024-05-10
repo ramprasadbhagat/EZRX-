@@ -1,7 +1,20 @@
 part of 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';
 
-class _PaymentMethodSelector extends StatelessWidget {
+class _PaymentMethodSelector extends StatefulWidget {
   const _PaymentMethodSelector({Key? key}) : super(key: key);
+
+  @override
+  State<_PaymentMethodSelector> createState() => _PaymentMethodSelectorState();
+}
+
+class _PaymentMethodSelectorState extends State<_PaymentMethodSelector> {
+  @override
+  void initState() {
+    context
+        .read<NewPaymentBloc>()
+        .add(const NewPaymentEvent.fetchAvailablePaymentMethods());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
