@@ -21,17 +21,22 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/product_image.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
@@ -40,14 +45,16 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_items.dart';
-part 'package:ezrxmobile/presentation/orders/order_success/widgets/bundle_items.dart';
-part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_summary.dart';
-part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_detail_header.dart';
+part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_material_section.dart';
+part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_bundle_section.dart';
+part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_summary.dart';
+part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_header.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_message.dart';
+
+const _horizontalPadding = 20.0;
+const _verticalPadding = 12.0;
 
 class OrderSuccessPage extends StatelessWidget {
   const OrderSuccessPage({Key? key}) : super(key: key);
@@ -114,6 +121,10 @@ class _BodyContent extends StatelessWidget {
         final allItems = state.orderHistoryDetailsList.allItems;
         final zpItems = allItems.zpItemOnly;
         final mpItems = allItems.mpItemOnly;
+        final zpMaterials = zpItems.materialItemDetailsList;
+        final mpMaterials = mpItems.materialItemDetailsList;
+        final zpBundles = zpItems.bundleItemDetailsList;
+        final mpBundles = mpItems.bundleItemDetailsList;
 
         return state.isConfirming
             ? LoadingShimmer.logo(
@@ -122,8 +133,8 @@ class _BodyContent extends StatelessWidget {
             : ListView(
                 key: WidgetKeys.scrollList,
                 shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 children: [
+                  const SizedBox(height: 8),
                   _OrderSuccessMessage(
                     orderStatus: state.orderHistoryDetails.processingStatus,
                   ),
@@ -135,7 +146,7 @@ class _BodyContent extends StatelessWidget {
                         const SizedBox(
                           height: 20.0,
                         ),
-                        _OrderDetailHeader(
+                        _OrderSuccessHeader(
                           orderHeader: state.orderHistoryDetails,
                           orderHistoryList: state.orderHistoryDetailsList,
                         ),
@@ -167,67 +178,89 @@ class _BodyContent extends StatelessWidget {
                             context,
                             sellers: mpItems.manufacturers,
                           ),
-                        _OrderSummary(
+                        _OrderSuccessSummary(
                           orderHistoryDetailList: state.orderHistoryDetailsList,
                         ),
-                        const Divider(
-                          indent: 0,
-                          endIndent: 0,
-                          height: 15,
-                          thickness: 1,
-                          color: ZPColors.extraLightGrey2,
-                        ),
+                        const _Divider(),
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 20.0,
+                            vertical: _verticalPadding,
+                            horizontal: _horizontalPadding,
                           ),
                           child: Text(
-                            '${context.tr('Your items')}(${allItems.length})',
+                            '${context.tr('Your items')} (${allItems.length})',
                             key: WidgetKeys.orderSuccessItemTotalQty,
                             style: Theme.of(context)
                                 .textTheme
-                                .labelMedium
-                                ?.copyWith(
-                                  color: ZPColors.black,
-                                ),
+                                .labelLarge
+                                ?.copyWith(color: ZPColors.neutralsBlack),
                           ),
                         ),
-                        _BundleItemSection(
-                          bundleItems: zpItems.bundleItemDetailsList,
-                          orderNumber: state.orderHistoryDetails.orderNumber,
-                        ),
-                        _MaterialItemSection(
-                          orderItems: zpItems.materialItemDetailsList,
-                        ),
-                        if (zpItems.isNotEmpty && mpItems.isNotEmpty) ...[
-                          const SizedBox(height: 12),
-                          const Divider(
-                            height: 24,
-                            thickness: 1,
-                            color: ZPColors.extraLightGrey2,
+                        if (zpBundles.isNotEmpty)
+                          _OrderSuccessBundleSection(bundleItems: zpBundles),
+                        if (zpBundles.isNotEmpty && zpMaterials.isNotEmpty)
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: _horizontalPadding,
+                            ),
+                            child: _Divider(),
                           ),
-                        ],
+                        if (zpMaterials.isNotEmpty)
+                          _OrderSuccessMaterialSection(
+                            orderItems: zpMaterials,
+                          ),
+                        if (zpItems.isNotEmpty && mpItems.isNotEmpty)
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: _horizontalPadding,
+                            ),
+                            child: _Divider(),
+                          ),
                         if (mpItems.isNotEmpty) ...[
                           const SizedBox(height: 12),
                           const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: _horizontalPadding,
+                            ),
                             child: MarketPlaceTitleWithLogo(showToolTip: true),
                           ),
-                          _BundleItemSection(
-                            bundleItems: mpItems.bundleItemDetailsList,
-                            orderNumber: state.orderHistoryDetails.orderNumber,
-                          ),
-                          _MaterialItemSection(
-                            orderItems: mpItems.materialItemDetailsList,
-                            isMarketPlace: true,
-                          ),
+                          if (mpBundles.isNotEmpty)
+                            _OrderSuccessBundleSection(
+                              bundleItems: mpBundles,
+                            ),
+                          if (mpBundles.isNotEmpty && mpMaterials.isNotEmpty)
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: _horizontalPadding,
+                              ),
+                              child: _Divider(),
+                            ),
+                          if (mpMaterials.isNotEmpty)
+                            _OrderSuccessMaterialSection(
+                              orderItems: mpMaterials,
+                              isMarketPlace: true,
+                            ),
                         ],
                       ],
                     ),
                 ],
               );
       },
+    );
+  }
+}
+
+class _Divider extends StatelessWidget {
+  const _Divider();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Divider(
+      indent: 0,
+      endIndent: 0,
+      thickness: 1,
+      height: _verticalPadding * 2,
+      color: ZPColors.extraLightGrey2,
     );
   }
 }

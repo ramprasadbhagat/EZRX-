@@ -36,7 +36,6 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
-import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
@@ -46,13 +45,13 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
-import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_material.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +84,6 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   late CartBloc cartBlocMock;
-  late MixpanelService mixpanelServiceMock;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late ProductImageBloc productImageBlocMock;
   late PoAttachmentBloc poAttachmentBlocMock;
@@ -110,7 +108,6 @@ void main() {
           .registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
 
       locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
-      mixpanelServiceMock = locator<MixpanelService>();
 
       fakeOrderHistoryDetails =
           await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
@@ -1180,8 +1177,6 @@ void main() {
           find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
           findsOneWidget,
         );
-        expect(find.byType(BundleItemMaterial), findsWidgets);
-
         expect(
           find.byKey(
             WidgetKeys.orderHistoryBundleItemMaterial(
@@ -1190,54 +1185,6 @@ void main() {
           ),
           findsOneWidget,
         );
-      });
-
-      testWidgets('Navigate to item detail on tap', (tester) async {
-        when(() => autoRouterMock.push(const ViewByItemDetailsPageRoute()))
-            .thenAnswer((_) => Future.value(true));
-        when(() => orderSummaryBlocMock.state).thenReturn(
-          OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              OrderHistoryDetails.empty().copyWith(
-                orderNumber: fakeOrderNumber,
-                orderHistoryDetailsOrderItem: [fakeBundleItem],
-              ),
-            ],
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final item = find.byKey(
-          WidgetKeys.orderHistoryBundleItemMaterial(
-            fakeBundleItem.materialNumber.displayMatNo,
-          ),
-        );
-        await tester.dragUntilVisible(
-          item,
-          find.byKey(WidgetKeys.scrollList),
-          const Offset(0, -200),
-        );
-        await tester.pump();
-        await tester.tap(item);
-
-        verify(() => autoRouterMock.push(const ViewByItemDetailsPageRoute()))
-            .called(1);
-
-        verify(
-          () => mixpanelServiceMock.trackEvent(
-            eventName: TrackingEvents.orderDetailViewed,
-            properties: any(named: 'properties'),
-          ),
-        ).called(1);
-
-        verify(
-          () => viewByItemDetailsBlocMock.add(
-            ViewByItemDetailsEvent.fetchOrderHistoryDetails(
-              orderNumber: fakeOrderNumber,
-              lineNumber: fakeOrderHistory.orderHistoryItems[1].lineNumber,
-            ),
-          ),
-        ).called(1);
       });
 
       testWidgets(
@@ -1304,6 +1251,38 @@ void main() {
           expect(preOrderText, findsOneWidget);
         },
       );
+
+      testWidgets('Show marketplace logo when is MP bundle', (tester) async {
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            orderHistoryDetailsList: [
+              OrderHistoryDetails.empty().copyWith(
+                orderHistoryDetailsOrderItem: [
+                  fakeBundleItem.copyWith.material(
+                    isMarketPlace: true,
+                    bundle: Bundle.empty().copyWith(bundleCode: 'fake-code'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(
+              WidgetKeys.cartItemBundleTile(fakeBundleItem.parentId),
+            ),
+            matching: find.byType(MarketPlaceLogo),
+          ),
+          findsOne,
+        );
+      });
     });
 
     group('Material -', () {

@@ -58,7 +58,8 @@ class OrderBundleItem extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '${context.tr('Bundle')} ${viewByOrdersGroup.bundleMaterial.bundle.bundleName.name}',
+                                viewByOrdersGroup
+                                    .bundleMaterial.bundle.bundleName.name,
                                 style: Theme.of(context).textTheme.labelMedium,
                               ),
                               _BundleInformation(

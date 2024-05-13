@@ -1,10 +1,10 @@
 part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 
-class _MaterialItemSection extends StatelessWidget {
+class _OrderSuccessMaterialSection extends StatelessWidget {
   final List<ViewByOrdersGroup> orderItems;
   final bool isMarketPlace;
 
-  const _MaterialItemSection({
+  const _OrderSuccessMaterialSection({
     Key? key,
     required this.orderItems,
     this.isMarketPlace = false,
@@ -12,8 +12,6 @@ class _MaterialItemSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (orderItems.isEmpty) return const SizedBox();
-
     return Column(
       key: isMarketPlace
           ? WidgetKeys.orderSuccessMPItemsSection
@@ -22,12 +20,14 @@ class _MaterialItemSection extends StatelessWidget {
       children: orderItems
           .map(
             (item) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: _horizontalPadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: _verticalPadding),
                     child: isMarketPlace
                         ? MarketPlaceSellerTitle(
                             sellerName: item.principalName.name,
@@ -79,6 +79,7 @@ class _MaterialItem extends StatelessWidget {
         );
 
     return CommonTileItem(
+      margin: const EdgeInsets.symmetric(vertical: _verticalPadding),
       materialNumber: orderItem.materialNumber,
       label: orderItem.combinationCode(
         showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,

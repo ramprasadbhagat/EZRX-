@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -49,11 +48,8 @@ class Bundle with _$Bundle {
 
   double get totalPrice => totalQty * currentBundleInfo.rate;
 
-  bool get showStrikeThroughPrice {
-    final originalRate = sortedBundleInformation.firstOrNull?.rate ?? 0;
-
-    return originalRate > currentBundleInfo.rate;
-  }
+  bool get showStrikeThroughPrice =>
+      minimumQuantityBundleMaterial.rate > currentBundleInfo.rate;
 
   BundleInfo get currentBundleInfo => sortedBundleInformation.lastWhere(
         (bundleInfo) => totalQty >= bundleInfo.quantity,
@@ -63,9 +59,6 @@ class Bundle with _$Bundle {
   bool get miniumQtySatisfied =>
       totalQty >= minimumQuantityBundleMaterial.quantity;
 
-  int get totalQty => materials.fold(
-        0,
-        (int previousValue, element) =>
-            previousValue + element.quantity.intValue,
-      );
+  int get totalQty =>
+      materials.fold<int>(0, (sum, e) => sum + e.quantity.intValue);
 }

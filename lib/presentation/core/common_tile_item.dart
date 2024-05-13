@@ -35,6 +35,7 @@ class CommonTileItem extends StatelessWidget {
     this.topHeaderWidget,
     this.labelTrailing,
     this.labelLeading,
+    this.margin,
   }) : super(key: key);
 
   final String label;
@@ -42,6 +43,7 @@ class CommonTileItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final EdgeInsets? padding;
+  final EdgeInsets? margin;
   final String? headerText;
   final TextStyle? headerTextStyle;
   final Widget? headerTextInfoIcon;
@@ -63,6 +65,7 @@ class CommonTileItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      margin: margin ?? const EdgeInsets.only(bottom: 12),
       padding: padding ?? const EdgeInsets.only(bottom: 0),
       child: ListTile(
         onTap: onTap,

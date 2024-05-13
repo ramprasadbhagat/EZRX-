@@ -1,10 +1,10 @@
 part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 
-class _OrderDetailHeader extends StatelessWidget {
+class _OrderSuccessHeader extends StatelessWidget {
   final List<OrderHistoryDetails> orderHistoryList;
   final OrderHistoryDetails orderHeader;
 
-  const _OrderDetailHeader({
+  const _OrderSuccessHeader({
     Key? key,
     required this.orderHistoryList,
     required this.orderHeader,

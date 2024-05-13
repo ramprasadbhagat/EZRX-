@@ -89,16 +89,12 @@ class _MaterialDetails extends StatelessWidget {
                         .salesOrgConfigs
                         .enableGMC,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ZPColors.neutralsBlack,
                       ),
                 ),
               ),
-              const SizedBox(
-                width: 4,
-              ),
+              const SizedBox(width: 4),
               PreOrderLabel(stockInfo: cartItem.productStockInfo),
             ],
           ),

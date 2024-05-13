@@ -142,6 +142,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
             material: MaterialInfo.empty().copyWith(
               materialNumber: priceAggregate.getMaterialNumber,
               bundle: priceAggregate.bundle,
+              isMarketPlace: priceAggregate.materialInfo.isMarketPlace,
             ),
           );
         }).toList(),
