@@ -78,7 +78,7 @@ stages:
           firebase appdistribution:distribute *.ipa \
           --app "$(FIREBASE_UAT_IOS_APP_ID)" \
           --token "$(FIREBASE_CI_TOKEN)" \
-          --groups "$(FIREBASE_UAT_TESTER_GROUP)"
+          --release-notes "eZRx+ UAT IOS"
         workingDirectory: 'build/ios/ipa'
 
     - task: AppStoreRelease@1
@@ -183,6 +183,7 @@ stages:
           --app "$(FIREBASE_UAT_ANDROID_APP_ID)" \
           --token "$(FIREBASE_CI_TOKEN)" \
           --groups "$(FIREBASE_UAT_TESTER_GROUP)"
+          --release-notes "eZRx+ UAT Android"
         workingDirectory: 'build/app/outputs/bundle/uatRelease'
 
     - task: AppCenterDistribute@3
