@@ -17,44 +17,43 @@ class BundleMaterialDescription extends StatelessWidget {
         .productDetailAggregate
         .materialInfo;
 
-    return Padding(
-      key: WidgetKeys.bundleMaterialDescriptionBottomSheet,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Material information'.tr(),
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-          const SizedBox(height: 24),
-          BalanceTextRow(
-            keyFlex: 3,
-            valueFlex: 4,
-            keyText: 'Bundle Code'.tr(),
-            valueText: materialInfo.materialNumber.getOrDefaultValue(''),
-          ),
-          const SizedBox(height: 8),
-          BalanceTextRow(
-            keyFlex: 3,
-            valueFlex: 4,
-            keyText: 'Manufacturer'.tr(),
-            valueText: materialInfo.manufactured,
-          ),
-          const SizedBox(height: 70),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () => context.router.pop(),
-                  child: Text(context.tr('Close')),
-                ),
+    return SafeArea(
+      child: Padding(
+        key: WidgetKeys.bundleMaterialDescriptionBottomSheet,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.tr('Material information'),
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            const SizedBox(height: 24),
+            BalanceTextRow(
+              keyFlex: 3,
+              valueFlex: 4,
+              keyText: context.tr('Bundle Code'),
+              valueText: materialInfo.materialNumber.displayMatNo,
+            ),
+            const SizedBox(height: 8),
+            BalanceTextRow(
+              keyFlex: 3,
+              valueFlex: 4,
+              keyText: context
+                  .tr(materialInfo.isMarketPlace ? 'Sold by' : 'Manufacturer'),
+              valueText: materialInfo.getManufactured,
+            ),
+            const SizedBox(height: 40),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => context.router.pop(),
+                child: Text(context.tr('Close')),
               ),
-            ],
-          ),
-          const SizedBox(height: 30),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

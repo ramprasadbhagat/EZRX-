@@ -751,17 +751,18 @@ void main() {
         expect(price, findsOneWidget);
       });
 
-      testWidgets('Find marketplace logo in image section MP bundle detail',
+      testWidgets('Find marketplace logo and seller name MP bundle detail',
           (tester) async {
+        final mpBundle = materialResponseMock.products
+            .firstWhere((e) => e.type.typeBundle && e.isMarketPlace)
+            .copyWith
+            .bundle(
+          materials: [MaterialInfo.empty()],
+        );
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: materialResponseMock.products
-                  .firstWhere((e) => e.type.typeBundle && e.isMarketPlace)
-                  .copyWith
-                  .bundle(
-                materials: [MaterialInfo.empty()],
-              ),
+              materialInfo: mpBundle,
             ),
           ),
         );
@@ -769,6 +770,29 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
         expect(find.byType(MarketPlaceRectangleLogo), findsOne);
+        final materialInformationTile =
+            find.byKey(WidgetKeys.bundleOfferMaterialInfo);
+        await tester.dragUntilVisible(
+          materialInformationTile,
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -300),
+        );
+        await tester.pump();
+        expect(
+          find.descendant(
+            of: materialInformationTile,
+            matching: find.text('Bundle code, Sold by'),
+          ),
+          findsOne,
+        );
+        await tester.tap(materialInformationTile);
+        await tester.pump();
+        expect(
+          find.byKey(
+            WidgetKeys.balanceTextRow('Sold by', mpBundle.getManufactured),
+          ),
+          findsOne,
+        );
       });
 
       testWidgets(

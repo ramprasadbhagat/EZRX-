@@ -131,6 +131,7 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
             : const SizedBox.shrink(),
         body: ListView(
           controller: _scrollController,
+          key: WidgetKeys.scrollList,
           children: [
             const EdiUserBanner(),
             const _BundleImageSection(),
@@ -373,11 +374,11 @@ class _BundleOfferDetails extends StatelessWidget {
                 },
                 contentPadding: const EdgeInsets.only(top: 10, bottom: 20),
                 title: Text(
-                  'Material information'.tr(),
+                  context.tr('Material information'),
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
                 subtitle: Text(
-                  '${'Bundle code'.tr()}, ${'Manufacturer'.tr()}',
+                  '${context.tr('Bundle code')}, ${context.tr(state.productDetailAggregate.materialInfo.isMarketPlace ? 'Sold by' : 'Manufacturer')}',
                   overflow: TextOverflow.ellipsis,
                 ),
                 trailing: const Icon(Icons.chevron_right),
