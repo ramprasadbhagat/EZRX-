@@ -14,71 +14,53 @@ part 'order_history_details_dto.g.dart';
 class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
   const OrderHistoryDetailsDto._();
   const factory OrderHistoryDetailsDto({
-    @JsonKey(name: 'OrderValue', defaultValue: 0.0)
-        required double orderValue,
-    @JsonKey(name: 'TotalTax', defaultValue: 0)
-        required double totalTax,
-    @JsonKey(name: 'DeliveryFee', defaultValue: 0)
-        required double deliveryFee,
-    @JsonKey(name: 'ManualFee', defaultValue: 0)
-        required double manualFee,
-    @JsonKey(name: 'TotalValue', defaultValue: 0)
-        required double totalValue,
+    @JsonKey(name: 'OrderValue', defaultValue: 0.0) required double orderValue,
+    @JsonKey(name: 'TotalTax', defaultValue: 0) required double totalTax,
+    @JsonKey(name: 'DeliveryFee', defaultValue: 0) required double deliveryFee,
+    @JsonKey(name: 'ManualFee', defaultValue: 0) required double manualFee,
+    @JsonKey(name: 'TotalValue', defaultValue: 0) required double totalValue,
     @JsonKey(name: 'TotalDiscount', defaultValue: 0)
-        required double totalDiscount,
+    required double totalDiscount,
     @JsonKey(name: 'ProcessingStatus', defaultValue: '')
-        required String processingStatus,
+    required String processingStatus,
     @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-        required String requestedDeliveryDate,
+    required String requestedDeliveryDate,
     @JsonKey(name: 'ExpectedDeliveryDate', defaultValue: '')
-        required String expectedDeliveryDate,
-    @JsonKey(name: 'Type', defaultValue: '')
-        required String type,
+    required String expectedDeliveryDate,
+    @JsonKey(name: 'Type', defaultValue: '') required String type,
     @JsonKey(name: 'TelephoneNumber', defaultValue: '')
-        required String telephoneNumber,
-    @JsonKey(name: 'CreatedDate', defaultValue: '')
-        required String createdDate,
-    @JsonKey(name: 'EZRXNumber', defaultValue: '')
-        required String eZRXNumber,
-    @JsonKey(name: 'OrderBy', defaultValue: '')
-        required String orderBy,
+    required String telephoneNumber,
+    @JsonKey(readValue: _createdDateTimeReadValue) required String createdDate,
+    @JsonKey(name: 'EZRXNumber', defaultValue: '') required String eZRXNumber,
+    @JsonKey(name: 'OrderBy', defaultValue: '') required String orderBy,
     @JsonKey(name: 'ReferenceNotes', defaultValue: '')
-        required String referenceNotes,
-    @JsonKey(name: 'CompanyName', defaultValue: '')
-        required String companyName,
-    @JsonKey(name: 'OrderNumber', defaultValue: '')
-        required String orderNumber,
-    @JsonKey(name: 'POReference', defaultValue: '')
-        required String pOReference,
-    @JsonKey(name: 'ShipTo', defaultValue: '')
-        required String shipTo,
-    @JsonKey(name: 'SoldTo', defaultValue: '')
-        required String soldTo,
+    required String referenceNotes,
+    @JsonKey(name: 'CompanyName', defaultValue: '') required String companyName,
+    @JsonKey(name: 'OrderNumber', defaultValue: '') required String orderNumber,
+    @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
+    @JsonKey(name: 'ShipTo', defaultValue: '') required String shipTo,
+    @JsonKey(name: 'SoldTo', defaultValue: '') required String soldTo,
     @JsonKey(name: 'ShipToAddres', defaultValue: '')
-        required String shipToAddress,
+    required String shipToAddress,
     @JsonKey(name: 'SoldToAddress', defaultValue: '')
-        required String soldToAddress,
+    required String soldToAddress,
     @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-        required String invoiceNumber,
-    @JsonKey(name: 'OrderReason', defaultValue: '')
-        required String orderReason,
+    required String invoiceNumber,
+    @JsonKey(name: 'OrderReason', defaultValue: '') required String orderReason,
     @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
-        required List<OrderHistoryDetailsOrderItemDto>
-            orderHistoryDetailsOrderItem,
+    required List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
     @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
-        required OrderHistoryDetailsPaymentTermDto
-            orderHistoryDetailsPaymentTerm,
+    required OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
     @JsonKey(name: 'SpecialInstructions', readValue: specialInstructionOverride)
-        required String orderHistoryDetailsSpecialInstructions,
+    required String orderHistoryDetailsSpecialInstructions,
     @JsonKey(
       name: 'PODocuments',
       readValue: poDocumentOverride,
     )
-        required List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
-    @JsonKey(name: 'ItmCount', defaultValue: 0)
-        required int itemCount,
+    required List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
+    @JsonKey(name: 'ItmCount', defaultValue: 0) required int itemCount,
     @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-        required bool isMarketPlace,
+    required bool isMarketPlace,
   }) = _OrderHistoryDetailsDto;
   factory OrderHistoryDetailsDto.fromDomain(
     OrderHistoryDetails orderHistoryDetails,
@@ -173,7 +155,19 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
 }
 
 List poDocumentOverride(Map json, String key) => json[key] ?? [];
+
 Map<String, dynamic> paymentTermOverride(Map json, String key) =>
     json[key] ?? {};
+
 String specialInstructionOverride(Map json, String key) => json[key] ?? '';
+
 List orderItemOverride(Map json, String key) => json[key] ?? [];
+
+String _createdDateTimeReadValue(Map json, String _) {
+  final createdDate = json['CreatedDate'] ?? '';
+  final createdTime = json['CreatedTime'] ?? '';
+
+  // Concatenation is necessary to convert 'createdDate' and 'createdTime' into
+  // the 'yyyyMMddHHmmss' format.
+  return '$createdDate$createdTime';
+}

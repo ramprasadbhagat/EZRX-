@@ -6,9 +6,9 @@ part of 'order_history_details_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
+_$OrderHistoryDetailsDtoImpl _$$OrderHistoryDetailsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_OrderHistoryDetailsDto(
+    _$OrderHistoryDetailsDtoImpl(
       orderValue: (json['OrderValue'] as num?)?.toDouble() ?? 0.0,
       totalTax: (json['TotalTax'] as num?)?.toDouble() ?? 0,
       deliveryFee: (json['DeliveryFee'] as num?)?.toDouble() ?? 0,
@@ -20,7 +20,7 @@ _$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
       expectedDeliveryDate: json['ExpectedDeliveryDate'] as String? ?? '',
       type: json['Type'] as String? ?? '',
       telephoneNumber: json['TelephoneNumber'] as String? ?? '',
-      createdDate: json['CreatedDate'] as String? ?? '',
+      createdDate: _createdDateTimeReadValue(json, 'createdDate') as String,
       eZRXNumber: json['EZRXNumber'] as String? ?? '',
       orderBy: json['OrderBy'] as String? ?? '',
       referenceNotes: json['ReferenceNotes'] as String? ?? '',
@@ -52,8 +52,8 @@ _$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(
-        _$_OrderHistoryDetailsDto instance) =>
+Map<String, dynamic> _$$OrderHistoryDetailsDtoImplToJson(
+        _$OrderHistoryDetailsDtoImpl instance) =>
     <String, dynamic>{
       'OrderValue': instance.orderValue,
       'TotalTax': instance.totalTax,
@@ -66,7 +66,7 @@ Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(
       'ExpectedDeliveryDate': instance.expectedDeliveryDate,
       'Type': instance.type,
       'TelephoneNumber': instance.telephoneNumber,
-      'CreatedDate': instance.createdDate,
+      'createdDate': instance.createdDate,
       'EZRXNumber': instance.eZRXNumber,
       'OrderBy': instance.orderBy,
       'ReferenceNotes': instance.referenceNotes,

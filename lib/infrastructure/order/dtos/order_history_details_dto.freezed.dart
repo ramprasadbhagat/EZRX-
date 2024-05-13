@@ -12,7 +12,7 @@ part of 'order_history_details_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OrderHistoryDetailsDto _$OrderHistoryDetailsDtoFromJson(
     Map<String, dynamic> json) {
@@ -43,7 +43,7 @@ mixin _$OrderHistoryDetailsDto {
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   String get telephoneNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'CreatedDate', defaultValue: '')
+  @JsonKey(readValue: _createdDateTimeReadValue)
   String get createdDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'EZRXNumber', defaultValue: '')
   String get eZRXNumber => throw _privateConstructorUsedError;
@@ -114,7 +114,7 @@ abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
       @JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       String telephoneNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
+      @JsonKey(readValue: _createdDateTimeReadValue) String createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
       @JsonKey(name: 'ReferenceNotes', defaultValue: '') String referenceNotes,
@@ -327,11 +327,12 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
+abstract class _$$OrderHistoryDetailsDtoImplCopyWith<$Res>
     implements $OrderHistoryDetailsDtoCopyWith<$Res> {
-  factory _$$_OrderHistoryDetailsDtoCopyWith(_$_OrderHistoryDetailsDto value,
-          $Res Function(_$_OrderHistoryDetailsDto) then) =
-      __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>;
+  factory _$$OrderHistoryDetailsDtoImplCopyWith(
+          _$OrderHistoryDetailsDtoImpl value,
+          $Res Function(_$OrderHistoryDetailsDtoImpl) then) =
+      __$$OrderHistoryDetailsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -350,7 +351,7 @@ abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
       @JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       String telephoneNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
+      @JsonKey(readValue: _createdDateTimeReadValue) String createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
       @JsonKey(name: 'ReferenceNotes', defaultValue: '') String referenceNotes,
@@ -382,12 +383,13 @@ abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
+class __$$OrderHistoryDetailsDtoImplCopyWithImpl<$Res>
     extends _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
-        _$_OrderHistoryDetailsDto>
-    implements _$$_OrderHistoryDetailsDtoCopyWith<$Res> {
-  __$$_OrderHistoryDetailsDtoCopyWithImpl(_$_OrderHistoryDetailsDto _value,
-      $Res Function(_$_OrderHistoryDetailsDto) _then)
+        _$OrderHistoryDetailsDtoImpl>
+    implements _$$OrderHistoryDetailsDtoImplCopyWith<$Res> {
+  __$$OrderHistoryDetailsDtoImplCopyWithImpl(
+      _$OrderHistoryDetailsDtoImpl _value,
+      $Res Function(_$OrderHistoryDetailsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -424,7 +426,7 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
     Object? itemCount = null,
     Object? isMarketPlace = null,
   }) {
-    return _then(_$_OrderHistoryDetailsDto(
+    return _then(_$OrderHistoryDetailsDtoImpl(
       orderValue: null == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
@@ -552,8 +554,8 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
-  const _$_OrderHistoryDetailsDto(
+class _$OrderHistoryDetailsDtoImpl extends _OrderHistoryDetailsDto {
+  const _$OrderHistoryDetailsDtoImpl(
       {@JsonKey(name: 'OrderValue', defaultValue: 0.0) required this.orderValue,
       @JsonKey(name: 'TotalTax', defaultValue: 0) required this.totalTax,
       @JsonKey(name: 'DeliveryFee', defaultValue: 0) required this.deliveryFee,
@@ -570,7 +572,7 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
       @JsonKey(name: 'Type', defaultValue: '') required this.type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       required this.telephoneNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '') required this.createdDate,
+      @JsonKey(readValue: _createdDateTimeReadValue) required this.createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') required this.eZRXNumber,
       @JsonKey(name: 'OrderBy', defaultValue: '') required this.orderBy,
       @JsonKey(name: 'ReferenceNotes', defaultValue: '')
@@ -604,8 +606,8 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
         _orderHistoryDetailsPoDocuments = orderHistoryDetailsPoDocuments,
         super._();
 
-  factory _$_OrderHistoryDetailsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_OrderHistoryDetailsDtoFromJson(json);
+  factory _$OrderHistoryDetailsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderHistoryDetailsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'OrderValue', defaultValue: 0.0)
@@ -641,7 +643,7 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   final String telephoneNumber;
   @override
-  @JsonKey(name: 'CreatedDate', defaultValue: '')
+  @JsonKey(readValue: _createdDateTimeReadValue)
   final String createdDate;
   @override
   @JsonKey(name: 'EZRXNumber', defaultValue: '')
@@ -718,10 +720,10 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryDetailsDto &&
+            other is _$OrderHistoryDetailsDtoImpl &&
             (identical(other.orderValue, orderValue) ||
                 other.orderValue == orderValue) &&
             (identical(other.totalTax, totalTax) ||
@@ -825,13 +827,13 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryDetailsDtoCopyWith<_$_OrderHistoryDetailsDto> get copyWith =>
-      __$$_OrderHistoryDetailsDtoCopyWithImpl<_$_OrderHistoryDetailsDto>(
-          this, _$identity);
+  _$$OrderHistoryDetailsDtoImplCopyWith<_$OrderHistoryDetailsDtoImpl>
+      get copyWith => __$$OrderHistoryDetailsDtoImplCopyWithImpl<
+          _$OrderHistoryDetailsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderHistoryDetailsDtoToJson(
+    return _$$OrderHistoryDetailsDtoImplToJson(
       this,
     );
   }
@@ -860,7 +862,7 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
       @JsonKey(name: 'Type', defaultValue: '') required final String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       required final String telephoneNumber,
-      @JsonKey(name: 'CreatedDate', defaultValue: '')
+      @JsonKey(readValue: _createdDateTimeReadValue)
       required final String createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '')
       required final String eZRXNumber,
@@ -896,11 +898,11 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
       required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(name: 'ItmCount', defaultValue: 0) required final int itemCount,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required final bool isMarketPlace}) = _$_OrderHistoryDetailsDto;
+      required final bool isMarketPlace}) = _$OrderHistoryDetailsDtoImpl;
   const _OrderHistoryDetailsDto._() : super._();
 
   factory _OrderHistoryDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$_OrderHistoryDetailsDto.fromJson;
+      _$OrderHistoryDetailsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'OrderValue', defaultValue: 0.0)
@@ -936,7 +938,7 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   String get telephoneNumber;
   @override
-  @JsonKey(name: 'CreatedDate', defaultValue: '')
+  @JsonKey(readValue: _createdDateTimeReadValue)
   String get createdDate;
   @override
   @JsonKey(name: 'EZRXNumber', defaultValue: '')
@@ -994,6 +996,6 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryDetailsDtoCopyWith<_$_OrderHistoryDetailsDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OrderHistoryDetailsDtoImplCopyWith<_$OrderHistoryDetailsDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
