@@ -365,6 +365,11 @@ void main() {
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Po Document Add',
         build: () => AdditionalDetailsBloc(),
+        seed: () => AdditionalDetailsState.initial().copyWith(
+          isValidated: false,
+          showErrorMessages: true,
+          config: fakeIDSalesOrgConfigs,
+        ),
         act: (AdditionalDetailsBloc bloc) {
           bloc.add(
             AdditionalDetailsEvent.addPoDocument(
@@ -374,6 +379,9 @@ void main() {
         },
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
+            isValidated: false,
+            showErrorMessages: true,
+            config: fakeIDSalesOrgConfigs,
             deliveryInfoData: DeliveryInfoData.empty().copyWith(
               poDocuments: [PoDocuments.empty()],
             ),

@@ -49,9 +49,6 @@ class AdditionalDetailsBloc
             isPoAttachmentValidated: true,
           ),
         );
-        if (state.showErrorMessages) {
-          _validateAdditionalDetails(emit: emit);
-        }
       },
       removePoDocument: (value) {
         final updatedPoDocuments =
@@ -151,12 +148,6 @@ class AdditionalDetailsBloc
                         : !isPaymentTermValid
                             ? DeliveryInfoLabel.paymentTerm
                             : null,
-      ),
-    );
-
-    emit(
-      state.copyWith(
-        showErrorMessages: !isFormValid,
       ),
     );
   }
