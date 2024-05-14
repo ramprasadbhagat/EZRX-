@@ -21,6 +21,7 @@ import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart'
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
+import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
@@ -600,5 +601,26 @@ void main() {
         );
       },
     );
+
+    testWidgets('PreOrder Label', (tester) async {
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          materialList: fakeMaterialList,
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.productOnOffer),
+        findsWidgets,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.productOnOffer).first,
+          matching: find.byType(PreOrderLabel),
+        ),
+        findsOneWidget,
+      );
+    });
   });
 }

@@ -171,7 +171,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
           },
           '\n',
         );
-        
+
         return message.toString();
       case 'TW':
         message.writeAll(
@@ -256,7 +256,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
 
   bool get showGovtListPrice => enableListPrice && salesOrg.isTW;
 
-  double get homeOfferListHeight => showGovtListPrice ? 170 : 150;
+  double get homeOfferListHeight => showGovtListPrice ? 195 : 185;
 
   bool get displayStockInfo => enableBatchNumber || expiryDateDisplay;
 

@@ -27,6 +27,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
+import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
@@ -36,7 +37,6 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';

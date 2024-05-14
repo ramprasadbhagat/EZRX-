@@ -51,6 +51,9 @@ class _ProductTile extends StatelessWidget {
                                 .bodySmall
                                 ?.copyWith(color: ZPColors.extraLightGrey4),
                           ),
+                          PreOrderLabel(
+                            stockInfo: materialInfo.productStockInfo,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 5.0),
                             child: Text(
