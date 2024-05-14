@@ -12,7 +12,7 @@ part of 'add_request_params_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AddRequestParamsDto _$AddRequestParamsDtoFromJson(Map<String, dynamic> json) {
   return _AddRequestParamsDto.fromJson(json);
@@ -108,11 +108,11 @@ class _$AddRequestParamsDtoCopyWithImpl<$Res, $Val extends AddRequestParamsDto>
 }
 
 /// @nodoc
-abstract class _$$_AddRequestParamsDtoCopyWith<$Res>
+abstract class _$$AddRequestParamsDtoImplCopyWith<$Res>
     implements $AddRequestParamsDtoCopyWith<$Res> {
-  factory _$$_AddRequestParamsDtoCopyWith(_$_AddRequestParamsDto value,
-          $Res Function(_$_AddRequestParamsDto) then) =
-      __$$_AddRequestParamsDtoCopyWithImpl<$Res>;
+  factory _$$AddRequestParamsDtoImplCopyWith(_$AddRequestParamsDtoImpl value,
+          $Res Function(_$AddRequestParamsDtoImpl) then) =
+      __$$AddRequestParamsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -128,11 +128,11 @@ abstract class _$$_AddRequestParamsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AddRequestParamsDtoCopyWithImpl<$Res>
-    extends _$AddRequestParamsDtoCopyWithImpl<$Res, _$_AddRequestParamsDto>
-    implements _$$_AddRequestParamsDtoCopyWith<$Res> {
-  __$$_AddRequestParamsDtoCopyWithImpl(_$_AddRequestParamsDto _value,
-      $Res Function(_$_AddRequestParamsDto) _then)
+class __$$AddRequestParamsDtoImplCopyWithImpl<$Res>
+    extends _$AddRequestParamsDtoCopyWithImpl<$Res, _$AddRequestParamsDtoImpl>
+    implements _$$AddRequestParamsDtoImplCopyWith<$Res> {
+  __$$AddRequestParamsDtoImplCopyWithImpl(_$AddRequestParamsDtoImpl _value,
+      $Res Function(_$AddRequestParamsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -145,7 +145,7 @@ class __$$_AddRequestParamsDtoCopyWithImpl<$Res>
     Object? soldToCustomer = null,
     Object? invoiceDetails = null,
   }) {
-    return _then(_$_AddRequestParamsDto(
+    return _then(_$AddRequestParamsDtoImpl(
       orderSource: null == orderSource
           ? _value.orderSource
           : orderSource // ignore: cast_nullable_to_non_nullable
@@ -176,8 +176,8 @@ class __$$_AddRequestParamsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AddRequestParamsDto extends _AddRequestParamsDto {
-  const _$_AddRequestParamsDto(
+class _$AddRequestParamsDtoImpl extends _AddRequestParamsDto {
+  const _$AddRequestParamsDtoImpl(
       {@JsonKey(name: 'orderSource', defaultValue: '')
       required this.orderSource,
       @JsonKey(name: 'purchaseNumberC', defaultValue: '')
@@ -192,8 +192,8 @@ class _$_AddRequestParamsDto extends _AddRequestParamsDto {
       : _invoiceDetails = invoiceDetails,
         super._();
 
-  factory _$_AddRequestParamsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AddRequestParamsDtoFromJson(json);
+  factory _$AddRequestParamsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddRequestParamsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'orderSource', defaultValue: '')
@@ -225,10 +225,10 @@ class _$_AddRequestParamsDto extends _AddRequestParamsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddRequestParamsDto &&
+            other is _$AddRequestParamsDtoImpl &&
             (identical(other.orderSource, orderSource) ||
                 other.orderSource == orderSource) &&
             (identical(other.purchaseNumberC, purchaseNumberC) ||
@@ -257,13 +257,13 @@ class _$_AddRequestParamsDto extends _AddRequestParamsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddRequestParamsDtoCopyWith<_$_AddRequestParamsDto> get copyWith =>
-      __$$_AddRequestParamsDtoCopyWithImpl<_$_AddRequestParamsDto>(
+  _$$AddRequestParamsDtoImplCopyWith<_$AddRequestParamsDtoImpl> get copyWith =>
+      __$$AddRequestParamsDtoImplCopyWithImpl<_$AddRequestParamsDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AddRequestParamsDtoToJson(
+    return _$$AddRequestParamsDtoImplToJson(
       this,
     );
   }
@@ -283,11 +283,11 @@ abstract class _AddRequestParamsDto extends AddRequestParamsDto {
           required final String soldToCustomer,
           @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailsDto>[])
           required final List<InvoiceDetailsDto> invoiceDetails}) =
-      _$_AddRequestParamsDto;
+      _$AddRequestParamsDtoImpl;
   const _AddRequestParamsDto._() : super._();
 
   factory _AddRequestParamsDto.fromJson(Map<String, dynamic> json) =
-      _$_AddRequestParamsDto.fromJson;
+      _$AddRequestParamsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'orderSource', defaultValue: '')
@@ -309,6 +309,6 @@ abstract class _AddRequestParamsDto extends AddRequestParamsDto {
   List<InvoiceDetailsDto> get invoiceDetails;
   @override
   @JsonKey(ignore: true)
-  _$$_AddRequestParamsDtoCopyWith<_$_AddRequestParamsDto> get copyWith =>
+  _$$AddRequestParamsDtoImplCopyWith<_$AddRequestParamsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -14,35 +14,35 @@ class AddRequestParamsDto with _$AddRequestParamsDto {
       name: 'orderSource',
       defaultValue: '',
     )
-        required String orderSource,
+    required String orderSource,
     @JsonKey(
       name: 'purchaseNumberC',
       defaultValue: '',
     )
-        required String purchaseNumberC,
+    required String purchaseNumberC,
     @JsonKey(
       name: 'specialInstruction',
       defaultValue: '',
     )
-        required String specialInstruction,
+    required String specialInstruction,
     @JsonKey(
       name: 'username',
       defaultValue: '',
     )
-        required String userName,
+    required String userName,
     @JsonKey(name: 'soldToCustomer', defaultValue: '')
-        required String soldToCustomer,
+    required String soldToCustomer,
     @JsonKey(name: 'invoiceDetails', defaultValue: <InvoiceDetailsDto>[])
-        required List<InvoiceDetailsDto> invoiceDetails,
+    required List<InvoiceDetailsDto> invoiceDetails,
   }) = _AddRequestParamsDto;
 
   factory AddRequestParamsDto.fromDomain(AddRequestParams param) {
     return AddRequestParamsDto(
-      orderSource: param.orderSource,
+      orderSource: param.user.role.type.purchaseOrderType,
       purchaseNumberC: param.returnReference,
       specialInstruction: param.specialInstruction,
       soldToCustomer: param.soldTo,
-      userName: param.userName.getValue(),
+      userName: param.user.username.getValue(),
       invoiceDetails: param.invoiceDetails
           .map((e) => InvoiceDetailsDto.fromDomain(e))
           .toList(),

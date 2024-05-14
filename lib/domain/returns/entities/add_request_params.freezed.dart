@@ -12,14 +12,13 @@ part of 'add_request_params.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AddRequestParams {
-  String get orderSource => throw _privateConstructorUsedError;
   String get returnReference => throw _privateConstructorUsedError;
   String get specialInstruction => throw _privateConstructorUsedError;
-  Username get userName => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
   String get soldTo => throw _privateConstructorUsedError;
   List<InvoiceDetails> get invoiceDetails => throw _privateConstructorUsedError;
 
@@ -35,12 +34,13 @@ abstract class $AddRequestParamsCopyWith<$Res> {
       _$AddRequestParamsCopyWithImpl<$Res, AddRequestParams>;
   @useResult
   $Res call(
-      {String orderSource,
-      String returnReference,
+      {String returnReference,
       String specialInstruction,
-      Username userName,
+      User user,
       String soldTo,
       List<InvoiceDetails> invoiceDetails});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -56,18 +56,13 @@ class _$AddRequestParamsCopyWithImpl<$Res, $Val extends AddRequestParams>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderSource = null,
     Object? returnReference = null,
     Object? specialInstruction = null,
-    Object? userName = null,
+    Object? user = null,
     Object? soldTo = null,
     Object? invoiceDetails = null,
   }) {
     return _then(_value.copyWith(
-      orderSource: null == orderSource
-          ? _value.orderSource
-          : orderSource // ignore: cast_nullable_to_non_nullable
-              as String,
       returnReference: null == returnReference
           ? _value.returnReference
           : returnReference // ignore: cast_nullable_to_non_nullable
@@ -76,10 +71,10 @@ class _$AddRequestParamsCopyWithImpl<$Res, $Val extends AddRequestParams>
           ? _value.specialInstruction
           : specialInstruction // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as Username,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       soldTo: null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
@@ -90,48 +85,53 @@ class _$AddRequestParamsCopyWithImpl<$Res, $Val extends AddRequestParams>
               as List<InvoiceDetails>,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_AddRequestParamsCopyWith<$Res>
+abstract class _$$AddRequestParamsImplCopyWith<$Res>
     implements $AddRequestParamsCopyWith<$Res> {
-  factory _$$_AddRequestParamsCopyWith(
-          _$_AddRequestParams value, $Res Function(_$_AddRequestParams) then) =
-      __$$_AddRequestParamsCopyWithImpl<$Res>;
+  factory _$$AddRequestParamsImplCopyWith(_$AddRequestParamsImpl value,
+          $Res Function(_$AddRequestParamsImpl) then) =
+      __$$AddRequestParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String orderSource,
-      String returnReference,
+      {String returnReference,
       String specialInstruction,
-      Username userName,
+      User user,
       String soldTo,
       List<InvoiceDetails> invoiceDetails});
+
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_AddRequestParamsCopyWithImpl<$Res>
-    extends _$AddRequestParamsCopyWithImpl<$Res, _$_AddRequestParams>
-    implements _$$_AddRequestParamsCopyWith<$Res> {
-  __$$_AddRequestParamsCopyWithImpl(
-      _$_AddRequestParams _value, $Res Function(_$_AddRequestParams) _then)
+class __$$AddRequestParamsImplCopyWithImpl<$Res>
+    extends _$AddRequestParamsCopyWithImpl<$Res, _$AddRequestParamsImpl>
+    implements _$$AddRequestParamsImplCopyWith<$Res> {
+  __$$AddRequestParamsImplCopyWithImpl(_$AddRequestParamsImpl _value,
+      $Res Function(_$AddRequestParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderSource = null,
     Object? returnReference = null,
     Object? specialInstruction = null,
-    Object? userName = null,
+    Object? user = null,
     Object? soldTo = null,
     Object? invoiceDetails = null,
   }) {
-    return _then(_$_AddRequestParams(
-      orderSource: null == orderSource
-          ? _value.orderSource
-          : orderSource // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$AddRequestParamsImpl(
       returnReference: null == returnReference
           ? _value.returnReference
           : returnReference // ignore: cast_nullable_to_non_nullable
@@ -140,10 +140,10 @@ class __$$_AddRequestParamsCopyWithImpl<$Res>
           ? _value.specialInstruction
           : specialInstruction // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as Username,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       soldTo: null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
@@ -158,25 +158,22 @@ class __$$_AddRequestParamsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddRequestParams extends _AddRequestParams {
-  const _$_AddRequestParams(
-      {required this.orderSource,
-      required this.returnReference,
+class _$AddRequestParamsImpl extends _AddRequestParams {
+  const _$AddRequestParamsImpl(
+      {required this.returnReference,
       required this.specialInstruction,
-      required this.userName,
+      required this.user,
       required this.soldTo,
       required final List<InvoiceDetails> invoiceDetails})
       : _invoiceDetails = invoiceDetails,
         super._();
 
   @override
-  final String orderSource;
-  @override
   final String returnReference;
   @override
   final String specialInstruction;
   @override
-  final Username userName;
+  final User user;
   @override
   final String soldTo;
   final List<InvoiceDetails> _invoiceDetails;
@@ -189,22 +186,19 @@ class _$_AddRequestParams extends _AddRequestParams {
 
   @override
   String toString() {
-    return 'AddRequestParams(orderSource: $orderSource, returnReference: $returnReference, specialInstruction: $specialInstruction, userName: $userName, soldTo: $soldTo, invoiceDetails: $invoiceDetails)';
+    return 'AddRequestParams(returnReference: $returnReference, specialInstruction: $specialInstruction, user: $user, soldTo: $soldTo, invoiceDetails: $invoiceDetails)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddRequestParams &&
-            (identical(other.orderSource, orderSource) ||
-                other.orderSource == orderSource) &&
+            other is _$AddRequestParamsImpl &&
             (identical(other.returnReference, returnReference) ||
                 other.returnReference == returnReference) &&
             (identical(other.specialInstruction, specialInstruction) ||
                 other.specialInstruction == specialInstruction) &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
             const DeepCollectionEquality()
                 .equals(other._invoiceDetails, _invoiceDetails));
@@ -213,45 +207,42 @@ class _$_AddRequestParams extends _AddRequestParams {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      orderSource,
       returnReference,
       specialInstruction,
-      userName,
+      user,
       soldTo,
       const DeepCollectionEquality().hash(_invoiceDetails));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddRequestParamsCopyWith<_$_AddRequestParams> get copyWith =>
-      __$$_AddRequestParamsCopyWithImpl<_$_AddRequestParams>(this, _$identity);
+  _$$AddRequestParamsImplCopyWith<_$AddRequestParamsImpl> get copyWith =>
+      __$$AddRequestParamsImplCopyWithImpl<_$AddRequestParamsImpl>(
+          this, _$identity);
 }
 
 abstract class _AddRequestParams extends AddRequestParams {
   const factory _AddRequestParams(
-          {required final String orderSource,
-          required final String returnReference,
+          {required final String returnReference,
           required final String specialInstruction,
-          required final Username userName,
+          required final User user,
           required final String soldTo,
           required final List<InvoiceDetails> invoiceDetails}) =
-      _$_AddRequestParams;
+      _$AddRequestParamsImpl;
   const _AddRequestParams._() : super._();
 
-  @override
-  String get orderSource;
   @override
   String get returnReference;
   @override
   String get specialInstruction;
   @override
-  Username get userName;
+  User get user;
   @override
   String get soldTo;
   @override
   List<InvoiceDetails> get invoiceDetails;
   @override
   @JsonKey(ignore: true)
-  _$$_AddRequestParamsCopyWith<_$_AddRequestParams> get copyWith =>
+  _$$AddRequestParamsImplCopyWith<_$AddRequestParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

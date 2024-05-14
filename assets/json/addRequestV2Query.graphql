@@ -16,7 +16,7 @@ variables: {
   "returnInput": {
       "soldToCustomer": "0030082707",
       "username": "rootadmin",
-      "orderSource": "DSS",
+      "orderSource": "MRXS",
       "invoiceDetails": [
           {
               "invoiceNumber": "1100001113",

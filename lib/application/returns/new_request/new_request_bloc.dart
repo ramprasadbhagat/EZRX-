@@ -261,11 +261,10 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
         final failureOrSuccess = await newRequestRepository.addRequest(
           requestParams: AddRequestParams.empty().copyWith(
             invoiceDetails: state.validInvoiceDetails,
-            orderSource: 'DSS',
             returnReference: state.returnReference,
             specialInstruction: state.specialInstructions,
             soldTo: e.customerCodeInfo.customerCodeSoldTo,
-            userName: e.user.username,
+            user: e.user,
           ),
         );
 

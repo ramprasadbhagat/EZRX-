@@ -473,9 +473,7 @@ void main() {
         setUp: () {
           when(
             () => newRequestRepository.addRequest(
-              requestParams: AddRequestParams.empty().copyWith(
-                orderSource: 'DSS',
-              ),
+              requestParams: AddRequestParams.empty(),
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -508,9 +506,7 @@ void main() {
         setUp: () {
           when(
             () => newRequestRepository.addRequest(
-              requestParams: AddRequestParams.empty().copyWith(
-                orderSource: 'DSS',
-              ),
+              requestParams: AddRequestParams.empty(),
             ),
           ).thenAnswer(
             (invocation) async => const Right(

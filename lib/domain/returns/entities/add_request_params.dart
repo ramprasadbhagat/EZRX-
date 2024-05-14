@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,20 +9,18 @@ class AddRequestParams with _$AddRequestParams {
   const AddRequestParams._();
 
   const factory AddRequestParams({
-    required String orderSource,
     required String returnReference,
     required String specialInstruction,
-    required Username userName,
+    required User user,
     required String soldTo,
     required List<InvoiceDetails> invoiceDetails,
   }) = _AddRequestParams;
 
   factory AddRequestParams.empty() => AddRequestParams(
-        orderSource: '',
         returnReference: '',
         specialInstruction: '',
         soldTo: '',
-        userName: Username(''),
+        user: User.empty(),
         invoiceDetails: <InvoiceDetails>[],
       );
 }

@@ -8,59 +8,47 @@ void main() {
   final config = Config()..appFlavor = Flavor.mock;
   final mockOrderDecrypted = {
     'NewOrderInput': {
-      'username': 'rootadmin',
-      'Holidays': '{}',
-      'CustomerHolidays':
-          '{"monday":false,"tuesday":false,"wednesday":false,"thursday":false,"friday":false,"saturday":false,"sunday":false}',
+      'username': 'myrootadmin',
+      'companyName': 'RSD HOSPITALS SDN BHD (SJMC) Test Name 2',
       'customer': {
         'customerNumber': '0030082707',
         'customerNumberShipTo': '0070149863',
         'salesOrganisation': '2001',
-        'division': '00',
+        'division': '',
       },
+      'POReference': '',
       'materials': [
         {
-          'materialNumber': '000000000021041773',
-          'qty': 15,
-          'price': 20.4,
-          'tax': 0,
-          'bonuses': [
-            {
-              'materialNumber': '000000000021041773',
-              'qty': 2,
-              'PromoStatus': false,
-              'PromoType': '',
-            }
-          ],
-          'ProductType': 'MATERIAL',
-          'ParentID': '000000000021041773',
+          'materialNumber': '000000000021038305',
+          'qty': 5,
+          'bonuses': [],
           'Comment': '',
-          'Mrp': 20.4,
-          'PromoStatus': true,
+          'ParentID': '',
+          'ProductType': 'MATERIAL',
+          'price': 273.6,
+          'tax': 0.0,
+          'Mrp': 273.6,
+          'PromoStatus': false,
           'PromoType': '',
+          'PrincipalCode': '0000101246',
+          'PrincipalName': 'BAXTER HEALTHCARE -M',
           'isCounterOffer': false,
-          'principalCode': '0000101334',
-          'principalName': 'GLAXOSMITHKLINE CONSUMER',
-          'Description': '190 BIOTENE D/MOUTHT/PASTE FM ORI 4.5OZ',
-        }
+        },
       ],
-      'blockOrder': false,
-      'orderValue': 306,
-      'totalTax': 0,
-      'PODate': '2023-12-14',
-      'companyName': '',
-      'SpecialInstructions': '',
-      'paymentMethod': 'Bank Transfer',
-      'language': 'EN',
-      'POReference': '',
+      'PODate': '2024-05-14',
       'RequestedDeliveryDate': '',
-      'paymentTerms': '0001',
-      'CollectiveNumber': '',
+      'SpecialInstructions': '',
+      'orderValue': 1368.0,
+      'totalTax': 0.0,
+      'Telephone': '0356341212035634',
       'referenceNotes': '',
+      'paymentTerms': '',
+      'CollectiveNumber': '',
+      'blockOrder': false,
+      'language': 'EN',
+      'paymentMethod': 'Bank Transfer',
+      'PurchaseOrderType': 'MRXS',
       'poDocuments': [],
-      'Telephone': '',
-      'deliveryFee': 'undefined',
-      'PurchaseOrderType': 'DSS',
     },
   };
 
@@ -84,7 +72,7 @@ void main() {
         'Order decryption',
         () async {
           const dataEncrypted =
-              'b5458710d3cea8263ff3008f0a5d9c5abb71d09bd070a7fb1a93956494f8f04d6689f26670fb3d55423bb7b5931872da011a9e312c45d9cd4028588caacd40755a1fe2908119ddf98c5efbe30ecfeef82c3a2bdb8070f705c6bfee765cb717601df6a11d5a8c668f59d852c8953c08fd42b91e7ae224eeb1483411f2af9526d98c70a6605967ba901e261797c76cd7057fa14c1606f8ad2c3c42a692173cb043558db0c7d2e91aca7ff742a2dcc41def5a5a8b7f531ef4d86145a01a15dfbe2fc9e7e8b9500130638a201a11bd37f9f24eaa37dba48e079bb7029886aae2d37373631c5eb05e095ed236670bbb2d25b076010e0ff39b3a239b57ec9011f1943d548fc25339c88eb82f0f0908805d99fc0e80de14ea6c8264e3325b3c52c90eefe36db4cdad9a93e1caf74dcf8e524f912d5519244282e0c6b093713cd2ac5fd2c33f92aca34d223da99811a17fef329e86594045d0b0f41b218f9a297daa417fc983084c98071a6bad3fabe4e358c0545edc01c6508d5213478257545f447fe7de14855b153304fd18cc17b6dd1ea5d128df84013c6ddc9f7adfe291cb89d6b6282ba48db77469b6d58d93eb9c5c4d922e7196e4ac5a7f80ed2d13fa7e43aedcd96e3109fb0f8e9b21873e8d4b9a94bc0b56e24c2609cc142e8c4dcb518495849bc817f047b74a6cd5f00bbd0c73a47b868025eea99268efef11efe0b513595497ad583ebd32a9ad68c8215bfb763f45a24f828e7cf859174e440afe669b38565532196f38fd86106241b41a87ba0463715bbca7b0e8fa68e2c6d19408a8b9f586beed9e6197e73ba8d5d0f251af307c16a91142cad949895eb0109a2b18ca4bc9f608eb22edfa56d327e830bd04c0514d8bfb26f57e60a390e984eb8872ae5da18120b1fe62bc1c6bb48a592d3c42ae4748c39b6b77656c82deca70d6757c229c35cb178de9534e1581b2f3276b25888d8047916a8cf3c3ccf1a08a050d93d99a5e12f178a5143d21a32565def60c74c23904ada2e0d3dbba8b76ec04018690079e8dfa2517da7eb17b0ef9274bd0e815dec3c8d3ea264528aaeb1c91fd16c3a2af0ae8f2f9ab81b547bdb3d9f00ce1b15826a214596254b4a3fdca1d3abd96d00e6a598b7ce0557e5693b1cddda6af0e71468c0a27cf2cf14893bfec130c21ea6c604cf3e9bafc68be49d23481f6690b121bdc3ac21c906cc7bf5ebe92862a14c76fcb1797ccef8db98233d2a8574fd33ed3866def9e7ddca6b95ca5821cc7a53a8e09a54d66255147dc0cfcbbb57840c87403285ed1ae3977494f5b6f876ae182f86d63c60fc87c2483c733777216cb70e133b1d6f7b1cf208481d282afa8159ba8d2d1e48b4984de4a4d0ea6413a01cac6415f7bbe1967e392d44ed3b5aaa0698cfd304293542b15c1dbc07153eb2bb043cf9938dfbbf8ac9506faa379d3274dca4a55aa9ab151156e2c62df2c250936d8c6defc375cc8b75f643e5b37429a83efe7768501daef38f212bea1d04c781ad3d68c71f0802a497780efb748665a37c7be29a606d476aff72d98a7926f35ad4365c8300c152fbe7d761cc88e74ebb0764ae179777321295176395362ab3d7a0661fedc490d7191b51809e590b6';
+              '22b7adde7fd4b70dd49821ff9498fc412c2894849082ac768bb4ed0041b638d846627b4ffcfeae5690f70e93384fc2d5d276e1bcdcdada8f786856aa1cd65371c88956e0b45503c63b89613c2703355526fe173b470a5a432ebb8eaacd7bab0cb17674d4fe7b7ee8054a4350a939ebd02fa0eee92466f7cad9cce051c5ac6b25384c826045f011aabb3caccb4b6dc3932df2792a888fc35eed95dd26b595d3f23c7f48898a9d6856ad0b7c50703f50cbcbea70579c8c52afd2557fc9f65a7ca13bb3a0ea3609310e6d0bd69796f4ae6453a70455b76b90bd2efe15f7b94537a9ec86d6d1ab730b2f9a131bb577d6098995b5389fe683c229402cd81bd46f207e56b536ec0b2e233f74747efca16a10c45115914ea81181f198e08c90d96f0809af47f8251adc1dfdea709a66fefa2bc74782b98b09e753b809bd94ff9fa21f7527dc57cea206540b7ea4ca16058a5f8b545634d2ce0da44676fdfe25c6380c8420804031eafa769801eb686e0a15ccd75c7af61f6ec93b37fd7e6f052a2c0913a27ad31caa3a101d24b8440db1cd10c53f714e4ed501cb9dec6b0a1cff1b1dc41fca3d35bd9e73097d978a911cf219bf84bb9c827e33d803711be46440609e57b1d308171e41e868551fdcf2636cf4606002437340bc805cc548ca28edc328267d65d4ca60f78ce3c2ed9ded44172095ec7c8b051a0d132244ea796bdc87fa8202b98c2dcb4bd9f8f826ff2cb6c2c73efb03a685128e907fef6a4fbc819bdc5d99be7b4dd1e30f277fe3393e0b4a713186982d5e5ae89be3ec25b59f92586505bc2754beb64f7feb01c790ba90d3ce3a10a974d07088f8d2f6dc077cb5c473d9ed5d19d61263d59e711051ee70c79295e7287202e70d9861961d67e474a0e2e2fb82dc860e4c7f863215a9b6a09dbc10715cad3d08a51830b534e4b770d2e1fe4e0e772f1a0013c518c8118e7c9d42c8b7bcdd41e34ca55e51b3da2eabb58e111c7f5f7dd8c84dcea63209af6f169eb2b9d64cba13d181ed0327b160aa2bb6aef62c6bec12d4e18137dba59ebb7fbeec93fa22090771d508b40c5efea9f0cb0e322291f67cf2596b1ae3efa5de308dcd58483122e8fce589161f823b45c4f1a4abb508ae42b571cdc088c5ebb1b856751bd622351a1574f86b363ebbb40b1e1803ae3d83fdd5a37fc63381b95ad8d1b74f03be2cf13a68de90e0719fea9d718a';
 
           final data = decryption.orderDecrypt(
             encryptedText: dataEncrypted,

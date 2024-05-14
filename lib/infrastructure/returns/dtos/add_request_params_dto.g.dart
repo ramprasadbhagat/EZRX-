@@ -6,9 +6,9 @@ part of 'add_request_params_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AddRequestParamsDto _$$_AddRequestParamsDtoFromJson(
+_$AddRequestParamsDtoImpl _$$AddRequestParamsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AddRequestParamsDto(
+    _$AddRequestParamsDtoImpl(
       orderSource: json['orderSource'] as String? ?? '',
       purchaseNumberC: json['purchaseNumberC'] as String? ?? '',
       specialInstruction: json['specialInstruction'] as String? ?? '',
@@ -21,8 +21,8 @@ _$_AddRequestParamsDto _$$_AddRequestParamsDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_AddRequestParamsDtoToJson(
-        _$_AddRequestParamsDto instance) =>
+Map<String, dynamic> _$$AddRequestParamsDtoImplToJson(
+        _$AddRequestParamsDtoImpl instance) =>
     <String, dynamic>{
       'orderSource': instance.orderSource,
       'purchaseNumberC': instance.purchaseNumberC,

@@ -302,19 +302,6 @@ String roleNameToRoleType(String roleName) {
   return roleNameToRoleTypeMap[roleName] ?? 'Unknown';
 }
 
-String getOrderSource(String roleType) {
-  final roleNameToOrderSource = {
-    'internal_sales_rep': 'EZS',
-    'external_sales_rep': 'EZP',
-    'zp_admin': 'DSS',
-    'root_admin': 'DSS',
-    'client_user': 'DSC',
-    'client_admin': 'DSC',
-  };
-
-  return roleNameToOrderSource[roleType] ?? '';
-}
-
 bool roleCanLoginOnBehalfByZPAdmin(String userRoleType) {
   switch (userRoleType) {
     case 'client_admin':

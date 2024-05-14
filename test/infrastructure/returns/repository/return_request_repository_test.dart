@@ -5,6 +5,9 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -95,10 +98,16 @@ void main() {
   final fakeAttachmentFile = AttachmentFileBuffer.empty();
   final fakeReturnRequestAttachment = ReturnRequestAttachment.empty();
   final fakeRequestParams = AddRequestParams(
-    orderSource: 'fake-order-source',
     specialInstruction: 'fake-special-instruction',
     returnReference: 'fake-return-reference',
-    userName: Username('fake-username'),
+    user: User.empty().copyWith(
+      username: Username('fake-ext-sales-rep-user'),
+      role: Role.empty().copyWith(
+        type: RoleType(
+          'external_sales_rep',
+        ),
+      ),
+    ),
     soldTo: 'fake-sold_to',
     invoiceDetails: <InvoiceDetails>[],
   );
