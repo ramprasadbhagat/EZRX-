@@ -206,16 +206,17 @@ class CommonRobot {
   Future<void> verifyAndDismissInvalidLengthSearchMessageSnackbar({
     bool isVisible = true,
   }) async {
-    expect(
-      find.descendant(
-        of: customSnackBar,
-        matching: find.text('Please enter at least 2 characters.'.tr()),
-      ),
-      isVisible ? findsWidgets : findsNothing,
+    final finder = find.descendant(
+      of: customSnackBar,
+      matching: find.text('Please enter at least 2 characters.'.tr()),
     );
     if (isVisible) {
+      await tester.pumpUntilVisible(customSnackBar, maxIteration: 5);
+      expect(finder, findsWidgets);
       await dismissSnackbar(dismissAll: true);
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+    } else {
+      expect(finder, findsNothing);
     }
   }
 

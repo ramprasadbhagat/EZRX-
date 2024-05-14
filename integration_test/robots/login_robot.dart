@@ -125,8 +125,8 @@ class LoginRobot extends CommonRobot {
   }
 
   Future<void> tapIntroGetStartedButton() async {
-    await tester.tap(introGetStartedButton);
-    await tester.pumpAndSettle(const Duration(seconds: 2));
+    await tester.tap(introGetStartedButton.last);
+    await tester.pumpAndSettle();
   }
 
   void verifyDefaultValueSelector(String marketValue) {

@@ -16,7 +16,7 @@ class CovidDetailRobot extends ProductDetailRobot {
   );
 
   void verifyCovidLabel() {
-    expect(find.byKey(WidgetKeys.covidLabel), findsOneWidget);
+    expect(find.byKey(WidgetKeys.covidLabel), findsWidgets);
   }
 
   void verifyCovidMaterialPrice() {

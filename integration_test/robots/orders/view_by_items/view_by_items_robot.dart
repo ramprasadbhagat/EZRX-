@@ -218,7 +218,7 @@ class ViewByItemsRobot extends CommonRobot {
       find
           .byWidgetPredicate(
             (widget) =>
-                widget.key == WidgetKeys.commonTileItemLabel &&
+                widget.key == WidgetKeys.viewOrderByItemTileLabel &&
                 widget is Text &&
                 (widget.data ?? '').contains(materialNumber),
           )

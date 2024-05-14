@@ -2,13 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/auth/forgot_password_robot.dart';
 import '../../robots/common/common_robot.dart';
 import '../../robots/common/enum.dart';
@@ -128,10 +125,9 @@ void main() {
   const market = 'Singapore';
   const username = 'sgclientuser';
   const password = 'St@ysafe01';
-  const customerCode = '0030031507';
-  const shipToCode = '0070042061';
-  const shipToAddress = 'Order for Mon and Mon Plastic Surgery';
-  const otherShipToCode = '0000002610';
+  const customerCode = '0030032829';
+  const shipToCode = '0070043298';
+  const shipToAddress = 'Order for Group Procurement Office';
   const currency = 'SGD';
   const invalidLengthSearchKey = '1';
   const invalidSearchKey = 'auto-test-auto-test';
@@ -151,12 +147,12 @@ void main() {
   const materialPrincipalName = 'GSK Consumer Healthcare';
   const materialCountryOfOrigin = 'Malaysia';
   const materialUnitMeasurement = 'EA';
-  const materialUnitPrice = 7.23;
+  const materialUnitPrice = 7.25;
   const multiImageMaterialNumber = materialNumber;
   const otherInfoMaterialNumber = materialNumber;
   const suspendedMaterialNumber = '21027135';
   const lowPriceMaterialNumber = materialNumber;
-  const lowPriceMaterialUnitPrice = 7.23;
+  const lowPriceMaterialUnitPrice = 7.25;
   const bonusMaterialNumber = '21035367';
   const bonusMaterialNumberTierQty = 3;
   const bonusMaterialNumberUnitPrice = 87.78;
@@ -173,33 +169,32 @@ void main() {
   const bundleTier2Qty = 10;
   const bundleTier2UnitPrice = 120.0;
   const bundleTier2UnitPriceDisplay = '$currency $bundleTier2UnitPrice';
-  const bundleMaterialNumber1 = '23007415';
-  const bundleMaterialName1 = '?Imdur Depot Tab 60mg 2x15';
+  const bundleMaterialNumber1 = '23340349';
+  const bundleMaterialName1 = 'Niften Cap 50/100mg 2x14';
   const bundleMaterialNumber2 = '23007425';
   const bundleMaterialName2 = 'IMFINZI INJ 120MG VI 1X2.4ML SG';
   const poReference = 'Auto-test-po-reference';
   const deliveryInstruction = 'Auto-test-delivery-instruction';
-  const orderId = '0200331221';
-  final materialStockInfo =
-      StockInfo.empty().copyWith(expiryDate: DateTimeStringValue('2027-03-20'));
+  const orderId = '0200365136';
+  final materialStockInfo = StockInfo.empty().copyWith(
+    expiryDate: DateTimeStringValue(
+      '2027-03-20',
+    ),
+  );
   final bonusMaterialStockInfo = StockInfo.empty();
   final oosPreOrderMaterialStockInfo = StockInfo.empty();
   final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
   final materialBatchNumber = materialStockInfo.batch.displayLabel;
   final bundleStockInfoList = [
-    StockInfo.empty().copyWith(materialNumber: MaterialNumber('23007415')),
     StockInfo.empty().copyWith(
       materialNumber: MaterialNumber('23007425'),
       expiryDate: DateTimeStringValue('2025-03-01'),
     ),
-    StockInfo.empty().copyWith(
-      materialNumber: MaterialNumber('23007440'),
-      expiryDate: DateTimeStringValue('2025-02-01'),
-    ),
-    StockInfo.empty().copyWith(materialNumber: MaterialNumber('23007448')),
     StockInfo.empty().copyWith(materialNumber: MaterialNumber('23340349')),
   ];
 
+  const otherShipToCode = '0070042061';
+  const otherShipToAddress = 'Order for Mon and Mon Plastic Surgery';
   const covidMaterialNumber = '23348698';
   const covidMaterialName = "?Alcohol swabs box of 200's";
   const covidMaterialPrincipalName = 'MINISTRY OF HEALTH (HQ)/AG';
@@ -1024,7 +1019,7 @@ void main() {
     testWidgets('EZRX-38 | Verify Filter by covid', (tester) async {
       const covidCheckbox = 'Covid-19';
 
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await productRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openFilterProductScreen();
 
@@ -1051,7 +1046,7 @@ void main() {
 
     testWidgets('EZRX-38 | Verify Filter by using covid chip', (tester) async {
       const covidCheckbox = 'Covid-19';
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyFilterCovidChip();
@@ -1266,7 +1261,7 @@ void main() {
 
     testWidgets('EZRX-T33 | Verify search and navigate to bundle detail',
         (tester) async {
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifySearchBarVisible();
@@ -1278,7 +1273,7 @@ void main() {
 
     testWidgets('EZRX-T33 | Verify search and navigate to covid detail',
         (tester) async {
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifySearchBarVisible();
@@ -1327,7 +1322,7 @@ void main() {
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifySearchBarVisible();
       await productRobot.openSearchProductScreen();
-       await productSuggestionRobot
+      await productSuggestionRobot
           .searchWithKeyboardAction(twentySixSeriesMaterialNumber);
       productSuggestionRobot.verifyNoRecordFound();
     });
@@ -1392,7 +1387,7 @@ void main() {
 
     testWidgets('EZRX-T65| Verify available offers in the material detail',
         (tester) async {
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1500,7 +1495,7 @@ void main() {
 
   group('Bundle detail -', () {
     testWidgets('EZRX-T212 | Verify bundles detail page', (tester) async {
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1520,7 +1515,7 @@ void main() {
       const qty1 = 1;
       var qty2 = bundleTier1Qty - qty1;
 
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(bundleShortNumber);
@@ -1570,7 +1565,7 @@ void main() {
     });
 
     testWidgets('EZRX-T213 | Verify favorite in bundle detail', (tester) async {
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1593,7 +1588,7 @@ void main() {
     testWidgets(
         'EZRX-T62 | Verify covid material detail with basic information',
         (tester) async {
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1625,7 +1620,7 @@ void main() {
         'EZRX-T68 | Verify add and navigate to cart in covid material detail',
         (tester) async {
       const maximumQty = 99999;
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       await browseProductFromEmptyCart();
       await productSuggestionRobot
@@ -1648,7 +1643,7 @@ void main() {
         'EZRX-T68 | verify all case of covid material + normal material add to cart',
         (tester) async {
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       //adding normal material
       await browseProductFromEmptyCart();
@@ -1727,7 +1722,7 @@ void main() {
       };
 
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
       //adding bundle material
       await addBundleToCart(items);
@@ -1924,7 +1919,7 @@ void main() {
         (tester) async {
       var qty = 1;
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await browseProductFromEmptyCart();
       await productSuggestionRobot
           .searchWithKeyboardAction(covidMaterialNumber);
@@ -1954,7 +1949,7 @@ void main() {
       );
       cartRobot.verifyCartQty(1);
       cartRobot.verifyQtyOnAppBar(1);
-      cartRobot.verifyCartShipToAddress(shipToAddress);
+      cartRobot.verifyCartShipToAddress(otherShipToAddress);
       cartRobot.verifyCartTotalPrice(
         cartTotalPriceForCovidMaterial.priceDisplay(currency),
       );
@@ -2016,7 +2011,7 @@ void main() {
       var totalPrice = totalQty * bundleTier2UnitPrice;
 
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await addBundleToCart({
         bundleMaterialNumber1: materialQty1,
         bundleMaterialNumber2: materialQty2,
@@ -2049,7 +2044,13 @@ void main() {
       cartRobot.verifyBundleItemExpiryDateAndBatch(
         bundleNumber,
         bundleMaterialNumber1,
-        bundleStockInfoList.first,
+        bundleStockInfoList.elementAt(1),
+        isBatchNumberVisible: false,
+      );
+      cartRobot.verifyBundleItemExpiryDateAndBatch(
+        bundleNumber,
+        bundleMaterialNumber2,
+        bundleStockInfoList.elementAt(0),
         isBatchNumberVisible: false,
       );
       cartRobot.verifyBundleItemPrincipalName(
@@ -2082,7 +2083,7 @@ void main() {
       cartRobot.verifyBundleItemExpiryDateAndBatch(
         bundleNumber,
         bundleMaterialNumber2,
-        bundleStockInfoList.elementAt(1),
+        bundleStockInfoList.elementAt(0),
         isBatchNumberVisible: false,
       );
       cartRobot.verifyBundleItemPrincipalName(
@@ -2104,7 +2105,7 @@ void main() {
         totalPrice.priceDisplay(currency),
       );
       cartRobot.verifyCartQty(2);
-      cartRobot.verifyCartShipToAddress(shipToAddress);
+      cartRobot.verifyCartShipToAddress(otherShipToAddress);
       cartRobot.verifyCartTotalPrice(
         totalPrice.includeTax(tax).priceDisplay(currency),
       );
@@ -2197,10 +2198,12 @@ void main() {
       const bundleMaterialQty2 = bundleTier2Qty - bundleMaterialQty1;
       const bundleTotalQty = bundleMaterialQty1 + bundleMaterialQty2;
       const bundleTotalPrice = bundleTotalQty * bundleTier2UnitPrice;
-      const totalPrice = materialQty * materialUnitPrice + bundleTotalPrice;
+      const materialUnitPriceForThisShipTo = 7.23;
+      const totalPrice =
+          materialQty * materialUnitPriceForThisShipTo + bundleTotalPrice;
 
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await addBundleToCart({
         bundleMaterialNumber1: bundleMaterialQty1,
         bundleMaterialNumber2: bundleMaterialQty2,
@@ -2220,11 +2223,11 @@ void main() {
       cartRobot.verifyMaterialQty(materialNumber, materialQty);
       cartRobot.verifyMaterialUnitPrice(
         materialNumber,
-        materialUnitPrice.priceDisplay(currency),
+        materialUnitPriceForThisShipTo.priceDisplay(currency),
       );
       cartRobot.verifyMaterialTotalPrice(
         materialNumber,
-        materialUnitPrice.priceDisplay(currency),
+        materialUnitPriceForThisShipTo.priceDisplay(currency),
       );
       await cartRobot.verifyBundle(bundleNumber);
       cartRobot.verifyBundleQty(bundleNumber, bundleTotalQty);
@@ -2257,7 +2260,7 @@ void main() {
       );
       cartRobot.verifyCartQty(3);
       cartRobot.verifyQtyOnAppBar(3);
-      cartRobot.verifyCartShipToAddress(shipToAddress);
+      cartRobot.verifyCartShipToAddress(otherShipToAddress);
       cartRobot.verifyCartTotalPrice(
         totalPrice.includeTax(tax).priceDisplay(currency),
       );
@@ -2267,7 +2270,7 @@ void main() {
     testWidgets('EZRX-T101 | Verify material on offer with bonus in cart',
         (tester) async {
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await browseProductFromEmptyCart();
 
       //verify
@@ -2350,7 +2353,7 @@ void main() {
 
     testWidgets('EZRX-T108 | Verify remove item in cart', (tester) async {
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await browseProductFromEmptyCart();
 
       //verify
@@ -2383,7 +2386,7 @@ void main() {
 
     testWidgets('EZRX-T113 | Verify clear cart', (tester) async {
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await browseProductFromEmptyCart();
 
       //verify
@@ -2840,13 +2843,15 @@ void main() {
       const bundleTotalPrice = bundleTotalQty * bundleTier1UnitPrice;
 
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await addBundleToCart({
         bundleMaterialNumber1: bundleMaterialQty1,
         bundleMaterialNumber2: bundleMaterialQty2,
       });
       await cartRobot.tapCheckoutButton();
-      await oosPreOrderRobot.tapContinueButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
 
       //verify
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
@@ -2869,7 +2874,7 @@ void main() {
       checkoutRobot.verifyBundleItemExpiryDateAndBatch(
         bundleNumber,
         bundleMaterialNumber1,
-        bundleStockInfoList.first,
+        bundleStockInfoList.last,
         isBatchNumberVisible: false,
       );
       checkoutRobot.verifyBundleItemPrincipal(
@@ -2892,7 +2897,7 @@ void main() {
       checkoutRobot.verifyBundleItemExpiryDateAndBatch(
         bundleNumber,
         bundleMaterialNumber2,
-        bundleStockInfoList.elementAt(1),
+        bundleStockInfoList.elementAt(0),
         isBatchNumberVisible: false,
       );
       checkoutRobot.verifyBundleItemPrincipal(
@@ -2929,7 +2934,7 @@ void main() {
       const qty = 1000;
 
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await checkoutWithMaterial(
         covidMaterialNumber,
         qty,
@@ -2970,7 +2975,7 @@ void main() {
       const totalPrice = bonusMaterialNumberUnitPrice * qty;
 
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await checkoutWithMaterial(bonusMaterialNumber, qty);
 
       //verify
@@ -3097,7 +3102,7 @@ void main() {
       const totalPrice = bonusMaterialNumberUnitPrice * qty;
 
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await checkoutWithMaterial(bonusMaterialNumber, qty);
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
@@ -3141,13 +3146,15 @@ void main() {
       const bundleTotalPrice = bundleTotalQty * bundleTier1UnitPrice;
 
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await addBundleToCart({
         bundleMaterialNumber1: bundleMaterialQty1,
         bundleMaterialNumber2: bundleMaterialQty2,
       });
       await cartRobot.tapCheckoutButton();
-      await oosPreOrderRobot.tapContinueButton();
+      if (oosPreOrderRobot.isSheetVisible) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
 
@@ -3186,7 +3193,7 @@ void main() {
       const grandtotalPriceForCovidMaterial = 0.0;
 
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
       await checkoutWithMaterial(covidMaterialNumber, qty);
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
@@ -3261,14 +3268,13 @@ void main() {
       testWidgets(
           'EZRX-T75 | Verify search by material number/material description/order number',
           (tester) async {
+        const orderNumber = '0200365212';
         //init app
         await pumpAppWithHomeScreen(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify
         ordersRootRobot.verifyViewByItemsPage();
-        await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         final productName = viewByItemsRobot.getFirstProductName();
         await commonRobot.searchWithKeyboardAction(productName);
         viewByItemsRobot.verifyOrdersWithProductName(productName);
@@ -3280,13 +3286,8 @@ void main() {
         viewByItemsRobot.verifyOrdersWithProductCode(materialNumber);
         await commonRobot.pullToRefresh();
 
-        await commonRobot.autoSearch(invalidLengthSearchKey);
-        await commonRobot.waitAutoSearchDuration();
-        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
-          isVisible: false,
-        );
-        await commonRobot.autoSearch(orderId);
-        viewByItemsRobot.verifyOrdersWithOrderCode(orderId);
+        await commonRobot.autoSearch(orderNumber);
+        viewByItemsRobot.verifyOrdersWithOrderCode(orderNumber);
         await commonRobot.pullToRefresh();
 
         await commonRobot.searchWithKeyboardAction(invalidSearchKey);
@@ -3294,6 +3295,12 @@ void main() {
         await commonRobot.tapClearSearch();
         commonRobot.verifySearchBarText('');
         viewByItemsRobot.verifyOrders();
+
+        await commonRobot.autoSearch(invalidLengthSearchKey);
+        await commonRobot.waitAutoSearchDuration();
+        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: false,
+        );
       });
 
       testWidgets(
@@ -3376,7 +3383,7 @@ void main() {
           'EZRX-T87 | Verify view by item detail with default components',
           (tester) async {
         //init app
-        await pumpAppWithHomeScreen(tester);
+        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify
@@ -3443,7 +3450,7 @@ void main() {
         const bonusQty = qty ~/ bonusMaterialNumberTierQty;
 
         //init app
-        await pumpAppWithHomeScreen(tester);
+        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
         await checkoutWithMaterial(bonusMaterialNumber, qty);
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
@@ -3498,7 +3505,7 @@ void main() {
         const bundleMaterialQty2 = bundleTier1Qty - bundleMaterialQty1;
 
         //init app
-        await pumpAppWithHomeScreen(tester);
+        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
         await addBundleToCart({
           bundleMaterialNumber1: bundleMaterialQty1,
           bundleMaterialNumber2: bundleMaterialQty2,
@@ -3536,7 +3543,7 @@ void main() {
         const qty = 1000;
 
         //init app
-        await pumpAppWithHomeScreen(tester);
+        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
         await checkoutWithMaterial(covidMaterialNumber, qty);
         await checkoutRobot.tapPlaceOrderButton();
         await orderSuccessRobot.tapCloseButton();
@@ -3801,7 +3808,7 @@ void main() {
         const qty = 10;
         const bonusQty = qty ~/ bonusMaterialNumberTierQty;
         //init app
-        await pumpAppWithHomeScreen(tester);
+        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
         //setup data
         await checkoutWithMaterial(bonusMaterialNumber, qty);
@@ -3869,7 +3876,7 @@ void main() {
         const bundleTotalPrice = bundleTotalQty * bundleTier1UnitPrice;
 
         //init app
-        await pumpAppWithHomeScreen(tester);
+        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
         await addBundleToCart({
           bundleMaterialNumber1: bundleMaterialQty1,
           bundleMaterialNumber2: bundleMaterialQty2,
@@ -3939,7 +3946,7 @@ void main() {
         const orderQty = 15;
         const cartQty = 10;
         //init app
-        await pumpAppWithHomeScreen(tester);
+        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
 
         //setup data
         await checkoutWithMaterial(covidMaterialNumber, orderQty);
@@ -3975,8 +3982,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }

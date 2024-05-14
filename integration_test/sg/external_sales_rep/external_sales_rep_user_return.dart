@@ -1,11 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/common/common_robot.dart';
 import '../../robots/common/enum.dart';
 import '../../robots/common/extension.dart';
@@ -96,7 +93,7 @@ void main() {
   final reason = 'Expired Within Policy'.tr();
   const materialId = '23007551';
   const materialTitle = "BAMBEC TAB 10MG 100'S";
-  const materialUUID = '1080005602000010';
+  const materialUUID = '1080005604000010';
 
   //Return detail data
   const returnRequestStatus = 'Pending Review';
@@ -275,15 +272,19 @@ void main() {
       returnsRootRobot.verifyViewByItemsPageVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByItemsRobot.verifyReturnItemsVisible();
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
+      await commonRobot.tapClearSearch();
+
+      await commonRobot.autoSearch(validSearchKey);
+      returnsByItemsRobot.verifyReturnItemsVisible();
+      await commonRobot.tapClearSearch();
+
       await commonRobot.autoSearch(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
         isVisible: false,
       );
-      returnsByItemsRobot.verifyNoRecordFoundVisible();
-      await commonRobot.autoSearch(validSearchKey);
-      returnsByItemsRobot.verifyReturnItemsVisible();
     });
 
     testWidgets(
@@ -319,8 +320,6 @@ void main() {
         toDate: toDate,
       );
       await returnsByItemsFilterRobot.tapApplyButton();
-      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
       returnsByItemsRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
@@ -329,6 +328,10 @@ void main() {
       await commonRobot.waitAutoSearchDuration();
       commonRobot.verifyLoadingImage(isVisible: false);
       returnsByItemsRobot.verifyReturnsWithProductCodeVisible(materialNumber);
+      await commonRobot.tapClearSearch();
+
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
     });
 
     testWidgets(
@@ -667,15 +670,19 @@ void main() {
       returnsRootRobot.verifyViewByRequestPageVisible();
       await commonRobot.autoSearch(validSearchKey);
       returnsByRequestRobot.verifyReturnRequestVisible();
+      await commonRobot.tapClearSearch();
       await commonRobot.autoSearch(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
+      await commonRobot.tapClearSearch();
+
+      await commonRobot.autoSearch(validSearchKey);
+      returnsByRequestRobot.verifyReturnRequestVisible();
+      await commonRobot.tapClearSearch();
+
       await commonRobot.autoSearch(invalidLengthSearchKey);
       await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
         isVisible: false,
       );
-      returnsByRequestRobot.verifyNoRecordFoundVisible();
-      await commonRobot.autoSearch(validSearchKey);
-      returnsByRequestRobot.verifyReturnRequestVisible();
     });
 
     testWidgets(
@@ -711,8 +718,6 @@ void main() {
       returnsRootRobot.verifyTabBarVisible();
       await returnsRootRobot.switchToViewByRequestPage();
       returnsRootRobot.verifyViewByRequestPageVisible();
-      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
       await commonRobot.searchWithKeyboardAction(invalidSearchKey);
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.tapClearSearch();
@@ -721,6 +726,8 @@ void main() {
       returnsByRequestRobot.verifyNoRecordFoundVisible();
       await commonRobot.pullToRefresh();
       returnsByRequestRobot.verifyReturnRequestVisible();
+      await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
+      await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
     });
 
     testWidgets(
@@ -1173,8 +1180,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }
