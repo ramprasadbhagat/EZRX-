@@ -114,6 +114,7 @@ class ViewByOrderDetailsQueryMutation {
         mrp
         promotype
         promoStatus
+        isCovid
         ${enableMarketPlace ? 'IsMarketPlace' : ''}
         Batches {
           BatchNumber

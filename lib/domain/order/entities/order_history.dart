@@ -36,4 +36,7 @@ class OrderHistory with _$OrderHistory {
       orElse: () => OrderHistoryItem.empty(),
     );
   }
+
+  bool get isCovidMaterialAvailable =>
+      orderHistoryItems.any((element) => element.isCovid);
 }

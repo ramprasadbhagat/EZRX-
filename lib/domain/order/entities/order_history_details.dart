@@ -180,6 +180,9 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
   String get trackingOrderId => processingStatus.isInQueue
       ? 'no order number'
       : orderNumber.getOrDefaultValue('');
+
+  bool get isCovidMaterialAvailable =>
+      orderHistoryDetailsOrderItem.any((element) => element.isCovid);
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetails> {

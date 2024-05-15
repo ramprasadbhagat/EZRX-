@@ -134,6 +134,7 @@ class _OrderItemTile extends StatelessWidget {
       materialNumber: orderItem.materialNumber,
       isQuantityBelowImage: true,
       isQuantityRequired: false,
+      isCovidItem: orderItem.isCovid,
       showOfferTag: orderItem.showOfferTag,
       statusTag:
           salesOrgConfig.salesOrg.isID ? null : orderItem.orderDetailBonusTag,

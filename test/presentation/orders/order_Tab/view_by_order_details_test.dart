@@ -2485,5 +2485,82 @@ void main() {
         expect(licenseExpiredBannerSubTitle, findsNothing);
       },
     );
+
+    testWidgets(
+        'Find Add To Cart Error Section when buy again button pressed for covid material when cart have commercial material',
+        (tester) async {
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderNumber: OrderNumber('1234567890'),
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryItem.copyWith(isCovid: true),
+            ],
+          ),
+          user: fakeClientUser,
+        ),
+      );
+
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(
+          isUpserting: false,
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              isCovid: false,
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final buyAgainButton = find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+      expect(buyAgainButton, findsOneWidget);
+      final addToCartErrorSection =
+          find.byKey(WidgetKeys.addToCartErrorSection);
+      await tester.tap(buyAgainButton);
+      await tester.pump(const Duration(seconds: 2));
+      expect(addToCartErrorSection, findsOneWidget);
+    });
+
+    testWidgets(
+        'Find Add To Cart Error Section when buy again button pressed for commercial material when cart have covid material',
+        (tester) async {
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderNumber: OrderNumber('1234567890'),
+            orderHistoryDetailsOrderItem: [fakeOrderHistoryItem],
+          ),
+          user: fakeClientUser,
+        ),
+      );
+
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(
+          isUpserting: false,
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              isCovid: true,
+              materialInfo: MaterialInfo.empty().copyWith(
+                isFOCMaterial: true,
+              ),
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final buyAgainButton = find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+      expect(buyAgainButton, findsOneWidget);
+      final addToCartErrorSection =
+          find.byKey(WidgetKeys.addToCartErrorSection);
+      await tester.tap(buyAgainButton);
+      await tester.pump(const Duration(seconds: 2));
+      expect(addToCartErrorSection, findsOneWidget);
+    });
   });
 }

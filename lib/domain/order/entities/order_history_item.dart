@@ -56,6 +56,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required int tenderPriceUnit,
     required TenderPrice tenderPrice,
     required TenderContractReason tenderOrderReason,
+    required bool isCovid,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -98,6 +99,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         tenderPriceUnit: 0,
         tenderPrice: TenderPrice('0'),
         tenderOrderReason: TenderContractReason(''),
+        isCovid: false,
       );
 
   bool get isOfferItem => !isBundle && !isBonusMaterial && promoStatus;

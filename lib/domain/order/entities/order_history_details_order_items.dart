@@ -51,6 +51,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required bool isCounterOffer,
     required bool hidePrice,
     required bool isMarketPlace,
+    required bool isCovid,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -85,6 +86,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         isCounterOffer: false,
         hidePrice: false,
         isMarketPlace: false,
+        isCovid: false,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(

@@ -74,6 +74,7 @@ query orderHistoryQuery($soldTo: String!, $language: String, $searchKey: String,
         promotype
         promoStatus
         isMarketPlace
+        isCovid
         Batches {
           BatchNumber
           ExpiryDate

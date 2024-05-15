@@ -77,6 +77,32 @@ class _BuyAgainButton extends StatelessWidget {
 
   void _reOrder(BuildContext context) {
     final viewByItemDetailState = context.read<ViewByItemDetailsBloc>().state;
+    final cartState = context.read<CartBloc>().state;
+    final cartProducts = cartState.cartProducts;
+
+    if (cartProducts.isEmpty) {
+      _buyAgain(context);
+
+      return;
+    }
+
+    final isCovidMaterialAvailable =
+        viewByItemDetailState.orderHistory.isCovidMaterialAvailable;
+    final containFocMaterialInCartProduct =
+        cartState.containFocMaterialInCartProduct;
+
+    if ((isCovidMaterialAvailable && !containFocMaterialInCartProduct) ||
+        (!isCovidMaterialAvailable && containFocMaterialInCartProduct)) {
+      _showDetailsPage(context);
+      
+      return;
+    }
+
+    _buyAgain(context);
+  }
+
+  void _buyAgain(BuildContext context) {
+    final viewByItemDetailState = context.read<ViewByItemDetailsBloc>().state;
     final item = viewByItemDetailState.orderHistoryItem;
 
     trackMixpanelEvent(
@@ -109,5 +135,26 @@ class _BuyAgainButton extends StatelessWidget {
             item: item,
           ),
         );
+  }
+
+  void _showDetailsPage(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      isDismissible: false,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (_) {
+        return AddToCartErrorSection.forCovid(
+          cartContainsFocProduct:
+              context.read<CartBloc>().state.containFocMaterialInCartProduct,
+          context: context,
+        );
+      },
+    ).then((value) {
+      if (value != null) {
+        _buyAgain(context);
+      }
+    });
   }
 }

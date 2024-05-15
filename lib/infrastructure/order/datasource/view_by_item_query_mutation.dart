@@ -102,6 +102,7 @@ class ViewByItemQueryMutation {
         promotype
         promoStatus
         referenceNotes
+        isCovid
       }
      
     }

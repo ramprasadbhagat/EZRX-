@@ -42,10 +42,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
                 children: [
                   _ImageBox(
                     materialNumber: orderHistoryItem.materialNumber,
-                    isCovidItem: (salesOrgConfigs.salesOrg.isPH &&
-                            orderHistoryItem.orderType.isCovidOrderTypeForPH) ||
-                        (salesOrgConfigs.salesOrg.isSg &&
-                            orderHistoryItem.orderType.isCovidOrderTypeForSG),
+                    isCovidItem: orderHistoryItem.isCovid,
                     showOfferTag: orderHistoryItem.isOfferItem,
                     showBundleTag: orderHistoryItem.isBundle,
                   ),

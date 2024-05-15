@@ -72,10 +72,7 @@ class ProductTag extends StatelessWidget {
         hasIcon: true,
         padding: const EdgeInsets.symmetric(vertical: 4.0).copyWith(
           left: 8.0,
-          right: 4.0,
-        ),
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(4.0),
+          right: 12.0,
         ),
         labelStyle: labelStyle,
       );

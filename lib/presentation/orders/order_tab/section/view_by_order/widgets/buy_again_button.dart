@@ -100,21 +100,7 @@ class BuyAgainButton extends StatelessWidget {
                       stateCart.isFetching ||
                       isCustomerBlockedOrSuspended)
                   ? null
-                  : () {
-                      _trackBuyAgainEvent(
-                        context,
-                        viewByOrderHistoryItem.orderHistoryDetailsOrderItem,
-                      );
-                      context.read<ReOrderPermissionBloc>().add(
-                            ReOrderPermissionEvent.fetchOrder(
-                              orderHistoryDetailsOrderItems:
-                                  viewByOrderHistoryItem
-                                      .orderHistoryDetailsOrderItem,
-                              orderNumberWillUpsert:
-                                  viewByOrderHistoryItem.orderNumber,
-                            ),
-                          );
-                    },
+                  : () => _reOrder(context),
               child: LoadingShimmer.withChild(
                 enabled: state.orderNumberWillUpsert ==
                         viewByOrderHistoryItem.orderNumber &&
@@ -130,6 +116,67 @@ class BuyAgainButton extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _reOrder(BuildContext context) {
+    final cartState = context.read<CartBloc>().state;
+    final cartProducts = cartState.cartProducts;
+
+     if (cartProducts.isEmpty) {
+      _buyAgain(context);
+
+      return;
+    }
+
+    final isCovidMaterialAvailable =
+        viewByOrderHistoryItem.isCovidMaterialAvailable;
+    final containFocMaterialInCartProduct =
+        cartState.containFocMaterialInCartProduct;
+
+    if ((isCovidMaterialAvailable && !containFocMaterialInCartProduct) ||
+        (!isCovidMaterialAvailable && containFocMaterialInCartProduct)) {
+      _showDetailsPage(context);
+      
+      return;
+    }
+
+    _buyAgain(context);
+  }
+
+  void _showDetailsPage(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      isDismissible: false,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (_) {
+        return AddToCartErrorSection.forCovid(
+          cartContainsFocProduct:
+              context.read<CartBloc>().state.containFocMaterialInCartProduct,
+          context: context,
+        );
+      },
+    ).then((value) {
+      if (value != null) {
+        _buyAgain(context);
+      }
+    });
+  }
+
+  void _buyAgain(BuildContext context) {
+    _trackBuyAgainEvent(
+      context,
+      viewByOrderHistoryItem.orderHistoryDetailsOrderItem,
+    );
+
+    context.read<ReOrderPermissionBloc>().add(
+          ReOrderPermissionEvent.fetchOrder(
+            orderHistoryDetailsOrderItems:
+                viewByOrderHistoryItem.orderHistoryDetailsOrderItem,
+            orderNumberWillUpsert: viewByOrderHistoryItem.orderNumber,
+          ),
+        );
   }
 
   void _trackBuyAgainEvent(

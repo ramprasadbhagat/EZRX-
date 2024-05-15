@@ -77,6 +77,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required bool hidePrice,
     @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
         required bool isMarketPlace,
+    @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,    
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
     OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
@@ -122,6 +123,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       isCounterOffer: orderHistoryDetailsOrderItem.isCounterOffer,
       hidePrice: orderHistoryDetailsOrderItem.hidePrice,
       isMarketPlace: orderHistoryDetailsOrderItem.isMarketPlace,
+      isCovid: orderHistoryDetailsOrderItem.isCovid,
     );
   }
 
@@ -163,6 +165,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       isCounterOffer: isCounterOffer,
       hidePrice: hidePrice,
       isMarketPlace: isMarketPlace,
+      isCovid: isCovid,
     );
   }
 

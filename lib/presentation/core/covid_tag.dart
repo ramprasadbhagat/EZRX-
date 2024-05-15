@@ -19,7 +19,8 @@ class CovidTag extends StatelessWidget {
       decoration: const BoxDecoration(
         color: ZPColors.invoiceStatusBlue,
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10.0),
+          topRight: Radius.circular(16.0),
+          bottomRight: Radius.circular(16.0),
         ),
       ),
       child: SvgPicture.asset(

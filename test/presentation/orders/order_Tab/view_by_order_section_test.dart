@@ -12,8 +12,10 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
@@ -692,6 +694,105 @@ void main() {
         ).called(1);
       },
     );
+
+    testWidgets(
+        'Find Add To Cart Error Section when buy again button pressed for covid material when cart have commercial material',
+        (tester) async {
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          viewByOrderList: viewByOrder.copyWith(
+            orderHeaders: [
+              viewByOrder.orderHeaders.first.copyWith(
+                isMarketPlace: false,
+                orderHistoryDetailsOrderItem: [
+                  viewByOrder
+                      .orderHeaders.first.orderHistoryDetailsOrderItem.first
+                      .copyWith(
+                    isCovid: true,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+        ),
+      );
+
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(
+          isUpserting: false,
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              isCovid: false,
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final buyAgainButton =
+          find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+
+      expect(buyAgainButton, findsWidgets);
+      final addToCartErrorSection =
+          find.byKey(WidgetKeys.addToCartErrorSection);
+      await tester.tap(buyAgainButton.first);
+      await tester.pump(const Duration(seconds: 2));
+      expect(addToCartErrorSection, findsOneWidget);
+    });
+
+    testWidgets(
+        'Find Add To Cart Error Section when buy again button pressed for commercial material when cart have covid material',
+        (tester) async {
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          viewByOrderList: viewByOrder.copyWith(
+            orderHeaders: [
+              viewByOrder.orderHeaders.first.copyWith(
+                isMarketPlace: false,
+                orderHistoryDetailsOrderItem: [
+                  viewByOrder
+                      .orderHeaders.first.orderHistoryDetailsOrderItem.first
+                      .copyWith(
+                    isCovid: false,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+        ),
+      );
+
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(
+          isUpserting: false,
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              isCovid: true,
+              materialInfo: MaterialInfo.empty().copyWith(
+                isFOCMaterial: true,
+              ),
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final buyAgainButton =
+          find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+
+      expect(buyAgainButton, findsWidgets);
+      final addToCartErrorSection =
+          find.byKey(WidgetKeys.addToCartErrorSection);
+      await tester.tap(buyAgainButton.first);
+      await tester.pump(const Duration(seconds: 2));
+      expect(addToCartErrorSection, findsOneWidget);
+    });
 
     group('Order status label -', () {
       setUp(() {

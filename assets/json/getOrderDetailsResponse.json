@@ -80,7 +80,8 @@
               "GovernmentMaterialCode": "",
               "ItemRegistrationNumber": "",
               "IsTenderContractMaterial": false,
-              "TenderContractDetails": null
+              "TenderContractDetails": null,
+              "isCovid": false
             },
             {
               "isCounterOffer": false,
@@ -115,7 +116,8 @@
               "GovernmentMaterialCode": "",
               "ItemRegistrationNumber": "",
               "IsTenderContractMaterial": false,
-              "TenderContractDetails": null
+              "TenderContractDetails": null,
+              "isCovid": false
             },
             {
               "isCounterOffer": false,
@@ -150,7 +152,8 @@
               "GovernmentMaterialCode": "",
               "ItemRegistrationNumber": "",
               "IsTenderContractMaterial": false,
-              "TenderContractDetails": null
+              "TenderContractDetails": null,
+              "isCovid": false
             },
             {
               "isCounterOffer": false,
@@ -185,7 +188,8 @@
               "GovernmentMaterialCode": "",
               "ItemRegistrationNumber": "",
               "IsTenderContractMaterial": false,
-              "TenderContractDetails": null
+              "TenderContractDetails": null,
+              "isCovid": false
             },
             {
               "isCounterOffer": false,
@@ -220,7 +224,8 @@
               "GovernmentMaterialCode": "",
               "ItemRegistrationNumber": "",
               "IsTenderContractMaterial": false,
-              "TenderContractDetails": null
+              "TenderContractDetails": null,
+              "isCovid": false
             },
             {
               "isCounterOffer": false,
@@ -256,7 +261,8 @@
               "ItemRegistrationNumber": "",
               "IsTenderContractMaterial": false,
               "TenderContractDetails": null,
-              "isMarketplace": true
+              "isMarketplace": true,
+              "isCovid": false
             }
           ],
           "OrderHolidays": {

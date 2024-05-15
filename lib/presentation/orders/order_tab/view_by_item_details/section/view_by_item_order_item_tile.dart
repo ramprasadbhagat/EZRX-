@@ -56,10 +56,7 @@ class ViewByItemOrderItemTile extends StatelessWidget {
       headerTextStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.neutralsGrey1,
           ),
-      isCovidItem: (eligibilityState.salesOrg.isPH &&
-              orderHistoryItem.orderType.isCovidOrderTypeForPH) ||
-          (eligibilityState.salesOrg.isSg &&
-              orderHistoryItem.orderType.isCovidOrderTypeForSG),
+      isCovidItem: orderHistoryItem.isCovid,
       showOfferTag: orderHistoryItem.isOfferItem,
       showBundleTag: orderHistoryItem.isBundle,
       footerWidget: QuantityAndPriceWithTax.order(

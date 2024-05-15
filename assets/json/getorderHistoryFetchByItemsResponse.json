@@ -62,7 +62,8 @@
               "mrp": 0,
               "promotype": "",
               "promoStatus": false,
-              "referenceNotes": "Test Delivery Info"
+              "referenceNotes": "Test Delivery Info",
+              "isCovid" : false
             },
             {
               "poAttachment": null,
@@ -112,7 +113,8 @@
               "mrp": 0,
               "promotype": "",
               "promoStatus": false,
-              "referenceNotes": "Test Delivery Info"
+              "referenceNotes": "Test Delivery Info",
+              "isCovid" : false
             },
             {
               "poAttachment": null,
@@ -162,7 +164,8 @@
               "mrp": 70.5,
               "promotype": "",
               "promoStatus": true,
-              "referenceNotes": ""
+              "referenceNotes": "",
+              "isCovid" : false
             },
             {
               "poAttachment": null,
@@ -212,7 +215,8 @@
               "mrp": 70.5,
               "promotype": "",
               "promoStatus": true,
-              "referenceNotes": ""
+              "referenceNotes": "",
+              "isCovid" : false
             },
             {
               "poAttachment": null,
@@ -262,7 +266,8 @@
               "mrp": 86.67,
               "promotype": "",
               "promoStatus": false,
-              "referenceNotes": "Test Delivery Info"
+              "referenceNotes": "Test Delivery Info",
+              "isCovid" : false
            }
           ]
         }

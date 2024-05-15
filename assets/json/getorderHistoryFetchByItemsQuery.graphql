@@ -81,6 +81,7 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
         mrp
         promotype
         promoStatus
+        isCovid
       }
      
     }

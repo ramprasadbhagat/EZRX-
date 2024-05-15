@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
@@ -1026,6 +1027,85 @@ void main() {
           ),
         ).called(1);
         expect(autoRouterMock.current.path, 'orders/cart');
+      });
+
+      testWidgets(
+          'Find Add To Cart Error Section for covid material when cart have commercial material',
+          (tester) async {
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistory: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem.copyWith(isCovid: true)],
+            ),
+            user: fakeClientUser,
+            salesOrgConfig: SalesOrganisationConfigs.empty()
+                .copyWith(salesOrg: SalesOrg('2601')),
+          ),
+        );
+
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            isUpserting: false,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                isCovid: false,
+              ),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final buyAgainButton =
+            find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+        expect(buyAgainButton, findsOneWidget);
+        final addToCartErrorSection =
+            find.byKey(WidgetKeys.addToCartErrorSection);
+        await tester.tap(buyAgainButton);
+        await tester.pump(const Duration(seconds: 2));
+        expect(addToCartErrorSection, findsOneWidget);
+      });
+
+      testWidgets(
+          'Find Add To Cart Error Section for commercial material when cart have covid material',
+          (tester) async {
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistory: OrderHistory.empty().copyWith(
+              orderHistoryItems: [fakeOrderHistoryItem],
+            ),
+            user: fakeClientUser,
+            salesOrgConfig: SalesOrganisationConfigs.empty()
+                .copyWith(salesOrg: SalesOrg('2601')),
+          ),
+        );
+
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            isUpserting: false,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                isCovid: true,
+                materialInfo: MaterialInfo.empty().copyWith(
+                  isFOCMaterial: true,
+                ),
+              ),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final buyAgainButton =
+            find.byKey(WidgetKeys.viewByItemDetailBuyAgainButton);
+        expect(buyAgainButton, findsOneWidget);
+        final addToCartErrorSection =
+            find.byKey(WidgetKeys.addToCartErrorSection);
+        await tester.tap(buyAgainButton);
+        await tester.pump(const Duration(seconds: 2));
+        expect(addToCartErrorSection, findsOneWidget);
       });
     });
 

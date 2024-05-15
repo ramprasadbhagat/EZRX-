@@ -83,6 +83,8 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   bool get hidePrice => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isCovid', defaultValue: false)
+  bool get isCovid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -142,7 +144,8 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
       @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      bool isMarketPlace});
+      bool isMarketPlace,
+      @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid});
 
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
       get tenderContractDetails;
@@ -189,6 +192,7 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? isCounterOffer = null,
     Object? hidePrice = null,
     Object? isMarketPlace = null,
+    Object? isCovid = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -299,6 +303,10 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCovid: null == isCovid
+          ? _value.isCovid
+          : isCovid // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -366,7 +374,8 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
       @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
       @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      bool isMarketPlace});
+      bool isMarketPlace,
+      @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid});
 
   @override
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
@@ -413,6 +422,7 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
     Object? isCounterOffer = null,
     Object? hidePrice = null,
     Object? isMarketPlace = null,
+    Object? isCovid = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItemDto(
       type: null == type
@@ -523,6 +533,10 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCovid: null == isCovid
+          ? _value.isCovid
+          : isCovid // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -580,7 +594,8 @@ class _$_OrderHistoryDetailsOrderItemDto
       required this.isCounterOffer,
       @JsonKey(name: 'HidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required this.isMarketPlace})
+      required this.isMarketPlace,
+      @JsonKey(name: 'isCovid', defaultValue: false) required this.isCovid})
       : _details = details,
         super._();
 
@@ -682,10 +697,13 @@ class _$_OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   final bool isMarketPlace;
+  @override
+  @JsonKey(name: 'isCovid', defaultValue: false)
+  final bool isCovid;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace)';
+    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid)';
   }
 
   @override
@@ -742,7 +760,8 @@ class _$_OrderHistoryDetailsOrderItemDto
             (identical(other.hidePrice, hidePrice) ||
                 other.hidePrice == hidePrice) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
-                other.isMarketPlace == isMarketPlace));
+                other.isMarketPlace == isMarketPlace) &&
+            (identical(other.isCovid, isCovid) || other.isCovid == isCovid));
   }
 
   @JsonKey(ignore: true)
@@ -775,7 +794,8 @@ class _$_OrderHistoryDetailsOrderItemDto
         promosStatus,
         isCounterOffer,
         hidePrice,
-        isMarketPlace
+        isMarketPlace,
+        isCovid
       ]);
 
   @JsonKey(ignore: true)
@@ -853,7 +873,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
       @JsonKey(name: 'HidePrice', defaultValue: false)
       required final bool hidePrice,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required final bool isMarketPlace}) = _$_OrderHistoryDetailsOrderItemDto;
+      required final bool isMarketPlace,
+      @JsonKey(name: 'isCovid', defaultValue: false)
+      required final bool isCovid}) = _$_OrderHistoryDetailsOrderItemDto;
   const _OrderHistoryDetailsOrderItemDto._() : super._();
 
   factory _OrderHistoryDetailsOrderItemDto.fromJson(Map<String, dynamic> json) =
@@ -947,6 +969,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace;
+  @override
+  @JsonKey(name: 'isCovid', defaultValue: false)
+  bool get isCovid;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderItemDtoCopyWith<
