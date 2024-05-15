@@ -125,7 +125,8 @@ class ReturnItemsTab extends StatelessWidget {
                   controller: ScrollController(),
                   onRefresh: () => context.read<ReturnItemsBloc>().add(
                         ReturnItemsEvent.fetch(
-                          appliedFilter: ReturnItemsFilter.empty(),
+                          appliedFilter:
+                              ReturnItemsFilter.resetInvoiceDateFilter(),
                           searchKey: SearchKey.searchFilter(''),
                         ),
                       ),
