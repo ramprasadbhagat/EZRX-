@@ -56,7 +56,6 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:universal_io/io.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
@@ -78,11 +77,9 @@ import 'package:ezrxmobile/application/returns/user_restriction/user_restriction
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:upgrader/upgrader.dart';
 
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 
@@ -99,6 +96,7 @@ import 'package:ezrxmobile/presentation/orders/create_order/camera_files_permiss
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:upgrader/upgrader.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -826,12 +824,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             state.when(
               initial: () {},
               linkPending: (_, __) {
-                context.read<DeepLinkingBloc>().add(
-                      DeepLinkingEvent.consumePendingLink(
-                        selectedCustomerCode: eligibilityState.customerCodeInfo,
-                        selectedShipTo: eligibilityState.shipToInfo,
-                      ),
-                    );
+                if (!locator<Upgrader>().blocked()) {
+                  context.read<DeepLinkingBloc>().add(
+                        DeepLinkingEvent.consumePendingLink(
+                          selectedCustomerCode:
+                              eligibilityState.customerCodeInfo,
+                          selectedShipTo: eligibilityState.shipToInfo,
+                        ),
+                      );
+                }
               },
               redirectProductDetail: (materialNumber, banner) {
                 if (eligibilityState.user.userCanAccessProducts) {
@@ -1113,22 +1114,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           },
         ),
       ],
-      child: locator<Config>().appFlavor == Flavor.mock
-          ? const _Splash()
-          : UpgradeAlert(
-              dialogStyle: Platform.isIOS
-                  ? UpgradeDialogStyle.cupertino
-                  : UpgradeDialogStyle.material,
-              upgrader: Upgrader(
-                messages: UpgraderLocalizationMessage(),
-                debugLogging: locator<Config>().appFlavor != Flavor.prod,
-                // We're hardcode countryCode and languageCode here because of
-                // 'tagRegExpSource' in upgrader package only check text by English
-                countryCode: 'US',
-                languageCode: 'en',
-              ),
-              child: const _Splash(),
-            ),
+      child: const _Splash(),
     );
   }
 

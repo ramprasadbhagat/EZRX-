@@ -12,6 +12,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/widgets/announcement_bottomsheet.dart';
+import 'package:ezrxmobile/presentation/widgets/upgrade_alert_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,10 +58,12 @@ class HomeNavigationTabbar extends StatelessWidget {
         },
         buildWhen: (previous, current) => previous.user != current.user,
         builder: (context, state) {
-          return PopScope(
-            canPop: false,
-            child: _CustomTabBar(
-              routes: _getTabs(state),
+          return UpgradeAlertWrapper(
+            child: PopScope(
+              canPop: false,
+              child: _CustomTabBar(
+                routes: _getTabs(state),
+              ),
             ),
           );
         },

@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/auth/login/login_mobile.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/widgets/upgrade_alert_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -42,9 +43,11 @@ class LoginPage extends StatelessWidget {
               previous.showErrorMessages != current.showErrorMessages ||
               previous.currentMarket != current.currentMarket,
           builder: (context, state) {
-            return LoginMobile(
-                key: WidgetKeys.loginMobileScreen,
-              state: state,
+            return UpgradeAlertWrapper(
+              child: LoginMobile(
+                  key: WidgetKeys.loginMobileScreen,
+                state: state,
+              ),
             );
           },
         ),

@@ -171,6 +171,7 @@ void main() {
   late ChatBotBloc chatBotBloc;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
   late AupTcBloc aupTcBloc;
+
   final appMarketVariant = ValueVariant<AppMarket>(
     {
       // AppMarket('hk'),

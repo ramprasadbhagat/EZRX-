@@ -409,11 +409,13 @@ import 'package:ezrxmobile/infrastructure/returns/repository/usage_code_reposito
 import 'package:ezrxmobile/infrastructure/returns/repository/user_restriction_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
+import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:upgrader/upgrader.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -537,6 +539,17 @@ void setupLocator() {
   locator.registerLazySingleton(() => DataSourceExceptionHandler());
 
   locator.registerLazySingleton(() => LocalAuthentication());
+
+  locator.registerLazySingleton(
+    () => Upgrader(
+      messages: UpgraderLocalizationMessage(),
+      debugLogging: locator<Config>().appFlavor != Flavor.prod,
+      // We're hardcode countryCode and languageCode here because of
+      // 'tagRegExpSource' in upgrader package only check text by English
+      countryCode: 'US',
+      languageCode: 'en',
+    ),
+  );
 
   //============================================================
   //  Auth

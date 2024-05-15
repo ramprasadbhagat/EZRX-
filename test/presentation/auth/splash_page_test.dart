@@ -229,6 +229,9 @@ void main() {
     locator.registerLazySingleton(() => mockMaterialPriceBloc);
     locator.registerLazySingleton(() => mockNotificationBloc);
     locator.registerLazySingleton(() => mockPriceOverrideBloc);
+    locator.registerLazySingleton(
+      () => Upgrader(),
+    );
   });
 
   group('Splash Screen', () {
