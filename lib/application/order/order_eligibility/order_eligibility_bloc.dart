@@ -11,6 +11,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+
 part 'order_eligibility_event.dart';
 part 'order_eligibility_state.dart';
 part 'order_eligibility_bloc.freezed.dart';

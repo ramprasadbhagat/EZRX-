@@ -405,7 +405,7 @@ void main() {
     test(
       'Status Order PoFailed',
       () {
-        final statusType = FilterStatus('PoFailed');
+        final statusType = FilterStatus('pofailed');
         expect(
           statusType.displayStatusLabelColor,
           ZPColors.lightRedStatusColor,

@@ -61,7 +61,7 @@ String naIfEmpty(String text) {
 bool checkIfTrimmedValueNotEmpty(String text) => text.trim().isNotEmpty;
 
 bool getInStock(String text) {
-  return text == 'Yes';
+  return isEqualsIgnoreCase(text, 'Yes');
 }
 
 String getValidPhoneNumber(String text) {
@@ -94,7 +94,7 @@ bool isAtLeastOneSpecialCharacter({
 String getTenderContractNumber(String text) {
   if (text.isEmpty) return text;
 
-  return text == 'No contract (Price remains same)'
+  return isEqualsIgnoreCase(text, 'No contract (Price remains same)')
       ? 'Tender Contract available'
       : 'Contract: $text';
 }
@@ -279,74 +279,73 @@ int getIntegerReturnQuantity(String quantity) =>
 
 String getNoun(String qty) => int.tryParse(qty) == 1 ? 'item' : 'items';
 
-bool isBundle(String type) => type == 'bundle';
+bool isBundle(String type) => isEqualsIgnoreCase(type, 'bundle');
 
-bool isMaterial(String type) => type.toLowerCase() == 'material';
+bool isMaterial(String type) => isEqualsIgnoreCase(type, 'material');
 
-bool isBonus(String type) => type.toLowerCase() == 'bonus';
+bool isBonus(String type) => isEqualsIgnoreCase(type, 'bonus');
 
-bool isDealsBonus(String type) => type == 'Deals';
+bool isDealsBonus(String type) => isEqualsIgnoreCase(type, 'Deals');
 
-bool isCombo(String type) => type == 'combo';
+bool isCombo(String type) => isEqualsIgnoreCase(type, 'combo');
 
 bool notZero(int number) => number != 0;
 
 Color getStatusLabelColor(String statusType) {
   final lightSecondary = {
-    'Processed': ZPColors.lightSecondary,
-    'Successful': ZPColors.lightSecondary,
-    'Approved for Return': ZPColors.lightSecondary,
-    'Approved': ZPColors.lightSecondary,
-    'Reviewed': ZPColors.lightSecondary,
-    'Bonus': ZPColors.primary,
-    'Active': ZPColors.lightSecondary,
-    'Payment Received': ZPColors.lightSecondary,
+    'processed': ZPColors.lightSecondary,
+    'successful': ZPColors.lightSecondary,
+    'approved for return': ZPColors.lightSecondary,
+    'approved': ZPColors.lightSecondary,
+    'reviewed': ZPColors.lightSecondary,
+    'bonus': ZPColors.primary,
+    'active': ZPColors.lightSecondary,
+    'payment received': ZPColors.lightSecondary,
   };
 
   final lightRedStatusColor = {
-    'Cancelled': ZPColors.lightRedStatusColor,
-    'Failed': ZPColors.lightRedStatusColor,
-    'Cancelled - credit issue': ZPColors.lightRedStatusColor,
-    'Cancelled - duplicate order': ZPColors.lightRedStatusColor,
-    'Cancelled - license invalid / expired': ZPColors.lightRedStatusColor,
-    'Cancelled - stock unavailable': ZPColors.lightRedStatusColor,
-    'Cancelled by buyer': ZPColors.lightRedStatusColor,
-    'Cancelled by seller': ZPColors.lightRedStatusColor,
-    'Overdue': ZPColors.lightRedStatusColor,
-    'Rejected': ZPColors.lightRedStatusColor,
-    'PoFailed': ZPColors.lightRedStatusColor,
-    'FAILED': ZPColors.lightRedStatusColor,
+    'cancelled': ZPColors.lightRedStatusColor,
+    'failed': ZPColors.lightRedStatusColor,
+    'cancelled - credit issue': ZPColors.lightRedStatusColor,
+    'cancelled - duplicate order': ZPColors.lightRedStatusColor,
+    'cancelled - license invalid / expired': ZPColors.lightRedStatusColor,
+    'cancelled - stock unavailable': ZPColors.lightRedStatusColor,
+    'cancelled by buyer': ZPColors.lightRedStatusColor,
+    'cancelled by seller': ZPColors.lightRedStatusColor,
+    'overdue': ZPColors.lightRedStatusColor,
+    'rejected': ZPColors.lightRedStatusColor,
+    'pofailed': ZPColors.lightRedStatusColor,
   };
 
   final lightYellow = {
-    'Pending': ZPColors.lightYellow,
-    'OOS-Preorder': ZPColors.lightYellow,
-    'Picking in progress': ZPColors.lightYellow,
-    'Out for delivery': ZPColors.lightYellow,
-    'Pending Approval': ZPColors.lightYellow,
-    'Out for re-delivery': ZPColors.lightYellow,
-    'Not Available': ZPColors.lightYellow,
-    'In Process': ZPColors.lightYellow,
-    'Order Creating': ZPColors.lightYellow,
-    'On the way to you': ZPColors.lightYellow,
-    'Order being prepared': ZPColors.lightYellow,
-    'Pending release': ZPColors.lightYellow,
-    'Pending release - credit check': ZPColors.lightYellow,
-    'Pending release - license issue': ZPColors.lightYellow,
-    'Pending release - month end closing': ZPColors.lightYellow,
-    'Pending release - on backorder': ZPColors.lightYellow,
-    'Pending release - seller approval required': ZPColors.lightYellow,
+    'pending': ZPColors.lightYellow,
+    'oos-preorder': ZPColors.lightYellow,
+    'picking in progress': ZPColors.lightYellow,
+    'out for delivery': ZPColors.lightYellow,
+    'pending approval': ZPColors.lightYellow,
+    'out for re-delivery': ZPColors.lightYellow,
+    'not available': ZPColors.lightYellow,
+    'in Process': ZPColors.lightYellow,
+    'order creating': ZPColors.lightYellow,
+    'on the way to you': ZPColors.lightYellow,
+    'order being prepared': ZPColors.lightYellow,
+    'pending release': ZPColors.lightYellow,
+    'pending release - credit check': ZPColors.lightYellow,
+    'pending release - license issue': ZPColors.lightYellow,
+    'pending release - month end closing': ZPColors.lightYellow,
+    'pending release - on backorder': ZPColors.lightYellow,
+    'pending release - seller approval required': ZPColors.lightYellow,
     'order pending': ZPColors.lightYellow,
-    'Order packed and ready for delivery': ZPColors.lightYellow,
-    'Expiring': ZPColors.lightYellow,
-    'In progress': ZPColors.lightYellow,
+    'order packed and ready for delivery': ZPColors.lightYellow,
+    'expiring': ZPColors.lightYellow,
+    'in progress': ZPColors.lightYellow,
   };
 
   final secondary = {
-    'Completed': ZPColors.secondary,
-    'Delivered': ZPColors.secondary,
-    'Delivered - partial rejection': ZPColors.secondary,
-    'Delivered - rejected upon delivery': ZPColors.secondary,
+    'completed': ZPColors.secondary,
+    'delivered': ZPColors.secondary,
+    'delivered - partial rejection': ZPColors.secondary,
+    'delivered - rejected upon delivery': ZPColors.secondary,
   };
 
   final statusTypeMap = {
@@ -354,39 +353,41 @@ Color getStatusLabelColor(String statusType) {
     ...lightRedStatusColor,
     ...lightYellow,
     ...secondary,
-    'Order created': ZPColors.invoiceStatusBlue,
-    'Order received': ZPColors.invoiceStatusBlue,
-    'Order Creating': ZPColors.invoiceStatusBlue,
-    'Cleared': ZPColors.invoiceStatusGreen,
-    'Open': ZPColors.invoiceStatusBlue,
-    'In progress': ZPColors.invoiceStatusOrange,
+    'order created': ZPColors.invoiceStatusBlue,
+    'order received': ZPColors.invoiceStatusBlue,
+    'order creating': ZPColors.invoiceStatusBlue,
+    'cleared': ZPColors.invoiceStatusGreen,
+    'open': ZPColors.invoiceStatusBlue,
+    'in progress': ZPColors.invoiceStatusOrange,
     // 'In Progress': ZPColors.lightGray,
-    'PENDING': ZPColors.lightRed,
-    'REJECTED': ZPColors.darkGray,
-    'Out of stock': ZPColors.lightGray,
-    'Expired': ZPColors.lightGray,
+    'pending': ZPColors.lightRed,
+    'rejected': ZPColors.darkGray,
+    'out of stock': ZPColors.lightGray,
+    'expired': ZPColors.lightGray,
   };
 
-  return statusTypeMap[statusType] ?? ZPColors.lightYellow;
+  return statusTypeMap[statusType.toLowerCase()] ?? ZPColors.lightYellow;
 }
 
 Color getDueDateColor(String statusType) {
-  return statusType == 'Overdue' ? ZPColors.red : ZPColors.black;
+  return isEqualsIgnoreCase(statusType, 'Overdue')
+      ? ZPColors.red
+      : ZPColors.black;
 }
 
 Color getStatusTextColor(String statusType) {
-  switch (statusType) {
-    case 'PENDING':
-    case 'APPROVED':
-    case 'FAILED':
+  switch (statusType.toLowerCase()) {
+    case 'pending':
+    case 'approved':
+    case 'failed':
       return ZPColors.returnSummaryStatusTextColor;
-    case 'REJECTED':
+    case 'rejected':
       return ZPColors.darkGray;
-    case 'OOS-Preorder':
+    case 'oos-preorder':
       return ZPColors.black;
-    case 'Bonus':
+    case 'bonus':
       return ZPColors.white;
-    case 'Out of stock':
+    case 'out of stock':
       return ZPColors.black;
 
     default:
@@ -395,13 +396,13 @@ Color getStatusTextColor(String statusType) {
 }
 
 String getReturnSummaryStatus(String status) {
-  switch (status) {
-    case 'PENDING':
+  switch (status.toLowerCase()) {
+    case 'pending':
       return 'Pending Approval';
-    case 'APPROVED':
-    case 'FAILED':
+    case 'approved':
+    case 'failed':
       return 'Approved';
-    case 'REJECTED':
+    case 'rejected':
       return 'Rejected';
     default:
       return 'Return Completed';
@@ -409,10 +410,10 @@ String getReturnSummaryStatus(String status) {
 }
 
 String getPaymentStatus(String status) {
-  switch (status) {
-    case 'OPEN':
+  switch (status.toLowerCase()) {
+    case 'open':
       return 'Open';
-    case 'OVERDUE':
+    case 'overdue':
       return 'Overdue';
     default:
       return status;
@@ -420,31 +421,32 @@ String getPaymentStatus(String status) {
 }
 
 String getReturnByRequestStatus(String status) {
-  switch (status) {
-    case 'PENDING':
+  switch (status.toLowerCase()) {
+    case 'pending':
       return 'Pending Review';
-    case 'REVIEWED':
+    case 'reviewed':
       return 'Reviewed';
-    case 'FAILED':
+    case 'failed':
       return 'Failed';
     default:
       return status;
   }
 }
 
-String getReturnSummaryFilterByStatus(String filter) => filter == 'Active'
-    ? 'PENDING'
-    : filter != 'All'
-        ? 'COMPLETED'
-        : '';
+String getReturnSummaryFilterByStatus(String filter) =>
+    isEqualsIgnoreCase(filter, 'Active')
+        ? 'PENDING'
+        : isEqualsIgnoreCase(filter, 'All')
+            ? ''
+            : 'COMPLETED';
 
 String getReturnSummaryStatusInList(String statusType) {
-  switch (statusType) {
-    case 'PENDING':
+  switch (statusType.toLowerCase()) {
+    case 'pending':
       return 'Active';
-    case 'APPROVED':
-    case 'FAILED':
-    case 'REJECTED':
+    case 'approved':
+    case 'failed':
+    case 'rejected':
       return 'Completed';
 
     default:
@@ -474,20 +476,21 @@ bool checkIfDateMoreThanAWeekAway(DateTime date) {
 }
 
 bool isApproved(String status) {
-  return status == 'APPROVED';
+  return isEqualsIgnoreCase(status, 'approved');
 }
 
-bool isRejected(String status) => status == 'REJECTED';
+bool isRejected(String status) => isEqualsIgnoreCase(status, 'rejected');
 
-bool isBapiStatusSuccess(String status) => status == 'SUCCESS';
+bool isBapiStatusSuccess(String status) =>
+    isEqualsIgnoreCase(status, 'success');
 
 String bapiStatusType(String bapiStatus) {
-  switch (bapiStatus) {
-    case 'FAILED':
+  switch (bapiStatus.toLowerCase()) {
+    case 'failed':
       return 'Request Failed';
-    case 'PENDING':
+    case 'pending':
       return 'Pending';
-    case 'SUCCESS':
+    case 'success':
       return 'Success';
     case '':
       return '-';
@@ -498,20 +501,20 @@ String bapiStatusType(String bapiStatus) {
 }
 
 bool isBapiStatusFailed(String status) {
-  return status == 'FAILED';
+  return isEqualsIgnoreCase(status, 'failed');
 }
 
 IconData getReturnStatusIcon(String status) {
-  switch (status) {
-    case 'Return request submitted':
+  switch (status.toLowerCase()) {
+    case 'return request submitted':
       return Icons.inventory_outlined;
-    case 'Pending review':
+    case 'pending review':
       return Icons.query_builder;
-    case 'Reviewed':
-    case 'Approved':
+    case 'reviewed':
+    case 'approved':
       return Icons.check;
-    case 'Rejected':
-    case 'Failed':
+    case 'rejected':
+    case 'failed':
       return Icons.cancel;
     default:
       return Icons.inventory_outlined;
@@ -519,7 +522,7 @@ IconData getReturnStatusIcon(String status) {
 }
 
 List<StatusType> getReturnByItemStatusDetail(String status) => [
-      if (status != 'Pending Approval') StatusType(status),
+      if (!isEqualsIgnoreCase(status, 'Pending Approval')) StatusType(status),
       StatusType('Pending review'),
       StatusType('Return request submitted'),
     ];
@@ -529,16 +532,16 @@ List<StatusType> getReturnStatusDetails(String status) {
     StatusType('Pending review'),
     StatusType('Return request submitted'),
   ];
-  switch (status) {
-    case 'FAILED':
+  switch (status.toLowerCase()) {
+    case 'failed':
       return [
         StatusType('Failed'),
         ...returnStatusList,
       ];
 
-    case 'PENDING':
+    case 'pending':
       return returnStatusList;
-    case 'REVIEWED':
+    case 'reviewed':
       return [
         StatusType('Reviewed'),
         ...returnStatusList,
@@ -685,20 +688,24 @@ String getOosTag() => 'Out of stock';
 Color getOosTagLabelColor() => ZPColors.black;
 
 bool isSuccessfulOrProcessed(String status) =>
-    status == 'Successful' ||
-    status == 'Processed' ||
-    status == 'Payment Received' ||
-    status == 'success' ||
-    status == 'expired' ||
-    status == 'canceled';
+    isEqualsIgnoreCase(status, 'Successful') ||
+    isEqualsIgnoreCase(status, 'Processed') ||
+    isEqualsIgnoreCase(status, 'Payment received') ||
+    isEqualsIgnoreCase(status, 'success') ||
+    isEqualsIgnoreCase(status, 'expired') ||
+    isEqualsIgnoreCase(status, 'canceled');
 
 bool getExpiredOrCanceled(String status) =>
-    status == 'expired' || status == 'canceled';
+    isEqualsIgnoreCase(status, 'expired') ||
+    isEqualsIgnoreCase(status, 'canceled');
 
 bool getSuccessful(String status) =>
-    status == 'Successful' || status == 'success' || status == 'Processed';
+    isEqualsIgnoreCase(status, 'Successful') ||
+    isEqualsIgnoreCase(status, 'success') ||
+    isEqualsIgnoreCase(status, 'Processed');
 
-bool getPaymentReceived(String status) => status == 'Payment Received';
+bool getPaymentReceived(String status) =>
+    isEqualsIgnoreCase(status, 'Payment Received');
 
 Color getDisplayStatusTextColor(String status) =>
     isSuccessfulOrProcessed(status) ? ZPColors.black : ZPColors.red;
@@ -706,15 +713,15 @@ Color getDisplayStatusTextColor(String status) =>
 Color getAdviceExpiryColor(String status) =>
     isSuccessfulOrProcessed(status) ? ZPColors.white : ZPColors.red;
 
-bool isFailed(String status) => status == 'Failed';
+bool isFailed(String status) => isEqualsIgnoreCase(status, 'Failed');
 
-bool isPending(String status) => status == 'Pending';
+bool isPending(String status) => isEqualsIgnoreCase(status, 'Pending');
 
 bool isInProgress(String status) =>
-    status == 'creating' ||
-    status == 'In Progress' ||
-    status == 'waiting' ||
-    status == 'processing';
+    isEqualsIgnoreCase(status, 'creating') ||
+    isEqualsIgnoreCase(status, 'In Progress') ||
+    isEqualsIgnoreCase(status, 'waiting') ||
+    isEqualsIgnoreCase(status, 'processing');
 
 Color getAdviceExpiryColorFailed(String status) {
   return isInProgress(status) ||
@@ -725,10 +732,10 @@ Color getAdviceExpiryColorFailed(String status) {
 }
 
 String getSortLabel(String sort) {
-  switch (sort) {
-    case 'COMPLETED':
+  switch (sort.toLowerCase()) {
+    case 'completed':
       return 'Completed';
-    case 'ALL':
+    case 'all':
       return 'All';
 
     default:
@@ -737,26 +744,26 @@ String getSortLabel(String sort) {
 }
 
 String covertApiSortValue(String value) =>
-    value.isNotEmpty && value != 'ALL' ? value : '';
+    value.isNotEmpty && isEqualsIgnoreCase(value, 'ALL') ? '' : value;
 
 List<String> getApiSatuses(String statusText) {
-  switch (statusText) {
-    case 'In progress':
+  switch (statusText.toLowerCase()) {
+    case 'in progress':
       return <String>[
         'waiting',
         'creating',
         'processing',
       ];
-    case 'Expired':
+    case 'expired':
       return <String>[
         'expired',
       ];
-    case 'Successful':
+    case 'successful':
       return <String>[
         'success',
         'failed',
       ];
-    case 'Cancelled':
+    case 'cancelled':
       return <String>[
         'canceled',
       ];
@@ -768,7 +775,7 @@ List<String> getApiSatuses(String statusText) {
 }
 
 String getStatusText(String apiStatus) {
-  switch (apiStatus) {
+  switch (apiStatus.toLowerCase()) {
     case 'canceled':
       return 'Cancelled';
     case 'success':
@@ -851,7 +858,8 @@ Uri getFilteredResetPasswordUri(Uri uri) {
 
 bool isResetPasswordLink(String path) => path == '/login/set-password';
 
-bool isDealOrOverrideBonus(String type) => type == 'Deals' || type == 'Bonus';
+bool isDealOrOverrideBonus(String type) =>
+    isEqualsIgnoreCase(type, 'Deals') || isEqualsIgnoreCase(type, 'Bonus');
 
 String getPoReferenceHintText(bool value) =>
     value ? 'Enter your PO reference' : 'Enter your PO reference (Optional)';
@@ -915,3 +923,9 @@ String getViewByOrderHistoryTitle(int value) {
       return '';
   }
 }
+
+bool isEqualsIgnoreCase(String value, String matcher) =>
+    value.trim().toLowerCase() == matcher.trim().toLowerCase();
+
+bool isContainIgnoreCase(String value, String containValue) =>
+    value.trim().toLowerCase().contains(containValue.trim().toLowerCase());

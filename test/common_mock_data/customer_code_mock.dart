@@ -46,10 +46,10 @@ final fakeCustomerCodeInfoWithCustomerGrp4 = CustomerCodeInfo.empty().copyWith(
   customerGrp4: CustomerGrp4('VR'),
 );
 final fakeBlockedCustomerCodeInfo = CustomerCodeInfo.empty()
-    .copyWith(status: Status('Z1 - Suspended Customer'));
+    .copyWith(status: Status('z1 - suspended customer'));
 
 final fakeBlockedShipToInfo =
-    ShipToInfo.empty().copyWith(status: Status('Z1 - Suspended Customer'));
+    ShipToInfo.empty().copyWith(status: Status('z1 - suspended customer'));
 
 final fakeEDICustomerCodeInfo =
     CustomerCodeInfo.empty().copyWith(status: Status('EDI'));

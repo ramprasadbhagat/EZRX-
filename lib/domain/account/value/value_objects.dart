@@ -376,30 +376,30 @@ class Currency extends ValueObject<String> {
   }
 
   bool get isVN {
-    return value.getOrElse(() => '').toLowerCase() == 'vnd';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'vnd');
   }
 
   bool get isTH {
-    return value.getOrElse(() => '').toLowerCase() == 'thb';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'thb');
   }
 
   bool get isSG {
-    return value.getOrElse(() => '').toLowerCase() == 'sgd';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'sgd');
   }
 
   bool get isMM {
-    return value.getOrElse(() => '').toLowerCase() == 'mmk' ||
-        value.getOrElse(() => '').toLowerCase() == 'usd';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'mmk') ||
+        isEqualsIgnoreCase(value.getOrElse(() => ''), 'usd');
   }
 
   bool get isKH {
-    return value.getOrElse(() => '').toLowerCase() == 'khr' ||
-        value.getOrElse(() => '').toLowerCase() == 'cop' ||
-        value.getOrElse(() => '').toLowerCase() == 'usd';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'khr') ||
+        isEqualsIgnoreCase(value.getOrElse(() => ''), 'cop') ||
+        isEqualsIgnoreCase(value.getOrElse(() => ''), 'usd');
   }
 
   bool get isPH {
-    return value.getOrElse(() => '').toLowerCase() == 'php';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'php');
   }
 
   const Currency._(this.value);
@@ -414,7 +414,7 @@ class CustomerAttr7 extends ValueObject<String> {
   }
 
   bool get isZEV {
-    return value.getOrElse(() => '') == 'ZEV';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'ZEV');
   }
 
   const CustomerAttr7._(this.value);
@@ -429,11 +429,11 @@ class CustomerGrp4 extends ValueObject<String> {
   }
 
   bool get isVR {
-    return value.getOrElse(() => '') == 'VR';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'VR');
   }
 
   bool get isVP {
-    return value.getOrElse(() => '') == 'VP';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'VP');
   }
 
   bool get canOrderCovidMaterial => isVR || isVP;
@@ -454,14 +454,14 @@ class Status extends ValueObject<String> {
   }
 
   bool get isContainZ1 {
-    return value.getOrElse(() => '').contains('Z1');
+    return isContainIgnoreCase(value.getOrElse(() => ''), 'z1');
   }
 
   bool get isCustomerBlocked =>
       checkIfCustomerIsBlocked(value.getOrElse(() => ''));
 
   bool get isEDI {
-    return value.getOrElse(() => '') == 'EDI';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'EDI');
   }
 
   bool get isSuspended => isContain01 || isContainZ1 || isCustomerBlocked;

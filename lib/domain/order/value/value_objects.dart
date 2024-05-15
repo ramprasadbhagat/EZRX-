@@ -673,13 +673,13 @@ class DocumentType extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  bool get isZPFB => value.getOrElse(() => '').contains('ZPFB');
+  bool get isZPFB => isContainIgnoreCase(value.getOrElse(() => ''), 'zpfb');
 
-  bool get isZPFC => value.getOrElse(() => '').contains('ZPFC');
+  bool get isZPFC => isContainIgnoreCase(value.getOrElse(() => ''), 'zpfc');
 
-  bool get isZPOR => value.getOrElse(() => '').contains('ZPOR');
-  bool get isZPVF => value.getOrElse(() => '').contains('ZPVF');
-  bool get isZPFV => value.getOrElse(() => '').contains('ZPFV');
+  bool get isZPOR => isContainIgnoreCase(value.getOrElse(() => ''), 'zpor');
+  bool get isZPVF => isContainIgnoreCase(value.getOrElse(() => ''), 'zpvf');
+  bool get isZPFV => isContainIgnoreCase(value.getOrElse(() => ''), 'zpfv');
 
   bool get isSpecialOrderType => isZPFB || isZPFC;
   bool get isCovidOrderTypeForPH => isZPVF || isZPFV;
@@ -707,10 +707,8 @@ class ShippingCondition extends ValueObject<String> {
     return ShippingCondition._(Right(input));
   }
 
-  factory ShippingCondition.greenDelivery() => ShippingCondition('GD');
-
   bool get isGreenDelivery {
-    return value.getOrElse(() => '') == 'GD';
+    return isEqualsIgnoreCase(value.getOrElse(() => ''), 'GD');
   }
 
   const ShippingCondition._(this.value);
@@ -735,9 +733,11 @@ class ComboDealCategoryType extends ValueObject<String> {
     return ComboDealCategoryType._(validateStringNotEmpty(input));
   }
 
-  bool get isMaterialNumber => value.getOrElse(() => '') == 'MATNR';
+  bool get isMaterialNumber =>
+      isEqualsIgnoreCase(value.getOrElse(() => ''), 'MATNR');
 
-  bool get isPrinciple => value.getOrElse(() => '') == 'ZPRINC';
+  bool get isPrinciple =>
+      isEqualsIgnoreCase(value.getOrElse(() => ''), 'ZPRINC');
 
   const ComboDealCategoryType._(this.value);
 }

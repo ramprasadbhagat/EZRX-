@@ -56,9 +56,9 @@ class AppMarket extends ValueObject<String> {
 
   String get country => value.getOrElse(() => '').toUpperCase();
 
-  bool get isVN => value.getOrElse(() => '') == 'vn';
+  bool get isVN => isEqualsIgnoreCase(value.getOrElse(() => ''), 'vn');
 
-  bool get isID => value.getOrElse(() => '') == 'id';
+  bool get isID => isEqualsIgnoreCase(value.getOrElse(() => ''), 'id');
 
   bool get isSupportMarket {
     return supportMarkets.any(

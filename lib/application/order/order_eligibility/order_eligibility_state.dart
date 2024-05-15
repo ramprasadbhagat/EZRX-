@@ -154,8 +154,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
   }
 
   bool get eligibleOrderType {
-    return orderType.isNotEmpty &&
-        (orderType.contains('ZPFC') || orderType.contains('ZPFB'));
+    return orderType.isNotEmpty && isContainIgnoreCase(orderType, 'zpfc') ||
+        isContainIgnoreCase(orderType, 'zpfb');
   }
 
   bool get hasPrincipal {
@@ -167,7 +167,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       .any((element) => !element.materialInfo.isSpecialOrderTypeMaterial);
 
   bool get validateRegularOrderType =>
-      orderType.contains('ZPOR') && !configs.salesOrg.isTH
+      isContainIgnoreCase(orderType, 'zpor') && !configs.salesOrg.isTH
           ? containsRegularMaterials
           : true;
 

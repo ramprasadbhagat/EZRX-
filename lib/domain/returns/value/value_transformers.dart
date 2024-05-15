@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -38,11 +39,11 @@ String getFileSizeString(int sizeInBytes) {
 }
 
 bool isUserOverride(String value) {
-  return value == 'USEROVR';
+  return isEqualsIgnoreCase(value, 'USEROVR');
 }
 
 bool isApproverOverride(String value) {
-  return value == 'Approver';
+  return isEqualsIgnoreCase(value, 'Approver');
 }
 
 String statusReason(String reason) =>

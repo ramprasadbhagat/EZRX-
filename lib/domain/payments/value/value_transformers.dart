@@ -1,11 +1,12 @@
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 
 bool checkIsInvoice(String documentType) {
-  return documentType == 'I';
+  return isEqualsIgnoreCase(documentType, 'I');
 }
 
 bool checkIsCredit(String documentType) {
-  return documentType == 'C';
+  return isEqualsIgnoreCase(documentType, 'C');
 }
 
 String findDate(String input) {
@@ -29,16 +30,16 @@ String findDate(String input) {
 }
 
 bool checkIsQrCode(String paymentMethodValue) =>
-    paymentMethodValue == 'QR Code';
+    isEqualsIgnoreCase(paymentMethodValue, 'QR Code');
 
 bool checkIsPaymentGateway(String paymentMethodValue) =>
-    paymentMethodValue == 'Payment Gateway';
+    isEqualsIgnoreCase(paymentMethodValue, 'Payment Gateway');
 
 bool checkIsBankIn(String paymentMethodValue) =>
-    paymentMethodValue == 'Bank-In';
+    isEqualsIgnoreCase(paymentMethodValue, 'Bank-In');
 
 bool checkIsAPL(String paymentMethodValue) =>
-    paymentMethodValue == 'Virtual Accounts Transfer';
+    isEqualsIgnoreCase(paymentMethodValue, 'Virtual Accounts Transfer');
 
 //Get the amount string from paymentDue string (Ex: MYR 18940.000000)
 String getTotalAmount(String paymentDue) {
@@ -51,13 +52,15 @@ String getTotalAmount(String paymentDue) {
 int getExpiryDays(String adviceExpiry) =>
     int.tryParse(adviceExpiry.split(' ').first) ?? 0;
 
-bool checkIsBNI(String bankOptionId) => bankOptionId == 'BNI';
+bool checkIsBNI(String bankOptionId) => isEqualsIgnoreCase(bankOptionId, 'BNI');
 
-bool checkIsBCA(String bankOptionId) => bankOptionId == 'BCA';
+bool checkIsBCA(String bankOptionId) => isEqualsIgnoreCase(bankOptionId, 'BCA');
 
-bool checkIsDebitByCode(String debitCreditCode) => debitCreditCode == 'S';
+bool checkIsDebitByCode(String debitCreditCode) =>
+    isEqualsIgnoreCase(debitCreditCode, 'S');
 
-bool checkIsCreditByCode(String debitCreditCode) => debitCreditCode == 'H';
+bool checkIsCreditByCode(String debitCreditCode) =>
+    isEqualsIgnoreCase(debitCreditCode, 'H');
 
 String getReferenceListString(String referenceId) => referenceId.isNotEmpty
     ? referenceId.split(',').map((e) => '#${e.trim()}').join(', ')

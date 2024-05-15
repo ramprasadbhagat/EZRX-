@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/contact_us_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
@@ -38,7 +39,7 @@ class ContactUsRemoteDataSource {
       );
       _contactUsExceptionChecker(res: res);
 
-      return res.data == 'Message sent successfully.';
+      return isEqualsIgnoreCase(res.data, 'Message sent successfully.');
     });
   }
 

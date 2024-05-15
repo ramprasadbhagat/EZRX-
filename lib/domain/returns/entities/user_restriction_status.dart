@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_restriction_status.freezed.dart';
@@ -18,5 +19,6 @@ class UserRestrictionStatus with _$UserRestrictionStatus {
 
   bool get ifUserAdded =>
       approverRightsStatus.isNotEmpty || approvalLimitStatus;
-  bool get ifUserNotConfigured => approverRightsStatus == '0 rows inserted';
+  bool get ifUserNotConfigured =>
+      isEqualsIgnoreCase(approverRightsStatus, '0 rows inserted');
 }

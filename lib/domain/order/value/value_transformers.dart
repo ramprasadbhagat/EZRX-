@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_step.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -29,11 +30,11 @@ BonusMaterialCalculationEnum getBonusCalculationEnum(String calculation) {
 }
 
 bool checkMaterialType(String type) {
-  return type == 'Comm';
+  return isEqualsIgnoreCase(type, 'Comm');
 }
 
 bool checkMaterialTypeBonus(String type) {
-  return type == 'Bonus';
+  return isEqualsIgnoreCase(type, 'Bonus');
 }
 
 bool contractIs730(String tenderReason) {
@@ -45,7 +46,7 @@ bool materialBundleTypeIsPercent(String bundleType) {
 }
 
 bool materialTaxClassificationIsNoTax(String taxClassification) {
-  return taxClassification == 'noTax';
+  return isEqualsIgnoreCase(taxClassification, 'noTax');
 }
 // Need to revisit once Tax Exempt User story is ready
 // bool materialTaxClassificationIsExempt(String taxClassification) {
@@ -89,18 +90,18 @@ PriceOverrideValue getPriceOverrideValue(double value) =>
 Zdp8OverrideValue getZdp8OverrideValue(double value) =>
     Zdp8OverrideValue(value);
 
-bool isBonusReturnType(String prsfd) => prsfd == 'B';
+bool isBonusReturnType(String prsfd) => isEqualsIgnoreCase(prsfd, 'B');
 
 int getParentLineNumberIntValue(int value) => value - (value % 10);
 
 String getOrderStatus(String status) {
-  switch (status) {
-    case 'Pending release':
-    case 'Pending release on backorder':
-    case 'Pending release - on backorder':
-    case 'Pending release - seller approval required':
+  switch (status.toLowerCase()) {
+    case 'pending release':
+    case 'pending release on backorder':
+    case 'pending release - on backorder':
+    case 'pending release - seller approval required':
       return 'Pending release';
-    case 'Order Creating':
+    case 'order creating':
       return 'Order created';
     case '':
       return '-';
@@ -110,7 +111,8 @@ String getOrderStatus(String status) {
 }
 
 bool checkIfInQueue(String value) =>
-    isEqual(value, 'in queue') || isEqual(value, 'OnHold');
+    isEqualsIgnoreCase(value, 'in queue') ||
+    isEqualsIgnoreCase(value, 'OnHold');
 
 String queueStateToOrderConfirmationIcon(bool isInQueue) =>
     isInQueue ? SvgImage.orderInQueue : SvgImage.orderCreated;
@@ -125,19 +127,16 @@ String queueStateToOrderConfirmationSuffixMessage(bool isInQueue) => isInQueue
 
 String getOrderNumberPrefix(bool value) => value ? 'Queue' : 'Order';
 
-bool isEqual(String value1, String value2) =>
-    value1.trim().toLowerCase() == value2.trim().toLowerCase();
-
 bool checkIsEligibleForFetchZyllemStatues(String orderStatus) =>
-    isEqual(orderStatus, 'Out for delivery') ||
-    isEqual(orderStatus, 'Delivered');
+    isEqualsIgnoreCase(orderStatus, 'Out for delivery') ||
+    isEqualsIgnoreCase(orderStatus, 'Delivered');
 
 List<OrderHistoryStep> getOrderHistorySteps({
   required bool isViewByOrder,
   required String stepTitle,
 }) {
   final baseSteps = <OrderHistoryStep>[
-    if (isViewByOrder || isEqual(stepTitle, 'Order received'))
+    if (isViewByOrder || isEqualsIgnoreCase(stepTitle, 'Order received'))
       OrderHistoryStep.empty().copyWith(
         title: 'Order received',
         icon: Icons.pending_actions,
@@ -149,8 +148,8 @@ List<OrderHistoryStep> getOrderHistorySteps({
   ];
 
   var result = <OrderHistoryStep>[];
-  if (isEqual(stepTitle, 'Cancelled') ||
-      isEqual(stepTitle, 'Order Cancelled')) {
+  if (isEqualsIgnoreCase(stepTitle, 'Cancelled') ||
+      isEqualsIgnoreCase(stepTitle, 'Order Cancelled')) {
     result = <OrderHistoryStep>[
       ...baseSteps,
       OrderHistoryStep.empty().copyWith(
@@ -158,8 +157,8 @@ List<OrderHistoryStep> getOrderHistorySteps({
         icon: Icons.cancel,
       ),
     ];
-  } else if (isEqual(stepTitle, 'Delivered - partial rejection') ||
-      isEqual(stepTitle, 'Delivered - rejected upon delivery')) {
+  } else if (isEqualsIgnoreCase(stepTitle, 'Delivered - partial rejection') ||
+      isEqualsIgnoreCase(stepTitle, 'Delivered - rejected upon delivery')) {
     result = <OrderHistoryStep>[
       ...baseSteps,
       OrderHistoryStep.empty().copyWith(
@@ -186,7 +185,7 @@ List<OrderHistoryStep> getOrderHistorySteps({
   } else {
     final fullSteps = <OrderHistoryStep>[
       ...baseSteps,
-      if (!isViewByOrder || isEqual(stepTitle, 'Pending release'))
+      if (!isViewByOrder || isEqualsIgnoreCase(stepTitle, 'Pending release'))
         OrderHistoryStep.empty().copyWith(
           title: 'Pending release',
           icon: Icons.query_builder,
@@ -210,7 +209,7 @@ List<OrderHistoryStep> getOrderHistorySteps({
     ];
 
     final stepIndex = fullSteps.indexWhere(
-      (step) => isEqual(step.title, stepTitle),
+      (step) => isEqualsIgnoreCase(step.title, stepTitle),
     );
     result = stepIndex > -1
         ? fullSteps.sublist(0, stepIndex + 1)
@@ -234,8 +233,8 @@ List<OrderHistoryStep> getOrderHistorySteps({
 }
 
 String getOrderSAPStatus(String status) {
-  switch (status) {
-    case 'Order Creating':
+  switch (status.toLowerCase()) {
+    case 'order creating':
       return 'Order created';
     case '':
       return '-';
@@ -245,7 +244,7 @@ String getOrderSAPStatus(String status) {
 }
 
 String getDeliveryDateTitle(String status) {
-  if (status.contains('Delivered')) {
+  if (status.toLowerCase().contains('delivered')) {
     return 'Delivered';
   }
 
@@ -253,7 +252,7 @@ String getDeliveryDateTitle(String status) {
 }
 
 bool isPaymentTermCodeOutsideOfSystem(String value) {
-  return value == 'C024' || value == 'A007';
+  return isEqualsIgnoreCase(value, 'C024') || isEqualsIgnoreCase(value, 'A007');
 }
 
 String getTenderOrderReasonTitle(String status) {

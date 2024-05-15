@@ -4221,7 +4221,7 @@ void main() {
           expect(
             cartBlocState.dialogContent(
               OrderDocumentType.empty().copyWith(
-                documentType: DocumentType('ZPFB'),
+                documentType: DocumentType('zpfb'),
               ),
             ),
             'non-sample',
@@ -4244,7 +4244,7 @@ void main() {
           expect(
             cartBlocState.dialogContent(
               OrderDocumentType.empty().copyWith(
-                documentType: DocumentType('ZPFC'),
+                documentType: DocumentType('zpfc'),
               ),
             ),
             'non-FOC',
@@ -4267,7 +4267,7 @@ void main() {
           expect(
             cartBlocState.showDialog(
               OrderDocumentType.empty().copyWith(
-                documentType: DocumentType('ZPFB'),
+                documentType: DocumentType('zpfb'),
               ),
             ),
             true,
@@ -4290,7 +4290,7 @@ void main() {
           expect(
             cartBlocState.showDialog(
               OrderDocumentType.empty().copyWith(
-                documentType: DocumentType('ZPFC'),
+                documentType: DocumentType('zpfc'),
               ),
             ),
             true,
@@ -4313,7 +4313,7 @@ void main() {
           expect(
             cartBlocState.showDialog(
               OrderDocumentType.empty().copyWith(
-                documentType: DocumentType('ZPOR'),
+                documentType: DocumentType('zpor'),
               ),
             ),
             true,

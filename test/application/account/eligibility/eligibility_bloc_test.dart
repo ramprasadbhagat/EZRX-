@@ -1044,7 +1044,7 @@ void main() {
         () {
           final eligibilityState = EligibilityState.initial().copyWith(
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              status: Status('Z1'),
+              status: Status('z1'),
             ),
           );
 
@@ -1056,7 +1056,7 @@ void main() {
         () {
           final eligibilityState = EligibilityState.initial().copyWith(
             shipToInfo: ShipToInfo.empty().copyWith(
-              status: Status('Z1'),
+              status: Status('z1'),
             ),
           );
 

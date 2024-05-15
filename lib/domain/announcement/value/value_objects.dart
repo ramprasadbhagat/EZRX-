@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 
 class AnnouncementType extends ValueObject<String> {
@@ -24,18 +25,21 @@ class AnnouncementDislayTime extends ValueObject<String> {
 
   const AnnouncementDislayTime._(this.value);
 
-  bool get isPre => value.getOrElse(() => '') == 'Pre';
+  bool get isPre => isEqualsIgnoreCase(value.getOrElse(() => ''), 'Pre');
 
-  bool get isPost => value.getOrElse(() => '') == 'Post';
+  bool get isPost => isEqualsIgnoreCase(value.getOrElse(() => ''), 'Post');
 
-  bool get isPreAndPost => value.getOrElse(() => '') == 'Pre and Post';
+  bool get isPreAndPost =>
+      isEqualsIgnoreCase(value.getOrElse(() => ''), 'Pre and Post');
 
-  bool get isPreLogin => value.getOrElse(() => '') == 'Pre Login';
+  bool get isPreLogin =>
+      isEqualsIgnoreCase(value.getOrElse(() => ''), 'Pre Login');
 
-  bool get isPostLogin => value.getOrElse(() => '') == 'Post Login';
+  bool get isPostLogin =>
+      isEqualsIgnoreCase(value.getOrElse(() => ''), 'Post Login');
 
   bool get isPreAndPostLogin =>
-      value.getOrElse(() => '') == 'Pre and Post Login';
+      isEqualsIgnoreCase(value.getOrElse(() => ''), 'Pre and Post Login');
 
   bool get isLogged => isPostLogin || isPreAndPostLogin;
 
@@ -52,9 +56,10 @@ class AnnouncementDislayModule extends ValueObject<String> {
 
   const AnnouncementDislayModule._(this.value);
 
-  bool get isOrder => value.getOrElse(() => '') == 'Orders';
+  bool get isOrder => isEqualsIgnoreCase(value.getOrElse(() => ''), 'Orders');
 
-  bool get isPayment => value.getOrElse(() => '') == 'Payments';
+  bool get isPayment =>
+      isEqualsIgnoreCase(value.getOrElse(() => ''), 'Payments');
 
-  bool get isReturn => value.getOrElse(() => '') == 'Returns';
+  bool get isReturn => isEqualsIgnoreCase(value.getOrElse(() => ''), 'Returns');
 }

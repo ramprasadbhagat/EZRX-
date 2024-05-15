@@ -257,7 +257,7 @@ void main() {
         act: (bloc) {
           final orderEligibilityState = initializedState.copyWith(
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              status: Status('Z1'),
+              status: Status('z1'),
             ),
           );
 
@@ -272,7 +272,7 @@ void main() {
         act: (bloc) {
           final orderEligibilityState = initializedState.copyWith(
             shipInfo: ShipToInfo.empty().copyWith(
-              status: Status('Z1'),
+              status: Status('z1'),
             ),
           );
 

@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:ezrxmobile/domain/account/entities/bu_contact.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 BuContact salesOrgContact(String salesOrg) {
@@ -286,24 +287,24 @@ bool isAdmin(String roleType) {
 String roleNameToRoleType(String roleName) {
   // use map insted of switch statement to reduce cyclomatic complexity
   final roleNameToRoleTypeMap = {
-    'Public': 'public',
-    'ROOT Admin': 'root_admin',
-    'ZP Admin': 'zp_admin',
-    'Internal Sales Rep': 'internal_sales_rep',
-    'Client Admin': 'client_admin',
-    'Return Requestor': 'return_requestor',
-    'External Sales Rep': 'external_sales_rep',
-    'Client User': 'client_user',
-    'Return Admin': 'return_admin',
-    'Return Approver': 'return_approver',
-    'ZP Admin Attachments': 'zp_admin_attachments',
+    'public': 'public',
+    'root admin': 'root_admin',
+    'zp admin': 'zp_admin',
+    'internal sales rep': 'internal_sales_rep',
+    'client admin': 'client_admin',
+    'return requestor': 'return_requestor',
+    'external sales rep': 'external_sales_rep',
+    'client user': 'client_user',
+    'return admin': 'return_admin',
+    'return approver': 'return_approver',
+    'zp admin attachments': 'zp_admin_attachments',
   };
 
-  return roleNameToRoleTypeMap[roleName] ?? 'Unknown';
+  return roleNameToRoleTypeMap[roleName.toLowerCase()] ?? 'Unknown';
 }
 
 bool roleCanLoginOnBehalfByZPAdmin(String userRoleType) {
-  switch (userRoleType) {
+  switch (userRoleType.toLowerCase()) {
     case 'client_admin':
     case 'client_user':
     case 'internal_sales_rep':
@@ -386,7 +387,7 @@ bool countrySupportOrderType(country) {
 }
 
 String checkAllOrDash(String value) {
-  switch (value) {
+  switch (value.toLowerCase()) {
     case '-':
     case 'all':
       return '';
@@ -398,7 +399,7 @@ String checkAllOrDash(String value) {
 int getIntValue(String value) => int.tryParse(value) ?? 0;
 
 bool paymentAdviceEdit(String value) =>
-    value.toLowerCase() == 'Data Updated Successfully'.toLowerCase();
+    isEqualsIgnoreCase(value, 'Data Updated Successfully');
 
 String countryAnnouncementPath(String country) {
   final salesOrgCountryMap = {
@@ -608,6 +609,7 @@ double countrySmallOrderThreshold(String country) {
   return salesOrgCountryMap[country] ?? 0;
 }
 
-bool checkIfCustomerIsBlocked(String value) => value == 'blocked';
+bool checkIfCustomerIsBlocked(String value) =>
+    isEqualsIgnoreCase(value, 'blocked');
 
 bool salesOrgIsPhMdi(String salesOrg) => salesOrg == '2501';

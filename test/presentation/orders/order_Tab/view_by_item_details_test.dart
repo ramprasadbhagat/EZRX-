@@ -855,7 +855,7 @@ void main() {
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
             orderHistoryItem:
-                fakeOrderHistoryItem.copyWith(orderType: DocumentType('ZPVF')),
+                fakeOrderHistoryItem.copyWith(orderType: DocumentType('zpvf')),
             orderHistory: OrderHistory.empty().copyWith(
               orderHistoryItems: [fakeOrderHistoryItem],
             ),

@@ -412,7 +412,7 @@ void main() {
               hasPriceOverride: true,
             ),
             selectedOrderType: OrderDocumentType.empty().copyWith(
-              documentType: DocumentType('ZPFC'),
+              documentType: DocumentType('zpfc'),
             ),
           ),
         );
@@ -1120,7 +1120,10 @@ void main() {
 
         final priceNotAvailableFinder = find.descendant(
           of: find.byKey(WidgetKeys.cartItemProductUnitPrice),
-          matching: find.text('SGD ${finalPrice.toStringAsFixed(2)}', findRichText: true),
+          matching: find.text(
+            'SGD ${finalPrice.toStringAsFixed(2)}',
+            findRichText: true,
+          ),
         );
         expect(priceNotAvailableFinder, findsOneWidget);
       });
