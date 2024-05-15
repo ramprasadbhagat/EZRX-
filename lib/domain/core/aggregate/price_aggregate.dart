@@ -349,7 +349,13 @@ class PriceAggregate with _$PriceAggregate {
       itemTaxPercent.toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '');
 
   double get itemTax {
-    return (finalPriceTotal * itemTaxPercent) / 100;
+    final tax = (finalPriceTotal * itemTaxPercent) / 100;
+
+    if (salesOrgConfig.salesOrg.isID) {
+      return tax.floorToDouble();
+    }
+
+    return tax;
   }
 
   double get individualItemTax => (finalPrice * itemTaxPercent) / 100;

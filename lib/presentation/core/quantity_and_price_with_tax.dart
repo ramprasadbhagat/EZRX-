@@ -91,7 +91,10 @@ class QuantityAndPriceWithTax extends StatelessWidget {
                 totalPrice: netPriceValue,
                 percentage: taxPercentage,
                 //TODO : This is a temporary solution once C4P fix the calculated total, we will remove this
-                taxValue: taxValue??(netPriceValue * taxPercentage / 100),
+                taxValue: taxValue ??
+                    (eligibilityState.salesOrgConfigs.salesOrg.isID
+                        ? (netPriceValue * taxPercentage / 100).floorToDouble()
+                        : (netPriceValue * taxPercentage / 100)),
               ),
           ],
         ),

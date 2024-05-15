@@ -1193,6 +1193,54 @@ void main() {
             find.byKey(WidgetKeys.bonusSampleItemButtonKey);
         expect(bonusOverrideButton, findsNothing);
       });
+
+      testWidgets(
+        'Round down tax value for ID market',
+        (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                    quantity: MaterialQty(1),
+                    taxClassification:
+                        MaterialTaxClassification('Product : Full Tax'),
+                    tax: 11,
+                    hidePrice: false,
+                    isFOCMaterial: false,
+                  ),
+                  price: Price.empty().copyWith(
+                    lastPrice: MaterialPrice(180880),
+                    finalPrice: MaterialPrice(180880),
+                  ),
+                  salesOrgConfig: fakeIDSalesOrgConfigs.copyWith(
+                    vatValue: 11,
+                  ),
+                ),
+              ],
+            ),
+          );
+
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeIDSalesOrgConfigs.copyWith(
+                vatValue: 11,
+              ),
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+
+          final taxValueFinder = find.text('IDR 19,896', findRichText: true);
+          expect(taxValueFinder, findsOneWidget);
+
+          final itemPriceWithTaxFinder =
+              find.text('IDR 200,776', findRichText: true);
+          expect(itemPriceWithTaxFinder, findsOneWidget);
+        },
+      );
     },
   );
 }
