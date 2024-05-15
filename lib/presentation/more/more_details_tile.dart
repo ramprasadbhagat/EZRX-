@@ -153,7 +153,7 @@ class MoreDetailsTile {
         icon: SvgPicture.asset(
           'assets/svg/more_return.svg',
           height: 24,
-          fit: BoxFit.fill,
+          fit: BoxFit.contain,
         ),
         label: 'Returns',
         onTap: () => context.navigateTo(
