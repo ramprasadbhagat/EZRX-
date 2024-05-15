@@ -15,7 +15,7 @@ class ServiceTile extends StatelessWidget {
         buildWhen: (previous, current) =>
             current.user != previous.user ||
             current.salesOrgConfigs != previous.salesOrgConfigs ||
-            current.customerCodeInfo != previous.customerCodeInfo,
+            current.customerCodeConfig != previous.customerCodeConfig,
         builder: (context, state) {
           final items = _getServiceTabs(context, state);
 

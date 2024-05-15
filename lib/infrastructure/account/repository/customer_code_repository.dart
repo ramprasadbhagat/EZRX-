@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -138,6 +139,33 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
       return Right(accountSelectorStorageDto.toDomain());
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, CustomerCodeConfig>> getCustomerCodeConfig({
+    required CustomerCodeInfo customerCodeInfo,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final customerConfig =
+            await localCustomerCodeDataSource.getCustomerCodeConfig();
+
+        return Right(customerConfig);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final customerConfig = await remoteDataSource.getCustomerCodeConfig(
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+      );
+
+      return Right(customerConfig);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
     }
   }
 }

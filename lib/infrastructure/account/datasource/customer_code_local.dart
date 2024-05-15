@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_config_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_information_dto.dart';
 import 'package:flutter/services.dart';
@@ -35,5 +37,18 @@ class CustomerCodeLocalDataSource {
           .map((e) => CustomerCodeDto.fromJson(e).toDomain())
           .toList(),
     );
+  }
+
+  Future<CustomerCodeConfig> getCustomerCodeConfig() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/customerCodeConfig.json',
+      ),
+    );
+    final finalData = data['data']['customerConfig'];
+
+    return CustomerCodeConfigDto.fromJson(
+      finalData,
+    ).toDomain;
   }
 }

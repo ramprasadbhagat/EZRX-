@@ -21,4 +21,8 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
   const factory CustomerCodeEvent.deletedSearch({
     @Default('') String searchText,
   }) = _DeletedSearch;
+
+  const factory CustomerCodeEvent.fetchCustomerCodeConfig({
+    required CustomerCodeInfo customerCodeInfo,
+  }) = _FetchCustomerCodeConfig;
 }

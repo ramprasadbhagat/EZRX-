@@ -42,6 +42,7 @@ import 'package:ezrxmobile/application/returns/new_request/return_items/return_i
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
@@ -151,6 +152,38 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        BlocListener<EligibilityBloc, EligibilityState>(
+          listenWhen: (previous, current) =>
+              previous.customerCodeInfo != current.customerCodeInfo &&
+              current.customerCodeInfo != CustomerCodeInfo.empty(),
+          listener: (context, state) => context.read<CustomerCodeBloc>().add(
+                CustomerCodeEvent.fetchCustomerCodeConfig(
+                  customerCodeInfo: state.customerCodeInfo,
+                ),
+              ),
+        ),
+        BlocListener<CustomerCodeBloc, CustomerCodeState>(
+          listenWhen: (previous, current) =>
+              previous.customerCodeConfig != current.customerCodeConfig ||
+              previous.configFailureOrSuccessOption !=
+                  current.configFailureOrSuccessOption,
+          listener: (context, state) {
+            state.configFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {},
+              ),
+            );
+            context.read<EligibilityBloc>().add(
+                  EligibilityEvent.updatedCustomerCodeConfig(
+                    customerCodeConfig: state.customerCodeConfig,
+                  ),
+                );
+          },
+        ),
         BlocListener<AuthBloc, AuthState>(
           listenWhen: (previous, current) => previous != current,
           listener: (context, state) {
@@ -1047,7 +1080,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   ..add(
                     const CustomerCodeEvent.fetch(),
                   );
-
+                  context.read<CustomerCodeBloc>().add(
+                      CustomerCodeEvent.fetchCustomerCodeConfig(
+                        customerCodeInfo: eligibilityState.customerCodeInfo,
+                      ),
+                  );
                 // context.read<HomePageBloc>().add(const HomePageEvent.refresh());
               }
             }

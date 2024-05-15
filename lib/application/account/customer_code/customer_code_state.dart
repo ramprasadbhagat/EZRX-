@@ -9,7 +9,9 @@ class CustomerCodeState with _$CustomerCodeState {
     required User userInfo,
     required SalesOrganisation selectedSalesOrg,
     required List<CustomerCodeInfo> customerCodeList,
+    required CustomerCodeConfig customerCodeConfig,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
+    required Option<Either<ApiFailure, dynamic>> configFailureOrSuccessOption,
     required bool canLoadMore,
     required bool isFetching,
     required bool isSearchActive,
@@ -26,6 +28,8 @@ class CustomerCodeState with _$CustomerCodeState {
         isFetching: true,
         isSearchActive: false,
         searchKey: SearchKey(''),
+        customerCodeConfig: CustomerCodeConfig.empty(),
+        configFailureOrSuccessOption: none(),
       );
 
   bool get apiSuccess => apiFailureOrSuccessOption.isNone();

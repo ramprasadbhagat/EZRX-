@@ -1,6 +1,7 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -148,7 +149,8 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                   customerCodeList: finalCustomerCodeInfoList,
                   apiFailureOrSuccessOption: none(),
                   isFetching: false,
-                  canLoadMore: customerInformation.shipToCount >= config.pageSize,
+                  canLoadMore:
+                      customerInformation.shipToCount >= config.pageSize,
                 ),
               );
             }
@@ -203,6 +205,33 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         add(
           _Fetch(
             searchText: event.searchText,
+          ),
+        );
+      },
+    );
+    on<_FetchCustomerCodeConfig>(
+      (event, emit) async {
+        emit(
+          state.copyWith(
+            configFailureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess =
+            await customerCodeRepository.getCustomerCodeConfig(
+          customerCodeInfo: event.customerCodeInfo,
+        );
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              configFailureOrSuccessOption: optionOf(failureOrSuccess),
+              customerCodeConfig: CustomerCodeConfig.empty(),
+            ),
+          ),
+          (config) => emit(
+            state.copyWith(
+              customerCodeConfig: config,
+              apiFailureOrSuccessOption: none(),
+            ),
           ),
         );
       },

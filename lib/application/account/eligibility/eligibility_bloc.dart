@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -219,6 +220,11 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           },
         );
       },
+      updatedCustomerCodeConfig: (_UpdatedCustomerCodeConfig e) async => emit(
+        state.copyWith(
+          customerCodeConfig: e.customerCodeConfig,
+        ),
+      ),
     );
   }
 }

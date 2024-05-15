@@ -21,9 +21,7 @@ class QuickAccessMenuPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
-          current.user != previous.user ||
-          current.salesOrgConfigs != previous.salesOrgConfigs ||
-          current.customerCodeInfo != previous.customerCodeInfo,
+          current.customerCodeConfig != previous.customerCodeConfig,
       builder: (context, state) {
         final quickAccessItems = _getQuickAccessItems(context, state);
 

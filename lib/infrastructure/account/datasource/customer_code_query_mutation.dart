@@ -130,4 +130,15 @@ query customerInformationSearch(
       }    
     ''';
   }
+
+  String getCustomerCodeConfig() {
+    return '''
+    query customerConfig(\$request: CustomerConfig!) {
+      customerConfig(request: \$request ) {
+        customerCode
+        disableReturns
+      }
+    }
+    ''';
+  }
 }

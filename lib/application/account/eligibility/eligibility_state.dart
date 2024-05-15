@@ -10,6 +10,7 @@ class EligibilityState with _$EligibilityState {
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required CustomerCodeConfig customerCodeConfig,
     required OrderDocumentType selectedOrderType,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoadingCustomerCode,
@@ -22,6 +23,7 @@ class EligibilityState with _$EligibilityState {
         salesOrgConfigs: SalesOrganisationConfigs.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         shipToInfo: ShipToInfo.empty(),
+        customerCodeConfig: CustomerCodeConfig.empty(),
         selectedOrderType: OrderDocumentType.empty(),
         failureOrSuccessOption: none(),
         preSelectShipTo: false,
@@ -29,14 +31,22 @@ class EligibilityState with _$EligibilityState {
       );
 
   bool get isReturnsEnable {
+    // If returns are disabled from
+    // 1. User level
+    // 2. Customer Code Config
+    // return false
+    if (user.disableReturns || customerCodeConfig.disableReturns) {
+      return false;
+    }
+
     final salesRepRoleAndDisabled =
         user.role.type.isSalesRepRole && salesOrgConfigs.disableReturnsAccessSR;
 
     final customerAndDisabled =
         user.role.type.isCustomer && salesOrgConfigs.disableReturnsAccess;
 
-    // If returns are disabled at user level respective of their role, return false
-    if (user.disableReturns || salesRepRoleAndDisabled || customerAndDisabled) {
+    // If returns are disabled at sales org level respective of their role, return false
+    if (salesRepRoleAndDisabled || customerAndDisabled) {
       return false;
     }
 

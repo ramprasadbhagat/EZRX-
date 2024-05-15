@@ -18,6 +18,10 @@ class EligibilityEvent with _$EligibilityEvent {
     required ShipToInfo shipToInfo,
   }) = _SelectedCustomerCode;
 
+  const factory EligibilityEvent.updatedCustomerCodeConfig({
+    required CustomerCodeConfig customerCodeConfig,
+  }) = _UpdatedCustomerCodeConfig;
+
   const factory EligibilityEvent.loadStoredCustomerCode() =
       _LoadStoredCustomerCode;
 

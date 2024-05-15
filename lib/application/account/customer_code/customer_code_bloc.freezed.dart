@@ -12,7 +12,7 @@ part of 'customer_code_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerCodeEvent {
@@ -25,6 +25,8 @@ mixin _$CustomerCodeEvent {
     required TResult Function(SearchKey searchValue) search,
     required TResult Function() loadMore,
     required TResult Function(String searchText) deletedSearch,
+    required TResult Function(CustomerCodeInfo customerCodeInfo)
+        fetchCustomerCodeConfig,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +38,8 @@ mixin _$CustomerCodeEvent {
     TResult? Function(SearchKey searchValue)? search,
     TResult? Function()? loadMore,
     TResult? Function(String searchText)? deletedSearch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +51,8 @@ mixin _$CustomerCodeEvent {
     TResult Function(SearchKey searchValue)? search,
     TResult Function()? loadMore,
     TResult Function(String searchText)? deletedSearch,
+    TResult Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -57,6 +63,8 @@ mixin _$CustomerCodeEvent {
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearch value) deletedSearch,
+    required TResult Function(_FetchCustomerCodeConfig value)
+        fetchCustomerCodeConfig,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +74,7 @@ mixin _$CustomerCodeEvent {
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearch value)? deletedSearch,
+    TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +84,7 @@ mixin _$CustomerCodeEvent {
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearch value)? deletedSearch,
+    TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -99,10 +109,10 @@ class _$CustomerCodeEventCopyWithImpl<$Res, $Val extends CustomerCodeEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {bool hideCustomer, User userInfo, SalesOrganisation selectedSalesOrg});
@@ -112,11 +122,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$CustomerCodeEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -126,7 +136,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? userInfo = null,
     Object? selectedSalesOrg = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       hideCustomer: null == hideCustomer
           ? _value.hideCustomer
           : hideCustomer // ignore: cast_nullable_to_non_nullable
@@ -161,8 +171,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.hideCustomer,
       required this.userInfo,
       required this.selectedSalesOrg});
@@ -180,10 +190,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.hideCustomer, hideCustomer) ||
                 other.hideCustomer == hideCustomer) &&
             (identical(other.userInfo, userInfo) ||
@@ -199,8 +209,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -212,6 +222,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(SearchKey searchValue) search,
     required TResult Function() loadMore,
     required TResult Function(String searchText) deletedSearch,
+    required TResult Function(CustomerCodeInfo customerCodeInfo)
+        fetchCustomerCodeConfig,
   }) {
     return initialized(hideCustomer, userInfo, selectedSalesOrg);
   }
@@ -226,6 +238,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(SearchKey searchValue)? search,
     TResult? Function()? loadMore,
     TResult? Function(String searchText)? deletedSearch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
   }) {
     return initialized?.call(hideCustomer, userInfo, selectedSalesOrg);
   }
@@ -240,6 +254,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(SearchKey searchValue)? search,
     TResult Function()? loadMore,
     TResult Function(String searchText)? deletedSearch,
+    TResult Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -256,6 +272,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearch value) deletedSearch,
+    required TResult Function(_FetchCustomerCodeConfig value)
+        fetchCustomerCodeConfig,
   }) {
     return initialized(this);
   }
@@ -268,6 +286,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearch value)? deletedSearch,
+    TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) {
     return initialized?.call(this);
   }
@@ -280,6 +299,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearch value)? deletedSearch,
+    TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -293,29 +313,31 @@ abstract class _Initialized implements CustomerCodeEvent {
   const factory _Initialized(
       {required final bool hideCustomer,
       required final User userInfo,
-      required final SalesOrganisation selectedSalesOrg}) = _$_Initialized;
+      required final SalesOrganisation selectedSalesOrg}) = _$InitializedImpl;
 
   bool get hideCustomer;
   User get userInfo;
   SalesOrganisation get selectedSalesOrg;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String searchText});
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$CustomerCodeEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -323,7 +345,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? searchText = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       searchText: null == searchText
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
@@ -334,8 +356,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({this.searchText = ''});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({this.searchText = ''});
 
   @override
   @JsonKey()
@@ -347,10 +369,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.searchText, searchText) ||
                 other.searchText == searchText));
   }
@@ -361,8 +383,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -374,6 +396,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(SearchKey searchValue) search,
     required TResult Function() loadMore,
     required TResult Function(String searchText) deletedSearch,
+    required TResult Function(CustomerCodeInfo customerCodeInfo)
+        fetchCustomerCodeConfig,
   }) {
     return fetch(searchText);
   }
@@ -388,6 +412,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function(SearchKey searchValue)? search,
     TResult? Function()? loadMore,
     TResult? Function(String searchText)? deletedSearch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
   }) {
     return fetch?.call(searchText);
   }
@@ -402,6 +428,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(SearchKey searchValue)? search,
     TResult Function()? loadMore,
     TResult Function(String searchText)? deletedSearch,
+    TResult Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -418,6 +446,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearch value) deletedSearch,
+    required TResult Function(_FetchCustomerCodeConfig value)
+        fetchCustomerCodeConfig,
   }) {
     return fetch(this);
   }
@@ -430,6 +460,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearch value)? deletedSearch,
+    TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) {
     return fetch?.call(this);
   }
@@ -442,6 +473,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearch value)? deletedSearch,
+    TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -452,27 +484,29 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements CustomerCodeEvent {
-  const factory _Fetch({final String searchText}) = _$_Fetch;
+  const factory _Fetch({final String searchText}) = _$FetchImpl;
 
   String get searchText;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SearchCopyWith<$Res> {
-  factory _$$_SearchCopyWith(_$_Search value, $Res Function(_$_Search) then) =
-      __$$_SearchCopyWithImpl<$Res>;
+abstract class _$$SearchImplCopyWith<$Res> {
+  factory _$$SearchImplCopyWith(
+          _$SearchImpl value, $Res Function(_$SearchImpl) then) =
+      __$$SearchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SearchKey searchValue});
 }
 
 /// @nodoc
-class __$$_SearchCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_Search>
-    implements _$$_SearchCopyWith<$Res> {
-  __$$_SearchCopyWithImpl(_$_Search _value, $Res Function(_$_Search) _then)
+class __$$SearchImplCopyWithImpl<$Res>
+    extends _$CustomerCodeEventCopyWithImpl<$Res, _$SearchImpl>
+    implements _$$SearchImplCopyWith<$Res> {
+  __$$SearchImplCopyWithImpl(
+      _$SearchImpl _value, $Res Function(_$SearchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -480,7 +514,7 @@ class __$$_SearchCopyWithImpl<$Res>
   $Res call({
     Object? searchValue = null,
   }) {
-    return _then(_$_Search(
+    return _then(_$SearchImpl(
       searchValue: null == searchValue
           ? _value.searchValue
           : searchValue // ignore: cast_nullable_to_non_nullable
@@ -491,8 +525,8 @@ class __$$_SearchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Search implements _Search {
-  const _$_Search({required this.searchValue});
+class _$SearchImpl implements _Search {
+  const _$SearchImpl({required this.searchValue});
 
   @override
   final SearchKey searchValue;
@@ -503,10 +537,10 @@ class _$_Search implements _Search {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Search &&
+            other is _$SearchImpl &&
             (identical(other.searchValue, searchValue) ||
                 other.searchValue == searchValue));
   }
@@ -517,8 +551,8 @@ class _$_Search implements _Search {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchCopyWith<_$_Search> get copyWith =>
-      __$$_SearchCopyWithImpl<_$_Search>(this, _$identity);
+  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
+      __$$SearchImplCopyWithImpl<_$SearchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -530,6 +564,8 @@ class _$_Search implements _Search {
     required TResult Function(SearchKey searchValue) search,
     required TResult Function() loadMore,
     required TResult Function(String searchText) deletedSearch,
+    required TResult Function(CustomerCodeInfo customerCodeInfo)
+        fetchCustomerCodeConfig,
   }) {
     return search(searchValue);
   }
@@ -544,6 +580,8 @@ class _$_Search implements _Search {
     TResult? Function(SearchKey searchValue)? search,
     TResult? Function()? loadMore,
     TResult? Function(String searchText)? deletedSearch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
   }) {
     return search?.call(searchValue);
   }
@@ -558,6 +596,8 @@ class _$_Search implements _Search {
     TResult Function(SearchKey searchValue)? search,
     TResult Function()? loadMore,
     TResult Function(String searchText)? deletedSearch,
+    TResult Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -574,6 +614,8 @@ class _$_Search implements _Search {
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearch value) deletedSearch,
+    required TResult Function(_FetchCustomerCodeConfig value)
+        fetchCustomerCodeConfig,
   }) {
     return search(this);
   }
@@ -586,6 +628,7 @@ class _$_Search implements _Search {
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearch value)? deletedSearch,
+    TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) {
     return search?.call(this);
   }
@@ -598,6 +641,7 @@ class _$_Search implements _Search {
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearch value)? deletedSearch,
+    TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -608,34 +652,34 @@ class _$_Search implements _Search {
 }
 
 abstract class _Search implements CustomerCodeEvent {
-  const factory _Search({required final SearchKey searchValue}) = _$_Search;
+  const factory _Search({required final SearchKey searchValue}) = _$SearchImpl;
 
   SearchKey get searchValue;
   @JsonKey(ignore: true)
-  _$$_SearchCopyWith<_$_Search> get copyWith =>
+  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$CustomerCodeEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore();
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl();
 
   @override
   String toString() {
@@ -643,9 +687,9 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMore);
+        (other.runtimeType == runtimeType && other is _$LoadMoreImpl);
   }
 
   @override
@@ -661,6 +705,8 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(SearchKey searchValue) search,
     required TResult Function() loadMore,
     required TResult Function(String searchText) deletedSearch,
+    required TResult Function(CustomerCodeInfo customerCodeInfo)
+        fetchCustomerCodeConfig,
   }) {
     return loadMore();
   }
@@ -675,6 +721,8 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(SearchKey searchValue)? search,
     TResult? Function()? loadMore,
     TResult? Function(String searchText)? deletedSearch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
   }) {
     return loadMore?.call();
   }
@@ -689,6 +737,8 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(SearchKey searchValue)? search,
     TResult Function()? loadMore,
     TResult Function(String searchText)? deletedSearch,
+    TResult Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -705,6 +755,8 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearch value) deletedSearch,
+    required TResult Function(_FetchCustomerCodeConfig value)
+        fetchCustomerCodeConfig,
   }) {
     return loadMore(this);
   }
@@ -717,6 +769,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearch value)? deletedSearch,
+    TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) {
     return loadMore?.call(this);
   }
@@ -729,6 +782,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearch value)? deletedSearch,
+    TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -739,24 +793,24 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements CustomerCodeEvent {
-  const factory _LoadMore() = _$_LoadMore;
+  const factory _LoadMore() = _$LoadMoreImpl;
 }
 
 /// @nodoc
-abstract class _$$_DeletedSearchCopyWith<$Res> {
-  factory _$$_DeletedSearchCopyWith(
-          _$_DeletedSearch value, $Res Function(_$_DeletedSearch) then) =
-      __$$_DeletedSearchCopyWithImpl<$Res>;
+abstract class _$$DeletedSearchImplCopyWith<$Res> {
+  factory _$$DeletedSearchImplCopyWith(
+          _$DeletedSearchImpl value, $Res Function(_$DeletedSearchImpl) then) =
+      __$$DeletedSearchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String searchText});
 }
 
 /// @nodoc
-class __$$_DeletedSearchCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$_DeletedSearch>
-    implements _$$_DeletedSearchCopyWith<$Res> {
-  __$$_DeletedSearchCopyWithImpl(
-      _$_DeletedSearch _value, $Res Function(_$_DeletedSearch) _then)
+class __$$DeletedSearchImplCopyWithImpl<$Res>
+    extends _$CustomerCodeEventCopyWithImpl<$Res, _$DeletedSearchImpl>
+    implements _$$DeletedSearchImplCopyWith<$Res> {
+  __$$DeletedSearchImplCopyWithImpl(
+      _$DeletedSearchImpl _value, $Res Function(_$DeletedSearchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -764,7 +818,7 @@ class __$$_DeletedSearchCopyWithImpl<$Res>
   $Res call({
     Object? searchText = null,
   }) {
-    return _then(_$_DeletedSearch(
+    return _then(_$DeletedSearchImpl(
       searchText: null == searchText
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
@@ -775,8 +829,8 @@ class __$$_DeletedSearchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeletedSearch implements _DeletedSearch {
-  const _$_DeletedSearch({this.searchText = ''});
+class _$DeletedSearchImpl implements _DeletedSearch {
+  const _$DeletedSearchImpl({this.searchText = ''});
 
   @override
   @JsonKey()
@@ -788,10 +842,10 @@ class _$_DeletedSearch implements _DeletedSearch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeletedSearch &&
+            other is _$DeletedSearchImpl &&
             (identical(other.searchText, searchText) ||
                 other.searchText == searchText));
   }
@@ -802,8 +856,8 @@ class _$_DeletedSearch implements _DeletedSearch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeletedSearchCopyWith<_$_DeletedSearch> get copyWith =>
-      __$$_DeletedSearchCopyWithImpl<_$_DeletedSearch>(this, _$identity);
+  _$$DeletedSearchImplCopyWith<_$DeletedSearchImpl> get copyWith =>
+      __$$DeletedSearchImplCopyWithImpl<_$DeletedSearchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -815,6 +869,8 @@ class _$_DeletedSearch implements _DeletedSearch {
     required TResult Function(SearchKey searchValue) search,
     required TResult Function() loadMore,
     required TResult Function(String searchText) deletedSearch,
+    required TResult Function(CustomerCodeInfo customerCodeInfo)
+        fetchCustomerCodeConfig,
   }) {
     return deletedSearch(searchText);
   }
@@ -829,6 +885,8 @@ class _$_DeletedSearch implements _DeletedSearch {
     TResult? Function(SearchKey searchValue)? search,
     TResult? Function()? loadMore,
     TResult? Function(String searchText)? deletedSearch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
   }) {
     return deletedSearch?.call(searchText);
   }
@@ -843,6 +901,8 @@ class _$_DeletedSearch implements _DeletedSearch {
     TResult Function(SearchKey searchValue)? search,
     TResult Function()? loadMore,
     TResult Function(String searchText)? deletedSearch,
+    TResult Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (deletedSearch != null) {
@@ -859,6 +919,8 @@ class _$_DeletedSearch implements _DeletedSearch {
     required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_DeletedSearch value) deletedSearch,
+    required TResult Function(_FetchCustomerCodeConfig value)
+        fetchCustomerCodeConfig,
   }) {
     return deletedSearch(this);
   }
@@ -871,6 +933,7 @@ class _$_DeletedSearch implements _DeletedSearch {
     TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_DeletedSearch value)? deletedSearch,
+    TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) {
     return deletedSearch?.call(this);
   }
@@ -883,6 +946,7 @@ class _$_DeletedSearch implements _DeletedSearch {
     TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_DeletedSearch value)? deletedSearch,
+    TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (deletedSearch != null) {
@@ -893,12 +957,195 @@ class _$_DeletedSearch implements _DeletedSearch {
 }
 
 abstract class _DeletedSearch implements CustomerCodeEvent {
-  const factory _DeletedSearch({final String searchText}) = _$_DeletedSearch;
+  const factory _DeletedSearch({final String searchText}) = _$DeletedSearchImpl;
 
   String get searchText;
   @JsonKey(ignore: true)
-  _$$_DeletedSearchCopyWith<_$_DeletedSearch> get copyWith =>
+  _$$DeletedSearchImplCopyWith<_$DeletedSearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchCustomerCodeConfigImplCopyWith<$Res> {
+  factory _$$FetchCustomerCodeConfigImplCopyWith(
+          _$FetchCustomerCodeConfigImpl value,
+          $Res Function(_$FetchCustomerCodeConfigImpl) then) =
+      __$$FetchCustomerCodeConfigImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CustomerCodeInfo customerCodeInfo});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+}
+
+/// @nodoc
+class __$$FetchCustomerCodeConfigImplCopyWithImpl<$Res>
+    extends _$CustomerCodeEventCopyWithImpl<$Res, _$FetchCustomerCodeConfigImpl>
+    implements _$$FetchCustomerCodeConfigImplCopyWith<$Res> {
+  __$$FetchCustomerCodeConfigImplCopyWithImpl(
+      _$FetchCustomerCodeConfigImpl _value,
+      $Res Function(_$FetchCustomerCodeConfigImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? customerCodeInfo = null,
+  }) {
+    return _then(_$FetchCustomerCodeConfigImpl(
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$FetchCustomerCodeConfigImpl implements _FetchCustomerCodeConfig {
+  const _$FetchCustomerCodeConfigImpl({required this.customerCodeInfo});
+
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+
+  @override
+  String toString() {
+    return 'CustomerCodeEvent.fetchCustomerCodeConfig(customerCodeInfo: $customerCodeInfo)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchCustomerCodeConfigImpl &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, customerCodeInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchCustomerCodeConfigImplCopyWith<_$FetchCustomerCodeConfigImpl>
+      get copyWith => __$$FetchCustomerCodeConfigImplCopyWithImpl<
+          _$FetchCustomerCodeConfigImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool hideCustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)
+        initialized,
+    required TResult Function(String searchText) fetch,
+    required TResult Function(SearchKey searchValue) search,
+    required TResult Function() loadMore,
+    required TResult Function(String searchText) deletedSearch,
+    required TResult Function(CustomerCodeInfo customerCodeInfo)
+        fetchCustomerCodeConfig,
+  }) {
+    return fetchCustomerCodeConfig(customerCodeInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(bool hideCustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        initialized,
+    TResult? Function(String searchText)? fetch,
+    TResult? Function(SearchKey searchValue)? search,
+    TResult? Function()? loadMore,
+    TResult? Function(String searchText)? deletedSearch,
+    TResult? Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
+  }) {
+    return fetchCustomerCodeConfig?.call(customerCodeInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool hideCustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
+        initialized,
+    TResult Function(String searchText)? fetch,
+    TResult Function(SearchKey searchValue)? search,
+    TResult Function()? loadMore,
+    TResult Function(String searchText)? deletedSearch,
+    TResult Function(CustomerCodeInfo customerCodeInfo)?
+        fetchCustomerCodeConfig,
+    required TResult orElse(),
+  }) {
+    if (fetchCustomerCodeConfig != null) {
+      return fetchCustomerCodeConfig(customerCodeInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Search value) search,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_DeletedSearch value) deletedSearch,
+    required TResult Function(_FetchCustomerCodeConfig value)
+        fetchCustomerCodeConfig,
+  }) {
+    return fetchCustomerCodeConfig(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Search value)? search,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_DeletedSearch value)? deletedSearch,
+    TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
+  }) {
+    return fetchCustomerCodeConfig?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Search value)? search,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_DeletedSearch value)? deletedSearch,
+    TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
+    required TResult orElse(),
+  }) {
+    if (fetchCustomerCodeConfig != null) {
+      return fetchCustomerCodeConfig(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchCustomerCodeConfig implements CustomerCodeEvent {
+  const factory _FetchCustomerCodeConfig(
+          {required final CustomerCodeInfo customerCodeInfo}) =
+      _$FetchCustomerCodeConfigImpl;
+
+  CustomerCodeInfo get customerCodeInfo;
+  @JsonKey(ignore: true)
+  _$$FetchCustomerCodeConfigImplCopyWith<_$FetchCustomerCodeConfigImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -908,7 +1155,11 @@ mixin _$CustomerCodeState {
   SalesOrganisation get selectedSalesOrg => throw _privateConstructorUsedError;
   List<CustomerCodeInfo> get customerCodeList =>
       throw _privateConstructorUsedError;
+  CustomerCodeConfig get customerCodeConfig =>
+      throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
+  Option<Either<ApiFailure, dynamic>> get configFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
@@ -931,7 +1182,9 @@ abstract class $CustomerCodeStateCopyWith<$Res> {
       User userInfo,
       SalesOrganisation selectedSalesOrg,
       List<CustomerCodeInfo> customerCodeList,
+      CustomerCodeConfig customerCodeConfig,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
+      Option<Either<ApiFailure, dynamic>> configFailureOrSuccessOption,
       bool canLoadMore,
       bool isFetching,
       bool isSearchActive,
@@ -939,6 +1192,7 @@ abstract class $CustomerCodeStateCopyWith<$Res> {
 
   $UserCopyWith<$Res> get userInfo;
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrg;
+  $CustomerCodeConfigCopyWith<$Res> get customerCodeConfig;
 }
 
 /// @nodoc
@@ -958,7 +1212,9 @@ class _$CustomerCodeStateCopyWithImpl<$Res, $Val extends CustomerCodeState>
     Object? userInfo = null,
     Object? selectedSalesOrg = null,
     Object? customerCodeList = null,
+    Object? customerCodeConfig = null,
     Object? apiFailureOrSuccessOption = null,
+    Object? configFailureOrSuccessOption = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
     Object? isSearchActive = null,
@@ -981,9 +1237,17 @@ class _$CustomerCodeStateCopyWithImpl<$Res, $Val extends CustomerCodeState>
           ? _value.customerCodeList
           : customerCodeList // ignore: cast_nullable_to_non_nullable
               as List<CustomerCodeInfo>,
+      customerCodeConfig: null == customerCodeConfig
+          ? _value.customerCodeConfig
+          : customerCodeConfig // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeConfig,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
+      configFailureOrSuccessOption: null == configFailureOrSuccessOption
+          ? _value.configFailureOrSuccessOption
+          : configFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
@@ -1019,14 +1283,23 @@ class _$CustomerCodeStateCopyWithImpl<$Res, $Val extends CustomerCodeState>
       return _then(_value.copyWith(selectedSalesOrg: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeConfigCopyWith<$Res> get customerCodeConfig {
+    return $CustomerCodeConfigCopyWith<$Res>(_value.customerCodeConfig,
+        (value) {
+      return _then(_value.copyWith(customerCodeConfig: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_CustomerCodeStateCopyWith<$Res>
+abstract class _$$CustomerCodeStateImplCopyWith<$Res>
     implements $CustomerCodeStateCopyWith<$Res> {
-  factory _$$_CustomerCodeStateCopyWith(_$_CustomerCodeState value,
-          $Res Function(_$_CustomerCodeState) then) =
-      __$$_CustomerCodeStateCopyWithImpl<$Res>;
+  factory _$$CustomerCodeStateImplCopyWith(_$CustomerCodeStateImpl value,
+          $Res Function(_$CustomerCodeStateImpl) then) =
+      __$$CustomerCodeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1034,7 +1307,9 @@ abstract class _$$_CustomerCodeStateCopyWith<$Res>
       User userInfo,
       SalesOrganisation selectedSalesOrg,
       List<CustomerCodeInfo> customerCodeList,
+      CustomerCodeConfig customerCodeConfig,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
+      Option<Either<ApiFailure, dynamic>> configFailureOrSuccessOption,
       bool canLoadMore,
       bool isFetching,
       bool isSearchActive,
@@ -1044,14 +1319,16 @@ abstract class _$$_CustomerCodeStateCopyWith<$Res>
   $UserCopyWith<$Res> get userInfo;
   @override
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrg;
+  @override
+  $CustomerCodeConfigCopyWith<$Res> get customerCodeConfig;
 }
 
 /// @nodoc
-class __$$_CustomerCodeStateCopyWithImpl<$Res>
-    extends _$CustomerCodeStateCopyWithImpl<$Res, _$_CustomerCodeState>
-    implements _$$_CustomerCodeStateCopyWith<$Res> {
-  __$$_CustomerCodeStateCopyWithImpl(
-      _$_CustomerCodeState _value, $Res Function(_$_CustomerCodeState) _then)
+class __$$CustomerCodeStateImplCopyWithImpl<$Res>
+    extends _$CustomerCodeStateCopyWithImpl<$Res, _$CustomerCodeStateImpl>
+    implements _$$CustomerCodeStateImplCopyWith<$Res> {
+  __$$CustomerCodeStateImplCopyWithImpl(_$CustomerCodeStateImpl _value,
+      $Res Function(_$CustomerCodeStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1061,13 +1338,15 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
     Object? userInfo = null,
     Object? selectedSalesOrg = null,
     Object? customerCodeList = null,
+    Object? customerCodeConfig = null,
     Object? apiFailureOrSuccessOption = null,
+    Object? configFailureOrSuccessOption = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
     Object? isSearchActive = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_CustomerCodeState(
+    return _then(_$CustomerCodeStateImpl(
       hideCustomer: null == hideCustomer
           ? _value.hideCustomer
           : hideCustomer // ignore: cast_nullable_to_non_nullable
@@ -1084,9 +1363,17 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
           ? _value._customerCodeList
           : customerCodeList // ignore: cast_nullable_to_non_nullable
               as List<CustomerCodeInfo>,
+      customerCodeConfig: null == customerCodeConfig
+          ? _value.customerCodeConfig
+          : customerCodeConfig // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeConfig,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
+      configFailureOrSuccessOption: null == configFailureOrSuccessOption
+          ? _value.configFailureOrSuccessOption
+          : configFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
       canLoadMore: null == canLoadMore
           ? _value.canLoadMore
@@ -1110,13 +1397,15 @@ class __$$_CustomerCodeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerCodeState extends _CustomerCodeState {
-  const _$_CustomerCodeState(
+class _$CustomerCodeStateImpl extends _CustomerCodeState {
+  const _$CustomerCodeStateImpl(
       {required this.hideCustomer,
       required this.userInfo,
       required this.selectedSalesOrg,
       required final List<CustomerCodeInfo> customerCodeList,
+      required this.customerCodeConfig,
       required this.apiFailureOrSuccessOption,
+      required this.configFailureOrSuccessOption,
       required this.canLoadMore,
       required this.isFetching,
       required this.isSearchActive,
@@ -1140,7 +1429,11 @@ class _$_CustomerCodeState extends _CustomerCodeState {
   }
 
   @override
+  final CustomerCodeConfig customerCodeConfig;
+  @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
+  @override
+  final Option<Either<ApiFailure, dynamic>> configFailureOrSuccessOption;
   @override
   final bool canLoadMore;
   @override
@@ -1152,14 +1445,14 @@ class _$_CustomerCodeState extends _CustomerCodeState {
 
   @override
   String toString() {
-    return 'CustomerCodeState(hideCustomer: $hideCustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg, customerCodeList: $customerCodeList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, isSearchActive: $isSearchActive, searchKey: $searchKey)';
+    return 'CustomerCodeState(hideCustomer: $hideCustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg, customerCodeList: $customerCodeList, customerCodeConfig: $customerCodeConfig, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, configFailureOrSuccessOption: $configFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, isSearchActive: $isSearchActive, searchKey: $searchKey)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerCodeState &&
+            other is _$CustomerCodeStateImpl &&
             (identical(other.hideCustomer, hideCustomer) ||
                 other.hideCustomer == hideCustomer) &&
             (identical(other.userInfo, userInfo) ||
@@ -1168,9 +1461,15 @@ class _$_CustomerCodeState extends _CustomerCodeState {
                 other.selectedSalesOrg == selectedSalesOrg) &&
             const DeepCollectionEquality()
                 .equals(other._customerCodeList, _customerCodeList) &&
+            (identical(other.customerCodeConfig, customerCodeConfig) ||
+                other.customerCodeConfig == customerCodeConfig) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
+            (identical(other.configFailureOrSuccessOption,
+                    configFailureOrSuccessOption) ||
+                other.configFailureOrSuccessOption ==
+                    configFailureOrSuccessOption) &&
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
             (identical(other.isFetching, isFetching) ||
@@ -1188,7 +1487,9 @@ class _$_CustomerCodeState extends _CustomerCodeState {
       userInfo,
       selectedSalesOrg,
       const DeepCollectionEquality().hash(_customerCodeList),
+      customerCodeConfig,
       apiFailureOrSuccessOption,
+      configFailureOrSuccessOption,
       canLoadMore,
       isFetching,
       isSearchActive,
@@ -1197,8 +1498,8 @@ class _$_CustomerCodeState extends _CustomerCodeState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerCodeStateCopyWith<_$_CustomerCodeState> get copyWith =>
-      __$$_CustomerCodeStateCopyWithImpl<_$_CustomerCodeState>(
+  _$$CustomerCodeStateImplCopyWith<_$CustomerCodeStateImpl> get copyWith =>
+      __$$CustomerCodeStateImplCopyWithImpl<_$CustomerCodeStateImpl>(
           this, _$identity);
 }
 
@@ -1208,12 +1509,15 @@ abstract class _CustomerCodeState extends CustomerCodeState {
       required final User userInfo,
       required final SalesOrganisation selectedSalesOrg,
       required final List<CustomerCodeInfo> customerCodeList,
+      required final CustomerCodeConfig customerCodeConfig,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
+      required final Option<Either<ApiFailure, dynamic>>
+          configFailureOrSuccessOption,
       required final bool canLoadMore,
       required final bool isFetching,
       required final bool isSearchActive,
-      required final SearchKey searchKey}) = _$_CustomerCodeState;
+      required final SearchKey searchKey}) = _$CustomerCodeStateImpl;
   const _CustomerCodeState._() : super._();
 
   @override
@@ -1225,7 +1529,11 @@ abstract class _CustomerCodeState extends CustomerCodeState {
   @override
   List<CustomerCodeInfo> get customerCodeList;
   @override
+  CustomerCodeConfig get customerCodeConfig;
+  @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
+  @override
+  Option<Either<ApiFailure, dynamic>> get configFailureOrSuccessOption;
   @override
   bool get canLoadMore;
   @override
@@ -1236,6 +1544,6 @@ abstract class _CustomerCodeState extends CustomerCodeState {
   SearchKey get searchKey;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerCodeStateCopyWith<_$_CustomerCodeState> get copyWith =>
+  _$$CustomerCodeStateImplCopyWith<_$CustomerCodeStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
