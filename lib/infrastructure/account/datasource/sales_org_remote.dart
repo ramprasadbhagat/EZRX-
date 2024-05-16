@@ -51,7 +51,9 @@ class SalesOrgRemoteDataSource {
 
       return SalesOrganisationConfigsDto.fromJson(
         res.data['data']['salesOrgConfigs'][0],
-      ).toDomain();
+      ).toDomain(
+        enablePromotionBlacklist: remoteConfigService.enablePromotionBlacklist,
+      );
     });
   }
 

@@ -34,6 +34,8 @@ void main() {
   final remoteConfigService = RemoteConfigServiceMock();
   const fakeMarket = 'fake-market';
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
+  final fakeEnablePromotionBlacklist = ['ID'];
+
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
   const fakeAccountStatementConfigDisable = false;
 
@@ -44,6 +46,8 @@ void main() {
           .thenReturn(fakeEnableMarketPlaceMarkets);
       when(() => remoteConfigService.enableAccountStatementQuery)
           .thenReturn(fakeAccountStatementConfigDisable);
+      when(() => remoteConfigService.enablePromotionBlacklist)
+          .thenReturn(fakeEnablePromotionBlacklist);
       remoteDataSource = SalesOrgRemoteDataSource(
         httpService: service,
         salesOrgQueryMutation: SalesOrgQueryMutation(),
@@ -90,6 +94,77 @@ void main() {
           res['data']['salesOrgConfigs'][0],
         ).toDomain();
         expect(result.enableBatchNumber, resTest.enableBatchNumber);
+      },
+    );
+    test(
+      'Get sales config details have enablePromotionBlacklist',
+      () async {
+        final res = json.decode(
+          await rootBundle
+              .loadString('assets/json/getSalesOrgConfigsResponse.json'),
+        );
+
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(
+            200,
+            res,
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query':
+                remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
+              fakeConfigValue,
+              fakeAccountStatementConfigDisable,
+            ),
+            'variables': {
+              'request': {'salesOrg': saleOrgName},
+            },
+          }),
+        );
+        final result = await remoteDataSource.getConfig(
+          salesOrg: saleOrgName,
+          market: fakeMarket,
+        );
+        final resTest = SalesOrganisationConfigsDto.fromJson(
+          res['data']['salesOrgConfigs'][0],
+        ).toDomain(enablePromotionBlacklist: fakeEnablePromotionBlacklist);
+        expect(result.disablePromotion, resTest.disablePromotion);
+      },
+    );
+    test(
+      'Get sales config details enablePromotionBlacklist empty',
+      () async {
+        final res = json.decode(
+          await rootBundle
+              .loadString('assets/json/getSalesOrgConfigsResponse.json'),
+        );
+
+        dioAdapter.onPost(
+          '/api/license',
+          (server) => server.reply(
+            200,
+            res,
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query':
+                remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
+              fakeConfigValue,
+              fakeAccountStatementConfigDisable,
+            ),
+            'variables': {
+              'request': {'salesOrg': saleOrgName},
+            },
+          }),
+        );
+        final result = await remoteDataSource.getConfig(
+          salesOrg: saleOrgName,
+          market: fakeMarket,
+        );
+        expect(result.disablePromotion, false);
       },
     );
     test(

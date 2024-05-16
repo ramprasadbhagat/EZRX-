@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/entities/mp_remote_config.dart';
+import 'package:ezrxmobile/domain/core/entities/promotion_remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/mp_remote_config_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/promotion_remote_config_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config_constants.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
@@ -48,6 +50,15 @@ class RemoteConfigService {
     return MPRemoteConfigDto.fromJson(configAsJson).toDomain.whiteList;
   }
 
+  List<String> get enablePromotionBlacklist {
+    final configAsJson = jsonDecode(
+      _remoteConfig.getValue(RemoteConfigConstants.enablePromotion).asString(),
+    );
+
+    //JSON sample: {"blacklist":["ID"]}
+    return PromotionRemoteConfigDto.fromJson(configAsJson).toDomain.blackList;
+  }
+
   /// Setting in-app default parameter values to make app behave as intended
   /// before it connects or if no values are set in the Remote Config backend
   Future<void> _setInAppDefaultValues() async {
@@ -57,6 +68,10 @@ class RemoteConfigService {
           MPRemoteConfigDto.fromDomain(MPRemoteConfig.empty()).toJson(),
         ),
         RemoteConfigConstants.enableAccountStatementQuery: false,
+        RemoteConfigConstants.enablePromotion: jsonEncode(
+          PromotionRemoteConfigDto.fromDomain(PromotionRemoteConfig.empty())
+              .toJson(),
+        ),
       },
     );
   }

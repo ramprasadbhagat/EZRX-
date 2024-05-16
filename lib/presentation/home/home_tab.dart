@@ -109,9 +109,11 @@ class HomeTab extends StatelessWidget {
                         },
                       ),
                       if (state.haveShipTo &&
-                          state.user.userCanAccessProducts) ...[
+                          state.user.userCanAccessProducts &&
+                          !state.salesOrgConfigs.disablePromotion) ...[
                         const ProductsOnOffer(),
-                        if (!state.salesOrgConfigs.disableBundles)
+                        if (!state.salesOrgConfigs.disableBundles &&
+                            !state.salesOrgConfigs.disablePromotion)
                           const BundleSection(),
                       ],
                       if (state.haveShipTo &&

@@ -13,126 +13,126 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
 
   const factory SalesOrganisationConfigsDto({
     @JsonKey(name: 'disableProcessingStatus')
-        required bool disableProcessingStatus,
+    required bool disableProcessingStatus,
     @JsonKey(name: 'currency') required String currency,
     @JsonKey(name: 'hideCustomer', defaultValue: false)
-        required bool hideCustomer,
+    required bool hideCustomer,
     @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
-        required bool enableGimmickMaterial,
+    required bool enableGimmickMaterial,
     @JsonKey(name: 'disablePrincipals', defaultValue: false)
-        required bool disablePrincipals,
+    required bool disablePrincipals,
     @JsonKey(name: 'principalList')
     @_PrincipalListConverter()
-        required List<SalesOrganisationConfigsPrincipalDto> principalList,
+    required List<SalesOrganisationConfigsPrincipalDto> principalList,
     @JsonKey(name: 'disableOrderType', defaultValue: false)
-        required bool disableOrderType,
+    required bool disableOrderType,
     @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-        required bool enableBatchNumber,
+    required bool enableBatchNumber,
     @JsonKey(name: 'disableBundles', defaultValue: false)
-        required bool disableBundles,
+    required bool disableBundles,
     @JsonKey(name: 'enableZDP5', defaultValue: false) required bool enableZDP5,
     @JsonKey(name: 'enableTaxClassification', defaultValue: false)
-        required bool enableTaxClassification,
+    required bool enableTaxClassification,
     @JsonKey(name: 'enableVat', defaultValue: false) required bool enableVat,
     @JsonKey(name: 'vatValue', defaultValue: 0) required int vatValue,
     @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
-        required bool materialWithoutPrice,
+    required bool materialWithoutPrice,
     @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
-        required bool enableSpecialInstructions,
+    required bool enableSpecialInstructions,
     @JsonKey(name: 'enableReferenceNote', defaultValue: false)
-        required bool enableReferenceNote,
+    required bool enableReferenceNote,
     @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
-        required bool enableCollectiveNumber,
+    required bool enableCollectiveNumber,
     @JsonKey(name: 'enableMobileNumber', defaultValue: false)
-        required bool enableMobileNumber,
+    required bool enableMobileNumber,
     @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
-        required bool enableFutureDeliveryDay,
+    required bool enableFutureDeliveryDay,
     @JsonKey(name: 'enablePOAttachmentRequired', defaultValue: false)
-        required bool enablePOAttachmentRequired,
+    required bool enablePOAttachmentRequired,
     @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
-        required bool enablePaymentTerms,
+    required bool enablePaymentTerms,
     @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
-        required String futureDeliveryDay,
+    required String futureDeliveryDay,
     @JsonKey(name: 'enableGMC', defaultValue: false) required bool enableGMC,
     @JsonKey(name: 'enableListPrice', defaultValue: false)
-        required bool enableListPrice,
+    required bool enableListPrice,
     @JsonKey(name: 'enableDefaultMD', defaultValue: false)
-        required bool enableDefaultMD,
+    required bool enableDefaultMD,
     @JsonKey(name: 'priceOverride', defaultValue: false)
-        required bool priceOverride,
+    required bool priceOverride,
     @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
-        required bool disablePaymentTermsDisplay,
+    required bool disablePaymentTermsDisplay,
     @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
-        required bool disableDeliveryDate,
+    required bool disableDeliveryDate,
     @JsonKey(name: 'enableBillTo', defaultValue: false)
-        required bool enableBillTo,
+    required bool enableBillTo,
     @JsonKey(name: 'showPOAttachment', defaultValue: false)
-        required bool showPOAttachment,
+    required bool showPOAttachment,
     @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
-        required bool expiryDateDisplay,
+    required bool expiryDateDisplay,
     @JsonKey(name: 'hideStockDisplay', defaultValue: false)
-        required bool hideStockDisplay,
+    required bool hideStockDisplay,
     @JsonKey(name: 'addOosMaterials', defaultValue: false)
-        required bool addOosMaterials,
+    required bool addOosMaterials,
     @JsonKey(name: 'oosValue', defaultValue: 0) required int oosValue,
     @JsonKey(name: 'enableRemarks', defaultValue: false)
-        required bool enableRemarks,
+    required bool enableRemarks,
     @JsonKey(name: 'enableOHPrice', defaultValue: true)
-        required bool enableOHPrice,
+    required bool enableOHPrice,
     @JsonKey(name: 'ponRequired', defaultValue: false)
-        required bool poNumberRequired,
+    required bool poNumberRequired,
     @JsonKey(name: 'enableIRN', defaultValue: false) required bool enableIRN,
     @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-        required bool enableTaxDisplay,
+    required bool enableTaxDisplay,
     @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
-        required bool enableTaxAtTotalLevelOnly,
+    required bool enableTaxAtTotalLevelOnly,
     @JsonKey(name: 'netPriceOverride', defaultValue: false)
-        required bool netPriceOverride,
+    required bool netPriceOverride,
     @JsonKey(name: 'batchNumDisplay', defaultValue: false)
-        required bool batchNumDisplay,
+    required bool batchNumDisplay,
     @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
-        required bool displayOrderDiscount,
+    required bool displayOrderDiscount,
     @StringToDoubleConverter()
     @JsonKey(name: 'minOrderAmount', defaultValue: 0.0)
-        required double minOrderAmount,
+    required double minOrderAmount,
     @JsonKey(name: 'salesOrgCode', defaultValue: '0') required String salesOrg,
     @JsonKey(name: 'enableZDP8Override', defaultValue: false)
-        required bool enableZDP8Override,
+    required bool enableZDP8Override,
     @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
-        required bool disableReturnsAccessSR,
+    required bool disableReturnsAccessSR,
     @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
-        required bool disableReturnsAccess,
+    required bool disableReturnsAccess,
     @JsonKey(name: 'disableOverrideFieldCustomer', defaultValue: false)
-        required bool disableOverrideFieldCustomer,
+    required bool disableOverrideFieldCustomer,
     @JsonKey(name: 'disableOverrideFieldSR', defaultValue: false)
-        required bool disableOverrideFieldSR,
+    required bool disableOverrideFieldSR,
     @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
-        required bool enableGreenDelivery,
+    required bool enableGreenDelivery,
     @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
-        required int greenDeliveryDelayInDays,
+    required int greenDeliveryDelayInDays,
     @JsonKey(name: 'enableComboDeals', defaultValue: false)
-        required bool enableComboDeals,
+    required bool enableComboDeals,
     @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
-        required int greenDeliveryUserRole,
+    required int greenDeliveryUserRole,
     @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
-        required int comboDealsUserRole,
+    required int comboDealsUserRole,
     @JsonKey(name: 'enableGMN', defaultValue: false) required bool enableGMN,
     @JsonKey(name: 'displayItemTaxBreakdown', defaultValue: false)
-        required bool displayItemTaxBreakdown,
+    required bool displayItemTaxBreakdown,
     @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
-        required bool displaySubtotalTaxBreakdown,
+    required bool displaySubtotalTaxBreakdown,
     @JsonKey(name: 'disablePayment', defaultValue: false)
-        required bool disablePayment,
+    required bool disablePayment,
     @JsonKey(name: 'hideCredit', defaultValue: false) required bool hideCredit,
     @JsonKey(name: 'allowReturnsOutsidePolicy', defaultValue: false)
-        required bool allowReturnsOutsidePolicy,
+    required bool allowReturnsOutsidePolicy,
     @JsonKey(name: 'enableMarketPlace', defaultValue: false)
-        required bool enableMarketPlace,
+    required bool enableMarketPlace,
     @StringToDoubleConverter()
     @JsonKey(name: 'mpMinOrderAmount', defaultValue: 0.0)
-        required double mpMinOrderAmount,
+    required double mpMinOrderAmount,
     @JsonKey(name: 'statementOfAccountEnabled', defaultValue: false)
-        required bool statementOfAccountEnabled,
+    required bool statementOfAccountEnabled,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -208,9 +208,11 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     );
   }
 
-  SalesOrganisationConfigs toDomain() {
+  SalesOrganisationConfigs toDomain({List<String> enablePromotionBlacklist = const []}) {
+    final saleOrg = SalesOrg(salesOrg);
+    
     return SalesOrganisationConfigs(
-      salesOrg: SalesOrg(salesOrg),
+      salesOrg: saleOrg,
       enableIRN: enableIRN,
       enableDefaultMD: enableDefaultMD,
       disableProcessingStatus: disableProcessingStatus,
@@ -274,6 +276,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableMarketPlace: enableMarketPlace,
       mpMinOrderAmount: mpMinOrderAmount,
       statementOfAccountEnabled: statementOfAccountEnabled,
+      disablePromotion: enablePromotionBlacklist.contains(saleOrg.country),
     );
   }
 

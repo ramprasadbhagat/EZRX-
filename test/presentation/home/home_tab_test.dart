@@ -306,6 +306,34 @@ void main() {
     );
 
     testWidgets(
+      ' -> Find HomeScreen disable promotion on ID market',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: User.empty().copyWith(
+              accessRight: AccessRight.empty().copyWith(products: true),
+              role: Role.empty().copyWith(
+                type: RoleType('client_user'),
+              ),
+            ),
+            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+            shipToInfo: fakeShipToInfo,
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final homeScreen = find.byKey(
+          WidgetKeys.homeScreen,
+        );
+        expect(homeScreen, findsOneWidget);
+        expect(find.byType(ProductsOnOffer), findsNothing);
+        expect(find.byType(BundleSection), findsNothing);
+        expect(find.byType(BrowseProduct), findsOneWidget);
+      },
+    );
+
+    testWidgets(
       ' -> HomeScreen on refresh',
       (WidgetTester tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(

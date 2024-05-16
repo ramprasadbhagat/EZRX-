@@ -53,17 +53,19 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                     ),
                 title: 'Marketplace items',
               ),
-            _ListTileThemeWidget(
-              value: state.materialFilter.isProductOffer,
-              onChanged: (value) => context.read<MaterialFilterBloc>().add(
-                    MaterialFilterEvent.updateSelectedMaterialFilter(
-                      MaterialFilterType.productOffers,
-                      !state.materialFilter.isProductOffer,
+            if (!eligibilityState.salesOrgConfigs.disablePromotion)
+              _ListTileThemeWidget(
+                value: state.materialFilter.isProductOffer,
+                onChanged: (value) => context.read<MaterialFilterBloc>().add(
+                      MaterialFilterEvent.updateSelectedMaterialFilter(
+                        MaterialFilterType.productOffers,
+                        !state.materialFilter.isProductOffer,
+                      ),
                     ),
-                  ),
-              title: 'Items with offers',
-            ),
-            if (!eligibilityState.salesOrgConfigs.disableBundles)
+                title: 'Items with offers',
+              ),
+            if (!eligibilityState.salesOrgConfigs.disableBundles &&
+                !eligibilityState.salesOrgConfigs.disablePromotion)
               _ListTileThemeWidget(
                 value: state.materialFilter.bundleOffers,
                 onChanged: (value) => context.read<MaterialFilterBloc>().add(

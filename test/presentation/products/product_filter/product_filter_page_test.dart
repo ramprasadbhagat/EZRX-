@@ -530,7 +530,7 @@ void main() {
         );
         expect(
           find.byKey(WidgetKeys.showProductCheckbox('Items with offers')),
-          findsOneWidget,
+          findsNothing,
         );
         expect(
           find.byKey(WidgetKeys.showProductCheckbox('Bundle offers')),

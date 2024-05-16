@@ -12,7 +12,7 @@ part of 'sales_organisation_configs.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SalesOrganisationConfigs {
@@ -83,6 +83,7 @@ mixin _$SalesOrganisationConfigs {
   bool get enableMarketPlace => throw _privateConstructorUsedError;
   double get mpMinOrderAmount => throw _privateConstructorUsedError;
   bool get statementOfAccountEnabled => throw _privateConstructorUsedError;
+  bool get disablePromotion => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrganisationConfigsCopyWith<SalesOrganisationConfigs> get copyWith =>
@@ -159,7 +160,8 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool allowReturnsOutsidePolicy,
       bool enableMarketPlace,
       double mpMinOrderAmount,
-      bool statementOfAccountEnabled});
+      bool statementOfAccountEnabled,
+      bool disablePromotion});
 }
 
 /// @nodoc
@@ -240,6 +242,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? enableMarketPlace = null,
     Object? mpMinOrderAmount = null,
     Object? statementOfAccountEnabled = null,
+    Object? disablePromotion = null,
   }) {
     return _then(_value.copyWith(
       enableIRN: null == enableIRN
@@ -498,17 +501,21 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.statementOfAccountEnabled
           : statementOfAccountEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePromotion: null == disablePromotion
+          ? _value.disablePromotion
+          : disablePromotion // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
+abstract class _$$SalesOrganisationConfigsImplCopyWith<$Res>
     implements $SalesOrganisationConfigsCopyWith<$Res> {
-  factory _$$_SalesOrganisationConfigsCopyWith(
-          _$_SalesOrganisationConfigs value,
-          $Res Function(_$_SalesOrganisationConfigs) then) =
-      __$$_SalesOrganisationConfigsCopyWithImpl<$Res>;
+  factory _$$SalesOrganisationConfigsImplCopyWith(
+          _$SalesOrganisationConfigsImpl value,
+          $Res Function(_$SalesOrganisationConfigsImpl) then) =
+      __$$SalesOrganisationConfigsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -575,16 +582,18 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool allowReturnsOutsidePolicy,
       bool enableMarketPlace,
       double mpMinOrderAmount,
-      bool statementOfAccountEnabled});
+      bool statementOfAccountEnabled,
+      bool disablePromotion});
 }
 
 /// @nodoc
-class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
+class __$$SalesOrganisationConfigsImplCopyWithImpl<$Res>
     extends _$SalesOrganisationConfigsCopyWithImpl<$Res,
-        _$_SalesOrganisationConfigs>
-    implements _$$_SalesOrganisationConfigsCopyWith<$Res> {
-  __$$_SalesOrganisationConfigsCopyWithImpl(_$_SalesOrganisationConfigs _value,
-      $Res Function(_$_SalesOrganisationConfigs) _then)
+        _$SalesOrganisationConfigsImpl>
+    implements _$$SalesOrganisationConfigsImplCopyWith<$Res> {
+  __$$SalesOrganisationConfigsImplCopyWithImpl(
+      _$SalesOrganisationConfigsImpl _value,
+      $Res Function(_$SalesOrganisationConfigsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -654,8 +663,9 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableMarketPlace = null,
     Object? mpMinOrderAmount = null,
     Object? statementOfAccountEnabled = null,
+    Object? disablePromotion = null,
   }) {
-    return _then(_$_SalesOrganisationConfigs(
+    return _then(_$SalesOrganisationConfigsImpl(
       enableIRN: null == enableIRN
           ? _value.enableIRN
           : enableIRN // ignore: cast_nullable_to_non_nullable
@@ -912,14 +922,18 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
           ? _value.statementOfAccountEnabled
           : statementOfAccountEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePromotion: null == disablePromotion
+          ? _value.disablePromotion
+          : disablePromotion // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
-  const _$_SalesOrganisationConfigs(
+class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
+  const _$SalesOrganisationConfigsImpl(
       {required this.enableIRN,
       required this.enableDefaultMD,
       required this.disableProcessingStatus,
@@ -983,7 +997,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.allowReturnsOutsidePolicy,
       required this.enableMarketPlace,
       required this.mpMinOrderAmount,
-      required this.statementOfAccountEnabled})
+      required this.statementOfAccountEnabled,
+      required this.disablePromotion})
       : _principalList = principalList,
         super._();
 
@@ -1121,17 +1136,19 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final double mpMinOrderAmount;
   @override
   final bool statementOfAccountEnabled;
+  @override
+  final bool disablePromotion;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled)';
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, disablePromotion: $disablePromotion)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrganisationConfigs &&
+            other is _$SalesOrganisationConfigsImpl &&
             (identical(other.enableIRN, enableIRN) ||
                 other.enableIRN == enableIRN) &&
             (identical(other.enableDefaultMD, enableDefaultMD) ||
@@ -1223,7 +1240,8 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
             (identical(other.allowReturnsOutsidePolicy, allowReturnsOutsidePolicy) || other.allowReturnsOutsidePolicy == allowReturnsOutsidePolicy) &&
             (identical(other.enableMarketPlace, enableMarketPlace) || other.enableMarketPlace == enableMarketPlace) &&
             (identical(other.mpMinOrderAmount, mpMinOrderAmount) || other.mpMinOrderAmount == mpMinOrderAmount) &&
-            (identical(other.statementOfAccountEnabled, statementOfAccountEnabled) || other.statementOfAccountEnabled == statementOfAccountEnabled));
+            (identical(other.statementOfAccountEnabled, statementOfAccountEnabled) || other.statementOfAccountEnabled == statementOfAccountEnabled) &&
+            (identical(other.disablePromotion, disablePromotion) || other.disablePromotion == disablePromotion));
   }
 
   @override
@@ -1292,84 +1310,85 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
         allowReturnsOutsidePolicy,
         enableMarketPlace,
         mpMinOrderAmount,
-        statementOfAccountEnabled
+        statementOfAccountEnabled,
+        disablePromotion
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>
-      get copyWith => __$$_SalesOrganisationConfigsCopyWithImpl<
-          _$_SalesOrganisationConfigs>(this, _$identity);
+  _$$SalesOrganisationConfigsImplCopyWith<_$SalesOrganisationConfigsImpl>
+      get copyWith => __$$SalesOrganisationConfigsImplCopyWithImpl<
+          _$SalesOrganisationConfigsImpl>(this, _$identity);
 }
 
 abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   const factory _SalesOrganisationConfigs(
-          {required final bool enableIRN,
-          required final bool enableDefaultMD,
-          required final bool disableProcessingStatus,
-          required final Currency currency,
-          required final bool hideCustomer,
-          required final bool enableGimmickMaterial,
-          required final bool disablePrincipals,
-          required final List<SalesOrganisationConfigsPrincipal> principalList,
-          required final bool disableOrderType,
-          required final bool enableBatchNumber,
-          required final bool disableBundles,
-          required final bool enableZDP5,
-          required final bool enableVat,
-          required final bool enableTaxAtTotalLevelOnly,
-          required final bool enablePOAttachmentRequired,
-          required final bool enableTaxClassification,
-          required final int vatValue,
-          required final bool materialWithoutPrice,
-          required final bool enableSpecialInstructions,
-          required final bool enableReferenceNote,
-          required final bool enableCollectiveNumber,
-          required final bool enableMobileNumber,
-          required final bool enableFutureDeliveryDay,
-          required final bool enablePaymentTerms,
-          required final FutureDeliveryDay futureDeliveryDay,
-          required final bool enableGMC,
-          required final bool enableListPrice,
-          required final bool priceOverride,
-          required final bool disablePaymentTermsDisplay,
-          required final bool disablePayment,
-          required final bool disableDeliveryDate,
-          required final bool enableBillTo,
-          required final bool enableGreenDelivery,
-          required final int greenDeliveryDelayInDays,
-          required final GreenDeliveryUserRole greenDeliveryUserRole,
-          required final bool showPOAttachment,
-          required final bool hideStockDisplay,
-          required final bool expiryDateDisplay,
-          required final bool batchNumDisplay,
-          required final OosMaterial addOosMaterials,
-          required final OosValue oosValue,
-          required final bool enableRemarks,
-          required final bool enableOHPrice,
-          required final PoNumberRequired poNumberRequired,
-          required final bool enableTaxDisplay,
-          required final bool netPriceOverride,
-          required final bool displayOrderDiscount,
-          required final double minOrderAmount,
-          required final SalesOrg salesOrg,
-          required final bool enableZDP8Override,
-          required final bool disableReturnsAccessSR,
-          required final bool disableReturnsAccess,
-          required final bool enableComboDeals,
-          required final ComboDealUserRole comboDealsUserRole,
-          required final bool enableGMN,
-          required final bool displayItemTaxBreakdown,
-          required final bool displaySubtotalTaxBreakdown,
-          required final bool disableOverrideFieldCustomer,
-          required final bool disableOverrideFieldSR,
-          required final bool hideCredit,
-          required final bool allowReturnsOutsidePolicy,
-          required final bool enableMarketPlace,
-          required final double mpMinOrderAmount,
-          required final bool statementOfAccountEnabled}) =
-      _$_SalesOrganisationConfigs;
+      {required final bool enableIRN,
+      required final bool enableDefaultMD,
+      required final bool disableProcessingStatus,
+      required final Currency currency,
+      required final bool hideCustomer,
+      required final bool enableGimmickMaterial,
+      required final bool disablePrincipals,
+      required final List<SalesOrganisationConfigsPrincipal> principalList,
+      required final bool disableOrderType,
+      required final bool enableBatchNumber,
+      required final bool disableBundles,
+      required final bool enableZDP5,
+      required final bool enableVat,
+      required final bool enableTaxAtTotalLevelOnly,
+      required final bool enablePOAttachmentRequired,
+      required final bool enableTaxClassification,
+      required final int vatValue,
+      required final bool materialWithoutPrice,
+      required final bool enableSpecialInstructions,
+      required final bool enableReferenceNote,
+      required final bool enableCollectiveNumber,
+      required final bool enableMobileNumber,
+      required final bool enableFutureDeliveryDay,
+      required final bool enablePaymentTerms,
+      required final FutureDeliveryDay futureDeliveryDay,
+      required final bool enableGMC,
+      required final bool enableListPrice,
+      required final bool priceOverride,
+      required final bool disablePaymentTermsDisplay,
+      required final bool disablePayment,
+      required final bool disableDeliveryDate,
+      required final bool enableBillTo,
+      required final bool enableGreenDelivery,
+      required final int greenDeliveryDelayInDays,
+      required final GreenDeliveryUserRole greenDeliveryUserRole,
+      required final bool showPOAttachment,
+      required final bool hideStockDisplay,
+      required final bool expiryDateDisplay,
+      required final bool batchNumDisplay,
+      required final OosMaterial addOosMaterials,
+      required final OosValue oosValue,
+      required final bool enableRemarks,
+      required final bool enableOHPrice,
+      required final PoNumberRequired poNumberRequired,
+      required final bool enableTaxDisplay,
+      required final bool netPriceOverride,
+      required final bool displayOrderDiscount,
+      required final double minOrderAmount,
+      required final SalesOrg salesOrg,
+      required final bool enableZDP8Override,
+      required final bool disableReturnsAccessSR,
+      required final bool disableReturnsAccess,
+      required final bool enableComboDeals,
+      required final ComboDealUserRole comboDealsUserRole,
+      required final bool enableGMN,
+      required final bool displayItemTaxBreakdown,
+      required final bool displaySubtotalTaxBreakdown,
+      required final bool disableOverrideFieldCustomer,
+      required final bool disableOverrideFieldSR,
+      required final bool hideCredit,
+      required final bool allowReturnsOutsidePolicy,
+      required final bool enableMarketPlace,
+      required final double mpMinOrderAmount,
+      required final bool statementOfAccountEnabled,
+      required final bool disablePromotion}) = _$SalesOrganisationConfigsImpl;
   const _SalesOrganisationConfigs._() : super._();
 
   @override
@@ -1501,7 +1520,9 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   @override
   bool get statementOfAccountEnabled;
   @override
+  bool get disablePromotion;
+  @override
   @JsonKey(ignore: true)
-  _$$_SalesOrganisationConfigsCopyWith<_$_SalesOrganisationConfigs>
+  _$$SalesOrganisationConfigsImplCopyWith<_$SalesOrganisationConfigsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

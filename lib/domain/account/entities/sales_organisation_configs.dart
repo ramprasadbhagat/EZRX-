@@ -76,6 +76,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableMarketPlace,
     required double mpMinOrderAmount,
     required bool statementOfAccountEnabled,
+    required bool disablePromotion,
   }) = _SalesOrganisationConfigs;
 
   //ignore:long-method
@@ -144,6 +145,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableMarketPlace: false,
         mpMinOrderAmount: 0.0,
         statementOfAccountEnabled: false,
+        disablePromotion: false,
       );
 
   bool get shouldDisplayVATInPercentage =>
