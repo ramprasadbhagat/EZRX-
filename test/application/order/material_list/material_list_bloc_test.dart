@@ -428,7 +428,7 @@ void main() {
             ),
           ),
         );
-
+ 
         when(
           () => materialListMockRepository.getStockInfoList(
             materials: materialResponseMock.products.skip(20).toList(),
@@ -462,20 +462,6 @@ void main() {
             ],
             canLoadMore: false,
             nextPageIndex: 2,
-          ),
-          materialState.copyWith(
-            materialCount: 44,
-            materialList: [
-              ...List.generate(
-                24,
-                (index) => materialResponseMock.products.first,
-              ),
-              ...materialResponseMock.products.skip(20).toList(),
-            ],
-            canLoadMore: false,
-            nextPageIndex: 2,
-            apiFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.poorConnection())),
           ),
         ];
       },
@@ -786,6 +772,21 @@ void main() {
           apiFailureOrSuccessOption: optionOf(Right(stockInfoList)),
         ),
       ],
+    );
+
+    blocTest(
+      'Get stock info on empty material list',
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteMockRepository,
+        config: config,
+      ),
+      act: (MaterialListBloc bloc) => bloc.add(
+        MaterialListEvent.fetchStock(
+          materials: [],
+        ),
+      ),
+      expect: () => [],
     );
   });
 }
